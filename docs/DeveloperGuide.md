@@ -102,10 +102,12 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/DeleteClientSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete-client 1` Command" />
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</box>
+
+</div>
 
 How the `Logic` component works:
 
@@ -136,13 +138,14 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Prudy`, which `Client` references. This allows `Prudy` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects. (Note that the details of PolicySet has been omitted from this diagram as they are not relevant)<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
-</box>
+</div>
 
 
 ### Storage component
@@ -198,33 +201,36 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Note:** If a command fails its execution, it will not call `Model#commitPrudy()`, so the Prudy state will not be saved into the `prudyStateList`.
 
-</box>
+</div>
 
 **Step 4.** The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPrudy()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Prudy state, and restores Prudy to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Prudy state, then there are no previous Prudy states to restore. The `undo` command uses `Model#canUndoPrudy()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</box>
+</div>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
 <puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-</box>
+</div>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
@@ -232,11 +238,12 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 The `redo` command does the opposite — it calls `Model#redoPrudy()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores Prudy to that state.
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Note:** If the `currentStatePointer` is at index `prudyStateList.size() - 1`, pointing to the latest Prudy state, then there are no undone Prudy states to restore. The `redo` command uses `Model#canRedoPrudy()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-</box>
+</div>
 
 **Step 5.** The user then decides to execute the command `list-client`. Commands that do not modify Prudy, such as `list-client`, will usually not call `Model#commitPrudy()`, `Model#undoPrudy()` or `Model#redoPrudy()`. Thus, the `prudyStateList` remains unchanged.
 
@@ -295,11 +302,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Target user profile**:
 The target user is an insurance agent working with Prudential, responsible for managing a substantial portfolio of clients. This user has specific needs and preferences for effectively managing clients, policies, and claims in a high-volume environment.
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Note:** Prudential insurance agents were chosen as the target users for Prudy because the development team has extensive experience working with Prudential agents in the past. This background allowed the team to design Prudy with a deep understanding of the agents' specific needs and daily challenges, ensuring the tool aligns closely with their workflow.
 
-</box>
+</div>
 
 Key attributes of the target user include:
 * **Role and Responsibilities:** The user is a Prudential insurance agent who needs to efficiently oversee and update client records, including individual policies and claims
@@ -340,20 +348,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-<box type="info" seamless>
-Note: For all use cases below, the System is <code>Prudy</code> and the Actor is the user.
-</box>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
-<box type="info" seamless>
-Note: For all use cases below, if the user enters an invalid input, or there is an error when executing the command, the use case simply ends.
-</box>
+🔔
+**Note:** For all use cases below, the System is <code>Prudy</code> and the Actor is the user.
 
-**Use case: UC1 - List clients (Find client has a similar use case)**
+</div>
+
+**Use case: UC1 - List clients**
 
 **MSS**
 
-1. User requests to list clients
-1. Prudy shows a list of clients
+1. User requests to list clients.
+1. Prudy shows a list of clients.
 
    Use case ends.
 
@@ -361,83 +368,325 @@ Note: For all use cases below, if the user enters an invalid input, or there is 
 
 **MSS**
 
-1. User requests to add client
-1. Prudy adds the client
+1. User requests to add client by entering the details (name, phone, email, address, and optional tags).
+1. Prudy adds the client.
 
    Use case ends.
+
+**Extensions**
+
+- 1a. The name is invalid.
+   - 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1b. The phone is invalid.
+   - 1b1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1c. The email is invalid.
+   - 1b1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1d. The address is invalid.
+   - 1d1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1e. The tags provided are invalid.
+   - 1e1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1f. The client already exists in Prudy.
+   - 1f1. Prudy shows an error message.
+
+      Use case ends.
 
 **Use case: UC3 - Delete a client**
 
 **MSS**
 
-1. User <u>list clients (UC1)</u> to look for index of client
-1. User requests to delete a specific client in the list
-1. Prudy deletes the client
+1. User <u>list clients (UC1)</u> to look for index of client.
+1. User requests to delete a specific client in the list.
+1. Prudy deletes the client.
 
    Use case ends.
 
-**Use case: UC4 - Add a policy to client**
+**Extensions**
+
+- 2a. The provided index is invalid.
+   - 2a1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC4 - List policies of a client**
 
 **MSS**
 
-1. User <u>list clients (UC1)</u> to look for index of client
-1. User requests to add a policy to a specific client in the list
-1. Prudy adds the policy under the client
+1. User <u>list clients (UC1)</u> to look for index of client.
+1. User request to list policies of client.
+1. Prudy shows a list of the client's policies.
 
    Use case ends.
 
-**Use case: UC5 - Add a claim to a policy**
+**Extensions**
+
+- 2a. The provided index is invalid.
+   - 2a1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC5 - Add a policy to client**
 
 **MSS**
 
-1. User <u>list clients (UC1)</u> to look for index of client
-1. User requests to add a claim to a specific policy for a client in the list
-1. Prudy adds the claim under the specified policy for the client
+1. User <u>list clients (UC1)</u> to look for index of client.
+1. User requests to add a policy to a specific client in the list (optionally providing the premium amount, coverage amount, and expiry date).
+1. Prudy adds the policy under the client.
 
    Use case ends.
 
-**Use case: UC6 - List claims for a policy**
+**Extensions**
+
+- 2a. The provided policy type is invalid.
+   - 2a1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2b. The provided premium amount is invalid.
+   - 2b1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2c. The provided coverage amount is invalid.
+   - 2c1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2d. The provided expiry date is invalid.
+   - 2d1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2e. Client already has a policy of the same policy type.
+   - 2e1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC6 - List claims for a client's policy**
 
 **MSS**
 
-1. User <u>list clients (UC1)</u> to look for index of client
-1. User requests to list claims for a specific policy under the client
-1. Prudy lists the claims under the specified policy
+1. User <u>list clients (UC1)</u> to look for index of client.
+1. User request to list all claims of client's policy.
+1. Prudy shows a list of claims under the specified client's policies.
 
    Use case ends.
 
-**Use case: UC7 - Resolve a claim**
+**Extensions**
 
-1. User <u>list clients (UC1)</u> to look for index of client
-1. User <u>list claims for a policy (UC6)</u>
-1. User requests to edit a claim to mark its status as resolved
-1. Prudy edits the claim under the specified policy for the client
+- 1a. User wants to list all client's policies.
+   - 1a1. User <u>list policies of a client (UC4)</u>.
+
+      Use case resumes at step 2.
+
+- 2a. The provided index is invalid.
+   - 2a1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2b. The provided policy type is invalid.
+   - 2b1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2c. Client does not has the specified policy.
+   - 2c1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC7 - Add a claim to a policy**
+
+**MSS**
+
+1. User <u>list clients (UC1)</u> to look for index of client.
+1. User requests to add a claim to a specific policy for a client in the list by providing the claim status and claim description.
+1. Prudy adds the claim under the specified policy for the client.
 
    Use case ends.
+
+**Extensions**
+
+- 1a. User wants to list all client's policies.
+   - 1a1. User <u>list policies of a client (UC4)</u>.
+
+      Use case resumes at step 2.
+
+- 2a. The provided index is invalid.
+   - 2a1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2b. The provided policy type is invalid.
+   - 2b1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2c. Client does not have the specified policy.
+   - 2c1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2d. The provided claim status is invalid.
+   - 2d1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2e. The provided claim description is invalid.
+   - 2e1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2f. The claim to be added is a duplicate.
+   - 2f1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC8 - Edit a claim**
+
+**MSS**
+
+1. User <u>list clients (UC1)</u> to look for index of client.
+1. User requests to edit the claim's status or description or both.
+1. Prudy edits the claim under the specified policy for the client.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User wants to list all client's policies.
+   - 1a1. User <u>list policies of a client (UC4)</u>.
+
+      Use case resumes at step 2.
+
+- 1b. User wants to list all claim's of a policy.
+   - 1b1. User <u>list claims for a client's policy (UC6)</u>.
+
+      Use case resumes at step 3.
+
+- 2b. The provided index is invalid.
+   - 2b1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2c. The provided policy type is invalid.
+   - 2c1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2d. Client does not have the specified policy.
+   - 2d1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2e. The provided claim index is invalid.
+   - 2e1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2f. The provided claim status is invalid.
+   - 2b1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2g. The provided claim description is invalid.
+   - 2g1. Prudy shows an error message.
+
+      Use case ends.
+
+- 2h. The result of the command will lead to a duplicate claim.
+   - 2h1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC9 - List expiring policies**
+
+**MSS**
+
+1. User requests to list expiring policies, optionally indicating the number of days to expiry.
+1. Prudy list all policies expiring in 30 days if not specified by user, or policies expiring in however many days as specified by user.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The number of days specified is invalid.
+   - 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Filter clients**
+
+**MSS**
+
+1. User requests to filter clients by search criteria.
+1. Prudy list all clients that match the search criteria.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The provided name is invalid.
+   - 1a1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1b. The provided phone is invalid.
+   - 1b1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1c. The provided email is invalid.
+   - 1c1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1d. The provided address is invalid.
+   - 1d1. Prudy shows an error message.
+
+      Use case ends.
+
+- 1e. The provided policy type is invalid.
+   - 1e1. Prudy shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
-1.**Platform Compatibility**: Should work on any mainstream OS with Java 17 or above installed.
+1. **Platform Compatibility**: Should work on any mainstream OS with Java 17 or above installed.
 
-2.**Performance**: Should be able to hold up to 1000 clients without noticeable sluggishness in typical usage.
+1. **Performance**: Should be able to hold up to 1000 clients without noticeable sluggishness in typical usage.
 
-3.**Efficiency**: A user with average typing speed should be able to perform tasks faster using commands than using a mouse-based interface.
+1. **Efficiency**: A user with average typing speed should be able to perform tasks faster using commands than using a mouse-based interface.
 
-4.**Ease of Use**: Core functions should be intuitive enough for a new user to learn within 30 minutes.
+1. **Ease of Use**: Core functions should be intuitive enough for a new user to learn within 30 minutes.
 
-5.**Response Time**: Basic commands (e.g., add client, update client) should provide feedback within 1 second.
+1. **Response Time**: Basic commands (e.g., add client, update client) should provide feedback within 1 second.
 
-6.**Memory Usage**: The app should not exceed 500MB of memory usage.
+1. **Memory Usage**: The app should not exceed 500MB of memory usage.
 
-7.**Error Messaging**: Should provide clear error messages that guide the user in correcting invalid inputs.
+1. **Error Messaging**: Should provide clear error messages that guide the user in correcting invalid inputs.
 
-8.**Data Persistence**: All client data should be saved and remain intact between application sessions to prevent data loss.
+1. **Data Persistence**: All client data should be saved and remain intact between application sessions to prevent data loss.
 
-9.**Reliability**: The application should handle typical user errors gracefully without crashing or requiring a restart.
+1. **Reliability**: The application should handle typical user errors gracefully without crashing or requiring a restart.
 
-10.**Documentation**: Basic user instructions and command descriptions should be available to help new users understand and use core features effectively.
+1. **Documentation**: Basic user instructions and command descriptions should be available to help new users understand and use core features effectively.
 
-11.**Backup**: Users should be able to easily save a copy of all data manually to prevent accidental loss.
+1. **Backup**: Users should be able to easily save a copy of all data manually to prevent accidental loss.
 
 
 
@@ -482,12 +731,13 @@ We plan to enhance the checks by checking if the domain is valid i.e. contains b
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</box>
+</div>
 
 ### Launch and shutdown
 
