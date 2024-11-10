@@ -139,7 +139,7 @@ Alerts you to potential issues or problems that may arise.
 Help command supports two input formats which allows for more flexibility when
 you want to seek help:
 
-**Shows a message explain the usage of the specified command keyword**
+**Shows a message explaining the usage of the specified command keyword**
 
 Format: `help [COMMAND_KEYWORD]`
 
