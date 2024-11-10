@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.shape.Rectangle?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true">
     <columnConstraints>
-      <ColumnConstraints minWidth="20" prefWidth="90" />
+      <ColumnConstraints minWidth="20" prefWidth="130" />
     </columnConstraints>
     <VBox alignment="CENTER" minHeight="105" GridPane.columnIndex="0">
       <padding>
@@ -26,7 +26,13 @@
         <ImageView fx:id="pinIcon" fitWidth="24" fitHeight="24">
           <Image url="@/images/pin_icon.png"/>
         </ImageView>
-        <Label text=" P " styleClass="maroon-box" />
+        <Label text="  " />
+        <ImageView fitWidth="16" fitHeight="16">
+          <clip>
+            <Rectangle width="16" height="16" arcWidth="8" arcHeight="8"/>
+          </clip>
+          <Image url="@/images/maroon_P.png"/>
+        </ImageView>
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
