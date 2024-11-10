@@ -169,11 +169,11 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 ### General Commands
 
-| Command | Format | Example |
-| --- | --- | --- |
-| [Help](#help-command) | `help` | `help` |
-| [Clear](#clearing-all-entries--clear) | `clear` | `clear` |
-| [Exit](#exit-command) | `exit` | `exit` |
+| Command                     | Format | Example |
+|-----------------------------| --- | --- |
+| [Help](#help-command)       | `help` | `help` |
+| [Clear](#clear-all-command) | `clear` | `clear` |
+| [Exit](#exit-command)       | `exit` | `exit` |
 
 **Parameter Reference:**
 * `INDEX`: Positive integer (1, 2, 3, ...)
