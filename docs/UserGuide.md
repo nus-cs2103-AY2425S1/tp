@@ -272,7 +272,7 @@ In Prudy, arguments ensure that the command functions as expected. Without corre
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Note:**  
+**Note:**
 Prudy allows flexibility in date inputs for February due to the variable number of days (28 or 29) depending on the year. If an invalid date between the maximum day of February and `02/31` is entered, Prudy will automatically adjust it to the maximum valid date for February in that year.
 
 **Examples:**
@@ -326,7 +326,7 @@ Shows a message explaining how to **access the help page**.
 
 ![help message](images/helpMessage.png)
 
-**Format:** 
+**Format:**
 
 ```
 help
@@ -335,7 +335,7 @@ help
 #### 5.1.2 Clearing All Entries: `clear`
 **Clears all entries** from Prudy, resetting the data.
 
-**Format:** 
+**Format:**
 
 ```
 clear
@@ -343,14 +343,14 @@ clear
 
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FADBD8; margin-bottom: 16px;">
 
-**Warning:** 
+**Warning:**
 This action is destructive and irreversible.
 </div>
 
 #### 5.1.3 Exiting the Program: `exit`
 **Exits** the program.
 
-**Format:** 
+**Format:**
 
 ```
 exit
@@ -406,7 +406,7 @@ A client can have any number of tags (including 0).
 **Examples:**
 * `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add-client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Yishun Street 22, Block 245, #04-02 p/1234567 t/owesMoney`
-  
+
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
@@ -440,7 +440,7 @@ This command is useful for finding the `INDEX` of a specific client. `INDEX` is 
 #### 5.2.3 Filtering Clients: `find-client`
 **Filters clients** based on the specified parameters.
 
-**Format:** 
+**Format:**
 
 ```
 find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…
@@ -487,7 +487,7 @@ This command modifies the main client list display as well.<br>
 
 **Edits an existing client** in Prudy. **Does not edit his/her policies**. See [editing a policy](#5-3-3-editing-a-policy-edit-policy) for more info on the command.
 
-**Format:** 
+**Format:**
 
 ```
 edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
@@ -506,7 +506,7 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Note:** 
+**Note:**
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, **the existing tags of the client will be removed** i.e. adding of tags is not cumulative.
@@ -525,7 +525,7 @@ Edited client: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS, Tags: TAG
 #### 5.2.5 Deleting a Client: `delete-client`
 **Deletes a specified client** at the specified `INDEX`.
 
-**Format:** 
+**Format:**
 
 ```
 delete-client INDEX
@@ -639,7 +639,7 @@ Policies Left:
 #### 5.3.3 Editing a Policy: `edit-policy`
 **Edit the policy** from the client at the specified `INDEX`, and of the specified `POLICY_TYPE`.
 
-**Format:** 
+**Format:**
 ```edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]```
 
 | **Parameter Name** | **Description**                                       | **Requirements**                              | **Required** |
@@ -676,7 +676,7 @@ Policy type: POLICY_TYPE  | Premium amount: PREMIUM_AMOUNT | Coverage amount: CO
 #### 5.3.4 Listing All Policies: `list-policies`
 Lists **all policies** associated with a client at the specified `INDEX`.
 
-**Format:** 
+**Format:**
 ```
 list-policies INDEX
 ```
@@ -768,7 +768,7 @@ add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION
 🔔
 **Note:**
 * This command will not allow adding a claim if the client has no policy of the specified type.
-* This command will not allow adding a claim if a similar claim already exists. This is to prevent accidental adding of duplicate claims. 
+* This command will not allow adding a claim if a similar claim already exists. This is to prevent accidental adding of duplicate claims.
 * Two claims are consider similar if they have the same `CLAIM_STATUS` and `CLAIM_DESCRIPTION`.
 * `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
 </div>
@@ -880,7 +880,7 @@ Status: CLAIM_STATUS | Description: CLAIM_DESCRIPTION
 #### 5.4.4 Listing All Claims: `list-claims`
 Lists **all claims** under the specified policy type for the client identified by the index number used in the displayed client list.
 
-**Format:** 
+**Format:**
 ```
 list-claims INDEX pt/POLICY_TYPE
 ```
@@ -918,7 +918,7 @@ Claims listed for policy type POLICY_TYPE of client: NAME
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Prudy home folder.
 
 **Q**: Why am I getting an error when executing commands?<br>
-**A**: Ensure that the command syntax (e.g. `list-claims INDEX pt/POLICY_TYPE`) is correct, and that the flags (e.g. `pt/`) are entered correctly. You can refer to [Command Structure](#4-command-structure) to better understand the command structure. 
+**A**: Ensure that the command syntax (e.g. `list-claims INDEX pt/POLICY_TYPE`) is correct, and that the flags (e.g. `pt/`) are entered correctly. You can refer to [Command Structure](#4-command-structure) to better understand the command structure.
 
 
 

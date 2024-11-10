@@ -715,7 +715,7 @@ Team size: 5
 
 1. **Change policy from FlowPane to Label in the UI:** Currently, when the window is widened, the next FlowPane container will be placed beside instead of below, 2 rows of policies to appear on the same row as shown below.
 We plan to make it a label to solve the issue.
-   
+ 
 <img src="images/img.png" width="1000px">
 
 2. **Include more policy types:** Currently there are only 3 policy types. We plan to include all the policies that Prudential offers in our app.
