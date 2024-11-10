@@ -1,8 +1,3 @@
----
-layout: page
-title: User Guide
----
-
 EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
 at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
@@ -34,15 +29,21 @@ at the National University of Singapore. While optimised for use via a Command L
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com s/IFG r/friends r/owesMoney` : Adds a person named `John Doe` to the local database, with the given details.
+  * `add n/John Doe p/98765432 e/johnd@example.com s/IFG r/friends r/owesMoney` : Adds a person named `John Doe` to the local database, with the given details.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+  * `delete 3` : Deletes the 3rd person shown in the current list of people.
 
-   * `clear` : Deletes all contacts.
+  * `listevent`: Lists all events.
 
-   * `exit` : Exits the app.
+  * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John` : Adds a chess event with the given details.
 
-1. Refer to the [Features](#features) below for details of each command.
+  * `deleteevent 2`: Deletes the second event shown in the current list of events.
+
+  * `clear` : Deletes all contacts and events.
+
+  * `exit` : Exits the app.
+
+Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
