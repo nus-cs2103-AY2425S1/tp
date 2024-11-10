@@ -86,11 +86,6 @@ public class Messages {
                 .append("; Family size: ")
                 .append(person.getFamilySize());
 
-        String remark = person.getRemark().value;
-        if (!remark.isEmpty()) {
-            builder.append("; Remark: ").append(remark);
-        }
-
         Set<Tag> tags = person.getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

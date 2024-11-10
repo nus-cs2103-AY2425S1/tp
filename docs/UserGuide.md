@@ -40,15 +40,15 @@ If done correctly, a GUI similar to the image below should appear in a few secon
 5. Type the command where "Enter command here..." is seen in the command box and press the **enter / return** key on your computer to execute it. e.g. typing **`help`** and pressing enter / return will open the help window.<br><br>
    Some example commands you can try:
 
-   * `list` : Lists all current (i.e. not archived) contacts.
+   * `list`: Lists all current (i.e. not archived) contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2 #02-25 dob/1999-03-09` : Adds a contact named `John Doe` to SocialBook with these specified details.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2 #02-25 dob/1999-03-09`: Adds a contact named `John Doe` to SocialBook with these specified details.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3`: Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear`: Deletes all contacts.
 
-   * `exit` : Exits the app.
+   * `exit`: Exits the app.
 
 <br>6. Refer to the [Features](#features) below for details of each command.
 
@@ -97,7 +97,7 @@ Examples:
 
 Adds a person to SocialBook.
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [r/REMARK] [t/TAG]...`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [t/TAG]...`
 
 * Names are case-insensitive. E.g., `JOHN DOE` is the same as `john doe`.
 * Extra whitespaces between names are trimmed. E.g., <code>John&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doe</code> is the same as `John Doe`.
@@ -136,13 +136,13 @@ Format: `list [archive/] [all/]`
 
 Edits an existing person's details in SocialBook.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** not exceeding the largest index number e.g. 1, 2, 3,…​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, all existing tags of the person will be removed and replaced with updated values i.e editing of tags does not cumulatively add them to current tags.
-* You can remove all the person’s tags or remarks by typing `edit INDEX t/` or `edit INDEX r/` where `INDEX` is the person's index.
+* You can remove all the person's tags by typing `edit INDEX t/` where `INDEX` is the person's index.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -242,7 +242,7 @@ Adds an appointment with a person to the address book.
 Format: `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`
 
 * Adds an appointment with a person at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed person list.
+  * The index refers to the index number shown in the **last viewed person list**.
   * The index should be a **positive integer** not exceeding the last index number in the list.
 * `date` specifies the date of the appointment in the `yyyy-MM-dd` format, where:
   * `yyyy` is the four-digit year (e.g., `2024`)
@@ -285,7 +285,7 @@ Edits an existing appointment in the address book.
 Format: `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`
 
 * Edits the appointment at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed appointment list.
+  * The index refers to the index number shown in the **last viewed appointment list**.
   * The index should be a **positive integer** not exceeding the last index number in the list.
 * `date` specifies the new date of the appointment in the `yyyy-MM-dd` format, where:
     * `yyyy` is the four-digit year (e.g., `2024`)
@@ -309,7 +309,7 @@ Deletes the specified appointment from the address book.
 Format: `deleteappt INDEX`
 
 * Deletes the appointment at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed appointment list.
+  * The index refers to the index number shown in the **last viewed appointment list**.
   * The index should be a **positive integer** not exceeding the last index number in the list.
 
 Examples:
@@ -509,27 +509,27 @@ The current time marker (denoted by the red line on the right side of the calend
 
 ## Command summary
 
-| Command          | Format, Examples                                                                                                                                                                                                |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **help**         | `help [COMMAND]`                                                                                                                                                                                                |
-| **add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                           |
-| **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                                        |
-| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                             |
-| **sort**         | `sort [name] [address] [priority] [income] [updated]`<br> e.g.,`sort name`                                                                                                                                      |
-| **delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`                                                                                                              |
-| **get**          | `get PARAMETERS`<br> e.g.,`get email phone`                                                                                                                                                                     |
-| **clear**        | `clear`                                                                                                                                                                                                         |
-| **addappt**      | `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`<br> e.g., `addappt 1 date/2024-11-08 from/16:00 to/17:00`                                                                                                   |
-| **listappt**     | `listappt`                                                                                                                                                                                                      |
-| **editappt**     | `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`<br> e.g., `editappt 2 from/10:00 to/11:30`                                                                                                           |
-| **deleteappt**   | `deleteappt INDEX`                                                                                                                                                                                              |
-| **statistics**   | `statistics` <br> Shows general statistics                                                                                                                                                                      |
-| **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                            |
-| **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                            |
-| **viewscheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                                    |
-| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`                                                                                                                                      |
-| **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                          |
-| **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                      |
-| **undo**         | `undo`                                                                                                                                                                                                          |
-| **exit**         | `exit`                                                                                                                                                                                                          |
+| Command          | Format, Examples                                                                                                                                                                                    |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **help**         | `help [COMMAND]`                                                                                                                                                                                    |
+| **add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                |
+| **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                            |
+| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                 |
+| **sort**         | `sort [name] [address] [priority] [income] [updated]`<br> e.g.,`sort name`                                                                                                                          |
+| **delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`                                                                                                  |
+| **get**          | `get PARAMETERS`<br> e.g.,`get email phone`                                                                                                                                                         |
+| **clear**        | `clear`                                                                                                                                                                                             |
+| **addappt**      | `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`<br> e.g., `addappt 1 date/2024-11-08 from/16:00 to/17:00`                                                                                       |
+| **listappt**     | `listappt`                                                                                                                                                                                          |
+| **editappt**     | `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`<br> e.g., `editappt 2 from/10:00 to/11:30`                                                                                               |
+| **deleteappt**   | `deleteappt INDEX`                                                                                                                                                                                  |
+| **statistics**   | `statistics` <br> Shows general statistics                                                                                                                                                          |
+| **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                |
+| **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                |
+| **viewscheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                        |
+| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`                                                                                                                          |
+| **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                              |
+| **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                          |
+| **undo**         | `undo`                                                                                                                                                                                              |
+| **exit**         | `exit`                                                                                                                                                                                              |
