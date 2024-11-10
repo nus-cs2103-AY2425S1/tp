@@ -404,7 +404,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Future Features
 
-1) While we are aware of the possibility of international numbers, for this iteration, we decided to focus on the local population.
+1) While we are aware of the possibility of international numbers, for this iteration, we decided to focus on the local population. Support for these numbers is planned in a future release.
 
 
 ---
