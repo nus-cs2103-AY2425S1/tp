@@ -310,56 +310,83 @@ Examples:
 
 ### Adding a Wedding : `create-wedding`
 
-Creates a `Wedding` within WedLinker to be with contacts.
+Use the create-wedding command to create a `Wedding` within WedLinker that can be linked to contacts.
 
 Format: `create-wedding w/WEDDINGNAME`
+
+To create a `Wedding` in WedLinker, type `create-wedding` followed by the name of the wedding.
 
 * The `WEDDINGNAME` is alphanumeric and can contain whitespaces.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
 * Contacts can be assigned to the Wedding using the [assign-wedding](#assign-contact-to-a-wedding--assign-wedding) command.
 
+Examples:
+* To create a Wedding named `Wedding 1`, enter the command:
+    * `create-wedding w/Wedding 1`
+
 ### Assign contact to a Wedding : `assign-wedding`
 
-Assigns a contact to a `Wedding`.
+Use the assign-wedding command to assign a contact to a `Wedding`.
 
-Format: `assign-wedding INDEX w/WEDDINGNAME`
+Format: `assign-wedding PERSON_NUMBER w/WEDDINGNAME`
 
-* Assigns a specified contact to the `Wedding` based on their `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​.
+To assign a contact to a `Wedding`, type `assign-wedding`, followed by the person's position number in the contact list and the name of the wedding.
+
+* The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * The `Wedding` must exists in WedLinker before it can be assigned.
-* If the `Wedding` does not exist, you can use `f/` to force the creation and assignment of the `Wedding`.
+* If the `Wedding` does not exist, you can use `f/` to force its creation and assignment to the contact.
+
+Examples:
+* To assign the Wedding named `Wedding 1` to the third person in the list, enter the command:
+    * `assign-wedding 3 w/Wedding 1`
 
 ### Edit Wedding details : `edit-wedding`
 
-Edits the details of a `Wedding`.
+Use the edit-wedding command to edit details of a `Wedding`.
 
-Format: `edit-wedding INDEX [w/WEDDINGNAME] [a/ADDRESS]`
+Format: `edit-wedding WEDDING_NUMBER [w/WEDDINGNAME] [a/ADDRESS]`
+
+To edit the details of a `Wedding`, enter the command [list-weddings](#listing-all-weddings-list-weddings) to identify the Wedding number in the `Wedding` list. <br>
+Following that, type "edit-wedding" followed by the Wedding number enter the details you wish to edit and the name of the wedding.
 
 * Edits the specific `Wedding` at the INDEX when in [list-wedding](#listing-all-weddings-list-weddings) view.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
+Examples:
+* To edit the address of the Wedding named `Wedding!`, to XYZ street:
+    * First, identify the Wedding number by entering the command: `list-weddings`
+    * If the wedding number is 1, enter the command: `edit-wedding 1 a/XYZ street`
+
 ### Unassign contacts from a Wedding : `unassign-wedding`
 
-Unassigns a contact from a `Wedding` in WedLinker.
+Use the unassign-wedding command to remove a contact from a specific `Wedding`.
 
-Format: `unassign-wedding INDEX w/WEDDINGNAME`
+Format: `unassign-wedding PERSON_NUMBER w/WEDDINGNAME`
 
-* Unassign a contact that is assigned in a `Wedding`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​.
+To remove the details of a `Wedding`, type "unassign-wedding", followed by the person's position number in the contact list and the name of the wedding.
+
+* The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
+
+Examples:
+* To remove the second person in the list from the Wedding named `Wedding 1`, enter the command:
+    * `unassign-wedding 2 w/Wedding 1`
 
 ### Deleting a Wedding : `delete-wedding`
 
-Deletes a `Wedding` from WedLinker.
+Use the delete-wedding command to delete a `Wedding` from WedLinker.
 
 Format: `delete-wedding w/WEDDINGNAME [f/]`
 
-* Deletes a `Wedding ` from WedLinker.
-* The no contacts should be assigned to the `Wedding` before it is deleted.
-* If there are still contacts assigned, you can use `f/` to force the deletion of the `Wedding` and unassign all contacts.
+To delete a `Wedding`, type "delete-wedding", followed by the name of the wedding.
 
+* There should be no contacts assigned to the `Wedding` before it is deleted.
+* If there are still contacts assigned to the `Wedding`, you can use `f/` to force its deletion and the removal of all contacts from the `Wedding`.
+
+Examples:
+* To delete the wedding named `Wedding 1`, enter the command:
+    * `delete-wedding w/Wedding 1`
+  
 ## Task Features
 
 ### Creating a Task : `create-task`
