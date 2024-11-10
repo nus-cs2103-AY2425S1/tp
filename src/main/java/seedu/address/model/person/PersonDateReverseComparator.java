@@ -2,9 +2,6 @@ package seedu.address.model.person;
 
 import java.util.Comparator;
 
-import seedu.address.model.person.ContractEndDate.EmptyContractEndDate;
-import seedu.address.model.person.ContractEndDate.FilledContractEndDate;
-
 /**
  * A Comparator object that compares two persons based on their name.
  */
@@ -13,13 +10,13 @@ public class PersonDateReverseComparator implements Comparator<Person> {
      * Compares two persons based on their names.
      */
     public int compare(Person p1, Person p2) {
-        ContractEndDate d1 = p1.getContractEndDate();
-        ContractEndDate d2 = p2.getContractEndDate();
-        if (d1 instanceof EmptyContractEndDate && d2 instanceof FilledContractEndDate) {
+        boolean isEmployeeP1 = p1.isEmployee();
+        boolean isEmployeeP2 = p2.isEmployee();
+        if (!isEmployeeP1 && isEmployeeP2) {
             return 1;
-        } else if (d1 instanceof FilledContractEndDate && d2 instanceof EmptyContractEndDate) {
+        } else if (isEmployeeP1 && !isEmployeeP2) {
             return -1;
         }
-        return -d1.compareTo(d2);
+        return -p1.getContractEndDate().compareTo(p2.getContractEndDate());
     }
 }

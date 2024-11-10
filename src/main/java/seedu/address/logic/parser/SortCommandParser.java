@@ -25,7 +25,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        String[] params = args.trim().split(" ");
+        String[] params = args.trim().split(" ", 2);
         boolean isReversed = false;
 
         if (params.length == 1) {
