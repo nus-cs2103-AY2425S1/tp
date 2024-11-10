@@ -310,7 +310,7 @@ Invalid Example (Duplicate Persons):
 * Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` exists as the first contact.
 * Attempting to edit another contact: <br> e.g. `edit 2 -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be edited.
 * The following error message will be shown:
-  ![EditPersonDuplicateExample.png](images/EditPersonDuplicateExample.png)
+![EditPersonDuplicateExample.png](images/EditPersonDuplicateExample.png)
 
 
 ### Find Contacts By Name 🔍
