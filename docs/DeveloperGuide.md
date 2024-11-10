@@ -542,12 +542,80 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all buyers using the `view` command. At least one buyer in the list.
    
     1. Launching the app and execute `delete 1`.    
-    Expected: A new instance of the application should open with each double click
+    Expected: A new instance of the application should open and running this command deletes the first contact from the buyer list.
 
     1. Force close the app using Task Manager.
 
    1. Re-launch another instance of the application.
        Expected: Changes made is saved.
+   
+### Adding a buyer
+
+1. Adding a new buyer to the buyer list
+
+    1. Prerequisites: Switch to buyer mode using the `switch b` command. Ensure that no buyer with the name `John Doe` or `Betsy Crowe` is present in the list.
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com b/100000`  
+   Expected: A new buyer with the name `John Doe` is added to the list. Details of the added buyer are shown in the status message.
+
+    1. Test case: `add n/Betsy Crowe t/urgent e/betsycrowe@example.com b/7000000 p/91234567 t/referred`  
+Expected: A new buyer with the name `Betsy Crowe`and tags `urgent` and `referred` is added to the list. Details of the added buyer are shown in the status message.
+
+    1. Test case: `add n/John Doe p/invalidPhone e/johnd@example.com b/100000`   
+   Expected: No buyer is added. Error message indicating an invalid phone number is shown as the status message.
+
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com b/`  
+   Expected: No buyer is added. Error message indicating that budget should not be blank is shown as the status message.
+
+1. Adding an existing buyer to the buyer list
+
+    1. Prerequisites: Switch to buyer mode using the `switch b` command. Ensure that a buyer with the name `John Doe` is already present in the list.
+
+    1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com b/100000`
+    Expected: No buyer is added. Error message indicating that the buyer already exists is shown as the status message.
+
+### Adding a meet-up
+
+1. Adding a new meet-up to the meet-up list
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. Ensure that no meet-up with the subject `Discuss work plans` and from `2024-02-03 14:00` and to `2024-02-03 15:30` is present in the list.
+
+    1. Test case: `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li`
+    Expected: A new meet-up with the subject `Discuss work plans` is added to the list. Details of the added meet-up are shown in the status message. In the meet-up shown, if the added buyers (i.e. `Alex Yeoh`, `David Li`) do not exist in the buyer list, they are marked in red.
+
+   1. `Test case: add s/Invalid Meeting i/Discuss with team f/2024-02-04 14:00 t/2024-02-04 13:00 n/John Doe`
+   Expected: No meet-up is added. Error message indicating that the end time must be later than the start time is shown as the status message.
+
+1. Adding an existing meet-up to the meet-up list
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m command`. Ensure that a meet-up with the subject `Discuss work plans` and from `2024-02-03 14:00` and to `2024-02-03 15:30` is present in the list.
+
+    1. Test case: `add s/Discuss work plans i/New information f/2024-02-03 14:00 t/2024-02-03 15:30 n/John Doe`  
+Expected: No meet-up is added. Error message indicating that the meet-up already exists is shown as the status message.
+
+### Adding a property
+1. Adding a new property to the property list
+
+    1. Prerequisites: Switch to property mode using the `switch p` command. Ensure that no property with the address `Paya Lebar Rd #01-01` or `Bishan Street 22` is present in the list.
+
+    1. Test case: `add n/John p/87152433 a/Paya Lebar Rd #01-01 s/200000 t/Condominium`  
+Expected: A new property with the address `Paya Lebar Rd #01-01` is added to the list. Details of the added property are shown in the status message.
+
+       1. Test case: `add n/Mary Tan p/91234567 a/Bishan Street 22 s/850000 t/HDB`  
+Expected: A new property with the address `Bishan Street 22` is added to the list with the specified details. Details of the added property are shown in the status message.
+       
+    1. Test case: `add n/John p/invalidPhone a/Paya Lebar s/200000 t/Condominium`  
+Expected: No property is added. Error message indicating an invalid phone number is shown as the status message.
+
+    1. `Test case: add n/John p/87152433 a/Paya Lebar s/ t/Condominium`  
+Expected: No property is added. Error message indicating that the asking price should not be blank is shown as the status message.
+
+1. Adding an existing property to the property list
+
+    1. Prerequisites: Switch to property mode using the switch p command. Ensure that a property with the address `Paya Lebar Rd #01-01` is already present in the list.
+
+    1. Test case: `add n/Alice p/87152433 a/Paya Lebar Rd #01-01 s/300000 t/Landed`  
+Expected: No property is added. Error message indicating that the property already exists is shown as the status message.
 
 ### Deleting a buyer
 
@@ -556,31 +624,32 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted buyer shown in the status message.
 
-    1. Test case: `delete 0`<br>
-       Expected: No buyer is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`, `delete -1`, `delete y` (where y is not a positive number)<br>
+       Expected: No buyer is deleted. Error message indicating invalid command format is shown as the status message.
+   
+    1. Test case: `delete x`(where x is larger than the list size)<br>
+       Expected: No buyer is deleted. Error message indicating invalid buyer index is shown as the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete abc`, `...` <br>
+       Expected: No buyer is deleted. Error message indicating invalid command format is shown as the status message.
 
 1. Deleting a buyer while some buyers are filtered in the list
 
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only one buyer using relevant filters.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only some buyer (fewer than full list) using relevant filters.
 
    1. Test case: `delete 1`    
-   Expected: First (and only) contact in the filtered list is deleted. Details of the deleted contact are shown in the status message. The filtered list becomes empty. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 2` (with only one buyer in the filtered list)  
-    Expected: No buyer is deleted. Error message indicating an invalid buyer index is shown. Status bar remains unchanged.
-
-1. Deleting a buyer with an out-of-bound index
-
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show fewer buyers than the total list size.
+   Expected: First (and only) buyer in the filtered list is deleted. Details of the deleted buyer are shown in the status message.
 
    1. Test case: `delete x` (where x is within the bounds of the full list but not within the filtered list)  
-   Expected: No buyer is deleted. Error message indicating an invalid buyer index for the filtered list is shown. Status bar remains unchanged.
+   Expected: No buyer is deleted. Error message indicating an invalid buyer index is shown as the status message.
+
+### Deleting a meet-up
+1. Similar steps to those outlined in [deleting a buyer](#Deleting-a-buyer) can be followed, but in the context of meet-up mode. Before performing the tests, ensure the application is in meet-up mode by using the `switch m` command.
+
+### Deleting a property
+1. Similar steps to those outlined in [deleting a buyer](#Deleting-a-buyer) can be followed, but in the context of property mode. Before performing the tests, ensure the application is in property mode by using the `switch p` command.
 
 ### Editing a buyer
 
@@ -589,65 +658,162 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers are present in the list.
 
     1. Test case: `edit 1 b/700000 p/91234567`  
-    Expected: First contact’s budget and phone number are updated. All other fields remain the same. Details of the edited buyer are shown in the status message. Timestamp in the status bar is updated.
+    Expected: First buyer’s budget and phone number are updated. All other fields remain the same. Details of the edited buyer are shown in the status message. 
 
-    1. Test case: `edit 0 b/700000`  
-    Expected: No buyer is edited. Error details are shown in the status message. Status bar remains unchanged.
+    1. Test case: `edit 0 b/700000`, `edit -1 b/700000`, `edit y b/700000` (where y is not a positive number)  
+    Expected: No changes are made. Error message indicating invalid command format is shown as the status message.
 
     1. Test case: `edit 1`  
-    Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit. Status bar remains unchanged.
+    Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit.
+
+    1. Test case: `edit x`(where x is larger than the list size)  
+       Expected: No changes are made. Error message indicating invalid buyer index is shown as the status message.
 
     1. Test case: `edit 1 b/700000 p/91@83817`  
-    Expected: No changes are made. Error message displayed due to invalid phone format. Status bar remains unchanged.
+    Expected: No changes are made. Error message indicating invalid phone number is shown as the status message.
 
 1. Editing a buyer in a filtered list
 
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only one buyer using relevant filters.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only some buyers (fewer than full list) using relevant filters.
 
    1. Test case: `edit 1 p/87151234 ` 
-   Expected: First (and only) contact in the filtered list has its phone number updated to “87151234”. Details of the edited contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First (and only) buyer in the filtered list has its phone number updated. Details of the edited buyer shown in the status message. 
 
+   1. Test case: `edit x p/87151234` (where x is within the bounds of the full list but not within the filtered list)  
+      Expected: No changes made. Error message indicating an invalid buyer index is shown as the status message.
+   
 1. Attempting to edit to create a duplicate buyer
 
     1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. At least two buyers present.
     
-    1. Test case: `edit 2 n/x` (where x is an existing name)
-    Expected: No changes are made. Error message shown indicating that the updated details would create a duplicate buyer. Status bar remains unchanged.
+    1. Test case: `edit 1 n/x` (where x is another existing name)
+    Expected: No changes are made. Error message indicating that buyer already exists in application is shown as the status message.
 
-1. Attempting to edit a buyer with an invalid index
+### Editing a meet-up
 
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. List all buyers using the `view` command. Multiple buyers are present.
+1. Editing a meet-up while all meet-ups are being shown
 
-   1. Test case: `edit x p/87151234` (where x is larger than the list size)  
-   Expected: No changes are made. Error message displayed indicating an invalid index. Status bar remains unchanged.
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. List all buyers using the `view` command. Multiple meet-ups are present in the list.
 
-1. Editing a buyer in a filtered list with an out-of-bounds index
+    1. Test case: `edit 1 i/New information n/Adam`  
+       Expected: First meet-up information and added buyers are updated. All other fields remain the same. Details of the edited meet-up are shown in the status message. Note that if added buyer (i.e. `Adam`) is not found in the buyer list, it will be flagged out as red.
 
-    1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command, so it has fewer buyers than the total list size.
+    1. Test case: `edit 0 i/New information`, `edit -1 i/New information`, `edit y i/New information` (where y is not a positive number)  
+       Expected: No changes are made. Error message indicating invalid command format is shown as the status message.
+
+    1. Test case: `edit 1`  
+       Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit.
+
+    1. Test case: `edit x`(where x is larger than the list size)  
+       Expected: No changes are made. Error message indicating invalid meet-up index is shown as the status message.
+
+    1. Test case: `edit 1 t/23 June 2024`  
+       Expected: No changes are made. Error message indicating an invalid to datetime format is shown as the status message.
+
+1. Editing a meet-up in a filtered list
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. Filter the meet-up list using the `find` command to show only some meet-up (fewer than full list) using relevant filters.
+
+    1. Test case: `edit 1 i/New information `
+       Expected: First (and only) meet-up in the filtered list has its information updated. Details of the edited meet-up is shown in the status message.
+
+    1. Test case: `edit x i/New information` (where x is within the bounds of the full list but not within the filtered list)  
+       Expected: No changes made. Error message indicating an invalid meet-up index is shown as the status message.
+
+1. Attempting to edit to create a duplicate meet-up
+
+    1. Prerequisites: Switch to buyer mode using the `switch m` command. List all meet-up using the `view` command. At least two meet-ups present.
+
+    1. Test case: `edit 1 s/xt t/xt f/xf` (where xs, xt, xf are the subject, to and from of another existing meet-up in the list)
+       Expected: No changes are made. Error message indicating that meet-up already exists in application is shown as the status message.
+
+### Editing a property
+
+1. Editing a property while all properties are being shown
+
+    1. Prerequisites: Switch to property mode using the `switch p` command. List all properties using the `view` command. Multiple properties are present in the list.
+
+    1. Test case: `edit 1 s/700000 p/91234567`  
+       Expected: First property’s asking price and landlord phone number are updated. All other fields remain the same. Details of the edited property are shown in the status message.
+
+    1. Test case: `edit 0 s/700000`, `edit -1 s/700000`, `edit y s/700000` (where y is not a positive number)  
+       Expected: No changes are made. Error message indicating invalid command format is shown as the status message.
+
+    1. Test case: `edit 1`  
+       Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit.
+
+    1. Test case: `edit x`(where x is larger than the list size)  
+       Expected: No changes are made. Error message indicating invalid property index is shown as the status message.
+
+    1. Test case: `edit 1 s/700000 p/91@83817`  
+       Expected: No changes are made. Error message indicating invalid phone number is shown as the status message.
+
+1. Editing a property in a filtered list
+
+    1. Prerequisites: Switch to property mode using the `switch p` command. Filter the property list using the `find` command to show only some properties (fewer than full list) using relevant filters.
+
+    1. Test case: `edit 1 p/87151234 `
+       Expected: First (and only) property in the filtered list has its landlord phone number updated. Details of the edited property shown in the status message.
 
     1. Test case: `edit x p/87151234` (where x is within the bounds of the full list but not within the filtered list)  
-    Expected: No changes are made. Error message shown indicating an invalid index for the filtered list. Status bar remains unchanged.
+       Expected: No changes made. Error message indicating an invalid property index is shown as the status message.
 
+1. Attempting to edit to create a duplicate property
+
+    1. Prerequisites: Switch to property mode using the `switch p` command. List all properties using the `view` command. At least two properties present.
+
+    1. Test case: `edit 1 a/x` (where x is another existing address)
+       Expected: No changes are made. Error message indicating that property already exists in application is shown as the status message.
+
+### Finding a buyer
+1. Finding buyers by name keywords
+
+    1. Prerequisites: Switch to buyer mode using the `switch b` command.
+
+    1. Test case: `find n/Alex David`  
+       Expected: Buyers with names containing the keywords `Alex` or `David` are shown in the list. The number of buyers found is displayed in the status message.
+
+    1. Test case: `find n/` (empty keyword)  
+       Expected: Error message indicating that name should not be blank will be shown as status message.
+
+### Finding a meet-up
+1. Finding meet-up by subject keywords
+
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command.
+
+    1. Test case: `find s/Sales Investors`  
+       Expected: Meet-ups with names containing the keywords `Sales` or `Investors` are shown in the list. The number of meet-ups found is displayed in the status message.
+
+    1. Test case: `find s/` (empty keyword)  
+       Expected: Error message indicating that subject should not be blank will be shown as status message.
+   
 ### Finding a property
 1. Finding properties by address keywords
 
     1. Prerequisites: Switch to property mode using the `switch p` command.
    
-    1. Test case: find a/Aljunied Marsiling Shibuya  
-Expected: Properties with addresses containing the keywords "Aljunied," "Marsiling," or "Shibuya" are shown in the list. The number of properties found is displayed in the status message.
+    1. Test case: `find a/Bishan Marsiling Shibuya`  
+Expected: Properties with addresses containing the keywords `Bishan`, `Marsiling`, or `Shibuya` are shown in the list. The number of properties found is displayed in the status message.
 
-   1. Test case: find a/ (empty keyword)  
-   Expected: Error message informing you that address should not be blank will be displayed.
+   1. Test case: `find a/` (empty keyword)  
+   Expected: Error message indicating that address should not be blank will be shown as status message.
 
 1. Finding properties by landlord name keywords
 
     1. Prerequisites: Switch to property mode using the `switch p` command.
    
-    1. Test case: `find n/Kurz Elle Kunz`  
-    Expected: Properties with landlord names containing "Kurz," "Elle," or "Kunz" are shown in the list. The number of properties found is displayed in the status message.
+    1. Test case: `find n/Kurz Elle Bob`  
+    Expected: Properties with landlord names containing `Kurz`, `Elle`, or `Bob` are shown in the list. The number of properties found is displayed in the status message.
     
-    1. Test case: `find n/`
-    Expected: Error message informing you that the landlord name should not be blank will be displayed.
+    1. Test case: `find n/`  
+    Expected: Error message indicating that landlord name should not be blank will be shown as status message.
+
+1. Attempting to input an incorrect find command format
+   
+   1. Prerequisites: Switch to property mode using the `switch p` command.
+   
+   1. Test case: `find a/ n/`, `find`  
+      Expected: Error message indicating invalid command format is shown as status message.
 
 ### Saving data
 
