@@ -26,9 +26,14 @@ public class FindSubjectCommandParser implements Parser<FindSubjectCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSubjectCommand.MESSAGE_USAGE)
             );
         }
-        if (!isValidSubject(trimmedArgs)) {
-            throw new ParseException(MESSAGE_CONSTRAINTS);
+
+        String[] subjectKeywords = trimmedArgs.split("\\s+");
+        for (String subject : subjectKeywords) {
+            if (!isValidSubject(subject)) {
+                throw new ParseException(MESSAGE_CONSTRAINTS);
+            }
         }
+
         String subjectToFind = trimmedArgs;
         return new FindSubjectCommand(new PersonHaveSubjectPredicate(subjectToFind));
     }
