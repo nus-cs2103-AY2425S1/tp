@@ -129,9 +129,18 @@ Shows a message with basic usage instructions for PlanPerfect. The link to this 
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]`
 
-Adds a [contact](#glossary) to the address book.
+Adds a [contact](#glossary)  to the contact list.
 
-* Address field cannot contain " n/", " p/", " e/", " a/", " t/" as these sequences of characters are reserved for parameter prefixes.
+* The `NAME` input accepts only alphanumeric characters and spaces. Other symbols are not allowed.
+* The `PHONE_NUMBER` input accepts only numbers, and it should be 3-15 digits long.
+* The `EMAIL` input has to have the format `local-part@domain`. 
+  * `local-part` should only contain alphanumeric characters and the characters `+`, `_`, `.` and `-`. The `local-part` may not start or end with any special characters. 
+  * The domain name is made up of domain labels separated by periods. 
+    * end with a domain label at least 2 characters long
+    * have each domain label start and end with alphanumeric characters
+    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* The `ADDRESS` input accepts any text, but cannot contain " n/", " p/", " e/", " a/", " t/" as these sequences of characters are reserved for parameter prefixes.
+* The `TAG` input is optional, and can include 0 to 6 one-word alphanumeric text, separated by spaces.
 * The order of parameters given does not matter, parameters can be in any order.
 
 <box type="info">
@@ -153,7 +162,7 @@ Examples:
 
 Format: `list`
 
-Shows a list of all [contacts](#glossary) in the address book.
+Shows a list of all [contacts](#glossary) in the contact list.
 
 * Use this command to return to the view of all your contacts after using commands such as `filter` and `view` that display a subset of contacts.
 
@@ -163,10 +172,11 @@ Shows a list of all [contacts](#glossary) in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
-Edits an existing [contact](#glossary) in the address book.
+Edits an existing [contact](#glossary) in the contact list.
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Inputs to the parameters must adhere to the constraints detailed in [Adding a contact](#adding-a-contact-add).
 * Existing values will be updated to the input values only for the fields for which a new value is provided.
 * You cannot edit a contact's phone number to one that is held by another contact.
   
@@ -188,12 +198,12 @@ Examples:
 
 Format: `tag INDEX t/TAG1 TAG2 ...`
 
-Adds one or more [tags](#glossary) to a specific [contact](#glossary) in the address book.
+Adds one or more [tags](#glossary) to a specific [contact](#glossary) in the contact list.
 
 * Tags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
 * Tags specified in the command must be alphanumeric.
 * You can specify multiple tags in the same command by separating the tags with a space.
-* As such, each tag must be 1 word (i.e. does not contain spaces)
+* As such, each tag must be 1 word (i.e. does not contain spaces).
 * Adding a tag to a contact who already has the tag will show an error message.
 
 <box type="warning">
@@ -212,10 +222,10 @@ Examples:
 
 Format: `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all`
 
-Removes one or more [tags](#glossary) from a specific [contact](#glossary) in the address book.
+Removes one or more [tags](#glossary) from a specific [contact](#glossary) in the contact list.
 
 * Untags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
-* If you only wants to remove specific tags from the contact, at least one tag to remove must be specified.
+* If you only want to remove specific tags from the contact, at least one tag to remove must be specified.
 * You can remove multiple tags from a contact by separating them with a space.
 * Alternatively, you can remove all tags associated with a contact by using `untag INDEX t/all`.
 
@@ -229,7 +239,8 @@ Examples:
 
 Format: `taglist`
 
-Lists the active [tags](#glossary) across *all* [contacts](#glossary) in the address book.
+Lists the active [tags](#glossary) across *all* [contacts](#glossary) in the contact list.
+
 'Active tag' refers to a tag that currently assigned to at least 1 contact in your PlanPerfect application.<br>
 
 * Lists active tags in alphabetical order.
@@ -254,7 +265,7 @@ Finds [contacts](#glossary) whose names contain any of the given keywords.
 
 <box type="info">
 
-Execution of `find` will **always** search within all contacts, not just contacts in the current filtered or [wedding](#glossary) view. If a `view` or `filter` command had been executed prior to the execution of `find`, the displayed list will include contacts in the "all contacts" view.
+Execution of `find` will **always** search within all contacts, not just contacts in the current filtered or [wedding](#glossary) view. Even if a `view` or `filter` command had been executed prior to the execution of `find`, the displayed list will include contacts in the "all contacts" view.
 
 </box>
 
@@ -275,6 +286,7 @@ Filters [contacts](#glossary) who are tagged with all of the given [tags](#gloss
 * Contacts matching all tags will be returned (i.e. `AND` search).
 * The search for tags is case-insensitive. eg. filtering by tag `Photographer` will also show contacts tagged with `photographer`.
 * If used inside a [wedding](#glossary) view, only contacts assigned to that wedding (with that tag) are displayed.
+* The input tags must each be one-word and alphanumeric. You can filter by more than one word by separating the tags with a space.
 
 <box type="info">
 
@@ -297,21 +309,21 @@ Examples:
 
 Format: `delete INDEX`
 
-Deletes the specified [contact](#glossary) from the address book.
+Deletes the specified [contact](#glossary) from the contact list.
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of contacts currently listed.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `list` followed by `delete 2` deletes the 2nd contact in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 **Warning**: If you want to remove a contact from a [wedding](#glossary), use the unassign command instead of the delete command. 
 The delete command deletes the contact from the address book entirely.
 <br><br/>
 
-#### Sort all entries: `sort`
+#### Sorting all contacts: `sort`
 
 Format: `sort`
 
@@ -319,7 +331,7 @@ Sorts the [contacts](#glossary) in the current view in alphabetical order.
 
 <box type="warning">
 
-You will not be able to recover the previous sorting of your contacts after the running the `sort` command.
+You will not be able to recover the previous sorting of your contacts after the running the `sort` command. If you sort your contacts while in a wedding view, the list of all contacts will also be sorted.
 
 </box>
 
@@ -348,14 +360,14 @@ In this section, note that:
 
 <br><br/>
 
-#### Add wedding: `addw`
+#### Adding a wedding: `addw`
 
 Format: `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CONTACT2_INDEX ...]`
 
-Adds a [wedding](#glossary) to PlanPerfect with the specified date. Optionally allows users to pre-assign [contacts](#glossary) to the wedding.
+Adds a [wedding](#glossary) to PlanPerfect with the specified date. Optionally allows you to pre-assign [contacts](#glossary) to the wedding.
 
-* Running this command will create a new wedding in the weddings panel, allowing you to use its wedding index to 
-  execute relevant commands on that wedding.
+* Running this command will create a new wedding in the weddings panel, allowing you to use its wedding index to execute relevant commands on that wedding.
+* Wedding names must be alphanumeric, with a maximum length of 30 characters.
 * Date can be in the past (for documenting/tracking old weddings), present, or future.
 * Contact indexes must be valid in the context of the current view.
 
@@ -384,18 +396,21 @@ Examples:
 
 <br><br/>
 
-#### View wedding : `view`
+#### Viewing a wedding : `view`
 
 Format: `view WEDDING_INDEX`
 
-Displays [contacts](#glossary) assigned to the [wedding](#glossary) at the specified `WEDDING_INDEX`. Please refer to the 'General Notes' at the start of the Features section to learn more about the implications (on command behaviour) of entering a wedding view using this command 
+Displays [contacts](#glossary) assigned to the [wedding](#glossary) at the specified `WEDDING_INDEX`. 
+
+* The index **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of weddings currently listed.
+* Please refer to the 'General Notes' at the start of the Features section to learn more about how entering a wedding view using this command affects the behaviour of other commands.
 
 Examples:
 * `view 2` displays a list of all contacts involved in the 2nd wedding on the wedding list.
 
 <br><br/>
 
-#### Edit wedding: `editw`
+#### Editing a wedding: `editw`
 
 Format: `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
 
@@ -430,7 +445,7 @@ Examples:
 
 <br><br/>
 
-#### Assign contact to wedding : `assign`
+#### Assigning a contact to a wedding : `assign`
 
 Format: `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
@@ -445,7 +460,7 @@ Examples:
 
 <br><br/>
 
-#### Unassign contact from wedding : `unassign`
+#### Unassigning a contact from a wedding : `unassign`
 
 Format: `unassign c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
@@ -466,7 +481,7 @@ Examples:
 
 <br><br/>
 
-#### Delete wedding: `deletew`
+#### Deleting a wedding: `deletew`
 
 Format: `deletew WEDDING_INDEX`
 
@@ -531,8 +546,15 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 **Q**: **What if my contact or wedding name contains symbols such as @, (, ) and /?** <br>
 **A**: PlanPerfect currently only supports alphanumeric contact and wedding names. We understand that there are names containing these characters, and plan to include support for these characters in a future release.
 
-**Q**: **What do I do if the data I entered does not appear in full or is truncated which I do not want?** <br>
+**Q**: **What do I do if the data I entered does not appear in full or is truncated which I do not want?** 
 **A**: You can expand your window size to view the full details of the information you entered, do this for all fields you can't fully see.
+
+**Q**: **Are "John" and "john" considered duplicate wedding names?** 
+**A**: No, checking for duplicates in wedding names is **case-sensitive**.
+
+**Q**: **How are duplicate contacts determined?**
+**A**: Two contacts are considered duplicates if they have the **same phone number**. An error message will be shown if you attempt to add a duplicate contact or edit the phone number of a contact to be the same as another phone number already in the contact list. 
+
 <br><br/>
 
 ## Known issues
@@ -546,11 +568,11 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 
 ## Glossary
 
-| Term                               | Explanation                                                                                                                                                                                            |
-|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <a id="contact">Person/Contact</a> | Used interchangeably. Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                  |
+| Term                               | Explanation                                                                                                                                                                                          |
+|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <a id="contact">Person/Contact</a> | Used interchangeably. Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                |
 | <a id="wedding">Wedding</a>        | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/>Weddings are considered duplicate if they have identical names (case-sensitive). |
-| <a id="tag">Tag</a>                | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                       | 
+| <a id="tag">Tag</a>                | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                     | 
 
 ## Command summary
 
