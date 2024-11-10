@@ -123,6 +123,23 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Summary of a `Person`
+
+This table will explain the fields that a `Person` in EduContacts possesses and its respective constraints. Each person
+in EduContacts is assumed to be Singaporean. All fields should not be blank upon the initialisation of a Student, except for `Module`.
+
+Field      | Details
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**StudentID**   | The StudentID that belongs to the `Person`. The input for this field can only contain digits and should be exactly 8 digits long. <br><br> This field also serves as the unique identifier for a `Person`.
+**Name**   | The name that belongs to the `Person`. The input for this field can only contain alphanumeric characters.
+**Course** | The course that the `Person` studies. The input for this field can only contain alphabetical characters.
+**Email**  | The email that belongs to the `Person`. The input for this field should be of the format local-part@domain. <br><br> The local-part should only contain alphanumeric characters and these special characters: `+ _ . -` The local-part may not start or end with any special characters. This is followed by a '@' and then a domain name. <br><br> The domain name is made up of domain labels separated by periods. <br><br> The domain name must: <br> - End with a domain label at least 2 characters long <br> - Have each domain label start and end with alphanumeric characters <br> - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+**Address**   | The address that belongs to the `Person`. The first character for the input for this field can only contain alphanumeric characters and these special characters: `# , -`. <br><br> After the first character, any additional characters are allowed, including whitespace and further text.
+**Phone Number**  | The phone number that belongs to the `Person`. The input for this field can only contain digits and must at least be 8 digits long.
+**Module** | A module that the `Person` takes. A `Person` can have multiple modules. The input for this field can only contain alphanumeric characters. <br><br> A module can also be assigned a `Grade`, which must be one of the following: must be one of the following: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
+**Role**   | The role assigned to the `Person`. A person can either be a "Student" or "Tutor".
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## Features
@@ -163,7 +180,8 @@ help
 ```
 
 The help window will display the help message as shown in the screenshot below:
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" alt="help message" width="500" height="auto">
+
 Alternatively, you can click the button on the top right hand corner as indicated here:
 ![alternative_help](images/alternativeHelp.png)
 
@@ -213,7 +231,7 @@ Examples:
 * `module 12345678 m/GEA1000` will add a module `GEA1000` to a person with student ID of `12345678`.
 * `module 13131313 m/CS2103T` will add a module `CS2103T` to a person with student ID of `13131313` (the response message of this command is shown in the screenshot below).
 
-  ![result for 'add module result'](images/addModule.png)
+  ![result for 'add module result'](images/addModuleResult.png)
 
 <br>
 
@@ -233,7 +251,7 @@ edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 
 Examples:
 *  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
-*  `edit 12121212 c/Computer Science` will edit a person with student ID of `12121212` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
+*  `edit 12345678 c/Computer Science` will edit a person with student ID of `12345678` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
 
    ![result for 'edit command result'](images/editCommandResult.png)
 
@@ -297,8 +315,8 @@ Examples:
 * `filter m/CS2103T` will return a list of all persons with module `CS2103T`.
 * `filter c/Computer Science` will return a list of all persons with course `Computer Science`.
 * `filter n/alex david` will return a list of all persons with `alex` or `david` in their name e.g.  `Alex Yeoh`, `David Li` (the result of this command is shown in the screenshot below).
+  <img src="images/filterAlexDavidResult.png" alt="filter alex david" width="600" height="auto">
 
-  ![result for 'find alex david'](images/filterAlexDavidResult.png)
 <br>
 
 <box type="info" seamless>
@@ -322,7 +340,7 @@ delete ID
 
 Examples:
 * `delete 15151515` will delete a person with student ID of `15151515` from EduContacts.
-* `delete 71271222` will delete a person with student ID of `71271222` from EduContacts (the response message of this command is shown in the screenshot below).
+* `delete 12345678` will delete a person with student ID of `12345678` from EduContacts (the response message of this command is shown in the screenshot below).
 
   ![result for 'delete_71271222'](images/deleteCommandResult.png)
 
