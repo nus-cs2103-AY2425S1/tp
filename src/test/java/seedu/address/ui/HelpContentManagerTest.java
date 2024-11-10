@@ -78,11 +78,11 @@ public class HelpContentManagerTest {
     public void contentMap_containsExpectedKeys() {
         // Verify that all expected keys are present
         String[] expectedKeys = {
-            "Introduction", "Features", "Validation Rules: Name and Phone", "Validation Rules: Email and Birthday",
-                "Validation Rules: Address and Tag(s)", "Adding a client", "Listing all clients",
+            "Introduction", "Features", "Validation Rules: Name, Phone Number", "Validation Rules: Email, Birthday",
+            "Validation Rules: Address, Tag(s)", "Adding a client", "Listing all clients",
             "Editing a client", "Locating clients by attribute", "Deleting a client",
             "Clearing all entries", "Marking a client as paid", "Marking a client as unpaid",
-            "Upload a client's profile picture", "Exiting the Program", "Viewing a client's details",
+            "Uploading a client's profile picture", "Exiting the program", "Viewing a client's details",
             "Visual Features", "Saving and Editing Data", "FAQ and Known Issues"
         };
 

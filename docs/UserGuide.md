@@ -9,7 +9,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a**desktop app for m
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-## Glossary
+ ## Glossary
 
 * Command Line Interface (CLI): All instructions are done via typing into a textbox at the bottom of your screen
 * Command Terminal:
@@ -101,7 +101,7 @@ Do note these rules when attempting to interact with the various commands below.
   * The slash character `/`, e.g. `S/O`
   * The period character `.`, e.g. `Jr.`
 
- #### Phone
+ #### Phone Number
 * Valid inputs: Numerical characters starting with either 3, 6, 8 or 9 (Singaporean numbers). The input must be exactly 8 characters long e.g. `91234567`, `81234567`
 * Common invalid inputs:
   * A non-Singaporean phone number e.g. `51234567`
@@ -202,7 +202,7 @@ Format: `list`
 
 Need to update a client's details? This command edits an existing client in the F.A.R.T book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BIRTHDAY] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [b/BIRTHDAY] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive whole number** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -221,7 +221,7 @@ Examples:
 
 Need to quickly find a client by their address or something other than their name? Use this command to find clients whose attributes contain any of the given keywords.
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [b/BIRTHDAY] [a/ADDRESS] [t/TAG]…​`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [b/BIRTHDAY] [a/ADDRESS] [t/TAG]…​`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`.
 * At least one of the optional fields must be provided.
