@@ -17,7 +17,7 @@ EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **re
 * `Environment` : Works in a fast-paced setting where quick data entry and retrival are essential
 
 But do not worry if you do not meet every characteristic — EZSTATE is designed to be **intuitive and efficient for all users**.
-<br> Give it a try, and head over to our Quick Start guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
+<br> Give it a try, and head over to our [Quick Start](#quick-start-guide) guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
 
 * Table of Contents
 {:toc}
@@ -90,7 +90,7 @@ To use EZSTATE, type commands in the command box and press `Enter`. Here are a f
 
 <br>
 <div class="note" markdown="span">
-Explore the Features section for a full list of commands and their uses.
+Explore the [Features](#features) section for a full list of commands and their uses.
 </div>
 
 ### Command Structure
@@ -168,7 +168,7 @@ The prefixes used in **EZSTATE** are universal across all commands _(i.e. have t
 ## Features
 
 <div class="alert" markdown="span">
-Please read through [Command Structure](#CommandStructure) before proceeding with this section!
+Please read through the [Command Structure](#command-structure) before proceeding with this section!
 </div>
 
 <br>
