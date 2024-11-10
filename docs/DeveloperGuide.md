@@ -692,6 +692,13 @@ Actor: TA
 
 ---
 
+## **Appendix: Planned Enhacements**
+
+Team member count: 5
+
+1. We are planning to create commands to directly add new assignment deatils to the `assignment.json` file instead of directly editing the `assignment.json` file.
+
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -726,14 +733,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete name/John Doe`<br>
+      Expected: Deletes the contact named John Doe. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      Expected: An error message redirecting to the correct format.
 
 1. _{ more test cases …​ }_
 

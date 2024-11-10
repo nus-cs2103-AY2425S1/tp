@@ -52,13 +52,16 @@ To get started,
 
 3. Copy the file to the folder you want to use as the _home folder_ for KonTActs.
 
-4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar KonTActs.jar` to run the application and type `view name/Alex Yeoh`.<br>
+4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar kontacts.jar` to run the application. 
+
+5. Once the application starts, type `view name/Alex Yeoh` into the command box as shown in the picture below.<br>
+
    A interface similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![quick start GUI on launch](images/quickStartLaunchScreenshot.png)
+   ![quick start GUI on launch](images/updatedQuickStartLaunchScreenshot.png)
    {{ newPage }}
 --------------------------------------------------------------------------------------------------------------------
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -72,9 +75,9 @@ To get started,
    * The GUI should now look something like this.<br>
    ![quick start GUI after commands](images/quickStartResultScreenshot.png)
 
-   * `clear` : Deletes all contacts. THIS IS AN IRREVERSIBLE ACTION.
+   * `clear` : Deletes all contacts. <b>THIS IS AN IRREVERSIBLE ACTION.</b>
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
    <br><br>
 
 {{ newPage }}
@@ -818,17 +821,45 @@ Adds an assignment and its grades to a contact.
 
 * Assignments that can be added to a contact are specified in path `/data/assignment.json`.
 * If `assignment.json` is missing from `/data`, KonTActs will load a default assignment database.
-* `assignment.json` needs to be manually created in `/data`.
+* `assignment.json` needs to be manually created in `/data`. Steps are shown below.
 * Each assignment must have a unique `ASSIGNMENT_NAME`.
 * If `SCORE` has more than 2 decimal places, its display will be truncated to 2 decimal places.
 
   </box>
 
+
+</box>
+
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 
-Example with the following assignment.json file:
+
+`addGrade name/JohnDoe assignment/Ex01 score/5` will add an assignment name `Ex01` with score 5 to contact JohnDoe.
+Alternatively, `ag n/JohnDoe a/Ex01 s/5` will do the same using the shortcut command and parameters.
+
+`addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
+as the input score is greater than the max, as specified in the `assignment.json` file.
+
+`addGrade n/JohnDoe a/Ex05 s/5` will not add the assignment to contact JohnDoe
+as the assignment is not specified `assignment.json`
+</box>
+
+<box type="success" icon=":fa-solid-lightbulb:" light>
+
+Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
+</box>
+
+<box type="success" icon=":fa-solid-book:" light>
+
+<md>**Steps to set up assignment.json file:**</md>
+
+* The professor, before each semester, may update the assignment.json file to consist of the assignments present for that semeester.
+* However, if there is a need for a manual update, please follow the steps as shown below. 
+
+1. Create a file name called `assignment.json` in the `/data` folder.
+2. Copy the following format into the .json file.
+
 ```json
 {
   "assignments" : [
@@ -845,19 +876,40 @@ Example with the following assignment.json file:
   ]
 }
 ```
-`addGrade name/JohnDoe assignment/Ex01 score/5` will add an assignment name `Ex01` with score 5 to contact JohnDoe.
-Alternatively, `ag n/JohnDoe a/Ex01 s/5` will do the same using the shortcut command and parameters.
 
-`addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
-as the input score is greater than the max, as specified in the `assignment.json` file.
+3. To add more assignments, add the following part in curly braces after the last assignment.
 
-`addGrade n/JohnDoe a/Ex05 s/5` will not add the assignment to contact JohnDoe
-as the assignment is not specified `assignment.json`
-   </box>
+```json
+    {
+      "name": "Ex04",
+      "maxScore": 15
+    }
+```
 
-<box type="success" icon=":fa-solid-lightbulb:" light>
+4. It should look something similar to this now.
 
-Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
+```json
+{
+  "assignments" : [
+    {
+      "name": "Ex01",
+      "maxScore": 10
+    }, {
+      "name": "Ex02",
+      "maxScore": 10
+    }, {
+      "name": "Ex03",
+      "maxScore": 15
+    }, {
+      "name": "Ex04",
+      "maxScore": 15
+    }
+  ]
+}
+```
+5. You may repeat step 3 for as many new assignments you require.
+6. Save the file and re-run the application to load the new assignment.json file. You will then be able to use the newly included assignments!
+
 </box>
 
 
