@@ -491,7 +491,8 @@ You can also navigate the calendar using these keyboard shortcuts:
 * `Ctrl + N`: Go to the next day
 * `Ctrl + T`: Go to today
 
-<box type="info">
+
+<box type="info" seamless>
 The current time marker (denoted by the red line on the right side of the calendar) is updated every 10 seconds.
 </box>
 
