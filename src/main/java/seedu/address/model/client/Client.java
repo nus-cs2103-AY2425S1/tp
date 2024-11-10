@@ -117,6 +117,9 @@ public class Client {
      * @return whether the balance would overflow.
      */
     public boolean checkIsOverflow(double amount) {
+        if (amount == Double.POSITIVE_INFINITY || amount == Double.NEGATIVE_INFINITY) {
+            return true;
+        }
         double updatedBalance = balance + amount;
         return (updatedBalance == Double.POSITIVE_INFINITY || updatedBalance == Double.NEGATIVE_INFINITY);
     }
