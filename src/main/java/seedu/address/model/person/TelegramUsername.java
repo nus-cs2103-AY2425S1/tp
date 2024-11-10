@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TelegramUsername {
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram Usernames should only contain alphanumeric characters and underscores, "
-                    + "and be between 5 to 32 characters.";
+            "Telegram usernames should begin with an alphabet, should only contain "
+            + "alphanumeric characters and underscores, and be between 5 to 32 characters.";
 
     /*
      * The first character of the address must be an alphabet.
