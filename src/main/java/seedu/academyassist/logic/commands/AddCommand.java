@@ -2,6 +2,7 @@ package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academyassist.logic.Messages.MESSAGE_DUPLICATE_IC;
+import static seedu.academyassist.logic.Messages.MESSAGE_ID_LIMIT;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
@@ -48,6 +49,10 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasReachedIdLimit()) {
+            throw new CommandException(MESSAGE_ID_LIMIT);
+        }
 
         if (model.hasPersonWithIc(toAdd.getIc())) {
             throw new CommandException(MESSAGE_DUPLICATE_IC);

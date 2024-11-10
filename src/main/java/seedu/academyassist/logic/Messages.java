@@ -24,6 +24,9 @@ public class Messages {
             + "\nPlease make sure the name is between 1-100 characters and only contains alphabets and spaces.";
     public static final String MESSAGE_DUPLICATE_IC = "Another student with the same NRIC already exists "
             + "in the system.";
+    public static final String MESSAGE_ID_LIMIT = "AcademyAssist has reached its student ID limit of 99999 and cannot "
+            + "add any more students.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
