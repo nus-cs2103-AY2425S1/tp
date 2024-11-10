@@ -88,7 +88,8 @@ If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMA
 | **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG...` or `td n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James`                                                               |
 | **[Filter](#filtering-contacts-by-name-and-job-filter--fil)**      | `filter n/KEYWORD` or `filter j/KEYWORD` or `fil n/KEYWORD` <br> e.g., `filter n/John` or `filter j/Photographer` or `fil n/Harry`                                                               |
 | **[View Wedding](#view-wedding-view-wed--vw)**                     | `view-wed NAME & NAME` or `vw NAME & NAME` <br> e.g., `view-wed John & Sarah` or `vw John & Sarah`                                                                                               |
-| **[Clear](#clearing-all-entries-clear-ab--cab-and-clear-wb--cwb)** | `clear-ab` or `cab` for address book and `clear-wb` or `cwb` for wedding book followed by `y` or `n`                                                                                             |
+| **[Clear Address Book](#clearing-all-entries-in-address-book-clear-ab--cab)** | `clear-ab` followed by `y` or `n`                                                                                             |
+| **[Clear Wedding Book](#clearing-all-entries-in-wedding-book-clear-wb--cwb)** | `clear-wb` or `cwb` followed by `y` or `n`                                                                                             |
 | **[Exit](#exiting-the-program-exit)**                              | `exit`                                                                                                                                                                                           |
 --------------------------------------------------------------------------------------------------------------------
 
@@ -514,39 +515,55 @@ Examples:
 * `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding
 * `vw Ahmad & Esther` returns `Halim` who is a best man for Ahmad and `Jia Zhun` who is a photographer for that wedding
 
-### Clearing All Entries: `clear-ab` / `cab` and `clear-wb` / `cwb`
+### Clearing All Entries in Address Book: `clear-ab` / `cab`
 
 You can delete ALL contacts in the address book from the application.
 
-1. `clear-ab` / `cab` clears all contacts in address book.
-2. `clear-wb` / `cwb` clears all weddings in wedding book.
-3. Both commands will prompt for confirmation before deleting all entries.
-4. If you confirm, all entries will be deleted.
-5. If you cancel, no entries will be deleted.
-
 Format:
 * `clear-ab` / `cab` followed by `y` clears all contacts in the address book.
-* `clear-wb` / `cwb` followed by `n` will not clear all weddings in the wedding book.
+* `clear-ab` / `cab` followed by `n` will not clear all contacts in the address book.
 
-<box type="important" seamless
+1. `clear-ab` / `cab` clears all contacts in address book.
+2. The command will prompt for confirmation before deleting all entries.
+3. If you confirmwith `y`, all entries will be deleted.
+4. If you cancel with `n`, no entries will be deleted.
+
+<box type="important" seamless>
 
 **IMPORTANT:** 
 
-* Both clear commands must be followed by either `y` or `n` command.
+* The clear command must be followed by either `y` or `n` command.
+* `y` and `n` are CASE-SENSITIVE. Inputting `Y` or `N` will not execute the confirmation.
 * If you accidentally mistype or enter an unintended command, we suggest you to use `n` to cancel any pending clear operations to ensure everything runs smoothly😊
 
 </box>
 
-<div style="display: flex; justify-content: space-between;">
-    <div style="text-align: center; width: 50%;">
-        <img src="images/clearMsg1.png" alt="clear ab" style="width: 100%;">
-        <div>Clear Address Book</div>
-    </div>
-    <div style="text-align: center; width: 50%;">
-        <img src="images/clearMsg2.png" alt="clear wb" style="width: 100%;">
-        <div>Clear Wedding Book</div>
-    </div>
-</div>
+![clear addressbook message](images/clearMsg1.png)
+
+### Clearing All Entries in Wedding Book: `clear-wb` / `cwb`
+
+You can delete ALL weddings in the wedding book from the application.
+
+Format:
+* `clear-wb` / `cwb` followed by `y` clears all weddings in the wedding book.
+* `clear-wb` / `cwb` followed by `n` will not clear all weddings in the wedding book.
+
+1. `clear-wb` / `cwb` clears all weddings in wedding book.
+3. The command will prompt for confirmation before deleting all entries.
+4. If you confirm with `y`, all entries will be deleted.
+5. If you cancel with `n`, no entries will be deleted.
+
+<box type="important" seamless>
+
+**IMPORTANT:** 
+
+* The clear command must be followed by either `y` or `n` command.
+* `y` and `n` are CASE-SENSITIVE. Inputting `Y` or `N` will not execute the confirmation.
+* If you accidentally mistype or enter an unintended command, we suggest you to use `n` to cancel any pending clear operations to ensure everything runs smoothly😊
+
+</box>
+
+![clear weddingbook message](images/clearMsg2.png)
 
 ### Exiting the Program: `exit`
 
