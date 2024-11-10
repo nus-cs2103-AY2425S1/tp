@@ -32,7 +32,7 @@ public class Level {
             + " and Track is one of: [EXPRESS, NA, NT, IP].\n"
             + "S5 is only allowed to have the Track NA";
 
-    public final String levelName;
+    private final String levelName;
 
     /**
      * Constructs a {@code Level}.
@@ -75,6 +75,13 @@ public class Level {
         return isValidYear(year) && isValidTrack(track);
     }
 
+    /**
+     * Returns true if there is no level set.
+     */
+    public boolean isNone() {
+        return levelName.equals("NONE NONE");
+    }
+
     private static boolean isValidYear(String year) {
         return inEnum(year, Year.class);
     }
@@ -107,6 +114,9 @@ public class Level {
      * Format state as text for viewing.
      */
     public String toString() {
+        if (isNone()) {
+            return "";
+        }
         return levelName;
     }
 

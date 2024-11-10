@@ -76,7 +76,7 @@ class JsonAdaptedStudent {
         emergencyContact = source.getEmergencyContact().value;
         address = source.getAddress().value;
         note = source.getNote().value;
-        level = source.getLevel().levelName;
+        level = source.getLevel().toString();
         subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));

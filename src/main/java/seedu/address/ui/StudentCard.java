@@ -61,7 +61,9 @@ public class StudentCard extends UiPart<Region> {
         emergencyContact.setText("Emergency Contact: " + student.getEmergencyContact().value);
         address.setText("Address: " + student.getAddress().value);
         note.setText("Note: " + student.getNote().value);
-        level.getChildren().add(new Label(student.getLevel().levelName));
+        if (!student.getLevel().isNone()) {
+            level.getChildren().add(new Label(student.getLevel().toString()));
+        }
         student.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
