@@ -297,4 +297,4 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
 
    3. Test cases: Missing `isDone` field in `transactionbook.json` data file<br>
       Simulation: Remove the `isDone` field from a transaction entry in the JSON file, then start the app.<br>
-      Expected: The transaction loads as undone by default. Upon closing the app, the transaction is saved as undone in the JSON file.
+      Expected: The transaction loads as not done by default. Upon closing the app, the transaction is saved as not done in the JSON file.
