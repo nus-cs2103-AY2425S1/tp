@@ -216,7 +216,9 @@ Displays the help window. Also accessible by pressing the `F1` key.
 The help window can be closed by `F1` and `Esc` keys  
 
 Format: `help`  
+
 Output:
+
 ![help message](images/helpMessage.png)
 
 <br>
