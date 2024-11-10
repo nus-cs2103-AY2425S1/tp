@@ -1,10 +1,7 @@
 package seedu.address.logic.parser;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
+import java.util.List;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,26 +18,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        String trimmedArgs = args.trim();
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        String prefix = PREFIX_TAG.getPrefix();
+        // Collect all tag keywords provided with multiple `t/` prefixes
+        List<String> tagKeywords = argMultimap.getAllValues(PREFIX_TAG);
 
-        if (!trimmedArgs.startsWith(prefix)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        if (tagKeywords.isEmpty()) {
+            throw new ParseException("At least one tag must be provided.");
         }
 
-        String tagArgs = trimmedArgs.substring(prefix.length()).trim();
-
-        if (tagArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
-
-        String[] tagKeywords = tagArgs.split("\\s+");
-
-        return new FilterCommand(new PersonContainsTagsPredicate(Arrays.asList(tagKeywords)));
+        return new FilterCommand(new PersonContainsTagsPredicate(tagKeywords));
     }
-
 }

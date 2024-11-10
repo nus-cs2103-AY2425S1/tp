@@ -7,8 +7,6 @@ import seedu.address.model.Model;
 import seedu.address.model.order.OrderStatus;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.order.SupplyOrderList;
-import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Product;
 
 /**
@@ -22,7 +20,7 @@ public class MarkSupplyOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_ORDER_SUCCESS = "Marked supply order as completed: %1$s";
+    public static final String MESSAGE_MARK_ORDER_SUCCESS = "Marked supply order as completed:";
     public static final String MESSAGE_ORDER_ALREADY_COMPLETED = "The order at index %1$s is already completed.";
     public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
 
@@ -35,7 +33,6 @@ public class MarkSupplyOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         SupplyOrderList supplyOrderList = model.getSupplyOrderList();
-        Inventory inventory = model.getInventory();
 
         // Validate index
         if (targetIndex <= 0 || targetIndex > supplyOrderList.getOrders().size()) {
@@ -52,21 +49,14 @@ public class MarkSupplyOrderCommand extends Command {
 
         List<? extends Product> items = supplyOrder.getItems();
 
-        // Filter to ensure we only process Ingredient
-        for (Product product : items) {
-            if (product instanceof Ingredient ingredient) {
-                // Add stock to inventory, currently assume quantity is one
-                inventory.addStock(ingredient.getProductId(), 1);
-            }
-        }
-
         // Mark the order as completed
         supplyOrder.setStatus(OrderStatus.COMPLETED);
 
         supplyOrderList.removeOrder(targetIndex - 1);
         supplyOrderList.addOrder(supplyOrder);
 
-        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, targetIndex));
+        String resultMessage = MESSAGE_MARK_ORDER_SUCCESS + "\n" + supplyOrder.toString();
+        return new CommandResult(resultMessage);
     }
 
     @Override

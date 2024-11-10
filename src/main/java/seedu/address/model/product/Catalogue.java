@@ -39,6 +39,14 @@ public abstract class Catalogue {
     }
 
     /**
+     * Clears all pastries from the catalogue.
+     */
+    public void clear() {
+        productCatalogue.clear();
+        nextProductId = 1;
+    }
+
+    /**
      * Deletes a product from the catalogue by its ID.
      *
      * @param id The ID of the product to be deleted.

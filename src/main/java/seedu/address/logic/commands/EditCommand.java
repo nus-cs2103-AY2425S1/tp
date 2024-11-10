@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -25,6 +26,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -135,22 +137,66 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = personToEdit.getRemark(); // Edit command does not allow editing remarks
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+        // Preserve the original tags representing customer or supplier
+        Set<Tag> originalTags = personToEdit.getTags().stream()
+                .filter(tag -> tag.tagName.equals("Customer") || tag.tagName.equals("Supplier"))
+                .collect(Collectors.toSet());
+
+        // Filter out customer or supplier tags from the updated tags
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags()).stream()
+                .filter(tag -> !tag.tagName.equalsIgnoreCase("Customer") && !tag.tagName.equalsIgnoreCase("Supplier"))
+                .collect(Collectors.toSet());
+
+        // Merge original tags with updated tags
+        updatedTags.addAll(originalTags);
+
+        // Check if the tags are unchanged
+        if (updatedTags.equals(personToEdit.getTags())) {
+            throw new CommandException("Tags were unchanged. Note that Customer/Supplier or duplicate tags cannot be added.");
+        }
+
+        // Preserve the original orders list
+        List<Order> retainedOrders = personToEdit.getOrders();
 
         if (personToEdit instanceof Customer) {
             Information updatedInformation = editPersonDescriptor.getInformation()
                     .orElse(((Customer) personToEdit)
                     .getInformation());
-            return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation,
+            Customer editedCustomer = new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation,
                     updatedRemark, updatedTags);
+
+            // Update each order with the new editedCustomer
+            for (Order order : retainedOrders) {
+                order.setOriginalPerson(editedCustomer);
+                order.setPerson(new Person(editedCustomer));
+            }
+            editedCustomer.setOrders(retainedOrders);
+            return editedCustomer;
         } else if (personToEdit instanceof Supplier) {
             Ingredients updatedIngredients = getUpdatedIngredients(editPersonDescriptor,
                     (Supplier) personToEdit, catalogue);
-            return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress,
+            Supplier editedSupplier = new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress,
                     updatedIngredients, updatedRemark, updatedTags);
+
+            // Update each order with the new editedSupplier
+            for (Order order : retainedOrders) {
+                order.setOriginalPerson(editedSupplier);
+                order.setPerson(new Person(editedSupplier));
+            }
+
+            editedSupplier.setOrders(retainedOrders);
+            return editedSupplier;
         }
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        // Update each order with the new editedPerson
+        for (Order order : retainedOrders) {
+            order.setOriginalPerson(editedPerson);
+            order.setPerson(new Person(editedPerson));
+        }
+        editedPerson.setOrders(retainedOrders);
+        return editedPerson;
     }
     /**
      * Retrieves and updates the ingredients supplied based on the provided ingredient names.

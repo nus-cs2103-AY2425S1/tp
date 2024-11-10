@@ -23,6 +23,8 @@ public class AddIngredientCommand extends Command {
 
     public static final String MESSAGE_ADD_INGREDIENT_SUCCESS = "New ingredient added: %1$s";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the catalogue.";
+    public static final String MESSAGE_INVALID_COST = "The cost value entered is too large and may lead to inaccuracies. "
+            + "Please enter a reasonable cost value (e.g., less than 1000).";
 
     private final String name;
     private final double cost;
@@ -39,6 +41,11 @@ public class AddIngredientCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Validate the cost value
+        if (cost >= 1000) {
+            throw new CommandException(MESSAGE_INVALID_COST);
+        }
 
         // Use the existing ingredient catalogue from the model
         IngredientCatalogue ingredientCatalogue = model.getIngredientCatalogue();
