@@ -322,6 +322,11 @@ How import and export work:
   `saveAddressBook` methods.
 * If the import or export was successful, `LogicManager` applies the supplier in the most recent `CommandResult`.
 
+The sequence diagram below illustrates the interactions within the `Logic`, `UI` and `Storage` components when
+importing or exporting data, taking the command `export` as an example:
+
+<puml src="diagrams/ExportSequenceDiagram.puml" alt="Interactions Inside the Logic, UI and Storage Component for the `export` Command" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
