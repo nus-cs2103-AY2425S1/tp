@@ -16,4 +16,6 @@ Company *--> Email
 Company *--> Address
 Company *--> CareerPageUrl
 Company *--> Bookmark
+Company *--> Remark
+Company *--> ApplicationStatus
 @enduml
