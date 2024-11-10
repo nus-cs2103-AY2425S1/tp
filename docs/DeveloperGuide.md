@@ -750,38 +750,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to add a new person to TalentSG
-2. Recruiter inputs candidate details (name, phone, email, address, desired role, experience, skills, status) with the add command.
-3. TalentSG confirms that the command is valid and adds the person.
-4. TalentSG responds with a success message indicating that the person was added successfully
+1. Recruiter inputs candidate details (name, phone, email, address, desired role, experience, skills, status) with the add command.
+2. TalentSG confirms that the command is valid and adds the person.
+3. TalentSG responds with a success message indicating that the person was added successfully
 
     Use case ends.
 
 **Extensions**:
 
-- 2a. Recruiter does not input all required person details.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input all the required fields and that the
+- 1a. Recruiter does not input all required person details.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input all the required fields and that the
       command is invalid
-    - 2a2. Recruiter inputs add command with the required person details
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+    - 1a2. Recruiter inputs add command with the required person details
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2b. Recruiter inputs invalid field.
-    - 2b1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
+- 1b. Recruiter inputs invalid field.
+    - 1b1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
       formatted and that the command is invalid
-    - 2b2. Recruiter inputs add command with the proper format for all fields
-    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+    - 1b2. Recruiter inputs add command with the proper format for all fields
+    - 1b3. Steps 1b1-1b2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2c. A duplicate candidate profile is detected.
-    - 2c1. TalentSG responds with an error message telling the recruiter that the person has already been added and
+- 1c. A duplicate candidate profile is detected.
+    - 1c1. TalentSG responds with an error message telling the recruiter that the person has already been added and
       prompts the recruiter to input a new person
-    - 2c2. Recruiter inputs add command with new person details
-    - 2c3. Steps 2c1-2c2 are repeated until the data entered is correct
+    - 1c2. Recruiter inputs add command with new person details
+    - 1c3. Steps 1c1-1c2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 
 #### Use Case 2 - Delete a Person
@@ -791,30 +790,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to delete a person from TalentSG.
-2. Recruiter inputs the delete command with the index i of the person to be deleted.
-3. TalentSG confirms that the command is valid and deletes the person.
-4. TalentSG responds with a success message indicating that the person was deleted successfully
+1. Recruiter inputs the delete command with the index i of the person to be deleted.
+2. TalentSG confirms that the command is valid and deletes the person.
+3. TalentSG responds with a success message indicating that the person was deleted successfully
 
    Use case ends.
 
 **Extensions**:
 
-- 2a. Recruiter does not input index of person to be deleted.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
+- 1a. Recruiter does not input index of person to be deleted.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
       and that the command is invalid.
-    - 2a2. Recruiter inputs deleted command with the index of the person to be deleted
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+    - 1a2. Recruiter inputs deleted command with the index of the person to be deleted
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
-    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+- 1b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 1b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
       person of that index doesn't exist and that the command is invalid
-    - 2b2. Recruiter inputs delete command with a valid index
-    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+    - 1b2. Recruiter inputs delete command with a valid index
+    - 1b3. Steps 1b1-1b2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 #### Use Case 3 - Edit a Person
 
@@ -823,39 +821,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to edit a person in TalentSG.
-2. Recruiter inputs the edit command with the index i of the person to be edited along with the fields that the recruiter
+1. Recruiter inputs the edit command with the index i of the person to be edited along with the fields that the recruiter
    would like to edit.
-3. TalentSG confirms that the command is valid and edits the specified fields of the person.
-4. TalentSG responds with a success message indicating that the person was edited successfully
+2. TalentSG confirms that the command is valid and edits the specified fields of the person.
+3. TalentSG responds with a success message indicating that the person was edited successfully
 
    Use case ends.
 
 **Extensions**:
 
-- 2a. Recruiter does not input index of person to be edited.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
+- 1a. Recruiter does not input index of person to be edited.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
       and that the command is invalid.
-    - 2a2. Recruiter inputs deleted command with the index of the person to be deleted
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+    - 1a2. Recruiter inputs deleted command with the index of the person to be deleted
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
-    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+- 1b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 1b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
       person of that index doesn't exist and that the command is invalid
-    - 2b2. Recruiter inputs edit command with a valid index
-    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+    - 1b2. Recruiter inputs edit command with a valid index
+    - 1b3. Steps 1b1-1b2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2c. Recruiter inputs invalid field(s).
-    - 2c1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
+- 1c. Recruiter inputs invalid field(s).
+    - 1c1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
       formatted and that the command is invalid
-    - 2c2. Recruiter inputs edit command with the proper format for all fields
-    - 2c3. Steps 2c2-2c3 are repeated until the data entered is correct
+    - 1c2. Recruiter inputs edit command with the proper format for all fields
+    - 1c3. Steps 1c2-1c3 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 #### Use Case 4 - List all People
 
@@ -864,10 +861,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to list all the people in TalentSG.
-2. Recruiter inputs the list command
-3. TalentSG confirms that the command is valid and lists all the people in the application
-4. TalentSG responds with a success message indicating that list was displayed successfully.
+1. Recruiter inputs the list command
+2. TalentSG confirms that the command is valid and lists all the people in the application
+3. TalentSG responds with a success message indicating that list was displayed successfully.
 
 
 #### Use Case 5 - Find a Person
@@ -877,19 +873,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to find a person in TalentSG.
-2. Recruiter inputs the find command with keywords that the application will use match the people.
-3. TalentSG confirms that the command is valid and finds the person/people by matching the keywords with every person's
+1. Recruiter inputs the find command with keywords that the application will use match the people.
+2. TalentSG confirms that the command is valid and finds the person/people by matching the keywords with every person's
    name.
-4. TalentSG responds with a success message indicating that the person/people were either found, or no one matched the keyword.
+3. TalentSG responds with a success message indicating that the person/people were either found, or no one matched the keyword.
 
 **Extensions**:
-- 2a. Recruiter does not input a keyword.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input a keyword and that the command is invalid.
-    - 2a2. Recruiter inputs find command with the required keyword.
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+- 1a. Recruiter does not input a keyword.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input a keyword and that the command is invalid.
+    - 1a2. Recruiter inputs find command with the required keyword.
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 
 #### Use Case 6 - Filter people based on application status
@@ -899,18 +894,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to filter the list of people in TalentSG by application status.
-2. Recruiter inputs the filter command with one of the valid application statuses.
-3. TalentSG confirms that the command is valid and filters the person list to display the people with the inputted application status.
-4. TalentSG responds with a success message indicating that the person list was filtered successfully.
+1. Recruiter inputs the filter command with one of the valid application statuses.
+2. TalentSG confirms that the command is valid and filters the person list to display the people with the inputted application status.
+3. TalentSG responds with a success message indicating that the person list was filtered successfully.
 
 **Extensions**:
-- 2a. Recruiter inputs an empty or invalid application status.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input a valid application status and that the command is invalid.
-    - 2a2. Recruiter inputs filter command with a valid application status.
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+- 1a. Recruiter inputs an empty or invalid application status.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input a valid application status and that the command is invalid.
+    - 1a2. Recruiter inputs filter command with a valid application status.
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 #### Use Case 7 - View a Person
 
@@ -919,27 +913,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to view a person in TalentSG.
-2. Recruiter inputs the view command with the index i of the person to be viewed
-3. TalentSG confirms that the command is valid and displays the specified fields of the person in the `Overview Panel`
-4. TalentSG responds with a success message indicating that the person was viewed successfully
+1. Recruiter inputs the view command with the index i of the person to be viewed
+2. TalentSG confirms that the command is valid and displays the specified fields of the person in the `Overview Panel`
+3. TalentSG responds with a success message indicating that the person was viewed successfully
 
 **Extensions**:
-- 2a. Recruiter does not input index of person to be viewed.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be viewed
+- 1a. Recruiter does not input index of person to be viewed.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be viewed
       and that the command is invalid.
-    - 2a2. Recruiter inputs view command with the index of the person to be viewed
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+    - 1a2. Recruiter inputs view command with the index of the person to be viewed
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
-    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+- 1b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 1b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
       person of that index doesn't exist and that the command is invalid
-    - 2b2. Recruiter inputs view command with a valid index
-    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+    - 1b2. Recruiter inputs view command with a valid index
+    - 1b3. Steps 1b1-1b2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 
 #### Use Case 8 - Get summary of application statuses of People
@@ -949,10 +942,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to list all the people in TalentSG.
-2. Recruiter inputs the list command.
-3. TalentSG confirms that the command is valid and lists all the people in the application.
-4. TalentSG responds with a success message indicating that list was displayed successfully.
+1. Recruiter inputs the list command.
+2. TalentSG confirms that the command is valid and lists all the people in the application.
+3. TalentSG responds with a success message indicating that list was displayed successfully.
 
 
 #### Use Case 9 - Get help within TalentSG
@@ -962,10 +954,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to get help regarding the acceptable commands in TalentSG.
-2. Recruiter inputs the help command.
-3. TalentSG confirms that the command is valid and displays the help pop-up.
-4. TalentSG responds with a success message indicating that help pop-up was displayed successfully.
+1. Recruiter inputs the help command.
+2. TalentSG confirms that the command is valid and displays the help pop-up.
+3. TalentSG responds with a success message indicating that help pop-up was displayed successfully.
 
 
 #### Use Case 10 - Exit TalentSG
@@ -975,9 +966,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to exit TalentSG.
-2. Recruiter clicks the exit button.
-3. TalentSG confirms that the command is valid and exits the application
+1. Recruiter inputs the exit command
+2. TalentSG confirms that the command is valid and exits the application
 
 
 ### Non-Functional Requirements
