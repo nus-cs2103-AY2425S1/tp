@@ -194,8 +194,8 @@ Format: `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 * The index is unique in the displayed list, so Cher directly deletes the person at that position.
 
 Examples
-- `list` followed by `delete 2` deletes the 2nd person in the displayed list.
-- `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd person in the displayed list.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 #### Name (`n/KEYWORDS`)
 * The order and case of keywords does not matter. For example, `find n/Hans Bo` will match both `Hans Gruber` and `Bo hans`.
