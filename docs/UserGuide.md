@@ -45,15 +45,19 @@ This guide will walk you through HallPointer’s main features and show you step
 ## Getting Started Quickly
 
 1. **Make sure Java is installed:**\
-Check that Java `17` or above is installed by opening a command terminal and typing `java -version` before pressing Enter.\
-If it is not installed, download and install the right one for your system by following the appropriate guide before continuing: [Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html), [Mac](https://se-education.org/guides/tutorials/javaInstallationMac.html), [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html).
+Check that Java `17` or above is installed by opening a command terminal (Command Prompt for Windows, Terminal for macOS/Linux) and typing `java -version` before pressing Enter.\
+If it is not installed, download and install the right one for your system by following the appropriate guide before continuing: [Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html), [macOS](https://se-education.org/guides/tutorials/javaInstallationMac.html), [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/ay2425s1-cs2103t-w14-3/tp/releases/latest).
+2. **Download the latest HallPointer application:**\
+Download the most recent HallPointer `.jar` file from the release page [here](https://github.com/ay2425s1-cs2103t-w14-3/tp/releases/latest).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your data.
+3. **Place the file in your desired folder:**\
+Move the downloaded `.jar` file into the _home folder_ where you want to store your data.
 
-4. Open a command terminal, `cd` into the folder where you placed the jar file, and use the command `java -jar hallpointer.jar` to run the application.<br>
-   A GUI similar to the one below should appear in a few seconds. Note that the app contains some sample data.<br>
+4. **Run HallPointer:**
+- Open a command terminal, and use the `cd` command to navigate to the folder where you saved the `.jar` file.
+- Type the folowing command and press Enter: `java -jar hallpointer.jar`
+- A window should appear after a few seconds, showing the HallPointer app’s user interface (UI). Note that the app comes with some sample data to help you get started.<br>
    ![Ui](images/Ui.png)
 
 5. Type commands in the command box and press Enter to execute them. For example, typing **`help`** and pressing Enter will open the help window.<br>
