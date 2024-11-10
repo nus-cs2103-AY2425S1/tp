@@ -64,7 +64,8 @@ deactivate CommandResult
 
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
+destroy DeleteCommand
 
-[<--LogicManager
+[<-- LogicManager
 deactivate LogicManager
 @enduml
