@@ -22,6 +22,11 @@ public class BudgetTest {
 
     @Test
     public void constructor_validInputs_success() {
+        assertEquals("5.00", new Budget("000000000000005.00").toString()); // Fixes preceding 0s
+        assertEquals("5.00", new Budget("0000005").toString()); // Fixes preceding 0s
+        assertEquals("0.00", new Budget("0000000000").toString()); // Fixes preceding 0s
+        assertEquals("301.00", new Budget("00000000301").toString()); // Fixes preceding 0s
+        assertEquals("0.00", new Budget(".").toString()); // Fixes "."
         assertEquals("0.00", new Budget(".").toString()); // Fixes "."
         assertEquals("0.00", new Budget("0").toString()); // Fixes "x"
         assertEquals("5.00", new Budget("5").toString()); // Fixes "x"
