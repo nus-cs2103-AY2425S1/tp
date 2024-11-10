@@ -13,7 +13,7 @@ public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Start time should be before end time";
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
 
     /**
      * Constructs a {@code Time}.
@@ -51,10 +51,10 @@ public class Time {
      * Returns true if a given {@code Time} overlaps with this {@code Time}.
      */
     public boolean isOverlap(Time other) {
-        if (this.endTime.isBefore(other.startTime) || this.startTime.isAfter(other.endTime)) {
-            return false;
-        }
-        return true;
+        return !this.endTime.isBefore(other.startTime)
+                && !this.startTime.isAfter(other.endTime)
+                && !this.endTime.isEqual(other.startTime)
+                && !this.startTime.isEqual(other.endTime);
     }
 
     @Override

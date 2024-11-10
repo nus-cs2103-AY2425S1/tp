@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +31,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -167,13 +168,13 @@ public class ParserUtil {
         LocalDateTime toDate;
 
         try {
-            fromDate = LocalDateTime.parse(matcher.group(1), formatter);
+            fromDate = LocalDateTime.parse(matcher.group(1), formatter.withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
         }
 
         try {
-            toDate = LocalDateTime.parse(matcher.group(2), formatter);
+            toDate = LocalDateTime.parse(matcher.group(2), formatter.withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
         }
