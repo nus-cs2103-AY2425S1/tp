@@ -166,7 +166,7 @@ The name must match the full name exactly
 - Email
 - Address
 - Condition
-- Schedule
+- Schedule (including its details such as date, note and payment status)
 - Reminder Note
 
 **Note:** Pressing `Esc` closes the pop-up window and refocuses on the command input bar in the main window.
@@ -176,11 +176,11 @@ The name must match the full name exactly
 * `view Jamie Chew`<br>
   ![view Jamie Chew](images/viewJamieChew.png)<br>
 
-### Locating persons: `find`
+### Finding persons: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find [KEYWORD] [MORE_KEYWORDS] || [p/PHONE]`
+Format: `find KEYWORD [MORE_KEYWORDS] || p/PHONE`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `hans bo` will match `bo hans`
