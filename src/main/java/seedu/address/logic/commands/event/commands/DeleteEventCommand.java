@@ -3,6 +3,7 @@ package seedu.address.logic.commands.event.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,6 +14,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonInEventPredicate;
 
 /**
  * Deletes an event from the address book.

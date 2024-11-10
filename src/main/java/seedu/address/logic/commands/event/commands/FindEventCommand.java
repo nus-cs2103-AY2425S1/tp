@@ -61,7 +61,7 @@ public class FindEventCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, eventToView.getName()));
     }
 
-    private static void updateContactsUiWithEventSpecificRoles(Model model, Event eventToView) {
+    public static void updateContactsUiWithEventSpecificRoles(Model model, Event eventToView) {
         ObservableList<Person> persons = model.getFilteredPersonList();
         ArrayList<Person> tempListOfPersons = new ArrayList<>();
         for (Person person : persons) {

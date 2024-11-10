@@ -2,6 +2,7 @@ package seedu.address.logic.commands.event.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -77,16 +78,24 @@ public class RemovePersonFromEventCommand extends Command {
         event.removePerson(person, personRole);
         eventManager.setEvent(originalEvent, event);
         event.updateUi();
+
+        updateContactsIfInEventViewToShowRemovedContact(model, eventManager, event);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName(), event.getName()));
+    }
+
+    private static void updateContactsIfInEventViewToShowRemovedContact(Model model, EventManager eventManager,
+                                                                        Event event) {
         // check the last shown list if it is event
+        model.setIsFindEvent(false);
         Predicate<Person> lastPred = model.getLastPredicate();
         if (lastPred instanceof PersonInEventPredicate) {
             if (((PersonInEventPredicate) lastPred).getEvent().equals(event)) {
                 //create a new predicate for changed event
                 model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(event));
+                FindEventCommand.updateContactsUiWithEventSpecificRoles(model, event);
             }
         }
-        model.setIsFindEvent(false);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName(), event.getName()));
     }
 
     @Override
