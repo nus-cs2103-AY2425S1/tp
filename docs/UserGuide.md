@@ -102,13 +102,13 @@ Parameter     | Notes
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have [`Java 17`](https://www.oracle.com/java/technologies/downloads/#java17) or above installed in your Computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for HiredFiredPro.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HiredFiredPro.jar` command to run the application. Alternatively, you can double-click the jar file to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HiredFiredPro.jar` command to run the application. <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png) 
 
