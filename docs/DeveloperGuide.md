@@ -183,7 +183,7 @@ This section describes some noteworthy details on how certain features are imple
 **Status:** Implementation deferred to a future release due to the complexity of potential solutions and risk of introducing new bugs.
 
 ### 3. Data Import/Export Functionality
-**Current issue:** Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' agentassist data files, or share their data files with other users.
+**Current issue:** Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' AgentAssist data files, or share their data files with other users.
 
 **Proposed Enhancement:** Add UI buttons in the application menu for:
 - Importing data files
