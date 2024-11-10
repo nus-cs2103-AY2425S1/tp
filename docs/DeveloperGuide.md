@@ -253,8 +253,6 @@ _{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
 ## Product Scope
 
 ### Target User Profile
