@@ -843,6 +843,8 @@ Common prerequisite: List all elderly using the `list` command.
    2. Launch the app.<br>
        Expected: The app should show a list of sample persons.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Planned Enhancements**
 Team size: 5
 
