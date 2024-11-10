@@ -522,7 +522,7 @@ Example:
 
 <figure style="text-align: center;">
   <img src="images/help_popup.png" alt="help" style="display: block; margin: 0 auto; border-radius: 10px;">
-  <figcaption>Command: <code>help</code></figcaption>
+  <figcaption>command: <code>help</code></figcaption>
 </figure>
 
 ### Saving the data
