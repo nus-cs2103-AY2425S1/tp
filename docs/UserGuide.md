@@ -95,7 +95,10 @@ This section breaks down the structure, reference, and prefixes used across all 
 
 Commands in EZSTATE follow the same structure:
 
+<p style="text-align: center;">
 `commandWord (REFERENCE) (PREFIXES)` 
+</p>
+<br>
 
 | commandWord                  | REFERENCE                                                                                                            | PREFIXES                                                                                                 |
 |------------------------------|----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
@@ -111,7 +114,10 @@ Commands in EZSTATE follow the same structure:
 
 Prefixes follow the same structure:
 
+<p style="text-align: center;">
 `prefix/Value`
+</p>
+<br>
 
 and can be either optional or mandatory, and variadic or not variadic.
 The table below showcases the four different possible notations of prefixes:
@@ -147,14 +153,14 @@ The prefixes used in **EZSTATE** are universal across all commands <br> _(i.e. h
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Feature Categories
+## Features
 
 <div class="alert" markdown="span">
 You are strongly recommended to read through [Command Structure](#CommandStructure) before proceeding with this section!
 </div>
 
 <br>
-This user guide is divided into four main feature categories:
+EZSTATE features (i.e. commands) are divided into four main categories:
 
 1. **Client Management Commands**
 2. **Appointment Management Commands**
