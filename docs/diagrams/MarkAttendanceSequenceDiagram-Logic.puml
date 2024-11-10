@@ -54,6 +54,13 @@ activate Model
 MarkAttendanceCommand -> MarkAttendanceCommand : findByTelegram()
 activate MarkAttendanceCommand
 
+MarkAttendanceCommand --> MarkAttendanceCommand
+deactivate MarkAttendanceCommand
+
+MarkAttendanceCommand --> MarkAttendanceCommand
+deactivate MarkAttendanceCommand
+
+
 MarkAttendanceCommand --> LogicManager : result
 deactivate MarkAttendanceCommand
 
