@@ -3,7 +3,6 @@
 ![Ui](docs/images/Ui.png)
 
 ## This is ClinicConnect
-___
 
 ClinicConnect is a unified platform for clinic assistants in private health screening clinics to manage incoming and current patient details. Clinic assistants can then perform many tasks in a single platform.
 
