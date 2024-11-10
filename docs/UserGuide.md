@@ -111,7 +111,7 @@ Format: `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 * `NAME` must be alphanumeric but these special characters `_`,`&`,`/`,`.`,`:`,`(`, and `)` can also be used.
 * `ROLE` must be alphanumeric but these special characters `/` can also be used.
 * `EMAIL` must be a valid email address.
-* The `DATE` must be within the year 2000 and 2099. It also cannot be a future date which means that the date used must be before today or today's date.
+* The `DATE` must be within the year 2000 and the current year. It also cannot be a future date which means that the date used must be before today or today's date.
 * It must be in the format `dd/mm/yy`, and each field must be double digits (e.g. 01 is valid while 1 is not)
 
 Examples:
