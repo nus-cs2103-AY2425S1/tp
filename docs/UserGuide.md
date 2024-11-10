@@ -379,7 +379,7 @@ Format: `undo`
 
 * Data-modifying commands refers to those who has direct manipulation over the contact data,
 such as add, edit, delete or clear.
-* Commands that does not modify contact data in the address book(list, help, find etc.)
+* Commands that do not modify contact data in the address book(list, help, find etc.)
 are not considered by the undo command.
 * If you input `undo` when there's nothing to undo, GUI will remind you about this
 and no effect would be applied to the address book.
