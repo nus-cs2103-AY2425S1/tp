@@ -759,9 +759,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
-
-<a id="similar"></a>
+* **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending. <a id="similar"></a>
 * **Similar names (for customers, orders and tags)**: Names which are identical if whitespaces and case sensitivity are ignored.
 * **Similar details (orders)**: Orders with identical date, quantity and status along with similar item names.
 
@@ -878,14 +876,14 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `findcustomer bernice` <br>
        Expected: 
        - All customers with 'bernice' in their names are listed. A success message shown in the status message.
-       - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
+       - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.<br>
        
 2. Finding customers with multiple keywords using the command alias.
 
     1. Test case: `findc alex david` <br>
        Expected:
        - All customers with `alex` or `david` in their names are listed. A success message shown in the status message.
-       - If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.
+       - If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.<br>
 
 3. Finding customer who does not exist in the address book.
 
@@ -917,7 +915,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites:
        - Customer with name `Betsy Crowe` already exist in the address book.
        - At least 1 customer is listed.
-       - The customer to be edited is not `Betsy Crowe`.
+       - The customer to be edited is not `Betsy Crowe`.<br>
 
     2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
@@ -927,7 +925,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites:
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
         - At least 1 customer is listed.
-        - The customer to be edited is not `Betsy Crowe`.
+        - The customer to be edited is not `Betsy Crowe`.<br>
        
     2. Test case: `editcustomer 1 n/betsy crowe` <br>
        Expected: The customer is successfully edited. A warning and details of the edited customer shown in the status message.
@@ -987,7 +985,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: 
         - At least 1 customer is displayed in the customer list.
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
-        - There are no orders similar to the order to be added under the first customer.
+        - There are no orders similar to the order to be added under the first customer.<br>
 
     2. Test case: `addorder 1 i/Lamp d/20-11-2024 q/3`<br>
        Expected: The order is successfully added. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
@@ -1014,7 +1012,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
         - At least 1 customer is displayed in the customer list.
-        - There is an existing order similar to the order to be added under the first customer.
+        - There is an existing order similar to the order to be added under the first customer.<br>
 
     2. Test case: `addo 1 i/books d/02-03-2026` <br>
        Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
@@ -1023,7 +1021,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: 
         - At least 1 customer is displayed in the customer list.
-        - No order similar to order to be added under the first customer.
+        - No order similar to order to be added under the first customer.<br>
 
     2. Test case: `addo 1 i/phone d/02-03-2020` <br>
        Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list
@@ -1083,7 +1081,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
-        - The first order must be `pending` status.
+        - The first order must be `pending` status.<br>
 
     2. Adding the similar order: `addo 1 i/test d/21-11-2025 q/1`
 
@@ -1128,7 +1126,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
        - List all customers using the `listorder 1` command with at least 1 order listed.
-       - The first order's status is not `Completed`.
+       - The first order's status is not `Completed`.<br>
 
     2. Test case: `markorder 1`<br>
        Expected: First order is marked as completed. Details of the marked order shown in the status message.
@@ -1153,7 +1151,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
         - At least 1 order listed. <br>
-        - The first order's status is `Completed`.
+        - The first order's status is `Completed`.<br>
 
     2. Test case: `marko 1`<br>
        Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
@@ -1164,7 +1162,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
         - List all customers using the `listorder 1` command with at least 1 order listed.
-        - The first order's status is not `Pending`.
+        - The first order's status is not `Pending`.<br>
 
     2. Test case: `unmarkorder 1`<br>
        Expected: First order is reverted to pending status. Details of the unmarked order shown in the status message.
@@ -1189,7 +1187,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
         - At least 1 order listed. <br>
-        - The first order's status is `Pending`.
+        - The first order's status is `Pending`.<br>
 
     2. Test case: `unmarko 1`<br>
        Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
@@ -1240,10 +1238,10 @@ Order handling involved:
 * Enhance UI and Storage functionality to support `Order` and `OrderList`.
 
 This was time and effort intensive as:
-* Orders are handled differently from Person because identical orders should be allowed.
+* Orders are handled differently from Customer because identical orders should be allowed.
 * Orders requires additional levels of similarity checks.
 * Further enhancements for order management by parameters is stated below.
-* Implementing the GUI for order, `OrderListPanel` is not a direct parallel of the `CustomerListPanel` as the `OrderList` is inside `Customer` class instead of being directly inside the `ModelManger` class, hence the need to handle the selected `Customer` as well.
+* The `OrderListPanel` implementation is not a direct parallel to the `CustomerListPanel` because the `OrderList` is part of the `Customer` class instead of being directly within the `ModelManager` class. This distinction necessitates handling the selected `Customer` to ensure the `OrderListPanel` correctly displays the orders relevant to the currently chosen customer.
 
 ### Implementing `Order` parameters for order management
 
