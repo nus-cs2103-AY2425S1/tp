@@ -2,11 +2,13 @@ package seedu.address.model.patient;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -20,13 +22,6 @@ import seedu.address.model.healthservice.HealthService;
 public class Appt {
     public static final String DATETIME_MESSAGE_CONSTRAINTS = "Invalid date and time. "
             + "Please enter a valid date and time.";
-    public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("yyyy-MM-dd")
-            .optionalStart()
-            .appendLiteral(' ')
-            .optionalEnd()
-            .appendPattern("HH:mm")
-            .toFormatter();
 
     /**
      * Comparator to compare two appointments by their date and time.
@@ -39,6 +34,15 @@ public class Appt {
      */
     public static final Comparator<Appt> DATETIME_COMPARATOR = (appt1, appt2) -> appt1.getDateTime()
             .compareTo(appt2.getDateTime());
+
+    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+        .appendPattern("uuuu-MM-dd")
+        .optionalStart()
+        .appendLiteral(' ')
+        .optionalEnd()
+        .appendPattern("HH:mm")
+        .toFormatter();
+    public static final DateTimeFormatter STRICT_FORMATTER = FORMATTER.withResolverStyle(ResolverStyle.STRICT);
 
     private final LocalDateTime dateTime;
     private final HealthService healthService;
@@ -106,9 +110,11 @@ public class Appt {
      */
     public static boolean isValidDateTime(String trimmedDateTime) {
         try {
-            LocalDateTime.parse(trimmedDateTime, FORMATTER);
+            LocalDateTime.parse(trimmedDateTime, STRICT_FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
+            return false;
+        } catch (DateTimeException e) {
             return false;
         } catch (IllegalArgumentException e) {
             return false;

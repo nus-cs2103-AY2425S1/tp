@@ -264,7 +264,7 @@ Example:
 
 For more information on each individual parameter click here
 
-### Delete Appointment : `deleteappt`
+### Deleting an appointment : `deleteappt`
 
 Identifies a specific patient using NRIC and deletes the appointment specified.
 
@@ -282,9 +282,9 @@ All parameters are compulsory
 </div>
 
 Example:
-* `deleteappt T01234567A dt|2024-11-05 16:00`
+* `deleteappt T0123456A dt|2024-11-05 16:00`
 
-### Filter appointments : `filter`
+### Filtering appointments : `filter`
 
 Filters existing patient records based on the specified parameters.
 
@@ -310,7 +310,7 @@ Examples:
 *  `filter ed|2024-12-12 h|vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
 *  `filter sd|2012-10-01 ed|2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
 
-### View patients full profile: `view`
+### Viewing patients full profile: `view`
 
 Identifies the specific patient using NRIC and shows the full profile of the patient.
 

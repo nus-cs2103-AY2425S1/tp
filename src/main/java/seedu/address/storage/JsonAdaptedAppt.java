@@ -38,7 +38,7 @@ public class JsonAdaptedAppt {
      * @throws IllegalValueException
      */
     public JsonAdaptedAppt(Appt source) {
-        this.dateTime = source.getDateTime().format(Appt.FORMATTER).toString();
+        this.dateTime = source.getDateTime().format(Appt.STRICT_FORMATTER).toString();
         this.healthService = source.getHealthService().toString();
     }
 
@@ -56,6 +56,6 @@ public class JsonAdaptedAppt {
             logger.severe("Invalid health service.");
             throw new IllegalValueException(HealthService.MESSAGE_CONSTRAINTS);
         }
-        return new Appt(LocalDateTime.parse(dateTime, Appt.FORMATTER), new HealthService(healthService));
+        return new Appt(LocalDateTime.parse(dateTime, Appt.STRICT_FORMATTER), new HealthService(healthService));
     }
 }

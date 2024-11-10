@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Patient's BirthDate in the address book.
@@ -30,12 +31,13 @@ public class Birthdate {
     }
 
     /**
-     * Returns if a given string is a valid nric.
+     * Returns true if a given string is a valid birth date.
      */
     public static boolean isValidBirthdate(String test) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter strictFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+            .withResolverStyle(ResolverStyle.STRICT);
         try {
-            LocalDate date = LocalDate.parse(test, formatter);
+            LocalDate date = LocalDate.parse(test, strictFormatter);
             return !date.isAfter(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
