@@ -135,8 +135,10 @@ Need a quick reference?
 * **Copying Commands from PDF**  
   If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
+</box>
 
 ### Understanding Commands Format
+<box type="info" seamless>
 
 * **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
   e.g. `add n/NAME` means you would type something like `add n/John Doe`.
@@ -158,8 +160,10 @@ Need a quick reference?
   and `clear`)  
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   <br>
+  </box>
 
 ### Notes About Parameters Format
+<box type="info" seamless>
 
 * `NAME` **only accepts alphanumeric characters and spaces**.  
   Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
@@ -181,7 +185,7 @@ Need a quick reference?
   Currently users can work around with this issue by breaking the overnight range down into 2 separate ranges.     
   e.g. `2300-0100` can be broken down into `2300-2359` and `0000-0100` and be accepted.
 
-* **No single points in time for `TIME-TIME`**
+* `TIME-TIME`**cannot refer to a single point in time**
   The start and end times must be different (e.g. `1200-1200` is invalid).
 
 </box>
