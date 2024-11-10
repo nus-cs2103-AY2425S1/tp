@@ -302,6 +302,7 @@ In a transaction list, summarises the transactions' amount within the specified 
 
 Format: `summary s/START_MONTH e/END_MONTH`
 * `START_MONTH` and `END_MONTH` should be in the format `YYYY-MM` e.g. `2024-10`
+* Month should be in the range `1-12` and year should be an integer.
 * The `START_MONTH` should be before or equal to the `END_MONTH`
 * The transactions whose date falls within the first day of `START_MONTH` and the last day of `END_MONTH` (inclusive) will be summarised.
 
