@@ -278,7 +278,7 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 
 * **For filtering by Module:**
   * Use prefix `m/`.
-  * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will match modules like "CS2103T" and "CS2101."
+  * Only full module codes will be matched, e.g. `m/CS2103T` will match the module "CS2103T", and not `m/CS21`.
 
 <!-- -->
 
