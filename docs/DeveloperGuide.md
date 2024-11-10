@@ -448,7 +448,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 **MSS**:
 
-1. Tutor keys in a keyword in the required field to find contacts whose names contain this keyword.
+1. Tutor keys in a keyword in the required field to find contacts whose names contain any of the keywords.
 1. TutorEase lists the contacts with the given keyword.  
    Use case ends.
 
@@ -465,15 +465,17 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
     * **1b2**. Tutor enters a new keyword or cancels the search.  
       Use case resumes from Step 2 or ends if cancelled.  
 
-**Use Case: UC06 - Add lesson for student**
-Precondition: Student exists in the system.
+**Use Case: UC06 - Add lesson for student**  
+
+Precondition: Student exists in the system.  
+
 **MSS:**
 
 1. Tutor keys in required fields to add student contact.
 1. TutorEase adds the lesson to the student.  
    Use case ends.
 
-**Extensions:**
+**Extensions**:
 
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
@@ -494,7 +496,8 @@ Precondition: Student exists in the system.
       Use case resumes from Step 2.
 
 **Use Case: UC07 - Delete lesson for student**  
-**MSS:**
+
+**MSS:**  
 
 1. Tutor keys in required fields to delete student contact.
 1. TutorEase deletes the lesson for the student.  
@@ -515,7 +518,8 @@ Precondition: Student exists in the system.
       Use case resumes from Step 2.
 
 **Use Case: UC08 - List all lessons**
-**MSS:**
+
+**MSS:**  
 
 1. Tutor keys in required fields to list all lessons.
 1. TutorEase lists all lessons.    
@@ -532,7 +536,7 @@ Precondition: Student exists in the system.
 **Use Case: UC09 - Find lessons by student names**  
 **MSS:**
 
-1. Tutor keys in a keyword in the required field, to find lessons with students whose names contain any of the specified keywords.
+1. Tutor keys in a keyword in the required field, to find lessons with students whose names contain any of the keywords.
 1. TutorEase lists lessons that match the requirement.    
    Use case ends.
 
