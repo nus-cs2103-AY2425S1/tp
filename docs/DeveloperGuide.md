@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- GitHub copilot was used by Li Yifeng as an auto-complete tool during most of the coding
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -585,7 +585,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
 * **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger Pro. Consists of name, contact number, room number, and emergency contact.
 * **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, immigration related issues etc.). Consists of a name and contact number.
-* **Dorm room**: Rooms of the dorm where residents stay in. Has a room number and upper limit of
+* **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and unit number that specify its location.
+* **Graduation Year**: The year during which the student will graduate.
+* **File path**: The path to the file. Is considered to be the location of the file. Can often be found by right-clicking the file as an option in the menu.
+* **JSON**: A type of file like `pdf` and `docx` that is often used for data storage.
+* **Parameter**: A value / characteristic used by a feature that is often defined by the feature, or otherwise by the real world.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -641,3 +645,12 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+## **Appendix: Planned enhancements**
+
+Team size: 5
+
+1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of 
+students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to 
+add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
