@@ -256,7 +256,6 @@ Format: `home`
 Home Command also informs you on the number of patients currently registered in the system.
 </div>
 
-### Booking an appointment: `bookappt`
 ### Booking an upcoming appointment: `bookappt`
 
 Book an upcoming appointment for an existing patient in the system for a health service provided by the clinic.
