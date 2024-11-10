@@ -27,13 +27,20 @@ public class AddressTest {
         // invalid addresses
         assertFalse(Address.isValidAddress("")); // empty string
         assertFalse(Address.isValidAddress(" ")); // spaces only
-        assertFalse(Address.isValidAddress("24 Johnny Cena Street Earth Milky Way Galaxy; Emperor's Angels"
-                + " Ultramarine Chapter, 172 Avenue Bolter Tower, Cadia Stands")); // 121 character long > 120 allowed
+        assertFalse(Address.isValidAddress("24 Johnny Cena Street Earth Milky Way Galaxy; "
+                + "Emperor's Angels Ultramarine Chapter, "
+                + "172 Avenue Bolter Tower, Cadia Stands")); // 121 character long > 120 allowed
+        assertFalse(Address.isValidAddress("   Johnny Cena Street Earth Milky Way Galaxy; "
+                + "Emperor's Angels Ultramarine Chapter, "
+                + "172 Avenue Bolter Tower, Cadia       ")); // 121 character long, with leading + trailing whitespaces
 
         // valid addresses
         assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
         assertTrue(Address.isValidAddress("-")); // one character
+        assertTrue(Address.isValidAddress("The Pinnacle ˏˋ°•*⁀➷")); // special characters
         assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Address.isValidAddress("24 Johnny Cena Street Earth Milky Way Galaxy; Emperor's Angels"
+                + " Ultramarine Chapter, 172 Avenue Bolter Tower, Cadia Stand")); // 120 characters
     }
 
     @Test
