@@ -33,6 +33,7 @@ public class ClientBuilder {
     public static final Transaction DEFAULT_TRANSACTION_2 = new Transaction(
             "Invest", -1000, "Nice Company",
             LocalDate.parse("2024-08-01", DateTimeUtil.DEFAULT_DATE_PARSER));
+    
     private Name name;
     private Company company;
     private Phone phone;

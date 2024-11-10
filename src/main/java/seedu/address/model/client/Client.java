@@ -97,10 +97,6 @@ public class Client {
         this.transactions.remove(transaction);
     }
 
-    public void addTransaction(Transaction transaction) {
-        this.transactions.add(transaction);
-    }
-
     public double getBalance() {
         return balance;
     }
