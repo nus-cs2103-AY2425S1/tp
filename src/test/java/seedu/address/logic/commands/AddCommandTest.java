@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_DUPLICATE_FIELD_CONTACT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalContacts.ALICE;
 
@@ -42,6 +43,48 @@ public class AddCommandTest {
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validContact)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validContact), modelStub.contactsAdded);
+    }
+
+    @Test
+    public void execute_duplicateFields_throwsCommandException() throws Exception {
+        Contact validContact = new ContactBuilder().build();
+        String otherEmail = "EMAIL@EMAIL";
+        String otherNickname = "NICKNAME";
+        String otherTelegram = "TELEGRAM";
+
+        // same email -> throws duplicateFieldException
+        Contact contactDuplicateEmail = new ContactBuilder(validContact)
+                .withTelegramHandle(otherTelegram)
+                .withNickname(otherNickname)
+                .build();
+        executeAssertionHelper(MESSAGE_DUPLICATE_FIELD_CONTACT, validContact, contactDuplicateEmail);
+
+        // same telegram -> throws duplicateFieldException
+        Contact contactDuplicateTelegram = new ContactBuilder(validContact)
+                .withEmail(otherEmail)
+                .withNickname(otherNickname)
+                .build();
+        executeAssertionHelper(MESSAGE_DUPLICATE_FIELD_CONTACT, validContact, contactDuplicateTelegram);
+
+        // president already exist -> throws duplicateFieldException
+        Contact contactPresident = new ContactBuilder().withRoles("President").build();
+        Contact contactDuplicatePresident = new ContactBuilder(contactPresident)
+                .withNickname(otherNickname)
+                .withEmail(otherEmail)
+                .withTelegramHandle(otherTelegram)
+                .build();
+        executeAssertionHelper(MESSAGE_DUPLICATE_FIELD_CONTACT, contactPresident, contactDuplicatePresident);
+    }
+
+    private void executeAssertionHelper (
+            String expected,
+            Contact validContact,
+            Contact contactDuplicateField
+    ) {
+        ModelStubAcceptingContactAdded modelStub = new ModelStubAcceptingContactAdded();
+        AddCommand addCommand = new AddCommand(contactDuplicateField);
+        modelStub.addContact(validContact);
+        assertThrows(CommandException.class, expected, () -> addCommand.execute(modelStub));
     }
 
     @Test
