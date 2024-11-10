@@ -321,7 +321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | familiar user | sort the contacts by product deadlines                                      | easily know which products I have to send out                               |
 | `* * `   | familiar user | filter contacts by criteria                                                 | search for specific types of people with certain characteristics            |
 | `* *`    | familiar user | sort my contacts alphabetically                                             | find my contacts by their name                                              |
-| `* * `   | familiar user | add profile photos to my contacts                                           | have a idea of how my contacts look like if i have not seen them for awhile |
+| `* * `   | familiar user | add profile photos to my contacts                                           | have a idea of how my contacts look like if I have not seen them for awhile |
 | `* * `   | familiar user | export and share a contact with others                                      | share a contact with others potentially to discuss about                    |
 | `* *`    | familiar user | pin contacts                                                                | quickly find those that are important to my business                        |
 | `* * `   | familiar user | see alerts on duplicate contacts                                            | delete it and keep my address book clean                                    |
@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | familiar user | create temporary groups                                                     | group contacts based on projects, rather than just their affiliations       |
 | `*`      | familiar user | colour code my contacts by their categories                                 | easily spot them                                                            |
 | `* `     | expert user   | perform mass edits                                                          | change in the information of groups of contacts at one shot                 |
-| `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what i remember them by               |
+| `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what I remember them by               |
 | `* `     | expert user   | add reminders                                                               | be reminded to follow up with specific contacts                             |
 | `* `     | expert user   | create shortcut commands to add specific types of contacts                  | add people of similar profiles faster                                       |
 
