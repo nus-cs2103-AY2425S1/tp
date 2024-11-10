@@ -1,12 +1,5 @@
 package seedu.address.ui;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +8,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * A CommandBox component that is part of the UI, allowing the user to input commands.
@@ -86,11 +87,18 @@ public class CommandBox extends UiPart<Region> {
         commandParameterOrder.put("delete", Arrays.asList(
                 "ec/"
         ));
-
-
-
     }
 
+    /**
+     * Creates a CommandBox with the given CommandExecutor.
+     * This command box provides an interactive command interface with suggestions based on command syntax.
+     * Suggestions are shown for:
+     * - Available commands when typing command keywords
+     * - Parameter syntax for commands with parameters
+     * - Next parameter in sequence after completing each parameter
+     *
+     * @param commandExecutor Lambda function that executes the entered command text
+     */
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
@@ -116,7 +124,7 @@ public class CommandBox extends UiPart<Region> {
                 // Replace INDEX with the actual value from input
                 fullSyntax = fullSyntax.replace("INDEX", inputParts[1]);
             } else {
-            fullSyntax = fullSyntax.replace("KEYWORD", inputParts[1]);
+                fullSyntax = fullSyntax.replace("KEYWORD", inputParts[1]);
             }
         }
 
@@ -159,11 +167,11 @@ public class CommandBox extends UiPart<Region> {
                 if (validPrefixes.contains(potentialPrefix)) {
                     // If this is a valid prefix, it should be at the start of the part
                     if (!part.startsWith(potentialPrefix)) {
-                        return true;  // Invalid structure
+                        return true; // Invalid structure
                     }
                     // Check if there are any more slashes after this valid prefix
                     if (part.indexOf('/', slashIndex + 1) != -1) {
-                        return true;  // Invalid structure
+                        return true; // Invalid structure
                     }
                 }
             }
@@ -173,12 +181,14 @@ public class CommandBox extends UiPart<Region> {
 
     private boolean hasProperSpaceBeforePrefix(String input, String prefix) {
         int prefixPos = input.lastIndexOf(prefix);
-        if (prefixPos <= 0) return false;
+        if (prefixPos <= 0) {
+            return false;
+        }
 
         // Get the last space before this prefix
         int lastSpacePos = input.lastIndexOf(' ', prefixPos);
         if (lastSpacePos == -1) {
-            return false;  // No space found before prefix at all
+            return false; // No space found before prefix at all
         }
 
         // Get the text between the last space and this prefix
@@ -215,7 +225,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         // New section for command suggestions
-        if (!input.contains(" ")) {  // If we haven't typed a space yet
+        if (!input.contains(" ")) { // If we haven't typed a space yet
             StringBuilder suggestions = new StringBuilder();
             boolean foundMatch = false;
 
@@ -226,7 +236,7 @@ public class CommandBox extends UiPart<Region> {
             for (String command : commands) {
                 if (command.startsWith(input.trim().toLowerCase())) {
                     if (foundMatch) {
-                        suggestions.append(" | ");  // Separator between commands
+                        suggestions.append(" | "); // Separator between commands
                     }
                     suggestions.append(commandSyntaxMap.get(command));
                     foundMatch = true;
@@ -418,7 +428,11 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-
+    /**
+     * Functional interface for command execution in the CommandBox.
+     * Implementations should handle parsing and execution of command text entered by users.
+     * Commands can throw CommandException for execution errors or ParseException for invalid syntax.
+     */
     @FunctionalInterface
     public interface CommandExecutor {
         void execute(String commandText) throws CommandException, ParseException;
