@@ -5,7 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -148,6 +150,21 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        List<GoodsReceipt> supplierReceipts =
+                goodsList.findReceipts(receipt -> receipt.isFromSupplier(target.getName()));
+
+        Function<GoodsReceipt, GoodsReceipt> edit = x -> new GoodsReceipt(
+                x.getGoods(),
+                editedPerson.getName(),
+                x.getProcurementDate(),
+                x.getArrivalDate(),
+                x.isDelivered(),
+                x.getQuantity(),
+                x.getPrice());
+
+        for (GoodsReceipt receipt : supplierReceipts) {
+            goodsList.setReceipt(receipt, edit.apply(receipt));
+        }
 
         addressBook.setPerson(target, editedPerson);
     }
@@ -209,7 +226,9 @@ public class ModelManager implements Model {
 
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && goodsList.equals(otherModelManager.goodsList)
+                && filteredReceipts.equals(otherModelManager.filteredReceipts);
     }
 
     @Override
@@ -306,5 +325,12 @@ public class ModelManager implements Model {
      */
     private void filterIllegalSupplierNames() {
         this.goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));
+    }
+
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(addressBook, goodsList, userPrefs, filteredPersons, filteredReceipts);
     }
 }
