@@ -218,6 +218,9 @@ This section provides a detailed explanation of the features available in NovaCa
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `listincomplete` and `listtask`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* All commands are case-sensitive.<br>
+  e.g. `addtask 1 d/Eat medication at noon` is valid while `addTask 1 d/Eat medication at noon` is invalid, as command `addtask` is case-sensitive.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
@@ -757,6 +760,10 @@ _Details coming soon ..._
 **Q**: What should I do if NovaCare **doesn't start** after double-clicking the JAR file? <br>
 **A**: Ensure Java is correctly installed by typing `[java -version]` in your command prompt or terminal. If Java is not recognized, install it from Oracle's official site.
 
+**Q**: Can I run NovaCare without internet connection?<br>
+**A**: NovaCare is able to run without internet connection.
+
+
 [⬆️ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -765,6 +772,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Adding patients of same name** is possible, and task added may be confusing if they have the same name. The remedy is to use `findtask` to find the task specific to the patient.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
