@@ -133,22 +133,23 @@ Examples:
 
 ### Sorting persons: `sort`
 
-Sorts list of persons in ASCII order by each character in specified field.
+Sorts list of persons in a case-insensitive order based on ASCII values, 
+meaning letters and numbers are organized as if in alphabetical and numerical order, 
+with no distinction between uppercase and lowercase letters.
 
 Format: `sort [name] [role] [phone] [email] [address]`
 
 * Exactly one of the optional fields is required
-* Sorts the list in ASCII order by each character.
 * The field refers to attributes used to sort the list by.
 * The field **must be a valid attribute** name, role, phone, email or address.
 
 Examples:
-* `sort name` sorts the list in ASCII order by each character in the name.
+* `sort phone` returns list sorted by phone number.
+* `sort name` returns list sorted by name.
   ![result for 'sort name'](images/sortMessage.png)
-* `sort role` sorts the list in ASCII order by each character in the role.
-* `sort phone` sorts the list in ASCII order by each character in the phone number.
-* `sort email` sorts the list in ASCII order by each character in the email address.
-* `sort address` sorts the list in ASCII order by each character in the address.
+
+:exclamation: **Caution:** using `list`, `edit`, `mark`, `unmark`, `batch-mark`, `batch-unmark`, `reset-att`, 
+or `add` command after the `sort` command will revert the list to its original, unsorted order.
 
 ### Deleting a person : `delete`
 
@@ -326,7 +327,7 @@ Action | Format, Examples
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [s/SEX] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
-**Sort** | `sort [name] [role] [phone] [email] [address] `<br> Only one optional field should be given e.g., `sort name`
+**Sort** | `sort [name] [role] [phone] [email] [address] `<br> Only one optional field should be given <br> e.g., `sort name`
 **Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
 **Mark** | `mark INDEX` <br> e.g., `mark 2`
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`

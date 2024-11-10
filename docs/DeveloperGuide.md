@@ -306,6 +306,12 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 3. Cher shows success message that list has been sorted by name.<br>
    Use case ends.
 
+**Extensions**
+* 1a. User leaves the sort field empty.
+    - 1a1. Cher detects error in user input and shows correct input format.
+* 2a. User enters invalid field.
+    - 2a1. Cher detects error in user input and shows correct input format
+
 #### Use case: UC7 - Batch edit
 **MSS**
 1. User enters a command to edit all contacts with specific tags to new tag.
