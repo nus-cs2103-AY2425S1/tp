@@ -1,6 +1,6 @@
 ---
 layout: page
-title: RealConnect
+title: Developer Guide
 ---
 ## Table of Contents
 
@@ -340,7 +340,7 @@ Given below is a sequence diagram of favourite command usage.
 ![ViewSequenceDiagram](images/favouriteSort.png)
 
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> The lifeline for `FavouriteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1253,6 +1253,7 @@ Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> 
 These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+</div>
 
 ### Launch and Shutdown
 
