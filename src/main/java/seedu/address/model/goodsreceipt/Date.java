@@ -1,22 +1,23 @@
 package seedu.address.model.goodsreceipt;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a date related to goods.
  */
 public class Date {
-    private static final String DATE_FORMAT_READ = "yyyy-MM-dd HH:mm";
+    private static final String DATE_FORMAT_READ = "uuuu-MM-dd HH:mm";
     private static final String DATE_FORMAT_WRITE = "EEEE : dd MMMM yyyy, hh.mm a";
     public static final String MESSAGE_INVALID_FORMAT =
             String.format("Dates should only be in the format of <%s>.", DATE_FORMAT_READ);
-    private static final DateTimeFormatter PATTERN_READ = DateTimeFormatter.ofPattern(DATE_FORMAT_READ);
-    private static final DateTimeFormatter PATTERN_WRITE = DateTimeFormatter.ofPattern(DATE_FORMAT_WRITE)
+    private static final DateTimeFormatter PATTERN_READ = DateTimeFormatter.ofPattern(DATE_FORMAT_READ)
+            .withResolverStyle(ResolverStyle.STRICT);
+    private static final DateTimeFormatter PATTERN_DISPLAY = DateTimeFormatter.ofPattern(DATE_FORMAT_WRITE)
             .withZone(ZoneId.of("Singapore"));
 
     private LocalDateTime dateTime;
@@ -26,8 +27,6 @@ public class Date {
      */
     public Date(String dateTime) {
         requireNonNull(dateTime);
-        // Basic check for the length of string format
-        checkArgument(dateTime.length() > 10);
         this.dateTime = LocalDateTime.parse(dateTime, PATTERN_READ);
     }
 
@@ -39,17 +38,17 @@ public class Date {
     }
 
     /**
-     * Checks if this date is before another date.
+     * Checks if this date is strictly before another date.
      */
     public boolean isBefore(Date otherDate) {
-        return this.dateTime.isBefore(otherDate.dateTime);
+        return !dateTime.isAfter(otherDate.dateTime);
     }
 
     /**
      * Returns the date time string, formatted for user display.
      */
     public String getReadableDateTimeString() {
-        return dateTime.format(PATTERN_WRITE);
+        return dateTime.format(PATTERN_DISPLAY);
     }
 
     /**

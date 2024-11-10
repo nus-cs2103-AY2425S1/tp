@@ -18,7 +18,7 @@ public class GoodsReceiptBuilder {
     public static final GoodsName DEFAULT_GOODS_NAME = new GoodsName("Apple");
     public static final GoodsCategories DEFAULT_GOODS_CATEGORY = GoodsCategories.CONSUMABLES;
     public static final Date DEFAULT_PROCUREMENT_DATE = new Date("2021-01-01 00:00");
-    public static final Date DEFAULT_ARRIVAL_DATE = new Date("2021-01-01 00:00");
+    public static final Date DEFAULT_ARRIVAL_DATE = new Date("2021-01-01 10:00");
 
     private Goods goods;
     private GoodsName goodsName;

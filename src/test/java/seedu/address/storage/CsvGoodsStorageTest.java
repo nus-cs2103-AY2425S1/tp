@@ -60,7 +60,7 @@ public class CsvGoodsStorageTest {
         csvGoodsStorage.saveGoods(receiptLog, filePath);
 
         List<String> lines = Files.readAllLines(filePath);
-        String expectedLine = "\"2021-01-01 00:00\","
+        String expectedLine = "\"2021-01-01 10:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
@@ -98,7 +98,7 @@ public class CsvGoodsStorageTest {
                 + "\"procurement date\","
                 + "\"quantity\","
                 + "\"supplier name\"\n";
-        String content = "\"2021-01-01 00:00\","
+        String content = "\"2021-01-01 10:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
@@ -128,18 +128,18 @@ public class CsvGoodsStorageTest {
                 + "\"procurement date\","
                 + "\"quantity\","
                 + "\"supplier name\"\n";
-        String content = "\"2021-01-01 00:00\","
+        String content = "\"2021-01-01 10:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
                 + "\"Supplier\"\n";
-        String negativeQuantity = "\"2022-02-02T00:00\","
+        String negativeQuantity = "\"2021-01-01 10:00\","
                 + "\"Banana,CONSUMABLES\","
                 + "\"true\","
                 + "\"20.00\","
-                + "\"2022-02-02T00:00\","
+                + "\"2021-01-01 00:00\","
                 + "\"-2\","
                 + "\"New Supplier\"\n";
         Files.write(filePath, headerLine.getBytes());
@@ -165,18 +165,18 @@ public class CsvGoodsStorageTest {
                 + "\"procurement date\","
                 + "\"quantity\","
                 + "\"supplier name\"\n";
-        String content = "\"2021-01-01 00:00\","
+        String content = "\"2021-01-01 10:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
                 + "\"Supplier\"\n";
-        String negativeQuantity = "\"2022-02-02T00:00\","
+        String negativeQuantity = "\"2021-01-01 10:00\","
                 + "\"Banana,CONSUMABLES\","
                 + "\"true\","
                 + "\"-20.00\","
-                + "\"2022-02-02T00:00\","
+                + "\"2021-01-01 00:00\","
                 + "\"2\","
                 + "\"New Supplier\"\n";
         Files.write(filePath, headerLine.getBytes());
@@ -202,18 +202,18 @@ public class CsvGoodsStorageTest {
             + "\"procurement date\","
             + "\"quantity\","
             + "\"supplier name\"\n";
-        String content = "\"2021-01-01 00:00\","
+        String content = "\"2021-01-01 10:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
                 + "\"2021-01-01 00:00\","
                 + "\"1\","
                 + "\"Amy Bee\"\n";
-        String missingContent = "\"2022-02-02T00:00\","
+        String missingContent = "\"2021-01-01 10:00\","
                 + "\"Banana\","
                 + "\"true\","
                 + "\"20.00\","
-                + "\"2022-02-02T00:00\","
+                + "\"2021-01-01 00:00\","
                 + "\"2\","
                 + "\"New Supplier\"\n";
         Files.write(filePath, headerLine.getBytes());
@@ -239,7 +239,7 @@ public class CsvGoodsStorageTest {
                 + "\"procurement date\","
                 + "\"quantity\","
                 + "\"supplier name\"\n";
-        String content = "\"2021-01-01 00:00\","
+        String content = "\"2021-01-01 10:00\","
                 + "\"Apple,CONSUMABLES\","
                 + "\"false\","
                 + "\"10.00\","
