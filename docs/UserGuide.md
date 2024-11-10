@@ -102,7 +102,7 @@ Examples:
 ##### Constraints
 
 * `NAME` can only contain alphanumeric characters, spaces, and one of the following symbols: hyphen, comma, and apostrophe, where commas should be followed with a space.
-* `NAME` should have alphanumeric characters before and after the symbol, and it should not be blank. Relationship indicator using "S/O" or "D/O" can be included but should be wrapped with spaces, and followed with the name of customer with stated relationship.
+* `NAME` should have alphanumeric characters before and after the symbol, and it should not be blank. Relationship indicator using "S/O" or "D/O" can be included but should be wrapped with a single space, and followed with the name of customer with stated relationship.
 * Duplicated `NAME` is not allowed.
 * If there is already a customer with similar `NAME` (same name excluding space and casing), a warning will be given.
 * `PHONE_NUMBER` should only contains numbers, and it should at least be 3 digits long.
