@@ -454,8 +454,6 @@ The **Employee Details Window** allows HR personnel to view and edit detailed in
     - If invalid data is entered, an error dialog will appear prompting correction.
     - Follow the on-screen instructions to rectify any issues.
 
-<div style="page-break-after: always;"></div>
-
 ### Saving the data
 
 HR Helper data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
