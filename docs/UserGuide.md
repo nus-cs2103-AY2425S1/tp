@@ -90,16 +90,9 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 **:information_source: Person constraints:**<br>
 
-- A person's name must be unique (case-insensitive).
+- A person's name must be unique (case-sensitive).
 
-- A person's phone number must be unique.
-</div>
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Person constraints:**<br>
-
-- A person's name must be unique (case-insensitive).
+- A person's name can only contain alphanumeric characters and spaces.
 
 - A person's phone number must be unique.
 </div>
@@ -153,7 +146,9 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 
 **:information_source: Person constraints:**<br>
 
-- A person's name must be unique (case-insensitive).
+- A person's name must be unique (case-sensitive).
+
+- A person's name can only contain alphanumeric characters and spaces.
 
 - A person's phone number must be unique.
 </div>
@@ -273,13 +268,6 @@ Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…�
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Event constraints:**<br>
-
-- The celebrity and all points of contacts must be existing persons in TalentHub.
-</div>
-
-<div markdown="block" class="alert alert-info">
-
 **:information_source:Optionals** <br>
 
 An event can have any number of points of contact or none at all!
@@ -317,6 +305,13 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Event constraints:**<br>
+
+- The celebrity and all points of contacts must be existing persons in TalentHub.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
