@@ -1,37 +1,66 @@
 
-# Vendor Vault User Guide
+# VendorVault User Guide
 
-Vendor Vault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a  Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. Vendor Vault is targeted at small convenience/grocery stores. 
+VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. Vendor Vault is targeted at small convenience/grocery stores. 
 
-<!-- * Table of Contents -->
-<page-nav-print />
+--- 
+
+### Table of Contents will be added here by Linkes
+
+
+---
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## How to get started
 
-1. Ensure you have Java `17` or above installed in your Computer. If you are unsure, you can check by opening the command terminal and typing `java -version`. If you do not have Java installed, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
+1. If you are new to Vendor Vault, we suggest starting from the [Setting up VendorVault section](#setting-up-vendorvault).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-1/tp/releases).
+2. If you have already set up Vendor Vault and are looking for information of our commands and features, take a look at our [Features](#features) or [Command Summary](#command-summary) sections. 
 
-1. Copy the file to the folder you want to use as the _home folder_ for your VendorVault Application.
+3. If you’re unsure about any of the terms used in this User Guide, please refer to the [Glossary](#glossary) section for definitions and explanations
 
-1. Open a command terminal, type `cd [path-to-your-folder]` (path to the folder you put the jar file in) and use the `java -jar vendorvault.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+--------------------------------------------------------------------------------------------------------------------
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+## Setting up VendorVault 
+
+1. Java is the toolset that will allow you to use VendorVault on your system. Hence, first you need to ensure that you have Java `17` or above installed on your Computer. If you are unsure, you can check by following the steps below:
+   - 1a. Open up your command terminal. 
+     * Windows users can open the terminal by typing in `Command Prompt` in the search bar located at the bottom left of the screen. 
+     * Mac users can open the terminal by typing in `Terminal` using the spotlight search bar (accessed by pressing Command + Space).
+     * Linux users can open for the command terminal by searching for the `Terminal` or `Console` in the Applications Menu
+   
+   - 1b. Type in java -version to check if you have Java installed. If you have java installed you should see something like this:
+     ![Terminal Example showcasing java version](images/intro/terminalJavaVersion.png)
+   
+   - 1c. If you do not have Java installed, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
+
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-1/tp/releases).
+   ![Download jar file](images/intro/jarFile.png)
+
+3. Upon downloading the `.jar` file, copy the file to the folder you want to use as the _home folder_ for your VendorVault Application.
+
+4. Open the command terminal (same as step 1a), type `cd [path-to-your-folder]` (path to the folder you put the jar file in) and use the `java -jar vendorvault.jar` command to run the application.<br>
+   ![Starting up application](images/intro/startingApp.png)
+
+A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
+<br>
+
+![Ui](images/intro/Ui.png)
+
+5. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list -a` : Lists all suppliers and deliveries.
 
-   * `add -s n/John Doe p/98765432 e/johnd@example.com com/John street, block 123, #01-01 pro/ iPhone` : Adds a supplier named `John Doe` to the VendorVault.
+   * `add -s n/John Doe p/98765432 e/johnd@example.com com/John street, block 123, #01-01 pro/iPhone` : Adds a supplier named `John Doe` to the VendorVault.
 
-   * `delete -d 3` : Deletes the 3rd contact shown in the current delivery list.
+   * `delete -d 3` : Deletes the 3rd delivery shown in the current delivery list.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 <br>
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +81,7 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help` `clear` and `exit`) will be ignored.<br>
+* For the commands `help` `clear` and `exit`, extra information/words following the command after a space will be ignored.<br>
   e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
 
 * For all parameters, starting and ending spaces are trimmed.
@@ -64,45 +93,6 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 </box>
 ---
 
-## Command table of content
-
-### Supplier Commands
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-**[Delete](#deleting-a-supplier-delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
-**[List](#listing-all-suppliers-list-s)**   | `list -s`
-**[Mark](#mark-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
-**[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>` <br> e.g., `find -s n/link com/NU`
-**[Sort](#sort-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
-
-
-### Delivery Commands
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-delivery-add-d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-**[Delete](#deleting-a-delivery-delete-d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
-**[List](#listing-all-deliveries-list-d)**   | `list -d`
-**[Mark](#marking-a-delivery-mark-d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
-**[Find](#find-a-delivery-find-d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
-**[Sort](#sort-deliveries-sort-d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
-**[Upcoming](#upcoming-deliveries-upcoming)** | `upcoming aft/START_DATE bef/END_DATE`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
-
-
-
-### General Commands
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[List](#viewing-all-deliveries-and-suppliers-list)**   | `list -a`
-**[Clear](#clearing-all-suppliers-and-deliveries-clear)**   | `clear`
-**[Help](#viewing-help-help)**   | `help`
-**[Exit](#exiting-the-program-exit)**   | `exit`
-
-
-
----
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -111,7 +101,7 @@ Format: `help`
 
 ##### Here's how it would look like in the app:
 
-![help message](images/helpMessage.png)
+![help message](images/generalCommands/helpCommand.png)
 
 ### Viewing all deliveries and suppliers : `list -a`
 
@@ -120,7 +110,6 @@ Lists all suppliers and deliveries in the VendorVault
 Format: `list -a`
 
 <box type="warning" seamless>
-
 **Warnings**:
 - No other parameters should be given for this command.
 - At least one space between list and -a
@@ -525,6 +514,41 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Command Summary
+
+### General Commands
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**[List](#viewing-all-deliveries-and-suppliers-list)**   | `list -a`
+**[Clear](#clearing-all-suppliers-and-deliveries-clear)**   | `clear`
+**[Help](#viewing-help-help)**   | `help`
+**[Exit](#exiting-the-program-exit)**   | `exit`
+
+
+### Supplier-specific Commands
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**[Add](#adding-a-supplier-add-s)**    | `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​` <br> e.g., `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+**[Delete](#deleting-a-supplier-delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
+**[List](#listing-all-suppliers-list-s)**   | `list -s`
+**[Mark](#mark-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
+**[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>` <br> e.g., `find -s n/link com/NU`
+**[Sort](#sort-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
+
+
+### Delivery-specific Commands
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**[Add](#adding-a-delivery-add-d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**[Delete](#deleting-a-delivery-delete-d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
+**[List](#listing-all-deliveries-list-d)**   | `list -d`
+**[Mark](#marking-a-delivery-mark-d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+**[Find](#find-a-delivery-find-d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
+**[Sort](#sort-deliveries-sort-d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
+**[Upcoming](#upcoming-deliveries-upcoming)** | `upcoming aft/START_DATE bef/END_DATE`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
 
 
 [Back to Top](#vendor-vault-user-guide)
