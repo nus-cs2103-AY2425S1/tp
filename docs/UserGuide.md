@@ -531,25 +531,43 @@ the data of your previous AcademyAssist folder.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Command Summary
+## General Format
+The general format of commands in AcademyAssist is as follows:
+```
+COMMAND [PARAMETERS]
+```
+Where:
+- `COMMAND` refers to the action you want to perform (e.g., `add`, `delete`, `edit`).
+- `PARAMETERS` are the inputs required for the command to execute successfully.
 
-| Action            | Format, Examples                                                                                                                                                                                     |
-|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**   | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` <br><br> e.g., `add n\John Doe i\T3840859A yg\3 p\81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
-| **Delete Student**| `delete STUDENT_ID`<br><br> e.g., `delete S00001`                                                                                                                                                    |
-| **Edit Student**  | `edit STUDENT_ID FIELD\NEW_VALUE`<br> e.g.,`edit S00001 a\New_Address`                                                                                                                               |
-| **List Students** | `list`                                                                                                                                                                                               |
-| **View Student**  | `detail STUDENT_ID`<br><br> e.g., `detail S00001`                                                                                                                                                    |
-| **Find Student**  | `find NAME [MORE_NAMES]`<br><br> e.g., `find John Jane`                                                                                                                                              |
-| **Filter Students**| `filter FIELD\VALUE`<br><br> e.g., `filter yg\2`                                                                                                                                                     |
-| **Add Subject**   | `addsubject STUDENT_ID s\SUBJECT`<br><br> e.g., `addsubject S00003 s\Science`                                                                                                                        |
-| **Track Subjects**| `tracksubject`                                                                                                                                                                                       |
-| **Sort Students** | `sort by\FIELD`<br><br> e.g., `sort by\name`                                                                                                                                                         |
-| **Clear Data**    | `clear`                                                                                                                                                                                              |
-| **Get Help**      | `help`                                                                                                                                                                                               |
-| **Exit**          | `exit`                                                                                                                                                                                               |
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
+Refer to the tables below or the [Features](#features) section for more details on each command.
+</div>
 
-## Command Parameters Reference
+## Command Format and Examples
+This section provides a quick overview of the available commands for managing student records. Each command is accompanied by its format and an example to help you understand how to use it effectively.
+
+| **Action**          | **Command Format**                                                                        | **Example**                                                                                 |
+|---------------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Add Student**     | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` | `add n\John Doe i\T3840859A yg\3 p\81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
+| **Delete Student**  | `delete STUDENT_ID`                                                                       | `delete S00001`                                                                             |
+| **Edit Student**    | `edit STUDENT_ID FIELD\NEW_VALUE`                                                         | `edit S00001 a\New_Address`                                                                 |
+| **List Students**   | `list`                                                                                    |                                                                                             |
+| **View Student**    | `detail STUDENT_ID`                                                                       | `detail S00001`                                                                             |
+| **Find Student**    | `find NAME [MORE_NAMES]`                                                                  | `find John Jane`                                                                            |
+| **Filter Students** | `filter FIELD\VALUE`                                                                      | `filter yg\2`                                                                               |
+| **Add Subject**     | `addsubject STUDENT_ID s\SUBJECT`                                                         | `addsubject S00003 s\Science`                                                               |
+| **Track Subjects**  | `tracksubject`                                                                            |                                                                                             |
+| **Sort Students**   | `sort by\FIELD`                                                                           | `sort by\name`                                                                              |
+| **Clear Data**      | `clear`                                                                                   |                                                                                             |
+| **Get Help**        | `help`                                                                                    |                                                                                             |
+| **Exit**            | `exit`                                                                                    |                                                                                             |
+
+## Command Parameters Reference 
+In this section, you'll find detailed information about the parameters for each command. Each command is broken down into its constituent parameters, including their prefixes, descriptions, and constraints. This reference will guide you in ensuring that your inputs are valid and conform to the required formats.
+
 | **Command**             | **Parameter**     | **Prefix** | **Description**                                                                    | **Constraints**                                                                                                                                                 |
 |-------------------------|-------------------|------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**         | `NAME`            | `n\ `      | Name of the student.                                                               | 2-255 characters, only alphabets, spaces, and special characters (-/'), cannot start/end with special characters, no consecutive special characters and spaces. |
