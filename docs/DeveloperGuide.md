@@ -1996,7 +1996,7 @@ Clearing the entire True Rental's database, wiping all clients and their respect
 
 <box type="warning">
 
-**Prerequisites**: There are more than 1 client and 1 rental information in the application.
+**Prerequisites**: There is more than 1 client in the application.
 
 </box>
 
