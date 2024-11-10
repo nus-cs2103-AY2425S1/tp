@@ -14,6 +14,7 @@
     --hover-bg-color: rgb(243, 243, 243);
     --white-bg-color: rgb(255, 255, 255);
     --code-bg-color: rgba(202, 206, 255, 0.6);
+    --code-bg-no-opacity-color: rgba(202, 206, 255, 1);
     --box-bg-color: rgba(255, 130, 21, 0.6);
     --box-border-color: rgba(255, 130, 21, 0.75);
     --mistake-bg-color: rgba(255, 0, 0, 0.2);
@@ -53,6 +54,10 @@
     border: 2px solid var(--box-border-color);
   }
 
+  .box-large-padding {
+    padding: 16px 24px;
+  }
+
   .box-info {
     background-color: var(--info-bg-color) !important;
     padding: 16px 16px;
@@ -87,7 +92,7 @@
   .content {
     background-color: var(--primary-bg-color);
     border-radius: 10px;
-    padding: 32px;
+    padding: 48px;
     margin: 16px;
   }
 
@@ -95,8 +100,13 @@
     padding: 16px;
   }
 
+  .sub-content-no-vertical-padding {
+    padding: 0px 16px !important;
+  }
+
   .content-special {
     background-color: var(--special-bg-color);
+    padding: 32px;
   }
 
   .content-droppable {
@@ -114,7 +124,6 @@
   }
 
   .content-qna {
-    padding: 24px 32px;
     font-size: 0.9em;
   }
 
@@ -151,6 +160,24 @@
   .command-content {
     padding: 24px 16px 8px 16px;
     font-size: 0.8em;
+  }
+
+  .code-full-width {
+    width: calc(100% - 48px);
+    background-color: var(--code-bg-color) !important;
+    padding: 12px 24px;
+    margin: 16px 0;
+    border-radius: 5px;
+  }
+
+  .code-full-width > span {
+    color: var(--black-color) !important;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .code-no-opacity {
+    background-color: var(--code-bg-no-opacity-color) !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   }
 
   .qna-content {
@@ -244,7 +271,7 @@
   <a href="#storing-data">
     <button class="toc-btns"><span>4. Storing Data</span></button>
   </a>
-  <a href="#storing-data">
+  <a href="#glossary">
     <button class="toc-btns"><span>5. Glossary</span></button>
   </a>
   <a href="#faq">
@@ -262,50 +289,120 @@
 
 <div class="content">
 
-<strong>1. </strong>Ensure you have [Java `17`](https://www.oracle.com/java/technologies/downloads/#java17) installed in your Computer. Higher versions may work but we do not officially support it.
+<strong>1. </strong>**Download** and **install** [Java `17`](https://www.oracle.com/java/technologies/downloads/#java17) if you don't have it installed. We don't support other versions.
+
+<div class="sub-content">
+
+_You may check your installed version of Java by entering the following in your command terminal_
+
+<div class="code-full-width"><span>java -version</span></div>
+
+</div>
 
 <br>
 
-<strong>2. </strong>Download the latest release `.jar` file from [our Github page](https://github.com/AY2425S1-CS2103T-T10-2/tp/releases).
+<br>
+
+<strong>2. </strong>**Download** the latest version of `StaffSync.jar` from [our Github page](https://github.com/AY2425S1-CS2103T-T10-2/tp/releases).
 
 <br>
 
-<strong>3. </strong>Copy `staffSync.jar` to the folder you want to use as the _home folder_ for your StaffSync. This folder
-would also include the file that StaffSync uses to store all the data.
+<br>
+
+<strong>3. </strong>**Copy** `StaffSync.jar` into the folder you want to use as the _home folder_ for StaffSync. StaffSync will store all save data here.
 
 <br>
 
-<strong>4. </strong>Open a command terminal, Change the directory to the folder you have placed `staffSync.jar` using
-the `cd` command. For example, if the file is in the `Downloads` folder, enter `cd Downloads`.
-Next, enter `java -jar staffSync.jar` to run the application.<br>
+<br>
 
-   Alternatively, you can double-click the jar file to run the application (though we do not officially support it).
+<strong>4. </strong>Open a command terminal, and **change your directory** to the StaffSync's _home folder_ by using the `cd` command.
 
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   <div class="ug-images">
+<div class="sub-content">
 
-   ![GUI](images/v1.6images/GUI.png)
-   </div>
+For example, if the _home folder_ is located at `Desktop/StaffSync`, enter the command
+
+<div class="code-full-width"><span>cd "Desktop/StaffSync"</span></div>
+
+</div>
 
 <br>
 
-<strong>5. </strong>Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+<br>
 
-   * `list ph`: Lists all potential hires.
+<strong>5. </strong>Next, let's **run** StaffSync.
 
-   * `employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01`: Adds an employee named `John Doe` to StaffSync.
+<div class="sub-content">
 
-   * `delete ph 1`: Deletes the 1st person shown if they are a potential hire.
+In your command terminal, enter the following command
 
-   * `exit`: Exits the app.
+<div class="code-full-width"><span>java -jar StaffSync.jar</span></div>
 
 <br>
 
-<strong>6. </strong>You can refer to the [Commands](#commands) below for details of each command.
+A GUI similar to the below should appear in a few seconds with some sample data.<br>
 
-<strong>7. </strong>Now, you are all set to use StaffSync! Use `clear` to remove all sample data and good luck for your
-journey with StaffSync!
+</div>
+
+<div class="ug-images">
+
+![GUI](images/v1.6images/GUI.png)
+</div>
+
+<br>
+
+<br>
+
+<strong>6. </strong>To **run any command**, type it in the command box and press Enter to execute it.
+
+<div class="sub-content">
+
+<div class="sub-content sub-content-no-vertical-padding">
+
+For example, entering the following command will open the help window.
+
+<div class="code-full-width"><span>help</span></div><br>
+
+</div>
+
+Some example commands you can try:
+
+<div class="sub-content">
+
+List all potential hires.
+
+<div class="code-full-width"><span>list ph</span></div><br>
+
+Add an employee named `John Doe` to StaffSync.
+
+<div class="code-full-width"><span>employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01</span></div><br>
+
+Delete the 1st person shown if they are a potential hire
+
+<div class="code-full-width"><span>delete ph 1</span></div><br>
+
+Exit the app.
+
+<div class="code-full-width"><span>exit</span></div><br>
+
+</div>
+
+</div>
+
+<br>
+
+<strong>7. </strong>You can refer to the [Commands](#commands) below for **details of each command**.
+
+<div class="sub-content">
+
+If you would like to remove all sample data, you can run the command
+
+<div class="code-full-width"><span>clear</span></div><br>
+
+</div>
+
+<br>
+
+<strong>8. </strong>Now, you are all set to use StaffSync. We wish you all the best on your journey with StaffSync!
 
 </div>
 
@@ -320,37 +417,37 @@ journey with StaffSync!
 
 <br>
 
-* Words in `UPPER_CASE` are the compulsory parameters to be supplied by the user.
+* Words in `UPPER_CASE` are the **compulsory** parameters to be **supplied by the user**.
   e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
 
 <br>
 
-* Items in round brackets are compulsory.
+* Items in round brackets are **compulsory**.
   e.g. `list (e/ph/all)` must be used as `list e` or `list ph` or `list all`.
 
 <br>
 
-* Items in square brackets are optional.
+* Items in square brackets are **optional**.
   e.g. `edit INDEX [n/NAME] [e/EMAIL]` can be used as `edit 1 n/John Doe e/johndoe@gmail.com` or `edit 1 n/John Doe`.
 
 <br>
 
-* Items in curly brackets are requirements for the format.
+* Items in curly brackets are **requirements for the format**, but are **not entered** into the command box.
   e.g. `demote INDEX {must be a positive integer}` means that index must be a positive integer.
 
 <br>
 
-* Parameters can be in any order.
+* Parameters can be in **any order**.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 <br>
 
-* Parameters and commands are case-sensitive.
+* Parameters and commands are **case-sensitive**.
   e.g. the command `Help` and `edit 1 N/John Doe` will return an error.
 
 <br>
 
-* Extra parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
+* Extra parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be **ignored**.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 <br>
@@ -414,7 +511,7 @@ journey with StaffSync!
   </div>
   <br>
 
-  You can delete the potential hire/employee at the specified `INDEX`.
+  You can delete the potential hire/employee at the specified shown `INDEX`.
 
 <br>
 
@@ -432,8 +529,8 @@ journey with StaffSync!
 
 **Examples:**
 
-  * `list ph` followed by `delete ph 2` deletes the 2nd person in your potential hire list.
-  * `find e n/Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
+  * `list ph` followed by `delete ph 2` deletes the 2nd person in the display shown by `list`, if he/she is a potential hire.
+  * `find e n/Betsy` followed by `delete e 1` deletes the 1st person in the display shown by `find`, if he/she is an employee.
     
 <br>
 
@@ -610,9 +707,9 @@ Example: `demote 1`
 
   `PHONE_NUMBER`: Contains numbers that are at least 3 digits long.
 
-  `EMAIL`: In the format local-part@domain.
-
   `ADDRESS`: Takes any values, and it should not be blank.
+
+  `EMAIL`: In the format local-part@domain.
 
   `DEPARTMENT`: Takes any values, and it should not be blank.
 
@@ -867,9 +964,9 @@ Example: `list all`
 
   `PHONE_NUMBER`: Contains numbers that are at least 3 digits long.
 
-  `EMAIL`: In the format local-part@domain.
-
   `ADDRESS`: Takes any values, and it should not be blank.
+
+  `EMAIL`: In the format local-part@domain.
 
   `DEPARTMENT`: Takes any values, and it should not be blank.
 
@@ -1105,15 +1202,19 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 
 <div class="content">
 
-<h3>Alphanumeric</h3>
+### **Alphanumeric**
+
+<div class="sub-content">
 
 A mix of letters and numbers only. Includes both alphabets (a to z) and digits (0 to 9) with no spaces or special characters.
 
 Example: StaffSync123
 
-<br>
+</div>
 
-<h3>Command Line Interface</h3>
+### **Command Line Interface**
+
+<div class="sub-content">
 
 A text-based interface that lets you type instructions directly to your computer to perform certain tasks. Instead of
 clicking on menus or icons, you would type specific commands into the text-based interface and the computer or software
@@ -1121,9 +1222,11 @@ will run those commands for you.
 
 Example: To show a list of potential hire, simply type `list ph` and press enter. The list of potential hire will appear. 
 
-<br>
+</div>
 
-<h3>Graphical User Interface</h3>
+### **Graphical User Interface**
+
+<div class="sub-content">
 
 The "face" of a program, designed to use visual elements like buttons, icons, windows and menus to make it easier for
 people to interact with the program.
@@ -1131,36 +1234,42 @@ people to interact with the program.
 Example: You can see each entry of potential hire or employees in a box with their details nicely formatted and easy to
 read.
 
-<br>
+</div>
 
-<h3>Index</h3>
+### **Index**
+
+<div class="sub-content">
 
 The order or position of an item in a list. The value starts from 1 and it must be a positive
 integer.
 
 Example: If you have a list of names (1. Alice, 2. Betty, 3. Charlie) then, Alice is at index 1, Betty is at index 2
 and Charlie is at index 3.
+
 </div>
 
-<br>
+### **Integer**
 
-<h3>Integer</h3>
+<div class="sub-content">
 
 A whole number with no fractions and decimals that can be positive, 0 or negative. The range of a valid integer in
 programming is from -2147483648 to 2147483647, inclusive of both.
 
 Example: -2147483648, -15, 0, 35, 2147483647
 
-<br>
+</div>
 
-<h3>Parameter</h3>
+### **Parameter**
+
+<div class="sub-content">
 
 A piece of information you would give to a program to allow it to know exactly how you want it to work.
 
 Example: In order to display a list of employee and not a list of potential hire, you would type in `list e` instead of
 `list ph` as `e` is the parameter to allow the program to know that you want the list of employees.
 
-<br>
+</div>
+</div>
 
 <h1 class="headers" id="faq">FAQ</h1>
 
