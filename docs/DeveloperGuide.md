@@ -295,37 +295,35 @@ With its fast and efficient Command Line Interface (CLI), PlanPerfect enables us
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                             | So that I can…​                                        |
-|----------|------------------|--------------------------------------------------------------------------|--------------------------------------------------------|
-| `* * *`  | User             | Add new contacts                                                         | Expand my wedding planner network                      |
-| `* * *`  | User             | Delete contacts                                                          | Get rid of unneeded contacts                           |
-| `* * *`  | User             | Tag contacts                                                             | Organise my contacts                                   |
-| `* * *`  | User             | Untag contacts                                                           | Organise my contacts                                   |
-| `* * *`  | User             | View a list of all contacts                                              | Retrieve the contact information                       |
-| `* *`    | User             | Edit contacts                                                            | Update my contacts' information upon changes           |
-| `* *`    | User             | Filter contacts by tag                                                   | Find specific profiles of interest quickly             |
-| `* *`    | User             | Archive contacts                                                         | Prevent clutter in my contacts without a full deletion |
-| `* *`    | First-time user  | See help messages                                                        | learn how to use the app                               |
-| `* *`    | User             | See a confirmation message before I clear/delete                         | Avoid accidentally deleting all my data                |
-| `*`      | User             | View which wedding service providers a client is paired with              | Easily find contacts associated with a wedding         |
-| `*`      | User             | Add notes for a specific contact                                         | Add my own details                                     |
-| `*`      | User             | Sort contacts alphabetically                                             | Organize and access contacts easily                    |
-| `*`      | Forgetful user   | Set reminders to talk to contacts                                        | Remember to communicate with contacts                  |
-| `*`      | User             | Import contacts from an existing CSV/text file                           | Add new contacts quickly                               |
-| `*`      | Busy user        | Schedule calls with contacts                                             | Remember when to call people                           |
-| `*`      | Organised user   | Create folders                                                           | Organise my contacts into categories                   |
-| `*`      | Efficient user   | Make mass operations                                                     | Add/delete/archive numerous contacts in one go         |
-| `*`      | User             | Create wedding events with associated contacts                           | Park relevant contacts for that wedding in one place   |
-| `*`      | User             | Create todo lists for each wedding                                       | Manage tasks efficiently                               |
-| `*`      | User             | Send my contacts to other users                                          | Allow my colleagues to contact the same people         |
-| `*`      | User             | Add descriptions to contacts                                             | See more clarifying details about the contact          |
-| `*`      | User             | Search contacts by name or tag                                            | Quickly access a contact                               |
-| `*`      | Curious user     | See statistics                                                           | See how many contacts are added                        |
-| `*`      | User             | Export all my data as a spreadsheet/CSV                                  | Transfer it to other softwares if needed               |
-| `*`      | Clumsy user      | Undo the latest action                                                   | So that wrong actions can be undone                    |
-| `*`      | User             | Copy the email of the contacts to clipboard                              | Email contacts conveniently                            |
-
-
+| Priority | As a …​         | I want to …​                                                 | So that I can…​                                        |
+|----------|-----------------|--------------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | User            | Add new contacts                                             | Expand my wedding planner network                      |
+| `* * *`  | User            | Delete contacts                                              | Get rid of unneeded contacts                           |
+| `* * *`  | User            | Tag contacts                                                 | Organise my contacts                                   |
+| `* * *`  | User            | Untag contacts                                               | Organise my contacts                                   |
+| `* * *`  | User            | View a list of all contacts                                  | Retrieve the contact information                       |
+| `* *`    | User            | Edit contacts                                                | Update my contacts' information upon changes           |
+| `* *`    | User            | Filter contacts by tag                                       | Find specific profiles of interest quickly             |
+| `* *`    | User            | Archive contacts                                             | Prevent clutter in my contacts without a full deletion |
+| `* *`    | First-time user | See help messages                                            | learn how to use the app                               |
+| `* *`    | User            | See a confirmation message before I clear all data           | Avoid accidentally losing all of my data               |
+| `*`      | User            | View which wedding service providers a client is paired with | Easily find contacts associated with a wedding         |
+| `*`      | User            | Add notes for a specific contact                             | Add my own details                                     |
+| `*`      | User            | Sort contacts alphabetically                                 | Organize and access contacts easily                    |
+| `*`      | Forgetful user  | Set reminders to talk to contacts                            | Remember to communicate with contacts                  |
+| `*`      | User            | Import contacts from an existing CSV/text file               | Add new contacts quickly                               |
+| `*`      | Busy user       | Schedule calls with contacts                                 | Remember when to call people                           |
+| `*`      | Organised user  | Create folders                                               | Organise my contacts into categories                   |
+| `*`      | Efficient user  | Make mass operations                                         | Add/delete/archive numerous contacts in one go         |
+| `*`      | User            | Create wedding events with associated contacts               | Park relevant contacts for that wedding in one place   |
+| `*`      | User            | Create todo lists for each wedding                           | Manage tasks efficiently                               |
+| `*`      | User            | Send my contacts to other users                              | Allow my colleagues to contact the same people         |
+| `*`      | User            | Add descriptions to contacts                                 | See more clarifying details about the contact          |
+| `*`      | User            | Search contacts by name or tag                               | Quickly access a contact                               |
+| `*`      | Curious user    | See statistics                                               | See how many contacts are added                        |
+| `*`      | User            | Export all my data as a spreadsheet/CSV                      | Transfer it to other softwares if needed               |
+| `*`      | Clumsy user     | Undo the latest action                                       | So that wrong actions can be undone                    |
+| `*`      | User            | Copy the email of the contacts to clipboard                  | Email contacts conveniently                            |
 
 
 ### Use cases

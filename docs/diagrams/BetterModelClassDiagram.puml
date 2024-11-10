@@ -11,18 +11,18 @@ UniqueTagList -[hidden]down- UniquePersonList
 UniqueTagList -[hidden]down- UniquePersonList
 
 UniqueTagList -right-> "*" Tag
-UniquePersonList -right-> Person
-UniqueWeddingList -down-> Wedding
+UniquePersonList -right-> "*" Person
+UniqueWeddingList -down-> "*" Wedding
 
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 
-Wedding *--> WeddingName
-Wedding *--> WeddingDate
+Wedding *--> "1" WeddingName
+Wedding *--> "1" WeddingDate
 
 @enduml

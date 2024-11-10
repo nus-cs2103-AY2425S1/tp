@@ -131,17 +131,22 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]`
 Adds a contact to the address book.
 
 * Address field cannot contain " n/", " p/", " e/", " a/", " t/" as these sequences of characters are reserved for parameter prefixes.
+* The order of parameters given does not matter, parameters can be in any order.
+
+<box type="warning" seamless>
+
+A contact can have up to 6 tags (including 0). No two contacts can have the same phone number.
+</box>
 
 <box type="info" seamless>
-
-**Note:**
-A contact can have up to 6 tags (including 0). No two contacts can have the same phone number.
+After adding a contact, you will return to the main contact list view, regardless of whether you were in wedding or 
+filtered view.
 </box>
 
 Examples:
 * `add n/Foutou Graffer e/foutougraphy@gmail.com a/123 Commons Studio p/99527199 t/photographer caterer`
 * `add n/Homer Simpson p/98765432 e/homersimpson@gmail.com a/742 Evergreen Terrace, Block 123, #01-01`
-* `add n/Marge Simpson t/florist baker e/margesimpson@yahoo.com a/742 Evergreen Terrace p/98137192 t/florist`
+* `add n/Marge Simpson t/florist baker e/margesimpson@yahoo.com a/742 Evergreen Terrace p/98137192`
 
 <br><br/>
 
@@ -317,10 +322,11 @@ You will not be able to recover the previous sorting of your contacts after the 
 
 Format: `clear`
 
-Clears all entries in the address book.
+Clears all contact and wedding entries in the address book.
 
 * After entering the `clear` command, a confirmation message will appear to ask you if you are sure about clearing the address book.
-* If you input `yes` or `y`, the address book will be cleared. If other input is entered, the address book will not be cleared.
+* If you input `Yes` or `Y` (case-insensitive, so variations like `y`/`yEs` etc. are accepted as well), the address 
+  book will be cleared. If any other input is entered, the address book will not be cleared.
 
 <br><br/>
 
@@ -417,8 +423,8 @@ The edited wedding name provided must not be the name of a pre-existing wedding 
 
 Examples:
 * `editw 1 d/12/11/2025` edits the date of the 1st wedding on the wedding list.
-* `editw 3 n/Marge and Homer` edits the name of the 2nd wedding on the wedding list.
-* `editw 2 n/Maria and Mario d/01/08/2024` edits the name and date of the 3rd wedding on the wedding list.
+* `editw 3 n/Marge and Homer` edits the name of the 3rd wedding on the wedding list.
+* `editw 2 n/Maria and Mario d/01/08/2024` edits the name and date of the 2nd wedding on the wedding list.
 
 
 <br><br/>
