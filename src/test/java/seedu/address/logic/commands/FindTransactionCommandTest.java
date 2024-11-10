@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.testutil.TypicalClients.CARL;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,7 +20,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.TransactionContainsKeywordsPredicate;
+import seedu.address.model.client.TransactionContainsKeywordsPredicate;
 
 public class FindTransactionCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -59,13 +59,13 @@ public class FindTransactionCommandTest {
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 0, Messages.format(CARL));
         TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTransactionCommand command = new FindTransactionCommand(predicate);
-        // set person list to contain only the target person
-        showPersonAtIndex(model, Index.fromOneBased(3));
-        showPersonAtIndex(expectedModel, Index.fromOneBased(3));
+        // set client list to contain only the target client
+        showClientAtIndex(model, Index.fromOneBased(3));
+        showClientAtIndex(expectedModel, Index.fromOneBased(3));
         // set isViewTransactions to true
         model.setIsViewTransactions(true);
         expectedModel.setIsViewTransactions(true);
-        // update transaction list to contain only the target person's transactions
+        // update transaction list to contain only the target client's transactions
         model.updateTransactionList(CARL.getTransactions());
         expectedModel.updateTransactionList(CARL.getTransactions());
         // find transactions in expectedModel
@@ -80,13 +80,13 @@ public class FindTransactionCommandTest {
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 2, Messages.format(CARL));
         TransactionContainsKeywordsPredicate predicate = preparePredicate("raw materials invest");
         FindTransactionCommand command = new FindTransactionCommand(predicate);
-        // set person list to contain only the target person
-        showPersonAtIndex(model, Index.fromOneBased(3));
-        showPersonAtIndex(expectedModel, Index.fromOneBased(3));
+        // set client list to contain only the target client
+        showClientAtIndex(model, Index.fromOneBased(3));
+        showClientAtIndex(expectedModel, Index.fromOneBased(3));
         // set isViewTransactions to true
         model.setIsViewTransactions(true);
         expectedModel.setIsViewTransactions(true);
-        // update transaction list to contain only the target person's transactions
+        // update transaction list to contain only the target client's transactions
         model.updateTransactionList(CARL.getTransactions());
         expectedModel.updateTransactionList(CARL.getTransactions());
         // find transactions in expectedModel
@@ -96,7 +96,7 @@ public class FindTransactionCommandTest {
     }
 
     @Test
-    public void execute_personListView_throwsCommandException() {
+    public void execute_clientListView_throwsCommandException() {
         TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTransactionCommand command = new FindTransactionCommand(predicate);
         model.setIsViewTransactions(false);
@@ -114,7 +114,7 @@ public class FindTransactionCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code PersonContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code ClientContainsKeywordsPredicate}.
      */
     private TransactionContainsKeywordsPredicate preparePredicate(String userInput) {
         return new TransactionContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));

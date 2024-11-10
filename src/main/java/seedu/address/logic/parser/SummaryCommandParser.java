@@ -9,7 +9,7 @@ import java.time.YearMonth;
 
 import seedu.address.logic.commands.SummaryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TransactionDatePredicate;
+import seedu.address.model.client.TransactionDatePredicate;
 
 /**
  * Parses input arguments and creates a new SummaryCommand object.

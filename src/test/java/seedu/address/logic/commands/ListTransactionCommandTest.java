@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showEmptyPersonList;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showEmptyClientList;
+import static seedu.address.testutil.TypicalClients.BENSON;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +25,9 @@ public class ListTransactionCommandTest {
 
     @Test
     public void execute_listAllTransactions_success() {
-        showPersonAtIndex(expectedModel, INDEX_SECOND_PERSON);
+        showClientAtIndex(expectedModel, INDEX_SECOND_CLIENT);
         expectedModel.updateTransactionList(BENSON.getTransactions());
-        assertCommandSuccess(new ListTransactionCommand(INDEX_SECOND_PERSON), model,
+        assertCommandSuccess(new ListTransactionCommand(INDEX_SECOND_CLIENT), model,
                 String.format(ListTransactionCommand.MESSAGE_SUCCESS,
                         1,
                         Messages.format(BENSON)),
@@ -36,13 +36,13 @@ public class ListTransactionCommandTest {
 
     @Test
     public void execute_emptyList_throwCommandException() {
-        showEmptyPersonList(model);
+        showEmptyClientList(model);
 
-        Index outOfBoundIndex = INDEX_FIRST_PERSON;
+        Index outOfBoundIndex = INDEX_FIRST_CLIENT;
 
         ListTransactionCommand listTransactionCommand = new ListTransactionCommand(outOfBoundIndex);
 
-        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, "listt");
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, "listt");
 
         assertCommandFailure(listTransactionCommand, model, expectedMessage);
 
@@ -50,24 +50,24 @@ public class ListTransactionCommandTest {
 
     @Test
     public void execute_listTransactionsInvalidIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
         ListTransactionCommand command = new ListTransactionCommand(outOfBoundIndex);
-        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_transactionListView_throwsCommandException() {
-        ListTransactionCommand command = new ListTransactionCommand(INDEX_FIRST_PERSON);
+        ListTransactionCommand command = new ListTransactionCommand(INDEX_FIRST_CLIENT);
         model.setIsViewTransactions(true);
-        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "listt");
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_CLIENT_LIST, "listt");
         assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
     public void equals() {
-        ListTransactionCommand command1 = new ListTransactionCommand(INDEX_FIRST_PERSON);
-        ListTransactionCommand command2 = new ListTransactionCommand(INDEX_FIRST_PERSON);
-        ListTransactionCommand command3 = new ListTransactionCommand(INDEX_SECOND_PERSON);
+        ListTransactionCommand command1 = new ListTransactionCommand(INDEX_FIRST_CLIENT);
+        ListTransactionCommand command2 = new ListTransactionCommand(INDEX_FIRST_CLIENT);
+        ListTransactionCommand command3 = new ListTransactionCommand(INDEX_SECOND_CLIENT);
 
         // same object -> return true
         assertTrue(command1.equals(command1));

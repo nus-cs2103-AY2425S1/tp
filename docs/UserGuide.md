@@ -294,7 +294,7 @@ Format: `findt KEYWORD [MORE_KEYWORDS]`
 </box>
 
 Examples:
-* `listt 1` followed by `findt materials invest` returns `Invest` and `Buy raw materials`, which are transactions of person 1.
+* `listt 1` followed by `findt materials invest` returns `Invest` and `Buy raw materials`, which are transactions of client 1.
 
 #### Summarising transactions within month range: `summary`
 
@@ -312,7 +312,7 @@ Format: `summary s/START_MONTH e/END_MONTH`
 </box>
 
 Examples:
-* `listt 1` followed by `summary s/2024-09 e/2024-10` summarises the transactions of person 1 within the month of September and October 2024.
+* `listt 1` followed by `summary s/2024-09 e/2024-10` summarises the transactions of client 1 within the month of September and October 2024.
 
 ### Data Management
 

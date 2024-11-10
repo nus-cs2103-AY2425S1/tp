@@ -16,17 +16,17 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Transaction;
-import seedu.address.model.person.TransactionDateComparator;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Transaction;
+import seedu.address.model.client.TransactionDateComparator;
 
 /**
- * Adds a transaction to the selected person in address book.
+ * Adds a transaction to the selected client in address book.
  */
 public class AddTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "addt";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to selected person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction to selected client. "
             + "Parameters: "
             + "INDEX (must be a positive integer) "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
@@ -46,7 +46,7 @@ public class AddTransactionCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(AddTransactionCommand.class);
 
     /**
-     * @param index index of selected person in person list to add transaction to
+     * @param index index of selected client in client list to add transaction to
      * @param transaction transaction to add
      */
     public AddTransactionCommand(Index index, Transaction transaction) {
@@ -63,32 +63,32 @@ public class AddTransactionCommand extends Command {
 
         if (model.getIsViewTransactions()) {
             logger.fine("CommandException caused by attempt to use addt command in transaction view.");
-            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, COMMAND_WORD));
+            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_CLIENT_LIST, COMMAND_WORD));
         }
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
         if (lastShownList.isEmpty()) {
-            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, COMMAND_WORD));
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, COMMAND_WORD));
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             logger.fine("CommandException caused by invalid index.");
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        assert personToEdit != null : "Person should not be null";
-        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        assert clientToEdit != null : "Client should not be null";
+        List<Transaction> transactions = new ArrayList<>(clientToEdit.getTransactions());
         transactions.add(toAdd);
         transactions.sort(new TransactionDateComparator());
 
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getCompany(), clientToEdit.getPhone(),
+                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), transactions);
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setClient(clientToEdit, editedClient);
 
         return new CommandResult(String.format(MESSAGE_ADD_TRANSACTION_SUCCESS, Messages.format(toAdd),
-                Messages.format(editedPerson)));
+                Messages.format(editedClient)));
     }
 
     @Override
