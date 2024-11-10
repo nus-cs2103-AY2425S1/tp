@@ -162,22 +162,22 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The add command allows users to add a new contact to the addressbook with required and optional fields. 
+The add command allows users to add a new contact to the addressbook with required and optional fields.
 The command format is as follows:<br>
 `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
 * **Required fields**: `NAME`, `CONTACT_TYPE`, at least one of `TELEGRAM_HANDLE`, `PHONE_NUMBER` or `EMAIL`
 * **Optional fields**: `TELEGRAM_HANDLE`, `PHONE_NUMBER`, `EMAIL`, `MODULE`, `REMARK`, `TAG`
 
-The command parser identifies each prefix (e.g. `n/`, `ct/`, `h/`) and stores the associated data in a new contact. 
+The command parser identifies each prefix (e.g. `n/`, `ct/`, `h/`) and stores the associated data in a new contact.
 The optional fields allow users to include more detailed information, making the contact record customizable.
 
 #### Key Components and Operations
 
 * **Parser**
   * The `Parser` component processes the `add` command string to extract required and optional fields.
-  * It uses prefixes (`n/`, `ct/`, `h/`, etc.) to correctly identify each piece of data and verify that required fields 
-  (`NAME`, `CONTACT_TYPE` and one of `TELEGRAM_HANDLE`, `PHONE_NUMBER`, `EMAIL`) are present. If any required field is missing, 
+  * It uses prefixes (`n/`, `ct/`, `h/`, etc.) to correctly identify each piece of data and verify that required fields
+  (`NAME`, `CONTACT_TYPE` and one of `TELEGRAM_HANDLE`, `PHONE_NUMBER`, `EMAIL`) are present. If any required field is missing,
   an error is raised, prompting the user to provide the necessary information.
 * **Logic Manager**
   * The parsed information is passed to `LogicManager#execute()`, which transfers control to the `Storage` component
@@ -209,7 +209,7 @@ The command format is as follows:<br>
 #### Key Components and Operations
 
 * **Parser (SwitchThemeCommandParser)**
-    * The `Parser` component processes the `switch` command string to extract the requested theme ('light' or 'dark'), creating a new `SwitchThemeCommand` with the specified theme. 
+    * The `Parser` component processes the `switch` command string to extract the requested theme ('light' or 'dark'), creating a new `SwitchThemeCommand` with the specified theme.
     * If the input format is invalid, a `ParseException` is raised with an error message, prompting users to enter a valid input.
 * **Logic (SwitchThemeCommand)**
     * After parsing, `SwitchThemeCommand#execute` calls `ThemeController.switchTheme()` to apply the new theme.
@@ -292,7 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to add a new contact
 2.  User enters the required contact details
-3.  UniLink validates the entered details 
+3.  UniLink validates the entered details
 4.  UniLink adds the new contact
 5.  UniLink displays the updated contact list
 
@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. User enters a duplicate contact.
 
-    * 3b1. UniLink shows an error message indicating the contact already exists. 
+    * 3b1. UniLink shows an error message indicating the contact already exists.
 
       Use case ends.
 
@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4b. The edited contact results in a duplicate
   * 4b1. UniLink shows an error message indicating that a duplicate contact already exists.
-    
+  
   Use case ends.
 
 **Use case: UC004 - View contact list**
@@ -490,20 +490,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. Saving theme preferences
+3. Saving theme preferences
 
     1. Enter the command 'switch light' or 'switch dark' to set the theme of the app. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br> 
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent theme is retained.
 
 ### Adding a person
@@ -513,21 +513,21 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee`<br>
        Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
 
-    1. Test case: `add n/Nicole 333 ct/work h/@nicole_lee`<br>
+    2. Test case: `add n/Nicole 333 ct/work h/@nicole_lee`<br>
        Expected: No person added. Error details displayed in the status message.
 
-    1. Other incorrect add commands to try: `add`, `add n/Nicole Lee`, `add Nicole Lee`, `...`<br>
+    3. Other incorrect add commands to try: `add`, `add n/Nicole Lee`, `add Nicole Lee`, `...`<br>
        Expected: Similar to previous.
 
-1. Adding a person with all fields (name, contact type, telegram handle, phone number, email, module, remark, tags)
+2. Adding a person with all fields (name, contact type, telegram handle, phone number, email, module, remark, tags)
 
     1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee p/98765432 e/nicolelee@example.com m/CS2103T r/likes coding t/friend`<br>
        Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
 
-    1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee p/98765432 e/nicolelee@example.com m/CS2103T r/likes coding t/friend t/colleague t/student`<br>
+    2. Test case: `add n/Nicole Lee ct/work h/@nicole_lee p/98765432 e/nicolelee@example.com m/CS2103T r/likes coding t/friend t/colleague t/student`<br>
        Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
 
-    1. Test case: `add Nicole Lee work @nicole_lee 98765432 nicole@example.com CS2103T likes coding friend`
+    3. Test case: `add Nicole Lee work @nicole_lee 98765432 nicole@example.com CS2103T likes coding friend`
        Expected: No person added. Error details displayed in the status message.
 
 ### Editing a person's contact details
@@ -536,26 +536,26 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `edit 1 h/@ashley_`<br>
+    2. Test case: `edit 1 h/@ashley_`<br>
        Expected: Telegram handle of first contact updated to `@ashley_`. Details of the edited contact are shown in the status message.
-   
-    1. Test case: `edit 0 h/@ashley_`<br>
+
+    3. Test case: `edit 0 h/@ashley_`<br>
        Expected: No person is edited. Error details shown in the status message.
 
-    1. Other incorrect edit commands to try: `edit h/@ashley_`, `edit 1 @ashley_`, `edit x @ashley_`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect edit commands to try: `edit h/@ashley_`, `edit 1 @ashley_`, `edit x @ashley_`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. Editing multiple fields for an existing contact (e.g. email, telegram handle)
+2. Editing multiple fields for an existing contact (e.g. email, telegram handle)
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `edit 1 e/ashley@example.com h/@ashley_`<br>
+    2. Test case: `edit 1 e/ashley@example.com h/@ashley_`<br>
        Expected: Email and telegram handle of first contact is updated to `ashley@example.com` and `@ashley_` respectively. Details of the edited contact are shown in the status message.
-   
-    1. Test case `edit 0 e/ashley@example.com h/@ashley_`<br>
+
+    3. Test case `edit 0 e/ashley@example.com h/@ashley_`<br>
        Expected: No person is edited. Error details shown in the status message.
 
-    1. Other incorrect edit commands to try: `edit e/ashley@example.com h/@ashley_`, `edit 1 e/ashley@example.com @ashley_`, `edit e/ashley@example.com h/@ashley_`, `...`<br>
+    4. Other incorrect edit commands to try: `edit e/ashley@example.com h/@ashley_`, `edit 1 e/ashley@example.com @ashley_`, `edit e/ashley@example.com h/@ashley_`, `...`<br>
        Expected: Similar to previous.
 
 ### Deleting a person
@@ -564,47 +564,47 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact are shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. 
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. Deleting a person when the list is empty
+2. Deleting a person when the list is empty
 
     1. Prerequisite: Ensure that there are no contacts in the app.
 
-    1. Test case: `delete 1`<br>
+    2. Test case: `delete 1`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x` , `...` (where x can be any number)<br>
+    3. Other incorrect delete commands to try: `delete`, `delete x` , `...` (where x can be any number)<br>
        Expected: Similar to previous.
-    
+
 
 ### Saving data
 
 1. Dealing with missing data file
 
     1. Navigate to ./data/addressbook.json and delete the addressbook.json file.
-   
-    1. Launch the app by double-clicking the jar file.<br>
+
+    2. Launch the app by double-clicking the jar file.<br>
        Expected: The default list of contacts is loaded.
 
-1. Dealing with corrupted data file
+2. Dealing with corrupted data file
 
     1. Navigate to ./data/addressbook.json. Right click the addressbook.json file and open in TextEdit.
 
-    1. Delete all the contents of the file and type some symbols (e.g. `&*$@`).
+    2. Delete all the contents of the file and type some symbols (e.g. `&*$@`).
 
-    1. Launch the app by double-clicking the jar file.<br>
+    3. Launch the app by double-clicking the jar file.<br>
        Expected: The app loads with no contacts.
-                                       
+                                 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort**   
+## **Appendix: Effort**
 This project required substantial effort due to the complexity of expanding beyond the initial structure of AddressBook Level 3 (AB3).
 The following describes the challenges, difficulty level, and effort involved, as well as achievements attained through enhancements and
 additional features.
@@ -614,7 +614,7 @@ additional features.
 * **Additional Fields**: Our project manages additional fields such as Telegram handle, module, and contact type. Integrating these fields required modifying both data structures and UI components, as well as adapting backend logic to manage and validate these new attributes.
 * **Enhanced Search Functionality**: We implemented additional search functionalities, allowing users to find contacts by tags and Telegram handles, in addition to names. This required integration of the find command with additional fields.
 * **UI Enhancements**: Significant effort went into redesigning the user interface to make it aesthetically pleasing. In addition to improving layout and visual styling, we introduced both light and dark modes, ensuring each element was clearly visible in both themes.
- 
+
 ### Effort
 
 * **Custom Implementation and Adaptation** The majority of the codebase was custom-developed to meet the specific needs of our project, with very limited reuse of existing libraries or tools beyond those provided in AB3. For example, the additional fields, search functionality, and UI customization were built from scratch, significantly increasing the project’s scope and difficulty level.
