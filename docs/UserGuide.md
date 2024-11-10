@@ -32,7 +32,7 @@ tasks done faster than traditional GUI apps.
    <br><br/>
       ![Ui](images/Ui.png)
 
-   <box type="tip" seamless>
+   <box type="tip">
 
    **If you are struggling with step 3 and/or 4, verify that you followed these steps correctly:**
     1. Create an empty folder on your Desktop called 'PlanPerfect'.
@@ -63,15 +63,17 @@ tasks done faster than traditional GUI apps.
 
 * **Output Box**: After you enter a command, any messages (informative or error-related) will be displayed here!
   
-* **Contacts Panel**: Here is where you can find your contacts. The contacts displayed here depend on the wedding you are currently viewing.
+* **Contacts Panel**: Here is where you can find your contacts. The contacts displayed here depend on the wedding 
+  you are currently viewing, any filter/find command you've applied, or show all contacts by default. 
   
-* **Weddings Panel**: Here is where you can find your weddings. The currently viewed wedding will be displayed in the blue box at the top.
+* **Weddings Panel**: Here is where you can find your weddings. The currently viewed wedding name will be displayed in 
+  the blue box at the top.
 
 <div style="page-break-after: always;"></div>
 
 ## Features
 
-<box type="info" seamless>
+<box type="info">
 
 <details open>
 
@@ -98,8 +100,7 @@ tasks done faster than traditional GUI apps.
     your contacts. However, if you are in a wedding view, using `filter` to find 
     florists will only list florists assigned to that wedding.
   * Example 2: Certain commands like `unassign` can only be used while inside a wedding view. This aligns with the 
-    logical 
-    flow of viewing the contacts already assigned to a wedding when deciding if a particular assigned contact needs to be unassigned from that wedding.
+    logical flow of viewing the contacts already assigned to a wedding when deciding if a particular assigned contact needs to be unassigned from that wedding.
 <br><br/>
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </General>
@@ -133,13 +134,11 @@ Adds a contact to the address book.
 * Address field cannot contain " n/", " p/", " e/", " a/", " t/" as these sequences of characters are reserved for parameter prefixes.
 * The order of parameters given does not matter, parameters can be in any order.
 
-<box type="warning" seamless>
+<box type="info">
 
-A contact can have up to 6 tags (including 0). No two contacts can have the same phone number.
-</box>
+A contact can have **up to 6 tags** (including 0). No two **contacts** can have the **same phone number**.
 
-<box type="info" seamless>
-After adding a contact, you will return to the main contact list view, regardless of whether you were in wedding or 
+After adding a contact, you will return to the main contact list view, regardless of whether you were in a wedding or 
 filtered view.
 </box>
 
@@ -171,9 +170,8 @@ Edits an existing contact in the address book.
 * Existing values will be updated to the input values only for the fields for which a new value is provided.
 * You cannot edit a contact's phone number to one that is held by another contact.
   
-<box type="info" seamless>
+<box type="info">
 
-**Note:**
 Tagging & Untagging (Editing of Tags) is done using the `tag` and `untag` commands, not the `edit` command!
 
 </box>
@@ -197,9 +195,8 @@ Adds one or more tags to a specific contact in the address book.
 * You can specify multiple tags in the same command by separating the tags with a space.
 * Adding a tag to a contact who already has the tag will show an error message.
 
-<box type="info" seamless>
+<box type="warning">
 
-**Note:**
 You cannot tag contacts with the word 'all'. It is restricted for the `untag` command to remove all of a contact's tags at once.
 
 </box>
@@ -254,9 +251,8 @@ Finds contacts whose names contain any of the given keywords.
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-<box type="info" seamless>
+<box type="info">
 
-**Note:**
 Execution of `find` will **always** search within all contacts, not just contacts in the current filtered or wedding view. If a `view` or `filter` command had been executed prior to the execution of `find`, the displayed list will include contacts in the "all contacts" view.
 
 </box>
@@ -279,12 +275,13 @@ Filters contacts who are tagged with all of the given tags.
 * The search for tags is case-insensitive. eg. filtering by tag `Photographer` will also show contacts tagged with `photographer`.
 * If used inside a wedding view, only contacts assigned to that wedding (with that tag) are displayed.
 
-<box type="info" seamless>
+<box type="info">
 
-**Note:**
-Successive use of `filter` commands is not cumulative. That is, suppose `filter t/foodCaterer` is input, followed by `filter t/bartender`, the displayed list will contain contacts tagged with `bartender`, rather than contacts tagged with both `foodCaterer` and `bartender`.
+* Successive use of `filter` commands is not cumulative. That is, suppose `filter t/foodCaterer` is input, followed 
+by `filter t/bartender`, the displayed list will contain contacts tagged with `bartender`, rather than contacts tagged with both `foodCaterer` and `bartender`.
 <br><br/>
-Execution of `filter` is **always** relative to the current view (all contacts OR wedding view). If a `find` command had been executed prior to the execution of `filter`, the displayed list will include contacts in the current view tagged with the provided tag(s), instead of only contacts returned by the previous `find` command. 
+* Execution of `filter` is **always** relative to the current view (all contacts OR wedding view). If a `find` 
+  command had been executed prior to the execution of `filter`, the displayed list will include contacts in the current view tagged with the provided tag(s), instead of only contacts returned by the previous `find` command. 
 
 </box>
 
@@ -319,9 +316,8 @@ Format: `sort`
 
 Sorts the contacts in the current view in alphabetical order.
 
-<box type="warning" seamless>
+<box type="warning">
 
-**Caution:**
 You will not be able to recover the previous sorting of your contacts after the running the `sort` command.
 
 </box>
@@ -335,7 +331,8 @@ Clears all contact and wedding entries in the address book.
 
 * After entering the `clear` command, a confirmation message will appear to ask you if you are sure about clearing the address book.
 * If you input `Yes` or `Y` (case-insensitive, so variations like `y`/`yEs` etc. are accepted as well), the address 
-  book will be cleared. If any other input is entered, the address book will not be cleared.
+  book will be cleared. If any other input is entered, the address book will not be cleared. This means you will 
+  lose all of your wedding and contact-related data.
 
 <br><br/>
 
@@ -356,25 +353,25 @@ Format: `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CON
 
 Adds a wedding to PlanPerfect with the specified date. Optionally allows users to pre-assign contacts to the wedding.
 
-* Running this command will create a new wedding in the wedding panel, allowing you to use its wedding index to execute relevant commands on that wedding.
+* Running this command will create a new wedding in the weddings panel, allowing you to use its wedding index to 
+  execute relevant commands on that wedding.
 * Date can be in the past (for documenting/tracking old weddings), present, or future.
 * Contact indexes must be valid in the context of the current view.
 
-<box type="warning" seamless>
+<box type="warning">
 
-  **Caution:**
-  If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the `addw` command to add a new wedding. Not doing so will mean that you are only able to add contacts from the current wedding being viewed into the new wedding.
+  If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts **BEFORE** using the `addw` command to add a new wedding. Not doing so will mean that you are only able to add contacts from the current wedding being viewed into the new wedding.
   
 </box>
 
-<box type="info" seamless>
-
-**Note:**
+<box type="info">
 
 * Inputs to the `DATE` parameter with invalid months (MM) or years (YYYY) will be rejected. 
+
 * For days (DD), the parameter will only accept values in the range 01, 02, ..., 31. If all three inputs
 are valid, but the date is not possible, the input will be automatically corrected to the nearest valid date
 before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/23)
+
 * Any other invalid inputs to the `DATE` parameter will be rejected.
 
 </box>
@@ -403,31 +400,25 @@ Format: `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
 
 Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
 
-<box type="info" seamless>
+* The edited wedding name provided must not be the name of a pre-existing wedding in PlanPerfect.
 
-**Note:** 
+
+<box type="info">
+
 Assigning/removing of contacts from a wedding (editing wedding contacts) is to be done using the `assign` and 
   `unassign` commands.
 
 </box>
 
-<box type="warning" seamless>
-
-**Caution:**
-The edited wedding name provided must not be the name of a pre-existing wedding in PlanPerfect.
-
-</box>
-
-<box type="info" seamless>
-
-**Note:**
+<box type="warning">
 
 * Inputs to the `DATE` parameter with invalid months (MM) or years (YYYY) will be rejected.
-* For days (DD), the parameter will only accept values in the range 01, 02, ..., 31. If all three inputs
-  are valid, but the date is not possible, the input will be automatically corrected to the nearest valid date
-  before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/23)
-* Any other invalid inputs to the `DATE` parameter will be rejected.
 
+* For days (DD), the parameter will only accept values in the range 01, 02, ..., 31. If all three inputs
+are valid, but the date is not possible, the input will be automatically corrected to the nearest valid date
+before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/23)
+
+* Any other invalid inputs to the `DATE` parameter will be rejected.
 </box>
 
 Examples:
@@ -447,8 +438,9 @@ Assigns contacts at the specified index's to the wedding at the specified `WEDDI
 * At least 1 `CONTACT_INDEX` must be specified when using this command.
 
 Examples:
-* `assign 1 c/2` assigns the 2nd contact in the current contact list to 1st wedding in the wedding panel.
-* `assign 3 c/1 4 5` assigns the 1st, 4th, and 5th contacts in the current contact list to the 3rd wedding in the wedding panel.
+* `assign 1 c/2` assigns the 2nd contact in the current contact list to 1st wedding in the weddings panel.
+* `assign 3 c/1 4 5` assigns the 1st, 4th, and 5th contacts in the current contact list to the 3rd wedding in the 
+  weddings panel.
 
 <br><br/>
 
@@ -460,9 +452,8 @@ Unassigns contacts at the specified index's from the wedding you are currently v
 
 * At least 1 `CONTACT_INDEX` must be specified when using this command.
 
-<box type="warning" seamless>
+<box type="warning">
 
-**Caution:**
 You must be in a wedding view to unassign contacts from that wedding (using the `view` command). You can only input contact indices
 from that wedding to be unassigned.
 
@@ -481,7 +472,7 @@ Format: `deletew WEDDING_INDEX`
 Deletes the wedding at the specified `WEDDING_INDEX`.
 
 Examples:
-* `deletew 4` deletes the 4th wedding shown on the wedding panel.
+* `deletew 4` deletes the 4th wedding shown on the weddings panel.
 
 <br><br/>
 
@@ -504,7 +495,6 @@ Advanced users are welcome to update data directly by editing that data file if 
 
 <box type="warning" seamless>
 
-**Caution:**
 If your changes to the data file makes its format invalid, PlanPerfect will discard all data and start with an empty data file the next time it is run.  Hence, you are strongly recommended to save a backup of the file before editing it.<br>
 Furthermore, certain edits can cause PlanPerfect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
@@ -522,25 +512,25 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: **How do I transfer my data to another Computer?**<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: What do I need to start using PlanPerfect?  
+**Q**: **What do I need to start using PlanPerfect?**  
 **A**: Ensure Java 17 or above is installed on your computer. Then, download the `PlanPerfect.jar` file and follow the Quick Start instructions to set up and run the application.
 
-**Q**: How do I add a contact?  
+**Q**: **How do I add a contact?**  
 **A**: Use the `add` command followed by the contact details. For example: `add n/John Doe p/98765432 e/johnd@example.com a/123 Street Name`. You can also add optional tags like this: `add n/John Doe p/98765432 e/johnd@example.com a/123 Street Name t/photographer florist`.
 
-**Q**: How can I organize my contacts with tags?  
+**Q**: **How can I organize my contacts with tags?**  
 **A**: You can add tags to each contact using the `tag` command. To see contacts with specific tags, use the `filter` command. Use `taglist` to view all active tags in alphabetical order.
 
-**Q**: What if PlanPerfect opens off-screen after moving it to a secondary monitor?  
+**Q**: **What if PlanPerfect opens off-screen after moving it to a secondary monitor?**  
 **A**: If this happens, delete the `preferences.json` file in the PlanPerfect folder and restart the app to reset the screen position.
 
-**Q**: What if my contact or wedding name contains symbols such as @, (, ) and /?
+**Q**: **What if my contact or wedding name contains symbols such as @, (, ) and /?** <br>
 **A**: PlanPerfect currently only supports alphanumeric contact and wedding names. We understand that there are names containing these characters, and plan to include support for these characters in a future release.
 
-**Q**: What do I do if the data I entered does not appear in full or is truncated which I do not want?
+**Q**: **What do I do if the data I entered does not appear in full or is truncated which I do not want?** <br>
 **A**: You can expand your window size to view the full details of the information you entered, do this for all fields you can't fully see.
 <br><br/>
 
