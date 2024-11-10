@@ -86,11 +86,14 @@ Format: `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * Phone numbers can contain only numbers and should be exactly 8 digits long. 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+   
+* A person can have any number of tags (including 0)
+* Cher considers people with the identical phone numbers as duplicates. You will not be able to add two entries with the same phone number.
+
 </div>
 
 Examples:
-* `add n/John Doe s/m r/student p/987654321 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/John Doe s/m r/student p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe s/f r/parent e/betsycrowe@example.com a/Newgate Street p/12345678`
 
 ### Listing all persons : `list`
@@ -228,6 +231,7 @@ Format: `mark INDEX`
 * Marks the attendance for the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* You cannot mark attendance for a parent. 
 
 Example:
 * `list` followed by `mark 2` marks the attendance of the the 2nd person in the Cher.
@@ -241,6 +245,8 @@ Format: `unmark INDEX`
 * Unmarks the attendance for the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* You cannot unmark attendance for a parent.
+* If the student's attendance count is initially at 0, it will remain at 0 after an unmark. You will receive a corresponding error message. 
 
 Example:
 * `list` followed by `unmark 3` unmarks the attendance of the 3rd person in Cher.
@@ -261,9 +267,13 @@ Marks attendance for all students in the displayed list.
 
 Format: `batch-mark`
 
-Example:
-* Enter `select 1 2 3` and then `batch-mark` marks the attendance of entries at index 1, 2 and 3
+* Having parents in the list will not affect the batch marking of student attendance. Parents are ignored. 
+* If the list has only parents and no students, you will receive an error message.
+* You will return to the list of all contacts after executing the command. 
 
+Example:
+* Enter `select 1 2 3` and then `batch-mark` marks the attendance of students at index 1, 2 and 3. Parents are ignored. 
+* Enter `find t/tue 4-6` and then `batch-mark` marks the attendance of all students with the tag `tue 4-6`.
 
 ### Unmark attendance for a group of students: `batch-unmark`
 
@@ -271,8 +281,18 @@ Unmarks attendance for all students in the displayed list.
 
 Format: `batch-unmark`
 
+* Having parents in the list will not affect the batch unmarking of student attendance. Parents are ignored.
+* If there are students whose attendance is already at 0 in the list, their attendance will remain at 0.
+* If the list has only parents and no students, you will receive an error message.
+* You will return to the list of all contacts after executing the command. 
+
 Example:
-* Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries at index 1, 2 and 3
+* Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of students at index 1, 2 and 3. Parents are ignored.
+* Enter `list` and then `batch-unmark` unmarks the attendance of all students in Cher.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use a mix of `find`, `select` and attendance commands to take attendance efficiently. Find contacts by tag, and `batch-mark`. Then, select absentees by index and `batch-unmark` 
+</div>
 
 ### Editing tag in a batch: `batch-edit`
 Changes all contacts from cher with containing the specified tags with a new tag. After successful execution,
