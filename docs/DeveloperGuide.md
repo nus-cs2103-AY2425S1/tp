@@ -569,9 +569,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7.  The source code should be open source.
 8.  Major bug fixes should be accompanied with a new release.
 9.  The app should not have any offensive UI elements.
-10. Features should complement each other soundly.
-
-_{More to be added}_
 
 ### Glossary
 
