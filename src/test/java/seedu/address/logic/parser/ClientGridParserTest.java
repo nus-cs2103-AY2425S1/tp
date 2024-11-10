@@ -70,7 +70,7 @@ import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.MeetingBuilder;
 import seedu.address.testutil.PropertyBuilder;
 
-public class AddressBookParserTest {
+public class ClientGridParserTest {
 
     private final ClientGridParser parser = new ClientGridParser();
 

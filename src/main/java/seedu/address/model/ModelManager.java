@@ -84,7 +84,7 @@ public class ModelManager implements Model {
     private final ReadOnlyObjectWrapper<DisplayMode> displayMode = new ReadOnlyObjectWrapper<>(DisplayMode.CLIENTS);
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given propertyBook, clientBook, meetingBook and userPrefs.
      */
     public ModelManager(ReadOnlyUserPrefs userPrefs,
                         ReadOnlyPropertyBook propertyBook, ReadOnlyClientBook clientBook,
