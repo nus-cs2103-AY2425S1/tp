@@ -122,7 +122,6 @@ Format: `find [INDEX] [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 ### General Search Rules
 - **Case-insensitive**: Searches ignore case differences. For example, `hans` will match `Hans`.
 - **Attribute-Specific Requirements**: Each attribute has specific search behaviors (see details below).
-- **`OR` Search for Keywords**: Persons matching at least one keyword will be returned. For example, `find Hans Bo` will return `Hans Gruber` and `Bo Yang`.
 
 ### Attribute-Specific Search Details
 
@@ -134,13 +133,13 @@ Format: `find [INDEX] [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 - `list` followed by `find 2` shows the 2nd person in the displayed list.
 
 ### Name (`n/KEYWORDS`)
-- **Case-insensitive** and **order-independent**: The order of keywords does not matter. For example, `find Hans Bo` will match both `Hans Gruber` and `Bo Yang`.
-- **Partial Name Search Supported**: You can search using partial names, such as `find j`, which will return persons with names like `John`.
-- **Only Full Words Are Considered**: Keywords must be full words (e.g., `Han` will not match `Hans`).
+- **Case-insensitive** and **order-independent**: The order of keywords does not matter. For example, `find Hans Bo` will match both `Hans Gruber` and `Bo Hans`.
+- **Partial Word Matching from the Start of Each Name Part**: You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
 
 ### Examples
 - `find n/John` → returns `John Doe`, `Johnny Appleseed`
-- `find n/alex david` → returns `Alex Yeoh`, `David Li`
+- `find n/alex david` → returns `Alex Yeoh`, `David Alex`
+- `find n/jo ap` → returns `John Appleseed`, `Appleseed Johnny`
 
 #### Phone Number (`p/PHONE`)
 - **Full Phone Number Required**: Partial matches will not be returned. You need to provide the complete phone number.
@@ -218,7 +217,7 @@ Format: `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 ### Partial Name (`n/KEYWORDS`)
 - Deletes the person with a name that **matches partially** with the specified `PARTIAL_NAME`.
 - **Case-insensitive** and **order-independent**: The order of keywords does not matter, and case is ignored (e.g., `delete John` matches both `john doe` and `Doe John`).
-- **Supports Partial Words**: Partial words are supported; for example, `delete j` will delete `John` if it is the only matching name.
+- **Partial Word Matching from the Start of Each Name Part**: You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
 - **Multiple Matches**: If multiple persons match the partial name, Cher will display a list of matches for the user to choose from.
 
 ### Examples
