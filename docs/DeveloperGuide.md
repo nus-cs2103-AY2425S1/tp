@@ -808,12 +808,14 @@ Prerequisites: List all patients using the `list` command. At least 1 patient in
 
 1. Test case: `addtask 1 d/Check blood pressure`
     * Expected: Task "Check blood pressure" is added to the task list for the patient with index 1. Details of the added task are displayed in the status message<br>`New task added: Check blood pressure`
-2. Test case: `addtask`
+2. Test case: Add the same task as above
+    * Expected: Error message<br>`This task already exists in the task list`
+3. Test case: `addtask`
     * Expected: Error message<br>`Invalid command format!`<br>`addtask: Adds a task to the task list. Parameters: INDEX d/DESCRIPTION`<br>`Example: addtask 1 d/Buy medication`
-3. Test case: `addtask x d/Check blood pressure` where `x` a number larger than the size of the patient list
+4. Test case: `addtask x d/Check blood pressure` where `x` a number larger than the size of the patient list
     * Expected: Error message<br>`The patient index provided is invalid`
-4. Other incorrect add task commands to try: `addtask 1 d/`, `addtask 0 d/Check blood pressure`
-    * Expected: Similar to test case 2
+5. Other incorrect add task commands to try: `addtask 1 d/`, `addtask 0 d/Check blood pressure`
+    * Expected: Similar to test case 3
 
 ### Deleting a Task
 
