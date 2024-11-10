@@ -77,7 +77,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 
 **Notes about the Command Format:**<br>
 
-* All command words are to be written in lowercase (e.g. `find`, `list`)
+* All command words (e.g. `add`, `list`) and prefixes (e.g. `n/`, `ct/`) are to be written in lowercase 
 
 * Certain fields used in commands have specific constraints (e.g., format, length). For a full list of field requirements, please refer to the [Field Constraints](#field-constraints) section.
 
