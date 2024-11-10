@@ -33,7 +33,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
 1. Ensure you have Java `17` or above installed in your Computer. You can check by opening a command terminal and typing:
     ```bash
     java -version
-    
+   
     ```
     If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
 
@@ -44,7 +44,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
 4. Open a command terminal and navigate to the folder with the `.jar` file by typing:
     ```bash
     cd path/to/your/folder
-    
+
     ```
     <br>
     
