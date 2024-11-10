@@ -763,6 +763,9 @@ Method 2:
 <a id="storage-file"></a>
 - **Storage File**: The file where EduTuTu data is automatically saved. No manual saving is needed, as data is updated after every command.
 
+<a id="substring-matching></a>
+- **Substring Matching**: A search method that returns all items containing a provided keyword.
+
 <a id="tag"></a>
 - **Tag**: A label or keyword associated with a person, which helps categorise or organise entries (e.g., `student`, `alumni`, `parent`).
 
