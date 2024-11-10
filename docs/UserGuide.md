@@ -6,8 +6,7 @@
 
 # BA€ User Guide
 
-Thank you for choosing BA€! We understand how crucial it is for salespeople like you to stay organized and efficient, especially when managing a large network of clients and making recurring sales. BA€ is designed to be your reliable assistant, helping you streamline your sales process by quickly storing and retrieving client information, so you can focus on building strong, lasting relationships and closing deals. With our powerful command-line functionality and intuitive interface, we aim to make your contact management smoother and faster than ever before.
-BA€ is a desktop app for managing contacts, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI). If you can type fast, BA€ can get your contact management tasks done faster than traditional GUI apps.
+Thank you for choosing BA€! We know how important it is for salespeople to stay organized and efficient, especially when managing a large client network and making recurring sales. BA€ is designed to be your trusted assistant, streamlining your sales process by swiftly storing and retrieving client information. This allows you to focus on building lasting relationships and closing deals. Combining the speed of a Command Line Interface (CLI) with the ease of a Graphical User Interface (GUI), BA€ ensures your contact management is smoother and faster than ever before!
 
 <!-- * Table of Contents -->
 <page-nav-print />
