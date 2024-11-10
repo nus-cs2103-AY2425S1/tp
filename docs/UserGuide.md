@@ -1,7 +1,7 @@
 ---
   layout: default.md
   title: "User Guide"
-  pageNav: 3
+  pageNav: 4
 ---
 
 # UniVerse User Guide
@@ -142,7 +142,9 @@ add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12
 
 <br>
 
-### Adding Interests: `addi`
+### Adding fields to an existing contact
+
+#### Adding Interests: `addi`
 
 Adds interest(s) to an existing contact.
 
@@ -163,7 +165,7 @@ addi in/1 i/Swimming i/Cycling
 
 <br>
 
-### Adding Work Experience: `addw`
+#### Adding Work Experience: `addw`
 
 Adds work experience to an existing contact.
 
@@ -232,7 +234,8 @@ Examples:
 
 <br>
 
-### Locating persons by name: `find`
+### Finding contacts 
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -262,7 +265,7 @@ Examples:
 
 <br>
 
-### Finding Contacts by Interest: `findi`
+#### Finding Contacts by Interest: `findi`
 
 Finds contacts with specific interests.
 
@@ -282,7 +285,7 @@ findi i/Swimming
 
 <br>
 
-### Finding Contacts by Work Experience: `findw`
+#### Finding Contacts by Work Experience: `findw`
 
 Finds contacts with specific work experiences based on **company** and optionally **role** and **year**.
 
@@ -318,27 +321,7 @@ Examples:
 
 <br>
 
-### Finding Contacts by Major: `findm`
-
-Finds contacts with a specific major from the currently displayed list.
-
-Format:
-
-```plaintext
-findm m/MAJOR
-```
-
-- `m/MAJOR`: Major or field of study.
-
-Example:
-
-```plaintext
-findm m/Computer Science
-```
-
-<br>
-
-### Finding Contacts by University: `findu`
+#### Finding Contacts by University: `findu`
 
 Finds contacts with a specific university from the currently displayed list.
 
@@ -367,6 +350,26 @@ The `findu` command operates based on the **current list of contacts displayed**
 **Example Workflow**:
 1. Type `list` to display all contacts.
 2. Use `findu u/NUS` to filter and show only contacts from NUS.
+
+<br>
+
+#### Finding Contacts by Major: `findm`
+
+Finds contacts with a specific major from the currently displayed list.
+
+Format:
+
+```plaintext
+findm m/MAJOR
+```
+
+- `m/MAJOR`: Major or field of study.
+
+Example:
+
+```plaintext
+findm m/Computer Science
+```
 
 <br>
 
@@ -407,6 +410,8 @@ exit
 ```
 
 <br>
+
+## Data Management
 
 ### Saving the data
 
