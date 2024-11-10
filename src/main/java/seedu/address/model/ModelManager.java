@@ -20,6 +20,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 
@@ -270,12 +271,20 @@ public class ModelManager implements Model {
     public void deleteTagsWithWedding(Wedding weddingToDelete) {
         Set<Person> weddingParticipants = weddingToDelete.getParticipants();
         for (Person participant : weddingParticipants) {
-            participant.getTags().removeIf(tag -> tag.getTagName().equals(weddingToDelete.getWeddingName().toString()));
-            Person newPerson = new Person(
-                    participant.getName(), participant.getPhone(), participant.getEmail(),
-                    participant.getAddress(), participant.getJob(),
-                    participant.getTags());
-            setPerson(participant, newPerson);
+            try {
+                if (addressBook.hasExactPerson(participant)) {
+                    participant.getTags()
+                            .removeIf(tag -> tag.getTagName().equals(weddingToDelete.getWeddingName().toString()));
+                    Person newPerson = new Person(
+                            participant.getName(), participant.getPhone(), participant.getEmail(),
+                            participant.getAddress(), participant.getJob(),
+                            participant.getTags());
+                    setPerson(participant, newPerson);
+                }
+            } catch (PersonNotFoundException e) {
+                // Handle the case where the person does not exist in the address book
+                System.out.println("Person not found: " + participant);
+            }
         }
     }
 
