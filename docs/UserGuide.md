@@ -93,24 +93,34 @@ Examples:
 
 ### Listing all persons: `list`
 
-Shows a list of all persons in the address book. The list can be optionally sorted by specified fields.
+Shows a list of all persons in the address book. The list can be optionally sorted by various fields to help you organize and find contacts more efficiently.
 
 Format: `list [s/SORT_FIELD] [r/]`
 
-Parameters:
-* `s/SORT_FIELD`: The field to sort by. Valid values are `name`, `email`, `income`, or `age`. If not provided, no sorting will be applied.
-* `r/`: If present, the sort order will be reversed (descending). If not present, the sort order will be ascending.
+* `s/SORT_FIELD`: The field to sort by. Valid values are:
+  * `name` - Sort by contact name
+  * `email` - Sort by email address
+* `r/`: Reverses the sort order (descending instead of ascending)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Sorting helps you quickly find contacts! For example, sort by name to easily locate someone alphabetically, or sort by age to see your youngest or oldest contacts.
+</div>
 
 Examples:
-* `list`: Lists all persons without any sorting.
-* `list s/name`: Lists all persons sorted by name in ascending order.
-* `list s/email r/`: Lists all persons sorted by email in descending order.
-* `list s/income`: Lists all persons sorted by income in ascending order.
-* `list s/age r/`: Lists all persons sorted by age in descending order.
+* `list` - Shows all contacts without any sorting
+* `list s/name` - Lists all contacts sorted alphabetically by name (A to Z)
+  <img src="images/listName.png" alt="List sorted by name">
+* `list s/email r/` - Lists all contacts sorted by email in reverse order (Z to A)
+  <img src="images/listEmail.png" alt="List sorted by email reverse">
 
-Notes:
-* If `s/SORT_FIELD` is provided without `r/`, the list will be sorted in ascending order.
-* If `r/` is provided without `s/SORT_FIELD`, it will have no effect.
+Expected outcome for `list s/name`:
+```
+Listed all persons
+Results: 
+1. Alice Pauline (Phone: 94351253)
+2. Benson Meier (Phone: 98765432)
+...
+```
 
 ### Editing a person : `edit`
 
@@ -174,23 +184,56 @@ Parameters:
 * The criteria for phone, email, address, and tags are case-insensitive and can be partial matches.
 * The criteria income group only checks for exact matches.
 
-### Viewing, adding and editing notes: `notes` 
+### Managing contact notes: `notes`
 
-Views, adds, edits, or deletes the notes of the person identified by their name or index.
+View, add, edit, or delete additional notes for any contact in your address book. Notes can help you remember important details about each contact.
 
 Format: `notes [PARAMETER]`
 
 Parameters:
-* View: [view/NAME] or [view/INDEX]
-* Add: [add/NAME nt/NOTES] or [add/INDEX nt/NOTES]
-* Edit: [edit/NAME] or [edit/INDEX]
-* Delete: [del/NAME] or [del/INDEX]
+* View: `view/NAME` or `view/INDEX`
+* Add: `add/NAME nt/NOTES` or `add/INDEX nt/NOTES`
+* Edit: `edit/NAME` or `edit/INDEX`
+* Delete: `del/NAME` or `del/INDEX`
 
-**Examples**:
-* `notes view/John Doe` OR `view/1`
-* `notes add/John Doe nt/Prefers email contact` OR `add/1 nt/Prefers email contact`
-* `notes edit/John Doe` OR `edit/1`
-* `notes del/John Doe` OR `del/1`
+<div markdown="span" class="alert alert-warning">:exclamation: **Note:**
+When using a person's name, it must exactly match their name in the address book (case-insensitive).
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Using the person's index number from the last displayed list is often easier than typing their full name!
+</div>
+
+
+Examples:
+* `notes view/John Doe` or `notes view/1` - Views John Doe's notes
+  <img src="images/notesView.png" alt="View notes">
+* `notes add/John Doe nt/Prefers phone contact` or `notes add/1 nt/Prefers phone contact` - Adds a note for John Doe
+  <img src="images/notesAdd.png" alt="Add notes">
+* `notes edit/John Doe` or `notes edit/1` - Opens a window to edit John Doe's notes
+  <img src="images/notesEdit.png" alt="Edit notes">
+* `notes del/John Doe` or `notes del/1` - Deletes all notes for John Doe
+
+Expected outcomes:
+
+For viewing notes:
+```
+Notes for John Doe:
+Prefers email contact
+```
+
+For adding notes:
+```
+Added notes for John Doe:
+Prefers email contact
+```
+
+For editing notes (opens a popup window):
+<img src="images/notesEdit2.png" alt="Edit notes window">
+
+For deleting notes:
+```
+Deleted notes for John Doe
+```
 
 ### Deleting a person : `delete`
 
@@ -285,11 +328,12 @@ _Details coming soon ..._
 ## Command summary
 
 Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+-------|------------------
+**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3` `delete James Ho`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list [s/<name/email/income/age>] [r/]`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find James Jake`
+**List** | `list [s/SORT_FIELD] [r/]` <br> • SORT_FIELD: `name`, `email`, `income`, or `age` <br> e.g., `list s/name`, `list s/email r/`, `list s/age`
+**Notes** | `notes PARAMETER` <br> • View: `notes view/NAME` or `notes view/INDEX` <br> • Add: `notes add/NAME nt/NOTES` or `notes add/INDEX nt/NOTES` <br> • Edit: `notes edit/NAME` or `notes edit/INDEX` <br> • Delete: `notes del/NAME` or `notes del/INDEX` <br> e.g., `notes view/1`, `notes add/James Ho nt/Prefers email`
 **Help** | `help`
