@@ -53,10 +53,10 @@ If you can type fast, ConTActs can get your contact management tasks done faster
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/CS1101S` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/CS1101S` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/CS1101S`, `t/MA1521 t/CS1101S` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -69,7 +69,7 @@ If you can type fast, ConTActs can get your contact management tasks done faster
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message with basic examples of commands. Copy URL button allows users to copy the link of this page for easy access to this user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -80,6 +80,8 @@ Format: `help`
 Adds a student to the contact list.
 
 Format: `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​`
+
+For more information about the different fields e.g. (`NAME`, `EMAIL`, ...), please reference [Field Constraints](#field-constraints).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
@@ -134,8 +136,8 @@ Examples:
 - `find an` returns `armin` (characters a and n are present in **a**rmi**n**) and `brian`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br> 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-- `find t/ri` returns all contacts marked with tag `friends` and `isRich` etc. <br>
-- `find alex t/colleagues` returns `Alex Yeoh` and all contacts marked with tag `colleagues`<br>
+- `find t/1` returns all students tagged with tag `MA1521` and `CS1101S` etc. <br>
+- `find alex t/CS1101S` returns `Alex Yeoh` and all students tagged with tag `CS1101S`<br>
   ![result for 'find alex t/colleagues'](images/findAlexColleaguesResult.png)
 
 <div markdown="block" class="alert alert-info">
@@ -192,7 +194,7 @@ Visual Effect:
 
 The specified tutorial box of the specified student will turn <span style="color:red">red</span>.
 
-|:exclamation: *To reduce visual clutter, an image will not be provided*.|
+|❗ *To reduce visual clutter, an image will not be provided*.|
 ---
 
 ### Resetting student's attendance : `reset`
@@ -217,7 +219,7 @@ Visual Effect:
 
 The specified tutorial box of the specified student will turn <span style="color:grey">grey</span>.
 
-|:exclamation: *To reduce visual clutter, an image will not be provided*.|
+|❗ *To reduce visual clutter, an image will not be provided*.|
 ---
 
 <div markdown="block" class="alert alert-info">
@@ -227,6 +229,13 @@ You can use the `mark`, `unmark` and `reset` commands with the wildcard `*` to u
 - `mark * tut/1` marks all students as attended for tutorial 1.
 - `unmark * tut/1` marks all students as absent for tutorial 1.
 - `reset * tut/1` resets the attendance of all students for tutorial 1.
+
+A combination of commands can be used to optimise attendance updating. e.g. *John* did not attend tutorial 1 but the rest of the students did.
+
+1. `mark * tut/1`
+2. `find john`
+3. `unmark 1 tut/1` (assuming *John* is the first student in the list)
+
 </div>
 
 ### Sorting students : `sort`
@@ -246,7 +255,8 @@ Format: `sort ORDER [n/] [i/] [tut/TUTORIAL]`
 Examples:
 
 - `sort -1 i/` sorts the student list in descending order according to student id.
-- `sort 1 tut/3` sorts the student list in ascending order according to tutorial 3 attendance.
+- `sort 1 tut/3` sorts the student list according to tutorial 3 attendance in this order: present, absent and not marked (grey box).
+- `sort -1 tut/3` sorts the student list according to tutorial 3 attendance in this order: absent, present and not marked (grey box).
 
 <div markdown="block" class="alert alert-info">
 
@@ -319,7 +329,21 @@ Click on each command to jump to their subsection.
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ConTActs home folder.
+
+**Q**: Does clicking a student's card (the individual boxes containing his/her contact information) perform any command?<br>
+**A**: Clicking the student's card does not affect any details of the student. The colour of the card will change. Clicking another student's card will restore the card to its original colour and change the colour of the other student's card.
+
+---
+
+## Field Constraints
+
+|Field|Acceptable Values|
+|---|---|
+|`NAME`|alphanumeric|
+|`STUDENT_ID`|E followed by 7 digits (0 to 9)|
+|`PHONE`|digits (0 to 9)|
+|`EMAIL`|**local-part**@**domain**<br>**local-part**:<br> - alphanumeric and special characters: (`+_.-`), not starting / ending with any special characters.<br>**domain**:<br> - end with a domain label at least 2 characters long<br> - have each domain label start and end with alphanumeric characters<br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any|
 
 ---
 
@@ -329,4 +353,4 @@ Click on each command to jump to their subsection.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
-[Back to Top](#command-summary)
+[Back to Top](#installation-guide)
