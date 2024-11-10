@@ -80,9 +80,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip 1:** Phone number can take on multiple formats, including for Singapore and foreign
+**Tip 1:** Phone number can take on multiple formats, including Singapore and foreign
 numbers (without the + symbol). This supports insurance agents with an international customer base. </br>
-**Tip 2:** A client can have any number of tags (including 0)
+**Tip 2:** A client can have any number of tags (including 0).
 </box>
 
 Examples:
