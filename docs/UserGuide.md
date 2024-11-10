@@ -18,8 +18,8 @@ KeyContacts allows you to
 
 &nbsp;
 
-KeyContacts is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, KeyContacts can get your contact management tasks done much faster than traditional GUI apps.
+KeyContacts is optimized for use via a Command Line Interface (CLI) while still being aesthetically pleasing and easy to use.
+If you type fast, you can complete your contact management tasks much faster with KeyContacts than GUI apps.
 
 <!-- * Table of Contents -->
 
@@ -29,20 +29,20 @@ If you can type fast, KeyContacts can get your contact management tasks done muc
 
 ## Table of Contents
 
-* [Quick Start](#quick-start)
-* [Command Overview](#command-overview)
-* [Student Commands](#student-commands)
+* [**Quick Start**](#quick-start)
+* [**Command Overview**](#command-overview)
+* [**Student Commands**](#student-commands)
   * [Adding a student: `add`](#adding-a-student-add)
   * [Deleting a student: `delete`](#deleting-a-student-delete)
   * [Editing a student: `edit`](#editing-a-student-edit)
   * [Assigning piano pieces to a student: `assign`](#assigning-piano-pieces-to-a-student-assign)
   * [Unassigning piano pieces from a student: `unassign`](#unassigning-piano-pieces-from-a-student-unassign)
-* [Lesson Commands](#lesson-commands)
+* [**Lesson Commands**](#lesson-commands)
   * [Scheduling a regular lesson: `schedule`](#scheduling-a-regular-lesson-schedule)
   * [Scheduling a makeup lesson: `makeup`](#scheduling-a-makeup-lesson-makeup)
   * [Cancelling a lesson: `cancel`](#cancelling-a-lesson-cancel)
   * [Uncancelling a cancelled regular lesson: `uncancel`](#uncancelling-a-cancelled-regular-lesson-uncancel)
-* [General Commands](#general-commands)
+* [**General Commands**](#general-commands)
   * [Viewing help: `help`](#viewing-help-help)
   * [Listing all students: `list`](#listing-all-students-list)
   * [Viewing the schedule: `view`](#viewing-the-schedule-view)
@@ -52,9 +52,9 @@ If you can type fast, KeyContacts can get your contact management tasks done muc
   * [Undoing the last command: `undo`](#undoing-the-last-command-undo)
   * [Redoing the last undone command: `redo`](#redoing-the-last-undone-command-redo)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
-* [FAQ](#faq)
-* [Known issues](#known-issues)
-* [Command Summary](#command-summary)
+* [**FAQ**](#faq)
+* [**Known issues**](#known-issues)
+* [**Command Summary**](#command-summary)
 
 
 <br>
@@ -232,8 +232,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`
 
 * Edits the student at the specified `INDEX`.
 * If the group is left blank (`g/`), the student will be removed from any existing group.
-* Removing a student from a group also removes all the student's lessons.
-* At least one of the optional fields must be provided.
+* Removing a student from a group also **removes all the student's lessons**.
+* **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
@@ -342,7 +342,7 @@ Cancels a lesson at a specific date and start time for the specified student in 
 
 Format: `cancel INDEX dt/DATE st/START_TIME`
 
-* Cancels a lesson for the student at the specified `INDEX`, that starts at the specified `START_TIME`.
+* Cancels a lesson for the student at the specified `INDEX`, on the specified `DATE` that starts at the specified `START_TIME`.
 * Cancelling a makeup lesson will remove it from the student's list of makeup lessons.
 * Cancelling a regular lesson adds it to a list of cancelled lessons. This is shared across students in the same group.
 * `DATE` must be a valid date in the format `DD-MM-YYYY`.
@@ -353,12 +353,13 @@ Format: `cancel INDEX dt/DATE st/START_TIME`
 Example:
 * `cancel 1 dt/15-10-2024 st/16:00` cancels a lesson on 15th Oct 2024, starting at 4pm for the 1st student.
 
-<box type="info" light theme="primary">
+<box type="tip" light>
 
-**Tip:**
+**Note:**
 
-The cancel command supports cancelling both regular and makeup lessons!<br>
-Canceled makeup lessons will be removed, while canceled regular lessons appear as a list of dates in the displayed list.
+The cancel command supports cancelling **both regular and makeup lessons**!<br>
+Canceled makeup lessons will be removed, while canceled regular lessons appear as a list of dates in the student card.
+
 </box>
 
 <br> 
@@ -382,7 +383,7 @@ Example:
 
 **Tip:**
 
-The `uncancel` command only allows uncancelling of regular lessons. To uncancel a makeup lesson, simply reschedule it with the `makeup` command.
+The `uncancel` command only allows uncancelling of regular lessons. To uncancel a makeup lesson, simply reschedule it with the [makeup](#scheduling-a-makeup-lesson-makeup) command.
 </box>
 
 <br>
@@ -454,7 +455,7 @@ Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_L
 * The order of the keywords does not matter. e.g. `n/Hans p/88197184` will fetch same list as `p/88197184 n/Hans`
 * Only the name, phone number, address, grade level and group is searched.
 * Partial inclusion of keyword will be considered a match.
-* At least one of the optional fields must be provided.
+* **At least one** of the optional fields must be provided.
 * Students matching all fields will be returned (i.e. `AND` search).
   e.g. `n/Hans p/88191784` will return `Hans Gruber; 88197184`, but not`Hans Goretzka; 88197188`
 
@@ -474,7 +475,7 @@ Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [
 * The order of prefixes DOES matter. If there are ties in the first field, later fields will be used to tie-break.
 * Only name, phone number, address, grade level and group are valid fields to sort by.
 * The sorting order must be `ASC` or  `DESC`, and is case-insensitive.
-* At least one of the optional fields must be provided.
+* **At least one** of the optional fields must be provided.
 
 To clear the sorting conditions, use the command `sort clear`.
 
