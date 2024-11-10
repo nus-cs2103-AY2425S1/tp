@@ -119,7 +119,7 @@ This screenshot shows the result of executing `list_s`.
 
 Adds a student to T_Assistant.
 
-**Format**: `add_s/as sno/STUDENT_NUMBER sn/STUDENT_NAME e/EMAIL [t/TAG]...`
+**Format**: `add_s sno/STUDENT_NUMBER sn/STUDENT_NAME e/EMAIL [t/TAG]...`
 
 ##### Notes
 
