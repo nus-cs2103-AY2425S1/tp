@@ -64,25 +64,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        // Handle multiple schedules
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
-
-        Set<Schedule> schedules = person.getSchedules();
-        if (schedules.isEmpty()) {
-            schedule.setText("No scheduled appointments");
-        } else {
-            String formattedSchedules = schedules.stream()
-                    .map(schedule -> {
-                        LocalDateTime dateTime = LocalDateTime.parse(schedule.getDateTime(), inputFormatter);
-                        String formattedDate = dateTime.format(outputFormatter);
-                        String noteText = schedule.getNotes();
-                        return String.format("%s [ %s ]\n", formattedDate, noteText);
-                    })
-                    .collect(Collectors.joining(""));
-            schedule.setText(formattedSchedules);
-        }
-
+        schedule.setText(formatSchedules(person.getSchedules()));
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
             reminder.setText(String.format("Reminder: %s before",
                     person.getReminder().getReminderTime()));
@@ -93,5 +75,29 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Formats the schedules of the person into a readable string.
+     *
+     * @param schedules The set of schedules.
+     * @return A formatted string of schedules or a default message if empty.
+     */
+    private String formatSchedules(Set<Schedule> schedules) {
+        if (schedules.isEmpty()) {
+            return "No scheduled appointments";
+        }
+        // Handle multiple schedules
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+
+        return schedules.stream()
+            .map(schedule -> {
+                LocalDateTime dateTime = LocalDateTime.parse(schedule.getDateTime(), inputFormatter);
+                String formattedDate = dateTime.format(outputFormatter);
+                String noteText = schedule.getNotes();
+                return String.format("%s [ %s ]\n", formattedDate, noteText);
+            })
+            .collect(Collectors.joining(""));
     }
 }
