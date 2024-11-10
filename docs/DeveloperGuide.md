@@ -772,3 +772,22 @@ testers are expected to do more *exploratory* testing.
 
     1. Open the JSON data file located in `[JAR file location]/data/eventTory.json`, make changes, and restart EventTory. <br>
        Expected: Changes are reflected in the application, but incorrect formatting (e.g., invalid JSON) should prompt the app to reset to an empty state.
+
+## **Appendix: Planned Enhancements**
+### Name similarity warning
+Notifies users when creating vendors or events with names similar to existing ones. If a user attempts to add a new vendor or event with a potentially matching name, the system alerts them to existing similar entries, prompting confirmation or suggesting alternative naming options.
+
+### Description fields for events
+Introduce a description field for each event, allowing users to add more detailed notes about the event's context, objectives, special requirements, or unique features.
+
+### Association note
+Allow users to add a short note to an association between a vendor and an event. This note can serve as a custom message or reminder specific to the event-vendor relationship, such as special instructions, deadlines, or contract details.
+
+### Fine-grained find command
+Enhance the find command to support searching within specific fields. Users can specify particular fields to search within, such as name, tag, or description. This feature will make finding items more precise and adaptable to different user needs.
+
+### Bulk unassign
+Enable users to unassign multiple vendors from an event or multiple events from a vendor in one command. This feature is especially helpful for clearing out old associations after an event concludes or for quickly reassigning vendors to different events.
+
+### Enhanced Support for Foreign Phone Numbers
+Improve the system’s ability to handle phone numbers in various international formats and with non-standard characters. This includes recognizing and storing diverse formats such as country codes, extensions, and special characters to accommodate a wider range of contact details. The current approach relies on users adding these specifiers without symbols or using tags to identify them, which can be confusing and cumbersome.
