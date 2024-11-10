@@ -296,6 +296,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Teaching Assistant                                     | view a student's contact information                                           | I can contact a student directly if required                                        |
 | `* * *`  | Teaching Assistant                                     | view a students' grades                                                        | I can have a comprehensive overview of each students' performance                   |
 | `* * *`  | Teaching Assistant                                     | record student grades                                                          | I can keep accurate records of their performance                                    |
+| `* * *`  | Teaching Assistant                                     | query different statistics about student's grades (e.g. mean, median, etc.)    | I can analyze their performance                                                     |
 | `* * *`  | Teaching Assistant                                     | list out all students                                                          | I can see who's contacts I have saved                                               |
 | `* * *`  | Teaching Assistant                                     | view students' attendance                                                      | I can keep track of when a student has not shown up to class                        |
 | `* * *`  | Teaching Assistant                                     | mark students' attendance                                                      | I can keep track of who goes to class                                               |
@@ -460,7 +461,7 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Duplicate Entry**: An attempt to add a student contact, grade, or record that already exists in the system. TAHub identifies and prevents duplicate entries based on specific criteria (e.g., matriculation number).
+* **Duplicate Entry**: An attempt to add a student contact, grade, or record that already exists in the system. TAHub identifies and prevents duplicate entries based on specific criteria (e.g., course name and email).
 * **Index**: A numerical value representing the position of a student’s contact in the TAHub system. TAs use this index to refer to a student’s record in commands.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -514,6 +515,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Back up the existing `TAHub.json` file under the data directory.
+    2. Since the data file is corrupted, the application will show a blank list of contacts.
+    3. Adding any new contacts now, will override the old file.
+    4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
+    5. Make sure to follow the constraints laid out in the user guide for each attribute of a `Person`.
+    6. If the data file is successfully repaired, running `TAHub.jar` should result in the old data being displayed back in the application.
 
-1. _{ more test cases …​ }_
