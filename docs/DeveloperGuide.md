@@ -774,7 +774,7 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 ### Duplication detection for vendors and events
-Detects and prevents the creation of duplicate vendors and events. When a user attempts to create a vendor or event with the same name as an existing one, the system should prompt the user to confirm the creation of a duplicate or suggest an alternative name.
+Detects and prevents the creation of duplicate vendors and events. When a user attempts to create a vendor or event with a similar name as an existing one, the system should prompt the user to confirm the creation or suggest an alternative name.
 
 ### Description fields for events
 Introduce a description field for each event, allowing users to add more detailed notes about the event's context, objectives, special requirements, or unique features.
