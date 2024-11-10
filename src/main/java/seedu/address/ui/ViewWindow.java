@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
@@ -28,7 +29,7 @@ public class ViewWindow extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label assignment;
+    private Text assignment;
     @FXML
     private FlowPane tags;
     @FXML
