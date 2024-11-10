@@ -709,17 +709,9 @@ Method 2:
 
 # 4. Glossary
 
-<a id="backup"></a>
-- **Backup**: A saved copy of data, which can be restored if the original data is lost or corrupted. It’s advisable to back up the JSON data file before editing it directly.
-
-<a id="bar-chart"></a>
-- **Bar Chart**: A chart with rectangular bars representing data (e.g., monthly payments) on the x-axis and values on the y-axis, helpful for viewing trends over time.
 
 <a id="class-id"></a>
 - **Class ID**: A unique identifier assigned to each class within EduTuTu, helping to organise and locate students in specific classes (e.g., `CS2100`, `ES2660`).
-
-<a id="clear"></a>
-- **Clear**: A command used to remove all entries from the address book, resetting the data.
 
 <a id="cli-command-line-interface"></a>
 - **CLI (Command Line Interface)**: An interface where users type commands to interact with the application. CLI allows for quick and precise control, often preferred by users familiar with typing commands.
@@ -736,9 +728,6 @@ Method 2:
 <a id="edututu"></a>
 - **EduTuTu**: A desktop application designed for tuition centers to streamline student information management. It combines the speed of a Command Line Interface (CLI) with the convenience of a Graphical User Interface (GUI).
 
-<a id="exit"></a>
-- **Exit**: A command that closes the EduTuTu application safely.
-
 <a id="gui-graphical-user-interface"></a>
 - **GUI (Graphical User Interface)**: A user-friendly interface with graphical elements like buttons, icons, and windows, allowing users to interact with the application more visually.
 
@@ -748,20 +737,11 @@ Method 2:
 <a id="json-file"></a>
 - **JSON File**: A text file format for storing data in an organised way, readable by humans and computers. EduTuTu saves all data in a JSON file for easy access and editing.
 
-<a id="MONTH_PAID"></a>
+<a id="month-paid"></a>
 - **Month Paid**: A month and year combination, used for representing a month when a person has paid. (e.g., `2024-01`, `2024-12`).
 
 <a id="parameter"></a>
 - **Parameter**: A value or setting provided by the user within a command to specify details like a name or phone number. Parameters help customise commands to suit specific actions.
-
-<a id="payment-status"></a>
-- **Payment Status**: Indicates whether a student’s monthly payment is complete or pending. EduTuTu includes commands to mark payments as completed.
-
-<a id="pie-chart"></a>
-- **Pie Chart**: A circular chart divided into slices that shows the proportion of students in each class. It provides a visual overview of class distributions.
-
-<a id="storage-file"></a>
-- **Storage File**: The file where EduTuTu data is automatically saved. No manual saving is needed, as data is updated after every command.
 
 <a id="substring-matching></a>
 - **Substring Matching**: A search method that returns all items containing a provided keyword.
