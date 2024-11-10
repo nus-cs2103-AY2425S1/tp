@@ -174,7 +174,7 @@ Before diving into our features, do note that we set some specifications for nam
 * `NAME` would be the company's name, InternBuddy only allows alphanumeric characters (letters and numbers only) and spaces to represent it. <br>
   e.g. `7Eleven` is allowed but not `7-Eleven` because `-` is neither a letter nor a number.
 
-* `PHONE_NUMBER` is the company's phone number. Company phone numbers should be at least 3 digits long, does not take into account the `+` prefix and must be all numbers.
+* `PHONE_NUMBER` is the company's phone number. It must be at least 3 digits long, consist only of numbers, and cannot include the `+XXX` country code prefix.
   e.g. `85092323`, `0122345677`
 
 * InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters as well (letters and numbers only). The following special characters `+ - _ .` are allowed in `local-part` but note that:
@@ -494,6 +494,7 @@ _Details coming soon ..._
 3. **If running `java -jar internbuddy.jar` gives error**, such as terminal displaying an error, ensure that Java 17 or higher is installed. Run `java -version` to check your version. For Mac users, check if you have followed the advisory given [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html).
 4. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to 1000 companies, each with 1000 applications. Entering values beyond this range (e.g., greater than 1000) may lead to undefined behavior, so please ensure indexes stay within the specified bounds.
 5. The error message for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the domain name between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the user guide.
+6. The AddressBook currently accepts invalid phone numbers, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
 
 [back to top](#internbuddy-user-guide)
 
