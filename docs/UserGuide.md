@@ -278,8 +278,8 @@ Groups students together.
 Format: `group [g/GROUPNAME] [s/STUDENTNAME]…​`
 
 - Each group must have a unique name.
-- Only exact name matches will be added.
-- Only the name is searched.
+- Only exact student name matches will be added.
+- Only the student name is searched.
 
 ![Group](images/Group.png)
 
