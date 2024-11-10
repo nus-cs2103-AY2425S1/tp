@@ -62,6 +62,17 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
 
+### User Interface (UI) Overview
+The EZSTATE UI is organized into `five` key components:
+
+![ui](images/ui_overview_ug.png)
+
+* Menu Bar: Located at the top, this includes options such as `File` and `Help` for managing settings and accessing support.
+* Command Box: The main area where users can enter commands to interact with the app.
+* Result Display: Provides immediate feedback, displaying success or failure messages based on the user’s command.
+* List Card: Displays key information about clients or listings, depending on the user's command.
+* Chat Window: Serves as a helpful assistant, offering guidance and support through interactive communication.
+
 ### Basic Commands
 To use EZSTATE, type commands in the command box and press `Enter`. Here are a few to try:
 
