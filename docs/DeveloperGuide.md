@@ -344,7 +344,7 @@ Use case ends.
 
 1.  User chooses to add a new customer and specifies the customer details.
 2.  SellSavvy adds the customer into the list.
-3.  SellSavvy confirms the addition by displaying the newly added customer's details.
+3.  SellSavvy confirms the addition is successful by displaying the newly added customer's details.
 
 Use case ends.
 
@@ -390,7 +390,8 @@ Use case ends.
 
 1. User finds the customer index from the list.
 2. User deletes the customer by their index.
-3. SellSavvy updates the displayed list of customers and indicates that delete is successful.
+3. SellSavvy updates the displayed list of customers.
+4. SellSavvy confirms that the deletion is successful by displaying the deleted order's details.
 
 Use case ends.
 
@@ -489,16 +490,16 @@ Use case ends.
 **Use case 6: Add an Order under a Customer**
 
 * **Use Case**: UC06 - Add an Order under a Customer
-* **Preconditions**: There are orders displayed in the customer's list.
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * A new pending order will be added under the specified customer, if input parameters are valid.
 
 **MSS**
 
 1. User finds the customer index from the list.
-2. User adds the order by specifying the customer using the index and details of the order.
+2. User adds the order using the customer index and details of the order.
 3. SellSavvy adds the order under the customer.
-4. SellSavvy confirms the addition by displaying the newly added order's details and customer's list of orders.
+4. SellSavvy confirms the addition is successful by displaying the newly added order's details and customer's list of orders.
 
 Use case ends.
 
@@ -522,15 +523,15 @@ Use case ends.
   Use case ends.
 
 
-* 3a. SellSavvy detects that there is an existing pending order under the customer with a similar details.
-    * 3a1. SellSavvy gives a warning that an order with a similar details already exists.
+* 3a. SellSavvy detects that there is an existing pending order under the customer with similar details.
+    * 3a1. SellSavvy gives a warning that an order with similar details already exists.
 
   Use case resumes from step 4.
 
 **Use case 7: List a Customer's Orders**
 
 * **Use Case**: UC07 - List a Customer's Orders
-* **Preconditions**: There are orders displayed in the customer's list.
+* **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
     * Orders made by specific customer will be displayed as a list, if input parameters are valid.
 
@@ -555,10 +556,16 @@ Use case ends.
 
     Use case ends.
 
+
+* 2c. There are no orders under the specified customer.
+  * SellSavvy displays that the customer does not have any orders currently.
+
+  Use case ends.
+
 **Use case 8: Mark Order as Completed**
 
 * **Use Case**: UC08 - Mark Order as Completed
-* **Preconditions**: There are orders displayed in the customer's list.
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Specified order will be marked as “Completed” if the input parameters are valid.
 
@@ -592,7 +599,7 @@ Use case ends.
 **Use case 9: Remove "Completed" Marking from Order**
 
 * **Use Case**: UC09 - Remove "Completed" Marking from Order
-* **Preconditions**: There are orders displayed in the customer's list.
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Specified order will be reverted to "Pending" status if the input parameters are valid.
 
@@ -626,7 +633,7 @@ Use case ends.
 **Use case 10: Delete an order**
 
 * **Use Case**: UC10 - Delete an Order
-* **Preconditions**: There are orders displayed in the customer's list.
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * An order made by the customer will be deleted if input parameters are valid.
 
@@ -634,7 +641,8 @@ Use case ends.
 
 1. User finds the order they want to delete.
 2. User deletes the order by its index.
-3. SellSavvy updates the displayed list of orders that the action is successful.
+3. SellSavvy updates the displayed list of orders.
+4. SellSavvy confirms that the deletion is successful by displaying the deleted order's details.
 
 Use case ends.
 
@@ -654,7 +662,7 @@ Use case ends.
 **Use case 11: Edit an Order's Details**
 
 * **Use Case**: UC11 - Edit a Order's Details
-* **Preconditions**: There are orders displayed in the customer's list.
+* **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * The specified order's details will be overwritten if the input parameters are valid.
 
