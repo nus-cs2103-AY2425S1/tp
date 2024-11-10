@@ -1130,6 +1130,7 @@ Currently, when adding or deleting multiple medical conditions or allergies with
 This means that none of the conditions or allergies are processed, even if some are valid. 
 In the future, we plan to enhance these features by partially accepting the command—only rejecting the invalid entries and successfully adding or deleting the valid ones.
 
-5. Enchance `find`, `findNric`, `findMedCon`, `listPrio` and `list` functions to also update the Appointment List panes.
+5. **Enhance `find`, `findNric`, `findMedCon`, `listPrio` and `list` commands to update the Appointment List panel as well**
 
-Currently, commands that change the patient list panels do not update the appointment list panes to only show the appointment of the currently listed patients. Adding this feature will allow doctors to view the list of appointments of the visible patients in chronological order instead of grouped under each patient's details. 
+Currently, commands that modify the Patient List panel do not update the Appointment List panel to show only the appointments of the currently listed patients. 
+Adding this feature would allow doctors to view the appointments of the visible patients in chronological order, rather than grouped under each patient's details.
