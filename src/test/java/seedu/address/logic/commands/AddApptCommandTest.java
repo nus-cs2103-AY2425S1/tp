@@ -10,6 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DAT
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_DENTAL_AFT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIMEPERIOD_DENTAL_BEF;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -62,24 +65,82 @@ public class AddApptCommandTest {
                               + VALID_APPOINTMENT_DATE_AMY + ":"
                               + VALID_APPOINTMENT_TIMEPERIOD_AMY;
         currentSerializedAppointmentLists.add(expectedAppt);
-        Person newApptPerson = new PersonBuilder().withNric(targetPerson.getNric().value)
-                                                  .withName(targetPerson.getName().fullName)
-                                                  .withAddress(targetPerson.getAddress().value)
-                                                  .withEmail(targetPerson.getEmail().value)
-                                                  .withGender(targetPerson.getGender().value)
-                                                  .withPhone(targetPerson.getPhone().value)
-                                                  .withDateOfBirth(targetPerson.getDateOfBirth().value)
-                                                  .withPriority(targetPerson.getPriority().getPriority())
-                                                  .withAllergies(targetPerson.getAllergies()
-                                                          .stream()
-                                                          .map(x -> x.allergyName)
-                                                          .toArray(String[]::new))
-                                                  .withAppointments(currentSerializedAppointmentLists
-                                                                            .toArray(String[]::new))
-                                                  .build();
+        Person newApptPerson = new PersonBuilder(targetPerson).withAppointments(
+                currentSerializedAppointmentLists.toArray(String[]::new))
+                                                              .build();
         String expectedMessage = String.format(AddApptCommand.MESSAGE_SUCCESS_4S, nric.value,
                                                VALID_APPOINTMENT_NAME_AMY, VALID_APPOINTMENT_DATE_AMY,
                                                VALID_APPOINTMENT_TIMEPERIOD_AMY);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), newApptPerson);
+        assertCommandSuccess(addApptCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_consequtiveAppts_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        Person targetPerson = model.getFilteredPersonList().get(0);
+        Nric nric = targetPerson.getNric();
+
+        ArrayList<String> currentSerializedAppointmentLists =
+                new ArrayList<>(targetPerson.getAppointments()
+                                            .stream()
+                                            .map(x -> x.getAppointmentName() + ":"
+                                                      + x.getAppointmentDate() + ":"
+                                                      + x.getAppointmentTimePeriod())
+                                            .toList());
+
+        AddApptCommand addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric),
+                                                           VALID_APPOINTMENT_NAME_AMY,
+                                                           VALID_APPOINTMENT_DATE_AMY,
+                                                           VALID_APPOINTMENT_TIMEPERIOD_DENTAL);
+        String expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":"
+                              + VALID_APPOINTMENT_DATE_AMY + ":"
+                              + VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
+        currentSerializedAppointmentLists.add(expectedAppt);
+        Person newApptPerson = new PersonBuilder(targetPerson).withAppointments(
+                currentSerializedAppointmentLists.toArray(String[]::new))
+                                                              .build();
+        String expectedMessage = String.format(AddApptCommand.MESSAGE_SUCCESS_4S, nric.value,
+                                               VALID_APPOINTMENT_NAME_AMY, VALID_APPOINTMENT_DATE_AMY,
+                                               VALID_APPOINTMENT_TIMEPERIOD_DENTAL);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), newApptPerson);
+        assertCommandSuccess(addApptCommand, model, expectedMessage, expectedModel);
+
+        // Before
+        addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric),
+                                            VALID_APPOINTMENT_NAME_AMY,
+                                            VALID_APPOINTMENT_DATE_AMY,
+                                            VALID_APPOINTMENT_TIMEPERIOD_DENTAL_BEF);
+        expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":"
+                       + VALID_APPOINTMENT_DATE_AMY + ":"
+                       + VALID_APPOINTMENT_TIMEPERIOD_DENTAL_BEF;
+        currentSerializedAppointmentLists.add(expectedAppt);
+        newApptPerson = new PersonBuilder(targetPerson).withAppointments(
+                currentSerializedAppointmentLists.toArray(String[]::new))
+                                                       .build();
+        expectedMessage = String.format(AddApptCommand.MESSAGE_SUCCESS_4S, nric.value,
+                                        VALID_APPOINTMENT_NAME_AMY, VALID_APPOINTMENT_DATE_AMY,
+                                        VALID_APPOINTMENT_TIMEPERIOD_DENTAL_BEF);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), newApptPerson);
+        assertCommandSuccess(addApptCommand, model, expectedMessage, expectedModel);
+
+        // After
+        addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric),
+                                            VALID_APPOINTMENT_NAME_AMY,
+                                            VALID_APPOINTMENT_DATE_AMY,
+                                            VALID_APPOINTMENT_TIMEPERIOD_DENTAL_AFT);
+        expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":"
+                       + VALID_APPOINTMENT_DATE_AMY + ":"
+                       + VALID_APPOINTMENT_TIMEPERIOD_DENTAL_AFT;
+        currentSerializedAppointmentLists.add(expectedAppt);
+        newApptPerson = new PersonBuilder(targetPerson).withAppointments(
+                currentSerializedAppointmentLists.toArray(String[]::new))
+                                                       .build();
+        expectedMessage = String.format(AddApptCommand.MESSAGE_SUCCESS_4S, nric.value,
+                                        VALID_APPOINTMENT_NAME_AMY, VALID_APPOINTMENT_DATE_AMY,
+                                        VALID_APPOINTMENT_TIMEPERIOD_DENTAL_AFT);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), newApptPerson);
         assertCommandSuccess(addApptCommand, model, expectedMessage, expectedModel);
     }

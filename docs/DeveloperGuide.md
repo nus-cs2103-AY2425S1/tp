@@ -15,7 +15,8 @@ Generative AI tools (ChatGPT, Copilot) were used for creating test cases, writin
 
 The following Java libraries were also used in the development of MediBase3:
 - [JavaFX](https://openjfx.io/) for the GUI
-- [JUnit 5](https://junit.org/junit5/) for testing
+- [JUnit5](https://junit.org/junit5/) for testing
+- [Jackson](https://github.com/FasterXML/jackson) for processing JSON files
 
 [Back to Table of Contents](#table-of-contents)
 ## **Setting up, getting started**
@@ -165,6 +166,16 @@ This section describes some noteworthy details on how certain features are imple
 
 This command enables the addition of an `Appointment` for a specified `Person` in the `Model`. Its implementation involves coordinated updates between the `Model` and UI.
 
+As a refresher, this is the addAppt command as described in the User Guide:
+
+> **Format**: 
+> `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
+> 
+> **Example**:
+> `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` schedules a `Dental` appointment for the patient with `NRIC` `S1234567A` on `2024-10-27`, from `1100` to `1200`.
+> 
+
+
 #### Overview
 
 When executed, this command parses user input and creates an internal representation of the appointment data. The sequence proceeds as follows:
@@ -311,29 +322,30 @@ The following activity diagram summarizes what happens when a user executes a ne
 [Back to Table of Contents](#table-of-contents)
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :star: :star:, Low (unlikely to have) - :star:
 
-| Priority | As a …​           | I want to …​                                                                | So that I can…​                                                                                                                                                       |
-|----------|-------------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | doctor            | add new records                                                             | keep track of my existing patients' details                                                                                                                           |
-| `* * *`  | doctor            | delete records                                                              | remove entries of patients no longer existing                                                                                                                         |
-| `* * *`  | doctor            | edit records                                                                | amend outdated information in the patients' record                                                                                                                    |
-| `* * *`  | busy doctor       | search for a patient by name                                                | quickly access their records                                                                                                                                          |
-| `* * *`  | busy doctor       | search for a patient by NRIC                                                | quickly access their records                                                                                                                                          |
-| `* * *`  | doctor            | schedule an appointment with a patient                                      | manage my daily workload effectively                                                                                                                                  |
-| `* * *`  | doctor            | delete an appointment with a patient                                        | cancel an appointment                                                                                                                                                 |
-| `* * *`  | doctor            | list all records                                                            | look through all contacts                                                                                                                                             |
-| `* *`    | doctor            | view all my appointments                                                    | know the appointments I have on a certain day                                                                                                                         |
-| `* *`    | meticulous doctor | remove a medical condition from a patient's record                          | retrieve the most accurate and up-to-date version of my patient's information, reflecting their current health status                                                 |
-| `* *`    | meticulous doctor | remove an allergy from a patient's record                                   | ensure my patient's medical information is current and accurate, which helps me make better decisions when prescribing medication and avoid unnecessary complications |
-| `* *`    | meticulous doctor | assign a specific condition to a patient                                    | pay extra care to it during consultation and diagnosis                                                                                                                |
-| `* *`    | meticulous doctor | assign a specific allergy to a patient                                      | pay extra care when prescribing medication                                                                                                                            |
-| `*`      | focused doctor    | want to search patients by medical condition                                | focus on those with similar treatment plans                                                                                                                           |
-| `*`      | busy doctor       | assign priority level to a patient                                          | manage urgent cases more effectively                                                                                                                                  |
-| `*`      | busy doctor       | view all my urgent cases                                                    | attend to those with urgent needs first                                                                                                                               |
-| `*`      | doctor            | press [↑] to fill the command-line-box with the previous command I keyed in | amend errors in the last command I typed easily                                                                                                                       |
-| `*`      | doctor            | clear all sample data                                                       | insert my own patient details into MediBase3                                                                                                                          |
-| `*`      | doctor            | access the user guide easily                                                | quickly understand how to use the application's feature                                                                                                               |
+| Priority                                           | As a …            | I want to …                                                                 | So that I can…                                                                                                                                                        |
+|----------------------------------------------------|-------------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| *:star::star::star:*{: style="white-space:nowrap"} | doctor            | add new records                                                             | keep track of my existing patients' details                                                                                                                           |
+| *:star::star::star:*{: style="white-space:nowrap"} | doctor            | delete records                                                              | remove entries of patients no longer existing                                                                                                                         |
+| *:star::star::star:*{: style="white-space:nowrap"} | doctor            | edit records                                                                | amend outdated information in the patients' record                                                                                                                    |
+| *:star::star::star:*{: style="white-space:nowrap"} | busy doctor       | search for a patient by name                                                | quickly access their records                                                                                                                                          |
+| *:star::star::star:*{: style="white-space:nowrap"} | busy doctor       | search for a patient by NRIC                                                | quickly access their records                                                                                                                                          |
+| *:star::star::star:*{: style="white-space:nowrap"} | doctor            | schedule an appointment with a patient                                      | manage my daily workload effectively                                                                                                                                  |
+| *:star::star::star:*{: style="white-space:nowrap"} | doctor            | delete an appointment with a patient                                        | cancel an appointment                                                                                                                                                 |
+| *:star::star::star:*{: style="white-space:nowrap"} | doctor            | list all records                                                            | look through all contacts                                                                                                                                             |
+| :star::star:                                       | doctor            | view all my appointments                                                    | know the appointments I have on a certain day                                                                                                                         |
+| :star::star:                                       | meticulous doctor | remove a medical condition from a patient's record                          | retrieve the most accurate and up-to-date version of my patient's information, reflecting their current health status                                                 |
+| :star::star:                                       | meticulous doctor | remove an allergy from a patient's record                                   | ensure my patient's medical information is current and accurate, which helps me make better decisions when prescribing medication and avoid unnecessary complications |
+| :star::star:                                       | meticulous doctor | assign a specific condition to a patient                                    | pay extra care to it during consultation and diagnosis                                                                                                                |
+| :star::star:                                       | meticulous doctor | assign a specific allergy to a patient                                      | pay extra care when prescribing medication                                                                                                                            |
+| :star:                                             | focused doctor    | want to search patients by medical condition                                | focus on those with similar treatment plans                                                                                                                           |
+| :star:                                             | busy doctor       | assign priority level to a patient                                          | manage urgent cases more effectively                                                                                                                                  |
+| :star:                                             | busy doctor       | view all my urgent cases                                                    | attend to those with urgent needs first                                                                                                                               |
+| :star:                                             | doctor            | press [↑] to fill the command-line-box with the previous command I keyed in | amend errors in the last command I typed easily                                                                                                                       |
+| :star:                                             | doctor            | clear all sample data                                                       | insert my own patient details into MediBase3                                                                                                                          |
+| :star:                                             | doctor            | access the user guide easily                                                | quickly understand how to use the application's feature                                                                                                               |
+
 [Back to Table of Contents](#table-of-contents)
 ### Use cases
 
@@ -350,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 2a. The patient already exists in MediBase3.
+* 2a. The user provides an existing patient in MediBase3.
 
     * 2a1. MediBase3 informs user of the error.
   
@@ -375,23 +387,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-    * 3a1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
   
         Use case resumes at step 2.
 
 
-* 3b. User provides a field that is not in the expected format.
+* 2b. User provides a field that is not in the expected format.
 
-    * 3b1. MediBase3 informs user of the error.
+    * 2b1. MediBase3 informs user of the error.
   
         Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2c. User provides multiple instances of the same field for the patient.
 
-    * 3b1. MediBase3 informs user of the error.
+    * 2c1. MediBase3 informs user of the error.
   
         Use case resumes at step 2.
 
@@ -402,15 +414,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User requests to find a patient by with a specific keyword in their name
 2. MediBase3 checks each patient's name in the list that contains the keyword
-4. MediBase3 shows the selected patient information that match the criteria
+3. MediBase3 shows the selected patient information that match the criteria
 
    Use case ends
 
 **Extensions:**
 
-* 4a. No patient found with the given name.
+* 2a. No patient found with the given name.
 
-    * 4a1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
   
         Use case ends.
 
@@ -420,17 +432,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 1. User requests to find a patient by NRIC
-2. MediBase3 request for search requirements
-3. User provides the details required to search for the patient
-4. MediBase3 shows the selected patient information
+2. User provides the details required to search for the patient
+3. MediBase3 shows the selected patient information
 
    Use case ends
 
 **Extensions:**
 
-* 4a. No patient found with the given NRIC.
+* 2a. User provides a non-existing patient detail.
 
-    * 4a1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
 
         Use case ends.
 
@@ -441,15 +452,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 1. User requests to find a patient by with a specific keyword in their medical condition
 2. MediBase3 checks each patient's medical condition in the list that contains the keyword
-4. MediBase3 shows the selected patient information that match the criteria
+3. MediBase3 shows the selected patient information that match the criteria
 
    Use case ends
 
 **Extensions:**
 
-* 4a. No patient found with the given medical condition.
+* 2a. No patient found with the given medical condition.
 
-    * 4a1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
 
       Use case ends.
 
@@ -463,6 +474,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends
 
+**Extensions:**
+
+* 2a. Medibase is unable to list patient details
+
+    * 2a1. MediBase3 does not show any patients.
+
+      Use case ends.
 ---
 
 **Use case:** UC7 - List Patients By Priority
@@ -474,6 +492,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extensions:**
+
+* 2a. User provides invalid patient details.
+
+    * 2a1. MediBase3 does not show any patients.
+
+      Use case ends.
 ---
  
 **Use case:** UC8 - Add Appointment
@@ -487,15 +512,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. User provides a field that is not in the expected format.
+* 2a. User provides a field that is not in the expected format.
 
-    * 3a1. MediBase3 informs the user of the error.
+    * 2a1. MediBase3 informs the user of the error.
   
       Use case resumes at step 2.
 
-* 3b. User provides multiple instances of the same field for the appointment.
+* 2b. User provides multiple instances of the same field for the appointment.
 
-    * 3b1. MediBase3 informs the user of the error.
+    * 2b1. MediBase3 informs the user of the error.
   
       Use case resumes at step 2.
 
@@ -512,15 +537,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. User provides a field that is not in the expected format.
+* 2a. User provides a field that is not in the expected format.
 
-    * 3a1. MediBase3 informs the user of the error.
+    * 2a1. MediBase3 informs the user of the error.
 
       Use case resumes at step 2.
 
-* 3b. User provides multiple instances of the same field for the medical condition.
+* 2b. User provides multiple instances of the same field for the medical condition.
 
-    * 3b1. MediBase3 informs the user of the error.
+    * 2b1. MediBase3 informs the user of the error.
 
       Use case resumes at step 2.
 
@@ -537,15 +562,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. User provides a field that is not in the expected format.
+* 2a. User provides a field that is not in the expected format.
 
-    * 3a1. MediBase3 informs the user of the error.
+    * 2a1. MediBase3 informs the user of the error.
   
       Use case ends.
 
-* 3b. User provides multiple instances of the same field for the medical condition.
+* 2b. User provides multiple instances of the same field for the medical condition.
 
-    * 3b1. MediBase3 informs the user of the error.
+    * 2b1. MediBase3 informs the user of the error.
 
       Use case ends.
 
@@ -587,23 +612,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-  * 3a1. MediBase3 informs user of the error.
-
-    Use case resumes at step 2.
-
-
-* 3b. User provides a field that is not in the expected format.
-
-  * 3b1. MediBase3 informs user of the error.
+  * 2a1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2b. User provides a field that is not in the expected format.
 
-  * 3b1. MediBase3 informs user of the error.
+  * 2b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 2c. User provides multiple instances of the same field for the patient.
+
+  * 2c1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
@@ -620,23 +645,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-  * 3a1. MediBase3 informs user of the error.
-
-    Use case resumes at step 2.
-
-
-* 3b. User provides a field that is not in the expected format.
-
-  * 3b1. MediBase3 informs user of the error.
+  * 2a1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2b. User provides a field that is not in the expected format.
 
-  * 3b1. MediBase3 informs user of the error.
+  * 2b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 2c. User provides multiple instances of the same field for the patient.
+
+  * 2c1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
@@ -653,23 +678,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-  * 3a1. MediBase3 informs user of the error.
-
-    Use case resumes at step 2.
-
-
-* 3b. User provides a field that is not in the expected format.
-
-  * 3b1. MediBase3 informs user of the error.
+  * 2a1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2b. User provides a field that is not in the expected format.
 
-  * 3b1. MediBase3 informs user of the error.
+  * 2b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 2c. User provides multiple instances of the same field for the patient.
+
+  * 2c1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
@@ -686,23 +711,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-    * 3a1. MediBase3 informs user of the error.
-
-      Use case resumes at step 2.
-
-
-* 3b. User provides a field that is not in the expected format.
-
-    * 3b1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
 
       Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2b. User provides a field that is not in the expected format.
 
-    * 3b1. MediBase3 informs user of the error.
+    * 2b1. MediBase3 informs user of the error.
+
+      Use case resumes at step 2.
+
+
+* 2c. User provides multiple instances of the same field for the patient.
+
+    * 2b1. MediBase3 informs user of the error.
 
       Use case resumes at step 2.
 
@@ -724,19 +749,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 
-* **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
+* **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose".
 
 * **Appointment**: A scheduled meeting between a patient and a doctor, encompassing a specific date, time period and description.
 
-* **Appointment List**: A list of appointments of all patients, displayed chronologically on the right hand side of the application.
+* **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
 * **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient. It should start with a letter (S, T, G, F or M), followed by 7 digits, and end with a letter.
 
 * **Priority**: Indicates the urgency of a patient’s condition, with values like none, low, medium, or high to assist doctors in managing urgent cases.
 
-* **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
+* **Person**: The base object that represents each patient.
 
-* **Patient List**: A list of patients and their details displayed on the left hand side of the application.
+* **AddressBook**: The underlying class that holds the all `Person` records.
+
+* **Manager**: Any implementation of the following:
+    
+    * **Model**: The interface that controls the changes to `AddressBook`.
+
+    * **Logic**: The interface that controls the creation and dispatch of a `Command`.
+
+    * **Storage**: The interface that controls the reading and saving of any data to disk.
+
+* **Parser**: Any class that parses a given input into appropriate arguments.
+
+* **Panel**: A section of the graphical user interface that displays a certain item such as:
+
+    * **Patient List**: A list of patients and their details displayed on the left hand side of the application.
+
+    * **Appointment List**: A list of appointments of all patients, displayed chronologically on the right hand side of the application.
+
+    * **Command Box:** Where you can type and enter commands.
+
+    * **Result Display:** Shows the result of the command you entered.
+
+    * **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
+
+    * **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
+
+* **Card**: An entry in a List Panel.
 
 [Back to Table of Contents](#table-of-contents)
 

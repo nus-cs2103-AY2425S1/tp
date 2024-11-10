@@ -2,7 +2,7 @@
 
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F12-3/tp/graph/badge.svg?token=HSIAMD7AYQ)](https://codecov.io/gh/AY2425S1-CS2103T-F12-3/tp)
 
-![Ui](docs/images/medibase3Ui.png)
+![Ui](docs/images/Ui.png)
 
 # MediBase3
 

@@ -111,24 +111,42 @@ public class Appointment implements Comparable<Appointment> {
     public boolean isClashing(String date, String timePeriod) throws IllegalValueException {
         requireNonNull(date);
         requireNonNull(timePeriod);
+
+        if (!date.equals(appointmentDate)) {
+            // invalid dates will also trigger this and return false
+            return false;
+        }
+
+        if (isSameDateTime(date, timePeriod)) {
+            return true;
+        }
+
         checkIsTimePeriodValid(timePeriod);
         LocalTime startTime = getTimeFromString(timePeriod.substring(0, 4));
         LocalTime endTime = getTimeFromString(timePeriod.substring(5, 9));
 
-        if (!date.equals(appointmentDate)) {
-            return false;
-        }
 
-        if (timePeriod.equals(appointmentTimePeriod)) {
-            return true;
-        }
+        // ast----aet
+        // -----|--^--|-------
+        //     st     et
 
-        boolean isApptEndingDuringTimePeriod = appointmentEndTime.isBefore(startTime)
-                                               && !(appointmentStartTime.isBefore(endTime));
-        boolean isApptStartingDuringTimePeriod = appointmentEndTime.isAfter(startTime)
-                                                 && !(appointmentStartTime.isAfter(endTime));
+        boolean isApptEndingDuringTimePeriod = appointmentEndTime.isBefore(endTime)
+                                               && appointmentEndTime.isAfter(startTime);
 
-        return isApptEndingDuringTimePeriod || isApptStartingDuringTimePeriod;
+        //        ast------------aet
+        // -----|--^---|-------
+        //     st     et
+        boolean isApptStartingDuringTimePeriod = appointmentStartTime.isAfter(startTime)
+                                               && appointmentStartTime.isBefore(endTime);
+
+        // ast------------aet
+        // -----|--^--|-------
+        //     st     et
+
+        boolean isApptEnclosing = !appointmentEndTime.isBefore(endTime)
+                                  && !appointmentStartTime.isAfter(startTime);
+
+        return isApptEndingDuringTimePeriod || isApptStartingDuringTimePeriod || isApptEnclosing;
     }
 
     /**

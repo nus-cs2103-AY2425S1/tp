@@ -21,10 +21,10 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> AddressBookParser
 
-AddressBookParser .down.> XYZCommandParser: creates >
+AddressBookParser .down.> XYZCommandParser
 
-XYZCommandParser ..> XYZCommand : creates >
-AddressBookParser ..> Command : uses >
+XYZCommandParser ..> XYZCommand
+AddressBookParser ..> Command
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer

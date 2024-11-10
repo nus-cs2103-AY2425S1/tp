@@ -6,7 +6,7 @@ title: MediBase 3
 [![CI Status](https://github.com/AY2425S1-CS2103T-F12-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F12-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F12-3/tp/graph/badge.svg?token=HSIAMD7AYQ)](https://codecov.io/gh/AY2425S1-CS2103T-F12-3/tp)
 
-![Ui](images/medibase3Ui.png)
+![Ui](images/Ui.png)
 
 #### MediBase3 is a desktop application for managing your contact details.
 
