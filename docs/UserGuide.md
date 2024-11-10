@@ -7,7 +7,7 @@ PhysioPal is an **all-in-one, desktop app** specifically created to streamline d
 allowing them to focus more on patient care and less on paperwork. By seamlessly **combining the efficiency of a Command Line Interface (CLI)
 with the visual ease of a Graphical User Interface (GUI)**, PhysioPal provides a powerful and intuitive way to manage patient records,
 schedule appointments, and track payments all in one place. Designed to resolve common challenges—like long search times, duplicate records,
-and scheduling conflicts—PhysioPal simplifies client management with rapid commands for quick data entry, automated reminders, and a clear
+and scheduling conflicts—PhysioPal simplifies client management with rapid commands for quick data entry and retrieval, duplicate checks and a clear
 snapshot of all patient details. The result is a faster, more organised workflow that enables physiotherapists to deliver an exceptional
 experience to their clients without being weighed down by administrative burdens.
 
@@ -85,7 +85,7 @@ experience to their clients without being weighed down by administrative burdens
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* The parameter `NAME` is unique and case-insensitive across all commands that require it, and it will be displayed in lowercase.
+* The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b> across all commands that require it, and it will be displayed in lowercase.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -108,7 +108,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
-* The parameter `NAME` is unique and case-insensitive, and it will be displayed in lowercase.
+* The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b>, and it will be displayed in lowercase.
 * Persons in PhysioPal can share the same phone number, email and address.
 * Persons with dashes, commas, slashes and periods in name should be omitted. For example,
   persons with `s/o` or `d/o` in name should be entered as `s o` and `d o` respectively.
