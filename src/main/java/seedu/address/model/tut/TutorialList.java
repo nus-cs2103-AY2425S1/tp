@@ -4,7 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.exceptions.DuplicateTutorialException;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
@@ -90,9 +94,29 @@ public class TutorialList {
         tutorials.stream()
                 .filter(x -> x.equals(tutorial))
                 .forEach(t -> t.getStudents().stream()
-                        .forEach(student -> assignStudent(student, TutorialId.none())));
+                        .forEach(s -> {
+                            EditCommand.EditStudentDescriptor editStudentDescriptor =
+                                    new EditCommand.EditStudentDescriptor();
+                            editStudentDescriptor.setTutorialId(TutorialId.none());
+                            Student editedStudent = createEditedStudent(s, editStudentDescriptor);
+                            editedStudent.setPresentDatesEmpty();
+                            assignStudent(editedStudent, TutorialId.none());
+                        }));
         this.tutorials.remove(tutorial);
         return tut.toString();
+    }
+
+    private static Student createEditedStudent(Student studentToEdit,
+                                               EditCommand.EditStudentDescriptor editStudentDescriptor) {
+        assert studentToEdit != null;
+
+        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
+        StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
+        TutorialId updatedTutorialId = editStudentDescriptor.getTutorialId()
+                .orElse(studentToEdit.getTutorialId());
+        PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
+
+        return new Student(updatedName, updatedStudentId, updatedTutorialId, updatedDates);
     }
 
     /**
