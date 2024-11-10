@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final HiredFiredPro hiredFiredPro;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final SortedList<Person> sortedPersons;
+    private final SortedList<Person> sortedFilteredPersons;
 
 
     /**
@@ -42,7 +42,7 @@ public class ModelManager implements Model {
         this.hiredFiredPro = new HiredFiredPro(hiredFiredPro);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.hiredFiredPro.getPersonList());
-        sortedPersons = new SortedList<>(filteredPersons);
+        sortedFilteredPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -119,12 +119,13 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Person> getSortedPersonList() {
-        return sortedPersons;
+        return sortedFilteredPersons;
     }
 
     @Override
     public void updateSortedPersonList(Comparator<Person> comparator) {
-        sortedPersons.setComparator(comparator);
+        requireNonNull(comparator);
+        sortedFilteredPersons.setComparator(comparator);
     }
 
     @Override
@@ -148,7 +149,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return sortedFilteredPersons; // Changed to return sorted list instead of filtered list
     }
 
     @Override
@@ -156,6 +157,13 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    @Override
+    public ObservableList<Person> getSortedFilteredPersonList() {
+        return sortedFilteredPersons;
+    }
+
+
     @Override
     public void markAsHired(Person person) {
         // Implementation to mark the person as hired
