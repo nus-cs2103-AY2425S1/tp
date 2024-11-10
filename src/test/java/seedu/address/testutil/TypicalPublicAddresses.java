@@ -11,7 +11,7 @@ import seedu.address.model.addresses.SolAddress;
  */
 public class TypicalPublicAddresses {
     public static final String VALID_PUBLIC_ADDRESS_ETH_MAIN_STRING =
-        "0x0B1C9E1Fb5E13c797c7f0134641810E9A7ca14d2".toLowerCase(); //this is a real ETH public address
+        "0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2".toLowerCase(); //this is a real ETH public address
     public static final String VALID_PUBLIC_ADDRESS_ETH_SUB_STRING =
         "0xE859Ed4267af9f247aAB2703CebcA466C71887b2".toLowerCase(); //this is a real ETH public address
     public static final String VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING =

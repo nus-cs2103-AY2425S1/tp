@@ -71,9 +71,12 @@ If you're not familiar with these terms, don't worry—this section breaks down 
 
 **What is Distributed Ledger Technology (DLT)?**
 
-DLT refers to a digital system for recording transactions of assets in multiple places at once.
-Unlike traditional databases, DLTs do not have a central administrator, which means blockchain records are
-decentralized.
+According to [Investopedia](https://www.investopedia.com/terms/d/decentralized-technology-dlt.asp), Distributed Ledger
+Technology (DLT) is the technological infrastructure and protocols that allow simultaneous access,
+validation, and record updating across a networked database. DLT is the technology blockchains are created from, and the
+infrastructure allows users to view any changes and who made them, reduces the need to audit data, ensures data is
+reliable, and only provides access to those that need
+it.
 </box>
 
 <box type="tip" seamless>
@@ -90,16 +93,19 @@ Before diving in, let's clarify some essential terms:
 
 <box type="info" seamless>
 
-- **Blockchain**: A decentralized digital ledger that records transactions across multiple computers.
-  Acts like a currency, but it's digital and secure.
+- **Blockchain/Network**: A decentralized digital ledger that records transactions across multiple computers.
+  Acts like a currency, but it's digital and secure. (e.g., Bitcoin, Ethereum, Solana).
 
-- **Network**: A network on the blockchain (e.g., Bitcoin, Ethereum, Solana).
+- **Software Wallet/Wallet**:  A software wallet, also known simply as a wallet, is an application that exists on a
+  connected device such as a phone or computer. It is always connected to the internet.
+- [Ledger](https://www.ledger.com/academy/topics/security/what-is-a-software-wallet)
 
-- **Wallet**: A digital tool used to store, send, and receive cryptocurrencies.
+- **Wallet Name**: A label that you use tag to the wallet to identify the wallets purpose
+- (for daily transactions, for decentralised fiannce transactions, for long term storage).
 
-- **Wallet Name**: A label that you tag to the wallet.
-
-- **Public Address**: A unique identifier tagged to the wallet to interact with the blockchain (similar to an account
+- **Public Address**: A public address is a unique series of cryptographic codes that can be shared with others to
+  receive messages, coins, or tokens. [Ledger](https://www.ledger.com/academy/glossary/public-address) (similar to an
+  account
   number).
 
 - **Command Line**: A text-based interface used to run commands on your computer.
@@ -192,7 +198,7 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 3. **Add a DLT public address**
 
    ```
-   addpa c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2
+   addpa c/ETH n/Travis w/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2
    ```
 
 
@@ -437,13 +443,14 @@ Format: `addpa INDEX c/NETWORK l/LABEL pa/PUBLIC_ADDRESS`
 
 Examples:
 
-* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address
+* `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2
+* ` adds a public address
   to the first contact on the list `Alex Yeoh` under the ETH network with the wallet name `wallet1` and the public
-  address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+  address `0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`.
 
-* `addpa 4 c/BTC l/savings_wallet pa/0x71C7656EC7ab88b098defB751B7401B5f6d8976F` adds a public address to the fourth
-  contact on the list `David Li` under the BC network with the wallet name `savings_wallet` and the public address
-  `0x71C7656EC7ab88b098defB751B7401B5f6d8976F`.
+* `addpa 4 c/BTC l/savings_wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` adds a public address to the fourth
+  contact on the list `David Li` under the BTC network with the wallet name `savings_wallet` and the public address
+  `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
 
 ![img.png](img.png)
 
@@ -467,7 +474,7 @@ WALLET_NAME is NOT case-sensitive.
   The index **must be a positive integer** 1, 2, 3, …​
 
 * The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
-  `SOL`, `SUI`, etc.).
+  `SOL`, etc.).
   Allowed values: `BTC|ETH|SOL`.
 
 * The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
@@ -476,10 +483,11 @@ WALLET_NAME is NOT case-sensitive.
 
 #### Examples
 
-* `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
-  Changes the third contact's BTC public address labelled `Daily wallet` to `14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`.<br />
+* `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`<br />
+  Changes the third contact's BTC public address labelled `Daily wallet` to
+  `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.<br />
 
-* `editpa 3 c/BTC l/daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
+* `editpa 3 c/BTC l/daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`<br />
   **DOES NOT** change the third contact's BTC public address labelled `Daily wallet` as `WALLET_NAME` is
   case-sensitive.<br />
 
@@ -543,15 +551,15 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Searching for a public address : `publicAddressSearch`
+### Searching for a public address : `searchpa`
 
 Searches for a public address.
 
-Format: `publicAddressSearch pa/PUBLIC_ADDRESS`
+Format: `searchpa pa/PUBLIC_ADDRESS`
 
 <box type="tip" seamless>
 
-The fields are not cap sensitive.
+The field PUBLIC_ADDRESS is not cap sensitive.
 </box>
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
@@ -560,8 +568,8 @@ The fields are not cap sensitive.
 
 Examples:
 
-* `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` searches for a public
-  address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the contact and wallet to
+* `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` searches for a public
+  address `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` and displays the contact and wallet to
   which it belongs.
 
 <br>
@@ -660,19 +668,19 @@ the data of your previous AddressBook home folder.
 
 ## Command summary
 
-| Action                      | Format, Examples                                                                                                                                                                     |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`               |
-| **Clear**                   | `clear`                                                                                                                                                                              |
-| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                  |
-| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                         |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                           |
-| **List**                    | `list`                                                                                                                                                                               |
-| **Help**                    | `help`                                                                                                                                                                               |
-| **Exit**                    | `exit`                                                                                                                                                                               |
-| **Add Public Address**      | `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` |
-| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`                                                |
-| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                                 |
-| **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                               |
-| **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`                                                              |
-| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                                          |
+| Action                      | Format, Examples                                                                                                                                                       |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**                   | `clear`                                                                                                                                                                |
+| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                    |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             |
+| **List**                    | `list`                                                                                                                                                                 |
+| **Help**                    | `help`                                                                                                                                                                 |
+| **Exit**                    | `exit`                                                                                                                                                                 |
+| **Add Public Address**      | `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`           |
+| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                          |
+| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                   |
+| **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                 |
+| **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                                        |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                            |
