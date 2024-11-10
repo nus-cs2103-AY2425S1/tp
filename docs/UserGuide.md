@@ -120,7 +120,7 @@ add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/UNIVERSITY m/MAJOR b/BIRTHDATE [w/
 Parameters:
 
 - `n/NAME`: Full name of the contact.
-- `p/PHONE_NUMBER`: 8-15 digit phone number.
+- `p/PHONE_NUMBER`: Numeric input of any length.
 - `e/EMAIL`: Email address in `local-part@domain` format.
 - `a/ADDRESS`: Contact's address.
 - `u/UNIVERSITY`: University name. It is case-sensitive.
@@ -209,7 +209,7 @@ addw in/1 w/Intern,Google,2024
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in UniVerse.
 
 Format:
 
@@ -221,7 +221,7 @@ list
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in UniVerse.
 
 Format:
 
@@ -231,6 +231,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
 ```
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- The index should not be longer than 1000. 
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -311,9 +312,17 @@ findi i/swimming
 ```plaintext
 findi i/swim
 ```
+<br>
+
 <img src="images/findPplSwimming.png" alt="result for 'find i/swimming'" style="width: 80%;">
 
-Invalid Input: **searching by multiple interests** is not supported and will trigger an error message:
+<br><br>
+
+<box type="warning" seamless>
+
+**Caution**:
+
+Invalid Input: **Searching by multiple interests** is not supported and will trigger an error message:
 ```plaintext
 Invalid command format! 
 findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers.
@@ -338,7 +347,7 @@ findi i/reading,swimming
 ```plaintext
 findi i/reading, swimming
 ```
-
+</box>
 
 <br>
 
@@ -381,6 +390,12 @@ Examples:
 #### Finding Contacts by University: `findu`
 
 Finds contacts with a specific university from the currently displayed list.
+
+<box type="tip" seamless>
+
+**Tip:** University name is case-sensitive.
+
+</box>
 
 Format:
 ```plaintext
@@ -440,7 +455,8 @@ findm m/Comp
 ```
 <img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 80%;">
 
-<br>
+
+<br><br>
 
 ### Deleting a person : `delete`
 
@@ -514,12 +530,45 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the Help menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Major and University Field Validation**:
     - The application currently allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`), which is unintended.
     - **Limitation**: The app does not restrict users from entering numerical values or potential module codes as majors and universities.
     - **Planned Solution**: We plan to introduce stricter input validation to prevent numbers-only entries for these fields in future versions.
+4. **When adding a new user**, the birthday field is compulsory.
+5. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
+6. **When adding a new user**, the birthday field can be a date in the future. 
+---
+
+## Glossary
+
+- **CLI (Command Line Interface)**: A user interface that allows interaction with the application through text-based commands, enabling quick and efficient data entry and command execution.
+
+- **GUI (Graphical User Interface)**: The visual component of the application that users interact with. It includes buttons, panels, and other visual elements to make navigation easier.
+
+- **Keyword**: A word or phrase used to search for or filter contacts within the app (e.g., an interest or university name in search commands).
+
+- **Index**: The numerical identifier assigned to each contact in the list, used in commands such as `delete 1` or `edit 2` to specify which contact is being referenced.
+
+- **Tag**: A label attached to a contact for categorization and easy filtering. Tags help organize contacts based on shared attributes or groups.
+
+- **University**: The name of the institution where a contact is studying or has studied. This field helps users find and connect with peers from specific universities.
+
+- **Major**: The field of study that a contact is pursuing or has completed. It helps users find contacts within the same academic field.
+
+- **Work Experience**: Information detailing a contact’s professional experience, formatted as `role,company,year` (e.g., `Intern,Google,2023`).
+
+- **Interest**: A hobby or activity that a contact is interested in, used to connect with others who share similar interests.
+
+- **Find Command**: A command used to filter and display contacts based on specific criteria (e.g., `findu`, `findm`, `findi`, `findw`).
+
+- **Alphanumeric**: Refers to characters that are either letters (A-Z, a-z) or numbers (0-9). It may include symbols such as underscores (_) and hyphens (-) in certain contexts, but generally excludes special characters unless specified.
+
+- **Case-Insensitive**: A search term or keyword that matches regardless of whether it is in uppercase or lowercase (e.g., `findu u/nus` matches both "NUS" and "nus").
+
+- **Partial Match**: A feature in some commands where the search does not require an exact match of the keyword, but can find results that contain the keyword as part of a longer string (e.g., `findm m/Comp` could match "Computer Science" and "Computer Engineering").
 
 ---
 

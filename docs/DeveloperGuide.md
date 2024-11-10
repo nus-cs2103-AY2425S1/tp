@@ -292,11 +292,11 @@ _{more aspects and alternatives to be added}_
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation guide](./Documentation.md)
+* [Testing guide](./Testing.md)
+* [Logging guide](./Logging.md)
+* [Configuration guide](./Configuration.md)
+* [DevOps guide](./DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -501,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**:
 - **1a**: User enters an incomplete or improperly formatted `findw` command.
-  - **1a1**: UniVerse displays an error message indicating the proper format (e.g., "Invalid command format! Use: findw w/COMPANY[,ROLE][,YEAR]").
+  - **1a1**: UniVerse displays an error message indicating the proper format (e.g., "Invalid command format! Use: findw w/[ROLE]COMPANY[,YEAR]").
   - **1a2**: User re-enters the command with corrected input.
   - **1a3**: Use case resumes at step 1.
 - **2a**: No contacts match the specified work experience.
@@ -560,11 +560,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Command Interface**: A text-based interface where users interact with the system by typing commands instead of using graphical controls like buttons.
-* **Error Messages**: Messages provided to users to indicate problems and guide corrective actions.
-* **Auto-Save**: A feature that saves changes automatically without requiring explicit user action to prevent data loss.
+* **Alphanumeric**: Refers to a string consisting of both letters (A-Z, a-z) and numbers (0-9). It may not include special characters or symbols.
+
+* **CLI (Command Line Interface)**: A text-based user interface where commands are input to perform specific functions in a program.
+
+* **GUI (Graphical User Interface)**: A visual interface where users interact with the application using graphical elements such as buttons and icons.
+
+* **Predicate**: A function or expression that evaluates to `true` or `false`, used in the application to filter data based on specified criteria.
+
+* **JSON (JavaScript Object Notation)**: A lightweight data format used to store and exchange data, readable by both humans and machines.
+
+* **API (Application Programming Interface)**: A set of protocols and tools for building and interacting with software applications.
+
+* **Mainstream OS**: Includes widely used operating systems like Windows, Linux, Unix, and MacOS.
+
+* **Partial Match**: A search capability that returns results matching part of the query rather than the exact full query.
+
+* **Error Message**: A notification provided to users when input or commands do not meet the required format or conditions.
+
+* **Auto-Save**: A feature that ensures data is automatically saved without user intervention to prevent data loss.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -664,11 +678,11 @@ This command finds contacts by work experience. It requires a company name and a
 
 ***Expected:*** Lists all contacts who have worked at Amazon.
 
-**Test case 2:** `findw w/Meta,Intern`
+**Test case 2:** `findw w/Intern,Meta`
 
 ***Expected:***   Lists contacts who interned at Meta.
 
-**Test case 3:** `findw w/Google,Intern,2023`
+**Test case 3:** `findw w/Intern,Google,2023`
 
 ***Expected:*** Lists contacts who interned at Google in 2023.
 
@@ -678,7 +692,7 @@ This command finds contacts by work experience. It requires a company name and a
 
 ### 5. Finding Contacts by Major: `findm`
 
-This command finds contacts by major. It requires a major. Major is case insensitive. 
+This command finds contacts by major. It requires a major. Major is case insensitive. [UserGuide.md](UserGuide.md)
 
 **Test case 1:** `findm m/Business`
 
