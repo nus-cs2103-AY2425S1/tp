@@ -344,7 +344,8 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | Tutor | List all my contacts                                                   | Keep track of my contacts                                | MVP      |
 | Tutor | Categorize my students based on subjects or grade levels               | Know what type of lesson it is                           | 2        |
 | Tutor | Keep track of my students' exam dates                                  | Prepare my students adequately by then                   | 2        |
-| Tutor | Edit student details (address, fees, exam, subject, grade level, etc.) | Ensure my students' details are up to date               | 2        |
+| Tutor | Edit student details (name, phone number, email, address, tags, etc.)  | Ensure my students' details are up to date               | 2        |
+| Tutor | Edit guardian details (name, phone number, email, address, tags, etc.) | Ensure guardians' details are up to date                 | 2        |
 
 ### A little bit familiar with the software
 
