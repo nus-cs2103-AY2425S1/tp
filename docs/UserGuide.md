@@ -6,11 +6,17 @@ title: User Guide
 EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
 at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
-
+---------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+1. [Quick start](#quick-start)
+2. [Features](#features)
+3. [Person commands](#persons)
+4. [Event commands](#events)
+5. [More features](#more-features)
+6. [FAQ](#faq)
+7. [Known issues](#known-issues)
+8. [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -19,7 +25,7 @@ at the National University of Singapore. While optimised for use via a Command L
 
 1. Copy the file to the folder you want to use as the _home folder_ for EventfulNUS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eventfulnus.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
