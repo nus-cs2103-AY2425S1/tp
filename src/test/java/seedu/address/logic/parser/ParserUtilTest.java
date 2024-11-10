@@ -31,7 +31,8 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_SORT_ORDER = "2";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_TUTORIAL = "0";
+    private static final String INVALID_TUTORIAL_1 = "0";
+    private static final String INVALID_TUTORIAL_2 = "a";
     private static final String INVALID_TUTORIAL_FORMAT = "1-2-4";
     private static final String INVALID_TUTORIAL_NUMBER_IN_LIST = "[1,13]";
     private static final String INVALID_TUTORIAL_NUMBER_IN_RANGE = "1-13";
@@ -223,28 +224,41 @@ public class ParserUtilTest {
         assertEquals(1, ParserUtil.parseSortOrder(sortOrderWithWhitespace));
     }
 
+    //Singular Tutorial parsing
+    @Test
+    public void parseTutorial_validTutorial_returnsTutorial() throws Exception {
+        Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
+        assertEquals(expectedTutorial, ParserUtil.parseTutorial(VALID_TUTORIAL_1));
+    }
+
+    @Test
+    public void parseTutorial_invalidTutorial_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorial(INVALID_TUTORIAL_2));
+    }
+
+    //Multiple Tutorial parsing
     // EP: Not a number
     @Test
-    public void parseTutorial_null_throwsNullPointerException() {
+    public void parseTutorials_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorials(null));
     }
 
     // EP: Non-positive numbers
     @Test
-    public void parseTutorial_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL));
+    public void parseTutorials_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_1));
     }
 
     // EP: Positive numbers
     @Test
-    public void parseTutorial_validValueWithoutWhitespace_returnsTutorial() throws Exception {
-        Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
-        assertEquals(List.of(expectedTutorial), ParserUtil.parseTutorials(VALID_TUTORIAL_1));
+    public void parseTutorials_validValueWithoutWhitespace_returnsTutorial() throws Exception {
+        Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_2);
+        assertEquals(List.of(expectedTutorial), ParserUtil.parseTutorials(VALID_TUTORIAL_2));
     }
 
     // EP: Positive numbers with whitespace
     @Test
-    public void parseTutorial_validValueWithWhitespace_returnsTrimmedTutorial() throws Exception {
+    public void parseTutorials_validValueWithWhitespace_returnsTrimmedTutorial() throws Exception {
         String tutWithWhitespace = WHITESPACE + VALID_TUTORIAL_1 + WHITESPACE;
         Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
         assertEquals(List.of(expectedTutorial), ParserUtil.parseTutorials(tutWithWhitespace));
@@ -252,25 +266,25 @@ public class ParserUtilTest {
 
     // 1. Test for invalid range (start > end)
     @Test
-    public void parseTutorial_invalidRangeStartGreaterThanEnd_throwsParseException() {
+    public void parseTutorials_invalidRangeStartGreaterThanEnd_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_RANGE));
     }
 
     // 2. Test for invalid format (e.g., mark 1 tut/1-2-4)
     @Test
-    public void parseTutorial_invalidFormatMultipleDashes_throwsParseException() {
+    public void parseTutorials_invalidFormatMultipleDashes_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_FORMAT));
     }
 
     // 3. Test for invalid tutorial number in list (e.g., [1, 13])
     @Test
-    public void parseTutorial_invalidTutorialNumberInList_throwsParseException() {
+    public void parseTutorials_invalidTutorialNumberInList_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_LIST));
     }
 
     // 4. Test for invalid tutorial number in range (e.g., 1-13)
     @Test
-    public void parseTutorial_invalidTutorialNumberInRange_throwsParseException() {
+    public void parseTutorials_invalidTutorialNumberInRange_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_RANGE));
     }
 
