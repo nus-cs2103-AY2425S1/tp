@@ -437,7 +437,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
 * 1c. At least one of the parameters (name and/ or phone number) are invalid.
 
@@ -445,9 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1d. NovaCare detects that the patient already has a registered emergency contact.
 
-    * 1d1. NovaCare displays an error message that the patient already has a registered emergency contact.
-
-      Use case ends.
+    * 1d1. NovaCare displays an error message that the patient already has a registered emergency contact.<br>Use Case ends.
 
 **Use case: UC07 - Delete Emergency contact**
 **Preconditions: Patient list is not empty**
@@ -467,13 +465,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
 * 1d. NovaCare detects that the patient already does not have a registered emergency contact.
 
-    * 1d1. NovaCare displays an error message that the patient already does not have a registered emergency contact.
-
-      Use case ends.
+    * 1d1. NovaCare displays an error message that the patient already does not have a registered emergency contact.<br>Use case ends.
 
 **Use Case: UC08 - Add Priority**
 **Preconditions: Patient list is not empty**
@@ -493,7 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
 **Use Case: UC09 - Reset Priority**
 
@@ -525,7 +521,7 @@ Use case ends.
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
 **Use Case: UC11 - Delete Task**
 **Preconditions: Patient list and task list is not empty**
@@ -545,7 +541,7 @@ Use case ends.
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
 **Use Case: UC12 - List Tasks**
 
@@ -573,7 +569,7 @@ Use case ends.
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
 **Use Case: UC14 - Mark Task**
 **Preconditions: Patient list and task list is not empty**
@@ -593,7 +589,7 @@ Use case ends.
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
 **Use Case: UC15 - Unmark Task**
 **Preconditions: Patient list and task list is not empty**
@@ -613,7 +609,7 @@ Use case ends.
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
 **Use Case: UC16 - List Incomplete Tasks**
 
