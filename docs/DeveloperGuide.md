@@ -1,12 +1,57 @@
 ---
   layout: default.md
-  title: "Developer Guide"
+  title: "Data coNdUctorS"
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Data coNdUctorS Developer Guide
 
-<!-- * Table of Contents -->
+## Table of Contents
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+  - [UI Component](#ui-component)
+  - [Logic Component](#logic-component)
+  - [Model Component](#model-component)
+  - [Storage Component](#storage-component)
+  - [Common Classes](#common-classes)
+- [Implementation](#implementation)
+  - [Pagination](#pagination)
+    - [Implementation of Constructor](#implementation-of-constructor)
+    - [Steps to Update the List when there is a Change](#steps-to-update-the-list-when-there-is-a-change)
+  - [Status Bar Footer](#status-bar-footer----how-to-reflect-the-total-number-of-contacts)
+- [Documentation, Logging, Testing, Configuration, Dev-Ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product Scope](#product-scope)
+  - [User Stories](#user-stories)
+  - [Use Cases](#use-cases)
+    - [Add a Contact](#use-case-add-a-contact)
+    - [Listing All Contacts](#use-case-listing-all-contacts)
+    - [Deleting a Contact](#use-case-deleting-a-contact)
+    - [Deleting a Contact in a Filtered List](#use-case-deleting-a-contact-in-a-filtered-list)
+    - [Editing a Contact](#use-case-editing-a-contact)
+    - [Editing a Contact in a Filtered List](#use-case-editing-a-contact-in-a-filtered-list)
+    - [Finding a Contact by Details](#use-case-finding-a-contact-by-details)
+    - [Clearing All Contacts](#use-case-clearing-all-contacts)
+    - [Help Information](#use-case-help-information)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
+  - [Launch and Shutdown](#launch-and-shutdown)
+  - [Adding a Contact](#adding-a-contact)
+  - [Listing All Contacts](#listing-all-contacts)
+  - [Deleting a Contact](#deleting-a-contact)
+  - [Editing a Contact](#editing-a-contact)
+  - [Finding a Contact](#finding-a-contact)
+  - [Saving Data](#saving-data)
+  - [GUI Components](#gui-components)
+  - [Additional Notes](#additional-notes)
+- [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+  - [Advanced Error Messages](#advanced-error-messages)
+
+
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -15,7 +60,7 @@
 
 - Sample data for testing purpose developed by [Wu Zengfu](AboutUs.md#wu-zengfu): https://github.com/wuzengfu/tp_util
 - JavaFX Pagination documentation: https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Pagination.html
-- Code for responsive design : ChatGPT (Chua Tse Hui uses it)
+- ChatGPT used for Code for responsive design and JavaDoc comments (Chua Tse Hui, Winston, Ernest uses it)
 - Inspired by Code given for camel Case conversion (Chua Tse Hui uses it): https://www.baeldung.com/java-string-to-camel-case 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -68,7 +113,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -85,7 +130,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -118,7 +163,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="diagrams/ModelClassDiagram.svg" width="450" alt="ModelClassDiagram"/>
@@ -132,7 +177,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -143,7 +188,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
@@ -164,14 +209,14 @@ The `PaginationPanel` contains the following member/class variables:
 * `currentPageIndex`: Represents the index (0-indexed) of the current page, it is shared among all instances and hence `static`.
 * `personList`: A **reference** of `ObservableList<Person>` from `Logic` during the initialization of UI.
 
-#### Implementation of constructor ####
+#### Implementation of Constructor ####
 
 The constructor of `PaginationPanel` takes in a reference of `ObservableList<Person>` and stores it as a member variable.
 Since it is _observable_, the pagination listens to the event when there is an update of `personList`, this is implemented by
 `this.personList.addListener(this::onListItemsChanged)`. Then the constructor initializes the pagination component.
 
 
-#### Steps to update the list when there is a change ####
+#### Steps to Update the List when there is a Change ####
 
 Since the constructor adds a listener that listens to `onListItemsChanged` event on `personList`.
 The `onListItemsChanged` simply invokes `initPagination` to re-render the list displayed.
@@ -186,12 +231,12 @@ triggering `ArrayIndexOutOfBoundException`.
 4. Get the sublist to be rendered based on the calculated `fromIndex` and `endIndex`.
 5. Render the updated sublist.
 
-### Status bar footer -- how to reflect the total number of contacts 
+### Status Bar Footer -- how to reflect the total number of contacts 
 The `ModelManager` class now also stores `private final ObservableList<Contact> allContacts` on top of the `FilteredList`. This `allContacts` can be obtained subsequently by the `LogicManager` with a method provided by the ModelManager. A listener is added so that the statusbarFotoer will listen for any changes made to the `allContacts` and if so update the number accordingly.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -203,26 +248,26 @@ The `ModelManager` class now also stores `private final ObservableList<Contact> 
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
-**Target user profile**:
+**Target User Profile**:
 
 Administrative Directors of CCAs in NUS who wish to manage a database of the CCA members more effectively.
 The database size is around 50 students. These directors are tech savvy who can type fast.
 
 
-**Value proposition**: Enables users to efficiently and easily manage large CCA membership database
+**Value Proposition**: Enables users to efficiently and easily manage large CCA membership database
 (including creation, edition, and deletion of data entries).
 
 --------------------------------------------------------------------------------------------------------------------
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                     | I want to …​                                                                                                                                                                             | So that I can…​                             -                                                                                    |
 |----------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                    | search the contact information by his/her name                                                                                                                                           | find the information of this member quickly.                                                                                     |
+| `* * *`  | new user                    | search the contact information of a CCA member by his/her name or other fields                                                                                                           | find the information of this member quickly.                                                                                     |
 | `* * *`  | user                        | remove a member from the address book                                                                                                                                                    | update the address book accordingly if he is no longer in the club                                                               |
 | `* * *`  | user                        | use this app to populate the member’s details into the app database                                                                                                                      | save their details (name, year, tele handle, email address) into the database for future reference                               |
 | `* *`    | user                        | see a demonstration or tutorial for me to get started                                                                                                                                    | know how to use the app                                                                                                          |
@@ -253,10 +298,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **application** is the `data_coNdUctorS` and the **User** is the `user`, unless specified otherwise)
 
 
-**Use case: Add a contact**
+#### Use case: Add a Contact
 
 **MSS**
 1. User launches the application.
@@ -277,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Listing All Contacts
+#### Use Case: Listing All Contacts
 
 **MSS**
 1. User launches the application.
@@ -287,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Deleting a Contact
+#### Use Case: Deleting a Contact
 
 **MSS**
 1. User enters the `delete` command with the contact’s index or unique full name.
@@ -306,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Deleting a Contact in a Filtered List
+#### Use Case: Deleting a Contact in a Filtered List
 
 **MSS**
 1. User performs a search using `find` to filter contacts.
@@ -326,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Editing a Contact
+#### Use Case: Editing a Contact
 
 **MSS**
 1. User enters the `edit` command with the contact’s index or unique full name, specifying the fields to update.
@@ -349,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Editing a Contact in a Filtered List
+#### Use Case: Editing a Contact in a Filtered List
 
 **MSS**
 1. User performs a search using `find` to filter contacts.
@@ -372,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Finding a Contact by Details
+#### Use Case: Finding a Contact by Details
 
 **MSS**
 1. User enters the `find` command with specific criteria, such as name or role etc.
@@ -393,7 +438,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Clearing All Contacts
+#### Use Case: Clearing All Contacts
 
 **MSS**
 1. User enters the `clear` command.
@@ -402,7 +447,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Help Information
+#### Use Case: Help Information
 
 **MSS**
 1. User enters the `help` command.
@@ -428,24 +473,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Data changes should be automatically saved to avoid loss of data.
-5.  Should validate data entries to ensure consistency and correctness (eg. check that email format is correct etc.)
-6.  Should be able to accommodate increasing member data over time.
-7.  Should be able to retrieve and display member data within 2 seconds.
-8.  User Interface should be intuitive even for new users.
+   - The application should function on any mainstream operating system (Windows, macOS, and Linux) that supports Java 17 or above.
+
+   - The application should handle up to 1,000 members without noticeable performance lag for standard operations such as adding, editing, and searching contacts.
+
+   - A user with an above-average typing speed for English text should be able to execute commands and accomplish tasks more quickly than by relying solely using commands than using a mouse. 
+
+   - The application should operate fully offline, with no reliance on an internet connection for core functionalities, including saving and retrieving contact information.
+
+   - Comprehensive documentation should be available, including a User Guide, command references, and troubleshooting instructions, to support users and developers alike.
+
+   - The GUI should be well-organised, user-friendly, and easy to navigate for users of all experience levels, with intuitive layouts and accessible help options.
+
+   - The application should handle common user errors effectively, displaying clear error messages and suggestions to help users correct their input where possible.
+
+   - The application should support English as the default language, with future releases allowing for additional languages if necessary.
+
+   - The application should support future integration with external contact management systems, allowing for seamless data transfer if needed.
+
+   - The application should periodically create a backup of contact data, enabling users to restore from the most recent backup in the event of data loss or corruption.
+
+   - The application should be able to retrieve and display member data within 2 seconds.
+
+   - The application should  validate data entries to ensure consistency and correctness (eg. check that email format is correct etc.)
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Glossary
 
+* **Application Programming Interface (API)**: A collection of protocols and rules that enables different software applications to communicate and work together.
+
+* **Command Line Interface (CLI)**: A method of interacting with a program by typing commands into a terminal or command window.
+
+* **Confidential Contact Information**: Contact details intended to remain private and not shared with others.
+
+* **Extensible Markup Language (XML)**: A language for defining document structures that are readable by both humans and computers, enabling data sharing.
+
+* **Graphical User Interface (GUI)**: A user interaction method that involves visual elements like buttons, menus, and windows to operate a program.
+
+* **JavaScript Object Notation (JSON)**: A simple data format that allows information to be stored and exchanged in a lightweight, text-based structure.
+
+* **Main Success Scenario (MSS)**: The primary sequence of actions in a use case that achieves the intended result.
+
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+
+* **Pagination**: A technique for organising large sets of data or lists into discrete pages, making it easier to navigate and view information one section at a time. 
+
+* **User Interface (UI)**: The part of an application that users see and interact with to operate the software.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 This section provides a guide for performing manual testing on the data_coNdUctorS application. Each test case includes expected results and possible error messages for invalid inputs.
 
@@ -458,7 +539,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
@@ -509,7 +590,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-### Deleting a contact
+### Deleting a Contact
 
 1. Deleting a contact while **ALL** contacts are being shown
 
@@ -634,7 +715,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
  
-### Saving data
+### Saving Data
 
 1. Automatic Data Saving
 
@@ -667,6 +748,8 @@ testers are expected to do more *exploratory* testing.
    
    1. Test case: Add a contact, then delete a different contact.<br>
       Expected: The footer updates in real-time, displaying the current total contacts and the path of the data file. Status message shows the results of the last action.
+
+---
 
 ### Additional Notes
 
