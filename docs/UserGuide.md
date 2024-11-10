@@ -318,6 +318,8 @@ Format: `clear`
 
 Exits the program.
 
+**Note: do close all the view client windows before exiting the program** 
+
 Format: `exit`
 
 ### Showing Top 3 Upcoming Appointments
