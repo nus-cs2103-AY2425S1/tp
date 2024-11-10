@@ -10,7 +10,7 @@ public class PersonDateComparator implements Comparator<Person> {
      * Compares two persons based on their names.
      */
     public int compare(Person p1, Person p2) {
-        // Place all potential hires at the bottom as 
+        // Place all potential hires at the bottom as
         // they should not have a contract end date
         boolean isEmployeeP1 = p1.isEmployee();
         boolean isEmployeeP2 = p2.isEmployee();
