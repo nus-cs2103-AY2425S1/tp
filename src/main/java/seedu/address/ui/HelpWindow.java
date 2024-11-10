@@ -146,6 +146,9 @@ public class HelpWindow extends UiPart<Stage> {
                                 + "[g/GAME]… [t/TAG]… [pt/TIME-TIME]…`"),
                         new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] "
                                 + "[a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…`\n"),
+                        new HelpCommand("Delete", "`delete INDEX`\n"),
+                        new HelpCommand("Clear", "`clear`"),
+                        new HelpCommand("Exit", "`exit`"),
                         new HelpCommand("AddGame", "`addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`\n"),
                         new HelpCommand("EditGame", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]`\n"),
                         new HelpCommand("DeleteGame", "`deletegame INDEX g/GAME`\n"),
@@ -154,12 +157,9 @@ public class HelpWindow extends UiPart<Stage> {
                         new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]`\n"),
                         new HelpCommand("FindTime", "`findtime TIME-TIME [TIME-TIME]`\n"),
                         new HelpCommand("FindGame", "`findgame KEYWORD [MORE_KEYWORDS]'\n"),
-                        new HelpCommand("Delete", "`delete INDEX`\n"),
-                        new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("Undo", "`undo`"),
                         new HelpCommand("Save", "`save`"),
-                        new HelpCommand("Load", "`load`"),
-                        new HelpCommand("Exit", "`exit`")
+                        new HelpCommand("Load", "`load`")
                 );
         // Add data to the table
         table.setItems(data);
