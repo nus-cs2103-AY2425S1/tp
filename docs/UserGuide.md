@@ -48,6 +48,9 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
 **How do I read the command format?**<br>
 
+* Main command keywords are **case-sensitive** unless specified otherwise.<br>
+  e.g. `Find` and `Add` do not work for `find` and `add` respectively.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
@@ -55,7 +58,8 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
   e.g `n/NAME [c/COURSE]` can be used as `n/John Doe c/CS2103T` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[c/COURSE]…` can be used as ` ` (i.e. 0 times), `c/CS2103T;CS2101`, `c/CS2103T c/CS2101` etc.
+  e.g. `[c/COURSE]…` can be used as ` ` (i.e. 0 times), `c/CS2103T;CS2101` 
+(note that use of `;` is unique to only some fields), `c/CS2103T c/CS2101` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.

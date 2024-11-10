@@ -237,10 +237,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-
-### \[Proposed\] Consultation Management
+### Consultation Management
 
 The consultation management feature enables TAs to schedule and manage consultation sessions with students. This section describes the implementation details of the consultation system.
 
@@ -975,7 +972,20 @@ Use case ends.
 8. The data should be stored locally and should be in a human editable text file.
 9. The software should work without requiring an installer.
 
-*{More to be added}*
+### Planned Enhancements
+
+**<u>Make command names case-insensitive</u>**
+
+**Description**
+
+Make command names case-insensitive, i.e. `Find` is safe to substitute for
+`find` in the `find` command.
+
+**Rationale**
+
+Users may make small mistakes in capitalisation when typing quickly.
+It can save time to ensure minor mistakes such as these in the command keyword
+(not the arguments) will not prevent the command from working.
 
 ### Glossary
 
@@ -1014,8 +1024,6 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-3. _{ more test cases …​ }_
 
 ### Adding a student
 1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
