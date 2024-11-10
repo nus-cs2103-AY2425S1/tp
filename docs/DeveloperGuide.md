@@ -13,9 +13,9 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-ChatGPT was used to create the TrueRental application logo. ![logo](images/true_rental.jpg)
+**ChatGPT** was used to create the TrueRental application logo as well as for **debugging** purposes only.
 
-
+![logo](images/true_rental.jpg){width=200px height=200px}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,7 +161,7 @@ How the parsing works:
 ### Model component
 
 **API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**: [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="890" />
 
@@ -195,12 +195,14 @@ each `Person` needing their own `Tag` objects.<br>
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding
+* can save both TrueRental's data and user preference data in JSON format, and read them back into corresponding
   objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+* Separately, it has another portion within the storage component to store the current's session command history into a
+  text file.
 
 ### Common classes
 
@@ -596,8 +598,6 @@ otherwise)
 
    Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any [_mainstream OS_](#glossary-mainstream-os) as long as it has Java `17` or above installed.
@@ -610,8 +610,6 @@ otherwise)
 6. A new user should be able to view information intuitively, even if they do not know the commands used to perform
    tasks.
 7. Should be able to type up to 2000 characters without a noticeable lag.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -686,60 +684,153 @@ testers are expected to do more *exploratory* testing.
 
 #### Adding a [_client_](#glossary-client)
 
-1. Adding a _client_ while all _clients_ are being shown
+Adding a client while all clients are being shown.
 
-    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+<box type="warning">
 
-    2. Test case: `cadd n/John Doe p/99887766 e/johndoe@example.com`<br>
-       Expected: A new client is added, with the name "John Doe", phone number "99887766", email address "
-       johndoe@example.com". The details of the added client is shown in the result display box.
+**Prerequisite**: List all _clients_ using the `list` command. Multiple _clients_ in the list. <br> Please input this command `cadd n/Alice Peng p/81239999 e/alicepeng@example.com` to ensure that there is already a client with the name `Alice Peng` with phone number `81239999` and email address `alicepeng@example.com`. 
 
-    3. Test case: `cadd n/Amy Tan p/99887766`<br>
-       Expected: A new client is added, with the name "Amy Tan", phone number "99887766", without an email address. The
-       details of the added client is shown in the result display box.
+<box type="info" light>
 
-    4. Test case: `cadd n/Beckham Lee e/beckhamlee@example.com`<br>
-       Expected: A new client is added, with the name "Beckham Lee", email address "beckhamlee@example.com", without a
-       phone number. The details of the added client is shown in the result display box.
+**Note:** If the client already exist within the list, please continue with the test cases.
 
-    5. Test case: `cadd n/John Doe p/81234567 e/johndoe@test.com`<br>
-       Expected: A new client is added, with the name "John Doe", phone number "81234567", email address "
-       johndoe@test.com". The details of the added client is shown in the result display box.
+</box>
 
-    6. Test case: `cadd n/John Doe p/99887766 e/johndoe@example.com`<br>
-       Expected: No new client is added, as there already exist the same client within the application. Error details
-       will be displayed in the result display box.
+</box>
 
-    7. Test case: `cadd n/John Doe p/99887766`<br>
-       Expected: No new client is added, as there already exist the same client within the application. Error details
-       will be displayed in the result display box.
+<box type="info" seamless>
 
-    8. Test case: `cadd n/John Doe e/johndoe@example.com`<br>
-       Expected: No new client is added, as there already exist the same client within the application. Error details
-       will be displayed in the result display box.
+**Test case 1:** `cadd n/John Doe p/99887766 e/johndoe@example.com`
 
-    9. Test case: `cadd n/Charlie Peng`<br>
-       Expected: No new client is added, as a client is required to have at least one phone number or one email address.
-       Error details will be displayed in the result display box.
+<box type="success">
 
-    10. Test case: `cadd n/J@ckie Chan p/91112222 e/jackiechan@example.com`<br>
-        Expected: No new client is added, as the name contains invalid format. Error details will be displayed in the
-        result display box.
+A new client is added, with the name "John Doe", phone number "99887766", email address "
+johndoe@example.com". The details of the added client is shown in the result display box.
 
-    11. Test case: `cadd n/Jackie Chan p/#999$999 e/jackiechan@example.com`<br>
-        Expected: No new client is added, as the phone contains invalid format. Error details will be displayed in the
-        result display box.
+</box>
 
-    12. Test case: `cadd n/Jackie Chan p/91112222 e/jackiechan@.com`<br>
-        Expected: No new client is added, as the email contains invalid format. Error details will be displayed in the
-        result display box.
+</box>
 
-    13. Test case: `cadd`<br>
-        Expected: No new client is added, as there are no parameters provided.
+<box type="info" seamless>
+
+**Test case 2:** `cadd n/Amy Tan p/99887766`
+
+<box type="success">
+
+A new client is added, with the name "Amy Tan", phone number "99887766", without an email address. The
+details of the added client is shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3:** `cadd n/Beckham Lee e/beckhamlee@example.com`
+
+<box type="success">
+
+A new client is added, with the name "Beckham Lee", email address "beckhamlee@example.com", without a
+phone number. The details of the added client is shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4:** `cadd n/John Doe p/81234567 e/johndoe@test.com`
+
+<box type="success">
+
+A new client is added, with the name "John Doe", phone number "81234567", email address "
+johndoe@test.com". The details of the added client is shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5:** `cadd n/Alice Peng p/81239999 e/alicepeng@example.com`
+
+<box type="wrong">
+
+No new client is added, as there already exist the same client within the application from prerequisite. Error details
+will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 6:** `cadd n/Charlie Peng`
+
+<box type="wrong">
+
+No new client is added, as a client is required to have at least one phone number or one email address.
+Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 7:** `cadd n/J@ckie Chan p/91112222 e/jackiechan@example.com`
+
+<box type="wrong">
+
+No new client is added, as the name contains invalid format. Error details will be displayed in the
+result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 8:** `cadd n/Jackie Chan p/#999$999 e/jackiechan@example.com`
+
+<box type="wrong">
+
+No new client is added, as the phone contains invalid format. Error details will be displayed in the
+result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 9:** `cadd n/Jackie Chan p/91112222 e/jackiechan@.com`
+
+<box type="wrong">
+
+No new client is added, as the email contains invalid format. Error details will be displayed in the
+result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 10:** `cadd`
+
+<box type="wrong">
+
+No new client is added, as there are no parameters provided. Error details will be displayed in the
+result display box.
+
+</box>
+
+</box>
 
 #### Adding a client's [_rental information_](#glossary-rental-information)
 
-Adding a _client_'s rental information while all _clients_ are being shown
+Adding a _client_'s rental information while all _clients_ are being shown.
 
 <box type="warning">
 
@@ -960,61 +1051,187 @@ and customers as "—", because no values are specified after their respective p
 
 #### Viewing a client's [_rental information_](#glossary-rental-information)
 
-1. Viewing a _client's rental information_ while all _clients_ are being shown
+Viewing a _client's rental information_ while all _clients_ are being shown.
 
-    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+<box type="warning">
 
-    2. Test case: `rview 1`<br>
-       Expected: If the first client has rental information, displays the respective client's rental information in the
-       rental information list panel. A command success message is displayed in the result display box.
+**Prerequisite:** List all _clients_ using the `list` command. Multiple _clients_ in the list, with the respective rental information within each client.
 
-    3. Test case: `rview 1`<br>
-       Expected: If the first client does not have rental information, no rental information will be displayed in the
-       rental information list panel. A command success message is displayed in the result display box.
+</box>
 
-    4. Test case: `rview 0`<br>
-       Expected: No rental information is shown in the rental information list panel. Error details will be displayed in
-       the result display box.
+<box type="info" seamless>
 
-    5. Test case: `rview x`, where x is larger than the total number of clients.<br>
-       Expected: No rental information is shown in the rental information list panel. Error details will be displayed in
-       the result display box.
+**Test case 1**: `rview 1`
 
-    6. Test case: `rview`<br>
-       Expected: No rental information is shown in the rental information list panel. An invalid command will be shown
-       in the result display box.
+<box type="success">
+
+If the first client has rental information, displays the respective client's rental information in the
+rental information list panel. A command success message is displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 2**: `rview 2`
+
+<box type="wrong">
+
+If the second client does not have rental information, no rental information will be displayed in the
+rental information list panel. A command success message is displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `rview 0`
+
+<box type="wrong">
+
+No rental information is shown in the rental information list panel as 0 is an invalid index. Error details will be displayed in
+the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4**: `rview x`, where x is larger than the total number of clients.
+
+<box type="wrong">
+
+No rental information is shown in the rental information list panel as x is an invalid index. Error details will be displayed in
+the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5**: `rview`
+
+<box type="wrong">
+
+No rental information is shown in the rental information list panel as no index is provided. Error details will be displayed in
+the result display box.
+
+</box>
+
+</box>
 
 #### Editing a [_client_](#glossary-client)
 
-1. Editing a _client_ information.
+<box type="warning">
 
-    1. Prerequisite: List all _clients_ using the `list` command. Multiple _clients_ in the list, with the first client
-       being named "John Doe", with email address "johndoe@example.com" and phone number "99887766".
+**Prerequisite**: List all _clients_ using the `list` command. Multiple _clients_ in the list, with the first client
+being named "John Doe", with email address "johndoe@example.com" and phone number "99887766".
 
-    2. Test case: `cedit 1 n/Peter Pan`<br>
-       Expected: The first client's name will be edited from "John Doe" to "Peter Pan". A command success message is
-       displayed in the result display box.
+</box>
 
-    3. Test case: `cedit 1 p/91231231`<br>
-       Expected: The first client's phone number will be edited from "99887766" to "91231231". A command success message
-       is displayed in the result display box.
+<box type="info" seamless>
 
-    4. Test case: `cedit 1 e/peterpan@example.com`<br>
-       Expected: The first client's email address will be edited from "johndoe@example.com" to "peterpan@example.com". A
-       command success message is displayed in the result display box.
+**Test case 1**: `cedit 1 n/Peter Pan`
 
-    5. Test case: `cedit 1 n/Peter Wang p/ e/`<br>
-       Expected: No client's information will be edited as a client must at least have a phone number or an email
-       address. Error details will be displayed in the result display box.
+<box type="success">
 
-    6. Test case: `cedit 0`<br>
-       Expected: No client's information will be edited. Error details will be displayed in the result display box.
+The first client's name will be edited from "John Doe" to "Peter Pan". A command success message is
+displayed in the result display box.
 
-    7. Test case: `cedit x`, where x is larger than the total number of clients.<br>
-       Expected: No client's information will be edited. Error details will be displayed in the result display box.
+</box>
 
-    8. Test case: `cedit`<br>
-       Expected: No client's information will be edited. An invalid command will be shown in the result display box.
+</box>
+
+<box type="info" seamless>
+
+**Test case 2**: `cedit 1 p/91231231`
+
+<box type="success">
+
+The first client's phone number will be edited from "99887766" to "91231231". A command success message
+is displayed in the result display box.
+
+</box>
+
+</box> 
+
+<box type="info" seamless>
+
+**Test case 3**: `cedit 1 e/peterpan@example.com`
+
+<box type="success">
+
+The first client's email address will be edited from "johndoe@example.com" to "peterpan@example.com". A
+command success message is displayed in the result display box.
+
+</box>
+
+</box> 
+
+<box type="info" seamless>
+
+**Test case 4**: `cedit 1 n/Peter Wang p/ e/`
+
+<box type="wrong">
+
+No client's information will be edited as a client must at least have a phone number or an email
+address. Error details will be displayed in the result display box.
+
+</box>
+
+</box> 
+
+<box type="info" seamless>
+
+**Test case 5**: `cedit 0`
+
+<box type="wrong">
+
+No client's information will be edited as 0 is an invalid index. Error details will be displayed in the result display box.
+
+</box>
+
+</box> 
+
+<box type="info" seamless>
+
+**Test case 6**: `cedit x`, where x is larger than the total number of clients.
+
+<box type="wrong">
+
+No client's information will be edited as x is an invalid index. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 7**: `cedit`
+
+<box type="wrong">
+
+No client's information will be edited as no index is provided. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 8**: `cedit 2 n/Peter Pan p/91231231 e/peterpan@example.com`
+
+<box type="wrong">
+
+No client's information will be edited as there already exist the client with the name "Peter Pan" with the phone number "91231231" and "peterpan@example.com" after test cases 1-3. Error details will be displayed in the result display box.
+
+</box>
+
+</box>
 
 #### Editing a client's [_rental information_](#glossary-rental-information)
 
@@ -1218,44 +1435,102 @@ monthly payment date, monthly rent amount, deposit amount and customers will be 
 
 #### Listing all [_clients_](#glossary-client)
 
-1. Listing all _clients_ within the application.
+Listing all _clients_ within the application.
 
-    1. Prerequisites: There are already multiple _clients_ within the application.
+<box type="warning">
 
-    2. Test case: `list`
-       Expected: All _clients_ will be displayed in the client list panel.
+**Prerequisite**: There are already multiple _clients_ within the application.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `list`
+
+<box type="success">
+
+All _clients_ will be displayed in the client list panel.
+
+</box>
+
+</box>
 
 #### Find a keyword within all [_clients_](#glossary-client) and [_rental information_](#glossary-rental-information)
 
-1. Finding a keyword from all _clients_ and _rental information_.
+Finding a keyword from all _clients_ and _rental information_.
 
-    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list, with client called
-       Amy Tan in this list.
+<box type="warning">
 
-    2. Test case: `find k/Amy Tan`<br>
-       Expected: Client with the keyword "Amy Tan" will be displayed on the client list panel. Command success message
-       will be displayed in the result display box.
+**Prerequisite**: List all _clients_ using the `list` command. Multiple _clients_ in the list, with client called
+Amy Tan in this list.
 
-    3. Test case: `find k/Yong Li`<br>, given that no client within the list is called "Yong Li"
-       Expected: No client or rental information matches the particular keyword "Yong Li". Error details will be
-       displayed in the result display box.
+</box>
 
-    4. Test case: `find Amy`<br>
-       Expected: No prefix k/ given. An invalid command will be shown in the result display box.
+<box type="info" seamless>
 
-    5. Test case: `find k/`<br>
-       Expected: No parameters given. An invalid command will be shown in the result display box.
+**Test case 1**: `find k/Amy Tan`
 
-    6. Test case: `find`<br>
-       Expected: No prefix and/or parameters given. An invalid command will be shown in the result display box.
+<box type="success">
 
-#### Find a [_clients_](#glossary-client)
+Client with the keyword "Amy Tan" will be displayed on the client list panel. Command success message
+will be displayed in the result display box.
 
-<!-- TODO!! @Nathan -->
+</box>
 
-#### Find a client's [_rental information_](#glossary-rental-information)
+</box>
 
-<!-- TODO!! @Nathan -->
+<box type="info" seamless>
+
+**Test case 2**: `find k/Yong Li`, given that no client within the list is called "Yong Li"
+
+<box type="wrong">
+
+No client or rental information matches the particular keyword "Yong Li". Error details will be
+displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `find Amy`
+
+<box type="wrong">
+
+No prefix k/ given. An invalid command will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 4**: `find k/`
+
+<box type="wrong">
+
+No parameters given. An invalid command will be shown in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 5**: `find`
+
+<box type="wrong">
+
+No prefix and/or parameters given. An invalid command will be shown in the result display box.
+
+</box>
+
+</box>
+
+#### Find a information from all [_clients_](#glossary-client)
+
+<!-- TODO!! @Nathan follow format above for n/ e/ t/ p/ -->
 
 #### Deleting a [_client_](#glossary-client)
 
@@ -1275,50 +1550,136 @@ monthly payment date, monthly rent amount, deposit amount and customers will be 
 
 #### Deleting a client's [_rental information_](#glossary-rental-information)
 
-1. <!-- TODO!! @Nathan -->
+1. <!-- TODO!! @Nathan follow same foramt as above -->
 
 #### Command History Feature
 
-1. Retrieving previously entered commands.
+Retrieving previously entered commands.
 
-    1. Prerequisites: Below commands were previously entered.
-        1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
-        2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
-        3. `cadd n/Amy Tan p/99887766`
-        4. `rview 1`
-        5. `list`
-        6. `cdelete 2`
+<box type="warning">
 
-    2. Test case (Steps 1 to 13 are performed sequentially):
-        1. Step 1: Press up-arrow key on the keyboard.<br>
-           Expected: `cdelete 2` is shown in the command box.
-        2. Step 2: Press up-arrow key on the keyboard.<br>
-           Expected: `list` is shown in the command box.
-        3. Step 3: Press up-arrow key on the keyboard.<br>
-           Expected: `rview 1` is shown in the command box.
-        4. Step 4: Press up-arrow key on the keyboard.<br>
-           Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
-        5. Step 5: Press up-arrow key on the keyboard.<br>
-           Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
-           the command box.
-        6. Step 6: Press up-arrow key on the keyboard.<br>
-           Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
-        7. Step 7: Press up-arrow key on the keyboard.<br>
-           Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
-           are no more previous commands.
-        8. Step 8: Press down-arrow key on the keyboard.<br>
-           Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
-           the command box.
-        9. Step 9: Press down-arrow key on the keyboard.<br>
-           Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
-        10. Step 10: Press down-arrow key on the keyboard.<br>
-            Expected: `rview 1` is shown in the command box.
-        11. Step 11: Press down-arrow key on the keyboard.<br>
-            Expected: `list` is shown in the command box.
-        12. Step 12: Press down-arrow key on the keyboard.<br>
-            Expected: `cdelete 3` is shown in the command box.
-        13. Step 13: Press down-arrow key on the keyboard.<br>
-            Expected: : Nothing is shown in the command box.
+**Prerequisites**: Below commands were previously entered.
+<br>1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
+<br>2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
+<br>3. `cadd n/Amy Tan p/99887766`
+<br>4. `rview 1`
+<br>5. `list`
+<br>6. `cdelete 2`
+
+</box>
+
+<box type="info" seamless>
+
+**Test case** (Steps 1 to 13 are performed sequentially):
+
+Step 1: Press ↑ up-arrow key on the keyboard.
+
+<box type="success">
+
+`cdelete 2` is shown in the command box.
+
+</box>
+
+Step 2: Press ↑ up-arrow key on the keyboard.
+
+<box type="success">
+
+`list` is shown in the command box.
+
+</box>
+
+Step 3: Press ↑ up-arrow key on the keyboard.
+
+<box type="success">
+
+`rview 1` is shown in the command box.
+
+</box>
+
+Step 4: Press ↑ up-arrow key on the keyboard.
+
+<box type="success">
+
+`cadd n/Amy Tan p/99887766` is shown in the command box.
+
+</box>
+
+Step 5: Press ↑ up-arrow key on the keyboard.
+
+<box type="success">
+
+`radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
+the command box.
+
+</box>
+
+Step 6: Press ↑ up-arrow key on the keyboard.
+
+<box type="success">
+
+`cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
+
+</box>
+
+Step 7: Press ↑ p-arrow key on the keyboard.
+
+<box type="success">
+
+`cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
+are no more previous commands.
+
+</box>
+
+Step 8: Press ↓ down-arrow key on the keyboard.
+
+<box type="success">
+
+`radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
+the command box.
+
+</box>
+
+Step 9: Press ↓ down-arrow key on the keyboard.
+
+<box type="success">
+
+`cadd n/Amy Tan p/99887766` is shown in the command box.
+
+</box>
+
+Step 10: Press ↓ down-arrow key on the keyboard.
+
+<box type="success">
+
+`rview 1` is shown in the command box.
+
+</box>
+
+Step 11: Press ↓ down-arrow key on the keyboard.
+
+<box type="success">
+
+`list` is shown in the command box.
+
+</box>
+
+Step 12: Press ↓ down-arrow key on the keyboard.
+
+<box type="success">
+
+`cdelete 3` is shown in the command box.
+
+</box>
+
+Step 13: Press ↓ down-arrow key on the keyboard.
+
+<box type="success">
+
+Nothing is shown in the command box.
+
+</box>
+
+</box>
 
 #### Autofill Commands Feature
 
@@ -1572,7 +1933,8 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
     1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
 
     2. Test case: `sort`<br>
-       Expected: Client list will be sorted in alphabetical order by name. A command success message for name will be displayed in the result display box.
+       Expected: Client list will be sorted in alphabetical order by name. A command success message for name will be
+       displayed in the result display box.
 
 #### Clear
 
@@ -1595,6 +1957,84 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Duplicate Client Detection and Handling
+
+A client is only considered as **duplicate** **if and only if** all three parameters `[NAME]`, `[PHONE_NUMBER]`
+and `[EMAIL_ADDRESS]` are **exactly the same** (including case sensitivity).
+
+This is to allow the user to have a greater flexibility of manipulating the client's information.
+
+**For example:** All the clients stated below the initial client are **NOT CONSIDERED** as duplicates.
+
+<box type="info" light>
+
+An **initial client** with the name `Jason Lee`, phone number `91231231` and email address `jasonlee@example.com`
+
+</box>
+
+<box type="success" light>
+
+The following are **NOT DUPLICATES** of the initial client:
+
+1. A client with the name `Jason Lee`, phone number `99998888` and email address `jasonlee@example.com`.
+2. A client with the name `Jason Lee`, phone number `91231231` and email address `NOTjasonlee@example.com`.
+3. A client with the name `Jason Lee`, phone number `—` and email address `jasonlee@example.com`.
+4. A client with the name `Jason Lee`, phone number `91231231` and email address `—`.
+5. A client with the name `JASON LEE`, phone number `91231231` and email address `jasonlee@example.com`.
+
+<box type="info" seamless>
+
+**Note:** `—` signifies an empty parameter without any characters.
+
+</box>
+
+</box>
+
+<box type="wrong" light>
+
+The following is a **DUPLICATE** of the initial client:
+
+1. A client with the name: `Jason Lee`, phone number: `91231231` and email address `jasonlee@example.com`.
+
+</box>
+
+## Duplicate Rental Information Detection and Handling
+
+Rental information is considered a **duplicate** **if and only if** the `ADDRESS` parameter is **exactly the same**, including case sensitivity.
+
+This is to allow you to have a greater flexibility of manipulating the rental information.
+
+**For example:**
+
+<box type="info" light>
+
+An **initial rental information** with the address `201 Bukit Batok Street 21 #10-163`, rental start date `01/01/2024` and monthly rent amount `3200`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified.
+
+</box>
+
+<box type="success" light>
+
+The following are **NOT DUPLICATES** of the initial rental information:
+
+1. Rental information with the address `201 BUKIT BATOK STREET 21 #10-163`, rental start date `01/01/2024` and monthly rent amount `3200`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified (as `—`).
+2. Rental information with the address `201 BUKIT Batok Street 21 #10-163`, rental start date `01/01/2024` and monthly rent amount `3500`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified (as `—`).
+3. Rental information with the address `201 Bukit BATOK Street 21 #10-163`, rental start date `01/01/2024`, monthly rent amount `3200` and rental end date `31/12/2024`. The values for rent due date, deposit amount, and customer list are unspecified (as `—`).
+4. Rental information with the address `201 BuKiT BaToK StReEt 21 #10-163`, rental start date `01/01/2024`, monthly rent amount `3200`, rental end date `31/12/2024`, rent due date `10`. The values for deposit amount and customer list are unspecified (as `—`).
+5. Rental information with the address `201 bukit batok street 21 #10-163`, rental start date `01/06/2024` and monthly rent amount `3200`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified (as `—`).
+
+</box>
+
+<box type="wrong" light>
+
+The following are **DUPLICATES** of the initial rental information:
+
+1. Rental information with the address `201 Bukit Batok Street 21 #10-163`, rental start date `01/02/2024` and monthly rent amount `3300`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified.
+2. Rental information with the address `201 Bukit Batok Street 21 #10-163` and rental start date `01/12/2024`. The values for monthly rent amount, rental end date, rent due date, deposit amount, and customer list are unspecified.
+
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Appendix: Future Enhancements
 
 #### Additional Parameter Constraints
@@ -1614,7 +2054,7 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 The current version of `cedit` only supports replacing **all tags** with the **updated tag** provided by the `cedit`
 command.
-In the future, there will be an update to the `cedit` command, where the client is able to choose which tag to **retain
+In the future, there will be an update to the `cedit` command, where the user is able to choose which tag to **retain
 ** as well as which tag to **edit**.
 
 #### `sort` Command.
