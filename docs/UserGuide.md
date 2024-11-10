@@ -88,8 +88,8 @@ Term           | Explanation
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Science` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Science`, `t/Math t/English` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/Science`, `t/Math t/English` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -113,10 +113,11 @@ Format: `help`
 
 Adds a student to the app.
 
-Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br>
+Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…` <br>
+
 Constraints:
 * Tags must be at most 40 characters long, and must be alphanumeric
-* Maximum length for a name is 256 characters long
+* Maximum length for a name is 256 characters long, and must be alphanumeric
 * Maximum phone number is 16 numbers
 * Maximum email length is 256 characters
 <box type="tip" seamless>
@@ -136,9 +137,9 @@ Format: `view_student INDEX`
 * Displays the details of a student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 ![Explanation for INDEX](images/student_index.png)
-* The index **must be a positive integer** 1, 2, 3, …​
 
 Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
 * Index must exist in the current displayed student list.
 * Only one index can be supplied at a time. If additional indices are provided after the first valid index, they will be ignored.
   (e.g: `view_student 1 2 3` will be identical in behaviour to `view_student 1`)
@@ -157,22 +158,24 @@ Format: `list`
 
 Edits an existing student in the app.
 
-Format: `edit_student si/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit_student si/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…`
+
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
+
 Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* Index must exist in the current displayed student list.
 * Tags must be at most 40 characters long, and must be alphanumeric
-* Maximum length for a name is 256 characters long
+* Maximum length for a name is 256 characters long, and must be alphanumeric
 * Maximum phone number is 16 numbers
 * Maximum email length is 256 characters
   <box type="tip" seamless>
   **Tip:** A student can have any number of tags (including 0)
   </box>
-
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit_student si/1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
@@ -205,7 +208,10 @@ Format: `delete_student INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * Similar to the View Command, this index is specified by the number as shown on the left of the Student's name, in the student list display.
-* The index **must be a positive integer** 1, 2, 3, …​
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* Index must exist in the current displayed student list.
 
 Examples:
 * `list` followed by `delete_student 2` deletes the 2nd student in the app.
@@ -220,10 +226,13 @@ Format: `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
 * Adds an assignment to the student at the specified `INDEX`. The index refers to the index number shown in the
   displayed student list.
-* The max score must be a positive integer.
 
 Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
 * Assignment name must be at most 256 characters long, and must be alphanumeric
+* Assignments for the same student cannot have the same name and max score
+* The max score must be a positive integer.
 
 Examples:
 * `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
@@ -239,7 +248,11 @@ Deletes an assignment belonging to a student based on the student's index number
 Format: `delete_assignment si/INDEX ai/INDEX`
 
 * Deletes the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student
-  list and the assignment list on the student detail panel respectively. The index **must be a positive integer** 1, 2, 3, …​
+  list and the assignment list on the student detail panel respectively.
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
 
 Examples:
 * `find John` followed by `delete_assignment si/1 ai/1` deletes the 1st assignment of the 1st student in the results of the `find` command.
@@ -255,9 +268,15 @@ Format: `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_
 
 * Edits the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
   list and the assignment list on the student detail panel respectively.
-  The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
+* Assignment name must be at most 256 characters long, and must be alphanumeric
+* Assignments for the same student cannot have the same name and max score
+* The max score must be a positive integer.
 
 Examples:
 * `view_student 1` followed by `edit_assignment si/1 ai/1 an/Assignment 1 ms/100` edits the 1st assignment of the 1st
@@ -276,11 +295,13 @@ Examples:
 
 Marks an existing assignment belonging to a student as submitted, based on the student's index and the assignment's index.
 
-Constraints:
-- The assignment must not have been submitted prior to the Mark Command.
-- The assignment must already exist and belong to a particular student.<br>
-
 Format: `mark si/INDEX ai/INDEX`
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
+* The assignment must not have been submitted prior to the Mark Command.
+* The assignment must already exist and belong to a particular student.<br>
 
 Examples:
 * `list` followed by `mark si/3 ai/1` marks the 1st assignment of the 3rd student in the app.
@@ -292,11 +313,13 @@ Examples:
 
 Unmarks an existing assignment belonging to a student, resetting its status to not submitted.
 
-Constraints:
-- The assignment must already have been submitted prior to the Unmark Command.
-- The assignment must already exist and belong to a particular student.<br>
-
 Format: `unmark si/INDEX ai/INDEX`
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
+* The assignment must already have been submitted prior to the Unmark Command.
+* The assignment must already exist and belong to a particular student.<br>
 
 Examples:
 * `unmark si/1 ai/1`
@@ -308,11 +331,13 @@ Examples:
 Edits the score of an assignment belonging to a student and marks it as submitted.
 
 Format: `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`
+
 * Grades the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student
   list and the assignment list on the student detail panel respectively.
 
 Constraints:
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …
+* The student's index must exist in the current displayed student list.
 * The score must be a positive integer that is in bounds of the minimum and maximum scores of the assignment.
 * The score can be regraded multiple times by using the `grade` command again. If the assignment was already assigned a grade previously, it will be overwritten, and a warning is shown to the user.
 
@@ -323,9 +348,15 @@ Examples:
   ![result for `grade si/1 ai/1 s/80`](images/gradeAssignment.png)
 
 ### Adding a remark to a student: `remark`
-Adds a remark to a existing student in the displayed list.
+Adds a remark to an existing student in the displayed list.
 
 Format: `remark si/INDEX r/REMARK`
+
+* Existing values will be updated to the input values
+
+Constraints:
+* The index **must be a positive integer** 1, 2, 3, …
+* Index must exist in the current displayed student list.
 
 Examples:
 * `remark si/1 r/Weak in Math`
@@ -406,11 +437,11 @@ _Details coming soon ..._
 
 Action            | Format, Examples
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Student**   | `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add_student n/James Ho p/22224444 e/jamesho@example.com t/likesMath`
+**Add Student**   | `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…` <br> e.g., `add_student n/James Ho p/22224444 e/jamesho@example.com t/likesMath`
 **View Student**  | `view_student INDEX`<br> e.g., `view_student 3`
 **Clear**         | `clear`
 **Delete Student**| `delete_student INDEX`<br> e.g., `delete_student 3`
-**Edit Student**  | `edit_student si/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [r/REMARK]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Student**  | `edit_student si/INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**          | `list`
 **Help**          | `help`
