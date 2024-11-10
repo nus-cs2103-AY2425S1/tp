@@ -36,7 +36,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 ![Ui](images/Ui.png)
 
-5. **Try Out Some Commands!**:Type the command in the command box and press Enter to see it in action!
+5. **Try Out Some Commands!**: Type the command in the command box and press Enter to see it in action!
 Here are a few examples:
     * `help` : Opens the help window. 
 
@@ -116,7 +116,6 @@ Need a quick reference?
 
 <box type="info" seamless>
 
-
 * **Commands Are Case-Sensitive and All Lowercase**  
   Make sure to type commands exactly as shown. e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
 
@@ -150,7 +149,6 @@ If you are using a PDF version of this document, be careful when copying and pas
 <box type="info" seamless>
 
 ### Notes About Command Parameters:<br>
-
 * `NAME` **only accepts alphanumeric characters and spaces**.  
   Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
 
@@ -205,41 +203,44 @@ Although duplicate contact names are not allowed, adding two separate contacts `
 <div style="page-break-after: always;"></div>
 
 ## Commands
-
+This section provides details on the usage of each command.
 <br>
 
-### Viewing help : `help`
+### Basic Commands
 
-Shows a message explaining how to access the help page.
- 
-Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close the window if it is in **focus**.
+**Viewing help :** `help`
 
+Displays the help window. Also accessible by pressing the `F1` key.  
+
+The help window can be closed by `F1` and `Esc` keys  
+
+Format: `help`  
+Output:
 ![help message](images/helpMessage.png)
 
-Format: `help`
-
 <br>
 
-### Listing all persons : `list`
+**Listing all persons :** `list`
 
-Shows a list of all persons in the GamerBook.
+Lists all persons in GamerBook. Use this after you are done searching for someone!
 
-Format: `list`
-
+Format: `list`  
+Output: `Listed all persons`
 <br>
 
-### Adding a person: `add`
+**Adding a person :** `add`
 
-Adds a person to the GamerBook.
+Adds a person with optional details like phone, email, address, games, tags, and preferred time.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/TIME-TIME]…​`
-
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/TIME-TIME]…​`  
+Output: `New person added: NAME; Phone: PHONE_NUMBER; Email: EMAIL; Address: ADDRESS...; Tags: TAG; Games: GAME...; Preferred Times: TIME-TIME...`
 <box type="tip" seamless>
 
+**Notes about adding!**
 * A person can have any number of tags, games and preferred times (including 0).
-* `TIME-TIME` should be in the format `HHmm-HHmm` and must be a valid time range within the same day.  
+* `TIME-TIME` should be in the format `HHmm-HHmm` and **must be a valid time range within the same day.**  
   e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
-* `TIME-TIME` time ranges cannot be a single point in time.
+* `TIME-TIME` **time ranges cannot be a single point in time.**
     e.g. `1200-1200` is not a valid time range.
 </box>
 
@@ -249,7 +250,7 @@ Examples:
 
 <br>
 
-### Editing a person : `edit`
+**Editing a person :** `edit`
 
 Edits an existing person in the GamerBook.
 
@@ -274,9 +275,44 @@ Examples:
 *  `edit 2 n/Matthew g/Overwatch g/Valorant` Edits the name of the 2nd person to be `Matthew` with games `Overwatch` and `Valorant`.
 *  `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and preferred times.
 
+**Deleting a person :** `delete`
+
+Deletes the specified person from the GamerBook.
+
+Format: `delete INDEX`
+
+<box type="tip" seamless>
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+  </box>
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the GamerBook.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
 <br>
 
-### Adding a game : `addgame`
+**Clearing all entries :** `clear`
+
+Clears all entries from the GamerBook.
+
+Format: `clear`
+
+<br>
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+<br>
+
+### Game Management Commands
+
+**Adding a game :** `addgame`
 
 Adds a game to an existing person in the GamerBook.
 
@@ -298,7 +334,7 @@ Examples:
 
 <br>
 
-### Editing a game : `editgame`
+**Editing a game :** `editgame`
 
 Edits the game of an existing person in the GamerBook.
 
@@ -322,7 +358,7 @@ Examples:
 
 <br>
 
-### Deleting a game : `deletegame`
+**Deleting a game :** `deletegame`
 
 Deletes the specified game from an existing person in the GamerBook.
 
@@ -337,7 +373,7 @@ Format: `deletegame INDEX g/GAME`
 
 <br>
 
-### Favouriting a game : `favgame`
+**Favouriting a game :** `favgame`
 
 Gives a **singular** game under an existing person in the GamerBook the "favourite" status.
 
@@ -355,7 +391,7 @@ Examples:
 
 <br>
 
-### Un-favouriting a game : `unfavgame`
+**Un-favouriting a game :** `unfavgame`
 
 Removes the "favourite" status from a **singular** game under an existing person in the GamerBook.
 
@@ -371,9 +407,9 @@ Format: `unfavgame INDEX g/GAME`
 Examples:
 * `unfavgame 3 g/LoL` Removes the "favourite" status from the game "LoL" of the 3rd person.
 
-<br>
 
-### Locating persons by name: `find`
+### Search Commands
+**Locating persons by name :** `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -396,7 +432,7 @@ Examples:
   
   <br>
 
-### Locating persons by game name: `findgame`
+**Locating persons by game name :** `findgame`
 
 Finds persons whose games' names contain any of the given keywords.
 
@@ -419,7 +455,7 @@ Examples:
   
   <br>
 
-### Locating persons by time range: `findtime`
+**Locating persons by time range :** `findtime`
 
 Finds persons whose preferred time ranges overlap with any of given time ranges.
 
@@ -449,36 +485,9 @@ Examples:
 * `findtime 2030-2100 2230-2330` returns persons with any preferred time range overlapping with any 
 one of the specified ranges.
 
-<br>
+### Utility Commands
 
-### Deleting a person : `delete`
-
-Deletes the specified person from the GamerBook.
-
-Format: `delete INDEX`
-
-<box type="tip" seamless>
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-</box>
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the GamerBook.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-<br>
-
-### Clearing all entries : `clear`
-
-Clears all entries from the GamerBook.
-
-Format: `clear`
-
-<br>
-
-### Undoing previous command : `undo`
+**Undoing previous command :** `undo`
 
 <box type="important" seamless>
 
@@ -495,11 +504,15 @@ Format: `undo`
 
 <br>
 
-### Exiting the program : `exit`
+**Saving the data file :** `save`
 
-Exits the program.
+Manually saves the data in another JSON file `[JAR file location]/data/save.json`.
 
-Format: `exit`
+<br>
+
+**Loading the data file :** `load`
+
+Manually loads the data from JSON file `[JAR file location]/data/save.json`.
 
 <br>
 
@@ -513,17 +526,6 @@ GamerBook data are loaded from `[JAR file location]/data/addressbook.json` autom
 
 <br>
 
-### Saving the data file : `save`
-
-Manually saves the data in another JSON file `[JAR file location]/data/save.json`.
-
-<br>
-
-### Loading the data file : `load`
-
-Manually loads the data from JSON file `[JAR file location]/data/save.json`.
-
-<br>
 
 ### Editing the data file
 
