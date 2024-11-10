@@ -16,6 +16,8 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 * **Precision:** Avoid mis-clicking and mistakes as CLI will execute the exact command you type 💯
 * **Offline:** CLI does not require internet and allows you to use it anywhere 👩‍💻
 
+Here's a quick tip! To navigate back to the top of this page, use the `Home` key on Windows/Linux or `command + ↑` on Mac. 
+
 <!-- * Table of Contents -->
 ## Table of Contents
 - [Quick Start](#quick-start-non-technical-users)
@@ -24,6 +26,8 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 - [Features](#features)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
+
+If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMAND-F` for Mac to find exactly what you need!
 
 <page-nav-print />
 
@@ -91,12 +95,6 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 <box type="important" seamless>
 
 **IMPORTANT:** Feel free to use this table and navigate to the features that interests you by clicking on the action words 😁 
-
-</box>
-
-<box type="tip" seamless>
-
-**TIP:** Here's a quick tip! To navigate to the top of the page, use `Home` key on Windows/Linux or `command + ↑` on Mac. 
 
 </box>
 
