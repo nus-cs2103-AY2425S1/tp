@@ -194,6 +194,8 @@ EZSTATE features (i.e. commands) are divided into **four** main categories:
 3. [Listing Management Commands](#3-listing-management)
 4. [Utility Commands](#4-utility-commands)
 
+The instructions for using each command are explained in the sections below. For the command examples provided, you can assume that `Output` refers to the text displayed in the `Result Display`, unless stated otherwise.
+
 ---
 
 ### 1. Client Management Commands
@@ -202,72 +204,77 @@ Commands for creating, updating, and deleting buyers and sellers.
 
 ![showClients](images/Ui.png)
 
-- #### Add Buyer Command
-    - **Format:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
-    - **Description:** Creates a new buyer profile with specified details.
-    - **Successful Execution:**
-      > ---
-      >
-      > **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `bobby123@gmail.com`
-      >
-      > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
-      >
-      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
-      >
-      > ---
-      >
-      > **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `bobby123@gmail.com`, tags `friend`, `owner`
-      >
-      > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
-      >
-      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
-      >
-      > ---
+#### Add Buyer Command
 
-    - **Failed Execution:**
-      > ---
-      >
-      > **User Error #1**: Missing `NAME` field
-      >
-      > **Input**: `buyer p/91124444 e/bobby123@gmail.com`
-      >
-      > **Output**: <br>
-      Invalid command format! <br>
-      buyer: Adds a buyer to the address book. <br>
-      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > ---
-      >
-      > **User Error #2**: Missing `PHONE` field
-      >
-      > **Input**: `buyer n/Bobby e/bobby123@gmail.com`
-      >
-      > **Output**: <br>
-      Invalid command format! <br>
-      buyer: Adds a buyer to the address book. <br>
-      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > ---
-      >
-      > **User Error #3**: Missing `EMAIL` field
-      >
-      > **Input**: `buyer n/Bobby p/91124444`
-      >
-      > **Output**: <br>
-      Invalid command format! <br>
-      buyer: Adds a buyer to the address book. <br>
-      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > **User Error #4**: Buyer already exists 
-      > 
-      > **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
-      > 
-      > **Output**: This buyer already exists in the address book
-      > 
-      > ---
+Adds a new `Buyer` to EZSTATE.
+
+Command: `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
+
+##### Successful Execution:
+
+> ---
+>
+> **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `bobby123@gmail.com`
+>
+> **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
+>
+> **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+>
+> ---
+>
+> **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `bobby123@gmail.com`, tags `friend`, `owner`
+>
+> **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
+>
+> **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+>
+> ---
+
+
+##### Failed Execution:
+> ---
+>
+> **User Error #1**: Missing `NAME` field
+>
+> **Input**: `buyer p/91124444 e/bobby123@gmail.com`
+>
+> **Output**: <br>
+Invalid command format! <br>
+buyer: Adds a buyer to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+>
+> ---
+>
+> **User Error #2**: Missing `PHONE` field
+>
+> **Input**: `buyer n/Bobby e/bobby123@gmail.com`
+>
+> **Output**: <br>
+Invalid command format! <br>
+buyer: Adds a buyer to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+>
+> ---
+>
+> **User Error #3**: Missing `EMAIL` field
+>
+> **Input**: `buyer n/Bobby p/91124444`
+>
+> **Output**: <br>
+Invalid command format! <br>
+buyer: Adds a buyer to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+>
+> **User Error #4**: Buyer already exists 
+> 
+> **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
+> 
+> **Output**: This buyer already exists in the address book
+> 
+> ---
 <br>
 <div class="note" markdown="span">
 Adding a space between two names is treated as "adding a character". Hence,
