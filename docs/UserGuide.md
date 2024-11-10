@@ -1,3 +1,4 @@
+---
 layout: default.md
 title: "User Guide"
 pageNav: 3
@@ -13,25 +14,25 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 ---
 # Table of Contents
 
-1. [Glossary](#glossary)
-2. [Quick start](#quick-start)
-3. [Features](#features)
-    1. [Viewing help : `help`](#viewing-help--help)
-    2. [Adding a company: `add`](#adding-a-company-add)
-        - [Special Tag Values](#special-tag-values)
-    3. [Listing all companies : `list`](#listing-all-companies--list)
-    4. [Bookmarking a company : `bookmark`](#bookmarking-a-company--bookmark)
-    5. [Removing a bookmark from a bookmarked company : `removebm`](#removing-a-bookmark-from-a-bookmarked-company--removebm)
-    6. [Listing all bookmarked companies : `bmlist`](#listing-all-bookmarked-companies--bmlist)
-    7. [Editing a company : `edit`](#editing-a-company--edit)
-    8. [Editing a company's remark : `remark`](#editing-a-companys-remark--remark)
-    9. [Locating companies by name: `find`](#locating-companies-by-name-find)
-    10. [Deleting a company : `delete`](#deleting-a-company--delete)
-    11. [Editing an application status: `status`](#editing-an-application-status-status)
-    12. [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    13. [Exiting the program : `exit`](#exiting-the-program--exit)
-3. [FAQ](#faq)
-4. [Command Summary](#command-summary)
+- [Glossary](#glossary)
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Viewing help : `help`](#viewing-help-help)
+  - [Adding a company: `add`](#adding-a-company-add)
+    - [Special Tag Values](#special-tag-values)
+  - [Listing all companies : `list`](#listing-all-companies-list)
+  - [Bookmarking a company : `bookmark`](#bookmarking-a-company-bookmark)
+  - [Removing a bookmark from a bookmarked company : `removebm`](#removing-a-bookmark-from-a-bookmarked-company-removebm)
+  - [Listing all bookmarked companies : `bmlist`](#listing-all-bookmarked-companies-bmlist)
+  - [Editing a company : `edit`](#editing-a-company-edit)
+  - [Editing a company's remark : `remark`](#editing-a-companys-remark-remark)
+  - [Locating companies by name: `find`](#locating-companies-by-name-find)
+  - [Deleting a company : `delete`](#deleting-a-company-delete)
+  - [Editing an application status: `status`](#editing-an-application-status-status)
+  - [Clearing all entries : `clear`](#clearing-all-entries-clear)
+  - [Exiting the program : `exit`](#exiting-the-program-exit)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 ---
 ## Glossary
 
@@ -56,21 +57,33 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 
     <img src="images/Ui.png" alt="Ui" width="400" height="300"/>
 
+
 5. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     - `list` : Lists all companies.
-    - `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com r/Search engine giant t/Tech` : Adds a company named `Google` to the Address Book.
+
+    - `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com r/Search engine giant t/Tech` : Adds a company named `Google` to the address book.
+
     - `bookmark 1` : Bookmarks the 1st company shown in the current list.
+
     - `bmlist` : Shows a list of all the bookmarked companies in the address book.
+
     - `edit 2 p/91234567 e/grab@example.com` : Edits the phone number and email address of the 2nd company to be 91234567 and grab@example.com respectively.
+
     - `remark 3 r/Has good internship opportunities` : Edits the remark of the 3rd company to Has good internship opportunities.
+
     - `find Google` :  Finds companies whose name contain Google.
+
     - `delete 4` : Deletes the 4th company shown in the current list.
-    - `status 5 as/Applied` : Edits the application status of the 5th company at index 5 to `Applied`
+
+    - `status 5 as/Applied` : Edits the application status of the 5th company at index 5 to `Applied`.
+
     - `clear` : Deletes all companies.
+
     - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
 7. Refer to the [Glossary](#Glossary) for any unfamiliar terms.
 
 ---
