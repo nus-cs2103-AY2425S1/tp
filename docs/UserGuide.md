@@ -6,7 +6,7 @@
 
 # T_Assistant User Guide
 
-T_Assistant is a **desktop app for CS2103 tutors managing their students, groups and tasks** optimized for use via a
+T_Assistant is a **desktop app for CS2103 tutors managing their students, groups and tasks** optimized for use via a Command
 Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 If you can type fast, T_Assistant can get your contact management tasks done faster than traditional GUI apps.
@@ -119,7 +119,7 @@ This screenshot shows the result of executing `list_s`.
 
 Adds a student to T_Assistant.
 
-**Format**: `add_s/as sno/STUDENT_NUMBER sn/STUDENT_NAME e/EMAIL [t/TAG]...`
+**Format**: `add_s sno/STUDENT_NUMBER sn/STUDENT_NAME e/EMAIL [t/TAG]...`
 
 ##### Notes
 
@@ -256,9 +256,10 @@ Searches T_Assistant for students with fields that match the search query.
 ##### Notes
 
 1. This command is case-insensitive.
-2. The command will match substrings. You may search for part of a group's name such as `Alex Y` to find `Alex Yeoh`.
+2. The command will match substrings. You may search for part of a student's name such as `Alex Y` to find `Alex Yeoh`.
 3. A blank query i.e. `fs q/` will return all students.
-4. Searches the following fields that a student has that matches the query:
+4. This command functions on an OR logic. It will return all students that have fields that match any of the queries.
+5. Searches the following fields that a student has that matches the query:
 
     * Student name
     * Student number
@@ -335,7 +336,9 @@ Adds a group to the T_Assistant。
 ##### Notes
 
 1. `Group Name` is the unique identifier for each group, so no two groups can have the same group name.
-3. For information on the constraints for each parameter used in this command, go
+2. Leading 0s in `Group Name` will be truncated, e.g. `CS2103-F00012-002` will be read as `CS2103-F12-2`.
+3. 
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -414,10 +417,11 @@ Searches T_Assistant for groups with fields that match the search query.
 
 1. This command is case-insensitive.
 2. The command will match substrings. You may search for part of a group's name such as `F12` to find `CS2103T-F12-10`.
-3. Searches the following field that a group has that matches the query:
-    * Group name
 3. A blank query i.e. `fg q/` will return all groups.
-4. For information on the constraints for each parameter used in this command, go
+4. This command functions on an OR logic. It will return all groups that have fields that match any of the queries.
+5. Searches the following field that a group has that matches the query:
+    * Group name
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -661,7 +665,7 @@ This screenshot shows the result of executing `del_t i/2`.
 
 Edits a task from a group.
 
-**Format**: `edit_t_g i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`
+**Format**: `edit_t_g i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)]`
 
 ##### Notes
 
@@ -708,7 +712,7 @@ Edits a task from all groups that contain it.
 
 This screenshot shows the result of executing `edit_t i/2 tn/Complete task 8`.
 
-<img src="images/screenshots/del_t.png" width="600">
+<img src="images/screenshots/edit_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -758,10 +762,11 @@ Searches T_Assistant for tasks with fields that match the search query.
 ##### Notes
 
 1. This command is case-insensitive.
-2. The command will match substrings. You may search for part of a group's name such as `tp` to find `tP v1.6 Release`.
+2. The command will match substrings. You may search for part of a task's name such as `tp` to find `tP v1.6 Release`.
+3. A blank query i.e. `ft q/` will return all tasks.
+4. This command functions on an OR logic. It will return all tasks that have fields that match any of the queries.
 3. Searches the following field that a group has that matches the query:
     * Task name
-3. A blank query i.e. `ft q/` will return all tasks.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -771,7 +776,7 @@ Searches T_Assistant for tasks with fields that match the search query.
 
 This screenshot shows the result of executing `find_t q/4`.
 
-<img src="images/screenshots/mark_t_2.png" width="600">
+<img src="images/screenshots/find_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -799,16 +804,14 @@ Undoes the previous command ran.
 
 ##### Notes
 
-1. If you first open the application, you will be unable to undo because there is no data to undo. You can only undo
+1. If it is your first time opening the application, you will be unable to undo because there is no data to undo. You can only undo
    after you have made changes to the application.
 2. You can only undo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
    and not the commands which do not make any changes (find, list, help, exit commands).
-3. For every change you make to the application, it will be added to the version history of the application.
-4. The application stores up to 100 version histories. Hence you will only be able to undo up to 100 of your most recent
+3. For every change you make within the application, it will be added to the version history of the application.
+4. The application stores up to 100 version histories. Hence, you will only be able to undo up to 100 of your most recent
    versions.
 5. After running the command you will be brought to the default panel of the application (the student list panel).
-6. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
 
 #### Redoing change: `redo`
 
@@ -818,14 +821,11 @@ Format: `redo`
 
 ##### Notes
 
-1. If you first open the application, you will be unable to redo because there is no data to redo. You can only
+1. If it is your first time opening the application, you will be unable to redo because there is no data to redo. You can only
    redo the application after at least one undo has been executed.
 2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
-   and
-   not the commands which do not make any changes (find, list, help, exit commands).
+   and not the commands which do not make any changes (find, list, help, exit commands).
 3. After running the command you will be brought to the default panel of the application (the student list panel).
-4. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
 
 #### Viewing help : `help`
 
@@ -863,7 +863,7 @@ save manually.
 ### Editing the data file
 
 T_Assistant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
-welcome to update data directly by editing that data file.
+welcome to update data directly by editing that data file. 
 
 <box type="warning" seamless>
 
@@ -872,11 +872,9 @@ If your changes to the data file makes its format invalid, T_Assistant will disc
 data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br><br>
 Furthermore, certain edits can cause the T_Assistant to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+Changes done directly to the data file will **NOT** be registered by the application, i.e. `undo`/`redo` will not register these changes.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -885,7 +883,7 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous T_Assistant home folder and also copy over `versionHistory.json`.
+the data of your previous T_Assistant home folder and also copy over `versionHistory.json` if you wish to keep it.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -919,17 +917,17 @@ This section will inform you about what parameters are used in T_Assistant and t
 All parameters are case-insensitive when used for comparison unless stated otherwise.
 </box>
 
-| Parameter                | Constraints                                                                                                                                                                                                                                                                                        | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
-| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                                                                       | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
-| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                                                                         | `John Doe`                                    | `J0hn Doe$$`                                     |
-| `e/`<br>Email            | Format: `local-part@domain-part` <br>`local-part` follows NUS email constraints<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
-| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                                                               | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
-| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a number<br>`Group Number` should be a number                                                                                              | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
-| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                                                                    | `Release tP v1.6`                             |                                                  |
-| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                                                                             | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
-| `q/`<br>Query            | No limitations                                                                                                                                                                                                                                                                                     | `iP`<br>`tP v1.5`                             |                                                  |
-| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                                                           | `1`<br>`10`                                   | `-1`<br>`test`                                   |
+| Parameter                | Constraints                                                                                                                                                                                                                                         | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
+| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                        | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
+| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                          | `John Doe`                                    | `J0hn Doe$$`                                     |
+| `e/`<br>Email            | Format: `local-part@domain-part`<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
+| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
+| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a positive number<br>`Group Number` should be a positive number                             | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
+| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                     | `Release tP v1.6`                             |                                                  |
+| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                              | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
+| `q/`<br>Query            | No limitations                                                                                                                                                                                                                                      | `iP`<br>`tP v1.5`                             |                                                  |
+| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                            | `1`<br>`10`                                   | `-1`<br>`test`                                   |
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -943,7 +941,7 @@ All parameters are case-insensitive when used for comparison unless stated other
 | **List Students**             | `list_s/ls`                                                                                                                          |
 | **Add Student**               | `add_s/as sno/STUDENT_NUMBER sn/STUDENT_NAME e/EMAIL [t/TAG]...`<br>e.g., `as sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9` |
 | **Delete Student**            | `del_s/ds sno/STUDENT_NUMBER`<br>e.g., `ds sno/A0123456A`                                                                            |
-| **Edit Student**              | `edit_s/es sno/STUDENT_NUMBER [sn/STUDENT_NAME] [e/EMAIL] [t/TAG]`<br>e.g., `es sno/A0123456A sn/James Ho Ting Kang`                 |
+| **Edit Student**              | `edit_s/es i/INDEX sno/STUDENT_NUMBER [sn/STUDENT_NAME] [e/EMAIL] [t/TAG]...`<br>e.g., `es i/1 sno/A0123456A sn/James Ho Ting Kang`  |
 | **Add Student to Group**      | `add_s_g/asg sno/STUDENT_NUMBER gn/GROUP_NAME`<br>e.g., `asg sno/A0123456A gn/CS2103-F12-2`                                          |
 | **Delete Student From Group** | `del_s_g/dsg sno/STUDENT_NUMBER`<br>e.g., `dsg sno/A0123456A`                                                                        |
 | **Find Student**              | `find_s/fs q/QUERY [q/QUERY]...`<br>e.g., `fs q/James`                                                                               |
@@ -970,8 +968,8 @@ All parameters are case-insensitive when used for comparison unless stated other
 | **Add Existing Task to Group**  | `add_et_g/aetg i/INDEX gn/GROUP_NAME [gn/GROUP_NAME]...`<br>e.g., `aetg i/1 gn/CS2103-F12-3`                                                                     |
 | **Delete Task from All Groups** | `del_t/dt i/INDEX`<br>e.g., `dt i/1`                                                                                                                             |
 | **Delete Task from Group**      | `del_t_g/dtg i/INDEX gn/GROUP_NAME`<br>e.g., `dtg i/1 gn/CS2103-F12-2`                                                                                           |
-| **Edit Task for Group**         | `edit_t_g/etg i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)` <br>e.g., `etg i/1 gn/CS2103-F12-3 tn/v1.4 Release`                      |
-| **Edit Task for All Groups**    | `edit_t/et i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`<br>e.g., `et i/1 td/2024-11-20 1200`                                                      |
+| **Edit Task for Group**         | `edit_t_g/etg i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)]` <br>e.g., `etg i/1 gn/CS2103-F12-3 tn/v1.4 Release`                     |
+| **Edit Task for All Groups**    | `edit_t/et i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)]`<br>e.g., `et i/1 td/2024-11-20 1200`                                                     |
 | **Mark Task**                   | `mark_t/mt gn/GROUP_NAME i/INDEX`<br>e.g., `mt gn/CS2103-F12-2 i/2`                                                                                              |
 | **Find Task**                   | `find_t/ft q/QUERY [q/QUERY]...`<br>e.g., `ft q/v1.3 Release`                                                                                                    |
 | **Sort Tasks**                  | `sort_t/st`                                                                                                                                                      |
