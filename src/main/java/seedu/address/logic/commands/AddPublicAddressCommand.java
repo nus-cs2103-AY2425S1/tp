@@ -86,7 +86,7 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
                 .orElseThrow(() -> new CommandException("Public Address to add is missing"))
                 .getPublicAddressString();
 
-        List<String> allPAs = model.getFilteredPersonList().stream()
+        List<String> allPAs = model.getAddressBook().getPersonList().stream()
                 .flatMap(person -> person.getPublicAddressesComposition().getAllPublicAddresses().stream())
                 .map(PublicAddress::getPublicAddressString)
                 .toList();
