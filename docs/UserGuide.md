@@ -330,7 +330,7 @@ Examples:
 Filters the list of contacts and displays those with the provided tag(s).
 Use this feature to view all contacts with the same group of tag(s).
 
-Format: `filter [t/TAG]...`
+Format: `filter t/TAG [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
 
@@ -545,7 +545,7 @@ Please refer to the [Arguments Constraints Summary](#argument-constraints-summar
 | **[Delete](#deleting-a-person--delete)**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                         |
 | **[List](#listing-all-persons--list)**                  | `list`                                                                                                                                                                                                                                                                                      |
 | **[Sort](#sort-persons-by-name--sort)**                 | `sort {n/[ORDER] sch/[ORDER]}`<br> e.g., `sort n/asc`                                                                                                                                                                                                                                       |
-| **[Filter](#filter-persons-by-tag--filter)**            | `filter [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                                                                                                                                             |
+| **[Filter](#filter-persons-by-tag--filter)**            | `filter t/TAG [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                                                                                                                                       |
 | **[Find](#locating-persons-by-name--find)**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                  |
 | **[Search](#search-persons-by-schedule-range--search)** | `search [b/START_DATETIME] [en/END_DATETIME]`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                     |
 | **[Help](#viewing-help--help)**                         | `help`                                                                                                                                                                                                                                                                                      |
