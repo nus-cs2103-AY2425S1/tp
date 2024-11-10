@@ -920,7 +920,14 @@ Claims listed for policy type POLICY_TYPE of client: NAME
 **Q**: Why am I getting an error when executing commands?<br>
 **A**: Ensure that the command syntax (e.g. `list-claims INDEX pt/POLICY_TYPE`) is correct, and that the flags (e.g. `pt/`) are entered correctly. You can refer to [Command Structure](#4-command-structure) to better understand the command structure. 
 
+**Q**: Does Prudy support special characters in client names or addresses?<br>
+**A**: Currently, Prudy does not support special characters in client names. However, addresses and descriptions can include alphanumeric characters and symbols.
 
+**Q**: What should I do if Prudy shows an error message saying "invalid index"?<br>
+**A**: Ensure that the index you entered corresponds to an actual client or policy in the current displayed list. If you recently filtered the list, the index may differ from the full list.
+
+**Q**: Can I recover data if I accidentally use the clear command?<br>
+**A**: The clear command permanently deletes all data in Prudy and cannot be undone. It is recommended to back up your data file regularly to prevent accidental data loss.
 
 --------------------------------------------------------------------------------------------------------------------
 
