@@ -178,9 +178,9 @@ This section describes some noteworthy details on how certain features are imple
 **Technical Impact:**
 - Allowing forward slashes would create ambiguous parsing scenarios
 - Example of resulting error message:
-  ![Confusing error message](images/PlannedEnhancementBug1.png)
+  ![Confusing error message](images/PlannedEnhancementForwardSlash.png)
 
-**Status:** Implementation deferred to a future release due to the complexity of potential solutions and risk of introducing new bugs.
+**Status:** Scheduled for future release due to the complexity of potential solutions and risk of introducing new bugs.
 
 ### 3. Data Import/Export Functionality
 **Current issue:** Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' AgentAssist data files, or share their data files with other users.
