@@ -135,20 +135,23 @@ A client can have any number of tags (including 0)
 </div>
 
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about input formats:**<br>
 
-* Client's name must be unique (case-sensitive). Clients with the same name cannot be added to
-  the system twice.
-    - entering the command:
-        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-        * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
-          different block, different unit`
-          will not be allowed.
-    - However, clients with the same name spelling but different case can be added. Entering:
-        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-        * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
-          different block, different unit`
-          will successfully add both `John Doe` and `John doe` to the case management system.
+* Client's name should only contain alphanumeric characters and spaces, and it should not be blank
+    * name must be unique (case-sensitive). Clients with the same name cannot be added to
+      the system twice.
+        - entering the commands:
+            * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+            * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
+              different block, different unit`
+              will not be allowed.
+        - However, clients with the same name spelling but different case can be added. Entering
+          the commands:
+            * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+            * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
+              different block, different unit`
+              will successfully add both `John Doe` and `John doe` to the case management system.
 
 * Client's phone number must not contain any spaces or special characters.
     - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
@@ -205,22 +208,23 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about input formats:**<br>
 
-* Client's name must be unique (case-sensitive). Clients with the same name cannot be added to
-  the system twice.
-    - entering the command:
-        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-        * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
-          different block, different unit`
-          will not be allowed.
-    - However, clients with the same name spelling but different case can be added. Entering:
-        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-        * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
-          different block, different unit`
-          will successfully add both `John Doe` and `John doe` to the case management system.
-    - The same applies to `edit` commands, users cannot change the name of a client to a name
-      that already exists (case-sensitive) in the system.
+* Client's name should only contain alphanumeric characters and spaces, and it should not be blank
+  * name must be unique (case-sensitive). Clients with the same name cannot be added to
+    the system twice.
+      - entering the commands:
+          * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+          * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
+            different block, different unit`
+            will not be allowed.
+      - However, clients with the same name spelling but different case can be added. Entering 
+        the commands:
+          * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+          * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
+            different block, different unit`
+            will successfully add both `John Doe` and `John doe` to the case management system.
 
 * Client's phone number must not contain any spaces or special characters.
     - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
@@ -340,6 +344,7 @@ Examples:
 Adds a log entry to the specified client in the case management system.
 
 Format: `addlog INDEX r/REMARK [d/DATE]`
+
 * Adds a log entry to the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -347,6 +352,8 @@ Format: `addlog INDEX r/REMARK [d/DATE]`
 * The date is optional and defaults to the current date and time if not provided.
 * The date must be in the format `yyyy-MM-dd HH:mm` e.g. `2022-12-12 14:00`
 
+Examples:
+* `addlog 2 r/Client is doing well d/2022-12-12 14:00` adds a log entry to the 2nd client with the remark `Client is doing well` and the date `2022-12-12 14:00`.
 
 ### Deleting a log entry : `deletelog`
 
@@ -359,6 +366,9 @@ Format: `deletelog INDEX l/LOG_INDEX`
 * The `LOG_INDEX` refers to the index number shown in the displayed log list.
 * The log index **must be a positive integer** 1, 2, 3, …​
 * The log index is specific to the client at the specified `INDEX`.
+
+Examples:
+* `deletelog 2 l/3` deletes the 3rd log entry from the 2nd client in the case management system.
 
 ### Clearing all entries : `clear`
 
