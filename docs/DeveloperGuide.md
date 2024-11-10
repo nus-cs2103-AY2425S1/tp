@@ -2,19 +2,47 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+
+## Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Setting Up, Getting Started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+* [Implementation](#implementation)
+    * [Add Client Feature](#add-client-feature)
+    * [Add Listing Feature](#add-listing-feature)
+    * [Sort Feature](#sort-feature)
+* [Documentation, Logging, Testing, Configuration, Dev-Ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix-A: Requirements](#appendix-a-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+* [Appendix-B: Planned Enhancements](#appendix-b-planned-enhancements)
+    * [Enhance Phone Numbers to Accept Special Characters](#enhance-phone-numbers-to-accept-special-characters)
+* [Appendix-C: Instructions for Manual Testing](#appendix-c-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Adding a client](#adding-a-client)
+    * [Deleting a client](#deleting-a-client)
+
 
 -----------------------------------------------------------------------------------------------------------------
 ---
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well} 
-* ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, as well as the JavaDocs for code written by BuffWuff1712
+This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
+
+ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
+as well as the JavaDocs for code written by BuffWuff1712
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -105,7 +133,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `PROpertyParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -146,7 +174,7 @@ The `Model` component,
 The `Storage` component,
 
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `PROpertyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -158,95 +186,48 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedPROperty`. It extends `PROperty` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedPROperty#commit()` — Saves the current address book state in its history.
-* `VersionedPROperty#undo()` — Restores the previous address book state from its history.
-* `VersionedPROperty#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitPROperty()`, `Model#undoPROperty()` and `Model#redoPROperty()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedPROperty` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/developer-guide-images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitPROperty()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/developer-guide-images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitPROperty()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/developer-guide-images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitPROperty()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPROperty()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/developer-guide-images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial PROperty state, then there are no previous PROperty states to restore. The `undo` command uses `Model#canUndoPROperty()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/developer-guide-images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/developer-guide-images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoPROperty()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone PROperty states to restore. The `redo` command uses `Model#canRedoPROperty()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitPROperty()`, `Model#undoPROperty()` or `Model#redoPROperty()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/developer-guide-images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitPROperty()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/developer-guide-images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/developer-guide-images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
     
+### Add Client Feature
+
+the AddCommand follows a typical command pattern where `LogicManager` orchestrates the parsing and execution process. 
+When the user input is received, `LogicManager` calls `AddressBookParser` to interpret and parse the user input string into an executable command.
+In this case, `AddressBookParser` creates `AddCommandParser` to parse user input string.
+
+![AddSequenceDiagram](images/developer-guide-images//AddSequenceDiagram-Logic.png)
+
+`AddressBookParser` first obtains the values corresponding to the prefixes `n/`, `p/`, `e/`, `a/`, `t/` and `r/`.
+`AddressBookParser` ensures that:
+- All values corresponding to the prefixes are valid
+  If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, 
+  `AddCommandParser` creates an `AddCommand` instance with a `Person` object representing the new client.
+
+Upon execution, `AddCommand` first queries the supplied model if it contains a client. If no duplicate client exists, `AddCommand` then calls on `model::addPerson` to add the client into the contact list.
+
+### Add Listing Feature
+
+the ListingAddCommand follows a typical command pattern where `LogicManager` orchestrates the parsing and execution process.
+When the user input is received, `LogicManager` calls `AddressBookParser` to interpret and parse the user input string into an executable command.
+In this case, `AddressBookParser` creates `ListingCommandsParser` to parse user input string.
+
+![AddListingSequenceDiagram](images/developer-guide-images//AddListingSequenceDiagram-Logic.png)
+
+`ListingCommandsParser` first obtains the user input string and ensures that the suffix of the command matches 'add' or 'delete'. 
+ If the suffix does not match either, `ListingCommandsParser` throws a ParseException. Otherwise,
+ `ListingCommandsParser` creates `ListingAddCommandParser` to parse the arguments.
+
+`ListingAddCommandParser` then extracts the index and the values corresponding to the prefixes `t/` and `a/`.
+`ListingAddCommandParser` ensures that:
+- Provided index is within a valid range, meaning it cannot be less than 1 or greater than the number of clients in the currently displayed list.
+- All values corresponding to the prefixes are valid.
+
+If any of the above constraints are violated, `ListingAddCommandParser` throws a ParseException. Otherwise,
+`ListingAddCommandParser` creates an `ListingAddCommand` instance with a `Listing` object representing the new listing.
+
+Upon execution, `ListingAddCommand` first attempts to add a listing in a `UniqueListingList`. If no duplicate listing exists,
+`UniqueListingList` then adds the listing to its list. 
+
 ### Sort Feature
 
-### Implementation
 
 The sort feature in `PROperty` is implemented by adding sorting methods to the `UniquePersonList` class, which is responsible for managing the list of `Person` objects. Sorting is performed directly on the `internalList` by specific attributes such as `name` or `ID`, allowing users to organise contacts in a meaningful order.
 
@@ -279,7 +260,7 @@ Similarly, the sorting process within the `Model` component is shown below:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -313,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | --------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------- |
 | `* * *`  | new user                                | see usage instructions                                      | refer to instructions when I forget how to use the App        |
 | `* * *`  | user                                    | add a contact with their information                        | view them later                                               |
-| `* * *`  | user                                    | delete a person                                             | remove entries that I no longer need                          |
+| `* * *`  | user                                    | delete a client                                             | remove entries that I no longer need                          |
 | `* * *`  | user                                    | use a search bar to find my contact                         | locate details without going through the entire list          |
 | `* * *`  | user                                    | edit current contact details                                | keep the details updated                                      |
 | `* * *`  | user                                    | search via tags                                             | filter by different groups of people                          |
@@ -360,17 +341,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `PROperty` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: Add a client**
 
 **MSS**
 
-1. User requests to add a new person by providing the person's details.
+1. User requests to add a new client by providing the client's details.
 
 2. PROperty validates the input details.
 
-3. PROperty adds the person to the contact list.
+3. PROperty adds the client to the contact list.
 
-4. PROperty displays a confirmation that the person has been added.
+4. PROperty displays a confirmation that the client has been added.
    
    Use case ends.
 
@@ -384,19 +365,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
 
-- 2b. A person with the same details already exists.
+- 2b. A client with the same details already exists.
   
-  - 2b1. PROperty informs the user that the person already exists.
+  - 2b1. PROperty informs the user that the client already exists.
     
     Use case ends.
 
 ---
 
-**Use case: Edit a person's details**
+**Use case: Edit a client's details**
 
 **MSS**
 
-1. User requests to edit details of a specific person.
+1. User requests to edit details of a specific client.
 
 2. User inputs desired edits.
 
@@ -404,13 +385,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 4. PROperty saves the updated details.
 
-5. PROperty confirms that the person's details have been updated.
+5. PROperty confirms that the client's details have been updated.
    
    Use case ends.
 
 **Extensions**
 
-- 1a. The specified person does not exist.
+- 1a. The specified client does not exist.
   
   - 1a1. PROperty shows an error message.
     
@@ -426,15 +407,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Add remarks to a person**
+**Use case: Add remarks to a client**
 
 **MSS**
 
-1. User selects a person to add a remark.
+1. User selects a client to add a remark.
 
 2. User enters the remark.
 
-3. PROperty saves the remark to the person's details.
+3. PROperty saves the remark to the client's details.
 
 4. PROperty confirms that the remark has been added.
    
@@ -442,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 1a. The specified person does not exist.
+- 1a. The specified client does not exist.
   
   - 1a1. PROperty shows an error message.
     
@@ -450,19 +431,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The remark is empty.
   
-  - 2a1. PROperty removes the remark from the specified person instead.
+  - 2a1. PROperty removes the remark from the specified client instead.
 
 ---
 
-**Use case: Remove remarks from a person**
+**Use case: Remove remarks from a client**
 
 **MSS**
 
-1. User selects a person to remove remark.
+1. User selects a client to remove remark.
 
 2. User enters empty remark.
 
-3. PROperty removes the existing remark (if any) from the person's details.
+3. PROperty removes the existing remark (if any) from the client's details.
 
 4. PROperty confirms that the remark has been removed.
 
@@ -470,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 1a. The specified person does not exist.
+- 1a. The specified client does not exist.
 
     - 1a1. PROperty shows an error message.
 
@@ -478,15 +459,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Search for persons by tags**
+**Use case: Search for clients by tags**
 
 **MSS**
 
-1. User requests to search for persons using one or more tags.
+1. User requests to search for clients using one or more tags.
 
 2. PROperty filters the contact list based on the specified tags.
 
-3. PROperty displays a list of persons matching the tags.
+3. PROperty displays a list of clients matching the tags.
    
    Use case ends.
 
@@ -498,7 +479,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
 
-- 2a. No persons match the specified tags.
+- 2a. No clients match the specified tags.
   
   - 2a1. PROperty informs the user that no matches were found.
     
@@ -927,7 +908,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should work on any screen size from (`13'` laptop screens to `32'` widescreen monitors)
 5. Should reliably store contact information across different sessions with minimal chance of corruption
@@ -945,7 +926,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Reminder/Event**: A scheduled notification linked to a contact, alerting the user of upcoming tasks, appointments, or follow-ups.
 
-- **Social Media Handles**: Usernames or profile links associated with a person's social media accounts.
+- **Social Media Handles**: Usernames or profile links associated with a client's social media accounts.
 
 - **Syntax Highlighting**: A feature that displays commands in different colors to differentiate between commands, attributes, and values for easier readability.
 
@@ -953,7 +934,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Undo Feature**: A function that allows the user to reverse the last action taken, preventing accidental loss or changes to information.
 
-- **Contact**: An entry in the PROperty representing a person, including their personal and professional information.
+- **Contact**: An entry in the PROperty representing a client, including their personal and professional information.
 
 - **Reminder/Event List**: A chronological list displaying upcoming reminders or events set by the user.
 
@@ -965,7 +946,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Planned Enhancements**
+
+Team Size: 5 members
+
+As we continue to develop PROperty, we are focused on refining and expanding its capabilities to better meet user needs. 
+Through identifying current limitations, we’re able to target areas that can benefit most from enhancement. 
+This section highlights our planned improvements, showcasing the steps we're taking to deliver a more comprehensive and effective solution for property agents.
+
+
+### 1. Enhance Phone Numbers to Accept Special Characters
+
+**Feature Flaw in Current Implementation**
+
+At present, phone numbers only accept numeric characters, excluding symbols such as `+` and dashes `-`. 
+However, these characters are essential for supporting country and area codes, and dashes can improve readability by 
+separating sections of a phone number (e.g., `+1-800-9087-2029`).
+
+**Proposed Enhancement**
+
+We plan to modify the phone number field to allow `+` symbols and dashes `-` so users can input phone numbers with country/area codes 
+and use dashes for better readability. This enhancement will provide greater flexibility and accommodate a wider range of valid phone number formats.
+
+### 2. Enhance Search Flexibility
+
+**Feature Flaw in Current Implementation**
+
+The current search functionality is limited when searching for strings containing alphanumeric characters followed by special characters (e.g. "29," in an address),
+or special characters followed by alphanumeric characters (e.g "#03-02" in a unit number). 
+Users may not find their intended client if they do not explicitly state the exact string due to this restriction
+(e.g. using `find 29` to find a client with the address `Blk 30 Geylang Street 29, #06-40` will result in no clients being found).
+
+**Proposed Enhancement**
+
+We plan to enhance the search feature to allow partial matches on numeric values regardless of punctuation or spacing. 
+This enhancement will improve the user experience by showing relevant contact details even if the input includes numbers adjacent to punctuation marks.
+
+### 3. Enhance Export Feature to Handle Export Errors.
+
+**Feature Flaw in Current Implementation**
+
+At present, the PROperty does not indicate to the user when an export fails (e.g. If the user exports a csv file and opens it, 
+then edits information using the app and exports the csv again, 
+the second export will cause an error and the new CSV file will not be correctly exported.
+However, the PROperty GUI reflects that a second export command has been successfully executed, 
+even though the console shows that an error has been thrown).
+
+**Proposed Enhancement**
+
+We plan to enhance the export feature by implementing error handling should there be a failed export. 
+This enhancement will improve the user experience by informing the user when their export has failed,
+and prevent confusion when the user checks their CSV file to find there has been no updates to its contents.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix C: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -990,29 +1025,35 @@ testers are expected to do more *exploratory* testing.
       
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a client
 
-### Deleting a person
+1. Adding a new client to the contact list
 
-1. Deleting a person while all persons are being shown
+    1. Prerequisites: The contact list is displayed, and the user has relevant details to add a new client.
+
+    2. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Road`<br>
+       Expected: A new contact with the name "John Doe" and provided details is added to the list. The status message in the outcome box confirms the addition.
+
+    3. Test case: `add n/ p/ e/ a/`<br>
+       Expected: No client is added. An error message appears, indicating that names should only contain alphanumeric characters and spaces, and it should not be blank.
+
+    4. Other incorrect add commands to try: `add`, `add n/John Doe p/@456789`, `add n/Harry Kane p/88332255 e/harrykane.com a/123 Clementi Road`<br>
+       Expected: Error message indicating invalid command, phone or email format, with no changes to the list.
+
+
+### Deleting a client
+
+1. Deleting a client while all clients are being shown
    
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
    
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
    
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message.
    
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-   
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_

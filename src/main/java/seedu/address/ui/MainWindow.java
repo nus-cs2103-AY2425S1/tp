@@ -55,6 +55,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane personPanePlaceholder;
 
+    private PersonPane personPaneObject;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -180,10 +182,10 @@ public class MainWindow extends UiPart<Stage> {
     public void setShowPerson(Person person) {
         logic.setCurrentlyShownPerson(person);
         // Create a new PersonPane with the selected person
-        PersonPane personPane = new PersonPane(person);
+        personPaneObject = new PersonPane(person);
         personPanePlaceholder.getChildren().clear(); // Clear existing content
         // Add the new PersonPane to the placeholder
-        personPanePlaceholder.getChildren().add(personPane.getRoot());
+        personPanePlaceholder.getChildren().add(personPaneObject.getRoot());
     }
 
     /**
@@ -204,6 +206,15 @@ public class MainWindow extends UiPart<Stage> {
                     || (logic.getCurrentlyShownPerson() != null
                             && logic.getCurrentlyShownPerson().equals(commandResult.getOriginalPerson()))) {
                 setShowPerson(commandResult.getPersonToShow());
+            }
+
+            if (logic.getCurrentlyShownPerson() != null && commandResult.isDeleteCommand()) {
+                if (commandResult.getOriginalPerson() == null
+                        || logic.getCurrentlyShownPerson().equals(commandResult.getOriginalPerson())
+                ) {
+                    personPaneObject.emptyPane();
+                }
+
             }
 
             if (commandResult.isShowHelp()) {
