@@ -58,8 +58,9 @@ public class UnassignVendorCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    1, model.getFilteredPersonList().size()));
         }
 
         Person personToUnassign = lastShownList.get(targetIndex.getZeroBased());
@@ -94,11 +95,6 @@ public class UnassignVendorCommand extends Command {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof UnassignVendorCommand)) {
-            return false;
         }
 
         UnassignVendorCommand otherUnassignVendorCommand = (UnassignVendorCommand) other;
