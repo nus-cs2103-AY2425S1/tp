@@ -23,8 +23,15 @@ public class IncomeTest {
     @Test
     public void isValidIncome() {
         assertTrue(Income.isValidIncome(3000.0));
+
+        // lower limit
         assertTrue(Income.isValidIncome(0));
+
+        // artificial upper limit
+        assertTrue(Income.isValidIncome(Integer.MAX_VALUE));
+
         assertFalse(Income.isValidIncome(-0.1));
         assertFalse(Income.isValidIncome(-1));
+        assertFalse(Income.isValidIncome(Integer.MAX_VALUE + 0.1));
     }
 }

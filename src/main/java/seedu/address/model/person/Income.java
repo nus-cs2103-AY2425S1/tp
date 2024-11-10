@@ -50,15 +50,16 @@ public class Income {
     }
 
     /**
-     * Returns true if a given value is a valid income.
+     * Returns true if a given value is a valid income
+     * i.e. must be non-negative and is not more than 2^31 - 1 (preset as the artificial upper limit)
      * @param test A double value to be tested
      * @return {@code true} if the value is valid, {@code false} otherwise
      */
     public static boolean isValidIncome(double test) {
-        return test >= 0;
+        return test >= 0 && test <= Integer.MAX_VALUE;
     }
 
     private static double roundTwoDecimalPlaces(double value) {
-        return Math.floor(Math.round(value * 100.0) / 100.0);
+        return Math.round(value * 100.0) / 100.0;
     }
 }
