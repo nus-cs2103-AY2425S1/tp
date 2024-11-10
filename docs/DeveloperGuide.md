@@ -391,7 +391,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Add tags to a contact**
+**Use case: UC04 - Add tags to a contact**  
+
 **Precondition**: Contact to add tags to already exists
 
 **MSS**
@@ -417,7 +418,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case ends.
 
-**Use cases: UC05 - Delete a tag from a contact**
+**Use case: UC05 - Delete a tag from a contact**  
+
 **Precondition**: Contact to delete a tag from already exists
 
 **MSS**
@@ -442,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
-**Use cases: UC06 - Undo an execution of command**
+**Use case: UC06 - Undo an execution of command**
 **Precondition**: At least one valid command has been executed by the user.
 
 **MSS**
@@ -456,7 +458,7 @@ before the command was executed.
 * 1a. No earlier data to revert.
     * 1a1. CampusConnect shows error message.
 
-      Use cases ends.
+      Use case ends.
 
 **Use Case: UC07 - Redo Command Execution**
 
@@ -491,7 +493,9 @@ before the command was executed.
 * **Field**: An attribute possessed by a contact, namely Phone number, Tags, Name and Email.
 * **Prefix**: An identifier used in commands to indicate which field is referred to. For the 4 fields Phone, Name, Tags and Email,
     the *prefixes* would be `p/`, `t/`, `n/` and `e/` respectively.
-* **Duplicate Contact**: A contact that has the same Phone, Email or Name as another contact.
+* **Duplicate Contact**: A contact is considered a duplicate if it shares the same phone number, email, or name with another contact. 
+    Phone numbers and emails are unique identifiers, so allowing duplicates could cause confusion, such as accidentally contacting the wrong person. 
+    Unique names also help maintain organization, with small variations (e.g., capitalization or adding a number) used to distinguish individuals with the same name.
 * **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories. The execution of `find` commands do not change the content of tag lists. 
 * **Person List**: The scrollable list of contacts in the GUI displaying all contacts and the respective values for their fields.
 * **Commands affected by `undo` and `redo`**: These refer to all commands that affect the *state* of the Tag List and Contact List
