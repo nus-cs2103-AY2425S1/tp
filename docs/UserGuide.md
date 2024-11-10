@@ -199,7 +199,7 @@ Example:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in UniVerse.
 
 Format:
 
@@ -211,7 +211,7 @@ list
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in UniVerse.
 
 Format:
 
@@ -287,9 +287,17 @@ findi i/swimming
 ```plaintext
 findi i/swim
 ```
+<br>
+
 <img src="images/findPplSwimming.png" alt="result for 'find i/swimming'" style="width: 80%;">
 
-Invalid Input: **searching by multiple interests** is not supported and will trigger an error message:
+<br><br>
+
+<box type="warning" seamless>
+
+**Caution**:
+
+Invalid Input: **Searching by multiple interests** is not supported and will trigger an error message:
 ```plaintext
 Invalid command format! 
 findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers.
@@ -314,7 +322,7 @@ findi i/reading,swimming
 ```plaintext
 findi i/reading, swimming
 ```
-
+</box>
 
 <br>
 
@@ -354,11 +362,16 @@ Examples:
 
 <br>
 
+#### Finding Contacts by University: `findu`
+
 Finds contacts with a specific university from the currently displayed list.
 
 <box type="tip" seamless>
+
 **Tip:** University name is case-sensitive.
+
 </box>
+
 Format:
 ```
 findu u/UNIVERSITY
@@ -411,7 +424,8 @@ findm m/Comp
 ```
 <img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 80%;">
 
-<br>
+
+<br><br>
 
 ### Deleting a person : `delete`
 
@@ -495,6 +509,36 @@ _Details coming soon ..._
 4. **When adding a new user**, the birthday field is compulsory.
 5. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
 6. **When adding a new user**, the birthday field can be a date in the future. 
+---
+
+## Glossary
+
+- **CLI (Command Line Interface)**: A user interface that allows interaction with the application through text-based commands, enabling quick and efficient data entry and command execution.
+
+- **GUI (Graphical User Interface)**: The visual component of the application that users interact with. It includes buttons, panels, and other visual elements to make navigation easier.
+
+- **Keyword**: A word or phrase used to search for or filter contacts within the app (e.g., an interest or university name in search commands).
+
+- **Index**: The numerical identifier assigned to each contact in the list, used in commands such as `delete 1` or `edit 2` to specify which contact is being referenced.
+
+- **Tag**: A label attached to a contact for categorization and easy filtering. Tags help organize contacts based on shared attributes or groups.
+
+- **University**: The name of the institution where a contact is studying or has studied. This field helps users find and connect with peers from specific universities.
+
+- **Major**: The field of study that a contact is pursuing or has completed. It helps users find contacts within the same academic field.
+
+- **Work Experience**: Information detailing a contact’s professional experience, formatted as `role,company,year` (e.g., `Intern,Google,2023`).
+
+- **Interest**: A hobby or activity that a contact is interested in, used to connect with others who share similar interests.
+
+- **Find Command**: A command used to filter and display contacts based on specific criteria (e.g., `findu`, `findm`, `findi`, `findw`).
+
+- **Alphanumeric**: Refers to characters that are either letters (A-Z, a-z) or numbers (0-9). It may include symbols such as underscores (_) and hyphens (-) in certain contexts, but generally excludes special characters unless specified.
+
+- **Case-Insensitive**: A search term or keyword that matches regardless of whether it is in uppercase or lowercase (e.g., `findu u/nus` matches both "NUS" and "nus").
+
+- **Partial Match**: A feature in some commands where the search does not require an exact match of the keyword, but can find results that contain the keyword as part of a longer string (e.g., `findm m/Comp` could match "Computer Science" and "Computer Engineering").
+
 ---
 
 ## Command Summary
