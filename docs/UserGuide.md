@@ -113,8 +113,8 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 </div>
 
 <div markdown="span" class="alert alert-danger">⚠️ **Warning:**
-Students with same name, regardless of case-sensitivity, will be considered as the same student and will not be added.
-Modules and tags are case-sensitive and will be added as they are.
+- Students with same name, regardless of case-sensitivity, will be considered as the same student and will not be added.
+- Modules and tags are case-sensitive and will be added as they are.
 </div>
 
 Examples:
