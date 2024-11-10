@@ -59,7 +59,7 @@ public class FindCommandParserTest {
     public void parse_invalidInput_throwsParseException() {
         // EP: invalid input
         assertParseFailure(parser, " hello",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_PARAMETERS));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
     @Test
     public void parse_emptyNameArgument_throwsParseException() {
