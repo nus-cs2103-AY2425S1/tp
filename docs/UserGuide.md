@@ -172,14 +172,45 @@ Examples:
 
 ### Adding an insurance plan to a client : `addInsurance`
 
-Adds the insurance plan (given by the `INSURANCE_ID`) to the client at the specified `INDEX`. Insurance plan types are preloaded and new types cannot be added by the user. This is to ensure that the plans are consistent with market type plans. In the future, there are some plans to allow users to add their own new types of insurance plans.
+Adds an insurance plan (given by the `INSURANCE_ID`) to the client at the specified `INDEX`. 
 
 Format: `addInsurance INDEX iid/INSURANCE_ID`
 
-* If the `INDEX` or `INSURANCE_ID` is invalid, the user will be informed with an error message.
+<box type="tip" seamless>
+    Parameters
+</box>
 
-Examples:
-* `addInsurance 1 iid/1` adds the insurance plan with `INSURANCE_ID` 1 to the client at `INDEX` 1
+1. `INDEX` : Must be a valid client index in the filtered list that is currently shown.
+   <br>
+2. `INSURANCE_ID` : Must be an existing valid ID that is currently supported.
+   <br> Currently supported IDs for insurance plans: `Basic Insurance Plan` : `0` & `Travel Insurance Plan`: `1`. <br>
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
+
+* If the `INDEX` is invalid, or the client does not have the insurance plan `INSURANCE_ID`, the
+  user will be informed with an error message.
+* Insurance plan types are preloaded and new types cannot be added by the user. 
+  This is to ensure that the plans are consistent with market type plans. 
+  In the future, there are some plans to allow users to add their own new types of insurance plans.
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:warning:</md></span>
+    Warnings:
+</box>
+- The prefix `iid` is case-sensitive.
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `addInsurance 1 iid/1`
+<br>
+Output 1: `Added Insurance Plan: Travel Insurance Plan, to Client: Alex Yeoh`
+
 
 ### Deleting an insurance plan from a client : `deleteInsurance`
 
@@ -236,7 +267,7 @@ as a placeholder claim for now.
 - Claim ID is always capitalised in the system so b1234 is the considered the same as B1234.
 - Do not add alphabets or any other special characters including but not limited to "$", "£" and "€" in front or behind
 the claim amount.
-- the prefixes like `iid`, `cid` and `ca` are case-sensitive.
+- The prefixes such as `iid`, `cid` and `ca` are case-sensitive.
 
 <box type="info">
     <span circle slot="icon" class="text-danger"><md>:book:</md></span>
