@@ -224,6 +224,7 @@ Shows a message explaining how to access the help page.
 
 <img src="images/helpMessage.png" alt="help message" width="500" height="300">
 
+<br><br>
 
 <h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-client</span></h3>
 
