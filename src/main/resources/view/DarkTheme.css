@@ -120,17 +120,19 @@
     -fx-text-fill: white;
 }
 
-.cell_big_label { /*name*/
+.cell_big_label { /* Name */
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
-.cell_medium_label .label { /*nickname*/
+/*@@author cth06-Github*/
+.cell_medium_label .label { /* Nickname */ /*@@author cth06-Github*/
     -fx-font-size: 15px;
 }
+/*@@author*/
 
-.cell_small_label { /* contact details */
+.cell_small_label { /* Contact Details */
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
@@ -347,6 +349,7 @@
     -fx-background-radius: 0;
 }
 
+/*@@author wuzengfu*/
 #roles {
     -fx-hgap: 7;
     -fx-vgap: 3;
