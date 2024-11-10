@@ -408,6 +408,12 @@ Use case ends.
   
   Use case ends.
 
+
+* 3a. The deleted customer's order list is being displayed.
+  * SellSavvy configures the order panel to not display anyone's orders.
+
+  Use case resumes from step 4.
+
 **Use case 4: Find the Customer by their Name**
 
 * **Use Case**: UC04 - Find the Customer by their Name
