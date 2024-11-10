@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide 👨‍🍳👩‍🍳
+title: User Guide 📖🧁
 ---
 
 # **Welcome to BakeBuddy**
