@@ -22,7 +22,7 @@ public class HelpWindowTest {
 
     @Test
     public void helpMessage_isCorrect() {
-        String expectedMessage = "Refer to the user guide: " + HelpWindow.USERGUIDE_URL;
+        String expectedMessage = "Refer to the user guide for more details: " + HelpWindow.USERGUIDE_URL;
         assertEquals(expectedMessage, HelpWindow.HELP_MESSAGE,
                 "Help message should be correctly formatted");
     }
