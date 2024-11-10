@@ -140,18 +140,7 @@ Events allow you to group contacts together in a sensible and seamless manner li
     </ul>
 </box>
 
-### Viewing Help: `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format:
-```
-help
-```
-
-### Create a New Record: `add`
+### Create a Contact/Event: `add`
 
 Adds a new entity, of type specified by flag.
 
@@ -167,7 +156,6 @@ Examples:
 <box type="tip" header="**Tip:**" >
   A contact can have any number of tags (including 0).
 </box>
-
 
 Note:
 * You have to specify whether you are creating a `Client` or a `Vendor` using `-c` or `-v`.
@@ -206,16 +194,16 @@ Example:
 * `list -v s/catering`
 * `list -e des/wedding`
 
-<box type="tip" header="**Tip:**" >
-  All parameters are optional! Leaving them out will list all contacts (clients and vendors) by default.
+<box type="info" header="**Note:**" >
+  All parameters are optional! Running `list` by itself will list all contacts (clients and vendors) by default. If the input is <code>list abc</code>, <code>abc<code> will be discarded and the input will be treated as `list`. 
 </box>
 
 Notes:
 * The `-c`, `-v` and `-e` flags can be used to decide what type of data to list.
-* `s/SERVICE` should only be specified if `v` is specified.
+* `s/SERVICE` should only be specified if `-v` is specified.
 * `d/DATE` and `des/DESCRIPTION` should only be specified if `-e` is specified.
 * Any extra information provided in between flags and parameters will be ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/Jane`
-* The `Name` keyword search is case-insensitive. e.g. `hans` will match `Hans`.
+* The `n/NAME` keyword search is case-insensitive. e.g. `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * Contacts matching all filters will be returned (i.e. `AND` search). e.g. `list -c n/Jane Doe a/Blk 123` will list all clients with names containing **ANY** of `Jane` or `Doe` **AND** address containing **ANY** of `Blk` or `123`.
 * Refer to the specifications of the parameters [here](#parameters).
@@ -236,7 +224,6 @@ edit {INDEX | id/ID} [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG
 <box type="warning" header="**Caution**">
   Although all the parameters are optional, you must specify at least one field to make an edit!
 </box>
-
 
 Examples:
 * `edit 1 p/91234567`
@@ -303,7 +290,7 @@ exit
 
 ### Editing the Data File
 
-DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
+DDD data are saved automatically as a JSON file `HOME_FOLDER/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" header="**Caution**">
   If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it. Certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is null/outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
@@ -345,6 +332,8 @@ DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.js
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. On **some devices**, the UI may appear truncated. Resizing the window usually helps to correct this behavior.
+4. As DDD is targeted at freelance wedding event planners, it is designed to handle up to **10,000** unique contacts and events. As such, there is no guarantee that the app's ID system will function properly if the current largest ID becomes very high.
 
 --------------------------------------------------------------------------------------------------------------------
 
