@@ -350,7 +350,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a. SellSavvy detects there are required parameters missing.
+* 1a. SellSavvy detects that there are required parameters missing.
   * 1a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
@@ -505,7 +505,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. SellSavvy detects there are required parameters missing or the customer index is non-positive.
+* 2a. SellSavvy detects that the required parameters are missing or the customer index is non-positive.
     * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
@@ -545,7 +545,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. SellSavvy detects the customer index is missing or non-positive.
+* 2a. SellSavvy detects that the customer index is missing or non-positive.
     * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
