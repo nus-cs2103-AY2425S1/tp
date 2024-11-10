@@ -219,7 +219,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * `NAME` can only contain **alphanumeric and spaces**.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
+Use `t/` to add new tags and `dt/` to delete specific tags from a client. 
 </div>
 
 Examples:
@@ -249,7 +249,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use the `list` or `find` command to determine the `INDEX` of the person you want to delete. 
+Use the `list` or `find` command to determine the `INDEX` of the client you want to delete. 
 </div>
 
 Examples:
@@ -318,7 +318,7 @@ Format: `show INDEX`
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `show` to view a person in-depth. 
+Use `show` to view a client in-depth. 
 </div>
 
 Examples:
@@ -420,10 +420,6 @@ Format: `clear`
 Example:
 
 1. `clear` clears all clients and their data from PROperty.
-
-Visual example of correct output [Example `1.`]:
-
-![ClearCommandShowcase.png](images/user-guide-images/ClearCommandShowcase.png)
 
 [_Back to Top_](#table-of-contents)
 
@@ -532,20 +528,18 @@ Exports your contacts and their relevant data to a Comma-Separated Value (CSV) f
 
 Format: `export`
 
-* Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
+* Headings of the CSV file will be the attributes of a client (ie Name, Address, Phone number etc).
 * If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
-* By default, the exported CSV file at `[JAR file location]/data/property.csv`
+* By default, the exported CSV file is at `[JAR file location]/data/property.csv`.
+* Ensure that you do not have any other programmes utilising the `property.csv` file while you run the `export` command. Otherwise, PROperty may not correctly export your client data.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 `export` is useful if you want to view your contacts in Excel.
 </div>
+
 Example:
 
 1. `export` exports your current client data in PROperty into a CSV file.
-
-Visual example of correct output [Example `1.`]:
-
-![ExportCommandShowcase](images/user-guide-images/ExportCommandShowcase.png)
 
 [_Back to Top_](#table-of-contents)
 
@@ -555,6 +549,7 @@ Exits the program.
 
 Format: `exit`
 
+* You should **only** utilise the `exit` command to close the application. Unintended issues or bugs may occur if you utilize other methods to close the application.
 * There is no visual example as the programme will close after inputting the `exit` command.
 
 Example:
@@ -573,12 +568,6 @@ Example:
 
 1. `help` results in a popup window which contains all the commands in PROperty for easy reference during use.
 
-Visual example of correct output:
-
-![HelpCommandShowcase.png](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase2.png)
-
 [_Back to Top_](#table-of-contents)
 
 ### Saving the data
@@ -589,11 +578,11 @@ PROperty data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-PROperty data are saved automatically as a [JSON](#technical-terms) file `[JAR file location]/data/property.json`. Advanced users are welcome to update data directly by editing that data file.
+PROperty data are saved automatically as a [JSON](#technical-terms) file `[JAR file location]/data/property.json`. Advanced users are welcome to update data directly by editing that data file with valid inputs only.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, PROperty will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file results in an invalid format, PROperty may not load the data and will reset the `property.json` file after you exit application. Hence, it is recommended to make a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range, or manually add tags not stated in the glossary, etc). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 [_Back to Top_](#table-of-contents)
@@ -712,3 +701,5 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **CONTRACTOR**: Professionals providing construction, renovation, or repair services.
 
 [_Back to Top_](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
