@@ -619,7 +619,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Add is unsuccessful since `p/` is not specified. Error details shown in the status message. Status bar remains the same.
        1. Similar commands to try: Missing `n/`, `e/` or `a/`. <br> Expected: Same as above. 
     5. Test case: `add -c n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/vegan t/urgent` performed twice.<br>
-       Expected: Second add is unsuccessful due to duplicate name/phone. Error details shown in the status message. Status bar remains the same.
+       Expected: Second add is unsuccessful due to duplicate name and phone. Error details shown in the status message. Status bar remains the same.
     6. Test case: `add -c n/Alice (Yeo) p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/vegan t/urgent` <br>
        Expected: Add is unsuccessful due to invalid `Name` input. Error details shown in the status message. Status bar remains the same.
        1. Similar commands to try: Invalid inputs for `p/`, `e/`, `a/` or `t/`. <br> Expected: Same as above.
@@ -634,7 +634,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `add -v n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/budget`<br>
        Expected: Add is unsuccessful since `p/` is not specified. Error details shown in the status message. Status bar remains the same.
         1. Similar commands to try: Missing `n/`, `p/`, `e/` or `a/`. <br> Expected: Same as above.
-    5. Test case: `add -c n/Alice p/98765432 e/alice@gmail.com a/1 Clementi Street Blk 25 s/Catering t/budget` followed by 
+    5. Test case: `add -c n/Alice p/98765432 e/alice@gmail.com a/1 Clementi Street Blk 25 t/budget` followed by 
        `add -v n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 s/Catering t/budget`<br>
         Expected: Second add is unsuccessful due to duplicate phone. Error details shown in the status message. Status bar remains the same.
     6. Test case: `add -v n/Alice (Yeo) p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 s/Catering t/budget` <br>

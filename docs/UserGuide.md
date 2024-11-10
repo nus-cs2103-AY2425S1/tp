@@ -97,7 +97,6 @@ Events allow you to group contacts together in a sensible and seamless manner li
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
 <box type="info" header="**Notes about the command format:**">
     <ul>
       <li>
@@ -113,15 +112,19 @@ Events allow you to group contacts together in a sensible and seamless manner li
       </li>
       <li>
         Parameters wrapped in <strong>square brackets</strong> are optional arguments.<br>
-        <ul><li>e.g. in <code>add n/NAME ... [t/TAG ...]</code>, <code>TAG</code> is an optional argument.</li></ul>
+        <ul><li>e.g. in <code>add n/NAME ... [t/TAG…​]</code>, <code>TAG</code> is an optional argument.</li></ul>
       </li>
       <li>
         Parameters wrapped in <strong>curly brackets</strong> are mutually exclusive arguments (i.e. only 1 should be specified).<br>
         <ul><li>e.g. in <code>add {-c | -v s/SERVICE} ...</code>, <code>-c</code> and <code>-v s/SERVICE</code> are mutually exclusive arguments.</li></ul>
       </li>
       <li>
-        Items with <code>...</code>​ after them can be used multiple times including zero times.<br>
-        <ul><li>e.g. <code>t/TAG ...</code> can be used as <code> </code> (i.e. 0 times), <code>t/vegetarian</code>, <code>t/budget conscious t/small scale</code> etc.</li></ul>
+        Items with <code>…</code>​ after them can be used one or more times.<br>
+        <ul><li>e.g. <code>c/CLIENT_ID…​</code> can be used as <code>c/1</code>, <code>c/17 c/22</code> etc.</li></ul>
+      </li>
+      <li>
+        Items with <code>…</code>​ after them and wrapped in <strong>square brackets</strong> can be used zero or more times.<br>
+        <ul><li>e.g. <code>[t/TAG…​]</code> can be used as <code> </code> (i.e. 0 times), <code>t/vegetarian</code>, <code>t/budget conscious t/small scale</code> etc.</li></ul>
       </li>
       <li>
         Parameters can be in any order.<br>
@@ -137,36 +140,54 @@ Events allow you to group contacts together in a sensible and seamless manner li
     </ul>
 </box>
 
+### Viewing Help: `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format:
+```
+help
+```
+
 ### Create a New Record: `add`
 
 Adds a new entity, of type specified by flag.
 
 Format for adding **contact**:
 ```
-add {-c | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]
+add {-c | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG…​]
 ```
 
 Examples:
 * `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`
 * `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget`
 
+<box type="tip" header="**Tip:**" >
+  A contact can have any number of tags (including 0).
+</box>
+
+
 Note:
-* Contacts' name and phone number pair need to be unique.
-* A contact can have any number of tags (including 0)
+* You have to specify whether you are creating a `Client` or a `Vendor` using `-c` or `-v`.
+* Contacts' name and phone number need to be unique.
+* Refer to the specifications of the parameters [here](#parameters).
 
 ___
 Format for adding **event**:
 
 ```
-add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID v/VENDOR_ID [c/CLIENT_ID ...] [v/VENDOR_ID ...]
+add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID…​ v/VENDOR_ID…​
 ```
 
 Example:
 * `add -e n/Sample Wedding des/Wedding reception d/2025-01-01 c/0 v/1 v/2`
 
 Notes:
-* Events are uniquely identified by their names and hence all event names must be unique.
-* Each event must have minimal one client and one vendor.
+* Events are uniquely identified by their names, hence all event names must be unique.
+* Each event must have one client and one vendor minimally.
+* Refer to the specifications of the parameters [here](#parameters).
 
 ### View Contacts/Events: `list`
 
@@ -174,7 +195,7 @@ List contacts or events (with optional filters).
 
 Format:
 ```
-list [{-c | -v}] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] { | [s/SERVICE] }
+list [{-c | -v}] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG…​] [id/ID] { | [s/SERVICE] }
 ```
 ```
 list [-e] [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]
@@ -185,28 +206,37 @@ Example:
 * `list -v s/catering`
 * `list -e des/wedding`
 
+<box type="tip" header="**Tip:**" >
+  All parameters are optional! Leaving them out will list all contacts (clients and vendors) by default.
+</box>
+
 Notes:
-* All parameters are optional. Leaving them out will list all contacts (clients and vendors) by default.
 * The `-c`, `-v` and `-e` flags can be used to decide what type of data to list.
 * `s/SERVICE` should only be specified if `v` is specified.
-* `d/DATE` should only be specified if `-e` is specified.
-* `des/DESCRIPTION` should only be specified if `-e` is specified.
-* If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
-* All user input in between flags are ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
-* The name keyword search is case-insensitive. e.g. `hans` will match `Hans`.
+* `d/DATE` and `des/DESCRIPTION` should only be specified if `-e` is specified.
+* Any extra information provided in between flags and parameters will be ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/Jane`
+* The `Name` keyword search is case-insensitive. e.g. `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` **AND** phone number `91234567`.
-* Searching by address will list all contacts with addresses that include the keywords. e.g. `list a/Blk 123` will list contacts with address `Blk 123` and `Blk 456` because`Blk 456` contains the word `Blk`.
-* Likewise, searching by name will list all contacts and events with names that include the input keywords.
+* Contacts matching any keywords in all fields will be returned (i.e. `AND` search). e.g. `list -c n/Jane Doe a/Blk 123` will list all clients with names containing **ANY** of `Jane` or `Doe` **AND** address containing **ANY** of `Blk` or `123`.
+* Refer to the specifications of the parameters [here](#parameters).
 
-### Editing a Contact
+<box type="tip" header="**Tip:**" >
+  To search for an event by name, you will need to specify the <code>-e</code> flag.
+</box>
+
+### Editing a Contact: `edit`
 
 Edit an existing contact.
 
 Format:
 ```
-edit {INDEX | id/ID} [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]
+edit {INDEX | id/ID} [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG…​]
 ```
+
+<box type="warning" header="**Caution**">
+  Although all the parameters are optional, you must specify at least one field to make an edit!
+</box>
+
 
 Examples:
 * `edit 1 p/91234567`
@@ -215,6 +245,7 @@ Examples:
 Notes:
 * Only one of `INDEX` or `id/ID` should be specified.
 * `s/SERVICE` should only be specified if the contact is a vendor.
+* Refer to the specifications of the parameters [here](#parameters).
 
 ### Deleting a Contact/Event : `delete`
 
@@ -229,13 +260,17 @@ delete INDEX
 Examples:
 * `delete 1`
 
+<box type="tip" header="**Tip:**" >
+  <code>delete</code> can delete either an event or a contact depending on what is currently displayed.
+</box>
+
 Notes:
 * `INDEX` should be the one-based index position of the contact or event displayed on the screen.
 * The command is highly dependent on what is displayed on the screen, i.e., `delete 1` will have different results when preceded by different `list` options.
 * To delete an event, the user has to enter `list -e` (with optional filters) to ensure the screen displays events, before entering the `delete` command.
 * Similarly, to delete contacts, the user has to enter `list` (with optional filters) to ensure the screen displays contacts, before entering the `delete` command.
-* The user will not be allowed to delete clients and vendors that are the **sole** client/vendor of any event, i.e., if any event only has a single client/vendor, that client/vendor cannot be deleted.
-* The user must delete the corresponding event(s) before deleting the intended client.
+* You will not be allowed to delete clients and vendors that are the **sole** client/vendor of any event. In such a case, you must delete the event before deleting the client/vendor.
+* Refer to the specifications of the parameters [here](#parameters).
 
 ### Clearing All Entries : `clear`
 
@@ -280,22 +315,23 @@ DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.js
 
 <box type="important" icon=":question:" seamless>
   <strong>Q</strong>: I accidentally deleted a contact. Is there an undo feature?<br>
-  <strong>A</strong>: Nope. Unforunately, undo has not been implemented.
+  <strong>A</strong>: Nope. Unfortunately, <code>undo</code> has not been implemented.
 </box>
 
 <box type="important" icon=":question:" seamless>
   <strong>Q</strong>: How do I edit events?<br>
-  <strong>A</strong>: Unforunately, editing events has not been implemented. You will have to delete the existing event and create a new one with your desired details.
+  <strong>A</strong>: Editing events will be implemented in a future release. For now, you will have to delete the existing event and create a new one with your desired details.
 </box>
+
 
 <box type="important" icon=":question:" seamless>
   <strong>Q</strong>: I have a vendor that provides multiple services, but I can only indicate 1 service per vendor entry. What should I do?<br>
-  <strong>A</strong>: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provde 1 single service is so that searches via the <code>list</code> command can be more precise.
+  <strong>A</strong>: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provide 1 single service is so that searches via the <code>list</code> command can be more precise.
 </box>
 
 <box type="important" icon=":question:" seamless>
   <strong>Q</strong>: Can DDD be used by users who are not wedding planners (i.e. other event planners)?<br>
-  <strong>A</strong>: Yes! While DDD is targetted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
+  <strong>A</strong>: Yes! While DDD is targeted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
 </box>
 
 <box type="important" icon=":question:" seamless>
