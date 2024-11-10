@@ -125,7 +125,7 @@ Edits an existing person in TalentHub.
 
 Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` e.g. 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -205,7 +205,7 @@ Format: `delete person INDEX`
 
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` e.g. 1, 2, 3 …​
 
 <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
 When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from all events' contact lists. This action is irreversible after confirmation.
@@ -271,7 +271,7 @@ Edits an existing event in TalentHub.
 
 Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`
 
-- Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** and smaller than `Integer.MAX_VALUE` e.g. 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 
@@ -352,10 +352,9 @@ Examples:
 Deletes the specified event from the address book.
 
 Format: `delete event INDEX`
-
 - Deletes the event at the specified `INDEX`.
 - The index refers to the index number shown in the displayed event list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** and smaller than or equal to `Integer.MAX_VALUE` e.g. 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
   :bulb: **Tip:**
