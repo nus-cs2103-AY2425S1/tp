@@ -160,9 +160,9 @@ A client can have any number of tags (including 0)
     - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
 
 * Client's email address should be of the format local-part@domain and adhere to the following constraints:
-    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). 
-       - The local-part may not start or end with any special characters.
-       - The local-part may not have consecutive special characters.
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
+        - The local-part may not start or end with any special characters.
+        - The local-part may not have consecutive special characters.
     2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
        The domain name must:
         - end with a domain label at least 2 characters long
@@ -172,9 +172,14 @@ A client can have any number of tags (including 0)
     * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`
 
 * Client's addresses can take any values, and it should not be blank
+    - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`
+    - Unacceptable address format: ``
 
 * Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
+    - Acceptable tag format: `friend`, `colleague`, `newComer`
+    - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`
 </div>
+
 
 ### Listing all beneficiaries : `list`
 
@@ -251,8 +256,12 @@ Examples:
     * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`
 
 * Client's addresses can take any values, and it should not be blank
+    - Acceptable address format: `123, Clementi Rd, 1234665`, `Blk 123, Clementi Ave 6, #08-111`
+    - Unacceptable address format: ``
 
 * Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
+  - Acceptable tag format: `friend`, `colleague`, `newComer`
+  - Unacceptable tag format: ``, `friend colleague`, `friend, colleague`, `friend&colleague`
 </div>
 
 
