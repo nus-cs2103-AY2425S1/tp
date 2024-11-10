@@ -526,6 +526,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface - a text-based interface where you can input commands that interact with a computer's operating system
+* **GUI**: Graphical User Interface - a type of user interface through which users interact with electronic devices via visual indicator representations
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -546,16 +548,19 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open your favourite CLI (Command Prompt, Windows Powershell, Terminal).
+   
+   1. `cd` into the folder containing the jar file. 
+   
+   1. Run `java -jar clubconnect.jar`.  
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+      Expected: The most recent window size and location is retained.
 
 ### Deleting a person
 
@@ -572,7 +577,75 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding an event
+
+1. Adding a new unique event.
+
+   1. Test case: `add_event n/Meeting d/Monday Meeting f/2024-01-01 t/2024-01-01`  
+      Expected: An event with the name `Meeting` will be added to the event list. Details of added event shown in the status message.
+
+   1. Test case: `add_event n/ d/Monday Meeting f/2024-01-01 t/2024-01-01`  
+      Expected: No event is added. Error details (Invalid Name) shown in the status message.
+
+   1. Test case: `add_event d/Monday Meeting f/2024-01-01 t/2024-01-01`  
+      Expected: No event is added. Error details (Invalid Command Format) shown in the status message.
+
+   1. Test case: `add_event n/Meeting d/  f/2024-01-01 t/2024-01-01`  
+      Expected: No event is added. Error details (Invalid Description) shown in the status message.
+
+   1. Test case: `add_event n/Meeting d/Monday Meeting f/2024-0101 t/2024-01-01`  
+      Expected: No event is added. Error details (Invalid Date Format) shown in the status message.
+
+   1. Test case: `add_event n/Meeting d/Monday Meeting f/2024-01-01 t/2023-01-01`  
+      Expected: No event is added. Error details (End date cannot be earlier than start date) shown in the status message.
+
+   1. Test case: `add_event n/Meeting d/Monday Meeting f/2024-01-01 t/2024-02-30`  
+      Expected: No event is added. Error details (Invalid Date Format) shown in the status message.
+
+1. Adding an event with the same name as an existing event.
+
+   1. Test case: `add_event n/Meeting d/Duplicate Meeting f/2024-01-01 t/2024-01-01`  
+      Expected: No event is added. Error details (Duplicate Event) shown in the status message.
+
+### Unassigning an event from a person
+
+1. Unassigning an existing event from an existing person
+
+   1. Prerequisites: Ensure that the first person in the contact list is named `Alice` and the first event in the event list is named `Meeting`. Ensure that only `Alice` is assigned to `Meeting` before each test case. More than 1 person and event should be present.
+
+   1. Test case: `unassign_event p/1 ev/1`  
+      Expected: `Alice` is unassigned from `Meeting` in the status message.
+
+   1. Test case: `unassign_event p/1 ev/meeting`  
+      Expected: `Alice` is unassigned from `Meeting` in the status message.
+
+   1. Test case: `unassign_event p/alice ev/1`  
+      Expected: `Alice` is unassigned from `Meeting` in the status message.
+
+   1. Test case: `unassign_event p/alice ev/meeting`  
+      Expected: `Alice` is unassigned from `Meeting` in the status message.
+
+   1. Test case: `unassign_event p/2 ev/1`  
+      Expected: No person is unassigned from `Meeting`. Error details (Person not assigned to Event) shown in the status message.
+
+1. Event / Person does not exist
+
+   1. Prerequisites: Ensure that person `Bob` and event `Workshop` do not exist in the app. Ensure that person `Alice` and event `Meeting` exists in the app.
+
+   1. Test case: `unassign_event p/bob ev/meeting`  
+     Expected: No person is unassigned from `Meeting`. Error details (Person does not exist) shown in the status message.
+
+   1. Test case: `unassign_event p/alice ev/workshop`  
+     Expected: No person is unassigned from any event. Error details (Event does not exist) shown in the status message.
+
+   1. Test case: `unassign_event p/0 ev/1`  
+     Expected: No person is unassigned from the first event. Error details (Invalid Command Format) shown in the status message.
+
+   1. Test case: `unassign_event p/1 ev/0`  
+     Expected: No person is unassigned from any event. Error details (Invalid Command Format) shown in the status message.
+
+   1. Test case: `unassign_event p/1 ev/999999`  
+     Expected: No person is unassigned from any event. Error details (Invalid Event Index) shown in the status message.
 
 ### Saving data
 
