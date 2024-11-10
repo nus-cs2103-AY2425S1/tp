@@ -89,18 +89,21 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 <box type="important" seamless>
 
-**IMPORTANT:**
+**IMPORTANT:** Feel free to use this table and navigate to the features that interests you by clicking on the action words 😁 
 
-* Feel free to use this table and navigate to the features that interests you by clicking on the action words 😁 
+</box>
 
-* 
+<box type="tips" seamless>
+
+**TIPS:** Here's a quick tip! To navigate to the top of the page, use `Home` on Windows or `command + ↑` on Mac. 
+
 </box>
 
 ## Features
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+** Important notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -216,8 +219,10 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 
 <box type="important" seamless>
 
-**IMPORTANT:** Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
+**IMPORTANT:** 
+* Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
 ['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
+* Multiple input of the same parameter can be added but only the last one will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`)
 
 </box>
 
@@ -286,7 +291,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 * `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
-* As we do not have an edit wedding command, you will have to delete and add back the wedding if you would like to change wedding parameters
+* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding
 
 </box>
 
@@ -517,8 +522,5 @@ There is no need to save manually.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **List Command** ignores any extraneous parameters after the `list` command. This is a feature, not a bug.
-4. **Filter Command** returns the largest range of matches based on your input. This is a feature, not a bug.
-5. **Names and Wedding Names** are automatically formatted to have the first letter of each word capitalized. This is a feature, not a bug.
-
+3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`)
 --------------------------------------------------------------------------------------------------------------------
