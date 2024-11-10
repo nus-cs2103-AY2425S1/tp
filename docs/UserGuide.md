@@ -53,6 +53,8 @@ ClientGrid is an address book targeted for English-speaking real estate agents w
 
 **Notes about the command format:**<br>
 
+* All the commands in ClientGrid (e.g. `list`, `addbuyer`, `addproperty`, `addmeeting`, etc...) are case-sensitive and must be entered in lower case
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. In `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`, `BUYER_NAME` is a parameter which can be used as `addbuyer n/John p/81234567 e/john@gmail.com`.
 
@@ -107,20 +109,21 @@ Add a specified buyer into the client book of ClientGrid.
 Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
-* The `BUYER_NAME` should ignore case sensitivity and not be empty. Each word is separated by a single space or apostrophe and has a character limit of 747 ([longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name) in the world is 747 characters). Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words.
+* The `BUYER_NAME` should ignore case sensitivity and not be empty. Each word is separated by a single space or apostrophe and has a character limit of 747 ([longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name) in the world is 747 characters).
 * The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
-* The `BUYER_EMAIL` should be of the format `local-part@domain-name.top-level-domain` and adhere to the following constraints: 
+The BUYER_EMAIL should follow the format `local-part@domain` and adhere to the following constraints:
   * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
     * The `local-part` may not start or end with any special characters and must not contain consecutive special characters.
-  * This is followed by an `@` and then a `domain-name`.
-  * The `domain-name` must:
-    * have each domain label start and end with alphanumeric characters.
-    * have each domain label consist of alphanumeric characters, separated by a single period, if any.
-  * The `domain-name` must be followed with a period and end with a `top-level-domain` (TLD) that is at least 2 alphabetic characters long.
-  * `domain-name`s with multiple domain labels should be separated by a single period.
-    * e.g. `domain-name` with a single label: `example@gmail.com`.
-    * e.g. `domain-name` with multiple labels: `example@u.nus.edu`.
-  
+  * This is followed by an `@` and then a `domain`.
+  * The `domain` must:
+    * consist of one or more domain labels separated by single periods.
+      * each domain label must start and end with alphanumeric characters.
+      * The final label is the top-level domain (TLD), which must be at least two alphabetic characters long.
+  * `domain`s with multiple domain labels should be separated by a single period.
+  * Examples:
+    * Single-label domain: example@gmail.com (where gmail.com is the domain and .com is the TLD). 
+    * Multi-label domain: example@u.nus.edu (where u.nus.edu is the domain and .edu is the TLD).
+
 <box type="info" seamless>
 
 **Note:**
@@ -133,7 +136,7 @@ No duplicate emails are allowed. Duplicate emails are detected if
 
 <box type="warning" seamless>
 
-**Special Scenario:** It's possible to have a buyer and seller with the same phone number and email but different names. This flexibility provided by ClientGrid allows users to record the same client under different names in buying and selling roles, which may be useful for clients operating under separate business identities (e.g. personal vs. professional roles).
+**Special Scenario 1:** It's possible to have a buyer and seller with the same phone number but different names/ emails. This flexibility provided by ClientGrid allows users to record the same client under different names/ emails in buying and selling roles, which may be useful for clients operating under separate business identities (e.g. personal vs. professional roles).
 
 </box>
 
@@ -380,9 +383,19 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+1. **GUI (Graphical User Interface)**: A type of user interface that allows users to interact with a software application through visual elements such as buttons, icons, menus, and windows, instead of text-based commands. 
+2. **Alphanumeric**: Refers to characters that are either letters (`A-Z`, `a-z`) or numbers (`0-9`).
+local-part: The portion of the email address before the `@` symbol. It identifies the specific mailbox. 
+3. **Domain**: The portion of the email address after the `@` symbol. 
+4. **Domain label**: A subdivision of the domain name, separated by periods (e.g., `gmail` and `com` in `gmail.com`). 
+5. **Top-level domain (TLD)**: The last part of the domain name, such as `.com`, `.org`, or `.edu`. It generally indicates the type or location of the organization.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Command Summary
 
-| Action                | Format, Examples                                                                                 |
+| Action                | Format                                                                                 |
 |-----------------------|--------------------------------------------------------------------------------------------------|
 | **Help**              | `help`                                                                                           |
 | **List**              | `list k/KEY`                                                                                     |
@@ -397,5 +410,3 @@ Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.
 | **Add Meeting**       | `addmeeting mt/MEETING_TITLE d/MEETING_DATE bp/BUYER_PHONE sp/SELLER_PHONE t/TYPE c/POSTAL_CODE` |
 | **Delete Meeting**    | `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`                                                  |
 | **Exit**              | `exit`                                                                                           |
-
-
