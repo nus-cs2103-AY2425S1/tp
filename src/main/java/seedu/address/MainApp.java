@@ -189,7 +189,8 @@ public class MainApp extends Application {
             int len = months.length;
             for (int i = 0; i < len; i++) {
                 String month = months[i].name().toLowerCase();
-                if (month.equals(checkMonth) && date == 1 && !person.getLastPaidDate().equals(new LastPaidDate(today))) {
+                if (month.equals(checkMonth) && date == 1 &&
+                        !person.getLastPaidDate().equals(new LastPaidDate(today))) {
                     Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                             person.getAddress(), person.getBirthday(), person.getTags(), false,
                             person.getLastPaidDate(), new Frequency("0"), person.getProfilePicFilePath());
