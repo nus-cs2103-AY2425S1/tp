@@ -408,10 +408,6 @@ Example:
 
 1. `clear` clears all clients and their data from PROperty.
 
-Visual example of correct output [Example `1.`]:
-
-![ClearCommandShowcase.png](images/user-guide-images/ClearCommandShowcase.png)
-
 [_Back to Top_](#table-of-contents)
 
 ### Managing Remarks : `remark`
@@ -523,10 +519,6 @@ Example:
 
 1. `export` exports your current client data in PROperty into a CSV file.
 
-Visual example of correct output [Example `1.`]:
-
-![ExportCommandShowcase](images/user-guide-images/ExportCommandShowcase.png)
-
 [_Back to Top_](#table-of-contents)
 
 ### Exiting the program : `exit`
@@ -552,12 +544,6 @@ Format: `help`
 Example:
 
 1. `help` results in a popup window which contains all the commands in PROperty for easy reference during use.
-
-Visual example of correct output:
-
-![HelpCommandShowcase.png](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase2.png)
 
 [_Back to Top_](#table-of-contents)
 
