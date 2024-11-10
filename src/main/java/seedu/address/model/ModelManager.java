@@ -151,12 +151,6 @@ public class ModelManager implements Model {
         assert !filteredPersons.isEmpty() : "Filtered person list should not be empty after sorting.";
         return 1;
     }
-
-    @Override
-    public void sortByName() {
-        addressBook.sortByName();
-    }
-
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);

@@ -96,12 +96,6 @@ public interface Model {
      */
     int sortFilteredPersons();
 
-    /**
-     * Sorts the person by Name
-     *
-     */
-    void sortByName();
-
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
