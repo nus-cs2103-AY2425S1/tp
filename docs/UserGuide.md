@@ -19,19 +19,19 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 
 1. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.5). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
 
-1. Copy the file to the folder you want to use as the _home folder_ for MediContact. We recommend naming this folder `MediContact`. Place `MediContact.jar` in this folder.
+1. Copy the file to the folder you want to use as the _home folder_ for MediContact. We recommend naming this folder `MediContact`. Place `MediContact.jar` in this folder.<br>
 
-   <img src="images/quickStart.png" width="800"/>
+   <img src="images/quickStart.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 1. Open a command terminal (called `Terminal` on MacOS and `Command Prompt` on Windows). Change directory into the folder you put the jar file in using the command `cd`. For example, if you created your home folder `MediContact` in your Desktop type `cd Desktop/MediContact`. If you created your home folder `MediContact` in Documents, type `cd Documents/MediContact`. If you named your home folder some other FILENAME, replace `MediContact` with filename. 
 
-1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory.
+1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory.<br>
 
-   <img src="images/quickStart1.png" width="800"/>
+   <img src="images/quickStart1.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   <img src="images/Ui.png" width="800"/>
+   <img src="images/ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 1. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -89,7 +89,7 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 
 Adds a person to the address book.
 
-**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT] [t/TAG]…​`
+**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT]…​ [t/TAG]…​`
 
 - `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long.
 - `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any.
@@ -106,6 +106,8 @@ Adds a person to the address book.
 - A person can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
 
 - A person can have any number of appointments (including 0).
+
+- Fields in square brackets (e.g. `[ap/APPOINTMENT]`) are optional.
 
   </box>
 
@@ -208,7 +210,7 @@ Deletes the specified person from the address book.
 
 Edits an existing person in the address book.
 
-**Format**: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…​`
+**Format**: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/FUTURE APPOINTMENT]…​ [t/TAG]…​`
 
 * Edits the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the optional fields must be provided.
@@ -216,9 +218,17 @@ Edits an existing person in the address book.
 * When editing tags/appointments, the existing tags/appointments of the person will be added i.e adding of tags is cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
-* You can remove all the person’s appointments by typing `ap/` without
+* You can remove all the person’s future appointments by typing `ap/` without
   specifying any appointments after it.
 * Currently, editing of specific tags and appointments are not possible. To work around this, you can clear their respective fields and add the new tags/appointments.
+
+<box type="tip" seamless>
+
+**Remarks**:
+
+- Fields in square brackets (e.g. `[ap/APPOINTMENT]`) are optional.
+
+  </box>
 
 **Examples**:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
@@ -255,7 +265,7 @@ Exits the program.
 
 Filter persons whose age and/or appointment dates are within the specified range.
 
-**Format**: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`
+**Format**: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]…​`
 
 * The order of the keywords does not matter.
 * Only appointment dates and/or age group and/or tags can be used to filter.
@@ -267,6 +277,14 @@ Filter persons whose age and/or appointment dates are within the specified range
 * Range are inclusive (i.e. age 79 is considered True in specified range'79-99')
 * Persons must within all specified ranges to be returned if both age and appointment dates are specified (i.e. `AND` search).
   e.g. `filter b/70-99 ap/01/01/2025 - 01/01/2026` will return `Roy b/87 ap/11/11/2025`.
+
+<box type="tip" seamless>
+
+**Remarks**:
+
+- Fields in square brackets (e.g. `[t/TAG]`) are optional.
+
+</box>
 
 **Examples**:
 * `filter b/70-79`
@@ -300,6 +318,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hay Bo` will return `Hayley Gruber`, `Bo Yang`,
         `Hay 874` will return contacts `Hayley p/99999999`, `Bons p/87444444`
+
+**Remarks**:
+
+- Fields in square brackets (e.g. `[MORE_KEYWORDS]`) are optional.
+
+</box>
 
 Examples:
 * `find John` returns `john` and `Johnny Doe`
@@ -515,6 +539,12 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
     specifying any medications after it.
 * You can remove all the person’s remarks by typing `r/` without
     specifying any remarks after it.
+
+**Remarks**:
+
+- Fields in square brackets (e.g. `[r/REMARK]`) are optional.
+
+</box>
 
 **Examples**:
 *  `note John Doe ap/01/01/2023 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
