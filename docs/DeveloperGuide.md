@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2d. Existing contact or email given
   * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
-  
+
     Use case ends.
 
 **Use case: UC02 - Add a teacher**
@@ -338,17 +338,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 2a. Required parameter(s) missing in command format
   * 2a1. EduConnect displays an error message.
-  
+
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
   * 2b1. EduConnect displays an error message
- 
+
     Use case ends.
 
 * 2c. Invalid argument for a parameter given
   * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
-  
+
     Use case ends.
 
 * 2d. Existing contact or email given

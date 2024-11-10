@@ -74,7 +74,7 @@ This section explains the different types of annotated boxes used in the user gu
 5. Enter a command:
 
    - Type a command in the command box and press **Enter** to send it. For example, typing `help` and pressing Enter will open a help window.
- 
+
    - Here are some commands you can try:
        - `list`: Displays all the student and teacher details.
        - `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321`: Adds a new student with the specified details.
@@ -477,4 +477,3 @@ EduConnect data are saved automatically as a JSON file `[JAR file location]/data
 | **Reset Attendance**  | `resetAttendance`                                                                                                                                                                                                                                                                                                                                                                        |
 | **Help**              | `help`                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Exit**              | `exit`                                                                                                                                                                                                                                                                                                                                                                                   |
-                                                                                                                                                                                                                                                                                                                                                             
