@@ -43,11 +43,10 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
   - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
   - **For Mac**: Press Command + Space, type `terminal`, and press Enter 
 
-2. In the black window that appears, type exactly:
+2. In the black window that appears, type exactly and press Enter:
    ```
    java --version
    ```
-   and press Enter
 
 3. What you should see:
   - ✅ If you see "Java version 17", you're ready to go!
@@ -67,12 +66,10 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
   - Type `cd ` (with a space after cd) 
   - Drag your BakeBuddy folder into the terminal window (this fills in the location automatically!)
   - Press Enter
-  - Type:
+  - Type and press Enter:
     ```
     java -jar BakeBuddy.jar
     ```
-  - Press Enter
-
    You should see the BakeBuddy window appear as follows!
 
 ## **Step 3: Try Your First Commands**
