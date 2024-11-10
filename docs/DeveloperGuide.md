@@ -177,7 +177,7 @@ the same full name with different contact details but it will be unreasonably ra
 number, email and addresses simultaneously.
 
 ### 4. Flexible Command Keywords.
-Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we will make command keywords case-insensitive in a future update.
+Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we will make command keywords case-insensitive in a future update by parsing the prefixes differently.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -406,8 +406,8 @@ Use case ends.
 
 **Extensions**
 
-* 3a. The claim has already been closed for the client.
-    * 3a1. System shows that claim is closed with no error.
+* 1a. The claim has already been closed for the client.
+    * 1a1. System shows that claim is closed with no error.
 
     Use case ends.
 ---
@@ -431,7 +431,6 @@ Use case ends.
 * **Client**: A customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
 * **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system. 
   * Supported insurance plans are: `Basic Insurance Plan` : `0` and `Travel Insurance Plan` : `1`.
-  * Allowing the user to add their own insurance plan types is a [planned enhancement](#planned-enhancements). 
 * **Valid Insurance Plan ID**: An insurance plan ID that exists in the system.
 * **Claim**: A formal request by a client for reimbursement for losses that are covered by specific insurance plans.
 <!-- (the above definition was obtained from: https://www.iciciprulife.com/insurance-claim.html) -->
@@ -454,8 +453,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Use the command `java -jar InSUREance.java` to launch the app
-   2. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Download the jar file `InSUREance.jar` and copy it into an empty folder.
+   2. Use the command `java -jar InSUREance.jar` to launch the app.
+   3. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
