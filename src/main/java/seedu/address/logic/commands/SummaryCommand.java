@@ -25,7 +25,6 @@ public class SummaryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        assert model != null : "Model should not be null";
 
         // Initialize a map with all statuses set to 0
         Map<String, Long> statusCounts = new HashMap<>();
@@ -35,28 +34,27 @@ public class SummaryCommand extends Command {
 
         // Populate map with actual counts
         model.getAddressBook().getPersonList().stream()
-                .collect(Collectors.groupingBy(person -> {
-                    assert person != null : "Person should not be null.";
-                    assert person.getStatus() != null : "Person's status should not be null.";
-                    return person.getStatus().value;
-                }, Collectors.counting()))
+                .collect(Collectors.groupingBy(person -> person.getStatus().value, Collectors.counting()))
                 .forEach(statusCounts::put);
 
         // Total number of applicants
         long totalApplicants = model.getAddressBook().getPersonList().size();
-        assert totalApplicants > 0 : "Total applicants should be greater than zero if list is non-empty.";
 
-        // Format the summary message
+        // If there are no applicants, provide a specific message
+        if (totalApplicants == 0) {
+            return new CommandResult("Total number of applicants: 0\nNo applicants found.");
+        }
+
+        // Format the summary message for non-zero applicants
         StringBuilder summary = new StringBuilder();
         for (String status : Status.VALID_STATUSES) {
             summary.append(String.format("Number of applicants %s: %d\n", status, statusCounts.get(status)));
         }
 
-        assert summary.length() > 0 : "Summary string should not be empty.";
-
         String resultMessage = String.format(MESSAGE_SUCCESS, totalApplicants, summary.toString().trim());
         return new CommandResult(resultMessage);
     }
+
 
     @Override
     public boolean equals(Object other) {
