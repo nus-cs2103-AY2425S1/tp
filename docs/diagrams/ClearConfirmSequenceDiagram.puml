@@ -70,9 +70,12 @@ else "confirm"\n is missing
     AddressBookParser -> ClearCommandParser : parse(...)
     activate AddressBookParser
     activate ClearCommandParser
-    ClearCommandParser -> AddressBookParser : throws ParseException
+    ClearCommandParser --> AddressBookParser : throws ParseException
     deactivate ClearCommandParser
-    AddressBookParser -> LogicManager : throws ParseException
+    'Hidden arrow to position the destroy marker below the end of the activation bar.
+    ClearCommandParser -[hidden]-> AddressBookParser
+    destroy ClearCommandParser
+    AddressBookParser --> LogicManager : throws ParseException
     deactivate AddressBookParser
 end
 
