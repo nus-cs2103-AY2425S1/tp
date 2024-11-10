@@ -24,7 +24,67 @@ for the team of AddressBook-Level 3.
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+### Setting up the project in your computer
+
+<box type="warning" seamless>
+
+**Caution:**
+Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
+
+</box>
+
+First, **fork** this repo, and **clone** the fork into your computer.
+
+If you plan to use Intellij IDEA (highly recommended):
+
+1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 17**.
+1. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
+   <box type="warning" seamless>
+   Note: Importing a Gradle project is slightly different from importing a normal Java project.
+   </box>
+1. **Verify the setup**:
+    1. Run the `seedu.address.Main` and try a few commands.
+    1. [Run the tests](#running-tests) to ensure they all pass.
+
+### Running Tests
+
+There are two ways to run tests.
+
+* **Method 1: Using IntelliJ JUnit test runner**
+    * To run all tests, right-click on the `src/test/java` folder and choose `Run 'All Tests'`
+    * To run a subset of tests, you can right-click on a test package,
+      test class, or a test and choose `Run 'ABC'`
+* **Method 2: Using Gradle**
+    * Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
+
+<box type="info" seamless>
+
+**Link**: Read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html) to learn more about using Gradle.
+
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Before writing code
+
+1. **Configure the coding style**
+
+   If using IDEA, follow the guide [_[se-edu/guides] IDEA: Configuring the code style_](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up IDEA's coding style to match ours.
+
+   <box type="tip" seamless>
+
+   **Tip:**
+   Optionally, you can follow the guide [_[se-edu/guides] Using Checkstyle_](https://se-education.org/guides/tutorials/checkstyle.html) to find how to use the CheckStyle within IDEA e.g., to report problems _as_ you write code.
+   
+   </box>
+
+1. **Set up CI**
+
+   This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up required.
+
+1. **Learn the design**
+
+   When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [TrueRental’s architecture](DeveloperGuide.md#architecture).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -34,7 +94,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the application.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -43,16 +103,16 @@ Given below is a quick overview of main components and how they interact with ea
 **`Main`** (consisting of
 classes [`Main`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/Main.java)
 and [`MainApp`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is
-in charge of the app launch and shut down.
+in charge of the application launch and shut down.
 
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+* At application launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the application in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
@@ -239,16 +299,6 @@ How confirmation prompts work:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
-
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -298,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TrueRental` system and the **Actor** is the `user`, unless specified
+(For all use cases below, the **System** is the `TrueRental` application and the **Actor** is the `user`, unless specified
 otherwise)
 
 **Use case 01: Add a [_client_](#glossary-client)**
@@ -461,12 +511,6 @@ otherwise)
 
   Use case resumes from step 3.
 
-* 4a. System fails to update the _client_'s information.
-
-    * 4a1. System prompts user that edit has failed.
-
-  Use case resumes from step 1 or user choose not to proceed and use case ends.
-
 * *a. At any time, User chooses not to proceed with the operation.
 
   Use case ends.
@@ -500,12 +544,6 @@ otherwise)
     * Steps 3b1-3b2 are repeated until the _rental information_ is valid.
 
   Use case resumes from step 3.
-
-* 4a. System fails to update the _client_'s _rental information_.
-
-    * 4a1. System prompts user that edit has failed.
-
-  Use case resumes from step 1 or user choose not to proceed and use case ends.
 
 * *a. At any time, User chooses not to proceed with the operation.
 
@@ -1962,8 +2000,8 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 ## Duplicate Client Detection and Handling
 
-A client is only considered as **duplicate** **if and only if** all three parameters `[NAME]`, `[PHONE_NUMBER]`
-and `[EMAIL_ADDRESS]` are **exactly the same** (including case sensitivity).
+A client is only considered as **duplicate** **if and only if** all three parameters `NAME`, `PHONE_NUMBER`
+and `EMAIL_ADDRESS` are **exactly the same** (including case sensitivity).
 
 This is to allow the user to have a greater flexibility of manipulating the client's information.
 
@@ -2044,16 +2082,16 @@ The following are **DUPLICATES** of the initial rental information:
 
 <d-table>
 
-| Parameter       | Description                                                                                                        | Additional Constraints                                                                                                                                          | Examples                                                                                                                     |
-|-----------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`          | Client's name                                                                                                      | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`.                                                                | `Ravi S/O Ramasamy`                                                                                                          |
-| `PHONE_NUMBER`  | Client's phone number                                                                                              | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`                                                                                                                   |
-| `EMAIL`         | Client's email address                                                                                             | Accommodate well-established email companies only.                                                                                                              | `test@gmail.com`                                                                                                             |
-| `TAG`           | Client's tag                                                                                                       | Limit up to `20 characters`.                                                                                                                                    | `12345678901234567890`                                                                                                       |
-| `ADDRESS`       | The address of the property managed by the client.                                                                 | Limit up to **150** `Unicode` characters.                                                                                                                       | `Building 9, Meadowbrook Towers, 235 Crescent Drive, Hillside Road, Block F, Suburb 12, Bangalore, Karnataka, 560078, India` |
-| `MONTHLY_RENT`  | The security deposit amount for the property managed by your client, paid by the tenant at the start of the lease. | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                                                                               |
-| `DEPOSIT`       | The address of the property managed by the client.                                                                 | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                                                                               |
-| `CUSTOMER_LIST` | The name(s) of the tenant(s) for the property managed by the client.                                               | Limit the usage of the `;` separator to **49** occurrences, which can accommodate up to 50 names in total.                                                      | `Alice;Bob;Charlie;David;Ella;Fiona;Geoge;Helen;Ivan;Joshua;Keria;Laura`                                                     |
+| Parameter       | Description                                                                                                        | Additional Constraints                                                                                                                                          | Examples                                                                   |
+|-----------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `NAME`          | Client's name                                                                                                      | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`.                                                                | `Ravi S/O Ramasamy`                                                        |
+| `PHONE_NUMBER`  | Client's phone number                                                                                              | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`                                                                 |
+| `EMAIL`         | Client's email address                                                                                             | Accommodate well-established email companies only.                                                                                                              | `test@gmail.com`                                                           |
+| `TAG`           | Client's tag                                                                                                       | Limit up to `20 characters`.                                                                                                                                    | `12345678901234567890`                                                     |
+| `ADDRESS`       | The address of the property managed by the client.                                                                 | Limit up to **150** `Unicode` characters.                                                                                                                       | `18 Kaki Bt Rd 3 #05-16 Entrepreneur Business Centre S(415978), Singapore` |
+| `MONTHLY_RENT`  | The security deposit amount for the property managed by your client, paid by the tenant at the start of the lease. | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                             |
+| `DEPOSIT`       | The address of the property managed by the client.                                                                 | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                             |
+| `CUSTOMER_LIST` | The name(s) of the tenant(s) for the property managed by the client.                                               | Limit the usage of the `;` separator to **49** occurrences, which can accommodate up to **50** names in total.                                                  | `Alice;Bob;Charlie;David;Ella;Fiona;Geoge;Helen`                           |
 
 </d-table>
 
@@ -2098,119 +2136,7 @@ In the future, there will be an update to the duplicate rental information detec
 Currently, some long texts are truncated due to the window size constraints of the application, with excess text displayed as `...`.
 In the future, there will be an update to the UI and additional constraints on the parameter value. The UI will be updated such that all characters will be fully displayed without truncation or the use of `...`.
 
-#### \[Proposed\] Undo/redo feature
+#### Storage Related Error Handling
 
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
-
-* `VersionedAddressBook#commit()`— Saves the current address book state in its history.
-* `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `cdelete 5` command to delete the 5th [_client_](#glossary-client) in the address book.
-The `cdelete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after
-the `cdelete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to
-the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new [_client_](#glossary-client). The `add` command also
-calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
-the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will
-not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the [_client_](#glossary-client) was a mistake, and decides to undo that action
-by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift
-the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address
-book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no
-previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the
-case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the
-lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address
-book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()`
-to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `cdelete`, just save the [_client_](#glossary-client) being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+In some very rare cases, reading from or writing to data file may fail due to various reasons.
+In the future, there will be an update to the application, where a prompt will be displayed to notify the user of such failures.
