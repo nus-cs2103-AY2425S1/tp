@@ -343,55 +343,64 @@ A success message will be displayed if the suppliers are successfully sorted.
 ### Adding a delivery: `add -d`
 
 Adds a delivery to VendorVault.
-<box type="tip" seamless>
 
 Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY c/COST`
 
+<box type="details" seamless>
+
 Parameters:
 
-- `on/DELIVERY_DATE_TIME`: Represents the date and time of delivery. Must be in dd-MM-yyyy hh:mm format, and must not be blank.
-- `s/SUPPLIER_INDEX`: Represents the index of supplier currently displayed. Must be a number greater than 0, and must not be blank.
-- `pro/PRODUCT`: Represents the product to be delivered. Must be alphanumeric and between 1 and 50 (inclusive) characters long and can include spaces.
-- `q/QUANTITY`: Represents the quantity of product to be delivered. Must be a number greater than 0 followed by a space, and a unit and must not be blank.
-- `c/COST`: Represents the total cost of delivery. Must be a number greater than 0 with up to 2 decimal places allowed, and must not be blank.
+- `on/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the date and time of delivery. It must be in dd-MM-yyyy hh:mm format, and cannot be blank.
+- `s/SUPPLIER_INDEX`:`SUPPLIER_INDEX` is the index of supplier currently displayed. It must be a number between 1 and the total number of suppliers currently displayed (inclusive), and cannot be blank.
+- `pro/PRODUCT`: `PRODUCT` is the product associated with the delivery. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
+    - One space is counted as one character.
+    - `PRODUCT` cannot be made up of only spaces.
+- `q/QUANTITY`: `QUANTITY` is the amount of product to be delivered with units. It must be a number greater than 0 followed by a space, and a unit and must not be blank.
+    - `QUANTITY` cannot have decimal places.
+    - `QUANTITY` units are case sensitive.
+- `c/COST`: `COST` is the total cost for the delivery. It must be a number greater than 0 with up to 2 decimal places allowed, and cannot be blank.
 
-**Tip:** Day and month of DELIVERY_DATE_TIME must be in double digits!
+**Tips:** 
+- Day and month of DELIVERY_DATE_TIME must be in double digits!
 
 </box>
 
 <box type="warning" seamless>
 
 **Warnings**:
-- At least one space between `add` and `-d`
-- If SUPPLIER_INDEX provided is greater than the number of suppliers displayed, an error message will be shown
-- A delivery is considered duplicate if they have the same DELIVERY_DATE_TIME, SUPPLIER, PRODUCT, QUANTITY, COST and STATUS
-- Duplicate delivery will not be added again
-- No duplicate prefix can be used
-- Units for QUANTITY is case-sensitive
+- At least one space is needed between `add` and `-d`.
+- A warning will be given if the user tries to add a duplicate delivery.
+- A delivery is considered duplicate and will not be added again if it has the same `DELIVERY_DATE_TIME`, `SUPPLIER`, `PRODUCT`, `QUANTITY`, `COST` and `STATUS` as an existing delivery.
+    - Comparison between different `PRODUCT`is case-sensitive.
+- A delivery has a default `STATUS` of `PENDING`.
+
 </box>
 
 Examples:
-* `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/12.50`
-* `add -d on/12-11-2024 14:00 s/1 pro/rice q/5 units c/50.75`
+- `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/25.50`
+- `add -d on/19-12-2022 08:00 s/2 pro/rice q/50 kg c/50.20 `
+
+Expected output:
+- Delivery details is shown and paired to supplier at index 1, assuming there is at least one supplier. Otherwise, an error message will be shown.
+- Delivery details is shown and paired to supplier at index 2, assuming there is at least two supplier. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
+TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![add delivery command](images/addDeliveryCommand.png)
 
 ### Listing all deliveries: `list -d`
 
-Shows a list of all deliveries in VendorVault. (The supplier list will not be affected)
+Shows a list of all deliveries in VendorVault. The supplier list will not be affected.
 
 Format: `list -d`
 
 <box type="warning" seamless>
 
 **Warnings**:
-- At least one space between list and -d
+- At least one space is needed between `list` and `-d`.
 - No other parameters should be given for this command.
-</box>
 
-Examples:
-* `list -d`
+</box>
 
 ### Marking a delivery : `mark -d`
 
@@ -399,21 +408,31 @@ Marks the specified delivery in VendorVault with the specified `STATUS`.
 
 Format: `mark -d INDEX STATUS`
 
+<box type="details" seamless>
+
 Parameters:
 
-- `INDEX`: Represents the index of delivery currently displayed. Must be a number greater than 0 and must not be blank.
-- `STATUS`: Represents the status of delivery. Must be one of the following: `PENDING`, `DELIVERED`, `CANCELLED` and must not be blank.
-<box type="tip" seamless>
+- `INDEX`: The index of the delivery to be marked in the displayed list. It must be a number between 1 and smaller than the total number of deliveries displayed (inclusive), and cannot be blank.
+- `STATUS`: The status of delivery. It must be one of the following values: `PENDING`, `DELIVERED`, `CANCELLED`, and cannot be blank.
+    -  `STATUS` is case-insensitive so `pending`, `delivered`, `cancelled` can be accepted as well.
+
+</box>
+
+<box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `mark` and `-d` is compulsory
-- Both parameters must be given
-- Parameters used are case-insensitive
+- At least one space is needed between `mark` and `-d`.
+- An error message will be given if the user tries to mark a delivery with a status that is the same as the existing status.
+
 </box>
 
 Examples:
-* `list` followed by `mark -d 2 pending` marks the 2nd delivery in the address book with a pending status.
-* `find -d /pro bread` followed by `mark -d 1 cancelled` marks the 1st delivery in the results of the `find` command with a cancelled status.
+- `mark -d 2 DELIVERED`
+- `find -d pro/ bread` followed by `mark -d 1 cancelled`
+
+Expected output:
+- Delivery at index 2 of the displayed list has status shown as DELIVERED, assuming it has a different status initially. Otherwise, an error message will be shown.
+- Delivery at index 1 of the displayed list has status shown as CANCELLED, assuming it has a different status initially and there is at least one delivery in the displayed list. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 ![mark delivery command](images/markDeliveryCommand.png)
@@ -503,38 +522,42 @@ To sort deliveries by cost in ascending order:
 
 ### Upcoming deliveries: `upcoming`
 
-The `upcoming` command is used to view pending deliveries in VendorVault.
-You can choose to view all pending deliveries within a specified date range or
+View pending deliveries in VendorVault. You can choose to view all pending deliveries within a specified date range or
 before or after a given date.
 
-Format: `upcoming aft/START_DATE bef/END_DATE`
-<box type="tip" seamless>
+Format: `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`
+
+<box type="details" seamless>
 
 Parameters:
 
-- `aft/DELIVERY_DATE_TIME`: Represents the delivery date and time in which PENDING deliveries before and on this date and time would not be displayed. Must be in dd-mm-yyyy hh:mm format.
-- `bef/DELIVERY_DATE_TIME`: Represents the delivery date and time in which PENDING deliveries after and on this date and time would not be displayed. Must be in dd-mm-yyyy hh:mm format.
+- `aft/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the start date and time in which  deliveries with status`PENDING` before and on this date and time would not be displayed. It must be in dd-mm-yyyy hh:mm format.
+- `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` after and on this date and time would not be displayed. It must be in dd-mm-yyyy hh:mm format.
 
-**Tip:** You can provide both parameters!
+**Tip:**
+- You can provide both parameters!
 
 </box>
 
+<box type="warning" seamless>
+
 **Warnings**:
-- At least one space between `upcoming` and the first parameter
-- At least one parameter must be provided
-- No duplicate prefix can be used
-- The prefixes `aft/` and `bef/` are **case-sensitive**
+- At least one space is needed between `upcoming` and the first parameter.
+- At least one parameter must be provided.
+
 </box>
 
 Examples:
-* `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
-* 
-To view pending deliveries between two dates:
+- `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+- `upcoming aft/19-12-2022 08:00`
 
-    upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00
+Expected output:
+- All deliveries with status `PENDING` and `DELIVERY_DATE_TIME` after 19-12-2022 08:00 and before 18-06-2023 17:00 are shown.
+- All deliveries with status `PENDING` and `DELIVERY_DATE_TIME` after 19-12-2022 08:00 are shown.
 
 #### Here's how it would look like in the app:
 ![upcoming command](images/upcomingCommand.png)
+
 ---
 ### Exiting the program : `exit`
 
