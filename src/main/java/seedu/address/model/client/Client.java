@@ -111,6 +111,20 @@ public class Client {
     }
 
     /**
+     * Checks if the transaction causes a double overflow.
+     *
+     * @param amount The amount of the transaction to be added / deleted.
+     * @return whether the balance would overflow.
+     */
+    public boolean checkIsOverflow(double amount) {
+        if (amount == Double.POSITIVE_INFINITY || amount == Double.NEGATIVE_INFINITY) {
+            return true;
+        }
+        double updatedBalance = balance + amount;
+        return (updatedBalance == Double.POSITIVE_INFINITY || updatedBalance == Double.NEGATIVE_INFINITY);
+    }
+
+    /**
      * Returns true if both clients have the same name and address
      * This defines a weaker notion of equality between two clients.
      */

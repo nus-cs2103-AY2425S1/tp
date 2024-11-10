@@ -78,6 +78,11 @@ public class AddTransactionCommand extends Command {
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
         assert clientToEdit != null : "Client should not be null";
+
+        if (clientToEdit.checkIsOverflow(toAdd.getAmount())) {
+            throw new CommandException(Messages.MESSAGE_DOUBLE_OVERFLOW);
+        }
+
         List<Transaction> transactions = new ArrayList<>(clientToEdit.getTransactions());
         transactions.add(toAdd);
         transactions.sort(new TransactionDateComparator());

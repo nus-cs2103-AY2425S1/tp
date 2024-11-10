@@ -52,6 +52,9 @@ public class Messages {
 
     public static final String MESSAGE_EMPTY_TRANSACTION_LIST =
             "Invalid command: The current transaction list is empty.";
+
+    public static final String MESSAGE_DOUBLE_OVERFLOW =
+            "This action will cause the balance to exceed the supported range.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
