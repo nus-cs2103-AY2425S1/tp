@@ -75,7 +75,7 @@ public class AssignWeddingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
             throw new CommandException(String.format(
                     MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size() + 1
             ));
@@ -149,11 +149,7 @@ public class AssignWeddingCommand extends Command {
         if (other == this) {
             return true;
         }
-
-        if (!(other instanceof AssignWeddingCommand otherCommand)) {
-            return false;
-        }
-
+        AssignWeddingCommand otherCommand = (AssignWeddingCommand) other;
         return index.equals(otherCommand.index) && weddingsToAdd.keySet()
                 .equals(otherCommand.weddingsToAdd.keySet())
                 && this.force == otherCommand.force;
