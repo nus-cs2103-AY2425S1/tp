@@ -21,8 +21,8 @@ details, appointments, and treatment records.
 
 With **DocTrack**, you can take the first step towards digitalisation of your practice!
 **DocTrack** aims to simplify your patient and appointment tracking process, by allowing you to
-- easily add and update patient and appointment records
-- delete records for regulation purposes
+- easily add and update patient and appointment records.
+- delete records for regulation purposes.
 - search for records based on important criteria such as dates and names
 with an intuitive and user-friendly interface!
 
@@ -306,16 +306,19 @@ specific to those commands.
 
 A **person** is a patient with several fields. The fields and their corresponding prefixes are as follows:
 
-| Field            | Prefix | Optional | Multiple |
-|------------------|--------|----------|----------|
-| **Name**         | `n/`   | No       | No       |
-| **Phone number** | `p/`   | No       | No       |
-| **Email**        | `e/`   | No       | No       |
-| **Address**      | `a/`   | No       | No       |
-| **Status**       | `st/`  | No       | No       |
-| **Tag(s)**       | `t/`   | Yes      | Yes      |
+| Field            | Prefix | Optional | Multiple | Acceptable Inputs                                      |
+|------------------|--------|----------|----------|--------------------------------------------------------|
+| **Name**         | `n/`   | No       | No       | Only alphanumeric characters (Cannot start with space) |
+| **Phone number** | `p/`   | No       | No       | Positive integer of length 3-15 (Inclusive)            |
+| **Email**        | `e/`   | No       | No       | Refer to *                                             |
+| **Address**      | `a/`   | No       | No       | Any value                                              |
+| **Status**       | `st/`  | No       | No       | Only alphanumeric characters                           |
+| **Tag(s)**       | `t/`   | Yes      | Yes      | Only alphanumeric characters                           |
 
 You can identify these patients uniquely by their **patient ID (PID)** for easy reference. 
+
+---
+* Emails must have a local part containing alphanumeric characters and specific symbols (`+_.-`) (not at the start or end), followed by `@`, and a domain part with labels separated by periods, ending in a label with at least two alphanumeric characters, and no labels starting or ending with hyphens.
 
 <br>
 
@@ -524,13 +527,13 @@ Note that this will also clear the appointment data.
 
 An **appointment** is defined by several fields. The fields and their corresponding prefixes are as follows:
 
-| Field               | Prefix | Optional | Multiple |
-|---------------------|--------|----------|----------|
-| **Person ID**       | `i/`   | No       | No       |
-| **Appointment Type**| `ty/`  | No       | No       |
-| **Date and Time**   | `d/`   | No       | No       |
-| **Sickness**        | `s/`   | Yes      | No       |
-| **Medicine**        | `m/`   | Yes      | No       |
+| Field               | Prefix | Optional | Multiple | Acceptable Inputs                 |
+|---------------------|--------|----------|----------|-----------------------------------|
+| **Person ID**       | `i/`   | No       | No       | Existing person ID                |
+| **Appointment Type**| `ty/`  | No       | No       | Any value                         |
+| **Date and Time**   | `d/`   | No       | No       | `yyyy-MM-dd HH:mm`                |
+| **Sickness**        | `s/`   | Yes      | No       | At least one alphabetic character |
+| **Medicine**        | `m/`   | Yes      | No       | At least one alphabetic character |
 
 You can manage the appointments through different commands, which can be seen in the table below:
 
@@ -909,7 +912,7 @@ computer?<br>
 <br>
 
 **Q**: Can I access DocTrack without internet connection?<br>
-**A**: Yes, You can run DocTrack without an internet connection.
+**A**: Yes, you can run DocTrack without an internet connection.
 
 <br>
 
