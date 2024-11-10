@@ -103,7 +103,7 @@ administrators.
 ### Field Constraints
 * Names support alphanumeric characters and spaces. In addition, it supports the addition of special characters of common name formats.
 
-* Phone numbers accepts hyphen and spaces between the numbers and + (for country code) as special characters.
+* Phone numbers accepts hyphen and spaces between the numbers and + (for country code) as special characters. Only one or zero hyphen/spaces are allowed. eg.(91088231, 9108 8231, 9108-8231, +6591088231)
 
 * Fees accepts only a maximum of only 9 digits due to integer overflow constraints.
 
