@@ -171,14 +171,19 @@ The prefixes used in **EZSTATE** are universal across all commands _(i.e. have t
 | sel/   | seller  | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `sel/1` `sel/2`                       | `sel/0`, `sel/-1`, `sel/abc`              |
 | buy/   | buyer   | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `buy/1` `buy/2`                       | `buy/0`, `buy/-2`, `buy/abc`              |
 
-Congratulations! You've successfully completed the Quick Start guide. The [next section](#features) offers an in-depth overview of all the commands available in EZSTATE.
+Congratulations! You've successfully completed the Quick Start guide. 
 
+The [next section](#features) offers an in-depth overview of all the commands available in EZSTATE.
+
+Curious about how EZSTATE stores data? Check out the [storage section](#saving-the-data) for more information.
+
+If you're an advanced user looking to edit the JSON file directly, head over to [this section](#editing-the-data-file) for more information.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
 <div class="alert" markdown="span">
-Please read through the [Command Structure](#command-structure) before proceeding with this section!
+Before proceeding, make sure you have reviewed the [Command Structure](#command-structure) section or are already familiar with EZSTATE's command structure. This will ensure you can fully understand and use the features in this section. 
 </div>
 
 <br>
@@ -191,7 +196,7 @@ EZSTATE features (i.e. commands) are divided into four main categories:
 
 ---
 
-### **1. Client Management Commands**
+### 1. Client Management Commands
 
 Commands for creating, updating, and deleting buyers and sellers.
 
@@ -478,7 +483,7 @@ Commands for creating, updating, and deleting buyers and sellers.
 
 ---
 
-### **2. Appointment Management**
+### 2. Appointment Management
 
 Commands for managing appointments between user and clients.
 
@@ -558,7 +563,7 @@ Commands for managing appointments between user and clients.
       
 ---
 
-### **3. Listing Management**
+### 3. Listing Management
 
 Commands for managing property listings and associating clients with listings.
 
@@ -789,7 +794,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > ---
 
-### **4. Utility Commands**
+### 4. Utility Commands
 
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
 
@@ -926,7 +931,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EZSTATE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
