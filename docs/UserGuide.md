@@ -11,6 +11,8 @@ PROperty is useful for property agents because it saves their time by allowing e
 and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It is much
 simpler to use while being even more functional than alternatives on the market.
 
+<div class="page-break"></div>
+
 ## Table of Contents
 * [User Guide Essentials](#user-guide-essentials)
     * [Icon Legend](#icon-legend)
@@ -47,6 +49,8 @@ simpler to use while being even more functional than alternatives on the market.
     * [Client Tags](#client-tags)
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
+
 ## User Guide Essentials
 
 ### Icon Legend
@@ -79,6 +83,7 @@ This section outlines the topics covered in each part of the guide, helping you 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## Quick Start
 
@@ -157,6 +162,7 @@ Refer to the [Features](#features) below for details of each command.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## Features
 
@@ -679,6 +685,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## FAQ
 
@@ -717,6 +724,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## Command Summary
 
@@ -760,6 +768,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## Glossary
 
