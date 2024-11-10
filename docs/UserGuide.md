@@ -173,7 +173,9 @@ Note:
     * For `Donor`, `d/DONATED_AMOUNT` is required.
     * For `Partner`, `ped/PARTNERSHIP_END_DATE` is required.
     * If the specified role does not match the provided role-specific fields, the `add` command will be deemed invalid.
-2. **Contact Uniqueness**: Contacts are distinguished **by their names only**. This means duplicate names are not allowed in the address book. However, multiple contacts can share the same phone number or email address if their names are unique.
+2. **Contact Uniqueness**: Contacts are distinguished **by their names only**. 
+This means duplicate names are not allowed in the address book. 
+However, multiple contacts can share the same phone number or email address if their names are unique.
 
 
 #### Notes on valid and invalid fields
