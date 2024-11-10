@@ -433,8 +433,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Duplicate names are not allowed**. If students have duplicate names (e.g: common names such as "Nicholas Tan"), then the tutor should add an extra word in the name to distinguish the students. For example ('Nicholas Tan RJC' and 'Nicholas Tan HCI') can be done to distinguish students with duplicate names.
-4. **Student names cannot include the symbol '/'**. Even if legal names include symbols (e.g: Suresh S/O Rama), TAchy will not be able to parse such names. Users are advised to instead remove such characters, or write the names in full (e.g: Suresh son of Rama)
+3. **Student names cannot include the symbol '/'**. Even if legal names include symbols (e.g: Suresh S/O Rama), TAchy will not be able to parse such names. Users are advised to instead remove such characters, or write the names in full (e.g: Suresh son of Rama)
 
 --------------------------------------------------------------------------------------------------------------------
 
