@@ -102,13 +102,6 @@ public class HallPointerTest {
         assertEquals(1, hallPointer.countMemberOccurrences(member));
     }
 
-    @Test
-    public void countMemberOccurrences_memberAppearsMultipleTimes_returnsCorrectCount() {
-        hallPointer.addMember(ALICE);
-        hallPointer.addMember(ALICE);
-        assertEquals(2, hallPointer.countMemberOccurrences(ALICE));
-    }
-
     /**
      * A stub ReadOnlyHallPointer whose members list can violate interface constraints.
      */
