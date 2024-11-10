@@ -545,3 +545,4 @@ Team Size: 5
 3. Bound the unit level and unit number in the address field for the relevant commands. Currently, the commands allow an unrestricted unit level and number, resulting in inputs such as 421 Marina Bay Road 
 #123222222222-34444444444444 Tan Kim PTE Building Singapore 123456 to be accepted as valid.
 4. Allow for automatic capitalization for supplier names. Currently, inputting a lower cased supplier name into the relevant commands does not automatically capitalize it appropriately.
+5. Add case insensitivity for tags. Currently, identical tags that differ only in letter casing is considered as unique tags.
