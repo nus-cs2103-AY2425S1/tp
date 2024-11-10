@@ -102,7 +102,7 @@ Displays instructions for accessing the help page, which includes an alphabetica
 
 Adds a member to Hall Pointer.
 
-**Format:** `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
+**Format:** `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
 <box type="tip" seamless>
 
