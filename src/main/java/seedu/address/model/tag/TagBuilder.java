@@ -39,7 +39,12 @@ public class TagBuilder {
             case "wlb":
                 return new WorkLifeBalanceTag("WLB", tagValue);
             case "period":
-                int year = parts.length > 2 ? Integer.parseInt(parts[2]) : 0;
+                int year;
+                try {
+                    year = parts.length > 2 ? Integer.parseInt(parts[2]) : 0;
+                } catch (NumberFormatException e) {
+                    year = 0;
+                }
                 return new PeriodTag("Period", tagValue, year);
             default:
                 return new Tag(userInput);

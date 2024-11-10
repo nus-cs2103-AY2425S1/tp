@@ -24,16 +24,29 @@ public class ApplicationStatusCommandParserTest {
         ApplicationStatusCommand expectedCommand = new ApplicationStatusCommand(INDEX_FIRST_COMPANY,
                 new ApplicationStatus(nonEmptyStatus));
         assertParseSuccess(parser, userInput, expectedCommand);
-        // no status
+
+        // empty status (deleting status)
         userInput = targetIndex.getOneBased() + " " + PREFIX_APPLICATION_STATUS;
         expectedCommand = new ApplicationStatusCommand(INDEX_FIRST_COMPANY, new ApplicationStatus(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
+    @Test
+    public void parse_missingStatusPrefix_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ApplicationStatusCommand.MESSAGE_USAGE);
+
+        // Index provided but missing 'as/' prefix
+        String userInput = "1 " + nonEmptyStatus;
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
     @Test
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ApplicationStatusCommand.MESSAGE_USAGE);
+
         // no parameters
-        assertParseFailure(parser, ApplicationStatusCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, "", expectedMessage);
+
         // no index
         assertParseFailure(parser, ApplicationStatusCommand.COMMAND_WORD + " " + nonEmptyStatus, expectedMessage);
     }

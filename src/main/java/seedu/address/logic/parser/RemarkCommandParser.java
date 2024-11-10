@@ -33,7 +33,13 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), pe);
         }
 
-        String remarkValue = argMultimap.getValue(CliSyntax.PREFIX_REMARK).orElse("");
+        // Ensure the 'r/' prefix is present
+        if (!argMultimap.getValue(CliSyntax.PREFIX_REMARK).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE));
+        }
+
+        String remarkValue = argMultimap.getValue(CliSyntax.PREFIX_REMARK).get();
         Remark remark = new Remark(remarkValue);
 
         return new RemarkCommand(index, remark);
