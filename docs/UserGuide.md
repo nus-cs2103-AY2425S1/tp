@@ -177,6 +177,12 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 
 - <strong>[Note]</strong>: The **Name** field does not currently support special characters (e.g., `/`, `-`). This restriction may pose limitations for certain names, such as `s/o` or hyphenated names. A workaround is to use spaces or omit these characters (e.g., enter `John s o Kaarthik` instead of `John s/o Kaarthik`). Future updates may address support for special characters in names.
 
+> **General Note**: The fields in TalentSG only support alphanumeric characters, spaces, and a few select symbols like `#` and `:` in specific cases. If a field requires a symbol that is unsupported (e.g., `/`, `-`, `@`), you may consider using an alternative format or omitting the symbol entirely. For example:
+> - Use `Objective C` instead of `Objective-C`.
+> - Use `John s o Kaarthik` instead of `John s/o Kaarthik`.
+> - Use `Apartment No 3` instead of `Apartment #3`.
+
+
 ---
 
 ### Viewing Help: `help`
