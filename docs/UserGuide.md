@@ -397,9 +397,9 @@ Edits an existing patient in DocTrack.
 
 **Examples**:
 
-- `list` followed by `edit person 1 p/91234567 e/johndoe@example.com` edits the phone number and email 
+- `list person` followed by `edit person 1 p/91234567 e/johndoe@example.com` edits the phone number and email 
   address of the first person in the list to be `91234567` and `johndoe@example.com` respectively.
-- `list` followed by `edit person 2 n/Betsy Crower t/` edits the name of the second person in the list to 
+- `list person` followed by `edit person 2 n/Betsy Crower t/` edits the name of the second person in the list to 
   be `Betsy Crower` and clears all existing tags.
 
 <box type="tip" light>
@@ -474,7 +474,7 @@ Note that deleting a person will also delete all related appointments.
 
 **Examples**:
 
-- `list` followed by `delete person 2` deletes the second person in the list.
+- `list person` followed by `delete person 2` deletes the second person in the list.
 - `find Betsy` followed by `delete person 1` deletes the first person in the results of the `find` command.
 
 <box style="background: #eeeeee">
