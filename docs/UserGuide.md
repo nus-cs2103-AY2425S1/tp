@@ -285,7 +285,7 @@ Format: `findp [n/NAME_KEYWORDS] [r/ROLE]`
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching both name and role from the command entry will be returned (i.e. `OR` search).
+- Persons matching both name and role from the command entry will be returned (i.e. `AND` search).
   e.g. `findp n/Hans Bo r/Artist` will return `Hans Gruber, Artist` and `Bo Yang, Artist`
 - At least one of the 2 fields must be present
 
