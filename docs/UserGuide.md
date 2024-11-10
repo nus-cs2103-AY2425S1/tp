@@ -27,7 +27,7 @@ SalesContactPro is a **CLI-first contact management system designed specifically
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to SalesContactPro.
 
    * `delete John Doe` : Deletes the John Doe contact.
 
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book. People with **both** same **Name** and **Phone** are not allowed.
+Adds a person to SalesContactPro. People with **both** same **Name** and **Phone** are not allowed.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
@@ -97,7 +97,7 @@ Examples:
 
 ### Listing all persons: `list`
 
-Shows a list of all persons in the address book. The list can be optionally sorted by various fields to help you organize and find contacts more efficiently.
+Shows a list of all persons in SalesContactPro. The list can be optionally sorted by various fields to help you organize and find contacts more efficiently.
 
 Format: `list [s/SORT_FIELD] [r/]`
 
@@ -137,7 +137,7 @@ Results:
 
 ### Editing a person: `edit`
 
-Edits an existing person in the address book. People with **both** same **Name** and **Phone** are not allowed.
+Edits an existing person in SalesContactPro. People with **both** same **Name** and **Phone** are not allowed.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
@@ -158,7 +158,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords. If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
+Finds persons whose names contain any of the given keywords. If no exact match is found, SalesContactPro displays the names in decreasing order of similarity to search term.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -168,7 +168,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
+* If no exact match is found, SalesContactPro displays the names in decreasing order of similarity to search term.
 
 Examples:
 * `find John` returns `john`, `John Doe`, and `Johnny`
@@ -178,7 +178,7 @@ Examples:
 
 ### Filtering persons by criteria: `filter`
 
-Filters the displayed list of persons in the address book to include all persons who meet the specified criteria and displays them with index numbers.
+Filters the displayed list of persons in SalesContactPro to include all persons who meet the specified criteria and displays them with index numbers.
 
 Format: `filter [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [i/INCOME_GROUP…​] [age/AGE_CRITERIA…​]`
 
@@ -203,7 +203,7 @@ Parameters:
 
 ### Managing contact notes: `notes`
 
-View, add, edit, or delete additional notes for any contact in your address book. Notes can help you remember important details about each contact. Each contact can only have 1 notes.
+View, add, edit, or delete additional notes for any contact in SalesContactPro. Notes can help you remember important details about each contact. Each contact can only have 1 notes.
 
 Format: `notes PARAMETER`
 
@@ -285,7 +285,7 @@ The `delete NAME` feature will only delete if NAME is exact match with contact f
   * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `delete Alice`: Deletes the person named Alice from the address book.
+* `delete Alice`: Deletes the person named Alice from SalesContactPro.
 * `delete 1`: Deletes the first person in the currently displayed list.
 * `delete alex`: If there is no alex in contact, display list has filtered based on the name "alex".
   <img src="images/deleteAlex.png" alt="delete alex">
@@ -294,7 +294,7 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from the address book.
+Clears all entries from SalesContactPro.
 
 Format: `clear`
 
