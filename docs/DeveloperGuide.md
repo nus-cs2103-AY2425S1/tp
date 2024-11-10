@@ -278,7 +278,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Tourist                     | find the best local delicacies                                      | clear my itinerary                                           |
 | `* * *`  | Muslim                      | find and filter down eateries that are halal and within my location | enjoy delicious food that is within my dietary restrictions  |
 | `* * *`  | Person with Allergies       | find eateries that meet my restrictions                             | not worry about searching far and wide for every meal        |
-| `* * *`  | Hungry restaurant with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
+| `* * *`  | Hungry foodie with cravings | find restaurants with the cuisine I'm craving for                   | fulfill my cravings                                          |
 | `* * *`  | Newbie                      | read up on how the app works                                        | start using the app                                          |
 | `* * *`  | Foodie                      | add restaurant ratings                                              | give an informed decision to other diners' experiences       |
 | `* *`    | Frequent Traveler           | find reliable and high-quality restaurants in new cities            | enjoy great meals without extensive research                 |
