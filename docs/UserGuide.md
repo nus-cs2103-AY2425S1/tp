@@ -338,14 +338,17 @@ We recognize the need for clarity around overlapping lesson scheduling. Options 
 * Enabling you to customize settings for overlap permissions based on the type of lesson.
 
 #### 7. **Enhanced Name Field Support**
-To accommodate contacts with names that contain special characters, such as commas, we plan to update the application to allow names with these characters. 
+To accommodate contacts with names that contain special characters, such as commas, we plan to update the application to allow names with these characters.
 In the future, the system will support a wider variety of name formats, making it more inclusive and user-friendly.
+
+Additionally, if extra whitespace is accidentally added between names (e.g., double space between first and last name), the system will show a warning to alert you of potential duplicate entries due to spacing inconsistencies.
 
 #### 8. **Past Lesson Management**
 To enhance lesson organization, we plan to introduce features that clearly distinguish past lessons. This will include options to automatically hide completed lessons or display them in a different color for easy identification.
 You will also be able to toggle the visibility of past lessons, allowing them to focus on upcoming schedules while still being able to reference completed sessions if needed.
 
 #### 9. **Support for Decimal Places in Fees**
+We have acknowledged that it might be possible to charge an odd number (ie $25) per lesson for an even number of hours (ie 2 hours), resulting in the fee per hour not being an integer.
 To provide more flexibility in fee management, we plan to introduce support for decimal places in fee amounts.
 This will allow you to input and manage fees with greater precision, catering to scenarios where fees are calculated to fractional values (e.g., for hourly rates or partial payments).
 
