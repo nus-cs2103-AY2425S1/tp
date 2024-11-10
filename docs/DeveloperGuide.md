@@ -14,7 +14,7 @@ title: Developer Guide
   3.6. [Common classes](#common-classes)<br>
 4. [Implementation](#implementation)<br>
   4.1. [Undo/redo feature](#undoredo-feature)<br>
-    4.1.1. [Implementation](#implementation)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.1.1. [Implementation](#implementation)<br>
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-opss)
 6. [Appendix: Requirements](#appendix-requirements)<br>
   6.1. [Product scope](#product-scope)<br>
