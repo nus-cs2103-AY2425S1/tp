@@ -9,7 +9,7 @@ title: PROperty
 
 [//]: # (The commented out section is not relevent to PROperty. However, I do not know how to properly change the links such that it reflect PROperty's content. Hence, I have left it commented out for future reference.)
 
-![Ui](images/user-guide-images/Ui.png)
+![Ui](images/Ui.png)
 
 **PROperty is a desktop application for managing your property listings and client's contact details.**
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).

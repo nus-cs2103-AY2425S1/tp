@@ -2,7 +2,7 @@
 
 [![CI Status](https://github.com/AY2425S1-CS2103T-F15-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F15-3/tp/actions)
 
-![Ui](docs/images/user-guide-images/Ui.png)
+![Ui](docs/images/user-guide-images/Annotated_Ui.png)
 
 * This is **a specialised address book for property agents who are fast typers**.<br>
   Example usages:
