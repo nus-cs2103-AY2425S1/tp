@@ -279,17 +279,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                              | I want to …​                                                                                | So that I can…​                                                          |
-|----------|--------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | Tuition Center Administrators        | keep different levels of access for contact information                                     | keep sensitive information not accessible to unauthorized users          |
-| `* * *`  | Tuition Center Administrators        | search for contacts based on multiple criteria (name, role, or ID)                          | can find a specific person quickly without manually scrolling the list   |
-| `* * *`  | Tuition Center Administrators        | a user-friendly command-line interface with clear and concise command options               | quickly perform tasks without a usage guide                              |
+| Priority | As a …​                              | I want to …​                                                                                | So that I can…​                                                |
+|----------|--------------------------------------|---------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| `* * *`  | Tuition Center Administrators        | keep different levels of access for contact information                                     | keep sensitive information not accessible to unauthorized users |
+| `* * *`  | Tuition Center Administrators        | search for contacts based on multiple criteria (name, role, or ID)                          | find a specific person quickly without manually scrolling the list |
+| `* * *`  | Tuition Center Administrators        | a user-friendly command-line interface with clear and concise command options               | quickly perform tasks without a usage guide                    |
 | `* * *`  | Tuition Center Administrators        | manage, retrieve and update the contact information for teachers, students and parents      | smoothly communicate across all parties without any confusions or delays |
-| `* * *`  | Tuition Center Administrators        | able to perform mutliple actions at once                                                    | increase the productivity                                                |
-| `* * *`  | Tuition Center Administrators        | add note about individual students (e.g. learning preferences, special needs, etc)          | can personalise learning experience                                      |
-| `* *`    | Tuition Center Administrators        | send automated payment notifications to parents                                             | can ensure timely payments                                               |
-| `* *`    | Tuition Center Administrators        | integrate a billing system that automatically calculates monthly fees and generate invoices | can reduce workload                                                      |
-| `* *`    | Tuition Center Administrators        | log and track communication history with parents, teachers and students                     | ensure continuity in communication                                       |
+| `* * *`  | Tuition Center Administrators        | able to perform mutliple actions at once                                                    | boost efficiency by cutting down administrative time on repetitive tasks |
+| `* * *`  | Tuition Center Administrators        | add note about individual students (e.g. learning preferences, special needs, etc)          | personalise learning experience                                |
+| `* *`    | Tuition Center Administrators        | send automated payment notifications to parents                                             | ensure timely payments                                         |
+| `* *`    | Tuition Center Administrators        | integrate a billing system that automatically calculates monthly fees and generate invoices | lower administrative burden by minimising manual billing tasks |
+| `* *`    | Tuition Center Administrators        | log and track communication history with parents, teachers and students                     | ensure continuity in communication                             |
 
 
 
@@ -353,7 +353,7 @@ Use case ends.
 **Actor**: Administrator
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to search for students by name or class ID.
+1. Administrator types the command to search for students by any field.
 2. EduTuTu validates the search criteria.
 3. EduTuTu searches the system and outputs matching students with unique indices.
 
@@ -416,7 +416,66 @@ Use case ends.
 
 ---
 
+#### **Use Case UC07: Edit Student Record**
+**Actor**: Administrator
 
+**Main Success Scenario (MSS)**:
+1. Administrator first searches for the student using the `find` command.
+2. EduTuTu displays a list of students with unique indices.
+3. Administrator types the command to edit a student's record, including the student index.
+4. EduTuTu validates the student index.
+5. Administrator edits the selected the field with new value.
+6. EduTuTu updates the student’s record with the new information and logs a confirmation of the successful edit.
+
+Use case ends.
+
+**Extensions**:
+
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+- **5a. Invalid Field Value Entered**:
+    - 5a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC08: Display Class Pie Chart**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator types the command `pie` to view the distribution of students across classes.
+2. EduTuTu generates and displays a pie chart, representing the number of students per class, with each class labeled clearly.
+3. Administrator reviews the chart for insights into class sizes.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. No Students Enrolled in Classes**:
+    - 2a1. EduTuTu logs a message indicating that no data is available for display.
+    - **Use case ends.**
+---
+
+#### **Use Case UC09: Display Monthly Payment Bar Chart**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator types the command `bar` to view the monthly payment data.
+2. EduTuTu generates and displays a bar chart with the y-axis representing the number of students and the x-axis representing each month.
+3. Administrator reviews the chart for insights into monthly payment patterns.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. No Student Data Available**:
+    - 2a1. EduTuTu logs a message indicating that no student data is available for display.
+    - **Use case ends.**
+  
+
+---
 ### Non-Functional Requirements
 
 ---
@@ -615,6 +674,21 @@ testers are expected to do more *exploratory* testing.
    2. Other incorrect date format to try: `markpaid 1 m/2024-13`, `markpaid 1 m/13`, `markpaid 1 m/abc`<br>
       Expected: Similar to previous.
 
+### Unmarking MonthsPaid for a Specific Month
+
+1. Unmarking a Month as Paid
+
+    1. **Prerequisites**: Ensure there is a student record with a marked payment for the specified month. Use the `find` command to retrieve the student’s index.
+
+    2. **Test Case**: `unmarkpaid 1 m/2020-10`
+        - **Expected**: The payment record for the specified month is removed from the student’s record. A confirmation message logs the successful update, and the student's payment history no longer includes that month.
+
+    3. **Test Case**: `unmarkpaid 1 m/2020-13`
+        - **Expected**: An error message is logged, indicating an invalid date format. No changes are made to the student’s record, and the use case restarts from the search step.
+
+    4. **Test Case**: `unmarkpaid -10 m/2020-10`
+        - **Expected**: An error message is logged, indicating an invalid student index. No changes are made to any student records, and the use case restarts from the search step.
+       
 ### Viewing Command History
 
 1. Viewing command history

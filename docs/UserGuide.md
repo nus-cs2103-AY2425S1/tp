@@ -43,7 +43,7 @@ administrators.
 
 1. Ensure you have Java `17` or above installed in your Computer. It can be downloaded [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-2/tp/releases/tag/v1.3).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-2/tp/releases/tag/v1.5).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -57,7 +57,7 @@ administrators.
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/250, c/1 ` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/250 c/1 ` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -73,8 +73,6 @@ administrators.
 
 ## 2. Command Instructions
 ### Command Format Guidelines
-
-* ` `: Commands format is indicated in the shaded boxes.
 
 * `[ ]`: Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -237,7 +235,7 @@ Updates the [payment status](#payment-status) of a student to completed.
 * The `INDEX` refers to the index number shown in the displayed person list.
 * The `MONTH_PAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The [index](#index) **must be within the range** of the number of people in the list.
-* The year must be within 1900 to 2100 inclusive, and the month must be within 01 to 12 inclusive.
+* The year must be within 1900 to 2100 (exclusive of 2100), and the month must be within 01 to 12 inclusive.
 * The `markpaid all m/MONTH_PAID` command marks all students as paid for the specified month.
 * Can accept multiple months as input.
 
@@ -284,7 +282,7 @@ Updates the [payment status](#payment-status) of a student by removing the compl
 * The `INDEX` refers to the index number shown in the displayed person list.
 * The `MONTH_UNPAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The [index](#index) **must be within the range** of the number of people in the list.
-* The year must be within 1900 to 2100 inclusive, and the month must be within 01 to 12 inclusive.
+* The year must be within 1900 to 2100 (exclusive of 2100), and the month must be within 01 to 12 inclusive.
 * The `unmarkpaid all m/MONTH_PAID` command removes the payment status of all students with the specified month.
 * Can accept multiple months as input.
 
