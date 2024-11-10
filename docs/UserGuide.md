@@ -6,11 +6,17 @@ title: User Guide
 EventfulNUS is a **desktop app for managing contacts and events specifically for the Inter-Faculty Games hosted annually
 at the National University of Singapore. While optimised for use via a Command Line Interface** (CLI), it also has the benefits of a Graphical User Interface (GUI). If you can type fast, you will certainly benefit from event organisation tasks being done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
-
+---------------------------------------------------------------------------------------------------------------------
+## Table of Contents
+1. [Quick start](#quick-start)
+2. [Features](#features)
+3. [Person commands](#persons)
+4. [Event commands](#events)
+5. [More features](#more-features)
+6. [FAQ](#faq)
+7. [Known issues](#known-issues)
+8. [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -19,7 +25,7 @@ at the National University of Singapore. While optimised for use via a Command L
 
 1. Copy the file to the folder you want to use as the _home folder_ for EventfulNUS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eventfulnus.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -130,7 +136,6 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-
 ### Deleting a person : `delete`
 
 Deletes the specified person from the database.
@@ -147,8 +152,7 @@ Examples:
 
 ## Events
 
-### Adds an event to the database.
-
+### Adding an event : `addevent`
 Format: `addevent sp/SPORT t/Faculty 1 t/Faculty 2 d/LocalDateTime v/Venue [pa/PARTICIPANTS]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -159,7 +163,7 @@ Note that the participants must be valid persons in the database.
 Examples:
 * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John`
 
-### Edits an event in the database.
+### Editing an event : `editevent`
 
 Format: `editevent INDEX sp/SPORT t/Faculty 1 t/Faculty 2 d/LocalDateTime v/Venue [pa/PARTICIPANTS]…​`
 
@@ -175,7 +179,7 @@ Examples:
 *  `edit 1 sp/Chess` Edits the sport of the event to be `Chess`.
 *  `edit 2 sp/Basketball Women pa/` Edits the sport of the event to be `Basketball Women` and clears all existing participants.
 
-### Deletes an event from the database.
+### Deleting an event : `deleteevent`
 
 Deletes the specified event from the database.
 
@@ -186,15 +190,16 @@ Format: `deleteevent INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listevent` followed by `delete 2` deletes the 2nd event in the address book.
+* `listevent` followed by `deleteevent 2` deletes the 2nd event in the address book.
+* `findevent dummy` followed by `deleteevent 1` deletes the 1st event in the results of the `find` command.
 
-### Lists all events in the database.
+### Listing all events : `listevent`
 
 Shows a list of all events in the address book.
 
 Format: `listevent`
 
-### Finds events by keywords.
+### Finding events by keywords : `findevent`
 
 Finds all events whose names or attributes contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
 
