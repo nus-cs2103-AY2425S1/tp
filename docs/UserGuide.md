@@ -282,7 +282,7 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactMate home folder.
 
 **Q**: Why can't I execute certain commands like `mark S2208201I` when the displayed person list is empty after a `find` command?<br>
-**A**: Some commands that refer to an existing elderly by index or NRIC will not work if it didn't exist in the displayed person list. To execute these commands, you can use the `list` command to return to the person list view.
+**A**: Commands that refer to an elderly by index or NRIC will not work if the elderly is not shown in the displayed person list. To execute these commands, you can use the `list` command to return to the full, unfiltered displayed person list view.
 
 **Q**: Why are the `delete`, `edit` and `mark` commands are restricted in the history list view?<br>
 **A**: These commands are restricted in the history list view to prevent unintended modifications to an elder's details. To modify an elder's information accurately, you can use the `list` command to return to the person list view. 
