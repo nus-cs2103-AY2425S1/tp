@@ -117,16 +117,16 @@ The table below provides a brief explanation of each parameter encountered in th
 
 
 | Parameter | Prefix | Definition | Case-sensitvity | Constraints | Examples |
-|--------------------|-|-----------------------------------------------------------------------------------------------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`             | `n/` | Name of the person. | Case-insensitive | - Only alphanumeric characters, spaces, `/`, and `.` are allowed. <br> - Should not be blank. <br> - If the name contains a `-`, a possible workaround is to replace the `-` with an empty spacing. | :+1: `Muhammad Ali` <br>:+1: `Henry s/o Nathan` <br>:+1: `Robert Downey Jr.` <br>:x: `Trent Alexander-Arnold` <br>:x: `@JohnnyBoi` |
-| `PHONE`            | `p/` | Phone number of the person. | NA | - Only numbers and `+` are allowed. <br> - Should be at least 3 digits long. <br> - Should not be blank. <br> - There is no limit on the maximum length of phone numbers accepted to accommodate international phone numbers as well. | :+1: `98765432` <br>:+1: `+65 9876 5432` <br>:x: `1234 5678 (HP) 1111-3333 (Office)` |
-| `EMAIL`            | `e/` | Email address of the person. | Case-sensitive | - Should be in the format `local-part@domain`. <br> - `local-part` should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. `local-part` may not start or end with any special characters, or contain consecutive special characters. <br> - `domain` must be at least 2 characters long, start and end with alphanumeric characters. <br> - Should not be blank. <br> | :+1: `gary@yahoo.com` <br>:x: `henry` <br>:x: `j++a@rocketmail.com` |
-| `ADDRESS`          | `a/` | Address of the person. | Case-sensitive | - All values are allowed. <br> - Should not be blank. | :+1: `Woodlands Dr 71, Blk 680C, #08-12, S721767` |
-| `JOB`              | `j/` | Occupation of the person. | Case-insensitive | - All values are allowed.<br> - Should not be blank. | :+1: `DJ` |
-| `TAG`              | `t/` | A tag is the wedding associated with that person. | Case-insensitive. | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the format `NAME & NAME`. <br> - Should not be blank. | :+1: `Ahmad & Esther` <br> :+1: `Kattar d/o Hanif & Xavier Lee` <br> :x: `Jerry and Stacy` <br> :x: `Farah x Adam` |
-| `WEDDING NAME`     | `w/` | Name of a wedding. | Case-insensitive. | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the format `NAME & NAME`. <br> - Should not be blank. | :+1: `Henry & Terry`<br> :+1: `Eubanks Jr. & Ayesha` <br> :x: `Nwakame Dickson` <br> :x: `Siti n Syafie` |
-| `VENUE`            | `v/` | Location of the wedding. | Case-sensitive | - All values are allowed. <br> - Should not be blank. | :+1: `Fullerton Hotel, Ballroom 1, #01-05` |
-| `DATE`             | `d/` | Date of the wedding. | NA | - Should be in the format `DD/MM/YYY`. <br> - Only numbers and `/` are allowed. <br> - Should not be blank. | :+1: `12/12/2025` <br>:x: `12th June 2021` <br>:x: `12th June 2021` |
+|--------------------|------|---------------------------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`             | `n/` | Name of the person.                               | Case-insensitive | - Only alphanumeric characters, spaces, `/`, and `.` are allowed. <br> - Should not be blank. <br> - If the name contains a `-`, a possible workaround is to replace the `-` with an empty spacing. | :+1: `Muhammad Ali` <br>:+1: `Henry s/o Nathan` <br>:+1: `Robert Downey Jr.` <br>:x: `Trent Alexander-Arnold` <br>:x: `@JohnnyBoi` |
+| `PHONE`            | `p/` | Phone number of the person.                       | NA               | - Only numbers and `+` are allowed. <br> - Should be at least 3 digits long. <br> - Should not be blank. <br> - There is no limit on the maximum length of phone numbers accepted to accommodate international phone numbers as well. | :+1: `98765432` <br>:+1: `+65 9876 5432` <br>:x: `1234 5678 (HP) 1111-3333 (Office)` |
+| `EMAIL`            | `e/` | Email address of the person.                      | Case-sensitive   | - Should be in the format `local-part@domain`. <br> - `local-part` should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. `local-part` may not start or end with any special characters, or contain consecutive special characters. <br> - `domain` must be at least 2 characters long, start and end with alphanumeric characters. <br> - Should not be blank. <br> | :+1: `gary@yahoo.com` <br>:x: `henry` <br>:x: `j++a@rocketmail.com` |
+| `ADDRESS`          | `a/` | Address of the person.                            | Case-sensitive   | - All values are allowed. <br> - Should not be blank. | :+1: `Woodlands Dr 71, Blk 680C, #08-12, S721767` |
+| `JOB`              | `j/` | Occupation of the person.                         | Case-insensitive | - All values are allowed. <br> - Should not be blank. | :+1: `DJ` |
+| `TAG`              | `t/` | A tag is the wedding associated with that person. | Case-insensitive | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the format `NAME & NAME`. <br> - Should not be blank. | :+1: `Ahmad & Esther` <br> :+1: `Kattar d/o Hanif & Xavier Lee` <br> :x: `Jerry and Stacy` <br> :x: `Farah x Adam` |
+| `WEDDING NAME`     | `w/` | Name of a wedding.                                | Case-insensitive | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the exact format `NAME & NAME`. <br> - Both names must be unique <br> - Should not be blank. | :+1: `Henry & Terry`<br> :+1: `Eubanks Jr. & Ayesha` <br> :x: `Nwakame Dickson` <br> :x: `Siti n Syafie` <br> :x: `Jolyn &Max` <br> :x: `Sara & Sara` |
+| `VENUE`            | `v/` | Location of the wedding.                          | Case-sensitive   | - All values are allowed. <br> - Should not be blank. | :+1: `Fullerton Hotel, Ballroom 1, #01-05` |
+| `DATE`             | `d/` | Date of the wedding.                              | NA               | - Should be in the format `DD/MM/YYY`. <br> - Only numbers and `/` are allowed. <br> - Should not be blank. <br> - The range of dates allowed are `01/01/1900` to `31/12/2099` | :+1: `12/12/2025` <br> :x: `12th June 2021` <br> :x: `2025-09-03` <br> :x: `31/12/1899` <br> :x: `01/01/2100` |
 
 
 
@@ -173,10 +173,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 * A person can have any number of tags (including 0). Tags are associated to the weddings this person is
   involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
-  
-* To make adding a person easier, KnottyPlanners will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
-  
-  Examples:`john doe`, `JOHN    doe` will all be formatted to `John Doe`
 
 <box type="important" seamless>
 
@@ -187,18 +183,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 </box>
 
-<box type="warning" seamless>
-
-**TAKE NOTE:** `PHONE_NUMBER` only accepts integers between 0 and 9 as valid inputs. Allowing a broader range of characters could introduce inconsistencies and potential misuse, such as the entry of text in place of numbers.
-This is a known limitation as although multiple numbers with labels cannot be saved, one phone number can be saved, which is the intended scope so the product's use is not degraded.
-
-</box>
-
 ![add message](images/addMsg.png)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, Blk 123, #01-04 j/Photographer`
-* `add n/Betsy Crowe p/90341259 e/betsycrowe@example.com a/Newgate Center j/Caterer t/Stacy & Sam`
+* `add n/Betsy Crowe p/90341259 e/betsycrowe@example.com a/Newgate Center j/Caterer t/Stacy & Sam` P.S. The wedding `Stacy & Sam` must be created first using `add-wed` command!
 
 ### Deleting a Contact: `del` followed by `y` or `n`
 
@@ -420,7 +409,7 @@ Format: `filter n/KEYWORD... j/KEYWORD...` / `fil n/KEYWORD... j/KEYWORD...`
 
 * At least one of the `NAME` or `JOB` fields must be present.
 * `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
-* Only full words will be matched e.g. `jak` will not match `Jake`.
+* Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`.
 * `filter` returns the largest range of matches based on your input
 
 <box type="tip" seamless>
@@ -442,8 +431,8 @@ Format: `filter n/KEYWORD... j/KEYWORD...` / `fil n/KEYWORD... j/KEYWORD...`
 
 Examples:
 * `filter j/Photographer` returns `John` and `Ernest` whose jobs are photographers.
-* `filter n/John` returns `John` whose name is John.
-* `fil n/jonus n/harry j/photographer` returns Jonus, Harry and all photographers that are in your contacts.
+* `filter n/John` returns a person whose name is John.
+* `fil n/jonus n/harry j/photographer` returns `Jonus`, `Harry` and all photographers that are in your contacts.
 * `fil j/host j/caterer` returns all hosts and caterers that are in your contacts.
 
 ### View Wedding: `view-wed` / `vw`
