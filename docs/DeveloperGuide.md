@@ -118,7 +118,7 @@ together.
 
 **Main components of the architecture**
 
-**`Main`** consists of two classes: [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)). It is in charge of the app launch and shut down.
+**`Main`** consists of two classes: [`Main`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)). It is in charge of the app launch and shut down.
 * At app launch: it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down: it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -152,7 +152,7 @@ The sections below give more details of each component.
 
 This component is responsible for displaying the graphical elements of TalentSG's GUI to the user.
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -182,7 +182,7 @@ The `UI` component,
 
 This component is responsible for processing and executing user commands
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -215,7 +215,7 @@ How the parsing works:
 
 This component is responsible for storing and managing TalentSG’s data
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
@@ -238,7 +238,7 @@ The `Model` component,
 
 This component is responsible for saving and retrieving TalentSG's data
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -280,9 +280,9 @@ The `add` command allows users to add a `Person` to the `AddressBook`.
 
 To help you understand how the `add` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
+We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
 
-1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
+1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
 2. The `AddCommandParser` interprets the input.
 3. An `AddCommand` object is created.
 4. The `LogicManager` invokes the execute method of AddCommand.
@@ -369,9 +369,9 @@ The `edit` command allows users to edit a `Person` in the `AddressBook`.
 
 To help you understand how the `delete` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
 
-1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
+1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
 2. The `EditCommandParser` interprets the input.
 3. An `EditCommand` object is created.
 4. The `LogicManager` invokes the execute method of `EditCommand`.
@@ -382,7 +382,6 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 <div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), a matching error will be shown on the screen and the sequence of action is terminated.
-- At step 3, if the user provides a category to edit to, and it is found that there is no such category in FastTrack, an error will be shown and the sequence of action is terminated.
 </div>
 
 #### `EditCommand` Implementation Sequence Diagram
@@ -684,36 +683,36 @@ Simplify and enhance the recruitment process for HR professionals and recruiters
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                      | So that I can…​                                                             |
-| ------ | ---------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `* * *` | recruiter         | add new candidate profiles                                        | keep track of all candidates applying for positions                         |
-| `* * *` | recruiter         | edit candidate profiles                                           | update candidate information as new details become available                |
-| `* * *` | recruiter         | delete candidate profiles                                         | remove candidates who are no longer considered for positions                |
-| `* * *` | HR professional   | view a list of all candidates                                     | easily access any candidate’s details on demand                             |
-| `* * *` | recruiter         | search for candidates by specific criteria (e.g., skills)         | quickly find suitable candidates for various roles                          |
+| Priority | As a …​          | I want to …​                                                     | So that I can…​                                                             |
+| ------ | ---------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `* * *` | recruiter         | add new candidate profiles                                       | keep track of all candidates applying for positions                         |
+| `* * *` | recruiter         | edit candidate profiles                                          | update candidate information as new details become available                |
+| `* * *` | recruiter         | delete candidate profiles                                        | remove candidates who are no longer considered for positions                |
+| `* * *` | HR professional   | view a list of all candidates                                    | easily access any candidate’s details on demand                             |
+| `* * *` | recruiter         | search for candidates by specific criteria (e.g., skills)        | quickly find suitable candidates for various roles                          |
 | `* *`  | recruiter         | track the status of a candidate through different recruitment stages | maintain an organised overview of the recruitment pipeline                  |
-| `* *`  | HR professional   | import candidate data from external sources                       | streamline the process of adding new candidates                             |
-| `* *`  | recruiter         | export data on candidates                                         | prepare reports or share data with colleagues                               |
-| `* *`  | recruiter         | record notes during or after interviews                           | have detailed records and observations to refer back to                     |
-| `* *`  | recruiter         | see a dashboard of recruitment activities                         | get a quick overview of all current recruitment efforts                     |
-| `* *`  | HR professional   | manage and view employment details for hired candidates           | keep track of all employment-related information in one place               |
+| `* *`  | HR professional   | import candidate data from external sources                      | streamline the process of adding new candidates                             |
+| `* *`  | recruiter         | export data on candidates                                        | prepare reports or share data with colleagues                               |
+| `* *`  | recruiter         | record notes during or after interviews                          | have detailed records and observations to refer back to                     |
+| `* *`  | recruiter         | see a dashboard of recruitment activities                        | get a quick overview of all current recruitment efforts                     |
+| `* *`  | HR professional   | manage and view employment details for hired candidates          | keep track of all employment-related information in one place               |
 | `*`    | recruiter         | receive notifications about upcoming tasks                       | stay on top of all recruitment-related tasks without having to constantly check the app |
-| `*`    | HR professional   | customise the fields in candidate profiles                        | tailor the application to fit the specific needs and focus areas of my organisation |
-| `*`    | recruiter         | archive candidate profiles                                        | keep our current database up-to-date without losing past data               |
-| `*`    | recruiter         | view analytics on recruitment efforts (e.g., time to hire)        | assess the effectiveness of current recruitment strategies                  |
-| `*`    | HR professional   | undo/redo changes in the application                              | correct mistakes without needing to manually revert changes                 |
-| `*`    | recruiter         | create and manage job postings                                    | advertise new job openings directly from the application                    |
-| `*`    | recruiter         | receive automated suggestions for potential candidates            | speed up the process of candidate selection                                 |
-| `*`    | recruiter         | categorise candidates into different job pools                    | organize candidates based on their skill sets and roles                     |
-| `*`    | HR professional   | bulk upload candidate profiles via a CSV or Excel file            | quickly import a large number of candidate profiles                         |
-| `*`    | recruiter         | assign tags/labels to candidates                                  | quickly identify candidates based on specific characteristics               |
-| `*`    | HR professional   | generate candidate summary reports for hiring managers            | provide concise and relevant candidate data to stakeholders                 |
-| `*`    | recruiter         | log communication history with candidates                         | track all interactions with candidates throughout the recruitment process   |
-| `*`    | recruiter         | set priorities for candidates in the pipeline                     | focus on high-priority candidates first                                     |
-| `*`    | recruiter         | track the reason for rejecting a candidate                        | maintain clear records of why candidates were not selected                  |
-| `*`    | recruiter         | add links to candidates’ online profiles (e.g., LinkedIn, GitHub) | have quick access to additional candidate information                       |
-| `*`    | HR professional   | integrate the app with job portals or LinkedIn                    | streamline candidate sourcing from multiple platforms                       |
-| `*`    | recruiter         | send automated follow-up emails to candidates                     | save time by automating routine communication tasks                         |
+| `*`    | HR professional   | customise the fields in candidate profiles                       | tailor the application to fit the specific needs and focus areas of my organisation |
+| `*`    | recruiter         | archive candidate profiles                                       | keep our current database up-to-date without losing past data               |
+| `*`    | recruiter         | view analytics on recruitment efforts (e.g., time to hire)       | assess the effectiveness of current recruitment strategies                  |
+| `*`    | HR professional   | undo/redo changes in the application                             | correct mistakes without needing to manually revert changes                 |
+| `*`    | recruiter         | create and manage job postings                                   | advertise new job openings directly from the application                    |
+| `*`    | recruiter         | receive automated suggestions for potential candidates           | speed up the process of candidate selection                                 |
+| `*`    | recruiter         | categorise candidates into different job pools                   | organize candidates based on their skill sets and roles                     |
+| `*`    | HR professional   | bulk upload candidate profiles via a CSV or Excel file           | quickly import a large number of candidate profiles                         |
+| `*`    | recruiter         | assign tags/labels to candidates                                 | quickly identify candidates based on specific characteristics               |
+| `*`    | HR professional   | generate candidate summary reports for hiring managers           | provide concise and relevant candidate data to stakeholders                 |
+| `*`    | recruiter         | log communication history with candidates                        | track all interactions with candidates throughout the recruitment process   |
+| `*`    | recruiter         | set priorities for candidates in the pipeline                    | focus on high-priority candidates first                                     |
+| `*`    | recruiter         | track the reason for rejecting a candidate                       | maintain clear records of why candidates were not selected                  |
+| `*`    | recruiter         | add links to candidates’ online profiles (e.g. LinkedIn, GitHub) | have quick access to additional candidate information                       |
+| `*`    | HR professional   | integrate the app with job portals or LinkedIn                   | streamline candidate sourcing from multiple platforms                       |
+| `*`    | recruiter         | send automated follow-up emails to candidates                    | save time by automating routine communication tasks                         |
 
 
 ### Use cases
