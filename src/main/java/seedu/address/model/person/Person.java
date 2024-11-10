@@ -91,6 +91,39 @@ public class Person {
     }
 
     /**
+     * Adds a tag to the Person's tag list
+     */
+    public void addTag(Tag tag) {
+        requireNonNull(tag);
+        this.tags.add(tag);
+    }
+
+    /**
+     * Replaces the old tag with a specified new tag. As tags are internally stored in a set,
+     * this can only be done by removing the old tag and adding a new one.
+     */
+    public void setTag(Tag oldTag, Tag newTag) {
+        assert tags.contains(oldTag);
+        tags.remove(oldTag);
+        tags.add(newTag);
+    }
+
+    /**
+     * Checks if this person has the specified tag assigned.
+     *
+     * @param tag The tag to check.
+     * @return true if the specified tag is assigned to this person, false otherwise.
+     */
+    public boolean hasTag(Tag tag) {
+        for (Tag eachTag : tags) {
+            if (eachTag.isSameTag(tag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns a task if it exists in this person's task list.
      */
     public Task getTask(Task task) throws NoSuchElementException {
@@ -108,6 +141,14 @@ public class Person {
      */
     public Set<Task> getTasks() {
         return Collections.unmodifiableSet(tasks);
+    }
+
+    /**
+     * Replaces the original set of tags with a new specified one.
+     */
+    public void setTags(Set<Tag> newTag) {
+        tags.clear();
+        tags.addAll(newTag);
     }
 
     /**

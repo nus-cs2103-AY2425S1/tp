@@ -3,6 +3,7 @@ package seedu.address.logic.commands.tag;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.FLORIST;
 import static seedu.address.testutil.TypicalTags.PHOTOGRAPHER;
@@ -34,16 +35,16 @@ public class TagCommandTest {
 
     @Test
     public void execute_validTagsUnfilteredList_success() {
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("colleague"))));
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
+        HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("fiddler"))));
 
         // Ensure the model has the tag before adding it to the person
-        model.addTag(new Tag(new TagName("colleague")));
+        model.addTag(new Tag(new TagName("fiddler")));
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST, tagsToAdd);
+        TagCommand tagCommand = new TagCommand(INDEX_SECOND, tagsToAdd);
 
         String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_TAG_SUCCESS,
-                "colleague", personToEdit.getName().toString());
+                "fiddler", personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
@@ -59,6 +60,38 @@ public class TagCommandTest {
         expectedModel.setPerson(personToEdit, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validTagsPersonAlreadyTagged_failure() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_SECOND.getZeroBased());
+        Tag tagToAdd = new Tag(new TagName("colleague"));
+        personToEdit.addTag(tagToAdd);
+
+        HashSet<Tag> tagsToAdd = new HashSet<>();
+        tagsToAdd.add(tagToAdd);
+
+        // Ensure the model has the tag before adding it to the person
+        model.addTag(new Tag(new TagName("colleague")));
+
+        TagCommand tagCommand = new TagCommand(INDEX_SECOND, tagsToAdd);
+
+        String expectedMessage = Messages.MESSAGE_CONTACT_ALREADY_TAGGED;
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        updatedTags.addAll(tagsToAdd);
+        Person editedPerson = new Person(
+                personToEdit.getName(),
+                personToEdit.getPhone(),
+                personToEdit.getEmail(),
+                personToEdit.getAddress(),
+                updatedTags,
+                personToEdit.getWeddings(),
+                personToEdit.getTasks());
+        expectedModel.setPerson(personToEdit, editedPerson);
+
+        CommandTestUtil.assertCommandFailure(tagCommand, model, expectedMessage);
     }
 
     @Test

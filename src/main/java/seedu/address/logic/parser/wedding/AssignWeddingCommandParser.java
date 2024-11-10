@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.wedding;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
@@ -12,6 +11,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -42,20 +42,22 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
         Index index;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignWeddingCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignWeddingCommand.MESSAGE_USAGE));
         }
 
         try {
             // Parse the index from the preamble
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignWeddingCommand.MESSAGE_USAGE),
-                    ive);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignWeddingCommand.MESSAGE_USAGE), ive);
         }
 
         List<String> weddingValues = argMultimap.getAllValues(PREFIX_WEDDING);
         if (weddingValues.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignWeddingCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignWeddingCommand.MESSAGE_USAGE));
         }
 
         // Checks that all weddings have valid names
@@ -63,10 +65,15 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
             throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
         }
 
+        if (weddingValues.stream().map(wedding -> wedding.split(" p[12]/")[0]).distinct().count()
+                != weddingValues.size()) {
+            throw new ParseException(Messages.MESSAGE_DUPLICATED_WEDDING_IN_ASSIGN);
+        }
+
         Map<Wedding, String> weddings = weddingValues.stream()
                 .collect(Collectors.toMap(
                         value -> new Wedding(new WeddingName(value.split(" p[12]/")[0])),
-                        // Key: Wedding object with the name before "/p1" or "/p2"
+                        // Key: Wedding object with the name before "p1/" or "p2/"
                         value -> {
                             // Determine the type ("p1", "p2", or "g")
                             if (value.contains(" p1/")) {

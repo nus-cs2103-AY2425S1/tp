@@ -9,6 +9,7 @@ import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Wedding;
@@ -109,5 +110,11 @@ public class AssignWeddingCommandParserTest {
         String userInput = "3 w/Xavier's Wedding w/Yvonne's Wedding f/";
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_duplicateWeddings_throwsCommandException() {
+        String userInput = "3 w/Xavier's Wedding w/Xavier's Wedding";
+        assertParseFailure(parser, userInput, Messages.MESSAGE_DUPLICATED_WEDDING_IN_ASSIGN);
     }
 }

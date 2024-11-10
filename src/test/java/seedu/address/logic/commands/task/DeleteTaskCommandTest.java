@@ -119,6 +119,14 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
+    public void execute_taskRemoveIndexFailure() throws Exception {
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(Index.fromOneBased(100));
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                100, 1, 1), () -> deleteTaskCommand.execute(model)
+        );
+    }
+
+    @Test
     public void execute_equalsMethod() {
         DeleteTaskCommand deleteFirstCommand = new DeleteTaskCommand(INDEX_FIRST);
         DeleteTaskCommand deleteSecondCommand = new DeleteTaskCommand(INDEX_SECOND);

@@ -96,6 +96,12 @@ public class TagCommand extends Command {
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
 
         for (Tag tag : tagsToAdd) {
+            if (personToEdit.hasTag(tag)) {
+                throw new CommandException(Messages.MESSAGE_CONTACT_ALREADY_TAGGED);
+            }
+        }
+
+        for (Tag tag : tagsToAdd) {
             if (!model.hasTag(tag)) {
                 if (this.force) {
                     CreateTagCommand createTagCommand = new CreateTagCommand(tag);

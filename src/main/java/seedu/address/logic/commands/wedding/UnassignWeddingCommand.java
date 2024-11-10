@@ -30,7 +30,7 @@ public class UnassignWeddingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes one or multiple weddings from the person identified "
             + "by the index number used in the last person listing.\n"
-            + "Wedding names are case sensitive.\n"
+            + "Wedding names are case insensitive.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_WEDDING + "WEDDING... (can specify multiple weddings)\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -68,7 +68,9 @@ public class UnassignWeddingCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(
+                    MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()
+            ));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());

@@ -58,6 +58,7 @@ public class Messages {
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) %1$s from %2$s.";
     public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
     public static final String MESSAGE_TAG_NOT_FOUND_IN_CONTACT = "Some tags were not found in the person's tag list.";
+    public static final String MESSAGE_CONTACT_ALREADY_TAGGED = "Some tags are already in the person's tag list.";
 
     /**
      * Messages specific to Wedding
@@ -77,6 +78,7 @@ public class Messages {
             + "the Wedlinker.";
     public static final String MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT = "Some weddings were not found in "
             + "the person's wedding list.";
+    public static final String MESSAGE_DUPLICATED_WEDDING_IN_ASSIGN = "Some weddings to assign are repeated.";
 
     public static final String MESSAGE_WEDDING_ALREADY_ASSIGNED = "Some weddings already have %1$s assigned.";
     public static final String MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT = "Use f/ to force the assignment of wedding(s)."
@@ -119,7 +121,7 @@ public class Messages {
     public static final String MESSAGE_FORCE_UNASSIGN_VENDOR = "Use f/ to force the unassignment of vendors."
             + " This will unassign all tasks currently with the Vendor.";
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "The Vendor: %1$s still has tasks"
-            + " assigned to them.";
+            + " assigned to them";
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
     public static final String MESSAGE_UNASSIGN_VENDOR_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
 
