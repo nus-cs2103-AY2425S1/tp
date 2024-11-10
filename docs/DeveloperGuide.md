@@ -6,7 +6,7 @@ pageNav: 3
 
 # TrueRental Developer Guide
 
-<!-- * Table of Contents -->
+## **Table of Contents**
 <a id="table-of-contents"/><page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -38,8 +38,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -79,7 +79,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -90,9 +90,9 @@ visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -103,8 +103,8 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : 
+[`Logic.java`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -160,8 +160,8 @@ How the parsing works:
 
 ### Model component
 
-**API
-**: [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : 
+[`Model.java`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="890" />
 
@@ -188,8 +188,8 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : 
+[`Storage.java`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -1743,7 +1743,7 @@ Value of the input command changes from "rview" to "radd".
 
 </box>
 
-</box><br>
+</box> <br>
 
 2. Autofills parameter prefix for a command.
 
@@ -2041,26 +2041,60 @@ The following are **DUPLICATES** of the initial rental information:
 
 <d-table>
 
-| Parameter        | Description            | Additional Constraints                                                                                                                                          | Examples               |
-|------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
-| `[NAME]`         | Client's name          | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`                                                                 | `Ravi S/O Ramasamy`    |
-| `[PHONE_NUMBER]` | Client's phone number  | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`             |
-| `[EMAIL]`        | Client's email address | Accommodate well-established email companies only.                                                                                                              | `test@gmail.com`       |
-| `[TAG...]`       | Client's tag           | Limit up to `20 characters`                                                                                                                                     | `12345678901234567890` |
+| Parameter       | Description                                                                                                        | Additional Constraints                                                                                                                                          | Examples                                                                                                                     |
+|-----------------|--------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`          | Client's name                                                                                                      | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`.                                                                | `Ravi S/O Ramasamy`                                                                                                          |
+| `PHONE_NUMBER`  | Client's phone number                                                                                              | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`                                                                                                                   |
+| `EMAIL`         | Client's email address                                                                                             | Accommodate well-established email companies only.                                                                                                              | `test@gmail.com`                                                                                                             |
+| `TAG`           | Client's tag                                                                                                       | Limit up to `20 characters`.                                                                                                                                    | `12345678901234567890`                                                                                                       |
+| `ADDRESS`       | The address of the property managed by the client.                                                                 | Limit up to **150** `Unicode` characters.                                                                                                                       | `Building 9, Meadowbrook Towers, 235 Crescent Drive, Hillside Road, Block F, Suburb 12, Bangalore, Karnataka, 560078, India` |
+| `MONTHLY_RENT`  | The security deposit amount for the property managed by your client, paid by the tenant at the start of the lease. | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                                                                               |
+| `DEPOSIT`       | The address of the property managed by the client.                                                                 | Restrict the value to the maximum representable value of a `Double` in Java.                                                                                    | `999999999999`                                                                                                               |
+| `CUSTOMER_LIST` | The name(s) of the tenant(s) for the property managed by the client.                                               | Limit the usage of the `;` separator to **49** occurrences, which can accommodate up to 50 names in total.                                                      | `Alice;Bob;Charlie;David;Ella;Fiona;Geoge;Helen;Ivan;Joshua;Keria;Laura`                                                     |
 
 </d-table>
 
-#### `cedit` Command.
+#### `cedit` Command
 
 The current version of `cedit` only supports replacing **all tags** with the **updated tag** provided by the `cedit`
 command.
 In the future, there will be an update to the `cedit` command, where the user is able to choose which tag to **retain
 ** as well as which tag to **edit**.
 
-#### `sort` Command.
+#### `redit` Command
+
+The current version of `redit` only supports replacing existing value to the newly specified value for all parameters used in `redit`.
+In the future, there will be an update to the `redit` command, where the user is able to choose whether to edit from the existing value or simply replace the existing value, offering greater convenience.
+
+#### `sort` Command
 
 The current version of `sort` is case-sensitive.
 In the future, there will be an update to the `sort` command, where the sorting will be case-insensitive.
+
+#### `RENT_DUE_DATE` Parameter
+
+The current `RENT_DUE_DATE` meant to refer to the specific day (of the month) on which the rent payment is due for the property managed by the client. However, the term `DATE` may be misleading, as users might assume it requires the format `dd/mm/yyyy`.
+In the future, there will be an update to the `RENT_DUE_DATE` parameter, where it will be renamed to `RENT_DUE_DAY` for greater clarity.
+
+#### Error Message For Invalid Value Of `MONTHLY_RENT` Parameter
+
+The current error message for an invalid value of `MONTHLY_RENT` is: `Monthly Rent should only contain numbers, and in 2 decimal places if needed`. This message may be misleading, as the term `numbers` is too vague.
+In the future, there will be an update to the error message for invalid value of `MONTHLY_RENT`, where it will be rephrased to `Monthly Rent should only contain positive numbers (including 0, with no leading zeroes), and be formatted with exactly 2 decimal places if needed` for greater clarity.
+
+#### Error Message For Invalid Value Of `DEPOSIT` Parameter
+
+The current error message for an invalid value of `DEPOSIT` is: `Deposit should only contain numbers, and in 2 decimal places if needed`. This message may be misleading, as the term `numbers` is too vague.
+In the future, there will be an update to the error message for invalid value of `DEPOSIT`, where it will be rephrased to `Deposit should only contain positive numbers (including 0, with no leading zeroes), and be formatted with exactly 2 decimal places if needed` for greater clarity.
+
+#### Duplicate Rental Information Detection
+
+Currently, rental information is considered a duplicate if and only if the `ADDRESS` parameter **matches exactly**, **including case sensitivity**. However, this approach may not be ideal as unique identifiers such as unit numbers can differentiate addresses that are otherwise the same.
+In the future, there will be an update to the duplicate rental information detection method, where rental information will be considered a duplicate if and only if the `ADDRESS` parameter **matches** (**case-insensitively**).
+
+#### Handling Long Text In The UI
+
+Currently, some long texts are truncated due to the window size constraints of the application, with excess text displayed as `...`.
+In the future, there will be an update to the UI and additional constraints on the parameter value. The UI will be updated such that all characters will be fully displayed without truncation or the use of `...`.
 
 #### \[Proposed\] Undo/redo feature
 
@@ -2178,7 +2212,3 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_

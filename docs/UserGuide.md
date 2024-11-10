@@ -228,7 +228,7 @@ The following is a **DUPLICATE** of the initial client:
 
 ## Duplicate Rental Information Detection
 
-Rental information is considered a **duplicate** **if and only if** the `ADDRESS` parameter is **exactly the same**, including case sensitivity.
+Rental information is considered a **duplicate** **if and only if** the value of the `ADDRESS` parameter **matches exactly**, **including case sensitivity**.
 
 This is to allow you to have a greater flexibility of manipulating the rental information.
 
