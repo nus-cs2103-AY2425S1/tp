@@ -30,8 +30,7 @@ public class FindPriceCommandParser implements Parser<FindPriceCommand> {
 
         String[] tagKeywords = trimmedArgs.split("\\s+");
 
-        if (!(trimmedArgs.equals("$") || trimmedArgs.equals("$$")
-                || trimmedArgs.equals("$$$") || trimmedArgs.equals("$$$$"))) {
+        if (!trimmedArgs.contains("$")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_PRICE_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
