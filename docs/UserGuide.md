@@ -138,7 +138,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 - `find t/1` returns all students tagged with tag `MA1521` and `CS1101S` etc. <br>
 - `find alex t/CS1101S` returns `Alex Yeoh` and all students tagged with tag `CS1101S`<br>
-  ![result for 'find alex t/colleagues'](images/findAlexColleaguesResult.png)
+  ![result for 'find alex t/CS110S'](images/findAlexTag.png)
 
 <div markdown="block" class="alert alert-info">
 
