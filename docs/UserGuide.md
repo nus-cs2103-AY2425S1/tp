@@ -478,7 +478,7 @@ _Details coming soon ..._
 **A**: To add a company with multiple tags, use the add command with multiple t/ tags. Example: `add n/Google LLC e/contact@google.com t/tech t/FAANG t/software`
 
 **Q**: Can I edit a company’s details? <br>
-**A**: Yes, you can edit any company's details using the edit command followed by the index of the company. Example: `edit 2 n/Apple Inc e/careers@apple.com p/12345678`
+**A**: Yes, you can edit any company's details using the edit command followed by the index of the company. For example: `edit 2 n/Apple Inc e/careers@apple.com p/12345678`. However, please note that optional fields like `PHONE_NUMBER` and `ADDRESS` cannot be removed once added. If you wish to remove these fields, you will need to delete the company using the `delete` command and then re-add it without those fields.
 
 **Q**: Can I delete all contacts at once? <br>
 **A**: Yes, use the `clear` command to delete all contacts in your address book. Be cautious, as this action is <span style="color:red">irreversible</span>.
