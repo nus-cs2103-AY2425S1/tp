@@ -56,14 +56,14 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 ### Step 2: Install BakeBuddy
 
-1 Download BakeBuddy:
+1. Download BakeBuddy:
   - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
   - Look for the file named `bakebuddy.jar`
   - Click on it to download
-2 Create a home for BakeBuddy:
+2. Create a home for BakeBuddy:
   - Create a new folder on your computer named `BakeBuddy`
   - Move the downloaded `bakebuddy.jar` file into this folder
-3 Start BakeBuddy:
+3. Start BakeBuddy:
   - Open your terminal (like in Step 1)
   - Type `cd ` (with a space after cd)
   - Drag your BakeBuddy folder into the terminal window (this fills in the location automatically!)
