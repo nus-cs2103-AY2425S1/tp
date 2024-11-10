@@ -158,10 +158,10 @@ public class ModelManager implements Model {
             return -1;
         }
         addressBook.sortByAppointments();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         assert !filteredPersons.isEmpty() : "Filtered person list should not be empty after sorting.";
         return 1;
     }
-
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);

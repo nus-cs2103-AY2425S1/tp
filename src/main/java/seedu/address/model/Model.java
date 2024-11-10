@@ -90,9 +90,9 @@ public interface Model {
     void viewNote(Person person);
 
     /**
-     * Replaces person list with the specified person list
+     * Sorts person list with the specified person list
      *
-     * @return
+     * @return int to throw error for no contact with list in the
      */
     int sortFilteredPersons();
 
@@ -107,5 +107,6 @@ public interface Model {
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
+
     void updateFilteredPersonList(Predicate<Person> predicate);
 }
