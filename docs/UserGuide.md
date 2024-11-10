@@ -227,6 +227,7 @@ add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP
 ```
 * Adds a person to the address book.
 * All parameters `NAME`, `PHONE_NUMBER`, `EMAIL`, `RELATIONSHIP` must be present.
+* If you want to use special characters such as `d/o` or `s/o` in `name`, please omit the `/` and enter `so` and `do` instead.
 
 <box type="tip" seamless>
 
@@ -243,6 +244,7 @@ add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP
 **Note:** Names which are very long may not be fully displayed in the detailed person view, as displaying it would
 compromise the aesthetic of the User Interface and overall user experience. The person can still be identified through
 other information such as their phone number, email, and relationship.
+
 </box>
 
 Valid Example:
@@ -278,13 +280,16 @@ edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]
 
 <box type="tip" seamless>
 
-**Tip:**
+**Tips:**
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Each of the optional fields can only be specified at most once. <br>
   e.g. `edit 1 -n Carmen -n Betsy` is an invalid command.
 * Existing values will be updated to the input values.
-  </box>
+* If you want to use special characters such as `d/o` or `s/o` in `name`, please omit the `/` and enter `so` and `do` instead.
+  
+</box>
+
 
 Valid Example (One field edited):
 * `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
@@ -504,6 +509,8 @@ clear -e`
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When creating 2 or more events that have the same name, start date, end date, and location**, it is possible for these events to have attendees which are subsets for each other, but not equal to each other. The remedy is to implement a more sophisticated duplicate event detection system to enhance user experience in the future.
+4. **Incorrect error message for invalid index in `edit` command**. Currently, the error message for invalid index such as `-1` (negative numbers), `0` and integer overflow is an invalid command instead of an index out of bounds. This is a known issue and will be addressed in an upcoming update to ensure that users receive more accurate and specific error messages when encountering invalid index values.
+5. **Truncation of text in the GUI**, fields with lengthy text, such as long names and address, can sometimes be truncated in the GUI. To avoid this, you can adjust the size of the window by dragging the sides to enlarge the window.
 
 --------------------------------------------------------------------------------------------------------------------
 

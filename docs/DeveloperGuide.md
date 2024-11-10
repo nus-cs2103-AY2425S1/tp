@@ -130,7 +130,6 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -300,15 +299,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | As an organizer | update the event's information after creating it             | attendees can see the updated event details                           |
 | `* * *`  | As an organizer | delete an event                                              | I can cancel an event                                                 |
 
-
-
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `LegacyLink` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case 1: Add contact**
+### **Use case 1: Add contact**
 
 **MSS**
 1. User enters name, phone number, email and relationship of the contact.
@@ -323,8 +318,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
+* 3a. The addition of contact causes duplicate contacts.
 
-**Use case 2: Delete contact**
+    * 3a1. System shows an error message. 
+  
+    Use case resumes at step 2.
+
+*a. At any time, User chooses to cancel adding a contact Use case ends.
+
+### **Use case 2: Delete contact**
 
 **MSS**
 
@@ -348,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-#### **Use case 3: View all contacts**
+### **Use case 3: View all contacts**
 
 **MSS**
 
@@ -359,7 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case 4: Update information of contact**
+### **Use case 4: Update information of contact**
 
 **MSS**
 
@@ -378,10 +380,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
 * 3a. The changed details are invalid.
 
   * 3a1. System shows an error message.
+
+    Use case resumes at step 3.
+
+* 3b. User does not change contact details.
+
+  * 3b1. System shows an error message.
+  
+    Use case resumes at step 3.
+
+* 4a. The edited contact causes duplicate contacts.
+
+  * 4a1. System shows an error message.
 
     Use case resumes at step 3.
 
@@ -391,7 +404,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case 5: Add event**
+### **Use case 5: Add event**
 
 **MSS**
 
@@ -419,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *a At any time, Users chooses to cancel the adding.
 
 
-**Use case 6: Delete an event**
+### **Use case 6: Delete an event**
 
 **Preconditions:**
 
@@ -450,7 +463,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *a. If the user exits the application without confirming, the event is kept and the use case ends.
 
-#### Use Case 7: View All Events
+### Use Case 7: View All Events
 **MSS**
 
 1. User lists all events.
@@ -460,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends
 
-**Use case 8: Update event information**
+### **Use case 8: Update event information**
 
 **MSS**
 
@@ -491,10 +504,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 3.
 
+* 4a. The edited event causes duplicate events.
+
+    * 4a1. System shows an error message.
+
+      Use case resumes at step 3.
 
 *a At any time, User chooses to cancel the edit.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -696,3 +713,6 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
+* **Support for Special Characters in Contact Names**: The current address book functionality does not support certain special characters, such as "d/o" (daughter of). We plan to enhance the address book to allow the use of special characters in person names to better accommodate a wider range of user inputs. This will ensure that users from diverse cultural backgrounds, can accurately input and save their names without encountering errors.
+
+* **Error Handling for Invalid Contact Names in Search**: Currently, when a user attempts to find a contact using an invalid name (e.g., one containing special characters), the search is executed without displaying an error message. This can lead to confusion as no feedback is provided regarding the invalid input. We plan to improve this behavior by implementing a validation check for invalid contact names during the search operation. If a user attempts to search with an invalid name (such as "find -/Bob"), an error message will be displayed to inform the user that the name contains invalid characters
