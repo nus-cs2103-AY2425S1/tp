@@ -230,6 +230,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void deletePerson(Person target) {
+        triggerBackup("delete_" + target.getName().fullName, target);
         addressBook.removePerson(target);
         calendar.deleteAppointment(target);
     }
@@ -300,6 +301,21 @@ public class ModelManager implements Model {
     }
 
     // ============ Filtered Person List Accessors =======================================================
+
+    /**
+     * Triggers a backup for a specified action, including the target person’s details.
+     *
+     * @param actionDescription A description for the action being backed up.
+     * @param target            The person involved in the action.
+     */
+    protected void triggerBackup(String actionDescription, Person target) {
+        try {
+            int index = backupManager.createIndexedBackup(storage.getAddressBookFilePath(), actionDescription);
+            logger.info("Backup triggered for action: " + actionDescription + " at index " + index);
+        } catch (IOException e) {
+            logger.warning("Backup failed for action: " + actionDescription + " - " + e.getMessage());
+        }
+    }
 
     /**
      * Retrieves the list of persons filtered by the current filter predicate.
