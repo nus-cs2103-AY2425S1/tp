@@ -150,6 +150,7 @@ Format: `newtag t/TAG1…​`
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
 * Leading and trailing spaces are ignored. e.g `newtag t/ bride's side  t/ groom's side  ` is the same as `newtag t/bride's side t/groom's side`.
+* Extra leading parameters will be ignored. e.g. `newtag 1 t/bride's side` is the same as `newtag t/bride's side`.
 * Duplicate tags (with the same name) are **not** allowed.
 * Tag names are **case-insensitive**. e.g `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
 * Only 30 (or fewer) predefined tags can exist at any point.
@@ -174,6 +175,7 @@ Format: `deletetag [-force] t/TAG1…​`
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
 * Leading and trailing spaces are ignored. e.g `deletetag t/ bride's side  t/ groom's side` is the same as `deletetag t/bride's side t/groom's side`.
+* Extra leading parameters will be ignored. e.g. `deletetag 1 t/bride's side` is the same as `deletetag t/bride's side`.
 * User cannot delete a tag that has not been added via `newtag` before.
 * If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
 * Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
