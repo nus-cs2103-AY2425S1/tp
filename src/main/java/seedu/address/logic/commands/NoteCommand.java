@@ -71,7 +71,7 @@ public class NoteCommand extends Command {
         }
 
         Person personToEdit = lastShownList.stream()
-                .filter(person -> person.getName().equals(name))
+                .filter(person -> person.getName().toString().equalsIgnoreCase(name.toString()))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
 
@@ -79,7 +79,7 @@ public class NoteCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_NOTE_SUCCESS, name, editedPerson.getNote().toString()));
+        return new CommandResult(String.format(MESSAGE_EDIT_NOTE_SUCCESS, personToEdit.getName(), editedPerson.getNote().toString()));
     }
 
     /**
