@@ -614,7 +614,7 @@ filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
-    - See [Filtering By Income](#filter-by-income) for more information.
+    - See [Matching Criteria for Income](#filter-by-income) for more information.
 
 For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
