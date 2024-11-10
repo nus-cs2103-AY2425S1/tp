@@ -92,6 +92,8 @@ Examples:
 * `add n/John Doe p/98765432 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456`
 * `add n/Betsy Crowe p/99991111 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456 p/12345678 t/Vegetable`
 
+Note: The application is optimized for convenience store owners within the Singapore context, hence the address and phone numbers accepted are locked to Singapore's format. 
+
 ### Listing all suppliers : `list`
 
 Shows a list of all suppliers in the address book.
@@ -122,17 +124,20 @@ Format: `find KEYWORD [MORE_KEYWORDS] [c/CATEGORY]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* The keyword will be search on the name of the supplier.
+* The keywords will be searched on the name of the supplier.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Optionally, a selection of categories `CONSUMABLES`, `LIFESTYLE`, `SPECIALTY` can be specified to search for suppliers which has goods which has at least one of the specified category. If the category is specified, the keywords are optional.
+* When both keywords and category are provided in the search, they will be handled in an `OR` manner.
+  e.g. `find Alex c/CONSUMABLES` will return both suppliers who match `Alex` and all suppliers who can supply `CONSUMABLE` items.
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find alex c/LIFESTYLE`
+* `find alex c/LIFESTYLE` returns both `Alex` matches and suppliers for `LIFESTYLE` products<br>
+  ![result for 'find alex c/LIFESTYLE'](images/findAlexLifeStyleResult.png)
 * `find c/CONSUMABLES c/LIFESTYLE`
 
 ### Deleting a supplier : `delete`
@@ -162,13 +167,13 @@ Format: `exit`
 
 Adds a specific goods item tied to a supplier. All fields are required for this command.
 
-Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL DATE n/SUPPLIER_NAME`
+Format: `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL_DATE n/SUPPLIER_NAME`
 
 Examples:
 
 * `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh` will add goods of name `Gardenia Milk Bread` that belongs to the supplier `Alex Yeoh`.
 
-Note: The goods category of goods will be reflected on the supplier as a tag. For instance, if a supplier has a goods which has a goods category of `CONSUMABLES`, a `CONSUMABLES` tag will be added to the supplier (visually). The tag information of the supplier remains as it is.
+Note: The goods category of goods will also be reflected on the supplier as a tag. For instance, if a supplier has a goods which has a goods category of `CONSUMABLES`, a `CONSUMABLES` tag will be added to the supplier (only visually). The tag information of the supplier remains as it is.
 
 ### Deletion of Goods : `deletegoods`
 
@@ -178,7 +183,7 @@ Format: `deletegoods n/NAME gn/GOODS_NAME`
 
 Examples:
 
-* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes the goods that has name `Gardenia Milk Bread` that belongs to the supplier `John Doe`. 
+* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes the oldest goods record that has name `Gardenia Milk Bread` that belongs to the supplier `John Doe`. 
 
 ### View statistics for Goods : `viewgoods`
 
@@ -195,10 +200,17 @@ Note: All filters are optional, and all goods will be shown if no filters are pr
 ### Export Goods Data to CSV: `export`
 
 Exports the currently displayed goods in a new CSV file. Should be used after filters have been applied to obtain a clean set of data for any external usage.
-- This command is dependent on the `viewgoods` command.
+- This command is entirely dependent on the `viewgoods` command.
+- As such, if the `viewgoods` function has not been used, the default export will be the list of goods with pending deliveries.
 - The new CSV file will be saved as `[JAR file location]/data/filteredGoods.csv`
 
 Format: `export`
+
+Examples:
+
+* if `viewgoods c/CONSUMABLES` was entered, followed by `export`, you will receive a list of `CONSUMABLES` in the newly created CSV file.
+
+Note: If the `filteredGoods.csv` file already exists, the information contained will simply be overwritten with new data from the currently applied filter.
 
 ### Saving the data
 
@@ -229,9 +241,11 @@ SupplyCental allows you to resize the UI elements to better fit your screen. You
 
 The elements will resize according to the position of the divider, allocating more space for the output to be displayed, or more space for the suppliers/goods to be displayed.
 
-### Delivery status
+### Delivery Status
 
 The delivery status of the goods can be easily seen through the color of the delivery status text. The color of the delivery status will be yellow if the delivery status is `PENDING` and will change to green if the delivery status is `Delivered`, as shown in the image below.
+
+This is a **key** feature of our application and deliveries will be automatically marked as delivered depending on the time in real life. (e.g. If an existing goods record has an arrival date set for 1st of January 2024 at 12pm, once 1st of January 2024 12pm has passed, the goods will be marked as delivered without the need of any user action.)
 
 ![Goods Name Color UI](images/DeliveryStatusColorUi.png)
 
@@ -248,6 +262,7 @@ The delivery status of the goods can be easily seen through the color of the del
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Deleting goods from supplier**, if you delete goods from a specific supplier and there are multiple goods of the same name from that supplier, only the oldest entry will be deleted. This may not be intuitive for users as the deletion message does not specify which has been deleted.
 
 --------------------------------------------------------------------------------------------------------------------
 
