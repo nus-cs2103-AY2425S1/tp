@@ -465,7 +465,7 @@ Shows a list of all tasks in the T_Assistant.
 
 ##### Notes
 
-1. If there's a `Group Name`, all of the tasks in that group will be listed.
+1. If there's a `Group Name`, all the tasks in that group will be listed.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
