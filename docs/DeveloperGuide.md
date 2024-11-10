@@ -242,24 +242,17 @@ This follows the activity diagram shown below:
 The prompt for confirmation by the user seen here is also used in the `clear` command. The rationale behind this confirmation prompt was to ensure that users didn't end up losing precious data if they changed their minds later on or accidentally inputted the command.
 
 
-
-
-
-
 ## Planned enhancements
 
 ### 1. Multi-Language Support
 
-#### Current Issue
-Non-English text input can cause visual bugs, including reversed text display.
+**Current Issue:**: Non-English text input can cause visual bugs, including reversed text display.
 
-#### Proposed Solution
-Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
+**Proposed Solution:**: Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
 
 ### 2. Support for Forward Slash in Names
 
-#### Current Issue
-Names containing forward slashes (e.g., "Ramesh s/o Ravichandran") are incompatible with `add`, `edit`, and `filter` commands due to two problems:
+**Current Issue:**: Names containing forward slashes (e.g., "Ramesh s/o Ravichandran") are incompatible with `add`, `edit`, and `filter` commands due to two problems:
 
 1. The parser misinterprets "s/o" as a Status flag command, resulting in an invalid status error
 2. The name validation regex explicitly blocks forward slashes to prevent parsing conflicts
