@@ -330,16 +330,16 @@ findm m/MAJOR
 
 - `m/MAJOR`: Major or field of study. **Partial matches** are supported, so any contact with a major that partially matches the provided keyword will be included.
 
-Example: Finds contacts with the major "Computing"
+Example: Finds contacts with the major "Computer Science"
 - **Exact Match**:
 ```plaintext
-findm m/Computing
+findm m/Computer Science
 ```
 - **Partial Match**:
 ```plaintext
 findm m/Comp
 ```
-
+<img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 80%;">
 
 <br>
 
