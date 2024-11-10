@@ -46,8 +46,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a**desktop app for m
    1. The `Contacts List`, highlighted by the purple box. This shows you a simple list of all clients that have been added to the book.
    1. The `Detailed View`, highlighted by the orange box. This shows you a detailed view of one client when you select it from the `Contacts List` by double-clicking on the appropriate contact.
    1. The `Command Input Window`, highlighted by the green box. This is where you input commands to interact with the F.A.R.T. book. Do so by selecting the `Command Input Window` and typing the relevant command. Press `Enter` to execute it.
-   1. The `Response Window`, highlighted by the blue box. Once a command is inputted, this is where the F.A.R.T. book informs you of the result of your command. 
-   
+   1. The `Response Window`, highlighted by the blue box. Once a command is inputted, this is where the F.A.R.T. book informs you of the result of your command.
 1. Some example commands you can try:
    * `help`: Opens the help window.
    * `list` : Lists all contacts.
@@ -347,7 +346,7 @@ F.A.R.T has some handy visual cues that highlight certain clients.
 | Feature                   | Details                                                                                                                                                                                                                                                                                                                  | Examples                                                                                                                       |
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | **Net Worth Tagging**     | You can add tags to clients that say `"highnetworth"`, `"midnetworth"`, `"lownetworth"` that will be highlighted. <br><br> Each client can only have one net worth tag at a time.<br><br>(e.g. if you add a `"highnetworth"` tag to a client who already has a "midnetworth" tag, then the existing tag will be removed) | ![highnetworth](images/highnetworth.png)<br/>![midnetworth](images/midnetworth.png)<br/>![lownetworth](images/lownetworth.png) |
-| **Birthday Highlighting** | When a client's birthday is approaching or has recently passed (**7 days** before and after <br> the current date), their name will turn orange. It will also remind you if you mouse over their name. <br><br>Take this chance to wish them a happy birthday!                                                           | ![birthday color](images/birthdaycolor.png)                                                                                    | 
+| **Birthday Highlighting** | When a client's birthday is approaching or has recently passed (**7 days** before and after <br> the current date), their name will turn orange. It will also remind you if you mouse over their name. <br><br>Take this chance to wish them a happy birthday!                                                           | ![birthday color](images/birthdaycolor.png)                                                                                    |
 
 If you would like to disable these visual features, click on the `File` tab at the top and uncheck `Enable Visuals`.
 

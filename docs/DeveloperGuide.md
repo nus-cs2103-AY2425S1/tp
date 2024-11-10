@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* The feature to filter file format for the Upload Command was adapted from this [StackOverflow post.](https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser) 
+* The feature to filter file format for the Upload Command was adapted from this [StackOverflow post.](https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -306,8 +306,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete a contact. 
-2. FART requests confirmation. 
+1. User requests to delete a contact.
+2. FART requests confirmation.
 3. User confirms.
 4. FART deletes the contact and shows a confirmation message.
 

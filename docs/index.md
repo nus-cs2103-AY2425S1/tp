@@ -8,7 +8,7 @@ title: Financial Assurance Revolutionary Telemarketer (FART)
 
 ![Ui](images/Ui.png)
 
-**F.A.R.T is a desktop application for managing contact details, catered to financial advisors.** 
+**F.A.R.T is a desktop application for managing contact details, catered to financial advisors.**
 
 While it has a GUI (Graphical User Interface), most of the user interactions happen using a CLI (Command Line Interface).
 
