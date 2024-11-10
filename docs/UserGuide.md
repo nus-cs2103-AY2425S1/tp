@@ -2,13 +2,8 @@
 layout: page
 title: User Guide
 ---
-* Table of Contents
-{:toc}
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
-# Welcome to BakeBuddy
+# **Welcome to BakeBuddy**
 
 BakeBuddy is your all-in-one command-line companion for managing your home bakery business. Designed with speed and
 efficiency in mind, it combines the power of a Command Line Interface (CLI) with intuitive features to help you focus
@@ -20,20 +15,25 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 - 📦 Suppliers and ingredients
 - 📋 Order tracking and fulfillment
 
-## Why Choose BakeBuddy?
+## **Why Choose BakeBuddy?**
 
 - **Speed First**: Execute commands quickly through our CLI, perfect for busy bakers
 - **User-Friendly**: Simple GUI elements complement the CLI for enhanced usability
 - **All-in-One Solution**: Manage every aspect of your bakery business from a single application
 - **Efficiency Focused**: Designed specifically for home-based bakery owners who value their time
 
-## Getting Started
+## **Getting Started**
 
 This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
 
 --------------------------------------------------------------------------------------------------------------------
+* 
+* Table of Contents
+{:toc}
+
 <div style="page-break-after: always;"></div>
-## Before You Begin ✔️
+
+## **Before You Begin ✔️**
 ### Step 1: Check if Your Computer is Ready
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
@@ -86,8 +86,8 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-# List of Commands
-## Contact Management
+# **List of Commands**
+## **Contact Management**
 ### General Contacts
 
 | Command | Format | Example |
@@ -115,7 +115,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-## Order Management
+## **Order Management**
 ### Customer Orders
 
 | Command | Format | Example |
@@ -137,7 +137,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-## Catalogue Management
+## **Catalogue Management**
 ### Ingredient Catalogue
 
 | Command | Format | Example |
@@ -156,7 +156,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-## General Commands
+## **General Commands**
 
 | Command                     | Format | Example |
 |-----------------------------| --- | --- |
@@ -187,17 +187,9 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-# FAQ
+# **FAQ**
 
-## Q1: Why can't I see the new order under the customer's/supplier's contact details immediately after adding it?
-**A:** When you add a new order, you need to follow these steps to see it reflected in the contact details:
-1. First, add the order using the appropriate command (`addCustomerOrder` or `addSupplyOrder`)
-2. Click the refresh button in the user interface
-3. The order will now appear under the respective contact's information
-
-This refresh step is necessary to ensure all order information is properly synchronized with the contact details.
-
-## Q2: How can I easily find the correct Product IDs when adding orders?
+## **Q1: How can I easily find the correct Product IDs when adding orders?**
 **A:** When adding orders, you can use these tips to find the correct Product IDs:
 
 For Customer Orders:
@@ -210,7 +202,6 @@ For Customer Orders:
    [catalogue appears showing pastries and their IDs]
    > addCustomerOrder n/John p/98765432 o/1 2 3
    ```
-<div style="page-break-after: always;"></div>
 
 For Supply Orders:
 1. First run `viewIngredientCatalogue` to see all ingredients and their IDs
@@ -223,27 +214,46 @@ For Supply Orders:
    > addSupplyOrder n/Tim p/81234567 o/1 2
    ```
 
-## Q3: Do I need to refresh after deleting orders too?
-**A:** Yes, the same refresh process applies when deleting orders:
-1. Delete the order using `deleteCustomerOrder` or `deleteSupplyOrder`
-2. Click the refresh button in the UI
-3. The order will be removed from the contact's information
+## **Q2: How do I view all customers/suppliers easily?**
+**A:** We can use the filter command to view all customers/suppliers.
+   ```
+   filterContact t/Customer
+   ```
 
-## Q4: What happens if I use a wrong Product ID in my order?
-**A:** If you use a Product ID that doesn't exist in the catalogue:
-- The system will show an error message
-- The order won't be created
-- You should check the catalogue again using `viewPastryCatalogue` or `viewIngredientCatalogue` to verify the correct IDs
+## **Q3: How do I add collection dates and large quantities to orders?**
+**A:** You can include collection dates and quantities in the order's remark field:
+```
+addCustomerOrder n/John p/91234567 o/1 2 r/Collection: 25/12/2024 6pm, Qty: 2x Croissant, 3x Muffin
+```
 
-## Q5: Can I add multiple products with the same ID in one order?
+Best practices for remarks:
+- Start with collection date/time
+- List quantities clearly
+- Add any special instructions last
+- Use consistent format for dates
+
+## **Q4: Can I add multiple products with the same ID in one order?**
 **A:** Yes, you can repeat Product IDs in your order if the customer wants multiple of the same item. For example:
 ```
 addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
 
-## Q6: How do I tag contacts?
-**A:** You can add tags to contacts in several ways:
+## Q5: How are orders sorted in the list?
+**A:** Orders are automatically sorted in this priority:
+1. Pending orders (shown first)
+- Sorted by date added (newest first)
+2. Completed orders (shown after pending)
+- Sorted by completion date (newest first)
+
+This sorting helps you:
+- Focus on pending orders that need attention
+- Keep track of recent completions
+- Maintain an organized workflow
+
+
+## Q6: How do I tag contacts with multiple tags?
+**A:** You can add multiple tags to contacts in several ways:
 1. When creating a new contact:
    ```
    addContact n/John p/91234567 t/VIP t/Regular
@@ -285,45 +295,17 @@ For the best experience:
 - Avoid resizing to minimum dimensions
 
 ## Q10: Are there limits to email and phone number length?
-**A:** Yes, BakeBuddy has the following input limits:
+**A:** There are several constraints to email and phone number.
 - Phone numbers:
   - Minimum: 3 digits
-  - Maximum: 15 digits
+  - Maximum: No limit. Not advisable to input long phone number as it may disrupt the UI display.
   - Must be unique in the contact list
 - Email addresses:
-  - Maximum: 254 characters
+  - Maximum: No limit. Not advisable to input long phone number as it may disrupt the UI display.
   - Must follow standard email format (xxx@xxx.xxx)
   - Special characters allowed: . _ - @
 
-## Q11: How are orders sorted in the list?
-**A:** Orders are automatically sorted in this priority:
-1. Pending orders (shown first)
-  - Sorted by date added (newest first)
-2. Completed orders (shown after pending)
-  - Sorted by completion date (newest first)
 
-This sorting helps you:
-- Focus on pending orders that need attention
-- Keep track of recent completions
-- Maintain an organized workflow
-
-## Q12: How do I add collection dates and quantities to orders?
-**A:** You can include collection dates and quantities in the order's remark field:
-```
-addCustomerOrder n/John p/91234567 o/1 2 r/Collection: 25/12/2024 6pm, Qty: 2x Croissant, 3x Muffin
-```
-
-Best practices for remarks:
-- Start with collection date/time
-- List quantities clearly
-- Add any special instructions last
-- Use consistent format for dates
-
-## Q13: How do I view all customers/suppliers?
-**A:** We can use the filter command to view all customers/suppliers.
-   ```
-   filterContact t/Customer
-   ```
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
