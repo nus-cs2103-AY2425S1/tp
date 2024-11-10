@@ -173,11 +173,12 @@ Examples:
 
 Finds all of your applications whose company names contains words that starts with the specified characters.
 
-Format: `/find PATTERN`
+Format: `/find KEYWORD [ADDITIONAL_KEYWORDS]`
 
 * The search is **case-insensitive**. e.g. `goo` will match `Google`.
 * The search is **only for company names**.
 * The search uses **prefix search**.
+* The search allows for **more than 1 `KEYWORD`**
 * If you search for `go`, then you will see a list of all the internship applications that you have applied for
   whose companies have words starting with `go` in their names.
 
