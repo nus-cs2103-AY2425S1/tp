@@ -753,7 +753,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2c. A duplicate candidate profile is detected.
     - 2c1. TalentSG responds with an error message telling the recruiter that the person has already been added and
       prompts the recruiter to input a new person
-    - 2c2. Recruiter inputs add command with new person details
+    - 2c2a. Recruiter decides to end the process
+    
+        Use case ends.
+
+    - 2c2b. Recruiter inputs add command with new person details
     - 2c3. Steps 2c1-2c2 are repeated until the data entered is correct
 
       Use case resumes at step 3.
