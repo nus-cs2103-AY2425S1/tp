@@ -96,7 +96,6 @@ Action     | Format, Examples
 **[Redo action](#redo-a-command-redo)** | `redo`
 **[List](#listing-all-persons-list)**   | `list`
 **[Help](#viewing-help-help)**   | `help` 
-
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
 

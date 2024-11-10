@@ -571,11 +571,28 @@ testers are expected to do more *exploratory* testing.
    1. Test case: undo immediately after starting the application (with no operations performed)
       Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
 
+### Adding a tag
+1. Adding a tag while all tags are being shown
+
+   1. Prerequisites: There are 2 person in the list. First person on the list has tag `CS2100`, second person has tags `floortball` and `friends`. 
+
+   1. Test case: `addtag 1 t/CS2040S`<br>
+      Expected: The first person now has 2 tags `CS2100` and `CS2040S`. The tag lists are updated accordingly.
+      
+   1. Test case: `addtag 2 t/homie t/homie`
+      Expected: The second person now has 3 tags `floortball`, `friends` and `homie`. 
+      
+   1. With the following test case:
+      1. `addtag 1 t/CS2040s`
+      1. Test case: `addtag 1 t/CS2030s t/CS2040S`
+      1. Test case: `addtag 0 t/volleyball` <br>
+      1. Test case: `addtag 3 t/homie` <br>
+      1. Test case: `addtag 2` <br>
+         Expected: No new tag added. Error details shown in the status message..
+
 ### Finding a person
 
 1. Finding a person with tags
-
-    1. Prerequisites: There are contacts in the contact list. Add some if this is not the case.
 
     1. Assumption: Pick any 2 tags (or substring of the tags) present in any contact in the contact list. Call these x and y.
 
