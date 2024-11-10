@@ -163,9 +163,15 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    public void setPersons_listWithDuplicateDoctors_throwsDuplicatePersonException() {
+        List<Person> listWithDuplicateDoctors = Arrays.asList(DANIEL, DANIEL);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicateDoctors));
+    }
+
+    @Test
+    public void setPersons_listWithDuplicatePatients_throwsDuplicatePersonException() {
+        List<Person> listWithDuplicatePatients = Arrays.asList(CARL, CARL);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePatients));
     }
 
     @Test
