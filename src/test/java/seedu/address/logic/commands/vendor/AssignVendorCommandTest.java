@@ -42,7 +42,8 @@ public class AssignVendorCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(outOfBoundIndex);
 
-        assertCommandFailure(assignVendorCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(assignVendorCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, outOfBoundIndex.getZeroBased()));
     }
 
     @Test
@@ -78,7 +79,8 @@ public class AssignVendorCommandTest {
 
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(outOfBoundIndex);
 
-        assertCommandFailure(assignVendorCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(assignVendorCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, outOfBoundIndex.getZeroBased()));
     }
 
     @Test

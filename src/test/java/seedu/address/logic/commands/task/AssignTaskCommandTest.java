@@ -62,9 +62,12 @@ public class AssignTaskCommandTest {
         // Arrange: Set up a command with an invalid person index
         AssignTaskCommand command = new AssignTaskCommand(Index.fromOneBased(10), Set.of(INDEX_FIRST));
 
+        int personListSize = model.getFilteredPersonList().size();
         // Assert: Command should throw a CommandException for invalid person index
         assertThrows(
-                CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () -> command.execute(model)
+                CommandException.class, String.format(
+                        Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1 , personListSize
+                ), () -> command.execute(model)
         );
     }
 
@@ -78,10 +81,13 @@ public class AssignTaskCommandTest {
         // Assign task with an invalid index (out of bounds)
         AssignTaskCommand command = new AssignTaskCommand(Index.fromZeroBased(0),
                 Set.of(Index.fromOneBased(10)));
-
+        int taskListSize = model.getFilteredTaskList().size();
         // Assert: Command should throw a CommandException for invalid task index
         assertThrows(
-                CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, () -> command.execute(model)
+                CommandException.class, String.format(
+                        Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                        10, 1, taskListSize
+                ), () -> command.execute(model)
         );
     }
 
