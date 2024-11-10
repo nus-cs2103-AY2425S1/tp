@@ -289,7 +289,7 @@ Finds contacts with specific work experiences based on **company** and optionall
 Format:
 
 ```plaintext
-findw w/COMPANY[,ROLE][,YEAR]
+findw w/ROLE,COMPANY,YEAR
 ```
 
 - **`COMPANY`**: Required. The name of the company to search for.
@@ -313,7 +313,7 @@ Examples:
   ```
 - Find contacts who interned at Google in 2024:
   ```plaintext
-  findw w/Google,Intern,2024
+  findw w/Intern,Google,2024
   ```
 
 <br>
