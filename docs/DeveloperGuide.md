@@ -1770,7 +1770,7 @@ Step 1: Enter `r` as the input command.<br>
 
 <box type="success">
 
-Value of the input command is now "r".
+Value of the input command is now `r`.
 
 </box>
 
@@ -1778,7 +1778,7 @@ Step 2: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "r" to "radd".
+Value of the input command changes from `r` to `radd`.
 
 </box>
 
@@ -1786,7 +1786,7 @@ Step 3: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd" to "redit".
+Value of the input command changes from `radd` to `redit`.
 
 </box>
 
@@ -1794,7 +1794,7 @@ Step 4: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit" to "rdelete".
+Value of the input command changes from `redit` to `rdelete`.
 
 </box>
 
@@ -1802,7 +1802,7 @@ Step 5: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "rdelete" to "rview".
+Value of the input command changes from `rdelete` to `rview`.
 
 </box>
 
@@ -1810,7 +1810,7 @@ Step 6: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "rview" to "radd".
+Value of the input command changes from `rview` to `radd`.
 
 </box>
 
@@ -1832,7 +1832,7 @@ Step 1: Enter `radd ` as the input command.<br>
 
 <box type="success">
 
-Value of the input command is now "radd " (Take note of the whitespace at the end of the input).
+Value of the input command is now `radd ` (Take note of the whitespace at the end of the input).
 
 </box>
 
@@ -1841,7 +1841,7 @@ Step 2: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd " to "radd a/".
+Value of the input command changes from `radd ` to `radd a/`.
 
 </box>
 
@@ -1849,7 +1849,7 @@ Step 3: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd a/" to "radd cl/".
+Value of the input command changes from `radd a/` to `radd cl/`.
 
 </box>
 
@@ -1858,7 +1858,7 @@ Step 4: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd cl/" to "radd d/".
+Value of the input command changes from `radd cl/` to `radd d/`.
 
 </box>
 
@@ -1867,7 +1867,7 @@ Step 5: Press Spacebar key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd d/" to "radd d/ " (Take note of the whitespace at the end of the input).
+Value of the input command changes from `radd d/` to `radd d/ ` (Take note of the whitespace at the end of the input).
 
 </box>
 
@@ -1876,7 +1876,7 @@ Step 6: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd d/ " to "radd a/".
+Value of the input command changes from `radd d/ ` to `radd a/`.
 
 </box>
 
@@ -1884,7 +1884,7 @@ Step 7: Enter `1075 Eunos Avenue 6 #01-171 ` at the end of the input command.<br
 
 <box type="success">
 
-Value of the input command changes from "radd a/" to "radd a/1075 Eunos Avenue 6 #01-171 " (Take note of the whitespace
+Value of the input command changes from `radd a/` to `radd a/1075 Eunos Avenue 6 #01-171 ` (Take note of the whitespace
 at the end of the input).
 
 </box>
@@ -1893,8 +1893,8 @@ Step 8: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd a/1075 Eunos Avenue 6 #01-171 " to
-"radd a/1075 Eunos Avenue 6 #01-171 a/".
+Value of the input command changes from `radd a/1075 Eunos Avenue 6 #01-171 ` to
+`radd a/1075 Eunos Avenue 6 #01-171 a/`.
 
 </box>
 
@@ -1902,8 +1902,8 @@ Step 9: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd a/1075 Eunos Avenue 6 #01-171 a/" to
-"radd a/1075 Eunos Avenue 6 #01-171 cl/".
+Value of the input command changes from `radd a/1075 Eunos Avenue 6 #01-171 a/` to
+`radd a/1075 Eunos Avenue 6 #01-171 cl/`.
 
 </box>
 
@@ -1926,7 +1926,7 @@ Step 1: Enter `redit cl/J` as the input command.<br>
 
 <box type="success">
 
-Value of the input command is now "redit cl/J".
+Value of the input command is now `redit cl/J`.
 
 </box>
 
@@ -1934,7 +1934,7 @@ Step 2: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit cl/J " to "redit cl/Josh".
+Value of the input command changes from `redit cl/J ` to `redit cl/Josh`.
 
 </box>
 
@@ -1942,7 +1942,7 @@ Step 3: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit cl/Josh" to "redit cl/Joshua".
+Value of the input command changes from `redit cl/Josh` to `redit cl/Joshua`.
 
 </box>
 
@@ -1950,7 +1950,7 @@ Step 4: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit cl/Joshua" to "redit cl/Jayden".
+Value of the input command changes from `redit cl/Joshua` to `redit cl/Jayden`.
 
 </box>
 
@@ -1958,7 +1958,7 @@ Step 5: Press Spacebar key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit cl/Jayden" to "redit cl/Jayden " (Take note of the whitespace at the end
+Value of the input command changes from `redit cl/Jayden` to `redit cl/Jayden ` (Take note of the whitespace at the end
 of the input).
 
 </box>
@@ -1967,7 +1967,7 @@ Step 6: Enter `a/B` at the end of the input command.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit cl/Jayden " to "redit cl/Jayden a/B".
+Value of the input command changes from `redit cl/Jayden ` to `redit cl/Jayden a/B`.
 
 </box>
 
@@ -1975,7 +1975,7 @@ Step 7: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit cl/Jayden a/B" to "redit cl/Jayden a/Block".
+Value of the input command changes from `redit cl/Jayden a/B` to `redit cl/Jayden a/Block`.
 
 </box>
 
@@ -1983,7 +1983,7 @@ Step 8: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit cl/Jayden a/Block" to "redit cl/Jayden a/Blk".
+Value of the input command changes from `redit cl/Jayden a/Block` to `redit cl/Jayden a/Blk`.
 
 </box>
 
@@ -1991,7 +1991,7 @@ Step 9: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jayden a/BLOCK".
+Value of the input command changes from `redit cl/Jayden a/Blk` to `redit cl/Jayden a/BLOCK`.
 
 </box>
 
