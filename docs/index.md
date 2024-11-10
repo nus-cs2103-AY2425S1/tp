@@ -8,7 +8,7 @@ title: EZStates
 
 ![Ui](images/img_4.png)
 
-EZSTATES is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments.
+EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments.
 
 * If you are interested in using EZSTATES, head over to the [**User Guide**](UserGuide.md) to find out more.
 * If you are interested about developing EZSTATES, the [**Developer Guide**](DeveloperGuide.md) is a good place to start.

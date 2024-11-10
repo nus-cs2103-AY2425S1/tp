@@ -5,7 +5,7 @@ title: User Guide
 
 <link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
 
-EZSTATES is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments. Below is a sneak peek into our app: 
+EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments. Below is a sneak peek into our app: 
 <br>
 <br>
 **Client management**
