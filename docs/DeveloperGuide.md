@@ -362,17 +362,17 @@ to record their students with their details, and access relevant information eas
 ### User Stories
 
 | Priority | As a …​  | I want to …​                                                               | So that I can…​                                                                                                |
-| -------- | -------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| -------- | -------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --- |
 | `* * *`  | educator | add a new student                                                          | include all students I have currently in my app                                                                |
 | `* * *`  | educator | delete a student                                                           | keep my database of students concise with only currently relevant students                                     |
 | `* * *`  | educator | search for students by name                                                | find information about specific students                                                                       |
+| `* * *`  | educator | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects                                  |
+| `* * *`  | educator | delete groups                                                              | correct mistakes by deleting a group                                                                           |
+| `* * *`  | educator | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |     |
 | `* *`    | educator | search for groups by name                                                  | find information about specific groups of students                                                             |
 | `* *`    | educator | store additional information about students on grades, attendance or notes | better access and organise student information                                                                 |
 | `* *`    | educator | edit a student’s details                                                   | correct mistakes or update new information about the student                                                   |
 | `* *`    | educator | filter searched students by grades, attendance or notes                    | quickly find specific students or groups based on specific criteria                                            |
-| `*`      | educator | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects                                  |
-| `*`      | educator | delete groups                                                              | correct mistakes by deleting a group                                                                           |
-| `*`      | educator | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
 | `*`      | educator | use security measures for student data                                     | protect sensitive information and control access to parental data                                              |
 
 ### Use cases
