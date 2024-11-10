@@ -141,7 +141,7 @@ Examples:
 Creates a new log entry for a specific patient. This command is typically used to keep track of sessions or important notes related to each session.
 **Format**: `addlog i/IDENTITY_NUMBER d/DATE l/LOG_ENTRY`
 * **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
-* **DATE** should be in the format `DD-MMM-YYYY`.
+* **DATE** should be in the format `DD MMM YYYY`.
 * **LOG_ENTRY** is a description of the session with the patient.
   Examples:
 * `addlog i/S1234567D d/20 May 2024 s/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
