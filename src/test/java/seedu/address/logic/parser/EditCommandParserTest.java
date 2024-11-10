@@ -84,14 +84,23 @@ public class EditCommandParserTest {
     public void parse_moduleAndOtherFieldsPresent_failure() {
         String studentId = "12345678";
         String userInputWithExtraName = studentId + " m/ CS1010S CS1231S n/ Amy Bee";
+        String userInputWithExtraPhone = studentId + " m/ CS1010S CS1231S p/ 11111111";
         String userInputWithExtraEmail = studentId + " m/ CS1010S CS1231S e/ amybee@gmail.com";
+        String userInputWithExtraAddress = studentId + " m/ CS1010S CS1231S a/ 321 Clementi";
         String userInputWithExtraCourse = studentId + " m/ CS1010S CS1231S c/ Physics";
+        String userInputWithExtraRole = studentId + " m/ CS1010S CS1231S r/ Student";
 
         assertParseFailure(parser, userInputWithExtraName, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInputWithExtraPhone, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE));
         assertParseFailure(parser, userInputWithExtraEmail, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInputWithExtraAddress, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE));
         assertParseFailure(parser, userInputWithExtraCourse, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInputWithExtraRole, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE));
     }
 
