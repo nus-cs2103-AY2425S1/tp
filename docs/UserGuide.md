@@ -26,7 +26,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a**desktop app for m
 
 1. Ensure you have Java `17` or above installed in your Computer.
    1. You can check which version of Java you are currently running by entering `java -version` into a command terminal.
-   1. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java 17 
+   1. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java 17
    1. After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows)
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-4/tp/releases/tag/v1.4).
@@ -38,7 +38,6 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a**desktop app for m
    1. To open the command terminal, open the terminal app for Linux/macOS users, and Windows Powershell for Windows Users.
    1. If you followed step 3i, type `cd Downloads` in the terminal window to navigate to the Downloads folder.
    1. Alternatively, you may navigate to the folder using File Explorer, then right click it and select `Open in Terminal`
-   
 1. A GUI similar to the below should appear in a few seconds. Starting the F.A.R.T. book for the first time will automatically load some sample data.<br>
    ![Ui](images/newUi.png)
 
@@ -50,7 +49,6 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a**desktop app for m
    1. The `Response Window`, highlighted by the blue box. Once a command is inputted, this is where the F.A.R.T. book informs you of the result of your command. 
    
 1. Some example commands you can try:
-
    * `help`: Opens the help window.
    * `list` : Lists all contacts.
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a contact named `John Doe` to the F.A.R.T book and automatically marks them as unpaid.
