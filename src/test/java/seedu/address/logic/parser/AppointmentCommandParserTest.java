@@ -28,45 +28,45 @@ public class AppointmentCommandParserTest {
     public void parse_invalidDateFormat_failure() {
         // invalid date format with missing hyphens
         assertParseFailure(parser, "S1231231D app/15082024 14:30",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+                "Date and time provided are invalid.");
 
         // invalid date format with non-numeric date components
         assertParseFailure(parser, "S1231231D app/aa-bb-cccc 14:30",
-                "Invalid date format. Day, month, and year must be numbers.");
+                "Date and time provided are invalid.");
 
         // invalid date format with incorrect day/month range
         assertParseFailure(parser, "S1231231D app/32-12-2024 14:30",
-                "Day and months must be valid.");
+                "Date and time provided are invalid.");
 
         // invalid date format with incorrect month range
         assertParseFailure(parser, "S1231231D app/15-13-2024 14:30",
-                "Day and months must be valid.");
+                "Date and time provided are invalid.");
     }
 
     @Test
     public void parse_invalidTimeFormat_failure() {
         // invalid time format with missing colon
         assertParseFailure(parser, "S1231231D app/15-08-2024 1430",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+                "Date and time provided are invalid.");
 
         // invalid time format with non-numeric time components
         assertParseFailure(parser, "S1231231D app/15-08-2024 aa:bb",
-                "Invalid time format. Hour and minute must be numbers.");
+                "Date and time provided are invalid.");
 
         // invalid hour range
         assertParseFailure(parser, "S1231231D app/15-08-2024 25:30",
-                "Hour and minute must be valid.");
+                "Date and time provided are invalid.");
 
         // invalid minute range
         assertParseFailure(parser, "S1231231D app/15-08-2024 14:60",
-                "Hour and minute must be valid.");
+                "Date and time provided are invalid.");
     }
 
     @Test
     public void parse_invalidNric_failure() {
         // invalid nric
         assertParseFailure(parser, "1 app/15-08-2024 14:30",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+                "NRIC provided is invalid.");
     }
 
     @Test
