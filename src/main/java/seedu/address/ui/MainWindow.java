@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CloseCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -251,7 +252,7 @@ public class MainWindow extends UiPart<Stage> {
             reviewClientAfterEdit(indexToReview);
         } else if (commandResult.isShowClient()) {
             handleViewCommand(commandResult);
-        } else if (commandText.trim().toLowerCase().equals("close")) {
+        } else if (commandResult.getFeedbackToUser().equals(CloseCommand.MESSAGE_SUCCESS)) {
             handleCloseCommand();
         } else if (commandResult.isConfirmedDeletion() && currentlyViewedClient != null
                 && currentlyViewedClient.equals(commandResult.getDeletedClient())) {
