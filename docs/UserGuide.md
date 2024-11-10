@@ -77,7 +77,6 @@ Modern car workshops often face a variety of operational challenges:
 - **Poor record-keeping**: Relying on spreadsheets or paper records leads to inefficiencies, especially when managing vehicle histories, service issues, or specific vehicle details.
 - **Slow task execution**: Traditional systems require multiple clicks and navigation steps, slowing down workshop efficiency.
 
-<div style="page-break-after: always;"></div>
 
 ### **Our Solution**
 
@@ -96,6 +95,7 @@ MATER offers a feature-rich platform with the following capabilities:
 - **Status Tracking**: Mark clients as checked in or out for better tracking of in-progress services.
 - **Automatic Data Storage**: MATER saves all data automatically, minimising the risk of accidental data loss.
 
+<div style="page-break-after: always;"></div>
 
 ### **User Base**
 
