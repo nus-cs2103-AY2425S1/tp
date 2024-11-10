@@ -5,26 +5,31 @@ title: User Guide
 
 <h1> <b>Welcome to BakeBuddy 👨‍🍳 👩‍🍳</b> </h1>
 
-BakeBuddy is your all-in-one command-line companion for managing your home bakery business. Designed with speed and
-efficiency in mind, it combines the power of a Command Line Interface (CLI) with intuitive features to help you focus
-on what matters most - creating delicious baked goods.
+### Who is BakeBuddy For?
 
-BakeBuddy is a desktop application that streamlines your bakery operations by helping you manage:
+BakeBuddy is your perfect companion if you're running a home-based bakery business or planning to start one. Whether 
+you're managing a small cupcake operation or a medium-sized pastry business, we've designed BakeBuddy with you in mind. 
+If you're comfortable typing messages (like in WhatsApp) and prefer quick keyboard commands over clicking through 
+menus, you'll feel right at home with our interface.
+
+BakeBuddy helps you manage your:
 - 🧁 Pastries and recipes
 - 👥 Customers and their orders
 - 📦 Suppliers and ingredients
 - 📋 Order tracking and fulfillment
 
+### What We Assume About You
+
+We've designed BakeBuddy assuming you have basic computer skills - enough to download and run applications, and type 
+comfortably in English. Don't worry if you're not tech-savvy; this comprehensive user guide will walk you through 
+every step, and no technical knowledge is needed.
+
 <h2> <b>Why Choose BakeBuddy?</b> </h2>
 
-- **Speed First**: Execute commands quickly through our CLI, perfect for busy bakers
-- **User-Friendly**: Simple GUI elements complement the CLI for enhanced usability
+- **Speed First**: Execute commands quickly through our Command Line Interface (CLI), perfect for busy bakers
+- **User-Friendly**: Simple Graphical User Interface (GUI) elements complement the CLI for enhanced usability
 - **All-in-One Solution**: Manage every aspect of your bakery business from a single application
 - **Efficiency Focused**: Designed specifically for home-based bakery owners who value their time
-
-<h2> <b>Getting Started</b> </h2>
-
-This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
 
 <div style="page-break-after: always;"></div>
 
@@ -35,7 +40,7 @@ This guide will walk you through everything you need to know about BakeBuddy, fr
 <div style="page-break-after: always;"></div>
 
 ## **Before You Begin ✔️**
-### Step 1: Check if Your Computer is Ready
+### **Step 1: Check if Your Computer is Ready**
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
 1. Open your computer's terminal:
@@ -54,7 +59,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 <br>
 
-### Step 2: Install BakeBuddy
+### **Step 2: Install BakeBuddy**
 
 1. Download BakeBuddy:
   - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
@@ -64,8 +69,8 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
   - Create a new folder on your computer named `BakeBuddy`
   - Move the downloaded `bakebuddy.jar` file into this folder
 3. Start BakeBuddy:
-  - Open your terminal (like in Step 1)
-  - Type `cd ` (with a space after cd)
+  - Open your terminal (like in Step 1) and navigate to the BakeBuddy folder
+  - Type `cd ` (with a space after cd) 
   - Drag your BakeBuddy folder into the terminal window (this fills in the location automatically!)
   - Press Enter
   - Type:
@@ -76,12 +81,14 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
    You should see the BakeBuddy window appear as follows!
 
-### Step 3: Try Your First Commands
+### **Step 3: Try Your First Commands**
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
-Refer to the [FAQ](#faq) to see some of the common doubts.
-Refer to the [List of Commands](#list-of-commands) on the next page (which is grouped by logic and less detailed) and [Features](#features) below (which is alphabetically sorted) for details of each command.
+1. First, check out the [List of Commands](#list-of-commands) section to understand what BakeBuddy can do
+2. Review the [FAQ](#faq) to clear any initial doubts
+3. For detailed command information, refer to the [Features](#features) section which contains comprehensive documentation for each command
+
 ![screenshot](images/Screenshot-5.png)
 
 <div style="page-break-after: always;"></div>
