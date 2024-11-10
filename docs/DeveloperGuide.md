@@ -14,6 +14,8 @@
 ## **Acknowledgements**
 
 ChatGPT was heavily used to help create test case templates, although the ideas behind the test cases were mostly thought by the developers.
+<br>
+We would also like to acknowledge group CS-2103T-W14-1 as we followed a similar format for the command explanations in the user guide based on their user guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,10 +156,30 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Future Features
+## **Planned Enhancements**
+Do note we have 4 members in our group.
 
-### Being able to add new Insurance Plan Types
-As of now, we know that it can be cumbersome for users to wait for updates for new types of insurance plans to be added by us the developers. Thus, we have planned in a future update, we will allow users to create their own Insurance Plan Types to add to their clients. Do note that as these plans are created by users and not validated by us, we will not be held liable for any unintended record-keeping issues such as claim ID not being validated correctly or the claim amount not being calculated correctly!
+### 1. Being able to add new Insurance Plan Types
+Users currently cannot create their own types of insurance plans. Thus, in a future update, we will allow users to create
+their own Insurance Plan Types to add to their clients. Do note that as these plans are created by users and not validated
+by us, we will not be held liable for any unintended record-keeping issues such as claim ID not being validated correctly
+or the claim amount not being calculated correctly.
+
+### 2. addClaim ID
+Adding of a claim ID can be added to many users. This will be fixed in a future version such that claim ID is unique across
+all clients.
+
+### 3. addClaim amount
+Claim amount can currently exceed 1 million. In future, a restriction will be placed on the claim amount such that if
+the claim amount is over 1 million, it will be rejected with an appropriate error message.
+
+### 4. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
+Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
+name or not. However, in future versions, we are planning to check if all details are the same before flagging it as a
+duplicate. This is because 2 people can share numbers, address and emails (eg a parent and child) or 2 clients can have
+the same full name with different contact details but it will be unreasonably rare for clients to have the same name,
+number, email and addresses simultaneously.
+
 
 
 --------------------------------------------------------------------------------------------------------------------
