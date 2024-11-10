@@ -524,7 +524,7 @@ Format: `undo`
 
 2. You can undo **multiple** commands in a row that modified the student directory.
 </box>
-3. 
+
 <br>
 <br>
 
@@ -537,7 +537,7 @@ Format: `redo`
 
 **Tip:**
 
-You can redo **multiple** undo commands in a row.
+You can redo **multiple** undone commands in a row.
 </box>
 
 <br>
