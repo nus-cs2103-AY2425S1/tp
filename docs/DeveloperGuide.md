@@ -644,13 +644,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a contact
 1. Editing a contact field that is shown in the list
-   2. Test case: `edit 1 name/John Tan`
+   1. Test case: `edit 1 name/John Tan`
       Expected: Contact shown at index 1 has name edited to `John Tan`. Details shown in status message.
    
-   3. Test case: `edit 0 name/John Tan`
+   2. Test case: `edit 0 name/John Tan`
       Expected: No contact is edited. Details of error shown in status message.
 
-   4. Other incorrect edit commands to try: `edit -1 name/John Tan`, `edit x name/John Tan` (where `x` is a number that is not in the shown list)
+   3. Other incorrect edit commands to try: `edit -1 name/John Tan`, `edit x name/John Tan` (where `x` is a number that is not in the shown list)
       Expected: Similar to previous
 
 ### Adding grade to a person
@@ -739,15 +739,15 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `import path/data/x.csv`
       Expected: No data is imported. Details of the error is shown in status message.
    
-   3. Other incorrect import commands to try: `import`, `import path/`<br>
+   4. Other incorrect import commands to try: `import`, `import path/`<br>
       Expected: Similar to previous.
 
 ### Export CSV
 1. Export list of persons to a CSV file.
-    2. Test case: `export path/data/example.csv`
+    1. Test case: `export path/data/example.csv`
        Expected: `example.csv` is exported. Details shown in status message.
    
-    3. Test case: `export`
+    2. Test case: `export`
        Expected: No data is exported. Details of the error is shown in status message.
    
     3. Other incorrect export commands to try: `export path/`<br>
@@ -772,17 +772,17 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `sort email order/asc`
       Expected: List is not sorted. Details of error shown in status message. 
    
-   2. Other incorrect sort commands to try: `sort order/asc`, `sort order/desc`
+   3. Other incorrect sort commands to try: `sort order/asc`, `sort order/desc`
       Expected: Similar to previous.
 
 ### Finding persons
 1. Finding persons based on name.
-   2. Prerequisite: `John Doe`, `Alice`, and `Cindy` exists in KonTActs.
+   1. Prerequisite: `John Doe`, `Alice`, and `Cindy` exists in KonTActs.
    
    2. Test case: `find john doe alice`
       Expected: `John Doe` and `Alice` is found and revealed in the list. Details shown in status message.
    
-   2. Test case: `find`
+   3. Test case: `find`
       Expected: No change. Details of error shown in status message.
    
 ### Viewing a person
@@ -798,9 +798,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Launching Github page of person
 1. Open browser and navigate to person's Github page on command
-   2. Prerequisite: `John Doe` with Github username `johndoe` exists.
+   1. Prerequisite: `John Doe` with Github username `johndoe` exists.
    
-   1. Test case: `github n/John Doe`
+   2. Test case: `github n/John Doe`
       Expected: Github page of `John Doe` is opened in browser. Details is shown in status message.
       
 ### Listing contacts
