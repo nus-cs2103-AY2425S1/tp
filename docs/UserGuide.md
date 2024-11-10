@@ -189,10 +189,10 @@ Format:
 `add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<HOME ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT TIME>`
 
 - **Parameters**:
-    * Birthday should be in `yyyy-mm-dd`
-    * Appointment should be in `yyyy-mm-dd HH:mm` and accept both past and future dates
-    * Phone number can only be 3 to 8 digits long
-    * Clients with the same name and address are considered as duplicates
+    * Birthday should be in `yyyy-mm-dd` and only can be a date before today's date.
+    * Appointment should be in `yyyy-mm-dd HH:mm` and accept only future dates.
+    * Phone number can only be 3 to 8 digits long.
+    * Clients with the same name and address are considered as duplicates.
     * The system standardises addresses by removing commas, spaces, and hyphens and making
       all characters lowercase. This means that "311, Clementi Ave 5, unit 02-2" and
       "311 Clementi ave 5 unit 022" (without commas) will be treated as the same client address.
@@ -513,6 +513,7 @@ Format:
     * `POLICY START DATE` and `POLICY END DATE` refer to the duration of the policy's coverage.
     * `POLICY START DATE` and `POLICY END DATE` must be in the format `yyyy-mm-dd`.
     * `POLICY START DATE` and `POLICY END DATE` cannot be the same date.
+    * `POLICY START DATE` can only start from 1900s and onwards.
     * `INSURANCE DUE DATE` must be in the format `yyyy-mm-dd`.
     * `INSURANCE DUE DATE` cannot be earlier than the `POLICY START DATE`.
     * `INSURANCE DUE DATE` cannot be later than the `POLICY START DATE`.

@@ -69,6 +69,10 @@ public class AssignPolicyCommandParser implements Parser<AssignPolicyCommand> {
         if (!Payment.isValidInsurancePayment(insurancePayment)) {
             throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
         }
+        if (!Policy.isValidPolicy(nameString, startDateString, endDateString, insurancePayment)) {
+            throw new ParseException(Policy.MESSAGE_CONSTRAINTS);
+        }
+
         try {
             Policy policy = new Policy(nameString, startDateString, endDateString, insurancePayment);
             return new AssignPolicyCommand(index, policy);

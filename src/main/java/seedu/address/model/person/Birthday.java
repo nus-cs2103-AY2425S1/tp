@@ -14,7 +14,7 @@ public class Birthday {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Birthdays should be in the format 'yyyy-MM-dd', "
-                    + "must be a valid date, and must be a date after today's date.";
+                    + "must be a valid date, and must be a date before today's date.";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
