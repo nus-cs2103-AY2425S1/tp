@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.regex.Pattern;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,7 +29,7 @@ public class AddCustomerCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_INFORMATION + "INFORMATION ]"
+            + "[" + PREFIX_INFORMATION + "INFORMATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -37,9 +39,12 @@ public class AddCustomerCommand extends Command {
             + PREFIX_INFORMATION + "Allergic to Milk "
             + PREFIX_TAG + "loyal";
 
-
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the address book";
+    public static final String MESSAGE_INVALID_INFORMATION = "Invalid information: "
+            + "The information field must only contain alphanumeric characters and spaces.";
+
+    private static final Pattern VALID_INFORMATION_REGEX = Pattern.compile("^[A-Za-z0-9\\s]+$");
 
     private final Customer toAdd;
 
@@ -55,12 +60,24 @@ public class AddCustomerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // Validate the 'information' field of the customer
+        if (!isValidInformation(toAdd.getInformation().value)) {
+            throw new CommandException(MESSAGE_INVALID_INFORMATION);
+        }
+
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    /**
+     * Checks if the given information field is valid (alphanumeric and spaces only).
+     */
+    private boolean isValidInformation(String information) {
+        return VALID_INFORMATION_REGEX.matcher(information).matches();
     }
 
     @Override
