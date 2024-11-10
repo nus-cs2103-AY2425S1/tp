@@ -341,9 +341,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7. Use case ends.
 
 #### Extensions
-- **3a. Invalid patient data entered**:
+- **4a. Invalid patient data entered**:
   - CareLink displays an error message indicating which data is invalid.
-  - Fred corrects the input, and the use case resumes from step 3.
+  - Fred corrects the input, and the use case resumes from step 4.
   - Use case ends.
 
 ---
@@ -368,9 +368,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Use case ends.
 
 #### Extensions
-- **3a. Invalid or nonexistent person NRIC entered**:
+- **1a. Invalid or nonexistent person NRIC entered**:
   - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
-  - Fred corrects the NRIC, and the use case resumes from step 3.
+  - Fred corrects the NRIC, and the use case resumes from step 1.
   - Use case ends.
 
 ---
@@ -425,7 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Extensions
 - **2a. Record Does Not Exist**:
-  - CareLink informs Fred.
+  - CareLink informs Fred that the patient record does not exist.
   - Use case ends.
 
 - **2b. Input Validation Fails**:
@@ -454,7 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Use case ends.
 
 #### Extensions
-- **2a. Person Does Not Exist**:
+- **1a. Person Does Not Exist**:
   - CareLink displays an error message.
   - Use case ends.
 
@@ -714,14 +714,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 #### Extensions
-- **1a. Fred enters `clear` without `confirm`**:
+- **2a. Fred entered `clear` without `confirm`**:
   - CareLink displays a message prompting Fred to use `clear confirm`.
   - Use case ends.
-
-- **1b. No confirmation provided**:
-  - No data is deleted.
-  - Use case ends.
-
 ---
 
 ### Non-Functional Requirements
