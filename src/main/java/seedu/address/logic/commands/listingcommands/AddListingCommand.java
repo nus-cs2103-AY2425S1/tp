@@ -29,7 +29,6 @@ import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Role;
 
 /**
  * Adds a listing to the address book.
@@ -154,7 +153,7 @@ public class AddListingCommand extends Command {
         boolean hasSameBuyerIndexes = buyerIndexes.equals(otherCommand.buyerIndexes);
 
         return hasSameListingName && hasSamePrice && hasSameArea && hasSameAddress && hasSameRegion
-                && hasSameSellerIndex &&hasSameBuyerIndexes;
+                && hasSameSellerIndex && hasSameBuyerIndexes;
     }
 
     @Override

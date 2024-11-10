@@ -1,12 +1,7 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
-
-import org.apache.commons.text.similarity.LevenshteinDistance;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.

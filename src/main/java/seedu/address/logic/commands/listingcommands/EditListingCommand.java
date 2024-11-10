@@ -117,7 +117,8 @@ public class EditListingCommand extends Command {
                 seller, listingToEdit.getBuyers());
     }
 
-    private Person getUpdatedSeller(Optional<Index> sellerIndex, List<Person> lastShownPersonList, Listing listingToEdit) throws CommandException {
+    private Person getUpdatedSeller(Optional<Index> sellerIndex,
+                                    List<Person> lastShownPersonList, Listing listingToEdit) throws CommandException {
         if (sellerIndex.isPresent()) {
             int zeroBasedPerson = sellerIndex.get().getZeroBased();
             CommandUtils.handleInvalidPersonIndex(zeroBasedPerson, lastShownPersonList.size());

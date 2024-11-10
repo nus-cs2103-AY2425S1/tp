@@ -74,7 +74,7 @@ public class AddAppointmentCommand extends Command {
 
         Person personToEdit = lastShownList.get(zeroBased);
         Person editedPerson =
-                AppointmentCommandsUtil.createPersonWithAppointment(personToEdit,personToEdit.getRole(), appointment);
+                AppointmentCommandsUtil.createPersonWithAppointment(personToEdit, personToEdit.getRole(), appointment);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -111,6 +111,6 @@ public class AddAppointmentCommand extends Command {
         boolean hasSameIndex = index.equals(otherAppointmentCommand.index);
         boolean hasSameAppointment = appointment.equals(otherAppointmentCommand.appointment);
 
-        return  hasSameIndex && hasSameAppointment;
+        return hasSameIndex && hasSameAppointment;
     }
 }

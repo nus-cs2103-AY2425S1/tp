@@ -1,5 +1,11 @@
 package seedu.address.logic.commands.listingcommands;
 
+import static seedu.address.logic.commands.listingcommands.AddBuyersToListingCommand.MESSAGE_PERSON_NOT_BUYER;
+import static seedu.address.logic.commands.listingcommands.AddListingCommand.MESSAGE_NOT_BUYER;
+import static seedu.address.logic.commands.listingcommands.AddListingCommand.MESSAGE_NOT_SELLER;
+
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.listing.Address;
@@ -11,18 +17,30 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
 
-import java.util.Set;
-
-import static seedu.address.logic.commands.listingcommands.AddBuyersToListingCommand.MESSAGE_PERSON_NOT_BUYER;
-import static seedu.address.logic.commands.listingcommands.AddListingCommand.MESSAGE_NOT_SELLER;
-
 /**
  * Utility class containing helper methods for various Listing-related commands.
  */
 public class ListingCommandsUtil {
 
     /**
-     * Checks if the given person is a seller and throws a CommandException if so.
+     * Throws an exception if the person is not a Buyer. The error message is
+     * formatted using {@link seedu.address.logic.commands.listingcommands.AddBuyersToListingCommand#MESSAGE_PERSON_NOT_BUYER}
+     *
+     * @param person the person to check
+     * @param role the role of the person
+     * @param buyerIndex the index of the buyer in the list
+     * @throws CommandException if the person is a seller
+     */
+    public static void personIsNotBuyer(Person person, Role role, Index buyerIndex) throws CommandException {
+        if (role.equals(Role.SELLER)) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER,
+                    buyerIndex.getOneBased(), person.getName()));
+        }
+    }
+
+    /**
+     * Throws an exception if the person is not a Buyer. The error message is
+     * formatted using {@link seedu.address.logic.commands.listingcommands.AddListingCommand#MESSAGE_NOT_BUYER}
      *
      * @param person the person to check
      * @param role the role of the person
@@ -31,13 +49,13 @@ public class ListingCommandsUtil {
      */
     public static void checkIfBuyer(Person person, Role role, Index buyerIndex) throws CommandException {
         if (role.equals(Role.SELLER)) {
-            throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER,
+            throw new CommandException(String.format(MESSAGE_NOT_BUYER,
                     buyerIndex.getOneBased(), person.getName()));
         }
     }
 
     /**
-     * Checks if the given person is a buyer and throws a CommandException if so.
+     * Throws an exception if the person is not a Seller.
      *
      * @param person the person to check
      * @param role the role of the person

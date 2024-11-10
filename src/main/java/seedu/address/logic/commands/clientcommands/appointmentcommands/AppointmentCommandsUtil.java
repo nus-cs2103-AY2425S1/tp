@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.clientcommands.appointmentcommands;
 
+import java.util.Set;
+
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
@@ -9,8 +11,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
-
-import java.util.Set;
 
 /**
  * Utility class containing helper methods for Appointment-related commands.

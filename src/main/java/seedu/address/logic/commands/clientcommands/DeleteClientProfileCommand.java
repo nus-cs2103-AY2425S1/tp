@@ -66,7 +66,8 @@ public class DeleteClientProfileCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
-    private void checkUserConfirmation(Model model, boolean skipConfirmation, Person personToDelete) throws CommandException {
+    private void checkUserConfirmation(Model model, boolean skipConfirmation,
+                                       Person personToDelete) throws CommandException {
         boolean hasListingsForSeller = model.hasListingsForSeller(personToDelete);
         boolean hasListingsForBuyer = model.hasListingsForBuyer(personToDelete);
 
