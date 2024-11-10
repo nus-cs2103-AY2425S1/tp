@@ -14,13 +14,14 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> Age
-Person *--> Birthday
-Person *--> Frequency
-Person *--> ProfilePicFilePath
-Person *--> LastPaidDate
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "0..1" Address
+Person *--> "1" Age
+Age ..> Birthday
+Person *--> "1" Birthday
+Person *--> "1" Frequency
+Person *--> "1" ProfilePicFilePath
+Person *--> "1" LastPaidDate
 @enduml
