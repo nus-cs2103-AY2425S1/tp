@@ -6,7 +6,7 @@
 
 # UniLink User Guide
 
-UniLink is a desktop app that allows university students to manage their contacts. With UniLink, students can categorise
+UniLink is a desktop app that allows NUS students to manage their contacts. With UniLink, students can categorise
 their contacts into 'work', 'personal' and 'school' contacts to better manage their lives!
 
 ## Table of Contents
