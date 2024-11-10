@@ -86,7 +86,7 @@ The _Sequence Diagram_ below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 - defines its _API_ in an `interface` with the same name as the Component.
-- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+- implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -426,7 +426,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  _Performance Requirement_: The App should respond to most commands within 200 milliseconds.
 4.  _Quality Requirement_: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  _Quality Requirement_: A HR professional who has never used software to manage manpower should be able to learn basic operations like adding, deleting and assigning employees to projects within the first 10 minutes of reading the user guide.
-6.  _Fault Tolerance_: The App should be able to handle corrupted data without crashing.
+6.  _Fault Tolerance_: The App should be able to handle corrupted or missing data without crashing.
 7.  _Documentation_: The code should be well-documented so that maintainers new to the project can quickly understand and contribute to the codebase.
 8.  _Constraints_: The App should be backward compatible with data produced by earlier versions of the App.
 9.  _Privacy Requirement_: The App should comply with the Personal Data Protection Act (PDPA) in handling personal information.
@@ -462,7 +462,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the .jar file and store it in an empty folder.
 
-   2.  Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.)
+   2.  Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.
        * Expected: Shows the GUI with a set of sample contacts, projects, and assignments. The window size may not be optimum.
 
 1. Saving window preferences
