@@ -74,10 +74,11 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
 5.  Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead to [Basic Commands](#basic-commands).
+
 ### GUI Overview
 The EZSTATES GUI is organized into **five** key components:
 
-![ui](images/ui_overview_ug.png)
+   ![ui](images/ui_overview_ug.png)
 
 * `Menu Bar`: Located at the top, this includes options such as `File` and `Help` for managing settings and accessing support.
 * `Command Box`: The main area where users can enter commands to interact with the app.
