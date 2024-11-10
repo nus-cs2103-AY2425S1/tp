@@ -246,7 +246,7 @@ Adds a meet-up to the meet-up list.
 
 Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_NAME]…​`
 
-* New meet-ups must have unique meet-up subjects and must not be duplicate subjects of existing meet-ups.
+* New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO.
 
 * MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`.
 
