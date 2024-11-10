@@ -331,11 +331,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | aspiring university student | search for contacts by their internship or work experience                                              | network with people who have relevant industry experience                  |
 | `* * *`  | lonely university student   | add interests and hobbies to a contact                                                                  | remember what we have in common                                            |
 | `* * *`  | sociable university student | search for contacts by their interests                                                                  | connect with people with similar interests                                 |
-| `* * *`  | university student        | edit the contact details of an existing contact                     | keep their information current as they progress in their studies or career |
-| `* * *`  | university student        | update interests, work experience, or major of a contact            | reflect their latest accomplishments and interests                         |
-| `* * *`  | university student        | change the name, phone number, or email of a contact                | ensure my contact list has the most accurate and up-to-date information    |
-| `* *`    | university student          | add what year or alumni a contact is in                                                       | filter my search better                                                    |
-| `*`      | university student          | add social media links (e.g., LinkedIn, Instagram) to a contact                               | easily connect with them on other platforms                                |
+| `* * *`  | university student          | edit the contact details of an existing contact                                                         | keep their information current as they progress in their studies or career |
+| `* * *`  | university student          | update interests, work experience, or major of a contact                                                | reflect their latest accomplishments and interests                         |
+| `* * *`  | university student          | change the name, phone number, or email of a contact                                                    | ensure my contact list has the most accurate and up-to-date information    |
+| `* *`    | university student          | add what year or alumni a contact is in                                                                 | filter my search better                                                    |
+| `*`      | university student          | add social media links (e.g., LinkedIn, Instagram) to a contact                                         | easily connect with them on other platforms                                |
 
 ---
 <div style="page-break-after: always;"></div>
@@ -353,13 +353,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to add a new contact.
-2. UniVerse creates the contact and provides confirmation to the user.
-3. Use case ends.
+2. UniVerse validates all fields provided.
+3. UniVerse creates the contact and provides confirmation details including the added contact's information.
+4. Use case ends.
 
 **Extensions**
-- **1a**: The Name/Email/Phone Number/Address/University/Major/Birthday/Work Experience/Interests of contact has an invalid format.
-    - **1a1**: UniVerse displays an error message.
-    - **1a2**: Use case resumes at step 1.
+- **1a**: The Name/Email/Phone Number/Address/University/Major/Birthday/Work Experience/Interests/Tags of contact has an invalid format.
+  - **1a1**: UniVerse displays an appropriate error message (e.g., for email: "Emails should be of the format local-part@domain...").
+  - **1a2**: User rectifies the erroneous fields and re-submits the request.
+  - **1a3**: Use case resumes at step 2.
 
 <br>
 
@@ -369,20 +371,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case ID**: UC02 - Delete a Contact
 
 **MSS**
-1. User requests to view a list of contacts.
-2. System displays the current list of contacts.
-3. User requests to delete a specific contact.
-4. System deletes the selected contact.
-5. System confirms that the contact has been deleted.
-6. Use case ends.
+1. User requests to delete a contact by specifying an index.
+2. UniVerse locates the contact at the given index and deletes it.
+3. UniVerse displays confirmation showing the deleted contact's details.
+4. Use case ends.
 
-**Extensions**
-- **2a**: The list of contacts is empty.
-    - **2a1**: System shows a message that there are no contacts available.
-    - **2a2**: Use case ends.
-- **3a**: The given contact index is invalid.
-    - **3a1**: System shows an error message indicating an invalid index.
-    - **3a2**: Use case resumes at step 2.
+**Extensions**:
+- **1a**: The contact list is empty.
+  - **1a1**: System displays a message indicating no contacts are available.
+  - **1a2**: Use case ends.
+- **2a**: The specified index is invalid.
+  - **2a1**: System shows an error message (e.g., "Invalid index provided").
+  - **2a2**: Use case resumes at step 1.
+
+<box type="info" seamless>
+
+**Note**: There is no undo operation for deletions.
+</box>
 
 <br>
 
@@ -394,21 +399,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case ID**: UC03 - Find Contacts by University
 
 **MSS**:
-1. User requests to search for contacts enrolled in a specific university.
-2. System prompts the user to enter the name of the university.
-3. User provides the university name.
-4. System searches for contacts that match the specified university.
-5. System displays a list of contacts enrolled in the specified university.
-6. Use case ends.
+1. User requests to search for contacts by a specific university.
+2. UniVerse searches the current displayed contact list for matches.
+3. UniVerse displays all contacts matching the entered university (e.g., `findu u/N` returns partial matches such as "NTU" and "NUS").
+4. Use case ends.
 
 **Extensions**:
-- **3a**: The entered university name is invalid or does not exist.
-    - **3a1**: System displays an error message requesting a valid university name.
-    - **3a2**: User re-enters the university name.
-    - **3a3**: Use case resumes at step 4.
-- **4a**: No contacts found for the specified university.
-    - **4a1**: System displays a message indicating no contacts were found.
-    - **4a2**: Use case ends.
+- **3a**: No matches found.
+  - **3a1**: UniVerse displays a "0 persons listed!" message.
+  - **3a2**: Use case ends.
   
 <br>
   
@@ -418,21 +417,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case ID**: UC04 - Search for Contacts by Major
 
 **MSS**
-1. User requests to search contacts by major.
-2. System prompts user to enter a major.
-3. User enters the desired major.
-4. System searches and retrieves matching contacts.
-5. System displays a list of contacts with the specified major.
-6. Use case ends.
+1. User requests to search for contacts by a specific major.
+2. UniVerse searches the current displayed contact list for matches.
+3. UniVerse displays all contacts matching the entered major (e.g., `findm m/Computer` returns partial matches such as "Computer Engineering" and "Computer Science").
+4. Use case ends.
 
-**Extensions**
-- **3a**: The entered major is invalid or does not exist.
-    - **3a1**: System shows an error message requesting a valid major.
-    - **3a2**: User re-enters the major.
-    - **3a3**: Use case resumes at step 4.
-- **4a**: No contacts found for the entered major.
-    - **4a1**: System displays a message indicating no contacts were found.
-    - **4a2**: Use case ends.
+**Extensions**:
+- **3a**: No matches found.
+  - **3a1**: UniVerse displays a "0 persons listed!" message.
+  - **3a2**: Use case ends.
 
 <br>
 
@@ -442,24 +435,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case ID**: UC05 - Add Internship/Work Experience to a Contact
 
 **MSS**
-1. User requests to add internship/work experience to an existing contact.
-2. System prompts for the contact’s name and internship details (role, company, year).
-3. User provides the details.
-4. System validates the contact and internship details.
-5. System updates the contact with the new internship details.
-6. System confirms that the internship has been successfully added.
-7. Use case ends.
+1. User requests to add work experience to an existing contact by specifying an index and work details.
+2. UniVerse validates the contact and checks the format of the work experience.
+3. UniVerse adds the work experience (e.g., `addw in/1 w/Intern,Google,2024`).
+4. UniVerse displays confirmation that the work experience has been added.
+5. Use case ends.
 
-**Extensions**
-- **2a**: The specified contact does not exist.
-    - **2a1**: System shows an error message that the contact could not be found.
-    - **2a2**: User is prompted to re-enter the contact name.
-    - **2a3**: Use case resumes at step 2.
-- **4a**: The internship details are incomplete or incorrectly formatted.
-    - **4a1**: System displays an error message indicating the issues.
-    - **4a2**: User corrects the details.
-    - **4a3**: Use case resumes at step 4.
 
+**Extensions**:
+- **2a**: The specified contact index is invalid.
+  - **2a1**: UniVerse displays an error message.
+  - **2a2**: Use case resumes at step 1.
+- **3a**: Work experience format is incorrect (e.g., "Multiple words or incorrect capitalization").
+  - **3a1**: UniVerse shows an "Invalid command format" error.
+  - **3a2**: User rectifies input and re-enters details.
+  - **3a3**: Use case resumes at step 2.
+
+<box type="info" seamless>
+
+**Notes**:
+- Only one work experience can be stored for a contact.
+</box>
 
 <br>
 
@@ -468,24 +464,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor**: User  
 **Use Case ID**: UC06 - Add Interest/Hobby to a Contact
 
-**MSS**
-1. User requests to add an interest or hobby to an existing contact.
-2. System prompts for the contact’s name and the interest/hobby to add.
-3. User provides the details.
-4. System checks for duplicates and validates the interest.
-5. System updates the contact with the new interest.
-6. System confirms that the interest has been successfully added.
-7. Use case ends.
+**MSS**:
+1. User requests to add interests to a contact by specifying an index and interest(s).
+2. UniVerse validates the contact and interests.
+3. UniVerse updates the contact with the provided interests (e.g., `addi in/1 i/Swimming i/Reading`).
+4. UniVerse displays confirmation of added interests.
+5. Use case ends.
 
-**Extensions**
-- **2a**: The specified contact does not exist.
-    - **2a1**: System shows an error message that the contact could not be found.
-    - **2a2**: User re-enters the contact name.
-    - **2a3**: Use case resumes at step 2.
-- **4a**: The interest already exists for the contact.
-    - **4a1**: System shows an error message indicating a duplicate interest.
-    - **4a2**: User decides whether to re-enter a different interest or cancel the action.
-    - **4a3**: Use case ends if the user cancels.
+**Extensions**:
+- **2a**: The contact does not exist.
+  - **2a1**: UniVerse shows an error message.
+  - **2a2**: Use case resumes at step 1.
+- **3a**: Interest field is empty.
+  - **3a1**: UniVerse shows "Interest should not be blank" error.
+  - **3a2**: User re-enters valid interests.
+  - **3a3**: Use case resumes at step 2.
+
+<box type="info" seamless>
+
+**Notes**:
+- Multiple interests can be added in one command but only to one contact at a time.
+</box>
 
 <br>
 
@@ -495,21 +494,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case ID**: UC07 - Search for Contacts by Work Experience
 
 **MSS**
-1. User requests to search for contacts by work experience. 
-2. System prompts the user to enter a company, role, or year.
-3. User provides the desired work experience criteria.
-4. System searches for contacts that match the specified work experience. 
-5. System displays a list of contacts with the specified work experience. 
-6. Use case ends.
+1. User requests to search for contacts by a specific work experience by entering the required `COMPANY` and optional `ROLE` and/or `YEAR`.
+2. UniVerse searches the current displayed contact list for matches.
+3. UniVerse displays all contacts matching the criteria (e.g., `findw w/Google` finds all contacts with work experience at "Google").
+4. Use case ends.
 
-**Extensions**
-- 3a: The entered work experience criteria are invalid or do not match any records.
-  - 3a1: System displays an error message requesting valid work experience criteria.
-  - 3a2: User re-enters the criteria.
-  - 3a3: Use case resumes at step 4.
-- 4a: No contacts found for the specified work experience. 
-  - 4a1: System displays a message indicating no contacts were found.
-  - 4a2: Use case ends.
+**Extensions**:
+- **1a**: User enters an incomplete or improperly formatted `findw` command.
+  - **1a1**: UniVerse displays an error message indicating the proper format (e.g., "Invalid command format! Use: findw w/COMPANY[,ROLE][,YEAR]").
+  - **1a2**: User re-enters the command with corrected input.
+  - **1a3**: Use case resumes at step 1.
+- **2a**: No contacts match the specified work experience.
+  - **2a1**: UniVerse displays a "0 persons listed!" message.
+  - **2a2**: Use case ends.
+
+<box type="info" seamless>
+
+**Note**:
+- **COMPANY** is required, while **ROLE** and **YEAR** are optional.
+- The **ROLE** and **COMPANY** fields should be a single word, formatted with the first letter capitalized.
+- The search does **not** support partial matching for **ROLE**, **COMPANY**, or **YEAR**; full input must match exactly for these fields.
+</box>
+
 
 <br>
 
@@ -519,21 +525,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case ID**: UC08 - Search for Contacts by Interest
 
 **MSS**
-1. User requests to search for contacts by interest.
-2. System prompts the user to enter an interest.
-3. User provides the desired interest.
-4. System searches for contacts with the specified interest.
-5. System displays a list of contacts who have the specified interest.
-6. Use case ends.
+1. User requests to search for contacts by a specific interest.
+2. UniVerse searches the current displayed contact list for matches.
+3. UniVerse displays all contacts with the specified interest.
+4. Use case ends.
 
-**Extensions**
-- 3a: The entered interest is invalid or does not match any records.
-  - 3a1: System displays an error message requesting a valid interest.
-  - 3a2: User re-enters the interest.
-  - 3a3: Use case resumes at step 4.
-- 4a: No contacts found for the specified interest.
-  - 4a1: System displays a message indicating no contacts were found.
-  - 4a2: Use case ends.
+
+**Extensions**:
+- **1a**: No contacts match the specified interest.
+  - **1a1**: UniVerse displays a "0 persons listed!" message.
+  - **1a2**: Use case ends.
+
+<box type="info" seamless>
+
+**Notes**:
+- Only one-word interests are supported; partial matches and case insensitivity apply.
+</box>
 
 ---
 
@@ -691,11 +698,11 @@ This command finds contacts by university. It requires a university. University 
 ---
 <div style="page-break-after: always;"></div>
 
-### Appendix: Effort
+## **Appendix: Effort**
 
 Our goal was to enhance AB3 by introducing new commands and improving functionality for better contact management, specifically tailored for university students.
 
-#### Key Efforts and Challenges
+### Key Efforts and Challenges
 
 **1. Adding Work Experience and Interests (`addw` and `addi` commands)**:
 - **Effort**: These commands were developed to allow users to add work experiences and interests to existing contacts. The `Command` classes were extended to handle new parameters while ensuring that the `Model` and `Storage` components were updated for data integrity and compatibility.
