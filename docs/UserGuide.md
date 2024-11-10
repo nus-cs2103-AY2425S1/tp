@@ -174,6 +174,10 @@ You can remove all the person’s roles by typing `r/` without specifying any ro
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower r/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
 
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
+Record attendances for previous "Member" contacts are not wiped to allow for future reference and verification of participation. It is also important for tracking overall attendance trends and patterns over time.
+</div>
+
 ### Locating persons: `find`
 
 Search for contact(s) whose contact details satisfy either of the following:
@@ -334,7 +338,9 @@ mark t/TELEGRAM…​ d/DATE
 
   ![result of command `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`](images/MarkNonExistCommandResult.png)
 
-
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
+Do not be alarmed if your checkbox looks different from the one displayed in the examples. The checkbox styling depends on your current operating system, and have no impact on CCAConnect's functionality.
+</div>
 
 
 ### Unmarking attendance : `unmark`
@@ -356,6 +362,7 @@ unmark t/TELEGRAM…​ d/DATE
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
 | `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
+
 
 ### Clearing all entries : `clear`
 
@@ -385,13 +392,17 @@ view t/TELEGRAM_HANDLE
 
 #### Parameters
 
-| Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                         |
-|------------|--------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> |
+| Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                             |
+|------------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> Multiple `t/` entries are accepted, but all `t/` entries except for the terminating `t/` entry will be disregarded. |
 
 Examples:
 * `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
 ![result for `view t/bob12`](images/viewBob12.png)
+
+<div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
+The use of any other commands (other than another <code>view</code> command) will close the view page and revert back to the list of contacts!
+</div>
 
 ### Exiting the program : `exit`
 
