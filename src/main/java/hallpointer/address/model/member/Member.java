@@ -169,8 +169,8 @@ public class Member {
     public boolean isSameMember(Member otherMember) {
         // Check for duplicate based only on name and telegram
         return otherMember != null
-                && (otherMember.getTelegram().value.equalsIgnoreCase(this.getTelegram().value)
-                || otherMember.getTelegram().equals(getTelegram()));
+                && (otherMember.getName().equals(getName())
+                || otherMember.getTelegram().value.equalsIgnoreCase(this.getTelegram().value));
     }
 
     /**
