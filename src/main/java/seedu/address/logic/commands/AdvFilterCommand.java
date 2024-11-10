@@ -167,7 +167,7 @@ public class AdvFilterCommand extends Command {
             if (stringResult != null) {
                 yield stringResult != 0;
             }
-            yield false;
+            yield true;
         }
         case GREATER_THAN -> {
             Integer doubleResult = compareDouble(tag.tagValue, tagValue);
