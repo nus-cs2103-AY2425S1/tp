@@ -68,6 +68,26 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        loadAllPersons(addressBook);
+        loadAllTags(addressBook);
+        loadAllTasks(addressBook);
+        loadAllWeddings(addressBook);
+        // load tags and weddings from people after loading weddings and tags, because if tag or wedding already exist,
+        // method will throw an error
+        for (Person person : addressBook.getPersonList()) {
+            // Functions guarantee that person will share entities with the addressbook
+            loadTags(addressBook, person);
+            loadWeddings(addressBook, person);
+            loadTasks(addressBook, person);
+        }
+        return addressBook;
+    }
+
+    /**
+     * Loads all {@code Person} objects in the AddressBook
+     * @param addressBook The {@code AddressBook} object to load objects into
+     */
+    private void loadAllPersons(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             // Each person will store blank weddings with only the wedding name at this point
             Person person = jsonAdaptedPerson.toModelType();
@@ -82,13 +102,13 @@ class JsonSerializableAddressBook {
                 addressBook.addVendor(person);
             }
         }
-        for (JsonAdaptedTag jsonAdaptedTag : tags) {
-            Tag tag = jsonAdaptedTag.toModelType();
-            if (addressBook.hasTag(tag)) {
-                throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_TAG);
-            }
-            addressBook.addTag(tag);
-        }
+    }
+
+    /**
+     * Loads all {@code Task} objects in the AddressBook
+     * @param addressBook The {@code AddressBook} object to load objects into
+     */
+    private void loadAllTasks(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedTask jsonAdaptedTask : tasks) {
             Task task = jsonAdaptedTask.toModelType();
             if (addressBook.hasTask(task)) {
@@ -96,6 +116,27 @@ class JsonSerializableAddressBook {
             }
             addressBook.addTask(task);
         }
+    }
+
+    /**
+     * Loads all {@code Tag} objects in the AddressBook
+     * @param addressBook The {@code AddressBook} object to load objects into
+     */
+    private void loadAllTags(AddressBook addressBook) throws IllegalValueException {
+        for (JsonAdaptedTag jsonAdaptedTag : tags) {
+            Tag tag = jsonAdaptedTag.toModelType();
+            if (addressBook.hasTag(tag)) {
+                throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_TAG);
+            }
+            addressBook.addTag(tag);
+        }
+    }
+
+    /**
+     * Loads all {@code Wedding} objects in the AddressBook
+     * @param addressBook The {@code AddressBook} object to load objects into
+     */
+    private void loadAllWeddings(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedWedding jsonAdaptedWedding : weddings) {
             Wedding wedding = jsonAdaptedWedding.toModelType();
             if (addressBook.hasWedding(wedding)) {
@@ -113,6 +154,10 @@ class JsonSerializableAddressBook {
                 wedding.setPartner2(addressBook.getPerson(wedding.getPartner2()));
             }
             for (Person person : wedding.getGuestList()) {
+                // Creates a person if they were in the wedding but not in the address book
+                if (!addressBook.hasPerson(person)) {
+                    addressBook.addPerson(person);
+                }
                 addressBook.getPerson(person).addWedding(wedding);
                 // Replaces the Wedding object's Person with the Person object from the Wedlinker
                 try {
@@ -122,47 +167,54 @@ class JsonSerializableAddressBook {
                 }
             }
         }
-        // load tags and weddings from people after loading weddings and tags, because if tag or wedding already exist,
-        // method will throw an error
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            loadTags(addressBook, person);
-            loadWeddings(addressBook, person);
-            loadTasks(addressBook, person);
-        }
-        return addressBook;
     }
 
+    /**
+     * Adds tags to model that were in person but not in model, and makes model and
+     * person store the same tags
+     */
     private void loadTags(AddressBook addressBook, Person person) {
         Set<Tag> tagList = person.getTags();
+        Set<Tag> newTagList = new HashSet<>();
         for (Tag tag : tagList) {
-            if (addressBook.hasTag(tag) || !Tag.isValidTagName(tag.getTagName().toString())) {
-                continue;
+            // Adds the tag to the model
+            if (!addressBook.hasTag(tag)) {
+                addressBook.addTag(tag);
             }
-            addressBook.addTag(tag);
+
+            newTagList.add(addressBook.getTag(tag));
+            addressBook.getTag(tag).increaseTaggedCount();
         }
+        person.setTags(newTagList);
     }
 
+    /**
+     * Adds weddings to model that were in person but not in model, and makes model and
+     * person store the same weddings
+     */
     private void loadWeddings(AddressBook addressBook, Person person) {
         Set<Wedding> weddingList = person.getWeddings();
         Set<Wedding> newWeddingList = new HashSet<>();
         for (Wedding wedding : weddingList) {
+            // Adds the wedding to the model
+            if (!addressBook.hasWedding(wedding)) {
+                addressBook.addWedding(wedding);
+            }
+
             // If the wedding does not contain the person, add them to the guest list of the wedding by default
             if (!addressBook.getWedding(wedding).hasPerson(person)) {
                 addressBook.getWedding(wedding).addToGuestList(addressBook.getPerson(person));
             }
 
-            if (addressBook.hasWedding(wedding) || !Wedding.isValidWeddingName(wedding.getWeddingName().toString())) {
-                newWeddingList.add(addressBook.getWedding(wedding));
-                continue;
-            }
-
-            addressBook.addWedding(wedding);
             newWeddingList.add(addressBook.getWedding(wedding));
         }
         person.setWeddings(newWeddingList);
     }
 
+    /**
+     * Adds tasks to model that were in person but not in model, and makes model and
+     * person store the same tasks
+     */
     private void loadTasks(AddressBook addressBook, Person person) {
         Set<Task> taskList = person.getTasks();
         for (Task task : taskList) {
