@@ -247,7 +247,7 @@ The activity diagram below illustrates the sequence of actions users will follow
 
 <img src="images/EditPersonActivityDiagram.png" width="600"/>
 
-## Planned Enhancements
+## Planned Features
 ### \[Proposed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -360,6 +360,24 @@ The following activity diagram summarizes what happens when a user executes the 
     - Non-overlapping time slots are added successfully.
     - Overlapping time slots are correctly identified, resulting in command rejection.
     - Edge cases with adjacent `startTime` and `endTime` that do not overlap are handled as expected.
+
+## Planned Enhancements
+
+Team Size: 5
+
+1. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
+2. [Validation for Address: Address should be able to have "/n" or other prefixes]
+3. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
+4. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
+5. [Create his own tags and delete tags]
+6. [insert date end time]
+7. **Warn user that date entered is in the past:** 
+Currently, the user is allowed to enter an appointment date and time from the past because this function is meant to be for easy reference of information, so the user might want to add past patients and their last appointment date.
+However, in the future, an enhancement can be added where the user is warned when a past date in the added. For example, 'WARNING: Date and time that was added has already passed.'
+8. **Specific error message about date format:**
+   Currently, the app accepts dates in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
+which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
+   In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date formats.
 
 
 ## **Implementation**
@@ -786,7 +804,6 @@ testers are expected to do more *exploratory* testing.
 
      1. Test case: `edit 1 n/Axel`<br>
 
-
      2. Test case: `edit 1 p/88452209 e/alex@gmail.com`<br>
         Expected: Edited Person: Axel; Phone: 88452209; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
 
@@ -798,10 +815,10 @@ testers are expected to do more *exploratory* testing.
 
 2. Attempting to edit to create a duplicate patient
     
-     1. Prerequisites: Ensure "Alaya" with the contact details is already in the contact list.
+     1. Prerequisites: Ensure "Alice" with the contact details is already in the contact list.
     
-     2. Test case: `edit 1 n/Alice p/90967209
-        Expected Error Message: This person already exists in the address book
+     2. Test case: `edit 3 n/Alice p/90967209
+        Expected Error Message: Error. This edit will result in a person that already exists in the address book.
 
 ### Filtering patients
 
@@ -832,7 +849,9 @@ testers are expected to do more *exploratory* testing.
 
 **Difficulty Level:**
 
-As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles. Most of our effort was dedicated to adding commands, and debugging cases that we have not previously considered.
+As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. 
+However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles. 
+Most of our effort was dedicated to adding essential features, and debugging cases that we have not previously considered.
 
 **Challenges Faced:**
 
@@ -847,4 +866,20 @@ Our group tried to reuse as much of AB3's code structure as much as possible to 
 
 **Achievements:**
 
-Our group is happy with the outcome of Health Connect, as the process of adding and obtaining information of patients is simplified. With the use of tags, it makes it easier to filter people to find the relevant details. 
+In creating HealthConnect, we began with a base application (an address book) and adapted it to meet the specific needs of home-based healthcare professionals. 
+For example, by simplifying the process of adding and viewing information of patients.  For example, with the use of tags, it makes it easier to filter people to find the relevant details.
+Our focus was also on refining existing logic and validations to make them more suitable for this context. 
+This included careful adjustments to fields like name and phone number, ensuring that they were logical and functional for home-based healthcare use in Singapore.
+
+After considerable discussion, we established that two entries (Person A and Person B) would be considered duplicates if they shared the same:
+
+- Name, phone number, and email
+- Name and email
+- Name and phone number
+
+The latter two conditions prevent users from accidentally creating separate entries for the same person if only minor details, like email or phone number, change. 
+This approach maintains a cleaner, more accurate record-keeping system and reduces the risk of redundant data.
+
+Given the iterative nature of this project, we prioritized essential features in our initial development, including tags, filters, allergies, appointment dates, and finding schedule. 
+For each of these features, we focused on establishing clear logic and minimizing bugs, aiming for a robust and reliable experience for users from the outset. 
+This careful planning and attention to detail allowed us to build a solid foundation for HealthConnect, supporting its growth and adaptability.
