@@ -29,7 +29,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.util.Remark;
@@ -218,11 +217,6 @@ public class AddCustomerOrderCommandTest {
 
         @Override
         public SupplyOrderList getSupplyOrderList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Inventory getInventory() {
             throw new AssertionError("This method should not be called.");
         }
     }

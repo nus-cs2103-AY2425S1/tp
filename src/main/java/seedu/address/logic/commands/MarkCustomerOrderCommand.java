@@ -1,16 +1,12 @@
 package seedu.address.logic.commands;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.OrderStatus;
-import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.Pastry;
 import seedu.address.model.product.Product;
 
 /**
@@ -26,7 +22,6 @@ public class MarkCustomerOrderCommand extends Command {
 
     public static final String MESSAGE_MARK_ORDER_SUCCESS = "Marked customer order as completed:";
     public static final String MESSAGE_ORDER_ALREADY_COMPLETED = "The order at index %1$s is already completed.";
-    public static final String MESSAGE_INSUFFICIENT_STOCK = "Not enough stock to fulfill the order.";
     public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
 
     private final int targetIndex;
@@ -50,19 +45,6 @@ public class MarkCustomerOrderCommand extends Command {
         }
 
         List<? extends Product> items = customerOrder.getItems();
-
-        /* inventory function to remove
-        Map<Integer, Integer> requiredIngredients = new HashMap<>();
-        for (Product product : items) {
-            if (product instanceof Pastry pastry) {
-                for (Ingredient ingredient : pastry.getIngredients()) {
-                    int ingredientId = ingredient.getProductId();
-                    requiredIngredients.put(ingredientId,
-                            requiredIngredients.getOrDefault(ingredientId, 0) + 1);
-                }
-            }
-        }
-        */
 
         customerOrder.setStatus(OrderStatus.COMPLETED);
 

@@ -7,8 +7,6 @@ import seedu.address.model.Model;
 import seedu.address.model.order.OrderStatus;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.order.SupplyOrderList;
-import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Product;
 
 /**
@@ -35,7 +33,6 @@ public class MarkSupplyOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         SupplyOrderList supplyOrderList = model.getSupplyOrderList();
-        Inventory inventory = model.getInventory();
 
         // Validate index
         if (targetIndex <= 0 || targetIndex > supplyOrderList.getOrders().size()) {
