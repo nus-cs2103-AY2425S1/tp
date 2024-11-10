@@ -577,18 +577,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case (Invalid phone number): `add -n John Doe -p 1 -e johnd@example.com -rs Brother` <br>
       Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
-
-   1. Test case (Invalid email): `add -n John Doe -p 98765432 -e johndexample -rs Brother` <br>
+   2. Test case (Invalid phone number): `add -n John Doe -p +6512345678 -e johnd@example.com -rs Brother` <br>
       Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case (Invalid relationship): `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother333` <br>
-      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+      1. Test case (Invalid email): `add -n John Doe -p 98765432 -e johndexample -rs Brother` <br>
+         Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case (Multiple values for fields): `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother -rs Brother` <br>
-      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+      1. Test case (Invalid relationship): `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother333` <br>
+         Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case (Missing fields): `add -n John Doe -e johnd@example.com -rs Brother` <br>
-      Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+      1. Test case (Multiple values for fields): `add -n John Doe -p 98765432 -e johnd@example.com -rs Brother -rs Brother` <br>
+         Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
+
+      1. Test case (Missing fields): `add -n John Doe -e johnd@example.com -rs Brother` <br>
+         Expected: No person is added to the contact. Error details shown in the status message. Status bar remains the same.
 
 2. Adding a duplicate person
 
