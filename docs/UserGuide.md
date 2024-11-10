@@ -44,9 +44,9 @@ ClinicConnect is the **the *ideal* patient management and appointment tracker sy
 
 ## ClinicConnect Features
 
-ClinicConnect is designed to streamline clinic processes with various functionalities to book appointments and manage patient details effectively. These features allow you to perform a range of operations, from adding new patient records, managing patient details, scheduling appointments, filtering health services and customizing data to enhance productivity. 
+ClinicConnect is designed to streamline clinic processes with various functionalities to book appointments and manage patient details effectively. These features allow you to perform a range of operations, from adding new patient records, managing patient details, scheduling appointments to filtering appointments.
 
-The following sections will delve into the individual features, providing detailed descriptions and guidance on how to utilize each function to make the most out of the system's capabilities. 
+The following sections will delve into the individual features, providing detailed descriptions and guidance on how to utilize each feature to make the most out of the system's capabilities. 
 
 ### Legend
 These boxes might offer some additional information of different types:
@@ -177,9 +177,9 @@ Multiple allergies can be added using multiple "al|" prefixes
 Examples:
 * `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
    e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
-   al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care` Adds a patient named Abraham Tan with all fields and two allergies
+   al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care` adds a patient named Abraham Tan with all fields and two allergies
 * `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
-   e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` Adds a patient named Lincoln Park with compulsory fields and some optional fields
+   e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` adds a patient named Lincoln Park with compulsory fields and some optional fields
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -256,7 +256,7 @@ Home Command also informs you on the number of patients currently registered in 
 
 ### Booking an upcoming appointment: `bookappt`
 
-Book an upcoming appointment for an existing patient in the system for a health service provided by the clinic.
+Books an upcoming appointment for an existing patient in the system with the corresponding NRIC.
 
 Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 
@@ -266,40 +266,26 @@ Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 **:information_source: Important:**<br>
 <ul>
 <li>
-NRIC provided must be a valid NRIC in the system
+Appointments can only be booked for future dates and times
 </li>
-<li>
-All parameters are compulsory
-</li></ul>
+</ul>
 </div>
 
-
 Example:
-* `bookappt S9758366N dt|2024-12-29 13:00 h|Vaccination` books a Vaccination appointment for the given patient by NRIC at the specified time.
+* `bookappt T0123456A dt|2024-12-29 13:00 h|Vaccination` books a Vaccination appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
 ### Deleting an appointment : `deleteappt`
 
-Identifies a specific patient using NRIC and deletes the appointment specified.
+Deletes the specified appointment of an existing patient in the system with the corresponding NRIC.
 
 Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
 
 ![deleteappt message](images/deleteapptResult.png)
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-<ul>
-<li>
-NRIC provided must be a valid NRIC in the system
-</li>
-<li>
-All parameters are compulsory
-</li></ul>
-</div>
-
 Example:
-* `deleteappt T0123456A dt|2024-11-05 16:00`
+* `deleteappt T0123456A dt|2024-12-29 13:00` deletes the appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -335,31 +321,25 @@ For more information on each individual parameter click [here](#command-paramete
 
 ### Viewing patients full profile: `view`
 
-Identifies the specific patient using NRIC and shows the full profile of the patient.
+Displays all information of an existing patient in the system with the corresponding NRIC.
 
 Format: `view NRIC`
 
 ![view result](images/viewResult.png)
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-NRIC provided must be a valid NRIC currently in the system.
-</div>
-
 Example:
-* `view T0123456A`
+* `view T0123456A` displays all information of the patient with NRIC T0123456A.
 
 ### Deleting a patient : `delete`
 
-Deletes the patient with the specified NRIC from the address book.
+Deletes the patient with the corresponding NRIC from ClinicConnect.
 
 Format: `delete NRIC`
 
 ![delete message](images/deleteResult.png)
 
-* Deletes the patient at the specified `NRIC`.
-* The NRIC refers to the nric of the patient shown in the displayed patient list.
-* The NRIC **must be a valid NRIC number present in the system**
+Example:
+* `delete T0123456A` deletes the patient with NRIC T0123456A from ClinicConnect.
 
 ### Clearing all entries : `clear`
 
