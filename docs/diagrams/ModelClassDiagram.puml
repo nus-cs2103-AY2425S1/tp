@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
+Package Model as ModelPackage <<Rectangle>> {
 Class "<<interface>>\nReadOnlyPrudy" as ReadOnlyPrudy
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
@@ -27,6 +27,21 @@ Class "{abstract}\nPolicy" as Policy
 Class ClaimList
 Class Claim
 
+    enum PolicyType <<enumeration>> {
+        LIFE
+        HEALTH
+        EDUCATION
+    }
+
+    enum ClaimStatus <<enumeration>> {
+        PENDING
+        APPROVED
+        REJECTED
+    }
+
+Class PremiumAmount
+Class CoverageAmount
+Class ExpiryDate
 Class I #FFFFFF
 }
 
@@ -44,20 +59,39 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 Prudy *--> "1" UniqueClientList
 UniqueClientList --> "~* all" Client
-Client *--> Name
-Client *--> Phone
-Client *--> Email
-Client *--> Address
+Client *--> "1" Name
+Client *--> "1" Phone
+Client *--> "1" Email
+Client *--> "1" Address
 Client *--> "*" Tag
-Client *--> PolicySet
-PolicySet --> LifePolicy
-PolicySet --> HealthPolicy
-PolicySet --> EducationPolicy
+Client *--> "1" PolicySet
+
+PolicySet --> "0..1" LifePolicy
+PolicySet --> "0..1" HealthPolicy
+PolicySet --> "0..1" EducationPolicy
 LifePolicy --|> Policy
 HealthPolicy --|> Policy
 EducationPolicy --|> Policy
-Policy --> ClaimList
-ClaimList --> "*" Claim
+
+Policy ..> PolicyType
+
+Policy *--> PremiumAmount
+Policy *--> CoverageAmount
+Policy *--> ExpiryDate
+Policy *--> ClaimList
+
+ClaimList *--> "*" Claim
+ClaimList -[hidden]left-> ExpiryDate
+CoverageAmount -[hidden]right-> ExpiryDate
+PremiumAmount -[hidden]right-> CoverageAmount
+
+Claim --> ClaimStatus
+ClaimStatus -[hidden]down-> ExpiryDate
+ClaimStatus -[hidden]right-> Claim
+
+
+Policy -[hidden]down-> ClaimList
+PolicyType -[hidden]left-> Policy
 
 Client -[hidden]up--> I
 UniqueClientList -[hidden]right-> I

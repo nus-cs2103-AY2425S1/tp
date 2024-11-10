@@ -9,10 +9,10 @@ import seedu.address.model.claim.ClaimStatus;
 
 class JsonAdaptedClaimTest {
 
-    private static final String VALID_STATUS = "PENDING";
+    private static final String VALID_STATUS = "pending";
     private static final String VALID_DESCRIPTION = "Claim for medical expenses";
 
-    private static final String INVALID_STATUS = "INVALID";
+    private static final String INVALID_STATUS = "invalid";
     private static final String INVALID_DESCRIPTION = "";
 
     @Test

@@ -25,6 +25,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedClient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Client's %s field is missing!";
+    public static final String DUPLICATE_POLICY_TYPE_MESSAGE_FORMAT = "Client cannot have duplicate %s policies!";
 
     private final String name;
     private final String phone;
@@ -119,7 +120,13 @@ class JsonAdaptedClient {
         final Set<Tag> modelTags = new HashSet<>(clientTags);
 
         final PolicySet modelPolicies = new PolicySet();
-        modelPolicies.addAll(clientPolicies);
+
+        // ensure each policy is added, else throw IllegalValueException
+        for (Policy policy : clientPolicies) {
+            if (!modelPolicies.add(policy)) {
+                throw new IllegalValueException(String.format(DUPLICATE_POLICY_TYPE_MESSAGE_FORMAT, policy.getType()));
+            }
+        }
         return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPolicies);
     }
 

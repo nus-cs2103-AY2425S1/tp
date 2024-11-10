@@ -25,12 +25,12 @@ import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteClaimsCommand;
+import seedu.address.logic.commands.DeleteClaimCommand;
 import seedu.address.logic.commands.DeleteClientCommand;
 import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.logic.commands.EditClaimCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.address.logic.commands.EditClientCommand;
+import seedu.address.logic.commands.EditClientCommand.EditClientDescriptor;
 import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindClientCommand;
@@ -81,9 +81,9 @@ public class PrudyParserTest {
     public void parseCommand_edit() throws Exception {
         Client client = new ClientBuilder().build();
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder(client).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditClientCommand command = (EditClientCommand) parser.parseCommand(EditClientCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getEditClientDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_CLIENT, descriptor), command);
+        assertEquals(new EditClientCommand(INDEX_FIRST_CLIENT, descriptor), command);
     }
 
     @Test
@@ -198,13 +198,13 @@ public class PrudyParserTest {
 
     @Test
     public void parseCommand_deleteClaim() throws Exception {
-        String userInput = DeleteClaimsCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
+        String userInput = DeleteClaimCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " pt/health c/1";
 
-        DeleteClaimsCommand expectedCommand = new DeleteClaimsCommand(
+        DeleteClaimCommand expectedCommand = new DeleteClaimCommand(
                 INDEX_FIRST_CLIENT, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
 
-        DeleteClaimsCommand actualCommand = (DeleteClaimsCommand) parser.parseCommand(userInput);
+        DeleteClaimCommand actualCommand = (DeleteClaimCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, actualCommand);
     }
 

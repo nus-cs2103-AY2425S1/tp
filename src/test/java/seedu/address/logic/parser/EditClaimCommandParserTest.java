@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditClaimCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.claim.EditClaimDescriptor;
 import seedu.address.model.policy.PolicyType;
@@ -26,11 +27,11 @@ public class EditClaimCommandParserTest {
     public void parse_validArgs_returnsEditClaimCommand() throws Exception {
         // Example of valid input
         String userInput = "1 " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "2 "
-                + PREFIX_CLAIM_STATUS + "approved " + PREFIX_CLAIM_DESC + "Updated claim details.";
+                + PREFIX_CLAIM_STATUS + "approved " + PREFIX_CLAIM_DESC + "Updated claim details";
 
         EditClaimDescriptor descriptor = new EditClaimDescriptor();
         descriptor.setStatus(ClaimStatus.APPROVED);
-        descriptor.setDescription("Updated claim details.");
+        descriptor.setDescription("Updated claim details");
 
         EditClaimCommand expectedCommand = new EditClaimCommand(
                 Index.fromOneBased(1), PolicyType.HEALTH, Index.fromOneBased(2), descriptor);
@@ -112,5 +113,13 @@ public class EditClaimCommandParserTest {
 
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClaimCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidDescription_throwsParseException() {
+        String userInput = "1 " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "2 "
+                + PREFIX_CLAIM_STATUS + "approved " + PREFIX_CLAIM_DESC + "de??";
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput), Claim.MESSAGE_CONSTRAINTS);
     }
 }

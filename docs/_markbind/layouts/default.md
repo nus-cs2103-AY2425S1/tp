@@ -28,10 +28,11 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
-  * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
-  * [Features]({{ baseUrl }}/UserGuide.html#features)
-  * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [Prerequisites]({{ baseUrl }}/UserGuide.html#2-prerequisites)
+  * [Getting Started]({{ baseUrl }}/UserGuide.html#3-getting-started)
+  * [Command Structure]({{ baseUrl }}/UserGuide.html#4-command-structure)
+  * [Commands Overview]({{ baseUrl }}/UserGuide.html#5-commands-overview)
+  * [FAQ]({{ baseUrl }}/UserGuide.html#6-faq)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up, Getting Started]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
@@ -40,10 +41,6 @@
   * [Documentation, Logging, Testing, Configuration, Dev-Ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for Manual Testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>

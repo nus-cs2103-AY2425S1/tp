@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.claim.ClaimList;
+
 public class LifePolicyTest {
     private final LifePolicy life = new LifePolicy();
     private final PremiumAmount defaultPremiumAmount = life.getPremiumAmount();
@@ -54,9 +56,9 @@ public class LifePolicyTest {
         assertTrue(life.equals(policyWithSameValues));
 
         // different type -> returns false
-        Policy health = new HealthPolicy();
-        health.setPremiumAmount(life.getPremiumAmount());
-        health.setCoverageAmount(health.getCoverageAmount());
+        ClaimList sameClaimList = new ClaimList(life.getClaimList());
+        Policy health = new HealthPolicy(life.getPremiumAmount(), life.getCoverageAmount(),
+                life.getExpiryDate(), sameClaimList);
         assertFalse(life.equals(health));
     }
 }

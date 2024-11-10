@@ -27,7 +27,7 @@ class JsonAdaptedClaim {
      * Converts a given {@code Claim} into this class for Jackson use.
      */
     public JsonAdaptedClaim(Claim source) {
-        this.status = source.getStatus().name();
+        this.status = source.getStatus().name().toLowerCase();
         this.description = source.getClaimDescription();
     }
 

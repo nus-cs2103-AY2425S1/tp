@@ -3,30 +3,34 @@ package seedu.address.model.policy;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.ClaimList;
+import seedu.address.model.claim.exceptions.DuplicateClaimException;
 
 
 /**
  * An abstract class to capture all type of policies.
+ * Guarantees: immutability
  */
 public abstract class Policy {
-    private PremiumAmount premiumAmount;
-    private CoverageAmount coverageAmount;
-    private ExpiryDate expiryDate;
-    private ClaimList claimList;
+    private final PremiumAmount premiumAmount;
+    private final CoverageAmount coverageAmount;
+    private final ExpiryDate expiryDate;
+    private final ClaimList claimList;
 
 
     /**
-     * Constructor for a new Policy without an insuree specified.
+     * Constructor for a new Policy.
      *
      * @param premiumAmount the price of the policy, paid per month.
      * @param coverageAmount the maximum amount that can be claimed under this policy.
-     * @param expiryDate the date of Policy's expiry.
-     * @throws NullPointerException if any of the fields is null.
+     * @param expiryDate the date of policy's expiry.
+     * @param claims the list of claims filed under this policy.
+     * @throws NullPointerException if any of the fields are null.
      */
     public Policy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate,
                   ClaimList claims) {
@@ -38,7 +42,7 @@ public abstract class Policy {
     }
 
     /**
-     * Return a suitable Policy based on the PolicyType passed.
+     * Returns a suitable Policy based on the PolicyType passed.
      */
     public static Policy makePolicy(PolicyType policyType, PremiumAmount premiumAmount, CoverageAmount coverageAmount,
                                     ExpiryDate expiryDate, ClaimList claims) {
@@ -56,14 +60,14 @@ public abstract class Policy {
     }
 
     /**
-     * Return the policy's type.
+     * Returns the policy's type.
      *
      * @return the policy's type.
      */
     public abstract PolicyType getType();
 
     /**
-     * Return this policy's premium amount.
+     * Returns this policy's premium amount.
      *
      * @return this policy's premium amount.
      */
@@ -72,7 +76,7 @@ public abstract class Policy {
     }
 
     /**
-     * Return this policy's coverage amount.
+     * Returns this policy's coverage amount.
      *
      * @return this policy's coverage amount.
      */
@@ -81,7 +85,7 @@ public abstract class Policy {
     }
 
     /**
-     * Return this policy's expiry date.
+     * Returns this policy's expiry date.
      *
      * @return this policy's expiry date.
      */
@@ -89,64 +93,57 @@ public abstract class Policy {
         return expiryDate;
     }
 
-
     /**
-     * Change this policy's premium amount to the specified {@code premiumAmount}, which cannot be null.
+     * Returns this policy's claim list as an unmodifiable list.
      *
-     * @param premiumAmount the new price of the policy, paid per month.
-     * @throws NullPointerException if the given {@code premiumAmount} is null.
+     * @return this policy's claim list as an unmodifiable list.
      */
-    public void setPremiumAmount(PremiumAmount premiumAmount) {
-        requireNonNull(premiumAmount);
-        this.premiumAmount = premiumAmount;
+    public List<Claim> getClaimList() {
+        return Collections.unmodifiableList(claimList);
     }
 
     /**
-     * Change this policy's coverage amount to the specified {@code coverageAmount}, which cannot be null.
+     * Adds a claim to this policy's claim list.
+     * Preserves immutability by returning a new Policy, leaving the current one untouched.
      *
-     * @param coverageAmount the new maximum amount that can be claimed under this policy.
-     * @throws NullPointerException if the given {@code coverageAmount} is null.
+     * @param claim the claim to add.
+     * @return the new Policy with the claim successfully added.
+     * @throws NullPointerException when claim is null.
+     * @throws DuplicateClaimException when claim cannot be added because of duplicates.
      */
-    public void setCoverageAmount(CoverageAmount coverageAmount) {
-        requireNonNull(coverageAmount);
-        this.coverageAmount = coverageAmount;
+    public Policy addClaim(Claim claim) {
+        requireNonNull(claim);
+        ClaimList newClaimList = new ClaimList(getClaimList());
+        if (!newClaimList.add(claim)) {
+            throw new DuplicateClaimException();
+        }
+        return makePolicy(getType(), premiumAmount, coverageAmount, expiryDate, newClaimList);
     }
 
     /**
-     * Change this policy's expiry date to the specified {@code expiryDate}, which cannot be null.
+     * Removes a claim from this policy's claim list at the specified index.
+     * Preserves immutability by return a new Policy, leaving the current one untouched.
      *
-     * @param expiryDate the new expiry date of this policy.
-     * @throws NullPointerException if the given {@code expiryDate} is null.
+     * @param index the index of the claim to be removed.
+     * @return the new Policy with the claim successfully removed.
+     * @throws IndexOutOfBoundsException when the index is out of bounds of the claim list.
      */
-    public void setExpiryDate(ExpiryDate expiryDate) {
-        requireNonNull(expiryDate);
-        this.expiryDate = expiryDate;
-    }
-
-    /**
-     * Adds a claim to this policy's claim set.
-     *
-     * @param claim The claim to add.
-     * @return True if the claim was added successfully, false if it was already present.
-     */
-    public boolean addClaim(Claim claim) {
-        return claimList.add(claim);
-    }
-
-    /**
-     * Removes a claim from this policy's claim set.
-     *
-     * @param claim The claim to remove.
-     * @return True if the claim was removed successfully, false if it was not found.
-     */
-    public boolean removeClaim(Claim claim) {
-        return claimList.remove(claim);
+    public Policy removeClaim(int index) {
+        ClaimList newClaimList = new ClaimList(getClaimList());
+        newClaimList.remove(index);
+        return makePolicy(getType(), premiumAmount, coverageAmount, expiryDate, newClaimList);
     }
 
     @Override
     public String toString() {
-        return String.format("Premium amount: $%s | Coverage amount: $%s | Expiry date: %s | Claims: %s",
-                premiumAmount, coverageAmount, expiryDate, claimList);
+        StringBuilder claimsString = new StringBuilder();
+        if (claimList.isEmpty()) {
+            claimsString.append("No claims");
+        } else {
+            claimsString.append(String.format("Claims:\n%s", claimList));
+        }
+        return String.format("Premium amount: $%s | Coverage amount: $%s | Expiry date: %s | %s",
+                premiumAmount, coverageAmount, expiryDate, claimsString);
     }
 
     @Override
@@ -173,10 +170,4 @@ public abstract class Policy {
         return Objects.hash(premiumAmount, coverageAmount, expiryDate, claimList);
     }
 
-    public ClaimList getClaimList() {
-        return this.claimList;
-    }
-    public List<Claim> getList() {
-        return this.claimList.getList();
-    }
 }

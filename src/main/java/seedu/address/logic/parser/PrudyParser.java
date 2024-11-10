@@ -13,11 +13,11 @@ import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteClaimsCommand;
+import seedu.address.logic.commands.DeleteClaimCommand;
 import seedu.address.logic.commands.DeleteClientCommand;
 import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.logic.commands.EditClaimCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindClientCommand;
@@ -65,8 +65,8 @@ public class PrudyParser {
         case AddClientCommand.COMMAND_WORD:
             return new AddClientCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditClientCommand.COMMAND_WORD:
+            return new EditClientCommandParser().parse(arguments);
 
         case DeleteClientCommand.COMMAND_WORD:
             return new DeleteClientCommandParser().parse(arguments);
@@ -101,8 +101,8 @@ public class PrudyParser {
         case DeletePoliciesCommand.COMMAND_WORD:
             return new DeletePoliciesCommandParser().parse(arguments);
 
-        case DeleteClaimsCommand.COMMAND_WORD:
-            return new DeleteClaimsCommandParser().parse(arguments);
+        case DeleteClaimCommand.COMMAND_WORD:
+            return new DeleteClaimCommandParser().parse(arguments);
 
         case AddClaimCommand.COMMAND_WORD:
             return new AddClaimCommandParser().parse(arguments);

@@ -34,19 +34,20 @@ public class EditClaimCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_POLICY_TYPE + "POLICY_TYPE "
             + PREFIX_CLAIM_INDEX + "CLAIM_INDEX (must be a positive integer) "
-            + PREFIX_CLAIM_STATUS + "[NEW_STATUS] "
-            + PREFIX_CLAIM_DESC + "[NEW_DESCRIPTION]\n"
+            + "[" + PREFIX_CLAIM_STATUS + "NEW_STATUS] "
+            + "[" + PREFIX_CLAIM_DESC + "NEW_DESCRIPTION]\n"
             + "Note: Use the 'list-claims' command to find the appropriate claim index "
-            + "for the specified policy type.\n\n"
+            + "for the specified policy type.\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_TYPE + "health "
             + PREFIX_CLAIM_INDEX + "1 "
             + PREFIX_CLAIM_STATUS + "approved "
-            + PREFIX_CLAIM_DESC + "Updated claim details\n";
+            + PREFIX_CLAIM_DESC + "Updated claim details "
+            + "(The last 2 fields are optional but one of them needs to be edited at all times)\n ";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
-    public static final String MESSAGE_EDIT_CLAIM_SUCCESS = "Claim edited for policy type '%1$s' of client: %2$s.\n\n"
-            + "Updated Claim Details:\nStatus: %3$s | Description: %4$s.";
+    public static final String MESSAGE_EDIT_CLAIM_SUCCESS = "Claim edited for policy type '%1$s' of client: %2$s\n\n"
+            + "Updated Claim Details:\nStatus: %3$s | Description: %4$s";
     public static final String MESSAGE_NO_CLAIM_FOUND = "No claim found at the specified index to edit.";
     public static final String MESSAGE_INVALID_CLIENT_INDEX = "The client index provided is invalid.";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
@@ -93,12 +94,10 @@ public class EditClaimCommand extends Command {
         Claim oldClaim = getOldClaim(policy, claimIndex);
         Claim editedClaim = createEditedClaim(oldClaim, editClaimDescriptor);
 
-        PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(policySet);
-        updatedPolicySet.remove(policy.getType());
+        PolicySet updatedPolicySet = new PolicySet(policySet);
 
         Policy editedPolicy = createEditedPolicy(policy, oldClaim, editedClaim);
-        updatedPolicySet.add(editedPolicy);
+        updatedPolicySet.replace(editedPolicy);
 
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
                 clientToEdit.getAddress(), clientToEdit.getTags(), updatedPolicySet);
@@ -151,7 +150,7 @@ public class EditClaimCommand extends Command {
      */
     public Claim getOldClaim(Policy policy, Index claimIndex) throws CommandException {
         try {
-            return policy.getClaimList().getList().get(claimIndex.getZeroBased());
+            return policy.getClaimList().get(claimIndex.getZeroBased());
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException(MESSAGE_NO_CLAIM_FOUND);
         }
@@ -167,8 +166,7 @@ public class EditClaimCommand extends Command {
      * @throws CommandException If the claim has not been changed or if there is a duplicate claim.
      */
     public Policy createEditedPolicy(Policy policy, Claim oldClaim, Claim newClaim) throws CommandException {
-        ClaimList updatedClaims = new ClaimList();
-        updatedClaims.addAll(policy.getClaimList());
+        ClaimList updatedClaims = new ClaimList(policy.getClaimList());
 
         if (newClaim.equals(oldClaim)) {
             throw new CommandException(MESSAGE_NOT_CHANGED);

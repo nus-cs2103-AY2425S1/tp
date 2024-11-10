@@ -36,13 +36,10 @@ public class ListClaimsCommandParser implements Parser<ListClaimsCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListClaimsCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY_TYPE);
+
         PolicyType policyType;
-        try {
-            policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListClaimsCommand.MESSAGE_USAGE),
-                    pe);
-        }
+        policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
 
         return new ListClaimsCommand(clientIndex, policyType);
     }

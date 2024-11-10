@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +13,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.claim.Claim;
-import seedu.address.model.claim.ClaimList;
+import seedu.address.model.claim.exceptions.DuplicateClaimException;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
@@ -37,9 +36,9 @@ public class AddClaimCommand extends Command {
             + PREFIX_CLAIM_STATUS + "pending "
             + PREFIX_CLAIM_DESC + "stomach surgery";
 
-    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Claim added for policy type"
-            + "'%1$s' of client: %2$s.\n\n"
-            + "Added Claim Details:\nStatus: %3$s | Description: %4$s.\n";
+    public static final String MESSAGE_ADD_CLAIM_SUCCESS = "Claim added for policy type "
+            + "'%1$s' of client: %2$s\n\n"
+            + "Added Claim Details:\nStatus: %3$s | Description: %4$s\n";
     public static final String MESSAGE_POLICY_NOT_FOUND = "The policy for the specified type was not found.";
     public static final String MESSAGE_CLAIM_EXISTS = "A similar claim already exists in the policy.";
 
@@ -63,63 +62,119 @@ public class AddClaimCommand extends Command {
         this.policyType = policyType;
     }
 
+    /**
+     * Executes the command to add a claim to the specified client and returns the result.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return A {@code CommandResult} containing the success message.
+     * @throws CommandException if the client index is invalid, the policy is not found,
+     *                          or a duplicate claim already exists.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Client> lastShownList = model.getFilteredClientList();
+        Client clientToEdit = getClientToEdit(lastShownList);
 
+        Policy policy = findPolicy(clientToEdit.getPolicies());
+        Policy updatedPolicy = addClaimToPolicy(policy);
+
+        Client editedClient = createUpdatedClient(clientToEdit, updatedPolicy);
+        model.setClient(clientToEdit, editedClient);
+        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
+
+        String successMessage = formatSuccessMessage(clientToEdit, claim);
+        return new CommandResult(successMessage);
+    }
+
+    /**
+     * Retrieves the client at the specified index in the filtered client list.
+     *
+     * @param lastShownList The current list of clients being displayed.
+     * @return The {@code Client} at the specified index.
+     * @throws CommandException if the index is out of bounds.
+     */
+    private Client getClientToEdit(List<Client> lastShownList) throws CommandException {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
+        return lastShownList.get(index.getZeroBased());
+    }
 
-        Client clientToEdit = lastShownList.get(index.getZeroBased());
-        Set<Policy> policySet = clientToEdit.getPolicies();
-
-        // find the policy based on the policyType
-        Policy policy = policySet.stream()
+    /**
+     * Finds the policy within the client's policy set that matches the specified policy type.
+     *
+     * @param policySet The set of policies belonging to the client.
+     * @return The matching {@code Policy} object.
+     * @throws CommandException if no policy with the specified type is found.
+     */
+    private Policy findPolicy(Set<Policy> policySet) throws CommandException {
+        return policySet.stream()
                 .filter(p -> p.getType().equals(policyType))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_POLICY_NOT_FOUND));
-
-        ClaimList claimList = policy.getClaimList();
-        if (!claimList.add(claim)) {
-            throw new CommandException(MESSAGE_CLAIM_EXISTS);
-        }
-
-        // create new policy set with the updated policy (to preserve immutability)
-        PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(new HashSet<>(policySet));
-        updatedPolicySet.remove(policy.getType());
-        updatedPolicySet.add(policy);
-
-        // create a new client with the updated policy set
-        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(),
-                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), updatedPolicySet);
-
-        model.setClient(clientToEdit, editedClient);
-        model.updateFilteredClientList(Model.PREDICATE_SHOW_ALL_CLIENTS);
-        String successMessage = formatSuccessMessage(clientToEdit, claim);
-        return new CommandResult(successMessage);
-
     }
 
+    /**
+     * Attempts to add the claim to the specified policy and returns the updated policy.
+     *
+     * @param policy The policy to which the claim will be added.
+     * @return A new {@code Policy} object containing the added claim.
+     * @throws CommandException if a duplicate claim is detected in the policy.
+     */
+    private Policy addClaimToPolicy(Policy policy) throws CommandException {
+        try {
+            return policy.addClaim(claim); // returns a new Policy with the added claim
+        } catch (DuplicateClaimException e) {
+            throw new CommandException(MESSAGE_CLAIM_EXISTS);
+        }
+    }
+
+    /**
+     * Creates a new {@code Client} object with the updated policy set containing the new claim.
+     *
+     * @param clientToEdit The original client to be updated.
+     * @param updatedPolicy The updated policy containing the new claim.
+     * @return A new {@code Client} object with the updated policy set.
+     */
+    private Client createUpdatedClient(Client clientToEdit, Policy updatedPolicy) {
+        // create new policy set with the updated policy to preserve immutability
+        PolicySet updatedPolicySet = new PolicySet(clientToEdit.getPolicies());
+        updatedPolicySet.replace(updatedPolicy);
+
+        return new Client(clientToEdit.getName(), clientToEdit.getPhone(),
+                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), updatedPolicySet);
+    }
+
+    /**
+     * Formats the success message to be displayed after the claim is successfully added.
+     *
+     * @param client The client to whom the claim was added.
+     * @param claim The claim that was added.
+     * @return A formatted success message string.
+     */
+    private String formatSuccessMessage(Client client, Claim claim) {
+        return String.format(MESSAGE_ADD_CLAIM_SUCCESS, policyType, client.getName(), claim.getStatus(),
+                claim.getClaimDescription());
+    }
+
+    /**
+     * Checks if another object is equal to this {@code AddClaimCommand}.
+     *
+     * @param other The other object to compare to.
+     * @return True if both objects are equivalent; otherwise, false.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof AddClaimCommand)) {
             return false;
         }
-
         AddClaimCommand otherCommand = (AddClaimCommand) other;
         return index.equals(otherCommand.index)
                 && policyType.equals(otherCommand.policyType)
                 && claim.equals(otherCommand.claim);
-    }
-    private String formatSuccessMessage(Client client, Claim claim) {
-        return String.format(MESSAGE_ADD_CLAIM_SUCCESS, policyType, client.getName(), claim.getStatus(),
-                claim.getClaimDescription());
     }
 }

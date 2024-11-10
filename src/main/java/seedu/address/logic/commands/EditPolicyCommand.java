@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_COVERAGE_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import java.util.List;
 
@@ -9,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.claim.ClaimList;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.EditPolicyDescriptor;
@@ -23,19 +28,24 @@ import seedu.address.model.policy.PremiumAmount;
  */
 public class EditPolicyCommand extends Command {
     public static final String COMMAND_WORD = "edit-policy";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy edited to:\n%2$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
+    public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated.";
     public static final String MESSAGE_POLICY_NOT_FOUND = "Policy of specified type does not exist for client.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates the specified policy for the client identified "
             + "by the index number used in the last client listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pt/[POLICY_TYPE] pa/[PREMIUM_AMOUNT] ca/[COVERAGE_AMOUNT] ed/[EXPIRY_DATE]\n"
-            + "Example: "
-            + COMMAND_WORD
-            + " 1 pt/health pa/1500 ca/10000.50 ed/09/14/2024 "
+            + PREFIX_POLICY_TYPE + "POLICY_TYPE "
+            + "[" + PREFIX_POLICY_PREMIUM_AMOUNT + "PREMIUM_AMOUNT] "
+            + "[" + PREFIX_POLICY_COVERAGE_AMOUNT + "COVERAGE_AMOUNT] "
+            + "[" + PREFIX_POLICY_EXPIRY_DATE + "EXPIRY_DATE]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_POLICY_TYPE + "health "
+            + PREFIX_POLICY_PREMIUM_AMOUNT + "1500 "
+            + PREFIX_POLICY_COVERAGE_AMOUNT + "10000.50 "
+            + PREFIX_POLICY_EXPIRY_DATE + "09/14/2024 "
             + " (The last 3 fields are optional but one of them needs to be edited at all times)\n ";
-    public static final String MESSAGE_SUCCESS = "Edited Policy:\n\n%1$s";
+
+    public static final String MESSAGE_SUCCESS = "%1$s policy for %2$s has been changed to:\n\n%3$s";
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
 
@@ -61,9 +71,8 @@ public class EditPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        PolicySet clientPolicies = new PolicySet();
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-        clientPolicies.addAll(clientToEdit.getPolicies());
+        PolicySet clientPolicies = new PolicySet(clientToEdit.getPolicies());
 
         PolicyType policyTypeToEdit = editPolicyDescriptor.getPolicyType();
         Policy policyToRemove = findPolicyByType(clientPolicies, policyTypeToEdit);
@@ -80,8 +89,8 @@ public class EditPolicyCommand extends Command {
                 clientToEdit.getAddress(), clientToEdit.getTags(), clientPolicies);
 
         model.setClient(clientToEdit, editedClient);
-        return new CommandResult(String.format("Updated policy\n\n%s policy for %s has been changed to:\n"
-                + "%s ", policyTypeToEdit, clientToEdit.getName(), editedPolicy));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                policyTypeToEdit, clientToEdit.getName(), editedPolicy));
 
     }
 
@@ -105,8 +114,11 @@ public class EditPolicyCommand extends Command {
         CoverageAmount updatedCoverageAmount = descriptor.getCoverageAmount().orElse(policyToEdit.getCoverageAmount());
         ExpiryDate updatedExpiryDate = descriptor.getExpiryDate().orElse(policyToEdit.getExpiryDate());
 
+        // claims cannot be edited using this command
+        ClaimList claimList = new ClaimList(policyToEdit.getClaimList());
+
         return Policy.makePolicy(descriptor.getPolicyType(), updatedPremiumAmount,
-                updatedCoverageAmount, updatedExpiryDate, policyToEdit.getClaimList());
+                updatedCoverageAmount, updatedExpiryDate, claimList);
     }
 
     @Override

@@ -32,9 +32,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing client in Prudy.
  */
-public class EditCommand extends Command {
+public class EditClientCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit-client";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the client identified "
             + "by the index number used in the displayed client list. "
@@ -60,7 +60,7 @@ public class EditCommand extends Command {
      * @param index of the client in the filtered client list to edit
      * @param editClientDescriptor details to edit the client with
      */
-    public EditCommand(Index index, EditClientDescriptor editClientDescriptor) {
+    public EditClientCommand(Index index, EditClientDescriptor editClientDescriptor) {
         requireNonNull(index);
         requireNonNull(editClientDescriptor);
 
@@ -102,8 +102,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         // edit command should not be able to edit policies
-        PolicySet policies = new PolicySet();
-        policies.addAll(clientToEdit.getPolicies());
+        PolicySet policies = new PolicySet(clientToEdit.getPolicies());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 policies);
@@ -116,13 +115,13 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditClientCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editClientDescriptor.equals(otherEditCommand.editClientDescriptor);
+        EditClientCommand otherEditClientCommand = (EditClientCommand) other;
+        return index.equals(otherEditClientCommand.index)
+                && editClientDescriptor.equals(otherEditClientCommand.editClientDescriptor);
     }
 
     @Override

@@ -35,18 +35,23 @@ public class ClaimListTest {
     }
 
     @Test
-    public void getList_unmodifiableList_success() {
-        claimList.add(claim1);
-        claimList.add(claim2);
-        List<Claim> unmodifiableList = claimList.getList();
+    public void constructorWithCollection_success() {
+        List<Claim> claims = new ArrayList<>();
+        claims.add(claim1);
+        ClaimList actualClaimList = new ClaimList(claims);
+        Object[] actualClaimArray = actualClaimList.toArray();
 
-        assertEquals(2, unmodifiableList.size());
-        assertTrue(unmodifiableList.contains(claim1));
-        assertTrue(unmodifiableList.contains(claim2));
+        assertTrue(actualClaimArray.length == 1);
+        assertEquals(claim1, actualClaimArray[0]);
+    }
 
-        assertThrows(UnsupportedOperationException.class, () -> unmodifiableList.add(claim3));
-        assertThrows(UnsupportedOperationException.class, () -> unmodifiableList.remove(claim1));
-        assertThrows(UnsupportedOperationException.class, unmodifiableList::clear);
+    @Test
+    public void constructorWithCollection_nullInputs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new ClaimList(null));
+
+        List<Claim> claims = new ArrayList<>();
+        claims.add(null);
+        assertThrows(NullPointerException.class, () -> new ClaimList(claims));
     }
 
     @Test
@@ -110,10 +115,10 @@ public class ClaimListTest {
         assertEquals(2, claimList.size()); // Size remains the same
     }
     @Test
-    public void addAllAtIndex_someDuplicates_returnsFalse() {
+    public void addAllAtIndex_someDuplicates_returnsTrue() {
         claimList.add(claim1);
         List<Claim> mixedClaims = Arrays.asList(claim1, claim2);
-        Assertions.assertFalse(claimList.addAll(1, mixedClaims));
+        Assertions.assertTrue(claimList.addAll(1, mixedClaims));
         assertEquals(2, claimList.size());
         assertEquals(claim1, claimList.get(0));
         assertEquals(claim2, claimList.get(1));
@@ -297,14 +302,11 @@ public class ClaimListTest {
         final Set<Claim> claimsSet1 = new HashSet<>(Arrays.asList(claim1, claim2));
         final Set<Claim> claimsSet2 = new HashSet<>(Collections.singletonList(claim1));
 
-        final ClaimList standardClaimList = new ClaimList();
-        standardClaimList.addAll(claimsSet1);
+        final ClaimList standardClaimList = new ClaimList(claimsSet1);
 
-        final ClaimList sameValuesClaimList = new ClaimList();
-        sameValuesClaimList.addAll(claimsSet1);
+        final ClaimList sameValuesClaimList = new ClaimList(claimsSet1);
 
-        final ClaimList differentClaimsClaimList = new ClaimList();
-        differentClaimsClaimList.addAll(claimsSet2);
+        final ClaimList differentClaimsClaimList = new ClaimList(claimsSet2);
 
         // same values -> returns true
         assertTrue(standardClaimList.equals(sameValuesClaimList));

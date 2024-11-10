@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimList;
 import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.HealthPolicy;
@@ -34,21 +35,10 @@ public class AddClaimCommandTest {
     }
 
     @Test
-    public void constructor_nullIndex_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () ->
-                new AddClaimCommand(null, validClaim, validPolicyType));
-    }
-
-    @Test
-    public void constructor_nullClaim_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () ->
-                new AddClaimCommand(INDEX_FIRST_CLIENT, null, validPolicyType));
-    }
-
-    @Test
-    public void constructor_nullPolicyType_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () ->
-                new AddClaimCommand(INDEX_FIRST_CLIENT, validClaim, null));
+    public void constructor_nullInputs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddClaimCommand(null, validClaim, validPolicyType));
+        assertThrows(NullPointerException.class, () -> new AddClaimCommand(INDEX_FIRST_CLIENT, null, validPolicyType));
+        assertThrows(NullPointerException.class, () -> new AddClaimCommand(INDEX_FIRST_CLIENT, validClaim, null));
     }
 
     @Test
@@ -59,43 +49,28 @@ public class AddClaimCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
+        setupModelWithTypicalData();
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
-        AddClaimCommand addClaimCommand = new AddClaimCommand(outOfBoundIndex, validClaim, validPolicyType);
-        assertCommandFailure(addClaimCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+        AddClaimCommand command = new AddClaimCommand(outOfBoundIndex, validClaim, validPolicyType);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_addClaim_success() {
-        // create a client with an existing policy
-        Client client = createClientWithPolicy();
-        model.addClient(client);
+        Client clientWithPolicy = createClientWithPolicy();
+        model.addClient(clientWithPolicy);
 
-        // add the Health Policy claim
-        Claim claim = new Claim(ClaimStatus.PENDING, "Surgery");
-        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_CLIENT, claim, client.getPolicies()
-                .iterator().next().getType());
-
-        // expected success message
-        String expectedMessage = String.format(AddClaimCommand.MESSAGE_ADD_CLAIM_SUCCESS, PolicyType.HEALTH,
-                client.getName(), ClaimStatus.PENDING, "Surgery");
-
-        // ensure the command is successful
+        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_CLIENT, validClaim, validPolicyType);
+        String expectedMessage = getSuccessMessage(clientWithPolicy, validClaim);
         assertCommandSuccess(command, model, expectedMessage, model);
     }
 
     @Test
     public void execute_duplicateClaim_throwsCommandException() {
-        // create a client with an existing policy and a claim
-        Client client = createClientWithPolicyAndClaim();
-        model.addClient(client);
+        Client clientWithPolicyAndClaim = createClientWithPolicyAndClaim();
+        model.addClient(clientWithPolicyAndClaim);
 
-        // attempt to add the same claim again
-        Claim duplicateClaim = new Claim(ClaimStatus.PENDING, "Surgery");
-        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_CLIENT, duplicateClaim,
-                client.getPolicies().iterator().next().getType());
-
-        // expect failure due to the duplicate claim
+        AddClaimCommand command = new AddClaimCommand(INDEX_FIRST_CLIENT, validClaim, validPolicyType);
         assertCommandFailure(command, model, AddClaimCommand.MESSAGE_CLAIM_EXISTS);
     }
 
@@ -103,44 +78,38 @@ public class AddClaimCommandTest {
     public void equals() {
         Claim claim1 = new Claim(ClaimStatus.PENDING, "Surgery claim");
         Claim claim2 = new Claim(ClaimStatus.APPROVED, "Dental claim");
-        PolicyType healthPolicy = PolicyType.HEALTH;
-        PolicyType lifePolicy = PolicyType.LIFE;
 
-        AddClaimCommand addClaimFirstCommand = new AddClaimCommand(INDEX_FIRST_CLIENT, claim1, healthPolicy);
-        AddClaimCommand addClaimSecondCommand = new AddClaimCommand(INDEX_FIRST_CLIENT, claim2, lifePolicy);
+        AddClaimCommand command1 = new AddClaimCommand(INDEX_FIRST_CLIENT, claim1, PolicyType.HEALTH);
+        AddClaimCommand command2 = new AddClaimCommand(INDEX_FIRST_CLIENT, claim1, PolicyType.HEALTH);
+        AddClaimCommand commandDifferentClaim = new AddClaimCommand(INDEX_FIRST_CLIENT, claim2, PolicyType.HEALTH);
+        AddClaimCommand commandDifferentPolicy = new AddClaimCommand(INDEX_FIRST_CLIENT, claim1, PolicyType.LIFE);
 
-        // same object -> returns true
-        Assertions.assertEquals(addClaimFirstCommand, addClaimFirstCommand);
-
-        // same values -> returns true
-        AddClaimCommand addClaimFirstCommandCopy = new AddClaimCommand(INDEX_FIRST_CLIENT, claim1, healthPolicy);
-        Assertions.assertEquals(addClaimFirstCommand, addClaimFirstCommandCopy);
-
-        // different types -> returns false
-        Assertions.assertFalse(addClaimFirstCommand.equals(5));
-
-        // null -> returns false
-        Assertions.assertFalse(addClaimFirstCommand.equals(null));
-
-        // different claim -> returns false
-        Assertions.assertFalse(addClaimFirstCommand.equals(addClaimSecondCommand));
+        Assertions.assertEquals(command1, command1); // same object
+        Assertions.assertEquals(command1, command2); // same values
+        Assertions.assertNotEquals(command1, commandDifferentClaim); // different claim
+        Assertions.assertNotEquals(command1, commandDifferentPolicy); // different policy
+        Assertions.assertNotEquals(command1, null); // null
+        Assertions.assertNotEquals(command1, new ClearCommand()); // different type
     }
 
     private Client createClientWithPolicy() {
-        // initialize a client with a health policy (without claims)
         HealthPolicy policy = new HealthPolicy();
         return new ClientBuilder().withPolicy(policy).build();
     }
-
 
     private Client createClientWithPolicyAndClaim() {
-        // initialize a client with a health policy and a claim
-        HealthPolicy policy = new HealthPolicy();
-        Claim claim = new Claim(ClaimStatus.PENDING, "Surgery");
-
-        policy.getClaimList().add(claim);
-
+        ClaimList claimList = new ClaimList();
+        claimList.add(validClaim);
+        HealthPolicy policy = new HealthPolicy(null, null, null, claimList);
         return new ClientBuilder().withPolicy(policy).build();
     }
 
+    private String getSuccessMessage(Client client, Claim claim) {
+        return String.format(AddClaimCommand.MESSAGE_ADD_CLAIM_SUCCESS, validPolicyType,
+                client.getName(), claim.getStatus(), claim.getClaimDescription());
+    }
+
+    private void setupModelWithTypicalData() {
+        model = new ModelManager(getTypicalPrudy(), new UserPrefs());
+    }
 }

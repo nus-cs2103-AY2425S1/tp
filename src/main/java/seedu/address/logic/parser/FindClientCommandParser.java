@@ -70,12 +70,10 @@ public class FindClientCommandParser implements Parser<FindClientCommand> {
         // Process phone parameter
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String phoneInput = argMultimap.getValue(PREFIX_PHONE).get().trim();
-
             // Validate phone format
-            if (!phoneInput.matches("\\d{8}")) {
-                throw new ParseException("Error: Phone number must be exactly 8 digits.");
+            if (!phoneInput.matches("\\d{3,15}")) {
+                throw new ParseException("Error: Phone number must be between 3 and 15 digits.");
             }
-
             predicatesList.add(new PhoneMatchesPredicate(phoneInput));
         }
 

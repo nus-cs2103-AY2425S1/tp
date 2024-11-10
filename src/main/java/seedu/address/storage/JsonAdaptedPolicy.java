@@ -20,6 +20,9 @@ import seedu.address.model.policy.PremiumAmount;
 
 class JsonAdaptedPolicy {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Policy's %s field is missing!";
+    public static final String DUPLICATE_CLAIM_MESSAGE_FORMAT = "A single policy cannot have duplicate claims! "
+            + "Claims belonging to the same policy are considered duplicates if they "
+            + "have the same status and description.";
 
     private final String policyType;
     private final double premiumAmount;
@@ -53,7 +56,7 @@ class JsonAdaptedPolicy {
         this.premiumAmount = source.getPremiumAmount().value;
         this.coverageAmount = source.getCoverageAmount().value;
         this.expiryDate = source.getExpiryDate().toString();
-        this.claims.addAll(source.getList().stream()
+        this.claims.addAll(source.getClaimList().stream()
                 .map(JsonAdaptedClaim::new)
                 .collect(Collectors.toList()));
     }
@@ -96,7 +99,11 @@ class JsonAdaptedPolicy {
             policyClaims.add(claim.toModelType());
         }
         final ClaimList modelClaims = new ClaimList();
-        modelClaims.addAll(policyClaims);
+        for (Claim claim : policyClaims) {
+            if (!modelClaims.add(claim)) {
+                throw new IllegalValueException(String.format(DUPLICATE_CLAIM_MESSAGE_FORMAT));
+            }
+        }
         return Policy.makePolicy(modelPolicyType, modelPremiumAmount, modelCoverageAmount, modelExpiryDate,
                 modelClaims);
     }

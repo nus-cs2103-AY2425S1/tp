@@ -10,26 +10,33 @@ Prudy is an application to help Prudential financial agents help manage their cl
 Given below are my contributions to the project.
 
 * **New Feature**:
-  * What it does:
-  * Justification:
-  * Highlights:
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+  * What it does: Adds a policy for a client
+  * Justification: As an application for managing clients' policies, adding a policy is a requirement.
+  * Highlights: Created the `policy` package.
 
 * **New Feature**:
+  * What it does: Made the `resultDisplay` in `Ui` to be expandable.
+  * Justification: Some command results have long description. Being able to expand the display enhance readability.
+  * Highlights: Researched on `JavaFX`.
 
 * **Code contributed**:
+  * Created majority of the `policy` package, including `Policy`, `PolicySet`, `PremiumAmount`, `CoverageAmount`, `ExpiryDate`, `LifePolicy`, `HealthPolicy`, `EducationPolicy`.
+  * Ensured `Client`, `Policy` and `Claim` are immutable to shield them from external changes.
 
 * **Project management**:
-  *
+  * Reviewed and approved a few pull requests.
 
 * **Enhancements to existing features**:
-  *
+  * Polish the Ui.
 
 * **Documentation**:
   * User Guide:
     * Designed the UI mockup for Prudy
+    * Polished the user guide, ensuring the document is free of typos
+    * Ensured clarity of user guide
   * Developer Guide:
-    *
+    * Updated UML diagrams
+    * Ensured developer guide does not deviate from actual implementation
 
 * **Community**:
   * Create new issue labels of `type`, `priority`, and `severity` and new milestones `v1.1` - `v1.6`.

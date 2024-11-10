@@ -80,7 +80,7 @@ public class EditPolicyCommandTest {
     }
 
     @Test
-    public void execute_validEditCommand_policyUpdated() throws Exception {
+    public void execute_validEditPolicyCommand_policyUpdated() throws Exception {
         // Create a policy for the client
         Policy existingPolicy = Policy.makePolicy(PolicyType.LIFE, new PremiumAmount(2500),
                 new CoverageAmount(60000), new ExpiryDate("12/31/2025"), null);
@@ -122,7 +122,7 @@ public class EditPolicyCommandTest {
                 newCoverageAmount, newExpiryDate, null);
 
         // Check the command result message
-        String expectedMessage = String.format("Updated policy\n\n%s policy for %s has been changed to:\n%s ",
+        String expectedMessage = String.format(EditPolicyCommand.MESSAGE_SUCCESS,
                 newPolicyType, clientWithPolicy.getName(), updatedPolicy);
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }

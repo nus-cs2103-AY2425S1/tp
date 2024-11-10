@@ -16,6 +16,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.policy.LifePolicy;
 
 public class JsonAdaptedClientTest {
     private static final String INVALID_NAME = "R@chel";
@@ -118,4 +119,20 @@ public class JsonAdaptedClientTest {
                         VALID_POLICIES);
         assertThrows(IllegalValueException.class, client::toModelType);
     }
+
+    @Test
+    public void toModelType_duplicatePolicyTypes_throwsIllegalValueException() {
+        JsonAdaptedPolicy duplicatePolicy = new JsonAdaptedPolicy(new LifePolicy());
+        List<JsonAdaptedPolicy> invalidPolicies = new ArrayList<>();
+
+        // add duplicatePolicy twice
+        invalidPolicies.add(duplicatePolicy);
+        invalidPolicies.add(duplicatePolicy);
+
+        JsonAdaptedClient client =
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
+                        invalidPolicies);
+        assertThrows(IllegalValueException.class, client::toModelType);
+    }
+
 }

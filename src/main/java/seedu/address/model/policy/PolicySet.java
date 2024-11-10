@@ -10,8 +10,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.policy.exceptions.DuplicatePolicyTypeException;
+
 /**
- * A class to store a set {@code Policy}.
+ * A class to store a set of {@code Policy}.
  * This class ensures that a single PolicySet cannot have multiple policies with the same {@code PolicyType}.
  * For example, there cannot be two {@code LifePolicy} objects in a PolicySet.
  */
@@ -19,6 +21,28 @@ public class PolicySet implements Set<Policy> {
     private static final PolicyType[] policyTypes = PolicyType.getValidPolicyTypes();
     private static final int size = policyTypes.length;
     private final Policy[] policies = new Policy[size];
+
+    /**
+     * Constructor for a new {@code PolicySet} with no policies.
+     */
+    public PolicySet() {}
+
+    /**
+     * Constructor for a new {@code PolicySet} initialized with the following policies.
+     *
+     * @param policies the policies to be added to this {@code PolicySet}.
+     * @throws NullPointerException when {@code policies} or a {@code Policy} in policies is null.
+     * @throws DuplicatePolicyTypeException when the collection of {@code policies} contains
+     *                                      policies of the same {@code PolicyType}.
+     */
+    public PolicySet(Collection<Policy> policies) {
+        requireAllNonNull(policies);
+        for (Policy policy : policies) {
+            if (!add(policy)) {
+                throw new DuplicatePolicyTypeException();
+            }
+        }
+    }
 
     /**
      * A hash function to map each {@code PolicyType} to an array index in {@code policies}.
@@ -65,6 +89,22 @@ public class PolicySet implements Set<Policy> {
     }
 
     /**
+     * Replaces the policy in this set with the same {@code PolicyType} as {@code newPolicy}.
+     * only if a policy of the same {@code PolicyType} exists in this set.
+     *
+     * @param newPolicy the policy to replace the old one.
+     * @return the previous policy that had been replaced, or null if there was no policy for the {@code PolicyType}.
+     * @throws NullPointerException when {@code newPolicy} is null.
+     */
+    public Policy replace(Policy newPolicy) {
+        requireNonNull(newPolicy);
+        int index = hash(newPolicy.getType());
+        Policy replaced = policies[index];
+        policies[index] = newPolicy;
+        return replaced;
+    }
+
+    /**
      * Adds the specified {@code policy} to this set if there are no other {@code Policy} with
      * the same associated {@code PolicyType} as indicated by calling {@code policy::getType}.
      * If this set already contains a similar {@code PolicyType}, the call leaves the set unchanged and returns false.
@@ -79,14 +119,7 @@ public class PolicySet implements Set<Policy> {
 
         int index = hash(policy.getType());
         if (policies[index] != null) {
-            Policy existingPolicy = policies[index];
-
-            if (existingPolicy.getType().equals(policy.getType())) {
-                return false;
-            }
-
-            throw new IllegalArgumentException("Different policy types cannot occupy the same index: "
-                    + policy.getType() + " vs " + existingPolicy.getType());
+            return false;
         }
 
         policies[index] = policy;
@@ -97,15 +130,15 @@ public class PolicySet implements Set<Policy> {
      * Adds all of the elements in the specified {@code collection} to this set if their associated {@code PolicyType}
      * is not already present in this set.
      * The effect of this call is equivalent to that of calling {@code add} on this set once for each {@code Policy}.
-     * Return true if the set has been changed as a result of the call.
+     * Returns true if the set has been changed as a result of the call.
      *
      * @param collection containing elements to be added to this set.
      * @return true if this set has been changed as a result of the call.
-     * @throws NullPointerException when {@code collection} is null.
+     * @throws NullPointerException when {@code collection} or a policy in the collection is null.
      */
     @Override
     public boolean addAll(Collection<? extends Policy> collection) {
-        requireNonNull(collection);
+        requireAllNonNull(collection);
 
         boolean isChanged = false;
         for (Policy policy : collection) {
@@ -123,7 +156,7 @@ public class PolicySet implements Set<Policy> {
 
     /**
      * Throws an exception if {@code obj} is not an instance of {@code PolicyType}.
-     * Return whether this set contains a {@code Policy} associated with the specified {@code PolicyType}
+     * Returns whether this set contains a {@code Policy} associated with the specified {@code PolicyType}
      * as indicated by typecasting {@code (PolicyType) obj}.
      *
      * @param obj whose presence in this set is to be tested.
@@ -143,7 +176,7 @@ public class PolicySet implements Set<Policy> {
 
     /**
      * Throws an exception if {@code collection} contains elements that are not an instance of {@code PolicyType}.
-     * Return true if this set contains a {@code Policy} for each {@code PolicyType} in the {@code collection}.
+     * Returns true if this set contains a {@code Policy} for each {@code PolicyType} in the {@code collection}.
      * The effect of this call is equivalent to that of calling {@code contains} for each element
      * in {@code collection} once.
      *
@@ -191,7 +224,7 @@ public class PolicySet implements Set<Policy> {
      * Throws an exception if {@code obj} is not an instance of {@code PolicyType}.
      * Removes the {@code Policy} associated with the {@code PolicyType} as indicated
      * by typecasting {@code (PolicyType) obj}.
-     * Return whether this set has been changed as a result of the call.
+     * Returns whether this set has been changed as a result of the call.
      *
      * @param obj whose associated {@code Policy} is to be removed.
      * @return true if this set had a {@code Policy} associated with the {@code PolicyType}
@@ -216,7 +249,7 @@ public class PolicySet implements Set<Policy> {
     /**
      * Throws an exception if {@code collection} contains elements that are not an instance of {@code PolicyType}.
      * Removes from this set every {@code Policy} with respect to each {@code PolicyType} in {@code collection}.
-     * Return true if this set has been changed as a result of the call.
+     * Returns true if this set has been changed as a result of the call.
      * The effect of this call is equivalent to that of calling {@code remove} for each element
      * in {@code collection} once.
      *

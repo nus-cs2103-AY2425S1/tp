@@ -46,7 +46,8 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
     }
     private void validatePrefixes(ArgumentMultimap argMultimap) throws ParseException {
         if (!(argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent()) || argMultimap.getPreamble().isEmpty()
-                || !argMultimap.getValue(PREFIX_CLAIM_DESC).isPresent()) {
+                || !argMultimap.getValue(PREFIX_CLAIM_DESC).isPresent()
+                || !argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClaimCommand.MESSAGE_USAGE));
         }
     }

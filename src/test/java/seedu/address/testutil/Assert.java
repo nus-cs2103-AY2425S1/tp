@@ -31,4 +31,11 @@ public class Assert {
         Throwable thrownException = Assertions.assertThrows(expectedType, executable);
         Assertions.assertEquals(expectedMessage, thrownException.getMessage());
     }
+
+    /**
+     * Asserts that the {@code obj} is an instance of {@code expectedClass}.
+     */
+    public static void assertInstanceOf(Class<?> expectedClass, Object obj) {
+        Assertions.assertTrue(expectedClass.isInstance(obj));
+    }
 }

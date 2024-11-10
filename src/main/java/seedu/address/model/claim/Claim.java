@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Represents a Claim in the system.
  * A claim has a description and status.
- * Guarantees: mutable, claim description must follow validation rules.
+ * Guarantees: immutable
  */
 public class Claim {
     public static final String CLAIM_STATUS_MESSAGE_CONSTRAINTS = "Claim status can only be "
@@ -26,8 +26,8 @@ public class Claim {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    private String description;
-    private ClaimStatus status;
+    private final String description;
+    private final ClaimStatus status;
 
     /**
      * Constructs a {@code Claim} with the given status and description.
@@ -65,32 +65,12 @@ public class Claim {
     }
 
     /**
-     * Updates the status of the claim.
-     *
-     * @param status The new status for the claim.
-     */
-    public void setStatus(ClaimStatus status) {
-        this.status = status;
-    }
-
-    /**
      * Returns the current description of the claim.
      *
      * @return The description of the claim.
      */
     public String getClaimDescription() {
         return description;
-    }
-
-    /**
-     * Updates the description of the claim.
-     *
-     * @param description The new description of the claim.
-     * @throws IllegalArgumentException If the description does not match the {@code VALIDATION_REGEX}.
-     */
-    public void setClaimDescription(String description) {
-        checkArgument(isValidClaim(description), MESSAGE_CONSTRAINTS);
-        this.description = description;
     }
 
     /**
