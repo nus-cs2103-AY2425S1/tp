@@ -732,10 +732,10 @@ Sometimes, user cannot remember the full module code, or want to search over a w
 hence reducing the usefulness of this command.
 
 ![point1 screenshot](images/Planned_Enhancements_Screenshots/Point1_1.png)
-(As shown in the screenshot, the result of `find r/CS1101S` only matches contacts with role **CS1101S Student**, despite that there are 2 professors of CS1101S in the sample data.)
+(As shown in the screenshot, `find r/CS1101S` only matches contacts with role **CS1101S Student**, despite that there are 2 professors of CS1101S in the sample data.)
 
 ![point1 screenshot](images/Planned_Enhancements_Screenshots/Point1_2.png)
-(As showin the screenshot, the result of `find r/CS` results in error messages because construction of search query require exact module code to work.)
+(As show in the screenshot, `find r/CS` results in error messages because construction of search query require exact module code to work.)
 
 This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
 we plan to adopt other ways of constructing the query to allow for more general search of module-role in the future.
