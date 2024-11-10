@@ -482,13 +482,15 @@ BlitzBiz data is saved in the hard disk automatically after any command that cha
 
 #### Editing the data file
 
-BlitzBiz data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data
-directly by editing that data file.
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, BlitzBiz will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file using the backup command  before editing it.<br>
 Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+We strongly recommend that newer users or users unfamiliar with JSON file formats **do not** manually edit the data files. 
 </div>
+
+BlitzBiz data is saved automatically as a JSON file (a type of file that organises and stores data) `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data
+directly by editing that data file.
 
 ## Upcoming features
 
