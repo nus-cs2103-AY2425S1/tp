@@ -369,7 +369,7 @@ The `edit` command allows users to edit a `Person` in the `AddressBook`.
 
 To help you understand how the `delete` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
 
 1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
 2. The `EditCommandParser` interprets the input.
@@ -382,7 +382,6 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 <div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), a matching error will be shown on the screen and the sequence of action is terminated.
-- At step 3, if the user provides a category to edit to, and it is found that there is no such category in FastTrack, an error will be shown and the sequence of action is terminated.
 </div>
 
 #### `EditCommand` Implementation Sequence Diagram
