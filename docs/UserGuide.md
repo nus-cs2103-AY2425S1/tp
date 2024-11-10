@@ -297,7 +297,7 @@ Examples:
 <summary><strong>Caution:</strong></summary>
 <br>
 
-- A person with a singular or multiple space between their names are considered different people. For example:
+- People with single or multiple spaces in their names are considered distinct and treated as separate people. For example:
     - <span class="preserve-whitespace">John Doe vs. John  Doe</span>
     - <span class="preserve-whitespace">TK/Tyler Kennedy vs. TK / Tyler - Kennedy</span>
 </details>
@@ -357,7 +357,7 @@ Format: `create-tag t/TAGNAME`
 <details open>
 <summary><strong>Caution:</strong></summary>
 
-- A tag with a singular or multiple space are considered different tags. For example:
+- Tags with single or multiple spaces in their names are considered distinct and treated as separate tags. For example:
     - <span class="preserve-whitespace">Venue IC vs. Venue  IC</span>
 </details>
 </box>
@@ -432,7 +432,8 @@ Format: `create-wedding w/WEDDINGNAME`
 <summary><strong>Caution:</strong></summary>
 <br>
 
-- A wedding with a singular or multiple space are considered different weddings. For example:
+
+- Weddings with single or multiple spaces in their names are considered distinct and treated as separate weddings. For example:
     - <span class="preserve-whitespace">O'Hare's Wedding vs. O'Hare's  Wedding</span>
 </details>
 </box>
@@ -496,6 +497,17 @@ Format: `create-task tk/TASKDESCRIPTION [REMARKS]`
 * The dates can be specified under `REMARKS` with the format `d/YYYY-MM-DD`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
 * Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact-assign-task-) command.
+
+<box type="warning" seamless>
+
+<details open>
+<summary><strong>Caution:</strong></summary>
+<br>
+
+- Tasks with single or multiple spaces in their names are considered distinct and treated as separate tasks. For example:
+    - <span class="preserve-whitespace">Send invitations vs. Send  invitations</span>
+</details>
+</box>
 
 ##### Delete a Task : `delete-task`
 
