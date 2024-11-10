@@ -1,6 +1,7 @@
 package seedu.address.model.goodsreceipt;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -67,7 +68,7 @@ public class GoodsReceiptTest {
                 new Name("Alex Yeoh"), new Date(DATETIME_VALID),
                 new Date(DATETIME_VALID), false, 1, 5.22);
 
-        assertTrue(goodsReceipt.getGoods().equals(VALID_GOODS));
+        assertEquals(goodsReceipt.getGoods(), VALID_GOODS);
     }
 
     @Test
@@ -87,7 +88,7 @@ public class GoodsReceiptTest {
                 VALID_GOODS,
                 new Name("Alex Yeoh"), new Date(DATETIME_VALID),
                 new Date(DATETIME_VALID), false, 1, 5.22);
-        assertTrue(Objects.equals(goodsReceipt.toString(), "[Quantity 1] Milk Bread (Pending)"));
+        assertEquals("[Quantity 1] Milk Bread (Pending)", goodsReceipt.toString());
     }
 
     @Test
@@ -102,6 +103,6 @@ public class GoodsReceiptTest {
                 new Name("Alex Yeoh"), new Date(DATETIME_VALID),
                 new Date(DATETIME_VALID), false, 1, 5.22);
 
-        assertTrue(goodsReceipt.equals(otherReceipt));
+        assertEquals(goodsReceipt, otherReceipt);
     }
 }

@@ -1,5 +1,6 @@
 package seedu.address.model.goodsreceipt;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -18,24 +19,24 @@ public class GoodsReceiptUtilTest {
     @Test
     public void sumQuantity_success() {
         int total = GoodsReceiptUtil.sumQuantity(GOODS_LIST);
-        assertTrue(total == QUANTITY_TOTAL);
+        assertEquals(QUANTITY_TOTAL, total);
     }
 
     @Test
     public void sumQuantity_emptyList_success() {
         int total = GoodsReceiptUtil.sumQuantity(new ArrayList<GoodsReceipt>());
-        assertTrue(total == 0);
+        assertEquals(0, total);
     }
 
     @Test
     public void sumTotals_success() {
         double total = GoodsReceiptUtil.sumTotals(GOODS_LIST);
-        assertTrue(total == GOODS_PRICE_TOTAL);
+        assertEquals(GOODS_PRICE_TOTAL, total);
     }
 
     @Test
     public void sumTotals_emptyList_success() {
         double total = GoodsReceiptUtil.sumTotals(new ArrayList<GoodsReceipt>());
-        assertTrue(total == 0.0);
+        assertEquals(0.0, total);
     }
 }
