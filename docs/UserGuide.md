@@ -5,7 +5,9 @@ title: User Guide
 
 SpleetWaise builds on [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/) – **a desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still offering the benefits of a Graphical User Interface (GUI). SpleetWaise makes it easy for students to record transactions with contacts saved in the address book. If you can type fast, SpleetWaise lets you handle your contact and transaction management tasks more efficiently than traditional GUI apps.
 
-:exclamation: **Disclaimer:** Our app currently focuses on supporting university students based in Singapore and the English language only. The app may not be suitable for other non-university students and are not based in Singapore or users who prefer other languages. If users choose to use the app outside of these parameters, it may behave unexpectedly or not as intended.
+<div markdown="span" class="alert alert-info">
+**Disclaimer:** Our app currently focuses on supporting _university students_ based in _Singapore_ and the _English language_ only. The app may not be suitable for other non-university students and are not based in Singapore or users who prefer other languages. If users choose to use the app outside of these parameters, it may behave unexpectedly or not as intended.
+</div>
 
 * Table of Contents
 {:toc}
@@ -376,13 +378,18 @@ AddressBook and Transaction data are saved in the hard disk automatically after 
 - TransactionBook data are saved automatically as a JSON file `[JAR file location]/data/transactionbook.json` 
 - Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If changes to the data file make its format invalid, SpleetWaise will discard corrupted data and start as usual. To avoid data loss, it’s recommended to back up the file before making edits. Person and Transactions with invalid fields will be discarded before the application starts.<br>
-Furthermore, certain edits can cause the AddressBook or TransactionBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-Notably, if SpleetWaise encounter a person/transaction with an existing person/transaction ID in the 
-address/transaction book, it will be discarded. Similarly, if SpleetWaise encounter a transaction with the same 
-person ID, amount, date and description as an existing transaction in the transaction book, it will be discarded as 
-well.
+<div markdown="block" class="alert alert-warning" style="text-align: justify;">:exclamation: **Caution:**
+If changes to the data files make its format invalid, SpleetWaise will discard corrupted data and start as usual. To avoid data loss, it’s recommended to back up the file before making edits. Person and Transactions with invalid fields will be discarded before the application starts.<br>
+
+Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data files only if you are confident that you can update it correctly.
+</div>
+
+<div markdown="block" class="alert alert-danger" style="text-align: justify;">:exclamation: **Important**: 
+In addition to the stated criteria for duplicates, when editing through the data files, if a new person or transaction entry has the same `id` as an existing person or transaction in the addressbook.json or transactionbook.json respectively, it will be discarded. Additionally, the `personId` in transactions.json must match the `id` of a person in addressbook.json.
+
+If you must edit existing entries' `id` or create new entries through the data files, please ensure their `id` fields follow the [UUID](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html) format (Users may explore using [UUID generators](https://www.uuidgenerator.net/version7) to create unique `id` values for new entries). Failing to follow this guideline may cause the app to behave in unexpected ways.
+
+The `id` field in both persons and transactions is essential for maintaining [referential integrity](https://intelligent-ds.com/blog/what-is-referential-integrity) within the address and transaction books, are intended for internal reference. These `id` link transactions to their respective persons and vice versa.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
