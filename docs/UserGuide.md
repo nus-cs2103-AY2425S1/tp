@@ -107,6 +107,8 @@ Adds a person to the address book.
 
 - A person can have any number of appointments (including 0).
 
+- A person's sex is not limited to Male/Female/Other to provide you with more flexibility.
+
 - Fields in square brackets (e.g. `[ap/APPOINTMENT]`) are optional.
 
   </box>
