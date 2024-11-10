@@ -236,10 +236,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-`find` command will overwrite an existing person filter state.
-</div>
-
 Examples:
 
 * `find John` returns `john` and `John Doe`
@@ -274,7 +270,7 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-`filterTxn` command will overwrite an existing transaction filter state.
+The filtered condition remains active until another `filterTxn` command is issued or the transaction list is explicitly reset using `listTxn`.
 </div>
 
 Examples:<br>
@@ -421,7 +417,7 @@ _Details coming soon ..._
 4. **Email Validation Allows Certain Invalid Formats**: The current email validation allows some entries that may not be valid email formats. For instance, "123@123" is accepted even though it lacks a fully qualified domain. This occurs because the validation does not strictly enforce the requirement for a complete domain structure (e.g., "123.com" instead of just "123"). Future improvements aim to refine this validation to align more closely with real-world email standards. Until then, users are advised to enter email addresses in standard formats (e.g., "username@example.com") to avoid unexpected behavior.
 5. **Phone Number Validation Lacks Support for International Formats**: The current phone number validation requires that phone numbers only contain numeric characters and be at least 3 digits long. However, this limitation may not adequately support users with international contacts, as it lacks flexibility for common international number formats that include country codes (e.g., +65 91234567 or +1 123-456-7890). This may pose a problem for students who frequently communicate with international friends. Future improvements aim to support international phone number formats by allowing optional country codes and special characters such as + and -. In the meantime, users are advised to store international numbers in a consistent, numeric-only format (e.g., without + or spaces) to ensure compatibility with the current app constraints.
 6. **Lack of Support for Multiple Phone Numbers per Contact**: Currently, each contact can only store a single phone number. This limitation may be inconvenient for users who need to save multiple numbers for a single person, such as a mobile and home number or alternative international contact numbers. Future enhancements may include support for storing multiple phone numbers for each contact. Until then, users who need to save additional phone numbers for a contact may consider creating a separate entry with a label in the contact’s name (e.g., "Alex Yeoh - Home" and "Alex Yeoh - Mobile")
-7. **Find command does not Retain Filtered State for Persons**: Currently, only `delete` command or any other non-person related commands retains filtered state for person, whereas `add` or `edit` commands reset the person filter. This may be inconvenient for users who need to add new user to a filtered person list. Further enhancement aims to retain person filtered state for `add` or `edit` commands. 
+7. **Find Command Does Not Persist Filtered State for Persons**: Currently, executing commands such as `add` or `edit` resets the person filter, causing the UI to refresh. This can be inconvenient for users wishing to execute commands to the existing filtered list of persons. Future enhancements aim to retain the person filter state for such commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
