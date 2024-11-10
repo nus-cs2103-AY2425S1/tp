@@ -18,7 +18,7 @@ public abstract class Order {
     private final LocalDateTime orderDate;
     private final List<? extends Product> items;
     private OrderStatus status;
-    private final Person person;
+    private Person person;
     private Person originalPerson;
     private final Remark remark;
 
@@ -47,6 +47,10 @@ public abstract class Order {
      */
     public Person getPerson() {
         return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Person getOriginalPerson() {
