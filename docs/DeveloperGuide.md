@@ -6,15 +6,15 @@ title: Developer Guide
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
 3. [Design](#design)<br>
-  3.1. [Architecture](#architecture)
-  3.2. [UI component](#ui-component)
-  3.3. [Logic component](#logic-component)
-  3.4. [Model component](#model-component)
-  3.5. [Storage component](#storage-component)
-  3.6. [Common classes](#common-classes)
-4. [Implementation](#implementation)
-  4.1. [Undo/redo feature](#undoredo-feature)
-    4.1.1. [Implementation](#implementation)
+  3.1. [Architecture](#architecture)<br>
+  3.2. [UI component](#ui-component)<br>
+  3.3. [Logic component](#logic-component)<br>
+  3.4. [Model component](#model-component)<br>
+  3.5. [Storage component](#storage-component)<br>
+  3.6. [Common classes](#common-classes)<br>
+4. [Implementation](#implementation)<br>
+  4.1. [Undo/redo feature](#undoredo-feature)<br>
+    4.1.1. [Implementation](#implementation)<br>
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-opss)
 6. [Appendix: Requirements](#appendix-requirements)
   6.1. [Product scope](#product-scope)
