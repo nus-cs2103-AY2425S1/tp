@@ -436,7 +436,7 @@ Use case ends.
 * **Use Case**: UC06 - Add an Order under a Customer
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
-    * A new pending order will be added under the specified customer, if input parameters are valid.
+  * A new pending order will be added under the specified customer, if input parameters are valid.
 
 **MSS**
 
