@@ -77,7 +77,7 @@ management applications.
 
    - `deletecc 1` : Deletes the 1st concert contact shown in the current concert contact list.
 
-   - `clear` : Deletes all contacts.
+   - `clear` : Deletes all entries from ConcertPhonebook.
 
    - `findp n/alice bob charlie r/organiser` : Finds person(s) named either `Alice`, `Bob` or `Charlie` with
      an `organiser` role from the ConcertPhonebook.
