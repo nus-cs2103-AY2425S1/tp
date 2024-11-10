@@ -865,3 +865,4 @@ This is an example of the result of the enhancement:
 
     How we plan to implement this is to allow users to use the `delete` command in the history view. The user can specify the index of the call to delete. For example, `delete 1` will delete the first call in the call history. The `delete` command will remain unchanged, if the user is on the person list view.
 7. **Place cursor at the back of the command text after navigating command history:** Currently, when the user presses the `UP` or `DOWN` arrow key to navigate to the previous/next command, the cursor is placed at the front of the command text. We plan to change this behaviour such that the cursor is placed at the back of the command text after navigating the command history. This will allow users to continue typing the command without having to move the cursor to the back of the command box. This also aligns with the behaviour of most command-line interfaces.
+8. 
