@@ -145,9 +145,9 @@ they should make sense on their own without depending on other components)
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103-F13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="600" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -306,14 +306,14 @@ and the **Actor** is the `user`, unless specified otherwise)
 1.  User requests to list contacts
 2.  TalentConnect shows a list of contacts
 3.  User requests to delete a specific contact in the list
-4.  TalentConnect deletes the contacts
-5.  TalentConnect returns an updated list of contacts along with success message.
+4.  TalentConnect deletes the contact
+5.  TalentConnect returns an updated list of contacts along with a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The contact list is empty.
 
   Use case ends.
 
@@ -323,14 +323,60 @@ and the **Actor** is the `user`, unless specified otherwise)
 
       Use case resumes at step 2.
 
+**Use case: Delete job**
+
+**MSS**
+
+1. User requests to list jobs
+2. TalentConnect shows a list of jobs
+3. User requests to delete a specific job in the list
+4. TalentConnect deletes the job and unmatches all contacts matched to the job
+5. TalentConnect returns an updated list of jobs and contacts along with a success message
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The job list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+     * 3a1. TalentConnect shows an error message.
+
+       Use case resumes at step 2
+
+**Use case: Delete company**
+
+**MSS**
+
+1. User requests to list companies
+2. TalentConnect shows a list of companies
+3. User requests to delete a specific company in the list
+4. TalentConnect deletes the company and deletes all jobs associated with the company
+5. TalentConnect returns an updated list of companies, jobs, and contacts along with a success message
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The company list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. TalentConnect shows an error message.
+
+      Use case resumes at step 2
+
 **Use case: Screen a job listing**
 
 **MSS**
 
 1.  User requests to list job listings
 2.  TalentConnect shows a list of job listings
-3.  User requests to screen all contact based on the requirements of a job listing
-4.  TalentConnect return a list of contacts that fits the job requirements
+3.  User requests to screen all contacts based on the name of a job listing
+4.  TalentConnect returns a list of contacts that fits the job's name
 
     Use case ends.
 
@@ -354,7 +400,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 
 **MSS**
 
-1. User requests to add contact.
+1. User requests to add a contact.
 2. TalentConnect returns an updated list of contacts with a success message.
    Use case ends.
 
@@ -365,6 +411,22 @@ and the **Actor** is the `user`, unless specified otherwise)
     * 1a1. TalentConnect shows an error message.
   
       Use case ends. 
+
+**Use case: Add job**
+
+**MSS**
+
+1. User requests to add a job.
+2. TalentConnect returns an updated list of jobs with a success message.
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given parameters are invalid.
+
+    * 1a1. TalentConnect shows an error message.
+
+      Use case ends.
 
 **Use case: Add a company**
 
@@ -402,9 +464,8 @@ and the **Actor** is the `user`, unless specified otherwise)
 **MSS**
 
 1. User requests to list companies.
-2. User requests to view a company.
-3. TalentConnect selects the targeted company.
-4. TalentConnect filters the contact and job lists to show those associated with company.
+2. User requests to view all jobs and contacts associated with a company.
+3. TalentConnect filters the contact and job lists to show those associated with company.
 
     Use case ends.
 
@@ -418,7 +479,7 @@ and the **Actor** is the `user`, unless specified otherwise)
     
         Use case resumes at step 2.
 
-* 4a. The list is empty.
+* 3a. Either one or both lists are empty.
     
     Use case ends.
 
@@ -462,9 +523,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
