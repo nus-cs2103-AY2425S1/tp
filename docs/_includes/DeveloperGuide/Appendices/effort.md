@@ -1,49 +1,17 @@
-### Difficulty Level
+#### Difficulty Level
+Compared to iP (rated 10/20), this project rates at 17/20 due to:
 
-Overall, compared to iP, if iP was considered a 10/20, then this project would be a 17/20.
+- **2 points** for comprehensive UG and DG documentation, providing detailed explanations of each feature, use case, and design decision.
+- **2 points** for extensive refactoring in a large codebase. Approximately 17,000 lines of code were added/modified to improve modularity and maintainability through reusable components, simplifying development in later stages.
+- **2 points** for implementing complex validation and equality checks. Significant effort was spent on robust validation across various input fields, handling edge cases thoroughly.
+- **1 point** for collaborative development and effective Git workflows, including pull requests, reviews, and conflict resolution.
 
-- **2 points** for ensuring comprehensive User Guide (UG) and Developer Guide (DG) documentation (much more effort needed in documentation than iP). We invested considerable effort in making the documentation thorough, offering clear explanations of each feature, use case, and design decision.
-- **2 points** for extensive code refactoring in a large and complex codebase to enhance developer experience, modularity, and maintainability. We added approximately 17000 lines of code, carefully restructuring the codebase to introduce reusable components. This refactoring simplified development in the mid-to-late stages and will facilitate easier future development and debugging.
-- **2 points** for designing and implementing thorough equality checks, validation logic, etc. Much more time was required for validation of fields like names and other inputs. Implementing and testing these validations to ensure robustness across different input types demanded careful handling of edge cases and error conditions. This was vastly different from iP where there were not many validation checks required.
-- **1 point** for collaborative development and version control management. Coordinating among team members in a large codebase posed additional difficulties in managing merge conflicts and synchronizing code changes. We employed best practices in Git workflows, including pull requests, reviews, and conflict resolution, which required strong teamwork and communication.
+#### Additional Complexity in Transaction Features
+Much more effort was spent on implementing transaction features in SpleetWaise compared to the AB3 features.
 
-### Challenges Faced
+One example is the `find` command in AB3 vs. `filterTxn` in SpleetWaise. In AB3, `find` only filters by name using a single `NameContainsKeywordsPredicate` class. In SpleetWaise, `filterTxn` filters transactions by multiple parameters (e.g., description, amount, status, person) in any combination. This required a modular `FilterPredicate` system, resulting in seven `*FilterPredicate` classes and a `FilterCommandPredicate` wrapper, each with its own test cases. This approach reduced code complexity and duplication by reusing `FilterPredicate` classes in the UI.
 
-1. **GUI Testing**:
-   The prominent challenge faced was trying to get UI testing to work using Monocle, as Monocle support ended at JDK 12. We spent a couple of days diagnosing why the headless testing environment on GitHub Actions kept failing.
-
-2. **Refactoring**:
-   Refactoring the codebase to make it more modular and easier to maintain was a challenge as it required a lot of effort and time, especially when the majority of the AB3 codebase was tightly coupled.
-
-3. **Working with a Large Codebase**:
-   The large codebase made it difficult to understand and make changes without breaking other parts of the code. Reusable components were not well-defined, and the codebase was not modular.
-
-### Effort Required
-
-1. We spent significant effort refactoring the codebase to make it more modular and easier to maintain.
-
-2. We spent a lot of time adhering to defensive coding practices to ensure that the codebase was robust and less prone to bugs, even going to the extent of writing tests for the GUI, even though it was optional.
-
-3. We spend a lot more time implementing a feature compared to AB3, as the features were more complex.
-   One prominent example would be `find` command in AB3 vs `findTxn` command in SpleetWaise
-
-   In the specification of the `find` command, only the Names parameters are used to filter the list of person. This 
-   was easily done using a single class called `NameContainsKeywordsPredicate`
-   Meanwhile in the specification of the `filterTxn` command, it required the ability to filter by multiple 
-   different parameters such as by description, amount, status, person and in any combination. This lead to the 
-   creation of a modular filter predicate system where new `*FilterPredicate` classes can be easily added. This 
-   implementation method resulted in the current 7 FilterPredicate classes and a FilterCommandPredicate to tight the 
-   different Predicates together. This also meant that for each `*FitlerPredicate` classes has their corresponding test
-   cases to write as well.
-   This is just one case that more effort was placed in implementing a Spleetwaise feature compared to AB3.
-
-   One benefit from the above implementation is that some of the FilterPredicate classes is reused which helps to 
-   reduce code complexity and duplicate code in the UI side of SpleetWaise.
-
-### Achievements of the Project
-
-1. **Successful Feature Implementation**: We delivered nearly all planned features for the MVP, including the core functionalities of managing transactions such as adding, editing, and deleting transactions. Filtering and searching transactions were also implemented, which were not planned initially.
-
-2. **Comprehensive Documentation**: Our UG and DG provide detailed information for users and developers, supporting long-term use and maintenance.
-
-3. **Modular Codebase with Thorough Test Cases**: Through extensive refactoring, we transformed the codebase into a more modular structure, making future enhancements easier to manage and reducing technical debt. Our code coverage is above 90% for the core functionalities.
+#### Achievements of the Project
+1. **Feature Implementation**: Delivered core transaction management features, including filtering and searching.
+2. **Comprehensive Documentation**: UG and DG support long-term use and maintenance.
+3. **Modular Codebase with High Test Coverage**: Achieved a modular structure with over 90% code coverage for core functionalities, reducing technical debt.

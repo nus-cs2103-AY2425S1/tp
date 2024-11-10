@@ -1,24 +1,37 @@
-Team Size: 5
+**Team Size: 5**
 
 ### 1. Enhance Usability of Search Feature
-    
-Search related commands such as `find` and `filterTxn` could be more intuitive by allowing partial matches and relaxing constraints on keywords. For instance, we aim to improve `find` so users can find contacts based on partial matches for not just `names`, but also `phone numbers`,`email`, `addresses`, `remark`, `tags`, etc. Similarly, the `filterTxn` command currently supports exacts matches for filter by `amount`, `person`, `date`, `status`, and `category`; only `description` support partial matching. We plan to explore partial matching for other parameters such as the `day`, `month`, `year` in `date`, making it easier for users to find transactions with similar or related keywords.
 
-### 2. Enhance Specificity in Error Message
+1.1 **Improve `find` Command for Partial Matching**  
+Allow partial matches in `find` for various fields, including `names`, `phone numbers`, `emails`, `addresses`, `remarks`, and `tags`. This makes it easier for users to locate contacts even if they don’t have exact matches.
 
-Currently, error messages may lack specificity, such as in the case of duplicate transactions - stating "Transaction already exists in the transaction book" without further details. We plan to enhance error messages to provide clear reasons for the error, helping users correct errors faster. For example, specify "Transaction already exists in the transaction book: duplicate fields with description, date and amount."
+1.2 **Enhance `filterTxn` Command for Partial Matching Across Parameters**  
+Explore partial matching in `filterTxn` for parameters like `amount`, `person`, `date` (day, month, year), `status`, and `category`, enabling users to search transactions with related keywords.
+
+### 2. Enhance Specificity in Error Messages
+
+2.1 **Improve Duplicate Transaction Error Message**  
+Provide detailed information in duplicate transaction error messages, specifying duplicate fields (e.g., description, date, and amount) to help users resolve conflicts faster.
 
 ### 3. Enhance Input Validation
 
-- phone number validation will be updated to accept international formats, including country codes, spaces and special characters like "+" and "-". This will allow users to store numbers in formats such as "+65 91234567" or "+1-123-456-7890," facilitating the addition of more phone numbers.
-- tags and categories could also benefit from more flexible input validation as they currently do not support special characters. We plan to extend input validation to allow a broader range of special characters in both tags and categories. For instance, users could use categories like "#Business_Trip" or categories like "Food & Beverage".
-- email validation in SpleetWaise currently accepts formats that lack a full domain structure (e.g., "123@123"). To align with standard email validation rules, we plan to enhance email validation to enforce a fully qualified domain structure (e.g., “username@example.com”) to prevent invalid email formats. This will help users enter correct email addresses.
+3.1 **International Phone Number Format Support**  
+Update phone number validation to accept international formats, including country codes and special characters (e.g., "+", "-"). This allows users to store numbers in formats like "+65 91234567" or "+1-123-456-7890".
 
-### 4. Implement Duplicate Detection for Supposed Case-Insensitive Fields
+3.2 **Flexible Input Validation for Tags and Categories**  
+Allow special characters in tags and categories, enabling users to create categories such as "#Business_Trip" or "Food & Beverage" for better organization.
 
-Currently, SpleetWaise treats inputs for fields such as `names`, `email`, `tags`, etc. as case-sensitive, which could lead to duplicates (e.g., “John Doe” and “john doe” are treated as separate entries). We plan to implement case-insensitive matching for such fields to be able to warn users of duplicate entries such that when a potential duplicate is detected based on case differences, we will provide a prompt allowing users to confirm or discard the duplicate entry.
+3.3 **Enhanced Email Validation for Full Domain Structure**  
+Enforce email validation to require a fully qualified domain (e.g., “username@example.com”) to prevent invalid formats, ensuring more reliable email entries.
+
+### 4. Implement Duplicate Detection for Case-Insensitive Fields
+
+4.1 **Case-Insensitive Duplicate Detection**  
+Implement case-insensitive matching for fields like `names`, `emails`, and `tags`. Prompt users to confirm or discard duplicate entries if similar entries (e.g., “John Doe” and “john doe”) are detected.
 
 ### 5. UI Enhancements for Improved User Experience
-To make SpleetWaise more intuitive and visually appealing, we plan to implement several UI enhancements. These updates will include clearer differentiator for transaction statuses (e.g., green for done, red for not done), and optimised spacing/padding/margin for readability. Additionally, we will improve the layout of contact and transaction details by grouping related fields or adding field labels such as for remark, making information easier to locate and review. These enhancements aim to create a more user-friendly interface.
 
-These enhancements aim to improve usability, error handling, and functionality, enhancing the overall SpleetWaise experience for users.
+5.1 **Transaction Status Differentiation and Spacing Improvements**  
+Add color indicators for transaction statuses (e.g., green for done, red for not done) and optimize spacing for readability. Group related fields and add labels to improve information layout, making it easier for users to navigate and review details.
+
+These enhancements address search functionality, error handling, input validation, duplicate detection, and user interface improvements, collectively enhancing SpleetWaise’s usability and functionality.
