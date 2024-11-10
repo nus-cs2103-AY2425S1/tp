@@ -456,6 +456,8 @@ Views the details of a wedding.
 - **Notes**:
     - Keyword can be the wedding name or client's name.
     - If multiple matches are found, the system will prompt for index.
+    - Wedding list will be truncated to the matched wedding(s).
+    - Use `list` to view all weddings again.
 - **Information Displayed**:
     - Wedding name, client details, date, venue.
     - Assigned vendors.
