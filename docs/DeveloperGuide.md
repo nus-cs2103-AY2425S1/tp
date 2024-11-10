@@ -407,12 +407,12 @@ otherwise)
 
 - **3a.** The command format is incorrect (e.g., index not provided).
   - **3a1.** AddressBook displays an error message:
-    ```
+    `
     Invalid command format! 
     delete: Deletes the person identified by the index number used in the displayed person list.
     Parameters: INDEX (must be a positive integer)
     Example: delete 1
-    ```
+    `
   - **Use case resumes at Step 2.**
 
 - **4a.** The contact index is invalid or out of bounds.
@@ -494,7 +494,7 @@ otherwise)
   - **Interaction Details**: Verifies that the interaction details are provided and are non-empty, allowing the Salesperson to record free-form notes about the interaction, such as the nature, location, or purpose.
 3. Upon successful validation, AddressBook logs the interaction details in the contact’s profile. If a date is provided, it is also stored with the log entry.
 4. AddressBook displays a success message confirming the operation:
-   ```
+   `
    Added history to Person: William Go; Phone: 96341234; Email: william.go@example.com; Address: Blk 34 Bishan St 23, #07-45; Remark: Looking to purchase condo; Birthday: 1975-12-30; Remark: Looking to purchase condo; Tags: [buyer]; DateOfCreation: 2024-01-22; History: Date of Creation: 2024-01-22
    [2024-02-05]:
      [2024-02-05] Negotiated condo deal
@@ -502,7 +502,7 @@ otherwise)
      [2024-03-03] Follow-up on condo purchase
    ; PropertyList: Property List:
    Property at 246 Sentosa Cove, Sentosa (Condo): 180.00 sqm, 3 bed, 3 bath - $3000000.00
-   ```
+   `
 5. The contact’s interaction history is updated to include the new log entry, making it accessible for future reference and review.
 
    **Use case ends.**
@@ -513,14 +513,14 @@ otherwise)
 - **2a.** The `index` is of invalid format (not a positive integer).
   - **2a1.** The system displays an error message:
     ```
-    Invalid command format!
-    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-    Two usage formats are supported:
-    1. To mark a person as favourite: Specify the index of the person in the displayed list.
-       Parameters: INDEX (must be a positive integer)
-       Example: favourite 1
-    2. To sort all favourite persons to the top: Use the command without any parameters.
-       Example: favourite
+     Invalid command format!
+     favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
+     Two usage formats are supported:
+     1. To mark a person as favourite: Specify the index of the person in the displayed list.
+        Parameters: INDEX (must be a positive integer)
+        Example: favourite 1
+     2. To sort all favourite persons to the top: Use the command without any parameters.
+        Example: favourite
     ```
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
