@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.StudentId;
 
@@ -43,10 +44,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() || argMultimap.getValue(PREFIX_PHONE).isPresent()
+                || argMultimap.getValue(PREFIX_EMAIL).isPresent() || argMultimap.getValue(PREFIX_ADDRESS).isPresent()
+                || argMultimap.getValue(PREFIX_COURSE).isPresent() || argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+
             String[] modules = argMultimap.getValue(PREFIX_MODULE).get().split(" ");
             if (modules.length != 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
+
             editPersonDescriptor.setModuleChanges(new Module(modules[0].toUpperCase()),
                     new Module(modules[1].toUpperCase()));
         } else {

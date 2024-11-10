@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 
 import java.util.List;
 
@@ -19,16 +20,14 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified by the Student ID used in the displayed person list,\n"
-            + "or deletes a module from the person's module list.\n"
-            + "Parameters: "
-            + "ID\n"
-            + "or: "
-            + "ID MODULE_KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": 2 possible usages\n"
+            + "1. Deletes the student identified by the Student ID used in the displayed person list.\n"
+            + "    Parameters: ID\n"
+            + "    Example: " + COMMAND_WORD + " "
             + "12345678\n"
-            + "or: " + COMMAND_WORD + " "
+            + "2. Deletes a module from the person's module list.\n"
+            + "    Parameters: ID " + PREFIX_MODULE + "MODULE\n"
+            + "    Example: " + COMMAND_WORD + " "
             + "12345678 m/CS2103T";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
