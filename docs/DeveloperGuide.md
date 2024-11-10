@@ -31,7 +31,6 @@ title: Developer Guide
     * [Deleting a client](#deleting-a-client)
 
 
------------------------------------------------------------------------------------------------------------------
 ---
 
 ## **Acknowledgements**
@@ -40,7 +39,8 @@ This project was developed from [AddressBook-Level3](https://github.com/se-edu/a
 
 ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
 as well as the JavaDocs for code written by BuffWuff1712
---------------------------------------------------------------------------------------------------------------------
+
+---
 
 ## **Setting Up, Getting Started**
 
@@ -290,52 +290,52 @@ Moreover, they can keep track of house visits via an events management system.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                 | I want to …​                                                | So that I can…​                                               |
-| -------- | --------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------- |
-| `* * *`  | new user                                | see usage instructions                                      | refer to instructions when I forget how to use the App        |
-| `* * *`  | user                                    | add a contact with their information                        | view them later                                               |
-| `* * *`  | user                                    | delete a client                                             | remove entries that I no longer need                          |
-| `* * *`  | user                                    | use a search bar to find my contact                         | locate details without going through the entire list          |
-| `* * *`  | user                                    | edit current contact details                                | keep the details updated                                      |
-| `* * *`  | user                                    | search via tags                                             | filter by different groups of people                          |
-| `* * *`  | user                                    | partially fill contacts                                     | add people who do not want to give full information           |
-| `* * *`  | user                                    | find contacts using their names                             | view their contact details easily                             |
-| `* * *`  | user with many things to remember       | add remarks/notes to some users                             | remember things when I look up their contacts                 |
-| `* *`    | user                                    | know some suggestions of types of tags                      | keep track of client preferences and interactions             |
-| `* *`    | user                                    | set reminders linked to contacts                            | follow up with clients on time                                |
-| `* *`    | user                                    | have an undo feature when editing or deleting a contact     | prevent accidental loss of information                        |
-| `* *`    | new user                                | see a guide on what features there are and how to use them  | know what to do with the application                          |
-| `* *`    | user                                    | press [TAB] to auto-complete commands                       | not waste time typing the full command                        |
-| `* *`    | user                                    | find commands by typing part of it                          | not have to remember exact commands                           |
-| `* *`    | user                                    | press [TAB] to auto-suggest attributes                      | not waste time typing full command                            |
-| `* *`    | user                                    | see multiple attributes in the command box                  | know available commands without referring to help guide       |
-| `* *`    | user                                    | press [TAB] to auto-suggest values                          | save time figuring out command types                          |
-| `* *`    | user                                    | have appropriate colour highlighting for each attribute     | see what I input more easily                                  |
-| `* *`    | user                                    | see different colours for each attribute                    | classify information more easily                              |
-| `* *`    | user                                    | see error messages clearly                                  | know what went wrong with my input                            |
-| `* *`    | user                                    | see the exact reason an error is caused                     | input the correct command without wasting time                |
-| `* *`    | user with many contacts                 | tag certain contacts to show at the top                     | find them easily with minimal steps                           |
-| `* *`    | user with a busy schedule               | set reminders and see upcoming events                       | remind myself and stay on track                               |
-| `* *`    | forgetful user                          | quickly reuse my last searches and view search history      | quickly trace back my activity                                |
-| `* *`    | new user                                | explore all features and follow a guide                     | be oriented to the functionalities                            |
-| `* *`    | user with many different friend groups  | manage all my tags                                          | better organize my contacts                                   |
-| `* *`    | user who likes to categorise everything | choose different colours for my tags                        | they don't all look the same                                  |
-| `* *`    | impatient user                          | find and sort multiple tags at once                         | not have to search for each tag slowly                        |
-| `* *`    | user                                    | sort my contacts in different ways                          | view contacts in different ways                               |
-| `* *`    | user                                    | add and customise my own tags                               | personalise my address book                                   |
-| `* *`    | user                                    | link property listings to specific contacts                 | know who to market units to quickly                           |
-| `*`      | user                                    | merge duplicate contacts                                    | keep my address book clean and organised                      |
-| `*`      | user                                    | export my contacts to a CSV file                            | back up or share my contact list                              |
-| `*`      | beginner                                | know some suggestions of types of tag                       | have an idea on how to sort my customers                      |
-| `*`      | user                                    | put my deleted contacts in a recycle bin                    | keep my contacts clean and restore them if it was an accident |
-| `*`      | user                                    | auto-complete or suggest commands if multiple are available | complete commands more easily                                 |
-| `*`      | user                                    | use "fuzzy searching" when using "find" command             | not need to remember the exact words                          |
-| `*`      | user with many social accounts          | save and link to contact social pages and media handles     | connect with clients on social media easily                   |
-| `*`      | user who changes devices often          | export and import contacts on different devices easily      | not save everything manually again when I change devices      |
-| `*`      | user with many groups of friends        | know who the contacts I have put a particular tag on        | organise events                                               |
-| `*`      | user with many hobbies                  | remove the tag for contacts easily                          | remove their tags if not useful anymore                       |
-| `*`      | user                                    | search up other contact information other than name         | find contacts based on other information                      |
-| `*`      | user with many contacts                 | find and search contact besides the name                    | find contacts more easily with different kinds of input       |
+| Priority | As a …​                                 | I want to …​                                                | So that I can…​                                              |
+| -------- |-----------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | new user                                | see usage instructions                                      | refer to instructions when I forget how to use the app       |
+| `* * *`  | user                                    | add a client with their information                         | view them later                                              |
+| `* * *`  | user                                    | delete a client                                             | remove entries that I no longer need                         |
+| `* * *`  | user                                    | use a search bar to find my client                          | locate details without going through the entire list         |
+| `* * *`  | user                                    | edit current client details                                 | keep the details updated                                     |
+| `* * *`  | user                                    | search via tags                                             | filter by different groups of people                         |
+| `* * *`  | user                                    | partially fill client details                               | add people who do not want to give full information          |
+| `* * *`  | user                                    | find clients using their names                              | view their client details easily                             |
+| `* * *`  | user with many things to remember       | add remarks/notes to some clients                           | remember things when I look up clients                       |
+| `* *`    | user                                    | know some suggestions of types of tags                      | keep track of client preferences and interactions            |
+| `* *`    | user                                    | set reminders linked to clients                             | follow up with clients on time                               |
+| `* *`    | user                                    | have an undo feature when editing or deleting a contact     | prevent accidental loss of information                       |
+| `* *`    | new user                                | see a guide on what features there are and how to use them  | know what to do with the application                         |
+| `* *`    | user                                    | press [TAB] to auto-complete commands                       | not waste time typing the full command                       |
+| `* *`    | user                                    | find commands by typing part of it                          | not have to remember exact commands                          |
+| `* *`    | user                                    | press [TAB] to auto-suggest attributes                      | not waste time typing full command                           |
+| `* *`    | user                                    | see multiple attributes in the command box                  | know available commands without referring to help guide      |
+| `* *`    | user                                    | press [TAB] to auto-suggest values                          | save time figuring out command types                         |
+| `* *`    | user                                    | have appropriate colour highlighting for each attribute     | see what I input more easily                                 |
+| `* *`    | user                                    | see different colours for each attribute                    | classify information more easily                             |
+| `* *`    | user                                    | see error messages clearly                                  | know what went wrong with my input                           |
+| `* *`    | user                                    | see the exact reason an error is caused                     | input the correct command without wasting time               |
+| `* *`    | user with many clients                  | tag certain clients to show at the top                      | find them easily with minimal steps                          |
+| `* *`    | user with a busy schedule               | set reminders and see upcoming events                       | remind myself and stay on track                              |
+| `* *`    | forgetful user                          | quickly reuse my last searches and view search history      | quickly trace back my activity                               |
+| `* *`    | new user                                | explore all features and follow a guide                     | be oriented to the functionalities                           |
+| `* *`    | user with many different friend groups  | manage all my tags                                          | better organize my clients                                   |
+| `* *`    | user who likes to categorise everything | choose different colours for my tags                        | they don't all look the same                                 |
+| `* *`    | impatient user                          | find and sort multiple tags at once                         | not have to search for each tag slowly                       |
+| `* *`    | user                                    | sort my clients in different ways                          | view clients in different ways                               |
+| `* *`    | user                                    | add and customise my own tags                               | personalise my address book                                  |
+| `* *`    | user                                    | link property listings to specific clients                 | know who to market units to quickly                          |
+| `*`      | user                                    | merge duplicate clients                                    | keep my address book clean and organised                     |
+| `*`      | user                                    | export my clients to a CSV file                            | back up or share my contact list                             |
+| `*`      | beginner                                | know some suggestions of types of tag                       | have an idea on how to sort my customers                     |
+| `*`      | user                                    | put my deleted clients in a recycle bin                    | keep my clients clean and restore them if it was an accident |
+| `*`      | user                                    | auto-complete or suggest commands if multiple are available | complete commands more easily                                |
+| `*`      | user                                    | use "fuzzy searching" when using "find" command             | not need to remember the exact words                         |
+| `*`      | user with many social accounts          | save and link to contact social pages and media handles     | connect with clients on social media easily                  |
+| `*`      | user who changes devices often          | export and import clients on different devices easily      | not save everything manually again when I change devices     |
+| `*`      | user with many groups of friends        | know who the clients I have put a particular tag on        | organise events                                              |
+| `*`      | user with many hobbies                  | remove the tag for clients easily                          | remove their tags if not useful anymore                      |
+| `*`      | user                                    | search up other contact information other than name         | find clients based on other information                      |
+| `*`      | user with many clients                 | find and search contact besides the name                    | find clients more easily with different kinds of input       |
 
 ### Use cases
 
