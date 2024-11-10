@@ -249,7 +249,7 @@ This section describes some noteworthy details on how certain features are imple
 
 **Target user profile**: A Business owner managing a small business who frequently procures goods from suppliers.
 
-**Persona**: Ms. Balakrishnan is a business owner of a small convenience store (mama shop) located in tampines. She finds it difficult to track her procurements, and is bad with numbers.
+**Persona**: Ms. Balakrishnan is a business owner of a small convenience store (mama shop) located in Tampines. She finds it difficult to track her procurements, and is bad with numbers.
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
