@@ -16,32 +16,32 @@
 2. [**About**](#2-about)
 3. [**Starting HR Helper**](#3-starting-hr-helper)
 4. [**Features of HR Helper**](#4-features-of-hr-helper)
+   
+    4.1 [**Authentication**](#4-1-authentication)
+    
+    4.2 [**Viewing help**](#4-2-viewing-help-help)
 
-   4.1 [**Authentication**](#41-authentication-)
+    4.3 [**Adding an employee**](#4-3-adding-an-employee-add)
 
-   4.2 [**Viewing help**](#42-viewing-help--help)
+    4.4 [**Listing all employees**](#4-4-listing-all-employees-list)
 
-   4.3 [**Adding an employee**](#43-adding-an-employee--add)
+    4.5 [**Counting employees**](#4-5-counting-employees-count)
 
-   4.4 [**Listing all employees**](#44-listing-all-employees--list)
+    4.6 [**Editing an employee**](#4-6-editing-an-employee-edit)
+    
+    4.7 [**Locating employee by name**](#4-7-locating-employees-by-name-find)
 
-   4.5 [**Counting employees**](#45-counting-employees--count)
+    4.8 [**Deleting an employee**](#4-8-deleting-an-employee-delete)
 
-   4.6 [**Editing an employee**](#46-editing-an-employee--edit)
+    4.9 [**Sorting employees**](#4-9-sorting-employees-sort)
 
-   4.7 [**Locating employee by name**](#47-locating-employees-by-name--find)
+    4.10 [**Favoriting an employee**](#4-10-favoriting-an-employee-favorite)
 
-   4.8 [**Deleting an employee**](#48-deleting-an-employee--delete)
+    4.11 [**Clearing all entries**](#4-11-clearing-all-entries-clear)
 
-   4.9 [**Sorting employees**](#49-sorting-employees--sort)
+    4.12 [**Exiting HR Helper**](#4-12-exiting-hr-helper-exit)
 
-   4.10 [**Favoriting an employee**](#410-favoriting-an-employee--favorite)
-
-   4.11 [**Clearing all entries**](#411-clearing-all-entries--clear)
-
-   4.12 [**Exiting HR Helper**](#412-exiting-hr-helper--exit)
-
-   4.13 [**Employee details window**](#413-employee-details-window)
+    4.13 [**Employee details window**](#4-13-employee-details-window)
 
 5. [**Command Summary**](#5-command-summary)
 6. [**FAQ**](#6-faq)
