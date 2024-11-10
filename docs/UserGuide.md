@@ -157,10 +157,14 @@ Adds a member to Hall Pointer.
 
 ### Listing all members : `list`
 
-Shows a list of all members in Hall Pointer.
+Shows a list of all members registered in Hall Pointer.
 
 **Format:** `list`
 
+**Example:**
+-`list` shows all members in Hall Pointer.
+
+![result for 'list'](images/listCommandResult.png)
 ---
 
 ### Updating a member : `update_member`
@@ -225,7 +229,7 @@ Deletes the specified member from Hall Pointer.
 
 **Examples:**
 
-- `list_members` followed by `delete_member 2` deletes the 2nd member in Hall Pointer.
+- `list` followed by `delete_member 2` deletes the 2nd member in Hall Pointer.
 - `find_members Betsy` followed by `delete_member 1` deletes the 1st member in the results of the `find` command.
 
 ---
@@ -252,7 +256,7 @@ Adds a session to Hall Pointer and associates it with specified members.
 
 **Examples:**
 
-- `list_members` followed by `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3` adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with the members at indexes 1 and 3 in the displayed list.
+- `list` followed by `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3` adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with the members at indexes 1 and 3 in the displayed list.
 
 ---
 
@@ -288,7 +292,7 @@ Deletes a session associated with one or more members in Hall Pointer.
 
 **Examples:**
 
-- `list_members` followed by `delete_session s/Rehearsal m/1 m/3` Deletes the session named "Rehearsal" for the members at indexes 1 and 3 in the displayed list.
+- `list` followed by `delete_session s/Rehearsal m/1 m/3` Deletes the session named "Rehearsal" for the members at indexes 1 and 3 in the displayed list.
 
 ---
 
