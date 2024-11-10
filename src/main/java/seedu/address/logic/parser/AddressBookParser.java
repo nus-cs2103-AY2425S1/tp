@@ -46,6 +46,8 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_TOO_LONG);
         }
 
+        assert(userInput.length() <= MAX_LENGTH);
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "\n"
