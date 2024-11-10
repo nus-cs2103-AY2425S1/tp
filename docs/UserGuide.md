@@ -454,11 +454,11 @@ Deletes the specified tag(s) from the specified contact.
 
 </div>
 
-**Format 2**: `deletetag ALL t/TAG [t/MORE_TAG]…​`
+**Format 2**: `deletetag all t/TAG [t/MORE_TAG]…​`
 
 | Parameter Name | Description                                                               | Required   |
 |----------------|---------------------------------------------------------------------------|------------|
-| `ALL`          | Indicates that the deletion operation applies to all contacts in the list | Compulsory |
+| `all`          | Indicates that the deletion operation applies to all contacts in the list | Compulsory |
 | `t/TAG`        | Tag to be deleted from every contact in the list associated with the tag  | Compulsory |
 | `t/MORE_TAG`   | More tags to be deleted                                                   | Optional   |
 
