@@ -8,7 +8,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,8 +15,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
-import seedu.address.model.wedding.Wedding;
-import seedu.address.model.wedding.WeddingName;
 
 /**
  * Represents a command to add tags to an existing person in the address book.
@@ -42,6 +39,7 @@ public class TagAddCommand extends Command {
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added Tag(s) '%1$s' to Contact: '%2$s'." + "\n"
             + "Contact: '%2$s' has been added to Wedding(s): '%1$s'.";
     public static final String MESSAGE_DUPLICATE_TAGS = "Contact '%1$s' already has the Tag(s) '%2$s'.";
+    public static final String MESSAGE_EMPTY = "";
     public static final String MESSAGE_PERSON_DOESNT_EXIST = "Contact: '%1$s' does not exist in the address book.";
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "Tag(s): '%1$s' does not exist as a Wedding yet."
             + "\n"
@@ -66,6 +64,8 @@ public class TagAddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
                 .filter(person -> person.getName().fullName.equalsIgnoreCase(name.toString()))
                 .toList();
@@ -76,7 +76,7 @@ public class TagAddCommand extends Command {
 
         Person personToEdit = matchingPersons.get(0);
 
-        String message = handleWeddingDoesntExist(model, tagsToAdd);
+        String message = model.messageWeddingDoesNotExist(tagsToAdd);
 
         Set<Tag> editedTags = handleDuplicateTags(personToEdit);
 
@@ -124,21 +124,21 @@ public class TagAddCommand extends Command {
         Set<Tag> tagsInBoth = new HashSet<>(personToEdit.getTags());
         Set<Tag> tagsInNeither = new HashSet<>(tagsToAdd);
 
-        // if all tags in og person matches the tags to add, means all tags to be added
-        // are duplicates, so don't go inside the loop
+        // If all tags in og person matches the tags to add, means all tags to be added
+        // Are duplicates, so don't go inside the loop
         if (!personToEdit.getTags().containsAll(tagsToAdd)) {
             tagsInBoth.retainAll(tagsToAdd); // duplicates that we don't want to add
             tagsInNeither.removeAll(tagsInBoth); // new tags minus the duplicates that we want to add
 
             if (tagsInBoth.isEmpty() && !tagsToAdd.isEmpty()) {
-                // if there are no duplicates, this is a clean addition
+                // If there are no duplicates, this is a clean addition
                 return String.format(MESSAGE_ADD_TAG_SUCCESS, Messages.tagSetToString(tagsToAdd),
                         Messages.getName(editedPerson));
-            } else { // if there are some duplicates
-                // gets the tags that we actually want to add
+            } else { // If there are some duplicates
+                // Gets the tags that we actually want to add
                 String nonDuplicateTagsExist = String.format(MESSAGE_ADD_TAG_SUCCESS + "\n",
                         Messages.tagSetToString(tagsInNeither), Messages.getName(editedPerson));
-                // gets the duplicate tags that we dont want to add
+                // Gets the duplicate tags that we dont want to add
                 String duplicateTagsExist = String.format(MESSAGE_DUPLICATE_TAGS,
                         Messages.getName(editedPerson), Messages.tagSetToString(tagsInBoth));
                 return nonDuplicateTagsExist + duplicateTagsExist;
@@ -150,7 +150,7 @@ public class TagAddCommand extends Command {
     }
 
     /**
-     * Handles duplicate tags as inputted by the user.
+     * Handles duplicate tags as input by the user.
      * Checks if any of the tags from user input matches existing tags in the
      * original Person.
      * Matching tags are added to a separate set that keeps track of duplicate tags.
@@ -177,36 +177,5 @@ public class TagAddCommand extends Command {
         }
 
         return mergedTags;
-    }
-
-    /**
-     * Generates message based on whether tag can be added, which depends on whether wedding exists or not.
-     *
-     * @param model current Model containing necessary wedding address book.
-     * @param editedTags Set of tags that exist as a wedding as well.
-     * @return String message stating whether tag exists as a wedding or not.
-     * @throws CommandException if none of the weddings corresponding to the tags exist.
-     */
-    private String handleWeddingDoesntExist(Model model, Set<Tag> editedTags) throws CommandException {
-        List<Wedding> weddingList = model.getWeddingFromTags(editedTags);
-
-        if (weddingList.isEmpty()) {
-            Set<Tag> tagsDontExist = new HashSet<>(editedTags);
-            editedTags.removeAll(editedTags);
-            throw new CommandException(String.format(MESSAGE_WEDDING_DOESNT_EXIST,
-                    Messages.tagSetToString(tagsDontExist), Messages.tagSetToString(tagsDontExist)));
-        }
-
-        if (weddingList.size() < editedTags.size()) {
-            Set<Tag> weddingSet = weddingList.stream().map(Wedding::getWeddingName)
-                            .map(WeddingName::toString).map(Tag::new).collect(Collectors.toSet());
-            Set<Tag> tagsDontExist = new HashSet<>(editedTags);
-            editedTags.retainAll(weddingSet);
-            tagsDontExist.removeAll(weddingSet);
-            return String.format(MESSAGE_WEDDING_DOESNT_EXIST, Messages.tagSetToString(tagsDontExist),
-                    Messages.tagSetToString(tagsDontExist));
-        }
-
-        return "";
     }
 }

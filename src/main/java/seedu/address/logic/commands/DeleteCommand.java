@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -39,8 +40,7 @@ public class DeleteCommand extends Command {
     private final String name;
 
     /**
-     * Creates a DeleteCommand to delete the Person with the specified {@code Name}
-     * @param name Name of the person to delete
+     * Creates a DeleteCommand to delete the Person with the specified {@code Name}.
      */
     public DeleteCommand(String name) {
         this.name = name.trim();
@@ -49,6 +49,8 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
 
         if (name.isEmpty()) {
             throw new CommandException(MESSAGE_MISSING_NAME);

@@ -21,12 +21,22 @@ public class ListWeddingCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+
+        return new CommandResult(generateSuccessMessage(model));
+    }
+
+    /**
+     * Returns {@code String} message result of ListCommand executed on {@code Model}.
+     */
+    public String generateSuccessMessage(Model model) {
         int numberOfWeddings = model.getWeddingBook().getWeddingList().size();
-        String numberOfEvents = ", there are currently " + numberOfWeddings + " weddings in your wedding book";
+
         if (numberOfWeddings == 0) {
-            return new CommandResult(MESSAGE_EMPTY);
+            return MESSAGE_EMPTY;
         }
-        return new CommandResult(MESSAGE_SUCCESS + numberOfEvents);
+
+        String numberOfEvents = ", there are currently " + numberOfWeddings + " weddings in your wedding book";
+        return MESSAGE_SUCCESS + numberOfEvents;
     }
 }
 

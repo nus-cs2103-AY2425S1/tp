@@ -308,6 +308,12 @@ public class AddWeddingCommandTest {
         public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String messageWeddingDoesNotExist(Set<Tag> editedTags) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void clearAllPersonTags() {
             throw new AssertionError("This method should not be called.");

@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.TagAddCommand.MESSAGE_EMPTY;
+import static seedu.address.logic.commands.TagAddCommand.MESSAGE_WEDDING_DOESNT_EXIST;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,11 +19,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 
 /**
@@ -267,6 +272,7 @@ public class ModelManager implements Model {
             set.add(editedPerson);
         }
     }
+
     @Override
     public void deleteTagsWithWedding(Wedding weddingToDelete) {
         Set<Person> weddingParticipants = weddingToDelete.getParticipants();
@@ -307,6 +313,7 @@ public class ModelManager implements Model {
     public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
         List<String> predicate = tags
                 .stream().map(Tag::getTagName).collect(Collectors.toList());
+
         List<Wedding> list = new ArrayList<>();
 
         for (Wedding wedding : getFilteredWeddingList()) {
@@ -337,23 +344,56 @@ public class ModelManager implements Model {
         Set<Tag> currentTags = new HashSet<>(personToEdit.getTags());
 
         deletePersonInWedding(personToEdit, currentTags);
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getJob(), Collections.emptySet());
         setPerson(personToEdit, editedPerson);
+
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return editedPerson;
     }
+
+    @Override
+    public String messageWeddingDoesNotExist(Set<Tag> editedTags) throws CommandException {
+        List<Wedding> weddingList = getWeddingFromTags(editedTags);
+
+        if (weddingList.isEmpty() && !editedTags.isEmpty()) {
+            Set<Tag> tagsDontExist = new HashSet<>(editedTags);
+
+            editedTags.removeAll(editedTags);
+
+            throw new CommandException(String.format(MESSAGE_WEDDING_DOESNT_EXIST,
+                    Messages.tagSetToString(tagsDontExist), Messages.tagSetToString(tagsDontExist)));
+        } else if (weddingList.size() < editedTags.size()) {
+            Set<Tag> weddingSet = weddingList.stream().map(Wedding::getWeddingName)
+                    .map(WeddingName::toString).map(Tag::new).collect(Collectors.toSet());
+            Set<Tag> tagsDontExist = new HashSet<>(editedTags);
+
+            editedTags.retainAll(weddingSet);
+            tagsDontExist.removeAll(weddingSet);
+
+            return String.format(MESSAGE_WEDDING_DOESNT_EXIST, Messages.tagSetToString(tagsDontExist),
+                    Messages.tagSetToString(tagsDontExist));
+        }
+
+        return MESSAGE_EMPTY;
+    }
+
     @Override
     public void clearAllPersonTags() {
         for (Person person : addressBook.getPersonList()) {
             Set<Tag> currentTags = new HashSet<>(person.getTags());
+
             deletePersonInWedding(person, currentTags);
+
             Person personToDelete = new Person(person.getName(), person.getPhone(),
                     person.getEmail(), person.getAddress(), person.getJob(), Collections.emptySet());
             setPerson(person, personToDelete);
         }
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
+
     @Override
     public void clearAllWeddingParticipants() {
         for (Wedding wedding : weddingBook.getWeddingList()) {
