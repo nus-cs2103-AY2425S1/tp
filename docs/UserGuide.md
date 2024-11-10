@@ -133,7 +133,7 @@ Optional fields can be omitted and the command will still be executed successful
 
 #### Prefix Types
 
-The prefixes used in **EZSTATE** are universal across all commands <br> _(i.e. have the same constraints and remarks)_
+The prefixes used in **EZSTATE** are universal across all commands _(i.e. have the same constraints and remarks)_.
 
 | Prefix | Meaning | Constraints                                                                                                                                                          | Remarks                                                                                           | Valid                                                                                   | Invalid |
 |--------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|---------|
