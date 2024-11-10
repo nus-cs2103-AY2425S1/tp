@@ -5,12 +5,12 @@ at the National University of Singapore. While optimised for use via a Command L
 ## Table of Contents
 1. [Quick start](#quick-start)
 2. [Features](#features)
-3. [Person commands](#persons)
-4. [Event commands](#events)
-5. [More features](#more-features)
-6. [FAQ](#faq)
-7. [Known issues](#known-issues)
-8. [Command summary](#command-summary)
+   * [Person commands](#persons)
+   * [Event commands](#events)
+   * [Miscellaneous features](#miscellaneous-features)
+3. [FAQ](#faq)
+4. [Known issues](#known-issues)
+5. [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
 
@@ -92,8 +92,8 @@ A person can have zero or more roles.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com r/athlete`
+* `add n/Betsy Crowe p/98213132 e/betsycrowe@example.com r/volunteer`
 
 ### Listing all persons : `list`
 
@@ -123,7 +123,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -154,7 +154,7 @@ Examples:
 ## Events
 
 ### Adding an event : `addevent`
-Format: `addevent sp/SPORT t/Faculty 1 t/Faculty 2 d/LocalDateTime v/Venue [pa/PARTICIPANTS]…​`
+Format: `addevent sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/PARTICIPANTS]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An event can have zero or more participants.
@@ -166,7 +166,7 @@ Examples:
 
 ### Editing an event : `editevent`
 
-Format: `editevent INDEX sp/SPORT t/Faculty 1 t/Faculty 2 d/LocalDateTime v/Venue [pa/PARTICIPANTS]…​`
+Format: `editevent INDEX sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/PARTICIPANTS]…​`
 
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -204,14 +204,14 @@ Format: `listevent`
 
 Finds all events whose names or attributes contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
 
-Format: `findevent KEYWORD [MORE_KEYWORDS]`
+Format: `findevent KEYWORD [MORE_KEYWORDS]…​`
 
 * The search is case-insensitive. e.g `usc` will match `Usc`
 * The order of the keywords does not matter. e.g. `USC Chess` will match `Chess USC`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Utown Usc` will return Events containing `Utown Chess`, `Usc Table Tennis`
 
-## More Features
+## Miscellaneous Features
 ### Clearing all entries : `clear`
 
 Clears all entries from the database. But remember, they're gone forever.
