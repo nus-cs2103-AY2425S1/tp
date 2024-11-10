@@ -15,20 +15,29 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer.<br>
+If you don't have Java, see this installation [guide](https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-1/tp/releases).<br>
+  Scroll down until you see this part. Click on `tahub.jar` to download it.
+  ![img](images/UgQuickStartDownload.png)
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+
+3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.<br>
+  The _home folder_ is where other files such as the data file will be created.
+
+
+4. Open a command terminal and `cd` into the folder you put the jar file in.
+
+
+5. Type `java -jar addressbook.jar` and hit enter.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
 
-   * `list` : Lists all students.
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
 
    * `add n/John Doe p/98765432 e/johnd@example.com c/CS2103T;CS2101` : Adds a student named `John Doe` to TAHub.
 
@@ -38,7 +47,8 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
