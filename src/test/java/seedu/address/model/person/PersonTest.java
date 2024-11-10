@@ -102,13 +102,9 @@ public class PersonTest {
 
         // different car -> returns false
         editedAlice = new PersonBuilder(ALICE).withCar("SH8942L",
-                                                        "11111111111111111",
-                                                       "Toyota",
-                                                      "Corolla").build();
+                "11111111111111111", "Toyota", "Corolla").build();
         Person editedAliceDifferentCar = new PersonBuilder(ALICE).withCar("SH8942L",
-                                                                        "22222222222222222",
-                                                                        "Honda",
-                                                                        "Civic").build();
+                "22222222222222222", "Honda", "Civic").build();
         assertFalse(editedAliceDifferentCar.equals(editedAlice));
 
         // same person, but 1 has car and the other does not -> returns false
@@ -128,11 +124,9 @@ public class PersonTest {
         Person aliceWithCar = new PersonBuilder(ALICE).withCar("SH8942L", "11111111111111111",
                                                                 "Toyota", "Corolla").build();
         expected = Person.class.getCanonicalName() + "{name=" + aliceWithCar.getName() + ", phone="
-                                                    + aliceWithCar.getPhone()
-                                                    + ", email=" + aliceWithCar.getEmail()
-                                                    + ", address=" + aliceWithCar.getAddress()
-                                                    + ", issues=" + aliceWithCar.getIssues()
-                                                    + ", car=" + aliceWithCar.getCar() + "}";
+                + aliceWithCar.getPhone() + ", email=" + aliceWithCar.getEmail()
+                + ", address=" + aliceWithCar.getAddress() + ", issues=" + aliceWithCar.getIssues()
+                + ", car=" + aliceWithCar.getCar() + "}";
         assertEquals(expected, aliceWithCar.toString());
     }
 

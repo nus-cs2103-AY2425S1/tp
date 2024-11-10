@@ -86,8 +86,6 @@ public class AddClientCommandParserTest {
     /*
     * Test add client command with car details
     */
-
-
     public void parseAllFieldsPresentWithCarSuccess() {
         Person expectedPerson = new PersonBuilder(BOB_WITH_CAR).withIssues(VALID_ISSUE_FRIEND).build();
 
@@ -107,8 +105,8 @@ public class AddClientCommandParserTest {
     }
 
     /*
-        * Test add client command with invalid car details
-        */
+    * Test add client command with invalid car details
+    */
     @Test
     public void parseAllFieldsPresentWithInvalidCarFailure() {
         // invalid vin
@@ -137,8 +135,8 @@ public class AddClientCommandParserTest {
     }
 
     /*
-        * Test add client command with missing car details
-        */
+    * Test add client command with missing car details
+    */
     @Test
     public void parseAllFieldsPresentWithMissingCarDetailsFailure() {
         // missing vin

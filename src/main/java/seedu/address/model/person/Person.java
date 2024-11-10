@@ -33,8 +33,15 @@ public class Person {
     private boolean isServicing;
 
     private final Logger logger = LogsCenter.getLogger(Person.class);
+
     /**
      * Every field must be present and not null.
+     * Constructor for Person without Car
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param issues
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Issue> issues) {
         requireAllNonNull(name, phone, email, address, issues);

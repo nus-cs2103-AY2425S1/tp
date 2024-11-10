@@ -61,7 +61,7 @@
 
 <h1 style="color: #964B00;"> <i class="fas fa-book icon"></i> MATER User Guide </h1>
 
-Welcome to MATER, a **desktop app designed for efficient management of client and vehicle information in car workshops**. MATER is specially optimised for users who prefer quick interactions through a Graphical User Interface (GUI) while benefiting from the powerful speed of command-based navigation for faster workflows.
+Welcome to MATER, a **desktop app designed for efficient management of client and vehicle information in vehicle workshops in Singapore**. MATER is specially optimised for users who prefer quick interactions through a Graphical User Interface (GUI) while benefiting from the powerful speed of command-based navigation for faster workflows.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -112,14 +112,14 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
 <h2 style="color: #28B463;"> <i class="fas fa-rocket icon"></i> Quick Start</h2>
 
-1. **Check Your System**  
-   MATER requires **Java 17 or above** to run. If you’re unsure whether it’s installed, you can download it [here](https://www.java.com).
+1. **Check Your System**
+   MATER requires **Java 17 or above** to run. If you’re unsure whether it’s installed, you can download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-2. **Download MATER**  
-   Visit [this link](https://github.com/AY2425S1-CS2103T-T14-3/tp/releases) and download the latest version of MATER as a `.jar` file. This file is the program you’ll be opening each time you use MATER.
+2. **Download MATER**
+   Visit [this link](https://github.com/AY2425S1-CS2103T-T14-3/tp/releases) and download the latest version of MATER as a `.jar` file. The downloaded file is named mater.jar. This file is the program you'll be opening each time you use MATER.
 
-3. **Place the Downloaded File**  
-   Move the downloaded file to any folder on your computer where you want to keep MATER and its data. This will be your **MATER home folder**.
+3. **Place the Downloaded File**
+   Move the downloaded file to any folder on your computer where you want to keep MATER and its data. This will be your **MATER home folder** where the application and its data are stored.
 
 4. **Open MATER**
 
@@ -127,20 +127,22 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
      - Go to the folder where you saved the `.jar` file.
      - **On Windows or Linux**: Double-click the `.jar` file to open it.
      - **On Mac**: Right-click the `.jar` file, select “Open With,” and choose Java.
+     - If MATER does not open, you may need to open it from the terminal (see Option 2).
 
-   - **Option 2: Open MATER from the Terminal**  
+   - **Option 2: Open MATER from the Terminal**
      - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
      - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
        ```shell
        cd path/to/your/folder
        ```
-     - Then, type the following command and press Enter:
+        - If you require help with the `cd` command, you can refer to this [link](https://www.digitalcitizen.life/command-prompt-how-use-basic-commands/) for a basic tutorial.
+     - Then, if the file name is mater.jar, run the application with the following command:
        ```shell
        java -jar mater.jar
        ```
      After a few seconds, the MATER window should appear on your screen, preloaded with sample data for you to explore.
 
-5. **Using MATER**  
+5. **Using MATER**
    MATER has a command box at the top where you can type in simple commands to manage your clients and their cars. Here are a few basic commands to get you started:
    - **View all clients**: Type `list` and press Enter to see a list of all clients.
    - **Add a client**: Type `add-client n/John Doe p/98765432 e/johnd@example.com a/123 Example Street` to add a new client named John Doe.
@@ -148,10 +150,8 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
    - **Clear all data**: Type `clear` to remove all clients from MATER.
    - **Exit the app**: Type `exit` to close MATER.
 
-6. **Where to Go Next**  
+6. **Where to Go Next**
    For more details on what MATER can do, scroll down to the [Features](#features) section of this guide to explore additional commands and features.
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -159,29 +159,34 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
 - **Client:** A person who uses the services of the workshop. In MATER, a client is someone whose personal details are stored and managed.
 - **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX1234C`, where:
-  - `X` represents an alphabet letter.
-  - `1234` represents a four-digit number.
-  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore).
-- **VIN (Vehicle Identification Number):** A unique 17-character alphanumeric code assigned to each vehicle by the manufacturer, used to identify individual motor vehicles.
+  - `XXX` represents 1 to 3 alphabet letters.
+  - `1234` represents a number up to 4-digits.
+  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore). Find the correct checksum [here](https://carplatemart.sg/simple-checksum/).
 - **Checksum Letter:** The final character in a VRN, calculated based on the other characters to ensure the VRN's validity.
+- **VIN (Vehicle Identification Number):** A unique 17-character alphanumeric code assigned to each vehicle by the manufacturer, used to identify individual motor vehicles.
 - **Issue:** A problem or maintenance task associated with a client's car. Issues can be recorded in MATER for tracking and management purposes.
 - **Command Line Interface (CLI):** A text-based user interface used to interact with MATER by typing commands into a console or terminal.
 - **Graphical User Interface (GUI):** A visual interface that allows users to interact with MATER through graphical icons and visual indicators.
-- **Command Prefixes:** Short codes used in commands to specify the type of data being entered. For example:
-  - `n/` for name
-  - `p/` for phone number
-  - `e/` for email address
-  - `a/` for address
-  - `vrn/` for Vehicle Registration Number
-  - `vin/` for Vehicle Identification Number
-  - `make/` for car make
-  - `model/` for car model
-  - `i/` for issue
+- **Command Prefixes:** Short codes used in [commands](#command-prefixes) to specify the type of data being entered.
 - **Index:** The numerical position of an item in a list, starting from 1. Used in commands like `edit` and `del-client` to specify which client to modify.
 - **Field:** An individual piece of data associated with a client or car (e.g., name, phone number, VIN).
 - **Optional Field:** A parameter in a command that is not required but can be provided to include additional information. Denoted by square brackets `[]` in command formats.
 
+--------------------------------------------------------------------------------------------------------------------
 
+<h2 style="color: #3498DB;" id="command-prefixes"> <i class="fas fa-keyboard icon"></i>Command Prefixes</h2>
+
+| Command Prefix | Data Type                  |
+|----------------|----------------------------|
+| `n/`           | Name                       |
+| `p/`           | Phone Number               |
+| `e/`           | Email Address              |
+| `a/`           | Address                    |
+| `vrn/`         | Vehicle Registration Number|
+| `vin/`         | Vehicle Identification Number |
+| `make/`        | Car Make                   |
+| `model/`       | Car Model                  |
+| `i/`           | Issue                      |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -196,7 +201,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 - **Items in square brackets are optional.**
   - e.g., `n/NAME [i/ISSUE]` can be used as `n/John Doe i/oil` or as `n/John Doe`.
 - **Items with `...` after them can be used multiple times, including zero times.**
-  - e.g., `[i/ISSUE]...` can be used as   (i.e., 0 times), `i/wheel`, `i/steering i/oil`, etc.
+  - e.g., `[i/ISSUE]...` can be used with no issues (i.e., 0 times), `i/wheel`, `i/steering i/oil`, etc.
 - **Parameters can be in any order.**
   - e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 - **Extraneous parameters for commands that do not take in parameters will be ignored.**
@@ -240,26 +245,33 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 | Parameter         | Requirements                                                                                                                                                                           | Explanation                                       |
 |-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| `n/NAME`          | Required; Must alphanumeric and be at most 40 characters; Must be unique                                                                                                               | Client's name.                                    |
+| `n/NAME`          | Required; Must contain only letters, numbers, and spaces; Must be at most 40 characters; Must be unique                                                                                                               | Client's name.                                    |
 | `p/PHONE_NUMBER`  | Required; Must be between 3 and 15 digits                                                                                                                                              | Client's phone number.                            |
 | `e/EMAIL`         | Required                                                                                                                                                                               | Client's email address.                           |
 | `a/ADDRESS`       | Required; Must be at most 80 characters                                                                                                                                                | Client's address.                                 |
 | `vrn/CAR_VRN`     | Optional; Required if adding a car; Must follow the [VRN format](#glossary), be valid and unique                                                                                       | Car's [Vehicle Registration Number](#glossary).   |
 | `vin/CAR_VIN`     | Optional; Required if adding a car; Must be a unique 17-character alphanumeric string                                                                                                  | Car's [Vehicle Identification Number](#glossary). |
 | `make/CAR_MAKE`   | Optional; Required if adding a car; First letter must be capitalised; Must be at most 40 characters; No spaces                                                                         | Car's make.                                       |
-| `model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                      | Car's model.                                      |
-| `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.                 |
+| `model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalised letter or a number; Must be at most 40 characters;                                                      | Car's model.                                      |
+| `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must contain only letters, numbers, and spaces (max 20 characters) | Issue(s) associated with the car.                 |
 
 **Notes:**
 
-- If adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided. `vrn` is validated by checksum and invalid `vrn` provided will be rejected by MATER.
+- When adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided.
+- `vrn` is validated using a [checksum letter](#glossary). Invalid `vrn` provided will be rejected by MATER.
 - If the client does not have a car, these fields should be omitted completely.
+
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field or unsure about the correct checksum letter for the `vrn` , you can use the following [link](https://carplatemart.sg/simple-checksum/) to verify if checksum letter for the `vrn` is correct.
+
+</box>
 
 <box type="tip" seamless>
 
 **Tip:**
 
-- A client can have any number of issues (including 0).
+- A client with a car can have any number of issues (including 0).
 - A client may be added with or without a car.
 
 </box>
@@ -300,6 +312,12 @@ del-client INDEX
   Deletes the 3rd client in MATER.
 
 
+<box type="info" seamless>
+
+**Note:** Checked-in clients can be deleted via `del-client`, to facilitate quicker removal of clients who are no longer using the workshop's services. However, this action will also remove their checked-in status and any associated data. Use with caution.
+
+</box>
+
 ---
 
 <h3 style="color: #1877F2;">Adding a Car to a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-car</span></h3>
@@ -322,12 +340,18 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 | `vrn/CAR_VRN`     | Required; Must follow the [VRN format](#glossary), be valid and unique                                  | Car's [Vehicle Registration Number](#glossary).                    |
 | `vin/CAR_VIN`     | Required; Must be a unique 17-character alphanumeric string                                             | Car's [Vehicle Identification Number](#glossary).                  |
 | `make/CAR_MAKE`   | Required; First letter must be capitalised; Must be at most 40 characters; No spaces                    | Car's make.                                                        |
-| `model/CAR_MODEL` | Required; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces | Car's model.                                                       |
+| `model/CAR_MODEL` | Required; First character is a capitalised letter or a number; Must be at most 40 characters; | Car's model.                                                       |
 
 **Notes:**
 
 - `vrn` is validated by checksum and invalid `vrn` provided will be rejected by MATER.
 - The client must not already have a car.
+
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field or unsure about the correct checksum letter for the `vrn` , you can use the following [link](https://carplatemart.sg/simple-checksum/) to verify if checksum letter for the `vrn` is correct.
+
+</box>
 
 **Examples:**
 
@@ -362,6 +386,12 @@ del-car INDEX
 
 - `del-car 1`
 
+<box type="info" seamless>
+
+**Note:** Checked-in clients' cars cannot be deleted via `del-car` to prevent accidental deletion of a car currently undergoing service. Please check the client out before deleting the car.
+
+</box>
+
 
 ---
 
@@ -372,7 +402,7 @@ Edits an existing client in MATER.
 **Format:**
 
 ```shell
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...
+edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...
 ```
 
 **Parameters:**
@@ -380,15 +410,15 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] 
 | Parameter         | Requirements                                                                                                                                                                           | Explanation                                                         |
 |-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
 | `INDEX`           | Required; Must be a positive integer                                                                                                                                                   | The [Index](#glossary) of the client in the displayed client list.  |
-| `n/NAME`          | Optional; Must alphanumeric and be at most 40 characters; Must be unique                                                                                                               | New name of the client.                                             |
-| `p/PHONE`         | Optional; Must be between 3 and 15 digits                                                                                                                                              | New phone number of the client.                                     |   
+| `n/NAME`          | Optional; Must contain only letters, numbers, and spaces; Must be at most 40 characters; Must be unique                                                                                                               | New name of the client.                                             |
+| `p/PHONE_NUMBER`         | Optional; Must be between 3 and 15 digits                                                                                                                                              | New phone number of the client.                                     |
 | `e/EMAIL`         | Optional                                                                                                                                                                               | New email address of the client.                                    |
 | `a/ADDRESS`       | Optional; Must be at most 80 characters                                                                                                                                                | New address of the client.                                          |
 | `vrn/CAR_VRN`     | Optional; Must follow [VRN format](#glossary), be valid and be unique                                                                                                                  | New [Vehicle Registration Number](#glossary) of the client's car.   |
 | `vin/CAR_VIN`     | Optional; Must be a unique 17-character alphanumeric string                                                                                                                            | New [Vehicle Identification Number](#glossary) of the client's car. |
 | `make/CAR_MAKE`   | Optional; First letter must be capitalised; Must be at most 40 characters; No spaces                                                                                                   | New make of the client's car.                                       |
-| `model/CAR_MODEL` | Optional; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                                                | New model of the client's car.                                      |
-| `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Updates list of the client's current issues.                        |
+| `model/CAR_MODEL` | Optional; First character is a capitalised letter or a number; Must be at most 40 characters;                                                                                | New model of the client's car.                                      |
+| `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must contain only letters, numbers, and spaces (max 20 characters) | Updates list of the client's current issues.                        |
 
 **Notes:**
 
@@ -396,6 +426,12 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] 
 - Existing values will be updated to the input values.
 - When editing issues, the existing issues of the client will be replaced with the new issues.
 - To remove all issues from the client, type `i/` without specifying any issues after it.
+
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field or unsure about the correct checksum letter for the `vrn` , you can use the following [link](https://carplatemart.sg/simple-checksum/) to verify if checksum letter for the `vrn` is correct.
+
+</box>
 
 **Examples:**
 
@@ -467,7 +503,7 @@ Finds clients whose names or car VRN contain any of the given keywords.
 **Format:**
 
 ```shell
-find KEYWORD [MORE_KEYWORDS]
+find KEYWORD [MORE_KEYWORDS]...
 ```
 
 **Parameters:**
@@ -535,6 +571,12 @@ The `correct as of` timestamp at the top right corner of the `view` window shows
 
 </box>
 
+
+<box type="info" seamless>
+
+**Workaround:** If certain details are obstructed in the `view` window, due to unusually large number of `issues`, users can close the window and reopen it using the `view` command to fix the issue. This issue is a planned enhancement for future versions of MATER.
+
+</box>
 
 ---
 
@@ -632,8 +674,8 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 | **Delete Car**    | `del-car INDEX`                                                                                                                  | `del-car 1`                                                                                                                                                                                                                                                                                                                                      |
 | **Check Clients** | `check INDEX`                                                                                                                    | `check 1`                                                                                                                                                                                                                                                                                                                                        |
 | **List Clients**  | `list`                                                                                                                           | `list`                                                                                                                                                                                                                                                                                                                                           |
-| **Edit Client**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `edit 1 p/91234567 e/e1234567@u.nus.edu`<br>`edit 2 n/Xiao Ming i/`                                                                                                                                                                                                                                                                              |
-| **Find Clients**  | `find KEYWORD [KEYWORD]...`                                                                                                      | `find John`<br>`find SJH9514P`<br>`find John SJH9514P`                                                                                                                                                                                                                                                                                           |
+| **Edit Client**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `edit 1 p/91234567 e/e1234567@u.nus.edu`<br>`edit 2 n/Xiao Ming i/`                                                                                                                                                                                                                                                                              |
+| **Find Clients**  | `find KEYWORD [MORE_KEYWORDS]...`                                                                                                      | `find John`<br>`find SJH9514P`<br>`find John SJH9514P`                                                                                                                                                                                                                                                                                           |
 | **View Client**   | `view INDEX`                                                                                                                     | `view 1`                                                                                                                                                                                                                                                                                                                                         |
 | **Clear**         | `clear`                                                                                                                          | `clear`                                                                                                                                                                                                                                                                                                                                          |
 | **Exit**          | `exit`                                                                                                                           | `exit`                                                                                                                                                                                                                                                                                                                                           |
