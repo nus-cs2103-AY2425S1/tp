@@ -119,6 +119,21 @@ public class Person {
     }
 
     /**
+     * Returns true if person has all tags in others.
+     */
+    public boolean hasAllTags(Set<Tag> others) {
+        boolean hasAll = true;
+        Iterator<Tag> iterator = others.iterator();
+        while (iterator.hasNext()) {
+            Tag other = iterator.next();
+            if (!this.hasTag(other.getTagName())) {
+                hasAll = hasAll && false;
+            }
+        }
+        return hasAll;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

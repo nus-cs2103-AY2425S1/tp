@@ -105,5 +105,4 @@ public interface Model {
      */
     void sortFilteredPersonList(String order, Boolean toSortBySchedule);
 
-    ObservableList<Person> getPersonList();
 }
