@@ -341,6 +341,8 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### Visual Features
 F.A.R.T has some handy visual cues that highlight certain clients.
 
