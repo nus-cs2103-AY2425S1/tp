@@ -103,7 +103,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API
+** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -159,7 +160,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API
+** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="890" />
 
@@ -186,7 +188,8 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API
+** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -216,13 +219,13 @@ Some commands such as `clear`, `cdelete` and `rdelete` prompts the user for conf
 How confirmation prompts work:
 
 * The `CommandResult` class now has different types:
-  * **`ORDINARY`**: A regular result, representing a command's success.
-  * **`SHOW_HELP`**: The help window should be shown to the user.
-  * **`EXIT`**: The app should exit.
-  * **`PROMPT`**: The app should prompt the user for confirmation.
-* There is a new `Supplier<CommandResult>` field in the `CommandResult` class, which will be applied when the user 
+    * **`ORDINARY`**: A regular result, representing a command's success.
+    * **`SHOW_HELP`**: The help window should be shown to the user.
+    * **`EXIT`**: The app should exit.
+    * **`PROMPT`**: The app should prompt the user for confirmation.
+* There is a new `Supplier<CommandResult>` field in the `CommandResult` class, which will be applied when the user
   confirms the prompt.
-* In commands that will prompt for confirmation, the `execute` method returns a `CommandResult` that contains an 
+* In commands that will prompt for confirmation, the `execute` method returns a `CommandResult` that contains an
   additional `Supplier<Command>` and prompt message.
 * The `LogicManager` detects if the result of a command is of the type `PROMPT`, and enters a state where it waits for
   a confirmation.
@@ -581,7 +584,7 @@ otherwise)
 
     * 3a1. System fills command box with empty command
 
-   Use case ends.
+  Use case ends.
 
 **Use case 09: Sort a [_client_] list by name**
 
@@ -740,7 +743,7 @@ Adding a _client_'s rental information while all _clients_ are being shown
 
 <box type="warning">
 
-**Prerequisite**: List all _clients_ using the `list` command and suppose 10 clients are displayed. Additionally, one of 
+**Prerequisite**: List all _clients_ using the `list` command and suppose 10 clients are displayed. Additionally, one of
 the clients already has a rental saved in the application with address of "Blk 321 Ang Mo Kio Ave 3, #09-123".<br>
 
 </box>
@@ -751,7 +754,7 @@ the clients already has a rental saved in the application with address of "Blk 3
 
 <box type="wrong">
 
-No rental information will be added to the client with index 99 as the client does not exist. Error details will be 
+No rental information will be added to the client with index 99 as the client does not exist. Error details will be
 displayed in the result display box.
 
 </box>
@@ -764,7 +767,7 @@ displayed in the result display box.
 
 <box type="wrong">
 
-No rental information will be added as the index of client is not provided in the command. Error details will be 
+No rental information will be added as the index of client is not provided in the command. Error details will be
 displayed in the result display box
 
 </box>
@@ -777,7 +780,7 @@ displayed in the result display box
 
 <box type="wrong">
 
-No rental information will be added as there already exist a rental with the same address. Error details will be 
+No rental information will be added as there already exist a rental with the same address. Error details will be
 displayed in the result display box.
 
 </box>
@@ -790,7 +793,7 @@ displayed in the result display box.
 
 <box type="success">
 
-A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan 
+A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan
 Street 11 #01-386"; rental start date, rental end date, rental monthly payment date, monthly rent amount, deposit amount
 and customers as "—" because they are not specified in the command.
 
@@ -817,8 +820,8 @@ be provided). Error details will be displayed in the result display box.
 
 <box type="success">
 
-A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan 
-Street 11 #01-386", rental start date as "01 Jan 2024" and rental end date as "30 Jun 2024"; rental monthly payment 
+A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan
+Street 11 #01-386", rental start date as "01 Jan 2024" and rental end date as "30 Jun 2024"; rental monthly payment
 date, monthly rent amount, deposit amount and customers as "—" because they are not specified in the command.
 
 </box>
@@ -827,12 +830,12 @@ date, monthly rent amount, deposit amount and customers as "—" because they ar
 
 <box type="info" seamless>
 
-**Test case 7**: `radd 1 a/508 Bishan Street 11 #01-386 s/01-01-2024` and 
+**Test case 7**: `radd 1 a/508 Bishan Street 11 #01-386 s/01-01-2024` and
 `radd 1 a/508 Bishan Street 11 #01-386 r/1 e/31-12-2024`<br>
 
 <box type="wrong">
 
-No rental information will be added to the client with index 1 as rental start date and rental end date are required to 
+No rental information will be added to the client with index 1 as rental start date and rental end date are required to
 be in the form of `dd/mm/yyyy`. Error details will be displayed in the result display box.
 
 </box>
@@ -845,8 +848,8 @@ be in the form of `dd/mm/yyyy`. Error details will be displayed in the result di
 
 <box type="success">
 
-A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan 
-Street 11 #01-386", monthly rent amount as "$4000" and deposit amount as "$8500"; rental start date, rental end date, 
+A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan
+Street 11 #01-386", monthly rent amount as "$4000" and deposit amount as "$8500"; rental start date, rental end date,
 rental monthly payment date and customers as "—" because they are not specified in the command.
 
 </box>
@@ -876,8 +879,8 @@ will be displayed in the result display box.
 
 <box type="success">
 
-A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan 
-Street 11 #01-386" and rental monthly payment date as "20"; rental start date, rental end date, monthly rent amount, 
+A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan
+Street 11 #01-386" and rental monthly payment date as "20"; rental start date, rental end date, monthly rent amount,
 deposit amount and customers as "—" because they are not specified in the command.
 
 </box>
@@ -890,7 +893,7 @@ deposit amount and customers as "—" because they are not specified in the comm
 
 <box type="wrong">
 
-No rental information will be added to the client with index 1 as rental monthly payment date are required to be an 
+No rental information will be added to the client with index 1 as rental monthly payment date are required to be an
 integer in the range of 1 to 31. Error details will be displayed in the result display box.
 
 </box>
@@ -903,8 +906,8 @@ integer in the range of 1 to 31. Error details will be displayed in the result d
 
 <box type="success">
 
-A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan 
-Street 11 #01-386" and customers as "Steven;David"; rental start date, rental end date, rental monthly payment date, 
+A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan
+Street 11 #01-386" and customers as "Steven;David"; rental start date, rental end date, rental monthly payment date,
 monthly rent amount and deposit amount as "—" because they are not specified in the command.
 
 </box>
@@ -917,9 +920,9 @@ monthly rent amount and deposit amount as "—" because they are not specified i
 
 <box type="success">
 
-A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan 
-Street 11 #01-386" and customers as "Steven, David;Jason Ong"; rental start date, rental end date, rental monthly 
-payment date, monthly rent amount and deposit amount as "—" because they are not specified in the command. Note that 
+A rental information will be added to the client with index 1. The rental information added has address of "508 Bishan
+Street 11 #01-386" and customers as "Steven, David;Jason Ong"; rental start date, rental end date, rental monthly
+payment date, monthly rent amount and deposit amount as "—" because they are not specified in the command. Note that
 "Steven, David" will be treated as one person, as we only recognized ";" as the separator for customer's name.
 
 </box>
@@ -933,8 +936,8 @@ payment date, monthly rent amount and deposit amount as "—" because they are n
 
 <box type="wrong">
 
-No rental information will be added to the client with index 1 as single customer does not need the ";" separator; and 
-for multiple customers, ";" separator is used in between names to separate the names, ";" should not be added anywhere 
+No rental information will be added to the client with index 1 as single customer does not need the ";" separator; and
+for multiple customers, ";" separator is used in between names to separate the names, ";" should not be added anywhere
 else. Error details will be displayed in the result display box.
 
 </box>
@@ -947,7 +950,7 @@ else. Error details will be displayed in the result display box.
 
 <box type="success">
 
-A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan 
+A rental information will be added to the client with index 1. The rental information added has address as "508 Bishan
 Street 11 #01-386"; rental start date, rental end date, rental monthly payment date, monthly rent amount, deposit amount
 and customers as "—", because no values are specified after their respective prefix.
 
@@ -1020,7 +1023,7 @@ Editing a _client_'s _rental information_.
 <box type="warning">
 
 **Prerequisite**: List all _clients_ using the `list` command and suppose 10 clients are displayed. The first client in
-the list has one rental information with address as "Blk 321 Ang Mo Kio Ave 3, #09-123", rental start date as 
+the list has one rental information with address as "Blk 321 Ang Mo Kio Ave 3, #09-123", rental start date as
 "01 Apr 2018", rental end date as "31 Dec 2024", rental monthly payment date as "15", monthly rent amount as "$2500.00",
 deposit amount as "$7500.00" and customers as "Jackson;Yummi"<br>
 
@@ -1045,7 +1048,7 @@ displayed in the result display box.
 
 <box type="wrong">
 
-No client's rental information will be edited as the client with index 1 (the first client) does not have a second 
+No client's rental information will be edited as the client with index 1 (the first client) does not have a second
 rental information. Error details will be displayed in the result display box.
 
 </box>
@@ -1058,7 +1061,7 @@ rental information. Error details will be displayed in the result display box.
 
 <box type="success">
 
-The first rental information of the first client will be edited, specifically address will be edited from "Blk 321 Ang 
+The first rental information of the first client will be edited, specifically address will be edited from "Blk 321 Ang
 Mo Kio Ave 3, #09-123" to "729 Woodlands Circle #01-47".
 
 </box>
@@ -1110,7 +1113,7 @@ No client's rental information will be edited as rental start date and rental en
 
 <box type="success">
 
-The first rental information of the first client will be edited, specifically monthly rent amount will be edited from 
+The first rental information of the first client will be edited, specifically monthly rent amount will be edited from
 "$2500.00" to "$4000.00" and deposit amount will be edited from "$7500.00" to "$8500.00".
 
 </box>
@@ -1124,8 +1127,8 @@ The first rental information of the first client will be edited, specifically mo
 
 <box type="wrong">
 
-No client's rental information will be edited as monthly rent amount and deposit amount are required to be a positive 
-integer (and including 0) and with exactly 2 decimal points if a decimal point is specified. Error details will be 
+No client's rental information will be edited as monthly rent amount and deposit amount are required to be a positive
+integer (and including 0) and with exactly 2 decimal points if a decimal point is specified. Error details will be
 displayed in the result display box.
 
 </box>
@@ -1191,8 +1194,8 @@ recognized ";" as the separator for customer's name.
 
 <box type="wrong">
 
-No client's rental information will be edited as single customer does not need the ";" separator; and for multiple 
-customers, ";" separator is used in between names to separate the names, ";" should not be added anywhere else. Error 
+No client's rental information will be edited as single customer does not need the ";" separator; and for multiple
+customers, ";" separator is used in between names to separate the names, ";" should not be added anywhere else. Error
 details will be displayed in the result display box.
 
 </box>
@@ -1248,11 +1251,11 @@ monthly payment date, monthly rent amount, deposit amount and customers will be 
 
 #### Find a [_clients_](#glossary-client)
 
-<!-- TODO!! @Nathan --> 
+<!-- TODO!! @Nathan -->
 
 #### Find a client's [_rental information_](#glossary-rental-information)
 
-<!-- TODO!! @Nathan --> 
+<!-- TODO!! @Nathan -->
 
 #### Deleting a [_client_](#glossary-client)
 
@@ -1286,7 +1289,7 @@ monthly payment date, monthly rent amount, deposit amount and customers will be 
         5. `list`
         6. `cdelete 2`
 
-    2. Test case (Steps 1 to 13 are performed sequentially): 
+    2. Test case (Steps 1 to 13 are performed sequentially):
         1. Step 1: Press up-arrow key on the keyboard.<br>
            Expected: `cdelete 2` is shown in the command box.
         2. Step 2: Press up-arrow key on the keyboard.<br>
@@ -1449,7 +1452,7 @@ Step 7: Enter `1075 Eunos Avenue 6 #01-171 ` at the end of the input command.<br
 
 <box type="success">
 
-Value of the input command changes from "radd a/" to "radd a/1075 Eunos Avenue 6 #01-171 " (Take note of the whitespace 
+Value of the input command changes from "radd a/" to "radd a/1075 Eunos Avenue 6 #01-171 " (Take note of the whitespace
 at the end of the input).
 
 </box>
@@ -1458,7 +1461,7 @@ Step 8: Press Tab key on the keyboard.<br>
 
 <box type="success">
 
-Value of the input command changes from "radd a/1075 Eunos Avenue 6 #01-171 " to 
+Value of the input command changes from "radd a/1075 Eunos Avenue 6 #01-171 " to
 "radd a/1075 Eunos Avenue 6 #01-171 a/".
 
 </box>
@@ -1474,12 +1477,11 @@ Value of the input command changes from "radd a/1075 Eunos Avenue 6 #01-171 a/" 
 
 </box>
 
-
 3. Autofills value for parameter.
 
 <box type="warning">
 
-**Prerequisites**: The input command is empty and user is trying to enter the command. Note that autofill values are 
+**Prerequisites**: The input command is empty and user is trying to enter the command. Note that autofill values are
 shared across all parameters and only applicable when there is no value for prefix yet.
 
 </box>
@@ -1563,7 +1565,6 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 </box>
 
-
 #### Sort all _clients_ by name
 
 1. Sorting the entire True Rental's database by name.
@@ -1592,14 +1593,6 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
     2. Test case: `exit`
        Expected: The application will exit and be closed safely.
 
-#### Saving data
-
-<!-- TODO!! @Anybody --> 
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ### Appendix: Future Enhancements
@@ -1608,18 +1601,21 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 <d-table>
 
-| Parameter        | Description           | Additional Constraints                                                                          | Examples               | 
-|------------------|-----------------------|-------------------------------------------------------------------------------------------------|------------------------|
-| `[NAME]`         | Client's name         | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;` | `Ravi S/O Ramasamy`    |
-| `[PHONE_NUMBER]` | Client's phone number | Accommodate country code, which includes, but not limited to `+65`.                             | `12345678901234567890` |
-| `[TAG]...`       | Client's tag          | Limit up to `20 characters`                                                                     | `12345678901234567890` |
+| Parameter        | Description            | Additional Constraints                                                                                                                                          | Examples               |
+|------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
+| `[NAME]`         | Client's name          | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`                                                                 | `Ravi S/O Ramasamy`    |
+| `[PHONE_NUMBER]` | Client's phone number  | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`             |
+| `[EMAIL]`        | Client's email address | Accommodate well-established email companies only.                                                                                                              | `test@gmail.com`       |
+| `[TAG...]`       | Client's tag           | Limit up to `20 characters`                                                                                                                                     | `12345678901234567890` |
 
 </d-table>
 
 #### `cedit` Command.
 
-The current version of `cedit` only supports replacing all tags with the updated tag provided by the `cedit` command.
-In the future, there will be an update to the `cedit` command, where the client is able to choose which tag to retain as well as which tag to edit.
+The current version of `cedit` only supports replacing **all tags** with the **updated tag** provided by the `cedit`
+command.
+In the future, there will be an update to the `cedit` command, where the client is able to choose which tag to **retain
+** as well as which tag to **edit**.
 
 #### \[Proposed\] Undo/redo feature
 
