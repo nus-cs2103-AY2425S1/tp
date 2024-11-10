@@ -92,6 +92,9 @@ The input fields of vendors and events have varying constraints and are as liste
 Note:
 * Regardless of the date format chosen during input, dates will be displayed in the application in the format `dd-mm-yyyy`.
 * Dates that are already past will still be accepted as inputs. This provides users the flexibility to continue tracking events even after their conclusion.
+* Some dates will be rejected even when correctly formatted as these dates **do not exist**. Examples include:
+  * `31-02-2024` : The month of `February` will never have `31` days.
+  * `10-13-2001` : There are only `12` months in a year.
 
 **Tags** : Tag inputs can:
 * contain alphanumeric characters, hyphens `-`, and underscores `_` only.
