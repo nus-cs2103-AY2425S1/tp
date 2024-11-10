@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Description {
     public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values but not more than 500"
-            + "characters";
+            + " characters";
 
     // Allow printable characters excluding control characters
     public static final String VALIDATION_REGEX = "^[\\p{Print}&&[^\\p{Cntrl}]]*$";
