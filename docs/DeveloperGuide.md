@@ -216,8 +216,7 @@ Additionally, certain command hints could benefit from more clarity on constrain
 - Enhanced Usage Hint for `edit` Command
   - Include guidance indicating that the rn/ and ra/ flags cannot be used simultaneously.
 
-**Status:** Scheduled for Future Release  
-**Rational:**
+**Status:** Scheduled for future release, as:
 1. The current error messages are functional and provide sufficient guidance for users. However, standardizing them will improve usability by minimizing confusion and ensuring consistent messaging.
 2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
 
