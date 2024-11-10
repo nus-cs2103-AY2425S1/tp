@@ -1,5 +1,6 @@
 ---
-# RealConnect User
+layout: page
+title: User Guide
 ---
 
 RealConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Real Connect can get your contact management tasks done faster than traditional GUI apps.
@@ -76,9 +77,9 @@ E.g. `addProperty`: `<Command> <Index> <X/parameter>`
 ##### Functional commands
 E.g. `help`: `<Command>`
 
-> X is a placeholder for prefixes
+> `X/` is a placeholder for prefixes
 
-Insert example command picture
+![Command Format](images/CommandFormat.png)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -432,16 +433,14 @@ None, as it is an automatic feature.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Parameter Requirements
-| Paramter | Requirement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example                                                                              |
-|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| Name     | Only Alpha-numeric                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | ❌ Shanmugam S/O Balakrishnan <br> ✅ Shanmugam Son of Balakrishnan<br/>✅ Chris Paul 3 |
-| Birthday | yyyy-mm-dd                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | ❌ 2021/09/09 <br>❌ 09-09 <br> ✅ 2021-09-09<br/>                                      |
-| Log Date | yyyy-mm-dd                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | ❌ 2021/09/09 <br>❌ 09-09 <br> ✅ 2021-09-09<br/>                                      |
-| Email    | local-part@domain<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: end with a domain label at least 2 characters long; have each domain label start and end with alphanumeric characters; have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | ❌ 1/@d10 <br> ❌ hello@a.c<br/>✅ 1@a.com<br/>✅ ho@gmail.com                           |
-| address  | No contraint (right-to-left scripts will be displayed left-to-right)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | ✅ 123 Orchard<br/> ✅ 乌节路 123 号<br/> ✅ 123 بستان                                      |
-
+| Parameter  | Requirement                                                                                                                                                                                                                      | Example                                                                                       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **Name**   | Only Alpha-numeric                                                                                                                                                                                                               | ❌ Shanmugam S/O Balakrishnan <br> ✅ Shanmugam Son of Balakrishnan <br> ✅ Chris Paul 3       |
+| **Birthday** | yyyy-mm-dd                                                                                                                                                                                                                        | ❌ 2021/09/09 <br> ❌ 09-09 <br> ✅ 2021-09-09                                                 |
+| **Log Date** | yyyy-mm-dd                                                                                                                                                                                                                        | ❌ 2021/09/09 <br> ❌ 09-09 <br> ✅ 2021-09-09                                                 |
+| **Email**   | local-part@domain <br> The local-part should only contain alphanumeric characters and these special characters (+_.-). The local-part may not start or end with special characters. <br> The domain name must: <br> - End with a domain label at least 2 characters long. <br> - Have each domain label start and end with alphanumeric characters. <br> - Consist of alphanumeric characters, separated only by hyphens, if any. | ❌ 1/@d10 <br> ❌ hello@a.c <br> ✅ 1@a.com <br> ✅ ho@gmail.com                                |
+| **Address** | No constraint (right-to-left scripts will be displayed left-to-right)                                                                                                                      | ✅ 123 Orchard <br> ✅ 乌节路 123 号 <br> ✅ 123 بستان                                        |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
