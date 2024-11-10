@@ -734,7 +734,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing all customers
 
-1. Listing all customers with or without aliases.
+1. Listing all customers with or without aliasing.
 
     1. Test case: `listcustomer` <br>
        Expected: All customers are listed. A success message shown in the status message.
@@ -822,7 +822,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all customers using the `listcustomer` command with at least 1 customer listed.
 
    2. Test case: `deletecustomer 1`<br>
-      Expected: First customer is deleted from the list. Details of the deleted contact shown in the status message.
+      Expected: First customer is deleted from the list. Details of the deleted customer shown in the status message.
 
    3. Test case: `deletecustomer 0`<br>
       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
@@ -890,7 +890,7 @@ testers are expected to do more *exploratory* testing.
    
 ### Listing all orders under a customer.
 
-1. Listing all orders with or without aliases.
+1. Listing all orders with or without aliasing.
 
     1. Prerequisites: At least 2 customers and at most 99 customers is displayed in the customer list.
    
@@ -1037,7 +1037,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect `unmarkorder` commands to try: `unmarkorder`, `unmarkorder x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. Reverting an order from a filtered list to pending status using command aliases.
+2. Reverting an order from a filtered list to pending status using the command alias.
 
     1. Prerequisites:
         - Prerequisites: Orders filtered using `filterorder completed` command with at least 1 order listed. <br>
@@ -1085,4 +1085,4 @@ testers are expected to do more *exploratory* testing.
     - **Problem:** Currently, we only detect the relevant prefix for each command and treat every other prefix as part of the input.
     - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
     - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used instead of treating it as part of the parameters while allowing users to key in prefix such as `n/` or `a/` via the use of special symbols such as `\`.
-    - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict the users from typing names with prefix such as `n/` or `a/` hence we will need to add the functionality to do it as well.
+    - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict the users from typing inputs with prefix such as `n/` or `a/` hence we will need to add the functionality to do it as well.
