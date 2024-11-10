@@ -527,6 +527,30 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a transaction to a client 
+
+1. Adding a transaction while all clients are being shown.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `addt 1 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
+       Expected: Transaction is added to first client. Details of transaction and the client transaction was added to shown in status message.
+
+    3. Test case: `addt 0 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
+       Expected: UI still shows the full client list. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect addt commands to try: `addt`, `addt x ...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+
+2. Adding a transaction in transactions view.
+
+    1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+    2. Test case: `addt 1 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
+       Expected: UI still shows the transactions list. Error details shown in the status message. Status bar remains the same.
+
+
 ### Listing transactions for a client
 
 1. Listing transactions while all clients are being shown.
