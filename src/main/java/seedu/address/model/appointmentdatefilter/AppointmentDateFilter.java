@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import seedu.address.model.healthservice.HealthService;
 
@@ -50,8 +51,9 @@ public class AppointmentDateFilter {
      */
     public static LocalDate parseDate(String date) throws DateTimeParseException {
         requireNonNull(date);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(date, formatter);
+        DateTimeFormatter strictFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd")
+            .withResolverStyle(ResolverStyle.STRICT);
+        return LocalDate.parse(date, strictFormatter);
     }
 
     /**
