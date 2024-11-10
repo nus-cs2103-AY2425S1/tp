@@ -85,6 +85,9 @@ Adds a contact to the address book.
 
 Format: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​`
 
+* A contact's role represents the job that they are applying for, 
+and is used when screening contacts with a certain job.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of skills (including 0)
 </div>
@@ -110,6 +113,12 @@ Examples:
 Adds a company to the address book.
 
 Format: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
+
+* The name of the company is case-insensitive when used to identify duplicates 
+and to associate jobs to companies.
+* The billing date is a number from 1 to 28 that signifies the day of the month
+(with reference to the start of the month) that a company will pay their
+employees' salaries.
 
 Examples:
 * `add company n/Google a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000`
