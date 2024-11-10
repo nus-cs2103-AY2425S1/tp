@@ -971,11 +971,18 @@ Team size: 5
      * e.g. "add -s n/John Doe & Sons p/98765432
 
 
-9. **Enhancement 9**: Better error message for invalid date or month in commands that require date input.
-   * **Description**: The current implementation does not provide a clear error message when an invalid date of a valid format is entered.
-   * e.g. "add -d on/32-01-2023 15:00 s/1 pro/bread q/500 g c/5.50"
-   * Error Message: DELIVERY_DATE_TIME should be in the format dd-MM-yyyy HH:mm and must not be blank.
+9. **Enhancement 9**: Better input checks for invalid date in commands that require date input.
+   * **Description**: The current implementation allows for certain invalid dates
+    because the LocalDateTime module automatically converts the date to the first previous valid date
+   * e.g. "add -d on/31-04-2023 15:00 s/1 pro/bread q/500 g c/5.50" (For months with less than 31 days,
+   the date is converted to the last day of the previous month)
+   * No error message is shown.
    * **Tasks**:
-     * We plan to provide a better error message for invalid date of a valid format in commands that require date input.
-     * e.g. "Error: Invalid date. Please enter a valid date in the format dd-MM-yyyy HH:mm."
+     * We plan to add better input checks for invalid dates in commands that require date input.
 
+
+10. **Enhancement 10**: Allow finding deliveries by date and time range.
+   * **Description**: The current implementation only allows finding deliveries by a single date and time.
+   * **Tasks**:
+     * We plan to allow users to find deliveries within a specified date and time range.
+     * e.g. "find -d aft/18-01-2023 12:00 bef/18-01-2023 18:00 stat/DELIVERED"
