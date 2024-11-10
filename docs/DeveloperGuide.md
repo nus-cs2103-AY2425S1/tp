@@ -297,6 +297,11 @@ How confirmation prompts work:
 * `LogicManager` also keeps track of the most recent `CommandResult`. When a confirmation is obtained, it will apply
   the supplier in the previous `CommandResult`.
 
+The sequence diagram below illustrates the interactions involved in confirmation prompts, taking the command `clear`
+as an example:
+
+<puml src="diagrams/ClearSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `clear` Command" />
+
 ### Importing and Exporting data
 
 The user is able to import data from and export data to external files.
