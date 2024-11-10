@@ -33,8 +33,8 @@ public class FindConcertContactCommand extends Command {
             + "and displays them as a list with index numbers.\n"
             + "The person or concert index, or both of them must be included.\n"
             + "Parameters: "
-            + "[" + PREFIX_PERSON + "PERSON_INDEX] "
-            + "[" + PREFIX_CONCERT + "CONCERT_INDEX]\n"
+            + "[" + PREFIX_PERSON + "PERSON_INDEX (must be a positive integer)] "
+            + "[" + PREFIX_CONCERT + "CONCERT_INDEX (must be a positive integer)]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PERSON + "1 "
             + PREFIX_CONCERT + "1";

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -18,6 +19,9 @@ import seedu.address.logic.commands.AddConcertContactCommand;
 public class AddConcertContactCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddConcertContactCommand.MESSAGE_USAGE);
+
+    private static final String MESSAGE_INVALID_INDEX_INPUT =
+            String.format(MESSAGE_INVALID_INDEX, AddConcertContactCommand.MESSAGE_USAGE);
 
     private AddConcertContactCommandParser parser = new AddConcertContactCommandParser();
 
@@ -38,11 +42,11 @@ public class AddConcertContactCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // negative index for person
         assertParseFailure(parser, " " + PREFIX_PERSON + "-5 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT,
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_INVALID_INDEX_INPUT);
 
         // zero index for person
         assertParseFailure(parser, " " + PREFIX_PERSON + "0 " + PREFIX_CONCERT + INDEX_FIRST_CONCERT,
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_INVALID_INDEX_INPUT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -55,19 +59,19 @@ public class AddConcertContactCommandParserTest {
     public void parse_invalidConcertInput_failure() {
         // negative index
         assertParseFailure(parser, " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "-3",
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_INVALID_INDEX_INPUT);
 
         // zero index
         assertParseFailure(parser, " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "0",
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_INVALID_INDEX_INPUT);
 
         // no input
         assertParseFailure(parser, " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT,
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_INVALID_INDEX_INPUT);
 
         // not integer
         assertParseFailure(parser, " " + PREFIX_PERSON + INDEX_FIRST_PERSON + " " + PREFIX_CONCERT + "a",
-                MESSAGE_INVALID_FORMAT);
+                MESSAGE_INVALID_INDEX_INPUT);
     }
 
     @Test

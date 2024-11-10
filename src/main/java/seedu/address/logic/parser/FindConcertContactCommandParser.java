@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
@@ -38,12 +39,14 @@ public class FindConcertContactCommandParser implements Parser<FindConcertContac
 
         Index indexP = null;
         if (argMultimap.getValue(PREFIX_PERSON).isPresent()) {
-            indexP = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON).get());
+            indexP = ParserUtil.parseIndexWithMessage(argMultimap.getValue(PREFIX_PERSON).get(),
+                    String.format(MESSAGE_INVALID_INDEX, FindConcertContactCommand.MESSAGE_USAGE));
         }
 
         Index indexC = null;
         if (argMultimap.getValue(PREFIX_CONCERT).isPresent()) {
-            indexC = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONCERT).get());
+            indexC = ParserUtil.parseIndexWithMessage(argMultimap.getValue(PREFIX_CONCERT).get(),
+                    String.format(MESSAGE_INVALID_INDEX, FindConcertContactCommand.MESSAGE_USAGE));
         }
 
         return new FindConcertContactCommand(indexP, indexC);
