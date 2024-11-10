@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AcademyAssist User Guide
+title: User Guide
 
 ---
 
