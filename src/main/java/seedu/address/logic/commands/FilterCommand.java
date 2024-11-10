@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -65,7 +66,7 @@ public class FilterCommand extends Command {
         List<Predicate<Person>> predicates = new ArrayList<>();
 
         if (name != null) {
-            predicates.add(new NameContainsKeywordsPredicate(Arrays.asList(name.toString().toLowerCase())));
+            predicates.add(new NameMatchesKeywordPredicate(Arrays.asList(name.toString().toLowerCase())));
         }
 
         if (role != null) {
