@@ -17,6 +17,7 @@
   used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
@@ -201,6 +202,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Implementation**
@@ -278,6 +280,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - Con: Possible for user to mistype the wrong number
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ### Delete Group feature
@@ -337,6 +340,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - Con: Possible for user to mistype the wrong number
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ### Undo/redo feature
@@ -400,6 +404,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - [DevOps guide](DevOps.md)
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
@@ -430,7 +435,7 @@ PlantUML, the lifeline continues till the end of diagram.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a ...        | I want to...                                  | So that I can...                                    |
-|----------|-----------------|-----------------------------------------------|-----------------------------------------------------|
+| -------- | --------------- | --------------------------------------------- | --------------------------------------------------- |
 | `* * *`  | disorganised TA | mark tasks                                    | keep track of what a group has completed            |
 | `* * *`  | disorganised TA | remove tasks after I wrongly added them       | correct my mistake                                  |
 | `* * *`  | new TA          | add tasks to groups                           | keep track of what task each group has              |
@@ -767,13 +772,14 @@ _{More to be added}_
 ### Glossary
 
 | Key Terms      | Definition                                                   |
-|----------------|--------------------------------------------------------------|
+| -------------- | ------------------------------------------------------------ |
 | Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
 | JAR            | Executable file containing Java classes and other resources. |
 | Prefix         | Keyword used in commands to specify the parameter type       |
 | Student Number | Unique identifier for a student                              |
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
@@ -1300,6 +1306,7 @@ testers are expected to do more _exploratory_ testing.
        application, which is the panel displaying the student list.
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
@@ -1322,9 +1329,18 @@ testers are expected to do more _exploratory_ testing.
 
 ### 1. Update Email Constraints
 
-Currently, our system only validates the `local-part` of an email is alphanumerical, the following special characters `_`, `.` 
+Currently, our system only validates the `local-part` of an email is alphanumerical, the following special characters `_`, `.`
 and does not start or end with special characters.
 
-#### Enhancement
+##### Enhancement
 
 We plan to enhance the validation such that it follows NUS' email constraints, i.e. in the format of a student's NUS ID or friendly email.
+
+### 2. Improve UI
+
+Currently, our system only supports showing a single display panel at one time.
+
+##### Enhancement
+
+We plan to split display panel into 3 that will display students, groups and tasks panels respectively.
+This will allow users to better see all information rather than toggling through each display panel.

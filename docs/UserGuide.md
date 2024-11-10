@@ -20,7 +20,8 @@ If you are on the PDF, use the table of contents below to navigate the site.
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 <div style="page-break-after: always;"></div>
 
 ## Quick start
@@ -33,27 +34,28 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar t_assistant.jar`
    command to run the application.<br>
-   *A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.*<br>
+   _A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data._<br>
    <img src="images/Ui.png" width="600">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
-    * `list_s` : Lists all students.
+    - `list_s` : Lists all students.
 
-    * `as sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9` : Adds a student named `James Ho`
+    - `as sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9` : Adds a student named `James Ho`
       to T_Assistant.
 
-    * `undo` : Undo the last command ran.
+    - `undo` : Undo the last command ran.
 
-    * `clear` : Deletes all contacts.
+    - `clear` : Deletes all contacts.
 
-    * `exit` : Exits the app.
+    - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 <div style="page-break-after: always;"></div>
 
 ## Features
@@ -62,46 +64,46 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
 **Notes about the command format:**<br>
 
-* Command words are **case-insensitive**!<br>
+- Command words are **case-insensitive**!<br>
   `add_s ...` and `ADD_S ...` will both be recognised as commands to add a new student.
 
-* Command words come with **shorthands** <br>
+- Command words come with **shorthands** <br>
   e.g. `add_s...` and `as...` will both be recognised as commands to add a new student.
 
-* Prefixes are **case-insensitive**!<br>
+- Prefixes are **case-insensitive**!<br>
   e.g. `i/INDEX` and `I/INDEX` will be recognised.
 
-* Words in `UPPER_CASE` are the parameters to be **supplied by the user**.<br>
+- Words in `UPPER_CASE` are the parameters to be **supplied by the user**.<br>
   e.g. in `as sn/STUDENT_NAME`, `STUDENT_NAME` is a parameter which can be used as `as sn/John Doe`.
 
-* Items in square brackets are **optional**.<br>
+- Items in square brackets are **optional**.<br>
   e.g `sn/STUDENT_NAME [t/TAG]` can be used as `sn/John Doe t/TD9` or as `sn/John Doe`.
 
-* Items with `…`​ after them can **be used multiple times including zero times**.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/TD9`, `t/GoodatUI t/TeamLead` etc.
+- Items with `…`​ after them can **be used multiple times including zero times**.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/TD9`, `t/GoodatUI t/TeamLead` etc.
 
-* Parameters can be in **any order**.<br>
+- Parameters can be in **any order**.<br>
   e.g. if the command specifies `sno/STUDENT_NUMBER sn/STUDENT_NAME`, `sn/STUDENT_NAME sno/STUDENT_NUMBER` is also
   acceptable.
 
-* Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`)
+- Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`)
   will be **ignored**.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Extraneous parameters for commands that **take in parameters**  will be recognised as *invalid* input parameters.<br>
+- Extraneous parameters for commands that **take in parameters** will be recognised as _invalid_ input parameters.<br>
   e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as an invalid command structure due to extra `gn/`.
 
 **Important**
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ### Student Commands
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Listing Students: `list_s`, `ls`
 
@@ -113,7 +115,7 @@ This screenshot shows the result of executing `list_s`.
 
 <img src="images/screenshots/list_s.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Adding a Student: `add_s`, `as`
 
@@ -141,7 +143,7 @@ This screenshot shows the result of executing `add_s sno/A0123456A sn/James Ho e
 
 <img src="images/screenshots/add_s.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Deleting a Student: `del_s`, `ds`
 
@@ -166,7 +168,7 @@ This screenshot shows the result of executing `del_s sno/A0123456A`.
 
 <img src="images/screenshots/del_s.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Editing a Student: `edit_s`, `es`
 
@@ -194,7 +196,7 @@ This screenshot shows the result of executing `edit_s i/2 sn/Bernice Yu Ting Kan
 
 <img src="images/screenshots/edit_s.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Adding a Student to a Group: `add_s_g`, `asg`
 
@@ -219,7 +221,7 @@ This screenshot shows the result of executing `add_s_g sno/A0122764H gn/CS2103-F
 
 <img src="images/screenshots/add_s_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Deleting a Student from a Group: `del_s_g`, `dsg`
 
@@ -246,7 +248,7 @@ This screenshot shows the result of executing `del_s_g sno/A0737935G`.
 
 <img src="images/screenshots/del_s_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Finding Students: `find_s`, `fs`
 
@@ -262,12 +264,12 @@ Searches T_Assistant for students with fields that match the search query.
 4. This command functions on an OR logic. It will return all students that have fields that match any of the queries.
 5. Searches the following fields that a student has that matches the query:
 
-    * Student name
-    * Student number
-    * Email
-    * Group name
-        * **Bonus:** If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
-      > `!nogroup` is a special query that searches for students with no groups, it is also case-insensitive.
+    - Student name
+    - Student number
+    - Email
+    - Group name
+        - **Bonus:** If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
+          > `!nogroup` is a special query that searches for students with no groups, it is also case-insensitive.
 
 <box type="info" seamless>
 Take note that if any other student with a group happens to have a field that matches the special keyword, they will also appear in the results.
@@ -298,7 +300,7 @@ This screenshot shows the result of executing `find_s q/!nogroup`.
 
 <img src="images/screenshots/find_s_nogroup.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Sorting Students: `sort_s`, `ss`
 
@@ -310,11 +312,11 @@ This screenshot shows the result of executing `sort_s`.
 
 <img src="images/screenshots/sort_s.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ### Group Commands
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Listing Groups: `list_g`, `lg`
 
@@ -326,7 +328,7 @@ This screenshot shows the result of executing `list_g`.
 
 <img src="images/screenshots/list_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Adding a Group: `add_g`, `ag`
 
@@ -338,7 +340,7 @@ Adds a group to the T_Assistant。
 
 1. `Group Name` is the unique identifier for each group, so no two groups can have the same group name.
 2. Leading 0s in `Group Name` will be truncated, e.g. `CS2103-F00012-002` will be read as `CS2103-F12-2`.
-3. 
+3.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -353,7 +355,7 @@ This screenshot shows the result of executing `add_g gn/CS2103T-T10-1`.
 
 <img src="images/screenshots/add_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Deleting a Group: `del_g`, `dg`
 
@@ -380,7 +382,7 @@ This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
 
 <img src="images/screenshots/del_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Editing a Group: `edit_g`, `eg`
 
@@ -406,7 +408,7 @@ This screenshot shows the result of executing `edit_g i/3 gn/CS2103T-F11-3`.
 
 <img src="images/screenshots/edit_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Finding Groups: `find_g`, `fg`
 
@@ -421,7 +423,7 @@ Searches T_Assistant for groups with fields that match the search query.
 3. A blank query i.e. `fg q/` will return all groups.
 4. This command functions on an OR logic. It will return all groups that have fields that match any of the queries.
 5. Searches the following field that a group has that matches the query:
-    * Group name
+    - Group name
 6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -436,7 +438,7 @@ This screenshot shows the result of executing `find_g q/F11`.
 
 <img src="images/screenshots/find_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Sorting Groups: `sort_g`, `sg`
 
@@ -448,11 +450,11 @@ This screenshot shows the result of executing `sort_g`.
 
 <img src="images/screenshots/sort_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ### Task Commands
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Listing Tasks: `list_t`, `lt`
 
@@ -488,7 +490,7 @@ This screenshot shows the result of executing `list_t gn/CS2103-F11-1`.
 
 <img src="images/screenshots/list_t_group.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Adding a Task to a Group: `add_t_g`, `atg`
 
@@ -510,6 +512,7 @@ Adds a task to a group or multiple groups.
 ##### Usage Scenario
 
 ###### Scenario #1: Adding a task with the name of `Complete task 4` and deadline of `2024-11-15 1700` to groups `CS2103-F12-1` and `CS2103-F11-1`
+
 This is the default scenario where the task does not already exist and both groups exist.
 
 1. You can begin this command on any panel.
@@ -532,7 +535,7 @@ This screenshot shows the result of executing `add_t_g tn/Complete task 5 td/202
 
 <img src="images/screenshots/add_t_g_2.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Adding a Task to ALL Groups: `add_t`, `at`
 
@@ -557,7 +560,7 @@ This screenshot shows the result of executing `add_t tn/Complete task 6 td/2024-
 
 <img src="images/screenshots/add_t.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Adding an Existing Task to a Group: `add_et_g`, `aetg`
 
@@ -572,11 +575,10 @@ Adds an existing task to the groups specified.
 2. `add_et_g` adds an existing task identified by the index. It only accepts a valid index
    based on the list when `list_t` is called.
 3. You can add an existing task to multiple groups.
-4. This command is relatively flexible in terms of the input parameters. You can input duplicate group names or group names that don't exist. 
-   1. The application simply ignores the duplicates and adds the task to the desired group. 
+4. This command is relatively flexible in terms of the input parameters. You can input duplicate group names or group names that don't exist.
+    1. The application simply ignores the duplicates and adds the task to the desired group.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
-
 
 ##### Usage Scenario
 
@@ -605,7 +607,7 @@ This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-F11-1 gn/C
 
 <img src="images/screenshots/add_et_g_2.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Deleting a Task from a Group: `del_t_g`, `dtg`
 
@@ -617,7 +619,7 @@ Deletes a task from a group.
 
 1. The index must be valid and should be the index of target task in the group's task list.
 2. `del_t_g` deletes a task identified by the index. It only accepts a valid index
-      based on the list when `list_t` is called.
+   based on the list when `list_t` is called.
 3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
 4. For information on the constraints for each parameter used in this command, go
@@ -635,7 +637,7 @@ This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F11-1`.
 
 <img src="images/screenshots/del_t_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Deleting a Task from ALL Groups: `del_t`, `dt`
 
@@ -660,7 +662,7 @@ This screenshot shows the result of executing `del_t i/2`.
 
 <img src="images/screenshots/del_t.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Editing a Task for a Group: `edit_t_g`, `etg`
 
@@ -688,7 +690,7 @@ This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-1 tn/C
 
 <img src="images/screenshots/edit_t_g.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Editing a Task for ALL Groups: `edit_t`, `et`
 
@@ -715,7 +717,7 @@ This screenshot shows the result of executing `edit_t i/2 tn/Complete task 8`.
 
 <img src="images/screenshots/edit_t.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Mark a Task for a Group: `mark_t`, `mt`
 
@@ -726,8 +728,8 @@ Marks a task as done or undone.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-3. If a task is complete it will be marked as pending/overdue, and vice versa.
-4. For information on the constraints for each parameter used in this command, go
+2. If a task is complete it will be marked as pending/overdue, and vice versa.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -752,7 +754,7 @@ Marks a task as done or undone.
 
 <img src="images/screenshots/mark_t_2.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Finding Tasks: `find_t`, `ft`
 
@@ -766,9 +768,9 @@ Searches T_Assistant for tasks with fields that match the search query.
 2. The command will match substrings. You may search for part of a task's name such as `tp` to find `tP v1.6 Release`.
 3. A blank query i.e. `ft q/` will return all tasks.
 4. This command functions on an OR logic. It will return all tasks that have fields that match any of the queries.
-3. Searches the following field that a group has that matches the query:
-    * Task name
-4. For information on the constraints for each parameter used in this command, go
+5. Searches the following field that a group has that matches the query:
+    - Task name
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -779,7 +781,7 @@ This screenshot shows the result of executing `find_t q/4`.
 
 <img src="images/screenshots/find_t.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Sorting Tasks: `sort_t`, `st`
 
@@ -791,11 +793,11 @@ This screenshot shows the result of executing `sort_t`.
 
 <img src="images/screenshots/sort_t.png" width="600">
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ### Miscellaneous Commands
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 #### Undoing change: `undo`
 
@@ -850,11 +852,11 @@ Format: `exit`
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Data Handling
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ### Saving the data
 
@@ -864,7 +866,7 @@ save manually.
 ### Editing the data file
 
 T_Assistant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
-welcome to update data directly by editing that data file. 
+welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -877,7 +879,8 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 Changes done directly to the data file will **NOT** be registered by the application, i.e. `undo`/`redo` will not register these changes.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 <div style="page-break-after: always;"></div>
 
 ## FAQ
@@ -886,7 +889,7 @@ Changes done directly to the data file will **NOT** be registered by the applica
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous T_Assistant home folder and also copy over `versionHistory.json` if you wish to keep it.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Known issues
 
@@ -899,12 +902,12 @@ the data of your previous T_Assistant home folder and also copy over `versionHis
 3. The application will sometimes open to a blank screen with no information displayed, simply run any commands and
    the application should function as per normal.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Glossary
 
 | Key Terms      | Definition                                                   |
-|----------------|--------------------------------------------------------------|
+| -------------- | ------------------------------------------------------------ |
 | Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
 | JAR            | Executable file containing Java classes and other resources. |
 | Prefix         | Keyword used in commands to specify the parameter type       |
@@ -920,7 +923,7 @@ All parameters are case-insensitive when used for comparison unless stated other
 
 | Parameter                | Constraints                                                                                                                                                                                                                                         | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
-| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                        | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
+| `sno/`<br>Student Number | Start with `A0` <br>Followed by 6 numerical digits <br>End with any letter                                                                                                                                                                          | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
 | `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                          | `John Doe`                                    | `J0hn Doe$$`                                     |
 | `e/`<br>Email            | Format: `local-part@domain-part`<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
 | `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
@@ -930,7 +933,8 @@ All parameters are case-insensitive when used for comparison unless stated other
 | `q/`<br>Query            | No limitations                                                                                                                                                                                                                                      | `iP`<br>`tP v1.5`                             |                                                  |
 | `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                            | `1`<br>`10`                                   | `-1`<br>`test`                                   |
 
---------------------------------------------------------------------------------------------------------------------
+---
+
 <div style="page-break-after: always;"></div>
 
 ## Command Summary
