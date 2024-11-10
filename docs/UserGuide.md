@@ -308,7 +308,7 @@ Finds all concertContacts that are associated to the person and the concert at t
 Format: `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`
 
 - The order of the keywords does not matter e.g. `findcc pi/1 ci/1` is equivalent to `findcc ci/1 pi/1`
-- At least one of the one of the 2 fields must be present
+- At least one of the 2 fields must be present
 
 Examples:
 
