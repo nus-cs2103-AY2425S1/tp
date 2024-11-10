@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.commons.util.StringUtil.INDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
@@ -35,18 +34,10 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         + PREFIX_PUBLIC_ADDRESS_LABEL + "LABEL\n"
         + PREFIX_PUBLIC_ADDRESS + "ADDRESS\n"
         + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL
-        + "wallet1 " + PREFIX_PUBLIC_ADDRESS + "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
+        + "wallet1 " + PREFIX_PUBLIC_ADDRESS + "1a1zp1ep5qgefi2dmptftl5slmv7divfna";
 
     public static final String MESSAGE_ADDPA_SUCCESS = "Added Person's Public Address: %1$s";
-    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS_LABEL = "Invalid: %1$s\n"
-        + "You may either:\n"
-        + "1. Use another label for the new public address\n"
-        + "2. Edit the existing public address for the current label"
-        + "(overwrite) using the editpa command\n";
-    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS =
-            "Oops! Someone else (or yourself) is already using this address:\n\n"
-            + INDENT + INDENT + "%1$s\n\n"
-            + "Did you type the address correctly?";
+    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: duplicate label or public address\n%1$s\n";
 
     private EditPersonDescriptor editPersonDescriptor;
 
@@ -80,7 +71,7 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
             return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, combinedPublicAddresses,
                 updatedTags);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS_LABEL, e.getMessage()));
+            throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS, e.getMessage()));
         }
 
     }

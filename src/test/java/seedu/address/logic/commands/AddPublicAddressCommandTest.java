@@ -98,7 +98,7 @@ public class AddPublicAddressCommandTest {
         }
 
         // Expected message
-        String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS_LABEL,
+        String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
             String.format(
                 PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
                 duplicateLabel,
