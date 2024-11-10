@@ -14,11 +14,11 @@ SalesContactPro is a **CLI-first contact management system designed specifically
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your SalesContactPro.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar SalesContactPro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -203,11 +203,11 @@ Format: `delete NAME` or `delete INDEX`
   * Only delete if `NAME` is exact match with contact full name.
   * Delete is case-insensitive. e.g `hans` will delete `Hans`.
   * If no exact match, list will be filtered based on given `NAME`.
-    AddressBook will then prompt user to use fullname or `INDEX`.
+    SalesContactPro will then prompt user to use fullname or `INDEX`.
   * If no exact and partial match,
-    AddressBook will then prompt user to use another `NAME` or `INDEX`.
+    SalesContactPro will then prompt user to use another `NAME` or `INDEX`.
   * If more than 1 exact match, list will be filtered based on given `NAME`.
-    AddressBook will then prompt user to use `INDEX` instead.
+    SalesContactPro will then prompt user to use `INDEX` instead.
 
 * For deletion by `INDEX`:
   * Deletes the person at the specified INDEX.
@@ -251,15 +251,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SalesContactPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SalesContactPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, SalesContactPro will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the SalesContactPro to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -271,7 +271,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SalesContactPro home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
