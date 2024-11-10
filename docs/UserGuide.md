@@ -274,6 +274,7 @@ EZSTATES features (i.e. commands) are divided into **four** main categories:
 3. [Listing Management Commands](#3-listing-management) 
     - [Add Listing](#add-listing) (`listing`)
     - [Show Listings](#show-listings) (`showlistings`)
+    - [Edit Listing](#edit-listing) (`editlisting`)
     - [Add Buyers to Listing](#add-buyers-to-listing) (`addlistingbuyers`)
     - [Remove Buyers from Listing](#remove-buyers-from-listing) (`removelistingbuyers`)
     - [Delete Listing](#delete-listing) (`deletelisting`)
