@@ -18,6 +18,7 @@ any traditional point-and-click management app.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -47,6 +48,7 @@ any traditional point-and-click management app.
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -93,6 +95,7 @@ any traditional point-and-click management app.
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * Tag names should be alphanumeric. Tags that have multiple words can be separated by a hyphen (-)
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
@@ -123,6 +126,8 @@ When clicked, this hyperlink will show the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a person : `add`
 
@@ -168,6 +173,8 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
+
 ### Finding persons by contact information : `find`
 
 Finds persons whose names, email address, contact number, or tag contain any of the given keywords.
@@ -188,9 +195,13 @@ How `find` works with multiple parameters:
 
 Examples:
 * `find n/bernice t/is1108` returns `Bernice Yu`<br>
-  ![result for 'find n/bernice t/is1108'](images/findBerniceIS1108Result.png)
+  ![result for 'find n/bernice t/is1108'](images/findBerniceIS1108Result.png){ width="750px" }
+
+
 * `find t/floor t/run` returns all contacts with any tag containing `floor` or `run` <br>
-  ![result for 'find t/floor t/run'](images/findFloorRunResult.png)
+  ![result for 'find t/floor t/run'](images/findFloorRunResult.png){ width="750px" }
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete`
 
@@ -238,6 +249,8 @@ Examples:
 * `deltag 1 t/friend` 
 deletes the friend tag of the first person in the list.
 
+<div style="page-break-after: always;"></div>
+
 ### Categorizing a tag : `cattag`
 
 Categorizes a tag under a defined category.
@@ -266,6 +279,9 @@ Examples:
 * Newly created tags (by [`add`](#adding-a-person-add) or [`addtag`](#adds-tags-to-a-specific-person--addtag)) will have category `General` and colour `Grey` by default.
 
 ![cattag response image](images/cattagResponse.png)
+
+<div style="page-break-after: always;"></div>
+
 ### Undo a command : `undo`
 
 Undoes the previous command and reverts CampusConnect.
@@ -307,12 +323,15 @@ CampusConnect data is saved in the hard disk automatically after any command tha
 CampusConnect data is saved automatically as a JSON file `[JAR file location]/data/CampusConnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-**Caution:**
+<strong>Caution:</strong>
 If your changes to the data file makes its format invalid, CampusConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause CampusConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
