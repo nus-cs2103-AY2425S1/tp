@@ -173,7 +173,17 @@ The following is an example JSON output for a person:
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+## General Flow
+The activity diagram below illustrates the general flow of an interaction between the user and StoreClass.
 
+<img src="images/GeneralFlowActivity.png" width="1000" />
+
+1. The user enters a command in the `CommandBox`.
+2. The AddressBookParser parses the command.
+3. If the command is a valid command and is of a valid format, the corresponding `Command` object is created.
+4. The `Command` object is executed by the `Logic` component.
+5. The `UI` component displays the result of the command execution to the user.
+---
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -289,13 +299,6 @@ As with undo, if the pointer is at the last state in the list, trying to redo wi
 The following sequence diagram shows how the redo operation works across the `Logic` and `Model` components:
 
 ![UndoRedoState5](images/UndoRedoState5.png)
-
----
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
 
 ---
 
