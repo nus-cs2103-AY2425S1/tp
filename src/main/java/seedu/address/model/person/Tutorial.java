@@ -68,4 +68,8 @@ public class Tutorial {
     public String getTutorialNumber() {
         return tutorial;
     }
+
+    public boolean isAfter(Tutorial t) {
+        return Integer.parseInt(this.tutorial) > Integer.parseInt(t.tutorial);
+    }
 }
