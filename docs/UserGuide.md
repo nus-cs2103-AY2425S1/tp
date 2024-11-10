@@ -17,7 +17,13 @@ title: User Guide
       * [Technical Users](#technical-users)
    * [Getting Started](#getting-started)
 
-3. [Features](#features)
+3. Command Summary
+   * [General Format](#general-format)
+   * [Command Format and Examples](#command-format-and-examples)
+   * [Command Parameters Reference](#command-parameters-reference)
+   * [Glossary](#glossary)
+
+4. [Features](#features)
     * [Student Management](#student-management)
       * [Adding a student](#adding-a-student--add)
       * [Deleting a student](#deleting-a-student--delete)
@@ -36,11 +42,11 @@ title: User Guide
         * [Getting help](#getting-help--help)
         * [Exiting the program](#exiting-the-program--exit) 
 
-4. [Data Management](#data-management-in-academyassist)
+5. [Data Management](#data-management-in-academyassist)
 
-5. [FAQ](#faq)
+6. [FAQ](#faq)
 
-6. [Command summary](#command-summary)
+7. [Command summary](#command-summary)
 
 # Introduction
 Welcome to **AcademyAssist**, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
@@ -101,11 +107,11 @@ Please note that clear action is <span style="color:red;font-weight:bold">IRREVE
 ### Non-Technical Users
 1. Create a new folder at your Desktop. (e.g. `AcademyAssist`)
 2. Move the downloaded `academyassist.jar` file into this folder.
-2. Open the command prompt (Windows) or terminal (macOS, Linux).
-3. Navigate to the folder by typing the following command and pressing Enter:
+3. Open the command prompt (Windows) or terminal (macOS, Linux).
+4. Navigate to the folder by typing the following command and pressing Enter:
    * For Windows: `cd Desktop\AcademyAssist`
    * For macOS and Linux: `cd Desktop/AcademyAssist`
-4. Type `java -jar academyassist.jar` and press Enter to start the app. 
+5. Type `java -jar academyassist.jar` and press Enter to start the app. 
 
 ### Technical Users
 1. Move the downloaded `academyassist.jar` file to a directory of your choice.
@@ -119,7 +125,7 @@ You may refer to the [Command Summary](#command-summary) section for a quick ove
 
 ### User Interface Overview
 
-<img src="/images/UiOverview.png" alt="UI overview" width="600"/>
+<img src="images/UiOverview.png" alt="UI overview" width="600"/>
 
 1. **Top Bar**: Contains the following buttons
     * **Help**: Click on this to view the help window.
@@ -147,6 +153,70 @@ You can also use the `help` command to view the help window at any time.
 
 ### Conclusion
 You are now ready to use AcademyAssist! If you encounter any issues during installation or usage, please refer to this documentation or contact us via our email (academyassist@gmail.com). Enjoy using the application!
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Command Summary
+## General Format
+The general format of commands in AcademyAssist is as follows:
+```
+COMMAND [PARAMETERS]
+```
+Where:
+- `COMMAND` refers to the action you want to perform (e.g., `add`, `delete`, `edit`).
+- `PARAMETERS` are the inputs required for the command to execute successfully.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
+Refer to the tables below or the [Features](#features) section for more details on each command.
+</div>
+
+## Command Format and Examples
+This section provides a quick overview of the available commands for managing student records. Each command is accompanied by its format and an example to help you understand how to use it effectively.
+
+| **Action**          | **Command Format**                                                                        | **Example**                                                                                 |
+|---------------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Add Student**     | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` | `add n\John Doe i\T3840859A yg\3 p\81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
+| **Delete Student**  | `delete STUDENT_ID`                                                                       | `delete S00001`                                                                             |
+| **Edit Student**    | `edit STUDENT_ID FIELD\NEW_VALUE`                                                         | `edit S00001 a\New_Address`                                                                 |
+| **List Students**   | `list`                                                                                    |                                                                                             |
+| **View Student**    | `detail STUDENT_ID`                                                                       | `detail S00001`                                                                             |
+| **Find Student**    | `find NAME [MORE_NAMES]`                                                                  | `find John Jane`                                                                            |
+| **Filter Students** | `filter FIELD\VALUE`                                                                      | `filter yg\2`                                                                               |
+| **Add Subject**     | `addsubject STUDENT_ID s\SUBJECT`                                                         | `addsubject S00003 s\Science`                                                               |
+| **Track Subjects**  | `tracksubject`                                                                            |                                                                                             |
+| **Sort Students**   | `sort by\FIELD`                                                                           | `sort by\name`                                                                              |
+| **Clear Data**      | `clear`                                                                                   |                                                                                             |
+| **Get Help**        | `help`                                                                                    |                                                                                             |
+| **Exit**            | `exit`                                                                                    |                                                                                             |
+
+## Command Parameters Reference
+In this section, you'll find detailed information about the parameters for each command. Each command is broken down into its constituent parameters, including their prefixes, descriptions, and constraints. This reference will guide you in ensuring that your inputs are valid and conform to the required formats.
+
+| **Command**             | **Parameter**     | **Prefix** | **Description**                                                                    | **Constraints**                                                                                                                                                 |
+|-------------------------|-------------------|------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**         | `NAME`            | `n\ `      | Name of the student.                                                               | 2-255 characters, only alphabets, spaces, and special characters (-/'), cannot start/end with special characters, no consecutive special characters and spaces. |
+|                         | `NRIC`            | `i\ `      | NRIC number of the student.                                                        | Must start with `S, T, F, G, M`, followed by 7 digits and an alphabet (e.g., S1234567A).                                                                        |
+|                         | `YEARGROUP`       | `yg\ `     | Year group of the student.                                                         | Must be a number between 1-13.                                                                                                                                  |
+|                         | `PHONE`           | `p\ `      | Phone number of the student.                                                       | 4-20 digits long, no spaces.                                                                                                                                    |
+|                         | `EMAIL`           | `e\ `      | Email address of the student.                                                      | Must follow the format username@domain.                                                                                                                         |
+|                         | `ADDRESS`         | `a\ `      | Address of the student.                                                            | Maximum 300 characters, can contain any characters, cannot be empty.                                                                                            |
+|                         | `SUBJECT`         | `s\ `      | Subject(s) the student is enrolled in.                                             | Must be one of the available subjects; can add multiple subjects using repeated `s\` fields.                                                                    |
+| **Delete Student**      | `STUDENT_ID`      | -          | ID of the student to be deleted.                                                   | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
+| **Edit Student**        | `STUDENT_ID`      | -          | ID of the student to be edited.                                                    | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
+|                         | `FIELD`           | -          | Field to be edited (e.g., Name, NRIC, Year Group, Phone, Email, Address, Subject). | Must be the prefix of one of the specified fields.                                                                                                              |
+|                         | `NEW_VALUE`       | -          | New value for the specified field.                                                 | Must follow the constraints of the specified field.                                                                                                             |
+| **List Students**       | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
+| **View Student Detail** | `STUDENT_ID`      | -          | ID of the student whose details are to be viewed.                                  | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
+| **Find Student**        | `KEYWORD`         | -          | Keyword(s) to search for student names.                                            | Must be between 2-255 characters long, only alphabets, spaces, and special characters (-/').                                                                    |
+| **Filter Students**     | `FIELD`           | -          | Field to filter by (year group or subject).                                        | Must be either `yg` for year group or `s` for subject.                                                                                                          |
+|                         | `VALUE`           | -          | Value to filter by.                                                                | Must match the corresponding field value.                                                                                                                       |
+| **Add Subject**         | `STUDENT_ID`      | -          | ID of the student to whom subjects are to be added.                                | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
+|                         | `SUBJECT`         | `s\`       | Subject(s) to be added to the student's record.                                    | Must be one of the available subjects; can add multiple subjects using repeated `s\` fields.                                                                    |
+| **Track Subjects**      | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
+| **Clear Data**          | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
+| **Get Help**            | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
+| **Exit**                | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 # Features
@@ -233,7 +303,8 @@ Examples:
 * `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street \Science`
 * `add n\John Doe i\S1234567A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`
 
-![Add Success Message](/images/add.png)
+![Add Success Message](images/add.png)
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Some contact fields such as address and email are intentionally hidden to avoid cluttering of information. To view all 
 the details of a student, you can use the [detail command] (#viewing-a-students-detail--detail).
@@ -256,10 +327,15 @@ The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have 
 
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This action is irreversible. Once a student is deleted, the student's details will be permanently removed from the
+system.
+</div>
+
 Examples:
 * `delete S00001`
 
-![Delete Success Message](/images/delete.png)
+![Delete Success Message](images/delete.png)
 
 ### Editing a student : `edit`
 
@@ -286,7 +362,7 @@ Examples:
 * `edit S00001 a\New_Address`
 * `edit s00002 p\91234567 a\New_Address`
 
-![Edit Success Message](/images/edit.png)
+![Edit Success Message](images/edit.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To more efficiently add a subject to a person, see the [addsubject feature] (#adding-a-subject-to-a-student--addsubject)
@@ -305,7 +381,7 @@ Shows a list of all students in the system.
 
 Format: `list`
 
-![List Success Message](/images/list.png)
+![List Success Message](images/list.png)
 
 ### Viewing a student's detail : `detail`
 
@@ -321,7 +397,7 @@ Format: `detail STUDENT_ID`
 Examples:
 * `detail S00001`
 
-![Detail Success Message](/images/detail.png)
+![Detail Success Message](images/detail.png)
 
 ## Searching and Sorting
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -351,7 +427,7 @@ Examples:
 * `find John Jane` returns any student having names `John` or `Jane`
 * `find J` returns any student having names starting with `J`
 
-![Find Success Message](/images/find.png)
+![Find Success Message](images/find.png)
 
 ### Sorting students : `sort`
 
@@ -382,7 +458,7 @@ Examples:
 * `sort by\yearGroup`
 * `sort by\studentID`
 
-![Sort Success Message](/images/sort.png)
+![Sort Success Message](images/sort.png)
 
 ### Filtering students : `filter`
 
@@ -402,7 +478,7 @@ Examples:
 * `filter yg\2` shows only students who belong to year group 2
 * `filter s\Science` shows only students who take Science as a subject
 
-![Filter Success Message](/images/filter.png)
+![Filter Success Message](images/filter.png)
 
 ## Subject Management
 ### Adding subject(s) to a student : `addsubject`
@@ -426,7 +502,7 @@ Examples:
 * `addsubject S00001 s\Science`
 * `addsubject S00002 s\Science s\Math`
 
-![Addsubject Success Message](/images/addsubject.png)
+![Addsubject Success Message](images/addsubject.png)
 
 ### Tracking student count for each subject : `tracksubject`
 
@@ -444,7 +520,7 @@ are taking each of the subjects.
 
 </div> 
 
-![TrackSubject Success Message](/images/tracksubject.png)
+![TrackSubject Success Message](images/tracksubject.png)
 
 ## Utility Features
 ### Clearing all entries : `clear`
@@ -458,7 +534,7 @@ This action is irreversible. All student entries will be deleted permanently.
 
 Format: `clear`
 
-![Clear Success Message](/images/clear.png)
+![Clear Success Message](images/clear.png)
 
 ### Getting help : `help`
 
@@ -466,7 +542,7 @@ Shows a help window with details of how to use the different commands.
 
 Format: `help`
 
-![Help Success Message](/images/help.png)
+![Help Success Message](images/help.png)
 
 ### Exiting the program : `exit`
 
@@ -516,7 +592,8 @@ message explaining what's wrong.
 file with your backup to get back on track.
 
 Remember, AcademyAssist is here to make managing student information easy and stress-free.
-If you ever have questions about your data, just ask - we're always happy to help!
+If you ever have questions about your data, just ask - we're always happy to help! You can reach us via our email 
+(academyassist@gmail.com).
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -531,71 +608,12 @@ the data of your previous AcademyAssist folder.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Command Summary
-## General Format
-The general format of commands in AcademyAssist is as follows:
-```
-COMMAND [PARAMETERS]
-```
-Where:
-- `COMMAND` refers to the action you want to perform (e.g., `add`, `delete`, `edit`).
-- `PARAMETERS` are the inputs required for the command to execute successfully.
-
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
-Refer to the tables below or the [Features](#features) section for more details on each command.
-</div>
-
-## Command Format and Examples
-This section provides a quick overview of the available commands for managing student records. Each command is accompanied by its format and an example to help you understand how to use it effectively.
-
-| **Action**          | **Command Format**                                                                        | **Example**                                                                                 |
-|---------------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| **Add Student**     | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` | `add n\John Doe i\T3840859A yg\3 p\81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
-| **Delete Student**  | `delete STUDENT_ID`                                                                       | `delete S00001`                                                                             |
-| **Edit Student**    | `edit STUDENT_ID FIELD\NEW_VALUE`                                                         | `edit S00001 a\New_Address`                                                                 |
-| **List Students**   | `list`                                                                                    |                                                                                             |
-| **View Student**    | `detail STUDENT_ID`                                                                       | `detail S00001`                                                                             |
-| **Find Student**    | `find NAME [MORE_NAMES]`                                                                  | `find John Jane`                                                                            |
-| **Filter Students** | `filter FIELD\VALUE`                                                                      | `filter yg\2`                                                                               |
-| **Add Subject**     | `addsubject STUDENT_ID s\SUBJECT`                                                         | `addsubject S00003 s\Science`                                                               |
-| **Track Subjects**  | `tracksubject`                                                                            |                                                                                             |
-| **Sort Students**   | `sort by\FIELD`                                                                           | `sort by\name`                                                                              |
-| **Clear Data**      | `clear`                                                                                   |                                                                                             |
-| **Get Help**        | `help`                                                                                    |                                                                                             |
-| **Exit**            | `exit`                                                                                    |                                                                                             |
-
-## Command Parameters Reference 
-In this section, you'll find detailed information about the parameters for each command. Each command is broken down into its constituent parameters, including their prefixes, descriptions, and constraints. This reference will guide you in ensuring that your inputs are valid and conform to the required formats.
-
-| **Command**             | **Parameter**     | **Prefix** | **Description**                                                                    | **Constraints**                                                                                                                                                 |
-|-------------------------|-------------------|------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**         | `NAME`            | `n\ `      | Name of the student.                                                               | 2-255 characters, only alphabets, spaces, and special characters (-/'), cannot start/end with special characters, no consecutive special characters and spaces. |
-|                         | `NRIC`            | `i\ `      | NRIC number of the student.                                                        | Must start with `S, T, F, G, M`, followed by 7 digits and an alphabet (e.g., S1234567A).                                                                        |
-|                         | `YEARGROUP`       | `yg\ `     | Year group of the student.                                                         | Must be a number between 1-13.                                                                                                                                  |
-|                         | `PHONE`           | `p\ `      | Phone number of the student.                                                       | 4-20 digits long, no spaces.                                                                                                                                    |
-|                         | `EMAIL`           | `e\ `      | Email address of the student.                                                      | Must follow the format username@domain.                                                                                                                         |
-|                         | `ADDRESS`         | `a\ `      | Address of the student.                                                            | Maximum 300 characters, can contain any characters, cannot be empty.                                                                                            |
-|                         | `SUBJECT`         | `s\ `      | Subject(s) the student is enrolled in.                                             | Must be one of the available subjects; can add multiple subjects using repeated `s\` fields.                                                                    |
-| **Delete Student**      | `STUDENT_ID`      | -          | ID of the student to be deleted.                                                   | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
-| **Edit Student**        | `STUDENT_ID`      | -          | ID of the student to be edited.                                                    | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
-|                         | `FIELD`           | -          | Field to be edited (e.g., Name, NRIC, Year Group, Phone, Email, Address, Subject). | Must be the prefix of one of the specified fields.                                                                                                              |
-|                         | `NEW_VALUE`       | -          | New value for the specified field.                                                 | Must follow the constraints of the specified field.                                                                                                             |
-| **List Students**       | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
-| **View Student Detail** | `STUDENT_ID`      | -          | ID of the student whose details are to be viewed.                                  | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
-| **Find Student**        | `KEYWORD`         | -          | Keyword(s) to search for student names.                                            | Must be between 2-255 characters long, only alphabets, spaces, and special characters (-/').                                                                    |
-| **Filter Students**     | `FIELD`           | -          | Field to filter by (year group or subject).                                        | Must be either `yg` for year group or `s` for subject.                                                                                                          |
-|                         | `VALUE`           | -          | Value to filter by.                                                                | Must match the corresponding field value.                                                                                                                       |
-| **Add Subject**         | `STUDENT_ID`      | -          | ID of the student to whom subjects are to be added.                                | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
-|                         | `SUBJECT`         | `s\`       | Subject(s) to be added to the student's record.                                    | Must be one of the available subjects; can add multiple subjects using repeated `s\` fields.                                                                    |
-| **Track Subjects**      | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
-| **Clear Data**          | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
-| **Get Help**            | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
-| **Exit**                | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
---------------------------------------------------------------------------------------------------------------------
-
-
 ## Glossary
-1. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
-2. **Graphical User Interface (GUI)**: A visual interface that allows users to interact with a program using graphical elements.
-3. **Command Prompt (Windows)/ Terminal (macOS, Linux)**: A text-based interface for entering commands to interact with the operating system.
+1. **Command**: An instruction given by a user to a computer program.
+2. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
+3. **Graphical User Interface (GUI)**: A visual interface that allows users to interact with a program using graphical elements.
+4. **Command Prompt (Windows)/ Terminal (macOS, Linux)**: A text-based interface for entering commands to interact with the operating system.
+5. **Java**: A high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.
+6. **JSON**: JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
+7. **StudentID**: A unique identifier assigned to each student in the system, starting from S00001 to S99999.
+8. **NRIC**: National Registration Identity Card, a unique identifier assigned to Singapore residents and citizens.
