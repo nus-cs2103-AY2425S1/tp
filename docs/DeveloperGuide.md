@@ -362,17 +362,17 @@ to record their students with their details, and access relevant information eas
 ### User Stories
 
 | Priority | As a …​  | I want to …​                                                               | So that I can…​                                                                                                |
-| -------- | -------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| -------- | -------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --- |
 | `* * *`  | educator | add a new student                                                          | include all students I have currently in my app                                                                |
 | `* * *`  | educator | delete a student                                                           | keep my database of students concise with only currently relevant students                                     |
 | `* * *`  | educator | search for students by name                                                | find information about specific students                                                                       |
+| `* * *`  | educator | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects                                  |
+| `* * *`  | educator | delete groups                                                              | correct mistakes by deleting a group                                                                           |
+| `* * *`  | educator | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |     |
 | `* *`    | educator | search for groups by name                                                  | find information about specific groups of students                                                             |
 | `* *`    | educator | store additional information about students on grades, attendance or notes | better access and organise student information                                                                 |
 | `* *`    | educator | edit a student’s details                                                   | correct mistakes or update new information about the student                                                   |
-| `* *`    | educator | filter searched students by grades, attendance or notes                    | quickly find specific students or groups based on specific criteria                                            |
-| `*`      | educator | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects                                  |
-| `*`      | educator | delete groups                                                              | correct mistakes by deleting a group                                                                           |
-| `*`      | educator | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
+| `* *`    | educator | filter searched students by name                                           | quickly find specific students                                                                                 |
 | `*`      | educator | use security measures for student data                                     | protect sensitive information and control access to parental data                                              |
 
 ### Use cases
@@ -380,131 +380,355 @@ to record their students with their details, and access relevant information eas
 (For all use cases below, the **System** is the `GoonBook` and the **Actor** is the `Educator`, unless specified
 otherwise)
 
-**Use case: UC01 – Add new student**
+---
 
-**MSS**
+#### **Use Case: UC01 - Add a New Student**
 
-1. Educator enters a student’s name.
-2. Educator enters the student’s class.
-3. Educator enters the student’s contacts.
-4. Educator submits the form.
-5. New student with class and contact is added to list.
+**Main Success Scenario (MSS):**
 
-Use case ends.
+1. Educator chooses to add a new student.
+2. System prompts for the student's name, class, and contact information.
+3. Educator enters the student's name, class, and contact information.
+4. System validates the input.
+5. System adds the new student to the student list.
+6. System displays a confirmation message.
 
-**Extensions**
+   Use case ends.
 
-- 2a. Educator submits the form.
+**Extensions:**
 
-  - 2a1. New student without class and contact is added to list.
+- **2a.** Educator submits the form without entering the class or contact information.
 
-  Use case ends.
+  - **2a1.** System detects the missing class or contact information and returns an invalid command format message.
+  - **2a2.** Educator provides the missing information.
 
-- 2b. Educator enters the student’s contacts.
+    Use case resumes from step 3.
 
-  - 2b1. Educator submits the form.
+- **3a.** System detects that the entered student is a duplicate.
 
-  - 2b2. New student with contact is added to list.
+  - **3a1.** System informs the educator that the student already exists and cancels the addition.
 
-  Use case ends.
+    Use case ends.
 
-- 3a. Educator submits the form.
+- **3b.** System detects invalid characters in the student's name (e.g., non-alphabetic characters).
 
-  - 3a1. New student with class is added to list.
+  - **3b1.** System requests the educator to enter a valid name.
+  - **3b2.** Educator enters a valid name.
 
-  Use case ends.
+    Steps 3b1-3b2 are repeated until the input is valid.
 
-- 4a. Goon Book detects that the entered student is a duplicate.
+    Use case resumes from step 4.
 
-  - 4a1. Goon Book cancels the adding.
+- **3c.** System detects invalid input in the contact information (e.g., non-numeric characters).
 
-  User case ends.
+  - **3c1.** System requests the educator to enter a valid contact number.
+  - **3c2.** Educator enters a valid contact number.
 
-- 4b. Goon Book detects a non-alphabet in the name input.
+    Steps 3c1-3c2 are repeated until the input is valid.
 
-  - 4b1. Goon Book requests for the correct input.
+    Use case resumes from step 4.
 
-  - 4b2. Educator enters new data.
+---
 
-  Steps 4b1-4b2 are repeated until the data entered are correct.
-  Use case resumes from step 5.
+#### **Use Case: UC02 - Search for a Student**
 
-- 4c. Goon Book detects a non-number in the contact input
+**Main Success Scenario (MSS):**
 
-  - 4c1. Goon Book requests for the correct input.
+1. Educator chooses to search for a student.
+2. System prompts for the student's name or keywords.
+3. Educator enters the student's name or search keywords.
+4. System searches for matching students.
+5. System displays the list of matching students with their contact and class information.
 
-  - 4c2. Educator enters new data.
+   Use case ends.
 
-  Steps 4c1-4c2 are repeated until the data entered are correct.
-  Use case resumes from step 5.
+**Extensions:**
 
-**Use case: UC02 – Search for student**
+- **4a.** No students match the search criteria.
 
-**MSS**
+  - **4a1.** System informs the educator that no matching students were found.
 
-1. User chooses to search for student.
-2. User enters a student’s name.
-3. Student’s contact with class information appears.
+    Use case ends.
 
-Use case ends.
+---
 
-**Extensions**
+#### **Use Case: UC03 - Delete a Student**
 
-- 2a. GoonBook detects that the student does not exist.
+**Main Success Scenario (MSS):**
 
-  - 2a1. GoonBook displays an error message.
+1. Educator chooses to delete a student.
+2. System prompts for the student's index in the list.
+3. Educator enters the student's index.
+4. System deletes the student from the student list.
+5. System displays a confirmation message.
 
-  User case ends.
+   Use case ends.
 
-**Use case: UC03 - Delete student**
+**Extensions:**
 
-**MSS**
+- **3a.** The specified index is invalid.
 
-1. Educator searches for a student (UC02)
-2. Educator presses delete button
-3. GoonBook requests for confirmation
-4. Educator confirms
-5. Student’s name with information successfully deleted
+  - **3a1.** System informs the educator of the invalid index.
+  - **3a2.** Educator enters a valid index.
 
-User case ends.
+    Use case resumes from step 4.
 
-**Use case: UC04 - Group students**
+---
 
-**MSS**
+#### **Use Case: UC04 - Edit a Student**
 
-1. Educator selects the option to create a new group.
-2. Educator enters a group name.
-3. Educator selects students to add to the group.
-4. Educator confirms the selection.
-5. The new group with selected students is successfully created and added to the group list.
+**Main Success Scenario (MSS):**
 
-Use case ends.
+1. Educator chooses to edit a student.
+2. Educator enters the student's index and new details to update.
+3. System validates the new input.
+4. System updates the student's information.
+5. System displays a confirmation message.
 
-**Extensions**
+   Use case ends.
 
-- 2a. GoonBook detects that the entered group name already exists.
+**Extensions:**
 
-  - 2a1. GoonBook displays an error message indicating the duplicate name.
-  - 2a2. Educator enters a new group name.
+- **3a.** The specified index is invalid.
 
-  Use case resumes from step 3.
+  - **3a1.** System informs the educator of the invalid index.
+  - **3a2.** Educator enters a valid index.
 
-- 3a. Educator tries to add the same student multiple times.
+    Use case resumes from step 4.
 
-  - 3a1. GoonBook automatically removes duplicate entries.
+- **3b.** System detects invalid input in the new details.
 
-  Use case resumes from step 4.
+  - **3b1.** System requests the educator to correct the invalid input.
+  - **3b2.** Educator enters valid details.
 
-- 3b. Educator does not select any students.
+    Use case resumes from step 4.
 
-  - 3b1. GoonBook displays an error message requesting at least one student for the group.
+---
 
-  Use case resumes from step 3.
+#### **Use Case: UC05 - List All Students**
 
-- 4a. GoonBook detects a non-alphanumeric character in the group name.
-  - 4a1. GoonBook requests for a valid input.
-  - 4a2. Educator enters a corrected group name.
-    Use case resumes from step 5.
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to list all students.
+2. System retrieves the list of all students.
+3. System displays the list with students' names, classes, and contact information.
+
+   Use case ends.
+
+---
+
+#### **Use Case: UC06 - List All Groups**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to list all groups.
+2. System retrieves the list of all groups.
+3. System displays the list with group names and member information.
+
+   Use case ends.
+
+---
+
+#### **Use Case: UC07 - Group Students Together**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to create a new group.
+2. System prompts for the group name.
+3. Educator enters the group name.
+4. System prompts to select students to add to the group.
+5. Educator selects students from the student list.
+6. System validates the group name and selected students.
+7. System creates the new group with the selected students.
+8. System displays a confirmation message.
+
+   Use case ends.
+
+**Extensions:**
+
+- **3a.** Educator enters a group name that already exists.
+
+  - **3a1.** System informs the educator of the duplicate group name.
+  - **3a2.** Educator enters a unique group name.
+
+    Use case resumes from step 4.
+
+- **5a.** Educator does not select any students.
+
+  - **5a1.** System informs the educator that at least one student must be added to the group.
+
+    Use case resumes from step 4.
+
+- **6a.** System detects invalid characters in the group name.
+
+  - **6a1.** System requests the educator to enter a valid group name.
+  - **6a2.** Educator enters a valid group name.
+
+    Use case resumes from step 6.
+
+---
+
+#### **Use Case: UC08 - Locate Groups by Name**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to search for groups.
+2. System prompts for the group name or keywords.
+3. Educator enters the group name or search keywords.
+4. System searches for matching groups.
+5. System displays the list of matching groups.
+
+   Use case ends.
+
+**Extensions:**
+
+- **4a.** No groups match the search criteria.
+
+  - **4a1.** System informs the educator that no matching groups were found.
+
+    Use case ends.
+
+---
+
+#### **Use Case: UC09 - Delete a Group**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to delete a group.
+2. System prompts for the group name.
+3. Educator enters the group name.
+4. System deletes the group from the group list.
+5. System displays a confirmation message.
+
+   Use case ends.
+
+**Extensions:**
+
+- **3a.** The specified group name does not exist.
+
+  - **3a1.** System informs the educator that the group was not found.
+  - **3a2.** Educator enters a valid group name.
+
+    Use case resumes from step 4.
+
+---
+
+#### **Use Case: UC10 - Add a Tag to a Student**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to add a tag to a student.
+2. System prompts for the student's index and the tag name.
+3. Educator enters the student's index and tag name.
+4. System validates the input.
+5. System adds the tag to the student.
+6. System displays a confirmation message.
+
+   Use case ends.
+
+**Extensions:**
+
+- **2a.** The specified student index is invalid.
+
+  - **2a1.** System informs the educator of the invalid index.
+  - **2a2.** Educator enters a valid index.
+
+    Use case resumes from step 3.
+
+- **3a.** The tag name is invalid or already exists for the student.
+
+  - **3a1.** System informs the educator of the invalid or duplicate tag.
+  - **3a2.** Educator enters a valid and unique tag name.
+
+    Use case resumes from step 4.
+
+---
+
+#### **Use Case: UC11 - Delete a Tag from a Student**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to delete a tag from a student.
+2. System prompts for the student's index and the tag name.
+3. Educator enters the student's index and tag name.
+4. System validates the input.
+5. System removes the tag from the student.
+6. System displays a confirmation message.
+
+   Use case ends.
+
+**Extensions:**
+
+- **2a.** The specified student index is invalid.
+
+  - **2a1.** System informs the educator of the invalid index.
+  - **2a2.** Educator enters a valid index.
+
+    Use case resumes from step 3.
+
+- **3a.** The tag does not exist for the student.
+
+  - **3a1.** System informs the educator that the tag was not found.
+  - **3a2.** Educator enters a valid tag name.
+
+    Use case resumes from step 4.
+
+---
+
+#### **Use Case: UC12 - Import Students**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to import students from a CSV file.
+2. System prompts for the CSV file location.
+3. Educator provides the file location.
+4. System validates the file location and format.
+5. System reads student data from the CSV file.
+6. System adds new, non-duplicate students to the student list.
+7. System displays a summary of the import process, including the number of students imported and any duplicates found.
+
+   Use case ends.
+
+**Extensions:**
+
+- **3a.** The file location is invalid or the file does not exist.
+
+  - **3a1.** System informs the educator that the file was not found.
+  - **3a2.** Educator provides a valid file location.
+
+    Use case resumes from step 4.
+
+- **4a.** The file format is invalid or corrupted.
+
+  - **4a1.** System informs the educator of the invalid file format.
+
+    Use case ends.
+
+---
+
+#### **Use Case: UC13 - Export Students**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to export students to a CSV file.
+2. System exports all student data to a CSV file at a default location.
+3. System displays a confirmation message with the file location.
+
+   Use case ends.
+
+---
+
+#### **Use Case: UC14 - Clear All Entries**
+
+**Main Success Scenario (MSS):**
+
+1. Educator chooses to clear all entries.
+2. System deletes all student and group data.
+3. System displays a confirmation message.
+
+   Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
@@ -514,7 +738,6 @@ Use case ends.
    able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be usable by an Educator who has never used a command line interface.
 5. Should not terminate unless exit command given.
-6. Parents should not be able to remove students.
 
 ### Glossary
 
