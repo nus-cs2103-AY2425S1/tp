@@ -1,5 +1,6 @@
 package seedu.edulog.model.calendar;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
@@ -7,16 +8,15 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.edulog.model.calendar.exceptions.DuplicateLessonException;
+import seedu.edulog.model.student.Student;
 
 /**
  * Calendar class
  */
 public class EdulogCalendar {
-    private ObservableList<Lesson> lessons;
-
-    public EdulogCalendar() {
-        lessons = FXCollections.observableArrayList();
-    }
+    private final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
+    private final ObservableList<Lesson> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(lessons);
 
     public ObservableList<Lesson> getLessonList() {
         return lessons;
@@ -28,7 +28,16 @@ public class EdulogCalendar {
             throw new DuplicateLessonException();
         }
 
-        this.lessons = FXCollections.observableArrayList(lessons);
+        this.lessons.setAll(lessons);
+    }
+
+    public void setLessons(EdulogCalendar edulogCalendar) {
+        if (!lessonsAreUnique(edulogCalendar.lessons)) {
+            throw new DuplicateLessonException();
+        }
+
+        requireNonNull(edulogCalendar);
+        lessons.setAll(edulogCalendar.lessons);
     }
 
     /**
@@ -74,5 +83,12 @@ public class EdulogCalendar {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Lesson> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
     }
 }

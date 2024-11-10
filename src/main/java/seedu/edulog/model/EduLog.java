@@ -211,7 +211,7 @@ public class EduLog implements ReadOnlyEduLog {
      */
     @Override
     public ObservableList<Lesson> getLessonList() {
-        return edulogCalendar.getLessonList();
+        return edulogCalendar.asUnmodifiableObservableList();
     }
 
     /**
