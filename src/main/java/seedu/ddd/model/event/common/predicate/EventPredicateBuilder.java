@@ -14,7 +14,9 @@ import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.common.Id;
+import seedu.ddd.model.common.Name;
 import seedu.ddd.model.event.common.Date;
+import seedu.ddd.model.event.common.Description;
 import seedu.ddd.model.event.common.Event;
 
 /**
@@ -47,6 +49,9 @@ public class EventPredicateBuilder {
     private Predicate<Event> addDescriptionPredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_DESC).isPresent()) {
+            if (!Description.isValidDescription(argMultimap.getValue(PREFIX_DESC).get())) {
+                throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_DESC);
             String[] descriptionKeywords = args.split("\\s+");
             combinedPredicate = combinedPredicate.and(
@@ -70,6 +75,9 @@ public class EventPredicateBuilder {
     private Predicate<Event> addNamePredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            if (!Name.isValidName(argMultimap.getValue(PREFIX_NAME).get())) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_NAME);
             String[] nameKeywords = args.split("\\s+");
             combinedPredicate = combinedPredicate.and(
@@ -81,6 +89,9 @@ public class EventPredicateBuilder {
     private Predicate<Event> addDatePredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            if (!Date.isValidDate(argMultimap.getValue(PREFIX_DATE).get())) {
+                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_DATE);
             combinedPredicate = combinedPredicate.and(new EventDatePredicate(new Date(args)));
         }
