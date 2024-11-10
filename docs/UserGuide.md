@@ -142,7 +142,7 @@ Adds a supplier to VendorVault.
 
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
 
-<box type="details" seamless>
+
 
 Parameters:
 
@@ -155,10 +155,12 @@ Parameters:
 - `[t/TAG]`: `TAG` is the tag(s) associated with the supplier. It must be alphanumeric, and only contain between 1 and 50 (inclusive) characters.
 - `[pro/PRODUCT]`: `PRODUCT` is the product(s) associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
   - One space is counted as one character.
-  - A product name cannot be made up of only spaces.
+  - A `PRODUCT` cannot be made up of only spaces.
+
+<box type="tip" seamless>
 
 **Tip:** A supplier can have any number of `TAG` and `PRODUCT` (including 0).
-- To include multiple `TAG`, use multiple `t/TAG`.
+- To include multiple `TAG`/`PRODUCT`, use multiple `t/TAG`/`pro/PRODUCT` respectively.
 
 </box>
 
