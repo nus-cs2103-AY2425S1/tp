@@ -87,8 +87,7 @@ public class EditCommandParserTest {
         String invalidCommand = String.format("edit %s n/%s %s %s",
                 "12345678", VALID_NAME_AMY, VALID_MODULE_AMY, VALID_MODULE_BOB);
 
-        assertParseFailure(parser, invalidCommand, String.format(
-                seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, invalidCommand, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
