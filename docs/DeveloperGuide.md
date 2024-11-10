@@ -13,6 +13,8 @@ title: Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 * [Implementation](#implementation)
+    * [Add Client Feature](#add-client-feature)
+    * [Add Listing Feature](#add-listing-feature)
     * [Sort Feature](#sort-feature)
 * [Documentation, Logging, Testing, Configuration, Dev-Ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix-A: Requirements](#appendix-a-requirements)
@@ -172,7 +174,7 @@ The `Model` component,
 The `Storage` component,
 
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `PROpertyStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -185,6 +187,45 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
     
+### Add Client Feature
+
+the AddCommand follows a typical command pattern where `LogicManager` orchestrates the parsing and execution process. 
+When the user input is received, `LogicManager` calls `AddressBookParser` to interpret and parse the user input string into an executable command.
+In this case, `AddressBookParser` creates `AddCommandParser` to parse user input string.
+
+![AddSequenceDiagram](images/developer-guide-images//AddSequenceDiagram-Logic.png)
+
+`AddressBookParser` first obtains the values corresponding to the prefixes `n/`, `p/`, `e/`, `a/`, `t/` and `r/`.
+`AddressBookParser` ensures that:
+- All values corresponding to the prefixes are valid
+  If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, 
+  `AddCommandParser` creates an `AddCommand` instance with a `Person` object representing the new client.
+
+Upon execution, `AddCommand` first queries the supplied model if it contains a person. If no duplicate person exists, `AddCommand` then calls on `model::addPerson` to add the person into the contact list.
+
+### Add Listing Feature
+
+the ListingAddCommand follows a typical command pattern where `LogicManager` orchestrates the parsing and execution process.
+When the user input is received, `LogicManager` calls `AddressBookParser` to interpret and parse the user input string into an executable command.
+In this case, `AddressBookParser` creates `ListingCommandsParser` to parse user input string.
+
+![AddListingSequenceDiagram](images/developer-guide-images//AddListingSequenceDiagram-Logic.png)
+
+`ListingCommandsParser` first obtains the user input string and ensures that the suffix of the command matches 'add' or 'delete'. 
+ If the suffix does not match either, `ListingCommandsParser` throws a ParseException. Otherwise,
+ `ListingCommandsParser` creates `ListingAddCommandParser` to parse the arguments.
+
+`ListingAddCommandParser` then extracts the index and the values corresponding to the prefixes `t/` and `a/`.
+`ListingAddCommandParser` ensures that:
+- Provided index is within a valid range, meaning it cannot be less than 1 or greater than the number of clients in the currently displayed list.
+- All values corresponding to the prefixes are valid.
+
+If any of the above constraints are violated, `ListingAddCommandParser` throws a ParseException. Otherwise,
+`ListingAddCommandParser` creates an `ListingAddCommand` instance with a `Listing` object representing the new listing.
+
+Upon execution, `ListingAddCommand` first attempts to add a listing in a `UniqueListingList`. If no duplicate listing exists,
+`UniqueListingList` then adds the listing to its list. 
+
 ### Sort Feature
 
 
