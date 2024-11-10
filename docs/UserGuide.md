@@ -417,12 +417,6 @@ None, as it is an automatic feature.
 
 ![Birthday Reminder Example](images/Birthday.png)
 
----
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
