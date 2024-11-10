@@ -5,8 +5,11 @@ title: User Guide
 
 **Address Book Command Line Interface (ABCLI)** is a desktop application tailored for **real estate agents** who value the speed and efficiency of managing workflows through a **Command Line Interface (CLI)**. With the added support of a Graphical User Interface (GUI) for visual clarity, ABCLI empowers agents to handle contacts, schedule meetings, and organize property details significantly faster than traditional GUI-only applications. If you are a fast-typing real estate agent, ABCLI is designed to keep up with your speed, boosting your productivity.
 
-## Table of Contents
+<a id="toc"></a>
+<span style="font-size: 30px; font-weight: bold; color: #d67d3e">Table of Contents</span>
 
+* [How to use the User Guide](#how-to-user-guide)
+* [Display Boxes](#display-boxes)
 * [Application Overview](#application-overview)
 * [Quick Start](#quick-start)
 * [Features](#features)
@@ -43,27 +46,30 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## How to use the User Guide
+<a id="how-to-user-guide"></a>
+<span style="font-size: 30px; font-weight: bold; color: #d67d3e">How to Use the User Guide</span>
 
 This User Guide is designed to help you navigate and make the most of ABCLI. It introduces the application's features and guides you from getting started to mastering each function, all without requiring any prior knowledge. Explore each section below:
 
-1. **[Table of Contents](#Table-of-Contents)**: Located at the start of the guide, this is useful whenever you want to locate a specific section or topic quickly.
+1. **[Table of Contents](#toc)**: Located at the start of the guide, this is useful whenever you want to locate a specific section or topic quickly.
 
-2. **[Application Overview](#Application-Overview)**: Refer to this section if you are new to ABCLI or want to understand its purpose and primary capabilities. It is ideal for getting a high-level understanding of how ABCLI can support your real estate tasks.
+2. **[Application Overview](#application-overview)**: Refer to this section if you are new to ABCLI or want to understand its purpose and primary capabilities. It is ideal for getting a high-level understanding of how ABCLI can support your real estate tasks.
 
-3. **[Quick Start](#Quick Start)**: Use this section if you are setting up ABCLI for the first time. It provides step-by-step instructions to get the app running.
+3. **[Quick Start](#quick-start)**: Use this section if you are setting up ABCLI for the first time. It provides step-by-step instructions to get the app running.
 
-4. **[Features](#Features)**: This is your go-to section as you start using ABCLI. Divided into [General](#General), [Buyers](#Buyer), [Meet Ups](Meet Ups), and [Properties](Properties), it details how to use each feature, including command formats, tips, and examples. Refer here whenever you need guidance on operating any part of the app.
+4. **[Features](#features)**: This is your go-to section as you start using ABCLI. Divided into [General](#general), [Buyers](#buyers), [Meet Ups](#meet-ups), and [Properties](#properties), it details how to use each feature, including command formats, tips, and examples. Refer here whenever you need guidance on operating any part of the app.
 
-5. **[FAQ](#FAQ)**: Consult this section if you encounter issues or have questions about ABCLI’s functionality. It provides answers to common questions and can help resolve typical challenges.
+5. **[FAQ](#faq)**: Consult this section if you encounter issues or have questions about ABCLI’s functionality. It provides answers to common questions and can help resolve typical challenges.
 
-6. **[Known Issues](#Known-Issues)**: If ABCLI behaves unexpectedly, refer to this section to see if it’s a known issue. This section lists potential problems and workarounds, helping you troubleshoot effectively.
+6. **[Known Issues](#known-issues)**: If ABCLI behaves unexpectedly, refer to this section to see if it’s a known issue. This section lists potential problems and workarounds, helping you troubleshoot effectively.
 
-7. **[Command Summary](#Command-Summary)**: Ideal as a quick reference guide, this section provides an overview of all available commands. Use it when you need to check the format or options for any command without going into full detail.
+7. **[Command Summary](#command-summary)**: Ideal as a quick reference guide, this section provides an overview of all available commands. Use it when you need to check the format or options for any command without going into full detail.
 
-8. **[Glossary](#Glossary)**: If you encounter any unfamiliar terms while using ABCLI or reading the guide, refer to the Glossary. It defines key terms to ensure clarity as you navigate the app.
+8. **[Glossary](#glossary)**: If you encounter any unfamiliar terms while using ABCLI or reading the guide, refer to the Glossary. It defines key terms to ensure clarity as you navigate the app.
 
-### Display Boxes
+<a id="display-boxes"></a>
+<span style="font-size: 30px; font-weight: bold; color: #d67d3e">Display Boxes</span>
+
 Throughout the guide, you will see display boxes with additional information:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -122,7 +128,9 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 **Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
 </div>
 
-7. Enter commands: Type a command in the command box and press Enter to execute it. For example, typing `help` and pressing Enter will open the help window.<br>
+7. Here is a quick guide to the GUI.<br>
+   ![GuiGuide](images/GuiGuide.png)
+8. Enter commands: Type a command in the command box and press Enter to execute it. For example, typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `view` : Lists all buyers.
@@ -135,7 +143,7 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 
    * `exit` : Exits the app.
 
-8. Explore available features: Refer to the [Features](#features) section below for details on each command.
+9. Explore available features: Refer to the [Features](#features) section below for details on each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
