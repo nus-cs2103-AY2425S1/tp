@@ -6,6 +6,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.ddd.logic.parser.ParserUtil.MESSAGE_INVALID_ID;
 import static seedu.ddd.logic.parser.ParserUtil.verifyNoEmptyInput;
 
 import java.util.Arrays;
@@ -89,6 +90,9 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addIdPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            if (!Id.isValidId(argMultimap.getValue(PREFIX_ID).get())) {
+                throw new ParseException(MESSAGE_INVALID_ID);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_ID);
             Id contactId = new Id(Integer.parseInt(args));
             combinedPredicate = combinedPredicate.and(new ContactIdPredicate(contactId));

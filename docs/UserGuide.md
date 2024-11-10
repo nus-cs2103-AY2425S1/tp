@@ -8,7 +8,7 @@
 
 Are you a freelance **wedding planner**? Then DDD is just the right tool for you! Managing hundreds of clients and vendors can be troublesome, and **Dream Day Designer (DDD)** is our **answer** to your problems!
 
-DDD is a desktop app for **wedding planners** to keep track of their **clients**, **vendors** and **events**, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+DDD is a desktop app for **wedding planners** to keep track of their **clients**, **vendors** and **events**, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 DDD is tailored specifically to the needs of **wedding planners**, and is designed to streamline your workflows. If you can type fast, DDD can even help you manage your contacts faster than traditional GUI apps! Furthermore, DDD offers features designed to alleviate the hassle of managing disparate sets of contacts!
 
@@ -25,7 +25,7 @@ DDD is tailored specifically to the needs of **wedding planners**, and is design
 
 3. Copy the file to the folder you want to use as the _home folder_ for your DDD.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ddd.jar` command to run the application.<br>
+4. Open a command terminal, use `cd path_to_folder` command to access the folder you put the jar file in, and use the `java -jar ddd.jar` command to run the application.<br>
 
 A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
@@ -201,7 +201,7 @@ Notes:
 * `des/DESCRIPTION` should only be specified if `-e` is specified.
 * If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
 * All user input in between flags are ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
-* The name keyword search is case-insensitive. e.g `hans` will match `Hans`.
+* The name keyword search is case-insensitive. e.g. `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` **AND** phone number `91234567`.
 * Searching by address will list all contacts with addresses that include the keywords. e.g. `list a/Blk 123` will list contacts with address `Blk 123` and `Blk 456` because`Blk 456` contains the word `Blk`.
@@ -496,11 +496,15 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 In case you need more information on the command parameters, here's a more comprehensive explanation of each parameter:
 
+- `Vendor`: A person who provides certain kinds of services
+- `Client`: A person who is getting married
+- `Event`: The wedding event
+
 ### Flags
 
-Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
+Some commands can be applied on clients, vendors and events. Use `-CONTACT_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
 
-* `-c`: flag to specify client related commmands
+* `-c`: flag to specify client related commands
 * `-v`: flag to specify vendor related commands
 * `-e`: flag to specify event related commands
 
@@ -520,7 +524,7 @@ Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` 
       <td>Name of contact/event</td>
       <td>
         <ul>
-          <li>should only lphanumeric characters or spaces</li>
+          <li>should only alphanumeric characters or spaces, and it should not be blank</li>
         </ul>
       </td>
     </tr>
@@ -593,7 +597,7 @@ Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` 
       <td>Tag associated with contact</td>
       <td>
         <ul>
-          <li>should only contain alphanumeric characters or dashses</li>
+          <li>should only contain alphanumeric characters or dashes</li>
         </ul>
       </td>
     </tr>
