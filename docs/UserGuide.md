@@ -440,8 +440,12 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **When using multiple screens**, if you move the application to a secondary screen and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the Help menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Major and University Field Validation**:
+    - The application currently allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`), which is unintended.
+    - **Limitation**: The app does not restrict users from entering numerical values or potential module codes as majors and universities.
+    - **Planned Solution**: We plan to introduce stricter input validation to prevent numbers-only entries for these fields in future versions.
 
 ---
 
