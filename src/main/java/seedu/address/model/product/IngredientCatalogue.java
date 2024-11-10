@@ -53,6 +53,13 @@ public class IngredientCatalogue extends Catalogue {
             nextProductId = Collections.max(productCatalogue.keySet()) + 1;
         }
     }
+    @Override
+    public void clear() {
+        productCatalogue.clear();
+        ingredientByName.clear();
+        nextProductId = 1;
+    }
+
     /**
      * Returns the singleton instance of IngredientCatalogue.
      *

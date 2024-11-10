@@ -502,9 +502,9 @@ clear
 ![Clear.png](images%2FClear.png)
 
 The Clear All Command clears all data in the address book, removing all stored records such as customer and supplier
-details and inventory items.
+details, orders and catalogue items.
 
-For example, typing **clear** will remove all customer, supplier and inventory information from the address book.
+For example, typing **clear** will remove all customer, supplier and order information from the address book.
 This command provides a quick way to delete all existing records in one go, allowing bakery owners to reset their
 address book fully. It is helpful when bakery owners want a fresh start or data needs to be purged for any reason.
 This command ensures the address book is empty and ready for new entries.
