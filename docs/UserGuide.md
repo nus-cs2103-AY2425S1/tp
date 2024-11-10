@@ -139,7 +139,7 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
 
 
 * Parameters enclosed in square brackets indicate that they are optional. <br>
-  e.g. in `filter [n/NAME]`, `NAME` is a parameter which can be included or omitted as needed.
+  e.g. in `filter n/NAME [m/MODULE]`, `MODULE` is a parameter which can be included or omitted as needed.
 
 
 * Parameters can be in any order.<br>
