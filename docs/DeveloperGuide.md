@@ -157,6 +157,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find feature
+The `find` feature follows the sequence diagram here:
+<puml src="diagrams/FindSequenceDiagram.puml" width="550" />
+
+### Mass Reject feature
+The `mass reject` feature follows the sequence diagram here:
+<puml src="diagrams/MassRejectSequenceDiagram.puml" width="550" />
+
 
 ### Statistics feature
 The `statistics` feature follows the sequence diagram here:

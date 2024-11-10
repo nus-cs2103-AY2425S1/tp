@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MassRejectCommandParser" as MassRejectCommandParser LOGIC_COLOR
+participant "mr:MassRejectCommand" as MassRejectCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("massReject j/SWE2024 t/TP")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("massReject j/SWE2024 t/TP")
+activate AddressBookParser
+
+create MassRejectCommandParser
+AddressBookParser -> MassRejectCommandParser
+activate MassRejectCommandParser
+
+MassRejectCommandParser --> AddressBookParser
+deactivate MassRejectCommandParser
+
+AddressBookParser -> MassRejectCommandParser : parse("j/SWE2024 t/TP")
+activate MassRejectCommandParser
+
+create MassRejectCommand
+MassRejectCommandParser -> MassRejectCommand
+activate MassRejectCommand
+
+MassRejectCommand --> MassRejectCommandParser
+deactivate MassRejectCommand
+
+MassRejectCommandParser --> AddressBookParser : mr
+deactivate MassRejectCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MassRejectCommandParser -[hidden]-> AddressBookParser
+destroy MassRejectCommandParser
+
+AddressBookParser --> LogicManager : mr
+deactivate AddressBookParser
+
+LogicManager -> MassRejectCommand : execute(m)
+activate MassRejectCommand
+
+MassRejectCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+
+Model --> MassRejectCommand : filteredList
+deactivate Model
+
+loop for each p in filteredList
+    MassRejectCommand -> Person : setTag("r")
+end
+
+create CommandResult
+MassRejectCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MassRejectCommand
+deactivate CommandResult
+
+MassRejectCommand --> LogicManager : r
+deactivate MassRejectCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
