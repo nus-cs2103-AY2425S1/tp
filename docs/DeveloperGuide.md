@@ -620,9 +620,9 @@ Preconditions: User is viewing an item.
 
 10. **Vendor:** A service provider, such as a caterer, photographer, decorator, who is employed for events.
 
-12. **Item**: Refers to any entity or object that can be viewed or deleted within the system, such as an event, vendor.
+11. **Item**: Refers to any entity or object that can be viewed or deleted within the system, such as an event, vendor.
 
-13. **Associated Entities**: Refers to any related items or dependencies connected to the main item. For example, for an event, associated entities include assigned vendors; for a vendor, associated entities include assigned events.
+12. **Associated Entities**: Refers to any related items or dependencies connected to the main item. For example, for an event, associated entities include assigned vendors; for a vendor, associated entities include assigned events.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -682,12 +682,12 @@ testers are expected to do more *exploratory* testing.
 1.  Delete a Vendor:
 
     1.  Type `delete v/1` <br>
-        Expected: The first vendor in the list is removed from EventTory if it does not have any assigned event. Else, deletion will fail.
+        Expected: The first vendor in the list is removed from EventTory if it is not assigned to any event. Else, the deletion will fail.
 
 2.  Delete an Event:
 
     1. Type `delete e/2` <br>
-       Expected: The second event in the list is removed from EventTory if it does not have any assigned vendor. Else, deletion will fail.
+       Expected: The second event in the list is removed from EventTory if it is not assigned to any vendor. Else, the deletion will fail.
 
 ### List Command
 
@@ -764,7 +764,7 @@ testers are expected to do more *exploratory* testing.
 1. Getting Help:
 
    1. Type `help` in the command box and press Enter.
-      Expected: A help window appears with a URL directed to the user guide.
+      Expected: A help window appears with a link to the user guide.
 
 ### Editing Data File (Advanced Users)
 

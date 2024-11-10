@@ -153,7 +153,7 @@ Note:
 <box type="tip" seamless><br>
 Tip: A vendor or event can have any number of tags (including 0).
 </box>
-* If an event or a vendor already has the same name, command will fail and error message will be displayed.
+* If an event or a vendor already has the exact same name (case-sensitive), the command will fail and an error message will be displayed.
 
 Examples:
 * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew`
@@ -289,8 +289,10 @@ Note:
 * Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
   * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
 * If user is viewing an event or a vendor, the `find` command will affect the assignable list only. Assigned list is not affected.
-* To find an event according to its `date`, the displayed format should be followed.
+  ![find on view](images/findOnView.png)
+* To search the date field of events, the displayed format of dates should be followed.
   * e.g. `find v/ -11-` will return events dated in November.
+  * String matching is used to search date fields, so the keywords `November` and `Nov` will not match a date with month `11`.
 * If no matches are found, the user will be informed and the current view will remain unchanged.
 * If no keyword is provided, the operation will fail.
 
