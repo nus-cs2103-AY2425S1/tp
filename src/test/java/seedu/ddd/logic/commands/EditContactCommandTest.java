@@ -318,8 +318,6 @@ public class EditContactCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setContact(targetContact, editedContact);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-        System.out.println(model.getAddressBook());
-        System.out.println(expectedModel.getAddressBook());
 
         // first contact should still be ALICE
         targetContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
@@ -389,6 +387,26 @@ public class EditContactCommandTest {
         }
         assert editedBenson != null;
         assertEquals(editedName, editedBenson.getName().fullName);
+    }
+
+    @Test
+    public void execute_duplicatedName_failure() {
+        // first contact should be ALICE
+        Index targetIndex = INDEX_FIRST_CONTACT;
+        Contact targetContact = model.getFilteredContactList().get(targetIndex.getZeroBased());
+        assertEquals(ALICE, targetContact);
+
+        // try to edit a contact to have an existing name
+        assert model.hasContact(BENSON);
+        Contact editedContact = (Contact) new ClientBuilder((Client) targetContact)
+                .withName(BENSON.getName().fullName)
+                .build();
+
+        EditContactDescriptor editContactDescriptor = new EditContactDescriptorBuilder(editedContact).build();
+        EditCommand editCommand = new EditContactCommand(targetIndex, editContactDescriptor);
+
+        String expectedMessage = EditContactCommand.MESSAGE_DUPLICATE_CONTACT;
+        assertCommandFailure(editCommand, model, expectedMessage);
     }
 
     @Test

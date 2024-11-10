@@ -108,6 +108,13 @@ public class UniqueContactList implements Iterable<Contact> {
             throw new DuplicateContactException();
         }
 
+        // check if same contact exists
+        Predicate<Contact> duplicateContactPredicate = contact ->
+                contact != target && contact.isSameContact(editedContact);
+        if (internalList.stream().anyMatch(duplicateContactPredicate)) {
+            throw new DuplicateContactException();
+        }
+
         internalList.set(index, editedContact);
     }
 

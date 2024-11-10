@@ -98,6 +98,15 @@ public class EditContactCommand extends EditCommand {
 
         try {
             model.setContact(contactToEdit, editedContact);
+
+            for (Event event : editedContact.getEvents()) {
+                event.removeContact(contactToEdit);
+                if (editedContact instanceof Client) {
+                    event.addClient((Client) editedContact);
+                } else {
+                    event.addVendor((Vendor) editedContact);
+                }
+            }
         } catch (DuplicateContactException e) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
@@ -136,13 +145,11 @@ public class EditContactCommand extends EditCommand {
         Set<Event> events = new HashSet<>(contactToEdit.getEvents());
         Id id = contactToEdit.getId();
 
-        Client client = new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, id);
+        Client editedClient = new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, id);
         for (Event event : events) {
-            event.removeContact(contactToEdit);
-            client.addEvent(event);
-            event.addClient(client);
+            editedClient.addEvent(event);
         }
-        return client;
+        return editedClient;
     }
 
     /**
@@ -166,14 +173,12 @@ public class EditContactCommand extends EditCommand {
         Set<Event> events = new HashSet<>(contactToEdit.getEvents());
         Id id = contactToEdit.getId();
 
-        Vendor vendor = new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress,
+        Vendor editedVendor = new Vendor(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedService, updatedTags, id);
         for (Event event : events) {
-            event.removeContact(contactToEdit);
-            vendor.addEvent(event);
-            event.addVendor(vendor);
+            editedVendor.addEvent(event);
         }
-        return vendor;
+        return editedVendor;
     }
 
     @Override
