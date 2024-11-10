@@ -854,3 +854,14 @@ testers are expected to do more *exploratory* testing.
        e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
+## **Appendix: Planned Enhancements**
+
+**_Team size: 5_**
+
+1. **Integrate `pay` and `settle` command to reduce user confusion**: 
+
+* In the current version, the `pay` command adds student's payment to the paid amount, while the `settle` command subtracts the amount repaid from owed amount and adds to the paid amount. This somehow confuses users, especially new users.
+* In the future version, we plan to integrate the 2 commands into 1 command: `pay toPaid/AMOUNT | fromOwed/AMOUNT`.
+  * To be specific, the new `pay` command accepts either `toPaid/AMOUNT` or `fromOwed/AMOUNT` but not both and there must be exactly one argument given.
+  * `toPaid/AMOUNT` specifies the amount the student **pays**, will be added to the paid amount.
+  * `fromOwed/AMOUNT` specifies the amount the student **repays**, will be subtracted from the owed amount then added to the paid amount.
