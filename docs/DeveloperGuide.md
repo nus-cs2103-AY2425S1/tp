@@ -17,6 +17,7 @@
   used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
@@ -201,6 +202,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Implementation**
@@ -278,6 +280,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - Con: Possible for user to mistype the wrong number
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ### Delete Group feature
@@ -337,6 +340,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - Con: Possible for user to mistype the wrong number
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ### Undo/redo feature
@@ -400,6 +404,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - [DevOps guide](DevOps.md)
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
@@ -430,7 +435,7 @@ PlantUML, the lifeline continues till the end of diagram.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a ...        | I want to...                                  | So that I can...                                    |
-|----------|-----------------|-----------------------------------------------|-----------------------------------------------------|
+| -------- | --------------- | --------------------------------------------- | --------------------------------------------------- |
 | `* * *`  | disorganised TA | mark tasks                                    | keep track of what a group has completed            |
 | `* * *`  | disorganised TA | remove tasks after I wrongly added them       | correct my mistake                                  |
 | `* * *`  | new TA          | add tasks to groups                           | keep track of what task each group has              |
@@ -759,21 +764,23 @@ Use case ends.
    able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be for a single user only.
 5. Data should be stored in a human editable text file.
-6. Should not depend on any remote server.
-7. Should be packaged into a single JAR file
+6. Should be able to store up to 100 version histories.
+7. Should not depend on any remote server.
+8. Should be packaged into a single JAR file
 
 _{More to be added}_
 
 ### Glossary
 
 | Key Terms      | Definition                                                   |
-|----------------|--------------------------------------------------------------|
+| -------------- | ------------------------------------------------------------ |
 | Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
 | JAR            | Executable file containing Java classes and other resources. |
 | Prefix         | Keyword used in commands to specify the parameter type       |
 | Student Number | Unique identifier for a student                              |
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
@@ -990,7 +997,7 @@ testers are expected to do more _exploratory_ testing.
     2. Test case: `ag gn/cs2103-f20-1`<br>
        Expected: The group is added into the group list.
 
-    3. Test case: ag gn/cs2103-f20-1`<br> (Add the same group again)
+    3. Test case: `ag gn/cs2103-f20-1`<br> (Add the same group again)
        Expected: After doing the above step, repeating this command again will yield an error message.
 
     4. Test case: `ag gn/Team 1`<br>
@@ -1300,6 +1307,7 @@ testers are expected to do more _exploratory_ testing.
        application, which is the panel displaying the student list.
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
@@ -1318,6 +1326,57 @@ testers are expected to do more _exploratory_ testing.
 
 **Group size:** 4
 
-**Total Enhancements:** x/8 (`2x4`)
+**Total Enhancements:** 5/8 (`2x4`)
 
-[To be updated.]
+### 1. Update Email Constraints
+
+Currently, our system only validates the `local-part` of an email is alphanumerical, the following special characters `_`, `.`
+and does not start or end with special characters.
+
+##### Enhancement
+
+We plan to enhance the validation such that it follows NUS' email constraints, i.e. in the format of a student's NUS ID or friendly email.
+
+### 2. Improve UI
+
+Currently, our system only supports showing a single display panel at one time.
+
+##### Enhancement
+
+We plan to split display panel into 3 that will display students, groups and tasks panels respectively.
+This will allow users to better see all information rather than toggling through each display panel.
+
+### 3. Improve granularity of Find Student command
+
+Currently, our system returns all results that match any of the queries.
+
+#### Enhancement
+
+We plan to include other parameters such as `sno`, `sn`, `e` to allow users to search specific fields of a student.
+
+Flags will be introduced to fine-tune the search such that the user can choose for the system to search if the fields contain the queries or if the fields start with the queries.
+Additionally, we will also change the command to return only results that match ALL queries given.
+
+### 4. Enhance Sort Group
+
+Currently, our system sorts `Groups` by ASCII order.
+
+#### Enhancement
+
+We plan to improve the sorting feature to sort by alphabetical and numerical order.
+
+Below is a simplified process of how the sort will work:
+
+A reminder that this is the format accepted for `Group Name`: `[Module]-[Tutorial Group]-[Group Number]`
+
+1. For `Module`, `CS2103` groups will come first, followed by `CS2103T` groups.
+2. For `Tutorial Group`, the letter will be compared first and sorted by alphabetical order. If there is a tie, the numerical part will be compared and sorted in descending order.
+3. For `Group Number`,if the sort feature reaches this section, it will be sorted by descending order of numerical value.
+
+### 5. Enhance Sort Student
+
+Currently, our system sorts `Students` by ASCII order.
+
+#### Enhancement
+
+We plan to update the sorting such that it sorts by alphabetical order instead.
