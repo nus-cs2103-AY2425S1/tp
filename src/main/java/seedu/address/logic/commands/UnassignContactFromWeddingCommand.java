@@ -35,7 +35,7 @@ public class UnassignContactFromWeddingCommand extends Command {
             + PREFIX_CONTACT + "1 2 3";
 
     public static final String MESSAGE_UNASSIGN_FROM_WEDDING_SUCCESS =
-            "Unassigned the following people from %1$s's wedding: %2$s";
+            "Unassigned the following people from %1$s: %2$s";
 
 
     //private final Index specificWeddingIndex;
