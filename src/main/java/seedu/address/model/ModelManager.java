@@ -302,7 +302,7 @@ public class ModelManager implements Model {
 
     /**
      * Remove invalid receipts if {@code Name}
-     *     does not match an existing one.
+     * does not match an existing one.
      */
     private void filterIllegalSupplierNames() {
         this.goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));
