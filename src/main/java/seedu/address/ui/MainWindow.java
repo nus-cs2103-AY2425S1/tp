@@ -172,7 +172,6 @@ public class MainWindow extends UiPart<Stage> {
     private void handleChangeTheme() {
         // Get the current stylesheets
         ObservableList<String> stylesheets = getPrimaryStage().getScene().getStylesheets();
-        System.out.println(stylesheets);
 
         // Define the paths for the Light and Dark theme CSS files
         String darkTheme = Objects.requireNonNull(getClass()
