@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.UnstarCommand;
 import seedu.address.model.person.Name;
 
@@ -37,18 +39,18 @@ public class UnstarCommandParserTest {
     public void parse_invalidName_throwsParseException() {
         // Assuming names cannot contain special characters, like '@'
         assertParseFailure(parser, "John @ Doe",
-                Name.MESSAGE_CONSTRAINTS);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnstarCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
         // Test with a negative index
         assertParseFailure(parser, "-1",
-                ParserUtil.MESSAGE_INVALID_INDEX);
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // Test with zero index
         assertParseFailure(parser, "0",
-                ParserUtil.MESSAGE_INVALID_INDEX);
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
     }
 }
