@@ -86,7 +86,7 @@ Actor: New User
 **MSS**
 1. A user requests to list expenses
 2. The system shows a list of expenses
-3. The user requests to mark or unmark the selected expense.
+3. The user requests to mark the selected expense as Done or Not Done.
 4. The system updates the status of the expense.
 5. The system displays a success message indicating the change.
    <br>Use case ends.<br>

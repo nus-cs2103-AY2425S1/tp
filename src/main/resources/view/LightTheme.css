@@ -369,6 +369,10 @@
     -fx-background-radius: 8;
 }
 
+.label-container {
+    -fx-background-color: #E0E0E0;
+}
+
 .you-owe-text {
     -fx-text-fill: red;
 }
