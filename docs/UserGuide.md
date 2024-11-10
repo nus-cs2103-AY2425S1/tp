@@ -6,7 +6,7 @@
 
 # InSUREance APP User Guide
 
-InSUREance is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InSUREance can get your contact management tasks done faster than traditional GUI apps.
+InSUREance is a **desktop app for managing clients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InSUREance can get your client management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -23,18 +23,18 @@ InSUREance is a **desktop app for managing contacts, optimized for use via a  Li
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar inSUREance.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/appScreenshot.png)
+   ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all clients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to InSUREance app.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd client shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all clients.
 
    * `exit` : Exits the app.
 
@@ -80,7 +80,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A client can have any number of tags (including 0)
+**Tip 1:** Phone number can take on multiple formats, including for Singapore and foreign
+numbers (without the + symbol). This supports insurance agents with an international customer base. </br>
+**Tip 2:** A client can have any number of tags (including 0)
 </box>
 
 Examples:
@@ -150,6 +152,9 @@ Input 1: `find alex yu`
 <br>
 Output 1: ![result for 'find alex yu'](images/findalexyuResult.png)
 
+**Note**: the results of this command will be cleared after the execution of the next successful
+command. The list of clients would revert to showing the full list of all clients saved in the app.
+
 
 ### Deleting a client : `delete`
 
@@ -216,6 +221,7 @@ any number of digits for dollars but must be exactly 2 digits for cents. The cla
 user will be informed with an error message.
 * Claim Amount can be 0, in case the claim details have not been finalised and the user wishes to use the claim as
 as a placeholder claim for now.
+* Claim amount is in Singapore dollars.
 * Claims are opened with a default status of "open".
 * To simulate real world conditions, we have fixed the claim ID to always follow a specific format which
   is alphabet + 4-digit number. All other format of claims will be considered invalid.
@@ -321,11 +327,12 @@ Click Theme to toggle between Dark Theme and Light Theme.
 
 ### Saving the data
 
-App data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+App data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually. </br>
+**Note**: This would only take effect after a successful command is executed.
 
 ### Editing the data file
 
-App data are saved automatically as a JSON file `[JAR file location]/data/inSUREance.json`. Advanced users are welcome to update data directly by editing that data file.
+App data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
