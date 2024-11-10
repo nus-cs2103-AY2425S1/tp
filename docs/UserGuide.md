@@ -993,7 +993,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > ---
 
 - **Special Comments:**
-  Refer to the remarks and constraints for the following prefix: [n/](#n)
+1. Refer to the remarks and constraints for the following prefix: [n/](#n)
 
 #### Chat Window
 - **Command:** `chatbot`
