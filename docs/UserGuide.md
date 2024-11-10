@@ -8,9 +8,7 @@ title: User Guide
 BakeBuddy is your perfect companion if you're running a home-based bakery business or planning to start one. Whether 
 you're managing a small cupcake operation or a medium-sized pastry business, we've designed BakeBuddy with you in mind. 
 If you're comfortable typing messages (like in WhatsApp) and prefer quick keyboard commands over clicking through 
-menus, you'll feel right at home with our interface.
-
-BakeBuddy helps you manage your:
+menus, you'll feel right at home with our interface. BakeBuddy helps you manage your:
 - 🧁 Pastries and recipes
 - 👥 Customers and their orders
 - 📦 Suppliers and ingredients
@@ -37,7 +35,7 @@ every step, and no technical knowledge is needed.
 
 <div style="page-break-after: always;"></div>
 
-## **Before You Begin ✔️**
+## **Quick Start**
 ### **Step 1: Check if Your Computer is Ready**
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
