@@ -1320,4 +1320,11 @@ testers are expected to do more _exploratory_ testing.
 
 **Total Enhancements:** x/8 (`2x4`)
 
-[To be updated.]
+### 1. Update Email Constraints
+
+Currently, our system only validates the `local-part` of an email is alphanumerical, the following special characters `_`, `.` 
+and does not start or end with special characters.
+
+#### Enhancement
+
+We plan to enhance the validation such that it follows NUS' email constraints, i.e. in the format of a student's NUS ID or friendly email.
