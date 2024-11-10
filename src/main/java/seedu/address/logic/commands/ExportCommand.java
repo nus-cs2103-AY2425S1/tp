@@ -42,12 +42,16 @@ public class ExportCommand extends Command {
             + "./data/bae_addressbook.%1$s in the specified format.";
 
     public static final String FAILURE_MESSAGE = "Error exporting address book to %1$s";
-    public static final String BACKWARD_SLASH_REGEX = "\\\\";
-    public static final String INVERTED_COMMA_REGEX = "\"";
+    public static final String BACKWARD_SLASH = "\\\\";
+    public static final String INVERTED_COMMA = "\"";
     public static final String EMPTY_STRING = "";
 
     public static final String DEFAULT_FILEPATH = "data/";
     public static final String DEFAULT_FILENAME = "bae_addressbook";
+    public static final String NULL_VALUE = "\\b : null\\b";
+    public static final String LEFT_CURLY_BRACKET = "\\{";
+    public static final String RIGHT_CURLY_BRACKET = "}";
+    public static final String NEWLINE_OR_CARRIAGE_RETURN = "\\\\r|\\\\n";
 
     /**
      * Class that handles Format enum type used in ExportCommand
@@ -101,27 +105,20 @@ public class ExportCommand extends Command {
      */
     static String parseTags(String tagString) {
         // Remove leading and trailing whitespace
-        tagString = tagString.replaceAll("\\\\r|\\\\n", "")
-                             .replaceAll("\\\\\"", "")
-                             .replaceAll("\\b : null\\b", "")
-                             .trim();
-        // Check if the string starts with { and ends with }
-        if (tagString.startsWith("\"{") && tagString.endsWith("}\"")) {
-            // Remove the outer braces
-            tagString = tagString.substring(DISTANCE_TO_TAG_FRONT, tagString.length() - DISTANCE_TO_TAG_BACK).trim();
-
-            // Split by : and take the first part
-            String[] parts = tagString.split(":");
-            String trimmedKey = parts[0].trim()
-                    .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
-                    .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
-            if (parts.length > 1) {
-                // Trim and remove quotes from the tag name
-                String trimmedValue = parts[1].trim()
-                        .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
-                        .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
-                return trimmedKey + " : " + trimmedValue;
-            }
+        tagString = tagString.replaceAll(NEWLINE_OR_CARRIAGE_RETURN, EMPTY_STRING)
+                .replaceAll(BACKWARD_SLASH + INVERTED_COMMA, EMPTY_STRING)
+                .replaceAll(NULL_VALUE, EMPTY_STRING)
+                .replaceAll(INVERTED_COMMA + LEFT_CURLY_BRACKET, EMPTY_STRING)
+                .replaceAll(RIGHT_CURLY_BRACKET + INVERTED_COMMA, EMPTY_STRING)
+                .trim();
+        // Split the tagString; the first part represents the tag's key.
+        // If there's a second part, it represents the tag's value.
+        String[] parts = tagString.split(":");
+        boolean tagHasValue = parts.length == 2;
+        String trimmedKey = parts[0].trim();
+        if (tagHasValue) {
+            String trimmedValue = parts[1].trim();
+            return trimmedKey + " : " + trimmedValue;
         }
         // If the format doesn't match, return the original string
         return tagString;
