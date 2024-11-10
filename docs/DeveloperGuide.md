@@ -452,40 +452,143 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file `ddd.jar` and copy into an empty folder 
+   2. Open a terminal and navigate to the directory containing to the jar file.
+   3. Run `java -jar ddd.jar` in the terminal. <br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by running `java -jar ddd.jar` again.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a contact
+1. Adding a client to the existing contact list.
+    1. Prerequisites: Address book is empty or does not contain `Contacts` that have the same `Name` or `Phone` as those used below.
+    2. Test case: `add -c n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/vegan t/urgent`<br>
+       Expected: Client will be added to the contact list. Details of the newly created client shown in the status message.
+    3. Test case: `add n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/vegan t/urgent`<br>
+       Expected: Add is unsuccessful since `-c` is not specified. Error details shown in the status message. Status bar remains the same.
+    4. Test case: `add -c n/Alice e/alice@gmail.com a/1 Clementi Street Blk 25 t/vegan t/urgent`<br>
+       Expected: Add is unsuccessful since `p/` is not specified. Error details shown in the status message. Status bar remains the same.
+       1. Similar commands to try: Missing `n/`, `e/` or `a/`. <br> Expected: Same as above. 
+    5. Test case: `add -c n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/vegan t/urgent` performed twice.<br>
+       Expected: Second add is unsuccessful due to duplicate name/phone. Error details shown in the status message. Status bar remains the same.
+    6. Test case: `add -c n/Alice (Yeo) p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/vegan t/urgent` <br>
+       Expected: Add is unsuccessful due to invalid `Name` input. Error details shown in the status message. Status bar remains the same.
+       1. Similar commands to try: Invalid inputs for `p/`, `e/`, `a/` or `t/`. <br> Expected: Same as above.
 
-### Deleting a person
 
-1. Deleting a person while all persons are being shown
+2. Adding a vendor to the existing contact list.
+    1. Prerequisites: Address book is empty or does not contain `Contacts` that have the same `Name` or `Phone` as those used below.
+    2. Test case: `add -v n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 s/Catering t/budget`<br>
+       Expected: Vendor will be added to the contact list. Details of the newly created vendor shown in the status message.
+    3. Test case: `add n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 s/Catering t/budget`<br>
+       Expected: Add is unsuccessful since `-v` is not specified. Error details shown in the status message. Status bar remains the same.
+    4. Test case: `add -v n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/budget`<br>
+       Expected: Add is unsuccessful since `p/` is not specified. Error details shown in the status message. Status bar remains the same.
+        1. Similar commands to try: Missing `n/`, `p/`, `e/` or `a/`. <br> Expected: Same as above.
+    5. Test case: `add -c n/Alice p/98765432 e/alice@gmail.com a/1 Clementi Street Blk 25 s/Catering t/budget` followed by 
+       `add -v n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 s/Catering t/budget`<br>
+        Expected: Second add is unsuccessful due to duplicate phone. Error details shown in the status message. Status bar remains the same.
+    6. Test case: `add -v n/Alice (Yeo) p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 s/Catering t/budget` <br>
+       Expected: Add is unsuccessful due to invalid `Name` input. Error details shown in the status message. Status bar remains the same.
+        1. Similar commands to try: Invalid inputs for `p/`, `e/`, `a/`, `s/` or `t/`. <br> Expected: Same as above.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Adding an event
+1. Adding an event to the existing event list.
+    1. Prerequisites: Address book is empty or does not contain `Events` that have the same `Name` as those used below.
+    2. Test case: `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1`<br>
+       Expected: Event will be added to the event list. Details of the newly created event shown in the status message.
+    3. Test case: `add n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1`<br>
+       Expected: Add is unsuccessful since `-e` is not specified. Error details shown in the status message. Status bar remains the same.
+    4. Test case: `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 v/1`<br>
+       Expected: Add is unsuccessful since `c/` is not specified. Error details shown in the status message. Status bar remains the same.
+        1. Similar commands to try: Missing `n/`, `des/`, `d/` or `v/`. <br> Expected: Same as above.
+    5. Test case: `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1` followed by
+       `add -e n/Sample Wedding des/Wedding reception 2 d/2000-02-01 c/1 v/2`<br>
+       Expected: Second add is unsuccessful due to duplicate name. Error details shown in the status message. Status bar remains the same.
+    6. Test case: `add -e n/Sample (Wedding) des/Wedding reception d/2000-01-01 c/0 v/1` <br>
+       Expected: Add is unsuccessful due to invalid `Name` input. Error details shown in the status message. Status bar remains the same.
+        1. Similar commands to try: Invalid inputs for `des/`, `d/`, `c/` or `v/`. <br> Expected: Same as above.
+    7. Test case: `add -e n/Sample (Wedding) des/Wedding reception d/2000-01-01 c/0 v/1` where there is no `Client` with `Id` 0.<br>
+       Expected: Add is unsuccessful due to invalid `Client` index. Error details shown in the status message. Status bar remains the same.
+        1. Similar commands to try: Invalid index for `v/`. <br> Expected: Same as above.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
+### Editing a contact
+1. Editing an existing contact in the contact list
+    1. Prerequisites: Address book contains the `Contact` specified below.
+    2. Test case: `edit id/1 n/Bob`<br>
+       Expected: Contact will be edited accordingly. Details of the newly edited contact will be shown in the status message.
+    3. Test case: `edit 1 n/Bob` where there is at least 1 `Contact` displayed on the list. <br>
+     Expected: Contact will be edited accordingly. Details of the newly edited contact will be shown in the status message.
+    4. Test case: `edit n/Bob` <br>
+       Expected: Edit is unsuccessful as `Index` or `Id` is unspecified. Error details shown in the status message. Status bar remains the same.
+    5. Test case: `edit id/1 n/Bob` and there is another `Contact` with the same `Name` (Bob).<br>
+       Expected: Edit is unsuccessful due to duplicate `Name`. Error details shown in the status message. Status bar remains the same.
+       1. Similar commands to try: Duplicate `Phone`. <br> Expected: Same as above.
+    6. Test case: `edit id/1 n/(Bob)`<br>
+       Expected: Edit is unsuccessful due to invalid `Name` input. Error details shown in the status message. Status bar remains the same.
+       1. Similar commands to try: Invalid inputs for `id/`, `p/`, `e/`, `a/`, `s/` or `t/`. <br> Expected: Same as above.
+    7. Test case: `edit id/1 s/Catering` where `Id` 1 corresponds to a `Client`. <br>
+       Expected: Edit is unsuccessful since `Client` does not have a `Service`. Error details shown in the status message. Status bar remains the same.
+    8. Test case: `edit x ...` or `edit id/y ...` where x is larger than display size or non-positive, and y does not correspond to any `Contact` <br>
+       Expected: Edit is unsuccessful as `Index` or `Id` is invalid. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Listing
+1. Listing contacts
+    1. Prerequisites: Address book contains at least one `Client` and `Vendor`.
+    2. Test case: `list`<br>
+       Expected: All contacts will be displayed. The number of contacts displayed will be shown in the status message.
+    3. Test case: `list ...` where no flags or parameters like `n/` or `-c` are included in ... <br>
+       Expected: All contacts will be displayed since everything after `list` is ignored. The number of contacts displayed will be shown in the status message.
+    4. Test case: `list n/Bob Choo`<br>
+       Expected: All contacts that have `Name` matching any of `Bob` or `Choo` will be displayed. The number of contacts displayed will be shown in the status message.
+       1. Similar commands to try: `list` with `id/`, `n/`, `p/`, `e/`, `a/`, `t/`. <br> Expected: Same as above.
+    5. Test case: `list n/Bob Choo a/Blk 555`<br>
+       Expected: All contacts that have `Name` matching **any** of `Bob` or `Choo` **and** `Address` matching **any** of `Blk` or `555` will be displayed. The number of contacts displayed will be shown in the status message.
+       1. Similar commands to try: `list` with any combination of `id/`, `n/`, `p/`, `e/`, `a/`, `t/`. <br> Expected: Same as above.
+    6. Test case: `list -c -v -e` <br>
+       Expected: Displayed list is not updated. Error details shown in the status message. Status bar remains the same. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+2. Listing clients
+    1. Prerequisites: Address book contains at least one `Client`.
+    2. Test case: `list -c`<br>
+       Expected: All clients will be displayed. The number of clients displayed will be shown in the status message.
+    3. Other test cases specified above for `list` are applicable for `list -c`. <br>
+       Expected: Only relevant clients will be displayed. The rest of the expected behaviour is the same as above.
+
+3. Listing vendors
+    1. Prerequisites: Address book contains at least one `Vendor`.
+    2. Test case: `list -v`<br>
+       Expected: All vendors will be displayed. The number of vendors displayed will be shown in the status message.
+    3. Other test cases specified above for `list` are applicable for `list -v`. The `s/` parameter can be used here. <br>
+       Expected: Only relevant vendors will be displayed. The rest of the expected behaviour is the same as above.
+
+4. Listing events
+    1. Prerequisites: Address book contains at least one `Event`.
+    2. Test case: `list -e`<br>
+       Expected: All events will be displayed. The number of events displayed will be shown in the status message.
+    3. Other test cases specified above for `list` are applicable for `list -e`, and the relevant parameters include `n/`, `des/`, `d/`, `id/`. <br>
+       Expected: Relevant events will be displayed. The rest of the expected behaviour is the same as above.
+
+### Deleting a record
+
+1. Deleting a record (`Contact` or `Event`) while multiple records are displayed
+   1. Prerequisites: List contacts/events using the `list` command. Multiple records in the list.
+   2. Test case: `delete 1`<br>
+      Expected: First record is deleted from the list. Details of the deleted record shown in the status message.
+   3. Test case: `delete 0`<br>
+      Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or non-positive)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Missing `ddd.json` file in the `data` folder
+   1. Expected: `ddd.json` will be created in the `data` folder and populated with some sample data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. Corrupted `ddd.json` file
+   1. Test case: Modify the json file such that the parser cannot read it properly. For example, have duplicate `Clients`
+   2. Expected: `ddd.json` will be cleared upon initialisation of the application, i.e. there is no data left in the address book
