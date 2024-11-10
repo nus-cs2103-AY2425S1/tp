@@ -17,7 +17,6 @@ public class Address {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String CONTAINS_FORWARD_SLASH = "^(?!.*[/]).*";
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
@@ -41,7 +40,8 @@ public class Address {
         // the command parser or the storage's json converter.
         assert test != null;
 
-        return test.matches(CONTAINS_FORWARD_SLASH) && test.matches(VALIDATION_REGEX);
+        // Address should not contain forward-slash (/)
+        return (!test.contains("/")) && test.matches(VALIDATION_REGEX);
     }
 
     @Override
