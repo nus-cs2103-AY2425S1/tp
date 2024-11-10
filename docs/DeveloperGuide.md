@@ -113,9 +113,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AgentAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AgentAssistParser` returns back as a `Command` object.
-  * `FilterCommandParser` performs an additional task: it creates multiple predicate classes, which are combined into a `CombinedPredicate`.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `FilterCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AgentAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`).
+* `XYZCommandParser` is responsible for parsing the command details and constructing an `XYZCommand object` (e.g., `AddCommand`).This `XYZCommand` object is then returned to the `AgentAssistParser` as a `Command` object.
+    * Note: `FilterCommandParser` performs an additional step by creating multiple predicate classes (e.g., `NameContainsSubstringPredicate`). These individual predicates are then combined into a single `CombinedPredicate`.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `FilterCommandParser`, etc.) implement the `Parser` interface, allowing them to be handled consistently, such as in testing scenarios.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -192,23 +193,33 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 4. Error Message Improvement
 **Current issue:** Error messages are inconsistent when users input incorrect values. Depending on the parameter that is incorrect, the messages vary in detail. For example:
-- ![img.png](images/incorrectPhoneEditError.png)
-- ![differentEditError.png](images/differentEditError.png)
-- ![editErrorWithHint.png](images/editErrorWithHint.png)
-These images illustrate varying error message formats for the edit command. While some messages provide the full command hint, others offer minimal guidance, leading to inconsistency across commands. This issue extends beyond the edit command, as other commands also lack a standardized level of information in error messages. Some messages only indicate the error, while others include additional guidance, by also displaying the command hint.
+- Using `edit` without index nor flags:
+![EditErrorNoIndex.png](images/EditErrorNoIndex.png)
+- Using `edit` with index only:
+![EditErrorWithIndex.png](images/EditErrorWithIndex.png)
+- Using `edit` with index and `p/` flag without an argument: 
+![editErrorWithIndexAndPhone.png](images/EditErrorWithIndexAndPhone.png)
+
+These images illustrate varying error message formats of the `edit` command. 
+
+While some messages provide the full command hint, others offer minimal guidance, leading to an inconsistent user experience. This inconsistency extends beyond the `edit` command, as other error messages of other commands also vary in its level of information. In certain cases, error messages merely identify the issue without offering additional guidance, while others incorporate helpful usage hints.
 
 Additionally, certain command hints could benefit from more clarity on constraints, especially for the `edit` command, which currently does not indicate that the `rn/` and `ra/` flags cannot be used simultaneously.
 
 **Proposed Enhancement:** Standardize error message types and improve command hints:
-- `Incorrect command format` type error messages - Triggered when required flags are missing..
-  - Message format: 'Incorrect command format' + command hint.
-- `Invalid flag values` type error messages - Triggered when all necessary flags are present, but one or more flag values are invalid.
-  - Message format: Flag-specific error messages + command hint.
-- Clarify edit command hint – Add information on the constraint preventing simultaneous use of rn/ and ra/ flags.
+- `Incorrect command format` Error Messages 
+  - Triggered when required flags are missing.
+  - Message format: "Incorrect command format” followed by a command usage hint.
+- `Invalid flag values` Error Messages
+  - Triggered when all necessary flags are present, but one or more flag values are invalid.
+  - Message format: Flag-specific error message followed by a command usage hint.
+- Enhanced Usage Hint for `edit` Command
+  - Include guidance indicating that the rn/ and ra/ flags cannot be used simultaneously.
 
-**Status:** Scheduled for future release as the current error messages are still usable and help guide the user. Reason being:
-1. Current error messages adequately inform users. However, standardisation will enhance usability by reducing confusion and improving consistency. 
-2. The restriction on rn/ and ra/ flags is documented in the user guide, and an error is displayed when both flags are used together, thus users can learn of this constraint through multiple channels.
+**Status:** Scheduled for Future Release  
+**Rational:**
+1. The current error messages are functional and provide sufficient guidance for users. However, standardizing them will improve usability by minimizing confusion and ensuring consistent messaging.
+2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
 
 --------------------------------------------------------------------------------------------------------------------
 
