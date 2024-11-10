@@ -223,7 +223,6 @@ Format: `deleteInsurance INDEX iid/INSURANCE_ID`
 1. `INDEX` : Must be a valid client index in the filtered list that is currently shown.
    <br>
 2. `INSURANCE_ID` : Must be an existing valid ID that is currently supported.
-   <br> Currently supported IDs for insurance plans: `Basic Insurance Plan` : `0` & `Travel Insurance Plan`: `1`. <br>
 
 <box type="warning" seamless>
     <span circle slot="icon"><md>:bulb:</md></span>
