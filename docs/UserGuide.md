@@ -154,18 +154,20 @@ Examples:
 #### Locating Contacts by Name or Role: `find-name` and `find-role`
 
 ##### Find Contacts by Keywords in Name: `find-name` or `fn`
-Finds contacts whose names contain any of the provided keywords.
+Finds contacts whose names contain provided keywords.
 
 Format: `find-name KEYWORD [MORE_KEYWORDS]...`
 
 * The search is case-insensitive (e.g., `hans` matches `Hans`).
 * The order of keywords does not matter (e.g., `Hans Bo` matches `Bo Hans`).
-* Contacts matching at least one keyword will be returned (i.e., an `OR` search).<br>
-  For example, `Hans Bo` will return `Hans Gruber` and `Bo Yang`.
+* Contacts whose name contains a word that fully matches **at least one** keyword will be returned OR Contacts whose name
+contains **all** the keywords will be returned.<br>
+
 
 Examples:
 * `find-name John` returns `John` and `John Doe`.
 * `find-name alex david` returns `Alex Yeoh` and `David Li`.<br>
+* `Jon N` will return `Jon Ng`, `Jon Lim` and `Jonathan N Lee` .
   
 ![Result for find-name John](images%2FAppImages%2FFeaturesFindName.png)
 
@@ -302,17 +304,25 @@ The following commands can be used in Search Mode:
 
 Format: `search <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`
 
-For each field, you can specify multiple keywords or partial keywords.
-Contacts whose details match at least one keyword or contain all partial keywords will be returned.
+For each field, you can specify multiple keywords.
+
+For each Field:
+- Contacts whose field contains a word that fully matches **at least one** keyword will be returned OR Contacts whose field
+  contains **all** the keywords will be returned.<br>
+
+With Multiple Fields:
+- Contacts will be returned only if they match **all** specified fields.
 
 For example:
-- `search n/Samuel Tan` returns all contacts whose name matches `Samuel Tan` or contains `"samuel"` or `"Tan"`.
+- `search n/Samuel Tan` returns all contacts whose name matches `Samuel Tan` OR contains `"Samuel"` or `"Tan"`.
 
 When multiple fields are specified, the search will return only contacts that match **all** criteria.
 Example:
 - `search n/Samuel Tan a/Avenue` returns all contacts whose:
-    - name contains `Samuel Tan`
-    - address contains `Avenue`.
+    - name has words either `Samuel` or `Tan` OR contains `Samuel` AND `Tan`. 
+    - AND address contains `Avenue`.
+* `search n/Jon N` will return `Jon Ng`, `Jon Lim` and `Jonathan N Lee` .
+
 
 ![FeaturesSearchModeAlex.png](images%2FAppImages%2FFeaturesSearchModeSamuel.png)
 
