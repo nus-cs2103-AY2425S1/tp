@@ -54,7 +54,9 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_attemptToDeleteBothWays_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_NAME + VALID_NAME_AMY, DeleteCommand.MESSAGE_DELETE_MULTIPLE_WAYS_FORBIDDEN);
+        assertParseFailure(parser,
+                "1 " + PREFIX_NAME + VALID_NAME_AMY,
+                DeleteCommand.MESSAGE_DELETE_MULTIPLE_WAYS_FORBIDDEN);
     }
 
     @Test
@@ -65,7 +67,7 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_attemptToDeleteByInvalidInt_throwsParseException() {
         // num too big
-        assertParseFailure(parser, Integer.MAX_VALUE +  "1", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, Integer.MAX_VALUE + "1", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // negative num
         assertParseFailure(parser, "-1", ParserUtil.MESSAGE_INVALID_INDEX);

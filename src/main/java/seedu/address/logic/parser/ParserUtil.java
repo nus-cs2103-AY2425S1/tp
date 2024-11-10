@@ -21,9 +21,7 @@ import seedu.address.model.contact.TelegramHandle;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     public static final String MESSAGE_NAME_FIELD_CANNOT_BLANK = "Name " + MESSAGE_BLANK_FIELD;
     public static final String MESSAGE_EMAIL_FIELD_CANNOT_BLANK = "Email " + MESSAGE_BLANK_FIELD;
     public static final String MESSAGE_TELEGRAM_HANDLE_FILED_CANNOT_BLANK =

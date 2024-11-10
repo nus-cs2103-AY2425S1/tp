@@ -149,7 +149,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_attemptToEditByInvalidInt_throwsParseException() {
         // num too big
-        assertParseFailure(parser, Integer.MAX_VALUE +  "1" + EMAIL_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, Integer.MAX_VALUE + "1" + EMAIL_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // negative num
         assertParseFailure(parser, "-1" + EMAIL_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
