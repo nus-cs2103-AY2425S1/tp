@@ -698,13 +698,13 @@ Prerequisites: List all Guests and Vendors using the `list` command. Multiple Gu
 ### Saving Data
 
 1. Dealing with missing data file
-    i. Delete the file named `addressbook.json` located in the data folder.
+    i. Delete the file named `bridalbuddy.json` located in the data folder.
     ii. Relaunch Bridalbuddy
     iii. Run the command `clear`
-        Expected: A new empty `addressbook.json` file is created in the `data` folder. Sample Guests and Vendors are deleted.
+        Expected: A new empty `bridalbuddy.json` file is created in the `data` folder. Sample Guests and Vendors are deleted.
 
 2. Dealing with corrupted data file
-    i. Open the `addressbook.json` file located in the `data` folder with a text editor.
+    i. Open the `bridalbuddy.json` file located in the `data` folder with a text editor.
     ii. Corrupt the file by deleting a few characters. Save the file.
     iii. Relaunch Bridalbuddy.
         Expected: No Guests and Vendors will be displayed in the Bridalbuddy.
