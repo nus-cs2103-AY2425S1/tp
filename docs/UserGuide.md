@@ -126,6 +126,8 @@ student contact details!
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME`
   is also acceptable.
 
+- Address Length: If the `a/ADDRESS` parameter is too long, it may overflow in the user interface. To avoid display issues, keep addresses concise.
+
 - Extraneous parameters for commands that do not take in parameters (such as
   `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
