@@ -33,7 +33,7 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
 
    * `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer named `John Doe` to the displayed customer list.
 
-   * `deletecustomer 3` : Deletes the 3rd customer's contact and order list shown in the displayed customer list and the customer's order list.
+   * `deletecustomer 3` : Deletes the 3rd customer's contact and order list shown in the displayed customer list and their corresponding order list.
 
    * `listorder 1` : Lists all orders under the 1st customer as a displayed order list.
 
@@ -188,18 +188,18 @@ Examples:
 
 ### Deleting a customer : `deletecustomer`
 
-Deletes the specified customer contact and order list from the address book.
+Deletes the specified customer contact and their corresponding orders from the address book.
 
 Command aliases: `deletec`<br>
 Format: `deletecustomer CUSTOMER_INDEX`
 Examples:
-* `listcustomer` followed by `deletecustomer 2` deletes the 2nd customer contact and order list in the address book.
-* `findcustomer Betsy` followed by `deletec 1` deletes the 1st customer contact and order list in the results of the `find` command.
+* `listcustomer` followed by `deletecustomer 2` deletes the 2nd customer contact in the address book, along with their corresponding order list.
+* `findcustomer Betsy` followed by `deletec 1` deletes the 1st customer contact in the results of the `find` command, along with their corresponding order list.
 
 <box type="important">
 
 ##### Constraints
-* Deletes the customer and the customer's order list at the specified `CUSTOMER_INDEX`.
+* Deletes the customer at the specified `CUSTOMER_INDEX`.
 * The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 

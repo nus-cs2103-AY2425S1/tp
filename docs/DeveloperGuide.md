@@ -341,7 +341,7 @@ Use case ends.
 * **Actor**: User
 * **Use Case**: UC02 - Add Customer
 * **Guarantees**:
-  * Customer will be added to customer list if input parameters are valid.
+    * Customer will be added to customer list if input parameters are valid.
 
 **MSS**
 
