@@ -303,6 +303,11 @@ Possible Errors:
 
 Finds persons based on the specified criteria using the provided prefixes.
 
+<div class="alert alert-warning">
+<i>:warning:</i> <b>Warning:</b> The NRIC must be <b>full, complete and valid for the search to work</b>. This is not necssary for other parameters.
+</div>
+
+
 **Format**: `find [n/NAME] [nric/NRIC] [p/PHONE] [e/EMAIL] [role/ROLE] [t/TAG]…​`
 
 - The search is case-insensitive. e.g `n/alex` will match `Alex`.
