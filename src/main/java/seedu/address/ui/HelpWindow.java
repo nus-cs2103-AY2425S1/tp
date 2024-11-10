@@ -18,7 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103-f12-3.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Welcome to Grub!"
+    public static final String HELP_MESSAGE = "Welcome to Grub! \n"
             + "Here are some of the commands to help you get started:"
             + "\n\t"
             + "add:\t\tAdds a restaurant to the address book."
@@ -35,7 +35,9 @@ public class HelpWindow extends UiPart<Stage> {
             + "\n\t"
             + "rate:\t\tRates the specified restaurant from the address book."
             + "\n\t"
-            + "fav:\t\tSet the specified restaurant from the address book as favourite."
+            + "fav:\t\tMark the specified restaurant as a favorite, displaying favorites at the top."
+            + "\n\t"
+            + "unfav:\tUn-mark the specified restaurant as a favorite"
             + "\n\t"
             + "price:\tFinds restaurants who belong in any of the given price labels"
             + "\n\t"
