@@ -109,13 +109,10 @@ public class SortCommand extends Command {
      * Returns the exact order name.
      */
     public String getExactOrder(String order) {
-        switch (order) {
-        case "asc":
+        if (order.equals("asc")) {
             return "ascending";
-        case "desc":
+        } else {
             return "descending";
-        default:
-            return order;
         }
     }
 
