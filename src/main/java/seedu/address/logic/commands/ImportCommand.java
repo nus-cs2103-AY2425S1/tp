@@ -31,15 +31,19 @@ public class ImportCommand extends Command {
      */
     public ImportCommand() {
         toImport = new File("Import");
-        assert toImport.exists();
+        //assert toImport.exists();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<File> jsonFiles;
-
-        CsvToJsonConverter converter = new CsvToJsonConverter(toImport);
+        CsvToJsonConverter converter;
+        try {
+             converter = new CsvToJsonConverter(toImport);
+        } catch (IllegalArgumentException iae) {
+            throw new CommandException(iae.getMessage());
+        }
         try {
             jsonFiles = converter.convertAllCsvFiles();
         } catch (ConverterException ce) {

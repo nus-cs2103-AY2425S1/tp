@@ -51,10 +51,12 @@ class JsonSerializableAddressBook {
             if (skipDuplicate && !jsonAdaptedPerson.isValidPerson()) {
                 continue;
             }
-            if (jsonAdaptedPerson.hasEmptyContactInfo()) {
+            if (jsonAdaptedPerson.hasEmptyContactInfo() && skipDuplicate) {
                 jsonAdaptedPerson.fillEmptyContactInfo();
             }
-            jsonAdaptedPerson.clearInvalidContactInfo();
+            if (skipDuplicate) {
+                jsonAdaptedPerson.clearInvalidContactInfo();
+            }
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person) && !skipDuplicate) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);

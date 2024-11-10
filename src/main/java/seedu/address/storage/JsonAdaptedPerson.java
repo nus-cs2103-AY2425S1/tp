@@ -29,7 +29,7 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
     private static final String DEFAULT_PHONE = "00000000";
     private static final String DEFAULT_EMAIL = "default@email.net";
-    private static final String DEFAULT_TELEGRAMHANDLE = "@defaulthandle";
+    private static final String DEFAULT_TELEGRAMHANDLE = "@TelegramDefault";
     private static final String DEFAULT_MODNAME = "AA0000";
 
     private final String name;
@@ -188,7 +188,7 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Fills empty contactInfo with default values
+     * Fills empty contact Info with default values
      */
     public void fillEmptyContactInfo() {
         if (phone == null) {
