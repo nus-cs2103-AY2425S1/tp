@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TO + "YYYY-MM-DD HH:mm] "
             + "[" + PREFIX_ADDED_BUYER + "BUYER NAME]...\n"
             + "Example: " + COMMAND_WORD + " 2 "
-            + PREFIX_INFO + "Review work plans while having lunch with Eswen "
+            + PREFIX_INFO + "Review work plans while having lunch with Jason "
             + PREFIX_FROM + "2024-02-03 12:00 "
             + PREFIX_TO + "2024-02-03 14:00 "
             + PREFIX_ADDED_BUYER + "Alex Yeoh "
@@ -57,7 +57,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited meet-up: %1$s";
     public static final String MESSAGE_MEETUP_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the meet-up list.";
-    public static final String MESSAGE_INVALID_TO_FROM = "TO ($1%s) must be after FROM ($2%s)";
+    public static final String MESSAGE_INVALID_TO_FROM = "TO (%1$s) must be after FROM (%2$s)";
 
     private final Index targetIndex;
     private final EditMeetUpDescriptor editMeetUpDescriptor;
@@ -173,7 +173,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyMeetUpFieldEdited() {
-            return CollectionUtil.isAnyNonNull(subject, info, from, to);
+            return CollectionUtil.isAnyNonNull(subject, info, from, to, addedBuyers);
         }
 
         public void setSubject(Subject subject) {

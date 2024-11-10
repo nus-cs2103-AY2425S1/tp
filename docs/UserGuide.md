@@ -3,10 +3,23 @@ layout: page
 title: User Guide
 ---
 
-Address Book Command Line Interface (ABCLI) is a **desktop app made specially for Real Estate Agents to manage contacts and is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a real estate agent and can type fast, ABCLI can get your contact management tasks done faster than traditional GUI apps.
+**Address Book Command Line Interface (ABCLI)** is a desktop application tailored for **real estate agents** who value the speed and efficiency of managing workflows through a **Command Line Interface (CLI)**. With the added support of a Graphical User Interface (GUI) for visual clarity, ABCLI empowers agents to handle contacts, schedule meetings, and organize property details significantly faster than traditional GUI-only applications. If you are a fast-typing real estate agent, ABCLI is designed to keep up with your speed, boosting your productivity.
 
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+## Application Overview
+
+ABCLI is divided into three core modes, each dedicated to a key aspect of a real estate agent workflows:
+
+* **[Buyer Mode](#Buyers)**: Organize prospective buyers with details like budget, contact info, and tags for effective monitoring and follow-up.
+
+* **[Meet Up Mode](#Meet Ups)**: Schedule and manage meet-ups with buyers, track attendees, and avoid scheduling conflicts.
+
+* **[Property Mode](#Properties)**: Store property listings, including landlord details, asking price, and property type for quick and easy references.
+
+These modes allow real estate agents to handle buyers, meet-ups, and property listings at a rapid pace, ensuring an efficient, convenient and integrated workflow for those who thrive on speed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,6 +49,10 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+**Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -155,6 +172,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL b/BUDGET [t/TAG]…​`
 A buyer can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Buyer's budget cannot exceed `9223372036854775807`. Refer to [known issues](#known-issues) for more information.
+</div>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com b/100,000`
 * `add n/Betsy Crowe t/urgent e/betsycrowe@example.com b/7,000,000 p/91234567 t/referred`
@@ -246,7 +267,7 @@ Adds a meet-up to the meet-up list.
 
 Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_NAME]…​`
 
-* New meet-ups must have unique meet-up subjects and must not be duplicate subjects of existing meet-ups.
+* New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO.
 
 * MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`.
 
@@ -277,7 +298,7 @@ Format: `edit INDEX [s/MEETUP_SUBJECT] [i/MEETUP_INFO] [f/MEETUP_FROM] [t/MEETUP
 * You can remove all the meet-up's buyers by typing `n/` without specifying any tags after it.
 
 Examples:
-*  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
+*  `edit 1 i/Meet with Johnny to show him houses. f/2024-10-28 10:00 t/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
 
 ### Locating meet-ups: `find`
 
@@ -338,9 +359,13 @@ Format: `view`
 
 Adds a property to the property list.
 
+Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
+
 * New properties must have unique addresses and must not be duplicate addresses of existing properties.
 
-Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Property's asking price cannot exceed `9223372036854775807`. Refer to [known issues](#known-issues) for more information.
+</div>
 
 Examples:
 * `add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium`
@@ -495,8 +520,11 @@ Format: `clear`
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+3. **If you input a budget or asking price that exceeds** `9223372036854775807`, the command will silently fail, and no error message will be shown. This is due to exceeding the maximum value for a 64-bit integer. A planned enhancement will add a validation check to prevent input beyond a maximum realistic range.
+
+4. **When inputting a name**, if the name is too long, the interface is unable to display the full name, and it will be truncated, with ellipses (...) representing the truncated part of the name.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -515,9 +543,15 @@ Format: `clear`
     </tr>
     <tr>
         <td><b>Add</b></td>
+<<<<<<< HEAD
         <td><code>add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​</code><br> e.g., <code>add n/James Ho p/92233784 e/jamesho@example.com a/1200000 t/friend t/colleague</code></td>
         <td><code>add s/SUBJECT i/INFO f/FROM t/TO [a/ADDED_BUYERS]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Eswen to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
         <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
+=======
+        <td><code>add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​</code><br> e.g., <code>add n/James Ho p/22224444 e/jamesho@example.com a/1200000 t/friend t/colleague</code></td>
+        <td><code>add s/SUBJECT i/INFO f/FROM t/TO [a/ADDED_BUYERS]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Jason to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
+        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE…​</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
+>>>>>>> master
     </tr>
     <tr>
         <td><b>Edit</b></td>

@@ -206,6 +206,8 @@ The mode of `AbcliParser` can be switched by executing a `SwitchParserModeComman
 
 The diagram below shows the activity diagram for a user wanting to delete the first `MeetUp` in his `MeetUpList`:
 
+<br></br>
+<br></br>
 <img src="images/DeleteMeetUpActivityDiagram.png" width="386" />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -303,12 +305,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to switch the parser mode
 2. ABCLI switches to the desired parser mode
-3. ABCLI shows a success message
-4. ABCLI shows the corresponding list of items in the new mode
+3. ABCLI shows the corresponding list of items in the new mode
 
 **Extensions**
 
-* 1a. The parser mode is invalid
+* 1a. The parser mode inputted is invalid
   * 1a1. ABCLI shows an error message
   * Use case ends.
 
