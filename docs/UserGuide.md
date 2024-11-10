@@ -6,7 +6,11 @@ pageNav: 3
 
 # Clientell User Guide
 
-Clientell is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Clientell can get your client management tasks done faster than traditional GUI apps.
+Clientell is a **desktop app for freelance financial consultants to manage clients and their transactions, optimized for use via a Command Line Interface** (CLI) with a simple Graphical User Interface (GUI). If you can type fast, Clientell can get your client management tasks done faster than traditional GUI apps.
+
+Clientell is structured as an address book (a database to store details of clients), but with enhancements to cater to your financial bookkeeping needs and managing your clients' transactions.
+
+Our guiding principle is: a small app for you to do big things. As such, we allow great flexibility in storing your data. While some features are designed with a certain use in mind (e.g `NAME` should be actual names of your clients), you may use and interpret them in a way that better suits your workflow (e.g `NAME` as NRIC/FIN/IDs rather than name, or both!). Of course, do this at your own risk. With great power comes great responsibility.
 
 ## Table of Contents
 - [Quick Start](#quick-start)
@@ -18,39 +22,45 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
+- [Parameter Summary](#parameter-summary)
 
 
-<!-- * Table of Contents -->
-<page-nav-print />
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have [Java](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) `17` or above installed in your computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clientell.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in by typing  `cd [folder directory]` (where the folder is at), followed by `java -jar clientell.jar` in the same directory to run the application.<br>
+   You should see the GUI below with some sample clients to start with. By default, the app displays the Client List View upon launch, which is the view that lists your clients.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   We suggest this sequence of commands to get a feeling for the app first:
 
-   * `list` : Lists all clients.
+   * `list` : Lists all clients. This takes you to the **Client List View**.
 
    * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to the application.
 
-   * `delete 3` : Deletes the 3rd client shown in the current list.
+   * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to to the client indexed 1 in the list.
 
-   * `clear` : Deletes all clients.
+   * `listt 1` : Lists all transactions of client indexed 1. You should see the transaction you just added. This is the **Transaction List View**.
 
+   * `list` : Lists all clients, again. This returns you to the **Client List View**.
+   
    * `exit` : Exits the app.
+   
+   * Now, in the same folder, you should see a data file `clientell.json`. Opening it will show the saved data from the app, which will be loaded the next time you launch Clientell.
+  
+   * Try finding the client and transaction you just added! This file is sensitive, so do not edit it. You may transfer this file to another device with Clientell and load the same data.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command. Happy Bookkeeping!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -63,9 +73,6 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Parameters supplied by the user must never contain protected keywords, namely command words and delimeters (`x/`).<br>
-  e.g. `add n/add`, `add n/n/` are not allowed.
-
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -75,8 +82,10 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (namely `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* A summary of non-obvious parameters is given at [Parameter Summary](#parameter-summary).
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -84,9 +93,9 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 <box type="warning" seamless>
 
 **Handling Errors In User Input:**
-* First checks for valid command. 
-* Then checks for presence of fields for that command.
-* Next checks if the command is run in the correct view (client VS transaction view).
+* First checks for valid command. Did you type a real command word?
+* Then checks for presence of fields for that command. Did you give enough/correct info?
+* Next checks if the command is run in the correct view (Client VS Transaction List View). Are you using it in the right view?
 * Lastly checks if the command alters the balance beyond the supported range.
 
 *Supported range for balance* is (-1.7976931348623157E+308, 1.7976931348623157E+308).
@@ -97,7 +106,7 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 
 #### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -328,36 +337,39 @@ Clientell data are saved in the hard disk automatically after any command that c
 
 #### Editing the data file
 
-Clientell data are saved automatically as a JSON file `[JAR file location]/data/clientell.json`. Advanced users are welcome to update data directly by editing that data file.
+Clientell data are saved automatically as a JSON file `[JAR file location]/data/clientell.json`. Advanced users are welcome to update data directly by editing that data file (not recommended).
 
 <box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, Clientell will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the Clientell to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+For some cases, the app can autocorrect some mistakes:<br>
+* Extraneous key-value pairs (i.e irrelevant fields/info) are ignored<br>
+* Copies of relevant key-value pairs (e.g multiple names/companies) only admit the last copy<br>
+As a rule of thumb: if the edits you make could've been achieved by using the commands normally and legally, then the edits are valid. Most common mistakes include updating the file to include illegal values. Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Clientell home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Copy the `clientell.json` data file you want to transfer. On your other device and in the application directory (the folder containing the app), if there's already an existing data file, replace it with your version (preferably saving the replaced copy somewhere). Otherwise if there's no such file, safely paste the file inside the folder.
 
-**Q**: What should I do if the application won't start?<br>
-**A**: First verify Java 17 or above is installed correctly. If the problem persists, check if the `clientell.json` file is corrupted. You can also try deleting the `preferences.json` file and restart.
+**Q**: What should I do if the application won't start? <br>
+**A**: First verify Java 17 or above is installed correctly. If the problem persists, check if the `clientell.json` file is corrupted, and use a backup of the file (recommended) or rectify the mistakes in the file (not recommended).
 
 **Q**: Can I customize the data file location?<br>
-**A**: Currently, the data file location is fixed to the application directory. However, you can create a symbolic link if you need the data stored elsewhere.
+**A**: Currently, the data file location is fixed to the application directory (i.e it's in the same place as the app file). However, you can copy the data elsewhere (or if you're tech-savvy, create a [symbolic link](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux) )
 
 **Q**: How do I backup my data?<br>
-**A**: Simply copy the `clientell.json` file to a backup location. Consider setting up automated backups of this file.
+**A**: Simply copy the `clientell.json` file to a backup location.
 
 **Q**: What should I do if I accidentally delete a client?<br>
 **A**: Use your latest backup of the `clientell.json` file. There's currently no undo feature, so regular backups are recommended.
 
 **Q**: Can I import data from other applications?<br>
-**A**: Currently, direct import is not supported. However, you can manually format your data as JSON matching Clientell's format.
+**A**: Currently, direct import is not supported. However, you can manually format your data as JSON matching Clientell's format. This is very much not recommended due to risk of corrupting the data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -407,3 +419,16 @@ General Commands | Format
 Help | `help`
 Clear | `clear`
 Exit | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Parameter Summary
+
+Parameter | Restrictions | Extreme example | Banned example 
+---------------|---------------|---------------|--------
+Name | Alphanumeric and spaces, but not blank. | `E1234567 john doe vii` | `john s/o doe`
+Company | Anything, but not blank. | `💁 Inc.`| ` `
+Phone | The optional country code in front `(+XXX)` must be 1-3 digits, the optinal notes `[Notes]` behind must be 1-10 of any characters, and the main number must not be blank, with up to 1 space between digits. | `(+123) 3 [short note]`| `(+1234) [this is too long]` 
+Email |`local-part@domain`, where the local part is alphanumeric with at most 1 of special characters `+_.-` in between alphanumerals (i.e not at start nor end), and domain is alphanumeric with at most 1 of special characters `-.` between alphanumerals. It must end with at least 2 alphanumerals. | `a+b-c.d@a-z.co` | `a++b@c.-d`
+Address |Anything, but not blank. | `💁`| ` `
+Tag | Alphanumeric, but not blank. | `something`| `some thing`
