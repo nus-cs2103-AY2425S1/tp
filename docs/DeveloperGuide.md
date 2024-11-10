@@ -889,7 +889,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Finding customer who does not exist in the address book.
 
-    1. Prerequisites: Customer with name containing `khengyang` (case-insensitive) does not already exist in the address book.
+    1. Prerequisites: Customer with name containing `khengyang` (case-insensitive) does not exist in the address book.
 
     2. Test case: `findcustomer khengyang` <br>
        Expected: No customers listed. A success message shown in the status message. A message informing user that no related customers are found is shown in the customer list.
