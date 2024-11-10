@@ -21,7 +21,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "Person does not have this appointment";
-    public static final String MESSAGE_INDEX_OUT_OF_RANGE = "index should not be zero or a negative integer or "
+    public static final String MESSAGE_INDEX_OUT_OF_RANGE = "Index should not be zero or a negative integer or "
             + "outside the length of the current list.";
 
     /**
