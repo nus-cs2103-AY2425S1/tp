@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -19,6 +21,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramUsername;
 
 public class EventAddAllCommandTest {
     private EventAddAllCommand eventAddAllCommand = new EventAddAllCommand(INDEX_FIRST_EVENT);
@@ -55,15 +63,28 @@ public class EventAddAllCommandTest {
     }
 
     @Test
-    void testEquals_sameObject() {
+    public void testEquals_sameObject() {
         EventAddAllCommand command = new EventAddAllCommand(INDEX_FIRST_EVENT);
         assertTrue(command.equals(command));
     }
 
     @Test
-    void testEquals_differentType() {
+    public void testEquals_differentType() {
         EventAddAllCommand command = new EventAddAllCommand(INDEX_FIRST_EVENT);
         String otherObject = "NotAnEventAddAllCommand";
         assertFalse(command.equals(otherObject));
+    }
+
+    @Test
+    public void execute_addContactWithNoRole_throwsCommandException() {
+        AddressBook addressBook = new AddressBook();
+        Person personWithNoRoles = new Person(new Name("Saitama"), new Phone("12345678"), new Email("123@gmail.com"),
+                new Address("Blk 123"), new TelegramUsername(null), new HashSet<>());
+        addressBook.addPerson(personWithNoRoles);
+        Model model = new ModelManager(addressBook, getTypicalEventManager(), new UserPrefs());
+
+        assertCommandFailure(eventAddAllCommand, model, String.format(
+                Messages.MESSAGE_ADD_CONTACT_WITH_NO_ROLES_TO_EVENT,
+                personWithNoRoles.getName()));
     }
 }

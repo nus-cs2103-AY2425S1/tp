@@ -41,6 +41,7 @@ public class AddEventCommand extends Command {
         }
 
         eventManager.addEvent(eventToBeAdded);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, eventToBeAdded.getName()));
     }
 

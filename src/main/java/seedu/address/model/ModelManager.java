@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -31,12 +33,15 @@ public class ModelManager implements Model {
     private final EventManager eventManager;
     private final FilteredList<Person> filteredPersons;
 
+    private ObservableList<Person> contactListForFindEvent;
+
     /**
      * The set of persons that are excluded from the search. Reset upon exiting searchmode or clear command
      */
     private final Set<Person> excludedPersons = new HashSet<>();
 
     private BooleanProperty searchMode = new SimpleBooleanProperty(false);
+    private BooleanProperty isFindEvent = new SimpleBooleanProperty(false);
     private Predicate<Person> lastPredicate = PREDICATE_SHOW_ALL_PERSONS;
 
     /**
@@ -201,6 +206,14 @@ public class ModelManager implements Model {
     public BooleanProperty searchModeProperty() {
         return searchMode;
     }
+
+    public BooleanProperty getIsFindEvent() {
+        return isFindEvent;
+    }
+
+    public void setIsFindEvent(boolean isFindEvent) {
+        this.isFindEvent.set(isFindEvent);
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -272,4 +285,13 @@ public class ModelManager implements Model {
         return addressBook.findSameField(person);
     }
 
+    @Override
+    public void setContactListForFindEvent(ArrayList<Person> persons) {
+        this.contactListForFindEvent = FXCollections.observableList(persons);
+    }
+
+    @Override
+    public ObservableList<Person> getContactListForFindEvent() {
+        return this.contactListForFindEvent;
+    }
 }

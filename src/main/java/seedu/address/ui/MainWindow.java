@@ -76,6 +76,28 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         logic.getSearchMode().addListener((observable, oldValue, newValue) -> updateUiBasedOnSearchMode(newValue));
+        logic.getIsFindEvent().addListener((observable, oldValue, newValue) -> updateUiBasedOnFindEvent(newValue));
+    }
+
+    private void updateUiBasedOnFindEvent(boolean isFindEvent) {
+        HBox hbox = new HBox();
+        HBox.setHgrow(hbox, Priority.ALWAYS);
+        VBox.setVgrow(hbox, Priority.ALWAYS);
+        hbox.setPrefWidth(personListPanelPlaceholder.getWidth());
+        hbox.setPrefHeight(personListPanelPlaceholder.getHeight());
+        hbox.setSpacing(5);
+
+        if (isFindEvent) {
+            personListPanel = new PersonListPanel(logic.getContactListForFindEvent());
+        } else {
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        }
+        HBox.setHgrow(personListPanel.getRoot(), Priority.ALWAYS);
+        hbox.getChildren().add(personListPanel.getRoot());
+        commandBoxPlaceholder.setStyle("");
+
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(hbox);
     }
 
     private void updateUiBasedOnSearchMode(boolean isSearchMode) {

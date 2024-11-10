@@ -94,6 +94,7 @@ public class AddPersonToEventCommand extends Command {
 
         sb.delete(sb.length() - 1, sb.length());
         event.updateUi();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, sb, event.getName()));
     }
 

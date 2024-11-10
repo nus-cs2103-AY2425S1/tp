@@ -27,6 +27,9 @@ public class Messages {
     public static final String MESSAGE_USER_SEARCH_QUERY_ROLES = "Displaying search results for all contacts "
             + "with the roles: %s";
 
+    public static final String MESSAGE_ADD_CONTACT_WITH_NO_ROLES_TO_EVENT = "The contact: %1s you are adding"
+            + " does not have a role.";
+
     public static final String SEARCHMODE_UNKNOWN_COMMAND = "\nYou are in search-mode."
             + "\nUse only search, exit-search(es), "
             + "add-all(aa), exclude, check-excluded(chx), clear-excluded(clx) or exit.";

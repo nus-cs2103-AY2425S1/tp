@@ -23,6 +23,7 @@ public class ClearCommand extends Command {
         model.setAddressBook(new AddressBook());
         eventManager.clearAllContactsFromAllEvents();
         eventManager.updateEvents();
+        model.setIsFindEvent(false);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

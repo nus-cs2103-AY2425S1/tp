@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -156,4 +157,12 @@ public interface Model {
 
 
     String[] findSameField(Person person);
+
+    BooleanProperty getIsFindEvent();
+
+    void setIsFindEvent(boolean isFindEvent);
+
+    void setContactListForFindEvent(ArrayList<Person> persons);
+
+    ObservableList<Person> getContactListForFindEvent();
 }

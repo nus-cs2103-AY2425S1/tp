@@ -46,6 +46,7 @@ public class FindEventCommand extends Command {
     public CommandResult execute(Model model, EventManager eventManager) throws CommandException {
         requireNonNull(eventManager);
         List<Event> events = eventManager.getEventList();
+        model.setIsFindEvent(false);
 
         if (targetIndex.getZeroBased() >= events.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
@@ -60,7 +61,17 @@ public class FindEventCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, eventToView.getName()));
     }
 
-    private static void updateContactsUiWithEventSpecificRoles(Model model, Event eventToView) {
+    /**
+     * Updates the UI to display contacts with roles specific to a given event.
+     *
+     * <p>This method retrieves the current filtered list of persons from the model, creates copies of each person
+     * with roles that are specific to the provided event, and updates the model's contact list with these
+     * event-specific persons. Observers from the original persons are also copied to maintain UI updates.</p>
+     *
+     * @param model The model containing the data and methods for manipulating the contact list and event state.
+     * @param eventToView The event for which roles should be generated and assigned to each contact.
+     */
+    public static void updateContactsUiWithEventSpecificRoles(Model model, Event eventToView) {
         ObservableList<Person> persons = model.getFilteredPersonList();
         ArrayList<Person> tempListOfPersons = new ArrayList<>();
         for (Person person : persons) {
@@ -69,9 +80,9 @@ public class FindEventCommand extends Command {
             personWithEventSpecificRoles.addObserver(person.getObserver());
             tempListOfPersons.add(personWithEventSpecificRoles);
         }
-        for (Person person : tempListOfPersons) {
-            person.showContactWithEventSpecificRoles();
-        }
+
+        model.setContactListForFindEvent(tempListOfPersons);
+        model.setIsFindEvent(true);
     }
 
     @Override

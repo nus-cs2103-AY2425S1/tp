@@ -1,6 +1,8 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -193,5 +195,13 @@ public class LogicManagerTest {
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void testGetContactListForFindEvent() {
+        assertNull(logic.getContactListForFindEvent());
+    }
 
+    @Test
+    public void testGetIsFindEvent() {
+        assertFalse(logic.getIsFindEvent().get());
+    }
 }

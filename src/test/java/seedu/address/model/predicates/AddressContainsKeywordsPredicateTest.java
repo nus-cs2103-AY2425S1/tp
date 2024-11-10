@@ -6,10 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.person.predicates.AddressContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 public class AddressContainsKeywordsPredicateTest {
@@ -92,5 +96,31 @@ public class AddressContainsKeywordsPredicateTest {
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
+    @Test
+    public void test_nullAddress_returnsFalse() {
+        AddressContainsKeywordsPredicate predicate = new AddressContainsKeywordsPredicate(
+                Collections.singletonList("Jurong"));
+        assertFalse(predicate.test(new PersonStubNullAddress()));
+    }
+
+    /**
+     * A stub class to test for null address as Person should have a non null address
+     */
+    private class PersonStubNullAddress extends Person {
+        private Address address = null;
+
+        public PersonStubNullAddress() {
+            super(new seedu.address.model.person.Name("Alice"), new seedu.address.model.person.Phone("12345678"),
+                    new seedu.address.model.person.Email("test@gmail.com"),
+                    new seedu.address.model.person.Address("123, Jurong West Ave 6, #08-111"),
+                    new TelegramUsername("alice"),
+                    new HashSet<>());
+        }
+
+        @Override
+        public Address getAddress() {
+            return this.address;
+        }
+    }
 
 }

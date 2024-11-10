@@ -60,6 +60,10 @@ public class EventAddAllCommand extends Command {
         }
         for (int i = 0; i < persons.size(); i++) {
             Person person = persons.get(i);
+            if (person.getRoles().isEmpty()) {
+                throw new CommandException(String.format(Messages.MESSAGE_ADD_CONTACT_WITH_NO_ROLES_TO_EVENT,
+                        person.getName()));
+            }
             Index indexToAdd = Index.fromZeroBased(i);
             if (person.hasRole(new Attendee())) {
                 attendees.add(indexToAdd);
@@ -73,7 +77,9 @@ public class EventAddAllCommand extends Command {
             if (person.hasRole(new Sponsor())) {
                 sponsors.add(indexToAdd);
             }
+
         }
+
     }
 
     @Override

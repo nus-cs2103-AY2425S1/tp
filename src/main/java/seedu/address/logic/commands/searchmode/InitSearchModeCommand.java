@@ -25,6 +25,7 @@ public class InitSearchModeCommand extends Command {
     @Override
     public CommandResult execute(Model model, EventManager eventManager) {
         requireNonNull(model);
+        model.setIsFindEvent(false);
         model.setSearchMode(true);
         // empties the current displayed list
         model.updateFilteredPersonList(person -> false);

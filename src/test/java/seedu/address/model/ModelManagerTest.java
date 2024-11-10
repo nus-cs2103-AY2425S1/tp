@@ -10,14 +10,18 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -212,5 +216,16 @@ public class ModelManagerTest {
     @Test
     public void excludePerson_personNotInAddressBook() {
         assertThrows(PersonNotFoundException.class, () -> modelManager.excludePerson(ALICE));
+    }
+
+    @Test
+    public void testGetContactListForFindEvent() {
+        ArrayList<Person> persons = new ArrayList<Person>();
+        persons.add(ALICE);
+
+        modelManager.setContactListForFindEvent(persons);
+
+        ObservableList<Person> expectedList = FXCollections.observableList(persons);
+        assertEquals(expectedList, modelManager.getContactListForFindEvent());
     }
 }
