@@ -170,7 +170,7 @@ This section describes some noteworthy details on how certain features are imple
 **Proposed Solution:** Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
 
 ### 2. Support for Forward Slash in Names
-**Current Issue:** Names containing forward slashes (e.g., "Ramesh s/o Ravichandran") are incompatible with `add`, `edit`, and `filter` commands due to two problems:
+**Current Issue:** Names containing forward slashes (e.g., `Ramesh s/o Ravichandran`) are incompatible with `add`, `edit`, and `filter` commands due to two problems:
 
 1. The parser misinterprets "s/o" as a Status flag command, resulting in an invalid status error
 2. The name validation regex explicitly blocks forward slashes to prevent parsing conflicts
