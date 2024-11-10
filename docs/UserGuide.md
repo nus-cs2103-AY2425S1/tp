@@ -118,10 +118,10 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
      - **For Windows:** `Shift + Right-Click` in the folder where PROperty is and clicking on "Open PowerShell Window Here".
      - **For Mac:** `Control + Click` on the folder where PROperty is and clicking on "New Terminal at Folder".
    - Type `java -jar PROperty.jar` into your computer's terminal and press "Enter".
-
-    
-![Annotated_Ui](images/user-guide-images/Annotated_Ui.png)
-- The screenshot above showcases the various components of PROperty.
+   
+     ![Annotated_Ui](images/user-guide-images/Annotated_Ui.png)
+   
+   - The screenshot above showcases the various components of PROperty.
 
 
 <div class="no-print" markdown="span">
