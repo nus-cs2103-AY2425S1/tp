@@ -144,7 +144,7 @@ Shows a list of all groups in the Goon Book.
 
 Format: `listGroups`
 
-![List](images/ListGroup.png)
+![ListGroup](images/ListGroup.png)
 
 <div style="page-break-after: always"></div>
 
