@@ -674,4 +674,24 @@ public class ExportCommandTest {
         assertThrows(AssertionError.class, () ->
                 exportCommand.coursesToString(null));
     }
+
+    @Test
+    public void execute_filenameWithSpecialCharacters_throwsCommandException() {
+        String[] invalidFilenames = {
+            "test-file",
+            "test_file",
+            "test file",
+            "test!file",
+            "test@file",
+            "test#file",
+            "test$file",
+            "test.file"
+        };
+
+        for (String filename : invalidFilenames) {
+            ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
+            assertThrows(CommandException.class,
+                    ExportCommand.INVALID_FILENAME_MESSAGE, () -> exportCommand.execute(model));
+        }
+    }
 }

@@ -23,7 +23,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
-import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.testutil.ModelStub;
@@ -265,7 +264,7 @@ public class ExportConsultCommandTest {
     public void execute_filenameWithBackslash_throwsCommandException() throws IOException {
         ExportConsultCommand exportCommand = new ExportConsultCommand("test\\file", false, dataDir);
         assertThrows(CommandException.class, () -> exportCommand.execute(model),
-                String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '\\'));
+                String.format(ExportConsultCommand.INVALID_FILENAME_MESSAGE, '\\'));
     }
 
     private class ModelStubWithConsultations extends ModelStub {
@@ -355,5 +354,25 @@ public class ExportConsultCommandTest {
 
         // Test with multiple special characters
         assertEquals("\"test,\"\"'data\"", exportCommand.escapeSpecialCharacters("test,\"'data"));
+    }
+
+    @Test
+    public void execute_filenameWithSpecialCharacters_throwsCommandException() {
+        String[] invalidFilenames = {
+            "test-file",
+            "test_file",
+            "test file",
+            "test!file",
+            "test@file",
+            "test#file",
+            "test$file",
+            "test.file"
+        };
+
+        for (String filename : invalidFilenames) {
+            ExportConsultCommand exportCommand = new ExportConsultCommand(filename, false, dataDir);
+            assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                    ExportConsultCommand.INVALID_FILENAME_MESSAGE);
+        }
     }
 }

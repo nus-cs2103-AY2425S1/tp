@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.consultation;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,9 +39,8 @@ public class ExportConsultCommand extends Command {
             "File %1$s already exists in home directory. Use -f flag to overwrite.";
     public static final String MESSAGE_SUCCESS = "Exported %1$d consultations to %2$s";
     public static final String MESSAGE_SUCCESS_WITH_COPY = "Exported %1$d consultations to %2$s and %3$s";
-    public static final String INVALID_CHARS = "*/\\" + File.separator;
     public static final String INVALID_FILENAME_MESSAGE =
-            "Filename cannot contain '%s'. Only alphanumeric characters, spaces, and basic punctuation are allowed.";
+            "Filename can only contain alphanumeric characters (A-Z, a-z, 0-9)";
 
     private static final Logger logger = LogsCenter.getLogger(ExportConsultCommand.class);
 
@@ -77,11 +75,10 @@ public class ExportConsultCommand extends Command {
      *
      * @param filename String representing filename to be validated
      */
-    private void validateFilename(String filename) throws CommandException {
-        for (char c : INVALID_CHARS.toCharArray()) {
-            if (filename.indexOf(c) >= 0) {
-                throw new CommandException(String.format(INVALID_FILENAME_MESSAGE, c));
-            }
+    protected void validateFilename(String filename) throws CommandException {
+        // Check if filename contains any non-alphanumeric characters
+        if (!filename.matches("^[a-zA-Z0-9]+$")) {
+            throw new CommandException(ExportConsultCommand.INVALID_FILENAME_MESSAGE);
         }
     }
 
