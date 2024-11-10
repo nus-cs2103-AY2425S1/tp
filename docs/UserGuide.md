@@ -78,7 +78,7 @@ Start here if you are new to HRConnect.
 
 3. Copy the file to the folder you want to use as the home folder for your HRConnect. **This folder will be used to store saved data and preferences.**
 
-4. **Double click the `.jar` file** in the folder you placed. 
+4. **Double-click the `.jar` file** in the folder you placed. 
    - (If this does not work: Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.)
 
 A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.
@@ -131,7 +131,7 @@ Refer to the [Features](#features) below for details of each command.
   - e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
-  - e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  - e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   - e.g. `[t/TAG]…​` can be left out (i.e. used 0 times), used as `t/friend`, `t/friend t/family` etc.
@@ -145,7 +145,7 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -171,7 +171,7 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
   - The local-part may not start or end with special characters.
   - This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods (e.g. `u.nus.edu`).
 - Address must be: Any characters are valid
-- Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces, each should be 50 characters or less
+- Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces, each should be 50 characters or fewer
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An employee can have any number of tags (including 0) and any number of skills (including 0)
@@ -208,8 +208,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL
 - Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
-- When editing skills, the existing skills of the employee will be removed i.e adding of skills is not cumulative.
+- When editing tags, the existing tags of the employee will be removed i.e. adding of tags is not cumulative.
+- When editing skills, the existing skills of the employee will be removed i.e. adding of skills is not cumulative.
 - You can remove all the employee’s tags by typing `t/` without
   specifying any tags after it.
 - You can remove all the employee’s skills by typing `s/` without
@@ -228,7 +228,7 @@ Expected output:
 
 ### Filtering employees by skills: `filter`
 
-Finds employees who has **at least one skill or tag matching** at least one of the search items.
+Finds employees who have **at least one skill or tag matching** at least one of the search items.
 
 Format: `filter [s/SKILL]... [t/TAG]...`
 
@@ -371,7 +371,7 @@ Format: `editproject INDEX [pn/NAME] [s/SKILL]…​`
 - Edits the project at the specified `INDEX`. The index refers to the index number shown in the displayed project list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing skills, the existing skills of the project will be removed i.e adding of skills is not cumulative.
+- When editing skills, the existing skills of the project will be removed i.e. adding of skills is not cumulative.
 - You can remove all the project’s skills by typing `s/` without
   specifying any skills after it.
 - You cannot edit a project's id. More specifically, you are not allowed to specify `pid/PROJECTID` in the `edit` command.
@@ -525,7 +525,7 @@ Advanced users are welcome to update data directly by editing this data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
 
