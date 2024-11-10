@@ -16,15 +16,15 @@ at the National University of Singapore. While optimised for use via a Command L
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for EventfulNUS.
+3. Copy the file to the folder you want to use as the _home folder_ for EventfulNUS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -57,10 +57,10 @@ Refer to the [Features](#features) below for details of each command.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
+  e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/athlete` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/friend`, `r/friend r/family` etc.
+  e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/athlete`, `r/athlete r/volunteer` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER` is also acceptable.
@@ -121,7 +121,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds all persons whose names or attributes contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
 
 Format: `find KEYWORD [MORE_KEYWORDS]…​`
 
@@ -133,9 +133,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]…​`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find john` returns `john` and `John Doe`
+* `find John David` returns `John Doe`, `David Li`<br>
+  ![result for 'find John David'](images/find-johndavid-result.png)
 
 ### Deleting a person : `delete`
 
@@ -177,8 +177,8 @@ Format: `editevent INDEX sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENU
   specifying any participants after it.
 
 Examples:
-*  `edit 1 sp/Chess` Edits the sport of the event to be `Chess`.
-*  `edit 2 sp/Basketball Women pa/` Edits the sport of the event to be `Basketball Women` and clears all existing participants.
+*  `editevent 1 sp/Chess` Edits the sport of the first currently-displayed event to be `Chess`.
+*  `editevent 2 sp/Basketball Women pa/` Edits the sport of the second currently-displayed event to be `Basketball Women` and clears all existing participants.
 
 ### Deleting an event : `deleteevent`
 
@@ -325,17 +325,17 @@ Volunteer Roles (Code - Role Name):
 
 ## Command summary
 
-| Action                | Format, Examples                                                                               |
-|-----------------------|------------------------------------------------------------------------------------------------|
-| **Add Person**        | `add n/NAME p/PHONE_NUMBER m/EMAIL [r/ROLE]…​`                                                 |
-| **Add Event**         | `addevent sp/SPORT t/Faculty 1 t/Faculty 2 d/LocalDateTime v/Venue [pa/PARTICIPANTS`           |
-| **Clear All Entries** | `clear`                                                                                        |
-| **Delete Person**     | `delete INDEX`                                                                                 |
-| **Delete Event**      | `deleteevent INDEX`                                                                            |
-| **Edit Person**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`                         |
-| **Edit Event**        | `editevent INDEX sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/PARTICIPANTS]…​` |
-| **Find Person**       | `find KEYWORD [MORE_KEYWORDS]…​`                                                               |
-| **Find Event**        | `findevent KEYWORD [MORE_KEYWORDS]…​`                                                          |
-| **List People**       | `list`                                                                                         |
-| **List Events**       | `listevent`                                                                                    |
-| **Help**              | `help`                                                                                         |
+| Action                | Format, Examples                                                                                         |
+|-----------------------|----------------------------------------------------------------------------------------------------------|
+| **Add Person**        | `add n/NAME p/PHONE_NUMBER m/EMAIL [r/ROLE]…​`                                                           |
+| **Add Event**         | `addevent sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/PARTICIPANTS]`                    |
+| **Clear All Entries** | `clear`                                                                                                  |
+| **Delete Person**     | `delete INDEX`                                                                                           |
+| **Delete Event**      | `deleteevent INDEX`                                                                                      |
+| **Edit Person**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`                                                     |
+| **Edit Event**        | `editevent INDEX [sp/SPORT] [t/FACULTY 1] [t/FACULTY 2] [d/LOCALDATETIME] [v/VENUE] [pa/PARTICIPANTS]…​` |
+| **Find Person**       | `find KEYWORD [MORE_KEYWORDS]…​`                                                                         |
+| **Find Event**        | `findevent KEYWORD [MORE_KEYWORDS]…​`                                                                    |
+| **List People**       | `list`                                                                                                   |
+| **List Events**       | `listevent`                                                                                              |
+| **Help**              | `help`                                                                                                   |
