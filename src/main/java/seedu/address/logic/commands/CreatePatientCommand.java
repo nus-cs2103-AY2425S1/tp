@@ -33,7 +33,7 @@ public class CreatePatientCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully created a new patient of ID: #%d : \n"
             + "%2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists.";
     public static final String MESSAGE_OVERLAPPING_DOCTOR = "This person already exists as a doctor!\n"
             + "Please check the details you have entered!";
 
