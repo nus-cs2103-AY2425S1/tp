@@ -123,8 +123,11 @@ or events with `-e`.
 * Parameters wrapped in **curly brackets** are mutually exclusive arguments (i.e. only 1 should be specified).<br>
   e.g. in `add {-c | -v s/SERVICE} ...`, `-c` and `-v s/SERVICE` are mutually exclusive arguments.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `t/TAG…​` can be used as ` ` (i.e. 0 times), `t/vegetarian`, `t/budget conscious t/small scale` etc.
+* Items with `…`​ after them can be used one or more times.<br>
+  e.g. `c/CLIENT_ID…​` can be used as `c/1`, `c/1 c/2` etc.
+
+* Items with `…`​ after them and wrapped in **square brackets** can be used zero or more times.<br>
+  e.g. `[t/TAG…​]` can be used as ` ` (i.e. 0 times), `t/vegan`, `t/vegan t/budget` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER -c`, `p/PHONE_NUMBER -c n/NAME` is also acceptable.
@@ -151,30 +154,40 @@ Adds a new entity, of type specified by flag.
 
 Format for adding **contact**:
 ```
-add {-c | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]
+add {-c | -v s/SERVICE} n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG…​]
 ```
 
 Examples:
 * `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`
 * `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget`
 
+<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
+  <div>
+    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
+    A contact can have any number of tags (including 0).
+  </div>
+</div>
+
+
 Note:
-* Contacts' name and phone number pair need to be unique.
-* A contact can have any number of tags (including 0)
+* You have to specify whether you are creating a `Client` or a `Vendor` using `-c` or `-v`.
+* Contacts' name and phone number need to be unique.
+* Refer to the specifications of the parameters [here](#parameters).
 
 ___
 Format for adding **event**:
 
 ```
-add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID v/VENDOR_ID [c/CLIENT_ID ...] [v/VENDOR_ID ...]
+add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID…​ v/VENDOR_ID…​
 ```
 
 Example:
 * `add -e n/Sample Wedding des/Wedding reception d/2025-01-01 c/0 v/1 v/2`
 
 Notes:
-* Events are uniquely identified by their names and hence all event names must be unique.
-* Each event must have minimal one client and one vendor.
+* Events are uniquely identified by their names, hence all event names must be unique.
+* Each event must have one client and one vendor minimally.
+* Refer to the specifications of the parameters [here](#parameters).
 
 ### View Contacts/Events: `list`
 
@@ -182,7 +195,7 @@ List contacts or events (with optional filters).
 
 Format:
 ```
-list [{-c | -v}] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] { | [s/SERVICE] }
+list [{-c | -v}] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG…​] [id/ID] { | [s/SERVICE] }
 ```
 ```
 list [-e] [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]
@@ -193,19 +206,30 @@ Example:
 * `list -v s/catering`
 * `list -e des/wedding`
 
+<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
+  <div>
+    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
+    All parameters are optional! Leaving them out will list all contacts (clients and vendors) by default.
+  </div>
+</div>
+
+
 Notes:
-* All parameters are optional. Leaving them out will list all contacts (clients and vendors) by default.
 * The `-c`, `-v` and `-e` flags can be used to decide what type of data to list.
 * `s/SERVICE` should only be specified if `v` is specified.
-* `d/DATE` should only be specified if `-e` is specified.
-* `des/DESCRIPTION` should only be specified if `-e` is specified.
-* If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
-* All user input in between flags are ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
-* The name keyword search is case-insensitive. e.g. `hans` will match `Hans`.
+* `d/DATE` and `des/DESCRIPTION` should only be specified if `-e` is specified.
+* Any extra information provided in between flags and parameters will be ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/Jane`
+* The `Name` keyword search is case-insensitive. e.g. `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` **AND** phone number `91234567`.
-* Searching by address will list all contacts with addresses that include the keywords. e.g. `list a/Blk 123` will list contacts with address `Blk 123` and `Blk 456` because`Blk 456` contains the word `Blk`.
-* Likewise, searching by name will list all contacts and events with names that include the input keywords.
+* Contacts matching any keywords in all fields will be returned (i.e. `AND` search). e.g. `list -c n/Jane Doe a/Blk 123` will list all clients with names containing **ANY** of `Jane` or `Doe` **AND** address containing **ANY** of `Blk` or `123`.
+* Refer to the specifications of the parameters [here](#parameters).
+
+<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
+  <div>
+    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
+    To search for an event by name, you will need to specify the <code style="background-color: #66a3ff; padding: 2px 4px; border-radius: 3px; color: #ffffff;">-e</code> flag.
+  </div>
+</div>
 
 ### Editing a Contact
 
@@ -213,8 +237,15 @@ Edit an existing contact.
 
 Format:
 ```
-edit {INDEX | id/ID} [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]
+edit {INDEX | id/ID} [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG…​]
 ```
+
+<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
+  <div>
+    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
+    Although all the parameters are optional, you must specify at least one field to make an edit!
+  </div>
+</div>
 
 Examples:
 * `edit 1 p/91234567`
@@ -223,6 +254,7 @@ Examples:
 Notes:
 * Only one of `INDEX` or `id/ID` should be specified.
 * `s/SERVICE` should only be specified if the contact is a vendor.
+* Refer to the specifications of the parameters [here](#parameters).
 
 ### Deleting a Contact/Event : `delete`
 
@@ -236,14 +268,22 @@ delete INDEX
 
 Examples:
 * `delete 1`
+<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
+  <div>
+    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
+    <code style="background-color: #66a3ff; padding: 2px 4px; border-radius: 3px; color: #ffffff;">delete</code> can delete either an
+    <code style="background-color: #66a3ff; padding: 2px 4px; border-radius: 3px; color: #ffffff;">Event</code> or a 
+    <code style="background-color: #66a3ff; padding: 2px 4px; border-radius: 3px; color: #ffffff;">Contact</code> depending on what is currently displayed
+  </div>
+</div>
 
 Notes:
 * `INDEX` should be the one-based index position of the contact or event displayed on the screen.
 * The command is highly dependent on what is displayed on the screen, i.e., `delete 1` will have different results when preceded by different `list` options.
 * To delete an event, the user has to enter `list -e` (with optional filters) to ensure the screen displays events, before entering the `delete` command.
 * Similarly, to delete contacts, the user has to enter `list` (with optional filters) to ensure the screen displays contacts, before entering the `delete` command.
-* The user will not be allowed to delete clients and vendors that are the **sole** client/vendor of any event, i.e., if any event only has a single client/vendor, that client/vendor cannot be deleted.
-* The user must delete the corresponding event(s) before deleting the intended client.
+* You will not be allowed to delete clients and vendors that are the **sole** client/vendor of any event. In this case, you must delete the event before deleting the client/vendor.
+* Refer to the specifications of the parameters [here](#parameters).
 
 ### Clearing All Entries : `clear`
 
@@ -277,19 +317,19 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 > **Q**: I accidentally deleted a contact. Is there an undo feature?<br>
 
-**A**: Nope. Unforunately, undo has not been implemented.
+**A**: Nope. Unfortunately, `undo` has not been implemented.
 
 > **Q**: How do I edit events?<br>
 
-**A**: Unforunately, editing events has not been implemented. You will have to delete the existing event and create a new one with your desired details.
+**A**: Editing events will be implemented in a future release. For now, you will have to delete the existing event and create a new one with your desired details.
 
 >**Q**: I have a vendor that provides multiple services, but I can only indicate 1 service per vendor entry. What should I do?<br>
 
-**A**: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provde 1 single service is so that searches via the `list` command can be more precise.
+**A**: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provide a single service is so that searches via the `list` command can be more precise.
 
 > **Q**: Can DDD be used by users who are not wedding planners (i.e. other event planners)?<br>
 
-**A**: Yes! While DDD is targetted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
+**A**: Yes! While DDD is targeted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
 
 > **Q**: How do I transfer my data to another Computer?<br>
 
