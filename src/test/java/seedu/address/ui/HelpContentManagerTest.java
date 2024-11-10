@@ -23,10 +23,6 @@ public class HelpContentManagerTest {
         // Check that the contentMap is initialized and contains the expected keys
         assertNotNull(helpContentManager.getContent("Introduction"));
         assertNotNull(helpContentManager.getContent("FAQ and Known Issues"));
-
-        // Verify that all expected keys are present
-        assertEquals(17, helpContentManager.getTableOfContents().size(),
-                "Table of Contents should contain 17 entries");
     }
 
     @Test
@@ -65,24 +61,25 @@ public class HelpContentManagerTest {
         // Check if specific items exist in the Table of Contents
         assertEquals("Introduction", tableOfContents.get(0),
                 "First item in the TOC should be 'Introduction'");
-        assertEquals("Visual Features", tableOfContents.get(13),
+        assertEquals("Visual Features", tableOfContents.get(16),
                 "Expected 'Visual Features' at position 13 in the TOC");
-        assertEquals("Command Summary", tableOfContents.get(16),
+        assertEquals("Command Summary", tableOfContents.get(19),
                 "Last item in the TOC should be 'Command Summary'");
     }
 
     @Test
     public void tableOfContents_sizeIsCorrect() {
-        // Test to verify the Table of Contents size only once
+        // Test to verify the Table of Contents size
         ObservableList<String> tableOfContents = helpContentManager.getTableOfContents();
-        assertEquals(17, tableOfContents.size(), "Table of Contents should contain 17 entries");
+        assertEquals(20, tableOfContents.size(), "Table of Contents should contain 20 entries");
     }
 
     @Test
     public void contentMap_containsExpectedKeys() {
         // Verify that all expected keys are present
         String[] expectedKeys = {
-            "Introduction", "Features", "Adding a client", "Listing all clients",
+            "Introduction", "Features", "Validation Rules: Name and Phone", "Validation Rules: Email and Birthday",
+                "Validation Rules: Address and Tag(s)", "Adding a client", "Listing all clients",
             "Editing a client", "Locating clients by attribute", "Deleting a client",
             "Clearing all entries", "Marking a client as paid", "Marking a client as unpaid",
             "Upload a client's profile picture", "Exiting the Program", "Viewing a client's details",

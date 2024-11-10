@@ -63,170 +63,68 @@ public class HelpContentManager {
                  when copied over to the application.
                 """);
 
-        contentMap.put("Adding a client", """
-                Adding a client: add
-                 Met a potential client or someone new?
-                 This command adds a client to the F.A.R.T book.\n
-                 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS]
-                 b/BIRTHDAY [t/TAG]…​`\n
-                 Tip: A person can have any number of tags, including 0.\n
-                 Examples:
-                 `add n/John Doe p/98765432 e/johnd@example.com a/John
-                 street, block 123, #01-01 b/11 09 2001`
-                 `add n/Betsy Crowe t/friend e/betsycrowe@example.com
-                 a/Newgate Prison p/1234567 b/11 09 2001 t/criminal`\n
-                 Note:
-                 1. As of version 1.5, only valid email addresses (in the form
-                 name@domain.com) and Singapore phone numbers are accepted.
-                 Birthdays should be added in DD MM YYYY format.
-                 2. You may add duplicate contacts (i.e., contacts with the same name,
-                 case-insensitive), but the F.A.R.T book will prompt you to confirm
-                 that you are adding a duplicate contact.
+        contentMap.put("Validation Rules: Name, Phone", """
+                Validation Rules: Name, Phone
+                 Please adhere to these validation rules when using the various commands below. 
+                 Inputs that fail to comply will not be accepted by the F.A.R.T. address book, 
+                 and the data will not be added to the client list. For all commands, note that 
+                 spaces at the beginning of any input will be trimmed (e.g., inputting 
+                 `n/       John Doe` will be interpreted as `n/John Doe`).
+        
+                 Name
+                 Valid Inputs: Alphanumeric characters, with or without spaces, e.g., `Martin`, 
+                 `Martin Luther King`, `John`, `J0hn`.
+                 Common Invalid Inputs:
+                 * The slash character `/`, e.g., `S/O`.
+                 * The period character `.`, e.g., `Jr.`.
+        
+                 Phone
+                 Valid Inputs: 8-digit numbers starting with 3, 6, 8, or 9 (Singaporean numbers), 
+                 e.g., `91234567`, `81234567`.
+                 Common Invalid Inputs:
+                 * Non-Singaporean phone numbers, e.g., `51234567`.
+                 * Numbers exceeding 8 digits, e.g., `6581234567`.
+                 * Country code prefixes, e.g., `+6581234567`.
+                 * Spaces within numbers, e.g., `8123 4567`.
                 """);
 
-        contentMap.put("Listing all clients", """
-                Listing all clients: list
-                 Need to have a quick view of everyone in your F.A.R.T book
-                 or reset it after filtering?
-                 This command displays a list of all clients in the F.A.R.T book.
+        contentMap.put("Validation Rules: Email, Birthday", """
+                Validation Rules: Email, Birthday
+                 Email
+                 For all parts of the input that allow special characters, they cannot appear 
+                 at the start or end, and they can only be used consecutively at most once.
+                 Valid Inputs: In the format `local-part@domain`, e.g. `john.doe@example.com`, 
+                 `j_ohn@example.edu.org`, `john123@e-mail.com`.
+                 * `local-part`: Alphanumeric characters, plus `+`, `_`, `.`, `-`.
+                 * `@`: Required character.
+                 * `domain`: Alphanumeric, plus `.`, `-`. The last two characters must be alphanumeric.
+                 Common Invalid Inputs:
+                 * Special characters at the start or end, e.g., `.john@example.com`, `john@example.com.`.
+                 * More than one consecutive special character, e.g., `john..doe@example.com`.
+                 * Disallowed special characters, e.g., `john!@example.com`.
+                 * Missing `@` character, e.g., `johnexample.com`.
+                 * Last two characters not being alphanumeric, e.g., `john@example.c`.
+        
+                 Birthday
+                 Valid Inputs: Numerical characters in the format `DD MM YYYY`, using valid dates,
+                 e.g., `01 01 2000`, `02 03 2004`.
+                 Common Invalid Inputs:
+                 * Incorrect format, e.g., `01/01/2000`, `01 31 2000`.
+                 * Invalid dates, e.g., `31 02 2000`, `32 01 2000`.
                 """);
 
-        contentMap.put("Editing a client", """
-                Editing a client: edit
-                 Need to update an client’s details?
-                 This command edits an existing client in the F.A.R.T book.\n
-                 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]
-                 [b/BIRTHDAY] [t/TAG]…​`\n
-                 Edits the client at the specified INDEX. The index refers to the
-                 index number shown in the displayed client list. The index must be a
-                 positive whole number (1, 2, 3, …​).
-                 At least one of the optional fields must be provided.
-                 Existing values will be updated to what you have currently typed in.
-                 When editing tags, the existing tags of the client will be removed
-                 (i.e., adding of tags is not cumulative).
-                 You can remove all the client’s tags by
-                 typing `t/` without specifying any tags after it.\n
-                 Examples:
-                 `edit 1 p/91234567 e/johndoe@example.com`: Edits the phone
-                 number and email address of the 1st client to be `91234567`
-                 and `johndoe@example.com`, respectively.
-                 `edit 2 n/Betsy Crower t/`: Edits the name of the 2nd client
-                 to `Betsy Crower` and clears all existing tags.
-                """);
-
-        contentMap.put("Locating clients by attribute", """
-                Locating clients by attribute: find
-                 Need to quickly find a client by their address or something other
-                 than their name? Use this command to find clients whose attributes
-                 contain any of the given keywords.\n
-                 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY]
-                 [t/TAG]…​`\n
-                 The search is case-insensitive. For example, `hans` will match
-                 `Hans`. At least one of the optional fields must be provided.
-                 Keywords are matched against the attribute that you specified
-                 (i.e., searching for names will match against all names).
-                 Partial matches of a keyword will also be returned. For example,
-                 `9123` will return clients with the phone number `91234567`.\n
-                 Examples:
-                 `find n/John`: returns clients with names `john` and `John Doe`.
-                 `find a/serangoon`: returns `Bernice Yu`, `David Li`.
-                """);
-
-
-        contentMap.put("Deleting a client", """
-                Deleting a client : delete
-                 Need to remove someone from your list? This command deletes the
-                 specified client from the F.A.R.T book.\n
-                 Format: `delete INDEX`\n
-                 Deletes the client at the specified `INDEX`. The index refers to the
-                 index number shown in the displayed client list. The index must be a
-                 positive whole number (1, 2, 3, …​).\n
-                 Examples:
-                 `list` followed by `delete 2` deletes the 2nd client in the F.A.R.T book.
-                 `find Betsy` followed by `delete 1` deletes the 1st client in the results
-                 of the `find` command.\n
-                 Note:
-                 As a `delete` command cannot be undone, the F.A.R.T Book will first
-                 prompt you to confirm if the contact that you want to delete is
-                 correct. If you select `No`, the operation will be aborted and the
-                 client will not be deleted.
-                """);
-
-        contentMap.put("Clearing all entries", """
-                Clearing all entries : clear
-                 Want to get rid of all contacts or the sample data we’ve provided?
-                 This command clears all entries from the F.A.R.T book.\n
-                 Format: `clear`\n
-                 Note:
-                 A `clear` command cannot be undone. The F.A.R.T Book will first prompt
-                 you to confirm that you wish to clear the book. If you select `No`, the
-                 clear action will be aborted.
-                 If you do change your mind after clearing the F.A.R.T book, you may
-                 retrieve the sample data again by deleting the `addressbook.json` file
-                 in the `data` folder, then launching F.A.R.T again.
-                """);
-
-        contentMap.put("Marking a client as paid", """
-                Marking a client as paid: paid
-                 Need to track which clients have paid their policy premiums for the
-                 current period? This command marks the specified client from the
-                 F.A.R.T book as paid.\n
-                 Format: `paid INDEX f/FREQUENCY`\n
-                 Marks the client at the specified `INDEX` as paid. The index refers to
-                 the index number shown in the displayed client list. The index must
-                 be a positive whole number (1, 2, 3, …​).
-                 The frequency is the number of months between policy renewals, and it
-                 can only be 1, 3, 6, or 12. The frequency will indicate which month
-                 the client will be automatically updated to unpaid.\n
-                 Examples:
-                 `list` followed by `paid 2 f/6` marks the 2nd client in the F.A.R.T book
-                 as paid and sets their policy renewal frequency to 6 months.
-                 `find Betsy` followed by `paid 1 f/6` marks the 1st client in the results
-                 of the `find` command as paid.
-                """);
-
-        contentMap.put("Marking a client as unpaid", """
-                Marking a client as unpaid: unpaid
-                 Need to manually mark a client that has yet to pay? This command
-                 marks the specified client from the F.A.R.T book as unpaid.\n
-                 Format: `unpaid INDEX`\n
-                 Marks the client at the specified `INDEX` as unpaid. The index refers
-                 to the index number shown in the displayed client list. The index
-                 must be a positive whole number (1, 2, 3, …​).
-                 Changes the policy renewal frequency to 0.\n
-                 Examples:
-                 `list` followed by `unpaid 2` marks the 2nd client in the F.A.R.T book as
-                 unpaid.
-                 `find Betsy` followed by `unpaid 1` marks the 1st client in the results of
-                 the `find` command as unpaid.
-                """);
-
-        contentMap.put("Upload a client's profile picture", """
-                Upload a client’s profile picture
-                 Too many clients? Keep track of their faces by uploading a profile
-                 picture of them.\n
-                 Format: `upload INDEX`\n
-                 This opens a file browser where you can choose PNG images for the
-                 client at the specified `INDEX`. The index refers to the index number
-                 shown in the displayed client list. The index must be a positive
-                 whole number (1, 2, 3, …​).\n
-                 Tip:
-                 1. This feature is for Windows users only. Mac and Linux users may
-                 encounter errors if they use this feature. Support for other OSes
-                 will be released in future versions!
-                 2. The profile picture may look odd if the image chosen is very small,
-                 too wide, or too thin. For best results, use square images
-                 approximately 300px x 300px. You can crop with your computer’s
-                 image editor or use an online editor like Adobe.
-                 3. Only PNG images are supported. Please ensure your chosen image
-                 is in PNG format.
-                """);
-
-        contentMap.put("Exiting the Program", """
-                Exiting the program : exit
-                 Done with F.A.R.T.? This command closes the program. Your data is
-                 automatically saved.\n
-                 Format: `exit`
+        contentMap.put("Validation Rules: Address, Tag(s)", """
+                Validation Rules: Address, Tag(s)
+                 Address
+                 Valid Inputs: Accepts any string of characters, e.g., `John Street, Block 123, #01-01`,
+                 `Pro+fessional Building, Level 3, Unit 30`, `東京都豊島区東池袋1-22-10 ヒューマックスパビリオン`.
+        
+                 Tag(s)
+                 Valid Inputs: Alphanumeric characters. To include multiple tags, repeat the `t/` label,
+                 e.g., `t/friend`, `t/colleague t/neighbour`.
+                 Invalid Inputs:
+                 * Dropping the `t/` label, e.g., `t/colleague neighbour`.
+                 * Non-alphanumeric characters, e.g., `t/#1friend`.
                 """);
 
         contentMap.put("Viewing a client's details", """
@@ -240,14 +138,207 @@ public class HelpContentManager {
                  The displayed contact will persist, and edits will not be reflected
                  until you select another contact or close the F.A.R.T book. If you
                  made any changes to the current contact on display, kindly
-                 double-click to refresh the detailed view.
+                 double-click to refresh the detailed view.\n
+                 The detailed view can be broken down into three main sections, starting from the above:
+                 1. The client's profile picture. This can be updated via the `upload` command.
+                 2. The client's details. This can be updated by various commands, including
+                 `edit`, `paid,` `unpaid`.
+                 3. Three template messages. These are predetermined messages that have been
+                 categorised by the different life phases that a client could be in. Clicking
+                 on one of the buttons will copy the relevant message to your clipboard,allowing
+                 you to quickly send a message to your client via your preferred messaging app.
+                 The message will automatically use the name provided in the F.A.R.T. book.
+                 A successful copy will result in `Template Message copied to clipboard!`
+                 being shown in the `Response Window`.
+                """);
+
+        contentMap.put("Adding a client", """
+                Adding a client: add
+                 Met a potential client or someone new?
+                 This command adds a client to the F.A.R.T book.\n
+                 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL
+                  b/BIRTHDAY [a/ADDRESS][t/TAG]…​`\n
+                 Tip: A person can have any number of tags, including 0.\n
+                 Examples:
+                 `add n/John Doe p/98765432 e/johnd@example.com a/John
+                 street, block 123, #01-01 b/11 09 2001`\n
+                 `add n/Betsy Crowe t/friend e/betsycrowe@example.com
+                 a/Newgate Prison p/8234567 b/11 09 2001 t/criminal`\n
+                 Note:
+                 1. As mentioned in the Validation Rules, only valid email addresses
+                 (in the form `local-part@domain`) and Singapore phone numbers are accepted.\n
+                 2. Birthdays should be added in DD MM YYYY format.\n
+                 3. You may add duplicate contacts (i.e., contacts with the same name,
+                 case-insensitive), but the F.A.R.T book will prompt you to confirm
+                 that you are adding a duplicate contact. If you select `No` in the prompt window,
+                 the operation will be aborted and the client will not be added.
+                 Else, select `Yes` to add the new client.
+                """);
+
+        contentMap.put("Listing all clients", """
+                Listing all clients: list
+                 Need to have a quick view of everyone in your F.A.R.T book
+                 or reset it after filtering?
+                 This command displays a list of all clients in the F.A.R.T book.
+                """);
+
+        contentMap.put("Editing a client", """
+                Editing a client: edit
+                 Need to update an client’s details?
+                 This command edits an existing client in the F.A.R.T book.\n
+                 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]
+                 [b/BIRTHDAY] [a/ADDRESS] [t/TAG]…​`\n
+                 Edits the client at the specified INDEX. The index refers to the
+                 index number shown in the displayed client list. The index must be a
+                 positive whole number (1, 2, 3, …​).
+                 At least one of the optional fields must be provided.
+                 Existing values will be updated to what you have currently typed in.
+                 When editing tags, the existing tags of the client will be removed
+                 (i.e., adding of tags is not cumulative).\n
+                 You can remove all the client’s tags by typing `t/`
+                 without specifying any tags after it.
+                 Similarly, a client's address can be removed by typing `a/`
+                 without specifying anything after it.\n
+                 Examples:
+                 `edit 1 p/91234567 e/johndoe@example.com`: Edits the phone
+                 number and email address of the 1st client to be `91234567`
+                 and `johndoe@example.com`, respectively.\n
+                 `edit 2 n/Betsy Crower t/`: Edits the name of the 2nd client
+                 to `Betsy Crower` and clears all existing tags.
+                """);
+
+        contentMap.put("Locating clients by attribute", """
+                Locating clients by attribute: find
+                 Need to quickly find a client by their address or something other
+                 than their name? Use this command to find clients whose attributes
+                 contain any of the given keywords.\n
+                 Format: `find [n/NAME] [p/PHONE] [e/EMAIL]
+                 [b/BIRTHDAY] [a/ADDRESS] [t/TAG]…​`\n
+                 The search is case-insensitive. For example, `hans` will match
+                 `Hans`. At least one of the optional fields must be provided.
+                 Keywords are matched against the attribute that you specified
+                 (i.e., searching for names will match against all names).
+                 Partial matches of a keyword will also be returned. For example,
+                 `9123` will return clients with the phone number `91234567`.\n
+                 Examples:
+                 `find n/John`: returns clients with names `john` and `John Doe`.\n
+                 `find a/serangoon`: returns `Bernice Yu`, `David Li`.
+                """);
+
+        contentMap.put("Deleting a client", """
+                Deleting a client : delete
+                 Need to remove someone from your list? This command deletes the
+                 specified client from the F.A.R.T book.\n
+                 Format: `delete INDEX`\n
+                 Deletes the client at the specified `INDEX`. The index refers to the
+                 index number shown in the displayed client list. The index must be a
+                 positive whole number (1, 2, 3, …​).\n
+                 Examples:
+                 `list` followed by `delete 2` deletes the 2nd client in the F.A.R.T book.\n
+                 `find n/Betsy` followed by `delete 1` deletes the 1st client in the results
+                 of the `find` command.\n
+                 Note:
+                 1. A `delete` command cannot be undone, and deleted contacts cannot be retrieved.
+                 2. When a `delete` command is inputted, the F.A.R.T Book will first prompt you
+                 to confirm if the contact that you want to delete is correct.If you select `No`,
+                 the operation will be aborted and the client will not be deleted.
+                 Else, select `Yes` to delete the contact.
+                """);
+
+        contentMap.put("Clearing all entries", """
+                Clearing all entries : clear
+                 Want to get rid of all contacts or the sample data we’ve provided?
+                 This command clears all entries from the F.A.R.T book.\n
+                 Format: `clear`\n
+                 Note:
+                 1. A `clear` command cannot be undone, and cleared contacts cannot be retrieved.\n
+                 2. When a `clear` command is inputted, the F.A.R.T Book will first prompt you
+                 to confirm that you wish to clear the book. If you select `No`, the operation
+                 will be aborted and the book will not be cleared. Else, select `Yes` to clear the book.\n
+                 3. If you do change your mind after clearing the F.A.R.T book, you can retrieve only
+                 the sample data by deleting the `addressbook.json` file in the `data` folder,
+                 then launching F.A.R.T again.
+                """);
+
+        contentMap.put("Marking a client as paid", """
+                Marking a client as paid: paid
+                 Need to track client policy payments for the current period? This command
+                 marks the specified client from the F.A.R.T book as paid.\n
+                 Format: `paid INDEX f/FREQUENCY`\n
+                 Marks the client at the specified `INDEX` as paid. The index refers to
+                 the index number shown in the displayed client list. The index must
+                 be a positive whole number (1, 2, 3, …​).
+                 The frequency is the number of months between policy renewals, and it
+                 can only be 1, 3, 6, or 12. The frequency will indicate which month
+                 the client will be automatically updated to unpaid.\n
+                 Examples:
+                 `list` followed by `paid 2 f/6` marks the 2nd client in the F.A.R.T book
+                 as paid and sets their policy renewal frequency to 6 months.\n
+                 `find n/Betsy` followed by `paid 1 f/3` marks the 1st client in the results
+                 of the `find` command as paid and sets their policy renewal frequency to 3 months.\n
+                 Note:
+                 1. All policies are assumed to begin and end on the first of the month.\n
+                 2. As of now, each frequency only supports tracking for specific months.
+                 For example, a 3 Month Frequency marks the client as unpaid on Jan, Apr,
+                 Jul and Oct, while a 6 Month Frequency marks as unpaid on Jan and Jul.
+                """);
+
+        contentMap.put("Marking a client as unpaid", """
+                Marking a client as unpaid: unpaid
+                 Need to manually mark a client that has yet to pay? This command
+                 marks the specified client from the F.A.R.T book as unpaid.\n
+                 Format: `unpaid INDEX`\n
+                 Marks the client at the specified `INDEX` as unpaid. The index refers
+                 to the index number shown in the displayed client list. The index
+                 must be a positive whole number (1, 2, 3, …​).
+                 Changes the policy renewal frequency to 0.\n
+                 Examples:
+                 `list` followed by `unpaid 2` marks the 2nd client
+                 in the F.A.R.T book as unpaid.\n
+                 `find n/Betsy` followed by `unpaid 1` marks the 1st client
+                 in the results of the `find` command as unpaid.\n
+                 Note:
+                 1. As clients will be automatically marked as unpaid based on
+                 their policy renewal frequency, this command should only be used
+                 in special cases. A good example would be if a client wishes to
+                 change their renewal frequency, thus requiring you to update the
+                 new frequency into the F.A.R.T. book.
+                """);
+
+        contentMap.put("Uploading a client's profile picture", """
+                Uploading a client’s profile picture
+                 Too many clients? Keep track of their faces by uploading a profile
+                 picture of them.\n
+                 Format: `upload INDEX`\n
+                 This opens a file browser where you can choose PNG images for the
+                 client at the specified `INDEX`. The index refers to the index number
+                 shown in the displayed client list. The index must be a positive
+                 whole number (1, 2, 3, …​).\n
+                 Tip:
+                 1. This feature is for Windows users only. Mac and Linux users may
+                 encounter errors if they use this feature. Support for other OSes
+                 will be released in future versions!\n
+                 2. The profile picture may look odd if the image chosen is very small,
+                 too wide, or too thin. For best results, use square images
+                 approximately 300px x 300px. You can crop with your computer’s
+                 image editor or use an online editor like Adobe.\n
+                 3. Only PNG images are supported. Please ensure your chosen image
+                 is in PNG format.
+                """);
+
+        contentMap.put("Exiting the program", """
+                Exiting the program : exit
+                 Done with F.A.R.T.? This command closes the program. Your data is
+                 automatically saved.\n
+                 Format: `exit`
                 """);
 
         contentMap.put("Visual Features", """
                 Visual Features
                  F.A.R.T has some handy visual cues that highlight certain clients.\n
                  Net Worth Tagging
-                 You can add tags to clients such as `highnetworth`, `midnetworth`, or `lownetworth`
+                 You can add tags to clients such as
+                 `highnetworth`, `midnetworth`, or `lownetworth`
                  which will be highlighted with different styles.
                  Each client can only have one net worth tag at a time.
                  For example, if you add a `highnetworth` tag to a client
@@ -263,33 +354,48 @@ public class HelpContentManager {
 
         contentMap.put("Saving and Editing Data", """
                 Saving and Editing Data\n
-                 F.A.R.T data is saved on your computer automatically after any command that changes the data.
-                 There is no need to save manually. The location where the data is stored is shown on the
-                 bottom status bar of the app.\n
-                 F.A.R.T data is saved in a JSON file at `[JAR file location]/data/addressbook.json`.
-                 Advanced users are welcome to update data directly by editing this data file.\n
+                 F.A.R.T data is saved on your computer automatically
+                 after any command that changes the data.
+                 There is no need to save manually.
+                 The location where the data is stored
+                 is shown on the bottom status bar of the app.\n
+                 F.A.R.T data is saved in a JSON file at 
+                 `[JAR file location]/data/addressbook.json`.
+                 Advanced users are welcome to update
+                 data directly by editing this data file.\n
                  Caution:
-                 If changes to the data file make its format invalid, F.A.R.T will discard all data and start
-                 with an empty data file at the next run. Therefore, it is recommended to back up the file
-                 before editing it.
+                 If changes to the data file make its format invalid, F.A.R.T will
+                 discard all data and start with an empty data file at the next run.
+                 Therefore, it is recommended to back up the file before editing it.
                  Additionally, certain edits may cause F.A.R.T to behave unexpectedly
-                 (e.g., if a value entered is outside of the acceptable range).
-                 Therefore, edit the data file only if you are confident you can update it correctly.
+                 (e.g., if a value entered is outside the acceptable range).
+                 Therefore, edit the data file only if you are confident
+                 you can update it correctly.
                 """);
 
         contentMap.put("FAQ and Known Issues", """
                 FAQ and Known Issues
                  FAQ
-                 Q: How do I transfer my data to another computer?
-                 A: Install this app on the other computer and overwrite the empty data file it creates
-                 with the data file from your previous F.A.R.T home folder.\n
+                 Q: How do I transfer my data to another computer?\n
+                 A: Install this app on the other computer and overwrite the empty data
+                 file it creates with the data file from your previous F.A.R.T home folder.\n
                  Known Issues
-                 1. Screen positioning: When using multiple screens, if you move the application to a secondary
-                 screen and later switch to only the primary screen, the GUI may open off-screen. To fix this,
-                 delete the `preferences.json` file created by the application before running it again.
-                 2. Help Window minimization: If you minimize the Help Window and then run the `help` command (or
-                 use the `Help` menu, or the keyboard shortcut `F1`), the minimized Help Window will remain minimized,
-                 and no new Help Window will appear. To fix this, manually restore the minimized Help Window.
+                 1. Screen positioning: When using multiple screens, if you move the application
+                 to a secondary screen and later switch to only the primary screen,
+                 the GUI may open off-screen. To fix this, delete the `preferences.json`
+                 file created by the application before running it again.\n
+                 2. Help Window minimization: If you minimize the Help Window and then
+                 run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`),
+                 the minimized Help Window will remain minimized, and no new Help Window
+                 will appear. To fix this, manually restore the minimized Help Window.\n
+                 3. If you are unable to see the command input or result panels, resize the window
+                 to a larger size by hovering over the window outline on your screen. A two-sided
+                 arrow should appear, which you can click and drag to resize to an appropriate size.
+                 This issue may be especially prevalent on smaller monitor sizes.\n
+                 4. As mentioned in the Viewing a client's details section, a client's
+                 detailed view does not automatically update to reflect changes. Once
+                 changes are made, double-click on the same contact to refresh said changes.
+                 Else, the changes will be updated upon restarting the F.A.R.T. book.
                 """);
 
         assert contentMap.get("Introduction") != null : "Introduction content should not be null";
@@ -311,11 +417,13 @@ public class HelpContentManager {
      */
     public ObservableList<String> getTableOfContents() {
         ObservableList<String> tocList = FXCollections.observableArrayList(
-                "Introduction", "Features", "Adding a client",
-                "Listing all clients", "Editing a client", "Locating clients by attribute", "Deleting a client",
+                "Introduction","Features", "Validation Rules: Name, Phone",
+                "Validation Rules: Email, Birthday", "Validation Rules: Address, Tag(s)",
+                "Viewing a client's details", "Adding a client", "Listing all clients",
+                "Editing a client", "Locating clients by attribute", "Deleting a client",
                 "Clearing all entries", "Marking a client as paid", "Marking a client as unpaid",
-                "Upload a client's profile picture", "Exiting the Program", "Viewing a client's details",
-                "Visual Features", "Saving and Editing Data", "FAQ and Known Issues", "Command Summary");
+                "Uploading a client's profile picture", "Exiting the program", "Visual Features",
+                "Saving and Editing Data", "FAQ and Known Issues", "Command Summary");
 
         assert !tocList.isEmpty() : "Table of Contents should not be empty";
         return tocList;
@@ -346,21 +454,22 @@ public class HelpContentManager {
         commandSummaryData.clear();
 
         commandSummaryData.addAll(
-                new String[]{"Add", "add n/NAME p/PHONE_NUMBER e/EMAIL\n [a/ADDRESS]"
-                        + "b/BIRTHDAY [t/TAG]…​", "add n/James Ho p/22224444\n"
+                new String[]{"Add", "add n/NAME p/PHONE_NUMBER e/EMAIL\n b/BIRTHDAY"
+                        + "[a/ADDRESS] [t/TAG]…​", "add n/James Ho p/22224444\n"
                         + "e/jamesho@example.com\n a/123, Clementi Rd, 1234665 \nb/11 09 2001 "
                         + "t/friend t/colleague"},
                 new String[]{"Clear", "clear", "-"},
                 new String[]{"Delete", "delete INDEX", "delete 3"},
                 new String[]{"Edit", "edit INDEX [n/NAME] [p/PHONE_NUMBER]\n [e/EMAIL]"
-                        + "[a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​", "edit 2 n/James Lee\n"
+                        + "[b/BIRTHDAY] [a/ADDRESS] [t/TAG]…​", "edit 2 n/James Lee\n"
                         + "e/jameslee@example.com"},
                 new String[]{"Find", "find [n/NAME] [p/PHONE] [e/EMAIL]\n"
-                        + "[a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​", "find e/jameslee@example.com"},
+                        + "[b/BIRTHDAY] [a/ADDRESS] [t/TAG]…​", "find e/jameslee@example.com"},
                 new String[]{"List", "list", "-"},
                 new String[]{"Help", "help", "-"},
                 new String[]{"Paid", "paid INDEX f/FREQUENCY", "paid 3 f/3"},
-                new String[]{"Unpaid", "unpaid INDEX", "unpaid 3"}
+                new String[]{"Unpaid", "unpaid INDEX", "unpaid 3"},
+                new String[]{"Upload", "upload INDEX", "upload 3"}
         );
 
 
