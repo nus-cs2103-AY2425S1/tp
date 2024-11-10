@@ -760,28 +760,211 @@ _{to work on in the future}_
 
 ## **Appendix: Planned Enhancements**
 
-### Data archiving
+### **Known Issues**
 
-* Description: Allow users to move inactive or irrelevant entries to an archive.
-* Benefits:
+The following are current known issues with the application that have been identified. The implementation for the fixes
+for these issues have been deferred for future iterations due to certain considerations that will be elaborated
+in further detail for each issue.
+
+#### Fix `help` command popup window issue
+* **Known Issue:** On some platforms (especially MacOS), when using the application in full screen,
+running the `help` command and closing the popup window repeatedly in quick succession may cause the application
+to hang or crash.
+* **Enhancement:** 
+  * Improve the reliability and robustness of the help command by implementing 
+  better resource management and concurrency handling. 
+  * Note that the decision to move the help window away from being a popup and instead display it within the main window was
+    considered, but ultimately rejected as the team feels that the help page adds more value when it is outside of the
+    main application GUI, so that users can reference it easily.
+* **Benefits:**
+    * Enhances the overall user experience by preventing application crashes, ensuring smooth and 
+  uninterrupted usage of the application.
+    * Helps future iterations by laying the groundwork for robust window management, 
+  potentially benefiting other UI-related commands.
+* **Justification for Deferral:**
+    * The issue occurs only under specific conditions (repeated execution of the help command in quick succession 
+  while in full screen), making it a relatively low-priority bug compared to other critical 
+  functionalities of the application.
+    * Fixing this issue would require a significant amount of effort to implement comprehensive resource management and 
+  concurrency controls, potentially diverting time and resources away from higher-priority enhancements.
+    * The current implementation is sufficient for most standard use cases, and addressing this issue can be deferred 
+  to a future iteration when higher-priority tasks are completed.
+
+### **Current Feature Flaws**
+
+The following are current feature flaws related to the design of the application that have been identified. These 
+feature flaws are not critical to the usability of the application for its intended use case, but rather highlight
+potential mis-steps in the design process of the application by the development team. 
+
+The implementation for the planned enhancements required to improve these feature flaws have been deferred for future iterations as the 
+development team feels that the effort required to fix these feature flaws outweighs their value add 
+to the user at this current stage of development.
+
+More details are included for each feature flaw below.
+
+#### Overly general error message
+* **Feature Flaw:** Certain error messages provided as feedback to the user could be more specific or helpful. 
+Examples include (non-exhaustive):
+  * "Invalid command format" should not be used so extensively, and instead serve as a catch-all.
+    * `edit edit xxx` can have error message "Duplicate command word: `edit`".
+    * `find ID ID` can have error message "Duplicate `ID` detected, only one allowed".
+    * `filter c/Computer Science n/Crowe` can have error message "Only one filter condition allowed".
+  * "Unknown Command" can be more helpful.
+    * `test` can have error message "Unknown Command: `test`. Type `help` for list of commands.".
+* **Enhancement:** Introduce a more granular exception handling mechanism to differentiate error scenarios and 
+provide tailored error feedback. This includes categorizing command errors (e.g., syntax errors, duplicate arguments 
+etc.) and defining specific messages that clearly indicate the nature of the issue to users.
+* **Benefits:**
+  * Improves user experience by providing clearer and more actionable error messages, reducing user confusion 
+  and frustration when entering incorrect commands.
+  * Enhances usability for new users who may rely heavily on accurate feedback to 
+  learn the application’s command syntax, reducing the learning curve.
+* **Justification for Deferral:**
+  * Some of the error messages act as functional placeholders for future planned features that 
+  have yet to be implemented, (e.g. multiple filter conditions). 
+  * Since error messages are not necessarily "wrong", refining the current system can be safely deferred 
+  to a future iteration when more critical features and enhancements have been implemented.
+  * Developing a granular exception handling system requires substantial effort, including analyzing all commands, 
+  categorizing errors, and designing specific error messages. This would consume time better spent on higher-priority 
+  features. Additionally, implementing this enhancement when the application’s core feature set is more stable would 
+  ensure that the effort is more worthwhile, as it would reduce the need for constant repeated modifications to the 
+  error-handling system each time core features are tweaked.
+
+#### StudentID as duplicate detection mechanism
+* **Feature Flaw:** All contacts are currently identified by their StudentID (the development team only considers 
+  student teaching assistants as tutors for now).
+* **Enhancement:** Introduce a more robust identification mechanism outside of student ID, that distinguishes between students
+and other contact types.
+* **Benefits:**
+  * Enhances flexibility in the application, allowing it to accommodate a broader range of use cases, such as 
+  saving contacts of full-time staff, external collaborators, or other non-student roles.
+  * Eliminates the reliance on workarounds like dummy `StudentID`s, ensuring data integrity and reducing confusion 
+  for users who manage diverse types of contacts.
+  * Supports scalability by preparing the application for future features or expansions that require 
+  differentiation between contact roles.
+* **Justification for Deferral:**
+  * Implementing this enhancement requires a substantial refactoring of the `Model`, `Storage` and `Logic` components 
+  to introduce a more flexible contact identification and classification mechanism. This involves significant 
+  structural changes, including updating data representation and storage, parsing logic, as well as 
+  validation processes.
+  * The current system, while not ideal, provides sufficient functionality for managing students and student tutors,
+  which is the primary use case. Functionality for extended use cases are also possible with workarounds.
+
+#### `filter` command
+* **Feature Flaw:**
+  * `filter` command currently only supports one condition
+  * Partial/Full matching for `filter` command depends on the field to be filtered.
+* **Enhancement:**
+  * Implement filtering for multiple conditions, with toggle feature to choose between AND (strict search) vs OR (broad search) constraints.
+  * Implement toggle feature to filter based on partial or full matching.
+* **Benefits:**
+  * Allows users to perform more complex and precise searches, improving the overall utility of the filter command.
+  * The ability to toggle between AND and OR constraints enables users to adapt the search behavior based on their 
+  specific needs, such as finding contacts matching all conditions (strict search) or any condition (broad search).
+  * Introducing a toggle for partial vs full matching ensures uniformity and clarity in how the filter command operates, 
+  reducing user confusion and enhancing predictability.
+* **Justification for Deferral:**
+  * The current implementation of the filter command, while limited, provides sufficient functionality for 
+  basic searches, making this enhancement a lower-priority task.
+  * Implementing support for multiple conditions and toggle options would require significant non-trivial changes to the 
+  `Logic` and `Parser` components to handle advanced search constraints efficiently.
+  * The effort required to implement these enhancements outweighs the immediate benefit, especially when 
+  weighed against higher-priority improvements or bug fixes currently in scope.
+
+#### Index functionality
+* **Feature Flaw:** The current utility for indexing contacts is mostly as a visual aid. Commands like `edit` and `delete`
+could utilise contact indexes to perform operations, instead of just using ID. 
+* **Enhancement:** Implement index as an alternative form of contact referencing, apart from ID.
+* **Benefits:**
+  * Reduces the likelihood of errors caused by manually entering long or complex IDs, streamlining the execution of commands like edit and delete.
+  * Provides an alternative method for referencing contacts, allowing users to choose between index and ID based on convenience or preference.
+* **Justification for Deferral:** 
+  * Implementing index-based referencing requires substantial changes to the command format and `Logic` component, 
+  including updates to parsing and validation mechanisms to support both index and ID inputs seamlessly.
+  * The current ID-based referencing, while less flexible, is functional and sufficient for most use cases, 
+  making this enhancement a lower-priority task.
+
+#### Fixed role types
+* **Feature Flaw:** 
+  * Currently, only 2 role types are supported (`Student` and `Tutor`).
+  * Only one role is allowed per contact, causing ambiguity in the case where a student in one class is a tutor in another class.
+* **Enhancement:** 
+  * Update the role types supported to include specific roles such as `Colleague`, as well as general role types that 
+  are customizable by the user.
+  * Allow contacts to have multiple roles as long as it makes sense (e.g. `Student` and `Tutor` is possible with
+    part-time student teaching assistants, but not `Student` and `Colleague` etc.).
+* **Benefits:**
+  * Users can organize and manage contacts more effectively by categorizing them into specific roles, reducing ambiguity and making the contact list more intuitive.
+  * Supporting additional roles prepares the application for future enhancements, such as role-specific features (e.g., parent notifications or colleague collaboration tools).
+  * Allowing users to define a generic “Other” role provides them with the freedom to handle unique or unforeseen scenarios, increasing user satisfaction and engagement.
+* **Justification for Deferral:**
+  * Implementing support for multiple and customizable roles requires significant modifications to the 
+  `Model`, `Logic`, and `Storage` components, as well as updates to validation and command parsing.
+  * The current implementation meets the needs of the majority of users by supporting essential roles 
+  (`Student` and `Tutor`) and enabling basic role tagging functionality, making this a lower-priority enhancement.
+
+
+#### Fixed grading system
+* **Feature Flaw:** The application currently only supports a fixed, letter-based grading system. 
+* **Enhancement:** Introduce a customizable grading system, allowing users to define their own grading schemes 
+(e.g., Pass/Fail, numerical scores, or specific grading scales used in different institutions).
+* **Benefits:** Enables users to tailor the grading system to suit the requirements of different institutions, courses, or unique assessment systems.
+* **Justification for Deferral:**
+  * Implementing a customizable grading system involves significant changes across the `Model`, `Storage`, `UI` and `Logic` components to 
+    allow flexible input validation, data storage, and display formatting for grades.
+  * The current fixed grading system covers the majority of standard use cases and is sufficient for most users, 
+  making this a lower-priority enhancement compared to other core functionalities.
+
+#### Fixed `Module` utility
+* **Feature Flaw:** 
+  * `Module` utility only supports users tracking contacts from across various modules that they teach.
+  * This may not add value to a small subset of users who, for example, only teach a particular module. These users may 
+  instead want to use this feature as a way to track student assignment grades or class attendance.
+* **Enhancement:** 
+  * Expand the Module utility to allow customization based on user needs, such as tracking individual student 
+  assignment grades, attendance, or specific module-related details.
+  * Provide users with a flexible tagging or attribute system for modules to accommodate varying use cases.
+* **Benefits:** 
+  * Allows users to adapt the Module utility to suit specific workflows, such as managing assignment grades or monitoring attendance.
+  * Prepares the application for potential expansions, such as module-level analytics or reporting features.
+* **Justification for Deferral:**
+  * Implementing this enhancement would require significant modifications across the `Model`, `Storage`, `UI` and `Logic` components, 
+  including changes to data structures and input validation to accommodate the added flexibility.
+  * The current implementation, while less customizable, sufficiently covers the primary use case of 
+  tracking multiple modules and is functional for the majority of users, making this enhancement a lower-priority task.
+
+
+### **New Features**
+
+#### `Undo` command
+* **Description:** Allows users to revert the most recent change made to the application’s data.
+* **Benefits**
+  * Provides users with the flexibility to correct mistakes quickly without manually re-entering data or commands.
+  * Minimizes the impact of accidental commands (e.g., mistakenly deleting or editing a contact).
+  * Reduces frustration and saves time for users by eliminating the need to redo lengthy or complex data modifications.
+
+#### Data archiving
+
+* **Description:** Allow users to move inactive or irrelevant entries to an archive.
+* **Benefits:**
     * Reduces clutter in the main data set, making it easier to manage and navigate active records without losing historical data.
     * Lower the load on real-time data processing by isolating inactive records.
     * Retain archived data for historical records or compliance requirements.
     * Provide a safe way to store inactive data without risking deletion or loss.
 
-### Importing contact data
+#### Importing contact data
 
-* Description: Allow users to import contact data from multiple formats (e.g. CSV, vCard)
-* Benefits:
+* **Description:** Allow users to import contact data from multiple formats (e.g. CSV, vCard)
+* **Benefits:**
     * Saves time and effort by allowing users to easily populate the app with data, eliminating the need for manual data entry.
     * Maintain consistent contact records across different applications and devices.
     * Simplify the process for new users by letting them import contacts directly.
     * Enable users to restore contacts from external files in case of data loss.
 
-### Exporting contact data
+#### Exporting contact data
 
-* Description: Allow users to export contact data to multiple formats (e.g. CSV, vCard)
-* Benefits:
+* **Description:** Allow users to export contact data to multiple formats (e.g. CSV, vCard)
+* **Benefits:**
     * Allow users to easily transfer their contact information to other applications or storage solutions.
     * Provide users with the ability to create backups of their contact data.
     * Enable users to share their contact lists with others.
