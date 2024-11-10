@@ -775,12 +775,38 @@ The reuse of these components allowed us to focus more on the unique aspects of 
 
 ### Team size: 5
 
-1. Ritvi
-2. Ritvi
-3. Lynette
-4. Lynette
-5. Nasya
-6. Nasya
+1. **Improve handling of name inputs (`add` and `edit` commands)**: Currently names accepted are only alphanumeric. 
+To improve inclusivity, we plan to accept special characters (e.g. "s/o", "d/o"), accents (e.g. é, è) as well as other
+languages. However we will restrict names from including numbers, due to their lack of use.<br><br>
+An example of a newly accepted command will be:`edit Javier n/Javiér`<br>
+
+2. **Improve our date package (Used by all commands that require a date)**: Currently, it is possible to input invalid
+dates such as `29/02/2025 1200` (Invalid leap year) or `31/06/2025 2400` (31st of June does not exist). With our intended
+improvement, an error message will be displayed if any instance of an invalid date is inputted.<br><br>
+A few examples of commands that will throw invalid date errors will be:`edit Javier ap/31/06/2025 2400` `filter ap/31/06/2025 - 29/02/2026`<br>
+
+3. **Introduce stricter constraints for `age`**: Currently our Age field accepts any value ranging from 0-999, which seems
+a tad too high. We plan to decrease the upper limit of the range to a more reasonable 150<br><br>
+An example of a command that will throw invalid date errors will be:`edit Javier b/151`<br>
+
+4. **Set age boundaries for `filter age`**: Currently, the `filter` command allows any age range to be inputted, which 
+can lead to invalid or nonsensical ranges. We plan to set boundaries for the age filter to ensure that only valid age 
+ranges are accepted. The valid age range will be from 0 to 150.<br><br>
+An example of a command that will throw an invalid age range error will be: `filter b/151-200`
+
+5. **Introduce verification of fields such as phone number and email**: Currently, the application does not properly 
+verify the format of phone numbers and email addresses. We plan to introduce validation checks to ensure that phone 
+numbers and email addresses are in the correct format.<br><br>
+Examples of invalid inputs that will trigger an error:<br>
+Phone number: `00000000` (phone number should exist)<br>
+Email: `example@example` (should follow the format `local-part@domain.tld`)<br>
+
+6. **View any patient’s note without needing to return to the patient list view**: Currently, to view the details or 
+notes of a different patient after viewing a specific patient, users must first input the list command to return to the 
+full patient list before specifying another patient, e.g., `view SECONDPATIENT`.<br><br>
+The enhanced view command will allow the user to switch directly to another patient’s information without the need to 
+re-list all patients first.
+
 7. Kelly
 8. Kelly
 9. Otto
