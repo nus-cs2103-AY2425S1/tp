@@ -644,12 +644,12 @@ Team size: 5
 3. **Generate more helpful error messages**: In some instances the error messages are not informative enough, examples include:
    <br/>
    <br/>
-   a) The `update` command for attendees when used with an invalid index just returns a message saying "index not valid" instead of showing exactly which index is invalid
+   a) The `update` command for attendees when used with an invalid index just returns a message saying "Attendee index is invalid" instead of showing exactly which index is invalid.<br/>It also shows the error message "This event already exists in the event book" instead of a more helpful message such as "No changes were made".
 
    b) The `edit` command when used with negative indices, 0 or integer overflow shows 'invalid command' instead of 'invalid index'.
    <br/>
    <br/>
-   We plan to improve this by providing more information to the user on where they went wrong (e.g by showing the exact index that is invalid)
+   We plan to improve this by providing more information to the user on where they went wrong (e.g by showing the exact index that is invalid).
 <br/>
 <br/>
 4.  **Support for Special Characters in Contact Names**: The current address book functionality does not support certain special characters, such as "d/o" (daughter of). We plan to enhance the address book to allow the use of special characters in person names to better accommodate a wider range of user inputs. This will ensure that users from diverse cultural backgrounds, can accurately input and save their names without encountering errors.
