@@ -121,7 +121,8 @@ Adds a company to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cp/CAREER_PAGE_URL r/REMARK [t/TAG] …​`
 
 **Tip:** A company can have any number of tags (including 0)<br>
-**Note:** The company name is not case-sensitive, both `Google` and `google` are the same
+**Note:** The company name is not case-sensitive, both `Google` and `google` are the same<br>
+**Note:** Remark can be blank, e.g. `r/` is considered a valid input and remark will default to None
 
 **Example**:
 
@@ -329,6 +330,10 @@ Format: `remark INDEX r/REMARK`
   - a negative integer will result in an invalid command message.
 - Existing remark will be overwritten by the input.
 - You can remove the company's remark by typing `remark INDEX r/` without specifying any text after `r/`.
+- If no remark, default remark value will be `None`.
+
+**Note**: If there are multiple `r/`, only the last `r/REMARK` will be recorded.
+
 
 **Examples**:
 
