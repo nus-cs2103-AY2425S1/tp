@@ -596,8 +596,25 @@ acceptable range). Therefore, edit the data file only if you are confident that 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous GamerBook _home folder_.
+**A**: Install GamerBook on the new computer, and then copy the data file `addressbook.json` from your previous 
+GamerBook home folder to the new installation’s data folder, typically located at `[JAR file location]/data/addressbook.json`. Replace the empty data file on the new computer with your copied file.
+
+
+**Q**: What should I do if I accidentally delete someone from GamerBook?<br>
+**A**: You can use the `undo` command right after the delete command to restore the deleted person’s data, or use `load` if you have been saving frequently.
+
+**Q**: Should I ever use the `clear` command?
+**A**: The `clear` command deletes all entries in GamerBook. You should use it mainly to clear the sample data that GamerBook starts with.
+
+**Q**: Why do my searches sometimes return unexpected results?  
+**A**: GamerBook's search functions like `find` are case-insensitive, but they only match full words. If your search is not returning results, try again with full keywords like `John` instead of `J`.
+
+**Q**: Can I undo more than one command?  
+**A**: Yes! The `undo` command remembers your command history from when GamerBook was opened, and you can `undo` consecutive times.
+
+**Q**: Why did my GamerBook open blank when I had data saved previously?
+**A**: You may have moved the data file `addressbook.json` or modified it incorrectly. We suggest saving frequently and avoid editing the `json` directly!
+
 
 --------------------------------------------------------------------------------------------------------------------
 
