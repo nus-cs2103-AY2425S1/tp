@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateTimeUtil.DEFAULT_MONTH_FORMATTER;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
 import java.time.LocalDate;
@@ -203,7 +204,7 @@ public class ParserUtil {
         String trimmedYearMonth = yearMonthStr.trim();
         YearMonth yearMonth;
         try {
-            yearMonth = YearMonth.parse(trimmedYearMonth);
+            yearMonth = YearMonth.parse(trimmedYearMonth, DEFAULT_MONTH_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_MONTH_FORMAT);
         }

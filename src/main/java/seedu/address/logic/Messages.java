@@ -34,7 +34,7 @@ public class Messages {
             + "Date format: YYYY-MM-DD";
     public static final String MESSAGE_INVALID_MONTH_FORMAT = "Incorrect month format or invalid month!\n"
             + "Month format: YYYY-MM\n"
-            + "Valid month is between [1, 12]. Valid year is a positive integer.";
+            + "Valid month is between [1, 12]. Valid year is an integer.";
     public static final String MESSAGE_INVALID_DATE_RANGE = "Invalid date range!\n"
             + "Start date must be before or equal to end date";
     public static final String MESSAGE_MUST_BE_TRANSACTION_LIST = "%1$s must only be used in transaction list view!\n"
