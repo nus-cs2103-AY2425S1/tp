@@ -32,7 +32,6 @@ Paired also with a revolutionary AutoComplete feature, StoreClass helps you mana
 
 2. Download the latest version of the `.jar` file of our program from [here](https://github.com/AY2425S1-CS2103T-W10-4/tp/releases).
 
-
 3. Copy the file to the folder you want to use as the _home folder_ for StoreClass.
 
 4. Open the terminal on your computer and run the jar file.
@@ -104,12 +103,16 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 * `m/MODULE` : The module that the student is taking.
 * `t/TAG` : The tag of the student.
 
-<div markdown="span" class="alert alert-info"> :notebook: **Note:** Field Constraints
-- Names should only contain alphabets, hyphens, dots, commas, forward slash and spaces, and be between 1 and 100 characters long.
-- Although / is allowed in names, you should use it carefully, input like m/ g/ n/ will still be recognised as prefix and may lead to unexpected behaviour.
-- Phone numbers should only contain numbers, and be exactly 8 digits long. We do this because we are targeting private education institutions in Singapore.
-- Gender should be either `male` or `female`.
+<div markdown="block" class="alert alert-info"> :information_source: **Here are the field constraints that you should be aware of**
+
+- Names should only contain alphabets, hyphens, dots, commas, forward slash and spaces, and be between 1 and 100 characters long. Although / is allowed in names, you should use it carefully, input like m/ g/ n/ will still be recognised as prefix and may lead to unexpected behaviour.
+
+- Phone numbers should only contain numbers, and be exactly 8 digits long. This is because StoreClass is specifically targeting private education institutions in Singapore.
+
+- Gender should be either `male` or `female`, and is case-sensitive.
+
 - Module should consist of alphanumeric characters and spaces only, and it should be between 1 and 30 characters long.
+
 - Tag should consist of alphanumeric characters only, and it should be between 1 and 30 characters long.
 </div>
 
@@ -138,7 +141,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE]… [t/TAG]…​`
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
-<div markdown="span" class="alert alert-danger">⚠️ **Warning:**
+<div markdown="span" class="alert alert-warning">:warning: **Caution:**
 Editing modules will cause grades to disappear.
 </div>
 
@@ -170,7 +173,6 @@ Examples:
 ### Filter students : `filter`
 
 You can filter students who meet all specified conditions.
-> ⚠️ **Caution:** This actions will only filter students from the data set, not from the person panel list.
 
 Format: `filter [n/name] [p/phone] [g/gender] [t/tag]… [m/module]…`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
@@ -180,8 +182,11 @@ Format: `filter [n/name] [p/phone] [g/gender] [t/tag]… [m/module]…`
 * Students matching all the given conditions will be returned (i.e. `AND` search).
 * Filters with empty tag will return all students.
 
-<div markdown="span" class="alert alert-danger">⚠️ **Warning:**
-Each parameter can only contain one keyword.
+<div markdown="block" class="alert alert-info">:information_source: **Note:**
+
+ - Each parameter can only contain one keyword.
+ - This command works separately from the find command, e.g. you cannot execute a find command on a filtered list, and vice versa.
+ - Both filter and find **cannot** be chained, they will filter and find based on the entire student list every time you execute them.
 </div>
 
 Examples:
@@ -227,8 +232,8 @@ Why does `undo` not work after I run `list`, `filter`, or `find`? <br>
 `undo` only works for actions that modify the address book. Since `list`, `filter`, or `find` do not modify the data, they do not impact the undo history.
 </div>
 
-<div markdown="span" class="alert alert-primary">
-:rotating_light: **Warning:**
+<div markdown="span" class="alert alert-warning">
+:warning: **Caution:**
 Executing a command that modifies the address book (like `add`, `edit`, or `delete`) will **clear the redo stack**. This means once you undo an action and perform another modification, you cannot redo the previous undone action.
 </div>
 
@@ -278,8 +283,8 @@ Why does `redo` not work after I’ve made new changes to the address book? <br>
 `redo` only works if there is a previous action that was undone. If a new action is performed after an undo, the redo history is cleared, and there is nothing to redo.
 </div>
 
-<div markdown="span" class="alert alert-primary">
-:rotating_light: **Warning:**
+<div markdown="span" class="alert alert-warning">
+:warning: **Caution:**
 Executing a command that modifies the address book (like `add`, `edit`, or `delete`) will **clear the redo stack**. This means once you undo a change and then modify the address book again, you will lose the ability to redo the previous undone action.
 </div>
 
@@ -309,10 +314,12 @@ You can assign a grade to a module that a student is taking.
 - The `m/MODULE s/GRADE` pairs need not to be in order, see examples for illustration.
 - The grade can be any whole number between 0 and 100, inclusive.
 
-<div markdown="span" class="alert alert-info"> :notebook: **Important Note:**
+<div markdown="block" class="alert alert-info"> :information_source: **Important Note:**
+
 - Each module specified in the `grade` command must be a module that the student is taking.
 - The number of `m/MODULE` prefixes must match the number of `s/GRADE` prefixes.
-- Grades are assigned to modules based on the order of the `m/MODULE s/GRADE` pairs provided in the command.</div>
+- Grades are assigned to modules based on the order of the `m/MODULE s/GRADE` pairs provided in the command.
+</div>
 
 <div class="alert alert-primary">
 <img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Tip:</strong>
@@ -340,7 +347,7 @@ The file name must end with ".json" and must not contain any slashes "/".
 
 There should be only one file name provided.
 
-<div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
+<div markdown="span" class="alert alert-danger">:rotating_light: **Warning:**
 When you execute the archive command, all entries in the current StoreClass will be discarded.
 
 If you choose an existing archive file as the file name when archiving, the old archive file will be overwritten.
@@ -360,7 +367,7 @@ The file name must end with ".json", must not contain any slashes "/" and must p
 
 There should be only one file name provided.
 
-<div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
+<div markdown="span" class="alert alert-danger">:rotating_light: **Warning:**
 It is recommended that you avoid loading non-StoreClass .json files, as it may result in unexpected behaviors
 
 When you execute the load command, all the entries in the current StoreClass will be overwritten. So, it is recommended that you archive the current data in StoreClass before loading.
@@ -392,11 +399,11 @@ The Autocomplete feature provides real-time command suggestions as you type, hel
 Autocomplete operates based on the word at your current caret position:
 
 * As you begin typing a command or field, suggestions will appear that match the word under your current caret position. For example, typing `ad` will display a list of commands beginning with `ad`, like `add`. 
-  * Autocomplete matches with the text characters before your caret position of the word under your current caret position. For example, when typing in the command keyword `ad` and you move your cursor between `a` and `d`, autocomplete will show you all commands starting with `a`. You can utilize this to do some cool tricks as explained in the tips section below.
+  * Autocomplete matches with the text characters before your caret position of the word under your current caret position. For example, when typing in the command keyword `ad` and you move your cursor between `a` and `d`, Autocomplete will show you all commands starting with `a`. You can utilize this to do some cool tricks as explained in the tips section below.
 * Autocomplete for command keywords e.g. `clear`, `delete`, `add` applies only to the first word you type in the command box. This initial word is treated as the command.
 * Autocomplete for student fields applies to all subsequent words after the first word. All subsequent words after the first are treated as student fields with specific prefixes, e.g. `m/Math`, `g/male`
 
-<div markdown="span" class="alert alert-info"> :notebook: **Note:** Autocomplete will **not** match subsequent words after the first word you entered with command keywords! Similarly, Autocomplete will **not** match the first word you entered with student fields! </div>
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** Autocomplete will **not** match subsequent words after the first word you entered with command keywords! Similarly, Autocomplete will **not** match the first word you entered with student fields! </div>
 
 #### Supported Commands
 Autocomplete supports all existing command keywords when matching.
@@ -411,12 +418,12 @@ Autocomplete currently supports the following fields with these prefixes:
 | `g/`     | Gender           | Matches gender values: `male` or `female`       |
 | `pa/`    | File Paths       | Matches **all existing** archived file paths    |
 
-When these prefixes are detected, autocomplete automatically displays a list of suggestions related to these fields. The list of suggestions are generated through the existing list of students inside StoreClass.
+When these prefixes are detected, Autocomplete automatically displays a list of suggestions related to these fields. The list of suggestions are generated through the existing list of students inside StoreClass.
 
 #### Example Usage
 If you begin typing `edit 1 m/M`, Autocomplete will provide suggestions for available modules starting with the letter `M`, helping you to quickly select the correct module name. Similarly, typing `t/` after the command will bring up a list of tags, allowing you to specify tags accurately without needing to remember or retype exact names.
 
-<div markdown="span" class="alert alert-info"> :notebook: **Note:** Autocomplete is **case-insensitive**! </div>
+<div markdown="span" class="alert alert-info"> :information_source: **Note:** Autocomplete is **case-insensitive**! </div>
 
 <div markdown="span" class="alert alert-secondary">
 :question: **Common Question:**
@@ -447,7 +454,7 @@ StoreClass data are saved in the hard disk automatically after any command you e
 
 StoreClass data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-danger">:rotating_light: **Warning:**
 If your changes to the data file makes its format invalid, StoreClass will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the StoreClass to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
