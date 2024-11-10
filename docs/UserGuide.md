@@ -106,11 +106,15 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
    - Create a new folder on your computer named `PROperty`.
    - Copy the downloaded `PROperty.jar` file into this folder.
 3. Start PROperty:
-   - Double-click on the `PROperty.jar` file to run it.
-     **For advanced users:** Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar PROperty.jar` command to run the application.<br>
-   - You should see the PROperty window appear as follows below! Note how the app contains some sample data.<br>
+   - Open your computer's terminal in the folder where PROperty is by either:
+     - **For Windows:** `Shift+Rightclick` in the folder where PROperty is and clicking on "Open PowerShell Window Here".
+     - **For Mac:** `Control + Click` on the folder where PROperty is and clicking on "New Terminal at Folder".
+   - Type `java -jar PROperty.jar` into your computer's terminal and press "Enter".
 
-   ![Ui](images/user-guide-images/Ui.png)
+    
+![Ui](images/user-guide-images/Ui.png)
+- The screenshot above showcases the various components of PROperty.
+
 
 [_Back to Top_](#table-of-contents)
 
@@ -144,7 +148,7 @@ Refer to the [Features](#features) below for details of each command.
 
 **:information_source: Notes about the command format:**<br>
 
-* The current command format supports English only.
+* PROperty currently only supports English.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -174,9 +178,12 @@ Adds a client to PROperty.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​`
 
-- `NAME` and `PHONE_NUMBER` fields must be provided. 
+- `NAME` and `PHONE_NUMBER` fields must be provided.
+  - `NAME` can only contain **alphanumeric and spaces**.
 -  Client tags are added in a case-insensitive manner. e.g `t/buyer` or `t/BUYER` will both add the `Buyer` tag.
 -  Refer to the [Tag Table](#tag-table) for a complete list of client tags.
+- A client is considered the "same" as another client based on matching values in: `NAME` and `PHONE_NUMBER`.
+  - Note that values are **case-sensitive**.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including no tags)
@@ -208,11 +215,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * Existing values will be updated to the input values.
 * When editing tags, the tags specified using `t/` will be added to the contact (cumulatively).
 * Tags can also be removed using the delete tag `dt/` prefix, followed by the tag name.
+  * The overall change of all tags is computed together. However, any `dt/` arguments will **take priority** over any `t/` options, so `t/seller dt/seller` will **delete the `seller` tag**.
+  * If you specify a tag that does not exist, it will do nothing (e.g `dt/missing_tag`).
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
+  * This option **can not be used** with any other tag options (i.e `t/seller dt/buyer`).
+* `NAME` can only contain **alphanumeric and spaces**.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
+Use `t/` to add new tags and `dt/` to delete specific tags from a client. 
 </div>
 
 Examples:
@@ -242,7 +253,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use the `list` or `find` command to determine the `INDEX` of the person you want to delete. 
+Use the `list` or `find` command to determine the `INDEX` of the client you want to delete. 
 </div>
 
 Examples:
@@ -264,13 +275,15 @@ Shows a list of all clients in the PROperty.
 
 Format: `list`
 
+- `list` shows the clients in the order they were added into PROperty.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Use `list` for a quick overview of all your contacts. 
 </div>
 
 Example:
 
-1. `list` shows your full client listing in PROperty.
+1. `list` shows your full client listing in the order they were added in PROperty.
 
 Visual example of correct output:
 
@@ -309,7 +322,7 @@ Format: `show INDEX`
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `show` to view a person in-depth. 
+Use `show` to view a client in-depth. 
 </div>
 
 Examples:
@@ -412,10 +425,6 @@ Example:
 
 1. `clear` clears all clients and their data from PROperty.
 
-Visual example of correct output [Example `1.`]:
-
-![ClearCommandShowcase.png](images/user-guide-images/ClearCommandShowcase.png)
-
 [_Back to Top_](#table-of-contents)
 
 ### Managing Remarks : `remark`
@@ -427,7 +436,8 @@ Format: `remark INDEX r/[REMARKS]`
 * Adds a remark `REMARKS` to the client at `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If there are multiple remark inputs, only the last one will be added.
+* If there are multiple remark inputs, only the last remark will be added. See example 3 below for a better illustration.
+
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 If `[REMARKS]` of `r/` is left blank (e.g `remark 1 r/`), the remark will be deleted entirely
@@ -469,6 +479,7 @@ Format: `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​ 
 - Property tags are added in a case-insensitive manner. e.g `t/condo` or `t/CONDO` will both add the `CONDO` tag.
 - Refer to the [Tag Table](#tag-table) for a complete list of property tags.
+- If there are multiple tag inputs, the last tag will be used. See example 3 below for a better illustration.
 
 Examples:
 
@@ -477,9 +488,16 @@ Examples:
 
 2. `listing add 2 t/HDB a/Clementi Road 321` adds a property listing to the client at index `2` with a listing type of `HDB` and address of `Clementi Road 321`. 
 
+
+3. `listing add 1 t/HDB t/condo a/NTU Road 321` adds a property listing to the client at index `1` with a listing type of `condo` and address of `NTU Road 321`.
+
 Visual example of correct output [Example `1.`]:
 
 ![ListingAddCommandShowcase.png](images/user-guide-images/ListingAddCommandShowcase.png)
+
+Visual example of correct output [Example `3.`]:
+
+![ListingAddMultipleTagShowcase.png](images/user-guide-images/ListingAddMultipleTagShowcase.png)
 
 [_Back to Top_](#table-of-contents)
 
@@ -514,20 +532,18 @@ Exports your contacts and their relevant data to a Comma-Separated Value (CSV) f
 
 Format: `export`
 
-* Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
+* Headings of the CSV file will be the attributes of a client (ie Name, Address, Phone number etc).
 * If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
-* By default, the exported CSV file at `[JAR file location]/data/property.csv`
+* By default, the exported CSV file is at `[JAR file location]/data/property.csv`.
+* Ensure that you do not have any other programmes utilising the `property.csv` file while you run the `export` command. Otherwise, PROperty may not correctly export your client data.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 `export` is useful if you want to view your contacts in Excel.
 </div>
+
 Example:
 
 1. `export` exports your current client data in PROperty into a CSV file.
-
-Visual example of correct output [Example `1.`]:
-
-![ExportCommandShowcase](images/user-guide-images/ExportCommandShowcase.png)
 
 [_Back to Top_](#table-of-contents)
 
@@ -537,6 +553,7 @@ Exits the program.
 
 Format: `exit`
 
+* You should **only** utilise the `exit` command to close the application. Unintended issues or bugs may occur if you utilize other methods to close the application.
 * There is no visual example as the programme will close after inputting the `exit` command.
 
 Example:
@@ -565,11 +582,11 @@ PROperty data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-PROperty data are saved automatically as a [JSON](#technical-terms) file `[JAR file location]/data/property.json`. Advanced users are welcome to update data directly by editing that data file.
+PROperty data are saved automatically as a [JSON](#technical-terms) file `[JAR file location]/data/property.json`. Advanced users are welcome to update data directly by editing that data file with valid inputs only.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, PROperty will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file results in an invalid format, PROperty may not load the data and will reset the `property.json` file after you exit application. Hence, it is recommended to make a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range, or manually add tags not stated in the glossary, etc). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 [_Back to Top_](#table-of-contents)
@@ -688,3 +705,5 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **CONTRACTOR**: Professionals providing construction, renovation, or repair services.
 
 [_Back to Top_](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------

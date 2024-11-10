@@ -11,6 +11,7 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+class UniqueListingList
 
 Class UniquePersonList
 Class Person
@@ -45,7 +46,8 @@ Person *--> "0..1" Email
 Person *--> "0..1" Address
 Person *--> "*" Tag
 Person *--> "0..1" Remark
-Person *--> "*" Listing
+Person *--> "1" UniqueListingList
+UniqueListingList *--> "*" Listing
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
