@@ -391,7 +391,10 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When adding or editing patient entries**, the combination of a NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
 system, despite this being an impossible combination of NRIC and birthdate for a patient.
-4. **When adding allergies**, plural and singular forms of the same substance will be accepted into the allergy list.
+4. **When adding allergies**, there is no distinction between capitalized and uncapitalized forms and plural and singular variations.
+5. **For `no` and `ec` parameters**, the parameter summary has stated that it has to be non-empty. However,
+   * for `addf` command, the parameters can be left empty and the patient will still be added.
+   * for `edit` command, if either of the two parameters are used with other parameters, the edit command will delete the existing notes and existing conditions of the patient if left empty.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
