@@ -9,9 +9,8 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
 
 ## Table of Contents
 
-- [Quick start](#Quick-start)
-- [Features](#Features)
-
+- [Quick Start](#quick-start)
+- [Features](#features)
   - [Basic Commands](#basic-commands)
     - [Viewing help: `help`](#viewing-help-help)
     - [Link to the user guide: `helpwindow`](#link-to-the-user-guide-helpwindow)
@@ -33,7 +32,6 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
   - [File Operations](#file-operations)
     - [Importing CSV files: `import`](#importing-csv-files-import)
     - [Exporting CSV files: `export`](#exporting-csv-files-export)
-
 - [Glossary](#glossary)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
@@ -84,11 +82,10 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
 
 - Items with `…`​ after them can be used from zero times to multiple times.<br>
   e.g. `[t/TAG]…​` can be used as:
-
   - ` ` (i.e. 0 times),
   - `t/paid` (i.e. 1 times),
   - `t/paid t/Computing` (i.e. 2 times), or
-  - `t/paid t/Computing t/year2 t/CS2103T t/SWE` (i.e. 5 times) etc.
+  - `t/paid t/Computing t/year2 t/CS2103T t/SWE` (i.e. 5 times) etc. <br>
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -165,25 +162,28 @@ Adds a student to AdmiNUS.
 student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
-| Parameter Name   | Description                                                                              | Required   |
-| ---------------- | ---------------------------------------------------------------------------------------- | ---------- |
-| `n/NAME`         | Name of the student                                                                      | Compulsory |
-| `id/STUDENT_ID`  | Student ID issued by NUS (must be 7 digits enclosed with two alphabets, e.g., A1234567Z) | Compulsory |
-| `p/PHONE_NUMBER` | Contact number                                                                           | Compulsory |
-| `e/EMAIL`        | Email address                                                                            | Compulsory |
-| `a/ADDRESS`      | Physical address                                                                         | Compulsory |
-| `t/TAG`          | Tags to categorize contact (cannot contain spaces)                                       | Optional   |
+| Parameter Name   | Description                                                                                                                                                                                                                                                                                                                                                                       | Constraint                                                                                                                                                                                                                                                                                                                                                                                          | Required  |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `n/NAME`         | Name of the student                                                                                                                                                                                                                                                                                                                                                               | Can include alphanumeric characters, spaces, and the `/` character for common name formats like s/o or d/o, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`).                                                                                                                                                                                                 | Compulsory |
+| `id/STUDENT_ID`  | Student ID issued by NUS | Must be 7 digits enclosed with two **capital** letters, e.g., A1234567Z                                                                                                                                                                                                                                                                                                                             | Compulsory |
+| `p/PHONE_NUMBER` | Contact number | Must be at least 3 digits                                                                                                                                                                                                                                                                                                                                                                           | Compulsory                                                                                                                                                                                       |
+| `e/EMAIL`        | Email address | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens (e.g., example.com) | Compulsory                                                                                                                                                                                       |
+| `a/ADDRESS`      | Physical address | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                         | Compulsory                                                                                                                                                                                                                                                                                                                                                                       |
+| `t/TAG`          | Tags to categorize contact | Must be alphanumeric characters and no spaces (case sensitive)                                                                                                                                                                                                                                                                                                                                      | Optional                                                                                                                                                                                                                                                                                                                                                                         |
 
 <div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
 
-<div markdown="span" class="alert alert-primary">💡 **Tip:**
-A student can have any number of tags (including 0).
+<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: 
+While names and address can include `/` for valid formats, using parameter-like sequences (e.g., `n/`, `p/`) within the name and address fields will result in an error.
 </div>
 
 **Examples**:
 
 - `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a student named John Doe to AdmiNUS
 
+<div markdown="span" class="alert alert-primary">💡 **Tip:**
+A student can have any number of tags (including 0).
+</div>
 
 #### Adding a company: `company`
 
@@ -204,21 +204,24 @@ company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 | `a/ADDRESS`      | Physical address                                   | Compulsory |
 | `t/TAG`          | Tags to categorize contact (cannot contain spaces) | Optional   |
 
-<div markdown="span" class="alert alert-info"> 🔔 **Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. </div>
+<div markdown="block" class="alert alert-info"> 
 
-Example:
+🔔 **Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. 
+
+**Examples**:
 
 - Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry: `Education` is acceptable.
 - Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry:`Automotives` is NOT acceptable.
 
+</div>
+
+**Examples**:
+
+- `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison t/facility` adds a company name Newgate Prison to AdmiNUS.
+
 <div markdown="span" class="alert alert-primary">💡 **Tip:**
 A company can have any number of tags (including 0)
 </div>
-
-Examples:
-
-- `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility` adds a company name Newgate Prison to AdmiNUS
-
 
 #### Editing a contact: `edit`
 
@@ -302,8 +305,24 @@ To delete all students with the `oneYearMembership` tag, simply use `filtertag t
 
 **Examples**:
 
-* `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
+* `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS given that there are more than 3 contacts in the list.
 * `find Betsy` followed by `delete all` deletes all contacts in the results of the `find` command.
+
+<div markdown="block" class="alert alert-warning">
+
+⚠️ **Important: Behavior of delete Command with Repeated Indices** <br>
+When using the delete command with the same index repeated multiple times (e.g., `delete 2 2`), the command processes each deletion sequentially:
+1. The first instance deletes the contact at the specified index (e.g., index 2).
+2. The second instance attempts to delete the contact now at index 2 after the first deletion, which may have shifted from its original position (e.g., originally at index 3).
+
+**Example Scenario**:
+* If the command `delete 2 2` is entered and the contact at index 2 is deleted successfully:
+  * The app will then delete the new contact at index 2 after the first deletion.
+* If there are not enough contacts remaining to fulfill the repeated deletion (e.g., only two contacts were present initially), the app will display a message indicating that the index is invalid for the second attempt.
+
+**Note**: When an index becomes invalid after the initial deletion, the app will display an invalid index message instead of the expected success message for the contact that was deleted in the earlier step.
+
+</div>
 
 ---
 
@@ -547,6 +566,8 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 - **_CSV (Comma-separated values)_** : A text file format that uses commas to separate values, and newlines to separate records.
 - **_GUI (Graphical User Interface)_** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
 - **_NUS Club Administrator_** : An NUS club admin user responsible for managing contacts of students, companies, etc.
+<a name="parameter-like-sequence"></a>
+- **_Parameter-like Sequence_**: A combination of a forward slash (`/`) and a single character that resembles the prefixes used in commands (e.g., `n/`, `p/`, `e/`). These are used to specify input fields in commands and should not appear in any text fields.
 - **_Relative Path_** : A file path that is relative to the current working directory of the user or application.
 - **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z).
 - **_Tag_** : A keyword or label associated with a contact that allows for easy grouping and filtering.
@@ -565,6 +586,7 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Entering [parameter-like sequences](#parameter-like-sequence) in input fields**: If a user enters text that resembles a parameter prefix (e.g., `n/`, `p/`, `e/`) within an input field like `Name` or `Address`, it may cause unexpected parsing errors or rejections. Ensure that parameter-like sequences are avoided within fields that do not expect them.
 
 ---
 

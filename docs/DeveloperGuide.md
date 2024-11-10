@@ -6,9 +6,9 @@ title: Developer Guide
 ## Table of Contents
 
 - [Acknowledgements](#acknowledgements)
-- [Setting up, getting started](#Setting-up-getting-started)
-- [Design](#Design)
-  - [Architecture](#Architecture)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
   - [UI component](#ui-component)
   - [Logic component](#logic-component)
   - [Model component](#model-component)
@@ -350,10 +350,16 @@ _{More to be added}_
 
 - 2a. The given index is invalid.
   - 2a1. AdmiNUS shows an error message.
-    Use case resumes at step 1.
-- 2a. The given arguments are invalid.
-  - 2a1. AdmiNUS shows an error message for the specific invalid field.
-    Use case resumes at step 1.
+    Use case resumes at step 2.
+- 2b. The given arguments are invalid.
+  - 2b1. AdmiNUS shows an error message for the specific invalid field.
+    Use case resumes at step 2.
+- 2c. The contact at the given index is a student, and the user tries to edit the industry field.
+  - 2c1. AdmiNUS displays an error message indicating that editing the industry field for a student is not allowed. 
+    Use case resumes at step 2.
+- 2d. The contact at the given index is a company, and the user tries to edit the student-related field.
+  - 2d1. AdmiNUS displays an error message indicating that editing a student-related field for a company is not allowed. 
+    Use case resumes at step 2.
 
 **Use case: UC06 - View a contact**
 
@@ -606,7 +612,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Adding a company contact**
    - **Prerequisites**: Ensure that AdmiNUS is running and the contact list is visible.
-   - **Test case**: `company n/Newgate Prison i/Security p/1234567 e/newgateprison@example.com a/Newgate Prison t/prison facility`  
+   - **Test case**: `company n/Newgate Prison i/Security p/1234567 e/newgateprison@example.com a/Newgate Prison t/prison t/facility`  
      **Expected**: Company contact added successfully. Status message updates with details, timestamp updated.
    - **Test case**: `company n/Newgate p/invalid_phone e/email@domain.com a/Address`  
      **Expected**: No contact added. Error message shown in the status message. Status bar remains unchanged.
