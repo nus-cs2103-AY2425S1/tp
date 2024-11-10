@@ -973,17 +973,18 @@ Guarantees: The student and the parent will be linked in a parent-child relation
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private Contact Details**: A contact detail that is to be kept confidential.
 * **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.
 * **API**: The Application Programming Interface specifies the interface through which software and other programs interact.
 * **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.
 * **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays.
-* **Command**: A command is a specific instruction that you give to `GOATS` to perform a certain action, like adding a new participant to the list. Commands will be the primary way that you will interact with `GOATS`.
-* **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell `GOATS` which actions to perform. For example, the done command requires a single integer as a parameter so that it knows which event to mark as done.
+* **Command**: A command is a specific instruction to be provided to `GOATS` in order to perform a certain action, like adding a new contact to the GOATS Address Book. Commands will be the primary way of interacting with `GOATS`.
+* **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell `GOATS` which actions to perform. For example, the delete command requires one or more integers as a parameters, which will specify the contacts to be deleted from the GOATS Address Book.
 * **Prefix**: Prefixes are unique identifiers in front of parameters so that `GOATS` understands what kind of values they are. For example, the prefix "n/" lets `GOATS` know that a name is expected to follow behind it, while the prefix "d/" lets `GOATS` know that a date is expected.
-* **Archive**: A command that stores and removes all unused contact for later use, which can be retrieved by un-archiving.
+* **Archive**: A command that stores all unused contacts for later use, which can be retrieved by un-archiving.
 * **Parent**: A person that is responsible for a Student.
-* **Student**: A person studying under `user`
+* **Student**: A person studying under `user`.
+* **GOATS Address Book**: The list of all contacts stored by GOATS.
 * **Education**: The education level of the Student
 * **Grade**: The grade of the Student
 * **LessonTime**: The tuition lesson time of the Student.
@@ -1179,8 +1180,6 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `unlink ch/John Doe` when no parent is linked<br>
        Expected: No change occurs. An error message indicates that "John Doe" does not have a linked parent.
 
-
-
 ### Loading data
 
 1. Dealing with corrupted data files
@@ -1196,3 +1195,35 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: Start GOATS app
       Expected: GOATS should initialise a new data/addressbok.json file with sample data and user is presented an addressbook with that data
+
+## Appendix: Effort
+
+### Difficulty Level
+
+The project was a step-up in difficulty as compared to AddressBook Level3 (AB3), due to the number of commands added, and the need to support multiple entity types.
+Contacts in AB3 only constituted one single entity type, but in GOATS, they are split it into two different entities: **Student** and **Parent**, both with differing functionalities and representation in the UI.
+In addition, a large number of commands were added, with a high level of interaction between them, which made it difficult to keep track of and fix all the unintended behaviours and interactions that inevitably arose.
+
+### Challenges Faced
+
+* **Mitigating Unintended Behaviours and Interactions Between Commands**: Some of our commands initially had unintended behaviours when used after one another, which proved difficult to detect and to rectify. 
+* **Testing and Coverage**: Given the large number of commands added, it was difficult to maintain the same level of test coverage (roughly 75% in AB3).
+* **Implementation of Multiple Entity Types and Relationships Between Entities**: A lot of effort was required to implement the Student and Parent classes without excessive code duplication, and to implement the Link between Student and Parent.
+
+### Effort Required
+
+The project required significant effort due to the implementation of the following features on top of AB3:
+
+* Addition of two distinct entity types: **Student** and **Parent**, each with different functionalities and both storing references to each other
+* Addition and Modification of multiple additional commands and fields to support Tutor Use Cases: Grade, Education Level, Lesson Time
+* Addition of an Archive Feature
+
+Each member of the group wrote an average of 1,400 lines of code.
+
+### Achievements
+
+Over the course of the project, the group achieved the following:
+
+* Built upon AB3 to create a contact management system specifically tailored to the needs of private tutors
+* Gained familiarity with the software development process, e.g. forking workflow, documentation, sprints etc.
+* Improved technical proficiency with tools such as IntelliJ IDE, JUnit, GitHub etc.
