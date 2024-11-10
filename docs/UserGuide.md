@@ -42,7 +42,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 
 ### Installation Steps
 
-#### For Windows:
+#### For Windows
 1. **Open the Command Prompt**:
    - Press the **Windows key**, type `cmd`, and select **Command Prompt** from the search results.
 
@@ -80,7 +80,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
    ![Ui](images/Ui.png)<br><br>
 6. Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead to [Basic Commands](#basic-commands).
 
-#### For MacOS:
+#### For MacOS
 1. **Open the Terminal**:
    - Open **Spotlight** by pressing **Command + Space**, type `Terminal`, and press **Enter**.
    - Alternatively, you can go to **Finder > Applications > Utilities**, and double-click on **Terminal**.
