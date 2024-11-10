@@ -1124,8 +1124,10 @@ This will be useful as it allows doctors to save time by adding multiple appoint
 
 MediBase3 does not currently check if the email ends with a top-level domain (TLD) such as `.com` or `.org`. We plan to enhance the validation for email addresses to also check if the domain provided contains an actual top-level domain apart from the other existing constraints.
 
-4. **Allow partial addition of medical conditions and allergies**
+4. **Allow partial addition and deletion of medical conditions and allergies**
 
-Currently, when adding multiple medical conditions or allergies with the `addMedCon` or `addAllergy` commands, the entire command is rejected if any of the specified conditions or allergies already exist for the patient. 
-This means that none of the conditions or allergies are added, even if some are new. 
-In the future, we plan to enhance this feature by partially accepting the command, only rejecting the duplicate entries and successfully adding the new ones.
+Currently, when adding or deleting multiple medical conditions or allergies with the `addMedCon`, `addAllergy`, `delMedCon`, or `delAllergy` commands, the entire command is rejected if any of the specified conditions or allergies already exist (in the case of `addMedCon` and `addAllergy`) or do not exist (in the case of `delMedCon` and `delAllergy`) for the patient. 
+This means that none of the conditions or allergies are processed, even if some are valid. 
+In the future, we plan to enhance these features by partially accepting the command—only rejecting the invalid entries and successfully adding or deleting the valid ones.
+
+5. **YUKNAAAAAAAA**
