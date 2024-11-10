@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.BOB;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -47,7 +48,7 @@ public class AddressBookTest {
     public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
         Student editedAlice = new StudentBuilder(ALICE)
-                .withStudentId(VALID_STUDENTID_BOB).withTutorialId(VALID_TUTORIALID_BOB)
+                .withTutorialId(VALID_TUTORIALID_BOB)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newStudents);
@@ -72,12 +73,12 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsFalse() {
         addressBook.addStudent(ALICE);
-        Student editedAlice = new StudentBuilder(ALICE)
+        Student editedAlice = new StudentBuilder(BOB)
                 .withStudentId(VALID_STUDENTID_BOB).withTutorialId(VALID_TUTORIALID_BOB)
                 .build();
-        assertTrue(addressBook.hasStudent(editedAlice));
+        assertFalse(addressBook.hasStudent(editedAlice));
     }
 
     @Test
