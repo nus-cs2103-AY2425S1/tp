@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User inputs add command;
+:UGTeach parses the input;
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+if () then ([invalid input])
+    :UGTeach shows message
+            for invalid input;
+    stop
+else ([else])
+    :UGTeach creates the new student;
+    if () then ([else])
+        :UGTeach adds student
+           to the address book;
+        if () then ([else])
+            :UGTeach shows success message;
+            stop
+        else ([new schedule clashes])
+            :UGTeach shows success message
+                      with clashing schedules;
+            stop
+        endif
+    else ([is duplicate])
+        :UGTeach shows message
+                   for duplicate;
+    stop
+endif
+
+@enduml
