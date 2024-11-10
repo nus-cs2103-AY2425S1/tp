@@ -4,6 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_TAG_PRICE_SEARCH;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,12 +28,15 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
 
-        if (args.contains("$")) {
+        String[] tagKeywords = trimmedArgs.split("\\s+");
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher matcher = pattern.matcher(trimmedArgs);
+
+        if (matcher.find()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_TAG_PRICE_SEARCH, FindTagCommand.MESSAGE_USAGE));
         }
 
-        String[] tagKeywords = trimmedArgs.split("\\s+");
         return new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
     }
 
