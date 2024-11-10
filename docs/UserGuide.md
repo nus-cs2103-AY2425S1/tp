@@ -193,12 +193,12 @@ Command aliases: `deletec`<br>
 Format: `deletecustomer CUSTOMER_INDEX`
 Examples:
 * `listcustomer` followed by `deletecustomer 2` deletes the 2nd customer contact and order list in the address book.
-* `findcustomer Betsy` followed by `deletec 1` deletes the 1st customer in the results of the `find` command.
+* `findcustomer Betsy` followed by `deletec 1` deletes the 1st customer contact and order list in the results of the `find` command.
 
 <box type="important">
 
 ##### Constraints
-* Deletes the customer at the specified `CUSTOMER_INDEX`.
+* Deletes the customer and the customer's order list at the specified `CUSTOMER_INDEX`.
 * The index refers to the index number shown in the displayed customer list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
