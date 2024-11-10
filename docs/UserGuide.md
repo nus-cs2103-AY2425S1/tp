@@ -149,32 +149,26 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 <br> <br>
 #### Constraints of fields
 
-| Field            | Constraints                                                             | Example                                                                                                 |
-|------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| **NAME**         | Any number of alphanumeric characters and spaces, no special characters | `Dominic`, `Stanley`, `Adi`                                                                             |
-| **PHONE_NUMBER** | Numeric                                                                 | `98989899`, `81092819`                                                                                  |
-| **EMAIL**        | Valid email format                                                      | `testing@gmail.com`,`example@gmail.com`                                                                 |
-| **ADDRESS**      | Valid address, should not be blank                                      | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                  |
-| **SKILLS**       | Comma-separated values                                                  | `Java, Python`, `C++`                                                                                   |
-| **STATUS**       | Predefined statuses                                                     | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
-| **EXPERIENCE**   | Valid experience, should not be blank                                   | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                           |
-| **DESIRED_ROLE** | Desired job position, should not be blank                               | `Software Engineer`, `UI/UX Designer`                                                                   |
-| **NOTE**         | Any characters are accepted                                             | `Very confident`, `Confident`                                                                           |
-| **Tags**         | Optional and can be multiple                                            | `Must have`                                                                                             |
+| Field            | Constraints                                                                                                                                             | Example                                                                                                  |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **NAME**         | Any number of alphanumeric characters and spaces, no special characters                                                                                 | `Dominic`, `Stanley`, `Adi`                                                                              |
+| **PHONE_NUMBER** | Numeric characters (0-9) only. Does not support spaces, country codes, or other symbols                                                                 | `98989899`, `81092819`                                                                                   |
+| **EMAIL**        | Valid email format                                                                                                                                      | `testing@gmail.com`,`example@gmail.com`                                                                  |
+| **ADDRESS**      | Valid address, should not be blank                                                                                                                      | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
+| **SKILLS**       | Non-empty string consisting of alphabetic characters separated by commas. Spacings, '#' and ':' are accepted. Must be between 1 and 41 characters long. | `Java, Python` (`,` included), `C++` , `Machine Learning`                                                |
+| **STATUS**       | Only accepts these 9 Pre-defined statuses                                                                                                               | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
+| **EXPERIENCE**   | Should not be blank.                                                                                                                                    | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                            |
+| **DESIRED_ROLE** | Should not be blank.                                                                                                                                    | `Software Engineer`, `UI/UX Designer`, `Administrator`                                                    |
+| **NOTE**         | Any character are accepted                                                                                                                              | `Very confident`, `Confident`                                                                            |
+| **Tags**         | Alphanumeric characters. Cannot include spaces or special characters. Each tag should be a single, continuous word. Can have multiple tags              | `Amazing`, `MustHave`                                                                                    |
 
-
-
-- <strong>[Note]</strong>: The **Name** field accepts a large number of characters (over 50), but excessively long names may be truncated in the display for better readability. Names must only contain alphanumeric characters and spaces and cannot be blank.
-
-- <strong>[NOTE]</strong>: TalentSG allows you to add numerical values as there are laws around the world which allow people to have numerical values as names. You can read more about this from this [article](https://www.thebump.com/a/baby-name-rules). 
-
-- <strong>[Note]</strong>: Tags must only contain alphanumeric characters (letters and numbers) and cannot include spaces or special characters (e.g., `!`, `#`, `&`). Each tag should be a single, continuous word. For example, `MustHave` is valid, but `Must Have` and `Must-Have` are not.
-
-- <strong>[Note]</strong>: The phone number field accepts only numeric characters (0-9) and does not support spaces, country codes, or other symbols. For example, `92388172` is valid, but `+1 8271 8127 8172` and `9238 8172` are not accepted. Future updates may consider additional formats to support international phone numbers.
+- <strong>[Note]</strong>: The **Name** field:
+<br>1. Accepts a large number of characters (over 50), but excessively long names may be truncated in the display for better readability.
+<br>2. Accepts numerical values. There are laws around the world which allow people to have numerical values as names. You can read more about this from this [article](https://www.thebump.com/a/baby-name-rules).
+<br>3. Does not accept special characters (e.g., `/`, `-`). This restriction may pose limitations for certain names, such as `s/o` or hyphenated names. A workaround is to use spaces or omit these characters (e.g., enter `John s o Kaarthik` instead of `John s/o Kaarthik`).
 
 - <strong>[Note]</strong>: The **Note** field is recommended to be within 200 characters for optimal performance and display. Exceeding this length may result in truncated display or other limitations in certain views.
 
-- <strong>[Note]</strong>: The **Name** field does not currently support special characters (e.g., `/`, `-`). This restriction may pose limitations for certain names, such as `s/o` or hyphenated names. A workaround is to use spaces or omit these characters (e.g., enter `John s o Kaarthik` instead of `John s/o Kaarthik`). Future updates may address support for special characters in names.
 
 > **General Note**: The fields in TalentSG only support alphanumeric characters, spaces, and a few select symbols like `#` and `:` in specific cases. If a field requires a symbol that is unsupported (e.g., `/`, `-`, `@`), you may consider using an alternative format or omitting the symbol entirely. For example:
 > - Use `Objective C` instead of `Objective-C`.
