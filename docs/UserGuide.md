@@ -53,7 +53,7 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 3. Copy the file to the folder you want to use as the _home folder_ for TechConnect.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar techconnect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
 
     <img src="images/Ui.png" alt="Ui" width="400" height="300"/>
 
@@ -120,7 +120,7 @@ Adds a company to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cp/CAREER_PAGE_URL r/REMARK [t/TAG] …​`
 
-**Tip:** A company can have any number of tags (including 0)
+**Tip:** A company can have any number of tags (including 0)<br>
 **Note:** The company name is not case-sensitive, both `Google` and `google` are the same
 
 **Example**:
@@ -182,7 +182,9 @@ The **`Period`** tag is used to specify:
 - **SEASON**:
 
     - **Summer**
+
     - **Winter**
+
     - **Part-time**
 
 - **YEAR**: Any year between **2000 and 2500**
@@ -360,6 +362,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]…​`
 
 **Examples**:
 
+- `find Food` returns `Grab Food` and `Food Panda`
+- `find Shop Fast` returns `Shop Back`, `Fast Food`<br>
+
 ```
 find bigTech
 ```
@@ -369,8 +374,6 @@ returns companies with bigTech tag
 
 <img src="images/Rename.png" alt="Rename" width="400" height="300"/>
 
-- `find Food` returns `Grab Food` and `Food Panda`
-- `find Shop Fast` returns `Shop Back`, `Fast Food`<br>
 
 [Back to Table of Contents](#table-of-contents)
 
