@@ -70,15 +70,19 @@ class JsonSerializableAddressBook {
                 }
                 doctorList.add(doctor);
                 addressBook.addDoctor(doctor);
-            }
-
-            if (person instanceof Patient) {
+            } else if (person instanceof Patient) {
                 Patient patient = (Patient) person;
                 if (addressBook.hasPatient(patient)) {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
                 }
                 patientList.add(patient);
                 addressBook.addPatient(patient);
+            } else {
+                if (addressBook.hasPerson(person)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                }
+
+                addressBook.addPerson(person);
             }
         }
 
