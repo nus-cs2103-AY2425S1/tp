@@ -5,7 +5,7 @@ title: Prisha's Project Portfolio Page
 
 ### Project: ResearchRoster
 
-ResearchRoster is a desktop application designed for researchers managing large groups of study participants. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+ResearchRoster is a desktop application designed for researchers managing large groups of study participants. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 13 kLoC.
 
 Given below are my contributions to the project.
 

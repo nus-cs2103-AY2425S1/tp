@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Wong Ke Xin
@@ -14,7 +12,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/wkxcass.png" width="200px">
 
 [[github](https://github.com/wkxcass)]
-[[portfolio](team/wkxcass)]
 
 * Role: Code quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
@@ -24,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/k-hian.png" width="200px">
 
 [[github](http://github.com/k-hian)]
-[[portfolio](team/k-hian)]
+[[portfolio](team/k-hian.md)]
 
 * Role: Deliverables and deadlines
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
@@ -34,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/wujiaweijoanna.png" width="200px">
 
 [[github](http://github.com/wujiaweijoanna)]
-[[portfolio](team/wujiaweijoanna)]
+[[portfolio](team/wujiaweijoanna.md)]
 
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.
@@ -44,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/prishavp.png" width="200px">
 
 [[github](http://github.com/PrishaVP)]
-[[portfolio](team/prishavp)]
+[[portfolio](team/prishavp.md)]
 
 * Role: Scheduling and tracking
 * Responsibilities: In charge of defining, assigning, and tracking project tasks.
@@ -54,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/sannie-beep.png" width="200px">
 
 [[github](http://github.com/sannie-beep)]
-[[portfolio](team/sannie-beep)]
+[[portfolio](team/sannie-beep.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: UI Component
+* Responsibilities: In charge of managing the UI component.
