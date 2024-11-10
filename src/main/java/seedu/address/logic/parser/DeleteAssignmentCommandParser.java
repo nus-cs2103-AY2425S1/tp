@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.Assignment;
@@ -29,8 +30,15 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteAssignmentCommand.MESSAGE_USAGE));
         }
+
         LocalDateTime defaultDate = ParserUtil.parseDueDate("2025-12-12 1200");
-        Assignment assignment = new Assignment(argMultimap.getValue(PREFIX_NAME).get(), defaultDate);
+        String title = argMultimap.getValue(PREFIX_NAME).get();
+
+        if (title.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_EMPTY_ASSIGNMENT_TITLE);
+        }
+
+        Assignment assignment = new Assignment(title, defaultDate);
         return new DeleteAssignmentCommand(assignment);
 
     }
