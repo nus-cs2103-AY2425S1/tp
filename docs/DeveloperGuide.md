@@ -632,19 +632,20 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Future features**
 Below is a list of features that we feel would further enhance the user experience.
 
-  |                                    Feature                                     | Description                                                                        |
-  |:------------------------------------------------------------------------------:|------------------------------------------------------------------------------------|
-  |                               Clustering of tags                               | Group tags of the same categories together in the UI's display of the tags list.   |
-  |                                  Pin contacts                                  | Keep selected contacts constantly shown at the top of the contacts list.           |
-  |                           Customize category colors                            | Change the colors of the categories to the user's preference.                      |
-  |                          Multiple numbers per contact                          | Allow more than one number per contact to accommodate multiple contact numbers.    |
-  |                           Custom fields for contacts                           | Add custom fields to the contacts added.                                           |
-  |                            Custom shortcut commands                            | Add custom shortcut commands to streamline actions within the application.         |
-  |                          Delete tag from all contacts                          | Remove a specific tag from all contacts at once.                                   |
-  |                                   Dark mode                                    | Include a dark mode theme for easier viewing in low light conditions.              |
-  |                            Copy contact information                            | Enable copying of contact information to reduce errors from manual copying.        |
-  |                                Export contacts                                 | Provide an option to export contact information for easier sharing.                |
-
+  |              Feature               | Description                                                                      |
+  |:----------------------------------:|----------------------------------------------------------------------------------|
+  |         Clustering of tags         | Group tags of the same categories together in the UI's display of the tags list. |
+  |            Pin contacts            | Keep selected contacts constantly shown at the top of the contacts list.         |
+  |     Customize category colors      | Change the colors of the categories to the user's preference.                    |
+  |    Multiple numbers per contact    | Allow more than one number per contact to accommodate multiple contact numbers.  |
+  |     Custom fields for contacts     | Add custom fields to the contacts added.                                         |
+  |      Custom shortcut commands      | Add custom shortcut commands to streamline actions within the application.       |
+  |    Delete tag from all contacts    | Remove a specific tag from all contacts at once.                                 |
+  |             Dark mode              | Include a dark mode theme for easier viewing in low light conditions.            |
+  |      Copy contact information      | Enable copying of contact information to reduce errors from manual copying.      |
+  |          Export contacts           | Provide an option to export contact information for easier sharing.              |
+  |   Change the font color for tags   | Use font color with higher contrast to highlight tags of a contact.              |
+  | Allow adding overseas phone number | Allow users to add valid international phone numbers with country contact.       |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
