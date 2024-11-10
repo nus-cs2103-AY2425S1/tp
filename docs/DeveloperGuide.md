@@ -13,7 +13,7 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-**ChatGPT** was used to create the TrueRental application logo as well as for **debugging** purposes only.
+**ChatGPT** was used to create the TrueRental application logo, **debugging** and **documentation** purposes only.
 
 ![logo](images/true_rental.jpg){width=200px height=200px}
 
