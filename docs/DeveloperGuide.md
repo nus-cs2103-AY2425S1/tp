@@ -1046,3 +1046,7 @@ Team size: 5
 which may result in error-prone users (when trying do a minor update like `PHONE: 98765432 -> 98675432`) mistakenly thinking that they have edited the selected company correctly. In addition, after
 each edit operation is executed successfully, the application view returns to the full list of companies view (regardless of any existing filtered view by `find` command).
 This inconveniences users who are aiming to execute consecutive updates to the same company that has been filtered using the `find` command. We plan to fix this by <ins>1) preventing users from doing redundant edits</ins> and <ins>2) keeping the existing filtered list view instead of automatically returning to the full list of companies view after each successful edit operation</ins>.
+
+1. **Support for country codes in the `PHONE_NUMBER` field**: Currently, only numeric phone numbers without country codes are accepted, making it difficult to record numbers for international companies. We plan to enhance the AddressBook to accommodate country codes, enabling support for a broader range of company phone numbers.
+
+1. **Ability to remove optional fields for companies**: Currently, once an optional field is added to a company, it cannot be removed. We plan to enhance the `edit` command to allow users to clear optional fields, providing greater flexibility in managing company information.

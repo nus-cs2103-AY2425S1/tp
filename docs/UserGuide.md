@@ -15,6 +15,8 @@ Calling out to all [STEM](#stem) students!
 
 Navigating the internship application process can be overwhelming &ndash; from managing multiple applications to staying on top of deadlines and requirements, all while balancing your schoolwork and other commitments. That's where **InternBuddy** comes in!
 
+![basic view](images/basicNoCommand.png)
+
 Introducing **InternBuddy** &ndash; your all-in-one solution for seamless internship application management. Whether you're just beginning your search or juggling multiple opportunities, **InternBuddy** offers an intuitive, user-friendly platform that makes it easy to keep track of the companies you're interested in, the stages of your applications, and essential information to help you stay organized and focused.
 
 This guide provides step-by-step instructions to help you [start your journey](#how-to-use-our-user-guide) **with InternBuddy**. New users will find everything they need to get up and running quickly, while returning users can refresh their knowledge of InternBuddy's comprehensive features in our [command summary](#command-summary). **InternBuddy** is crafted with usability in mind – easy to learn and master, designed to support you in reaching your career goals.
@@ -131,6 +133,23 @@ Before continuing, here are some important information you need to know about th
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+
+## GUI Overview
+
+The blurred image below shows an annotated overview of **InternBuddy's** GUI:
+
+![GUI overview](images/GUI Overview.png)
+
+The **GUI** is divided into five main sections:
+
+1. **Menu Bar**: Contains options like `Help` and `File` for easy access to essential commands.
+1. **Command Box**: The area where you can type and execute commands by pressing Enter.
+1. **Result Display Box**: Shows the results of your commands and any error messages.
+1. **Company List**: Displays the current list of companies in a card-like format, making it easy to view and manage.
+1. **Status Bar**: Displays the file path of the loaded data file, alongside our trusty companion, `InternBuddy`, who will be with you throughout your journey.
+
+
+--------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
 | Action       | Format, Examples                                                                                                                                                                  |
@@ -189,7 +208,7 @@ not** put any parameters or prefixes that are not recognised by the command.
 * `NAME` would be the company's name, InternBuddy only allows alphanumeric characters (letters and numbers only) and spaces to represent it. <br>
   e.g. `7Eleven` is allowed but not `7-Eleven` because `-` is neither a letter nor a number.
 
-* `PHONE_NUMBER` is the company's phone number. Company phone numbers should be at least 3 digits long, does not take into account the `+` prefix and must be all numbers.
+* `PHONE_NUMBER` is the company's phone number. It must be at least 3 digits long, consist only of numbers, and cannot include the `+XXX` country code prefix.
   e.g. `85092323`, `0122345677`
 
 * InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters as well (letters and numbers only). The following special characters `+ - _ .` are allowed in `local-part` but note that:
@@ -242,6 +261,9 @@ Examples:
 * `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
 * `add n/Google LLC t/FAANG e/contact@google.com p/1234567 t/tech`
 
+![add a company](images/addCommand.png)
+> Result after executing `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding application record for a company: `apply`
@@ -263,6 +285,9 @@ Examples:
 * `apply 1 n/Software Engineer Intern d/Requires knowledge of ReactJS and ExpressJS`
 * `apply 2 n/Product Management Intern d/Requires Figma as/OA`
 * `apply 3 n/Devops Engineer Intern d/Requires knowledge in networks as/OFFERED`
+
+![create application](images/applyCommand.png)
+> Result after executing `apply 2 n/Product Management Intern d/Requires Figma as/OA`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -332,9 +357,17 @@ view to the full list of companies. Hence, please be mindful when running consec
 </box>
 
 
+<box type="info" seamless>
+
+**Note:** A company's status is updated based on your applications to it, so you cannot manually change the status using the `edit` command.
+</box>
+
 Examples:
 *  `edit 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
 *  `edit 2 n/Goggle t/` Edits the name of the 2nd company to be `Goggle` and clears all existing tags.
+
+![edit company details](images/editCommand.png)
+> Result after executing `edit 1 p/91234567 e/company@example.com`
 
 [back to features](#features)
 
@@ -359,6 +392,7 @@ Format: `fav INDEX`
 </box>
 
 ![FavouriteACompany](images/favCommand.png)
+> Result after executing `fav 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -402,6 +436,9 @@ Format: `view INDEX`
 
 * Shows the application details of the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
+![view application descriptions](images/viewCommand.png)
+> Result after executing `view 1`
+
 <box type="tip" seamless>
 
 **Tip:**
@@ -433,6 +470,9 @@ Format: `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`
 * Updates the application status of application record numbered `APPLICATION_INDEX` for the company at the specified `COMPANY_INDEX` to `APPLICATION_STATUS`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
+![updated application](images/updateCommand.png)
+> Result after executing `update c/1 app/1 as/OFFERED`
+
 <box type="tip" seamless>
 
 **tip:** `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
@@ -460,6 +500,9 @@ The index refers to the index number shown in the displayed company list. The in
 **tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
 </box>
 
+![withdrawn application](images/withdrawCommand.png)
+> Result after executing `withdraw c/2 app/1`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Reopening company: `reopen`
@@ -469,6 +512,9 @@ Changes the status of a company from `CLOSED` to `INTERESTED`
 Format: `reopen INDEX`
 * The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 * The company at the provided index **must have status** `CLOSED`.
+
+![reopened for applications](images/reopenCommand.png)
+> Result after executing `reopen 1`
 
 ### Exiting the program : `exit`
 
@@ -495,10 +541,6 @@ If your changes to the data file makes its format invalid, InternBuddy will disc
 Furthermore, certain edits can cause InternBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -519,7 +561,7 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 **A**: To add a company with multiple tags, use the add command with multiple t/ tags. Example: `add n/Google LLC e/contact@google.com t/tech t/FAANG t/software`
 
 **Q**: Can I edit a company’s details? <br>
-**A**: Yes, you can edit any company's details using the edit command followed by the index of the company. Example: `edit 2 n/Apple Inc e/careers@apple.com p/12345678`
+**A**: Yes, you can edit any company's details using the edit command followed by the index of the company. For example: `edit 2 n/Apple Inc e/careers@apple.com p/12345678`. However, please note that optional fields like `PHONE_NUMBER` and `ADDRESS` cannot be removed once added. If you wish to remove these fields, you will need to delete the company using the `delete` command and then re-add it without those fields.
 
 **Q**: Can I delete all contacts at once? <br>
 **A**: Yes, use the `clear` command to delete all contacts in your address book. Be cautious, as this action is <span style="color:red">irreversible</span>.
@@ -538,6 +580,7 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
    For instance, `update c/1 app/2 as/OA c/2 app/3 app/4 as/REJECTED` will be read the same as `update c/2 app/4 as/REJECTED` and will run if the read values are valid. 
 6. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to 1000 companies, each with 1000 applications. Entering values beyond this range (e.g., greater than 1000) may lead to undefined behavior, so please ensure indexes stay within the specified bounds.
 7. The error message for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the domain name between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the user guide.
+8. The AddressBook currently accepts invalid phone numbers, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
 
 [back to top](#internbuddy-user-guide)
 
