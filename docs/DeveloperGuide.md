@@ -172,7 +172,7 @@ Given below is an example usage scenario and how the View Client mechanism behav
 
 Step 1. The user launches the application, all clients will be listed by default. **OR** The user calls a List/ Find command.
 
-Step 2. The user executes the `view 1` command to view the first person in the Client list.
+Step 2. The user executes the `view 1` command to view the first client in the Client list.
 
 <box type="info" seamless>
 
@@ -180,7 +180,7 @@ Step 2. The user executes the `view 1` command to view the first person in the C
 
 </box>
 
-Step 3. Before closing the existing `MATER - View Client` Window, the user executes the `view 2` command to view the second person in the Client list.
+Step 3. Before closing the existing `MATER - View Client` Window, the user executes the `view 2` command to view the second client in the Client list.
 
 <box type="info" seamless>
 
@@ -298,7 +298,7 @@ Mater can be described as so:
 
 MATER (the CLI in development), shall help Mater and his colleagues by implementing a CLI to keep track of the workshop's customers,
 as well as other details about their cars. It will be hosted locally on one machine, with no servers and remote access
-to the CLI, for simplicity, to fit budget constraints and for security. (and the scope of the CS2103T course. Haha.)
+to the CLI, for simplicity, to fit budget constraints and for security.
 
 **Value proposition**: Manage customer/car-related details easily on a shared workshop computer
 as compared to the pen and paper alternative.
@@ -602,7 +602,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 2.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Operations like adding, deleting, or editing clients shall complete in less than 1 second for a single transaction.
 4. The Command-Line Interface (CLI) and any Graphical User Interface (GUI) components shall be intuitive and easy to navigate.
@@ -791,7 +791,7 @@ If you are having trouble entering the `vrn` field, you can use the following [l
    1. **Test case:** `del-car 1`<br>
       **Expected:** `John Doe`'s car is deleted. Status message reflects which client the car was deleted from.
 
-3. **Attempting to delete a client with a checked-in car**
+3. **Attempting to delete a car that is checked-in**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` with a car that is checked in.
 
     1. **Test case:** `del-car 1`<br>
@@ -836,7 +836,7 @@ If you are having trouble entering the `vrn` field, you can use the following [l
    1. **Test case:** `edit 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
       **Expected:** First client's car vrn and vin are edited. Details of the edited car are shown in the status message.
    - **Subsequent Command:** `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
-      **Expected:** No car is added. Error message displayed indicating that the car already exists.
+      **Expected:** No car is edited. Error message displayed indicating that the car already exists.
 3. **Editing a non-existent client's details**
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit does not exist.
 
@@ -904,6 +904,6 @@ Team size: 5 members
 
 8. **Add support for duplicate client handling**: Currently, the criteria for duplicate clients are based on the client's name. We plan to add support for duplicate client handling based on other criteria such as phone number, email, and address. This will allow users to add clients with the same name but different phone numbers, emails, and addresses.
 
-9. **Update the behavior of deleting clients with checked-in cars**: Currently, users can delete clients with checked-in cars to make the process of deregistering clients more efficient, as only 1 command is required. However, this may lead to accidental deletion of clients with checked-in cars. We plan to update the behavior of deleting clients with checked-in cars by introducing an additional flag to ensure that the user is fully aware that the client has a checked-in car. For example, the user will enter the command `del-client 1 -c` to delete a client with a checked-in car, using the `-c` flag to confirm the action.
+9. **Update the behavior of deleting clients with checked-in cars**: Currently, users can delete clients with checked-in cars to make the process of de-registering clients more efficient, as only 1 command is required. However, this may lead to accidental deletion of clients with checked-in cars. We plan to update the behavior of deleting clients with checked-in cars by introducing an additional flag to ensure that the user is fully aware that the client has a checked-in car. For example, the user will enter the command `del-client 1 -c` to delete a client with a checked-in car, using the `-c` flag to confirm the action.
 
 10. **Add support for scrollable `view` window**: Currently, the `view` window displays all client details in a fixed-size window, which could cause visual problems if there is a unusually large number of Issues. While there is a work around by reopening the `view` window via the `view` command, we plan to add support for a scrollable `view` window to allow users to view all client details without resizing the window.

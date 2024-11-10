@@ -113,7 +113,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 <h2 style="color: #28B463;"> <i class="fas fa-rocket icon"></i> Quick Start</h2>
 
 1. **Check Your System**
-   MATER requires **Java 17 or above** to run. If you’re unsure whether it’s installed, you can download it [here](https://www.java.com).
+   MATER requires **Java 17 or above** to run. If you’re unsure whether it’s installed, you can download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 2. **Download MATER**
    Visit [this link](https://github.com/AY2425S1-CS2103T-T14-3/tp/releases) and download the latest version of MATER as a `.jar` file. The downloaded file is named mater.jar. This file is the program you'll be opening each time you use MATER.
@@ -127,6 +127,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
      - Go to the folder where you saved the `.jar` file.
      - **On Windows or Linux**: Double-click the `.jar` file to open it.
      - **On Mac**: Right-click the `.jar` file, select “Open With,” and choose Java.
+     - If MATER does not open, you may need to open it from the terminal (see Option 2).
 
    - **Option 2: Open MATER from the Terminal**
      - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
@@ -135,7 +136,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
        cd path/to/your/folder
        ```
         - If you require help with the `cd` command, you can refer to this [link](https://www.digitalcitizen.life/command-prompt-how-use-basic-commands/) for a basic tutorial.
-     - Then, if the file name is mater.jar, type the following command and press Enter:
+     - Then, if the file name is mater.jar, run the application with the following command:
        ```shell
        java -jar mater.jar
        ```
@@ -161,27 +162,31 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
   - `XXX` represents 1 to 3 alphabet letters.
   - `1234` represents a number up to 4-digits.
   - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore). Find the correct checksum [here](https://carplatemart.sg/simple-checksum/).
-
-- **VIN (Vehicle Identification Number):** A unique 17-character alphanumeric code assigned to each vehicle by the manufacturer, used to identify individual motor vehicles.
 - **Checksum Letter:** The final character in a VRN, calculated based on the other characters to ensure the VRN's validity.
+- **VIN (Vehicle Identification Number):** A unique 17-character alphanumeric code assigned to each vehicle by the manufacturer, used to identify individual motor vehicles.
 - **Issue:** A problem or maintenance task associated with a client's car. Issues can be recorded in MATER for tracking and management purposes.
 - **Command Line Interface (CLI):** A text-based user interface used to interact with MATER by typing commands into a console or terminal.
 - **Graphical User Interface (GUI):** A visual interface that allows users to interact with MATER through graphical icons and visual indicators.
-- **Command Prefixes:** Short codes used in commands to specify the type of data being entered. For example:
-  - `n/` for name
-  - `p/` for phone number
-  - `e/` for email address
-  - `a/` for address
-  - `vrn/` for Vehicle Registration Number
-  - `vin/` for Vehicle Identification Number
-  - `make/` for car make
-  - `model/` for car model
-  - `i/` for issue
+- **Command Prefixes:** Short codes used in [commands](#command-prefixes) to specify the type of data being entered.
 - **Index:** The numerical position of an item in a list, starting from 1. Used in commands like `edit` and `del-client` to specify which client to modify.
 - **Field:** An individual piece of data associated with a client or car (e.g., name, phone number, VIN).
 - **Optional Field:** A parameter in a command that is not required but can be provided to include additional information. Denoted by square brackets `[]` in command formats.
 
+--------------------------------------------------------------------------------------------------------------------
 
+<h2 style="color: #3498DB;" id="command-prefixes"> <i class="fas fa-keyboard icon"></i>Command Prefixes</h2>
+
+| Command Prefix | Data Type                  |
+|----------------|----------------------------|
+| `n/`           | Name                       |
+| `p/`           | Phone Number               |
+| `e/`           | Email Address              |
+| `a/`           | Address                    |
+| `vrn/`         | Vehicle Registration Number|
+| `vin/`         | Vehicle Identification Number |
+| `make/`        | Car Make                   |
+| `model/`       | Car Model                  |
+| `i/`           | Issue                      |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -252,8 +257,15 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 **Notes:**
 
-- If adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided. `vrn` is validated by checksum and invalid `vrn` provided will be rejected by MATER.
+- When adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided.
+- `vrn` is validated using a [checksum letter](#glossary). Invalid `vrn` provided will be rejected by MATER.
 - If the client does not have a car, these fields should be omitted completely.
+
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field or unsure about the correct checksum letter for the `vrn` , you can use the following [link](https://carplatemart.sg/simple-checksum/) to verify if checksum letter for the `vrn` is correct.
+
+</box>
 
 <box type="tip" seamless>
 
@@ -261,12 +273,6 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 - A client with a car can have any number of issues (including 0).
 - A client may be added with or without a car.
-
-</box>
-
-<box type="tip" seamless>
-
-If you are having trouble entering the `vrn` field or unsure about the correct checksum letter for the `vrn` , you can use the following [link](https://carplatemart.sg/simple-checksum/) to verify if checksum letter for the `vrn` is correct.
 
 </box>
 
