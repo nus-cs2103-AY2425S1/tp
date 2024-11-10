@@ -21,7 +21,7 @@ public class MarkTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks one or more tasks in the address book. \n"
             + "The index specified in the parameters must be a positive integer, "
-            + "with a whitespace between any two indexes"
+            + "with a whitespace between any two indexes\n"
             + "Parameters: INDEX (must be a positive integer) [MORE INDEXES]\n"
             + "Example: " + COMMAND_WORD + " 1\n"
             + COMMAND_WORD + " 1 3 5\n";
