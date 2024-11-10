@@ -232,7 +232,7 @@ Congratulations - you've successfully completed the Quick Start guide!
 
 The [next section](#features) offers an **in-depth overview** of all the commands available in EZSTATE.
 
-<div class="note" markdown="span">EXTRA<br>
+<div class="note" markdown="span">**EXTRA**<br><br>
 Curious about how EZSTATE stores data? Check out the [storage section](#saving-the-data) for more information.
 <br>
 <br>
