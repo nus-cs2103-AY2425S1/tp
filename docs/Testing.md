@@ -1,10 +1,8 @@
+
 ---
-layout: page
-title: Testing guide
+Real Connect Test Guide
 ---
 
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 

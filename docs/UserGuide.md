@@ -76,9 +76,9 @@ E.g. `addProperty`: `<Command> <Index> <X/parameter>`
 ##### Functional commands
 E.g. `help`: `<Command>`
 
-> X is a placeholder for prefixes
+> `X/` is a placeholder for prefixes
 
-Insert example command picture
+![Command Format](images/CommandFormat.png)
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
