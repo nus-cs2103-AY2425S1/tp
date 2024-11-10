@@ -109,7 +109,7 @@ Insert example command picture
 
 
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks.
 
@@ -148,7 +148,7 @@ Displays all persons stored in the address book.
 
 ---
 
-### Sorting contacts: `sort`
+### Sorting contacts : `sort`
 
 Sorts the contact list by name, either in ascending (A-Z) or descending (Z-A) order.
 
@@ -226,7 +226,7 @@ Examples:
 * `remark 1 r/first remark r/second remark` adds remark message `second remark` to the first person.
   ![result for 'remark 1 r/remark message'](images/MultipleRemark.png)
 
-### Single page person view: `view`
+### Single page person view : `view`
 
 Shows all the information related to a contact on a single page.
 
@@ -250,7 +250,7 @@ Examples:
 > You can resize the detail window to extremely small size in case it blocks view of other windows.
 
 
-### Adding a Property: `addProperty`
+### Adding a Property : `addProperty`
 
 Add a property listing to an existing person in the address book.
 
@@ -264,7 +264,7 @@ Examples:
 * `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` adds a property with the specified details to the 1st person in the list.
 * `addProperty 2 address/45 Elm St town/Anytown type/HDB size/70 bed/3 bath/1 price/350000` adds a property to the 2nd person in the list.
 
-### Closing single page person view: `close`
+### Closing single page person view : `close`
 
 Closes the UI page that shows the information of the person.
 
