@@ -240,7 +240,7 @@ Format: `remind INDEX d/DATE des/DESCRIPTION`
 * Creates a reminder for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* When first added, dates cannot be in the past
+* `DATE` cannot be earlier than the current date
 * Expired reminders will display negative days
 
 Examples:
@@ -262,6 +262,10 @@ Format: `delete_reminder INDEX` or `dr INDEX`
 
 Examples:
 * `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Reminders cannot be edited. To make changes, delete the original reminder and create a new one with updated details.
+</div>
 
 ### Exiting the program : `exit` or `ex`
 
