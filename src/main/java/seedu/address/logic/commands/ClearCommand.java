@@ -14,8 +14,9 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_EMPTY = "No participants to clear.";
 
-    public static final String MESSAGE_CHECK = "Type confirm to clear listed participants. \n"
-                                                + "Type anything else to cancel clearing.";
+    public static final String MESSAGE_CHECK = "Type confirm (which can be followed by \n"
+                                                + "anything else) to clear listed participants. \n"
+                                                + "\nType anything else to cancel clearing.";
     private static boolean isClear;
 
 
