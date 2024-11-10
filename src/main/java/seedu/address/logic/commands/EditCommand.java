@@ -113,7 +113,12 @@ public class EditCommand extends Command {
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedSkills);
+        if(personToEdit.getMatch().isPresent()) {
+            String match = personToEdit.getMatch().get();
+            return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedSkills, match);
+        } else {
+            return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedSkills);
+        }
     }
 
     /**
