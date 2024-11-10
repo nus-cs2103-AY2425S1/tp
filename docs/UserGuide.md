@@ -6,7 +6,7 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents.
+NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents based in Singapore.
 Built for **fast, efficient use** through a Command Line Interface (CLI), NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
 
 With NUStates, agents can:
@@ -210,6 +210,11 @@ Adds a property which a client wants to buy to the address book. The property is
 
 Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
 
+- `HOUSING TYPE` must only be one of the following: `h`(hdb), `c`(condo), `a`(apartment), `b`(bto), `o`(others).
+- `BUYING_PRICE` must be a valid integer value less than or equals to `2000000000`.
+- `POSTAL_CODE` must only be 6-digit long. First two digits of the postal code must correspond to a valid Singapore postal sector. Refer to [Singapore Postal Sectors](https://www.ura.gov.sg/Corporate/-/media/Corporate/Property/PMI-Online/List_Of_Postal_Districts.pdf) for valid postal sectors.
+- `UNIT_NUMBER` should be in the format of 'XXX-XXX' where X is a digit. The first and second part of the unit number should be at least 1 digit long and at most 3 digits long respectively.
+
 <box type="note" seamless>
 
 **Note:** A property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
@@ -228,6 +233,11 @@ Adds a property which a client wants to sell to the address book. The property i
 ![addSell message](images/addSell.png)
 
 Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
+
+- `HOUSING TYPE` must only be one of the following: `h`(hdb), `c`(condo), `a`(apartment), `b`(bto), `o`(others).
+- `SELLING_PRICE` must be a valid integer value less than or equals to `2000000000`.
+- `POSTAL_CODE` must only be 6-digit long. First two digits of the postal code must correspond to a valid Singapore postal sector. Refer to [Singapore Postal Sectors](https://www.ura.gov.sg/Corporate/-/media/Corporate/Property/PMI-Online/List_Of_Postal_Districts.pdf) for valid postal sectors.
+- `UNIT_NUMBER` should be in the format of 'XXX-XXX' where X is a digit. The first and second part of the unit number should be at least 1 digit long and at most 3 digits long respectively.
 
 <box type="note" seamless>
 
