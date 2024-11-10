@@ -654,35 +654,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    - 2d.1: CareLink displays an error message that the appointment does not exist in CareLink
    - Use case ends
 
-
-### Use Case 14: Filter Patients by Risk Level
-
-**System**: CareLink
-**Use Case**: UC14 - Filter Patients by Risk Level
-**Actor**: Geriatrician (Fred)
-
-### Preconditions
-Fred is logged into CareLink.
-The system contains patient data with risk levels.
-### Guarantees
-The patients are successfully filtered by their risk level and displayed.
-Main Success Scenario (MSS)
-Fred enters a command to filter patients by risk level.
-CareLink prompts Fred to input the risk level.
-Fred enters the risk level (e.g., high).
-CareLink filters the patients based on the specified risk level and displays the results.
-Use case ends.
-### Extensions
-**3a.** Invalid Risk Level Entered:
-
-**3a.1**: If Fred enters an invalid risk level, CareLink displays an error message and prompts Fred to re-enter the risk level.
-Use case resumes from step 3.
-
-**4a.** No Data Found for Risk Level:
-
-**4a.1**: If no patients exist with the specified risk level, CareLink informs Fred that no records were found.
-Use case ends.
-
 **Use Case 15: Add Note to Person**
 
 **System**: CareLink
