@@ -113,6 +113,8 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
 
     
 ![Ui](images/user-guide-images/Ui.png)
+- The screenshot above showcases the various components of PROperty
+
 
 [_Back to Top_](#table-of-contents)
 
@@ -434,7 +436,8 @@ Format: `remark INDEX r/[REMARKS]`
 * Adds a remark `REMARKS` to the client at `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If there are multiple remark inputs `r/Hello r/Test`, only the last one (`r/Test`) will be added.
+* If there are multiple remark inputs, only the last remark will be added. See example 3 below for a better illustration.
+
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 If `[REMARKS]` of `r/` is left blank (e.g `remark 1 r/`), the remark will be deleted entirely
@@ -476,7 +479,7 @@ Format: `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​ 
 - Property tags are added in a case-insensitive manner. e.g `t/condo` or `t/CONDO` will both add the `CONDO` tag.
 - Refer to the [Tag Table](#tag-table) for a complete list of property tags.
-- If multiple attributes are used `t/condo t/HDB...`, the **latest tag (`t/HDB`)** is used instead.
+- If there are multiple tag inputs, the last tag will be used. See example 3 below for a better illustration.
 
 Examples:
 
@@ -485,9 +488,16 @@ Examples:
 
 2. `listing add 2 t/HDB a/Clementi Road 321` adds a property listing to the client at index `2` with a listing type of `HDB` and address of `Clementi Road 321`. 
 
+
+3. `listing add 1 t/HDB t/condo a/NTU Road 321` adds a property listing to the client at index `1` with a listing type of `condo` and address of `NTU Road 321`.
+
 Visual example of correct output [Example `1.`]:
 
 ![ListingAddCommandShowcase.png](images/user-guide-images/ListingAddCommandShowcase.png)
+
+Visual example of correct output [Example `3.`]:
+
+![ListingAddMultipleTagShowcase.png](images/user-guide-images/ListingAddMultipleTagShowcase.png)
 
 [_Back to Top_](#table-of-contents)
 
