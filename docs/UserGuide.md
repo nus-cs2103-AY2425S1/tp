@@ -3,7 +3,7 @@ layout: page
 title: User Guide 📖🧁
 ---
 
-# **Welcome to BakeBuddy**
+<h1 style="display: none;"> <b>Welcome to BakeBuddy 👨‍🍳👩‍🍳</b> </h1>
 
 BakeBuddy is your all-in-one command-line companion for managing your home bakery business. Designed with speed and
 efficiency in mind, it combines the power of a Command Line Interface (CLI) with intuitive features to help you focus
@@ -15,8 +15,6 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 - 📦 Suppliers and ingredients
 - 📋 Order tracking and fulfillment
 
---------------------------------------------------------------------------------------------------------------------
-
 ## **Why Choose BakeBuddy?**
 
 - **Speed First**: Execute commands quickly through our CLI, perfect for busy bakers
@@ -24,17 +22,13 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 - **All-in-One Solution**: Manage every aspect of your bakery business from a single application
 - **Efficiency Focused**: Designed specifically for home-based bakery owners who value their time
 
---------------------------------------------------------------------------------------------------------------------
-
 ## **Getting Started**
 
 This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
-# Table of Contents
+# **Table of Contents**
 * Table of Contents
 {:toc}
 
