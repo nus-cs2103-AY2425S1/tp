@@ -52,11 +52,12 @@ public class Messages {
             + "having the same full names without distinct nicknames, which are not allowed." + LINE_BREAK
             + "%1$s";
 
+    // to replace formatted words of: delete
+    public static final String MESSAGE_MULTIPLE_WAYS_FORBIDDEN = "%1$s by multiple ways is not allowed";
+
     // to replace formatted words of: edit or delete
     public static final String MESSAGE_MISSING_INDEX_OR_NAME = String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, "Missing index or Full name. " + LINE_BREAK + "%1$s");
-    public static final String MESSAGE_MULTIPLE_WAYS_FORBIDDEN = "%1$s by both index and full name is not "
-            + "allowed";
     public static final String MESSAGE_DUPLICATE_NAME = "There is more than 1 contact with the same "
             + "full name. Please %2$s by index.\nTip: find the contact's name to obtain their "
             + "corresponding displayed index, and %2$s by the displayed index directly on the page. "
