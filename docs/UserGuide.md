@@ -32,7 +32,7 @@ tasks done faster than traditional GUI apps.
    <br><br/>
       ![Ui](images/Ui.png)
 
-   <box type="tip" seamless>
+   <box type="tip">
 
    **If you are struggling with step 3 and/or 4, verify that you followed these steps correctly:**
     1. Create an empty folder on your Desktop called 'PlanPerfect'.
@@ -71,7 +71,7 @@ tasks done faster than traditional GUI apps.
 
 ## Features
 
-<box type="info" seamless>
+<box type="info">
 
 <details open>
 
@@ -133,12 +133,12 @@ Adds a contact to the address book.
 * Address field cannot contain " n/", " p/", " e/", " a/", " t/" as these sequences of characters are reserved for parameter prefixes.
 * The order of parameters given does not matter, parameters can be in any order.
 
-<box type="warning" seamless>
+<box type="warning">
 
 A contact can have up to 6 tags (including 0). No two contacts can have the same phone number.
 </box>
 
-<box type="info" seamless>
+<box type="info">
 After adding a contact, you will return to the main contact list view, regardless of whether you were in wedding or 
 filtered view.
 </box>
@@ -171,7 +171,7 @@ Edits an existing contact in the address book.
 * Existing values will be updated to the input values only for the fields for which a new value is provided.
 * You cannot edit a contact's phone number to one that is held by another contact.
   
-<box type="info" seamless>
+<box type="info">
 
 **Note:**
 Tagging & Untagging (Editing of Tags) is done using the `tag` and `untag` commands, not the `edit` command!
@@ -197,7 +197,7 @@ Adds one or more tags to a specific contact in the address book.
 * You can specify multiple tags in the same command by separating the tags with a space.
 * Adding a tag to a contact who already has the tag will show an error message.
 
-<box type="info" seamless>
+<box type="info">
 
 **Note:**
 You cannot tag contacts with the word 'all'. It is restricted for the `untag` command to remove all of a contact's tags at once.
@@ -254,7 +254,7 @@ Finds contacts whose names contain any of the given keywords.
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-<box type="info" seamless>
+<box type="info">
 
 **Note:**
 Execution of `find` will **always** search within all contacts, not just contacts in the current filtered or wedding view. If a `view` or `filter` command had been executed prior to the execution of `find`, the displayed list will include contacts in the "all contacts" view.
@@ -279,7 +279,7 @@ Filters contacts who are tagged with all of the given tags.
 * The search for tags is case-insensitive. eg. filtering by tag `Photographer` will also show contacts tagged with `photographer`.
 * If used inside a wedding view, only contacts assigned to that wedding (with that tag) are displayed.
 
-<box type="info" seamless>
+<box type="info">
 
 **Note:**
 Successive use of `filter` commands is not cumulative. That is, suppose `filter t/foodCaterer` is input, followed by `filter t/bartender`, the displayed list will contain contacts tagged with `bartender`, rather than contacts tagged with both `foodCaterer` and `bartender`.
@@ -319,7 +319,7 @@ Format: `sort`
 
 Sorts the contacts in the current view in alphabetical order.
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution:**
 You will not be able to recover the previous sorting of your contacts after the running the `sort` command.
@@ -360,14 +360,14 @@ Adds a wedding to PlanPerfect with the specified date. Optionally allows users t
 * Date can be in the past (for documenting/tracking old weddings), present, or future.
 * Contact indexes must be valid in the context of the current view.
 
-<box type="warning" seamless>
+<box type="warning">
 
   **Caution:**
   If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the `addw` command to add a new wedding. Not doing so will mean that you are only able to add contacts from the current wedding being viewed into the new wedding.
   
 </box>
 
-<box type="info" seamless>
+<box type="info">
 
 **Note:**
 
@@ -403,7 +403,7 @@ Format: `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
 
 Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
 
-<box type="info" seamless>
+<box type="info">
 
 **Note:** 
 Assigning/removing of contacts from a wedding (editing wedding contacts) is to be done using the `assign` and 
@@ -411,14 +411,14 @@ Assigning/removing of contacts from a wedding (editing wedding contacts) is to b
 
 </box>
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution:**
 The edited wedding name provided must not be the name of a pre-existing wedding in PlanPerfect.
 
 </box>
 
-<box type="info" seamless>
+<box type="info">
 
 **Note:**
 
@@ -460,7 +460,7 @@ Unassigns contacts at the specified index's from the wedding you are currently v
 
 * At least 1 `CONTACT_INDEX` must be specified when using this command.
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution:**
 You must be in a wedding view to unassign contacts from that wedding (using the `view` command). You can only input contact indices
