@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `VendorListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Vendor` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
@@ -392,6 +392,7 @@ Preconditions: User is viewing an item.
 **Use case: UC03 - Unassign a vendor from an event**
 
 Preconditions: User is viewing an item.
+
 **MSS**
 
 1. User enters command to unassign a vendor from an event.
@@ -619,8 +620,6 @@ Preconditions: User is viewing an item.
 
 10. **Vendor:** A service provider, such as a caterer, photographer, decorator, who is employed for events.
 
-11. **Vendor Rating:** A qualitative score assigned to a vendor to track their past performance in events.
-
 12. **Item**: Refers to any entity or object that can be viewed or deleted within the system, such as an event, vendor.
 
 13. **Associated Entities**: Refers to any related items or dependencies connected to the main item. For example, for an event, associated entities include assigned vendors; for a vendor, associated entities include assigned events.
@@ -642,9 +641,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch:
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open a command window.
+
+   3. Launch the jar file using the java -jar command. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences:
 
@@ -681,12 +682,12 @@ testers are expected to do more *exploratory* testing.
 1.  Delete a Vendor:
 
     1.  Type `delete v/1` <br>
-        Expected: The first vendor in the list is removed from EventTory.
+        Expected: The first vendor in the list is removed from EventTory if it does not have any assigned event. Else, deletion will fail.
 
 2.  Delete an Event:
 
     1. Type `delete e/2` <br>
-       Expected: The second event in the list is removed from EventTory.
+       Expected: The second event in the list is removed from EventTory if it does not have any assign vendor. Else, deletion will fail.
 
 ### List Command
 
@@ -736,12 +737,12 @@ testers are expected to do more *exploratory* testing.
 
 1.  Search for a Vendor by Keyword:
 
-    1. Type `find v/ catering` <br>
+    1. Type `find v/catering` <br>
        Expected: Vendors with names, descriptions, or tags matching "catering" are displayed.
 
 2.  Search for an Event by Keyword:
 
-    1. Type `find e/ wedding` <br>
+    1. Type `find e/wedding` <br>
        Expected: Events with names or tags matching "wedding" are displayed.
 
 ### Clear Command
@@ -763,7 +764,7 @@ testers are expected to do more *exploratory* testing.
 1. Getting Help:
 
    1. Type `help` in the command box and press Enter.
-      Expected: A help window appears, showing instructions and command summaries.
+      Expected: A help window appears with a URL directed to the user guide.
 
 ### Editing Data File (Advanced Users)
 
