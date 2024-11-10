@@ -3,7 +3,7 @@
     "name" : "David Ng",
     "phone" : "93456789",
     "email" : "davidng@example.com",
-    "availableDate" : "2023-10-27",
+    "availableDate" : "2023-10-27, 2023-10-28",
     "involvedIn" : [ "Tree Planting" ]
   }, {
     "name" : "Alice Wong",
