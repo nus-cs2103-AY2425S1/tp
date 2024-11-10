@@ -42,6 +42,7 @@ This app is a desktop app for managing candidates and job roles, **optimised for
     - [Archiving Data Files](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Glossary](#glossary)
+- [Known Limitation](#known-limitation)
 
 
 
@@ -50,18 +51,18 @@ This app is a desktop app for managing candidates and job roles, **optimised for
 ## Command Summary
 
 
-| Action      | Format, Examples                                                                                                                                                                                                            |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd, 1234665 s/Java t/friend` |
-| **Clear**   | `clear`                                                                                                                                                                                                                     |
-| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                         |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Active`                                              |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                       |
-| **List**    | `list`                                                                                                                                                                                                                      |
-| **Help**    | `help`                                                                                                                                                                                                                      |
-| **View**    | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                             |
-| **Filter**  | `filter STATUS`<br> e.g., `filter Shortlisted`                                                                                                                                                                              |
-| **Summary** | `summary`                                                                                                                                                                                                                   |
+| Action      | Format, Examples                                                                                                                                                                                                              |
+|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS [note/NOTE] ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd, 1234665 s/Java t/friend` |
+| **Clear**   | `clear`                                                                                                                                                                                                                       |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                           |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Applied`                                               |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                         |
+| **List**    | `list`                                                                                                                                                                                                                        |
+| **Help**    | `help`                                                                                                                                                                                                                        |
+| **View**    | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                               |
+| **Filter**  | `filter STATUS`<br> e.g., `filter Shortlisted`                                                                                                                                                                                |
+| **Summary** | `summary`                                                                                                                                                                                                                     |
 
 Detailed information can be found under [Features](#features).
 
@@ -112,11 +113,11 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
 
 6. **Interact with TalentSG**:
     - Type your command into the command box and press **Enter** to execute it.
-    - For example, typing `help` and pressing Enter will display the help message. ✨
+    - For example, typing `help` and pressing Enter will display the help message. 
 
 7. **Try Out Example Commands**:
     - `list` : Lists all Applicant.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` : Adds a Applicant named `John Doe` to TalentSG.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Applied note/Great candidate ex/5 years in HR dr/Software Engineer` : Adds a Applicant named `John Doe` to TalentSG.
     - `delete 3` : Deletes the 3rd applicant shown in the current list.
     - `clear` : Deletes all applicant.
     - `exit` : Exits the app.
@@ -146,21 +147,33 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 <br> <br>
 #### Constraints of fields
 
-| Field            | Constraints                                | Example                                                                                                  |
-|------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **NAME**         | Up to 20 characters, no special characters | `Dominic`, `Stanley`, `Adi`                                                                              |
-| **PHONE_NUMBER** | Numeric                                    | `98989899`, `81092819`                                                                                   |
-| **EMAIL**        | Valid email format                         | `testing@gmail.com`,`example@gmail.com`                                                                  |
-| **ADDRESS**      | Valid address, should not be blank         | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
-| **SKILLS**       | Comma-separated values                     | `Java, Python`, `C++`                                                                                    |
-| **STATUS**       | Predefined statuses                        | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
-| **EXPERIENCE**   | Valid experience, should not be blank      | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                            |
-| **DESIRED_ROLE** | Desired job position, should not be blank  | `Software Engineer`, `UI/UX Designer`                                                                    |
-| **NOTE**         | Any characters are accepted                | `Very confident`, `Confident`                                                                            |
-| **Tags**         | Optional and can be multiple               | `Must have`                                                                                              |
+| Field            | Constraints                                                             | Example                                                                                                  |
+|------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **NAME**         | Any number of alphanumeric characters and spaces, no special characters | `Dominic`, `Stanley`, `Adi`                                                                              |
+| **PHONE_NUMBER** | Numeric                                                                 | `98989899`, `81092819`                                                                                   |
+| **EMAIL**        | Valid email format                                                      | `testing@gmail.com`,`example@gmail.com`                                                                  |
+| **ADDRESS**      | Valid address, should not be blank                                      | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
+| **SKILLS**       | Comma-separated values                                                  | `Java, Python`, `C++`                                                                                    |
+| **STATUS**       | Predefined statuses                                                     | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
+| **EXPERIENCE**   | Valid experience, should not be blank                                   | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                            |
+| **DESIRED_ROLE** | Desired job position, should not be blank                               | `Software Engineer`, `UI/UX Designer`                                                                    |
+| **NOTE**         | Any characters are accepted                                             | `Very confident`, `Confident`                                                                            |
+| **Tags**         | Optional and can be multiple                                            | `Must have`                                                                                              |
 
 
-<strong>[Caution]</strong>: The required information except tags cannot be empty.
+- <strong>[Caution]</strong>: The required information except tags cannot be empty.
+
+- <strong>[Note]</strong>: The **Name** field accepts a large number of characters (over 50), but excessively long names may be truncated in the display for better readability. Names must only contain alphanumeric characters and spaces and cannot be blank.
+
+- <strong>[Note]</strong>: Tags must only contain alphanumeric characters (letters and numbers) and cannot include spaces or special characters (e.g., `!`, `#`, `&`). Each tag should be a single, continuous word. For example, `MustHave` is valid, but `Must Have` and `Must-Have` are not.
+
+- <strong>[Caution]</strong>: Extremely long names may be truncated in both the **Applicants list** and **Overview Panel** due to space constraints. If you need to view the full name, you may access the data file directly. To ensure readability, it is recommended to keep names within a reasonable length.
+
+- <strong>[Note]</strong>: The phone number field accepts only numeric characters (0-9) and does not support spaces, country codes, or other symbols. For example, `92388172` is valid, but `+1 8271 8127 8172` and `9238 8172` are not accepted. Future updates may consider additional formats to support international phone numbers.
+
+- <strong>[Note]</strong>: The **Note** field is recommended to be within 200 characters for optimal performance and display. Exceeding this length may result in truncated display or other limitations in certain views.
+
+- <strong>[Note]</strong>: The **Name** field does not currently support special characters (e.g., `/`, `-`). This restriction may pose limitations for certain names, such as `s/o` or hyphenated names. A workaround is to use spaces or omit these characters (e.g., enter `John s o Kaarthik` instead of `John s/o Kaarthik`). Future updates may address support for special characters in names.
 
 ---
 
@@ -200,6 +213,8 @@ Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4,
 
 
 <strong>[Caution]</strong>: You cannot add the same candidate twice. (same name and phone)
+
+<strong>[Tip]</strong>: The parameters in the `add` command can be entered in any order. For example, `p/PHONE_NUMBER n/NAME e/EMAIL` is equivalent to `n/NAME p/PHONE_NUMBER e/EMAIL`. This flexibility allows you to add candidates without needing to remember a strict parameter sequence, making data entry faster and more user-friendly.
 
 ---
 
@@ -261,6 +276,8 @@ Command: ` edit 1 st/Rejected note/arrogant `
 
 
 <strong>[Caution]</strong>: You cannot edit a candidate to be a duplicate of another existing candidate.
+
+<strong>[Note]</strong>: When using the `edit` command to modify tags, all existing tags for that person will be replaced by the new tags provided. To retain previous tags and add new ones, retype all desired tags in the `edit` command.
 
 ---
 
@@ -385,7 +402,7 @@ Filters candidates based on their status.
 
 #### Notes
 
-- **Case-Insensitive**: The search is case-insensitive.
+- **Case-Sensitive**: The search is case-sensitive.
 - **Available Statuses**:
     - Applied
     - Screening
@@ -403,7 +420,7 @@ Filters candidates based on their status.
 
 #### Image Example
 
-Command: `filter screening`
+Command: `filter Screening`
 
 **Before the filter command ran:**
 
@@ -417,6 +434,8 @@ Command: `filter screening`
 
 If an invalid status is input (e.g., `filter applying`), an error message will appear:
 > **Invalid status: applying. Valid statuses are: Applied, Screening, Interview Scheduled, Interviewed, Offer, Onboarding, Hired, Rejected**
+
+<strong>[Caution]</strong>: The `filter` command is case-sensitive. Make sure to enter the status exactly as shown below, with correct capitalization.
 
 
 ---
@@ -542,6 +561,8 @@ Below is an example of the Report Bug pop-up window that will appear when you ac
 - **Privacy**: Your feedback will be used solely for improving TalentSG. Any personal information provided will be handled according to our privacy policy.
 
 <strong>[Tip]</strong>: Reporting bugs with detailed steps and screenshots (if applicable) can help speed up the troubleshooting process.
+<strong>[Note]</strong>: "Report Bug" is accessed through the **Help** menu and is not a command that can be entered in the application’s command line interface.
+
 
 ---
 
@@ -623,5 +644,47 @@ _Details coming soon ..._
 
 - **Backup**:
   A saved copy of the data file, recommended before making manual changes to avoid data loss.
+
+### Status Glossary
+
+The **Status** field in TalentSG indicates the applicant’s current stage in the hiring process. HR professionals can use these definitions to maintain consistency, but they can also interpret them based on their specific use case.
+
+- **Applied**: The applicant has submitted their application, but it has not been reviewed yet.
+- **Screening**: The application is currently under initial review or pre-interview screening.
+- **Interview Scheduled**: An interview has been arranged, and the applicant has been informed.
+- **Interviewed**: The applicant has completed their interview, and the HR team is assessing the results.
+- **Offer**: An offer has been extended to the applicant, but they have yet to accept or reject it.
+- **Onboarding**: The applicant has accepted the offer and is currently in the onboarding process.
+- **Hired**: The applicant has completed onboarding and is now a part of the organization.
+- **Rejected**: The applicant was not selected to continue in the hiring process. This status applies whether:
+    - The company decided not to proceed with the application, or
+    - The applicant withdrew or rejected the offer.
+
+  > **Note**: If an applicant voluntarily withdraws or declines the offer, it can be marked as "Rejected" for record-keeping. Use tags or notes to clarify details, such as `tag/withdrawn` for easy future reference.
+
+#### Additional Tips
+- **Customizing Status Tracking**: HR professionals may add tags (e.g., `tag/withdrew`) for additional details alongside the main status.
+- **Updating Status**: Ensure that statuses are updated promptly to reflect the most current applicant stage, improving recruitment tracking and reducing confusion.
+
+---
+
+## Known Limitation
+
+### Overview Panel Not Cleared
+
+**Issue**: When using the `clear` command, all candidates are removed from the **Applicants List**, but if a candidate was previously selected, their details remain displayed in the **Overview Panel**.
+
+**Expected Behavior**: Ideally, the **Overview Panel** should also be cleared when the list is empty, as no candidates are available for viewing.
+
+**Reason**: This behavior occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
+
+**Potential Solution**:
+- Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
+
+  > **Suggested Implementation**: Use an observer that listens for changes in the candidate list model and updates the **Overview Panel** accordingly. This would ensure that both `clear` and `delete` commands properly update the **Overview Panel**.
+
+**Current Workaround**: Users can manually select a new candidate (if available) or restart the app to refresh the **Overview Panel**.
+
+**Future Development**: Since implementing this change would require code modifications not feasible in version 1.6, this feature could be considered for future updates.
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
