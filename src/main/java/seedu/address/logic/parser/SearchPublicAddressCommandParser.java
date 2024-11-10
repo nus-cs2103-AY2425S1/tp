@@ -24,13 +24,15 @@ public class SearchPublicAddressCommandParser implements Parser<SearchPublicAddr
         // if more than 1 pa entered
         if (argMultimap.getAllValues(PREFIX_PUBLIC_ADDRESS).size() > 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SearchPublicAddressCommand.MESSAGE_USAGE));
+                SearchPublicAddressCommand.MESSAGE_USAGE));
         }
         //if no pa entered
         if (argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SearchPublicAddressCommand.MESSAGE_USAGE));
+                SearchPublicAddressCommand.MESSAGE_USAGE));
         }
+
+
         String publicAddress = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).orElse("");
 
         return new SearchPublicAddressCommand(publicAddress);

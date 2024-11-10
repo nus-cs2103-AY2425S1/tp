@@ -2,9 +2,6 @@ package seedu.address.model.addresses;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 
 import java.util.Objects;
 
@@ -17,8 +14,17 @@ public abstract class PublicAddress {
 
     public static final String MESSAGE_LABEL_CONSTRAINTS =
         "Public Address Labels should not be blank"; // TODO: Update constraints
-    public static final String VALIDATION_PUBLIC_ADDRESS_REGEX = "^[a-zA-Z0-9]*$"; // TODO: Update regex
+    public static final String VALIDATION_PUBLIC_ADDRESS_REGEX = "^[a-zA-Z0-9]*$";
     public static final String VALIDATION_LABEL_REGEX = "[^\\s].*"; // TODO: Update regex
+    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND =
+        "Can't find any Person with public address"
+            + " inputted: %1$s";
+    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR =
+        "Public Address contains only alphanumeric characters";
+    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG =
+        "Public Address for length BTC/ETH/SOL should be less than 44 characters";
+    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_SHORT =
+        "Public Address for length BTC/ETH/SOL should be more than 26 characters";
 
     public final String publicAddress;
 
@@ -52,12 +58,12 @@ public abstract class PublicAddress {
      * @throws IllegalArgumentException
      */
     public static void validatePublicAddress(String publicAddress) throws IllegalArgumentException {
-        if (publicAddress.length() > 100) { //length of public address too long
+        if (publicAddress.length() > 44) { //length of public address too long
             throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
         } else if (!(publicAddress.matches(VALIDATION_PUBLIC_ADDRESS_REGEX))) {
             throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
-        } else if (publicAddress.isEmpty()) {
-            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND);
+        } else if (publicAddress.length() < 26) { //length of public address too short
+            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_SHORT);
         }
     }
 
@@ -112,7 +118,7 @@ public abstract class PublicAddress {
      * @return String
      */
     public String getPublicAddressString() {
-        return publicAddress;
+        return publicAddress.toLowerCase();
     }
 
     /**

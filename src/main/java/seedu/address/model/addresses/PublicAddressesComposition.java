@@ -81,11 +81,12 @@ public class PublicAddressesComposition {
      *
      * @param publicAddress The public address to be added.
      */
-    public void addPublicAddress(PublicAddress publicAddress) {
+    public PublicAddressesComposition addPublicAddress(PublicAddress publicAddress) {
         assert publicAddress != null : "Public address cannot be null.";
         assert publicAddress.getNetwork() != null : "Network cannot be null.";
         publicAddresses.computeIfAbsent(publicAddress.getNetwork(), k -> new HashSet<>());
         publicAddresses.get(publicAddress.getNetwork()).add(publicAddress);
+        return this;
     }
 
     /**
@@ -126,19 +127,36 @@ public class PublicAddressesComposition {
     }
 
     /**
-     * Returns the public address with the specified label in the network.
+     * Returns a set of public addresses that matches the label.
      *
-     * @param network The network to search for.
      * @param label The label to match against the public addresses.
+     * @return A set containing the desired public addresses.
      */
-    public Set<PublicAddress> getByNetworkAndLabel(Network network, String label) {
-        assert network != null;
+    public Set<PublicAddress> getByLabel(String label) {
         assert label != null;
-        return Collections.unmodifiableSet(
-            publicAddresses.getOrDefault(network, Collections.emptySet()).stream()
-            .filter(publicAddress -> publicAddress.getLabel().equals(label))
-            .collect(Collectors.toSet())
-        );
+
+        return publicAddresses.values().stream()
+            .flatMap(Set::stream)
+            .filter(publicAddress -> publicAddress.getLabel().toLowerCase().contains(label.toLowerCase()))
+            .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a set of public addresses that matches the label for a specific network.
+     *
+     * @param label   The label to match against the public addresses.
+     * @param network The network to search in.
+     * @return A set containing the desired public addresses.
+     */
+    public Set<PublicAddress> getByLabelAndNetwork(String label, Network network) {
+        assert label != null;
+        assert network != null;
+
+        Set<PublicAddress> addressesInNetwork = publicAddresses.getOrDefault(network, Collections.emptySet());
+
+        return addressesInNetwork.stream()
+            .filter(publicAddress -> publicAddress.getLabel().toLowerCase().contains(label.toLowerCase()))
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -152,7 +170,8 @@ public class PublicAddressesComposition {
         assert publicAddressString != null;
         return publicAddresses.values().stream()
             .flatMap(Set::stream)
-            .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
+            .anyMatch(publicAddress -> publicAddress.getPublicAddressString()
+                .equalsIgnoreCase(publicAddressString));
     }
 
     /**
@@ -272,7 +291,8 @@ public class PublicAddressesComposition {
      * @param existingPublicAddress
      * @param updatedPublicAddress
      */
-    public void updatePublicAddress(PublicAddress existingPublicAddress, PublicAddress updatedPublicAddress) {
+    public void updatePublicAddress(PublicAddress existingPublicAddress,
+                                    PublicAddress updatedPublicAddress) {
         assert existingPublicAddress != null : "Existing public address cannot be null.";
         assert updatedPublicAddress != null : "Updated public address cannot be null.";
         assert existingPublicAddress.getNetwork().equals(updatedPublicAddress.getNetwork())
@@ -308,7 +328,8 @@ public class PublicAddressesComposition {
             newPublicAddress.getNetwork(),
             new HashSet<>()
         );
-        networkAddresses.removeIf(addr -> addr.getLabel().equalsIgnoreCase(newPublicAddress.getLabel()));
+        networkAddresses.removeIf(addr -> addr.getLabel().equalsIgnoreCase(
+            newPublicAddress.getLabel()));
         networkAddresses.add(newPublicAddress);
         updatedPublicAddresses.put(newPublicAddress.getNetwork(), networkAddresses);
 
@@ -321,7 +342,8 @@ public class PublicAddressesComposition {
      * @return The number of public addresses.
      */
     public int sizeOfAllPublicAddresses() {
-        return publicAddresses.values().stream().mapToInt(Set::size).sum();
+        return publicAddresses.values().stream()
+            .mapToInt(Set::size).sum();
     }
 
 
@@ -339,7 +361,8 @@ public class PublicAddressesComposition {
                 publicAddresses.entrySet().stream(),
                 other.getPublicAddresses().entrySet().stream()
             )
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (set1, set2) -> {
+            .collect(Collectors.toMap(Map.Entry::getKey,
+                Map.Entry::getValue, (set1, set2) -> {
                     Set<PublicAddress> combinedSet = new HashSet<>(set1);
                     set2.stream()
                         .filter(addr -> {
@@ -432,11 +455,11 @@ public class PublicAddressesComposition {
                 .append(network)
                 .append(":\n");
             addresses.forEach(address -> {
-                sb.append(INDENT + INDENT)
+                sb.append(INDENT + INDENT + INDENT)
                     .append(address.getLabel())
                     .append(":\n")
-                    .append(INDENT + INDENT + INDENT)
-                    .append(address.getPublicAddressString())
+                    .append(INDENT + INDENT + INDENT + INDENT)
+                    .append(address.getPublicAddressString().toLowerCase())
                     .append("\n");
             });
         });

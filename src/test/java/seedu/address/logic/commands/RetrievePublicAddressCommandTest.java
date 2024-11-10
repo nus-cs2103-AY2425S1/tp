@@ -2,155 +2,295 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.BTC_MAIN_ADDRESS;
-import static seedu.address.testutil.TypicalPersons.BTC_SUB_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.JOE;
+import static seedu.address.testutil.TypicalPersons.MOE;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_MAIN;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_SOL_MAIN;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class RetrievePublicAddressCommandTest {
-    private Model model;
+    private Model model = new ModelManager(new AddressBook(), new UserPrefs());
 
+    private String createPersonDetails(Person person, PublicAddress publicAddress) {
+        return String.format(RetrievePublicAddressCommand.MESSAGE_PERSON_FORMAT,
+            person.getName(), publicAddress.getNetwork(), publicAddress.getLabel(),
+            publicAddress.getPublicAddressString());
+    }
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(new AddressBook(), new UserPrefs());
+        model.addPerson(new PersonBuilder(JOE).build());
+        model.addPerson(new PersonBuilder(MOE).build());
+        model.addPerson(new PersonBuilder(IDA).build());
     }
 
-
     @Test
-    public void execute_validIndexValidNetwork_success() {
-        model.addPerson(JOE);
-        Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
-
+    public void execute_validArgsAnyNetworkAnyName_success() {
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(targetIndex, Network.BTC);
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(), "");
 
+        List<String> personsDetails =
+            Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN),
+                    createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_ETH_MAIN),
+                    createPersonDetails(MOE, VALID_PUBLIC_ADDRESS_SOL_MAIN))
+                .sorted()
+                .toList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
 
-        String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-            2, Network.BTC, JOE.getName(), BTC_MAIN_ADDRESS + "\n" + BTC_SUB_ADDRESS);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertCommandSuccess(retrieveCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
     @Test
-    public void execute_validIndexValidNetworkWithLabel_success() {
-        model.addPerson(JOE);
-        Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
-
+    public void execute_validArgsAnyNetworkSpecifiedName_success() {
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(targetIndex, Network.BTC, BTC_MAIN_ADDRESS.label);
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(), JOE.getName().toString());
 
+        List<String> personsDetails =
+            Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN),
+                    createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_ETH_MAIN))
+                .sorted()
+                .toList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
 
-        String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-            1, Network.BTC, JOE.getName(), BTC_MAIN_ADDRESS);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertCommandSuccess(retrieveCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
     @Test
-    public void execute_validIndexValidNetworkEmpty_success() {
-        model.addPerson(JOE);
-        Index targetIndex = Index.fromOneBased(1); // Use fixed index instead of size()
-
+    public void execute_validArgsSpecifiedNetworkAnyName_success() {
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(targetIndex, Network.BTC,
-                "Non-existent");
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(), "", Network.BTC);
 
-        String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-            0, Network.BTC, JOE.getName(), "-");
+        List<String> personsDetails =
+            Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN))
+                .sorted()
+                .toList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
 
-        assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
     @Test
-    public void execute_invalidIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(1);
-        RetrievePublicAddressCommand retrieveCommand = new RetrievePublicAddressCommand(outOfBoundIndex, Network.BTC);
-
-        assertCommandFailure(retrieveCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_personWithoutPublicAddresses_returnsEmptyList() {
-        Person personWithoutPublicAddresses = new PersonBuilder().build();
-        model.addPerson(personWithoutPublicAddresses);
-
+    public void execute_validArgsSpecifiedNetworkAndName_success() {
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(Index.fromOneBased(1), Network.BTC);
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
+                JOE.getName().toString(), Network.BTC);
 
+        List<String> personsDetails =
+            Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN)).toList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
 
-        String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-            0, Network.BTC, personWithoutPublicAddresses.getName(), "-");
-
-        assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
     @Test
-    public void equals() {
-        RetrievePublicAddressCommand retrieveFirstCommand =
-            new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
-        RetrievePublicAddressCommand retrieveSecondCommand =
-            new RetrievePublicAddressCommand(INDEX_SECOND_PERSON, Network.BTC);
-
-        // same object -> returns true
-        assertEquals(retrieveFirstCommand, retrieveFirstCommand);
-
-        // same values -> returns true
-        RetrievePublicAddressCommand retrieveFirstCommandCopy =
-            new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
-        assertEquals(retrieveFirstCommand, retrieveFirstCommandCopy);
-
-        // different types -> returns false
-        assertNotEquals(1, retrieveFirstCommand);
-
-        // null -> returns false
-        assertNotEquals(null, retrieveFirstCommand);
-
-        // different index -> returns false
-        assertNotEquals(retrieveFirstCommand, retrieveSecondCommand);
-
-        // TODO: Re-enable after more networks supported
-        // different network -> returns false
-        // RetrievePublicAddressCommand retrieveFirstCommandEth =
-        //         new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.ETH);
-        // assertFalse(retrieveFirstCommand.equals(retrieveFirstCommandEth));
-
-        // different label -> returns false
-        RetrievePublicAddressCommand retrieveFirstCommandLabelled =
-            new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "different");
-        assertNotEquals(retrieveFirstCommand, retrieveFirstCommandLabelled);
-    }
-
-    @Test
-    public void toStringMethod() {
+    public void execute_validArgsPartialLabel_success() {
         RetrievePublicAddressCommand retrieveCommand =
-            new RetrievePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, "wallet1");
-        String expected = new ToStringBuilder(retrieveCommand)
-            .add("index", INDEX_FIRST_PERSON)
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel().substring(0, 4), "");
+
+        List<String> personsDetails =
+            Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN),
+                    createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_ETH_MAIN),
+                    createPersonDetails(MOE, VALID_PUBLIC_ADDRESS_SOL_MAIN))
+                .sorted()
+                .toList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
+
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
+    }
+
+    @Test
+    public void execute_validArgsDifferentCaseLabel_success() {
+        RetrievePublicAddressCommand retrieveCommand =
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel().toUpperCase(), "");
+
+        List<String> personsDetails =
+            Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN),
+                    createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_ETH_MAIN),
+                    createPersonDetails(MOE, VALID_PUBLIC_ADDRESS_SOL_MAIN))
+                .sorted()
+                .toList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
+
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
+    }
+
+    @Test
+    public void execute_validArgsPartialName_success() {
+        RetrievePublicAddressCommand retrieveCommand =
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
+                JOE.getName().toString().substring(0, 5));
+
+        List<String> personsDetails =
+            Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN),
+                    createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_ETH_MAIN))
+                .sorted()
+                .toList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
+
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
+    }
+
+    @Test
+    public void execute_validArgsDifferentCaseName_success() {
+        RetrievePublicAddressCommand retrieveCommand =
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
+                JOE.getName().toString().toUpperCase());
+
+        List<String> personsDetails =
+            Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN),
+                    createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_ETH_MAIN))
+                .sorted()
+                .toList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
+
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
+    }
+
+    @Test
+    public void execute_validArgsNoMatchingLabel_success() {
+        RetrievePublicAddressCommand retrieveCommand =
+            new RetrievePublicAddressCommand("non-existent", "");
+
+        List<String> personsDetails = Collections.emptyList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
+
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
+    }
+
+    @Test
+    public void execute_validArgsNoMatchingName_success() {
+        RetrievePublicAddressCommand retrieveCommand =
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(), "non-existent");
+
+        List<String> personsDetails = Collections.emptyList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
+
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
+    }
+
+    @Test
+    public void execute_validArgsNoMatchingNetwork_success() {
+        RetrievePublicAddressCommand retrieveCommand =
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
+                JOE.getName().toString(), Network.SOL);
+
+        List<String> personsDetails = Collections.emptyList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
+
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
+    }
+
+    @Test
+    public void execute_validArgsNoPublicAddresses_success() {
+        RetrievePublicAddressCommand retrieveCommand =
+            new RetrievePublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(), IDA.getName().toString());
+
+        List<String> personsDetails = Collections.emptyList();
+        String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
+            personsDetails.size(), String.join("\n", personsDetails));
+
+        assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
+    }
+
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        RetrievePublicAddressCommand command = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        assertEquals(command, command);
+    }
+
+    @Test
+    public void equals_sameValues_returnsTrue() {
+        RetrievePublicAddressCommand command1 = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        RetrievePublicAddressCommand command2 = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        assertEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_differentLabel_returnsFalse() {
+        RetrievePublicAddressCommand command1 = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        RetrievePublicAddressCommand command2 = new RetrievePublicAddressCommand(
+            "mywallet", "John", Network.BTC);
+        assertNotEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_differentName_returnsFalse() {
+        RetrievePublicAddressCommand command1 = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        RetrievePublicAddressCommand command2 = new RetrievePublicAddressCommand(
+            "MyWallet", "john", Network.BTC);
+        assertNotEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_differentNetwork_returnsFalse() {
+        RetrievePublicAddressCommand command1 = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        RetrievePublicAddressCommand command2 = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.ETH);
+        assertNotEquals(command1, command2);
+    }
+
+    @Test
+    public void equals_nullObject_returnsFalse() {
+        RetrievePublicAddressCommand command = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        assertNotEquals(null, command);
+    }
+
+    @Test
+    public void equals_differentClass_returnsFalse() {
+        RetrievePublicAddressCommand command = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        assertNotEquals("Not a RetrievePublicAddressCommand", command);
+    }
+
+    @Test
+    public void toString_returnsCorrectString() {
+        RetrievePublicAddressCommand command = new RetrievePublicAddressCommand(
+            "MyWallet", "John", Network.BTC);
+        String expectedString = new ToStringBuilder(command)
+            .add("label", "MyWallet")
+            .add("name", "John")
             .add("network", Network.BTC)
-            .add("label", "wallet1")
             .toString();
-        assertEquals(expected, retrieveCommand.toString());
+        assertEquals(expectedString, command.toString());
     }
-
 
 }

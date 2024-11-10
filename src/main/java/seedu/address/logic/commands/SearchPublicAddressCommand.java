@@ -4,10 +4,12 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.INDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
+import static seedu.address.model.addresses.PublicAddress.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 import static seedu.address.model.addresses.PublicAddress.validatePublicAddress;
 
 import java.util.List;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Person;
@@ -26,13 +28,11 @@ public class SearchPublicAddressCommand extends Command {
         + "Parameters: PUBLIC_ADDRESS (must be a string) " + PREFIX_PUBLIC_ADDRESS
         + "PUBLIC_ADDRESS\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_PUBLIC_ADDRESS + "0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2";
+        + PREFIX_PUBLIC_ADDRESS + "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA";
 
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND = "Successfully found Persons with public "
         + "address inputted: %1$s";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND =
-        "Can't find any Person with public address"
-            + " inputted: %1$s";
+
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUBSTRING_SUCCESS = "Successfully found Persons with "
         + "public "
         + "address containing the substring inputted:\n%1$s";
@@ -40,10 +40,6 @@ public class SearchPublicAddressCommand extends Command {
         "Can't find any Person with public address of"
             + " containing the "
             + "public substring inputted:\n%1$s";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR =
-        "Public Address contains only alphanumeric characters";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG =
-        "Public Address length should be around 40 characters";
 
 
     public static final String MESSAGE_ARGUMENTS = "Public Address: %1$s";
@@ -57,8 +53,6 @@ public class SearchPublicAddressCommand extends Command {
     public SearchPublicAddressCommand(String publicAddressString) {
         requireAllNonNull(publicAddressString);
 
-        validatePublicAddress(publicAddressString);
-
 
         this.publicAddressString = publicAddressString;
 
@@ -66,7 +60,14 @@ public class SearchPublicAddressCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
+
+        try {
+            validatePublicAddress(publicAddressString);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
+        }
+
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -92,7 +93,7 @@ public class SearchPublicAddressCommand extends Command {
                     publicAddressString))
                 .reduce((a, b) -> a + "\n" + b)
                 .orElse("");
-            output = String.format(message, publicAddressString + "\n" + personsDetails);
+            output = String.format(message, publicAddressString.toLowerCase() + "\n" + personsDetails);
         } else {
             String message = MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
             output = String.format(message, publicAddressString);

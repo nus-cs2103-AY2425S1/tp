@@ -31,8 +31,8 @@ public class FilterByNetworkCommandTest {
     public void execute_invalidNetwork_noPersonsFound() {
         model.addPerson(JOE);
 
-        FilterByNetworkCommand command = new FilterByNetworkCommand(Network.ETH);
-        String expectedMessage = String.format(FilterByNetworkCommand.MESSAGE_FILTER_FAIL, Network.ETH);
+        FilterByNetworkCommand command = new FilterByNetworkCommand(Network.SOL);
+        String expectedMessage = String.format(FilterByNetworkCommand.MESSAGE_FILTER_FAIL, Network.SOL);
 
         assertCommandFailure(command, model, expectedMessage);
     }

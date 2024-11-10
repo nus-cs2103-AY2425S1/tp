@@ -1,17 +1,14 @@
 ---
 
 layout: default.md
-
 title: "User Guide"
-
 pageNav: 3
-
 ---
 
 # DLTbook User Guide
 
 <box type="info" seamless>
-DLTbook is a desktop application that helps you manage your contacts and their blockchain (DLT) addresses. It combines an easy-to-use interface with powerful command-line features, making it perfect for both beginners and advanced users.
+DLTbook is a desktop application that helps you manage your contacts and their Distributed Ledger Technology (DLT) public addresses. It combines an easy-to-use interface with powerful command-line features, making it perfect for both beginners and advanced users.
 </box>
 
 
@@ -27,7 +24,9 @@ If terms like 'command line', 'terminal', or 'Java' sound unfamiliar to you, don
 - 🛠️ [Troubleshooting Guide](#common-errors) for known issues
 
 ### Experienced Users
-If you're already familiar with DLTbook, jump straight to [Quick Start](#quick-start) for a quick overview on basic commands.
+
+If you're already familiar with DLTbook, jump straight to [Quick Start](#quick-start) for a quick overview on basic
+commands.
 Go to the [Features](#features) section for a detailed guide on all available commands and capabilities.
 </panel>
 
@@ -51,11 +50,12 @@ Not sure if you have Java? Check out [Setup Guide](#setup-guide)
 
 3. **Start**: Open Terminal and run `java -jar DLTbook.jar`
 
-4. **Try it Out**: If you are an experienced user, skip to [Try It Out!](#try-it-out) for a guide of the basic commands or go to [Features](#features) for a detailed list of all commands.
+4. **Try it Out**: If you are an experienced user, skip to [Try It Out!](#try-it-out) for a guide of the basic commands
+   or go to [Features](#features) for a detailed list of all commands.
 
 ## Beginner's Guide
 
-<panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded> 
+<panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded>
 
 _If you're new to DLTbook or the concept of Distributed Ledger Technology (DLT), this guide will walk you through the
 basics. Here, we'll cover key concepts, important terminology, and guide you through the first steps in using DLTbook._
@@ -65,7 +65,7 @@ basics. Here, we'll cover key concepts, important terminology, and guide you thr
 
 1. **Understanding the Basics**
 
-DLTbook is a powerful tool that helps you manage contacts and blockchain addresses.
+DLTbook is a powerful tool that helps you manage contacts and DLT public addresses.
 If you're not familiar with these terms, don't worry—this section breaks down the essential concepts.
 <box type="info" seamless>
 
@@ -76,11 +76,11 @@ Unlike traditional databases, DLTs do not have a central administrator, which me
 decentralized.
 </box>
 
-<box type="tip" seamless> 
+<box type="tip" seamless>
 
 **Why is DLTBook useful in managing contacts?**
 
-DLTbook simplifies the task of managing contacts linked with blockchain addresses,
+DLTbook simplifies the task of managing contacts linked with DLT public addresses,
 ensuring secure and efficient interaction with distributed networks.
 </box>
 
@@ -113,7 +113,7 @@ Here’s how you can start using DLTbook:
 
 1. Follow our [setup guide](#setup-guide) to install Java and DLTbook on your computer.
 
-2. Open the application and [try](#try-it-out) out some basic commands to manage contacts and blockchain addresses.
+2. Open the application and [try](#try-it-out) out some basic commands to manage contacts and DLT public addresses.
 
 3. If you encounter any issues, refer to our [troubleshooting guide](#known-issues) or [FAQ section](#faq) for help.
 
@@ -189,7 +189,7 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
    ```
 
 
-3. **Add a blockchain address**
+3. **Add a DLT public address**
 
    ```
    addpa c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2
@@ -199,7 +199,7 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 4. **Retrieves the public address of a contact**
 
    ```
-   retrievepa 1 c/BTC l/wallet1
+   retrievepa l/wallet1 c/BTC n/Travis
    ```
 
 
@@ -214,13 +214,6 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
     ```
     exit
     ```
-    * `addpa c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` : Adds a
-      public address to a contact
-
-    * `editpa 1 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`: Edits an existing public address of a
-      contact
-
-    * `retrievepa 1 c/BTC l/wallet1` : Retrieves the public address of a contact
 
 <br>
 
@@ -232,41 +225,36 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 
 - Check our [Troubleshooting Guide](link-to-troubleshooting) if you run into any issues
 
-<box type="tip" seamless>
-
-
-**Tip:** 💡 Type commands in any case - they're not case-sensitive
-
-</box>
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 
-Ready to learn more? Check out the [Features](#features) section below for a complete guide to all DLTbook commands and capabilities.
+Ready to learn more? Check out the [Features](#features) section below for a complete guide to all DLTbook commands and
+capabilities.
 <br>
 <br>
+
 ## Features
 
 ### Command Overview
 
 DLTbook supports the following commands:
 
-Command | Description
---------|------------
-[**Help**](#viewing-help-help) | Shows a message explaining how to access the help page
-[**Add**](#adding-a-person-add) | Adds a person to the address book
-[**List**](#listing-all-persons-list) | Shows a list of all persons in the address book
-[**Edit**](#editing-a-person-edit) | Edits an existing person in the address book
-[**Find**](#locating-persons-by-name-find) | Finds persons whose names contain any of the given keywords
-[**Delete**](#deleting-a-person-delete) | Deletes the specified person from the address book
-[**Clear**](#clearing-all-entries-clear) | Clears all entries from the address book
-[**Exit**](#exiting-the-program-exit) | Exits the program
-[**Add Public Address**](#adding-a-public-address-to-a-contact-addpa) | Adds a public address to a contact
-[**Edit Public Address**](#editing-a-public-address-of-a-contact-editpa) | Edits an existing public address of a contact
-[**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact
-[**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa) | Deletes the public address of a contact
-[**Public Address Search**](#searching-for-a-public-address-publicaddresssearch) | Searches for a public address
+ Command                                                                             | Description                                                                     
+-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------
+ [**Help**](#viewing-help-help)                                                      | Shows a message explaining how to access the help page                          
+ [**Add**](#adding-a-person-add)                                                     | Adds a person to the address book                                               
+ [**List**](#listing-all-persons-list)                                               | Shows a list of all persons in the address book                                 
+ [**Edit**](#editing-a-person-edit)                                                  | Edits an existing person in the address book                                    
+ [**Find**](#locating-persons-by-name-find)                                          | Finds persons whose names contain any of the given keywords                     
+ [**Delete**](#deleting-a-person-delete)                                             | Deletes the specified person from the address book                              
+ [**Clear**](#clearing-all-entries-clear)                                            | Clears all entries from the address book                                        
+ [**Exit**](#exiting-the-program-exit)                                               | Exits the program                                                               
+ [**Add Public Address**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                              
+ [**Edit Public Address**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                   
+ [**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact                                     
+ [**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                         
+ [**Search Public Address**](#searching-for-a-public-address-publicaddresssearch)    | Searches for a public address                                                   
+ [**Filter**](#filtering-persons-by-public-addresses-network-filter)                 | Filters out a list of people with the public addresses of the specified network 
 
 <box type="info" seamless>
 
@@ -284,16 +272,17 @@ Command | Description
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
-<br>
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </box>
+  <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -399,7 +388,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-  
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -430,9 +419,7 @@ Examples:
 
 Adds a public address to a contact.
 
-
-Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
-
+Format: `addpa INDEX c/NETWORK l/LABEL pa/PUBLIC_ADDRESS`
 
 * Adds a public address to a contact at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list.
@@ -440,13 +427,23 @@ Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
 * The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
   `SOL`, etc.).
+    * This field is not case-sensitive and will be converted to UPPERCASE.
 
-* The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
+* The `LABEL` parameter specifies the wallet name to which the public address belongs.
+    * This field is not case-sensitive and will be stored as is.
 
-* The `PUBLIC_ADDRESS` parameter specifies the public address to be added, this fields is not cap sensitive.
+* The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
+    * This field is not case-sensitive and will be converted to lowercase.
 
 Examples:
-* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a the first contact on the list `Alex Yeoh` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+
+* `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address
+  to the first contact on the list `Alex Yeoh` under the ETH network with the wallet name `wallet1` and the public
+  address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
+
+* `addpa 4 c/BTC l/savings_wallet pa/0x71C7656EC7ab88b098defB751B7401B5f6d8976F` adds a public address to the fourth
+  contact on the list `David Li` under the BC network with the wallet name `savings_wallet` and the public address
+  `0x71C7656EC7ab88b098defB751B7401B5f6d8976F`.
 
 ![img.png](img.png)
 
@@ -481,7 +478,6 @@ WALLET_NAME is NOT case-sensitive.
 
 * `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
   Changes the third contact's BTC public address labelled `Daily wallet` to `14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`.<br />
-  TODO: Example output
 
 * `editpa 3 c/BTC l/daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
   **DOES NOT** change the third contact's BTC public address labelled `Daily wallet` as `WALLET_NAME` is
@@ -495,25 +491,32 @@ WALLET_NAME is NOT case-sensitive.
 
 Retrieves the public addresses of a contact.
 
-Format: `retrievepa INDEX c/NETWORK [l/WALLET_NAME]`
+Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
-* Retrieves the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
-  displayed person list.
-  The index **must be a positive integer** 1, 2, 3, …​
+* `WALLET_NAME` parameter is compulsory and specifies the label (or part of the label) of the public address(es) to be
+  retrieved.
+  It is **case-insensitive**.
 
-* The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
-  `SOL`, `SUI`, etc.).
+* `NETWORK` parameter is optional and specifies the ticker name for each network and should be in all CAPS.<br />
   Allowed values: `BTC|ETH|SOL`.
 
-* The `WALLET_NAME` is optional and specifies the wallet name to which the public address belongs.
+* `PERSON_NAME` parameter is optional and specifies the name (or part of the name) of the contact(s) whose addresses
+  should be retrieved.
+  It is **case-insensitive**.
 
 #### Examples
 
-* `retrievepa 3 c/BTC`<br />
-  Retrieves all the BTC public addresses of the third contact.<br />
-  TODO: Example output
-* `retrievepa 3 c/BTC l/Daily wal`<br />
-  Retrieves all the BTC public addresses of the third contact which label contains "daily wal" (case-insensitive).
+* `retrievepa l/MyWallet`<br />
+  Retrieves all public addresses with labels containing "MyWallet" for all contacts and networks.
+
+* `retrievepa l/Daily c/BTC`<br />
+  Retrieves all BTC public addresses with labels containing "Daily" for all contacts.
+
+* `retrievepa l/Savings n/John`<br />
+  Retrieves all public addresses with labels containing "Savings" for contacts whose names contain "John".
+
+* `retrievepa l/Business c/ETH n/Alice`<br />
+  Retrieves all ETH public addresses with labels containing "Business" for contacts whose names contain "Alice".
 
 <br>
 
@@ -562,6 +565,30 @@ Examples:
 * `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` searches for a public
   address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the contact and wallet to
   which it belongs.
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Filtering persons by public addresses network : `filter`
+
+Filters out a list of people with the public addresses of the specified network.
+
+Format: `filter c/NETWORK`
+
+<box type="tip" seamless>
+
+The fields are not cap sensitive.
+</box>
+
+* Filters out a list of people with the public addresses of the `NETWORK` provided.
+
+* The `NETWORK` parameter specifies the public addresses network to be filtered.
+
+Examples:
+
+* `filter c/BTC` filters a list of people with the public addresses of `BTC` and
+  displays it with their respective list number.
 
 <br>
 
@@ -621,8 +648,6 @@ the data of your previous AddressBook home folder.
 
 ## Common Errors
 
-
-
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
@@ -637,18 +662,19 @@ the data of your previous AddressBook home folder.
 
 ## Command summary
 
- Action                      | Format, Examples                                                                                                                                                                     
------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                
- **Clear**                   | `clear`                                                                                                                                                                              
- **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                  
- **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                          
- **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                           
- **List**                    | `list`                                                                                                                                                                               
- **Help**                    | `help`                                                                                                                                                                               
- **Exit**                    | `exit`                                                                                                                                                                               
- **Add Public Address**      | `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` 
- **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`                                                
- **Retrieve Public Address** | `retrievepa INDEX c/NETWORK [l/WALLET_NAME]`<br> e.g., `retrievepa 3 c/BTC l/Daily wallet`                                                                                           
- **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                               
- **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`                                                              
+| Action                      | Format, Examples                                                                                                                                                                     |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`               |
+| **Clear**                   | `clear`                                                                                                                                                                              |
+| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                  |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                         |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                           |
+| **List**                    | `list`                                                                                                                                                                               |
+| **Help**                    | `help`                                                                                                                                                                               |
+| **Exit**                    | `exit`                                                                                                                                                                               |
+| **Add Public Address**      | `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` |
+| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`                                                |
+| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                                 |
+| **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                               |
+| **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`                                                              |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                                          |

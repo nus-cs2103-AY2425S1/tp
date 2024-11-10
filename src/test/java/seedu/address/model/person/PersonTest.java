@@ -13,6 +13,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.IDA;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_SOL_MAIN_STRING;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,8 +27,6 @@ import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
 
-    private static final String VALID_BTC_ADDRESS_1 = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
-    private static final String VALID_BTC_ADDRESS_2 = "34qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
 
     private Person person;
     private PublicAddress btcAddress1;
@@ -33,16 +34,20 @@ public class PersonTest {
 
     @BeforeEach
     public void setUp() {
-        btcAddress1 = PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "btcLabel1");
-        btcAddress2 = PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_2, "btcLabel2");
+        btcAddress1 = PublicAddressFactory.createPublicAddress(
+            Network.BTC, VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "btcLabel1");
+        btcAddress2 = PublicAddressFactory.createPublicAddress(
+            Network.BTC, VALID_PUBLIC_ADDRESS_BTC_SUB_STRING, "btcLabel2");
 
-        person = new PersonBuilder(IDA).withPublicAddresses(btcAddress1, btcAddress2).build();
+        person = new PersonBuilder(IDA).withPublicAddresses(
+            btcAddress1, btcAddress2).build();
     }
 
     @Test
     public void withUpdatedPublicAddress_existingNetwork_updatesAddress() {
         PublicAddress newBtcAddress =
-            PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_2, "btcLabel1");
+            PublicAddressFactory.createPublicAddress(
+                Network.BTC, VALID_PUBLIC_ADDRESS_BTC_SUB_STRING, "btcLabel1");
         Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
 
         assertEquals(2, updatedPerson.getPublicAddressesComposition()
@@ -58,7 +63,8 @@ public class PersonTest {
     @Test
     public void withUpdatedPublicAddress_existingNetworkCapitaliseLabel_returnsDifferentPerson() {
         PublicAddress newBtcAddress =
-            PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "BTCLABEL1");
+            PublicAddressFactory.createPublicAddress(
+                Network.BTC, VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "BTCLABEL1");
         Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
 
         assertNotEquals(person, updatedPerson);
@@ -67,7 +73,8 @@ public class PersonTest {
     @Test
     public void withUpdatedPublicAddress_existingNetworkNewLabel_returnsDifferentPerson() {
         PublicAddress newBtcAddress =
-            PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "newBtcLabel");
+            PublicAddressFactory.createPublicAddress(
+                Network.BTC, VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "newBtcLabel");
         Person updatedPerson = person.withAddedPublicAddress(newBtcAddress);
 
         assertNotEquals(person, updatedPerson);
@@ -75,7 +82,8 @@ public class PersonTest {
 
     @Test
     public void withUpdatedPublicAddress_newNetwork_returnsDifferentPerson() {
-        PublicAddress newAddress = PublicAddressFactory.createPublicAddress(Network.SOL, "solAddress", "solLabel");
+        PublicAddress newAddress = PublicAddressFactory.createPublicAddress(
+            Network.SOL, VALID_PUBLIC_ADDRESS_SOL_MAIN_STRING, "solLabel");
         Person updatedPerson = person.withAddedPublicAddress(newAddress);
 
         assertNotEquals(person, updatedPerson);
@@ -91,7 +99,8 @@ public class PersonTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+            person.getTags().remove(0));
     }
 
     @Test
@@ -103,7 +112,8 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+            .withEmail(VALID_EMAIL_BOB)
             .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
