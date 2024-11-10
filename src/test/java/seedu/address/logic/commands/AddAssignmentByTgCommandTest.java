@@ -17,7 +17,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.assignment.*;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.Deadline;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.AssignmentBuilder;

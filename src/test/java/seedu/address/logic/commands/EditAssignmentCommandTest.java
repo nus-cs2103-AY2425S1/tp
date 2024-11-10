@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.DEADLINE_C;
 import static seedu.address.testutil.TypicalAssignments.GRADE_90;
 import static seedu.address.testutil.TypicalAssignments.GRADE_NULL;
@@ -18,7 +20,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.assignment.*;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.AssignmentQuery;
+import seedu.address.model.assignment.Deadline;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
@@ -186,17 +193,21 @@ class EditAssignmentCommandTest {
         Name name2 = new Name("John Doe");
         StudentNumber studentNumber1 = new StudentNumber("A1234567L");
         StudentNumber studentNumber2 = new StudentNumber("A1234568M");
-        AssignmentQuery assignmentQuery1 = new AssignmentQuery(new Assignment(assignmentName1, new Deadline("2024-10-09"),
+        AssignmentQuery assignmentQuery1 = new AssignmentQuery(new Assignment(assignmentName1,
+                new Deadline("2024-10-09"),
                 new Status("N"), new Grade("NULL")));
-        AssignmentQuery assignmentQuery2 = new AssignmentQuery(new Assignment(assignmentName2, new Deadline("2024-10-10"),
+        AssignmentQuery assignmentQuery2 = new AssignmentQuery(new Assignment(assignmentName2,
+                new Deadline("2024-10-10"),
                 new Status("N"), new Grade("NULL")));
 
         EditAssignmentCommand command1 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1);
         EditAssignmentCommand command2 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1);
         EditAssignmentCommand command3 = new EditAssignmentCommand(name1, assignmentName2, assignmentQuery1);
         EditAssignmentCommand command4 = new EditAssignmentCommand(name2, assignmentName1, assignmentQuery1);
-        EditAssignmentCommand command5 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1, studentNumber1);
-        EditAssignmentCommand command6 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1, studentNumber2);
+        EditAssignmentCommand command5 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1,
+                studentNumber1);
+        EditAssignmentCommand command6 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1,
+                studentNumber2);
         EditAssignmentCommand command7 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery2);
 
         // Same object
