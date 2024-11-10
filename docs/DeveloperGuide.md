@@ -721,3 +721,16 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+**Team size**: 5
+
+1. **Make find command for searching module-role more general, such that user can find all contacts with roles related to a specified module.
+(For example: `find r/CS2103T` finds all contacts related to CS2103T).** The current find command automatically assumes that user wants to search
+student role if only a module code is supplied to the find command, which may be counter-intuitive to some users.
+
+![point1 screenshot](images/Planned_Enhancements_Screenshots/Point1.png)
+(As shown in the screenshot, the result of `find r/CS1101S` only matches contacts with role **CS1101S Student**)
+
+This limitation is due to our current system design which forces a role type to be assigned to the search query for the find command to execute, we plan to adopt other ways
+of constructing the query to allow for more general search of module-role in the future.
