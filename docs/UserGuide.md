@@ -144,15 +144,15 @@ student contact details!
 **All** input fields **must** follow the following data formats:
 </box>
 
-| Field | Format |
-| :-----: | :----------------- |
+| Field | Format                                                                                                                                                                  |
+| :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `MATRICULATION_NUMBER` | must be a valid **NUS** matriculation number in the form `AxxxxxxxB`, where `A` is the fixed as 'A', `B` is any *uppercase* character, and `xxxxxxx` is any 7 integers. |
-| `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**. |
-| `PHONE_NUMBER` | must contain **numbers**, and it should be **at least 3 digits long**. |
-| `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm) |
-| `COURSE_CODE` | must be in the form `AAxxxxB` where `AA` is 2 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter. |
-| `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**. |
-| `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99. |
+| `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
+| `PHONE_NUMBER` | must only contain **numbers**, and it should be **at least 3 digits long**.                                                                                             |
+| `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm)                                                                         |
+| `COURSE_CODE` | must be in the form `AAxxxxB` where `AA` is 2 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                               |
+| `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
+| `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99.                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
