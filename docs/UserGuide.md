@@ -115,33 +115,30 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 ### Adding a contact: `add`
 
 This command adds a contact to CFG.
-There are 4 types of contacts: Volunteer, Donor, Partner, Person(default)
+There are 4 types of contacts: Volunteer, Donor, Partner, Person (default).
 
 Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
 - `ROLE` (Optional): Specifies the type of contact. If not provided, the contact will be added as a general `Person`.
 - `NAME`: The contact's full name (case-insensitive).
-- `PHONE_NUMBER`: The contact's phone number.
-- `EMAIL`: The contact's email address.
+- `PHONE_NUMBER`: The contact's phone number (Any length is allowed, accommodating 3-digit emergency numbers to 15-digit international numbers).
+- `EMAIL`: The contact's email address (Only **english** emails are currently supported).
 - `ADDRESS`: The contact's physical address.
-- `TAG` (Optional): Additional tags associated with the contact.
-- Role-specific fields(not required for `Person`)
-    - **Volunteer**: `h/HOURS` :required for volunteers, representing contributed hours.
-    - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
-    - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date. The
-      date should be in the **YYYY-MM-DD** format and must be a valid date (e.g., 2024-11-07).
+- `TAG` (Optional): Additional tags associated with the contact (A contact can have any number of tags, including none).
+- Role-specific fields (not required for `Person`)
+    - **Volunteer**: `h/HOURS` - Represents contributed hours.
+    - **Donor**: `d/DONATED_AMOUNT` - Represents total donation amount in thousands of USD.
+    - **Partner**: `ped/PARTNERSHIP_END_DATE` - Represents the partnership's end date. Must be in the **YYYY-MM-DD** format and a valid date (e.g. 2024-11-07).
 
-Note:
-Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of
-`Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT`
-is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
-If the specified role does not match with the specified field, the add command will be deemed invalid.
+<box type="info" seamless>
 
+**Role-specific fields must match the specified role:**
+* For `Volunteer`, `h/HOURS` is required.
+* For `Donor`, `d/DONATED_AMOUNT` is required. 
+* For `Partner`, `ped/PARTNERSHIP_END_DATE` is required. 
+* If the specified role does not match the provided role-specific fields, the `add` command will be deemed invalid.
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
@@ -189,7 +186,7 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in CFG**.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
     * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.
@@ -258,7 +255,8 @@ Format: `sort [s/SORT_OPTION]`
 <box type="info" seamless>
 
 **Supported sort options include**:
-* `name`: Sorts contacts alphabetically by name [^1].
+* `name`: Sorts contacts alphabetically by name.
+  * For names with numbers, sorting follows **alphabetical order first**, then **numerical order** (e.g. "alfred" < "alfred2" < "ben").
 * `hours`: Sorts volunteers by hours contributed (in descending order).
 * `donations`: Sorts donors by donation amount (in descending order).
 * `end_date`: Sorts partners by partnership end date (from earliest to latest).
@@ -268,8 +266,6 @@ Examples:
 * `sort`
 * `sort s/name`
 * `sort s/hours`
-
-[^1]: For names with numbers, sorting follows **alphabetical order first**, then **numerical order** (e.g. "alfred" < "alfred2" < "ben")
 
 ### Creating a group : `createGroup`
 
