@@ -78,11 +78,14 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && showListings == otherCommandResult.showListings
-                && showClients == otherCommandResult.showClients;
+
+        boolean hasSameFeedBackToUser = feedbackToUser.equals(otherCommandResult.feedbackToUser);
+        boolean hasSameShowHelp = showHelp == otherCommandResult.showHelp;
+        boolean hasSameExit = exit == otherCommandResult.exit;
+        boolean hasSameShowListings = showListings == otherCommandResult.showListings;
+        boolean hasSameShowClients = showClients == otherCommandResult.showClients;
+
+        return hasSameFeedBackToUser && hasSameShowHelp && hasSameExit && hasSameShowListings && hasSameShowClients;
     }
 
     @Override
