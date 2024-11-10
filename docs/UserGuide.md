@@ -27,7 +27,6 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
 
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,8 +44,8 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 - Move the `.jar` file to where you want to store your UniLink data. This will be your 'home folder'.
 
 **4. Launch the app!**
-- Open up Command Prompt (for Windows) or Terminal (for Mac) and navigate to the home folder with `cd path-to/folder`
-    - E.g. If my jar file is in a folder called 'Contacts' in a folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
+- Open Command Prompt (for Windows) or Terminal (for Mac) and navigate to the folder where your JAR file is located. Use the cd command followed by the path to the folder. 
+    - E.g. If my jar file is in a folder called 'Contacts', which is inside another folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
 - Run UniLink by typing `java -jar UniLink.jar`
 - The app should open within a few seconds, showing some sample data that you can explore! 
 
@@ -66,8 +65,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
-
-1. For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
+- For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
