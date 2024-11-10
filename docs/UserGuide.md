@@ -115,19 +115,41 @@ Examples:
 
 Finds clients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+<box type="tip" seamless>
+    Parameters
+</box>
+
+1. `KEYWORD`: Is case-insensitive. e.g `hans` will match `Hans`
+   <br>
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
+
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* clients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find john betsy'](images/findJohnBetsyResult.png)
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:warning:</md></span>
+    Warnings:
+</box>
+
+- Only full words will be matched e.g. `Han` will not match `Hans`
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `find alex yu`
+<br>
+Output 1: ![result for 'find alex yu'](images/findalexyuResult.png)
+
 
 ### Deleting a client : `delete`
 
