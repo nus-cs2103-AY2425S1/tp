@@ -84,7 +84,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `HelpWindow` & `ViewPersonCard`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F11-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -493,17 +493,17 @@ ___
 
 ### Non-Functional Requirements
 
-1. The system should work on any mainstream OS as long as it has Java `17` or above installed. This primarily applies for windows, macos and linux
+1. The system should work on any mainstream OS as long as it has Java `17` or above installed. This primarily applies for Windows, MacOS and Linux.
 2. The system should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should not be bloated in application size
-5. All functionality should be well documented, with example usages
-6. The system must ensure that all contact information is stored accurately, and able to be retrieved without any loss of information or data corruption
-7. The system should be able to respond to user inputs within 2 seconds, under normal load conditions
-8. The program must include automated tests for all of its functionalities to ensure code reliability
-9. All code changes must be tracked with a Revision Control Software
-10. All code changes must be subject to peer review and approval by two separate team members (not including the owner of the change)
-11. All releases must have proper documentation
+4. Should not be bloated in application size.
+5. All functionality should be well documented, with example usages.
+6. The system must ensure that all contact information is stored accurately, and able to be retrieved without any loss of information or data corruption.
+7. The system should be able to respond to user inputs within 2 seconds, under normal load conditions.
+8. The program must include automated tests for all of its functionalities to ensure code reliability.
+9. All code changes must be tracked with a Revision Control Software.
+10. All code changes must be subject to peer review and approval by two separate team members (not including the owner of the change).
+11. All releases must have proper documentation.
 
 ### Glossary
 
