@@ -481,6 +481,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
     * 2a1. MediBase3 does not show any patients.
 
       Use case ends.
+
 ---
 
 **Use case:** UC7 - List Patients By Priority
@@ -490,7 +491,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 2. User provides the details required to list patients by priority
 3. MediBase3 lists patients' details by priority
 
-   Use case ends.
+   Use case ends
 
 **Extensions:**
 
@@ -499,6 +500,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
     * 2a1. MediBase3 does not show any patients.
 
       Use case ends.
+
 ---
  
 **Use case:** UC8 - Add Appointment
