@@ -82,6 +82,7 @@ This combination of efficiency and clarity ensures that you can manage your wedd
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/guest`, `t/guest t/photographer` etc.
 
+
 * Commands in WedLinker uses labels to specify the parameters, the labels are stated as such:
   * n/ Name
   * a/ Address
@@ -90,12 +91,17 @@ This combination of efficiency and clarity ensures that you can manage your wedd
   * t/ Tag
   * w/ Wedding
   * tk/ Task
+  * d/ Date
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Similarly, extraneous prefixes (e.g. n/ or tk/) for commands that do not take in those prefixes will be processed as part of other inputs.<br>
+  * e.g. when [adding a person](#adding-a-person-add), you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+  `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -120,13 +126,19 @@ Format: `list`
 
 Shows a list of all [Weddings](#wedding-features) in the WedLinker.
 
-Format: `list-weddings`
+Format: `list-weddings` or `lw`
 
 ### Listing all Tasks : `list-tasks`
 
 Shows a list of all [Tasks](#task-features) in the WedLinker
 
-Format: `list-tasks`
+Format: `list-tasks` or `ltasks`
+
+### Listing all Tags : `list-tags`
+
+Shows a list of all [Tags](#tag-features) in the WedLinker
+
+Format: `list-tags` or `ltags`
 
 ### Locating contacts by any field, similar to a search function: `find`
 
@@ -147,6 +159,7 @@ Format: `find LABEL KEYWORD [KEYWORD]…​`
 * `find t/friends` returns all Contacts tagged with 'guest' <br>
 ![result for `find t/guest](images/findCommandTag.png)
 * `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
+
 
 ### Clearing all entries : `clear`
 
@@ -197,11 +210,35 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDD
 
 To add a contact to WedLinker, type `add` followed by details such as the name, phone number, and email.
 
+* **People in Wedlinker cannot have the same names**
+  * So, if `John Doe` is already in Wedlinker, adding another `John Doe` with different details will not work
+* If the tags or weddings specified in the add command do not exist yet, they will be created
+
 Examples:
 * To add a contact named John Doe with a phone number of 98765432, email johnd@example.com, and address XYZ Floral Services, enter the command:
   * `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
 * To add a contact named Betsy Crowe with a phone number of 1234567, with tags Photographer and Guest, enter the command:
   * `add n/Betsy Crowe p/1234567 t/Photographer t/Guest`
+
+<box type="tip" seamless>
+
+**Tip:** 
+* Adding a person with tags or weddings that do not exist in Wedlinker will create all the tags and weddings!
+Created weddings will have the person automatically assigned to their guest lists.
+
+* A person can have any number of tags or weddings (including 0)
+
+* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
+</box>
+
+<box type="warning" seamless>
+
+**Warning:** Extraneous prefixes in the add command will be processed as part of other inputs.<br>
+* e.g. when adding a person, you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+`add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
+</box>
+
+
 
 ### Editing a person : `edit`
 
@@ -247,6 +284,26 @@ Examples:
   * First, enter the command: `find n/Betsy`
   * Then, enter the command: `delete 1` 
 
+### Locating contacts by any field, similar to a search function: `find`
+
+Finds all persons based on the specified keywords (case-insensitive) after the prefix representing the field, and displays them as a list with index numbers.
+
+Format: `find PREFIX KEYWORD [KEYWORD]…​`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
+* The search will return partial matches and full matches.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix.
+* Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
+
+* `find p/973` returns all Contacts whose phone number contains 973
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find n/alex n/david'](images/findCommandName.png)
+* `find t/friends` returns all Contacts tagged with 'guest' <br>
+  ![result for `find t/guest](images/findCommandTag.png)
+* `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
+
 ## Tag Features
 
 ### Adding a tag : `create-tag`
@@ -259,11 +316,14 @@ To create a tag, type `tag` followed by the name of the tag.
 
 * The `TAGNAME` is alphanumeric and can contain whitespaces.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
+
 * Multiple contacts can share the same tag.
+* Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag
 
 Examples:
 * To create a tag named `Florist`, enter the command:
     * `create-tag t/Florist`
+
 
 ### Assign tag to contact : `tag`
 
@@ -282,6 +342,11 @@ Examples:
     * `tag 1 t/Florist`
 * To assign a new tag named `Musician` (that doesn't currently exist) to the second person in the list, enter the command:
     * `tag 2 t/Musician f/`
+
+<box type="tip" seamless>
+
+**Tip:** To see all current tags, use the [list-tags](#listing-all-tags--list-tags) command
+</box>
 
 ### Unassign tag to contacts : `untag`
 

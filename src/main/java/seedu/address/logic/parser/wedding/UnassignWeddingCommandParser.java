@@ -6,16 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Wedding;
@@ -48,10 +46,10 @@ public class UnassignWeddingCommandParser implements Parser<UnassignWeddingComma
 
         try {
             // Parse the index from the preamble
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UnassignWeddingCommand.MESSAGE_USAGE), ive);
+            index = Index.oneBasedNoConstraints(Integer.parseInt(argMultimap.getPreamble().trim()));
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    UnassignWeddingCommand.MESSAGE_USAGE));
         }
 
         List<String> weddingValues = argMultimap.getAllValues(PREFIX_WEDDING);
@@ -69,7 +67,7 @@ public class UnassignWeddingCommandParser implements Parser<UnassignWeddingComma
         List<Wedding> weddings = weddingValues.stream()
                 .map(WeddingName::new)
                 .map(Wedding::new)
-                .collect(Collectors.toList());
+                .toList();
 
         return new UnassignWeddingCommand(index, new HashSet<>(weddings));
     }

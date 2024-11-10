@@ -122,6 +122,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getPerson(Person person) {
+        requireNonNull(person);
+        return addressBook.getPerson(person);
+    }
+
+    @Override
     public boolean hasVendor(Person person) {
         requireNonNull(person);
         return addressBook.hasVendor(person);
