@@ -114,13 +114,17 @@ public class AssignWeddingCommand extends Command {
             switch (type) {
             case "p1":
                 if (editedWedding.hasPartner1()) {
-                    model.getPerson(editedWedding.getPartner1()).removeWedding(wedding);
+                    Person modelPartner1 = model.getPerson(editedWedding.getPartner1());
+                    modelPartner1.removeWedding(wedding);
+                    model.setPerson(modelPartner1, modelPartner1);
                 }
                 editedWedding.setPartner1(model.getPerson(personToEdit));
                 break;
             case "p2":
                 if (editedWedding.hasPartner2()) {
-                    model.getPerson(editedWedding.getPartner2()).removeWedding(wedding);
+                    Person modelPartner2 = model.getPerson(editedWedding.getPartner2());
+                    modelPartner2.removeWedding(wedding);
+                    model.setPerson(modelPartner2, modelPartner2);
                 }
                 editedWedding.setPartner2(model.getPerson(personToEdit));
                 break;
