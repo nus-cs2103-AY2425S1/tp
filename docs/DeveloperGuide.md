@@ -169,11 +169,7 @@ or the claim amount not being calculated correctly.
 Adding of a claim ID can be added to many users. This will be fixed in a future version such that claim ID is unique across
 all clients.
 
-### 3. addClaim amount
-Claim amount can currently exceed 1 million. In future, a restriction will be placed on the claim amount such that if
-the claim amount is over 1 million, it will be rejected with an appropriate error message.
-
-### 4. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
+### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
 Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
 name or not. However, in future versions, we are planning to check if all details are the same before flagging it as a
 duplicate. This is because 2 people can share numbers, address and emails (eg a parent and child) or 2 clients can have
