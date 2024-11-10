@@ -16,32 +16,32 @@
 2. [**About**](#2-about)
 3. [**Starting HR Helper**](#3-starting-hr-helper)
 4. [**Features of HR Helper**](#4-features-of-hr-helper)
-   
-    4.1 [**Authentication**](#4-1-authentication)
-    
-    4.2 [**Viewing help**](#4-2-viewing-help-help)
 
-    4.3 [**Adding an employee**](#4-3-adding-an-employee-add)
+   4.1 [**Authentication**](#41-authentication-)
 
-    4.4 [**Listing all employees**](#4-4-listing-all-employees-list)
+   4.2 [**Viewing help**](#42-viewing-help--help)
 
-    4.5 [**Counting employees**](#4-5-counting-employees-count)
+   4.3 [**Adding an employee**](#43-adding-an-employee--add)
 
-    4.6 [**Editing an employee**](#4-6-editing-an-employee-edit)
-    
-    4.7 [**Locating employee by name**](#4-7-locating-employees-by-name-find)
+   4.4 [**Listing all employees**](#44-listing-all-employees--list)
 
-    4.8 [**Deleting an employee**](#4-8-deleting-an-employee-delete)
+   4.5 [**Counting employees**](#45-counting-employees--count)
 
-    4.9 [**Sorting employees**](#4-9-sorting-employees-sort)
+   4.6 [**Editing an employee**](#46-editing-an-employee--edit)
 
-    4.10 [**Favoriting an employee**](#4-10-favoriting-an-employee-favorite)
+   4.7 [**Locating employee by name**](#47-locating-employees-by-name--find)
 
-    4.11 [**Clearing all entries**](#4-11-clearing-all-entries-clear)
+   4.8 [**Deleting an employee**](#48-deleting-an-employee--delete)
 
-    4.12 [**Exiting HR Helper**](#4-12-exiting-hr-helper-exit)
+   4.9 [**Sorting employees**](#49-sorting-employees--sort)
 
-    4.13 [**Employee details window**](#4-13-employee-details-window)
+   4.10 [**Favoriting an employee**](#410-favoriting-an-employee--favorite)
+
+   4.11 [**Clearing all entries**](#411-clearing-all-entries--clear)
+
+   4.12 [**Exiting HR Helper**](#412-exiting-hr-helper--exit)
+
+   4.13 [**Employee details window**](#413-employee-details-window)
 
 5. [**Command Summary**](#5-command-summary)
 6. [**FAQ**](#6-faq)
@@ -186,7 +186,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/true d/Operations l/12`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Road p/1234567 t/lazy f/true d/Marketing l/10`
 
-<img src = "" width=500 alt="output">
+<img src = "images/add.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
@@ -208,7 +208,7 @@ Format: `list`
 Example:
 * `list` shows all employees.
 
-<img src = "" width=500 alt="output">
+<img src = "images/list.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
@@ -234,7 +234,7 @@ Examples:
 * `count`
 * `count tag/Communications`
 
-<img src = "" width=500 alt="output">
+<img src = "images/count.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
@@ -264,7 +264,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
-<img src = "" width=500 alt="output">
+<img src = "images/edit.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
@@ -293,9 +293,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-<img src = "" width=500 alt="output">
+
+<img src = "images/find.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
@@ -322,7 +322,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd employee in HR Helper.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
-<img src = "" width=500 alt="output">
+<img src = "images/delete.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
@@ -349,7 +349,7 @@ Examples:
 * `sort friend` Sorts and displays all employees tagged as friend.
 * `sort friend family` Sorts and displays employees tagged as either friend or family.
 
-<img src = "" width=500 alt="output">
+<img src = "images/sort.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
@@ -369,8 +369,6 @@ Format: `favorite INDEX`
   
 <box type="tip" seamless>
 
-<img src = "images/favorite.png" width=500 alt="description">
-
 **Tip:** Use favorite for high-priority employees, making them easier to locate with filtering or sorting.
 </box>
 
@@ -378,7 +376,7 @@ Examples:
 * `list` followed by `favorite 2` favorites the 2nd employee in HR Helper.
 * `find Betsy` followed by `favorite 1` favorites the 1st employee in the results of the `find` command.
 
-<img src = "" width=500 alt="output">
+<img src = "images/favorite.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
@@ -400,7 +398,7 @@ Format: `clear`
 Examples:
 * `clear` resets the database in HR Helper.
 
-<img src = "" width=500 alt="output">
+<img src = "images/clear.png" width=500 alt="output">
 
 <box type="warning" seamless>
 
