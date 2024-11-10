@@ -101,15 +101,17 @@ Tags also only accepts a **maximum** of 30 characters.
 Notes on Command Formats:
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+(Commands are incomplete and are for illustrative purposes only)<br>
   e.g. `create v/ n/VENDOR_NAME`, `VENDOR_NAME` is a parameter which is specified by the user:
   * `create v/ n/Kimberly's Flowers`.
 
 <p>
 
 * Items in square brackets are **optional**.<br>
-  e.g. `e/ n/EVENT_NAME [t/TAG]` can be used as:
-  * `e/ n/Stagecraft Solutions t/backstage-crew` or as;
-  * `n/Stagecraft Solutions`.
+(Commands are incomplete and are for illustrative purposes only)<br>
+  e.g. `create e/ n/EVENT_NAME [t/TAG]` can be used as:
+  * `create e/ n/Stagecraft Solutions t/backstage-crew` or as;
+  * `create e/ n/Stagecraft Solutions`.
 
 <p>
 
@@ -179,7 +181,7 @@ Note:
     * Editing an item but providing no new values is invalid.
 * The existing values will be updated to the input values.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
-    * e.g. `edit v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be edited.
+    * e.g. `edit v/1 t/` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be edited.
 * When editing tags, the existing tags of the vendor/event will be **overridden**.
     * Tags cannot be added cumulatively.
     * You can remove all tags from a vendor/event by typing `t/` without specifying any tags after it.
@@ -206,7 +208,7 @@ Note:
 
 Examples:
 * `list` followed by `delete v/2` deletes the 2nd vendor in EventTory.
-* `find e/Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
+* `find e/ Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
 
 ### Listing Vendors & Events : `list`
 
@@ -257,8 +259,8 @@ Note:
 * If the specified vendor-event pair are already associated (assigned to each other), the operation will fail.
 
 Examples:
-* `view v/2` then `assign 1` will assign the 1st event to the current viewed vendor, which is the 2nd vendor.
-* `view e/1` then `assign 3` will assign the 3rd vendor to the current viewed event, which is the 1st event.
+* `view v/2` then `assign 1` will assign the 1st assignable event to the current viewed vendor, which is the 2nd vendor.
+* `view e/1` then `assign 3` will assign the 3rd assignable vendor to the current viewed event, which is the 1st event.
 
 ### Unassigning Vendors & Events: `unassign`
 
@@ -367,7 +369,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **View**     | `view v/INDEX` or `view e/INDEX`<br> e.g. `view v/1`                                                                                                                                                                                              |
 | **Assign**   | `assign INDEX` <br> e.g. `assign 1`                                                                                                                                                                                                               |
 | **Unassign** | `unassign INDEX` <br> e.g. `unassign 1`                                                                                                                                                                                                           |
-| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Catering Band`, `find e/ wedding banquet`                                                                                                   |
+| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Catering Band`, `find e/ wedding banquet`                                                                                                |
 | **Clear**    | `clear`                                                                                                                                                                                                                                           |
 | **Help**     | `help`                                                                                                                                                                                                                                            |
 | **Exit**     | `exit`                                                                                                                                                                                                                                            |
