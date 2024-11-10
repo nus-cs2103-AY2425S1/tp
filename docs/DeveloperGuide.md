@@ -961,7 +961,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting an order while all orders under a customer are being shown.
 
-    1. Prerequisites: List all customers using the `listorder 1` command with at least 1 order listed.
+    1. Prerequisites: List all orders using the `listorder 1` command with at least 1 order listed.
 
     2. Test case: `deleteorder 1`<br>
        Expected: First order is deleted from the list. Details of the deleted order shown in the status message.
@@ -1063,13 +1063,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `addresbook.json` file in the `data` folder.
 
-    2. Test case: Delete the `addresbook.json` file, run SellSavvy and exit using the `exit` command.<br>
+    2. Test case: Delete the `addresbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
        Expected: SellSavvy should create a new `addresbook.json` file with default data.
 
-    3. Test case: Delete the `data` folder together with the `addresbook.json` file, run SellSavvy and exit using the `exit` command.<br>
+    3. Test case: Delete the `data` folder together with the `addresbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
        Expected: SellSavvy should create a new `data` folder and a new `addresbook.json` file inside the folder with default data.
 
-    4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g., add a non-numeric character to one of the customer's phone number, run SellSavvy and exit using the `exit` command. 
+    4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g., add a non-numeric character to one of the customer's phone number. Then, run SellSavvy and exit using the `exit` command.<br>
        Expected: SellSavvy should discard all data in the file and start with an `addressbook.json` file with an empty person list.
 
 ## **Appendix: Planned Enhancements**
