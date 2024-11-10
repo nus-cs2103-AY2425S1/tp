@@ -1,5 +1,15 @@
 # HireMe User Guide
 
+## Welcome to HireMe!
+
+Thank you for choosing **HireMe** to simplify your internship journey.
+With so many positions to apply for, managing applications becomes a real challenge, on top of classes, projects, and exams.
+**HireMe** is here to keep you organised and focused on landing your dream internship.
+In this guide, new users will find everything you need to get started while experienced users can user the [command summary](#command-summary) as a quick reference. Let's dive in and make your internship search a little easier!
+
+*Use HireMe to get hired now!*
+## Overview
+
 HireMe is a **free desktop application that helps you manage your extensive list of internship applications.**
 
 * [Easy to use]
@@ -37,16 +47,16 @@ HireMe is a **free desktop application that helps you manage your extensive list
 
 1. Ensure you have Java `17` or above installed on your computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your HireMe.
+3. Copy the file to the folder you want to use as the _home folder_ for your HireMe.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hireme.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hireme.jar` command to run the application.<br>
 
     <br>A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br>
+5. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br>
    Some example commands you can try:
 
     * `/list` : Lists all your internship applications.
@@ -61,7 +71,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 
     * `/exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
