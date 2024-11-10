@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -40,7 +41,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 }
             } else {
                 // If it's not a name and not a valid index, throw an invalid index message
-                throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
         }
     }
