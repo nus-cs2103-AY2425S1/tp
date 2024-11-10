@@ -8,7 +8,7 @@ allowing them to focus more on patient care and less on paperwork. By seamlessly
 with the visual ease of a Graphical User Interface (GUI)**, PhysioPal provides a powerful and intuitive way to manage patient records,
 schedule appointments, and track payments all in one place. Designed to resolve common challenges—like long search times, duplicate records,
 and scheduling conflicts—PhysioPal simplifies client management with rapid commands for quick data entry and retrieval, duplicate checks and a clear
-snapshot of all patient details. PhysioPal supports only the English language, ensuring clear and consistent communication across all its features.
+snapshot of all patient details. **PhysioPal supports only the English language**, ensuring clear and consistent communication across all its features.
 The result is a faster, more organised workflow that enables physiotherapists to deliver an exceptional
 experience to their clients without being weighed down by administrative burdens.
 
