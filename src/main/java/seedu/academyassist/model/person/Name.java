@@ -10,15 +10,15 @@ import seedu.academyassist.commons.util.AppUtil;
  */
 public class Name {
 
+    private static final String SPECIAL_CHARACTERS = "-/'";
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabets and spaces. Names should not be blank and should not exceed 255 "
-                    + "characters long.";
+            "Names should not be blank and should be between 2 and 255 characters long. Names should only contain "
+                    + "alphabets, spaces and these special characters, excluding the parentheses, ("
+                    + SPECIAL_CHARACTERS + "). Names should start and end with an alphabet, and there should not be "
+                    + "more than one consecutive special characters.";
 
-    /*
-     * The first character of the name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "^[\\p{Alpha}][\\p{Alpha} ]{0,254}$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z](?!.*[" + SPECIAL_CHARACTERS + " ]{2})[a-zA-Z"
+            + SPECIAL_CHARACTERS + " ]{0,253}[a-zA-Z]$"; // Adapted from the help of ChatGPT
 
     public final String fullName;
 
@@ -30,7 +30,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         AppUtil.checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = name.toUpperCase();
     }
 
     /**

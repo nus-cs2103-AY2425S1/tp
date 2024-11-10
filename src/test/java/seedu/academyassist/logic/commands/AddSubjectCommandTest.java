@@ -75,7 +75,7 @@ public class AddSubjectCommandTest {
         AddSubjectCommand addSubjectCommand = new AddSubjectCommand(new StudentId("S00008"), subjects);
         CommandResult commandResult = addSubjectCommand.execute(modelStub);
         assertEquals(String.format(AddSubjectCommand.MESSAGE_SUCCESS, "S00008",
-                        "Amy Bee", subjects.toString()
+                        "AMY BEE", subjects.toString()
                                 .replace("[", "").replace("]", "")),
                 commandResult.getFeedbackToUser());
 
@@ -92,7 +92,7 @@ public class AddSubjectCommandTest {
         AddSubjectCommand addSubjectCommand = new AddSubjectCommand(new StudentId("S00008"), subjects);
         CommandResult commandResult = addSubjectCommand.execute(modelStub);
         assertEquals(String.format(AddSubjectCommand.MESSAGE_SUCCESS, "S00008",
-                "Amy Bee", subjects.toString()
+                "AMY BEE", subjects.toString()
                         .replace("[", "").replace("]", "")),
                 commandResult.getFeedbackToUser());
 

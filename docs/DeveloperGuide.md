@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete S00001`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/ui/Ui.java).
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -88,15 +88,15 @@ Certain components will require the instance of the `Model` itself. For example,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete S00001")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete S00001` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -118,7 +118,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -133,7 +133,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="750" />
 
@@ -158,11 +158,11 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedAcademyAssist`. It extends `AcademyAssist` with an undo/redo history, stored internally as an `academyAssistStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAcademyAssist#commit()` — Saves the current address book state in its history.
-* `VersionedAcademyAssist#undo()` — Restores the previous address book state from its history.
-* `VersionedAcademyAssist#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAcademyAssist#commit()` — Saves the current academy assist state in its history.
+* `VersionedAcademyAssist#undo()` — Restores the previous academy assist state from its history.
+* `VersionedAcademyAssist#redo()` — Restores a previously undone academy assist state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAAcademyAssist()`, `Model#undoAcademyAssist()` and `Model#redoAcademyAssist()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitAcademyAssist()`, `Model#undoAcademyAssist()` and `Model#redoAcademyAssist()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
@@ -178,11 +178,11 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAcademyAssist()`, so the address book state will not be saved into the `academyAssistStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAcademyAssist()`, so the academy assist state will not be saved into the `academyAssistStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAcademyAssist()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAcademyAssist()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous academy assist state, and restores the academy assist to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -203,17 +203,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAcademyAssist()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAcademyAssist()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the academy assist to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `academyAssist.size() - 1`, pointing to the latest address book state, then there are no undone AcademyAssist states to restore. The `redo` command uses `Model#canRedoAcademyAssist()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `academyAssistStateList.size() - 1`, pointing to the latest academy assist state, then there are no undone AcademyAssist states to restore. The `redo` command uses `Model#canRedoAcademyAssist()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAcademyAssist()`, `Model#undoAcademyAssist()` or `Model#redoAcademyAssist()`. Thus, the `academyAssistStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the academy assist, such as `list`, will usually not call `Model#commitAcademyAssist()`, `Model#undoAcademyAssist()` or `Model#redoAcademyAssist()`. Thus, the `academyAssistStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAcademyAssist()`. Since the `currentStatePointer` is not pointing at the end of the `academyAssist`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAcademyAssist()`. Since the `currentStatePointer` is not pointing at the end of the `academyAssistStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -225,7 +225,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire academy assist.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -264,8 +264,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 * people who work in management/administration of tuition centres
-* has a need to manage a significant number of staff/students
-* tuition centre managed is of small to medium size (roughly a few hundred students)
+* manages a tuition centre of small to medium size
 
 **Value proposition**: Centralizes contact details, tracks student data, maintains a teacher directory, and offers functions that improve administrative efficiency and organization for a tuition centre.
 
