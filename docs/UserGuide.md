@@ -217,7 +217,7 @@ Notes:
 * Any extra information provided in between flags and parameters will be ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/Jane`
 * The `Name` keyword search is case-insensitive. e.g. `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
-* Contacts matching any keywords in all fields will be returned (i.e. `AND` search). e.g. `list -c n/Jane Doe a/Blk 123` will list all clients with names containing **ANY** of `Jane` or `Doe` **AND** address containing **ANY** of `Blk` or `123`.
+* Contacts matching all filters will be returned (i.e. `AND` search). e.g. `list -c n/Jane Doe a/Blk 123` will list all clients with names containing **ANY** of `Jane` or `Doe` **AND** address containing **ANY** of `Blk` or `123`.
 * Refer to the specifications of the parameters [here](#parameters).
 
 <box type="tip" header="**Tip:**" >
