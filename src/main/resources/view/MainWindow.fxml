@@ -67,7 +67,7 @@
         </HBox>
 
         <!-- Status bar at the bottom -->
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER">
+        <StackPane fx:id="statusBarPlaceholder" VBox.vgrow="NEVER">
         </StackPane>
       </VBox>
     </Scene>
