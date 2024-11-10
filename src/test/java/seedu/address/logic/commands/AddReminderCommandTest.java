@@ -63,9 +63,11 @@ public class AddReminderCommandTest {
         Person validPerson = new PersonBuilder().build();
         Reminder reminder = new Reminder("10-10-2025", "test", validPerson.getName());
         AddReminderCommand addReminderCommand = new AddReminderCommand(Index.fromOneBased(1), "10-10-2025", "test");
-        AddReminderCommandTest.ModelStub modelStub = new AddReminderCommandTest.ModelStubWithReminder(validPerson, reminder);
+        AddReminderCommandTest.ModelStub modelStub = new AddReminderCommandTest.ModelStubWithReminder(
+                validPerson, reminder);
 
-        assertThrows(CommandException.class, "This reminder already exists.", () -> addReminderCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                "This reminder already exists.", () -> addReminderCommand.execute(modelStub));
     }
 
     @Test
