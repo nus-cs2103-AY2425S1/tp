@@ -24,7 +24,6 @@ public class DesiredRoleTest {
         assertFalse(DesiredRole.isValidDesiredRole(" ")); // spaces only
 
         // invalid desired role (e.g. too short, special characters, etc.)
-        assertFalse(DesiredRole.isValidDesiredRole("12")); // too short
         assertFalse(DesiredRole.isValidDesiredRole("Software@Engineer")); // special character
 
         // valid desired role
@@ -52,6 +51,8 @@ public class DesiredRoleTest {
 
         // different values -> returns false
         assertFalse(desiredRole.equals(new DesiredRole("Data Scientist")));
+
+        assertTrue(DesiredRole.isValidDesiredRole("2")); //For one character
     }
 
     @Test
