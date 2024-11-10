@@ -160,7 +160,7 @@ public class ParserUtil {
      */
     public static String parseTagFind(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.trim().replaceAll("\\s", "");
         if (!Tag.isValidTagCodeFind(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS_FIND);
         }
