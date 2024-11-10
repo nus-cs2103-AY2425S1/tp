@@ -18,7 +18,7 @@
 - **Libraries Utilized**:
     - [JavaFX](https://openjfx.io/): Used for building a responsive graphical user interface.
     - [Jackson](https://github.com/FasterXML/jackson): Used for JSON data processing.
-    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability. <br>
+    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability.
 
 - **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
 
@@ -713,14 +713,14 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Customer with name `Yu Sutong` or other similar name does not already exist in the address book.
 
     2. Test case: `addcustomer n/Yu Sutong t/vvip t/vvip e/su@example.com a/Newgate Prison p/12345678` <br>
-       Expected: The customer is successfully added with one of the duplicated tag ignored. Details of the added customer shown in the status message.
+       Expected: The customer is successfully added with one of the duplicated tags ignored. Details of the added customer shown in the status message.
 
 6. Adding a customer with [similar tags](#similar).
 
     1. Prerequisites: Customer with name `Foo Chao` or other similar name does not already exist in the address book.
 
     2. Test case: `addcustomer n/Foo Chao t/VVIP t/vvip e/su@example.com a/69, Sembawang Road. #01-01  p/12345678` <br>
-       Expected: The customer is successfully added with both similar tags. A warning and details of the added customer shown in the status message.
+       Expected: The customer is successfully added with both similar tags accepted. A warning and details of the added customer shown in the status message.
 
 7. Adding a customer with missing compulsory field.
 
@@ -806,7 +806,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least one customer is listed.
 
     2. Test case: `editcustomer 1 t/Friends t/friends` <br>
-       Expected: The customer is successfully edited with both similar tags. A warning and details of the added customer shown in the status message.
+       Expected: The customer is successfully edited with both similar tags accepted. A warning and details of the added customer shown in the status message.
 
 7. Editing a customer with invalid inputs.
     1. Prerequisites: At least one customer is listed.
