@@ -6,7 +6,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PriorityLevel;
 
 /**
- * Changes the priority level of an existing person in the address book.
+ * Changes the priority level of an existing person in NovaCare.
  */
 public class PriorityCommand extends Command {
 
@@ -41,7 +41,7 @@ public class PriorityCommand extends Command {
     }
 
     /**
-     * Executes the priority level update on the specified person in the address book.
+     * Executes the priority level update on the specified person in NovaCare.
      *
      * @param model the model containing the person data.
      * @return a CommandResult with a success message.

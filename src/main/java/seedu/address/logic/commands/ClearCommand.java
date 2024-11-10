@@ -6,7 +6,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears all patient and task in NovaCare.
  */
 public class ClearCommand extends Command {
 

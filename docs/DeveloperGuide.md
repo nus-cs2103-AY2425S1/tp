@@ -17,7 +17,7 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -64,7 +64,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -98,13 +98,13 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-How the `Logic` component works:
+How the `Logic` Component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a patient).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -120,7 +120,7 @@ How the parsing works:
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
-The `Model` component,
+The `Model` Component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the address book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
@@ -138,7 +138,7 @@ The `Model` component,
 </box>
 
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -149,7 +149,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
@@ -159,7 +159,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Undo/Redo feature
 
 #### Proposed Implementation
 
@@ -177,11 +177,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th patient in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new patient. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -191,7 +191,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -237,9 +237,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
-#### Design considerations:
+#### Design Considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How Undo & Redo Executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
@@ -247,10 +247,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Data Archiving
 
 The data archiving feature allows for the backup and restoration of data by compressing it into a single archive file (e.g., `.zip`). This feature can be useful for storage and data retrieval.
 
@@ -266,7 +266,7 @@ In future releases, additional features may be implemented.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -278,34 +278,51 @@ In future releases, additional features may be implemented.
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
-**Target user profile**:
+**Target User Profile**:
 
-* nurse in the healthcare industry managing patients
-* has many patients across different wards with varying care levels
+* Private nurse in the healthcare industry managing patients
+* Has many patients across different wards with varying care levels (priority levels)
+  * where each patient has varying tasks
 * Mainly done in desktop app
 * Used to typing to fill out user information
-* is comfortable using CLI
+* Is comfortable using CLI
 
-**Value proposition**: 
+**Value proposition**:
 provides a patient management system for nurses to use which is faster than GUI/mouse driven apps
 
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                            | So that I can…​                      |
-|----------|---------|-----------------------------------------|--------------------------------------|
-| `* * *`  | nurse   | add in emergency contact numbers        | refer to them during an emergency    |
-| `* * *`  | nurse   | delete emergency contact numbers        | remove irrelevant emergency contacts |
-| `* * *`  | nurse   | update a patient’s category             | reflect changes in their care status |
-| `* * *`  | nurse   | assign multiple categories to a patient | quickly identify the care level      |
-| `* * *`  | nurse   | add tasks                               | track what task needs to be done     |
-| `* * *`  | nurse   | delete tasks                            | remove irrelevant tasks              |
+| Priority | As a …​  | I want to …​                                       | So that I can…​                                                                |
+|----------|----------|----------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | Nurse    | add in emergency contact numbers                   | refer to them during an emergency                                              |
+| `* * *`  | Nurse    | delete emergency contact numbers                   | remove irrelevant emergency contacts                                           |
+| `* * *`  | Nurse    | assign multiple categories to a patient            | quickly identify the care level                                                |
+| `* * *`  | Nurse    | add tasks                                          | track what task needs to be done                                               |
+| `* * *`  | Nurse    | delete tasks                                       | remove irrelevant tasks                                                        |
+| `* * *`  | Nurse    | assign priority levels to patients                 | recognize which patients need more immediate attention                         |
+| `* * *`  | Nurse    | add tags to patients                               | recognize the allergies for each patient                                       |
+| `* * `   | Nurse    | change the priority level for each patient         | reflect changes in their care status                                           |
+| `* * `   | Nurse    | reset the priority level for each patient          | reflect changes in their care status                                           |
+| `* *`    | Nurse    | edit the name for each patient                     | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | Nurse    | edit the phone number for each patient             | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | Nurse    | edit the emergency contact for each patient        | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | Nurse    | edit tags for each patient                         | reflect changes in their allergies                                             |
+| `* *`    | Nurse    | find a patient by their name                       | access their details quickly without scrolling through the list                |
+| `* *`    | Nurse    | find tasks by their description                    | access patients with the same task quickly without scrolling through the list  |
+| `* *`    | Nurse    | list tasks that are incomplete                     | prioritize my work during the shift                                            |
+| `* *`    | Nurse    | list tasks that are complete                       | double check that my the tasks that I have marked complete are indeed complete |
+| `* *`    | Nurse    | mark tasks as complete                             | update the tasks that I have completed                                         |
+| `* *`    | Nurse    | unmark tasks                                       | to unmark the tasks that I have accidentally marked as completed               |
+| `*`      | Nurse    | have the ability to clear all data from the system | reset the system for a new set of patients efficiently                         |
+| `*`      | Nurse    | be able to exit the program using a command        | quickly close the application when done                                        |
+| `*`      | Nurse    | edit the email for each patient                    | reflect changes in the event that the information was keyed in wrongly         |
+| `*`      | Nurse    | edit the address for each patient                  | reflect changes in the event that the information was keyed in wrongly         |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -330,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. User re-enters the phone number and/or email.
 
       Steps 3a1-3a2 are repeated until the data entered is correct.
-      Use case resumes at step 3 if the details are re-entered.
+      Use case resumes at step 4 if the details entered are correct.
 
 * 3b. User omits one or more required fields (name, phone number, email or address).
 
@@ -345,8 +362,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to delete a patient.
-2. NovaCare prompts the user to enter patient details.
-3. User inputs the required patient details.
+2. NovaCare prompts the user to enter patient ID.
+3. User inputs the required patient ID.
 4. NovaCare outputs a message showing successful patient deletion.
 
    Use case ends.
@@ -355,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. NovaCare cannot find the patient.
 
-    * 3a1. NovaCare prompts the user to enter valid patient details.
+    * 3a1. NovaCare prompts the user to enter valid patient ID.
     * 3a2. User re-enters the patient details.
 
       Steps 3a1-3a2 are repeated until a valid patient record is found.
@@ -469,21 +486,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to add a priority level to a patient.
-2. NovaCare prompts the user to select the patient.
-3. User selects the relevant patient and chooses the desired priority level.
-4. NovaCare updates the patient record with the chosen priority level.
-5. NovaCare outputs a message showing successful priority update for the patient.
+2. User selects the relevant patient and chooses the desired priority level.
+3. NovaCare updates the patient record with the chosen priority level.
+4. NovaCare outputs a message showing successful priority update for the patient.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. NovaCare detects an invalid priority level.
+* 2a. NovaCare detects an invalid priority level.
 
-    * 3a1. NovaCare prompts the user to enter a valid priority level.
-    * 3a2. User re-enters the priority level.
+    * 2a1. NovaCare prompts the user to enter a valid priority level.
+    * 2a2. User re-enters the priority level.
 
-      Steps 3a1-3a2 are repeated until a valid priority level is provided.
+      Steps 2a1-2a2 are repeated until a valid priority level is provided.
       Use case resumes at step 3 if the priority level is correct.
 
 **Use Case: UC08 - Reset Priority**
@@ -502,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
 5.  The codebase should be modular, allowing easy updates or feature additions without affecting other parts of the system.
@@ -513,13 +529,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Priority level**: A level to rank patients in terms of their severity level
+* **Priority level**: A priority level is a value assigned to a patient to indicate the urgency of their medical condition. A priority level of 1 indicates a critical condition, 2 indicates a serious but non-critical condition, while 3 indicates a non-critical condition.
 * **Emergency contact**: A person who is preferably close to the patient and is designated to receive information in case of an emergency
 * **Task**: A task to be done for a specific patient
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -530,72 +546,89 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   2. Open a terminal and navigate to the folder containing the jar file.
+   3. Run the command `java -jar NovaCare.jar`<br>Expected: The app launches with a set of sample patients. The window size may not be optimal.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2. Re-launch the app by running the command `java -jar NovaCare.jar`.<br>Expected: The most recent window size and location is retained.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+3._{ more test cases …​ }_
 
-1. _{ more test cases …​ }_
-
-### Deleting a person
+### Deleting a Patient
 
 1. Deleting a patient while all patients are being shown
 
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   2. Test case: `delete 1`<br>Expected: First contact is deleted from the list. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `delete 0`<br>Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>Expected: Similar to previous.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. All data is written to file specified in `preferences.json`
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. By default, the data is saved in the file `"addressBookFilePath" : "data\\addressbook.json"`.
+   2. Whenever a command is used to modify the data (e.g., `add`, `delete`, `edit`), the data is saved into the file indicated in `preferences.json`.
 
 ### Adding a Task
 
 1. Adding a task to a patient while all patients are being shown
 
-    1. Prerequisites: Patient should already exist in the list.
+   1. Prerequisites: Patient should already exist in the list.
+   2. Test case: `addtask 1 d/Eat Medication`<br>Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `addtask 0 d/Eat Medication`<br>Expected: No task is added. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
+   4. Other incorrect add task commands to try: `addtask`, `addtask x d/`, `addtask 1 d/` (where x is an invalid patient ID or description is missing)<br>Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
 
-    1. Test case: `addtask 1 d/Eat Medication`  
-       Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `addtask 0 d/Eat Medication`  
-       Expected: No task is added. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
-
-    1. Other incorrect add task commands to try: `addtask`, `addtask x d/`, `addtask 1 d/` (where x is an invalid patient ID or description is missing)  
-       Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
-
-### Changing Priority
+### Changing Priority Level
 
 1. Changing a priority level of a patient
 
-    1. Prerequisites: List all patients using the `list` command. Patient should already exist in the list.
-
-    1. Test case: `priority 1 l/2`  
-       Expected: Priority level 2 is assigned to the patient with ID 1. Details of the priority update are shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `priority 0 l/2`  
-       Expected: No priority is assigned. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
-
-    1. Other incorrect priority commands to try: `priority`, `priority x l/`, `priority 1 l/` (where x is an invalid patient ID or the priority level is missing or invalid)  
-       Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
+   1. Prerequisites: List all patients using the `list` command. Patient should already exist in the list.
+   2. Test case: `priority 1 l/2`<br>Expected: Priority level 2 is assigned to the patient with ID 1. Details of the priority update are shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `priority 0 l/2`<br>Expected: No priority is assigned. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
+   4. Other incorrect priority commands to try: `priority`, `priority x l/`, `priority 1 l/` (where x is an invalid patient ID or the priority level is missing or invalid)<br>Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
 
 For additional commands and further testing guidelines, refer to Help section in NovaCare.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+This section outlines proposed improvements to address known feature flaws identified during testing and user feedback. Each planned enhancement targets a specific limitation in the current implementation, aiming to improve data accuracy, user experience, and overall system reliability. Below, we detail the issues and outline precise changes, including examples, to demonstrate how each improvement will better meet user needs.
+
+1. **Implement stricter email validation:**
+   * Currently, NovaCare's email validation only requires two alphanumeric characters for the `DOMAIN`, allowing invalid email formats such as `username@example`. This flaw compromises data accuracy and can lead to incorrect contact details, which is critical in a healthcare setting where reliable communication is essential.
+   * We plan to enhance the email validation logic to enforce a domain format of `<subdomain>.<top-level domain>`, in which the top-level domain label must be at least 2 characters long. Each domain label must start and end with alphanumeric characters and consist of alphanumeric characters, separated only by hyphens, if any.
+   * For example:
+     * :white_check_mark: `username1@example.sg`
+     * :white_check_mark: `username-2@example.com`
+     * :white_check_mark: `username-3@example.com`
+     * :white_check_mark: `username4@test.example.org"`
+     * :x: `username1@example`<br></br>
+2. **Implement more robust phone number validation:**
+   * Currently, NovaCare's phone number validation only requires for entries to be numeric, and at least 3 digits long. This means that the system accepts phone number entries that exceed the upper limit of possible phone number lengths, and also disallows entries that try and input country code, i.e. `+6512345678`, since phone numbers must be strictly numeric. This flaw could cause data entry errors, especially for international contacts.
+   * As phone numbers are both used in a patient's phone field and in the emergency contact number field, this flaw affects two fields in the addressbook.
+   * We plan to enhance the phone number validation logic to allow the usage of the `+` character only as the first character of the phone number, and to limit the length of the phone number entered.
+   * For example:
+     * :white_check_mark: `+6512345678`
+     * :white_check_mark: `+601123456789`
+     * :x: `111+111`
+     * :x: `11111111111111111111`<br></br>
+3. **Implement more robust name validation:**
+    * Currently, names in NovaCare can only contain alphanumeric characters and spaces, limiting inclusivity by excluding names with special characters such as hyphens or slashes. This flaw may reduce inclusivity, which is essential for a healthcare application.
+    * As names are both used in a patient's name field and in the emergency contact name field, this flaw affects two fields in the addressbook.
+    * We plan to enhance the name validation logic to allow the usage of the `-` and `/` character, but not as the first or lsat characters of any word in the name.
+    * For example:
+      * :white_check_mark: `Simon Andy-Fletcher`
+      * :white_check_mark: `Ravi s/o Indra`
+      * :x: `Timothy /Ng`
+      * :x: `-Lim En An`<br></br>

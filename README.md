@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-* The product `NovaCare` targets healthcare professionals, particularly nurses, with the aim of optimizing patient care and task management. 
+* The product `NovaCare` targets healthcare professionals, particularly nurses, with the aim of optimizing patient care and task management.
 * This application is designed to **improve efficiency** by providing a clear overview of patient information, critical tasks, and emergency contacts, reducing reliance on manual documentation.
 * It is named `NovaCare`, a blend of "new" (Nova) and "care", symbolizing a fresh approach to managing patient information and tasks.
 * `NovaCare` enhances patient care by **organizing and tracking critical data**, allowing healthcare personnel to prioritize their time and focus on urgent tasks. The system provides:

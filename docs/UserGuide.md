@@ -34,7 +34,7 @@ In this guide, users will be able to learn the following details:
       - 6.2.6 [Adding emergency contact](#6-2-6-adding-emergency-contact-emergency)
       - 6.2.7 [Deleting emergency contact](#6-2-7-deleting-emergency-contact-deleteemergency)
       - 6.2.8 [Adding priority level](#6-2-8-adding-priority-level-priority)
-      - 6.2.9 [Deleting priority level](#6-2-9-deleting-priority-level-deletelevel) 
+      - 6.2.9 [Deleting priority level](#6-2-9-deleting-priority-level-deletelevel)
     - 6.3 [Task commands](#6-3-task-commands)
       - 6.3.1 [Adding a task](#6-3-1-adding-a-task-addtask)
       - 6.3.2 [Deleting a task](#6-3-2-deleting-a-task-deletetask)
@@ -58,7 +58,6 @@ In this guide, users will be able to learn the following details:
    - 9.2 [Task-Related Commands](#9-2-task-related-commands)
    - 9.3 [Other Commands](#9-3-other-commands)
 10. [Glossary](#10-glossary)
-      
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -180,7 +179,7 @@ Here will be a basic guide on how to use the application.
        > `addtask 1 d/Eat paracetamol 1000mg`
     * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of NovaCare, in this case being the patient `Lily` who was just added! 
 <br></br>
-   
+
 8. **Exit**:
     * Type the following command in the command box and press Enter to **exit the program**:
        > `exit`
@@ -259,8 +258,9 @@ In NovaCare, these commands will allow you to modify your list of patients to su
 <box type="info" seamless>
 
 **Note:**
-* For all commands, parts of the command in square brackets are optional parameters that can be included in or omitted from the command. 
+* For all commands, parts of the command in square brackets are optional parameters that can be included in or omitted from the command.
   * For example: `[t/TAG]`
+* Conversely, parts of the command not in square brackets are compulsory fields.
 </box>
 
 #### 6.2.1 Adding a patient: `add`
@@ -399,8 +399,14 @@ Deletes the specified patient and tasks associated to that patient from NovaCare
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
-Example:
-* `delete 1` deletes the 1st-indexed patient in the patient list.
+<box type="warning" seamless>
+
+**Warning:**
+Deleting a patient will also **delete all tasks associated with that patient**.
+</box>
+Examples:
+* `list` followed by `delete 2` deletes the 2nd patient in NovaCare.
+* `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
 
 Expected output:
 ```
@@ -464,7 +470,7 @@ Adds a priority level to a patient in NovaCare.
 
 **Note:**
 * Adds a priority level at the specified `INDEX`.
-* The `l/` prefix refers to the lowercase letter `l`, not the uppercase letter `I`. 
+* The `l/` prefix refers to the lowercase letter `l`, not the uppercase letter `I`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The priority level **must be a positive integer** and only from **1, 2, 3**
@@ -697,7 +703,7 @@ Clears all patient and tasks entry from NovaCare.
 <box type="warning" seamless>
 
 **Warning:**
-Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare. 
+Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.
 **This action is irreversible!**
 </box>
 
@@ -737,7 +743,7 @@ NovaCare data are saved automatically as a JSON file `[JAR file location]/data/a
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>

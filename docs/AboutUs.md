@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/yixianggg.png" width="200px">
 
-[[github](http://github.com/yixianggg)] 
+[[github](http://github.com/yixianggg)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
