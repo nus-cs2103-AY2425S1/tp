@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric characters and spaces, "
-            + "and it should include given name and surname!";
+    public static final String MESSAGE_CONSTRAINTS = "Name should only contain alphabet characters and spaces.\n"
+            + "Both given name and surname should be included.";
 
     /*
      * The name must only contain alphabetical characters and spaces. It must contain at least two words, for given name

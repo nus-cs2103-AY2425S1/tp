@@ -150,6 +150,8 @@ A person can have any number of study group tags (including 0), and any extra du
 </div>
 
 * Email, gender and study group tags are **case-insensitive**.
+* Valid entries for names should only contain alphabet characters and spaces; numbers and special characters are not allowed. 
+* Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
 * Valid entries for gender are M/m/F/f.
 * Age must be a non-negative integer between 0 and 150 (both inclusive).
 * Two contacts are considered **duplicates** if they share the same **email** address.
@@ -196,7 +198,7 @@ Examples:
 
 Deletes the specified person(s) from the address book.
 
-Format: `delete [INDEX | INDEX-INDEX]…`
+Format: `delete [INDEX | LowerBound-UpperBound]…`
 
 * At least one index or index range must be provided.
 * Deletes the person at the specified `INDEX` or range of indices.
@@ -206,7 +208,7 @@ Format: `delete [INDEX | INDEX-INDEX]…`
 Examples:
 * `delete 2` deletes the 2nd person in the displayed list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the [`find` command](#locating-persons-by-criteria-find).
-* `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
+* `delete 1 3 5-7 15` deletes the 1st, 3rd, 5th, 6th, 7th and 15th person in the displayed list.
 
 ### Exiting the program : `exit`
 
