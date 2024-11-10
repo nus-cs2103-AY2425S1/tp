@@ -477,6 +477,9 @@ We plan to enhance the checks by checking if the domain is valid i.e. contains b
 5. **Enhance the visuals for policy in the UI:** We plan to enhance the presentation of information for policy and claims.
 6. **Make emails case-insensitive:** Currently emails is case-sensitive which does not make sense as capital letters do not affect email addresses in any way. Therefore, we plan to make emails case-insensitive.
 7. **Make claims case-insensitive:** Currently, claims are case-sensitive and therefore do not detect duplicates when descriptions differ only in letter casing (e.g., Accident Claim vs. accident claim). We plan to convert claims to lowercase before storing.
+8. **Make Prudy check for all prefixes:** Currently Prudy only checks the prefix used in the command and does not detect wrong prefixes.
+For example, `add-client n/John Doe c/claim p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` will throw `Names should only contain alphanumeric characters and spaces, and it should not be blank`
+instead of recognizing that the wrong prefix is used. We plan to make Prudy check for all prefixes and throw an error if wrong prefix is detected.
 
 --------------------------------------------------------------------------------------------------------------------
 
