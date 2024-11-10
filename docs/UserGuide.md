@@ -712,7 +712,7 @@ Edits a task from all groups that contain it.
 
 This screenshot shows the result of executing `edit_t i/2 tn/Complete task 8`.
 
-<img src="images/screenshots/del_t.png" width="600">
+<img src="images/screenshots/edit_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
