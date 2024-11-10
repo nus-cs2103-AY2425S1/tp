@@ -17,7 +17,7 @@ This means that you can do everything by simply typing commands into the command
 If you can type fast, and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 ---
 
