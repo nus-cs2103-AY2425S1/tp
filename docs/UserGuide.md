@@ -93,7 +93,7 @@ This combination of efficiency and clarity ensures that you can manage your wedd
   * d/ Date
 
 * Parameters can be in any order.<br>
-  * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  * e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -182,10 +182,12 @@ Furthermore, certain edits can cause the WedLinker to behave in unexpected ways 
 
 Adds a person to the address book.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​`
+Format: `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​`
 
 * **People in Wedlinker cannot have the same names. `NAME` is case-insensitive.**
   * So, if `John Doe` is already in Wedlinker, adding another `john doe` with different details will not work
+* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
+* A person's phone number should be at least 3 digits long.
 * If the tags or weddings specified in the add command do not exist yet, they will be created
 
  
@@ -200,8 +202,6 @@ Examples:
 Created weddings will have the person automatically assigned to their guest lists.
 
 * A person can have any number of tags or weddings (including 0)
-
-* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
 </box>
 
 <box type="warning" seamless>
@@ -217,7 +217,7 @@ Created weddings will have the person automatically assigned to their guest list
 
 Edits an existing person in the address book.
 
-Format: `edit PERSON_NUMBER [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+Format: `edit PERSON_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -247,6 +247,9 @@ Finds all persons based on the specified keywords after the prefix representing 
 
 Format: `find PREFIX_TAG KEYWORD [KEYWORD]…​`
 
+<box type="tip" seamless>
+
+**Tip:** 
 * Available prefixes that can be used as the `PREFIX_TAG`:
     * n/ Name
     * a/ Address
@@ -255,6 +258,7 @@ Format: `find PREFIX_TAG KEYWORD [KEYWORD]…​`
     * t/ Tag
     * w/ Wedding
     * tk/ Task
+</box>
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
@@ -336,7 +340,7 @@ Creates a `Wedding` within WedLinker to be with contacts.
 
 Format: `create-wedding w/WEDDING_NAME` or `cw w/WEDDING_NAME`
 
-* The `WEDDING_NAME` should only contain alphanumeric characters, spaces or the following characters: `/`, `.`, `,`, '&:().
+* The `WEDDING_NAME` should only contain alphanumeric characters, spaces or the following characters: / . , ' & : ( )
 * `WEDDING_NAME` is case-insensitive.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
 * Contacts can be assigned to the Wedding using the [assign-wedding](#assigning-contact-to-a-wedding-assign-wedding) command.
