@@ -170,6 +170,11 @@ Examples:
 It is recommended to link the pets to the owners are the first action after adding a pet but this is not enforced.
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Important information:**
+Ensure that for multiple pets that all the pets are unlinked.<br>
+If any of the pets has already been linked to an owner, then the command will _fail_.
+</div>
+
 ### Unlinking entities: `unlink`
 
 Unlinks an owner to one or more pets.
