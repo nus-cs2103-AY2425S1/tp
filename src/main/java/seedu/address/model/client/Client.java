@@ -97,6 +97,10 @@ public class Client {
         this.transactions.remove(transaction);
     }
 
+    public void addTransaction(Transaction transaction) {
+        this.transactions.add(transaction);
+    }
+
     public double getBalance() {
         return balance;
     }
@@ -108,6 +112,17 @@ public class Client {
      */
     public void updateBalance(double amount) {
         balance += amount;
+    }
+
+    /**
+     * Checks if the transaction causes a double overflow.
+     *
+     * @param amount The amount of the transaction to be added / deleted.
+     * @return whether the balance would overflow.
+     */
+    public boolean checkIsOverflow(double amount) {
+        double updatedBalance = balance + amount;
+        return (updatedBalance == Double.POSITIVE_INFINITY || updatedBalance == Double.NEGATIVE_INFINITY);
     }
 
     /**

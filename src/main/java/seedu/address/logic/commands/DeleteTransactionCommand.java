@@ -56,6 +56,10 @@ public class DeleteTransactionCommand extends Command {
         }
 
         Transaction transactionToRemove = transactions.get(index.getZeroBased());
+        if (selected.checkIsOverflow(-1 * transactionToRemove.getAmount())) {
+            throw new CommandException(Messages.MESSAGE_DOUBLE_OVERFLOW);
+        }
+
         transactions.remove(index.getZeroBased());
         selected.updateBalance(transactionToRemove.getAmount() * -1);
         selected.removeTransaction(transactionToRemove);

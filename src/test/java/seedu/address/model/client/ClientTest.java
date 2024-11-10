@@ -114,4 +114,17 @@ public class ClientTest {
         client2.updateBalance(-20);
         assertEquals(initialBalance2 - 20, client2.getBalance());
     }
+
+    @Test
+    public void checkIsOverflow() {
+        Client client1 = new ClientBuilder().build();
+        client1.updateBalance(Double.MAX_VALUE);
+        assertTrue(client1.checkIsOverflow(Double.MAX_VALUE));
+        assertFalse(client1.checkIsOverflow(-100));
+
+        Client client2 = new ClientBuilder().build();
+        client2.updateBalance(-Double.MAX_VALUE);
+        assertTrue(client2.checkIsOverflow(-Double.MAX_VALUE));
+        assertFalse(client2.checkIsOverflow(100));
+    }
 }
