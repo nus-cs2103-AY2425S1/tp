@@ -63,28 +63,42 @@ deactivate ClearCommand
 [<--LogicManager
 deactivate LogicManager
 
-[-> LogicManager : execute("yes")
-activate LogicManager
+alt Confirm
+    [-> LogicManager : execute("yes")
+    activate LogicManager
 
-LogicManager -> CommandResult1 : comfirmPrompt()
-activate CommandResult1
+    LogicManager -> CommandResult1 : comfirmPrompt()
+    activate CommandResult1
 
-CommandResult1 -> Model : reset()
-activate Model
+    CommandResult1 -> Model : reset()
+    activate Model
 
-Model --> CommandResult1
-deactivate Model
+    Model --> CommandResult1
+    deactivate Model
 
-create CommandResult2
-CommandResult1 -> CommandResult2
-activate CommandResult2
+    create CommandResult2
+    CommandResult1 -> CommandResult2
+    activate CommandResult2
 
-CommandResult2 --> CommandResult1
-deactivate CommandResult2
+    CommandResult2 --> CommandResult1
+    deactivate CommandResult2
 
-CommandResult1 --> LogicManager : r2
-deactivate CommandResult1
+    CommandResult1 --> LogicManager : r2
+    deactivate CommandResult1
 
-[<-- LogicManager
-deactivate LogicManager
+    [<-- LogicManager
+    deactivate LogicManager
+
+else Cancel
+    [-> LogicManager : execute("no")
+    activate LogicManager
+
+    [<-- LogicManager
+    note right
+    LogicManager returns a CommandResult
+    with cancellation message
+    endnote
+    deactivate LogicManager
+
+end
 @enduml

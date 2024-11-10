@@ -308,7 +308,7 @@ The user is able to import data from and export data to external files.
 
 How import and export work:
 
-* A <ins>[`FileChooser`](https://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html)</ins> resides in 
+* A <ins>[`FileChooser`](https://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html)</ins> resides in
   the `MainWindow` container.
 * The `CommandResult` class now has two new types:
   * **`IMPORT`**: The `FileChooser` window should be shown to the user to choose a file for import.
