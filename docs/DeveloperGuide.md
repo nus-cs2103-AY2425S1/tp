@@ -304,7 +304,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### System: Grub Address Book (GAB)
 
 **Use Case:** UC1 - Search by Vendor Name
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -328,7 +330,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use Case:** UC2 - Filter by Tag Names
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -352,7 +356,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use Case:** UC3 - Filter by Price Label
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -368,7 +374,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * Use case resumes at step 5.
 
 **Use Case:** UC4 - Create new vendor
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -389,7 +397,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC5 - Update vendor
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -411,7 +421,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC6 - Adding tags
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -433,7 +445,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC7 - Getting Help
+
 **Actor:** User
+
 **MSS:**
 1. User opens the application.
 2. User enters a command for help.
