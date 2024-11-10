@@ -16,7 +16,7 @@ Class UniquePersonList
 Class Person
 Class Address
 Class Email
-Class Ic
+Class NRIC
 Class Name
 Class Phone
 Class StudentId

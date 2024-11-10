@@ -14,7 +14,7 @@ public class Ic {
                     + "and should follow the format of Singaporean NRIC and FIN numbers:\n"
                     + "They should only start with one of 'S, T, F, G, M' followed by a 7 digits number "
                     + "and end with an alphabet (e.g. S1234567A)";
-    public static final String VALIDATION_REGEX = "^[STFGM]\\d{7}[A-Z]$";
+    public static final String VALIDATION_REGEX = "^[STFGM]\\d{7}[A-Z]$"; // Adapted from the help of ChatGPT
     public final String value;
 
     /**

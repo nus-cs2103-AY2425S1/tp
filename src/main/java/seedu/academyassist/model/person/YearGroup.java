@@ -13,7 +13,7 @@ public class YearGroup {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Year group should only contain numbers, and it should be between 1 and 13";
-    public static final String VALIDATION_REGEX = "^(1[0-3]|[1-9])$";
+    public static final String VALIDATION_REGEX = "^(1[0-3]|[1-9])$"; // Adapted from the help of ChatGPT
     public final String value;
 
     /**

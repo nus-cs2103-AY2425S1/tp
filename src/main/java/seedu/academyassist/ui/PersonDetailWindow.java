@@ -50,6 +50,10 @@ public class PersonDetailWindow extends UiPart<Stage> {
     public PersonDetailWindow(Stage root) {
         super(FXML, root);
         addKeyEventHandler(root);
+
+        // Set minimum width and height
+        root.setMinWidth(500);
+        root.setMinHeight(600);
     }
 
     /**

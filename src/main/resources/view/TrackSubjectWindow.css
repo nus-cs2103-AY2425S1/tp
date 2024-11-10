@@ -1,5 +1,8 @@
 .root {
     -fx-background-color: derive(#dafaff, 20%);
+    -fx-min-width: 450;
+    -fx-min-height: 450;
+    -fx-max-height: 600;
 }
 
 .header-label {

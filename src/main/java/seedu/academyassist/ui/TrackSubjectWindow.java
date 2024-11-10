@@ -54,6 +54,13 @@ public class TrackSubjectWindow extends UiPart<Stage> {
         this.model = model;
         updateSubjectStats();
         addKeyEventHandler(root);
+
+        // Set minimum width and height
+        root.setMinWidth(450);
+        root.setMinHeight(450);
+
+        // Set max height
+        root.setMaxHeight(600);
     }
 
     /**

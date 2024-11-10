@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
             + "Format: " + COMMAND_WORD + " STUDENT_ID\n"
             + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
             + "Parameter example:\n"
-            + "- STUDENT_ID: S1234567A\n";
+            + "- STUDENT_ID: S00001\n";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Student %1$s (%2$s) is successfully deleted.\n";
 

@@ -27,8 +27,8 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_inputLengthOverHundred_throwsParseException() {
-        String input = String.copyValueOf(new char[101]).replace('\0', 'a');
+    public void parse_inputLengthOverTwoFiftyFive_throwsParseException() {
+        String input = String.copyValueOf(new char[256]).replace('\0', 'a');
 
         System.out.println(input);
 

@@ -71,5 +71,8 @@ public class IcTest {
 
         // different values -> returns false
         assertFalse(ic.equals(new Ic("F0987543M")));
+        assertFalse(ic.equals(new Ic("F1234567X"))); // different beginning letter
+        assertFalse(ic.equals(new Ic("M1234567B"))); // different ending letter
+        assertFalse(ic.equals(new Ic("M1234067X"))); // different number in between
     }
 }

@@ -26,9 +26,9 @@ public class FilterCommand extends Command {
             + PREFIX_YEARGROUP + "YEARGROUP " + "or "
             + PREFIX_SUBJECT + "SUBJECT " + "\n"
             + "Examples: " + "\n" + COMMAND_WORD + " "
-            + "yg/2" + "\n"
+            + "yg\\2" + "\n"
             + COMMAND_WORD + " "
-            + "s/Science";
+            + "s\\Science";
 
     public static final String MESSAGE_SUCCESS = "Filtered by %1$s: %2$s\n"
             + "Number of student(s) found: %3$d";
