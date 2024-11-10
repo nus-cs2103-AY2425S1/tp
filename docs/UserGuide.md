@@ -81,7 +81,7 @@ Field | Accepted input values | Examples | Exceptions
 ----------|-----------------------|----------|-----------
 `NAME` | Any valid English name. Alphanumeric characters, spaces and dashes are allowed to account for scenarios where clients may prefer to use a username or pseudonym instead of their real name. | `Josh1248`, `Jean Mary-Jane`, `Jackie  Chan` | None
 `PHONE_NUMBER` | Must consist of digits (0 to 9). Spaces and dashes are allowed between digits, and a plus sign (`+`) at the start of the phone number is allowed (to indicate country code). | `9143 9032`, `872-233-8554`, `987223414`, `+91 23883 90022` | None
-`EMAIL` | Must be a in a valid email format (no underscores): `somestring@domain.topleveldomain` | `jemma22@github.com`, `rahulSingh@rocket.net`, `cassie@finance.morganstanley.com` | None
+`EMAIL` | Must be in a valid email format (no underscores): `somestring@domain.topleveldomain` | `jemma22@github.com`, `rahulSingh@rocket.net`, `cassie@finance.morganstanley.com` | None
 `ADDRESS` | Any non-empty string | `Singapore`, `42 Wallaby Way, Sydney` | None
 `DEADLINE` | Any valid date in the format dd-mm-[yy]yy<br>Day and Month must be a valid combination (so no 31st of February for example)<br>Year can be either 2-digit or 4-digit<br>Dashes (-), Slashes (/), underscores (_) and vertical bars (&#124;) can be used as delimiters | `1-1-25` (represents "January 1, 2025"), `10/8/2040` (represents "August 10, 2040"), <code>29&#124;2&#124;28</code> (represents "February 29, 2028") | None
 `TAG` | Any non-empty alphanumeric string (spaces allowed) | `friends`, `CEO of IMB`, `Born 2017` | None
@@ -206,7 +206,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TA
 * Phone number, email, address, project status, tags, payment status, client status and deadline must match the exact string.
   e.g. `ps/in progress` will not match `ps/in prog`.
 * All fields need to be matched for a person to be found
-  e.g. `find n/Rah py/paid ps/in progress` matches those clients whose name starts with "Rah", payment status is `paid` and project status is `in progress`.
+  e.g. `find n/Rah py/paid ps/in progress` matches those clients whose name segment (first name, middle name, last name etc) starts with "Rah", payment status is `paid` and project status is `in progress`.
 * When searching by tags, if multiple tags are specified then only one of the tags need to be matched.
 
 Examples:
