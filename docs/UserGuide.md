@@ -192,14 +192,14 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 3. **Add a DLT public address**
 
    ```
-   addpa c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2
+   addpa 1 c/BTC l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2
    ```
 
 
 4. **Retrieves the public address of a contact**
 
    ```
-   retrievepa l/wallet1 c/BTC n/Travis
+   retrievepa l/wallet1 c/BTC 
    ```
 
 
@@ -249,12 +249,12 @@ DLTbook supports the following commands:
  [**Delete**](#deleting-a-person-delete)                                             | Deletes the specified person from the address book                              
  [**Clear**](#clearing-all-entries-clear)                                            | Clears all entries from the address book                                        
  [**Exit**](#exiting-the-program-exit)                                               | Exits the program                                                               
- [**Add Public Address**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                              
- [**Edit Public Address**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                   
- [**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact                                     
- [**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                         
+ [**Add Public Address**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a person                                              
+ [**Edit Public Address**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a person                                   
+ [**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a person                                     
+ [**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a person                                         
  [**Search Public Address**](#searching-for-a-public-address-publicaddresssearch)    | Searches for a public address                                                   
- [**Filter**](#filtering-persons-by-public-addresses-network-filter)                 | Filters out a list of people with the public addresses of the specified network 
+ [**Filter**](#filtering-persons-by-public-addresses-network-filter)                 | Filters out a list of persons with the public addresses of the specified network 
 
 <box type="info" seamless>
 
@@ -271,9 +271,6 @@ DLTbook supports the following commands:
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored.<br>
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
@@ -369,13 +366,13 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is **case-insensitive**. e.g `hans` will match `Hans`
 
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 
 * Only the name is searched.
 
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched. e.g. `Han` will not match `Hans`
 
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
 
@@ -415,34 +412,36 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Adding a public address to a contact : `addpa`
+### Adding a public address to a person : `addpa`
 
-Adds a public address to a contact.
+Adds a public address to a person.
 
-Format: `addpa INDEX c/NETWORK l/LABEL pa/PUBLIC_ADDRESS`
+Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-* Adds a public address to a contact at the specified `INDEX`. The index refers to the index number shown in the
+* Adds a public address to a person at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
 
-* The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
-  `SOL`, etc.).
-    * This field is not case-sensitive and will be converted to UPPERCASE.
+* The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
+  `SOL`, etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
+  Allowed values: `BTC|ETH|SOL`.
 
-* The `LABEL` parameter specifies the wallet name to which the public address belongs.
-    * This field is not case-sensitive and will be stored as is.
+* The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs. 
+  This field is **case-insensitive** and will be stored as is.
 
 * The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
-    * This field is not case-sensitive and will be converted to lowercase.
+  The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only 
+  contain alphanumeric characters.
+  This field is **case-insensitive** and will be converted to lowercase.
 
 Examples:
 
 * `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address
-  to the first contact on the list `Alex Yeoh` under the ETH network with the wallet name `wallet1` and the public
+  to the first person on the list `Alex Yeoh` under the ETH network with the wallet name `wallet1` and the public
   address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
 
 * `addpa 4 c/BTC l/savings_wallet pa/0x71C7656EC7ab88b098defB751B7401B5f6d8976F` adds a public address to the fourth
-  contact on the list `David Li` under the BC network with the wallet name `savings_wallet` and the public address
+  person on the list `David Li` under the BTC network with the wallet name `savings_wallet` and the public address
   `0x71C7656EC7ab88b098defB751B7401B5f6d8976F`.
 
 ![img.png](img.png)
@@ -451,119 +450,127 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Editing a public address of a contact : `editpa`
+### Editing a public address of a person : `editpa`
 
-Edits an existing public address of a contact.
+Edits an existing public address of a person.
 
-Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`
-
-<box type="tip" seamless>
-
-WALLET_NAME is NOT case-sensitive.
-</box>
+Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
 * Edits the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
 
-* The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`,
-  `SOL`, `SUI`, etc.).
+* The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
+  `SOL`, etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
   Allowed values: `BTC|ETH|SOL`.
 
 * The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
+  This field is **case-insensitive** and will be stored as is. 
 
-* The `NEW_ADDRESS` parameter specifies the new public address to be added.
+* The `PUBLIC_ADDRESS` parameter specifies the new public address to be added.
+  The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only
+  contain alphanumeric characters.
+  This field is **case-insensitive** and will be converted to lowercase.
 
 #### Examples
 
 * `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
-  Changes the third contact's BTC public address labelled `Daily wallet` to `14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`.<br />
+  Changes the third person's BTC public address labelled `Daily wallet` to `14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`.<br />
 
 * `editpa 3 c/BTC l/daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`<br />
-  **DOES NOT** change the third contact's BTC public address labelled `Daily wallet` as `WALLET_NAME` is
-  case-sensitive.<br />
+  Changes the third person's BTC public address labelled "Daily wallet" as `WALLET_NAME` is **case-insensitive**.
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Retrieving public addresses of a contact : `retrievepa`
+### Retrieving public addresses of a person : `retrievepa`
 
-Retrieves the public addresses of a contact.
+Retrieves the public addresses of a person.
 
 Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
 * `WALLET_NAME` parameter is compulsory and specifies the label (or part of the label) of the public address(es) to be
-  retrieved.
-  It is **case-insensitive**.
+  retrieved. This field is **case-insensitive**.
 
-* `NETWORK` parameter is optional and specifies the ticker name for each network and should be in all CAPS.<br />
+* `NETWORK` parameter is optional and specifies the ticker name for each network.
+  This field is **case-insensitive** <br />
   Allowed values: `BTC|ETH|SOL`.
 
-* `PERSON_NAME` parameter is optional and specifies the name (or part of the name) of the contact(s) whose addresses
-  should be retrieved.
-  It is **case-insensitive**.
+* `PERSON_NAME` parameter is optional and specifies the name (or part of the name) of the person(s) whose addresses
+  should be retrieved. This field is **case-insensitive**.
 
 #### Examples
 
 * `retrievepa l/MyWallet`<br />
-  Retrieves all public addresses with labels containing "MyWallet" for all contacts and networks.
+  Retrieves all public addresses with labels containing "MyWallet" for all persons and networks.
 
 * `retrievepa l/Daily c/BTC`<br />
-  Retrieves all BTC public addresses with labels containing "Daily" for all contacts.
+  Retrieves all BTC public addresses with labels containing "Daily" for all persons.
 
 * `retrievepa l/Savings n/John`<br />
-  Retrieves all public addresses with labels containing "Savings" for contacts whose names contain "John".
+  Retrieves all public addresses with labels containing "Savings" for persons whose names contain "John".
 
 * `retrievepa l/Business c/ETH n/Alice`<br />
-  Retrieves all ETH public addresses with labels containing "Business" for contacts whose names contain "Alice".
+  Retrieves all ETH public addresses with labels containing "Business" for persons whose names contain "Alice".
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting a public address of a contact : `deletepa`
+### Deleting a public address of a person : `deletepa`
 
-Deletes the public address of a contact.
+Deletes the public address of a person.
 
 Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
-* Deletes the public address of a contact based on the index
 
-* If Wallet Name is not provided, all public addresses in the network of the contact will be deleted.
+* Deletes the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
+  displayed person list.
+  The index **must be a positive integer** 1, 2, 3, …​
+
+
+* The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
+  `SOL` etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
+  Allowed values: `BTC|ETH|SOL`.
+
+* The `WALLET_NAME` parameter is not compulsory and specifies the wallet name of the public address 
+  that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the person 
+  at the specified `INDEX` will be deleted. This field is **case-insensitive**.
 
 * The Wallet Name is Case-sensitive. It will not work unless the Wallet Name is exactly the same as the one in the
   contact.
 
 Examples:
 
-* `deletepa 1 c/BTC l/wallet1` deletes the public address of the 1st person in the BTC Network with the wallet name `wallet1`.
 
-* `deletepa 3 c/BTC` deletes all the public addresses of the 3rd person in the BTC network.
+* `deletepa 1 c/BTC l/wallet1` deletes the public address of the first person in the BTC network with the wallet name
+  `wallet1`.
+
+
+* `deletepa 3 c/BTC` deletes all the public addresses of the third person in the BTC network.
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Searching for a public address : `publicAddressSearch`
+### Searching for a public address : `searchpa`
 
 Searches for a public address.
 
-Format: `publicAddressSearch pa/PUBLIC_ADDRESS`
-
-<box type="tip" seamless>
-
-The fields are not cap sensitive.
-</box>
+Format: `searchpa pa/PUBLIC_ADDRESS`
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
 
-* The `PUBLIC_ADDRESS` parameter specifies the public address to be searched.
+* The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
+  The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only
+  contain alphanumeric characters.
+  This field is **case-insensitive** and will be converted to lowercase.
 
 Examples:
 
-* `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` searches for a public
-  address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the contact and wallet to
+* `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` searches for a public
+  address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the person and wallet to
   which it belongs.
 
 <br>
@@ -572,22 +579,17 @@ Examples:
 
 ### Filtering persons by public addresses network : `filter`
 
-Filters out a list of people with the public addresses of the specified network.
+Filters out a list of persons with the public addresses of the specified network.
 
 Format: `filter c/NETWORK`
 
-<box type="tip" seamless>
-
-The fields are not cap sensitive.
-</box>
-
-* Filters out a list of people with the public addresses of the `NETWORK` provided.
-
-* The `NETWORK` parameter specifies the public addresses network to be filtered.
+* The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
+  `SOL` etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
+  Allowed values: `BTC|ETH|SOL`.
 
 Examples:
 
-* `filter c/BTC` filters a list of people with the public addresses of `BTC` and
+* `filter c/BTC` filters a list of persons with the public addresses of `BTC` and
   displays it with their respective list number.
 
 <br>
@@ -662,19 +664,19 @@ the data of your previous AddressBook home folder.
 
 ## Command summary
 
-| Action                      | Format, Examples                                                                                                                                                                     |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`               |
-| **Clear**                   | `clear`                                                                                                                                                                              |
-| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                  |
-| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                         |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                           |
-| **List**                    | `list`                                                                                                                                                                               |
-| **Help**                    | `help`                                                                                                                                                                               |
-| **Exit**                    | `exit`                                                                                                                                                                               |
-| **Add Public Address**      | `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` |
-| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`                                                |
-| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                                 |
-| **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                               |
-| **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`                                                              |
-| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                                          |
+| Action                      | Format, Examples                                                                                                                                                       |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**                   | `clear`                                                                                                                                                                |
+| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                    |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             |
+| **List**                    | `list`                                                                                                                                                                 |
+| **Help**                    | `help`                                                                                                                                                                 |
+| **Exit**                    | `exit`                                                                                                                                                                 |
+| **Add Public Address**      | `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa 1 c/ETH l/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`      |
+| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd`                                  |
+| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                   |
+| **Delete Public Address**   | `deletepa c/NETWORK [l/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC l/wallet1`                                                                                            |
+| **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`                                                |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                            |
