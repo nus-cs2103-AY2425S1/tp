@@ -378,6 +378,8 @@ Examples:
 
 <br>
 
+#### Finding Contacts by University: `findu`
+
 Finds contacts with a specific university from the currently displayed list.
 
 Format:
