@@ -1,13 +1,12 @@
 package seedu.address.logic.commands.wedding;
 
-import static seedu.address.logic.Messages.*;
-import static seedu.address.logic.Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_REMOVE_WEDDING_SUCCESS;
+import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -86,9 +85,7 @@ public class UnassignWeddingCommand extends Command {
         for (Wedding wedding : weddingsToRemove) {
             if (!model.hasWedding(wedding)) {
                 throw new CommandException(
-                        MESSAGE_WEDDING_NOT_FOUND
-                                + "\n"
-                                + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
+                        MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
             }
             if (!personToEdit.hasWedding(wedding)) {
                 throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
