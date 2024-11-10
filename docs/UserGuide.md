@@ -200,14 +200,11 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 </box>
 
 #### Notes on valid and invalid fields
-- The address book differentiates names by checking both the characters and the number of spaces. John Doe
+- CFG differentiates names by checking both the characters and the number of spaces. John Doe
 with a single space is NOT the same person as John&nbsp;&nbsp;&nbsp;Doe. If there exists a John Doe currently in 
 ContactsForGood, you may add another John &nbsp;Doe with 2 spaces between.
 - Note: Email addresses without periods (Single Label Domains) **are supported**. 
 e.g. johndoe@intranet is a valid email.
-
-
-
 
 
 Examples:
