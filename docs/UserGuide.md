@@ -251,7 +251,7 @@ Examples:
 If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
 </box>
 
-#### Editing All other fields
+#### Editing all other fields
 
 Except for the module-role pairs, all other fields can only be edited by complete replacement.
 
