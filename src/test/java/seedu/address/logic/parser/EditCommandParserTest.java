@@ -83,11 +83,15 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_invalidEditCommandWithNameAndModules_throwsParseException() {
-        String invalidCommand = String.format("edit %s n/%s %s %s",
-                "12345678", VALID_NAME_AMY, VALID_MODULE_AMY, VALID_MODULE_BOB);
+    public void parse_moduleAndOtherFieldsPresent_failure() {
+        String studentId = "12345678";
+        String userInputWithExtraName = studentId + " m/ CS1010S CS1231S n/ Amy Bee";
+        String userInputWithExtraEmail = studentId + " m/ CS1010S CS1231S e/ amybee@gmail.com";
+        String userInputWithExtraCourse = studentId + " m/ CS1010S CS1231S c/ Physics";
 
-        assertParseFailure(parser, invalidCommand, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInputWithExtraName, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInputWithExtraEmail, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInputWithExtraCourse, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
 
     @Test
