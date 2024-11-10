@@ -1243,6 +1243,7 @@ This was time and effort intensive as:
 * Orders are handled differently from Person because identical orders should be allowed.
 * Orders requires additional levels of similarity checks.
 * Further enhancements for order management by parameters is stated below.
+* Implementing the GUI for order, `OrderListPanel` is not a direct parallel of the `CustomerListPanel` as the `OrderList` is inside `Customer` class instead of being directly inside the `ModelManger` class, hence the need to handle the selected `Customer` as well.
 
 ### Implementing `Order` parameters for order management
 
