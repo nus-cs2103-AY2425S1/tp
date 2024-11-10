@@ -40,11 +40,13 @@ title: User Guide
     * [Utility Features](#utility-features)
         * [Clearing all entries](#clearing-all-entries--clear)
         * [Getting help](#getting-help--help)
-        * [Exiting the program](#exiting-the-program--exit) 
+        * [Exiting the program](#exiting-the-program--exit)
 
 5. [Data Management](#data-management-in-academyassist)
 
 6. [FAQ](#faq)
+
+7. [Planned Features](#planned-features)
 
 7. [Command summary](#command-summary)
 
@@ -552,12 +554,12 @@ Format: `exit`
 
 ---
 
-## Data Management in AcademyAssist
+# Data Management in AcademyAssist
 
 Welcome to the Data Management section of AcademyAssist! Here, we'll explain how your important information
 is stored and managed.
 
-### How Your Data is Saved
+## How Your Data is Saved
 
 Don't worry about constantly saving your work - AcademyAssist has got you covered! Here's what you need to know:
 
@@ -570,7 +572,7 @@ It's like a digital filing cabinet just for AcademyAssist.
 3. **Easy to Understand**: We use a format called JSON to store your data. While you don't need
 to know the details, it's designed to be easy for both computers and humans to read if needed.
 
-### Keeping Your Data Safe
+## Keeping Your Data Safe
 
 Your information is important, so here are some tips to keep it secure:
 
@@ -581,7 +583,7 @@ why not copy your AcademyAssist file to a USB drive or cloud storage?
 it unless you're an expert in CLI applications. It's safer to make changes through the AcademyAssist program.
 
 
-### What If Something Goes Wrong?
+## What If Something Goes Wrong?
 
 Don't panic! AcademyAssist is designed to handle most issues smoothly. But if you do run into problems:
 
@@ -598,7 +600,7 @@ If you ever have questions about your data, just ask - we're always happy to hel
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
@@ -608,7 +610,25 @@ the data of your previous AcademyAssist folder.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+# Planned Features
+As part of our ongoing efforts to enhance the functionality of the student management system, we are excited to 
+introduce the following features aimed at providing greater flexibility in subject management:
+
+1. **Create Subject**: Allow users to create their own subjects. Currently, the application only permits a restricted
+set of predefined subjects. With this feature, users will be able to tailor the subjects offered in their tuition center
+based on their specific needs.
+<br><br>
+2. **Delete Subject**: Enable users to delete subjects that are no longer offered by the tuition center. This feature
+will also automatically remove the subject tag from students currently enrolled in that subject, ensuring accurate and
+up-to-date records.
+<br><br>
+3. **Drop Subject**: Allow users to modify the subjects taken by students by dropping a subject. Currently, the system
+only supports adding subjects, and if a user wants to remove a subject from a student’s record, they must use the edit
+feature and manually note the remaining subjects. This new feature will streamline the process and enhance usability.
+
+### Conclusion
+These planned features are designed to improve the administrative capabilities of our student management system, allowing for more efficient subject management. We welcome your feedback and suggestions as we work towards implementing these enhancements!
+# Glossary
 1. **Command**: An instruction given by a user to a computer program.
 2. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
 3. **Graphical User Interface (GUI)**: A visual interface that allows users to interact with a program using graphical elements.
