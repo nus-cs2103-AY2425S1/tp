@@ -28,7 +28,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 ### Architecture
-<puml src="diagrams/ArchitectureDiagram.puml" width="280"/>
+<div style="text-align: center;">
+    <puml src="diagrams/ArchitectureDiagram.puml" width="280"/>
+</div>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +55,9 @@ The bulk of the app's work is done by the following four components:
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"/>
+<div style="text-align: center;">
+    <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"/>
+</div>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -68,7 +72,9 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<div style="text-align: center;">
+    <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+</div>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -90,7 +96,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<div style="text-align: center;">
+    <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+</div>
 
 <box type="info" seamless>
 
@@ -106,18 +114,23 @@ How the `Logic` component works:
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<div style="text-align: center;">
+    <puml src="diagrams/ParserClasses.puml" width="600"/>
+</div>
 
 How the parsing works:
 * When called upon to parse a user command, the `CampusConnectParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `CampusConnectParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 Finally, the `Logic` contains the important `Command` classes. Some command classes from AB3 have been retained:
-<puml src="diagrams/CommandClassesOriginal.puml" width="600"/>
-
+<div style="text-align: center;">
+    <puml src="diagrams/CommandClassesOriginal.puml" width="600"/>
+</div>
 
 However, there are new classes implemented for CampusConnect as well:
-<puml src="diagrams/CommandClasses.puml" width="600"/>
+<div style="text-align: center;">
+    <puml src="diagrams/CommandClasses.puml" width="600"/>
+</div>
 
 The structure is simple:
 * Each `Command` class (old and new) extends from the abstract `Command` class, which enforces the implementation of the `execute()` method.
@@ -127,7 +140,9 @@ The structure is simple:
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<div style="text-align: center;">
+    <puml src="diagrams/ModelClassDiagram.puml" width="450" />
+</div>
 
 The `Model` component,
 
@@ -139,7 +154,9 @@ The `Model` component,
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CampusConnect`, which `Person` references. This allows `CampusConnect` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<div style="text-align: center;">
+    <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+</div>
 
 </box>
 
@@ -147,7 +164,9 @@ The `Model` component,
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<div style="text-align: center;">
+    <puml src="diagrams/StorageClassDiagram.puml" width="550" />
+</div>
 
 The `Storage` component,
 * can save both CampusConnect data and user preference data in JSON format, and read them back into corresponding objects.
@@ -180,13 +199,19 @@ These operations are exposed in the `Model` interface as `Model#saveCurrentCampu
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedCampusConnect` will be initialized with two stacks.
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+<div style="text-align: center;">
+    <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+</div>
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the CampusConnect. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+<div style="text-align: center;">
+    <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+</div>
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+<div style="text-align: center;">
+    <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+</div>
 
 <box type="info" seamless>
 
@@ -195,8 +220,9 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 </box>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCampusConnect()`, which will save the current CampusConnect state into `future` and pop the latest saved CampusConnect state from the `history`.
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
+<div style="text-align: center;">
+    <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+</div>
 
 <box type="info" seamless>
 
@@ -206,7 +232,9 @@ than attempting to perform the undo.
 </box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<div style="text-align: center;">
+    <puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+</div>
 
 <box type="info" seamless>
 
@@ -215,7 +243,9 @@ The following sequence diagram shows how an undo operation goes through the `Log
 </box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+<div style="text-align: center;">
+    <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+</div>
 
 The `redo` command does the opposite — it calls `Model#redoCampusConnect()`, which save current state into `history` and restores the CampusConnect to that state popped from the top of `future`.
 
@@ -226,13 +256,19 @@ The `redo` command does the opposite — it calls `Model#redoCampusConnect()
 </box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the CampusConnect, such as `list`, will usually not call `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` or `Model#redoCampusConnect()`. Thus, the `history` and `future` remain unchanged.
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+<div style="text-align: center;">
+    <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+</div>
 
 Step 6. The user executes `clear`, which calls `Model#commitCampusConnect()`. All CampusConnectState in the future will be removed. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+<div style="text-align: center;">
+    <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+</div>
 
 The following activity diagram summarizes what happens when a user executes a new command:
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<div style="text-align: center;">
+    <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+</div>
 
 #### Design considerations:
 
