@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Supplier;
@@ -53,7 +55,13 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
-        orders.setText(person.getOrders());
+
+        List<Order> orderList = person.getOrders();
+        StringBuilder builder = new StringBuilder();
+        for (Order order : orderList) {
+            builder.append(order.toString()).append("\n");
+        }
+        orders.setText(builder.toString());
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
