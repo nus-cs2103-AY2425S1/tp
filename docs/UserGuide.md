@@ -650,6 +650,7 @@ Displaying the detailed command window can be done in two ways:
 </div>
 
 **Tips:**
+- Ensure that data is updated for accurate visualisation.
 - Press "esc" to close the pie chart window.
 
 [Back to Table of Contents](#table-of-contents)
