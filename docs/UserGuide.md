@@ -1,7 +1,7 @@
 
 # VendorVault User Guide
 
-VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. VendorVault is targeted at small convenience/grocery stores. 
+VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. VendorVault specifically targets small convenience/grocery stores and aims to help them achieve higher efficiency! 
 
 --- 
 
@@ -18,7 +18,7 @@ VendorVault is a **desktop app for managing supplier contact information and del
 
 2. If you have already set up Vendor Vault and are looking for information of our commands and features, take a look at our [Features](#features) or [Command Summary](#command-summary) sections. 
 
-3. If you’re unsure about any of the terms used in this User Guide, please refer to the [Glossary](#glossary) section for definitions and explanations
+3. If you’re unsure about any of the terms used in this User Guide, please refer to the [Glossary](#glossary) section for definitions and explanations.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ VendorVault is a **desktop app for managing supplier contact information and del
    - 1a. Open up your command terminal. 
      * Windows users can open the terminal by typing in `Command Prompt` in the search bar located at the bottom left of the screen. 
      * Mac users can open the terminal by typing in `Terminal` using the spotlight search bar (accessed by pressing Command + Space).
-     * Linux users can open for the command terminal by searching for the `Terminal` or `Console` in the Applications Menu
+     * Linux users can open for the command terminal by searching for the `Terminal` or `Console` in the Applications Menu.
    
    - 1b. Type in java -version to check if you have Java installed. If you have java installed you should see something like this:
      ![Terminal Example showcasing java version](images/intro/terminalJavaVersion.png)
@@ -82,7 +82,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * For the commands `help` `clear` and `exit`, extra information/words following the command after a space will be ignored.<br>
-  e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`. However, `exit1` will not be recognized as a command
+  e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`. However, `exit1` will not be recognized as a command.
 
 * For all parameters, starting and ending spaces will be trimmed.
 
@@ -105,19 +105,19 @@ Format: `help`
 
 ### Viewing all deliveries and suppliers : `list -a`
 
-Lists all suppliers and deliveries in the VendorVault
+Lists all suppliers and deliveries in the VendorVault.
 
 Format: `list -a`
 
 <box type="warning" seamless>
 **Warnings**:
 - No other parameters should be given for this command.
-- Give at least one space between list and -a
+- Give at least one space between list and -a.
 </box>
 
 ### Clearing all suppliers and deliveries : `clear`
 
-Clear all data regarding suppliers and deliveries in vendor vault
+Clear all data regarding suppliers and deliveries in vendor vault.
 
 Format: `clear`
 
