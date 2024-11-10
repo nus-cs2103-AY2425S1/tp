@@ -1,16 +1,31 @@
 ---
-layout: page
-title: User Guide
+# RealConnect User
 ---
-# RealConnect
+
 RealConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Real Connect can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-  {:toc}
+--------------------------------------------------------------------------------------------------------------------
+### Table of Contents
+1. [Quick Start](#quick-start)
+2. [Command Structure](#command-structure)
+3. [Features](#features)
+    - [Viewing help](#viewing-help--help)
+    - [Adding a person](#adding-a-person--add)
+    - [Listing all persons](#listing-all-persons--list)
+    - [Sorting contacts](#sorting-contacts--sort)
+    - [Editing a person](#editing-a-person--edit)
+    - [Adding history to a person](#adding-history-to-a-person--log)
+    - [Remarking a person](#remarking-a-person--remark)
+    - [Single page person view](#single-page-person-view--view)
+    - [Adding a Property](#adding-a-property--addproperty)
+4. [Parameter Requirements](#parameter-requirements)
+5. [Command Summary](#command-summary)
+6. [Coming Soon](#coming-soon)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+### Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -198,7 +213,7 @@ Examples:
 
 ### Remarking a person : `remark`
 
-Add or edit remark to an existing person in the address book. Note that although multiple remarks may be entered, 
+Add or edit remark to an existing person in the address book. Note that although multiple remarks may be entered,
 only the last (most up to date one) will be recorded.
 
 Format: `remark INDEX r/REMARK]…​`
@@ -262,7 +277,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords. <br> 
+Finds persons whose names contain any of the given keywords. <br>
 
 > ###### ⚠️ **Warning**
 > Commands that alter the ordering of the original list like `favourite` and `sort` will show the full list again.
@@ -290,7 +305,7 @@ Finds persons whose names contain any of the given keywords. <br>
 ### Marking a person as favourite: `favourite`
 
 Mark a specific person from the address book as favourite by assigning a special favourite tag.
-Using this command on an already favourited person will remove the person from favourite 
+Using this command on an already favourited person will remove the person from favourite
 by removing the special favourite tag.
 
 Format: `favourite INDEX`
