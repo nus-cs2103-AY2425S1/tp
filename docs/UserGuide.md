@@ -173,7 +173,7 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
     - **Format**: `COMMAND NAME [parameters]`
     - **Behavior**:
         - **Case-insensitive matching**.
-        - **Full name matching**: Searches for names containing the entire keyword.
+        - **Full name matching**: Searches for names containing the entire keyword (not necessarily as substring).
         - **Single Match**:
             - Command executes immediately.
         - **Multiple Matches**:
@@ -387,11 +387,11 @@ Filters and lists persons whose fields match the specified keywords.
     - Case-insensitive search.
     - Returns persons matching any of the fields (logical `OR` search).
 - **Field-Specific Matching**:
-    - **Name**: Requires an exact substring match.
-    - **Role**: Exact match, case-insensitive.
-    - **Email**: Allows partial matches.
+    - **Name**: Allow partial matches. 'filter n/Al Ye' will allow Alex Yeoh to be filtered.
+    - **Role**: Requires exact role match.
+    - **Email**: Requires exact email match.
     - **Phone**: Requires exact number match.
-    - **Address**: Allows partial matches, case-insensitive.
+    - **Address**: Allows partial matches.
 - **Examples**:
     - `filter n/John` returns persons named `John`.
     - `filter r/vendor` returns persons with role `vendor`.
