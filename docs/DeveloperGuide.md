@@ -151,82 +151,15 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Undo/redo feature
+### 1. Add Command
 
-#### Implementation
+### 2. Edit Command
 
-The undo/redo mechanism is facilitated by `VersionedAgentAssist`. It extends `AgentAssist` with an undo/redo history, stored internally as an `agentAssistStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+### 3. Delete Command
 
-* `VersionedAgentAssist#commit()` — Saves the current address book state in its history.
-* `VersionedAgentAssist#undo()` — Restores the previous address book state from its history.
-* `VersionedAgentAssist#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAgentAssist()`, `Model#undoAgentAssist()` and `Model#redoAgentAssist()` respectively.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAgentAssist` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAgentAssist()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `agentAssistStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAgentAssist()`, causing another modified address book state to be saved into the `agentAssistStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAgentAssist()`, so the address book state will not be saved into the `agentAssistStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAgentAssist()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AgentAssist state, then there are no previous AgentAssist states to restore. The `undo` command uses `Model#canUndoAgentAssist()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAgentAssist()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `agentAssistStateList.size() - 1`, pointing to the latest address book state, then there are no undone AgentAssist states to restore. The `redo` command uses `Model#canRedoAgentAssist()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAgentAssist()`, `Model#undoAgentAssist()` or `Model#redoAgentAssist()`. Thus, the `agentAssistStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAgentAssist()`. Since the `currentStatePointer` is not pointing at the end of the `agentAssistStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
 
 ## **Planned enhancements**
 

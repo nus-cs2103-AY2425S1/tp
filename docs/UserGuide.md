@@ -8,7 +8,7 @@ title: User Guide
 The **AgentAssist User Guide** is here to help you unlock the full potential of **AgentAssist** and take your credit card sales to the next level. This guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
 
 In this guide, you'll learn how to:
-* **Set Up AgentAssist**
+* **Set Up AgentAssist** to be used to manage clients.
 * **Navigate and Use Key Features** like contact management, filtering, and more.
 * **Optimize Your Workflow** with shortcuts, data export/import, and automatic saving.
 
@@ -216,7 +216,6 @@ Let's take a look at the structure in more detail:
 | **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> This guide may represent it as a placeholder using `<ARGUMENT>`. | `John Doe`, `john@example.com` |
 
 Here's an example that uses multiple flags and arguments:
-Here's an example that uses multiple flags and arguments:
 ```
 add n/ John Doe e/ john@example.com
 ```
@@ -230,19 +229,19 @@ A command is the action that AgentAssist will perform, such as adding, deleting,
 
 Here is a reference table that briefly summarizes available commands:
 
-| **Command** | **Description**                                        |
-|-------------|--------------------------------------------------------|
-| `add`       | Adds a new client to the system.                       |
-| `edit`      | Modifies details of an existing client.                |
-| `delete`    | Removes a client from the system.                      |
-| `list`      | Displays all clients currently stored in the system.   |
-| `filter`    | Filters clients based on specified criteria            |
-| `view`      | Opens a split view showing detailed client information |
-| `close`     | Closes the split view of client details                |
-| `clear`     | Deletes all clients from the system.                   |
-| `undo`      | Undoes latest command.                                 |
-| `help`      | Displays a list of available commands and their usage. |
-| `exit`      | Exits the AgentAssist application.                     |
+| **Command** | **Description**                                         |
+|-------------|---------------------------------------------------------|
+| `add`       | Adds a new client to the system.                        |
+| `edit`      | Modifies details of an existing client.                 |
+| `delete`    | Removes a client from the system.                       |
+| `list`      | Displays all clients currently stored in the system.    |
+| `filter`    | Filters clients based on specified criteria.            |
+| `view`      | Opens a split view showing detailed client information. |
+| `close`     | Closes the split view of client details.                |
+| `clear`     | Deletes all clients from the system.                    |
+| `undo`      | Undoes latest command.                                  |
+| `help`      | Displays a list of available commands and their usage.  |
+| `exit`      | Exits the AgentAssist application.                      |
 
 Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
@@ -284,7 +283,7 @@ Refer to the table below for more details.
 | **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
 |----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             |
-| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                                               |
+| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 6, 8 or 9                                            |
 | `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                                                  |
 | `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   |
@@ -458,7 +457,7 @@ edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/
 ```
 - Mandatory Field: `<INDEX>`, at least one of the Optional Fields
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
-- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command.
+- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#541-viewing-a-clients-details).
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments).
 
@@ -502,30 +501,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
           Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
           Example Usage: 'edit 1 p/91234567 e/johndoe@example.com'
           ```
-  - Error caused by invalid values for some fields
-      - Message:
-        ```
-        Invalid command format!
-        <INDIVIDUAL FIELD'S ERROR MESSAGES>...
-        ```
-
-- **On Error**
-    - Error caused by invalid index
-        - Message:
-          ```
-          Invalid command format!
-          edit: Edits the details of the client identified by the index number used in the displayed client list. Existing values will be overwritten by the input values. Any fields unspecified will not be modified.
-          Required Parameters: INDEX (must be a positive integer)
-          Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
-          Example Usage: 'edit 1 p/91234567 e/johndoe@example.com'
-          ```
     - Error caused by invalid values for some fields
         - Message:
           ```
           Invalid command format!
           <INDIVIDUAL FIELD'S ERROR MESSAGES>...
           ```
-
 
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
@@ -630,7 +611,7 @@ list
 
 **Command Format:**
 ```
-filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>
+filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>]
 ```
 - **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left empty.
 - **Special Syntax for Income (i/)**:
@@ -768,7 +749,11 @@ close
 undo
 ```
 - Reverts all changes of the previous command.
-- **Note:** This command can only be used after a permanent change has been made (e.g. after using the edit command).
+- **Note:** This command is only used on the latest command which made a permanent change to the list of clients. If there have been no previous permanent changes, this command will not work at all. The commands that `undo` works on are:
+  - add
+  - edit
+  - delete
+  - clear
 - **Note:** You can only use `undo` once. Using `undo` 2 times in a row has the same effect as not using the `undo` command at all.
 
 ### 5.4.4 Help Menu
@@ -814,7 +799,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 > ⚠️ **Danger:**
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
 >
-> Incorrect data modifications may also cause unexpected behavior. **Only modify the data file if you're confident in doing so correctly.**
+> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.**
 
 [↑ Return to Table of Contents](#table-of-contents)
 
