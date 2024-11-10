@@ -1,4 +1,4 @@
----
+`---
 layout: page
 title: User Guide
 ---
@@ -145,10 +145,11 @@ Adds a person to the address book.
 
 Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​`
 
-* Email, gender and study group tags are **case-insensitive**
-* Valid entries for gender are M/m/F/f
-* Age must be a positive integer less than 150
-* Two contacts are considered **duplicates** if they share the same **email** address
+* Email, gender and study group tags are **case-insensitive**.
+* Valid entries for names must consist only of letters; numbers and special characters are not allowed. Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
+* Valid entries for gender are M/m/F/f.
+* Age must be a positive integer less than 150.
+* Two contacts are considered **duplicates** if they share the same **email** address.
 
 Examples:
 * `add n/John Doe e/johnd@example.com g/M a/30 d/to be assigned t/1A t/2B`
@@ -188,16 +189,16 @@ Examples:
 
 Deletes the specified persons from the address book.
 
-Format: `delete [INDEX | INDEX-INDEX]…`
+Format: `delete INDEX | LowerBound-UpperBound [INDEX | LowerBound-UpperBound]…`
 
-* Deletes the person at the specified `INDEX` or range of indices
-* The index must be within the range
+* Deletes the person at the specified `INDEX` or range of indices.
+* All input indices must be within the range.
 * When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
 
 Examples:
 * `delete 2` deletes the 2nd person in the displayed list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the [`find` command](#locating-persons-by-criteria-find).
-* `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
+* `delete 1 3 5-7 15` deletes the 1st, 3rd, 5th, 6th, 7th and 15th person in the displayed list.
 
 ### Exiting the program : `exit`
 

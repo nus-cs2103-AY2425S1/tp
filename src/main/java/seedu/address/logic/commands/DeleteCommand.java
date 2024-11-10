@@ -36,6 +36,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_FULL_RANGE = "Both the lower and upper bounds should be present.\n"
             + "Ensure there are no spaces around the hyphen in range inputs. Example: 1-5";
 
+    public static final String MESSAGE_INVALID_INPUT = "Invalid input: Must be positive integer.\n";
+
     private final List<Index> targetIndices;
 
     public DeleteCommand(List<Index> targetIndices) {

@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,35 +29,42 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 String[] range = part.split("-");
                 if (range.length != 2) {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_FULL_RANGE));
+                            DeleteCommand.MESSAGE_FULL_RANGE);
                 }
                 try {
                     int start = Integer.parseInt(range[0].trim());
                     int end = Integer.parseInt(range[1].trim());
                     if (start <= 0 || end <= 0) {
-                        throw new ParseException("Invalid input: Must be positive integer");
+                        throw new ParseException(
+                                DeleteCommand.MESSAGE_INVALID_INPUT);
                     }
                     // Check for valid range
                     if (start > end) {
-                        throw new ParseException("Invalid range: "
-                                + "The end index must be greater than or equal to the start index");
+                        throw new ParseException(
+                                DeleteCommand.MESSAGE_INVALID_RANGE);
                     }
                     for (int i = start; i <= end; i++) {
                         indices.add(ParserUtil.parseIndex(String.valueOf(i)));
                     }
                 } catch (NumberFormatException e) {
-                    throw new ParseException("Invalid input: Must be positive integer", e);
+                    throw new ParseException(
+                            DeleteCommand.MESSAGE_INVALID_INPUT);
                 }
+            } else if (!part.matches("\\d+")) {
+                throw new ParseException(
+                        DeleteCommand.MESSAGE_INVALID_INPUT);
             } else {
                 // Handle individual index
                 try {
                     int index = Integer.parseInt(part.trim());
                     if (index <= 0) {
-                        throw new ParseException("Invalid input: Must be positive integer");
+                        throw new ParseException(
+                                DeleteCommand.MESSAGE_INVALID_INPUT);
                     }
                     indices.add(ParserUtil.parseIndex(part.trim()));
                 } catch (NumberFormatException e) {
-                    throw new ParseException("Invalid input: Must be positive integer", e);
+                    throw new ParseException(
+                            DeleteCommand.MESSAGE_USAGE);
                 }
             }
         }
