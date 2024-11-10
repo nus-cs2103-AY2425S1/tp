@@ -165,13 +165,13 @@ The tier and status fields are classes which contain an enum value.
 
 ![TierStatusAttributes](images/TierStatusAttributes.png)
 
-The usage of enums here help to restrict the range of possible values that Tier or Status can take on. 
+The usage of enums here help to restrict the range of possible values that Tier or Status can take on.
 
 For Tier, this helped to model the real-world dynamic of there being a predefined list of credit-card services offered by a bank. At the same time, we also considered the possibility of there existing clients who have applied for but have been rejected in their credit card applications.
 
 We believe that this information can help Agents understand at a glance, their customer's needs better.
 
-The usage of an Enum in Tier, also makes it easier to modify the list of predefined credit services, to tailor it to each bank's own unique catalogue of services. 
+The usage of an Enum in Tier, also makes it easier to modify the list of predefined credit services, to tailor it to each bank's own unique catalogue of services.
 
 When modifying the `Enum`, remember to also update the CSS files `ClientDetailPanel.css` and `ClientListCard.css`. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new `Enum` settings. Here is an example of the changes to a css file after renaming one enum value to `TEST`:
 ![img_1.png](images/CssFileSetting.png)
@@ -244,7 +244,7 @@ Additionally, certain command hints could benefit from more clarity on constrain
 - Clarify edit command hint – Add information on the constraint preventing simultaneous use of rn/ and ra/ flags.
 
 **Status:** Scheduled for future release as the current error messages are still usable and help guide the user. Reason being:
-1. Current error messages adequately inform users. However, standardisation will enhance usability by reducing confusion and improving consistency. 
+1. Current error messages adequately inform users. However, standardisation will enhance usability by reducing confusion and improving consistency.
 2. The restriction on rn/ and ra/ flags is documented in the user guide, and an error is displayed when both flags are used together, thus users can learn of this constraint through multiple channels.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -394,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The given edit option is invalid.
   * 3b1. AgentAssist shows an invalid parameter error message.
-  
+
     Use case resumes at step 3.
 * 3c. Provided values are invalid.
   * 3c1. AgentAssist shows the errors pertaining to the fields.
@@ -429,8 +429,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to close detailed view. 
-2.  AgentAssist closes the detailed view.
+1. User requests to close detailed view. 
+2. AgentAssist closes the detailed view. 
 
     Use case ends.
 
