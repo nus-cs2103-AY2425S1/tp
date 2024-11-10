@@ -184,7 +184,7 @@ public class ModelManager implements Model {
                 .addTags(goodsList.getReceiptList()
                         .stream()
                         .filter(g -> g.isFromSupplier(p.getName()))
-                        .map(g -> new Tag(g.getGoods().getCategory().name()))
+                        .map(g -> new Tag(g.getGoods().category().name()))
                         .toList())).toList();
     }
 

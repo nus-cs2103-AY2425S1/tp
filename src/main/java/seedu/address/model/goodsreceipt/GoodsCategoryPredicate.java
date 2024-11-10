@@ -22,7 +22,7 @@ public class GoodsCategoryPredicate implements Predicate<GoodsReceipt> {
 
     @Override
     public boolean test(GoodsReceipt goodsData) {
-        return goodsData.getGoods().getCategory().equals(this.category);
+        return goodsData.getGoods().category().equals(this.category);
     }
 
     @Override

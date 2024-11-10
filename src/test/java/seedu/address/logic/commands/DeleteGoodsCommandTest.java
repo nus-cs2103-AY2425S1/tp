@@ -32,7 +32,7 @@ public class DeleteGoodsCommandTest {
                 .withGoods(apple)
                 .build();
         model.addGoods(appleReceipt);
-        DeleteGoodsCommand cmd = new DeleteGoodsCommand(BOB.getName(), apple.getGoodsName());
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(BOB.getName(), apple.goodsName());
         assertCommandFailure(cmd, model, Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND);
     }
 
@@ -59,7 +59,7 @@ public class DeleteGoodsCommandTest {
                 .build();
         model.addGoods(appleReceipt);
         model.addGoods(bananaReceipt);
-        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), banana.getGoodsName());
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), banana.goodsName());
         assertCommandFailure(cmd, model, Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND);
     }
 
@@ -76,8 +76,8 @@ public class DeleteGoodsCommandTest {
                 .withGoods(apple)
                 .build();
         model.addGoods(appleReceipt);
-        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), apple.getGoodsName());
-        String expectedMessage = String.format(MESSAGE_SUCCESS, apple.getGoodsName());
+        DeleteGoodsCommand cmd = new DeleteGoodsCommand(ALICE.getName(), apple.goodsName());
+        String expectedMessage = String.format(MESSAGE_SUCCESS, apple.goodsName());
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(ALICE);
         assertCommandSuccess(cmd, model, expectedMessage, expectedModel);

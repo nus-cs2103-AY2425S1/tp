@@ -53,7 +53,7 @@ public class GoodsCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         goodsName.setText(goodsReceipt.getGoods().toString());
         goodsCategory = new Label();
-        goodsCategory.setText(goodsReceipt.getGoods().getCategory().toString());
+        goodsCategory.setText(goodsReceipt.getGoods().category().toString());
         goodsCategoryFlowPane.getChildren().add(goodsCategory);
         supplierName.setText("From: " + goodsReceipt.getSupplierName().toString());
         procurementDate.setText("Ordered on " + goodsReceipt.getProcurementDate().getReadableDateTimeString());

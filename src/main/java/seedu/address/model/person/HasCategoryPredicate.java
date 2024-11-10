@@ -37,7 +37,7 @@ public class HasCategoryPredicate implements Predicate<Person> {
                 .getReceiptList()
                 .stream()
                 .filter(goodsReceipt -> goodsReceipt.isFromSupplier(person.getName()))
-                .anyMatch(goodsReceipt -> categoriesSet.contains(goodsReceipt.getGoods().getCategory()));
+                .anyMatch(goodsReceipt -> categoriesSet.contains(goodsReceipt.getGoods().category()));
     }
 
     @Override

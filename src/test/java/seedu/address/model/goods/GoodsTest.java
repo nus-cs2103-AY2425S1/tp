@@ -30,7 +30,7 @@ public class GoodsTest {
     public void getGoodsName_success() {
         Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
         String expected = "Gardenia Bread";
-        assertEquals(new GoodsName(expected), testGoods.getGoodsName());
+        assertEquals(new GoodsName(expected), testGoods.goodsName());
     }
 
     @Test
