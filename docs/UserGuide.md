@@ -242,10 +242,10 @@ If you're an advanced user looking to edit the JSON file directly, head over to 
 ## Features
 
 <div class="alert" markdown="span">
-Before proceeding, make sure you have reviewed the [Command Structure](#command-structure) section or are already familiar with EZSTATE's command structure. This will ensure you can fully understand and use all of EZSTATE's features. 
+Before proceeding, please review or familiarize yourself with EZSTATE's [Command Structure](#command-structure) to ensure effective use of all features.
 </div>
-
 <br>
+
 EZSTATE features (i.e. commands) are divided into **four** main categories:
 
 1. [Client Management Commands](#1-client-management-commands)
