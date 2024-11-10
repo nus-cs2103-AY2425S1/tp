@@ -8,7 +8,9 @@ With so many positions to apply for, managing applications becomes a real challe
 In this guide, new users will find everything you need to get started while experienced users can user the [command summary](#command-summary) as a quick reference. Let's dive in and make your internship search a little easier!
 
 *Use HireMe to get hired now!*
-## Overview
+<br></br>
+
+## Overview of User Guide
 
 HireMe is a **free desktop application that helps you manage your extensive list of internship applications.**
 
@@ -23,6 +25,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 
 <!-- TOC -->
 * [HireMe User Guide](#hireme-user-guide)
+  * [Overview of target users](#overview-of-target-users)
   * [Quick start](#quick-start)
   * [Features](#features)
     * [Viewing help : `/help`](#viewing-help-help)
@@ -40,6 +43,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
   * [FAQ](#faq)
   * [Command summary](#command-summary)
 <!-- TOC -->
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,6 +107,7 @@ started with HireMe!
 
 </box>
 
+<br></br>
 ### Viewing help : `/help`
 
 Shows a message explaining how you can access the help page.
@@ -111,7 +116,7 @@ Shows a message explaining how you can access the help page.
 
 Format: `/help`
 
-<br>
+<br></br>
 
 ### Adding an internship application: `/add`
 
@@ -131,11 +136,11 @@ Examples:
 
 <p>Before and after images of the second example</p>
 <div style="display: flex;">
-  <img src="images/add-before.png" width="500" alt="Add-Before" style="margin-right: 20px;">
-  <img src="images/add-after.png" width="500" alt="Add-After">
+  <img src="images/add-before.png" width="350" alt="Add-Before" style="margin-right: 20px;">
+  <img src="images/add-after.png" width="350" alt="Add-After">
 </div>
 
-<br>
+<br></br>
 
 ### Listing all internship applications : `/list`
 
@@ -143,7 +148,7 @@ Shows a list of all of your internship applications in HireMe.
 
 Format: `/list`
 
-<br>
+<br></br>
 
 ### Deleting an internship application : `/delete`
 
@@ -163,11 +168,11 @@ Examples:
 
 <p>Before and after images of the first example</p>
 <div style="display: flex;">
-  <img src="images/delete-before.png" width="500" alt="Delete-Before" style="margin-right: 20px;">
-  <img src="images/delete-after.png" width="500" alt="Delete-After">
+  <img src="images/delete-before.png" width="350" alt="Delete-Before" style="margin-right: 20px;">
+  <img src="images/delete-after.png" width="350" alt="Delete-After">
 </div>
 
-<br>
+<br></br>
 
 ### Finding applications by company name: `/find`
 
@@ -190,11 +195,11 @@ Examples:
 
 <p>Before and after images of the last example</p>
 <div style="display: flex;">
-  <img src="images/find-before.png" width="500" alt="Find-Before" style="margin-right: 20px;">
-  <img src="images/find-after.png" width="500" alt="Find-After">
+  <img src="images/find-before.png" width="350" alt="Find-Before" style="margin-right: 20px;">
+  <img src="images/find-after.png" width="350" alt="Find-After">
 </div>
 
-<br>
+<br></br>
 
 ### Updating the status of an internship application : `/accept`, `/pending`, `/reject`
 
@@ -218,11 +223,11 @@ Examples:
 
 <p>Before and after images of the first example</p>
 <div style="display: flex;">
-  <img src="images/accept-status-before.png" width="500" alt="Accept-Status-Before" style="margin-right: 20px;">
-  <img src="images/accept-status-after.png" width="500" alt="Accept-Status-After">
+  <img src="images/accept-status-before.png" width="350" alt="Accept-Status-Before" style="margin-right: 20px;">
+  <img src="images/accept-status-after.png" width="350" alt="Accept-Status-After">
 </div>
 
-<br>
+<br></br>
 
 ### Filtering internship applications by status: `/filter`
 
@@ -240,11 +245,11 @@ Examples:
 
 <p>Before and after images of the second example</p>
 <div style="display: flex;">
-  <img src="images/filter-before.png" width="500" alt="Filter-Before" style="margin-right: 20px;">
-  <img src="images/filter-after.png" width="500" alt="Filter-After">
+  <img src="images/filter-before.png" width="350" alt="Filter-Before" style="margin-right: 20px;">
+  <img src="images/filter-after.png" width="350" alt="Filter-After">
 </div>
 
-<br>
+<br></br>
 
 ### Sorting internship applications: `/sort`
 
@@ -262,11 +267,11 @@ Examples:
 
 <p>Before and after images of the first example</p>
 <div style="display: flex;">
-  <img src="images/sort-before.png" width="500" alt="Sort-Before" style="margin-right: 20px;">
-  <img src="images/sort-after.png" width="500" alt="Sort-After">
+  <img src="images/sort-before.png" width="350" alt="Sort-Before" style="margin-right: 20px;">
+  <img src="images/sort-after.png" width="350" alt="Sort-After">
 </div>
 
-<br>
+<br></br>
 
 ### Clearing all entries : `/clear`
 
@@ -280,17 +285,17 @@ This removes all the internship applications that you have been tracking. You wi
 
 Format: `/clear`
 
-<br>
+<br></br>
 
 ### Viewing status chart: `/chart`
 
-<img src="images/piechart.png" alt="drawing" width="500"/>
+<img src="images/piechart.png" alt="drawing" width="350"/>
 
 Opens a new window that displays a pie chart with summary data of the statuses of all of your internship applications.
 
 Format: `/chart`
 
-<br>
+<br></br>
 
 ### Exiting the program : `/exit`
 
@@ -298,13 +303,13 @@ Exits the HireMe application.
 
 Format: `/exit`
 
-<br>
+<br></br>
 
 ### Saving the data
 
 HireMe data are saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
 
-<br>
+<br></br>
 
 --------------------------------------------------------------------------------------------------------------------
 
