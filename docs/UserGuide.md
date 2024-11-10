@@ -389,6 +389,11 @@ For the best experience:
   - Must follow standard email format (xxx@xxx.xxx)
   - Special characters allowed: . _ - @
 
+## **Q11: Can I add two contacts with the same phone number?**
+**A:** No, phone number is the unique identification number in the contact book. When a different name is attached to an 
+order with a phone number that is already in the address book, the person's name in the address book will be treated as 
+the entity who places the order.
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -436,14 +441,6 @@ addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
 ## **Add Customer Order Command**
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
 New customer will be added with the name if phone number not found in contacts.
-
-<div class="alert alert-info">
-⚠️ **Important Information**  
-To view the new order in the customer's contact details:<br>
-1. Add the customer order using the command above <br>
-2. Click the refresh button in the UI <br>
-3. The order will now appear under the customer's contact information <br> <br>
-</div>
 
 ```bash
 addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYID]... [r/REMARK]
@@ -533,14 +530,6 @@ of supplier contacts and ingredient sources, helping bakery owners efficiently m
 
 ## **Add Supply Order Command**
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
-
-<div class="alert alert-info">
-⚠️ **Important Information**  <br>
-To view the new order in the supplier's contact details: <br>
-1. Add the supplier order using the command above <br> 
-2. Click the refresh button in the UI <br>
-3. The order will now appear under the supplier's contact information <br> <br>
-</div>
 
 ```bash
 addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]... [r/REMARK]
