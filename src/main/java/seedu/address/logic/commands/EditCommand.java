@@ -64,8 +64,7 @@ public class EditCommand extends Command {
             String.format(Messages.MESSAGE_MISSING_PREFIX, "editing");
 
     public static final String MESSAGE_DUPLICATE_CONTACT =
-            String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "This will result in a contact",
-                    "that edits to make");
+            String.format(Messages.MESSAGE_DUPLICATE_CONTACT, "This will result in a contact that");
     public static final String MESSAGE_DUPLICATE_FIELDS_CONTACT =
             String.format(Messages.MESSAGE_DUPLICATE_FIELDS_CONTACT,
                     "If you are sure these are the changes to make, please edit the conflicting "
