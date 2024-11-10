@@ -322,7 +322,7 @@ Examples:
 The delete command deletes the contact from the address book entirely.
 <br><br/>
 
-#### Sort all entries: `sort`
+#### Sorting all contacts: `sort`
 
 Format: `sort`
 
@@ -359,7 +359,7 @@ In this section, note that:
 
 <br><br/>
 
-#### Add wedding: `addw`
+#### Adding a wedding: `addw`
 
 Format: `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CONTACT2_INDEX ...]`
 
@@ -395,7 +395,7 @@ Examples:
 
 <br><br/>
 
-#### View wedding : `view`
+#### Viewing a wedding : `view`
 
 Format: `view WEDDING_INDEX`
 
@@ -409,7 +409,7 @@ Examples:
 
 <br><br/>
 
-#### Edit wedding: `editw`
+#### Editing a wedding: `editw`
 
 Format: `editw WEDDING_INDEX [n/WEDDING_NAME] [d/WEDDING_DATE]`
 
@@ -444,7 +444,7 @@ Examples:
 
 <br><br/>
 
-#### Assign contact to wedding : `assign`
+#### Assigning a contact to a wedding : `assign`
 
 Format: `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
@@ -459,7 +459,7 @@ Examples:
 
 <br><br/>
 
-#### Unassign contact from wedding : `unassign`
+#### Unassigning a contact from a wedding : `unassign`
 
 Format: `unassign c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
@@ -480,7 +480,7 @@ Examples:
 
 <br><br/>
 
-#### Delete wedding: `deletew`
+#### Deleting a wedding: `deletew`
 
 Format: `deletew WEDDING_INDEX`
 
