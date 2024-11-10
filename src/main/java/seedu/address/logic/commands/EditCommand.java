@@ -52,7 +52,7 @@ public class EditCommand extends Command {
 
     /**
      * @param targetName of the person to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editPersonDescriptor the details to edit the person
      */
     public EditCommand(Name targetName, EditPersonDescriptor editPersonDescriptor) {
         this.targetName = targetName;
@@ -87,11 +87,14 @@ public class EditCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof EditCommand)) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof EditCommand otherEditCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
         return targetName.equals(otherEditCommand.targetName)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }

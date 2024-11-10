@@ -13,7 +13,7 @@ import seedu.address.model.goods.GoodsCategories;
  * Tests that a {@code Person} has goods which have at
  * least one of the specified goods categories
  */
-public class HasCategoryPredicate implements Predicate<Person> {
+public class PersonHasGoodsWithCategoriesPredicate implements Predicate<Person> {
 
     private final Model model;
 
@@ -23,7 +23,7 @@ public class HasCategoryPredicate implements Predicate<Person> {
      * Creates a predicate that checks if a person has goods
      * which have at least one of the specified goods categories
      */
-    public HasCategoryPredicate(Model model, Set<GoodsCategories> categoriesSet) {
+    public PersonHasGoodsWithCategoriesPredicate(Model model, Set<GoodsCategories> categoriesSet) {
         requireNonNull(model);
         requireNonNull(categoriesSet);
         this.model = model;
@@ -37,7 +37,7 @@ public class HasCategoryPredicate implements Predicate<Person> {
                 .getReceiptList()
                 .stream()
                 .filter(goodsReceipt -> goodsReceipt.isFromSupplier(person.getName()))
-                .anyMatch(goodsReceipt -> categoriesSet.contains(goodsReceipt.getGoods().getCategory()));
+                .anyMatch(goodsReceipt -> categoriesSet.contains(goodsReceipt.getGoods().category()));
     }
 
     @Override
@@ -46,12 +46,12 @@ public class HasCategoryPredicate implements Predicate<Person> {
             return true;
         }
 
-        if (!(other instanceof HasCategoryPredicate otherHasCategoryPredicate)) {
+        if (!(other instanceof PersonHasGoodsWithCategoriesPredicate otherPersonHasGoodsWithCategoriesPredicate)) {
             return false;
         }
 
-        return model.equals(otherHasCategoryPredicate.model)
-                && categoriesSet.equals(otherHasCategoryPredicate.categoriesSet);
+        return model.equals(otherPersonHasGoodsWithCategoriesPredicate.model)
+                && categoriesSet.equals(otherPersonHasGoodsWithCategoriesPredicate.categoriesSet);
     }
 
     @Override

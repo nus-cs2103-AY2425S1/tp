@@ -94,7 +94,7 @@ public class FindCommandTest {
                 .filter(goodsReceipt -> goodsReceipt.isFromSupplier(person.getName()))
                 .anyMatch(goodsReceipt -> goodsReceipt
                         .getGoods()
-                        .getCategory()
+                        .category()
                         .equals(goodsCategory));
 
         for (GoodsCategories category : GoodsCategories.values()) {

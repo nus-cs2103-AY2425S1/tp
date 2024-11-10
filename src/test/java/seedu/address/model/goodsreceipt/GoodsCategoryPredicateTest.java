@@ -1,6 +1,8 @@
 package seedu.address.model.goodsreceipt;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,14 +13,14 @@ import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
 import seedu.address.model.person.Name;
 
-public class CategoryPredicateTest {
+public class GoodsCategoryPredicateTest {
     private static final String DATETIME_PROCUREMENT_VALID = "2024-10-10 12:00";
     private static final String DATETIME_ARRIVAL_VALID = "2024-12-12 12:00";
     private final Goods testGoods = new Goods(new GoodsName("Gardenia Bread"), GoodsCategories.CONSUMABLES);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CategoryPredicate(null));
+        assertThrows(NullPointerException.class, () -> new GoodsCategoryPredicate(null));
     }
 
     @Test
@@ -26,7 +28,7 @@ public class CategoryPredicateTest {
         GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
                 new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID), false, 1, 1.0);
 
-        CategoryPredicate testPredicate = new CategoryPredicate(GoodsCategories.CONSUMABLES);
+        GoodsCategoryPredicate testPredicate = new GoodsCategoryPredicate(GoodsCategories.CONSUMABLES);
         boolean posResult = testPredicate.test(testReceipt);
         assertTrue(posResult);
     }
@@ -36,25 +38,25 @@ public class CategoryPredicateTest {
         GoodsReceipt testReceipt = new GoodsReceipt(testGoods, new Name("Alex Yeoh"),
                 new Date(DATETIME_PROCUREMENT_VALID), new Date(DATETIME_ARRIVAL_VALID), false, 1, 1.0);
 
-        CategoryPredicate testPredicate = new CategoryPredicate(GoodsCategories.SPECIALTY);
+        GoodsCategoryPredicate testPredicate = new GoodsCategoryPredicate(GoodsCategories.SPECIALTY);
         boolean negResult = testPredicate.test(testReceipt);
         assertFalse(negResult);
     }
 
     @Test
     public void equals() {
-        CategoryPredicate predicate = new CategoryPredicate(GoodsCategories.CONSUMABLES);
+        GoodsCategoryPredicate predicate = new GoodsCategoryPredicate(GoodsCategories.CONSUMABLES);
 
         // check that it is equal to itself
-        assertTrue(predicate.equals(predicate));
+        assertEquals(predicate, predicate);
 
         // check that it is equal when category is equal
-        assertTrue(predicate.equals(new CategoryPredicate(GoodsCategories.CONSUMABLES)));
+        assertEquals(predicate, new GoodsCategoryPredicate(GoodsCategories.CONSUMABLES));
 
         // check that it is not equal with different category
-        assertFalse(predicate.equals(new CategoryPredicate(GoodsCategories.SPECIALTY)));
+        assertNotEquals(predicate, new GoodsCategoryPredicate(GoodsCategories.SPECIALTY));
 
         // check that is not equal to different types
-        assertFalse(predicate.equals(1.00));
+        assertNotEquals(1.00, predicate);
     }
 }

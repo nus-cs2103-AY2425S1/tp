@@ -1,7 +1,8 @@
 package seedu.address.model.goodsreceipt;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -56,15 +57,15 @@ public class DateTest {
         Date validDate = new Date(DATETIME_VALID);
 
         // same values -> return true
-        assertTrue(validDate.equals(new Date(DATETIME_VALID)));
+        assertEquals(validDate, new Date(DATETIME_VALID));
 
         // same object -> return true
-        assertTrue(validDate.equals(validDate));
+        assertEquals(validDate, validDate);
 
         // null -> return false
-        assertFalse(validDate.equals(null));
+        assertNotEquals(null, validDate);
 
         // different value -> return false
-        assertFalse(validDate.equals(new Date("2024-12-12 13:00")));
+        assertNotEquals(validDate, new Date("2024-12-12 13:00"));
     }
 }

@@ -83,7 +83,7 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
 
     /**
      * Wrapper function for updating of delivery status
-     *     in the internal list.
+     * in the internal list.
      */
     public void updateReceiptsDeliveryStatus() {
         this.receipts.autoMarkCompletedDeliveries();

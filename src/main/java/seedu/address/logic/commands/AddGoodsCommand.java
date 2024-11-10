@@ -19,9 +19,11 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
  * Adds trackable goods linked to contacted suppliers.
  */
 public class AddGoodsCommand extends Command {
+
     public static final String COMMAND_WORD = "addgoods";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds linked goods to the address book. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds linked goods to the address book. \n"
             + "Parameters: "
             + PREFIX_GOODS_NAME + "GOODS_NAME "
             + PREFIX_QUANTITY + "QUANTITY "
@@ -37,7 +39,7 @@ public class AddGoodsCommand extends Command {
             + PREFIX_CATEGORY + "CONSUMABLES "
             + PREFIX_PROCUREMENT_DATE + "2024-08-08 11:00 "
             + PREFIX_ARRIVAL_DATE + "2024-11-11 11:00 "
-            + PREFIX_NAME + "Alex Yeoh \n";
+            + PREFIX_NAME + "Alex Yeoh";
 
     public static final String MESSAGE_SUCCESS = "New goods added: %1$s";
 
@@ -47,7 +49,7 @@ public class AddGoodsCommand extends Command {
 
     /**
      * Creates an AddGoodsCommand that adds goods.
-     * @param goodsReceipt
+     * @param goodsReceipt the good receipt to be added.
      */
     public AddGoodsCommand(GoodsReceipt goodsReceipt) {
         requireNonNull(goodsReceipt);
