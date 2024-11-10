@@ -176,7 +176,7 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(-blue-dark, 20%);
+     -fx-background-color: -white-light;
 }
 
 .pane-with-border {
@@ -369,12 +369,13 @@
 #commandTextField {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
-    -fx-border-color: -blue-darkest -blue-darkest -white-dark -blue-darkest;
+    -fx-border-color: -blue-darkest -blue-darkest -text-dark -blue-darkest;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: -text-dark;
+    -fx-prompt-text-fill: #a2a2a2;
 }
 
 #filterField, #studentListPanel, #studentWebpage {
