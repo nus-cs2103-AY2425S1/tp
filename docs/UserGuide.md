@@ -42,30 +42,35 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 
 ### Installation Steps
 
-1. Ensure you have Java `17` or above installed in your Computer. You can check by opening a command terminal and typing:
-    ```bash
-    java -version
+#### For Windows:
+1. **Open the Command Prompt**:
+   - Press the **Windows key**, type `cmd`, and select **Command Prompt** from the search results.
+
+2. **Check your Java version**:
+   - In the Command Prompt window, type the following command:
+     ```bash
+     java -version
+     ```
+   - Press **Enter**. If Java is installed, it will display the version. Ensure it is **Java 17 or above**.
    
-    ```
     If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
 
-2. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
+3. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for EZSTATES.
+4. Copy the file to the folder you want to use as the _home folder_ for EZSTATES.
 
-4. Open a command terminal and navigate to the folder with the `.jar` file by typing:
+5. Open a command terminal (repeat Step 1) and navigate to the folder with the `.jar` file by typing:
     ```bash
     cd path/to/your/folder
 
     ```
     <div class="note" markdown="span">
-    (Windows Users) Alternatively, you can open the folder where the `.jar` file  is located,
+    Alternatively, you can open the folder where the `.jar` file  is located,
     right click on any space inside the folder and click `Open in Terminal`.
     </div>
-    
-   <br>
+    <br>
    
-   Then run the app with:
+   Then inside terminal, run the app with:
     ```bash
     java -jar EZSTATES.jar
    
@@ -73,18 +78,56 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
    
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
-5.  Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead to [Basic Commands](#basic-commands).
+6. Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead to [Basic Commands](#basic-commands).
+
+#### For MacOS:
+1. **Open the Terminal**:
+   - Open **Spotlight** by pressing **Command + Space**, type `Terminal`, and press **Enter**.
+   - Alternatively, you can go to **Finder > Applications > Utilities**, and double-click on **Terminal**.
+
+2. **Check your Java version**:
+   - In the Terminal window, type the following command:
+     ```bash
+     java -version
+     ```
+   - Press **Enter**. The terminal will display the installed Java version. Ensure it is **Java 17 or above**.
+
+   If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
+
+3. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
+
+4. Copy the file to the folder you want to use as the _home folder_ for EZSTATES.
+
+5. Open Terminal (repeat Step 1) and navigate to the folder with the `.jar` file by typing:
+    ```bash
+    cd path/to/your/folder
+
+    ``` 
+    <div class="note" markdown="span">
+    Alternatively, you can open the folder where the `.jar` file  is located,
+    right click on any space inside the folder and click `New Terminal at Folder`.
+    </div>
+    <br>
+
+   Then inside terminal, run the app with:
+   ```bash
+   java -jar EZSTATES.jar
+
+    ```
+   A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
+   ![Ui](images/Ui.png)<br><br>
+6. Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead to [Basic Commands](#basic-commands).
 
 ### GUI Overview
 The EZSTATES GUI is organized into **five** key components:
 
    ![ui](images/ui_overview_ug.png)
 
-* `Menu Bar`: Located at the top, this includes options such as `File` and `Help` for managing settings and accessing support.
+* `Menu Bar`: Located at the top left, this includes options such as `File` and `Help` for managing settings and accessing support.
 * `Command Box`: The main area where users can enter commands to interact with the app.
-* `Result Display`: Provides immediate feedback, displaying success or failure messages based on the user’s command.
-* `List Card`: Displays key information about clients or listings, depending on the user's command.
-* `Chat Window`: Serves as a helpful assistant, offering guidance and support through interactive communication.
+* `Result Display`: Provides immediate feedback, displaying success or failure messages based on the user’s command. Situated below the `Command Box`.
+* `List Card`: Displays key information about clients or listings, depending on the user's command. Situated below the `Result Display`
+* `Chat Window`: Located at the bottom right, this serves as a helpful assistant, offering guidance and support through interactive communication.
 
 With a clear understanding of the GUI, let's move on to how you can interact with EZSTATES using [basic commands](#basic-commands).
 
