@@ -860,7 +860,7 @@ testers are expected to do more *exploratory* testing.
        Example: `findcustomer bernice`
 
     2. Test case: `addo 1 i/Books d/02-03-2026` <br>
-       Expected: The order is successfully added. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list
+       Expected: The order is successfully added with default quantity of `1`. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
 
 3. Adding an order with missing compulsory field(s).
 
@@ -876,10 +876,10 @@ testers are expected to do more *exploratory* testing.
 
 4. Adding a [similar order](#similar).
 
-    1. Prerequisites: At least 1 customer is displayed in the customer list. No order similar to the order to be added under the first customer.
+    1. Prerequisites: At least 1 customer is displayed in the customer list. Order similar to the order to be added under the first customer.
 
     2. Test case: `addo 1 i/books d/02-03-2026` <br>
-       Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list
+       Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
 
 5. Adding an order with delivery date elapsed.
 
@@ -1084,5 +1084,5 @@ testers are expected to do more *exploratory* testing.
 2. **Allows detection of wrong prefix for commands**
     - **Problem:** Currently, we only detect the relevant prefix for each command and treat every other prefix as part of the input.
     - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
-    - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used instead of treating it as part of the parameters.
-    - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening.
+    - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used instead of treating it as part of the parameters while allowing users to key in prefix such as `n/` or `a/` via the use of special symbols such as `\`.
+    - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict the users from typing names with prefix such as `n/` or `a/` hence we will need to add the functionality to do it as well.
