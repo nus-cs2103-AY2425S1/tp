@@ -549,7 +549,7 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 | Term                               | Explanation                                                                                                                                                                                            |
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <a id="contact">Person/Contact</a> | Used interchangeably. Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                  |
-| <a id="wedding">Wedding</a>        | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/>Weddings are considered duplicate if they have identical names (case-insensitive). |
+| <a id="wedding">Wedding</a>        | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/>Weddings are considered duplicate if they have identical names (case-sensitive). |
 | <a id="tag">Tag</a>                | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                       | 
 
 ## Command summary
