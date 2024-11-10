@@ -542,3 +542,6 @@ Team Size: 5
 
 1. Make the error message for adding of goods more detailed. The current error message is too general and can be improved upon by mentioning which field is failing the sanity check and reflecting that to the user.
 2. Add a feature to allow the user to sort the goods by price, quantity, and arrival date. This will allow the user to better manage their goods.
+3. Bound the unit level and unit number in the address field for the relevant commands. Currently, the commands allow an unrestricted unit level and number, resulting in inputs such as 421 Marina Bay Road 
+#123222222222-34444444444444 Tan Kim PTE Building Singapore 123456 to be accepted as valid.
+4. Allow for automatic capitalization for supplier names. Currently, inputting a lower cased supplier name into the relevant commands does not automatically capitalize it appropriately.
