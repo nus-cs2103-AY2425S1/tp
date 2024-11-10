@@ -138,6 +138,10 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 
+* Parameters enclosed in square brackets indicate that they are optional. <br>
+  e.g. in `filter n/NAME [m/MODULE]`, `MODULE` is a parameter which can be included or omitted as needed.
+
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -175,7 +179,7 @@ add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
 
 Examples:
-* `add 87654321 n/Betsy Crowe r/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics` will add a person named `Betsy Crowe` with student ID of `87654321` to EduContacts.
+* `add 87654321 n/Betsy Crowe r/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/12345678 c/Business Analytics` will add a person named `Betsy Crowe` with student ID of `87654321` to EduContacts.
 * `add 12345678 n/John Doe p/98981212 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student` will add a person named `John Doe` with student ID of `12345678` to EduContacts.
 * `add 71271222 n/Benson Boon p/89229191 e/benson@example.com a/Blk 12 Benson Street c/Economics r/Student` will add a person named `Benson Boon` with student ID of `71271222` to EduContacts (the response message of this command is shown in the screenshot below).
 
@@ -394,12 +398,6 @@ If your changes to the data file makes its format invalid, EduContacts will disc
 Furthermore, certain edits can cause the EduContacts to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-<br>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -436,7 +434,7 @@ Action     | Format, Examples
 **Delete** | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`
 **Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
 **Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
-**Add Module** | `module ID [m/MODULE]` <br> e.g., `add 12345678 m/CS2103T`
+**Add Module** | `module ID m/MODULE` <br> e.g., `add 12345678 m/CS2103T`
 **Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`
 **Find**   | `find ID`<br> e.g., `find 12345678`
 **List**   | `list`
