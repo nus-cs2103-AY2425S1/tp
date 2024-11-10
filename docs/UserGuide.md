@@ -98,6 +98,7 @@ A person can have any number of tags (including 0)
 - Note that Name, Phone Number, Email and Address are compulsory fields. 
 - We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not 
 particularly sensitive as compared to Identification Number etc.
+- Email does not check for `.com` specifically at the end of each email as custom domain names exist. E.g. `@u.nus.edu`
 
 Examples:
 
@@ -203,6 +204,9 @@ A person can have any number of notes (including 0)
 - The note must be comprised of alphanumeric characters or spaces.
 - Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
 - Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
+- Only one note may be added at a time. E.g. `addnote 1 n/High profile client`. If `addnote 1 n/Supplier 1 n/Supplier 2`
+is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
+feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
 
 Examples:
 
@@ -223,6 +227,7 @@ Format: `editnote INDEX i/NOTE_INDEX n/NOTE`
 - The note must be comprised of alphanumeric characters or spaces.
 - Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
 - Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
+- Only one note may be edited in each command. The behaviour is similar to that of `addnote`.
 
 Examples:
 
@@ -240,6 +245,7 @@ Format: `deletnote INDEX i/NOTE_INDEX`
 - The note index (i.e. `NOTE_INDEX`) refers to the index number shown in the notes list of the contact details of the
   displayed person.
 - The index and note index **must be positive integers** 1, 2, 3, …​
+- Only one note may be deleted in each command. The behaviour is similar to that of `addnote`.
 
 Examples:
 
