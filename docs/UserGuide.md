@@ -1,7 +1,7 @@
 ---
   layout: default.md
   title: "User Guide"
-  pageNav: 3
+  pageNav: 4
 ---
 
 # UniVerse User Guide
@@ -73,11 +73,15 @@ UniVerse is more than just a **desktop app for managing contacts**—it is a pla
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+- Note that name cannot include prefixes that are already part of our commands.
+
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+- Work experience parameter `[w/WORK_EXPERIENCE]` can only be used one time. <br>
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -117,12 +121,12 @@ Parameters:
 
 - `n/NAME`: Full name of the contact.
 - `p/PHONE_NUMBER`: 8-15 digit phone number.
-- `e/EMAIL`: Email address in a valid format.
+- `e/EMAIL`: Email address in `local-part@domain` format.
 - `a/ADDRESS`: Contact's address.
-- `u/UNIVERSITY`: University name.
+- `u/UNIVERSITY`: University name. It is case-sensitive.
 - `m/MAJOR`: Major or field of study.
 - `b/BIRTHDATE`: Date of birth in `dd-mm-yyyy` format.
-- `[w/WORK_EXPERIENCE]`: Work experience in the format `ROLE,COMPANY,YEAR`.
+- `[w/WORK_EXPERIENCE]`: Work experience in the format `ROLE,COMPANY,YEAR`, where role, company and year are capitalised.
 - `[i/INTEREST]...`: Interests of the contact.
 - `[t/TAG]...`: Tags for categorization.
 
@@ -138,7 +142,9 @@ add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12
 
 <br>
 
-### Adding Interests: `addi`
+### Adding fields to an existing contact
+
+#### Adding Interests: `addi`
 
 Adds interest(s) to an existing contact.
 
@@ -149,7 +155,7 @@ addi in/INDEX i/INTEREST...
 ```
 
 - `in/INDEX`: Contact's position in the list.
-- `i/INTEREST...`: Interests to add. Can add multiple interests.
+- `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters each.
 
 Example:
 
@@ -159,7 +165,7 @@ addi in/1 i/Swimming i/Cycling
 
 <br>
 
-### Adding Work Experience: `addw`
+#### Adding Work Experience: `addw`
 
 Adds work experience to an existing contact.
 
@@ -210,7 +216,8 @@ Edits an existing person in the address book.
 Format:
 
 ```plaintext
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INTEREST] [w/WORK_EXPERIENCE] 
+[m/MAJOR] [u/UNIVERSITY]…​
 ```
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -227,7 +234,8 @@ Examples:
 
 <br>
 
-### Locating persons by name: `find`
+### Finding contacts 
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -257,7 +265,7 @@ Examples:
 
 <br>
 
-### Finding Contacts by Interest: `findi`
+#### Finding Contacts by Interest: `findi`
 
 Finds contacts with specific interests.
 
@@ -309,7 +317,7 @@ findi i/reading, swimming
 
 <br>
 
-### Finding Contacts by Work Experience: `findw`
+#### Finding Contacts by Work Experience: `findw`
 
 Finds contacts with specific work experiences based on **company** and optionally **role** and **year**.
 
@@ -345,35 +353,11 @@ Examples:
 
 <br>
 
-### Finding Contacts by Major: `findm`
+Finds contacts with a specific university from the currently displayed list.
 
-Finds contacts with a specific major.
-
-Format:
-
-```plaintext
-findm m/MAJOR
-```
-
-- `m/MAJOR`: Major or field of study. **Partial matches** are supported, so any contact with a major that partially matches the provided keyword will be included.
-
-Example: Finds contacts with the major "Computer Science"
-- **Exact Match**:
-```plaintext
-findm m/Computer Science
-```
-- **Partial Match**:
-```plaintext
-findm m/Comp
-```
-<img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 80%;">
-
-<br>
-
-### Finding Contacts by University: `findu`
-
-Finds contacts with a specific university.
-
+<box type="tip" seamless>
+**Tip:** University name is case-sensitive.
+</box>
 Format:
 ```
 findu u/UNIVERSITY
@@ -400,6 +384,31 @@ The `findu` command operates based on the **current list of contacts displayed**
 **Example Workflow**:
 1. Type `list` to display all contacts.
 2. Use `findu u/NUS` to filter and show only contacts from NUS.
+
+<br>
+
+#### Finding Contacts by Major: `findm`
+
+Finds contacts with a specific major from the currently displayed list.
+
+Format:
+
+```plaintext
+findm m/MAJOR
+```
+
+- `m/MAJOR`: Major or field of study. **Partial matches** are supported, so any contact with a major that partially matches the provided keyword will be included.
+
+Example: Finds contacts with the major "Computer Science"
+- **Exact Match**:
+```plaintext
+findm m/Computer Science
+```
+- **Partial Match**:
+```plaintext
+findm m/Comp
+```
+<img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 80%;">
 
 <br>
 
@@ -441,6 +450,8 @@ exit
 
 <br>
 
+## Data Management
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -473,8 +484,12 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **When using multiple screens**, if you move the application to a secondary screen and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the Help menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Major and University Field Validation**:
+    - The application currently allows numbers-only input for the **major** and **university** fields (e.g., `m/12345` or `u/9876`), which is unintended.
+    - **Limitation**: The app does not restrict users from entering numerical values or potential module codes as majors and universities.
+    - **Planned Solution**: We plan to introduce stricter input validation to prevent numbers-only entries for these fields in future versions.
 
 ---
 

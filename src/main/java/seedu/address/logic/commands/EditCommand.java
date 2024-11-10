@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTEREST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -56,9 +57,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_UNIVERSITY + "NUS"
-            + PREFIX_MAJOR + "Computer Science"
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_UNIVERSITY + "NUS "
+            + PREFIX_MAJOR + "Computer Science "
+            + PREFIX_BIRTHDAY + "06/11/2003 "
             + PREFIX_INTEREST + "Swimming";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
