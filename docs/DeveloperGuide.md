@@ -537,13 +537,19 @@ testers are expected to do more *exploratory* testing.
    
    2. **Test case:** `add n\John Smith p\98765432 e\johnsmith@example.com a\45 Elm Road fi\highIncome s\@johnSmith t\friends:5 t\priority:2`
    
-   3. **Expected:** John Smith is added, but a label (duplicatePhoneTagger) appears in the UI indicating that a duplicate phone number is present.
+   3. **Expected:** John Smith is added, but a tag `DuplicatePhone` appears in the UI indicating that a duplicate phone number is present.
 
 3. **Add an additional person normally, for the later parts of testing**
 
    1. **Test case:**: `add n\Tim Jobs p\98222432 e\timjo@example.com a\1 Infinity Loop fi\billionaire s\@tJobs t\friends:7 t\priority:1 t\client`
    
    2. **Expected:** Tim Jobs is added to the address book with specified details and tags. The UI shows the updated contact list.
+
+4. **Attempt to add a person with a reserved tag**
+
+   1. **Test case:**: `add n\Tan Ah Kow p\98111111 e\tak@example.com a\1 Infinity Loop fi\billionaire s\@tJobs t\DuplicatePhone`
+
+   2. **Expected:** An error message stating the tag `DuplicatePhone` is reserved and the entry is not added.
 
 ### Filtering contacts
 
