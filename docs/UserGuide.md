@@ -107,11 +107,20 @@ _Figure 1: CareLink main window with sample data_
   exit
   ```
 
-6. For detailed instructions on all commands, proceed to the [Features](#features) section.
+For detailed instructions on all commands, proceed to the [Features](#features) section.
 
 > **Tip:** Type `help` at any time to view the command guide.
 
 ---
+### Valid NRIC rules
+All NRICs should adhere to the following format and constraints:
+1. The NRIC must be 9 characters long.
+2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
+  - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
+  - 'F' and 'G' are for Foreigners.
+3. The next 7 characters must be digits.
+4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
+5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
 
 ## Features
 
@@ -190,14 +199,6 @@ Possible Errors:
 
 - `Missing required field:` - Displayed when any required field is not provided (name, NRIC, phone, email, address, or role)
 
-NRIC should adhere to the following format and constraints:
-1. The NRIC must be 9 characters long.
-2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
-  - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
-  - 'F' and 'G' are for Foreigners.
-3. The next 7 characters must be digits.
-4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
-5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
 
 
 ### Linking a patient and a caregiver: `link`
