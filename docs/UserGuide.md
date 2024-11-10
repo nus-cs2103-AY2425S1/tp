@@ -879,10 +879,6 @@ Furthermore, certain edits can cause the T_Assistant to behave in unexpected way
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
