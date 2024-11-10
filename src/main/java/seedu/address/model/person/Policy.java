@@ -18,8 +18,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * Represents an insurance policy in the address book.
  */
 public class Policy {
-    
-    public static final String MESSAGE_CONSTRAINTS = "Policy name, start date, and end date are required. Dates must follow the 'yyyy-MM-dd' format.";
+    public static final String MESSAGE_CONSTRAINTS = "Policy name, start date, and end date are required. "
+            + "Dates must follow the 'yyyy-MM-dd' format.";
 
     public static final String START_DATE_MUST_BE_AFTER_THE_NINETIES = "Insurance has been around in the 1900s! "
             + "Please input a date after that";
