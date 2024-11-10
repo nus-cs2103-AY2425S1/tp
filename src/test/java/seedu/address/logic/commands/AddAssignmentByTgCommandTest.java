@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.AddAssignmentByTgCommand.MESSAGE_NO_TUTORIAL_GROUP_FOUND;
 import static seedu.address.logic.commands.AddAssignmentByTgCommand.MESSAGE_SUCCESS;
@@ -17,6 +18,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.Deadline;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 import seedu.address.testutil.AssignmentBuilder;
@@ -67,6 +72,39 @@ class AddAssignmentByTgCommandTest {
         }
     }
 
+    @Test
+    public void equalsMethod() {
+        Assignment assignment1 = new Assignment(new AssignmentName("Math Quiz"), new Deadline("2024-10-09"),
+                new Status("N"), new Grade("NULL"));
+        Assignment assignment2 = new Assignment(new AssignmentName("Science Quiz"), new Deadline("2024-10-10"),
+                new Status("N"), new Grade("NULL"));
+        TutorialGroup tutorialGroup1 = new TutorialGroup("T15");
+        TutorialGroup tutorialGroup2 = new TutorialGroup("T16");
+
+        AddAssignmentByTgCommand command1 = new AddAssignmentByTgCommand(assignment1, tutorialGroup1);
+        AddAssignmentByTgCommand command2 = new AddAssignmentByTgCommand(assignment1, tutorialGroup1);
+        AddAssignmentByTgCommand command3 = new AddAssignmentByTgCommand(assignment2, tutorialGroup1);
+        AddAssignmentByTgCommand command4 = new AddAssignmentByTgCommand(assignment1, tutorialGroup2);
+
+        // Same object
+        assertEquals(command1, command1);
+
+        // Different objects, same values
+        assertEquals(command1, command2);
+
+        // Different assignments
+        assertNotEquals(command1, command3);
+
+        // Different tutorial groups
+        assertNotEquals(command1, command4);
+
+        // Null
+        assertNotEquals(command1, null);
+
+        // Different types
+        assertNotEquals(command1, new Object());
+    }
+
     // ModelStub class to simulate behavior of Model for testing
     private class ModelStubWithStudents extends ModelStub {
         private List<Student> students = new ArrayList<>();
@@ -84,4 +122,6 @@ class AddAssignmentByTgCommandTest {
             return new ArrayList<>();
         }
     }
+
+
 }

@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_HUGH;
@@ -15,6 +17,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.Deadline;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.StudentBuilder;
@@ -134,6 +142,46 @@ public class AddAssignmentCommandTest {
                         new StudentNumber(VALID_STUDENT_NUMBER_DIDDY)),
                 model,
                 AddAssignmentCommand.MESSAGE_NO_STUDENT_FOUND);
+    }
+
+    @Test
+    public void equalsMethod() {
+        Assignment assignment1 = new Assignment(new AssignmentName("Math Quiz"), new Deadline("2024-10-09"),
+                new Status("N"), new Grade("NULL"));
+        Assignment assignment2 = new Assignment(new AssignmentName("Science Quiz"), new Deadline("2024-10-10"),
+                new Status("N"), new Grade("NULL"));
+        Name name1 = new Name("Jane Doe");
+        Name name2 = new Name("John Doe");
+        StudentNumber studentNumber1 = new StudentNumber("A1234567L");
+        StudentNumber studentNumber2 = new StudentNumber("A1234568M");
+
+        AddAssignmentCommand command1 = new AddAssignmentCommand(name1, assignment1);
+        AddAssignmentCommand command2 = new AddAssignmentCommand(name1, assignment1);
+        AddAssignmentCommand command3 = new AddAssignmentCommand(name1, assignment2);
+        AddAssignmentCommand command4 = new AddAssignmentCommand(name2, assignment1);
+        AddAssignmentCommand command5 = new AddAssignmentCommand(name1, assignment1, studentNumber1);
+        AddAssignmentCommand command6 = new AddAssignmentCommand(name1, assignment1, studentNumber2);
+
+        // Same object
+        assertEquals(command1, command1);
+
+        // Different objects, same values
+        assertEquals(command1, command2);
+
+        // Different assignments
+        assertNotEquals(command1, command3);
+
+        // Different names
+        assertNotEquals(command1, command4);
+
+        // Different student numbers
+        assertNotEquals(command5, command6);
+
+        // Null
+        assertNotEquals(command1, null);
+
+        // Different types
+        assertNotEquals(command1, new Object());
     }
 
 }
