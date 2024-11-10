@@ -558,67 +558,73 @@ Given below are instructions to test the app manually.
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</box> 
+</box>
+
 <br></br>
 
 ### Contact Management
 
 1. Adding a contact
-   - **Prerequisites:** Enter the all contacts view using the `list` command. You can add contacts while in a wedding view, but you will not be able to see the contact added to the addressbook unless you enter the all contacts view. 
+   - **Recommended:** Enter the all contacts view using the `list` command. You can add contacts while in a wedding view, but upon the contact being added, you will be redirected to the all contacts view. 
    - Test case: `add n/John Doe p/91234567 e/johnd@example.com a/123 John St.`<br>
-          **Expected:** A new contact with the specified details is added to the list. Confirmation is shown in the status message.<br>
+          **Expected:** A new contact with the specified details is added to the all contacts list. Confirmation is shown in the status message.
      <br></br>
+
 2. Deleting a contact
 
-   - **Prerequisites:** Enter the all contacts view using the `list` command. For optimal testing, multiple contacts should already be present in the contact list. You can delete contacts from a wedding view, but only the contacts in that wedding. 
+   - **Prerequisites:** For optimal testing, multiple contacts should already be present in the contact list.
    - Test case: `delete 1`<br>
-         **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
+         **Expected:** First contact is deleted from the list in view. Details of the deleted contact are shown in the status message. 
    - Test case: `delete 0`<br>
          **Expected:** No contact is deleted. Error details are shown in the status message. 
    - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
-         **Expected:** Similar to the previous case, an error message appears.<br>
+         **Expected:** Similar to the previous case, an error message appears.
      <br></br>
+
 3. Editing a contact
    - **Prerequisites:** Ensure the contact you want to edit is in the current view.
    - Test case: `edit 2 n/Jane Smith p/98765432`<br>
        **Expected:** The name and phone number of the second contact in view are updated. Confirmation is shown in the status message.
     <br></br>
+
 4. Tagging a contact
    - **Prerequisites:** The contact should not already have the tag you want to add. You may add multiple tags at once.
-   - Test case: `tag 2 t/florist`<br>
-        **Expected:** The contact at index 2 in the current contacts view will now have the florist tag.
+   - Test case: `tag 2 t/florist designer`<br>
+        **Expected:** The contact at index 2 in the current contacts view will now have the florist and designer tags.
     <br></br>
 5. Untagging a contact
-   - **Prerequisites:** The contact should currently have the tag you want to remove.
-   - Test case: `untag 2 t/photographer`<br>
-        **Expected:** The contact at index 2 will no longer have the photographer tag.
+   - **Prerequisites:** The contact should currently have the tag you want to remove. You may remove multiple tags at once.
+   - Test case: `untag 2 t/photographer videographer`<br>
+        **Expected:** The contact at index 2 will no longer have the photographer and videographer tags.
    <br></br>
+
 ### Wedding Management
 
 1. Adding a wedding
-   - **Prerequisites:** Enter the all contacts view using the `list` command. You can add a wedding while in a wedding view, but if you intend assigning contacts as you add a wedding, you will only be able to assign contacts from the current wedding view into the wedding being added, which may not be optimal. To have complete flexibility/access in assigning contacts while adding a wedding, you are recommended to be in the all contacts view. 
+   - **Recommendation:** Enter the all contacts view using the `list` command. You can add a wedding while in a wedding view, but if you intend assigning contacts as you add a wedding, you will only be able to assign contacts from the current wedding view into the wedding being added, which may not be optimal. 
    - Test case: `addw n/Emily and John Wedding d/25/12/2024 c/1 2`<br>
           **Expected:** A new wedding is added with the specified contacts and date. Confirmation message is shown.
      <br></br>
 2. Viewing wedding details
    - Test case: `view 1`<br>
-       **Expected:** Displays the contacts assigned to the wedding at index 1.<br>
+       **Expected:** Displays the contacts assigned to the wedding at index 1.
      <br></br>
 3. Assigning and unassigning contacts to/from a wedding
-   - Assigning: `assign 1 c/3`<br>
-       **Expected:** Contact at index 3 is assigned to Wedding 1. A confirmation message is displayed.
-   - Unassigning: `unassign c/3`<br>
-       **Expected:** Contact at index 3 is removed from Wedding 1. A confirmation message is displayed.
+   - Test case: `assign 1 c/3`<br>
+       **Expected:** Contact at index 3 is assigned to wedding 1. A confirmation message is displayed.
+   - Test case: `unassign c/3`<br>
+       **Expected:** Contact at index 3 is removed from the wedding in view. A confirmation message is displayed.
      <br></br>
+
 ### Error Handling and Data Integrity
 
 1. Handling invalid commands
    - Test case: Enter invalid commands, such as `edit`, `delete abc`, `add n/` (missing parameters).<br>
-          **Expected:** Clear error message appears, with no unintended changes to the data.<br>
+          **Expected:** Clear error message appears, with no unintended changes to the data.
      <br></br>
 2. Testing data persistence
    - After making several changes, close and reopen the application.<br>
-          **Expected:** All recent changes persist, confirming successful data saving.<br>
+          **Expected:** All recent changes persist, confirming successful data saving.
      <br></br>
 3. Dealing with missing/corrupted data files
    - To simulate a missing data file, go into the folder where your jar file is stored, and delete the folder named 'data'. 
