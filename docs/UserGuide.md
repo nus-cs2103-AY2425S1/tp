@@ -136,8 +136,8 @@ Tag Constraints: <br>
 * Multiple of the same tags are not supported for a single contact. For example, `t\policy` and `t\policy: 223302B` would not be supported for a single contact.
 * Negative numbers are not supported in tag values
 * Operations such as `+, -, *, /` are also not supported in tag values
-* Reserved tags are not allowed to be added manually via commands like `add` or `edit`.
-  * For example, `DuplicatePhone` is a reserved tag name, manually adding variants with different capitalisation of letters (e.g. `duplicatePhone`, `dUpLiCaTePhOnE`) or adding tags with will give an error
+* Reserved tags are not allowed to be added manually via commands like `add` or `edit`
+  * For BA€, `DuplicatePhone` is a reserved tag name, manually adding variations with different capitalisation of letters (e.g. `duplicatePhone`, `dUpLiCaTePhOnE`) or adding tags with will give an error
   * Tags with values but have the same name as reserved tags are also not allowed (e.g. `t\DuplicatePhone:7`)
 
 </box>
