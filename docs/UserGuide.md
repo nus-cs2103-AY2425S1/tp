@@ -117,42 +117,21 @@ Adds a contact to the address book.
 
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
+* Telegram usernames must start with an alphabet, contain only alphanumeric characters or underscores and be between 5 and 32 characters long.
+* The roles must be one of the following: attendee, vendor, volunteer and sponsor.
+
 <div markdown="span" class="alert alert-primary">:memo: **Note:**
 A contact can have any number of roles (including 0), and the Telegram username is optional. 
-The roles must be one of the following: attendee, vendor, volunteer and sponsor.
-Telegram usernames must start with an alphabet.
+
+:memo: **Note:** You will be unable to add a contact to PlanPal if there already exists a contact with the same phone number, email or telegram username.
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe e/bc@gmail.com a/New Street p/1234567 t/betsyyy r/sponsor`
+* `add n/Betsy Crowe e/bc@gmail.com a/New Street p/1234567 t/betsyyy r/sponsor r/vendor`
 
 
 ![Successfully added a contact](images/AppImages/FeaturesAddCommand.png)
-
-#### Editing a Contact : `edit`
-
-Edits an existing contact in the address book.
-
-Format: `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`
-
-* Edits the contact at the specified `INDEX`. The index refers to the position number shown in the displayed contact list. The index **must be a positive integer** (e.g., 1, 2, 3, …).
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the new values entered.
-* When adding roles, only the following are valid roles: attendee, sponsor, vendor, volunteer.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-To remove all roles from a contact, type `r/` without specifying any role after it. Similarly, to remove a Telegram handle, type `t/` with no username after it.
-</div>
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Editing a contact's information will update it across all events where that contact is included!
-</div>
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to `91234567` and `johndoe@example.com`.
-*  `edit 2 n/Jason Brown t/` Changes the name of the 2nd contact to `Jason Brown` and clears their Telegram username.
-*  `edit 3 n/Betsy Crower r/` Updates the name of the 3rd contact to `Betsy Crower` and removes all existing roles.
 
 #### Locating Contacts by Name or Role: `find-name` and `find-role`
 
@@ -170,7 +149,7 @@ contains **all** the keywords will be returned.<br>
 Examples:
 * `find-name John` returns `John` and `John Doe`.
 * `find-name alex david` returns `Alex Yeoh` and `David Li`.<br>
-* `Jon N` will return `Jon Ng`, `Jon Lim` and `Jonathan N Lee` .
+* `find-name Jon N` will return `Jon Ng`, `Jon Lim` and `Jonathan N Lee` .
   
 ![Result for find-name John](images%2FAppImages%2FFeaturesFindName.png)
 
@@ -189,6 +168,33 @@ Examples:
 * `find-role attendee` returns all contacts with the attendee role.<br>
 * `find-role attendee sponsor` returns all contacts with either the attendee or sponsor roles (or both!).<br>
 
+#### Editing a Contact : `edit`
+
+Edits an existing contact in the address book.
+
+Format: `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`
+
+* Edits the contact at the specified `INDEX`. The index refers to the position number shown in the displayed contact list. The index **must be a positive integer** (e.g., 1, 2, 3, …).
+* At least one of the fields in the angle brackets must be provided.
+* Existing values will be updated to the new values entered.
+* When adding roles, only the following are valid roles: attendee, sponsor, vendor, volunteer.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+To remove all roles from a contact, type `r/` without specifying any role after it. Similarly, to remove a Telegram handle, type `t/` with no username after it.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Editing a contact's information will update it across all events where that contact is included!
+
+:exclamation: **Caution:** If a contact’s role is edited so that they no longer hold the role they were originally assigned for an event, they will be removed from that event! (More on this in the events section)
+</div>
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to `91234567` and `johndoe@example.com`.
+*  `edit 2 n/Jason Brown t/` Changes the name of the 2nd contact to `Jason Brown` and clears their Telegram username.
+*  `edit 3 n/Betsy Crower r/` Updates the name of the 3rd contact to `Betsy Crower` and removes all existing roles.
+*  `find-name John` followed by `edit 1 n/John Henry` Updates the name of the first contact in the search results to `John Henry`.
+
 ![find-role attendee sponsor example](images%2FAppImages%2FFeaturesFindRole.png)
 
 #### Deleting a Contact : `delete`
@@ -197,7 +203,7 @@ Removes the specified contact from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the contact at the specified `INDEX`.
+* Deletes the contact at the specified `INDEX`. 
 * The index refers to the number shown in the displayed contact list.
 * The index **must be a positive integer** (e.g., 1, 2, 3, …).
 
@@ -206,8 +212,8 @@ Once you delete a contact, they will also be automatically removed from all even
 </div>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the search results from the `find` command.
+* `list` followed by `delete 2` deletes the 2nd contact in PlanPal.
+* `find-name Betsy` followed by `delete 1` deletes the 1st contact in the search results from the `find-name` command.
 
 <div style="page-break-after: always"></div>
 
@@ -219,19 +225,21 @@ Adds a new Event to address book.
 
 Format: `new EVENT_NAME`
 
-**Note:** The event name cannot be blank.
+<div markdown="span" class="alert alert-primary">:memo: **Note:**
+The event name cannot be blank.
+</div>
 
 Examples:
 * `new Sumo Bot Festival`
 * `new RC Horror Night`
 
 #### Finding all Contacts in an event: `find-event`
-Displays the list of contacts in the specified event.
+Displays the list of contacts in the event specified by its index.
 
 Format: `find-event EVENT_INDEX`
 
-* Event name cannot be blank
-* Event must exist in PlanPal.
+* The `EVENT_INDEX` refers to the number shown in the displayed events list.
+* The `EVENT_INDEX` must be a positive integer (e.g., 1, 2, 3, …).
 
 Examples:
 * `find-event 1`
@@ -239,7 +247,17 @@ Examples:
 #### Adding a Contact to an Event : `event-add` or `ea`
 Adds a contact to an event with a specified role.
 
-Format: `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/> CONTACT_INDEX, [MORE_CONTACT_INDICES]...`
+Format: `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...`
+
+* Contacts can only be added to an event based on their roles (e.g. If John is a sponsor, he can only be added to Event X as a sponsor, not a volunteer)
+* Contacts with no roles cannot be added to events
+* The `EVENT_INDEX` refers to the number shown in the displayed events list and must be a positive integer.
+* The `CONTACT_INDEX` refers to the number shown in the current displayed list of contacts and must be a positive integer.
+
+<div markdown="span" class="alert alert-primary">:memo: **Note:**
+A contact can be added to the same event under multiple roles (e.g. If Alice is both an attendee and a volunteer, she can be added to Event Y as both an attendee and a volunteer)
+So, don't worry if the counts for attendees, vendors, sponsors, and volunteers don't exactly match the event total!
+</div>
 
 Guide for flag roles:
 * `a/` - attendee
@@ -247,15 +265,26 @@ Guide for flag roles:
 * `ve/` - vendor
 * `vo/` - volunteer
 
+<div markdown="span" class="alert alert-primary">:memo: **Note:**
 **Note:** At least one of the following prefixes is required—`a/`, `e/`, `ve/`, or `vo/`—each followed by one or more contact index/indices
+</div>
 
 Examples:
-* `event-add ei/1 a/1,2,3`
+* `event-add ei/1 a/1,2,3` will add the first 3 contacts as attendees to the first event.
+* `find-role attendee` followed by `event-add ei/2 a/1,2,3 ve/2,4,5` will add the first 3 contacts from the search results as attendees and the 2nd, 4th and 5th contact as vendors to the 2nd event.
 
 #### Removing a Contact from an Event : `remove`
 Removes a contact from an event.
 
-Format: `remove ei/EVENT_INDEX ci/PERSON_INDEX`
+Format: `remove ei/EVENT_INDEX ci/CONTACT_INDEX`
+
+* The `EVENT_INDEX` refers to the number shown in the displayed events list and must be a positive integer.
+* The `CONTACT_INDEX` refers to the number shown in the current displayed list of contacts and must be a positive integer.
+* Only one `CONTACT_INDEX` can be provided.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Removing a contact from an event will remove the contact from all the roles that he or she has in the event!
+</div>
 
 Example:
 * `remove ei/1 ci/1`
@@ -264,6 +293,8 @@ Example:
 Deletes an event from the event list.
 
 Format: `erase EVENT_INDEX`
+
+* The `EVENT_INDEX` refers to the number shown in the displayed events list and must be a positive integer.
 
 Example:
 * `erase 1`
@@ -307,30 +338,33 @@ The following commands can be used in Search Mode:
 
 Format: `search <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`
 
-For each field, you can specify multiple keywords.
+* The search is case-insensitive (e.g., `BLK` matches `blk`).
+* For each field (e.g. name, phone number, email), you can specify multiple keywords.
 
-For each Field:
+With one Field:
 - Contacts whose field contains a word that fully matches **at least one** keyword will be returned OR Contacts whose field
   contains **all** the keywords will be returned.<br>
+
+Example:
+* `search n/John` returns `John` and `John Doe`.
+* `search a/Jurong East` returns `Jurong West` and `Tampines East`.<br>
+* `search p/123 456` will return `123`, `456` and `123456`.
 
 With Multiple Fields:
 - Contacts will be returned only if they match **all** specified fields.
 
-For example:
-- `search n/Samuel Tan` returns all contacts whose name matches `Samuel Tan` OR contains `"Samuel"` or `"Tan"`.
-
-When multiple fields are specified, the search will return only contacts that match **all** criteria.
 Example:
 - `search n/Samuel Tan a/Avenue` returns all contacts whose:
-    - name has words either `Samuel` or `Tan` OR contains `Samuel` AND `Tan`. 
-    - AND address contains `Avenue`.
-* `search n/Jon N` will return `Jon Ng`, `Jon Lim` and `Jonathan N Lee` .
+    - name has words either `Samuel` or `Tan` **OR** contains `Samuel` **AND** `Tan`. 
+    - **AND** address contains `Avenue`.
 
 
 ![FeaturesSearchModeAlex.png](images%2FAppImages%2FFeaturesSearchModeSamuel.png)
 
-**Note:** A flag parameter should not be empty (e.g. `n/` or `t/`), as it will not return any results.
+<div markdown="span" class="alert alert-primary">:memo: **Note:**
+A flag parameter should not be empty (e.g. `n/` or `t/`), as it will not return any results.
 Flag parameters should also not be repeated (e.g. `n/Alex n/John`).
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can chain multiple searches to get the full list of contacts you are looking for!
@@ -338,11 +372,12 @@ If you are looking for a specific contact, try to be as specific as possible to 
 </div>
 
 #### Excluding Contacts in Search Mode : `exclude`
+Exclude contacts from the search results.
 
 Format: `exclude ci/INDEX, [MORE_INDICES]...`
 
-Exclude contacts from the search results using the `exclude` command.
-Excluded contacts will not appear in any subsequent searches until they are cleared from the excluded list.
+* `INDEX` refers to the contact index displayed in the search results panel.
+* Excluded contacts will not appear in any subsequent searches until they are cleared from the excluded list.
 
 Example:
 - `search n/John` returns a list of contacts named `John`.
@@ -376,6 +411,11 @@ To add all selected contacts in Search Mode to an event, use the `add-all` comma
 
 Format: `add-all EVENT_INDEX`
 
+* Contacts will be added to the event for each of their roles. (e.g., if John is both a sponsor and a vendor, he will be added to Event X in both roles).
+* Contacts with no roles cannot be added to events
+* There needs to be at least one contact in the search results panel to add to the event.
+* The `EVENT_INDEX` refers to the number shown in the displayed events list and must be a positive integer.
+
 Example: `add-all 2`
 
 #### Exiting Search Mode : `exit-search` or `es`
@@ -405,11 +445,7 @@ PlanPal data is saved automatically to your hard disk after any command that cha
 
 ### Editing the Data File
 
-PlanPal data is stored as a JSON file in `[JAR file location]/data/addressbook.json`. Advanced users can edit this data file directly.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file make its format invalid, PlanPal will discard all data and start with an empty data file on the next run. **We recommend creating a backup of the file before editing it.**
-</div>
+PlanPal data is stored as a JSON file in `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/eventmanager.json`. **Do not** edit these data files directly.
 
 ### Navigating Through Command History
 
@@ -422,7 +458,7 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app on the other computer and replace the empty data file it creates with the file containing the data from your previous AddressBook home folder.
+**A**: Install the app on the other computer and replace the empty data file it creates with the file containing the data from your previous PlanPal home folder.
 
 **Q**: What should I do if the program isn’t launching correctly?<br>
 **A**: First, ensure you have Java 17 or above installed. If you do, try re-downloading the `.jar` file and running it again. If issues persist, check your system’s permissions for accessing and running files.
@@ -479,3 +515,4 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 | **Clear Excluded Contacts**   | `clear-excluded` or `clx`                                      |
 | **Add All Selected Contacts** | `add-all EVENT_INDEX` or `aa EVENT_INDEX`                      |
 | **Exit Search Mode**          | `exit-search` or `es`                                          |
+| **Exit**                      | `exit`                                                         |
