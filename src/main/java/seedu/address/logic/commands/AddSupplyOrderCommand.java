@@ -31,7 +31,7 @@ public class AddSupplyOrderCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_ORDER + "INGREDIENTID] "
+            + PREFIX_ORDER + "INGREDIENTID "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

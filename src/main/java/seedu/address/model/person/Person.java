@@ -67,16 +67,24 @@ public class Person {
     }
 
     /**
-     * Retrieves the orders associated with this person as a formatted string.
+     * Retrieves the orders associated with this person as a list.
      *
-     * @return A formatted string of all orders.
+     * @return An unmodifiable list of all orders.
      */
-    public String getOrders() {
-        StringBuilder builder = new StringBuilder();
-        for (Order order : orders) {
-            builder.append(order.toString()).append("\n");
-        }
-        return builder.toString();
+    public List<Order> getOrders() {
+        return Collections.unmodifiableList(this.orders);
+    }
+
+    /**
+     * Sets the list of orders for this person.
+     * A defensive copy of the provided list is used internally.
+     *
+     * @param orders The list of orders to set.
+     */
+    public void setOrders(List<Order> orders) {
+        requireAllNonNull(orders);
+        this.orders.clear();
+        this.orders.addAll(orders);
     }
 
     /**

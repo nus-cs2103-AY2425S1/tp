@@ -25,6 +25,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -137,20 +138,31 @@ public class EditCommand extends Command {
         Remark updatedRemark = personToEdit.getRemark(); // Edit command does not allow editing remarks
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
+        // Preserve the original orders list
+        List<Order> retainedOrders = personToEdit.getOrders();
+
         if (personToEdit instanceof Customer) {
             Information updatedInformation = editPersonDescriptor.getInformation()
                     .orElse(((Customer) personToEdit)
                     .getInformation());
-            return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation,
+            Customer editedCustomer = new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation,
                     updatedRemark, updatedTags);
+
+            editedCustomer.setOrders(retainedOrders);
+            return editedCustomer;
         } else if (personToEdit instanceof Supplier) {
             Ingredients updatedIngredients = getUpdatedIngredients(editPersonDescriptor,
                     (Supplier) personToEdit, catalogue);
-            return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress,
+            Supplier editedSupplier = new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress,
                     updatedIngredients, updatedRemark, updatedTags);
+
+            editedSupplier.setOrders(retainedOrders);
+            return editedSupplier;
         }
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        editedPerson.setOrders(retainedOrders);
+        return editedPerson;
     }
     /**
      * Retrieves and updates the ingredients supplied based on the provided ingredient names.
