@@ -5,7 +5,7 @@ title: User Guide
 
 <link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
 
-EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments. Below is a sneak peek into our app: 
+EZSTATES is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments. Below is a sneak peek into our app: 
 <br>
 <br>
 **Client management**
@@ -16,7 +16,7 @@ EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **re
 ![img_5.png](images/img_5.png)
 <br>
 
-**You could be part of the ideal target audience of EZSTATE if you meet the following criteria**:
+**You could be part of the ideal target audience of EZSTATES if you meet the following criteria**:
 
 * `Job` : Real Estate Agent focused on managing buyer and seller relationships 
 * `Typing ability` : Comfortable with typing speeds of ~80 WPM or higher 
@@ -25,12 +25,12 @@ EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **re
 * `Work Style` : Handles multiple clients and properties simultaneously and values efficiency in contact and property management
 * `Environment` : Works in a fast-paced setting where quick data entry and retrival are essential
 
-But do not worry if you do not meet every criterion — EZSTATE is designed to be **intuitive and efficient for all users**. Give it a try, and head over to our [Quick Start](#quick-start-guide) guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
+But do not worry if you do not meet every criterion — EZSTATES is designed to be **intuitive and efficient for all users**. Give it a try, and head over to our [Quick Start](#quick-start-guide) guide to get started and see how EZSTATES can make your contact and property management tasks faster and easier!
 
 --------------------------------------------------------------------------------------------------------------------
-
+<!-- omit from toc -->
 # Table of Contents
-
+<br>
 * Table of Contents
 {:toc}
 
@@ -38,7 +38,7 @@ But do not worry if you do not meet every criterion — EZSTATE is designed to b
 
 ## Quick Start Guide
 
-Welcome to EZSTATE! This guide will walk you through installing the app and getting started with basic commands.
+Welcome to EZSTATES! This guide will walk you through installing the app and getting started with basic commands.
 
 ### Installation Steps
 
@@ -49,9 +49,9 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
     ```
     If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
 
-2. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
+2. Download the latest `.jar` file from [EZSTATESS Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for EZSTATE.
+3. Copy the file to the folder you want to use as the _home folder_ for EZSTATES.
 
 4. Open a command terminal and navigate to the folder with the `.jar` file by typing:
     ```bash
@@ -67,7 +67,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
    
    Then run the app with:
     ```bash
-    java -jar ezstate.jar
+    java -jar EZSTATES.jar
    
     ```
    
@@ -75,7 +75,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
    ![Ui](images/Ui.png)<br><br>
 5.  Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead to [Basic Commands](#basic-commands).
 ### GUI Overview
-The EZSTATE GUI is organized into **five** key components:
+The EZSTATES GUI is organized into **five** key components:
 
 ![ui](images/ui_overview_ug.png)
 
@@ -85,10 +85,10 @@ The EZSTATE GUI is organized into **five** key components:
 * `List Card`: Displays key information about clients or listings, depending on the user's command.
 * `Chat Window`: Serves as a helpful assistant, offering guidance and support through interactive communication.
 
-With a clear understanding of the GUI, let's move on to how you can interact with EZSTATE using [basic commands](#basic-commands).
+With a clear understanding of the GUI, let's move on to how you can interact with EZSTATES using [basic commands](#basic-commands).
 
 ### Basic Commands
-To use EZSTATE, type commands in the command box and press `Enter`. Here are a few to try:
+To use EZSTATES, type commands in the command box and press `Enter`. Here are a few to try:
 
    * `help` : Opens the help window showing all commands.
 
@@ -104,17 +104,17 @@ To use EZSTATE, type commands in the command box and press `Enter`. Here are a f
 
    * `exit` : Exits the app.
 
-Once you've tried out these basic commands, it's helpful to understand [how they are organized](#command-structure). This will make it easier to navigate and use **all** commands in EZSTATE effectively, and to grasp how each part functions.
+Once you've tried out these basic commands, it's helpful to understand [how they are organized](#command-structure). This will make it easier to navigate and use **all** commands in EZSTATES effectively, and to grasp how each part functions.
 
 ### Command Structure
 
-Understanding the command structure in EZSTATE is essential for efficient navigation and use of the app’s features. 
-Each command in EZSTATE is designed to follow a **clear, consistent format**, allowing you to manage clients, listings, and appointments with precision and speed. 
+Understanding the command structure in EZSTATES is essential for efficient navigation and use of the app’s features. 
+Each command in EZSTATES is designed to follow a **clear, consistent format**, allowing you to manage clients, listings, and appointments with precision and speed. 
 By mastering this structure, you will find it easier to remember commands and customize inputs, making your experience smoother and enabling you to accomplish tasks more effectively. 
 
-This section breaks down the **structure, reference, and prefixes** used across all commands, so you can quickly become proficient with EZSTATE.
+This section breaks down the **structure, reference, and prefixes** used across all commands, so you can quickly become proficient with EZSTATES.
 
-Commands in EZSTATE follow the same structure:
+Commands in EZSTATES follow the same structure:
 
 <p style="text-align: center;">
 `commandWord (REFERENCE) (PREFIXES)` 
@@ -164,7 +164,7 @@ This lets you add multiple tags at once, making it easier to input bulk data
 
 #### Prefix Types
 
-The prefixes used in **EZSTATE** are universal across all commands.
+The prefixes used in **EZSTATES** are universal across all commands.
 
 | Prefix | Meaning | Constraints                                                                                                                                                                                                                                                                                                                                                         | Valid                                 | Invalid                                   |
 |--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|-------------------------------------------|
@@ -243,10 +243,10 @@ NIL (all covered in Constraints)
 <br>
 Congratulations - you've successfully completed the Quick Start guide!
 
-The [next section](#features) offers an **in-depth overview** of all the commands available in EZSTATE.
+The [next section](#features) offers an **in-depth overview** of all the commands available in EZSTATES.
 
 <div class="note" markdown="span">**EXTRA**<br><br>
-Curious about how EZSTATE stores data? Check out the [storage section](#saving-the-data) for more information.
+Curious about how EZSTATES stores data? Check out the [storage section](#saving-the-data) for more information.
 <br>
 <br>
 If you're an advanced user looking to edit the JSON file directly, head over to [this section](#editing-the-data-file) for more information.
@@ -256,11 +256,11 @@ If you're an advanced user looking to edit the JSON file directly, head over to 
 ## Features
 
 <div class="alert" markdown="span">
-Before proceeding, please review or familiarize yourself with EZSTATE's [Command Structure](#command-structure) to ensure effective use of all features.
+Before proceeding, please review or familiarize yourself with EZSTATES's [Command Structure](#command-structure) to ensure effective use of all features.
 </div>
 <br>
 
-EZSTATE features (i.e. commands) are divided into **four** main categories:
+EZSTATES features (i.e. commands) are divided into **four** main categories:
 
 1. [Client Management Commands](#1-client-management-commands)
     - [Add Buyer](#add-buyer) (`buyer`) 
@@ -738,7 +738,7 @@ Commands for managing property listings and associating clients with listings.
 - **Description:** Displays all current listings.
 - **Successful Execution:**
 > ---
-> **Use Case #1**: To show all listings in EZSTATE
+> **Use Case #1**: To show all listings in EZSTATES
 >
 > **Input**: showlistings
 >
@@ -956,7 +956,7 @@ Address: test
 >
 > **Input**: deletelisting 100
 >
-> **Output**: This listing does not exist in EZSTATE
+> **Output**: This listing does not exist in EZSTATES
 >
 > ---
 
@@ -1104,7 +1104,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 
 ### Saving the data
 
-EZSTATE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+EZSTATES data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1114,9 +1114,9 @@ AddressBook data are saved automatically as a JSON file:<br><br> `[JAR file loca
 
 <div markdown="span" class="alert">
 **Caution:**
-If your changes to the data file makes its format invalid, EZSTATE will **discard all data** and start with an empty data file at the next run. Hence, it is recommended to **take a backup of the file before editing it**.<br>
+If your changes to the data file makes its format invalid, EZSTATES will **discard all data** and start with an empty data file at the next run. Hence, it is recommended to **take a backup of the file before editing it**.<br>
 <br>
-Furthermore, certain edits can cause EZSTATE to **behave in unexpected ways** (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1124,7 +1124,7 @@ Furthermore, certain edits can cause EZSTATE to **behave in unexpected ways** (e
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EZSTATE home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EZSTATES home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
