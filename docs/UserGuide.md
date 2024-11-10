@@ -82,7 +82,7 @@ This combination of efficiency and clarity ensures that you can manage your wedd
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/guest`, `t/guest t/photographer` etc.
 
-* Commands in WedLinker uses prefix to specify the parameters, the prefixes are stated as such:
+* Commands in WedLinker uses labels to specify the parameters, the labels are stated as such:
   * n/ Name
   * a/ Address
   * p/ Phone Number
@@ -130,15 +130,15 @@ Format: `list-tasks`
 
 ### Locating contacts by any field, similar to a search function: `find`
 
-Finds all persons based on the specified keywords (case-insensitive) after the prefix representing the field, and displays them as a list with index numbers.
+Finds all persons based on the specified keywords (case-insensitive) after the labels representing the field, and displays them as a list with index numbers.
 
-Format: `find PREFIX KEYWORD [KEYWORD]…​`
+Format: `find LABEL KEYWORD [KEYWORD]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
-* The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
+* The LABEL that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
 * The search will return partial matches and full matches.
-* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix. 
-* Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate label. 
+* Only the first LABEL entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
 * The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
 * `find p/973` returns all Contacts whose phone number contains 973
@@ -185,64 +185,86 @@ Furthermore, certain edits can cause the WedLinker to behave in unexpected ways 
 
 ### Adding a person: `add`
 
-Adds a person to WedLinker.
+Use the add command to add a new contact to WedLinker.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDDING]…​`
+
 
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
+To add a contact to WedLinker, type `add` followed by details such as the name, phone number, and email.
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/ABC Photo Studio p/1234567 t/Photographer`
+* To add a contact named John Doe with a phone number of 98765432, email johnd@example.com, and address XYZ Floral Services, type:
+  * `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
+* To add a contact named Betsy Crowe with a phone number of 1234567, with tags Photographer and Guest, type:
+  * `add n/Betsy Crowe p/1234567 t/Photographer t/Guest`
 
 ### Editing a person : `edit`
 
-Edits an existing person in WedLinker.
+Use the edit command to edit details of an existing contact in WedLinker.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+Format: `edit POSITION_NUM [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+To edit the details of an existing contact in WedLinker, type `edit` followed by the contact's position number in the contact list, and details you wish to update, such as the name, phone number, and email.
+
+* The `POSITION_NUM` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Existing details will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`
+* To change the phone number of the first contact to 91234567, type:  
+  * `edit 1 p/91234567`
+* To change the name and address of the second contact, type:
+  * `edit 2 n/Betsy Crower`
+  * This updates the contact's name to `Betsy Crower` and address to `XYZ Flower Shop`
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from WedLiker.
+Use the delete command to remove a contact from WedLiker.
 
-Format: `delete INDEX`
+Format: `delete POSITION_NUM`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+To remove a contact to WedLinker, type `delete` followed by the contact's position number in the contact list
+
+* The `POSITION_NUM` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in WedLinker.
-* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* To delete the second contact in WedLinker:
+  * First, type `list`, 
+  * Then, type `delete 2`
+* To delete the first contact found when searching for the name `Betsy`, type:
+  * First, type `find n/Betsy`
+  * Then, type`delete 1` 
 
 ## Tag Features
 
 ### Adding a tag : `create-tag`
 
-Creates a `Tag` within WedLinker to be used on contacts.
+Use the create-tag command to create a `tag` within WedLinker, which you can assign to contacts.
 
 Format: `create-tag t/TAGNAME`
+
+To create a tag, type `tag` followed by the name of the tag.
 
 * The `TAGNAME` is alphanumeric and can contain whitespaces.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
 
+Examples:
+* To create a tag named `Florist`, type:
+    * `create-tag t/Florist`
+
 ### Assign tag to contact : `tag`
 
-Assigns a `Tag` to the specified person in WedLinker
+Use the tag command when you want to assign a `tag` to a specific contact in WedLinker.
 
 Format: `tag INDEX t/TAGNAME [f/]`
+
+To assign a tag to a contact, type `tag` followed by the contact's position number in the contact list
 
 * Tag a specified contact based on the `INDEX` with a `Tag`.
 * The index refers to the index number shown in the displayed person list.
