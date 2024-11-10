@@ -128,7 +128,7 @@ public class CommandResult {
                 && personIndex == otherCommandResult.personIndex
                 && hasPrompt == otherCommandResult.hasPrompt
                 && isPopup == otherCommandResult.isPopup
-                // Uses null save equals method
+                // Uses null safe equals method
                 && Objects.equals(identityNumber, otherCommandResult.identityNumber)
                 && Objects.equals(appointmentDate, otherCommandResult.appointmentDate)
                 && Objects.equals(logEntry, otherCommandResult.logEntry);
