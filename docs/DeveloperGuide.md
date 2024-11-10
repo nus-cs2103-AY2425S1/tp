@@ -19,6 +19,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -60,11 +62,15 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -83,6 +89,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14b-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -90,6 +98,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -107,6 +117,8 @@ How the `Logic` component works:
 4. If the command is one that triggers a `ConfirmationHandler`, e.g. delete, clear, add (duplicate), the `ConfirmationHandler` object will handle whether the user confirms or cancels the action. 
 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
@@ -114,6 +126,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14b-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -152,6 +166,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -169,6 +185,8 @@ for PNG files only. Else, the user will be notified that it is not supported for
 Step 3: If a valid PNG file is chosen, the `File` path is recorded as a new `ProfilePicFilePath`. A new client is created
 with the updated path. Else, it will throw an error message notifying of invalid file type.
 
+<div style="page-break-after: always;"></div>
+
 An activity diagram for this feature is as follows:
 
 ![Upload Activity Diagram](images/UploadActivityDiagram.png)
@@ -185,6 +203,8 @@ An activity diagram for this feature is as follows:
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -390,7 +410,7 @@ Use case ends.
 * **Financial Advisor**: A professional who provides expertise for clients' decisions around money matters, personal finances, and investments
 * **Client**: A financial advisor's contact
 * **GUI**: Graphical User Interface, a type of user interface through which users interact with electronic devices via visual indicator representations
-* **Payment frequency**: The frequency of which a Financial Advisor receives payments from their clients. Typically, every 3, 6, 9 or 12 months
+* **Payment frequency**: The frequency of which a Financial Advisor receives payments from their clients. Typically, every 1, 3, 6 or 12 months
 * **Policy**: An agreement between the Financial Advisor and their client on the financial advisory services provided
 
 --------------------------------------------------------------------------------------------------------------------
@@ -574,3 +594,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Ensure all panels such as command panel are shown even in minimum resolution window
 2. Automatically update the client's detailed view page whenever a change is made to their details
+3. Allow for more flexible policy start dates as we currently assume all policies start on the 1st of the respective months
+4. Allow users to input their own template messages and update template message labels accordingly
+5. Allow for more flexibility regarding policy frequency, as now it is fixed at 1, 3, 6 or 12 months
