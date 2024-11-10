@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/blanklogic.png" width="200px">
 
 [[github](https://github.com/blanklogic)]
-[[portfolio](team/jaymeson.md)]
+[[portfolio](team/blanklogic)]
 
 * Role: Team Lead
 * Responsibilities: Integration, Testing, Code Quality
