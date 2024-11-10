@@ -49,7 +49,8 @@ public class DeleteCommandTest {
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
         DeleteCommand deleteCommand = new DeleteCommand(unregisteredNric);
 
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, unregisteredNric));
+        assertCommandFailure(deleteCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, unregisteredNric));
     }
 
     @Test
