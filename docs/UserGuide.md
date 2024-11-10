@@ -173,7 +173,7 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
     - **Format**: `COMMAND NAME [parameters]`
     - **Behavior**:
         - **Case-insensitive matching**.
-        - **Full name matching**: Searches for names containing the entire keyword.
+        - **Full name matching**: Searches for names containing the entire keyword (not necessarily as substring).
         - **Single Match**:
             - Command executes immediately.
         - **Multiple Matches**:
@@ -246,13 +246,13 @@ Adds a new person to the address book.
 - **Notes**:
     - All fields except `[r/ROLE]` and `[w/WEDDING_INDEX]` are required.
     - A person can have either 0 or 1 role.
-    - A person can be assigned to multiple weddings.
+    - A person can be assigned to 0 or multiple weddings.
 - **Validation**:
     - Ensure all fields meet the criteria specified in the [Validation Rules](#validation-rules).
 - **Examples**:
     - `add n/John Doe p/98765432 e/johnd@example.com a/123 Street`
     - `add n/Betsy Crowe p/91234567 e/betsycrowe@example.com a/Tanglin Mall r/florist`
-    - `add n/Betsy Crowe p/91234567 e/betsycrowe@example.com a/Tanglin Mall w/1 w/2`
+    - `add n/Betsy Crowe p/91234567 e/betsycrowe@example.com a/Tanglin Mall w/1 w/2` (assuming wedding list has at least 2 weddings)
 
 ---
 
@@ -396,24 +396,26 @@ Filters and lists persons whose fields match the specified keywords.
 - **Notes**:
     - At least one field must be provided.
     - Parameters can be in any order.
-    - Each field can contain single or multiple words (address and email allow partial matches).
     - Case-insensitive search.
     - Returns persons matching any of the fields (logical `OR` search).
 - **Field-Specific Matching**:
-    - **Name**: Requires exact full-word match.
-    - **Role**: Exact match, case-insensitive.
-    - **Email**: Allows partial matches.
+    - **Name**: Allow partial matches.
+    - **Role**: Requires exact role match.
+    - **Email**: Requires substring email match.
     - **Phone**: Requires exact number match.
-    - **Address**: Allows partial matches, case-insensitive.
+    - **Address**: Requires substring address match.
+  - **Validation**:
+    - Ensure all fields provided meet the criteria specified in the [Validation Rules](#validation-rules).
 - **Examples**:
-    - `filter n/John` returns persons named `John`.
+    - `filter n/John` returns persons with names containing `John`.
+    - `filter n/Al Ye` returns persons with names containing both `Al` and `Ye`.
     - `filter r/vendor` returns persons with role `vendor`.
-    - `filter e/gmail` returns persons whose emails contain "gmail".
+    - `filter e/john@gmail.com` returns persons with emails containing `john@gmail.com`.
     - `filter p/91234567` returns the person with phone number `91234567`.
-    - `filter n/John r/vendor` returns persons who have name `John` or role `vendor`.
-    - `filter e/gmail a/Jurong` returns persons whose email contains "gmail" or address contains "Jurong".
-      ![Multi-field filter results](images/multi_filter_weddings_unfiltered.png)<br>
-      *`filter n/David r/florist e/mike` Example of filtering results showing matched persons, weddings remain unfiltered*
+    - `filter n/John r/vendor` returns persons with names containing `John` or with role `vendor`.
+    - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".
+      ![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
+      *`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
 
 ---
 
@@ -425,12 +427,13 @@ Adds a new wedding to the address book.
 
 - **Format**: `addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]`
 - **Notes**:
-    - Wedding name (`n/`) and client (`c/`) are mandatory.
+    - Wedding name (`n/`) and client (`c/`) are required.
     - Client can be specified by index or name.
         - If multiple matches are found when using name, the system will prompt for index.
-    - Date (`d/`) must be in `YYYY-MM-DD` format if provided.
-    - Venue (`v/`) cannot be blank or whitespace if provided.
+        - Names are considered matched if they contain the inputted words, either together or separate (for more than one word names)
     - A client can have only one active wedding.
+- **Validation**:
+    - Ensure all fields meet the criteria specified in the [Validation Rules](#validation-rules).
 - **Examples**:
     - `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach`
         - Adds a wedding named "Beach Wedding" for the client at index 1.

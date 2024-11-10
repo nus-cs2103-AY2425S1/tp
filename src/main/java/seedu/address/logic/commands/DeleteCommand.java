@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
             + "from specified person.\n"
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact)\n"
             + "Examples:\n" + COMMAND_WORD + " 1\n" + COMMAND_WORD + " alex\n"
-            + COMMAND_WORD + "1 w/1 w/2";
+            + COMMAND_WORD + " 1 w/1 w/2";
 
     public static final String MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR = "There is no person to delete.";
     public static final String MESSAGE_DELETE_EMPTY_WEDDING_LIST_ERROR =
