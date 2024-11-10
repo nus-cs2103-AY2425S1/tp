@@ -196,8 +196,10 @@ Constraints:
     - Can only contain numbers, '/', and spaces.
 
 * **DATE**
-    - Follows the format of d/M/yyyy
+    - Follows the format of `d/M/yyyy`
+    - `02/02/2024` and `2/2/2024` are both valid and accepted date formats.
     - Can only contain numbers and '/'
+    - No spaces are allowed within the date format. For example, `2/ 0 2/ 20 24` will result in an invalid date format error.
 
 ### Viewing help: `help`
 
