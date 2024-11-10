@@ -27,6 +27,15 @@ public class AddressTest {
         // invalid addresses
         assertFalse(Address.isValidAddress("")); // empty string
         assertFalse(Address.isValidAddress(" ")); // spaces only
+        assertFalse(Address.isValidAddress("/")); // slashes only
+        assertFalse(Address.isValidAddress("kent / ridge")); // address with slashes
+        assertFalse(Address.isValidAddress("kent/ ridge")); // address with slashes
+        assertFalse(Address.isValidAddress("kent /ridge")); // address with slashes
+        assertFalse(Address.isValidAddress("kent/ridge")); // address with slashes
+        assertFalse(Address.isValidAddress("kent s/ridge")); // address with prefix
+        assertFalse(Address.isValidAddress("kent t/ridge")); // address with prefix
+        assertFalse(Address.isValidAddress("kent n/ridge")); // address with prefix
+        assertFalse(Address.isValidAddress("kent p/12345678")); // address with prefix
 
         // valid addresses
         assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
