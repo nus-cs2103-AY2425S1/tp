@@ -279,5 +279,5 @@ Action | Format, Examples
 **Help** | `help`
 **Add Goods** | `addgoods gn/GOODS_NAME q/QUANTITY p/PRICE c/CATEGORY pd/PROCUREMENT_DATE ad/ARRIVAL DATE n/SUPPLIER_NAME` <br> e.g. `addgoods gn/Gardenia Milk Bread q/2 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh`
 **Delete Goods** | `deletegoods n/NAME gn/GOODS_NAME` <br> e.g. `deletegoods n/John Doe gn/Gardenia Milk Bread`
-**View Statistics** | `viewgoods [gn/GOODS_NAME] [c/CATEGORY] [n/SUPPLIER_NAME]` <br> e.g. `viewgoods gn/Banana c/CONSUMABLES`
-**Export Data** | `export`
+**View Goods List** | `viewgoods [gn/GOODS_NAME] [c/CATEGORY] [n/SUPPLIER_NAME]` <br> e.g. `viewgoods gn/Banana c/CONSUMABLES`
+**Export Goods Data** | `export`
