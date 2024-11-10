@@ -290,27 +290,28 @@ Furthermore, it can provide easy categorisation and filtering of patients.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                  | So that I can…​                                               |
-|----------| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Priority | As a …​        | I want to …​                                                                     | So that I can…​                                                                                 |
+|----------|----------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
 | `* * *`  | New user       | add a new contact with multiple phone numbers (e.g. home, mobile, email address) | manage patient contact information and have multiple options for reaching them in an emergency. |
-| `* * *`  | User           | save addresses                                               | I have their location readily available.                     |
-| `* * *`  | User           | delete a contact                                             | remove outdated or incorrect contact information             |
-| `* * *`  | User           | list all contacts in one dashboard                           | easily view all the contacts that I have added.              |
-| `* * *`  | User           | find the patient contact by a keyword                        | I can search the patients’ contact instantly.                |
-| `* *`    | User           | edit an existing patient contact                             | I can update their details when necessary.                   |
-| `* *`    | User           | see all the texts and UI clearly                             | I don’t have to squint my eyes                               |
-| `* *`    | User           | import contacts from a file                                  | I can quickly fill in the address book with existing contact information. |
-| `* *`    | User           | export contacts to a file securely                           | I can share them with other authorized personnel or have a backup. |
-| `* *`    | Silly user     | receive confirmation before deleting a contact               | I don’t accidentally delete important information            |
-| `* *`    | User           | sort the patients according to appointment dates             | I can easily know which are the latest upcoming appointments |
-| `* *`    | User           | add a contact to my favorite list                            | I can quickly access important contacts                      |
-| `* *`    | User           | see alerts of duplicate contacts in the app                  | I can keep the contact list clean and avoid redundancy and confusion |
-| `* *`    | User           | tag patients with recurring appointments                     | I know those who need regular follow ups                     |
-| `* *`    | Expert User    | categorize patients based on medical conditions, assigned doctor(s) and/or treatment plan | I can prioritize urgent conditions and streamline patient management. |
-| `* *`    | User           | add notes to a contact                                       | I can remember important information about that person.      |
-| `*`      | User           | filter patients based on appointment dates                   | I can contact and remind them.                               |
-| `*`      | Potential user | see the app populated with some sample commands              | I can easily learn how to use the app.                       |
-| `*`      | User           | use the app to work offline                                  | I can use it even when there is no internet connection.      |
+| `* * *`  | User           | save addresses                                                                   | I have their location readily available.                                                        |
+| `* * *`  | User           | delete a contact                                                                 | remove outdated or incorrect contact information                                                |
+| `* * *`  | User           | list all contacts in one dashboard                                               | easily view all the contacts that I have added.                                                 |
+| `* * *`  | User           | find the patient contact by a keyword (e.g. name, phone numbers)                 | I can search the patients’ contact instantly.                                                   |
+| `* *`    | User           | edit an existing patient contact                                                 | I can update their details when necessary.                                                      |
+| `* *`    | User           | see all the texts and UI clearly                                                 | I don’t have to squint my eyes                                                                  |
+| `* *`    | User           | import contacts from a file                                                      | I can quickly fill in the address book with existing contact information.                       |
+| `* *`    | User           | export contacts to a file securely                                               | I can share them with other authorized personnel or have a backup.                              |
+| `* *`    | Silly user     | receive confirmation before deleting a contact                                   | I don’t accidentally delete important information                                               |
+| `* *`    | User           | sort the patients according to appointment dates                                 | I can easily know which are the latest upcoming appointments                                    |
+| `* *`    | User           | add a contact to my favorite list                                                | I can quickly access important contacts                                                         |
+| `* *`    | User           | see alerts of duplicate contacts in the app                                      | I can keep the contact list clean and avoid redundancy and confusion                            |
+| `* *`    | User           | tag patients with recurring appointments                                         | I know those who need regular follow ups                                                        |
+| `* *`    | Expert User    | record patients' medical conditions, assigned doctor(s) and/or treatment plan    | I can prioritize urgent conditions and streamline patient management.                           |
+| `* *`    | User           | add notes to a contact                                                           | I can remember important information about that person.                                         |
+| `*`      | User           | filter patients based on appointment dates                                       | I can contact and remind them.                                                                  |
+| `*`      | User           | filter patients based on age groups                                              | I can prioritize patients who fall within a certain age group.                                  |
+| `*`      | Potential user | see the app populated with some sample commands                                  | I can easily learn how to use the app.                                                          |
+| `*`      | User           | use the app to work offline                                                      | I can use it even when there is no internet connection.                                         |
 
 ### Use cases
 
