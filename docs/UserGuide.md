@@ -753,12 +753,12 @@ close
 undo
 ```
 - Reverts all changes of the previous command.
-- **Note:** This command is only used on the latest command which made a permanent change to the list of clients. If there have been no previous permanent changes, this command will not work at all. The commands that `undo` works on are:
-  - add
-  - edit
-  - delete
-  - clear
-- **Note:** You can only use `undo` once. Using `undo` 2 times in a row has the same effect as not using the `undo` command at all.
+- **Note:** The `undo` command can only be used on `the most recent command that made a permanent change to the client list`. If no such changes have been made, the `undo` command will not function. Commands eligible for `undo` include:
+  - `add`
+  - `edit`
+  - `delete`
+  - `clear`
+- **Note:** You can only use `undo` once. Using `undo` twice in a row has the same effect as not using the `undo` command at all.
 
 ### 5.4.4 Help Menu
 
