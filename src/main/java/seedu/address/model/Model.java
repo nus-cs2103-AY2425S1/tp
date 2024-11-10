@@ -131,17 +131,22 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Undo the previous actions of users
+     * Undoes the previous actions of users
      */
     void undoCampusConnect() throws CommandException;
 
     /**
-     * Restore state before previous undo actions of users
+     * Restores state before previous undo actions of users
      */
     void redoCampusConnect() throws CommandException;
 
     /**
-     * Save current state of model before execution.
+     * Saves current state of model before execution.
      */
     void saveCurrentCampusConnect();
+
+    /**
+     * Undoes a state without saving current state when execution fails.
+     */
+    void undoExceptionalCommand() throws CommandException;
 }

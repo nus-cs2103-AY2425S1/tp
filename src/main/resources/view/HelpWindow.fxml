@@ -3,34 +3,36 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.Hyperlink?>
+<fx:root resizable="false" title="CampusConnect Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/help_icon.png" />
+    <Image url="@/images/HelpWindowLogo.png" requestedWidth="100"/>
   </icons>
   <scene>
     <Scene>
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-
       <HBox alignment="CENTER" fx:id="helpMessageContainer">
         <children>
           <Label fx:id="helpMessage" text="Label">
             <HBox.margin>
-              <Insets right="5.0" />
+              <Insets left="3.0" top="3.0" right="0.0"/>
             </HBox.margin>
           </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+          <Hyperlink fx:id="ugLink">
             <HBox.margin>
-              <Insets left="5.0" />
+              <Insets top="3.0" left="0.0"/>
             </HBox.margin>
-          </Button>
+            <padding>
+              <Insets top="0.1" left="0.1"/>
+            </padding>
+          </Hyperlink>
         </children>
         <opaqueInsets>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />

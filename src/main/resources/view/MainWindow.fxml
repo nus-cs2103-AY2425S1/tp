@@ -15,7 +15,7 @@
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="CampusConnect" minWidth="640" minHeight="480" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/nus_logo.png" />
+    <Image url="@/images/CampusConnectLogo.png" />
   </icons>
   <scene>
     <Scene>

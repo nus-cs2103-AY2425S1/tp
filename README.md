@@ -13,4 +13,4 @@ CampusConnect not only provides basic contact information storage solutions, but
 sorting features for quicker and easier organisation and contact retrieval.
 
 # Acknowledgements
-This project is based on the CampusConnect project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

@@ -77,6 +77,10 @@ public class CampusConnect implements ReadOnlyCampusConnect {
         return out;
     }
 
+    public ReadOnlyCampusConnect recoverStateWithoutSaving() throws UndoException {
+        return versionedCampusConnect.extractOldData();
+    }
+
     /**
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
@@ -121,8 +125,9 @@ public class CampusConnect implements ReadOnlyCampusConnect {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in CampusConnect.
+     * The person identity of {@code editedPerson} must not be the same as
+     * another existing person in CampusConnect.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -132,7 +137,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
 
     /**
      * Removes {@code key} from this {@code CampusConnect}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in CampusConnect
      */
     public void removePerson(Person key) {
         persons.remove(key);

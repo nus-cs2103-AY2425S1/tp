@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# CampusConnect Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -14,6 +14,8 @@
 ## **Acknowledgements**
 
 * Our name, **CampusConnect**, was inspired by the NUS internship portal [**TalentConnect**](https://nus-csm.symplicity.com/).
+* Our **CampusConnect** logo reuses the [**NUS logo**](https://nus.edu.sg/identity/guidelines/logo-colour-and-background)
+* Our help window icon uses a cartoon representation of the [**NUS mascot on the NUS main reddit page**](https://www.reddit.com/r/nus/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -134,7 +136,7 @@ The structure is simple:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the CampusConnect data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -155,7 +157,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both CampusConnect data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `CampusConnectStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -169,16 +171,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedCampusConnect`. It extends `CampusConnect` with an undo/redo history, stored internally as an `history` and `future`. Additionally, it implements the following operations:
 
-* `VersionedCampusConnect#saveCurrentData()` — Saves the current address book state in its future.
-*  `VersionedCampusConnect#saveOldData()` — Saves the current address book state in its history.
-* `VersionedCampusConnect#extractOldData()` — Restores the previous address book state from its history.
-* `VersionedCampusConnect#extractUndoneData()` — Restores a previously undone address book state from its history.
+* `VersionedCampusConnect#saveCurrentData()` — Saves the current CampusConnect state in its future.
+*  `VersionedCampusConnect#saveOldData()` — Saves the current CampusConnect state in its history.
+* `VersionedCampusConnect#extractOldData()` — Restores the previous CampusConnect state from its history.
+* `VersionedCampusConnect#extractUndoneData()` — Restores a previously undone CampusConnect state from its history.
 
 These operations are exposed in the `Model` interface as `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` and `Model#redoCampusConnect()` respectively.
 
@@ -188,7 +190,7 @@ Step 1. The user launches the application for the first time. The `VersionedCamp
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
+Step 2. The user executes `delete 5` command to delete the 5th person in the CampusConnect. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
@@ -236,7 +238,7 @@ The `redo` command does the opposite — it calls `Model#redoCampusConnect()
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitCampusConnect()`, `Model#undoCampusConnect()` or `Model#redoCampusConnect()`. Thus, the `campusConnectStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the CampusConnect, such as `list`, will usually not call `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` or `Model#redoCampusConnect()`. Thus, the `history` and `future` remain unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
@@ -250,23 +252,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo & redo executes**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire CampusConnect.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+* **Alternative 2:** Each command that changes the state stores the change that it has made.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+  * Cons: Difficult and tedious to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,7 +278,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:  university students   
+**Target user profile**:  NUS undergraduate students
    
 * has a need to manage a significant number of contacts  
 * prefer desktop apps over other types   
@@ -302,19 +296,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                 | I want to …​                                                    | So that I can…​                                                               |
-|----------|-------------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | new user                | see usage instructions                                          | refer to instructions when I forget how to use the App                        |
-| `* * *`  | user                    | add a new contact                                               | easily connect with them                                                      |
-| `* * *`  | user                    | delete a contact                                                | remove entries that I no longer need                                          |
-| `* * *`  | user                    | find a person by name                                           | locate details of persons without having to go through the entire list        |
-| `* *`    | user                    | update my contacts information                                  | always keep an updated version of contact information                         |
-| `*`      | user with many contacts | search contacts by name                                         | locate a contact easily                                                       |
-| `*`      | user                    | add a tag information to contacts                               | easily locate and connect with individuals such as classmates or club members |
-| `*`      | student                 | filter contacts by tags such as "group project" or "internship" | easily access related contacts                                                |
-| `*`      | user                    | undo my last action                                             | prevent the accidental deletion of all my contacts                            |
-
-*{More to be added}*
+| Priority | As a …​                 | I want to …​                                                    | So that I can…​                                                                    |
+|----------|-------------------------|-----------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | new user                | see usage instructions                                          | refer to instructions when I forget how to use the App                             |
+| `* * *`  | user                    | add a new contact                                               | easily connect with them                                                           |
+| `* * *`  | user                    | delete a contact                                                | remove entries that I no longer need                                               |
+| `* * *`  | user                    | find a person by name                                           | locate details of persons without having to go through the entire list             |
+| `* *`    | user                    | update my contacts information                                  | always keep an updated version of contact information                              |
+| `* *`    | user                    | undo my last action                                             | prevent the accidental deletion of all my contacts                                 |
+| `* *`    | user                    | redo my latest undone action                                    | prevent the accidental undoing of certain actions                                  |    
+| `*`      | user with many contacts | search contacts by name                                         | locate a contact easily                                                            |
+| `*`      | user                    | add a tag information to contacts                               | easily locate and connect with individuals such as classmates or club members      |
+| `*`      | student                 | filter contacts by tags such as "group project" or "internship" | easily access related contacts                                                     |
+| `*`      | user with many tags     | categorize tags into different groups                           | easily organize contacts and locate individuals such as classmates or club members |
 
 ### Use cases
 
@@ -398,13 +392,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Add tags to a contact**\
+**Use case: UC04 - Add tags to a contact**
 **Precondition**: Contact to add tags to already exists
 
 **MSS**
 1. User requests to add tags to a contact.
 2. CampusConnect searches the contact list and finds the correct contact.
-3. CampusConnect add tags to the contact.
+3. CampusConnect adds tags to the contact.
 4. CampusConnect displays success message.
 
    Use case ends.
@@ -419,65 +413,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-* 1b. Tag already exists for the contact
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again
-        
-      Steps 1b1-1b2 repeat until non-duplicate tags are input
+* 3a. Tag already exists for the contact
+    * 3a1. CampusConnect shows error message.
       
       Use case ends.
 
-
-**Use case: UC05 - Sort contacts by criterion**
+**Use cases: UC05 - Delete a tag from a contact**
+**Precondition**: Contact to delete a tag from already exists
 
 **MSS**
-1. User requests to sort list by criterion.
-2. CampusConnect sorts the list.
-3. CampusConnect displays the sorted list.
+1. User requests to delete a specific tag from a contact
+2. CampusConnect searches the contact list and finds the correct contact.
+3. CampusConnect deletes the specific tag from the contact
+4. CampusConnect displays success message
 
-   Use case ends.
+   Use case ends
 
 **Extensions**
-* 1a. Contact list is empty
+* 1a. Input format is invalid
+    * 1a1. CampusConnect shows error message.
+    * 1a2 User enters input again.
 
-  Use case ends.
-
-
-* 1b. Input format is invalid.
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again.
-
-      Steps 1b1-1b2 repeat until input format is valid.
+      Steps 1a1-1a2 repeat until input format is valid.
 
       Use case ends.
 
-
-* 1c. Invalid criterion input.
-    * 1c1. CampusConnect shows error message.
-    * 1c2. User enters input again.
-
-      Steps 1c1-1c2 repeat until input format is valid.
-
+* 3a. The contact does not contain the tag user wants to delete
+    * 3a1. CampusConnect shows error message.
+  
       Use case ends.
 
-
-**Use case: UC06 - Pin contacts to the top of the list**\
-**Precondition**: Contact list is not empty
+**Use cases: UC06 - Undo an execution of command**
+**Precondition**: At least one valid command has been executed by the user.
 
 **MSS**
-1. User requests to pin contact to the top of the list.
-2. CampusConnect marks contact as pinned.
-3. CampusConnect displays success message.
+1. User requests to undo the most recent command execution.
+2. CampusConnect reverts the most recent command, restoring the data to its previous state 
+before the command was executed.
 
-   Use case ends.
+   Use case ends
 
 **Extensions**
-
 * 1a. Input format is invalid.
     * 1a1. CampusConnect shows error message.
     * 1a2. User enters input again.
 
       Steps 1a1-1a2 repeat until input format is valid.
+
+      Use case ends.
+
+* 1b. No earlier data to revert.
+    * 1b1. CampusConnect shows error message.
+
+      Use cases ends.
+
+**Use Case: UC07 - Redo Command Execution**
+
+**Precondition: The user has previously undone at least one command.**
+
+**MSS:**
+1. The user requests to redo the most recently undone command.
+2. CampusConnect restores the data to the state it was in immediately before the undo.
+
+   Use case ends.
+
+**Extensions:**
+* 1a. Invalid Input Format:
+    * 1a1. CampusConnect displays an error message indicating the input format is invalid.
+    * 1a2. The user re-enters the input.
+
+      Steps 1a1-1a2 repeat until the input format is valid.
+
+      Use case ends.
+
+* 1b. No More Commands to Redo:
+    * 1b1. CampusConnect displays an error message indicating that there are no more commands to redo.
 
       Use case ends.
 
@@ -494,7 +504,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI**: The *Graphical User Interface*, through which the user can input commands and view contacts and tags.
+* **Field**: An attribute possessed by a contact, namely Phone number, Tags, Name and Email.
+* **Prefix**: An identifier used in commands to indicate which field is referred to. For the 4 fields Phone, Name, Tags and Email,
+    the *prefixes* would be `p/`, `t/`, `n/` and `e/` respectively.
+* **Duplicate Contact**: A contact that has the same Phone, Email or Name as another contact.
+* **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories.
+* **Person List**: The scrollable list of contacts in the GUI displaying all contacts and the respective values for their fields.
+* **Commands affected by `undo` and `redo`**: These refer to all commands that affect the *state* of the Tag List and Contact List
+  in **CampusConnect** and exclude `list` and `find`, as they do not alter the state of the contact or tag list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -524,32 +542,108 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Categorizing a tag
 
-### Saving data
+1. Categorizing an existing tag
+   1. Prerequisites: Ensure that the tag `CS2103` exists and is under a category other than `Academics` (Gold).
+   2. Test case: `cattag t/CS2103 acads` </br>
+      Expected: Success message is shown. All occurrences of the tag `CS2103` in the person list on the bottom left and tag list on the bottom right are set to `Academics` category. Colour of tag `CS2103` set to Gold.
+2. Attempting to categorize a non-existent tag
+   1. Prerequisites: Ensure that tag `A` does not exist yet.
+   2. Test case: `cattag t/A activity` </br>
+      Expected: Error message "`Tag not found: [A]`" is shown, indicating that tag `A` does not exist.
+3. Attempting to categorize to an invalid category
+   1. Prerequisites: Ensure that tag `CS2103` is still present.
+   2. Test case: `cattag t/CS2103 foo` </br>
+      Expected: Error message "`Invalid category: foo`" is shown.
+4. Attempting to categorize an **invalid tag** to an **invalid category**
+   1. Prerequisites: Ensure that tag `A` does not exist yet.
+   2. Test case: `cattag t/A foo` </br>
+      Expected: Error message "`Invalid category: foo`" is shown. Message for invalid tag is not shown for this case.
 
-1. Dealing with missing/corrupted data files
+### Undoing the last operation
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Undoing an execution that modifies the CampusConnect data
 
-1. _{ more test cases …​ }_
+   1. Prerequisites: Perform any operation that modifies the state (all executions except for list and find) to ensure there is an action to undo.
+
+   1. Test case: undo 
+      Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action.
+
+   1. Test case: undo immediately after starting the application (with no operations performed)
+      Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
+
+### Finding a person
+
+1. Finding a person with tags
+
+    1. Prerequisites: There are contacts in the contact list. Add some if this is not the case.
+
+    1. Assumption: Pick any 2 tags (or substring of the tags) present in any contact in the contact list. Call these x and y.
+
+    1. Test case: `find t/x` where `x` is the substring/tag chosen<br> 
+       Expected: All contacts with tags containing x will be displayed with a success message.
+
+    1. Test case: `find t/x t/y` where `x` and `y` are the substrings/tags chosen<br>
+       Expected: The contact(s) with tags containing x or y will be displayed with a success message.
+
+1. Finding a person with multiple fields
+
+    1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
+   
+    1. Assumption: Pick any name and tag within the same contact. Call these name x and tag y.
+   
+    1. Test case: `find n/x t/y` where `x` and `y` are the name and tag chosen<br>
+       Expected: The contact(s) with name containing x and tags containing y will be displayed with a success message.
+
+1. Other incorrect find commands to try: `find`, `find x` (with no prefix)<br>
+   Expected: No filtering of contacts will occur and an error message will be displayed.
+
+### Deleting a tag from a person
+
+1. Deleting a tag.
+
+    1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
+
+    1. Assumption: Pick any contact with at least one tag. Let `i` be the index (one-based) of this contact and `x` be the name of the tag.
+
+    1. Test case: `deltag i t/x` where `i` is the index and `x` is the tag chosen<br>
+       Expected: The tag x will be deleted from person i and the tag will also disappear from the Tag List. A success message will be displayed.
+
+1. Other incorrect delete tag commands to try: `deltag`, `deltag M t/x` (where M is larger than the list size or smaller than 0), `deltag 1 x`<br>
+   Expected: No deleting of tags will occur and an error message will be displayed.
+   
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Future features**
+Below is a list of features that we feel would further enhance the user experience.
+
+  |                                    Feature                                     | Description                                                                        |
+  |:------------------------------------------------------------------------------:|------------------------------------------------------------------------------------|
+  |                               Clustering of tags                               | Group tags of the same categories together in the UI's display of the tags list.   |
+  |                                  Pin contacts                                  | Keep selected contacts constantly shown at the top of the contacts list.           |
+  |                           Customize category colors                            | Change the colors of the categories to the user's preference.                      |
+  |                          Multiple numbers per contact                          | Allow more than one number per contact to accommodate multiple contact numbers.    |
+  |                           Custom fields for contacts                           | Add custom fields to the contacts added.                                           |
+  |                            Custom shortcut commands                            | Add custom shortcut commands to streamline actions within the application.         |
+  |                          Delete tag from all contacts                          | Remove a specific tag from all contacts at once.                                   |
+  |                                   Dark mode                                    | Include a dark mode theme for easier viewing in low light conditions.              |
+  |                            Copy contact information                            | Enable copying of contact information to reduce errors from manual copying.        |
+  |                                Export contacts                                 | Provide an option to export contact information for easier sharing.                |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -571,3 +665,6 @@ in the GUI required a restructuring of our GUI files (under the `ui` folder) and
 implementing this system was not easy but it did provide better tag customisation and control than AB3.
 
 Most commands implemented used the given `Command` classes as a reference, but modified them to adapt the respective `execute()` methods for the command.
+
+On top of all these, we had also modified the GUI, which required us to familiarise and work through the 
+quirks of JavaFX.

@@ -20,7 +20,7 @@ public class CategorizeTagCommandParser implements Parser<CategorizeTagCommand> 
     private static final String CATEGORY_GENERAL = "general";
     private static final String CATEGORY_ACADEMICS = "acads";
     private static final String CATEGORY_ACTIVITIES = "activity";
-    private static final String CATEGORY_NETWORKING = "networking";
+    private static final String CATEGORY_NETWORKING = "network";
     private static final String CATEGORY_MENTORSHIP = "mentor";
 
     /**
