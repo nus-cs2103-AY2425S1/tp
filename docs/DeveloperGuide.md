@@ -16,17 +16,17 @@ title: Developer Guide
   4.1. [Undo/redo feature](#undoredo-feature)<br>
     4.1.1. [Implementation](#implementation)<br>
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-opss)
-6. [Appendix: Requirements](#appendix-requirements)
-  6.1. [Product scope](#product-scope)
-  6.2. [User stories](#user-stories)
-  6.3. [Use cases](#use-cases)
-  6.4. [Non-Functional Requirements](#non-functional-requirements)
-  6.5. [Product scope](#product-scope)
-  6.6. [Glossary](#glossary)
-7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-  7.1. [Launch and shutdown](#launch-and-shutdown)
-  7.2. [Deleting a person](#deleting-a-person)
-  7.3. [Saving data](#saving-data)
+6. [Appendix: Requirements](#appendix-requirements)<br>
+  6.1. [Product scope](#product-scope)<br>
+  6.2. [User stories](#user-stories)<br>
+  6.3. [Use cases](#use-cases)<br>
+  6.4. [Non-Functional Requirements](#non-functional-requirements)<br>
+  6.5. [Product scope](#product-scope)<br>
+  6.6. [Glossary](#glossary)<br>
+7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)<br>
+  7.1. [Launch and shutdown](#launch-and-shutdown)<br>
+  7.2. [Deleting a person](#deleting-a-person)<br>
+  7.3. [Saving data](#saving-data)<br>
 
 ---
 
