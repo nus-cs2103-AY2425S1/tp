@@ -13,7 +13,7 @@ ClinicConnect is the **the *ideal* patient management and appointment tracker sy
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a patient: `add`](#adding-a-patient-add)
     * [Adding a patient with additional information: `addf`](#adding-a-patient-with-additional-information-addf)
-    * [Viewing a patient's full profile: `view`](#viewing-patients-full-profile-view)
+    * [Viewing a patient's full profile: `view`](#viewing-a-patients-full-profile-view)
     * [Editing a patient: `edit`](#editing-a-patient-edit)
     * [Listing all patients : `home`](#listing-all-patients--home)
     * [Booking an upcoming appointment: `bookappt`](#booking-an-upcoming-appointment-bookappt)
