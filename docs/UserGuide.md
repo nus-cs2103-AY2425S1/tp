@@ -110,6 +110,13 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
    ```
    Deletes all contacts.
 
+<box type="warning" seamless>
+
+**Warning:**
+The `clear` command will erase all contacts from the system. Please ensure that you have backed up any important information before proceeding. This action cannot be undone, so use this command with caution.
+
+</box>
+
    ```bash
    exit
    ```
