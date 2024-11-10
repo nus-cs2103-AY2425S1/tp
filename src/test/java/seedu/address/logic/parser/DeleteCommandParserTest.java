@@ -29,4 +29,9 @@ public class DeleteCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
+    @Test
+    public void parse_noInfex_throwsParseException() {
+        assertParseFailure(parser, "", "Please enter a valid index.");
+    }
 }
