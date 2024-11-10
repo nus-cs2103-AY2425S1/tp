@@ -122,7 +122,7 @@ Adds a person to the address book.
 **Examples**:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/40 s/Male`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
-* `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
+* `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2025 1100`
 
 **Input**<br>
 
@@ -223,12 +223,6 @@ Edits an existing person in the address book.
 * Edits the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags/appointments, the existing tags/appointments of the person will be added i.e adding of tags is cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* You can remove all the person’s future appointments by typing `ap/` without
-  specifying any appointments after it.
-* Currently, editing of specific tags and appointments are not possible. To work around this, you can clear their respective fields and add the new tags/appointments.
 
 <box type="tip" seamless>
 
@@ -236,7 +230,17 @@ Edits an existing person in the address book.
 
 - Fields in square brackets (e.g. `[ap/FUTURE APPOINTMENT]`) are optional.
 
-  </box>
+- Edited appointments are meant to be future appointments. If you would like to add previous appointments, please use the **Note command**.
+
+- When editing tags/appointments, the existing tags/appointments of the person will be added i.e adding of tags is cumulative.
+
+- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+
+- You can remove all the person’s future appointments by typing `ap/` without specifying any appointments after it.
+
+- Currently, editing of specific tags and appointments are not possible. To work around this, you can clear their respective fields and add the new tags/appointments.
+
+</box>
 
 **Examples**:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
