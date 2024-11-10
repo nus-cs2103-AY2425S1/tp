@@ -31,8 +31,8 @@ public class MarkLessonAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the attendance of student(s) "
             + "in a lesson at the chosen index in the lesson list to the specified value. "
-            + "\nParameters: LESSON_INDEX (must be a positive integer) "
-            + PREFIX_NAME + "NAME "
+            + "\nParameters: LESSON_INDEX "
+            + PREFIX_NAME + "NAME [" + PREFIX_NAME + "NAME]… "
             + PREFIX_ATTENDANCE + "ATTENDANCE (1/y/Y or 0/n/N) "
             + "\nExample: " + COMMAND_WORD + " 1 n/John Doe n/Jane Doe a/y";
 

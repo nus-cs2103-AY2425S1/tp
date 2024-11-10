@@ -10,7 +10,7 @@ import java.util.Objects;
  * Represents a Time in the system.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}.
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     public static final String MESSAGE_CONSTRAINTS = "Times should be in the format HH:mm, "
         + "where hour is between 00 and 23, and minute between 00 and 59 (e.g., 14:30).";
