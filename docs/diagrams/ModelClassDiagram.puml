@@ -13,13 +13,14 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+Class UniqueGroupList
 Class Person
-Class Address
-Class Email
 Class Name
 Class Phone
 Class Tag
+Class Tags
 Class Group
+Class GroupName
 
 Class I #FFFFFF
 }
@@ -37,20 +38,24 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" UniqueGroupList
 UniquePersonList --> "~* all" Person
+UniqueGroupList --> "~* all" Group
 Person *--> Name
 Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
-Person *--> "*" Group
+Person *--> "1" Tags
+Tags *--> "*" Tag
+Group *--> GroupName
+Group *-left-> "1..*" Person
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Group
+
+note "When all Persons are removed from a Group, the Group is deleted" as GroupDeletionNote
+
+Group -right-> GroupDeletionNote
 @enduml

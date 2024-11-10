@@ -15,7 +15,8 @@ import seedu.address.model.tag.Tags;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class Person {
 
@@ -56,7 +57,8 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable tag set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTagSet() {
@@ -87,7 +89,6 @@ public class Person {
 
     /**
      * Returns true if tags already exist in the existing tags.
-     *
      */
     public boolean tagExists(Tags tags) {
         return tags.tagExists(this.tags);
@@ -107,7 +108,8 @@ public class Person {
     }
 
     /**
-     * Returns an immutable group set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable group set, which throws
+     * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Group> getGroups() {
@@ -116,6 +118,7 @@ public class Person {
 
     /**
      * Adds a group to the group field of the person.
+     *
      * @param group
      */
     public void addGroups(Group group) {
@@ -132,24 +135,19 @@ public class Person {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof Person)) {
             return false;
         }
-
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && studentClass.equals(otherPerson.studentClass)
                 && phone.equals(otherPerson.phone)
-                && tags.equals(otherPerson.tags)
-                && groups.equals(otherPerson.groups);
+                && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, studentClass, phone, tags, groups);
+        return Objects.hash(name, studentClass, phone, tags);
     }
 
     @Override
@@ -162,5 +160,4 @@ public class Person {
                 .add("groups", groups)
                 .toString();
     }
-
 }

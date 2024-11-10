@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 import seedu.address.model.person.Person;
@@ -49,7 +50,8 @@ public class Group {
     }
 
     /**
-     * Returns a string representation of the group, including the group name and members.
+     * Returns a string representation of the group, including the group name and
+     * members.
      *
      * @return A string representation of the group.
      */
@@ -75,22 +77,20 @@ public class Group {
     }
 
     @Override
-    public boolean equals(Object other) throws ClassCastException {
-
-        requireNonNull(other);
-        // Check if the object is the same reference
-        if (this == other) {
+    public boolean equals(Object other) {
+        if (other == this) {
             return true;
         }
-
-        // Check if the object is an instance of Group
         if (!(other instanceof Group)) {
-            throw new ClassCastException();
+            return false;
         }
-
-        // Cast the other object to Group and compare fields
         Group otherGroup = (Group) other;
-        return this.groupName.equals(otherGroup.groupName)
-                && this.members.equals(otherGroup.members);
+        return groupName.equals(otherGroup.groupName)
+                && members.equals(otherGroup.members);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(groupName, members);
     }
 }

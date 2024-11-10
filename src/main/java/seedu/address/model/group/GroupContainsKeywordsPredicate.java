@@ -3,7 +3,6 @@ package seedu.address.model.group;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -19,8 +18,9 @@ public class GroupContainsKeywordsPredicate implements Predicate<Group> {
     }
     @Override
     public boolean test(Group group) {
+        String lowercaseGroupName = group.getGroupName().toString().toLowerCase();
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(group.getGroupName().toString(), keyword));
+                .anyMatch(keyword -> lowercaseGroupName.contains(keyword.toLowerCase()));
     }
     @Override
     public boolean equals(Object other) {
