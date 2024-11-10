@@ -146,7 +146,7 @@ Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS
 
 * Edits the elderly at the specified `INDEX` or `NRIC`. 
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
-* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the displayed person list.
+* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must be shown in the displayed person list.
 * The parameters must adhere to the constraints specified in the [Elderly Fields](#elderly-fields) section.
 * At least one of the optional fields must be provided.
 * The existing values will be replaced with the new input values.
@@ -185,7 +185,7 @@ Format: `delete INDEX/NRIC`
 
 * Deletes the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
-* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the displayed person list.
+* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must be shown in the displayed person list.
 * This command is only allowed in `personList` view. You can first `list` all elderly to use this command.
 
 Examples:
@@ -203,7 +203,7 @@ Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
 * Marks the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
-* The `NRIC` used to select the elderly to mark must be a valid, government issued NRIC and must exist in the displayed person list.
+* The `NRIC` used to select the elderly to mark must be a valid, government issued NRIC and must be shown in the displayed person list.
 * The date must be in the format `YYYY-MM-DD` and must not be a future date.
 * If the parameter `d/DATE` is not provided, the current date will be used.
 * This command is only allowed in `personList` view. You can first `list` all elderly to use this command.
@@ -222,7 +222,7 @@ Format: `history INDEX/NRIC`
 
 * Shows the call history and profile view of the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
-* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the current person list.
+* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must be shown in the displayed person list.
 
 Examples:
 * `list` followed by `history 2` shows the call history and profile view of the 2nd elderly in ContactMate.
