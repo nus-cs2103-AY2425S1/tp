@@ -78,13 +78,7 @@ public class CommandUtilTest {
         );
 
         // Verify the exception message
-        assertEquals(
-                String.format(
-                        Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        outOfBoundsIndex.getOneBased()
-                ),
-                exception.getMessage()
-        );
+        assertEquals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
     }
 
     @Test
@@ -99,9 +93,6 @@ public class CommandUtilTest {
         );
 
         // Verify the exception message
-        assertEquals(
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, INDEX_FIRST_PERSON.getOneBased()),
-                exception.getMessage()
-        );
+        assertEquals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
     }
 }

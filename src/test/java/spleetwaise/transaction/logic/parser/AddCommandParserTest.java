@@ -81,10 +81,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, userInput, MESSAGE_INVALID_FORMAT);
 
         userInput = " " + (abModel.getFilteredPersonList().size() + 1) + " amt/1.23 desc/description date/01012024";
-        assertParseFailure(
-                parser, userInput,
-                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, abModel.getFilteredPersonList().size() + 1)
-        );
+        assertParseFailure(parser, userInput, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
