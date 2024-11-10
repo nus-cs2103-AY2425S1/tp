@@ -18,6 +18,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.wedding.Wedding;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * Adds a person to the address book.
  */
@@ -67,9 +71,13 @@ public class AddCommand extends Command {
                 model.addWedding(wedding);
             }
             wedding.addToGuestList(toAdd);
-            // Set person wedding to model's version of wedding
-            toAdd.setWedding(wedding, model.getWedding(wedding));
         }
+
+        // Gets model's version of all weddings that need to be added
+        Set<Wedding> modelWeddings = toAdd.getWeddings().stream().map(model::getWedding)
+                .collect(Collectors.toCollection(HashSet::new));
+        // Replaces all versions of weddings in person with model version
+        toAdd.setWeddings(modelWeddings);
 
         // Creates tags for all new ones and increases tag count for all
         for (Tag tag : toAdd.getTags()) {
@@ -77,9 +85,12 @@ public class AddCommand extends Command {
                 model.addTag(tag);
             }
             tag.increaseTaggedCount();
-            // Set person tag to model's version of tag
-            toAdd.setTag(tag, model.getTag(tag));
         }
+
+        // Gets model's version of all tags that need to be added
+        Set<Tag> modelTags = toAdd.getTags().stream().map(model::getTag).collect(Collectors.toCollection(HashSet::new));
+        // Replaces all versions of tags in person with model version
+        toAdd.setTags(modelTags);
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(Messages.MESSAGE_ADD_PERSON_SUCCESS, Messages.format(toAdd)));
