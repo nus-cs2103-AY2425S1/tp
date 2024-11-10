@@ -82,6 +82,8 @@ Welcome! Tuteez is a **desktop address book app that makes managing student cont
 
 ## UI 
 
+![annotated_ui](images/annotated_ui.png)
+
 ### Left panel
 
 * Prioritizes important information such as student's phone number, address, next lesson, based on your computer's current time
