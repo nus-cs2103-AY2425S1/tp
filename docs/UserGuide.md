@@ -81,6 +81,7 @@ Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG`
 <box type="tip" seamless>
 
 **Tip:** Only one interview stage tag will be attached to a contact at any point of time.
+</box>
 
 Please refer to this table
 for list of valid tags:
@@ -120,6 +121,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG]`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be updated.
 * Existing values will be updated to the input values.
+* You can use the `edit` command to reapply the same values to a person without making any changes.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -131,14 +133,15 @@ Finds persons by criteria given
 Format:
 `find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]`
 
-* The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and `Hans Bobo`, but not `Bo Hans`
+* The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo`, `Hans Bobo`, and `Rohans Bobo`, but not `Bo Hans`
 * All fields are case-insensitive
-* Search will be done using partial match
+* Search will return any entries containing the specified character sequence, regardless of position within the field.
 
 Examples:
-* `find n/alex yeoh` returns `Alex Yeoh` and `Alex Yeoh Bin Sheng`
+* `find n/alex yeoh` returns `Alex Yeoh`, `Alex Yeoh Bin Sheng`, and `Dalex Yeohanes`
 * `find t/TP` returns the list of contacts with `TP` tag <br>
-  ![result for 'findTp'](images/findTp.png)
+  <img src="images/findTp.png" alt="result for 'findTp'" width="400"/>
+
 * `find n/alex yeoh t/TP` return the list of contacts with name containing `alex yeoh` whose tag is `TP`
 
 ### Deleting a person : `delete`
@@ -163,8 +166,6 @@ Examples:
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete n/Betsy` will delete contact with the full name Betsy.
 * `delete e/betsy@gmail.com` will delete the contact with the email betsy@gmail.com
-* If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command`delete n/John Doe p/8834156` to delete the former.
-work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
 
 
 ### Showing applicant statistics: `stats`
@@ -190,6 +191,9 @@ Format:
 * Updates contacts' tags to `r` (rejected) based on the specified criteria.
 * You can filter by job code only, tag only, or a combination of both.
 * If only a job code is provided, persons with the `a` (accepted) tag will be excluded from the update.
+* If both job code and tag are provided, they must exactly match the job code and tag.
+* If only tag is provided, it must exactly match the tag.
+* If only job code is provided, partial matches are allowed, marking all persons whose job code contains the specified string.
 
 Examples:
 * `massreject j/SWE2024 t/TP` marks all persons with the job code `SWE2024` and the tag `TP` as rejected.
@@ -248,7 +252,7 @@ _Details coming soon ..._
 
 ## Fields
 
-<box type="info" seamless>  
+<box type="info" seamless>
 
 **Notes about each valid input field:**<br>
 
@@ -256,6 +260,7 @@ _Details coming soon ..._
 - Must be between 1 and 50 characters, excluding leading and trailing whitespaces.
 - Must contain at least one letter.
 - Can include letters, digits, spaces, hyphens (-), slashes (/), apostrophes ('), and periods (.).
+- Symbols are not allowed in the first character of name.
 - Cannot start or end with spaces.
 - Input name will be converted to upper case. (e.g., "John Doe" will become "JOHN DOE")
 - Symbols such as hyphens, slashes, apostrophes, and periods cannot have spaces directly before or after them (e.g., "JOHN -DOE" will be formatted to "JOHN-DOE").
@@ -275,6 +280,7 @@ _Details coming soon ..._
 - The domain part must consist of alphanumeric characters, with each domain label separated by periods.
 - Each domain label must start and end with alphanumeric characters and may contain hyphens (-) but cannot start or end with them.
 - The entire email address must not exceed 50 characters in length and cannot contain any spaces.
+- All characters before the "@" symbol will retain their case.
 - All characters after the "@" symbol will be converted to lowercase (e.g., "hhh@GMAil.com" will become "hhh@gmail.com").
 - Checking for valid email domain is not in scope.
 
@@ -283,7 +289,7 @@ _Details coming soon ..._
 - Only alphanumeric characters (A-Z, a-z, 0-9) and single dashes (-) are allowed.
 - The first and last character must be alphanumeric.
 - Trailing spaces and spaces within job code will be removed. (e.g. " swe -201  " will become "swe-201")
-- Two consecutive dashes (--) are not allowed (e.g., "HR--2023" is invalid).
+- Two consecutive dashes (`--`) are not allowed (e.g., "HR--2023" is invalid).
 - The input job code will be converted to uppercase (e.g., "swe2023-intern" will become "SWE2023-INTERN").
 
 ### TAG
@@ -302,11 +308,12 @@ for list of valid tags:
 | R | Rejected | Applicant has been rejected by the company                                  |
 
 - Input tag code is case-insensitive. (e.g., "bp" will be treated the same as "BP").
-- Spaces within the tag will be removed (e.g., "T P" will become "TP"), and hence tags with spaces is still valid as long as it is one of the tags listed above. 
+- Spaces within the tag will be removed (e.g., "T P" will become "TP"), and hence a tag with spaces is still valid as long as it is one of the tags listed above. 
 
 
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
+</box>
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ

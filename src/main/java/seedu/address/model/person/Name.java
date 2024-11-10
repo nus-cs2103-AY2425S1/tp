@@ -13,7 +13,9 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Invalid name: Only alphanumeric characters (with at least one alphabet) are allowed, "
-                    + "and it should not be blank.";
+                    + "and it should not be blank. "
+                    + "Hyphens (-), slashes (/), apostrophes ('), and periods (.) are allowed, "
+                    + "but not at the first character.";
 
     public static final String MESSAGE_LENGTH_CONSTRAINTS =
             "Name cannot be more than 50 characters.";
