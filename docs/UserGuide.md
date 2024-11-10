@@ -118,10 +118,6 @@ Back to [Quick Start](#quick-start)
 
 ---
 
-## General Commands 
-
----
-
 ### Viewing help : `help`
 
 Shows you a message containing a link to a more in depth user guide to help you!
