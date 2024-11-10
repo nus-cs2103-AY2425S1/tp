@@ -60,6 +60,10 @@ Highlights important information that you should know.
 Provides you with tips to use our system more effectively.
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can search for relevant info in the user guide by typing <code>Ctrl + F</code> for Windows and Linux computers and <code>⌘ + F</code> for Mac.
+</div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -82,13 +86,364 @@ Provides you with tips to use our system more effectively.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Command Parameter Summary Table
+### Viewing help : `help`
 
-The table below shows the list of valid parameters that can be encountered in our functions, as well as their specifications.
+Opens a separate help window detailing a summary of the commands available and their functions.
 
-<div markdown="span" class="alert alert-primary">You can search for relevant info in the user guide by typing <code>Ctrl + F</code> for Windows and Linux computers and <code>⌘ + F</code> for Mac.
+Format: `help`
+
+![help message](images/helpMessage.png)
+
+#### Viewing help for individual commands
+
+Opens a separate help window showing more information about a specific command.
+
+Format: `help COMMAND_KEYWORD`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+This command only takes in one command keyword.
 </div>
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Information:**<br>
+Multiple help windows can be open at any point in time, but only one help window per command keyword can be open.
+</div>
+
+![add help window](images/addHelpWindow.png)
+
+Examples:
+* `help add`
+* `help edit`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Press `esc` to close the help window.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can keep the help windows open and refer to it while using our application.
+</div>
+
+To check out the list of all commands in ClinicConnect, click [here](#command-summary).
+
+### Adding a patient: `add`
+
+Adds a new patient record into the system.
+
+Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER`
+
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+Each person should have a unique NRIC.
+ClinicConnect does not allow two patients with the same NRIC to exist in the system.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use this command to quickly add a patient with only the required information.
+</div>
+
+Example: `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
+<br>
+Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
+
+For more information on each individual parameter click [here](#command-parameters-summary).
+
+### Adding a patient with additional information: `addf`
+
+Adds a new patient record into the system with additional information.
+
+Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NO [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
+[nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+Each person should have a unique NRIC.
+ClinicConnect does not allow two patients with the same NRIC to exist in the system.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use this command if you want to add a patient with additional information in addition to the required fields
+(NAME, NRIC, SEX, DATE_OF_BIRTH, PHONE_NO)
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Multiple allergies can be added using multiple "al|" prefixes
+</div>
+
+Examples:
+* `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
+   e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
+   al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care` adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
+     Next-of-Kin Name, Next-of-Kin Phone, Risk Level, Existing Conditions, Notes and his two allergies.
+* `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
+   e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` adds a patient Lincoln Park with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
+     and his allergy.
+
+For more information on each individual parameter click [here](#command-parameters-summary).
+
+### Editing a patient: `edit`
+
+Edits the information of an existing patient in the system by searching for their NRIC.
+
+Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NO] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
+[nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL]
+[ec|EXISTING_CONDITIONS] [no|NOTES]`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+<ul>
+<li>
+NRIC provided must be a valid NRIC currently in the system
+</li>
+<li>
+Input must contain at least one parameter to be edited
+</li>
+<li>
+Not all parameters are compulsory
+</li>
+</ul>
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+<ul>
+<li>
+Except for allergies, existing values will be updated to the input values.
+</li>
+<li>
+Editing EXISTING_CONDITIONS and NOTES is not cumulative (i.e. the existing conditions and notes of the patient will be removed)
+</li>
+<li>
+Not all parameters are compulsory
+</li>
+</ul>
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<ul>
+<li>
+Multiple allergies can be added using multiple "al" prefixes. Ensure allergies to be added are not current allergies 
+of the patient
+</li>
+<li>
+Multiple allergies can be removed using multiple "rmal" prefixes. Ensure allergies to be removed
+are current allergies of the patient
+</li>
+</ul>
+</div>
+
+Examples:
+* `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N.
+* `edit S9758366N al|wheat al|eggs rmal|fish` add wheat and eggs and remove fish allergies to the patient with NRIC S9758366N.
+
+For more information on each individual parameter click [here](#command-parameters-summary).
+
+### Listing all patients : `home`
+
+Returns to ClinicConnect home page which displays a list of all patients in the ClinicConnect System.
+
+Format: `home`
+
+![home command result](images/homeCommand.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Home Command also informs you on the number of patients currently registered in the system.
+</div>
+
+### Booking an appointment: `bookappt`
+### Booking an upcoming appointment: `bookappt`
+
+Book an upcoming appointment for an existing patient in the system for a health service provided by the clinic.
+
+Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
+
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+<ul>
+<li>
+NRIC provided must be a valid NRIC in the system
+</li>
+<li>
+All parameters are compulsory
+</li></ul>
+</div>
+
+
+Example:
+* `bookappt S9758366N dt|2024-12-29 13:00 h|Vaccination` books a Vaccination appointment for the given patient by NRIC at the specified time.
+
+For more information on each individual parameter click [here](#command-parameters-summary).
+
+### Delete Appointment : `deleteappt`
+
+Identifies a specific patient using NRIC and deletes the appointment specified.
+
+Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+<ul>
+<li>
+NRIC provided must be a valid NRIC in the system
+</li>
+<li>
+All parameters are compulsory
+</li></ul>
+</div>
+
+Example:
+* `deleteappt T01234567A dt|2024-11-05 16:00`
+
+For more information on each individual parameter click [here](#command-parameters-summary).
+
+### Filter appointments : `filter`
+
+Filters existing patient records based on the specified parameters.
+
+Format: `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]`
+
+Start date and health service parameters are optional.
+End date parameter is compulsory.
+
+When all parameters are specified, it returns all appointments from start-date to end-date which matches the specified health service.
+When start date and end date are specified, it returns all appointments from start date to end date.
+When end date and health service is specified, it returns all appointments from today's date to end date which matches the specified health service.
+When end date is specified, it returns all appointments from today's date to end-date.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To retrieve appointments on a single date e.g. 2024/10/20, you can input the same start and end date
+
+`filter sd|2024-10-20 ed|2024-10-10`
+</div>
+
+
+Examples:
+*  `filter sd|2012-10-01 ed|2012-11-01 h|blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012.
+*  `filter ed|2024-12-12 h|vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
+*  `filter sd|2012-10-01 ed|2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
+
+For more information on each individual parameter click [here](#command-parameters-summary).
+
+### View patients full profile: `view`
+
+Identifies the specific patient using NRIC and shows the full profile of the patient.
+
+Format: `view NRIC`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+NRIC provided must be a valid NRIC currently in the system.
+</div>
+
+Example:
+* `view T0123456A`
+
+### Deleting a patient : `delete`
+
+Deletes the patient with the specified NRIC from the address book.
+
+Format: `delete NRIC`
+
+* Deletes the patient at the specified `NRIC`.
+* The NRIC refers to the nric of the patient shown in the displayed patient list.
+* The NRIC **must be a valid NRIC number present in the system**
+
+### Clearing all entries : `clear`
+
+Clears **all** patient entries and data in the system.
+
+![clear command result](images/clearCommand.png)
+
+Format: `clear`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+Using clear will delete all data in the system. Please use it carefully.
+</div>
+
+### Exiting the program : `exit`
+
+Exits the system and closes all windows of ClinicConnect.
+
+Format: `exit`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Using exit command will also close any help windows that are currently open.
+</div>
+
+### Saving the data
+
+ClinicConnectSystem data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+ClinicConnectSystem data are saved automatically as a JSON file `[JAR file location]/data/clinicconnectsystem.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, ClinicConnectSystem will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ClinicConnectSystem to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</div>
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
+--------------------------------------------------------------------------------------------------------------------
+
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClinicConnectSystem home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Known issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When adding or editing patient entries**, the combination of a NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
+system, despite this being an impossible combination of NRIC and birthdate for a patient.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+| Action                 | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                | `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER` <br> <br> e.g. `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666` |
+| **Add Full**           | `addf n|NAME i|NRIC s|SEX d|DATE OF BIRTH p|PHONE NUMBER [e|EMAIL] [a|ADDRESS] [b|BLOOD TYPE] [nokn|NEXT-OF-KIN NAME] [nokp|NEXT-OF-KIN PHONE NUMBER] [al|ALLERGIES]…​ [rl|HEALTH RISK LEVEL] [ec|EXISTING CONDITIONS] [no|ADDITIONAL NOTES]` <br> <br>e.g. `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abrahamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Lincoln Tan nokp|91234567 al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`                                               |
+| **Book Appointment**   | `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE` <br> <br> e.g. `bookappt S9758366N dt|2024-12-29 13:30 h|Vaccination`                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Clear**              | `clear`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Delete Appointment** | `deleteappt NRIC dt|APPOINTMENT_DATE_TIME` <br> <br> e.g. `deleteappt S9758366N dt|2024-12-29 13:30`                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Delete**             | `delete NRIC` <br> <br> e.g. `delete S0123456Z`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Edit**               | `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NO] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE] [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]` <br> <br> e.g. `edit S9758366N n|Keanu Reeves i|S9975483H s|M s|1997-11-30 p|86526969 e|keanureeves@gmail.com a|Blk 512 Ang Mo Kio Ave 2 b|O+ nokn|Mila Kunis nokp|84126990 al|nuts al|shellfish rmal|cake rmal|wheat rl|LOW ec|diabetes no|Patient is a fall risk` |
+| **Exit**               | `exit`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Filter**             | `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]` <br> <br> e.g. `filter sd|2024-12-29 ed|2024-12-30 h|Blood Test`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Home**               | `home`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **View**               | `view NRIC` <br> <br> e.g. `view S9758366N`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Help**               | `help` **OR** `help COMMAND_KEYWORD` <br> <br> e.g. `help add`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command Parameters Summary
+
+Some commands include parameters which are identified by prefixes. Here is a table showing the prefixes and what each entails:
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+All Prefixes/Parameters should:
+<li>
+Not be blank
+</li>
+<li>
+Not start with a whitespace
+</li>
+<li>
+Should follow the specifications given below
+</li>
+</div>
 
 <table>
   <thead>
@@ -110,7 +465,7 @@ The table below shows the list of valid parameters that can be encountered in ou
       <td style="text-align:center;">2</td>
       <td style="text-align:center;">Allergy</td>
       <td style="text-align:center;">al|</td>
-      <td>Takes all values. Can be multiple values.</td>
+      <td>Takes all values.</td>
     </tr>
     <tr>
       <td style="text-align:center;">4</td>
@@ -136,8 +491,8 @@ The table below shows the list of valid parameters that can be encountered in ou
       <td style="text-align:center;">e|</td>
       <td>Should be of the format local-part@domain. The <code>local-part</code> section should only contain alphanumeric characters and the special characters <code>+_.-</code>. The <code>local-part</code> section may not start or end with special characters. The <code>domain</code> section must:
         <ul>
-          <li>start with a domain name (*gmail*.com) at least 1 character long</li>
-          <li>end with a domain label (.*com*) at least 2 characters long</li>
+          <li>start with a domain name (<em>gmail</em>.com) at least 1 character long</li>
+          <li>end with a domain label (.<em>com</em>) at least 2 characters long</li>
           <li>have each domain label start and end with alphanumeric characters</li>
           <li>have each domain label consist only of alphanumeric characters, which can be separated by hyphens.</li>
         </ul>
@@ -223,376 +578,3 @@ The table below shows the list of valid parameters that can be encountered in ou
     </tr>
   </tbody>
 </table>
-
-### Viewing help : `help`
-
-Opens a separate help window detailing a summary of the commands available and their functions.
-
-Format: `help`
-
-![help message](images/helpMessage.png)
-
-#### Viewing help for individual commands
-
-Opens a separate help window showing more information about a specific command.
-
-Format: `help COMMAND_KEYWORD`
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-This command only takes in one command keyword.
-</div>
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Information:**<br>
-Multiple help windows can be open at any point in time, but only one help window per command keyword can be open.
-</div>
-
-![add help window](images/addHelpWindow.png)
-
-Examples:
-* `help add`
-* `help edit`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Press `esc` to close the help window.
-</div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can keep the help windows open and refer to it while using our application.
-</div>
-
-### Adding a patient: `add`
-
-Adds a new patient record into the system.
-
-Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER`
-
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-Each person should have a unique NRIC.
-ClinicConnect does not allow two patients with the same NRIC to exist in the system.
-</div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Use this command to quickly add a patient with only the required information.
-</div>
-
-Example: `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
-<br>
-Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
-
-For more information on each individual parameter click here
-
-### Adding a patient with additional information: `addf`
-
-Adds a new patient record into the system with additional information.
-
-Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NO [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
-[nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]`
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-Each person should have a unique NRIC.
-ClinicConnect does not allow two patients with the same NRIC to exist in the system.
-</div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Use this command if you want to add a patient with additional information in addition to the required fields
-(NAME, NRIC, SEX, DATE_OF_BIRTH, PHONE_NO)
-</div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Multiple allergies can be added using multiple "al|" prefixes
-</div>
-
-Examples:
-* `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
-   e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
-   al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care` adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
-     Next-of-Kin Name, Next-of-Kin Phone, Risk Level, Existing Conditions, Notes and his two allergies.
-* `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
-   e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` adds a patient Lincoln Park with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
-     and his allergy.
-
-For more information on each individual parameter click here
-
-### Editing a patient: `edit`
-
-Edits the information of an existing patient in the system by searching for their NRIC.
-
-Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NO] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
-[nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL]
-[ec|EXISTING_CONDITIONS] [no|NOTES]`
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-<ul>
-<li>
-NRIC provided must be a valid NRIC currently in the system
-</li>
-<li>
-Input must contain at least one parameter to be edited
-</li>
-<li>
-Not all parameters are compulsory
-</li>
-</ul>
-</div>
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-<ul>
-<li>
-Except for allergies, existing values will be updated to the input values.
-</li>
-<li>
-Editing EXISTING_CONDITIONS and NOTES is not cumulative (i.e. the existing conditions and notes of the patient will be removed)
-</li>
-<li>
-Not all parameters are compulsory
-</li>
-</ul>
-</div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-<ul>
-<li>
-Multiple allergies can be added using multiple "al" prefixes. Ensure allergies to be added are not current allergies 
-of the patient
-</li>
-<li>
-Multiple allergies can be removed using multiple "rmal" prefixes. Ensure allergies to be removed
-are current allergies of the patient
-</li>
-</ul>
-</div>
-
-Examples:
-* `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N.
-* `edit S9758366N al|wheat al|eggs rmal|fish` add wheat and eggs and remove fish allergies to the patient with NRIC S9758366N.
-
-For more information on each individual parameter click here
-
-### Listing all patients : `home`
-
-Returns to ClinicConnect home page which displays a list of all patients in the ClinicConnect System.
-
-Format: `home`
-
-![home command result](images/homeCommand.png)
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Home Command also informs you on the number of patients currently registered in the system.
-</div>
-
-### Booking an appointment: `bookappt`
-### Booking an upcoming appointment: `bookappt`
-
-Book an upcoming appointment for an existing patient in the system for a health service provided by the clinic.
-
-Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
-
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-<ul>
-<li>
-NRIC provided must be a valid NRIC in the system
-</li>
-<li>
-All parameters are compulsory
-</li></ul>
-</div>
-
-
-Example:
-* `bookappt S9758366N dt|2024-12-29 13:00 h|Vaccination` books a Vaccination appointment for the given patient by NRIC at the specified time.
-
-For more information on each individual parameter click here
-
-### Delete Appointment : `deleteappt`
-
-Identifies a specific patient using NRIC and deletes the appointment specified.
-
-Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-<ul>
-<li>
-NRIC provided must be a valid NRIC in the system
-</li>
-<li>
-All parameters are compulsory
-</li></ul>
-</div>
-
-Example:
-* `deleteappt T01234567A dt|2024-11-05 16:00`
-
-### Filter appointments : `filter`
-
-Filters existing patient records based on the specified parameters.
-
-Format: `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]`
-
-Start date and health service parameters are optional.
-End date parameter is compulsory.
-
-When all parameters are specified, it returns all appointments from start-date to end-date which matches the specified health service.
-When start date and end date are specified, it returns all appointments from start date to end date.
-When end date and health service is specified, it returns all appointments from today's date to end date which matches the specified health service.
-When end date is specified, it returns all appointments from today's date to end-date.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To retrieve appointments on a single date e.g. 2024/10/20, you can input the same start and end date
-
-`filter sd|2024-10-20 ed|2024-10-10`
-</div>
-
-
-Examples:
-*  `filter sd|2012-10-01 ed|2012-11-01 h|blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012.
-*  `filter ed|2024-12-12 h|vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
-*  `filter sd|2012-10-01 ed|2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
-
-### View patients full profile: `view`
-
-Identifies the specific patient using NRIC and shows the full profile of the patient.
-
-Format: `view NRIC`
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-NRIC provided must be a valid NRIC currently in the system.
-</div>
-
-Example:
-* `view T0123456A`
-
-### Deleting a patient : `delete`
-
-Deletes the patient with the specified NRIC from the address book.
-
-Format: `delete NRIC`
-
-* Deletes the patient at the specified `NRIC`.
-* The NRIC refers to the nric of the patient shown in the displayed patient list.
-* The NRIC **must be a valid NRIC number present in the system**
-
-### Clearing all entries : `clear`
-
-Clears **all** patient entries and data in the system.
-
-![clear command result](images/clearCommand.png)
-
-Format: `clear`
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-Using clear will delete all data in the system. Please use it carefully.
-</div>
-
-### Exiting the program : `exit`
-
-Exits the system and closes all windows of ClinicConnect.
-
-Format: `exit`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Using exit command will also close any help windows that are currently open.
-</div>
-
-### Saving the data
-
-ClinicConnectSystem data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-ClinicConnectSystem data are saved automatically as a JSON file `[JAR file location]/data/clinicconnectsystem.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ClinicConnectSystem will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the ClinicConnectSystem to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClinicConnectSystem home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-| Action                 | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                | `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER` <br> <br> e.g. `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666` |
-| **Add Full**           | `addf n|NAME i|NRIC s|SEX d|DATE OF BIRTH p|PHONE NUMBER [e|EMAIL] [a|ADDRESS] [b|BLOOD TYPE] [nokn|NEXT-OF-KIN NAME] [nokp|NEXT-OF-KIN PHONE NUMBER] [al|ALLERGIES]…​ [rl|HEALTH RISK LEVEL] [ec|EXISTING CONDITIONS] [no|ADDITIONAL NOTES]` <br> <br>e.g. `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abrahamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Lincoln Tan nokp|91234567 al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`                                               |
-| **Book Appointment**   | `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE` <br> <br> e.g. `bookappt S9758366N dt|2024-12-29 13:30 h|Vaccination`                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| **Clear**              | `clear`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| **Delete Appointment** | `deleteappt NRIC dt|APPOINTMENT_DATE_TIME` <br> <br> e.g. `deleteappt S9758366N dt|2024-12-29 13:30`                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Delete**             | `delete NRIC` <br> <br> e.g. `delete S0123456Z`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| **Edit**               | `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NO] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE] [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]` <br> <br> e.g. `edit S9758366N n|Keanu Reeves i|S9975483H s|M s|1997-11-30 p|86526969 e|keanureeves@gmail.com a|Blk 512 Ang Mo Kio Ave 2 b|O+ nokn|Mila Kunis nokp|84126990 al|nuts al|shellfish rmal|cake rmal|wheat rl|LOW ec|diabetes no|Patient is a fall risk` |
-| **Exit**               | `exit`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Filter**             | `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]` <br> <br> e.g. `filter sd|2024-12-29 ed|2024-12-30 h|Blood Test`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Home**               | `home`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **View**               | `view NRIC` <br> <br> e.g. `view S9758366N`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| **Help**               | `help` **OR** `help COMMAND_KEYWORD` <br> <br> e.g. `help add`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command Parameters Summary
-
-Some commands include parameters which are identified by prefixes. Here is a table showing the prefixes and what each entails:
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-All Prefixes/Parameters should:
-<li>
-Not be blank
-</li>
-<li>
-Not start with a whitespace
-</li>
-<li>
-Should follow the format given below
-</li>
-</div>
-
-| Prefixes | Refers to                | Format                                                                                                                      | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|---------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `a|`    | Address                  | -                                                                                                                           | Can take any value, should not start with a whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `al|`  | Allergies to be added    | -                                                                                                                           | • Should contain only known allergies in the world <br> • Should contain only alphanumeric and whitespaces <br> • Singular and plural of allergies are the same and should not be added by user <br> • Check if allergy is present before adding                                                                                                                                                                                                                                                                                    |
-| `b|`   | Blood Type               | `A+` `A-` `B+` `B-` `AB+` `AB-` `O+` `O-`                                                                                   | Accepts all the known blood types in the world                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `d|`   | Date of Birth            | YYYY-MM-DD                                                                                                                  | Should follow the format and should not be after today's date                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `dt|`  | Appointment Date-Time    | YYYY-MM-DD HH:mm                                                                                                            | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `e|`   | Email                    | local-part@domain                                                                                                           | **Constraints for local-part:** <br> • Should only contain alphanumeric characters, and these special characters `+`, `_`, `.` and `-` <br> • Should not start or end with any special characters <br> <br> **Constraints for domain:** <br> • Made up of domain labels separated by periods <br> • End with a domain label at least 2 characters long <br> • Have each domain label start and end with alphanumeric characters <br> • Have each domain label consist of alphanumeric characters, separated only by hyphens, if any |
-| `ec|`  | Existing Conditions      | -                                                                                                                           | • Should contain only known medical conditions in the world <br> • Input multiple existing conditions separated by a `,`                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `ed|`  | End Date                 | YYYY-MM-DD                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `h|`   | Health Service           | `Blood Test` `Cancer Screening` `Vaccination` `Consult`                                                                     | Values of health service should only include the 4 types of health service provided                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `i|`   | NRIC                     | 9 characters: <br> • 1 uppercased alphabet at the start <br> • Followed by 7 digits <br> • 1 uppercased alphabet at the end | Starting uppercase alphabet should be `S` `T` `F` `G` `M`                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `n|`   | Name                     | -                                                                                                                           | • Should only contain alphanumeric characters and spaces <br> • Should not start with a whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `no|`  | Additional Notes         | -                                                                                                                           | Can take any value, should not start with a whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `nokn|` | Next-of-Kin Name         | -                                                                                                                           | • Should only contain alphanumeric characters and spaces <br> • Should not start with a whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `nokp|` | Next-of-Kin Phone Number | At least 3 digits long                                                                                                      | Should contain only numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `p|`   | Phone number             | At least 3 digits long                                                                                                      | Should contain only numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `rmal|` | Allergies to be removed  | -                                                                                                                           | • Should contain only known allergies in the world <br> • Should contain only alphanumeric and whitespaces <br> • Check if allergy is present before removing                                                                                                                                                                                                                                                                                                                                                                       |
-| `rl|`  | Health Risk Level        | `HIGH` `MEDIUM` `LOW`                                                                                                       | • Values of health risk level should only include the 3 types of risk level provided <br> • Each patient can only be tagged to one health risk level                                                                                                                                                                                                                                                                                                                                                                                |
-| `s|`   | Sex                      | `M` `F`                                                                                                                     | • Sex should only include the 2 types of sex provided <br> • Each patient can only be tagged to one sex <br> • Sex should be uppercased                                                                                                                                                                                                                                                                                                                                                                                             |
-| `sd|`  | Start Date               | YYYY-MM-DD                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
