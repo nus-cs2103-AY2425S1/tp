@@ -308,7 +308,12 @@ Possible Errors:
 Finds persons based on the specified criteria using the provided prefixes.
 
 <div class="alert alert-warning">
-<i>:warning:</i> <b>Warning:</b> The NRIC must be <b>full, complete and valid for the search to work</b>. This is not necssary for other parameters.
+<i>:warning:</i> <b>Warning:</b> All search parameters (NRIC, phone, email, role) must exactly match the stored data, except for name which allows partial matches. For example:
+- NRIC 'S1234567D' will match 'S1234567D' only
+- Phone '91234567' will match '91234567' only
+- Name 'John' will match 'John Doe', 'Johnny'
+- The NRIC must be a valid Singapore NRIC that follows the official format ('S/T' for citizens/PRs, 'F/G' for foreigners, followed by 7 digits and a checksum letter)
+
 </div>
 
 
@@ -369,6 +374,10 @@ Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
 - `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00` adds a one-hour appointment on January 1st, 2025
 - `addapp nric/S9876543B d/15/03/2025 start/14:30 end/16:00` adds a 90-minute appointment on March 15th, 2025
+
+<div class="alert alert-warning">
+<i>:warning:</i> <b>Warning:</b> CareLink is designed for independent geriatricians' office hours. All appointments must start and end on the same day. For patient safety and doctor work-life balance, overnight appointments are not supported.
+</div>
 
 **Common errors and their meanings:**
 
