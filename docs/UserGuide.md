@@ -94,7 +94,7 @@ We recommend naming your home folder `key-contacts` and storing it on your Deskt
 
 4. Open a command terminal of your preference (e.g. Command Prompt on Windows, Terminal on Mac) from your home folder.
 
-    * **On Windows**, right-click the folder and select `Open Command Terminal`.
+    * **On Windows**, right-click the folder and select `Open in Terminal`.
 
 &nbsp;
     ![WindowsOpenTerminal.png](images/WindowsOpenTerminal.png)
