@@ -342,6 +342,11 @@ Finds persons based on the specified criteria using the provided prefixes.
 - `find role/caregiver` returns all caregivers.
 - `find p/1234567 e/johndoe@example.com` returns persons with phone number `1234567` or email address `johndoe@example.com`.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To navigate through multiple results more efficiently, try using the `Tab` key twice, followed by the `Up` and `Down` arrow keys to cycle through options. This eliminates the need for scrolling or using the mouse.
+</div>
+
+
 An example of using the find command in CareLink is given below.
 ![Find command example](images/findcommandexample.png)
 
