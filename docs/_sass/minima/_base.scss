@@ -291,5 +291,11 @@ table {
     content: "PROperty";
     font-size: 32px;
   }
+  /**
+  * Add some utility classes in printing mode
+  */
+  .no-print {
+    display: none !important;
+  }
 }
 
