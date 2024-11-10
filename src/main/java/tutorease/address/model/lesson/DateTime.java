@@ -5,23 +5,32 @@ import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.dateTimeToString;
 
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import tutorease.address.commons.core.LogsCenter;
+import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a DateTime in the address book.
  */
 public class DateTime implements Comparable<DateTime> {
+    private static Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
     private final LocalDateTime dateTime;
+
     /**
      * Constructs a {@code DateTime}.
      *
      * @param dateTime A valid date and time.
      */
     public DateTime(LocalDateTime dateTime) throws ParseException {
+        logger.log(Level.INFO, "Creating DateTime object with date time: " + dateTime);
         requireNonNull(dateTime);
         checkValidDateTime(dateTimeToString(dateTime));
+
         this.dateTime = dateTime;
+        logger.log(Level.INFO, "Created DateTime object with date time: " + dateTime);
     }
 
     /**

@@ -26,6 +26,8 @@ public class JsonSerializableLessonSchedule {
 
     /**
      * Constructs a {@code JsonSerializableLessonSchedule} with the given lessons.
+     *
+     * @param lessons List of lessons.
      */
     @JsonCreator
     public JsonSerializableLessonSchedule(@JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
@@ -44,11 +46,13 @@ public class JsonSerializableLessonSchedule {
     /**
      * Converts this lesson schedule into the model's {@code LessonSchedule} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * @param tutorEase The tutorEase to read from.
+     * @throws IllegalValueException If there are overlapping lessons.
      */
     public LessonSchedule toModelType(ReadOnlyTutorEase tutorEase) throws IllegalValueException {
         requireNonNull(tutorEase);
         LessonSchedule lessonSchedule = new LessonSchedule();
+
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
             Lesson lesson = jsonAdaptedLesson.toModelType(tutorEase);
             if (lessonSchedule.hasLesson(lesson)) {

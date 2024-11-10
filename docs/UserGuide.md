@@ -95,33 +95,18 @@ Format: `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…�
 
 Remarks:
 * Add a contact with the specified details.
-* `NAME` should only contain alphanumeric characters, spaces and round brackets.
-* Duplicated names is strictly not allowed. Please include a unique identifier like "Ryan Tan (Sec 1)".
-* `NAME` with symbols like "s/o" and "d/o" will not be allowed. However, so and do are accepted, please write without these symbols.
-* `NAME` that are duplicated will be prompted to add a unique identifier.
-* `NAME` with additional white spaces in between terms will be taken as it is.
-* `PHONE_NUMBER` can must be a non-negative integers
-* `PHONE_NUMBER` can start with any number.
-* `PHONE_NUMBER` must have a length of at least 3.
-* `PHONE_NUMBER` does not have a limit on length. 
-* Duplicated phone numbers is strictly not allowed.
-* `EMAIL` should be of format `local-part@domain` with the following constraints
-  * `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+-._).
-  * `local-part` may not start or end with any special characters.
-  * `domain` is made up of domain labels separated by periods.
-  * `domain` must:
-    * end with a `domain` label at least 2 characters long
-    * have each `domain` label start and end with alphanumeric characters
-    * have each `domain` label consist of alphanumeric characters, separated only by hyphens, if any.
-* `NAME` and `EMAIL` are case-insensitive.
-* `ADDRESS` can be in any form with any amount of characters.
-* `ADDRESS` with non-alphanumeric characters are accepted like "😁" too.
-* `ROLE` can only be Student or Guardian.
-* `ROLE` need not be case-sensitive. e.g. `ROLE` can be `stUDent` or `GuaRDIAN`.
-* `TAGS` have no limits on quantity.
-* `TAGS` can only have alphanumeric characters with no spacing.
 
-> **Note:** Lessons can only be added to contacts with the role of student. Therefore, if you want to add a lesson to a contact, you must first add the contact with the role of student.
+
+Field          | Optional/Compulsory | Prefix | Remarks
+---------------|---------------------|--------|-----------------------------------------
+`NAME`         | Compulsory          | n/     | 1. `NAME` should only contain alphanumeric characters, spaces and round brackets. <br> 2. Duplicated names is strictly not allowed. Please include a unique identifier like "Ryan Tan (Sec 1)". <br> 3. `NAME` with symbols like "s/o", "d/o", "D'Cruz", "Lim, Jacus", and etc will not be allowed. However, so and do are accepted, please write without these symbols. <br> 4. `NAME` that are duplicated will be prompted to add a unique identifier. <br>5. `NAME` with additional white spaces in between terms will be taken as it is.
+`PHONE_NUMBER` | Compulsory          | p/     | 1. `PHONE_NUMBER` can must be a non-negative integers. <br> 2. `PHONE_NUMBER` can start with any number. <br> 3. `PHONE_NUMBER` must have a length of at least 3. <br> 4. `PHONE_NUMBER` does not have a limit on length. <br> 5. Duplicated phone numbers is strictly not allowed. <br> 6. Do not include "+" as we only supports local contact numbers only.
+`EMAIL`        | Compulsory          | e/     | `EMAIL` should be of format `local-part@domain` with the following constraints<br> 1.`local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+-._).<br> 2. `local-part` may not start or end with any special characters.<br> 3. `local-part`'s special characters should not be adjacent to one another.<br> 4. `domain` is made up of domain labels separated by periods.<br> 5. After every period, ensure that each domain label has at least 2 consecutive alphanumeric characters. <br> 6. `domain` must:<br> 6a. end with a `domain` label at least 2 characters long. <br> 6b. have each `domain` label start and end with alphanumeric characters. <br> 6c. have each `domain` label consist of alphanumeric characters, separated only by hyphens, if any.
+`ADDRESS`      | Compulsory          | a/     | 1. `ADDRESS` can be in any form with any amount of characters. <br> 2. `ADDRESS` with non-alphanumeric characters are accepted like "😁" too.
+`ROLE`         | Compulsory          | r/     | 1. `ROLE` can only be Student or Guardian. <br> 2. `ROLE` need is case-insensitive. e.g. `ROLE` can be `stUDent` or `GuaRDIAN`.
+`TAGS`         | Optional            | t/     | 1. `TAGS` have no limits on quantity. <br> 2. `TAGS` can only have alphanumeric characters with no spacing.
+> **Note 1:** Lessons can only be added to contacts with the role of student. Therefore, if you want to add a lesson to a contact, you must first add the contact with the role of student.
+> <br> **Note 2:** `NAME` and `EMAIL` are case-insensitive.
 
 Examples:
 
@@ -153,7 +138,7 @@ Remarks:
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `/t` without specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * `ROLE` is not editable!
 * All constraints from `contact add` command still stands with `contact edit` command.
 
@@ -218,6 +203,8 @@ Remarks:
 * The price per hour **must be a non-negative integer**.
 * The duration **must be a decimal number or an integer** in multiples of 0.5.
 * The duration have to be more than 0 and be at most 24.
+* Do not use any other special characters other than a single `.` for indicating decimal points if required. 
+* Not including the leading 0 (e.g. .5) or adding more leading 0s (e.g. 000.5) is equivalent to 0.5.
 * The duration of the lesson is specified by the `DURATION` in hours.
 * The student ID **must be a positive integer** 1, 2, 3, …​, within the range of the number of students in the address book.
 * The student location will automatically be set to the address of the student.
@@ -251,6 +238,8 @@ Remarks:
 * The index refers to the index number shown in the displayed lesson schedule.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * `INDEX` must be within the range of the displayed list.
+* If a `lesson find` operation was done prior to this, `INDEX` needs to be in the new range as a result of 
+  find.
 
 Examples:
 
@@ -344,7 +333,7 @@ the data of your previous TutorEase home folder.
 
  Action             | Format, Examples                                                                                                                                                      
 --------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add Contact**    | `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `contact add n/James Ho p/22224444 e/jamesho@example.com r/Student a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Add Contact**    | `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE[t/TAG]…​` <br> e.g., `contact add n/James Ho p/22224444 e/jamesho@example.com r/Student a/123, Clementi Rd, 1234665 t/friend t/colleague` 
  **Clear**          | `clear`                                                                                                                                                               
  **Delete Contact** | `contact delete INDEX`<br> e.g., `contact delete 3`                                                                                                                                   
  **Edit Contact**   | `contact edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`contact edit 2 n/James Lee e/jameslee@example.com`                                           
