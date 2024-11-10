@@ -152,7 +152,7 @@ This lets you add multiple tags at once, making it easier to input bulk data
 
 #### Prefix Types
 
-The prefixes used in **EZSTATE** are universal across all commands _(i.e. have the same constraints and remarks)_.
+The prefixes used in **EZSTATE** are universal across all commands.
 
 | Prefix | Meaning | Constraints                                                                                                                                                                                                                                                                                                                                                         | Valid                                 | Invalid                                   |
 |--------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|-------------------------------------------|
@@ -161,14 +161,60 @@ The prefixes used in **EZSTATE** are universal across all commands _(i.e. have t
 | e/     | email   | Emails must follow the format `local-part@domain`. The local-part can contain alphanumeric characters and special characters (`+_.-`), but cannot start or end with special characters. The domain must have at least one label, with each label starting and ending with alphanumeric characters and being at least 2 characters long. Labels can contain hyphens. | `e/bobby@gmail.com`, `e/123@123`      | `e/bobby`, `e/123@.com`, `e/@example.com` |
 | t/     | tag     | Tag names should be `alphanumeric`.                                                                                                                                                                                                                                                                                                                                 | `t/friend1`, `t/colleague`, `t/`      | `t/friend@1`, `t/123@abc`                 |
 | d/     | date    | Dates should be in the format `dd-MM-yy` or `ddMMyy` (e.g., 25-12-24 or 251224).                                                                                                                                                                                                                                                                                    | `d/08-12-24`, `d/081224`              | `d/32-13-24`, `d/123456`, `d/`            |
-| fr/    | from    | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00).                                                                                                                                                                                                                                                                                              | `fr/0800`, `fr/08:00`                 | `fr/2500`, `fr/100`, `fr/8am`             |
-| to/    | to      | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00).                                                                                                                                                                                                                                                                                              | `to/1000`, `to/10:00`                 | `to/2500`, `to/110`, `to/`                |
-| pr/    | price   | Price should only contain `positive` numbers and cannot start with `zeroes`, and it should be at least `6` digits long.                                                                                                                                                                                                                                             | `pr/100000`, `pr/45000000`            | `pr/000123`, `pr/-1000`, `pr/12`          |
+| fr/    | from    | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `from` time must precede `to` time.                                                                                                                                                                                                                                                          | `fr/0800`, `fr/08:00`                 | `fr/2500`, `fr/100`, `fr/8am`             |
+| to/    | to      | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `to` time must supercede `from` time.                                                                                                                                                                                                                                                        | `to/1000`, `to/10:00`                 | `to/2500`, `to/110`, `to/`                |
+| pr/    | price   | Price should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `6` digits long.                                                                                                                                                                                                                                            | `pr/100000`, `pr/45000000`            | `pr/000123`, `pr/-1000`, `pr/12`          |
 | ar/    | area    | Area should only contain `positive` numbers and cannot start with `zeroes`, and it should be at least `2` digits long.                                                                                                                                                                                                                                              | `ar/10`, `ar/100`                     | `ar/01`, `ar/-5`, `ar/`                   |
 | add/   | address | Addresses can take any values, and it should not be `blank`.                                                                                                                                                                                                                                                                                                        | `add/123 PASIR RIS (S)123456`         | `add/`                                    |
 | reg/   | region  | Only the following `9` regions are allowed: `EAST`, `WEST`, `NORTHEAST`, `SOUTH`, `NORTH`, `NORTHWEST`, `SOUTHEAST`, `SOUTHWEST`, `CENTRAL`.                                                                                                                                                                                                                        | `reg/east` `reg/northeast`            | `reg/xyz`, `reg/invalidregion`            |
 | sel/   | seller  | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `sel/1` `sel/2`                       | `sel/0`, `sel/-1`, `sel/abc`              |
 | buy/   | buyer   | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `buy/1` `buy/2`                       | `buy/0`, `buy/-2`, `buy/abc`              |
+
+#### Remarks
+
+This section covers remarks for some of the prefixes above. You are to take note of the following remarks when using any commands.
+
+##### n/
+1. Names are `space-sensitive`. This means that `n/alexyeoh` (0 space), `n/alex yeoh` (1 space) and `n/alex  yeoh` (2 spaces) _(not exhaustive)_ create three different profiles.
+2. Names are `case-insensitive`. This means that `n/alex yeoh` and `n/AlEx YeOh` refer to the same name.
+3. Duplicate names are not allowed within the clients or listings lists (e.g., two buyers or sellers both named `Bobby` cannot exist).
+4. Duplicate names between clients and listings are allowed (e.g. a client named `Bobby` and a listing named `Bobby` can both exist).
+5. Names have `no character limit`, but lengthy names will be automatically truncated with an ellipsis.
+6. Names can consist only of numbers, but use caution, as this may cause confusion when displayed alongside the client's index.
+7. Allowable Edge Cases: Names can include single characters or initials (e.g. `n/A` is valid). While this is allowed, single-letter names might be confusing in lists with similar entries (e.g. `n/A`, `n/B`, etc.).
+8. Names with excessive leading or trailing spaces are treated as names withouit (e.g. `n/Alice Johnson               ` = `n/Alice Johnson`).
+
+##### p/
+1. It is permissible for different clients to have the same phone number.
+2. Phones have `no character limit`, but lengthy phones will be automatically truncated with an ellipsis.
+3. Numbers with leading zeros (e.g. p/0012345) are allowed, though these may be visually confusing or prone to misinterpretation.
+4. As an extension to pt. 3, a number with just `zeroes` is allowed, although such a number may not appear realistic. 
+
+##### e/
+1. Emails may technically be invalid but still pass the regex test (e.g. 123@123). It’s up to the user to decide how they input their clients' emails.
+2. Emails have `no character limit`, but lengthy emails will be automatically truncated with an ellipsis.
+3. Emails can have unusual domain labels as long as they’re valid (e.g. `e/user@x-y.com` or `e/person@123.co`). While valid, such domains may not appear realistic.
+
+##### t/
+1. Tags are `case-sensitive`. This means that `t/FRIEND` and `t/friend` are treated as unique tags.
+2. Very long tags (e.g., t/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA) are permissible but might be visually truncated.
+
+##### d/
+1. There is no restriction on the date range, so unrealistic dates in the far future or past may be entered (e.g. `d/01-01-99`).
+
+###### fr/
+NIL (all covered in Constraints)
+
+##### to/
+NIL (all covered in Constraints)
+
+##### pr/
+1. While only positive values are allowed, there’s no limit on maximum value, allowing extremely high prices (e.g., pr/9999999999) which may affect the display of data.
+2. As per constraints, prices like `1000000.50` are not allowed.
+3. 
+
+
+
 
 Congratulations - you've successfully completed the Quick Start guide!
 
@@ -289,18 +335,6 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >
 > ---
 
-<br>
-<div class="note" markdown="span">
-Adding a space between two names is treated as "adding a character". Hence,
-<br>`buyer n/alexyeoh` (0 space)
-<br>!= `buyer n/alex yeoh` (1 space)
-<br>!= `buyer n/alex  yeoh` (2 spaces)
-<br>.
-<br>.
-<br>.
-</div>
-<br>
-
 #### Add Seller
 - **Command:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
 - **Description:** Creates a new seller profile with specified details.
@@ -392,24 +426,6 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ![bobwinter](images/bob_winter.png)
 >
 > ---
-
-<br>
-<div class="note" markdown="span">
-NAME is case-insensitive: 
-`find Bob` = `find BOB` = `find bOb` _(not exhaustive)_
-</div>
-<br>
-
-<div class="alert" markdown="span">
-However, NAME is space-sensitive:
-`find Wen Xuan` != `find WenXuan`
-<br>
-<br>
-First command finds names with `wen` OR `xuan`
-<br>
-Second command finds names with `wenxuan`
-</div> 
-<br>    
 
 - **Failed Execution:**
 > ---
