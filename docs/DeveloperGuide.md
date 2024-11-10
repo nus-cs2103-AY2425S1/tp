@@ -209,7 +209,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`              | HR Manager | view phone number of my employees/potential hire.                 | easily contact them if required.                             |
 | `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their phone number if required.                     |
 | `* * *`              | HR Manager | view email addresses of employees/potential hire.                 | contact them if its not an emergency.                        |
-| `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their email address if required.                    |
+| `* * *`              | HR Manager | insert email address of my employees/potential hire.               | retrieve their email address if required.                    |
 | `* * *`              | HR Manager | delete data through the UI.                                       | delete users who are incorrectly added.                      |
 | `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them. |
 | `* *`                | New user   | be shown some basic functions.                                    | learn the basic functions of the product.                    |
@@ -231,8 +231,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  System shows a list of persons
 3.  User requests to delete a specific person in the list of the correct shown type
 4.  System deletes the person
-
-   Use case ends.
+   
+      Use case ends.
 
 **Extensions**
 
@@ -263,17 +263,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-*1a. The input syntax is invalid.
+* 1a. The input syntax is invalid.
 
-    * 1a1. System shows an error message.
+   * 1a1. System shows an error message.
 
-    Use case resumes at step 1.
+   Use case resumes at step 1.
 
-*1b. The user requests to add a potential hire.
+* 1b. The user requests to add a potential hire.
 
-    *1b1. System saves the potential hire's information.
+   * 1b1. System saves the potential hire's information.
 
-    Use case ends.
+   Use case ends.
 
 **Use case: Find a person**
 
@@ -286,17 +286,17 @@ Use case ends.
 
 **Extensions**
 
-*1a. The input syntax is invalid
+* 1a. The input syntax is invalid
 
-    *1a1. System shows an error message.
+   * 1a1. System shows an error message.
 
-    Use case resumes at step 1.
+   Use case resumes at step 1.
 
-*1b. There is no name that fits the search.
+* 1b. There is no name that fits the search.
 
-    *1b1. The list is empty.
+   * 1b1. The list is empty.
 
-    Use case ends.
+   Use case ends.
 
 **Use case: Ask for help**
 
@@ -305,7 +305,7 @@ Use case ends.
 1. User requests for help.
 2. System gives a list of commands.
 
-Use case ends.
+   Use case ends.
 
 **Use case: Exit the program**
 
