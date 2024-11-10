@@ -44,7 +44,6 @@ EditCommandParser --> AddressBookParser : r
 deactivate EditCommandParser
 
 EditCommandParser -[hidden]-> AddressBookParser
-destroy EditCommandParser
 
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser

@@ -33,7 +33,6 @@ activate VC
 return v
 return v
 return v
-destroy VCP
 LM -> VC ++ : execute(model)
 VC -> Model ++ : getFilteredPersonList()
 return

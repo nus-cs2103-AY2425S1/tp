@@ -25,7 +25,6 @@ activate SC
 return s
 return s
 return s
-destroy SCP
 LM -> SC ++ : execute(model)
 SC -> Model : getAddressBook()
 Model --> SC : AddressBook instance
