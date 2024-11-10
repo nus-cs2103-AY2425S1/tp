@@ -153,7 +153,7 @@ public class EditCommand extends Command {
 
         // Check if the tags are unchanged
         if (updatedTags.equals(personToEdit.getTags())) {
-            throw new CommandException("You cannot add Customer or Supplier tags.");
+            throw new CommandException("Tags were unchanged. Note that Customer/Supplier or duplicate tags cannot be added.");
         }
 
         // Preserve the original orders list
