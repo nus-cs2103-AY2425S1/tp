@@ -615,15 +615,46 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding an event
 
-Coming soon...
+1. Adding an event with all fields
+
+   1. Prerequisites: No events in the list.
+
+   1. Test case: `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC`
+      Expected: An event with the given details is added to the list. Details of new event shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `addevent sp/Chess t/COM v/usc`
+      Expected: No event is added. Error details shown in the status message. Status bar remains the same.
+
+2. _{ more test cases …​ }_
 
 ### Editing an event
 
-Coming soon...
+1. Editing an event with all fields
+
+   1. Prerequisites: List all events using the `listevent` command. Multiple events in the list.
+
+   1. Test case: `editevent 1 sp/Chess d/2024 12 12 1800 v/USC`
+      Expected: First event is updated with the new details. Details of the updated event shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `editevent 0 sp/Chess t/COM v/usc`
+      Expected: No event is updated. Error details shown in the status message. Status bar remains the same.
+
+2. _{ more test cases …​ }_
 
 ### Deleting an event
 
-Coming soon...
+1. Deleting an event while all events are being shown
+
+   1. Prerequisites: List all events using the `listevent` command. Multiple events in the list.
+
+   1. Test case: `deleteevent 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `deleteevent 0`<br>
+      Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `deleteevent`, `deleteevent x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. { more test cases …​ }_
 
 ### Saving data
 
