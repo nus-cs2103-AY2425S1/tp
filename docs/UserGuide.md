@@ -13,7 +13,7 @@ ClinicConnect is the **the *ideal* patient management and appointment tracker sy
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a patient: `add`](#adding-a-patient-add)
     * [Adding a patient with additional information: `addf`](#adding-a-patient-with-additional-information-addf)
-    * [Viewing patient's full profile: `view`](#viewing-patients-full-profile-view)
+    * [Viewing a patient's full profile: `view`](#viewing-patients-full-profile-view)
     * [Editing a patient: `edit`](#editing-a-patient-edit)
     * [Listing all patients : `home`](#listing-all-patients--home)
     * [Booking an upcoming appointment: `bookappt`](#booking-an-upcoming-appointment-bookappt)
@@ -71,11 +71,11 @@ Provides you with tips to use our system more effectively.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n|NAME [al|ALLERGY]` can be used as `n|John Doe al|friend` or as `n|John Doe`.
+* Parameters in square brackets are optional.<br>
+  e.g. `n|NAME [al|ALLERGY]` can be used as `n|John Doe al|friend` or as `n|John Doe`.
 
 * Parameters immediately preceding an ellipsis(...) can appear more than once, to add multiple arguments of the same type.<br>
-  e.g `al|ALLERGY...` can be used as `al|fish al|nuts` or `al|nuts`.
+  e.g. `al|ALLERGY...` can be used as `al|fish al|nuts` or `al|nuts`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n|NAME p|PHONE_NUMBER`, `p|PHONE_NUMBER n|NAME` is also acceptable.
@@ -83,7 +83,13 @@ Provides you with tips to use our system more effectively.
 * Extraneous parameters for commands that do not take in parameters (such as `home`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `home 123`, it will be interpreted as `home`.
 
+* For these commands requiring NRIC to specify the patient (`bookappt`, `deleteappt`, `delete`, `edit` and `view`), NRIC should:
+    * Be a 9 character uppercase sequence with an alphabet at the start and at the end
+    * Start with an uppercase `S`, `T`, `F`, `G`, `M` followed by 7 numbers and ending with an uppercase alphabet
+    * Be registered in the system
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -92,33 +98,21 @@ You can search for relevant info in the user guide by typing <code>Ctrl + F</cod
 
 ### Viewing help : `help`
 
-Opens a separate help window detailing a summary of the commands available and their functions.
-
-Format: `help`
-
+`help` opens a separate help window detailing a summary of the commands available and their functions.
 ![help message](images/helpMessage.png)
+`help [COMMAND_KEYWORD]` opens a separate help window showing more information about a specific command.
+![add help window](images/addHelpWindow.png)
 
-#### Viewing help for individual commands
-
-Opens a separate help window showing more information about a specific command.
-
-Format: `help COMMAND_KEYWORD`
+Format: `help [COMMAND_KEYWORD]` <br>
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
 This command only takes in one command keyword.
 </div>
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Information:**<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Multiple help windows can be open at any point in time, but only one help window per command keyword can be open.
 </div>
-
-![add help window](images/addHelpWindow.png)
-
-Examples:
-* `help add`
-* `help edit`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Press `esc` to close the help window.
@@ -127,6 +121,11 @@ Press `esc` to close the help window.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can keep the help windows open and refer to it while using our application.
 </div>
+
+Examples:
+* `help`
+* `help add`
+* `help edit`
 
 To check out the list of all commands in ClinicConnect, click [here](#command-summary).
 
@@ -212,10 +211,8 @@ Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NUMBER] 
 **:information_source: Important:**<br>
 <ul>
 <li>
-NRIC provided must be a valid NRIC currently in the system
 </li>
 <li>
-Input must contain at least one parameter to be edited
 </li>
 <li>
 Not all parameters are compulsory
@@ -227,39 +224,36 @@ Not all parameters are compulsory
 **:information_source: Important:**<br>
 <ul>
 <li>
-Except for allergies, existing values will be updated to the input values.
+Except for allergies, input values will replace existing values.
 </li>
 <li>
-Editing EXISTING_CONDITIONS and NOTES is not cumulative (i.e. the existing conditions and notes of the patient will be removed)
+Editing EXISTING_CONDITIONS and NOTES is not cumulative (i.e. the existing conditions and notes of the patient will be removed).
 </li>
 <li>
-Not all parameters are compulsory
+Input must contain at least one parameter to be edited.
 </li>
 </ul>
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-<ul>
-<li>
-Multiple allergies can be added using multiple "al" prefixes. Ensure allergies to be added are not current allergies 
+
+* Multiple allergies can be added using multiple "al" prefixes. Ensure allergies to be added are not current allergies 
 of the patient
-</li>
-<li>
-Multiple allergies can be removed using multiple "rmal" prefixes. Ensure allergies to be removed
+
+* Multiple allergies can be removed using multiple "rmal" prefixes. Ensure allergies to be removed
 are current allergies of the patient
-</li>
-</ul>
+
 </div>
 
 Examples:
-* `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N.
-* `edit S9758366N al|wheat al|eggs rmal|fish` add wheat and eggs and remove fish allergies to the patient with NRIC S9758366N.
+* `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N
+* `edit S9758366N al|wheat al|eggs rmal|fish` edits the allergies of the patient with NRIC S9758366N (add wheat and egg allergies and remove fish allergy)
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
-### Listing all patients : `home`
+### Returning to home page : `home`
 
-Returns to ClinicConnect home page which displays a list of all patients in the ClinicConnect System.
+Returns to home page which displays a list of all patients in the ClinicConnect System.
 
 Format: `home`
 
@@ -347,14 +341,13 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears **all** patient entries and data in the system.
-
-![clear command result](images/clearCommand.png)
+Clears ***ALL*** patient entries and data in the system.
 
 Format: `clear`
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
+![clear command result](images/clearCommand.png)
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Using clear will delete all data in the system. Please use it carefully.
 </div>
 
@@ -403,20 +396,20 @@ system, despite this being an impossible combination of NRIC and birthdate for a
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                | `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER` <br> <br> e.g. `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666` |
-| **Add Full**           | `addf n|NAME i|NRIC s|SEX d|DATE OF BIRTH p|PHONE NUMBER [e|EMAIL] [a|ADDRESS] [b|BLOOD TYPE] [nokn|NEXT-OF-KIN NAME] [nokp|NEXT-OF-KIN PHONE NUMBER] [al|ALLERGIES]…​ [rl|HEALTH RISK LEVEL] [ec|EXISTING CONDITIONS] [no|ADDITIONAL NOTES]` <br> <br>e.g. `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abrahamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Lincoln Tan nokp|91234567 al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`                                               |
-| **Book Appointment**   | `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE` <br> <br> e.g. `bookappt S9758366N dt|2024-12-29 13:30 h|Vaccination`                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| **Clear**              | `clear`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| **Delete Appointment** | `deleteappt NRIC dt|APPOINTMENT_DATE_TIME` <br> <br> e.g. `deleteappt S9758366N dt|2024-12-29 13:30`                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Delete**             | `delete NRIC` <br> <br> e.g. `delete S0123456Z`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| **Edit**               | `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NUMBER] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE] [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]` <br> <br> e.g. `edit S9758366N n|Keanu Reeves i|S9975483H s|M s|1997-11-30 p|86526969 e|keanureeves@gmail.com a|Blk 512 Ang Mo Kio Ave 2 b|O+ nokn|Mila Kunis nokp|84126990 al|nuts al|shellfish rmal|cake rmal|wheat rl|LOW ec|diabetes no|Patient is a fall risk` |
-| **Exit**               | `exit`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **Filter**             | `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]` <br> <br> e.g. `filter sd|2024-12-29 ed|2024-12-30 h|Blood Test`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Home**               | `home`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| **View**               | `view NRIC` <br> <br> e.g. `view S9758366N`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| **Help**               | `help` **OR** `help COMMAND_KEYWORD` <br> <br> e.g. `help add`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Command                | Format, Examples                                   |
+|------------------------|----------------------------------------------------|
+| **Add**                | `add n                                             |NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER` <br> <br> e.g. `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666` |
+| **Add Full**           | `addf n                                            |NAME i|NRIC s|SEX d|DATE OF BIRTH p|PHONE NUMBER [e|EMAIL] [a|ADDRESS] [b|BLOOD TYPE] [nokn|NEXT-OF-KIN NAME] [nokp|NEXT-OF-KIN PHONE NUMBER] [al|ALLERGIES]…​ [rl|HEALTH RISK LEVEL] [ec|EXISTING CONDITIONS] [no|ADDITIONAL NOTES]` <br> <br>e.g. `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abrahamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Lincoln Tan nokp|91234567 al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`                                               |
+| **Book Appointment**   | `bookappt NRIC dt                                  |APPOINTMENT_DATE_TIME h|HEALTH_SERVICE` <br> <br> e.g. `bookappt S9758366N dt|2024-12-29 13:30 h|Vaccination`                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Clear**              | `clear`                                            |
+| **Delete Appointment** | `deleteappt NRIC dt                                |APPOINTMENT_DATE_TIME` <br> <br> e.g. `deleteappt S9758366N dt|2024-12-29 13:30`                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Delete**             | `delete NRIC` <br> <br> e.g. `delete S0123456Z`    |
+| **Edit**               | `edit NRIC [n                                      |NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NUMBER] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE] [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]` <br> <br> e.g. `edit S9758366N n|Keanu Reeves i|S9975483H s|M s|1997-11-30 p|86526969 e|keanureeves@gmail.com a|Blk 512 Ang Mo Kio Ave 2 b|O+ nokn|Mila Kunis nokp|84126990 al|nuts al|shellfish rmal|cake rmal|wheat rl|LOW ec|diabetes no|Patient is a fall risk` |
+| **Exit**               | `exit`                                             |
+| **Filter**             | `filter [sd                                        |START DATE] ed|END DATE [h|HEALTH SERVICE]` <br> <br> e.g. `filter sd|2024-12-29 ed|2024-12-30 h|Blood Test`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Home**               | `home`                                             |
+| **View**               | `view NRIC` <br> <br> e.g. `view S9758366N`        |
+| **Help**               | `help [COMMAND_KEYWORD]` <br> <br> e.g. `help add` |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command Parameters Summary
