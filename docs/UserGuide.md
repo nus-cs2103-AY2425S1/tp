@@ -515,8 +515,9 @@ The following commands can be used in Search Mode:
 - `exclude` : Excludes contacts from appearing in search results.
 - `clear-excluded` or `clx` : Clears all excluded contacts.
 - `check-excluded` or `chx` : Displays the list of excluded contacts.
+- `add-all` : Adds all selected contacts to an event.
 - `exit-search` or `es` : Exits Search Mode and returns to the normal display.
-- `help` : Displays the help message.
+- `help` : Displays the help message (same as the `help` command).
 - `exit` : Exits the program (same as the `exit` command).
 
 <div style="page-break-after: always"></div>
