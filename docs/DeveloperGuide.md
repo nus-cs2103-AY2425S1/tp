@@ -786,7 +786,6 @@ testers are expected to do more *exploratory* testing.
 
      1. Test case: `edit 1 n/Axel`<br>
 
-
      2. Test case: `edit 1 p/88452209 e/alex@gmail.com`<br>
         Expected: Edited Person: Axel; Phone: 88452209; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
 
@@ -832,7 +831,9 @@ testers are expected to do more *exploratory* testing.
 
 **Difficulty Level:**
 
-As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles. Most of our effort was dedicated to adding commands, and debugging cases that we have not previously considered.
+As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. 
+However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles. 
+Most of our effort was dedicated to adding essential features, and debugging cases that we have not previously considered.
 
 **Challenges Faced:**
 
@@ -847,4 +848,20 @@ Our group tried to reuse as much of AB3's code structure as much as possible to 
 
 **Achievements:**
 
-Our group is happy with the outcome of Health Connect, as the process of adding and obtaining information of patients is simplified. With the use of tags, it makes it easier to filter people to find the relevant details. 
+In creating HealthConnect, we began with a base application (an address book) and adapted it to meet the specific needs of home-based healthcare professionals. 
+For example, by simplifying the process of adding and viewing information of patients.  For example, with the use of tags, it makes it easier to filter people to find the relevant details.
+Our focus was also on refining existing logic and validations to make them more suitable for this context. 
+This included careful adjustments to fields like name and phone number, ensuring that they were logical and functional for home-based healthcare use in Singapore.
+
+After considerable discussion, we established that two entries (Person A and Person B) would be considered duplicates if they shared the same:
+
+- Name, phone number, and email
+- Name and email
+- Name and phone number
+
+The latter two conditions prevent users from accidentally creating separate entries for the same person if only minor details, like email or phone number, change. 
+This approach maintains a cleaner, more accurate record-keeping system and reduces the risk of redundant data.
+
+Given the iterative nature of this project, we prioritized essential features in our initial development, including tags, filters, allergies, appointment dates, and finding schedule. 
+For each of these features, we focused on establishing clear logic and minimizing bugs, aiming for a robust and reliable experience for users from the outset. 
+This careful planning and attention to detail allowed us to build a solid foundation for HealthConnect, supporting its growth and adaptability.

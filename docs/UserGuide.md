@@ -148,7 +148,7 @@ Health Connect is an application designed to **streamline client management** fo
   * Same name AND same phone number
   * Same name AND same email
   * Same name, same phone number AND same email
-  * Note: same phone number AND same email are not considered as a duplicate patient since the patient might use their NOK's contact details
+  * Note: same phone number AND same email are not considered as a duplicate patient since the patient might use their Next Of Kin's contact details
 
 
 
