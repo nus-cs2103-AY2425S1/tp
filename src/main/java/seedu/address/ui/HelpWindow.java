@@ -466,7 +466,7 @@ public class HelpWindow extends UiPart<Stage> {
         }
 
         // type-casted to Hbox as every Text in helpWindow is wrapped by a Hbox as its parent
-        HBox box = (HBox) targetText.getParent().getParent().getParent();
+        HBox box = (HBox) targetText.getParent().getParent().getParent().getParent().getParent();
         Bounds bounds = box.getBoundsInParent();
         double yPadding = 100;
         double yOffset = bounds.getMinY() + yPadding;
@@ -483,14 +483,14 @@ public class HelpWindow extends UiPart<Stage> {
      */
     private void highlightText(Text targetText) {
         if (lastHighlighted != null) {
-            HBox prevBox = (HBox) lastHighlighted.getParent().getParent().getParent();
+            HBox prevBox = (HBox) lastHighlighted.getParent().getParent().getParent().getParent().getParent();
             prevBox.setBackground(new Background(new BackgroundFill(
                     HIGHLIGHT_HOVER_BACKGROUND,
                     DEFAULT_CORNER_RADII,
                     new Insets(INSET_PADDING, INSET_PADDING, 0, INSET_PADDING))));
         }
         // type-casted to Hbox as every Text in helpWindow is wrapped by a Hbox as its parent
-        HBox hBox = (HBox) targetText.getParent().getParent().getParent();
+        HBox hBox = (HBox) targetText.getParent().getParent().getParent().getParent().getParent();
         Background highlight = new Background(new BackgroundFill(
                 HIGHLIGHT_ACTIVE_BACKGROUND,
                 DEFAULT_CORNER_RADII,
