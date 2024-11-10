@@ -56,7 +56,8 @@ public class Income {
      * @return {@code true} if the value is valid, {@code false} otherwise
      */
     public static boolean isValidIncome(double test) {
-        return test >= 0 && test <= Integer.MAX_VALUE;
+        double roundedTest = roundTwoDecimalPlaces(test);
+        return roundedTest >= 0 && roundedTest <= Integer.MAX_VALUE;
     }
 
     private static double roundTwoDecimalPlaces(double value) {
