@@ -124,15 +124,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Can search for names and courses. Use the `n/` prefix to search for names and the `c/` prefix to search for courses.
 * Partial searches will be matched e.g. `Jam` will match `James` and `James Ho`
 * Each sequence of words not separated by `;` or a prefix will be used as a search. This means that `jam ho` will not match `James Ho`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * If a semicolon was used to separate searches, students matching at least one keyword will be returned (i.e. `OR` search). 
 * If a prefix was used to separate searches, students matching all keywords will be returned (i.e. `AND` search).
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex;david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find n/peter;john'](images/findPeterJohnResult.png)
 * `find n/alex n/david` returns `Alex David`, if a student with that name exists
 * `find c/CS2103T c/CS2100` will return students who are taking both `CS2103T` and `CS2100`
 * `find n/alex c/cs2103t;cs2100` will return all students whose names contain `alex` and are taking at least one of `CS2103T` or `CS2101`.
