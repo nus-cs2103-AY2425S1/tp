@@ -950,6 +950,10 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 
 Furthermore, we believe that duplicate names are better managed based on how the tutor identifies them. Different people have different method of remembering people with the same name. For instance, given two `John`s, a tutor might identify them physically as `John 1` and `John 2` or by their surname, `John Doe` and `John Tan` . This identification should also be reflected in KonTActs to make it easy to distinguish the two students.
 
+**Q**: Why are duplicate fields like Email, Telegram and Github usernames allowed?<br>
+**A**: KonTActs recognizes that students may use the same usernames and emails across different points of contact. To provide greater flexibility in the application, KonTActs permits duplicate entries for email addresses, Telegram handles, and GitHub usernames.  
+
+
 {{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -962,4 +966,6 @@ Furthermore, we believe that duplicate names are better managed based on how the
 ![excel known issue](images/excelKnownIssue.png)
 4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is intended so that the list view does not become cluttered with too much information.
 5. Names that contains the `/` characters will cause konTActs to show an error message although a person can legally have `/` in their legal name such as `Kumar S/O Mahesh`. This is a limitation within konTActs as it uses the `/` charcter internally. The solution for this is to totally omit the `/` altogether. In this case, the name may be added as `Kumar SO Mahesh` or `Kumar son of Mahesh` depending on your preference.
+6. **When closing the View Window**, you will not be able to scroll if the mouse hovers over the area previously occupied by the View Window. To fix this, move the mouse to the left side of the window before scrolling.
+7. **If you are using a small window** and have a person with a long tag, their attendance record will not wrap around, and the last few weeks may not be visible. To see the remaining attendance, increase the window width. 
 --------------------------------------------------------------------------------------------------------------------
