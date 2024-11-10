@@ -22,7 +22,7 @@ public class MarkSupplyOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_ORDER_SUCCESS = "Marked supply order as completed: %1$s";
+    public static final String MESSAGE_MARK_ORDER_SUCCESS = "Marked supply order as completed:";
     public static final String MESSAGE_ORDER_ALREADY_COMPLETED = "The order at index %1$s is already completed.";
     public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
 
@@ -66,7 +66,8 @@ public class MarkSupplyOrderCommand extends Command {
         supplyOrderList.removeOrder(targetIndex - 1);
         supplyOrderList.addOrder(supplyOrder);
 
-        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, targetIndex));
+        String resultMessage = MESSAGE_MARK_ORDER_SUCCESS + "\n" + supplyOrder.toString();
+        return new CommandResult(resultMessage);
     }
 
     @Override
