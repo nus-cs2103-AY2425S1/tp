@@ -69,32 +69,47 @@ This user guide will walk you through:
 
 For immediate setup, proceed to [Quick Start](#quick-start). For detailed feature information, visit the [Features](#features) section.
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed on your computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-4/tp/releases).
+2. Download the latest CareLink `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the **_home folder_** for your CareLink.
+3. Copy the file to your desired CareLink **home folder**.
+4. Open a command terminal, navigate to your home folder, and run:<br>
+```
+java -jar carelink.jar
+```
+The CareLink application window will appear with sample data:<br>
+![CareLink main window](images/Ui.png)
+_Figure 1: CareLink main window with sample data_
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar carelink.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+5. Type commands in the command box and press Enter to execute them. Try these basic commands:
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+* View all records:<br>
+  ```
+  list
+  ```
 
-   - `list` : Lists all contacts.
+* Add a new record:<br>
+  ```
+  add n/John Lee p/91234567 e/johnlee@email.com a/123 Medical Drive nric/S9876543A role/patient
+  ```
 
-   - `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient` : Adds a contact named `John Doe` to the Address Book.
 
-   - `delete S6483749D` : Deletes the person with NRIC `S6483749D`.
+* View help:<br>
+  ```
+  help
+  ```
 
-   - `clear confirm` : Deletes all contacts.
+* Exit CareLink:<br>
+  ```
+  exit
+  ```
 
-   - `exit` : Exits the app.
+6. For detailed instructions on all commands, proceed to the [Features](#features) section.
 
-1. Refer to the [Features](#features) below for details of each command.
+> **Tip:** Type `help` at any time to view the command guide.
 
 ---
 
