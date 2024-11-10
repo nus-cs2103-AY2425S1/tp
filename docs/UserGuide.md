@@ -114,7 +114,7 @@ Examples:
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-### Locating students by name or tag: `find`
+### Locating students by name or tag : `find`
 
 Finds students whose names or tags contain any of the given keywords.
 
@@ -305,10 +305,10 @@ Click on each command to jump to their subsection.
 | **[Add](#adding-a-student--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/John Doe i/E0000000 p/98765432 e/johnd@example.com t/CS1101S`                            |
 | **[List](#listing-all-students--list)**            | `list`                                                                                                                                                                      |
 | **[Edit](#editing-a-student--edit)**               | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                     |
-| **[Mark](#marking-student-as-attended--mark)**     | `mark INDEX tut/TUTORIAL` <br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list (e.g.,`tut/[1,3,7]`) or range (e.g.,`tut/1-12`) <br> e.g., `mark 2 tut/1` |
+| **[Find](#locating-students-by-name-or-tag--find)**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                  |
+| **[Mark](#marking-student-as-present--mark)**     | `mark INDEX tut/TUTORIAL` <br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list (e.g.,`tut/[1,3,7]`) or range (e.g.,`tut/1-12`) <br> e.g., `mark 2 tut/1` |
 | **[Unmark](#marking-student-as-absent--unmark)**   | `unmark INDEX tut/TUTORIAL` <br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list or range<br> e.g., `unmark 2 tut/1`                                     |
 | **[Reset](#resetting-students-attendance--reset)** | `reset INDEX tut/TUTORIAL`<br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list or range <br> e.g., `reset 2 tut/1`                                       |
-| **[Find](#locating-students-by-name--find)**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                  |
 | **[Sort](#sorting-students--sort)**                | `sort ORDER [n/] [i/] [tut/]`<br> e.g., `sort -1 i/`                                                                                                                          |
 | **[Delete](#deleting-a-student--delete)**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                         |
 | **[Clear](#clearing-all-entries--clear)**         | `clear`                                                                                                                                                                     |
