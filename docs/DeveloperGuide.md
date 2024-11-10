@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | new user                                           | see sample entries                                         | understand how the interface will look like with entries added          |
 | `* *`    | user                                               | edit contact details                                       | keep my information up-to-date                                          |
 | `* *`    | busy undergraduate tutor                           | check who owes me tuition fee                              | identify and remind them to pay                                         |
-| `* *`    | busy undergraduate tutor                           | be reminded of my tuitions for today                       | remember to teach for today (if any)                                    |
+| `* *`    | busy undergraduate tutor                           | be reminded of my tuition for today                        | remember to teach for today (if any)                                    |
 | `* *`    | busy undergraduate tutor                           | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive                     |
 | `* *`    | forgetful user                                     | detect duplicates                                          | avoid manually finding and deleting the duplicates                      |
 | `* *`    | forgetful user                                     | tag my students with the day and time of the tuition       | differentiate between different contacts                                |
