@@ -52,16 +52,6 @@ public class MarkSupplyOrderCommand extends Command {
 
         List<? extends Product> items = supplyOrder.getItems();
 
-        /* Remove if we decide to scrap inventory
-        // Filter to ensure we only process Ingredient
-        for (Product product : items) {
-            if (product instanceof Ingredient ingredient) {
-                // Add stock to inventory, currently assume quantity is one
-                inventory.addStock(ingredient.getProductId(), 1);
-            }
-        }
-        */
-
         // Mark the order as completed
         supplyOrder.setStatus(OrderStatus.COMPLETED);
 
