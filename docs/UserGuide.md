@@ -102,6 +102,7 @@ Format: `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS cs/CAROUSELL_HANDLE fb/FAC
 **:information_source: Notes about the `add` command:**<br>
 
 * A contact **must** have a name.
+* Contacts with duplicate names (exact matches) are strictly not allowed.
 * A contact **must** have **at least one** of phone, email, address, or any social media handle
   * Social media handles consists of only Carousell, Facebook and Instagram.
 * Each contact can have **at most one** social media handle
