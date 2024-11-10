@@ -255,8 +255,10 @@ are current allergies of the patient
 </div>
 
 Examples:
-* `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N
-* `edit S9758366N al|wheat al|eggs rmal|fish` edits the allergies of the patient with NRIC S9758366N (add wheat and egg allergies and remove fish allergy)
+* Edits the name and date-of-birth of the patient with NRIC S9758366N
+  * `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N
+* Edits the allergies of the patient with NRIC S9758366N where wheat and egg allergies are added and fish allergy is removed
+  * `edit S9758366N al|wheat al|eggs rmal|fish`
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -290,7 +292,8 @@ Appointments can only be booked for future dates and times
 </div>
 
 Example:
-* `bookappt T0123456A dt|2024-12-29 13:00 h|Vaccination` books a Vaccination appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+* Books an appoinment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+  * `bookappt T0123456A dt|2024-12-29 13:00 h|Vaccination`
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -303,7 +306,8 @@ Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
 ![deleteappt message](images/deleteapptResult.png)
 
 Example:
-* `deleteappt T0123456A dt|2024-12-29 13:00` deletes the appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+* Deletes the appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+  * `deleteappt T0123456A dt|2024-12-29 13:00`
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -351,7 +355,8 @@ Format: `delete NRIC`
 ![delete message](images/deleteResult.png)
 
 Example:
-* `delete T0123456A` deletes the patient with NRIC T0123456A from ClinicConnect.
+* Deletes the patient with NRIC T0123456A from ClinicConnect
+  * `delete T0123456A`
 
 ### Clearing all entries : `clear`
 
