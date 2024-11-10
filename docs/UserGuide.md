@@ -48,9 +48,10 @@ student contact details!
     - [Enrolling a student : `enroll`](#enroll)
     - [Unenrolling a student : `unenroll`](#unenroll)
   - [ATTENDANCE](#attendance-commands)
-    - [Marking attendance : `attend-present`](#attend-present)
+    - [Marking presence : `attend-present`](#attend-present)
     - [Marking absence : `attend-absent`](#attend-absent)
-    - [Clear attendance : `attend-clear`](#attend-clear)
+    - [Removing last attendance : `attend-remove`](#attend-remove)
+    - [Clearing attendance : `attend-clear`](#attend-clear)
   - [DATA](#data)
     - [Saving the data](#saving-the-data)
     - [Editing data file](#editing-the-data-file)
@@ -336,7 +337,7 @@ Format: **`person-delete m/MATRICULATION_NUMBER​​`**
 
 <box type="warning">
 
-Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [data format](#data-formats)!
+Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [:fa-solid-link: data format](#data-formats)!
 </box>
 
 <a name="course-add">
@@ -392,7 +393,7 @@ Format: **`course-delete c/COURSE_CODE`**
 | :--- |
 | `course-delete c/CS1101S` |
 
-<box type="warning">
+<box type="important">
 
 **Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
 </box>
@@ -412,7 +413,7 @@ Format: **`course-delete c/COURSE_CODE`**
 Enrolls a student in a particular course and tutorial group.
 
 <box type="definition" seamless><md>
-Format: **`enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
+Format: **`enroll m/MATRICULATION_NUMBER c/COURSE_CODE tutut/TUTORIAL_ID`**
 </md></box>
 
 - `MATRICULATION_NUMBER` must be the matriculation number of an existing person.
@@ -464,10 +465,10 @@ Each student has an attendance record associated with each unique course and tut
 This record is to be edited over the duration of a semester, where you can mark and unmark
 attendance for for each consecutive session.
 
-<box typ="warning">
+<box type="warning">
 
 Reminder: where used, course **code** and **name**, and tutorial **code** must exist
-and follow the [data format](#data-formats)!
+and follow the [:fa-solid-link: data format](#data-formats)!
 
 The particular student **must** also be enrolled in that course and corresponding tutorial.
 </box>
@@ -478,12 +479,12 @@ The particular student **must** also be enrolled in that course and correspondin
 Marks a student in a particular course and tutorial group as having attended a session (**present**).
 
 <box type="definition" seamless><md>
-Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
+Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
 
 | **Examples** |
 | :--- |
-| `attend-present m/A1234567Y c/CS1101S t/T10A` |
+| `attend-present m/A1234567Y c/CS1101S tut/T10` |
 
 </panel>
 </a>
@@ -494,12 +495,12 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
 Marks a student in a particular course and tutorial group as having missed a session (was **absent**).
 
 <box type="definition" seamless><md>
-Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
+Format: **`attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
 
 | **Examples** |
 | :--- |
-| `attend-absent m/A1234567Y c/CS1101S t/T10A` |
+| `attend-absent m/A1234567Y c/CS1101S tut/T10` |
 
 </panel>
 </a>
@@ -510,12 +511,12 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
 Removes the last attendance session record of a student in a particular course and tutorial group.
 
 <box type="definition" seamless><md>
-Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
+Format: **`attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
 
 | **Examples** |
 | :--- |
-| `attend-remove m/A1234567Y c/CS1101S t/T10A` |
+| `attend-remove m/A1234567Y c/CS1101S tut/T10` |
 
 </panel>
 </a>
@@ -528,12 +529,12 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
 Clears the attendance of a student in a particular course and tutorial group.
 
 <box type="definition" seamless><md>
-Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
+Format: **`attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
 
 | **Examples** |
 | :--- |
-| `attend-clear m/A1234567Y c/CS1101S t/T10A` |
+| `attend-clear m/A1234567Y c/CS1101S tut/T10` |
 
 </panel>
 </a>
@@ -649,15 +650,15 @@ revert the change?<br>
 | Find Students by Name     | `find KEYWORD [MORE_KEYWORDS]`<br>e.g.`find James Jake`                                                                                                                                                           |
 | Edit Student              | `person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`person-edit m/A0296210X n/James Lee e/jameslee@example.com`                                                        |
 | Delete Student            | `person-delete m/MATRICULATION_NUMBER`<br>e.g.`person-delete m/A0296210X`                                                                                                                                         |
-| Add Course                | `course-add c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                       |
-| Edit Course               | `course-edit c/COURSE_CODE n/NAME`<br>e.g.`course-edit c/CS1101S n/Programming Basics`                                                                                                                            |
-| Delete Course             | `course-delete c/COURSE_CODE n/NAME`<br>e.g.`course-delete c/CS3230`                                                                                                                                              |
-| Enroll Student            | `enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`enroll m/A1234567Y c/CS1101S  t/T10A`                                                                                                       |
-| Unenroll Student          | `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`unenroll m/A1234567Y c/CS1101S  t/T10A`                                                                                                    |
-| Mark Attendance           | `attend attend m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend attend m/A1234567Y c/CS1101S  t/T10A`                                                                                           |
-| Mark Absence              | `attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend-absent m/A1234567Y c/CS1101S  t/T10A`                                                                                           |
-| Remove Attendance Session | `attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend-remove m/A1234567Y c/CS1101S  t/T10A`                                                                                           |
-| Clear Attendance          | `attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`<br>e.g.`attend-clear m/A1234567Y c/CS1101S  t/T10A`                                                                                             |
+| Add Course                | `course-add c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                         |
+| Edit Course               | `course-edit c/COURSE_CODE n/NAME`<br>e.g.`course-edit c/CS1101S n/Programming Basics`                                                                                                                              |
+| Delete Course             | `course-delete c/COURSE_CODE n/NAME`<br>e.g.`course-delete c/CS3230`                                                                                                                                                |
+| Enroll Student            | `enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`enroll m/A1234567Y c/CS1101S  tut/T10`                                                                                                           |
+| Unenroll Student          | `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`unenroll m/A1234567Y c/CS1101S  tut/T10`                                                                                                       |
+| Mark Present           | `attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend attend m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
+| Mark Absence              | `attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-absent m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
+| Remove Attendance Session | `attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-remove m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
+| Clear Attendance          | `attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-clear m/A1234567Y c/CS1101S  tut/T10`                                                                                               |
 
 <!-- markdownlint-enable MD013 -->
 
