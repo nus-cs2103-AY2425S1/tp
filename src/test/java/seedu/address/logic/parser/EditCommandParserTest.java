@@ -19,8 +19,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_STUDENT;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_TUTOR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -89,9 +87,12 @@ public class EditCommandParserTest {
         String userInputWithExtraEmail = studentId + " m/ CS1010S CS1231S e/ amybee@gmail.com";
         String userInputWithExtraCourse = studentId + " m/ CS1010S CS1231S c/ Physics";
 
-        assertParseFailure(parser, userInputWithExtraName, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, userInputWithExtraEmail, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, userInputWithExtraCourse, String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInputWithExtraName, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInputWithExtraEmail, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInputWithExtraCourse, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE));
     }
 
     @Test
