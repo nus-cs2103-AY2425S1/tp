@@ -49,7 +49,6 @@ public class Address {
      */
     public String normaliseAddress() {
         return value.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-
     }
 
     @Override

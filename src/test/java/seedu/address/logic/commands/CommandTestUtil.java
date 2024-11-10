@@ -57,6 +57,7 @@ public class CommandTestUtil {
     public static final String VALID_PAID_INSURANCE_PAYMENT = "2026-12-12 349.00";
     public static final String VALID_INSURANCE_PAYMENT_DATE = "2023-05-05";
     public static final String VALID_INSURANCE_AMOUNT_DUE = "349.00";
+    public static final String INVALID_DATE_1 = "2021222-10-16";
     public static final String INVALID_INSURANCE_AMOUNT_DUE = "349.00asdd";
     public static final String INVALID_INSURANCE_PAYMENT = "2023-05-05 349.00asd";
 
@@ -90,6 +91,10 @@ public class CommandTestUtil {
             + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " " + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
             + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
             + PREFIX_PAYMENT_AMOUNT + INVALID_INSURANCE_AMOUNT_DUE;
+    public static final String INVALID_ASSIGN_POLICY_START_DATE = " " + PREFIX_POLICY_NAME
+            + VALID_POLICY_NAME_LIFE + " " + PREFIX_POLICY_START_DATE + INVALID_DATE_1 + " "
+            + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " " + PREFIX_NEXT_PAYMENT_DATE
+            + VALID_INSURANCE_PAYMENT_DATE + " " + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
     public static final String POLICY_END_DATE_EARLIER_THAN_START = " " + PREFIX_POLICY_NAME
             + VALID_POLICY_NAME_LIFE + " " + PREFIX_POLICY_START_DATE + VALID_DATE_2 + " "
             + PREFIX_POLICY_END_DATE + VALID_DATE_1 + " " + PREFIX_NEXT_PAYMENT_DATE
