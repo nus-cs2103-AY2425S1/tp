@@ -99,6 +99,10 @@ public class Person {
         return this.getName().getFullName();
     }
 
+    public String getFullNameToLowerCase() {
+        return this.getName().getFullName().toLowerCase();
+    }
+
     public Phone getPhone() {
         return phone;
     }

@@ -34,7 +34,8 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the list in ascending order based on the person's name.
      */
     public void setAsc() {
-        internalList.sort(Comparator.comparing(Person::getFullName)); // Assuming Person has a getName() method
+        internalList.sort(
+                Comparator.comparing(Person::getFullNameToLowerCase)); // Assuming Person has a getName() method
     }
 
     /**
@@ -42,7 +43,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setDesc() {
         // Assuming Person has a getName() method
-        internalList.sort(Comparator.comparing(Person::getFullName).reversed());
+        internalList.sort(Comparator.comparing(Person::getFullNameToLowerCase).reversed());
     }
 
     public void setFavouriteFirst() {
