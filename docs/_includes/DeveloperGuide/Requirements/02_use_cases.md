@@ -136,7 +136,7 @@ Actor: New User
 **UC10 - List all Transactions**
 
 **MSS**
-1. A user requests to list all transaction after filtering.
+1. A user requests to list all transaction.
 2. The system resets the displayed filtered list.
 3. The system displays the list of all transactions.
    <br>Use case ends.<br>
