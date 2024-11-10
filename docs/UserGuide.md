@@ -428,6 +428,7 @@ Format: `clear`
             <br>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br>The domain name must:
             <br>- end with a domain label at least 2 characters long<br>- have each domain label start and end with alphanumeric characters
             <br>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+            <br>Special characters (+_.-) can only be used to separate alphanumeric values and not be put together consecutively.
         </td>
     </tr>
     <tr>
