@@ -551,3 +551,6 @@ testers are expected to do more *exploratory* testing.
    This enhancement will allow users to clear the current search results and view all contacts again.
 2. **find-role search for users with no Roles**: Currently, the find-role command is unable to search for users with no roles.
    This enhancement will allow search for users with no roles.
+3. **Better TLD input validation for emails**: Currently, it is possible to create emails of `x@xx` format, even though 
+   the domain part of the email should have at least 2 domain labels, the last one being the Top Level Domain (TLD) in
+   real life. We could have better input validation to enforce that there must be at least 2 domain labels.
