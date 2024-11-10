@@ -386,12 +386,28 @@ Lists all claims that the client has associated with them.
 
 Format: `listClaims INDEX`
 
-* Lists the claims for the client at the specified index
-* The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​.
+<box type="tip" seamless>
+    Parameters
+</box>
 
-Examples:
-* `listClaims 1` lists all claims for the client at index 1.
+1. `INDEX` : Must be a valid client index in the filtered list that is currently shown.
+   <br>
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
+
+* If the `INDEX` is invalid, the user will be informed with an error message.
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `listClaims 1`
+<br>
+Output 1: ![listClaimsResult.png](images/listClaimsResult.png)
 
 ### Clearing all entries : `clear`
 
