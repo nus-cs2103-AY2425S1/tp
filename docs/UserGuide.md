@@ -309,6 +309,8 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
+**Warning**: If you want to remove a contact from a wedding, use the unassign command instead of the delete command. 
+The delete command deletes the contact from the address book entirely.
 <br><br/>
 
 #### Sort all entries: `sort`
