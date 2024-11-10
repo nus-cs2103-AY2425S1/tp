@@ -450,3 +450,13 @@ There were some efforts that was saved by reusing parts from the existing AB3 co
 The reuse of these parts helped us to save time and focus more on refining the new features that we decided to implement. Overall, approximately 15% of the total effort was saveed.
 
 ---
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Standardise how different fields can be modified**: Currently, fields like `Remark` and `ApplicationStatus` have their own commands to change these fields (`remark` and `status` respectively). We plan to combine this functionality under this `edit` command to provide users with a more seamless experience.
+2. **Enhancing the use of URLs**: Currently, the `careerPageUrl` field takes in any values and users are not able to click on them to go to the specified link or copy the URL from the application. We plan to enhance the app to only accept valid URL values and give them a way to easily open up the links from the application.
+3. **Improving how names are handled**: Currently, the `name` of a company only accepts alphanumeric values. Also, additional whitespaces in names are not handled with the idea of human error in mind. For example, `Company 1` and `Company  1` will be listed as two different companies even though the latter could be caused by an accidental extra whitespace. We plan to make names include more than just alphanumeric characters as well as collapsing any additional whitespace into a single whitespace.
+
+---
