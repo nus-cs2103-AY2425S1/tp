@@ -49,7 +49,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
     ```
     If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
 
-2. Download the latest `.jar` file from [EZSTATESS Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
+2. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for EZSTATES.
 
