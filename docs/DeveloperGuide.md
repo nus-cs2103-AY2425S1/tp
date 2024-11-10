@@ -257,7 +257,7 @@ In order to add a remark to a student, the user must provide a number representi
 
 * Alternative 2: Identify student by their name.
     * Pros: Users do not have to worry about filtered indexes, so the user does not have to check the list every time before calling this command.
-    * Cons: Since TAchy allows multiple contacts with the same name, the system may encounter ambiguity when handling duplicate names, so additional fields are required to uniquely identify the contacts.
+    * Cons: Since TAchy allows multiple contacts with the same name, the system may encounter ambiguity when handling duplicate names, so additional fields are required to uniquely identify the contacts, which will require more typing.
 
 #### Implementation
 * LogicManager executes the command "remark".
@@ -342,7 +342,7 @@ unless specified otherwise)
 
 * 1b. The student information already exists.
     * 1b1. TAchy an error message of duplicate student.
-    * 1b2. Teacher adds the student again by providing a different name.
+    * 1b2. Teacher adds the student again by providing a different name, phone number, or email.
 
       Use case resumes at step 2.
 
@@ -597,6 +597,8 @@ Team size: 5
 6. **Standardize the command success messages:** The current implementation of the command success messages is 
    inconsistent. Some commands like `edit_student` displays student details, while others like `view_student` do not.
    This should be standardized to ensure that users receive feedback in consistent formats.
+7. **Allow for "s/" in student names:** The current implementation does not allow for student names to contain "/", which isolates them. This should be fixed to allow for a wider range of valid names.
+8. **Reject new students with the same Student Identifiers, but different capitalisation of email:** The current implementation allows for students with the same Student Identifiers but a different capitalisation of email to be added. This does not make sense as email are traditionally not case-sensitive. It should be fixed to allow better identification of users.
 
 ### Non-Functional Requirements
 
@@ -604,7 +606,7 @@ Team size: 5
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-- Business/domain rules: Students cannot have duplicate names. If a tutor has 2 or more students with the same name (e.g: Nicholas Tan and Nicholas Tan), the tutor must add an additional word to the name to differentiate the students (e.g: Nicholas Tan RJC and Nicholas Tan HCI).
+- Business/domain rules: Students cannot have the same Student Identifiers. If a tutor has 2 or more students with the same name (e.g: Nicholas Tan and Nicholas Tan), the tutor must add an additional word to the name to differentiate the students (e.g: Nicholas Tan RJC and Nicholas Tan HCI).
 - Constraints: The system must be backward compatible with data produced by earlier versions of the system, The total project cost should be $0, The project is offered as a free service, TAs are only allowed to store up to 5 GB of data
 - Technical requirements: The system should work on both 32-bit and 64-bit environment, The system should be compatible with Windows, macOS and Linux operating systems.
 - Performance requirements: The system should respond to user inputs within five seconds, The system should be able to handle a large number of students, classes, and assignments without degradation in performance, Data retrieval should not take longer than 2 seconds.
@@ -616,9 +618,9 @@ Team size: 5
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Duplicate Names**: Names for students are considered to be duplicates even if the capitalisation is different (e.g: 'Nicholas' is a duplicate of 'nicholas')
 * **Private student detail**: A student detail that is not meant to be shared with others
-* **Teacher** : Interchangeable with Tutor. This app is meant for Private tutors who teach multiple students
+* **Teacher**: Interchangeable with Tutor. This app is meant for Private tutors who teach multiple students
+* **Student Identifiers** : Student name, phone number, and email
 
 --------------------------------------------------------------------------------------------------------------------
 
