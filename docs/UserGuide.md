@@ -338,7 +338,7 @@ App data are saved automatically as a JSON file `[JAR file location]/data/addres
 
 **Caution:**
 If your changes to the data file makes its format invalid, app will discard all data at the start of the next run. <br>
-An empty data file will replace the corrupted file once a new successful command is executed.
+A new data file without previously saved data will replace the corrupted file once a new successful command is executed.
 Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside the acceptable range).
 Therefore, edit the data file only if you are confident that you can update it correctly.
