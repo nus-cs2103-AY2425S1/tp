@@ -33,8 +33,6 @@ public class CommandBox extends UiPart<Region> {
     private static final String INPUT_NEEDED_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt;"
             + " -fx-text-fill: #fb5252;";
     private boolean isProgrammaticChange = false;
-    private final ResultDisplay resultDisplay;
-
 
     @FXML
     private TextField commandTextField;
@@ -105,20 +103,14 @@ public class CommandBox extends UiPart<Region> {
      *
      * @param commandExecutor Lambda function that executes the entered command text
      */
-    public CommandBox(CommandExecutor commandExecutor, ResultDisplay resultDisplay) {
+    public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.resultDisplay = resultDisplay;
-
         // Listen for ANY text changes to reset ALL styles
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             resetStyle();
             commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS); // Remove error class too
 
-            // Only clear result display if it's a user change (not programmatic)
-            if (!isProgrammaticChange && !oldValue.equals(newValue)) {
-                resultDisplay.setFeedbackToUser("");
-            }
             handleTextChanged(newValue);
         });
 
