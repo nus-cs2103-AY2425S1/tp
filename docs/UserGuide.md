@@ -157,7 +157,8 @@ Health Connect is an application designed to **streamline client management** fo
 Constraints:
 * **NAME**
     - The string must be alphanumeric and contain at least one alphabetic character (i.e., it cannot consist entirely of numbers). Special characters allowed are space (' '), slash ('/'), and hyphen ('-').
-  
+    - However, since `d/` is a recognized parameter, names containing `d/o` are not accepted in this version of Health Connect (though `s/o` is allowed). 
+    - If a patient's name includes `d/o`, format it instead as such `d o`, for example, `Siti d o Raja`.
 * **PHONE NUMBER**
     - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
     - Only numeric characters are allowed
@@ -176,7 +177,7 @@ Constraints:
         1. `High Risk`
         2. `Medium Risk`
         3. `Low Risk`
-    - Note: tags are case insensitive.
+    - Note: tags are case-insensitive.
       
 * **ALLERGY**
     - Only include alphanumeric characters, spaces, and commas.
