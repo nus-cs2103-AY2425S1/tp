@@ -125,6 +125,9 @@ Adds the appointment date (in format DD-MM-YYYY HH:MM) of a patient to the patie
 
 Format: `appointment NRIC app/DD-MM-YYYY HH:MM`
 
+* If the patient already has an appointment, the new appointment will overwrite the existing one.
+* Invalid dates and times (eg. 30th February, 24:59) will not be accepted.
+
 ### Changing Triage Stage : `triage`
 
 Changes the existing triage stage of a patient to another stage. Stages are categorised from 1 to 5.
@@ -233,6 +236,7 @@ Format: `log NRIC DD-MM-YYYY HH:MM INFO`
 
 * Logs the information to the patient with the specified `NRIC`.
 * Date and time inputs refer to log date and time.
+* Invalid dates and times (eg. 30th February, 24:59) will not be accepted.
 * Logged information must be non-empty.
 * Note that when the View Window is opened when adding log entries, the window will not display the new log entries until the view command is executed by the user again.
 
