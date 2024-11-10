@@ -133,7 +133,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `PROpertyParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -201,7 +201,7 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
   If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, 
   `AddCommandParser` creates an `AddCommand` instance with a `Person` object representing the new client.
 
-Upon execution, `AddCommand` first queries the supplied model if it contains a person. If no duplicate person exists, `AddCommand` then calls on `model::addPerson` to add the person into the contact list.
+Upon execution, `AddCommand` first queries the supplied model if it contains a client. If no duplicate client exists, `AddCommand` then calls on `model::addPerson` to add the client into the contact list.
 
 ### Add Listing Feature
 
@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | --------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------- |
 | `* * *`  | new user                                | see usage instructions                                      | refer to instructions when I forget how to use the App        |
 | `* * *`  | user                                    | add a contact with their information                        | view them later                                               |
-| `* * *`  | user                                    | delete a person                                             | remove entries that I no longer need                          |
+| `* * *`  | user                                    | delete a client                                             | remove entries that I no longer need                          |
 | `* * *`  | user                                    | use a search bar to find my contact                         | locate details without going through the entire list          |
 | `* * *`  | user                                    | edit current contact details                                | keep the details updated                                      |
 | `* * *`  | user                                    | search via tags                                             | filter by different groups of people                          |
@@ -341,17 +341,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `PROperty` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: Add a client**
 
 **MSS**
 
-1. User requests to add a new person by providing the person's details.
+1. User requests to add a new client by providing the client's details.
 
 2. PROperty validates the input details.
 
-3. PROperty adds the person to the contact list.
+3. PROperty adds the client to the contact list.
 
-4. PROperty displays a confirmation that the person has been added.
+4. PROperty displays a confirmation that the client has been added.
    
    Use case ends.
 
@@ -365,19 +365,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
 
-- 2b. A person with the same details already exists.
+- 2b. A client with the same details already exists.
   
-  - 2b1. PROperty informs the user that the person already exists.
+  - 2b1. PROperty informs the user that the client already exists.
     
     Use case ends.
 
 ---
 
-**Use case: Edit a person's details**
+**Use case: Edit a client's details**
 
 **MSS**
 
-1. User requests to edit details of a specific person.
+1. User requests to edit details of a specific client.
 
 2. User inputs desired edits.
 
@@ -385,13 +385,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 4. PROperty saves the updated details.
 
-5. PROperty confirms that the person's details have been updated.
+5. PROperty confirms that the client's details have been updated.
    
    Use case ends.
 
 **Extensions**
 
-- 1a. The specified person does not exist.
+- 1a. The specified client does not exist.
   
   - 1a1. PROperty shows an error message.
     
@@ -407,15 +407,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Add remarks to a person**
+**Use case: Add remarks to a client**
 
 **MSS**
 
-1. User selects a person to add a remark.
+1. User selects a client to add a remark.
 
 2. User enters the remark.
 
-3. PROperty saves the remark to the person's details.
+3. PROperty saves the remark to the client's details.
 
 4. PROperty confirms that the remark has been added.
    
@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 1a. The specified person does not exist.
+- 1a. The specified client does not exist.
   
   - 1a1. PROperty shows an error message.
     
@@ -431,19 +431,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The remark is empty.
   
-  - 2a1. PROperty removes the remark from the specified person instead.
+  - 2a1. PROperty removes the remark from the specified client instead.
 
 ---
 
-**Use case: Remove remarks from a person**
+**Use case: Remove remarks from a client**
 
 **MSS**
 
-1. User selects a person to remove remark.
+1. User selects a client to remove remark.
 
 2. User enters empty remark.
 
-3. PROperty removes the existing remark (if any) from the person's details.
+3. PROperty removes the existing remark (if any) from the client's details.
 
 4. PROperty confirms that the remark has been removed.
 
@@ -451,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 1a. The specified person does not exist.
+- 1a. The specified client does not exist.
 
     - 1a1. PROperty shows an error message.
 
@@ -459,15 +459,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Search for persons by tags**
+**Use case: Search for clients by tags**
 
 **MSS**
 
-1. User requests to search for persons using one or more tags.
+1. User requests to search for clients using one or more tags.
 
 2. PROperty filters the contact list based on the specified tags.
 
-3. PROperty displays a list of persons matching the tags.
+3. PROperty displays a list of clients matching the tags.
    
    Use case ends.
 
@@ -479,7 +479,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 1.
 
-- 2a. No persons match the specified tags.
+- 2a. No clients match the specified tags.
   
   - 2a1. PROperty informs the user that no matches were found.
     
@@ -908,7 +908,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should work on any screen size from (`13'` laptop screens to `32'` widescreen monitors)
 5. Should reliably store contact information across different sessions with minimal chance of corruption
@@ -926,7 +926,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Reminder/Event**: A scheduled notification linked to a contact, alerting the user of upcoming tasks, appointments, or follow-ups.
 
-- **Social Media Handles**: Usernames or profile links associated with a person's social media accounts.
+- **Social Media Handles**: Usernames or profile links associated with a client's social media accounts.
 
 - **Syntax Highlighting**: A feature that displays commands in different colors to differentiate between commands, attributes, and values for easier readability.
 
@@ -934,7 +934,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Undo Feature**: A function that allows the user to reverse the last action taken, preventing accidental loss or changes to information.
 
-- **Contact**: An entry in the PROperty representing a person, including their personal and professional information.
+- **Contact**: An entry in the PROperty representing a client, including their personal and professional information.
 
 - **Reminder/Event List**: A chronological list displaying upcoming reminders or events set by the user.
 
