@@ -13,7 +13,7 @@
 </pic>
 </center>
 
-KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who works at the National University of Singapore, School of Computing.
+KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who works at the National University of Singapore, School of Computing.**
 
 KonTActs streamlines contact management, helping you keep track of your students contact, attendance and assignment information more effectively compared to traditional GUI apps. 
 
