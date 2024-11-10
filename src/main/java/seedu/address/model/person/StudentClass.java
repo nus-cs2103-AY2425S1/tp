@@ -9,9 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentClass {
 
-    public static final String MESSAGE_CONSTRAINTS = "Student's class names should be alphanumeric"; // alphanumeric
+    public static final String MESSAGE_CONSTRAINTS =
+            "Student's class names should be alphanumeric and a maximum of 50 characters"; // alphanumeric
     // and special characters
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}{1,50}";
 
     public final String value;
 
