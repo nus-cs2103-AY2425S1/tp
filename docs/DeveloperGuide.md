@@ -123,7 +123,7 @@ How commands work:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/eventtory/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="640" />
 
 
 The `Model` component,
@@ -136,15 +136,6 @@ The `Model` component,
     * the current trailing index offset for assigned vendors/events in view mode as a `ObservableIntegerValue` object
 * stores a `UserPref` object that represents the user’s preferences. This is exposed as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `EventTory`, which `Vendor` and `Event` references. This allows `EventTory` to only require one `Tag` object per unique tag, instead of each `Event` and `Vendor` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
 
 ### Storage component
 
