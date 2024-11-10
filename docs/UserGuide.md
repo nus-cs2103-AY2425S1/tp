@@ -526,16 +526,16 @@ Format: `exit`
 
 ### Saving the data
 
-InternBuddy data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+`InternBuddy` data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-InternBuddy data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+`InternBuddy` data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file as a even faster way to interact with your AddressBook.
 
 <box type="warning" seamless>
 
 **Warning:**
-If your changes to the data file makes its format invalid, InternBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, InternBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to create a backup of the file before editing it.<br>
 Furthermore, certain edits can cause InternBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -548,8 +548,8 @@ Furthermore, certain edits can cause InternBuddy to behave in unexpected ways (e
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: Must I install java 17 or above to use InternBuddy? <br>
-**A**: Yes, InternBuddy uses libraries implemented in java 17 or above, it will not work without it.
+**Q**: Must I install Java `17` or above to use InternBuddy? <br>
+**A**: Yes, InternBuddy uses libraries implemented in Java `17` or above, it will not work without it.
 
 **Q**: <a id="param-exceptions"></a>Do I have to follow the order of parameters specified by the commands? <br>
 **A**: If the parameter has a prefix (eg: `n/NAME`), you can specify them in any order you like! (eg: `add n/NAME e/EMAIL` and `add e/EMAIL n/NAME` are both allowed) <br>
@@ -559,7 +559,7 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 **A**: To add a company with multiple tags, use the add command with multiple t/ tags. Example: `add n/Google LLC e/contact@google.com t/tech t/FAANG t/software`
 
 **Q**: Can I edit a company’s details? <br>
-**A**: Yes, you can edit any company's details using the edit command followed by the index of the company. For example: `edit 2 n/Apple Inc e/careers@apple.com p/12345678`. However, please note that optional fields like `PHONE_NUMBER` and `ADDRESS` cannot be removed once added. If you wish to remove these fields, you will need to delete the company using the `delete` command and then re-add it without those fields.
+**A**: Yes, you can edit any company's details using the edit command followed by the index of the company. <br> For example: `edit 2 n/Apple Inc e/careers@apple.com p/12345678`. However, please note that optional fields like `PHONE_NUMBER` and `ADDRESS` cannot be removed once added. If you wish to remove these fields, you will need to delete the company using the `delete` command and then re-add it without those fields.
 
 **Q**: Can I delete all contacts at once? <br>
 **A**: Yes, use the `clear` command to delete all contacts in your address book. Be cautious, as this action is <span style="color:red">irreversible</span>.
@@ -576,9 +576,9 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 4. **Indicating multiple `APPLICATION_STATUS` in `apply` command**, if you specify more than one `APPLICATION_STATUS` (eg: `apply n/SWE Intern d/Requires Java as/APPLIED as/OA`) will result in InternBuddy in applying the last `APPLICATION_STATUS` (`OA` in the given example); provided that the last `APPLICATION_STATUS` is valid.
 5. **Indicating multiple parameters in `update` command**, if you specify multiple parameters with the same prefix, only the right most parameter will be used by InternBuddy. <br>
    For instance, `update c/1 app/2 as/OA c/2 app/3 app/4 as/REJECTED` will be read the same as `update c/2 app/4 as/REJECTED` and will run if the read values are valid. 
-6. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to 1000 companies, each with 1000 applications. Entering values beyond this range (e.g., greater than 1000) may lead to undefined behavior, so please ensure indexes stay within the specified bounds.
-7. The error message for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the domain name between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the user guide.
-8. The AddressBook currently accepts invalid phone numbers, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
+6. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to **1000 companies**, each with **1000 applications**. Entering values beyond this range (e.g., greater than 1000) may lead to **undefined behavior**, so please ensure indexes stay within the specified bounds.
+7. **The error message** for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the `domain` between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the notes in [features](#features).
+8. `InternBuddy` **currently accepts invalid phone numbers**, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
 
 [back to top](#internbuddy-user-guide)
 
