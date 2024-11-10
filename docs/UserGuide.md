@@ -50,9 +50,9 @@ By following these sections, you can quickly find the information you need and m
 
 3. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
 
-4. *Windows:* Open the home folder and right click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
+4. *Windows:* Open the home folder and right-click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
 <img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows"><br><br>
-*MacOS:* Right click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
+*MacOS:* Right-click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
    <img src="images/Quickstart-new-terminal-MacOS.png" alt="New terminal on MacOS">
 
 5. Type the command in the [command box](#command-box) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
