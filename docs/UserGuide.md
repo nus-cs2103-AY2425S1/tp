@@ -123,60 +123,43 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find [INDEX] [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-### General Search Rules
-- **Attribute-Specific Requirements**: Each attribute has specific search behaviors (see details below).
-- At least one of the optional fields must be provided.
+#### General Search Rules
+* At least one of the optional fields must be provided.
+* If no matches to user input are found, an empty list is returned.
+* Attribute-Specific Requirements: Each attribute has specific search behaviors (see details below).
 
-### Attribute-Specific Search Details
+##### Index (`INDEX`)
+* Finds the person at the specified `INDEX` in the currently displayed list.
+* Index must be a positive integer (e.g., `1`, `2`, `3`, …).
 
-## Index (`INDEX`)
-- Finds the person at the specified `INDEX` in the currently displayed list.
-- **Index** must be a positive integer (e.g., `1`, `2`, `3`, …).
+Examples
+* `list` followed by `find 2` shows the 2nd person in the displayed list.
 
-### Examples
-- `list` followed by `find 2` shows the 2nd person in the displayed list.
+##### Name (`n/KEYWORDS`)
+* The order and case of keywords does not matter. For example, `find n/Hans Bo` will match both `Hans Gruber` and `Bo hans`.
+* You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
 
-### Name (`n/KEYWORDS`)
-- **Case-insensitive** and **order-independent**: The order of keywords does not matter. For example, `find Hans Bo` will match both `Hans Gruber` and `Bo Hans`.
-- **Partial Word Matching from the Start of Each Name Part**: You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
+Examples
+* `find n/John` → returns `John Doe`, `Johnny Appleseed`
+* `find n/alex david` → returns `Alex Yeoh`, `David Alex`
+* `find n/jo ap` → returns `John Appleseed`, `Appleseed Johnny`
 
-### Examples
-- `find n/John` → returns `John Doe`, `Johnny Appleseed`
-- `find n/alex david` → returns `Alex Yeoh`, `David Alex`
-- `find n/jo ap` → returns `John Appleseed`, `Appleseed Johnny`
+###### Tags (`t/TAG`)
+* Case sensitive search
+* Only persons with tags that match all the exact tag names provided will be returned.
 
-#### Phone Number (`p/PHONE`)
-- **Full Phone Number Required**: Partial matches will not be returned. You need to provide the complete phone number.
+Examples
+* `find t/friend t/colleague` returns persons tagged as both `friend` and `colleague`
 
-### Examples
-- `find p/12345678` → returns only persons with the exact phone number `12345678`
 
-#### Email (`e/EMAIL`)
-- **Exact Match Required**: Only persons with the exact email provided will be matched.
+##### Other attributes (`p/PHONE`, `e/EMAIL`, `a/ADDRESS`)
+* Exact match is required for the attributes, there is no partial match functionality 
 
-### Examples
-- `find e/johndoe@example.com` → returns only persons with the email `johndoe@example.com`
+Examples
+* `find p/12345678` returns only the person with the exact phone number `12345678`
+* `find e/johndoe@example.com` → returns only persons with the email `johndoe@example.com`
+* `find a/123 Clementi Ave 3` → returns only persons with the exact address `123 Clementi Ave 3`
 
-#### Address (`a/ADDRESS`)
-- **Full Address Required**: The search requires the complete address; partial address matches are not supported.
-
-### Examples
-- `find a/123 Clementi Ave 3` → returns only persons with the exact address `123 Clementi Ave 3`
-
-#### Tags (`t/TAG`)
-- **Full Tag Name Required**: Only persons with tags that match the exact tag names provided will be returned.
-- **Multiple Tags for Filtering**: You can specify multiple tags for a broader search.
-
-### Examples
-- `find t/friend t/colleague` → returns persons tagged as `friend` and `colleague`
-
-### Examples
-
-- `find n/John` → returns `John`, `John Doe`
-- `find n/alex david` → returns `Alex Yeoh`, `David Li`
-- `find p/12345678` → returns persons with phone number `12345678`
-- `find a/123 Clementi Ave 3` → returns persons with address `123 Clementi Ave 3`
-- `find t/friend t/colleague` → returns persons with tags `friend` or `colleague`
 
 ### Sorting persons by name: `sort`
 
