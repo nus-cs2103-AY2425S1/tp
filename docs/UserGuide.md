@@ -126,6 +126,8 @@ student contact details!
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME`
   is also acceptable.
 
+- Address Length: If the `a/ADDRESS` parameter is too long, it may overflow in the user interface. To avoid display issues, keep addresses concise.
+
 - Extraneous parameters for commands that do not take in parameters (such as
   `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -148,9 +150,9 @@ student contact details!
 | :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `MATRICULATION_NUMBER` | must be a valid **NUS** matriculation number in the form `AxxxxxxxB`, where `A` is the fixed as 'A', `B` is any *uppercase* character, and `xxxxxxx` is any 7 integers. |
 | `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
-| `PHONE_NUMBER` | must contain **numbers**, and it should be **at least 3 digits long**.                                                                                                  |
+| `PHONE_NUMBER` | must only contain **numbers**, and it should be **at least 3 digits long**.                                                                                             |
 | `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm).                                                                        |
-| `COURSE_CODE` | must be in the form `AAxxxxB` where `AA` is 2 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                               |
+| `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 2 or 3 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                               |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
 | `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99.                                                                  |
 
@@ -647,7 +649,7 @@ revert the change?<br>
 | Clear                     | `clear`                                                                                                                                                                                                           |
 | Exit                      | `exit`                                                                                                                                                                                                            |
 | Add Student               | `person-add m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br>e.g.`person-add m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| Find Students by Name     | `find KEYWORD [MORE_KEYWORDS]`<br>e.g.`find James Jake`                                                                                                                                                           |
+| Find Students by Name     | `person-find KEYWORD [MORE_KEYWORDS]`<br>e.g.`person-find James Jake`                                                                                                                                             |
 | Edit Student              | `person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`person-edit m/A0296210X n/James Lee e/jameslee@example.com`                                                        |
 | Delete Student            | `person-delete m/MATRICULATION_NUMBER`<br>e.g.`person-delete m/A0296210X`                                                                                                                                         |
 | Add Course                | `course-add c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                         |
