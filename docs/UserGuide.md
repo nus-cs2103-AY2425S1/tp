@@ -9,31 +9,36 @@ title: User Guide
 1. [Introduction](#introduction)
 
 2. [Quick Start](#quick-start)
+   2.1. [Prerequisites](#prerequisites)
+   2.2. [Download AcademyAssist](#download-academyassist)
+   2.3. [Things to Note Before You Start](#things-to-note-before-you-start)
+   2.4. [Setting up AcademyAssist](#setting-up-academyassist)
+   2.5. [Getting Started](#getting-started)
 
 3. [Features](#features)
-    * [Student Management](#student-management)
-      * [Adding a student](#adding-a-student--add)
-      * [Deleting a student](#deleting-a-student--delete)
-      * [Editing a student](#editing-a-student--edit)
-      * [Listing all students](#listing-all-students--list)
-      * [Viewing a student's detail](#viewing-a-students-detail--detail)
-    * [Searching and Sorting](#searching-and-sorting)
-        * [Finding a student](#finding-a-student--find)
-        * [Sorting students](#sorting-students--sort)
-        * [Filtering students](#filtering-students--filter)
-    * [Subject Management](#subject-management)
-        * [Adding a subject to a student](#adding-a-subject-to-a-student--addsubject)
-        * [Tracking student count for each subject](#tracking-student-count-for-each-subject--tracksubject)
-    * [Utility Features](#utility-features)
-        * [Clearing all entries](#clearing-all-entries--clear)
-        * [Getting help](#getting-help--help)
-        * [Exiting the program](#exiting-the-program--exit) 
+   3.1. [Student Management](#student-management)
+   3.1.1. [Adding a student](#adding-a-student--add)
+   3.1.2. [Deleting a student](#deleting-a-student--delete)
+   3.1.3. [Editing a student](#editing-a-student--edit)
+   3.1.4. [Listing all students](#listing-all-students--list)
+   3.1.5. [Viewing a student's detail](#viewing-a-students-detail--detail)
+   3.2. [Searching and Sorting](#searching-and-sorting)
+   3.2.1. [Finding students](#finding-students--find)
+   3.2.2. [Sorting students](#sorting-students--sort)
+   3.2.3. [Filtering students](#filtering-students--filter)
+   3.3. [Subject Management](#subject-management)
+   3.3.1. [Adding subject(s) to a student](#adding-subjects-to-a-student--addsubject)
+   3.3.2. [Tracking student count for each subject](#tracking-student-count-for-each-subject--tracksubject)
+   3.4. [Utility Features](#utility-features)
+   3.4.1. [Clearing all entries](#clearing-all-entries--clear)
+   3.4.2. [Getting help](#getting-help--help)
+   3.4.3. [Exiting the program](#exiting-the-program--exit)
 
 4. [Data Management](#data-management-in-academyassist)
 
 5. [FAQ](#faq)
 
-6. [Command summary](#command-summary)
+6. [Command Summary](#command-summary)
 
 # Introduction
 Welcome to **AcademyAssist**, your ultimate solution for <span style="color:lightgreen; font-weight:bold">efficient student contact management</span>, targeted at tuition centers operating in Singapore.
@@ -57,7 +62,7 @@ This guide provides step-by-step instructions for installing and running the Aca
 and technical users. Please follow the instructions that correspond to your level of expertise.
 
 ## Prerequisites
-Before you beginm, ensure you have Java `17` or above installed in your computer. 
+Before you begin, ensure you have Java `17` or above installed in your computer. 
 
 ### Check Java Version
 1. Open up command prompt (Windows) or terminal (macOS, Linux).
@@ -87,7 +92,7 @@ Please note that clear action is <span style="color:red;font-weight:bold">IRREVE
 </div>
 
 ## Setting up AcademyAssist
-### Non Technical Users
+### Non-Technical Users
 1. Create a new folder at your Desktop. (e.g. `AcademyAssist`)
 2. Move the downloaded `academyassist.jar` file into this folder.
 2. Open the command prompt (Windows) or terminal (macOS, Linux).
@@ -102,14 +107,38 @@ Please note that clear action is <span style="color:red;font-weight:bold">IRREVE
 3. Navigate to the directory where the `academyassist.jar` file is located.
 4. Type `java -jar academyassist.jar` and press Enter to start the app.
 
-## First Time-Use
-For all users, upon first running the application, a help window will appear automatically, providing details on some basic features. 
+## Getting Started
+For all users, upon first running the application, a help window will appear automatically, providing details on some basic features.
 You may refer to the [Command Summary](#command-summary) section for a quick overview of the available commands. The [Features](#features) section provides a more detailed explanation of each feature.
 
-## User Interface Overview
-<img src="/images/UiOverview.png" alt="UI overview" width="600"/>
---------------------------------------------------------------------------------------------------------------------
+### User Interface Overview
 
+<img src="/images/UiOverview.png" alt="UI overview" width="600"/>
+
+1. **Top Bar**: Contains the following buttons
+    * **Help**: Click on this to view the help window.
+    * **Exit**: Click on this to exit the application.
+2. **Command Box**: Enter your commands here to interact with the application.
+3. **Message Box**: Displays messages to the user. Which includes success messages, error messages, and help messages.
+4**Student List**: Displays the list of students in the system.
+
+### Sample Commands
+Here are some sample commands you can try out to get started:
+1. Add a student: `add n\John Doe i\S1234567A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`
+2. Edit a student: `edit S00001 a\Clementi Street 14`
+3. Delete a student: `delete S00001`
+4. Find a student: `find John`
+5. List all students: `list`
+6. View a student's details: `detail S00001`
+7. Sort students by name: `sort by\name`
+8. Filter students by year group: `filter yg\2`
+9. Add a subject to a student: `addsubject S00001 s\Science`
+10. Track the number of students taking each subject: `tracksubject`
+
+### Conclusion
+You are now ready to use AcademyAssist! If you encounter any issues during installation or usage, please refer to this documentation or contact us via our email (academyassist@gmail.com). Enjoy using the application!
+
+--------------------------------------------------------------------------------------------------------------------
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -291,7 +320,7 @@ To return to the full list of students, use the `list` command.
 
 </div>
 
-### Finding a student : `find`
+### Finding students : `find`
 
 Finds students whose name contains any of the given keywords.
 
@@ -345,7 +374,7 @@ Examples:
 
 ![Sort Success Message](/images/sort.png)
 
-### Filtering the list : `filter`
+### Filtering students : `filter`
 
 Shows a list of students filtered by year group or subject.
 
