@@ -283,7 +283,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: The address book offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With a customizable field, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
+**Value proposition**: The address book offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With an editable field, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
 
 
 ### User stories
@@ -860,7 +860,7 @@ testers are expected to do more *exploratory* testing.
             Parameters: n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [t/TAG]...<br>
             Example: `add person n/Alex Yeoh p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
    
-   5. Other incorrect add commands to try: `add person n/Alex Yeoh p/98765432 a/311, Clementi Ave 2, #02-25 t/Celebrity` or any inputs that do not include a name, phone number, or email.
+   5. Other incorrect add commands to try: `add person n/Alex Yeoh a/311, Clementi Ave 2, #02-25 t/Celebrity` or any inputs that do not include a name or phone number.
 
 ### Deleting a person
 
