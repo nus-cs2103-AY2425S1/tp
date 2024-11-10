@@ -246,11 +246,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -297,9 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Wedding Planner | Un-tag my contacts from a wedding                 | I can remove relevant stakeholders and attendees who will no associate with that wedding | |
 | `*`      | Wedding Planner | Create and manage guest lists for each wedding    | I can track RSVPs and dietary preferences                                                |
 | `*`      | Wedding Planner | Track vendor bookings for each wedding            | I can ensure all necessary services are confirmed                                        |
-| `*`      | Wedding Planner | Rate or review vendors after each event           | I can assess their performance for future recommendations                                |
-| `*`      | Wedding Planner | Separate my contacts into categories              | I can locate their contact easily and boost my efficiency                                |
-| `*`      | Wedding Planner | Export guest lists and vendor details             | I can share them with clients or print them for use during events                        |
+| `*`      | Wedding Planner | Rate or review vendors after each event           | I can assess their performance for future recommendations                                | |
 | `*`      | Wedding Planner | Set reminders to contact specific vendors/clients | I can correspond with them on time without missing any important deadlines.              |
 
 ### Use cases
