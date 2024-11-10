@@ -153,7 +153,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
-### SupplyCentral: Goods Classes ###
+### SupplyCentral: Goods Classes
 
 <img src="images/GoodsClassDiagram.png" width="550">
 
