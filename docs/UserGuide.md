@@ -127,7 +127,7 @@ Need a quick reference?
 
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## Command Summary
 
 | Action                                                   | Format, Examples                                                                                                                                                                                                               |
 |----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -469,7 +469,7 @@ Examples:
 
 <box type="important" seamless>
 
-Worried about losing your data? You can just `undo` this command!
+Worried about losing your data? You can `undo` most commands!
 </box>
 
 Undoes the previous command.
