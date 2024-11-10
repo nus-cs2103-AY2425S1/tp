@@ -26,8 +26,8 @@ public class EmergencyContactCommand extends Command {
     public static final String COMMAND_WORD = "emergency";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the emergency contact details of the person identified "
-            + "by the index number used in the last person listing.\n"
+            + ": Edits the emergency contact details of the patient identified "
+            + "by the index number used in the last patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NAME + "[EMERGENCY CONTACT NAME]"
             + PREFIX_PHONE + "[EMERGENCY CONTACT NUMBER\n"

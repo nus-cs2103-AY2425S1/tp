@@ -20,7 +20,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the NovaCare. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the NovaCare. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -32,16 +32,10 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "Diabetic\n"
-            + "If phone, email, or address is unknown, you may use the following recommended temporary fields:\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "000 "
-            + PREFIX_EMAIL + "unknown@x.com "
-            + PREFIX_ADDRESS + "unknown address ";
+            + PREFIX_TAG + "Diabetic";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the NovaCare";
+    public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the NovaCare";
 
     private final Person toAdd;
 

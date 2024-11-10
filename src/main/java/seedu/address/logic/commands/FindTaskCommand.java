@@ -17,9 +17,9 @@ public class FindTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "findtask";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks related to the person identified by "
-            + "the index number used in the displayed person list and displays them as a list with index numbers.\n"
-            + "Parameters: PERSON_INDEX (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks related to the patient identified by "
+            + "the index number used in the displayed patient list and displays them as a list with index numbers.\n"
+            + "Parameters: PATIENT_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     private final Index targetIndex;

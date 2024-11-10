@@ -12,11 +12,10 @@ public class PriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "priority";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the priority level for a patient identified by "
-            + "the index number used in the displayed person list.\n"
+            + "the index number used in the displayed patient list.\n"
             + "Parameters: INDEX l/LEVEL (LEVEL must be 1, 2, or 3 or 'reset' for default level)\n"
             + "Example: priority 1 l/2\n"
-            + "Example: priority 2 l/reset\n"
-            + "Note: The `l/` prefix uses a lowercase 'l', not an uppercase 'I'.";
+            + "Example: priority 2 l/reset\n";
 
     public static final String MESSAGE_SUCCESS_RESET = "Priority level reset to default for %s";
     public static final String MESSAGE_SUCCESS_SET = "Priority level %d successfully set for %s";
