@@ -341,9 +341,15 @@ Format: `archive-list`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 <br>
-The archive list is a purely read-only list. You can only manipulate it using the command `unarchive`.
+The archive list is a purely read-only list. You can only use 5 commands while viewing it:
+
+1. `unarchive` (to unarchive a client)
+2. `list` (to navigate back to the main client list)
+3. `exit` (to exit the application)
+4. `help` (to view the help window)
+5. `archive-list` (redundant)
 <br>
-Other commands will require you to navigate back to the main client list first using the `list` command.
+All other commands will require you to navigate back to the main client list first using the `list` command.
 </div>
 
 ### Deadline Reminder
