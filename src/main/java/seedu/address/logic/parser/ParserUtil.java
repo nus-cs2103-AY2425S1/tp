@@ -18,7 +18,6 @@ import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
-import seedu.address.model.wedding.Wedding;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -180,10 +179,6 @@ public class ParserUtil {
 
         final Set<Index> weddingSet = new HashSet<>();
         for (String weddingIndex : weddings) {
-            String trimmedWeddingIndex = weddingIndex.trim();
-            if (!Wedding.isValidWeddingIndex(trimmedWeddingIndex)) {
-                throw new ParseException(Wedding.WEDDING_INDEX_MESSAGE_CONSTRAINT);
-            }
             Index indexToAdd = parseIndex(weddingIndex);
             if (!weddingSet.contains(indexToAdd)) {
                 weddingSet.add(indexToAdd);

@@ -17,11 +17,6 @@ public class Wedding {
     private Date date;
     private Venue venue;
     private boolean isOwnWedding;
-    public static final String WEDDING_INDEX_VALIDATION_REGEX = "^(0*[1-9]\\d*)$";
-
-    public static final String WEDDING_INDEX_MESSAGE_CONSTRAINT = "Wedding index should be a positive integer and cannot be blank";
-
-
 
     /**
      * Constructs a temporary {@code Wedding}.
@@ -90,14 +85,6 @@ public class Wedding {
      */
     public boolean isSameWedding(Wedding otherWedding) {
         return this.equals(otherWedding);
-    }
-
-    /**
-     * Returns true if a given string is a valid phone number.
-     */
-    public static boolean isValidWeddingIndex(String test) {
-        System.out.println(test);
-        return test.matches(WEDDING_INDEX_VALIDATION_REGEX);
     }
 
     @Override
