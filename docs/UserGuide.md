@@ -13,6 +13,10 @@ Welcome to VolunSync! We've created this friendly Human Resource Management Syst
 <b>DO NOT</b> modify the data files in the `data` folder. Doing so may result in unexpected behaviour when using VolunSync and you may lose your data permanently.
 </div>
 
+Please read the following sections before using VolunSync:
+- [Command Format Guidelines](#command-format-guidelines)
+- [Input Constraints](#input-constraints)
+
 <div style="page-break-after: always;"></div>
 
 ## Learn About Commands Supported By VolunSync
@@ -20,6 +24,7 @@ Welcome to VolunSync! We've created this friendly Human Resource Management Syst
 The command words are shown beside their corresponding commands below. The command words should be used before the parameters when entering commands in VolunSync.
 
 1. [Command Format Guidelines](#command-format-guidelines)
+1. [Input Constraints](#input-constraints)
 1. [General Commands](#general-commands)
    1. [Viewing help](#viewing-help--help) `help`
    1. [Listing all volunteers and events](#listing-all-volunteers-and-events--list) `list`
@@ -33,6 +38,7 @@ The command words are shown beside their corresponding commands below. The comma
    1. [Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree) `/v unfree`
    1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign) `assign`
    1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign) `unassign`
+   1. [Listing all events a volunteer is participating in](#listing-all-events-a-volunteer-is-participating-in-v-view) `/v view`
 1. [Managing Events](#event-related-commands)
    1. [Adding an event](#adding-an-event-e-new) `/e new`
    1. [Finding events by name](#finding-events-by-name--e-find) `/e find`
@@ -97,7 +103,7 @@ Let's get you started with VolunSync! Just follow these simple steps:
 
     * `exit` : Exits the app.
 
-1. Refer to the [Command Format](#command-format-guidelines) below for details of each command.
+1. Refer to the [Command Format](#command-format-guidelines) below for details of each command, and the [Input Constraints](#input-constraints) for the details of what inputs are accepted by VolunSync.
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -135,6 +141,33 @@ Let's go over some simple guidelines that will help you use VolunSync easily:
 </div>
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+## Input Constraints
+
+Volunsync has certain constraints on the inputs that can be entered. 
+
+VolunSync generally only accepts **English alphabets** and **numbers** within the input field.
+
+Specifically, only the following characters are allowed:
+- Alphabets: `A-Z`, `a-z`
+- Numbers: `0-9`
+- At sign: `@` (for email addresses only)
+- Dot: `.` (for email addresses only)
+- Hyphen: `-` (for dates only)
+- Comma: `,` (for separating multiple dates only)
+- Colon: `:` (for separating hours and minutes in time only)
+- slash: `/` (for separating command words and parameters only)
+
+All other characters are not allowed and will result in an error message.
+
+Some examples include:
+- Special characters: `é`, `ñ`, `ç`
+- Punctuation marks: `!`, `?`, `:`
+- Mathematical symbols: `+`, `-`, `=`
+- Other languages' characters: `你`, `ـز`, `あ`
+
 
 <div style="page-break-after: always;"></div>
 
@@ -205,12 +238,17 @@ What you'll need:
 - Email: Must follow username@domain format.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01)
 
+<div class="alert alert-block alert-warning">
+:exclamation: <b>NOTE:</b><br>
+You cannot add a volunteer with the same name as an existing volunteer.
+</div>
+
 Examples:
 * `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` <br/>creates a volunteer record for `John Doe` with the specified details
 
 Running the command successfully, you should see:
 
-![New Volunteer Demo](images/NewVolunteer.png)
+<img src="images/NewVolunteer.png" alt="New Volunteer Demo" width="500"/>
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -313,8 +351,9 @@ Examples:
 * `assign v/3 e/2` assigns the third volunteer on the volunteer list to the list of participants of the second event on the event list.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-The system checks if the volunteer is free on that date, and if they are already signed up for another event at the same time.<br>
-If that is the case, they cannot be assigned to this event.
+The system checks if the volunteer is free on that date, and if they are already signed up for another event on the same day.<br>
+If that is the case, they cannot be assigned to this event.<br>
+**Volunteers cannot sign up for multiple events on the same day.**
 </div>
 
 ![Assign Volunteer Demo](images/commandDemo/AssignVolunteerDemo.png)
@@ -382,6 +421,11 @@ What you'll need:
 - Start Time: 24-hour Format HH:mm (e.g., 12:00).
 - End Time: 24-hour Format HH:mm (e.g., 15:00). Start time must be before end time.
 - Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
+
+<div class="alert alert-block alert-warning">
+:exclamation: <b>NOTE:</b><br>
+You cannot add an event with the same name as an existing volunteer.
+</div>
 
 Examples:
 * `/e new n/Blood Donation Drive l/Red Cross Center d/2024-02-14 s/08:30 e/16:00 des/Organizing a blood donation drive` <br/>creates an event record for Blood Donation Drive with the specified details
@@ -509,6 +553,14 @@ Don't worry about saving - VolunSync automatically saves everything you do! Ever
    - Doing so may result in unexpected behaviour when using VolunSync, such as the app crashing
    - You may lose your data permanently
 
+1. **Assigning Volunteers To Multiple Events on the Same Day**
+   - Volunteers cannot sign up for multiple events on the same day
+   - If you try to assign a volunteer to an event on a day they're already signed up for another event, you'll see an error message
+
+1. **Creating Events that Span Multiple Days**
+   - Events that span multiple days are not supported
+   - You can only create events that start and end on the same day
+
 These known issues are actively being worked on, and we are continuously improving VolunSync to provide a better experience. Please stay tuned for future updates!
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
@@ -527,6 +579,8 @@ These known issues are actively being worked on, and we are continuously improvi
 | **[Export database to a CSV file](#export-database-to-a-csv-file--export)**    | `export` |
 | **[View help](#viewing-help--help)**                                           | `help`   |
 | **[Exit the program](#exiting-the-program--exit)**                             | `exit`   |
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 <div style="page-break-after: always;"></div>
 
