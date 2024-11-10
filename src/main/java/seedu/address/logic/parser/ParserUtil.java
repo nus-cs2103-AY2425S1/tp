@@ -182,8 +182,8 @@ public class ParserUtil {
      * Throws a {@code ParseException} if the amount is out of range.
      */
     public static void verifyAmountIsWithinRange(double amount) throws ParseException {
-        double minAmount = -Math.pow(10, 9);
-        double maxAmount = Math.pow(10, 9);
+        double minAmount = -1000000000;
+        double maxAmount = 1000000000;
 
         if (amount < minAmount || amount > maxAmount) {
             throw new ParseException(MESSAGE_AMOUNT_OUT_OF_RANGE);
