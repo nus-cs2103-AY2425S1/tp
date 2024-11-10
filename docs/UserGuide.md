@@ -108,6 +108,8 @@ Examples:
 * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 * `/add r/Data Scientist Intern n/Facebook e/fb@example.com d/21/10/24`
 
+> **_NOTE:_**  HireMe considers an entry to be a duplicate of all of its fields match **(case-insensitive)** an existing internship application entry. An attempt to add duplicates will result in an error.
+
 <br>
 
 ### Listing all internship applications : `/list`
@@ -265,6 +267,9 @@ Ans: New entries will not be inserted in the right order. They are inserted to t
 
 #### Q5: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
 Ans: Yes! You are not required to close the window. Any changes made will be reflected immediately in the pie chart.
+
+#### Q6: What is considered a valid email address format?
+Ans: If you have an existing email address account, it will be allowed by HireMe. You can check [here](https://verifalia.com/validate-email).
 
 --------------------------------------------------------------------------------------------------------------------
 
