@@ -6,7 +6,7 @@ title: User Guide
 <div markdown="block" class="alert alert-warning">
 **:warning: Disclaimer**:
 <br>
-MedConnect is only designed to support the **English language** and for use in a **single timezone**. 
+MedConnect is only designed to support the **English language** and for use in a **single timezone**.
 <br>
 Using MedConnect with other languages or across timezones may cause unexpected behaviour.
 </div>
@@ -20,6 +20,7 @@ With MedConnect, connecting with on-call doctors, family members, or other essen
 
 
 ## Table of Contents
+{:.no_toc}
 
 * Table of Contents
 {:toc}
@@ -49,26 +50,26 @@ By following these sections, you can quickly find the information you need and m
 
 3. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
 
-4. *Windows:* Open the home folder and right click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br>
-<img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows">
-*MacOS:* Right click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br>
+4. *Windows:* Open the home folder and right click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
+<img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows"><br><br>
+*MacOS:* Right click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
    <img src="images/Quickstart-new-terminal-MacOS.png" alt="New terminal on MacOS">
 
 5. Type the command in the [command box](#command-box) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : [List](#listing-all-persons--list) all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim
-   ecphone/81243564 ecrs/Sibling dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com`<br> Adds a contact named `John Doe` to the Address Book with emergency contact `Charlotte Lim` and doctor `Ronald Lee`.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim ecphone/81243564 ecrs/Sibling dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com`<br>
+   [Add](#adding-a-person-add) a contact named `John Doe` to the Address Book with emergency contact `Charlotte Lim` and doctor `Ronald Lee`.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : [Delete](#deleting-a-person--delete) the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : [Clear](#clearing-all-entries--clear) the contacts list of all contacts.
 
-   * `undo` : Undo previous command.
+   * `undo` : [Undo](#undoing-previous-command--undo) previous command.
 
-   * `exit` : Exits the app.
+   * `exit` : [Exit](#exiting-the-program--exit) the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -80,6 +81,8 @@ By following these sections, you can quickly find the information you need and m
 
 ![uitutorial](images/uitutorial.png)
 
+* The headers are colour-coded to match the GUI screenshot's boxes above!
+
 <span style="font-size: 20px; font-weight: bold; color: #7a7d82">Menu Bar</span>
 * Clicking `File` will show the option to exit the application.
 * Clicking `Help` will show `Help F1` which when clicked will link you to this User Guide!
@@ -87,7 +90,7 @@ By following these sections, you can quickly find the information you need and m
 <span style="font-size: 20px; font-weight: bold; color: #00bf63">Command Box</span><a name="command-box"></a>
 * This is where you will be typing the commands for MedConnect! The full list of commands can be found at [Features](#features)!
 
-<span style="font-size: 20px; font-weight: bold; color: #ffde59">Result Box</span>
+<span style="font-size: 20px; font-weight: bold; color: #0d00ff">Result Box</span>
 * This is where MedConnect will give you feedback after you type in a command! It will provide information on whether a command was successful or an invalid input was provided! For more information on the valid command inputs, head to [Features](#features).
 
 <span style="font-size: 20px; font-weight: bold; color: #ff3131">Patients List</span>
@@ -147,7 +150,7 @@ These features aim to enhance the user's command entry experience, reduce the ne
 ### Suggestion Feature
 ![suggestion](images/Suggestion.png)
 
-> **Description**: As you begin typing a command, suggestions are displayed to provide context about the expected syntax. For example, if you start typing `add`, the suggestion will provide all required and optional parameters related to the `add` command. This is enforced by dynamically checking substring of input to the expected output, except areas where personal details are to be filled.
+> **Description**: As you begin typing a command, suggestions are displayed to provide context about the expected syntax. For example, if you start typing `add`, the suggestion will provide all required and optional parameters related to the `add` command.
 
 **Usage**:
 - As soon as you begin typing a valid command (e.g., `add`, `edit`, `find`), a suggestion will be displayed showing the entire command syntax.
@@ -172,7 +175,7 @@ This suggestion will be displayed as soon as you start typing `add`.
 - When a command is partially typed (e.g., `ad`), pressing `Control` will automatically complete it to the full command (`add`).
 - When the command word 'add' is typed, we move on to the slash commands where the autocompletes stops at the slash to allow users to type their personal details. E.g. `add` ->`add n/`
 - Autocomplete works for command words as well as parameters, helping you quickly complete complex entries without fully typing each part.
-- Autocomplete will only work if the input before pressing `Control` is a valid substring of a command.
+- Autocomplete will only work if the input before pressing `Control` is a part of a valid command.
 
 Do take note, for commands like `delete index`, since index can be any number, there will be no autocomplete as there is no meaning to autocomplete the name "INDEX" itself.
 Other examples include `add n/` -> `add n/ p/` as there is no value in autocomplete the name "NAME" itself.
@@ -209,6 +212,7 @@ ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail
 A person can have any number of tags (including 0)
 </div>
 
+* MedConnect will automatically add the `Dr` prefix to the Doctor Name.
 * Valid inputs for `EMERGENCY_CONTACT_RELATIONSHIP` can be found in the [glossary](#glossary).
 
 Examples:
