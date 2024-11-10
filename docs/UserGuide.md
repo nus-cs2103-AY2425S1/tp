@@ -194,6 +194,8 @@ Format: `list`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a client : `edit`
 
 Need to update a client's details? This command edits an existing client in the F.A.R.T book.
