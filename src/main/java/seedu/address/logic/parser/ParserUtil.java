@@ -182,10 +182,10 @@ public class ParserUtil {
      */
     public static ReminderDescription parseReminderDescription(String description) throws ParseException {
         requireNonNull(description);
-        String trimmedDescription = description.trim();
-        if (!Description.isValidDescription(trimmedDescription)) {
+        try {
+            return new ReminderDescription(description);
+        } catch (IllegalArgumentException e) {
             throw new ParseException(ReminderDescription.MESSAGE_CONSTRAINTS);
         }
-        return new ReminderDescription(trimmedDescription);
     }
 }
