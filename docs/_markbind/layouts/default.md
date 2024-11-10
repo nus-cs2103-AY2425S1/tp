@@ -9,11 +9,9 @@
   <script src="{{baseUrl}}/scripts/script.js"></script>
 </head-bottom>
 
-
-
 <header sticky>
   <navbar type="dark">
-    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand"><span class="wedLinkerStyle">WedLinker</span></a>
+    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">WedLinker</a>
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>
@@ -21,6 +19,7 @@
       <form class="navbar-form">
         <searchbar :data="searchData" placeholder="Search" :on-hit="searchCallback" menu-align-right></searchbar>
       </form>
+    </li>
   </navbar>
 </header>
 

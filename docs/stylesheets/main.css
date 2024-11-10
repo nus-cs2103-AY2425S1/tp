@@ -233,22 +233,22 @@ h5 {color: #a37e00;}
 }
 
 #toggleButton {
-    background-color: #5a9200; /* Green background */
-    color: white; /* White text */
-    font-size: 16px; /* Adjust text size */
-    padding: 10px 20px; /* Add some padding */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effect */
+    background-color: #5a9200;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #toggleButton:hover {
-    background-color: #85003d; /* Darker green on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #85003d;
+    transform: scale(1.05);
 }
 
 #toggleButton:focus {
-    outline: none; /* Remove focus outline */
+    outline: none;
     box-shadow: 0 0 5px #e83e8c;
 }
