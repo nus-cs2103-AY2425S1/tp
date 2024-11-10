@@ -67,7 +67,6 @@ public class DeleteCommand extends Command {
         StringBuilder commandResultString = new StringBuilder(MESSAGE_DELETE_PERSON_SUCCESS);
         validateIndices(targetIndices, lastShownList.size());
         for (Index targetIndex : targetIndices) {
-
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
             personToDeleteList.add(personToDelete);
             commandResultString.append(Messages.format(personToDelete)).append("\n");

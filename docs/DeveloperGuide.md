@@ -139,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T16-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -444,7 +444,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Role                  | A Volunteer, Donor or Partner                                                                                                 |
 | Group                 | A named collection of contacts, allowing users to view specific subsets of people easily.                                     |
 | Partner               | A contact who represents their company or organization as the main point of communication and collaboration.                  |
-| Remote Server         | A computer or system located on a network (e.g., the internet) that provides services or resources to other devices remotely. |
+| Remote Server         | A computer or system located on a network (e.g., the internet) that provides services or resources to other devices remotely. | 
+| CLI                   | A Command Line Interface                                                                                                      |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -499,3 +500,7 @@ testers are expected to do more *exploratory* testing.
    can appear in official, legal names, so we plan to add support for them.
 3. **Allow creation of empty groups**: Currently, groups must be created with at least one member. It may improve the user experience to be able to first create
     an empty group and subsequently add users to it.
+4. **Allow case-insensitive commands**: Currently, commands are case-sensitive. For example, typing creategroup will
+   not work, because the app expects "createGroup" with the capitalized G. Making commands case-insensitive has no
+   negative repercussions and can help users type slightly faster.
+

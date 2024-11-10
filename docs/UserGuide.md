@@ -6,7 +6,8 @@
 
 # CFG User Guide
 
-ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CFG can get your contact management tasks done faster than traditional GUI apps.
+ContactsForGood (CFG) is a **desktop app for Non Government Organisations (NGOs) to manage contacts.**
+It is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CFG can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -66,7 +67,10 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
       will result in an error)
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.  
+  Note: If a field is optional and you choose to not input anything into the field, **DO NOT**
+  leave an empty prefix, as this will not be a valid command.  
+  e.g `edit 1 n/NAME t/` is not a valid command
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -111,14 +115,14 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 <div style="page-break-after: always;"></div>
 
 ### Group-Related Commands
-| **Action**                                                                                          | **Format**                                        | **Example**                                    |
-|-----------------------------------------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------|
-| [**Create Group**](#creating-a-group--creategroup)                                                  | `createGroup g/GROUP_NAME m/[INDICES]`            | `createGroup g/blood drive m/1 2 4-7`          |
-| [**Add New Members to Group**](#adding-new-members-to-an-existing-group--addtogroup)                | `addToGroup g/GROUP_NAME m/[INDICES]`             | `addToGroup g/beach cleanup m/1 2 3-6`         |
-| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group--removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`        | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
+| **Action**                                                                                          | **Format**                                  | **Example**                                    |
+|-----------------------------------------------------------------------------------------------------|---------------------------------------------|------------------------------------------------|
+| [**Create Group**](#creating-a-group--creategroup)                                                  | `createGroup g/GROUP_NAME m/INDICES`        | `createGroup g/blood drive m/1 2 4-7`          |
+| [**Add New Members to Group**](#adding-new-members-to-an-existing-group--addtogroup)                | `addToGroup g/GROUP_NAME m/INDICES`         | `addToGroup g/beach cleanup m/1 2 3-6`         |
+| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group--removefromgroup) | `removeFromGroup g/GROUP_NAME m/INDICES`    | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
 | [**Edit Group Name**](#editing-a-groups-name--editgroupname)                                        | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME` | `editGroupName g/blood drive g/blood donation` |
-| [**List Groups**](#listing-groups-listgroups)                                                       | `listGroups`                                      | `listGroups`                                   |
-| [**Delete Group**](#deleting-a-group-deletegroup)                                                   | `deleteGroup g/GROUP_NAME`                        | `deleteGroup g/blood donation`                 |
+| [**List Groups**](#listing-groups-listgroups)                                                       | `listGroups`                                | `listGroups`                                   |
+| [**Delete Group**](#deleting-a-group-deletegroup)                                                   | `deleteGroup g/GROUP_NAME`                  | `deleteGroup g/blood donation`                 |
 
 ### General Commands
 | **Action**                                         | **Format** | **Example** |
@@ -169,8 +173,17 @@ Note:
     * For `Donor`, `d/DONATED_AMOUNT` is required.
     * For `Partner`, `ped/PARTNERSHIP_END_DATE` is required.
     * If the specified role does not match the provided role-specific fields, the `add` command will be deemed invalid.
-2. **Contact Uniqueness**: Contacts are distinguished **by their names only**. This means duplicate names are not allowed in the address book. However, multiple contacts can share the same phone number or email address if their names are unique.
+2. **Contact Uniqueness**: Contacts are distinguished **by their names only**. 
+This means duplicate names are not allowed in the address book. 
+However, multiple contacts can share the same phone number or email address if their names are unique.
 
+
+#### Notes on valid and invalid fields
+- The address book differentiates names by checking both the characters and the number of spaces. John Doe
+with a single space is NOT the same person as John&nbsp;&nbsp;&nbsp;Doe. If there exists a John Doe currently in 
+ContactsForGood, you may add another John &nbsp;Doe with 2 spaces between.
+- Note: Email addresses without periods (Single Label Domains) **are supported**. 
+e.g. johndoe@intranet is a valid email.
 
 <box type="info" seamless>
 
@@ -306,7 +319,7 @@ Examples:
 
 Creates a new group with people as members.
 
-Format: `createGroup g/GROUP_NAME m/[INDICES]`
+Format: `createGroup g/GROUP_NAME m/INDICES`
 
 * Creates a new group with name `GROUP_NAME`.
 * Adds the persons at the specified `INDICES` to the group. 
@@ -323,13 +336,15 @@ Example:
 
 Adds new members to a group that currently exists.
 
-Format: `addToGroup g/GROUP_NAME m/[INDICES]`
+Format: `addToGroup g/GROUP_NAME m/INDICES`
 
 * Adds new members to the group with the name `GROUP_NAME`.
 * The indices are based on the indices displayed in the last list command.
 * There must already exist a group with the name `GROUP_NAME`. The indices
 must be valid indices.
 * If either of the above conditions are not met, the command will fail.
+* The address book differentiates group names by checking both the characters and the number of spaces. Blood Drive
+    with a single space is NOT the same group as Blood&nbsp;&nbsp;&nbsp;Drive.
 
 Example:
 * `addToGroup g/blood drive 2024 m/1 2 5 6` adds the persons at index 1, 2, 5 and 6 of
@@ -339,7 +354,7 @@ Example:
 
 Remove members from a group that currently exists.
 
-Format: `removeFromGroup g/GROUP_NAME m/[INDICES]`
+Format: `removeFromGroup g/GROUP_NAME m/INDICES`
 
 * Removes specified members from the group with the name `GROUP_NAME`.
 * The indices are based on the indices displayed in the last list command.
@@ -488,4 +503,3 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
