@@ -126,8 +126,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(parentToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(parentToEdit.getTags());
         Set<Name> updatedChildrensNames = parentToEdit.getChildrensNames(); // command does not allow editing child name
+        boolean updatedIsPinned = parentToEdit.isPinned(); // edit command does not allow editing is pinned
+        boolean updatedIsArchived = parentToEdit.isArchived(); // edit command does not allow editing is archived
 
-        return new Parent(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedChildrensNames, updatedTags);
+        return new Parent(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedChildrensNames, updatedTags,
+                updatedIsPinned, updatedIsArchived);
     }
 
     private static Student createEditedPerson(Student personToEdit, EditPersonDescriptor editPersonDescriptor) {
