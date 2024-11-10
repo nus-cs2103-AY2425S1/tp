@@ -2,9 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 ---
 
@@ -401,15 +400,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-- **Client**: A pet owner who seeks services from the veterinary clinic for their pet(s)
-- **Mainstream OS**: Windows, Linux, Unix, MacOS
-- **Pet Owners**: An individual who has registered their pet with the veterinary clinic for treatment or checkups
-- **Private contact detail**: A contact detail that is not meant to be shared with others
-- **Profile**: A detailed record containing information about a pet or pet owner, including the owner's name and contact details, as well as the pet's name, species, breed, age, and sex
-- **Veterinarian**: A licensed medical professional who provides care and treatment to animals
-- **Vaccination**: The administration of a vaccine to a pet to stimulate an immune response against specific diseases
-- **Workflow**: The sequence of processes involved in providing veterinary care, including appointment scheduling, examination, treatment, and follow-up
-
+- **API**: An API (Application Programming Interface) defines a set of rules and protocols that allow different software applications to communicate and interact with each other.
+- **Architecture Diagram**: An architecture diagram visually represents the structure, components, and relationships within a system, providing a clear overview of its design and interactions.
+- **CLI**: CLI (Command Line Interface) is a text-based interface that allows users to interact with a computer system by typing commands, rather than using a graphical interface.
+- **Client**: A pet owner who seeks services from the veterinary clinic for their pet(s).
+- **JAR**: JAR (Java Archive) is a file format used to package multiple Java class files, metadata, and resources into a single archive, often for distribution or deployment.
+- **JSON**: JSON (JavaScript Object Notation) is a lightweight, text-based format for representing structured data, commonly used for data exchange between a server and a client.
+- **Mainstream OS**: Windows, Linux, Unix, MacOS.
+- **Pet Owners**: An individual who has registered their pet with the veterinary clinic for treatment or checkups.
+- **Private contact detail**: A contact detail that is not meant to be shared with others.
+- **Profile**: A detailed record containing information about a pet or pet owner, including the owner's name and contact details, as well as the pet's name, species, breed, age, and sex.
+- **Sequence Diagram**: A sequence diagram shows the sequence of interactions between objects or components over time, highlighting the order of messages exchanged in a process or system.
+- **UI**: A UI diagram illustrates the layout, elements, and flow of a user interface, showcasing how users interact with the system.
+- **Vaccination**: The administration of a vaccine to a pet to stimulate an immune response against specific diseases.
+- **Veterinarian**: A licensed medical professional who provides care and treatment to animals.
+- **Workflow**: The sequence of processes involved in providing veterinary care, including appointment scheduling, examination, treatment, and follow-up.
 ---
 
 ## **Appendix: Instructions for manual testing**
