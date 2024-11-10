@@ -19,7 +19,7 @@ This app is designed for GP clinics in Singapore, where all patients should have
 
 1. Ensure you have Java `17` or above installed in your Computer. Instructions for Java `17` are available [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-2. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.4). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
+2. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.5). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
 
 3. Copy the file to the folder you want to use as the _home folder_ for MediContact. 
 
@@ -33,12 +33,12 @@ Your terminal should look something like this right before entering the last com
 
    <img src="images/quickStart1.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
- A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 
-   <img src="images/Ui.png" width="800"/>
+    <img src="images/ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
-6. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * `list` : Lists all contacts.
