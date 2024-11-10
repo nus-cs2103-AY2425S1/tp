@@ -84,10 +84,25 @@ public class AddSupplierCommand extends Command {
         // Update the supplier's ingredients list with the validated ingredients
         toAdd.setIngredientsSupplied(updatedIngredients);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SUPPLIER);
+        // Check for duplicate fields (phone, email, name) internally
+        List<Supplier> allSuppliers = model.getFilteredPersonList().stream()
+                .filter(person -> person instanceof Supplier)
+                .map(person -> (Supplier) person)
+                .toList();
+
+        for (Supplier existingSupplier : allSuppliers) {
+            if (existingSupplier.getPhone().equals(toAdd.getPhone())) {
+                throw new CommandException("A contact with this phone number already exists in the address book. Please use a different phone number.");
+            }
+            if (existingSupplier.getEmail().equals(toAdd.getEmail())) {
+                throw new CommandException("A contact with this email address already exists in the address book. Please use a different email address.");
+            }
+            if (existingSupplier.getName().equals(toAdd.getName())) {
+                throw new CommandException("A contact with this name already exists in the address book. Please use a different name.");
+            }
         }
 
+        // Add the new supplier if no duplicates are found
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
