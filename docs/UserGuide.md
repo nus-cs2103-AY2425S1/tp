@@ -6,7 +6,7 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents.
+NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents based in Singapore.
 Built for **fast, efficient use** through a Command Line Interface (CLI), NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
 
 With NUStates, agents can:
@@ -71,19 +71,20 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 1. Ensure you have Java `17` or a newer version installed in your computer.
    If you're not sure, you can download and install it from [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 
-2. Download the latest `NUStates.jar` file from [this link](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
+2. Download the latest `[CS2103T-F10-3][NUStates].jar` file from [this link](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
 
 3. Move the downloaded file to the folder where you want to keep NUStates.
 
 4. Open a command terminal:
     - **Windows**: Press `Win + R`, type `cmd`, and press `Enter`.
     - **macOS**: Press `Cmd + Space`, type `Terminal`, and press `Enter`.
+    - **Linux**: Press `Ctrl + Alt + T`.
 
-5. Navigate to the folder where you put the `NUStates.jar` file by using the `cd` command:
-    - **Windows**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd C:\Users\JohnDoe\Desktop\NUStates`
-    - **macOS**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
+5. Navigate to the folder where you put the `[CS2103T-F10-3][NUStates].jar` file by using the `cd` command:
+    - **Windows**: Type `cd` followed by the path to the folder where `[CS2103T-F10-3][NUStates].jar` is located. eg. `cd C:\Users\JohnDoe\Desktop\NUStates`
+    - **macOS/Linux**: Type `cd` followed by the path to the folder where `[CS2103T-F10-3][NUStates].jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
 
-6. Run the application by typing `java -jar nustates.jar` in the terminal and pressing `Enter`.
+6. Run the application by typing `java -jar "[CS2103T-F10-3][NUStates].jar"` in the terminal and pressing `Enter`.
 
     A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -150,7 +151,7 @@ Lists all the commands the address book supports.
 
 ![list of_commands](images/commandsMessage.png)
 
-Format: `help`
+Format: `commands`
 
 ### Viewing overall statistics : `stats`
 
@@ -180,10 +181,19 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
+- `NAME` must be at least one character long, and should only contain alphanumeric characters and spaces.
+- `PHONE_NUMBER` must be at least 3-digit long, and should only contain numbers.
+- `EMAIL` must be a valid email address.
+- `ADDRESS` must be at least one character long.
+- `TAG` must be at least one character long, and should only contain alphanumeric characters and spaces.
 
-**Tip:** A person can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
-</box>
+<box type="note" seamless>
+
+**Note:**
+
+- `NAME` is case-sensitive (e.g., `John Doe` is different from `john doe`).
+
+- Two contacts are considered duplicate if they have the same name (case-sensitive).
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -197,9 +207,14 @@ Adds a property which a client wants to buy to the address book. The property is
 
 Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
 
-<box type="tip" seamless>
+- `HOUSING TYPE` must only be one of the following: `h`(hdb), `c`(condo), `a`(apartment), `b`(bto), `o`(others).
+- `BUYING_PRICE` must be a valid integer value less than or equals to `2000000000`.
+- `POSTAL_CODE` must only be 6-digit long. First two digits of the postal code must correspond to a valid Singapore postal sector. Refer to [Singapore Postal Sectors](https://www.ura.gov.sg/Corporate/-/media/Corporate/Property/PMI-Online/List_Of_Postal_Districts.pdf) for valid postal sectors.
+- `UNIT_NUMBER` should be in the format of 'XXX-XXX' where X is a digit. The first and second part of the unit number should be at least 1 digit long and at most 3 digits long respectively.
 
-**Tip:** A property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
+<box type="note" seamless>
+
+**Note:** A property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
 </box>
 
 Examples:
@@ -216,9 +231,14 @@ Adds a property which a client wants to sell to the address book. The property i
 
 Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
 
-<box type="tip" seamless>
+- `HOUSING TYPE` must only be one of the following: `h`(hdb), `c`(condo), `a`(apartment), `b`(bto), `o`(others).
+- `SELLING_PRICE` must be a valid integer value less than or equals to `2000000000`.
+- `POSTAL_CODE` must only be 6-digit long. First two digits of the postal code must correspond to a valid Singapore postal sector. Refer to [Singapore Postal Sectors](https://www.ura.gov.sg/Corporate/-/media/Corporate/Property/PMI-Online/List_Of_Postal_Districts.pdf) for valid postal sectors.
+- `UNIT_NUMBER` should be in the format of 'XXX-XXX' where X is a digit. The first and second part of the unit number should be at least 1 digit long and at most 3 digits long respectively.
 
-**Tip:** A Property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
+<box type="note" seamless>
+
+**Note:** A Property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
 </box>
 
 Examples:
@@ -482,6 +502,13 @@ Format `unpin INDEX`
 ### Command history: Up and Down arrow keys
 NUStates keeps a history of the commands you have entered. You can navigate through this history using the up and down arrow keys.
 
+<box type="note" seamless>
+
+**Note:**
+
+Invalid commands will not be saved in the command history.
+</box>
+
 - **Up Arrow Key**: Pressing the up arrow key will cycle through the previous commands you have entered, starting from the most recent one.
 - **Down Arrow Key**: Pressing the down arrow key will cycle forward through the command history, allowing you to revisit commands you have skipped over.
 
@@ -499,7 +526,7 @@ NUStates will highlight any specific errors in the command entered by the user. 
 ![highlight_error_feature](images/highlightErrorFeature.png)
 
 - **Unknown Command**: If the command entered is not recognized by NUStates, it will highlight the invalid command keyword and provide a message indicating that the command is unknown.
-- **Missing Preamble Value**: If required preamble value is invalid (e.g., non-positive values where positive numbers are expected), NUStates will highlight the invalid preamble value and provide a message indicating the expected format.
+- **Missing Index Value**: If required index value is invalid (e.g., non-positive values where positive numbers are expected), NUStates will not highlight any specific part of the command but will provide a message indicating the correct format.
 - **Invalid Parameter Values**: If any parameter values are invalid (e.g., non-numeric values where numbers are expected), NUStates will highlight the invalid values and provide a message indicating the expected format.
 - **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format. This includes missing parameters, incorrect command structure, and other general errors.
 
@@ -509,7 +536,12 @@ Examples:
   - Cause: The command `ad` is not recognised.
   - Highlight: The `ad` part is highlighted.
 
-2. **Invalid Preamble Value**:
+2. **Missing Index Value**:
+  - Command entered: `addBuy ht/h bp/999999 pc/999111 un/10-01`
+  - Cause: The required person index is missing.
+  - Highlight: No specific part is highlighted.
+
+2. **Invalid Index Value**:
   - Command entered: `addBuy -22 ht/c pc/999111 un/10-01 bp/1000000`
   - Cause: The person index `-22` is invalid.
   - Highlight: The invalid `-22` part is highlighted.

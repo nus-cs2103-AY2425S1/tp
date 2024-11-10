@@ -121,7 +121,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="600" />
+<puml src="diagrams/ModelClassDiagram.puml" width="800" />
 
 
 The `Model` component,
@@ -336,30 +336,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add a new contact by providing the required details.
-2.  AddressBook validates the provided details.
-3.  AddressBook adds the new contact to the list.
-4.  AddressBook shows a success message with the contact details.
+2.  NUStates validates the provided details.
+3.  NUStates adds the new contact to the list.
+4.  NUStates shows a success message with the contact details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided details are invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. AddressBook re-validates the details.
+    * 2a3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
-* 2b. The contact already exists in the AddressBook.
-    * 2b1. AddressBook shows an error message indicating the duplicate contact.
+* 2b. The contact already exists in the NUStates.
+    * 2b1. NUStates shows an error message indicating the duplicate contact.
 
       Use case ends.
 
 * 2c. Required fields are missing.
-    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. AddressBook re-validates the details.
+    * 2c3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
@@ -372,21 +372,21 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to delete a contact by providing the index.
-2.  AddressBook validates the provided index.
-3.  AddressBook deletes the contact from the list.
-4.  AddressBook shows a success message with the deleted contact details.
+2.  NUStates validates the provided index.
+3.  NUStates deletes the contact from the list.
+4.  NUStates shows a success message with the deleted contact details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided index is missing or not a positive integer.
-    * 2a1. AddressBook shows an error message indicating the invalid index.
+    * 2a1. NUStates shows an error message indicating the invalid index.
 
       Use case ends.
 
 * 2b. The provided index is more than the number of contacts in the list.
-    * 2b1. AddressBook shows an error message indicating the invalid index.
+    * 2b1. NUStates shows an error message indicating the invalid index.
 
       Use case ends.
 
@@ -395,38 +395,31 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to list all contacts.
-2.  AddressBook lists all contacts.
-3.  AddressBook shows a success message indicating all contacts are listed.
+2.  NUStates lists all contacts.
+3.  NUStates shows a success message indicating all contacts are listed.
 
     Use case ends.
-
-**Extensions**
-
-* 1a. User provides additional arguments after the `list` command.
-    * 1a1. AddressBook shows an error message indicating that the `list` command takes no arguments.
-
-      Use case ends.
 
 **Use case: UC04 - Search for a contact using name**
 
 **MSS**
 
 1.  User requests to search for a contact by providing a keyword related to contact's name.
-2.  AddressBook validates the provided keyword.
-3.  AddressBook performs a case-insensitive search for contacts where the name begins with the keyword.
-4.  AddressBook shows a list of matching contacts with their details.
+2.  NUStates validates the provided keyword.
+3.  NUStates performs a case-insensitive search for contacts where the name begins with the keyword.
+4.  NUStates shows a list of matching contacts with their details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided keyword is missing or invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+    * 2a1. NUStates shows an error message indicating the invalid keyword.
 
       Use case ends.
 
 * 3a. No contacts have names that match the provided keyword.
-    * 3a1. AddressBook shows a message indicating no contacts were found.
+    * 3a1. NUStates shows a message indicating no contacts were found.
 
       Use case ends.
       
@@ -435,21 +428,21 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to search for a contact by providing a keyword related to contact's phone number.
-2.  AddressBook validates the provided keyword.
-3.  AddressBook performs the search for contacts where the phone number begins with the keyword.
-4.  AddressBook shows a list of matching contacts with their details.
+2.  NUStates validates the provided keyword.
+3.  NUStates performs the search for contacts where the phone number begins with the keyword.
+4.  NUStates shows a list of matching contacts with their details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided keyword is missing or invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+    * 2a1. NUStates shows an error message indicating the invalid keyword.
 
       Use case ends.
 
 * 3a. No contacts have phone number that match the provided keyword.
-    * 3a1. AddressBook shows a message indicating no contacts were found.
+    * 3a1. NUStates shows a message indicating no contacts were found.
 
       Use case ends.
 
@@ -458,21 +451,21 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to search for a contact by providing a keyword related to contact's tag.
-2.  AddressBook validates the provided keyword.
-3.  AddressBook performs a case-insensitive search for contacts where the tag begins with the keyword.
-4.  AddressBook shows a list of matching contacts with their details.
+2.  NUStates validates the provided keyword.
+3.  NUStates performs a case-insensitive search for contacts where the tag begins with the keyword.
+4.  NUStates shows a list of matching contacts with their details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided keyword is missing or invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+    * 2a1. NUStates shows an error message indicating the invalid keyword.
 
       Use case ends.
 
 * 3a. No contacts have tags that match the provided keyword.
-    * 3a1. AddressBook shows a message indicating no contacts were found.
+    * 3a1. NUStates shows a message indicating no contacts were found.
 
       Use case ends.
 
@@ -481,21 +474,21 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to search for a property by providing a keyword.
-2.  AddressBook validates the provided keyword.
-3.  AddressBook performs a case-insensitive search for properties.
-4.  AddressBook shows a list of matching contacts with their details.
+2.  NUStates validates the provided keyword.
+3.  NUStates performs a case-insensitive search for properties.
+4.  NUStates shows a list of matching contacts with their details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided keyword is missing or invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+    * 2a1. NUStates shows an error message indicating the invalid keyword.
 
       Use case ends.
 
 * 3a. No properties match the provided keyword.
-    * 3a1. AddressBook shows a message indicating no contacts were found.
+    * 3a1. NUStates shows a message indicating no contacts were found.
 
       Use case ends.
 
@@ -503,20 +496,20 @@ The following activity diagram summarizes the steps involved in adding a contact
 
 **MSS**
 
-1.  User requests to pin a specific contact by providing the index number
-2.  AddressBook validates the provided index number.
-3.  AddressBook pins the contact at the provided index, moving it to the top of the list view.
-4.  AddressBook shows a confirmation message that the item has been successfully pinned.
+1.  User requests to pin a specific contact by providing the index number.
+2.  NUStates validates the provided index number.
+3.  NUStates pins the contact at the provided index, moving it to the top of the list view.
+4.  NUStates shows a confirmation message that the item has been successfully pinned.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided index number is missing or invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid index number.
+    * 2a1. NUStates shows an error message indicating the invalid index number.
 
 * 3a. The item is already pinned.
-    * 3a1. AddressBook shows a message indicating that the item is already pinned.
+    * 3a1. NUStates shows a message indicating that the item is already pinned.
 
       Use case ends.
 
@@ -525,19 +518,19 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to unpin a specific contact by providing the index number
-2.  AddressBook validates the provided index number.
-3.  AddressBook unpins the contact at the provided index, moving it back to the bottom of the pinned list.
-4.  AddressBook shows a confirmation message that the item has been successfully unpinned.
+2.  NUStates validates the provided index number.
+3.  NUStates unpins the contact at the provided index, moving it back to the bottom of the pinned list.
+4.  NUStates shows a confirmation message that the item has been successfully unpinned.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided index number is missing or invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid index number.
+    * 2a1. NUStates shows an error message indicating the invalid index number.
 
 * 3a. The item is already unpinned.
-    * 3a1. AddressBook shows a message indicating that the item is already unpinned.
+    * 3a1. NUStates shows a message indicating that the item is already unpinned.
 
       Use case ends.
 
@@ -546,18 +539,18 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to edit an existing contact by providing the required details.
-2.  AddressBook validates the provided details.
-3.  AddressBook updates the existing contact in the list with the new details.
-4.  AddressBook shows a success message with the contact details.
+2.  NUStates validates the provided details.
+3.  NUStates updates the existing contact in the list with the new details.
+4.  NUStates shows a success message with the contact details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided details are invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. AddressBook re-validates the details.
+    * 2a3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
@@ -566,39 +559,39 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to add a new `Property-To-Sell` to the specified existing contact by providing the required details.
-2.  AddressBook validates the provided details.
-3.  AddressBook adds the new `Property-To-Sell` to the specified existing contact in the list.
-4.  AddressBook shows a success message with the contact details.
+2.  NUStates validates the provided details.
+3.  NUStates adds the new `Property-To-Sell` to the specified existing contact in the list.
+4.  NUStates shows a success message with the contact details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided details are invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. AddressBook re-validates the details.
+    * 2a3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
-* 2b. The existing contact in the AddressBook already has the same `Property-To-Sell` in the list.
-    * 2b1. AddressBook shows an error message indicating the duplicate `Property-To-Sell`.
+* 2b. The existing contact in the NUStates already has the same `Property-To-Sell` in the list.
+    * 2b1. NUStates shows an error message indicating the duplicate `Property-To-Sell`.
     * 2b2. User corrects the invalid details.
-    * 2b3. AddressBook re-validates the details.
+    * 2b3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
 * 2c. Required fields are missing.
-    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. AddressBook re-validates the details.
+    * 2c3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
-* 2d. Someone in the AddressBook is already wanting to sell the `Property-To-Sell` that the user specified.
-    * 2d1. AddressBook shows an error message indicating the existing `Property-To-Sell`
+* 2d. Someone in the NUStates is already wanting to sell the `Property-To-Sell` that the user specified.
+    * 2d1. NUStates shows an error message indicating the existing `Property-To-Sell`
     * 2d2. User corrects the invalid details.
-    * 2d3. AddressBook re-validates the details.
+    * 2d3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
@@ -607,32 +600,32 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to add a new `Property-To-Buy` to the specified existing contact by providing the required details.
-2.  AddressBook validates the provided details.
-3.  AddressBook adds the new `Property-To-Buy` to the specified existing contact in the list.
-4.  AddressBook shows a success message with the contact details.
+2.  NUStates validates the provided details.
+3.  NUStates adds the new `Property-To-Buy` to the specified existing contact in the list.
+4.  NUStates shows a success message with the contact details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided details are invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. AddressBook re-validates the details.
+    * 2a3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
-* 2b. The existing contact in the AddressBook already has the same `Property-To-Buy` in the list.
-    * 2b1. AddressBook shows an error message indicating the duplicate `Property-To-Buy`.
+* 2b. The existing contact in the NUStates already has the same `Property-To-Buy` in the list.
+    * 2b1. NUStates shows an error message indicating the duplicate `Property-To-Buy`.
     * 2b2. User corrects the invalid details.
-    * 2b3. AddressBook re-validates the details.
+    * 2b3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
 * 2c. Required fields are missing.
-    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. AddressBook re-validates the details.
+    * 2c3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
@@ -641,32 +634,32 @@ The following activity diagram summarizes the steps involved in adding a contact
 **MSS**
 
 1.  User requests to delete a new `Property-To-Sell` from the specified existing contact by providing the required details.
-2.  AddressBook validates the provided details.
-3.  AddressBook deletes the new `Property-To-Sell` from the specified existing contact in the list.
-4.  AddressBook shows a success message with the contact details.
+2.  NUStates validates the provided details.
+3.  NUStates deletes the new `Property-To-Sell` from the specified existing contact in the list.
+4.  NUStates shows a success message with the contact details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided details are invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. AddressBook re-validates the details.
+    * 2a3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
-* 2b. The existing contact in the AddressBook does not have the specified `Property-To-Sell` in the list.
-    * 2b1. AddressBook shows an error message indicating the missing `Property-To-Sell`.
+* 2b. The existing contact in the NUStates does not have the specified `Property-To-Sell` in the list.
+    * 2b1. NUStates shows an error message indicating the missing `Property-To-Sell`.
     * 2b2. User corrects the invalid details.
-    * 2b3. AddressBook re-validates the details.
+    * 2b3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
 * 2c. Required fields are missing.
-    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. AddressBook re-validates the details.
+    * 2c3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
@@ -674,40 +667,103 @@ The following activity diagram summarizes the steps involved in adding a contact
 
 **MSS**
 
-1.  User requests to delete a new `Property-To-Buy` from the specified existing contact by providing the required details.
-2.  AddressBook validates the provided details.
-3.  AddressBook deletes the new `Property-To-Buy` from the specified existing contact in the list.
-4.  AddressBook shows a success message with the contact details.
+1.  User requests to sort contact list by a specific field.
+2.  NUStates validates the provided details.
+3.  NUStates deletes the new `Property-To-Buy` from the specified existing contact in the list.
+4.  NUStates shows a success message with the contact details.
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The provided details are invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a1. NUStates shows an error message indicating the invalid fields.
     * 2a2. User corrects the invalid details.
-    * 2a3. AddressBook re-validates the details.
+    * 2a3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
-* 2b. The existing contact in the AddressBook does not have the specified `Property-To-Buy` in the list.
-    * 2b1. AddressBook shows an error message indicating the missing `Property-To-Buy`.
+* 2b. The existing contact in the NUStates does not have the specified `Property-To-Buy` in the list.
+    * 2b1. NUStates shows an error message indicating the missing `Property-To-Buy`.
     * 2b2. User corrects the invalid details.
-    * 2b3. AddressBook re-validates the details.
+    * 2b3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
 * 2c. Required fields are missing.
-    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c1. NUStates shows an error message indicating the missing fields.
     * 2c2. User provides the missing details.
-    * 2c3. AddressBook re-validates the details.
+    * 2c3. NUStates re-validates the details.
 
       Use case resumes at step 3.
 
 
+**Use case: UC15 - Sort contact list**
+
+**MSS**
+
+1.  User requests to sort contact list by a specific field and order.
+2. NUStates validates the provided details.
+3. NUStates sorts the contact list based on the specified field and order.
+4. NUStates shows a success message with the sorted contact list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. NUStates shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. NUStates re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2b. Required fields are missing.
+    * 2b1. NUStates shows an error message indicating the missing fields.
+    * 2b2. User provides the missing details.
+    * 2b3. NUStates re-validates the details.
+
+      Use case resumes at step 3.
+
+**Use case: UC16 - Sort property lists in a specific contact**
+
+**MSS**
+
+1.  User requests to sort property lists in a specific contact by a specific field and order.
+2. NUStates validates the provided details.
+3. NUStates sorts the property lists for that contact based on the specified field and order.
+4. NUStates shows a success message with the sorted property lists.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. NUStates shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. NUStates re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2b. Required fields are missing.
+    * 2b1. NUStates shows an error message indicating the missing fields.
+    * 2b2. User provides the missing details.
+    * 2b3. NUStates re-validates the details.
+
+      Use case resumes at step 3.
+
+**Use case: UC17 - View statistics**
+
+**MSS**
+
+1.  User requests to view statistics of the contacts.
+2.  NUStates shows the statistics of the contacts.
+
+    Use case ends.
+
 ### Non-Functional Requirements
 
-1.  Should work on any mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any mainstream OS as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Client searches should provide results even with partial or incomplete input and return results instantly (within 1 second).
@@ -745,18 +801,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Ensure you have Java `17` or a newer version installed in your computer.
+   If you're not sure, you can download and install it from [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Download the jar file from [this link](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases) and copy into an empty folder
 
-1. Saving window preferences
+   3. Run the application by typing `java -jar "[CS2103T-F10-3][NUStates].jar"` in a terminal from the folder with `[CS2103T-F10-3][NUStates].jar`. The window size may not be optimum.
+
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by following `Initial launch` step above.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -772,8 +829,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Sorting properties for a person
 
@@ -804,11 +859,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect add property commands to try: `addBuy`, `addSell x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
