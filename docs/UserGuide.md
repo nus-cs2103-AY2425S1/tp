@@ -305,7 +305,7 @@ This screenshot shows the result of executing `find_s q/!nogroup`.
 
 #### Sorting Students: `sort_s`, `ss`
 
-Sorts the list of students in alphabetical order.
+Sorts the list of students in ASCII order.
 
 **Format**: `sort_s`
 
@@ -443,7 +443,7 @@ This screenshot shows the result of executing `find_g q/F11`.
 
 #### Sorting Groups: `sort_g`, `sg`
 
-Sorts the list of groups in alphabetical order.
+Sorts the list of groups in ASCII order.
 
 **Format**: `sort_g`
 
