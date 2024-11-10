@@ -173,13 +173,19 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 * `INDEX`: Positive integer (1, 2, 3, ...)
 * `NAME`: Name of person/item
 * `PHONE_NUMBER`: Phone number
+
+
+ **Note:** Phone number validation is not restrictive in BakeBuddy. Hence invalid phone numbers may be allowed to be added. We will aim to improve this feature in subsequent iterations. 
+
 * `EMAIL`: Email address
 * `ADDRESS`: Physical address
 * `INFORMATION`: Additional customer details
 * `INGREDIENTS_SUPPLIED`: List of ingredients (for suppliers)
 * `COST`: Numeric value
 * `PRODUCTID`: Product identification numbers
-* `TAG`: Category or label (Only a single word can be used as a single tag name)
+* `TAG`: Category or label 
+
+**Note:** Only a single word can be used as a single tag name. If multiple words are required to be used as a tag, use dash-separated words.
 * `REMARK`: Additional comments
 
 **Format Notes:**
