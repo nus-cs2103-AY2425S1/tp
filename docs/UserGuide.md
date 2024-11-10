@@ -108,7 +108,7 @@ Parameters:
 - `u/UNIVERSITY`: University name.
 - `m/MAJOR`: Major or field of study.
 - `b/BIRTHDATE`: Date of birth in `dd-mm-yyyy` format.
-- `[w/WORK_EXPERIENCE]`: Work experience in the format `ROLE,COMPANY,YEAR`.
+- `[w/WORK_EXPERIENCE]`: Work experience in the format `ROLE,COMPANY,YEAR`, where role, company and year are capitalised.
 - `[i/INTEREST]...`: Interests of the contact.
 - `[t/TAG]...`: Tags for categorization.
 
@@ -196,7 +196,8 @@ Edits an existing person in the address book.
 Format:
 
 ```plaintext
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INTEREST] [w/WORK_EXPERIENCE] 
+[m/MAJOR] [u/UNIVERSITY]…​
 ```
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
