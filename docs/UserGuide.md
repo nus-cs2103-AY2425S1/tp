@@ -215,6 +215,8 @@ Field          | Optional/Compulsory | Prefix | Remarks
 > 4. The lesson added will be in sorted order of the start date time.
 > 5. The name of student for the lesson is linked to the student contact.
 > 6. The end date time of the lesson is automatically calculated based on the start date time and duration of the lesson.
+> 7. The `PRICEPERHOUR` should not exceed Java's `Integer.MAX_VALUE` (2147483647).
+> 8. For `STARTDATETIME`, the year has been limited to the range `[2000,2100]`. The maximum day will depend on the year and month that is given.
 
 Examples: `lesson add sid/1 f/10 d/23-10-2024 12:00 h/1`
 
@@ -370,5 +372,4 @@ Hard disk  | The primary storage device of a computer.
 JSON       | JavaScript Object Notation, a structure for reading and writing data from a file.
 JAR        | Java Archive, a file format used for TutorEase.
 GUI        | Graphical User Interface.
-
-
+Integer    | Follows Java convention of signed 32-bit integers. Stores values from -2^31 to 2^31-1 (-2147483648 to 2147483647)
