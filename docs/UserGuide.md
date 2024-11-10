@@ -44,8 +44,15 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
 4. Open a command terminal and navigate to the folder with the `.jar` file by typing:
     ```terminal
      cd path/to/your/folder
-   
+    
     ```
+    <br>
+    
+    <div class="note" markdown="span">
+    (Windows Users) Alternatively, you can open the folder where the `.jar` file  is located,
+    right click on any space inside the folder and click `Open in Terminal`.
+    </div>
+   
    <br>
 
    Then run the app with:
@@ -76,7 +83,6 @@ To use EZSTATE, type commands in the command box and press Enter. Here are a few
 <div class="note" markdown="span">
 Explore the Features section for a full list of commands and their uses.
 </div>
-
 
 ### Command Structure
 
