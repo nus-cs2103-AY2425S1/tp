@@ -440,8 +440,10 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Insurance Agent**: The user of the app.
-* **Client**: A potential customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
+* **Client**: A customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
 * **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system. 
+  * Supported insurance plans are: `Basic Insurance Plan` : `0` and `Travel Insurance Plan` : `1`.
+  * Allowing the user to add their own insurance plan types is a [planned enhancement](#planned-enhancements). 
 * **Valid Insurance Plan ID**: An insurance plan ID that exists in the system.
 * **Claim**: A formal request by a client for reimbursement for losses that are covered by specific insurance plans.
 <!-- (the above definition was obtained from: https://www.iciciprulife.com/insurance-claim.html) -->
