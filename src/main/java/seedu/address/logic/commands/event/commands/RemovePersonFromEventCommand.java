@@ -85,11 +85,8 @@ public class RemovePersonFromEventCommand extends Command {
                 model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(event));
             }
         }
+        model.setIsFindEvent(false);
         return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName(), event.getName()));
-
-
-
-
     }
 
     @Override
