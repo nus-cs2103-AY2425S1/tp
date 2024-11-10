@@ -289,6 +289,11 @@ Format: `exit`
 
 MediContacts data are saved in the hard disk automatically after any command modifies the data. There is no need for users to save manually.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The app can only save a maximum of 10,000 appointments. If the limit is reached, the app may react in unexpected ways.
+Therefore, ensure that the data file is regularly archived to prevent data loss.
+</div>
+
 ### Editing the data file
 
 MediContacts data are saved automatically as a JSON file `[WORKING DIRECTORY]/data/addressbook.json`, where [WORKING DIRECTORY] is the directory the user is running the jar file. Advanced users are welcomed to update the data directly by editing that data file.
