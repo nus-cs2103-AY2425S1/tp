@@ -52,8 +52,8 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
      java -version
      ```
    - Press **Enter**. If Java is installed, it will display the version. Ensure it is **Java 17 or above**.
-   
-    If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
+   <br>
+   If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
 
 3. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
@@ -91,7 +91,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
      java -version
      ```
    - Press **Enter**. The terminal will display the installed Java version. Ensure it is **Java 17 or above**.
-
+   <br>
    If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
 
 3. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
