@@ -196,6 +196,7 @@ number, email and addresses simultaneously.
 
 **Target user profile**: **Insurance Agents**
 
+* is based in Singapore
 * has a need to manage a significant number of insurance clients
 * prefer desktop apps over other types
 * can type fast
