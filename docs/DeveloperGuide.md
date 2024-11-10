@@ -561,6 +561,8 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned enhancements**
 
+Team size: 5
+
 Given below are some planned future enhancements for the app.
 
 1. Make Find Stackable: The current find does not stack on top of each other.
