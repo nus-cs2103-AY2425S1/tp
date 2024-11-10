@@ -131,8 +131,6 @@ Adds a supplier to VendorVault.
 
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
 
-
-
 Parameters:
 
 - `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
@@ -157,6 +155,7 @@ Parameters:
 
 **Warnings**:
 - At least one space is needed between `add` and `-s`.
+- At least one space is needed between parameters.
 - A warning will be given if the user tries to add a duplicate supplier.
 - A supplier is considered duplicate if they have the same `NAME` and `COMPANY`.
   - Comparison between different `NAME`is case-sensitive.
@@ -172,8 +171,8 @@ Examples:
 - `add -s n/Betsy Crowe p/98223232 e/betsycrowe@example.com com/Newgates t/urgent pro/soap`
 
 Expected output:
-- `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products: [bread][rice]; Status: active`
-- `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products: [soap]; Status: active`
+- `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companyA; Tags: [owesMoney][friends]; Products: [bread][rice]; Status: active`
+- `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: Newgates; Tags: [urgent]; Products: [soap]; Status: active`
 
 #### Here's how it would look like in the app:
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
@@ -227,13 +226,9 @@ Deletes a supplier from the list of suppliers in VendorVault.
 
 Format: `delete -s INDEX`
 
-<box type="details" seamless>
-
 Parameters:
 
-- `INDEX`: The index of the supplier to be deleted in the displayed list. Must be a positive numeric number.
-
-</box>
+- `INDEX`: The index of the supplier to be deleted in the displayed list. It must be a number between 1 and the total number of suppliers displayed (inclusive), and cannot be blank.
 
 <box type="warning" seamless>
 
@@ -247,7 +242,7 @@ Example:
 `delete -s 3`
 
 Expected output:
-Supplier at index 3 is deleted, assuming it existed initially. Otherwise, an error message will be shown.
+Supplier at index 3 is deleted, assuming there is at least three suppliers displayed. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
@@ -260,13 +255,9 @@ in VendorVault. This helps you keep track of which suppliers are currently activ
 
 Format: `mark -s INDEX STATUS`
 
-<box type="details" seamless>
-
 Parameters:
 - `INDEX`: The index of the supplier in the list. Must be a number greater than 0 and must not be blank.
 - `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank. Parameters used are case-sensitive.
-
-</box>
 
 <box type="warning" seamless>
 
@@ -381,8 +372,6 @@ Adds a delivery to VendorVault.
 
 Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY c/COST`
 
-<box type="details" seamless>
-
 Parameters:
 
 - `on/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the date and time of delivery. It must be in dd-MM-yyyy hh:mm format, and cannot be blank.
@@ -395,6 +384,8 @@ Parameters:
     - `QUANTITY` units are case sensitive.
     - Accepted units for `QUANTITY` are `kg`, `g`, `L`, `mL`, `units`. 
 - `c/COST`: `COST` is the total cost for the delivery. It must be a number greater than 0 with up to 2 decimal places allowed, and cannot be blank.
+
+<type="tip" seamless>
 
 **Tips:** 
 - Day, month, hour and minute of DELIVERY_DATE_TIME must be in double digits!
@@ -448,15 +439,10 @@ Marks the specified delivery in VendorVault with the specified `STATUS`.
 
 Format: `mark -d INDEX STATUS`
 
-<box type="details" seamless>
-
 Parameters:
 
 - `INDEX`: The index of the delivery to be marked in the displayed list. It must be a number between 1 and the total number of deliveries displayed (inclusive), and cannot be blank.
 - `STATUS`: The status of delivery. It must be one of the following values: `PENDING`, `DELIVERED`, `CANCELLED`, and cannot be blank.
-
-
-</box>
 
 <box type="warning" seamless>
 
@@ -570,12 +556,12 @@ before or after a given date.
 
 Format: `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`
 
-<box type="details" seamless>
-
 Parameters:
 
 - `aft/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the start date and time in which only deliveries with status`PENDING` after this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
 - `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` before this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
+
+<box type="tip" seamless>
 
 **Tip:**
 - You can provide both parameters or just one parameter!
