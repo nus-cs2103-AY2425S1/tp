@@ -77,18 +77,21 @@ Adds a person to Cher.
 
 Format: `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-Role can either be ```student``` or ```parent```, case-insensitive.
+* Name can only contain alphabets and spaces. 
 
-Sex can either be ```f``` or ```m```, case-insensitive.
+* Role can either be ```student``` or ```parent```, case-insensitive.
 
+* Sex can either be ```f``` or ```m```, case-insensitive.
+
+* Phone numbers can contain only numbers and should be exactly 8 digits long. 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe s/m r/student p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe s/f r/parent e/betsycrowe@example.com a/Newgate Prison p/1234567`
+* `add n/John Doe s/m r/student p/987654321 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe s/f r/parent e/betsycrowe@example.com a/Newgate Street p/12345678`
 
 ### Listing all persons : `list`
 
@@ -108,6 +111,7 @@ Format: `edit INDEX [n/NAME] [s/SEX] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* Note that role cannot be edited. 
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
