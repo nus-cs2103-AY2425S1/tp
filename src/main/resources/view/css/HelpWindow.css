@@ -87,11 +87,16 @@
 .more-info {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-border-color: derive(#1d1d1d, 25%);
-
 }
 
 .more-info .label {
     -fx-font-size: 14pt;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+
+.bracket-info .label {
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
     -fx-alignment: center;
 }
