@@ -987,6 +987,36 @@ Users may make small mistakes in capitalisation when typing quickly.
 It can save time to ensure minor mistakes such as these in the command keyword
 (not the arguments) will not prevent the command from working.
 
+**<u>Allow students with same name to be added</u>**
+
+**Description**
+
+Allow students with the same name to be added (still case-sensitive).<br>
+Instead, disallow students with the same **phone number** or **email address** to be added.<br>
+Commands that currently use student **names** as arguments should instead use their **index**
+in the student list.
+
+**Rationale**
+
+It is arguably rarer for students to share a phone number or email address (university email?) with
+another student than it is to share a name.
+
+**<u>Allow more commands to use student index instead of full name</u>**
+
+**Description**
+
+Currently, some commands such as `marka` and `markp` require the user to type
+out the full name of the student.<br>
+Instead, change it so that they use the student's index in the student list, similar to commands
+like `addtolesson`.
+
+**Rationale**
+
+Under normal conditions, it is impossible for a consultation or lesson to have a student
+that is not in the student list. Thus, it is safe to specify students by their index
+in the student list.<br>
+Additionally, doing so is faster to type.
+
 ### Glossary
 
 * **Attendance**: Student's Presence/Absence for a Lesson
