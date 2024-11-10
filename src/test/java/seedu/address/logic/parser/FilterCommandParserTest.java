@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.FilterCommandParser.INCORRECT_AGE;
+import static seedu.address.logic.parser.FilterCommandParser.INCORRECT_AGE_AND_RANGE;
 import static seedu.address.logic.parser.FilterCommandParser.INCORRECT_DATE_FORMAT;
 import static seedu.address.logic.parser.FilterCommandParser.INCORRECT_RANGE;
 
@@ -94,13 +94,13 @@ public class FilterCommandParserTest {
     public void parse_invalidRange_throwsParseException() {
         // invalid age range
         String age = " b/ 10-";
-        assertParseFailure(parser, age, String.format(INCORRECT_RANGE));
+        assertParseFailure(parser, age, String.format(INCORRECT_AGE_AND_RANGE));
         age = " b/ 10-fifty";
-        assertParseFailure(parser, age, String.format(INCORRECT_AGE));
+        assertParseFailure(parser, age, String.format(INCORRECT_AGE_AND_RANGE));
         age = " b/ 100-0";
-        assertParseFailure(parser, age, String.format(INCORRECT_RANGE));
+        assertParseFailure(parser, age, String.format(INCORRECT_AGE_AND_RANGE));
         age = " b/ -5--1";
-        assertParseFailure(parser, age, String.format(INCORRECT_RANGE));
+        assertParseFailure(parser, age, String.format(INCORRECT_AGE_AND_RANGE));
 
         // invalid appointment range
         String appointment = " ap/ 01/01/2024-01-01-2026";
