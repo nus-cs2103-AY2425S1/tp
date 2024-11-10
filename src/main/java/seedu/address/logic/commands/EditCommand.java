@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -136,7 +137,24 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = personToEdit.getRemark(); // Edit command does not allow editing remarks
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+        // Preserve the original tags representing customer or supplier
+        Set<Tag> originalTags = personToEdit.getTags().stream()
+                .filter(tag -> tag.tagName.equals("Customer") || tag.tagName.equals("Supplier"))
+                .collect(Collectors.toSet());
+
+        // Filter out customer or supplier tags from the updated tags
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags()).stream()
+                .filter(tag -> !tag.tagName.equalsIgnoreCase("Customer") && !tag.tagName.equalsIgnoreCase("Supplier"))
+                .collect(Collectors.toSet());
+
+        // Merge original tags with updated tags
+        updatedTags.addAll(originalTags);
+
+        // Check if the tags are unchanged
+        if (updatedTags.equals(personToEdit.getTags())) {
+            throw new CommandException("You cannot add Customer or Supplier tags.");
+        }
 
         // Preserve the original orders list
         List<Order> retainedOrders = personToEdit.getOrders();
