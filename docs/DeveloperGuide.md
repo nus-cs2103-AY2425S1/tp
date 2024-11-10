@@ -505,12 +505,12 @@ Use case ends.
 Use case ends.
 
 **Extensions:**
-* 2a. There are no students enrolled in the given course.
-    * 2a1. TAHub shows a message indicating there are no students found.
+* 1a. There are no students enrolled in the given course.
+    * 1a1. TAHub shows a message indicating there are no students found.
     <br>
     Use case ends.
-* 2b. There are multiple courses containing the given string as a prefix.
-    * 2b1. TAHub displays a list of all students enrolled in those courses.
+* 1b. There are multiple courses containing the given string as a prefix.
+    * 1b1. TAHub displays a list of all students enrolled in those courses.
     <br>
     Use case ends.
 
@@ -524,8 +524,8 @@ Use case ends.
 Use case ends.
 
 **Extensions:**
-* 2a. The list is empty.
-  * 2a1. TAHub displays a message that there were no students found.
+* 1a. The list is empty.
+  * 1a1. TAHub displays a message that there were no students found.
   <br>
   Use case ends.
 
