@@ -27,7 +27,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Remark remark;
+    private Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private final List<Order> orders = new ArrayList<>();
 
@@ -143,6 +143,10 @@ public class Person {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public void setRemark(Remark remark) {
+        this.remark = remark;
     }
 
     /**
