@@ -373,7 +373,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4b. The edited contact results in a duplicate
   * 4b1. UniLink shows an error message indicating that a duplicate contact already exists.
-    Use case ends.
+    
+  Use case ends.
 
 **Use case: UC004 - View contact list**
 
