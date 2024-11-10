@@ -181,7 +181,8 @@ public class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex, null);
 
         assertCommandFailure(viewCommand, model,
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                String.format(
+                        Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, outOfBoundIndex.getOneBased(),
                         model.getFilteredPersonList().size()));
     }
 

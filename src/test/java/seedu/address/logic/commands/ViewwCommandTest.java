@@ -125,7 +125,8 @@ public class ViewwCommandTest {
         ViewwCommand viewwCommand = new ViewwCommand(outOfBoundIndex, null);
 
         assertCommandFailure(viewwCommand, model,
-                String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
+                String.format(
+                        Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX, outOfBoundIndex.getOneBased(),
                         model.getFilteredWeddingList().size()));
     }
 

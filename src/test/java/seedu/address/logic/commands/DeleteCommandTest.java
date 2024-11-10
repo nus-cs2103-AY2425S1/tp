@@ -66,7 +66,8 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null, null);
 
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertCommandFailure(deleteCommand, model, String.format(
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, outOfBoundIndex.getOneBased(),
                 model.getFilteredPersonList().size()));
     }
 
@@ -111,7 +112,8 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null, null);
 
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertCommandFailure(deleteCommand, model, String.format(
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, outOfBoundIndex.getOneBased(),
                 model.getFilteredPersonList().size()));
     }
 
@@ -236,7 +238,8 @@ public class DeleteCommandTest {
         Set<Index> invalidWeddingIndices = Set.of(Index.fromOneBased(5)); // Out-of-bound wedding index
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, invalidWeddingIndices);
 
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
+        assertCommandFailure(deleteCommand, model, String.format(
+                Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX, 5,
                 model.getFilteredWeddingList().size()));
     }
 
