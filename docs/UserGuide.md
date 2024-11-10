@@ -156,8 +156,8 @@ The index **must be a positive integer** 1, 2, 3, …​.
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:**
-You **cannot** edit `schedule` and `socialMedia` information using the `edit` command.
-Please use the [`schedule`](#scheduling-contacts--schedule) and [`socialMedia`](#adding-social-media--socialmedia) commands instead.
+You **cannot** edit schedule and social media information using the `edit` command.
+Please use the [`schedule`](#scheduling-contacts--schedule) to edit schedule information and the [`socialMedia`](#adding-social-media--socialmedia) commands to edit social media information instead.
 
 </div>
 
