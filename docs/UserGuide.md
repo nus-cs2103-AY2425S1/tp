@@ -526,13 +526,13 @@ Once the command succeeds, notice that David is removed and hence no longer disp
 - `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
 
 
-### Clearing all entries: `clear confirm`
+### Clearing all entries: `clear`  `confirm`
 
 **Clears all entries from the address book after receiving confirmation.**
 
 **Warning**: This command will permanently delete all entries from the address book. Ensure that you want to proceed before executing this command.
 
-**Format**: `clear confirm`
+**Format**: `clear` `confirm`
 
 - You must type `confirm` explicitly to execute this command. Any other input will not clear the address book.
 
