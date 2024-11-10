@@ -66,6 +66,10 @@ public class AmountTest {
         assertTrue(Amount.isValidAmount("-0.01"));
         assertTrue(Amount.isValidAmount("0.1"));
         assertTrue(Amount.isValidAmount("-0.1"));
+        assertTrue(Amount.isValidAmount(".01"));
+        assertTrue(Amount.isValidAmount("-.01"));
+        assertTrue(Amount.isValidAmount(".1"));
+        assertTrue(Amount.isValidAmount("-.1"));
     }
 
     @Test
@@ -85,6 +89,10 @@ public class AmountTest {
 
         amt1 = new Amount("100");
         assertTrue(amt1.equals(amt1));
+
+        Amount amt3 = new Amount("-0.01");
+        Amount amt4 = new Amount("-.01");
+        assertTrue(amt3.equals(amt4));
     }
 
     @Test

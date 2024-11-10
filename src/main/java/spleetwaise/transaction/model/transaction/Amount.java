@@ -20,7 +20,7 @@ public class Amount {
     /*
      * The first character of amount must be + or - and only allow precision up to 2 decimal places
      */
-    public static final String VALIDATION_REGEX = "^(\\-)?([\\d]+$|[\\d]+\\.[\\d]{1,2}$)";
+    public static final String VALIDATION_REGEX = "^(\\-)?([\\d]+$|[\\d]*\\.[\\d]{1,2}$)";
 
     private static final int MAX_DECIMAL_PLACES = 2;
 
