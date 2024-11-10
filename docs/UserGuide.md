@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a**desktop app for managing contacts just for you Financial Advisors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, F.A.R.T can get your contact management tasks done faster than traditional GUI apps.
+Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for managing contacts just for you Financial Advisors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, F.A.R.T can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -247,8 +247,8 @@ Examples:
 * `find n/Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 **Note:**
-1. A `delete` command cannot be undone, and deleted contacts cannot be retrieved.
-1. When a `delete` command is inputted, the F.A.R.T Book will first prompt you to confirm if the contact that you want to delete is correct. If you select `No`, the operation will be aborted and the client will not be deleted. Else, select `Yes` to delete the contact.
+1. A `delete` command cannot be undone, and deleted clients cannot be retrieved.
+1. When a `delete` command is inputted, the F.A.R.T Book will first prompt you to confirm if the client that you want to delete is correct. If you select `No`, the operation will be aborted and the client will not be deleted. Else, select `Yes` to delete the client.
 ![Delete confirmation window](images/deletewindow.png)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -260,7 +260,7 @@ Want to get rid of all contacts or the sample data we've provided? This command 
 Format: `clear`
 
 **Note:**
-1. A `clear` command cannot be undone, and cleared contacts cannot be retrieved.
+1. A `clear` command cannot be undone, and cleared clients cannot be retrieved.
 1. When a `clear` command is inputted, the F.A.R.T Book will first prompt you to confirm that you wish to clear the book. If you select `No`, the operation will be aborted and the book will not be cleared. Else, select `Yes` to clear the book.
 1. If you do change your mind after clearing the F.A.R.T book, you can retrieve only the sample data by deleting the `addressbook.json` file in the `data` folder, then launching F.A.R.T again.
 

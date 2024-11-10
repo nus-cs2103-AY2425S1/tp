@@ -221,11 +221,11 @@ public class HelpContentManager {
                  `find n/Betsy` followed by `delete 1` deletes the 1st client in the results
                  of the `find` command.\n
                  Note:
-                 1. A `delete` command cannot be undone, and deleted contacts cannot be retrieved.
+                 1. A `delete` command cannot be undone, and deleted clients cannot be retrieved.
                  2. When a `delete` command is inputted, the F.A.R.T Book will first prompt you to
-                 confirm if the contact that you want to delete is correct.If you select `No`, the
+                 confirm if the client that you want to delete is correct.If you select `No`, the
                  operation will be aborted and the client will not be deleted. Else, select `Yes`
-                 to delete the contact.
+                 to delete the client.
                 """);
 
         contentMap.put("Clearing all entries", """
@@ -234,7 +234,7 @@ public class HelpContentManager {
                  This command clears all entries from the F.A.R.T book.\n
                  Format: `clear`\n
                  Note:
-                 1. A `clear` command cannot be undone, and cleared contacts cannot be retrieved.\n
+                 1. A `clear` command cannot be undone, and cleared clients cannot be retrieved.\n
                  2. When a `clear` command is inputted, the F.A.R.T Book will first prompt you
                  to confirm that you wish to clear the book. If you select `No`, the operation
                  will be aborted and the book will not be cleared. Else, select `Yes` to clear the book.\n
