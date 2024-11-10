@@ -131,9 +131,9 @@ public class FindCommandParserTest {
 
         assertParseFailure(parser, "all d/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
 
-        assertParseFailure(parser, "ph e/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+        assertParseFailure(parser, "ph r/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
 
-        String args = "all n/John";
+        String args = "all n/John p/98765432 e/john@example.com d/IT r/SWE";
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_DEPARTMENT, PREFIX_ROLE);
