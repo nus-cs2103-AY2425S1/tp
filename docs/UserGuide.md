@@ -45,9 +45,9 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
   * `exit` : Exits the app.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Refer to the [Features](#features) below for details of each command.
-</div>
+<box type="tip" header="Tip:" >
+  Refer to the [Features](#features) below for details of each command.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -76,9 +76,9 @@ DDD also allows you to tag contacts with your own tags. This is quite handy if y
 
 `Vendor` entries contain an extra `service` field. These are contacts who provide a particular type of service for events (e.g. catering, flowers, etc).
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" header="Tip:" >
 DDD does not currently support vendors providing multiple services. Instead, you can add multiple contacts to represent each service. These entries should be named differently to prevent duplication.
-</div>
+</box>
 
 ### Events
 
@@ -98,35 +98,35 @@ Events allow you to group contacts together in a sensible and seamless manner li
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Notes about the command format:**<br>
+<box type="info" header="**Notes about the command format:**">
+  Documentation style conventions are based on [Google's guide for CLI syntax](https://developers.google.com/style/code-syntax).
 
-Documentation style conventions are based on [Google's guide for CLI syntax](https://developers.google.com/style/code-syntax).
+  <md>
+    * Words in `UPPER_CASE` are the parameters that must be supplied by the user.<br>
+      e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
 
-* Words in `UPPER_CASE` are the parameters that must be supplied by the user.<br>
-  e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
+    * `-TYPE_FLAG` can be either `-c`, `v` or `-e` for commands allowing specifying of type.
+      e.g. in `list -TYPE_FLAG`, `-TYPE_FLAG` can allow for filtering all clients with `-c` or vendor with `-v`
+    or events with `-e`.
 
-* `-TYPE_FLAG` can be either `-c`, `v` or `-e` for commands allowing specifying of type.
-  e.g. in `list -TYPE_FLAG`, `-TYPE_FLAG` can allow for filtering all clients with `-c` or vendor with `-v`
-or events with `-e`.
+    * Parameters wrapped in **square brackets** are optional arguments.<br>
+      e.g. in `add n/NAME ... [t/TAG ...]`, `TAG` is an optional argument
 
-* Parameters wrapped in **square brackets** are optional arguments.<br>
-  e.g. in `add n/NAME ... [t/TAG ...]`, `TAG` is an optional argument
+    * Parameters wrapped in **curly brackets** are mutually exclusive arguments (i.e. only 1 should be specified).<br>
+      e.g. in `add {-c | -v s/SERVICE} ...`, `-c` and `-v s/SERVICE` are mutually exclusive arguments.
 
-* Parameters wrapped in **curly brackets** are mutually exclusive arguments (i.e. only 1 should be specified).<br>
-  e.g. in `add {-c | -v s/SERVICE} ...`, `-c` and `-v s/SERVICE` are mutually exclusive arguments.
+    * Items with `...`​ after them can be used multiple times including zero times.<br>
+      e.g. `t/TAG ...​` can be used as ` ` (i.e. 0 times), `t/vegetarian`, `t/budget conscious t/small scale` etc.
 
-* Items with `...`​ after them can be used multiple times including zero times.<br>
-  e.g. `t/TAG ...​` can be used as ` ` (i.e. 0 times), `t/vegetarian`, `t/budget conscious t/small scale` etc.
+    * Parameters can be in any order.<br>
+      e.g. if the command specifies `n/NAME p/PHONE_NUMBER -c`, `p/PHONE_NUMBER -c n/NAME` is also acceptable.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER -c`, `p/PHONE_NUMBER -c n/NAME` is also acceptable.
+    * Extraneous parameters for commands that do not take in parameters (such as `list`, `help`, `exit` and `clear`) will be ignored.<br>
+      e.g. if the command specifies `list abc`, it will be interpreted as `list`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list`, `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `list abc`, it will be interpreted as `list`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+    * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </md>
+</box>
 
 ### Create a New Record: `add`
 
@@ -261,35 +261,40 @@ exit
 
 DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<box type="warning" header="**Caution**">
 If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 
 Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQs
 
-> **Q**: I accidentally deleted a contact. Is there an undo feature?<br>
+<box type="tip" icon=":question:" seamless>
+  <strong>Q</strong>: I accidentally deleted a contact. Is there an undo feature?<br>
+  <strong>A</strong>: Nope. Unforunately, undo has not been implemented.
+</box>
 
-**A**: Nope. Unforunately, undo has not been implemented.
+<box type="tip" icon=":question:" seamless>
+  <strong>Q</strong>: How do I edit events?<br>
+  <strong>A</strong>: Unforunately, editing events has not been implemented. You will have to delete the existing event and create a new one with your desired details.
+</box>
 
-> **Q**: How do I edit events?<br>
+<box type="tip" icon=":question:" seamless>
+  <strong>Q</strong>: I have a vendor that provides multiple services, but I can only indicate 1 service per vendor entry. What should I do?<br>
+  <strong>A</strong>: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provde 1 single service is so that searches via the <code>list</code> command can be more precise.
+</box>
 
-**A**: Unforunately, editing events has not been implemented. You will have to delete the existing event and create a new one with your desired details.
+<box type="tip" icon=":question:" seamless>
+  <strong>Q</strong>: Can DDD be used by users who are not wedding planners (i.e. other event planners)?<br>
+  <strong>A</strong>: Yes! While DDD is targetted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
+</box>
 
->**Q**: I have a vendor that provides multiple services, but I can only indicate 1 service per vendor entry. What should I do?<br>
-
-**A**: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provde 1 single service is so that searches via the `list` command can be more precise.
-
-> **Q**: Can DDD be used by users who are not wedding planners (i.e. other event planners)?<br>
-
-**A**: Yes! While DDD is targetted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
-
-> **Q**: How do I transfer my data to another Computer?<br>
-
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DDD home folder.
+<box type="tip" icon=":question:" seamless>
+  <strong>Q</strong>: How do I transfer my data to another Computer?<br>
+  <strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DDD home folder.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -361,4 +366,4 @@ Some commands can be applied on clients, vendors and events. Use `-CONTACT_FLAG`
 | `s/SERVICE` | Service provided by vendor  | <ul><li>Can contain any value except slash (`/`)</li><li>Should not be blank</li><ul>                                |
 | `t/TAG`     | Tag associated with contact | <ul><li>Should only contain alphanumeric characters or dashes</li></ul>                                              |
 | `d/DATE`    | Date of event               | <ul>Should follow one of these formats:<ul><li>`MM/dd/yyyy`</li><li>`yyyy-MM-dd`</li><li>`d MMM yyyy`</li></ul></ul> |
-| `id/ID`     | ID of contact/event         | <ul><li>This field is configured by DDD</li></ul>  |
+| `id/ID`     | ID of contact/event         | <ul><li>This field is configured by DDD</li></ul>                                                                    |
