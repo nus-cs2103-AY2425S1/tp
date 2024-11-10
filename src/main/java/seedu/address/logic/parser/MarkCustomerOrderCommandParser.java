@@ -24,7 +24,7 @@ public class MarkCustomerOrderCommandParser implements Parser<MarkCustomerOrderC
             int index = Integer.parseInt(args.trim());
             return new MarkCustomerOrderCommand(index);
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format("Invalid index: %s", args));
+            throw new ParseException("The index provided is invalid. Please input a number.");
         }
     }
 }

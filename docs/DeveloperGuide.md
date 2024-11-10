@@ -19,6 +19,7 @@ title: Developer Guide
 * Libraries used:
    * [JavaFX](https://openjfx.io/) - The main GUI framework
    * [JUnit](https://junit.org/junit5/) - Testing framework
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -261,6 +262,7 @@ The `Storage` component employs robust error handling to manage potential issues
 - **IOException**:
     - Thrown during file read/write operations.
     - Errors are logged, and users are notified.
+  
 --------------------------------------------------------------------------------------------------------------------
 ### Common classes
 
@@ -632,7 +634,8 @@ Given below are instructions to test the app manually.
 #### Initial launch
 
 1. Download the `jar` file and copy it into an empty folder.
-2. Double-click the `jar` file.
+2. Navigate to the folder which contains the jar file using the command line.
+3. Run the command `java -jar BakeBuddy.jar`.
     - **Expected:** Shows the GUI with a set of sample customers, suppliers, and orders. The window size may not be optimum.
 
 #### Saving window preferences
@@ -734,3 +737,10 @@ Given below are instructions to test the app manually.
 2. **Simulating a corrupted data file**: Introduce invalid JSON syntax in the data file and restart the app.
     - **Expected:** App shows an error message and starts with an empty address book or sample data.
 
+## Future Enhancements
+1. **Allow bakery owners to edit ingredient cost after input**
+- If there were to be changes in the ingredients prices, user would have to delete the entire input and add another rather than having a fast fix of allowing the user to solely modify changes in ingredients cost. We aim to allow user to directly modify the ingredient catalogue directly in the future.
+2. **Replace click requirements with input commands on GUI**
+- Some GUI elements currently require a mouse click to function, such as the drop-down icon to display full contact profiles, and the refresh button. These can be replaced with inputs commands to follow the spirit of a command line application better.
+3. **Allow addition of "quantity" field when adding orders**
+- Given a scenario where a customer would order 30 Strawberry Waffles for example, it would require the user to input addCustomerOrder p/ o/1 1 1 1 1 .... (a total of 30 times) which is inefficient. The temporary solution is to add the quantity under "remarks", however we aim to add a quantity field when placing an order to reduce this redundancy.

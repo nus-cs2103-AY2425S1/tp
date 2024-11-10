@@ -179,7 +179,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 
 * `EMAIL`: Email address
 
-**Note:** Email address is not restrictive in BakeBuddy. Hence invalid addresses may be allowed to be added. We will aim to improve email address validation features in subsequent iterations.
+**Note:** Email address is not restrictive in BakeBuddy. Hence invalid addresses may be allowed to be added. It is advised to not add email addresses that are excessively long. We will aim to improve email address validation features in subsequent iterations. 
 * `ADDRESS`: Physical address
 * `INFORMATION`: Additional customer details
 * `INGREDIENTS_SUPPLIED`: List of ingredients (for suppliers)
@@ -254,9 +254,8 @@ For Supply Orders:
 addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
-
-### Q6: Why is the UI not scrollable when not in full screen?
-**A:** Due to the UI configuration of BakeBuddy, the middle column is non-scrollable when minimized. To prevent this from happening, please use BakeBuddy in full screen.
+### Q5: How do I add orders for customers/suppliers with a large order?
+**A:** Yes, you can repeat Product IDs in your order if the customer wants multiple of the same item. For example:
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
