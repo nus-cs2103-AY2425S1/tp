@@ -676,8 +676,11 @@ Imports contacts based on CSV file
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* File path can be relative or absolute, but must end with .csv
-* Importing a file will delete **ALL** existing contacts before adding the contacts from the file
+* File path can be relative or absolute, but must end with ".csv".
+  * If using relative path, you may use ".." to move up one directory level (you may refer to example below).
+  * Although ~ symbol is commonly used as home, it will not be the case when using export. Please use the full
+    home path instead.
+* Importing a file will delete **ALL** existing contacts before adding the contacts from the file.
 </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -686,6 +689,12 @@ Imports contacts based on CSV file
 
 * `import path/data/group12.csv` will import the contacts found from the CSV (group12.csv from relative path given)
 * Alternatively, `im p/data/group12.csv` will do the exact same. It uses the shortcut command and parameter.
+* `import path//data/group12.csv` will import the contacts at the ABSOLUTE path given - absolute paths specify the exact
+location in the file system, starting from the root directory, so the file group12.csv at the /data directory will be
+imported regardless of where the program is run.
+* `import path/../data/group12.csv` will import contacts from the CSV file (group12.csv) at the relative path. It moves
+up one level from the current directory and then navigates to data folder, and imports the csv file named "group12.csv".
+  </box>
 
 </box>
 
@@ -694,23 +703,23 @@ Imports contacts based on CSV file
 <md>**CSV file formatting:**</md>
 
 * The CSV file must have header with the exact required order {"Name", "Email", "Telegram", "Tags", "Github",
-  "Assignments", "WeeksPresent"} (Case-insensitive)
-* The CSV file must contain information about at least 1 person
-* The data fields for Name, Email, Telegram, Github is compulsory
+  "Assignments", "WeeksPresent"} (Case-insensitive).
+* The CSV file must contain information about at least 1 person.
+* The data fields for Name, Email, Telegram, Github is compulsory.
   * Do note that each of these field have their own restrictions 
   [(refer above)](#i-classfa-solid-fa-user-plusi-adding-a-person-add)
 * Tags format: enclose tag in square brackets ("[tag]"). If a person has multiple tags, separate the tags within 
 the same entry with commas. (e.g."[tag1],[tag2],[tag3].....")
-  * Duplicate tags will be ignored (e.g."[Group1],[Group1]" will be treated as "[Group1]")
-  * This field can be empty (will be treated as no tags for specific person)
+  * Duplicate tags will be ignored. (e.g."[Group1],[Group1]" will be treated as "[Group1]")
+  * This field can be empty (will be treated as no tags for specific person).
 * Assignment format: Assignment name and assignment score should be separated with "|" (e.g. Ex01|10). If multiple 
 assignments are present for a person, separate them within the same entry using commas. (e.g. Ex01|9, Ex02|5)
   * If an assignment name appears twice, the later instance will be used (e.g. Ex01|10, Ex01|5 will cause KonTActs
-  to record 5 marks for Assignment Ex01)
-  * This field can be empty (will be treated as no assignments for specified person)
-* WeeksPresent format: Each integer represents a specific week, with each week separated by a comma. (e.g. 1,2,3,4)
-  * Duplicate weeks will be ignored (e.g. 1,2,3,4,1 will be treated as 1,2,3,4)
-  * This field can be empty (will be treated as no weeks attended for specific person)
+  to record 5 marks for Assignment Ex01).
+  * This field can be empty (will be treated as no assignments for specified person).
+* WeeksPresent format: Each integer represents a specific week, with each week separated by a comma. (e.g. 1,2,3,4).
+  * Duplicate weeks will be ignored (e.g. 1,2,3,4,1 will be treated as 1,2,3,4).
+  * This field can be empty (will be treated as no weeks attended for specific person).
 </box>
 
 {{ newPage }}
@@ -753,18 +762,27 @@ Exports contacts based on contacts and their details stored in KonTActs.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* File path can be relative or absolute but must end with .csv
-  </box>
-* You must have write permission in order to export CSV file to specified location
+* File path can be relative or absolute but must end with ".csv". 
+  * If using relative path, you may use ".." to move up one directory level (you may refer to example below).
+  * Although ~ symbol is commonly used as home, it will not be the case when using export. Please use the full
+  home path instead.
+      </box>
+* You must have write permission in order to export CSV file to specified location.
 
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 
 * `export path/data/group12.csv` will export the contacts in KonTActs as a csv file (group12.csv at the 
-relative path given)
-* Alternatively, `ex p/data/group12.csv` will do the exact same. It uses the shortcut command and parameter. 
+RELATIVE path given).
+* Alternatively, `ex p/data/group12.csv` will do the exact same. It uses the shortcut command and parameter.
+* `export path//data/group12.csv` will export the contacts in KonTActs as a csv file (group12.csv at the
+ABSOLUTE path given - absolute paths specify the exact location in the file system, starting from the root directory,
+so this file will be saved in the /data directory as group12.csv regardless of where the program is run).
+* `export path/../data/group12.csv` will export contacts as a CSV file (group12.csv) to the relative path. It moves up 
+one level from the current directory and then navigates to data folder, and saves the csv file as "group12.csv".
   </box>
+
 
 {{ newPage }}
 
