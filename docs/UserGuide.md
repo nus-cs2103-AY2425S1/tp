@@ -7,13 +7,11 @@
 <button id="toggleButton" onclick="toggleAllDetails()">Expand All</button>
 
 
-<body>
-  <div style="display: flex; justify-content: center; align-items: center;">
-    <span class="parisienne-regular" style="font-size: 3em; font-weight: bold;">
-      WedLinker User Guide
-    </span>
-  </div>
-</body>
+<div style="display: flex; justify-content: center; align-items: center;">
+<span class="parisienne-regular" style="font-size: 3em; font-weight: bold;">
+  WedLinker User Guide
+</span>
+</div>
 
 
 
