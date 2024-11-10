@@ -853,7 +853,7 @@ This means that your machine is running Java version 17.0.11, which means that J
 [Return to Quick Start](#quick-start)
 
 #### **Q**: Is there a limit to the number of patients/appointments we can add?
- - **A**: As of right now, we do not have a limit to the number of patients/appointments but is dependent on the hardware specification.
+ - **A**: As of right now, we do not have a limit to the number of patients/appointments but the limit is dependent on the hardware specification.
 
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
