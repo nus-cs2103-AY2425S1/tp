@@ -707,7 +707,7 @@ Imports contacts based on CSV file
 * The CSV file must contain information about at least 1 person
 * The data fields for Name, Email, Telegram, Github is compulsory
   * Do note that each of these field have their own restrictions 
-  [(refer above)](#i-classfa-solid-fa-user-plusi-adding-a-person-add)
+  [(defined above)](#adding-a-person-add)
 * Tags format: enclose tag in square brackets ("[tag]"). If a person has multiple tags, separate the tags within 
 the same entry with commas. (e.g."[tag1],[tag2],[tag3].....")
   * Duplicate tags will be ignored (e.g."[Group1],[Group1]" will be treated as "[Group1]")
