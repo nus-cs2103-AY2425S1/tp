@@ -540,7 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 2.
 
-* 2c. User attempts to change the name to another existing company
+* 2c. User attempts to change the name to another existing company.
     * 2c1. InternBuddy shows an error message.
 
   Use case resumes at step 2.
@@ -618,7 +618,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. User specifies an optional company information that is empty (application status)
+* 1b. User specifies an optional company information that is empty (application status).
     * 1b1. InternBuddy shows an error message.
 
       Use case resumes at step 1.
@@ -664,7 +664,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>.
 2.  User requests to update the status of an application from a specific company at a specific index from the list of applications belonging to the company; where the company is
     specified with using its index on the list of companies.
 3.  InternBuddy edits the company.
@@ -680,7 +680,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
  
-* 2b. User updated application status is invalid
+* 2b. User updated application status is invalid.
     * 2b1. InternBuddy shows an error message.
 
       Use case resumes at step 2.
@@ -689,7 +689,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>.
 2.  User requests to view the full application details of a company by its given index in the list.
 3.  InternBuddy shows the application details of the company.
 
@@ -735,10 +735,10 @@ Use case ends.
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 companies without a noticeable sluggishness in performance for typical usage.
-3. Should be able to store up to 1000 companies with up to 1000 applications each.
-4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-5. The system should respond to user commands without noticeable lag for most operations.
-6. The application should allow for seamless data export in common formats (e.g., CSV or JSON) for external backup or sharing.
+3.  Should be able to store up to 1000 companies with up to 1000 applications each.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  The system should respond to user commands without noticeable lag for most operations.
+6.  The application should allow for seamless data export in common formats (e.g., CSV or JSON) for external backup or sharing.
 
 *{More to be added}*
 
