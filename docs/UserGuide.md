@@ -71,11 +71,11 @@ Our interface has a few key parts (check the image below for a visual guide):
 
 ![UiTut](images/UiTut.png)
 
-### Command Suggestion: Your Shortcut to Faster Commands
+### Command Suggestion PopUp
 
 ![CommandPopUp](images/commandpopup.png)
 
-Our Command Suggestion PopUp helps you quickly find the right command as you type!
+Our Command Suggestion PopUp will assist you in quickly finding the right command as you type!
 
 Each suggestion includes the command name, command format and any required details to use it effectively.
 
@@ -104,9 +104,10 @@ Need a quick reference?
 
 <box type="info" seamless>
 
-**Note:** Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it!  
+**Note:** 
+* Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it!  
 
-**Note:** The PopUp will adjust its position to stay fully visible, even if your app window is partially off-screen.
+* The PopUp will adjust its position to stay fully visible, even if your app window is partially off-screen.
 
 </box>
 
@@ -178,26 +179,26 @@ Although duplicate contact names are not allowed, adding two separate contacts `
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                                               |
-|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**       | `help`                                                                                                                                                                                                                         |
-| **List**       | `list`                                                                                                                                                                                                                         |
-| **Add**        | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130-2359` |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                          |
-| **AddGame**    | `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`addgame 1 g/Overwatch u/Potato`                                                                                                                         |
-| **EditGame**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                                       |
-| **DeleteGame** | `deletegame INDEX g/GAME`<br> e.g.,`deletegame 1 g/Overwatch`                                                                                                                                                                  |
-| **FavGame**    | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                        |
-| **UnFavGame**  | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                                    |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                                    |
-| **FindGame**   | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find Overwatch League`                                                                                                                                                          |
-| **FindTime**   | `findtime TIME-TIME [TIME-TIME]…`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                                    |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
-| **Clear**      | `clear`                                                                                                                                                                                                                        |
-| **Undo**       | `undo`                                                                                                                                                                                                                         |
-| **Save**       | `save`                                                                                                                                                                                                                         |
-| **Load**       | `load`                                                                                                                                                                                                                         |
-| **Exit**       | `exit`                                                                                                                                                                                                                         |
+| Action                         | Format, Examples                                                                                                                                                                                                               |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Help**](#viewing-help-help) | `help`                                                                                                                                                                                                                         |
+| [**List**](#listing-all-persons-list)                      | `list`                                                                                                                                                                                                                         |
+| **Add**                        | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130-2359` |
+| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                          |
+| **AddGame**                    | `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`addgame 1 g/Overwatch u/Potato`                                                                                                                         |
+| **EditGame**                   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                                       |
+| **DeleteGame**                 | `deletegame INDEX g/GAME`<br> e.g.,`deletegame 1 g/Overwatch`                                                                                                                                                                  |
+| **FavGame**                    | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                        |
+| **UnFavGame**                  | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                                    |
+| **Find**                       | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                                    |
+| **FindGame**                   | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find Overwatch League`                                                                                                                                                          |
+| **FindTime**                   | `findtime TIME-TIME [TIME-TIME]…`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                                    |
+| **Delete**                     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
+| **Clear**                      | `clear`                                                                                                                                                                                                                        |
+| **Undo**                       | `undo`                                                                                                                                                                                                                         |
+| **Save**                       | `save`                                                                                                                                                                                                                         |
+| **Load**                       | `load`                                                                                                                                                                                                                         |
+| **Exit**                       | `exit`                                                                                                                                                                                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
