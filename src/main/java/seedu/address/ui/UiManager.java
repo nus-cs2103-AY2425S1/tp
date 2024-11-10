@@ -40,7 +40,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         boolean passwordCorrect = PasswordPromptDialog.display(primaryStage);
-        System.out.println(passwordCorrect);
+
         if (!passwordCorrect) {
             // Exit the application if the password is incorrect
             Platform.exit();
