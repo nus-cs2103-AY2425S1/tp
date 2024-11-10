@@ -360,14 +360,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The contact list is empty.
+* 2a. The given contact index is invalid or the contact list is empty.
 
-  Use case ends.
-
-* 3a. The given contact index is invalid.
-
-    * 3a1. PlanPerfect shows an error message.
-
+    * 2a1. PlanPerfect shows an error message.
       Use case resumes at step 2.
 
 <br/><br/>
@@ -386,10 +381,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The input format for adding the contact is invalid.
 
-    * 1a1. PlanPerfect shows an error message.
+    * 1a1. PlanPerfect shows an error message requesting for the correct input format.
+  
+        Use case ends.
+* 1b. PlanPerfect detects a duplicate contact entry (by phone number) in the addressbook.
 
+  * 1b1. PlanPerfect displays an error message showing the duplicated contact.
+  
       Use case ends.
-
 <br/><br/>
 
 **Use case: UC04 - Tag a contact**
@@ -496,8 +495,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view contacts tagged with one or more tag
+1. Wedding planner requests to view contacts tagged with one or more tag
 2. PlanPerfect shows the list of all contacts tagged with the tags input by the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid.
+
+    * 1a1. PlanPerfect shows an error message.
+
+        Use case ends.
+
+<br/><br/>
+
+**Use case: UC11 - Clear all wedding and contact data**
+
+**MSS**
+
+1. Wedding planner requests to clear all contacts and weddings.
+2. PlanPerfect asks for confirmation before clearing data.
+3. Wedding planner confirms.
+4. PlanPerfect clears all contacts and weddings, showing a success message.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The wedding planner enters input that cancels the action
+    * 1a1. PlanPerfect retains all data.
+    * 1a2. PlanPerfect shows a message indicating that the wedding and contact data has not been cleared.
+
+      Use case ends.
+
+<br/><br/>
+
+**Use case: UC12 - View contacts of a specified wedding**
+
+**MSS**
+
+1. Wedding planner requests to view contacts stored in a specified wedding.
+2. PlanPerfect shows the list of all contacts involved in a specified wedding.
 
    Use case ends.
 
@@ -511,22 +550,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC11 - View contacts of a specified wedding**
+
+**Use case: UC13- Add a wedding**
+
+<br/><br/>
+
+**Use case: UC14 - Delete a wedding**
 
 **MSS**
 
-1. User requests to view contacts stored in a specified wedding.
-2. PlanPerfect shows the list of all contacts involved in a specified wedding.
+1. User requests to delete a wedding with specified details.
+2. PlanPerfect deletes the wedding and removes it from the weddings panel view.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The input format is invalid.
-
+* 1a. The wedding contact index provided is invalid or missing.
     * 1a1. PlanPerfect shows an error message.
 
       Use case ends.
+
+<br/><br/>
+
+**Use case: UC15 - Edit a wedding**
+
+**MSS**
+
+1. User requests to edit the name and/or date of the wedding.
+2. PlanPerfect edits the wedding as specified and updates the wedding name and date in the weddings panel 
+   view.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The input format for editing the wedding is invalid.
+    * 1a1. PlanPerfect shows an error message.
+
+      Use case ends.
+  
+* 1b. PlanPerfect detects a duplicate wedding entry (by wedding name) in the addressbook.
+    * 1b1. PlanPerfect displays an error message showing the duplicated wedding details.
+
+      Use case ends.
+
+
+
 
 <br/><br/>
 
