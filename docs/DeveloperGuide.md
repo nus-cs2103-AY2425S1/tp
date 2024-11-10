@@ -2,7 +2,7 @@
 layout: page
 title: Developer Guide
 ---
-## Table of Contents
+* Table of Contents
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -32,13 +32,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The *Architecture Diagram* given above explains the high-level design of the App.
+The **Architecture Diagram** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
-#### Main components of the architecture
+**Main components of the architecture**
 
-`Main` (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+`Main` (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 [`Commons`](#common-classes) represents a collection of classes used by multiple other components.
 
-##### How the architecture components interact with each other
+**How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
@@ -59,10 +59,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding *API* `interface` mentioned in the previous point.
+* defines its **API** in an `interface` with the same name as the Component.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its **API** in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -113,9 +113,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-- When called upon to parse a user command, the `AgentAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AgentAssistParser` returns back as a `Command` object.
-  - `FilterCommandParser` is explicitly shown as unlike other command parsers, `FilterCommandParser` performs an additional task: it creates multiple predicate classes, which are combined into a `CombinedPredicate`.
-- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) and `FilterCommandParser` inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AgentAssistParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`).
+* `XYZCommandParser` is responsible for parsing the command details and constructing an `XYZCommand object` (e.g., `AddCommand`).This `XYZCommand` object is then returned to the `AgentAssistParser` as a `Command` object.
+    * Note: `FilterCommandParser` performs an additional step by creating multiple predicate classes (e.g., `NameContainsSubstringPredicate`). These individual predicates are then combined into a single `CombinedPredicate`.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `FilterCommandParser`, etc.) implement the `Parser` interface, allowing them to be handled consistently, such as in testing scenarios.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -125,10 +126,10 @@ How the parsing works:
 
 The `Model` component,
 
-- stores the address book data i.e., all `Client` objects (which are contained in a `UniqueClientList` object).
-- stores the currently 'selected' `Client` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores the address book data i.e., all `Client` objects (which are contained in a `UniqueClientList` object).
+* stores the currently 'selected' `Client` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
 
@@ -137,9 +138,9 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-- can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-- inherits from both `AgentAssistStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `AgentAssistStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
@@ -245,61 +246,79 @@ The prompt for confirmation by the user seen here is also used in the `clear` co
 ## Planned enhancements
 
 ### 1. Multi-Language Support
+**Current Issue:** Non-English text input can cause visual bugs, including reversed text display.
 
-**Current Issue:**: Non-English text input can cause visual bugs, including reversed text display.
-
-**Proposed Solution:**: Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
+**Proposed Solution:** Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
 
 ### 2. Support for Forward Slash in Names
-
-**Current Issue:**: Names containing forward slashes (e.g., "Ramesh s/o Ravichandran") are incompatible with `add`, `edit`, and `filter` commands due to two problems:
+**Current Issue:** Names containing forward slashes (e.g., `Ramesh s/o Ravichandran`) are incompatible with `add`, `edit`, and `filter` commands due to two problems:
 
 1. The parser misinterprets "s/o" as a Status flag command, resulting in an invalid status error
 2. The name validation regex explicitly blocks forward slashes to prevent parsing conflicts
 
-#### Technical Impact
+**Technical Impact:**
 - Allowing forward slashes would create ambiguous parsing scenarios
 - Example of resulting error message:
-  ![Confusing error message](images/PlannedEnhancementBug1.png)
+  ![Confusing error message](images/PlannedEnhancementForwardSlash.png)
 
-#### Status 
-Implementation deferred to a future release due to the complexity of potential solutions and risk of introducing new bugs.
+**Status:** Scheduled for future release due to the complexity of potential solutions and risk of introducing new bugs.
 
-### 3. Data Import/Export Functionality
-#### Current issue
-Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' agentassist data files, or share their data files with other users.
+### 3.  Support for Symbols such as `@` and Parentheses in Names
+**Current Issue:** ames containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
 
-#### Proposed Enhancement
-Add UI buttons in the application menu for:
+**Technical Impact:**
+- There are no anticipated issues with allowing these symbols in names. The main reason for the lack of support is the low frequency of such cases, making it a lower priority for development.
+
+**Status:** Scheduled for future release as an enhancement to improve flexibility in name handling, allowing a broader range of symbols in user inputs.
+
+### 4. Data Import/Export Functionality
+**Current issue:** Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' AgentAssist data files, or share their data files with other users.
+
+**Proposed Enhancement:** Add UI buttons in the application menu for:
 - Importing data files
 - Exporting data files
 
-#### Status 
-Scheduled for future release as current manual process provides a workable solution.
+**Status:** Scheduled for future release as current manual process provides a workable solution.
 
-### 4. Error Message Improvement
+### 5. Error Message Improvement
+**Current issue:** Error messages are inconsistent when users input incorrect values. Depending on the parameter that is incorrect, the messages vary in detail. For example:
+- Using `edit` without index nor flags:
+![EditErrorNoIndex.png](images/EditErrorNoIndex.png)
+- Using `edit` with index only:
+![EditErrorWithIndex.png](images/EditErrorWithIndex.png)
+- Using `edit` with index and `p/` flag without an argument: 
+![editErrorWithIndexAndPhone.png](images/EditErrorWithIndexAndPhone.png)
 
-#### Current issue
-Error messages are inconsistent when users input incorrect values. Depending on the parameter that is incorrect, the messages vary in detail. For example:
-- ![img.png](images/incorrectPhoneEditError.png)
-- ![differentEditError.png](images/differentEditError.png)
-- ![editErrorWithHint.png](images/editErrorWithHint.png)
-These images illustrate varying error message formats for the edit command. While some messages provide the full command hint, others offer minimal guidance, leading to inconsistency across commands. This issue extends beyond the edit command, as other commands also lack a standardized level of information in error messages. Some messages only indicate the error, while others include additional guidance, by also displaying the command hint.
+These images illustrate varying error message formats of the `edit` command. 
+
+While some messages provide the full command hint, others offer minimal guidance, leading to an inconsistent user experience. This inconsistency extends beyond the `edit` command, as other error messages of other commands also vary in its level of information. In certain cases, error messages merely identify the issue without offering additional guidance, while others incorporate helpful usage hints.
 
 Additionally, certain command hints could benefit from more clarity on constraints, especially for the `edit` command, which currently does not indicate that the `rn/` and `ra/` flags cannot be used simultaneously.
 
-#### Proposed Enhancement
-Standardize error message types and improve command hints:
-- `Incorrect command format` type error messages - Triggered when required flags are missing..
-  - Message format: 'Incorrect command format' + command hint.
-- `Invalid flag values` type error messages - Triggered when all necessary flags are present, but one or more flag values are invalid.
-  - Message format: Flag-specific error messages + command hint.
-- Clarify edit command hint – Add information on the constraint preventing simultaneous use of rn/ and ra/ flags.
+**Proposed Enhancement:** Standardize error message types and improve command hints:
+- `Incorrect command format` Error Messages 
+  - Triggered when required flags are missing.
+  - Message format: "Incorrect command format” followed by a command usage hint.
+- `Invalid flag values` Error Messages
+  - Triggered when all necessary flags are present, but one or more flag values are invalid.
+  - Message format: Flag-specific error message followed by a command usage hint.
+- Enhanced Usage Hint for `edit` Command
+  - Include guidance indicating that the rn/ and ra/ flags cannot be used simultaneously.
 
-#### Status 
-Scheduled for future release as the current error messages are still usable and help guide the user. Reason being:
-1. Current error messages adequately inform users. However, standardisation will enhance usability by reducing confusion and improving consistency.
-2. The restriction on rn/ and ra/ flags is documented in the user guide, and an error is displayed when both flags are used together, thus users can learn of this constraint through multiple channels.
+**Status:** Scheduled for future release, as:
+1. The current error messages are functional and provide sufficient guidance for users. However, standardizing them will improve usability by minimizing confusion and ensuring consistent messaging.
+2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
+
+### 5. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
+**Current issue:** The current parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
+- `income` must be a full, valid 8-digit phone number.
+- `email` must be a valid email address.
+
+These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
+
+**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the filter command, allowing any input and matching based on substrings rather than strict validation.
+
+**Status:** Scheduled for future release due to current timeline priorities.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -484,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to close detailed view. 
-2. AgentAssist closes the detailed view. 
+2. AgentAssist closes the detailed view.
 
     Use case ends.
 
