@@ -90,7 +90,8 @@ public class AssignTaskCommand extends Command {
         for (Index taskIndex : taskIndexes) {
             if (taskIndex.getZeroBased() >= lastShownTaskList.size()) {
                 throw new CommandException(String.format(
-                        Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, taskIndex.getOneBased(), 1, lastShownTaskList.size()
+                        Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                        taskIndex.getOneBased(), 1, lastShownTaskList.size()
                 ));
             }
             Task newTask = lastShownTaskList.get(taskIndex.getZeroBased());
