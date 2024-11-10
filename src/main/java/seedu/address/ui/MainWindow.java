@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CloseCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
@@ -191,11 +191,17 @@ public class MainWindow extends UiPart<Stage> {
             int indexToReview = getIndexForReview(commandText);
             CommandResult commandResult = executeMainCommand(commandText);
 
-            if (!commandText.trim().toLowerCase().equals("close")) {
-                updateViewPanelWithFilteredList();
+            if (splitPane.getItems().contains(clientDetailsPanelPlaceholder)) {
+                handleCloseCommand();
             }
-
-            handlePostCommandExecution(commandResult, commandText, indexToReview);
+            if (commandResult.isShowClient()) {
+                handleViewCommand(commandResult);
+            } else if (commandResult.getFeedbackToUser().startsWith(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS)
+                    && indexToReview > 0) {
+                reviewClientAfterEdit(indexToReview);
+            }
+            updateViewPanelWithFilteredList();
+            handlePostCommandExecution(commandResult);
             return commandResult;
         } catch (CommandException | ParseException e) {
             handleCommandError(e);
@@ -247,18 +253,13 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Handles actions to take after a command is executed, such as displaying help or closing the view.
      */
-    private void handlePostCommandExecution(CommandResult commandResult, String commandText, int indexToReview) {
-        if (indexToReview > 0) {
-            reviewClientAfterEdit(indexToReview);
-        } else if (commandResult.isShowClient()) {
+    private void handlePostCommandExecution(CommandResult commandResult) {
+        if (commandResult.isShowClient()) {
             handleViewCommand(commandResult);
-        } else if (commandResult.getFeedbackToUser().equals(CloseCommand.MESSAGE_SUCCESS)) {
-            handleCloseCommand();
         } else if (commandResult.isConfirmedDeletion() && currentlyViewedClient != null
                 && currentlyViewedClient.equals(commandResult.getDeletedClient())) {
             handleCloseCommand();
         }
-
         if (commandResult.isShowHelp()) {
             handleHelp();
         }
