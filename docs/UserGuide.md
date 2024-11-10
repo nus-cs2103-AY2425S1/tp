@@ -6,7 +6,7 @@ pageNav: 3
 
 # Bridal Boss User Guide
 
-Bridal Boss is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bridal Boss can get your contact management tasks done faster than traditional GUI apps.
+Bridal Boss is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bridal Boss can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,9 +17,9 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your application.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar BridalBoss.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -30,7 +30,7 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to BridalBoss.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -107,7 +107,7 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 #### Email Addresses
 
 - **Format**:
-    - Must be in the form `local-part@domain`.
+    - Must be in the form `local-part@domain.com`.
 - **Local-part**:
     - Can contain alphanumeric characters and `+`, `_`, `.`, `-`.
     - Cannot start or end with a special character.
