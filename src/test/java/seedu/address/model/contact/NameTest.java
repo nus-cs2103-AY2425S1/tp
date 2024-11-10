@@ -61,6 +61,9 @@ public class NameTest {
         // null -> returns false
         assertFalse(name.equals(null));
 
+        // null -> returns false
+        assertFalse(name.equalsIgnoreCase(null));
+
         // different types -> returns false
         assertFalse(name.equals(5.0f));
 

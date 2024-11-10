@@ -20,9 +20,12 @@ public class ContactBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TELEGRAM = "85355255";
+
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_STUDENT_STATUS = "Undergraduate 1";
+
     public static final String[] DEFAULT_ROLES = {"Admin"};
+
     public static final String DEFAULT_NICKNAME = "";
 
     private Name name;
@@ -104,6 +107,13 @@ public class ContactBuilder {
         return this;
     }
 
+    /**
+     * Builds and returns a new {@code Contact} instance using the current values set
+     * for name, telegramHandle, email, studentStatus, roles, and nickname.
+     *
+     * @return A new {@code Contact} object with the properties specified by
+     *         the current state of the builder.
+     */
     public Contact build() {
         return new Contact(name, telegramHandle, email, studentStatus, roles, nickname);
     }
