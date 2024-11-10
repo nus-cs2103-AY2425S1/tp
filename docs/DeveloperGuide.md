@@ -589,13 +589,6 @@ Duplicate names)
 
 ---
 
-## **Appendix: Planned Enhacements**
-
-Team member count: 5
-
-1. We are planning to create commands to directly add new assignment deatils to the `assignment.json` file instead of directly editing the `assignment.json` file.
-
-
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
