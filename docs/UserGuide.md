@@ -176,14 +176,6 @@ Unlinks an owner to one or more pets.
 
 Format: `unlink oOWNER_INDEX t/pPET_INDEX…​`
 
-<div markdown="span" class="alert alert-info">
-
-:exclamation: **Extra information:**<br>
-
-Unlinks owner at specified `OWNER_INDEX` to pet(s) at specified `PET_INDEX`s.
-
-</div>
-
 Examples:
 * `unlink o1 t/p1`
 * `unlink o2 t/p2 t/p3`
