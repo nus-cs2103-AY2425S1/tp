@@ -61,7 +61,7 @@ Welcome to **EZSTATE**! This guide will walk you through installing the app and 
    ![Ui](images/Ui.png)<br><br>
 
 ### Basic Commands
-To use **EZSTATE**, type commands in the command box and press Enter. Here are a few to try:
+To use **EZSTATE**, type commands in the command box and press `Enter`. Here are a few to try:
 
    * `help` : Opens the help window showing all commands.
 
@@ -81,7 +81,12 @@ Explore the Features section for a full list of commands and their uses.
 
 ### Command Structure
 
-In this section, we will explore the general format of commands in **EZSTATE**.
+In this section, we will explore the command structure in **EZSTATE** before delving into the **Features** section. 
+Understanding the command structure in **EZSTATE** is essential for efficient navigation and use of the app’s features. 
+Each command in **EZSTATE** is designed to follow a clear, consistent format, allowing you to manage clients, listings, and appointments with precision and speed. 
+By mastering this structure, you will find it easier to remember commands and customize inputs, making your experience smoother and enabling you to accomplish tasks more effectively. 
+
+This section breaks down the structure, reference, and prefixes used across all commands, so you can quickly become proficient with **EZSTATE**.
 
 Commands in **EZSTATE** follow the same structure:
 
@@ -122,21 +127,21 @@ The prefixes used in **EZSTATE** are universal across all commands <br> _(i.e. h
 </div>
 <br>
 
-| Prefix | Meaning | Location    | Constraints | Remarks                                                               | Example |
-|--------|---------|-------------|-------------|-----------------------------------------------------------------------|---------|
-| n/     | name    | Client      |             |                                                                       |         |
-| p/     | phone   | Client      |             |                                                                       |         |
-| e/     | email   | Client      |             |                                                                       |         |
-| t/     | tag     | Client      |             |                                                                       |         |
-| d/     | date    | Appointment |             |                                                                       |         |
-| fr/    | from    | Appointment |             |                                                                       |         |
-| to/    | to      | Appointment |             |                                                                       |         |
-| pr/    | price   | Listing     |             |                                                                       |         |
-| ar/    | area    | Listing     |             |                                                                       |         |
-| add/   | address | Listing     |             |                                                                       |         |
-| reg/   | region  | Listing     |             |                                                                       |         |
-| sell/  | seller  | Listing     |             |                                                                       |         |
-| buy/   | buyer   | Listing     |             | In addlistingbuyers, buy is used instead of buyer to refer to buyers. |         |
+| Prefix | Meaning | Location       | Constraints | Remarks                                                                                           | Example                                                                                 |
+|--------|---------|----------------|-------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| n/     | name    | Client/Listing |             | -                                                                                                 |                                                                                         |
+| p/     | phone   | Client         |             | -                                                                                                 |                                                                                         |
+| e/     | email   | Client         |             | -                                                                                                 |                                                                                         |
+| t/     | tag     | Client         |             | -                                                                                                 |                                                                                         |
+| d/     | date    | Appointment    |             | Unique to `apt` command.                                                                          |                                                                                         |
+| fr/    | from    | Appointment    |             | Unique to `apt` command.                                                                                                 |                                                                                         |
+| to/    | to      | Appointment    |             | Unique to `apt` command.                                                                                                |                                                                                         |
+| pr/    | price   | Listing        |             | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1                                                                                        |
+| ar/    | area    | Listing        |             | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1                                                                                        |
+| add/   | address | Listing        |             | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1                                                                                        |
+| reg/   | region  | Listing        |             | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1                                                                                        |
+| sell/  | seller  | Listing        |             | In `listing`, sell is used instead of seller to refer to the seller of the listing.               | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1 |
+| buy/   | buyer   | Listing        |             | In `addlistingbuyers` and `removelistingbuyers`, buy is used instead of buyer to refer to buyers. | addlistingbuyers 1 buy/Charlotte Oliveiro                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -942,12 +947,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com`
-**Clear** | `clear`
-**Delete** | `delete NAME`<br> e.g. `delete James Ho`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com` <br> e.g.`edit 2 n/James Voo`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+ Action     | Format, Examples                                                                                                                    
+------------|-------------------------------------------------------------------------------------------------------------------------------------
+ **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com`                                    
+ **Clear**  | `clear`                                                                                                                             
+ **Delete** | `delete NAME`<br> e.g. `delete James Ho`                                                                                            
+ **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com` <br> e.g.`edit 2 n/James Voo` 
+ **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                          
+ **List**   | `list`                                                                                                                              
+ **Help**   | `help`                                                                                                                              
