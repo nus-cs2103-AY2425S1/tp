@@ -183,9 +183,9 @@ On execution, `AddCommand` first queries the supplied model if it contains a stu
 
 Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
-Below is an activity diagram when [Adding a new student](#add-a-new-student)
+The following diagram summarizes how a user may add a student into UGTeach.
 
-<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
+<puml src="diagrams/UserAddCommandActivityDiagram.puml" alt="UserAddCommandActivityDiagram" width="600"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -853,4 +853,3 @@ testers are expected to do more *exploratory* testing.
     1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
        e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
-
