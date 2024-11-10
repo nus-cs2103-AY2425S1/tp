@@ -21,12 +21,12 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
     - [Viewing help : `help`](#viewing-help-help)
     - [Adding a person: `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons-list)
+    - [Adding a module to a person: `module`](#adding-a-module-to-a-person-module)
     - [Editing a person : `edit`](#editing-a-person-edit)
-    - [Grading a person : `grade`](#grading-a-person-grade)
-    - [Listing students by certain attributes : `filter`](#listing-students-by-certain-attributes-filter)
-    - [Adding a module to a student: `module`](#adding-a-module-to-a-student-module)
-    - [Deleting a person : `delete`](#deleting-a-person-delete)
-    - [Finding a person: `find`](#finding-a-person--find)
+    - [Adding a grade : `grade`](#adding-a-grade-grade)
+    - [Listing persons by certain attributes : `filter`](#listing-persons-by-certain-attributes-filter)
+    - [Deleting a person/module : `delete`](#deleting-a-person-module-delete)
+    - [Finding a person: `find`](#finding-a-person-find)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
 4. [FAQ](#faq)
@@ -254,7 +254,7 @@ Examples:
 
 <br>
 
-### Listing person by certain attributes : `filter`
+### Listing persons by certain attributes : `filter`
 
 Filters person contacts based on their names, courses and modules.
 

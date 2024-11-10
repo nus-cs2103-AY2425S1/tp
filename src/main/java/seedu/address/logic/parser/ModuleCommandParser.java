@@ -24,13 +24,14 @@ public class ModuleCommandParser implements Parser<ModuleCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE);
         String preamble = argMultimap.getPreamble();
+        argMultimap.verifyNoDuplicateStudentId(args);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE) || preamble.isEmpty()
+                || ParserUtil.hasWhitespace(preamble)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE);
-        argMultimap.verifyNoDuplicateStudentId(args);
         StudentId studentId = ParserUtil.parseStudentId(preamble);
         Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
 

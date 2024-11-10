@@ -1,10 +1,14 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.MODULE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.StudentId;
@@ -53,5 +57,23 @@ public class DeleteCommandParserTest {
     public void parse_invalidModuleFormat_throwsParseException() {
         String input = "12345678 m/ Invalid_Module!";
         assertParseFailure(parser, input, Module.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_multipleStudentIds_throwsParseException() {
+        String input = STUDENTID_DESC_BOB + STUDENTID_DESC_BOB + MODULE_DESC_BOB;
+        assertParseFailure(parser, input, Messages.getErrorMessageForDuplicateID());
+    }
+
+    @Test
+    public void parse_missingStudentId_throwsParseException() {
+        String input = MODULE_DESC_BOB;
+        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_extraneousInput_throwsParseException() {
+        String input = DeleteCommand.COMMAND_WORD + STUDENTID_DESC_BOB + MODULE_DESC_BOB;
+        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
