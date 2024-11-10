@@ -38,12 +38,12 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
    1. If you followed step 3i, type `cd Downloads` in the terminal window to navigate to the Downloads folder.
    1. Alternatively, you may navigate to the folder using File Explorer, then right click it and select `Open in Terminal`
 1. A GUI similar to the below should appear in a few seconds. Starting the F.A.R.T. book for the first time will automatically load some sample data.<br>
-   ![Ui](images/newUi.png)
+   ![Ui](images/newUi.png) Do note that for the best experience, we recommend using F.A.R.T. in _full-screen mode_.
 
 1. The F.A.R.T. book is divided into four main sections. Referencing the above:
 
    1. The `Client List`, highlighted by the purple box. This shows you a simple list of all clients that have been added to the book.
-   1. The `Detailed View`, highlighted by the orange box. This shows you a detailed view of one client when you select it from the `Client List` by double-clicking on the appropriate client.
+   1. The `Detailed View`, highlighted by the orange box. This shows you a detailed view of one client when you select it from the `Client List` by double-clicking or pressing `Enter` on the appropriate client.
    1. The `Command Input Window`, highlighted by the green box. This is where you input commands to interact with the F.A.R.T. book. Do so by selecting the `Command Input Window` and typing the relevant command. Press `Enter` to execute it.
    1. The `Response Window`, highlighted by the blue box. Once a command is inputted, this is where the F.A.R.T. book informs you of the result of your command.
 1. Some example commands you can try:
@@ -70,7 +70,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets `[]` are optional.<br>
   e.g. `n/NAME [a/ADDRESS] [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -133,7 +133,7 @@ For all parts of the input that accept special characters, they cannot be placed
 #### Tag(s)
 
 Aside from normal tags, F.A.R.T. also provides specialised tags. For more information, refer to the [Visual Features](#visual-features) below.
-* Valid inputs: Alphanumeric characters. To include multiple tags, repeat the `t/` label e.g. `t/ friend`, `t/ colleague t/ neighbour`
+* Valid inputs: Alphanumeric characters. To include multiple tags, repeat the `t/` label e.g. `t/friend`, `t/colleague t/neighbour`
 * Invalid inputs:
   * Dropping of the `t/` label e.g. `t/colleague neighbour`
   * Non-alphanumeric characters e.g. `t/#1friend`
@@ -152,10 +152,10 @@ Format: `help`
 
 ### Viewing a client's details
 * When the app starts, a placeholder on the right panel will prompt you to select a client on the list.
-* **Double-click** on a client in the client list to bring up a more detailed view of the client, including information like address and birthday. This will bring up something similar to the below.
+* You may use your arrow keys to traverse the client list, then **double-click** or **press `Enter`** on a client in the client list to bring up a more detailed view of the client, including information like address and birthday. This will bring up something similar to the below.
 ![detailedView.png](images/detailedView.png)
 * The detailed view can be broken down into three main sections:
-  * The client's profile picture, highlighted by the purple box. This can be updated via the `upload` command.
+  * The client's profile picture, highlighted by the purple box. A default profile picture is given to all clients. This can be updated via the `upload` command.
   * The client's details, highlighted by the orange box. This can be updated by various commands, including `edit`, `paid,` `unpaid`.
   * Three template messages, highlighted by the green boxes. These are predetermined messages that have been categorised by the different life phases that a client could be in. Clicking on one of the buttons will copy the relevant message to your clipboard, allowing you to quickly send a message to your client via your preferred messaging app. The message will automatically use the **name provided in the F.A.R.T. book**. A successful copy will result in `Template Message copied to clipboard!` being shown in the `Response Window`.
 
@@ -210,6 +210,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [b/BIRTHDAY] [a/ADDRESS]
 * When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
 * You can **remove all** the client’s tags by typing `t/` without specifying any tags after it.
 * Similarly, a client's address can be removed by typing `a/` without specifying anything after it.
+* If you edit a client's name to be the same of that of another client in the F.A.R.T. book, a prompt will appear asking you to confirm the edit action. 
+If you select `No` in the prompt window, the operation will be aborted and the name will not be changed. Else, select `Yes` to proceed with the edit.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
@@ -252,6 +254,7 @@ Examples:
 **Note:**
 1. A `delete` command cannot be undone, and deleted clients cannot be retrieved.
 1. When a `delete` command is inputted, the F.A.R.T Book will first prompt you to confirm if the client that you want to delete is correct. If you select `No`, the operation will be aborted and the client will not be deleted. Else, select `Yes` to delete the client.
+You may use your arrow keys and `Enter` to traverse the `Yes` and `No` options.
 ![Delete confirmation window](images/deletewindow.png)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -386,8 +389,9 @@ If your changes to the data file makes its format invalid, F.A.R.T will discard 
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-1. **If you are unable to see the command input or result panels**, resize the window to a larger size by hovering over the window outline on your screen. A two-sided arrow should appear, which you can click and drag to resize to an appropriate size. This issue may be especially prevalent on smaller monitor sizes.
+1. **If you are unable to see the command input or result panels**, resize the window to a larger size by hovering over the window outline on your screen. A two-sided arrow should appear, which you can click and drag to resize to an appropriate size. This issue may be especially prevalent on smaller monitor sizes. We recommend using F.A.R.T. in full-screen mode.
 1. As mentioned in the Viewing a client's details section, a client's detailed view **does not automatically update to reflect changes**. Once changes are made, double-click on the same client to refresh said changes. Else, the changes will be updated upon restarting the F.A.R.T. book.
+2. If you are using arrow keys to navigate the client list, then enter a command in the command box, you need to move your cursor back to the client list to select it again. 
 
 --------------------------------------------------------------------------------------------------------------------
 
