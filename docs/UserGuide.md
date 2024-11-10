@@ -60,10 +60,6 @@ Highlights important information that you should know.
 Provides you with tips to use our system more effectively.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can search for relevant info in the user guide by typing <code>Ctrl + F</code> for Windows and Linux computers and <code>⌘ + F</code> for Mac.
-</div>
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -84,6 +80,10 @@ You can search for relevant info in the user guide by typing <code>Ctrl + F</cod
   e.g. if the command specifies `home 123`, it will be interpreted as `home`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can search for relevant info in the user guide by typing <code>Ctrl + F</code> for Windows and Linux computers and <code>⌘ + F</code> for Mac.
 </div>
 
 ### Viewing help : `help`
