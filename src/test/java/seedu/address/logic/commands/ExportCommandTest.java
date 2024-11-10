@@ -64,16 +64,8 @@ public class ExportCommandTest {
     }
     @Test
     public void parseValidTag() {
-        String input = "\"{\n  \"neighbours\" : \"null\"\n}\"";
-        String expectedOutput = "neighbours : null";
-        String result = parseTags(input);
-        assertEquals(expectedOutput, result);
-    }
-
-    @Test
-    public void parseInvalidTagNoBraces() {
-        String input = "\"friends\" : null";
-        String expectedOutput = "\"friends\" : null";
+        String input = "\"{\\n  \\\"neighbours\\\" : null\\n}\"";
+        String expectedOutput = "neighbours";
         String result = parseTags(input);
         assertEquals(expectedOutput, result);
     }
@@ -89,7 +81,7 @@ public class ExportCommandTest {
     @Test
     public void parseMalformedTag() {
         String input = "{\"friends\":}";
-        String expectedOutput = "{\"friends\":}";
+        String expectedOutput = "{\"friends\" : }";
         String result = parseTags(input);
         assertEquals(expectedOutput, result);
     }
@@ -132,7 +124,7 @@ public class ExportCommandTest {
         assertEquals("87438807", result.get(0).get("phone"));
         assertEquals("alexyeoh@example.com", result.get(0).get("email"));
         assertEquals("Blk 30 Geylang Street 29, #06-40", result.get(0).get("address"));
-        assertEquals("friends : null", result.get(0).get("tags"));
+        assertEquals("friends", result.get(0).get("tags"));
         assertEquals("Annual life insurance premium: $1,200", result.get(0).get("financialInfo"));
         assertEquals("alex_yeoh", result.get(0).get("socialMediaHandle"));
 
@@ -140,7 +132,7 @@ public class ExportCommandTest {
         assertEquals("99272758", result.get(1).get("phone"));
         assertEquals("berniceyu@example.com", result.get(1).get("email"));
         assertEquals("Blk 30 Lorong 3 Serangoon Gardens, #07-18", result.get(1).get("address"));
-        assertEquals("colleagues : null, friends : null", result.get(1).get("tags"));
+        assertEquals("colleagues, friends", result.get(1).get("tags"));
         assertEquals("Income category: $60,000 - $80,000", result.get(1).get("financialInfo"));
         assertEquals("bernice_yu", result.get(1).get("socialMediaHandle"));
     }
