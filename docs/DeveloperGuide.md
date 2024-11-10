@@ -682,14 +682,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a unique customer with all parameters specified.
 
-    1. Prerequisites: Customer with name `John Doe` or other similar name does not already exist in the address book.
+    1. Prerequisites: Customer with name `John Doe` or other similar names does not already exist in the address book.
 
     2. Test case: `addcustomer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`<br>
        Expected: The customer is successfully added. Details of the added customer shown in the status message.
 
-2. Adding a unique customer with all parameters specified using command aliases.
+2. Adding a unique customer with all parameters specified using the command alias.
 
-    1. Prerequisites: Customer with name `Betsy Crowe` or other similar name does not already exist in the address book.
+    1. Prerequisites: Customer with name `Betsy Crowe` or other similar names does not already exist in the address book.
    
     2. Test case: `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` <br>
        Expected: The customer is successfully added. Details of the added customer shown in the status message.
@@ -710,14 +710,14 @@ testers are expected to do more *exploratory* testing.
 
 5. Adding a customer with duplicate tags.
 
-    1. Prerequisites: Customer with name `Yu Sutong` or other similar name does not already exist in the address book.
+    1. Prerequisites: Customer with name `Yu Sutong` or other similar names does not already exist in the address book.
 
     2. Test case: `addcustomer n/Yu Sutong t/vvip t/vvip e/su@example.com a/Newgate Prison p/12345678` <br>
        Expected: The customer is successfully added with one of the duplicated tags ignored. Details of the added customer shown in the status message.
 
 6. Adding a customer with [similar tags](#similar).
 
-    1. Prerequisites: Customer with name `Foo Chao` or other similar name does not already exist in the address book.
+    1. Prerequisites: Customer with name `Foo Chao` or other similar names does not already exist in the address book.
 
     2. Test case: `addcustomer n/Foo Chao t/VVIP t/vvip e/su@example.com a/69, Sembawang Road. #01-01  p/12345678` <br>
        Expected: The customer is successfully added with both similar tags accepted. A warning and details of the added customer shown in the status message.
@@ -751,7 +751,7 @@ testers are expected to do more *exploratory* testing.
        - All customers with 'bernice' in their names are listed. A success message shown in the status message.
        - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
        
-2. Finding customers with multiple keywords using command aliases.
+2. Finding customers with multiple keywords using the command alias.
 
     1. Test case: `findc alex david` <br>
        Expected:
@@ -767,7 +767,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editcustomer 1 p/91234567 e/johndoe@example.com` <br>
        Expected: The customer is successfully edited. Details of the edited customer shown in the status message.
 
-2. Editing a customer in a filtered list using command aliases.
+2. Editing a customer in a filtered list using the command alias.
 
     1. Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
        Example: `findcustomer john`
@@ -785,7 +785,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
 
-4. Editing a customer to a [name similar to an existing customer](#similar).
+4. Editing a customer to have a [name similar to an existing customer](#similar).
 
     1. Prerequisites:
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
@@ -830,7 +830,7 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect `deletecustomer` commands to try: `deletecustomer`, `deletecustomer x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. Deleting a customer from a filtered customer list using command aliases.
+2. Deleting a customer from a filtered customer list using the command alias.
 
     1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
        Example: `findcustomer john`
@@ -849,12 +849,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least 1 customer is displayed in the customer list.
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
-        - No order similar to the order to be added under the first customer.
+        - There are no orders similar to the order to be added under the first customer.
 
     2. Test case: `addorder 1 i/Lamp d/20-11-2024 q/3`<br>
        Expected: The order is successfully added. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
 
-2. Adding a unique order with optional field omitted using command aliases when the customer list is filtered.
+2. Adding a unique order with optional field omitted using the command alias when the customer list is filtered.
 
     1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
        Example: `findcustomer bernice`
@@ -913,7 +913,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `filterorder pending` <br>
        Expected: Only pending orders remain in the order list. A success message shown in the status message.
 
-2. Filtering order list to display all `completed` orders. using command aliases.
+2. Filtering order list to display all `completed` orders. using the command alias.
     1. Prerequisites:
         - All orders under a customer are listed using the `listorder` command with at least 1 order listed.
         - Example `listorder 1`.
@@ -931,7 +931,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editorder 1 i/Light bulb d/21-11-2025` <br>
        Expected: The order is successfully edited. Details of the edited order shown in the status message.
 
-2. Editing an order in a filtered order list using command aliases.
+2. Editing an order in a filtered order list using the command alias.
 
     1. Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed. <br>
        Example: `filterorder pending`
@@ -972,9 +972,9 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect `deleteorder` commands to try: `deleteorder`, `deleteorder x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. Deleting an order from a filtered list using command aliases.
+2. Deleting an order from a filtered list using the command alias.
 
-    1. Prerequisites: Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed. <br>
+    1. Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed. <br>
        Example: `filterorder pending`
 
     2. Test case: `deleteo 1`<br>
@@ -989,7 +989,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
        - List all customers using the `listorder 1` command with at least 1 order listed.
-       - The first order's status is not `completed`.
+       - The first order's status is not `Completed`.
 
     2. Test case: `markorder 1`<br>
        Expected: First order is marked as completed. Details of the marked order shown in the status message.
@@ -1000,13 +1000,13 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect `markorder` commands to try: `markorder`, `markorder x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. Marking an order from a filtered list as completed using command aliases.
+2. Marking an order from a filtered list as completed using the command alias.
 
    1. Prerequisites:
-       - Prerequisites: Orders filtered using `filterorder pending` command with at least 1 order listed. <br>
+       - Orders filtered using `filterorder pending` command with at least 1 order listed. <br>
 
    2. Test case: `marko 1`<br>
-      Expected: First order is marked as completed. Details of the marked order shown in the status message. The marked order will disappear from the filtered order list as it is no longer `pending`.
+      Expected: First order is marked as completed. Details of the marked order shown in the status message. The marked order will disappear from the filtered order list as it is no longer `Pending`.
 
    3. Test case: `marko 0`<br>
       Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
@@ -1014,8 +1014,8 @@ testers are expected to do more *exploratory* testing.
 3. Marking an already completed order as completed.
 
     1. Prerequisites:
-        - Prerequisites: At least 1 order listed. <br>
-        - The first order's status is `completed`.
+        - At least 1 order listed. <br>
+        - The first order's status is `Completed`.
 
     2. Test case: `marko 1`<br>
        Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
@@ -1026,7 +1026,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
         - List all customers using the `listorder 1` command with at least 1 order listed.
-        - The first order's status is not `pending`.
+        - The first order's status is not `Pending`.
 
     2. Test case: `unmarkorder 1`<br>
        Expected: First order is reverted to pending status. Details of the unmarked order shown in the status message.
@@ -1051,8 +1051,8 @@ testers are expected to do more *exploratory* testing.
 3. Reverting an order which is already pending to pending.
 
     1. Prerequisites:
-        - Prerequisites: At least 1 order listed. <br>
-        - The first order's status is `pending`.
+        - At least 1 order listed. <br>
+        - The first order's status is `Pending`.
 
     2. Test case: `unmarko 1`<br>
        Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
@@ -1063,11 +1063,11 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `addresbook.json` file in the `data` folder.
 
-    2. Test case: Delete the `addresbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
-       Expected: SellSavvy should create a new `addresbook.json` file with default data.
+    2. Test case: Delete the `addressbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
+       Expected: SellSavvy should create a new `addressbook.json` file with default data.
 
-    3. Test case: Delete the `data` folder together with the `addresbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
-       Expected: SellSavvy should create a new `data` folder and a new `addresbook.json` file inside the folder with default data.
+    3. Test case: Delete the `data` folder together with the `addressbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
+       Expected: SellSavvy should create a new `data` folder and a new `addressbook.json` file inside the folder with default data.
 
     4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g., add a non-numeric character to one of the customer's phone number. Then, run SellSavvy and exit using the `exit` command.<br>
        Expected: SellSavvy should discard all data in the file and start with an `addressbook.json` file with an empty person list.
