@@ -100,8 +100,8 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 | [**Add New Members to Group**](#adding-new-members-to-an-existing-group--addtogroup)                | `addToGroup g/GROUP_NAME m/[INDICES]`             | `addToGroup g/beach cleanup m/1 2 3-6`         |
 | [**Remove Existing Members from Group**](#removing-members-from-an-existing-group--removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`        | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
 | [**Edit Group Name**](#editing-a-groups-name--editgroupname)                                        | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME` | `editGroupName g/blood drive g/blood donation` |
-| [**Delete Group**](#deleting-a-group-deletegroup)                                                   | `deleteGroup g/GROUP_NAME`                        | `deleteGroup g/blood donation`                 |
 | [**List Groups**](#listing-groups-listgroups)                                                       | `listGroups`                                      | `listGroups`                                   |
+| [**Delete Group**](#deleting-a-group-deletegroup)                                                   | `deleteGroup g/GROUP_NAME`                        | `deleteGroup g/blood donation`                 |
 
 ### General Commands
 | **Action**                                         | **Format** | **Example** |
@@ -227,13 +227,14 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 </box>
 
 Examples: <br>
-1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role`: donor `group`: blood drive<br>
-2. **Person B:** `name`: Alex Yeoh `tag`: friends `phone number`: 91234567 `role`: volunteer <br>
-3. **Person C:** `name`: David Li `tag`: friends `phone number`: 81234123 `role`: person `group`: blood drive
-* `search n/john` returns persons with the name `john` like `John Doe`
-* `search g/blood drive` returns all persons in group `blood drive` like `John Doe` and `David Li`
-* `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
-  ![result for 'search alex david'](images/search_alex_david.png)
+1. **Person A:** `name`: Alex Yeoh `tag`: friends `phone number`: 87438807 `role`: person <br>
+2. **Person B:** `name`: Irfan Ibrahim  `tag`: classmates `phone number`: 92492021 `role`: person <br>
+3. **Person C:** `name`: Charlotte Oliveiro `tag`: neighbours `phone number`: 93210283 `role`: person
+* `search n/alex` returns persons with the name `alex` like `Alex Yeoh`.
+* `search r/person` returns all contacts with role `Person` like `Alex Yeoh`, `Irfan Ibrahim` and `Charlotte Oliveiro`.
+* `search n/charlotte t/neighbours p/93210283` returns all persons with name matching `charlotte`, tag matching `neighbours`, `phone number` 93210283 like `Charlotte Oliveiro`. <br>
+
+![result for 'search charlotte'](images/search_charlotte.png)
 
 ### Listing all persons : `list`
 
@@ -324,7 +325,6 @@ Example:
 **Tip:** For ease of use, first list out the people in the group using the `search` command, then remove persons using this command.
 </box>
 
-
 ### Editing a group's name : `editGroupName`
 
 Edits the name of a group that currently exists.
@@ -339,18 +339,6 @@ Example:
 * `editGroupName g/blood drive 2024 g/charity run` renames an existing group called
   `blood drive 2024` into `charity run`.
 
-### Deleting a group: `deleteGroup`
-
-Deletes a group.
-
-Format: `deleteGroup g/GROUP_NAME`
-
-* Deletes group named `GROUP_NAME`
-* Group named `GROUP_NAME` must exist.
-
-Example:
-* `deleteGroup g/blood drive 2024`
-
 ### Listing groups: `listGroups`
 Shows a list of all existing groups.
 
@@ -362,9 +350,21 @@ Format: `listGroups`
 <box type="tip" seamless>
 
 **Tip:** To view all members of a group with more than 3 people, use `search g/GROUP_NAME`.
-</box> 
+</box>
 
 ![result for 'list groups'](images/list-groups.png)
+
+### Deleting a group: `deleteGroup`
+
+Deletes a group.
+
+Format: `deleteGroup g/GROUP_NAME`
+
+* Deletes group named `GROUP_NAME`
+* Group named `GROUP_NAME` must exist.
+
+Example:
+* `deleteGroup g/blood drive 2024`
 
 ### Viewing help : `help`
 
