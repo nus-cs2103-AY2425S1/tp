@@ -697,3 +697,46 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+This section documents the involved effort to evolve AB3 into SellSavvy.
+
+### Creating `Order` class and handling
+
+At this point, AB3 `Person` is refactored into `Customer`.
+
+Order handling involved:
+* Augmenting `Customer` into `Order` class and existing commands to handle `Order`.
+  * E.g. `AddCustomerCommand` into `AddOrderCommand`.
+* Augmenting `UniqueCustomerList` into `OrderList` class and existing methods to handle `OrderList`.
+  * Updating parameter handling for orders.
+* Enhance UI and Storage functionality to support `Order` and `OrderList`.
+
+This was time and effort intensive as:
+* Orders are handled differently from Person because identical orders should be allowed.
+* Orders requires additional levels of similarity checks.
+* Further enhancements for order management by parameters is stated below.
+
+### Implementing `Order` parameters for order management
+
+This involved:
+* Creating parameters necessary for managing orders, namely `Item`, `Date`, `Quantity` and `Status`.
+* Integrating parameters with order commands.
+
+This was challenging as:
+* `Date` involves additional checks to contextualise delivery dates to order management.
+* Updating the command parsers to correctly handle order parameters.
+* Deliberating `Status` limitations to manage order delivery completion.
+
+### Implementing `filterOrder` command
+
+This involved:
+* Creating predicate class to support filtering by order `Status`.
+* Enhancing model to support filtering for displayed order list.
+
+This was challenging as:
+* Interpreting expected filter of displayed list after commands such as `listOrder` and `addOrder`.
+
