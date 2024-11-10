@@ -507,9 +507,19 @@ We aim to bring even more flexibility for the phone numbers of contacts by allow
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: To safely transfer your data, install the app in the other computer. Use the `backup` command on your original computer and transfer the `addressbook.json` file at `[JAR file location]/backup`
 to `[JAR file location]/data` in your new computer.
+
+**Q**: What should I do if I cannot start up the application?<br>
+**A**: We advise you to download the latest release of our app [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases).<br>
+Note that the contacts saved in the previous application needs to be manually transferred to this new application.
+For instructions on how to transfer data, please view the FAQ about `How do I transfer my data to another computer?` above.
+
+**Q**: I have manually updated the data file to add more contacts. However, after starting up the application, I do not see any contacts. What should I do?<br>
+**A**: We advise users to view the warnings listed under [Editing the data file](#editing-the-data-file).
+Users are advised to ensure that all fields of each contact are compliant with the corresponding constraints.
+Please refer to the [Arguments Constraints Summary](#argument-constraints-summary) table for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
