@@ -308,6 +308,13 @@ Clears all entries from CampusConnect.
 
 Format: `clear`
 
+<box type="warning" seamless>
+<strong>Caution:</strong>
+There will not be any confirmation message shown. </br>
+
+If you have unintentionally executed the `clear` command, you can use the [`undo`](#undo-a-command-undo) command to restore your data.
+</box>
+
 ### Exiting the program : `exit`
 
 Exits the program.
