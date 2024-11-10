@@ -9,7 +9,7 @@ pageNav: 3
 
 <box type="info" seamless>
 DLTbook is a desktop application that helps you manage your contacts and their Distributed Ledger Technology (DLT) public addresses. It combines an easy-to-use interface with powerful command-line features, making it perfect for both beginners and advanced users.
-
+To prevent manipulation of the data stored in this application, it is recommended that the device this software is installed to is not connected to the internet at all times as hackers can manipulate the data stored in this application.
 
 
 </box>
