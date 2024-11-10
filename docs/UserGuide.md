@@ -554,13 +554,13 @@ Should follow the specifications given below:
     </tr>
     <tr>
       <td style="text-align:center;">15</td>
-      <td style="text-align:center;">Next-of-Kin Phone</td>
+      <td style="text-align:center;">Next-of-Kin Phone Number</td>
       <td style="text-align:center;">nokp|</td>
       <td>Should only contain numbers. Should be at least 3 digits long.</td>
     </tr>
     <tr>
       <td style="text-align:center;">16</td>
-      <td style="text-align:center;">Phone</td>
+      <td style="text-align:center;">Phone Number</td>
       <td style="text-align:center;">p|</td>
       <td>Should only contain numbers. Should be at least 3 digits long.</td>
     </tr>
