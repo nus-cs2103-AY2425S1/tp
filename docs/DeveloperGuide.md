@@ -978,6 +978,33 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
        Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed.
        The application status of the company is changed to `CLOSED`. A message containing the details of the removed application is displayed in the results box.
 
+### Viewing full application details of a company
+
+1. View the full application details of a company
+
+   1. Requisites: The company corresponding to `INDEX` has at least one application.
+
+   1. Test case: `view INDEX` <br>
+      Expected: Only the selected company is shown in the company list. The `DESCRIPTION` of all the applications for the 
+      selected company are fully visible. A message displaying the name of the company to view is shown.
+   
+   1. Try invalid fields: `view`, `view 0`, `view x`, `...` (where `x` is larger than the list size) <br>
+      Expected: No application details of any companies are shown, company list remains unchanged. An error message with details should be displayed in the results box.
+
+### Reopening a company
+
+1. Reopen a company that has a status of `CLOSED`
+
+   1. Prerequisites: The company corresponding to `INDEX` has a status of `CLOSED`.
+
+   1. Test case: `reopen INDEX` <br>
+      Expected: The company corresponding to `INDEX` status changes from `CLOSED` to `INTERESTED`. A message displaying the 
+      reopened company is displayed in the results box.
+
+   1. Try invalid fields: `reopen`, `reopen INVALID_INDEX`, `reopen x`, `reopen y`, `...` (where `x` is larger than the list size and `y` is an index corresponding to company that is not `CLOSED`) <br>
+      Expected: No company is reopened. An error message with details should be displayed in the results box.
+
+
 ### Saving data
 
 <box type="info" seamless>
