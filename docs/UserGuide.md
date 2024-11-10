@@ -959,7 +959,7 @@ EZSTATE data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file:<br> `[JAR file location]/data/addressbook.json`.<br>Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file:<br><br> `[JAR file location]/data/addressbook.json`<br><br>**Advanced users** are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert">
 **Caution:**
