@@ -7,7 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -54,6 +56,15 @@ public class EditPersonDescriptorTest {
 
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different next of kin -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNextOfKin(VALID_NEXT_OF_KIN_CHRIS).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different emergency contact -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmergencyContact(VALID_EMERGENCY_CONTACT_CHRIS)
+                .build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 

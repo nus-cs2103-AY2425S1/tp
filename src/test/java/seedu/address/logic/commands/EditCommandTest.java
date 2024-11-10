@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -14,6 +16,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalPersons.STUDENT_BENSON;
+import static seedu.address.testutil.TypicalPersons.TEACHER_ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +32,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -83,6 +88,50 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_studentFieldsSpecifiedForTeacher_success() {
+        showPersonAtIndex(model, Index.fromZeroBased(model.getFilteredPersonList().indexOf(TEACHER_ALICE)));
+
+        Person teacher = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        // Teacher should remain the same after edit
+        PersonBuilder teacherInList = new PersonBuilder(teacher);
+        Person editedTeacher = teacherInList.build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withNextOfKin(VALID_NEXT_OF_KIN_CHRIS)
+                .withEmergencyContact(VALID_EMERGENCY_CONTACT_CHRIS).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedTeacher));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(teacher, editedTeacher);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_studentFieldsSpecifiedForStudent_success() {
+        showPersonAtIndex(model, Index.fromZeroBased(model.getFilteredPersonList().indexOf(STUDENT_BENSON)));
+
+        Person student = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        StudentBuilder studentInList = new StudentBuilder(STUDENT_BENSON);
+        Person editedStudent = studentInList.withNextOfKin(VALID_NEXT_OF_KIN_CHRIS)
+                .withEmergencyContact(VALID_EMERGENCY_CONTACT_CHRIS).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withNextOfKin(VALID_NEXT_OF_KIN_CHRIS)
+                .withEmergencyContact(VALID_EMERGENCY_CONTACT_CHRIS).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(student, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

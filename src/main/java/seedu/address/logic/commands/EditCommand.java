@@ -313,7 +313,9 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(subjects, otherEditPersonDescriptor.subjects)
-                    && Objects.equals(classes, otherEditPersonDescriptor.classes);
+                    && Objects.equals(classes, otherEditPersonDescriptor.classes)
+                    && Objects.equals(nextOfKin, otherEditPersonDescriptor.nextOfKin)
+                    && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact);
         }
 
         @Override
