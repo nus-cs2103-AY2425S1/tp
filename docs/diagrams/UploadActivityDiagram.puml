@@ -13,9 +13,9 @@ if () then ([user is running Windows])
     :User chooses a file;
         if () then ([valid png file])
         :Store absolute file path
-        as a ProfilePicFilePath;
-        :Create new person
-        with updated path;
+        to user's chosen image;
+        :Updates person's image
+        in the application;
         else ([else])
         :Notify user of error;
         endif

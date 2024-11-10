@@ -87,17 +87,19 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Validation Rules
+## Accepted formats for parameters
 
 Do note these rules when attempting to interact with the various commands below. Inputs that do not follow the rules will not be accepted by the F.A.R.T. address book and the inputted data will not be added to the client list. Note that for all commands, spaces at the start of any input will be cut off e.g. inputting `n/        John Doe`will result in F.A.R.T. reading it as `n/John Doe`.
 
 ### Name
+
 * Valid inputs: Alphanumeric characters, with or without spaces e.g. `Martin`, `Martin Luther King`, `John`, `J0hn`
 * Common invalid inputs:
   * The slash character `/`, e.g. `S/O`
   * The period character `.`, e.g. `Jr.`
 
 ### Phone Number
+
 * Valid inputs: Numerical characters starting with either 3, 6, 8 or 9 (Singaporean numbers). The input must be exactly 8 characters long e.g. `91234567`, `81234567`
 * Common invalid inputs:
   * A non-Singaporean phone number e.g. `51234567`
@@ -173,7 +175,7 @@ Met a potential client or someone new? This command adds a client to the F.A.R.T
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL b/BIRTHDAY [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can have any number of tags (including 0) but only maximum of 1 address
+A client can have any number of tags (including 0) but only maximum of 1 address!
 </div>
 
 Examples:
@@ -183,8 +185,8 @@ Examples:
 
 **Note:**
 1. As mentioned in the Validation Rules, only valid email addresses (in the form `local-part@domain`) and **Singapore** phone numbers are accepted.
-1. Birthdays should be added in DD MM YYYY format.
-1. You may add duplicate clients (i.e., clients with the same name, case-insensitive) but the F.A.R.T book will prompt you to confirm that you are adding a duplicate client. If you select `No` in the prompt window, the operation will be aborted and the client will not be added. Else, select `Yes` to add the new client.
+2. Birthdays should be added in DD MM YYYY format.
+3. You may add duplicate clients (i.e., clients with the same name, case-insensitive) but the F.A.R.T book will prompt you to confirm that you are adding a duplicate client. If you select `No` in the prompt window, the operation will be aborted and the client will not be added. Else, select `Yes` to add the new client.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -228,10 +230,17 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [b/BIRTHDAY] [a/ADDRESS] [t/TA
 * Keywords are matched against the attribute that you specified (i.e. searching for names will match against all names).
 * Partial matches of a keyword will also be returned. e.g. ``9123`` will return clients with the phone number ``91234567``.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+When searching with more than one attribute, it will find clients who satisfies ALL keywords. e.g. ``find n/Alice a/Clementi`` will return
+clients named Alice **AND** has an address in Clementi.
+</div>
+
 Examples:
 * `find n/John` returns clients with **names** `john` and `John Doe`.
 * `find a/serangoon` returns ``Bernice Yu``, ``David Li``.
 ![result for 'find serangoon'](images/findSerangoonResult.png)
+* `find n/bernice a/serangoon` returns ``Bernice Yu``
+![result for `find n/bernice a/serangoon](images/findbernicefindserangoonResult.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -326,7 +335,7 @@ Format: `upload INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive whole number** 1, 2, 3, …​
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br>
 
 * This feature is for Windows users only. Mac and Linux users may encounter errors if they use this feature. Support for the other OSes will be released in future versions!
 * The profile picture may look weird if the image chosen is extremely small, too wide or too thin. For best results, we recommend square images approximately 300px x 300px. You can achieve this by cropping with your computer's image editor or an online one like this one from [Adobe](https://www.adobe.com/express/feature/image/crop).
@@ -382,10 +391,10 @@ If your changes to the data file makes its format invalid, F.A.R.T will discard 
 ## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-1. **If you are unable to see the command input or result panels**, resize the window to a larger size by hovering over the window outline on your screen. A two-sided arrow should appear, which you can click and drag to resize to an appropriate size. This issue may be especially prevalent on smaller monitor sizes. We recommend using F.A.R.T. in full-screen mode.
-1. As mentioned in the Viewing a client's details section, a client's detailed view **does not automatically update to reflect changes**. Once changes are made, double-click on the same client to refresh said changes. Else, the changes will be updated upon restarting the F.A.R.T. book.
-2. If you are using arrow keys to navigate the client list, then enter a command in the command box, you need to move your cursor back to the client list to select it again. 
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you are unable to see the command input or result panels**, resize the window to a larger size by hovering over the window outline on your screen. A two-sided arrow should appear, which you can click and drag to resize to an appropriate size. This issue may be especially prevalent on smaller monitor sizes. We recommend using F.A.R.T. in full-screen mode.
+4. As mentioned in the Viewing a client's details section, a client's detailed view **does not automatically update to reflect changes**. Once changes are made, double-click on the same client to refresh said changes. Else, the changes will be updated upon restarting the F.A.R.T. book.
+5. If you are using arrow keys to navigate the client list, then enter a command in the command box, you need to move your cursor back to the client list to select it again. 
 
 --------------------------------------------------------------------------------------------------------------------
 

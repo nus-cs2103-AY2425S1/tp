@@ -9,7 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -31,7 +33,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_BIRTHDAY, PREFIX_TAG);
 
-        Map<String, String> searchCriteria = new HashMap<>();
+        Map<String, Object> searchCriteria = new HashMap<>();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             searchCriteria.put("name", argMultimap.getValue(PREFIX_NAME).get());
@@ -48,8 +50,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_BIRTHDAY).isPresent()) {
             searchCriteria.put("birthday", argMultimap.getValue(PREFIX_BIRTHDAY).get());
         }
-        if (argMultimap.getAllValues(PREFIX_TAG).size() > 0) {
-            searchCriteria.put("tag", String.join(" ", argMultimap.getAllValues(PREFIX_TAG)));
+        if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
+            List<String> tags = argMultimap.getAllValues(PREFIX_TAG)
+                    .stream()
+                    .map(String::toLowerCase)
+                    .collect(Collectors.toList());
+            searchCriteria.put("tags", tags); // Store tags as a list
         }
 
         if (searchCriteria.isEmpty()) {

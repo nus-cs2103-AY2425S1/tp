@@ -300,6 +300,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+* 1b. No parameters are given.
+  * 1b1. F.A.R.T shows an error message<br>
+  Use case ends.
+
+* 1c. Parameters are given but keywords are empty. 
+  * 1c1. F.A.R.T does not execute command and waits for more input by user. <br>
+  Use case ends.
+
 **Use case 3: Mark a contact as paid or unpaid**
 
 **MSS**
@@ -508,14 +516,17 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   2. Test case: `find John`<br>
+   2. Test case: `find n/John`<br>
       Expected: Clients with name containing `John` are shown in the list.
 
-   3. Test case: `find Cena`<br>
-      Expected: Clients with name containing `Cena` are shown in the list.
+   3. Test case: `find a/Serangoon`<br>
+      Expected: Clients with addresses containing `Serangoon` are shown in the list.
 
    4. Test case: `find`<br>
       Expected: No client is found. Error details shown in the status message.
+   
+   5. Test case: `find`<br>
+      Expected: No output is given. Program waits for more user input.
 
 ### Editing a client
 

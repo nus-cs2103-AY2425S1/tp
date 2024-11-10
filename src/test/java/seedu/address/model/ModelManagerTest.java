@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        Map<String, String> searchCriteria = Map.of("name", ALICE.getName().fullName);
+        Map<String, Object> searchCriteria = Map.of("name", ALICE.getName().fullName);
         modelManager.updateFilteredPersonList(new PersonContainsKeywordsPredicate(searchCriteria));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

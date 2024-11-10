@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -31,8 +32,8 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        Map<String, String> firstSearchCriteria = Collections.singletonMap("name", "first");
-        Map<String, String> secondSearchCriteria = Collections.singletonMap("name", "second");
+        Map<String, Object> firstSearchCriteria = Collections.singletonMap("name", "first");
+        Map<String, Object> secondSearchCriteria = Collections.singletonMap("name", "second");
 
         PersonContainsKeywordsPredicate firstPredicate = new PersonContainsKeywordsPredicate(firstSearchCriteria);
         PersonContainsKeywordsPredicate secondPredicate = new PersonContainsKeywordsPredicate(secondSearchCriteria);
@@ -56,9 +57,6 @@ public class FindCommandTest {
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
-
-    /*
-    Fix in v1.5
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
@@ -68,7 +66,6 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
-    */
 
     @Test
     public void execute_oneKeyword_multiplePersonsFound() {
@@ -82,7 +79,7 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
-        Map<String, String> searchCriteria = Collections.singletonMap("name", "keyword");
+        Map<String, Object> searchCriteria = Collections.singletonMap("name", "keyword");
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         FindCommand findCommand = new FindCommand(predicate);
 
@@ -94,9 +91,9 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code PersonContainsKeywordsPredicate}.
      */
     private PersonContainsKeywordsPredicate preparePredicate(String userInput) {
-        Map<String, String> searchCriteria = new HashMap<>();
+        Map<String, Object> searchCriteria = new HashMap<>();
         if (!userInput.trim().isEmpty()) {
-            searchCriteria.put("tag", userInput); //assume finding tag
+            searchCriteria.put("tags", List.of(userInput)); //assume finding tag
         }
 
         return new PersonContainsKeywordsPredicate(searchCriteria);
