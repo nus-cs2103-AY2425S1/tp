@@ -89,8 +89,8 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 ### Before you start...
 
 * **anUdder** refers to anyone using the findingbrUdders app and all the contacts in the app
-* **brUdder** refers to anyone who the user thinks is a good friend and mentee users as well
-* **mUdder** refers to anyone who is capable of teaching other Udders according to the user
+* **brUdder** refers to peers or connections who are experiencing similar things as you
+* **mUdder** refers to mentor users or connections who are more experienced in a relevant field
 </box>
 
 
