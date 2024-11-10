@@ -629,7 +629,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting contact(s)
 
 1. **Deleting one or more contacts**
-   - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed, where there are at least 3 contacts in the list.
+   - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed, where there are at least 3 contacts currently shown in the list.
    - **Test case**: `delete 2 3`  
      **Expected**: 2nd and 3rd contacts are deleted. Status message confirms the action, timestamp updated.
    - **Test case**: `delete 0`  
