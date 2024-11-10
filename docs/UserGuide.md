@@ -490,10 +490,10 @@ Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g
 
 | Action     | Format                                                                                  | Examples                                                                               |
 | ---------- |-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| **Add**    | `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINT OF CONTACT]…​`<br>              | e.g., `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
+| **Add**    | `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINT OF CONTACT]…​`<br>              | e.g., `add event n/Oscars t/2024-03-01 13:10 to 2024-03-01 19:30 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
 | **Clear** | `clear event`                                                                           |
 | **Delete** | `delete event INDEX`<br>                                                                | e.g., `delete event 3`                                                                 |
-| **Edit**   | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> | e.g.,`edit event 1 t/2024-03-21 v/Jane's Salon`                                        |
+| **Edit**   | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> | e.g.,`edit event 1 t/2024-03-01 13:10 to 2024-03-01 19:30 v/Jane's Salon`                                        |
 | **Filter** | `filter event CELEBRITY_NAME`<br>                                                       | e.g., `filter event Jim Bob`                                                           |
 | **Find**   | `find event KEYWORD [MORE_KEYWORDS]`<br>                                                | e.g., `find event Hair Oscars`                                                         |
 | **List**   | `list event`                                                                            |
