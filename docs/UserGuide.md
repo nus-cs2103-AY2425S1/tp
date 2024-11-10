@@ -558,10 +558,11 @@ Creates a pie chart of the distribution of students in each class, by `CLASS_ID`
 
 **[Command Format](#command-format):** `pie`
 
-For example, given the following currently displayed student with 4 students:
-- 1 student in class 1
-- 2 students in class 2
-- 1 student in class 3
+For example, given the following currently displayed student with 7 students:
+- 2 student in class MA1522
+- 2 students in class CS2103T
+- 2 student in class CS2100
+- 1 student in class MA1521
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
 
