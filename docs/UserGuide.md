@@ -276,14 +276,6 @@ Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DAT
 
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
 * We will also alert you when you add a different wedding with the same name, we need your help to change their input name in these situations 😊.
-* To make adding a wedding easier, Knotty Planner will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
-  Examples: `john & jane`, `JOHN   & jane` will all be formatted to `John & Jane`.
-
-<box type="important" seamless>
-
-**IMPORTANT:** Date must be a valid date in the format of **dd/MM/yyyy**.
-
-</box>
 
 ![add wedding message](images/addWeddingMsg.png)
 
