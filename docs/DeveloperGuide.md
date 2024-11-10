@@ -892,8 +892,7 @@ feature freeze. The plans to improve our features are as such.
 1. There is a small GUI bug that causes the overflow of names for Tags and Weddings which causes cosmetic flaws.
 Planned enhancements would be to truncate the name with `...`.
 2. There is a duplicate validation bug that allows the creation of certain "duplicate" Person, Wedding, Tag, Task, Tags.
-For example, John Doe and John  Doe, would be considered duplicates although in the real world, the user likely refers to
-the same person.
+For example, John Doe and John  Doe, would not be considered duplicates in WedLinker although in the real world, the user likely refers to the same person.
 Planned enhancements would be to ensure parser strips all whitespace except one between the keywords before creating the
 respective command objects.
 3. There is a missing validation in unassign-task command that negates the check of whether a Person is a vendor, resulting 
