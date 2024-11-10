@@ -47,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_TAG + "TAG:VALUE] "
             + "[" + PREFIX_FINANCIAL_INFO + "FINANCIAL INFO] "
             + "[" + PREFIX_SOCIAL_MEDIA_HANDLE + "SOCIAL MEDIA HANDLE] "
             + "...\n"

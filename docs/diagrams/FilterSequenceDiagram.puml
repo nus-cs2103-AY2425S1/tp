@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("filter n/John t/client")
+[-> LogicManager : execute("filter n\John t\client")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("filter n/John t/client")
+LogicManager -> AddressBookParser : parseCommand("filter n\John t\client")
 activate AddressBookParser
 
 create FilterCommandParser
@@ -27,7 +27,7 @@ activate FilterCommandParser
 FilterCommandParser --> AddressBookParser
 deactivate FilterCommandParser
 
-AddressBookParser -> FilterCommandParser : parse("n/John t/client")
+AddressBookParser -> FilterCommandParser : parse("n\John t\client")
 activate FilterCommandParser
 
 create FilterCommand
