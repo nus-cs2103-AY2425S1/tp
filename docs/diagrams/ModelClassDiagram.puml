@@ -70,6 +70,8 @@ Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered\n" Person
+note left of Person: ~* filtered should be on the arrow connecting \n ModelManager and {abstract} Person. \n Current diagram is due to a puml limitation.
+
 ModelManager --> "1" LessonSchedule
 @enduml
