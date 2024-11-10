@@ -285,7 +285,7 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 **A**: Commands that refer to an elderly by index or NRIC will not work if the elderly is not shown in the displayed person list. To execute these commands, you can use the `list` command to return to the full, unfiltered displayed person list view.
 
 **Q**: Why are the `delete`, `edit` and `mark` commands are restricted in the history list view?<br>
-**A**: These commands are restricted in the history list view to prevent unintended modifications to an elder's details. To modify an elder's information accurately, you can use the `list` command to return to the person list view. 
+**A**: These commands are restricted in the history list view to prevent unintended modifications to an elder's details. To modify an elderly's information accurately, you can use the `list` command to return to the person list view. 
 
 **Q**: Why can't I `mark S2208201I` when I am currently viewing the contact records of the elderly with NRIC `S2208201I`? <br>
 **A**: The `mark` command requires you to be in the person list view rather in the individual history list view. It ensures that all-elderly related commands function as expected and to avoid confusion. 
