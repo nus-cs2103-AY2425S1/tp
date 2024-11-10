@@ -10,11 +10,11 @@
         "BTC": [
           {
             "address": "bc1qak5yzzvn7va9qmkp7g5uykg2msc5kt0z0uhv2k",
-            "label": "Main wallet"
+            "label": "main"
           },
           {
             "address": "bc1qrcpwxgwmy7yp73eq9xmnr9t43ncl7ms8jly0tt",
-            "label": "Sub wallet"
+            "label": "sub"
           }
         ]
       },
@@ -31,11 +31,11 @@
         "SOL": [
           {
             "address": "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA",
-            "label": "Main wallet"
+            "label": "main"
           },
           {
             "address": "44wP1ZSKZX4PDADKU2i14EyU8TsXdjZahxGNMryvv3Ty",
-            "label": "Sub wallet"
+            "label": "sub"
           }
         ]
       },
@@ -53,7 +53,7 @@
         "SOL": [
           {
             "address": "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA",
-            "label": "Main wallet"
+            "label": "main"
           }
         ]
       },

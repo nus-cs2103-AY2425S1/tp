@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_MAIN;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_SUB;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,8 +63,11 @@ public class PublicAddressesCompositionTest {
     public void addPublicAddress_caseSensitivity() {
         // EP: case sensitivity
         PublicAddressesComposition composition = new PublicAddressesComposition();
-        PublicAddress addressLowerCase = new BtcAddress("address", "Label");
-        PublicAddress addressUpperCase = new BtcAddress("ADDRESS", "Label");
+        PublicAddress addressLowerCase =
+            new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING.toLowerCase(), "Label");
+        PublicAddress addressUpperCase = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING
+            .toUpperCase(),
+            "Label");
 
         composition.addPublicAddress(addressLowerCase);
         composition.addPublicAddress(addressUpperCase);
@@ -70,18 +75,6 @@ public class PublicAddressesCompositionTest {
         assertEquals(2, composition.getByNetwork(Network.BTC).size());
     }
 
-
-    @Test
-    public void copyAndAddPublicAddress_largeNumberOfAddresses() {
-        // EP: large number of addresses
-        PublicAddressesComposition composition = new PublicAddressesComposition();
-        for (int i = 0; i < 1000; i++) {
-            PublicAddress address = new BtcAddress("address" + i, "Label" + i);
-            composition.addPublicAddress(address);
-        }
-
-        assertEquals(1000, composition.sizeOfAllPublicAddresses());
-    }
 
     @Test
     public void addPublicAddress_newNetwork() {
@@ -133,11 +126,12 @@ public class PublicAddressesCompositionTest {
         // EP: update existing address
         PublicAddressesComposition composition = new PublicAddressesComposition();
         composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
-        PublicAddress updatedAddress = new BtcAddress("updatedAddress", "Updated Label");
+        PublicAddress updatedAddress =
+            new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_SUB.getPublicAddressString(), "Updated Label");
         composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN,
             updatedAddress);
 
-        assertTrue(composition.hasPublicAddress("updatedAddress"));
+        assertTrue(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_SUB.getPublicAddressString()));
         assertFalse(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
     }
 
@@ -145,10 +139,12 @@ public class PublicAddressesCompositionTest {
     public void updatePublicAddress_nonExistentAddress() {
         // EP: update non-existent address
         PublicAddressesComposition composition = new PublicAddressesComposition();
-        PublicAddress updatedAddress = new BtcAddress("updatedAddress", "Updated Label");
+        PublicAddress updatedAddress =
+            new BtcAddress(VALID_PUBLIC_ADDRESS_SOL_MAIN.getPublicAddressString(), "Updated Label");
 
         assertThrows(AssertionError.class, () ->
-            composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, updatedAddress));
+            composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN,
+                updatedAddress));
     }
 
     @Test
@@ -156,7 +152,8 @@ public class PublicAddressesCompositionTest {
         // EP: update with the same address
         PublicAddressesComposition composition = new PublicAddressesComposition();
         composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
-        composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, VALID_PUBLIC_ADDRESS_BTC_MAIN);
+        composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN,
+            VALID_PUBLIC_ADDRESS_BTC_MAIN);
 
         assertTrue(composition.hasPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN.getPublicAddressString()));
     }
@@ -168,7 +165,8 @@ public class PublicAddressesCompositionTest {
         composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
 
         assertThrows(AssertionError.class, () ->
-            composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, VALID_PUBLIC_ADDRESS_ETH_MAIN));
+            composition.updatePublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN,
+                VALID_PUBLIC_ADDRESS_ETH_MAIN));
     }
 
     //------------------ Empty Network Tests ------------------

@@ -6,89 +6,179 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditPublicAddressCommand;
+import seedu.address.model.addresses.BtcAddress;
 import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 
 public class EditPublicAddressCommandParserTest {
 
-    private static final String VALID_PUBLIC_ADDRESS = "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd";
-
     private final EditPublicAddressCommandParser parser = new EditPublicAddressCommandParser();
 
+    // Valid
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_missingPrefixes_throwsParseException() {
-        assertParseFailure(parser, "1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, "a " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
-                        + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet " + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_missingNetwork_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet "
-                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_missingLabel_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
-                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_missingAddress_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
-                        + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_invalidNetwork_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "INVALID_NETWORK "
-                        + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet " + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS,
-                Network.MESSAGE_CONSTRAINTS);
-    }
-
-    @Test
-    public void parse_validArgs_returnsEditPublicAddressCommand() {
-        Index expectedIndex = Index.fromOneBased(1);
-        Network expectedNetwork = Network.BTC;
-        String expectedLabel = "MyWallet";
-
-        EditPublicAddressCommand expectedCommand = new EditPublicAddressCommand(
-                expectedIndex, expectedNetwork, VALID_PUBLIC_ADDRESS, expectedLabel);
+    public void parse_validArgs_success() {
+        Index index = Index.fromOneBased(1);
+        PublicAddress publicAddress = new BtcAddress(
+            VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "mylabel");
 
         assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
-                        + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet "
-                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS,
-                expectedCommand);
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            new EditPublicAddressCommand(index, publicAddress));
     }
 
     @Test
-    public void parse_duplicatePrefixes_throwsParseException() {
-        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
-                        + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet "
-                        + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS + " "
-                        + PREFIX_PUBLIC_ADDRESS_NETWORK + "ETH",
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PUBLIC_ADDRESS_NETWORK));
+    public void parse_validArgsReversedOrder_success() {
+        Index index = Index.fromOneBased(1);
+        PublicAddress publicAddress = new BtcAddress(
+            VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "mylabel");
+
+        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING + " "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC",
+            new EditPublicAddressCommand(index, publicAddress));
     }
 
+    @Test
+    public void parse_validArgsWithSpaces_success() {
+        Index index = Index.fromOneBased(1);
+        PublicAddress publicAddress = new BtcAddress(
+            VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "mylabel");
+
+        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + " BTC  "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + " mylabel  "
+                + PREFIX_PUBLIC_ADDRESS + " " + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING + " ",
+            new EditPublicAddressCommand(index, publicAddress));
+    }
+
+    // Missing arguments
+    @Test
+    public void parse_noArgs_failure() {
+        assertParseFailure(parser, " ",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingIndex_failure() {
+        assertParseFailure(parser, PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingNetwork_failure() {
+        assertParseFailure(parser, "1 "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingLabel_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_missingPublicAddress_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    // Duplicate arguments
+    @Test
+    public void parse_duplicateNetwork_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_NETWORK + "ETH "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            Messages.getErrorMessageForDuplicatePrefixes(
+                PREFIX_PUBLIC_ADDRESS_NETWORK));
+    }
+
+    @Test
+    public void parse_duplicateLabel_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "otherlabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PUBLIC_ADDRESS_LABEL));
+    }
+
+    @Test
+    public void parse_duplicatePublicAddress_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_NETWORK + "ETH "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_SUB_STRING,
+            Messages.getErrorMessageForDuplicatePrefixes(
+                PREFIX_PUBLIC_ADDRESS_NETWORK));
+    }
+
+    // Invalid arguments
+    @Test
+    public void parse_invalidIndexNonNumeric_failure() {
+        assertParseFailure(parser, "a " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidIndexMultiple_failure() {
+        assertParseFailure(parser, "1 1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidIndexNegative_failure() {
+        assertParseFailure(parser, "-1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPublicAddressCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidNetworkUnsupported_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "DOGE "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            Network.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidNetworkWrongCase_success() {
+        assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "btc "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            new EditPublicAddressCommand(Index.fromOneBased(1),
+                new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "mylabel")));
+    }
+
+    @Test
+    public void parse_invalidNetworkEmpty_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + " "
+                + PREFIX_PUBLIC_ADDRESS_LABEL + "mylabel "
+                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            Network.MESSAGE_CONSTRAINTS);
+    }
+
+    // TODO: Invalid public address
 }

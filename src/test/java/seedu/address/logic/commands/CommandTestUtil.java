@@ -21,6 +21,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+
 /**
  * Contains helper methods for testing commands.
  */
@@ -56,32 +57,6 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final String VALID_PUBLIC_ADDRESS_ETH_MAIN =
-        "0x0B1C9E1Fb5E13c797c7f0134641810E9A7ca14d2"; //this is a real ETH public address
-    public static final String VALID_PUBLIC_ADDRESS_ETH_SUB =
-        "0xE859Ed4267af9f247aAB2703CebcA466C71887b2"; //this is a real ETH public address
-    public static final String VALID_PUBLIC_ADDRESS_BTC_MAIN =
-        "bc1qak5yzzvn7va9qmkp7g5uykg2msc5kt0z0uhv2k"; //this is a real BTC public address
-    public static final String VALID_PUBLIC_ADDRESS_BTC_SUB =
-        "bc1qrcpwxgwmy7yp73eq9xmnr9t43ncl7ms8jly0tt"; //this is a real BTC public address
-    public static final String VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_NOT =
-        "bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9"; //this is a real BTC public address
-    public static final String VALID_PUBLIC_ADDRESS_SOL_MAIN =
-        "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA"; //this is a real SOL public address
-    public static final String VALID_PUBLIC_ADDRESS_SOL_SUB =
-        "44wP1ZSKZX4PDADKU2i14EyU8TsXdjZahxGNMryvv3Ty"; //this is a real SOL public address
-
-
-    public static final String SIMPLE_PUBLIC_ADDRESS_1234 =
-        "1234"; // for use in testing
-    public static final String SIMPLE_PUBLIC_ADDRESS_12345 =
-        "12345"; // for use in testing
-
-    public static final String INVALID_PUBLIC_ADDRESS_INVALID_CHAR = "0x!@#$%^&*()";
-    public static final String INVALID_PUBLIC_ADDRESS_TOO_LONG =
-        "0x0B1C9E1Fb5Ec797c7f0134641810E9A7ca14d2wjrenlkewrngilsdfjdshfsdkfewrkhgnilwerkngiwrengiwrhngirwengiwrengiwer";
-    public static final String PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK = "TEJfF77NnSEBj5CnFYo4iHGcQGbjiEzNrv";
 
 
     public static final AbstractEditCommand.EditPersonDescriptor DESC_AMY;
