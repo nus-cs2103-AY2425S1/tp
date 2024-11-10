@@ -230,7 +230,7 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> moduleRolePairs} into a {@code ModuleRoleMap}.
      */
-    public static ModuleRoleMap parseModuleRolePairs(Collection<String> moduleRolePairs) throws ParseException {
+    public static ModuleRoleMap parseModuleRoleMap(Collection<String> moduleRolePairs) throws ParseException {
         requireNonNull(moduleRolePairs);
 
         final LinkedHashMap<ModuleCode, RoleType> hashMap = new LinkedHashMap<>();
@@ -291,7 +291,7 @@ public class ParserUtil {
      */
     public static AddModuleRoleDescriptor parseAddModuleRoleDescriptor(List<String> moduleRolePairs)
             throws ParseException {
-        return new AddModuleRoleDescriptor(parseModuleRolePairs(moduleRolePairs).getData());
+        return new AddModuleRoleDescriptor(parseModuleRoleMap(moduleRolePairs).getData());
     }
 
     /**

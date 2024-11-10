@@ -80,7 +80,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        ModuleRoleMap moduleRoleMap = ParserUtil.parseModuleRolePairs(argMultimap.getAllValues(PREFIX_MODULE));
+        ModuleRoleMap moduleRoleMap = ParserUtil.parseModuleRoleMap(argMultimap.getAllValues(PREFIX_MODULE));
 
         Description description = null;
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {

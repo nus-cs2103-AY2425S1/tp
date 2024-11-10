@@ -22,9 +22,9 @@ public class ModuleRoleContainsKeywordsPredicateTest {
     @Test
     public void equals() throws ParseException {
         ModuleRoleMap firstModuleRoleMap =
-                ParserUtil.parseModuleRolePairs(Collections.singletonList("CS1101S-Student"));
+                ParserUtil.parseModuleRoleMap(Collections.singletonList("CS1101S-Student"));
         ModuleRoleMap secondModuleRoleMap =
-                ParserUtil.parseModuleRolePairs(Arrays.asList("CS2103T-Prof", "CS1101S-Student"));
+                ParserUtil.parseModuleRoleMap(Arrays.asList("CS2103T-Prof", "CS1101S-Student"));
 
         ModuleRoleContainsKeywordsPredicate firstPredicate =
                 new ModuleRoleContainsKeywordsPredicate(firstModuleRoleMap);
@@ -53,26 +53,26 @@ public class ModuleRoleContainsKeywordsPredicateTest {
     public void test_moduleRoleContainsKeywords_returnsTrue() throws ParseException {
         // One keyword
         ModuleRoleContainsKeywordsPredicate predicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs(Collections.singletonList("CS1101S-Student")));
+                ParserUtil.parseModuleRoleMap(Collections.singletonList("CS1101S-Student")));
         Person person = new PersonBuilder().withModuleRoleMap(DEFAULT_MODULE_CODE, DEFAULT_ROLE_TYPE).build();
         assertTrue(predicate.test(person));
 
         // Multiple keywords
         predicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs(Arrays.asList("CS1101S-Student", "CS2103T-Prof")));
+                ParserUtil.parseModuleRoleMap(Arrays.asList("CS1101S-Student", "CS2103T-Prof")));
         person = new PersonBuilder().withModuleRoleMap(new ModuleCode[]{DEFAULT_MODULE_CODE, DEFAULT_MODULE_CODE_2},
                 new RoleType[]{DEFAULT_ROLE_TYPE, DEFAULT_ROLE_TYPE_2}).build();
         assertTrue(predicate.test(person));
 
         // Only one matching keyword
         predicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs(Arrays.asList("CS1101S-Student", "CS2103T-Prof")));
+                ParserUtil.parseModuleRoleMap(Arrays.asList("CS1101S-Student", "CS2103T-Prof")));
         person = new PersonBuilder().withModuleRoleMap(DEFAULT_MODULE_CODE, DEFAULT_ROLE_TYPE).build();
         assertTrue(predicate.test(person));
 
         // Mixed-case keywords
         predicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs(Arrays.asList("cS1101S-student", "CS2103T-prof")));
+                ParserUtil.parseModuleRoleMap(Arrays.asList("cS1101S-student", "CS2103T-prof")));
         person = new PersonBuilder().withModuleRoleMap(new ModuleCode[]{DEFAULT_MODULE_CODE, DEFAULT_MODULE_CODE_2},
                 new RoleType[]{DEFAULT_ROLE_TYPE, DEFAULT_ROLE_TYPE_2}).build();
         assertTrue(predicate.test(person));
@@ -89,18 +89,18 @@ public class ModuleRoleContainsKeywordsPredicateTest {
 
         // Non-matching keyword
         predicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs(Collections.singletonList("CS2103T-Prof")));
+                ParserUtil.parseModuleRoleMap(Collections.singletonList("CS2103T-Prof")));
         assertFalse(predicate.test(person));
 
         // Keywords match module and role, but not together
         predicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs(Arrays.asList("CS1101S-Prof")));
+                ParserUtil.parseModuleRoleMap(Arrays.asList("CS1101S-Prof")));
         assertFalse(predicate.test(person));
     }
 
     @Test
     public void toStringMethod() throws ParseException {
-        ModuleRoleMap moduleRoleMap = ParserUtil.parseModuleRolePairs(Arrays.asList("CS1101S-Student", "CS2103T-Prof"));
+        ModuleRoleMap moduleRoleMap = ParserUtil.parseModuleRoleMap(Arrays.asList("CS1101S-Student", "CS2103T-Prof"));
         ModuleRoleContainsKeywordsPredicate predicate = new ModuleRoleContainsKeywordsPredicate(moduleRoleMap);
 
         String expected =

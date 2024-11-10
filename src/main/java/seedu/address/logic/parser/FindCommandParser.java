@@ -12,7 +12,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.areAnyPrefixesPresent;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -21,6 +23,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
 import seedu.address.model.person.ModuleRoleMap;
+import seedu.address.model.person.ModuleRolePair;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -78,7 +81,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                     FindCommand.MESSAGE_USAGE));
         }
 
-        ModuleRoleMap moduleRoleMapKeywords = ParserUtil.parseModuleRolePairs(moduleRoleKeywords);
+        ModuleRoleMap moduleRoleMapKeywords = ParserUtil.parseModuleRoleMap(moduleRoleKeywords);
+//        Set<ModuleRolePair> moduleRoleMapKeywords = new HashSet<>();
+
+
 
         List<Predicate<Person>> predicates = new ArrayList<>();
         if (!nameKeywords.isEmpty()) {

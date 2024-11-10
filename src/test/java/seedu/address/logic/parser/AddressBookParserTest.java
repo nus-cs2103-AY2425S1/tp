@@ -91,7 +91,7 @@ public class AddressBookParserTest {
         );
 
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
-        ModuleRoleMap moduleRoleMapKeywords = ParserUtil.parseModuleRolePairs(moduleRoleKeywords);
+        ModuleRoleMap moduleRoleMapKeywords = ParserUtil.parseModuleRoleMap(moduleRoleKeywords);
         ModuleRoleContainsKeywordsPredicate modulePredicate =
                 new ModuleRoleContainsKeywordsPredicate(moduleRoleMapKeywords);
         List<Predicate<Person>> expectedPredicates = new ArrayList<>();

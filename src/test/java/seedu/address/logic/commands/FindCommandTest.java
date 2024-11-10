@@ -48,9 +48,9 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
         ModuleRoleContainsKeywordsPredicate firstModuleRolePredicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs(Collections.singletonList("CS1010")));
+                ParserUtil.parseModuleRoleMap(Collections.singletonList("CS1010")));
         ModuleRoleContainsKeywordsPredicate secondModuleRolePredicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs(Collections.singletonList("CS2103T-prof")));
+                ParserUtil.parseModuleRoleMap(Collections.singletonList("CS2103T-prof")));
 
         List<Predicate<Person>> firstNamePredicates = Arrays.asList(firstNamePredicate);
         List<Predicate<Person>> secondNamePredicates = Arrays.asList(secondNamePredicate);
@@ -214,7 +214,7 @@ public class FindCommandTest {
     public void toStringMethod() throws ParseException {
         List<Predicate<Person>> predicates = new ArrayList<>();
         predicates.add(new NameContainsKeywordsPredicate(List.of("keyword")));
-        predicates.add(new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(List.of("CS2103T"))));
+        predicates.add(new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRoleMap(List.of("CS2103T"))));
 
         FindCommand findCommand = new FindCommand(predicates);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicates + "}";
@@ -232,7 +232,7 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private ModuleRoleContainsKeywordsPredicate prepareModuleRolePredicate(String userInput) throws ParseException {
-        return new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
+        return new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRoleMap(
                 Arrays.asList(userInput.split("\\s+"))));
     }
 
