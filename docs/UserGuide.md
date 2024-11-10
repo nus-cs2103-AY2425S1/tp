@@ -36,7 +36,7 @@ title: AcademyAssist User Guide
 6. [Command summary](#command-summary)
 
 # Introduction
-Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers.
+Welcome to AcademyAssist, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
 This desktop application is designed to streamline your administrative tasks, allowing you to focus your efforts on 
 keeping operations smooth and organized for optimal student support.
 
@@ -195,6 +195,11 @@ taken(`s\ `).
 in the [add feature](#adding-a-student--add) section.
 * Although editing the NRIC is allowed, it must not match any other student's NRIC in the system. 
 An error message will be shown if a duplicate is detected.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+When editing a contact, the previously saved value of FIELD will be replaced entirely by NEW_VALUE. e.g. 'edit S00001 
+n\Henry Teo' replaces the name field of student S00001 with "Henry Tan". 
+
+</div>
 
 Examples:
 * `edit S00001 a\New_Address`
@@ -204,6 +209,12 @@ Examples:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To more efficiently add a subject to a person, see the [addsubject feature] (#adding-a-subject-to-a-student--addsubject)
+
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To delete a subject, you can use the edit command. e.g. student S00120 takes the subjects English and Math, but wishes to 
+drop the subject English, you can use the command 'edit S00120 s\Math'.
 
 </div>
 
