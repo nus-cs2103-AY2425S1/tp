@@ -6,7 +6,8 @@
 
 # CFG User Guide
 
-ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CFG can get your contact management tasks done faster than traditional GUI apps.
+ContactsForGood (CFG) is a **desktop app for Non Government Organisations (NGOs) to manage contacts.**
+It is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CFG can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -53,7 +54,10 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.  
+  Note: If a field is optional and you choose to not input anything into the field, **DO NOT**
+  leave an empty prefix, as this will not be a valid command.  
+  e.g `edit 1 n/NAME t/` is not a valid command
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -100,18 +104,23 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - `EMAIL`: The contact's email address.
 - `ADDRESS`: The contact's physical address.
 - `TAG` (Optional): Additional tags associated with the contact.
-- Role-specific fields(not required for `Person`)
+#### Role-specific fields(not required for `Person`)
   - **Volunteer**: `h/HOURS` :required for volunteers, representing contributed hours.
   - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
   - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date. The 
     date should be in the **YYYY-MM-DD** format and must be a valid date (e.g., 2024-11-07).
 
-Note:
-Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of 
+- Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of 
 `Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT` 
-is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided. 
 If the specified role does not match with the specified field, the add command will be deemed invalid.
 
+#### Notes on valid and invalid fields
+- The address book differentiates names by checking both the characters and the number of spaces. John Doe
+with a single space is NOT the same person as John&nbsp;&nbsp;&nbsp;Doe. If there exists a John Doe currently in 
+ContactsForGood, you may add another John &nbsp;Doe with 2 spaces between.
+- Note: Email addresses without periods (Single Label Domains) **are supported**. 
+e.g. johndoe@intranet is a valid email.
 
 <box type="tip" seamless>
 
@@ -246,7 +255,7 @@ Format: `clear`
 
 Creates a new group with people as members.
 
-Format: `createGroup g/GROUP_NAME m/[INDICES]`
+Format: `createGroup g/GROUP_NAME m/INDICES`
 
 * Creates a new group with name `GROUP_NAME`.
 * Adds the persons at the specified `INDICES` to the group. 
@@ -263,13 +272,15 @@ Example:
 
 Adds new members to a group that currently exists.
 
-Format: `addToGroup g/GROUP_NAME m/[INDICES]`
+Format: `addToGroup g/GROUP_NAME m/INDICES`
 
 * Adds new members to the group with the name `GROUP_NAME`.
 * The indices are based on the indices displayed in the last list command.
 * There must already exist a group with the name `GROUP_NAME`. The indices
 must be valid indices.
 * If either of the above conditions are not met, the command will fail.
+* The address book differentiates group names by checking both the characters and the number of spaces. Blood Drive
+    with a single space is NOT the same group as Blood&nbsp;&nbsp;&nbsp;Drive.
 
 Example:
 * `addToGroup g/blood drive 2024 m/1 2 5 6` adds the persons at index 1, 2, 5 and 6 of
@@ -279,7 +290,7 @@ Example:
 
 Remove members from a group that currently exists.
 
-Format: `removeFromGroup g/GROUP_NAME m/[INDICES]`
+Format: `removeFromGroup g/GROUP_NAME m/INDICES`
 
 * Removes specified members from the group with the name `GROUP_NAME`.
 * The indices are based on the indices displayed in the last list command.
@@ -389,9 +400,9 @@ Action     | Format, Examples
 **List**   | `list`
 **Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`
-**Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
-**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
-**Remove Existing Members from Group** | `removeFromGroup g/GROUP_NAME m/[INDICES]`
+**Create Group** | `createGroup g/GROUP_NAME m/INDICES`
+**Add New Members to Group** | `addToGroup g/GROUP_NAME m/INDICES`
+**Remove Existing Members from Group** | `removeFromGroup g/GROUP_NAME m/INDICES`
 **Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
 **List Groups**  | `listGroups`
