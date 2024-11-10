@@ -314,6 +314,8 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 Use a combination of `findp`, `findc`, `listp` and `listc` to view specific persons and concerts.<br>
+- `findp` and `listp` preserves the current displayed concert list.<br>
+- `findc` and `findp` preserves the current displayed person list.<br>
 
 </div>
 
