@@ -79,6 +79,17 @@ public class UniqueMemberList implements Iterable<Member> {
         }
     }
 
+    /**
+     * Returns the number of times an equivalent member as the given argument appears in the list.
+     *
+     * @param toCheck The member to count occurrences of.
+     * @return The number of times the member appears in the list.
+     */
+    public int countOccurrences(Member toCheck) {
+        requireNonNull(toCheck);
+        return (int) internalList.stream().filter(toCheck::isSameMember).count();
+    }
+
     public void setMembers(UniqueMemberList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

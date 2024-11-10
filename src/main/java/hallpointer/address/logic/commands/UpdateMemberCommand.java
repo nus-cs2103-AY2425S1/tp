@@ -51,8 +51,8 @@ public class UpdateMemberCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Member %1$s's details updated successfully.";
     public static final String MESSAGE_NOT_UPDATED = "At least one field to update must be provided.";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "A member with the same name already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "A member with the same name or telegram already exists.";
 
     private final Index index;
     private final UpdateMemberDescriptor updateMemberDescriptor;
@@ -69,6 +69,13 @@ public class UpdateMemberCommand extends Command {
         this.updateMemberDescriptor = new UpdateMemberDescriptor(updateMemberDescriptor);
     }
 
+    /**
+     * Executes the update member command and returns the result message.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return feedback message of the operation result for display.
+     * @throws CommandException if the index is invalid or if updating the member results in a duplicate member.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -80,8 +87,12 @@ public class UpdateMemberCommand extends Command {
 
         Member memberToUpdate = lastShownList.get(index.getZeroBased());
         Member updatedMember = createUpdatedMember(memberToUpdate, updateMemberDescriptor);
+    
+        long matchCount = model.getFilteredMemberList().stream()
+        .filter(member -> member.isSameMember(updatedMember))
+        .count();
 
-        if (!memberToUpdate.isSameMember(updatedMember) && model.hasMember(updatedMember)) {
+        if (memberToUpdate.isSameMember(updatedMember) && matchCount > 1) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
