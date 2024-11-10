@@ -28,8 +28,12 @@ public class CommandBox extends UiPart<Region> {
     private static final Map<String, String> commandSyntaxMap = new HashMap<>();
     private static final Map<String, List<String>> commandParameterOrder = new HashMap<>();
     private static final Map<String, String> parameterMap = new HashMap<>();
-    private static final String DEFAULT_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt; -fx-text-fill: white;";
-    private static final String INPUT_NEEDED_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt; -fx-text-fill: #fb5252;";
+    private static final String DEFAULT_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt;"
+            + " -fx-text-fill: white;";
+    private static final String INPUT_NEEDED_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt;"
+            + " -fx-text-fill: #fb5252;";
+    private boolean isProgrammaticChange = false;
+    private final ResultDisplay resultDisplay;
 
 
     @FXML
@@ -101,9 +105,6 @@ public class CommandBox extends UiPart<Region> {
      *
      * @param commandExecutor Lambda function that executes the entered command text
      */
-    private boolean isProgrammaticChange = false;
-    private final ResultDisplay resultDisplay;
-
     public CommandBox(CommandExecutor commandExecutor, ResultDisplay resultDisplay) {
         super(FXML);
         this.commandExecutor = commandExecutor;
@@ -112,7 +113,7 @@ public class CommandBox extends UiPart<Region> {
         // Listen for ANY text changes to reset ALL styles
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             resetStyle();
-            commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);  // Remove error class too
+            commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS); // Remove error class too
 
             // Only clear result display if it's a user change (not programmatic)
             if (!isProgrammaticChange && !oldValue.equals(newValue)) {
@@ -143,7 +144,7 @@ public class CommandBox extends UiPart<Region> {
 
         // Changed to require exact case matching
         for (String command : commandSyntaxMap.keySet()) {
-            if (command.startsWith(partial)) {  // Removed .toLowerCase()
+            if (command.startsWith(partial)) {
                 if (shortestMatch == null || command.length() < shortestMatch.length()) {
                     shortestMatch = command;
                 }
@@ -186,7 +187,7 @@ public class CommandBox extends UiPart<Region> {
 
         // Check if input sequence is valid before proceeding with any autocomplete
         if (!isValidPreSlashSequence(input)) {
-            return;  // Do not autocomplete if sequence is invalid
+            return; // Do not autocomplete if sequence is invalid
         }
 
         String[] parts = input.split("\\s+");
@@ -262,7 +263,7 @@ public class CommandBox extends UiPart<Region> {
 
         // If no prefix found or input is shorter than what we found so far
         if (longestPrefix == null) {
-            return true;  // Allow typing to continue
+            return true; // Allow typing to continue
         }
 
         int inputSlashPos = input.indexOf('/');
@@ -364,7 +365,7 @@ public class CommandBox extends UiPart<Region> {
             Collections.sort(commands);
 
             for (String command : commands) {
-                if (command.startsWith(input.trim())) {  // Removed .toLowerCase()
+                if (command.startsWith(input.trim())) {
                     if (foundMatch) {
                         suggestions.append(" | ");
                     }
@@ -527,9 +528,9 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
-            isProgrammaticChange = true;  // Flag that this is a programmatic change
+            isProgrammaticChange = true; // Flag that this is a programmatic change
             commandTextField.setText("");
-            isProgrammaticChange = false;  // Reset the flag
+            isProgrammaticChange = false; // Reset the flag
             suggestionLabel.setVisible(false);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
