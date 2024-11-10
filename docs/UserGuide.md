@@ -189,7 +189,7 @@ Examples:
 
 Deletes the specified persons from the address book.
 
-Format: `delete INDEX | LowerBound-UpperBound [INDEX | LowerBound-UpperBound]…`
+Format: `delete INDEX | LowerBound-UpperBound [INDEX]… [LowerBound-UpperBound]…`
 
 * Deletes the person at the specified `INDEX` or range of indices.
 * All input indices must be within the range.

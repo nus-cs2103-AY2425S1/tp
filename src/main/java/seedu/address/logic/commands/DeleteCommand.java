@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX_1\n"
+            + "Parameters: INDEX_1 | LOWER_BOUND-UPPER_BOUND\n"
             + " [INDEX_2]...\n"
             + " [INDEX_3-INDEX_4]...\n"
             + " (must be positive integer(s))\n"

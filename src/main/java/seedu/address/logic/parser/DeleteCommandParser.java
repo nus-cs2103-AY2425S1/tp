@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -20,6 +22,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
         Set<Index> indices = new HashSet<>();
 
         String[] parts = args.trim().split("\\s+");
@@ -50,9 +55,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     throw new ParseException(
                             DeleteCommand.MESSAGE_INVALID_INPUT);
                 }
-            } else if (!part.matches("\\d+")) {
-                throw new ParseException(
-                        DeleteCommand.MESSAGE_INVALID_INPUT);
             } else {
                 // Handle individual index
                 try {
@@ -64,7 +66,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     indices.add(ParserUtil.parseIndex(part.trim()));
                 } catch (NumberFormatException e) {
                     throw new ParseException(
-                            DeleteCommand.MESSAGE_USAGE);
+                            DeleteCommand.MESSAGE_INVALID_INPUT);
                 }
             }
         }
