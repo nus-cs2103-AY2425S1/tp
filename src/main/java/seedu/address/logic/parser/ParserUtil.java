@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.DateTimeUtil.DEFAULT_MONTH_FORMATTER;
+import static seedu.address.logic.Messages.MESSAGE_AMOUNT_OUT_OF_RANGE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
 import java.time.LocalDate;
@@ -171,9 +172,24 @@ public class ParserUtil {
             logger.fine("ParseException caused by invalid amount or incorrect amount format.");
             throw new ParseException(Messages.MESSAGE_INVALID_AMOUNT);
         }
+
+        verifyAmountIsWithinRange(amount);
+
         return amount;
     }
 
+    /**
+     * Throws a {@code ParseException} if the amount is out of range.
+     */
+    public static void verifyAmountIsWithinRange(double amount) throws ParseException {
+        double minAmount = -1000000000;
+        double maxAmount = 1000000000;
+
+        if (amount < minAmount || amount > maxAmount) {
+            throw new ParseException(MESSAGE_AMOUNT_OUT_OF_RANGE);
+        }
+
+    }
 
     /**
      * Parses a {@code String date} into a {@code LocalDate}.

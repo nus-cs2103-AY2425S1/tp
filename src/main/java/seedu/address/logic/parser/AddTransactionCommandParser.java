@@ -57,7 +57,6 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DESCRIPTION, PREFIX_AMOUNT,
                 PREFIX_OTHER_PARTY, PREFIX_DATE);
-
         verifyNoBlankValues(argMultimap);
 
         String description = argMultimap.getValue(PREFIX_DESCRIPTION).get().trim();
