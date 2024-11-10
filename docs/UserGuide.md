@@ -219,6 +219,12 @@ Format: `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_E
 
 * The date inputs must be in the format `YYYY-MM-DD`.
 
+<box type="info" seamless>
+
+Currently, new events must have unique event names. Events that have the same name as existing ones cannot be added. <br>
+Look out for future updates where we will fix this issue! More information can be found in [Planned Enhancement 1](DeveloperGuide.md#appendix-planned-enhancements).
+</box>
+
 Examples:
 * `add_event n/Meeting d/CS2103T Meeting f/2024-09-09 t/2024-09-10`
 * `add_event n/Workshop d/Orbital Workshop f/2024-10-01 t/2024-10-10`
