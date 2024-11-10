@@ -102,42 +102,54 @@ public class AssignmentTest {
     void getState_returnsCorrectState() {
         Deadline validDateline = new Deadline("2025-12-01");
         // Test GRADED state
-        Assignment gradedAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE, NEW_SUBMISSION_STATUS, NEW_GRADE);
+        Assignment gradedAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE,
+                NEW_SUBMISSION_STATUS, NEW_GRADE);
         assertEquals(Assignment.State.GRADED, gradedAssignment.getState());
 
         // Test SUBMITTED state
-        Assignment submittedAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE, NEW_SUBMISSION_STATUS, ORIGINAL_GRADE);
+        Assignment submittedAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE,
+                NEW_SUBMISSION_STATUS, ORIGINAL_GRADE);
         assertEquals(Assignment.State.SUBMITTED, submittedAssignment.getState());
 
         // Test PENDING state
-        Assignment pendingAssignment = new Assignment(ORIGINAL_NAME, validDateline, ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
+        Assignment pendingAssignment = new Assignment(ORIGINAL_NAME, validDateline,
+                ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
         assertEquals(Assignment.State.PENDING, pendingAssignment.getState());
 
         // Test LATE state
-        Assignment lateAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE, ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
+        Assignment lateAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE,
+                ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
         assertEquals(Assignment.State.LATE, lateAssignment.getState());
     }
 
     @Test
     void getLabelName_returnsCorrectLabelName() {
         // Test label name with grade
-        Assignment gradedAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE, NEW_SUBMISSION_STATUS, NEW_GRADE);
+        Assignment gradedAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE,
+                NEW_SUBMISSION_STATUS, NEW_GRADE);
         assertEquals("Homework 1: 90.00", gradedAssignment.getLabelName());
 
         // Test label name without grade
-        Assignment ungradedAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE, NEW_SUBMISSION_STATUS, ORIGINAL_GRADE);
+        Assignment ungradedAssignment = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE,
+                NEW_SUBMISSION_STATUS, ORIGINAL_GRADE);
         assertEquals("Homework 1", ungradedAssignment.getLabelName());
     }
 
     @Test
     public void equalsMethod() {
         AssignmentName newName = new AssignmentName("Homework 2");
-        Assignment assignment1 = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE, ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
-        Assignment assignment2 = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE, ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
-        Assignment assignment3 = new Assignment(newName, ORIGINAL_DEADLINE, ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
-        Assignment assignment4 = new Assignment(ORIGINAL_NAME, NEW_DEADLINE, ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
-        Assignment assignment5 = new Assignment(ORIGINAL_NAME, NEW_DEADLINE, NEW_SUBMISSION_STATUS, ORIGINAL_GRADE);
-        Assignment assignment6 = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE, ORIGINAL_SUBMISSION_STATUS, NEW_GRADE);
+        Assignment assignment1 = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE,
+                ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
+        Assignment assignment2 = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE,
+                ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
+        Assignment assignment3 = new Assignment(newName, ORIGINAL_DEADLINE,
+                ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
+        Assignment assignment4 = new Assignment(ORIGINAL_NAME, NEW_DEADLINE,
+                ORIGINAL_SUBMISSION_STATUS, ORIGINAL_GRADE);
+        Assignment assignment5 = new Assignment(ORIGINAL_NAME, NEW_DEADLINE, NEW_SUBMISSION_STATUS,
+                ORIGINAL_GRADE);
+        Assignment assignment6 = new Assignment(ORIGINAL_NAME, ORIGINAL_DEADLINE,
+                ORIGINAL_SUBMISSION_STATUS, NEW_GRADE);
 
         // Same object
         assertEquals(assignment1, assignment1);
