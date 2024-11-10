@@ -207,6 +207,7 @@ Adds students to an existing consultation, specified by its index.
 * `INDEX` specifies the consultation to add students to.
 * Student names (`n/NAME`) and/or student indices (`i/INDEX`) can be used to specify students.
 * Students already in the consultation will not be added again, and an error message will be shown.
+* Student names are **case-sensitive**.
 
 **Examples**:
 * `addtoconsult 1 n/John Doe n/Harry Ng`
@@ -222,6 +223,7 @@ Removes specified students from a consultation, identified by its index.
 
 * `INDEX` is the index of the consultation from which the students will be removed.
 * Specify one or more students to remove by their names.
+* Student names are **case-sensitive**.
 
 **Examples**:
 * `removefromconsult 1 n/John Doe n/Harry Ng` (removes students named John Doe and Harry Ng from the 1st consultation)
@@ -365,7 +367,7 @@ Format: `addtolesson LESSON_INDEX [n/NAME]… [i/STUDENT_INDEX]…`
 
 * `LESSON_INDEX` is the index of the lesson as displayed in the list.
 * At least one of the optional arguments must be provided. There must be at least one name or index.
-* `NAME` must be the full name of a student exactly as shown in the student list.
+* `NAME` must be the full name of a student exactly as shown in the student list. Names are **case-sensitive**.
 * `STUDENT_INDEX` is the index of a student as displayed in the list.
 
 Examples:
@@ -380,7 +382,7 @@ with them to that lesson, i.e. re-adding them defaults to no attendance and 0 pa
 Format: `removefromlesson LESSON_INDEX n/NAME [n/NAME]…`
 
 * `LESSON_INDEX` is the index of the lesson as displayed in the list.
-* `NAME` must be the full name of a student in the lesson.
+* `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
 
 Examples:
 * `removefromlesson 1 n/John Doe n/Jane Doe` removes `John Doe` and `Jane Doe` from lesson number 1.
@@ -393,7 +395,7 @@ color of their name tag under a lesson - **green** for present and **red** for a
 Format: `marka LESSON_INDEX n/NAME [n/NAME]… a/ATTENDANCE`
 
 * `LESSON_INDEX` is the index of the lesson as displayed in the list.
-* `NAME` must be the full name of a student in the lesson.
+* `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
 * If multiple names are provided, all their attendances will be set to the given value.
 * `ATTENDANCE` must be one of the following: `Y`,`y`or`1` for yes (student is present) and `N`,`n`or`0` for no (student is absent).
 * There must be exactly 1 `ATTENDANCE` argument, e.g. `a/1 a/1` is not allowed.
@@ -412,7 +414,7 @@ will also automatically set their attendance to true.**
 Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 
 * `LESSON_INDEX` is the index of the lesson as displayed in the list.
-* `NAME` must be the full name of a student in the lesson.
+* `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
 * If multiple names are provided, all their participation points will be set to the given value.
 * `PARTICIPATION` must be an integer between 0 and 100 inclusive.
 * There must be exactly 1 `PARTICIPATION` argument, e.g. `pt/3 pt/3` is not allowed.
