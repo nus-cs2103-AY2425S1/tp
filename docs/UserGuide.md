@@ -224,82 +224,82 @@ Commands for creating, updating, and deleting buyers and sellers.
 
 #### Add Buyer
 - **Format:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
-    - **Description:** Creates a new buyer profile with specified details.
-    - **Successful Execution:**
-      > ---
-      >
-      > **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `bobby123@gmail.com`
-      >
-      > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
-      >
-      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
-      >
-      > ---
-      >
-      > **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `bobby123@gmail.com`, tags `friend`, `owner`
-      >
-      > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
-      >
-      > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
-      >
-      > ---
+- **Description:** Creates a new buyer profile with specified details.
+- **Successful Execution:**
+  > ---
+  >
+  > **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `bobby123@gmail.com`
+  >
+  > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
+  >
+  > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+  >
+  > ---
+  >
+  > **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `bobby123@gmail.com`, tags `friend`, `owner`
+  >
+  > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
+  >
+  > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+  >
+  > ---
 
-    - **Failed Execution:**
-      > ---
-      >
-      > **User Error #1**: Missing `NAME` field
-      >
-      > **Input**: `buyer p/91124444 e/bobby123@gmail.com`
-      >
-      > **Output**: <br>
-      Invalid command format! <br>
-      buyer: Adds a buyer to the address book. <br>
-      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > ---
-      >
-      > **User Error #2**: Missing `PHONE` field
-      >
-      > **Input**: `buyer n/Bobby e/bobby123@gmail.com`
-      >
-      > **Output**: <br>
-      Invalid command format! <br>
-      buyer: Adds a buyer to the address book. <br>
-      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > ---
-      >
-      > **User Error #3**: Missing `EMAIL` field
-      >
-      > **Input**: `buyer n/Bobby p/91124444`
-      >
-      > **Output**: <br>
-      Invalid command format! <br>
-      buyer: Adds a buyer to the address book. <br>
-      Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-      Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > **User Error #4**: Buyer already exists
-      >
-      > **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
-      >
-      > **Output**: This buyer already exists in the address book
-      >
-      > ---
+- **Failed Execution:**
+  > ---
+  >
+  > **User Error #1**: Missing `NAME` field
+  >
+  > **Input**: `buyer p/91124444 e/bobby123@gmail.com`
+  >
+  > **Output**: <br>
+Invalid command format! <br>
+buyer: Adds a buyer to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+  >
+  > ---
+  >
+  > **User Error #2**: Missing `PHONE` field
+  >
+  > **Input**: `buyer n/Bobby e/bobby123@gmail.com`
+  >
+  > **Output**: <br>
+Invalid command format! <br>
+buyer: Adds a buyer to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+  >
+  > ---
+  >
+  > **User Error #3**: Missing `EMAIL` field
+  >
+  > **Input**: `buyer n/Bobby p/91124444`
+  >
+  > **Output**: <br>
+Invalid command format! <br>
+buyer: Adds a buyer to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+  >
+  > **User Error #4**: Buyer already exists
+  >
+  > **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
+  >
+  > **Output**: This buyer already exists in the address book
+  >
+  > ---
 
-    <br>
-    <div class="note" markdown="span">
-    Adding a space between two names is treated as "adding a character". Hence,
-    <br>`buyer n/alexyeoh` (0 space)
-    <br>!= `buyer n/alex yeoh` (1 space)
-    <br>!= `buyer n/alex  yeoh` (2 spaces)
-    <br>.
-    <br>.
-    <br>.
-    </div>
-    <br>
+<br>
+<div class="note" markdown="span">
+Adding a space between two names is treated as "adding a character". Hence,
+<br>`buyer n/alexyeoh` (0 space)
+<br>!= `buyer n/alex yeoh` (1 space)
+<br>!= `buyer n/alex  yeoh` (2 spaces)
+<br>.
+<br>.
+<br>.
+</div>
+<br>
 
 - #### Add Seller
     - **Format:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
