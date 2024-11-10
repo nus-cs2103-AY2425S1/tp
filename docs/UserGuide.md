@@ -142,6 +142,8 @@ Format: `sort [name] [role] [phone] [email] [address]`
 * Exactly one of the optional fields is required
 * The field refers to attributes used to sort the list by.
 * The field **must be a valid attribute** name, role, phone, email or address.
+* The field is case-insensitive. <br>
+e.g. Both `sort name` and `sort NAME` will be accepted.
 
 Examples:
 * `sort phone` returns list sorted by phone number.
