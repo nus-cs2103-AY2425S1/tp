@@ -22,7 +22,7 @@ public class PromoteCommandParser implements Parser<PromoteCommand> {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DemoteCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PromoteCommand.MESSAGE_USAGE));
         }
         String[] argsArray = trimmedArgs.split("\\s+");
 
