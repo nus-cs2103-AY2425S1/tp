@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -63,9 +64,9 @@ public class Person {
         if (otherPerson == this) {
             return true;
         }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        Function<Person, String> convert = x ->
+                x.getName().toString().toLowerCase().replaceAll("\\s+", "");
+        return otherPerson != null && convert.apply(otherPerson).equals(convert.apply(this));
     }
 
     /**
