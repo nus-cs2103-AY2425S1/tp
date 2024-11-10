@@ -1345,3 +1345,15 @@ Currently, our system only supports showing a single display panel at one time.
 
 We plan to split display panel into 3 that will display students, groups and tasks panels respectively.
 This will allow users to better see all information rather than toggling through each display panel.
+
+### 3. Improve granularity of Find Student command
+
+Currently, the command returns all results that match any of the queries.
+
+#### Enhancement
+
+We plan to include other parameters such as `sno`, `sn`, `e` to allow users to search specific fields of a student.
+
+Flags will be introduced to fine-tune the search such that the user can choose for the system to search if the fields contain the queries or if the fields start with the queries.
+Additionally, we will also change the command to return only results that match ALL queries given.
+
