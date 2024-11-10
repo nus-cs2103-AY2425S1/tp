@@ -526,8 +526,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Should work on any **mainstream OS** (e.g., Windows, macOS, Linux) as long as it has **Java 17** or above installed.
-2. Should be able to hold and manage up to **1000 contacts** (e.g., clients, vendors, venues) without noticeable sluggishness in performance during typical usage.
+1. Should work on any **mainstream OS** (e.g., Windows, macOS, Linux) as long as it has **Java 17** installed.
+2. Should be able to hold and manage up to **1000 contacts** (e.g., clients, vendors, weddings) with no more than 2 seconds of delay.
 3. A wedding planner with **above average typing speed** should be able to accomplish most tasks faster using **command-line inputs** rather than relying on graphical user interfaces or the mouse.
 4. The system should be designed for **single-user** operation, where one wedding planner uses the application on their local machine.
 5. The software should work **offline** and require no internet connection after the **initial download** of the application's jar file.
