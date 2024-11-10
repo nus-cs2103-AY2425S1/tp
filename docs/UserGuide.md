@@ -86,7 +86,10 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 **Handling Errors In User Input:**
 * First checks for valid command. 
 * Then checks for presence of fields for that command.
-* Lastly checks if the command is run in the correct view (client VS transaction view).
+* Next checks if the command is run in the correct view (client VS transaction view).
+* Lastly checks if the command alters the balance beyond the supported range.
+
+*Supported range for balance* is (-1.7976931348623157E+308, 1.7976931348623157E+308).
 
 </box>
 
@@ -191,8 +194,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex creative` returns `Alex Yeoh`, `Charlotte Oliveiro`, whose company matches `creative`<br>
-  ![result for 'find alex creative'](images/findAlexCreativeResult.png =600x)
+* `find alex innovative` returns `Alex Yeoh`, `Roy Balakrishnan`, whose company matches `innovative`<br>
+  ![result for 'find alex innovative'](images/findAlexInnovativeResult.png)
 
 #### Deleting a client : `delete`
 
@@ -232,6 +235,8 @@ e.g. `0.5`
 <box type="warning" seamless>
 
 **Note:** `addt` can only be used in client list view.
+
+**IMPORTANT:** adding transactions that cause the client's balance to go beyond the supported range is not allowed.
 </box>
 
 Examples:
@@ -285,7 +290,7 @@ Format: `findt KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `invest material` will match `Material Invest`
 * Only the description is searched.
 * Only full words will be matched e.g.  `invest` will not match `investing`
-* clients matching at least one keyword will be returned (i.e. `OR` search).
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `investing material` will return `material purchase`, `future investing`
 
 <box type="warning" seamless>
@@ -302,6 +307,7 @@ In a transaction list, summarises the transactions' amount within the specified 
 
 Format: `summary s/START_MONTH e/END_MONTH`
 * `START_MONTH` and `END_MONTH` should be in the format `YYYY-MM` e.g. `2024-10`
+* Month should be in the range `1-12` and year should be an integer.
 * The `START_MONTH` should be before or equal to the `END_MONTH`
 * The transactions whose date falls within the first day of `START_MONTH` and the last day of `END_MONTH` (inclusive) will be summarised.
 
@@ -311,7 +317,8 @@ Format: `summary s/START_MONTH e/END_MONTH`
 </box>
 
 Examples:
-* `listt 1` followed by `summary s/2024-09 e/2024-10` summarises the transactions of client 1 within the month of September and October 2024.
+* `listt 6` followed by `summary s/2023-09 e/2023-10` summarises the transactions of client 6 within the month of September and October 2023.
+  ![result for 'summary s/2023-09 e/2023-10'](images/summaryResult.png)
 
 ### Data Management
 
@@ -354,13 +361,23 @@ Furthermore, certain edits can cause the Clientell to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Future Enhancements
+
+1. **Matching partial words for `find` and `findt` commands.**<br>
+Currently, only full words are matched. E.g. `Han` doesn't match `Hans`. 
+In the future, we plan to allow partial word matches.
+2. **Finding clients and transactions by other fields.**<br>
+Currently, only names and companies are searchable for clients, and only descriptions are searchable for transactions.
+In the future, we plan to allow searching by other fields e.g. phone number, address.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 

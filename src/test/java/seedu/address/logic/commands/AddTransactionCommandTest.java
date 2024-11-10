@@ -147,6 +147,21 @@ public class AddTransactionCommandTest {
         assertCommandFailure(addTransactionCommand, model, expectedMessage);
     }
 
+    @Test
+    public void execute_causeDoubleOverflow_throwsCommandException() {
+        // equals negative infinity
+        Transaction transactionToAdd1 = new Transaction("buy raw materials", Double.NEGATIVE_INFINITY,
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
+        AddTransactionCommand addTransactionCommand1 = new AddTransactionCommand(INDEX_FIRST_CLIENT, transactionToAdd1);
+        assertCommandFailure(addTransactionCommand1, model, Messages.MESSAGE_DOUBLE_OVERFLOW);
+
+        // equals positive infinity
+        Transaction transactionToAdd2 = new Transaction("buy raw materials", Double.POSITIVE_INFINITY,
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
+        AddTransactionCommand addTransactionCommand2 = new AddTransactionCommand(INDEX_FIRST_CLIENT, transactionToAdd2);
+        assertCommandFailure(addTransactionCommand2, model, Messages.MESSAGE_DOUBLE_OVERFLOW);
+    }
+
 
     @Test
     public void equals() {
