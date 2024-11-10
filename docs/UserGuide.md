@@ -239,9 +239,17 @@ Executing a command that modifies the address book (like `add`, `edit`, or `dele
 2. You decide to undo the delete action.
     - *After Undo:* [After Undo Command] – The deleted contact is restored.
 
-<img src="images/UndoRedoExample1.png" alt="Initial State" width="60%" />
-<img src="images/UndoRedoExample2.png" alt="After Delete Command" width="60%" />
-<img src="images/UndoRedoExample3.png" alt="After Undo Command" width="60%" />
+**[Initial State]**
+<br>
+<img src="images/UndoRedoExample1.png" alt="Initial State" />
+
+**[After Delete Command]**
+<br>
+<img src="images/UndoRedoExample2.png" alt="After Delete Command" />
+
+**[After Undo Command]**
+<br>
+<img src="images/UndoRedoExample3.png" alt="After Undo Command" />
 
 Examples:
 * `undo` will revert the last command executed, restoring the previous state of the address book.
@@ -281,7 +289,9 @@ Executing a command that modifies the address book (like `add`, `edit`, or `dele
 2. You decide to redo the action and restore the contact again.
     - *After Redo:* [After Redo Command] – The contact is deleted once more.
 
-<img src="images/UndoRedoExample4.png" alt="After Redo Command" width="60%" />
+**[After Redo Command]**
+<br>
+<img src="images/UndoRedoExample4.png" alt="After Redo Command" />
 
 ---
 
