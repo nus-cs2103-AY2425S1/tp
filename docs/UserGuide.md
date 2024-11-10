@@ -45,8 +45,8 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
   * `exit` : Exits the app.
 
-<box type="tip" header="Tip:" >
-  Refer to the [Features](#features) below for details of each command.
+<box type="tip" header="**Tip:**" >
+  Refer to the <md>[Features](#features)</md> below for details of each command.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -76,7 +76,7 @@ DDD also allows you to tag contacts with your own tags. This is quite handy if y
 
 `Vendor` entries contain an extra `service` field. These are contacts who provide a particular type of service for events (e.g. catering, flowers, etc).
 
-<box type="tip" header="Tip:" >
+<box type="tip" header="**Tip:**" >
 DDD does not currently support vendors providing multiple services. Instead, you can add multiple contacts to represent each service. These entries should be named differently to prevent duplication.
 </box>
 
@@ -99,33 +99,42 @@ Events allow you to group contacts together in a sensible and seamless manner li
 ## Features
 
 <box type="info" header="**Notes about the command format:**">
-  Documentation style conventions are based on [Google's guide for CLI syntax](https://developers.google.com/style/code-syntax).
-
-  <md>
-    * Words in `UPPER_CASE` are the parameters that must be supplied by the user.<br>
-      e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
-
-    * `-TYPE_FLAG` can be either `-c`, `v` or `-e` for commands allowing specifying of type.
-      e.g. in `list -TYPE_FLAG`, `-TYPE_FLAG` can allow for filtering all clients with `-c` or vendor with `-v`
-    or events with `-e`.
-
-    * Parameters wrapped in **square brackets** are optional arguments.<br>
-      e.g. in `add n/NAME ... [t/TAG ...]`, `TAG` is an optional argument
-
-    * Parameters wrapped in **curly brackets** are mutually exclusive arguments (i.e. only 1 should be specified).<br>
-      e.g. in `add {-c | -v s/SERVICE} ...`, `-c` and `-v s/SERVICE` are mutually exclusive arguments.
-
-    * Items with `...`​ after them can be used multiple times including zero times.<br>
-      e.g. `t/TAG ...​` can be used as ` ` (i.e. 0 times), `t/vegetarian`, `t/budget conscious t/small scale` etc.
-
-    * Parameters can be in any order.<br>
-      e.g. if the command specifies `n/NAME p/PHONE_NUMBER -c`, `p/PHONE_NUMBER -c n/NAME` is also acceptable.
-
-    * Extraneous parameters for commands that do not take in parameters (such as `list`, `help`, `exit` and `clear`) will be ignored.<br>
-      e.g. if the command specifies `list abc`, it will be interpreted as `list`.
-
-    * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </md>
+    <ul>
+      <li>
+        Documentation style conventions are based on <a href="https://developers.google.com/style/code-syntax">Google's guide for CLI syntax</a>.<br>    
+      </li>
+      <li>
+        Words in <code>UPPER_CASE</code> are the parameters that must be supplied by the user.<br>
+        <ul><li>e.g. in <code>list n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>list n/NAME</code>.</li></ul>
+      </li>
+      <li>
+        <code>-TYPE_FLAG</code> can be either <code>-c</code>, <code>-v</code> or <code>-e</code> for commands allowing specifying of type.<br>
+        <ul><li>e.g. in <code>list -TYPE_FLAG</code>, <code>-TYPE_FLAG</code> can allow for filtering all clients with <code>-c</code> or vendor with <code>-v</code> or events with <code>-e</code>.</li></ul>
+      </li>
+      <li>
+        Parameters wrapped in <strong>square brackets</strong> are optional arguments.<br>
+        <ul><li>e.g. in <code>add n/NAME ... [t/TAG ...]</code>, <code>TAG</code> is an optional argument.</li></ul>
+      </li>
+      <li>
+        Parameters wrapped in <strong>curly brackets</strong> are mutually exclusive arguments (i.e. only 1 should be specified).<br>
+        <ul><li>e.g. in <code>add {-c | -v s/SERVICE} ...</code>, <code>-c</code> and <code>-v s/SERVICE</code> are mutually exclusive arguments.</li></ul>
+      </li>
+      <li>
+        Items with <code>...</code>​ after them can be used multiple times including zero times.<br>
+        <ul><li>e.g. <code>t/TAG ...</code> can be used as <code> </code> (i.e. 0 times), <code>t/vegetarian</code>, <code>t/budget conscious t/small scale</code> etc.</li></ul>
+      </li>
+      <li>
+        Parameters can be in any order.<br>
+        <ul><li>e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER -c</code>, <code>p/PHONE_NUMBER -c n/NAME</code> is also acceptable.</li></ul>
+      </li>
+      <li>
+        Extraneous parameters for commands that do not take in parameters (such as <code>list</code>, <code>help</code>, <code>exit</code> and <code>clear</code>) will be ignored.<br>
+        <ul><li>e.g. if the command specifies <code>list abc</code>, it will be interpreted as <code>list</code>.</li></ul>
+      </li>
+      <li>
+        If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+      </li>
+    </ul>
 </box>
 
 ### Create a New Record: `add`
@@ -262,36 +271,34 @@ exit
 DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" header="**Caution**">
-If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-
-Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+  If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it. Certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is null/outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQs
 
-<box type="tip" icon=":question:" seamless>
+<box type="important" icon=":question:" seamless>
   <strong>Q</strong>: I accidentally deleted a contact. Is there an undo feature?<br>
   <strong>A</strong>: Nope. Unforunately, undo has not been implemented.
 </box>
 
-<box type="tip" icon=":question:" seamless>
+<box type="important" icon=":question:" seamless>
   <strong>Q</strong>: How do I edit events?<br>
   <strong>A</strong>: Unforunately, editing events has not been implemented. You will have to delete the existing event and create a new one with your desired details.
 </box>
 
-<box type="tip" icon=":question:" seamless>
+<box type="important" icon=":question:" seamless>
   <strong>Q</strong>: I have a vendor that provides multiple services, but I can only indicate 1 service per vendor entry. What should I do?<br>
   <strong>A</strong>: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provde 1 single service is so that searches via the <code>list</code> command can be more precise.
 </box>
 
-<box type="tip" icon=":question:" seamless>
+<box type="important" icon=":question:" seamless>
   <strong>Q</strong>: Can DDD be used by users who are not wedding planners (i.e. other event planners)?<br>
   <strong>A</strong>: Yes! While DDD is targetted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
 </box>
 
-<box type="tip" icon=":question:" seamless>
+<box type="important" icon=":question:" seamless>
   <strong>Q</strong>: How do I transfer my data to another Computer?<br>
   <strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DDD home folder.
 </box>
@@ -349,7 +356,7 @@ In case you need more information on the command parameters, here's a more compr
 
 ### Flags
 
-Some commands can be applied on clients, vendors and events. Use `-CONTACT_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
+Some commands can be applied on clients, vendors and events. Use `-TYPE_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
 
 * `-c`: flag to specify client related commands
 * `-v`: flag to specify vendor related commands
