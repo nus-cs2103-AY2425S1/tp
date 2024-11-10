@@ -39,8 +39,7 @@ public class TagCommand extends Command {
             + " either be:\n"
             + "1. A positive integer within the size of the list\n"
             + "2. 'all' if you want to add the tag to all contacts in the list.";
-    public static final String MESSAGE_NO_CONTACTS_TO_TAG = "There are no contacts to add tags to.\n"
-            + "Enter the command help to start adding student or company contacts!";
+    public static final String MESSAGE_NO_CONTACTS_TO_TAG = "There are no contacts to add tags to.";
     private final Index index;
     private final Set<Tag> tagsToAdd;
     private final boolean shouldAddToAll;

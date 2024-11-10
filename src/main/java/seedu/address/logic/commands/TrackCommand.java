@@ -43,8 +43,12 @@ public class TrackCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // Resets to the full complete contact list to work with before filtering
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         executableList(model, MESSAGE_NO_CONTACTS_TO_TRACK);
 
+        // Filters with the predicate after resetting to the full complete contact list
         model.updateFilteredPersonList(categoryPredicate);
         int size = model.getFilteredPersonList().size();
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.category, size));
