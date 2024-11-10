@@ -20,7 +20,7 @@ public class ViewStudentCommandParser implements Parser<ViewStudentCommand> {
     public ViewStudentCommand parse(String args) throws ParseException {
         if (args.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewStudentCommand.MESSAGE_USAGE));
         }
         try {
             Index index = ParserUtil.parseIndex(args);

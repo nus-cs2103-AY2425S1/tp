@@ -234,7 +234,7 @@ Format: `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 Constraints:
 * The index **must be a positive integer** 1, 2, 3, …
 * The student's index must exist in the current displayed student list.
-* Assignment name must be at most 256 characters long, and must be alphanumeric
+* Assignment name must be at most 55 characters long, and must be alphanumeric
 * Assignments for the same student cannot have the same name and max score
 * The max score must be a positive integer.
 
@@ -279,7 +279,7 @@ Format: `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_
 Constraints:
 * The index **must be a positive integer** 1, 2, 3, …
 * The student's index must exist in the current displayed student list.
-* Assignment name must be at most 256 characters long, and must be alphanumeric
+* Assignment name must be at most 55 characters long, and must be alphanumeric
 * Assignments for the same student cannot have the same name and max score
 * The max score must be a positive integer.
 
