@@ -20,13 +20,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (args.trim().isEmpty()) {
             throw new ParseException("Please enter a valid index.");
         }
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        Index index = ParserUtil.parseIndex(args);
+        return new DeleteCommand(index);
     }
 
 }
