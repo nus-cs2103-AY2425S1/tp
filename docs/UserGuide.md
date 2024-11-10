@@ -7,32 +7,36 @@
 
 # InvenTrack User Guide
 
-InvenTrack is a simple desktop app designed to help you manage the products and suppliers for your convenience store. The app is fast and easy to use, especially if you’re comfortable typing.
+Your Journey to Easier Inventory Management Starts Here! 📦
+
+InvenTrack is a simple desktop app specially designed for Inventory managers and local convenience store owners helps you manage the products and suppliers for your convenience store. It empowers you to manage your inventory and suppliers without restrictions. 
+
+🎯 The app is fast and easy to use, especially if you’re comfortable typing!
 
 With InvenTrack, you can:
 
 - Add and manage suppliers and products in your inventory.
 - Keep track of which suppliers provide which products.
-- Monitor and update stock levels.
+- Monitor and update stock levels of the products in the system.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## QuickStart
 ### Step 1: Install Java
-Before you can use InvenTrack, ensure you have Java `17` or above installed in your Computer.
+Before you can use InvenTrack, ensure you have Java version `17` or above installed in your Computer. Java helps you to run our app in your desktop.
 - To check if Java is installed:
-  1. Open a command terminal (Command Prompt on Windows, Terminal on macOS/Linux).
+  1. Open a command terminal using `cmd` in search (Command Prompt on Windows, Terminal on macOS/Linux). <br> Alternate way to open terminal: right-click on the opened folder or desktop, select `Open in terminal` option.
   2. Type the following command and press Enter:
     ```
     java -version
     ```
-     If Java is installed, you should see the version number. If Java is not installed, download it from the [official website](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
+     If Java is installed, you should see the version number. <br> If Java is not installed, download it from the [official website](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 
 ### Step 2: Download InvenTrack
-1. Get the latest version of InvenTrack by downloading the `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Get the latest version of InvenTrack by downloading the `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T17-3/tp/releases).
 2. Move the .jar file into the folder where you want to store your InvenTrack data (this will be your "home folder").
 
 ### Step 3: Navigate to the Folder
@@ -60,7 +64,12 @@ To launch the application:
 
 ### Step 5: Start Using InvenTrack
 You can now start using the application by typing commands into the command box. For example:
-   * `list` : Lists all contacts.
+
+   * `add_supplier n/Kayla Beauty p/98136450 e/kaylab@hotmail.com a/Phoenix Cross Road, Hilton Avenue 6` : Adds a supplier named Kayla Beauty with respective phone, email and address.
+
+   * `add_product n/Corn flour stk/50` Adds product named Corn flour with current stock level as 50
+
+   * `view_product` : Helps you to view the current products in the system.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a supplier named `John Doe` to the InvenTrack.
 
