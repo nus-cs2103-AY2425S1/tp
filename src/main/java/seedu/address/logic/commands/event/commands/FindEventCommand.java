@@ -61,6 +61,16 @@ public class FindEventCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, eventToView.getName()));
     }
 
+    /**
+     * Updates the UI to display contacts with roles specific to a given event.
+     *
+     * <p>This method retrieves the current filtered list of persons from the model, creates copies of each person
+     * with roles that are specific to the provided event, and updates the model's contact list with these
+     * event-specific persons. Observers from the original persons are also copied to maintain UI updates.</p>
+     *
+     * @param model The model containing the data and methods for manipulating the contact list and event state.
+     * @param eventToView The event for which roles should be generated and assigned to each contact.
+     */
     public static void updateContactsUiWithEventSpecificRoles(Model model, Event eventToView) {
         ObservableList<Person> persons = model.getFilteredPersonList();
         ArrayList<Person> tempListOfPersons = new ArrayList<>();
