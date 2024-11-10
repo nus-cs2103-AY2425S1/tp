@@ -45,6 +45,38 @@ public class StringUtilTest {
         assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
     }
 
+    //---------------- Tests for isInteger --------------------------------------
+
+    @Test
+    public void isInteger() {
+
+        // EP: empty strings
+        assertFalse(StringUtil.isInteger("")); // Boundary value
+        assertFalse(StringUtil.isInteger("  "));
+
+        // EP: not a number
+        assertFalse(StringUtil.isInteger("a"));
+        assertFalse(StringUtil.isInteger("aaa"));
+
+        // EP: zero
+        assertTrue(StringUtil.isInteger("0"));
+
+        // EP: zero as prefix
+        assertTrue(StringUtil.isInteger("01"));
+
+        // EP: numbers with + in front
+        assertFalse(StringUtil.isInteger("+1"));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isInteger(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isInteger("1 0")); // Spaces in the middle
+
+        // EP: valid numbers, should return true
+        assertTrue(StringUtil.isInteger("1")); // Boundary value
+        assertTrue(StringUtil.isInteger("10"));
+        assertTrue(StringUtil.isInteger("-1"));
+    }
+
 
     //---------------- Tests for containsWordIgnoreCase --------------------------------------
 
