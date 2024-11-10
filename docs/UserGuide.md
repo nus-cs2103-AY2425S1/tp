@@ -266,11 +266,11 @@ DLTbook supports the following commands:
  Command                                                                | Description                                                                     
 ------------------------------------------------------------------------|---------------------------------------------------------------------------------
  [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                          
- [**add**](#adding-a-person-add)                                        | Adds a person to the address book                                               
- [**list**](#listing-all-persons-list)                                  | Shows a list of all persons in the address book                                 
- [**edit**](#editing-a-person-edit)                                     | Edits an existing person in the address book                                    
- [**find**](#locating-persons-by-name-find)                             | Finds persons whose names contain any of the given keywords                     
- [**delete**](#deleting-a-person-delete)                                | Deletes the specified person from the address book                              
+ [**add**](#adding-a-person-add)                                        | Adds a contact to the address book                                              
+ [**list**](#listing-all-persons-list)                                  | Shows a list of all contacts in the address book                                
+ [**edit**](#editing-a-person-edit)                                     | Edits an existing contact in the address book                                   
+ [**find**](#locating-persons-by-name-find)                             | Finds contacts whose names contain any of the given keywords                    
+ [**delete**](#deleting-a-person-delete)                                | Deletes the specified contact from the address book                             
  [**clear**](#clearing-all-entries-clear)                               | Clears all entries from the address book                                        
  [**exit**](#exiting-the-program-exit)                                  | Exits the program                                                               
  [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                              
@@ -319,7 +319,7 @@ Format: `help`
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
 Adds a contact to the address book.
 
@@ -331,7 +331,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 <box type="tip" seamless>
 
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A contact can have any number of tags (including 0)
 
 </box>
 
@@ -346,9 +346,9 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Listing all persons : `list`
+### Listing all contacts : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book.
 
 Format: `list`
 
@@ -356,39 +356,39 @@ Format: `list`
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Editing a person : `edit`
+### Editing a contact : `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 
 * At least one of the optional fields must be provided.
 
 * Existing values will be updated to the input values.
 
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
 
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the contact’s tags by typing `t/` without
 
   specifying any tags after it.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567`
   and `johndoe@example.com` respectively.
 
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Locating persons by name: `find`
+### Locating contacts by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -400,7 +400,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * Only full words will be matched. e.g. `Han` will not match `Hans`
 
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* contacts matching at least one keyword will be returned (i.e. `OR` search).
 
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -416,36 +416,36 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting a person : `delete`
+### Deleting a contact : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the contact at the specified `INDEX`.
 
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed contact list.
 
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
 
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Adding a public address to a person : `addpa`
+### Adding a public address to a contact : `addpa`
 
-Adds a public address to a person.
+Adds a public address to a contact.
 
 Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-* Adds a public address to a person at the specified `INDEX`. The index refers to the index number shown in the
-  displayed person list.
+* Adds a public address to a contact at the specified `INDEX`. The index refers to the index number shown in the
+  displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 
 * The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
@@ -477,14 +477,14 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Editing a public address of a person : `editpa`
+### Editing a public address of a contact : `editpa`
 
-Edits an existing public address of a person.
+Edits an existing public address of a contact.
 
 Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-* Edits the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
-  displayed person list.
+* Edits the public address of the contact at the specified `INDEX`. The index refers to the index number shown in the
+  displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 
 
@@ -504,21 +504,21 @@ Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
 * `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`<br />
   if the contact at index 3 exists and has a BTC public address labelled as 'Daily wallet'.
-  Changes the third person's BTC public address labelled `Daily wallet` to
+  Changes the third contact's BTC public address labelled `Daily wallet` to
   `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.<br />
 
 * `editpa 3 c/BTC l/daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`<br />
   if the contact at index 3 exists and has a BTC public address 'bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9'.
-  Changes the third person's BTC public address labelled "Daily wallet" to "daily wallet" as `WALLET_NAME` is *
+  Changes the third contact's BTC public address labelled "Daily wallet" to "daily wallet" as `WALLET_NAME` is *
   *case-insensitive**.
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Retrieving public addresses of a person : `retrievepa`
+### Retrieving public addresses of a contact : `retrievepa`
 
-Retrieves the public addresses of a person.
+Retrieves the public addresses of a contact.
 
 Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
@@ -529,35 +529,35 @@ Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
   This field is **case-insensitive** <br />
   Allowed values: `BTC|ETH|SOL`.
 
-* `PERSON_NAME` parameter is optional and specifies the name (or part of the name) of the person(s) whose addresses
+* `PERSON_NAME` parameter is optional and specifies the name (or part of the name) of the contact(s) whose addresses
   should be retrieved. This field is **case-insensitive**.
 
 #### Examples
 
 * `retrievepa l/MyWallet`<br />
-  Retrieves all public addresses with labels containing "MyWallet" for all persons and networks.
+  Retrieves all public addresses with labels containing "MyWallet" for all contacts and networks.
 
 * `retrievepa l/Daily c/BTC`<br />
-  Retrieves all BTC public addresses with labels containing "Daily" for all persons.
+  Retrieves all BTC public addresses with labels containing "Daily" for all contacts.
 
 * `retrievepa l/Savings n/John`<br />
-  Retrieves all public addresses with labels containing "Savings" for persons whose names contain "John".
+  Retrieves all public addresses with labels containing "Savings" for contacts whose names contain "John".
 
 * `retrievepa l/Business c/ETH n/Alice`<br />
-  Retrieves all ETH public addresses with labels containing "Business" for persons whose names contain "Alice".
+  Retrieves all ETH public addresses with labels containing "Business" for contacts whose names contain "Alice".
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting a public address of a person : `deletepa`
+### Deleting a public address of a contact : `deletepa`
 
-Deletes the public address of a person.
+Deletes the public address of a contact.
 
 Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
-* Deletes the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
-  displayed person list.
+* Deletes the public address of the contact at the specified `INDEX`. The index refers to the index number shown in the
+  displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
 
 
@@ -566,7 +566,7 @@ Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
   Allowed values: `BTC|ETH|SOL`.
 
 * The `WALLET_NAME` parameter is not compulsory and specifies the wallet name of the public address
-  that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the person
+  that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact
   at the specified `INDEX` will be deleted. This field is **case-insensitive**.
 
 * The Wallet Name is Case-sensitive. It will not work unless the Wallet Name is exactly the same as the one in the
@@ -574,11 +574,11 @@ Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
 Examples:
 
-* `deletepa 1 c/BTC l/wallet1` deletes the public address of the first person in the BTC network with the wallet name
+* `deletepa 1 c/BTC l/wallet1` deletes the public address of the first contact in the BTC network with the wallet name
   `wallet1`.
 
 
-* `deletepa 3 c/BTC` deletes all the public addresses of the third person in the BTC network.
+* `deletepa 3 c/BTC` deletes all the public addresses of the third contact in the BTC network.
 
 <br>
 
@@ -621,9 +621,9 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Filtering persons by public addresses network : `filter`
+### Filtering contacts by public addresses network : `filter`
 
-Filters out a list of persons with the public addresses of the specified network.
+Filters out a list of contacts with the public addresses of the specified network.
 
 Format: `filter c/NETWORK`
 
@@ -633,7 +633,7 @@ Format: `filter c/NETWORK`
 
 Examples:
 
-* `filter c/BTC` filters a list of persons with the public addresses of `BTC` and
+* `filter c/BTC` filters a list of contacts with the public addresses of `BTC` and
   displays it with their respective list number.
 
 <br>
