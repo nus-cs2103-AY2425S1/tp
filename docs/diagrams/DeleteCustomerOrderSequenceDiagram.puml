@@ -1,29 +1,29 @@
 @startuml
 actor User
-participant ":AddCustomerOrderCommand" as ACC
-participant ":Model" as M
-participant ":CustomerOrderList" as COL
-participant ":Order" as O
-participant ":Person" as P
+participant "DeleteCustomerOrderCommand" as DCC
+participant "Model" as M
+participant "CustomerOrderList" as COL
+participant "Order" as O
+participant "Person" as P
 
-User -> ACC: addCustomerOrder()
-activate ACC
-ACC -> M: getCustomerOrderList()
+User -> DCC: deleteCustomerOrder()
+activate DCC
+DCC -> M: getCustomerOrderList()
 activate M
-M -> COL: addOrder(order)
+DCC -> COL: getOrder(targetIndex - 1)
 activate COL
-COL -> O: createOrder()
-activate O
-O -> P: assignOrder(order)
-activate P
-P --> O: order assigned
-deactivate P
-O --> COL: order created
-deactivate O
-COL --> M: order added
+COL --> DCC: order
 deactivate COL
-M --> ACC: order list updated
-deactivate M
-ACC --> User: CommandResult
-deactivate ACC
+DCC -> O: getOriginalPerson()
+activate O
+O --> DCC: person
+deactivate O
+DCC -> P: removeOrder(order)
+activate P
+deactivate P
+DCC -> COL: removeOrder(targetIndex - 1)
+activate COL
+deactivate COL
+DCC --> User: CommandResult
+deactivate DCC
 @enduml
