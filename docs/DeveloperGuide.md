@@ -501,6 +501,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
       Use case ends.
 
+
 ---
  
 **Use case:** UC8 - Add Appointment
@@ -1110,27 +1111,29 @@ Deleting an existing appointment from a patient
 
 Team size: 5
 
-1. **Allow names to include symbols and special characters**
+1\. **Allow names to include symbols and special characters**
 
-As of the current version of MediBase3, names are restricted to both alphanumerics and spaces only. 
-However, there are people with legal names that include symbols and special characters, such as 'Nagaratnam s/o Suppiah'. In the future, we will loosen the restrictions for names to allow users to input names with any special characters and symbols.
+  As of the current version of MediBase3, names are restricted to both alphanumerics and spaces only. 
+  However, there are people with legal names that include symbols and special characters, such as 'Nagaratnam s/o Suppiah'. In the future, we will loosen the restrictions for names to allow users to input names with any special characters and symbols.
 
-2. **Improve `addAppt` command to allow users to add multiple appointments at once**
+2\. **Improve `addAppt` command to allow users to add multiple appointments at once**
 
-Currently, users can only add one appointment at a time using the `addAppt` command. We plan to enhance the `addAppt` command to allow users to add multiple appointments at once.
-This will be useful as it allows doctors to save time by adding multiple appointments for a patient in one go, instead of typing the same command multiple times.
+  Currently, users can only add one appointment at a time using the `addAppt` command. We plan to enhance the `addAppt` command to allow users to add multiple appointments at once.
+  This will be useful as it allows doctors to save time by adding multiple appointments for a patient in one go, instead of typing the same command multiple times.
 
-3. **Improve Email Validation**
+3\. **Improve Email Validation**
 
-MediBase3 does not currently check if the email ends with a top-level domain (TLD) such as `.com` or `.org`. We plan to enhance the validation for email addresses to also check if the domain provided contains an actual top-level domain apart from the other existing constraints.
+  MediBase3 does not currently check if the email ends with a top-level domain (TLD) such as `.com` or `.org`. We plan to enhance the validation for email addresses to also check if the domain provided contains an actual top-level domain apart from the other existing constraints.
 
-4. **Allow partial addition and deletion of medical conditions and allergies**
+4\. **Allow partial addition and deletion of medical conditions and allergies**
 
-Currently, when adding or deleting multiple medical conditions or allergies with the `addMedCon`, `addAllergy`, `delMedCon`, or `delAllergy` commands, the entire command is rejected if any of the specified conditions or allergies already exist (in the case of `addMedCon` and `addAllergy`) or do not exist (in the case of `delMedCon` and `delAllergy`) for the patient. 
-This means that none of the conditions or allergies are processed, even if some are valid. 
-In the future, we plan to enhance these features by partially accepting the command—only rejecting the invalid entries and successfully adding or deleting the valid ones.
+  Currently, when adding or deleting multiple medical conditions or allergies with the `addMedCon`, `addAllergy`, `delMedCon`, or `delAllergy` commands, the entire command is rejected if any of the specified conditions or allergies already exist (in the case of `addMedCon` and `addAllergy`) or do not exist (in the case of `delMedCon` and `delAllergy`) for the patient. 
+  This means that none of the conditions or allergies are processed, even if some are valid. 
+  In the future, we plan to enhance these features by partially accepting the command—only rejecting the invalid entries and successfully adding or deleting the valid ones.
 
-5. **Enhance `find`, `findNric`, `findMedCon`, `listPrio` and `list` commands to update the Appointment List panel as well**
+5\. **Enhance `find`, `findNric`, `findMedCon`, `listPrio` and `list` commands to update the Appointment List panel as well**
 
-Currently, commands that modify the Patient List panel do not update the Appointment List panel to show only the appointments of the currently listed patients. 
-Adding this feature would allow doctors to view the appointments of the visible patients in chronological order, rather than grouped under each patient's details.
+  Currently, commands that modify the Patient List panel do not update the Appointment List panel to show only the appointments of the currently listed patients. 
+  Adding this feature would allow doctors to view the appointments of the visible patients in chronological order, rather than grouped under each patient's details.
+
+

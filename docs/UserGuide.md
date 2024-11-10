@@ -174,8 +174,6 @@ Here are some basic commands to get you started.
 6. `clear`:  
    Clears all patient and appointment data from the system.
 
-[Back to Table of Contents](#table-of-contents)
-
 
 You’re now ready to start using MediBase3.  
 For a detailed list of features and instructions, see the [Features](#features) section.  
@@ -860,7 +858,7 @@ This means that your machine is running Java version 17.0.11, which means that J
 [Return to Quick Start](#quick-start)
 
 #### **Q**: Is there a limit to the number of patients/appointments we can add?
- - **A**: As of right now, We do not have a limit to the number of patients/appointments but is dependent on the hardware specification.
+ - **A**: As of right now, we do not have a limit to the number of patients/appointments but the limit is dependent on the hardware specification.
 
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
