@@ -37,7 +37,8 @@ Here are some symbols you may encounter in this user guide:
 This contains some information on what you are not able to do
 </div>
 
-### Table of Contents
+
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -643,13 +644,3 @@ Action | Format, Examples
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Glossary
-
-
-[cols="1, 3", options="header"]
-|==============
-|Term                           | Explanation
-|Command Terminal               | A text based interface to type instructions to interact with a computer system
