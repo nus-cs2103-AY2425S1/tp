@@ -230,17 +230,17 @@ add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP
 **Rules to Remember:**
 
 
-| Field       | Requirements                                                                                                                                                       |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name        | • Letters, numbers, and spaces only<br>• Cannot be blank                                                                                                           |
-| Phone       | • Minimally 3 digits<br>•                                                                                                                                          |
-| Email       | • Must be valid email format (example@domain.com)                                                                                                                  |
+| Field       | Requirements                                                                                                                                           |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name        | • Letters, numbers, and spaces only<br>• Cannot be blank                                                                                               |
+| Phone       | • Minimally 3 digits                                                                                                                                   |
+| Email       | • Must be valid email format (example@domain.com)                                                                                                      |
 | Relationship| • Letters only<br>• Cannot be blank<br>• Note: Please enter a meaningful relationship that best describes the connection (e.g., "Friend," "Colleague," "Sibling"). |
 
 
 **Note:** Names which are very long may not be fully displayed in the detailed person view, as displaying it would
-compromise the aesthetic of the User Interface and overall user experience. The person can still be identified through
-other information such as their phone number, email, and relationship. Additionally, relationship tags are case-sensitive.
+compromise the aesthetic of the User Interface and overall user experience.<br/> The person can still be identified through
+other information such as their phone number, email, and relationship. Additionally, <u>relationship tags are **case-sensitive**</u>.
 
 </box>
 
@@ -423,6 +423,7 @@ event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION [-a ATTE
 * The optional field `-a` can only be specified at most once.
 * Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
 Note that the indexes are separated by **spaces**.
+* **Note**: It is an intended feature that you can add events with dates that have already passed. This is so that you can keep track of and archive past events.  
 </box>
 
 Valid Example:
@@ -464,6 +465,8 @@ will be adding the person first, then removing them, i.e. they will not be prese
 * Note that the indexes are separated by **spaces**.
 * Each of the optional fields can only be specified at most once. <br>
 e.g. `update -i 1 -n Birthday Party -n Dinner Party -a 1 -a 2` is an invalid command.
+* If you leave any trailing options but pass no arguments into them, they will be treated as part of the argument for the previous option, which is likely not what you intended to do so.<br/>
+E.g. `update -i 1 -n Billy's School Musical -a 1 2 -l` is an invalid command, as the trailing `-l` (location) flag is treated as an index, since no location string was passed as an argument into it.
 </box>
 
 Valid Example (One field updated):
@@ -529,7 +532,8 @@ clear -e`
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When creating 2 or more events that have the same name, start date, end date, and location**, it is possible for these events to have attendees which are subsets for each other, but not equal to each other. The remedy is to implement a more sophisticated duplicate event detection system to enhance user experience in the future.
 4. **Imprecise error message for invalid index in `edit` command**. Currently, the error message for invalid index such as `-1` (negative numbers), `0` and integer overflow is an invalid command instead of an index out of bounds. This is a known issue and will be addressed in an upcoming update to ensure that users receive more accurate and specific error messages when encountering invalid index values.
-5. **Truncation of text in the GUI**, fields with lengthy text, such as long names and address, can sometimes be truncated in the GUI. To avoid this, you can adjust the size of the window by dragging the sides to enlarge the window.
+5. **Truncation of text in the GUI**. fields with lengthy text, such as long names and address, can sometimes be truncated in the GUI. To avoid this, you can adjust the size of the window by dragging the sides to enlarge the window.
+6. **Delay between updating of UI and updating of contact information**. You may notice that the UI is not immediately updated upon executing commands such as `edit` or `delete`. You may have to refresh the UI by clicking on the person/event card again to see the updated person/event information. 
 
 --------------------------------------------------------------------------------------------------------------------
 
