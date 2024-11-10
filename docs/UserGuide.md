@@ -62,7 +62,7 @@ faster than traditional GUI apps.
   e.g. `[s/SKILL]…​` can be used as ` ` (i.e. 0 times), `s/Python`, `s/Python s/Cuda` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -83,7 +83,7 @@ Format: `help`
 
 Adds a contact to the address book.
 
-Format: `add contact n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILL]…​`
+Format: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of skills (including 0)
@@ -99,11 +99,7 @@ Adds a job to the address book.
 The company attributed to the job being added must already 
 be in the address book.
 
-Format: `add job n/NAME c/COMPANY s/SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Make sure to match job names and requirements to contact roles and skills to better utilise other features
-</div>
+Format: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
 
 Examples:
 * `add job n/Software Engineer c/Google s/100000 d/Looking for an exceptional individual`
@@ -147,7 +143,7 @@ Format: `list all`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILL]…​`
+Format: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -157,14 +153,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILL]…​`
     specifying any skills after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower s/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing skills.
+*  `edit contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `edit contact 2 n/Betsy Crower s/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing skills.
 
 ### Locating contacts by name : `find`
 
 Finds all contacts whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find contact KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -174,8 +170,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find contact John` returns `john` and `John Doe`
+* `find contact alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a contact : `delete contact`
@@ -190,7 +186,7 @@ Format: `delete contact INDEX`
 
 Examples:
 * `list contact` followed by `delete contact 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `delete contact 1` deletes the 1st contact in the results of the `find` command.
+* `find contact Betsy` followed by `delete contact 1` deletes the 1st contact in the results of the `find` command.
 
 ### Deleting a job : `delete job`
 
@@ -232,6 +228,7 @@ Format: `screen job INDEX`
 
 * Uses the name of the job at the specified `INDEX` to filter the 
 list of contacts to contacts with role matching the name.
+* Contacts that are already matched will not be shown. 
 * The index refers to the index number shown in the displayed job list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The filter is case-insensitive i.e. `Cleaner` will match `cleaner`.
@@ -356,12 +353,13 @@ _Details coming soon ..._
 
 | Action             | Format, Examples                                                                                                                                                                 |
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**    | `add contact n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILL]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com r/copywriter s/MSWord`                        |
-| **Add Job**        | `add job n/NAME c/COMPANY s/SALARY d/DESCRIPTION [r/REQUIREMENT]…​` <br> e.g., `add job n/Software Engineer c/Google s/2000 d/Needs to know AI r/Python`                         |
+| **Add Contact**    | `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com r/copywriter s/MSWord`                               |
+| **Add Job**        | `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​` <br> e.g., `add job n/Software Engineer c/Google s/2000 d/Needs to know AI r/Python`                 |
 | **Add Company**    | `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE` <br> e.g., `add company n/Google a/70 Pasir Panjang Rd #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000` |
 | **List Contacts**  | `list contact`                                                                                                                                                                   |
 | **List Jobs**      | `list job`                                                                                                                                                                       |
 | **List Companies** | `list company`                                                                                                                                                                   |
+| **List All**       | `list all`                                                                                                                                                                       |
 | **Clear**          | `clear`                                                                                                                                                                          |
 | **Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`                                                                                                                              |
 | **Delete Job**     | `delete job INDEX` <br> e.g., `delete job 2`                                                                                                                                     |
@@ -370,7 +368,7 @@ _Details coming soon ..._
 | **Match**          | `match CONTACT_INDEX JOB_INDEX` <br> e.g., `match 1 2`                                                                                                                           |
 | **Unmatch**        | `unmatch CONTACT_INDEX JOB_INDEX` <br> e.g., `unmatch 3 2`                                                                                                                       |
 | **View Company**   | `view company INDEX` <br> e.g., `view company 1`                                                                                                                                 |
-| **Edit Contact**   | `edit contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                      |
+| **Edit Contact**   | `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                                       |
 | **Find Contact**   | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`                                                                                                       |
 | **Help**           | `help`                                                                                                                                                                           |
 | **Exit**           | `exit`                                                                                                                                                                           |

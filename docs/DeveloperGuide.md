@@ -243,13 +243,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -291,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | list all job listings                |
 | `* * *`  | user    | create a job listing                 |  
 | `* * *`  | user    | remove a job listing                 | remove job listing information that I no longer need |
-| `* * *`  | user    | filter contacts based on job listing | focus on contacting talents that fits the job        |
+| `* * *`  | user    | screen contacts based on job listing | focus on contacting talents that fits the job        |
 | `* * *`  | user    | list all companies                   |                                                      |
 | `* * *`  | user    | create a company                     | group and organize contacts and job listings         |
 | `* * *`  | user    | delete a company                     | remove company information that I no longer need     |
@@ -370,7 +363,7 @@ and the **Actor** is the `user`, unless specified otherwise)
   
       Use case ends. 
 
-**Use case: Add a company **
+**Use case: Add a company**
 
 **MSS**
 
@@ -386,7 +379,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 
       Use case ends.
 
-**Use case: List companies **
+**Use case: List companies**
 
 **MSS**
 
@@ -401,7 +394,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 
     Use case ends.
 
-**Use case: View company **
+**Use case: View company**
 
 **MSS**
 
@@ -495,20 +488,12 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-* Job
-  * Edit a job
-  * Locating jobs by name
-  * Screen jobs by a contact
-  * Support job type (part-time, intern, full-time, contract)
-  * Support other job duration attribute (6-month contract, summer vacation internship)
-  * Support job requirement type (mandatory, good to have)
-  * Support job quota
-  * Smart select company if not found when creating job listing (find & return 1st match)
-  * Support screening candidates via more advanced requirement (salary range, number of skills)
-  * Sorting capability of job list
-* Company
-  * Edit a company
-  * Locating company by name
-  * Enhance company contact details by having contacts as company liaises 
-* Archiving capability
-* Set a contact as potential candidate of a job
+Team size: 5
+
+* **Improve `screen job` functionality**: Currently, this command is only able to screen contacts that have roles which is a sub-string of the job name. 
+We plan to expand on this functionality by allowing users to add parameters to modify the way screen works. Examples being to 
+screen by how well the contact's skill match up to the job's requirements or to specify whether partial role matches are fine. 
+* **Enable support for `find job`**:   
+* **Enable support for `find company`**  
+* **Enable support for `edit job`**  
+* **Enable support for `edit company`**  
