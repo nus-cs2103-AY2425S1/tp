@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.eventfulnus.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -108,6 +109,10 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        List<Event> events = getFilteredEventList();
+        for (Event event : events) {
+            setEvent(event, event);
+        }
     }
 
     @Override
