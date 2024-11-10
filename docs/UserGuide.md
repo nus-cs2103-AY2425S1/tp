@@ -1,9 +1,9 @@
 ---
 layout: page
-title: User Guide 📖🧁
+title: User Guide 
 ---
 
-<h1> <b>Welcome to BakeBuddy 👨‍🍳👩‍🍳</b> </h1>
+<h1> <b>Welcome to BakeBuddy 👨‍🍳👩‍🍳📖🧁</b> </h1>
 
 BakeBuddy is your all-in-one command-line companion for managing your home bakery business. Designed with speed and
 efficiency in mind, it combines the power of a Command Line Interface (CLI) with intuitive features to help you focus
