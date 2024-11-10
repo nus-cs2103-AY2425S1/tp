@@ -333,6 +333,7 @@ to give too much than to not give at all", and we believe that finding by whole 
 **Q**: Why does the tags list not update when I `find` something? <br>
 **A**: Our tags list is meant to span the entire contact list, which can serve as a reference if you require to find a contact to add a specific and easily-forgettable tag to.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
