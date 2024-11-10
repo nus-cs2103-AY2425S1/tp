@@ -211,7 +211,7 @@ Format: `addClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID ca/CLAIM_AMOUNT_IN_DOLLARS
 organisation before the claim is added to this app.
 4. `CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS` is the claim amount written in `DD.CC` format eg. `151.10`. So, it can contain
 any number of digits for dollars (leading zeroes will be trimmed), but must be exactly 2 digits for cents. If the claim amount
-is a whole number eg. $500, enter it as `500.00`. The claim amount can be up till 1 million Singapore Dollars (SGD).
+is a whole number eg. 500, enter it as `500.00`.
 
 <box type="warning" seamless>
     <span circle slot="icon"><md>:bulb:</md></span>
