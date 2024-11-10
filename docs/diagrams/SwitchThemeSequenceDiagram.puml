@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ArrowColor blue
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SwitchThemeCommandParser" as SwitchThemeCommandParser LOGIC_COLOR
+participant "s:SwitchThemeCommand" as SwitchThemeCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant ":ThemeController" as ThemeController UI_COLOR
+
+box STORAGE STORAGE_COLOR_T1
+participant ":ThemePreference" as ThemePreference STORAGE_COLOR
+
+[-> LogicManager : execute("switch dark")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("switch dark")
+activate AddressBookParser
+
+create SwitchThemeCommandParser
+AddressBookParser -> SwitchThemeCommandParser
+activate SwitchThemeCommandParser
+
+SwitchThemeCommandParser --> AddressBookParser
+deactivate SwitchThemeCommandParser
+
+AddressBookParser -> SwitchThemeCommandParser : parse("dark")
+activate SwitchThemeCommandParser
+
+create SwitchThemeCommand
+SwitchThemeCommandParser -> SwitchThemeCommand : SwitchThemeCommand("dark")
+activate SwitchThemeCommand
+
+SwitchThemeCommand --> SwitchThemeCommandParser : s
+deactivate SwitchThemeCommand
+
+SwitchThemeCommandParser --> AddressBookParser : s
+deactivate SwitchThemeCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SwitchThemeCommandParser -[hidden]-> AddressBookParser
+destroy SwitchThemeCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SwitchThemeCommand : execute(m)
+activate SwitchThemeCommand
+
+SwitchThemeCommand -> ThemeController : switchTheme("dark")
+activate ThemeController
+
+ThemeController -> ThemePreference : setTheme("dark")
+activate ThemePreference
+
+ThemePreference -> ThemePreference : saveThemePreference("dark")
+activate ThemePreference
+
+ThemePreference --> ThemePreference
+deactivate ThemePreference
+
+ThemePreference --> ThemeController
+deactivate ThemePreference
+
+ThemeController --> SwitchThemeCommand
+deactivate ThemeController
+
+create CommandResult
+SwitchThemeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SwitchThemeCommand : r
+deactivate CommandResult
+
+SwitchThemeCommand --> LogicManager : r
+deactivate SwitchThemeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

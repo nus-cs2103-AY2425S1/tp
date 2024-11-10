@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ArrowColor blue
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+end box
+
+box STORAGE STORAGE_COLOR_T1
+participant ":JsonAddressBookStorage" as JsonAddressBookStorage STORAGE_COLOR
+participant "j:JsonSerializableAddressBook" as JsonSerializableAddressBook STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("add n/John ct/work p/98765432")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add n/John ct/work p/98765432")
+activate AddressBookParser
+
+create AddCommandParser
+AddressBookParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> AddressBookParser
+deactivate AddCommandParser
+
+AddressBookParser -> AddCommandParser : parse("n/John ct/work p/98765432")
+activate AddCommandParser
+
+create Person
+AddCommandParser -> Person
+activate Person
+
+Person --> AddCommandParser : p
+deactivate Person
+
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(p)
+activate AddCommand
+
+AddCommand --> AddCommandParser : a
+deactivate AddCommand
+
+AddCommandParser --> AddressBookParser : a
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddCommand : execute(m)
+activate AddCommand
+
+AddCommand -> Model : addPerson(person)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand : r
+deactivate CommandResult
+
+AddCommand --> LogicManager : r
+deactivate AddCommand
+
+LogicManager -> JsonAddressBookStorage : saveAddressBook(model.getAddressBook())
+activate JsonAddressBookStorage
+
+create JsonSerializableAddressBook
+JsonAddressBookStorage -> JsonSerializableAddressBook
+activate JsonSerializableAddressBook
+
+JsonSerializableAddressBook --> JsonAddressBookStorage : j
+deactivate JsonSerializableAddressBook
+
+JsonAddressBookStorage --> LogicManager : j
+deactivate JsonAddressBookStorage
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

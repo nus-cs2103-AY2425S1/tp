@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,9 +116,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
 
 The `Model` component,
@@ -132,14 +132,14 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="550" />
 
 </box>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -166,8 +166,8 @@ The add command allows users to add a new contact to the addressbook with requir
 The command format is as follows:<br>
 `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
-* **Required fields**: NAME, CONTACT_TYPE, at least one of TELEGRAM_HANDLE, PHONE_NUMBER or EMAIL
-* **Optional fields**: TELEGRAM_HANDLE, PHONE_NUMBER, EMAIL, MODULE, REMARK, TAG
+* **Required fields**: `NAME`, `CONTACT_TYPE`, at least one of `TELEGRAM_HANDLE`, `PHONE_NUMBER` or `EMAIL`
+* **Optional fields**: `TELEGRAM_HANDLE`, `PHONE_NUMBER`, `EMAIL`, `MODULE`, `REMARK`, `TAG`
 
 The command parser identifies each prefix (e.g. `n/`, `ct/`, `h/`) and stores the associated data in a new contact. 
 The optional fields allow users to include more detailed information, making the contact record customizable.
@@ -181,8 +181,11 @@ The optional fields allow users to include more detailed information, making the
   an error is raised, prompting the user to provide the necessary information.
 * **Logic Manager**
   * The parsed information is passed to `LogicManager#execute()`, which transfers control to the `Storage` component
+* **Storage**
   * The information is stored using the `JsonAddressBookStorage#saveAddressBook()` method which calls the `JsonSerializableAddressBook`
-  constructor, to create an object that can be serialized in JSON format.
+    constructor, to create an object that can be serialized in JSON format.
+
+<puml src="diagrams/AddSequenceDiagram.puml" width="550" />
 
 #### Design Considerations
 
@@ -193,6 +196,40 @@ The optional fields allow users to include more detailed information, making the
   * Required fields are validated to prevent incomplete records.
   * Invalid formats (e.g. incorrectly formatted phone numbers or emails) are checked and validated to maintain data consistency.
 
+### Switch Theme feature
+
+#### Implementation
+
+The switch theme command allows users to change the display to "light" mode or "dark" mode according to their preference. The preferred theme will be stored and displayed every time the user opens the app.<br>
+The command format is as follows:<br>
+`switch THEME​`
+
+* `THEME` can be either 'light' or 'dark'
+
+#### Key Components and Operations
+
+* **Parser (SwitchThemeCommandParser)**
+    * The `Parser` component processes the `switch` command string to extract the requested theme ('light' or 'dark'), creating a new `SwitchThemeCommand` with the specified theme. 
+    * If the input format is invalid, a `ParseException` is raised with an error message, prompting users to enter a valid input.
+* **Logic (SwitchThemeCommand)**
+    * After parsing, `SwitchThemeCommand#execute` calls `ThemeController.switchTheme()` to apply the new theme.
+    * A message is returned to the user to confirm the theme change.
+* **UI (ThemeController)**
+    * The `ThemeController` clears current stylesheets, applies the specified stylesheet and logs the theme change.
+    * The selected theme is stored via `ThemePreference.setTheme()`, which calls `saveThemePreference()` to update the JSON file.
+* **Storage (ThemePreference)**
+    * `ThemePreference` loads the saved theme from `themePreference.json`, or defaults to 'LIGHT' if none is found.
+
+<puml src="diagrams/SwitchThemeSequenceDiagram.puml" width="550" />
+
+#### Design Considerations
+
+* **User experience**
+    * After executing `SwitchThemeCommand`, users receive immediate confirmation of the theme change, providing clarity and an improved experience.
+    * Saving the user's theme preference ensures a consistent experience each time the application is launched, enhancing usability.
+* **Error Handling**
+    * Invalid theme inputs raises clear errors, guiding users on valid options.
+    * `ThemePreference` manages file I/O errors with warnings, defaulting to "LIGHT" if any issues arise with loading or saving preferences.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -327,7 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 4a. The entered data is invalid
-    * 4a1. UniLink shows an error message
+    * 4a1. UniLink shows an error message indicating fields that could be invalid.
     * 4a2. User re-enters the new data
 
   Steps 4a1-4a2 are repeated until the data entered is correct.
@@ -335,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes from step 5.
 
 * 4b. The edited contact results in a duplicate
-  * 4b1. UniLink shows an error message indicating that a duplicate contact already exists
+  * 4b1. UniLink shows an error message indicating that a duplicate contact already exists.
     Use case ends.
 
 **Use case: UC004 - View contact list**
