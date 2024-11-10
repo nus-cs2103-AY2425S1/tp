@@ -59,22 +59,25 @@ public class RemovePersonFromEventCommand extends Command {
         Event originalEvent = eventManager.getEventList().get(eventIndex.getZeroBased());
         Event event = new Event(originalEvent);
 
-        if (personIndex.getZeroBased() >= event.getAllPersons().size()) {
+        if (personIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
         // get the person from address book, then remove from event
         List<Person> lastShownList = model.getFilteredPersonList();
         Person person = lastShownList.get(personIndex.getZeroBased());
-        String personRole = event.getRole(person);
-        if (personRole == null) {
+        if (!event.hasPerson(person)) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
+        //        String personRole = event.getRole(person);
+        //        if (personRole == null) {
+        //            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        //        }
         // at this point, person should have a role in event
         assert(event.hasPerson(person));
         logger.info("Removing person " + person.getName() + " from event " + event.getName());
         logger.info(event.getName() + " now has " + event.getAllPersons().size() + " people");
 
-        event.removePerson(person, personRole);
+        event.removePerson(person);
         eventManager.setEvent(originalEvent, event);
         event.updateUi();
         // check the last shown list if it is event
