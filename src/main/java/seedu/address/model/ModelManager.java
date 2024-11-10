@@ -236,7 +236,7 @@ public class ModelManager implements Model {
                     person.getEmail(), person.getRsvpStatus(), newTags);
             setPerson(person, updatedPerson);
             updatedPersons.add(updatedPerson);
-            tagFilters.remove(tag);
+            tagFilters.clear();
         }
         return updatedPersons;
     }
