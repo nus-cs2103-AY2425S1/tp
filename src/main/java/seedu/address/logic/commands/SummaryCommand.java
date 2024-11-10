@@ -40,12 +40,7 @@ public class SummaryCommand extends Command {
         // Total number of applicants
         long totalApplicants = model.getAddressBook().getPersonList().size();
 
-        // If there are no applicants, provide a specific message
-        if (totalApplicants == 0) {
-            return new CommandResult("Total number of applicants: 0\nNo applicants found.");
-        }
-
-        // Format the summary message for non-zero applicants
+        // Format the summary message
         StringBuilder summary = new StringBuilder();
         for (String status : Status.VALID_STATUSES) {
             summary.append(String.format("Number of applicants %s: %d\n", status, statusCounts.get(status)));
@@ -54,7 +49,6 @@ public class SummaryCommand extends Command {
         String resultMessage = String.format(MESSAGE_SUCCESS, totalApplicants, summary.toString().trim());
         return new CommandResult(resultMessage);
     }
-
 
     @Override
     public boolean equals(Object other) {

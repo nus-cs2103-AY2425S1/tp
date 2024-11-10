@@ -32,22 +32,8 @@ public class SummaryCommandTest {
     public void execute_summaryDisplaysCorrectCounts() {
         SummaryCommand summaryCommand = new SummaryCommand();
 
-        // Generate expected summary message for non-empty AddressBook
+        // Generate expected summary message
         String expectedMessage = generateExpectedSummaryMessage(model);
-
-        assertCommandSuccess(summaryCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_summaryDisplaysZeroApplicants() {
-        // Set up an empty AddressBook to test zero applicants scenario
-        model = new ModelManager(new AddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(new AddressBook(), new UserPrefs());
-
-        SummaryCommand summaryCommand = new SummaryCommand();
-
-        // Expected message when there are zero applicants
-        String expectedMessage = "Total number of applicants: 0\nNo applicants found.";
 
         assertCommandSuccess(summaryCommand, model, expectedMessage, expectedModel);
     }
