@@ -213,7 +213,7 @@ NIL (all covered in Constraints)
 2. As per constraints, prices like `1000000.50` are not allowed.
 
 ##### ar/
-1. The unit of measurement is `m^2`.
+1. The unit of measurement is `m²`.
 2. There's no maximum limit, so values like ar/99999999999999999999999999999 will pass, which may affect the display of data.
 3. As per constraints, areas like `1000.50` are not allowed.
 
