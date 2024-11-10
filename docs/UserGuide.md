@@ -93,7 +93,7 @@ Adds a pet owner to PawPatrol.
 <ul>
 <li><code>IC_NUMBER</code>: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
 <li><code>NAME</code>: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
-<li><code>PHONE</code>: Must contain exactly 8 digits as according to Singapore phone standards.</li>
+<li><code>PHONE</code>: Must contain exactly 8 digits.</li>
 <li><code>EMAIL</code>: Should follow a standard email format of local-part@domain and adhere to the following constraints:
 <ul>
 <li>The local-part should only contain alphanumeric characters and the following special characters (excluding the apostrophes) '+', '_', '.', '-'.</li>
