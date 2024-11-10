@@ -103,7 +103,7 @@ Field | Description                                                             
 
 * The `personList` view is the view where the list of elderly is shown. It is the default view when you start the application. Use the `list` command to return to this view if you are in another view.
 
-* The fields in a command cannot have their prefix as part of the input. For example, `address` cannot be `a/Clementi Ave a/2` or `notes` cannot be `o/This is a note o/part of same note`.
+* The fields in a command cannot contain whitespace followed by any of the command's prefix as part of the input. For example, `address` cannot be `a/Clementi Ave a/2` but can be `a/Clementi Area/2`. Another example is `notes` can neither be `o/This is a note o/part of same note` nor `o/Note with d/in it` but can be `o/I asked a no/yes question`.
 </div>
 
 ### Viewing help : `help`
