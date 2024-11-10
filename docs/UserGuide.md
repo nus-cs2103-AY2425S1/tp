@@ -404,8 +404,53 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CFG home folder.
+**Q**: Can I use CFG offline?<br>  
+**A**: Yes! CFG is fully offline, storing data locally. You can manage contacts and use all commands without an internet connection, making it convenient and accessible anywhere.
+
+---
+
+**Q**: How do I transfer my data to another computer?<br>  
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file containing the data from your previous CFG home folder.
+
+---
+
+**Q**: How does CFG handle duplicate contacts?<br>  
+**A**: CFG checks for duplicates by comparing contact names. If a contact with the same name already exists, CFG will prevent the addition of a duplicate. Modify the name slightly or add unique identifiers if you need to create a similar entry.
+
+---
+
+**Q**: I ran a command, but it didn’t seem to work. What went wrong?<br>  
+**A**: Check if you entered the command parameters in the correct format and order. Refer to the [Features](#features) section for detailed command syntax. Commands are case-insensitive, so don’t worry about capitalization, but ensure there are no extra spaces within commands.
+
+---
+
+**Q**: How can I improve search accuracy in CFG?<br>  
+**A**: For more precise search results:
+- Use multiple prefixes (e.g., `search n/John t/friend`) to filter by multiple criteria.
+- Remember that searches are case-insensitive but require exact word matches.
+- If your search results are too broad, refine them with additional criteria.
+
+---
+
+**Q**: How do I view all members in a large group?<br>  
+**A**: Use `search g/GROUP_NAME` to display all members, regardless of the group size.
+
+---
+
+**Q**: Can a contact belong to multiple groups?<br>  
+**A**: Yes, a contact can be a member of multiple groups. Simply use the `addToGroup` command with the contact’s index to include them in additional groups without affecting their membership in existing groups.
+
+---
+
+**Q**: Can I add or remove multiple members from a group at once?<br>  
+**A**: Yes, CFG allows you to add or remove several members from a group in a single command. Use the `createGroup` or `addToGroup` command with a space-separated list of indices or a closed range to add multiple members. Similarly, use the `removeFromGroup` command with multiple indices or ranges to remove members efficiently. 
+
+---
+
+**Q**: Can I rename a group without changing its members?<br>  
+**A**: Yes, you can use the `editGroupName` command to change a group’s name while keeping its members intact. Just specify the old name and the new name, and the group will be updated without losing any contacts.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
