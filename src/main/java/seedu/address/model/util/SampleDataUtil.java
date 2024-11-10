@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,7 +58,6 @@ public class SampleDataUtil {
                 getTagSet("hairstylist"),
                 getWeddingSet("Tom's Wedding"),
                 getTaskSet())
-
         };
     }
 
@@ -65,20 +65,69 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
-
-            // Add person to guest list for all assigned weddings
-            for (Wedding wedding : samplePerson.getWeddings()) {
-                wedding.addToGuestList(samplePerson);
-            }
-
-            // Increment tagged count for all tags
-            for (Tag tag : samplePerson.getTags()) {
-                tag.increaseTaggedCount();
-            }
+            loadTags(sampleAb, samplePerson);
+            loadTasks(sampleAb, samplePerson);
+            loadWeddings(sampleAb, samplePerson);
         }
-        //TODO sample data for tags, tasks, & weddings
         return sampleAb;
     }
+
+    /**
+     * Adds tags to model that were in person but not in model, and makes model and
+     * person store the same tags
+     */
+    private static void loadTags(AddressBook addressBook, Person person) {
+        Set<Tag> tagList = person.getTags();
+        Set<Tag> newTagList = new HashSet<>();
+        for (Tag tag : tagList) {
+            // Adds the tag to the model
+            if (!addressBook.hasTag(tag)) {
+                addressBook.addTag(tag);
+            }
+
+            newTagList.add(addressBook.getTag(tag));
+            addressBook.getTag(tag).increaseTaggedCount();
+        }
+        person.setTags(newTagList);
+    }
+
+    /**
+     * Adds weddings to model that were in person but not in model, and makes model and
+     * person store the same weddings
+     */
+    private static void loadWeddings(AddressBook addressBook, Person person) {
+        Set<Wedding> weddingList = person.getWeddings();
+        Set<Wedding> newWeddingList = new HashSet<>();
+        for (Wedding wedding : weddingList) {
+            // Adds the wedding to the model
+            if (!addressBook.hasWedding(wedding)) {
+                addressBook.addWedding(wedding);
+            }
+
+            // If the wedding does not contain the person, add them to the guest list of the wedding by default
+            if (!addressBook.getWedding(wedding).hasPerson(person)) {
+                addressBook.getWedding(wedding).addToGuestList(addressBook.getPerson(person));
+            }
+
+            newWeddingList.add(addressBook.getWedding(wedding));
+        }
+        person.setWeddings(newWeddingList);
+    }
+
+    /**
+     * Adds tasks to model that were in person but not in model, and makes model and
+     * person store the same tasks
+     */
+    private static void loadTasks(AddressBook addressBook, Person person) {
+        Set<Task> taskList = person.getTasks();
+        for (Task task : taskList) {
+            if (addressBook.hasTask(task)) {
+                continue;
+            }
+            addressBook.addTask(task);
+        }
+    }
+
 
     /**
      * Returns a tag set containing the list of tags given.

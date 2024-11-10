@@ -12,6 +12,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -43,6 +47,20 @@ public class AddCommandIntegrationTest {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model,
                 Messages.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void execute_personNewWeddingAndTag_successCreatesWeddingAndTag() {
+        Person validPerson = new PersonBuilder().withTags("new tag").withWeddings("new wedding").build();
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(validPerson);
+        expectedModel.addTag(new Tag(new TagName("new tag")));
+        expectedModel.addWedding(new Wedding(new WeddingName("new wedding")));
+
+        assertCommandSuccess(new AddCommand(validPerson), model,
+                String.format(Messages.MESSAGE_ADD_PERSON_SUCCESS, Messages.format(validPerson)),
+                expectedModel);
     }
 
 }

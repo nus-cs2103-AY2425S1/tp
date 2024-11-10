@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.CLIVE_WEDDING;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,12 +33,12 @@ public class AssignWeddingCommandTest {
     public void assignWedding_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         Map<Wedding, String> weddingsToAdd = new HashMap<>() {
-            { put(AMY_WEDDING, "g"); }
+            { put(CLIVE_WEDDING, "g"); }
         };
         AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
                 INDEX_FIRST, weddingsToAdd, false);
 
-        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS, "Amy's Wedding",
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS, "Clive's Wedding",
                 personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -125,6 +126,5 @@ public class AssignWeddingCommandTest {
                 addedWeddings,
                 personToEdit.getName().toString());
         CommandTestUtil.assertCommandSuccess(assignWeddingCommand, model, expectedMessage, model);
-
     }
 }

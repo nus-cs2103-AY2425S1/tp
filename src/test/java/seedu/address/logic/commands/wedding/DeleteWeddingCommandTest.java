@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
 
 import java.util.HashSet;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -56,7 +55,6 @@ public class DeleteWeddingCommandTest {
         assertCommandSuccess(deleteWeddingCommand, model, expectedMessage, expectedModel);
     }
 
-    @Disabled
     @Test
     public void execute_invalidNotFoundDeleteWeddingCommand() {
         Wedding weddingToDelete = model.getFilteredWeddingList().get(0);

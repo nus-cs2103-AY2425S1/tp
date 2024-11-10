@@ -18,6 +18,8 @@ import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 import seedu.address.testutil.PersonBuilder;
@@ -192,5 +194,19 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
                 + ", weddings=" + ALICE.getWeddings() + ", tasks=" + ALICE.getTasks() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void tagFunctions() {
+        Person person1 = new PersonBuilder(ALICE).build();
+        Tag tag = new Tag(new TagName("buy groceries"));
+
+        person1.addTag(tag);
+        assertTrue(person1.hasTag(tag));
+
+        Tag newTag = new Tag(new TagName("call family"));
+        person1.setTag(tag, newTag);
+        assertTrue(person1.hasTag(newTag));
+        assertFalse(person1.hasTag(tag));
     }
 }
