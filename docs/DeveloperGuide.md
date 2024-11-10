@@ -259,90 +259,170 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Add a contact**
 
 **MSS**
-
-1.  User requests to add contact
-2.  AddressBook adds the contact
-
-    Use case ends.
+1. User launches the application.
+2. User enters the `add` command with contact details, including name, Telegram handle, email, student status, role(s), and optional nickname.
+3. Application validates input fields (e.g., unique email and Telegram handle).
+4. Application adds the contact to the address book.
+5. Application displays a confirmation message: "Contact added successfully."
+     Use case ends.
 
 **Extensions**
+- 2a. User provides incomplete or invalid data (e.g., incorrect email format).
+  - 2a1. Application displays an error message indicating the issue (e.g., "Error: Invalid email format").
+       Use case ends.
+- 3a. Duplicate contact details detected (e.g., duplicate email or Telegram handle).
+  - 3a1. Application displays an error message indicating the duplication.
+  - 3a2. User either corrects the details or cancels the add operation.
+    Use case ends.
 
-* 1a. Given contact has invalid or duplicate fields.
-    * 1a1. AddressBook shows an error message.
+---
 
-      Use case ends.
-
-* 1b. Given contact has duplicate 'name' field.
-    * 1a1. AddressBook shows an error message and prompts user to re-enter with nickname.
-
-      Use case ends.
-
-**Use case: Delete a contact**
+### Use Case: Listing All Contacts
 
 **MSS**
+1. User launches the application.
+2. User enters the `list` command with no additional parameters.
+3. Application displays all stored contacts.
+     Use case ends.
 
-1.  User requests to delete contact
-2.  AddressBook deletes the contact
+---
 
-    Use case ends.
+### Use Case: Deleting a Contact
+
+**MSS**
+1. User enters the `delete` command with the contact’s index or unique full name.
+2. Application removes the specified contact.
+3. Application displays a confirmation message with the deleted contact’s details.
+     Use case ends.
 
 **Extensions**
-
-* 1a. The given contact is not in the AddressBook
-    * 1a1. AddressBook shows an error message.
-
+- 1a. User provides an invalid index or name.
+  - 1a1. Application displays an error message: "Error: Contact not found."
       Use case ends.
-
-* 1b. Multiple matching contacts in the AddressBook
-    * 1b1. AddressBook shows list of all matching contacts.
-    * 1b2. User enters index of contact to delete
-
+- 1b. User enters a name that is not unique in the address book.
+  - 1b1. Application prompts the user to delete by index instead.
+  - 1b2. User enters index of contact to delete
       Use case resumes at step 2.
 
+---
 
-**Use case: Search for contact**
+### Use Case: Deleting a Contact in a Filtered List
 
 **MSS**
-
-1.  User requests to search for contact
-2.  AddressBook shows list of all matching contacts
-
-    Use case ends.
+1. User performs a search using `find` to filter contacts.
+2. User enters the `delete` command with an index from the filtered list.
+3. Application deletes the specified contact from the filtered list.
+4. Application displays a confirmation message.
+     Use case ends.
 
 **Extensions**
-
-* 1a. User did not provide the search input
-    * 1a1. AddressBook shows an error message.
-
+- 2a. User provides an invalid index or namenot in the filterest list.
+  - 2a1. Application displays an error message: "Error: Contact not found."
       Use case ends.
-* 1b. Given search input has invalid or duplicate fields.
-    * 1b1. AddressBook shows an error message.
+- 2b. User enters a name that is not unique in the address book.
+  - 2b1. Application prompts the user to delete by index instead.
+  - 2b2. User enters index of contact to delete
+      Use case resumes at step 2.
 
-      Use case ends.
-* 1c. Search input does not match any contact in the AddressBook
-    * 1c1. AddressBook shows an error message and prompts user to try searching under another field
+---
 
-      Use case ends.
-
-**Use case: List all contacts**
+### Use Case: Editing a Contact
 
 **MSS**
+1. User enters the `edit` command with the contact’s index or unique full name, specifying the fields to update.
+2. Application validates the updated details (e.g., unique Telegram handle).
+3. Application updates the contact’s details in the address book.
+4. Application displays a confirmation message: "Contact edited successfully."
+     Use case ends.
 
-1.  User requests to list all contacts
-2.  AddressBook shows list of all contacts
+**Extensions**
+- 1a. User provides incomplete, invalid, or duplicate data.
+  - 1a1. Application displays an error message indicating the issue.
+      Use case ends
+- 1b. User specifies a non-unique full name for editing.
+  - 1b1. Application prompts the user to edit by index.
+  - 1b2. User enters index of contact to delete
+      Use case resumes at step 2.
+- 1c. Contact not found (e.g., incorrect index or name not in list).
+  - 1c1. Application displays an error message: "Error: Contact not found."
+      Use case ends
 
-    Use case ends.
+---
 
-
-**Use case: Help to find list of contacts**
+### Use Case: Editing a Contact in a Filtered List
 
 **MSS**
+1. User performs a search using `find` to filter contacts.
+2. User enters the `edit` command with an index from the filtered list.
+3. Application updates the specified contact’s details in the filtered list.
+4. Application displays a confirmation message.
+     Use case ends
 
-1.  New user requests to see the list of commands
-2.  Data_coNdUctorS shows help list and URL to our User Guide
-3.  User goes to the User Guide link
+**Extensions**
+- 2a. User provides incomplete, invalid, or duplicate data.
+  - 2a1. Application displays an error message indicating the issue.
+      Use case ends
+- 2b. User specifies a non-unique full name for editing.
+  - 2b1. Application prompts the user to edit by index.
+  - 2b2. User enters index of contact to delete
+      Use case resumes at step 2.
+- 2c. Contact not found (e.g., incorrect index or name not in filtered list).
+  - 2c1. Application displays an error message: "Error: Contact not found."
+      Use case ends
 
-    Use case ends.
+---
+
+### Use Case: Finding a Contact by Details
+
+**MSS**
+1. User enters the `find` command with specific criteria, such as name or role etc.
+2. Application searches for contacts that match the criteria.
+3. Application displays a list of contacts that meet the search criteria, along with a status message: "Found contacts matching criteria."
+     Use case ends.
+
+**Extensions**
+- 1a. Search input does not match any contact in the AddressBook.
+  - 1a1. Application shows an error message and prompts user to try searching under another field
+      Use case ends.
+- 1b. User specifies an invalid role or student status.
+  - 1b1. Application displays an error message of invalid role/student status inputted
+      Use case ends.
+- 1c. User did not provide the search input
+  - 1c1. Application displays error message to input search criteria
+      Use case ends.
+
+---
+
+### Use Case: Clearing All Contacts
+
+**MSS**
+1. User enters the `clear` command.
+2. Application deletes all contacts.
+     Use case ends.
+
+---
+
+### Use Case: Help Information
+
+**MSS**
+1. User enters the `help` command.
+2. Application displays a general help message detailing available commands and how to access specific command help.
+3. User reads the displayed help message for command information.
+     Use case ends.
+
+**Extensions**
+- 1a. User enters `help COMMAND_WORD` (e.g., `help add`) to get detailed information on a specific command.
+  - 1a1. Application displays detailed usage information for the specified command, including the command format, required fields, and examples.
+      Use case continues to step 3.
+- 1b. User enters `help` with extraneous parameters (e.g., `help extra`).
+  - 1b1. Application shows an error message and prompts user to try `help` or `help COMMAND_WORD`.
+      Use case ends.
+
+**Alternate Paths**
+- 2a. User requests further assistance by following the provided link to the complete User Guide.
+  - 2a1. Application opens the User Guide in the default web browser, allowing the user to view more comprehensive instructions.
+      Use case ends.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
