@@ -7,13 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
-import java.util.Set;
-
 import seedu.address.logic.commands.person.AddCommand;
 import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.wedding.Wedding;
 
 /**
  * A utility class for Person.
@@ -54,23 +50,6 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.getTagName()).append(" "));
-            }
-        }
-        sb.append(" ");
-        if (descriptor.getWeddings().isPresent()) {
-            Set<Wedding> weddings = descriptor.getWeddings().get();
-            if (weddings.isEmpty()) {
-                sb.append(PREFIX_WEDDING);
-            } else {
-                weddings.forEach(s -> sb.append(PREFIX_WEDDING).append(s.getWeddingName()).append(" "));
-            }
-        }
         return sb.toString();
     }
 }

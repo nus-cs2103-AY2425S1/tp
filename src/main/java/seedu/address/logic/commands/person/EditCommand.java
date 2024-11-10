@@ -5,12 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -48,9 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_WEDDING + "WEDDING]...\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS].\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -74,26 +68,6 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
-        // Check that all tags that user wants to add are in the Wedlinker
-        if (editPersonDescriptor.getTags().isPresent()) {
-            Set < Tag > editedTags = editPersonDescriptor.getTags().get();
-            for (Tag tag : editedTags) {
-                if (!model.hasTag(tag)) {
-                    throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND);
-                }
-            }
-        }
-
-        // Check that all weddings that user wants to add are in the Wedlinker
-        if (editPersonDescriptor.getWeddings().isPresent()) {
-            Set < Wedding > editedWeddings = editPersonDescriptor.getWeddings().get();
-            for (Wedding wedding : editedWeddings) {
-                if (!model.hasWedding(wedding)) {
-                    throw new CommandException(Messages.MESSAGE_WEDDING_NOT_FOUND);
-                }
-            }
-        }
 
         Person personToEdit = getPerson(model);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
@@ -131,9 +105,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Wedding> updatedWeddings = editPersonDescriptor.getWeddings().orElse(personToEdit.getWeddings());
-        Set<Task> updatedTasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
+        Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Wedding> updatedWeddings = personToEdit.getWeddings();
+        Set<Task> updatedTasks = personToEdit.getTasks();
 
         if (personToEdit.isVendor()) {
             return new Vendor(updatedName, updatedPhone, updatedEmail,
@@ -176,9 +150,6 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
-        private Set<Wedding> weddings;
-        private Set<Task> tasks;
 
         public EditPersonDescriptor() {}
 
@@ -191,16 +162,13 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
-            setWeddings(toCopy.weddings);
-            setTasks(toCopy.tasks);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, weddings);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address);
         }
 
         public void setName(Name name) {
@@ -235,56 +203,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable task set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tasks} is null.
-         */
-        public Optional<Set<Task>> getTasks() {
-            return (tasks != null) ? Optional.of(Collections.unmodifiableSet(tasks)) : Optional.empty();
-        }
-
-        /**
-         * Sets {@code tasks} to this object's {@code tasks}.
-         * A defensive copy of {@code tasks} is used internally.
-         */
-        public void setTasks(Set<Task> tasks) {
-            this.tasks = (tasks != null) ? new HashSet<>(tasks) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        /**
-         * Sets {@code weddings} to this object's {@code weddings}.
-         * A defensive copy of {@code weddings} is used internally.
-         */
-        public void setWeddings(Set<Wedding> weddings) {
-            this.weddings = (weddings != null) ? new HashSet<>(weddings) : null;
-        }
-
-        /**
-         * Returns an unmodifiable weddings set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code weddings} is null.
-         */
-        public Optional<Set<Wedding>> getWeddings() {
-            return (weddings != null) ? Optional.of(Collections.unmodifiableSet(weddings)) : Optional.empty();
-        }
 
         @Override
         public boolean equals(Object other) {
@@ -300,9 +218,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(weddings, otherEditPersonDescriptor.weddings);
+                    && Objects.equals(address, otherEditPersonDescriptor.address);
         }
 
         @Override
@@ -312,8 +228,6 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("tags", tags)
-                    .add("weddings", weddings)
                     .toString();
         }
     }
