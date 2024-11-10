@@ -27,7 +27,8 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_MODULE = " ";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG_1 = "#friend";
+    private static final String INVALID_TAG_2 = "LooooooooooooooooooooooooooooooooooongTag";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "12345678";
     private static final String VALID_MODULE = "CS2103T";
@@ -158,7 +159,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG_2));
     }
 
     @Test
@@ -181,7 +183,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG_1)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG_2)));
     }
 
     @Test

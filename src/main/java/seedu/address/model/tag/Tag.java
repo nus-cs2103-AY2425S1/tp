@@ -32,7 +32,7 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && isValidLength(test);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Tag {
      * @param test the tag to be tested.
      * @return the result of the test
      */
-    private boolean isValidLength(String test) {
+    private static boolean isValidLength(String test) {
         return test.length() <= MAX_TAG_LENGTH;
     }
 
