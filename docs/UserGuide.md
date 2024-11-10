@@ -85,6 +85,8 @@ Explore the Features section for a full list of commands and their uses.
 ### Command Structure
 
 In this section, we will explore the command structure in **EZSTATE** before delving into the **Features** section. 
+<br>
+
 Understanding the command structure in **EZSTATE** is essential for efficient navigation and use of the app’s features. 
 Each command in **EZSTATE** is designed to follow a clear, consistent format, allowing you to manage clients, listings, and appointments with precision and speed. 
 By mastering this structure, you will find it easier to remember commands and customize inputs, making your experience smoother and enabling you to accomplish tasks more effectively. 
