@@ -191,9 +191,12 @@ Examples:
 
 An example for adding a patient to the address book is given below.
 ![add Patient Command](images/addPatient.png)
+_Figure 2: Example of using the `add` command to add a patient to CareLink_
+
 
 Once the command succeeds, the person will be added to the address book and the following message will be displayed.
 ![add Patient Succeeds](images/addPatientSucceed.png)
+_Figure 3: Success message displayed after adding a patient_
 
 
 
@@ -219,9 +222,12 @@ Examples:
 
 An example of using CareLink to link a patient and a caregiver is given below.
 ![Link command example](images/linkcommandexample.png)
+_Figure 4: Example of using the `link` command to link a patient with a caregiver_
+
 
 Once the command succeeds, the patient will be linked with the caregiver and the following message will be displayed.
 ![Link command success](images/linkcommandsucceed.png)
+_Figure 5: Success message displayed after linking a patient with a caregiver_
 
 Possible Errors:
 - `This link already exists in CareLink` - When attempting to create a link that already exists
@@ -245,9 +251,13 @@ Examples:
 
 An example of using CareLink to delete a link between a patient and a caregiver is given below.
 ![Deletelink command example](images/DeleteLinkCommand.png)
+_Figure 6: Example of using the `deletelink` command to remove a link between a patient and a caregiver_
+
 
 Once the command succeeds, the link will be removed and the following message will be displayed.
 ![Deletelink command success](images/DeleteLinkCommandSuccess.png)
+_Figure 7: Success message displayed after deleting a link between a patient and a caregiver_
+
 
 ### Adding Notes to a Person: `addnote`
 
@@ -273,9 +283,12 @@ To view all notes for a person, use the `find` command with their NRIC or name. 
 
 An example of using CareLink to add notes to a person is given below.
 ![AddNote command example](images/AddNoteExample.png)
+_Figure 8: Example of using the `addnote` command to add a note to a patient's record_
+
 
 Once the command succeeds, the notes will be added to the person and the following message will be displayed.
 ![AddNote command success](images/AddNoteSuccessExample.png)
+_Figure 9: Success message displayed after adding a note to a patient's record_
 
 Possible Errors:
 - `This link does not exist in CareLink` - When trying to delete a link that doesn't exist
@@ -355,9 +368,13 @@ To navigate through multiple results more efficiently, try using the `Tab` key t
 
 An example of using the find command in CareLink is given below.
 ![Find command example](images/findcommandexample.png)
+_Figure 10: Example of using the `find` command to locate a person in CareLink_
+
 
 Once the command succeeds, the persons found will be displayed providing comprehensive information about the persons.
 ![Find command success](images/findcommandsucceed.png)
+_Figure 11: List of persons displayed after using the `find` command with specified criteria_
+
 
 Possible Errors:
 - `Invalid command format! `
@@ -520,6 +537,8 @@ When using date ranges for searching appointments, ensure your end date comes af
 
 An example of the result obtained from the `findapp` command is given below.
 ![Find Appointment command example](images/findappointment.png)
+_Figure 12: Example of using the `findapp` command to locate appointments within a specific date-time range_
+
 
 **Possible Errors:**
 - `Invalid date. Please use the DD/MM/YYYY format` - When the date format is incorrect
@@ -543,9 +562,13 @@ Examples:
 An example of using the delete command in CareLink is given below.
 Notice the NRIC used in the example belongs to `David LI`.
 ![delete command example](images/deleteDavid.png)
+_Figure 13: Example of using the `delete` command to remove a person from CareLink_
+
 
 Once the command succeeds, notice that David is removed and hence no longer displayed.
 ![result for 'delete S6483749D'](images/deleteDavidResult.png)
+_Figure 14: Display after a successful delete command, showing the removed person is no longer listed_
+
 
 **Possible Errors:**
 - `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
@@ -565,8 +588,12 @@ Once the command succeeds, notice that David is removed and hence no longer disp
 
 - `clear confirm` clears all entries from the address book.
   ![result for 'clear confirm'](images/clearconfirm.png)
+  _Figure 15: Example of using the `clear confirm` command to delete all entries in CareLink_
+
 - `clear` without `confirm` will prompt the user to include the confirmation keyword.
   ![result for 'clear'](images/clear.png)
+  _Figure 16: Display prompt for using `clear` command without `confirm`, reminding user to include confirmation_
+
 
 ### Exiting the program : `exit`
 
