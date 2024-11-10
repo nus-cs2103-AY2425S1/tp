@@ -93,7 +93,7 @@ Action     | Format, Examples
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER** number.
+* No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER**.
 
 > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
 
