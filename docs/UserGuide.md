@@ -113,6 +113,8 @@ Adds a person to the address book.
 
 - There is also a higher age limit of 999 to provide you with more flexibility.
 
+- Duplicate phone numbers are allowed for cases like parents and children sharing a same number.
+
 - Fields in square brackets (e.g. `[ap/APPOINTMENT]`) are optional.
 
   </box>
