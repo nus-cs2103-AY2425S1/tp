@@ -100,6 +100,10 @@ This combination of efficiency and clarity ensures that you can manage your wedd
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+* Some commands have shorter keywords that speed up entering commands - these keywords are specified in the format of each command.
+
+* For example, instead of typing in [assign-vendor 1](#assigning-a-vendor--assign-vendor), you can type in `asv 1`
+
 ## General Features
 
 ### Viewing help : `help`
@@ -116,17 +120,17 @@ Shows a list of all saved [Persons](#person-features) in the WedLinker.
 
 Format: `list`
 
-### Listing all Weddings : `list-weddings`
+### Listing all Weddings : `list-weddings` or `lw`
 
 Shows a list of all [Weddings](#wedding-features) in the WedLinker.
 
-Format: `list-weddings`
+Format: `list-weddings` or `lw`
 
-### Listing all Tasks : `list-tasks`
+### Listing all Tasks : `list-tasks` or `ltasks`
 
 Shows a list of all [Tasks](#task-features) in the WedLinker
 
-Format: `list-tasks`
+Format: `list-tasks` or `ltasks`
 
 ### Locating contacts by field: `find`
 
@@ -136,7 +140,7 @@ Format: `find PREFIX KEYWORD [KEYWORD]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email. The full list of prefixes which can be used can be found [here](#features). 
-* The keyword after the prefix must be specified and cannot be empty.
+* The keyword after the prefix must be specified and cannot be empty. e.g. `find a/` is not allowed as the address keyword to search should be specified.
 * The search will return both partial matches and full matches for each keyword.
 * Only one field can be searched at a time, but multiple keywords can be searched for the same field by placing each keyword after the appropriate prefix. 
 * Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
@@ -188,7 +192,7 @@ Furthermore, certain edits can cause the WedLinker to behave in unexpected ways 
 
 Adds a person to the address book.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDDING]…​`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​`
 
 <box type="tip" seamless>
 
@@ -203,7 +207,7 @@ Examples:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+Format: `edit PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -217,7 +221,7 @@ Examples:
 
 Deletes the specified person from WedLinker.
 
-Format: `delete INDEX`
+Format: `delete PERSON_INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -229,13 +233,13 @@ Examples:
 
 ## Tag Features
 
-### Adding a tag : `create-tag`
+### Creating a tag : `create-tag` or `ctag`
 
 Creates a `Tag` within WedLinker to be used on contacts.
 
-Format: `create-tag t/TAGNAME`
+Format: `create-tag t/TAG_NAME` or`ctag t/TAG_NAME`
 
-* The `TAGNAME` is alphanumeric and can contain whitespaces.
+* The `TAG_NAME` is alphanumeric and can contain whitespaces.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
 
@@ -243,7 +247,7 @@ Format: `create-tag t/TAGNAME`
 
 Assigns a `Tag` to the specified person in WedLinker
 
-Format: `tag INDEX t/TAGNAME [f/]`
+Format: `tag PERSON_INDEX t/TAG_NAME [f/]`
 
 * Tag a specified contact based on the `INDEX` with a `Tag`.
 * The index refers to the index number shown in the displayed person list.
@@ -255,17 +259,17 @@ Format: `tag INDEX t/TAGNAME [f/]`
 
 Untags a `Tag` from a specified person in WedLinker
 
-Format: `untag INDEX t/TAGNAME`
+Format: `untag PERSON_INDEX t/TAG_NAME`
 
 * Untag a specified contact based on their `INDEX` with a `Tag`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
-### Deleting a tag : `delete-tag`
+### Deleting a tag : `delete-tag` or `dtag`
 
 Deletes a `Tag` from WedLinker.
 
-Format: `delete-tag t/TAGNAME [f/]`
+Format: `delete-tag t/TAG_NAME [f/]` or `dtag t/TAG_NAME [f/]`
 
 * Deletes a `Tag` from WedLinker.
 * The `Tag` must exists in WedLinker.
@@ -274,102 +278,102 @@ Format: `delete-tag t/TAGNAME [f/]`
 
 ## Wedding Features
 
-### Adding a Wedding : `create-wedding`
+### Adding a Wedding : `create-wedding` or `cw`
 
 Creates a `Wedding` within WedLinker to be with contacts.
 
-Format: `create-wedding w/WEDDINGNAME`
+Format: `create-wedding w/WEDDING_NAME` or `cw w/WEDDING_NAME`
 
-* The `WEDDINGNAME` is alphanumeric and can contain whitespaces.
+* The `WEDDING_NAME` is alphanumeric and can contain whitespaces.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
 * Contacts can be assigned to the Wedding using the [assign-wedding](#assigning-contact-to-a-wedding-assign-wedding) command.
 
-### Assigning contact to a Wedding : `assign-wedding`
+### Assigning contact to a Wedding : `assign-wedding` or `asw`
 
 Assigns a contact to a `Wedding`.
 
-Format: `assign-wedding INDEX w/WEDDINGNAME`
+Format: `assign-wedding PERSON_INDEX w/WEDDING_NAME` or `asw PERSON_INDEX w/WEDDING_NAME`
 
-* Assigns a specified contact to the `Wedding` based on their `INDEX`.
+* Assigns a specified contact to the `Wedding` based on their `PERSON_INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * The `Wedding` must exists in WedLinker before it can be assigned.
 * If the `Wedding` does not exist, you can use `f/` to force the creation and assignment of the `Wedding`.
 
-### Editing Wedding details : `edit-wedding`
+### Editing Wedding details : `edit-wedding` or `ew`
 
 Edits the details of a `Wedding`.
 
-Format: `edit-wedding INDEX [w/WEDDINGNAME] [a/ADDRESS]`
+Format: `edit-wedding INDEX [w/WEDDING_NAME] [a/ADDRESS]` or `ew INDEX [w/WEDDING_NAME] [a/ADDRESS]`
 
 * Edits the specific `Wedding` at the INDEX when in [list-weddings](#listing-all-weddings-list-weddings) view.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
-### Unassigning contacts from a Wedding : `unassign-wedding`
+### Unassigning contacts from a Wedding : `unassign-wedding` or `uw`
 
 Unassigns a contact from a `Wedding` in WedLinker.
 
-Format: `unassign-wedding INDEX w/WEDDINGNAME`
+Format: `unassign-wedding PERSON_INDEX w/WEDDING_NAME` or `uw PERSON_INDEX w/WEDDING_NAME`
 
-* Unassign a contact that is assigned in a `Wedding`.
+* Unassigns a contact that is assigned to a `Wedding`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
-### Deleting a Wedding : `delete-wedding`
+### Deleting a Wedding : `delete-wedding` or `dw`
 
 Deletes a `Wedding` from WedLinker.
 
-Format: `delete-wedding w/WEDDINGNAME [f/]`
+Format: `delete-wedding w/WEDDING_NAME [f/]` or `dw w/WEDDING_NAME [f/]`
 
-* Deletes a `Wedding ` from WedLinker.
+* Deletes a `Wedding` from WedLinker.
 * The no contacts should be assigned to the `Wedding` before it is deleted.
-* If there are still contacts assigned, you can use `f/` to force the deletion of the `Wedding` and unassign all contacts.
+* If there are still contacts assigned, you can use `f/` to force the deletion of the `Wedding`. This will unassign all contacts from that `Wedding`.
 
 ## Task Features
 
-### Creating a Task : `create-task`
+### Creating a Task : `create-task` or `ctask`
 
 Creates a `Task` in WedLinker
 
-Format: `create-task tk/TASKDESCRIPTION [REMARKS]`
+Format: `create-task tk/TASK_DESCRIPTION [REMARKS]` or `ctask tk/TASK_DESCRIPTION [REMARKS]`
 
 * Tasks may have no dates, a single date indicating a deadline, or two dates to define a start and end period.
 * The dates can be specified under `REMARKS` with the format `d/YYYY-MM-DD`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
 * Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task) command.
 
-### Deleting a Task : `delete-task`
+### Deleting a Task : `delete-task` or `dtask`
 
 Deletes a `Task` from WedLinker
 
-Format: `delete-task INDEX`
+Format: `delete-task TASK_INDEX` or `dtask TASK_INDEX`
 
-* Deletes the specific `Task` at the INDEX when in [list-tasks](#listing-all-tasks--list-tasks) view.
+* Deletes the specific `Task` at the `TASK_INDEX` when in [list-tasks](#listing-all-tasks--list-tasks) view.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
-### Assigning a Task to a contact : `assign-task` 
+### Assigning a Task to a contact : `assign-task` or `atask`
 
-Format: `assign-task PERSONINDEX TASKINDEX`
+Format: `assign-task PERSON_INDEX TASK_INDEX` or `atask PERSON_INDEX TASK_INDEX`
 
 * Assigns a `Task` to a contact.
 * The indexes correspond to the indexes when in the [list-tasks](#listing-all-tasks--list-tasks) view.
-* The `PERSONINDEX` refers to the index of the person shown under the **People** column.
-* The `TASKINDEX` refers to the index of the task shown under the **Tasks** column
+* The `PERSON_INDEX` refers to the index of the person shown under the **People** column.
+* The `TASK_INDEX` refers to the index of the task shown under the **Tasks** column
 * The indexes **must be positive integers** 1, 2, 3, …​.
 
 ### Unassigning a Task from a contact : `unassign-task` 
 
-Format: `unassign-task PERSONINDEX TASKINDEX_OFPERSON`
+Format: `unassign-task PERSON_INDEX TASK_INDEX_OF_PERSON`
 
 * Un-assigns a `Task` from a contact.
-* The `PERSONINDEX` is the index of the person shown in the displayed person list.
-* The `TASKINDEX_OFPERSON` is the index of the task associated with the selected person.
+* The `PERSON_INDEX` is the index of the person shown in the displayed person list.
+* The `TASK_INDEX_OF_PERSON` is the index of the task associated with the selected person that will be unassigned.
 * The indexes **must be positive integers** 1, 2, 3, …​.
 
-### Marking a task as completed : `mark-task` 
+### Marking a task as completed : `mark-task` or `mtask`
 
-Format: `mark-task TASKINDEX`
+Format: `mark-task TASK_INDEX` or `mtask TASK_INDEX`
 
 * Marks a `Task` as completed.
 * The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
@@ -377,7 +381,7 @@ Format: `mark-task TASKINDEX`
 
 ### Unmarking a task  : `unmark-task` 
 
-Format: `unmark-task TASKINDEX`
+Format: `unmark-task TASK_INDEX`
 
 * Marks a `Task` as not completed.
 * The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
@@ -385,18 +389,18 @@ Format: `unmark-task TASKINDEX`
 
 ## Vendor Features
 
-### Assigning a Vendor : `assign-vendor`
-Format: `assign-vendor PERSONINDEX`
+### Assigning a Vendor : `assign-vendor` or `asv`
+Format: `assign-vendor PERSON_INDEX` or `asv PERSON_INDEX`
 
-* Assigns an existing `Person` at the specified `Index` to become a `Vendor`.
-* The `Vendor` now can have `Tasks` assigned to it.
+* Assigns an existing `Person` at the specified `PERSON_INDEX` to become a `Vendor`.
+* The `Vendor` now can have `Tasks` assigned to it. The full list of `Task` commands can be found [here](#task-features) 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
-### Unassigning a Vendor : `unassign-vendor`
-Format: `unassign-vendor PERSONINDEX`
+### Unassigning a Vendor : `unassign-vendor` or `uv`
+Format: `unassign-vendor PERSON_INDEX` or `uv PERSON_INDEX`
 
-* Unassigns a `Vendor` at the specified `Index` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
+* Unassigns a `Vendor` at the specified `PERSON_INDEX` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
@@ -417,7 +421,6 @@ Format: `unassign-vendor PERSONINDEX`
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
