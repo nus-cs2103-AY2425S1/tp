@@ -6,7 +6,7 @@
 
 # StudentManagerPro User Guide
 
-StudentManagerPro (SMP) is a **desktop app for managing students, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SMP can get your contact management tasks done faster than traditional GUI apps.
+StudentManagerPro (SMP) is a **desktop app for managing students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SMP can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,9 +15,9 @@ StudentManagerPro (SMP) is a **desktop app for managing students, optimized for 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F12-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -227,8 +227,8 @@ Format: `addAttendance INDEX ad/[DATE] ar/[REASON]`
 * The date **must be in the form of DD-MM-YYYY** and within the current year.
 
 Examples:
-* `addAttendance 1 ad/[24-09-2024] ar/[Sick]` to add the date where the 1st person in the list is absent and the reason.
-* `addAttendance 1 ad/[24-09-2024] ar/` to delete the attendance from the 1st person in the list.
+* `addAttendance 1 ad/24-09-2024 ar/Sick` to add the date where the 1st person in the list is absent and the reason.
+* `addAttendance 1 ad/24-09-2024 ar/` to delete the attendance from the 1st person in the list.
 
 ### Adding an Exam : `addExam`
 
