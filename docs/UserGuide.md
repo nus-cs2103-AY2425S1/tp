@@ -185,10 +185,10 @@ Please read through the [Command Structure](#command-structure) before proceedin
 <br>
 EZSTATE features (i.e. commands) are divided into four main categories:
 
-1. **Client Management Commands**
-2. **Appointment Management Commands**
-3. **Listing Management Commands**
-4. **Utility Commands**
+1. [Client Management Commands](#1-client-management-commands)
+2. [Appointment Management Commands](#2-appointment-management)
+3. [Listing Management Commands](#3-listing-management)
+4. [Utility Commands](#4-utility-commands)
 
 ---
 
