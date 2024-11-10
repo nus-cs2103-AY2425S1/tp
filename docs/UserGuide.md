@@ -117,7 +117,8 @@ Need a quick reference?
 <box type="info" seamless>
 
 * **Commands Are Case-Sensitive and All Lowercase**  
-  Make sure to type commands exactly as shown. e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
+  Make sure to type commands exactly as shown.  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
 
 
 * **Copying Commands from PDF**  
@@ -215,7 +216,9 @@ Displays the help window. Also accessible by pressing the `F1` key.
 The help window can be closed by `F1` and `Esc` keys  
 
 Format: `help`  
+
 Output:
+
 ![help message](images/helpMessage.png)
 
 <br>
