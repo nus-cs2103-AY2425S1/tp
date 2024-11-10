@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + "[n/MORE_BUYER_NAMES]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SUBJECT + "Discuss work plans "
-            + PREFIX_INFO + "Meet with Eswen to discuss the March Project "
+            + PREFIX_INFO + "Meet with Jason to discuss the March Project "
             + PREFIX_FROM + "2024-02-03 14:00 "
             + PREFIX_TO + "2024-02-03 15:30 "
             + PREFIX_ADDED_BUYER + "Alex Yeoh "
