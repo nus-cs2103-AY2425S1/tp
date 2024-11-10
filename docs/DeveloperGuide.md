@@ -532,7 +532,7 @@ _{More to be added}_
 
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
 - **Private contact detail**: A contact detail that is not meant to be shared with others
-- **ConcertContact**: A ConcerContact is a link between an existing Person in the Phonebook and a particular Concert in the Phonebook
+- **ConcertContact**: A ConcertContact is a link between an existing Person in the Phonebook and a particular Concert in the Phonebook
 ---
 
 ## **Appendix: Instructions for manual testing**
