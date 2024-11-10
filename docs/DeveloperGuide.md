@@ -974,6 +974,19 @@ Through identifying current limitations, we’re able to target areas that can b
 This section highlights our planned improvements, showcasing the steps we're taking to deliver a more comprehensive and effective solution for property agents.
 
 
+### Enhance Phone Numbers to Accept Special Characters
+
+**Feature Flaw in Current Implementation**
+
+At present, phone numbers only accept numeric characters, excluding symbols such as `+` and dashes `-`. 
+However, these characters are essential for supporting country and area codes, and dashes can improve readability by 
+separating sections of a phone number (e.g., `+1-800-9087-2029`).
+
+**Proposed Enhancement**
+
+We plan to modify the phone number field to allow `+` symbols and dashes `-` so users can input phone numbers with country/area codes 
+and use dashes for better readability. This enhancement will provide greater flexibility and accommodate a wider range of valid phone number formats.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix C: Instructions for manual testing**
