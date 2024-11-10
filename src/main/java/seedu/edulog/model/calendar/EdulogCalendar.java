@@ -8,7 +8,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.edulog.model.calendar.exceptions.DuplicateLessonException;
-import seedu.edulog.model.student.Student;
 
 /**
  * Calendar class
