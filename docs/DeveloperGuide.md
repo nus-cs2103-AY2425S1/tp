@@ -277,12 +277,6 @@ In order to add a remark to a student, the user must provide a number representi
 #### Example activity diagram for RemarkCommand
 <puml src="diagrams/add-remark/RemarkCommandActivityDiagram.puml" alt="Activities inside the Logic Component for the `remark` Command" />
 
-## Planned Enhancements
-Team size: 5
-1. **Make tag names wrap if it exceeds the UI display:** The current display of tag names results in them exceeding the UI display if they are too long. Although it can be mitigated by enlarging the window size, it relies on using the mouse, which is not CLI-friendly.
-2. **Display student information in the window after the Add Student command:** The current implementation does not display the student information in the window after the Add Student command, unlike other commands like the Edit Student command. This should be fixed to maintain consistency.
-3. **Display more accurate error messages for unexpected prefixes and '/'s:** The current implementation will display a ```Index should be a non-zero unsigned integer and cannot be blank``` error message for a command that contains prefixes or '/'s that are not expected e.g. ```edit_student si/1 r/math```. However, it should display the command's respective invalid command message to facilitate better understanding.
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -594,6 +588,8 @@ unless specified otherwise)
 
       Use case ends.
 
+<<<<<<< HEAD
+=======
 * 1b. The student already has a remark.
     * 1b1. TAchy shows a warning message.
     * 1b2. TAchy asks if the Teacher wants to overwrite the remark.
@@ -604,9 +600,12 @@ unless specified otherwise)
 
 ### Planned Enhancements:
 Team size: 5
+1. **Update Result display box to enable wrapping and be of greater vertical length:** So that users do not need to scroll in order to read the result display box.
+2. **Make tag names wrap if it exceeds the UI display:** The current display of tag names results in them exceeding the UI display if they are too long. Although it can be mitigated by enlarging the window size, it relies on using the mouse, which is not CLI-friendly.
+3. **Display student information in the window after the Add Student command:** The current implementation does not display the student information in the window after the Add Student command, unlike other commands like the Edit Student command. This should be fixed to maintain consistency.
+4. **Display more accurate error messages for unexpected prefixes and '/'s:** The current implementation will display a ```Index should be a non-zero unsigned integer and cannot be blank``` error message for a command that contains prefixes or '/'s that are not expected e.g. ```edit_student si/1 r/math```. However, it should display the command's respective invalid command message to facilitate better understanding.
 
-1. Update Result display box to enable wrapping, and be of greater vertical length, so that users do not need to scroll in order to read the result display box.
-
+>>>>>>> 43720c37653bcfa98b648f54fd1ce59838987be1
 
 ### Non-Functional Requirements
 
