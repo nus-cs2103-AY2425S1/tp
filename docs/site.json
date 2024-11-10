@@ -1,7 +1,6 @@
 {
   "baseUrl": "",
   "titlePrefix": "ClubConnect",
-  "titleSuffix": "Documentation Guide",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
