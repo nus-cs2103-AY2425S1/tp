@@ -258,15 +258,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. ClientHub shows an error message informing user that required field(s) are missing
 
     Step 1 is repeated until user inputs all required fields.
- 
+
 
 * 1c. ClientHub detects a duplicate client
 
-  * 1c1. ClientHub informs user that there is more than one client with the same name and prompt the user to input a 
+  * 1c1. ClientHub informs user that there is more than one client with the same name and prompt the user to input a
     different name.
-    
+
     Step 1 is repeated until user inputs a unique name.
-  
+
 
 **Use case: Delete a client**
 
@@ -287,7 +287,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Step 1 is repeated until user inputs the correct format.
 
 * 1b. ClientHub detects that the given name is not in the list
- 
+
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Search for a client**
 
-**MSS** 
+**MSS**
 1. User inputs the command to search for a client
 2. ClientHub searches for the client
 3. ClientHub shows the client details
@@ -449,7 +449,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Step 1 is repeated until user inputs the correct format.
 * 2a. ClientHub detects the given index is out of range
     * 2a1. ClientHub shows an error message that the index is out of range
-        
+
         Step 1 is repeated until user inputs the correct format.
 
 
@@ -469,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Step 1 is repeated until user inputs the correct format.
 * 2a. ClientHub detects the given index is out of range
     * 2a1. ClientHub shows an error message that the index is out of range
-        
+
         Step 1 is repeated until user inputs the correct format.
 
 ### Non-Functional Requirements
@@ -504,25 +504,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-#### 1. Initial launch 
+#### 1. Initial launch
 
 * **For Mac**
 
-    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
-    2. Open Terminal 
+    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`.
+    2. Open Terminal
     3. Inside the terminal enter: `cd Downloads/ClientHub`
     4. Then enter:`java -jar clienthub.jar`
-       * Expected: Shows the GUI with a set of sample clients. 
+       * Expected: Shows the GUI with a set of sample clients.
        * The window size may not be optimum.
 
 
 * **For Windows**
 
-    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
+    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`.
     2. Open PowerShell
     3. Inside the Command Prompt enter: `cd Downloads/ClientHub`
-    4. Then enter:`java -jar clienthub.jar` 
-       * Expected: Shows the GUI with a set of sample clients. 
+    4. Then enter:`java -jar clienthub.jar`
+       * Expected: Shows the GUI with a set of sample clients.
        * The window size may not be optimum.
 
 #### 2. Saving window preferences
@@ -581,9 +581,9 @@ able to take in Numbers from other countries such as Malaysia to accommodate to 
 
 
 4. More flexible Add: Currently, the app requires the user to input all fields when adding a client, we plan to make the app more flexible by allowing the user to input only the necessary fields when adding a client.
-Certain fields such as Description and Address may be unnecessary for some FAs to keep track of. So to increase their efficiency, we plan to make the app allow the user to input only the necessary fields when adding a client 
+Certain fields such as Description and Address may be unnecessary for some FAs to keep track of. So to increase their efficiency, we plan to make the app allow the user to input only the necessary fields when adding a client
 such as Name, Phone Number and Client Type.
 
-5. All for more flexible Reminder Editing: Currently, the app only allows the user to edit the name of a person if they have no reminders, 
-this is quite restrictive and may cause some inconveniences for users. Thus, we plan to make the app allow the user to edit the name of a person even if 
+5. All for more flexible Reminder Editing: Currently, the app only allows the user to edit the name of a person if they have no reminders,
+this is quite restrictive and may cause some inconveniences for users. Thus, we plan to make the app allow the user to edit the name of a person even if
 they have reminders. This will allow the user to make changes to the client's name without having to delete all the reminders first.
