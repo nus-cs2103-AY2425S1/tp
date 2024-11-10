@@ -24,6 +24,22 @@ Overall, compared to iP, if iP was considered a 10/20, then this project would b
 
 2. We spent a lot of time adhering to defensive coding practices to ensure that the codebase was robust and less prone to bugs, even going to the extent of writing tests for the GUI, even though it was optional.
 
+3. We spend a lot more time implementing a feature compared to AB3, as the features were more complex.
+   One prominent example would be `find` command in AB3 vs `findTxn` command in SpleetWaise
+
+   In the specification of the `find` command, only the Names parameters are used to filter the list of person. This 
+   was easily done using a single class called `NameContainsKeywordsPredicate`
+   Meanwhile in the specification of the `filterTxn` command, it required the ability to filter by multiple 
+   different parameters such as by description, amount, status, person and in any combination. This lead to the 
+   creation of a modular filter predicate system where new `*FilterPredicate` classes can be easily added. This 
+   implementation method resulted in the current 7 FilterPredicate classes and a FilterCommandPredicate to tight the 
+   different Predicates together. This also meant that for each `*FitlerPredicate` classes has their corresponding test
+   cases to write as well.
+   This is just one case that more effort was placed in implementing a Spleetwaise feature compared to AB3.
+
+   One benefit from the above implementation is that some of the FilterPredicate classes is reused which helps to 
+   reduce code complexity and duplicate code in the UI side of SpleetWaise.
+
 ### Achievements of the Project
 
 1. **Successful Feature Implementation**: We delivered nearly all planned features for the MVP, including the core functionalities of managing transactions such as adding, editing, and deleting transactions. Filtering and searching transactions were also implemented, which were not planned initially.
