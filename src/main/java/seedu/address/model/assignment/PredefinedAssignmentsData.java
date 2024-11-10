@@ -57,7 +57,7 @@ public class PredefinedAssignmentsData implements ReadOnlyPredefinedAssignmentsD
      * @param name the name of assignment
      * @return the float (max score)
      */
-    public float maxScore(String name) {
+    public float getMaxScore(String name) {
         for (PredefinedAssignment assignment : predefinedAssignmentArrayList) {
             if (assignment.name().equalsIgnoreCase(name)) {
                 return assignment.maxScore();
@@ -66,6 +66,12 @@ public class PredefinedAssignmentsData implements ReadOnlyPredefinedAssignmentsD
         return -1;
     }
 
+    /**
+     * Retrieves the exact assignment name that matches the given name, ignoring case.
+     *
+     * @param name the name of the assignment to search for.
+     * @return the exact assignment name if found, or {@code null} if no match is found.
+     */
     public String getAssignmentName(String name) {
         for (PredefinedAssignment assignment : predefinedAssignmentArrayList) {
             if (assignment.name().equalsIgnoreCase(name)) {

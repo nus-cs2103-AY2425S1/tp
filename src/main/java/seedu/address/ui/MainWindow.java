@@ -54,6 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane viewWindowPlaceholder;
     private ChangeListener<Person> listener;
+    private ObjectProperty<Person> person;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -175,16 +176,22 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleView(CommandResult commandResult) {
-        ObjectProperty<Person> person = commandResult.getPerson();
-        if (person != null && person.get() != null && listener != null) {
-            person.removeListener(listener);
-        }
         if (commandResult.isCloseView()) {
+            removeListener();
             closeView();
         } else {
+            person = commandResult.getPerson();
+            removeListener();
             assert person != null;
             person.addListener(setUpListener());
-            openView(commandResult.getPerson().get());
+            openView(person.get());
+
+        }
+    }
+
+    private void removeListener() {
+        if (person != null && person.get() != null && listener != null) {
+            person.removeListener(listener);
         }
     }
 

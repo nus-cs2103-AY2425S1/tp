@@ -71,7 +71,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         } else if (userInput.trim().equalsIgnoreCase("desc")) {
             return SortOrder.DESC;
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+            throw new ParseException(SortCommand.MESSAGE_INVALID_ORDER);
         }
     }
 
@@ -87,7 +87,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         case "telegram" -> SortField.TELEGRAM;
         case "reset" -> SortField.NONE;
         default ->
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                throw new ParseException(SortCommand.MESSAGE_INVALID_FIELD);
         };
 
     }

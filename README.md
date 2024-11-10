@@ -1,4 +1,5 @@
 By CS2103T-T11-2
+# <img src="docs/images/kontactsLogo.png" alt="KonTActs logo" width="50"/> KonTActs 
 
 [![Java CI](https://github.com/AY2425S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T11-2/tp/graph/badge.svg)](https://codecov.io/github/AY2425S1-CS2103T-T11-2/tp)
@@ -13,7 +14,7 @@ Build as part of **a project for CS2030S TAs**.<br>
   * as a reference to get their students' details more easily
   * as a tool to help them keep track of their students.
 
-**The project simulates an ongoing software project for a desktop application (called _KonTActs_) used for managing contact details.
+The project simulates an ongoing software project for a desktop application (called _KonTActs_) used for managing contact details.
   * For details on how to use KonTActs, please refer to the user guide for [KonTActs](https://ay2425s1-cs2103t-t11-2.github.io/tp/UserGuide.html)
 
 

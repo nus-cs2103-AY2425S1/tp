@@ -37,11 +37,11 @@ public class SortCommandParserTest {
     public void parse_invalidValues_throwsParseException() {
         // invalid field
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + ORDER_DESC_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                SortCommand.MESSAGE_INVALID_FIELD);
 
         // invalid order
         assertParseFailure(parser, VALID_FIELD_NAME + INVALID_ORDER_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                SortCommand.MESSAGE_INVALID_ORDER);
     }
 
     @Test

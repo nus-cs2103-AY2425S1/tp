@@ -22,7 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of KonTActs data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -34,9 +34,9 @@ public class ModelManager implements Model {
     private final PredefinedAssignmentsData predefinedAssignmentsData;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given KonTActs and userPrefs.
      *
-     * @param addressBook               the address book
+     * @param addressBook               KonTActs
      * @param userPrefs                 the user prefs
      * @param predefinedAssignmentsData the predefined assignments data
      */
@@ -45,7 +45,7 @@ public class ModelManager implements Model {
                         ReadOnlyPredefinedAssignmentsData predefinedAssignmentsData) {
         requireAllNonNull(addressBook, userPrefs, predefinedAssignmentsData);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with KonTActs: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -183,33 +183,38 @@ public class ModelManager implements Model {
 
     //=========== Predefined assignments accessors =============================================================
 
+    @Override
     public boolean hasAssignment(String name) {
         return predefinedAssignmentsData.hasAssignment(name);
     }
 
-    public float maxScore(String assignment) {
-        return predefinedAssignmentsData.maxScore(assignment);
+
+    @Override
+    public float getMaxScore(String assignment) {
+        return predefinedAssignmentsData.getMaxScore(assignment);
     }
 
+    @Override
     public String getAssignmentName(String name) {
         return predefinedAssignmentsData.getAssignmentName(name);
     }
 
+    @Override
     public boolean hasName(Name name) {
         return addressBook.hasName(name);
     }
 
+    @Override
     public ReadOnlyPredefinedAssignmentsData getPredefinedAssignments() {
         return predefinedAssignmentsData;
     }
 
+    @Override
     public Github getGitHubUsername(Name name) {
         return addressBook.getGitHubUsername(name);
     }
 
-    /**
-     * Replace all person in currently with new data
-     */
+    @Override
     public void replaceAllPersons(List<Person> persons) {
         AddressBook updatedList = new AddressBook();
         updatedList.setPersons(persons);

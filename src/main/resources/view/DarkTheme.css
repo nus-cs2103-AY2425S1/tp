@@ -396,8 +396,18 @@
     -fx-text-fill: white;
 }
 
+.viewWindow #assignment {
+-fx-font-family: "Segoe UI";
+    -fx-font-size: 20px;
+}
+
 .viewWindow #name  {
 -fx-font-family: "Segoe UI";
     -fx-font-size: 35px;
     -fx-text-fill: white;
+}
+
+#viewPane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: transparent;
 }

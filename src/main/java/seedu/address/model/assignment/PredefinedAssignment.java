@@ -13,9 +13,6 @@ public record PredefinedAssignment(String name, Float maxScore) {
         return false;
     }
 
-    public float getMaxScore() {
-        return maxScore;
-    }
 
     @Override
     public String toString() {

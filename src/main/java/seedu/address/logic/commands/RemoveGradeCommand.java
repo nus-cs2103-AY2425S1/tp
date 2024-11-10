@@ -33,8 +33,8 @@ public class RemoveGradeCommand extends Command {
     public static final String COMMAND_WORD_SHORT_FORM = "rg";
 
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
-                    + ": Removes a grade of an assignment from the person.\n"
+                    "Removes a grade of an assignment from the person.\n"
+                        + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
                     + "Parameters: "
                     + PREFIX_NAME
                     + "NAME "
@@ -50,9 +50,9 @@ public class RemoveGradeCommand extends Command {
                     + "Example: "
                     + COMMAND_WORD_SHORT_FORM
                     + " "
-                    + PREFIX_NAME
+                    + PREFIX_NAME.getShortPrefix()
                     + "John Doe "
-                    + PREFIX_ASSIGNMENT
+                    + PREFIX_ASSIGNMENT.getShortPrefix()
                     + "Ex01";
 
     public static final String MESSAGE_SUCCESS = "Assignment %1$s removed from %2$s";

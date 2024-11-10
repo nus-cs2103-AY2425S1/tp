@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Person's name in KonTActs.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
@@ -59,18 +59,6 @@ public class Name {
         return fullName.toLowerCase().equals(otherName.fullName.toLowerCase());
     }
 
-    /**
-     * Ignore case while comparing name.
-     *
-     * @param name the name
-     * @return the boolean
-     */
-    public boolean equalIgnoreCase(Name name) {
-        if (name.fullName.equalsIgnoreCase(this.fullName)) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * Compares the {@code fullName} of this Name object against another Name object.

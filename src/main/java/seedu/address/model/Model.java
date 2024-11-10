@@ -43,12 +43,12 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' KonTActs file path.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' KonTActs file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
@@ -58,36 +58,36 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces KonTActs data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in KonTActs.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in KonTActs.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in KonTActs.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the KonTActs.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in KonTActs.
      */
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Returns the person in the address book with the given name.
+     * Returns the person in KonTActs with the given name.
      *
      * @param name The name to search for
      * @return An Optional containing the matched person if that person is found, otherwise an empty Optional
@@ -117,12 +117,36 @@ public interface Model {
      */
     boolean hasAssignment(String name);
 
-    float maxScore(String assignment);
+    /**
+     * Returns the maximum score for a specified assignment.
+     *
+     * @param assignment The name of the assignment to retrieve the maximum score for.
+     * @return The maximum score for the specified assignment.
+     */
+    float getMaxScore(String assignment);
 
+    /**
+     * Retrieves the exact name of a specified assignment.
+     *
+     * @param name The name to retrieve.
+     * @return The assignment name as a {@code String}.
+     */
     String getAssignmentName(String name);
 
+
+    /**
+     * Checks if a person with the specified name exists in KonTActs.
+     *
+     * @param name The {@code Name} of the person to check.
+     * @return {@code true} if a person with the specified name exists, {@code false} otherwise.
+     */
     boolean hasName(Name name);
 
+    /**
+     * Retrieves the predefined assignments data as a read-only data object.
+     *
+     * @return A {@code ReadOnlyPredefinedAssignmentsData} object containing predefined assignments.
+     */
     ReadOnlyPredefinedAssignmentsData getPredefinedAssignments();
 
     /**
@@ -130,6 +154,11 @@ public interface Model {
      */
     Github getGitHubUsername(Name name);
 
+    /**
+     * Replaces all persons in the predefined assignments data with a new list.
+     *
+     * @param newPersons A list of {@code Person} objects to replace the existing persons.
+     */
     void replaceAllPersons(List<Person> newPersons);
 
 }

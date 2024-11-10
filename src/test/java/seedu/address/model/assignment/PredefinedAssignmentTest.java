@@ -14,11 +14,7 @@ class PredefinedAssignmentTest {
         assertNotEquals(one, new Object());
     }
 
-    @Test
-    public void test_max_score() {
-        PredefinedAssignment one = new PredefinedAssignment("g", 0f);
-        assertEquals(one.getMaxScore(), 0f);
-    }
+
 
     @Test
     public void test_to_string() {

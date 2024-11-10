@@ -54,7 +54,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing KonTActs ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -75,9 +75,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s KonTActs and {@code userPrefs}. <br>
+     * The data from the sample KonTActs will be used instead if {@code storage}'s KonTActs is not found,
+     * or an empty KonTActs will be used instead if errors occur when reading {@code storage}'s KonTActs.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
@@ -97,7 +97,6 @@ public class MainApp extends Application {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
-            e.printStackTrace();
         }
 
         try {
@@ -109,7 +108,7 @@ public class MainApp extends Application {
             predefinedAssignments = readAssignmentOptional
                     .orElseGet(SampleAssignmentsUtil::getSamplePredefinedAssignments);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+            logger.warning("Data file at " + storage.getAssignmentFilePath() + " could not be loaded."
                     + " Will be starting with an empty predefined assignments data.");
             predefinedAssignments = new PredefinedAssignmentsData();
         }
