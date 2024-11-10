@@ -5,6 +5,6 @@ package seedu.address.model.event.exceptions;
  */
 public class ChronologicalOrderException extends RuntimeException {
     public ChronologicalOrderException() {
-        super("Events must start before it ends.");
+        super("Events cannot start after it ends.");
     }
 }
