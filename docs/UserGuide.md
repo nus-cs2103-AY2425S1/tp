@@ -19,7 +19,6 @@ Our guide is structured as such:
 3. **Command Summary:** A quick summary of all our commands
 3. **FAQ:** Answers to some common questions users have
 4. **Known Issues:** A list of known issues
-5. **Glossary:** The definition to some terms used in this guide 
 
 If you are new to Teacher's Pet, we recommend you to continue reading this guide sequentially (starting with [Quick Start](#quick-start)) to get a complete idea of how it works.
 
@@ -37,6 +36,9 @@ Here are some symbols you may encounter in this user guide:
 This contains some information on what you are not able to do
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+### Table of Contents
 
 * Table of Contents
 {:toc}
