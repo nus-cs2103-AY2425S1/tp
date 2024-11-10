@@ -562,7 +562,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediContact home folder.
+
+**Q**: What should I do if I input an invalid command<br>
+**A**: Check out [Features](#features), or simple run `help` to see the full list of commands, and try entering a valid command again.
+
+**Q**: Can I have duplicate contacts in my address book? <br>
+**A**: Duplicate names are not permitted. Same names with different capatilised are considered duplicates.
 
 --------------------------------------------------------------------------------------------------------------------
 
