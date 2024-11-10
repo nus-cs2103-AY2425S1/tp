@@ -154,7 +154,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC p/PHONE e/EMAIL h/ADDRESS [apt/APPOINT
 * Addresses can take any values except a whitespace followed by a character and '/' (Eg. 'samplepark a/fe' is not allowed). Case-sensitive.
 * Emails should be of the format local-part@domain. Case-sensitive.
 * Appointments should be in a format of `dd/MM/yyyy HH:mm`.
-* Tags are alphanumeric. Case-sensitive.
+* Tags are alphanumeric with the exception of blood types, which must contain a + or - (e.g. A+, AB-, O+ etc.). Case-sensitive.
 * Appointments are made in 15 minute intervals starting from given time and cannot be made after 14 minutes before closing time.
 * Appointments cannot carry over into the next day. (Eg. an Appointment from 23:58 to 00:13 will not be allowed)
 * Appointments can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
@@ -210,7 +210,7 @@ by NRIC if the record is not currently displayed will not work.
 
 ### Deleting a patient : `delete`
 
-Deletes the specified patient from ClinicBuddy either by **NRIC** or **index** on the patient record.
+Deletes the specified patient from ClinicBuddy either by **NRIC** or **Index** on the patient record.
 
 #### Deleting a patient by NRIC:
 
@@ -232,13 +232,13 @@ Deletions only work if the displayed list contains the entry you are deleting. H
 by NRIC if the record is not currently displayed will not work.
  </div>
 
-#### Deleting a patient by index:
+#### Deleting a patient by Index:
 
 Format: `delete Index`
 
 * Deletes the patient at the specified `Index`.
 * The Index refers to the patient's position in the displayed patient list.
-* The Index **must be a positive whole number greater than one and no larger than the size of the list.**
+* The Index **must be a positive whole number no larger than the size of the list.**
 
 Examples:
 
@@ -342,23 +342,23 @@ Examples:
 
 Deletes the specified patient from ClinicBuddy.
 
-Format: `deleteappt NRIC dd-mm-yyyy HH:mm`
+Format: `deleteappt NRIC DATE HH:mm`
 
 * Removes the appointment scheduled at the specified date and time for the patient identified by the given `NRIC`.
 * The NRIC refers to the unique identifier displayed in the current patient list.
 * The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
 
 Example:
-* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the patient identified by the NRIC s1234567z.
+* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, for the patient identified by the NRIC s1234567z, assuming 12:12 falls within his appointment window.
 
-Format: `deleteappt Index dd-mm-yyyy HH:mm` 
+Format: `deleteappt Index DATE HH:mm` 
 
 * Removes the appointment scheduled at the specified date and time for the patient at the given Index.
 * The Index refers to the patient’s position in the displayed list.
-* The Index **must be a positive whole number greater than one and no larger than the size of the list.**
+* The Index **must be a positive whole number no larger than the size of the list.**
 
 Example:
-* `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the patient at index 1 of the displayed list.
+* `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024 for the patient at index 1 of the displayed list, assuming 12:12 falls within his appointment window.
 
 ![deleteapt](images/delete%20appointment.png)
 
@@ -612,16 +612,16 @@ the data of your previous AddressBook home folder.
  **Help**              | `help`  
  **Add**               | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`  
  **Update**            | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​` <br> e.g.,`update 2 n/James Lee e/jameslee@example.com`                                                                 
- **Delete**            | `delete` [NRIC] <br> `delete` [index] <br> e.g., `delete S1234567Z`, `delete 1`
+ **Delete**            | `delete` NRIC <br> `delete` Index <br> e.g., `delete S1234567Z`, `delete 1`
  **Clear**             | `clear`                  
  **List**              | `list` 
- **Find**              | `find` [NRIC] <br> `find NAME` [MORE_NAMES] <br> e.g., `find S1234567Z`, `find James Jake`  
- **Bookings**          | `bookings` [DATE] <br> e.g., `bookings 01/02/2024`
- **Delete Appointments** | `deleteappt` [NRIC dd-mm-yyyy HH:mm] <br> `deleteappt` [Index dd-mm-yyyy HH:mm] <br> e.g., `deleteappt s1234567z 01-01-2024 12:12`, `deleteappt 1 01-01-2024 12:12` 
+ **Find**              | `find` NRIC <br> `find NAME` [MORE_NAMES] <br> e.g., `find S1234567Z`, `find James Jake`  
+ **Bookings**          | `bookings` DATE <br> e.g., `bookings 01/02/2024`
+ **Delete Appointments** | `deleteappt` NRIC DATE HH:mm <br> `deleteappt` Index DATE HH:mm <br> e.g., `deleteappt s1234567z 01-01-2024 12:12`, `deleteappt 1 01-01-2024 12:12` 
  **Hours**             | `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]` <br> e.g., `hours`, `hours o/09:30 c/18:00`, `hours o/09:30 c/18:00`                                                                                                                                                                                                     
- **Backup**            | `backup`  <br/>  `backup` [DESCRIPTION] <br> e.g., `backup After updating John's contact info`  
+ **Backup**            | `backup` [Description] <br> e.g., `backup` `backup After updating John's contact info`  
  **ListBackups**       | `listbackups`
- **Restore**           | `restore` [INDEX] <br> e.g., `restore 1`   
+ **Restore**           | `restore` Index <br> e.g., `restore 1`   
  **Exit**              | `exit`
 
                                                                                                                                                                                                     
