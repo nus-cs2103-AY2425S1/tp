@@ -343,13 +343,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 {{ newPage }}
 
-**Use case: UC04 - View Contact**
+**Use case: UC04 - List contacts**
 
 **MSS**
 
-1. Current UI is not showing the entire contact list.
-2. User chooses to view the entire contact list.
-3. KonTActs displays the full list of contacts.\
+1. User chooses to view the entire contact list.
+2. KonTActs displays the full list of contacts.\
    Use case ends.
 
 **Extensions**
@@ -433,65 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 {{ newPage }}
 
-**Use case: UC07 - Create shortcut for commands**
-
-**MSS**
-
-1. User indicates to create a shortcut.
-2. KonTActs request for the command that is frequently used.
-3. User enters the command to be shortened.
-4. KonTActs request for the shortcut input to replace the command.
-5. User enters the shortcut input.
-6. KonTActs stores the shortcut and indicates success.
-
-   Use case ends.
-
-**Extensions**
-
-- 3a. KonTActs detects that the command entered is not valid.
-
-  - 3a1. KonTActs requests for the correct command.
-  - 3a2. User enters a new command.
-  - Steps 3a1 - 3a2 are repeated until the command entered is valid.
-
-    Use case resumes from step 4.
-
-- 5a. KonTActs detects that the shortcut is already in use.
-
-  - 5a1. KonTActs request for a new shortcut.
-  - 5a2. User enters a new shortcut.
-  - Steps 5a1 - 5a2 are repeated until the shortcut entered is valid.
-
-    Use case resumes from step 6.
-
-- \*a. At any time, User chooses to cancel the creation of a shortcut.
-
-  - \*a1. KonTActs stops the creation.
-
-    Use case ends.
-
-    <br>
-
-{{ newPage }}
-
-**Use case: UC08 - Sort students based on proficiency**
-
-**Precondition**
-
-1. KonTActs contains a list of students/ contacts.
-2. Contacts should have a proficiency rating associated to them.
-
-**MSS**
-
-1. User chooses to sort the students based on their proficiency.
-2. User enters the sort command.
-3. KonTActs returns the list of students in the sorted order.
-
-   Use case ends.
-
-   <br>
-
-**Use case: UC09 - Export contacts**
+**Use case: UC07 - Export contacts**
 
 **Precondition**
 
@@ -520,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 {{ newPage }}
 
-**Use case: UC10 - Request for help**
+**Use case: UC08 - Request for help**
 
 **MSS**
 
@@ -529,17 +470,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
-
-- 1a. User inputs help for a specific command.
-
-  - 1a1. KonTActs displays a help page for that command.
-
-    Use case ends.
-
     <br>
 
-**Use case: UC11 - Tag students with custom labels**
+**Use case: UC09 - Tag students with custom labels**
 
 **Precondition**
 
@@ -568,30 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 {{ newPage }}
 
-**Use case: UC12 - View last modification date of contact details**
-
-**MSS**
-
-1. User requests for last modification date of contact.
-2. KonTActs shows the last modification date for that contact.
-
-   Use case ends.
-
-**Extensions**
-
-- 1a. User inputs a non-existing contact.
-
-  - 1a1. KonTActs requests for corrected contact details.
-  - 1a2. User inputs new contact details.
-  - Steps 1a1 - 1a2 are repeated until the input contact is correct.
-
-    Use case resumes from step 2.
-
-    <br>
-
-{{ newPage }}
-
-**Use case: UC13 - Import contacts from CSV file**
+**Use case: UC10 - Import contacts from CSV file**
 
 **Precondition**
 
@@ -635,19 +545,6 @@ Duplicate names)
     Use case ends.
 
     <br>
-
-{{ newPage }}
-
-**Use case: UC14 - Create automatic flags for students’ work if marked**
-
-Actor: TA
-
-**MSS**
-
-1. TA marks a student’s work.
-2. KonTActs creates a flag to show the student’s work as marked.
-
-   Use case ends.
 
 {{ newPage }}
 
