@@ -259,6 +259,10 @@ Examples:
 </div>
 
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To view all notes for a person, use the `find` command with their NRIC or name. Notes are shown only in the search results to keep the main display clean and focused.
+</div>
+
 
 An example of using CareLink to add notes to a person is given below.
 ![AddNote command example](images/AddNoteExample.png)
