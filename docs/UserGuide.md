@@ -112,16 +112,16 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
 <h2 style="color: #28B463;"> <i class="fas fa-rocket icon"></i> Quick Start</h2>
 
-1. **Check Your System**
+1. **Check Your System:**
    MATER requires **Java 17 or above** to run. If you’re unsure whether it’s installed, you can download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-2. **Download MATER**
+2. **Download MATER:**
    Visit [this link](https://github.com/AY2425S1-CS2103T-T14-3/tp/releases) and download the latest version of MATER as a `.jar` file. The downloaded file is named mater.jar. This file is the program you'll be opening each time you use MATER.
 
-3. **Place the Downloaded File**
+3. **Place the Downloaded File:**
    Move the downloaded file to any folder on your computer where you want to keep MATER and its data. This will be your **MATER home folder** where the application and its data are stored.
 
-4. **Open MATER**
+4. **Open MATER:**
 
    - **Option 1: Open MATER by Double-Clicking**
      - Go to the folder where you saved the `.jar` file.
@@ -131,7 +131,9 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
    - **Option 2: Open MATER from the Terminal**
      - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
+
      - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
+
        ```shell
        cd path/to/your/folder
        ```
@@ -142,7 +144,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
        ```
      After a few seconds, the MATER window should appear on your screen, preloaded with sample data for you to explore.
 
-5. **Using MATER**
+5. **Using MATER:**
    MATER has a command box at the top where you can type in simple commands to manage your clients and their cars. Here are a few basic commands to get you started:
    - **View all clients**: Type `list` and press Enter to see a list of all clients.
    - **Add a client**: Type `add-client n/John Doe p/98765432 e/johnd@example.com a/123 Example Street` to add a new client named John Doe.
@@ -150,7 +152,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
    - **Clear all data**: Type `clear` to remove all clients from MATER.
    - **Exit the app**: Type `exit` to close MATER.
 
-6. **Where to Go Next**
+6. **Where to Go Next:**
    For more details on what MATER can do, scroll down to the [Features](#features) section of this guide to explore additional commands and features.
 
 --------------------------------------------------------------------------------------------------------------------
