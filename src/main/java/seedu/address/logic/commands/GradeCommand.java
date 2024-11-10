@@ -38,7 +38,7 @@ public class GradeCommand extends Command {
     public static final String MESSAGE_INVALID_GRADE = "The grade provided is invalid.";
     public static final String MESSAGE_INVALID_MODULE = "The module specified is not found.";
     public static final String MESSAGE_INVALID_PERSON = "The person index provided is invalid.";
-    public static final String MESSAGE_MISMATCH_MODULE_GRADE = "The number of modules and grades"
+    public static final String MESSAGE_MISMATCH_MODULE_GRADE = "The number of modules and grades "
             + "provided do not match.";
 
     private final Index targetIndex;
