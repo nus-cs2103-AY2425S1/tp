@@ -509,7 +509,7 @@ before the command was executed.
 * **Prefix**: An identifier used in commands to indicate which field is referred to. For the 4 fields Phone, Name, Tags and Email,
     the *prefixes* would be `p/`, `t/`, `n/` and `e/` respectively.
 * **Duplicate Contact**: A contact that has the same Phone, Email or Name as another contact.
-* **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories.
+* **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories. The execution of `find` commands do not change the content of tag lists. 
 * **Person List**: The scrollable list of contacts in the GUI displaying all contacts and the respective values for their fields.
 * **Commands affected by `undo` and `redo`**: These refer to all commands that affect the *state* of the Tag List and Contact List
   in **CampusConnect** and exclude `list` and `find`, as they do not alter the state of the contact or tag list.
