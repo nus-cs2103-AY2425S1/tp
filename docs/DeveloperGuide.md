@@ -515,8 +515,27 @@ Prerequisites: Ensure more than one contact is present. These tests can and shou
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Steps to Simulate
+      1. Locate the directory where you saved the `ConTActs.jar` file.
+      2. Locate the `data` folder in this directory.
+      3. Locate the file named `addressbook.json`.
+      4. Delete or temporarily move the data file to simulate a missing file.
+      5. Launch the application once more.
+   2. Expected Behavior
+      1. The application should detect the missing data file.
+      2. A new, empty data file with sample data should be created upon launching the application.
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+
+   1. Steps to Simulate
+      1. Locate the directory where you saved the `ConTActs.jar` file.
+      2. Locate the `data` folder in this directory.
+      3. Locate the file named `addressbook.json`.
+      4. Modify the file to make it invalid JSON by deleting a closing bracket `}`.
+      5. Save the file and close the editor.
+      6. Launch the application once more.
+   2. Expected Behavior
+       1. The application should detect the file is corrupted.
+       2. A new, empty data file should be created upon launching the application.
