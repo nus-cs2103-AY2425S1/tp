@@ -32,14 +32,14 @@ HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
 LogicManager -right->"1" ParserClasses
-ParserClasses ..> XYZContactCommand : <<create>>
-ParserClasses ..> XYZLessonCommand : <<create>>
+ParserClasses ..> XYZContactCommand
+ParserClasses ..> XYZLessonCommand
 
 ContactCommand -up-|> Command
 LessonCommand -up-|> Command
 XYZContactCommand -up-|> ContactCommand
 XYZLessonCommand -up-|> LessonCommand
-LogicManager .left.> Command : <<call>>
+LogicManager .left.> Command
 
 LogicManager --> Model
 LogicManager --> Storage
@@ -51,5 +51,5 @@ note bottom of XYZLessonCommand: XYZLessonCommand = AddLessonCommand, \nFindLess
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
-Command .up.> CommandResult : <<create>>
+Command .up.> CommandResult
 @enduml

@@ -316,7 +316,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Reducing scheduling conflicts
 * Providing a clear overview of classes and finances
 
-It enables seamless tutor coordination with students and parents, improving communication and organization, ultimately leading to a more effective and stress-free educational experience.
+It enables seamless tutor coordination with primary to junior college level students and parents, improving communication and organization, ultimately leading to a more effective and stress-free educational experience.
 
 ### User stories
 
@@ -335,16 +335,17 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | As a  | I want to                                                              | So that I can                                            | Priority |
 |-------|------------------------------------------------------------------------|----------------------------------------------------------|----------|
 | Tutor | Add and delete my students' contacts                                   | Keep track of my students                                | MVP      |
-| Tutor | Add and delete my students' guardians' contacts                        | Keep track of my students’ guardians                     | 2        |
+| Tutor | Add and delete my students' guardians' contacts                        | Keep track of my students’ guardians                     | MVP      |
 | Tutor | Keep track of the house address of a student for home tuition          | Easily go to their house when their tuition starts       | MVP      |
-| Tutor | Keep track of Zoom meeting link of a student for online tuition        | Easily go to the online meeting room when tuition starts | MVP      |
+| Tutor | Keep track of Zoom meeting link of a student for online tuition        | Easily go to the online meeting room when tuition starts | 2        |
 | Tutor | Store what was done in the lessons                                     | Track what was done and plan for next lessons easier     | 2        |
 | Tutor | Create and delete lesson slots in my schedule                          | Keep track of my lessons                                 | MVP      |
 | Tutor | List all my lesson slots in my schedule                                | Keep track of my lessons                                 | MVP      |
 | Tutor | List all my contacts                                                   | Keep track of my contacts                                | MVP      |
 | Tutor | Categorize my students based on subjects or grade levels               | Know what type of lesson it is                           | 2        |
 | Tutor | Keep track of my students' exam dates                                  | Prepare my students adequately by then                   | 2        |
-| Tutor | Edit student details (address, fees, exam, subject, grade level, etc.) | Ensure my students' details are up to date               | 2        |
+| Tutor | Edit student details (name, phone number, email, address, tags, etc.)  | Ensure my students' details are up to date               | 2        |
+| Tutor | Edit guardian details (name, phone number, email, address, tags, etc.) | Ensure guardians' details are up to date                 | 2        |
 
 ### A little bit familiar with the software
 
@@ -354,11 +355,13 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | Tutor | Be able to make my lesson slots repeat every week                        | Avoid creating the same lesson slot every week                            | 2        |
 | Tutor | Keep track of my students' homework (i.e., done status, deadline)        | Track the progress of my students and <br/>keep them accountable          | 2        |
 | Tutor | Change the lesson slot just for that week/all subsequent weeks           | Easily reschedule lessons                                                 | 2        |
-| Tutor | Know if I have accidentally scheduled a class at a conflicting time slot | Avoid troubling students to reschedule after <br/>agreeing on a time slot | 2        |
+| Tutor | Know if I have accidentally scheduled a class at a conflicting time slot | Avoid troubling students to reschedule after <br/>agreeing on a time slot | MVP      |
 | Tutor | Keep track of when and how much each student/guardian needs to pay       | Collect my fees timely and accurately                                     | 2        |
 | Tutor | Tag students under their guardian                                        | Track total fees to collect                                               | 2        |
 | Tutor | Automatically update the amount of fee I collect after a lesson          | Avoid manually update and track fees                                      | 2        |
 | Tutor | Batch delete all scheduled lessons with a student                        | Remove all students' classes                                              | 2        |
+| Tutor | Find a student's or guardian's contact details quickly                   | Contact them quickly                                                      | 2        |
+| Tutor | Find a student's lesson details quickly                                  | Know the location for their tuition                                       | 2        |
 
 ### Expert user
 
@@ -449,6 +452,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Use case resumes from Step 2 or ends if cancelled.  
 
 **Use Case: UC05 - Add lesson for student**  
+Precondition: Student exists in the system.
 **MSS:**
 
 1. Tutor keys in required fields to add student contact.
@@ -463,10 +467,16 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-* **1b**. TutorEase detects that the student does not exist.
-    * **1b1**. TutorEase prompts Tutor to key in data for a student that exists.
+* **1b**. TutorEase detects that the student index is invalid.
+    * **1b1**. TutorEase prompts Tutor to key in an index for a student that exists.
     * **1b2**. Tutor enters new data.  
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
+      Use case resumes from Step 2.
+
+* **1c**. TutorEase detects there is an overlapping lesson at the specified date time.
+    * **1c1**. TutorEase prompts Tutor that there is an overlapping lesson.
+    * **1c2**. Tutor enters new data.  
+      Steps 1c1 to 1c2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
 **Use Case: UC06 - Delete lesson for student**  
