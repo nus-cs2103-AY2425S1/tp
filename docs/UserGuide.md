@@ -61,9 +61,10 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
    
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
+5.  Head over to the [next section](#gui-overview) to understand the GUI
 
-### User Interface (UI) Overview
-The EZSTATE UI is organized into **5** key components:
+### GUI Overview
+The EZSTATE GUI is organized into **5** key components:
 
 ![ui](images/ui_overview_ug.png)
 
@@ -78,7 +79,9 @@ To use EZSTATE, type commands in the command box and press `Enter`. Here are a f
 
    * `help` : Opens the help window showing all commands.
 
-   * `showclients` : Lists all contacts in the system.
+   * `showclients` : Shows all contacts in the system.
+
+   * `showlistings` : Shows all listings in the system.
 
    * `buyer n/John Doe p/98765432 e/johnd@example.com` : Adds a buyer named `John Doe` with a phone number `98765432` and email `johnd@example.com`.
 
@@ -356,7 +359,7 @@ Commands for creating, updating, and deleting buyers and sellers.
     <br>
     <div class="note" markdown="span">
     NAME is case-insensitive: 
-    `find Bob` = `find BOB` = `find bOb` _(Not exhaustive)_
+    `find Bob` = `find BOB` = `find bOb` _(not exhaustive)_
     </div>
     <br>
 
