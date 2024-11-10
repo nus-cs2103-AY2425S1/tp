@@ -78,6 +78,8 @@ any traditional point-and-click management app.
 **Notes about duplicate contacts:**<br>
 * A contact is considered a duplicate of another if it has the same Name, Phone or Email as the other contact.
 
+**Notes about case sensitivity:**<br>
+* Names, emails and tags are case-sensitive. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
