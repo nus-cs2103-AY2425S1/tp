@@ -34,7 +34,7 @@ public class GameDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Username} of the {@code GameDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code GameDescriptor} that we are building.
      */
     public GameDescriptorBuilder withGame(String game) {
         descriptor.setGame(game);
