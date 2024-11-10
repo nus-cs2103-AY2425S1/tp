@@ -330,6 +330,11 @@ Format: `listGroups`
 
 * The group size and up to three members are displayed for each group.
 * If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
+* 
+<box type="tip" seamless>
+
+**Tip:** To view all members of a group with more than 3 people, use `search g/GROUP_NAME`.
+</box>
 
 ![result for 'list groups'](images/list-groups.png)
 
