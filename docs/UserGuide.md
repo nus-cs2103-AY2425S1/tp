@@ -95,7 +95,6 @@ MATER offers a feature-rich platform with the following capabilities:
 - **Status Tracking**: Mark clients as checked in or out for better tracking of in-progress services.
 - **Automatic Data Storage**: MATER saves all data automatically, minimising the risk of accidental data loss.
 
-<div style="page-break-after: always;"></div>
 
 <br>
 
@@ -225,7 +224,6 @@ Shows a message explaining how to access the help page.
 
 <img src="images/helpMessage.png" alt="help message" width="500" height="300">
 
-<div style="page-break-after: always;"></div>
 
 <h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-client</span></h3>
 
