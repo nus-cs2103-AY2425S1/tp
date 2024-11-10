@@ -43,18 +43,18 @@ public class TagCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Missing tags or index should throw format error
-        String missingTagInput = "1";
+        String missingTagPrefix = "1 e";
         String missingIndexInput = "t/friend";
         String emptyInput = " ";
-        String missingTagNameInput = "t/ ";
+        String onlyTagPrefix = "t/";
 
-        assertParseFailure(parser, missingTagInput,
+        assertParseFailure(parser, missingTagPrefix,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         assertParseFailure(parser, missingIndexInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         assertParseFailure(parser, emptyInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, missingTagNameInput,
+        assertParseFailure(parser, onlyTagPrefix,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
     }
 
