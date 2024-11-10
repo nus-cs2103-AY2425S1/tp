@@ -517,19 +517,19 @@ Format: `clear`
         <td><b>Add</b></td>
         <td><code>add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​</code><br> e.g., <code>add n/James Ho p/92233784 e/jamesho@example.com a/1200000 t/friend t/colleague</code></td>
         <td><code>add s/SUBJECT i/INFO f/FROM t/TO [a/ADDED_BUYERS]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Eswen to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
-        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE…​</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
+        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
     </tr>
     <tr>
         <td><b>Edit</b></td>
         <td><code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​</code><br> e.g., <code>edit 2 n/James Lee e/jameslee@example.com</code></td>
         <td><code>edit INDEX [s/SUBJECT] [i/INFO] [f/FROM] [t/TO] [a/ADDED_BUYERS]…​</code><br> e.g., <code>edit 3 a/Alex Yeoh a/Ben Ten</code></td>
-        <td><code>edit INDEX [n/LANDLORD_NAME] [a/ADDRESS] [p/PHONE] [a/ASKING_PRICE] [t/TYPE]…​</code><br> e.g., <code>edit 2 n/Ben Tan a/East Coast Blk 20 #11-283 </code></td>
+        <td><code>edit INDEX [n/LANDLORD_NAME] [a/ADDRESS] [p/PHONE] [a/ASKING_PRICE] [t/TYPE]</code><br> e.g., <code>edit 2 n/Ben Tan a/East Coast Blk 20 #11-283 </code></td>
     </tr>
     <tr>
         <td><b>Find</b></td>
-        <td><code>find n/KEYWORD [MORE_KEYWORDS]</code><br> e.g., <code>find n/James Jake</code></td>
-        <td><code>find s/KEYWORD [MORE_KEYWORDS]</code><br> e.g., <code>find Project </code></td>
-        <td><code>find [a/KEYWORD] [n/KEYWORD] [MORE_KEYWORDS]</code><br> e.g., <code>find a/Lakefront</code></td>
+        <td><code>find n/KEYWORD [n/MORE_KEYWORDS]...</code><br> e.g., <code>find n/James Jake</code></td>
+        <td><code>find s/KEYWORD [s/MORE_KEYWORDS]...</code><br> e.g., <code>find Project</code></td>
+        <td><code>find [a/KEYWORD] [n/KEYWORD] [n/MORE_KEYWORDS] [a/MORE_KEYWORDS]...</code><br> e.g., <code>find a/Lakefront</code></td>
     </tr>
     <tr>
         <td><b>Clear</b></td>
