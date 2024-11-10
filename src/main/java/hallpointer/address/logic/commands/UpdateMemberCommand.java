@@ -90,10 +90,9 @@ public class UpdateMemberCommand extends Command {
         if (!memberToUpdate.isSameMember(updatedMember) && model.hasMember(updatedMember)) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
-        //not ideal
-        
+
         long matchCount = model.countMemberOccurrences(updatedMember);
-        
+
         if (memberToUpdate.isSameMember(updatedMember) && matchCount > 1) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
