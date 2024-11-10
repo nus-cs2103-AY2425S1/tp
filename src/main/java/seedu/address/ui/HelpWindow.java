@@ -19,7 +19,67 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w14-2.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Refer to the user guide for more details: " + USERGUIDE_URL;
+    public static final String HELP_TEXT = String.join("\n\n",
+            "Welcome to BA€ 1.6, your powerful ally in optimizing recurring sales.",
+            "This guide will help you navigate the key features and commands of BA€.",
+
+            "=== Adding a Client ===",
+            "Add a new client to your database with detailed information.",
+            "Command: add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS [fi\\FINANCIALINFO]"
+                    + " [s\\SOCIALMEDIAHANDLE] [t\\TAG]… [t\\TAG:value]…",
+            "Example: add n\\Acme Corp p\\91234567 e\\contact@acme.com a\\123 Business Ave, Suite 100, Metropolis "
+                    + "t\\industry:tech t\\size:enterprise fi\\Annual contract: €50,000 s\\@acmecorp",
+
+            "=== Listing Clients ===",
+            "View all clients in your database.",
+            "Command: list",
+
+            "=== Finding Clients ===",
+            "Search for clients by name using keywords.",
+            "Command: find KEYWORD [MORE_KEYWORDS]",
+            "Example: find Acme Corp",
+
+            "=== Smart Filtering ===",
+            "Quickly identify client groups based on tags or name.",
+            "Command: filter [n\\NAME] [t\\TAG]…",
+            "Example: filter t\\friend n\\John",
+
+            "=== Editing Client Information ===",
+            "Update existing client details.",
+            "Command: edit INDEX [n\\NAME] [p\\PHONE] [e\\EMAIL] [a\\ADDRESS] "
+                    + "[fi\\FINANCIALINFO] [s\\SOCIALMEDIAHANDLE] [t\\TAG]… [t\\TAG:value]…",
+            "Example: edit 1 p\\98765432 e\\newemail@acme.com",
+
+            "=== Deleting a Client ===",
+            "Remove a client from your database.",
+            "Command: delete INDEX",
+            "Example: delete 1",
+
+            "=== Advanced Filtering ===",
+            "Organize your client list based on custom priority metrics.",
+            "Command: advfilter t\\tag OPERATOR VALUE",
+            "Example: advfilter t\\age <= 50",
+
+            "=== Sorting by Tags ===",
+            "Sort your client list based on tag values.",
+            "Command: sort t\\tag asc/desc",
+            "Example: sort t\\age asc",
+
+            "=== Data Export ===",
+            "Export your client data for analysis or reporting.",
+            "Command: export format\\file format",
+            "Example: export format\\csv",
+
+            "=== Clearing All Entries ===",
+            "Remove all clients from your database.",
+            "Command: clear",
+
+            "=== Exiting the Program ===",
+            "Close the BA€ application.",
+            "Command: exit"
+    );
+
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -55,135 +115,9 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     private void setHelpText() {
-        helpTextFlow.getChildren().addAll(
-                createHeader("BA€ 1.6 Help                                                    "),
-                createParagraph(
-                        "Welcome to BA€ 1.6, your powerful ally in optimizing recurring sales.",
-                        "This guide will help you navigate the key features and commands of BA€."
-                ),
-                createHeader("Key Features and Commands"),
-                createFeature(
-                        "Adding a Client: add",
-                        "Add a new client to your database with detailed information.",
-                        "add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS [fi\\FINANCIALINFO] \n [s\\SOCIALMEDIAHANDLE]"
-                        + "[t\\TAG]…\u200B [t\\TAG:value]…\u200B",
-                        "add n\\Acme Corp p\\91234567 e\\contact@acme.com a\\123 Business Ave, Suite 100, "
-                                + "\n Metropolis t\\industry:tech t\\size:enterprise "
-                                + "fi\\Annual contract: €50,000 s\\@acmecorp"
-                ),
-                createFeature(
-                        "Listing Clients: list",
-                        "View all clients in your database.",
-                        "list                                                                                  ",
-                        null
-                ),
-                createFeature(
-                        "Finding Clients: find",
-                        "Search for clients by name using keywords.                                         ",
-                        "find KEYWORD [MORE_KEYWORDS]",
-                        "find Acme Corp"
-                ),
-                createFeature(
-                        "Smart Filtering: filter",
-                        "Quickly identify client groups based on tags or name.",
-                        "filter [n\\NAME] [t\\TAG]…\u200B",
-                        "filter t\\friend n\\John"
-                ),
-                createFeature(
-                        "Editing Client Information: edit",
-                        "Update existing client details.",
-                        "edit INDEX [n\\NAME] [p\\PHONE] [e\\EMAIL] [a\\ADDRESS] [fi\\FINANCIALINFO]"
-                                + " \n [s\\SOCIALMEDIAHANDLE] " + "[t\\TAG]…\u200B [t\\TAG:value]…\u200B",
-                        "edit 1 p\\98765432 e\\newemail@acme.com"
-                ),
-                createFeature(
-                        "Deleting a Client: delete",
-                        "Remove a client from your database.                                       ",
-                        "delete INDEX",
-                        "delete 1"
-                ),
-                createFeature(
-                        "Advanced Filtering: advfilter",
-                        "Organize your client list based on custom priority metrics.                       ",
-                        "advfilter t\\tag [OPERATOR] [VALUE]",
-                        "advfilter t\\age <= 50 "
-                ),
-                createFeature(
-                        "Sorting by tags: sort",
-                        "Sort your client list based on tag values                                          ",
-                        "sort t\\tag asc/desc",
-                        "sort t\\age asc "
-                ),
-                createFeature(
-                        "Data Export: export",
-                        "Export your client data for analysis or reporting.",
-                        "export format\\[file format]",
-                        "export format\\csv                                                                   "
-                ),
-                createFeature(
-                        "Clearing All Entries: clear",
-                        "Remove all clients from your database.",
-                        "clear                                                                             ",
-                        null
-                ),
-                createFeature(
-                        "Exiting the Program: exit",
-                        "Close the BA€ application.",
-                        "exit",
-                        null
-                ),
-                createParagraph(
-                        "For more detailed information, please refer to the full user guide."
-                )
-        );
-    }
-
-    private Text createText(String content, String... styleClasses) {
-        Text text = new Text(content);
-        text.getStyleClass().addAll("white-text");
-        text.getStyleClass().addAll(styleClasses);
-        return text;
-    }
-
-    private TextFlow createHeader(String content) {
-        Text header = createText(content + "\n", "header");
-        TextFlow feature = new TextFlow(header);
-        return feature;
-    }
-
-    private TextFlow createParagraph(String line1, String line2) {
-        TextFlow paragraph = new TextFlow(
-                createText(line1 + "\n"),
-                createText(line2)
-        );
-        paragraph.getChildren().add(createText("\n"));
-        return paragraph;
-    }
-
-    private TextFlow createParagraph(String line1) {
-        TextFlow paragraph = new TextFlow(
-                createText(line1 + "\n")
-        );
-        return paragraph;
-    }
-
-    private TextFlow createFeature(String title, String description, String format, String example) {
-        TextFlow feature = new TextFlow(
-                createText(title + "\n", "subheader"),
-                createText(description + "\n"),
-                createText("Format: ", "bold"),
-                createText(format + "\n", "code")
-        );
-
-        if (example != null) {
-            feature.getChildren().addAll(
-                    createText("Example: ", "bold"),
-                    createText(example + "\n", "code")
-            );
-        }
-
-        feature.getChildren().add(createText("\n"));
-        return feature;
+        Text text = new Text(HELP_TEXT);
+        text.getStyleClass().add("help-text");
+        helpTextFlow.getChildren().add(text);
     }
 
     /**

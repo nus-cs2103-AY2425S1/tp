@@ -2,6 +2,18 @@
     -fx-background-color: #1d1d1d;
 }
 
+.scene {
+    -fx-background-color: #1d1d1d;
+}
+
+.help-window {
+    -fx-background-color: #1d1d1d;
+}
+
+.content-box {
+    -fx-background-color: #1d1d1d;
+}
+
 .scroll-pane {
     -fx-background-color: #1d1d1d;
 }
@@ -19,32 +31,19 @@
 }
 
 .help-text-flow {
-    -fx-padding: 20;
+    -fx-padding: 10;
     -fx-font-family: "Segoe UI", Arial, sans-serif;
     -fx-background-color: #1d1d1d;
 }
 
-.white-text {
-    -fx-fill: white;
+.help-text {
+    -fx-font-size: 14px;
+    -fx-fill: #e0e0e0;
 }
 
-.header {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-}
-
-.subheader {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-}
-
-.bold {
-    -fx-font-weight: bold;
-}
-
-.code {
-    -fx-font-family: "Consolas", monospace;
-    -fx-fill: #66d9ef;
+.help-text-flow .text {
+    -fx-line-spacing: 5px;
+    -fx-fill: #e0e0e0;
 }
 
 #copyButton {
@@ -62,7 +61,7 @@
 }
 
 #helpMessage {
-    -fx-text-fill: white;
+    -fx-text-fill: #b3b3b3;
     -fx-font-size: 12px;
 }
 
