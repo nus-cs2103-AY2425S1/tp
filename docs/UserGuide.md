@@ -224,7 +224,7 @@ Notes:
   To search for an event by name, you will need to specify the <code>-e</code> flag.
 </box>
 
-### Editing a Contact
+### Editing a Contact: `edit`
 
 Edit an existing contact.
 
