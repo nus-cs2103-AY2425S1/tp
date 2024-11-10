@@ -5,8 +5,12 @@
 ---
 # GamerBook Pro Max User Guide
 
-GamerBook Pro Max is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+GamerBook Pro Max is a **desktop app designed to make managing your gaming contacts a breeze**. 
 This app is useful for gamers who have many friends online across different games.
+
+GamerBook Pro Max lets you type quick commands using a Command Line Interface (CLI) while still enjoying the ease and visuals of a Graphical User Interface (GUI). 
+
+You get the best of both worlds: speedy command-based interactions with an intuitive, user-friendly display! 
 If you can type fast, GamerBook can get your contact management tasks done faster than traditional GUI apps.
 
 
@@ -21,18 +25,20 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 ## Installation and Quick Start
 
-1. Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
+1. **Check your Java version**: Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. To check, open a command terminal (like Command Prompt) and type: `java -version`.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).
+2. **Download GamerBook Pro Max**: Download the latest `gamerbook.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).  
+![DownloadPage](images/DownloadPage.png)
 
-3. Copy the file to the folder you want to use as the _home folder_ for your GamerBook.
+3. **Set Up Your GamerBook Folder**: Copy the file to the folder you want to use as the _home folder_ for your GamerBook.
 
-4. Open a command terminal, use `cd` to navigate into the folder you put the jar file in, and use the `java -jar gamerbook.jar` command to run the application.<br>
+4. **Run the App**: Open a command terminal, use `cd` to navigate into the folder you put the jar file in, and use the `java -jar gamerbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. **Try Out Some Commands!**:Type the command in the command box and press Enter to see it in action!
+Here are a few examples:
+    * `help` : Opens the help window. 
 
     * `list` : Lists all contacts, this is useful after you filter the GamerBook using commands such as `find`.
 
@@ -41,6 +47,8 @@ If you can type fast, GamerBook can get your contact management tasks done faste
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
     * `clear` : Deletes all contacts.
+
+    * `undo`  : If you just used `clear`, this will bring back all your contacts!
 
     * `exit` : Exits the app.
 
@@ -51,33 +59,31 @@ Refer to the [Features](#features) below for more details.
 
 ## Exploring the GUI
 
-Our Graphical User Interface (GUI) consists of several parts, refer to the image below.
+Our interface has a few key parts (check the image below for a visual guide):
 
-1. **Menu Option**: By clicking the buttons here around the top right, you can exit the app or open the help window.
+1. **Menu Options**: Click the buttons in the top right to exit the app or open the help window.
 
-2. **Command Input Box**: You may input commands here.
+2. **Command Input Box**: Type your commands here!
 
-3. **Result Display Panel**: Results of command execution and error messages are displayed here.
+3. **Result Display Panel**: See the results of your commands or any error messages here.
 
-4. **Person Cards Panel**: Person cards are listed here. 
+4. **Person Cards Panel**: A list of all your contacts will appear here, each on their own card.
 
 ![UiTut](images/UiTut.png)
 
-### Command PopUp
+### Command Suggestion: Your Shortcut to Faster Commands
 
 ![CommandPopUp](images/commandpopup.png)
 
-Our Command Suggestion PopUp helps you find the command you need with ease.
-
-When you start typing in the command box and have **at least one** character entered, the PopUp will appear, suggesting possible commands to complete your input. 
+Our Command Suggestion PopUp helps you quickly find the right command as you type!
 
 Each suggestion includes the command name, command format and any required details to use it effectively.
 
 <box type="tip" seamless>
 
-To cycle through the suggestions:
+To scroll through the suggestions:
 * Press `shift + up` or `shift + down` and the **current selection** will be highlighted in **blue**.  
-  _In the image the **current selection** would be `editgame`._
+  _In the image above, the **current selection** would be `editgame`._
 
 </box>
 
@@ -91,66 +97,79 @@ Quickly complete your commands!
 <box type="tip" seamless>
 
 Need a quick reference?
-* The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
+* The PopUp stays open as you finish typing your command, so you can check it for syntax or details if you need them.
+
 
 </box>
 
 <box type="info" seamless>
 
-**Note:** Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it.  
+**Note:** Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it!  
 
-**Note:** The Command PopUp will try to remain fully visible on screen at all times for your reading convenience even when 
-the main window is partially off-screen.
+**Note:** The PopUp will adjust its position to stay fully visible, even if your app window is partially off-screen.
 
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Important Notes about Command Formats
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
 
-* Commands are **case-sensitive** and also fully **lowercase**  
-  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
+* **Commands Are Case-Sensitive and All Lowercase**  
+  Make sure to type commands exactly as shown. e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.  
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are **optional**.  
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* **Copying Commands from PDF**  
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-* Items with `…`​ after them can be used multiple times.  
+### Understanding Parameters
+* **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
+  e.g. `add n/NAME` means you would type something like `add n/John Doe`.
+
+
+* **Items in square brackets are optional**.  
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply `n/John Doe`.
+
+
+* **Items with `…`​ after them can be used multiple times.**  
   e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.  
+
+* **Flexible Parameter Order**  
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.  
+
+* **Ignored Extra Parameters** for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)  
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </box>
 
 <box type="info" seamless>
 
-**Notes about command parameters:**<br>
+### Notes About Command Parameters:<br>
 
-* `NAME` **only** accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
-  e.g. `Flora-Ann`. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
+* `NAME` **only accepts alphanumeric characters and spaces**.  
+  Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
 
-* `INDEX` must be a **must** be a **positive integer** (`1`, `2`, `3`, …) or it will be read as invalid command format rather than an index value error.
 
-* `NAME` is **case-sensitive**. Although duplicate contact names are not allowed,     
-e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
+* `INDEX` **must be a must be a positive integer**  
+  If it’s not, you’ll see an invalid command format error.
 
-* `TIME-TIME` should be in the format `HHmm-HHmm` and must be a valid time range within the same day.  
+
+* `NAME` **is case-sensitive**.  
+Although duplicate contact names are not allowed, adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
+
+
+* `TIME-TIME` **must be within the same day**  
+  Use the format `HHmm-HHmm` for time ranges within the same day.  
   e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
 
-* `TIME-TIME` time ranges cannot be a single point in time.
-  e.g. `1200-1200` is not a valid time range.
+
+* **No single points in time for `TIME-TIME`**
+  The start and end times must be different (e.g. `1200-1200` is invalid).
 
 </box>
 
@@ -172,7 +191,7 @@ e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
 | **FavGame**    | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                        |
 | **UnFavGame**  | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                                    |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                                    |
-| **FindGame**   | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                                |
+| **FindGame**   | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find Overwatch League`                                                                                                                                                          |
 | **FindTime**   | `findtime TIME-TIME [TIME-TIME]…`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                                    |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
 | **Clear**      | `clear`                                                                                                                                                                                                                        |
