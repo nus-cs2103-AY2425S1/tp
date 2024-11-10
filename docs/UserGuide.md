@@ -45,7 +45,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 #### For Windows
 1. **Open the Command Prompt**:
    - Press the **Windows key**, type `cmd`, and select **Command Prompt** from the search results.
-
+   <br>
 2. **Check your Java version**:
    - In the Command Prompt window, type the following command:
      ```bash
@@ -54,7 +54,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
    - Press **Enter**. If Java is installed, it will display the version. Ensure it is **Java 17 or above**.
    <br>
    If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
-
+   <br>
 3. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
 4. Copy the file to the folder you want to use as the _home folder_ for EZSTATES.
@@ -84,7 +84,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 1. **Open the Terminal**:
    - Open **Spotlight** by pressing **Command + Space**, type `Terminal`, and press **Enter**.
    - Alternatively, you can go to **Finder > Applications > Utilities**, and double-click on **Terminal**.
-
+   <br>
 2. **Check your Java version**:
    - In the Terminal window, type the following command:
      ```bash
@@ -93,7 +93,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
    - Press **Enter**. The terminal will display the installed Java version. Ensure it is **Java 17 or above**.
    <br>
    If you need `Java`, you can download it from [Java Downloads](https://www.oracle.com/java/technologies/downloads/).
-
+   <br>
 3. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
 4. Copy the file to the folder you want to use as the _home folder_ for EZSTATES.
