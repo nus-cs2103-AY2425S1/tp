@@ -85,10 +85,8 @@ for the team of AddressBook-Level 3.
 * Items without brackets are **mandatory**, you must provide a value.<br>
   E.g. `n/NAME` for `cadd`, `CLIENT_INDEX` and `a/ADDRESS` for `radd`.
 
-* Items in square brackets `[]` are **mandatory** to have **at least one of them**, you should not use omit any of them
-  in a command.<br>
-  E.g. `cedit` can be used as `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`
-  or `cedit 1 n/Steven Tan p/98765432`.
+* Items in square brackets `[]` are **mandatory** to have **at least one of them**, you should not omit all of them in a command.<br>
+  E.g `cedit` can be used as `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432` or `cedit 1 n/Steven Tan p/98765432`.
 
 * Items in curly brackets `{}` are **optional**, you may choose not to have them in your command.<br>
   E.g. `radd` can be used as `radd 1 a/140 Robinson Road, #03-05, Chow House`
@@ -148,7 +146,7 @@ for the team of AddressBook-Level 3.
 | [**find**](#locating-clients-find)                                          | Find information                        | `find [k/KEYWORDS...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG...]`                                                                               | `find k/Tan n/Steven Tan p/98765432`                             |
 | [**cdelete**](#deleting-a-client-cdelete)                                   | Delete a client                         | `cdelete CLIENT_INDEX`                                                                                                                                       | `cdelete 3`                                                      |
 | [**rdelete**](#deleting-a-rental-information-rdelete)                       | Delete rental information from a client | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`                                                                                                                      | `rdelete c/1 r/2`                                                |
-| [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                       | `sort`                                                           |
+| [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                       | -                                                           |
 | [**↑up↓down arrow keys**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                      | -                                                                |
 | [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                  | -                                                                |
 | [**import**](#importing-data-import)                                        | Import data from an external file       | `import`                                                                                                                                                     | -                                                                |
@@ -994,9 +992,8 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
