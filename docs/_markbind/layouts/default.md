@@ -4,7 +4,7 @@
 
 <header sticky>
   <navbar type="dark">
-    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">Gamerbook PRO MAX</a>
+    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">GamerBook Pro Max</a>
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>
@@ -28,7 +28,8 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
-  * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
+  * [Installation and Quick Start]({{ baseUrl }}/UserGuide.html#installation-and-quick-start)
+  * [Exploring the GUI]({{ baseUrl }}/UserGuide.html#exploring-the-gui)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
   * [Commands]({{ baseUrl }}/UserGuide.html#commands)
@@ -42,10 +43,6 @@
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
-  * [Adding a command](https://se-education.org/guides/tutorials/ab3AddRemark.html)
-  * [Removing Fields](https://se-education.org/guides/tutorials/ab3RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>

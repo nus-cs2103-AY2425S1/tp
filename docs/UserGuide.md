@@ -11,13 +11,15 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 
 <!-- * Table of Contents -->
-<page-nav-print />
+<div style="font-size: 18px;">
+  <page-nav-print />
+</div>
 
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Install and Get Started!
+## Installation and Quick Start
 
 1. Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
 
@@ -25,7 +27,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, use `cd` to nvaigate into the folder you put the jar file in, and use the `java -jar GamerBook.jar` command to run the application.<br>
+4. Open a command terminal, use `cd` to navigate into the folder you put the jar file in, and use the `java -jar GamerBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -47,31 +49,45 @@ Refer to the [Features](#features) below for more details.
 
 -------------------------------------------------
 
-## Play Around With GUI
+## Exploring the GUI
 
-Our GUI consists of several parts, refer to the image below.
+Our graphical user interface (GUI) consists of several parts, refer to the image below.
 
-1. **Menu Option**: By clicking the buttons here, you can exit the app or open the help window.
-2. **Command Input Box**: You may input your command here.
-3. **Result Display Panel**: Error messages and result of command execution are displayed here.
-4. **Person Cards Panel**: Person cards are listed here.
+1. **Menu Option**: By clicking the buttons here around the top right, you can exit the app or open the help window.
+
+2. **Command Input Box**: You may input commands here.
+
+3. **Result Display Panel**: Results of command execution and error messages are displayed here.
+
+4. **Person Cards Panel**: Person cards are listed here. 
    ![UiTut](images/UiTut.png)
 
-### Command Popup!
+### Command PopUp
 
 ![CommandPopUp](images/commandpopup.png)
 
-We have implemented a Command Suggestion PopUp for your convenience!
+Our Command Suggestion PopUp helps you find the command you need with ease.
 
-As long as the command box is currently the UI element **in focus** and **at least one** character is detected inside the command box, it will suggest the possible commands that you can autocomplete it to.
+When you start typing in the command box and have **at least one** character entered, the PopUp will appear, suggesting possible commands to complete your input. 
 
-Underneath each suggested command is the syntax for that command and what parameters are needed to complete it
-* To access the autocomplete functionality press `shift + up` or `shift + down` while the popup is open and it will highlight the **current selection** in **blue**.  
+Each suggestion includes the command name, command format and any required details to use it effectively.
+
+To cycle through the suggestions:
+* Press `shift + up` or `shift + down` and the **current selection** will be highlighted in **blue**.  
   _In the image the **current selection** would be `editgame`._
 
+Quickly complete your commands!
 * If your **current selection** is correct press `tab` to autocomplete it within the command box.
 
+Need a quick reference?
 * The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
+  <box type="tip" seamless>
+
+**Note:** Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it.  
+
+**Note:** The Command PopUp will try to remain fully visible on screen at all times even when the main window is partially 
+offscreen for your reading convenience.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -80,6 +96,9 @@ Underneath each suggested command is the syntax for that command and what parame
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
+
+* Commands are **case-sensitive** and also fully **lowercase**  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.  
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -100,31 +119,52 @@ Underneath each suggested command is the syntax for that command and what parame
 
 </box>
 
+<box type="info" seamless>
+
+**Notes about command parameters:**<br>
+
+* `NAME` **only** accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
+  e.g. `Flora-Ann`. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
+
+* `INDEX` must be a **must** be a **positive integer** (`1`, `2`, `3`, …) or it will be read as invalid command format rather than an index value error.
+
+* `NAME` is **case-sensitive**. Although duplicate contact names are not allowed,     
+e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
+
+* `TIME-TIME` should be in the format `HHmm-HHmm` and must be a valid time range within the same day  
+  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
+
+* `TIME-TIME` time ranges cannot be a single point in time.
+  e.g. `1200-1200` is not a valid time range.
+
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 ## Command summary
 
-| Action   | Format, Examples                                                                                                                                                                                                         |
-| **Help** | `help`                                                                                                                                                                                                                   |
-| **List** | `list`                                                                                                                                                                                                                   |
-| **Add**  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130-2359` |
-| **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]… [pt/TIME-TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
-| **AddGame** | `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`addgame 1 g/Overwatch u/Potato`                                                                                                                   |
-| **EditGame** | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                                 |
-| **DeleteGame** | `deletegame INDEX g/GAME`<br> e.g.,`deletegame 1 g/Overwatch`                                                                                                                                                            |
-| **FavGame** | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                  |
-| **UnFavGame** | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                              |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                              |
-| **Findgame** | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                          |
-| **FindTime** | `findtime TIME-TIME [TIME-TIME]…`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                              |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
-| **Clear** | `clear`                                                                                                                                                                                                                  |
-| **Undo** | `undo`                                                                                                                                                                                                                   |
-| **Save** | `save`                                                                                                                                                                                                                   |
-| **Load** | `load`                                                                                                                                                                                                                   |
-| **Exit** | `exit`                                                                                                                                                                                                                   |
+| Action         | Format, Examples                                                                                                                                                                                                               |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**       | `help`                                                                                                                                                                                                                         |
+| **List**       | `list`                                                                                                                                                                                                                         |
+| **Add**        | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130-2359` |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]… [pt/TIME-TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                          |
+| **AddGame**    | `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`addgame 1 g/Overwatch u/Potato`                                                                                                                         |
+| **EditGame**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                                       |
+| **DeleteGame** | `deletegame INDEX g/GAME`<br> e.g.,`deletegame 1 g/Overwatch`                                                                                                                                                                  |
+| **FavGame**    | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                        |
+| **UnFavGame**  | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                                    |
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                                    |
+| **Findgame**   | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                                |
+| **FindTime**   | `findtime TIME-TIME [TIME-TIME]…`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                                    |
+| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
+| **Clear**      | `clear`                                                                                                                                                                                                                        |
+| **Undo**       | `undo`                                                                                                                                                                                                                         |
+| **Save**       | `save`                                                                                                                                                                                                                         |
+| **Load**       | `load`                                                                                                                                                                                                                         |
+| **Exit**       | `exit`                                                                                                                                                                                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -162,8 +202,8 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]..
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags, games and preferred times (including 0)   
-**Tip:** Preferred time `pt/` TIME-TIME should be in the form of "HHmm-HHmm" and a valid time range that is not overnight
+**Tip:** A person can have any number of tags, games and preferred times (including 0).    
+**Tip:** `TIME` should be in the form of `HHmm` and `pt/` time ranges must be within the same day (e.g. "2300-0100" is not allowed).
 </box>
 
 Examples:
@@ -176,7 +216,7 @@ Examples:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/PREFERRED TIME]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/PREFERRED TIME]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -271,7 +311,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]...`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is **case-insensitive**. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -291,7 +331,7 @@ Finds persons whose games' names contain any of the given keywords.
 
 Format: `findgame KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `lol` will match `LoL`
+* The search is **case-insensitive**. e.g `lol` will match `LoL`
 * The order of the keywords does not matter. e.g. `Impact Genshin` will match `Genshin Impact`
 * Only the name of games is searched.
 * Only full words will be matched e.g. `Legends` will not match `Legend`
@@ -355,6 +395,8 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+* Worried about losing your data? You can just `undo` this command!
+
 <br>
 
 ### Undoing previous command : `undo`
@@ -410,11 +452,7 @@ If your changes to the data file makes its format invalid, GamerBook will discar
 Furthermore, certain edits can cause the GamerBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-<br>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+<br></br>
 
 --------------------------------------------------------------------------------------------------------------------
 

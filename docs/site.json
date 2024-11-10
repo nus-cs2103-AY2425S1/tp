@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
-  "titlePrefix": "Gamerbook Pro Max",
-  "titleSuffix": "Gamerbook Pro Max",
+  "titlePrefix": "GamerBook Pro Max",
+  "titleSuffix": "GamerBook Pro Max",
   "faviconPath": "images/Logo.png",
   "style": {
     "codeTheme": "light"

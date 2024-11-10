@@ -39,7 +39,7 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
-MainWindow -left-> "1" CommandBox
+MainWindow *-up-> "1" CommandBox
 
 PersonListPanel -down-> "*" PersonCard
 
@@ -47,7 +47,7 @@ MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-CommandBox *-down-> "1" AutoSuggestionTextField
+CommandBox *--> "1" AutoSuggestionTextField
 AutoSuggestionTextField *-- "0..*" CommandTextFlow
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
