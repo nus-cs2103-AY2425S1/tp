@@ -93,8 +93,10 @@ Note:
 * Regardless of the date format chosen during input, dates will be displayed in the application in the format `dd-mm-yyyy`.
 * Dates that are already past will still be accepted as inputs. This provides users the flexibility to continue tracking events even after their conclusion.
 
-**Tags** : Tags can contain alphanumeric characters, hyphens `-`, and underscores `_` only, but cannot be made up of only hyphens `-` and underscores `_`.<br>
-Tags also only accepts a **maximum** of 30 characters.
+**Tags** : Tag inputs can:
+* contain alphanumeric characters, hyphens `-`, and underscores `_` only.
+* cannot be made up of **only** hyphens `-` and underscores `_`.
+* only accept a **maximum** of 30 characters.
 
 ## Features
 
