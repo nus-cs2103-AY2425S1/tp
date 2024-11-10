@@ -15,7 +15,8 @@ Generative AI tools (ChatGPT, Copilot) were used for creating test cases, writin
 
 The following Java libraries were also used in the development of MediBase3:
 - [JavaFX](https://openjfx.io/) for the GUI
-- [JUnit 5](https://junit.org/junit5/) for testing
+- [JUnit5](https://junit.org/junit5/) for testing
+- [Jackson](https://github.com/FasterXML/jackson) for processing JSON files
 
 [Back to Table of Contents](#table-of-contents)
 ## **Setting up, getting started**
