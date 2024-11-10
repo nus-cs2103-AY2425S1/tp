@@ -28,9 +28,9 @@ public class Level {
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Level should be in the format YEAR TRACK, "
-            + "where Year is one of: [S1, S2, S3, S4, S5]"
-            + " and Track is one of: [EXPRESS, NA, NT, IP]"
-            + " with the exception of S5 which is only allowed to have the Track NA";
+            + "where Year is one of: [S1, S2, S3, S4]"
+            + " and Track is one of: [EXPRESS, NA, NT, IP].\n"
+            + "S5 is only allowed to have the Track NA";
 
     public final String levelName;
 

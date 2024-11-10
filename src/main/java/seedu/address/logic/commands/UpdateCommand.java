@@ -119,6 +119,10 @@ public class UpdateCommand extends Command {
         Set<Subject> updatedSubjects = newSubjects.orElse(studentToUpdate.getSubjects());
 
         if (updatedLevel.equals(new Level("None None"))) {
+            if (newSubjects.isPresent()) {
+                throw new CommandException(Subject.MESSAGE_LEVEL_NEEDED);
+            }
+
             updatedSubjects = new HashSet<Subject>();
         }
 
