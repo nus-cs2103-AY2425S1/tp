@@ -1104,3 +1104,17 @@ Deleting an existing appointment from a patient
    Expected: An error message is shown, indicating that the command format is incorrect.
 
 [Back to Table of Contents](#table-of-contents)
+
+
+## Appendix: Planned Enhancements
+
+Team size: 5
+
+1. **Allow names to include symbols and special characters**: As of the current version of MediBase3, names are restricted to both alphanumerics and spaces only. 
+However, there are people with legal names that include symbols and special characters, such as 'Nagaratnam s/o Suppiah'. In the future, we will loosen the restrictions for names to allow users to input names with any special characters and symbols.
+
+2. **Improve `addAppt` command to allow users to add multiple appointments at once**: Currently, users can only add one appointment at a time using the `addAppt` command. We plan to enhance the `addAppt` command to allow users to add multiple appointments at once.
+This will be useful as it allows doctors to save time by adding multiple appointments for a patient in one go, instead of typing the same command multiple times.
+
+3. **Improve Email Validation**: MediBase3 does not currently check if the email ends with a top-level domain (TLD) such as `.com` or `.org`. We plan to enhance the validation for email addresses to also check if the domain provided contains an actual top-level domain apart from the other existing constraints.
+
