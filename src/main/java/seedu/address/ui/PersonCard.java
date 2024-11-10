@@ -58,10 +58,15 @@ public class PersonCard extends UiPart<Region> {
 
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().getDisplayableName());
+        name.setWrapText(true);
         phone.setText(person.getPhone().getDisplayablePhone());
+        phone.setWrapText(true);
         address.setText(person.getAddress().getDisplayableAddress());
+        address.setWrapText(true);
         email.setText(person.getEmail().getDisplayableEmail());
+        email.setWrapText(true);
         remark.setText(person.getRemark().getDisplayableRemark());
+        remark.setWrapText(true);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
