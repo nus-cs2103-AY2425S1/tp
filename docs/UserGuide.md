@@ -8,8 +8,26 @@ ClinicConnect is the **the *ideal* patient management and appointment tracker sy
 ---
 
 ## Table of Contents
-
-{:toc}
+1. [Quick Start](#quick-start)
+2. [ClinicConnect Features](#clinicconnect-features)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a patient: `add`](#adding-a-patient-add)
+    * [Adding a patient with additional information: `addf`](#adding-a-patient-with-additional-information-addf)
+    * [Viewing patient's full profile: `view`](#viewing-patients-full-profile-view)
+    * [Editing a patient: `edit`](#editing-a-patient-edit)
+    * [Listing all patients : `home`](#listing-all-patients--home)
+    * [Booking an upcoming appointment: `bookappt`](#booking-an-upcoming-appointment-bookappt)
+    * [Deleting an appointment : `deleteappt`](#deleting-an-appointment--deleteappt)
+    * [Filtering appointments : `filter`](#filtering-appointments--filter)
+    * [Deleting a patient : `delete`](#deleting-a-patient--delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+3. [FAQ](#faq)
+4. [Known Issues](#known-issues)
+5. [Command Summary](#command-summary)
+6. [Command Parameters Summary](#command-parameters-summary)
 
 ---
 
@@ -38,10 +56,9 @@ ClinicConnect is the **the *ideal* patient management and appointment tracker sy
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#clinicconnect-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## ClinicConnect Features
 
 ClinicConnect is designed to streamline clinic processes with various functionalities to book appointments and manage patient details effectively. These features allow you to perform a range of operations, from adding new patient records, managing patient details, scheduling appointments, filtering health services and customizing data to enhance productivity. 
@@ -182,6 +199,23 @@ Examples:
    e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` Adds a patient named Lincoln Park with compulsory fields and some optional fields
 
 For more information on each individual parameter click [here](#command-parameters-summary).
+
+### Viewing patient's full profile: `view`
+
+Identifies the specific patient using NRIC and shows the full profile of the patient.
+
+Format: `view NRIC`
+
+![view result](images/viewResult.png)
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+NRIC provided must be a valid NRIC currently in the system.
+</div>
+
+Example:
+* `view T0123456A`
+
 
 ### Editing a patient: `edit`
 
@@ -333,22 +367,6 @@ Examples:
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
-### Viewing patients full profile: `view`
-
-Identifies the specific patient using NRIC and shows the full profile of the patient.
-
-Format: `view NRIC`
-
-![view result](images/viewResult.png)
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-NRIC provided must be a valid NRIC currently in the system.
-</div>
-
-Example:
-* `view T0123456A`
-
 ### Deleting a patient : `delete`
 
 Deletes the patient with the specified NRIC from the address book.
@@ -402,15 +420,13 @@ Furthermore, certain edits can cause the ClinicConnectSystem to behave in unexpe
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClinicConnectSystem home folder.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -419,7 +435,6 @@ system, despite this being an impossible combination of NRIC and birthdate for a
 4. **When adding allergies**, plural and singular forms of the same substance will be accepted into the allergy list.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Command summary
 
 | Action                 | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -438,7 +453,6 @@ system, despite this being an impossible combination of NRIC and birthdate for a
 | **Help**               | `help` **OR** `help COMMAND_KEYWORD` <br> <br> e.g. `help add`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Command Parameters Summary
 
 Some commands include parameters which are identified by prefixes. Here is a table showing the prefixes and what each entails:
