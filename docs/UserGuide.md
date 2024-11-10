@@ -393,6 +393,10 @@ Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Appointment start and end times are displayed in a format that includes a "T" between the date and time (e.g., `2025-01-01T10:00`). This "T" serves as a separator and is part of the standard ISO 8601 date-time format, which ensures consistency across systems.
 </div>
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
+When using the `addapp` command, ensure that the minutes in the start and end times do not exceed `:59`. For example, a valid time format is `10:30`, not `10:60`.
+</div>
+
 
 
 
