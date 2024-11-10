@@ -188,6 +188,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 * Can type fast.
 * Prefers typing to mouse interactions.
 * Is reasonably comfortable using CLI apps.
+* Their company has employees with contract end dates.
 
 **Value proposition**:
 * Manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app.
