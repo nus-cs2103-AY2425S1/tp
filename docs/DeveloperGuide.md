@@ -534,6 +534,7 @@ Precondition: Student exists in the system.
       Use case resumes from Step 2.
 
 **Use Case: UC09 - Find lessons by student names**  
+
 **MSS:**
 
 1. Tutor keys in a keyword in the required field, to find lessons with students whose names contain any of the keywords.
