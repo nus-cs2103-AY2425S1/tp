@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -225,7 +226,9 @@ public class ModelManager implements Model {
 
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && goodsList.equals(otherModelManager.goodsList)
+                && filteredReceipts.equals(otherModelManager.filteredReceipts);
     }
 
     @Override
@@ -322,5 +325,12 @@ public class ModelManager implements Model {
      */
     private void filterIllegalSupplierNames() {
         this.goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));
+    }
+
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(addressBook, goodsList, userPrefs, filteredPersons, filteredReceipts);
     }
 }
