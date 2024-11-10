@@ -204,21 +204,24 @@ company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 | `a/ADDRESS`      | Physical address                                   | Compulsory |
 | `t/TAG`          | Tags to categorize contact (cannot contain spaces) | Optional   |
 
-<div markdown="span" class="alert alert-info"> 🔔 **Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. </div>
+<div markdown="block" class="alert alert-info"> 
 
-Examples:
+🔔 **Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. 
+
+**Examples**:
 
 - Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry: `Education` is acceptable.
 - Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry:`Automotives` is NOT acceptable.
 
-<div markdown="span" class="alert alert-primary">💡 **Tip:**
-A company can have any number of tags (including 0)
 </div>
 
-Examples:
+**Examples**:
 
 - `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison t/facility` adds a company name Newgate Prison to AdmiNUS.
 
+<div markdown="span" class="alert alert-primary">💡 **Tip:**
+A company can have any number of tags (including 0)
+</div>
 
 #### Editing a contact: `edit`
 
@@ -307,17 +310,17 @@ To delete all students with the `oneYearMembership` tag, simply use `filtertag t
 
 <div markdown="block" class="alert alert-warning">
 
-⚠️ **Important: Behavior of delete Command with Repeated Indices**
-When using the delete command with the same index repeated multiple times (e.g., delete 2 2), the command processes each deletion sequentially:
+⚠️ **Important: Behavior of delete Command with Repeated Indices** <br>
+When using the delete command with the same index repeated multiple times (e.g., `delete 2 2`), the command processes each deletion sequentially:
 1. The first instance deletes the contact at the specified index (e.g., index 2).
 2. The second instance attempts to delete the contact now at index 2 after the first deletion, which may have shifted from its original position (e.g., originally at index 3).
 
 **Example Scenario**:
-* If the command delete 2 2 is entered and the contact at index 2 is deleted successfully:
+* If the command `delete 2 2` is entered and the contact at index 2 is deleted successfully:
   * The app will then delete the new contact at index 2 after the first deletion.
 * If there are not enough contacts remaining to fulfill the repeated deletion (e.g., only two contacts were present initially), the app will display a message indicating that the index is invalid for the second attempt.
 
-**Note**: When an index becomes invalid after the initial deletion, the app will display an "invalid index" message instead of the expected success message for the contact that was deleted in the earlier step.
+**Note**: When an index becomes invalid after the initial deletion, the app will display an invalid index message instead of the expected success message for the contact that was deleted in the earlier step.
 
 </div>
 
