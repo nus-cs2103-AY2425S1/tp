@@ -274,6 +274,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefer desktop apps over other types
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* only deals with English for work
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app with functionality for quick matching of candidates to jobs
 
