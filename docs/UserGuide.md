@@ -7,12 +7,12 @@ VendorVault is a **desktop app for managing supplier contact information and del
 # Table of Contents
 <!-- * Table of Contents -->
 1. [How to get started]()
-2. [Setting up VendorVault ]()
+2. [Setting up VendorVault]()
 3. [Features]()
     - 3.1 [Understanding the Command Syntax]()
     - 3.2 [General commands]()
         - 3.2.1 [Viewing help]()
-        - 3.2.2 [Viewings all deliveries and suppliers]()
+        - 3.2.2 [Viewing all deliveries and suppliers]()
         - 3.2.3 [Clearing all suppliers and deliveries]()
         - 3.2.4 [Exiting the program]()
     - 3.3 [Supplier commands]()
@@ -31,8 +31,8 @@ VendorVault is a **desktop app for managing supplier contact information and del
         - 3.4.6 [Sorting deliveries]()
         - 3.4.7 [Upcoming deliveries]()
     - 3.5 [Extended valid format guidelines]()
-        - 3.4.2 [Valid email address format]()
-        - 3.4.3 [Valid company name format]()
+        - 3.5.1 [Valid email address format]()
+        - 3.5.2 [Valid company name format]()
 4. Managing my data
    - 4.1 [Saving your data]()
    - 4.2 [Editing your data directly]()
@@ -172,7 +172,7 @@ Format: `list -a`
 
 ### 3.2.3 Clearing all suppliers and deliveries : `clear`
 
-Clear all data regarding suppliers and deliveries in vendor vault.
+Clears all data regarding suppliers and deliveries in vendor vault.
 
 Format: `clear`
 
@@ -302,7 +302,7 @@ TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 
 ---
 
-### 3.3.4 Mark a supplier with a status : `mark -s`
+### 3.3.4 Marking a supplier with a status : `mark -s`
 
 The `mark` command is used to mark a supplier as either **active** or **inactive**.
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
@@ -345,7 +345,7 @@ A success message will be displayed if the supplier is successfully marked as ac
 
 ---
 
-### 3.3.5 Find a supplier: `find -s`
+### 3.3.5 Finding suppliers: `find -s`
 
 The `find -s` command is used to find a supplier in VendorVault. 
 This helps you to search for a supplier based on the supplier name, company, or product. 
@@ -393,7 +393,7 @@ To find the supplier whose name contains "link" and company contains "NU":
 
 ---
 
-### 3.3.6 Sort suppliers: `sort -s`
+### 3.3.6 Sorting suppliers: `sort -s`
 
 The `sort -s` command is used to sort suppliers according to the supplier name in VendorVault.
 This helps you to view the suppliers in a different order (ascending or descending).
@@ -589,7 +589,7 @@ Expected output:
 
 ---
 
-### 3.4.5 Find a delivery: `find -d`
+### 3.4.5 Finding deliveries: `find -d`
 
 Find deliveries based on attributes of the delivery, like the delivery date and time, status, supplier and product.
 
@@ -636,7 +636,7 @@ Expected output:
 
 ---
 
-### 3.4.6 Sort deliveries: `sort -d`
+### 3.4.6 Sorting deliveries: `sort -d`
 
 The `sort -d` command is used to sort deliveries in VendorVault based on the delivery cost, date and time or status.
 This helps you to view the deliveries in a different order (ascending or descending).
