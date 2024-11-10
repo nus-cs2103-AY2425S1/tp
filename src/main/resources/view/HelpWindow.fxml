@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root title="Help" minWidth="600" minHeight="600" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Help" minWidth="800" minHeight="500" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -44,7 +44,7 @@
               <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
             <children>
-              <TableView fx:id="commandSummaryTable" prefHeight="900.0" prefWidth="1000.0"  maxHeight="Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+              <TableView fx:id="commandSummaryTable" prefHeight="500.0" prefWidth="800.0"  maxHeight="Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                 <columns>
                   <TableColumn fx:id="actionColumn" editable="false" minWidth="80" prefWidth="150.0" text="Command" />
                   <TableColumn fx:id="formatColumn" editable="false" minWidth="400" prefWidth="850.0" text="Format, Examples" />

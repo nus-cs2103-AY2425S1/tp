@@ -135,6 +135,16 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
+        return filteredPersons;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} sorted alphabetically and
+     * backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getSortedPersonList() {
         addressBook.sortByName();
         return filteredPersons;
     }
