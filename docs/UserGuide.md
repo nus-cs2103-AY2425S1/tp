@@ -685,7 +685,7 @@ For detailed explanations for the matching criteria of each flag and the accepta
       Parameters: <FLAG>/ <SEARCH TERM>
       Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
       Example: filter n/ Alice p/ 9111222
-      This will find all clients whose names contain 'Alice'and whose phone number is '91112222'.
+      This will find all clients whose names contain 'Alice' and whose phone number is '91112222'.
       ```
     - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to all the invalid search terms.
 
