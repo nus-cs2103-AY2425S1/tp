@@ -112,6 +112,11 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 - Tag should consist of alphanumeric characters only, and it should be between 1 and 30 characters long.
 </div>
 
+<div markdown="span" class="alert alert-danger">⚠️ **Warning:**
+Students with same name, regardless of case-sensitivity, will be considered as the same student and will not be added.
+Modules and tags are case-sensitive and will be added as they are.
+</div>
+
 Examples:
 * `add n/John Doe p/98765432 g/male m/Mathematics` : Adds a student named `John Doe` to StoreClass.
 * `add n/Betsy Crowe g/female p/1234567 m/Physics m/Chemistry t/OLevels t/new` : Adds a student named `Betsy Crowe` to StoreClass.
