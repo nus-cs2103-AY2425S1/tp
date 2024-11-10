@@ -188,7 +188,6 @@ public class AddCommandTest {
 
         @Override
         public void setCurrentWeddingName(WeddingName weddingName) {
-            throw new AssertionError("This method should not be called.");
         }
 
         @Override
