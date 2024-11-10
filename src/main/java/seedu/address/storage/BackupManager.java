@@ -123,14 +123,6 @@ public class BackupManager {
         }
 
         String backupFileName = String.format("%d_%s_%s.json", usedIndex, actionDescription, timestamp);
-
-        // Check if the file name exceeds the limit
-        if (backupFileName.length() > MAX_FILENAME_LENGTH) {
-            throw new IOException("Backup file name exceeds the maximum length of "
-                    + MAX_FILENAME_LENGTH
-                    + " characters. Please shorten your description.");
-        }
-
         Path backupPath = backupDirectory.resolve(backupFileName);
 
         // Copy source to the backup path
