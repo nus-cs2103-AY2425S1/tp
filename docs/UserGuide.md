@@ -72,7 +72,7 @@ Perfect for managing both small, close-knit families and large extended family n
 
 ### 4. Try These Basic Commands
 
-We've prepoluated LegacyLink with some dummy data for you to play around and get a feel
+We've prepopulated LegacyLink with some dummy data for you to play around and get a feel
 of how LegacyLink works!
 Here are some simple commands to get you started:
 
@@ -232,12 +232,12 @@ add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP
 
 **Rules to Remember:**
 
-| Field       | Requirements                                                                 |
-|-------------|---------------------------------------------------------------------------|
-| Name        | • Letters, numbers, and spaces only<br>• Cannot be blank                  |
-| Phone       | • 3-15 digits<br>• Numbers only                                           |
-| Email       | • Must be valid email format (example@domain.com)                         |
-| Relationship| • Letters only<br>• Cannot be blank                                       |
+| Field       | Requirements                                                                                                    |
+|-------------|-----------------------------------------------------------------------------------------------------------------|
+| Name        | • Letters, numbers, and spaces only<br>• Cannot be blank                                                        |
+| Phone       | • 3-15 digits<br>• Alphabetical characters (A-Z, a-z) and special characters (/ - _ ( )) are permitted. <br> • At least one digit is required in the number |
+| Email       | • Must be valid email format (example@domain.com)                                                               |
+| Relationship| • Letters only<br>• Cannot be blank                                                                             |
 
 
 **Note:** Names which are very long may not be fully displayed in the detailed person view, as displaying it would
