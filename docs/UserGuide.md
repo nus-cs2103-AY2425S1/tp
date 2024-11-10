@@ -225,7 +225,7 @@ Example:
 
 ### Reset attendance: `reset-att`
 
-Resets the attendance count of all students in displayed list to 0.
+Resets the attendance count of all students in the displayed list to 0.
 
 Format: `reset-att`
 
@@ -240,7 +240,7 @@ Marks attendance for all students in the displayed list.
 Format: `batch-mark`
 
 Example:
-* Enter `select 1 2 3` and then `batch-mark` marks the attendance of entries 1, 2 and 3
+* Enter `select 1 2 3` and then `batch-mark` marks the attendance of entries at index 1, 2 and 3
 
 
 ### Unmark attendance for a group of students: `batch-unmark`
