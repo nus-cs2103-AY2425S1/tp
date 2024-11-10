@@ -28,10 +28,12 @@ public class StringUtil {
     public static boolean containsIgnoreCase(String sentence, String word) {
         requireNonNull(sentence);
         requireNonNull(word);
+        if (sentence.trim().equals("Address was not added")) { // special case for address
+            return false;
+        }
 
         String preppedWord = word.trim();
         checkArgument(!preppedWord.isEmpty(), "String parameter cannot be empty");
-        //checkArgument(preppedWord.split("\\s+").length == 1, "String parameter should be a single word");
 
         String preppedSentence = sentence.toLowerCase();
         return preppedSentence.contains(preppedWord.toLowerCase());
