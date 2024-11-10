@@ -546,6 +546,30 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+1. Finding people while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with one or more contacts containing the word `Roy`
+   2. Test case: `find Roy`<br>
+      Expected: Contacts containing `Roy` is displayed.
+   3. Test case: `find roy`<br>
+      Expected: Similar to previous.
+   4. Test case: `find royt`<br>
+      Expected: Contacts similar to `royt` is displayed.
+   5. Other find commands to try: `find x`, `...` (where x is any sequence of characters)<br>
+      Expected: Similar to previous.
+   5. Test case: `find`<br>
+      Expected: No person is found. Error details shown in the status message. Status bar remains the same.
+
+1. Filtering people while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `filter p/+65`<br>
+      Expected: Contacts containing in their phone `+65` is displayed.
+   3. Test case: `filter p/+++`<br>
+      Expected: No person is found. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect filter commands to try: `filter p/x`, `...` (where x is any invalid phone number)<br>
+      Expected: Similar to previous.
+   5. Other incorrect filter commands to try: `filter y/x`, `...` (where x is any invalid field, and y is any valid field format)<br>
+      Expected: Similar to previous.
+
 1. _{ more test cases …​ }_
 
 ### Saving data
