@@ -701,3 +701,9 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Planned Enhancements**
+1. Support for phone numbers that are not strictly 8 digits.
+2. User customization of pass/fail grade boundary.
+3. Support for grades that are in decimal values.
+4. Add a way to view grades without hovering over the class, preferably without using the mouse.
