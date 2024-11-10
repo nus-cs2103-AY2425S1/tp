@@ -73,6 +73,15 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]`
 
+* Name should consist of alphanumeric characters and spaces, and should not be blank
+* Phone numbers should only contain digits, and should have at least 3 digits.
+* Emails should be of the format local-part@domain and adhere to the following constraints:<br>
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (``). The local-part may not start or end with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br>
+  The domain name must:
+      - end with a domain label at least 2 characters long,
+      - have each domain label start and end with alphanumeric characters,
+      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 * (if supplied) `IS_VIP` should either be `true` or `false`, corresponding to whether the person being added is initialized as VIP.
 * Person added is by default a non-VIP if the `vip/` command is omitted.
 <box type="tip" seamless>
@@ -137,6 +146,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [c/CO
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Constraints regarding each of the fields are the same as those when [adding a person](#adding-a-person-add).
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
