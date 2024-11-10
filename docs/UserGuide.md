@@ -196,7 +196,7 @@ Notes:
 * `des/DESCRIPTION` should only be specified if `-e` is specified.
 * If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
 * All user input in between flags are ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
-* The name keyword search is case-insensitive. e.g `hans` will match `Hans`.
+* The name keyword search is case-insensitive. e.g. `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` **AND** phone number `91234567`.
 * Searching by address will list all contacts with addresses that include the keywords. e.g. `list a/Blk 123` will list contacts with address `Blk 123` and `Blk 456` because`Blk 456` contains the word `Blk`.
@@ -497,9 +497,9 @@ In case you need more information on the command parameters, here's a more compr
 
 ### Flags
 
-Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
+Some commands can be applied on clients, vendors and events. Use `-CONTACT_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
 
-* `-c`: flag to specify client related commmands
+* `-c`: flag to specify client related commands
 * `-v`: flag to specify vendor related commands
 * `-e`: flag to specify event related commands
 
@@ -592,7 +592,7 @@ Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` 
       <td>Tag associated with contact</td>
       <td>
         <ul>
-          <li>should only contain alphanumeric characters or dashses</li>
+          <li>should only contain alphanumeric characters or dashes</li>
         </ul>
       </td>
     </tr>
