@@ -36,11 +36,10 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports the address book in CSV format.\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "format\\csv";
+            + ": Exports the address book in CSV or TXT format.\n"
+            + "Example: " + COMMAND_WORD + " format\\csv or " + COMMAND_WORD + " format\\txt";
     public static final String SUCCESS_MESSAGE = "The address book has been exported to "
-            + "/data/addressbook.%1$s in the specified format.";
+            + "./data/bae_addressbook.%1$s in the specified format.";
 
     public static final String FAILURE_MESSAGE = "Error exporting address book to %1$s";
     public static final String BACKWARD_SLASH_REGEX = "\\\\";
@@ -48,7 +47,7 @@ public class ExportCommand extends Command {
     public static final String EMPTY_STRING = "";
 
     public static final String DEFAULT_FILEPATH = "data/";
-    public static final String DEFAULT_FILENAME = "addressbook";
+    public static final String DEFAULT_FILENAME = "bae_addressbook";
 
     /**
      * Class that handles Format enum type used in ExportCommand
@@ -80,8 +79,7 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        String jsonFilePath = "data/addressbook.json";
-
+        String jsonFilePath = DEFAULT_FILEPATH + DEFAULT_FILENAME + ".json";
         try {
             List<Map<String, String>> jsonData = readAndParseJson(jsonFilePath);
             Set<String> headers = extractHeaders(jsonData);
@@ -144,7 +142,7 @@ public class ExportCommand extends Command {
                 // isTextual checks if a JsonNode represents a basic JSON String value.
                 if (value.isTextual()) {
                     personInfo.put(header, value.asText());
-                    // Note that the tags in AddressBook.json are stored in an array literal.
+                    // Note that the tags in bae_addressbook.json are stored in an array literal.
                     // Therefore, we can't process tags in the same way as we do other variables
                     // (e.g. name, phone, etc.)
                 } else if (value.isArray() && header.equals("tags")) {

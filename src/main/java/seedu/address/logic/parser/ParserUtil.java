@@ -123,6 +123,7 @@ public class ParserUtil {
 
     private static String[] getTagKeyValue(String trimmedTag) throws ParseException {
         String[] tagKeyValue = trimmedTag.split(":");
+
         // Account for the possibility that the tag is just a lone colon.
         // i.e. edit 1 t\:
         if (tagKeyValue.length == 0) {
@@ -137,8 +138,8 @@ public class ParserUtil {
             }
             throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
         }
-        if (!Tag.isValidTagName(tagKeyValue[1])) {
-            throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
+        if (!Tag.isValidTagValue(tagKeyValue[1])) {
+            throw new ParseException(Tag.MESSAGE_TAG_VALUES_SHOULD_BE_ALPHANUMERIC);
         }
         return tagKeyValue;
     }
