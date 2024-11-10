@@ -142,6 +142,13 @@ Adds a pet to PawPatrol.
 A pet can have any number of tags (including 0)
 </div>
 
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+It is recommended to link the pets to the owners immediately after adding a pet but this is not enforced. See <a href="#linking-owners-and-pets-link">link command</a>
+</div>
+
 Format: `pet n/NAME s/SPECIES b/BREED a/AGE x/SEX [t/TAG]…​`
 
 Examples:
@@ -155,7 +162,9 @@ Links an owner to one or more pets.
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Important information:**<br>
-In the event where the user wants to link multiple pets to an owner, ensure that for multiple pets that all the pets are unlinked. If any of the pets has already been linked to an owner, then the command will _fail_.
+In the event you want to link multiple pets to an owner, ensure that none of the pets are already linked to the owner. If any of the pets has already been linked to the specified owner, then the command will _fail_.
+
+Ensure that links are always from owners to pets, i.e. from `oINDEX` to `pINDEX`. If any other letter is specified instead, the command will fail with error "Input is not of the correct format".
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -164,6 +173,7 @@ In the event where the user wants to link multiple pets to an owner, ensure that
 <ul>
 <li>An owner can be linked to 0 or more pets.</li>
 <li>A pet can be linked to 0 or more owners.</li>
+<li>If an owner has pets with similar names, you should rename one to be able to differentiate both pets.</li>
 </ul>
 </div>
 
