@@ -495,8 +495,9 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 
 **A**: To transfer your data:
 1. [Install](#quick-start) the app on the new computer.
-2. Locate the `data` folder in your [home folder](#glossary). Replace the default `data` folder in the new installation with this folder.
-3. In the original home folder, locate the `preference.json` file. Copy this file and overwrite the default `preference.json` in the new computer's home folder.
+2. Ensure the app is closed on both computers.
+3. Locate the `data` folder in your [home folder](#glossary). Replace the default `data` folder in the new installation with this folder.
+4. In the original home folder, locate the `preference.json` file. Copy this file and overwrite the default `preference.json` in the new computer's home folder.
 
 
 --------------------------------------------------------------------------------------------------------------------
