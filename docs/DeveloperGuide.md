@@ -501,6 +501,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
       Use case ends.
 
+
 ---
  
 **Use case:** UC8 - Add Appointment
