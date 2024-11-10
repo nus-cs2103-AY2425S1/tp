@@ -197,7 +197,8 @@ Parameters:
 * Delete: `del/NAME` or `del/INDEX`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
-When using a person's name, it must exactly match their name in the address book (case-insensitive).
+When using a person's name:
+* If there are multiple contacts with similar names, Sales Contact Pro will display a filtered list of all matching contacts
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Using the person's index number from the last displayed list is often easier than typing their full name!
