@@ -76,6 +76,11 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Gets the model's version of the {@code Person}
+     */
+    Person getPerson(Person person);
+
+    /**
      * Returns true if a vendor with the same identity as {@code person} exists in the address book.
      */
     boolean hasVendor(Person person);
@@ -90,7 +95,6 @@ public interface Model {
      * Unassigns the vendor to just be a normal person contact in the WedLinker.
      */
     void unassignVendor(Person person);
-
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -224,8 +228,6 @@ public interface Model {
 
     /**
      * Get the target {@code Wedding}.
-     *
-     * @return
      */
     Wedding getWedding(Wedding target);
 
