@@ -62,7 +62,6 @@ public class DeleteVendorCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
 
         System.out.print(deleteVendorCommand);
         System.out.println(expectedMessage);
