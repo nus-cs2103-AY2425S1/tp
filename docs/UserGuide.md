@@ -87,10 +87,10 @@ Adds a pet owner to PawPatrol.
 
 **:information_source: Important notes about owner fields:**<br>
 <ul>
-<li>IC number: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
-<li>Owner name: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
-<li>Phone number: Must contain exactly 8 digits as according to Singapore phone standards.</li>
-<li>Email: Should follow a standard email format of local-part@domain and adhere to the following constraints:
+<li><code>IC_NUMBER</code>: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
+<li><code>NAME</code>: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
+<li><code>PHONE</code>: Must contain exactly 8 digits as according to Singapore phone standards.</li>
+<li><code>EMAIL</code>: Should follow a standard email format of local-part@domain and adhere to the following constraints:
 <ul>
 <li>The local-part should only contain alphanumeric characters and the following special characters (excluding the apostrophes) '+', '_', '.', '-'.</li>
 <li>The local-part may not start or end with any special characters.</li>
@@ -99,7 +99,7 @@ Adds a pet owner to PawPatrol.
 <li>The last domain label (Top-Level Domain (TLD)) must only contain letters (e.g. <code>.com</code>) or be a valid TLD combination like <code>.co.uk</code>.</li>
 </ul>
 </li>
-<li>Address: Can contain any characters, but must be at least 3 characters long.</li>
+<li><code>ADDRESS</code>: Can contain any characters, but must be at least 3 characters long.</li>
 </ul>
 </div>
 
@@ -109,7 +109,8 @@ Examples:
 * `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
 
 <div markdown="span" class="alert alert-info">
-:exclamation: **About Owner's NRIC in list**<br>
+
+**:exclamation: About Owner's NRIC in list**<br>
 
 Due to PDPA regulations, only the last 3 digits and last letter of the NRIC will be shown in the list view.<br>
 The first 4 numbers of the NRIC will be replaced with a `X` to protect the privacy of the owner.
@@ -124,16 +125,18 @@ Adds a pet to PawPatrol.
 
 **:information_source: Important notes about pet fields:**<br>
 <ul>
-<li>Pet name: Must only contain alphanumeric characters, spaces, or hyphens, and it should not be blank.</li>
-<li>Pet species: Must only contain alphabetic characters, should be a single word, and it should not be blank.</li>
-<li>Pet breed: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
-<li>Pet age: Must only contain numbers, and it should be 1 or 2 digits long.</li>
-<li>Pet sex: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female respectively).</li>
-<li>Pet tags: Must be alphanumeric and should only contain a single word each.</li>
+<li><code>NAME</code>: Must only contain alphanumeric characters, spaces, or hyphens, and it should not be blank.</li>
+<li><code>SPECIES</code>: Must only contain alphabetic characters, should be a single word, and it should not be blank.</li>
+<li><code>BREED</code>: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
+<li><code>AGE</code>: Must only contain numbers, and it should be 1 or 2 digits long.</li>
+<li><code>SEX</code>: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female respectively).</li>
+<li><code>TAG</code>: Must be alphanumeric and should only contain a single word each.</li>
 </ul>
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 A pet can have any number of tags (including 0)
 </div>
 
@@ -147,14 +150,25 @@ Examples:
 
 Links an owner to one or more pets.
 
+<div markdown="span" class="alert alert-warning">
+
+:exclamation: **Important information:**<br>
+In the event where the user wants to link multiple pets to an owner, ensure that for multiple pets that all the pets are unlinked. If any of the pets has already been linked to an owner, then the command will _fail_.
+</div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Extra information:**<br>
 <ul>
-<li>Links owner at specified <code>OWNER_INDEX</code> to pet(s) at specified <code>PET_INDEX</code>s.</li>
 <li>An owner can be linked to 0 or more pets.</li>
 <li>A pet can be linked to 0 or more owners.</li>
 </ul>
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+It is recommended to link the pets to the owners immediately after adding a pet but this is not enforced.
 </div>
 
 Format: `link oOWNER_INDEX t/pPET_INDEX…​`
@@ -165,15 +179,6 @@ Examples:
 
 ![link between Claire and Fluffy](images/linkClaireFluffy.jpeg)
 <div style="text-align: center;"><em>Link between Claire (owner) and Fluffy (pet)</em></div>
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-It is recommended to link the pets to the owners are the first action after adding a pet but this is not enforced.
-</div>
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Important information:**
-Ensure that for multiple pets that all the pets are unlinked.<br>
-If any of the pets has already been linked to an owner, then the command will _fail_.
-</div>
 
 ### Unlinking entities: `unlink`
 
@@ -244,6 +249,15 @@ Finds owners or pets whose names contain any of the given keywords.
 </ul>
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: About find and UI:**<br>
+<ul>
+<li>Only the list that is selected by the <code>find</code> will be updated. The other list will remain the same.</li>
+<li>This allows for the possibility to find <code>owners</code> then find <code>pets</code> without disrupting the other list.</li>
+</ul>
+</div>
+
 Format:
 * `find owner KEYWORD [MORE_KEYWORDS]`: Finds owners whose names contain any of the given keywords.
 * `find pet KEYWORD [MORE_KEYWORDS]`: Finds pets whose names contain any of the given keywords.
@@ -252,14 +266,6 @@ Examples:
 * `find owner John` returns `john` and `John Doe` in the owners list panel.
 * `find pet fluffy megatron` returns `Fluffy`, `Megatron` as shown in the image below.<br>
   ![result for 'find fluffy megatron'](images/findFluffyMegatron.jpeg)
-
-<div markdown="block" class="alert alert-info">
-**:information_source: About find and UI:**<br>
-<ul>
-<li>Only the list that is selected by the <code>find</code> will be updated. The other list will remain the same.</li>
-<li>This allows for the possibility to find <code>owners</code> then find <code>pets</code> without disrupting the other list.</li>
-</ul>
-</div>
 
 ### Deleting an entity : `delete`
 
@@ -306,7 +312,9 @@ Clears all owners and pets in PawPatrol.
 
 Format: `clear`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+<div markdown="span" class="alert alert-warning">
+
+:exclamation: **Warning:**
 This action is irreversible! Please make a backup of the <a href="#for-advanced-users-updating-pawpatrol-data-directly">data file</a> should you wish to retain past data.
 </div>
 
@@ -336,9 +344,11 @@ PawPatrol does not automatically back up your data. To do so, copy the JSON file
 
 Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+
+:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, PawPatrol will <b>discard all data</b> and start with an empty data file at the next run. Hence, it is recommended to take a <a href="#saving-a-backup-data-file">backup</a> of the file before editing it.<br>
-Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause PawPatrol to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Automatic backup data files `[coming in v2.0]`
