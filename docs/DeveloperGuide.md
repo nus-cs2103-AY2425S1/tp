@@ -601,7 +601,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a Guest
 
-1. Test case: `add_guest n/Nick Fury p/96753452 e/nickfury@avengers.com a/219 West 47th Street, New York City, New York rsvp/A r/H t/boss t/avenger`<br>
+1. Test case: `add_guest n/Nick Fury p/96753452 e/nickfury@avengers.com a/219 West 47th Street, New York City, New York rsvp/P r/H t/boss t/avenger`<br>
      Expected: A new guest is added to the end of the Guest list. Details of the Guest are displayed in the status message.
 
 2. Test case: `add_guest n/Peter Parker p/92458634 e/peter@school.com a/20 Ingram Street, New York City, New York`<br>
@@ -702,7 +702,6 @@ Prerequisites: List all Guests and Vendors using the `list` command. Multiple Gu
     ii. Relaunch Bridalbuddy<br>
     iii. Run the command `clear`<br>
         Expected: A new empty `bridalbuddy.json` file is created in the `data` folder. Sample Guests and Vendors are deleted.
-
 
 2. Dealing with corrupted data file<br>
     i. Open the `bridalbuddy.json` file located in the `data` folder with a text editor.<br>
