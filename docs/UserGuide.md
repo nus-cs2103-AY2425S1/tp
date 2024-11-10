@@ -11,44 +11,6 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
-### An Overview of the User Guide:
-1. [**Introduction**](#1-introduction)
-2. [**About**](#2-about)
-3. [**Starting HR Helper**](#3-starting-hr-helper)
-4. [**Features of HR Helper**](#4-features-of-hr-helper)
-   
-    4.1 [**Authentication**](#4-1-authentication)
-    
-    4.2 [**Viewing help**](#4-2-viewing-help-help)
-
-    4.3 [**Adding an employee**](#4-3-adding-an-employee-add)
-
-    4.4 [**Listing all employees**](#4-4-listing-all-employees-list)
-
-    4.5 [**Counting employees**](#4-5-counting-employees-count)
-
-    4.6 [**Editing an employee**](#4-6-editing-an-employee-edit)
-    
-    4.7 [**Locating employee by name**](#4-7-locating-employees-by-name-find)
-
-    4.8 [**Deleting an employee**](#4-8-deleting-an-employee-delete)
-
-    4.9 [**Sorting employees**](#4-9-sorting-employees-sort)
-
-    4.10 [**Favoriting an employee**](#4-10-favoriting-an-employee-favorite)
-
-    4.11 [**Clearing all entries**](#4-11-clearing-all-entries-clear)
-
-    4.12 [**Exiting HR Helper**](#4-12-exiting-hr-helper-exit)
-
-    4.13 [**Employee details window**](#4-13-employee-details-window)
-
-5. [**Command Summary**](#5-command-summary)
-6. [**FAQ**](#6-faq)
-7. [**Known Issues**](#7-known-issues)
-
---------------------------------------------------------------------------------------------------------------------
-
 ## 1 Introduction
 HR Helper is a **desktop app for managing employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
