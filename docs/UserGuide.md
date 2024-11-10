@@ -16,7 +16,7 @@ Graphical User Interface (GUI). If you can type fast, SocialBook can get your co
 than traditional GUI apps.
 
 <!-- * Table of Contents -->
-<page-nav-print />f
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
