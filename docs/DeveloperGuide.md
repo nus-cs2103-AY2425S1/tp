@@ -430,8 +430,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2b.1: If input validation fails, CareLink displays an error message and does not update the record.
     - Use case ends.
 
-
-
 **Use Case 5: Delete Person Details**
 
 **System**: CareLink
@@ -456,13 +454,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a.1: If no person record matches the given details, CareLink displays an error message.
     - Use case ends.
 
-
-
-
-**Use Case 9: Filter Data by Medical Condition**
+**Use Case 6: Filter Data by Medical Condition**
 
 **System**: CareLink
-**Use Case**: UC09 - Filter Data by Medical Condition
+**Use Case**: UC06 - Filter Data by Medical Condition
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -488,10 +483,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 4a.1: If no patient data exists for the specified condition, CareLink informs Fred that no records were found.
     - Use case ends.
 
-**Use Case 10: Filter Data by Patients**
+**Use Case 7: Filter Data by Patients**
 
 **System**: CareLink
-**Use Case**: UC10 - Filter Data by Patients
+**Use Case**: UC07 - Filter Data by Patients
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -517,10 +512,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 4a.1: If no patient data exists for the specified patients, CareLink informs Fred that no records were found.
     - Use case ends.
 
-**Use Case 11: Schedule Appointments**
+**Use Case 8: Schedule Appointments**
 
 **System**: CareLink
-**Use Case**: UC11 - Schedule Appointments
+**Use Case**: UC08 - Schedule Appointments
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -564,10 +559,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - CareLink displays an error message about the conflicting appointment
     - Use case ends
 
-**Use Case 12: Edit Existing Appointments**
+**Use Case 9: Edit Existing Appointments**
 
 **System**: CareLink
-**Use Case**: UC12 - Edit Existing Appointments
+**Use Case**: UC09 - Edit Existing Appointments
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -614,10 +609,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Use case ends
 
 
-**Use Case 13: Delete Appointments**
+**Use Case 10: Delete Appointments**
 
 **System**: CareLink
-**Use Case**: UC13 - Delete Appointments
+**Use Case**: UC10 - Delete Appointments
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
@@ -654,10 +649,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    - 2d.1: CareLink displays an error message that the appointment does not exist in CareLink
    - Use case ends
 
-**Use Case 15: Add Note to Person**
+**Use Case 11: Add Note to Person**
 
 **System**: CareLink
-**Use Case**: UC15 - Add Note to Person
+**Use Case**: UC11 - Add Note to Person
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
