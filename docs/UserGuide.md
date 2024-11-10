@@ -19,17 +19,17 @@ Perfect for educators who value efficiency and prefer keyboard-based interaction
 
 1. [Getting Help](#getting-help)
    1. [Viewing help](#viewing-help--help)
-2. [Managing Persons](#managing-persons)
-   1. [Adding a person](#adding-a-person-add)
-   2. [Listing all persons](#listing-all-persons--list)
-   3. [Editing a person](#editing-a-person--edit)
-   4. [Deleting a person](#deleting-a-person--delete)
-   5. [Finding a person](#locating-persons-by-name-find)
+2. [Managing Students](#managing-students)
+   1. [Adding a student](#adding-a-student-add)
+   2. [Listing all students](#listing-all-students--list)
+   3. [Editing a student](#editing-a-student--edit)
+   4. [Deleting a student](#deleting-a-student--delete)
+   5. [Finding a student](#locating-students-by-name-find)
 3. [Managing Groups](#managing-groups)
    1. [Listing all groups](#listing-all-groups--listgroups)
    2. [Grouping students together](#grouping-students-together-group)
    3. [Locating groups by name](#locating-groups-by-name-findgroup)
-   4. [Deleting a group](#deleting-a-group-deletegroup)
+   4. [Deleting a group](#deleting-a-group--deletegroup)
 4. [Managing Tags](#managing-tags)
    1. [Adding a tag](#adding-a-tag--tag)
    2. [Deleting a tag](#deleting-a-tag--untag)
@@ -47,6 +47,7 @@ Perfect for educators who value efficiency and prefer keyboard-based interaction
 8. [FAQ](#faq)
 9. [Known Issues](#known-issues)
 10. [Command Summary](#command-summary)
+11. [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -73,9 +74,9 @@ Once GoonBook is running, familiarize yourself with:
    - The results display
 
 2. **Essential Features**
-   - [Adding students](#adding-a-person-add)
+   - [Adding students](#adding-a-student-add)
    - [Creating groups](#grouping-students-together-group)
-   - [Managing tags](#adding-a-tag-tag)
+   - [Managing tags](#adding-a-tag--tag)
    - [Importing/Exporting data](#import-students-import-csv_file_location)
 
 ### Quick References
@@ -94,13 +95,13 @@ Once GoonBook is running, familiarize yourself with:
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-- If you are on MacOS do note you may need to download a specific JDK 17 version. More on this [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html#programming-language).
+   - If you are on MacOS do note you may need to download a specific JDK 17 version. More on this [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html#programming-language).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-4/tp/releases/).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-4/tp/releases/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your GoonBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your GoonBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar goonbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar goonbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
    <br>
@@ -110,7 +111,7 @@ Once GoonBook is running, familiarize yourself with:
 
    - cd /users/desktop/goonbook/goonbook.jar
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    - `list` : Lists all students.
@@ -123,7 +124,7 @@ Once GoonBook is running, familiarize yourself with:
 
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -157,7 +158,7 @@ Once GoonBook is running, familiarize yourself with:
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -165,15 +166,19 @@ Format: `help`
 
 <div style="page-break-after: always"></div>
 
-## Managing Persons
+## Managing Students
 
-### Adding a person: `add`
+### Adding a student: `add`
 
-Adds a person to the address book.
+Adds a student to the address book.
 
 Format: `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​`
 
-- Name of person is case-insensitive - same name but different casing is considered duplicate.
+- Students of same `NAME` is considered duplicate.
+- `NAME` is case-insensitive. It must be alphanumeric and allows whitespace.
+- `CLASS` must be alphanumeric.
+- `PHONE_NUMBER` must be at least 3 digits long and only contain numbers.
+- `TAG` must be alphanumeric and allows whitespace. It must be within 30 characters.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -183,14 +188,22 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-- `add n/Song Si Mew c/W08 p/10110011 t/Japanese`
+- `add n/Song Si Mew c/W08 p/10110011`
+  - Successfully adds new student `Song Si Mew` from class `W08` and phone number `10110011` successfully.
+- `add n/SONG SI MEW c/W08 p/10110011`
+  - Returns `This student already exists in the address book`
 - `add n/Aaron Tan c/G12 p/11110011 t/Trivial t/CS `
+  - Successfully adds new student `Aaron Tan` from class `G12`, phone number `11110011`, tags `Trivial` and `CS` successfully.
+- `add n/Beh Wen Jie c/ p/`
+  - Returns `Student's class names cannot be empty and should be alphanumeric`
+- `add n/Beh Wen Jie c/S09 p/###`
+  - Returns `Phone numbers should only contain numbers, and it should be at least 3 digits long`
 
 <div style="page-break-after: always"></div>
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the address book.
 
 Format: `list`
 
@@ -198,48 +211,58 @@ Format: `list`
 
 <div style="page-break-after: always"></div>
 
-### Editing a person : `edit`
+### Editing a student : `edit`
 
-Edits an existing person in the address book.
+Edits an existing student in the address book.
 
-Format: `edit INDEX [n/ NAME] [p/ PHONE] [c/ STUDENT CLASS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [c/CLASS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
+- When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+- You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
 
 ![Edit](images/Edit.png)
 
 Examples:
 
-- `edit 1 p/91234567 c/ 4L` Edits the phone number and class of the 1st person to be `91234567` and `4L` respectively.
+- `edit 1 c/A11 p/91234567`
+  - Edits the class and phone number of the 1st student to be `A11` and `91234567` respectively.
+- `edit 2`
+  - Returns `At least one field to edit must be provided.`
+- `edit 1 c/W-08`
+  - Returns `Student's class names cannot be empty and should be alphanumeric`
 
 <div style="page-break-after: always"></div>
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
 Format: `delete INDEX`
 
-- Deletes the person at the specified `INDEX`.
+- Deletes the student at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 ![Delete](images/Delete.png)
+
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the Goon book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete 2`
+    - Successfully deletes the 2nd person in the Goon book.
+- `find Betsy` followed by `delete 1`
+    - Successfully deletes the 1st person in the results of the `find` command.
+- `delete 100`
+    - If contains fewer than 100 students, returns `The index provided is greater than the max students`
 
 <div style="page-break-after: always"></div>
 
-### Locating persons by name: `find`
+### Locating students by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -247,15 +270,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
+- Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 ![Find](images/Find.png)
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find alex david`
+  - Returns `Alex Yeoh`, `David Li`
+- `find alex dav`
+  - Returns `Alex Yeoh`
 
 <div style="page-break-after: always"></div>
 
@@ -275,21 +300,24 @@ Format: `listGroups`
 
 Groups students together.
 
-Format: `group [g/GROUPNAME] [s/STUDENTNAME]…​`
+Format: `group g/GROUPNAME s/STUDENTNAME [s/STUDENTNAME]…​`
 
 - Each group must have a unique name.
-- Only exact student name matches will be added.
-- Only the student name is searched.
+- `GROUPNAME` must be alphanumeric and allows whitespace (case-insensitive).
+- `STUDENTNAME` must match exactly (case-insensitive).
+- Group is successfully created only if all student names match.
 
 ![Group](images/Group.png)
 
 Examples:
 
-- If the GoonBook contains `Bob` and `Tom` and a group called `Meow`
-- `group g/StudyGroup1 s/Bob s/Tom` groups `Bob` and `Tom`
-- `group g/Meow s/Bob s/Tom` returns `Group name already taken!!`
-- `group g/Meow s/Bob s/` returns `Please do not enter an empty string for student name!`
-- `group g/StudyGroup1 s/Bo` returns `The following students could not be found: Bo`<br>
+If the addressgroup contains `Alice Pauline` and `Benson Meier`,
+- `group g/Study Group 1 s/alice pauline s/benson meier`
+    - Successfully groups `Alice Pauline` and `Benson Meier` into `StudyGroup1`.
+- `group g/STUDY GROUP 1 s/alice pauline s/benson meier`
+    - Returns `Group name already taken!!`
+- `group g/Study Group 2 s/ali`
+    - Returns `The following students could not be found: ali`
 
 <div style="page-break-after: always"></div>
 
@@ -300,18 +328,20 @@ Finds groups whose names contain any of the given keywords.
 Format: `findGroup KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g `class` will match `Class`
-- The order of the keywords do not matter. e.g. `class A` will match `A class`
+- The order of the keywords matters. e.g. `class A` will not match `A class`
 - Only the group name is searched.
 - Only full words will be matched e.g. `class` will not match `clas`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `class` will return `class A`, `class B`
+- Groups matching all keywords will be returned.
+  e.g. `class A` will return `class A` but not `class B`
 
 ![FindGroup](images/FindGroup.png)
 
 Examples:
 
-- `findGroup 19S13` returns `19S13`
-- `findGroup GroupA GroupB` returns `GroupA`, GroupB<br>
+- `findGroup study group`
+  - Returns `study group 1` and `study group 2`
+- `findGroup study group 1`
+  - Returns `study group 1`
 
 <div style="page-break-after: always"></div>
 
@@ -335,28 +365,44 @@ Examples:
 
 ### Adding a tag : `tag`
 
-Adds a tag to a specified person.
+Adds a tag to a specified student.
 
-Format: `tag INDEX t/TAG`
+Format: `tag INDEX t/TAG [t/TAG]…​`
 
 - Ability to add more than one tag at once by doing another `t/TAG` after.
-- The index **must be a positive integer** 1, 2, 3, …​
-- Tag is case-insensitive - same word but different casing is a duplicate.
+- `INDEX` **must be a positive integer** 1, 2, 3, …​
+- `TAG` must be alphanumeric and allows whitespace (case-insensitive). It must be within 30 characters.
 
 ![Tag](images/Tag.png)
+
+Examples:
+
+- `tag 1 t/needs consult t/quiet`
+  - Successfully tags 1st student to `needs consult` tag and `quiet` tag
+- `tag 1 t/QUIET`
+  - Returns `Tag(s) already exist`
+- `tag 100 t/hardworking`
+  - If contains fewer than 100 students, returns `The person index provided is invalid`
 
 <div style="page-break-after: always"></div>
 
 ### Deleting a tag : `untag`
 
-Deletes a tag of a specified person.
+Deletes a tag of a specified student.
 
-Format: `untag INDEX t/TAG`
+Format: `untag INDEX t/TAG [t/TAG]…​`
 
-- Removes specified tag from that person.
-- The index **must be a positive integer** 1, 2, 3, …​
+- `INDEX` **must be a positive integer** 1, 2, 3, …​
+- `TAG` must match exactly (case-insensitive)
 
 ![UnTag](images/UnTag.png)
+
+Examples:
+
+- `untag 1 t/needs consult t/quiet`
+    - Successfully removes `needs consult` tag and `quiet` tag from 1st student
+- `untag 1 t/qquiet`
+    - Returns `The tag(s) does not exist`
 
 <div style="page-break-after: always"></div>
 
@@ -366,10 +412,12 @@ Format: `untag INDEX t/TAG`
 
 Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
 
-- Only adds NON-DUPLICATE students (students primary key is their name).
+Format: `import CSV_FILE_LOCATION`
+
+- Only adds NON-DUPLICATE students (i.e. students with same name).
 - Does not update existing users with the new imported data.
 - Will notify user of all duplicate students found and not imported.
-- Csv file location must be absolute path and valid.
+- `CSV_FILE_LOCATION` must be absolute path and valid.
 - Csv files must be properly formatted to GoonBook style (see exported_data.csv).
 - Csv files are to have 4 columns: `[name, class, phone number, tags]`.
 - Tags in the csv file are to be seperated with a space.
@@ -379,8 +427,10 @@ Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
 ![Import](images/Import.png)
 
 Examples:
-
-- `import /users/shaun/desktop/tp/test_students.csv`
+- `import /Users/martin/CODE/tp/data/exported_data.csv`
+  - Successfully imports data
+- `import /invalid/path`
+  - Returns `Invalid path!`
 
 <div style="page-break-after: always"></div>
 
@@ -458,21 +508,35 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                       |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Add**             | `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 c/4B t/friend t/colleague`         |
-| **Clear**           | `clear`                                                                                                                |
-| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
-| **Delete Group**    | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER][c/CLASS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee c/4L`                           |
-| **Export Students** | `export`                                                                                                               |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                             |
-| **Find Group**      | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`                                                        |
-| **Delete Group**    | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
-| **Create Group**    | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie s/Martin s/Jianbing s/Shaun s/Wenjie` |
-| **Import**          | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                             |
-| **List Students**   | `list`                                                                                                                 |
-| **List Groups**     | `listGroups`                                                                                                           |
-| **Tag**             | `tag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                       |
-| **Untag**           | `untag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                     |
-| **Help**            | `help`                                                                                                                 |
+| Action           | Format, Examples                                                                                                                     |
+| ---------------- |--------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 c/4B t/friend t/colleague`                       |
+| **Clear**        | `clear`                                                                                                                              |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                  |
+| **Delete Group** | `deleteGroup g/GROUP_NAME` <br> e.g., `deleteGroup g/studygroup1`                                                                    |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee c/4L`                                        |
+| **Export Students** | `export`                                                                                                                             |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                           |
+| **Find Group**   | `findGroup g/GROUP_NAME` <br> e.g., `findGroup g/studygroup1`                                                                        |
+| **Delete Group** | `deleteGroup g/GROUP_NAME` <br> e.g., `deleteGroup g/studygroup1`                                                                    |
+| **Create Group** | `group g/GROUP_NAME s/STUDENT_NAME [s/STUDENT_NAME]…​` <br> e.g., `group g/studygroup1 s/Annie s/Martin s/Jianbing s/Shaun s/Wenjie` |
+| **Import**       | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                                           |
+| **List Students**| `list`                                                                                                                               |
+| **List Groups**  | `listGroups`                                                                                                                         |
+| **Tag**          | `tag INDEX t/TAG [t/TAG]…​` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                                            |
+| **Untag**        | `untag INDEX t/TAG [t/TAG]…​` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                                          |
+| **Help**         | `help`                                                                                                                               |
+
+---
+
+## Acknowledgements
+
+GoonBook is a brownfield software project based off AddressBook Level-3, taken under the CS2103T Software Engineering module held by the School of Computing at the National University of Singapore.
+
+Java dependencies:
+- JavaFX for GUI
+- JUnit5 for testing
+
+Documentation dependencies:
+- Jekyll for rendering the website
+- PlantUML for creating UML diagrams

@@ -82,7 +82,7 @@ public class GroupCommand extends Command {
         for (String studentName : students) {
             boolean found = false;
             for (Person person : allPersons) {
-                if (person.getName().fullName.equals(studentName)) {
+                if (person.getName().fullName.equalsIgnoreCase(studentName)) {
                     groupMembers.add(person);
                     found = true;
                     break;
@@ -119,7 +119,7 @@ public class GroupCommand extends Command {
             return false;
         }
 
-        return groupName.equals(e.groupName)
+        return groupName.equalsIgnoreCase(e.groupName)
                 && students.equals(e.students);
     }
 }

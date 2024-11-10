@@ -42,7 +42,7 @@ public class Messages {
      * Returns a message indicating the number of groups listed.
      */
     public static String getMessageGroupsListedOverview(int numOfGroup) {
-        if (numOfGroup <= 2) {
+        if (numOfGroup < 2) {
             return numOfGroup + " group listed!";
         } else {
             return numOfGroup + " groups listed!";
