@@ -29,16 +29,19 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidCapitalizationNric_throwsParseException() {
-        assertParseFailure(parser, INVALID_NRIC, Nric.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NRIC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidLengthNric_throwsParseException() {
-        assertParseFailure(parser, "S12345678A", Nric.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "S12345678A",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArgs_throwsParseException() {
-        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 }
