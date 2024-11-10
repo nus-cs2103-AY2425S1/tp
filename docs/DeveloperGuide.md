@@ -996,7 +996,7 @@ testers are expected to do more _exploratory_ testing.
     2. Test case: `ag gn/cs2103-f20-1`<br>
        Expected: The group is added into the group list.
 
-    3. Test case: ag gn/cs2103-f20-1`<br> (Add the same group again)
+    3. Test case: `ag gn/cs2103-f20-1`<br> (Add the same group again)
        Expected: After doing the above step, repeating this command again will yield an error message.
 
     4. Test case: `ag gn/Team 1`<br>
