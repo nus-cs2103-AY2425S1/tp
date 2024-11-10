@@ -364,6 +364,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
+* 3d. Provided values will cause edited client to become a duplicate of an existing client.
+  * 3d1. AgentAssist shows an error to inform the user that allowing this edit will result in a duplicate client.
+  * 3d2. No change occurs.
+
+    Use case resumes at step 3.
+
 **Use case: U5 - View a client**
 
 **MSS**
