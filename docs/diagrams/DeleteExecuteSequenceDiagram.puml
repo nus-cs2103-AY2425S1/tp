@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box "Logic Layer" LOGIC_COLOR_T1
+    participant "e:DeleteCommand" as DeleteCommand LOGIC_COLOR
+    participant "<<class>>\nDeleteCommand" as DeleteCommandClass LOGIC_COLOR
+    participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model Layer" MODEL_COLOR_T1
+    participant ":Model" as Model MODEL_COLOR
+    participant "List<Person>" as LastShownList MODEL_COLOR
+end box
+
+[-> DeleteCommand : execute(Model model)
+activate DeleteCommand
+
+DeleteCommand -> Model : requireNonNull(model)
+DeleteCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> DeleteCommand : lastShownList
+deactivate Model
+
+loop For each target index
+    DeleteCommand -> DeleteCommand : Validate index
+    alt Index out of bounds
+        DeleteCommand -> DeleteCommand : throw CommandException (invalid index)
+    end
+
+    DeleteCommand -> LastShownList : get(index)
+    LastShownList --> DeleteCommand : personToDelete
+    DeleteCommand -> DeleteCommand : Add to peopleToDelete
+end
+
+DeleteCommand -> DeleteCommand : assert peopleToDelete.size() == targetIndices.size()
+
+loop For each person to delete
+    DeleteCommand -> Model : deletePerson(person)
+    activate Model
+    Model --> DeleteCommand
+    deactivate Model
+
+    DeleteCommand -> DeleteCommand : Add formatted message to resultMessages
+end
+
+loop For each person to delete
+    DeleteCommand -> DeleteCommandClass : removeLinks(person, model)
+    activate DeleteCommandClass
+    deactivate DeleteCommandClass
+end
+
+DeleteCommand -> DeleteCommand : assert resultMessages.size() == targetIndices.size()
+
+alt Single result message
+    DeleteCommand -> CommandResult : new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS))
+    activate CommandResult
+    CommandResult --> DeleteCommand : result
+    deactivate CommandResult
+else Multiple result messages
+    DeleteCommand -> CommandResult : new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS))
+    activate CommandResult
+    CommandResult --> DeleteCommand : result
+    deactivate CommandResult
+end
+
+
+[<-- DeleteCommand : result
+deactivate DeleteCommand
+
+@enduml

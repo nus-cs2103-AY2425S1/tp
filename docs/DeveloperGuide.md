@@ -9,7 +9,11 @@
 
 <page-nav-print />
 
----
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -26,7 +30,11 @@ Libraries used in this project:
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
----
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -71,6 +79,12 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -88,6 +102,12 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -96,7 +116,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1 2 3")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -122,6 +142,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -135,13 +161,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
+<br>
 
 ### Storage component
 
@@ -159,13 +179,223 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
----
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features and commands are implemented.
 
-### \[Proposed\] Undo/redo feature
+* [Add Student Command](#add-student-command)
+* [Add Parent Command](#add-parent-command)
+* [Edit Person Command](#edit-person-command)
+* [Grade Command](#grade-command)
+* [Delete Person Command](#delete-person-command)
+* [Link Command](#link-command)
+* [Unlink Command](#unlink-command)
+* [Find Command](#find-command)
+* [Find Tag Command](#find-tag-command)
+* [Find Day Command](#find-day-command)
+* [Sort Command](#sort-command)
+* [Pin Command](#pin-command)
+* [Unpin Command](#unpin-command)
+* [Clear Command](#clear-command)
+* [List Command](#list-command)
+* [List Student Command](#list-student-command)
+* [List Parent Command](#list-parent-command)
+* [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Add Student Command
+
+#### Overview
+The `addstudent` command is used to add a student to the address book with the information fields `Name`, `Phone`,
+`Email`, `Address`, `LessonTime` and `Education`.
+
+The format for the `addstudent` command can be found [here](https://ay2425s1-cs2103t-t09-4.github.io/tp/UserGuide.html#adding-a-student-addstudent)
+
+#### Feature details
+1. The user executes the `addstudent` command.
+2. If any of the fields are not provided, an error message with the appropriate command usage will be displayed.
+3. If any of the command parameters are invalid, an error message with the appropriate parameter format will be displayed.
+4. The `Student` is then searched in the `model` to see if it is an existing person that the address book contains. If the person does
+   exist, an error message will be displayed.
+5. If all the previous stages complete without exceptions or errors, the `Student` will be added to the `AddressBook`
+
+The activity diagram for adding a `Student` into the address book
+
+<puml src="diagrams/AddStudentActivityDiagram.puml" width="475" />
+
+The sequence of the `addstudent` command is as follows:
+
+1. The user inputs the `addstudent` command.<br>
+   e.g. `addstudent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 lt/mon:12:00 edu/Primary t/focused`
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` to parse the command.
+3. The `AddressBookParser` then creates a new `AddStudentCommandParser` to parse the fields provided by the user and
+   a new `Student` and `AddStudentCommand` is created.
+4. The `AddStudentCommand` checks if the `Student` is valid by calling `Model#hasPerson` and retrieves
+   the module if the person exists in Address Book.
+6. `AddStudentCommand` then attempts to add the module into the Model via `Model#addPerson`.
+7. If `Student`, the user inputs are valid, and the Address Book does not contain the module, `AddStudentCommand` will
+   successfully add the new `Student` into Address Book.
+
+<div style="page-break-after: always;"></div>
+
+The following two *Sequence Diagrams* shows how the `addstudent` command works:
+
+Here is the *Sequence Diagram* showing how the parser works:
+
+<puml src="diagrams/AddStudentParseSequenceDiagram.puml" />
+
+<div style="page-break-after: always;"></div>
+
+And here is the *Sequence Diagram* showing the command being executed:
+
+<puml src="diagrams/AddStudentExecuteSequenceDiagram.puml" />
+
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Add Parent Command
+
+#### Overview
+The `addparent` command is used to add a student to the address book with the information fields `Name`, `Phone`,
+`Email`, `Address`.
+
+The format for the `addparent` command can be found [here](https://ay2425s1-cs2103t-t09-4.github.io/tp/UserGuide.html#adding-a-parent-addparent)
+
+#### Feature details
+1. The user executes the `addparent` command.
+2. If any of the fields are not provided, an error message with the appropriate command usage will be displayed.
+3. If any of the command parameters are invalid, an error message with the appropriate parameter format will be displayed.
+4. The `Parent` is then searched in the `model` to see if it is an existing person that the address book contains. If the person does
+   exist, an error message will be displayed.
+5. If all the previous stages complete without exceptions or errors, the `Parent` will be added to the `AddressBook`
+
+The activity diagram for adding a `Parent` into the address book
+
+<puml src="diagrams/AddParentActivityDiagram.puml" width="475" />
+
+The sequence of the `addparent` command is as follows:
+
+1. The user inputs the `addparent` command.<br>
+   e.g. `addparent n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` to parse the command.
+3. The `AddressBookParser` then creates a new `AddParentCommandParser` to parse the fields provided by the user and
+   a new `Parent` and `AddParentCommand` is created.
+4. The `AddParentCommand` checks if the `Parent` is valid by calling `Model#hasPerson` and retrieves
+   the module if the person exists in Address Book.
+6. `AddParentCommand` then attempts to add the module into the Model via `Model#addPerson`.
+7. If `Parent`, the user inputs are valid, and the Address Book does not contain the module, `AddParentCommand` will
+   successfully add the new `Parent` into Address Book.
+
+<div style="page-break-after: always;"></div>
+
+The following two *Sequence Diagrams* shows how the `addparent` command works:
+
+Here is the *Sequence Diagram* showing how the parser works:
+
+<puml src="diagrams/AddParentParseSequenceDiagram.puml" />
+
+<div style="page-break-after: always;"></div>
+
+And here is the *Sequence Diagram* showing the command being executed:
+
+<puml src="diagrams/AddParentExecuteSequenceDiagram.puml" />
+
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Edit Person Command
+
+#### Overview
+
+The `edit` command is used to change the information fields (e.g. name, email and address) for person in the address book.
+
+The format for the `edit` command can be found [here](https://ay2425s1-cs2103t-t09-4.github.io/tp/UserGuide.html#editing-a-person-edit).
+
+#### Feature details
+
+The edit mechanism uses `EditPersonDescriptor` to abstract out the fields to edit. It can be found as a publicly accessible class within `EditCommand`. Currently, it contains fields for `name`, `phone`, `email`, `address`, `tags`, `lessonTime`, `education`, which are the only attributes of `Parent` or `Student` that can be edited for now. Besides this, it largely follows the parser and command structure as described in [Logic](#logic-component).
+
+Below illustrates how `EditPersonDescriptor` is used.
+
+Here is a *Sequence Diagram* showing the parser in action:
+
+<puml src="diagrams/EditParseSequenceDiagram.puml" />
+
+<div style="page-break-after: always;"></div>
+
+And here is a *Sequence Diagram* showing the command being executed:
+
+<puml src="diagrams/EditExecuteSequenceDiagram.puml" />
+
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Delete Person Command
+
+#### Overview
+
+The `delete` command is used to delete a person from the address book. The person can only be deleted if it is already present in the address book.<br>
+
+The format of the `delete` command can be found [here](https://ay2425s1-cs2103t-t09-4.github.io/tp/UserGuide.html#deleting-a-person-delete).<br>
+
+#### Feature details
+
+1. The user executes the `delete` command.
+2. If the index field is not provided, an error message with the correct command usage will be shown.
+3. If invalid index field is provided, an error message with the correct command usage will be shown. 
+4. If all previous steps are completed without exceptions, the new `Person` will be successfully deleted from the address book.
+
+<br>
+
+<div style="page-break-after: always;"></div>
+
+
+The sequence of the `delete` command is as follows:<br>
+
+1. The user inputs the `delete` command.<br>
+   e.g. `delete 1`
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` to parse the command.
+3. The `AddressBookParser` then creates a new `DeleteCommandParser` to parse the fields provided by the user and a new `DeleteCommand` is created.
+4. The `DeleteCommand` checks if the `index` is valid
+4. The `DeleteCommand` then checks if the `Model` contains a person with the same `ModuleCode` by calling `Model#getModule`.
+5. If the `index` is valid and `Model` contains the persons, the `DeleteCommand` calls `Model#deletePerson` to delete the person from the address book.
+
+The following sequence diagram shows how the `delete` command works:
+
+<puml src="diagrams/DeleteCommandSequenceDiagram.puml" />
+
+<puml src="diagrams/DeleteCommandSequenceDiagram2.puml" width="600" />
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### [Proposed] Undo/redo feature
 
 #### Proposed Implementation
 
@@ -258,11 +488,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
----
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
