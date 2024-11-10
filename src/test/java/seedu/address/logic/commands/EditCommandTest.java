@@ -45,15 +45,15 @@ public class EditCommandTest {
                 Messages.format(editedSupplier));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setSupplier(model.getFilteredSupplierList().get(0), editedSupplier);
+        expectedModel.setSupplier(model.getModifiedSupplierList().get(0), editedSupplier);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastSupplier = Index.fromOneBased(model.getFilteredSupplierList().size());
-        Supplier lastSupplier = model.getFilteredSupplierList().get(indexLastSupplier.getZeroBased());
+        Index indexLastSupplier = Index.fromOneBased(model.getModifiedSupplierList().size());
+        Supplier lastSupplier = model.getModifiedSupplierList().get(indexLastSupplier.getZeroBased());
 
         SupplierBuilder supplierInList = new SupplierBuilder(lastSupplier);
         Supplier editedSupplier = supplierInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -75,7 +75,7 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_SUPPLIER, new EditSupplierDescriptor());
-        Supplier editedSupplier = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier editedSupplier = model.getModifiedSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_SUPPLIER_SUCCESS,
                 Messages.format(editedSupplier));
@@ -89,7 +89,7 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showSupplierAtIndex(model, INDEX_FIRST_SUPPLIER);
 
-        Supplier supplierInFilteredList = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier supplierInFilteredList = model.getModifiedSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         Supplier editedSupplier = new SupplierBuilder(supplierInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_SUPPLIER,
                 new EditSupplierDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -98,14 +98,14 @@ public class EditCommandTest {
                 Messages.format(editedSupplier));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setSupplier(model.getFilteredSupplierList().get(0), editedSupplier);
+        expectedModel.setSupplier(model.getModifiedSupplierList().get(0), editedSupplier);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateSupplierUnfilteredList_failure() {
-        Supplier firstSupplier = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
+        Supplier firstSupplier = model.getModifiedSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         EditSupplierDescriptor descriptor = new EditSupplierDescriptorBuilder(firstSupplier).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_SUPPLIER, descriptor);
 
@@ -126,7 +126,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidSupplierIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredSupplierList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getModifiedSupplierList().size() + 1);
         EditSupplierDescriptor descriptor = new EditSupplierDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 

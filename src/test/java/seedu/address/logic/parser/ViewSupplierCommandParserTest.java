@@ -1,13 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
-import java.util.Arrays;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SUPPLIERS;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewSupplierCommand;
-import seedu.address.model.supplier.NameContainsKeywordsPredicate;
 
 public class ViewSupplierCommandParserTest {
 
@@ -15,13 +13,9 @@ public class ViewSupplierCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsViewSupplierCommand() {
-        // no leading and trailing whitespaces
         ViewSupplierCommand expectedViewSupplierCommand =
-                new ViewSupplierCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedViewSupplierCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedViewSupplierCommand);
+                new ViewSupplierCommand(PREDICATE_SHOW_ALL_SUPPLIERS);
+        assertParseSuccess(parser, "\t", expectedViewSupplierCommand);
     }
 
 }

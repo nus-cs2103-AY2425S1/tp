@@ -53,8 +53,8 @@ public class AssignProductCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Supplier> lastShownSupplierList = model.getFilteredSupplierList();
-        List<Product> lastShownProductList = model.getFilteredProductList();
+        List<Supplier> lastShownSupplierList = model.getModifiedSupplierList();
+        List<Product> lastShownProductList = model.getModifiedProductList();
 
         // Check if supplier exists in supplier list
         Supplier supplierToAssign = lastShownSupplierList.stream()

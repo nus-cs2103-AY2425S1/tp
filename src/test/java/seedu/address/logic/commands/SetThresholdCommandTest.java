@@ -56,7 +56,7 @@ public class SetThresholdCommandTest {
         SetThresholdCommand command = new SetThresholdCommand(validProductName, 20, 80);
         CommandResult result = command.execute(model);
 
-        Product editedProduct = model.getFilteredProductList().stream()
+        Product editedProduct = model.getModifiedProductList().stream()
                 .filter(p -> p.getName().equals(validProductName))
                 .findFirst()
                 .get();
@@ -76,7 +76,7 @@ public class SetThresholdCommandTest {
         SetThresholdCommand command = new SetThresholdCommand(validProductName, 20, null);
         CommandResult result = command.execute(model);
 
-        Product editedProduct = model.getFilteredProductList().stream()
+        Product editedProduct = model.getModifiedProductList().stream()
                 .filter(p -> p.getName().equals(validProductName))
                 .findFirst()
                 .get();
@@ -96,7 +96,7 @@ public class SetThresholdCommandTest {
         SetThresholdCommand command = new SetThresholdCommand(validProductName, null, 80);
         CommandResult result = command.execute(model);
 
-        Product editedProduct = model.getFilteredProductList().stream()
+        Product editedProduct = model.getModifiedProductList().stream()
                 .filter(p -> p.getName().equals(validProductName))
                 .findFirst()
                 .get();

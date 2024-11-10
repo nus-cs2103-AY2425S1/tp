@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -23,17 +24,32 @@ public class ViewProductCommand extends Command {
             + "Example: " + COMMAND_WORD + " chocolate ice cream";
 
     private final Predicate<Product> predicate;
+    private final Boolean sortAscending;
 
-    public ViewProductCommand(Predicate<Product> predicate) {
+    /**
+     * Creates a ViewProductCommand to view products that match the specified {@code Predicate} and display settings.
+     */
+    public ViewProductCommand(Predicate<Product> predicate, Boolean sortAscending) {
         this.predicate = predicate;
+        this.sortAscending = sortAscending;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredProductList(predicate);
+
+        if (sortAscending != null) {
+            Comparator<Product> comparator = Comparator.comparingInt(product -> product
+                .getStockLevel().getStockLevel() - product.getStockLevel().getMinStockLevel());
+            if (!sortAscending) {
+                comparator = comparator.reversed();
+            }
+            model.updateSortedProductList(comparator);
+        }
+
         CommandResult commandResult = new CommandResult(
-                String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
+                String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getModifiedProductList().size()));
         commandResult.setShowProduct();
         return commandResult;
     }

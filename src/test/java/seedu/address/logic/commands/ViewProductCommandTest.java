@@ -34,14 +34,14 @@ public class ViewProductCommandTest {
         ProductNameContainsKeywordsPredicate secondPredicate =
                 new ProductNameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        ViewProductCommand findFirstCommand = new ViewProductCommand(firstPredicate);
-        ViewProductCommand findSecondCommand = new ViewProductCommand(secondPredicate);
+        ViewProductCommand findFirstCommand = new ViewProductCommand(firstPredicate, null);
+        ViewProductCommand findSecondCommand = new ViewProductCommand(secondPredicate, null);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        ViewProductCommand findFirstCommandCopy = new ViewProductCommand(firstPredicate);
+        ViewProductCommand findFirstCommandCopy = new ViewProductCommand(firstPredicate, null);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -58,27 +58,27 @@ public class ViewProductCommandTest {
     public void execute_zeroKeywords_noProductFound() {
         String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 0);
         ProductNameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        ViewProductCommand command = new ViewProductCommand(predicate);
+        ViewProductCommand command = new ViewProductCommand(predicate, null);
         expectedModel.updateFilteredProductList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredProductList());
+        assertEquals(Collections.emptyList(), model.getModifiedProductList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleProductsFound() {
         String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 3);
         ProductNameContainsKeywordsPredicate predicate = preparePredicate("APPLE JUICE");
-        ViewProductCommand command = new ViewProductCommand(predicate);
+        ViewProductCommand command = new ViewProductCommand(predicate, null);
         expectedModel.updateFilteredProductList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(APPLE, APPLE_JUICE, PINEAPPLE), model.getFilteredProductList());
+        assertEquals(Arrays.asList(APPLE, APPLE_JUICE, PINEAPPLE), model.getModifiedProductList());
     }
 
     @Test
     public void toStringMethod() {
         ProductNameContainsKeywordsPredicate predicate =
                 new ProductNameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        ViewProductCommand viewProductCommand = new ViewProductCommand(predicate);
+        ViewProductCommand viewProductCommand = new ViewProductCommand(predicate, null);
         String expected = ViewProductCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewProductCommand.toString());
     }

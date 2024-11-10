@@ -83,12 +83,12 @@ public class LogicManagerTest {
 
     @Test
     public void getFilteredSupplierList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredSupplierList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getModifiedSupplierList().remove(0));
     }
 
     @Test
     public void getFilteredProductList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredProductList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> logic.getModifiedProductList().remove(0));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class LogicManagerTest {
         model.addProduct(productB);
 
         // Get the filtered product list from logic
-        ObservableList<Product> productList = logic.getFilteredProductList();
+        ObservableList<Product> productList = logic.getModifiedProductList();
 
         // Verify that the list contains the added products
         assertEquals(2, productList.size());

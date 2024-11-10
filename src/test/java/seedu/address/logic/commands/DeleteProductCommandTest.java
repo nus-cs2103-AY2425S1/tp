@@ -27,7 +27,7 @@ public class DeleteProductCommandTest {
 
     @Test
     public void execute_validProductNameUnfilteredList_success() {
-        Product productToDelete = model.getFilteredProductList().get(INDEX_FIRST_PRODUCT.getZeroBased());
+        Product productToDelete = model.getModifiedProductList().get(INDEX_FIRST_PRODUCT.getZeroBased());
         ProductName productName = productToDelete.getName();
         DeleteProductCommand deleteProductCommand = new DeleteProductCommand(productName);
 
@@ -86,7 +86,7 @@ public class DeleteProductCommandTest {
     private void showProductWithName(Model model, ProductName productName) {
         model.updateFilteredProductList(p -> p.getName().equals(productName));
 
-        assertEquals(1, model.getFilteredProductList().size());
+        assertEquals(1, model.getModifiedProductList().size());
     }
 
     /**
@@ -95,7 +95,7 @@ public class DeleteProductCommandTest {
     private void showNoProduct(Model model) {
         model.updateFilteredProductList(p -> false);
 
-        assertTrue(model.getFilteredProductList().isEmpty());
+        assertTrue(model.getModifiedProductList().isEmpty());
     }
 }
 

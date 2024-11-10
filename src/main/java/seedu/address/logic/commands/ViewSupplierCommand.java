@@ -24,6 +24,9 @@ public class ViewSupplierCommand extends Command {
 
     private final Predicate<Supplier> predicate;
 
+    /**
+     * Creates a ViewSupplierCommand to view suppliers that match the specified {@code Predicate} and display settings.
+     */
     public ViewSupplierCommand(Predicate<Supplier> predicate) {
         this.predicate = predicate;
     }
@@ -32,8 +35,9 @@ public class ViewSupplierCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredSupplierList(predicate);
+
         CommandResult commandResult = new CommandResult(
-                String.format(Messages.MESSAGE_SUPPLIERS_LISTED_OVERVIEW, model.getFilteredSupplierList().size()));
+                String.format(Messages.MESSAGE_SUPPLIERS_LISTED_OVERVIEW, model.getModifiedSupplierList().size()));
         commandResult.setShowSupplier();
         return commandResult;
     }

@@ -48,7 +48,7 @@ public class UpdateStockLevelCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Product> lastShownProductList = model.getFilteredProductList();
+        List<Product> lastShownProductList = model.getModifiedProductList();
 
         Product productToEdit = lastShownProductList.stream()
                 .filter(product -> product.getName().equals(productName))

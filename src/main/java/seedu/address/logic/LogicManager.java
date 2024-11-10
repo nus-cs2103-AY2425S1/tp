@@ -71,13 +71,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Supplier> getFilteredSupplierList() {
-        return model.getFilteredSupplierList();
+    public ObservableList<Supplier> getModifiedSupplierList() {
+        return model.getModifiedSupplierList();
     }
 
     @Override
-    public ObservableList<Product> getFilteredProductList() {
-        return model.getFilteredProductList();
+    public ObservableList<Product> getModifiedProductList() {
+        return model.getModifiedProductList();
     }
 
     @Override

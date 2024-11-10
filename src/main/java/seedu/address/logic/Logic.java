@@ -33,10 +33,10 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of suppliers */
-    ObservableList<Supplier> getFilteredSupplierList();
+    ObservableList<Supplier> getModifiedSupplierList();
 
     /** Returns an unmodifiable view of the filtered list of products */
-    ObservableList<Product> getFilteredProductList();
+    ObservableList<Product> getModifiedProductList();
 
     /**
      * Returns the user prefs' address book file path.
