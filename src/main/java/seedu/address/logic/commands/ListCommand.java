@@ -12,14 +12,14 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all clients";
     public static final String HELP_LIST_COMMAND = "List Command\n"
             + "- Format: list\n"
             + "- Example: list\n"
-            + "Using the list command will display all persons in the address book, "
+            + "Using the list command will display all clients in the address book, "
             + "ordered sequentially from the earliest entry to the most recent. "
-            + "This means that the first person added appears at the top of the list, "
-            + "while the most recently added person appears at the bottom.";
+            + "This means that the first client added appears at the top of the list, "
+            + "while the most recently added client appears at the bottom.";
 
     @Override
     public CommandResult execute(Model model) {
