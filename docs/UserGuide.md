@@ -58,7 +58,7 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 
 5. Right-click on the `.jar` file and select `Open with` and then `Java(TM) Platform SE binary`. 
 
-   Alternatively, you can also run the `.jar` file by opening a command terminal, typing `cd` into the folder you put the jar file in, and using the`java -jar findingbrudders.jar` command to run the application.
+   Alternatively, you can also run the `.jar` file by opening a command terminal, typing `cd` into the folder you put the jar file in, and using the`java -jar findingbrUdders.jar` command to run the application.
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data to help you get started.<br>
 
