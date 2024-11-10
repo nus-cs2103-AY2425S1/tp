@@ -297,109 +297,120 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `ABCLI` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ABCLI` and the **Actor** is the `User`, unless specified otherwise)
 
 **Use Case 1: Switching parser modes**
 
 **MSS**
 
-1. User requests to switch the parser mode
-2. ABCLI switches to the desired parser mode
-3. ABCLI shows a success message
-4. ABCLI shows the corresponding list of items in the new mode
+1. User requests to switch the parser mode.
+2. ABCLI switches to the desired parser mode.
+4. ABCLI shows the corresponding list of items in the new mode.  
+
+Use case ends.
 
 **Extensions**
 
-* 1a. The parser mode is invalid
-  * 1a1. ABCLI shows an error message
-  * Use case ends.
+* 1a. The inputted parser mode is invalid.
+  * 1a1. ABCLI informs the User of the error.  
+
+  Use case ends.
 
 **Use Case 2: Adding a buyer**
 
 **MSS**
 
-1. User requests to add a buyer
-2. ABCLI adds the buyer
-3. ABCLI shows a success message
-4. ABCLI shows the updated list of buyers on its interface
+1. User requests to add a buyer.
+2. ABCLI adds the buyer and displays the updated list of buyers.  
 
-- Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 1a. The buyer format is invalid
-    * 1a1. ABCLI shows an error message
-    * Use case ends.
+* 1a. The inputted command format is invalid.
+    * 1a1. ABCLI informs the User of the error.  
+  
+    Use case ends.
 
+* 1b. The inputted fields are invalid.
+  * 1b1. ABCLI informs the User of the error.  
+  
+  Use case ends.
+  
 **Use Case 3: Deleting a buyer**
 
 **MSS**
 
-1. User requests to list buyers
-2. ABCLI shows the list of buyers on its interface
-3. User requests to delete a specific buyer
-4. ABCLI deletes the buyer
-5. ABCLI shows a success message
-6. ABCLI shows the updated list of buyers on its interface
+1. User requests to view buyers.
+2. ABCLI shows the list of buyers.
+3. User requests to delete a specific buyer based on the buyer's index in the list.
+4. ABCLI deletes the buyer and displays the updated list of the buyers.  
 
-- Use case ends
+Use case ends.
 
 **Extensions**
 
-- 3a. The index for deletion is not a positive whole number
-    - 3a1. ABCLI shows an error message
-    - Use case ends
-- 3b. The index for deletion is out of range
-    - 3b1. ABCLI shows an error message
-    - Use case ends
+- 3a. The index for deletion is not a positive whole number.
+    - 3a1. ABCLI informs the User of the error. 
+  
+    Use case ends.
+- 3b. The index for deletion is out of range.
+    - 3b1. ABCLI informs the User of the error.  
+    
+  Use case ends.
 
 **Use Case 4: Editing a buyer**
 
 **MSS**
 
-1. User requests to edit a buyer
-2. ABCLI edits the buyer
-3. ABCLI shows a success message
-4. ABCLI shows the updated list of buyers on its interface
+1. User requests to view buyers.
+2. ABCLI shows the list of buyers.
+3. User requests to edit a specific buyer based on the buyer's index in the list.
+4. ABCLI edits the buyer and displays the updated list of the buyers.  
 
-- Use case ends
+Use case ends.
 
 **Extensions**
 
-- 1a. The tags for editing are incorrect
-    - 1a1. ABCLI shows an error message
-    - Use case ends
-- 1b. The index for editing is out of range
-    - 1b1. ABCLI shows an error message
-    - Use case ends
-- 1c. The fields to edit are empty
-    - 1c1. ABCLI shows an error message
-    - Use case ends
+* 3a. The inputted fields are invalid.
+    * 3a1. ABCLI informs the User of the error.
+
+  Use case ends.
+
+* 3b. The index for editing is out of range.
+    * 3b1. ABCLI informs the User of the error.
+
+  Use case ends.
+
+* 3c. No field to edit is provided.
+    * 3c1. ABCLI informs the User of the error.
+
+  Use case ends.
 
 **Use Case 5: Viewing all buyers**
 
 **MSS**
 
-1. User requests to view all buyers
-2. ABCLI shows the list of buyers on its interface
+1. User requests to view all buyers.
+2. ABCLI shows the list of buyers.  
 
-- Use case ends
+Use case ends.
 
 **Use Case 6: Finding buyers**
 
 **MSS**
 
-1. User requests to find buyers matching his keywords
-2. ABCLI shows a success message
-3. ABCLI shows the updates list of buyers matching the keywords
+1. User requests to find buyers by matching keywords to the buyers' name.
+2. ABCLI shows the filtered list of buyers whose name matches the keywords.
 
-- Use case ends
+Use case ends.
 
 **Extensions**
 
-* 1a. The tags for finding are incorrect
-  * 1a1. ABCLI shows an error message
-  * Use case ends
+* 1a. The inputted keywords are invalid.
+  * 1a1. ABCLI informs the User of the error.
+
+Use case ends.
 
 **Use Case 7: Adding a meetup**
 
