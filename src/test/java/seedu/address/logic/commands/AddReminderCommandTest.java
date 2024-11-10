@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -54,6 +56,16 @@ public class AddReminderCommandTest {
         assertEquals(String.format(AddReminderCommand.MESSAGE_SUCCESS, VALID_PERSON.getName()),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(VALID_REMINDER), modelStub.remindersAdded);
+    }
+
+    @Test
+    public void execute_duplicateReminder_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        Reminder reminder = new Reminder("10-10-2025", "test", validPerson.getName());
+        AddReminderCommand addReminderCommand = new AddReminderCommand(Index.fromOneBased(1), "10-10-2025", "test");
+        AddReminderCommandTest.ModelStub modelStub = new AddReminderCommandTest.ModelStubWithReminder(validPerson, reminder);
+
+        assertThrows(CommandException.class, "This reminder already exists.", () -> addReminderCommand.execute(modelStub));
     }
 
     @Test
@@ -233,6 +245,12 @@ public class AddReminderCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public boolean hasReminder(Reminder reminder) {
+            requireNonNull(reminder);
+            return remindersAdded.contains(reminder);
         }
 
         public void addReminder(Reminder reminder, Person person) {
