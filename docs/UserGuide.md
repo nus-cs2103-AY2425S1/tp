@@ -106,7 +106,7 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 
 <div markdown="span" class="alert alert-info"> :notebook: **Note:** Field Constraints
 - Names should only contain alphabets, hyphens, dots, commas, forward slash and spaces, and be between 1 and 100 characters long.
-- Although / is allowed in names, you should use it carefully, input like m/ g/ n/ will still be recognised as prefix and may lead to unexpected behaviour
+- Although / is allowed in names, you should use it carefully, input like m/ g/ n/ will still be recognised as prefix and may lead to unexpected behaviour.
 - Phone numbers should only contain numbers, and be exactly 8 digits long.
 - Gender should be either `male` or `female`.
 - Module should consist of alphanumeric characters and spaces only, and it should be between 1 and 30 characters long.
@@ -290,7 +290,7 @@ You can assign a grade to a module that a student is taking.
 - `m/MODULE`: The module code to which the grade is assigned. The module match is case-sensitive.
 - `s/GRADE`: The numerical grade (between 0 and 100) to assign to the module.
 - You can provide multiple `m/MODULE s/GRADE` pairs to assign grades to multiple modules in a single `grade` command. 
-- The  `m/MODULE s/GRADE` pairs need not to be in order, see examples for illustration.
+- The `m/MODULE s/GRADE` pairs need not to be in order, see examples for illustration.
 - The grade can be any whole number between 0 and 100, inclusive.
 
 <div markdown="span" class="alert alert-info"> :notebook: **Important Note:**
@@ -307,7 +307,7 @@ You can hover over each individual module for a while to view the grades for tha
 - `grade 1 m/Physics s/85` : assigns a grade of 85 to Physics for the first student.
 - `grade 2 m/Chemistry s/90` : assigns a grade of 90 to Chemistry for the second student.
 - `grade 3 m/English s/80 m/Chinese s/85` assigns a grade of 80 to English and 85 to Chinese for the third student.
-- `grade 1 m/Math m/Chinese s/100 s/90` will grade the first person's math to 100 and his Chinese to 90.
+- `grade 1 m/Math m/Chinese s/100 s/90` will grade the first person's Math to 100 and his Chinese to 90.
 
 
 ### Archiving data files `archive`
