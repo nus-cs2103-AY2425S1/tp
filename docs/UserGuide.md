@@ -537,13 +537,13 @@ Commands for managing appointments between user and clients.
       > ---
 
 - #### Delete Appointment
-    - **Format:** `delapt INDEX`
+    - **Format:** `deleteapt INDEX`
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
       > **Use Case**: Deleting appointment for `Bob` (Assuming displayed index is 1)
       >
-      > **Input**: `delapt 1`
+      > **Input**: `deleteapt 1`
       >
       > **Output**: Successfully deleted appointment from Bob
       >
@@ -555,7 +555,7 @@ Commands for managing appointments between user and clients.
       > ---
       > **Use Case**: Entering out-of-bounds index (larger than number of clients)
       >
-      > **Input**: `delapt 100`
+      > **Input**: `deleteapt 100`
       >
       > **Output**: The person index provided is invalid
       >
@@ -617,7 +617,7 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Displays all current listings.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: To show all listings in the addressbook
+      > **Use Case #1**: To show all listings in EZSTATE
       >
       > **Input**: showlistings
       >
@@ -644,7 +644,7 @@ Commands for managing property listings and associating clients with listings.
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4` (Assuming displayed index is 1)
+      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4` (Assuming RC4 index is 1)
       >
       > **Input**: `addlistingbuyers 1 buy/1 buy/3`
       >
@@ -688,7 +688,7 @@ Commands for managing property listings and associating clients with listings.
       > 
       > **User Error #4**: Person is not a buyer
       > 
-      > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming client 1 is a seller)_
+      > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming client with index 1 is a seller)_
       > 
       > **Output**: The specified person is not a buyer:<br>1.bob
       > 
@@ -838,13 +838,6 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       > ![help](images/help.png)
       > 
       > ---
-    
-    <br>
-    <div class="alert" markdown="span">
-    WARNING: The subsequent section `More Info` might have an outdated command format. This is as of `v1.5`.<br>
-    <br>
-    Please refer to the command format given in the application as per the app version used.
-    </div>
 
 - #### More Info
     - **Format:** `moreinfo NAME`
