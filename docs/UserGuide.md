@@ -225,7 +225,7 @@ in Vendor Vault. This helps you keep track of which suppliers are currently acti
 <box type="tip" seamless>
 
 **Tip:**
-- A supplier has a default status of `active`
+- A supplier has a default status of `active`.
 - A supplier with an `inactive` status signifies that the supplier is not currently active for deliveries. 
 However, marking an `active` supplier as `inactive` will not delete the delivery associated with the supplier from the delivery list 
 or affect the delivery status in any way.
@@ -271,12 +271,12 @@ Parameters:
 <box type="warning" seamless>
 
 **Warnings**:
-- At least one non-empty parameter must be given
-- No duplicate parameter can be used
-- A spacing between `find` and `-s` is compulsory
-- A spacing between `-s` and the first parameter is compulsory
-- A spacing between each parameter and the next prefix is compulsory
-- Parameters used are case-insensitive
+- At least one non-empty parameter must be given.
+- No duplicate parameter can be used.
+- A spacing between `find` and `-s` is compulsory.
+- A spacing between `-s` and the first parameter is compulsory.
+- A spacing between each parameter and the next prefix is compulsory.
+- Parameters used are case-insensitive.
 </box>
 
 <box type="tip" seamless>
@@ -308,12 +308,12 @@ Format: `sort -s so/SORT_ORDER sb/SORT_BY`
 <box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `add` and `-s` is compulsory
-- A spacing between `-s` and `so` is compulsory
-- A spacing between `SORT_ORDER` and `sb` is compulsory
-- All prefixes and parameters must be given
-- No duplicate prefix can be used
-- Parameters used are **case-sensitive**
+- A spacing between `add` and `-s` is compulsory.
+- A spacing between `-s` and `so` is compulsory.
+- A spacing between `SORT_ORDER` and `sb` is compulsory.
+- All prefixes and parameters must be given.
+- No duplicate prefix can be used.
+- Parameters used are **case-sensitive**.
 </box>
 
 <box type="tip" seamless>
