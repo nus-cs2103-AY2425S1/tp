@@ -195,9 +195,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 - Two contacts are considered duplicate if they have the same name (case-sensitive).
 
-- A person can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
-</box>
-
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
