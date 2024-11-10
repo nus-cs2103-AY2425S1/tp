@@ -138,7 +138,7 @@ Format: `clear`
 
 ### Adding a supplier: `add -s`
 
-Adds a supplier to the address book.
+Adds a supplier to VendorVault.
 
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
 
