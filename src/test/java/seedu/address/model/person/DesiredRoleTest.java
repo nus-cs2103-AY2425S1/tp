@@ -23,9 +23,6 @@ public class DesiredRoleTest {
         assertFalse(DesiredRole.isValidDesiredRole("")); // empty string
         assertFalse(DesiredRole.isValidDesiredRole(" ")); // spaces only
 
-        // invalid desired role (e.g. too short, special characters, etc.)
-        assertFalse(DesiredRole.isValidDesiredRole("Software@Engineer")); // special character
-
         // valid desired role
         assertTrue(DesiredRole.isValidDesiredRole("Software Engineer"));
         assertTrue(DesiredRole.isValidDesiredRole("Data Scientist"));
@@ -53,6 +50,8 @@ public class DesiredRoleTest {
         assertFalse(desiredRole.equals(new DesiredRole("Data Scientist")));
 
         assertTrue(DesiredRole.isValidDesiredRole("2")); //For one character
+
+        assertTrue(DesiredRole.isValidDesiredRole("Software@Engineer")); // special character
     }
 
     @Test
