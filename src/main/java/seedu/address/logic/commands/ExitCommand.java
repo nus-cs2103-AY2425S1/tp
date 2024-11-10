@@ -13,6 +13,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        GetAttendanceByTgCommand.closeAllWindows();
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
     }
 
