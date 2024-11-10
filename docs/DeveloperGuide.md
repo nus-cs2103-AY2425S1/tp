@@ -439,7 +439,7 @@ Use case ends.
 
 1. User finds the index of the customer they want to edit.
 2. User specifies the customer index along with modifications they want to make to the customer's details.
-3. SellSavvy updates the customer list with the modifications made to the customer.
+3. SellSavvy updates the customer list with the modifications made to the customer and lists all customers.
 4. SellSavvy confirms the modification by stating the updated customer's details.
 
 Use case ends.
