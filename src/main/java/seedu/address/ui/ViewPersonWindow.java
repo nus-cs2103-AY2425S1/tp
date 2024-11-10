@@ -43,16 +43,7 @@ public class ViewPersonWindow extends UiPart<Stage> {
     public ViewPersonWindow(ObservableList<Person> person) {
         super(FXML, new Stage());
         this.person = person;
-    }
 
-    /**
-     * Updates the window to display the first person in the list.
-     */
-    private void updatePersonDisplay() {
-        // Clear existing client types
-        clientTypes.getChildren().clear();
-
-        // Update with first person's details
         this.person.stream()
                 .findFirst()
                 .ifPresent(p -> {
@@ -66,12 +57,12 @@ public class ViewPersonWindow extends UiPart<Stage> {
                 });
     }
 
+
     /**
      * Shows the ViewPersonWindow.
      */
     public void show() {
         LOGGER.fine("Viewing client details.");
-        updatePersonDisplay();
         getRoot().show();
         getRoot().centerOnScreen();
 
@@ -81,7 +72,6 @@ public class ViewPersonWindow extends UiPart<Stage> {
      * Updates and shows the window with details of the specified person.
      */
     public void showPerson() {
-        updatePersonDisplay();
         if (!isViewShowing()) {
             show();
         } else {
