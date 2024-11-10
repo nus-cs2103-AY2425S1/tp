@@ -77,19 +77,24 @@ public class RemovePersonFromEventCommand extends Command {
         event.removePerson(person, personRole);
         eventManager.setEvent(originalEvent, event);
         event.updateUi();
+
+        updateContactsIfInEventViewToShowRemovedContact(model, eventManager, event);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName(), event.getName()));
+    }
+
+    private static void updateContactsIfInEventViewToShowRemovedContact(Model model, EventManager eventManager,
+                                                                        Event event) {
         // check the last shown list if it is event
+        model.setIsFindEvent(false);
         Predicate<Person> lastPred = model.getLastPredicate();
         if (lastPred instanceof PersonInEventPredicate) {
             if (((PersonInEventPredicate) lastPred).getEvent().equals(event)) {
                 //create a new predicate for changed event
                 model.updateFilteredPersonList(eventManager.getPersonInEventPredicate(event));
+                FindEventCommand.updateContactsUiWithEventSpecificRoles(model, event);
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, person.getName(), event.getName()));
-
-
-
-
     }
 
     @Override

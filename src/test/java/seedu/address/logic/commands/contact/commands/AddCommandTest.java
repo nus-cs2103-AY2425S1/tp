@@ -16,6 +16,8 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -242,6 +244,22 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public BooleanProperty getIsFindEvent() {
+            return new SimpleBooleanProperty(false);
+        };
+
+        public void setIsFindEvent(boolean isFindEvent) {
+
+        };
+
+        public void setContactListForFindEvent(ArrayList<Person> persons) {
+
+        };
+
+        public ObservableList<Person> getContactListForFindEvent() {
+            return FXCollections.observableArrayList();
+        };
     }
 
     /**

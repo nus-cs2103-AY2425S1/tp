@@ -105,6 +105,7 @@ public class EditCommand extends Command {
         // edit person for eventManager
         eventManager.editAllPersonsInEvents(personToEdit, editedPerson);
         eventManager.updateEvents();
+        model.setIsFindEvent(false);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

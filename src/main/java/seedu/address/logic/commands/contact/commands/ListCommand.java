@@ -22,6 +22,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model, EventManager eventManager) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setIsFindEvent(false);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
