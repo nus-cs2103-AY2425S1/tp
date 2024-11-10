@@ -523,15 +523,18 @@ Format: `retrievepa INDEX c/NETWORK [l/WALLET_NAME]`
 
 Deletes the public address of a contact.
 
-Format: `deletepa INDEX c/NETWORK [w/WALLET_NAME]`
+Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
 * Deletes the public address of a contact based on the index
 
 * If Wallet Name is not provided, all public addresses in the network of the contact will be deleted.
 
+* The Wallet Name is Case-sensitive. It will not work unless the Wallet Name is exactly the same as the one in the
+  contact.
+
 Examples:
 
-* `deletepa 1 c/BTC w/wallet1` deletes the public address of the 1st person in the BTC Network with the wallet name `wallet1`.
+* `deletepa 1 c/BTC l/wallet1` deletes the public address of the 1st person in the BTC Network with the wallet name `wallet1`.
 
 * `deletepa 3 c/BTC` deletes all the public addresses of the 3rd person in the BTC network.
 
