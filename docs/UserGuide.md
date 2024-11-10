@@ -99,7 +99,7 @@ This combination of efficiency and clarity ensures that you can manage your wedd
   * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Similarly, extraneous prefixes (e.g. n/ or tk/) for commands that do not take in those prefixes will be processed as part of other inputs.<br>
-  * e.g. when [adding a person](#adding-a-person-add), you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+  * e.g. when [adding a person](#adding-a-person-add), you can specify the prefixes `n/`, `p/`, `e/`, `a/`, `t/`, and `w/`. If the command specifies
   `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -205,8 +205,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​`
 
-* **People in Wedlinker cannot have the same names**
-  * So, if `John Doe` is already in Wedlinker, adding another `John Doe` with different details will not work
+* **People in Wedlinker cannot have the same names. `NAME` is case-insensitive.**
+  * So, if `John Doe` is already in Wedlinker, adding another `john doe` with different details will not work
 * If the tags or weddings specified in the add command do not exist yet, they will be created
 
  
@@ -291,6 +291,7 @@ Creates a `Tag` within WedLinker to be used on contacts.
 Format: `create-tag t/TAG_NAME` or`ctag t/TAG_NAME`
 
 * The `TAG_NAME` is alphanumeric and can contain whitespaces.
+* `TAG_NAME` is case-insensitive.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
 * Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag
@@ -303,6 +304,7 @@ Assigns a `Tag` to the specified person in WedLinker
 Format: `tag PERSON_INDEX t/TAG_NAME [f/]`
 
 * Tag a specified contact based on the `INDEX` with a `Tag`.
+* `TAG_NAME` is case-insensitive.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * The `Tag` must exists in WedLinker before it can be assigned.
@@ -321,6 +323,7 @@ Untags a `Tag` from a specified person in WedLinker
 Format: `untag PERSON_INDEX t/TAG_NAME`
 
 * Untag a specified contact based on their `INDEX` with a `Tag`.
+* `TAG_NAME` is case-insensitive.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
@@ -331,6 +334,7 @@ Deletes a `Tag` from WedLinker.
 Format: `delete-tag t/TAG_NAME [f/]` or `dtag t/TAG_NAME [f/]`
 
 * Deletes a `Tag` from WedLinker.
+* `TAG_NAME` is case-insensitive.
 * The `Tag` must exists in WedLinker.
 * The `Tag` cannot be assigned to any contacts.
 * If the `Tag` is in used, you can use `f/` to force the deletion of the `Tag` and unassign this tag from all contacts.
@@ -343,7 +347,8 @@ Creates a `Wedding` within WedLinker to be with contacts.
 
 Format: `create-wedding w/WEDDING_NAME` or `cw w/WEDDING_NAME`
 
-* The `WEDDING_NAME` is alphanumeric and can contain whitespaces.
+* The `WEDDING_NAME` should only contain alphanumeric characters, spaces or the following characters: `/`, `.`, `,`, '&:().
+* `WEDDING_NAME` is case-insensitive.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
 * Contacts can be assigned to the Wedding using the [assign-wedding](#assigning-contact-to-a-wedding-assign-wedding) command.
 
@@ -354,6 +359,7 @@ Assigns a contact to a `Wedding`.
 Format: `assign-wedding PERSON_INDEX w/WEDDING_NAME` or `asw PERSON_INDEX w/WEDDING_NAME`
 
 * Assigns a specified contact to the `Wedding` based on their `PERSON_INDEX`.
+* `WEDDING_NAME` is case-insensitive.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * The `Wedding` must exists in WedLinker before it can be assigned.
@@ -376,6 +382,7 @@ Unassigns a contact from a `Wedding` in WedLinker.
 Format: `unassign-wedding PERSON_INDEX w/WEDDING_NAME` or `uw PERSON_INDEX w/WEDDING_NAME`
 
 * Unassigns a contact that is assigned to a `Wedding`.
+* `WEDDING_NAME` is case-insensitive.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
@@ -386,6 +393,7 @@ Deletes a `Wedding` from WedLinker.
 Format: `delete-wedding w/WEDDING_NAME [f/]` or `dw w/WEDDING_NAME [f/]`
 
 * Deletes a `Wedding` from WedLinker.
+* `WEDDING_NAME` is case-insensitive.
 * The no contacts should be assigned to the `Wedding` before it is deleted.
 * If there are still contacts assigned, you can use `f/` to force the deletion of the `Wedding`. This will unassign all contacts from that `Wedding`.
 
@@ -400,6 +408,7 @@ Format: `create-task tk/TASK_DESCRIPTION [REMARKS]` or `ctask tk/TASK_DESCRIPTIO
 * Tasks may have no dates, a single date indicating a deadline, or two dates to define a start and end period.
 * The dates can be specified under `REMARKS` with the format `d/YYYY-MM-DD`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
+* `TASK_NAME` is case-insensitive.
 * Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task) command.
 
 ### Deleting a Task : `delete-task` or `dtask`
