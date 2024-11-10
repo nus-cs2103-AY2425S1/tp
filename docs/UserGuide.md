@@ -4,37 +4,92 @@ title: User Guide
 ---
 
 ## About GoonBook
-GoonBook is a **desktop app for educators that manage a large number of students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). You can organise your students effectively with relevant student details and grouping function. You can also find your students conveniently using their names or groups. If you are a fast-typer, GoonBook can allow you to keep track of your students faster than any traditional GUI apps, without ever having to touch your mouse.
+
+GoonBook is a **modern desktop application designed for educators to efficiently manage their students**. It combines the speed and efficiency of a Command Line Interface (CLI) with an intuitive Graphical User Interface (GUI). Featuring robust student management capabilities including:
+
+- Quick student information lookup and editing
+- Smart grouping system for organizing students
+- Tag-based organization for tracking student attributes
+- Import/Export functionality for seamless data management
+- Automatic data saving and backup
+
+Perfect for educators who value efficiency and prefer keyboard-based interactions. With GoonBook, managing your student records becomes faster, simpler, and more organized than traditional GUI-only applications.
 
 ## **Table of Contents**
-1. [Quick start](#quick-start)
-2. [Features](#features)
+
+1. [Getting Help](#getting-help)
    1. [Viewing help](#viewing-help--help)
-   2. [Adding a student](#adding-a-student-add)
-   3. [Listing all students](#listing-all-students--list)
-   4. [Listing all groups](#listing-all-groups--listgroups)
-   5. [Editing a student](#editing-a-student--edit)
-   6. [Grouping students together](#grouping-students-together-group)
-   7. [Locating students by name](#locating-students-by-name-find)
-   8. [Locating groups by name](#locating-groups-by-name-findgroup)
-   9. [Adding a tag](#adding-a-tag--tag)
-   10. [Deleting a tag](#deleting-a-tag--untag)
-   11. [Deleting a student](#deleting-a-student--delete)
-   12. [Deleting a group](#deleting-a-group--deletegroup)
-   13. [Import students](#import-students-import)
-   14. [Export students](#export-students-export)
-   15. [Clearing all entries](#clearing-all-entries--clear)
-   16. [Exiting the program](#exiting-the-program--exit)
-   17. [Saving the data](#saving-the-data)
-   18. [Editing the data file](#editing-the-data-file)
-   19. [Exported csv data file location](#exported-csv-data-file-location)
-   20. [Archiving data files](#archiving-data-files-coming-in-v20)
-3. [FAQ](#faq)
-4. [Known issues](#known-issues)
-5. [Command summary](#command-summary)
-6. [Acknowledgements](#acknowledgements)
+2. [Managing Students](#managing-students)
+   1. [Adding a student](#adding-a-student-add)
+   2. [Listing all students](#listing-all-students--list)
+   3. [Editing a student](#editing-a-student--edit)
+   4. [Deleting a student](#deleting-a-student--delete)
+   5. [Finding a student](#locating-students-by-name-find)
+3. [Managing Groups](#managing-groups)
+   1. [Listing all groups](#listing-all-groups--listgroups)
+   2. [Grouping students together](#grouping-students-together-group)
+   3. [Locating groups by name](#locating-groups-by-name-findgroup)
+   4. [Deleting a group](#deleting-a-group--deletegroup)
+4. [Managing Tags](#managing-tags)
+   1. [Adding a tag](#adding-a-tag--tag)
+   2. [Deleting a tag](#deleting-a-tag--untag)
+5. [Importing and Exporting Data](#importing-and-exporting-data)
+   1. [Import students](#import-students-import-csv_file_location)
+   2. [Export students](#export-students-export)
+   3. [Exported csv data file location](#exported-csv-data-file-location)
+6. [Data Management](#data-management)
+   1. [Clearing all entries](#clearing-all-entries--clear)
+   2. [Saving the data](#saving-the-data)
+   3. [Editing the data file](#editing-the-data-file)
+   4. [Archiving data files](#archiving-data-files-coming-in-v20)
+7. [Exiting the Program](#exiting-the-program)
+   1. [Exiting the program](#exiting-the-program--exit)
+8. [FAQ](#faq)
+9. [Known Issues](#known-issues)
+10. [Command Summary](#command-summary)
+11. [Acknowledgements](#acknowledgements)
 
 ---
+
+## How to Use This Guide
+
+### Getting Started
+
+If you haven't installed GoonBook yet, start with the [Quick Start](#quick-start) section which will guide you through:
+
+- Installing Java 17
+- Downloading GoonBook
+- Setting up your workspace
+- Running your first command
+
+### Learning GoonBook
+
+Once GoonBook is running, familiarize yourself with:
+
+1. **Basic Interface**
+
+   - The command box for entering commands
+   - The student list panel
+   - The group management area
+   - The results display
+
+2. **Essential Features**
+   - [Adding students](#adding-a-student-add)
+   - [Creating groups](#grouping-students-together-group)
+   - [Managing tags](#adding-a-tag--tag)
+   - [Importing/Exporting data](#import-students-import-csv_file_location)
+
+### Quick References
+
+- For a complete list of commands, refer to the [Command Summary](#command-summary)
+- Experienced users can use this as a quick refresher
+- Each command includes examples of proper usage
+
+### Need Help?
+
+- Check the [FAQ](#faq) section for common questions
+- Review [Known Issues](#known-issues) if you encounter problems
+- Refer to the [Features](#features) section for detailed command usage
 
 ## Quick start
 
@@ -42,7 +97,7 @@ GoonBook is a **desktop app for educators that manage a large number of students
 
    - If you are on MacOS do note you may need to download a specific JDK 17 version. More on this [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html#programming-language).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-4/tp/releases/tag/v1.5).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-4/tp/releases/).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your GoonBook.
 
@@ -99,6 +154,8 @@ GoonBook is a **desktop app for educators that manage a large number of students
 
 <div style="page-break-after: always"></div>
 
+## Getting Help
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -108,6 +165,8 @@ Format: `help`
 ![help message](images/Help.png)
 
 <div style="page-break-after: always"></div>
+
+## Managing Students
 
 ### Adding a student: `add`
 
@@ -152,16 +211,6 @@ Format: `list`
 
 <div style="page-break-after: always"></div>
 
-## Listing all groups : `listGroups`
-
-Shows a list of all groups in the Goon Book.
-
-Format: `listGroups`
-
-![ListGroup](images/ListGroup.png)
-
-<div style="page-break-after: always"></div>
-
 ### Editing a student : `edit`
 
 Edits an existing student in the address book.
@@ -188,28 +237,26 @@ Examples:
 
 <div style="page-break-after: always"></div>
 
-### Grouping students together: `group`
+### Deleting a student : `delete`
 
-Groups students together.
+Deletes the specified student from the address book.
 
-Format: `group g/GROUPNAME s/STUDENTNAME [s/STUDENTNAME]…​`
+Format: `delete INDEX`
 
-- Each group must have a unique name.
-- `GROUPNAME` must be alphanumeric and allows whitespace (case-insensitive).
-- `STUDENTNAME` must match exactly (case-insensitive).
-- Group is successfully created only if all student names match.
+- Deletes the student at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- `INDEX` **must be a positive integer** 1, 2, 3, …​
 
-![Group](images/Group.png)
+![Delete](images/Delete.png)
 
 Examples:
 
-If the addressgroup contains `Alice Pauline` and `Benson Meier`,
-- `group g/Study Group 1 s/alice pauline s/benson meier`
-  - Successfully groups `Alice Pauline` and `Benson Meier` into `StudyGroup1`.
-- `group g/STUDY GROUP 1 s/alice pauline s/benson meier`
-  - Returns `Group name already taken!!`
-- `group g/Study Group 2 s/ali`
-  - Returns `The following students could not be found: ali`
+- `list` followed by `delete 2`
+    - Successfully deletes the 2nd person in the Goon book.
+- `find Betsy` followed by `delete 1`
+    - Successfully deletes the 1st person in the results of the `find` command.
+- `delete 100`
+    - If contains fewer than 100 students, returns `The index provided is greater than the max students`
 
 <div style="page-break-after: always"></div>
 
@@ -237,6 +284,43 @@ Examples:
 
 <div style="page-break-after: always"></div>
 
+## Managing groups
+
+## Listing all groups : `listGroups`
+
+Shows a list of all groups in the Goon Book.
+
+Format: `listGroups`
+
+![ListGroup](images/ListGroup.png)
+
+<div style="page-break-after: always"></div>
+
+### Grouping students together: `group`
+
+Groups students together.
+
+Format: `group g/GROUPNAME s/STUDENTNAME [s/STUDENTNAME]…​`
+
+- Each group must have a unique name.
+- `GROUPNAME` must be alphanumeric and allows whitespace (case-insensitive).
+- `STUDENTNAME` must match exactly (case-insensitive).
+- Group is successfully created only if all student names match.
+
+![Group](images/Group.png)
+
+Examples:
+
+If the addressgroup contains `Alice Pauline` and `Benson Meier`,
+- `group g/Study Group 1 s/alice pauline s/benson meier`
+    - Successfully groups `Alice Pauline` and `Benson Meier` into `StudyGroup1`.
+- `group g/STUDY GROUP 1 s/alice pauline s/benson meier`
+    - Returns `Group name already taken!!`
+- `group g/Study Group 2 s/ali`
+    - Returns `The following students could not be found: ali`
+
+<div style="page-break-after: always"></div>
+
 ### Locating groups by name: `findGroup`
 
 Finds groups whose names contain any of the given keywords.
@@ -260,6 +344,24 @@ Examples:
   - Returns `study group 1`
 
 <div style="page-break-after: always"></div>
+
+### Deleting a group : `deleteGroup`
+
+Deletes the specified Group from the address book.
+
+Format: `deleteGroup GROUPNAME`
+
+- Deletes the group given the specific `GROUPNAME`.
+- The group name refers to the name shown in the group list.
+
+![DeleteGroup](images/DeleteGroup.png)
+Examples:
+
+- `groups` followed by `deleteGroup StudyGroup 1` deletes StudyGroup1
+
+<div style="page-break-after: always"></div>
+
+## Managing Tags
 
 ### Adding a tag : `tag`
 
@@ -304,51 +406,9 @@ Examples:
 
 <div style="page-break-after: always"></div>
 
-### Deleting a student : `delete`
+## Importing and Exporting Data
 
-Deletes the specified student from the address book.
-
-Format: `delete INDEX`
-
-- Deletes the student at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
-- `INDEX` **must be a positive integer** 1, 2, 3, …​
-
-![Delete](images/Delete.png)
-
-Examples:
-
-- `list` followed by `delete 2`
-  - Successfully deletes the 2nd person in the Goon book.
-- `find Betsy` followed by `delete 1`
-  - Successfully deletes the 1st person in the results of the `find` command.
-- `delete 100`
-  - If contains fewer than 100 students, returns `The index provided is greater than the max students`
-
-<div style="page-break-after: always"></div>
-
-### Deleting a group : `deleteGroup`
-
-Deletes the specified Group from the address book.
-
-Format: `deleteGroup GROUPNAME`
-
-- Deletes the group given the specific `GROUPNAME`.
-- `GROUPNAME` must match exactly (case-insensitive).
-- The group name refers to the name shown in the group list.
-
-![DeleteGroup](images/DeleteGroup.png)
-
-Examples:
-
-- `deleteGroup StudyGroup1`
-  - Successfully deletes StudyGroup1
-- `deleteGroup Study`
-  - Returns `Group not found: Study`
-
-<div style="page-break-after: always"></div>
-
-### Import students: `import`
+### Import students: `import CSV_FILE_LOCATION`
 
 Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
 
@@ -374,7 +434,7 @@ Examples:
 
 <div style="page-break-after: always"></div>
 
-## Export students: `export`
+### Export students: `export`
 
 Exports all students in GoonBook to a .csv file.
 
@@ -387,6 +447,14 @@ Format: `export`
 
 <div style="page-break-after: always"></div>
 
+### Exported csv data file location
+
+GoonBook csv data files are saved automatically as a .csv file at `[JAR file location/exported_data.csv]`.
+
+<div style="page-break-after: always"></div>
+
+## Data Management
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -396,6 +464,8 @@ Format: `clear`
 ![Clear](images/Clear.png)
 
 <div style="page-break-after: always"></div>
+
+## Exiting the Program
 
 ### Exiting the program : `exit`
 
@@ -410,10 +480,6 @@ GoonBook data are saved in the hard disk automatically after any command that ch
 ### Editing the data file
 
 GoonBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-## Exported csv data file location
-
-GoonBook csv data files are saved automatically as a .csv file at `[JAR file location/exported_data.csv]`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
