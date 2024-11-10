@@ -143,7 +143,7 @@ Adds a student to the address book.
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and **END_TIME** are represented as `HHmm`.
-* **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
+* **PHONE_NUMBER** should be 8 digits that starts with 3, 6, 8 or 9.
 * **RATE** is the tuition fee per hour. It must meet the following criteria:
   * Minimum: $0.01 (must be a positive value)
   * Maximum: $1000.00 (two decimal places allowed)
