@@ -244,7 +244,7 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 <box type="tip" header="##### Tips">
 <markdown>
-* The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list).
+* The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list)).
 <br> i.e. The `find` command will not be affected by the previous `find` command. 
 * The search is case-insensitive. e.g. `alex` will match `Alex`
 * Only full words will be matched e.g. `alex` will not match `Alexander`
