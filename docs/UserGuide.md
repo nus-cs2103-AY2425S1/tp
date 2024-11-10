@@ -812,12 +812,18 @@ AgentAssist **automatically saves** all client data to your computer after each 
 
 
 ## 5.6 Modifying the Data File
-The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file as `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
+The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 > ⚠️ **Danger:**
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
 >
-> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.**
+> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.** 
+
+## 5.7 Modifying the Window Size
+The window size settings for AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/preferences.json`. Advanced users are welcome to update the window size directly by editing that preferences file.
+- Note: The minimum window size for AgentAssist is fixed at 800x600.
+> ⚠️ **Danger:**
+> If the window size is set too large, the application will render incorrectly. 
 
 [↑ Return to Table of Contents](#table-of-contents)
 
