@@ -26,6 +26,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
+- [Field Constraints](#field-constraints)
 
 --------------------------------------------------------------------------------------------------------------------
 
