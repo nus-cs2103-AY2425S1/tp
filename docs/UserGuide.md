@@ -50,7 +50,9 @@ Welcome to **EZSTATE**! This guide will walk you through installing the app and 
     (Windows Users) Alternatively, you can open the folder where the `.jar` file  is located,
     right click on any space inside the folder and click `Open in Terminal`.
     </div>
-
+    
+   <br>
+   
    Then run the app with:
     ```bash
     java -jar ezstate.jar
