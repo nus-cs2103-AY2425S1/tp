@@ -102,12 +102,19 @@ Format: `list [s/SORT_FIELD] [r/]`
   * `email` - Sort by email address
 * `r/`: Reverses the sort order (descending instead of ascending)
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Important Note:**
+Sorting is case-sensitive. When sorting by name:
+* Names starting with uppercase letters (e.g., "Alice") appear before names starting with lowercase letters (e.g., "bob")
+* To ensure consistent sorting, it is recommended to always capitalize the first letter of names when adding contacts
+* Example sort order: "Alice", "Bob", "Charlie", "alice", "bob"
+</div>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Sorting helps you quickly find contacts! For example, sort by name to easily locate someone alphabetically, or sort by age to see your youngest or oldest contacts.
+If you notice names appearing lower in the sorted list than expected, check if they were entered with correct capitalization. You can use the `edit` command to fix the capitalization if needed.
 </div>
 
 Examples:
-* `list` - Shows all contacts without any sorting
+* `list` - Shows all contacts
 * `list s/name` - Lists all contacts sorted alphabetically by name (A to Z)
   <img src="images/listName.png" alt="List sorted by name">
 * `list s/email r/` - Lists all contacts sorted by email in reverse order (Z to A)
@@ -197,7 +204,8 @@ Parameters:
 * Delete: `del/NAME` or `del/INDEX`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
-When using a person's name, it must exactly match their name in the address book (case-insensitive).
+When using a person's name:
+* If there are multiple contacts with similar names, Sales Contact Pro will display a filtered list of all matching contacts
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Using the person's index number from the last displayed list is often easier than typing their full name!
