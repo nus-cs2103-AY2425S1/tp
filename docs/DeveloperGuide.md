@@ -603,13 +603,20 @@ This section includes commands specific to the additional features implemented i
 
 This command allows you to add one or more interests to an existing contact.
 
+**Note:** Only interests that were not part of the contact's interest list will be shown on the display message.
+
 **Test case 1:** `addi in/1 i/Swimming i/Cycling`
 
-***Expected:*** Adds "Swimming" and "Cycling" as interests to the contact at index 1.
+***Expected:*** Adds "Swimming" and "Cycling" as interests to the contact at index 1. 
+
+**Display Message:** "New interests added to <name of contact at index 1>: [Cyling, Swimming]" **(only if "Swimming" and "Cycling" were not originally part of the interest list of the contact at index 1.)**
+
 
 **Test case 2:** `addi in/2 i/Reading`
 
 ***Expected:*** Adds "Reading" as an interest to the contact at index 2.
+
+**Display Message:** "New interest added to <name of contact at index 2>: [Reading]" **(only if "Reading" was not originally part of the interest list of the contact at index 2.)**
 
 **Test case 3:** `addi in/3 i/`
 
@@ -619,13 +626,13 @@ This command allows you to add one or more interests to an existing contact.
 
 This command adds work experience to a contact, replacing any existing work experience if present.
 
-**Test case 1:** `addw in/1 w/Software Engineer,Google,2023`
+**Test case 1:** `addw in/1 w/SoftwareEngineer,Google,2023`
 
-***Expected:*** Adds the work experience "Software Engineer at Google in 2023" to the contact at index 1.
+***Expected:*** Adds the work experience "SoftwareEngineer at Google in 2023" to the contact at index 1.
 
-**Test case 2:** `addw in/2 w/Data Scientist,Meta,2022`
+**Test case 2:** `addw in/2 w/DataScientist,Meta,2022`
 
-***Expected:***  Adds "Data Scientist at Meta in 2022" to the contact at index 2.
+***Expected:***  Adds "DataScientist at Meta in 2022" to the contact at index 2.
 
 **Test case 3:** `addw in/3 w/`
 
@@ -683,7 +690,7 @@ This command finds contacts by major. It requires a major. Major is case insensi
 
 ---
 
-### 6. Finding Contacts by Major: `findu`
+### 6. Finding Contacts by University: `findu`
 
 This command finds contacts by university. It requires a university. University is case insensitive.
 
@@ -691,7 +698,7 @@ This command finds contacts by university. It requires a university. University 
 
 ***Expected:*** Lists all contacts who have university as NUS.
 
-**Test case 2:** `findm u/`
+**Test case 2:** `findu u/`
 
 ***Expected:*** Error message due to missing university name.
 
