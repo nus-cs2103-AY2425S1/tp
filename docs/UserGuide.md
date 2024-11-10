@@ -84,15 +84,22 @@ The input fields of vendors and events have varying constraints and are as liste
 **Description** : Descriptions can take in any characters but cannot be blank.
 
 **Date** : Date inputs can be in any of the following formats:
-1. `dd-MM-uuuu`
-2. `uuuu-MM-dd`
-3. `dd MMM uuuu`
-4. `dd MMMM uuuu`
+1. `dd-mm-yyyy` e.g. `24-01-2024`
+2. `yyyy-mm-dd` e.g. `2024-01-24`
+3. `dd MMM yyyy` e.g. `24 Jan 2024`
+4. `dd MMMM yyyy` e.g. `24 January 2024`
 
-`uuuu` is equivalent to `yyyy` denoting the year in a date.
+Note:
+* Regardless of the date format chosen during input, dates will be displayed in the application in the format `dd-mm-yyyy`.
+* Dates that are already past will still be accepted as inputs. This provides users the flexibility to continue tracking events even after their conclusion.
+* Some dates will be rejected even when correctly formatted as these dates **do not exist**. Examples include:
+  * `31-02-2024` : The month of `February` will never have `31` days.
+  * `10-13-2001` : There are only `12` months in a year.
 
-**Tags** : Tags can contain alphanumeric characters, hyphens `-`, and underscores `_` only, but cannot be made up of only hyphens `-` and underscores `_`.<br>
-Tags also only accepts a **maximum** of 30 characters.
+**Tags** : Tag inputs can:
+* contain alphanumeric characters, hyphens `-`, and underscores `_` only.
+* cannot be made up of **only** hyphens `-` and underscores `_`.
+* only accept a **maximum** of 30 characters.
 
 ## Features
 
