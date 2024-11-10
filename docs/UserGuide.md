@@ -957,6 +957,8 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 
 EZSTATE data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+---
+
 ### Editing the data file
 
 AddressBook data are saved automatically as a JSON file:<br><br> `[JAR file location]/data/addressbook.json`<br><br>**Advanced users** are welcome to update data directly by editing that data file.
