@@ -289,7 +289,6 @@ Note:
 * Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
   * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
 * If user is viewing an event or a vendor, the `find` command will affect the assignable list only. Assigned list is not affected.
-  ![find on view](images/findOnView.png)
 * To search the date field of events, the displayed format of dates should be followed.
   * e.g. `find v/ -11-` will return events dated in November.
   * String matching is used to search date fields, so the keywords `November` and `Nov` will not match a date with month `11`.
