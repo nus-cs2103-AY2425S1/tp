@@ -5,14 +5,26 @@ title: User Guide
 
 <link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
 
-EZStates is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts, listings, and appointments.
+
+<br> You are part of the ideal target audience of EZSTATE if you meet the following characteristics:
+
+`Job`: Real Estate Agent focused on residential or commercial property sales (i.e. listings)
+`Typing ability`: Comfortable with typing speeds of ~80 WPM or higher
+`Workflow Preference`: Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons
+`Tech Savviness`: Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons
+`Work Style`: Handles multiple clients and properties simultaneously and values efficiency in contact and property management
+`Environment`: Works in a fast-paced setting where quick data entry and retrival are essential
+
+But don’t worry if you don’t meet every characteristic — EZSTATE is designed to be intuitive and efficient for all users. 
+<br> Give it a try, and see how it can make your contact and property management tasks faster and easier!
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start: Get started in 3 minutes!
+## Quick Start
 
 In this quick start guide, you'll learn how to install EZSTATES. 
 <br>
@@ -23,7 +35,7 @@ In this quick start guide, you'll learn how to install EZSTATES.
 While learning our command structure is optional, we highly recommend reviewing this section to make using EZSTATES much easier.
 </div>
 
-### Installation _(~3min)_
+### Installation 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -50,7 +62,7 @@ While learning our command structure is optional, we highly recommend reviewing 
 
 6. Refer to the [Features](#features) for command details.
 
-### Command Structure _(~10 mins)_
+### Command Structure
 
 In this section, we will explore the general format of commands in EZSTATES.
 
