@@ -48,7 +48,7 @@ title: User Guide
 
 7. [Planned Features](#planned-features)
 
-7. [Command summary](#command-summary)
+8. [Command summary](#command-summary)
 
 # Introduction
 Welcome to **AcademyAssist**, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
