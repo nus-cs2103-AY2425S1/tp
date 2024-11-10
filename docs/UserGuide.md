@@ -19,7 +19,7 @@ StudentManagerPro (SMP) is a **desktop app for managing students, optimized for 
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F12-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for StudentManagerPro.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar studentmanagerpro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -30,7 +30,7 @@ StudentManagerPro (SMP) is a **desktop app for managing students, optimized for 
 
    * `list` : Lists all student contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/1A s/M r/1` : Adds a student named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/1A s/M r/1` : Adds a student named `John Doe` to the student list.
 
    * `delete 3` : Deletes the 3rd student contact shown in the current list.
 
@@ -68,7 +68,7 @@ StudentManagerPro (SMP) is a **desktop app for managing students, optimized for 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -77,7 +77,7 @@ Format: `help`
 
 ### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to the student list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/SEX r/REGISTER_NUMBER [t/TAG]…​`
 
@@ -86,19 +86,28 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/SEX r/REGISTER_NU
 **Tip:** A student can have any number of tags (including 0)
 </box>
 
+* Adds a student to the student list with attributes as specified in the command.
+* The name should contain only alphanumeric characters and spaces, and it should not be blank.
+* The phone number should only contain numbers, and it should be at least 3 digits long.
+* The email should only contain alphanumeric characters and select special characters, and it should not be blank. (The specifics will be described only if the wrong format is provided for email)
+* The address can take any values, and it should not be blank.
+* The class should be a non-zero digit followed by a capital alphabet.
+* The sex should only be "M" or "F".
+* The register number should be a value between 1 and 40.
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/1A s/M r/1`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/2C s/F r/2`
 
 ### Listing all students : `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in the student list.
 
 Format: `list`
 
 ### Editing a student : `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in the student list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
 
@@ -157,7 +166,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the student list.
 
 Format: `delete INDEX`
 
@@ -166,12 +175,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the student list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Adding an Emergency contact's name : `addEcName`
 
-Adds an emergency contact's name to the specified person in the address book.
+Adds an emergency contact's name to the specified person in the student list.
 
 Format: `addEcName INDEX en/[ECNAME]`
 
@@ -191,7 +200,7 @@ Examples:
 
 ### Adding an Emergency contact's number : `addEcNumber`
 
-Adds an emergency contact's number to the specified person in the address book.
+Adds an emergency contact's number to the specified person in the student list.
 
 Format: `addEcNumber INDEX [ep/ECNUMBER]`
 
@@ -212,7 +221,7 @@ Examples:
 
 ### Adding Attendance : `addAttendance`
 
-Adds the date and reason as to why the specified person in the address book is absent.
+Adds the date and reason as to why the specified person in the student list is absent.
 
 Format: `addAttendance INDEX ad/[DATE] ar/[REASON]`
 
@@ -232,7 +241,7 @@ Examples:
 
 ### Adding an Exam : `addExam`
 
-Adds an exam to every person in the address book.
+Adds an exam to every person in the student list.
 
 Format: `addExam ex/EXAMNAME`
 
@@ -249,7 +258,7 @@ Examples:
 
 ### Deleting an Exam : `deleteExam`
 
-Deletes the specified exam from every student in the address book.
+Deletes the specified exam from every student in the student list.
 
 Format: `deleteExam ex/EXAM_NAME`
 
@@ -276,7 +285,7 @@ Examples:
 
 ### Adding a Submission : `addSubmission`
 
-Adds a submission to every student in the address book.
+Adds a submission to every student in the student list.
 
 Format: `addSubmission sm/SUBMISSION_NAME`
 
@@ -312,7 +321,7 @@ Examples:
 
 ### Deleting a Submission : `deleteSubmission`
 
-Deletes the specified submission from every student in the address book.
+Deletes the specified submission from every student in the student list.
 
 Format: `deleteSubmission sm/SUBMISSION_NAME`
 
@@ -345,7 +354,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the student list.
 
 Format: `clear`
 
@@ -357,17 +366,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+StudentManagerPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+StudentManagerPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, StudentManagerPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the StudentManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -379,7 +388,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StudentManagerPro home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
