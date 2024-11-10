@@ -253,7 +253,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Description**: Search for a volunteer by their name.
 
-**Preconditions**: NA
+**Preconditions**: Some Volunteers must exist in the system.
 
 **MSS**:
 1. User enters a keyword to search for.
@@ -453,7 +453,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Description**: Search for an event by its name.
 
-**Preconditions**: NA
+**Preconditions**: Some Events must exist in the system.
 
 **MSS**:
 1. User enters a keyword to search for.
