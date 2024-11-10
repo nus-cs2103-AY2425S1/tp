@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -33,7 +33,7 @@ public class EditConcertCommandParser implements Parser<EditConcertCommand> {
         }
 
         Index index = ParserUtil.parseIndexWithMessage(argMultimap.getPreamble(),
-                String.format(MESSAGE_INVALID_INDEX, EditConcertCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_DATE);
 

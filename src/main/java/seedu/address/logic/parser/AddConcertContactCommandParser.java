@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONCERT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
@@ -42,9 +43,9 @@ public class AddConcertContactCommandParser implements Parser<AddConcertContactC
         }
 
         Index indexP = ParserUtil.parseIndexWithMessage(argMultimap.getValue(PREFIX_PERSON).get(),
-                String.format(MESSAGE_INVALID_INDEX, AddConcertContactCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         Index indexC = ParserUtil.parseIndexWithMessage(argMultimap.getValue(PREFIX_CONCERT).get(),
-                String.format(MESSAGE_INVALID_INDEX, AddConcertContactCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
 
         assert indexP != null : "Person index cannot be null";
         assert indexC != null : "Concert index cannot be null";

@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeletePersonCommand;
@@ -27,8 +27,7 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndexWithMessage(args,
-                String.format(MESSAGE_INVALID_INDEX, DeletePersonCommand.MESSAGE_USAGE));
+        Index index = ParserUtil.parseIndexWithMessage(args, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         return new DeletePersonCommand(index);
     }
 
