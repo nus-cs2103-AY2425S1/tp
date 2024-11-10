@@ -35,8 +35,8 @@ every step, and no technical knowledge is needed.
 
 <div style="page-break-after: always;"></div>
 
-## **Quick Start**
-### **Step 1: Check if Your Computer is Ready**
+# **Quick Start**
+## **Step 1: Check if Your Computer is Ready**
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
 1. Open your computer's terminal:
@@ -53,9 +53,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
   - ✅ If you see "Java version 17", you're ready to go!
   - ❌ If you see "command not found" or a number that is not 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
-<br>
-
-### **Step 2: Install BakeBuddy**
+## **Step 2: Install BakeBuddy**
 
 1. Download BakeBuddy:
   - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
@@ -63,7 +61,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
   - Click on it to download
 2. Create a home for BakeBuddy:
   - Create a new folder on your computer named `BakeBuddy`
-  - Move the downloaded `bakebuddy.jar` file into this folder
+  - Move the downloaded `BakeBuddy.jar` file into this folder
 3. Start BakeBuddy:
   - Open your terminal (like in Step 1) and navigate to the BakeBuddy folder
   - Type `cd ` (with a space after cd) 
@@ -71,13 +69,13 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
   - Press Enter
   - Type:
     ```
-    java -jar bakebuddy.jar
+    java -jar BakeBuddy.jar
     ```
   - Press Enter
 
    You should see the BakeBuddy window appear as follows!
 
-### **Step 3: Try Your First Commands**
+## **Step 3: Try Your First Commands**
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
