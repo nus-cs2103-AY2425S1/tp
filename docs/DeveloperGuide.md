@@ -314,25 +314,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *User stories for the MVP:* Stories 4, 6 and 9 are for the MVP
 *User stories for the final version:* Stories 1 - 13 are for the final version.
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+---
 
-**Use Case 1: Add a New Person**
+### **Use Case 1: Add a New Person**
 
-**System**: CareLink
-**Use Case**: UC01 - Add New Patient
-**Actor**: Geriatrician (Fred)
+- **System**: CareLink
+- **Use Case**: UC01 - Add New Patient
+- **Actor**: Geriatrician (Fred)
 
-**Preconditions**
+#### Preconditions
 - Fred is logged into CareLink.
-- Fred is at the patient details entry screen.
 
-**Guarantees**
+#### Guarantees
 - Patient details are saved only if the input data is valid.
 - Duplicates are not created (NRIC uniqueness is enforced).
 
-**MSS**
+#### Main Success Scenario (MSS)
 1. Fred enters command to `add` a new person.
 2. CareLink requests person details.
 3. Fred enters the person details along with their role as patient, caregiver, or both.
@@ -341,130 +340,139 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. CareLink displays a success message and shows the newly added patient in the system.
 7. Use case ends.
 
-**Extensions**
+#### Extensions
 - **3a. Invalid patient data entered**:
-    - CareLink displays an error message indicating which data is invalid.
-    - Fred corrects the input, and the use case resumes from step 3.
-    - Use case ends.
+  - CareLink displays an error message indicating which data is invalid.
+  - Fred corrects the input, and the use case resumes from step 3.
+  - Use case ends.
 
+---
 
-**Use Case 2: Find Person Details**
+### **Use Case 2: Find Person Details**
 
-**System**: CareLink
-**Use Case**: UC02 - Find Patient Details
-**Actor**: Geriatrician (Fred)
+- **System**: CareLink
+- **Use Case**: UC02 - Find Patient Details
+- **Actor**: Geriatrician (Fred)
 
-**Preconditions**
+#### Preconditions
 - Fred is logged into CareLink.
 
-**Guarantees**
+#### Guarantees
 - The person's details are successfully retrieved and displayed.
 - The correct person's information is displayed without errors.
 
-**Main Success Scenario (MSS)**
+#### Main Success Scenario (MSS)
 1. Fred enters command to `find` a person's details.
 2. CareLink retrieves the person's details.
 3. CareLink displays the person's details to Fred.
 4. Use case ends.
 
-**Extensions**
+#### Extensions
 - **3a. Invalid or nonexistent person NRIC entered**:
-    - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
-    - Fred corrects the NRIC, and the use case resumes from step 3.
-    - Use case ends.
+  - CareLink displays an error message and prompts Fred to re-enter the correct NRIC.
+  - Fred corrects the NRIC, and the use case resumes from step 3.
+  - Use case ends.
 
-**Use Case 3: Adding a Caregiver and Linking to an Existing Patient**
+---
 
-**System**: CareLink
-**Use Case**: UC03 - Link Caregiver to an Existing Patient
-**Actor**: Geriatrician (Fred)
+### **Use Case 3: Adding a Caregiver and Linking to an Existing Patient**
 
-### Preconditions
+- **System**: CareLink
+- **Use Case**: UC03 - Link Caregiver to an Existing Patient
+- **Actor**: Geriatrician (Fred)
+
+#### Preconditions
 - Fred is logged into CareLink.
 
-### Guarantees
+#### Guarantees
 - The caregiver is correctly linked to the specified patient, and vice versa.
 
-### MSS
+#### Main Success Scenario (MSS)
 1. Fred enters command to `link` a caregiver to a patient and enters the necessary details, including the caregiver's and patient's NRIC.
 2. CareLink validates all input details against criteria.
 3. CareLink links the caregiver to the specified patient NRIC.
 4. CareLink confirms the link with a success message.
 5. Use case ends.
 
-### Extensions
+#### Extensions
 - **2a. Specified Caregiver NRIC Does Not Exist**:
-    - 2a.1: CareLink displays an error message, and link not formed.
-    - Use case ends.
+  - CareLink displays an error message, and link not formed.
+  - Use case ends.
 
 - **2b. Specified Patient NRIC Does Not Exist**:
-    - 2b.1: CareLink displays an error message, and link not formed.
-    - Use case ends.
+  - CareLink displays an error message, and link not formed.
+  - Use case ends.
 
-**Use Case 4: Update Person Details**
+---
 
-**System**: CareLink
-**Use Case**: UC04 - Update Patient Details
-**Actor**: Geriatrician (Fred)
+### **Use Case 4: Update Person Details**
 
-### Preconditions
+- **System**: CareLink
+- **Use Case**: UC04 - Update Patient Details
+- **Actor**: Geriatrician (Fred)
+
+#### Preconditions
 - Fred is logged into CareLink.
 
-### Guarantees
+#### Guarantees
 - The patient’s details are successfully updated in the system.
 
-### Main Success Scenario (MSS)
+#### Main Success Scenario (MSS)
 1. Fred enters command to `edit` and provides the NRIC of patient and new details.
 2. CareLink validates the new input.
 3. CareLink updates the records and confirms the update with a success message.
 4. Use case ends.
 
-### Extensions
+#### Extensions
 - **2a. Record Does Not Exist**:
-    - 2a.1: CareLink informs Fred.
-    - Use case ends.
+  - CareLink informs Fred.
+  - Use case ends.
 
 - **2b. Input Validation Fails**:
-    - 2b.1: CareLink displays an error message and does not update the record.
-    - Use case ends.
+  - CareLink displays an error message and does not update the record.
+  - Use case ends.
 
-**Use Case 5: Delete Person Details**
+---
 
-**System**: CareLink
-**Use Case**: UC05 - Delete Patient Details
-**Actor**: Geriatrician (Fred)
+### **Use Case 5: Delete Person Details**
 
-### Preconditions
+- **System**: CareLink
+- **Use Case**: UC05 - Delete Patient Details
+- **Actor**: Geriatrician (Fred)
+
+#### Preconditions
 - Fred is logged into CareLink.
 - The patient exists in the system.
 
-### Guarantees
+#### Guarantees
 - The patient's details are successfully removed from the system.
 
-### Main Success Scenario (MSS)
-1. Fred enters command to `delete` a persons's details by using the NRIC.
+#### Main Success Scenario (MSS)
+1. Fred enters command to `delete` a person's details by using the NRIC.
 2. CareLink retrieves the person's information.
 3. CareLink deletes the person's record.
 4. Use case ends.
 
-### Extensions
+#### Extensions
 - **2a. Person Does Not Exist**:
-    - 2a.1: CareLink displays an error message.
-    - Use case ends.
+  - CareLink displays an error message.
+  - Use case ends.
 
-**Use Case 6: Filter Data by Medical Condition**
+---
 
-**System**: CareLink
-**Use Case**: UC06 - Filter Data by Medical Condition
-**Actor**: Geriatrician (Fred)
+### **Use Case 6: Filter Data by Medical Condition**
 
-### Preconditions
+- **System**: CareLink
+- **Use Case**: UC06 - Filter Data by Medical Condition
+- **Actor**: Geriatrician (Fred)
+
+#### Preconditions
 - Fred is logged into CareLink.
 
-### Guarantees
+#### Guarantees
 - Data is successfully filtered by the specified condition and displayed.
 
-### Main Success Scenario (MSS)
+#### Main Success Scenario (MSS)
 1. Fred enters command to `filter` patient data by medical condition.
 2. CareLink prompts Fred to input the medical condition.
 3. Fred enters the medical condition.
@@ -472,28 +480,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. CareLink displays the filtered data to Fred.
 6. Use case ends.
 
-### Extensions
+#### Extensions
 - **3a. Invalid Condition**:
-    - 3a.1: CareLink displays an error message and prompts Fred to re-enter the condition.
-    - Use case resumes from step 3.
+  - CareLink displays an error message and prompts Fred to re-enter the condition.
+  - Use case resumes from step 3.
 
 - **4a. No Data Found for Condition**:
-    - 4a.1: CareLink informs Fred that no records were found.
-    - Use case ends.
+  - CareLink informs Fred that no records were found.
+  - Use case ends.
 
-**Use Case 7: Filter Data by Patients**
+---
 
-**System**: CareLink
-**Use Case**: UC07 - Filter Data by Patients
-**Actor**: Geriatrician (Fred)
+### **Use Case 7: Filter Data by Patients**
 
-### Preconditions
+- **System**: CareLink
+- **Use Case**: UC07 - Filter Data by Patients
+- **Actor**: Geriatrician (Fred)
+
+#### Preconditions
 - Fred is logged into CareLink.
 
-### Guarantees
+#### Guarantees
 - Data is successfully filtered by the specified patient(s) and displayed.
 
-### Main Success Scenario (MSS)
+#### Main Success Scenario (MSS)
 1. Fred enters the command to filter patient data by specific patients.
 2. CareLink prompts Fred to input patient identifiers.
 3. Fred enters the patient identifiers.
@@ -501,249 +511,216 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. CareLink displays the filtered data to Fred.
 6. Use case ends.
 
-### Extensions
+#### Extensions
 - **3a. Invalid Patient Identifier**:
-    - 3a.1: CareLink displays an error message and prompts Fred to re-enter the identifier.
-    - Use case resumes from step 3.
+  - CareLink displays an error message and prompts Fred to re-enter the identifier.
+  - Use case resumes from step 3.
 
 - **4a. No Data Found for Patients**:
-    - 4a.1: CareLink informs Fred that no records were found.
-    - Use case ends.
+  - CareLink informs Fred that no records were found.
+  - Use case ends.
 
-**Use Case 8: Schedule Appointments**
+---
 
-**System**: CareLink
-**Use Case**: UC08 - Schedule Appointments
-**Actor**: Geriatrician (Fred)
+### **Use Case 8: Schedule Appointments**
 
-### Preconditions
-- Fred is logged into CareLink
-- The person exists in the system
+- **System**: CareLink
+- **Use Case**: UC08 - Schedule Appointments
+- **Actor**: Geriatrician (Fred)
 
-### Guarantees
-- A follow-up appointment is successfully scheduled and confirmed
-- The appointment time is valid (start time before end time)
-- The appointment is in the future
-- No duplicate appointments are created for the person
+#### Preconditions
+- Fred is logged into CareLink.
+- The person exists in the system.
 
-### Main Success Scenario (MSS)
-1. Fred enters the `addapp` command to schedule a follow-up appointment with the required details (person's NRIC, start date/time, end date/time, description)
+#### Guarantees
+- A follow-up appointment is successfully scheduled and confirmed.
+- The appointment time is valid (start time before end time).
+- The appointment is in the future.
+- No duplicate appointments are created for the person.
+
+#### Main Success Scenario (MSS)
+1. Fred enters the `addapp` command to schedule a follow-up appointment with the required details (person's NRIC, start date/time, end date/time, description).
 2. CareLink validates that:
-   - The start date/time is before the end date/time
-   - The appointment is in the future
-   - The person exists in the system
-   - The appointment does not conflict with existing appointments
-3. CareLink confirms the follow-up appointment and saves it in the system
-4. CareLink displays a confirmation message with the appointment details
-5. Use case ends
+  - The start date/time is before the end date/time.
+  - The appointment is in the future.
+  - The person exists in the system.
+  - The appointment does not conflict with existing appointments.
+3. CareLink confirms the follow-up appointment and saves it in the system.
+4. CareLink displays a confirmation message with the appointment details.
+5. Use case ends.
 
-### Extensions
+#### Extensions
 - **2a. Person Does Not Exist**:
-    - 2a.1: CareLink displays an error message that the person cannot be found
-    - Use case ends
+  - CareLink displays an error message that the person cannot be found.
+  - Use case ends.
 
 - **2b. Invalid Appointment Time**:
-    - 2b.1: CareLink displays an error message that the appointment times are invalid
-    - Use case ends
+  - CareLink displays an error message that the appointment times are invalid.
+  - Use case ends.
 
 - **2c. Past Appointment Time**:
-    - 2c.1: CareLink displays an error message that appointments must be in the future
-    - Use case ends
+  - CareLink displays an error message that appointments must be in the future.
+  - Use case ends.
 
 - **2d. Duplicate Appointment**:
-    - 2d.1: CareLink displays an error message about the conflicting appointment
-    - Use case ends
+  - CareLink displays an error message about the conflicting appointment.
+  - Use case ends.
 
-**Use Case 9: Edit Existing Appointments**
+---
 
-**System**: CareLink
-**Use Case**: UC09 - Edit Existing Appointments
-**Actor**: Geriatrician (Fred)
+### **Use Case 9: Edit Existing Appointments**
 
-### Preconditions
-- Fred is logged into CareLink
-- The person exists in the system
-- The appointment for that person exists in the system
+- **System**: CareLink
+- **Use Case**: UC09 - Edit Existing Appointments
+- **Actor**: Geriatrician (Fred)
 
-### Guarantees
-- The edited appointment is successfully scheduled and confirmed
-- The edited appointment time is valid (start time before end time)
-- The edited appointment is in the future
-- No duplicate appointments are created for the person after editing
+#### Preconditions
+- Fred is logged into CareLink.
+- The person exists in the system.
+- The appointment for that person exists in the system.
 
-### Main Success Scenario (MSS)
-1. Fred enters the `editapp` command to schedule a edited appointment with the required details (person's NRIC, date, start time, new date, new start time, new end time)
+#### Guarantees
+- The edited appointment is successfully scheduled and confirmed.
+- The edited appointment time is valid (start time before end time).
+- The edited appointment is in the future.
+- No duplicate appointments are created for the person after editing.
+
+#### Main Success Scenario (MSS)
+1. Fred enters the `editapp` command to schedule an edited appointment with the required details (person's NRIC, date, start time, new date, new start time, new end time).
 2. CareLink validates that:
-   - The new start date/time is before the new end date/time
-   - The appointment is in the future
-   - The person exists in the system
-   - The appointment to be edited exists in the system
-   - The appointment does not conflict with existing appointments
-3. CareLink confirms the edited appointment and saves it in the system
-4. CareLink displays a confirmation message with the appointment details
-5. Use case ends
+  - The new start date/time is before the new end date/time.
+  - The appointment is in the future.
+  - The person exists in the system.
+  - The appointment to be edited exists in the system.
+  - The appointment does not conflict with existing appointments.
+3. CareLink confirms the edited appointment and saves it in the system.
+4. CareLink displays a confirmation message with the appointment details.
+5. Use case ends.
 
-### Extensions
+#### Extensions
 - **2a. Person Does Not Exist**:
-    - 2a.1: CareLink displays an error message that the person cannot be found
-    - Use case ends
+  - CareLink displays an error message that the person cannot be found.
+  - Use case ends.
 
 - **2b. Invalid Appointment Time**:
-    - 2b.1: CareLink displays an error message that the appointment times are invalid
-    - Use case ends
+  - CareLink displays an error message that the appointment times are invalid.
+  - Use case ends.
 
 - **2c. Past Appointment Time**:
-    - 2c.1: CareLink displays an error message that appointments must be in the future
-    - Use case ends
+  - CareLink displays an error message that appointments must be in the future.
+  - Use case ends.
 
 - **2d. Duplicate Appointment**:
-    - 2d.1: CareLink displays an error message about the conflicting appointment
-    - Use case ends
+  - CareLink displays an error message about the conflicting appointment.
+  - Use case ends.
 
+---
 
-**Use Case 10: Delete Appointments**
+### **Use Case 10: Delete Appointments**
 
-**System**: CareLink
-**Use Case**: UC10 - Delete Appointments
-**Actor**: Geriatrician (Fred)
+- **System**: CareLink
+- **Use Case**: UC10 - Delete Appointments
+- **Actor**: Geriatrician (Fred)
 
-### Preconditions
-- Fred is logged into CareLink
-- The person exists in the system
-- The appointment exists in the system
+#### Preconditions
+- Fred is logged into CareLink.
+- The person exists in the system.
+- The appointment exists in the system.
 
-### Guarantees
-- The specified appointment is successfully deleted from the system
+#### Guarantees
+- The specified appointment is successfully deleted from the system.
 
-### Main Success Scenario (MSS)
-1. Fred enters the `deleteapp` command with the required details (person's NRIC, date, start time)
+#### Main Success Scenario (MSS)
+1. Fred enters the `deleteapp` command with the required details (person's NRIC, date, start time).
 2. CareLink validates that:
-  - The person exists in the system
-  - The specified appointment exists for that person at the given date and time
-3. CareLink deletes the appointment from the system
-4. CareLink displays a confirmation message with the deleted appointment's details
-5. Use case ends
+  - The person exists in the system.
+  - The specified appointment exists for that person at the given date and time.
+3. CareLink deletes the appointment from the system.
+4. CareLink displays a confirmation message with the deleted appointment's details.
+5. Use case ends.
 
-### Extensions
+#### Extensions
 - **2a. Person Does Not Exist**:
-   - 2a.1: CareLink displays an error message that the person cannot be found
-   - Use case ends
+  - CareLink displays an error message that the person cannot be found.
+  - Use case ends.
 
 - **2b. Invalid Date Format**:
-   - 2b.1: CareLink displays an error message that the date format should be DD/MM/YYYY
-   - Use case ends
+  - CareLink displays an error message that the date format should be DD/MM/YYYY.
+  - Use case ends.
 
 - **2c. Invalid Time Format**:
-   - 2c.1: CareLink displays an error message that the time format should be HH:MM
-   - Use case ends
+  - CareLink displays an error message that the time format should be HH:MM.
+  - Use case ends.
 
 - **2d. Appointment Does Not Exist**:
-   - 2d.1: CareLink displays an error message that the appointment does not exist in CareLink
-   - Use case ends
+  - CareLink displays an error message that the appointment does not exist in CareLink.
+  - Use case ends.
 
-**Use Case 11: Add Note to Person**
+---
 
-**System**: CareLink
-**Use Case**: UC11 - Add Note to Person
-**Actor**: Geriatrician (Fred)
+### **Use Case 11: Add Note to Person**
 
-### Preconditions
-- Fred is logged into CareLink
-- The person exists in the system
+- **System**: CareLink
+- **Use Case**: UC11 - Add Note to Person
+- **Actor**: Geriatrician (Fred)
 
-### Guarantees
-- The note is successfully added to the person's records
-- The note text is not empty
+#### Preconditions
+- Fred is logged into CareLink.
+- The person exists in the system.
 
-### Main Success Scenario (MSS)
-1. Fred enters the `addnote` command with the required details (person's NRIC, note text)
+#### Guarantees
+- The note is successfully added to the person's records.
+- The note text is not empty.
+
+#### Main Success Scenario (MSS)
+1. Fred enters the `addnote` command with the required details (person's NRIC, note text).
 2. CareLink validates that:
-  - The person exists in the system
-  - The note text is not empty
-3. CareLink adds the note to the person's records
-4. CareLink displays a confirmation message showing the NRIC and the added note text
-5. Use case ends
+  - The person exists in the system.
+  - The note text is not empty.
+3. CareLink adds the note to the person's records.
+4. CareLink displays a confirmation message showing the NRIC and the added note text.
+5. Use case ends.
 
-### Extensions
+#### Extensions
 - **2a. Person Does Not Exist**:
-   - 2a.1: CareLink displays an error message that the person cannot be found
-   - Use case ends
+  - CareLink displays an error message that the person cannot be found.
+  - Use case ends.
 
 - **2b. Empty Note Text**:
-   - 2b.1: CareLink displays an error message that the note text cannot be empty
-   - Use case ends
+  - CareLink displays an error message that the note text cannot be empty.
+  - Use case ends.
 
-### Non-Functional Requirements
+---
 
-1. **Typing-Preferred**
-   - **Category:** User Efficiency
-   - **Requirement:** The product should be optimized for users who can type fast and prefer typing over other forms of input, with a command-line interface (CLI) that allows quick and efficient task completion.
-   - **User Benefit:** This allows users who prefer typing to accomplish tasks faster without relying on slower point-and-click methods.
+### **Use Case 12: Clear All Entries with Confirmation**
 
-2. **Platform-Independent**
-   - **Category:** Environment Requirements
-   - **Requirement:** The software must work seamlessly on Windows, Linux, and OS-X platforms.
-   - **User Benefit:** Users can run the application on any operating system they prefer, ensuring flexibility and convenience without worrying about compatibility issues.
+- **System**: CareLink
+- **Use Case**: UC12 - Clear All Entries with Confirmation
+- **Actor**: Geriatrician (Fred)
 
-3. **No-DBMS**
-   - **Category:** Technical Requirements
-   - **Requirement:** The system should not rely on a database management system (DBMS) for data storage.
-   - **User Benefit:** Users don't need to set up complex database systems, making the software easier to install and maintain, with simple file-based data storage.
-
-4. **Human-Editable File**
-   - **Category:** Data Requirements
-   - **Requirement:** The system's data should be stored locally in a human-readable and editable text file format.
-   - **User Benefit:** Users can directly view and modify their data without needing specialized tools, providing more control and flexibility for advanced users.
-
-5. **Single-User**
-   - **Category:** User Constraints
-   - **Requirement:** The product is designed for use by a single user, and data should not be shared between multiple users.
-   - **User Benefit:** Users can have confidence that their data is secure and private, without interference from other users, ensuring data integrity and ease of use.
-
-6. **Portability**
-    - **Category:** System Constraints
-    - **Requirement:** The product must support downloading CSV files that can be easily loaded and used on another system.
-    - **User Benefit:** Users can seamlessly transfer and access their data across different systems, providing flexibility and ease of use.
-
-7. **Readable Font Size**
-    - **Category:** Usability
-    - **Requirement:** The font size should be reasonably large to ensure readability, particularly for users who may have difficulty reading smaller text.
-    - **User Benefit:** Ensures users can comfortably read information on the interface, improving accessibility and user experience.
-
-8. **Simplicity**
-    - **Category:** Usability
-    - **Requirement:** The interface should be intuitive, with straightforward workflows that make it easy to navigate and use.
-    - **User Benefit:** Reduces the learning curve for new users, allowing for efficient and hassle-free operation, improving overall user satisfaction.
-
-**Use Case 15: Clear All Entries with Confirmation**
-
-**System**: CareLink  
-**Use Case**: UC15 - Clear All Entries with Confirmation  
-**Actor**: Geriatrician (Fred)
-
-### Preconditions
+#### Preconditions
 - Fred is logged into CareLink.
 - The address book contains patient data.
 
-### Guarantees
+#### Guarantees
 - All patient data is removed only after explicit confirmation.
 - CareLink prompts Fred to use the correct command to avoid accidental data loss.
 
-### Main Success Scenario (MSS)
+#### Main Success Scenario (MSS)
 1. Fred enters the `clear confirm` command.
 2. CareLink validates the command.
 3. CareLink clears all entries from the address book.
 4. CareLink displays a success message confirming that all data has been cleared.
 5. Use case ends.
 
-### Extensions
+#### Extensions
 - **1a. Fred enters `clear` without `confirm`**:
-    - 1a.1: CareLink displays a message prompting Fred to use `clear confirm`.
-    - Use case ends.
+  - CareLink displays a message prompting Fred to use `clear confirm`.
+  - Use case ends.
 
 - **1b. No confirmation provided**:
-    - 1b.1: If Fred does not use the `confirm` keyword, no data is deleted.
-    - Use case ends.
+  - No data is deleted.
+  - Use case ends.
 
 ---
 
@@ -864,7 +841,7 @@ testers are expected to do more *exploratory* testing.
     - Success message confirms the addition.
 
 2. **Adding a New Caregiver**
-  - **Test case**: `add n/Jane Smith nric/S2345678E p/98765432 e/janesmith@example.com a/456 Bukit Timah Rd #02-02 role/caregiver t/primary`
+  - **Test case**: `add n/Jane Smith nric/S2345678H p/98765432 e/janesmith@example.com a/456 Bukit Timah Rd #02-02 role/caregiver t/primary`
   - **Expected**:
     - New caregiver is added with the specified details.
     - The list reflects the addition, showing Jane Smith as a caregiver.
@@ -923,20 +900,20 @@ testers are expected to do more *exploratory* testing.
 ### Linking and Deleting Links
 
 1. **Linking a Patient and Caregiver**
-  - **Prerequisites**: Ensure two persons, one with NRIC `S1234567D` (patient) and `S2345678E` (caregiver), exist in the list.
-  - **Test case**: `link patient/S1234567D caregiver/S2345678E`
+  - **Prerequisites**: Ensure two persons, one with NRIC `S1234567D` (patient) and `S2345678H` (caregiver), exist in the list.
+  - **Test case**: `link patient/S1234567D caregiver/S2345678H`
   - **Expected**:
     - Link is created between the patient and caregiver.
     - Success message confirms the link.
 
 2. **Deleting a Link**
-  - **Test case**: `deletelink patient/S1234567D caregiver/S2345678E`
+  - **Test case**: `deletelink patient/S1234567D caregiver/S2345678H`
   - **Expected**:
     - Link between the specified patient and caregiver is removed.
     - Success message confirms the deletion.
 
 3. **Invalid Link Command**
-  - **Test case**: `link patient/S0000000J caregiver/S2345678E`
+  - **Test case**: `link patient/S0000000J caregiver/S2345678H`
   - **Expected**:
     - Error message indicating that the patient does not exist.
 
