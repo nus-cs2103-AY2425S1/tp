@@ -35,7 +35,7 @@ public class AddPropertyToSellCommand extends Command {
             + PREFIX_SELLING_PRICE + "165000000 "
             + PREFIX_POSTAL_CODE + "567510 "
             + PREFIX_UNIT_NUMBER + "10-65 "
-            + PREFIX_TAG + "Extremely spacious "
+            + PREFIX_TAG + "spacious "
             + PREFIX_TAG + "Near MRT";
 
     public static final String MESSAGE_SUCCESS = "New property added: \n%1$s";
