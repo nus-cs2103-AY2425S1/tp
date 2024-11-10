@@ -415,3 +415,38 @@ TechConnect assists students in managing and organizing their internship and job
    
     - **Edge Case**: Searching for non-existent terms should display a "There is no company that suits your keyword!" message.
 ---
+
+## **Appendix: Effort**
+
+### Difficulty Level
+
+The project was moderately challenging due to the complexity of working on an already existing codebase. Extending from AB3, our project consists of more functionalities which proved to be tougher to integrate together due to the increased complexity of the data model and interactions
+
+### Challenges Faced
+
+1. **Understanding complex codebase**: Given that this was a brownfield project, it posed a significant challenge to understand the existing codebase before we could proceed with adding the new features.
+2. **Testing**: It was not easy to implement new features as doing so would cause existing tests to fail sometimes.
+3. **Designing the user interface**: There was a need to ensure that the features we implemented integrated smoothly with the JavaFX UI components.
+
+### Effort Required
+
+The following areas required significant effort in the project:
+
+1. **Familiarizing with existing codebase**: It was crucial to understand how the initial developers worked on AB3 in order to ensure that the features we implement will work in tandem with the existing functionalities.
+2. **Documentation**: There was a need to produce comprehensive documentations for both developers to explain how the application functioned internally, and a user guide to explain to users on how to use the application in its intended way.
+3. **Testing**: There was a need to write tests to sufficiently cover the code that we have written to minimise the chances of bugs.
+
+### Achievements
+
+We managed to develop an application that achieves the goal of our project. The application is well-suited for its purpose of keeping track of companies and provides a user-friendly interface. The tests that was written have also allowed us to minimise the number of bugs, ensuring that any invalid inputs is handled in an appropriate manner.
+
+### Reuse and Effort Savings
+
+There were some efforts that was saved by reusing parts from the existing AB3 codebase.
+
+1. **UI Components**: The existing AB3 user interface aligned with our goals, and most of it was retained. Only slight modifications were made to include the UI of new features.
+2. **Command Parsers**: Our team adapted the existing parsing logic from AB3 to handle the additional commands that we added to the project.
+
+The reuse of these parts helped us to save time and focus more on refining the new features that we decided to implement. Overall, approximately 15% of the total effort was saveed.
+
+---
