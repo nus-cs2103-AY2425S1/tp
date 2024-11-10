@@ -355,7 +355,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-  Use case ends.
+  
+   Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. BlitzBiz shows an error message.
@@ -446,16 +447,16 @@ Preconditions: User has deleted a contact
 * 1a. The user did provide all required fields or entered a wrong field.
     *  1a1. BlitzBiz displays an error message.
     *   1a2. User enters new command.
-    *   Steps 3a1-3a2 are repeated until the command format entered is correct.
+    *   Steps 1a1-1a2 are repeated until the command format entered is correct.
      
-    Use case resumes from step 4.
+    Use case resumes from step 2.
 
 * 1b. The new tag does not follow requirements.
     *  1a1. BlitzBiz displays an error message.
     *   1a2. User enters new command with new tag.
     *   Steps 1a1-1a2 are repeated until the new tag entered is valid.
      
-    Use case resumes from step 4.
+    Use case resumes from step 2.
 
 * 2a. There are no tags with the old tag name.
     *  2a1. BlitzBiz informs the user that there were no matches found.
@@ -529,6 +530,7 @@ Preconditions: User has deleted a contact
 * 1a. User did not enter order to sort by.
     *  1a1. BlitzBiz will sort by ascending order by default.
 
+    Use case ends.
 * 1b. User requested to sort by both name or schedule or did not provide a field to sort by.
     * 1b1. BlitzBiz displays error message.
     * 1b2. User enters again with only one field to sort by.
