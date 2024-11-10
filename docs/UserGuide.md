@@ -19,19 +19,19 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 
 1. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.5). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
 
-1. Copy the file to the folder you want to use as the _home folder_ for MediContact. We recommend naming this folder `MediContact`. Place `MediContact.jar` in this folder.
+1. Copy the file to the folder you want to use as the _home folder_ for MediContact. We recommend naming this folder `MediContact`. Place `MediContact.jar` in this folder.<br>
 
-   <img src="images/quickStart.png" width="800"/>
+   <img src="images/quickStart.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 1. Open a command terminal (called `Terminal` on MacOS and `Command Prompt` on Windows). Change directory into the folder you put the jar file in using the command `cd`. For example, if you created your home folder `MediContact` in your Desktop type `cd Desktop/MediContact`. If you created your home folder `MediContact` in Documents, type `cd Documents/MediContact`. If you named your home folder some other FILENAME, replace `MediContact` with filename. 
 
-1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory.
+1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory.<br>
 
-   <img src="images/quickStart1.png" width="800"/>
+   <img src="images/quickStart1.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   <img src="images/Ui.png" width="800"/>
+   <img src="images/ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 1. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -89,32 +89,50 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 
 Adds a person to the address book.
 
-**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT] [t/TAG]…​`
+**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/FUTURE APPOINTMENT]…​ [t/TAG]…​`
 
 - `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long.
 - `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any.
+- `ADDRESS` must not contain any of the prefixes (e.g. `\n`, `\ap`) and must not begin with a space.
 - `AGE` must only contain characters 0-9 and must be 1-3 digits long.
 - `SEX` must only contain alphanumeric characters.
-- `APPOINTMENT` should be in the format **dd/MM/yyyy HHmm**.
+- `FUTURE APPOINTMENT` should be in the format **dd/MM/yyyy HHmm** and be after your current time.
+- `TAG` must only contain alphanumeric characters.
 
 <box type="tip" seamless>
 
 **Remarks**: 
 
-- Duplicate names are not permitted. Addressbook cannot contain two `John Doe` or a `Betsy Crowe` and a `betsy crowe`
+- Duplicate **names** are not permitted. MediContact cannot contain two `John Doe` or a `Betsy Crowe` and a `betsy crowe`
 
 - A person can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
 
-- A person can have any number of appointments (including 0).
+- A person can have any number of future appointments (including 0).
+
+- A person's sex is not limited to Male/Female/Other to provide you with more flexibility.
+
+- A person aged 0 is allowed for accurate tracking of a newborns age. 
+
+- There is also a higher age limit of 999 to provide you with more flexibility.
+
+- Duplicate phone numbers are allowed for cases like parents and children sharing a same number.
+
+- Fields in square brackets (e.g. `[ap/FUTURE APPOINTMENT]`) are optional.
 
   </box>
 
 **Examples**:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/40 s/Male`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
-* `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
+* `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2025 1100`
 
-<img src="images/addEvie.png" width="800">
+**Input**<br>
+
+<img src="images/addCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/addCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -181,11 +199,17 @@ Deletes the specified person from the address book.
 
 **Examples**:
 
-* `list` followed by `delete Alex Yeoh` followed by clicking `OK `deletes the person with name `Alex Yeoh` in the address book.
+* `list` followed by `delete Evie Sage` followed by clicking `OK `deletes the person with name `Evie Sage` in the address book.
 * `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st person in the results of the `find` command.<br>
 
-<img src="images/deleteExpected.png" width="800">
+**Input**<br>
+
+<img src="images/deleteCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/deleteCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -196,23 +220,41 @@ Deletes the specified person from the address book.
 
 Edits an existing person in the address book.
 
-**Format**: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…​`
+**Format**: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/FUTURE APPOINTMENT]…​ [t/TAG]…​`
 
 * Edits the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags/appointments, the existing tags/appointments of the person will be added i.e adding of tags is cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* You can remove all the person’s appointments by typing `ap/` without
-  specifying any appointments after it.
-* Currently, editing of specific tags and appointments are not possible. To work around this, you can clear their respective fields and add the new tags/appointments.
+
+<box type="tip" seamless>
+
+**Remarks**:
+
+- Fields in square brackets (e.g. `[ap/FUTURE APPOINTMENT]`) are optional.
+
+- Edited appointments are meant to be future appointments. If you would like to add previous appointments, please use the **Note command**.
+
+- When editing tags/appointments, the existing tags/appointments of the person will be added i.e adding of tags is cumulative.
+
+- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+
+- You can remove all the person’s future appointments by typing `ap/` without specifying any appointments after it.
+
+- Currently, editing of specific tags and appointments are not possible. To work around this, you can clear their respective fields and add the new tags/appointments.
+
+</box>
 
 **Examples**:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit John Doe n/Betsy Crower t/ ap/` Edits the name of John Doe to be `Betsy Crower` and clears all existing tags and appointments.
 
-<img src="images/editJohn.png" width="800">
+**Input**<br>
+
+<img src="images/editCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/editCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -237,7 +279,7 @@ Exits the program.
 
 Filter persons whose age and/or appointment dates are within the specified range.
 
-**Format**: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`
+**Format**: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]…​`
 
 * The order of the keywords does not matter.
 * Only appointment dates and/or age group and/or tags can be used to filter.
@@ -250,19 +292,32 @@ Filter persons whose age and/or appointment dates are within the specified range
 * Persons must within all specified ranges to be returned if both age and appointment dates are specified (i.e. `AND` search).
   e.g. `filter b/70-99 ap/01/01/2025 - 01/01/2026` will return `Roy b/87 ap/11/11/2025`.
 
+<box type="tip" seamless>
+
+**Remarks**:
+
+- Fields in square brackets (e.g. `[t/TAG]`) are optional.
+
+</box>
+
 **Examples**:
 * `filter b/70-79`
 * `filter ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`<br>
 
-<img src="images/filterResult.png" width="800">
+**Input**<br>
+
+<img src="images/filterCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/filterCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
 <br>
 <br>
-
 
 ### Locating persons by name or phone number: `find`
 
@@ -278,6 +333,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hay Bo` will return `Hayley Gruber`, `Bo Yang`,
         `Hay 874` will return contacts `Hayley p/99999999`, `Bons p/87444444`
 
+**Remarks**:
+
+- Fields in square brackets (e.g. `[MORE_KEYWORDS]`) are optional.
+
+</box>
+
 Examples:
 * `find John` returns `john` and `Johnny Doe`
 
@@ -285,7 +346,13 @@ Examples:
 
 * `find olive 87438` returns `87438807`, `Charlotte Oliveiro`
 
-<img src="images/findResult.png" width="800">
+**Input**<br>
+
+<img src="images/findCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/findCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -435,7 +502,13 @@ Shows an alphabetically sorted list of all persons in the address book.
 * No other parameters should be supplied.
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
-<img src="images/listResult.png" width="800">
+**Input**<br>
+
+<img src="images/listCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/listCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -452,7 +525,13 @@ Shows a list of all starred persons in the address book.
 * No other parameters should be supplied aside from `*`.
 * You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
 
-<img src="images/listStarResult.png" width="800">
+**Input**<br>
+
+<img src="images/listStarCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/listStarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -463,39 +542,73 @@ Shows a list of all starred persons in the address book.
 
 Edits an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
 
-**Format**: `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…​`
+**Format**: `note NAME [ap/PREVIOUS APPOINTMENTS] [m/MEDICATION] [r/REMARK]…​`
 
-* Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
-* At least one of the fields must be provided.
-* When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
-* You can remove all the person’s appointments by typing `ap/` without
-  specifying any appointments after it.
-* You can remove all the person’s medications by typing `m/` without
-    specifying any medications after it.
-* You can remove all the person’s remarks by typing `r/` without
-    specifying any remarks after it.
+- Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
+- `PREVIOUS APPOINTMENT` should be in the format **dd/MM/yyyy HHmm** and be **before** your current time.
+- Both `MEDICATIONS` and `REMARKS` must only alphanumerical characters.
+
+<box type="tip" seamless>
+
+**Remarks**:
+
+- Fields in square brackets (e.g. `[r/REMARK]`) are optional.
+
+- At least one of the fields must be provided.
+
+- When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
+
+- You can remove all the person’s previous appointments by typing `ap/` without specifying any appointments after it.
+
+- You can remove all the person’s medications by typing `m/` without specifying any medications after it.
+
+- You can remove all the person’s remarks by typing `r/` without specifying any remarks after it.
+
+</box>
 
 **Examples**:
 *  `note John Doe ap/01/01/2023 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
-<img src="images/noteResult.png" width="800">
+**Input**<br>
+
+<img src="images/noteCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/noteCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
 <br>
 <br>
 
+
 ### Sorting list based on Appointment Dates : `sort`
 
-Sorts the persons in the address book on the basis of their appointment dates. Any contacts without appointments will 
-remain sorted alphabetically at the end of the list.
+Sorts the persons in the address book on the basis of their earliest appointment dates.
 
 **Format**: `sort`
 
 * No other parameters should be supplied.
 
-<img src="images/sortResult.png" width="800">
+<box type="tip" seamless>
+
+**Remarks**:
+
+- If contacts share an appointment timing, they will be sorted alphabetically by name.
+
+- Any contacts without appointments will remain sorted alphabetically at the end of the list.
+
+</box>
+
+**Input**<br>
+
+<img src="images/sortCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/sortCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -519,7 +632,13 @@ Stars the specified person from the address book into favourites.
 * `list` followed by `star 2` stars the 2nd person in the address book.
 * `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
 
-<img src="images/starResult.png" width="800">
+**Input**<br>
+
+<img src="images/starCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/starCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -544,7 +663,13 @@ Unstars the specified person from the address book removing them from favourites
 * `list` followed by `unstar 2` unstars the 2nd person in the address book.
 * `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
 
-<img src="images/unstarResult.png" width="800">
+**Input**<br>
+
+<img src="images/unstarCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/unstarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -569,7 +694,13 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 *  `view John Doe`
 *  `view 1` shows all details of the 1st person's details including notes.
 
-<img src="images/viewResult.png" width="800">
+**Input**<br>
+
+<img src="images/viewCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/viewCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 [Return to Table of Contents](#medicontact)
 
@@ -665,21 +796,21 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Summary of parameter constraints
 
-| Parameter              | Constraints                                                  |
-| ---------------------- | ------------------------------------------------------------ |
-| **Address**            | Should not be blank. Should not begin with a whitespace.<br>Valid example: `2042 Balotony street #05-03` |
-| **Age**                | Should only contain numbers. Should be 1-3 digits long.<br>Valid example: `103` |
-| **Appointment**        | Should be in the form dd/mm/yyyy hhmm. Should be dates in the future.<br>Valid example: `12/02/2040 1600` |
+| Parameter              | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ---------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Address**            | Should not be blank. Should not begin with a whitespace. Should not contain any prefixes.<br>Valid example: `2042 Balotony street #05-03`                                                                                                                                                                                                                                                                                                             |
+| **Age**                | Should only contain numbers. Should be 1-3 digits long.<br>Valid example: `103`                                                                                                                                                                                                                                                                                                                                                                       |
+| **Appointment**        | Should be in the form dd/mm/yyyy hhmm. Should be dates in the future.<br>Valid example: `12/02/2040 1600`                                                                                                                                                                                                                                                                                                                                             |
 | **Email**              | Should be in the form local-part@domain. Local-part should only contain alphanumeric characters or these special characters `+_.-`. Domain should be made up of doman labels separated by periods. Domain name should end with a domain label at least 2 characters long. Domain label should start and end with alphanumeric characters. Domain label should consist of alphanumeric characters or hyphens.<br>Valid example: `alexyeoh24@gmail.com` |
-| **Filename**           | Should match the filename of desired import file exactly. Should end in `.json`.<br>Valid example: `PatientRecords.json` |
-| **Index**              | Should be a positive integer. Should match to an index displayed in the contacts list.<br>Valid example: `1` (if there is at least one contact in the contacts list) |
-| **Keyword**            | Should be alphanumeric (since only name and phone number is searched).<br>Valid example: `alex yeoh` |
-| **Name**               | Should be alphanumeric. Should not be blank.<br>Valid example: `Alex Yeoh` |
-| **Note (Appointment)** | Should be in the form dd/mm/yyyy hhmm. Should be dates in the past.<br/>Valid example: `12/02/2023 1600` |
-| **Note (Medication)**  | Should be alphanumeric.<br>Valid example: `Ibuprofen`        |
-| **Note (Remark)**      | Should be alphanumeric.<br>Valid example: `Recurring appointment on Tuesdays` |
-| **Phone number**       | Should only contain numbers. Should be exactly 8 digits long.<br>Valid example: `12345678` |
-| **Sex**                | Should be alphanumeric. Should not be blank.<br>Valid example: `Female` |
-| **Tags**               | Should be alphanumeric.<br>Valid example: `Patient`          |
+| **Filename**           | Should match the filename of desired import file exactly. Should end in `.json`.<br>Valid example: `PatientRecords.json`                                                                                                                                                                                                                                                                                                                              |
+| **Index**              | Should be a positive integer. Should match to an index displayed in the contacts list.<br>Valid example: `1` (if there is at least one contact in the contacts list)                                                                                                                                                                                                                                                                                  |
+| **Keyword**            | Should be alphanumeric (since only name and phone number is searched).<br>Valid example: `alex yeoh`                                                                                                                                                                                                                                                                                                                                                  |
+| **Name**               | Should be alphanumeric. Should not be blank.<br>Valid example: `Alex Yeoh`                                                                                                                                                                                                                                                                                                                                                                            |
+| **Note (Appointment)** | Should be in the form dd/mm/yyyy hhmm. Should be dates in the past.<br/>Valid example: `12/02/2023 1600`                                                                                                                                                                                                                                                                                                                                              |
+| **Note (Medication)**  | Should be alphanumeric.<br>Valid example: `Ibuprofen`                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Note (Remark)**      | Should be alphanumeric.<br>Valid example: `Recurring appointment on Tuesdays`                                                                                                                                                                                                                                                                                                                                                                         |
+| **Phone number**       | Should only contain numbers. Should be exactly 8 digits long.<br>Valid example: `12345678`                                                                                                                                                                                                                                                                                                                                                            |
+| **Sex**                | Should be alphanumeric. Should not be blank.<br>Valid example: `Female`                                                                                                                                                                                                                                                                                                                                                                               |
+| **Tags**               | Should be alphanumeric.<br>Valid example: `Patient`                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 [Return to Table of Contents](#medicontact)
