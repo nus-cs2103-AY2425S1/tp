@@ -6,8 +6,16 @@ pageNav: 3
 
 # ClientGrid User Guide
 
-ClientGrid is an address book targeted for English-speaking real estate agents within Singapore to efficiently manage client contacts, properties and meeting schedule. It provides a streamlined way to organize these data while maintaining core address book functionality. The default language of communication in ClientGrid is English.
+ClientGrid is an address book targeted for English-speaking real estate agents handling residential properties within Singapore. It is used to efficiently manage client contacts, properties and meeting schedule by providing a streamlined way to organize these data while maintaining core address book functionality.
 
+<box type="info" seamless>
+
+**CLientGrid Context TLDR:**<br>
+
+* The app is designed specifically for the Singapore residential property market only.
+* The default language of communication is English. Using other languages may produce errors or unexpected results.
+* All monetary values are in Singapore Dollars (SGD) by default.
+</box>
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -58,8 +66,14 @@ ClientGrid is an address book targeted for English-speaking real estate agents w
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. In `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`, `BUYER_NAME` is a parameter which can be used as `addbuyer n/John p/81234567 e/john@gmail.com`.
 
+* Items in square brackets are optional.<br>
+  e.g. `t/TYPE [lte/MATCHING_PRICE]` can be used as `t/HDB lte/300` or `t/HDB`.
+
 * Parameters can be in any order.<br>
   e.g. If the command specifies `n/BUYER_NAME e/BUYER_EMAIL p/BUYER_PHONE_NUMBER`, `e/BUYER_EMAIL p/BUYER_PHONE_NUMBER n/BUYER_NAME` is also acceptable.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
+  e.g. If the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -222,7 +236,7 @@ Adds a specified property into the property book of ClientGrid.
 
 Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 
-* Adds a property of `TYPE` with the specified `POSTAL_CODE` and `UNIT_NUMBER` with seller's `ASK` price (in thousands) and buyer's `BID` price (in thousands).
+* Adds a property of `TYPE` with the specified `POSTAL_CODE` and `UNIT_NUMBER` with seller's estimated `ASK` price (in thousands) and buyer's estimated `BID` price (in thousands).
 * The `POSTAL_CODE` must be a non-negative integer and contain exactly 6 numeric characters.
 * The `UNIT_NUMBER` must contain numbers delimited by a dash, and numbers on either side of the dash must be at least 2 characters long with no excess padding. The range of numbers on the **left hand side** of the dash is [00-148] and the **right hand side** is [00-111110].
 * The `TYPE` must be one of the following values (case-insensitive): `HDB`, `CONDO`, or `LANDED`.
@@ -231,7 +245,7 @@ Format: `addproperty c/POSTAL_CODE u/UNIT_NUMBER t/TYPE a/ASK b/BID`
 
 <box type="info" seamless>
 
-**Note:**
+**Property Duplication:**
 No duplicate properties are allowed. Duplicate properties are checked based on:
 
 1. if at least one of the two properties are `LANDED`, then the comparison is done based on postal code.
@@ -243,8 +257,12 @@ No duplicate properties are allowed. Duplicate properties are checked based on:
 **Unit Defaults:**
 The Unit parameter for `LANDED` properties will default to `00-00` regardless of the unit value placed. This is because, a landed property is not segmented into multiple apartments and therefore, deemed to be a unit in itself.
 
+**Padding In Unit:**
+ClientGrid follows Singapore’s convention of padding unit numbers with `0`. Single-digit numbers require a leading `0` (e.g. `08-12` instead of `8-12`). 
+For numbers with two or more non-zero digits, avoid extra padding with `0` (e.g. `18-12` instead of `018-12`).
+
 **Ask And Bid Prices:**
-Ask and Bid prices cannot be less than $1 (thousand) as the prices of almost all properties in Singapore are at least in the thousands.
+Since property prices in Singapore typically start in the thousands, `Ask` and `Bid`  prices will be calculated in increments of $1 (thousand) to provide agents with a quick estimated value without focusing on smaller denominations. Therefore, prices less than $1 (thousand) will round down to $0 (thousand) as any smaller denominations are considered negligible.
 </box>
 
 Examples:
@@ -265,13 +283,17 @@ Format: `filterproperty [t/TYPE] [gte/MATCHING_PRICE] [lte/MATCHING_PRICE]`
 <box type="definition" seamless>
 
 **Matching Price:** The true price of the property given by the average of the property's lowest `ASK` price and highest `BID` price.
+
+`gte/`: Means greater than or equal. Sets the lower bound, filtering values greater than and including the specified number.
+
+`lte/`: Means lesser than or equal. Sets the upper bound, filtering values less than and including the specified number.
 </box>
 <box type="warning" seamless>
 
 **Important**
 1. At least one optional prefix needs to be present for any filtering to be possible.
 2. Prices denoted in `gte/` and `lte/` parameters are checked based on the 'AND' condition. For example, `filterproperty gte/500 lte/60000` filters for properties greater than or equal to `$500 (thousand)` and less than or equal to `$60,000 (thousand)`.
-3. Matching Price cannot be less than $1 (thousand) as the prices of almost all properties in Singapore are at least in the thousands.
+3. The filter feature allows flexibility in custom price searches and hence, delivers results on a best effort basis. Thus, an input such as `filterproperty gte/600 lte/500` will simply not return any results.
 </box>
 
 Examples:
@@ -364,7 +386,7 @@ Advanced users are welcome to directly update data by editing these individual f
 **Caution:**
 If your changes to the data files make its format invalid, ClientGrid will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 
-Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, user are cautioned to only edit the data files if you are confident that you can update it correctly.
+Furthermore, certain edits can cause ClientGrid to behave in unexpected ways (e.g. if a value entered is a restriction as defined in the commands above). Therefore, user are cautioned to only edit the data files if you are confident that you can update it correctly.
 </box>
 
 
