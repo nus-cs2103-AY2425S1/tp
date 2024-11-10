@@ -154,31 +154,31 @@ Here will be a basic guide on how to use the application.
 3. **Add a patient**:
    * Type the following command in the command box and press Enter to **add a patient**:
       > `add n/Johnson p/11111111 e/johnson123@gmail.com a/123 Clementi Rd, 1234665 t/Diabetic`
-   * This example command adds a new patient named `Johnson` with phone number `11111111`, email `johnson123@gmail.com`, address `123 Clementi Rd, 1234665` and tagged as `Diabetic` to the system!
+   * This example command adds a new patient named `Johnson` with phone number `11111111`, email `johnson123@gmail.com`, address `123 Clementi Rd, 1234665` and tagged as `Diabetic` to NovaCare!
 <br></br>  
 
 4. **Edit patient information**:
    * Type the following command in the command box and press Enter to **edit a patient's information**:
       > `edit 1 p/91234567`
-   * This example command edits the phone number of patient at index 1 of the addressbook, in this case being the patient `Johnson` who was just added!
+   * This example command edits the phone number of patient at index 1 of NovaCare, in this case being the patient `Johnson` who was just added!
 <br></br>
 
 5. **Delete a patient**:
    * Type the following command in the command box and press Enter to **delete a patient**:
       > `delete 1
-   * This example command deletes the patient at index 1 of the addressbook!
+   * This example command deletes the patient at index 1 of NovaCare!
 <br></br>
 
 6. **Add another patient**:
     * Type the following command in the command box and press Enter to **add a patient**:
       > `add n/Lily p/22222222 e/lily@gmail.com a/456 Bishan St, 222222 t/Asthmatic`
-    * This example command adds a new patient named `Lily` with phone number `22222222`, email `lily@gmail.com@gmail.com a/123`, address `456 Bishan St, 222222` and tagged as `Asthmatic` to the system!
+    * This example command adds a new patient named `Lily` with phone number `22222222`, email `lily@gmail.com@gmail.com a/123`, address `456 Bishan St, 222222` and tagged as `Asthmatic` to NovaCare!
 <br></br>
 
 7. **Add a task**:
     * Type the following command in the command box and press Enter to **add a task to the patient**:
        > `addtask 1 d/Eat paracetamol 1000mg`
-    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of the addressbook, in this case being the patient `Lily` who was just added! 
+    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of NovaCare, in this case being the patient `Lily` who was just added! 
 <br></br>
    
 8. **Exit**:
@@ -244,7 +244,7 @@ Otherwise, the command will not be executed and display an error message in Resu
 | **EMAIL**                    | Email of patient                  | * Format must be in `LOCAL-PART@DOMAIN`.<br/> * No space allowed.<br/> * `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> * `LOCAL-PART` local-part may not start or end with any special character.<br/> * `DOMAIN` must be at least 2 characters long, start and end with alphanumeric characters.<br/>* In the event where email is unknown, please key in `unknown@x.com` as email, you can edit this later. This serves as a temporary field, and does not mean anything. | :white_check_mark: `thomasho@gmail.com`<br/>:x: `$thomas@gmail.com`<br/>(`LOCAL-PART` error) |
 | **ADDRESS**                  | Address of patient                | * Address should not be blank.<br/> * Address can take any values.<br/>* In the event where address is unknown, please key in `unknown address` as address, you can edit this later. This serves as a temporary field, and does not mean anything.                                                                                                                                                                                                                                                                                                | :white_check_mark: `123, Clementi Rd, 1234665`<br/>                                          |
 | **TAG**                      | Tag of patient                    | * Tags take alphanumeric and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | :white_check_mark: `high blood pressure`<br/>:x:`low income $`                               |
-| **INDEX**                    | Index of patient on GUI           | * Index should be a positive integer.<br/> * Index should not be blank, and will be auto incremented by the system.                                                                                                                                                                                                                                                                                                                                                                                                                               | :white_check_mark: `1`<br/>:x: `0`                                                           |
+| **INDEX**                    | Index of patient on GUI           | * Index should be a positive integer.<br/> * Index should not be blank, and will be auto incremented by NovaCare.                                                                                                                                                                                                                                                                                                                                                                                                                                 | :white_check_mark: `1`<br/>:x: `0`                                                           |
 | **DESCRIPTION**              | Description of task               | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                             |
 | **PRIORITY_LEVEL**           | Priority level of patient         | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | :white_check_mark: `1`<br/>:x: `4`                                                           |
 
@@ -262,7 +262,7 @@ In NovaCare, these commands will allow you to modify your list of patients to su
 
 #### 6.2.1 Adding a patient: `add`
 
-Adds a patient's details to the system.
+Adds a patient's details to NovaCare.
 
 :pencil: Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -272,7 +272,7 @@ Adds a patient's details to the system.
 * Upon adding a patient the default priority is set to *3*. 
   * Users can change the priority level using the [`priority` command](#6-2-8-adding-priority-level-priority).
 * To update emergency contact details, use the [`emergency` command](#6-2-6-adding-emergency-contact-emergency).
-* A patient will not be added if the name and phone number is already in the system.
+* A patient will not be added if the name and phone number is already in NovaCare.
 * Refer to [Parameter information](#6-1-parameter-information) for the limitations of each parameter.
 * As mentioned in [Parameter information](#6-1-parameter-information), our team recommends users to use the specific filler fields for unknown phone/email/address fields. Using your own fields in place is allowed in this version, but will be subjected to your **own risk** of **data loss** or **inaccuracy**. **Please proceed with caution**.
 </box>
@@ -287,36 +287,44 @@ Adds a patient's details to the system.
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into the system.
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tags as `Diabetic` to the system.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into NovaCare.
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tags as `Diabetic` to NovaCare.
 * `add n/Jarell p/000 e/unknown@x.com a/unknown address` adds a patient named `Jarell` with phone number `000`, email `unknown@x.com`, address `unknown address` and no tags. As mentioned in [Parameter information](#6-1-parameter-information), phone/email/address fields are unknown, hence they are filled with the recommended filler fields.
 
-Expected output:
+Expected output (First example):
 ```
-New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
-New person added: Betsy Crowe; Phone: 1234567; Email: betsycrowe@example.com; Address: Blk 50 Tampines Street 21, #08-281; Tags: [Diabetic]
-New person added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown address; Tags: 
+New patient added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: John street, block 123, #01-01; Tags: 
+```
+
+Expected output (Second example):
+```
+New patient added: Betsy Crowe; Phone: 1234567; Email: betsycrowe@example.com; Address: Blk 50 Tampines Street 21, #08-281; Tags: [Diabetic]
+```
+
+Expected output (Third example):
+```
+New patient added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown address; Tags: 
 ```
 <br>
 
 #### 6.2.2 Listing all patients: `list`
 
-Shows a list of all patients in the system.
+Shows a list of all patients in NovaCare.
 
 :pencil: Format: `list`
 
 Example:
-* `list` lists and displays all the patients in the system.
+* `list` lists and displays all the patients in NovaCare.
 
 Expected output:
 ```
-Listed all persons
+Listed all patients
 ```
 <br>
 
 #### 6.2.3 Editing a patient: `edit`
 
-Edits an existing patient's details in the system.
+Edits an existing patient's details in NovaCare.
 
 :pencil: Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -335,10 +343,14 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-Expected output:
+Expected output (First example):
 ```
-Edited Person: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
-Edited Person: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
+Edited patient: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+```
+
+Expected output (Second example):
+```
+Edited patient: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
 ```
 <br>
 
@@ -359,13 +371,12 @@ Finds patients whose name contains any of the given keywords.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 </box>
 
-Examples:
-* `find John` returns any patient that has the name John inside, for instance `john` and `John Doe`
+Example:
 * `find alex david` returns any patient with names containing either "Alex" or "David". This means it will return any patient whose name includes either "Alex" or "David" as part of their name, for instance, `Alex Yeoh` or `David Li`<br>
 
 Expected output:
 ```
-2 persons listed!
+2 patients listed!
 ```
 You should see something like this:<br></br>
 ![result for 'Find_Patient_Example'](images/FindPatientExample.png)
@@ -373,7 +384,7 @@ You should see something like this:<br></br>
 
 #### 6.2.5 Deleting a patient: `delete`
 
-Deletes the specified patient and tasks associated to that patient from the system.
+Deletes the specified patient and tasks associated to that patient from NovaCare.
 
 :pencil: Format: `delete INDEX`
 
@@ -385,19 +396,18 @@ Deletes the specified patient and tasks associated to that patient from the syst
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the system.
-* `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
+Example:
+* `delete 1` deletes the 1st-indexed patient in the patient list.
 
 Expected output:
 ```
-Deleted Person: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+Deleted Patient: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
 ```
 <br>
 
 #### 6.2.6 Adding emergency contact: `emergency`
 
-Adds an emergency contact and details to a patient in the system.
+Adds an emergency contact and details to a patient in NovaCare.
 
 :pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 
@@ -420,7 +430,7 @@ Added emergency contact to John Doe: Tom Tan, 91237171
 
 #### 6.2.7 Deleting emergency contact: `deleteemergency`
 
-Deletes an emergency contact and its details from a patient in the system.
+Deletes an emergency contact and its details from a patient in NovaCare.
 
 :pencil: Format: `deleteemergency INDEX`
 
@@ -443,7 +453,7 @@ Removed emergency contact (Tom Tan, 91237171) from John Doe
 
 #### 6.2.8 Adding priority level: `priority`
 
-Adds a priority level to a patient in the system.
+Adds a priority level to a patient in NovaCare.
 
 :pencil: Format: `priority INDEX l/PRIORITY_LEVEL`
 
@@ -468,7 +478,7 @@ Priority level 2 successfully set for John Doe
 
 #### 6.2.9 Deleting priority level: `deletelevel`
 
-Delete a priority level to a patient in the system, resetting it to the default value **3**.
+Delete a priority level to a patient in NovaCare, resetting it to the default value **3**.
 
 :pencil: Format: `deletelevel INDEX` or `priority INDEX l/reset`
 
@@ -485,7 +495,7 @@ Examples:
 * `deletelevel 1` deletes priority level of the 1st-indexed patient in the patient list.
 * `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3.
 
-Expected output:
+Expected output (First and second examples):
 ```
 Priority level reset to default for John Doe
 ```
@@ -498,7 +508,7 @@ In NovaCare, these commands will allow you to modify your list of tasks, with ea
 
 #### 6.3.1 Adding a task: `addtask`
 
-Adds a task to a patient in the system.
+Adds a task to a patient in NovaCare.
 
 :pencil: Format: `addtask INDEX d/DESCRIPTION`
 
@@ -516,20 +526,20 @@ Adds a task to a patient in the system.
 * **Please proceed with caution when describing tasks to be added to avoid conflict.**
 
 Examples:
-* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd-indexed patient in the system.
+* `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd-indexed patient in NovaCare.
 * `find John doe` followed by `addtask 1 d/Clear Diapers` adds a task `Clear Diapers` to the 1st-indexed patient in the resultant list produced from the `find` command.
 
-Expected output (First example):
+Expected outputs (First example):
 ```
-Listed all persons
+Listed all patients
 New task added: Eat paracetamol 1000mg
 ```
 You should see something like this:<br></br>
 ![result for 'Add_Task_Example_1'](images/AddTaskExample1.png)
 
-Expected output (Second example):
+Expected outputs (Second example):
 ```
-1 persons listed!
+1 patients listed!
 New task added: Clear Diapers
 ```
 You should see something like this:<br></br>
@@ -538,7 +548,7 @@ You should see something like this:<br></br>
 
 #### 6.3.2 Deleting a task: `deletetask`
 
-Deletes a task for a patient in the system.
+Deletes a task for a patient in NovaCare.
 
 :pencil: Format: `deletetask INDEX`
 
@@ -622,12 +632,12 @@ Expected output:
 
 #### 6.3.6 Listing Tasks: `listtask`
 
-List all tasks for all patients in the system.
+List all tasks for all patients in NovaCare.
 
 :pencil: Format: `listtask`
 
 Example:
-* `listtask` lists and displays all tasks in the system.
+* `listtask` lists and displays all tasks in NovaCare.
 
 Expected output:
 ```
@@ -637,12 +647,12 @@ Listed all tasks
 
 #### 6.3.7 Listing Incomplete Tasks: `listincomplete`
 
-List all incomplete tasks for all patients in the system.
+List all incomplete tasks for all patients in NovaCare.
 
 :pencil: Format: `listincomplete`
 
 Example:
-* `listincomplete` lists and displays all incomplete tasks in the system.
+* `listincomplete` lists and displays all incomplete tasks in NovaCare.
 
 Expected output:
 ```
@@ -693,7 +703,7 @@ Example:
 
 Expected output:
 ```
-Address book has been cleared!
+NovaCare has been cleared!
 ```
 <br>
 
