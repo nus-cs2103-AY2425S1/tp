@@ -28,8 +28,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 ### Architecture
-
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280"/>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -54,8 +53,7 @@ The bulk of the app's work is done by the following four components:
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
-
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574"/>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -63,15 +61,13 @@ Each of the four main components (also shown in the diagram above),
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
-
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300"/>
 
 The sections below give more details of each component.
 
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
-
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -90,7 +86,6 @@ The `UI` component,
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
-
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
@@ -111,7 +106,6 @@ How the `Logic` component works:
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
@@ -120,6 +114,7 @@ How the parsing works:
 
 Finally, the `Logic` contains the important `Command` classes. Some command classes from AB3 have been retained:
 <puml src="diagrams/CommandClassesOriginal.puml" width="600"/>
+
 
 However, there are new classes implemented for CampusConnect as well:
 <puml src="diagrams/CommandClasses.puml" width="600"/>
@@ -132,9 +127,7 @@ The structure is simple:
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
-
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
 
 The `Model` component,
 
@@ -146,7 +139,6 @@ The `Model` component,
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CampusConnect`, which `Person` references. This allows `CampusConnect` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
@@ -155,7 +147,6 @@ The `Model` component,
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
-
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
@@ -189,15 +180,12 @@ These operations are exposed in the `Model` interface as `Model#saveCurrentCampu
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedCampusConnect` will be initialized with two stacks.
-
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the CampusConnect. The `delete` command calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
-
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#saveCurrentCampusConnect()`, causing the modified state of the CampusConnect after the `delete 5` command executes to be displayed and the old state of CampusConnect to be saved to the history.
-
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
@@ -207,7 +195,6 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 </box>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCampusConnect()`, which will save the current CampusConnect state into `future` and pop the latest saved CampusConnect state from the `history`.
-
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
@@ -219,7 +206,6 @@ than attempting to perform the undo.
 </box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
 <puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
 <box type="info" seamless>
@@ -229,7 +215,6 @@ The following sequence diagram shows how an undo operation goes through the `Log
 </box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
-
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 The `redo` command does the opposite — it calls `Model#redoCampusConnect()`, which save current state into `history` and restores the CampusConnect to that state popped from the top of `future`.
@@ -241,15 +226,12 @@ The `redo` command does the opposite — it calls `Model#redoCampusConnect()
 </box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the CampusConnect, such as `list`, will usually not call `Model#saveCurrentCampusConnect()`, `Model#undoCampusConnect()` or `Model#redoCampusConnect()`. Thus, the `history` and `future` remain unchanged.
-
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitCampusConnect()`. All CampusConnectState in the future will be removed. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
-
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
@@ -544,63 +526,13 @@ testers are expected to do more *exploratory* testing.
 1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
 
-### Categorizing a tag
-
-1. Categorizing an existing tag
-   1. Prerequisites: Ensure that the tag `CS2103` exists and is under a category other than `Academics` (Gold).
-   2. Test case: `cattag t/CS2103 acads` </br>
-      Expected: Success message is shown. All occurrences of the tag `CS2103` in the person list on the bottom left and tag list on the bottom right are set to `Academics` category. Colour of tag `CS2103` set to Gold.
-2. Attempting to categorize a non-existent tag
-   1. Prerequisites: Ensure that tag `A` does not exist yet.
-   2. Test case: `cattag t/A activity` </br>
-      Expected: Error message "`Tag not found: [A]`" is shown, indicating that tag `A` does not exist.
-3. Attempting to categorize to an invalid category
-   1. Prerequisites: Ensure that tag `CS2103` is still present.
-   2. Test case: `cattag t/CS2103 foo` </br>
-      Expected: Error message "`Invalid category: foo`" is shown.
-4. Attempting to categorize an **invalid tag** to an **invalid category**
-   1. Prerequisites: Ensure that tag `A` does not exist yet.
-   2. Test case: `cattag t/A foo` </br>
-      Expected: Error message "`Invalid category: foo`" is shown. Message for invalid tag is not shown for this case.
-
-### Undoing the last operation
-
-1. Undoing an execution that modifies the CampusConnect data
-
-   1. Prerequisites: Perform any operation that modifies the state (all executions except for list and find) to ensure there is an action to undo.
-
-   1. Test case: undo 
-      Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action.
-
-   1. Test case: undo immediately after starting the application (with no operations performed)
-      Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
-
-### Adding a tag
-1. Adding a tag while all tags are being shown
-
-   1. Prerequisites: There are 2 person in the list. First person on the list has tag `CS2100`, second person has tags `floortball` and `friends`. 
-
-   1. Test case: `addtag 1 t/CS2040S`<br>
-      Expected: The first person now has 2 tags `CS2100` and `CS2040S`. The tag lists are updated accordingly.
-      
-   1. Test case: `addtag 2 t/homie t/homie`
-      Expected: The second person now has 3 tags `floortball`, `friends` and `homie`. 
-      
-   1. With the following test case:
-      1. `addtag 1 t/CS2040s`
-      1. Test case: `addtag 1 t/CS2030s t/CS2040S`
-      1. Test case: `addtag 0 t/volleyball` <br>
-      1. Test case: `addtag 3 t/homie` <br>
-      1. Test case: `addtag 2` <br>
-         Expected: No new tag added. Error details shown in the status message..
-
 ### Finding a person
 
 1. Finding a person with tags
 
     1. Assumption: Pick any 2 tags (or substring of the tags) present in any contact in the contact list. Call these x and y.
 
-    1. Test case: `find t/x` where `x` is the substring/tag chosen<br> 
+    1. Test case: `find t/x` where `x` is the substring/tag chosen<br>
        Expected: All contacts with tags containing x will be displayed with a success message.
 
     1. Test case: `find t/x t/y` where `x` and `y` are the substrings/tags chosen<br>
@@ -609,14 +541,67 @@ testers are expected to do more *exploratory* testing.
 1. Finding a person with multiple fields
 
     1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
-   
+
     1. Assumption: Pick any name and tag within the same contact. Call these name x and tag y.
-   
+
     1. Test case: `find n/x t/y` where `x` and `y` are the name and tag chosen<br>
        Expected: The contact(s) with name containing x and tags containing y will be displayed with a success message.
 
 1. Other incorrect find commands to try: `find`, `find x` (with no prefix)<br>
    Expected: No filtering of contacts will occur and an error message will be displayed.
+
+### Undoing the last operation
+
+1. Undoing an execution that modifies the CampusConnect data
+
+   1. Prerequisites: Perform any operation that modifies the state (all commands except for list and find) to ensure there is an action to undo.
+
+   1. Test case: undo 
+      Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action.
+
+1. Undo immediately after starting the application
+    
+    1. Prerequisites: CampusConnect has been booted and no command has been input yet.
+    1. Test case: undo
+       Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
+
+### Redoing the last operation
+
+1. Redoing an execution that modifies the CampusConnect data
+
+    1. Prerequisites: Perform any operation that modifies the state (all commands except for list and find) and undo that action.
+
+    1. Test case: redo
+       Expected: The last undone operation is redone, restoring the previous state. The list updates accordingly, and a status message confirms the redo action.
+
+1. Redo immediately after starting the application
+    1. Prerequisites: CampusConnect has been booted and no command has been input yet.
+
+    1. Test case: redo
+          Expected: No redo operation is performed. An error message appears in the status message, indicating there is no action to redo.
+
+1. Redo when no operation has been undone
+    1. Prerequisites: Some commands that affect the state of CampusConnect have been entered but none of them have been redone.
+
+    1. Test case: redo
+       Expected: No redo operation is performed. An error message appears in the status message, indicating there is no action to redo.
+
+### Adding a tag
+1. Adding a tag while all tags are being shown
+
+   1. Prerequisites: There are 2 contacts in the list. First contact on the list has tag `CS2100`, second contact has tags `floortball` and `friends`. 
+
+   1. Test case: `addtag 1 t/CS2040S`<br>
+      Expected: The first contact now has 2 tags `CS2100` and `CS2040S`. The tag list is updated accordingly.
+      
+   1. Test case: `addtag 2 t/homie t/homie`
+      Expected: The second contact now has 3 tags `floortball`, `friends` and `homie`. The tag list is updated accordingly.
+      
+   1. With the following test cases:
+      1. Test case: `addtag 0 t/volleyball` <br>
+      1. Test case: `addtag 3 t/homie` <br>
+      1. Test case: `addtag 2` <br>
+         Expected: No new tags are added. Error message is shown.
 
 ### Deleting a tag from a person
 
@@ -632,6 +617,36 @@ testers are expected to do more *exploratory* testing.
 1. Other incorrect delete tag commands to try: `deltag`, `deltag M t/x` (where M is larger than the list size or smaller than 0), `deltag 1 x`<br>
    Expected: No deleting of tags will occur and an error message will be displayed.
 
+### Categorizing a tag
+
+1. Categorizing an existing tag
+
+    1. Prerequisites: Ensure that the tag `CS2103` exists and is under a category other than `Academics` (Gold).
+   
+    2. Test case: `cattag t/CS2103 acads` </br>
+       Expected: Success message is shown. All occurrences of the tag `CS2103` in the person list on the bottom left and tag list on the bottom right are set to `Academics` category. Colour of tag `CS2103` set to Gold.
+
+2. Attempting to categorize a non-existent tag
+
+    1. Prerequisites: Ensure that tag `A` does not exist yet.
+   
+    2. Test case: `cattag t/A activity` </br>
+       Expected: Error message "`Tag not found: [A]`" is shown, indicating that tag `A` does not exist.
+   
+3. Attempting to categorize to an invalid category
+
+    1. Prerequisites: Ensure that tag `CS2103` is still present.
+   
+    2. Test case: `cattag t/CS2103 foo` </br>
+       Expected: Error message "`Invalid category: foo`" is shown.
+   
+4. Attempting to categorize an **invalid tag** to an **invalid category**
+
+    1. Prerequisites: Ensure that tag `A` does not exist yet.
+   
+    2. Test case: `cattag t/A foo` </br>
+       Expected: Error message "`Invalid category: foo`" is shown. Message for invalid tag is not shown for this case.
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned enhancements**
 
@@ -640,7 +655,9 @@ Team size: 5
 1. Change the font color for tags: Currently, the font color for `GENERAL` tags is grey, making them less noticeable. We plan to use a higher-contrast font color to make tags more prominent and easier to read.
 2. Allow adding overseas phone number: The app currently supports only Singaporean phone number. We aim to expand functionality to include valid international numbers, complete with country codes.
 3. Allow certain special characters: We currently only allow alphanumeric characters and whitespaces. We plan to support additional characters, such as hyphens, to better accommodate real-world naming conventions.
-4. Make duplicate contact error message more specific: : The current error message for duplicate contacts, “This person already exists in CampusConnect,” is too general. We plan to enhance it by specifying the name of the existing contact that duplicates the one the user is attempting to add.
+4. Make duplicate contact error message more specific: The current error message for duplicate contacts, “This person already exists in CampusConnect,” is too general. We plan to enhance it by specifying the name of the existing contact that duplicates the one the user is attempting to add.
+5. Make `find n/`, `find p/` and `find e/` throw an error while `find t/` finds all users with not tags.
+6. Make the result display box slightly larger to accommodate longer error messages.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Future features**

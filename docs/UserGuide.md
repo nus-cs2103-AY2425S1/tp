@@ -307,16 +307,12 @@ CampusConnect data is saved in the hard disk automatically after any command tha
 CampusConnect data is saved automatically as a JSON file `[JAR file location]/data/CampusConnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-
 **Caution:**
 If your changes to the data file makes its format invalid, CampusConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause CampusConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -324,13 +320,25 @@ _Details coming soon ..._
 
 **Q**: How can I add contacts with the same name?<br>
 **A**: If two contacts share the same name, you can differentiate them by adding a number or adjusting the capitalization. For example, use “Mary” and “Mary 2” or “John” and “john” to keep each entry unique.
+
+**Q**: What if I need to use special characters in tags?<br>
+**A**: You can work around this by using hyphens (-) to signify spacing and eliminate all special characters. For example, you can add "Cafe@NUS" as a tag using "Cafe-NUS".
+
+**Q**: Why can't I find fields by whole words? There's too much clutter!<br>
+**A**: We understand the importance of a neat and simple contact list. But, like search engines, we want to give you unparallelled control and flexibility over how you find contacts. As is often said, "It is better 
+to give too much than to not give at all", and we believe that finding by whole words is not enough and gives too little.
+
+**Q**: Why are tags case-sensitive? Now I can just add tags with different cases and clutter up CampusConnect...<br>
+**A**: Again, we want to give you the flexibility to customise your own tags, so we allow this.
+
+**Q**: Why does the tags list not update when I `find` something? <br>
+**A**: Our tags list is meant to span the entire contact list, which can serve as a reference if you require to find a contact to add a specific and easily-forgettable tag to.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
-
+3. **If the value of a field is too long**, the display will not render the full value properly. However, we expect that the average contact will not have such a long name nor require a long tag name.
 
 
