@@ -139,7 +139,7 @@ addi in/INDEX i/INTEREST...
 ```
 
 - `in/INDEX`: Contact's position in the list.
-- `i/INTEREST...`: Interests to add. Can add multiple interests.
+- `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters each.
 
 Example:
 
