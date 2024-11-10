@@ -211,19 +211,6 @@ Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NUMBER] 
 **:information_source: Important:**<br>
 <ul>
 <li>
-</li>
-<li>
-</li>
-<li>
-Not all parameters are compulsory
-</li>
-</ul>
-</div>
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-<ul>
-<li>
 Except for allergies, input values will replace existing values.
 </li>
 <li>
