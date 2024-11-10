@@ -339,6 +339,5 @@ to give too much than to not give at all", and we believe that finding by whole 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **If the value of a field is too long**, the display will not render the full value properly. However, we expect that the average contact will not have such a long name nor require a long tag name.
-4. 
 
 
