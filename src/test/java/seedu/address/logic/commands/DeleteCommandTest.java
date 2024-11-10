@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPatients.KEANU;
 import static seedu.address.testutil.TypicalPatients.getTypicalClinicConnectSystem;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -22,9 +23,14 @@ import seedu.address.model.patient.Patient;
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
+    private Model model;
+    private Nric unregisteredNric;
 
-    private Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
-
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
+        unregisteredNric = new Nric("S1234567A");
+    }
     @Test
     public void execute_validName_success() {
         Patient patientToDelete = KEANU;
@@ -41,10 +47,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
-        Nric invalidNric = new Nric("S1234567A");
-        DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
+        DeleteCommand deleteCommand = new DeleteCommand(unregisteredNric);
 
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, invalidNric));
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, unregisteredNric));
     }
 
     @Test
