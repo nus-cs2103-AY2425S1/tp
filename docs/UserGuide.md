@@ -164,20 +164,15 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
               - `2023-03-33` (March does not have 33 days).
 
 Note:
-1. Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of
-    `Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT`
-    is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
-    If the specified role does not match with the specified field, the add command will be deemed invalid.
+1. **Role-specific fields must match the specified role:**
+    * For `Volunteer`, `h/HOURS` is required.
+    * For `Donor`, `d/DONATED_AMOUNT` is required.
+    * For `Partner`, `ped/PARTNERSHIP_END_DATE` is required.
+    * If the specified role does not match the provided role-specific fields, the `add` command will be deemed invalid.
 2. **Contact Uniqueness**: Contacts are distinguished **by their names only**. This means duplicate names are not allowed in the address book. However, multiple contacts can share the same phone number or email address if their names are unique.
 
 
 <box type="info" seamless>
-
-**Role-specific fields must match the specified role:**
-* For `Volunteer`, `h/HOURS` is required.
-* For `Donor`, `d/DONATED_AMOUNT` is required. 
-* For `Partner`, `ped/PARTNERSHIP_END_DATE` is required. 
-* If the specified role does not match the provided role-specific fields, the `add` command will be deemed invalid.
 
 </box>
 
