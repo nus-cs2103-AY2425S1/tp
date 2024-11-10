@@ -173,11 +173,11 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not be added to `CommandHistory` to be saved as a past command.
+**Note:** If a command fails its execution, it will not be added to the `CommandHistory` object in `LogicManager` to be saved as a past command.
 
 </box>
 
-Step 4. The user now decides that deleting the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will extract the latest command excluding `undo` and call the `undo()` of the latest command.
+Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will extract the latest command excluding `undo` and call the `undo()` of the latest command.
 
 <box type="info" seamless>
 
@@ -266,13 +266,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook displays an error message that suggest what a correct input should look like.
+    * 1a1. SocialBook displays an error message that suggests what a correct input should look like.
 
     * 1a2. User corrects the input and enters the command again.
     
         Steps 1a1-1a2 are repeated until the user enters a correct input.
 
-        Use case ends.
+        Use case resumes from step 2.
 
 * 1b. SocialBook detects a duplicate person entry.
 
@@ -282,7 +282,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Steps 1b1-1b2 are repeated until the user enters a correct input.
   
-        Use case ends.
+        Use case resumes from step 2.
 
 
 **Use case: UC02 - View information of all people**
@@ -314,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Steps 1a1-1a2 are repeated until the user enters a correct input.
 
-      Use case ends.
+      Use case resumes from step 2.
 
 * 1b. SocialBook detects person indicated by input does not exist. 
   
@@ -324,16 +324,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Steps 1b1-1b2 are repeated until the user enters a correct input.
 
-      Use case ends.
+      Use case resumes from step 2.
 
 
-**Use case: Display help manual** 
+**Use case: UC04 - Display help manual** 
 
 **MSS:**
 
 1. User keys in command to open help manual.
 2. SocialBook displays help manual.
-3. User keys in command to close help manual.
+3. User closes help manual.
 4. SocialBook displays previously shown screen.
 	
     Use case ends.
@@ -342,16 +342,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User chooses more detailed manual for specific command.
 
-    * 1a1. SocialBook displays detailed command manual.
-
-    * 1a2. User keys in command to close command manual.
-
-    * 1a3. SocialBook displays previously shown screen.
+    * 1a1. SocialBook displays detailed command instructions.
 
     Use case ends.
 
 	
-**Use case: Edit existing information of a person**
+**Use case: UC05 - Edit existing information of a person**
 
 **MSS:**
 
@@ -367,8 +363,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. SocialBook should not update any fields.
   
     * 1a2. SocialBook displays errors encountered with respect to the field.
-    
-        Use case ends.
+  
+    * 1a3. User corrects the input and enters the command again.
+
+      Steps 1a1-1a3 are repeated until the user enters a correct input.
+
+      Use case resumes from step 2.
 
 
 ### Non-Functional Requirements
@@ -406,9 +406,9 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
-   2. Change directory to the folder the jar file is in.
-
-   1. Run the jar file using `java -jar socialbook.jar`.  Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Change directory to the folder the jar file is in. 
+   3. Run the jar file using `java -jar socialbook.jar`.  
+       Expected: Shows the GUI with a set of sample contacts on the left side of the screen and a day calender on the right side of the screen. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -418,7 +418,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. Shutting down app
-   1. Type in `exit` as the input or click the x on top left of app.
+   1. Type in `exit` as the input or click the x at the top of app.
         Expected: App stops and closes.
 
 ### Deleting a person
