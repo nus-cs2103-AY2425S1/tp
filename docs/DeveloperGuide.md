@@ -543,7 +543,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **API**: Application Programming Interface, a set of programming code that enables data transmission between one software and another
 * **Abstraction and Cohesion**: Abstraction is hiding all but relevant data in order to reduce complexity and increase efficiency. Cohesion is the degree which elements belong together
 * **Version Control System**: Version control is the practice of tracking and managing changes to software code, and there are many version control systems such as Git, Apache Subversion etc
-
+* **JAR**: Java ARchive, a file format based on the popular ZIP file format and is used for aggregating many files into one. Click [here](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html) to find out more.
+* **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
