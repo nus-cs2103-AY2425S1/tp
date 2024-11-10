@@ -291,12 +291,15 @@ the job at index 2 if they were matched beforehand.
 * If `match 1 2` was called previously, calling `unmatch 1 2` will undo the matching
 if the shown list was in the same condition as when the previous command was called.
 
-### Viewing jobs and contacts associated with a company : `view company`
+### Viewing a company's details : `view company`
 
-Views all jobs and contacts currently associated with the specified company.
+Views all jobs and contacts currently associated with the specified company, as well as information about the company. 
+
+![ViewCompanyImage](images/ViewCompanyImage.png)
 
 Format: `view company INDEX`
 
+* Views the information of a company at the specified `INDEX`.
 * Views all contacts and jobs associated with a company at the specified `INDEX`.
 * The index refers to the index number shown in the displayed company list.
 * The index **must be a positive integer** 1, 2, 3, …​
