@@ -383,7 +383,6 @@ Filters and lists persons whose fields match the specified keywords.
 - **Notes**:
     - At least one field must be provided.
     - Parameters can be in any order.
-    - Each field must follow their respective validation.
     - Case-insensitive search.
     - Returns persons matching any of the fields (logical `OR` search).
 - **Field-Specific Matching**:
@@ -391,7 +390,9 @@ Filters and lists persons whose fields match the specified keywords.
     - **Role**: Requires exact role match.
     - **Email**: Requires substring email match.
     - **Phone**: Requires exact number match.
-    - **Address**: Allows partial matches.
+    - **Address**: Requires substring address match.
+  - **Validation**:
+    - Ensure all fields provided meet the criteria specified in the [Validation Rules](#validation-rules).
 - **Examples**:
     - `filter n/John` returns persons with names containing `John`.
     - `filter n/Al Ye` returns persons with names containing both `Al` and `Ye`.
@@ -400,8 +401,8 @@ Filters and lists persons whose fields match the specified keywords.
     - `filter p/91234567` returns the person with phone number `91234567`.
     - `filter n/John r/vendor` returns persons with names containing `John` or with role `vendor`.
     - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".
-      ![Multi-field filter results](images/multi_filter_weddings_unfiltered.png)<br>
-      *`filter n/David r/florist e/mike` Example of filtering results showing matched persons, weddings remain unfiltered*
+      ![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
+      *`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
 
 ---
 
