@@ -455,11 +455,11 @@ _Details coming soon ..._
 | **Log Interaction**     | `log INDEX [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                                |
 | **Add/Edit Remark**     | `remark INDEX r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                               |
 | **View Contact**        | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
-| **Favourite Contact**   | `favourite INDEX`(on not favourited person)<br> e.g., `favourite 123`                                                                                                    |
-| **Unfavourite Contact** | `favourite INDEX`(on already favourited person) <br> e.g., `favourite 123`                                                                                               |
-| **Favourite Contact**   | `favourite`<br> e.g., `favourite`                                                                                                                                        |
-| **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
---------------------------------------------------------------------------------------------------------------------
+| **Favourite Contact**   | `favourite INDEX` (on not favourited person)<br> e.g., `favourite 123`                                                                                                 |
+| **Unfavourite Contact** | `favourite INDEX` (on already favourited person)<br> e.g., `favourite 123`                                                                                             |
+| **Add Property**        | `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`<br> e.g., `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` |
+| **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 b/2001-03-04`                                                                                                      |
+
 ## Coming soon:
 ### Editing and deleting log entries
 * Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
