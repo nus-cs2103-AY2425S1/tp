@@ -51,6 +51,8 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 
 **:information_source: Notes about the command format:**<br>
 
+* Command are case sensitive. e.g. `list` command will work but `List` will fail.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `owner n/NAME`, `NAME` is a parameter which can be used as `owner n/John Doe`, and in `delete oOWNER_INDEX`, `OWNER_INDEX` is a parameter which can be used as `delete o1`.
 
