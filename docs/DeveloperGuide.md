@@ -261,7 +261,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### **Command Feature**
 
-`add n/NAME p/PHONE NUMBER e/EMAIL ADDRESS a/ADDRESS s/SKILLS st/STATUS ex/EXPERIENCE dr/DESIRED ROLE note/[NOTE] t/[TAG]`,
+`add n/NAME p/PHONE NUMBER e/EMAIL ADDRESS a/ADDRESS s/SKILLS st/STATUS ex/EXPERIENCE dr/DESIRED ROLE [note/NOTE] [t/TAG]`,
 where note and tag are optional fields
 
 #### **Command Feature Purpose**
@@ -299,6 +299,11 @@ We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a
 The sequence diagram below illustrates the above process of adding a person into TalentSG.
 
 <img src="images/AddCommandSequenceDiagram.png" width="550" />
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for AddCommand is very similar to the sequence diagrams for the following
+commands: DeleteCommand, EditCommand, FindCommand, FilterCommand, as its implementation is much like that of them.
+</div>
 
 ---
 
@@ -344,13 +349,18 @@ The sequence diagram below illustrates the above process of deleting a person fr
 
 <img src="images/DeleteCommandSequenceDiagram.png" width="800" />
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for DeleteCommand is very similar to the sequence diagrams for the following
+commands: AddCommand, EditCommand, FindCommand, FilterCommand, as its implementation is much like that of them.
+</div>
+
 ---
 
 ### Edit Person Feature
 
 #### **Command Feature**
 
-`edit INDEX n/[NAME] p/[PHONE NUMBER] e/[EMAIL ADDRESS] a/[ADDRESS] s/[SKILLS] st/[STATUS] ex/[EXPERIENCE] dr/[DESIRED ROLE] note/[NOTE] t/[TAG]`
+`edit INDEX [n/NAME] [p/PHONE NUMBER] [e/EMAIL ADDRESS] [a/ADDRESS] [s/SKILLS] [st/STATUS] [ex/EXPERIENCE] [dr/DESIRED ROLE] [note/NOTE] [t/TAG]`
 where all the fields are optional.
 
 #### **Command Feature Purpose**
@@ -367,7 +377,7 @@ The `edit` command allows users to edit a `Person` in the `AddressBook`.
 
 ### **Sequence of action**
 
-To help you understand how the `delete` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+To help you understand how the `edit` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
 We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
 
@@ -388,6 +398,11 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 The sequence diagram below illustrates the above process of editing a person's details in TalentSG.
 
 <img src="images/EditCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for EditCommand is very similar to the sequence diagrams for the following
+commands: AddCommand, DeleteCommand, FindCommand, FilterCommand, as its implementation is much like that of them.
+</div>
 
 ---
 
@@ -475,6 +490,11 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 <img src="images/FindCommandSequenceDiagram.png" width="800" />
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for FindCommand is very similar to the sequence diagrams for the following
+commands: AddCommand, DeleteCommand, EditCommand, FilterCommand, as its implementation is much like that of them.
+</div>
+
 ---
 
 ### Filter Status Feature
@@ -532,6 +552,11 @@ We will be using the user input `filter Interviewed` as an example.
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
 
 <img src="images/FilterStatusCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for FilterCommand is very similar to the sequence diagrams for the following
+commands: AddCommand, DeleteCommand, EditCommand, FindCommand, as its implementation is much like that of them.
+</div>
 
 ---
 
@@ -683,36 +708,36 @@ Simplify and enhance the recruitment process for HR professionals and recruiters
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                     | So that I can…​                                                             |
-| ------ | ---------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `* * *` | recruiter         | add new candidate profiles                                       | keep track of all candidates applying for positions                         |
-| `* * *` | recruiter         | edit candidate profiles                                          | update candidate information as new details become available                |
-| `* * *` | recruiter         | delete candidate profiles                                        | remove candidates who are no longer considered for positions                |
-| `* * *` | HR professional   | view a list of all candidates                                    | easily access any candidate’s details on demand                             |
-| `* * *` | recruiter         | search for candidates by specific criteria (e.g., skills)        | quickly find suitable candidates for various roles                          |
+| Priority | As a …​          | I want to …​                                                        | So that I can…​                                                             |
+| ------ | ---------------- |---------------------------------------------------------------------| --------------------------------------------------------------------------- |
+| `* * *` | recruiter         | add new candidate profiles                                          | keep track of all candidates applying for positions                         |
+| `* * *` | recruiter         | edit candidate profiles                                             | update candidate information as new details become available                |
+| `* * *` | recruiter         | delete candidate profiles                                           | remove candidates who are no longer considered for positions                |
+| `* * *` | HR professional   | view a list of all candidates                                       | easily access any candidate’s details on demand                             |
+| `* * *` | recruiter         | search for candidates by specific criteria (e.g. status)            | quickly find suitable candidates for various roles                          |
 | `* *`  | recruiter         | track the status of a candidate through different recruitment stages | maintain an organised overview of the recruitment pipeline                  |
-| `* *`  | HR professional   | import candidate data from external sources                      | streamline the process of adding new candidates                             |
-| `* *`  | recruiter         | export data on candidates                                        | prepare reports or share data with colleagues                               |
-| `* *`  | recruiter         | record notes during or after interviews                          | have detailed records and observations to refer back to                     |
-| `* *`  | recruiter         | see a dashboard of recruitment activities                        | get a quick overview of all current recruitment efforts                     |
-| `* *`  | HR professional   | manage and view employment details for hired candidates          | keep track of all employment-related information in one place               |
-| `*`    | recruiter         | receive notifications about upcoming tasks                       | stay on top of all recruitment-related tasks without having to constantly check the app |
-| `*`    | HR professional   | customise the fields in candidate profiles                       | tailor the application to fit the specific needs and focus areas of my organisation |
-| `*`    | recruiter         | archive candidate profiles                                       | keep our current database up-to-date without losing past data               |
-| `*`    | recruiter         | view analytics on recruitment efforts (e.g., time to hire)       | assess the effectiveness of current recruitment strategies                  |
-| `*`    | HR professional   | undo/redo changes in the application                             | correct mistakes without needing to manually revert changes                 |
-| `*`    | recruiter         | create and manage job postings                                   | advertise new job openings directly from the application                    |
-| `*`    | recruiter         | receive automated suggestions for potential candidates           | speed up the process of candidate selection                                 |
-| `*`    | recruiter         | categorise candidates into different job pools                   | organize candidates based on their skill sets and roles                     |
-| `*`    | HR professional   | bulk upload candidate profiles via a CSV or Excel file           | quickly import a large number of candidate profiles                         |
-| `*`    | recruiter         | assign tags/labels to candidates                                 | quickly identify candidates based on specific characteristics               |
-| `*`    | HR professional   | generate candidate summary reports for hiring managers           | provide concise and relevant candidate data to stakeholders                 |
-| `*`    | recruiter         | log communication history with candidates                        | track all interactions with candidates throughout the recruitment process   |
-| `*`    | recruiter         | set priorities for candidates in the pipeline                    | focus on high-priority candidates first                                     |
-| `*`    | recruiter         | track the reason for rejecting a candidate                       | maintain clear records of why candidates were not selected                  |
-| `*`    | recruiter         | add links to candidates’ online profiles (e.g. LinkedIn, GitHub) | have quick access to additional candidate information                       |
-| `*`    | HR professional   | integrate the app with job portals or LinkedIn                   | streamline candidate sourcing from multiple platforms                       |
-| `*`    | recruiter         | send automated follow-up emails to candidates                    | save time by automating routine communication tasks                         |
+| `* *`  | HR professional   | import candidate data from external sources                         | streamline the process of adding new candidates                             |
+| `* *`  | recruiter         | export data on candidates                                           | prepare reports or share data with colleagues                               |
+| `* *`  | recruiter         | record notes during or after interviews                             | have detailed records and observations to refer back to                     |
+| `* *`  | recruiter         | see a dashboard of recruitment activities                           | get a quick overview of all current recruitment efforts                     |
+| `* *`  | HR professional   | manage and view employment details for hired candidates             | keep track of all employment-related information in one place               |
+| `*`    | recruiter         | receive notifications about upcoming tasks                          | stay on top of all recruitment-related tasks without having to constantly check the app |
+| `*`    | HR professional   | customise the fields in candidate profiles                          | tailor the application to fit the specific needs and focus areas of my organisation |
+| `*`    | recruiter         | archive candidate profiles                                          | keep our current database up-to-date without losing past data               |
+| `*`    | recruiter         | view analytics on recruitment efforts (e.g., time to hire)          | assess the effectiveness of current recruitment strategies                  |
+| `*`    | HR professional   | undo/redo changes in the application                                | correct mistakes without needing to manually revert changes                 |
+| `*`    | recruiter         | create and manage job postings                                      | advertise new job openings directly from the application                    |
+| `*`    | recruiter         | receive automated suggestions for potential candidates              | speed up the process of candidate selection                                 |
+| `*`    | recruiter         | categorise candidates into different job pools                      | organize candidates based on their skill sets and roles                     |
+| `*`    | HR professional   | bulk upload candidate profiles via a CSV or Excel file              | quickly import a large number of candidate profiles                         |
+| `*`    | recruiter         | assign tags/labels to candidates                                    | quickly identify candidates based on specific characteristics               |
+| `*`    | HR professional   | generate candidate summary reports for hiring managers              | provide concise and relevant candidate data to stakeholders                 |
+| `*`    | recruiter         | log communication history with candidates                           | track all interactions with candidates throughout the recruitment process   |
+| `*`    | recruiter         | set priorities for candidates in the pipeline                       | focus on high-priority candidates first                                     |
+| `*`    | recruiter         | track the reason for rejecting a candidate                          | maintain clear records of why candidates were not selected                  |
+| `*`    | recruiter         | add links to candidates’ online profiles (e.g., LinkedIn, GitHub)   | have quick access to additional candidate information                       |
+| `*`    | HR professional   | integrate the app with job portals or LinkedIn                      | streamline candidate sourcing from multiple platforms                       |
+| `*`    | recruiter         | send automated follow-up emails to candidates                       | save time by automating routine communication tasks                         |
 
 
 ### Use cases
@@ -724,42 +749,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to add a new person to TalentSG
-2. Recruiter inputs candidate details (name, phone, email, address, desired role, experience, skills, status) with the add command.
-3. TalentSG confirms that the command is valid and adds the person.
-4. TalentSG responds with a success message indicating that the person was added successfully
+1. Recruiter inputs candidate details (name, phone, email, address, desired role, experience, skills, status) with the add command.
+2. TalentSG confirms that the command is valid and adds the person.
+3. TalentSG responds with a success message indicating that the person was added successfully
 
     Use case ends.
 
 **Extensions**:
 
-- 2a. Recruiter does not input all required person details.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input all the required fields and that the
+- 1a. Recruiter does not input all required person details.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input all the required fields and that the
       command is invalid
-    - 2a2. Recruiter inputs add command with the required person details
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+    - 1a2. Recruiter inputs add command with the required person details
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2b. Recruiter inputs invalid field.
-    - 2b1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
+- 1b. Recruiter inputs invalid field.
+    - 1b1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
       formatted and that the command is invalid
-    - 2b2. Recruiter inputs add command with the proper format for all fields
-    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+    - 1b2. Recruiter inputs add command with the proper format for all fields
+    - 1b3. Steps 1b1-1b2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2c. A duplicate candidate profile is detected.
-    - 2c1. TalentSG responds with an error message telling the recruiter that the person has already been added and
+- 1c. A duplicate candidate profile is detected.
+    - 1c1. TalentSG responds with an error message telling the recruiter that the person has already been added and
       prompts the recruiter to input a new person
-    - 2c2a. Recruiter decides to end the process
+    - 1c2a. Recruiter decides to end the process
     
         Use case ends.
 
-    - 2c2b. Recruiter inputs add command with new person details
-    - 2c3. Steps 2c1-2c2 are repeated until the data entered is correct
+    - 1c2b. Recruiter inputs add command with new person details
+    - 1c3. Steps 1c1-2c1 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 
 #### Use Case 2 - Delete a Person
@@ -769,30 +793,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to delete a person from TalentSG.
-2. Recruiter inputs the delete command with the index i of the person to be deleted.
-3. TalentSG confirms that the command is valid and deletes the person.
-4. TalentSG responds with a success message indicating that the person was deleted successfully
+1. Recruiter inputs the delete command with the index i of the person to be deleted.
+2. TalentSG confirms that the command is valid and deletes the person.
+3. TalentSG responds with a success message indicating that the person was deleted successfully
 
    Use case ends.
 
 **Extensions**:
 
-- 2a. Recruiter does not input index of person to be deleted.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
+- 1a. Recruiter does not input index of person to be deleted.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
       and that the command is invalid.
-    - 2a2. Recruiter inputs deleted command with the index of the person to be deleted
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+    - 1a2. Recruiter inputs deleted command with the index of the person to be deleted
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
-    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+- 1b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 1b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
       person of that index doesn't exist and that the command is invalid
-    - 2b2. Recruiter inputs delete command with a valid index
-    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+    - 1b2. Recruiter inputs delete command with a valid index
+    - 1b3. Steps 1b1-1b2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 #### Use Case 3 - Edit a Person
 
@@ -801,39 +824,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to edit a person in TalentSG.
-2. Recruiter inputs the edit command with the index i of the person to be edited along with the fields that the recruiter
+1. Recruiter inputs the edit command with the index i of the person to be edited along with the fields that the recruiter
    would like to edit.
-3. TalentSG confirms that the command is valid and edits the specified fields of the person.
-4. TalentSG responds with a success message indicating that the person was edited successfully
+2. TalentSG confirms that the command is valid and edits the specified fields of the person.
+3. TalentSG responds with a success message indicating that the person was edited successfully
 
    Use case ends.
 
 **Extensions**:
 
-- 2a. Recruiter does not input index of person to be edited.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
+- 1a. Recruiter does not input index of person to be edited.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be deleted
       and that the command is invalid.
-    - 2a2. Recruiter inputs deleted command with the index of the person to be deleted
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+    - 1a2. Recruiter inputs deleted command with the index of the person to be deleted
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
-    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+- 1b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 1b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
       person of that index doesn't exist and that the command is invalid
-    - 2b2. Recruiter inputs edit command with a valid index
-    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+    - 1b2. Recruiter inputs edit command with a valid index
+    - 1b3. Steps 1b1-1b2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2c. Recruiter inputs invalid field(s).
-    - 2c1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
+- 1c. Recruiter inputs invalid field(s).
+    - 1c1. TalentSG responds with an error message telling the recruiter that one of the inputted fields is improperly
       formatted and that the command is invalid
-    - 2c2. Recruiter inputs edit command with the proper format for all fields
-    - 2c3. Steps 2c2-2c3 are repeated until the data entered is correct
+    - 1c2. Recruiter inputs edit command with the proper format for all fields
+    - 1c3. Steps 1c2-1c3 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 #### Use Case 4 - List all People
 
@@ -842,10 +864,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to list all the people in TalentSG.
-2. Recruiter inputs the list command
-3. TalentSG confirms that the command is valid and lists all the people in the application
-4. TalentSG responds with a success message indicating that list was displayed successfully.
+1. Recruiter inputs the list command
+2. TalentSG confirms that the command is valid and lists all the people in the application
+3. TalentSG responds with a success message indicating that list was displayed successfully.
 
 
 #### Use Case 5 - Find a Person
@@ -855,19 +876,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to find a person in TalentSG.
-2. Recruiter inputs the find command with keywords that the application will use match the people.
-3. TalentSG confirms that the command is valid and finds the person/people by matching the keywords with every person's
+1. Recruiter inputs the find command with keywords that the application will use match the people.
+2. TalentSG confirms that the command is valid and finds the person/people by matching the keywords with every person's
    name.
-4. TalentSG responds with a success message indicating that the person/people were either found, or no one matched the keyword.
+3. TalentSG responds with a success message indicating that the person/people were either found, or no one matched the keyword.
 
 **Extensions**:
-- 2a. Recruiter does not input a keyword.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input a keyword and that the command is invalid.
-    - 2a2. Recruiter inputs find command with the required keyword.
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+- 1a. Recruiter does not input a keyword.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input a keyword and that the command is invalid.
+    - 1a2. Recruiter inputs find command with the required keyword.
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 
 #### Use Case 6 - Filter people based on application status
@@ -877,18 +897,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to filter the list of people in TalentSG by application status.
-2. Recruiter inputs the filter command with one of the valid application statuses.
-3. TalentSG confirms that the command is valid and filters the person list to display the people with the inputted application status.
-4. TalentSG responds with a success message indicating that the person list was filtered successfully.
+1. Recruiter inputs the filter command with one of the valid application statuses.
+2. TalentSG confirms that the command is valid and filters the person list to display the people with the inputted application status.
+3. TalentSG responds with a success message indicating that the person list was filtered successfully.
 
 **Extensions**:
-- 2a. Recruiter inputs an empty or invalid application status.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input a valid application status and that the command is invalid.
-    - 2a2. Recruiter inputs filter command with a valid application status.
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+- 1a. Recruiter inputs an empty or invalid application status.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input a valid application status and that the command is invalid.
+    - 1a2. Recruiter inputs filter command with a valid application status.
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 #### Use Case 7 - View a Person
 
@@ -897,27 +916,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to view a person in TalentSG.
-2. Recruiter inputs the view command with the index i of the person to be viewed
-3. TalentSG confirms that the command is valid and displays the specified fields of the person in the `Overview Panel`
-4. TalentSG responds with a success message indicating that the person was viewed successfully
+1. Recruiter inputs the view command with the index i of the person to be viewed
+2. TalentSG confirms that the command is valid and displays the specified fields of the person in the `Overview Panel`
+3. TalentSG responds with a success message indicating that the person was viewed successfully
 
 **Extensions**:
-- 2a. Recruiter does not input index of person to be viewed.
-    - 2a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be viewed
+- 1a. Recruiter does not input index of person to be viewed.
+    - 1a1. TalentSG responds with an error message telling the recruiter to input an index for the person to be viewed
       and that the command is invalid.
-    - 2a2. Recruiter inputs view command with the index of the person to be viewed
-    - 2a3. Steps 2a1-2a2 are repeated until the data entered is correct
+    - 1a2. Recruiter inputs view command with the index of the person to be viewed
+    - 1a3. Steps 1a1-1a2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-- 2b. Recruiter inputs invalid index (the index is out of bounds of the person list).
-    - 2b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
+- 1b. Recruiter inputs invalid index (the index is out of bounds of the person list).
+    - 1b1. TalentSG responds with an error message telling the recruiter that the inputted index is invalid because the
       person of that index doesn't exist and that the command is invalid
-    - 2b2. Recruiter inputs view command with a valid index
-    - 2b3. Steps 2b1-2b2 are repeated until the data entered is correct
+    - 1b2. Recruiter inputs view command with a valid index
+    - 1b3. Steps 1b1-1b2 are repeated until the data entered is correct
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
 
 #### Use Case 8 - Get summary of application statuses of People
@@ -927,10 +945,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to list all the people in TalentSG.
-2. Recruiter inputs the list command.
-3. TalentSG confirms that the command is valid and lists all the people in the application.
-4. TalentSG responds with a success message indicating that list was displayed successfully.
+1. Recruiter inputs the list command.
+2. TalentSG confirms that the command is valid and lists all the people in the application.
+3. TalentSG responds with a success message indicating that list was displayed successfully.
 
 
 #### Use Case 9 - Get help within TalentSG
@@ -940,10 +957,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to get help regarding the acceptable commands in TalentSG.
-2. Recruiter inputs the help command.
-3. TalentSG confirms that the command is valid and displays the help pop-up.
-4. TalentSG responds with a success message indicating that help pop-up was displayed successfully.
+1. Recruiter inputs the help command.
+2. TalentSG confirms that the command is valid and displays the help pop-up.
+3. TalentSG responds with a success message indicating that help pop-up was displayed successfully.
 
 
 #### Use Case 10 - Exit TalentSG
@@ -953,9 +969,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: TalentSG has been launched, and the recruiter is logged into the application.
 
 **Main Success Scenario**:
-1. Recruiter requests to exit TalentSG.
-2. Recruiter clicks the exit button.
-3. TalentSG confirms that the command is valid and exits the application
+1. Recruiter inputs the exit command
+2. TalentSG confirms that the command is valid and exits the application
 
 
 ### Non-Functional Requirements
@@ -986,9 +1001,6 @@ Java `11` or above installed.
 
 3. **Candidate Profile**:
 - A record containing all relevant details about a job applicant, including contact information, skills, experience, and interview notes.
-
-4. **Interview Schedule**:
-- The process of setting a date and time for a job applicant to be interviewed by the recruiter or hiring manager.
 
 --------------------------------------------------------------------------------------------------------------------
 
