@@ -338,7 +338,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Adding a company to favourites: 'fav'
+### Adding a company to favourites: `fav`
 
 Labels an existing company as a favourite.
 
