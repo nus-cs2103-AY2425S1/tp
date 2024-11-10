@@ -185,13 +185,13 @@ Each feature is implemented with careful consideration of compatibility and exte
 
 **Target User Profile**:
 
-* Students or recent graduates who are actively looking for job opportunities, specifically internships in the tech industry.
+* Students who are actively looking for internships in the tech industry.
 * Users who prefer using a desktop app over mobile or web applications.
 * Users comfortable with typing commands, benefiting from a Command Line Interface (CLI) for faster data entry.
 * Users looking for an organized way to manage a list of companies, contact statuses, and related job application data.
 
 **Value Proposition**:
-TechConnect assists students in managing and organizing their internship and job applications efficiently. The app enables users to bookmark, tag, and retrieve company information with ease, all through a simple, efficient command-based interface.
+TechConnect assists students in managing and organizing their internship. The app enables users to bookmark, tag, and retrieve company information with ease, all through a simple, efficient command line based interface.
 
 ---
 
@@ -447,7 +447,7 @@ There were some efforts that was saved by reusing parts from the existing AB3 co
 1. **UI Components**: The existing AB3 user interface aligned with our goals, and most of it was retained. Only slight modifications were made to include the UI of new features.
 2. **Command Parsers**: Our team adapted the existing parsing logic from AB3 to handle the additional commands that we added to the project.
 
-The reuse of these parts helped us to save time and focus more on refining the new features that we decided to implement. Overall, approximately 15% of the total effort was saveed.
+The reuse of these parts helped us to save time and focus more on refining the new features that we decided to implement. Overall, approximately 15% of the total effort was saved.
 
 ---
 
