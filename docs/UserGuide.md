@@ -55,7 +55,7 @@ This combination of efficiency and clarity ensures that you can manage your wedd
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/ABC Photography Studio` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/ABC Photography Studio` : Adds a contact named `John Doe` to WedLinker.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -150,7 +150,7 @@ Format: `find PREFIX KEYWORD [KEYWORD]…​`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from WedLinker.
 
 Format: `clear`
 
@@ -185,7 +185,7 @@ Furthermore, certain edits can cause the WedLinker to behave in unexpected ways 
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to WedLinker.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDDING]…​`
 
@@ -200,7 +200,7 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in WedLinker.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
@@ -223,7 +223,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in WedLinker.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ## Tag Features
