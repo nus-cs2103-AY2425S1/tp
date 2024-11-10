@@ -375,28 +375,32 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Batch deleting a group of people
 1. Deleting a group of people.
+   
    1. Prerequisites: <br>
    Execute the following:
       - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
       - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
       - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
       - List all persons using the `list` command.
+        
    2. Test case: `batch-delete t/tag3` <br>
       Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
-   3. Test case: `batch-delete t/tag1 t/tag2` <br>
+   
+   4. Test case: `batch-delete t/tag1 t/tag2` <br>
       Expected: `test person 3` will be deleted. Feedback box will show detail of deleted person.
-   4. Test case: `batch-delete t/tag1` <br>
+      
+   6. Test case: `batch-delete t/tag1` <br>
       Expected: `test person 1`, `test person 2` will be deleted as `test person 3` is already deleted from the
       previous test case `iii`. Feedback box will show detail of deleted person.
 
@@ -408,13 +412,16 @@ testers are expected to do more *exploratory* testing.
         - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
         - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
         - List all persons using the `list` command.
+          
     2. Test case: `batch-edit t/tag3 t/tag4` <br>
        Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
-    3. Test case: `batch-edit t/tag1 t/tag3` <br>
+   
+    4. Test case: `batch-edit t/tag1 t/tag3` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`. 
        Contact entries will show a list of contacts that currently has `[tag3]`; `test person 1`, `test person 2`,
        `test person 3`, for this test assuming other contacts does not have the `[tag1]` as their tag.
-    4. Test case: `batch-edit t/tag2 t/tag4` <br>
+       
+    6. Test case: `batch-edit t/tag2 t/tag4` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag4]` <br>
        Contact entries will show a list of contacts that currently has `[tag4]`; `test person 3`.
 
@@ -425,4 +432,27 @@ testers are expected to do more *exploratory* testing.
    1. Delete all generated save file if there is any.
    2. Re-start the Cher application which will automatically regenerate the basic data.
    3. It will result in loss of data.
+
+
+### Finding persons
+
+1. Finding persons by tag
+      1. Prerequisites: <br>
+         Execute the following:
+         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
+         - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
+         - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+         - List all persons using the `list` command.
+           
+      2. Test case: `find t/tag1`<br>
+         Expected: test person 1, test person 2, and test person 3 will be shown in the list of persons.
+         Feedback box will show number of persons listed.
+
+      3. Test case: `find t/tag2`<br>
+         Expected: test person 3 will be shown in the list of persons.
+         Feedback box will show number of persons listed.
+
+      4. Other incorrect find commands to try: `find`, `find x`, `...` (where x is larger than the list size)<br>
+         Expected: List of persons shown remains unchanged.
+         Feedback box shows error details regarding incorrect input format.
 
