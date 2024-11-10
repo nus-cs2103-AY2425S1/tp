@@ -100,7 +100,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [c/COURSE]…`
 A student can have any number of courses (including 0)
 </div>
 
-* The student's name must only contain alphabetical characters, commas, and spaces.
+* `NAME` must only contain alphabetical characters, commas, and spaces.
+* `NAME` must be unique, i.e. no two students can have the same name.
+  * However, names are **case-sensitive**, i.e. `John Doe` is considered different from `john doe`.
 * `PHONE_NUMBER` should only contain numbers, and should be at least 3 numbers long.
 * `EMAIL` should conform to the format `local-part@domain` and:
   * `local-part` should only contain alphanumeric characters and these special characters: `+` `_` `.` `-`.
