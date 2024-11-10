@@ -50,7 +50,7 @@ This section is for users who are experienced in installing and using Java execu
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete z/3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -181,13 +181,10 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `delete z/PERSON_ID`, `PERSON_ID` is a parameter which can be used as `delete z/01`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `n/NAME [r/REMARK]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -316,13 +313,11 @@ Examples:
 
 Edits an existing person with the specified `ID` in the database.
 
-Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK]`
 
 * **ID**: The Person ID must be valid, present in the MedDict database, and an _integer_ (0, 1, 2, …​).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Editing the person with the same details as the existing detail is not allowed.
 * A _notification message_ will be displayed if MedDict could not edit the person with the given ID.
 
@@ -405,7 +400,7 @@ Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
 * **DateTime**: Must use _yyyy-MM-dd HH:mm_ format (e.g. 2024-12-31 23:59).
 * **Remark**: Optional, user can add remark details by adding `[r/Remark]` when calling the command.
   Empty remark will be added to the appointment if remark is not specified.
-* When adding appointment, the appointment detail will be added to the appointments list in both patient and doctor class.
+* When adding appointment, the appointment detail will be added to both the patient's and doctor's appointment lists.
 * Each appointment must be scheduled at a unique time to prevent overlap for both the patient and the doctor.
 * A _notification message_ will be displayed if MedDict could not add the appointment successfully.
 Examples:
@@ -440,7 +435,7 @@ Examples:
    **Output**: <br>
    Appointment: `2024-12-31 15:23` for `0` (patient ID) with `1` (doctor ID). Remarks: `Third physiotherapy session`. <br>
    Appointment: `2024-12-31 16:23` for `0` (patient ID) with `1` (doctor ID). Remarks: `Fourth physiotherapy session`.
-*  `view z/1 x/2024-12-31` <br>
+*  `view z/1 x/2024-12-31 16:23` <br>
    **Output**: <br>
    No history found for the person.
 
@@ -506,7 +501,7 @@ Examples:
    Successfully deleted appointment to a patient
 *  `deleteA z/1 z/3 x/2024-12-31 15:23` <br>
    **Output**: <br>
-   The appointment doesn't exist!
+   The appointment doesn't exist! Please check again the details you have entered!
 
 ### [Clearing All Entries](#command-summary): `clear`
 
@@ -537,10 +532,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving Data Files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
