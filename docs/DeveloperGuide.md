@@ -34,7 +34,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/nus-cs2103-AY2425S1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/nus-cs2103-AY2425S1/tp/blob/master/src/main/java/seedu/address/MainApp.java) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -493,7 +493,7 @@ Similarly, a planner might also not have complete contact information of a vendo
 
 The phone, email and address fields should be updated to optional parameters in the `add_guest` and `add_vendor` commands.
 
-### Enhance Flexibility in Phone Number Parameter Input
+### Enhance flexibility in phone number parameter input
 
 **Feature Flaw in Current Implementation**
 
@@ -505,17 +505,25 @@ The current restriction prevents users from indicating country codes, and might 
 
 We can relax validation on the phone number field to allow symbols such as `()`, `+`, `-` and `.`.
 
-### Enhance Find Feature to Allow for Partial and Substring Search
+### Enhance `find` command to allow for partial and substring search
 
 **Feature Flaw in Current Implementation**
 
-Currently, the `find` feature requires an exact match or a specific keyword for searching guests or vendors.
+Currently, the `find` command requires an exact match or a specific keyword for searching guests or vendors.
 This limits the flexibility of the search functionality, as users cannot retrieve entries that partially match the search term.
 
 **Proposed Enhancement**
 
-Enhance the `find` feature to allow partial and substring searches.
+Enhance the `find` command to allow partial and substring searches.
 With this enhancement, a search query would return all results containing the specified character(s) or substring, regardless of its position in the name or other fields.
+
+### Enhance `find` command to allow multiple types of prefixes to be used for each `find` command
+
+**Feature Flaw in Current Implementation**
+Currently, users can only use one type of prefix for each `find` command. As such, users are unable to use multiple types of prefixes within the same `find` command. For example, `find n/John p/98765432` is an invalid command.
+
+**Proposed Enhancement**
+Enhance `find` command to allow multiple types of prefixes to be used for each `find` command. When multiple types of prefixes are specified, the `find` command returns all guest(s) and vendor(s) that match all the specified fields. For example, `find n/John p/98765432` will return all guest(s) and vendor(s) that have the name John and the phone number 98765432
 
 --------------------------------------------------------------------------------------------------------------------
 
