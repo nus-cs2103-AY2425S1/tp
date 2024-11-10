@@ -823,11 +823,8 @@ Use the [`edit` command](#522-edit-an-existing-clients-information), and specify
 ### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
 
-### What do the different tier colors represent in the UI?
-Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a maroon banner. This makes it easy to see at a glance the tier of each client.
-
-### What do the different status colors represent in the UI?
-Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non_urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
+### What do the different tier/status colors represent in the UI?
+Each credit card tier and client status is visually distinguished in the UI with colored labels. You may view the section about [Tier and Status color codes](#tier-color-code-for-agentassist-gui).
 
 [↑ Return to Table of Contents](#table-of-contents)
 
