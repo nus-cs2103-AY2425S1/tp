@@ -398,7 +398,7 @@ Format: `redo`
 
 * Redo only helps to restore command results that can be handled by undo command,
 such as add, edit, delete and clear.
-* If you input `redo` when there's nothing to undo, GUI will remind you about this
+* If you input `redo` when there's nothing to redo, GUI will remind you about this
 and no effect would be applied to the address book.
 
 Examples:
