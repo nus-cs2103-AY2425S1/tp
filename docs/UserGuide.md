@@ -3,12 +3,11 @@ layout: page
 title: EduTuTu User Guide
 ---
 
-**EduTUTU** is a desktop application designed to streamline contact management for tuition centers, making it easier to 
+**EduTUTU** is a desktop application designed to streamline contact management for private tutors, making it easier to 
 organise and access student information. Optimised for use through a [Command Line Interface (CLI)](#cli-command-line-interface) while incorporating 
 the convenience of a [Graphical User Interface (GUI)](#gui-graphical-user-interface), EduTUTU allows you to manage student details with speed and 
 efficiency. Whether you’re handling student registrations, updating records, or searching for students, EduTUTU helps 
-you complete these tasks more quickly than traditional applications, making it an ideal solution for tuition center 
-administrators.
+you complete these tasks more quickly than traditional applications, making it an ideal solution for private tutors.
 
 ***
 
@@ -31,7 +30,7 @@ administrators.
    - [2.13 Viewing Command History](#213-viewing-command-history-arrow-keys)
    - [2.14 View Student Details](#214-viewing-student-details-info)
    - [2.15 Editing the Data File](#215-editing-the-data-file)
-   - [2.16 Saving the Data](#216-saving-the-data)
+   - [2.16 Saving Data](#216-saving-data)
    - [2.17 Exiting the Program](#217-exiting-the-program-exit)
 3. [FAQ](#3-faq)
 4. [Glossary](#4-glossary)
@@ -43,11 +42,11 @@ administrators.
 
 1. Ensure you have Java `17` or above installed in your Computer. It can be downloaded [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-2/tp/releases/tag/v1.5).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your EduTuTu.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edututu.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduTuTu.jar` command to run the application.<br>
 
    A [GUI](#gui-graphical-user-interface) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/real_ui.png)
@@ -138,7 +137,9 @@ Adds a person to [EduTuTu](#edututu).
 
 **[Command Word Alias](#command-word-alias):** `a`
 
-> **Remark:** A person can have any number of tags (including 0).
+> **Remark:** A person can have any number of tags (including 0). Fields can be empty provided the prefix is specified.
+> eg. add n/ p/ e/ a/ f/ c/
+
 
 **Example Usage:**
 
@@ -174,6 +175,8 @@ Adds a person to [EduTuTu](#edututu).
 - [Tag](#tag) can be added to classify or group persons for easier management.
 - The `add` command is helpful when setting up new contacts in [EduTuTu](#edututu).
 - `MONTH_PAID` cannot be specified for `add`.
+- Duplicate Tags will be added as a singular tag.
+- Adding duplicate tags require the use of multiple t/ prefix.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -191,14 +194,14 @@ Deletes the specified person from the address book.
 * The [index](#index) refers to the index number shown in the displayed person list.
 * The [index](#index) **must be a positive integer** 1, 2, 3, …
 
-**Example Usage:** `delete 3`
+**Example Usage:** `delete 4`
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
 
   <!-- Text Section -->
   <div style="display: flex; justify-content: space-around; width: 100%;">
     <div style="width: 45%;">
-      <p><b>Input:</b> User enters the `delete 3` command to remove the 3rd person in the displayed list.</p>
+      <p><b>Input:</b> User enters the `delete 4` command to remove the 3rd person in the displayed list.</p>
     </div>
     <div style="width: 45%;">
       <p><b>Output:</b> The UI updates to reflect the deletion of the person.</p>
@@ -237,7 +240,7 @@ Updates the [payment status](#payment-status) of a student to completed.
 * The [index](#index) **must be within the range** of the number of people in the list.
 * The year must be within 1900 to 2100 (exclusive of 2100), and the month must be within 01 to 12 inclusive.
 * The `markpaid all m/MONTH_PAID` command marks all students as paid for the specified month.
-* Can accept multiple months as input.
+* Can accept multiple months as input. eg. `markpaid 1 m/2024-10 m/2024-11`
 
 **Example Usage:**
 
@@ -274,17 +277,17 @@ Updates the [payment status](#payment-status) of a student to completed.
 
 Updates the [payment status](#payment-status) of a student by removing the completed status for a specific month.
 
-**[Command Format](#command-format):** `unmarkpaid INDEX m/MONTH_UNPAID` & `unmarkpaid all m/MONTH_PAID`
+**[Command Format](#command-format):** `unmarkpaid INDEX m/MONTH_PAID` & `unmarkpaid all m/MONTH_PAID`
 
 **[Command Word Alias](#command-word-alias):** `ump`
 
 * Removes the payment mark of the person at the specified `INDEX` for the given month and year.
 * The `INDEX` refers to the index number shown in the displayed person list.
-* The `MONTH_UNPAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+* The `MONTH_PAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The [index](#index) **must be within the range** of the number of people in the list.
 * The year must be within 1900 to 2100 (exclusive of 2100), and the month must be within 01 to 12 inclusive.
 * The `unmarkpaid all m/MONTH_PAID` command removes the payment status of all students with the specified month.
-* Can accept multiple months as input.
+* Can accept multiple months as input. eg. `unmarkpaid 1 m/2024-10 m/2024-11`
 
 **Example Usage:**
 
@@ -320,7 +323,7 @@ Updates the [payment status](#payment-status) of a student by removing the compl
 
 Edits an existing person in the address book.
 
-**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [m/YEAR-MONTH] [t/TAG]…​`
+**[Command Format](#command-format):** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEES] [c/CLASSID] [m/MONTH_PAID] [t/TAG]…​`
 
 **[Command Word Alias](#command-word-alias):** `e`
 
@@ -329,6 +332,7 @@ Edits an existing person in the address book.
 * Existing values will be updated to the input values.
 * When editing [tags](#tags), the existing [tags](#tags) of the person will be removed, i.e., adding of [tags](#tags) is not cumulative.
 * You can remove all the person’s [tags](#tags) by typing `t/` without specifying any [tags](#tags) after it.
+* Editing Monthspaid will remove all current Monthspaid and replace them with the new Monthspaid.
 
 **Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com m/2024-10`
 
@@ -398,7 +402,7 @@ After entering the `list` command, all persons stored in the address book will b
 
 ### 2.8 Finding A Person: `find`
 
-The `find` command allows you to list persons by their names, [Class IDs](#class-id), or [payment status](#payment-status) (paid/unpaid).
+The `find` command allows you find specific people by any fields or a combination of fields.
 
 
 **[Command Format](#command-format):** `find`
@@ -406,13 +410,13 @@ The `find` command allows you to list persons by their names, [Class IDs](#class
 **[Command Word Alias](#command-word-alias):** `f`
 
 - **By Name Substring:** `find n/NAME_SUBSTRING [MORE_NAME_SUBSTRING]`
-- **By Phone Number Prefix:** `find p/PHONE_SUBSTRING [MORE_PHONE_SUBSTRING]`
+- **By Phone Number Substring:** `find p/PHONE_SUBSTRING [MORE_PHONE_SUBSTRING]`
 - **By Address Substring:** `find a/ADDRESS_SUBSTRING [MORE_ADDRESS_SUBSTRING]`
 - **By Email Substring:** `find e/EMAIL_SUBSTRING [MORE_EMAIL_SUBSTRING]`
 - **By Fees (Exact Match):** `find f/FEES [MORE_FEES]`
 - **By Class ID Substring:** `find c/CLASSID_SUBSTRING [MORE_CLASSIDS_SUBSTRING]`
-- **By Months Paid:** `find m/YEAR-MONTH [MORE_YEARS-MONTHS]`
-- **By Months Not Paid:** `find !m/YEAR-MONTH [MORE_YEARS-MONTHS]`
+- **By Months Paid Substring:** `find m/MONTH_PAID [MORE_YEARS-MONTHS]`
+- **By Months Not Paid Substring:** `find !m/MONTH_PAID [MORE_YEARS-MONTHS]`
 
 
 **Examples of Combined Searches**
@@ -479,7 +483,8 @@ Upon entering the command, all entries will be cleared from [EduTuTu](#edututu).
 </div>
 
 **Tips:**
-- Be careful when using this command, as it permanently deletes all current entries.
+- Be careful when using this command, as it deletes all current entries.
+- If you do accidentally clear, you can use the `undo` command to reverse the action.
 - Consider exporting your data before using the `clear` command if you need a [backup](#backup).
 
 [Back to Table of Contents](#table-of-contents)
@@ -491,11 +496,11 @@ Upon entering the command, all entries will be cleared from [EduTuTu](#edututu).
 **[Command Format](#command-format):** `undo` and `redo`
 
 The `undo` and `redo` commands allow you to reverse or reapply the most recent changes made to the address book.
+Disclaimer: After an undo/redo command is executed, EduTuTu will display every person present. The list of persons displayed by the latest find command will not be preserved!
 
 **Format:**
 - `undo` – Reverses the most recent change to the address book.
 - `redo` – Reapplies the most recent change that was undone.
-
 * The `undo` command can be used to revert the last command that modified the address book.
 * The `redo` command can be used only if an `undo` was performed previously.
 
@@ -511,6 +516,8 @@ The UI updates to reflect the reapplication of the previously undone change*
 **Tips:**
 - The `redo` command is only available after an `undo`, allowing you to reapply the change if needed.
 - Remember that `undo` and `redo` are limited to the most recent changes. For more comprehensive [backups](#backup), consider exporting your data regularly.
+- The `undo` and `redo` history will be cleared after closing EduTuTu. (i.e. undo cannot be executed when EduTuTu is first open.)
+- Only the last 200 executed commands are saved in the `undo` / `redo` history.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -518,7 +525,7 @@ The UI updates to reflect the reapplication of the previously undone change*
 
 ### 2.11 Displaying Pie Chart of Class Distribution: `pie`
 
-Creates a pie chart showing the distribution of students in each class. This feature allows tuition center administrators to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
+Creates a pie chart showing the distribution of students in each class. This feature allows private tutors to quickly visualize the number of students in each class, helping them efficiently allocate class sizes.
 
 **[Command Format](#command-format):** `pie`
 
@@ -580,6 +587,7 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
 **Tips:**
 - Use the bar command to monitor payment trends and identify any seasonal patterns.
 - Ensure that all payment records are updated for accurate chart visualisation.
+- If you edited a monthpaid to be an empty string, the empty string may appear in the bar chart
 - Press "esc" to close the bar chart window.
 
 [Back to Table of Contents](#table-of-contents)
@@ -588,13 +596,18 @@ Displays a [bar chart](#bar-chart) showing the number of students who made payme
 
 ### 2.13 Viewing Command History: *Arrow Keys*
 
-Allows users to quickly access previously entered commands using the up and down arrow keys.
+Allows users to quickly access previously entered commands using the up and down arrow keys. 
 
 **[Command Format](#command-format):** *No specific command required.*
 
 * Press the **up arrow key** to cycle back through previously entered commands.
 * Press the **down arrow key** to move forward through the [command history](#command-history).
 * This feature is useful for repeating recent commands without needing to retype them.
+
+
+**Tips**
+- Command history persists even after the program is closed. It is saved in `commandhistory.json`.
+- By default, the last 2000 executed commands are saved.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -651,7 +664,8 @@ Displaying the detailed command window can be done in two ways:
 
 **Tips:**
 - Ensure that data is updated for accurate visualisation.
-- Press "esc" to close the pie chart window.
+- Press "esc" to close the detailed information window.
+- The text from the detailed information window can be highlighted and copied.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -659,17 +673,17 @@ Displaying the detailed command window can be done in two ways:
 
 ### 2.15 Editing the Data File
 
-[EduTuTu](#edututu) data is saved automatically as a [JSON](#json-file) file at `[JAR file location]/data/addressbook.json`. Advanced users can modify data directly by editing that file.
+[EduTuTu](#edututu) data is saved automatically as a [JSON](#json-file) file at `[JAR file location]/data/EduTuTu.json`. Advanced users can modify data directly by editing that file.
 
 > **Caution:**
 > - If your changes to the data file make its format invalid, EduTuTu will discard all data and start with an empty data file at the next run. It is highly recommended to take a backup of the file before making any edits.
-> - Certain edits can cause EduTuTu to behave in expected ways (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident in your ability to update it correctly.
+> - Certain edits can cause EduTuTu to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Edit the data file only if you are confident in your ability to update it correctly.
 
 [Back to Table of Contents](#table-of-contents)
 
 ***
 
-### 2.16 Saving the Data
+### 2.16 Saving Data
 
 [EduTuTu](#edututu) data is saved in the hard disk automatically after the execution of any command that modifies the data. There is no need for manual saving.
 
@@ -710,6 +724,10 @@ Method 2:
 
 2. The program will close.
 
+**Tips:**
+- Use the `exit` command when you are done with the program.
+- If the `exit` command is executed with extra windows opened, the extra windows will not be closed. They have to be closed manually.
+
 [Back to Table of Contents](#table-of-contents)
 
 ***
@@ -722,11 +740,11 @@ Method 2:
 **Q**: How do I save my data?<br> 
 **A**: EduTuTu automatically saves any changes. No manual saving is needed.
 
-**Q**: Can I see a bar chart of monthly payment records?<br> 
-**A**: Yes, use the bar command to see the payment trends for each month.
-
 **Q**: What if I forget to add the fees when creating a student entry?<br> 
 **A**: You can update the fee amount later using the edit command, like edit 1 f/500 to set fees to 500 for the first student.
+
+**Q**: What if I accidentally execute the clear command? <br>
+**A**: You can use the undo command to reverse the clear command.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -809,24 +827,24 @@ Method 2:
 ## Command summary
 Here's the updated table with the **Unmark Paid** action added:
 
-| Action                      | Format                                                                                                                                          |
-|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> |
-| **Bar Chart**               | `bar`                                                                                                                                                       |
-| **Clear**                   | `clear`                                                                                                                                                     |
-| **Delete**                  | `delete INDEX`<br>                                                                                                                              |
+| Action                      | Format                                                                                                          |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>                                                    |
+| **Bar Chart**               | `bar`                                                                                                           |
+| **Clear**                   | `clear`                                                                                                         |
+| **Delete**                  | `delete INDEX`<br>                                                                                              |
 | **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS_ID] [f/FEES] [m/MONTH_PAID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> |
-| **Exit**                    | `exit`                                                                                                                                                      |
-| **Help**                    | `help`                                                                                                                                                      |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br>                                                                                                      |
-| **List**                    | `list`                                                                                                                                                      |
-| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br>                                                                                                        |
-| **Unmark Paid**             | `unmarkpaid INDEX YEAR_MONTH`<br>                                                                                                       |
-| **Pie Chart**               | `pie`                                                                                                                                                       |
-| **Undo**                    | `undo`<br>                                                                                                                                                  |
-| **Redo**                    | `redo`<br>                                                                                                                                                  |
-| **Viewing Command History** | *No command needed, just the use of arrow keys*<br>                                                                                                         |
-| **Viewing Student Details**  | `info INDEX` <br>                                                                                                                                           |
-| **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                                                                  |
-| **Saving the Data**         | *Automatic*<br> Data is saved automatically to the storage file after each command                                                                          |
+| **Exit**                    | `exit`                                                                                                          |
+| **Help**                    | `help`                                                                                                          |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br>                                                                              |
+| **List**                    | `list`                                                                                                          |
+| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br>                                                                                 |
+| **Unmark Paid**             | `unmarkpaid INDEX YEAR_MONTH`<br>                                                                               |
+| **Pie Chart**               | `pie`                                                                                                           |
+| **Undo**                    | `undo`<br>                                                                                                      |
+| **Redo**                    | `redo`<br>                                                                                                      |
+| **Viewing Command History** | *No command needed, just the use of arrow keys*<br>                                                             |
+| **Viewing Student Details** | `info INDEX` <br>                                                                                               |
+| **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                      |
+| **Saving the Data**         | *Automatic*<br> Data is saved automatically to the storage file after each command                              |
 [Back to Table of Contents](#table-of-contents)
