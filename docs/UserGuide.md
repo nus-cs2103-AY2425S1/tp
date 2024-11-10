@@ -130,6 +130,14 @@ Examples:
 
 </box>
 
+<box type="warning">
+
+##### Warning
+
+* Adding a customer will unfilter the displayed customer list.
+
+</box>
+
 ### Listing all customers : `listcustomer`
 
 Shows a list of all customers in the address book.
@@ -158,6 +166,14 @@ Examples:
 * When editing tags, the existing tags of the customer will be removed i.e adding of tags is not cumulative.
 * You can remove all the customer’s tags by typing `t/` without
     specifying any tags after it.
+
+</box>
+
+<box type="warning">
+
+##### Warning
+
+* Editing a customer will unfilter the displayed customer list.
 
 </box>
 
@@ -228,6 +244,14 @@ Examples:
 * If the quantity is not provided, the quantity will be set to a default value of **1**.
 * If there already exists a pending order with similar item(same item excluding space and casing), identical quantity and date under that customer, a warning will be given.
 * If the order `DATE` has elapsed the current date, a warning will be given.
+
+</box>
+
+<box type="warning">
+
+##### Warning
+
+* Adding an order under a customer will display their order list.
 
 </box>
 
@@ -364,8 +388,8 @@ Examples:
 
 ##### Warning
 
-Filtering the order list by status and then changing an order's status will result in the order no longer appearing under the filtered list. <br>
-e.g. using `filterorder pending` followed by marking the first order in the filtered list as completed will remove that order from the current filtered list.
+* Filtering the order list by status and then changing an order's status will result in the order no longer appearing under the filtered list. <br>
+  e.g. using `filterorder pending` followed by marking the first order in the filtered list as completed will remove that order from the current filtered list.
 
 </box>
 
