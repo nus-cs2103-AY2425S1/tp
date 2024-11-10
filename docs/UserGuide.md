@@ -48,7 +48,7 @@
 
   .box {
     background-color: var(--box-bg-color) !important;
-    padding: 8px 16px;
+    padding: 16px 24px;
     margin: 8px 0;
     border-radius: 5px;
     border: 2px solid var(--box-border-color);
@@ -66,13 +66,11 @@
 
   .box-warn {
     background-color: var(--warn-bg-color) !important;
-    padding: 16px 24px;
     border: 2px solid var(--warn-border-color);
   }
 
   .box-mistake {
     background-color: var(--mistake-bg-color) !important;
-    padding: 16px 24px;
     border: 2px solid var(--mistake-border-color);
   }
 
@@ -164,7 +162,7 @@
 
   .code-full-width {
     width: calc(100% - 48px);
-    background-color: var(--code-bg-color) !important;
+    background-color: var(--info-bg-color) !important;
     padding: 12px 24px;
     margin: 16px 0;
     border-radius: 5px;
@@ -251,7 +249,15 @@
 <h1 class="headers headers-first">StaffSync User Guide</h1>
 
 <p class="content content-special">
-  Welcome to StaffSync! Are you an HR Manager looking for a better way to handle your hiring and employee management needs? StaffSync makes managing employees and potential hires straightforward, blending the efficiency of a Command Line Interface (CLI) with the visual advantages of a Graphical User Interface (GUI). If you’re a fast typer, you’ll find that StaffSync lets you breeze through contact management tasks more quickly than traditional GUI-only applications.
+  Welcome to StaffSync! Are you a Human Resources (HR) Manager that has a lot of potential hires and employees to manage? StaffSync allows you to manage your potential hires and employees on your desktop, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you type fast, you can complete your contact management tasks faster with StaffSync than with GUI apps.
+</p>
+
+<br>
+
+<h1 class="headers">Why Choose StaffSync?</h1>
+
+<p class="content content-special">
+  Why choose StaffSync? We’re dedicated to helping you simplify and accelerate your HR processes. With our innovative CLI-GUI combination, you’ll experience streamlined operations, reduced task times, and a user-friendly approach that adapts to your workflow. Whether you’re handling onboarding, keeping track of employee information, or managing candidate pipelines, StaffSync is designed with your productivity in mind. Let us help you save time, stay organized, and focus on what matters most—your people.
 </p>
 
 <br>
@@ -295,7 +301,7 @@
 
 _You may check your installed version of Java by entering the following in your command terminal_
 
-<div class="code-full-width"><span>java -version</span></div>
+<div class="code-full-width"><code>java -version</code></div>
 
 </div>
 
@@ -321,7 +327,7 @@ _You may check your installed version of Java by entering the following in your 
 
 For example, if the _home folder_ is located at `Desktop/StaffSync`, enter the command
 
-<div class="code-full-width"><span>cd "Desktop/StaffSync"</span></div>
+<div class="code-full-width"><code>cd "Desktop/StaffSync"</code></div>
 
 </div>
 
@@ -335,7 +341,7 @@ For example, if the _home folder_ is located at `Desktop/StaffSync`, enter the c
 
 In your command terminal, enter the following command
 
-<div class="code-full-width"><span>java -jar StaffSync.jar</span></div>
+<div class="code-full-width"><code>java -jar StaffSync.jar</code></div>
 
 <br>
 
@@ -360,7 +366,7 @@ A GUI similar to the below should appear in a few seconds with some sample data.
 
 For example, entering the following command will open the help window.
 
-<div class="code-full-width"><span>help</span></div><br>
+<div class="code-full-width"><code>help</code></div><br>
 
 </div>
 
@@ -370,19 +376,19 @@ Some example commands you can try:
 
 List all potential hires.
 
-<div class="code-full-width"><span>list ph</span></div><br>
+<div class="code-full-width"><code>list ph</code></div><br>
 
 Add an employee named `John Doe` to StaffSync.
 
-<div class="code-full-width"><span>employee n/John Doe p/81234567 e/johndoe@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01</span></div><br>
+<div class="code-full-width"><code>employee n/John Doe p/81234567 e/johndoe@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01</code></div><br>
 
 Delete the 1st person shown if they are a potential hire
 
-<div class="code-full-width"><span>delete ph 1</span></div><br>
+<div class="code-full-width"><code>delete ph 1</code></div><br>
 
 Exit the app.
 
-<div class="code-full-width"><span>exit</span></div><br>
+<div class="code-full-width"><code>exit</code></div><br>
 
 </div>
 
@@ -396,7 +402,7 @@ Exit the app.
 
 If you would like to remove all sample data, you can run the command
 
-<div class="code-full-width"><span>clear</span></div><br>
+<div class="code-full-width"><code>clear</code></div><br>
 
 </div>
 
