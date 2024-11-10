@@ -12,8 +12,8 @@ import seedu.address.logic.parser.ParserUtil;
 public class Tag {
 
     public static final String BLOOD_TYPE_PREFIX = "Blood type ";
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric with " +
-            "the exception of blood types (e.g A+, AB-, O+ etc.)";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric with "
+            + "the exception of blood types (e.g A+, AB-, O+ etc.)";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}-+ ]+";
     public static final String BLOOD_TYPE_REGEX = "^(A|B|AB|O)[+-]$";
 
