@@ -32,6 +32,8 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_AMOUNT_1 = "100.005";
     private static final String INVALID_AMOUNT_2 = "1,000";
+    private static final String INVALID_AMOUNT_3 = "-1000000000.01";
+    private static final String INVALID_AMOUNT_4 = "1000000000.01";
     private static final String INVALID_DATE_1 = "2024-10-32";
     private static final String INVALID_DATE_2 = "2024-13-12";
     private static final String INVALID_DATE_3 = "2024-1-12";
@@ -220,8 +222,14 @@ public class ParserUtilTest {
     }
     @Test
     public void parseAmount_invalidValue_throwsParseException() {
+        //amount more than 3 decimal places
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_1));
+        //amount contains comma
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_2));
+        //amount is smaller than minimum amount
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_3));
+        //amount is larger than maximum amount
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT_4));
     }
 
     @Test
@@ -243,10 +251,15 @@ public class ParserUtilTest {
     }
     @Test
     public void parseDate_invalidValue_throwsParseException() {
+        //day out of range [1, 31]
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_1));
+        //month out of range [1, 12]
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_2));
+        //incorrect format of YYYY-M-DD
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_3));
+        //invalid date which does not exist
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_4));
+        //invalid date which does not exist on non-leap years  
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_5));
 
     }
