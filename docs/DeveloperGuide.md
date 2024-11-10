@@ -419,7 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case ends.
 
-**Use cases: UC05 - Delete a tag from a contact**  
+**Use case: UC05 - Delete a tag from a contact**  
 
 **Precondition**: Contact to delete a tag from already exists
 
@@ -445,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
-**Use cases: UC06 - Undo an execution of command**
+**Use case: UC06 - Undo an execution of command**
 **Precondition**: At least one valid command has been executed by the user.
 
 **MSS**
@@ -467,7 +467,7 @@ before the command was executed.
 * 1b. No earlier data to revert.
     * 1b1. CampusConnect shows error message.
 
-      Use cases ends.
+      Use case ends.
 
 **Use Case: UC07 - Redo Command Execution**
 
