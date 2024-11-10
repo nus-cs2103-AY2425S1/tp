@@ -94,8 +94,6 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 
 4. TAGS: Tag names should be alphanumeric. Default: Empty <br> Prefix: `t/`
 
-5. REMARK: There is no limitations on adding remarks. Default: Empty <br> Prefix: `r/`
-
 <box type="info" seamless>
 
 **Duplicate Handling:** Since two persons are not allowed to have the same name, in rare cases where you have more than one contact with the exact same name, it is up to your discretion how you want to differentiate them. <br>
