@@ -3,10 +3,23 @@ layout: page
 title: User Guide
 ---
 
-Address Book Command Line Interface (ABCLI) is a **desktop app made specially for Real Estate Agents to manage contacts and is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a real estate agent and can type fast, ABCLI can get your contact management tasks done faster than traditional GUI apps.
+**Address Book Command Line Interface (ABCLI)** is a desktop application tailored for **real estate agents** who value the speed and efficiency of managing workflows through a **Command Line Interface (CLI)**. With the added support of a Graphical User Interface (GUI) for visual clarity, ABCLI empowers agents to handle contacts, schedule meetings, and organize property details significantly faster than traditional GUI-only applications. If you are a fast-typing real estate agent, ABCLI is designed to keep up with your speed, boosting your productivity.
 
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+## Application Overview
+
+ABCLI is divided into three core modes, each dedicated to a key aspect of a real estate agent workflows:
+
+* **[Buyer Mode](#Buyers)**: Organize prospective buyers with details like budget, contact info, and tags for effective monitoring and follow-up.
+
+* **[Meet Up Mode](#Meet Ups)**: Schedule and manage meet-ups with buyers, track attendees, and avoid scheduling conflicts.
+
+* **[Property Mode](#Properties)**: Store property listings, including landlord details, asking price, and property type for quick and easy references.
+
+These modes allow real estate agents to handle buyers, meet-ups, and property listings at a rapid pace, ensuring an efficient, convenient and integrated workflow for those who thrive on speed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,6 +49,10 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+**Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -155,6 +172,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL b/BUDGET [t/TAG]…​`
 A buyer can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Buyer's budget cannot exceed `9223372036854775807`. Refer to [known issues](#known-issues) for more information.
+</div>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com b/100,000`
 * `add n/Betsy Crowe t/urgent e/betsycrowe@example.com b/7,000,000 p/91234567 t/referred`
@@ -178,7 +199,7 @@ Examples:
 *  `edit 1 p/81234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `81234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
 
-### Locating buyers: `find`
+### Finding buyers: `find`
 
 Finds existing buyers in existing buyer list based on keywords.
 
@@ -222,6 +243,10 @@ Clears all entries from the buyer list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the buyers from the BuyerList, and there is no way to undo this, you may lose your data permanently.
+</div>
+
 ## Meet Ups
 ![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
 <div markdown="block" class="alert alert-info">
@@ -231,6 +256,10 @@ Format: `clear`
 * Note how the list already contains sample `Meet Up`s (if this is the first time using the app)
 
 * Note how the mode is highlighted by `Viewing: Meet Ups` above the command line
+
+* Note how each meet-up contains buyer, if the buyer exists in the BuyerList, it will be marked as purple, else red. The matching here is done by case-sensitive matching, e.g. `Alex Yeoh` will only be purple if there is `Alex Yeoh` in the Buyer List, not `Alex yeoh` or `alex yeoh` or `Alex`.
+
+* However, if an existing buyer's name is edited, the buyer shown in meet-ups will not update accordingly and will just change from purple to red, e.g. in the image above, if the name of `Alex Yeoh` was changed in the BuyerList to `Alex Yeo`, in the meet-up mode, both meetings would still display `Alex Yeoh` but in red now.
 
 </div>
 
@@ -246,15 +275,19 @@ Adds a meet-up to the meet-up list.
 
 Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO n/BUYER_NAME [n/MORE_BUYER_NAMES]…​`
 
-* New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO.
+* New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO. Else, it will be marked as a duplicate meet-up.
 
 * MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`.
 
 * MEETUP_TO must be a date/time that is later than MEETUP_FROM.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+When adding the MEETUP_FROM or MEETUP_TO, the `DD` parameter will take in any 2-digit number from 01 to 31. However, in some cases, such as February or April, the date 31 doesn't exist, in this case, instead of rejecting the input, the meet-up will be added but the date will be changed to the closest valid date in the same month. e.g. `2024-02-31 23:59` will create `2024-02-29 23:59`, `2024-04-31 12:00` will create `2024-04-30 12:00`, but `2024-04-32 12:00` will give an error since 32 is not a valid `DD` input.
+</div>
+
 * There must be at least one BUYER_NAME added.
 
-* Buyers that exist in buyer list will be marked as green, while those that don't will be marked as red.
+* Buyers that exist in buyer list will be marked as purple, while those that do not will be marked as red, for more details [see the notes in MeetUp](#meet-ups)
 
 Examples:
 * `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li `
@@ -262,7 +295,6 @@ Examples:
 Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
 
 ![MeetUpClash](images/MeetUpClash.png)
-
 
 ### Editing a meet-up : `edit`
 
@@ -281,7 +313,7 @@ Format: `edit INDEX [s/MEETUP_SUBJECT] [i/MEETUP_INFO] [f/MEETUP_FROM] [t/MEETUP
 Examples:
 *  `edit 1 i/Meet with Johnny to show him houses. f/2024-10-28 10:00 t/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
 
-### Locating meet-ups: `find`
+### Finding meet-ups: `find`
 
 Finds meet-ups whose meet-up names contain any of the given keywords.
 
@@ -299,7 +331,7 @@ Examples:
 
 ### Deleting a meet-up : `delete`
 
-Deletes the specified meet-up from the buyer list.
+Deletes the specified meet-up from the meet-up list.
 
 Format: `delete INDEX`
 
@@ -317,6 +349,10 @@ Examples:
 Clears all entries from the meet-up list.
 
 Format: `clear`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the meet-ups from the MeetUpList, and there is no way to undo this, you may lose your data permanently.
+</div>
 
 ## Properties
 ![PropertyModeInitialList](images/PropertyModeInitialList.png)
@@ -340,9 +376,13 @@ Format: `view`
 
 Adds a property to the property list.
 
+Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
+
 * New properties must have unique addresses and must not be duplicate addresses of existing properties.
 
-Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Property's asking price cannot exceed `9223372036854775807`. Refer to [known issues](#known-issues) for more information.
+</div>
 
 Examples:
 * `add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium`
@@ -353,17 +393,17 @@ Edits an existing property in the property list.
 
 Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [s/ASKING_PRICE] [t/PROPERTY_TYPE]`
 
-* Edits the buyer at the specified `INDEX`. 
+* Edits the landlord at the specified `INDEX`. 
 * The index refers to the index number shown in the **displayed property list**. 
 * The index must be a positive integer 1, 2, 3, …​. ​If the index is not a positive integer, the error message shown will be `invalid command format`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 s/100000` Edits the seller's phone number and the property's asking price to be `91234567` and `100,000` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's seller to be `Betsy Crower`.
+*  `edit 1 p/91234567 s/100000` Edits the first property's landlord phone number and its asking price to be `91234567` and `100,000` respectively.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's landlord to be `Betsy Crower`.
 
-### Locating properties: `find`
+### Finding properties: `find`
 
 Find existing properties in the property list based on either name or address keywords.
 
@@ -403,6 +443,10 @@ Clears all entries from the property list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the properties from the PropertyList, and there is no way to undo this, you may lose your data permanently.
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -425,11 +469,13 @@ Format: `clear`
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-1. **The JAR file cannot be opened with double-click on some MacOS devices**. If the JAR file fails to open, use a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar abcli.jar` command to run the application.
+3. **If you input a budget or asking price that exceeds** `9223372036854775807`, the command will silently fail, and no error message will be shown. This is due to exceeding the maximum value for a 64-bit integer. A planned enhancement will add a validation check to prevent input beyond a maximum realistic range.
 
-1. **When inputting a name**, if the name is too long, the interface is unable to display the full name, and it will be truncated, with ellipses (...) representing the truncated part of the name.
+4. **When inputting a name**, if the name is too long, the interface is unable to display the full name, and it will be truncated, with ellipses (...) representing the truncated part of the name.
+
+5. **Editing/Deleting buyers that are included in Meet-Ups**, editing/deleting a buyer in the BuyerList that is also part of a meet-up in the MeetUpList will not update the buyer shown in the MeetUpList. For example, meet-up `Sales Meeting` has buyer `Alex Yeoh` in the MeetUpList and `Alex Yeoh` is a buyer in the BuyerList, thus `Sales Meeting` shows `Alex Yeoh` in purple (the buyer exists). If you go to Buyer mode and edit `Alex Yeoh` to be something different such as `Alex yeoh`,`alex yeoh`,`alex`, etc, `Sales Meeting` will still show `Alex Yeoh` but in red now (buyer does not exist anymore). Deleting `Alex Yeoh` in the BuyerList will cause the same effect. The name matching between buyers in meet-ups and buyers in the BuyerList is done with exact case-sensitive matching, `Alex Yeoh` will only be purple in the `Sales Meeting` if the BuyerList has a buyer with the exact name `Alex Yeoh`.
 
 --------------------------------------------------------------------------------------------------------------------
 
