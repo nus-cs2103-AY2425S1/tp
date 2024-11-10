@@ -18,6 +18,7 @@ public class PhoneNumberContainsKeywordPredicate implements Predicate<Person> {
      * @param keywords List of keywords to search for in the phone number field.
      */
     public PhoneNumberContainsKeywordPredicate(List<String> keywords) {
+
         this.keywords =
                 keywords.stream()
                         .filter(keyword -> !keyword.isBlank())
@@ -27,6 +28,9 @@ public class PhoneNumberContainsKeywordPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        if (person.getPhone() == null) {
+            return false;
+        }
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword))
             || keywords.stream().allMatch(keyword -> person.getPhone().value.toLowerCase()

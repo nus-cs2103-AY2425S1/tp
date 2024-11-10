@@ -29,7 +29,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+
         if (keywords.isEmpty()) {
+            return false;
+        }
+        if (person.getName() == null) {
             return false;
         }
         List<String> filteredKeywords = keywords.stream()
