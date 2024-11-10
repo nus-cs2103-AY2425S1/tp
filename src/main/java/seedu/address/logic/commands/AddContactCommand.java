@@ -23,7 +23,7 @@ public class AddContactCommand extends AddCommand<Person> {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ROLE + "ROLE "
-            + "[" + PREFIX_SKILL + "SKILLS]... (Optional)\n"
+            + "[" + PREFIX_SKILL + "SKILL]... (Optional)\n"
             + "Example: " + FULL_COMMAND + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
