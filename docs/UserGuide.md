@@ -113,6 +113,11 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 - Tag should consist of alphanumeric characters only, and it should be between 1 and 30 characters long.
 </div>
 
+<div markdown="span" class="alert alert-danger">⚠️ **Warning:**
+- Students with same name, regardless of case-sensitivity, will be considered as the same student and will not be added.
+- Modules and tags are case-sensitive and will be added as they are.
+</div>
+
 Examples:
 * `add n/John Doe p/98765432 g/male m/Mathematics` : Adds a student named `John Doe` to StoreClass.
 * `add n/Betsy Crowe g/female p/12345678 m/Physics m/Chemistry t/OLevels t/new` : Adds a student named `Betsy Crowe` to StoreClass.
@@ -467,7 +472,9 @@ Furthermore, certain edits can cause the StoreClass to behave in unexpected ways
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When the UI window is set to a small size** certain element in the UI maybe hard to view. E.g. modules, long names... Hence, we recommend you to use a large screen and a large window size when using our product so that all the fields can be viewed clearly.
+3. **After inputting a command**, the scroll bar in the command box becomes unresponsive. The remedy is to click on the scroll bar to make it responsive again.
+4. **When the UI window is set to a small size** certain element in the UI maybe hard to view. E.g. modules, long names... Hence, we recommend you to use a large screen and a large window size when using our product so that all the fields can be viewed clearly.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
