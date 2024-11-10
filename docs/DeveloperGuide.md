@@ -1128,5 +1128,4 @@ MediBase3 does not currently check if the email ends with a top-level domain (TL
 
 Currently, when adding multiple medical conditions or allergies with the `addMedCon` or `addAllergy` commands, the entire command is rejected if any of the specified conditions or allergies already exist for the patient. 
 This means that none of the conditions or allergies are added, even if some are new. 
-In the future, we plan to enhance this feature by partially accepting the command, only rejecting the duplicate entries and successfully adding the new ones. 
-This change will improve efficiency for busy doctors by reducing redundant error messages and ensuring that valid inputs are processed, optimising the application for real-world use cases.
+In the future, we plan to enhance this feature by partially accepting the command, only rejecting the duplicate entries and successfully adding the new ones.
