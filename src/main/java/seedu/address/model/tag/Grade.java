@@ -14,7 +14,7 @@ import seedu.address.model.tag.exceptions.InvalidGradeIndexException;
  * Guarantees: immutable; index is valid as declared in {@link #isValidGradeIndex(String)}
  */
 public class Grade {
-    public static final String MESSAGE_CONSTRAINTS = "Grade index should be numeric and between 0 to 5";
+    public static final String MESSAGE_CONSTRAINTS = "Grade index should be numeric and between 0 to 4";
     public static final String VALIDATION_REGEX = "\\d+";
     private static final Logger logger = LogsCenter.getLogger(Grade.class);
     public final String gradeIndex;
