@@ -234,7 +234,7 @@ add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP
 | Name        | • Letters, numbers, and spaces only<br>• Cannot be blank                                                                                                   |
 | Phone       | • 3-15 digits<br>• Alphabetical characters (A-Z, a-z) and special characters (/ - _ ( )) are permitted. <br> • At least one digit is required in the number |
 | Email       | • Must be valid email format (example@domain.com)                                                                                                          |
-| Relationship| • Letters only<br>• Cannot be blank<br>• Note: Please enter a meaningful relationship that best describes the connection (e.g., "Friend," "Colleague," "Sibling").
+| Relationship| • Letters only<br>• Cannot be blank<br>• Case-sensitive<br>• Note: Please enter a meaningful relationship that best describes the connection (e.g., "Friend," "Colleague," "Sibling").
 
                                                                                                                    |
 
