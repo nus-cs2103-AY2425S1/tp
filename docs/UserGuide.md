@@ -129,6 +129,7 @@ A person can have any number of tags (including 0)
 - Note that Name, Phone Number, Email and Address are compulsory fields. 
 - We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not 
 particularly sensitive as compared to Identification Number etc.
+- The email validation does not check for the presence of a period (.) after the "@" symbol, and it does not verify any specific domain extension. It only ensures that the domain name after the "@" is at least two characters long. E.g. `@u.nus.edu`
 
 Examples:
 
@@ -235,6 +236,9 @@ A person can have any number of notes (including 0)
 - The note must be comprised of alphanumeric characters or spaces.
 - Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
 - Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
+- Only one note may be added at a time. E.g. `addnote 1 n/High profile client`. If `addnote 1 n/Supplier 1 n/Supplier 2`
+is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
+feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
 
 Examples:
 
@@ -255,6 +259,7 @@ Format: `editnote INDEX i/NOTE_INDEX n/NOTE`
 - The note must be comprised of alphanumeric characters or spaces.
 - Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
 - Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
+- Only one note may be edited in each command. The behaviour is similar to that of `addnote`.
 
 Examples:
 
@@ -272,6 +277,7 @@ Format: `deletenote INDEX i/NOTE_INDEX`
 - The note index (i.e. `NOTE_INDEX`) refers to the index number shown in the notes list of the contact details of the
   displayed person.
 - The index and note index **must be positive integers** 1, 2, 3, …​
+- Only one note may be deleted in each command. The behaviour is similar to that of `addnote`.
 
 Examples:
 
@@ -436,7 +442,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## Future Features
 
 1) While we are aware of the possibility of international numbers, for this iteration, we decided to focus on the local population. Support for these numbers is planned in a future release.
-
+2) The current email validation does not check for the presence of a period (.) after the "@" symbol and only ensures that the domain name after the "@" is at least two characters long. Checking for the period is planned in a future release.
 
 ---
 
@@ -452,6 +458,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When you have extremely long tags**, the UI will not be able to display your tags properly. Text may not wrap, it may cause some parts to have scroll bars. Please avoid using excessive or really long tag names.
+4. **Only one note may be added at a time**. E.g. `addnote 1 n/High profile client`. If `addnote 1 n/Supplier 1 n/Supplier 2`
+   is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
+   feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
 
 ---
 
