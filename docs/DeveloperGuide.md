@@ -332,188 +332,306 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to add a new patient.
-2. NovaCare prompts for the patient's relevant details.
-3. User inputs the required information.
-4. NovaCare outputs a message showing successful patient creation.
+1. Nurse requests to add patient details to the system.
+2. NovaCare adds the patient to the list.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. NovaCare detects an invalid phone number or email.
+* 1a. The command format is incorrect or one or more compulsory fields (name, phone number, email or address) are omitted.
 
-    * 3a1. NovaCare requests valid phone number and/or email.
-    * 3a2. User re-enters the phone number and/or email.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
 
-      Steps 3a1-3a2 are repeated until the data entered is correct.
-      Use case resumes at step 4 if the details entered are correct.
+* 1b. One of the parameters are invalid.
 
-* 3b. User omits one or more required fields (name, phone number, email or address).
+    * 1b1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.
 
-    * 3b1. NovaCare prompts the user to enter the missing fields.
-    * 3b2. User provides the missing information.
+* 1c. A patient with identical name and phone number already exists in the list.
 
-      Steps 3b1-3b2 are repeated until all required fields are provided.
-      Use case resumes at step 3 once all fields are correctly entered.
+    * 1c1. NovaCare displays an error message specifying the existence of a duplicate patient.<br>Use Case ends.
 
-**Use Case: UC02 - Delete Patient**
+**Use Case: UC02 - Edit Patient**
+**Preconditions: Patient list is not empty**
 
 **MSS**
 
-1. User chooses to delete a patient.
-2. NovaCare prompts the user to enter patient ID.
-3. User inputs the required patient ID.
-4. NovaCare outputs a message showing successful patient deletion.
+1. Nurse requests to edit the patient details of a specific patient.
+2. NovaCare edits the details of the specified person in the list.
 
    Use case ends.
 
 **Extensions**
 
-* 3a. NovaCare cannot find the patient.
+* 1a. The command format is incorrect.
 
-    * 3a1. NovaCare prompts the user to enter valid patient ID.
-    * 3a2. User re-enters the patient details.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
 
-      Steps 3a1-3a2 are repeated until a valid patient record is found.
-      Use case resumes at step 3 if the patient details are correct.
+* 1b. One of the parameters are invalid.
 
+    * 1b1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.
 
-**Use case: UC03 - Add Task**
+* 1c. A patient with identical name and phone number already exists in the list.
 
-**MSS**
+    * 1c1. NovaCare displays an error message specifying the existence of a duplicate patient.<br>Use Case ends.
 
-1. User chooses to add a new task.
-2. NovaCare asks for a patient ID and description of the task.
-3. User inputs the requested information.
-4. NovaCare outputs message showing successful task creation.
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The patient list is empty.
-
-  Use case ends.
-
-* 3a. NovaCare detects an invalid patient ID.
-
-    * 3a1. NovaCare requests for valid patient ID.
-    * 3a2. User enters a new patient ID and description of the task.
-
-      Steps 3a1-3a2 are repeated until the data entered is correct.
-      Use case resumes at step 2 if patient details are re-entered.
-
-**Use Case: UC04 - Delete Task**
+**Use Case: UC03 - Delete Patient**
+**Preconditions: Patient list is not empty**
 
 **MSS**
 
-1. User chooses to delete a task.
-2. NovaCare asks for the Task ID of the task to be deleted.
-3. User inputs the Task ID.
-4. NovaCare outputs a message showing successful deletion of the task.
+1. Nurse requests to edit the patient details of a specific patient.
+2. NovaCare deletes the patient from the patient list and the tasks related to the patient in the task list.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The task list is empty.
+* 1a. The command format is incorrect or the index is missing.
 
-    * Use case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
 
-* 3a. NovaCare detects an invalid Task ID.
+* 1b. The given index is invalid.
 
-    * 3a1. NovaCare requests a valid Task ID.
-    * 3a2. User enters a new Task ID.
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
-      Steps 3a1-3a2 are repeated until the data entered is correct.
-      Use case resumes at step 2 if patient details are re-entered.
-
-**Use case: UC05 - Add Emergency contact**
+**Use Case: UC04 - List Patients**
 
 **MSS**
 
-1. User chooses to add emergency contact details to a selected patient.
-2. NovaCare asks for a patient ID, emergency contact name, and emergency contact number.
-3. User inputs the requested information.
-4. NovaCare adds the emergency contact to the selected patient and displays a confirmation message with the updated emergency contact.
+1. Nurse requests to list all patient details.
+2. NovaCare displays a list of all patient details.
 
-    Use case ends.
+   Use case ends.
+
+**Use Case: UC05 - Find Patient(s) by Name**
+
+**MSS**
+
+1. Nurse requests to find patients whose name contains `keywords`.
+2. NovaCare lists patient(s) whose name contains `keywords`.
+
+   Use case ends.
 
 **Extensions**
 
-* 3a. NovaCare detects that the patient already has a registered emergency contact.
+* 1a. The `keywords` are empty.
 
-    * 3a1. NovaCare notifies the user that the patient already has a registered emergency contact.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+
+**Use case: UC06 - Add Emergency contact**
+**Preconditions: Patient list is not empty**
+
+**MSS**
+
+1. Nurse requests to add emergency contact details to a selected patient.
+2. NovaCare adds the emergency contact details to the selected patient.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+
+* 1c. At least one of the parameters (name and/ or phone number) are invalid.
+
+    * 1c1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.
+
+* 1d. NovaCare detects that the patient already has a registered emergency contact.
+
+    * 1d1. NovaCare displays an error message that the patient already has a registered emergency contact.
 
       Use case ends.
 
-* 3b. NovaCare detects that the patient does not exist.
-
-    * 3b1. NovaCare notifies the user that the patient does not exist.
-    * 3b2. User either re-enters the correct patient details or cancels the operation.
-
-      Use case resumes at step 2 if patient details are re-entered.
-
-**Use case: UC06 - Delete Emergency contact**
+**Use case: UC07 - Delete Emergency contact**
+**Preconditions: Patient list is not empty**
 
 **MSS**
 
-1. User chooses to delete the emergency contact details of a selected patient.
-2. NovaCare asks for a patient ID of the patient to have their emergency contact details deleted.
-3. User inputs the patient ID.
-4. NovaCare deletes the emergency contact of the selected patient and displays a confirmation message with the deleted emergency contact.
+1. Nurse requests to delete the emergency contact details of a selected patient.
+2. NovaCare deletes the emergency contact details of the selected patient.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 3a. NovaCare detects that the patient does not have a registered emergency contact.
+* 1a. The command format is incorrect.
 
-    * 3a1. NovaCare notifies the user that the patient already does not have a registered emergency contact.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+
+* 1d. NovaCare detects that the patient already does not have a registered emergency contact.
+
+    * 1d1. NovaCare displays an error message that the patient already does not have a registered emergency contact.
 
       Use case ends.
 
-* 3b. NovaCare detects that the patient does not exist.
-
-    * 3b1. NovaCare notifies the user that the patient does not exist.
-    * 3b2. User either re-enters the correct patient details or cancels the operation.
-
-      Use case resumes at step 2 if patient details are re-entered.
-
-**Use Case: UC07 - Add Priority**
+**Use Case: UC08 - Add Priority**
+**Preconditions: Patient list is not empty**
 
 **MSS**
 
-1. User chooses to add a priority level to a patient.
-2. User selects the relevant patient and chooses the desired priority level.
-3. NovaCare updates the patient record with the chosen priority level.
-4. NovaCare outputs a message showing successful priority update for the patient.
+1. Nurse requests to add a priority level to a specified patient.
+2. NovaCare updates the given patient details with the entered priority level.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. NovaCare detects an invalid priority level.
+* 1a. The command format is incorrect.
 
-    * 2a1. NovaCare prompts the user to enter a valid priority level.
-    * 2a2. User re-enters the priority level.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
 
-      Steps 2a1-2a2 are repeated until a valid priority level is provided.
-      Use case resumes at step 3 if the priority level is correct.
+* 1b. The given index is invalid.
 
-**Use Case: UC08 - Reset Priority**
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+
+**Use Case: UC09 - Reset Priority**
 
 **MSS**
 
-1. User chooses to reset the priority level for a patient.
-2. NovaCare prompts the user to select the patient.
-3. User selects the relevant patient to reset the priority.
-4. NovaCare resets the priority level for the patient to the default setting.
-5. NovaCare outputs a message confirming the successful reset of the patient's priority.
+1. Nurse requests to reset a priority level of a specified patient.
+2. NovaCare resets the given patient details with the default priority level.
 
    Use case ends.
 
+
+**Use case: UC10 - Add Task**
+**Preconditions: Patient list is not empty**
+
+**MSS**
+
+1. Nurse requests to add a new task to a specific patient.
+2. NovaCare adds the task to the task list.
+
+    Use case ends.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect or the description field is empty.
+
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+
+**Use Case: UC11 - Delete Task**
+**Preconditions: Patient list and task list is not empty**
+
+**MSS**
+
+1. Nurse requests to delete a new task from the task list.
+2. NovaCare deletes the task from the task list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+
+**Use Case: UC12 - List Tasks**
+
+**MSS**
+
+1. Nurse requests to list all tasks.
+2. NovaCare displays a list of all tasks.
+
+   Use case ends.
+
+**Use Case: UC13 - Find Task(s) by Patient Index**
+
+**MSS**
+
+1. Nurse requests to find tasks for a specified patient's index.
+2. NovaCare lists task(s) under patient with the given index.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+
+**Use Case: UC14 - Mark Task**
+**Preconditions: Patient list and task list is not empty**
+
+**MSS**
+
+1. Nurse requests to mark a specified task as complete.
+2. NovaCare marks given task to be complete.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+
+**Use Case: UC15 - Unmark Task**
+**Preconditions: Patient list and task list is not empty**
+
+**MSS**
+
+1. Nurse requests to unmark a specified task to be incomplete.
+2. NovaCare unmarks given task to be incomplete.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use
+
+**Use Case: UC16 - List Incomplete Tasks**
+
+**MSS**
+
+1. Nurse requests to list all incomplete tasks.
+2. NovaCare displays a list of all incomplete tasks.
+
+   Use case ends.
+
+**Use Case: UC17 - Clear All Patients and Tasks**
+
+**MSS**
+
+1. Nurse requests to clear all patients and tasks in NovaCare.
+2. NovaCare clears all patient and task data.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
