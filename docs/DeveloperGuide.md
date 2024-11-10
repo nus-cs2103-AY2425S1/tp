@@ -281,7 +281,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **UC01: Add contact**
 
 **MSS**
-1. User requests to add a person
+1. User requests to add a student
 2. ConTActs adds the contact to the list
 
     Use case ends.
@@ -304,10 +304,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  ConTActs shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  ConTActs deletes the person
+1.  User requests to list students
+2.  ConTActs shows a list of students
+3.  User requests to delete a specific student in the list
+4.  ConTActs deletes the student
 
     Use case ends.
 
@@ -328,8 +328,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons with parameters e.g. by name, by tag
-2. ConTActs displays the list of persons
+1. User requests to list students with parameters e.g. by name, by tag
+2. ConTActs displays the list of students
 
     Use case ends.
 
@@ -347,15 +347,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
-**UC04: Mark/Unmark/Reset contacts' tutorial**
+**UC04: Mark/Unmark/Reset student's tutorial**
 
 **MSS**
 
-1.  User requests to list persons
-2.  ConTActs shows a list of persons
-3.  User requests to modify the tutorial attendance for a person in the list
-4.  ConTActs modifies the person's tutorial attendance accordingly
+1.  User requests to list students
+2.  ConTActs shows a list of students
+3.  User requests to modify the tutorial attendance for a student in the list
+4.  ConTActs modifies the student's tutorial attendance accordingly
 5.  ConTActs shows the unfiltered list after modification 
+
+    Use case ends.
 
 **Extensions**
 
@@ -371,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
   
-* 3c. User tries to modify tutorial state to itself e.g. mark someone present as present
+* 3c. User tries to modify tutorial state to itself e.g. mark someone present as present.
   
     * 3c1. ConTActs shows a message that the modification is unnecessary.
         
@@ -388,7 +390,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3d2. List is not empty.
     
         ConTActs will modify all tutorials for every Person.
-         
+
+**UC05: Edit student details**
+
+**MSS**
+
+1.  User requests to list persons.
+2.  ConTActs shows a list of persons. 
+3.  User requests to edit the details of a person in the list by specifying the index and the fields to update. 
+4.  ConTActs verifies that the index is valid and that the fields provided contain acceptable values. 
+5.  ConTActs modifies the person’s details as requested. 
+6.  ConTActs shows the updated unfiltered list after modification.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a.  The index provided does not correspond to any person in the list.
+
+    * 3a1. ConTActs shows an error message indicating the index is invalid.
+
+      Use case resumes at step 3.
+
+* 3b. No fields are specified for editing.
+
+    * 3b1. ConTActs shows an error message indicating that at least one field must be provided for editing.
+
+      Use case resumes at step 3.
+
+* 3c. The provided field values are invalid (e.g., email without an @ symbol, phone with non-numeric characters).
+
+    * 3c1. ConTActs shows an error message indicating which fields contain unacceptable values.
+
+      Use case resumes at step 3.
+
+* 3d. The updated values do not result in any actual changes (e.g., trying to set the same phone number or email as before).
+
+    * 3d1. ConTActs shows a message that the modification is unnecessary because the edited fields are identical to the old values.
+
+      Use case resumes at step 3.
+
+* 3e. The edited person would duplicate an existing person in the address book (e.g., same student ID or email as another person).
+
+    * 3e1. ConTActs shows an error message indicating that such a person already exists.
+
+      Use case resumes at step 3.
   
 ### Non-Functional Requirements
 
@@ -397,17 +443,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  The user interface should be optimized for CLI interaction. Users should be able to accomplish tasks more efficiently using commands than using the mouse.
 4.  Should provide clear, informative error messages in the event of invalid inputs or commands to provide sufficient guidance on how to correct it.
 5.  The contacts data, such as student details and tutorial attendance, should be stored in a durable format that supports easy retrieval.
-6.  Should only discard the affected contact in the event of corrupted data, to keep impact to a minimum.
-7.  Should work without internet connection.
-8.  All commands should run under 2 seconds.
-9.  Contact data stored should be secure and adhere to local laws such as PDPA.
+6. Should work without internet connection.
+7. All commands should run under 2 seconds.
+8. Contact data stored should be secure and adhere to local laws such as PDPA.
 
 ### Glossary
 
+* **TA**: Teaching Assistant, a student who provides teaching support for a course.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **CLI**: Command Line Interface, a text-based user interface used to interact with the app by typing commands.
 * **Contact**: A student's information stored in the system, including name, NUS Net ID, phone number, email address and tutorial attendance.
-* **NUS Net ID**: A unique username and identifier for NUS students associated with most of NUS platforms such as Canvas, EduRec. It should follow the format “eXXXXXXX” (one letter 'e' followed by seven digits).
+* **NUS Net ID**: A unique username and identifier for NUS students associated with most of NUS platforms such as Canvas, EduRec. It should follow the format “EXXXXXXX” (capital letter 'E' followed by seven digits).
 * **Invalid Commands**: Commands entered into the CLI that do not match any recognized system commands.
 * **Invalid Inputs**: Data provided by the user that does not meet the required format or validation criteria for the specific command.
 * **Corrupted Data**: Data stored in the wrong format or with missing/invalid mandatory information.
@@ -454,7 +500,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 ### Editing attendance status
-Prerequisites: Ensure one more than one contact is present. These tests can and should be done sequentially.
+Prerequisites: Ensure more than one contact is present. These tests can and should be done sequentially.
 1. Marking attendance as present for a person
    1. Test case: `mark 1 tut/1`<br>
    Expected: First contact's tutorial box 1 turns green.
