@@ -287,7 +287,9 @@ Executing a command that modifies the address book (like `add`, `edit`, or `dele
 2. You decide to redo the action and restore the contact again.
     - *After Redo:* [After Redo Command] – The contact is deleted once more.
 
-<img src="images/UndoRedoExample4.png" alt="After Redo Command" width="60%" />
+**[After Redo Command]**
+<br>
+<img src="images/UndoRedoExample4.png" alt="After Redo Command" />
 
 ---
 
