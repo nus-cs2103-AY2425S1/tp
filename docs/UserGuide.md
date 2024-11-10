@@ -430,8 +430,13 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > **Input**: `showclients`
 > 
 > **Output**: Here are your clients!
+> ![img_3.png](img_3.png)
 > 
 > ---
+
+- **Failed Execution:** NIL
+- **Special Comments**
+1. You are able to execute showclients on an empty list of clients.
 
 #### Find
 - **Command:** `find KEYWORD [KEYWORD]...`
@@ -906,6 +911,9 @@ Commands for managing property listings and associating clients with listings.
 >
 > ---
 
+- **Failed Execution:** NIL
+- **Special Comments:** NIL
+
 ### 4. Utility Commands
 
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
@@ -923,6 +931,9 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 >
 > ---
 
+- **Failed Execution:** NIL
+- **Special Comments:** NIL
+
 #### Exit
 - **Command:** `exit`
 - **Description:** Exits the application.
@@ -935,6 +946,9 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > **Output**: Exiting Address Book as requested ...
 >
 > ---
+
+- **Failed Execution:** NIL
+- **Special Comments:** NIL
 
 #### Help
 - **Command:** `help`
@@ -951,14 +965,17 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > 
 > ---
 
+- **Failed Execution:** NIL
+- **Special Comments:** NIL
+
 #### More Info
-- **Command:** `moreinfo NAME`
+- **Command:** `moreinfo INDEX`
 - **Description:** Provides additional information about a specific client.
 - **Successful Execution:**
 > ---
 > **Use Case**: Finding out more information about `Bob`
 >
-> **Input**: `moreinfo Bob`
+> **Input**: `moreinfo 1`
 >
 > **Output**: Opened window for client's information.
 >
@@ -966,32 +983,17 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > 
 > ---
 
-<br>
-<div class="note" markdown="span">
-NAME is case-insensitive: 
-`moreinfo Bob` = `moreinfo BOB` = `moreinfo bOb` _(Not exhaustive)_
-
-Thus, these commands will provide more information about the same `Bob` client
-</div>
-<br>
-
-<div class="alert" markdown="span">
-However, NAME is space-sensitive:
-`moreinfo wen xuan` != `moreinfo wenxuan`
-
-These commands will provide more information about different clients
-</div> 
-<br>
-
 - **Failed Execution:**
+> **User Error**: Out-of-bounds index
+>
+> **Input**: `moreinfo 100`
+> 
+> **Output**: The person index provided is invalid!
+> 
 > ---
-> **Use Case**: Client not found
->
-> **Input**: moreinfo nonExistentClient
->
-> **Output**: Please enter an existing client name!
->
-> ---
+
+- **Special Comments:**
+  Refer to the remarks and constraints for the following prefix: [n/](#n)
 
 #### Chat Window
 - **Command:** `chatbot`
@@ -1033,6 +1035,7 @@ These commands will provide more information about different clients
 ![outputOfInvalidInput.png](images%2FoutputOfInvalidInput.png)
 > ---
 
+- **Special Comments:** NIL
 
 ### Saving the data
 
