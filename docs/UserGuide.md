@@ -430,7 +430,7 @@ Examples:
 
 <br><br/>
 
-#### Assign person to wedding : `assign`
+#### Assign contact to wedding : `assign`
 
 Format: `assign WEDDING_INDEX c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
@@ -444,7 +444,7 @@ Examples:
 
 <br><br/>
 
-#### Unassign person from wedding : `unassign`
+#### Unassign contact from wedding : `unassign`
 
 Format: `unassign c/CONTACT1_INDEX [CONTACT2_INDEX...] `
 
