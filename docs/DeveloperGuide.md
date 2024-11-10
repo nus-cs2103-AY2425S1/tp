@@ -407,8 +407,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. No matching entries are found.
-    * 2a1. System shows a message indicating no results.
+* 1b. No matching entries are found.
+    * 1b1. System shows a message indicating no results.
 
       Use case ends.
 
