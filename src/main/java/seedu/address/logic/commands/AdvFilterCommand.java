@@ -73,7 +73,7 @@ public class AdvFilterCommand extends Command {
 
         Predicate<Person> predicate = person -> {
             boolean tagMatches = person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName)
-                    && (tag.tagValue != null ? compare(operator, tag, tagValue) : true));
+                    && (tag.tagValue != null ? compare(operator, tag, tagValue) : false));
             return tagMatches;
         };
 
@@ -147,8 +147,28 @@ public class AdvFilterCommand extends Command {
      */
     public boolean compare(Operator operator, Tag tag, String tagValue) {
         return switch (operator) {
-        case EQUAL -> tag.tagValue.equalsIgnoreCase(tagValue);
-        case NOT_EQUAL -> !tag.tagValue.equalsIgnoreCase(tagValue);
+        case EQUAL -> {
+            Integer doubleResult = compareDouble(tag.tagValue, tagValue);
+            if (doubleResult != null) {
+                yield doubleResult == 0;
+            }
+            Integer stringResult = compareString(tag.tagValue, tagValue);
+            if (stringResult != null) {
+                yield stringResult == 0;
+            }
+            yield false;
+        }
+        case NOT_EQUAL -> {
+            Integer doubleResult = compareDouble(tag.tagValue, tagValue);
+            if (doubleResult != null) {
+                yield doubleResult != 0;
+            }
+            Integer stringResult = compareString(tag.tagValue, tagValue);
+            if (stringResult != null) {
+                yield stringResult != 0;
+            }
+            yield false;
+        }
         case GREATER_THAN -> {
             Integer doubleResult = compareDouble(tag.tagValue, tagValue);
             if (doubleResult != null) {
@@ -211,7 +231,7 @@ public class AdvFilterCommand extends Command {
         if (tryParseDouble(currentValue) != null || tryParseDouble(testValue) != null) {
             return null;
         }
-        return currentValue.compareTo(testValue);
+        return currentValue.compareToIgnoreCase(testValue);
     }
 
     /**
