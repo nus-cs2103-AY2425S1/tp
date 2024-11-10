@@ -698,11 +698,11 @@ This command finds contacts by university. It requires a university. University 
 ---
 <div style="page-break-after: always;"></div>
 
-### Appendix: Effort
+## **Appendix: Effort**
 
 Our goal was to enhance AB3 by introducing new commands and improving functionality for better contact management, specifically tailored for university students.
 
-#### Key Efforts and Challenges
+### Key Efforts and Challenges
 
 **1. Adding Work Experience and Interests (`addw` and `addi` commands)**:
 - **Effort**: These commands were developed to allow users to add work experiences and interests to existing contacts. The `Command` classes were extended to handle new parameters while ensuring that the `Model` and `Storage` components were updated for data integrity and compatibility.
