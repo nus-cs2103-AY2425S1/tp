@@ -1135,4 +1135,13 @@ Team size: 5
   Currently, commands that modify the Patient List panel do not update the Appointment List panel to show only the appointments of the currently listed patients. 
   Adding this feature would allow doctors to view the appointments of the visible patients in chronological order, rather than grouped under each patient's details.
 
+6\. **Allow for foreign patients to be added to Medibase3**
 
+  Currently, MediBase3 uses the patient's NRIC or FIN number as their unique identifier. However, this prevents doctors from adding foreign patients, who do not have a NRIC or FIN number , into Medibase3.
+  As such, we plan on improving MediBase3 to allow doctors to add foreign patients by using other forms of identification, such as their passport number.
+
+7\. **Make certain fields optional**
+
+  Currently, all fields are mandatory when adding a patient. However, there could be cases where the patient does not have an email address or phone number.
+  It would be ideal to make certain fields optional as it allows for more flexibility when adding patient details. However, the NRIC field should remain mandatory 
+  since it is the unique identifier for each patient which ensures that duplicate patients cannot be added.
