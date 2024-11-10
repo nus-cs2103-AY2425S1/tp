@@ -12,22 +12,20 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 ## Table of Contents
 - [Quick Start](#quick-start)
 - [Features](#features)
-  - [Viewing help](#viewing-help-help)
-  - [Adding a person](#adding-a-person-add)
-  - [Editing a person](#editing-a-person-edit)
-  - [Finding persons by name](#finding-persons-by-name-find)
-  - [Finding persons by telegram handle](#finding-persons-by-telegram-handle-findtele)
-  - [Finding persons by tags](#finding-persons-by-tags-findtag)
-  - [Filtering persons by contact type](#filtering-persons-by-contact-type-filter)
-  - [Deleting a person](#deleting-a-person-delete)
-  - [Switching display theme](#switching-display-theme-switch)
-  - [Importing data](#importing-data-import)
-  - [Exiting the program](#exiting-the-program-exit)
+  - [Viewing help](#viewing-help--help)
+  - [Adding a person](#adding-a-person--add)
+  - [Editing a person](#editing-a-person--edit)
+  - [Finding persons by name](#finding-persons-by-name--find)
+  - [Finding persons by telegram handle](#finding-persons-by-telegram-handle--findtele)
+  - [Finding persons by tags](#finding-persons-by-tags--findtag)
+  - [Filtering persons by contact type](#filtering-persons-by-contact-type--filter)
+  - [Deleting a person](#deleting-a-person--delete)
+  - [Switching display theme](#switching-display-theme--switch)
+  - [Importing data](#importing-data--import)
+  - [Exiting the program](#exiting-the-program--exit)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
-
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -45,8 +43,8 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 - Move the `.jar` file to where you want to store your UniLink data. This will be your 'home folder'.
 
 **4. Launch the app!**
-- Open up Command Prompt (for Windows) or Terminal (for Mac) and navigate to the home folder with `cd path-to/folder`
-    - E.g. If my jar file is in a folder called 'Contacts' in a folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
+- Open Command Prompt (for Windows) or Terminal (for Mac) and navigate to the folder where your JAR file is located. Use the cd command followed by the path to the folder. 
+    - E.g. If my jar file is in a folder called 'Contacts', which is inside another folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
 - Run UniLink by typing `java -jar UniLink.jar`
 - The app should open within a few seconds, showing some sample data that you can explore!
 
@@ -66,8 +64,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
-
-1. For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
+- For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -223,7 +220,6 @@ Format: `filter CONTACT_TYPE`
 * The search is case-insensitive. e.g. 'work' is the same as 'WORK'
 
 Examples:
-
 * `filter WORK` returns all the 'work' contacts
 * `filter SCHOOL` returns all the 'school' contacts
 * `filter PERSONAL` returns all the 'personal' contacts
@@ -259,8 +255,8 @@ Format: `switch THEME`
 * `THEME` is case-insensitive. e.g. 'light' is the same as 'LIGHT'
 
 Examples:
-
 * `switch LIGHT` switches to the 'light' display theme
+  ![result for 'switch light'](images/switchLight.png)
 * `switch DARK` switches to the 'dark' display theme
   ![result for 'switch dark'](images/switchDark.png)
 
