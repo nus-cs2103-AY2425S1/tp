@@ -30,6 +30,7 @@
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
+  * [Calendar]({{ baseUrl }}/UserGuide.html#calendar)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:

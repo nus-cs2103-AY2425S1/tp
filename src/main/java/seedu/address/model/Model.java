@@ -93,6 +93,12 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Returns the current predicate used by the filtered person list.
+     * Should not return {@code null}.
+     */
+    Predicate<? super Person> getFilteredPersonListPredicate();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
@@ -104,6 +110,11 @@ public interface Model {
      * @param comparator Specifies new comparison criteria to order person list by.
      */
     void updateSortingOrder(Comparator<Person> comparator);
+
+    /**
+     * Replaces appointment list data with the data in {@code appointments}.
+     */
+    void setAppointmentList(List<Appointment> appointments);
 
     /** Returns an unmodifiable view of the appointment list */
     List<Appointment> getAppointmentList();

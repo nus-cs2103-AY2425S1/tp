@@ -52,7 +52,7 @@ public class ModelManager implements Model {
         sortedPersons.setComparator(Comparator.comparing(Person::getPriority) // sort by descending priority
                 .thenComparing(person -> person.getName().toString())); // sort by name alphabetically after
 
-        this.appointments = FXCollections.observableList(appointments);
+        this.appointments = FXCollections.observableArrayList(appointments);
         filteredAppointments = new FilteredList<>(this.appointments);
         sortedAppointments = new SortedList<>(filteredAppointments);
         sortedAppointments.setComparator(Comparator.comparing(Appointment::date)
@@ -124,13 +124,17 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPersonList(PREDICATE_SHOW_CURRENT_PERSONS);
     }
 
     @Override
     public void addPerson(Person person, int index) {
         addressBook.addPerson(person, index);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        /*
+            Since this method is currently only used for undoing delete command,
+            the filtered person list does not need to be updated to show all current persons
+         */
     }
 
     @Override
@@ -140,6 +144,12 @@ public class ModelManager implements Model {
     }
 
     //=========== Appointments ================================================================================
+
+    @Override
+    public void setAppointmentList(List<Appointment> appointments) {
+        requireNonNull(appointments);
+        this.appointments.setAll(appointments);
+    }
 
     @Override
     public List<Appointment> getAppointmentList() {
@@ -224,6 +234,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Predicate<? super Person> getFilteredPersonListPredicate() {
+        Predicate<? super Person> predicate = filteredPersons.getPredicate();
+
+        // predicate may be null, which means always true
+        if (predicate == null) {
+            return unused -> true;
+        }
+
+        return predicate;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -233,6 +255,8 @@ public class ModelManager implements Model {
     public void updateSortingOrder(Comparator<Person> comparator) {
         sortedPersons.setComparator(comparator);
     }
+
+    //=========== Filtered Appointment List Accessors =============================================================
 
     @Override
     public ObservableList<Appointment> getFilteredAppointmentList() {

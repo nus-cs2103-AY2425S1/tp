@@ -21,8 +21,8 @@ public class SchemeCommand extends Command {
     public static final String COMMAND_WORD = "scheme";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the scheme available to the family identified by the "
-            + "index number used in the displayed family list.\n"
+            + ": Displays the scheme available to the person identified by the "
+            + "index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -61,7 +61,7 @@ public class SchemeCommand extends Command {
         if (result.toString().equals("")) {
             result = new StringBuilder("No schemes available for this person.");
         }
-        result.insert(0, "Schemes available for: " + targetPerson.getName() + "\n");
+        result.insert(0, "Schemes available for " + targetPerson.getName() + ":\n");
         return new CommandResult(result.toString());
     }
 

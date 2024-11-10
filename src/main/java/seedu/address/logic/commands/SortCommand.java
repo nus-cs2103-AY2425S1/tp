@@ -16,13 +16,14 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
+
             + ": Sorts all persons in the address book according to the given parameter. "
             + "Only one parameter can be used.\n"
             + "Parameters: "
-            + "[name] [address] [priority] [income]\n"
+            + "[name] [address] [priority] [income] [updated]\n"
             + "Example: " + COMMAND_WORD + " name";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons by %s";
+    public static final String MESSAGE_SUCCESS = "Sorted all persons by parameter: %s";
 
     private final String parameter;
 
@@ -55,6 +56,10 @@ public class SortCommand extends Command {
 
         case SortCommandParser.INCOME:
             model.updateSortingOrder(Comparator.comparing(person -> person.getIncome().getValue()));
+            break;
+
+        case SortCommandParser.UPDATED:
+            model.updateSortingOrder(Comparator.comparing(person -> person.getUpdatedAt().getValue()));
             break;
 
         default:
