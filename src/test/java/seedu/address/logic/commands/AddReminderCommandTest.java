@@ -281,6 +281,12 @@ public class AddReminderCommandTest {
         }
 
         @Override
+        public boolean hasReminder(Reminder reminder) {
+            requireNonNull(reminder);
+            return remindersAdded.contains(reminder);
+        }
+
+        @Override
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
