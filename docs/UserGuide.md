@@ -1,6 +1,6 @@
 ---
 layout: page
-title: PROperty User Guide
+title: User Guide
 ---
 
 PROperty is a **desktop app for property agents managing contacts and their property listings,
