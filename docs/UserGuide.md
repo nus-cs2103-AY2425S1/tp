@@ -209,7 +209,7 @@ Format: `delete INDEX`
 
 * Deletes the buyer at the specified `INDEX`.
 * The index refers to the index number shown in the **displayed buyer list**.
-* The index must be a positive integer: 1, 2, 3, …​
+* The index must be a positive integer: 1, 2, 3, …​​. If the index is not a positive integer, the error message shown will be `invalid command format`.
 * The index cannot exceed the displayed list's range.
 
 Examples:
@@ -305,7 +305,7 @@ Format: `delete INDEX`
 
 * Deletes the meet-up at the specified `INDEX`.
 * The index refers to the index number shown in the **displayed meet-up list**.
-* The index must be a positive integer 1, 2, 3, …​
+* The index must be a positive integer 1, 2, 3, …​​. If the index is not a positive integer, the error message shown will be `invalid command format`.
 * The index cannot exceed the displayed list’s range.
 
 Examples:
@@ -390,7 +390,7 @@ Format: `delete INDEX`
 
 * Deletes the property at the specified `INDEX`.
 * The index refers to the index number shown in the **displayed property list**.
-* The index must be a positive integer: 1, 2, 3, ...
+* The index must be a positive integer: 1, 2, 3, ...​. If the index is not a positive integer, the error message shown will be `invalid command format`.
 * The index cannot exceed the displayed list's range
 
 Examples:
@@ -427,7 +427,7 @@ Format: `clear`
 
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-1. **The JAR file cannot be opened with double-click on some apple devices**. If the JAR file fails to open, use a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar abcli.jar` command to run the application.
+1. **The JAR file cannot be opened with double-click on some MacOS devices**. If the JAR file fails to open, use a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar abcli.jar` command to run the application.
 
 1. **When inputting a name**, if the name is too long, the interface is unable to display the full name, and it will be truncated, with ellipses (...) representing the truncated part of the name.
 
