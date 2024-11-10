@@ -260,7 +260,7 @@ Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_N
 
 * MEETUP_TO must be a date/time that is later than MEETUP_FROM.
 
-* Buyers that exist in buyer list will be marked as purple, while those that don't will be marked as red.
+* Buyers that exist in buyer list will be marked as purple, while those that don't will be marked as red, for more details [see the notes in MeetUp](#meet-ups)
 
 Examples:
 * `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li `
@@ -363,15 +363,15 @@ Edits an existing property in the property list.
 
 Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [s/ASKING_PRICE] [t/PROPERTY_TYPE]`
 
-* Edits the buyer at the specified `INDEX`. 
+* Edits the landlord at the specified `INDEX`. 
 * The index refers to the index number shown in the **displayed property list**. 
 * The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 s/100000` Edits the seller's phone number and the property's asking price to be `91234567` and `100,000` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's seller to be `Betsy Crower`.
+*  `edit 1 p/91234567 s/100000` Edits the landlord's phone number and the property's asking price to be `91234567` and `100,000` respectively.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's landlord to be `Betsy Crower`.
 
 ### Locating properties: `find`
 
