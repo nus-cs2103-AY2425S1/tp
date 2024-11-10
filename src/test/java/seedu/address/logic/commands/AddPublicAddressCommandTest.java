@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.addresses.PublicAddressesComposition.MESSAGE_DUPLICATE_PUBLIC_ADDRESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -98,7 +99,7 @@ public class AddPublicAddressCommandTest {
         }
 
         // Expected message
-        String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
+        String expectedMessage = String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
             String.format(
                 PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
                 duplicateLabel,
@@ -142,7 +143,7 @@ public class AddPublicAddressCommandTest {
         }
 
         // Expected message
-        String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
+        String expectedMessage = String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
                 duplicateAddressString.toLowerCase()
         );
 

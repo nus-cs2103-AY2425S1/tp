@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
+import static seedu.address.model.addresses.PublicAddressesComposition.MESSAGE_DUPLICATE_PUBLIC_ADDRESS;
 
 import java.util.List;
 import java.util.Set;
@@ -34,10 +35,9 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         + PREFIX_PUBLIC_ADDRESS_LABEL + "LABEL\n"
         + PREFIX_PUBLIC_ADDRESS + "ADDRESS\n"
         + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL
-        + "wallet1 " + PREFIX_PUBLIC_ADDRESS + "1a1zp1ep5qgefi2dmptftl5slmv7divfna";
+        + "wallet1 " + PREFIX_PUBLIC_ADDRESS + "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
 
     public static final String MESSAGE_ADDPA_SUCCESS = "Added Person's Public Address: %1$s";
-    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: duplicate label or public address\n%1$s\n";
 
     private EditPersonDescriptor editPersonDescriptor;
 
@@ -83,7 +83,7 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
 
         String paToAdd = editPersonDescriptor.getPublicAddresses()
                 .map(PublicAddressesComposition::getOnePublicAddress)
-                .orElseThrow(() -> new CommandException("Public Address to add is missing"))
+                .get()
                 .getPublicAddressString();
 
         List<String> allPAs = model.getAddressBook().getPersonList().stream()
