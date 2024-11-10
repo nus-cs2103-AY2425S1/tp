@@ -90,7 +90,7 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 
 6. Refer to the [Features](#features) below for details of each command.
 
-7. Refer to the [Glossary](#Glossary) for any unfamiliar terms.
+7. Refer to the [Glossary](#glossary) for any unfamiliar terms.
 
 ---
 
