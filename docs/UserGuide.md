@@ -348,7 +348,7 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ---
 
 - **Special Comments**
-1. Refer to the Remarks section for prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t)
+1. Refer to the Remarks section for prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t).
 
 #### Add Seller
 - **Command:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
@@ -418,7 +418,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >  ---
 
 - **Special Comments**<
-1. Refer to the Remarks section for prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t)
+1. Refer to the Remarks section for prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t).
 
 #### Find
 - **Command:** `find KEYWORD [KEYWORD]...`
@@ -518,7 +518,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ---
 
 - *Special Comments*
-1. Refer to
+1. Refer to [INDEX](#reference-types) constraints and the following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t).
 
 #### Delete Client
 - **Command:** `deleteclient INDEX`
@@ -544,7 +544,7 @@ Phone number: 977774444 and Email: bobby123@gmail.com`
 <br> Invalid command format! 
 <br>delete: Deletes the client profile corresponding to the client's name.
 <br>Parameters: INDEX (must be a positive integer)
-<br>Example: delete 1
+<br>Example: deleteclient 1
 >
 > ---
 > **Use Case #2**: Entering out-of-bounds index (larger than number of clients)
@@ -554,6 +554,9 @@ Phone number: 977774444 and Email: bobby123@gmail.com`
 > **Output**: The person index provided is invalid
 > 
 > ---
+
+- *Special Comments*
+1. Refer to [INDEX](#reference-types) constraints.
 
 ---
 
@@ -609,6 +612,9 @@ Commands for managing appointments between user and clients.
 > **Output**: Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.
 > 
 > ---
+
+- *Special Comments*
+Refer to [INDEX](#reference-types) constraints and the following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
 
 #### Delete Appointment
 - **Command:** `deleteapt INDEX`
