@@ -266,12 +266,9 @@ Assigns a specified event to a specified person stored in ClubConnect's contact 
 Format: `assign_event p/PERSON_INDEX ev/EVENT_INDEX` / `assign_event p/PERSON_NAME ev/EVENT_INDEX` / `assign_event p/PERSON_INDEX ev/EVENT_NAME` / `assign_event p/PERSON_NAME ev/EVENT_NAME`
 
 * Assigns the event specified by `EVENT_INDEX` or `EVENT_NAME` to the person specified by `PERSON_INDEX` or `PERSON_NAME`.
-* `EVENT_INDEX` refers to the index number shown in the displayed event list.
-* `EVENT_INDEX` **must be a positive integer** 1, 2, 3, …​
-* `PERSON_INDEX` refers to the index number shown in the displayed contact list.
-* `PERSON_INDEX` **must be a positive integer** 1, 2, 3, …​
-* `EVENT_NAME` refers to the name of the event (case-insensitive).
-* `PERSON_NAME` refers to the name of the person (case-insensitive).
+* `EVENT_INDEX` / `PERSON_INDEX` refers to the index number shown in the displayed event / contact list.
+* `EVENT_INDEX` and `PERSON_INDEX` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_NAME` / `PERSON_NAME` refers to the name of the event / person (case-insensitive).
 
 Examples:
 * `assign_event p/1 ev/2` will assign the 2nd event in ClubConnect's event list to the 1st person in ClubConnect's contact list.
@@ -287,12 +284,9 @@ Unassigns a specified event from a specified person stored in ClubConnect's cont
 Format: `unassign_event p/PERSON_INDEX ev/EVENT_INDEX` / `unassign_event p/PERSON_NAME ev/EVENT_INDEX` / `unassign_event p/PERSON_INDEX ev/EVENT_NAME` / `unassign_event p/PERSON_NAME ev/EVENT_NAME`
 
 * Unassigns the event specified by `EVENT_INDEX` or `EVENT_NAME` from the person specified by `PERSON_INDEX` or `PERSON_NAME`.
-* `EVENT_INDEX` refers to the index number shown in the displayed event list.
-* `EVENT_INDEX` **must be a positive integer** 1, 2, 3, …​
-* `PERSON_INDEX` refers to the index number shown in the displayed contact list.
-* `PERSON_INDEX` **must be a positive integer** 1, 2, 3, …​
-* `EVENT_NAME` refers to the name of the event (case-insensitive).
-* `PERSON_NAME` refers to the name of the person (case-insensitive).
+* `EVENT_INDEX` / `PERSON_INDEX` refers to the index number shown in the displayed event / contact list.
+* `EVENT_INDEX` and `PERSON_INDEX` **must be a positive integer** 1, 2, 3, …​
+* `EVENT_NAME` / `PERSON_NAME` refers to the name of the event / person (case-insensitive).
 
 Examples:
 * `unassign_event p/1 ev/2` will unassign the 2nd event in ClubConnect's event list from the 1st person in ClubConnect's contact list.
