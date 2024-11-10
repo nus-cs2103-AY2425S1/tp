@@ -292,7 +292,7 @@ Examples:
 * `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
 The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`
-![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
+![ImportCommandExampleUsage.png](images/ImportCommandExampleUsage.png)
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
@@ -309,6 +309,7 @@ seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, DorManagerPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Similarly, when trying to import a invalid JSON file, DorManagerPro will raise an error and disallow the import to go through to prevent invalid data.<br>
 Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
