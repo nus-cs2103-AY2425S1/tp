@@ -107,7 +107,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
-* Persons in PhysioPal can share the same phone number, email and address
+* Persons in PhysioPal can share the same phone number, email and address.
+* Persons with dashes, commas, slashes and periods in name should be omitted. For example,
+  persons with `s/o` or `d/o` in name should be entered as `s o` and `d o` respectively.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
