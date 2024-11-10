@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
@@ -64,7 +63,8 @@ public class ClearCommand extends Command {
         } else {
             setConfirmed(false);
             setPrompted(false);
-            model.setAddressBook(new AddressBook());
+            model.clearAllEvents();
+            model.clearAllPersons();
             return new CommandResult(MESSAGE_SUCCESS);
         }
     }

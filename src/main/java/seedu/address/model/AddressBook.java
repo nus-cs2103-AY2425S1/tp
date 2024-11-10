@@ -90,6 +90,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void clearEvents(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setEvents(newData.getEventList());
+        personEventManager.clearAllEvents();
     }
 
     /**
@@ -98,6 +99,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void clearPersons(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
+        personEventManager.clearAllPersons();
     }
 
     //// person-level operations
@@ -288,5 +290,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Map<Event, ArrayList<Person>> getPersonEventAssociationMap() {
         return personEventManager.getEventPersonMap();
     }
-
 }

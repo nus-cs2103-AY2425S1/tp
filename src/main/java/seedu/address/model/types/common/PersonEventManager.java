@@ -187,4 +187,20 @@ public class PersonEventManager {
     public Map<Event, ArrayList<Person>> getEventPersonMap() {
         return eventPersonMap;
     }
+
+    /**
+     * Clears all events from the eventPersonMap.
+     */
+    public void clearAllEvents() {
+        eventPersonMap.clear();
+    }
+
+    /**
+     * Clears all persons from all events.
+     */
+    public void clearAllPersons() {
+        for (Event event : eventPersonMap.keySet()) {
+            eventPersonMap.get(event).clear();
+        }
+    }
 }
