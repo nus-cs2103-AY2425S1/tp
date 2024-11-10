@@ -40,7 +40,106 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a Co
 
 1. Refer to the [Features](#features) below for details of each command.
 
+[↥ Back to Top](#bridal-boss-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
+
+## Common Scenarios
+
+### Understanding the Address Book Structure
+
+Bridal Boss manages two main types of entries:
+1. **Contacts List**: Shows all people in your address book
+    - Clients (people who have their own wedding)
+    - Vendors (people who can be assigned to weddings)
+
+2. **Weddings List**: Shows all weddings with their:
+    - Wedding name
+    - Client
+    - Date (if specified)
+    - Venue (if specified)
+    - Assigned vendors
+
+Here are some common scenarios to help you understand how to use Bridal Boss:
+#### 1. Setting Up a New Client's Wedding
+1. First, add the client as a contact:
+   `add n/Sarah Chen p/91234567 e/sarah@example.com a/123 Orchard Road`
+   [↗ See add command details](#adding-a-person-add)
+
+2. Create their wedding:
+   `addw n/Sarah's Garden Wedding c/Sarah Chen d/2024-12-25 v/Botanical Gardens`
+   [↗ See addw command details](#adding-a-wedding-addw)
+
+3. View the created wedding:
+   `vieww Sarah`
+   [↗ See vieww command details](#viewing-wedding-details-vieww)
+
+#### 2. Managing Vendors for a Wedding
+1. Add vendors as contacts:
+   `add n/John Doe p/91234567 e/john@photo.com a/456 River Valley r/photographer`
+   `add n/Mary Tan p/82345678 e/mary@flowers.com a/789 Garden Road r/florist`
+
+2. Assign them to a wedding (use `list` first to see indices):
+   `assign John Doe w/1`
+   `assign Mary Tan w/1`
+   [↗ See assign command details](#assigning-a-person-assign)
+
+3. Check wedding assignments:
+   `vieww 1`
+
+#### 3. Making Changes to Existing Entries
+1. Update contact details:
+   `edit John Doe p/91234599       # Update phone number`
+   `edit Mary Tan a/100 New Road   # Update address`
+   [↗ See edit command details](#editing-a-person-edit)
+
+2. Modify wedding details:
+   `editw w/1 d/2024-12-31         # Change date`
+   `editw w/1 v/New Venue          # Change venue`
+   [↗ See editw command details](#editing-a-wedding-editw)
+
+#### 4. Finding and Filtering Contacts
+1. Search by name (supports partial matches):
+   `find john                      # Finds "John" and "Johnny"`
+   [↗ See find command details](#finding-persons-by-name-find)
+
+2. Filter by multiple criteria:
+   `filter r/photographer          # All photographers`
+   `filter n/John r/photographer   # Johns or photographers`
+   [↗ See filter command details](#filtering-persons-filter)
+
+### Common Mistakes to Avoid
+
+1. ❌ Creating a wedding without adding the client first
+   `addw n/Beach Wedding c/John Doe   # Fails if John isn't a contact`
+
+   ✅ Correct approach:
+   `add n/John Doe p/91234567 e/john@example.com a/123 Main St`
+   `addw n/Beach Wedding c/John Doe`
+
+2. ❌ Trying to delete a client who has a wedding
+   `delete John   # Fails if John has an active wedding`
+
+   ✅ Correct approach:
+   `deletew 1     # Delete the wedding first`
+   `delete John   # Then delete the contact`
+
+3. ❌ Assigning a client to their own wedding as vendor
+   `assign Sarah Chen w/1    # Fails if wedding 1 is Sarah's wedding`
+
+   ✅ Correct approach:
+    - Clients cannot be vendors in their own wedding
+    - Create a new contact if the same person is both client and vendor
+
+### Quick Tips
+- Use `list` frequently to see updated indices
+- For name-based commands, use index if you get multiple matches
+- Check [validation rules](#validation-rules) when adding/editing entries
+- View the [command summary](#command-summary) for quick reference
+
+[↗ See more tips in FAQ section](#faq)
+
+[↥ Back to Top](#bridal-boss-user-guide)
 
 ---
 
@@ -107,18 +206,34 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a Co
 #### Email Addresses
 
 - **Format**:
-    - Must be in the form `local-part@domain.com`.
-- **Local-part**:
-    - Can contain alphanumeric characters and `+`, `_`, `.`, `-`.
-    - Cannot start or end with a special character.
-- **Domain**:
-    - Must have at least two characters.
-    - Cannot start or end with a hyphen (`-`).
+    - Must be in the form `local-part@domain.toplevel`
+- **Local-part Rules**:
+    - Can contain alphanumeric characters and `+`, `_`, `.`, `-`
+    - Cannot start or end with a special character
+    - Example: `user.name`, `john.doe-123`, `user+tag`
+- **Domain Rules**:
+    - Must include a top-level domain (e.g., `.com`, `.org`, `.edu`, `.sg`)
+    - Domain labels (parts between dots) must:
+        - Start and end with alphanumeric characters
+        - Can contain hyphens between alphanumeric characters
+        - Each label must contain at least one character
+    - Examples of valid domains:
+        - `example.com`
+        - `my-company.com`
+        - `school.edu.sg`
+        - `sub1.sub2.example.com`
 - **Uniqueness**:
-    - Each email must be unique in the system.
-- **Examples**:
-    - `john@example.com`, `user.name+tag@domain.com`.
-
+    - Each email must be unique in the system
+- **Valid Examples**:
+    - `john@example.com`
+    - `user.name+tag@my-company.com`
+    - `sales@company-name.com.sg`
+- **Invalid Examples**:
+    - `user@domain` (missing top-level domain)
+    - `user@e-a` (missing top-level domain)
+    - `user@-domain.com` (domain label starts with hyphen)
+    - `user@domain-.com` (domain label ends with hyphen)
+    - `user@.com` (empty domain label)
 #### Roles
 
 - **Format**:
@@ -162,6 +277,7 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 
 - **Usage**:
     - Uses the position number from the displayed list.
+    - Only integers are accepted.
     - **Format**: `COMMAND INDEX [parameters]`
     - **Example**:
         - `edit 1 n/John Smith`
@@ -188,6 +304,8 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
   ![Multiple matches resolution](images/multiple_match_solution.png) <br>
   *User selects a specific index to complete the command*
 
+[↥ Back to Top](#bridal-boss-user-guide)
+
 ---
 
 ### Cross-Reference Validations
@@ -198,17 +316,14 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
     - A client can have only one wedding at a time.
 - **Deletion Restrictions**:
     - Cannot delete a client who is associated with an active wedding.
-        - Error: "Cannot delete this person as they are a client in a wedding. Please delete their wedding first."
 - **Assignment Restrictions**:
     - Cannot assign a client as a vendor to their own wedding.
-        - Error: "Cannot assign client to their own wedding."
 
 #### Person-Wedding Relationships
 
 - **Vendor Assignments**:
     - A person can be assigned to multiple weddings as a vendor.
     - Cannot assign the same person to the same wedding multiple times.
-        - Error: "Person has already been assigned to wedding(s)."
 - **Deletion Effects**:
     - Deleting a wedding removes all vendor assignments related to that wedding.
 
@@ -220,7 +335,7 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 
 ---
 
-### Command Details
+### General Command Details
 
 Below are the detailed descriptions of each command, including examples, error messages, and important notes.
 
@@ -260,11 +375,6 @@ Adds a new person to the address book.
 Displays a list of all persons and weddings in the address book.
 
 - **Format**: `list`
-- **Example**:
-  ```
-  > list
-  [List of all contacts displayed]
-  ```
 
 ---
 
@@ -402,9 +512,11 @@ Filters and lists persons whose fields match the specified keywords.
       ![Multi-field filter results](images/multi_filter_weddings_unfiltered.png)<br>
       *`filter n/David r/florist e/mike` Example of filtering results showing matched persons, weddings remain unfiltered*
 
+[↥ Back to Top](#bridal-boss-user-guide)
+
 ---
 
-#### Managing Weddings
+#### Wedding Management Commands
 
 ##### Adding a Wedding: `addw`
 
@@ -539,6 +651,8 @@ Exits the application.
 - **Storage Location**:
     - Data is saved as a JSON file at `[JAR file location]/data/addressbook.json`.
 
+[↥ Back to Top](#bridal-boss-user-guide)
+
 ---
 
 #### Editing the Data File
@@ -566,7 +680,8 @@ Advanced users can edit the data file directly to modify the address book data.
     - The application provides specific error messages to guide users in correcting their commands.
 - **Case Sensitivity**:
     - Commands are generally case-insensitive, but parameters (especially for exact matches) may be case-sensitive as per the validation rules.
----
+
+[↥ Back to Top](#bridal-boss-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -639,6 +754,8 @@ Advanced users can edit the data file directly to modify the address book data.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+[↥ Back to Top](#bridal-boss-user-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -661,3 +778,5 @@ Advanced users can edit the data file directly to modify the address book data.
 | **Assign**  | `assign INDEX [r/ROLE] [w/WEDDING_INDEX]...` or `assign NAME [r/ROLE] [w/WEDDING_INDEX]...`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer w/1 w/2`, `assign 1 r/`                                                             |
 | **Help**    | `help`                                                                                                                                                                                                                                         |
 | **Exit**    | `exit`                                                                                                                                                                                                                                         |
+
+[↥ Back to Top](#bridal-boss-user-guide)
