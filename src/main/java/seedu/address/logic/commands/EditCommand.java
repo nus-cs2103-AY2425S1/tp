@@ -133,20 +133,20 @@ public class EditCommand extends Command {
                 updatedIsPinned, updatedIsArchived);
     }
 
-    private static Student createEditedPerson(Student personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Student createEditedPerson(Student studentToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert studentToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        LessonTime updatedLessonTime = editPersonDescriptor.getLessonTime().orElse(personToEdit.getLessonTime());
-        Education updatedEducation = editPersonDescriptor.getEducation().orElse(personToEdit.getEducation());
-        Grade updatedGrade = personToEdit.getGrade(); // edit command does not allow editing grade
-        Name updatedParentName = personToEdit.getParentName(); // edit command does not allow editing parent name
-        boolean updatedIsPinned = personToEdit.isPinned(); // edit command does not allow editing is pinned
-        boolean updatedIsArchived = personToEdit.isArchived(); // edit command does not allow editing is archived
+        Name updatedName = editPersonDescriptor.getName().orElse(studentToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(studentToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(studentToEdit.getAddress());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
+        LessonTime updatedLessonTime = editPersonDescriptor.getLessonTime().orElse(studentToEdit.getLessonTime());
+        Education updatedEducation = editPersonDescriptor.getEducation().orElse(studentToEdit.getEducation());
+        Grade updatedGrade = studentToEdit.getGrade(); // edit command does not allow editing grade
+        Name updatedParentName = studentToEdit.getParentName(); // edit command does not allow editing parent name
+        boolean updatedIsPinned = studentToEdit.isPinned(); // edit command does not allow editing is pinned
+        boolean updatedIsArchived = studentToEdit.isArchived(); // edit command does not allow editing is archived
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedLessonTime, updatedEducation,
                 updatedGrade, updatedParentName, updatedTags, updatedIsPinned, updatedIsArchived);
