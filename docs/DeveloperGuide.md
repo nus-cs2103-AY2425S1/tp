@@ -360,7 +360,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | Tutor | Tag students under their guardian                                        | Track total fees to collect                                               | 2        |
 | Tutor | Automatically update the amount of fee I collect after a lesson          | Avoid manually update and track fees                                      | 2        |
 | Tutor | Batch delete all scheduled lessons with a student                        | Remove all students' classes                                              | 2        |
-| Tutor | Find a student's contact details quickly                                 | Contact them quickly                                                      | 2        |
+| Tutor | Find a student's or guardian's contact details quickly                   | Contact them quickly                                                      | 2        |
 | Tutor | Find a student's lesson details quickly                                  | Know the location for their tuition                                       | 2        |
 
 ### Expert user
