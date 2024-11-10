@@ -26,7 +26,7 @@ public class AddPersonToEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_"
             + "INDEX \nAdds contacts to an event in the address book. \nNote: At least one of the following prefixes "
-            + "is required—`a/`, `e/`, `ve/`, or `vo/`—each followed by one or more contact index/indices \ne.g. "
+            + "is required—`a/`, `s/`, `ve/`, or `vo/`—each followed by one or more contact index/indices \ne.g. "
             + "event-add ei/1 a/1,2,3";
 
     public static final String MESSAGE_SUCCESS = "Contacts added to %2$s successfully: \n%1$s";
