@@ -262,18 +262,10 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
       >
       > ---
-
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `seller n/Bob` = `seller n/BOB` = `seller n/bOb` _(Not exhaustive)_
-    <br>
-    If a buyer/seller with the same name already exists, the equivalent commands above cannot be carried out
-    </div>
-    <br>
-
-    - **Failed Execution**
+  
+    - **Failed Execution:**
       > ---
+      > 
       > **User Error #1**: Missing `NAME` field
       >
       > **Input**: `seller p/91124444 e/bobby123@gmail.com`
