@@ -107,7 +107,7 @@ Sorting helps you quickly find contacts! For example, sort by name to easily loc
 </div>
 
 Examples:
-* `list` - Shows all contacts without any sorting
+* `list` - Shows all contacts
 * `list s/name` - Lists all contacts sorted alphabetically by name (A to Z)
   <img src="images/listName.png" alt="List sorted by name">
 * `list s/email r/` - Lists all contacts sorted by email in reverse order (Z to A)
