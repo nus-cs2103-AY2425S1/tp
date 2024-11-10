@@ -535,6 +535,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 - **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
+  - This can be used to remove all remarks for a given client: `edit <INDEX> rn/NA` 
 
 
 

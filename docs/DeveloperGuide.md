@@ -398,12 +398,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U7 - Remove remarks about a client**
+**Use case: U7 - Remove all remarks about a client**
 
 **MSS**
 
 1.  User performs <u> Edit remarks about a client (U4)</u>.
-2.  User removes existing remark through editing.
+2.  User removes all existing remarks through editing.
 
     Use case ends.
 
