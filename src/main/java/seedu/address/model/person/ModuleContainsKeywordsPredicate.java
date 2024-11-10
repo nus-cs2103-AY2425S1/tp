@@ -14,11 +14,12 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Person> {
         this.keyword = keyword;
     }
 
-    @Override
-    public boolean test(Person person) {
-        return person.getModules().stream()
-                .anyMatch(module -> module.toString().toLowerCase().contains(keyword.toLowerCase()));
-    }
+@Override
+public boolean test(Person person) {
+    String regex = "\\b" + keyword.toLowerCase() + "\\b";
+    return person.getModules().stream()
+            .anyMatch(module -> module.toString().toLowerCase().matches(".*" + regex + ".*"));
+}
 
     @Override
     public boolean equals(Object other) {
