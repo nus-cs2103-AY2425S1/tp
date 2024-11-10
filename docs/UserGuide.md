@@ -36,48 +36,78 @@ title: User Guide
 6. [Command summary](#command-summary)
 
 # Introduction
-Welcome to AcademyAssist, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
+Welcome to **AcademyAssist**, your ultimate solution for <span style="color:lightgreen; font-weight:bold">efficient student contact management</span>, targeted at tuition centers operating in Singapore.
 This desktop application is designed to streamline your administrative tasks, allowing you to focus your efforts on 
 keeping operations smooth and organized for optimal student support.
 
 AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical
 User Interface (GUI).** This hybrid approach ensures that you can manage your student database with
-lightning-fast efficiency while still enjoying the visual benefits of modern software design. Whether you're a
-seasoned administrator or new to digital management systems, AcademyAssist is intuitive enough for beginners yet
-powerful enough for experts. With features like quick student addition, easy information retrieval,
-and automated data saving, AcademyAssist is set to revolutionize how you manage your tuition center.
+lightning-fast efficiency while still enjoying the visual benefits of modern software design. 
 
-Let's embark on this journey to simpler, faster, and more effective student management!
+Whether you're a seasoned administrator or new to digital management systems, AcademyAssist is intuitive enough for beginners yet
+powerful enough for experts. With features like quick **student addition, easy information retrieval,
+and automated data saving**, AcademyAssist is set to revolutionize how you manage your tuition center.
+
+Let's embark on this journey to **simpler, faster, and more effective** student management!
 
 ---
 
 # Quick start
+This guide provides step-by-step instructions for installing and running the AcademyAssist application for both non-technical
+and technical users. Please follow the instructions that correspond to your level of expertise.
 
-1. Ensure you have Java `17` or above installed in your Computer.
-   1. Open a terminal window, and go to the main folder where all your project files are stored.
-   2. Run the `java -version` command to confirm the terminal is using Java 17.
-   3. If Java version is not Java 17, download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+## Prerequisites
+Before you beginm, ensure you have Java `17` or above installed in your computer. 
 
-2. Download the latest `academyassist.jar` file from the official website.
+### Check Java Version
+1. Open up command prompt (Windows) or terminal (macOS, Linux).
+2. Type `java -version` and press Enter to check your Java version.
+3. If your Java version is not `17` or above, you will need to install the latest version.
 
-3. Move the file to the folder you want to use as the _home folder_ for your AcademyAssist.
+### Download Java
+1. Download the latest version of Java from the [Oracle website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+   * For Windows users: Download the [Windows x64 Installer](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
+   * For macOS users: Download the [macOS Installer](https://www.oracle.com/java/technologies/downloads/#java17?os=macos-11).
+   * For Linux users: Download the [Linux x64 Compressed Archive](https://www.oracle.com/java/technologies/downloads/#java17?os=linux).
+2. Follow the installation instructions provided on the download page. 
+3. After installation, run the `java -version` command again to confirm that the installation was successful. 
+4. Close the terminal after confirming the installation.
 
-4. Double-click the file to start the app.
+## Download AcademyAssist
+Download the latest `academyassist.jar` file from the latest release in our [GitHub repository](https://github.com/AY2425S1-CS2103T-W11-3/tp/releases).
+You can find the file under the `Assets` section of the release.
 
-5. For first time users, a help window appears automatically and details of some basic features are shown.
-
-6. Type the command in the command box and press Enter to execute it. For example, to bring up the help window
-again, type `help` and press Enter.
-
-7. Refer to the [Features](#features) below for details of each command.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+## Things to note before you start
 When you first use AcademyAssist, some sample student contacts have been added to help you familiarise yourself with
 our features. Once you are ready to manage your tuition center's students, simply use the clear command
-to clear all existing contacts and reset the StudentID. Please note that this action is IRREVERSIBLE! 
+to clear all existing contacts and reset the StudentID. 
 
+<div markdown="span" class="alert alert-primary">::exclamation: **Caution:**
+Please note that clear action is <span style="color:red;font-weight:bold">IRREVERSIBLE!</span> All student entries will be deleted permanently. 
 </div>
 
+## Setting up AcademyAssist
+### Non Technical Users
+1. Create a new folder at your Desktop. (e.g. `AcademyAssist`)
+2. Move the downloaded `academyassist.jar` file into this folder.
+2. Open the command prompt (Windows) or terminal (macOS, Linux).
+3. Navigate to the folder by typing the following command and pressing Enter:
+   * For Windows: `cd Desktop\AcademyAssist`
+   * For macOS and Linux: `cd Desktop/AcademyAssist`
+4. Type `java -jar academyassist.jar` and press Enter to start the app. 
+
+### Technical Users
+1. Move the downloaded `academyassist.jar` file to a directory of your choice.
+2. Open the command prompt (Windows) or terminal (macOS, Linux).
+3. Navigate to the directory where the `academyassist.jar` file is located.
+4. Type `java -jar academyassist.jar` and press Enter to start the app.
+
+## First Time-Use
+For all users, upon first running the application, a help window will appear automatically, providing details on some basic features. 
+You may refer to the [Command Summary](#command-summary) section for a quick overview of the available commands. The [Features](#features) section provides a more detailed explanation of each feature.
+
+## User Interface Overview
+<img src="/images/UiOverview.png" alt="UI overview" width="600"/>
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
@@ -479,3 +509,10 @@ the data of your previous AcademyAssist folder.<br><br>
 | **Clear Data**    | `clear`                                                                                                                                                                                              |
 | **Get Help**      | `help`                                                                                                                                                                                               |
 | **Exit**          | `exit`                                                                                                                                                                                               |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+1. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
+2. **Graphical User Interface (GUI)**: A visual interface that allows users to interact with a program using graphical elements.
+3. **Command Prompt (Windows)/ Terminal (macOS, Linux)**: A text-based interface for entering commands to interact with the operating system.
