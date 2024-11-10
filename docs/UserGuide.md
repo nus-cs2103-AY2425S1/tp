@@ -243,6 +243,10 @@ Clears all entries from the buyer list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the buyers from the BuyerList, and there is no way to undo this, you may lose your data permanently.
+</div>
+
 ## Meet Ups
 ![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
 <div markdown="block" class="alert alert-info">
@@ -252,6 +256,10 @@ Format: `clear`
 * Note how the list already contains sample `Meet Up`s (if this is the first time using the app)
 
 * Note how the mode is highlighted by `Viewing: Meet Ups` above the command line
+
+* Note how each meet-up contains buyer, if the buyer exists in the BuyerList, it will be marked as purple, else red. The matching here is done by case-sensitive matching, e.g. `Alex Yeoh` will only be purple if there is `Alex Yeoh` in the Buyer List, not `Alex yeoh` or `alex yeoh` or `Alex`.
+
+* However, if an existing buyer's name is edited, the buyer shown in meet-ups will not update accordingly and will just change from purple to red, e.g. in the image above, if the name of `Alex Yeoh` was changed in the BuyerList to `Alex Yeo`, in the meet-up mode, both meetings would still display `Alex Yeoh` but in red now.
 
 </div>
 
@@ -267,13 +275,17 @@ Adds a meet-up to the meet-up list.
 
 Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_NAME]…​`
 
-* New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO.
+* New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO. Else, it will be marked as a duplicate meet-up.
 
 * MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`.
 
 * MEETUP_TO must be a date/time that is later than MEETUP_FROM.
 
-* Buyers that exist in buyer list will be marked as green, while those that don't will be marked as red.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+When adding the MEETUP_FROM or MEETUP_TO, the `DD` parameter will take in any 2-digit number from 01 to 31. However, in some cases, such as February or April, the date 31 doesn't exist, in this case, instead of rejecting the input, the meet-up will be added but the date will be changed to the closest valid date in the same month. e.g. `2024-02-31 23:59` will create `2024-02-29 23:59`, `2024-04-31 12:00` will create `2024-04-30 12:00`, but `2024-04-32 12:00` will give an error since 32 is not a valid `DD` input.
+</div>
+
+* Buyers that exist in buyer list will be marked as purple, while those that do not will be marked as red, for more details [see the notes in MeetUp](#meet-ups)
 
 Examples:
 * `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li `
@@ -281,7 +293,6 @@ Examples:
 Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
 
 ![MeetUpClash](images/MeetUpClash.png)
-
 
 ### Editing a meet-up : `edit`
 
@@ -337,6 +348,10 @@ Clears all entries from the meet-up list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the meet-ups from the MeetUpList, and there is no way to undo this, you may lose your data permanently.
+</div>
+
 ## Properties
 ![PropertyModeInitialList](images/PropertyModeInitialList.png)
 <div markdown="block" class="alert alert-info">
@@ -376,15 +391,15 @@ Edits an existing property in the property list.
 
 Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [s/ASKING_PRICE] [t/PROPERTY_TYPE]`
 
-* Edits the buyer at the specified `INDEX`. 
+* Edits the landlord at the specified `INDEX`. 
 * The index refers to the index number shown in the **displayed property list**. 
 * The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 s/100000` Edits the seller's phone number and the property's asking price to be `91234567` and `100,000` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's seller to be `Betsy Crower`.
+*  `edit 1 p/91234567 s/100000` Edits the first property's landlord phone number and its asking price to be `91234567` and `100,000` respectively.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's landlord to be `Betsy Crower`.
 
 ### Locating properties: `find`
 
@@ -426,6 +441,10 @@ Clears all entries from the property list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the properties from the PropertyList, and there is no way to undo this, you may lose your data permanently.
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -453,6 +472,9 @@ Format: `clear`
 3. **If you input a budget or asking price that exceeds** `9223372036854775807`, the command will silently fail, and no error message will be shown. This is due to exceeding the maximum value for a 64-bit integer. A planned enhancement will add a validation check to prevent input beyond a maximum realistic range.
 
 4. **When inputting a name**, if the name is too long, the interface is unable to display the full name, and it will be truncated, with ellipses (...) representing the truncated part of the name.
+
+
+4. **Editing/Deleting buyers that are included in Meet-Ups**, editing/deleting a buyer in the BuyerList that is also part of a meet-up in the MeetUpList will not update the buyer shown in the MeetUpList. For example, meet-up `Sales Meeting` has buyer `Alex Yeoh` in the MeetUpList and `Alex Yeoh` is a buyer in the BuyerList, thus `Sales Meeting` shows `Alex Yeoh` in purple (the buyer exists). If you go to Buyer mode and edit `Alex Yeoh` to be something different such as `Alex yeoh`,`alex yeoh`,`alex`, etc, `Sales Meeting` will still show `Alex Yeoh` but in red now (buyer does not exist anymore). Deleting `Alex Yeoh` in the BuyerList will cause the same effect. The name matching between buyers in meet-ups and buyers in the BuyerList is done with exact case-sensitive matching, `Alex Yeoh` will only be purple in the `Sales Meeting` if the BuyerList has a buyer with the exact name `Alex Yeoh`.
 
 --------------------------------------------------------------------------------------------------------------------
 
