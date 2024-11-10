@@ -272,7 +272,7 @@ Essentially they are to be supplied by the user.
 | `STUDENT_ID`          | `s/`             | Specifies the Student ID of a student. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with a letter `A`, followed by exactly 7 digits, and end with a letter.</li><li>Each `STUDENT_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                   |
 | `TUTORIAL_NAME`       | `tn/`            | Specifies the name of a tutorial. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `TUTORIAL_ID`         | `c/`             | Specifies the Tutorial ID of a tutorial. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with the letter `T`, followed by exactly 4 digits.</li><li>Each `TUTORIAL_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                     |
-| `ASSIGNMENT_TITLE`    | `n/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li><li>Each `ASSIGNMENT_TITLE` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                               |
+| `ASSIGNMENT_TITLE`    | `n/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>Names may contain any characters, including alphanumeric characters, whitespaces and special symbols.</li><li>Each `ASSIGNMENT_TITLE` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                             |
 | `ASSIGNMENT_DUE_DATE` | `d/`             | Specifies the due date of an assignment. <br/><br/> **Requirements:** <ul><li>The Assignment Due Date must contain only numerical digits, whitespace, and the hyphen `-` character.</li><li>The Assignment Due Date should be in the format of `yyyy-MM-dd`, followed by a whitespace and the time in `HHmm` format.</li><li>The format is strictly `yyyy-MM-dd HHmm`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li><li>`HH` represents the hour (in 24-hour format).</li><li>`mm` represents the minute.</li></ul></li></ul> |
 | `ATTENDANCE_DATE`     | `d/`             | Specifies the attendance date of a student. <br/><br/> **Requirements:** <ul><li>The attendance date must contain only numerical digits and hyphen `-` characters.</li><li>The attendance date should be in the format of `yyyy-MM-dd`.</li><li>The format is strictly `yyyy-MM-dd`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li></ul></li></ul>                                                                                                                                                                             |
 | `KEYWORD`             | Not Applicable   | Specifies the keywords to search for when finding students. <br/><br/> **Requirements:** <ul><li>Can contain alphanumeric characters and any special characters.</li><li>Whitespace characters will be treated as part of the `KEYWORD`.</li><li>The special character `/` will be ignored.</li>                                                                                                                                                                                                                                                                                                   |
@@ -475,6 +475,7 @@ Format: `deleteAsg n/ASSIGNMENT_TITLE`
 Command Details & Constraints:
 * Deletes the assignment based on the `ASSIGNMENT_TITLE`
   * The `ASSIGNMENT_TITLE` must exist in the assignment list.
+  * `ASSIGNMENT_TITLE` must not be empty.
 * Prefix is required for `deleteAsg` command.
 * All parameters are required to adhere to their [respective constraints](#3-3-2-parameters).
 
@@ -506,7 +507,7 @@ Format: `markAsg INDEX n/ASSIGNMENT_TITLE`
 
 Command Details & Constraints:
 * Using the given index of the student, TrackMate will mark his/her assignment status as completed.
-* Assignment with the given title must exist.
+* Assignment with the given non-empty title must exist.
 * Student at the specified index must exist.
 * Regardless of the previous assignment status, this command will show successful message for the ease of usage.
 
@@ -523,7 +524,7 @@ Format: `unmarkAsg INDEX n/ASSIGNMENT_TITLE`
 Command Details & Constraints:
 * This command is the opposite of mark command.
 * Using the given index of the student, TrackMate will mark his/her assignment status as not completed.
-* Assignment with the given title must exist.
+* Assignment with the given non-empty title must exist.
 * Student at the specified index must exist.
 * Regardless of the previous assignment status, this command will show successful message for the ease of usage.
 
@@ -542,7 +543,7 @@ Command Details & Constraints:
   * Number of students who have completed the assignments
   * List of students who have completed the assignment.
   * List of students who have not completed the assignment.
-* Assignment with the given title must exist.
+* Assignment with the given non-empty title must exist.
 
 Example:
 1. `checkAsg n/CS2103T Assignment 2`
