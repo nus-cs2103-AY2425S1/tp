@@ -526,6 +526,7 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
   starting from 1.
 * The `RENTAL_INDEX` refers to the client's rental index number shown in the displayed rental information list (
   run `rview CLIENT_INDEX` to display the rental information list) and must be a positive integer starting from 1.
+  * If you already know the `RENTAL_INDEX` of the rental information you want to edit, you can just use it directly in the command without needing to run `rview CLIENT_INDEX` to check for the `RENTAL_INDEX`.
 * You cannot and should not edit the value of `ADDRESS` to be empty, as it is required to not be empty.
 * Editing a parameter will remove its existing value and replace with the newly specified value.
 
@@ -1014,3 +1015,4 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **The commands are not case-insensitive**. The remedy is to ensure that all commands are either capitalised or not capitalised.
 4. Current **error message for invalid value** of `MONTHLY_RENT` and `DEPOSIT` is not precise enough (we use the term `numbers`). Please follow [Parameter Constraints Table](#parameter-constraints-table) for valid values.
+5. If a **parameter value is too long**, it will not display fully in the application. The excess characters will be cut off and replace by `...`. You should not provide a value that is too long to avoid this issue.
