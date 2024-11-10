@@ -7,7 +7,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Acknowledgements
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
@@ -15,13 +15,13 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## Design
 
 <div markdown="span" class="alert alert-primary">
 
@@ -32,24 +32,24 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **Architecture Diagram** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+`Main` (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [`UI`](#ui-component): The UI of the App.
+* [`Logic`](#logic-component): The command executor.
+* [`Model`](#model-component): Holds the data of the App in memory.
+* [`Storage`](#storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[`Commons`](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -59,10 +59,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its **API** in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its **API** in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -148,21 +148,102 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### 1. Add Command
+### 1. Tier and status attributes
 
-### 2. Edit Command
+Given that this software is designed to support credit card sales to clients, having predefined credit card tiers aligned with the bank’s product offerings is essential. These tiers provide valuable insights into a customer’s spending habits and allow agents to tailor their sales strategies accordingly.
 
-### 3. Delete Command
+Additionally, the inclusion of a status attribute for clients, indicating whether follow-up action is required, enhances customer satisfaction. This feature helps agents keep track of promised actions, reducing the risk of missed commitments and ensuring a more reliable service experience.
+
+This section will describe in detail the current implementation and design considerations of these two attributes.
+
+#### Current implementation
+
+The tier and status fields are classes which contain an enum value. 
+
+![TierStatusAttributes](images/TierStatusAttributes.png)
+
+Using enums helps to limit the range of possible values for `Tier` and `Status`.
+
+For `Tier`, this approach models the real-world scenario of a bank offering a predefined list of credit card services. It also accounts for the possibility of clients who have applied for, but been denied, a credit card.
+
+We believe that this information can help Agents understand at a glance, their customer's needs better.
+
+The usage of an Enum in `Tier`, also makes it easier to modify the list of predefined credit services, to tailor it to each bank's own unique catalogue of services.
+
+When modifying the `Enum`, remember to also update the CSS files `ClientDetailPanel.css` and `ClientListCard.css`. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new `Enum` settings. Here is an example of the changes to a css file after renaming one enum value to `TEST`:
+![img_1.png](images/CssFileSetting.png)
+![img_2.png](images/UIChangeAfterCSSFileChange.png)
+
+The `Enum` used in `Status` follows a similar rationale as `Tier`, with the key constraint that each client status is limited to a set of predefined values. These statuses have been color-coded throughout the UI for clear visual cues:
+
+- `NA` – Indicates a client with no required follow-up from the agent. This status is represented by green to signify a positive state, requiring no immediate action.
+- `NON_URGENT` – Indicates a client for whom follow-up is needed, but not urgently. This is represented by orange, signifying that action is required but not immediately pressing (e.g., within a few days).
+- `URGENT` – Indicates a client requiring immediate follow-up. This status is highlighted in red to draw attention to the need for prompt action by the agent.
+
+By assigning specific colors to each status, the UI helps agents prioritize their tasks effectively.
+
+### 2. Add Command
+The add command is used to add new clients into the existing list of clients. The `add` client will refuse to add any clients that are 'duplicates' of any existing clients. 
+
+The next section will describe in detail the current implementation and design considerations of the command.
+
+#### Current implementation
+This is a high-level view of what occurs when the `add` command is executing. 
+![AddSequenceDiagram.png](images%2FAddSequenceDiagram.png)
+
+There are a total of 3 checks that occur:
+1. A check for invalid flags and missing mandatory flags.
+2. A check for invalid values provided to any of the flags specified.
+3. A check as to whether there already exists a client with the same details, that would make these two client the same people.
+![AddActivityDiagram-Add_Activity_Diagram.png](images%2FAddActivityDiagram-Add_Activity_Diagram.png)
+
+Take note that the error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
+### 3. Edit Command
+The `edit` command is used to add a client's contact to the existing list of clients saved in AgentAssist.
+
+The next section will describe in detail the current implementation and design considerations of the command.
+
+Here is a high-level view of the logic flow when the `edit` command is run.
+![EditActivityDiagram.png](images%2FEditActivityDiagram.png)
+
+There are a total of 5 checks that occur, and they occur in sequential order:
+1. Index specified is not negative.
+2. At least one flag is specified.
+3. Both the `remark new` and `remark append` flags are not used together.
+4. Index specified is within range of the current filtered list.
+5. All values passed are valid fort
+
+#### Current implementation
+When users enter in the `edit` command, they have to specify a valid index (referring to the index of a client within the current viewed list of clients) which is:
+1. Positive
+2. Is an index inside the current viewed list of clients.
 
 
+### 4. Delete Command
+The `delete` command is used to remove client's contacts from the existing list of clients saved in AgentAssist.
+
+The next section will describe in detail the current implementation and design considerations of the command.
+
+#### Current implementation
+When users enter in the `delete` command, they have to specify a valid index (referring to the index of a client within the current viewed list of clients) which is:
+1. Positive
+2. Is an index inside the current viewed list of clients. 
+
+Here is a high-level view of the methods involved when the `delete` command is run and the user approves of the deletion after a confirmation prompt is showed.
+![DeleteSequenceDiagram.png](images%2FDeleteSequenceDiagram.png)
+
+This follows the activity diagram shown below:
+
+![DeleteActivityDiagram.png](images%2FDeleteActivityDiagram.png)
+
+The user confirmation prompt shown here is also used in the `clear` command. This prompt is intended to help prevent accidental data loss by allowing users to confirm their decision, providing an opportunity to reconsider or correct any unintended command input.
 
 
-
-## **Planned enhancements**
+## Planned enhancements
 
 ### 1. Multi-Language Support
 **Current Issue:** Non-English text input can cause visual bugs, including reversed text display.
@@ -386,10 +467,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The given edit option is invalid.
   * 3b1. AgentAssist shows an invalid parameter error message.
-  
+
     Use case resumes at step 3.
 * 3c. Provided values are invalid.
   * 3c1. AgentAssist shows the errors pertaining to the fields.
+
+    Use case resumes at step 3.
+
+* 3d. Provided values will cause edited client to become a duplicate of an existing client.
+  * 3d1. AgentAssist shows an error to inform the user that allowing this edit will result in a duplicate client.
+  * 3d2. No change occurs.
 
     Use case resumes at step 3.
 
@@ -415,8 +502,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to close detailed view. 
-2.  AgentAssist closes the detailed view.
+1. User requests to close detailed view. 
+2. AgentAssist closes the detailed view.
 
     Use case ends.
 
