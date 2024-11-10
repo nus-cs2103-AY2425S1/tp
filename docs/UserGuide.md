@@ -82,8 +82,11 @@ If you don't have Java, see this installation [guide](https://docs.oracle.com/en
 
 **Additional Notes**
 
+These apply to all commands unless specified otherwise.
+
 * When specifying an index, it should be between 1 and 2147483647, inclusive. The current error message
 may not reflect this requirement, but changes for clarification are planned in the future.
+* When specifying an index, leading zeroes are ignored, i.e. `001` is equivalent to `1`.
 
 ### Viewing help : `help`
 
