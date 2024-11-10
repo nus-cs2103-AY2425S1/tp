@@ -399,20 +399,6 @@ public class ModelManager implements Model {
         return storage.listBackups();
     }
 
-    /**
-     * Checks whether a backup exists for the specified index.
-     *
-     * @param index The index of the backup to check.
-     * @return True if a backup exists for the index, otherwise false.
-     */
-    @Override
-    public boolean isBackupAvailable(int index) {
-        if (storage == null) {
-            return false;
-        }
-        return backupManager.isBackupAvailable(index);
-    }
-
     // ============ Equality and Storage Access Methods ==================================================
 
     /**

@@ -280,20 +280,4 @@ public class BackupManager {
         }
     }
 
-    /**
-     * Checks if a backup file exists at the specified index.
-     *
-     * @param index The index of the backup to check.
-     * @return {@code true} if the backup exists, {@code false} otherwise.
-     * @throws IOException If an error occurs while accessing the backup directory.
-     */
-    public boolean isBackupAvailable(int index) {
-        try (Stream<Path> backups = Files.list(backupDirectory)) {
-            return backups.anyMatch(path -> extractIndex(path) == index);
-        } catch (IOException e) {
-            logger.warning("Failed to check backup availability: " + e.getMessage());
-            return false;
-        }
-    }
-
 }
