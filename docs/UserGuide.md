@@ -8,7 +8,7 @@ pageNav: 3
 
 TAHub Level 3 (TAHub) is a **desktop app for Teaching Assistants (TAs) to efficiently manage student-related information**, optimized for use via a Command Line Interface (CLI) while still offering the benefits of a Graphical User Interface (GUI). If you can type fast, TAHub can handle your tasks faster than traditional GUI apps.
 
-Designed to streamline the workload of TAs, TAHub goes beyond basic contact management by including powerful features such as **calculating aggregate scores**, **marking attendance**, and **tracking grades**. These functionalities make it an essential tool for TAs looking to manage student records and assessments effectively. If you're new to CLI-based apps, a comprehensive **Quick Start** section is available to help you get up to speed quickly and confidently.
+Designed to streamline the workflow of TAs, TAHub goes beyond basic contact management by including powerful features such as **calculating aggregate scores**, **marking attendance**, and **tracking grades**. These functionalities make it an essential tool for TAs looking to manage student records and assessments effectively. If you're new to CLI-based apps, a comprehensive **Quick Start** section is available to help you get up to speed quickly and confidently.
 
 <!-- * Table of Contents -->
 <page-nav-print />
