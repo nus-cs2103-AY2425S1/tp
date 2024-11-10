@@ -75,8 +75,8 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
   For example, `[tag/TAG]…` can be used as follows:
 
   - Not at all (i.e., ` ` )
-  - With one tag: `t/Parkinsons`
-  - With multiple tags: `t/Parkinsons t/Diabetic`
+  - With one tag: `tag/Parkinsons`
+  - With multiple tags: `tag/Parkinsons tag/Diabetic`
 
 * Parameters MUST be in order unless specified otherwise.<br>
 
