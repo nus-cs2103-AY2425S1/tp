@@ -138,6 +138,17 @@ public class ContactPredicateBuilderTest {
         argMultimap.put(PREFIX_ID, "1");
         assertFalse(predicateBuilder.build().test(new ClientBuilder().withId(2).build()));
     }
+    @Test
+    public void testArgumentMultimap_doesNotContainValidId_throwsParseException() throws ParseException {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        argMultimap.put(PREFIX_ID, "two");
+        ContactPredicateBuilder predicateBuilder = new ContactPredicateBuilder(argMultimap);
+
+        assertThrows(ParseException.class, predicateBuilder::build);
+
+        argMultimap.put(PREFIX_ID, "one");
+        assertThrows(ParseException.class, predicateBuilder::build);
+    }
 
     @Test
     public void testArgumentMultimap_containsTags_returnsTrue() throws ParseException {
