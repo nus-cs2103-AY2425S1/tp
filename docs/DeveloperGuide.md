@@ -240,7 +240,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -605,3 +604,14 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancement**
+Team size: 5
+### 1. Delete subject feature
+Currently, users use the edit feature
+
+### 2.
+
+--------------------------------------------------------------------------------------------------------------------

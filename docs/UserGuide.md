@@ -171,6 +171,11 @@ the details of a student, you can use the [detail command] (#viewing-a-students-
 
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Exceptionally long names will be cut off on the display, but you can read the student's full name using the 
+[detail command] (#viewing-a-students-detail--detail).
+</div>
+
 ### Deleting a student : `delete`
 
 Removes a student from the tuition center management system.
