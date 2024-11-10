@@ -57,7 +57,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited meet-up: %1$s";
     public static final String MESSAGE_MEETUP_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the meet-up list.";
-    public static final String MESSAGE_INVALID_TO_FROM = "TO ($1%s) must be after FROM ($2%s)";
+    public static final String MESSAGE_INVALID_TO_FROM = "TO (%1$s) must be after FROM (%2$s)";
 
     private final Index targetIndex;
     private final EditMeetUpDescriptor editMeetUpDescriptor;

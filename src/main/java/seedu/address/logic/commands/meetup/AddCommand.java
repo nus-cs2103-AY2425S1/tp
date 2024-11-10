@@ -39,7 +39,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New meet-up added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the application";
-    public static final String MESSAGE_INVALID_TO_FROM = "TO ($1%s) must be after FROM ($2%s)";
+    public static final String MESSAGE_INVALID_TO_FROM = "TO (%1$s) must be after FROM (%2$s)";
 
     private final MeetUp toAdd;
 
