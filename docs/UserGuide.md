@@ -71,7 +71,8 @@ For immediate setup, proceed to [Quick Start](#quick-start). For detailed featur
 
 ## Quick Start
 
-1. Ensure you have Java `17` or above installed on your computer.
+1. Ensure you have Java `17` or above installed on your computer. For optimal display, use a 13-inch screen or larger with a resolution of 1280x720 pixels or higher. Avoid resizing the window below this resolution, as it may hide essential interface elements.
+
 
 2. Download the latest CareLink `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-4/tp/releases).
 
