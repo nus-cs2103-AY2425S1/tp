@@ -43,7 +43,7 @@ public class ImportCommand extends Command {
         try {
             jsonFiles = converter.convertAllCsvFiles();
         } catch (ConverterException ce) {
-            throw new CommandException(ce);
+            throw new CommandException(ce.getMessage());
         }
 
         JsonImporter importer = new JsonImporter(jsonFiles);
