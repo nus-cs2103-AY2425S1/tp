@@ -39,6 +39,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
    * `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 t/budget t/pets` : Adds a client named `Jane Doe` to DDD.
 
    * `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget` : Adds a vendor named `ABC Catering` to DDD.
+   * `add -e n/Sample Wedding des/Wedding reception d/2025-01-01 c/0 v/1` : Adds an event named `Sample Wedding` to DDD.
 
    * `delete 2` : Deletes the 2nd contact shown in the current list.
 
