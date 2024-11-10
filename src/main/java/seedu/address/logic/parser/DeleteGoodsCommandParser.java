@@ -30,6 +30,7 @@ public class DeleteGoodsCommandParser implements Parser<DeleteGoodsCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GOODS_NAME);
+
         Name supplierName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         GoodsName goodsName = ParserUtil.parseGoodsName(argMultimap.getValue(PREFIX_GOODS_NAME).get());
 

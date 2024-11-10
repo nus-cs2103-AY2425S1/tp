@@ -11,7 +11,7 @@ public class GoodsNamePredicate implements Predicate<GoodsReceipt> {
     private final String name;
 
     /**
-     * Constructor for GoodsNamePredicate.
+     * Constructs a predicate that checks if a goods receipt has a good name.
      */
     public GoodsNamePredicate(String name) {
         requireNonNull(name);

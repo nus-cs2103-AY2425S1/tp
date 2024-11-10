@@ -2,46 +2,29 @@ package seedu.address.model.goods;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 /**
- * Represents goods.
- * Garauntees: Immutable; name is valid as declared in {@link #isValidGoodsName(String)};
+ * An immutable class that represents goods.
  */
-public class Goods {
+public final class Goods {
 
     public static final String MESSAGE_CONSTRAINTS = "Product quantity cannot be negative or 0!";
-    public static final String VALIDATION_REGEX = "/^[\\w\\-\\s]+$/";
-
     private final GoodsName goodsName;
     private final GoodsCategories category;
+
 
     /**
      * Constructs a {@Code Goods}.
      * All fields should not be null.
      *
      * @param goodsName A valid goods name.
-     * @param category A category for the goods.
+     * @param category  A category for the goods.
      */
     public Goods(GoodsName goodsName, GoodsCategories category) {
         requireAllNonNull(goodsName, category);
         this.goodsName = goodsName;
         this.category = category;
-    }
-
-    public GoodsName getGoodsName() {
-        return goodsName;
-    }
-
-    public GoodsCategories getCategory() {
-        return category;
-    }
-
-    /**
-     * Returns True if the goods name is valid.
-     *
-     * @param test String for goods name
-     */
-    public static boolean isValidGoodsName(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -71,6 +54,21 @@ public class Goods {
             return false;
         }
 
-        return otherGoods.goodsName.equals(this.goodsName) && otherGoods.category.equals(this.category);
+        return otherGoods.goodsName.equals(this.goodsName)
+                && otherGoods.category.equals(this.category);
     }
+
+    public GoodsName goodsName() {
+        return goodsName;
+    }
+
+    public GoodsCategories category() {
+        return category;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(goodsName, category);
+    }
+
 }

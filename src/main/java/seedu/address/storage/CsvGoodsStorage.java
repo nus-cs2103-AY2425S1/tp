@@ -32,8 +32,8 @@ public class CsvGoodsStorage implements GoodsStorage {
 
     private static final Logger logger = LogsCenter.getLogger(CsvGoodsStorage.class);
 
-    private Path filePath;
-    private Path exportFilePath;
+    private final Path filePath;
+    private final Path exportFilePath;
 
     /**
      * A class to access Goods data stored as a csv file on the hard disk.

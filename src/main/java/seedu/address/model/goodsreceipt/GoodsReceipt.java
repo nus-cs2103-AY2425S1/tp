@@ -21,8 +21,7 @@ import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
 
 /**
- * The {@code GoodsReceipt} class represents the receipt of goods from a supplier
- * Guarantees: Immutable;
+ * An immutable {@code GoodsReceipt} class represents the receipt of goods from a supplier
  */
 public class GoodsReceipt {
 
@@ -68,13 +67,13 @@ public class GoodsReceipt {
     /**
      * Constructs a {@code GoodsReceipt}.
      *
-     * @param goods The goods associated with this receipt.
-     * @param supplierName The name of the supplier.
-     * @param procurementDate The date when the goods were procured.
-     * @param arrivalDate The date when the goods are expected to or have arrived.
-     * @param isDelivered A boolean indicating whether the goods have been delivered.
-     * @param quantity The quantity of goods in this receipt.
-     * @param price The price of the goods in this receipt.
+     * @param goods the goods associated with this receipt.
+     * @param supplierName the name of the supplier.
+     * @param procurementDate the date when the goods were procured.
+     * @param arrivalDate the date when the goods are expected to or have arrived.
+     * @param isDelivered a boolean indicating whether the goods have been delivered.
+     * @param quantity the quantity of goods in this receipt.
+     * @param price the price of the goods in this receipt.
      */
     public GoodsReceipt(Goods goods, Name supplierName, Date procurementDate, Date arrivalDate,
                         boolean isDelivered, int quantity, double price) {
@@ -89,24 +88,23 @@ public class GoodsReceipt {
         this.isDelivered = isDelivered;
         this.quantity = quantity;
         this.price = price;
-
     }
 
     /**
-     * Returns True if the quantity is valid.
+     * Returns true if the quantity is valid.
      *
-     * @param quantity The price of the goods.
-     * @return True if the quantity is valid.
+     * @param quantity the price of the goods.
+     * @return true if the quantity is valid.
      */
     public static boolean isValidQuantity(double quantity) {
         return 0 <= quantity;
     }
 
     /**
-     * Returns True if the price is valid.
+     * Returns true if the price is valid.
      *
-     * @param price The price of the goods.
-     * @return True if the price is valid.
+     * @param price the price of the goods.
+     * @return true if the price is valid.
      */
     public static boolean isValidPrice(double price) {
         return 0 <= price;
@@ -114,14 +112,14 @@ public class GoodsReceipt {
 
 
     /**
-     * Returns True if the procurement date is valid.
+     * Returns true if the procurement date is valid.
      */
     public static boolean isValidProcurementDate(Date date) {
         return !date.getDateTime().isAfter(LocalDateTime.now());
     }
 
     /**
-     * Returns True if supplier is valid
+     * Returns true if supplier is valid.
      */
     public boolean isFromSupplier(Name supplier) {
         requireNonNull(supplier);
@@ -136,7 +134,7 @@ public class GoodsReceipt {
     }
 
     /**
-     * Returns if goods are delivered
+     * Returns if goods are delivered.
      */
     public boolean isDelivered() {
         return isDelivered;
@@ -205,8 +203,7 @@ public class GoodsReceipt {
 
 
     /**
-     * Checks if receipt is the same (Logic may be different from hashcode)
-     * E.g. delivered variable is not checked here
+     * Checks if receipt is the same.
      */
     @Override
     public boolean equals(Object other) {
@@ -220,16 +217,11 @@ public class GoodsReceipt {
         }
 
         return this.goods.equals(otherReceipt.goods)
-                &&
-                this.supplierName.equals(otherReceipt.supplierName)
-                &&
-                this.arrivalDate.equals(otherReceipt.arrivalDate)
-                &&
-                this.procurementDate.equals(otherReceipt.procurementDate)
-                &&
-                this.quantity == otherReceipt.quantity
-                &&
-                this.price == otherReceipt.price;
+                && this.supplierName.equals(otherReceipt.supplierName)
+                && this.arrivalDate.equals(otherReceipt.arrivalDate)
+                && this.procurementDate.equals(otherReceipt.procurementDate)
+                && this.quantity == otherReceipt.quantity
+                && this.price == otherReceipt.price;
     }
 
     @Override

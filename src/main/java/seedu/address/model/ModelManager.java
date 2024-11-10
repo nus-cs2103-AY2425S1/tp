@@ -201,7 +201,7 @@ public class ModelManager implements Model {
                 .addTags(goodsList.getReceiptList()
                         .stream()
                         .filter(g -> g.isFromSupplier(p.getName()))
-                        .map(g -> new Tag(g.getGoods().getCategory().name()))
+                        .map(g -> new Tag(g.getGoods().category().name()))
                         .toList())).toList();
     }
 
@@ -321,7 +321,7 @@ public class ModelManager implements Model {
 
     /**
      * Remove invalid receipts if {@code Name}
-     *     does not match an existing one.
+     * does not match an existing one.
      */
     private void filterIllegalSupplierNames() {
         this.goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));

@@ -1,6 +1,8 @@
 package seedu.address.model.goodsreceipt;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -46,15 +48,15 @@ public class SupplierNamePredicateTest {
         SupplierNamePredicate predicate = new SupplierNamePredicate(new Name("Alex Yeoh"));
 
         // check that it is equal to itself
-        assertTrue(predicate.equals(predicate));
+        assertEquals(predicate, predicate);
 
         // check that it is equal if keyword is the same
-        assertTrue(predicate.equals(new SupplierNamePredicate(new Name("Alex Yeoh"))));
+        assertEquals(predicate, new SupplierNamePredicate(new Name("Alex Yeoh")));
 
         // check that it is not equal if keyword is different
-        assertFalse(predicate.equals(new SupplierNamePredicate(new Name("Bernice Yu"))));
+        assertNotEquals(predicate, new SupplierNamePredicate(new Name("Bernice Yu")));
 
         // check that it is not equal to other types
-        assertFalse(predicate.equals(1.00));
+        assertNotEquals(1.00, predicate);
     }
 }

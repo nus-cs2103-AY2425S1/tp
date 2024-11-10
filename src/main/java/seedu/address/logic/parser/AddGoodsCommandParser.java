@@ -36,13 +36,23 @@ public class AddGoodsCommandParser implements Parser<AddGoodsCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_GOODS_NAME, PREFIX_QUANTITY, PREFIX_PRICE,
                         PREFIX_CATEGORY, PREFIX_PROCUREMENT_DATE, PREFIX_ARRIVAL_DATE, PREFIX_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GOODS_NAME, PREFIX_QUANTITY, PREFIX_PRICE, PREFIX_CATEGORY,
-                PREFIX_PROCUREMENT_DATE, PREFIX_ARRIVAL_DATE, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
+        boolean preambleIsNotEmpty = !argMultimap.getPreamble().isEmpty();
+        boolean prefixesAreNotAllPresent = !arePrefixesPresent(argMultimap, PREFIX_GOODS_NAME, PREFIX_QUANTITY,
+                PREFIX_PRICE, PREFIX_CATEGORY, PREFIX_PROCUREMENT_DATE, PREFIX_ARRIVAL_DATE, PREFIX_NAME);
+
+        if (preambleIsNotEmpty || prefixesAreNotAllPresent) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGoodsCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_GOODS_NAME, PREFIX_QUANTITY, PREFIX_PRICE,
                 PREFIX_CATEGORY, PREFIX_PROCUREMENT_DATE, PREFIX_ARRIVAL_DATE, PREFIX_NAME);
+
+        GoodsReceipt goodsReceipt = parseGoodsReceipt(argMultimap);
+
+        return new AddGoodsCommand(goodsReceipt);
+    }
+
+    private static GoodsReceipt parseGoodsReceipt(ArgumentMultimap argMultimap) throws ParseException {
         Name supplierName = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         GoodsName goodsName = ParserUtil.parseGoodsName(argMultimap.getValue(PREFIX_GOODS_NAME).get());
         int quantity = ParserUtil.parseGoodsQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
@@ -52,12 +62,10 @@ public class AddGoodsCommandParser implements Parser<AddGoodsCommand> {
         Date arrivalDate = ParserUtil.parseArrivalDate(
                 argMultimap.getValue(PREFIX_ARRIVAL_DATE).get(), procurementDate);
 
-        Boolean isDelivered = arrivalDate.getDateTime().isBefore(LocalDateTime.now());
+        boolean isDelivered = arrivalDate.getDateTime().isBefore(LocalDateTime.now());
         Goods goods = new Goods(goodsName, category);
-        GoodsReceipt goodsReceipt = new GoodsReceipt(goods, supplierName,
-                procurementDate, arrivalDate, isDelivered, quantity, price);
 
-        return new AddGoodsCommand(goodsReceipt);
+        return new GoodsReceipt(goods, supplierName, procurementDate, arrivalDate, isDelivered, quantity, price);
     }
 
     /**

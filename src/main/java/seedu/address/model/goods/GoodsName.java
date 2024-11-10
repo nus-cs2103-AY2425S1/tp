@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a goods name for stored goods.
- * Garauntees: immutable; is valid as declared in {@link #isValidName(String)}
+ * An immutable class that represents a goods name for stored goods.
+ * The name is valid as declared in {@link #isValidName(String)}.
  */
 public class GoodsName {
     public static final String MESSAGE_CONSTRAINTS =
@@ -17,7 +17,7 @@ public class GoodsName {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    private String name;
+    private final String name;
 
     /**
      * Constructs a {@code GoodsName}.
@@ -35,7 +35,6 @@ public class GoodsName {
         return test.matches(VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
         return this.name;
@@ -48,11 +47,10 @@ public class GoodsName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GoodsName)) {
+        if (!(other instanceof GoodsName otherName)) {
             return false;
         }
 
-        GoodsName otherName = (GoodsName) other;
         return name.equals(otherName.name);
     }
 }

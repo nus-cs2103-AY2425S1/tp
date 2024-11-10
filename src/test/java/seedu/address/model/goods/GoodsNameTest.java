@@ -1,6 +1,8 @@
 package seedu.address.model.goods;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -42,18 +44,18 @@ public class GoodsNameTest {
         GoodsName goodsName = new GoodsName("A valid GoodsName");
 
         // same values -> returns true
-        assertTrue(goodsName.equals(new GoodsName("A valid GoodsName")));
+        assertEquals(goodsName, new GoodsName("A valid GoodsName"));
 
         // same object -> returns true
-        assertTrue(goodsName.equals(goodsName));
+        assertEquals(goodsName, goodsName);
 
         // null -> returns false
-        assertFalse(goodsName.equals(null));
+        assertNotEquals(null, goodsName);
 
         // different types -> returns false
-        assertFalse(goodsName.equals(100));
+        assertNotEquals(100, goodsName);
 
         // different values -> returns false
-        assertFalse(goodsName.equals(new GoodsName("Other valid GoodsName")));
+        assertNotEquals(goodsName, new GoodsName("Other valid GoodsName"));
     }
 }

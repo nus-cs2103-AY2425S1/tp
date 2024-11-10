@@ -1,6 +1,8 @@
 package seedu.address.model.goodsreceipt;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -41,18 +43,18 @@ public class DeliveredPredicateTest {
         DeliveredPredicate predicate = new DeliveredPredicate(true);
 
         // check that it is equal to itself
-        assertTrue(predicate.equals(predicate));
+        assertEquals(predicate, predicate);
 
         // check that it is equal when isDelivered is equal
-        assertTrue(predicate.equals(new DeliveredPredicate(true)));
+        assertEquals(predicate, new DeliveredPredicate(true));
 
         // check that it is not equal with different isDelivered
-        assertFalse(predicate.equals(new DeliveredPredicate(false)));
+        assertNotEquals(predicate, new DeliveredPredicate(false));
 
         // check that it is not equal with null
-        assertFalse(predicate.equals(null));
+        assertNotEquals(null, predicate);
 
         // check that it is not equal with different object type
-        assertFalse(predicate.equals(new Object()));
+        assertNotEquals(predicate, new Object());
     }
 }

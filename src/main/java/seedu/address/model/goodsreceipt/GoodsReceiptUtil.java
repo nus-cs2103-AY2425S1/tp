@@ -12,9 +12,10 @@ public class GoodsReceiptUtil {
      * @param goodsReceipt A list of goodsReceipts.
      */
     public static int sumQuantity(List<GoodsReceipt> goodsReceipt) {
-        return goodsReceipt.stream().map(GoodsReceipt::getQuantity)
-                                 .reduce(Integer::sum)
-                                 .orElse(0);
+        return goodsReceipt.stream()
+                .map(GoodsReceipt::getQuantity)
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     /**
@@ -23,8 +24,9 @@ public class GoodsReceiptUtil {
      * @param goodsReceipt A list of goodsReceipts.
      */
     public static double sumTotals(List<GoodsReceipt> goodsReceipt) {
-        return goodsReceipt.stream().map(GoodsReceipt::getPriceTotal)
-                                 .reduce(Double::sum)
-                                 .orElse(0.0);
+        return goodsReceipt.stream()
+                .map(GoodsReceipt::getPriceTotal)
+                .reduce(Double::sum)
+                .orElse(0.0);
     }
 }

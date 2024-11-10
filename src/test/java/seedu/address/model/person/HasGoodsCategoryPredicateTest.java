@@ -20,7 +20,7 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.testutil.GoodsBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
 
-public class HasCategoryPredicateTest {
+public class HasGoodsCategoryPredicateTest {
 
     private Model getDefaultModel() {
         Model model = new ModelManager();
@@ -54,13 +54,14 @@ public class HasCategoryPredicateTest {
         Set<GoodsCategories> firstCategorySet = Set.of(GoodsCategories.CONSUMABLES);
         Set<GoodsCategories> secondCategorySet = Set.of(GoodsCategories.LIFESTYLE, GoodsCategories.SPECIALTY);
 
-        HasCategoryPredicate firstPredicate = new HasCategoryPredicate(firstModel, firstCategorySet);
+        PersonHasGoodsWithCategoriesPredicate firstPredicate =
+                new PersonHasGoodsWithCategoriesPredicate(firstModel, firstCategorySet);
 
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
-        assertEquals(firstPredicate, new HasCategoryPredicate(firstModel, firstCategorySet));
+        assertEquals(firstPredicate, new PersonHasGoodsWithCategoriesPredicate(firstModel, firstCategorySet));
 
         // different types -> returns false
         assertNotEquals(1, firstPredicate);
@@ -69,8 +70,8 @@ public class HasCategoryPredicateTest {
         assertNotEquals(null, firstPredicate);
 
         // different person -> returns false
-        assertNotEquals(firstPredicate, new HasCategoryPredicate(secondModel, firstCategorySet));
-        assertNotEquals(firstPredicate, new HasCategoryPredicate(firstModel, secondCategorySet));
+        assertNotEquals(firstPredicate, new PersonHasGoodsWithCategoriesPredicate(secondModel, firstCategorySet));
+        assertNotEquals(firstPredicate, new PersonHasGoodsWithCategoriesPredicate(firstModel, secondCategorySet));
     }
 
     @Test
@@ -79,12 +80,12 @@ public class HasCategoryPredicateTest {
         Model model = getDefaultModel();
 
         // One category
-        HasCategoryPredicate firstPredicate = new HasCategoryPredicate(
+        PersonHasGoodsWithCategoriesPredicate firstPredicate = new PersonHasGoodsWithCategoriesPredicate(
                 model, Set.of(GoodsCategories.LIFESTYLE));
         assertTrue(firstPredicate.test(ALICE));
 
         // Multiple category
-        HasCategoryPredicate secondPredicate = new HasCategoryPredicate(
+        PersonHasGoodsWithCategoriesPredicate secondPredicate = new PersonHasGoodsWithCategoriesPredicate(
                 model, Set.of(GoodsCategories.LIFESTYLE, GoodsCategories.CONSUMABLES));
         assertTrue(secondPredicate.test(ALICE));
         assertTrue(secondPredicate.test(BOB));
@@ -97,24 +98,26 @@ public class HasCategoryPredicateTest {
         Model model = getDefaultModel();
 
         // One category
-        HasCategoryPredicate firstPredicate = new HasCategoryPredicate(
+        PersonHasGoodsWithCategoriesPredicate firstPredicate = new PersonHasGoodsWithCategoriesPredicate(
                 model, Set.of(GoodsCategories.LIFESTYLE));
         assertFalse(firstPredicate.test(BOB));
         assertFalse(firstPredicate.test(CARL));
 
         // Multiple category
-        HasCategoryPredicate secondPredicate = new HasCategoryPredicate(
+        PersonHasGoodsWithCategoriesPredicate secondPredicate = new PersonHasGoodsWithCategoriesPredicate(
                 model, Set.of(GoodsCategories.LIFESTYLE, GoodsCategories.CONSUMABLES));
         assertFalse(secondPredicate.test(CARL));
 
         // No categories
-        HasCategoryPredicate thirdPredicate = new HasCategoryPredicate(model, Set.of());
+        PersonHasGoodsWithCategoriesPredicate thirdPredicate =
+                new PersonHasGoodsWithCategoriesPredicate(model, Set.of());
         assertFalse(thirdPredicate.test(ALICE));
         assertFalse(thirdPredicate.test(BOB));
         assertFalse(thirdPredicate.test(CARL));
 
         // Non-matching category
-        HasCategoryPredicate fourthPredicate = new HasCategoryPredicate(model, Set.of(GoodsCategories.SPECIALTY));
+        PersonHasGoodsWithCategoriesPredicate fourthPredicate =
+                new PersonHasGoodsWithCategoriesPredicate(model, Set.of(GoodsCategories.SPECIALTY));
         assertFalse(fourthPredicate.test(ALICE));
         assertFalse(thirdPredicate.test(BOB));
         assertFalse(thirdPredicate.test(CARL));
@@ -125,10 +128,11 @@ public class HasCategoryPredicateTest {
         Model model = getDefaultModel();
         Set<GoodsCategories> categoriesSet = Set.of(
                 GoodsCategories.LIFESTYLE, GoodsCategories.CONSUMABLES, GoodsCategories.SPECIALTY);
-        HasCategoryPredicate predicate = new HasCategoryPredicate(model, categoriesSet);
+        PersonHasGoodsWithCategoriesPredicate predicate =
+                new PersonHasGoodsWithCategoriesPredicate(model, categoriesSet);
 
-        String expected = HasCategoryPredicate.class.getCanonicalName() + "{model=" + model + ", categoriesSet="
-                + categoriesSet + "}";
+        String expected = PersonHasGoodsWithCategoriesPredicate.class.getCanonicalName()
+                + "{model=" + model + ", categoriesSet=" + categoriesSet + "}";
         assertEquals(expected, predicate.toString());
     }
 }
