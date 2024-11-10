@@ -66,17 +66,23 @@ Example:
 * Items in square brackets are optional.<br>
   e.g `n/NAME [c/CLIENT_TYPE]` can be used as `n/John Doe c/Plan A` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[c/CLIENT_TYPE]…​` can be used as ` ` (i.e. 0 times), `c/Plan A`, `c/Plan A c/Plan B` etc.
+* Items that are **not** in square brackets are compulsory.<br>
+  e.g. `n/NAME` must be used as `n/John Doe`.
+
+* Items with `…`​ after them can be used multiple times.<br>
+  e.g. `[c/CLIENT_TYPE]…​` can be used as ` `, `c/Plan A`, `c/Plan A c/Plan B` etc. (i.e. 0 or more times, since it is a optional field) <br>
+  e.g. `c/CLIENT_TYPE…​`can be used as `c/Plan A`, `c/Plan A c/Plan B` etc. (i.e. 1 or more times, since it is compulsory)
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Add `$` after the input name is used to indicate **exact** name.<br>
-  e.g. `delete John Doe$` will delete the contact with the name `John Doe`.
+* Add `$` after the input name to indicate **exact** name.<br>
+  * This is useful when a client's name is a prefix of another client's name.
+  
+  e.g. `delete John Doe$` will delete the contact with the name `John Doe`.<br>
   e.g. If there are two client named `David Li` and `David Lim`, typing `delete David Li$` will delete the client with the name `David Li`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `sort` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -87,17 +93,20 @@ Example:
 * Specific constraints for each parameter are specified in the table below.
 * Commands that use any of these parameters will have to adhere to the constraints specified in the table.
 
-| Parameter              | Constraints                                                                                                                                                                                                                                                                                               | Examples                                                                                         |
-|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| `NAME`                 | - Cannot be empty <br> - Only one name is allowed <br> - Must start with a letter <br> - First character: only letters <br> - Last character: only letters or parentheses <br> - Middle characters: letters, parentheses, or slashes                                                                      | **Valid**: `John Doe`, `John (NUS)`, `John S/O Bob` <br> **Invalid**: `John 123`, `!John Doe`    |
-| `PHONE_NUMBER`         | - Only numbers <br> - Cannot be empty <br> - Exactly 8 digits <br> - Only one phone number allowed                                                                                                                                                                                                        | **Valid**: `12345678` <br> **Invalid**: `123456789`, `p/abc`                                     |
-| `EMAIL`                | - Cannot be empty <br> - Only one email allowed <br> - Format: `local-part@domain` <br> - Local-part: alphanumeric and (+_.-) but cannot start/end with special characters <br> - Domain: ends with at least 2 characters; each label is alphanumeric, may contain hyphens but cannot start/end with them | **Valid**: `example@mail.com` <br> **Invalid**: `@mail.com`, `example@com`, `example@.com`       |
-| `ADDRESS`              | - Cannot be empty <br> - Only one address allowed <br> - Allowed characters: letters, numbers, `,#-():;`                                                                                                                                                                                                  | **Valid**: `John street, block 123, #01-01` <br> **Invalid**: `a/`                               |
-| `DESCRIPTION`          | - Cannot be empty <br> - Limited to 500 characters <br> - Only one description allowed                                                                                                                                                                                                                    | **Valid**: `likes bubble tea` <br> **Invalid**: `d/likes bubble tea d/likes coffee too`          |
-| `CLIENT_TYPE`          | - Alphanumeric only <br> - Cannot be empty <br> - Max length: 30 characters <br> - Multiple types allowed <br> - No duplicates; duplicate entries are combined <br> - Is case sensitive                                                                                                                   | **Valid**: `Plan A` <br> **Invalid**: `Investment #1`, `InvestmentPlanHealthcarePlanInsurancePlan` |
-| `DATETIME`             | - Cannot be empty <br> - Format: `yyyy-MM-dd HH:mm` in 24-hour format                                                                                                                                                                                                                                     | **Valid**: `2022-10-10 12:00` <br> **Invalid**: `2022-10-10 12:00 pm`                           |
-| `REMINDER_DESCRIPTION` | - Cannot be empty <br> - Max length: 300 characters                                                                                                                                                                                                                                                       | **Valid**: `Meeting with John at 12pm` <br> **Invalid**: `d/`                                   |
-| `INDEX`                | - Cannot be empty <br> - Must be a positive integer                                                                                                                                                                                                                                                       | **Valid**: `1`, `2`, `3` <br> **Invalid**: ``, `0`, `-1`                                           |
+
+| Command            | Constraints                                                                                                                                                                                                           | Examples                                                                                  |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `NAME`             | <br> - Must start with a letter <br> - **First** character: only letters <br> - **Last** character: only letters or parentheses <br> - **Middle** characters: letters, parentheses, or slashes                        | **Valid**: `John Doe`, `John (NUS)`, `John S/O Bob` <br> **Invalid**: `John 123`, `!John Doe` | 
+| `PHONE_NUMBER`     | - Only numbers <br> - Exactly 8 digits                                                                                                                                                                                | **Valid**: `12345678` <br> **Invalid**: `123456789`, `abc`                                |
+| `EMAIL`            | <br> - Format: `local-part@domain` <br> - Local-part: alphanumeric and (+_.-) but cannot start/end with special characters <br> - Domain: ends with at least 2 characters; each label is alphanumeric, may contain hyphens but cannot start/end with them | **Valid**: `example@mail.com` <br> **Invalid**: `@mail.com`, `example@com`, `example@.com` |
+| `ADDRESS`          | <br> - Allowed characters: letters, numbers, `,#-():;`                                                                                                                                                                | **Valid**: `John street, block 123, #01-01` <br> **Invalid**: `$Block 69`                 |
+| `DESCRIPTION`      | <br> - Limited to 500 characters (including whitespace)                                                                                                                                                               | **Valid**: `likes bubble tea`                                                             |
+| `CLIENT_TYPE`      | - Alphanumeric only <br> - Max length: 30 characters <br> - No duplicates; duplicate entries are combined <br> - Is case sensitive (`Health` is different from `health` while `Investment` and `Investment` are the same and is considered duplicates) | **Valid**: `Plan A` <br> **Invalid**:  `Investment #1`                                    |
+| `DATETIME`         | - Cannot be empty <br> - Format: `yyyy-MM-dd HH:mm` in 24-hour format                                                                                                                                                 | **Valid**: `2022-10-10 12:00` <br> **Invalid**: `2022-10-10 12:00 pm`                     |
+| `REMINDER_DESCRIPTION` | <br> - Max length: 300 characters                                                                                                                                                                                     | **Valid**: `Meeting with John at 12pm`                                                    |
+| `INDEX`            | <br> - Must be a positive integer                                                                                                                                                                                     | **Valid**: `1`, `2`, `3` <br> **Invalid**: `0`, `-1`                                      |
+
+
 
 
 
