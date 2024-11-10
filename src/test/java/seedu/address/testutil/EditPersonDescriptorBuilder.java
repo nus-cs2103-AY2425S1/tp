@@ -84,6 +84,22 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Name} of the next of kin of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNextOfKin(String nextOfKin) {
+        descriptor.setNextOfKin(new Name(nextOfKin));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} of the emergency contact of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmergencyContact(String emergencyContact) {
+        descriptor.setEmergencyContact(new Phone(emergencyContact));
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
