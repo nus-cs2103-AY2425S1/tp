@@ -173,7 +173,7 @@ Shows a list of all transactions in the transaction book.
 Format: `listTxn`
 
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** This command can be used to reset the filter applied on transaction list caused by a `fitlerTxn` 
+:bulb: **Tip:** This command can be used to reset the filter applied on transaction list caused by a `filterTxn` 
 command operation.
 </div>
 
@@ -236,6 +236,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+`find` command will apply a filter on the person list, and will retain its filtered state even after any other commands
+except `list`.
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+`find` command will overwrite an existing person filter state.
+</div>
+
 Examples:
 
 * `find John` returns `john` and `John Doe`
@@ -268,6 +276,14 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
 * The `AMOUNT_SIGN` accepts case-sensitive string of either `Pos` or `Neg`
   * To indicate filtering for transactions with amount that are positive or negative respectively.
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+`filterTxn` command will apply a filter on the transaction list, and will retain its filtered state even after any other
+commands except `listTxn`.
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+`filterTxn` command will overwrite an existing transaction filter state.
+</div>
 
 Examples:<br>
 
