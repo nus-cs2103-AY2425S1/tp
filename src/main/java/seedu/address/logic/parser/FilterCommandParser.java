@@ -22,7 +22,6 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
-    public static final String INCORRECT_AGE = "Age should be an integer";
     public static final String INCORRECT_DATE_FORMAT = "Appointment date should be form dd/MM/yyyy";
     public static final String INCORRECT_RANGE = "Please provide range in format: Lower bound - Upper bound";
     public static final String INCORRECT_AGE_AND_RANGE = "Please provide age range in format: Lower bound - Upper bound"
