@@ -122,7 +122,7 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 
 - `ROLE` (Optional): Specifies the type of contact. If not provided, the contact will be added as a general `Person`.
 - `NAME`: The contact's full name (case-insensitive).
-- `PHONE_NUMBER`: The contact's phone number (Any length is allowed, accommodating ranging from 3-digit emergency numbers to 15-digit international numbers).
+- `PHONE_NUMBER`: The contact's phone number (Any length is allowed, accommodating 3-digit emergency numbers to 15-digit international numbers).
 - `EMAIL`: The contact's email address (Only **english** emails are currently supported).
 - `ADDRESS`: The contact's physical address.
 - `TAG` (Optional): Additional tags associated with the contact (A contact can have any number of tags, including none).
