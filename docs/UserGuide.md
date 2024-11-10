@@ -35,10 +35,10 @@ VendorVault is a **desktop app for managing supplier contact information and del
    
    - 1c. If you do not have Java installed, you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-1/tp/releases).
+2. Download the latest `vendorvault.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-1/tp/releases).
    ![Download jar file](images/intro/jarFile.png)
 
-3. Upon downloading the `.jar` file, copy the file to the folder you want to use as the _home folder_ for your VendorVault Application.
+3. Upon downloading the `vendorvault.jar` file, copy the file to the folder you want to use as the _home folder_ for your VendorVault Application.
 
 4. Open the command terminal (same as step 1a), type `cd [path-to-your-folder]` (path to the folder you put the jar file in) and use the `java -jar vendorvault.jar` command to run the application.<br>
    ![Starting up application](images/intro/startingApp.png)
