@@ -172,7 +172,7 @@ The prefixes used in **EZSTATE** are universal across all commands.
 
 #### Remarks
 
-This section covers remarks for some of the prefixes above. You are to take note of the following remarks when using any commands.
+Below are additional notes regarding certain prefixes. Please keep these in mind while using commands to help maintain data integrity and avoid unexpected issues.
 
 ##### n/
 1. Names are `space-sensitive`. This means that `n/alexyeoh` (0 space), `n/alex yeoh` (1 space) and `n/alex  yeoh` (2 spaces) _(not exhaustive)_ create three different profiles.
@@ -227,7 +227,7 @@ NIL (all covered in Constraints)
 ##### sel/ & buy/
 1. Leading zeroes are allowed but will be trimmed (i.e. `sel/01` and `sel/1` refer to the same seller).
 
-
+<br>
 Congratulations - you've successfully completed the Quick Start guide!
 
 The [next section](#features) offers an **in-depth overview** of all the commands available in EZSTATE.
