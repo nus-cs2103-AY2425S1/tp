@@ -117,27 +117,43 @@ Examples:
 
 ### Listing all contacts : `list contact`
 
-Shows a list of all contacts in the address book.
+Shows all contacts in the address book in the contact list.
 
 Format: `list contact`
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all contacts are already displayed, nothing will appear to be changed. 
+</div>
+
 ### Listing all jobs : `list job`
 
-Shows a list of all jobs in the address book.
+Shows all jobs in the address book in the job list.
 
 Format: `list job`
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all jobs are already displayed, nothing will appear to be changed. 
+</div>
+
 ### Listing all companies : `list company`
 
-Shows a list of all companies in the address book.
+Shows all companies in the address book in the company list.
 
 Format: `list company`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all companies are already displayed, nothing will appear to be changed. 
+</div>
 
 ### Listing all entities : `list all`
 
 Show all contact, jobs and companies in the address book.
 
 Format: `list all`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all contacts, jobs and companies are already displayed, nothing will appear to be changed. 
+</div>
 
 ### Editing a contact : `edit`
 
