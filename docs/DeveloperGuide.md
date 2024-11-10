@@ -620,7 +620,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clinicbuddy.jar` command  Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clinicbuddy.jar` command  Expected: Shows the GUI with a set of sample patients. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -632,22 +632,104 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
-### Deleting a person
+### Deleting a patient
 
-1. Deleting a person while all persons are being shown
+1. Deleting a patient while all patient are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all patient using the `list` command. Multiple patients in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First patient is deleted from the list. Details of the deleted patient shown in the status message.
        Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
+2. Deleting a patient after filtering the list
+
+    1. Prerequisites: There should be a patient with a `NRIC` of `S1234567Z` in ClinicBuddy, else enter `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` to add the patient. Filter the list using the `find S1234567Z`.
+
+    1. Test case: `delete S1234567Z`<br>
+       Expected: Patient with NRIC `S1234567Z` is deleted from the list. Details of the deleted patient shown in the status message.
+       Timestamp in the status bar is updated.
+
+    1. Test case: `delete S9999999Z`<br>
+       Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size), `delete y`(where y is any other NRIC) <br>
+   Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
+
+### Updating an appointment
+
+1. Updating an appointment of a patient while all patients are being shown
+
+    1. Prerequisites: List all patients using the `list` command. At least 2 patients are in the list.
+
+    1. Test case: `update 1 apt/10/12/2024 10:30`<br>
+       Expected: First patient in the list is assigned an appointment for `10 December 2024 10:30`. Details of the  patient is shown in the status message.
+       Timestamp in the status bar is updated.
+   
+       1. Test case `update 2 apt/10/12/2024 10:35`<br>
+          Expected: Second patient in the list will not be given the appointment as the appointment is taken by another. Error details shown in the status message. Status bar remains the same.
+       
+       1. Test case: `update 1 apt/10/12/2024 10:45`<br>
+          Expected: First patient in the list is assigned an appointment for `10 December 2024 10:45`. Details of the  patient is shown in the status message.
+          Timestamp in the status bar is updated.
+
+    1. Test case: `Update 0 apt/10/12/2024 11:30`<br>
+       Expected: No patient is given the appointment. Error details shown in the status message. Status bar remains the same.
+   
+    1. Test case: `Update 1 apt/10/12/2024 23:50`<br>
+       Expected: Patient 1 is not given the appointment as it is past opening hours. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
+
+### Updating Operating Hours
+
+1. Updating Operating Hours 
+
+    1. Prerequisites: At least one patient with an appointment at `18:30` in the list. Use `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` to add the patient if there are no patients in the list or `update 1 apt/02/10/2024 18:30` to update the first patient.
+
+    1. Test case 1: `hours o/09:30 c/19:00`
+       Expected: Operating Hours changed. Details of the new operating hours shown in the status message. Operating hours display updated to new hours.
+   
+   1. Test case 2: `hours o/09:30 c/18:00`
+      Expected: Operating Hours not updated. Error details shown in the status message. Status bar remains the same.
+
+<div style="page-break-after: always;"></div>
+
+### Deleting Appointments
+
+1. Delete Appointment of a patient
+
+    1. Prerequisites: A patient with an appointment at `2 October 2024 18:30` and an NRIC of `S1234567Z` in the list. Use `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` to add the patient if there are no patients in the list or `update 1 apt/02/10/2024 18:30` to update the appointment first patient and `update 1 i/S1234567Z` to update the NRIC.
+
+    1. Test case 1: `deleteappt S1234567Z 02/10/2024 18:30`
+       Expected: Appointment deleted from patient. Success message shown. Operating hours display updated to new hours. Status bar remains the same.
+
+    1. Test case 2: `deleteappt S1234567Z 02/10/2024 17:30`
+       Expected: Appointment not deleted. Error details shown in the status message. Status bar remains the same.
+
+<div style="page-break-after: always;"></div>
+
+### Find patients by appointment
+
+1. Find patients by appointment
+
+    1. Prerequisites: A patient with an appointment at `2 October 2024 18:30` in the list. Use `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` to add the patient if there are no patients in the list or `update 1 apt/02/10/2024 18:30` to update the appointment first patient.
+
+    1. Test case 1: `bookings 02/10/2024`
+       Expected: Patients whose appointments are in `02/10/2024` are displayed. Number of persons with bookings shown in status message.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -658,7 +740,8 @@ Team size : 5
 
 1. **Make invalid command message more specific** : The current error message when one of the fields entered is empty or incorrect is `Invalid Command Format!`, which is too general. We plan to make the error message point out the incorrect field: `Gender Field is missing.` when adding a patient without specifying their gender.
 
-2. **Create reminders for appointments** : Currently ClinicBuddy only shows if a patient's appointment is today or has ended or is in the future by changing the text colour. We plan to include reminder features such as a box next to the appointment that shows the days / hours / minutes to the appointment. Example : `Appointment : 08 November 2024 10:30 - 10:45 (10 Days, 3 Hours, 20 minutes)`.
+2. **Better Helpbox** : Currently ClinicBuddy's helpbox is too lengthy and difficult to read for users. We intend to improve on this by simplifying the commands and using better formatting such as bolding the command words and padding the command syntax :
+![betterHelpBox](images/betterHelpBox.png)
 
 3. **Set appointment length** : Currently appointments are in 15 minute blocks and unable to be changed. We plan to allow the user to set the appointment time of a patient: `update 1 apttime/20` sets the appointment time of the patient in index `1` to `20` minutes. The new appointment must not clash with another existing appointment before updating the appointment duration.
 
