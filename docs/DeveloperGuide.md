@@ -1,10 +1,10 @@
 ---
   layout: default.md
-  title: "Developer Guide"
+  title: "Data coNdUctorS"
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Data coNdUctorS Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,7 +15,7 @@
 
 - Sample data for testing purpose developed by [Wu Zengfu](AboutUs.md#wu-zengfu): https://github.com/wuzengfu/tp_util
 - JavaFX Pagination documentation: https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Pagination.html
-- Code for responsive design : ChatGPT (Chua Tse Hui uses it)
+- Code for responsive design : ChatGPT (Chua Tse Hui, Winston, Ernest uses it)
 - Inspired by Code given for camel Case conversion (Chua Tse Hui uses it): https://www.baeldung.com/java-string-to-camel-case 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                     | I want to …​                                                                                                                                                                             | So that I can…​                             -                                                                                    |
 |----------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                    | search the contact information by his/her name                                                                                                                                           | find the information of this member quickly.                                                                                     |
+| `* * *`  | new user                    | search the contact information of a CCA member by his/her name or other fields                                                                                                           | find the information of this member quickly.                                                                                     |
 | `* * *`  | user                        | remove a member from the address book                                                                                                                                                    | update the address book accordingly if he is no longer in the club                                                               |
 | `* * *`  | user                        | use this app to populate the member’s details into the app database                                                                                                                      | save their details (name, year, tele handle, email address) into the database for future reference                               |
 | `* *`    | user                        | see a demonstration or tutorial for me to get started                                                                                                                                    | know how to use the app                                                                                                          |
@@ -253,7 +253,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **application** is the `data_coNdUctorS` and the **User** is the `user`, unless specified otherwise)
 
 
 **Use case: Add a contact**
@@ -428,20 +428,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Data changes should be automatically saved to avoid loss of data.
-5.  Should validate data entries to ensure consistency and correctness (eg. check that email format is correct etc.)
-6.  Should be able to accommodate increasing member data over time.
-7.  Should be able to retrieve and display member data within 2 seconds.
-8.  User Interface should be intuitive even for new users.
+   - The application should function on any mainstream operating system (Windows, macOS, and Linux) that supports Java 17 or above.
+
+   - The application should handle up to 1,000 members without noticeable performance lag for standard operations such as adding, editing, and searching contacts.
+
+   - A user with an above-average typing speed for English text should be able to execute commands and accomplish tasks more quickly than by relying solely using commands than using a mouse. 
+
+   - The application should operate fully offline, with no reliance on an internet connection for core functionalities, including saving and retrieving contact information.
+
+   - Comprehensive documentation should be available, including a User Guide, command references, and troubleshooting instructions, to support users and developers alike.
+
+   - The GUI should be well-organised, user-friendly, and easy to navigate for users of all experience levels, with intuitive layouts and accessible help options.
+
+   - The application should handle common user errors effectively, displaying clear error messages and suggestions to help users correct their input where possible.
+
+   - The application should support English as the default language, with future releases allowing for additional languages if necessary.
+
+   - The application should support future integration with external contact management systems, allowing for seamless data transfer if needed.
+
+   - The application should periodically create a backup of contact data, enabling users to restore from the most recent backup in the event of data loss or corruption.
+
+   - The application should be able to retrieve and display member data within 2 seconds.
+
+   - The application should  validate data entries to ensure consistency and correctness (eg. check that email format is correct etc.)
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Glossary
 
+* **Application Programming Interface (API)**: A collection of protocols and rules that enables different software applications to communicate and work together.
+
+* **Command Line Interface (CLI)**: A method of interacting with a program by typing commands into a terminal or command window.
+
+* **Confidential Contact Information**: Contact details intended to remain private and not shared with others.
+
+* **Extensible Markup Language (XML)**: A language for defining document structures that are readable by both humans and computers, enabling data sharing.
+
+* **Graphical User Interface (GUI)**: A user interaction method that involves visual elements like buttons, menus, and windows to operate a program.
+
+* **JavaScript Object Notation (JSON)**: A simple data format that allows information to be stored and exchanged in a lightweight, text-based structure.
+
+* **Main Success Scenario (MSS)**: The primary sequence of actions in a use case that achieves the intended result.
+
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+
+* **Pagination**: A technique for organising large sets of data or lists into discrete pages, making it easier to navigate and view information one section at a time. 
+
+* **User Interface (UI)**: The part of an application that users see and interact with to operate the software.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
