@@ -139,6 +139,8 @@ A client can have any number of tags (including 0)
 **:information_source: Notes about input formats:**<br>
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
+    * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`
+    * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`
     * name must be unique (case-sensitive). Clients with the same name cannot be added to
       the system twice.
         - entering the commands:
@@ -158,12 +160,16 @@ A client can have any number of tags (including 0)
     - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
 
 * Client's email address should be of the format local-part@domain and adhere to the following constraints:
-    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). 
+       - The local-part may not start or end with any special characters.
+       - The local-part may not have consecutive special characters.
     2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
        The domain name must:
         - end with a domain label at least 2 characters long
         - have each domain label start and end with alphanumeric characters
         - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    * Acceptable email format: `client@email.com`, `cli+ent.name@email.com`
+    * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`
 
 * Client's addresses can take any values, and it should not be blank
 
@@ -212,36 +218,43 @@ Examples:
 **:information_source: Notes about input formats:**<br>
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
-  * name must be unique (case-sensitive). Clients with the same name cannot be added to
-    the system twice.
-      - entering the commands:
-          * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-          * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
-            different block, different unit`
-            will not be allowed.
-      - However, clients with the same name spelling but different case can be added. Entering 
-        the commands:
-          * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-          * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
-            different block, different unit`
-            will successfully add both `John Doe` and `John doe` to the case management system.
+    * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`
+    * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`
+    * name must be unique (case-sensitive). Clients with the same name cannot be added to
+      the system twice.
+        - entering the commands:
+            * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+            * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
+              different block, different unit`
+              will not be allowed.
+        - However, clients with the same name spelling but different case can be added. Entering
+          the commands:
+            * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+            * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
+              different block, different unit`
+              will successfully add both `John Doe` and `John doe` to the case management system.
 
 * Client's phone number must not contain any spaces or special characters.
     - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
     - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
 
 * Client's email address should be of the format local-part@domain and adhere to the following constraints:
-    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
+        - The local-part may not start or end with any special characters.
+        - The local-part may not have consecutive special characters.
     2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
        The domain name must:
         - end with a domain label at least 2 characters long
         - have each domain label start and end with alphanumeric characters
         - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    * Acceptable email format: `client@email.com`, `cli+ent.name@email.com`
+    * Unacceptable email format: `cli+-ent@email.com`, `client@.com`, `client@.email.com`
 
 * Client's addresses can take any values, and it should not be blank
 
 * Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
 </div>
+
 
 ### Tagging a client: `tag`
 
