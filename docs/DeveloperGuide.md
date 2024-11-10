@@ -300,6 +300,10 @@ The following sequence diagram shows how the user can get previous command:
 The following activity diagram summarizes what happens when a user interacts with this feature:
 ![CommandTextHistoryActivityDiagram](images/CommandTextHistoryActivityDiagram.png)
 
+#### Future Improvements:
+
+* Implement a feature to clear the command history.
+
 ### NRIC Validation
 NRICs are stored in the `Nric` class. The method `Nric#isValidNric(String nric)` is used to validate the NRIC.
 
@@ -317,10 +321,6 @@ Thereafter, the NRIC is checked for its validity using the checksum algorithm th
    * If the first letter is `F` or `G`: The checksum mapping is `0=X, 1=W, 2=U, 3=T, 4=R, 5=Q, 6=P, 7=N, 8=M, 9=L, 10=K`.
    * For example, if the remainder is `3` and the first letter is `S`, the checksum alphabet is `H`.
 6. Check if the last letter of the NRIC is the same as the checksum alphabet. If it is, the NRIC is valid, otherwise, it is invalid.
-
-#### Future Improvements:
-
-* Implement a feature to clear the command history.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -393,10 +393,9 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
  | `*` | Expert User            | Use AI to calculate the priority list for elderly based on their information | The correct elderly are being prioritised                                                            | 
 
 ### Use cases
+(For all use cases below, the **System** is `ContactMate` and the **Actor** is `Staff`, unless specified otherwise)
 
-**System: ContactMate**  
-**Use case: UC01 \- Mark elderly as called**  
-**Actor: Staff**  
+**Use case: UC01 \- Mark elderly as called**\
 **Guarantees:** 
 
 * Marks elderly’s details to contact book only if input has no errors.
@@ -424,9 +423,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
   * Use case resumes from step 3\.
 
 <br/><br/>
-**System: ContactMate**  
-**Use case: UC02 \- List elderly contacts by priority**  
-**Actor: Staff**  
+**Use case: UC02 \- List elderly contacts by priority**\
 **Guarantees:** 
 
 * List of elderly sorted by priority of who to call next will be shown.
@@ -439,9 +436,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
       Use case ends.
 
 <br/><br/>
-**System: ContactMate**  
-**Use case: UC03 \- List individual elderly call history**  
-**Actor: Staff**  
+**Use case: UC03 \- List individual elderly call history**\
 **Guarantees:** 
 
 * Elderly call history will be listed only if the input has no errors.
@@ -465,9 +460,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * Use case resumes from step 2\.
 
 <br/><br/>
-**System: ContactMate**  
-**Use case: UC04 \- Delete elderly from the call list**  
-**Actor: Staff**  
+**Use case: UC04 \- Delete elderly from the call list**\
 **Guarantees:** 
 
 * Delete elderly from the contact list only if input has no errors.
@@ -491,9 +484,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * Use case resumes from step 2\.
 
 <br/><br/>
-**System: ContactMate**  
-**Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
-**Actor: Staff**  
+**Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**\
 **Guarantees:** 
 
 * Adds elderly to contact book only if input has no errors.
@@ -519,10 +510,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 	* 1d1. ContactMate shows a warning message that the elderly added has a matching name, phone number or email.  
 	* Use case resumes from step 2\.
 
-<br/><br/>
-**System: ContactMate**     
-**Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**      
-**Actor: Staff**    
+<br/><br/> 
+**Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**       \
 **Guarantees:**
 
 * Edits the elderly in the contact book only if input has no errors.
@@ -555,9 +544,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * Use case resumes from step 3\.
 
 <br/><br/>
-**System: ContactMate**     
-**Use case: UC07 \- Search elderly by name or NRIC**    
-**Actor: Staff**  
+**Use case: UC07 \- Search elderly by name or NRIC**\
 **Guarantees:**
 
 * Shows the filtered list of elderly that matches the name or NRIC.
@@ -569,10 +556,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
     Use case ends.
 
-<br/><br/>
-**System: ContactMate**      
-**Use case: UC08 \- Mark an elderly as called, given that elderly's name**      
-**Actor: Staff**        
+<br/><br/> 
+**Use case: UC08 \- Mark an elderly as called, given that elderly's name**       \
 **Guarantees:**     
 
 * Marks the elderly as called only if the input has no errors.
@@ -865,4 +850,3 @@ This is an example of the result of the enhancement:
 
     How we plan to implement this is to allow users to use the `delete` command in the history view. The user can specify the index of the call to delete. For example, `delete 1` will delete the first call in the call history. The `delete` command will remain unchanged, if the user is on the person list view.
 7. **Place cursor at the back of the command text after navigating command history:** Currently, when the user presses the `UP` or `DOWN` arrow key to navigate to the previous/next command, the cursor is placed at the front of the command text. We plan to change this behaviour such that the cursor is placed at the back of the command text after navigating the command history. This will allow users to continue typing the command without having to move the cursor to the back of the command box. This also aligns with the behaviour of most command-line interfaces.
-8. 
