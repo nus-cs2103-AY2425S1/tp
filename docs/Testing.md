@@ -1,6 +1,6 @@
-
 ---
-Real Connect Test Guide
+layout: page
+title: Real Connect Test Guide
 ---
 
 

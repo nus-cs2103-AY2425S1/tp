@@ -1,7 +1,7 @@
 ---
-Real Connect Developer Guide
+layout: page
+title: RealConnect
 ---
-
 ## Table of Contents
 
 - [Acknowledgements](#acknowledgements)
