@@ -242,22 +242,88 @@ addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
 
-## Q6: How do I tag Contact?
+## Q6: How do I tag contacts?
+**A:** You can add tags to contacts in several ways:
+1. When creating a new contact:
+   ```
+   addContact n/John p/91234567 t/VIP t/Regular
+   ```
+2. When editing an existing contact:
+   ```
+   editContact 1 t/Wholesale t/Priority
+   ```
 
+Tags are useful for:
+- Marking special status (e.g., t/VIP, t/Priority)
+- Noting preferences (e.g., t/NutFree, t/Halal)
 
-## Q7: Are the command case sensitive?
+## Q7: Are the commands case-sensitive?
+**A:** Yes, commands and parameter prefixes are case-sensitive, but parameter values are not. For example:
+- ✅ `addContact n/John p/12345678` (correct)
+- ❌ `AddContact n/John p/12345678` (wrong - command must be lowercase)
+- ❌ `addcontact N/John P/12345678` (wrong - prefixes must be lowercase)
+- ✅ `addContact n/JOHN p/12345678` (correct - name can be any case)
 
-## Q8: Ui Alignment table center row.
+## Q8: Why is my table not aligned properly in the UI?
+**A:** The table alignment may appear off if:
+1. The window is too narrow - try widening your application window
+2. There are very long entries - try using shorter entries or abbreviations
 
-## Q9 minimise screen some are hide open wide screen
+To ensure optimal viewing:
+- Keep the window width as wide as possible
+- Use reasonable length entries
 
-## Q10 Unrealistically long email and phone number
+## Q9: Why are some UI elements hidden when I minimize the screen?
+**A:** BakeBuddy is optimized for a minimum window size of 800x600 pixels. When the window is smaller:
+1. Some UI elements may be hidden to prevent overlap
+2. Use the scroll bars to navigate hidden content
+3. Resize the window larger to see all elements simultaneously
 
-## Q11 the order list is sorted in such a way pending order first
+For the best experience:
+- Keep the window at recommended size (1024x768 or larger)
+- Use full screen mode for optimal viewing
+- Avoid resizing to minimum dimensions
 
-## Q12 Add collection date to remark and quantity to remark as well
+## Q10: Are there limits to email and phone number length?
+**A:** Yes, BakeBuddy has the following input limits:
+- Phone numbers:
+  - Minimum: 3 digits
+  - Maximum: 15 digits
+  - Must be unique in the contact list
+- Email addresses:
+  - Maximum: 254 characters
+  - Must follow standard email format (xxx@xxx.xxx)
+  - Special characters allowed: . _ - @
 
-## Q13 how to view all customers
+## Q11: How are orders sorted in the list?
+**A:** Orders are automatically sorted in this priority:
+1. Pending orders (shown first)
+  - Sorted by date added (newest first)
+2. Completed orders (shown after pending)
+  - Sorted by completion date (newest first)
+
+This sorting helps you:
+- Focus on pending orders that need attention
+- Keep track of recent completions
+- Maintain an organized workflow
+
+## Q12: How do I add collection dates and quantities to orders?
+**A:** You can include collection dates and quantities in the order's remark field:
+```
+addCustomerOrder n/John p/91234567 o/1 2 r/Collection: 25/12/2024 6pm, Qty: 2x Croissant, 3x Muffin
+```
+
+Best practices for remarks:
+- Start with collection date/time
+- List quantities clearly
+- Add any special instructions last
+- Use consistent format for dates
+
+## Q13: How do I view all customers/suppliers?
+**A:** We can use the filter command to view all customers/suppliers.
+   ```
+   filterContact t/Customer
+   ```
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
