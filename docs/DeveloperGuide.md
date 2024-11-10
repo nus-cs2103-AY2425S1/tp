@@ -433,29 +433,28 @@ for tutorial dates that have not yet occurred. In future updates, the system wil
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​                         | I want to …​                                                                                       | So that I can…​                                                                          |
-|-----------|---------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| `* * *`   | tutor                           | add student data                                                                                   | add student information efficiently                                                      |
-| `* * *`   | tutor                           | delete student data                                                                                | delete student information efficiently                                                   |
-| `* * *`   | tutor                           | categorise students based on tutorial classes                                                      | find out which students are in my class                                                  |
-| `* * *`   | tutor                           | record student attendance daily through a CLI command                                              | track student participation                                                              |
-| `* * *`   | tutor                           | create assignments for students                                                                    | assign tasks to students                                                                 |
-| `* *`     | tutor                           | edit student data                                                                                  | manage student information efficiently                                                   |
-| `* *`     | tutor                           | list all students                                                                                  | see all students enrolled in the course                                                  |
-| `* *`     | tutor                           | add tutorials                                                                                      | organize students into specific sessions or groups                                       |
-| `* *`     | tutor                           | list all tutorials                                                                                 | review all tutorial sessions currently available                                         |
-| `* *`     | tutor                           | delete a tutorial                                                                                  | manage tutorials efficiently by removing sessions that are no longer needed              |
-| `* *`     | tutor                           | add assignments to a tutorial                                                                      | assign tasks to students and manage their workload                                       |
-| `* *`     | tutor                           | delete assignments                                                                                 | manage assignments efficiently by removing tasks that are no longer relevant             |
-| `* *`     | tutor                           | list all assignments                                                                               | see all assignments I have created for the students                                      |
-| `* *`     | tutor                           | mark assignments as completed or pending                                                           | track the progress of each student                                                       |
-| `* *`     | tutor                           | unmark assignments as completed                                                                    | correct any mistakes in assignment status updates                                        |
-| `* *`     | tutor                           | check assignment status for a student                                                              | monitor individual student progress on given assignments                                 |
-| `* *`     | tutor                           | mark student attendance                                                                            | keep track of each student's participation in the tutorials                              |
-| `* *`     | tutor                           | unmark student attendance                                                                          | correct mistakes in attendance marking                                                   |
-| `* *`     | cross-platform user             | run the application on any platform (Windows, Linux, OS X) without any OS-specific dependencies    | use it anywhere                                                                          |
-| `* *`     | convenience-seeking educator    | use the application without an installer                                                           | use it directly from the downloaded JAR file                                             |
-| `*`       | self-learning user              | use interactive help commands                                                                      | understand how to use the application without referring to external documentation        |
+| Priority  | As a …​                         | I want to …​                                                                                    | So that I can…​                                                                   |
+|-----------|---------------------------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *`   | tutor                           | add student data                                                                                | add student information efficiently                                               |
+| `* * *`   | tutor                           | delete student data                                                                             | delete student information efficiently                                            |
+| `* * *`   | tutor                           | record student attendance daily through a CLI command                                           | track student participation                                                       |
+| `* * *`   | tutor                           | create assignments for students                                                                 | assign tasks to students                                                          |
+| `* *`     | tutor                           | edit student data                                                                               | manage student information efficiently                                            |
+| `* *`     | tutor                           | list all students                                                                               | see all students enrolled in the course                                           |
+| `* *`     | tutor                           | add tutorials                                                                                   | organize students into specific sessions or groups                                |
+| `* *`     | tutor                           | list all tutorials                                                                              | review all tutorial sessions currently available                                  |
+| `* *`     | tutor                           | delete a tutorial                                                                               | manage tutorials efficiently by removing sessions that are no longer needed       |
+| `* *`     | tutor                           | add assignments                                                                                 | add assignment information efficiently                                            |
+| `* *`     | tutor                           | delete assignments                                                                              | manage assignments efficiently by removing tasks that are no longer relevant      |
+| `* *`     | tutor                           | list all assignments                                                                            | see all assignments I have created for the students                               |
+| `* *`     | tutor                           | mark assignments as completed or pending                                                        | track the progress of each student                                                |
+| `* *`     | tutor                           | unmark assignments as completed                                                                 | correct any mistakes in assignment status updates                                 |
+| `* *`     | tutor                           | check assignment status for a student                                                           | monitor individual student progress on given assignments                          |
+| `* *`     | tutor                           | mark student attendance                                                                         | keep track of each student's participation in the tutorials                       |
+| `* *`     | tutor                           | unmark student attendance                                                                       | correct mistakes in attendance marking                                            |
+| `* *`     | cross-platform user             | run the application on any platform (Windows, Linux, OS X) without any OS-specific dependencies | use it anywhere                                                                   |
+| `* *`     | convenience-seeking educator    | use the application without an installer                                                        | use it directly from the downloaded JAR file                                      |
+| `*`       | self-learning user              | use interactive help commands                                                                   | understand how to use the application without referring to external documentation |
 
 
 ### Use cases
@@ -627,6 +626,7 @@ Use case resumes at step 3.
 * **Parser**: A component that interprets user commands and converts them into actions or objects that the system can process.
 * **MSS (Main Success Scenario)**: The primary sequence of steps in a use case where everything proceeds as expected without any errors.
 * **JAR File**: Java ARchive file; a package file format that bundles Java class files and associated metadata for distribution.
+* **Prerequisite**: Compulsory requirements to fulfil before every manual testing action
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -646,49 +646,65 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Prerequisites: Download the jar file and copy into an empty folder
+   1. Prerequisite: Download the jar file and copy into an empty folder
 
    2. Test case: Double-click the jar file
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
-   1. Prerequisites: Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Prerequisite: Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Test case: Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
 ### Adding a student
 
-1. Adding a student with all required details
-    1. Prerequisites: Ensure that the tutorial T1001 exists in the system.
+>**Tip:** Replace "INVALID_ID" with "A12345678X" and "INVALID_TUT" with "T12345" for testing purpose here
 
-    2. Test case: `addStu n/John Doe s/A1234567X t/T1001`<br>
+**Sample error message indicating that invalid command format:** Invalid command format!
+
+**Sample error message indicating that the student ID format is invalid:** Student ID should be in the format: 'A' followed by seven digits and an uppercase character.
+
+**Sample error message indicating that the tutorial ID format is invalid:** Tutorial class should be in the format of Txxxx where xxxx are four digits.
+
+>**Prerequisite:** Ensure that the tutorial T1001 exists in the system.
+
+1. Adding a student with all required details
+
+    1. Test case: `addStu n/John Doe s/A1234567X c/T1001`<br>
        Expected: A new student named "John Doe" with student ID "A1234567X" is added to tutorial "T1001". Confirmation message is displayed with the student's details.
 
 2. Adding a student with missing compulsory fields
 
-    1. Test case: `addStu n/John Doe t/T1001`<br>
-       Expected: Error message indicating that the student ID is missing.
+    1. Test case: `addStu n/John Doe c/T1001`<br>
+       Expected: Error message indicating that invalid command format will output.
 
-    2. Test case: `addStu s/A1234567X t/T1001`<br>
-       Expected: Error message indicating that the student's name is missing.
+    2. Test case: `addStu s/A1234567X c/T1001`<br>
+       Expected: Error message indicating that invalid command format will output.
 
 3. Adding a student with invalid data
 
-    1. Test case: `addStu n/John Doe s/INVALID_ID t/T1001`<br>
+    1. Test case: `addStu n/John Doe s/INVALID_ID c/T1001`<br>
        Expected: Error message indicating that the student ID format is invalid.
 
-    2. Test case: `addStu n/John Doe s/A1234567X t/INVALID_TUT`<br>
-       Expected: Error message indicating that the tutorial ID does not exist.
+    2. Test case: `addStu n/John Doe s/A1234567X c/INVALID_TUT`<br>
+       Expected: Error message indicating that the tutorial ID format is invalid.
+
+    3. Test case: `addStu n/John Doe s/INVALID_ID c/INVALID_TUT`<br>
+       Expected: Error message indicating that the student ID format is invalid. Invalid student ID format will be prioritised over invalid tutorial ID in this case.
 
 ### Editing a student
 
+>**Prerequisite 1:** At least one student exists in the list. For example, a student at index 1.
+
+>**Prerequisite 2:** Ensure that the tutorial T1001 exists in the system.
+
+>**Prerequisite 3:** Ensure that no student with student ID "A7654321X" exists in the system.
+
 1. Editing a student's details
 
-    1. Prerequisites: At least one student exists in the list. For example, a student at index 1.
-
-    2. Test case: `edit 1 n/Jane Smith s/A7654321X t/T2001`<br>
+    1. Test case: `edit 1 n/Jane Smith s/A7654321X c/T2001`<br>
        Expected: Student at index 1 is updated with the new name "Jane Smith", student ID "A7654321X", and assigned to tutorial "T2001". Confirmation message is displayed with the updated details.
 
 2. Editing a student with some fields missing
@@ -696,24 +712,21 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit 1 n/Jane Smith`<br>
        Expected: Only the name of the student at index 1 is updated to "Jane Smith". Other details remain unchanged.
 
-3. Editing a student with invalid index
+3. Editing a student with invalid command format
 
     1. Test case: `edit 0 n/Jane Smith`<br>
-       Expected: Error message indicating that the student index provided is invalid.
-
-    2. Test case: `edit 999 n/Jane Smith` (assuming there are fewer than 999 students)<br>
-       Expected: Error message indicating that the student index provided is invalid.
+       Expected: Error message indicating that the command format is invalid.
 
 ### Deleting a student
 
+>**Prerequisite:** List all students using the `list` command. Multiple students in the list.
+
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-    2. Test case: `deleteStu 1`<br>
+    1. Test case: `deleteStu 1`<br>
      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    3. Test case: `deleteStu 0`<br>
+    2. Test case: `deleteStu 0`<br>
      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
 2. Other incorrect delete commands to try: `deleteStu`, `deleteStu x`, `...` (where x is larger than the list size)<br>
@@ -729,11 +742,11 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking attendance
 
+>**Prerequisite:** Student with ID "A1234567X" exists and is assigned to tutorial "T1001".
+
 1. Marking a student's attendance for a tutorial session
 
-    1. Prerequisites: Student with ID "A1234567X" exists and is assigned to tutorial "T1001".
-
-    2. Test case: `markAtt s/A1234567X t/T1001 d/2023-10-21`<br>
+    1. Test case: `markAtt s/A1234567X t/T1001 d/2023-10-21`<br>
        Expected: Attendance for student "A1234567X" on "2023-10-21" is marked as present in tutorial "T1001". Confirmation message is displayed.
 
 2. Marking attendance for a student not in the tutorial
