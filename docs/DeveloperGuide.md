@@ -622,8 +622,9 @@ Team size: 5
 1. Change the font color for tags: Currently, the font color for `GENERAL` tags is grey, making them less noticeable. We plan to use a higher-contrast font color to make tags more prominent and easier to read.
 2. Allow adding overseas phone number: The app currently supports only Singaporean phone number. We aim to expand functionality to include valid international numbers, complete with country codes.
 3. Allow certain special characters: We currently only allow alphanumeric characters and whitespaces. We plan to support additional characters, such as hyphens, to better accommodate real-world naming conventions.
-4. Make duplicate contact error message more specific: : The current error message for duplicate contacts, “This person already exists in CampusConnect,” is too general. We plan to enhance it by specifying the name of the existing contact that duplicates the one the user is attempting to add.
+4. Make duplicate contact error message more specific: The current error message for duplicate contacts, “This person already exists in CampusConnect,” is too general. We plan to enhance it by specifying the name of the existing contact that duplicates the one the user is attempting to add.
 5. Make `find n/`, `find p/` and `find e/` throw an error while `find t/` finds all users with not tags.
+6. Make the result display box slightly larger to accommodate longer error messages.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Future features**
