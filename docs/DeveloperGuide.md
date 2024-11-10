@@ -642,9 +642,9 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 ### Glossary
 
 * **Archive**: A feature that allows users to store old data for use later without cluttering the current interface.
-* **Export**: Saving the student data in a file format such as `.csv` or `.txt` for external use.
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Export**: Saving the student data in a file format as `json` file. This is done through data archiving.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Student Number**: A unique identifier assigned to each student.
 * **Tag**: A label that can be added to a student for categorization or searching.
 * **Undo/Redo**: The ability to reverse an action/command made in the application.
@@ -675,7 +675,36 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exit the App
+    1. Enter `exit` in the command box. This will exit the app.
+
+### Adding a person
+1. Adding a person into the person list
+   1. Assumption: We assume there is no duplicate in this test case
+   2. Test case `add n/John Doe p/98765432 g/male m/Physics`<br>
+   Expected: A person named John Doe into StoreClass with the details givens
+   3. Test case `add n/John Doe p/000 g/male m/Physics`<br> 
+   Expected: No person is added, an error message will be displayed.
+   4. Other incorrect add command to try : <br>
+   `add n/John Doe p/98765432 g/notAGender m/Physics`<br>
+   `add n/J@hn Do! p/98765432 g/male m/Physics`<br>
+   Expected: Same as test case 3
+
+### Editing a person
+1. Editing a person in the person list
+    1. Assumption: We assume the index here is valid if it is a positive integer
+    2. Test case `edit 1 g/femal`<br>
+       Expected: The gender of the first person in the list is changed to female
+    3. Test case `edit 0 g/female`<br>
+       Expected: No person is edited, an error message will be displayed. 
+    4. Other incorrect edit command to try : <br>
+       `edit 1 p/000`<br>
+       `edit 1 n/J@hn D*n`<br>
+       Expected: Same as test case 3
+    5. Other valid edit command to try : <br>
+        `edit 1 n/Angelica Lee`<br>
+        `edit 1 p/96754328`<br>
+        Expected: the field indicated by the prefix is edit to the information given.
 
 ### Deleting a person
 
@@ -692,12 +721,65 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+   1. Here `<HomeFolder>` refer to the folder containing the jar file.
+   1. Test case: Missing data file<br>
+      1. Close the app
+      2. Delete the json file with path `<HomeFolder>/data/addressbook.json` or remove the `data` folder entirely
+      3. Reopen the app <br>
+      Expected: a sample database will be provided.
+   2. Test case: Corrupted file<br>
+      1. Ensure that there is at least 1 student in StoreClass
+      1. Close the app
+      2. Open the json file with path  `<HomeFolder>/data/addressbook.json` and edit the name of the first student name to a invalid one e.g. `J@hn D*n`
+      3. ReOpen the app <br>
+      Expected: the corrupted list is discarded and an empty list is provided.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Saving data
+   1. Do some simple command to add / edit / delete student.
+   2. Close the app.
+   3. Reopen the app to see if your changes are saved correctly.<br>
+   Expected: Data is saved correctly, the list should after reopen should be same as before close.
 
-1. _{ more test cases …​ }_
+### Finding a person
+
+1. Test case: `find John`<br>
+Expected: list out all students whose names and tags contain john.
+
+### Filtering a list
+
+1. Test case: `filter g/male`<br>
+Expected: list out all the male students.
+
+### Undoing and Redoing a action
+
+1. Test case: Undo and redo a command
+   1. Perform a simple command that is supported by undo and redo e.g. add, edit or delete
+   2. Enter the command `undo`<br>
+   Expected: the action performed in step 1 will be undo.
+   3. Enter the command `redo`<br>
+   Expected: the action undone in step 2 will be redo.
+
+### Archiving Data
+Prerequisite: Ensure you can write in the `<HomeFolder>`
+
+Test case:  `archive pa/mybook.json`<br>
+Expected: The current list is cleared. Its data is stored in a json file with path `<HomeFolder>/archived/mybook.json`
+
+### Loading Data
+Prerequisite: Ensure you have a local `json` file containing a StoreClass data to read in the folder `<HomeFolder>/archived`. This can be done by try to archive one using the previous test.
+
+Test case: `load pa/mybook.json`<br>
+Expected: The current list will be overwritten and the content of the file will be loaded into the list.
+
+### Grade a person
+Assumption: The index and module are valid
+
+1. Test case: `grade 1 m/Math s/95`<br>
+Expected: Grade the first student's math as 95.
+2. Test case `grade 1 m/Math s/999`<br>
+Expected: No one will be graded, an error message will be shown.
