@@ -870,7 +870,7 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+3. **When entering a patient's date of birth or an appointment date**, the application currently accepts the year `0000` as a valid year. While it might be valid in some contexts such as the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601), it is not a valid year in the [Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar) which is the calendar system the typical user might expect.
 
 ## Command summary
 
