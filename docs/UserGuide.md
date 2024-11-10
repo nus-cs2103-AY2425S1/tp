@@ -324,7 +324,7 @@ Action | Format, Examples
 **Tag** | `tag INDEX t/TAG_NAME` <br> e.g., `tag 1 t/highPriority`
 **Untag** | `untag INDEX t/TAG_NAME` <br> e.g., `untag 1 t/highPriority`
 **Set Appointment** | `setappointment INDEX d/[YYYY-MM-DD]` <br> e.g., `setappointment 1 d/2024-11-23`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find n/NAME [MORE_NAME_KEYWORDS] a/ADDRESS [MORE_ADDRESS_KEYWORDS] t/TAG [MORE_TAGS]`<br>At least one of the parameters is required<br> e.g., `find n/James Jake a/Clementi t/elderly urgent`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Log** | `addlog INDEX r/REMARK [d/DATE]`<br> e.g., `addlog 2 r/Client is doing well d/2022-12-12 14:00`
 **Delete Log** | `deletelog INDEX l/LOG_INDEX`<br> e.g., `deletelog 2 l/3`
