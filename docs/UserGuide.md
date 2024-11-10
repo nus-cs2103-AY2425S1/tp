@@ -97,9 +97,11 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 
 #### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
+
+![Result for `help`](images/helpMessage.png)
 
 #### Clearing all entries : `clear`
 
