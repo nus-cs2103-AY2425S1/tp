@@ -627,13 +627,14 @@ Given below are instructions to test the app manually.
 
     1. Prerequisites: There are multiple lessons in the lesson schedule _{ may change when we can filter lessons}_
 
-    1. Test case: `delete 1`<br>
+    1. Test case: `lesson delete 1`<br>
        Expected: First lesson is deleted from the lesson schedule. Details of the deleted lesson shown in the status message.
 
-    1. Test case: `delete 0`<br>
+    1. Test case: `lesson delete 0`<br>
        Expected: No lesson is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `lesson delete`, `lesson delete x`, `...` (where x is larger 
+       than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
