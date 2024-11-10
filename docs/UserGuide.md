@@ -402,7 +402,7 @@ Action     | Format, Examples
 **[Sort](#sorting-students-sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
 **[Clear](#clearing-all-entries-clear)**  | `clear`
 **[Undo](#undoing-the-last-command-undo)**   | `undo`
-**[Redo](#undoing-the-last-undo-command-redo)**   | `redo`
+**[Redo](#redoing-the-last-undone-command-redo)**   | `redo`
 **[Exit](#exiting-the-program-exit)**   | `exit`
 
 <br>
@@ -621,5 +621,5 @@ Action     | Format, Examples
 **[Sort](#sorting-students-sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
 **[Clear](#clearing-all-entries-clear)**  | `clear`
 **[Undo](#undoing-the-last-command-undo)**   | `undo`
-**[Redo](#redoing-the-last-undo-command-redo)**   | `redo`
+**[Redo](#redoing-the-last-undone-command-redo)**   | `redo`
 **[Exit](#exiting-the-program-exit)**   | `exit`
