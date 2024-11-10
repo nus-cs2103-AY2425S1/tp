@@ -422,6 +422,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
   * 3c1. ContactMate shows an error message with the correct date format.  
   * Use case resumes from step 3\.
 
+<br/><br/>
 **System: ContactMate**  
 **Use case: UC02 \- List elderly contacts by priority**  
 **Actor: Staff**  
@@ -436,6 +437,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
       Use case ends.
 
+<br/><br/>
 **System: ContactMate**  
 **Use case: UC03 \- List individual elderly call history**  
 **Actor: Staff**  
@@ -461,6 +463,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
     * Use case resumes from step 2\.
 
+<br/><br/>
 **System: ContactMate**  
 **Use case: UC04 \- Delete elderly from the call list**  
 **Actor: Staff**  
@@ -486,6 +489,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
     * Use case resumes from step 2\.
 
+<br/><br/>
 **System: ContactMate**  
 **Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
 **Actor: Staff**  
@@ -514,6 +518,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 	* 1d1. ContactMate shows a warning message that the elderly added has a matching name, phone number or email.  
 	* Use case resumes from step 2\.
 
+<br/><br/>
 **System: ContactMate**     
 **Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**      
 **Actor: Staff**    
@@ -548,6 +553,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2e1. ContactMate shows a warning message that the elderly has a matching name, phone number or email.
     * Use case resumes from step 3\.
 
+<br/><br/>
 **System: ContactMate**     
 **Use case: UC07 \- Search elderly by name or NRIC**    
 **Actor: Staff**  
@@ -562,6 +568,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
     Use case ends.
 
+<br/><br/>
 **System: ContactMate**      
 **Use case: UC08 \- Mark an elderly as called, given that elderly's name**      
 **Actor: Staff**        
@@ -591,6 +598,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 3c1. ContactMate shows an error message with the correct date format.
     * Use case resumes from step 3\.
 
+<br/><br/>
 ### Non-Functional Requirements
 
 1. A user with above-average typing speed (> 40 Words Per Minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
@@ -834,3 +842,12 @@ Common prerequisite: List all elderly using the `list` command.
    1. Delete the `data/contactmate.json` file.
    2. Launch the app.<br>
        Expected: The app should show a list of sample persons.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+Team size: 5
+
+1. **Standardise uppercase for NRIC displayed in the person card:** If using lowercase NRIC when adding elderly: `add i/s5305394G n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7`, it is displayed as `s5305394G` in the person card (no change in case). We plan to standardise the displayed NRIC to be in uppercase in the person card for easier reading for users: `S5305394G`.
+2. **Relax constraint for name field:** The current constraint for the name field is alphanumeric characters and spaces which could be too restrictive if users want to add elderly with names that include other special characters (e.g. `João da Silva` or `Arjun Singh s/o Vijay Singh`). We plan to relax this constraint so that other characters that are commonly used in names are allowed. A non-exhaustive list of characters that will be allowed after this enhancement consists of diacritics (e.g. `ç`, `ñ`, `é`, `ü`), punctuation and symbols (e.g. `-`, `'`, `.`, `/`),  extended Latin characters (e.g. `ø`, `å`, `ð`), Chinese characters (e.g. `陈`, `小`, `明`) and Tamil characters (e.g.`ர`, `ஜ`).
+
