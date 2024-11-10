@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Tan Jia En
@@ -17,7 +15,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/jiaaaaen.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Created `socialMedia` and `renameTag` commands.
 
 ### Tan Yi Long
 
@@ -27,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yiiilonggg.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI Changes; Addition of new `schedule` command. Assisted with `filter`, `add` command changes
 
 ### Zon
 
@@ -37,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/Zon.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing of application. Addition of commands: restore, backup
 
 ### Liu Yujia
 
@@ -46,4 +44,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/LiuYJ2002)]
 [[portfolio](https://www.linkedin.com/in/liu-yujia-26b167203/)]
 
-* Role:
+* Role: Testing of application. Addition of `sort` and `search` command. Assisted with `filter` command and updating parameter requirements for `add` and `edit` commands.

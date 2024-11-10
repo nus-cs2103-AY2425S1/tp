@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project was built on the AddressBook-3 (AB3) application
+* No additional third-party libraries were used
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -94,20 +95,6 @@ Here's a (partial) class diagram of the `Logic` component:
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("schedule 1 sd/2024-10-24")` API call as an example.
-
-![Interactions Inside the Logic Component for the `schedule 1 sd/2024-10-24` Command](images/ScheduleSequenceDiagram.png)
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
-
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("sort n/asc"")` API call as an example.
-![Interactions Inside the Logic Component for the `sort n/asc` Command](images/SortSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
 
 How the `Logic` component works:
 
@@ -127,19 +114,34 @@ How the parsing works:
 
 Here are more examples of how our commands work:
 
-`socialMedia`
-
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("socialMedia 1 ig/username")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `socialMedia 1 ig/username` Command](images/SocialMediaSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SocialMediaCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("schedule 1 sd/2024-10-24")` API call as an example.
+
+![Interactions Inside the Logic Component for the `schedule 1 sd/2024-10-24` Command](images/ScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("sort n/asc"")` API call as an example.
+![Interactions Inside the Logic Component for the `sort n/asc` Command](images/SortSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 <img src="images/BackupSequenceDiagram.png" width="450" />
+
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
@@ -147,7 +149,10 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+
+Note that the Person class requires at least one of Phone, Address, Email or Social Media to be present. This cannot be captured by the UML. <br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -156,7 +161,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -300,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​       | I want to …​                                                                | So that I can…​                                                             |
 |----------|---------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| `* * *`  | new user      | understand the interface easily                                             | start using my addressbook with little trouble                              |
+| `* * *`  | new user      | understand the interface easily                                             | start using the contact management app with little trouble                  |
 | `* * *`  | new user      | add a new contact                                                           | start storing my existing contacts                                          |
 | `* * *`  | new user      | find a contact by name                                                      | retrieve their contact information                                          |
 | `* * *`  | familiar user | delete/archive a contact                                                    | remove those that are no longer working with me                             |
@@ -316,26 +321,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | familiar user | sort the contacts by product deadlines                                      | easily know which products I have to send out                               |
 | `* * `   | familiar user | filter contacts by criteria                                                 | search for specific types of people with certain characteristics            |
 | `* *`    | familiar user | sort my contacts alphabetically                                             | find my contacts by their name                                              |
-| `* * `   | familiar user | add profile photos to my contacts                                           | have a idea of how my contacts look like if i have not seen them for awhile |
+| `* * `   | familiar user | add profile photos to my contacts                                           | have a idea of how my contacts look like if I have not seen them for awhile |
 | `* * `   | familiar user | export and share a contact with others                                      | share a contact with others potentially to discuss about                    |
 | `* *`    | familiar user | pin contacts                                                                | quickly find those that are important to my business                        |
 | `* * `   | familiar user | see alerts on duplicate contacts                                            | delete it and keep my address book clean                                    |
 | `* * `   | familiar user | quickly retrieve my previous command                                        | not need to retype similar complex commands                                 |
 | `* * `   | familiar user | link my contacts' social media accounts                                     | access their social media easily, especially if relevant to our deal        |
 | `* *`    | familiar user | have a shortcut to user addresses                                           | easily determine where to send products to                                  |
-| `* * `   | familiar user | undo deletions                                                              | restore contacts incase of accidental deletion                              |
+| `* * `   | familiar user | undo deletions                                                              | restore contacts in case of accidental deletion                             |
 | `* *`    | familiar user | rename tags                                                                 | change the group of names when my business needs change                     |
 | `* * `   | familiar user | create temporary groups                                                     | group contacts based on projects, rather than just their affiliations       |
 | `*`      | familiar user | colour code my contacts by their categories                                 | easily spot them                                                            |
 | `* `     | expert user   | perform mass edits                                                          | change in the information of groups of contacts at one shot                 |
-| `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what i remember them by               |
+| `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what I remember them by               |
 | `* `     | expert user   | add reminders                                                               | be reminded to follow up with specific contacts                             |
 | `* `     | expert user   | create shortcut commands to add specific types of contacts                  | add people of similar profiles faster                                       |
+
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `BlitzBiz` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a contact**
+**Use case: UC01 - Delete a contact**
 
 **MSS**
 
@@ -349,78 +355,281 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
+  
+   Use case ends.
 
 * 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
+    * 3a1. BlitzBiz shows an error message.
+  
       Use case resumes at step 2.
 
-**Use case: Add a contact**
+**Use case: UC02 - Restore a contact**
+
+Preconditions: User has deleted a contact
 
 **MSS**
 
-1.  User requests to add a contact
-2.  BlitzBiz requests for name, phone number, and email address minimally
-3.  User enters contact details
-4.  BlitzBiz asks for confirmation
-5.  User confirms
-6.  BlitzBiz adds the contact
+1. User restores the deleted contact
+2. The contact is restored to BlitzBiz
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The entered details do not follow the correct format.
-   *  3a1. BlitzBiz requests for the correct details.
-      3a2. User enters new details.
-      Steps 3a1-3a2 are repeated until the data entered are correct.
-      Use case resumes from step 4.
+* 2a. The contact has been added back using the add command
+    * 2a1. BlitzBiz shows an error message.
 
-* *a. At any time, User chooses to cancel the transfer.
-      *a1. BlitzBiz requests to confirm the cancellation.
-      *a2. User confirms the cancellation.
-      Use case ends.
+    Use case ends.
 
-**Use case: Find contacts by name**
+**Use case: UC03 - Add a contact**
 
 **MSS**
 
-1.  User requests to view a contact by name
-2.  BlitzBiz requests for a prefix of the contact name
-3.  User enters name prefix
-4.  BlitzBiz displays all contacts containing the prefix in their name
+1.  User requests to add a contact by providing name, and at least one of the contact's phone number, email or address
+2.  BlitzBiz adds the contact to the list with the provided details
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The command does not follow the correct format.
-   *  3a1. BlitzBiz displays an error message.
-      3a2. User enters new command.
-      Steps 3a1-3a2 are repeated until the command format entered is correct.
-      Use case resumes from step 4.
+* 1a. The entered phone number, email or address do not follow the correct format.
+   *  1a1. BlitzBiz displays an error message
+   *  1a2. User enters new details.
+   *  Steps 1a1-1a2 are repeated until the data entered are in the correct format.
+      
+     Use case resumes from step 2.
+* 1b. The contact already exist
+   *  1b1. BlitzBiz displays an error message
+   
+    Use case ends.
+* 1c. User did not enter a phone number, email or address
+    *  1c1. BlitzBiz displays an error message
+    *  1c2. User enters new parameters.
+    *  Steps 1c1-1c2 are repeated until at least one parameter is entered.
+       
+    Use case resumes from step 2.
 
-* 4a. There are no contacts containing the prefix in their name.
-      4a1. BlitzBiz informs the user that there were no matches found.
-      Use case ends.
 
-*{More to be added}*
+**Use case: UC04 - Find contacts by name**
+
+**MSS**
+
+1.  User requests to find a contact by name
+2.  BlitzBiz displays contacts that matches the name provided
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not enter a name.
+   *  1a1. BlitzBiz displays an error message.
+   *   1a2. User enters new name to find.
+   *   Steps 1a1-1a2 are repeated until a name to find is entered.
+      
+   Use case resumes from step 2.
+
+* 2a. There are no contacts containing the prefix in their name.
+   *   2a1. BlitzBiz informs the user that there were no matches found.
+    
+    Use case ends.
+
+**Use case: UC05 - Rename Tag**
+
+**MSS**
+
+1.  User requests to rename a tag by providing a new tag name to change the old tag name into
+2.  BlitzBiz renames all the tags with the old tag name to the new tag name and displays the updated list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did provide all required fields or entered a wrong field.
+    *  1a1. BlitzBiz displays an error message.
+    *   1a2. User enters new command.
+    *   Steps 1a1-1a2 are repeated until the command format entered is correct.
+     
+    Use case resumes from step 2.
+
+* 1b. The new tag does not follow requirements.
+    *  1a1. BlitzBiz displays an error message.
+    *   1a2. User enters new command with new tag.
+    *   Steps 1a1-1a2 are repeated until the new tag entered is valid.
+     
+    Use case resumes from step 2.
+
+* 2a. There are no tags with the old tag name.
+    *  2a1. BlitzBiz informs the user that there were no matches found.
+ 
+   Use case ends.
+
+* 2b. There are contacts with both the old tag and new tag.
+   * 2b1. BlitzBiz informs the user that contacts which will result in duplicated tags will not be updated.
+
+    Use case ends.
+
+**Use case: UC06 - Social Media**
+
+**MSS**
+
+1.  User requests to add a social media handle to a contact by providing exactly one social media platform and handle name
+2.  BlitzBiz adds the social media to the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not provide exactly one social media platform or handle or entered an invalid field.
+    *  1a1. BlitzBiz displays an error message.
+    *   1a2. User enters new command.
+    *   Steps 1a1-1a2 are repeated until the command format entered is correct.
+       
+    Use case resumes from step 2.
+
+* 1b. The handle does not follow requirements.
+    *  1a1. BlitzBiz displays an error message.
+    *   1a2. User enters new command with new handle.
+    *   Steps 1a1-1a2 are repeated until the handle entered is valid.
+       
+    Use case resumes from step 2.
+
+**Use case: UC07 - Filter contact list by tag(s)**
+
+**MSS**
+
+1.  User requests to filter the contact list by providing tag(s) to filter by.
+2.  BlitzBiz displays the filter list of contacts with the given tag(s).
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The entered tag(s) do not follow the correct format.
+    *  1a1. BlitzBiz requests for the correct format.
+    *   1a2. User enters again in the new format.
+    *   Steps 1a1-1a2 are repeated until the format entered is correct.
+       
+    Use case resumes from step 2.
+
+* 2a. No contacts with the tag(s) are found.
+    * 2a1. BlitzBiz informs the user that there were no matches found.
+      
+    Use case ends.
+
+**Use case: UC08 - Sort list of contacts**
+
+**MSS**
+
+1.  User requests to sort contact list by name or schedules in ascending or descending order.
+2.  BlitzBiz displays the sorted list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User did not enter order to sort by.
+    *  1a1. BlitzBiz will sort by ascending order by default.
+
+    Use case ends.
+* 1b. User requested to sort by both name or schedule or did not provide a field to sort by.
+    * 1b1. BlitzBiz displays error message.
+    * 1b2. User enters again with only one field to sort by.
+    *  Steps 1b1-1b2 are repeated until user provides one field to sort by.
+      
+    Use case resumes from step 2.
+
+**Use case: UC09 - Search for contacts by schedules**
+
+**MSS**
+
+1.  User requests to search the contact list for contacts by providing a starting datetime and an ending datetime
+2.  BlitzBiz displays the searched list of contacts with schedules within the start and end datetime.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User only entered start time but not end time.
+    *  1a1. BlitzBiz searches for schedules that starts later than the given start time.
+
+* 1b. User only entered end time.
+    *  1b1. BlitzBiz searches for schedules that ends before the end time.
+
+* 1c. User enters an end time before start time.
+    * 1c1. BlitzBiz displays error message.
+    * 1c2. User enters again with a later end time than start time.
+    *  Steps 1c1-1c2 are repeated until the format entered is correct.
+      
+    Use case resumes from step 2.
+* 1b. Some contacts only has a schedule date but not time.
+    *  1b1. BlitzBiz searches under the assumption that the contacts without a schedule time information has a schedule time of 00:00
+  
+    Use case ends.
+
+* 2a. No contacts with schedules in the given range are found.
+    * 4a1. BlitzBiz informs the user that there were no matches found.
+      
+     Use case ends.
+
+**Use case: UC10 - Add/Edit Schedule**
+
+**MSS**
+
+1.  User requests to add/edit a schedule of a contact by providing the schedule name, schedule date and schedule time
+2.  BlitzBiz displays list after updating the contact with the new schedule details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The contact does not exist.
+    *  1a1. BlitzBiz displays an error message.
+
+    Use case ends.
+* 1b. The user did not enter a schedule name or schedule time.
+    *  1b1. BlitzBiz only adds/edits the schedule date.
+  
+     Use case ends.
+* 1c. The user did not provide a schedule date.
+    *  1c1. BlitzBiz displays an error message.
+    *  1c2. User enters the parameters again.
+    *  Steps 1c1-1c2 are repeated until a schedule date is entered.
+
+    Use case ends.
+*  1d. The user provided an invalid schedule date/ schedule time/ schedule name.
+    *  1d1. BlitzBiz displays an error message.
+    *  1d2. User enters the parameters again.
+    *  Steps 1d1-1d2 are repeated until the format entered is correct.
+
+  Use case resumes from step 2.
+
+**Use case: UC11 - Backup data**
+
+**MSS**
+
+1.  User requests to back up the contact list.
+2.  BlitzBiz creates an address.json file with the contact list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The addressbook.json file already exist.
+    *  1a1. BlitzBiz overwrites the old file. 
+  
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to load within 4 seconds while holding up to 1000 contacts.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The system should have an uptime of 99.9%.
-5.  The product must be intuitive to people without technical background.
-6.  For critical user actions such as searching for a contact or updating information, the system must respond within 1 second for up to 90% of operations.
-7.  The program should have a size of less than 100MB even with 1000 contacts.
-8.  The application should function fully when offline.
-9.  When a user executes a command there should be clear feedback on whether the task was successful.
-10. The user should be notified on the reason why the command they give is not working(i.e. incorrect input, lack of contacts in system)
+4. The product must be intuitive to people without technical background.
+5. For critical user actions such as searching for a contact or updating information, the system must respond within 1 second for up to 90% of operations.
+6. The program should have a size of less than 100MB even with 1000 contacts.
+7. The application should function fully when offline.
+8. When a user executes a command there should be clear feedback on whether the task was successful.
+9. The user should be notified on the reason why the command they give is not working(i.e. incorrect input, lack of contacts in system)
 
 *{More to be added}*
 
@@ -428,13 +637,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **API**: An application programming interface (API) is a way for computer programs to interact with one another by providing services
 * **CLI**: The command line interface (CLI) is a text-based interface that interacts with the computer's operating system
-* **Customer**: A contact that obtains the services of the user's business
 * **GUI**: The graphical user interface (GUI) is an interface users interact with that provides visuals, potentially with some point-and-click functionalities
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Partner**: A contact that provides mainly services for the user's business
 * **Point-of-Contact**: The person to contact for obtaining goods and/or services, usually from a larger organisation
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Supplier**: A contact that provides mainly goods for the user's business to run smmothly
+* **Contact**: A contact information of a person, a company or a point-of-contact of a company.
 * **Tag**: A label attached to a contact for grouping purposes. Common tags are `Supplier`, `Customer` and `Partner`, but can be flexible to suit the user's needs
 * **UI**: The user interface (UI) is a form of interface that the user interacts with
 
@@ -455,16 +661,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file 
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -472,21 +677,78 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a contact
 
-### Saving data
+1. Adding a contact with at least one of the contact fields (i.e. `phone`, `email`, `address`, or any of the social media handles) 
 
-1. Dealing with missing/corrupted data files
+    1. Prerequisites: N/A
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    2. Test case: `add n/testAddEmailOnly e/test@example.com`<br>
+       Expected: Contact is added with name as `testAddEmailOnly` and email as `test@example.com`. No other fields should be present. <br>
+       Note: This test case can be repeated for any of the contact fields.
 
-1. _{ more test cases …​ }_
+    3. Test case: `add n/testAddNoContactPresent`<br>
+       Expected: No person is added. An error message should be shown.
+
+    4. Other incorrect add commands to try: `add`, `add n/testName sd/2024-12-12`, `add n/testName t/friend` <br>
+       Expected: Similar to previous.
+   
+2. Add a valid contact with a schedule
+
+   1. Prerequisites: N/A
+   
+   2. Test Case: `add n/testAddWithSchedule p/91234567 sd/2024-12-12`
+      Expected: Contact is added with the given name and phone fields, and a schedule field with date `2024-12-12`. The schedule should be shown similar to a tag.
+   
+   3. Test Case: `add n/testAddWithInvalidSchedule p/91234567 st/16:00`
+      Expected: Contact is added with the provided name and phone values, but the schedule is ignored as it is missing the schedule date field.
+      Note: This test case can be repeated with only the schedule name provided, or both the schedule name and time provided, without the schedule date.
+
+### Schedule
+
+1. Clearing a schedule from a contact with a schedule
+
+   1. Prerequisites: The target contact should have an existing schedule. Suppose the target contact is at index 1.
+   
+   2. Test case: `schedule 1`
+      Expected: The schedule field is removed. The contact no longer has a schedule.
+   
+2. Editing a schedule from a contact with a schedule
+    1. Prerequisites: The target contact should have an existing schedule. Suppose the target contact is at index 1.
+   
+   2. Test case: `schedule 1 sd/2024-12-13`
+      Expected: The schedule field of contact at index 1 is now `2024-12-13`.
+      Note: If the schedule date is already `2024-12-13` (i.e. same as that provided in the command), then the command fails as the schedule is unedited.
+      Note: This test case can be repeated for other schedule fields, schedule name and schedule time.
+   
+3. Adding a schedule to a contact with no schedule
+   1. Prerequisites: The target contact should not have an existing schedule. Suppose the target contact is at index 1.
+   
+   2. Test case: `schedule 1 sd/2024-12-12`
+      Expected: The contact now has a schedule named `schedule`, scheduled on `2024-12-12`.
+      
+   3. Test case: `schedule 1 st/16:00`
+      Expected: The schedule command fails as there is no schedule date provided.
+
+## **Appendix: Effort**
+
+This section describes the difficulties and challenges faced while working on this Brownfield project.
+We detail some achievements accomplished by completing our iteration of the project.
+
+1. Our team has a smaller number of members (only 4 members, compared to the norm of 5), so more complex features could not have been implemented. <br>
+   We instead focused on features that are useful to users, and thought about our key value proposition, whilst maintaining the fact that the app is primarily for contact management.
+2. Testing was an expect that we found tedious and required a lot of effort. <br>
+   Relying on the testing code infrastructure used in AB3 greatly helped to make the testing process more modular. <br>
+   For example, when creating the tests for the `schedule` command, it was greatly inspired by the existing test infrastructure of the `edit` command.
+
+## **Appendix: Planned Enhancements**
+

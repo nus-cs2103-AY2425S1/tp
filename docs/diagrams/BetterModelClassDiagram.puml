@@ -15,7 +15,15 @@ UniquePersonList -right-> Person
 Person -up-> "*" Tag
 
 Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "0..1" Phone
+Person *--> "0..1" Email
+Person *--> "0..1" Address
+Person *--> "0..1" Schedule
+Person *--> "0..1" SocialMedia
+Person *--> "*" Tag
+
+Schedule *--> ScheduleDate
+Schedule *--> ScheduleName
+Schedule *--> "0..1" ScheduleTime
+
 @enduml
