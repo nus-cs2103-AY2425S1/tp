@@ -166,6 +166,10 @@ Examples:
 ![link between Claire and Fluffy](images/linkClaireFluffy.jpeg)
 <div style="text-align: center;"><em>Link between Claire (owner) and Fluffy (pet)</em></div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+It is recommended to link the pets to the owners are the first action after adding a pet but this is not enforced.
+</div>
+
 ### Unlinking entities: `unlink`
 
 Unlinks an owner to one or more pets.
