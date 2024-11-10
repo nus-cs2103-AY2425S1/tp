@@ -62,6 +62,7 @@ public class AddCommand extends Command {
         Set<Tag> tagSet = toAdd.getTags();
         model.getActiveTags().incrementTags(tagSet);
         model.addPerson(toAdd);
+        model.setCurrentWeddingName(null);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
