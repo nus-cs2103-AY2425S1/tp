@@ -238,20 +238,10 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 * At least one of the optional fields must be provided.
 * Existing values will be replaced with the new input values provided in the command.
 
-{: .alert .alert-info}
-> :information_source: **Note:**
->
-> The parameters can be entered in any order when editing multiple fields.
-
 {: .alert .alert-success}
 > :bulb: **Tip:**
 >
-> Use the `list` command before editing to ensure you have the correct index of the person you want to edit.
-
-{: .alert .alert-warning}
-> :exclamation: **Warning:**
->
-> The `edit` command works on the overall list of contacts and not on a filtered list produced by the `find` command.
+> The parameters can be entered in any order when editing multiple fields.
 
 Examples:
 *  `edit 1 /contact 91234567 /email johndoe@example.com` Edits the phone number and email address of the 1st person in the displayed list to be `91234567` and `johndoe@example.com` respectively.
