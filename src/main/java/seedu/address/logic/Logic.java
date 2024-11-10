@@ -62,4 +62,8 @@ public interface Logic {
      * Get all persons in the address book.
      */
     ObservableList<Person> getAllPersons();
+
+    BooleanProperty getIsFindEvent();
+
+    ObservableList<Person> getContactListForFindEvent();
 }

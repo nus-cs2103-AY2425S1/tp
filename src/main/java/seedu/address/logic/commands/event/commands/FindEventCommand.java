@@ -46,6 +46,7 @@ public class FindEventCommand extends Command {
     public CommandResult execute(Model model, EventManager eventManager) throws CommandException {
         requireNonNull(eventManager);
         List<Event> events = eventManager.getEventList();
+        model.setIsFindEvent(false);
 
         if (targetIndex.getZeroBased() >= events.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
@@ -69,9 +70,9 @@ public class FindEventCommand extends Command {
             personWithEventSpecificRoles.addObserver(person.getObserver());
             tempListOfPersons.add(personWithEventSpecificRoles);
         }
-        for (Person person : tempListOfPersons) {
-            person.showContactWithEventSpecificRoles();
-        }
+
+        model.setContactListForFindEvent(tempListOfPersons);
+        model.setIsFindEvent(true);
     }
 
     @Override

@@ -110,15 +110,32 @@ public class LogicManager implements Logic {
     /**
      * Returns the search mode status.
      */
+    @Override
     public BooleanProperty getSearchMode() {
         return model.searchModeProperty();
 
     }
 
+    @Override
+    public BooleanProperty getIsFindEvent() {
+        return model.getIsFindEvent();
+    }
+
     /**
      * Get all persons in the address book.
      */
+    @Override
     public ObservableList<Person> getAllPersons() {
         return model.getAllPersons();
+    }
+
+    /**
+     * Retrieves the contact list filtered specifically for finding events.
+     *
+     * @return an {@code ObservableList<Person>} containing the contacts related to the current event search.
+     */
+    @Override
+    public ObservableList<Person> getContactListForFindEvent() {
+        return model.getContactListForFindEvent();
     }
 }

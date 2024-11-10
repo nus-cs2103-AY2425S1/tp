@@ -47,6 +47,7 @@ public class DeleteCommand extends Command {
         model.deletePerson(personToDelete);
         eventManager.removeAllPersonsInEvents(personToDelete);
         eventManager.updateEvents();
+        model.setIsFindEvent(false);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
