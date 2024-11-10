@@ -495,3 +495,7 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancements**
 1. **Allow contacts to have multiple phone numbers**: Currently, contacts are only allowed to have one phone number.
    Realistically, contacts may have multiple phone numbers (e.g. home number, office number), so we plan to allow for contacts to have multiple numbers attached to them.
+2. **Improve input validation for contact names**: Certain symbols are currently not allowed for contact names (e.g. '-', '@', 's/o'). All of these symbols
+   can appear in official, legal names, so we plan to add support for them.
+3. **Allow creation of empty groups**: Currently, groups must be created with at least one member. It may improve the user experience to be able to first create
+    an empty group and subsequently add users to it.
