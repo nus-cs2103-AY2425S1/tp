@@ -752,3 +752,13 @@ We detail some achievements accomplished by completing our iteration of the proj
 
 ## **Appendix: Planned Enhancements**
 
+1.	Removing of social media handles
+2.	Duplicate detection for `name` field
+      1. Add the contact into the contact list, but
+      2. Notify the user that there is another contact with an existing name
+      3. Near-matches will be considered (i.e. same spelling, but different cases)
+3.	Enhance `name` field to accept more special characters such as dashes, slashes, apostrophes
+4.	Phone number validation to allow more different lengths and country code
+5.	More specific error messages so that the messages are not too long to improve readability
+6.	Allow a contact to have multiple phone numbers, emails, addresses and social media handles
+7.	If `edit` command does not actually edit the contact, raise an error message to the user
