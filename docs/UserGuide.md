@@ -23,9 +23,9 @@ UniVerse is more than just a **desktop app for managing contacts**—it is a pla
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T17-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your UniVerse application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar UniVerse.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    <img src="images/Ui.png" alt="Ui" style="width: 90%;">
@@ -130,6 +130,11 @@ Parameters:
 - `[i/INTEREST]...`: Interests of the contact.
 - `[t/TAG]...`: Tags for categorization.
 
+<box type="note" seamless>
+
+**Note:** Contacts can have same names but different phone numbers
+</box>
+
 Examples:
 
 ```plaintext
@@ -137,7 +142,7 @@ add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 w/In
 ```
 
 ```plaintext
-add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12 w/Intern,Meta,2024 u/NTU m/Computer Science t/classmate b/01-01-2001`
+add n/Betsy Crowe p/98765431 e/betsycrowe@example.com a/Bishan Street 22, #02-12 w/Intern,Meta,2024 u/NTU m/Computer Science t/classmate b/01-01-2001
 ```
 
 <br>
@@ -156,6 +161,7 @@ addi in/INDEX i/INTEREST...
 
 - `in/INDEX`: Contact's position in the list.
 - `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters each.
+- **Note:** Only interests that were not part of the contact's interest list will be shown on the display message.
 
 Example:
 
@@ -192,7 +198,11 @@ addw in/1 w/Software Engineer,Google,2023
 
 Example:
 
-- `addw in/1 w/Intern,Google,2024` Adds the work experience `Intern,Google,2024` to the 1st person in the contact list.
+```plaintext
+addw in/1 w/Intern,Google,2024
+```
+
+- Adds the work experience `Intern,Google,2024` to the 1st person in the contact list.
   
 <br>
 <div style="page-break-after: always;"></div>
@@ -230,8 +240,15 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+```plaintext
+edit 1 p/91234567 e/johndoe@example.com
+```
+- Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+
+```plaintext
+edit 2 n/Betsy Crower t/
+```
+- Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 <br>
 
@@ -260,8 +277,16 @@ find KEYWORD [MORE_KEYWORDS]
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
-- `find bob lee` returns `Bob Chen`, `Catherine Lee`<br>
+```plaintext
+find John
+```
+- returns `john` and `John Doe`
+
+```plaintext
+find bob lee
+```
+- returns `Bob Chen`, `Catherine Lee`<br>
+
   <img src="images/findBobLeeResult.png" alt="result for 'find bob lee'" style="width: 80%;">
 
 <br>
@@ -373,9 +398,15 @@ Finds contacts with a specific university from the currently displayed list.
 </box>
 
 Format:
-```
+```plaintext
 findu u/UNIVERSITY
 ```
+
+<box type="tip" seamless>
+
+**Tip:** University name is case-sensitive.
+</box>
+
 - `u/UNIVERSITY`: The university to search for (case-sensitive). **Partial matches** are supported, allowing any contact with a university name that partially matches the keyword to be listed.
 
 Example: Find contacts associated with SUTD.
@@ -469,17 +500,17 @@ exit
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+UniVerse data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UniVerse data are saved automatically as a JSON file `[JAR file location]/data/UniVerse.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, UniVerse will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the UniVerse to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -493,7 +524,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UniVerse home folder.
 
 ---
 
