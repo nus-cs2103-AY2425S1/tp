@@ -3,9 +3,7 @@ layout: page
 title: User Guide 
 ---
 
-<h1> <b>Welcome to BakeBuddy 👨‍🍳 👩‍🍳</b> </h1>
-
-### Who is BakeBuddy For?
+<h1> <b>Welcome to BakeBuddy 🧁 🍰</b> </h1>
 
 BakeBuddy is your perfect companion if you're running a home-based bakery business or planning to start one. Whether 
 you're managing a small cupcake operation or a medium-sized pastry business, we've designed BakeBuddy with you in mind. 
@@ -18,7 +16,7 @@ BakeBuddy helps you manage your:
 - 📦 Suppliers and ingredients
 - 📋 Order tracking and fulfillment
 
-### What We Assume About You
+<h2> <b>What We Assume About You 👨‍🍳 👩‍🍳</b> </h2>
 
 We've designed BakeBuddy assuming you have basic computer skills - enough to download and run applications, and type 
 comfortably in English. Don't worry if you're not tech-savvy; this comprehensive user guide will walk you through 
@@ -118,7 +116,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 </div>
 
 ## **Contact Management**
-### General Contacts
+### **General Contacts**
 
 | Command                                   | Format                                                                      | Example                                                              |
 |-------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
@@ -137,7 +135,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | --- |--------------------------------------------------------------------------------------| --- |
 | [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]...` | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
 
-### Supplier Specific
+### **Supplier Specific**
 
 | Command | Format                                                                                  | Example |
 | --- |-----------------------------------------------------------------------------------------| --- |
@@ -146,7 +144,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 <div style="page-break-after: always;"></div>
 
 ## **Order Management**
-### Customer Orders
+### **Customer Orders**
 
 | Command | Format                                                                                  | Example |
 | --- |-----------------------------------------------------------------------------------------| --- |
@@ -156,7 +154,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX`                                                             | `unmarkCustomerOrder 1` |
 
 <div style="page-break-after: always;"></div>
-#### Supply Orders
+#### **Supply Orders**
 
 | Command | Format                                                                  | Example |
 | --- |-------------------------------------------------------------------------| --- |
@@ -168,7 +166,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 <div style="page-break-after: always;"></div>
 
 ## **Catalogue Management**
-### Ingredient Catalogue
+### **Ingredient Catalogue**
 
 | Command | Format | Example |
 | --- | --- | --- |
@@ -176,7 +174,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Remove Ingredient](#remove-ingredient-command) | `removeIngredient NAME` | `removeIngredient Flour` |
 | [View Ingredient Catalogue](#view-ingredientcatalogue-command) | `viewIngredientCatalogue` | `viewIngredientCatalogue` |
 
-### Pastry Catalogue
+### **Pastry Catalogue**
 
 | Command | Format                                                 | Example |
 | --- |--------------------------------------------------------| --- |
