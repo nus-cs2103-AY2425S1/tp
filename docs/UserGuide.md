@@ -223,7 +223,7 @@ Commands for creating, updating, and deleting buyers and sellers.
 ![showClients](images/Ui.png)
 
 #### Add Buyer
-- **Format:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
+- **Command:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
 - **Description:** Creates a new buyer profile with specified details.
 - **Successful Execution:**
 > ---
@@ -302,7 +302,7 @@ Adding a space between two names is treated as "adding a character". Hence,
 <br>
 
 #### Add Seller
-- **Format:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
+- **Command:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
 - **Description:** Creates a new seller profile with specified details.
 - **Successful Execution:**
 > ---
@@ -369,7 +369,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >  ---
 
 #### Find
-- **Format:** `find KEYWORD [KEYWORD]...`
+- **Command:** `find KEYWORD [KEYWORD]...`
 - **Description:** Finds the specified client(s) based on the provided keywords.
 - **Successful Execution:**
 > ---
@@ -424,95 +424,95 @@ Second command finds names with `wenxuan`
 > 
 > ---
 
-- #### Edit Client
-    - **Format:** `editclient INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...`
-    - **Description:** Edits the details of the specified client.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Changing name of `Bob` to `Bobby` (Assuming displayed index is 1)
-      >
-      > **Input**: `editclient 1 n/Bobby`
-      >
-      > **Output**: Successfully edited Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
-      >
-      > ---
-      >
-      > **Use Case #2**: Changing phone of `Bobby` to `97774444` 
-      >
-      > **Input**: `editclient 1 p/97774444`
-      >
-      > **Output**: 
-      > Successfully edited Bobby.
-      > Phone number: 97774444 and Email: bobby123@gmail.com!
-      >
-      > ---
-      >
-      > **Use Case #3**: Removing tags of `Bobby`
-      >
-      > **Input**: `editclient 1 t/`
-      >
-      > **Output**: 
-      > Successfully edited Bobby. 
-      > Phone number: 97774444 and Email: bobby123@gmail.com!
-      >
-      > ---
+#### Edit Client
+- **Command:** `editclient INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...`
+- **Description:** Edits the details of the specified client.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Changing name of `Bob` to `Bobby` (Assuming displayed index is 1)
+>
+> **Input**: `editclient 1 n/Bobby`
+>
+> **Output**: Successfully edited Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
+>
+> ---
+>
+> **Use Case #2**: Changing phone of `Bobby` to `97774444` 
+>
+> **Input**: `editclient 1 p/97774444`
+>
+> **Output**: 
+> Successfully edited Bobby.
+> Phone number: 97774444 and Email: bobby123@gmail.com!
+>
+> ---
+>
+> **Use Case #3**: Removing tags of `Bobby`
+>
+> **Input**: `editclient 1 t/`
+>
+> **Output**: 
+> Successfully edited Bobby. 
+> Phone number: 97774444 and Email: bobby123@gmail.com!
+>
+> ---
 
-    - **Failed Execution:**
-      > ---
-      > **User Error #1**: No index found / Invalid type / Negative integer
-      >
-      > **Input**: `editclient n/Bobby` OR `editclient #a` OR `editclient -1`
-      >
-      > **Output**:
-      <br> Invalid command format!
-      <br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
-      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: editclient 1 e/johndoe@example.com p/91234567
-      >
-      > ---
-      > 
-      > **User Error #2**: Entering out-of-bounds index (larger than number of clients)
-      > 
-      > **Input**: `editclient 100 n/Bobby`
-      > 
-      > **Output**: The person index provided is invalid
-      > 
-      > ---
+- **Failed Execution:**
+> ---
+> **User Error #1**: No index found / Invalid type / Negative integer
+>
+> **Input**: `editclient n/Bobby` OR `editclient #a` OR `editclient -1`
+>
+> **Output**:
+<br> Invalid command format!
+<br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
+<br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+<br>Example: editclient 1 e/johndoe@example.com p/91234567
+>
+> ---
+> 
+> **User Error #2**: Entering out-of-bounds index (larger than number of clients)
+> 
+> **Input**: `editclient 100 n/Bobby`
+> 
+> **Output**: The person index provided is invalid
+> 
+> ---
 
-- #### Delete Client
-    - **Format:** `deleteclient INDEX`
-    - **Description:** Deletes the specified client profile.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Delete `Bob` from the address book (Assuming displayed index is 1)
-      >
-      > **Input**: `deleteclient 1`
-      >
-      > **Output**: `Successfully deleted Bob.
-      Phone number: 977774444 and Email: bobby123@gmail.com`
-      >
-      > ---
-  
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**: No index found / Invalid type / Negative integer
-      >
-      > **Input**: `deleteclient` OR `deleteclient #a` OR `deleteclient -1`
-      >
-      > **Output**: 
-      <br> Invalid command format! 
-      <br>delete: Deletes the client profile corresponding to the client's name.
-      <br>Parameters: INDEX (must be a positive integer)
-      <br>Example: delete 1
-      >
-      > ---
-      > **Use Case #2**: Entering out-of-bounds index (larger than number of clients)
-      > 
-      > **Input**: `deleteclient 100`
-      > 
-      > **Output**: The person index provided is invalid
-      > 
-      > ---
+#### Delete Client
+- **Command:** `deleteclient INDEX`
+- **Description:** Deletes the specified client profile.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Delete `Bob` from the address book (Assuming displayed index is 1)
+>
+> **Input**: `deleteclient 1`
+>
+> **Output**: `Successfully deleted Bob.
+Phone number: 977774444 and Email: bobby123@gmail.com`
+>
+> ---
+
+- **Failed Execution:**
+> ---
+> **Use Case #1**: No index found / Invalid type / Negative integer
+>
+> **Input**: `deleteclient` OR `deleteclient #a` OR `deleteclient -1`
+>
+> **Output**: 
+<br> Invalid command format! 
+<br>delete: Deletes the client profile corresponding to the client's name.
+<br>Parameters: INDEX (must be a positive integer)
+<br>Example: delete 1
+>
+> ---
+> **Use Case #2**: Entering out-of-bounds index (larger than number of clients)
+> 
+> **Input**: `deleteclient 100`
+> 
+> **Output**: The person index provided is invalid
+> 
+> ---
 
 ---
 
@@ -522,77 +522,77 @@ Commands for managing appointments between user and clients.
 
 ![appointments](images/appointments.png)
 
-- #### Schedule Appointment
-    - **Format:** `apt INDEX d/DD-MM-YY fr/HHmm to/HHmm` OR `apt INDEX d/ddMMyy fr/HH:mm to/HH:mm`
-    - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob` (Assuming displayed index is 1)
-      >
-      > **Input**: `apt 1 d/08-10-24 fr/1900 to/2100`
-      >
-      > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 08-10-24 (From: 19:00 To: 21:00); Tags:
-      >
-      > ![bob_apt](images/bob_apt.png)
-      > 
-      > ---
-      >
-      > **Use Case #2**: Overriding an existing appointment for client `Bob` to be `9th October 2024 10am to 12pm` instead
-      >
-      > **Input**: `apt 1 d/09-10-24 fr/1000 to/1200`
-      >
-      > **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 09-10-24 (From: 10:00 To: 12:00); Tags:
-      >
-      > ![bob_apt_2](images/bob_apt_2.png)
-      > 
-      > ---
-  
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**: Incorrect `DATE` format 
-      >
-      > **Input #a**: `apt 1 d/09-10-2024 fr/1000 to/1200`
-      >
-      > **Input #b**: `apt 1 d/aaa fr/1000 to/1200`
-      > 
-      > **Output**: Dates should be in the format dd-MM-yy or ddMMyy, e.g., 25-12-24 or 251224.
-      >
-      > ---
-      > 
-      > **Use Case #2**: Incorrect `TIME` format
-      > 
-      > **Input #a**: `apt 1 d/20-10-24 fr/100000 to/1200`
-      > 
-      > **Input #b**: `apt 1 d/20-10-24 fr/aa to/1200`
-      > 
-      > **Output**: Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.
-      > 
-      > ---
+#### Schedule Appointment
+- **Command:** `apt INDEX d/DD-MM-YY fr/HHmm to/HHmm` OR `apt INDEX d/ddMMyy fr/HH:mm to/HH:mm`
+- **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob` (Assuming displayed index is 1)
+>
+> **Input**: `apt 1 d/08-10-24 fr/1900 to/2100`
+>
+> **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 08-10-24 (From: 19:00 To: 21:00); Tags:
+>
+> ![bob_apt](images/bob_apt.png)
+> 
+> ---
+>
+> **Use Case #2**: Overriding an existing appointment for client `Bob` to be `9th October 2024 10am to 12pm` instead
+>
+> **Input**: `apt 1 d/09-10-24 fr/1000 to/1200`
+>
+> **Output**: Appointment scheduled for Bob; Phone: 94441111; Email: bob123@gmail.com; Appointment: Date: 09-10-24 (From: 10:00 To: 12:00); Tags:
+>
+> ![bob_apt_2](images/bob_apt_2.png)
+> 
+> ---
 
-- #### Delete Appointment
-    - **Format:** `deleteapt INDEX`
-    - **Description:** Deletes an appointment with the specified client.
-    - **Successful Execution:**
-      > ---
-      > **Use Case**: Deleting appointment for `Bob` (Assuming displayed index is 1)
-      >
-      > **Input**: `deleteapt 1`
-      >
-      > **Output**: Successfully deleted appointment from Bob
-      >
-      > ![bobdeletedappt](images/bob_del_apt.png)
-      > 
-      > ---
+- **Failed Execution:**
+> ---
+> **Use Case #1**: Incorrect `DATE` format 
+>
+> **Input #a**: `apt 1 d/09-10-2024 fr/1000 to/1200`
+>
+> **Input #b**: `apt 1 d/aaa fr/1000 to/1200`
+> 
+> **Output**: Dates should be in the format dd-MM-yy or ddMMyy, e.g., 25-12-24 or 251224.
+>
+> ---
+> 
+> **Use Case #2**: Incorrect `TIME` format
+> 
+> **Input #a**: `apt 1 d/20-10-24 fr/100000 to/1200`
+> 
+> **Input #b**: `apt 1 d/20-10-24 fr/aa to/1200`
+> 
+> **Output**: Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.
+> 
+> ---
 
-    - **Failed Execution:**
-      > ---
-      > **Use Case**: Entering out-of-bounds index (larger than number of clients)
-      >
-      > **Input**: `deleteapt 100`
-      >
-      > **Output**: The person index provided is invalid
-      >
-      > ---
+#### Delete Appointment
+- **Command:** `deleteapt INDEX`
+- **Description:** Deletes an appointment with the specified client.
+- **Successful Execution:**
+> ---
+> **Use Case**: Deleting appointment for `Bob` (Assuming displayed index is 1)
+>
+> **Input**: `deleteapt 1`
+>
+> **Output**: Successfully deleted appointment from Bob
+>
+> ![bobdeletedappt](images/bob_del_apt.png)
+> 
+> ---
+
+- **Failed Execution:**
+> ---
+> **Use Case**: Entering out-of-bounds index (larger than number of clients)
+>
+> **Input**: `deleteapt 100`
+>
+> **Output**: The person index provided is invalid
+>
+> ---
       
 ---
 
@@ -602,357 +602,357 @@ Commands for managing property listings and associating clients with listings.
 
 ![showListings](images/showListings.png)
 
-- #### Add Listing
-    - **Format:** `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`
-    - **Description:** Adds a new listing associated to the seller with the specified details.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Adding a listing with name `Warton House`, price `4000`, area `1000`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
-      >
-      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1`
-      >
-      > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}seedu.address.model.person.Buyer{name=Alex Yeoh, phone=87438807, email=alexyeoh@example.com, tags=[[friends]], appointment=Date: 20-12-24 (From: 08:00 To: 10:00), remark=Test}
-      >
-      > ![listing](images/warton_house_listing.png)
-      > 
-      > ---
-      >
-      > **Use Case #2**: Adding a listing with no buyers
-      >
-      > **Input**: `listing n/Warton House pr/4000 ar/1000 address/123 PASIR RIS (S)123456 reg/east sel/2`
-      >
-      > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}
-      >
-      > ![listing2](images/warton_house_no_buyers.png)
-      > 
-      > ---
+#### Add Listing
+- **Command:** `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`
+- **Description:** Adds a new listing associated to the seller with the specified details.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Adding a listing with name `Warton House`, price `4000`, area `1000`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
+>
+> **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1`
+>
+> **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}seedu.address.model.person.Buyer{name=Alex Yeoh, phone=87438807, email=alexyeoh@example.com, tags=[[friends]], appointment=Date: 20-12-24 (From: 08:00 To: 10:00), remark=Test}
+>
+> ![listing](images/warton_house_listing.png)
+> 
+> ---
+>
+> **Use Case #2**: Adding a listing with no buyers
+>
+> **Input**: `listing n/Warton House pr/4000 ar/1000 address/123 PASIR RIS (S)123456 reg/east sel/2`
+>
+> **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}
+>
+> ![listing2](images/warton_house_no_buyers.png)
+> 
+> ---
 
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**: Attempting to add a listing for a non-existent seller
-      >
-      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/100`
-      >
-      > **Output**: The seller index provided is invalid!
-      >
-      > ---
-      > 
-      > **Use Case #2**: Attempting to add non-existent buyers to a listing
-      > 
-      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/100`
-      > 
-      > **Output**: The buyer index (100) provided is invalid!
-      > 
-      > ---
+- **Failed Execution:**
+> ---
+> **Use Case #1**: Attempting to add a listing for a non-existent seller
+>
+> **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/100`
+>
+> **Output**: The seller index provided is invalid!
+>
+> ---
+> 
+> **Use Case #2**: Attempting to add non-existent buyers to a listing
+> 
+> **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/100`
+> 
+> **Output**: The buyer index (100) provided is invalid!
+> 
+> ---
 
-- #### Show Listings
-    - **Format:** `showlistings`
-    - **Description:** Displays all current listings.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: To show all listings in EZSTATE
-      >
-      > **Input**: showlistings
-      >
-      > **Output**: Here are your listings!
-      >
-      > ![showlistings](images/showListings.png)
-      > 
-      > ---
-      > 
-      > **Use Case #2**: To show all listings (when there are none)
-      > 
-      > **Input**: showlistings
-      > 
-      > **Output**: You have no listings available.
-      > 
-      > ![nolistings](images/no_listings.png)
-      > 
-      > ---
+#### Show Listings
+- **Command:** `showlistings`
+- **Description:** Displays all current listings.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: To show all listings in EZSTATE
+>
+> **Input**: showlistings
+>
+> **Output**: Here are your listings!
+>
+> ![showlistings](images/showListings.png)
+> 
+> ---
+> 
+> **Use Case #2**: To show all listings (when there are none)
+> 
+> **Input**: showlistings
+> 
+> **Output**: You have no listings available.
+> 
+> ![nolistings](images/no_listings.png)
+> 
+> ---
 
-    - **Failed Execution:** NIL
+- **Failed Execution:** NIL
 
-- #### Add Buyers to Listing
-    - **Format:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
-    - **Description:** Associates buyers with a specified listing.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4` (Assuming RC4 index is 1)
-      >
-      > **Input**: `addlistingbuyers 1 buy/1 buy/3`
-      >
-      > **Output**: Buyers added to listing: RC4
-      >
-      > ---
-      >
-      > **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB`
-      >
-      > **Input**: `addlistingbuyers 2 buy/1 buy/3`
-      >
-      > **Output**: Buyers added to listing: David HDB
-      >
-      > ---
-    
-    - **Failed Execution:**
-      > ---
-      > **Use Case #1**: Listing not found
-      >
-      > **Input**: `addlistingbuyers 100 buy/1`
-      >
-      > **Output**: The listing index provided is invalid!
-      >
-      > ---
-      > 
-      > **User Error #2**: Duplicate buyers
-      > 
-      > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming RC4 contains Alex Yeoh already)_
-      > 
-      > **Output**: Some buyers are already associated with this listing.
-      > 
-      > --- 
-      > 
-      > **User Error #3**: Buyer not found
-      > 
-      > **Input**: `addlistingbuyers 1 buy/100`
-      > 
-      > **Output**: The person index provided is invalid!
-      > 
-      > ---
-      > 
-      > **User Error #4**: Person is not a buyer
-      > 
-      > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming client with index 1 is a seller)_
-      > 
-      > **Output**: The specified person is not a buyer:<br>1.bob
-      > 
-      >
-      > ---
+#### Add Buyers to Listing
+- **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
+- **Description:** Associates buyers with a specified listing.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4` (Assuming RC4 index is 1)
+>
+> **Input**: `addlistingbuyers 1 buy/1 buy/3`
+>
+> **Output**: Buyers added to listing: RC4
+>
+> ---
+>
+> **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB`
+>
+> **Input**: `addlistingbuyers 2 buy/1 buy/3`
+>
+> **Output**: Buyers added to listing: David HDB
+>
+> ---
 
-- #### Remove Buyers from Listing
-    - **Format:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
-    - **Description:** Removes buyers associated with a specified listing.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Removing one buyer `Alex Yeoh` from listing `RC4`
-      >
-      > **Input**: `removelistingbuyers 1 buy/1` 
-      >
-      > **Output**: Buyers removed from listing: RC4
-      >
-      > ---
-      >
-      > **Use Case #2**: Removing two buyers `Alex Yeoh` and `Charlotte Oliveiro` from listing `RC4`
-      >
-      > **Input**: `removelistingbuyers 1 buy/1 buy/3`
-      >
-      > **Output**: Buyers removed from listing: RC4
-      >
-      > ---
+- **Failed Execution:**
+> ---
+> **Use Case #1**: Listing not found
+>
+> **Input**: `addlistingbuyers 100 buy/1`
+>
+> **Output**: The listing index provided is invalid!
+>
+> ---
+> 
+> **User Error #2**: Duplicate buyers
+> 
+> **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming RC4 contains Alex Yeoh already)_
+> 
+> **Output**: Some buyers are already associated with this listing.
+> 
+> --- 
+> 
+> **User Error #3**: Buyer not found
+> 
+> **Input**: `addlistingbuyers 1 buy/100`
+> 
+> **Output**: The person index provided is invalid!
+> 
+> ---
+> 
+> **User Error #4**: Person is not a buyer
+> 
+> **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming client with index 1 is a seller)_
+> 
+> **Output**: The specified person is not a buyer:<br>1.bob
+> 
+>
+> ---
 
-    - **Failed Execution:**
-      > ---
-      > **User Error #1**: Listing not found
-      >
-      > **Input**: `removelistingbuyers 100 buy/1`
-      >
-      > **Output**: The listing index provided is invalid!
-      > 
-      > ---
-      > 
-      > **User Error #2**: Empty set of buyers
-      >
-      > **Input**: `removelistingbuyers 1 buy/`
-      >
-      > **Output**: The person index provided is invalid!
-      > 
-      > ---
-      > 
-      > **User Error #3**: Person specified is not buyer
-      >
-      > **Input**: `removelistingbuyers 1 buy/2`
-      >
-      > **Output**: The person index provided is invalid!
-      > 
-      > ---
-      > 
-      > **User Error #4**: Person specified is not a buyer for the listing
-      >
-      > **Input**: `removelistingbuyers 1 buy/3`
-      >
-      > **Output**: The specified buyer notInterestedBuyer is not a buyer of the listing RC4.
-      > 
-      > ---
-      > 
-      > **User Error #5**: Buyer not found
-      >
-      > **Input**: `removelistingbuyers 1 buy/100`
-      >
-      > **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
-      > 
-      > ---
+#### Remove Buyers from Listing
+- **Command:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
+- **Description:** Removes buyers associated with a specified listing.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Removing one buyer `Alex Yeoh` from listing `RC4`
+>
+> **Input**: `removelistingbuyers 1 buy/1` 
+>
+> **Output**: Buyers removed from listing: RC4
+>
+> ---
+>
+> **Use Case #2**: Removing two buyers `Alex Yeoh` and `Charlotte Oliveiro` from listing `RC4`
+>
+> **Input**: `removelistingbuyers 1 buy/1 buy/3`
+>
+> **Output**: Buyers removed from listing: RC4
+>
+> ---
 
-- #### Delete Listing
-    - **Format:** `deletelisting INDEX`
-    - **Description:** Deletes a specified listing.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Deleting listing `Warton House` (Assuming displayed index is 1)
-      >
-      > **Input**: `deletelisting 1`
-      >
-      > **Output**: Successfully deleted listing: Warton House
-      >
-      > ---
+- **Failed Execution:**
+> ---
+> **User Error #1**: Listing not found
+>
+> **Input**: `removelistingbuyers 100 buy/1`
+>
+> **Output**: The listing index provided is invalid!
+> 
+> ---
+> 
+> **User Error #2**: Empty set of buyers
+>
+> **Input**: `removelistingbuyers 1 buy/`
+>
+> **Output**: The person index provided is invalid!
+> 
+> ---
+> 
+> **User Error #3**: Person specified is not buyer
+>
+> **Input**: `removelistingbuyers 1 buy/2`
+>
+> **Output**: The person index provided is invalid!
+> 
+> ---
+> 
+> **User Error #4**: Person specified is not a buyer for the listing
+>
+> **Input**: `removelistingbuyers 1 buy/3`
+>
+> **Output**: The specified buyer notInterestedBuyer is not a buyer of the listing RC4.
+> 
+> ---
+> 
+> **User Error #5**: Buyer not found
+>
+> **Input**: `removelistingbuyers 1 buy/100`
+>
+> **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
+> 
+> ---
 
-    - **Failed Execution:**
-      > ---
-      > **Use Error**: Listing not found
-      >
-      > **Input**: deletelisting 100
-      >
-      > **Output**: This listing does not exist in EZSTATE
-      >
-      > ---
+#### Delete Listing
+- **Command:** `deletelisting INDEX`
+- **Description:** Deletes a specified listing.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Deleting listing `Warton House` (Assuming displayed index is 1)
+>
+> **Input**: `deletelisting 1`
+>
+> **Output**: Successfully deleted listing: Warton House
+>
+> ---
 
-- #### Clear Listing
-    - **Format:** `clearlistings`
-    - **Description:** Deletes ALL listings.
-    - **Successful Execution:**
-      > ---
-      > **Use Case**: Clear all listings in addressbook
-      >
-      > **Input**: clearlistings
-      >
-      > **Output**: All listings have been cleared!
-      >
-      > ---
+- **Failed Execution:**
+> ---
+> **Use Error**: Listing not found
+>
+> **Input**: deletelisting 100
+>
+> **Output**: This listing does not exist in EZSTATE
+>
+> ---
+
+#### Clear Listing
+- **Command:** `clearlistings`
+- **Description:** Deletes ALL listings.
+- **Successful Execution:**
+> ---
+> **Use Case**: Clear all listings in addressbook
+>
+> **Input**: clearlistings
+>
+> **Output**: All listings have been cleared!
+>
+> ---
 
 ### 4. Utility Commands
 
 Miscellaneous commands for application utility, such as clearing, exiting, and displaying help.
 
-- #### Clear
-    - **Format:** `clear`
-    - **Description:** Clears all clients and listings.
-    - **Successful Execution:**
-      > ---
-      > **Use Case**: Fresh addressbook and listings
-      >
-      > **Input**: clear
-      >
-      > **Output**: Address book and listings has been cleared!
-      >
-      > ---
+#### Clear
+- **Command:** `clear`
+- **Description:** Clears all clients and listings.
+- **Successful Execution:**
+> ---
+> **Use Case**: Fresh addressbook and listings
+>
+> **Input**: clear
+>
+> **Output**: Address book and listings has been cleared!
+>
+> ---
 
-- #### Exit
-    - **Format:** `exit`
-    - **Description:** Exits the application.
-    - **Successful Execution:**
-      > ---
-      > **Use Case**: Exit the application
-      >
-      > **Input**: exit
-      > 
-      > **Output**: Exiting Address Book as requested ...
-      >
-      > ---
-      
-- #### Help
-    - **Format:** `help`
-    - **Description:** Displays a list of available commands and their descriptions.
-    - **Successful Execution:**
-      > ---
-      > **Use Case**: Accessing help
-      >
-      > **Input**: `help`
-      >
-      > **Output**: Opened help window.
-      >
-      > ![help](images/help.png)
-      > 
-      > ---
+#### Exit
+- **Command:** `exit`
+- **Description:** Exits the application.
+- **Successful Execution:**
+> ---
+> **Use Case**: Exit the application
+>
+> **Input**: exit
+> 
+> **Output**: Exiting Address Book as requested ...
+>
+> ---
 
-- #### More Info
-    - **Format:** `moreinfo NAME`
-    - **Description:** Provides additional information about a specific client.
-    - **Successful Execution:**
-      > ---
-      > **Use Case**: Finding out more information about `Bob`
-      >
-      > **Input**: `moreinfo Bob`
-      >
-      > **Output**: Opened window for client's information.
-      >
-      > ![moreinfo](images/moreinfo.png)
-      > 
-      > ---
+#### Help
+- **Command:** `help`
+- **Description:** Displays a list of available commands and their descriptions.
+- **Successful Execution:**
+> ---
+> **Use Case**: Accessing help
+>
+> **Input**: `help`
+>
+> **Output**: Opened help window.
+>
+> ![help](images/help.png)
+> 
+> ---
 
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `moreinfo Bob` = `moreinfo BOB` = `moreinfo bOb` _(Not exhaustive)_
+#### More Info
+- **Command:** `moreinfo NAME`
+- **Description:** Provides additional information about a specific client.
+- **Successful Execution:**
+> ---
+> **Use Case**: Finding out more information about `Bob`
+>
+> **Input**: `moreinfo Bob`
+>
+> **Output**: Opened window for client's information.
+>
+> ![moreinfo](images/moreinfo.png)
+> 
+> ---
 
-    Thus, these commands will provide more information about the same `Bob` client
-    </div>
-    <br>
+<br>
+<div class="note" markdown="span">
+NAME is case-insensitive: 
+`moreinfo Bob` = `moreinfo BOB` = `moreinfo bOb` _(Not exhaustive)_
 
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `moreinfo wen xuan` != `moreinfo wenxuan`
-    
-    These commands will provide more information about different clients
-    </div> 
-    <br>
+Thus, these commands will provide more information about the same `Bob` client
+</div>
+<br>
 
-    - **Failed Execution:**
-      > ---
-      > **Use Case**: Client not found
-      >
-      > **Input**: moreinfo nonExistentClient
-      >
-      > **Output**: Please enter an existing client name!
-      >
-      > ---
+<div class="alert" markdown="span">
+However, NAME is space-sensitive:
+`moreinfo wen xuan` != `moreinfo wenxuan`
 
-- #### Chat Window
-    - **Format:** `chatbot`
-    - **Description:** Opens a chatbot that answers basic queries.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Valid Greeting
-      >
-      > **Input**:
-      ![validGreeting.png](images%2FvalidGreeting.png)
-      **Output**:
-      ![outputFromValidGreeting.png](images%2FoutputFromValidGreeting.png)
-      > ---
-      >
-      > **Use Case #2**: Valid Query
-      >
-      > **Input**:
-      ![validQuery.png](images%2FvalidQuery.png)
-       **Output**:
-      ![outputFromValidQuery.png](images%2FoutputFromValidQuery.png)
-      > ---
-      >
-      > **Use Case #3**: Valid Farewell
-      >
-      > **Input**:
-      ![validGoodbye.png](images%2FvalidGoodbye.png)
-      **Output**:
-      ![outputFromValidGoodbye.png](images%2FoutputFromValidGoodbye.png)
-      > ---
+These commands will provide more information about different clients
+</div> 
+<br>
 
-      - **Failed Execution:**
-      > ---
-      > **Use Case #1**: Invalid Query
-      >
-      > **Input**:
-      ![invalidInput.png](images%2FinvalidInput.png)
-      >
-      > **Output**:
-      ![outputOfInvalidInput.png](images%2FoutputOfInvalidInput.png)
-      > ---
+- **Failed Execution:**
+> ---
+> **Use Case**: Client not found
+>
+> **Input**: moreinfo nonExistentClient
+>
+> **Output**: Please enter an existing client name!
+>
+> ---
+
+#### Chat Window
+- **Command:** `chatbot`
+- **Description:** Opens a chatbot that answers basic queries.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Valid Greeting
+>
+> **Input**:
+![validGreeting.png](images%2FvalidGreeting.png)
+**Output**:
+![outputFromValidGreeting.png](images%2FoutputFromValidGreeting.png)
+> ---
+>
+> **Use Case #2**: Valid Query
+>
+> **Input**:
+![validQuery.png](images%2FvalidQuery.png)
+**Output**:
+![outputFromValidQuery.png](images%2FoutputFromValidQuery.png)
+> ---
+>
+> **Use Case #3**: Valid Farewell
+>
+> **Input**:
+![validGoodbye.png](images%2FvalidGoodbye.png)
+**Output**:
+![outputFromValidGoodbye.png](images%2FoutputFromValidGoodbye.png)
+> ---
+
+- **Failed Execution:**
+> ---
+> **Use Case #1**: Invalid Query
+>
+> **Input**:
+![invalidInput.png](images%2FinvalidInput.png)
+>
+> **Output**:
+![outputOfInvalidInput.png](images%2FoutputOfInvalidInput.png)
+> ---
 
 
 ### Saving the data
