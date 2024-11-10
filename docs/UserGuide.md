@@ -707,6 +707,8 @@ Sorts all entries in the application according to name in alphabetical order.
 
 Format: `sort`
 
+![sortUi](images/sortUi.png)
+
 <div style="text-align: right;">
   <a href="#command-summary">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />

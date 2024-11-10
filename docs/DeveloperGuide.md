@@ -279,7 +279,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | re-visit my previous input                        | type faster                                                                |
 | `* * *`  | user    | autofill my input                                 | type faster                                                                |
 | `* *`    | user    | colour code a _client_                            | differentiate more important _clients_                                     |
-| `* *`    | user    | sort _clients_ by personal information            | find _clients_ easily                                                      |
+| `* *`    | user    | sort _clients_ by name                            | find _clients_ easily                                                      |
 | `* *`    | user    | attach files to a _client_                        | attach important contracts to the respective _clients_                     |
 | `* *`    | user    | assign tags to _clients_                          | differentiate _clients_ by any interesting factors                         |
 | `* *`    | user    | autofill CLI commands                             | easily assess the command line without typing the command again            |
@@ -591,24 +591,10 @@ otherwise)
 **MSS**
 
 1. User chooses to sort a _client_ list by name
-2. User types in a command consisting the sort type.
+2. User types in the respective command.
 3. System sorts the _client_ list by name
 
    Use case ends.
-
-**Extensions**
-
-* 2a. The provided sort type is not valid
-
-    * 2a1. System prompts error for invalid sort type
-    * 2a2. User enters new instruction
-    * Steps 2a1-2a2 are repeated until the instruction is valid
-
-  Use case resumes from step 3.
-
-* *a. At any time, User chooses not to proceed with the operation.
-
-  Use case ends.
 
 *{More to be added}*
 
@@ -1579,16 +1565,14 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 </box>
 
-#### Sort all _clients_ by personal information
+#### Sort all _clients_ by name
 
-1. Sorting the entire True Rental's database by the personal information given.
+1. Sorting the entire True Rental's database by name.
 
     1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
 
-    2. Test case: `sort name`<br>
-       Expected: Client list will be sorted in alphabetical order by name. A command success message for name will be
-       displayed in the result display box.
-    3.
+    2. Test case: `sort`<br>
+       Expected: Client list will be sorted in alphabetical order by name. A command success message for name will be displayed in the result display box.
 
 #### Clear
 
