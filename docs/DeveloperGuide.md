@@ -327,8 +327,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-
 ### Use cases
+
+<box type="info" seamless>
+
+**Note:** For all the use cases below, the **System** is PlanPerfect and the **Actor** is an arbitrary Wedding Planner.
+
+</box>
+
 <br/><br/>
 **Use case: UC01 - List all contacts**
 
