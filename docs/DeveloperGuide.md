@@ -460,24 +460,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Use Case 6: Filter Data by Medical Condition**
+### **Use Case 6: Find Data by Medical Condition**
 
 - **System**: CareLink
-- **Use Case**: UC06 - Filter Data by Medical Condition
+- **Use Case**: UC06 - Find Data by Medical Condition
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
 - Fred is logged into CareLink.
 
 #### Guarantees
-- Data is successfully filtered by the specified condition and displayed.
+- Data is successfully found by the specified condition and displayed.
 
 #### Main Success Scenario (MSS)
-1. Fred enters command to `filter` patient data by medical condition.
+1. Fred enters command to `find` patient data by medical condition.
 2. CareLink prompts Fred to input the medical condition.
 3. Fred enters the medical condition.
-4. CareLink filters the patient data based on the specified medical condition.
-5. CareLink displays the filtered data to Fred.
+4. CareLink finds the patient data based on the specified medical condition.
+5. CareLink displays the found data to Fred.
 6. Use case ends.
 
 #### Extensions
@@ -491,24 +491,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### **Use Case 7: Filter Data by Patients**
+### **Use Case 7: Find Data by Patients**
 
 - **System**: CareLink
-- **Use Case**: UC07 - Filter Data by Patients
+- **Use Case**: UC07 - Find Data by Patients
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
 - Fred is logged into CareLink.
 
 #### Guarantees
-- Data is successfully filtered by the specified patient(s) and displayed.
+- Data is successfully found by the specified patient(s) and displayed.
 
 #### Main Success Scenario (MSS)
-1. Fred enters the command to filter patient data by specific patients.
+1. Fred enters the command to `find` patient data by specific patients.
 2. CareLink prompts Fred to input patient identifiers.
 3. Fred enters the patient identifiers.
-4. CareLink filters the patient data based on the specified patient identifiers.
-5. CareLink displays the filtered data to Fred.
+4. CareLink finds the patient data based on the specified patient identifiers.
+5. CareLink displays the found data to Fred.
 6. Use case ends.
 
 #### Extensions
