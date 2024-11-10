@@ -238,7 +238,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-### use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -363,6 +363,8 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+---
+
 ### Launch and shutdown
 
 1. Initial launch
@@ -377,6 +379,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+---
 
 ### Adding a Contact
 
@@ -396,6 +400,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect add commands to try: `add`, `add n/`, `add th/username e/email.com`<br>
       Expected: Error message displayed indicating missing or incorrect parameters.
 
+---
+
 ### Listing All Contacts
 
 1. Listing contacts with no additional parameters
@@ -408,6 +414,7 @@ testers are expected to do more *exploratory* testing.
    1. Other variations to try: `list all`, `list contacts` or any variation of `all` and/or `contacts` after `list`<br>
       Expected: Similar outcome to `list` command. All contacts are displayed.
 
+---
 
 ### Deleting a contact
 
@@ -461,6 +468,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete NOT_FULL_NAME`<br>
       Expected: Similar to above.
 
+---
+
 ### Editing a Contact
 
 1. Editing a contact while **ALL** contacts are being shown
@@ -513,6 +522,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
       Expected: Similar to above.
 
+---
+
 ### Finding a Contact
 
 1. Finding a contact by name and role
@@ -527,7 +538,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect find commands to try `find`, `find n/NOT_FULL_NAME r/ROLE_NOT_IN_LIST`<br>
       Expected: If no contacts match, a message appears indicating no contacts found. If an invalid role is entered, an error message displays: "Error: Invalid role specified."
-      
+
+---
+ 
 ### Saving data
 
 1. Automatic Data Saving
@@ -543,6 +556,8 @@ testers are expected to do more *exploratory* testing.
    
    1. Test case: Manually edit the JSON file to include an invalid format or structure (e.g., remove a required field).<br>
       Expected: Upon launching, the application detects the corrupted data and either resets to an empty state or prompts an error message like "Error: Invalid data format detected. Data reset to empty state."
+
+---
 
 ### GUI Components
 
@@ -583,5 +598,89 @@ testers are expected to do more *exploratory* testing.
    1. Test case: Delete or replace the data JSON file and restart the application.<br>
       Expected: The app initialises with an empty contact list, and a message indicates that no saved data was found, prompting a fresh start.
 
+---
+
 This appendix provides a comprehensive approach to testing the data_coNdUctorS app, ensuring each core feature and edge case is addressed. Error messages will appear on the screen if incorrect inputs are entered, helping users to correct their input efficiently.
+
+
+
+## Appendix: Planned Enhancements
+
+This section outlines the planned future enhancements for the data_coNdUctorS application to improve functionality, usability, and scalability.
+
+---
+
+### Advanced Error Messages
+
+1. Informing the User what is their specific issue with the command that they have inputted 
+
+   1. Goal: Quality of Life for users to understand which part of the command they inputted wrongly so they don't have to waste time
+  
+   1. Planned Implementation example: Editing a contact with the same `NAME` and `NICKNAME` as a current contact will result in an error message: "This Contact already exists in the address book". This is not very clear and so in the future, we could show that current contact to the user and show them which fields are duplicated
+      
+   1. Expected Outcome: Users will waste less time debugging their inputs, espeically for large address books.
+
+---
+
+### Undo and Redo Commands
+
+1. Adding undo/redo functionality for recent actions
+
+   1. Goal: Allow users to revert recent changes or repeat an undone action for ease of correction and experimentation.
+   
+   1. Planned Implementation: Introduce `undo` and `redo` commands that track changes to the contact list. These commands would store actions in a history log to reverse or repeat the last commands executed.
+   
+   1. Expected Outcome: Users gain flexibility in editing contacts by easily reversing or reapplying changes, enhancing user control over modifications.
+
+---
+
+### Import and Export Functionality
+
+1. Enabling contacts import and export in CSV format
+
+   1. Goal: Provide options to import contact data from external sources and export the current contact list for external use.
+   
+   1. Planned Implementation: Implement `import` and `export` commands to handle CSV files. The `import` command would parse CSV files, while the `export` command would generate a CSV of the contact list.
+   
+   1. Expected Outcome: Users can easily transfer contacts between the app and other platforms, increasing the app's interoperability.
+
+---
+
+### Customisable Fields
+
+1. Allowing users to add custom fields to contacts
+
+   1. Goal: Enable users to include additional information specific to their needs by adding custom fields to each contact.
+   
+   1. Planned Implementation: Modify the `add` and `edit` commands to accept optional custom fields (e.g., “Birthday,” “Social Media Handle”). Custom fields could be specified with a new prefix, such as `cf/Birthday`.
+   
+   1. Expected Outcome: This flexibility allows users to store more diverse contact information, tailoring the app to different group management needs.
+
+---
+
+### Improved Pagination Controls
+
+1. Adding customisable page size for pagination
+
+   1. Goal: Allow users to control the number of contacts displayed per page, enhancing the usability of pagination for larger lists.
+   
+   1. Planned Implementation: Add a `setPageSize` command or settings option to specify the number of contacts displayed per page.
+   
+   1. Expected Outcome: Users can adjust page sizes to their preference, making navigation easier for both small and large contact lists.
+
+---
+
+### Enhanced Data Validation
+
+1. Adding stronger data validation for input fields
+
+   1. Goal: Ensure that all data entered adheres to correct formats to prevent data inconsistencies and potential errors.
+   
+   1. Planned Implementation: Implement additional checks in the `add` and `edit` commands to validate data formats rigorously, such as requiring a specific format for phone numbers or dates.
+   
+   1. Expected Outcome: Reduced errors due to input mistakes, improving data quality and consistency within the contact list.
+
+---
+
+This appendix provides an overview of enhancements planned for future releases of data_coNdUctorS, designed to improve user experience, add functionality, and support greater customization.
 
