@@ -271,7 +271,7 @@ EZSTATE features (i.e. commands) are divided into **four** main categories:
     - [More Info](#more-info) (`moreinfo`)
     - [Chat Window](#chat-window) (`chatbot`)
 
-The instructions for using each command are explained in the sections below. For the command examples provided, you can assume that **Output** refers to the text displayed in the **Result Display**, unless stated otherwise.
+The following sections cover the **command format**, **description**, **valid** and **invalid inputs**, and **special comments**.
 
 ---
 
