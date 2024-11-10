@@ -108,6 +108,7 @@ Name Constraints: <br>
 Phone Number Constraints: <br>
 * Phone numbers must consist of digits `0` to `9`, with the option of a `+` sign at the beginning for the country code
 * Phone numbers must not be more than 30 digits long
+* Phone numbers cannot contain spaces
 
 Email Address Constraints: <br>
 * Email should be of the format `local@domain`
@@ -136,6 +137,9 @@ Tag Constraints: <br>
 * Multiple of the same tags are not supported for a single contact. For example, `t\policy` and `t\policy: 223302B` would not be supported for a single contact.
 * Negative numbers are not supported in tag values
 * Operations such as `+, -, *, /` are also not supported in tag values
+* Reserved tags are not allowed to be added manually via commands like `add` or `edit`
+  * For BA€, `DuplicatePhone` is a reserved tag name, manually adding variations with different capitalisation of letters (e.g. `duplicatePhone`, `dUpLiCaTePhOnE`) or adding tags with will give an error
+  * Tags with values but have the same name as reserved tags are also not allowed (e.g. `t\DuplicatePhone:7`)
 
 </box>
 
@@ -374,7 +378,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE] [t\TAG]…​ [t\TAG:value]…​`` <br> e.g., `add n\James Ho p\22224444 e\jamesho@example.com a\123, Clementi Rd, 1234665 t\friend t\colleague`
+**Add**    | `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE] [t\TAG]…​ [t\TAG:value]…​` <br> e.g., `add n\James Ho p\22224444 e\jamesho@example.com a\123, Clementi Rd, 1234665 t\friend t\colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE\ [t\TAG]…​ [t\TAG:value]…​` <br> e.g.,`edit 2 n\James Lee e\jameslee@example.com`
