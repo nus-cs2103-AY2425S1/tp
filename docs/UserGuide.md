@@ -510,13 +510,15 @@ Exports your contacts and their relevant data to a Comma-Separated Value (CSV) f
 
 Format: `export`
 
-* Headings of the CSV file will be the attributes of an individual (ie Name, Address, Phone number etc)
+* Headings of the CSV file will be the attributes of a client (ie Name, Address, Phone number etc).
 * If an individual listings and/or tags attributed to them, the listings and/or tags are separated by a semicolon.
-* By default, the exported CSV file at `[JAR file location]/data/property.csv`
+* By default, the exported CSV file at `[JAR file location]/data/property.csv`.
+* Ensure that you do not have any other programmes utilising the `property.csv` file while you run the `export` command. Otherwise, PROperty may not correctly export your client data.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 `export` is useful if you want to view your contacts in Excel.
 </div>
+
 Example:
 
 1. `export` exports your current client data in PROperty into a CSV file.
