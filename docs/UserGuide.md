@@ -124,12 +124,12 @@ Finds persons whose names contain any of the given keywords.
 Format: `find [INDEX] [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 ### General Search Rules
-- **Case-insensitive**: Searches ignore case differences. For example, `hans` will match `Hans`.
 - **Attribute-Specific Requirements**: Each attribute has specific search behaviors (see details below).
+- At least one of the optional fields must be provided.
 
 ### Attribute-Specific Search Details
 
-### Index (`INDEX`)
+## Index (`INDEX`)
 - Finds the person at the specified `INDEX` in the currently displayed list.
 - **Index** must be a positive integer (e.g., `1`, `2`, `3`, …).
 
