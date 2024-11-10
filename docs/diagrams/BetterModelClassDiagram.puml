@@ -23,4 +23,5 @@ Person *--> Income
 Person *--> Priority
 Person *--> DateOfBirth
 Person *--> FamilySize
+Person *--> "*"Scheme
 @enduml

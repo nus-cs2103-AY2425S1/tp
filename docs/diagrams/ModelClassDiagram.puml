@@ -24,6 +24,7 @@ Class Priority
 Class Income
 Class DateOfBirth
 Class FamilySize
+Class Scheme
 
 Class I #FFFFFF
 }
@@ -52,6 +53,7 @@ Person *--> Priority
 Person *--> Income
 Person *--> DateOfBirth
 Person *--> FamilySize
+Person *--> "*" Scheme
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

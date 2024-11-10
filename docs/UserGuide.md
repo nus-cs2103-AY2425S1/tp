@@ -334,12 +334,16 @@ Format: `statistics`
 
 Displays the schemes that specified people from SocialBook are eligible for.
 
-Format: `scheme INDEXES`
+Format: `scheme INDEX`
 
-* Displays the schemes that the people at the specified `INDEXES` are eligible for.
+* Displays the schemes that the people at the specified `INDEX` are eligible for.
 * The indexes refer to the index numbers shown in the displayed person list.
 * The indexes **must be a positive integer** 1, 2, 3, …​
 * Only 1 index can be inputted at a time.
+
+<box type="info">
+Currently only 2 schemes are available in the current version of SocialBook.
+</box>
 
 Examples:
 * `scheme 1` shows scheme that the 1st person in SocialBook is eligible for.
@@ -355,6 +359,11 @@ Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
 * The scheme index refers to the index number shown in the displayed scheme list with scheme command.
 * The indexes **must be a positive integer** 1, 2, 3, …​
 * Only 1 scheme index and 1 person index can be inputted at a time.
+
+<box type="tip" seamless>
+
+**Tip:** Use the `scheme` command to check the schemes available to a person before adding them.
+</box>
 
 Examples:
 * `addscheme 1 i/1` adds the 1st scheme to the 1st person in the address book.
@@ -386,6 +395,11 @@ Format: `deletescheme PERSON_INDEX i/SCHEME_INDEXS`
 * Multiple scheme indexes can be inputted at a time but only 1 person index can be inputted at a time.
 * The scheme indexes can be in **any order** so long as all the indexes fall within the size of the current list.
 * Duplicated valid scheme index inputs would be treated as unique scheme index inputs.
+
+<box type="tip" seamless>
+
+**Tip:** Use the `viewscheme` command to check the schemes attached to a person before deleting them.
+</box>
 
 Examples:
 * `deletescheme 1 i/1` deletes the 1st scheme from the 1st person in the address book.
@@ -528,7 +542,7 @@ The current time marker (denoted by the red line on the right side of the calend
 | **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                            |
 | **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                            |
 | **viewscheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                                    |
-| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`                                                                                                                                      |
+| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEXES` <br> e.g., `deletescheme 1 i/1, 2`                                                                                                                                 |
 | **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                          |
 | **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                      |
 | **undo**         | `undo`                                                                                                                                                                                                          |
