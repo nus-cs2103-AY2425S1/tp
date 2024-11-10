@@ -75,7 +75,7 @@ public class DeletewCommand extends Command {
             throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
         }
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
                     lastShownList.size()));
         }

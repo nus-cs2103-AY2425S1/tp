@@ -216,7 +216,7 @@ public class AssignCommand extends Command {
         }
 
         for (Index index : weddingIndices) {
-            if (index.getZeroBased() >= lastShownList.size()) {
+            if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
                 throw new CommandException(String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
                         lastShownList.size()));
             }

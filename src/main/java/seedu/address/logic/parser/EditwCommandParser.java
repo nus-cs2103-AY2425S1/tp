@@ -29,14 +29,7 @@ public class EditwCommandParser implements Parser<EditwCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditwCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_WEDDING).orElseThrow(() ->
-                    new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditwCommand.MESSAGE_USAGE))
-            ));
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditwCommand.MESSAGE_USAGE), pe);
-        }
+        Index index = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING)).iterator().next();
 
         EditwCommand.EditWeddingDescriptor editWeddingDescriptor = new EditwCommand.EditWeddingDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
