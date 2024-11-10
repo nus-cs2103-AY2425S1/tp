@@ -671,42 +671,43 @@ Prerequisites: List all Guests and Vendors using the `list` command. Multiple Gu
 
 ### Finding Guest(s)/Vendor(s)
 
-1. Test case: `find n/Thor`
+1. Test case: `find n/Thor`<br>
     Expected: All Guests and Vendors with the word `Thor`in the name are displayed in their respective lists. Total number of Guests (pending, coming, not coming) and Vendors found will be displayed in the status message.
 
-2. Test case: `find t/agent`
+2. Test case: `find t/agent`<br>
     Expected: All Guests and Vendors with the tag `agent` are displayed in their respective lists. Total number of Guests (pending, coming, not coming) and Vendors found will be displayed in the status message.
 
-3. Test case: Try using the `find` command with more than one field specified.
+3. Test case: Try using the `find` command with more than one field specified.<br>
     Expected: No change in the Guests and Vendors displayed. Error details shown in the status message. Status bar remains the same.
 
 ### Viewing Statistics
 
-1. Test case: `stats`
+1. Test case: `stats`<br>
     Expected: All Guests and Vendors are displayed in their respective lists. Total number of Guests (pending, coming, not coming) and Vendors will be displayed in the status message.
 
 ### Clearing both lists
 
-1. Test case: `clear`
+1. Test case: `clear`<br>
     Expected: All Guests and Vendors deleted from their respective lists. Both lists have no contacts displayed. Success message is displayed in the status message.
 
 ### Exiting Bridalbuddy
 
-1. Test case: `exit`
+1. Test case: `exit`<br>
     Expected: Bridalbuddy closes.
 
 ### Saving Data
 
-1. Dealing with missing data file
-    i. Delete the file named `bridalbuddy.json` located in the data folder.
-    ii. Relaunch Bridalbuddy
-    iii. Run the command `clear`
+1. Dealing with missing data file<br>
+    i. Delete the file named `bridalbuddy.json` located in the data folder.<br>
+    ii. Relaunch Bridalbuddy<br>
+    iii. Run the command `clear`<br>
         Expected: A new empty `bridalbuddy.json` file is created in the `data` folder. Sample Guests and Vendors are deleted.
 
-2. Dealing with corrupted data file
-    i. Open the `bridalbuddy.json` file located in the `data` folder with a text editor.
-    ii. Corrupt the file by deleting a few characters. Save the file.
-    iii. Relaunch Bridalbuddy.
+
+2. Dealing with corrupted data file<br>
+    i. Open the `bridalbuddy.json` file located in the `data` folder with a text editor.<br>
+    ii. Corrupt the file by deleting a few characters. Save the file.<br>
+    iii. Relaunch Bridalbuddy.<br>
         Expected: No Guests and Vendors will be displayed in the Bridalbuddy.
 
 --------------------------------------------------------------------------------------------------------------------
