@@ -86,7 +86,10 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 **Handling Errors In User Input:**
 * First checks for valid command. 
 * Then checks for presence of fields for that command.
-* Lastly checks if the command is run in the correct view (client VS transaction view).
+* Next checks if the command is run in the correct view (client VS transaction view).
+* Lastly checks if the command alters the balance beyond the supported range.
+
+*Supported range for balance* is (-1.7976931348623157E+308, 1.7976931348623157E+308).
 
 </box>
 
@@ -232,6 +235,8 @@ e.g. `0.5`
 <box type="warning" seamless>
 
 **Note:** `addt` can only be used in client list view.
+
+**IMPORTANT:** adding transactions that cause the client's balance to go beyond the supported range is not allowed.
 </box>
 
 Examples:
