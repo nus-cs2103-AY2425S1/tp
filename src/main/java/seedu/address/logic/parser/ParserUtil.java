@@ -172,8 +172,7 @@ public class ParserUtil {
      */
     public static LocalDateTime parseAppointmentDateTime(String appointmentDateTime) throws ParseException {
         requireNonNull(appointmentDateTime);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-                .withResolverStyle( ResolverStyle.STRICT );
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
             return LocalDateTime.parse(appointmentDateTime, formatter);
         } catch (DateTimeParseException e) {

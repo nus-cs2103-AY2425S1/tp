@@ -23,7 +23,7 @@ With **DocTrack**, you can take the first step towards digitalisation of your pr
 **DocTrack** aims to simplify your patient and appointment tracking process, by allowing you to
 - easily add and update patient and appointment records.
 - delete records for regulation purposes.
-- search for records based on important criteria such as dates and names.
+- search for records based on important criteria such as dates and names
 with an intuitive and user-friendly interface!
 
 To get started, you can read the introduction below, which shows all the different sections
@@ -318,7 +318,6 @@ A **person** is a patient with several fields. The fields and their correspondin
 You can identify these patients uniquely by their **patient ID (PID)** for easy reference. 
 
 ---
-
 * Emails must have a local part containing alphanumeric characters and specific symbols (`+_.-`) (not at the start or end), followed by `@`, and a domain part with labels separated by periods, ending in a label with at least two alphanumeric characters, and no labels starting or ending with hyphens.
 
 <br>
