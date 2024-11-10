@@ -236,8 +236,10 @@ Eg. `n/John` or `name/john`
 
 <md>**Email restrictions**</md>
 Emails should be of the format `local-part@domain` and adhere to the following constraints:
-1. `local-part` should only contain English alphanumeric characters and `+`, `_` , `.` , `-`. 
-2. `local-part` may not start or end with any special characters.
+1. `local-part` should only contain English alphanumeric characters and `+`, `_` , `.` , `-`.
+The `local-part` name:
+    - may not start or end with any special characters.
+    - may not have any consecutive special characters.
 3. This is followed by an `@` and then a `domain` name. The domain name is made up of domain labels separated by periods.
 The `domain name` must:
     - end with a domain label at least 2 characters long
@@ -446,7 +448,7 @@ Deletes the specified person from KonTActs.
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Deletes the person with the specified name.
-* The name refers to the full name of the person shown in the displayed person list.
+* The name refers to the full name of the person shown in KonTActs.
 * If a person matches the name but is not shown in the list, it will not be deleted.
   </box>
 
@@ -474,6 +476,13 @@ Launches GitHub repository of the specified person on the browser from KonTActs.
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Shortcut: `git n/NAME`**</md>
+</box>
+
+<box type="important" light>
+
+**Browser security restrictions**
+
+KonTActs will attempt to open GitHub in your default browser. Please note that some browser security settings or pop-up blockers may prevent this. Please ensure that your browser allows new tabs or windows to be open from external applications before using the command.
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -512,7 +521,7 @@ Opens a window at the side with the full details of the specified person from Ko
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * View the full details of the contact you specify.
-* `NAME` refers to the full name of the person shown in the displayed person list.
+* `NAME` refers to the full name of the person shown in KonTActs.
 * Calling `view` without any name parameter closes any windows previously opened by `view`.
 * Deleting or editing name of the current contact opened by `view` closes `view`.
   </box>
@@ -941,6 +950,10 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 
 Furthermore, we believe that duplicate names are better managed based on how the tutor identifies them. Different people have different method of remembering people with the same name. For instance, given two `John`s, a tutor might identify them physically as `John 1` and `John 2` or by their surname, `John Doe` and `John Tan` . This identification should also be reflected in KonTActs to make it easy to distinguish the two students.
 
+**Q**: Why are duplicate fields like Email, Telegram and Github usernames allowed?<br>
+**A**: KonTActs recognizes that students may use the same usernames and emails across different points of contact. To provide greater flexibility in the application, KonTActs permits duplicate entries for email addresses, Telegram handles, and GitHub usernames.  
+
+
 {{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -953,4 +966,6 @@ Furthermore, we believe that duplicate names are better managed based on how the
 ![excel known issue](images/excelKnownIssue.png)
 4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is intended so that the list view does not become cluttered with too much information.
 5. Names that contains the `/` characters will cause konTActs to show an error message although a person can legally have `/` in their legal name such as `Kumar S/O Mahesh`. This is a limitation within konTActs as it uses the `/` charcter internally. The solution for this is to totally omit the `/` altogether. In this case, the name may be added as `Kumar SO Mahesh` or `Kumar son of Mahesh` depending on your preference.
+6. **When closing the View Window**, you will not be able to scroll if the mouse hovers over the area previously occupied by the View Window. To fix this, move the mouse to the left side of the window before scrolling.
+7. **If you are using a small window** and have a person with a long tag, their attendance record will not wrap around, and the last few weeks may not be visible. To see the remaining attendance, increase the window width. 
 --------------------------------------------------------------------------------------------------------------------
