@@ -2,6 +2,8 @@ package seedu.address.model.client.insurance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INSURANCE_ID;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INSURANCE_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ class InsurancePlanFactoryTest {
             InsurancePlan insurancePlan = InsurancePlanFactory.createInsurancePlan(-1);
             fail();
         } catch (InsurancePlanException e) {
-            assertEquals(e.getMessage(), InsurancePlanFactory.INVALID_PLAN_ID_MESSAGE);
+            assertEquals(e.getMessage(), MESSAGE_INVALID_INSURANCE_ID);
         }
     }
 
@@ -48,7 +50,7 @@ class InsurancePlanFactoryTest {
             InsurancePlan insurancePlan = InsurancePlanFactory.createInsurancePlan("Invalid String");
             fail();
         } catch (InsurancePlanException e) {
-            assertEquals(e.getMessage(), InsurancePlanFactory.INVALID_PLAN_NAME_MESSAGE);
+            assertEquals(e.getMessage(), MESSAGE_INVALID_INSURANCE_NAME);
         }
     }
 
@@ -58,7 +60,7 @@ class InsurancePlanFactoryTest {
             InsurancePlan insurancePlan = InsurancePlanFactory.createInsurancePlan("");
             fail();
         } catch (InsurancePlanException e) {
-            assertEquals(e.getMessage(), InsurancePlanFactory.INVALID_PLAN_NAME_MESSAGE);
+            assertEquals(e.getMessage(), MESSAGE_INVALID_INSURANCE_NAME);
         }
     }
 

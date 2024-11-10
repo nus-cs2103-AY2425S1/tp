@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INSURANCE_ID;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertInsuranceCommandSuccess;
-import static seedu.address.model.client.insurance.InsurancePlanFactory.INVALID_PLAN_ID_MESSAGE;
 import static seedu.address.model.client.insurance.InsurancePlansManager.DUPLICATE_PLAN_DETECTED_MESSAGE;
 import static seedu.address.testutil.TypicalClients.BENSON;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
@@ -53,7 +53,7 @@ class AddInsuranceCommandTest {
         AddInsuranceCommand addInsuranceCommand = new AddInsuranceCommand(INDEX_FOURTH_CLIENT, validInsuranceId);
 
         String expectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
-                planToBeAdded, Messages.format(updatedClient));
+                planToBeAdded, updatedClient.getName().toString());
 
         InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
         updatedInsurancePlansManager.addPlan(planToBeAdded);
@@ -84,7 +84,7 @@ class AddInsuranceCommandTest {
                 .build();
 
         String firstExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
-                firstPlan, Messages.format(clientWithFirstPlan));
+                firstPlan, clientWithFirstPlan.getName().toString());
 
         InsurancePlansManager updatedInsurancePlansManager = originalInsurancePlansManager.createCopy();
         updatedInsurancePlansManager.addPlan(firstPlan);
@@ -103,7 +103,7 @@ class AddInsuranceCommandTest {
                 .build();
 
         String secondExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
-                secondPlan, Messages.format(clientWithBothPlans));
+                secondPlan, clientWithBothPlans.getName().toString());
 
         updatedInsurancePlansManager.addPlan(secondPlan);
 
@@ -139,7 +139,7 @@ class AddInsuranceCommandTest {
 
         assertCommandFailure(addInsuranceCommand, model,
                 String.format(DUPLICATE_PLAN_DETECTED_MESSAGE,
-                        basicInsuranceId, Messages.format(BENSON)));
+                        basicInsuranceId, BENSON.getName().toString()));
     }
 
     /**
@@ -152,7 +152,7 @@ class AddInsuranceCommandTest {
         int invalidInsuranceId = -1;
         AddInsuranceCommand addInsuranceCommand = new AddInsuranceCommand(INDEX_FIRST_CLIENT, invalidInsuranceId);
 
-        assertCommandFailure(addInsuranceCommand, model, String.format(INVALID_PLAN_ID_MESSAGE));
+        assertCommandFailure(addInsuranceCommand, model, String.format(MESSAGE_INVALID_INSURANCE_ID));
     }
 
     @Test

@@ -70,10 +70,10 @@ public class DeleteInsuranceCommand extends Command {
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
             return new CommandResult(String.format(MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS,
-                    planToBeDeleted, Messages.format(clientWithDeletedInsurancePlan)));
+                    planToBeDeleted, clientWithDeletedInsurancePlan.getName().toString()));
         } catch (InsurancePlanException e) {
             throw new CommandException(
-                    String.format(e.getMessage(), insuranceID, Messages.format(clientToEdit)));
+                    String.format(e.getMessage(), insuranceID, clientToEdit.getName().toString()));
         }
     }
 

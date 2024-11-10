@@ -6,7 +6,7 @@
 
 # InSUREance APP User Guide
 
-InSUREance is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InSUREance can get your contact management tasks done faster than traditional GUI apps.
+InSUREance is a **desktop app for managing clients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InSUREance can get your client management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -28,13 +28,13 @@ InSUREance is a **desktop app for managing contacts, optimized for use via a  Li
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all clients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to InSUREance app.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd client shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all clients.
 
    * `exit` : Exits the app.
 
@@ -56,9 +56,6 @@ InSUREance is a **desktop app for managing contacts, optimized for use via a  Li
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -83,7 +80,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A client can have any number of tags (including 0)
+**Tip 1:** Phone number can take on multiple formats, including for Singapore and foreign
+numbers (without the + symbol). This supports insurance agents with an international customer base. </br>
+**Tip 2:** A client can have any number of tags (including 0)
 </box>
 
 Examples:
@@ -108,7 +107,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
-* Insurance plans and claims cannot be modified directly using this command. You may use other features such as `addInsurance`, `deleteInsurance`, `closeClaim` to make any necessary updates.
+* Insurance plans and claims cannot be modified directly using this command. You may use other features such as `addInsurance`, `deleteInsurance`, `addClaim`, `deleteClaim` and `closeClaim` to make any necessary updates.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
@@ -118,19 +117,44 @@ Examples:
 
 Finds clients whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+<box type="tip" seamless>
+    Parameters
+</box>
+
+1. `KEYWORD`: Is case-insensitive. e.g `hans` will match `Hans`
+   <br>
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
+
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* clients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find john betsy'](images/findJohnBetsyResult.png)
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:warning:</md></span>
+    Warnings:
+</box>
+
+- Only full words will be matched e.g. `Han` will not match `Hans`
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `find alex yu`
+<br>
+Output 1: ![result for 'find alex yu'](images/findalexyuResult.png)
+
+**Note**: the results of this command will be cleared after the execution of the next successful
+command. The list of clients would revert to showing the full list of all clients saved in the app.
+
 
 ### Deleting a client : `delete`
 
@@ -148,7 +172,7 @@ Examples:
 
 ### Adding an insurance plan to a client : `addInsurance`
 
-Adds the insurance plan (given by the `INSURANCE_ID`) to the client at the specified `INDEX`.
+Adds the insurance plan (given by the `INSURANCE_ID`) to the client at the specified `INDEX`. Insurance plan types are preloaded and new types cannot be added by the user. This is to ensure that the plans are consistent with market type plans. In the future, there are some plans to allow users to add their own new types of insurance plans.
 
 Format: `addInsurance INDEX iid/INSURANCE_ID`
 
@@ -175,23 +199,53 @@ Adds a claim to the insurance plan of a client.
 
 Format: `addClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID ca/CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS`
 
-IDs for insurance plans:
-`Basic Insurance Plan` : `0`, 
-`Travel Insurance Plan`: `1`
+<box type="tip" seamless>
+    Parameters
+</box>
 
-* Adds claim to the client at the specified `INDEX`.
-* `INSURANCE_ID` match the associated insurance plan. For a list of mappings between insurance plans and 
-IDs, refer above.
-* `CLAIM_ID` is generated by your insurance company and should be given to you before adding the claim. However, it does not 
-affect the functionality here except for deleting this claim later, where it would be required.
-* `CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS` is the claim amount written in `DD.CC` format eg. `151.10`.
+1. `INDEX` : Must be a valid client index in the filtered list that is currently shown.
+<br>
+2. `INSURANCE_ID` : Must be an existing valid ID that is currently supported.
+<br> Currently supported IDs for insurance plans: `Basic Insurance Plan` : `0` & `Travel Insurance Plan`: `1`. <br>
+3. `CLAIM_ID` : a unique id for each claim generated by the company and should be created externally by another
+organisation before the claim is added to this app.
+4. `CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS` is the claim amount written in `DD.CC` format eg. `151.10`. So, it can contain
+any number of digits for dollars but must be exactly 2 digits for cents. The claim amount can be up till 1 million.
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
 
 * If the `CLIENT_ID` is invalid, or the client does not have the insurance plan `INSURANCE_ID`, the
 user will be informed with an error message.
+* Claim Amount can be 0, in case the claim details have not been finalised and the user wishes to use the claim as
+as a placeholder claim for now.
+* Claim amount is in Singapore dollars.
+* Claims are opened with a default status of "open".
+* To simulate real world conditions, we have fixed the claim ID to always follow a specific format which
+  is alphabet + 4-digit number. All other format of claims will be considered invalid.
 
-Examples:
-* `addClaim 1 iid/1 cid/B1234 ca/151.10` adds a claim of $151.10 to the client at index 1, and this claim is tagged
-to his Travel Insurance plan that has a INSURANCE_ID of 1.
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:warning:</md></span>
+    Warnings:
+</box>
+
+- Same claim ID cannot be added to different plans of the same person.
+- A claim is considered a duplicate if there exists another claim of same claim ID for the same person.
+- Claim ID is always capitalised in the system so b1234 is the considered the same as B1234.
+- Do not add alphabets or any other special characters including but not limited to "$", "£" and "€" in front or behind
+the claim amount.
+- the prefixes like `iid`, `cid` and `ca` are case-sensitive.
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `addClaim 1 iid/1 cid/B1234 ca/151.10`
+<br>
+Output 1: `New claim added to Client: Alex Yeoh, under Insurance plan: Travel Insurance Plan, with Claim ID: B1234, Claim Amount: $151.10`
 
 ### Deleting a claim from a client : `deleteClaim`
 
@@ -209,7 +263,7 @@ IDs for insurance plans:
 same ID here to delete the claim.
 
 * If the `CLIENT_ID` is invalid, or the client does not have the insurance plan `INSURANCE_ID`, the
-  user will be informed with an error message.
+  user will be informed with an appropriate error message.
 
 Examples:
 * `deleteClaim 1 iid/1 cid/B1234` deletes the claim of CLAIM_ID B1234 from a client at INDEX 1 which is tagged
@@ -273,11 +327,12 @@ Click Theme to toggle between Dark Theme and Light Theme.
 
 ### Saving the data
 
-App data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+App data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually. </br>
+**Note**: This would only take effect after a successful command is executed.
 
 ### Editing the data file
 
-App data are saved automatically as a JSON file `[JAR file location]/data/inSUREance.json`. Advanced users are welcome to update data directly by editing that data file.
+App data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 

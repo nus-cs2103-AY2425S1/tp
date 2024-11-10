@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
@@ -21,9 +22,6 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_UNPARSABLE_INSURANCE_ID = "Insurance ID must be a positive integer.";
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -33,7 +31,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -126,11 +124,11 @@ public class ParserUtil {
         try {
             trimmedInsurancePlanId = Integer.parseInt(insurancePlanId.trim());
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
+            throw new ParseException(Messages.MESSAGE_INVALID_INSURANCE_ID);
         }
 
         if (trimmedInsurancePlanId < 0) {
-            throw new ParseException(MESSAGE_UNPARSABLE_INSURANCE_ID);
+            throw new ParseException(Messages.MESSAGE_INVALID_INSURANCE_ID);
         }
 
         return trimmedInsurancePlanId;

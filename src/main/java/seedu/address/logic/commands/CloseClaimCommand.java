@@ -28,7 +28,7 @@ public class CloseClaimCommand extends Command {
             + ": Marks a claim tagged to an insurance plan of a client as [closed] \n"
             + "Parameters: INDEX (must be a positive integer) "
             + " INSURANCE_PLAN_ID (must be a valid ID), "
-            + " ClAIM_ID (must be a valid ID) \n"
+            + " CLAIM_ID (must be a valid ID) \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INSURANCE_ID + " 0 "
             + PREFIX_CLAIM_ID + " B1234";
@@ -64,10 +64,10 @@ public class CloseClaimCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Client clientToCloseClaim = lastShownList.get(index.getZeroBased());
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
 
         try {
-            InsurancePlansManager clientToEditInsurancePlansManager = clientToCloseClaim.getInsurancePlansManager();
+            InsurancePlansManager clientToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
             InsurancePlan planToBeUsed = clientToEditInsurancePlansManager.getInsurancePlan(insuranceId);
             clientToEditInsurancePlansManager.checkIfPlanOwned(planToBeUsed);
 
@@ -75,15 +75,15 @@ public class CloseClaimCommand extends Command {
             clientToEditInsurancePlansManager.closeClaim(planToBeUsed, claimToBeMarkedAsClosed);
 
             Client clientWithClosedClaim = lastShownList.get(index.getZeroBased());
-            model.setClient(clientToCloseClaim, clientWithClosedClaim);
+            model.setClient(clientToEdit, clientWithClosedClaim);
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-            return new CommandResult(String.format(MESSAGE_CLOSE_CLAIM_SUCCESS, clientToCloseClaim.getName().toString(),
-                    planToBeUsed, claimId));
+            return new CommandResult(String.format(MESSAGE_CLOSE_CLAIM_SUCCESS,
+                    clientWithClosedClaim.getName().toString(), planToBeUsed, claimId));
         } catch (ClaimException e) {
-            throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToCloseClaim)));
+            throw new CommandException(String.format(e.getMessage(), claimId, clientToEdit.getName().toString()));
         } catch (InsurancePlanException e) {
-            throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToCloseClaim)));
+            throw new CommandException(String.format(e.getMessage(), insuranceId, clientToEdit.getName().toString()));
         }
     }
 

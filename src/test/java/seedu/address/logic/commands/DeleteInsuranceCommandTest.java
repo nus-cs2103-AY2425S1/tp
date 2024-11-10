@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -48,7 +47,7 @@ class DeleteInsuranceCommandTest {
         Client updatedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
                 clientToEdit.getAddress(), updatedInsurancePlansManager, clientToEdit.getTags());
         String expectedMessage = String.format(DeleteInsuranceCommand.MESSAGE_DELETE_INSURANCE_PLAN_SUCCESS,
-                insurancePlan, Messages.format(updatedClient));
+                insurancePlan, updatedClient.getName().toString());
 
         expectedModel.setClient(clientToEdit, updatedClient);
 

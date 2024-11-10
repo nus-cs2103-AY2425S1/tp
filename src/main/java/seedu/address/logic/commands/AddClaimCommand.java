@@ -84,12 +84,12 @@ public class AddClaimCommand extends Command {
             model.setClient(clientToEdit, clientWithAddedClaim);
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, clientToEdit.getName().toString(), planToBeUsed,
-                    claimId, Messages.formatClaimAmount(claimAmount)));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, clientWithAddedClaim.getName().toString(),
+                    planToBeUsed, claimId, Messages.formatClaimAmount(claimAmount)));
         } catch (ClaimException e) {
-            throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToEdit)));
+            throw new CommandException(String.format(e.getMessage(), claimId, clientToEdit.getName().toString()));
         } catch (InsurancePlanException e) {
-            throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
+            throw new CommandException(String.format(e.getMessage(), insuranceId, clientToEdit.getName().toString()));
         }
     }
 

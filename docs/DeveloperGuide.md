@@ -13,7 +13,11 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+ChatGPT was heavily used to help create test case templates, although the ideas behind the test cases were mostly thought by the developers.
+<br>
+We would also like to acknowledge group CS2103T-W14-1 as we followed a similar format for the command explanations in the user guide based on their user guide, 
+and group CS2103-F10-2 as we followed their test cases for saving data based on their developer guide.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,107 +158,26 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Planned Enhancements**
+Do note we have 4 members in our group.
 
-This section describes some noteworthy details on how certain features are implemented.
+### 1. addClaim ID
+A single claim ID can be added to multiple users. i.e. `B1100` can be added to both client `A` and client `B` with no error. This will be fixed in a future version such that claim ID is unique across
+all clients.
 
-### \[Proposed\] Undo/redo feature
+### 2. addClaim amount
+Claim amount can currently exceed 1 million. In the future, a restriction will be placed on the claim amount such that if
+the claim amount is over 1 million, it will be rejected with an appropriate error message. This is in line with our restriction on claim amount (claim amount cannot exceed 1 million)
 
-#### Proposed Implementation
+### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
+Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
+name or not. However, in future versions, we are planning to check if all details are the same before flagging it as a
+duplicate. This is because 2 people can share numbers, address and emails (eg a parent and child) or 2 clients can have
+the same full name with different contact details but it will be unreasonably rare for clients to have the same name,
+number, email and addresses simultaneously.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+### 4. Flexible Command Keywords.
+Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we will make command keywords case-insensitive in a future update by parsing the prefixes differently.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,6 +197,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**: **Insurance Agents**
 
+* is based in Singapore
 * has a need to manage a significant number of insurance clients
 * prefer desktop apps over other types
 * can type fast
@@ -287,24 +211,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                        | So that I can…​                                                                  |
-|----------|-------------------|---------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | new user          | view the help page                                                  | refer to instructions when I forget how to use the App                           |
-| `* * *`  | basic user        | add a client                                                        | keep track of a client's contact details                                         |
-| `* * *`  | basic user        | delete a client                                                     | remove a client's contact details that I no longer need                          |
-| `* *`    | intermediate user | edit a client                                                       | update a client's contact when necessary                                         |
-| `* * *`  | basic user        | list all my clients                                                 | view all my clients in my address book                                           |
-| `* * *`  | efficient user    | find a client by name                                               | quickly retrieve a client's contact when required                                |
-| `* * *`  | basic user        | add an insurance plan to a client                                   | keep track of the insurance plan the client has purchased                        |
-| `* * *`  | basic user        | delete an insurance plan from a client                              | remove an insurance plan that was previously purchased by the client             |
-| `* *`    | intermediate user | add a claim to an insurance plan purchased by a client              | keep track of a claim filed against the insurance plan                           |
-| `* *`    | intermediate user | view a claim filed against an insurance plan purchased by a client  | view the details of the claim                                                    |
-| `* *`    | intermediate user | close a claim filed against an insurance plan purchased by a client | mark the claim as closed                                                         |
-| `* *`    | intermediate user | edit a claim filed against an insurance plan purchased by a client  | modify details of the claim                                                      |
-| `* *`    | intermediate user | view all claims of a client                                         | see all the claims filed for the various insurance plans purchased by the client |
-| `* * *`  | basic user        | exit the app                                                        | close the app when I am done using it                                            |
-
-*{More to be added}*
+| Priority | As a …​           | I want to …​                                                        | So that I can…​                                                               |
+|----------|-------------------|---------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | new user          | view the help page                                                  | refer to instructions when I forget how to use the app                        |
+| `* * *`  | basic user        | add a client                                                        | keep track of client's contact details                                        |
+| `* * *`  | basic user        | delete a client                                                     | remove client's contact details that I no longer need                         |
+| `* *`    | intermediate user | edit a client                                                       | update client's contact when necessary                                        |
+| `* * *`  | basic user        | list all clients                                                    | view all clients in the app                                                   |
+| `* * *`  | efficient user    | find a client by name                                               | quickly retrieve client's contact without looking through all my contacts     |
+| `* * *`  | basic user        | add an insurance plan to a client                                   | keep track of the insurance plan the client has purchased                     |
+| `* * *`  | basic user        | delete an insurance plan from a client                              | remove an insurance plan that was previously purchased by the client          |
+| `* *`    | intermediate user | add a claim to an insurance plan purchased by a client              | keep track of a claim filed against an insurance plan                         |
+| `* *`    | intermediate user | delete a claim from an insurance plan purchased by a client         | remove a wrongly-added claim from an insurance plan                           |
+| `* *`    | intermediate user | close a claim filed against an insurance plan purchased by a client | mark the claim as closed                                                      |
+| `* *`    | intermediate user | list all claims of a client                                         | view all claims filed for the various insurance plans purchased by the client |
+| `*`      | frequent user     | customise the theme of the app                                      | change the theme according to my mood and liking                              |
+| `* *`    | basic user        | clear all contacts from the app                                     | quickly reset my app to an empty state                                        |
+| `* * *`  | basic user        | exit the app                                                        | close the app when I am done using it                                         |
 
 ### Use cases
 
@@ -315,25 +238,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a new client
-2. System checks new client details.
-3. System assigns client an ID.
-4. System shows successfully added a new client message.
+1. User requests to add a new client.
+2. System shows successfully added a new client message.
 
 Use case ends.
 
 **Extensions**
 
-* 2a. Client details are invalid.
-    * 2a1. System shows invalid client details error message.
-    * 2a2. User enters new client details.
+* 1a. Client details are invalid.
+    * 1a1. System shows invalid client details error message.
+    * 1a2. User enters new client details.
 
-    Steps 2a1-2a2 are repeated until the data entered is correct
+    Steps 1a1-1a2 are repeated until the data entered is correct
 
     Use case resumes from step 3.
 
-* 2b. Client name is identical to another client that already exists inside the system.
-    * 2b1. System sends a warning about identical client to user.
+* 1b. Client name is identical to another client that already exists inside the system.
+    * 1b1. System sends a warning about identical client to user.
 
     Use case resumes from step 3.
 ---
@@ -380,20 +301,19 @@ Use case ends.
 **MSS**
 
 1.  User selects an insurance plan ID.
-2.  System checks if the ID is valid.
-3.  System has selected the insurance plan ID.
+2.  System has selected the insurance plan ID.
 
 Use case ends.
 
 **Extensions**
 
-* 2b. The insurance plan id is invalid.
-    * 2b1. System shows an error message to user.
+* 1b. The insurance plan id is invalid.
+    * 1b1. System shows an error message to user.
 
     Use case ends.
 
-* 3a. The client does not have the specified insurance plan.
-    * 3a1. System shows an error message to user.
+* 1a. The client does not have the specified insurance plan.
+    * 1a1. System shows an error message to user.
 
     Use case ends.
 
@@ -416,7 +336,7 @@ Use case ends.
 
     Use case ends.
 ---
-**Use case 06: Remove an insurance plan to a client**
+**Use case 06: Remove an insurance plan from a client**
 
 **MSS**
 
@@ -427,12 +347,6 @@ Use case ends.
 
 Use case ends.
 
-**Extensions**
-
-* 3a. The client does not have the specified insurance plan.
-    * 3a1. System shows an error message to user.
-
-    Use case ends.
 ---
 **Use case 07: View all claims of a client**
 
@@ -493,8 +407,8 @@ Use case ends.
 
 **Extensions**
 
-* 3a. The claim has already been closed for the client.
-    * 3a1. System shows an error message.
+* 1a. The claim has already been closed for the client.
+    * 1a1. System shows that claim is closed with no error.
 
     Use case ends.
 ---
@@ -503,21 +417,21 @@ Use case ends.
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The data should be stored locally in a JSON file.
-3.  The data should be stored in a way that complies with the Personal Data Protection Act, Singapore [[PDPA](https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act)]
+3.  The data should be stored in a way that complies with the Personal Data Protection Act, Singapore [[PDPA](https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act)].
 4.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 6.  The app should display results within 2 seconds when searching for a client.
 7.  The app should save the data entered even if it exits unexpectedly while running.
-8.  The app should have a log of user actions for debugging purposes
-
-*{More to be added}*
+8.  The app should have a log of user actions for debugging purposes.
+9.  The app should help users validate their inputs for their client's claim information as they are adding or deleting the inputs based on known market standards.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Insurance Agent**: The user of the app.
-* **Client**: A potential customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
-* **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system.
+* **Client**: A customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
+* **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system. 
+  * Supported insurance plans are: `Basic Insurance Plan` : `0` and `Travel Insurance Plan` : `1`.
 * **Valid Insurance Plan ID**: An insurance plan ID that exists in the system.
 * **Claim**: A formal request by a client for reimbursement for losses that are covered by specific insurance plans.
 <!-- (the above definition was obtained from: https://www.iciciprulife.com/insurance-claim.html) -->
@@ -540,18 +454,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file `InSUREance.jar` and copy it into an empty folder.
+   2. Use the command `java -jar InSUREance.jar` to launch the app.
+   3. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by using the command `java -jar InSUREance.jar`<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a client
 
@@ -559,21 +472,27 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the number of clients displayed)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Existing data is not affected.
 
-1. _{ more test cases …​ }_
+   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Existing data is not affected. 
+   
+   3. Edit the line `"addressBookFilePath"` : `"data/addressbook.json"` to `"addressBookFilePath"` : `"data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only). 
+
+   4. Delete `data/` or `data/addressbook.json`. Expected: New `data/addressbook.json` created. App starts on clean slate (i.e. with sample data only).
+
+2. Dealing with corrupted data files 
+   1. Add a new field `"newField" : "newField"` to a client. Expected: All data is lost. The app starts on a clean slate.
+   2. Remove `"insurancePlans"` field from a client. Expected: All data is lost. The app starts on a clean slate.

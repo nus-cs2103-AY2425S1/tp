@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteClaimCommand;
 import seedu.address.model.client.insurance.claim.Claim;
 
@@ -73,6 +74,6 @@ public class DeleteClaimCommandParserTest {
                 + PREFIX_INSURANCE_ID + " "
                 + PREFIX_CLAIM_ID + VALID_CLAIM_ID; // Insurance ID left empty
 
-        assertParseFailure(parser, userInputEmptyInsuranceId, ParserUtil.MESSAGE_UNPARSABLE_INSURANCE_ID);
+        assertParseFailure(parser, userInputEmptyInsuranceId, Messages.MESSAGE_INVALID_INSURANCE_ID);
     }
 }
