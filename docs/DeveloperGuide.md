@@ -2,9 +2,23 @@
 layout: page
 title: Developer Guide
 ---
+## Table of Contents
 
-* Table of Contents
-  {:toc}
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+- [Implementation](#implementation)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User Stories](#user-stories)
+  - [Use Cases](#use-cases)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -288,13 +302,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -310,10 +324,23 @@ Given below is a sequence diagram to highlight the differences in implementation
 
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
 
-### \[Proposed\] Data archiving
+### Log Command
+Log command add a log entry to person at given index.
+Given below is a sequence diagram of favourite command usage.
 
-_{Explain here how the data archiving feature will be implemented}_
+![ViewSequenceDiagram](images/LogCommandSequenceDiagram.png)
+![ViewSequenceDiagram](images/LogWithDateSequenceDiagram.png)
 
+
+### Favourite Command
+Favourite command given different parameter can favourite/unfavourite a person in the list at the given index, or sort the list by Favourite.
+Given below is a sequence diagram of favourite command usage.
+
+![ViewSequenceDiagram](images/FavouriteCommandSequenceDiagram.png)
+![ViewSequenceDiagram](images/favouriteSort.png)
+
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> The lifeline for `FavouriteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -324,6 +351,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -340,7 +368,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 This app helps real estate agents efficiently manage client relationships by centralizing contact details and logging
 interactions. Also, automated reminders and notes ensure that you never miss an opportunity to engage clients. It
 simplifies client management but focuses only on handling moderate-sized contact lists, without support for financial
@@ -351,30 +379,27 @@ transactions, property details, or large-scale CRM functions.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                 | So that I can…​                                                                                |
-|----------|--------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                                       | refer to instructions when I forget how to use the App                                         |
-| `* * *`  | user                                       | add a new person                                             |                                                                                                |
-| `* * *`  | user                                       | delete a person                                              | remove entries that I no longer need                                                           |
-| `* * *`  | user with many persons in the address book | find a person by name                                        | locate details of persons without having to go through the entire list                         |
-| `* * *`  | user with many persons in the address book | find people by category                                      | view a collection of persons in the same category without having to go through the entire list |
-| `* * *`  | salesperson                                | add a new contact with details (name, phone, email)          | store client information in the address book                                                   |
-| `* * *`  | salesperson                                | search for a contact by name                                 | quickly find the client without manually scrolling through the list                            |
-| `* * *`  | user                                       | add history log to a person                                  | keep a record of past activities for future references                                         |
-| `* *`    | real estate agent                          | add notes and remarks for a contact                          | remember snippets of information about my clients                                              |
-| `* *`    | real estate agent                          | attach properties to a contact                               | easily identify what properties a client is looking at                                         |
-| `* *`    | user                                       | be reminded of important events                              | minimize chance of missing these important events                                              |
-| `* *`    | salesperson                                | system to check the validity of a phone number               | avoid entering incorrect or incomplete data                                                    |
-| `* *`    | salesperson                                | view the history of interactions with a contact              | keep track of past communication (e.g., notes, calls, meetings)                                |
-| `* *`    | salesperson                                | mark certain contacts as favourites                          | easily access the most important clients at the top of the list                                |
-| `* *`    | salesperson                                | store incomplete information                                 | later update it with more details or correct outdated information                              |
-| `* *`    | user with many persons in the address book | sort persons by name                                         | locate a person easily                                                                         |
-| `* *`    | user with many persons in the address book | keep track of important contacts                             | locate an important person easily                                                              |
-| `* *`    | salesperson                                | sort contacts alphabetically by their name                   | easily browse through the address book                                                         |
-| `* *`    | salesperson                                | view all information about a contact on one page             | see all relevant details without clicking multiple times                                       |
-| `*`      | salesperson                                | receive a confirmation prompt before clearing all contacts   | avoid accidental deletion of the entire address book                                           |
-| `*`      | salesperson                                | receive a success notification after adding/editing/deleting | know the operation was completed correctly                                                     |
-| `*`      | user                                       | hide private contact details                                 | minimize chance of someone else seeing them by accident                                        |
+| Priority | As a …​                                           | I want to …​                                                 | So that I can…​                                                                                |
+|----------|---------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                                          | see usage instructions                                       | refer to instructions when I forget how to use the App                                         |
+| `* * *`  | salesperson                                       | add a new contact with details (name, phone, email)          | store client information in the address book                                                   |
+| `* * *`  | salesperson                                       | delete a contact                                             | remove people that I no longer interact with                                                   |
+| `* * *`  | salesperson                                       | search for a contact by name                                 | quickly find the client without manually scrolling through the list                            |
+| `* * *`  | salesperson with many clients in the address book | find a person by name                                        | locate details of persons without having to go through the entire list                         |
+| `* *`    | salesperson with many clients in the address book | find people by category                                      | view a collection of persons in the same category without having to go through the entire list |
+| `* *`    | salesperson                                       | add notes and remarks for a contact                          | remember snippets of information about my clients                                              |
+| `* *`    | real estate agent                                 | attach properties to a contact                               | easily identify what properties a client is looking at                                         |
+| `* *`    | salesperson                                       | be reminded of important events                              | minimize chance of missing these important events                                              |
+| `* *`    | salesperson                                       | system to check the validity of all inputs                   | avoid entering incorrect or incomplete data                                                    |
+| `* *`    | salesperson                                       | view the history of interactions with a contact              | keep track of past communication (e.g., notes, calls, meetings)                                |
+| `* *`    | salesperson                                       | mark certain contacts as favourites                          | easily access the most important clients at the top of the list                                |
+| `* *`    | salesperson                                       | store incomplete information                                 | later update it with more details or correct outdated information                              |
+| `* *`    | salesperson with many clients in the address book | keep track of important contacts                             | locate an important person easily                                                              |
+| `* *`    | salesperson with many clients in the address book | sort contacts alphabetically by their name                   | easily browse through the address book                                                         |
+| `* *`    | salesperson                                       | view all information about a contact on one page             | see all relevant details of a client without clicking multiple times                           |
+| `*`      | salesperson                                       | receive a confirmation prompt before clearing all contacts   | avoid accidental deletion of the entire address book                                           |
+| `*`      | salesperson                                       | receive a success notification after adding/editing/deleting | know the operation was completed correctly                                                     |
+| `*`      | user                                              | hide private contact details                                 | minimize chance of someone else seeing them by accident                                        |
 
 
 
@@ -455,23 +480,23 @@ otherwise)
 
 #### Extensions:
 - **2a.** The entered sorting parameter is invalid (e.g., `ascending` instead of `asc`).
-    - **2a1.** The system displays an error message: `Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
-    - **2a2.** The Salesperson corrects the sorting parameter and reissues the command.
-    - **Use case resumes from Step 2.**
+  - **2a1.** The system displays an error message: `Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
+  - **2a2.** The Salesperson corrects the sorting parameter and reissues the command.
+  - **Use case resumes from Step 2.**
 
 - **2b.** The Salesperson forgets to specify the sorting order.
-    - **2b1.** The system displays an error message: `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
-    - **2b2.** The Salesperson adds the correct sorting order and reissues the command.
-    - **Use case resumes from Step 2.**
+  - **2b1.** The system displays an error message: `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
+  - **2b2.** The Salesperson adds the correct sorting order and reissues the command.
+  - **Use case resumes from Step 2.**
 
 ---
 
 #### Variations:
 - **1a.** The Salesperson issues the `sort asc` command to sort the contacts in ascending order.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 - **1b.** The Salesperson issues the `sort desc` command to sort the contacts in descending order.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -489,9 +514,9 @@ otherwise)
 #### Main Success Scenario (MSS):
 1. The Salesperson issues the `log` command with a valid `index`, an optional date (`d/`) in the `yyyy-mm-dd` format, and descriptive interaction details (`l/`).
 2. AddressBook validates each component:
-  - **index**: Ensures the provided ID is a numeric identifier that corresponds to an existing contact in the AddressBook.
-  - **Date** (if included): Confirms that the date follows the required `yyyy-mm-dd` format and checks that it falls within the acceptable date range (not before the contact’s creation date or beyond the current date).
-  - **Interaction Details**: Verifies that the interaction details are provided and are non-empty, allowing the Salesperson to record free-form notes about the interaction, such as the nature, location, or purpose.
+- **index**: Ensures the provided ID is a numeric identifier that corresponds to an existing contact in the AddressBook.
+- **Date** (if included): Confirms that the date follows the required `yyyy-mm-dd` format and checks that it falls within the acceptable date range (not before the contact’s creation date or beyond the current date).
+- **Interaction Details**: Verifies that the interaction details are provided and are non-empty, allowing the Salesperson to record free-form notes about the interaction, such as the nature, location, or purpose.
 3. Upon successful validation, AddressBook logs the interaction details in the contact’s profile. If a date is provided, it is also stored with the log entry.
 4. AddressBook displays a success message confirming the operation:
    `
@@ -580,7 +605,7 @@ otherwise)
 #### **Main Success Scenario (MSS):**
 1. The Salesperson issues the `find` command with one or more keywords as input.
 2. The system performs a case-insensitive search of the contact list, matching contacts whose names contain any of the keywords provided (an OR search).
-   * The search matches only full words in the name field and ignores the order of keywords.
+  * The search matches only full words in the name field and ignores the order of keywords.
 3. The system displays a list of contacts that match at least one of the keywords.
 4. The system shows a success message: `<Number of persons matching the search> persons listed!`
 
@@ -616,8 +641,8 @@ otherwise)
 #### Main Success Scenario (MSS):
 1. The Salesperson issues the `remark` command with a valid contact index and an optional remark message in the format: `remark <index> r/<remark message>`.
 2. The system validates the contact index to ensure it:
-   - References an existing contact in the current list.
-   - Is a positive integer within the list's range.
+  - References an existing contact in the current list.
+  - Is a positive integer within the list's range.
 3. The system adds or updates the remark for the specified contact. If a remark already exists, it is replaced with the new message; otherwise, a new remark is added. If `r/` is absent, or followed by an empty string, the existing remark is removed.
 4. The system displays a success message: `Added remark to Person: <Person details>`, when non empty remark is added or changed, and `Removed remark from Person: <Person details>` otherwise.
 5. The contact’s profile is updated, and the new remark appears in the contact list view.
@@ -675,8 +700,8 @@ otherwise)
 #### Main Success Scenario (MSS):
 1. The Salesperson issues the `view` command with a valid contact index in the format `view <index>`.
 2. The system validates the index, ensuring:
-   - It references an existing contact in the current list.
-   - It is a positive integer within the list's range.
+  - It references an existing contact in the current list.
+  - It is a positive integer within the list's range.
 3. Upon successful validation, the system retrieves and displays all available details of the contact in a pop-out GUI window, ensuring a single, focused view for all information related to the contact.
 4. The system displays a success message: `Person details displayed`.
 
@@ -748,19 +773,19 @@ otherwise)
 
 #### Extensions:
 - **2a.** The `index` is of invalid format (not a positive integer).
-    - **2a1.** The system displays an error message: 
-      ```
-      Invalid command format!
-      favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-      Two usage formats are supported:
-      1. To mark a person as favourite: Specify the index of the person in the displayed list.
-         Parameters: INDEX (must be a positive integer)
-         Example: favourite 1
-      2. To sort all favourite persons to the top: Use the command without any parameters.
-         Example: favourite
-      ```
-    - **2a2.** The Salesperson corrects the `index` and reissues the command.
-    - **Use case resumes from Step 2.**
+  - **2a1.** The system displays an error message:
+    ```
+    Invalid command format!
+    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
+    Two usage formats are supported:
+    1. To mark a person as favourite: Specify the index of the person in the displayed list.
+       Parameters: INDEX (must be a positive integer)
+       Example: favourite 1
+    2. To sort all favourite persons to the top: Use the command without any parameters.
+       Example: favourite
+    ```
+  - **2a2.** The Salesperson corrects the `index` and reissues the command.
+  - **Use case resumes from Step 2.**
 
 - **2a.** The `index` is out of bound (larger than the last existing contact).
   - **2a1.** The system displays an error message: `The person index provided is out of bound`
@@ -768,9 +793,9 @@ otherwise)
   - **Use case resumes from Step 2.**
 
 - **3a.** The contact is already marked as a favourite.
-    - **3a1.** The system removes the contact from favourite.
-    - **3a2.** The system displays a message: `Remove <Name at index> from favourite.`
-    - **Use case ends.**
+  - **3a1.** The system removes the contact from favourite.
+  - **3a2.** The system displays a message: `Remove <Name at index> from favourite.`
+  - **Use case ends.**
 
 ---
 
@@ -781,10 +806,10 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson marks a new contact as favourite.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 - **1b.** The Salesperson marks an existing contact that was not previously marked as favourite.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -834,9 +859,9 @@ otherwise)
   - **Use case resumes from Step 2.**
 
 - **2c.** The birthday format is incorrect.
-    - **2c1.** The system displays an error message: `Invalid date format! Please use yyyy-mm-dd.`
-    - **2c2.** The Salesperson corrects the birthday format and reissues the command.
-    - **Use case resumes from Step 2.**
+  - **2c1.** The system displays an error message: `Invalid date format! Please use yyyy-mm-dd.`
+  - **2c2.** The Salesperson corrects the birthday format and reissues the command.
+  - **Use case resumes from Step 2.**
 
 ---
 
@@ -902,7 +927,7 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson clears all contacts after reviewing them using the `list` command.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -938,10 +963,10 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson exits the application without unsaved changes.
-    - **Use case proceeds normally from Step 3.**
+  - **Use case proceeds normally from Step 3.**
 
 - **1b.** The Salesperson exits the application with unsaved changes, and the system successfully saves the data.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -966,9 +991,9 @@ otherwise)
 
 #### Extensions:
 - **2a.** The system encounters an error while saving the data.
-    - **2a1.** The system displays an error message: `Unable to save data automatically. Please save manually.`
-    - **2a2.** The system retries saving automatically after the next operation or prompts the Salesperson to manually save the data.
-    - **Use case ends.**
+  - **2a1.** The system displays an error message: `Unable to save data automatically. Please save manually.`
+  - **2a2.** The system retries saving automatically after the next operation or prompts the Salesperson to manually save the data.
+  - **Use case ends.**
 
 ---
 
@@ -980,10 +1005,10 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson performs a valid operation that modifies the contact list.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 - **1b.** The system automatically saves data after each operation without explicit user interaction.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -1008,9 +1033,9 @@ otherwise)
 
 #### Extensions:
 - **3a.** The format of the data file is incorrect.
-    - **3a1.** The system displays an error message: `Error: Data file format is incorrect. Please adhere to the correct format.`
-    - **3a2.** The Salesperson corrects the format and restarts the application.
-    - **Use case resumes from Step 2.**
+  - **3a1.** The system displays an error message: `Error: Data file format is incorrect. Please adhere to the correct format.`
+  - **3a2.** The Salesperson corrects the format and restarts the application.
+  - **Use case resumes from Step 2.**
 
 ---
 
@@ -1022,10 +1047,10 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson successfully edits the data file and restarts the application to load the changes.
-    - **Use case proceeds normally from Step 3.**
+  - **Use case proceeds normally from Step 3.**
 
 - **1b.** The Salesperson makes an error in the format, and the system rejects the data file.
-    - **Use case proceeds with Extension 3a.**
+  - **Use case proceeds with Extension 3a.**
 
 ---
 
@@ -1064,49 +1089,49 @@ otherwise)
 
 #### Extensions:
 - **2a.** One or more required fields are missing.
-    - **2a1.** AddressBook displays an error message:
-      ```
-      Invalid command format!
-      add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
-      Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney
-      ```
-    - **Use case ends.**
+  - **2a1.** AddressBook displays an error message:
+    ```
+    Invalid command format!
+    add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
+    Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney
+    ```
+  - **Use case ends.**
 
 - **2b.** Input parameters are invalid (e.g., incorrect phone number format).
-    - **2b1.** Invalid `Name` parameter.
-      - **2b1.1** AddressBook displays an error message: `Names should only contain alphanumeric characters and spaces, and it should not be blank`
+  - **2b1.** Invalid `Name` parameter.
+    - **2b1.1** AddressBook displays an error message: `Names should only contain alphanumeric characters and spaces, and it should not be blank`
+    - **Use case ends.**
+
+    - **2b2.** Invalid `Phone Number` parameter.
+      - **2b2.1** AddressBook displays an error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
       - **Use case ends.**
-    
-      - **2b2.** Invalid `Phone Number` parameter.
-        - **2b2.1** AddressBook displays an error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
-        - **Use case ends.**
-    
-      - **2b4.** Invalid `Birthday` parameter.
-        - **2b4.1** AddressBook displays an error message: `Birthday should be a valid date of the format yyyy-mm-dd and be within reasonable limits.`
-        - **Use case ends.**
-    
-      - **2b5.** Invalid `Email` parameter.
-        - **2b5.1** AddressBook displays an error message: 
-          ```
-          Emails should be of the format local-part@domain and adhere to the following constraints:
-          1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-          2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-          The domain name must:
-              - end with a domain label at least 2 characters long
-              - have each domain label start and end with alphanumeric characters
-              - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-          ```
-        - **Use case ends.**
-    
-      - **2b6.** Invalid command syntax.
-        - **2b7.1** AddressBook displays an error message: `Invalid command format! 
-                                                            add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
-                                                            Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
-        - **Use case ends.**
-    
+
+    - **2b4.** Invalid `Birthday` parameter.
+      - **2b4.1** AddressBook displays an error message: `Birthday should be a valid date of the format yyyy-mm-dd and be within reasonable limits.`
+      - **Use case ends.**
+
+    - **2b5.** Invalid `Email` parameter.
+      - **2b5.1** AddressBook displays an error message:
+        ```
+        Emails should be of the format local-part@domain and adhere to the following constraints:
+        1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+        2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+        The domain name must:
+            - end with a domain label at least 2 characters long
+            - have each domain label start and end with alphanumeric characters
+            - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+        ```
+      - **Use case ends.**
+
+    - **2b6.** Invalid command syntax.
+      - **2b7.1** AddressBook displays an error message: `Invalid command format!
+        add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
+        Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
+      - **Use case ends.**
+
 - **2c.** The contact already exists in the AddressBook.
-    - **2c1.** AddressBook displays a warning message: `This person already exists in the address book`
-    - **Use case resumes at Step 3.**
+  - **2c1.** AddressBook displays a warning message: `This person already exists in the address book`
+  - **Use case resumes at Step 3.**
 
 ---
 
@@ -1124,13 +1149,13 @@ otherwise)
 #### Main Success Scenario (MSS):
 1. The User issues the `addProperty` command, specifying a valid index and complete property details, including address, town, type, size, number of bedrooms, number of bathrooms, and price.
 2. AddressBook validates each parameter for correctness:
-  - **Address** is checked to confirm it is non-empty and follows an acceptable alphanumeric and punctuation format.
-  - **Town** is validated as a non-empty, alphabetic string.
-  - **Property Type** is validated to ensure it is a valid type (e.g., "Condo", "HDB", "Landed").
-  - **Size** is validated as a positive number representing square meters.
-  - **Number of Bedrooms** is validated as a non-negative integer.
-  - **Number of Bathrooms** is validated as a non-negative integer.
-  - **Price** is validated as a positive number representing the asking price in the relevant currency.
+- **Address** is checked to confirm it is non-empty and follows an acceptable alphanumeric and punctuation format.
+- **Town** is validated as a non-empty, alphabetic string.
+- **Property Type** is validated to ensure it is a valid type (e.g., "Condo", "HDB", "Landed").
+- **Size** is validated as a positive number representing square meters.
+- **Number of Bedrooms** is validated as a non-negative integer.
+- **Number of Bathrooms** is validated as a non-negative integer.
+- **Price** is validated as a positive number representing the asking price in the relevant currency.
 3. AddressBook adds the validated property details to the contact at the specified index.
 4. AddressBook displays a success message and updates the contact's details with the new property listing.
 
@@ -1171,27 +1196,27 @@ otherwise)
 - The app should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 
 2. **Performance:**
-  - The app should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-  - The search and sort functions should return results within 2 seconds for the average number of contacts.
+- The app should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+- The search and sort functions should return results within 2 seconds for 50 contacts.
 
 3. **Efficiency**
-  - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
-    able to accomplish most of the tasks faster using commands than using the mouse.
+- A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+  able to accomplish most of the tasks faster using commands than using the mouse.
 
 4. **Usability:**
-  - The interface should be intuitive, requiring less than 15 minutes of training for a real estate agent to become proficient.
-  - The app should provide clear error messages for incorrect inputs (e.g., invalid phone numbers, dates) and guide the user in correcting them.
+- The interface should be intuitive, requiring less than 15 minutes of training for a real estate agent to become proficient.
+- The app should provide clear error messages for incorrect inputs (e.g., invalid phone numbers, dates) and guide the user in correcting them.
 
 5. **Reliability:**
-  - The app must have an uptime of at least 99.5% during business hours.
-  - Data, such as contacts and interaction logs, should be autosaved after each modification, ensuring no loss of data during usage.
+- The app must have an uptime of at least 99.5% during business hours.
+- Data, such as contacts and interaction logs, should be autosaved after each modification, ensuring no loss of data during usage.
 
 6. **Scalability:**
-  - While optimized for a moderate number of contacts (up to 1000), the app should still function with reduced performance for up to 2,000 contacts.
+- While optimized for a moderate number of contacts (up to 1000), the app should still function with reduced performance for up to 2,000 contacts.
 
 7. **Maintainability:**
-  - The codebase should follow standard code style and be modular, ensuring ease of updates and bug fixes.
-  - The app should allow easy export and import of contact data for backup or migration purposes.
+- The codebase should follow standard code style and be modular, ensuring ease of updates and bug fixes.
+- The app should allow easy export and import of contact data for backup or migration purposes.
 
 *{More to be added}*
 
@@ -1210,56 +1235,205 @@ otherwise)
 * **Favourite**: A contact marked as important for easy access.
 
 --------------------------------------------------------------------------------------------------------------------
+## **Planned Enhancements**
+### Editing and deleting log entries
+* Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
+### Editing and deleting of properties
+### More flexible date input formatting
+### Confirmation upon unusual input when adding properties
+* Currently RealConnect accepts any non-negative integer values for property attributes number of bathrooms and bedrooms. Additional confirmation dialog will be implemented in the future to prompt the user to confirm unusually large input like 2000 bathrooms, to mitigate the chance of user mistakes.
+### Allow closing App by clicking close button
+* RealConnect as a CLI App currently support closing the application by command `exit`, force closing by clicking the close button of the window while person detail window is up may cause the detail card window to not close properly. In the future our team will focus on the GUI interaction more to resolve this issue.
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: <Strong>Note:</Strong> These instructions only provide a starting point for testers to work on;
-testers are expected to do more exploratory testing.
-
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> 
+These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
-1. Initial launch
+1. **Initial Launch**
 
-    1. Download the jar file and copy into an empty folder
+  1. Download the jar file and copy it into an empty folder.
+  2. Run `java -jar RealConnect.jar` in the same directory.  
+     **Expected:** The GUI displays with a set of sample contacts. The window size may not be optimal.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+2. **Saving Window Preferences**
 
-1. Saving window preferences
+  1. Resize the window to an optimal size. Move the window to a different location and close it.
+  2. Re-launch the app by running the jar file again.  
+     **Expected:** The window opens with the last used size and location.
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Viewing Help
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1. **Viewing Help Information**
 
-1. _{ more test cases …​ }_
+  1. Test case: `help`  
+     **Expected:** Displays help information with a guide to commands
 
-### Deleting a person
+### Adding a Person
 
-1. Deleting a person while all persons are being shown
+1. **Adding Persons with Various Details**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+  1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
+     **Expected:** John Doe is added to the contact list with the specified details.
 
-    2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+  2. Test case: `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/follow-up`  
+     **Expected:** Alice Tan is added with multiple tags and a remark.
 
-    3. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+  3. Invalid Input Cases: Test with missing mandatory fields  
+     **Expected:** Error message is displayed indicating missing information.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+### Listing Contacts
 
-1. _{ more test cases …​ }_
+1. **Listing All Persons**
 
-### Saving data
+  1. Execute `list`.  
+     **Expected:** Displays all persons stored in the address book.
 
-1. Dealing with missing/corrupted data files
+### Sorting Contacts
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. **Sorting the Contact List**
 
-1. _{ more test cases …​ }_
+  1. Prerequisites: Multiple contacts with various names.
+  2. Test Case: `sort asc`  
+     **Expected:** Contacts are sorted in alphabetical order (A-Z) by name.
+
+  3. Test Case: `sort desc`  
+     **Expected:** Contacts are sorted in reverse alphabetical order (Z-A).
+
+### Editing a Person
+
+1. **Editing Details of a Person**
+
+  1. Prerequisites: Have a contact list with multiple entries.
+  2. Test case: `edit 1 p/91234567 e/johndoe@example.com`  
+     **Expected:** Person at index 1's phone number and email are updated to new details.
+
+  3. Test case: `edit 2 n/Betsy Crowe t/`  
+     **Expected:** Name of the person at index 2 changes, and all tags are cleared.
+
+### Deleting a Person
+
+1. **Deleting a specific Person**
+
+  1. Prerequisites: List has multiple persons using the `list` command.
+  2. Test Case: `delete 1`  
+     **Expected:** First contact is deleted from the list. The status message shows details of the deletion.
+
+  3. Test Case: Enter invalid indices (e.g., `delete 0` or `delete x` where x exceeds list size)  
+     **Expected:** No person is deleted. Error message shown.
+
+### Sorting Contacts
+
+1. **Sorting the Contact List**
+
+  1. Prerequisites: Multiple contacts understood by their names.
+  2. Test Case: `sort asc`  
+     **Expected:** Contacts are sorted in ascending order (A-Z) by name.
+
+  3. Test Case: `sort desc`  
+     **Expected:** Contacts are sorted in descending order (Z-A).
+
+### Remarking a Person
+
+1. **Adding or Editing Remarks**
+
+  1. Test case: `remark 1 r/remark message`  
+     **Expected:** Adds or updates remark to say 'remark message' for the 1st person.
+
+### Single Page Person View
+
+1. **Viewing a Person's Details**
+
+  1. Test case: `view 1`  
+     **Expected:** Displays all information about the person at index 1 in a new window.
+
+### Adding a Property
+
+1. **Adding Property to a Contact**
+
+  1. Prerequisites: Have contacts in the list.
+  2. Test case: `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000`  
+     **Expected:** Adds a property listing to the person at index 1.
+
+### Adding History to a Person
+
+1. **Adding History Entries**
+
+  1. Prerequisites: Contact list exists with entries.
+  2. Test case: `log 1 d/2024-08-08 l/meet up`  
+     **Expected:** Adds a history entry about a meet up on 2024-08-08 for the first person.
+
+### Closing Single Page Person View
+
+1. **Closing the Person View Window**
+
+  1. Test case: `close`  
+     **Expected:** Closes the currently open person view window.
+
+### Locating Persons by Name
+
+1. **Finding Contacts**
+
+  1. Test case: `find John`  
+     **Expected:** Lists contacts whose names include 'John'.
+
+### Managing Favourites
+
+1. **Marking and Unmarking as Favourite**
+
+  1. Prerequisites: Have a contact list with multiple entries.
+  2. Test case: `favourite 2`  
+     **Expected:** Toggles the favourite status of the contact at index 2. If the contact was not a favourite, it is added to favourites, and vice versa.
+
+  3. Test Case: `favourite`  
+     **Expected:** Lists all contacts marked as favourites at the front of the contact list.
+
+### Deleting a Person
+
+1. **Deleting a Contact from the List**
+
+  1. Prerequisites: Contact list with several entries.
+  2. Test case: `delete 2`  
+     **Expected:** Deletes the contact at index 2 from the address book. Confirmation message is shown.
+
+  3. Invalid indices: Enter commands like `delete 0` or `delete 1000`  
+     **Expected:** Error message indicating invalid index.
+
+### Clearing All Entries
+
+1. **Clearing Contacts in the Address Book**
+
+  1. Test case: `clear`  
+     **Expected:** All entries are removed from the address book. Confirmation message is displayed.
+
+### Exiting Application
+
+1. **Closing the Application Safely**
+
+  1. Test case: `exit`  
+     **Expected:** Closes the application orderly. Users are advised to exit via this command to ensure all views are properly shut down.
+
+### Exploratory Testing
+
+- **Extreme Input Values:** Try inputs with long strings or special characters.
+  **Expected:** Proper validation errors without app crashes.
+- **Calling Commands in Succession:** Rapidly execute different commands.  
+  **Expected:** The app should handle sequential commands without becoming unresponsive.
+
+### Saving Data
+
+1. Perform various `add`/`edit`/`delete` operations.  
+   **Expected:** Data should save automatically and persist after closing and reopening the app.
+
+2. Simulating a Missing or Corrupted Data File:
+  - Remove or corrupt the data file in `/data/addressbook.json`
+  - Re-launch the app.  
+    **Expected:** The app initializes with default data, showing error or warning messages about missing or corrupted data.

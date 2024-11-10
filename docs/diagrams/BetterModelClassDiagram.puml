@@ -18,4 +18,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Birthday
+Person *--> History
+Person *--> Remark
+Person *--> DateOfCreation
+Person *--> PropertyList
+
 @enduml

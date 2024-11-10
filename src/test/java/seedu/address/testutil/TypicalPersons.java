@@ -92,6 +92,19 @@ public class TypicalPersons {
             .withPropertyList(BENSON_PROPERTY_LIST) // Using static property list
             .build();
 
+    public static final Person NO_BIRTHDAY_BENSON = new PersonBuilder().withName("Benson Meier")
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com").withPhone("98765432")
+            .withTags("owesMoney", "friends")
+            .withRemark("")
+            .withBirthday("")
+            .withDateOfCreation("2022-09-19")
+            .withHistory(LocalDate.of(2022, 9, 19), "Created")
+            .withHistory(LocalDate.of(2024, 9, 25), "Completed project A")
+            .withHistory(LocalDate.of(2024, 10, 1), "Attended team meeting")
+            .withPropertyList(BENSON_PROPERTY_LIST) // Using static property list
+            .build();
+
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("Wall Street")
             .withRemark("")
