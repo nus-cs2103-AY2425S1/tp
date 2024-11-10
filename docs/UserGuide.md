@@ -5,8 +5,33 @@ title: User Guide
 
 Supply Central is a **desktop app for managing suppliers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SupplyCentral can get your supplier management tasks done faster than traditional GUI apps. This app aims to resolve the pain points of small business owners by helping them with information handling. This app is based on the Address Book 3 (AB3) project.
 
-* Table of Contents
-{:toc}
+## Table of Contents
+<!-- TOC -->
+  * [Table of Contents](#table-of-contents)
+  * [Quick start](#quick-start)
+  * [Features](#features)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a supplier: `add`](#adding-a-supplier-add)
+      * [Address format](#address-format)
+    * [Listing all suppliers : `list`](#listing-all-suppliers--list)
+    * [Editing a supplier : `edit`](#editing-a-supplier--edit)
+    * [Locating suppliers by name: `find`](#locating-suppliers-by-name-find)
+    * [Deleting a supplier : `delete`](#deleting-a-supplier--delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Adding of Goods : `addgoods`](#adding-of-goods--addgoods)
+    * [Deletion of Goods : `deletegoods`](#deletion-of-goods--deletegoods)
+    * [View statistics for Goods : `viewgoods`](#view-statistics-for-goods--viewgoods)
+    * [Export Goods Data to CSV: `export`](#export-goods-data-to-csv-export)
+    * [Saving the data](#saving-the-data)
+    * [Editing the Supplier data file](#editing-the-supplier-data-file)
+    * [Editing the Goods data file](#editing-the-goods-data-file)
+    * [Resizing UI elements](#resizing-ui-elements)
+    * [Delivery status](#delivery-status)
+  * [FAQ](#faq)
+  * [Known issues](#known-issues)
+  * [Command summary](#command-summary)
+<!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
 
