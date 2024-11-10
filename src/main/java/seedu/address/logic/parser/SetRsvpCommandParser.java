@@ -1,9 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.commands.SetRsvpCommand.MESSAGE_INVALID_ACTION;
-import static seedu.address.logic.commands.SetRsvpCommand.MESSAGE_USAGE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetRsvpCommand;
@@ -28,15 +25,7 @@ public class SetRsvpCommandParser implements Parser<SetRsvpCommand> {
             // Return the new command
             return new SetRsvpCommand(index, rsvpInput);
         } catch (ParseException e) {
-            if (e.getMessage().equals(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
-                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            } else {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetRsvpCommand.MESSAGE_USAGE), e);
-            }
-        } catch (NumberFormatException e) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_ACTION), e);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetRsvpCommand.MESSAGE_USAGE), e);
         }
     }
 
@@ -51,11 +40,7 @@ public class SetRsvpCommandParser implements Parser<SetRsvpCommand> {
             }
             return index;
         } catch (ParseException e) {
-            if (e.getMessage().equals(ParserUtil.MESSAGE_INVALID_INDEX)) {
-                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), e);
-            }
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetRsvpCommand.MESSAGE_USAGE), e);
         }
     }
 

@@ -195,8 +195,7 @@ public class TagCommandTest {
         tags.add(BRIDES_SIDE);
         TagCommand tagCommand = new TagCommand(indexList, tags);
 
-        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_INVALID_INDEX
-                + model.getFilteredPersonList().size() + ")");
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
@@ -268,8 +267,7 @@ public class TagCommandTest {
         tags.add(BRIDES_SIDE);
         TagCommand tagCommand = new TagCommand(indexList, tags);
 
-        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_INVALID_INDEX
-                + model.getFilteredPersonList().size() + ")");
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         UndoCommand undoCommand = new UndoCommand();
         String expectedUndoMessage = UndoCommand.MESSAGE_NO_PREVIOUS_COMMAND;

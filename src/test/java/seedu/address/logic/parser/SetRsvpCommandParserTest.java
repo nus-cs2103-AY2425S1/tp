@@ -18,7 +18,7 @@ public class SetRsvpCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse("-1 s/1"));
 
         // Invalid status (non-numeric)
-        assertThrows(ParseException.class, () -> parser.parse("1 s/abc"));
+        assertThrows(NumberFormatException.class, () -> parser.parse("1 s/abc"));
 
         // Missing status prefix
         assertThrows(ParseException.class, () -> parser.parse("1 1"));
