@@ -134,7 +134,7 @@ Alerts you to potential issues or problems that may arise.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Help command supports two input formats which allows for more flexibility when
 you want to seek help:
@@ -189,13 +189,13 @@ Examples:
   ![result for adding John Doe](images/addJohnDoeResult.png)
 * `add n/Jane Doe p/81234567 e/janed@example.com r/CS1101S-TA r/CS2040S`. Jane is a CS1101S tutor and a CS2040S student.
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in the address book.
 
@@ -264,10 +264,17 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [d/DESCRIP
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 * Similarly, you can remove a person's description by typing `d/` without specifying any description after it.
+* After editing, the app will go back to the main window and display the updated person list.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+<box type="caution" seamless>
+
+**Caution:**
+If you input multiple indices separated by spaces, e.g.`edit 1 2 n/...`, the app will treat `1 2` as a single index which is invalid.
+</box>
 
 ### Locating persons: `find`
 
@@ -358,7 +365,7 @@ Examples:
 * `list` followed by `delete 1 2 3` deletes the 1st, 2nd and 3rd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all contacts from the address book.
 
@@ -397,7 +404,7 @@ Examples:
 * If you undo a change to the contact data, but end up thinking that it may be
 better to keep it, you can input `redo` after undo the change to restore it back.
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -447,9 +454,15 @@ Some invalid phone numbers include `+6 5 8 1 2 3 4 5 6 7`, or `8123p4567`.
 
 The `PHONE_NUMBER` field (specified in the `add` or `edit` commands) is defined as a string where, if split by spaces, at least one of the resulting tokens is a valid phone number.
 
-Some valid `PHONE_NUMBER` values include `81234567`, `81234567 (handphone)`, or `81234567 (hp) 91234567 (emergency)`.
+Some valid `PHONE_NUMBER` values include `81234567`, `81234567 (handphone)`, or `81234567 (office 1) 91234567 (office 2)`.
 
 This allows you to add extra annotations if you wish to.
+
+<box type="caution" seamless>
+
+**Caution:**
+To allow more flexibility in the input format, we have to sacrifice some validation checks. As such, it is important to ensure that the phone number you input is correct.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
