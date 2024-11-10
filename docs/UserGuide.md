@@ -88,6 +88,40 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 
 ## **Contact Types**
 
+## Contact Types
+- **Contact**: Any person or entity stored in BakeBuddy's database, including customers, suppliers, and other business contacts
+- **Customer**: A person or business who purchases pastries from your bakery
+- **Supplier**: A person or business who provides ingredients or materials to your bakery
+
+## Order-Related Terms
+- **Customer Order**: A record of pastries ordered by a customer, including quantity, delivery details, and status
+- **Supply Order**: A record of ingredients ordered from a supplier, including quantity and status
+- **Order Status**:
+  - *Pending*: Order that has not been fulfilled yet
+  - *Done*: Order that has been completed and delivered/received
+
+## Product Management
+- **Pastry Catalogue**: Complete list of pastries your bakery offers, including prices and required ingredients
+- **Ingredient Catalogue**: Complete list of ingredients used in your bakery, including costs and supplier information
+- **Product ID**: Unique identifier assigned to each pastry or ingredient in the catalogues
+
+## UI Elements
+- **Index**: The number shown beside each item in a list, used for referencing items in commands
+
+## Cost Management
+- **COST**:
+  - For ingredients: Purchase price from supplier
+  - For pastries: Selling price to customer
+
+## Contact Management
+- **Filter**: Process of showing only contacts with specific tags
+- **Tag**: Label that can be applied to contacts for easy categorization (e.g., "VIP", "Wholesale", "Regular")
+- **Remark**: Additional notes about a contact 
+
+## Order Processing
+- **Mark/Unmark**: Commands to toggle the completion status of an order
+- **Clear**: Command to remove all data from the system
+
 <div markdown="block" class="alert alert-info">
 - **Contact**: Any person or entity stored in BakeBuddy's database, including customers, suppliers, and other business contacts
 - **Customer**: A person or business who purchases pastries from your bakery
