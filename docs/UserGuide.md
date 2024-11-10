@@ -22,11 +22,11 @@ ContactMate is a **desktop app for managing clients (Singaporeans and Permanent 
          2. Type `Terminal` and press `Enter`.
    1. In the terminal, type `java --version` and press `Enter`.
    2. If you have Java `17` or above installed, you should see a message containing something like this, (`openjdk XX.0.12 2024-07-16 LTS`), where `XX` should be `17` or above.
-    3. If you do not have Java `17` or above installed, proceed to Step 2, otherwise, skip to Step 3.
-2. Install Java `17` using the following steps.
-   1. Go to [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
-   2. Download the appropriate installer for your operating system.
-   3. Run the installer and follow the instructions to install Java.
+    3. If you do not have Java `17` or above installed, proceed to Step 2, otherwise, skip to Step 3. 
+   4. **Important Note**: for Mac Users, the specific **Java 17 JDK+FX Azul distribution** must be installed. If you do not have it installed, or are unsure whether or not you have it installed, proceed to Step 2.
+2. Install Java `17` by following the guide below.
+   1. For [Windows Users](https://se-education.org/guides/tutorials/javaInstallationWindows.html).
+   2. For [Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-3/tp/releases).
    1. You can find the `.jar` file under the Assets section of the latest release.
    1. Click on the file `contactmate.jar` to download it.
