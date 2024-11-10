@@ -355,14 +355,15 @@ Parameters:
 - `pro/PRODUCT`: `PRODUCT` is the product associated with the delivery. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
     - One space is counted as one character.
     - `PRODUCT` cannot be made up of only spaces.
-- `q/QUANTITY`: `QUANTITY` is the amount of product to be delivered with units. It must be a number greater than 0 followed by a space, and a unit and must not be blank.
+- `q/QUANTITY`: `QUANTITY` is the amount of product to be delivered with units. It must be a number greater than 0 followed by a space, and a unit, and must not be blank.
     - `QUANTITY` cannot have decimal places.
     - `QUANTITY` units are case sensitive.
     - Accepted units for `QUANTITY` are `kg`, `g`, `L`, `mL`, `units`. 
 - `c/COST`: `COST` is the total cost for the delivery. It must be a number greater than 0 with up to 2 decimal places allowed, and cannot be blank.
 
 **Tips:** 
-- Day and month of DELIVERY_DATE_TIME must be in double digits!
+- Day, month, hour and minute of DELIVERY_DATE_TIME must be in double digits!
+  - example: 03-03-2024 02:01
 
 </box>
 
@@ -373,8 +374,8 @@ Parameters:
 - At least one space is needed between `-d` and the first parameter.
 - At least one space is needed between parameters.
 - A warning will be given if the user tries to add a duplicate delivery.
-- A delivery is considered duplicate and will not be added again if it has the same `DELIVERY_DATE_TIME`, `SUPPLIER`, `PRODUCT`, `QUANTITY`, `COST` and `STATUS` as an existing delivery.
-    - Comparison between different `PRODUCT`is case-sensitive.
+  - A delivery is considered duplicate and will not be added again if it has the same `DELIVERY_DATE_TIME`, `SUPPLIER`, `PRODUCT`, `QUANTITY`, `COST` and `STATUS` as an existing delivery.
+      - Comparison between different `PRODUCT`is case-sensitive.
 - A delivery has a default `STATUS` of `PENDING`.
 - A delivery cannot be added if the supplier of the chosen `SUPPLIER_INDEX` has status `INACTIVE`.
 
@@ -385,8 +386,8 @@ Examples:
 - `add -d on/19-12-2022 08:00 s/2 pro/rice q/50 kg c/50.20 `
 
 Expected output:
-- Delivery details is shown and paired to supplier at index 1, assuming there is at least one supplier. Otherwise, an error message will be shown.
-- Delivery details is shown and paired to supplier at index 2, assuming there is at least two supplier. Otherwise, an error message will be shown.
+- Delivery details is shown and paired to supplier at index 1, assuming there is at least one supplier displayed. Otherwise, an error message will be shown.
+- Delivery details is shown and paired to supplier at index 2, assuming there is at least two suppliers displayed. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
@@ -529,7 +530,7 @@ To sort deliveries by cost in ascending order:
 
 ### Upcoming deliveries: `upcoming`
 
-View pending deliveries in VendorVault. You can choose to view all pending deliveries within a specified date range or
+Shows a list of pending deliveries in VendorVault based on delivery date and time. You can choose to view all pending deliveries within a specified date range or
 before or after a given date.
 
 Format: `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`
@@ -542,7 +543,7 @@ Parameters:
 - `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` before this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
 
 **Tip:**
-- You can provide both parameters!
+- You can provide both parameters or just one parameter!
 
 </box>
 
