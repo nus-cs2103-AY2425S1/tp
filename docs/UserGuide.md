@@ -179,7 +179,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 * `INGREDIENTS_SUPPLIED`: List of ingredients (for suppliers)
 * `COST`: Numeric value
 * `PRODUCTID`: Product identification numbers
-* `TAG`: Category or label
+* `TAG`: Category or label (Only a single word can be used as a single tag name)
 * `REMARK`: Additional comments
 
 **Format Notes:**
