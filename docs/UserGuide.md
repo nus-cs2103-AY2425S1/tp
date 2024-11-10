@@ -125,7 +125,7 @@
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/guest`, `t/guest t/photographer` etc.
 
-* Commands in WedLinker uses prefix to specify the parameters, the prefixes are stated as such:
+* Commands in WedLinker uses prefixes to specify the parameters. The prefixes are stated as such:
   * n/ Name
   * a/ Address
   * p/ Phone Number
@@ -133,9 +133,10 @@
   * t/ Tag
   * w/ Wedding
   * tk/ Task
+  * d/ Date
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
   </details>
 </box>
@@ -147,7 +148,11 @@
 <summary><strong>Caution:</strong></summary>
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Similarly, extraneous prefixes (e.g. n/ or tk/) for commands that do not take in those prefixes will be processed as part of other inputs.<br>
+  * e.g. when [adding a person](#adding-a-person-add), you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+  `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </details>
@@ -281,8 +286,10 @@ Examples:
 <details>
 <summary><strong>Tip:</strong></summary>
 
-- A person can have any number of tags (including 0) <br><br>
-- A person's name can be saved with special characters, which can be used to represent different naming conventions:
+- Adding a person with tags or weddings that do not exist in Wedlinker will create all the tags and weddings. Created weddings will have the person automatically assigned to their guest lists.
+- A person can have any number of tags or weddings  (including 0) <br><br>
+- A person's name must contain only alphanumeric characters
+- A person's name can be saved with certain special characters, which can be used to represent different naming conventions:
     - **Hyphen (-)**: Used for double-barrelled names, such as "Mary Doe-Smith".
     - **Slash (/)**: Used to store nicknames or alternative names, like "John/Jonny Doe".
     - **Period (.)**: Used to shorten names, such as "John D. Doe" or "Jane S.".
@@ -300,6 +307,10 @@ Examples:
 - People with single or multiple spaces in their names are considered distinct and treated as separate people. For example:
     - <span class="preserve-whitespace">John Doe vs. John  Doe</span>
     - <span class="preserve-whitespace">TK/Tyler Kennedy vs. TK / Tyler - Kennedy</span>
+- Extraneous prefixes in the add command will be processed as part of other inputs.<br>
+  - e.g. when adding a person, you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+    `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
+
 </details>
 </box>
 
