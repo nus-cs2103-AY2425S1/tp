@@ -208,6 +208,7 @@ as a placeholder claim for now.
 - Claim ID is always capitalised in the system so b1234 is the considered the same as B1234.
 - Do not add alphabets or any other special characters including but not limited to "$", "£" and "€" in front or behind
 the claim amount.
+- the prefixes like `iid`, `cid` and `ca` are case-sensitive.
 
 <box type="info">
     <span circle slot="icon" class="text-danger"><md>:book:</md></span>
