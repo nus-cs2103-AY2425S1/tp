@@ -377,7 +377,7 @@ Examples:
 Need to know who you have a schedule with this week?
 Use our `search` feature, which searches for a list of persons within a given range of schedule.
 
-Format: `search [b/START_DATETIME] [en/END_DATETIME]`
+Format: `search <b/START_DATETIME en/END_DATETIME>`
 
 <div markdown="block" class="alert alert-info">
 
@@ -547,7 +547,7 @@ Please refer to the [Arguments Constraints Summary](#argument-constraints-summar
 | **[Sort](#sort-persons-by-name--sort)**                 | `sort {n/[ORDER] sch/[ORDER]}`<br> e.g., `sort n/asc`                                                                                                                                                                                                                                       |
 | **[Filter](#filter-persons-by-tag--filter)**            | `filter t/TAG [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                                                                                                                                       |
 | **[Find](#locating-persons-by-name--find)**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                  |
-| **[Search](#search-persons-by-schedule-range--search)** | `search [b/START_DATETIME] [en/END_DATETIME]`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                     |
+| **[Search](#search-persons-by-schedule-range--search)** | `search <b/START_DATETIME en/END_DATETIME>`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                       |
 | **[Help](#viewing-help--help)**                         | `help`                                                                                                                                                                                                                                                                                      |
 | **[Restore](#restoring-a-deleted-person--restore)**     | `restore`                                                                                                                                                                                                                                                                                   |
 | **[Backup](#backing-up-save-file--backup)**             | `backup`                                                                                                                                                                                                                                                                                    |
