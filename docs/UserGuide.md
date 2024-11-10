@@ -151,7 +151,7 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 
 | Field            | Constraints                                                             | Example                                                                                                  |
 |------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **NAME**         | Any number of alphanumeric characters and spaces, no special characters | `Dominic`, `Stanley`, `Adi`                                                                              |
+| **NAME**         | Any number of alphanumeric characters and spaces, no special characters | `Dominic`, `Stanley`, `Adi`, `83452124212`                                                                              |
 | **PHONE_NUMBER** | Numeric                                                                 | `98989899`, `81092819`                                                                                   |
 | **EMAIL**        | Valid email format                                                      | `testing@gmail.com`,`example@gmail.com`                                                                  |
 | **ADDRESS**      | Valid address, should not be blank                                      | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
@@ -163,13 +163,12 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 | **Tags**         | Optional and can be multiple                                            | `Must have`                                                                                              |
 
 
-- <strong>[Caution]</strong>: The required information except tags cannot be empty.
 
 - <strong>[Note]</strong>: The **Name** field accepts a large number of characters (over 50), but excessively long names may be truncated in the display for better readability. Names must only contain alphanumeric characters and spaces and cannot be blank.
 
-- <strong>[Note]</strong>: Tags must only contain alphanumeric characters (letters and numbers) and cannot include spaces or special characters (e.g., `!`, `#`, `&`). Each tag should be a single, continuous word. For example, `MustHave` is valid, but `Must Have` and `Must-Have` are not.
+- <strong>[NOTE]</strong>: TalentSG allows you to add numerical values as there are laws around the world which allow people to have numerical values as names. You can read more about this from this [article](https://www.thebump.com/a/baby-name-rules). 
 
-- <strong>[Caution]</strong>: Extremely long names may be truncated in both the **Applicants list** and **Overview Panel** due to space constraints. If you need to view the full name, you may access the data file directly. To ensure readability, it is recommended to keep names within a reasonable length.
+- <strong>[Note]</strong>: Tags must only contain alphanumeric characters (letters and numbers) and cannot include spaces or special characters (e.g., `!`, `#`, `&`). Each tag should be a single, continuous word. For example, `MustHave` is valid, but `Must Have` and `Must-Have` are not.
 
 - <strong>[Note]</strong>: The phone number field accepts only numeric characters (0-9) and does not support spaces, country codes, or other symbols. For example, `92388172` is valid, but `+1 8271 8127 8172` and `9238 8172` are not accepted. Future updates may consider additional formats to support international phone numbers.
 
@@ -181,6 +180,10 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 > - Use `Objective C` instead of `Objective-C`.
 > - Use `John s o Kaarthik` instead of `John s/o Kaarthik`.
 > - Use `Apartment No 3` instead of `Apartment #3`.
+
+- <strong>[Caution]</strong>: Extremely long names may be truncated in both the **Applicants list** and **Overview Panel** due to space constraints. If you need to view the full name, you may access the data file directly. To ensure readability, it is recommended to keep names within a reasonable length.
+
+- <strong>[Caution]</strong>: The required information except tags cannot be empty.
 
 
 ---
@@ -212,13 +215,12 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex
 
 #### Image Example
 
-Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends `
+Command: `add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends`
 
 
 **After the add command ran:**
 
 <img src="images/afteradd.png" alt="afteradd" width="800">
-
 
 <strong>[Caution]</strong>: You cannot add the same candidate twice. (same name and phone)
 
@@ -577,6 +579,14 @@ Below is an example of the Report Bug pop-up window that will appear when you ac
 ### Archiving Data Files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Known Issues and Bugs
+
+1. Result/Feedback display uses a scroll bar. Few users reported feedback information shown is not wrapped but it can be easily tackled by using the scroll bar.
+2. 
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
