@@ -11,8 +11,8 @@ Tuteez enables you to effortlessly organise your students' details in one centra
 
 Optimized for efficiency, Tuteez combines the speed of a Command Line Interface (CLI) with the user-friendly benefits of a Graphical User Interface (GUI), giving you the best of both worlds.
 
-We understand that managing student contacts can feel overwhelming, especially with countless details to remember. Worry no more, Tuteez is here to help you with that!
-Start focusing more on what truly matters – your teaching, and less on the administrative work with Tuteez.
+We understand that managing student contacts can feel overwhelming, especially with countless details to remember. Worry no more, because Tuteez is here to help you with that!
+With Tuteez, you can start focusing more on what truly matters – your teaching, and less on the administrative work.
 
 This comprehensive guide will walk you through the various features of Tuteez. Let’s dive in and explore how Tuteez can simplify your tutoring experience!
 
@@ -26,12 +26,14 @@ This comprehensive guide will walk you through the various features of Tuteez. L
    * [UI](#ui)
       + [Left panel](#left-panel)
       + [Right panel](#right-panel)
-   * [Beginner's Tutorial](#beginners-tutorial-for-tuteez)
+      + [Command Box](#command-box)
+      + [Results Box](#results-box)
+   * [Beginner's Tutorial](#beginner-s-tutorial-for-tuteez)
       + [Before You Begin](#before-you-begin)
       + [Exploring the Application](#exploring-the-application)
       + [Starting with a Clean Slate](#starting-with-a-clean-slate)
       + [Adding Your First Student](#adding-your-first-student)
-      + [Adding a Lesson to your Student's details](#adding-a-lesson-to-your-students-details)
+      + [Adding a Lesson to your Student's details](#adding-a-lesson-to-your-student-s-details)
       + [Editing Student Details](#editing-student-details)
       + [Deleting a Student](#deleting-a-student)
       + [Wrapping Up](#wrapping-up)
@@ -44,10 +46,10 @@ This comprehensive guide will walk you through the various features of Tuteez. L
       + [Deleting a Remark: `deleteremark` or `delrmk`](#deleting-a-remark-deleteremark-or-delrmk)
       + [Adding Lessons: `addlesson` or `addlsn`](#adding-lessons-addlesson-or-addlsn)
       + [Deleting Lessons: `deletelesson` or `dellsn`](#deleting-lessons-deletelesson-or-dellsn)
-      + [Locating students by name: `find`](#locating-students-by-name-find)
+      + [Locating students by name: `find`](#locating-students-by-name-address-tags-or-lessons-find)
       + [Deleting a student : `delete`](#deleting-a-student-delete)
       + [Displaying Student Information: `display`](#displaying-student-information-display)
-      + [Navigating command history: ↑ or ↓](#navigating-command-history--or-)
+      + [Navigating command history: ↑ or ↓](#navigating-command-history-or)
       + [Clearing all entries : `clear`](#clearing-all-entries-clear)
       + [Exiting the program : `exit`](#exiting-the-program-exit)
    * [Things you should definitely know 🤔](#things-you-should-definitely-know-)
@@ -69,7 +71,7 @@ This comprehensive guide will walk you through the various features of Tuteez. L
 Here is a quick look at the various sections in this user guide:
 - **[Quick start](#quick-start)**: A fast-track section to get Tuteez up and running in no time. It includes setup instructions and a list of essential commands you can try out immediately.
 - **[UI](#ui)**: A quick overview of the user interface of Tuteez, with explanations of the left and right panels.
-- **[Beginner's Tutorial](#beginners-tutorial-for-tuteez)**: A step-by-step guide for new users to get started with Tuteez. It includes instructions on adding students, editing details, scheduling lessons, and deleting students.
+- **[Beginner's Tutorial](#beginner-s-tutorial-for-tuteez)**: A step-by-step guide for new users to get started with Tuteez. It includes instructions on adding students, editing details, scheduling lessons, and deleting students.
 - **[Features](#features)**: This section covers all the key commands in Tuteez, providing detailed descriptions of each function. You’ll learn how to add students, manage lessons, add remarks, and more.
 - **[Things you should definitely know](#things-you-should-definitely-know-)**: Important information about constraints and limitations of the current version of Tuteez.
 - **[Future Features](#future-features)**: A sneak peek into the exciting features that will be added to Tuteez in future updates.
@@ -83,9 +85,11 @@ Here is a quick look at the various sections in this user guide:
 
 ### Prerequisites
 
-1. Ensure you have Java `17` or above installed in your computer. 
-   To check if you have Java `17` installed, open up a command terminal in your computer, type `java -version` and press <kbd>Enter</kbd>.
-   If you do not have Java `17` installed, you can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+- Ensure you have Java `17` or above installed in your computer.
+  
+  To check if you have Java `17` installed, open up a command terminal in your computer, type `java -version` and press <kbd>Enter</kbd>.
+
+  If you do not have Java `17` installed, you can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 ### Setting up
 
@@ -114,7 +118,7 @@ Here is a quick look at the various sections in this user guide:
 
    * `exit` : Exits the app.
 
-6. You may refer to the [Beginner's Tutorial](#beginners-tutorial-for-tuteez) to get a hands-on walkthrough of the application, or refer to the [Features](#features) section below for details of each command.
+6. You may refer to the [Beginner's Tutorial](#beginner-s-tutorial-for-tuteez) to get a hands-on walkthrough of the application, or refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -256,8 +260,6 @@ If you are confused while using the app any point in time, you may use this comm
 
 Format: `help`
 
-Example Usage: `help`
-
 
 ### Adding a student: `add`
 
@@ -285,8 +287,6 @@ Examples:
 This command will help you view the list of all your students in Tuteez on the left panel.
 
 Format: `list`
-
-Example usage: `list`
 
 ### Editing a student : `edit`
 
@@ -345,6 +345,7 @@ Format: `addlesson INDEX l/LESSON [l/LESSON]…​`
 * You can add multiple lessons to a student at once.
 * Lessons have to start with the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
 > :warning: **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.
+
 > :information_source: **Info**: For more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson).
 
 Examples:
@@ -388,8 +389,9 @@ Format: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON
 * For example, `find n/John t/Science English` will return students `John Doe` with tag `Math`, `Alice Richardson` with tag `Science` and `Mary Jane` with tag `English`
 
 Examples:
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`, as shown below:<br>
   <img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" width="800">
+
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
@@ -438,8 +440,10 @@ Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 * <kbd>&darr;</kbd> will allow you to navigate to the next command you have entered.
 
 <box type="tip" seamless>
-**Tip:** Use these shortcuts to quickly access and reuse previous commands without having to retype them.
+
+**Tip**: Use these shortcuts to quickly access and reuse previous commands without having to retype them.
 </box>
+
 > :information_source: **Info**: If your previous or next command is invalid, there will not be any command displayed in the command box.
 
 ### Clearing all entries : `clear`
@@ -529,6 +533,8 @@ With the ever-changing responsibilities of tutors, Tuteez evolves right alongsid
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
+
+These are the key terms used throughout the user guide:
 
 - **GUI**: Graphical User Interface, a type of visual user interface that allows users to interact with the application through graphical elements like buttons and menus.
 - **CLI**: Command Line Interface, a type of text-based user interface that allows users to interact with the application by typing commands.
