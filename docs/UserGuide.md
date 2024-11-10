@@ -18,13 +18,15 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/pawpatrol/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for PawPatrol.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar pawpatrol.jar` command to run the application.<br>
    A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.jpeg)
+
+1. The program is loaded up with some default data. If you wish to clear the data, enter `clear` in the command box and press Enter.
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -50,6 +52,8 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+
+* Command are case sensitive. e.g. `list` command will work but `List` will fail.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `owner n/NAME`, `NAME` is a parameter which can be used as `owner n/John Doe`, and in `delete oOWNER_INDEX`, `OWNER_INDEX` is a parameter which can be used as `delete o1`.
@@ -131,6 +135,9 @@ Adds a pet to PawPatrol.
 <li><code>AGE</code>: Must only contain numbers, and it should be 1 or 2 digits long.</li>
 <li><code>SEX</code>: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female respectively).</li>
 <li><code>TAG</code>: Must be alphanumeric and should only contain a single word each.</li>
+<ul>
+<li>Ensure that tags are short in length. Avoid long tags</li>
+</ul>
 </ul>
 </div>
 
