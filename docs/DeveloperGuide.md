@@ -41,7 +41,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,11 +86,11 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="800"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deletebuyer p/91234567")` API call as an example.
 
@@ -113,7 +113,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddBuyerCommandParser`, `AddMeetingCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="850" />
 
@@ -128,7 +128,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="850" />
 
@@ -458,6 +458,28 @@ Extensions:
 * **Corrupted file**: Missing file and invalid data
 * **Matching Price**: The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
 --------------------------------------------------------------------------------------------------------------------
+
+## **Planned Enhancements**
+
+### Team size: 5
+
+1. ClientGrid fully supports adding buyer (`addbuyer` command) and seller (`addseller` command) names with special characters, accommodating the diverse naming conventions agents encounter. Whether a name includes hyphens (like “Anna-Marie”), cultural identifiers (like "d/o" or "b/o"), or symbols like exclamation marks, ClientGrid captures these accurately. This feature allows agents to store client details without compromise, ensuring names are recorded precisely.
+2. ClientGrid's `filterclient` command will allow it to search for any part of a client’s name, rather than only names that start with the specified input. For example, entering "bob" would retrieve all clients with "bob" anywhere in their names.
+3. Enable horizontal scrolling for long email addresses:
+   * Current issue: Email addresses exceeding the visible character limit are truncated in the display panel, making it impossible for users to view the full address. This is problematic for cases where the email reaches the maximum length allowed (e.g., 320 characters for Gmail).
+   * Example input: `addbuyer n/testingALongEmail p/91234444 e/thisisaverylonggmailaddressasapsychopathwishestobreaktheirfingerhavingalongemailaddressnohumanshouldpossiblyhavesuchalongemailaddressbutidontknowwhytheydohavesuchalongemailaddressiamrunningoutofwordstosaysoiamjustgonnaputfillerwordstokeepextendingthisthinghmmidonotreallylikepeandtypingabunchofweirdstuff@gmail.com`
+   * Proposed change: Introduce horizontal scrolling within the email display panel, allowing users to scroll to view the entire email address. 
+   * Planned behavior: The scroll bar will appear dynamically when the email exceeds the available space. 
+   * Benefit: Improves usability and ensures all users, even those with long email addresses, can view their information fully and accurately.
+4. Prevent duplicate email addresses with case insensitivity:
+   * Current issue: It is possible for two different buyers with distinct phone numbers to be assigned the same email address if the email is typed in different cases (e.g., EXAMPLE@gmail.com and example@gmail.com). This leads to inconsistencies and potential data conflicts.
+   * Example input:
+     * `addbuyer n/John Doe p/91112222 e/EXAMPLE@gmail.com`
+     * `addbuyer n/John Doe p/92223333 e/example@gmail.com`
+   * Current behavior: Both buyers are added successfully, despite having the same email in different cases.
+   * Proposed change: Implement case-insensitive validation for email addresses during buyer creation or modification. If a duplicate email (regardless of case) is detected, an error message will inform the user and prevent the action.
+   * Planned behavior: The second command will fail with an error message such as: `Error: The email "example@gmail.com" is already in use.`
+   * Benefit: Ensures email address uniqueness across the application, eliminating potential conflicts and improving data integrity.
 
 ## **Appendix: Instructions for manual testing**
 
