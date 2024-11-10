@@ -318,7 +318,7 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. You can also use the import and export features and manipulate the produced data files from there.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. You can also use the import and export features to directly manage and modify JSON files that follow DorManagerPros format.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -452,7 +452,7 @@ Duplicate handling:
 * **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
 * **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger Pro. Consists of name, contact number, room number, and emergency contact.
 * **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, immigration related issues etc.). Consists of a name and contact number.
-* **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and room number that specify its location.
+* **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and unit number that specify its location.
 * **Graduation Year**: The year during which the student will graduate.
 * **File path**: The path to the file. Is considered to be the location of the file. Can often be found by right-clicking the file as an option in the menu.
 * **JSON**: A type of file like `pdf` and `docx` that is often used for data storage.

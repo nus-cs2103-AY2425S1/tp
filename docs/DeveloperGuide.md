@@ -585,7 +585,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
 * **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger Pro. Consists of name, contact number, room number, and emergency contact.
 * **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, immigration related issues etc.). Consists of a name and contact number.
-* **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and room number that specify its location.
+* **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and unit number that specify its location.
 * **Graduation Year**: The year during which the student will graduate.
 * **File path**: The path to the file. Is considered to be the location of the file. Can often be found by right-clicking the file as an option in the menu.
 * **JSON**: A type of file like `pdf` and `docx` that is often used for data storage.
