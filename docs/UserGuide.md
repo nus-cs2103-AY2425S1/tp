@@ -267,12 +267,16 @@ Format:
 findi i/INTEREST
 ```
 
-- `i/INTEREST`: Interest to search for.
+- `i/INTEREST`: Interest to search for. **Partial matches** are allowed, meaning any contact with an interest that partially matches the provided keyword will be listed.
 
-Example:
-
+Example: Finds contacts with the interest "Swimming."
+- **Exact Match**: 
 ```plaintext
 findi i/Swimming
+```
+- **Partial Match**: 
+```plaintext
+findi i/Swim
 ```
 
 <br>
