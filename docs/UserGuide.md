@@ -71,7 +71,7 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 1. Ensure you have Java `17` or a newer version installed in your computer.
    If you're not sure, you can download and install it from [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 
-2. Download the latest `NUStates.jar` file from [this link](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
+2. Download the latest `[CS2103T-F10-3][NUStates].jar` file from [this link](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
 
 3. Move the downloaded file to the folder where you want to keep NUStates.
 
@@ -80,11 +80,11 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
     - **macOS**: Press `Cmd + Space`, type `Terminal`, and press `Enter`.
     - **Linux**: Press `Ctrl + Alt + T`.
 
-5. Navigate to the folder where you put the `NUStates.jar` file by using the `cd` command:
-    - **Windows**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd C:\Users\JohnDoe\Desktop\NUStates`
-    - **macOS/Linux**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
+5. Navigate to the folder where you put the `[CS2103T-F10-3][NUStates].jar` file by using the `cd` command:
+    - **Windows**: Type `cd` followed by the path to the folder where `[CS2103T-F10-3][NUStates].jar` is located. eg. `cd C:\Users\JohnDoe\Desktop\NUStates`
+    - **macOS/Linux**: Type `cd` followed by the path to the folder where `[CS2103T-F10-3][NUStates].jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
 
-6. Run the application by typing `java -jar nustates.jar` in the terminal and pressing `Enter`.
+6. Run the application by typing `java -jar "[CS2103T-F10-3][NUStates].jar"` in the terminal and pressing `Enter`.
 
     A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
