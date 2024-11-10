@@ -126,8 +126,10 @@ public class ModelManager implements Model {
         return filteredMembers;
     }
 
+    //@@author {taggyhan}
     /**
      * Returns the number of times a member with the same identity as {@code member} exists in HallPointer.
+     * If this returns > 1, either the member update should be rejected or there is a bug somewhere.
      *
      * @param member The member to count occurrences of.
      * @return The number of times the member appears in HallPointer.

@@ -54,7 +54,8 @@ public class Telegram {
         }
 
         Telegram otherTelegram = (Telegram) other;
-        return value.equals(otherTelegram.value);
+        // Telegram username is case-insensitive by definition
+        return value.toLowerCase().equals(otherTelegram.value.toLowerCase());
     }
 
     @Override

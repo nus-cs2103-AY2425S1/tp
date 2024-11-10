@@ -57,6 +57,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
+        // As far as we are concerned, name is case-insensitive
         return value.toLowerCase().equals(otherName.value.toLowerCase());
     }
 
