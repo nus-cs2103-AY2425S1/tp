@@ -810,12 +810,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Clearing contacts
 1. Removing all contacts in KonTActs
-   2. Test case: `clear`
+   1. Test case: `clear`
       Expected: All contacts are removed from KonTActs. Details is shown in status message.
    
 ### Viewing help
 1. View help of every command
-   2. Test case: `help`
+   1. Test case: `help`
       Expected: A help window is shown with link to documentation.
 
 ### Exiting application
