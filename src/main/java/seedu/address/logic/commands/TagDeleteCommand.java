@@ -89,7 +89,7 @@ public class TagDeleteCommand extends Command {
      * @param deleteTags the {@code Set} of tags to be deleted from the person.
      * @return the edited {@code Set} of tags that no longer include the deleted tags.
      */
-    public Set<Tag> getTagsAfterDelete(Set<Tag> ogTags, Set<Tag> deleteTags) {
+    public static Set<Tag> getTagsAfterDelete(Set<Tag> ogTags, Set<Tag> deleteTags) {
         assert deleteTags != null;
         Set<Tag> copyOgTags = new HashSet<>(ogTags);
         copyOgTags.removeAll(deleteTags);
