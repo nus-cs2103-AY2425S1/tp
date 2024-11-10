@@ -118,7 +118,7 @@ together.
 
 **Main components of the architecture**
 
-**`Main`** consists of two classes: [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)). It is in charge of the app launch and shut down.
+**`Main`** consists of two classes: [`Main`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)). It is in charge of the app launch and shut down.
 * At app launch: it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down: it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -152,7 +152,7 @@ The sections below give more details of each component.
 
 This component is responsible for displaying the graphical elements of TalentSG's GUI to the user.
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -182,7 +182,7 @@ The `UI` component,
 
 This component is responsible for processing and executing user commands
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -215,7 +215,7 @@ How the parsing works:
 
 This component is responsible for storing and managing TalentSG’s data
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
@@ -238,7 +238,7 @@ The `Model` component,
 
 This component is responsible for saving and retrieving TalentSG's data
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -280,9 +280,9 @@ The `add` command allows users to add a `Person` to the `AddressBook`.
 
 To help you understand how the `add` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
+We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
 
-1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
+1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
 2. The `AddCommandParser` interprets the input.
 3. An `AddCommand` object is created.
 4. The `LogicManager` invokes the execute method of AddCommand.
@@ -379,9 +379,9 @@ The `edit` command allows users to edit a `Person` in the `AddressBook`.
 
 To help you understand how the `edit` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
 
-1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
+1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java, Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
 2. The `EditCommandParser` interprets the input.
 3. An `EditCommand` object is created.
 4. The `LogicManager` invokes the execute method of `EditCommand`.
@@ -392,7 +392,6 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 <div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), a matching error will be shown on the screen and the sequence of action is terminated.
-- At step 3, if the user provides a category to edit to, and it is found that there is no such category in FastTrack, an error will be shown and the sequence of action is terminated.
 </div>
 
 #### `EditCommand` Implementation Sequence Diagram

@@ -285,7 +285,7 @@ Command: ` edit 1 st/Rejected note/arrogant `
 <img src="images/afteredit.png" alt="afteredit.png" width="800">
 
 
-<strong>[Caution]</strong>: You cannot edit a candidate to be a duplicate of another existing candidate.
+<strong>[Caution]</strong>: You cannot edit a candidate to be a duplicate of another existing candidate. (same name and same phone)
 
 <strong>[Note]</strong>: When using the `edit` command to modify tags, all existing tags for that person will be replaced by the new tags provided. To retain previous tags and add new ones, retype all desired tags in the `edit` command.
 
