@@ -25,6 +25,11 @@ public class DeleteYCommand extends Command {
     public static final String MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_DELETE_WEDDING_BOOK_SUCCESS = "Wedding book has been cleared!";
     public static final String MESSAGE_NO_PENDING_OPERATION = "No pending delete operation.";
+
+    public static final String MESSAGE_MODIFY_BEFORE_DELETE = """
+            Delete operation failed. If you modified the person (any field) before pressing y or n:
+            Re-enter the modified person's details and delete again.
+            We have reverted the delete operation to prevent accidental operations.""";
     private final Person personToDelete;
     private final Wedding weddingToDelete;
 
@@ -93,11 +98,7 @@ public class DeleteYCommand extends Command {
 
             if (!(model.hasExactPerson(personToDelete))) {
                 StaticContext.clearStaticContext();
-                throw new CommandException("Delete operation failed. If you modified the person (any field) "
-                        + "before pressing y or n, either\n"
-                        + "1. Undo the modification and try again, or\n"
-                        + "2. Re-enter the modified person's details and delete again.\n"
-                        + "We have reset the delete operation to prevent accidental operations.");
+                throw new CommandException(MESSAGE_MODIFY_BEFORE_DELETE);
             }
 
             Person personToDeleteWithNoTag = model.personWithAllTagsRemoved(personToDelete);

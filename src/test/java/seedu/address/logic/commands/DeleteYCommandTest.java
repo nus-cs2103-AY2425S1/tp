@@ -122,11 +122,7 @@ public class DeleteYCommandTest {
 
         // Execute the command and expect a CommandException
         CommandException exception = assertThrows(CommandException.class, () -> deleteYCommand.execute(model));
-        assertEquals("Delete operation failed. If you modified the person (any field) before pressing "
-                + "y or n, either\n"
-                + "1. Undo the modification and try again, or\n"
-                + "2. Re-enter the modified person's details and delete again.\n"
-                + "We have reset the delete operation to prevent accidental operations.", exception.getMessage());
+        assertEquals(DeleteYCommand.MESSAGE_MODIFY_BEFORE_DELETE, exception.getMessage());
 
         // Verify that StaticContext is cleared
         assertNull(StaticContext.getPersonToDelete());
