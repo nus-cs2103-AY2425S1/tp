@@ -8,6 +8,7 @@ Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
+
 Class AddressBook
 Class ModelManager
 Class UserPrefs
@@ -28,17 +29,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook .up.|> ReadOnlyAddressBook
 
 ModelManager .up.|> Model
-ModelManager -down-> "1" AddressBook
+ModelManager -down-> "   1" AddressBook
 ModelManager -up-> "1" UserPrefs
 
-ModelManager -left-> "~* filtered" Delivery
-ModelManager -left-> "~* sorted" Delivery
-ModelManager -down-> "~* filtered" Supplier
-ModelManager -right-> "~* sorted" Supplier
+ModelManager --left-> "        * filtered" Delivery
+ModelManager --left-> "  * sorted" Delivery
+ModelManager --right-> "      filtered *" Supplier
+ModelManager --right-> "      sorted *" Supplier
 
-AddressBook -down-> "1" UniqueDeliveryList
-AddressBook -down-> "1" UniqueSupplierList
+AddressBook --down-> "1" UniqueDeliveryList
+AddressBook --down-> "           1" UniqueSupplierList
 
-UniqueSupplierList -left-> "*" Supplier
-UniqueDeliveryList -left-> "*" Delivery
+UniqueSupplierList -left-> "     *" Supplier
+UniqueDeliveryList -up-> "               *" Delivery
 @enduml
