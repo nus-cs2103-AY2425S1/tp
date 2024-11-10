@@ -139,7 +139,15 @@ The table below showcases the four different possible notations of prefixes:
 | Variadic     | prefix/Value... | [prefix/Value]... |
 
 <div class="note" markdown="span">
-Optional fields can be omitted and the command will still be executed successfully <br> _(assuming all other parts are correctly inputted)_ 
+Note 1: Optional prefixes can be omitted and the command will still be executed successfully <br> _(assuming all other parts of the command are correctly inputted)_ 
+</div>
+
+<div class="note" markdown="span">
+Note 2: Variadic prefixes allow you to enter multiple values for a single command by separating them with spaces. For example:
+
+`t/friend t/colleague t/mentor`
+
+This lets you add multiple tags at once, making it easier to input bulk data
 </div>
 
 #### Prefix Types
