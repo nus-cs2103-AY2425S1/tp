@@ -39,8 +39,8 @@ Refer to the sidebar if you are on the website.
 --------------------------------------------------------------------------------------------------------------------
 ## Overview
 
-**InternBuddy** is an offline desktop application for university students studying a STEM major to manage 
-the contacts of companies that they are potentially applying or have already applied for internships. 
+**InternBuddy** is an offline desktop application for university students pursuing a STEM major to manage 
+the contacts of companies that they are potentially applying for or have already applied for internships. 
 
 **InternBuddy** allows users to:
 * store and manage companies' contact information for various internship applications.
@@ -65,7 +65,7 @@ First time using **InternBuddy**? Don't worry! We've got you covered! This tutor
 
 Before continuing, here are some important information you need to know about the User Guide:
 1. There are 3 different kinds of boxes that provide extra information.
-    * *Tip boxes* provide tips or helpful advise on how to use a certain feature found in **InternBuddy**.
+    * *Tip boxes* provide tips or helpful advice on how to use a certain feature found in **InternBuddy**.
    
       <box type="tip" seamless>
    
@@ -138,7 +138,7 @@ Before continuing, here are some important information you need to know about th
 
 The blurred image below shows an annotated overview of **InternBuddy's** GUI:
 
-![GUI overview](images/GUI Overview.png)
+![GUI overview](images/GUI%20Overview.png)
 
 The **GUI** is divided into five main sections:
 
@@ -193,7 +193,7 @@ not** put any parameters or prefixes that are not recognised by the command.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Optiver`.
 
 * Letters preceding the `/` before parameters (if present) are prefixes that the app uses to determine that parameter. It is **case-sensitive** and thus
-  must be used exactly as shown <br>
+  must be used exactly as shown. <br>
   e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another. 
 
 * Items in square brackets are optional.<br>
@@ -212,8 +212,8 @@ not** put any parameters or prefixes that are not recognised by the command.
   e.g. `85092323`, `0122345677`
 
 * InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters as well (letters and numbers only). The following special characters `+ - _ .` are allowed in `local-part` but note that:
-    1. `local-part` can't begin or end with any special characters.
-    2. `local-part` can't have consecutive special characters in it.
+    1. `local-part` cannot begin or end with any special characters.
+    2. `local-part` cannot have consecutive special characters in it.
     3. The only special characters allowed in `domain` are periods (`.`) are allowed in `domain` and follows the 2 rules for `local-part` above.
     4. Each word between periods in `domain` (e.g. `nus` and `edu` in `nus.edu`) must be at least 2 characters long.
 
@@ -243,7 +243,8 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 <box type="tip" seamless>
 
 **Tip 1:** A company can have any number of tags (including 0) <br>
-**Tip 2:** A company requires a name and email at the minimum
+**Tip 2:** Tags can be a useful way to categorise different companies into various groups!
+**Tip 3:** A company requires a name and email at the minimum
 </box>
 
 <box type="info" seamless>
@@ -253,7 +254,7 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 <box type="warning" seamless>
 
-**Caution:** Due to the nature of prefix commands, company names are restricted to alphanumeric characters only
+**Caution:** Due to the nature of prefix commands, company names are restricted to alphanumeric characters and spaces only
 </box>
 
 Examples:
@@ -278,7 +279,7 @@ and will be `APPLIED` if not specified.
 
 <box type="tip" seamless>
 
-**Tip:** applying to a company automatically changes the company's status to `APPLIED`. (This is not the same as `APPLICATION_STATUS`)
+**Tip:** Applying to a company automatically changes the company's status to `APPLIED`. (This is not the same as `APPLICATION_STATUS`)
 </box>
 
 Examples:
@@ -581,6 +582,7 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 6. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to 1000 companies, each with 1000 applications. Entering values beyond this range (e.g., greater than 1000) may lead to undefined behavior, so please ensure indexes stay within the specified bounds.
 7. The error message for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the domain name between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the user guide.
 8. The AddressBook currently accepts invalid phone numbers, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
+9. The AddressBook currently has no limit on the tag length. However, with the default window size, the tag may overrun the screen if it exceeds 62 characters, causing the favourites star to no longer remain visible. If a tag length longer than 62 characters is required, adjustments to the window size can be made accordingly.
 
 [back to top](#internbuddy-user-guide)
 

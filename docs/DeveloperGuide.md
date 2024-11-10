@@ -234,7 +234,7 @@ Step 4. The changes are committed to the address book using `AddressBook#setComp
 
 <puml src="diagrams/UpdateCommandSequence.puml" alt="UpdateCommandSequence" />
 
-Below displays an activity diagram that explains roughly what happens when a user tries to add an application:
+Below displays an activity diagram that explains roughly what happens when a user tries to update an application:
 <puml src="diagrams/UpdateCommandActivity.puml" alt="UpdateCommandActivity" />
 
 #### Design considerations:
@@ -411,7 +411,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user that types fast                                        | utilize an easy to use CLI interface                        | be more efficient while using the app                                 |
 | `*`      | user who prefers less screen clutter                        | toggle list view to be less detailed / more general         |                                                                       |
 | `* *`    | user                                                        | export my data out of InternBuddy                           | have a data backup and/or share company information with fellow peers |
-| `* * *`  | STEM major planning to apply for internships                | find a specific company by name                             | retrieve info without having to go through the entire list            |
+| `* * *`  | STEM major planning to apply for internships                | find a specific company by name                             | retrieve information without having to go through the entire list     |
+| `* * *`  | STEM major planning to apply for internships                | find specific companies based on their tags                 | retrieve a list of companies attached to a certain tag                |
+| `* * *`  | STEM major planning to apply for internships                |                                                             |                                                                       |
 | `* *`    | STEM major planning to apply for internships                | add additional info about the company                       |                                                                       |
 | `* *`    | STEM major planning to apply for internships                | update the information for a specific company               | ensure my information is up-to-date                                   |
 | `*`      | STEM major planning to apply for internships                | add referral contacts to companies                          | remember to include them when applying                                |
@@ -425,6 +427,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | STEM major currently applying for internships               | add notes for upcoming / completed interviews               | find a specific piece of info for that interview in the future        |
 | `*`      | STEM major currently applying for internships               | organize interview timings                                  | ensure that they do not overlap                                       |
 | `* * *`  | STEM major planning to apply or is applying for internships | remove companies which are no longer relevant to me         | reduce clutter in my list of potential companies                      |
+| `* * *`  |                                                             |                                                             |                                                                       |
+
 
 *{More to be added}*
 
