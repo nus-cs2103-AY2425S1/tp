@@ -24,6 +24,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 ### Architecture
@@ -117,6 +119,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="700" />
@@ -136,7 +139,6 @@ The `Model` component,
 <puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
 
 </box>
-
 
 ### Storage component
 
@@ -297,6 +299,8 @@ The following sequence diagram shows how the filter operation works through the 
 The following activity diagram summarizes what happens when a user executes a filter command:
 
 <puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommand Activity Diagram" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design Considerations
 
@@ -489,6 +493,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook shows a input search bar
 3.  User enters input related to key of a tag
 4.  AddressBook shows a list of persons with matching tag key
+    
     Use case ends.
 
 **Extensions**
