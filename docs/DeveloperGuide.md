@@ -1040,6 +1040,8 @@ Team size: 5
 
 1. **Make `NAME` field less restrictive**: Currently, only alphanumeric characters are permitted, which means names like "Ernst & Young" and "UI/UX developer" cannot be accurately represented. We plan to expand the set of special characters allowed in the `NAME` field to support a wider range of company names and applications.
 
+1. **Make Index error message clearer**: Currently, the `withdraw` command gives an error message of "Index is not a non-zero unsigned integer." when an incorrect company or application index is supplied. We plan to make this message clearer by changing it to "Index is not a positive integer".
+
 1. **Improved `edit` command**: Currently, the `edit` command does not check if the user is trying to do a redundant edit (eg: changing the email to the same email),
 which may result in error-prone users (when trying do a minor update like `PHONE: 98765432 -> 98675432`) mistakenly thinking that they have edited the selected company correctly. In addition, after
 each edit operation is executed successfully, the application view returns to the full list of companies view (regardless of any existing filtered view by `find` command).
