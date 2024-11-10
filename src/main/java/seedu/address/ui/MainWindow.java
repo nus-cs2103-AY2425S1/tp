@@ -36,7 +36,6 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    // making ResultDisplay package-private so PersonCard can access it
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
