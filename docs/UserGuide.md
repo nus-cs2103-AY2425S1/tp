@@ -89,13 +89,13 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 
 Adds a person to the address book.
 
-**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT]…​ [t/TAG]…​`
+**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/FUTURE APPOINTMENT]…​ [t/TAG]…​`
 
 - `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long.
 - `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any.
 - `AGE` must only contain characters 0-9 and must be 1-3 digits long.
 - `SEX` must only contain alphanumeric characters.
-- `APPOINTMENT` should be in the format **dd/MM/yyyy HHmm**.
+- `FUTURE APPOINTMENT` should be in the format **dd/MM/yyyy HHmm** and be after your current time.
 
 <box type="tip" seamless>
 
@@ -115,7 +115,7 @@ Adds a person to the address book.
 
 - Duplicate phone numbers are allowed for cases like parents and children sharing a same number.
 
-- Fields in square brackets (e.g. `[ap/APPOINTMENT]`) are optional.
+- Fields in square brackets (e.g. `[ap/FUTURE APPOINTMENT]`) are optional.
 
   </box>
 
@@ -234,7 +234,7 @@ Edits an existing person in the address book.
 
 **Remarks**:
 
-- Fields in square brackets (e.g. `[ap/APPOINTMENT]`) are optional.
+- Fields in square brackets (e.g. `[ap/FUTURE APPOINTMENT]`) are optional.
 
   </box>
 
@@ -538,19 +538,25 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 
 **Format**: `note NAME [ap/PREVIOUS APPOINTMENTS] [m/MEDICATION] [r/REMARK]…​`
 
-* Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
-* At least one of the fields must be provided.
-* When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
-* You can remove all the person’s previous appointments by typing `ap/` without
-  specifying any appointments after it.
-* You can remove all the person’s medications by typing `m/` without
-    specifying any medications after it.
-* You can remove all the person’s remarks by typing `r/` without
-    specifying any remarks after it.
+- Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
+- `PREVIOUS APPOINTMENT` should be in the format **dd/MM/yyyy HHmm** and be **before** your current time.
+- Both `MEDICATIONS` and `REMARKS` must only alphanumerical characters.
+
+<box type="tip" seamless>
 
 **Remarks**:
 
 - Fields in square brackets (e.g. `[r/REMARK]`) are optional.
+
+- At least one of the fields must be provided.
+
+- When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
+
+- You can remove all the person’s previous appointments by typing `ap/` without specifying any appointments after it.
+
+- You can remove all the person’s medications by typing `m/` without specifying any medications after it.
+
+- You can remove all the person’s remarks by typing `r/` without specifying any remarks after it.
 
 </box>
 
