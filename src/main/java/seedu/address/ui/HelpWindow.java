@@ -58,7 +58,7 @@ public class HelpWindow extends UiPart<Stage> {
 
             "=== Advanced Filtering ===",
             "Organize your client list based on custom priority metrics.",
-            "Command: advfilter t\\tag [OPERATOR] [VALUE]",
+            "Command: advfilter t\\tag OPERATOR VALUE",
             "Example: advfilter t\\age <= 50",
 
             "=== Sorting by Tags ===",
@@ -68,7 +68,7 @@ public class HelpWindow extends UiPart<Stage> {
 
             "=== Data Export ===",
             "Export your client data for analysis or reporting.",
-            "Command: export format\\[file format]",
+            "Command: export format\\file format",
             "Example: export format\\csv",
 
             "=== Clearing All Entries ===",
