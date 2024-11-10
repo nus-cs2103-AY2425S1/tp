@@ -955,7 +955,7 @@ Through identifying current limitations, we’re able to target areas that can b
 This section highlights our planned improvements, showcasing the steps we're taking to deliver a more comprehensive and effective solution for property agents.
 
 
-### Enhance Phone Numbers to Accept Special Characters
+### 1. Enhance Phone Numbers to Accept Special Characters
 
 **Feature Flaw in Current Implementation**
 
@@ -967,6 +967,20 @@ separating sections of a phone number (e.g., `+1-800-9087-2029`).
 
 We plan to modify the phone number field to allow `+` symbols and dashes `-` so users can input phone numbers with country/area codes 
 and use dashes for better readability. This enhancement will provide greater flexibility and accommodate a wider range of valid phone number formats.
+
+### 2. Enhance Search Flexibility
+
+**Feature Flaw in Current Implementation**
+
+The current search functionality is limited when searching for strings containing alphanumeric characters followed by special characters (e.g. "29," in an address),
+or special characters followed by alphanumeric characters (e.g "#03-02" in a unit number). 
+Users may not find their intended client if they do not explicitly state the exact string due to this restriction
+(e.g. using `find 29` to find a client with the address `Blk 30 Geylang Street 29, #06-40` will result in no clients being found).
+
+**Proposed Enhancement**
+
+We plan to enhance the search feature to allow partial matches on numeric values regardless of punctuation or spacing. 
+This enhancement will improve the user experience by showing relevant contact details even if the input includes numbers adjacent to punctuation marks.
 
 --------------------------------------------------------------------------------------------------------------------
 
