@@ -491,6 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Client Type**: A category used to describe the relationship or status of a client, such as VIP and standard.
 * **client**: A client's information saved in the system, which includes details such as name, phone number, email, address, client type, and descriptions.
 * **Financial Advisor**: The primary user of ClientHub, responsible for managing a large number of clients and using the system to track details, tasks, and interactions with clients.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -565,25 +566,26 @@ Team size: 5
 
 Given below are some planned future enhancements for the app.
 
-1. Make Find Stackable: The current find does not stack on top of each other.
+1. **Make Find Stackable:** The current find does not stack on top of each other.
 We plan to make it able to stack. For example, doing a `find n/Alice` into a `find p/9874`
 will first find all clients that have the name `Alice` and then find the clients in this filtered list that have a phone number
 with `9874`.
 
 
-2. Disallow Duplicate Phone Numbers: Currently, the app allows the user to add clients with the same phone number which
+2. **Disallow Duplicate Phone Numbers:** Currently, the app allows the user to add clients with the same phone number which
 generally does not occur, thus we plan to make the app disallow adding clients with the same phone number, which will prevent
 any accidental additions of clients with the same phone number.
 
 
-3. Allow Phone Numbers of different lengths: Currently, the app only allows phone numbers of 8 for Singaporean Phone numbers, we plan to make the app
+3. **Allow Phone Numbers of different lengths:** Currently, the app only allows phone numbers of 8 for Singaporean Phone numbers, we plan to make the app
 able to take in Numbers from other countries such as Malaysia to accommodate to FAs that have clients outside of Singapore
 
 
-4. More flexible Add: Currently, the app requires the user to input all fields when adding a client, we plan to make the app more flexible by allowing the user to input only the necessary fields when adding a client.
+4. **More flexible Add:** Currently, the app requires the user to input all fields when adding a client, we plan to make the app more flexible by allowing the user to input only the necessary fields when adding a client.
 Certain fields such as Description and Address may be unnecessary for some FAs to keep track of. So to increase their efficiency, we plan to make the app allow the user to input only the necessary fields when adding a client
 such as Name, Phone Number and Client Type.
 
-5. All for more flexible Reminder Editing: Currently, the app only allows the user to edit the name of a person if they have no reminders,
+
+5. **All for more flexible Reminder Editing:** Currently, the app only allows the user to edit the name of a person if they have no reminders,
 this is quite restrictive and may cause some inconveniences for users. Thus, we plan to make the app allow the user to edit the name of a person even if
 they have reminders. This will allow the user to make changes to the client's name without having to delete all the reminders first.
