@@ -12,6 +12,7 @@ Class JsonUserPrefsStorage
 }
 
 Class "<<interface>>\nStorage" as Storage
+
 Class StorageManager
 
 package "AddressBook Storage" #F4F6F6{
@@ -23,10 +24,17 @@ Class JsonAdaptedTag
 Class JsonAdaptedRentalInformation
 }
 
+package "Command History Storage" #F4F6F6{
+Class "CommandHistoryStorage" as CmdHistStorage
+}
+
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> CmdHistStorage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
