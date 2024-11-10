@@ -1,5 +1,8 @@
 package bizbook.ui;
 
+import java.util.logging.Logger;
+
+import bizbook.commons.core.LogsCenter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,6 +12,7 @@ import javafx.collections.ObservableList;
 public class CommandHistory {
     private ObservableList<String> history;
     private int currentIndex;
+    private final Logger logger = LogsCenter.getLogger(CommandHistory.class);
 
     /**
      * Creates a {@code CommandHistory} to store command history.
@@ -19,13 +23,15 @@ public class CommandHistory {
     }
 
     /**
-     * Adds a new command to the history.
+     * Adds a new successfully executed command to the history.
      *
      * @param command the command to add.
      * */
     public void addCommand(String command) {
+        assert (command != null);
         history.add(command);
         currentIndex = history.size(); // Set to after the last command
+        logger.info("Added command to command history: " + command);
     }
 
     /**
@@ -36,6 +42,7 @@ public class CommandHistory {
     public String getPreviousCommand() {
         if (currentIndex > 0) {
             currentIndex--;
+            logger.fine("Successfully retrieved previous command");
             return history.get(currentIndex);
         }
         return "";
@@ -48,16 +55,9 @@ public class CommandHistory {
      */
     public String getNextCommand() {
         if (currentIndex >= 0 && currentIndex < history.size()) {
+            logger.fine("Successfully retrieved next command");
             return history.get(currentIndex++);
         }
         return "";
-    }
-
-    /**
-     * Clears the command history.
-     */
-    public void clear() {
-        history.clear();
-        currentIndex = -1;
     }
 }
