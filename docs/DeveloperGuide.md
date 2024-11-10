@@ -227,7 +227,7 @@ Step 3. When an appointment is removed through the `deleteapp` command:
 4. The central appointment list is updated
 
 
-<img src="images/AddAppointmentSequenceDiagram.png" width="280" />
+<img src="images/AddAppointmentSequenceDiagram.png" height = "150" width="450" />
 
 
 The following classes play important roles in the appointment system:
