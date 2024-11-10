@@ -186,6 +186,8 @@ You can multiple people to share the same email address, making it easier for ca
 A person can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, the `NAME` field does not support hyphens. Only letters, numbers, and spaces are allowed. We recommend entering names without hyphens to avoid errors. </div>
+
 Examples:
 
 - `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
