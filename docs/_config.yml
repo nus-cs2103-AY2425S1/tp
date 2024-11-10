@@ -1,15 +1,13 @@
 title: "CareLink"
 theme: minima
-
 header_pages:
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
-
 markdown: kramdown
-
+kramdown:
+  toc_levels: 1..2  # Only show h1 and h2 headings
 repository: "AY2425S1-CS2103T-T13-4/tp"
 github_icon: "images/github-icon.png"
-
 plugins:
   - jemoji
