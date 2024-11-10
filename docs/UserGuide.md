@@ -88,7 +88,7 @@ Adds a pet owner to PawPatrol.
 
 **:information_source: Important notes about owner fields:**<br>
 <ul>
-<li><code>IC_NUMBER</code>: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
+<li><code>IC_NUMBER</code>: Must contain only uppercase alphanumeric characters and follow the <a href="https://learn.microsoft.com/en-us/purview/sit-defn-singapore-national-registration-identity-card-number" target="_blank">format of a 9-character Singapore IC number</a>.</li>
 <li><code>NAME</code>: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
 <li><code>PHONE</code>: Must contain exactly 8 digits.</li>
 <li><code>EMAIL</code>: Should follow a standard email format of local-part@domain and adhere to <a href="https://snov.io/knowledgebase/what-is-a-valid-email-address-format/" target="_blank">standard email constraints</a>
