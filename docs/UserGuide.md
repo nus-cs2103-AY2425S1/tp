@@ -123,14 +123,10 @@ Format: `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS cs/CAROUSELL_HANDLE fb/FAC
 </div>
 
 Examples:
-* Adding a contact with a phone number, email address, physical address. <br>
-`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* Adding a contact with only a social media handle. <br>
+* Adding a contact with multiple fields, such as phone number, email address, physical address. <br>
+`add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01`
+* Adding a contact with only a social media handle. Tag is added to contact as well. <br>
 `add n/Adam An t/customer ig/theAdamAn`
-* Adding a contact with a tag. <br>
-`add n/Betsy Crowe t/friend e/betsycrowe@example.com p/12345678 t/supplier`
-* Adding a contact with only an email address. <br>
-`add n/Charlie Chan t/investor e/charlieChan@example.com`
 * Adding a contact with a schedule. <br>
 `add n/Danny t/student p/91234567 sd/2024-12-12 st/16:00`
 
