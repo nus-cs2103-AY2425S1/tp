@@ -28,7 +28,7 @@ public class DeleteConsultCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the consultation identified by the index number used in the displayed consultation list.\n"
-            + "Parameters: INDEX (must be a positive integer) [;INDEX...]\n"
+            + "Parameters: INDEX (must be a positive integer) [;INDEX…]\n"
             + "Example: " + COMMAND_WORD + " 1" + DEFAULT_DELIMITER + "2";
 
     public static final String MESSAGE_DELETE_CONSULT_SUCCESS = "Deleted Consult(s):\n%1$s";
