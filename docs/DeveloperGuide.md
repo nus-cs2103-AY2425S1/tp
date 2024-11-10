@@ -623,6 +623,7 @@ Team size: 5
 2. Allow adding overseas phone number: The app currently supports only Singaporean phone number. We aim to expand functionality to include valid international numbers, complete with country codes.
 3. Allow certain special characters: We currently only allow alphanumeric characters and whitespaces. We plan to support additional characters, such as hyphens, to better accommodate real-world naming conventions.
 4. Make duplicate contact error message more specific: : The current error message for duplicate contacts, “This person already exists in CampusConnect,” is too general. We plan to enhance it by specifying the name of the existing contact that duplicates the one the user is attempting to add.
+5. Make `find n/`, `find p/` and `find e/` throw an error while `find t/` finds all users with not tags.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Future features**
