@@ -92,9 +92,9 @@ Format: `help`
 
 <div style="page-break-after: always;"></div>
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
 Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE] [t\TAG]…​ [t\TAG:value]…​`
 
@@ -116,7 +116,7 @@ Email Address Constraints: <br>
 * `local` must not start or end with any special characters
 * `domain` must only consist of alphanumeric characters, with no more than one hyphen (`-`) or period (`.`) in between any 2 alphanumeric characters.
 * `domain` must end with at least 2 characters that are not a period (`.`)
-* Duplication is not prevented/checked for, as it might be possible for some of our users' clients to be contacted through the same person, such as a secretary.
+* Duplication is not prevented/checked for, as it might be possible for some of our users' clients to be contacted through the same contact, e.g. a common secretary.
 
 Address Constraints: <br>
 * Address can take any characters except for `\`, but cannot begin with a space and cannot be blank
@@ -147,9 +147,9 @@ Command examples:
 * `add n\John Doe p\98765432 e\johnd@example.com a\123 John street fi\millionaire s\@jon3 t\client t\priority:high`
 * `add n\Betsy Crowe t\friend e\betsycrowe@example.com a\Newgate Prison p\1234567 t\criminal fi\noIncome s\@bestyC`
 
-### Listing all persons : `list`
+### Listing all contacts : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book.
 
 Format: `list`
 
@@ -171,9 +171,11 @@ Examples:
 *  `edit 1 p\91234567 e\johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n\Betsy Crower t\ ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating contacts by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords.
+
+Useful for displaying contacts you already know of quickly and conveniently.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -181,7 +183,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -189,32 +191,35 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   <img src="images/UG_Images/findAlexDavidResult.png" alt="result for 'find alex david'" width="600"/>
 
-### Deleting a person : `delete`
+### Deleting a contacts : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified contact from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 ### Filtering contacts: `filter`
 
 Filters the contact list by name and/or tags.
 
+Useful for displaying contacts that match the filter criteria.
+
 Format: `filter [n\NAME] [t\TAG]…​`
 
 * At least one of the optional fields must be provided.
 * Filters the contact list by name and/or tags.
-* `n\NAME` specifies a name (or partial name) to filter by.
-* `t\TAG` specifies a tag to filter by. You can provide multiple tags.
 * Filter is not case-sensitive.
-* If both `n\NAME` and `t\TAG` are provided, the command will display contacts matching both the name and tags.
+* `n\NAME` specifies a name (or partial name) to filter by.
+* Partial words will also be matched e.g. `Han` will match `Hans`
+* `t\TAG` specifies a tag to filter by. You can provide multiple tags.
+* If both `n\NAME` and `t\TAG` are provided, the command will display contacts matching both the name and tags. (i.e. `AND` search).
 * Filter only temporarily modifies the list of contacts displayed, so if you use `filter` and then `edit`, your original unfiltered list of contacts will be displayed after.
 
 Examples:
@@ -267,6 +272,7 @@ Sort contacts by tag values, in ascending or descending order.
 Format: `sort t\TAG DIRECTION`
 
 * Sorts the contact list by tags values according to specified sort order.
+* Sort is not case-sensitive.
 * Available directions include `asc` (ascending) and `desc` (descending).
 * Numeric-only tag values are of lower sort value than alphanumeric tag values.
 * Empty tag values will always appear at the end of the list regardless of sort order.
@@ -370,7 +376,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 3. **If you accidentally press the alt key (Windows, Linux) or option key (MacOS)** on your keyboard while typing a command, the arrow keys will no longer navigate the command box. To rectify this, press the alt/option key again.
 4. **If you add very long names, tags, or other information** (> 80 characters) to contacts, and the application window is not wide enough to display the entire line of text, the text will be truncated with `...` at the end.
 5. **If you want to add tags to an existing contact**, you need to type in all existing tags to retain them.
-6. **If you use have a previous export's file open and try to export again** on a Windows computer, you will encounter an error. To rectify this, close the previous export's file and try again. 
+6. **If you use have a previous export's file open and try to export again** on a Windows computer, you will encounter an error. To rectify this, close the previous export's file and try again.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -402,6 +408,6 @@ Action     | Format, Examples
 * **Filter**: A way to quickly find the contacts you need by narrowing down the list based on specific details, like tags or names.
 * **Financial Info**: Any details related to a contact’s finances, like income level or whether they are a high-value customer.
 * **Index**: The number next to each contact in the list that helps you refer to them when you want to make changes.
-* **Social Media Handle**: A person's username on social platforms like Twitter or Instagram, for example, @john_doe.
-* **Tag**: Form of text-based labelling to categorise persons or data for organisation.
+* **Social Media Handle**: A contact's username on social platforms like Twitter or Instagram, for example, @john_doe.
+* **Tag**: Form of text-based labelling to categorise contacts or data for organisation.
 
