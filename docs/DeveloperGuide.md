@@ -2,8 +2,33 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+
+## Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+* [Implementation](#implementation)
+    * [Sort Feature](#sort-feature)
+       * [Implementation](#implementation-1) 
+* [Documentation, Logging, Testing, Configuration, Dev-Ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix-A: Requirements](#appendix-a-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+* [Appendix-B: Planned Enhancements](#appendix-b-planned-enhancements)
+    * [Enhance Phone Numbers to Accept Special Characters](#enhance-phone-numbers-to-accept-special-characters)
+* [Appendix-C: Instructions for manual testing](#appendix-c-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Adding a client](#adding-a-client)
+    * [Deleting a client](#deleting-a-client)
+
 
 -----------------------------------------------------------------------------------------------------------------
 ---
@@ -248,7 +273,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     
 ### Sort Feature
 
-### Implementation
+#### Implementation
 
 The sort feature in `PROperty` is implemented by adding sorting methods to the `UniquePersonList` class, which is responsible for managing the list of `Person` objects. Sorting is performed directly on the `internalList` by specific attributes such as `name` or `ID`, allowing users to organise contacts in a meaningful order.
 
