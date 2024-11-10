@@ -457,11 +457,11 @@ testers are expected to do more *exploratory* testing.
    2. Use the command `java -jar InSUREance.jar` to launch the app.
    3. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by using the command `java -jar InSUREance.java`<br>
+   2. Re-launch the app by using the command `java -jar InSUREance.jar`<br>
        Expected: The most recent window size and location is retained.
 
 
