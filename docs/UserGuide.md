@@ -118,12 +118,12 @@ Adds a contact to the address book.
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
 <div markdown="span" class="alert alert-primary">**Note:**
-A contact can have any number of roles (including 0), and the Telegram username is optional.
+A contact can have any number of roles (including 0), and the Telegram username is optional. The roles must be one of the following: attendee, vendor, volunteer and sponsor.
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/betsyyy r/attendee r/sponsor`
+* `add n/Betsy Crowe e/bc@gmail.com a/New Street p/1234567 t/betsyyy r/sponsor`
 
 ![Successfully added a contact](images/AppImages/FeaturesAddCommand.png)
 
@@ -156,7 +156,7 @@ Examples:
 ##### Find Contacts by Keywords in Name: `find-name` or `fn`
 Finds contacts whose names contain any of the provided keywords.
 
-Format: `find-name KEYWORD [MORE_KEYWORDS]`
+Format: `find-name KEYWORD [MORE_KEYWORDS]...`
 
 * The search is case-insensitive (e.g., `hans` matches `Hans`).
 * The order of keywords does not matter (e.g., `Hans Bo` matches `Bo Hans`).
@@ -172,7 +172,7 @@ Examples:
 ##### Find Contacts by Role: `find-role` or `fr`
 Finds contacts who have the specified role.
 
-Format: `find-role ROLE`
+Format: `find-role ROLE [MORE_ROLES]...`
 
 * The search is case-insensitive (e.g., `attendee` matches `Attendee`).
 * Only full words will be matched (e.g., `attend` will not match `attendee`).
@@ -229,13 +229,12 @@ Format: `find-event EVENT_INDEX`
 * Event must exist in PlanPal.
 
 Examples:
-* `find-event Sumo Bot Festival`
-* `find-event RC Horror Night`
+* `find-event 1`
 
 #### Adding a Contact to an Event : `event-add` or `ea`
 Adds a contact to an event with a specified role.
 
-Format: `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]`
+Format: `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/> CONTACT_INDEX, [MORE_CONTACT_INDICES]...`
 
 Guide for flag roles:
 * `a/` - attendee
@@ -327,7 +326,7 @@ If you are looking for a specific contact, try to be as specific as possible to 
 
 #### Excluding Contacts in Search Mode : `exclude`
 
-Format: `exclude ci/INDEX, [MORE_INDICES]`
+Format: `exclude ci/INDEX, [MORE_INDICES]...`
 
 Exclude contacts from the search results using the `exclude` command.
 Excluded contacts will not appear in any subsequent searches until they are cleared from the excluded list.
@@ -347,7 +346,7 @@ To view the contacts currently excluded from search results, use the `check-excl
 Format: `check-excluded`
 
 Example:
-- `checkexcluded` displays the list of excluded contacts.
+- `check-excluded` displays the list of excluded contacts.
   ![FeaturesSearchModeCheckExcluded.png](images%2FAppImages%2FFeaturesSearchModeCheckExcluded.png)
 
 #### Clearing Excluded Contacts : `clear-excluded` or `clx`
@@ -439,30 +438,31 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 
 ### Basic Commands
 
-| Action               | Format, Examples                                                                                                                                                                                                           |
-|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/james_ho`                                         |
-| **Clear All Contacts** | `clear`                                                                                                                                                                                                                    |
-| **Delete Contact**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                        |
-| **Edit Contact**     | `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
-| **Find by Name**     | `find-name KEYWORD [MORE_KEYWORDS]` or `fn KEYWORD [MORE_KEYWORDS]` <br> e.g., `find-name James Jake`                                                                                                                      |
-| **Find by Role**     | `find-role ROLE [MORE_ROLES]` or `fr ROLE [MORE_ROLES]` <br> e.g., `find-role sponsor`                                                                                                                                     |
-| **Add Event**        | `new EVENT_NAME` <br> e.g., `new Sumo Bot Festival`                                                                                                                                                                        |
-| **Add Contact to Event** | `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]` <br> e.g., `e.g. event-add ei/1 a/1,2,3` |
-| **Find Contacts in Event** | `find-event EVENT_INDEX` or `fe EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                                     |
-| **Remove Contact from Event** | `remove ei/EVENT_INDEX ci/CONTACT_INDEX` <br> e.g., `remove ei/1 ci/1`                                                                                                                                                     |
-| **Delete Event**     | `erase EVENT_INDEX`                                                                                                                                                                                                        
-| **Clear-Event**      | `clear-event`                                                                                                                                                                                                              |
-| **List Contacts**    | `list`                                                                                                                                                                                                                     |
-| **Help**             | `help`                                                                                                                                                                                                                     |
+| Action               | Format, Examples                                                                                                                                                                                                              |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/james_ho`                                            |
+| **Clear All Contacts** | `clear`                                                                                                                                                                                                                       |
+| **Delete Contact**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                           |
+| **Edit Contact**     | `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                      |
+| **Find by Name**     | `find-name KEYWORD [MORE_KEYWORDS]...` or `fn KEYWORD [MORE_KEYWORDS]...` <br> e.g., `find-name James Jake`                                                                                                                   |
+| **Find by Role**     | `find-role ROLE [MORE_ROLES]...` or `fr ROLE [MORE_ROLES]...` <br> e.g., `find-role sponsor`                                                                                                                                  |
+| **Add Event**        | `new EVENT_NAME` <br> e.g., `new Sumo Bot Festival`                                                                                                                                                                           |
+| **Add Contact to Event** | `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]` <br> e.g., `e.g. event-add ei/1 a/1,2,3` |
+| **Find Contacts in Event** | `find-event EVENT_INDEX` or `fe EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                                        |
+| **Remove Contact from Event** | `remove ei/EVENT_INDEX ci/CONTACT_INDEX` <br> e.g., `remove ei/1 ci/1`                                                                                                                                                        |
+| **Delete Event**     | `erase EVENT_INDEX`                                                                                                                                                                                                           
+| **Clear-Event**      | `clear-event`                                                                                                                                                                                                                 |
+| **List Contacts**    | `list`                                                                                                                                                                                                                        |
+| **Help**             | `help`                                                                                                                                                                                                                        |
 
 ### Search Mode Summary
 
-| Action                   | Format, Examples                                            |
-|--------------------------|-------------------------------------------------------------|
-| **Enter Search Mode**    | `search-mode` or `sm`                                       |
-| **Search Contacts**      | `search`                                                    |
-| **Exclude Contact**      | `exclude ci/INDEX [MORE_INDEXES]` <br> e.g., `exclude ci/2` |
-| **Check Excluded Contacts** | `check-excluded` or `chx`                                   |
-| **Clear Excluded Contacts** | `clear-excluded` or `clx`                                   |
-| **Exit Search Mode**     | `exit-search` or `es`                                       |
+| Action                        | Format, Examples                                               |
+|-------------------------------|----------------------------------------------------------------|
+| **Enter Search Mode**         | `search-mode` or `sm`                                          |
+| **Search Contacts**           | `search`                                                       |
+| **Exclude Contact**           | `exclude ci/INDEX [MORE_INDEXES]...` <br> e.g., `exclude ci/2` |
+| **Check Excluded Contacts**   | `check-excluded` or `chx`                                      |
+| **Clear Excluded Contacts**   | `clear-excluded` or `clx`                                      |
+| **Add All Selected Contacts** | `add-all EVENT_INDEX` or `aa EVENT_INDEX`                      |
+| **Exit Search Mode**          | `exit-search` or `es`                                          |

@@ -295,13 +295,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                                                                                | I want to …​                                                             | So that I can…​                                                                                                          |
 |----------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | Student Event Planner who handles contact information of many people                                   | Add contact details of event attendees, vendors, sponsors and volunteers | Store their contact details and have a platform to view the contact information of the relevant parties all in one place |
-| `* * *`  | Student event planner who can type fast and prefer typing over other means of input                    | Perform the functions of the app solely by typing                        | Speed up the process of accessing and managing information                                                               |
-| `* * *`  | Student Event Planner                                                                                  | delete a person                                                          | Keep my contacts up-to-date                                                                                              |
+| `* * *`  | Student Event Planner who handles contact information of many people                                   | Add contact details of event attendees, vendors, sponsors and volunteers | store their contact details and have a platform to view the contact information of the relevant parties all in one place |
+| `* * *`  | Student event planner who can type fast and prefer typing over other means of input                    | Perform the functions of the app solely by typing                        | speed up the process of accessing and managing information                                                               |
+| `* * *`  | Student Event Planner                                                                                  | delete a person                                                          | keep my contacts up-to-date                                                                                              |
 | `* * *`  | Student Event Planner                                                                                  | View the list of all contacts and number of contacts                     | quickly get an overview of contact information of all attendees, vendors, sponsors and volunteer saved so far            |
-| `* *`    | Student event planner who has to contact vendors, sponsors, attendees and volunteers via various means | Save their name, phone number, email address, telegram handle, address   | Save their name, phone number, email address, telegram handle, address                                                   |
+| `* *`    | Student event planner who has to contact vendors, sponsors, attendees and volunteers via various means | Save their name, phone number, email address, telegram handle, address   | efficiently keep track of their contact details and reach out to them through the appropriate channels                   |
 | `* *`    | Student event planner                                                                                  | Update contact details of attendees, vendors, sponsors and volunteers    | keep their most current information or rectify a mistake                                                                 |
-| `* *`    | Student event planner who needs to contact different stakeholders of an event                          | View list of contacts by categories                                      | Zoom in on contacts of a particular category that interest me                                                            |
+| `* *`    | Student event planner who needs to contact different stakeholders of an event                          | View list of contacts by categories                                      | zoom in on contacts of a particular category that interest me                                                            |
 
 *{More to be added}*
 
@@ -322,17 +322,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Tagging a contact with a role
-  * 1a1. User specifies what role the contact belongs to
+* 2a. Tagging a contact with a role
+  * 2a1. User specifies what role the contact belongs to
+    
     Use case resumes from 3.
 
-    Use case ends.
+* 2b. Adding Telegram Contact
+  * 2b1. User specifies the Telegram username that the contact belongs to
 
-
-* 1b. Adding Telegram Contact
-  * 1b1. User specifies the Telegram username that the contact belongs to
-
-  * Use case resumes from 3.
+    Use case resumes from 3.
 
 **UC02: Listing Contacts**
 
@@ -343,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 * 2a PlanPal detects error in process to list user
-  * 2a1 PlanPal shows an error message that the command was called wrongly.
+  * 2a1 PlanPal shows an error message that the command was called wrongly
 
     Use case ends.
 
@@ -354,57 +352,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons(UC02)
 2.  User requests to delete a specific person in the list
-3.  AddressBook deletes the person
+3.  PlanPal deletes the person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty
 
   Use case ends.
 
 * 3a.  PlanPal detects that the command given is invalid
-
-    * 3a1. AddressBook shows an error message.
+    * 3a1. PlanPal shows an error message
 
       Use case resumes at step 2.
 
 **UC04 List Contacts by Role**
 
 **MSS**
-1. User requests to list contacts by role.
-2. PlanPal shows the contacts grouped by their assigned role (attendee, vendor, volunteer, sponsor).
+
+1. User requests to filter contacts by role
+2. PlanPal displays a list of contacts matching the specified role
+
+   Use case ends.
 
 **Extensions**
+
 * 1a. PlanPal detects that the command given is invalid
-    * 1a1. AddressBook shows an error message.
+    * 1a1. PlanPal shows an error message indicating that the command syntax is incorrect
 
-        Use case resumes at step 1.
+      Use case resumes at step 1.
 
+* 2a. No contacts are found for the specified role
+    * 2a1. PlanPal displays a message that no users were found
 
-* 2a. No contacts are found for the requested role.
-    * 2a1. PlanPal shows a message: "No contacts found for the specified role."
-
-        Use case ends.
+      Use case ends.
 
 
 ### Non-Functional Requirements
 
-1. Operation of PlanPal must be done through CLI
+1. PlanPal must have a consistent command-line interface design adhering to standard CLI usability conventions
 2. PlanPal should not have multiple users on a shared computer
 3. PlanPal should only support a single user
 4. PlanPal data should be stored locally
 5. PlanPal should not rely on external database
 6. PlanPal should work on Windows, Linux and OS-X systems
 7. PlanPal should not depend on a remote server
-8. Third party frameworks/libraries/services used must be
-9. Free, open source and have permissive licence terms
+8. Third party frameworks/libraries/services used must be free, open source and have permissive licence terms
 10. Do not require installation by user
-11. Do not violate other constraints
-12. PlanPal should work well for standard screen resolutions 1920x1080 and higher and for screen scales 150%
-13. PlanPal should be packaged into a single JAR file
-14. JAR file should not be above 100MB
+11. PlanPal should work well for standard screen resolutions 1920x1080 and higher and for screen scales 150%
+12. PlanPal should be packaged into a single JAR file
+13. JAR file should not be above 100MB
 
 *{More to be added}*
 
@@ -414,6 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **PlanPal**: A software system designed to manage contact information specifically for student event planners, supporting functions like adding, updating, and deleting contacts, with data stored locally.
 * **CLI (Command Line Interface)**: A text-based user interface where the user interacts with the system by typing commands.
+* **GUI (Graphical User Interface)**: A icon-based user interface where the user interacts with the system through visual indicators and graphical icons.
 * **Contact**: An individual or entity whose information is stored in PlanPal, typically including name, phone number, email, address, role, and optionally a Telegram handle.
 * **Role**: A category assigned to a contact to indicate their relationship to an event, such as "attendee," "vendor," "volunteer," or "sponsor".
 * **Tag**: A label that is applied to a contact to categorize them (e.g., as an attendee, vendor, volunteer, or sponsor) for easy organization and filtering.
@@ -421,7 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **User Object**: The data structure in PlanPal that holds the information of a contact, including details like name, phone number, email, address, role, and Telegram handle.
 * **Single User**: PlanPal is designed to support only one user per system. It is not intended for multiple users on the same computer.
 * **Local Storage**: PlanPal stores all contact data on the user's local machine, without relying on external databases or cloud storage.
-* **Standard** Screen Resolution: PlanPal is optimized for display on screens with a resolution of 1920x1080 or higher, and it supports screen scaling up to 150% for better visibility on high-resolution displays.
+* **Standard Screen Resolution**: PlanPal is optimized for display on screens with a resolution of 1920x1080 or higher, and it supports screen scaling up to 150% for better visibility on high-resolution displays.
 * **JAR File**: A Java Archive file that contains all the compiled code, libraries, and resources required for PlanPal to run.
 * **Index**: A numerical identifier used to specify a contact in a list for actions like deletion or updating. The index corresponds to the contact's position in the displayed list.
 
@@ -436,44 +435,112 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### **Launch and shutdown**
 
-1. Initial launch
+1. **Initial launch**
+    1. Download the jar file and copy it into an empty folder.
+    2. Open a command terminal, navigate to the folder containing the jar file, and run `java -jar planpal.jar`.
+    3. Expected: The GUI opens with sample contacts preloaded. The window size may not be optimum.
 
-   1. Download the jar file and copy into an empty folder
+2. **Saving window preferences**
+    1. Resize the window to an optimum size. Move the window to a different location.
+    2. Close the application by typing `exit`.
+    3. Re-launch the app by running `java -jar planpal.jar` in the terminal.
+    4. Expected: The most recent window size and location are retained.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+3. **Closing the app**
+    1. Type `exit` in the command box and press Enter.
+    2. Expected: The application closes without errors.
 
-1. Saving window preferences
+---
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### **Contact management**
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1. **Adding a new contact**
+    1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Rd, #04-01 t/johndoe r/vendor`
+        - Expected: A new contact "John Doe" is added. Details of the added contact are displayed in the status message.
+    2. Test case: `add n/John Doe`
+        - Expected: Error message displayed indicating missing mandatory fields.
 
-1. _{ more test cases …​ }_
+2. **Editing a contact**
+    1. Prerequisite: At least one contact exists in the list.
+    2. Test case: `edit 1 p/91234567 e/johndoe_new@example.com`
+        - Expected: Updates the phone number and email of the first contact. The updated details are displayed in the contact list.
+    3. Test case: `edit 1`
+        - Expected: Error message indicating no fields were specified for updating.
 
-### Deleting a person
+3. **Finding contacts**
+    1. Test case: `find-name John`
+        - Expected: Displays all contacts whose name contains "John" (case-insensitive).
+    2. Test case: `find-role vendor`
+        - Expected: Displays all contacts with the "vendor" role.
+    3. Test case: `find-role unknown`
+        - Expected: Does not change the contacts displayed, instead prints out the available roles for search
 
-1. Deleting a person while all persons are being shown
+4. **Deleting a contact**
+    1. Prerequisite: At least two contacts exist in the list.
+    2. Test case: `delete 2`
+        - Expected: Deletes the second contact in the list. Status message displays the details of the deleted contact.
+    3. Test case: `delete 0`
+        - Expected: Error message indicating invalid command.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+---
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### **Event management**
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. **Adding a new event**
+    1. Test case: `new Career Fair`
+        - Expected: Adds a new event named "Career Fair" to the event list.
+    2. Test case: `new`
+        - Expected: Error message indicating invalid command.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. **Adding a contact to an event**
+    1. Prerequisite: An event and at least one contact exist.
+    2. Test case: `event-add ei/1 a/1`
+        - Expected: Adds the first contact to the first event with the "attendee" role. Status message confirms the addition.
+    3. Test case: `event-add ei/1`
+        - Expected: Error message indicating invalid command.
 
-1. _{ more test cases …​ }_
+3. **Removing a contact from an event**
+    1. Prerequisite: A contact has been added to an event.
+    2. Test case: `remove ei/1 ci/1`
+        - Expected: Removes the contact from the specified event. Status message confirms the removal.
+    3. Test case: `remove ei/1`
+        - Expected: Error message indicating invalid command.
 
-### Saving data
+4. **Deleting an event**
+    1. Prerequisite: At least one event exists in the list.
+    2. Test case: `erase 1`
+        - Expected: Deletes the first event. Status message confirms the deletion.
 
-1. Dealing with missing/corrupted data files
+---
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### **Search Mode**
 
-1. _{ more test cases …​ }_
+1. **Entering and using search mode**
+    1. Test case: `search-mode`
+        - Expected: Application enters search mode, displaying all contacts in a search panel.
+    2. Test case: `search n/John`
+        - Expected: Filters the contacts in the search panel to display only those matching the name "John."
+
+2. **Excluding contacts**
+    1. Prerequisite: At least one contact is displayed in the search results.
+    2. Test case: `exclude ci/1`
+        - Expected: Removes the first contact from the search results. Status message confirms exclusion.
+
+3. **Clearing exclusions**
+    1. Prerequisite: At least one contact is excluded.
+    2. Test case: `clear-excluded`
+        - Expected: All excluded contacts are restored to the search results.
+
+4. **Exiting search mode**
+    1. Test case: `exit-search`
+        - Expected: Application returns to normal mode.
+
+---
+
+### **Data management**
+
+1. **Automatic saving**
+    1. Test case: Add a new contact or edit an existing one. Close the application and re-launch it.
+        - Expected: Changes persist and are visible after re-launch.
