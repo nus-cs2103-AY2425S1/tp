@@ -24,6 +24,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 ### Architecture
@@ -117,6 +119,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="700" />
@@ -136,7 +139,6 @@ The `Model` component,
 <puml src="diagrams/BetterModelClassDiagram.puml" width="650" />
 
 </box>
-
 
 ### Storage component
 
@@ -203,6 +205,8 @@ The following sequence diagram shows how the filter operation works through the 
 The following activity diagram summarizes what happens when a user executes a filter command:
 
 <puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommand Activity Diagram" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design Considerations
 
@@ -395,6 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AddressBook shows a input search bar
 3.  User enters input related to key of a tag
 4.  AddressBook shows a list of persons with matching tag key
+    
     Use case ends.
 
 **Extensions**
@@ -480,13 +485,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. **Initial launch**
 
    1. Download the jar file and copy into an empty folder
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+1. **Saving window preferences**
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -495,87 +500,121 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. **Deleting a person while all persons are being shown**
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. **Prerequisites:** List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. **Test case:** `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. **Test case:** `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. **Other incorrect delete commands to try:** `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Clearing all entries
 
 1. **Clear all contacts**
-   1. Prerequisites: Add at least one person to the address book.
-   2. Test case: `clear`
-   3. Expected: All contacts are removed from the list
+
+   1. **Prerequisites:** Add at least one person to the address book.
+   
+   2. **Test case:** `clear`
+   
+   3. **Expected:** All contacts are removed from the list
 
 ### Adding a person (including a duplicate phone case)
 
 1. **Add a person normally**
+
    1. **Test case:** `add n\Jane Doe p\98765432 e\janedoe@example.com a\123 Maple Street fi\middleClass s\@janeDoe t\friends:4 t\priority:3 t\client`
+   
    2. **Expected:** Jane Doe is added to the address book with specified details and tags. The UI shows the updated contact list.
 
 2. **Add a person with the same phone number (duplicatePhoneTagger)**
+
    1. **Prerequisites:** Jane Doe already exists in the address book.
+   
    2. **Test case:** `add n\John Smith p\98765432 e\johnsmith@example.com a\45 Elm Road fi\highIncome s\@johnSmith t\friends:5 t\priority:2`
+   
    3. **Expected:** John Smith is added, but a label (duplicatePhoneTagger) appears in the UI indicating that a duplicate phone number is present.
 
 3. **Add an additional person normally, for the later parts of testing**
+
    1. **Test case:**: `add n\Tim Jobs p\98222432 e\timjo@example.com a\1 Infinity Loop fi\billionaire s\@tJobs t\friends:7 t\priority:1 t\client`
+   
    2. **Expected:** Tim Jobs is added to the address book with specified details and tags. The UI shows the updated contact list.
 
 ### Filtering contacts
 
 1. **Filter by a single tag**
+
    1. **Prerequisites:** Add at least two contacts with different tags.
+   
    2. **Test case:** `filter t\client`
+   
    3. **Expected:** The list shows only contacts tagged as `client`.
 
 2. **Filter by name and tag**
+
    1. **Test case:** `filter n\Jane t\client`
+   
    2. **Expected:** The list shows contacts whose name contains "Jane" and who have the `client` tag.
 
 ### Advanced Filtering of contacts (advfilter)
 
 1. **Filter with a comparison operator on tags with values**
+
    1. **Prerequisites:** At least one contact with a tag that has a numeric value (e.g., `t\friends:4`).
+   
    2. **Test case:** `advfilter t\friends > 4`
+   
    3. **Expected:** The list displays only contacts with a `friends` tag greater than 4.
 
 2. **Filter with equality on tags with specific values**
+
    1. **Test case:** `advfilter t\priority = 3`
+   
    2. **Expected:** Only contacts with a `priority` tag set to `3` are displayed.
 
 ### Sorting contacts
 
 1. **Sort contacts by tag values in ascending order**
+
    1. **Prerequisites:** At least two contacts with a tag that has a value (e.g., `t\friends:5`).
+   
    2. **Test case:** `sort t\friends asc`
+   
    3. **Expected:** Contacts are sorted in ascending order by the value of the `friends` tag.
 
 2. **Sort contacts by tag values in descending order**
+
    1. **Test case:** `sort t\priority desc`
+   
    2. **Expected:** Contacts are sorted in descending order by the value of the `priority` tag.
 
 ### Exporting contacts
 
 1. **Export contact list to a file**
+
    1. **Prerequisites:** Have a list of contacts available to export.
+
    2. **Test case:** Run the `export format\csv` command
+
    3. **Expected:** Contacts are exported to a file in CSV format. Verify that all contact details are present in the file.
 
 ### Saving data
 
 1. **Dealing with missing/corrupted data files**
+
    1. **Prerequisites:** BA€ is not running
+   
    2. **Test case:**
+   
       1. To simulate a corrupted file, navigate to the data folder, and find bae_addressbook.json
+      
       2. Delete bae_addressbook.json
+      
       3. Launch BA€.
-   3. **Expected:** A new bae_addressbook.json file will be created and it will be empty.
+      
+   3. **Expected:** A new addressbook.json file will be created and it will be empty.

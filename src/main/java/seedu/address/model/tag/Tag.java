@@ -3,6 +3,8 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.handler.DuplicatePhoneTagger;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -15,6 +17,8 @@ public class Tag {
             "Tag values should be alphanumeric or a decimal value like '4.5' ";
     public static final String MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY = "Tag names cannot be empty.";
     public static final String MESSAGE_TAG_NAME_OR_VALUE_MISSING = "Tag name or value is missing";
+    public static final String MESSAGE_TAG_NAME_IS_RESERVED = "Tag name is reserved: %1$s";
+    public static final String VALIDATION_REGEX = "(\\p{Alpha}+|\\d+(\\.\\d+)?)";
     public static final String NAME_VALIDATION_REGEX = "\\p{Alnum}+";
     public static final String VALUE_VALIDATION_REGEX = "\\p{Alpha}+|\\d+(\\.\\d+)?";
 
@@ -56,6 +60,13 @@ public class Tag {
 
     public static boolean isValidTagValue(String test) {
         return test.matches(VALUE_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a reserved tag name.
+     */
+    public static boolean isReservedTagName(String test) {
+        return test.equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME);
     }
 
     @Override
