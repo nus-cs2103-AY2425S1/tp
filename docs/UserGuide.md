@@ -307,7 +307,7 @@ Schedules a **weekly recurring** regular lesson for the specified student in the
 Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
 
 * Schedules the regular lesson for the student at the specified `INDEX`. 
-* Regular lessons are shared across students in the same group.
+* Regular lessons are synced across students in the same group.
 * If the student already has an existing regular lesson, **it will be overwritten** by the new regular lesson given.
 * If the student is part of a group, the entire group's regular lesson will be overwritten as well.
 * `DAY` must be a day of the week (e.g. Monday, Tuesday etc.) or its 3-letter abbreviation (e.g. Mon, Tue etc.). This parameter is case-insensitive.
@@ -326,7 +326,7 @@ Schedules a makeup lesson for the specified student in the student directory.
 Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 
 * Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* Makeup lessons are shared across students in the same group.
+* Makeup lessons are synced across students in the same group.
 * `DATE` must be a valid date in the format `DD-MM-YYYY`.
 * `START_TIME` and `END_TIME` must be in 24-hour format (`HH:MM`) and `START_TIME` must be before `END_TIME`.
 
@@ -343,6 +343,7 @@ Cancels a lesson at a specific date and start time for the specified student in 
 Format: `cancel INDEX dt/DATE st/START_TIME`
 
 * Cancels a lesson for the student at the specified `INDEX`, on the specified `DATE` that starts at the specified `START_TIME`.
+* Cancellations are synced across students in the same group.
 * `DATE` must be a valid date in the format `DD-MM-YYYY`.
 * `DATE` must match the student's lesson `DATE`, and `START_TIME` must match the student's lesson `START_TIME`.
 * `START_TIME` must be in 24-hour format (`HH:MM`).
@@ -356,7 +357,7 @@ Example:
 **Note:**
 
 The cancel command supports cancelling **both regular and makeup lessons**!<br>
-Canceled makeup lessons will be removed, while canceled regular lessons appear as a list of dates in the student card.
+Cancelled makeup lessons will be removed, while cancelled regular lessons appear as a list of dates in the student card.
 
 </box>
 
@@ -487,6 +488,7 @@ Examples:
 
 All sorting is performed in ASCII order, meaning lower-cased letters are considered larger than all upper-cased letters.
 For example, "A" comes before "B", but "a" comes after "B".
+
 </box>
 
 <br>
@@ -504,7 +506,9 @@ Format: `clear`
 
 Accidentally used the `clear` command? No need to worry! You can use the `undo` command to revert your action! <br>
 Do <b>NOT</b> exit out of the application before you undo, as this will lose your data forever.
+
 </box>
+
 <br>
 <br>
 
