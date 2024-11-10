@@ -77,6 +77,8 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 
 **Notes about the Command Format:**<br>
 
+* All command words are to be written in lowercase (e.g. `find`, `list`)
+
 * Certain fields used in commands have specific constraints (e.g., format, length). For a full list of field requirements, please refer to the [Field Constraints](#field-constraints) section.
 
 * Words in `UPPER_CASE` need to be provided by you.<br>
@@ -201,7 +203,7 @@ Format: <br>
 
 * The search is case-insensitive. e.g `friend` will match `Friend`
 * The order of the keywords does not matter. e.g. `Friend Family` will match `Family Friend`
-* Partial matches are allowed, meaning searching part of a tag will still return contacts with the full tag e.g. `fam` will match `family`
+* Partial matches are allowed, meaning searching part of a tag will still return contacts with the full tag (e.g. `fam` will match `family`)
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `friend family` will return all contacts with `friend` OR `family` as a tag
 
