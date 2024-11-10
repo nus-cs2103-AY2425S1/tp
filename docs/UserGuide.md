@@ -15,6 +15,8 @@ Calling out to all [STEM](#stem) students!
 
 Navigating the internship application process can be overwhelming &ndash; from managing multiple applications to staying on top of deadlines and requirements, all while balancing your schoolwork and other commitments. That's where **InternBuddy** comes in!
 
+![basic view](images/basicNoCommand.png)
+
 Introducing **InternBuddy** &ndash; your all-in-one solution for seamless internship application management. Whether you're just beginning your search or juggling multiple opportunities, **InternBuddy** offers an intuitive, user-friendly platform that makes it easy to keep track of the companies you're interested in, the stages of your applications, and essential information to help you stay organized and focused.
 
 This guide provides step-by-step instructions to help you [start your journey](#how-to-use-our-user-guide) **with InternBuddy**. New users will find everything they need to get up and running quickly, while returning users can refresh their knowledge of InternBuddy's comprehensive features in our [command summary](#command-summary). **InternBuddy** is crafted with usability in mind – easy to learn and master, designed to support you in reaching your career goals.
@@ -131,6 +133,23 @@ Before continuing, here are some important information you need to know about th
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
+
+## GUI Overview
+
+The blurred image below shows an annotated overview of **InternBuddy's** GUI:
+
+![GUI overview](images/GUI Overview.png)
+
+The **GUI** is divided into five main sections:
+
+1. **Menu Bar**: Contains options like `Help` and `File` for easy access to essential commands.
+1. **Command Box**: The area where you can type and execute commands by pressing Enter.
+1. **Result Display Box**: Shows the results of your commands and any error messages.
+1. **Company List**: Displays the current list of companies in a card-like format, making it easy to view and manage.
+1. **Status Bar**: Displays the file path of the loaded data file, alongside our trusty companion, `InternBuddy`, who will be with you throughout your journey.
+
+
+--------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
 | Action       | Format, Examples                                                                                                                                                                  |
@@ -242,6 +261,8 @@ Examples:
 * `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
 * `add n/Google LLC t/FAANG e/contact@google.com p/1234567 t/tech`
 
+![add a company](images/addCommand.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding application record for a company: `apply`
@@ -263,6 +284,8 @@ Examples:
 * `apply 1 n/Software Engineer Intern d/Requires knowledge of ReactJS and ExpressJS`
 * `apply 2 n/Product Management Intern d/Requires Figma as/OA`
 * `apply 3 n/Devops Engineer Intern d/Requires knowledge in networks as/OFFERED`
+
+![create application](images/applyCommand.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -341,6 +364,8 @@ Examples:
 *  `edit 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
 *  `edit 2 n/Goggle t/` Edits the name of the 2nd company to be `Goggle` and clears all existing tags.
 
+![edit company details](images/editCommand.png)
+
 [back to features](#features)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -407,6 +432,8 @@ Format: `view INDEX`
 
 * Shows the application details of the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
+![view application descriptions](images/viewCommand.png)
+
 <box type="tip" seamless>
 
 **Tip:**
@@ -438,6 +465,8 @@ Format: `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`
 * Updates the application status of application record numbered `APPLICATION_INDEX` for the company at the specified `COMPANY_INDEX` to `APPLICATION_STATUS`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
+![updated application](images/updateCommand.png)
+
 <box type="tip" seamless>
 
 **tip:** `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
@@ -465,6 +494,8 @@ The index refers to the index number shown in the displayed company list. The in
 **tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
 </box>
 
+![withdrawn application](images/withdrawCommand.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Reopening company: `reopen`
@@ -474,6 +505,8 @@ Changes the status of a company from `CLOSED` to `INTERESTED`
 Format: `reopen INDEX`
 * The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 * The company at the provided index **must have status** `CLOSED`.
+
+![reopened for applications](images/reopenCommand.png)
 
 ### Exiting the program : `exit`
 
