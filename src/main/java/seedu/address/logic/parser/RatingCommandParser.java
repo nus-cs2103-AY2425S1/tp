@@ -33,12 +33,13 @@ public class RatingCommandParser implements Parser<RatingCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RatingCommand.MESSAGE_USAGE), ive);
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_RATING);
         Optional<String> ratingValue = argMultimap.getValue(PREFIX_RATING);
-        Rating rating = new Rating(null);
+        Rating rating;
         if (ratingValue.isPresent()) {
             rating = ParserUtil.parseRating(ratingValue.get());
+            return new RatingCommand(index, rating);
         }
-
-        return new RatingCommand(index, rating);
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RatingCommand.MESSAGE_USAGE));
     }
 }

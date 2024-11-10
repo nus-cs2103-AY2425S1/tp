@@ -1,5 +1,6 @@
 package seedu.address.model.restaurant;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -32,6 +33,23 @@ public class AddressTest {
         assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
         assertTrue(Address.isValidAddress("-")); // one character
         assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+    }
+
+    @Test
+    public void testHashCodeConsistency() {
+        Address address1 = new Address("Pasir Ris");
+        Address address2 = new Address("Sembawang");
+        Address address3 = new Address("Tampines");
+        Address address4 = new Address("Bedok");
+        int hashCode1 = address1.hashCode();
+        int hashCode2 = address2.hashCode();
+        int hashCode3 = address3.hashCode();
+        int hashCode4 = address4.hashCode();
+
+        assertEquals(hashCode1, address1.hashCode());
+        assertEquals(hashCode2, address2.hashCode());
+        assertEquals(hashCode3, address3.hashCode());
+        assertEquals(hashCode4, address4.hashCode());
     }
 
     @Test

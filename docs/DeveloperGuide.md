@@ -303,8 +303,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### System: Grub Address Book (GAB)
 
-**Use Case:** UC1 - Search by Vendor Name  
-**Actor:** User  
+**Use Case:** UC1 - Search by Vendor Name
+**Actor:** User
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -327,8 +327,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case:** UC2 - Filter by Tag Names  
-**Actor:** User  
+**Use Case:** UC2 - Filter by Tag Names
+**Actor:** User
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -337,38 +337,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. GAB detects an error in entered user command.  
-   * 3a1. GAB responds with a command error message and requests correct data.  
-   * 3a2. User enters new data.  
-   * Steps 3a1-3a2 are repeated until the data entered is correct.  
+* 3a. GAB detects an error in entered user command.
+   * 3a1. GAB responds with a command error message and requests correct data. 
+   * 3a2. User enters new data.
+   * Steps 3a1-3a2 are repeated until the data entered is correct.
    * Use case resumes at step 4.
 
-* 3b. GAB detects an error in entered user tag.  
-   * 3b1. GAB responds with a command error message and requests correct data.  
-   * 3b2. User enters new data.  
-   * Steps 3b1-3b2 are repeated until the data entered is correct.  
+* 3b. GAB detects an error in entered user tag.
+   * 3b1. GAB responds with a command error message and requests correct data.
+   * 3b2. User enters new data.
+   * Steps 3b1-3b2 are repeated until the data entered is correct.
    * Use case resumes at step 4.
 
 ---
 
-**Use Case:** UC3 - Filter by Price Range  
-**Actor:** User  
+**Use Case:** UC3 - Filter by Price Label
+**Actor:** User
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
-3. User enters a price range.
-4. GAB returns a list of vendors within the price range.
+3. User enters a price label.
+4. GAB returns a list of vendors within the price label.
 5. Use case ends.
 
 **Extensions:**
-* 4a. No vendor found.  
-   * 4a1. GAB responds that there are no vendors within the price range.  
-   * 4a2. User enters new data.  
-   * Steps 4a1-4a2 are repeated until a vendor can be found.  
+* 4a. No vendor found.
+   * 4a1. GAB responds that there are no vendors within the price label.
+   * 4a2. User enters new data.
+   * Steps 4a1-4a2 are repeated until a vendor can be found.
    * Use case resumes at step 5.
 
-**Use Case:** UC4 - Create new vendor  
-**Actor:** User  
+**Use Case:** UC4 - Create new vendor
+**Actor:** User
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -389,7 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC5 - Update vendor
-**Actor:** User  
+**Actor:** User
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -411,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC6 - Adding tags
-**Actor:** User  
+**Actor:** User
 **MSS:**
 1. User opens the application.
 2. GAB opens up to the home page.
@@ -433,11 +433,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 **Use Case:** UC7 - Getting Help
-**Actor:** User  
+**Actor:** User
 **MSS:**
 1. User opens the application.
 2. User enters a command for help.
-3. GAB displays a window with a link to the user guide. 
+3. GAB displays a window with a link to the user guide.
 4. Use case ends.
 
 
@@ -456,23 +456,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Allergy-safe**:  
+* **Allergy-safe**:
   If a user filters using the keyword "Allergies," it is implied that restaurants with the associated tag can serve food that is completely free of any potential allergens. This typically means dishes will consist mainly of rice and vegetables.
 
-* **Cuisine**:  
+* **Cuisine**:
   A label used to categorize different restaurants based on the style of cooking and culinary traditions associated with a specific region or culture.
 
-* **Vendor**:  
+* **Vendor**:
   A shop, typically a restaurant, that is listed on the app.
 
-* **Affordable Price ($)**:  
+* **Affordable Price Label (`$`)**:
   Expected price per meal per restaurant to be \( x <= \$10 \). This is a subjective estimate based on human input.
 
-* **Moderate Price ($$)**:  
+* **Moderate Price Label (`$$`)**:
   Expected price per meal per restaurant to be \( \$10 < x <= \$20 \). This is a subjective estimate based on human input.
 
-* **Premium Price ($$$)**:  
-  Expected price per meal per restaurant to be \( x > \$20 \). This is a subjective estimate based on human input.
+* **Premium Price Label (`$$$`)**:
+  Expected price per meal per restaurant to be \( \$20 < x <= \$50 \). This is a subjective estimate based on human input.
+
+* **Very Premium Price Label (`$$$$`)**:
+Expected price per meal per restaurant to be \( x > \$50 \). This is a subjective estimate based on human input.
 
 --------------------------------------------------------------------------------------------------------------------
 

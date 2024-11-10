@@ -158,7 +158,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Verdana";
-    -fx-font-size: 13pt;
+    -fx-font-size: 10pt;
     -fx-text-fill: black;
 }
 
@@ -223,24 +223,25 @@
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {
-    -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
-    -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: #F4F4F4;
+    -fx-padding: 10 22 10 22;
+    -fx-border-color: #48803b;
+    -fx-border-width: 0;
+    -fx-background-radius: 16;
+    -fx-background-color: #539642;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: #4b6a44;
 }
 
 .button:pressed, .button:default:hover:pressed {
   -fx-background-color: black;
-  -fx-text-fill: #F4F4F4;
+  -fx-text-fill: #3d5237;
 }
 
 .button:focused {
@@ -259,11 +260,11 @@
 
 .button:default {
     -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #3d5237;
 }
 
 .button:default:hover {
-    -fx-background-color: derive(-fx-focus-color, 30%);
+    -fx-background-color: derive(-fx-focus-color, 70%);
 }
 
 .dialog-pane {
@@ -324,13 +325,13 @@
 #cardPane {
     -fx-background-color: derive(#88B07E, 30%);
     -fx-border-width: 0;
-    -fx-border-radius: 16;
+    -fx-border-radius: 10;
     -fx-background-radius: 16;
 }
 
 #cardPane.favourite {
     -fx-border-color: #F5B01B;
-    -fx-border-width: 2;
+    -fx-border-width: 4;
 }
 
 #commandTypeLabel {

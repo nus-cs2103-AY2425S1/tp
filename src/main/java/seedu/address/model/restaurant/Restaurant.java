@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.Pair;
 
 /**
  * Represents a Restaurant in the address book.
@@ -26,27 +25,23 @@ public class Restaurant {
     private final Address address;
     private final Rating rating;
     private final Set<Tag> tags = new HashSet<>();
-    private boolean isFavourite;
     private final Price price;
+    private boolean isFavourite;
 
     /**
      * Every field must be present and not null.
      */
-    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, rating, tags);
+    public Restaurant(Name name, Phone phone, Email email, Address address, Rating rating, Set<Tag> tags,
+                      Price price, boolean isFavourite) {
+        requireAllNonNull(name, phone, email, address, rating, tags, price);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.rating = rating;
-
-        // Extract the price tag and other tags
-        Pair<Price, Set<Tag>> priceTagAndOtherTags = PriceCategory.extractPriceTag(tags);
-        this.price = priceTagAndOtherTags.getFirst();
-        this.tags.addAll(priceTagAndOtherTags.getSecond());
-
-        // Default to not favourite
-        this.isFavourite = false;
+        this.tags.addAll(tags);
+        this.price = price;
+        this.isFavourite = isFavourite;
     }
 
     public Name getName() {
@@ -69,32 +64,17 @@ public class Restaurant {
         return rating;
     }
 
+    public Price getPrice() {
+        return price;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         Set<Tag> allTags = new HashSet<>(this.tags);
-        allTags.addAll(getPriceTags());
         return Collections.unmodifiableSet(allTags);
-    }
-
-    /**
-     * Returns an immutable tag set without symbols in PriceCategory
-     */
-    public Set<Tag> getTagsWithoutPrice() {
-        return tags;
-    }
-
-    /**
-     * Returns an immutable tag set containing only the single price tag.
-     */
-    public Set<Tag> getPriceTags() {
-        if (price == null) {
-            return Collections.emptySet();
-        }
-        assert price != null : "Price should not be null";
-        return Collections.singleton(price);
     }
 
     /**

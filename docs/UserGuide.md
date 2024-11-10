@@ -1,4 +1,4 @@
-e---
+---
 layout: page
 title: User Guide
 ---
@@ -18,16 +18,16 @@ GRUB is a quick and efficient solution to search for local dining options, tailo
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar GRUB.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui.png](images%2FUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all restaurants.
 
-   * `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01` : Adds a restaurant named `Swensens` to the Address Book.
+   * `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01 pr/$` : Adds a restaurant named `Swensens` to the Address Book.
 
    * `delete 3` : Deletes the 3rd restaurant shown in the current list.
 
@@ -74,16 +74,20 @@ Format: `help`
 
 Adds a restaurant to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/RATING] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The rating is an integer value between 0 to 10. Rating can be empty.
 A restaurant can have any number of tags (including 0)
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The price is a string value that can be one of the following: `$`, `$$`, `$$$`, `$$$$`.
+</div>
+
 Examples:
-* `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01`
-* `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 t/Halal`
+* `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01 pr/$`
+* `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 t/Halal pr/$$`
 
 ### Listing all restaurants : `list`
 
@@ -95,7 +99,7 @@ Format: `list`
 
 Edits an existing restaurant in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/RATING] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATING] [t/TAG]…​`
 
 * Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -163,7 +167,7 @@ Examples:
 
 Rates the specified restaurant from the address book.
 
-Format: `rate INDEX [r/RATING]`
+Format: `rate INDEX r/[RATING]`
 
 * Edits the restaurant's rating at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing rating will be updated.
@@ -172,13 +176,27 @@ Format: `rate INDEX [r/RATING]`
 
 Examples:
 *  `rate 1 r/2` Edits the rating of the 1st restaurant to be `2`.
-*  `rate 2 r/2` Edits the rating of the 2nd restaurant to be `No Rating`.
+*  `rate 2 r/ ` Edits the rating of the 2nd restaurant to be `No Rating`.
+
+### Searching for restaurants by price: `price`
+
+Finds restaurants of a specific price label.
+
+Format: `price PRICE_LABEL [MORE_PRICE_LABELS]`
+
+* Multiple price labels can be entered, and the search will return restaurants that match any one of the labels (i.e. `OR` search).
+  (e.g. `price $ $$` will return restaurants that are either `$` or `$$`)
+* The order of the keywords does not matter. e.g. `$ $$` will match `$$ $`
+* Refer to the glossary for details on the price labels.
+
+Examples:
+* `price $ $$` returns restaurants that are either `$` or `$$`
+* `price $$` returns restaurants that are `$$`<br>
 
 ### Favourite a restaurant : `fav`
 
 Set the specified restaurant from the address book as favourite.
-It displays the list of favourite restaurant to the top of the display list
-favourite restaurants boxes are also highlighted with a yellow outline
+Favourite items will be highlighted with a yellow outline and pushed to the top of the list.
 
 Format: `fav INDEX`
 
@@ -191,7 +209,8 @@ Examples:
 
 ### Un-favourite a restaurant : `unfav`
 
-Removes the restaurant from the favourite list.
+Remove the specified restaurant from the favourites list.
+Un-favourite items will not be highlighted and will be re-added to the list.
 
 Format: `unfav INDEX`
 
@@ -201,7 +220,6 @@ Format: `unfav INDEX`
 
 Examples:
 *  `unfav 1` Un-favourites the 1st restaurant.
-
 
 ### Clearing all entries : `clear`
 
@@ -228,10 +246,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -253,12 +267,16 @@ _Details coming soon ..._
 ## Command summary
 
 Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 t/Halal`
+-----------|------------------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​` <br> e.g., `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 pr/$ t/Halal`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 1 p/98765432 e/swensens@plsreply.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATING] [t/TAG]…​`<br> e.g.,`edit 1 p/98765432 e/swensens@plsreply.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Mala`
 **Tag** | `tags KEYWORD [MORE_KEYWORDS]`<br> e.g., `tags Chinese`
 **List** | `list`
 **Help** | `help`
+**Rating** | `rate INDEX r/[RATING]`<br> e.g.`rate 1 r/2`
+**Price** | `price PRICE_LABEL [MORE_PRICE_LABELS]`<br> e.g., `price $ $$`
+**Favourite** | `fav INDEX`<br> e.g., `fav 1`
+**Un-Favourite** | `unfav INDEX`<br> e.g., `unfav 1`

@@ -1,5 +1,6 @@
 package seedu.address.model.restaurant;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -36,6 +37,23 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+    }
+
+    @Test
+    public void testHashCodeConsistency() {
+        Name name1 = new Name("Jag");
+        Name name2 = new Name("Will");
+        Name name3 = new Name("Amadeus");
+        Name name4 = new Name("JingWen");
+        int hashCode1 = name1.hashCode();
+        int hashCode2 = name2.hashCode();
+        int hashCode3 = name3.hashCode();
+        int hashCode4 = name4.hashCode();
+
+        assertEquals(hashCode1, name1.hashCode());
+        assertEquals(hashCode2, name2.hashCode());
+        assertEquals(hashCode3, name3.hashCode());
+        assertEquals(hashCode4, name4.hashCode());
     }
 
     @Test

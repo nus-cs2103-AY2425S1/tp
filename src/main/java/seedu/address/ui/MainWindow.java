@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -30,10 +31,14 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
+    private boolean isDarkTheme = false;
+
     // Independent Ui parts residing in this Ui container
     private RestaurantListPanel restaurantListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private HostServices hostServices;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -53,7 +58,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic logic, HostServices hostServices) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -65,7 +70,8 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = new HelpWindow(hostServices);
+        this.hostServices = hostServices;
     }
 
     public Stage getPrimaryStage() {
@@ -121,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         restaurantListPanel = new RestaurantListPanel(logic.getFilteredRestaurantList());
         personListPanelPlaceholder.getChildren().add(restaurantListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
+        resultDisplay = new ResultDisplay(hostServices);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
@@ -156,6 +162,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Toggles the theme of the app between dark and light theme
+     */
+    @FXML
+    public void handleTheme() {
+        if (isDarkTheme) {
+            getRoot().getScene().getStylesheets().setAll(getClass()
+                    .getResource("/view/GrubTheme.css").toExternalForm());
+        } else {
+            getRoot().getScene().getStylesheets().setAll(getClass()
+                    .getResource("/view/AB3/DarkTheme.css").toExternalForm());
+        }
+        isDarkTheme = !isDarkTheme;
+    }
+
+    /**
      * Shows the application window.
      */
     void show() {
@@ -174,6 +195,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Provides a convenient avenue to reset filteres in the restaurant list panel.
+     * It's pretty much an alias for the "list" command.
+     */
+    @FXML
+    private void handleResetFilters() {
+        try {
+            executeCommand("list");
+        } catch (CommandException | ParseException e) {
+            logger.info("An error occurred while executing command: list");
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
     public RestaurantListPanel getPersonListPanel() {
         return restaurantListPanel;
     }
@@ -188,6 +223,11 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            String hyperlink = commandResult.getHyperlink();
+            if (hyperlink != null) {
+                resultDisplay.setUserGuideButton(hyperlink);
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

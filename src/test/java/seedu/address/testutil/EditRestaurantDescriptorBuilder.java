@@ -39,6 +39,7 @@ public class EditRestaurantDescriptorBuilder {
         descriptor.setAddress(restaurant.getAddress());
         descriptor.setRating(restaurant.getRating());
         descriptor.setTags(restaurant.getTags());
+        descriptor.setPrice(restaurant.getPrice());
     }
 
     /**
@@ -88,6 +89,14 @@ public class EditRestaurantDescriptorBuilder {
     public EditRestaurantDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Price} of the {@code EditRestaurantDescriptor} that we are building.
+     */
+    public EditRestaurantDescriptorBuilder withPrice(String price) {
+        descriptor.setPrice(new seedu.address.model.restaurant.Price(price));
         return this;
     }
 

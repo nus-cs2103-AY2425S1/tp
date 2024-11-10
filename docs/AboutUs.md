@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/amadeus.md)]
 
 * Role: Developer
-* Responsibilities: UI + Data + DevOps  
+* Responsibilities: UI + Data + DevOps
 
 ### Saw Jing Wen
 
