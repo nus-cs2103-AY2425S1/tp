@@ -476,7 +476,7 @@ Deletes the specified tag(s) from the specified contact.
 <div markdown="span" class="alert alert-primary">💡
  **Tip**:
 
-To delete all contacts with the `Y3` tag, simply use `filtertag Y3` followed by `deletetag all t/Y3`
+To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `deletetag all t/Y3`
  </div>
 
 **Examples**:
