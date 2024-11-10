@@ -118,7 +118,7 @@ together.
 
 **Main components of the architecture**
 
-**`Main`** consists of two classes: [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)). It is in charge of the app launch and shut down.
+**`Main`** consists of two classes: [`Main`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)). It is in charge of the app launch and shut down.
 * At app launch: it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down: it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -152,7 +152,7 @@ The sections below give more details of each component.
 
 This component is responsible for displaying the graphical elements of TalentSG's GUI to the user.
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -182,7 +182,7 @@ The `UI` component,
 
 This component is responsible for processing and executing user commands
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -215,7 +215,7 @@ How the parsing works:
 
 This component is responsible for storing and managing TalentSG’s data
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
@@ -238,7 +238,7 @@ The `Model` component,
 
 This component is responsible for saving and retrieving TalentSG's data
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
