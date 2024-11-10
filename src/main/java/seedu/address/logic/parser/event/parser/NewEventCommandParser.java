@@ -27,14 +27,18 @@ public class NewEventCommandParser implements Parser<AddEventCommand> {
      *     {@code NewEventCommand#MESSAGE_USAGE}.
      */
     public AddEventCommand parse(String userInput) throws ParseException {
+        if (userInput.isBlank()) {
+            logger.log(Level.WARNING, "User inputted blank Event name, throw ParseException");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
+        }
+
         try {
             Event event = ParserUtil.parseEvent(userInput);
             logger.log(Level.INFO, "Successfully parsed event: {0}", event);
             return new AddEventCommand(event);
         } catch (ParseException pe) {
             logger.log(Level.WARNING, "ParseException encountered: {0}", pe.getMessage());
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
     }
 }
