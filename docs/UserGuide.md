@@ -51,7 +51,7 @@ tasks done faster than traditional GUI apps.
 1. Type commands in the command box and press Enter to execute them. e.g. typing **`help`** and pressing Enter will open the help window. 
    Some example commands you can try:
 
-   * `add n/John David p/98765432 e/johnd@gmail.com a/Jurong East, Block 71, #04-19, 672381` : Adds a [contact](#contact) named `John David` with the specified details to your contacts.
+   * `add n/John David p/98765432 e/johnd@gmail.com a/Jurong East, Block 71, #04-19, 672381` : Adds a [contact](#glossary) named `John David` with the specified details to your contacts.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list in view.
    
