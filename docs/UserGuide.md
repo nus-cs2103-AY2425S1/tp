@@ -205,12 +205,13 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 
 #### Person-Wedding Relationships
 
-- **Vendor Assignments**:
-    - A person can be assigned to multiple weddings as a vendor.
+- **Role Assignments**:
+    - A person can be assigned to multiple weddings with or without a role.
     - Cannot assign the same person to the same wedding multiple times.
         - Error: "Person has already been assigned to wedding(s)."
 - **Deletion Effects**:
-    - Deleting a wedding removes all vendor assignments related to that wedding.
+    - Deleting a wedding removes all assignments related to that wedding.
+    - Can delete a person who is assigned to a wedding.
 
 #### Role-Person Relationship
 
@@ -354,7 +355,7 @@ Deletes a specified person from the address book or removes wedding jobs assigne
     - `delete 2` deletes the person at index 2.
     - `delete Betsy` deletes Betsy if there's only one match.
   
-#### Deleting a Person: `delete`
+#### Removing Wedding Jobs Assigned to a Person: `delete`
 
 Removes wedding jobs assigned to specified person.
 
