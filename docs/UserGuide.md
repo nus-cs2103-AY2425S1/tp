@@ -41,10 +41,10 @@ This app is a desktop app for managing candidates and job roles, **optimised for
     - [Bug Report](#how-to-report-a-bug)
     - [Archiving Data Files](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
-- [Glossary](#glossary)
 - [Known Limitation](#known-limitation)
-
-
+- [Planned Enhancement](#planned-enhancement)
+- [Glossary](#glossary)
+- [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -149,18 +149,18 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 <br> <br>
 #### Constraints of fields
 
-| Field            | Constraints                                                             | Example                                                                                                  |
-|------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **NAME**         | Any number of alphanumeric characters and spaces, no special characters | `Dominic`, `Stanley`, `Adi`, `83452124212`                                                                              |
-| **PHONE_NUMBER** | Numeric                                                                 | `98989899`, `81092819`                                                                                   |
-| **EMAIL**        | Valid email format                                                      | `testing@gmail.com`,`example@gmail.com`                                                                  |
-| **ADDRESS**      | Valid address, should not be blank                                      | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
-| **SKILLS**       | Comma-separated values                                                  | `Java, Python`, `C++`                                                                                    |
+| Field            | Constraints                                                             | Example                                                                                                 |
+|------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **NAME**         | Any number of alphanumeric characters and spaces, no special characters | `Dominic`, `Stanley`, `Adi`                                                                             |
+| **PHONE_NUMBER** | Numeric                                                                 | `98989899`, `81092819`                                                                                  |
+| **EMAIL**        | Valid email format                                                      | `testing@gmail.com`,`example@gmail.com`                                                                 |
+| **ADDRESS**      | Valid address, should not be blank                                      | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                  |
+| **SKILLS**       | Comma-separated values                                                  | `Java, Python`, `C++`                                                                                   |
 | **STATUS**       | Predefined statuses                                                     | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
-| **EXPERIENCE**   | Valid experience, should not be blank                                   | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                            |
-| **DESIRED_ROLE** | Desired job position, should not be blank                               | `Software Engineer`, `UI/UX Designer`                                                                    |
-| **NOTE**         | Any characters are accepted                                             | `Very confident`, `Confident`                                                                            |
-| **Tags**         | Optional and can be multiple                                            | `Must have`                                                                                              |
+| **EXPERIENCE**   | Valid experience, should not be blank                                   | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                           |
+| **DESIRED_ROLE** | Desired job position, should not be blank                               | `Software Engineer`, `UI/UX Designer`                                                                   |
+| **NOTE**         | Any characters are accepted                                             | `Very confident`, `Confident`                                                                           |
+| **Tags**         | Optional and can be multiple                                            | `Must have`                                                                                             |
 
 
 
@@ -541,7 +541,7 @@ Advanced users can edit the data file located at `[JAR file location]/data/addre
 
 ---
 
-### Reporting a Bug: `report bug`
+### Reporting a Bug
 
 If you encounter any issues or bugs while using TalentSG, you can easily report them through the Report Bug feature. This feature allows users to submit feedback directly through a designated Google Form.
 
@@ -580,15 +580,7 @@ Below is an example of the Report Bug pop-up window that will appear when you ac
 
 _Details coming soon ..._
 
---------------------------------------------------------------------------------------------------------------------
-
-## Known Issues and Bugs
-
-1. Result/Feedback display uses a scroll bar. Few users reported feedback information shown is not wrapped but it can be easily tackled by using the scroll bar.
-2. 
-    
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## FAQ
 
@@ -608,6 +600,60 @@ _Details coming soon ..._
 **A**: Simply download the latest `.jar` file released on our GitHub page.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Known Limitation
+
+### 1. Scroll Bar Usage for Feedback Display 
+
+**Issue**: Result/Feedback display uses a scroll bar. Few users reported feedback information shown is not wrapped.
+
+---
+
+## Planned Enhancement
+
+### 1. Overview Panel Not Cleared
+
+**Issue**: When using the `clear` command, all candidates are removed from the **Applicants List**, but if a candidate was previously selected, their details remain displayed in the **Overview Panel**.
+
+**Expected Behavior**: Ideally, the **Overview Panel** should also be cleared when the list is empty, as no candidates are available for viewing.
+
+**Reason**: This behaviour occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
+
+**Potential Solution**:
+- Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
+
+  > **Suggested Implementation**: Use an observer that listens for changes in the candidate list model and updates the **Overview Panel** accordingly. This would ensure that both `clear` and `delete` commands properly update the **Overview Panel**.
+
+**Note**: This Solution will fix [2. Update Overview After Executing Command](#2-update-overview-after-executing-command)
+
+**Current Workaround**: Users can manually select a new candidate (if available) or restart the app to refresh the **Overview Panel**.
+
+
+### 2. Update Overview After Executing Command
+
+**Issue**: When using the `add`, `edit` and `delete` commands, the **Overview Panel** will not display the correct information immediately. 
+
+**Expected Behavior**: Ideally, the **Overview Panel** should display the correct information immediately after executing the commands mentioned. 
+
+**Reason**: This behaviour occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
+
+**Potential Solution**:
+- Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
+
+  > **Suggested Implementation**: Use an observer that listens for changes in the candidate list model and updates the **Overview Panel** accordingly. This would ensure that the `add`, `edit` and `delete` commands properly update the **Overview Panel**.
+
+**Note**: This Solution will fix [1. Overview Panel Not Cleared](#1-overview-panel-not-cleared)
+
+**Current Workaround**: <br>
+To Update the Overview
+1. Users can manually click on the [summary button](#summary-summary).
+2. Type [`summary`](#summary-summary) under the CLI terminal.
+3. Restart the app.
+
+
+
+
+---
 
 ## Glossary
 
@@ -686,23 +732,7 @@ The **Status** field in TalentSG indicates the applicant’s current stage in th
 
 ---
 
-## Known Limitation
-
-### Overview Panel Not Cleared
-
-**Issue**: When using the `clear` command, all candidates are removed from the **Applicants List**, but if a candidate was previously selected, their details remain displayed in the **Overview Panel**.
-
-**Expected Behavior**: Ideally, the **Overview Panel** should also be cleared when the list is empty, as no candidates are available for viewing.
-
-**Reason**: This behaviour occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
-
-**Potential Solution**:
-- Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
-
-  > **Suggested Implementation**: Use an observer that listens for changes in the candidate list model and updates the **Overview Panel** accordingly. This would ensure that both `clear` and `delete` commands properly update the **Overview Panel**.
-
-**Current Workaround**: Users can manually select a new candidate (if available) or restart the app to refresh the **Overview Panel**.
-
-**Future Development**: Since implementing this change would require code modifications that are not feasible in version 1.6, this feature could be considered for future updates.
-
+## Acknowledgements
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+
