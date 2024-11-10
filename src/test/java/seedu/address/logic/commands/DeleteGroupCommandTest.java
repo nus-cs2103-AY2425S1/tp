@@ -16,6 +16,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
 
+//@@author gho7sie
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteGroupCommand}.

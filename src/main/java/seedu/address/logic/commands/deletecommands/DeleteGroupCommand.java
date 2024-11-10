@@ -16,6 +16,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
+//@@author gho7sie
 /**
  * Deletes a group from the address book and removes students in the group.
  */

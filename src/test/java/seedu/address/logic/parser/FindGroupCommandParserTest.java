@@ -13,6 +13,8 @@ import seedu.address.logic.commands.findcommands.FindGroupCommand;
 import seedu.address.logic.parser.findcommands.FindGroupCommandParser;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
+//@@author gho7sie
+
 public class FindGroupCommandParserTest {
 
     private FindGroupCommandParser parser = new FindGroupCommandParser();

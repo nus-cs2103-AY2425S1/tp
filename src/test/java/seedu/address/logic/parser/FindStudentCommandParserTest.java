@@ -13,6 +13,8 @@ import seedu.address.logic.commands.findcommands.FindStudentCommand;
 import seedu.address.logic.parser.findcommands.FindStudentCommandParser;
 import seedu.address.model.student.StudentMatchesQueryPredicate;
 
+//@@author gho7sie
+
 public class FindStudentCommandParserTest {
 
     private FindStudentCommandParser parser = new FindStudentCommandParser();

@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+//@@author gho7sie
+
 /**
  * Represents a Task that can be assigned to a Group.
  * Guarantees: details are present and not null, field values are validated, immutable.

@@ -17,6 +17,7 @@
   used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
@@ -201,6 +202,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Implementation**
@@ -278,6 +280,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - Con: Possible for user to mistype the wrong number
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ### Delete Group feature
@@ -337,6 +340,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - Con: Possible for user to mistype the wrong number
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ### Undo/redo feature
@@ -400,6 +404,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - [DevOps guide](DevOps.md)
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
@@ -759,8 +764,9 @@ Use case ends.
    able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be for a single user only.
 5. Data should be stored in a human editable text file.
-6. Should not depend on any remote server.
-7. Should be packaged into a single JAR file
+6. Should be able to store up to 100 version histories.
+7. Should not depend on any remote server.
+8. Should be packaged into a single JAR file
 
 _{More to be added}_
 
@@ -774,6 +780,7 @@ _{More to be added}_
 | Student Number | Unique identifier for a student                              |
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
@@ -809,7 +816,7 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant
-   
+
     2. Test case: `fs q/Alex Ye`<br>
        Expected: T_Assistant displays `Alex Yeoh` only.
 
@@ -886,18 +893,18 @@ testers are expected to do more _exploratory_ testing.
 
 1. Edit an existing student's name
 
-    1. Prerequisites: List students using `ls`. Have a Student with the Student Number `A0597991H` and name is not
+    1. Prerequisites: List students using `ls`. Have at least 1 student in the list and name is not
        `Clark Kent`.
 
-    2. Test case: `es sno/A0597991H sn/Clark Kent`<br>
+    2. Test case: `es i/1 sn/Clark Kent`<br>
        Expected: Student Name is updated to Clark Kent
 
 2. Editing an existing student's name to the same name
 
-   1. Prerequisites: Ran the above test case. 
+    1. Prerequisites: Ran the above test case.
 
-   2. Test case: `es sno/A0597991H sn/Clark Kent`<br>
-      Expected: Error given due to no change detected.
+    2. Test case: `es i/1 sn/Clark Kent`<br>
+       Expected: Error given due to no change detected.
 
 ### Adding a student(s) to a group
 
@@ -977,7 +984,7 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant
-   
+
     2. Test case: `fs q/F12`<br>
        Expected: T_Assistant displays `CS2103-F12-1` only.
 
@@ -990,7 +997,7 @@ testers are expected to do more _exploratory_ testing.
     2. Test case: `ag gn/cs2103-f20-1`<br>
        Expected: The group is added into the group list.
 
-    3. Test case: ag gn/cs2103-f20-1`<br> (Add the same group again)
+    3. Test case: `ag gn/cs2103-f20-1`<br> (Add the same group again)
        Expected: After doing the above step, repeating this command again will yield an error message.
 
     4. Test case: `ag gn/Team 1`<br>
@@ -1083,10 +1090,10 @@ testers are expected to do more _exploratory_ testing.
 ### Editing a group
 
 1. Editing a group's name
-   
+
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant. Run `lg` to see list of groups.
-   
+
     2. Test case: `eg i/1 gn/CS2103-F12-2`<br>
        Expected: `CS2103-F12-1` edited to `CS2130-F12-2`
 
@@ -1096,7 +1103,7 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant
-   
+
     2. Test case: `ft q/post`<br>
        Expected: T_Assistant displays `Add postmortem to team docs` only.
 
@@ -1255,16 +1262,17 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant. Run `lt gn/CS2103-F12-1` to see list of tasks for `CS2103-F12-1`.
-    
+
     2. Test case: `etg i/1 gn/CS2103-F12-1 tn/Add postmortem to team docs and report`<br>
        Expected: `Add postmortem to team docs` edited to `Add postmortem to team docs and report`
 
 ## Marking a task
+
 1. Marking a group's task
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant. Run `lt gn/CS2103-F12-1` to see list of tasks for `CS2103-F12-1`.
-   
+
     2. Test case: `mt i/1 gn/CS2103-F12-1`<br>
        Expected: Task at index 1 for `CS2103-F12-1` is updated to `COMPLETED`
 
@@ -1278,7 +1286,7 @@ testers are expected to do more _exploratory_ testing.
        Expected: This command will yield an error message because there is nothing to undo.
 
     1. Test case: `ag cs2103-f13-1`, then `undo`<br>
-       Expected: The add command will add a group which is reflected in the group list. The undo command then restores 
+       Expected: The add command will add a group which is reflected in the group list. The undo command then restores
        the previous data, removing this group. The removal is also reflected in the group list shown to you. After
        executing the command you will be brought back to the default panel of the application, which is the panel
        displaying the student list.
@@ -1294,11 +1302,12 @@ testers are expected to do more _exploratory_ testing.
 
     1. Test case: `ag cs2103-f13-1`, `undo`, then `redo`<br>
        Expected: The add command will add a group which is reflected in the group list. The undo command then restores
-       the previous data, removing this group. Redoing this will reverse the undo command, bringing the group back into 
-       the group list shown to you. After executing the command you will be brought back to the default panel of the 
+       the previous data, removing this group. Redoing this will reverse the undo command, bringing the group back into
+       the group list shown to you. After executing the command you will be brought back to the default panel of the
        application, which is the panel displaying the student list.
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
@@ -1317,6 +1326,57 @@ testers are expected to do more _exploratory_ testing.
 
 **Group size:** 4
 
-**Total Enhancements:** x/8 (`2x4`)
+**Total Enhancements:** 5/8 (`2x4`)
 
-[To be updated.]
+### 1. Update Email Constraints
+
+Currently, our system only validates the `local-part` of an email is alphanumerical, the following special characters `_`, `.`
+and does not start or end with special characters.
+
+##### Enhancement
+
+We plan to enhance the validation such that it follows NUS' email constraints, i.e. in the format of a student's NUS ID or friendly email.
+
+### 2. Improve UI
+
+Currently, our system only supports showing a single display panel at one time.
+
+##### Enhancement
+
+We plan to split display panel into 3 that will display students, groups and tasks panels respectively.
+This will allow users to better see all information rather than toggling through each display panel.
+
+### 3. Improve granularity of Find Student command
+
+Currently, our system returns all results that match any of the queries.
+
+#### Enhancement
+
+We plan to include other parameters such as `sno`, `sn`, `e` to allow users to search specific fields of a student.
+
+Flags will be introduced to fine-tune the search such that the user can choose for the system to search if the fields contain the queries or if the fields start with the queries.
+Additionally, we will also change the command to return only results that match ALL queries given.
+
+### 4. Enhance Sort Group
+
+Currently, our system sorts `Groups` by ASCII order.
+
+#### Enhancement
+
+We plan to improve the sorting feature to sort by alphabetical and numerical order.
+
+Below is a simplified process of how the sort will work:
+
+A reminder that this is the format accepted for `Group Name`: `[Module]-[Tutorial Group]-[Group Number]`
+
+1. For `Module`, `CS2103` groups will come first, followed by `CS2103T` groups.
+2. For `Tutorial Group`, the letter will be compared first and sorted by alphabetical order. If there is a tie, the numerical part will be compared and sorted in descending order.
+3. For `Group Number`,if the sort feature reaches this section, it will be sorted by descending order of numerical value.
+
+### 5. Enhance Sort Student
+
+Currently, our system sorts `Students` by ASCII order.
+
+#### Enhancement
+
+We plan to update the sorting such that it sorts by alphabetical order instead.
