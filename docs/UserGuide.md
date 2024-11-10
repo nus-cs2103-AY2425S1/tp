@@ -304,8 +304,7 @@ Allows users to quickly access previously entered commands without retyping them
 Format: `↑` or `↓`
 
 - Up Arrow `↑`: Displays the last command you entered. Press multiple times to view older commands in reverse order.
-- Down Arrow `↓`: Moves forward through the command history, displaying newer commands. Once you reach the most recent 
-command, pressing `↓` again will clear the command box.
+- Down Arrow `↓`: Moves forward through the command history, displaying newer commands. Once you reach the most recent command, pressing `↓` again will clear the command box.
 
 Examples:
 - `↑` : Retrieve previous command in the command box.
