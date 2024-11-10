@@ -73,8 +73,11 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedTask jsonAdaptedTask : tasks) {
             try {
                 Task task = jsonAdaptedTask.toModelType();
+                Person patient = task.getPatient();
                 if (addressBook.hasTask(task)) {
                     logger.warning("Duplicate task found and ignored: " + task);
+                } else if (!addressBook.hasPerson(patient)) {
+                    logger.warning("Patient linked to the following task does not exist: " + task);
                 } else {
                     addressBook.addTask(task);
                 }
