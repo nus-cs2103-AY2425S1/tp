@@ -96,8 +96,8 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 | [**Add New Members to Group**](#adding-new-members-to-an-existing-group-addtogroup)  | `addToGroup g/GROUP_NAME m/[INDICES]`                             | `addToGroup g/beach cleanup m/1 2 3-6`         |
 | [**Remove Existing Members from Group**](#removing-members-from-an-existing-group-removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`             | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
 | [**Edit Group Name**](#editing-a-groups-name-editgroupname)             | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`                 | `editGroupName g/blood drive g/blood donation` |
-| [**Delete Group**](#deleting-a-group-deletegroup)                 | `deleteGroup g/GROUP_NAME`                                        | `deleteGroup g/blood donation`                 |
 | [**List Groups**](#listing-groups-listgroups)                  | `listGroups`                                                     | `listGroups`                                   |
+| [**Delete Group**](#deleting-a-group-deletegroup)                 | `deleteGroup g/GROUP_NAME`                                        | `deleteGroup g/blood donation`                 |
 
 ### General Commands
 | **Action**           | **Format** | **Example** |
@@ -332,6 +332,21 @@ Example:
 * `editGroupName g/blood drive 2024 g/charity run` renames an existing group called
   `blood drive 2024` into `charity run`.
 
+### Listing groups: `listGroups`
+Shows a list of all existing groups.
+
+Format: `listGroups`
+
+* The group size and up to three members are displayed for each group.
+* If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
+
+<box type="tip" seamless>
+
+**Tip:** To view all members of a group with more than 3 people, use `search g/GROUP_NAME`.
+</box>
+
+![result for 'list groups'](images/list-groups.png)
+
 ### Deleting a group: `deleteGroup`
 
 Deletes a group.
@@ -343,21 +358,6 @@ Format: `deleteGroup g/GROUP_NAME`
 
 Example:
 * `deleteGroup g/blood drive 2024`
-
-### Listing groups: `listGroups`
-Shows a list of all existing groups.
-
-Format: `listGroups`
-
-* The group size and up to three members are displayed for each group.
-* If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
-* 
-<box type="tip" seamless>
-
-**Tip:** To view all members of a group with more than 3 people, use `search g/GROUP_NAME`.
-</box>
-
-![result for 'list groups'](images/list-groups.png)
 
 ### Viewing help : `help`
 
