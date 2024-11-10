@@ -19,7 +19,7 @@ This guide will walk you through HallPointer’s main features and show you step
 
 ## Table of Contents
 
-- [Quick start](#quick-start)
+- [Getting Started Quickly](#quick-start)
 - [Command summary](#command-summary)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
@@ -42,9 +42,11 @@ This guide will walk you through HallPointer’s main features and show you step
 
 ---
 
-## Quick start
+## Getting Started Quickly
 
-1. Ensure you have Java `17` or above installed on your computer.
+1. **Make sure Java is installed:**\
+Check that Java `17` or above is installed by opening a command terminal and typing `java -version` before pressing Enter.\
+If it is not installed, download and install the right one for your system by following the appropriate guide before continuing: [Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html), [Mac](https://se-education.org/guides/tutorials/javaInstallationMac.html), [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/ay2425s1-cs2103t-w14-3/tp/releases/latest).
 
