@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
@@ -127,6 +128,11 @@ public class FindCommandParserTest {
         predicate = new ContainsKeywordsPredicateBuilder().withNicknameKeywords(NICKNAME_KEYWORD_LIST).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parseName_emptyValue_returnsEmpty() throws Exception {
+        assertThrows(seedu.address.logic.parser.exceptions.ParseException.class, () -> ParserUtil.parseName(""));
     }
 
     @Test

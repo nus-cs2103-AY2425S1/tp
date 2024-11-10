@@ -135,4 +135,9 @@ public class ContactTest {
                 + ", roles=" + ALICE.getRoles() + ", nickname=" + ALICE.getNickname() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void isHashCode() {
+        assertTrue(ALICE.hashCode() < 0);
+    }
 }

@@ -37,6 +37,7 @@ public class HelpCommandTest {
 
         assertNotEquals(regularHelpCommand, 1);
         assertNotEquals(regularHelpCommand, addHelpCommand);
+        assertEquals(regularHelpCommand, regularHelpCommand);
         assertEquals(regularHelpCommand, otherHelpCommand);
         assertEquals(addHelpCommand, otherAddHelpCommand);
         assertNotEquals(addHelpCommand, editHelpCommand);

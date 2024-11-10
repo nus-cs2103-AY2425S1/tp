@@ -61,18 +61,16 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
     }
 
-    // omitted as we are accepting any character as name, hence this INVALID_NAME no longer is invalid
-    /*
-    @Test
-    public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
-    }
-     */
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
+    }
+
+    @Test
+    public void parseName_emptyValue_returnsEmpty() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseName(""));
     }
 
     @Test
@@ -90,6 +88,11 @@ public class ParserUtilTest {
     @Test
     public void parseTelegramHandle_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTelegramHandle(INVALID_TELEGRAM_HANDLE));
+    }
+
+    @Test
+    public void parseTelegramHandle_emptyValue_returnsEmpty() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegramHandle(""));
     }
 
     @Test
@@ -136,6 +139,11 @@ public class ParserUtilTest {
     @Test
     public void parseEmail_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+    }
+
+    @Test
+    public void parseEmail_emptyValue_returnsEmpty() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(""));
     }
 
     @Test

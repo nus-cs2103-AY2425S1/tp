@@ -107,7 +107,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         return Arrays.asList(keywords);
     }
 
-    // from add command but change from allMatch to anyMatch
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -115,23 +114,5 @@ public class FindCommandParser implements Parser<FindCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Arrays.stream(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
-    /*
-    private void checkCanParse(List<String> keywords, Function<String, ParserUtil> parser) throws ParseException {
-        String invalidInput = keywords.stream().map(word -> {
-                    try {
-                        parser.apply(word);
-                        return ""; // successful
-                    } catch (ParseException e) {
-                        return e.getMessage(); // fail
-                    }
-                }).filter(inputValidity -> !inputValidity.isEmpty())
-                .limit(1) // to standardise throughout that 1 error at the time is only shown
-                .reduce("", (toReturn, errorMessage) -> errorMessage);
-        if (!invalidInput.isEmpty()) {
-            throw new ParseException(invalidInput);
-        }
-
-    }*/
 }
 

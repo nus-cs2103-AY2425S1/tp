@@ -24,8 +24,6 @@ public class HelpCommand extends Command {
     public static final String DETAIL_PREAMBLE_START = "For more details,";
     public static final String MESSAGE_REFER_USERGUIDE =
             "%1$s visit our complete user guide on the popup window %2$s";
-    // "%s visit " + USERGUIDE_URL + WHITESPACE
-    //            + "for complete user guide"
     public static final String MESSAGE_REFER_USERGUIDE_GENERAL_HELP =
             String.format(MESSAGE_REFER_USERGUIDE, "Alternatively,", "");
     public static final String MESSAGE_REFER_USERGUIDE_DETAIL_HELP =
@@ -103,6 +101,15 @@ public class HelpCommand extends Command {
         this.isHelp = true;
     }
 
+    /**
+     * Executes the HelpCommand, returning a CommandResult that contains the help message.
+     *
+     * @param model The model in which the command operates. This parameter is not used
+     *              directly in HelpCommand but is included to adhere to the Command interface.
+     * @return A CommandResult containing the message to be displayed to the user,
+     *         with an indication if it's the general help message.
+     */
+
     @Override
     public CommandResult execute(Model model) {
         if (isHelp) {
@@ -112,6 +119,13 @@ public class HelpCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the current HelpCommand object is equal to another object.
+     *
+     * @param obj The object to be compared with this instance of HelpCommand.
+     * @return true if the objects are the same instance or if they are instances of
+     *         HelpCommand with identical message and isHelp flag values; false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -133,6 +147,13 @@ public class HelpCommand extends Command {
         }
     }
 
+    /**
+     * Formats a list of accepted values for a specific field into a readable string.
+     *
+     * @param fieldName The name of the field for which accepted values are being formatted.
+     * @param strings An array of strings representing the accepted values for the field.
+     * @return A formatted string listing the accepted values, with appropriate separators.
+     */
     private static String formatAcceptedString(String fieldName, String[] strings) {
         int stringArraySize = strings.length;
         String toReturn = String.format("For %s, the accepted ones are:", fieldName);
