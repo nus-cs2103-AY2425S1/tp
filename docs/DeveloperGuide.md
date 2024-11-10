@@ -161,7 +161,7 @@ the application.
 
 EZSTATES contains 5 main UI components which will be elaborated in the [UI Components](#ui-components) section.
 
-#### UI Components
+### UI Components
 
 EZSTATES contains 4 main UI components: 
 1. MainWindow
@@ -215,21 +215,23 @@ matching .fxml files in `src/main/resources/view` folder. For example, the layou
 
 This section will go through some additional information about each component in the `MainWindow`.
 
-#### 1. Command Box
+##### 1. Command Box
 - The `CommandBox` is the main method by which the user interacts with EZSTATES.
 - The user types inputs into the `CommandBox` and hits `ENTER` to give a command to EZSTATES.
 - At any point in time, the user can press the `UP` and `DOWN` arrow keys to navigate the history of past inputs. 
 
 <div class="note" markdown="span"> 
-:bulb: The history of past inputs is refreshed every single time EZSTATES is closed and re-opened. Additionally, the history preserves
+:bulb: The history of past inputs is refreshed every single time EZSTATES is closed and re-opened. 
+<br>
+Additionally, the history preserves
 all inputs given by the user, including duplicate and invalid inputs.
 </div>
 
-#### 2.Result Display
+##### 2.Result Display
 - The `ResultDisplay` provides feedback to the user.
 - The `ResultDisplay` is scrollable if the output message is too long.
 
-#### 3. PersonListPanel
+##### 3. PersonListPanel
 - The `PersonListPanel` contains the `clients` stored in EZSTATES.
 - The information of a relevant `client` is displayed using the `PersonCard` component
 - The `PersonListPanel` is a view of `PersonCard` components.
@@ -237,7 +239,7 @@ all inputs given by the user, including duplicate and invalid inputs.
 such as `showclients` displays all possible `clients` in the `PersonListPanel`.
 - A newly added `client` is added to the bottom of the `PersonListPanel`.
 
-    #### PersonCard
+    ##### PersonCard
     - The `PersonCard` is the component that displays the essential information of a `client`.
     - `Client ID`
         - The `Client ID` specifies the `INDEX` value associated to the specific `client` relative to the position of 
@@ -255,17 +257,17 @@ such as `showclients` displays all possible `clients` in the `PersonListPanel`.
         - The green ribbons in the box define a tag for the client. 
 
 <div class="note" markdown="span"> 
-:bulb: Certain fields that the user can input in EZSTATES are allowed values that can exceed the UI`s ability to fully
+Certain fields that the user can input in EZSTATES are allowed values that can exceed the UI's ability to fully
 display them. This design choice can be seen in fields such as the `client name`.
-
+<br>
 IMAGE HERE LOLOLOL
-
+<br>
 Our team has accounted for this as we do not wish to enforce arbitrary limits on the user. To account for this, we have 
 implemented proper UI/UX design to wrap the overflown text. Additionally, the `moreinfo` command allows users to view the 
 fully expanded details of their client.
 </div>    
 
-#### 4. ListingListPanel
+##### 4. ListingListPanel
 - This component mirrors the design implementation of `PersonListPanel`.
 - The `ListingListPanel` contains the `listings` stored in EZSTATES.
 - The information of a relevant `listing` is displayed using the `ListingCard` component
@@ -273,7 +275,7 @@ fully expanded details of their client.
 - Commands such as `showlistings` displays all possible `listings` in the `ListingsListPanel`.
 - A newly added `listing` is added to the bottom of the `ListingListPanel`.
 
-  #### ListingCard
+  ##### ListingCard
     - The `ListingCard` is the component that displays the essential information of a `listing`.
     - `Listing ID`
         - The `Listing ID` specifies the `INDEX` value associated to the specific `listing` relative to the position of
@@ -298,11 +300,11 @@ fully expanded details of their client.
         - This box specifies the `region` of the `listing`.
 
 <div class="note" markdown="span"> 
-:bulb: The `Listing Region` color pattern follows the same colour scheme as the Mass Transportation System (MRT) in
+The `Listing Region` color pattern follows the same colour scheme as the Mass Transportation System (MRT) in
 Singapore. 
 </div>       
 
-#### 5. Status Bar Footer
+##### 5. Status Bar Footer
 - This component is a visual element located at the bottom of the `MainWindow`
 - The `StatusBarFooter` contains a button to access the `ChatWindow` via GUi means.
 
@@ -323,7 +325,7 @@ The `HelpWindow` is a view that contains the User Guide Link and displays some C
 1. User Guide Link
 - The text on the left of the buttons contains the relevant `HELP_MESSAGE` which is a link to the EZSTATES user guide.
 - The first `Button` which writes `Copy URL` copies the URL of the link in the `HELP_MESSAGE` onto the user's clipboard.
-- The second `Button` which writes `Open in Browser` opens the link in the `HELP_MESSAGE` in the use's default browser.
+- The second `Button` which writes `Open in Browser` opens the link in the `HELP_MESSAGE` in the user's default browser.
 
 2. Common Commands
 - This scrollable view below the User Guide Link describes the common commands of EZSTATES in a `TextArea`.
@@ -347,10 +349,12 @@ The `Send` button sends the prompt written in the `userInput` to the chatbot. Th
 chatbot.
 
 <div class="note" markdown="span"> 
-:bulb: To facilitate the target audience which prefers CLI-focused interactions, the user can interact with all functions of the 
-chatbot using only keyboard inputs. This is achieved in two ways. <br>
+To facilitate the target audience which prefers CLI-focused interactions, the user can interact with all functions of the 
+chatbot using only keyboard inputs. This is achieved in two ways. 
+<br>
 Firstly, when the `ChatWindow` is opened, the user can immediately start typing in the `userInput` without having to
-click on the `inputArea`. This works for subsequent prompts as well. <br>
+click on the `inputArea`. This works for subsequent prompts as well. 
+<br>
 Secondly, the chatbot can be closed by prompting the bot with a `bye` message.
 </div>     
 
@@ -387,9 +391,9 @@ to specify characteristics or information about their user which can be hidden f
 remark is only displayed within the `MoreInfoWindow`.
 
 <div class="note" markdown="span"> 
-:bulb: The `clientRemarksLabel` allows a maximum of 400 characters to be entered. This was chosen due to the small space
+The `clientRemarksLabel` allows a maximum of 400 characters to be entered. This was chosen due to the small space
 allocated for the remarks, which is a trade-off made to display other relevant `client` information.
-
+<br>
 Additionally, the `clientRemarksLabel` is saved in EZSTATES when the application is closed and preserved when it is opened.
 </div> 
 
@@ -419,8 +423,9 @@ This window is developed as a fail-safe for users to protect against deletions o
 since a `listing` cannot exist without its `seller`.
 
 <div class="note" markdown="span"> 
-:bulb: To facilitate the target audience which prefers CLI-focused interactions, the `ConfirmationDialog` window can be interacted with fully
-keyboard-only inputs. <br>
+To facilitate the target audience which prefers CLI-focused interactions, the `ConfirmationDialog` window can be interacted with fully
+keyboard-only inputs. 
+<br>
 In the window, the user can navigate between the Yes/No buttons using the `LEFT ARROW <` and `RIGHT ARROW >` keys. To confirm their
 decision, they can do so by pressing `ENTER`. Additionally, they can also exit the window by using the `ESC` key.
 </div>
@@ -439,6 +444,7 @@ it to the `ConfirmationDialogController`. `Window` then passes the `client` to t
 :bulb: Why is it beneficial to create a Controller class?
 <br>
 This approach keeps the code modular and organized through the **Separation of Concerns** design principle. 
+<br>
 The `Window` class handles the window setup and layout loading exclusively while the `Controller` class manages all
 UI interactions and dynamically updates the UI utilising `set` methods. By dividing responsibilities between classes, this
 simplifies code, improves maintainability and enhances reusability.
@@ -483,7 +489,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the EZSTATES data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and all `Listing` objects (which are contained in a `UniqueListingList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
