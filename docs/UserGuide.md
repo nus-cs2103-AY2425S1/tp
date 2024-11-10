@@ -16,7 +16,7 @@ This means that you can do everything by simply typing commands into the command
 
 If you can type fast, and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
 
-- Table of Contents
+* Table of Contents
   {:toc}
 
 ---
@@ -44,11 +44,11 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
    - `clear all` : Deletes all events and persons after receiving confirmation from you.
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
-</div>
+    <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+    Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
+    </div>
 
-- `exit` : Exits the app.
+    - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
