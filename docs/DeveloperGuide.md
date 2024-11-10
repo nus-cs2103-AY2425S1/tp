@@ -231,7 +231,7 @@ The force feature is applicable for the following commands:
 * `Assign Wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
 * `Delete Wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
 
-The force functionality can be used with the above functions by including f/ at the end of the command.
+The force functionality can be used with the above functions by including f/ at the end of the command. Additional inputs following the f/ is extraneous and would be discarded.
 
 Example usage: delete-tag t/Tag1 f/
 
