@@ -643,8 +643,8 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 * **Archive**: A feature that allows users to store old data for use later without cluttering the current interface.
 * **Export**: Saving the student data in a file format as `json` file. This is done through data archiving.
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Student Number**: A unique identifier assigned to each student.
 * **Tag**: A label that can be added to a student for categorization or searching.
 * **Undo/Redo**: The ability to reverse an action/command made in the application.
@@ -680,7 +680,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 1. Adding a person into the person list
-    1. Assumption: We assume there is no duplicate in this test case
+   1. Assumption: We assume there is no duplicate in this test case
    2. Test case `add n/John Doe p/98765432 g/male m/Physics`<br>
    Expected: A person named John Doe into StoreClass with the details givens
    3. Test case `add n/John Doe p/000 g/male m/Physics`<br> 
@@ -726,29 +726,29 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-    1. Here `<HomeFolder>` refer to the folder containing the jar file.
+   1. Here `<HomeFolder>` refer to the folder containing the jar file.
    1. Test case: Missing data file<br>
       1. Close the app
       2. Delete the json file with path `<HomeFolder>/data/addressbook.json` or remove the `data` folder entirely
       3. Reopen the app <br>
-   Expected: a sample database will be provided.
+      Expected: a sample database will be provided.
    2. Test case: Corrupted file<br>
       1. Ensure that there is at least 1 student in StoreClass
       1. Close the app
       2. Open the json file with path  `<HomeFolder>/data/addressbook.json` and edit the name of the first student name to a invalid one e.g. `J@hn D*n`
       3. ReOpen the app <br>
-   Expected: the corrupted list is discarded and an empty list is provided
+      Expected: the corrupted list is discarded and an empty list is provided.
 
 1. Saving data
-    1. Do some simple command to add / edit / delete student
-   2. Close the app
-   3. Reopen the app to see if your changes are saved correctly<br>
+   1. Do some simple command to add / edit / delete student.
+   2. Close the app.
+   3. Reopen the app to see if your changes are saved correctly.<br>
    Expected: Data is saved correctly, the list should after reopen should be same as before close.
 
 ### Finding a person
 
 1. Test case: `find John`<br>
-Expected: list out all students whose names and tags contain john
+Expected: list out all students whose names and tags contain john.
 
 ### Filtering a list
 
@@ -758,11 +758,11 @@ Expected: list out all the male students.
 ### Undoing and Redoing a action
 
 1. Test case: Undo and redo a command
-    1. Perform a simple command that is supported by undo and redo e.g. add, edit or delete
+   1. Perform a simple command that is supported by undo and redo e.g. add, edit or delete
    2. Enter the command `undo`<br>
-   Expected: the action performed in step 1 will be undo
+   Expected: the action performed in step 1 will be undo.
    3. Enter the command `redo`<br>
-   Expected: the action undone in step 2 will be redo
+   Expected: the action undone in step 2 will be redo.
 
 ### Archiving Data
 Prerequisite: Ensure you can write in the `<HomeFolder>`
@@ -771,7 +771,7 @@ Test case:  `archive pa/mybook.json`<br>
 Expected: The current list is cleared. Its data is stored in a json file with path `<HomeFolder>/archived/mybook.json`
 
 ### Loading Data
-Prerequisite: Ensure you have a local `json` file containing a StoreClass data to read in the folder `<HomeFolder>/archived`. This can be done by try to archive one using the previous test
+Prerequisite: Ensure you have a local `json` file containing a StoreClass data to read in the folder `<HomeFolder>/archived`. This can be done by try to archive one using the previous test.
 
 Test case: `load pa/mybook.json`<br>
 Expected: The current list will be overwritten and the content of the file will be loaded into the list.
