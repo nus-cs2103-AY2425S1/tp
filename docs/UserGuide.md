@@ -13,11 +13,11 @@ title: User Guide
 
 ABCLI is divided into three core modes, each dedicated to a key aspect of a real estate agent workflows:
 
-* **[Buyer Mode](#Buyers)**: Organize prospective buyers with details like budget, contact info, and tags for effective monitoring and follow-up.
+* **[Buyer Mode](#buyers)**: Organize prospective buyers with details like budget, contact info, and tags for effective monitoring and follow-up.
 
-* **[Meet Up Mode](#Meet Ups)**: Schedule and manage meet-ups with buyers, track attendees, and avoid scheduling conflicts.
+* **[Meet Up Mode](#meet-ups)**: Schedule and manage meet-ups with buyers, track attendees, and avoid scheduling conflicts.
 
-* **[Property Mode](#Properties)**: Store property listings, including landlord details, asking price, and property type for quick and easy references.
+* **[Property Mode](#properties)**: Store property listings, including landlord details, asking price, and property type for quick and easy references.
 
 These modes allow real estate agents to handle buyers, meet-ups, and property listings at a rapid pace, ensuring an efficient, convenient and integrated workflow for those who thrive on speed.
 
@@ -142,8 +142,13 @@ Examples:
 * The mode is important for command execution, e.g. to `add` a `Buyer`, you need to be in the `b` mode, to `add` a `MeetUp`, you need to be in the `m` mode, etc.
 </div>
 
-## Buyers
+<a id="buyers"></a>
+<span style="font-size: 30px; font-weight: bold; color: #43839c">Buyers</span>
+
+Buyers represent your clients interested in purchasing properties. The buyer list allows you to keep track of each buyer's essential details such as name, phone number, email, and property budget. Additionally, you can organize and personalize each buyer’s profile by assigning multiple tags. For instance, if a client, `Bernice Yu`, expresses interest in relocating, you could add the tag `relocating` to her contact.
+
 ![BuyerModeInitialList](images/BuyerModeInitialList.png)
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: These commands are for when the parser is in `b` mode (Buyer mode) see [switching parser modes](#switching-parser-modes--switch):**<br>
@@ -154,13 +159,13 @@ Examples:
 
 </div>
 
-### Viewing all buyers : `view`
+<span style="font-size: 20px; font-weight: bold; color: #43839c">Viewing all buyers : `view`</span>
 
 Shows a list of all buyers in the buyer list.
 
 Format: `view`
 
-### Adding a buyer: `add`
+<span style="font-size: 20px; font-weight: bold; color: #43839c">Adding a buyer: `add`</span>
 
 Adds a buyer to the buyer list.
 
@@ -180,7 +185,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com b/100,000`
 * `add n/Betsy Crowe t/urgent e/betsycrowe@example.com b/7,000,000 p/91234567 t/referred`
 
-### Editing a buyer : `edit`
+<span style="font-size: 20px; font-weight: bold; color: #43839c">Editing a buyer : `edit`</span>
 
 Edits an existing buyer in the buyer list.
 
@@ -199,7 +204,7 @@ Examples:
 *  `edit 1 p/81234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `81234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
 
-### Finding buyers: `find`
+<span style="font-size: 20px; font-weight: bold; color: #43839c">Finding buyers: `find`</span>
 
 Finds existing buyers in existing buyer list based on keywords.
 
@@ -222,7 +227,7 @@ Examples:
 
 ![FindBuyerSequence](images/FindBuyerSequence.png)
 
-### Deleting a buyer : `delete`
+<span style="font-size: 20px; font-weight: bold; color: #43839c">Deleting a buyer : `delete`</span>
 
 Deletes the specified buyer from the buyer list.
 
@@ -237,7 +242,7 @@ Examples:
 * `view` followed by `delete 2` deletes the 2nd buyer in the displayed buyer list.
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the displayed results of the `find` command.
 
-### Clearing all buyers : `clear`
+<span style="font-size: 20px; font-weight: bold; color: #43839c">Clearing all buyers : `clear`</span>
 
 Clears all entries from the buyer list.
 
@@ -247,8 +252,13 @@ Format: `clear`
 Using the clear command will delete all the buyers from the BuyerList, and there is no way to undo this, you may lose your data permanently.
 </div>
 
-## Meet Ups
+<a id="meet-ups"></a>
+<span style="font-size: 30px; font-weight: bold; color: #b44cc7">Meet Ups</span>
+
+Meet-up represents any scheduled appointment with your clients, allowing you to record essential details, including the subject of the meeting, additional info, its start and end date-times (`From` and `To`), and the buyers involved. Additionally, ABCLI will highlight any overlapping meet-ups to help you avoid scheduling conflicts.
+
 ![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: These commands are for when the parser is in `m` mode (MeetUp mode) see [switching parser modes](#switching-parser-modes--switch):**<br>
@@ -263,13 +273,13 @@ Using the clear command will delete all the buyers from the BuyerList, and there
 
 </div>
 
-### Viewing all meet-ups : `view`
+<span style="font-size: 20px; font-weight: bold; color: #b44cc7">Viewing all meet-ups : `view`</span>
 
 Shows a list of all meet-ups in the meet-up list.
 
 Format: `view`
 
-### Adding a meet-up: `add`
+<span style="font-size: 20px; font-weight: bold; color: #b44cc7">Adding a meet-up: `add`</span>
 
 Adds a meet-up to the meet-up list.
 
@@ -285,7 +295,7 @@ Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_N
 When adding the MEETUP_FROM or MEETUP_TO, the `DD` parameter will take in any 2-digit number from 01 to 31. However, in some cases, such as February or April, the date 31 doesn't exist, in this case, instead of rejecting the input, the meet-up will be added but the date will be changed to the closest valid date in the same month. e.g. `2024-02-31 23:59` will create `2024-02-29 23:59`, `2024-04-31 12:00` will create `2024-04-30 12:00`, but `2024-04-32 12:00` will give an error since 32 is not a valid `DD` input.
 </div>
 
-* Buyers that exist in buyer list will be marked as purple, while those that do not will be marked as red, for more details [see the notes in MeetUp](#meet-ups)
+* Buyers that exist in buyer list will be marked as purple, while those that do not will be marked as red, for more details see [the notes in MeetUp](#meet-ups)
 
 Examples:
 * `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li `
@@ -294,7 +304,7 @@ Meet Ups with clashing timings will be displayed in red. Otherwise, the default 
 
 ![MeetUpClash](images/MeetUpClash.png)
 
-### Editing a meet-up : `edit`
+<span style="font-size: 20px; font-weight: bold; color: #b44cc7">Editing a meet-up : `edit`</span>
 
 Edits an existing meet-up in the meet-up list.
 
@@ -311,7 +321,7 @@ Format: `edit INDEX [s/MEETUP_SUBJECT] [i/MEETUP_INFO] [f/MEETUP_FROM] [t/MEETUP
 Examples:
 *  `edit 1 i/Meet with Johnny to show him houses. f/2024-10-28 10:00 t/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
 
-### Finding meet-ups: `find`
+<span style="font-size: 20px; font-weight: bold; color: #b44cc7">Finding meet-ups: `find`</span>
 
 Finds meet-ups whose meet-up names contain any of the given keywords.
 
@@ -327,7 +337,7 @@ Examples:
 
 ![FindMeetUpSequence](images/FindMeetUpSequence.png)
 
-### Deleting a meet-up : `delete`
+<span style="font-size: 20px; font-weight: bold; color: #b44cc7">Deleting a meet-up : `delete`</span>
 
 Deletes the specified meet-up from the meet-up list.
 
@@ -342,7 +352,7 @@ Examples:
 * `view` followed by `delete 2` deletes the 2nd meet-up in the meet-up list.
 * `find meet` followed by `delete 1` deletes the 1st meet-up in the results of the `find` command.
 
-### Clearing all meet-ups : `clear`
+<span style="font-size: 20px; font-weight: bold; color: #b44cc7">Clearing all meet-ups : `clear`</span>
 
 Clears all entries from the meet-up list.
 
@@ -352,8 +362,13 @@ Format: `clear`
 Using the clear command will delete all the meet-ups from the MeetUpList, and there is no way to undo this, you may lose your data permanently.
 </div>
 
-## Properties
+<a id="properties"></a>
+<span style="font-size: 30px; font-weight: bold; color: #56d676">Properties</span>
+
+Properties represent each property in your portfolio. The property list helps you keep track of each property's details such as the landlord's name and phone number, as well as the property's address, type (e.g. apartment, landed house, etc) and asking price.
+
 ![PropertyModeInitialList](images/PropertyModeInitialList.png)
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: These commands are for when the parser is in `p` mode (Property mode) see [switching parser modes](#switching-parser-modes--switch):**<br>
@@ -364,13 +379,13 @@ Using the clear command will delete all the meet-ups from the MeetUpList, and th
 
 </div>
 
-### Viewing all properties : `view`
+<span style="font-size: 20px; font-weight: bold; color: #56d676">Viewing all properties : `view`</span>
 
 Shows a list of all properties in the property list.
 
 Format: `view`
 
-### Adding a property: `add`
+<span style="font-size: 20px; font-weight: bold; color: #56d676">Adding a property: `add`</span>
 
 Adds a property to the property list.
 
@@ -385,7 +400,7 @@ Property's asking price cannot exceed `9223372036854775807`. Refer to [known iss
 Examples:
 * `add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium`
 
-### Editing a property : `edit`
+<span style="font-size: 20px; font-weight: bold; color: #56d676">Editing a property : `edit`</span>
 
 Edits an existing property in the property list.
 
@@ -401,7 +416,7 @@ Examples:
 *  `edit 1 p/91234567 s/100000` Edits the first property's landlord phone number and its asking price to be `91234567` and `100,000` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's landlord to be `Betsy Crower`.
 
-### Finding properties: `find`
+<span style="font-size: 20px; font-weight: bold; color: #56d676">Finding properties: `find`</span>
 
 Find existing properties in the property list based on either name or address keywords.
 
@@ -420,7 +435,7 @@ Examples:
 
 ![FindPropertySequence](images/FindPropertySequence.png)
 
-### Deleting a property: `delete`
+<span style="font-size: 20px; font-weight: bold; color: #56d676">Deleting a property: `delete`</span>
 
 Deletes the specified property from the property list
 
@@ -435,7 +450,7 @@ Examples:
 * `view` followed by `delete 4` deletes the 4th property in the displayed property list.
 * `find n/Adam` followed by `delete 2` deletes the 2nd property in the displayed results of the find command.
 
-### Clearing all properties : `clear`
+<span style="font-size: 20px; font-weight: bold; color: #56d676">Clearing all properties : `clear`</span>
 
 Clears all entries from the property list.
 
@@ -447,7 +462,7 @@ Using the clear command will delete all the properties from the PropertyList, an
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+<span style="font-size: 30px; font-weight: bold; color: #baa856">FAQ</span>
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data files (`buyerlist.json`, `meetuplist.json`, and `propertylist.json`) it creates with the respective files that contain your previous data (which should be in the old `buyerlist.json`, `meetuplist.json`, and `propertylist.json`).
@@ -463,7 +478,8 @@ Using the clear command will delete all the properties from the PropertyList, an
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+<a id="known-issues"></a>
+<span style="font-size: 30px; font-weight: bold; color: #ba6356">Known issues</span>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
@@ -478,7 +494,7 @@ Using the clear command will delete all the properties from the PropertyList, an
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+<span style="font-size: 30px; font-weight: bold; color: #d67d3e">Command summary</span>
 
 <table>
     <tr>
