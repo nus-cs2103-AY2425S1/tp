@@ -345,12 +345,14 @@ Format: `findp KEYWORD [MORE_KEYWORDS]`
 * The KEYWORD can only be numeric values
 * The order of the keywords does not matter. e.g. `86796692 98765432` will match `98765432 86796692`
 * Only the phone number is searched.
-* No need for full phone numbers to be matched e.g. `867966` will match `86796692`
+* No need for full phone numbers to be matched. e.g. `867966` will match `86796692`
+* Matching of phone numbers has to start from the first digit. eg. `96692` will not match `86796692`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. ` 87438807 99272758` will return `Alex Yeah`, `Bernice Yu`
 
 Examples:
 * `findp 87438807` returns `Alex Yeah`
+* `findp 874` returns `Alex Yeah`
 * `findp 87438807 99272758` returns `Alex Yeoh`, `Bernice Yu`<br>
 
 ### Finding persons by tags assigned to them: `findtc`
