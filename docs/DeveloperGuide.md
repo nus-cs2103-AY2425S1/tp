@@ -403,16 +403,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 * 3a. User enters at least one invalid description (e.g. containing non-ASCII characters, or is too long)
-    * 2a1. System displays error message and the correct usage.
+    * 3a1. System displays error message and the correct usage.
     * Use case ends.
 
 * 4a. Adding the new tag(s) would exceed the limit on the number of predefined tags allowed.
-    * 3a1. System displays a message indicating the limit will be reached.
+    * 4a1. System displays a message indicating the limit will be reached.
     * Use case ends.
 
 * 4b. User enters at least one duplicate tag description (i.e. tag already exists in the tag list)
-    * 3b1. System continues to update the tag list for non-offending tag descriptions (if any).
-    * 3b2. System displays a message indicating the tag(s) that already exist(s).
+    * 4b1. System continues to update the tag list for non-offending tag descriptions (if any).
+    * 4b2. System displays a message indicating the tag(s) that already exist(s).
     * Use case ends.
 
 **Use Case 6 (UC6)**: Delete Tag(s)<br>
@@ -430,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. User enters at least one invalid description (e.g. containing non-ASCII characters, or is too long)
-  * 2a1. System displays error message and the correct usage.
+  * 3a1. System displays error message and the correct usage.
   * Use case ends.
 
 * 4a. User enters at least one tag description that does not match any of the predefined tags.
@@ -478,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 3.
 
 * 3b. User enters invalid guest.
-    * 3c1. System displays error message and prompt for corrected guest and tag.
+    * 3b1. System displays error message and prompt for corrected guest and tag.
     * Use case resumes at step 3.
 
 * 5a. Tag not in tag list.
@@ -499,8 +499,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**:
 
-* 3b. User enters invalid guest.
-    * 3c1. System displays error message and prompt for the corrected guest and tag.
+* 3a. User enters invalid guest.
+    * 3a1. System displays error message and prompt for the corrected guest and tag.
     * Use case resumes at step 3.
 
 * 5a. Tag not on guest
@@ -574,8 +574,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Filter panel**: Shows the current filter predicates applied to the list
 * **New Tag**: Creates a new tag and adds it to the tag list
 * **Delete Tag**: Removes a tag from the tag list and all instances of it on all guests in the address book
-* **Untag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
 * **Undo**: Undoes the previous executed command
+* **Untag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
