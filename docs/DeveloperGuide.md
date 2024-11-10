@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This document is based on the [AddressBook-Level3](https://github.com/nus-cs2103-AY2425S1/tp)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete person 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -68,32 +68,32 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `TabPane` (which contains `PersonListPanel` and `EventListPanel`), `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete event 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete event 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -101,7 +101,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. The `DeleteCommandParser` parses the command and creates either a `DeletePersonCommandParser` or a `DeleteEventCommandParser` object depending on the command type, which then parses the input.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeletePersonCommand` or `DeleteEventCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -111,19 +112,19 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZEventCommand` object (e.g., `ClearCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddPersonCommandParser`, `DeletePersonCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` and `Event` objects (which are contained in `UniquePersonList` and `UniqueEventList` objects).
+* stores the currently 'selected' `Person` and `Event` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -136,7 +137,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -154,6 +155,27 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Event and Person Synchronisation
+
+#### Implementation
+The current `Event` class has a `Person` field that stores the `Person` object associated with the event. This is because the `Event` object should be aware of the `Person` object it is associated with. This ensures that when details of the `Person` object are updated, the `Event` object is aware of the changes and can update itself accordingly. This applies to the contact list in `Event` as well.
+
+Step 1: The user adds a new `Event` through the `add event` command. During execution of the command, the `Person` object associated with the `Event` is retrieved from the `Model` using the `findPerson` command.
+
+The following sequence diagram shows how the `Event` object is created and associated with a `Person` object:
+![AddEvent](images/AddEventSequenceDiagram.png)
+
+The following sequence diagram shows how `findPerson` command is executed and the `Person` object is retrieved:
+![FindPerson](images/FindPersonSequenceDiagram.png)
+
+Step 2: The user updates the details of a `Person` object through the `edit person` command. During execution of the command, is done by updating the `Person` object in the `Model`, the updated `Person` replaces all `Event` associate with the original `Person` using the `replacePerosnInEvents` method.
+
+The following sequence diagram shows how the `Person` object is edited:
+![EditPerson](images/EditPersonSequenceDiagram.png)
+
+The following sequence diagram shows how `findPerson` command is executed and the `Person` object is retrieved:
+![ReplacePerson](images/ReplacePersonInEvents.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -173,11 +195,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete person 5` command to delete the 5th person in the address book. The `delete person` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete person 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add person n/David …​` to add a new person. The `add person` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -234,15 +256,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete person`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -268,7 +283,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: The address book offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, track VIP relationships, and schedule events** efficiently. With a customizable field, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
+**Value proposition**: The address book offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With editable fields, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
 
 
 ### User stories
@@ -282,8 +297,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Celebrity Talent Manager                                       | delete a contact                                              | remove entries that I no longer need                     |
 | `* * *`  | Celebrity Talent Manager                                       | view details of a specific contact                            | quickly access specific information when needed          |
 | `* * *`  | Celebrity Talent Manager                                       | list my contacts                                              | see an overview of my contacts                           |
-| `* * *`  | Celebrity Talent Manager                                       | add important events and deadlines                            | quickly view my important tasks                          |
-| `* * *`  | Celebrity Talent Manager                                       | add remarks and people to my events and deadlines             | view who is involved with specific tasks                 |
+| `* * *`  | Celebrity Talent Manager                                       | add important events                                          | quickly view my important tasks                          |
 | `* * *`  | Celebrity Talent Manager                                       | view the event details a client has                           | see and plan around their schedule                       |
 | `* * *`  | Celebrity Talent Manager                                       | view all my events                                            | have an overview of my timetable                         |
 | `* * *`  | Celebrity Talent Manager                                       | delete an event                                               | remove outdated entries                                  |
@@ -296,12 +310,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Celebrity Talent Manager who can be forgetful                  | be alerted when I add duplicate entries                       | avoid duplicate entries                                  |
 | `* *`    | Celebrity Talent Manager who is new to the application         | access a help guide in the application                        | find out the command I need when I forget it             |
 | `* *`    | Celebrity Talent Manager                                       | perform mass deletion of entries                              | save time when I have to delete a lot of entries         |
-| `* *`    | Celebrity Talent Manager                                       | set customisable remark fields for entries                    | save information specific to the contact                 |
-| `* *`    | Celebrity Talent Manager who works with international partners | view the calendar different timezones                         | work with clients of different timezones easily          |
 | `* *`    | Celebrity Talent Manager                                       | be alerted when events clash                                  | identify clashes and resolve them easily                 |
 | `* *`    | Celebrity Talent Manager                                       | mark events as over or ended                                  | keep track my schedule                                   |
-| `* *`    | Celebrity Talent Manager                                       | unmark events as over or ended                                | mark tasks as undone or ongoing again                    |
-| `* *`    | Celebrity Talent Manager                                       | add a photo for my contacts                                   | easily remember or recognise the contact                 |
+| `*`      | Celebrity Talent Manager                                       | add a photo for my contacts                                   | easily remember or recognise the contact                 |
 | `*`      | Celebrity Talent Manager                                       | flag priority contacts                                        | identify contacts that require immediate focus           |
 | `*`      | Celebrity Talent Manager                                       | export and import client data                                 | safely transfer information on different devices         |
 | `*`      | Celebrity Talent Manager who can be careless at times          | undo my last command                                          | quickly revert my changes when they are wrong            |
@@ -312,14 +323,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
+(For all use cases below, the **TalentHub** is the `TalentHub` and the **Actor** is the `celebrity talent manager`, unless specified otherwise)
 
 **Use case: UC01 - Add Contact**
 
 **MSS**
 
 1. Talent Manager requests to add a specific contact
-2. TalentHub adds the person
+2. TalentHub adds the person to the list
 
 Use case ends.
 
@@ -331,42 +342,81 @@ Use case ends.
 
     Use case ends.
   
-* 1b. Any parameter is missing or invalid.
+* 1b. Any compulsory parameter is missing or invalid.
 
   * 1b1. TalentHub outputs an error message specifying the issue.
 
     Use case ends.
 
-* 1c. An identical phone number is detected.
+* 1c. An identical name is detected.
 
-  * 1c1. TalentHub outputs an error message specifying the issue.
+    * 1c1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1d. An identical phone number is detected.
+
+  * 1d1. TalentHub outputs an error message specifying the issue.
 
     Use case ends.
 
-**Use case: UC02 - Delete Contact after List**
+**Use case: UC02 - Edit Contact**
 
 **MSS**
 
-1. Talent Manager [list contacts (UC06)](#)
-2. Talent Manager [delete contact (UC04)](#)
+1. Talent Manager requests to edit the information a specific contact
+2. TalentHub change the information of the target person
 
-   Use case ends.
+Use case ends.
 
-**Use case: UC03 - Delete Contact after Find**
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. An identical name is detected.
+
+    * 1b1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1c. An identical phone number is detected.
+
+    * 1c1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+
+
+**Use case: UC03 - Delete Contact after List**
 
 **MSS**
 
-1. Talent Manager [find contacts (UC05)](#)
-2. Talent Manager [delete contact (UC04)](#)
+1. Talent Manager <a style="text-decoration:underline;">list contacts (UC06)</a>
+2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
+
+Use case ends.
+
+
+**Use case: UC04 - Delete Contact after Find**
+
+**MSS**
+
+1. Talent Manager <a style="text-decoration:underline;">find contact (UC07)</a>
+2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
 
    Use case ends.
 
-**Use case: UC04 - Delete Contact**
+**Use case: UC05 - Delete Contact**
 
 **MSS**
 
 1. Talent Manager requests to delete a specific person in the list
-2. TalentHub deletes the person
+2. TalentHub requests for confirmation of deletion
+3. TalentHub deletes the person and all his/her corresponding events
 
    Use case ends.
 
@@ -380,22 +430,55 @@ Use case ends.
 
 * 1b. The list is empty.
 
-  * 1b1. System shows an error message specifying the list is empty.
+  * 1b1. TalentHub shows an index error message.
 
     Use case ends.
 
 * 1c. The given index is invalid.
 
-  * 1c1. System shows an error message.
+  * 1c1. TalentHub shows an index error message.
 
     Use case ends.
 
-**Use case: UC05 - Find Contact**
+* 2a. Talent Manager confirms the deletion. 
+
+  * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the deletion.
+
+  * 2b1. TalentHub outputs an successful cancellation message.
+
+    Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+  * 2b1. TalentHub outputs an error message specifying the issue.
+
+    Use case resumes from step 2.
+
+**Use case: UC06 - List All Contacts**
 
 **MSS**
 
-1. User requests to find persons with with `keywords`
-2. System processes and list person with `keywords`
+1. Talent Manager requests to list contacts
+2. TalentHub shows a list of all contacts
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+**Use case: UC07 - Find Contact by Name**
+
+**MSS**
+
+1. User requests to find persons whose name contains `keywords`
+2. TalentHub processes and list person(s) whose name contains `keywords`
 
    Use case ends.
 
@@ -409,17 +492,16 @@ Use case ends.
 
 * 1b. The keyword is empty.
 
-  * 1b1. System shows an error message.
+  * 1b1. TalentHub shows an error message.
 
     Use case ends.
 
-
-**Use case: UC06 - List All Contacts**
+**Use case: UC08 - Filter Contact by Tag**
 
 **MSS**
 
-1. Talent Manager requests to list contacts
-2. System shows a list of all contacts
+1. User requests to filter persons with `tag`
+2. TalentHub processes and list person(s) with `tag`
 
    Use case ends.
 
@@ -427,17 +509,22 @@ Use case ends.
 
 * 1a. The command format is incorrect.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case ends.
+      Use case ends.
 
+* 1b. The keyword is empty.
 
-**Use case: UC07 - Add Events**
+    * 1b1. TalentHub shows an error message.
+
+      Use case ends.
+
+**Use case: UC09 - Add Event**
 
 **MSS**
 
-1. Talent Manager requests to add a event for a specific contact
-2. System adds the event
+1. Talent Manager requests to add an event for a specific celebrity
+2. TalentHub adds the event
 
 Use case ends.
 
@@ -449,50 +536,128 @@ Use case ends.
 
     Use case ends.
 
-* 1b. A duplicate event is detected:
+* 1b. Any compulsory parameter is missing or invalid.
+
+    * 1b1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1c. A duplicate event is detected:
   
-  * 1b1. System displays a message informing the Talent Manager of the duplicate event and does not add it.
+  * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not add it.
 
     Use case ends.
 
-    
-**Use case: UC08 - List All Events**
+* 1d. Time clash is detected:
+
+  * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not add it.
+
+    Use case ends.
+
+**Use case: UC10 - Edit Event**
+
+**MSS**
+
+1. Talent Manager requests to edit the information of an event for a specific celebrity
+2. TalentHub change the information of the event
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. The input parameter is invalid.
+
+    * 1b1. TalentHub outputs an error message specifying the issue.
+
+      Use case ends.
+
+* 1c. A duplicate event is detected:
+
+    * 1c1. TalentHub displays a message informing the Talent Manager of the duplicate event and does not change it.
+
+      Use case ends.
+
+* 1d. Time clash is detected:
+
+    * 1d1. TalentHub displays a message informing the Talent Manager of the time clash and does not change it.
+
+      Use case ends.
+
+**Use case: UC11 - Delete Event after List**
+
+**MSS**
+
+1. Talent Manager <a style="text-decoration:underline;">List Events (UC14)</a>
+2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC12)</a>
+
+   Use case ends.
+
+**Use case: UC12 - Delete Event after Find**
+
+**MSS**
+
+1. Talent Manager <a style="text-decoration:underline;">Find Event (UC15)</a>
+2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC12)</a>
+
+   Use case ends.
+
+**Use case: UC13 - Delete Event**
+
+1. Talent Manager requests to delete a specific event in the list
+2. TalentHub deletes the event
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. The list is empty.
+
+    * 1b1. TalentHub shows an index error message.
+
+      Use case ends.
+
+* 1c. The given index is invalid.
+
+    * 1c1. TalentHub shows an index error message.
+
+      Use case ends.
+
+
+**Use case: UC14 - List All Events**
 
 **MSS**
 
 1. Talent Manager requests to list all events.
-2. System retrieves and displays all events in chronological order.
-   
+2. TalentHub retrieves and displays all events in chronological order.
+
    Use case ends.
 
 **Extensions**
 
 * 1a. The command format is invalid.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
-    Use case ends.
+      Use case ends.
 
-* 2a. If no events are scheduled.
-
-  * 2a1. System displays a message stating "No events.".
-
-    User case ends.
-
-
-**Use case: UC09 - Delete Event after List**
+**Use case: UC15 - Find Contact by Name**
 
 **MSS**
 
-1. Talent Manager [List Events (UC08)](#)
-2. Talent Manager [Delete Event (UC10)](#)
-
-   Use case ends.
-
-**Use case: UC10 - Delete Event**
-
-1. Talent Manager requests to delete a specific event in the list
-1. TalentHub deletes the event
+1. User requests to find event with name contains `keywords`
+2. TalentHub processes and list event with name contains `keywords`
 
    Use case ends.
 
@@ -500,22 +665,103 @@ Use case ends.
 
 * 1a. The command format is invalid.
 
-  * 1a1. TalentHub outputs a generic error message about incorrect command format.
-
-    Use case ends.
-
-* 1b. The list is empty.
-
-    * 1b1. System shows an error message specifying the list is empty.
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
 
       Use case ends.
-  
-* 1c. The given index is invalid.
 
-  * 1c1. TalentHub shows an error message.
+* 1b. The keyword is empty.
 
-    Use case ends.
+    * 1b1. TalentHub shows an error message.
 
+      Use case ends.
+
+    
+**Use case: UC16 - Filter Event by Celebrity**
+
+**MSS**
+
+1. User requests to filter event by celebrity's name
+2. TalentHub processes and list target celebrity's events
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 1b. The keyword is empty.
+
+    * 1b1. TalentHub shows an error message.
+
+      Use case ends.
+
+**Use case: UC17 - Clear Events**
+
+1. Talent Manager requests to clear all event in the list
+2. TalentHub requests for confirmation of clear
+3. TalentHub clears all events in the list
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 2a. Talent Manager confirms the clear.
+
+    * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the clear.
+
+    * 2b1. TalentHub outputs an successful cancellation message.
+
+      Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+    * 2b1. TalentHub outputs an error message specifying the issue.
+
+      Use case resumes from step 2.
+
+**Use case: UC17 - Clear Persons and Events**
+
+1. Talent Manager requests to clear all persons and events in the list
+2. TalentHub requests for confirmation of clear
+3. TalentHub clears all persons and events in the list
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format is incorrect.
+
+    * 1a1. TalentHub outputs a generic error message about incorrect command format.
+
+      Use case ends.
+
+* 2a. Talent Manager confirms the clear.
+
+    * Use case resumes from step 3.
+
+* 2b. Talent Manager cancels the clear.
+
+    * 2b1. TalentHub outputs an successful cancellation message.
+
+      Use case ends.
+
+* 2c. The parameter is missing or invalid.
+
+    * 2b1. TalentHub outputs an error message specifying the issue.
+
+      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
@@ -541,8 +787,6 @@ Use case ends.
 18. The GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher and for screen scales 150%.
 19. As the app is an offline tool, it should be robust and able to run for extended periods without crashing. Downtime should be limited to under 1% (if any issues require restarting).
 20. The system should be able to recover from crashes within 5 seconds, ensuring minimal disruption to the talent manager’s workflow.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -598,10 +842,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a person to TalentHub
 
-   1. Test case: `add person n/Sydney Sweeney p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
+   1. Test case: `add person n/Alex Yeoh p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
       1. **Expected**
-         1. A contact with the name 'Sydney Sweeney' with the tag 'Celebrity' and phone number '98765432' is added to the persons list. 
-         2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
+         1. A contact with the name 'Alex Yeoh' with the tag 'Celebrity' and phone number '98765432' is added to the persons list. 
+         2. If you are on the Events tab, TalentHub will switch to the Persons tab.
    
    2. Test case: Add same person above
       1. **Expected**: This person already exists in TalentHub.
@@ -609,28 +853,27 @@ testers are expected to do more *exploratory* testing.
    3. Test case: Add new person with same number as above
       1. **Expected**: This phone number is already used by another person in TalentHub
 
-   4. Test case: `add person n/Sydney Sweeney e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity `<br>
+   4. Test case: `add person n/Alex Yeoh e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity `<br>
       1. **Expected**: 
          1. Invalid command format!<br>
             add person: Adds a person to the address book.<br>
             Parameters: n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [t/TAG]...<br>
-            Example: `add person n/Sydney Sweeney p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
+            Example: `add person n/Alex Yeoh p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
    
-   5. Other incorrect add commands to try: `add person n/Sydney Sweeney p/98765432 a/311, Clementi Ave 2, #02-25 t/Celebrity` or any inputs that do not include a name, phone number, email or address.
+   5. Other incorrect add commands to try: `add person n/Alex Yeoh a/311, Clementi Ave 2, #02-25 t/Celebrity` or any inputs that do not include a name or phone number.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list.
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Alex Yeoh at index 1
 
     2. Test case: `delete person 1`
        1. **Expected**: Are you sure you want to delete this person? All events tied to this person will be deleted and this person will no longer show in any event's contact list. (Y/N)
-       2. **Input Y or y**: Deleted Person: `Sydney Sweeney; Phone: 98765432; Email: sydney@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Celebrity]`
-       3. **Input N or n**: Pending command has been cancelled
-       4. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
+       2. **Input `Y` or `y`**: Deleted Person: `Alex Yeoh; Phone: 98765432; Email: sydney@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Celebrity]`
+       3. **Input `N` or `n`**: Pending command has been cancelled
 
-    3. Test case: `delete event 0`
+    3. Test case: `delete person 0`
        1. **Expected**
           1. Invalid command format!<br>
              delete person: Deletes the person identified by the index number used in the displayed person list.<br> 
@@ -644,36 +887,36 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding an event to TalentHub
 
-    1. **Prerequisites**: Have 2 test contacts for Sydney Sweeney and Jack Black created in your Persons list
+    1. **Prerequisites**: Have 2 contacts for Alex Yeoh and Bernice Yu created in your Persons list
 
-    2. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Sydney Sweeney p/Jack Black`
+    2. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Alex Yeoh p/Bernice Yu`
          1. **Expected**
             1. An event with the name 'Oscars' with the associated celebrity, duration and venue is added to the persons list.
-            2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+            2. If you are on the Persons tab, TalentHub will switch to the Events tab.
    
     3. Test case: Add same event as above
          1. **Expected**: This event already exists in TalentHub.  
     
     4. Test case: Add new event with different event name but same celebrity name and clashing timing e.g. `t/2024-02-28 12:10 to 2024-03-01 18:30`
-         1. **Expected**: Sydney Sweeney has another event that clashes with this event.
+         1. **Expected**: Alex Yeoh has another event that clashes with this event.
     
-    5. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Sydney Sweeney p/Sydney Sweeney`
+    5. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Alex Yeoh p/Alex Yeoh`
          1.  **Expected**: Celebrity cannot be a contact in contact list.
 
-    6. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/John Doe p/Jack Black`<br>
+    6. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/John Doe p/Bernice Yu`<br>
          1. **Expected**: John Doe not found in address book!
     
-    7. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Jack Black p/John Doe`
+    7. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Alex Yeoh p/John Doe`
          1. **Expected**: John Doe not found in address book!
    
-    8. Test case: `add event t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Jack Black p/Sydney Sweeney`
+    8. Test case: `add event t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Alex Yeoh p/Bernice Yu`
          1. **Expected**
              1.  Invalid command format!<br>
                  add event: Adds an event to the address book.<br> 
                  Parameters: n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/CONTACTS]...<br>
-                 Example: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Sydney Sweeney p/Jack Black`
+                 Example: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Alex Yeoh p/Bernice Yu p/David Li`
     
-    9. Other incorrect add commands to try: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 c/Sydney Sweeney p/Jack Black` or any inputs that do not include a name, time, venue or Talent name.
+    9. Other incorrect add commands to try: `add event n/Oscars v/Hollywood c/Alex Yeoh p/Bernice Yu` or any inputs that do not include a name, time or celebrity.
 
 ### Deleting an event
 
@@ -682,8 +925,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all events using the `list event` command. Multiple events in the list.
 
     2. Test case: `delete event 1`
-        1. **Expected**: Deleted Event: `Oscars; Time: From: 2024-03-01 12:10 To: 2024-03-01 18:30; Venue: Hollywood; Celebrity: Jack Black; Contacts:`
-        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact. 
+        1. **Expected**: Deleted Event: `Oscars; Time: From: 2024-03-01 12:10 To: 2024-03-01 18:30; Venue: Hollywood; Celebrity: Alex Yeoh; Contacts: Bernice Yu`
+        2. If you are on the Persons tab, TalentHub will switch to the Events tab. 
 
     3. Test case: `delete event 0`
         1. **Expected**
@@ -699,13 +942,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Viewing a person on TalentHub
    
-    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. An entry with the person Sydney Sweeney listed and no entries with person Jack Black listed
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. An entry with the person Alex Yeoh listed and no entries with person Bernice Yu listed
 
-    2. Test case: `view person Sydney Sweeney`
-        1. **Expected**: Sydney Sweeney shown!
-        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
+    2. Test case: `view person Alex Yeoh`
+        1. **Expected**: Alex Yeoh shown!
+        2. TalentHub will display the detailed contact.
     
-    3. Test case: `view person Jack Black`
+    3. Test case: `view person Bernice Yu`
         1. **Expected**: Name not found in TalentHub!
     
     4. Test case: `view person`
@@ -713,19 +956,19 @@ testers are expected to do more *exploratory* testing.
             1. Invalid command format!<br>
                view: Views the person whose name is the specified keywords (case-insensitive) and displays him/her.<br>
                Parameters: KEYWORD [MORE_KEYWORDS]...<br>
-               Example: view person David Li<br>
+               Example: `view person David Li`<br>
         
-    5. Test case: `view person Brad Pitt` or any other contact names not found in TalentHub
+    5. Other incorrect commands to try: `view person John Doe` or any other contact names not found in TalentHub
 
 ### Viewing an event
 
 1. Viewing an event on TalentHub
 
-    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. An entry with the event called Oscars listed and no entries with event Emmys listed
+    1. **Prerequisites**: List all events using the `list event` command. Multiple events in the list. An entry with the event called Oscars listed and no entries with event Emmys listed
 
     2. Test case: `view event Oscars`
         1. **Expected**: 1 events listed!
-        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+        2. TalentHub will display the detailed event.
 
     3. Test case: `view event Emmys`
         1. **Expected**: 0 events listed!
@@ -735,24 +978,24 @@ testers are expected to do more *exploratory* testing.
             1. Invalid command format!<br>
                view: Views the event whose name is the specified keywords (case-insensitive) and displays it.<br>
                Parameters: KEYWORD [MORE_KEYWORDS]...<br>
-               Example: view event Awards show<br>
+               Example: `view event Awards show`<br>
         
-    5. Test case: `view event Fashion Week` or any other events not found in TalentHub
+    5. Other incorrect commands to try: `view event Fashion Week` or any other events not found in TalentHub
 
 ### Finding a person
 
 1. Finding a person on TalentHub
 
-    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Three entries with names starting with Sydney listed. One entry with names starting with John listed. No entries with names starting with Jack listed
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Three entries with names starting with Alex listed. One entry with names starting with Bernice listed. No entries with names starting with David listed
 
-    2. Test case: `find person Sydney`
+    2. Test case: `find person Alex`
         1. **Expected**: 3 persons listed!
-        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contacts.
+        2. TalentHub will display the contacts that match the given keyword(s).
 
-    3. Test case: `find person Jack`
+    3. Test case: `find person David`
         1. **Expected**: 0 persons listed!
 
-    4. Test case: `find person Sydney John`
+    4. Test case: `find person Sydney Bernice`
         1. **Expected**: 4 persons listed!
 
     5. Test case: `find person`
@@ -760,9 +1003,9 @@ testers are expected to do more *exploratory* testing.
              1. Invalid command format!<br>
                 find: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.<br>
                 Parameters: KEYWORD [MORE_KEYWORDS]...<br>
-                Example: find person Sydney Jack<br>
+                Example: `find person Alex Bernice`<br>
          
-    6. Test case: `find person Brad` or any other contact names not found in TalentHub
+    6. Other incorrect inputs to try:  `find person John` or any other contact names not found in TalentHub
 
 ### Finding an event
 
@@ -772,7 +1015,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `find event Oscars`
         1. **Expected**: 3 events listed!
-        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+        2. TalentHub will display the events that match the given keyword(s).
 
     3. Test case: `find event Emmys`
         1. **Expected**: 0 events listed!
@@ -785,19 +1028,19 @@ testers are expected to do more *exploratory* testing.
             1. Invalid command format!<br>
                find: Finds all events whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.<br>
                Parameters: KEYWORD [MORE_KEYWORDS]...<br>
-               Example: find event Emmys Oscars<br>
+               Example: `find event Emmys Oscars`<br>
 
-    6. Test case: `find event Red Carpet` or any other events not found in TalentHub
+    6. Other incorrect inputs to try: `find event Red Carpet` or any other events not found in TalentHub
 
 ### Filter a person
 
-1. Filtering a person on TalentHub
+1. Filtering a person on TalentHub by tag
 
-    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Three entries with tags called Celebrity.  No entries with tags called TwitchStreamer.
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Three entries with tags called Celebrity. No entries with tags called TwitchStreamer.
 
     2. Test case: `filter person celebrity`
         1. **Expected**: 3 persons listed!
-        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contacts.
+        2. TalentHub will display the contacts with the given tag(s).
 
     3. Test case: `filter person TwitchStreamer`
         1. **Expected**: 0 persons listed!
@@ -807,21 +1050,21 @@ testers are expected to do more *exploratory* testing.
              1. Invalid command format!<br>
                 filter: Filters the persons by the specified tag (case-insensitive) and displays it.<br>
                 Parameters: TAG<br>
-                Example: filter person Chauffeur<br>
+                Example: `filter person Chauffeur`<br>
             
-    5. Test case: `filter person TikToker` or any other tags not found in TalentHub.
+    5. Other incorrect inputs to try: `filter person TikToker` or any other tags not found in TalentHub.
 
 ### Filtering an event
 
 1. Filtering an event on TalentHub
 
-    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. Three entries with celebrity name Sydney Sweeney. No entries with celebrity name Jack Black listed
+    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. Three events with celebrity, Alex Yeoh. No events with celebrity, Bernice Yu listed.
 
-    2. Test case: `filter event Sydney Sweeney`
+    2. Test case: `filter event Alex Yeoh`
         1. **Expected**: 3 events listed!
-        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+        2. TalentHub will display the events with the given celebrity name(s).
 
-    3. Test case: `filter event Jack Black`
+    3. Test case: `filter event Bernice Yu`
         1. **Expected**: 0 events listed!
 
     4. Test case: `filter event`
@@ -829,25 +1072,59 @@ testers are expected to do more *exploratory* testing.
              1. Invalid command format!<br>
                 filter: Filters the events by the specified celebrity (case-insensitive) and displays it.<br>
                 Parameters: NAME<br>
-                Example: filter event Lebron James<br>
+                Example: `filter event Alex Yeoh`<br>
 
-    5. Test case: `filter event Brad Pitt` or any other contact names not found in TalentHub
+    5. Other incorrect inputs to try:  `filter event John Doe` or any other contact names not found in TalentHub
 
 ### Editing a person
 
 1. Editing a person on TalentHub
 
-    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Contact at index 1 should be for Sydney Sweeney. Contact at index 2 be at 
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. 
 
     2. Test case: `edit person 1 p/91234567 e/johndoe@example.com`
-       1. **Expected**: Edited Person: Sydney Sweeney; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Celebrity]
+       1. **Expected**: Edited Person: Alex Yeoh; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Celebrity]
    
-    3. Test case: edit the 
+    3. Test case: Edit contact to have the same name as another contact.
+       1. **Expected**: This person already exists in the address book.
+    
+    4. Test case: Edit contact to have the same number as another contact
+       1. **Expected**: This phone number is already being used by another person in TalentHub.
+    
+    5. Test case: `edit person`
+       1. **Expected**
+          1. Invalid command format!<br>
+             edit person: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.<br>
+             Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...<br>
+             Example: `edit person 1 p/91234567 e/johndoe@example.com`<br>
 
-### Saving data
+    6. Other incorrect inputs to try: `edit person 0` or any other edit command with inputs of the wrong format.
 
-1. Dealing with missing/corrupted data files
+### Editing an event
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Editing an event on TalentHub
 
-2. _{ more test cases …​ }_
+   1. **Prerequisites**: List all persons using the `list event` command. Multiple persons in the list.
+
+   2. Test case: `edit event 1 t/2024-03-01 13:10 to 2024-03-01 19:30 v/Broadway c/Bernice Yu p/Alex Yeoh`
+      1. **Expected**: Edited Event: Emmys; Time: From: 2024-03-01 13:10 To: 2024-03-01 19:30; Venue: Broadway; Celebrity: Bernice Yu; Contacts: CelebrityAlex Yeoh 90765432
+
+   3. Test case: Edit event to have same details as another event.
+      1. **Expected**: This event already exists in TalentHub.
+   
+   4. Test case: Same celebrity has clashing events e.g. `edit event 2 t/2024-03-01 13:10 to 2024-03-01 19:30 v/Broadway c/Bernice Yu p/David Lee`
+      1. **Expected**: Bernice Yu has another event that clashes with this event!
+   
+   5. Test case: Celebrity is both celebrity and contact e.g. `edit event 2 p/Bernice Yu`
+      1. **Expected**: Celebrity cannot be a contact in contact list!
+   
+   6. Test case: `edit event`
+      1. **Expected**
+         1. Invalid command format!<br>
+            edit event: Edits the details of the event identified by the index number used in the displayed event list. Existing values will be overwritten by the input values.<br>
+            Parameters: INDEX (must be a positive integer) [n/EVENT NAME] [t/TIME] [v/VENUE] [c/CELEBRITY]...<br>
+            Example: `edit event 1 t/2024-03-01 13:10 to 2024-03-01 19:30 v/Broadway c/David Li p/Alex Yeoh`<br>
+   
+   7. Other incorrect inputs to try: `edit event 0` or any edit event command with inputs in the wrong format.
+
+

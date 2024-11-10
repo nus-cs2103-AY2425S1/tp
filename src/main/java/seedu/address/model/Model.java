@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
@@ -100,7 +101,7 @@ public interface Model {
      * Finds a person using person name
      * @param name
      */
-    Person findPerson(String name);
+    Person findPerson(Name name);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

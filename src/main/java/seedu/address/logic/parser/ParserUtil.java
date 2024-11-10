@@ -206,13 +206,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code celebrity} is invalid.
      */
-    public static String parseEventCelebrity(String celebrity) throws ParseException {
+    public static Name parseEventCelebrity(String celebrity) throws ParseException {
         requireNonNull(celebrity);
         String trimmedCelebrity = celebrity.trim();
         if (trimmedCelebrity.isEmpty()) {
             throw new ParseException(Messages.MESSAGE_INVALID_CELEBRITY_FORMAT);
         }
-        return trimmedCelebrity;
+        return parseName(trimmedCelebrity);
     }
     /**
      * Parses a {@code String contact} in Event.
@@ -220,13 +220,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code contact} is invalid.
      */
-    public static String parseEventContact(String contact) throws ParseException {
+    public static Name parseEventContact(String contact) throws ParseException {
         requireNonNull(contact);
         String trimmedContact = contact.trim();
         if (trimmedContact.isEmpty()) {
             throw new ParseException(Messages.MESSAGE_INVALID_EVENT_CONTACT_FORMAT);
         }
-        return trimmedContact;
+        return parseName(trimmedContact);
     }
 
     /**
@@ -235,9 +235,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code contact} is invalid.
      */
-    public static Set<String> parseEventContacts(Collection<String> contacts) throws ParseException {
+    public static Set<Name> parseEventContacts(Collection<String> contacts) throws ParseException {
         requireNonNull(contacts);
-        final Set<String> contactsSet = new HashSet<>();
+        final Set<Name> contactsSet = new HashSet<>();
         for (String contact : contacts) {
             contactsSet.add(parseEventContact(contact));
         }

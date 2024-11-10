@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -84,10 +85,9 @@ public class Event {
     }
 
     public String getContactsString() {
-        return contacts.stream().collect(StringBuilder::new, (sb, p) -> sb.append(p.getTagsString())
-                        .append(p.getName().fullName)
-                        .append(" ").append(p.getPhone().value).append("\n"),
-                StringBuilder::append).toString();
+        return contacts.stream()
+                .map(p -> "(" + p.getTagString() + ") " + p.getName().fullName + " " + p.getPhone().value)
+                .collect(Collectors.joining(", "));
     }
 
     @Override

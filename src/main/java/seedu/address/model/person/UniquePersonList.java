@@ -80,18 +80,18 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns a Person object using the name of the person.
+     * Finds a person using person name
      * @param toFind
-     * @return
+     * @return Person
+     * @throws PersonNotFoundException
      */
-    public Person findPerson(String toFind) throws PersonNotFoundException {
-        Name name = new Name(toFind);
-        for (int i = 0; i < internalList.size(); i++) {
-            if (internalList.get(i).getName().isSameName(name)) {
-                return internalList.get(i);
+    public Person findPerson(Name toFind) throws PersonNotFoundException {
+        for (Person person : internalList) {
+            if (person.getName().isSameName(toFind)) {
+                return person;
             }
         }
-        throw new PersonNotFoundException(toFind);
+        throw new PersonNotFoundException(toFind.toString());
     }
 
     public void setPersons(UniquePersonList replacement) {

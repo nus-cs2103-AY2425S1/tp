@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
@@ -145,7 +146,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.replacePersonInEvents(personToEdit, editedPerson);
     }
 
-    public Person findPerson(String personName) {
+    public Person findPerson(Name personName) {
         return persons.findPerson(personName);
     }
 

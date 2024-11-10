@@ -22,7 +22,7 @@ public class FindPersonCommand extends FindCommand {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD
             + " " + COMMAND_FIELD
-            + " " + "Sydney Jack";
+            + " " + "Alex Bernice";
 
     private final NameContainsKeywordsPredicate predicate;
 

@@ -32,7 +32,7 @@ public class AddPersonCommand extends AddCommand {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
-            + PREFIX_NAME + "Sydney Sweeney "
+            + PREFIX_NAME + "Alex Yeoh "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "sydney@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "

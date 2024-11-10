@@ -32,7 +32,6 @@ public class Messages {
             + "\"t/YYYY-MM-DD HH:mm to YYYY-MM-DD HH:mm\"";
     public static final String MESSAGE_INVALID_CELEBRITY_FORMAT = "Celebrity name cannot be blank";
     public static final String MESSAGE_INVALID_EVENT_CONTACT_FORMAT = "Contact name cannot be blank";
-    public static final String MESSAGE_INVALID_NAME = "Names must be alphanumeric";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -55,11 +54,17 @@ public class Messages {
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail().isPresent() ? person.getEmail().get() : "")
+                .append(person.getEmail().isPresent() ? person.getEmail().get() : "[To be added]")
                 .append("; Address: ")
-                .append(person.getAddress().isPresent() ? person.getAddress().get() : "")
+                .append(person.getAddress().isPresent() ? person.getAddress().get() : "[To be added]")
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+
+        if (person.getTags().isEmpty()) {
+            builder.append("[To be added]");
+        } else {
+            person.getTags().forEach(builder::append);
+        }
+
         return builder.toString();
     }
 
@@ -72,11 +77,11 @@ public class Messages {
                 .append("; Time: ")
                 .append(event.getTime())
                 .append("; Venue: ")
-                .append(event.getVenue().map(Venue::toString).orElse(""))
+                .append(event.getVenue().map(Venue::toString).orElse("[To be added]"))
                 .append("; Celebrity: ")
                 .append(event.getCelebrityName())
-                .append("; Contacts: ")
-                .append(event.getContactsString());
+                .append(";\nContacts: ")
+                .append(event.getContacts().isEmpty() ? "[To be added]" : event.getContactsString());
         return builder.toString();
     }
 

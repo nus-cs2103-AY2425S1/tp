@@ -23,6 +23,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.ui.CommandDetailChange;
@@ -43,18 +44,19 @@ public class EditEventCommand extends EditCommand {
             + "[" + PREFIX_EVENT_NAME + "EVENT NAME] "
             + "[" + PREFIX_EVENT_TIME + "TIME] "
             + "[" + PREFIX_EVENT_VENUE + "VENUE] "
-            + "[" + PREFIX_EVENT_CELEBRITY + "CELEBRITY]...\n"
+            + "[" + PREFIX_EVENT_CELEBRITY + "CELEBRITY] "
+            + "[" + PREFIX_EVENT_CONTACTS + "CONTACT NAME]...\n"
             + "Example: " + COMMAND_WORD
             + " " + COMMAND_FIELD + " 1 "
             + PREFIX_EVENT_TIME + "2024-03-01 13:10 to 2024-03-01 19:30 "
             + PREFIX_EVENT_VENUE + "Broadway "
-            + PREFIX_EVENT_CELEBRITY + "John Doe "
+            + PREFIX_EVENT_CELEBRITY + "David Li "
             + PREFIX_EVENT_CONTACTS + "Alex Yeoh";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
-    public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event";
-    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in TalentHub.";
+    public static final String MESSAGE_EVENT_OVERLAP = "%s has another event that clashes with this event!";
+    public static final String MESSAGE_CELEBRITY_IN_CONTACT = "Celebrity cannot be a contact in contact list!";
     private final Index index;
     private final EditEventDescriptor editEventDescriptor;
 
@@ -85,8 +87,6 @@ public class EditEventCommand extends EditCommand {
                 updatedCelebrity = model.findPerson(editEventDescriptor.celebrityName);
             } catch (PersonNotFoundException e) {
                 throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
-            } catch (IllegalArgumentException e) {
-                throw new CommandException(Messages.MESSAGE_INVALID_NAME);
             }
             editEventDescriptor.setCelebrity(updatedCelebrity);
         }
@@ -99,8 +99,6 @@ public class EditEventCommand extends EditCommand {
                         .toList());
             } catch (PersonNotFoundException e) {
                 throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
-            } catch (IllegalArgumentException e) {
-                throw new CommandException(Messages.MESSAGE_INVALID_NAME);
             }
             editEventDescriptor.setContacts(newSet);
         }
@@ -132,7 +130,9 @@ public class EditEventCommand extends EditCommand {
 
         EventName updatedEventName = editEventDescriptor.getName().orElse(eventToEdit.getName());
         Time updatedTime = editEventDescriptor.getTime().orElse(eventToEdit.getTime());
-        Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue().orElse(null));
+        Venue updatedVenue = editEventDescriptor.isVenueEdited()
+                ? editEventDescriptor.getVenue().orElse(null)
+                : eventToEdit.getVenue().orElse(null);
         Person updatedCelebrity = editEventDescriptor.getCelebrity().orElse(eventToEdit.getCelebrity());
         Set<Person> updatedContacts = editEventDescriptor.getContacts().orElse(eventToEdit.getContacts());
 
@@ -174,9 +174,10 @@ public class EditEventCommand extends EditCommand {
         private EventName name;
         private Time time;
         private Venue venue;
-        private String celebrityName;
+        private boolean isVenueEdited;
+        private Name celebrityName;
         private Person celebrity;
-        private Set<String> contactsNames;
+        private Set<Name> contactsNames;
         private Set<Person> contacts;
 
         public EditEventDescriptor() {}
@@ -193,14 +194,15 @@ public class EditEventCommand extends EditCommand {
             setCelebrity(toCopy.celebrity);
             setContactsNames(toCopy.contactsNames);
             setContacts(toCopy.contacts);
-
+            setVenueEdited(toCopy.isVenueEdited);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, time, venue, celebrity, celebrityName, contactsNames);
+            return CollectionUtil.isAnyNonNull(name, time, venue, celebrity, celebrityName, contactsNames)
+                    || isVenueEdited;
         }
 
         public void setEventName(EventName name) {
@@ -226,6 +228,13 @@ public class EditEventCommand extends EditCommand {
         public Optional<Venue> getVenue() {
             return Optional.ofNullable(venue);
         }
+        public boolean isVenueEdited() {
+            return isVenueEdited;
+        }
+
+        public void setVenueEdited(boolean isVenueEdited) {
+            this.isVenueEdited = isVenueEdited;
+        }
 
         public void setCelebrity(Person celebrity) {
             this.celebrity = celebrity;
@@ -235,11 +244,11 @@ public class EditEventCommand extends EditCommand {
             return Optional.ofNullable(celebrity);
         }
 
-        public void setCelebrityName(String celebrityName) {
+        public void setCelebrityName(Name celebrityName) {
             this.celebrityName = celebrityName;
         }
 
-        public void setContactsNames(Set<String> contactsNames) {
+        public void setContactsNames(Set<Name> contactsNames) {
             this.contactsNames = contactsNames;
         }
 

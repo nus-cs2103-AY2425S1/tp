@@ -15,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
+import seedu.address.model.person.Name;
 
 
 /**
@@ -45,10 +46,11 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_EVENT_TIME).get());
         Venue venue = argMultimap.getValue(PREFIX_EVENT_VENUE).isPresent()
+                && !argMultimap.getValue(PREFIX_EVENT_VENUE).get().isEmpty()
                 ? ParserUtil.parseVenue((argMultimap.getValue(PREFIX_EVENT_VENUE)).get())
                 : null;
-        String celebrity = ParserUtil.parseEventCelebrity(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get());
-        Set<String> contacts = ParserUtil.parseEventContacts(argMultimap.getAllValues(PREFIX_EVENT_CONTACTS));
+        Name celebrity = ParserUtil.parseEventCelebrity(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get());
+        Set<Name> contacts = ParserUtil.parseEventContacts(argMultimap.getAllValues(PREFIX_EVENT_CONTACTS));
 
         return new AddEventCommand(name, time, venue, celebrity, contacts);
     }

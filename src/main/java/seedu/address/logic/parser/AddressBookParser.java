@@ -114,6 +114,17 @@ public class AddressBookParser {
     }
 
     /**
+     * Polls the pending command.
+     *
+     * @return the pending command
+     */
+    public Command pollPendingCommand() {
+        Command command = this.pendingCommand;
+        this.pendingCommand = null;
+        return command;
+    }
+
+    /**
      * Parses user input into command for executing pending command.
      *
      * @param userInput full user input string
@@ -123,13 +134,11 @@ public class AddressBookParser {
     public Command executePendingCommand(String userInput) throws ParseException {
 
         if (userInput.equalsIgnoreCase("Y")) {
-            Command command = this.pendingCommand;
-            this.pendingCommand = null;
-            return command;
+            return this.pollPendingCommand();
         }
 
         if (userInput.equalsIgnoreCase("N")) {
-            this.pendingCommand = null;
+            this.pollPendingCommand();
             return new CancelPendingCommand();
         }
 

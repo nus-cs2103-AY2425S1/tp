@@ -19,6 +19,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.ui.CommandDetailChange;
@@ -43,9 +44,9 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_NAME + "Oscars "
             + PREFIX_EVENT_TIME + "2024-03-01 12:10 to 2024-03-01 18:30 "
             + PREFIX_EVENT_VENUE + "Hollywood "
-            + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney "
-            + PREFIX_EVENT_CONTACTS + "Jack Black "
-            + PREFIX_EVENT_CONTACTS + "Lebron James";
+            + PREFIX_EVENT_CELEBRITY + "Alex Yeoh "
+            + PREFIX_EVENT_CONTACTS + "Bernice Yu "
+            + PREFIX_EVENT_CONTACTS + "David Li";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in Talent Hub.";
@@ -54,14 +55,14 @@ public class AddEventCommand extends AddCommand {
     private final EventName eventName;
     private final Time time;
     private final Venue venue;
-    private final String celebrityName;
-    private final Set<String> contactNames;
+    private final Name celebrityName;
+    private final Set<Name> contactNames;
 
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
      */
-    public AddEventCommand(EventName eventName, Time time, Venue venue, String celebrityName,
-                           Set<String> contactNames) {
+    public AddEventCommand(EventName eventName, Time time, Venue venue, Name celebrityName,
+                           Set<Name> contactNames) {
         requireAllNonNull(eventName, time, celebrityName, contactNames);
         this.eventName = eventName;
         this.time = time;
@@ -81,8 +82,6 @@ public class AddEventCommand extends AddCommand {
             contacts = new HashSet<>(contactNames.stream().map(model::findPerson).toList());
         } catch (PersonNotFoundException e) {
             throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
-        } catch (IllegalArgumentException e) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_NAME));
         }
 
         if (contacts.contains(celebrity)) {
@@ -133,8 +132,8 @@ public class AddEventCommand extends AddCommand {
         } else {
             result.add("venue", "");
         }
-        result.add("Celebrity", celebrityName)
-                .add("Contacts", contactNames)
+        result.add("Celebrity", celebrityName.toString())
+                .add("Contacts", contactNames.toString())
                 .toString();
         return result.toString();
     }

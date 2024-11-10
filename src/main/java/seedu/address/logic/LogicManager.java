@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.PendingCommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -49,7 +50,12 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        try {
+            commandResult = command.execute(model);
+        } catch (PendingCommandException e) {
+            addressBookParser.pollPendingCommand();
+            throw new CommandException(e.getMessage());
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());

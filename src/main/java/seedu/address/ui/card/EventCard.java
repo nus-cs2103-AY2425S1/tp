@@ -79,7 +79,7 @@ public class EventCard extends UiPart<Region> {
         HBox contactCard = new HBox();
         contactCard.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
         contactCard.setSpacing(10);
-        Label tag = new Label(contact.getTagsString());
+        Label tag = new Label(contact.getTagString());
         tag.setBackground(new Background(new BackgroundFill(Color.DODGERBLUE, new CornerRadii(5), null)));
         tag.setTextFill(Color.WHITE);
         tag.setPadding(new javafx.geometry.Insets(2, 5, 2, 5));
