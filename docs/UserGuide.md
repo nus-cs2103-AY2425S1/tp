@@ -86,7 +86,7 @@ Provides you with tips to use our system more effectively.
 * For these commands requiring NRIC to specify the patient (`bookappt`, `deleteappt`, `delete`, `edit` and `view`), NRIC should:
     * Be a 9 character uppercase sequence with an alphabet at the start and at the end
     * Start with an uppercase `S`, `T`, `F`, `G`, `M` followed by 7 numbers and ending with an uppercase alphabet
-    * Be registered in the system
+    * Be registered in the system <br>
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
