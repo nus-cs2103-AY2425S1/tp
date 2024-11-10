@@ -471,7 +471,7 @@ Precondition: Student exists in the system.
 
 **MSS:**
 
-1. Tutor keys in required fields to add student contact.
+1. Tutor keys in required fields to add a lesson for a student contact.
 1. TutorEase adds the lesson to the student.  
    Use case ends.
 
