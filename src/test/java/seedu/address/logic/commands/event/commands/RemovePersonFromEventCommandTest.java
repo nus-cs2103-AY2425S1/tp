@@ -17,6 +17,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 
@@ -194,6 +196,26 @@ public class RemovePersonFromEventCommandTest {
 
 
 
+    @Test
+    public void execute_multipleRoles() throws Exception {
+        EventManager eventManager = model.getEventManager();
+        Person testMan = new PersonBuilder().withRoles("attendee", "vendor").build();
+        RemovePersonFromEventCommand removePersonFromEventCommand = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1), INDEX_FIRST_PERSON); //remove Alice
+
+        eventManager.getEventList().get(0).addPerson(testMan, "vendor");
+        eventManager.getEventList().get(0).addPerson(testMan, "attendee");
+        model.addPerson(testMan);
+        assertEquals(eventManager.getEventList().get(0).getAllPersons().size(), 7);
+        RemovePersonFromEventCommand removePersonFromEventCommand2 = new RemovePersonFromEventCommand(
+                Index.fromOneBased(1),
+                Index.fromZeroBased(model.getFilteredPersonList().size() - 1));
+        removePersonFromEventCommand2.execute(model, eventManager);
+        //check no. of people in TECH_CONFERENCE
+        Event techConference = eventManager.getEventList().get(0);
+        assertEquals(techConference.getAllPersons().size(), 6);
+        assert(!techConference.hasPerson(testMan));
+    }
 
 
 }
