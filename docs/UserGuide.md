@@ -358,6 +358,7 @@ Parameters:
 - `q/QUANTITY`: `QUANTITY` is the amount of product to be delivered with units. It must be a number greater than 0 followed by a space, and a unit and must not be blank.
     - `QUANTITY` cannot have decimal places.
     - `QUANTITY` units are case sensitive.
+    - Accepted units for `QUANTITY` are `kg`, `g`, `L`, `mL`, `units`. 
 - `c/COST`: `COST` is the total cost for the delivery. It must be a number greater than 0 with up to 2 decimal places allowed, and cannot be blank.
 
 **Tips:** 
@@ -375,6 +376,7 @@ Parameters:
 - A delivery is considered duplicate and will not be added again if it has the same `DELIVERY_DATE_TIME`, `SUPPLIER`, `PRODUCT`, `QUANTITY`, `COST` and `STATUS` as an existing delivery.
     - Comparison between different `PRODUCT`is case-sensitive.
 - A delivery has a default `STATUS` of `PENDING`.
+- A delivery cannot be added if the supplier of the chosen `SUPPLIER_INDEX` has status `INACTIVE`.
 
 </box>
 
