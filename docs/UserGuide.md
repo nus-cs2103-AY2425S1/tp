@@ -909,6 +909,7 @@ Calling `addGrade` without any fields will show the list of assignments in `assi
 ```
 5. You may repeat step 3 for as many new assignments you require.
 6. Save the file and re-run the application to load the new assignment.json file. You will then be able to use the newly included assignments!
+7. To delete an assignment, remove the code block of the assignment you want to delete as shown in step 3, and re-do step 6 again.
 
 </box>
 
