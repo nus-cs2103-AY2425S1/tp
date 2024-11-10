@@ -272,7 +272,7 @@ Tech-savvy sales representatives in the insurance industry who
 - Need quick access to contact information during calls or email communications
 - Require efficient follow-up management and interaction tracking
 
-**Value proposition**: Empowers insurance sales reps with lightning-fast, CLI-driven contact management. 
+**Value proposition**: Empowers insurance sales reps with lightning-fast, CLI-driven contact management.
 It offers instant access to lead details, interaction histories, and follow-up schedules, maximizing call and email productivity for high-volume, rapid-paced sales environments.
 
 
@@ -380,7 +380,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The user provides incomplete contact information
 
   * 2a1. AddressBook shows an error message and prompts for the missing details
-    
+
     Use case resumes at step 3
 
 * 3a. The contact already exists
@@ -473,14 +473,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. User reaches the earliest command in the history.
 
-  * 2a1. AddressBook stops navigating further back and continues displaying the first command. 
-  
+  * 2a1. AddressBook stops navigating further back and continues displaying the first command.
+
   Use case ends.
 
 * 2b. User requests to view the next command but is at the latest command.
 
-    * 2b1. AddressBook shows an empty string or a message indicating no further commands. 
-  
+    * 2b1. AddressBook shows an empty string or a message indicating no further commands.
+
     Use case ends.
 
 

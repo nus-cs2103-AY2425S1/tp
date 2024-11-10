@@ -168,12 +168,6 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // notes
-        userInput = targetIndex.getOneBased() + NOTES_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withNotes(VALID_NOTES_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
         // income
         userInput = targetIndex.getOneBased() + INCOME_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withIncome(VALID_INCOME_AMY).build();

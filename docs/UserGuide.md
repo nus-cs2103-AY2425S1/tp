@@ -129,7 +129,7 @@ Examples:
 Expected outcome for `list s/name`:
 ```
 Listed all persons
-Results: 
+Results:
 1. Alice Pauline (Phone: 94351253)
 2. Benson Meier (Phone: 98765432)
 ...
@@ -216,6 +216,9 @@ Parameters:
 <div markdown="span" class="alert alert-primary">:exclamation: **Tip:**
 The `notes add/` feature will replace the entire note, please use `notes edit/` to make modifications.
 </div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+While we allow any character for notes for flexibility, our primary language is English, and any formatting errors due to other languages is not part of our scope.
+</div>
 <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
 When using a person's name:
 * If there are multiple contacts with similar names, SalesContactPro will display a filtered list of all matching contacts
@@ -287,7 +290,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Command History: `↑` `↓` 
+### Command History: `↑` `↓`
 Allows users to quickly access previously entered commands without retyping them using arrow keys.
 
 Format: `↑` or `↓`
