@@ -27,7 +27,6 @@ public class Company {
     public Company(String company) {
         requireNonNull(company);
         checkArgument(isValidCompany(company), MESSAGE_CONSTRAINTS);
-        company = normalizeCompanyName(company);
         this.value = company;
     }
 
@@ -62,7 +61,7 @@ public class Company {
         }
 
         Company otherCompany = (Company) other;
-        return value.equals(otherCompany.value);
+        return normalizeCompanyName(value).equals(normalizeCompanyName(otherCompany.value));
     }
 
     @Override
