@@ -327,7 +327,7 @@ public class ParserUtil {
         if (!Budget.isValidBudget(budget)) {
             throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
         }
-        Budget b = new Budget(budget);
+        Budget b = parseBudget(budget);
         return new BudgetContainsKeywordsPredicate(splitAndTrim(b.toString()));
     }
 
