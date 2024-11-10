@@ -650,9 +650,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 
 
-
-
-
 ---
 
 ## Command summary
