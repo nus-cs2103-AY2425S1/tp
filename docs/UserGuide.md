@@ -30,6 +30,7 @@ But do not worry if you do not meet every criterion — EZSTATE is designed to b
 --------------------------------------------------------------------------------------------------------------------
 
 # Table of Contents
+
 * Table of Contents
 {:toc}
 
@@ -1137,23 +1138,22 @@ Furthermore, certain edits can cause EZSTATE to **behave in unexpected ways** (e
 
 ## Command summary
 
-| Action                         | Format, Examples                                                                                                                                                                                       |
-|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Buyer**                  | `buyer n/NAME p/PHONE e/EMAIL`<br>e.g. `buyer n/James Ho p/22224444 e/jamesho@example.com`                                                                                                             |
-| **Add Seller**                 | `seller n/NAME p/PHONE e/EMAIL`<br>e.g. `buyer n/James Ho p/22224444 e/jamesho@example.com`                                                                                                            |
-| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`                                                                                                                                              |
-| **Edit Client**                | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`<br>e.g., `edit 2 n/James Lee e/jameslee@example.com`<br>e.g., `edit 2 n/James Voo`<br>e.g., `edit 2 n/James Voo t/Friend t/Colleague |
-| **Delete Client**              | `deleteclient INDEX`<br>e.g., deleteclient 3                                                                                                                                                           |
-| **Add Listing**                | `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`<br>e.g., `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1`      |
-| **Show Listings**              | `showlistings`                                                                                                                                                                                         |
-| **Edit Listing**               | `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`<br>e.g., `editlisting 2 pr/450000 ar/1200`                                                                              |
-| **Add Buyers to Listing**      | `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `addlistingbuyers 1 buy/1 buy/3`                                                                                         |
-| **Remove Buyers from Listing** | `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `removelistingbuyers 1 buy/1 buy/3`                                                                                   |
-| **Delete Listing**             | `deletelisting INDEX`<br>e.g., `deletelisting 1`                                                                                                                                                       |
-| **Clear Listings**             | `clearlistings`                                                                                                                                                                                        |
-| **Clear**                      | `clear`                                                                                                                                                                                                |
-| **Exit**                       | `exit`                                                                                                                                                                                                 |
-| **Help**                       | `help`                                                                                                                                                                                                 |
-| **More Info**                  | `moreinfo INDEX`<br>e.g., `moreinfo 1`                                                                                                                                                                 |
-| **Chat Window**                | `chatbot`                                                                                                                                                                                              |
-
+| Action                         | Format, Examples                                                                                                                                                                                  |
+|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Buyer**                  | `buyer n/NAME p/PHONE e/EMAIL`<br>e.g., `buyer n/James Ho p/22224444 e/jamesho@example.com`                                                                                                       |
+| **Add Seller**                 | `seller n/NAME p/PHONE e/EMAIL`<br>e.g., `seller n/James Ho p/22224444 e/jamesho@example.com`                                                                                                     |
+| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`                                                                                                                                         |
+| **Edit Client**                | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`<br>e.g., `editclient 2 n/James Lee e/jameslee@example.com`<br>e.g., `editclient 2 n/James Voo t/Friend t/Colleague`             |
+| **Delete Client**              | `deleteclient INDEX`<br>e.g., `deleteclient 3`                                                                                                                                                    |
+| **Add Listing**                | `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`<br>e.g., `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1` |
+| **Show Listings**              | `showlistings`                                                                                                                                                                                    |
+| **Edit Listing**               | `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`<br>e.g., `editlisting 2 pr/450000 ar/1200`                                                                        |
+| **Add Buyers to Listing**      | `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `addlistingbuyers 1 buy/1 buy/3`                                                                                    |
+| **Remove Buyers from Listing** | `removelistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `removelistingbuyers 1 buy/1 buy/3`                                                                              |
+| **Delete Listing**             | `deletelisting INDEX`<br>e.g., `deletelisting 1`                                                                                                                                                  |
+| **Clear Listings**             | `clearlistings`                                                                                                                                                                                   |
+| **Clear**                      | `clear`                                                                                                                                                                                           |
+| **Exit**                       | `exit`                                                                                                                                                                                            |
+| **Help**                       | `help`                                                                                                                                                                                            |
+| **More Info**                  | `moreinfo INDEX`<br>e.g., `moreinfo 1`                                                                                                                                                            |
+| **Chat Window**                | `chatbot`                                                                                                                                                                                         |
