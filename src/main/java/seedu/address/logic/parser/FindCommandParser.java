@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -54,6 +53,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         return Arrays.stream(keywordsArg.split("\\s+"))
                 .filter(x -> !x.isEmpty())
-                .collect(Collectors.toList());
+                .toList();
     }
 }

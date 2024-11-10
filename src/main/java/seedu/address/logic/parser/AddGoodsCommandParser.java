@@ -36,9 +36,11 @@ public class AddGoodsCommandParser implements Parser<AddGoodsCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_GOODS_NAME, PREFIX_QUANTITY, PREFIX_PRICE,
                         PREFIX_CATEGORY, PREFIX_PROCUREMENT_DATE, PREFIX_ARRIVAL_DATE, PREFIX_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GOODS_NAME, PREFIX_QUANTITY, PREFIX_PRICE,
-                PREFIX_CATEGORY, PREFIX_PROCUREMENT_DATE, PREFIX_ARRIVAL_DATE, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        boolean preambleIsNotEmpty = !argMultimap.getPreamble().isEmpty();
+        boolean prefixesAreNotAllPresent = !arePrefixesPresent(argMultimap, PREFIX_GOODS_NAME, PREFIX_QUANTITY,
+                PREFIX_PRICE, PREFIX_CATEGORY, PREFIX_PROCUREMENT_DATE, PREFIX_ARRIVAL_DATE, PREFIX_NAME);
+
+        if (preambleIsNotEmpty || prefixesAreNotAllPresent) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGoodsCommand.MESSAGE_USAGE));
         }
 
