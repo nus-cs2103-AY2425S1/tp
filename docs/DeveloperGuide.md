@@ -83,6 +83,9 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+Certain components will require the instance of the `Model` itself. For example,
+* for example, `TrackSubjectWindow` requires information on the number of students taking each subject
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/logic/Logic.java)
@@ -127,18 +130,12 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="750" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -169,15 +166,15 @@ These operations are exposed in the `Model` interface as `Model#commitAcademyAss
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAcademyAssist` will be initialized with the initial academy assist state, and the `currentStatePointer` pointing to that single academy assist state.
+Step 1. The user launches the application for the first time. The `VersionedAcademyAssist` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete S00005` command to delete the student with studentID S00005 in the academy assist. The `delete` command calls `Model#commitAcademyAssist()`, causing the modified state of the academy assist after the `delete S00005` command executes to be saved in the `academyAssistStateList`, and the `currentStatePointer` is shifted to the newly inserted academy assist state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAcademyAssist()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `academyAssistStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAcademyAssist()`, causing another modified academy assist state to be saved into the `academyAssistStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAcademyAssist()`, causing another modified address book state to be saved into the `academyAssistStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
