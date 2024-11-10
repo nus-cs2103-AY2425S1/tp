@@ -66,7 +66,7 @@ This section explains the different types of annotated boxes used in the user gu
      - On Windows: `cd C:\Users\YourName\Documents\EduConnect`
      - On Mac/Linux: `cd /Users/YourName/Documents/EduConnect`
    - Then type this command to start the app:
-   
+
         `java -jar educonnect.jar`
    - After a few seconds, the EduConnect window will appear with some sample data to help you get started.
    ![Ui](images/Ui.png)
@@ -74,7 +74,7 @@ This section explains the different types of annotated boxes used in the user gu
 5. Enter a command:
 
    - Type a command in the command box and press **Enter** to send it. For example, typing `help` and pressing Enter will open a help window.
-    
+ 
    - Here are some commands you can try:
        - `list`: Displays all the student and teacher details.
        - `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321`: Adds a new student with the specified details.
@@ -93,7 +93,7 @@ The table below provides a quick overview of each parameter associated with a te
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
-> 
+>
 > Make sure the constraints for each parameter are met when entering a command. Not following these constraints may lead to errors and prevent the command from being executed correctly.
 
 | Parameter           | Definition                                                        | Constraints                                                                                                            | Examples                                                                   |
@@ -150,7 +150,7 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
-> 
+>
 > The selected theme will not be saved after closing the application. EduConnect will revert to its default theme, which is Dark Mode, when reopened.
 
 ![change themes](images/Changing-Themes.png)
@@ -161,7 +161,7 @@ Allows users to navigate through previously entered commands in the command box 
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
-> 
+>
 > The command history is only stored for the current session. When you close EduConnect, the history is cleared and cannot be retrieved in future sessions.
 
 
@@ -233,7 +233,7 @@ Edits an existing student or teacher in EduConnect.
 
 Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​ [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The `INDEX` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be replaced with the new input values provided in the command.
@@ -250,7 +250,7 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
-> 
+>
 > The `edit` command works on the overall list of contacts and not on a filtered list produced by the `find` command.
 
 Examples:
@@ -288,13 +288,13 @@ Format: `sort [ATTRIBUTE]`
 * Sorts the results based on the specified `ATTRIBUTE`. The available attributes are `name`, `subject`, `class`, `attendance`.
 * `sort name` Sorts the results by name in alphabetical order.
 * `sort subject` Sorts the results by the subjects they take in alphabetical order. Only the **first subject** in each person's list of subjects is considered when sorting.
-* `sort class` Sorts the results by class in alphanumerical order. Only the **first class** in each person's list of classes is considered when sorting. 
+* `sort class` Sorts the results by class in alphanumerical order. Only the **first class** in each person's list of classes is considered when sorting.
 * `sort attendance` Sorts the results by the number of days attended by students in descending order. Teachers, who do not have an attendance count, are placed at the end of the list
 * Sorting is case-insensitive.
 
 {: .alert .alert-info}
 > :information_source: **Note:**
-> 
+>
 > Explanation on Sorting by First Item:
 > When sorting by attributes such as subject or class, only the first item in the list of subjects or classes is considered. For instance:
 > * If a student has subjects listed as "Math, Physics, Chemistry", the `sort subject` command will use "Math" as the primary sorting key.
@@ -464,16 +464,17 @@ EduConnect data are saved automatically as a JSON file `[JAR file location]/data
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**       | `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] [/tag TAG]…​ [/attendance ATTENDANCE] /nok NEXT_OF_KIN /emergency EMERGENCY_CONTACT` <br> e.g., `student /name John Doe /gender male /contact 98765432 /email johnd@gmail.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A /attendance 0 /nok Bob Doe /emergency 87654321` |
 | **Add Teacher**       | `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/address ADDRESS] [/tag TAG]…​ /subject SUBJECT /classes CLASSES` <br/> e.g., `teacher /name Elizabeth Chua /gender female /contact 95673211 /email elizchua@yahoo.com /address Blk 30 Lorong 3 Serangoon Gardens, #07-18 /subject English /classes 5A, 8C`                                                       |
-| **Clear**             | `clear [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br/> e.g., `clear`, `clear /name Jacob`                                                                                                                                                                                                                  |
+| **Clear**             | `clear [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br/> e.g., `clear`, `clear /name Jacob`                                                                                                                                                                                                             |
 | **Delete**            | `delete INDEX...`<br> e.g., `delete 3`, `delete 1 2 4`                                                                                                                                                                                                                                                                                                                                   |
 | **Sort**              | `sort ATTRIBUTE`<br/>e.g.,`sort name`,`sort subject`                                                                                                                                                                                                                                                                                                                                     |
 | **Undo**              | `undo`                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Redo**              | `redo`                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Edit**              | `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​ [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`<br> e.g.,`edit 2 /name James Lee /email jameslee@example.com`                                                                                                                                                                                                                                      |
-| **Find**              | `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br> e.g., `find /name James /classes 8B`                                                                                                                                                                                                                   |
+| **Edit**              | `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​ [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`<br> e.g.,`edit 2 /name James Lee /email jameslee@example.com`                                                                                                                                                                                                                                 |
+| **Find**              | `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG]…​`<br> e.g., `find /name James /classes 8B`                                                                                                                                                                                                              |
 | **List**              | `list`                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Mark Attendance**   | `mark`                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Unmark Attendance** | `unmark INDEX…​` <br/> e.g., `unmark 1`, `unmark 1 2 3`                                                                                                                                                                                                                                                                                                                                  |
 | **Reset Attendance**  | `resetAttendance`                                                                                                                                                                                                                                                                                                                                                                        |
 | **Help**              | `help`                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Exit**              | `exit`                                                                                                                                                                                                                                                                                                                                                                                   |
+                                                                                                                                                                                                                                                                                                                                                             
