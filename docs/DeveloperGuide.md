@@ -15,7 +15,9 @@
 
 ChatGPT was heavily used to help create test case templates, although the ideas behind the test cases were mostly thought by the developers.
 <br>
-We would also like to acknowledge group CS-2103T-W14-1 as we followed a similar format for the command explanations in the user guide based on their user guide.
+We would also like to acknowledge group CS2103T-W14-1 as we followed a similar format for the command explanations in the user guide based on their user guide, 
+and group CS2103-F10-2 as we followed their test cases for saving data based on their developer guide.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -159,15 +161,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Planned Enhancements**
 Do note we have 4 members in our group.
 
-### 1. Being able to add new Insurance Plan Types
-Users currently cannot create their own types of insurance plans. Thus, in a future update, we will allow users to create
-their own Insurance Plan Types to add to their clients. Do note that as these plans are created by users and not validated
-by us, we will not be held liable for any unintended record-keeping issues such as claim ID not being validated correctly
-or the claim amount not being calculated correctly.
-
-### 2. addClaim ID
-Adding of a claim ID can be added to many users. This will be fixed in a future version such that claim ID is unique across
+### 1. addClaim ID
+A single claim ID can be added to multiple users. i.e. `B1100` can be added to both client `A` and client `B` with no error. This will be fixed in a future version such that claim ID is unique across
 all clients.
+
+### 2. addClaim amount
+Claim amount can currently exceed 1 million. In the future, a restriction will be placed on the claim amount such that if
+the claim amount is over 1 million, it will be rejected with an appropriate error message. This is in line with our restriction on claim amount (claim amount cannot exceed 1 million)
 
 ### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
 Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
@@ -176,7 +176,8 @@ duplicate. This is because 2 people can share numbers, address and emails (eg a 
 the same full name with different contact details but it will be unreasonably rare for clients to have the same name,
 number, email and addresses simultaneously.
 
-
+### 4. Flexible Command Keywords.
+Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we will make command keywords case-insensitive in a future update by parsing the prefixes differently.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -406,8 +407,8 @@ Use case ends.
 
 **Extensions**
 
-* 3a. The claim has already been closed for the client.
-    * 3a1. System shows an error message.
+* 1a. The claim has already been closed for the client.
+    * 1a1. System shows that claim is closed with no error.
 
     Use case ends.
 ---
@@ -424,14 +425,13 @@ Use case ends.
 8.  The app should have a log of user actions for debugging purposes.
 9.  The app should help users validate their inputs for their client's claim information as they are adding or deleting the inputs based on known market standards.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Insurance Agent**: The user of the app.
-* **Client**: A potential customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
-* **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system.
+* **Client**: A customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
+* **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system. 
+  * Supported insurance plans are: `Basic Insurance Plan` : `0` and `Travel Insurance Plan` : `1`.
 * **Valid Insurance Plan ID**: An insurance plan ID that exists in the system.
 * **Claim**: A formal request by a client for reimbursement for losses that are covered by specific insurance plans.
 <!-- (the above definition was obtained from: https://www.iciciprulife.com/insurance-claim.html) -->
@@ -454,18 +454,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file `InSUREance.jar` and copy it into an empty folder.
+   2. Use the command `java -jar InSUREance.jar` to launch the app.
+   3. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by using the command `java -jar InSUREance.jar`<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a client
 
@@ -473,21 +472,27 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the number of clients displayed)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Existing data is not affected.
 
-1. _{ more test cases …​ }_
+   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Existing data is not affected. 
+   
+   3. Edit the line `"addressBookFilePath"` : `"data/addressbook.json"` to `"addressBookFilePath"` : `"data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only). 
+
+   4. Delete `data/` or `data/addressbook.json`. Expected: New `data/addressbook.json` created. App starts on clean slate (i.e. with sample data only).
+
+2. Dealing with corrupted data files 
+   1. Add a new field `"newField" : "newField"` to a client. Expected: All data is lost. The app starts on a clean slate.
+   2. Remove `"insurancePlans"` field from a client. Expected: All data is lost. The app starts on a clean slate.
