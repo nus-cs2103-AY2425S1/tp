@@ -74,6 +74,12 @@ and make planning a breeze — so you can focus more on what matters and spend l
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="warning" seamless>
+
+**Caution:**
+All commands that use the indices shown in the displayed contact list can also be used in the displayed event list but the displayed contact list in this case refers to the last viewed displayed contact list (and vice versa).
+</box>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -111,13 +117,18 @@ Edits an existing person in ClubConnect's contact list.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. 
-* `INDEX` refers to the index number shown in the displayed person list. 
+* `INDEX` refers to the index number shown in the displayed contact list. 
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+
+<box type="tip" seamless>
+
+**Tip:** Displayed contact list refers to the contact list that is displayed on screen, and does not include contacts that are not shown on screen.
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -174,6 +185,11 @@ Format: `delete INDEX` / `delete CONTACT_NAME`
 * `INDEX` refers to the index number shown in the displayed contact list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
+<box type="tip" seamless>
+
+**Tip:** Displayed contact list refers to the contact list that is displayed on screen, and does not include contacts that are not shown on screen.
+</box>
+
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ClubConnect's contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
@@ -185,9 +201,14 @@ Deletes multiple specified contacts from ClubConnect's contact list using their 
 Format: `mass_delete INDEX1 INDEX2 ... INDEXN`
 
 * Deletes the persons at the specified indices.
-* Each index refers to the index number shown in the displayed person list.
-* All indices must be positive integers 1, 2, 3, … 
+* Each index refers to the index number shown in the displayed contact list.
+* All indices **must be a positive integer** 1, 2, 3, …​
 * Invalid indices will be filtered out.
+
+<box type="tip" seamless>
+
+**Tip:** Displayed contact list refers to the contact list that is displayed on screen, and does not include contacts that are not shown on screen.
+</box>
 
 Examples:
 * `list` followed by `mass_delete 1 2` deletes the 1st and 2nd persons in ClubConnect's contact list.
@@ -229,9 +250,15 @@ Edits the details of an existing event in the address book.
 
 Format: `edit_event INDEX n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_END_DATE`
 
-* The `INDEX` is required to identify which event to edit.
+* `INDEX` refers to the index number shown in the displayed event list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
 * The date inputs must be in the format `YYYY-MM-DD`.
 * At least one of the optional fields (`EVENT_NAME`, `EVENT_DESCRIPTION`, `EVENT_START_DATE`, `EVENT_END_DATE`) must be provided to make changes.
+
+<box type="tip" seamless>
+
+**Tip:** Displayed event list refers to the event list that is displayed on screen, and does not include events that are not shown on screen.
+</box>
 
 Examples:
 * `edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11`
@@ -255,6 +282,11 @@ Format: `delete_event INDEX` / `delete_event EVENT_NAME`
 * `INDEX` refers to the index number shown in the displayed event list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 
+<box type="tip" seamless>
+
+**Tip:** Displayed event list refers to the event list that is displayed on screen, and does not include events that are not shown on screen.
+</box>
+
 Examples:
 * `list_events` followed by `delete_event 2` deletes the 2nd event in ClubConnect's event list.
 * `delete_event meeting` will delete the event with event name `meeting` (case-insensitive).
@@ -269,6 +301,11 @@ Format: `assign_event p/PERSON_INDEX ev/EVENT_INDEX` / `assign_event p/PERSON_NA
 * `EVENT_INDEX` / `PERSON_INDEX` refers to the index number shown in the displayed event / contact list.
 * `EVENT_INDEX` and `PERSON_INDEX` **must be a positive integer** 1, 2, 3, …​
 * `EVENT_NAME` / `PERSON_NAME` refers to the name of the event / person (case-insensitive).
+
+<box type="tip" seamless>
+
+**Tip:** Displayed contact / event list refers to the contact / event list that is displayed on screen, and does not include contacts / events that are not shown on screen.
+</box>
 
 Examples:
 * `assign_event p/1 ev/2` will assign the 2nd event in ClubConnect's event list to the 1st person in ClubConnect's contact list.
@@ -287,6 +324,11 @@ Format: `unassign_event p/PERSON_INDEX ev/EVENT_INDEX` / `unassign_event p/PERSO
 * `EVENT_INDEX` / `PERSON_INDEX` refers to the index number shown in the displayed event / contact list.
 * `EVENT_INDEX` and `PERSON_INDEX` **must be a positive integer** 1, 2, 3, …​
 * `EVENT_NAME` / `PERSON_NAME` refers to the name of the event / person (case-insensitive).
+
+<box type="tip" seamless>
+
+**Tip:** Displayed contact / event list refers to the contact / event list that is displayed on screen, and does not include contacts / events that are not shown on screen.
+</box>
 
 Examples:
 * `unassign_event p/1 ev/2` will unassign the 2nd event in ClubConnect's event list from the 1st person in ClubConnect's contact list.
