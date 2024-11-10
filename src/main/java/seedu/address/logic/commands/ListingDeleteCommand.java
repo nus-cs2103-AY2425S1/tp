@@ -21,14 +21,14 @@ public class ListingDeleteCommand extends Command {
     public static final String COMMAND_WORD_SUFFIX = "delete";
     public static final String COMMAND_WORD = COMMAND_WORD_PREFIX + " " + COMMAND_WORD_SUFFIX;
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes a property listing from a Person "
+            + ": Deletes a property listing from a client "
             + "by the index number passed into INDEX parameter and LISTING_INDEX parameter"
             + "Multiple types of each property can exist, but the address must be unique.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "LISTING_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 1";
 
-    public static final String MESSAGE_DELETE_LISTING_SUCCESS = "Deleted property listing from Person: %1$s";
+    public static final String MESSAGE_DELETE_LISTING_SUCCESS = "Deleted property listing from client: %1$s";
     public static final String HELP_LISTING_DELETE_COMMAND = "Property Listing Delete Command\n"
             + "- Format: listing delete INDEX LISTING_INDEX\n"
             + "- Example: listing delete 1 1";

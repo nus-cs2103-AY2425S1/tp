@@ -22,7 +22,7 @@ public class ListingAddCommand extends Command {
     public static final String COMMAND_WORD_SUFFIX = "add";
     public static final String COMMAND_WORD = COMMAND_WORD_PREFIX + " " + COMMAND_WORD_SUFFIX;
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a property listing to a Person "
+            + ": Adds a property listing to a client "
             + "by the index number passed into INDEX parameter. "
             + "Multiple types of each property can exist, but the address must be unique.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -30,7 +30,7 @@ public class ListingAddCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "t/hdb a/NUS avenue 123";
 
-    public static final String MESSAGE_ADDED_LISTING_SUCCESS = "Added property listing to Person: %1$s";
+    public static final String MESSAGE_ADDED_LISTING_SUCCESS = "Added property listing to client: %1$s";
     public static final String HELP_LISTING_ADD_COMMAND = "Property Listing Add Command\n"
             + "- Format: listing add INDEX t/PROPERTY_TAG a/address\n"
             + "- Example: listing add 1 t/hdb a/123 NUS Street\n"

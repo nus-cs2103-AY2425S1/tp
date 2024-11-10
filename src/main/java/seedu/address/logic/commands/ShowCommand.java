@@ -17,7 +17,7 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_SHOW_PERSON_SUCCESS = "Displaying details for %s.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays detailed information about the person identified"
+            + ": Displays detailed information about the client identified"
             + " by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
@@ -25,7 +25,7 @@ public class ShowCommand extends Command {
     public static final String HELP_SHOW_COMMAND = "Show Command\n"
             + "- Format: show INDEX\n"
             + "- Example: show 1\n"
-            + "- Displays detailed information and listings of the person at the specified INDEX in the list.";
+            + "- Displays detailed information and listings of the client at the specified INDEX in the list.";
 
     private final Index targetIndex;
 

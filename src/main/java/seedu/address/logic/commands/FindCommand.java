@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String SPECIFIC_FIND_PREFIX = "s/";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "For more specific searches, use the \"s/\" prefix. When doing so, keywords need to be an exact match.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
@@ -34,8 +34,8 @@ public class FindCommand extends Command {
             + " The command is case insensitive."
             + " Only full words will be matched."
             + " By default, when more than one keyword is used,"
-            + " persons matching at least one keyword will be returned."
-            + " If a more specific search is required to find individuals exactly matching the specified keyword,"
+            + " clients matching at least one keyword will be returned."
+            + " If a more specific search is required to find clients exactly matching the specified keyword,"
             + " utilise the \"s/\" prefix.";
 
     private final ContainsSpecificKeywordsPredicate specificPredicate;
