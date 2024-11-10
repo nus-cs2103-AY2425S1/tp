@@ -22,10 +22,11 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 3. Copy the file to the folder you want to use as the _home folder_ for CFG.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar contactsforgood.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   
+5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   ![Ui](images/Ui.png)<br>
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -39,9 +40,10 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -71,7 +73,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -79,32 +81,36 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
 ## Command summary
 ### Person-Related Commands
-| **Action**  | **Format**                                                                                                                                                    | **Example**                                                                                    |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-contact-add)    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                        | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
-| [**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                                        | `clear`                                                                                        |
-| [**Delete**](#deleting-a-person-delete) | `delete INDICES`                                                                                                                                               | `delete 1 2 3 5-7`                                                                             |
-| [**Edit**](#editing-a-person-edit)     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                  | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
-| [**Search**](#searching-persons-by-field-search) | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                                                 | `search n/john`                                                                                |
-| [**List**](#listing-all-persons-list)  | `list`                                                                                                                                                         | `list`                                                                                         |
-| [**Sort**](#sorting-the-displayed-list-sort) | `sort [s/SORT_OPTION]`                                                                                                                                         | `sort s/name`                                                                                  |
+| **Action**                                       | **Format**                                                                                                                     | **Example**                                                                                    |
+|--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-contact-add)                 | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`       | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
+| [**Clear**](#clearing-all-entries--clear)        | `clear`                                                                                                                        | `clear`                                                                                        |
+| [**Delete**](#deleting-a-person--delete)         | `delete INDICES`                                                                                                               | `delete 1 2 3 5-7`                                                                             |
+| [**Edit**](#editing-a-person--edit)              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
+| [**Search**](#searching-persons-by-field-search) | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                 | `search n/john`                                                                                |
+| [**List**](#listing-all-persons--list)           | `list`                                                                                                                         | `list`                                                                                         |
+| [**Sort**](#sorting-the-displayed-list-sort)     | `sort [s/SORT_OPTION]`                                                                                                         | `sort s/name`                                                                                  |
+
+<div style="page-break-after: always;"></div>
 
 ### Group-Related Commands
-| **Action**                       | **Format**                                                        | **Example**                                    |
-|----------------------------------|-------------------------------------------------------------------|------------------------------------------------|
-| [**Create Group**](#creating-a-group-creategroup)                 | `createGroup g/GROUP_NAME m/[INDICES]`                            | `createGroup g/blood drive m/1 2 4-7`          |
-| [**Add New Members to Group**](#adding-new-members-to-an-existing-group-addtogroup)  | `addToGroup g/GROUP_NAME m/[INDICES]`                             | `addToGroup g/beach cleanup m/1 2 3-6`         |
-| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group-removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`             | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
-| [**Edit Group Name**](#editing-a-groups-name-editgroupname)             | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`                 | `editGroupName g/blood drive g/blood donation` |
-| [**Delete Group**](#deleting-a-group-deletegroup)                 | `deleteGroup g/GROUP_NAME`                                        | `deleteGroup g/blood donation`                 |
-| [**List Groups**](#listing-groups-listgroups)                  | `listGroups`                                                     | `listGroups`                                   |
+| **Action**                                                                                          | **Format**                                        | **Example**                                    |
+|-----------------------------------------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------|
+| [**Create Group**](#creating-a-group--creategroup)                                                  | `createGroup g/GROUP_NAME m/[INDICES]`            | `createGroup g/blood drive m/1 2 4-7`          |
+| [**Add New Members to Group**](#adding-new-members-to-an-existing-group--addtogroup)                | `addToGroup g/GROUP_NAME m/[INDICES]`             | `addToGroup g/beach cleanup m/1 2 3-6`         |
+| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group--removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`        | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
+| [**Edit Group Name**](#editing-a-groups-name--editgroupname)                                        | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME` | `editGroupName g/blood drive g/blood donation` |
+| [**Delete Group**](#deleting-a-group-deletegroup)                                                   | `deleteGroup g/GROUP_NAME`                        | `deleteGroup g/blood donation`                 |
+| [**List Groups**](#listing-groups-listgroups)                                                       | `listGroups`                                      | `listGroups`                                   |
 
 ### General Commands
-| **Action**           | **Format** | **Example** |
-|----------------------|------------|-------------|
-| [**Help**](#viewing-help-help)            | `help`     | `help`      |
-| [**Get Emails**](#getting-emails-email)      | `email`    |      `email` |
-| [**Exit Application**](#exiting-the-program-exit) | `exit`     |      `exit` |
+| **Action**                                         | **Format** | **Example** |
+|----------------------------------------------------|------------|-------------|
+| [**Help**](#viewing-help--help)                    | `help`     | `help`      |
+| [**Get Emails**](#getting-emails-email)            | `email`    | `email`     |
+| [**Exit Application**](#exiting-the-program--exit) | `exit`     | `exit`      |
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a contact: `add`
 
@@ -141,6 +147,8 @@ If the specified role does not match with the specified field, the add command w
 Examples:
 * `add r/volunteer h/10 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add r/donor d/100 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/rich`
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -350,18 +358,17 @@ Format: `listGroups`
 
 * The group size and up to three members are displayed for each group.
 * If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
-* 
+
 <box type="tip" seamless>
 
 **Tip:** To view all members of a group with more than 3 people, use `search g/GROUP_NAME`.
-</box>
+</box> 
 
 ![result for 'list groups'](images/list-groups.png)
 
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
-
 ![help message](images/helpMessage.png)
 
 Format: `help`
@@ -406,6 +413,4 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
 
