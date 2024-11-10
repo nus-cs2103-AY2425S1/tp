@@ -531,8 +531,8 @@ Format: `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`
 
 Parameters:
 
-- `aft/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the start date and time in which  deliveries with status`PENDING` before and on this date and time would not be displayed. It must be in dd-mm-yyyy hh:mm format.
-- `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` after and on this date and time would not be displayed. It must be in dd-mm-yyyy hh:mm format.
+- `aft/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the start date and time in which only deliveries with status`PENDING` after this date and time would be displayed. It must be in dd-mm-yyyy hh:mm format.
+- `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` before this date and time would be displayed. It must be in dd-mm-yyyy hh:mm format.
 
 **Tip:**
 - You can provide both parameters!
@@ -544,6 +544,7 @@ Parameters:
 **Warnings**:
 - At least one space is needed between `upcoming` and the first parameter.
 - At least one parameter must be provided.
+- If both parameters are provided, then only deliveries with status`PENDING` and `DELIVERY_DATE_TIME` between the two specified parameters are displayed (not inclusive)
 
 </box>
 
