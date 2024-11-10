@@ -202,6 +202,11 @@ Examples:
 
 ![update](images/update%20patient.png)
 
+<div markdown="span" class="alert alert-warning">:bangbang: Note:
+Updating only works if the displayed list contains the entry you are updating. Hence, attempting to update a record
+by NRIC if the record is not currently displayed will not work.
+ </div>
+
 <div style="page-break-after: always;"></div>
 
 ### Deleting a patient : `delete`
@@ -222,6 +227,12 @@ Examples:
 * `find Betsy` followed by `delete S2345678E` deletes the patient with 'S2345678E' in the results of the `find` command.
 
 <div style="page-break-after: always;"></div>
+
+<div markdown="span" class="alert alert-warning">:bangbang: Note:
+Deletions only work if the displayed list contains the entry you are deleting. Hence, attempting to delete a record
+by NRIC if the record is not currently displayed will not work.
+ </div>
+
 #### Deleting a patient by index:
 
 Format: `delete Index`
