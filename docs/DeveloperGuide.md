@@ -10,8 +10,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well} 
-* ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, as well as the JavaDocs for code written by BuffWuff1712
+This project was developed from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
+
+ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, 
+as well as the JavaDocs for code written by BuffWuff1712
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -279,7 +281,7 @@ Similarly, the sorting process within the `Model` component is shown below:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -965,7 +967,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Planned Enhancements**
+
+As we continue to develop PROperty, we are focused on refining and expanding its capabilities to better meet user needs. 
+Through identifying current limitations, we’re able to target areas that can benefit most from enhancement. 
+This section highlights our planned improvements, showcasing the steps we're taking to deliver a more comprehensive and effective solution for property agents.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix C: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -990,29 +1001,35 @@ testers are expected to do more *exploratory* testing.
       
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a client
 
-### Deleting a person
+1. Adding a new client to the contact list
 
-1. Deleting a person while all persons are being shown
+    1. Prerequisites: The contact list is displayed, and the user has relevant details to add a new client.
+
+    2. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Road`<br>
+       Expected: A new contact with the name "John Doe" and provided details is added to the list. The status message in the outcome box confirms the addition.
+
+    3. Test case: `add n/ p/ e/ a/`<br>
+       Expected: No client is added. An error message appears, indicating that names should only contain alphanumeric characters and spaces, and it should not be blank.
+
+    4. Other incorrect add commands to try: `add`, `add n/John Doe p/@456789`, `add n/Harry Kane p/88332255 e/harrykane.com a/123 Clementi Road`<br>
+       Expected: Error message indicating invalid command, phone or email format, with no changes to the list.
+
+
+### Deleting a client
+
+1. Deleting a client while all clients are being shown
    
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
    
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
    
    3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message.
    
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-   
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
