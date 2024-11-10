@@ -12,7 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.SelectPredicate;
+import seedu.address.model.person.predicates.SelectPredicate;
 
 /**
  * Selects the persons in the address book by the index numbers of the last shown list

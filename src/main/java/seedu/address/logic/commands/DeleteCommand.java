@@ -52,7 +52,6 @@ public class DeleteCommand extends Command {
     private Address address = null;
     private Email email = null;
     private Set<Tag> tags = null;
-    private PrefixHandler prefixHandler = new PrefixHandler();
 
     /**
      * Constructs a {@code DeleteCommand} that deletes a person identified by a name predicate (partial match).
@@ -169,6 +168,7 @@ public class DeleteCommand extends Command {
      */
     private CommandResult deletePersonByAttribute(Model model, Object attribute,
                                                   String errorMessage) throws CommandException {
+        PrefixHandler prefixHandler = new PrefixHandler();
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> personsToDelete = prefixHandler.findPersonByAttribute(lastShownList, attribute);
         if (personsToDelete.isEmpty()) {

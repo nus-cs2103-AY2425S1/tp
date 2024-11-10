@@ -25,7 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.SelectPredicate;
+import seedu.address.model.person.predicates.SelectPredicate;
 
 
 /**
