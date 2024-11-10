@@ -262,7 +262,7 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_3));
         //invalid date which does not exist
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_4));
-        //invalid date which does not exist on non-leap years  
+        //invalid date which does not exist on non-leap years
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_5));
 
     }
