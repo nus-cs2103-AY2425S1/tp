@@ -496,16 +496,17 @@ Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
 * `view-wed` / `vw` shows participants based on wedding names that match the keyword
 * `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`
-* Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`.
+* Only full words will be matched e.g. `jak` will not match `Jake`, `Sam` will not match `Sam Tan`, `ian & sky` will not match `Ian Pang & Sky Tan`.
 * Persons matching at least one keyword will not be returned (i.e. `AND` search)
   e.g. `Alice` will not return `Alice & Bob`
 
 <box type="warning" seamless>
 
-**TAKE NOTE:** No prefixes are required for this command
+**TAKE NOTE:** 
+* No prefixes are required for this command.
+* If there are no contacts in the wedding, KnottyPlanners will display all weddings to allow you to conveniently view other weddings if needed.
 
 </box>
-
 
 ![view-wed message](images/viewWeddingMsg.png)
 
