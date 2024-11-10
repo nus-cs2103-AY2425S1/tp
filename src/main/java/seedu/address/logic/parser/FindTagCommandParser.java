@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TAG_PRICE_SEARCH;
 
 import java.util.Arrays;
 
@@ -23,6 +24,11 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
+        }
+
+        if (args.contains("$")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_TAG_PRICE_SEARCH, FindTagCommand.MESSAGE_USAGE));
         }
 
         String[] tagKeywords = trimmedArgs.split("\\s+");
