@@ -537,16 +537,19 @@ otherwise)
 #### Extensions:
 - **2a.** The `index` is of invalid format (not a positive integer).
   - **2a1.** The system displays an error message:
-    ```
-     Invalid command format!
-     favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-     Two usage formats are supported:
-     1. To mark a person as favourite: Specify the index of the person in the displayed list.
+    
+    `Invalid command format!`
+     
+    `favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.`
+     
+    `Two usage formats are supported:`
+   
+    `1. To mark a person as favourite: Specify the index of the person in the displayed list.
         Parameters: INDEX (must be a positive integer)
-        Example: favourite 1
-     2. To sort all favourite persons to the top: Use the command without any parameters.
-        Example: favourite
-    ```
+        Example: favourite 1`
+  
+    `2. To sort all favourite persons to the top: Use the command without any parameters.
+        Example: favourite`
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
