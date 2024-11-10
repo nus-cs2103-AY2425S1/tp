@@ -254,6 +254,12 @@ Examples:
 - `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`
 - `addnote nric/S7012345B note/is caregiver for patient XYZ only until ABC day`
 
+<div class="alert alert-warning">
+<i>:warning:</i> <b>Warning:</b> CareLink does not check for duplicate notes. Please verify existing notes before adding new ones to avoid redundant medical information.
+</div>
+
+
+
 An example of using CareLink to add notes to a person is given below.
 ![AddNote command example](images/AddNoteExample.png)
 
