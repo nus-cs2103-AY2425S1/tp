@@ -1,8 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.handler.DuplicatePhoneTagger;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -71,7 +73,19 @@ public class PersonBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        ArrayList<String> addedTagsList = new ArrayList<>();
+        ArrayList<String> unaddedTagsList = new ArrayList<>();
+        for (String tag : tags) {
+            if (!DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME.equals(tag)) {
+                addedTagsList.add(tag);
+            } else {
+                unaddedTagsList.add(tag);
+            }
+        }
+        this.tags = SampleDataUtil.getTagSet(addedTagsList.toArray(new String[0]));
+        for (String unaddedTag : unaddedTagsList) {
+            this.tags.add(new Tag(unaddedTag));
+        }
         return this;
     }
 

@@ -10,13 +10,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS = "Names may only contain alphanumeric characters, "
-            + "spaces, forward slashes and apostrophes, and it should not be blank";
+            + "spaces, "
+            + "forward slashes "
+            + "apostrophes, "
+            + "should not be blank, "
+            + "and be within 200 characters";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} /']*";
+    public static final int MAX_NAME_LENGTH = 200;
     public final String fullName;
 
     /**
@@ -34,7 +39,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.length() <= MAX_NAME_LENGTH;
     }
 
 
