@@ -216,7 +216,7 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 3. **Add a DLT public address**
 
    ```
-   addpa c/ETH n/Travis w/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2
+   addpa 1 c/BTC l/wallet1 pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9
    ```
 
 
@@ -263,7 +263,6 @@ capabilities.
 
 DLTbook supports the following commands:
 
-
  Command                                                                | Description                                                                     
 ------------------------------------------------------------------------|---------------------------------------------------------------------------------
  [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                          
@@ -280,7 +279,6 @@ DLTbook supports the following commands:
  [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                         
  [**searchpa**](#searching-for-a-public-address-publicaddresssearch)    | Searches for a public address                                                   
  [**filter**](#filtering-persons-by-public-addresses-network-filter)    | Filters out a list of people with the public addresses of the specified network 
-
 
 <box type="info" seamless>
 
@@ -454,16 +452,15 @@ Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
   `SOL`, etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
   Allowed values: `BTC|ETH|SOL`.
 
-* The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs. 
+* The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
   This field is **case-insensitive** and will be stored as is.
 
 * The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
-  The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only 
+  The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only
   contain alphanumeric characters.
   This field is **case-insensitive** and will be converted to lowercase.
 
 Examples:
-
 
 * `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2
 * ` adds a public address
@@ -473,7 +470,6 @@ Examples:
 * `addpa 4 c/BTC l/savings_wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` adds a public address to the fourth
   contact on the list `David Li` under the BTC network with the wallet name `savings_wallet` and the public address
   `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
-
 
 ![img.png](img.png)
 
@@ -497,7 +493,7 @@ Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
   Allowed values: `BTC|ETH|SOL`.
 
 * The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
-  This field is **case-insensitive** and will be stored as is. 
+  This field is **case-insensitive** and will be stored as is.
 
 * The `PUBLIC_ADDRESS` parameter specifies the new public address to be added.
   The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only
@@ -508,12 +504,13 @@ Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
 * `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`<br />
   if the contact at index 3 exists and has a BTC public address labelled as 'Daily wallet'.
-  Changes the third person's BTC public address labelled `Daily wallet` to `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.<br />
+  Changes the third person's BTC public address labelled `Daily wallet` to
+  `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.<br />
 
 * `editpa 3 c/BTC l/daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`<br />
   if the contact at index 3 exists and has a BTC public address 'bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9'.
-  Changes the third person's BTC public address labelled "Daily wallet" to "daily wallet" as `WALLET_NAME` is **case-insensitive**.
-
+  Changes the third person's BTC public address labelled "Daily wallet" to "daily wallet" as `WALLET_NAME` is *
+  *case-insensitive**.
 
 <br>
 
@@ -559,7 +556,6 @@ Deletes the public address of a person.
 
 Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
-
 * Deletes the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -569,15 +565,14 @@ Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
   `SOL` etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
   Allowed values: `BTC|ETH|SOL`.
 
-* The `WALLET_NAME` parameter is not compulsory and specifies the wallet name of the public address 
-  that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the person 
+* The `WALLET_NAME` parameter is not compulsory and specifies the wallet name of the public address
+  that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the person
   at the specified `INDEX` will be deleted. This field is **case-insensitive**.
 
 * The Wallet Name is Case-sensitive. It will not work unless the Wallet Name is exactly the same as the one in the
   contact.
 
 Examples:
-
 
 * `deletepa 1 c/BTC l/wallet1` deletes the public address of the first person in the BTC network with the wallet name
   `wallet1`.
@@ -598,20 +593,23 @@ Format: `searchpa pa/PUBLIC_ADDRESS`
 
 <box type="tip" seamless>
 
-The field PUBLIC_ADDRESS is not cap sensitive.
-This command only searches the current list of public addresses displayed (eg if all contacts are displayed
-search pa will perform a global search. if a filtered list of contacts are
-displayed, search pa will perform a local
-search on list of contacts displayed).
-</box>
 
+
+</box>
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
 
 * The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
   The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only
   contain alphanumeric characters.
-  This field is **case-insensitive** and will be converted to lowercase.
+*
+
+This field is **case-insensitive** and will be converted to lowercase.
+
+* This command only searches the current list of public addresses displayed (eg if all contacts are displayed
+  searchpa will perform a global search. if a filtered list of contacts are
+  displayed, searchpa will perform a local
+  search on list of contacts displayed).
 
 Examples:
 
@@ -628,7 +626,6 @@ Examples:
 Filters out a list of persons with the public addresses of the specified network.
 
 Format: `filter c/NETWORK`
-
 
 * The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
   `SOL` etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
@@ -733,9 +730,9 @@ exactly describe this error. This shall be fixed in the future.
 | **List**                    | `list`                                                                                                                                                                 |
 | **Help**                    | `help`                                                                                                                                                                 |
 | **Exit**                    | `exit`                                                                                                                                                                 |
-| **Add Public Address**      | `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa c/ETH n/Travis w/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`                      |
+| **Add Public Address**      | `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`                              |z
 | **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                          |
 | **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                   |
-| **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC w/wallet1`                                                                                            |
+| **Delete Public Address**   | `deletepa c/NETWORK [l/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC l/wallet1`                                                                                            |
 | **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                                        |
 | **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                            |
