@@ -182,7 +182,15 @@ This section describes some noteworthy details on how certain features are imple
 
 **Status:** Scheduled for future release due to the complexity of potential solutions and risk of introducing new bugs.
 
-### 3. Data Import/Export Functionality
+### 3.  Support for Symbols such as `@` and Parentheses in Names
+**Current Issue:** ames containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
+
+**Technical Impact:**
+- There are no anticipated issues with allowing these symbols in names. The main reason for the lack of support is the low frequency of such cases, making it a lower priority for development.
+
+**Status:** Scheduled for future release as an enhancement to improve flexibility in name handling, allowing a broader range of symbols in user inputs.
+
+### 4. Data Import/Export Functionality
 **Current issue:** Users must manually copy and paste the `agentassist.json` file in the `data` directory, if they wish to use others' AgentAssist data files, or share their data files with other users.
 
 **Proposed Enhancement:** Add UI buttons in the application menu for:
@@ -191,7 +199,7 @@ This section describes some noteworthy details on how certain features are imple
 
 **Status:** Scheduled for future release as current manual process provides a workable solution.
 
-### 4. Error Message Improvement
+### 5. Error Message Improvement
 **Current issue:** Error messages are inconsistent when users input incorrect values. Depending on the parameter that is incorrect, the messages vary in detail. For example:
 - Using `edit` without index nor flags:
 ![EditErrorNoIndex.png](images/EditErrorNoIndex.png)
