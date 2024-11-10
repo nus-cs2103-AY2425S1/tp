@@ -198,6 +198,7 @@ Deletes the specified person(s) from the address book.
 
 Format: `delete [INDEX | INDEX-INDEX]…`
 
+* At least one of the index (range) must be provided.
 * Deletes the person at the specified `INDEX` or range of indices.
 * The index must be within the number of participants in the list.
 * When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
