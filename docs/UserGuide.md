@@ -203,7 +203,7 @@ Note:
 
 Examples:
 * `list` followed by `delete v/2` deletes the 2nd vendor in EventTory.
-* `find e/Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
+* `find e/ Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
 
 ### Listing Vendors & Events : `list`
 

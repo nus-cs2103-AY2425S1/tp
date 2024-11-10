@@ -737,12 +737,12 @@ testers are expected to do more *exploratory* testing.
 
 1.  Search for a Vendor by Keyword:
 
-    1. Type `find v/catering` <br>
+    1. Type `find v/ catering` <br>
        Expected: Vendors with names, descriptions, or tags matching "catering" are displayed.
 
 2.  Search for an Event by Keyword:
 
-    1. Type `find e/wedding` <br>
+    1. Type `find e/ wedding` <br>
        Expected: Events with names or tags matching "wedding" are displayed.
 
 ### Clear Command
