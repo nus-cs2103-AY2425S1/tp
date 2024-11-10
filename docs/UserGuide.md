@@ -157,7 +157,7 @@ Adds a member to Hall Pointer.
 
 ### Listing all members : `list`
 
-Shows a list of all members registered in hall Pointer.
+Shows a list of all members registered in Hall Pointer.
 
 **Format:** `list`
 
