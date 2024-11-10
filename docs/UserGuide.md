@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for managing contacts just for you Financial Advisors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, F.A.R.T can get your contact management tasks done faster than traditional GUI apps.
+Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for managing clients just for you Financial Advisors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, F.A.R.T can get your client management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -43,19 +43,19 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 
 1. The F.A.R.T. book is divided into four main sections. Referencing the above:
 
-   1. The `Contacts List`, highlighted by the purple box. This shows you a simple list of all clients that have been added to the book.
-   1. The `Detailed View`, highlighted by the orange box. This shows you a detailed view of one client when you select it from the `Contacts List` by double-clicking on the appropriate contact.
+   1. The `Client List`, highlighted by the purple box. This shows you a simple list of all clients that have been added to the book.
+   1. The `Detailed View`, highlighted by the orange box. This shows you a detailed view of one client when you select it from the `Client List` by double-clicking on the appropriate client.
    1. The `Command Input Window`, highlighted by the green box. This is where you input commands to interact with the F.A.R.T. book. Do so by selecting the `Command Input Window` and typing the relevant command. Press `Enter` to execute it.
    1. The `Response Window`, highlighted by the blue box. Once a command is inputted, this is where the F.A.R.T. book informs you of the result of your command.
 1. Some example commands you can try:
    * `help`: Opens the help window.
-   * `list` : Lists all contacts.
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a contact named `John Doe` to the F.A.R.T book and automatically marks them as unpaid.
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-   * `paid 3 f/6` : Marks the 3rd contact shown in the current list as paid and sets the policy renewal frequency to 6 months.
-   * `unpaid 3` : Marks the 3rd contact shown in the current list as unpaid and changes the policy renewal frequency to 0.
-   * `clear` : Deletes all contacts.
-   * `find n/john`  : Displays all contacts with name(s) matching "john"
+   * `list` : Lists all clients.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a client named `John Doe` to the F.A.R.T book and automatically marks them as unpaid.
+   * `delete 3` : Deletes the 3rd client shown in the current list.
+   * `paid 3 f/6` : Marks the 3rd client shown in the current list as paid and sets the policy renewal frequency to 6 months.
+   * `unpaid 3` : Marks the 3rd client shown in the current list as unpaid and changes the policy renewal frequency to 0.
+   * `clear` : Deletes all clients.
+   * `find n/john`  : Displays all clients with name(s) matching "john"
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -151,8 +151,8 @@ Format: `help`
 --------------------------------------------------------------------------------------------------------------------
 
  ### Viewing a client's details
-* When the app starts, a placeholder on the right panel will prompt you to select a contact on the list.
-* **Double-click** on a contact in the contact list to bring up a more detailed view of the client, including information like address and birthday. This will bring up something similar to the below.
+* When the app starts, a placeholder on the right panel will prompt you to select a client on the list.
+* **Double-click** on a client in the client list to bring up a more detailed view of the client, including information like address and birthday. This will bring up something similar to the below.
 ![detailedView.png](images/detailedView.png)
 * The detailed view can be broken down into three main sections:
   * The client's profile picture, highlighted by the purple box. This can be updated via the `upload` command.
@@ -161,7 +161,7 @@ Format: `help`
 
 <div markdown="block" class="alert alert-info">
   **:information_source: Note!**<br>
-The displayed contact will persist and edits will not be reflected until you select another contact or close the F.A.R.T book.If you made any changes to the current contact on display, kindly double-click on the same contact to refresh the detailed view.
+The displayed client will persist and edits will not be reflected until you select another client or close the F.A.R.T book.If you made any changes to the current client on display, kindly double-click on the same client to refresh the detailed view.
 </div> 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -183,7 +183,7 @@ Examples:
 **Note:**
 1. As mentioned in the Validation Rules, only valid email addresses (in the form `local-part@domain`) and **Singapore** phone numbers are accepted.
 1. Birthdays should be added in DD MM YYYY format.
-1. You may add duplicate contacts (i.e., contacts with the same name, case-insensitive) but the F.A.R.T book will prompt you to confirm that you are adding a duplicate contact. If you select `No` in the prompt window, the operation will be aborted and the client will not be added. Else, select `Yes` to add the new client.
+1. You may add duplicate clients (i.e., clients with the same name, case-insensitive) but the F.A.R.T book will prompt you to confirm that you are adding a duplicate client. If you select `No` in the prompt window, the operation will be aborted and the client will not be added. Else, select `Yes` to add the new client.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,7 +255,7 @@ Examples:
 
  ### Clearing all entries : `clear`
 
-Want to get rid of all contacts or the sample data we've provided? This command clears all entries from the F.A.R.T book.
+Want to get rid of all clients or the sample data we've provided? This command clears all entries from the F.A.R.T book.
 
 Format: `clear`
 
@@ -380,7 +380,7 @@ If your changes to the data file makes its format invalid, F.A.R.T will discard 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 1. **If you are unable to see the command input or result panels**, resize the window to a larger size by hovering over the window outline on your screen. A two-sided arrow should appear, which you can click and drag to resize to an appropriate size. This issue may be especially prevalent on smaller monitor sizes.
-1. As mentioned in the Viewing a client's details section, a client's detailed view **does not automatically update to reflect changes**. Once changes are made, double-click on the same contact to refresh said changes. Else, the changes will be updated upon restarting the F.A.R.T. book.
+1. As mentioned in the Viewing a client's details section, a client's detailed view **does not automatically update to reflect changes**. Once changes are made, double-click on the same client to refresh said changes. Else, the changes will be updated upon restarting the F.A.R.T. book.
 
 --------------------------------------------------------------------------------------------------------------------
 

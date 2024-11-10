@@ -29,10 +29,10 @@ public class HelpContentManager {
         contentMap.put("Introduction", """
                 Introduction
                  Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a
-                 desktop app for managing contacts tailored for Financial Advisors,
+                 desktop app for managing clients tailored for Financial Advisors,
                  optimized for use via a Command Line Interface (CLI) while still
                  having the benefits of a Graphical User Interface (GUI). If you can
-                 type fast, F.A.R.T can get your contact management tasks done faster
+                 type fast, F.A.R.T can get your client management tasks done faster
                  than traditional GUI apps.\n
                  Navigate to the appropriate issue via the panel on the left.
                 """);
@@ -120,7 +120,7 @@ public class HelpContentManager {
         contentMap.put("Viewing a client's details", """
                 Viewing a Client’s Details
                  When the app starts, a placeholder on the right panel will prompt you to
-                 select a contact on the list. Double-click on a contact in the contact list
+                 select a client on the list. Double-click on a client in the client list
                  to bring up a more detailed view of the client, including information like
                  address and birthday.\n
                  The detailed view can be broken down into three main sections. From the above:
@@ -135,9 +135,9 @@ public class HelpContentManager {
                  A successful copy will result in `Template Message copied to clipboard!`
                  being shown in the `Response Window`.\n
                  Note:
-                 The displayed contact will persist, and edits will not be reflected until you select
-                 another contact or close the F.A.R.T book. If you made any changes to the current
-                 contact on display, kindly double-click to refresh the detailed view.
+                 The displayed client will persist, and edits will not be reflected until you select
+                 another client or close the F.A.R.T book. If you made any changes to the current
+                 client on display, kindly double-click to refresh the detailed view.
                 """);
 
         contentMap.put("Adding a client", """
@@ -155,9 +155,9 @@ public class HelpContentManager {
                  1. As mentioned in the Validation Rules, only Singapore phone numbers and
                  valid email addresses (in the form `local-part@domain`) are accepted.\n
                  2. Birthdays should be added in DD MM YYYY format.\n
-                 3. You may add duplicate contacts (i.e., contacts with the same name,
+                 3. You may add duplicate clients (i.e., clients with the same name,
                  case-insensitive), but the F.A.R.T book will prompt you to confirm that you
-                 are adding a duplicate contact. If you select `No` in the prompt window, the
+                 are adding a duplicate client. If you select `No` in the prompt window, the
                  operation will be aborted and the client will not be added. Else, select
                  `Yes` to add the new client.
                 """);
@@ -230,7 +230,7 @@ public class HelpContentManager {
 
         contentMap.put("Clearing all entries", """
                 Clearing all entries : clear
-                 Want to get rid of all contacts or the sample data we’ve provided?
+                 Want to get rid of all clients or the sample data we’ve provided?
                  This command clears all entries from the F.A.R.T book.\n
                  Format: `clear`\n
                  Note:
@@ -367,7 +367,7 @@ public class HelpContentManager {
                  issue may be especially prevalent on smaller monitor sizes.\n
                  4. As mentioned in the Viewing a client's details section, a client's detailed view
                  does not automatically update to reflect changes. Once changes are made,
-                 double-click on the same contact to refresh said changes. Else, the changes will be
+                 double-click on the same client to refresh said changes. Else, the changes will be
                  updated upon restarting the F.A.R.T. book.
                 """);
 
