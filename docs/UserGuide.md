@@ -61,7 +61,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
    
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
-5.  Head over to the [next section](#gui-overview) to understand the GUI
+5.  Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead and enjoy the rest of the guide!
 
 ### GUI Overview
 The EZSTATE GUI is organized into **5** key components:
