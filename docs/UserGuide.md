@@ -39,7 +39,6 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
     - 4.2 [Commands](#4-2-commands)
     - 4.3 [Flags](#4-3-flags)
     - 4.4 [Arguments](#4-4-arguments)
-
 5. [Commands Overview](#5-commands-overview)
     - 5.1 [General Commands](#5-1-general-commands)
         - 5.1.1 [Viewing Help](#5-1-1-viewing-help-help)
@@ -64,7 +63,6 @@ Now, let’s get started and unlock the full potential of Prudy for efficient cl
         - 5.4.2 [Deleting a Claim](#5-4-2-deleting-a-claim-delete-claim)
         - 5.4.3 [Editing a Claim](#5-4-3-editing-a-claim-edit-claim)
         - 5.4.4 [Listing All Claims](#5-4-4-listing-all-claims-list-claims)
-
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
 8. [Command Summary](#8-command-summary)
@@ -77,37 +75,40 @@ Before you begin using Prudy, here are a few essential prerequisites to ensure a
 
 1. **Opening a Command Terminal**:
    To use Prudy effectively, you’ll need to know how to open a terminal on your operating system:
-
+<br>
     - **Windows**:
         1. Press `Windows Key + R` to open the Run dialog.
         2. Type `cmd` and press `Enter`.
         3. This will open the Command Prompt, which can be used as a terminal.
-
     - **MacOS**:
         1. Press `Command + Space` to open Spotlight Search.
         2. Type `Terminal` and press `Enter`.
         3. The Terminal application will open, ready for use.
-
     - **Linux**:
         1. Depending on your distribution, you can usually open the terminal by pressing `Ctrl + Alt + T`.
         2. Alternatively, look for the Terminal application in your system’s application menu.
 
+<br>
 
 2. **Basic Command Line Interface (CLI) Knowledge**:
    Prudy is optimized for CLI, allowing you to perform actions quickly through typed commands. If you're new to CLI, start by familiarizing yourself with basic commands such as:
+<br>
     - `cd` to change directories
     - `ls` (or `dir` on Windows) to list files
     - `exit` to close the terminal
       This knowledge will help you navigate the system and use Prudy more efficiently.
 
+<br>
 
 3. **Keyboard Navigation Skills**:
    Prudy is designed to enhance speed and productivity, especially when using keyboard shortcuts. Familiarize yourself with basic keyboard shortcuts, such as:
+<br>
     - `Enter` to execute a command
     - `Tab` to auto-complete directory paths
     - `Arrow keys` to navigate through previous commands
       These shortcuts will make it easier to work with Prudy’s CLI-based interface.
 
+<br>
 
 4. **Basic Understanding of Data Fields**:
    Prudy keeps track of essential client information such as names, phone numbers, emails, addresses, tags, policies, and claims. Familiarizing yourself with these data fields will make it easier to add, edit, and filter client information efficiently.
@@ -155,20 +156,15 @@ If you’re unsure how to open a terminal, refer back to the [Prerequisites](#2-
    ![Ui](images/Ui.png)
 
 
-5. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
-
-   Some example commands you can try:
-
+5. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.
+<br>
+   Some example commands you can try:<br>
    * `list-clients` : Lists all clients.
-
    * `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to Prudy.
-
    * `delete-client 3` : Deletes the 3rd client shown in the current list.
-
    * `clear` : Deletes all clients.
-
    * `exit` : Exits the app.
-
+<br>
 
 6. If you are a beginner, we recommend that you check out the [Command Structure](#4-command-structure) section to find out more about command syntax. Otherwise, you may also choose to skip and proceed directly to the [Command](#5-commands-overview) section for details of each command.
 
