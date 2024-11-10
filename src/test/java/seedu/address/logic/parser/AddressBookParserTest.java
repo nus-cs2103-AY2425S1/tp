@@ -72,7 +72,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         // Simulate a search for names containing "foo", addresses containing "bar"
-        Map<String, String> searchCriteria = Map.of(
+        Map<String, Object> searchCriteria = Map.of(
                 "name", "foo",
                 "address", "bar"
         );

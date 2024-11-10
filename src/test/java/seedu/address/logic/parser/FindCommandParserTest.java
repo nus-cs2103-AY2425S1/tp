@@ -23,7 +23,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // Expected search criteria with "Alice" as the name and "Bob" as the address
-        Map<String, String> searchCriteria = Map.of(
+        Map<String, Object> searchCriteria = Map.of(
                 "name", "Alice",
                 "address", "Serangoon"
         );

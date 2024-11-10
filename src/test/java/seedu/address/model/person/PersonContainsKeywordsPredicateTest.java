@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,8 @@ public class PersonContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        Map<String, String> firstPredicateSearchCriteria = Map.of("name", "first");
-        Map<String, String> secondPredicateSearchCriteria = Map.of("name", "first", "address", "second");
+        Map<String, Object> firstPredicateSearchCriteria = Map.of("name", "first");
+        Map<String, Object> secondPredicateSearchCriteria = Map.of("name", "first", "address", "second");
 
         PersonContainsKeywordsPredicate firstPredicate =
                 new PersonContainsKeywordsPredicate(firstPredicateSearchCriteria);
@@ -43,7 +44,7 @@ public class PersonContainsKeywordsPredicateTest {
     @Test
     public void test_personMatchesSearchCriteria_returnsTrue() {
         // Search by name
-        Map<String, String> searchCriteria = Map.of("name", "Alice");
+        Map<String, Object> searchCriteria = Map.of("name", "Alice");
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
@@ -76,7 +77,7 @@ public class PersonContainsKeywordsPredicateTest {
     @Test
     public void test_partialMatches_returnsTrue() {
         // Partial match at the beginning of the name
-        Map<String, String> searchCriteria = Map.of("name", "Ali");
+        Map<String, Object> searchCriteria = Map.of("name", "Ali");
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
@@ -104,7 +105,7 @@ public class PersonContainsKeywordsPredicateTest {
     @Test
     public void test_personDoesNotMatchSearchCriteria_returnsFalse() {
         // Search by name (no match)
-        Map<String, String> searchCriteria = Map.of("name", "Carol");
+        Map<String, Object> searchCriteria = Map.of("name", "Carol");
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
@@ -124,7 +125,7 @@ public class PersonContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withEmail("alice@example.com").build()));
 
         // Search by tag (no match)
-        searchCriteria = Map.of("tag", "colleague");
+        searchCriteria = Map.of("tags", List.of("colleague"));
         predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         assertFalse(predicate.test(new PersonBuilder().withTags("friend").build()));
     }
@@ -132,7 +133,7 @@ public class PersonContainsKeywordsPredicateTest {
     @Test
     public void test_partialMatches_returnsFalse() {
         // Partial match not present
-        Map<String, String> searchCriteria = Map.of("name", "Alz");
+        Map<String, Object> searchCriteria = Map.of("name", "Alz");
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
@@ -144,7 +145,7 @@ public class PersonContainsKeywordsPredicateTest {
 
     @Test
     public void toStringMethod() {
-        Map<String, String> searchCriteria = Map.of("name", "keyword1", "address", "keyword2");
+        Map<String, Object> searchCriteria = Map.of("name", "keyword1", "address", "keyword2");
         PersonContainsKeywordsPredicate predicate = new PersonContainsKeywordsPredicate(searchCriteria);
 
         String expected =

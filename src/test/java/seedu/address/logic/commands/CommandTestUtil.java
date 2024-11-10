@@ -130,7 +130,7 @@ public class CommandTestUtil {
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
 
-        Map<String, String> searchCriteria = new HashMap<>();
+        Map<String, Object> searchCriteria = new HashMap<>();
         searchCriteria.put("name", splitName[0]);
 
         model.updateFilteredPersonList(new PersonContainsKeywordsPredicate(searchCriteria));

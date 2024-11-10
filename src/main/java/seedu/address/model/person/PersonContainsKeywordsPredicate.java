@@ -21,6 +21,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         boolean matches = true;
+        matches &= !searchCriteria.isEmpty();
 
         if (searchCriteria.containsKey("name")) {
             matches &= StringUtil.containsIgnoreCase(person.getName().fullName, (String) searchCriteria.get("name"));
