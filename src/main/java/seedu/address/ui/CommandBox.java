@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A CommandBox component that is part of the UI, allowing the user to input commands.
@@ -137,44 +139,60 @@ public class CommandBox extends UiPart<Region> {
         return true;
     }
 
-    private boolean hasProperSpaceBeforePrefix(String input, String prefix) {
-        int prefixPos = input.lastIndexOf(prefix);
-        if (prefixPos <= 0) return false;
 
-        // If the character before prefix isn't a space, check if it's part of an incorrect parameter
-        // e.g., in "namep/" or "phonee/", the prefix is attached to previous text
-        char beforePrefix = input.charAt(prefixPos - 1);
-        if (beforePrefix != ' ') {
-            // Get the last proper space position before this prefix
-            int lastSpacePos = input.lastIndexOf(' ', prefixPos);
-            if (lastSpacePos == -1) {
-                return false;  // No space found before prefix at all
-            }
-            // Check if there's any text between the last space and this prefix
-            // If there is, this prefix is incorrectly attached to previous text
-            String textBetween = input.substring(lastSpacePos + 1, prefixPos);
-            if (!textBetween.isEmpty()) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     private boolean hasInvalidParameterStructure(String input) {
         String[] parts = input.split("\\s+");
         String command = parts[0];
 
+        // Create a set of valid prefixes for easier lookup
+        Set<String> validPrefixes = new HashSet<>(parameterMap.keySet());
+
         // Check each part that contains a slash
         for (String part : parts) {
-            if (part.contains("/")) {
-                // If this part contains a slash but not at the start, it's invalid
-                // e.g., "namep/" or "something/value"
-                if (part.indexOf('/') != part.lastIndexOf('/') || !startsWithValidPrefix(part)) {
-                    return true;
+            int slashIndex = part.indexOf('/');
+            if (slashIndex != -1) {
+                // Extract the potential prefix (everything up to and including the slash)
+                String potentialPrefix = part.substring(0, slashIndex + 1);
+
+                // Only validate if it's one of our known command prefixes
+                if (validPrefixes.contains(potentialPrefix)) {
+                    // If this is a valid prefix, it should be at the start of the part
+                    if (!part.startsWith(potentialPrefix)) {
+                        return true;  // Invalid structure
+                    }
+                    // Check if there are any more slashes after this valid prefix
+                    if (part.indexOf('/', slashIndex + 1) != -1) {
+                        return true;  // Invalid structure
+                    }
                 }
             }
         }
         return false;
+    }
+
+    private boolean hasProperSpaceBeforePrefix(String input, String prefix) {
+        int prefixPos = input.lastIndexOf(prefix);
+        if (prefixPos <= 0) return false;
+
+        // Get the last space before this prefix
+        int lastSpacePos = input.lastIndexOf(' ', prefixPos);
+        if (lastSpacePos == -1) {
+            return false;  // No space found before prefix at all
+        }
+
+        // Get the text between the last space and this prefix
+        String textBetween = input.substring(lastSpacePos + 1, prefixPos);
+
+        // Check if there are any valid prefixes in the text between
+        // This handles cases like "namep/" or "phonee/"
+        for (String validPrefix : parameterMap.keySet()) {
+            if (textBetween.contains(validPrefix)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private boolean startsWithValidPrefix(String part) {
