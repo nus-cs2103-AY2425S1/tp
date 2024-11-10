@@ -303,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LegacyLink` and the **Actor** is the `user`, unless specified otherwise)
 
-### **Use case 1: Add contact**
+### Use case 1: Add contact
 
 **MSS**
 1. User enters name, phone number, email and relationship of the contact.
@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *a. At any time, User chooses to cancel adding a contact Use case ends.
 
-### **Use case 2: Delete contact**
+### Use case 2: Delete contact
 
 **MSS**
 
@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-### **Use case 3: View all contacts**
+### Use case 3: View all contacts
 
 **MSS**
 
@@ -361,7 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### **Use case 4: Update information of contact**
+### Use case 4: Update information of contact
 
 **MSS**
 
@@ -404,7 +404,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-### **Use case 5: Add event**
+### Use case 5: Add event
 
 **MSS**
 
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *a At any time, Users chooses to cancel the adding.
 
 
-### **Use case 6: Delete an event**
+### Use case 6: Delete an event
 
 **Preconditions:**
 
@@ -473,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends
 
-### **Use case 8: Update event information**
+### Use case 8: Update event information
 
 **MSS**
 
