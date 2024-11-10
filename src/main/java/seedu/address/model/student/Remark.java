@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Remark in the address book.
+ * Represents a Remark in TAchy.
  * Guarantees: immutable; name is valid as declared in {@link #isValidRemarkName(String)}
  */
 public class Remark {

@@ -45,7 +45,7 @@ public class EditAssignmentCommand extends Command {
     public static final String MESSAGE_EDIT_SUCCESS = "Edited Assignment: assignment index %1$s belonging "
             + "to Student: %2$s, with a new name of %3$s and a new max score of %4$s.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in TAchy.";
     private final Index studentIndex;
     private final Index assignmentIndex;
     private final EditAssignmentDescriptor editAssignmentDescriptor;

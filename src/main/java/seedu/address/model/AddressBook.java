@@ -55,7 +55,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in TAchy.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -63,8 +63,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a student to TAchy.
+     * The student must not already exist in TAchy.
      */
     public void addStudent(Student p) {
         students.add(p);
@@ -72,7 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in TAchy.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the address
      * book.
      */
@@ -83,7 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in TAchy.
      */
     public void removeStudent(Student key) {
         students.remove(key);

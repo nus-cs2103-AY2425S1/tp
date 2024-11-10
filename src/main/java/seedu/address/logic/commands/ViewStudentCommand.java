@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Expands the details of a student identified using it's displayed index from the address book.
+ * Expands the details of a student identified using it's displayed index from TAchy.
  */
 public class ViewStudentCommand extends Command {
 
