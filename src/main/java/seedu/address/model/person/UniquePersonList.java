@@ -182,8 +182,17 @@ public class UniquePersonList implements Iterable<Person> {
     private boolean personsAreUnique(List<Person> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
-                    return false;
+                Person first = persons.get(i);
+                Person second = persons.get(j);
+                // Check if they are both patients or doctors first.
+                if (first instanceof Patient && second instanceof Patient) {
+                    if (((Patient) first).isSamePatient((Patient) second)) {
+                        return false;
+                    }
+                } else if (first instanceof Doctor && second instanceof Doctor) {
+                    if (((Doctor) first).isSameDoctor((Doctor) second)) {
+                        return false;
+                    }
                 }
             }
         }
