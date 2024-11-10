@@ -399,9 +399,17 @@ If your changes to the data file makes its format invalid, UGTeach will discard 
 Furthermore, certain edits can cause the application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+* **Duplicated student:** Two students are duplicates if they have the exactly same **NAME** (case sensitively) and same **PHONE NUMBER** at the one time.
+  * You can add 2 _different student names_ with _same phone number_ (siblings can use one parent's phone number to register).
+  * You can add 2 students with _exactly same name_ with _different phone numbers_ (You may have 2 students of the same name).
+  * You cannot add a duplicated student or edit an existing student to make it become a duplicate in UGTeach.
+
+--------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
