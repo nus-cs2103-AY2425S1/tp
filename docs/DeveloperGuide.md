@@ -438,6 +438,10 @@ otherwise)
 4. AddressBook deletes the person
 
 ~~~~
+add to future enhancements
+The command 'forgiving' these extraneous inputs (i.e., giving an output same as or similar to if those inputs are not
+present) is not incorrect. You can mention in the UG that such inputs will be ignored. AB3 already does a similar thing
+for some commands. Any special handling of such inputs can be left as a future enhancement.
     Use case ends.
 
 **Extensions**

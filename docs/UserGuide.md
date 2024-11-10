@@ -9,7 +9,22 @@ pageNav: 3
 
 <box type="info" seamless>
 DLTbook is a desktop application that helps you manage your contacts and their Distributed Ledger Technology (DLT) public addresses. It combines an easy-to-use interface with powerful command-line features, making it perfect for both beginners and advanced users.
+
+
+
 </box>
+
+### Discaimer
+
+<box type="info" seamless>
+The names of contacts in DLTbook do not support special symbols and only accepts characters from the English alphabet.
+The phone numbers of contacts in DLTbook are only suited for Singapore phone numbers with no support for country code for international numbers. Duplicates allowed
+The email field of contacts in DLTbook have no restrictions and can be duplicated across contacts.
+This app was created as part of a Minimum Viable Product (MVP) to build excitement among students and users 
+This assumes that you have throughly read through our userguide and aware of the financial risks involved when using our 
+app
+</box>
+
 
 
 <panel header="💡 **New Users Start Here**" type="primary" expanded>
@@ -85,6 +100,7 @@ it.
 
 DLTbook simplifies the task of managing contacts linked with DLT public addresses,
 ensuring secure and efficient interaction with distributed networks.
+
 </box>
 
 2. **Key Terms You Should Know**
@@ -97,20 +113,21 @@ Before diving in, let's clarify some essential terms:
   Acts like a currency, but it's digital and secure. (e.g., Bitcoin, Ethereum, Solana).
 
 - **Software Wallet/Wallet**:  A software wallet, also known simply as a wallet, is an application that exists on a
-  connected device such as a phone or computer. It is always connected to the internet.
-- [Ledger](https://www.ledger.com/academy/topics/security/what-is-a-software-wallet)
+  connected device such as a phone or computer. It is always connected to the internet. (
+  Source: [Ledger](https://www.ledger.com/academy/topics/security/what-is-a-software-wallet))
 
 - **Wallet Name**: A label that you use tag to the wallet to identify the wallets purpose
 - (for daily transactions, for decentralised fiannce transactions, for long term storage).
 
 - **Public Address**: A public address is a unique series of cryptographic codes that can be shared with others to
-  receive messages, coins, or tokens. [Ledger](https://www.ledger.com/academy/glossary/public-address) (similar to an
+  receive messages, coins, or tokens. (similar to an
   account
-  number).
+  number). (Source: [Ledger](https://www.ledger.com/academy/topics/security/what-is-a-software-wallet))
 
 - **Command Line**: A text-based interface used to run commands on your computer.
 
 - **Java**: The programming language required to run DLTbook.
+
   </box>
 
 3. **Getting Started: Your First Steps**
@@ -144,6 +161,7 @@ Here’s how you can start using DLTbook:
 
 - **Note**: If you're using a Mac, you may need to install the Java Development Kit (JDK) instead of the Java Runtime
   Environment (JRE)
+
   </box>
 
 2. **Download DLTbook**
@@ -245,22 +263,22 @@ capabilities.
 
 DLTbook supports the following commands:
 
- Command                                                                             | Description                                                                     
--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------
- [**Help**](#viewing-help-help)                                                      | Shows a message explaining how to access the help page                          
- [**Add**](#adding-a-person-add)                                                     | Adds a person to the address book                                               
- [**List**](#listing-all-persons-list)                                               | Shows a list of all persons in the address book                                 
- [**Edit**](#editing-a-person-edit)                                                  | Edits an existing person in the address book                                    
- [**Find**](#locating-persons-by-name-find)                                          | Finds persons whose names contain any of the given keywords                     
- [**Delete**](#deleting-a-person-delete)                                             | Deletes the specified person from the address book                              
- [**Clear**](#clearing-all-entries-clear)                                            | Clears all entries from the address book                                        
- [**Exit**](#exiting-the-program-exit)                                               | Exits the program                                                               
- [**Add Public Address**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                              
- [**Edit Public Address**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                   
- [**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact                                     
- [**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                         
- [**Search Public Address**](#searching-for-a-public-address-publicaddresssearch)    | Searches for a public address                                                   
- [**Filter**](#filtering-persons-by-public-addresses-network-filter)                 | Filters out a list of people with the public addresses of the specified network 
+ Command                                                                | Description                                                                     
+------------------------------------------------------------------------|---------------------------------------------------------------------------------
+ [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                          
+ [**add**](#adding-a-person-add)                                        | Adds a person to the address book                                               
+ [**list**](#listing-all-persons-list)                                  | Shows a list of all persons in the address book                                 
+ [**edit**](#editing-a-person-edit)                                     | Edits an existing person in the address book                                    
+ [**find**](#locating-persons-by-name-find)                             | Finds persons whose names contain any of the given keywords                     
+ [**delete**](#deleting-a-person-delete)                                | Deletes the specified person from the address book                              
+ [**clear**](#clearing-all-entries-clear)                               | Clears all entries from the address book                                        
+ [**exit**](#exiting-the-program-exit)                                  | Exits the program                                                               
+ [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                              
+ [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                   
+ [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact                                     
+ [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                         
+ [**searchpa**](#searching-for-a-public-address-publicaddresssearch)    | Searches for a public address                                                   
+ [**filter**](#filtering-persons-by-public-addresses-network-filter)    | Filters out a list of people with the public addresses of the specified network 
 
 <box type="info" seamless>
 
@@ -306,10 +324,12 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+* if the another contact within DLTbook already has the same details as contact of the incoming contact to be added,
+  the incoming contact will not be added.
 
 <box type="tip" seamless>
 
@@ -560,6 +580,9 @@ Format: `searchpa pa/PUBLIC_ADDRESS`
 <box type="tip" seamless>
 
 The field PUBLIC_ADDRESS is not cap sensitive.
+This command only searches the current list of public addresses displayed(eg if all contacts is displayed
+search pa will perform a global search. if a filtered list of contacts is displayed, search pa will perform a local
+search on list of contacts displayed).
 </box>
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
@@ -585,6 +608,7 @@ Format: `filter c/NETWORK`
 <box type="tip" seamless>
 
 The fields are not cap sensitive.
+
 </box>
 
 * Filters out a list of people with the public addresses of the `NETWORK` provided.
@@ -627,6 +651,8 @@ manually.
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Editing the data file
 
 DLTbook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
@@ -654,6 +680,8 @@ the data of your previous AddressBook home folder.
 
 ## Common Errors
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
@@ -663,6 +691,14 @@ the data of your previous AddressBook home folder.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
    `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
    manually restore the minimized Help Window.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Future Enhancements
+
+Most commands currently do not forgive extraneous inputs for commands that do not require them.
+Such inputs will be ignored. But the error message displayed for this error for commands are different and may not
+exactly describe this error. This shall be fixed in the future.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -678,9 +714,9 @@ the data of your previous AddressBook home folder.
 | **List**                    | `list`                                                                                                                                                                 |
 | **Help**                    | `help`                                                                                                                                                                 |
 | **Exit**                    | `exit`                                                                                                                                                                 |
-| **Add Public Address**      | `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`           |
+| **Add Public Address**      | `addpa c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa c/ETH n/Travis w/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`                      |
 | **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                          |
 | **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                   |
-| **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                 |
-| **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                                        |
+| **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC w/wallet1`                                                                                            |
+| **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                                        |
 | **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                            |
