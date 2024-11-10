@@ -236,10 +236,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-`find` command will overwrite an existing person filter state.
-</div>
-
 Examples:
 
 * `find John` returns `john` and `John Doe`
