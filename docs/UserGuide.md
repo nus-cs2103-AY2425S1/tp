@@ -776,7 +776,7 @@ Searches T_Assistant for tasks with fields that match the search query.
 
 This screenshot shows the result of executing `find_t q/4`.
 
-<img src="images/screenshots/mark_t_2.png" width="600">
+<img src="images/screenshots/find_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
