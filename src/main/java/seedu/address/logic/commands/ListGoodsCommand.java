@@ -17,7 +17,8 @@ public class ListGoodsCommand extends Command {
 
     public static final String COMMAND_WORD = "viewgoods";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all goods that match the specified conditions."
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists all goods that match the specified conditions."
             + "All parameters are optional. \n"
             + "Parameters: [" + PREFIX_GOODS_NAME + "GOODS_NAME]"
             + "[" + PREFIX_CATEGORY + "GOODS_CATEGORY]"
@@ -42,12 +43,13 @@ public class ListGoodsCommand extends Command {
         int qty = model.getFilteredGoodsQuantityStatistics();
         double total = model.getFilteredGoodsCostStatistics();
 
+        assert qty >= 0;
         if (qty == 0) {
             return new CommandResult(MESSAGE_EMPTY);
-        } else {
-            String composedMessage = MESSAGE_SUCCESS + String.format(MESSAGE_STATISTICS, qty, total);
-            return new CommandResult(composedMessage);
         }
+
+        String composedMessage = MESSAGE_SUCCESS + String.format(MESSAGE_STATISTICS, qty, total);
+        return new CommandResult(composedMessage);
     }
 
     @Override
@@ -57,11 +59,10 @@ public class ListGoodsCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ListGoodsCommand)) {
+        if (!(other instanceof ListGoodsCommand otherListGoodsCommand)) {
             return false;
         }
 
-        ListGoodsCommand otherListGoodsCommand = (ListGoodsCommand) other;
         return predicate.equals(otherListGoodsCommand.predicate);
     }
 }

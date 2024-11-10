@@ -46,7 +46,9 @@ public class DeleteGoodsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         GoodsReceipt receipt = model
-                .findGoodsReceipt(r -> r.isFromSupplier(supplierName) && r.getGoods().getGoodsName().equals(goodsName))
+                .findGoodsReceipt(
+                        r -> (r.isFromSupplier(supplierName)
+                                && r.getGoods().getGoodsName().equals(goodsName)))
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_GOODS_RECEIPT_NOT_FOUND));
         model.deleteGoods(receipt);
         return new CommandResult(String.format(MESSAGE_SUCCESS, goodsName));
