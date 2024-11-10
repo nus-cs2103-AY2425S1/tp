@@ -100,6 +100,18 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [c/COURSE]…`
 A student can have any number of courses (including 0)
 </div>
 
+* The student's name must only contain alphabetical characters, commas, and spaces.
+* `PHONE_NUMBER` should only contain numbers, and should be at least 3 numbers long.
+* `EMAIL` should conform to the format `local-part@domain` and:
+  * `local-part` should only contain alphanumeric characters and these special characters: `+` `_` `.` `-`.
+  * `local-part` must start and end with alphanumeric characters.
+  * `domain` must end with a domain label at least 2 characters long.
+  * `domain` must have each domain label start and end with alphanumeric characters.
+  * `domain` must have each domain label consist only of alphanumeric characters separated only if hyphens (if any).
+* `COURSE`s should begin with 2-4 letters, followed by 4 digits, followed by 0-2 letters.
+Example: `MA1100`, `GEA1000N`, `GESS1000T` etc.
+
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/CS2103T;CS2101`

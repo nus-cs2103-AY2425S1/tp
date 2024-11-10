@@ -1017,6 +1017,17 @@ that is not in the student list. Thus, it is safe to specify students by their i
 in the student list.<br>
 Additionally, doing so is faster to type.
 
+**<u>Allow certain special characters to be used in names</u>**
+
+**Description**
+
+Allow more special characters such as `/` and `-` to be used in student names.
+
+**Rationale**
+
+It is possible for students' legal names to contain `-` (e.g. Mary-Ann) or `/` (e.g. S/O).
+Relaxing current restrictions to allow such characters will allow such names to be input.
+
 ### Glossary
 
 * **Attendance**: Student's Presence/Absence for a Lesson
