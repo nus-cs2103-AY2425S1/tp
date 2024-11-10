@@ -127,6 +127,7 @@ Examples:
 #### Tips
 
 * A customer can have any number of tags (including 0).
+* In the rare situation where there are two customers with the same name, you can distinguish them by adding an index number behind their names. For example, if there are two `John Smiths`, you could enter them as `John Smith 1` and `John Smith 2`.
 
 </box>
 
@@ -314,7 +315,7 @@ Examples:
 * Marks a pending order under the selected customer at the specified `ORDER_INDEX` as completed.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The status of the order **must be `Pending`** before marking the order.
+* The status of the target order **must be `Pending`**.
 
 </box>
 
@@ -336,7 +337,7 @@ Examples:
 * Reverts a completed order under the selected customer at the specified `ORDER_INDEX` to pending.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The status of the order **must be `Completed`** before unmarking the order. 
+* The status of the target order **must be `Completed`**. 
 
 </box>
 
