@@ -228,7 +228,7 @@ Adds a person's contact detail to KonTActs.
 1. Names should only contain English alphanumeric characters and whitespaces only. Special characters are not allowed.
 2. Names should be **unique**. Duplicate names cannot exist in the same database. Please refer to the [faq](#faq) on this issue.
 
-Eg. `n/John` or `name/john`
+Eg. `n/John` or `name/John`
 
 </box>
 
@@ -240,8 +240,8 @@ Emails should be of the format `local-part@domain` and adhere to the following c
 2. `local-part` may not start or end with any special characters.
 3. This is followed by an `@` and then a `domain` name. The domain name is made up of domain labels separated by periods.
 The `domain name` must:
-    - end with a domain label at least 2 characters long
-    - have each domain label start and end with English alphanumeric characters
+    - end with a domain label at least 2 characters long.
+    - have each domain label start and end with English alphanumeric characters.
     - have each domain label consist of English alphanumeric characters, separated only by hyphens, if any.
 
 Eg. `e/john@abc.com` or `email/john@abc.com`
@@ -250,7 +250,7 @@ Eg. `e/john@abc.com` or `email/john@abc.com`
 
 <box type="success" icon=":fa-solid-lightbulb:" light>
 
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0).
   </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -275,9 +275,9 @@ Eg. `t/friend t/family`
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**GitHub username restrictions**</md>
-* Length of username must between 1 and 39 characters
+* Length of username must between 1 and 39 characters.
 * Can contain only English alphanumeric characters and hyphens ('-').
-* Hyphens cannot appear at the start or end, nor consecutively within the username
+* Hyphens cannot appear at the start or end, nor consecutively within the username.
 
 **Valid examples**
 
@@ -370,19 +370,19 @@ Find all persons whose names contains any of the given keywords.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 * `fd John` returns `john` and `John Doe` using the shortcut command.
-* `find alex charlotte` returns `Alex Yeoh`, `Charlotte`<br>
+* `find alex charlotte` returns `Alex Yeoh`, `Charlotte`.<br>
   ![result for 'find alex charlotte'](images/findAlexCharlotte.png)
 </box>
 
@@ -408,9 +408,9 @@ Finds persons whose names contain any of the given tag keywords.
 
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * At least one tag must be provided.
-* The order of the keywords does not matter. e.g. `t/friends t/family` will match `t/family t/friends`
+* The order of the keywords does not matter. e.g. `t/friends t/family` will match `t/family t/friends`.
 * Only the tags is searched.
-* Only full tag name will be matched e.g. `friend` will not match `friends`
+* Only full tag name will be matched. e.g. `friend` will not match `friends`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `t/friends t/family` will return any contact tagged with `friend` or `family`.
 </box>
@@ -421,7 +421,7 @@ Finds persons whose names contain any of the given tag keywords.
 
 <md>**Examples:**</md>
 * `f t/homies` returns any contact tagged with `homies`. It uses the shortcut command and parameter.<br>
-* `filter tag/friends` returns any contact tagged with `friends`<br>
+* `filter tag/friends` returns any contact tagged with `friends`.<br>
   ![result for 'filter t/friend t/family'](images/filterFriendsTagByFilter.png)
 </box>
 
@@ -662,7 +662,7 @@ This action is <b><i><u>IRREVERSIBLE</u></i></b> and it <b><i><u>cannot be undon
 
 ### <i class="fa-solid fa-file-import"></i> Importing data from CSV file : `import`
 
-Imports contacts based on CSV file
+Imports contacts based on CSV file.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -810,9 +810,9 @@ KonTActs automatically saves every (valid or invalid) command entered which can 
 
 <md>**Examples:**</md>
 
-1. `github n/Harry` launches the github account of Harry on the browser
+1. `github n/Harry` launches the github account of Harry on the browser.
 2. The command text field box is now empty.
-3. Pressing <kbd>↑</kbd> will retrieve the last input command which will populate the command text field box with `github n/Harry`
+3. Pressing <kbd>↑</kbd> will retrieve the last input command which will populate the command text field box with `github n/Harry`.
 4. Continuously pressing <kbd>↑</kbd> will scroll through all commands that have been previously input.
 5. Pressing <kbd>↓</kbd> will scroll down to the more recent commands that was last input.
   </box>
@@ -872,7 +872,7 @@ Alternatively, `ag n/JohnDoe a/Ex01 s/5` will do the same using the shortcut com
 as the input score is greater than the max, as specified in the `assignment.json` file.
 
 `addGrade n/JohnDoe a/Ex05 s/5` will not add the assignment to contact JohnDoe
-as the assignment is not specified `assignment.json`
+as the assignment is not specified in `assignment.json`.
    </box>
 
 <box type="success" icon=":fa-solid-lightbulb:" light>
@@ -905,7 +905,7 @@ Removes an assignment and its grades from a contact.
 
 Assuming John Doe has `Ex01` assignment with a score of `5`.
 
-Calling `removeGrade name/John Doe assignment/Ex01` will remove the `Ex01` assignment from contact John Doe. Alternatively, `rg n/John Doe a/Ex01` will do the same with the shortcut command and paramter.
+Calling `removeGrade name/John Doe assignment/Ex01` will remove the `Ex01` assignment from contact John Doe. Alternatively, `rg n/John Doe a/Ex01` will do the same with the shortcut command and parameter.
 
 Calling `removeGrade n/John Doe a/Ex01` again will throw an error since the assignment has already been removed.
 To add a new assignment, refer to [`addGrade`](#adding-grades-to-a-contact-addgrade) command above.
@@ -948,7 +948,6 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 - Certain edits can also cause the KonTActs to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## <i class="fa-solid fa-question"></i> FAQ
