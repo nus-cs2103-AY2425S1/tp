@@ -287,7 +287,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|---------|----------------------------------------------------|-------------------------------------------------------------------------------|
 | `* * *`  | user    | add clients to my existing addressbook             | store their contacts and respective information                               |
 | `* * *`  | user    | know if client has been added successfully         | so that I can proceed with the next steps or take corrective action if needed |
-| `* * *`  | user    | mark a client’s insurance payment as paid          | keep their due date up to date and know when they’ve fully paid               || `* * *`  | user    | update existing client details                     | keep their information up to date.                                            |
+| `* * *`  | user    | mark a client’s insurance payment as paid          | keep their due date up to date and know when they’ve fully paid               |
+| `* * *`  | user    | update existing client details                     | keep their information up to date.                                            |
 | `* * *`  | user    | record client's email address                      | contact them through email                                                    |
 | `* * *`  | user    | sort clients by renewal dates                      | prioritize my outreach efforts                                                |
 | `* * *`  | user    | remove clients should they change insurance agents |                                                                               |

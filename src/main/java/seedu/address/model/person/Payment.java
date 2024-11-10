@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
  * Represents a Person's insurance payment in the address book.
  */
 public class Payment {
-    public static final String MESSAGE_CONSTRAINTS = "Insurance payments should be in the format 'yyyy-MM-dd amount' "
+    public static final String MESSAGE_CONSTRAINTS = "Insurance payments should be in the format 'yyyy-MM-dd' "
             + "\nAmount is a positive number with up to two decimal places!";
 
     /*

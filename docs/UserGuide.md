@@ -194,8 +194,9 @@ Format:
     * Birthday should be in `yyyy-mm-dd` and only can be a date before today's date.
     * Appointment should be in `yyyy-mm-dd HH:mm` and accept only future dates.
     * Phone number can only be 3 to 8 digits long.
-    * Clients with the same name and address are considered as duplicates.
-    * The system standardises addresses by removing commas, spaces, and hyphens and making
+    * Clients with the same name and address are considered as duplicates. 
+    * Do note that the names are case-sensitive. 
+    * The system standardises addresses by removing special characters such as commas, spaces, and hyphens and making
       all characters lowercase. This means that "311, Clementi Ave 5, unit 02-2" and
       "311 Clementi ave 5 unit 022" (without commas) will be treated as the same client address.
 
@@ -513,10 +514,11 @@ Assign policy to a client.
 Format: 
 `assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> /paydate <INSURANCE DUE DATE> /amt <AMOUNT DUE>`
 - **Parameters**:
+    * `POLICY NAME` is case-sensitive.
     * `POLICY START DATE` and `POLICY END DATE` refer to the duration of the policy's coverage.
     * `POLICY START DATE` and `POLICY END DATE` must be in the format `yyyy-mm-dd`.
     * `POLICY START DATE` and `POLICY END DATE` cannot be the same date.
-    * `POLICY START DATE` can only start from 1900s and onwards.
+    * `POLICY START DATE` can only start from 1900-01-01 and onwards.
     * `INSURANCE DUE DATE` must be in the format `yyyy-mm-dd`.
     * `INSURANCE DUE DATE` cannot be earlier than the `POLICY START DATE`.
     * `INSURANCE DUE DATE` cannot be later than the `POLICY START DATE`.
@@ -524,8 +526,9 @@ Format:
 
 <div markdown="span" class="alert alert-info"> **Note:**
 Sometimes, after assigning a policy to a client, the user interface may not reflect the changes
-immediately. If this occurs, try double-clicking on the particular client profile card.
-The user interface will show the assigned policy.
+immediately. If this occurs, ensure that you did not select any client 
+beforehand, then try double-clicking on the particular client profile card.
+The user interface will show the assigned policy. 
 </div>
 
 Example:
