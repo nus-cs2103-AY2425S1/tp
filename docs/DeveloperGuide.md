@@ -1,10 +1,25 @@
 ---
-layout: page
-title: Developer Guide
+Real Connect Developer Guide
 ---
 
-* Table of Contents
-  {:toc}
+## Table of Contents
+
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+  - [How the architecture components interact with each other](#how-the-architecture-components-interact-with-each-other)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+- [Implementation](#implementation)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User Stories](#user-stories)
+  - [Use Cases](#use-cases)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -288,13 +303,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -328,11 +343,6 @@ Given below is a sequence diagram of favourite command usage.
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> The lifeline for `FavouriteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -358,7 +368,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 This app helps real estate agents efficiently manage client relationships by centralizing contact details and logging
 interactions. Also, automated reminders and notes ensure that you never miss an opportunity to engage clients. It
 simplifies client management but focuses only on handling moderate-sized contact lists, without support for financial
@@ -470,23 +480,23 @@ otherwise)
 
 #### Extensions:
 - **2a.** The entered sorting parameter is invalid (e.g., `ascending` instead of `asc`).
-    - **2a1.** The system displays an error message: `Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
-    - **2a2.** The Salesperson corrects the sorting parameter and reissues the command.
-    - **Use case resumes from Step 2.**
+  - **2a1.** The system displays an error message: `Invalid sorting order. Use 'asc' for ascending or 'desc' for descending.`
+  - **2a2.** The Salesperson corrects the sorting parameter and reissues the command.
+  - **Use case resumes from Step 2.**
 
 - **2b.** The Salesperson forgets to specify the sorting order.
-    - **2b1.** The system displays an error message: `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
-    - **2b2.** The Salesperson adds the correct sorting order and reissues the command.
-    - **Use case resumes from Step 2.**
+  - **2b1.** The system displays an error message: `Error: No sorting order provided. Please specify 'asc' or 'desc'.`
+  - **2b2.** The Salesperson adds the correct sorting order and reissues the command.
+  - **Use case resumes from Step 2.**
 
 ---
 
 #### Variations:
 - **1a.** The Salesperson issues the `sort asc` command to sort the contacts in ascending order.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 - **1b.** The Salesperson issues the `sort desc` command to sort the contacts in descending order.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -504,9 +514,9 @@ otherwise)
 #### Main Success Scenario (MSS):
 1. The Salesperson issues the `log` command with a valid `index`, an optional date (`d/`) in the `yyyy-mm-dd` format, and descriptive interaction details (`l/`).
 2. AddressBook validates each component:
-  - **index**: Ensures the provided ID is a numeric identifier that corresponds to an existing contact in the AddressBook.
-  - **Date** (if included): Confirms that the date follows the required `yyyy-mm-dd` format and checks that it falls within the acceptable date range (not before the contact’s creation date or beyond the current date).
-  - **Interaction Details**: Verifies that the interaction details are provided and are non-empty, allowing the Salesperson to record free-form notes about the interaction, such as the nature, location, or purpose.
+- **index**: Ensures the provided ID is a numeric identifier that corresponds to an existing contact in the AddressBook.
+- **Date** (if included): Confirms that the date follows the required `yyyy-mm-dd` format and checks that it falls within the acceptable date range (not before the contact’s creation date or beyond the current date).
+- **Interaction Details**: Verifies that the interaction details are provided and are non-empty, allowing the Salesperson to record free-form notes about the interaction, such as the nature, location, or purpose.
 3. Upon successful validation, AddressBook logs the interaction details in the contact’s profile. If a date is provided, it is also stored with the log entry.
 4. AddressBook displays a success message confirming the operation:
    ```
@@ -595,7 +605,7 @@ otherwise)
 #### **Main Success Scenario (MSS):**
 1. The Salesperson issues the `find` command with one or more keywords as input.
 2. The system performs a case-insensitive search of the contact list, matching contacts whose names contain any of the keywords provided (an OR search).
-   * The search matches only full words in the name field and ignores the order of keywords.
+  * The search matches only full words in the name field and ignores the order of keywords.
 3. The system displays a list of contacts that match at least one of the keywords.
 4. The system shows a success message: `<Number of persons matching the search> persons listed!`
 
@@ -631,8 +641,8 @@ otherwise)
 #### Main Success Scenario (MSS):
 1. The Salesperson issues the `remark` command with a valid contact index and an optional remark message in the format: `remark <index> r/<remark message>`.
 2. The system validates the contact index to ensure it:
-   - References an existing contact in the current list.
-   - Is a positive integer within the list's range.
+  - References an existing contact in the current list.
+  - Is a positive integer within the list's range.
 3. The system adds or updates the remark for the specified contact. If a remark already exists, it is replaced with the new message; otherwise, a new remark is added. If `r/` is absent, or followed by an empty string, the existing remark is removed.
 4. The system displays a success message: `Added remark to Person: <Person details>`, when non empty remark is added or changed, and `Removed remark from Person: <Person details>` otherwise.
 5. The contact’s profile is updated, and the new remark appears in the contact list view.
@@ -690,8 +700,8 @@ otherwise)
 #### Main Success Scenario (MSS):
 1. The Salesperson issues the `view` command with a valid contact index in the format `view <index>`.
 2. The system validates the index, ensuring:
-   - It references an existing contact in the current list.
-   - It is a positive integer within the list's range.
+  - It references an existing contact in the current list.
+  - It is a positive integer within the list's range.
 3. Upon successful validation, the system retrieves and displays all available details of the contact in a pop-out GUI window, ensuring a single, focused view for all information related to the contact.
 4. The system displays a success message: `Person details displayed`.
 
@@ -763,19 +773,19 @@ otherwise)
 
 #### Extensions:
 - **2a.** The `index` is of invalid format (not a positive integer).
-    - **2a1.** The system displays an error message: 
-      ```
-      Invalid command format!
-      favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
-      Two usage formats are supported:
-      1. To mark a person as favourite: Specify the index of the person in the displayed list.
-         Parameters: INDEX (must be a positive integer)
-         Example: favourite 1
-      2. To sort all favourite persons to the top: Use the command without any parameters.
-         Example: favourite
-      ```
-    - **2a2.** The Salesperson corrects the `index` and reissues the command.
-    - **Use case resumes from Step 2.**
+  - **2a1.** The system displays an error message:
+    ```
+    Invalid command format!
+    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
+    Two usage formats are supported:
+    1. To mark a person as favourite: Specify the index of the person in the displayed list.
+       Parameters: INDEX (must be a positive integer)
+       Example: favourite 1
+    2. To sort all favourite persons to the top: Use the command without any parameters.
+       Example: favourite
+    ```
+  - **2a2.** The Salesperson corrects the `index` and reissues the command.
+  - **Use case resumes from Step 2.**
 
 - **2a.** The `index` is out of bound (larger than the last existing contact).
   - **2a1.** The system displays an error message: `The person index provided is out of bound`
@@ -783,9 +793,9 @@ otherwise)
   - **Use case resumes from Step 2.**
 
 - **3a.** The contact is already marked as a favourite.
-    - **3a1.** The system removes the contact from favourite.
-    - **3a2.** The system displays a message: `Remove <Name at index> from favourite.`
-    - **Use case ends.**
+  - **3a1.** The system removes the contact from favourite.
+  - **3a2.** The system displays a message: `Remove <Name at index> from favourite.`
+  - **Use case ends.**
 
 ---
 
@@ -796,10 +806,10 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson marks a new contact as favourite.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 - **1b.** The Salesperson marks an existing contact that was not previously marked as favourite.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -849,9 +859,9 @@ otherwise)
   - **Use case resumes from Step 2.**
 
 - **2c.** The birthday format is incorrect.
-    - **2c1.** The system displays an error message: `Invalid date format! Please use yyyy-mm-dd.`
-    - **2c2.** The Salesperson corrects the birthday format and reissues the command.
-    - **Use case resumes from Step 2.**
+  - **2c1.** The system displays an error message: `Invalid date format! Please use yyyy-mm-dd.`
+  - **2c2.** The Salesperson corrects the birthday format and reissues the command.
+  - **Use case resumes from Step 2.**
 
 ---
 
@@ -917,7 +927,7 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson clears all contacts after reviewing them using the `list` command.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -953,10 +963,10 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson exits the application without unsaved changes.
-    - **Use case proceeds normally from Step 3.**
+  - **Use case proceeds normally from Step 3.**
 
 - **1b.** The Salesperson exits the application with unsaved changes, and the system successfully saves the data.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -981,9 +991,9 @@ otherwise)
 
 #### Extensions:
 - **2a.** The system encounters an error while saving the data.
-    - **2a1.** The system displays an error message: `Unable to save data automatically. Please save manually.`
-    - **2a2.** The system retries saving automatically after the next operation or prompts the Salesperson to manually save the data.
-    - **Use case ends.**
+  - **2a1.** The system displays an error message: `Unable to save data automatically. Please save manually.`
+  - **2a2.** The system retries saving automatically after the next operation or prompts the Salesperson to manually save the data.
+  - **Use case ends.**
 
 ---
 
@@ -995,10 +1005,10 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson performs a valid operation that modifies the contact list.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 - **1b.** The system automatically saves data after each operation without explicit user interaction.
-    - **Use case proceeds normally from Step 2.**
+  - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -1023,9 +1033,9 @@ otherwise)
 
 #### Extensions:
 - **3a.** The format of the data file is incorrect.
-    - **3a1.** The system displays an error message: `Error: Data file format is incorrect. Please adhere to the correct format.`
-    - **3a2.** The Salesperson corrects the format and restarts the application.
-    - **Use case resumes from Step 2.**
+  - **3a1.** The system displays an error message: `Error: Data file format is incorrect. Please adhere to the correct format.`
+  - **3a2.** The Salesperson corrects the format and restarts the application.
+  - **Use case resumes from Step 2.**
 
 ---
 
@@ -1037,10 +1047,10 @@ otherwise)
 
 #### Variations:
 - **1a.** The Salesperson successfully edits the data file and restarts the application to load the changes.
-    - **Use case proceeds normally from Step 3.**
+  - **Use case proceeds normally from Step 3.**
 
 - **1b.** The Salesperson makes an error in the format, and the system rejects the data file.
-    - **Use case proceeds with Extension 3a.**
+  - **Use case proceeds with Extension 3a.**
 
 ---
 
@@ -1079,49 +1089,49 @@ otherwise)
 
 #### Extensions:
 - **2a.** One or more required fields are missing.
-    - **2a1.** AddressBook displays an error message:
-      ```
-      Invalid command format!
-      add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
-      Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney
-      ```
-    - **Use case ends.**
+  - **2a1.** AddressBook displays an error message:
+    ```
+    Invalid command format!
+    add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
+    Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney
+    ```
+  - **Use case ends.**
 
 - **2b.** Input parameters are invalid (e.g., incorrect phone number format).
-    - **2b1.** Invalid `Name` parameter.
-      - **2b1.1** AddressBook displays an error message: `Names should only contain alphanumeric characters and spaces, and it should not be blank`
+  - **2b1.** Invalid `Name` parameter.
+    - **2b1.1** AddressBook displays an error message: `Names should only contain alphanumeric characters and spaces, and it should not be blank`
+    - **Use case ends.**
+
+    - **2b2.** Invalid `Phone Number` parameter.
+      - **2b2.1** AddressBook displays an error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
       - **Use case ends.**
-    
-      - **2b2.** Invalid `Phone Number` parameter.
-        - **2b2.1** AddressBook displays an error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
-        - **Use case ends.**
-    
-      - **2b4.** Invalid `Birthday` parameter.
-        - **2b4.1** AddressBook displays an error message: `Birthday should be a valid date of the format yyyy-mm-dd and be within reasonable limits.`
-        - **Use case ends.**
-    
-      - **2b5.** Invalid `Email` parameter.
-        - **2b5.1** AddressBook displays an error message: 
-          ```
-          Emails should be of the format local-part@domain and adhere to the following constraints:
-          1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-          2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-          The domain name must:
-              - end with a domain label at least 2 characters long
-              - have each domain label start and end with alphanumeric characters
-              - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-          ```
-        - **Use case ends.**
-    
-      - **2b6.** Invalid command syntax.
-        - **2b7.1** AddressBook displays an error message: `Invalid command format! 
-                                                            add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
-                                                            Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
-        - **Use case ends.**
-    
+
+    - **2b4.** Invalid `Birthday` parameter.
+      - **2b4.1** AddressBook displays an error message: `Birthday should be a valid date of the format yyyy-mm-dd and be within reasonable limits.`
+      - **Use case ends.**
+
+    - **2b5.** Invalid `Email` parameter.
+      - **2b5.1** AddressBook displays an error message:
+        ```
+        Emails should be of the format local-part@domain and adhere to the following constraints:
+        1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+        2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+        The domain name must:
+            - end with a domain label at least 2 characters long
+            - have each domain label start and end with alphanumeric characters
+            - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+        ```
+      - **Use case ends.**
+
+    - **2b6.** Invalid command syntax.
+      - **2b7.1** AddressBook displays an error message: `Invalid command format!
+        add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]...
+        Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/2001-04-08 t/friends t/owesMoney`
+      - **Use case ends.**
+
 - **2c.** The contact already exists in the AddressBook.
-    - **2c1.** AddressBook displays a warning message: `This person already exists in the address book`
-    - **Use case resumes at Step 3.**
+  - **2c1.** AddressBook displays a warning message: `This person already exists in the address book`
+  - **Use case resumes at Step 3.**
 
 ---
 
@@ -1139,13 +1149,13 @@ otherwise)
 #### Main Success Scenario (MSS):
 1. The User issues the `addProperty` command, specifying a valid index and complete property details, including address, town, type, size, number of bedrooms, number of bathrooms, and price.
 2. AddressBook validates each parameter for correctness:
-  - **Address** is checked to confirm it is non-empty and follows an acceptable alphanumeric and punctuation format.
-  - **Town** is validated as a non-empty, alphabetic string.
-  - **Property Type** is validated to ensure it is a valid type (e.g., "Condo", "HDB", "Landed").
-  - **Size** is validated as a positive number representing square meters.
-  - **Number of Bedrooms** is validated as a non-negative integer.
-  - **Number of Bathrooms** is validated as a non-negative integer.
-  - **Price** is validated as a positive number representing the asking price in the relevant currency.
+- **Address** is checked to confirm it is non-empty and follows an acceptable alphanumeric and punctuation format.
+- **Town** is validated as a non-empty, alphabetic string.
+- **Property Type** is validated to ensure it is a valid type (e.g., "Condo", "HDB", "Landed").
+- **Size** is validated as a positive number representing square meters.
+- **Number of Bedrooms** is validated as a non-negative integer.
+- **Number of Bathrooms** is validated as a non-negative integer.
+- **Price** is validated as a positive number representing the asking price in the relevant currency.
 3. AddressBook adds the validated property details to the contact at the specified index.
 4. AddressBook displays a success message and updates the contact's details with the new property listing.
 
@@ -1186,27 +1196,27 @@ otherwise)
 - The app should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 
 2. **Performance:**
-  - The app should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-  - The search and sort functions should return results within 2 seconds for 50 contacts.
+- The app should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+- The search and sort functions should return results within 2 seconds for 50 contacts.
 
 3. **Efficiency**
-  - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
-    able to accomplish most of the tasks faster using commands than using the mouse.
+- A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+  able to accomplish most of the tasks faster using commands than using the mouse.
 
 4. **Usability:**
-  - The interface should be intuitive, requiring less than 15 minutes of training for a real estate agent to become proficient.
-  - The app should provide clear error messages for incorrect inputs (e.g., invalid phone numbers, dates) and guide the user in correcting them.
+- The interface should be intuitive, requiring less than 15 minutes of training for a real estate agent to become proficient.
+- The app should provide clear error messages for incorrect inputs (e.g., invalid phone numbers, dates) and guide the user in correcting them.
 
 5. **Reliability:**
-  - The app must have an uptime of at least 99.5% during business hours.
-  - Data, such as contacts and interaction logs, should be autosaved after each modification, ensuring no loss of data during usage.
+- The app must have an uptime of at least 99.5% during business hours.
+- Data, such as contacts and interaction logs, should be autosaved after each modification, ensuring no loss of data during usage.
 
 6. **Scalability:**
-  - While optimized for a moderate number of contacts (up to 1000), the app should still function with reduced performance for up to 2,000 contacts.
+- While optimized for a moderate number of contacts (up to 1000), the app should still function with reduced performance for up to 2,000 contacts.
 
 7. **Maintainability:**
-  - The codebase should follow standard code style and be modular, ensuring ease of updates and bug fixes.
-  - The app should allow easy export and import of contact data for backup or migration purposes.
+- The codebase should follow standard code style and be modular, ensuring ease of updates and bug fixes.
+- The app should allow easy export and import of contact data for backup or migration purposes.
 
 *{More to be added}*
 
@@ -1242,26 +1252,25 @@ otherwise)
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: <Strong>Note:</Strong> These instructions only provide a starting point for testers to work on;
-testers are expected to do more exploratory testing.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> 
+These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
 
-</div>
 
 ### Launch and shutdown
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+  1. Download the jar file and copy into an empty folder
 
-    1. run `java -jar RealConnect.jar` in the same directory Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+  1. run `java -jar RealConnect.jar` in the same directory Expected: Shows the GUI with a set of sample contacts. The window size may not be
+     optimum.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+  1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+  1. Re-launch the app by double-clicking the jar file.<br>
+     Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
@@ -1269,24 +1278,50 @@ testers are expected to do more exploratory testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+  2. Test case: `delete 1`<br>
+     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+     Timestamp in the status bar is updated.
 
-    3. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+  3. Test case: `delete 0`<br>
+     Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+  4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### View Window
+
+1. Viewing a person while all persons are shown
+
+  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+  2. Test case: `view 1`<br>
+     Expected: First contact is shown from the list. Success message displayed.
+
+  3. Test case: `delete 0`<br>
+     Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+  4. Other incorrect delete commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
+
+   **For the following tests, a view window should already be open**
+
+  5. Test case: `close` <br>
+     Expected: Current displayed view window closes if there is one currently. Error message if there is not.
+
+  6. Test case: `edit 1 n/<insert any name>`<br>
+     Expected: Current view window updates to show the updated name, provided it is the view window of the aforementioned contact.
+
+
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+  1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
