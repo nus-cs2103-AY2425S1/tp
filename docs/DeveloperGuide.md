@@ -886,17 +886,17 @@ testers are expected to do more _exploratory_ testing.
 
 1. Edit an existing student's name
 
-    1. Prerequisites: List students using `ls`. Have a Student with the Student Number `A0597991H` and name is not
+    1. Prerequisites: List students using `ls`. Have at least 1 student in the list and name is not
        `Clark Kent`.
 
-    2. Test case: `es sno/A0597991H sn/Clark Kent`<br>
+    2. Test case: `es i/1 sn/Clark Kent`<br>
        Expected: Student Name is updated to Clark Kent
 
 2. Editing an existing student's name to the same name
 
     1. Prerequisites: Ran the above test case.
 
-    2. Test case: `es sno/A0597991H sn/Clark Kent`<br>
+    2. Test case: `es i/1 sn/Clark Kent`<br>
        Expected: Error given due to no change detected.
 
 ### Adding a student(s) to a group
