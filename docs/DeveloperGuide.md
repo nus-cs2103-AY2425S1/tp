@@ -1137,7 +1137,7 @@ Team size: 5
 
 6\. **Allow for foreign patients to be added to Medibase3**
 
-  Currently, MediBase3 uses the patient's NRIC or FIN number as their unique identifier. However, this prevents doctors from adding foreign patients, who do not have a NRIC or FIN number , into Medibase3.
+  Currently, MediBase3 uses the patient's NRIC or FIN number as their unique identifier. However, this prevents doctors from adding foreign patients, who do not have a NRIC or FIN number, into Medibase3.
   As such, we plan on improving MediBase3 to allow doctors to add foreign patients by using other forms of identification, such as their passport number.
 
 7\. **Make certain fields optional**
