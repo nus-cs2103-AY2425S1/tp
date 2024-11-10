@@ -389,7 +389,7 @@ In addition to the stated criteria for duplicates, when editing through the data
 
 If you must edit existing entries' `id` or create new entries through the data files, please ensure their `id` fields follow the [UUID](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html) format (Users may explore using [UUID generators](https://www.uuidgenerator.net/version7) to create unique `id` values for new entries). Failing to follow this guideline may cause the app to behave in unexpected ways.
 
-The `id` field in both persons and transactions is essential for maintaining [referential integrity](https://intelligent-ds.com/blog/what-is-referential-integrity) within the address and transaction books, are intended for internal reference. These `id` link transactions to their respective persons and vice versa.
+The `id` field in both persons and transactions is essential for maintaining [referential integrity](https://www.sciencedirect.com/topics/computer-science/referential-integrity) within the address and transaction books, and are intended for internal reference as the devs aim to mimic databases' with referential integrity to ensure valid relationships between persons and transactions. These `id` link transactions to their respective persons and vice versa.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
