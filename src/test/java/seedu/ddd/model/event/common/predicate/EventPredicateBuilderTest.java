@@ -115,6 +115,17 @@ public class EventPredicateBuilderTest {
         assertFalse(predicateBuilder.build().test(new EventBuilder().withEventId(2).build()));
     }
     @Test
+    public void testArgumentMultimap_doesNotContainValidId_throwsParseException() throws ParseException {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        argMultimap.put(PREFIX_ID, "two");
+        EventPredicateBuilder predicateBuilder = new EventPredicateBuilder(argMultimap);
+
+        assertThrows(ParseException.class, predicateBuilder::build);
+
+        argMultimap.put(PREFIX_ID, "one");
+        assertThrows(ParseException.class, predicateBuilder::build);
+    }
+    @Test
     public void testArgumentMultimap_containsDate_returnsTrue() throws ParseException {
         // Three same date inputs with different formats
 

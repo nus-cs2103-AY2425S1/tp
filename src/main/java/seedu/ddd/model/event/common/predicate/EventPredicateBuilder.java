@@ -4,6 +4,7 @@ import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.ddd.logic.parser.ParserUtil.MESSAGE_INVALID_ID;
 import static seedu.ddd.logic.parser.ParserUtil.verifyNoEmptyInput;
 
 import java.util.Arrays;
@@ -56,6 +57,9 @@ public class EventPredicateBuilder {
     private Predicate<Event> addIdPredicate(ArgumentMultimap argMultimap, Predicate<Event> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            if (!Id.isValidId(argMultimap.getValue(PREFIX_ID).get())) {
+                throw new ParseException(MESSAGE_INVALID_ID);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_ID);
             Id eventId = new Id(args);
             combinedPredicate = combinedPredicate.and(new EventIdPredicate(eventId));
