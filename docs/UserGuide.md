@@ -838,22 +838,24 @@ Method 2:
 
 ## Command summary
 
+## Command summary
 
-| Action                   | Format                                                                                                     |
-|--------------------------|------------------------------------------------------------------------------------------------------------|
-| **Add**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`                                                     |
-| **Bar Chart**            | `bar`                                                                                                      |
-| **Clear**                | `clear`                                                                                                    |
-| **Delete**               | `delete INDEX`<br>                                                                                         |
-| **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS_ID] [f/FEES] [m/MONTH_PAID] [e/EMAIL] [a/ADDRESS] [t/TAG]…` |
-| **Exit**                 | `exit`                                                                                                     |
-| **Find**                 | `find KEYWORD [MORE_KEYWORDS]`<br>                                                                         |
-| **Help**                 | `help`                                                                                                     |
-| **List**                 | `list`                                                                                                     |
-| **Mark Paid**            | `markpaid INDEX YEAR_MONTH`<br>                                                                            |
-| **Pie Chart**            | `pie`                                                                                                      |
-| **Redo**                 | `redo`<br>                                                                                                 |
-| **Undo**                 | `undo`<br>                                                                                                 |
-| **Unmark Paid**          | `unmarkpaid INDEX YEAR_MONTH`<br>                                                                          |
-| **View Student Details** | `info INDEX` <br>                                                                                          |
+| Action                      | Format, Examples                                                                                               |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`                                                         |
+| **Bar Chart**               | `bar`                                                                                                          |
+| **Clear**                   | `clear`                                                                                                        |
+| **Delete**                  | `delete INDEX`<br>                                                                                             |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS_ID] [f/FEES] [m/MONTH_PAID] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> |
+| **Exit**                    | `exit`                                                                                                         |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br>                                                                             |
+| **Help**                    | `help`                                                                                                         |
+| **List**                    | `list`                                                                                                         |
+| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br>                                                                                |
+| **Pie Chart**               | `pie`                                                                                                          |
+| **Redo**                    | `redo`<br>                                                                                                     |
+| **Undo**                    | `undo`<br>                                                                                                     |
+| **Unmark Paid**             | `unmarkpaid INDEX YEAR_MONTH`<br>                                                                              |
+| **Viewing Student Details** | `info INDEX` <br>                                                                                              |
+
 [Back to Table of Contents](#table-of-contents)
