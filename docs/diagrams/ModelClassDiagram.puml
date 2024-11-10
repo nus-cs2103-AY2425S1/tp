@@ -42,17 +42,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "0..1" Address
 Person *--> "*" Tag
-Person *--> Birthday
-Person *--> Age
+Person *--> "1" Birthday
+Person *--> "1" Age
 Age ..> Birthday
-Person *--> Frequency
-Person *--> ProfilePicFilePath
-Person *--> LastPaidDate
+Person *--> "1" Frequency
+Person *--> "1" ProfilePicFilePath
+Person *--> "1" LastPaidDate
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
