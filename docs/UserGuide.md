@@ -277,7 +277,7 @@ Format: `help`
 <box type="tip" seamless>
 
 **Tip:** Alternatively, you can press the button at the top of the navigation button bar to view the help page, or
-simply press `f11`.
+simply press `f1`.
 
 ![helpButton](images/helpButton.png)
 

@@ -13,6 +13,9 @@ pageNav: 3
 
 ## **Acknowledgements**
 
+This project is built on top of [AddressBook-Level3 Project](https://se-education.org/). Special thanks and appreciation
+for the team of AddressBook-Level 3.
+
 **ChatGPT** was used to create the TrueRental application logo, as well as **debugging** and **documentation** purposes only.
 
 ![logo](images/true_rental.jpg){width=200px height=200px}
@@ -2058,8 +2061,7 @@ The following are **DUPLICATES** of the initial rental information:
 
 The current version of `cedit` only supports replacing **all tags** with the **updated tag** provided by the `cedit`
 command.
-In the future, there will be an update to the `cedit` command, where the user is able to choose which tag to **retain
-** as well as which tag to **edit**.
+In the future, there will be an update to the `cedit` command, where the user is able to choose which tag to **retain** as well as which tag to **edit**.
 
 #### `redit` Command
 
