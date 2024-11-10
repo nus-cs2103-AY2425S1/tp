@@ -276,10 +276,12 @@ Here’s a reference table of available flags and the type of data they correspo
 
 ## 4.4 Arguments
 
-Arguments are the values that follow each flag in a command. **Arguments cannot be empty**, and each must meet specific parsing and format requirements to ensure proper execution of the command.
+Arguments are the values that are used in a command. **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
+
+### 4.4.1  Flag Arguments
+Flag arguments are the values that follow each flag in a command.
 
 Refer to the table below for more details.
-
 
 | **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
 |----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
@@ -303,6 +305,24 @@ Refer to the table below for more details.
 > Ensure every flag is followed by a valid argument!
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
+
+### 4.4.2 Non-Flag Arguments 
+
+Non-flag arguments are the values that do not have a corresponding tag. Currently, this only includes the `<INDEX>` argument.
+
+Refer to the table below for more details.
+
+| **Expected Argument** | **Description**                     | **Requirements**                                                                                             |
+|-----------------------|-------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `<INDEX>`             | The index of the item to be edited. | Positive number.<br/> • Must be less than or equal to the total number of clients in the current list view.  |
+
+> 💡 **Pro Tip:**
+> 
+> Indexes will when the current list view changes!
+> 
+> Ensure that the index supplied is accurate to the current view.
+
+Note: There is a known issue when the supplied index argument is too large. For more information, see Section [7. Known Issues](#7-known-issues).
 
 <div style="page-break-after: always;"></div>
 
@@ -543,7 +563,6 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
@@ -718,7 +737,6 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
 
 **Examples:**
 - **View client no.1**
@@ -849,7 +867,7 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran'
 4.  **Using non-english text input can cause visual bugs**. This release fully supports English text input only. Using non-English characters or text—especially those with right-to-left direction, like Arabic—may result in display problems, including incorrect text alignment, direction, and character rendering. We are actively working to expand support for international languages in future releases.
-5. **For index based commands**, negative inputs and inputs that are too large result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
+5. **For index based commands**, negative inputs and inputs larger than 2147483647 result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
 
 [↑ Return to Table of Contents](#table-of-contents)
 
