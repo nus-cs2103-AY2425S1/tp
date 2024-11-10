@@ -220,7 +220,7 @@ A success message will be displayed if the supplier is successfully deleted.
 ### Mark a supplier with a status : `mark -s`
 
 The `mark` command is used to mark a supplier as either **active** or **inactive**
-in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
+in Vendor Vault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
 
 <box type="tip" seamless>
 
@@ -257,7 +257,7 @@ A success message will be displayed if the supplier is successfully marked as ac
 
 ### Find a supplier: `find -s`
 
-The `find -s` command is used to find a supplier in VendorVault. 
+The `find -s` command is used to find a supplier in Vendor Vault. 
 This helps you to search for a supplier based on the supplier name, company, or product. 
 
 Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
@@ -298,7 +298,7 @@ To find the supplier whose name contains "link" and company contains "NU":
 
 ### Sort suppliers: `sort -s`
 
-The `sort -s` command is used to sort suppliers according to the supplier name in VendorVault.
+The `sort -s` command is used to sort suppliers according to the supplier name in Vendor Vault.
 This helps you to view the suppliers in a different order (ascending or descending).
 
 Format: `sort -s so/SORT_ORDER sb/SORT_BY`
