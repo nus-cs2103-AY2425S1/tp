@@ -195,11 +195,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete person 5` command to delete the 5th person in the address book. The `delete person` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete person 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add person n/David …​` to add a new person. The `add person` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -256,7 +256,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete person`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -845,7 +845,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add person n/Alex Yeoh p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
       1. **Expected**
          1. A contact with the name 'Alex Yeoh' with the tag 'Celebrity' and phone number '98765432' is added to the persons list. 
-         2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
+         2. If you are on the Events tab, TalentHub will switch to the Persons tab.
    
    2. Test case: Add same person above
       1. **Expected**: This person already exists in TalentHub.
@@ -860,7 +860,7 @@ testers are expected to do more *exploratory* testing.
             Parameters: n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [t/TAG]...<br>
             Example: `add person n/Alex Yeoh p/98765432 e/sydney@example.com a/311, Clementi Ave 2, #02-25 t/Celebrity`
    
-   5. Other incorrect add commands to try: `add person n/Alex Yeoh p/98765432 a/311, Clementi Ave 2, #02-25 t/Celebrity` or any inputs that do not include a name, phone number, email or address.
+   5. Other incorrect add commands to try: `add person n/Alex Yeoh p/98765432 a/311, Clementi Ave 2, #02-25 t/Celebrity` or any inputs that do not include a name, phone number, or email.
 
 ### Deleting a person
 
@@ -870,11 +870,10 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `delete person 1`
        1. **Expected**: Are you sure you want to delete this person? All events tied to this person will be deleted and this person will no longer show in any event's contact list. (Y/N)
-       2. **Input Y or y**: Deleted Person: `Alex Yeoh; Phone: 98765432; Email: sydney@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Celebrity]`
-       3. **Input N or n**: Pending command has been cancelled
-       4. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
+       2. **Input `Y` or `y`**: Deleted Person: `Alex Yeoh; Phone: 98765432; Email: sydney@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Celebrity]`
+       3. **Input `N` or `n`**: Pending command has been cancelled
 
-    3. Test case: `delete event 0`
+    3. Test case: `delete person 0`
        1. **Expected**
           1. Invalid command format!<br>
              delete person: Deletes the person identified by the index number used in the displayed person list.<br> 
@@ -888,12 +887,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding an event to TalentHub
 
-    1. **Prerequisites**: Have 2  contacts for Alex Yeoh and Bernice Yu created in your Persons list
+    1. **Prerequisites**: Have 2 contacts for Alex Yeoh and Bernice Yu created in your Persons list
 
     2. Test case: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Alex Yeoh p/Bernice Yu`
          1. **Expected**
             1. An event with the name 'Oscars' with the associated celebrity, duration and venue is added to the persons list.
-            2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+            2. If you are on the Persons tab, TalentHub will switch to the Events tab.
    
     3. Test case: Add same event as above
          1. **Expected**: This event already exists in TalentHub.  
@@ -917,7 +916,7 @@ testers are expected to do more *exploratory* testing.
                  Parameters: n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/CONTACTS]...<br>
                  Example: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 v/Hollywood c/Alex Yeoh p/Bernice Yu p/David Li`
     
-    9. Other incorrect add commands to try: `add event n/Oscars t/2024-03-01 12:10 to 2024-03-01 18:30 c/Alex Yeoh p/Bernice Yu` or any inputs that do not include a name, time, venue or Talent name.
+    9. Other incorrect add commands to try: `add event n/Oscars v/Hollywood c/Alex Yeoh p/Bernice Yu` or any inputs that do not include a name, time or celebrity.
 
 ### Deleting an event
 
@@ -927,7 +926,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `delete event 1`
         1. **Expected**: Deleted Event: `Oscars; Time: From: 2024-03-01 12:10 To: 2024-03-01 18:30; Venue: Hollywood; Celebrity: Alex Yeoh; Contacts: Bernice Yu`
-        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact. 
+        2. If you are on the Persons tab, TalentHub will switch to the Events tab. 
 
     3. Test case: `delete event 0`
         1. **Expected**
@@ -947,7 +946,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `view person Alex Yeoh`
         1. **Expected**: Alex Yeoh shown!
-        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contact.
+        2. TalentHub will display the detailed contact.
     
     3. Test case: `view person Bernice Yu`
         1. **Expected**: Name not found in TalentHub!
@@ -965,11 +964,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Viewing an event on TalentHub
 
-    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. An entry with the event called Oscars listed and no entries with event Emmys listed
+    1. **Prerequisites**: List all events using the `list event` command. Multiple events in the list. An entry with the event called Oscars listed and no entries with event Emmys listed
 
     2. Test case: `view event Oscars`
         1. **Expected**: 1 events listed!
-        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+        2. TalentHub will display the detailed event.
 
     3. Test case: `view event Emmys`
         1. **Expected**: 0 events listed!
@@ -991,7 +990,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `find person Alex`
         1. **Expected**: 3 persons listed!
-        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contacts.
+        2. TalentHub will display the contacts that match the given keyword(s).
 
     3. Test case: `find person David`
         1. **Expected**: 0 persons listed!
@@ -1016,7 +1015,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `find event Oscars`
         1. **Expected**: 3 events listed!
-        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+        2. TalentHub will display the events that match the given keyword(s).
 
     3. Test case: `find event Emmys`
         1. **Expected**: 0 events listed!
@@ -1035,13 +1034,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Filter a person
 
-1. Filtering a person on TalentHub
+1. Filtering a person on TalentHub by tag
 
-    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Three entries with tags called Celebrity.  No entries with tags called TwitchStreamer.
+    1. **Prerequisites**: List all persons using the `list person` command. Multiple persons in the list. Three entries with tags called Celebrity. No entries with tags called TwitchStreamer.
 
     2. Test case: `filter person celebrity`
         1. **Expected**: 3 persons listed!
-        2. If you are on the Events tab, TalentHub will switch to the Persons tab and display the added contacts.
+        2. TalentHub will display the contacts with the given tag(s).
 
     3. Test case: `filter person TwitchStreamer`
         1. **Expected**: 0 persons listed!
@@ -1059,11 +1058,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Filtering an event on TalentHub
 
-    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. Three entries with celebrity name Alex Yeoh. No entries with celebrity name Bernice Yu listed
+    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. Three events with celebrity, Alex Yeoh. No events with celebrity, Bernice Yu listed.
 
     2. Test case: `filter event Alex Yeoh`
         1. **Expected**: 3 events listed!
-        2. If you are on the Persons tab, TalentHub will switch to the Events tab and display the added contact.
+        2. TalentHub will display the events with the given celebrity name(s).
 
     3. Test case: `filter event Bernice Yu`
         1. **Expected**: 0 events listed!
