@@ -380,7 +380,7 @@ List all potential hires.
 
 Add an employee named `John Doe` to StaffSync.
 
-<div class="code-full-width"><code>employee n/John Doe p/81234567 e/pohjunkang@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01</code></div><br>
+<div class="code-full-width"><code>employee n/John Doe p/81234567 e/johndoe@gmail.com a/21 Lower Kent Ridge Rd d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01</code></div><br>
 
 Delete the 1st person shown if they are a potential hire
 
@@ -443,7 +443,7 @@ If you would like to remove all sample data, you can run the command
 
 <br>
 
-* Parameters can be in **any order**.
+* Parameters with prefixes can be in **any order**.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 <br>
@@ -611,7 +611,7 @@ Example: `demote 1`
 
   **Common Mistakes:**
   * `list ph` followed by `demote 2` - You cannot demote a potential hire, you can use `list e` instead of `list ph` to get the list of employees
-  * `demote 0` - invalid format, you should change 0 to a greater number corresponding to the index
+  * `demote 0` - invalid format, you should change 0 to a positive integer corresponding to the index
   * `demote 3` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again
   </div>
   </div>
@@ -630,7 +630,7 @@ Example: `demote 1`
   </summary>
 
   <div class="command-content">
-  You can edit an existing person in StaffSync.
+  You can edit the details of an existing person in StaffSync.
 
   <br>
   <br>
@@ -643,7 +643,7 @@ Example: `demote 1`
 
   <br>
 
-  You can edit the person at the specified `INDEX`.
+  You can edit the details of the person at the specified `INDEX`.
 
 <br>
 
@@ -721,7 +721,7 @@ Example: `demote 1`
 
   `ROLE`: Takes any values, and it should not be blank.
 
-  `CONTRACT_END_DATE`: In the format of yyyy-MM-dd.
+  `CONTRACT_END_DATE`: In the format of YYYY-MM-DD.
 
   <div class="box" type="tip" seamless>
 
@@ -1032,7 +1032,7 @@ Example: `list all`
   * `INDEX` **must be within the size of the list** shown.
   * The person at the `INDEX` must be a potential hire
 
-  `CONTRACT_END_DATE`: The contract end date of the employee in the format of yyyy-MM-dd.
+  `CONTRACT_END_DATE`: The contract end date of the employee in the format of YYYY-MM-DD.
 
 <br>
 
@@ -1057,7 +1057,7 @@ Example: `promote 1 2025-12-20`
   * `promote 2 12-20-2025` - the contract end date is in the wrong date format, you can enter `2025-12-20` to represent 20 Dec 2025 instead of `12-20-2025`.
   * `promote 2 2025-20-12` - the day and the month of the contract end date is swapped, you can enter `2025-12-20` to represent 20 Dec 2025 instead of `2025-20-12`.
   * `list e` followed by `promote 2 2025-12-20` - cannot promote an employee, you can use `list ph` instead of `list e` to get the list of potential hires.
-  * `promote 0 2025-12-20` - invalid format, you should change 0 to a greater number corresponding to the index.
+  * `promote 0 2025-12-20` - invalid format, you should change 0 to a positive integer corresponding to the index.
   * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again.
   </div>
   </div>
@@ -1095,10 +1095,10 @@ Example: `promote 1 2025-12-20`
 **Parameters:**
 
   `FIELD`: The type of data you want to sort by.
-  * `name` will sort the list based on the names of your contacts in alphabetical order.
-  * `date` will sort the list based on the contract end dates of your employees.
-  * `dept` will sort the list based on the department of your contacts in alphabetical order.
-  * `role` will sort the list based on the roles of your contacts in alphabetical order.
+  * `name` will sort the list alphabetically by contact names, using non-case-sensitive ASCII order.
+  * `date` will sort the list by employees' contract end dates.
+  * `dept` will sort the list alphabetically by department names, using non-case-sensitive ASCII order.
+  * `role` will sort the list alphabetically by job roles, using non-case-sensitive ASCII order.
 
 <br>
 
@@ -1218,6 +1218,19 @@ Example: StaffSync123
 
 </div>
 
+### **ASCII Order**
+
+<div class="sub-content">
+
+A method of sorting characters based on the ASCII (American Standard Code for Information Interchange) values assigned to them. 
+In ASCII order, characters are organized by their numerical codes, where uppercase letters (A–Z) come before lowercase 
+letters (a–z), and numbers (0–9) come before letters. This ordering is often used in computer sorting and is 
+case-sensitive by default, though it can be adapted for non-case-sensitive sorting.
+
+For more information: [ASCII on Wikipedia](https://en.wikipedia.org/wiki/ASCII)
+
+</div>
+
 ### **Command Line Interface**
 
 <div class="sub-content">
@@ -1259,9 +1272,9 @@ and Charlie is at index 3.
 <div class="sub-content">
 
 A whole number with no fractions and decimals that can be positive, 0 or negative. The range of a valid integer in
-programming is from -2147483648 to 2147483647, inclusive of both.
+programming is from -2 147 483 648 to 2 147 483 647, inclusive of both.
 
-Example: -2147483648, -15, 0, 35, 2147483647
+Example: -2 147 483 648, -15, 0, 35, 2 147 483 647
 
 </div>
 
@@ -1301,13 +1314,41 @@ Example: In order to display a list of employee and not a list of potential hire
 
 <div class="content">
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **Issue:** When using multiple screens, if you move the application to a secondary screen and later switch to only the primary screen, the application window may open off-screen.<br><br>
+   **Workaround:** Delete the `preferences.json` file created by the application, then reopen the application.
 
-<br>
+<br><br>
 
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **Issue:** If you minimize the Help Window and then run the `help` command (or use the `Help` menu, or the `F1` shortcut) again, the minimized Help Window remains hidden, and no new Help Window opens.<br><br> 
+   **Workaround:** Manually restore the minimized Help Window.
+
+<br><br>
+
+3. **Issue:** If you `john doe` and `John Doe` to StaffSync, it does not register them as duplicate entries.<br><br>
+   **Workaround:** Ensure all contact names are added using a consistent format.
+
+<br><br>
+
+4. **Issue:** You cannot input a name containing special characters (e.g., `Carls s/o Jr.`).<br><br>
+   **Workaround:** Enter the contact name without special characters (e.g., `Carls son of Jr`).
+
+<br><br>
+
+5. **Issue:** You cannot save employees without a contract end date.<br><br>
+   **Workaround:** Use a far-future date as a placeholder (e.g., `3000-01-01`).
+
+<br><br>
+
+6. **Issue:** You can input contract end dates from the past.<br><br>
+   **Workaround:** Avoid entering past dates if not desired. This flexibility allows for documentation of past employees if needed.
+
+<br><br>
+
+7. **Issue:** The results screen may appear too small after entering a command.<br><br>
+   **Workaround:** Expand the window or scroll to view the full content.
 
 </div>
+
 
 <div class="last-component"></div>
 
