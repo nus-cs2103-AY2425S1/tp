@@ -10,12 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values (except for /),"
+            + " and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
+    public static final String CONTAINS_FORWARD_SLASH = "^(?!.*[/]).*";
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String value;
@@ -39,7 +41,7 @@ public class Address {
         // the command parser or the storage's json converter.
         assert test != null;
 
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(CONTAINS_FORWARD_SLASH) && test.matches(VALIDATION_REGEX);
     }
 
     @Override
