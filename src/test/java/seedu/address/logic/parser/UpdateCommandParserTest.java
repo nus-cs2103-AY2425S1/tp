@@ -241,7 +241,6 @@ public class UpdateCommandParserTest {
 
         UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder().withSubjects().build();
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
-
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -254,5 +253,18 @@ public class UpdateCommandParserTest {
         UpdateCommand expectedCommand = new UpdateCommand(targetName, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+    @Test
+    public void parse_validLevelInvalidSubject_failure() {
+        String command = " John Doe l/S2 NA s/Chem";
+
+        assertParseFailure(parser, command, Subject.getValidSubjectMessage(new Level("S2 NA")));
+    }
+
+    @Test
+    public void parse_invalidLevelInvalidSubject_failure() {
+        String command = " John Doe s/Chem";
+
+        assertParseFailure(parser, command, Subject.MESSAGE_CONSTRAINTS);
     }
 }

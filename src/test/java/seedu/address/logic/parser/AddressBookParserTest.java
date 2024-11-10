@@ -108,9 +108,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_update() throws Exception {
         Student student = new StudentBuilder().build();
-        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(student).build();
+
+        UpdateStudentDescriptor descriptor = new UpdateStudentDescriptorBuilder(student)
+                .withSubjects("Math")
+                .build();
         UpdateCommand command = (UpdateCommand) parser.parseCommand(UpdateCommand.COMMAND_WORD + " "
                 + student.getName() + " " + StudentUtil.getUpdateStudentDescriptorDetails(descriptor));
+
         assertEquals(new UpdateCommand(student.getName(), descriptor), command);
     }
 

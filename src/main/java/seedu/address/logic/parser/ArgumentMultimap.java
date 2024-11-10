@@ -75,4 +75,9 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    @Override
+    public String toString() {
+        return argMultimap.toString();
+    }
 }
