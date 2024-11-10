@@ -3,7 +3,12 @@ package seedu.address.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -23,9 +28,36 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws ParseException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
+        checkForInvalidPrefixes(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Checks for invalid prefixes in the arguments string.
+     *
+     * @param argsString The string of arguments to check for prefixes.
+     * @param prefixes   The list of valid prefixes.
+     */
+    private static void checkForInvalidPrefixes(String argsString, Prefix... prefixes) throws ParseException {
+        Set<String> validPrefixes = Arrays.stream(prefixes)
+                .map(prefix -> " " + prefix.getPrefix())
+                .collect(Collectors.toSet());
+
+        // Use regex to find all prefixes in the form " <char or str>/"
+        Pattern pattern = Pattern.compile("\\s\\S+/");
+        Matcher matcher = pattern.matcher(argsString);
+
+        // Look through each prefix found
+        while (matcher.find()) {
+            String detectedPrefix = matcher.group();
+
+            // If detected prefix doesn't match any valid prefix, throw a ParseException
+            if (!validPrefixes.contains(detectedPrefix)) {
+                throw new ParseException("Invalid prefix detected:" + detectedPrefix);
+            }
+        }
     }
 
     /**
