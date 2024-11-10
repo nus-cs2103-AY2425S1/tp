@@ -459,10 +459,8 @@ otherwise)
 1. Educator chooses to delete a student.
 2. System prompts for the student's index in the list.
 3. Educator enters the student's index.
-4. System requests confirmation for deletion.
-5. Educator confirms the deletion.
-6. System deletes the student from the student list.
-7. System displays a confirmation message.
+4. System deletes the student from the student list.
+5. System displays a confirmation message.
 
    Use case ends.
 
@@ -474,12 +472,6 @@ otherwise)
   - **3a2.** Educator enters a valid index.
 
     Use case resumes from step 4.
-
-- **5a.** Educator cancels the deletion.
-
-  - **5a1.** System aborts the deletion process and displays a cancellation message.
-
-    Use case ends.
 
 ---
 
@@ -488,13 +480,10 @@ otherwise)
 **Main Success Scenario (MSS):**
 
 1. Educator chooses to edit a student.
-2. System prompts for the student's index in the list.
-3. Educator enters the student's index.
-4. System displays the current details of the student.
-5. Educator enters the new details to update.
-6. System validates the new input.
-7. System updates the student's information.
-8. System displays a confirmation message.
+2. Educator enters the student's index and new details to update.
+3. System validates the new input.
+4. System updates the student's information.
+5. System displays a confirmation message.
 
    Use case ends.
 
@@ -507,14 +496,12 @@ otherwise)
 
     Use case resumes from step 4.
 
-- **6a.** System detects invalid input in the new details.
+- **3b.** System detects invalid input in the new details.
 
-  - **6a1.** System requests the educator to correct the invalid input.
-  - **6a2.** Educator enters valid details.
+  - **3b1.** System requests the educator to correct the invalid input.
+  - **3b2.** Educator enters valid details.
 
-    Steps 6a1-6a2 are repeated until the input is valid.
-
-    Use case resumes from step 7.
+    Use case resumes from step 4.
 
 ---
 
@@ -610,10 +597,8 @@ otherwise)
 1. Educator chooses to delete a group.
 2. System prompts for the group name.
 3. Educator enters the group name.
-4. System requests confirmation for deletion.
-5. Educator confirms the deletion.
-6. System deletes the group from the group list.
-7. System displays a confirmation message.
+4. System deletes the group from the group list.
+5. System displays a confirmation message.
 
    Use case ends.
 
@@ -625,12 +610,6 @@ otherwise)
   - **3a2.** Educator enters a valid group name.
 
     Use case resumes from step 4.
-
-- **5a.** Educator cancels the deletion.
-
-  - **5a1.** System aborts the deletion process and displays a cancellation message.
-
-    Use case ends.
 
 ---
 
@@ -725,12 +704,6 @@ otherwise)
 
     Use case ends.
 
-- **6a.** No new students were imported (all are duplicates).
-
-  - **6a1.** System informs the educator that no new students were added.
-
-    Use case ends.
-
 ---
 
 #### **Use Case: UC13 - Export Students**
@@ -750,20 +723,10 @@ otherwise)
 **Main Success Scenario (MSS):**
 
 1. Educator chooses to clear all entries.
-2. System prompts for confirmation to delete all data.
-3. Educator confirms the action.
-4. System deletes all student and group data.
-5. System displays a confirmation message.
+2. System deletes all student and group data.
+3. System displays a confirmation message.
 
    Use case ends.
-
-**Extensions:**
-
-- **3a.** Educator cancels the action.
-
-  - **3a1.** System aborts the clear operation and displays a cancellation message.
-
-    Use case ends.
 
 ---
 
