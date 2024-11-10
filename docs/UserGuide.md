@@ -420,16 +420,20 @@ Parameters:
 <box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `delete` and `-d` is compulsory
-- Spacing between `-d` and `INDEX` is not compulsory
-- Only one delivery at the specified `INDEX` can be deleted at a time
-  - `delete -d 1 3 5` is not allowed
+- At least one space is needed between `delete` and `-d`.
+- Spacing between `-d` and `INDEX` is not compulsory.
+- Only one delivery at the specified `INDEX` can be deleted at a time.
+  - `delete -d 1 3 5` is not allowed.
 
 </box>
 
 Examples:
-* `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
-* `find -d pro/ bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
+- `delete -d 2`
+- `find -d pro/ bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
+
+Expected output:
+- Delivery at index 2 of the displayed list will be deleted, assuming there are at least 2 deliveries in the displayed list. Otherwise, an error message will be shown.
+- Delivery at index 1 of the displayed list will be deleted, assuming there is at least 1 delivery in the displayed list after the find command is executed. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 ![delete delivery command](images/deleteDeliveryCommand.png)
@@ -456,22 +460,23 @@ Parameters:
 <box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `find` and `-d` is compulsory
-- At least one parameter must be given
-- A spacing between `-d` and the first parameter is compulsory
-- When using more than one parameter, a spacing between parameters is compulsory
-- `STATUS` and `PRODUCT` are not case-sensitive
-- No duplicate parameter can be used
-  - `find -d pro/milk pro/bread` is not allowed
-- Find result(s) will contain/satisfy all the given parameters
+- At least one space is needed between `find` and `-d`.
+- At least one parameter must be given.
+- At least one space is needed between `-d` and the first parameter.
+- When using more than one parameter, at least one space is needed between parameters.
+- `STATUS` and `PRODUCT` are not case-sensitive.
+- No duplicate parameter can be used.
+  - `find -d pro/milk pro/bread` is not allowed.
+- Find result(s) will contain/satisfy all the given parameters.
 
 </box>
 
 
-#### Example
-To find deliveries of products that contains "milk" on "28-06-2025 17:00" :
+Example:
+- `find -d on/ 28-06-2025 17:00 pro/ milk`
 
-    find -d on/ 28-06-2025 17:00 pro/ milk
+Expected output:
+- Deliveries of products that contains "milk" on "28-06-2025 17:00", if any, will be displayed.
 
 #### Here's how it would look like in the app:
 ![find command](images/findDeliveryCommand.png)
@@ -495,14 +500,14 @@ Parameters:
 <box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `sort` and `-d` is compulsory
-- A spacing between `-d` and `so/SORT_ORDER` is compulsory
-- A spacing between `so/SORT_ORDER` and `sb/SORT_BY` is compulsory 
-- All parameters must be given
-- No duplicate parameter can be used
-  - `sort -d so/a sb/c sb/d` is not allowed
-- `SORT_ORDER` and `SORT_BY` are **case-sensitive**
-- Using `sort -d` command will sort and display all deliveries in VendorVault even if you have previously used the `find -d` command
+- At least one space is needed between `sort` and `-d`.
+- At least one space is needed between `-d` and `so/SORT_ORDER`.
+- At least one space is needed between `so/SORT_ORDER` and `sb/SORT_BY`.
+- All parameters must be given.
+- No duplicate parameter can be used.
+  - `sort -d so/a sb/c sb/d` is not allowed.
+- `SORT_ORDER` and `SORT_BY` are case-sensitive.
+- Using `sort -d` command will sort and display all deliveries in VendorVault even if you have previously used the `find -d` command.
 
 </box>
 
@@ -512,11 +517,13 @@ Parameters:
 
 </box>
 
-#### Example
+Example:
+- `sort -d so/a sb/c`
 
-To sort deliveries by cost in ascending order:
+Expected output:
+- All deliveries, if any, will be sorted by cost in ascending order.
 
-    sort -d so/a sb/c
+    
 
 #### Here's how it would look like in the app:
 ![sort command](images/sortDeliveriesCommand.png)
