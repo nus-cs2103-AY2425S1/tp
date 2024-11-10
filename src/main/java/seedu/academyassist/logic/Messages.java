@@ -21,7 +21,8 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_STUDENTS_FOUND_MATCHES = "%1$d student(s) found that matches the keywords.";
     public static final String MESSAGE_INVALID_NAME_FORMAT = "The name entered is invalid. "
-            + "\nPlease make sure the name is between 1-100 characters and only contains alphabets and spaces.";
+            + "\nPlease make sure the name is between 1-255 characters and only contains alphabets, spaces and "
+            + "these special characters, excluding the parentheses, (-/')";
     public static final String MESSAGE_DUPLICATE_IC = "Another student with the same NRIC already exists "
             + "in the system.";
 

@@ -18,7 +18,7 @@ public class Name {
                     + "more than one consecutive special characters.";
 
     public static final String VALIDATION_REGEX = "^[a-zA-Z](?!.*[" + SPECIAL_CHARACTERS + " ]{2})[a-zA-Z"
-            + SPECIAL_CHARACTERS + " ]{0,253}[a-zA-Z]$";
+            + SPECIAL_CHARACTERS + " ]{0,253}[a-zA-Z]$"; // Adapted from the help of ChatGPT
 
     public final String fullName;
 
