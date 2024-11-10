@@ -32,15 +32,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
 
 
-        try {
-            Set<Index> indices;
-            Optional<Set<Index>> optionalIndices = parseIndicesForDelete(indicesList);
-            assert optionalIndices.isPresent() : "Optional set of indices should not be empty or return null";
-            indices = optionalIndices.get();
-            return new DeleteCommand(indices);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
-        }
+        Set<Index> indices;
+        Optional<Set<Index>> optionalIndices = parseIndicesForDelete(indicesList);
+        assert optionalIndices.isPresent() : "Optional set of indices should not be empty or return null";
+        indices = optionalIndices.get();
+        return new DeleteCommand(indices);
     }
 
     /**
