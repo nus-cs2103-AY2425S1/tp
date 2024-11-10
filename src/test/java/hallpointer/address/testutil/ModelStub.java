@@ -84,6 +84,9 @@ public class ModelStub implements Model {
     public void updateFilteredMemberList(Predicate<Member> predicate) {
         throw new AssertionError("This method should not be called.");
     }
-
+    @Override
+    public int countMemberOccurrences(Member member) {
+        throw new AssertionError("This method should not be called.");
+    }
 }
 

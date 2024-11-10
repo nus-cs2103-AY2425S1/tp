@@ -167,14 +167,10 @@ public class Member {
      * This is used to check for duplicates in HallPointer.
      */
     public boolean isSameMember(Member otherMember) {
-        if (otherMember == this) {
-            return true;
-        }
-
         // Check for duplicate based only on name and telegram
         return otherMember != null
                 && (otherMember.getName().equals(getName())
-                || otherMember.getTelegram().equals(getTelegram()));
+                || otherMember.getTelegram().value.equalsIgnoreCase(this.getTelegram().value));
     }
 
     /**
