@@ -73,7 +73,7 @@ public class RenameTagCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (!found) {
             throw new CommandException(String.format(MESSAGE_TAG_NOT_FOUND, oldTag));
-        } else if (duplicates) {
+        } if (duplicates) {
             return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, newTag)
                     + String.format(MESSAGE_DUPLICATES, newTag));
         } else {
