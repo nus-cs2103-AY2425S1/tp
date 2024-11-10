@@ -57,7 +57,7 @@ public class Tag {
      * Returns true if a given string is a reserved tag name.
      */
     public static boolean isReservedTagName(String test) {
-        return test.equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME);
+        return test.equalsIgnoreCase(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME);
     }
 
     @Override
