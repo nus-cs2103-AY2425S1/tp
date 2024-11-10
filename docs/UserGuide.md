@@ -113,23 +113,67 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by attributes : `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [INDEX] [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+### General Search Rules
+- **Case-insensitive**: Searches ignore case differences. For example, `hans` will match `Hans`.
+- **Attribute-Specific Requirements**: Each attribute has specific search behaviors (see details below).
+- **`OR` Search for Keywords**: Persons matching at least one keyword will be returned. For example, `find Hans Bo` will return `Hans Gruber` and `Bo Yang`.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+### Attribute-Specific Search Details
+
+### Index (`INDEX`)
+- Finds the person at the specified `INDEX` in the currently displayed list.
+- **Index** must be a positive integer (e.g., `1`, `2`, `3`, …).
+
+### Examples
+- `list` followed by `find 2` shows the 2nd person in the displayed list.
+
+### Name (`n/KEYWORDS`)
+- **Case-insensitive** and **order-independent**: The order of keywords does not matter. For example, `find Hans Bo` will match both `Hans Gruber` and `Bo Yang`.
+- **Partial Name Search Supported**: You can search using partial names, such as `find j`, which will return persons with names like `John`.
+- **Only Full Words Are Considered**: Keywords must be full words (e.g., `Han` will not match `Hans`).
+
+### Examples
+- `find n/John` → returns `John Doe`, `Johnny Appleseed`
+- `find n/alex david` → returns `Alex Yeoh`, `David Li`
+
+#### Phone Number (`p/PHONE`)
+- **Full Phone Number Required**: Partial matches will not be returned. You need to provide the complete phone number.
+
+### Examples
+- `find p/12345678` → returns only persons with the exact phone number `12345678`
+
+#### Email (`e/EMAIL`)
+- **Exact Match Required**: Only persons with the exact email provided will be matched.
+
+### Examples
+- `find e/johndoe@example.com` → returns only persons with the email `johndoe@example.com`
+
+#### Address (`a/ADDRESS`)
+- **Full Address Required**: The search requires the complete address; partial address matches are not supported.
+
+### Examples
+- `find a/123 Clementi Ave 3` → returns only persons with the exact address `123 Clementi Ave 3`
+
+#### Tags (`t/TAG`)
+- **Full Tag Name Required**: Only persons with tags that match the exact tag names provided will be returned.
+- **Multiple Tags for Filtering**: You can specify multiple tags for a broader search.
+
+### Examples
+- `find t/friend t/colleague` → returns persons tagged as `friend` and `colleague`
+
+### Examples
+
+- `find n/John` → returns `John`, `John Doe`
+- `find n/alex david` → returns `Alex Yeoh`, `David Li`
+- `find p/12345678` → returns persons with phone number `12345678`
+- `find a/123 Clementi Ave 3` → returns persons with address `123 Clementi Ave 3`
+- `find t/friend t/colleague` → returns persons with tags `friend` or `colleague`
 
 ### Sorting persons by name: `sort`
 
@@ -153,33 +197,57 @@ Examples:
 
 Deletes the specified person from Cher.
 
-Format: `delete INDEX`
+Format: `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+### General Rules
+- **Case-insensitive**: The search for names and tags is not case-sensitive, so `john` will match `John`.
+- **Behavior with Duplicates**: For attributes where duplicates may exist (such as names, addresses, and tags), if multiple matches are found, a list of possible matches will be displayed, allowing the user to choose.
+- **Direct Deletion**: For unique attributes (like index and phone number), Cher will directly delete the matching person.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the Cher.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+### Attribute-Specific Deletion Rules
 
-Format: `delete PHONE_NUMBER
+### Index (`INDEX`)
+- Deletes the person at the specified `INDEX` in the currently displayed list.
+- **Index** must be a positive integer (e.g., `1`, `2`, `3`, …).
+- **Unique Match**: The index is unique in the displayed list, so Cher directly deletes the person at that position.
 
-* Deletes the person with the specified `PHONE_NUMBER`
-* The phone number **must be present in the list of contacts**
+### Examples
+- `list` followed by `delete 2` deletes the 2nd person in the displayed list.
+- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-Examples:
-* `list` followed by `delete 98765432` deletes the person with the phone number 98765432 in the address book.
+### Partial Name (`n/KEYWORDS`)
+- Deletes the person with a name that **matches partially** with the specified `PARTIAL_NAME`.
+- **Case-insensitive** and **order-independent**: The order of keywords does not matter, and case is ignored (e.g., `delete John` matches both `john doe` and `Doe John`).
+- **Supports Partial Words**: Partial words are supported; for example, `delete j` will delete `John` if it is the only matching name.
+- **Multiple Matches**: If multiple persons match the partial name, Cher will display a list of matches for the user to choose from.
 
-Format: `delete PARTIAL_NAME`
+### Examples
+- `list` followed by `delete John` deletes the person with the name `John`.
+- If multiple persons have the name `John`, a list of these persons is displayed for selection.
 
-* Deletes the person with name matching the specified `PARTIAL_NAME`
-* The partial name **must match at least oner person's name**
-* If multiple persons matching the partial name are found, a list of the matching persons is displayed
+### Phone Number (`p/PHONE`)
+- Deletes the person with the specified **full** `PHONE_NUMBER`.
+- **Exact Match Required**: Partial phone numbers will not be matched.
+- **Unique Match**: Since phone numbers are unique, Cher will directly delete the person with that phone number.
 
-Examples:
-* `list` followed by `delete John` deletes the person with the name John in the address book.
-* If multiple persons have the name John, a list of these persons is displayed to the user
+### Examples
+- `list` followed by `delete 98765432` deletes the person with the phone number `98765432` in the list.
+
+### Address (`a/ADDRESS`)
+- Deletes the person with the specified **full** `ADDRESS`.
+- **Exact Match Required**: The address must be complete; partial matches are not supported.
+- **Multiple Matches**: If multiple persons share the same address, Cher will display a list of matching persons for the user to choose from.
+
+### Examples
+- `delete a/123 Clementi Ave 3` deletes the person with the exact address `123 Clementi Ave 3`.
+
+### Tags (`delete t/TAG…`)
+- Deletes persons based on specified tags. Multiple tags can be used for broader filtering.
+- **Full Tag Name Required**: Only persons with tags that match the exact names provided will be considered.
+- **Multiple Matches**: If multiple persons match the provided tags, Cher will display a list of matches for selection.
+
+### Examples
+- `delete t/friend t/colleague` deletes persons tagged as both `friend` and `colleague` if they are unique; otherwise, Cher will show a list of matching persons.
 
 ### Deleting in a batch : `batch-delete`
 
