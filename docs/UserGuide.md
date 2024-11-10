@@ -264,7 +264,7 @@ EZSTATE features (i.e. commands) are divided into **four** main categories:
     - [Add Buyers to Listing](#add-buyers-to-listing) (`addlistingbuyers`)
     - [Remove Buyers from Listing](#remove-buyers-from-listing) (`removelistingbuyers`)
     - [Delete Listing](#delete-listing) (`deletelisting`)
-    - [Clear Listing](#clear-listing) (`clearlistings`)
+    - [Clear Listings](#clear-listing) (`clearlistings`)
 4. [Utility Commands](#4-utility-commands)
     - [Clear](#clear) (`clear`)
     - [Exit](#exit) (`exit`)
@@ -350,7 +350,7 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ---
 
 - **Special Comments**
-1. Refer to the remarks and constraints for the following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t).
+1. Refer to the remarks and constraints for the following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t)
 
 #### Add Seller
 - **Command:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
@@ -420,7 +420,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >  ---
 
 - **Special Comments**
-1. Refer to the remarks and constraints for the following prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t).
+1. Refer to the remarks and constraints for the following prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t)
 
 #### Show Clients
 - **Command:** `showclients`
@@ -538,7 +538,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ---
 
 - **Special Comments**
-1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t).
+1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t)
 
 #### Delete Client
 - **Command:** `deleteclient INDEX`
@@ -636,7 +636,7 @@ Commands for managing appointments between user and clients.
 > ---
 
 - **Special Comments**
-1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
+1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [d/](#d) [fr/](#fr) [to/](#to)
 
 #### Delete Appointment
 - **Command:** `deleteapt INDEX`
@@ -664,7 +664,7 @@ Commands for managing appointments between user and clients.
 > ---
 
 - **Special Comments**
-1. Refer to [INDEX](#reference-types) constraints and the remarks & constraints for the following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
+1. Refer to [INDEX](#reference-types) constraints and the remarks & constraints for the following prefixes: [d/](#d) [fr/](#fr) [to/](#to)
       
 ---
 
@@ -718,7 +718,7 @@ Commands for managing property listings and associating clients with listings.
 > ---
 
 - **Special Comments**
-1. Refer to the remarks and constraints for the following prefixes: [n/](#n) [pr/](#pr) [ar/](#ar) [add/](#add) [reg/](#reg) [sel/ & buy/](#sel--buy).
+1. Refer to the remarks and constraints for the following prefixes: [n/](#n) [pr/](#pr) [ar/](#ar) [add/](#add) [reg/](#reg) [sel/ & buy/](#sel--buy)
 
 #### Show Listings
 - **Command:** `showlistings`
@@ -748,6 +748,56 @@ Commands for managing property listings and associating clients with listings.
 - **Failed Execution:** NIL
 - **Special Comments:**
 1. You are able to show an empty list of listings, as per Successful Execution Use Case #2
+
+#### Edit Listing
+- **Command:** `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`
+- **Description:** Edits the details of the listing identified by the listing index number. **Buyers cannot be edited using this command.** Use addlistingbuyers or removelistingbuyers to manage buyers.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Editing listing `RC4` to become `RC445` with area `150`
+> 
+> **Input**: `editlisting 1 n/RC445 pr 1500000000 ar/150`
+> 
+> **Output**: 
+Successfully edited listing: RC445.
+Address: test
+> 
+> **Use Case #2**: Editing listing `RC4` region to become `central`
+> 
+> **Input**: `editlisting 1 reg/central`
+> 
+> **Output**:
+Successfully edited listing: RC445.
+Address: test
+> 
+> ---
+
+- **Failed Execution:**
+> ---
+> **User Error #1**: Out-of-bounds index
+> 
+> **Input**: `editlisting 1000` 
+> 
+> **Output**: The listing index provided is invalid!
+> 
+> 
+> **User Error #2**: Changing name to pre-existing name
+> 
+> **Input**: `editlisting 1 n/RC5` _(assuming RC5 already exists in the system)_
+> 
+> **Output**: This listing name / address already exists in the system.
+> 
+> 
+> **User Error #3**: No prefixes provided
+> 
+> **Input**: editlisting 1
+> 
+> **Output**: At least one field to edit must be provided.
+> 
+> ---
+
+- **Special Commands**
+1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints for the following prefixes: [n/](#n) [pr/](#pr) [ar/](#ar) [add/](#add) [reg/](#reg) [sel/ & buy/](#sel--buy)
 
 #### Add Buyers to Listing
 - **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
@@ -900,7 +950,7 @@ Commands for managing property listings and associating clients with listings.
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints.
 
-#### Clear Listing
+#### Clear Listings
 - **Command:** `clearlistings`
 - **Description:** Deletes ALL listings.
 - **Successful Execution:**
@@ -1075,12 +1125,23 @@ Furthermore, certain edits can cause EZSTATE to **behave in unexpected ways** (e
 
 ## Command summary
 
- Action     | Format, Examples                                                                                                                    
-------------|-------------------------------------------------------------------------------------------------------------------------------------
- **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com`                                 
- **Clear**  | `clear`                                                                                                                             
- **Delete** | `delete NAME`<br> e.g. `delete James Ho`                                                                                            
- **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com` <br> e.g.`edit 2 n/James Voo`
- **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                          
- **List**   | `list`                                                                                                                              
- **Help**   | `help`                                                                                                                              
+| Action                         | Format, Examples                                                                                                                                                                                       |
+|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Buyer**                  | `buyer n/NAME p/PHONE e/EMAIL`<br>e.g. `buyer n/James Ho p/22224444 e/jamesho@example.com`                                                                                                             |
+| **Add Seller**                 | `seller n/NAME p/PHONE e/EMAIL`<br>e.g. `buyer n/James Ho p/22224444 e/jamesho@example.com`                                                                                                            |
+| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`                                                                                                                                              |
+| **Edit Client**                | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`<br>e.g., `edit 2 n/James Lee e/jameslee@example.com`<br>e.g., `edit 2 n/James Voo`<br>e.g., `edit 2 n/James Voo t/Friend t/Colleague |
+| **Delete Client**              | `deleteclient INDEX`<br>e.g., deleteclient 3                                                                                                                                                           |
+| **Add Listing**                | `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`<br>e.g., `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1`      |
+| **Show Listings**              | `showlistings`                                                                                                                                                                                         |
+| **Edit Listing**               | `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`<br>e.g., `editlisting 2 pr/450000 ar/1200`                                                                              |
+| **Add Buyers to Listing**      | `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `addlistingbuyers 1 buy/1 buy/3`                                                                                         |
+| **Remove Buyers from Listing** | `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `removelistingbuyers 1 buy/1 buy/3`                                                                                   |
+| **Delete Listing**             | `deletelisting INDEX`<br>e.g., `deletelisting 1`                                                                                                                                                       |
+| **Clear Listings**             | `clearlistings`                                                                                                                                                                                        |
+| **Clear**                      | `clear`                                                                                                                                                                                                |
+| **Exit**                       | `exit`                                                                                                                                                                                                 |
+| **Help**                       | `help`                                                                                                                                                                                                 |
+| **More Info**                  | `moreinfo INDEX`<br>e.g., `moreinfo 1`                                                                                                                                                                 |
+| **Chat Window**                | `chatbot`                                                                                                                                                                                              |
+
