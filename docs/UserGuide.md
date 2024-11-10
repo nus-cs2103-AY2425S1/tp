@@ -107,13 +107,13 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
    - Copy the downloaded `PROperty.jar` file into this folder.
 3. Start PROperty:
    - Open your computer's terminal in the folder where PROperty is by either:
-     - **For Windows:** `Shift+Rightclick` in the folder where PROperty is and clicking on "Open PowerShell Window Here"
-     - **For Mac:** `Control + Click` on the folder where PROperty is and clicking on "New Terminal at Folder" 
-   - Type `java -jar PROperty.jar` into your computer's terminal and press "Enter"
+     - **For Windows:** `Shift+Rightclick` in the folder where PROperty is and clicking on "Open PowerShell Window Here".
+     - **For Mac:** `Control + Click` on the folder where PROperty is and clicking on "New Terminal at Folder".
+   - Type `java -jar PROperty.jar` into your computer's terminal and press "Enter".
 
     
 ![Ui](images/user-guide-images/Ui.png)
-- The screenshot above showcases the various components of PROperty
+- The screenshot above showcases the various components of PROperty.
 
 
 [_Back to Top_](#table-of-contents)
