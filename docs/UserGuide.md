@@ -159,8 +159,10 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+<div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** This command can be used to reset the filter applied on the person list caused by a `find` command 
 operation.
+</div>
 
 ### Listing all transactions : `listTxn`
 
@@ -168,8 +170,10 @@ Shows a list of all transactions in the transaction book.
 
 Format: `listTxn`
 
+<div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** This command can be used to reset the filter applied on transaction list caused by a `fitlerTxn` 
 command operation.
+</div>
 
 ### Editing a person : `edit`
 
@@ -208,7 +212,9 @@ Format: `editTxn INDEX [p/PHONE_NUMBER] [amt/AMOUNT] [desc/DESCRIPTION] [date/DA
 * You can remove all the person’s categories by typing `cat/` without specifying any categories after it.
 * When editing the person related to the transaction through specifying `[p/PHONE_NUMBER]`, the person with the input phone number must be in the address book.
 
-:bulb: **Tip:** Status can be edited via `markDone` or `markUndone` command. Support for editing status through `editTxn` may be considered by the devs in future releases.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
+Status can be edited via `markDone` or `markUndone` command.
+</div>
 
 Examples:
 
@@ -344,7 +350,9 @@ Format: `markUndone INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** By default, a new transaction is undone. <br />
+:bulb: **Tip:** By default, a new transaction is undone.
+</div>
+<div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** If a done transaction is marked as undone, the existing done icon for the transaction in GUI disappears. 
 </div>
 
