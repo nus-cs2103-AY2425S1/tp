@@ -101,13 +101,17 @@ Adds a person to the address book.
 
 **Remarks**: 
 
-- Duplicate names are not permitted. Addressbook cannot contain two `John Doe` or a `Betsy Crowe` and a `betsy crowe`
+- Duplicate **names** are not permitted. MediContact cannot contain two `John Doe` or a `Betsy Crowe` and a `betsy crowe`
 
 - A person can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
 
-- A person can have any number of appointments (including 0).
+- A person can have any number of future appointments (including 0).
 
 - A person's sex is not limited to Male/Female/Other to provide you with more flexibility.
+
+- A person aged 0 is allowed for accurate tracking of a newborns age. 
+
+- There is also a higher age limit of 999 to provide you with more flexibility.
 
 - Fields in square brackets (e.g. `[ap/APPOINTMENT]`) are optional.
 
