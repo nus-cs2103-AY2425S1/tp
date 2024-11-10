@@ -146,17 +146,19 @@ Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]�
 
 Parameters:
 
-- `n/NAME`: The supplier's name. It must be alphanumeric, and cannot be blank.
-- `p/PHONE`: The supplier's phone number. It must be numeric, and contain at least 3 digits.
-- `e/EMAIL`: The supplier's email address. It must be in a valid email address format, and cannot be blank.
+- `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
+- `p/PHONE`: `PHONE` is the supplier's phone number. It must be numeric, and contain at least 3 digits.
+- `e/EMAIL`: `EMAIL` is the supplier's email address. It must be in a valid email address format, and cannot be blank.
   - Please see [below](#valid-email-address-format) for more information on what constitutes a valid email address format.
-- `com/COMPANY`: The company associated with the supplier. It must be in a valid company name format, and cannot be blank.
+- `com/COMPANY`: `COMPANY` is the company associated with the supplier. It must be in a valid company name format, and cannot be blank.
   - Please see [below](#valid-company-name-format) for more information on what constitutes a valid company name format.
-- `[t/TAG]`: The tag(s) associated with the supplier. It must be alphanumeric, and only contain between 1 and 50 (inclusive) characters.
-- `[pro/PRODUCT]`: The product(s) associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
+- `[t/TAG]`: `TAG` is the tag(s) associated with the supplier. It must be alphanumeric, and only contain between 1 and 50 (inclusive) characters.
+- `[pro/PRODUCT]`: `PRODUCT` is the product(s) associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
   - One space is counted as one character.
+  - A product name cannot be made up of only spaces.
 
-**Tip:** A supplier can have any number of tags and products (including 0).
+**Tip:** A supplier can have any number of `TAG` and `PRODUCT` (including 0).
+- To include multiple `TAG`, use multiple `t/TAG`.
 
 </box>
 
@@ -166,7 +168,8 @@ Parameters:
 - At least one space is needed between `add` and `-s`.
 - A warning will be given if the user tries to add a duplicate supplier.
 - A supplier is considered duplicate if they have the same `NAME` and `COMPANY`.
-  - Comparison between different `NAME`/`COMPANY` is case-sensitive.
+  - Comparison between different `NAME`is case-sensitive.
+  - Comparison between different `COMPANY` is case-insensitive.
 - Adding duplicate `TAG`/`PRODUCT` will result in only one copy being added to the supplier.
   - Comparison between different `TAG`/`PRODUCT` is case-sensitive.
 - A supplier has a default `STATUS` of `active`.
@@ -194,7 +197,7 @@ Special characters cannot be used consecutively.
 `local-part` must be alphanumeric, or these special characters: `+.-_`.
 
 `domain` must be alphanumeric, or these special characters: `.-`.  
-`domain` can be separated into multiple parts with `.`, and the ending part must be at least 2 alphanumeric characters.  
+`domain` can be separated into multiple parts with `.`, and the last part must be at least 2 alphanumeric characters.  
 - Each part must start and end with alphanumeric characters.
 - e.g. `example.com` is separated into two parts, `example` and `com`, and is a valid `domain`.
 
