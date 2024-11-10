@@ -195,7 +195,7 @@ Adds a person to the address book.
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDDING]…​`
 
 
-* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . -
+* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
 * A person can have any number of tags or weddings (including 0)
  
 Examples:
