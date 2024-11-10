@@ -130,15 +130,15 @@ Format: `list-tasks`
 
 ### Locating contacts by field: `find`
 
-Finds all persons based on the specified keywords (case-insensitive) after the prefix representing the field, and displays them as a list with index numbers.
+Finds all persons based on the specified keywords after the prefix representing the field, and displays them as a list with index numbers.
 
 Format: `find PREFIX KEYWORD [KEYWORD]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
-* The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
+* The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email. The full list of prefixes which can be used can be found [here](#features). 
 * The keyword after the prefix must be specified and cannot be empty.
-* The search will return partial matches and full matches for each keyword.
-* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix. 
+* The search will return both partial matches and full matches for each keyword.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by placing each keyword after the appropriate prefix. 
 * Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
 * The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
@@ -282,7 +282,7 @@ Format: `create-wedding w/WEDDINGNAME`
 
 * The `WEDDINGNAME` is alphanumeric and can contain whitespaces.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
-* Contacts can be assigned to the Wedding using the [assign-wedding](#assign-contact-to-a-wedding--assign-wedding) command.
+* Contacts can be assigned to the Wedding using the [assign-wedding](#assigning-contact-to-a-wedding-assign-wedding) command.
 
 ### Assigning contact to a Wedding : `assign-wedding`
 
@@ -337,7 +337,7 @@ Format: `create-task tk/TASKDESCRIPTION [REMARKS]`
 * Tasks may have no dates, a single date indicating a deadline, or two dates to define a start and end period.
 * The dates can be specified under `REMARKS` with the format `d/YYYY-MM-DD`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
-* Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task-) command.
+* Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task) command.
 
 ### Deleting a Task : `delete-task`
 
@@ -424,7 +424,7 @@ Action     | Format, Examples
 **Assign Wedding**    | `assign-wedding PERSON_INDEX w/WEDDING…​` or `asw PERSON_INDEX w/WEDDING…​` <br> e.g., `asw 2 w/Casey's Wedding w/Wedding August 29th`
 **Clear**  | `clear`
 **Create Tag**  | `create-tag t/TAG` or `ctag t/TAG` <br> e.g., `create-tag t/photographer`
-**Create Task**  | `create-task tk/TASK_DESCRIPTION [REMARKS]` or `ctask tk/TASK_DESCRIPTION [REMARKS]` <br> e.g., `create-task tk/todo Order Wedding Cake` <br> `create-task tk/event Meet Caterer /from 2024-11-19 /to 2024-11-20` <br> `create-task tk/deadline Book Venue /by 2025-02-01`
+**Create Task**  | `create-task tk/TASK_DESCRIPTION [REMARKS]` or `ctask tk/TASK_DESCRIPTION [REMARKS]` <br> e.g., `create-task tk/Meet Caterer` <br> `ctask tk/Order Wedding Cake /by 2025-02-01` <br>
 **Create Wedding**  | `create-wedding w/WEDDING` or `cw w/WEDDING` <br> e.g., `cw w/JJ's Wedding`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `delete-tag t/TAG` or `dtag t/TAG` <br> e.g., `delete-tag t/photographer`
