@@ -25,7 +25,7 @@ public class Fees {
     public Fees(String fees) {
         requireNonNull(fees);
         checkArgument(isValidFees(fees), MESSAGE_CONSTRAINTS);
-        value = String.valueOf(Integer.parseInt(fees));
+        value = fees.isEmpty() ? "" : String.valueOf(Integer.parseInt(fees));
     }
 
     /**
