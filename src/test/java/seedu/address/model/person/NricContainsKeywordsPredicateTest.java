@@ -65,6 +65,10 @@ public class NricContainsKeywordsPredicateTest {
         predicate = new NricContainsKeywordsPredicate(Arrays.asList("S1234567Z"));
         assertFalse(predicate.test(new PersonBuilder().withNric("G1234568Z").build()));
 
+        // Partial keyword
+        predicate = new NricContainsKeywordsPredicate(Arrays.asList("S1234"));
+        assertFalse(predicate.test(new PersonBuilder().withNric("S1234567Z").build()));
+
         // Keywords match phone, email and address, but does not match Nric
         predicate = new NricContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withNric("S1234567Z").withPhone("12345678")

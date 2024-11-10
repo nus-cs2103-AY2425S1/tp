@@ -32,12 +32,16 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean containsNric = Arrays.asList(keywords).stream().anyMatch(keyword ->
                 Nric.isValidNric(keyword.toUpperCase()));
 
-        if (!containsNric) {
+        if (keywords.length == 1) {
+            if (containsNric) {
+                return new FindCommand(new NricContainsKeywordsPredicate(Arrays.asList(keywords)));
+            }
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         }
-        if (keywords.length == 1) {
-            return new FindCommand(new NricContainsKeywordsPredicate(Arrays.asList(keywords)));
+        if (keywords.length > 1) {
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         }
+
         throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }

@@ -31,6 +31,41 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+
+
+        // multiple patients with NRIC names
+        expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("S1234567Z", "G1234567Z")));
+        assertParseSuccess(parser, "S1234567Z G1234567Z", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "\t S1234567Z  \n G1234567Z     ", expectedFindCommand);
+
+
+        // a patients with NRIC name followed by a normal name
+        expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("S1234567Z", "Alice")));
+        assertParseSuccess(parser, "S1234567Z Alice", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "\t S1234567Z  \n Alice     ", expectedFindCommand);
+
+        // a patients with normal name followed by a NRIC name
+        expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "S1234567Z")));
+        assertParseSuccess(parser, "Alice S1234567Z", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "Alice  \t S1234567Z  \n", expectedFindCommand);
+
+
+        // a patients with normal name followed by multiple NRIC names
+        expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "S1234567Z", "G1234567Z")));
+        assertParseSuccess(parser, "Alice S1234567Z G1234567Z", expectedFindCommand);
+
+
+
     }
 
     @Test
@@ -43,15 +78,5 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n S1234567Z \n \t", expectedFindCommand);
     }
-
-    @Test
-    public void parse_nricArgs_throwsParseException() {
-        // only accepts 1 NRIC
-        assertParseFailure(parser, "S1234567Z G1234567Z",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "S1234567Z g1234567z",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-    }
-
 
 }

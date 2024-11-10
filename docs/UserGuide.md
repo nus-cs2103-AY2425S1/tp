@@ -278,6 +278,7 @@ Example:
 
   ![result for 'find S1234567Z'](./images/findS1234567Zresult.png)
 
+
 <div style="page-break-after: always;"></div>
 
 
@@ -299,6 +300,13 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
+If only one input is keyed in and it has an NRIC format (e.g S1234567Z), the find command will search for the patient 
+with that NRIC rather than a patient with that name. The application assumes that single inputs of NRIC format are 
+NRICs. When multiple keywords are used, the application treats the keywords as names, regardless of whether they
+are in NRIC format or not.
+ </div>
 
 <div style="page-break-after: always;"></div>
 
