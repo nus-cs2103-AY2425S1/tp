@@ -22,7 +22,40 @@ KeyContacts is optimized for use via a Command Line Interface (CLI) while still 
 If you can type fast, KeyContacts can get your contact management tasks done much faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
-<page-nav-print />
+
+<br>
+
+---
+
+## Table of Contents
+
+* [Quick Start](#quick-start)
+* [Command Overview](#command-overview)
+* [Student Commands](#student-commands)
+  * [Adding a student: `add`](#adding-a-student-add)
+  * [Deleting a student: `delete`](#deleting-a-student-delete)
+  * [Editing a student: `edit`](#editing-a-student-edit)
+  * [Assigning piano pieces to a student: `assign`](#assigning-piano-pieces-to-a-student-assign)
+  * [Unassigning piano pieces from a student: `unassign`](#unassigning-piano-pieces-from-a-student-unassign)
+* [Lesson Commands](#lesson-commands)
+  * [Scheduling a regular lesson: `schedule`](#scheduling-a-regular-lesson-schedule)
+  * [Scheduling a makeup lesson: `makeup`](#scheduling-a-makeup-lesson-makeup)
+  * [Cancelling a lesson: `cancel`](#cancelling-a-lesson-cancel)
+  * [Uncancelling a cancelled regular lesson: `uncancel`](#uncancelling-a-cancelled-regular-lesson-uncancel)
+* [General Commands](#general-commands)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [Listing all students: `list`](#listing-all-students-list)
+  * [Viewing the schedule: `view`](#viewing-the-schedule-view)
+  * [Finding students: `find`](#finding-students-find)
+  * [Sorting students: `sort`](#sorting-students-sort)
+  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  * [Undoing the last command: `undo`](#undoing-the-last-command-undo)
+  * [Redoing the last undone command: `redo`](#redoing-the-last-undone-command-redo)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command Summary](#command-summary)
+
 
 <br>
 
@@ -147,7 +180,7 @@ Action     | Format, Examples
 <br>
 <br>
 
-### Adding a student: `add`
+### Adding a student : `add`
 
 Adds a student to the student directory.
 
@@ -211,7 +244,7 @@ Examples:
 <br>
 <br>
 
-### Assigning piano pieces to a student: `assign`
+### Assigning piano pieces to a student : `assign`
 
 Assigns piano pieces to a student in the student directory.
 
@@ -226,7 +259,7 @@ Examples:
 <br>
 <br>
 
-### Unassigning piano pieces from a student: `unassign`
+### Unassigning piano pieces from a student : `unassign`
 
 Unassigns piano pieces from a student in the student directory.
 
@@ -411,7 +444,7 @@ Examples:
 <br>
 <br>
 
-### Finding students: `find`
+### Finding students : `find`
 
 Finds students whose personal details match inputs.
 
@@ -495,7 +528,7 @@ Format: `undo`
 <br>
 <br>
 
-### Redoing the last undone command: `redo`
+### Redoing the last undone command : `redo`
 
 Reverts the effects of the `undo` command if it was the last command run that modified the student directory.
 
