@@ -144,6 +144,10 @@ Health Connect is an application designed to **streamline client management** fo
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+* If multiple tags are provided as an input only the last tag will be taken.
+    - For example: `add n/John Doe...t/Low Risk t/High Risk`. The patient John Doe will be assigned the tag `High Risk`.
+
+
 * The following are considered duplicate patients:
   * Same name AND same phone number
   * Same name AND same email
