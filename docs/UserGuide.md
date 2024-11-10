@@ -275,6 +275,7 @@ Format: `unmark INDEX`
 
 Example:
 * `list` followed by `unmark 3` unmarks the attendance of the 3rd person in Cher.
+  ![results for 'unmark'](images/unmark-attendanceExample.png)
 
 ### Reset attendance: `reset-att`
 
@@ -297,12 +298,11 @@ Format: `batch-mark`
 Example:
 * Enter `select 1 2 3` and then `batch-mark` marks the attendance of entries 1, 2 and 3
 
-
 ### Unmark attendance for a group of students: `batch-unmark`
 
 Unmarks attendance for all students in the displayed list.
 
-Format: `batch-unmark`
+Format: `batch-unmark`'
 
 Example:
 * Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries 1, 2 and 3
@@ -318,7 +318,8 @@ Format: select INDEX [MORE_INDEXES]...
 
 Examples:
 * `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show
-  only these selected contacts. The person at index 3, 5 and 7 will be selected. 
+  only these selected contacts. The person at index 3, 5 and 7 will be selected.
+  ![results for 'select'](images/selectExample.png)
 
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip: To increase efficiency when performing actions on multiple persons,
@@ -344,6 +345,8 @@ Examples:
 Clears all entries from Cher.
 
 Format: `clear`
+
+![results for 'clear'](images/clearExample.png)
 
 ### Exiting the program : `exit`
 
