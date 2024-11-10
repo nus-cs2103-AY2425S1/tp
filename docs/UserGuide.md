@@ -145,6 +145,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [List](#list-command)                     | `list`                                                                      | `list`                                                               |
 | [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **Customer and Supplier Contact Management**
@@ -154,6 +155,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]...`          | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
 | [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [s/INGREDIENTS_SUPPLIED] [t/TAG]...` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **Customer Order Management**
@@ -165,6 +167,9 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX`                                                             | `markCustomerOrder 1` |
 | [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX`                                                           | `unmarkCustomerOrder 1` |
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## **Supply Order Management**
 
 | Command | Format                                                                  | Example |
@@ -174,6 +179,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX`                                                 | `markSupplyOrder 1` |
 | [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX`                                               | `unmarkSupplyOrder 1` |
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **Ingredient Catalogue Management**
@@ -192,6 +198,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Remove Pastry](#remove-pastry-command) | `removePastry NAME`                                    | `removePastry Croissant` |
 | [View Pastry Catalogue](#view-pastrycatalogue-command) | `viewPastryCatalogue`                                  | `viewPastryCatalogue` |
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **General Commands**
