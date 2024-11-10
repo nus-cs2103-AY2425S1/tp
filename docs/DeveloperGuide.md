@@ -685,7 +685,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   The system must provide **immediate feedback** (within 1 second) when an error occurs, such as invalid input or missing fields. The user should be able to correct errors without restarting the operation.
 
 #### 4. Security and Privacy Requirements:
-- **Data Encryption:**
+- **Data Encryption (Future Consideration):**
   All sensitive patient and contact information must be encrypted when stored locally. The system should implement industry-standard encryption (e.g., AES-256) for both storage and transmission of data.
 
 - **User Authentication (Future Consideration):**
