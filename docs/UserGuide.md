@@ -255,7 +255,7 @@ addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
 ### Q5: How do I add orders for customers/suppliers with a large order?
-**A:** Yes, you can repeat Product IDs in your order if the customer wants multiple of the same item. For example:
+**A:** For now,
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
