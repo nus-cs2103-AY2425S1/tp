@@ -237,7 +237,7 @@ Reminder: follow the [data formats](#data-formats)!
 Shows a list of all students saved in TAHub Contacts in the GUI.
 
 <box type="definition" seamless><md>
-Format: **`person-add m/MATRICULATION_NUMBER /NAME p/PHONE_NUMBER e/EMAIL
+Format: **`person-add m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL
 a/ADDRESS [t/TAG]…​`**
 </md></box>
 
