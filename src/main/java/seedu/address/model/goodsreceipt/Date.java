@@ -19,7 +19,7 @@ public class Date {
     private static final DateTimeFormatter PATTERN_WRITE = DateTimeFormatter.ofPattern(DATE_FORMAT_WRITE)
             .withZone(ZoneId.of("Singapore"));
 
-    private LocalDateTime dateTime;
+    private final LocalDateTime dateTime;
 
     /**
      * Constructs Date object for Goods.
@@ -72,11 +72,10 @@ public class Date {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Date)) {
+        if (!(other instanceof Date otherDate)) {
             return false;
         }
 
-        Date otherDate = (Date) other;
         return dateTime.equals(otherDate.dateTime);
     }
 }
