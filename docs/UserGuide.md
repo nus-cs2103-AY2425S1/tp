@@ -125,13 +125,15 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
    - **Option 1: Open MATER by Double-Clicking**
      - Go to the folder where you saved the `.jar` file.
-     - **On Windows or Linux**: Double-click the `.jar` file to open it.
-     - **On Mac**: Right-click the `.jar` file, select “Open With,” and choose Java.
-     - If MATER does not open, you may need to open it from the terminal (see Option 2).
 
+     - **On Windows or Linux**: Double-click the `.jar` file to open it.
+
+     - **On Mac**: Right-click the `.jar` file, select “Open With,” and choose Java.
+     
+     - If MATER does not open, you may need to open it from the terminal (see Option 2).
+<br><br>
    - **Option 2: Open MATER from the Terminal**
      - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
-
      - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
 
        ```shell
