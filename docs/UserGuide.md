@@ -461,7 +461,7 @@ Examples:
 
 Marks appointment associated with the specified `PATIENT_ID`, `DOCTOR_ID`, `DATE_TIME` in the MedDict database.
 
-Format: `marK z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
+Format: `mark z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
 <div class="alert alert-block alert-warning">
     <strong>Warning!</strong> Usually, the order of parameters in the command do not matter. However, in this case, do take extra effort to ensure you key in z/PATIENT_ID before z/DOCTOR_ID. Remember, the patient always comes first! 😉
