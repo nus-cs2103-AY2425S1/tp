@@ -248,6 +248,13 @@ public class Person {
     }
 
     /**
+     * Checks if the wedding exists in the person's list of weddings
+     */
+    public boolean hasWedding(Wedding wedding) {
+        return weddings.stream().anyMatch(wedding::isSameWedding);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

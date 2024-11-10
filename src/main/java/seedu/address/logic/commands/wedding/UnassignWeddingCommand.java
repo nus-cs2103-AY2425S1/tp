@@ -1,12 +1,13 @@
 package seedu.address.logic.commands.wedding;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_REMOVE_WEDDING_SUCCESS;
-import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT;
+import static seedu.address.logic.Messages.*;
+import static seedu.address.logic.Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -71,7 +72,7 @@ public class UnassignWeddingCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
+        Set<Wedding> modelWeddingsToKeep = new HashSet<>();
 
         if (personToEdit.getWeddings().isEmpty()) {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
@@ -81,13 +82,31 @@ public class UnassignWeddingCommand extends Command {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
 
-        if (!updatedWeddings.containsAll(weddingsToRemove)) {
-            throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
+        // Checks whether the model has all the specified weddings AND if the person has all the weddings assigned
+        for (Wedding wedding : weddingsToRemove) {
+            if (!model.hasWedding(wedding)) {
+                throw new CommandException(
+                        MESSAGE_WEDDING_NOT_FOUND
+                                + "\n"
+                                + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
+            }
+            if (!personToEdit.hasWedding(wedding)) {
+                throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
+            }
         }
 
-        updatedWeddings.removeAll(weddingsToRemove);
+        // Stores weddings from model that we want to remove - already guaranteed that are all within the model
+        HashSet<Wedding> modelWeddingsToRemove = weddingsToRemove.stream().map(model::getWedding)
+                .collect(Collectors.toCollection(HashSet::new));
 
-        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, updatedWeddings);
+        // Already checks that person has all weddings, so can go ahead and remove
+        for (Wedding wedding : personToEdit.getWeddings()) {
+            if (!modelWeddingsToRemove.contains(wedding)) {
+                modelWeddingsToKeep.add(wedding);
+            }
+        }
+
+        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, modelWeddingsToKeep);
 
         // Remove Wedding from Person
         model.setPerson(personToEdit, editedPerson);

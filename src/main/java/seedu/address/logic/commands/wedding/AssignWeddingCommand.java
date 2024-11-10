@@ -108,6 +108,14 @@ public class AssignWeddingCommand extends Command {
                         MESSAGE_WEDDING_ALREADY_ASSIGNED, personToEdit.getName()
                 ));
             }
+        }
+
+        for (Map.Entry<Wedding, String> entry : weddingsToAdd.entrySet()) {
+            Wedding wedding = entry.getKey();
+
+            // Work with the model's copy of the wedding
+            wedding = model.getWedding(wedding);
+
             Wedding editedWedding = wedding.clone();
             String type = entry.getValue();
             switch (type) {
