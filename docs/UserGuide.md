@@ -16,17 +16,17 @@ management applications.
    2. [Listing all persons](#listing-all-persons--listp)
    3. [Listing all concerts](#listing-all-concerts--listc)
    4. [Listing all persons and concerts](#listing-all-persons-and-concerts--list)
-   5. [Listing all concertContacts](#listing-all-concertcontacts--listcc)
+   5. [Listing all concert contacts](#listing-all-concertcontacts--listcc)
    6. [Adding a Person](#adding-a-person-addp)
    7. [Adding a Concert](#adding-a-concert-addc)
-   8. [Adding a ConcertContact](#adding-a-concertcontact-addcc)
+   8. [Adding a Concert Contact](#adding-a-concertcontact-addcc)
    9. [Deleting a person](#deleting-a-person--deletep)
    10. [Deleting a concert](#deleting-a-concert--deletec)
-   11. [Deleting a concertContact](#deleting-a-concertcontact--deletecc)
+   11. [Deleting a concert contact](#deleting-a-concertcontact--deletecc)
    12. [Clearing All Entries](#clearing-all-entries--clear)
    13. [Finding a person](#finding-a-person-findp)
    14. [Finding a concert](#finding-a-concert-findc)
-   15. [Finding a concertContact](#finding-a-concertcontact-findcc)
+   15. [Finding a concert contact](#finding-a-concertcontact-findcc)
    16. [Editing a person](#editing-a-person--editp)
    17. [Editing a concert](#editing-a-concert--editc)
    18. [Exiting programme](#exiting-the-program--exit)
@@ -61,7 +61,7 @@ management applications.
 
    - `list` : Lists all contacts and concerts in the ConcertPhonebook.
 
-   - `listcc` : Lists all concertContacts in the ConcertPhonebook.
+   - `listcc` : Lists all concert contacts in the ConcertPhonebook.
 
    - `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/organiser t/friends` : Adds a
      contact named `John Doe` to the ConcertPhonebook.
@@ -75,7 +75,7 @@ management applications.
 
    - `deletec 1` : Deletes the 1st concert shown in the current concert list.
 
-   - `deletecc 1` : Deletes the 1st concertContact shown in the current concertContact list.
+   - `deletecc 1` : Deletes the 1st concert contact shown in the current concert contact list.
 
    - `clear` : Deletes all contacts.
 
@@ -85,7 +85,7 @@ management applications.
    - `findc n/coachella glastonbury` : Finds concert(s) named either `Coachella` or `Glastonbury` from the
      ConcertPhonebook.
 
-   - `findcc pi/1 ci/1` : Finds the concertContact between the 1st person and 1st concert.
+   - `findcc pi/1 ci/1` : Finds the concert contact between the 1st person and 1st concert.
 
    - `editp 1 n/John Doe` : Edits the name of the 1st person shown in the current person list to `John Doe`.
 
@@ -154,7 +154,7 @@ Format: `help`
 ### Listing all persons : `listp`
 
 Shows a list of all persons in the ConcertPhonebook.
-If the concertContact view is currently being shown, the application will switch to the view of persons and
+If the concert contact view is currently being shown, the application will switch to the view of persons and
 concerts instead.
 
 Format: `listp`
@@ -162,7 +162,7 @@ Format: `listp`
 ### Listing all concerts : `listc`
 
 Shows a list of all concerts in the ConcertPhonebook.
-If the concertContact view is currently being shown, the application will switch to the view of persons and
+If the concert contact view is currently being shown, the application will switch to the view of persons and
 concerts instead.
 
 Format: `listc`
@@ -170,21 +170,21 @@ Format: `listc`
 ### Listing all persons and concerts : `list`
 
 Shows a list of all persons and concerts in the ConcertPhonebook.
-If the concertContact view is currently being shown, the application will switch to the view of persons and
+If the concert contact view is currently being shown, the application will switch to the view of persons and
 concerts instead.
 
 Format: `list`
 
-### Listing all concertContacts : `listcc`
+### Listing all concert contacts : `listcc`
 
-Shows a list of all concertContacts in the ConcertPhonebook.
-If the persons and concerts are currently being shown, the application will switch to the concertContact view instead.
+Shows a list of all concert contacts in the ConcertPhonebook.
+If the persons and concerts are currently being shown, the application will switch to the concert contact view instead.
 
 Format: `listcc`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-`F2` key can be used to toggle the concertContact view. <br>
+`F2` key can be used to toggle the concert contact view. <br>
 
 </div>
 
@@ -206,9 +206,9 @@ Examples:
 - `addp n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Organiser`
 - `addp n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison r/Artist p/1234567 t/criminal`
 
-### Adding a Concert: `addc`
+### Adding a concert: `addc`
 
-Adds a Concert to the ConcertPhonebook.
+Adds a concert to the ConcertPhonebook.
 
 Format: `addc n/NAME a/ADDRESS d/DATE`
 
@@ -221,9 +221,9 @@ Examples:
 
 - `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`
 
-### Adding a ConcertContact: `addcc`
+### Adding a concert contact: `addcc`
 
-Adds an association to the contact in the ConcertPhonebook with another Concert.
+Adds an association to the contact in the ConcertPhonebook with another concert.
 
 Format: `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`
 
@@ -256,14 +256,14 @@ Format: `deletec INDEX`
 - The index refers to the index number shown in the displayed concert list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
-### Deleting a concertContact : `deletecc`
+### Deleting a concert contact : `deletecc`
 
-Deletes the specified concertContact from the ConcertPhonebook.
+Deletes the specified concert contact from the ConcertPhonebook.
 
 Format: `deletecc INDEX`
 
-- Deletes the concertContact at the specified `INDEX`
-- The index refers to the index number shown in the displayed concertContacts list.
+- Deletes the concert contact at the specified `INDEX`
+- The index refers to the index number shown in the displayed concert contacts list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
 ### Clearing all entries : `clear`
@@ -277,7 +277,7 @@ Format: `clear`
 ### Finding a person: `findp`
 
 Finds persons whose names contain any of the given keywords.
-If the concertContact view is currently being shown, the application will switch to the view of persons and
+If the concert contact view is currently being shown, the application will switch to the view of persons and
 concerts instead.
 
 Format: `findp [n/NAME_KEYWORDS] [r/ROLE]`
@@ -298,7 +298,7 @@ Examples:
 ### Finding a concert: `findc`
 
 Finds concerts whose names contain any of the given keywords.
-If the concertContact view is currently being shown, the application will switch to the view of persons and
+If the concert contact view is currently being shown, the application will switch to the view of persons and
 concerts instead.
 
 Format: `findc n/NAME_KEYWORDS`
@@ -311,10 +311,16 @@ Examples:
 
 - `findc n/Coachella` finds concert(s) with Coachella in their names.
 
-### Finding a concertContact: `findcc`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-Finds all concertContacts that are associated to the person and the concert at the specified index.
-If the persons and concerts are currently being shown, the application will switch to the concertContact view instead.
+Use a combination of `findp`, `findc`, `listp` and `listc` to view specific persons and concerts.<br>
+
+</div>
+
+### Finding a concert contact: `findcc`
+
+Finds all concert contacts that are associated to the person and the concert at the specified index.
+If the persons and concerts are currently being shown, the application will switch to the concert contact view instead.
 
 Format: `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`
 
@@ -323,9 +329,9 @@ Format: `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`
 
 Examples:
 
-- `findcc pi/1` finds concertContact(s) associated with the first person in the phone book.
-- `findcc ci/1` finds concertContact(s) associated with the first concert in the phone book.
-- `findcc pi/1 ci/1` finds the concertContact associated with the first concert and the first person in the phone book.
+- `findcc pi/1` finds concert contact(s) associated with the first person in the phone book.
+- `findcc ci/1` finds concert contact(s) associated with the first concert in the phone book.
+- `findcc pi/1 ci/1` finds the concert contact associated with the first concert and the first person in the phone book.
 
 ### Editing a person : `editp`
 
@@ -419,17 +425,17 @@ the data of your previous AddressBook home folder.
 | **List Person**              | `listp`                                                                                                                                                                      |
 | **List Concerts**            | `listc`                                                                                                                                                                      |
 | **List Person and Concerts** | `list`                                                                                                                                                                       |
-| **List ConcertContacts**     | `listcc`                                                                                                                                                                     |
+| **List concert contacts**     | `listcc`                                                                                                                                                                     |
 | **Add Person**               | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​` <br> e.g., `add n/Alex Yeoh p/22224444 e/alexyeoh@example.com a/123, Clementi Rd, 1234665 r/Artist t/friend` |
 | **Add Concert**              | `addc n/NAME a/ADDRESS d/DATE `<br> e.g. `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010`                                    |
-| **Add ConcertContact**       | `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g. `addcc pi/1 ci/1`                                                                                                          |
+| **Add concert contact**       | `addcc pi/PERSON_INDEX ci/CONCERT_INDEX`<br> e.g. `addcc pi/1 ci/1`                                                                                                          |
 | **Delete Person**            | `deletep INDEX`<br> e.g., `deletep 3`                                                                                                                                        |
 | **Delete Concert**           | `deletec INDEX`<br> e.g., `deletec 3`                                                                                                                                        |
-| **Delete ConcertContact**    | `deletecc INDEX`<br> e.g., `deletecc 1`                                                                                                                                      |
+| **Delete concert contact**    | `deletecc INDEX`<br> e.g., `deletecc 1`                                                                                                                                      |
 | **Clear**                    | `clear`                                                                                                                                                                      |
 | **Find Person**              | `findp [n/NAME_KEYWORDS] [r/ROLE]`<br> e.g., `findp n/James Jake r/organiser`                                                                                                |
 | **Find Concert**             | `findc [n/NAME_KEYWORDS]`<br> e.g., `findc n/Coachella Glastonbury`                                                                                                          |
-| **Find ConcertContact**      | `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`<br> e.g., `findcc pi/1 ci/1`                                                                                                   |
+| **Find concert contact**      | `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`<br> e.g., `findcc pi/1 ci/1`                                                                                                   |
 | **Edit Person**              | `editp INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
 | **Edit Concert**             | `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`<br> e.g.,`editc 1 a/2 Stadium Drive d/2024-10-11 2200`                                                                           |
 | **Exit**                     | `exit`                                                                                                                                                                       |
