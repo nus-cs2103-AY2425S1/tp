@@ -37,7 +37,19 @@ public class UnstarCommandParserTest {
     public void parse_invalidName_throwsParseException() {
         // Assuming names cannot contain special characters, like '@'
         assertParseFailure(parser, "John @ Doe",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnstarCommand.MESSAGE_USAGE));
+                Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidIndex_throwsParseException() {
+        // Test with a negative index
+        assertParseFailure(parser, "-1",
+                ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Test with zero index
+        assertParseFailure(parser, "0",
+                ParserUtil.MESSAGE_INVALID_INDEX);
+
     }
 }
 

@@ -17,9 +17,12 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists relevant contacts\n"
+            + "Use 'list' only to view all contacts or 'list *' to list starred contacts\n"
+            + "Avoid adding extra parameters or text after 'list' or 'list *'"
             + "Parameters: [*] (to list starred contacts)\n"
-            + "Example: " + COMMAND_WORD
-            + "Example: " + COMMAND_WORD + " *";
+            + "Examples: \n"
+            + "- " + COMMAND_WORD + "\n"
+            + "- " + COMMAND_WORD + " *";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
     public static final String MESSAGE_EMPTY_LIST = "The list is currently empty.";
@@ -47,13 +50,13 @@ public class ListCommand extends Command {
 
         if (predicate == null) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            List<Person> lastShownList = model.getFilteredPersonList();
+            List<Person> lastShownList = model.getSortedPersonList();
             if (lastShownList.isEmpty()) {
                 return new CommandResult(MESSAGE_EMPTY_LIST);
             }
         } else {
             model.updateFilteredPersonList(predicate);
-            List<Person> lastShownList = model.getFilteredPersonList();
+            List<Person> lastShownList = model.getSortedPersonList();
             if (lastShownList.isEmpty()) {
                 return new CommandResult(MESSAGE_EMPTY_STARRED_LIST);
             }

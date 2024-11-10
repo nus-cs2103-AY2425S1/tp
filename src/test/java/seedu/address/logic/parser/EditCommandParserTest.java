@@ -75,9 +75,6 @@ public class EditCommandParserTest {
         // no name specified
         assertParseFailure(parser, "p/99999999", MESSAGE_INVALID_FORMAT);
 
-        // no field specified
-        assertParseFailure(parser, "Bob", EditCommand.MESSAGE_NOT_EDITED);
-
         // no name and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
@@ -129,6 +126,13 @@ public class EditCommandParserTest {
                                    + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
+
+    @Test
+    public void parse_noFieldsSpecified_success() {
+        // no field specified
+        EditCommand expectedCommand = new EditCommand(new Name("Bob"), new EditPersonDescriptor());
+        assertParseSuccess(parser, "Bob", expectedCommand);
+    }
     @Test
     public void parse_allFieldsSpecified_success() {
         Name targetName = NAME_FIRST_PERSON;

@@ -156,110 +156,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -291,19 +187,18 @@ Furthermore, it can provide easy categorisation and filtering of patients.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​         | I want to …​                                                  | So that I can…​                                               |
-| -------- | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|----------| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `* * *`  | New user       | add a new contact with multiple phone numbers (e.g. home, mobile, email address) | manage patient contact information and have multiple options for reaching them in an emergency. |
+| `* * *`  | User           | save addresses                                               | I have their location readily available.                     |
 | `* * *`  | User           | delete a contact                                             | remove outdated or incorrect contact information             |
 | `* * *`  | User           | list all contacts in one dashboard                           | easily view all the contacts that I have added.              |
 | `* * *`  | User           | find the patient contact by a keyword                        | I can search the patients’ contact instantly.                |
 | `* *`    | User           | edit an existing patient contact                             | I can update their details when necessary.                   |
-| `* *`    | User           | click on the patient contact in a dashboard                  | I can view more details and retrieve information faster during busy hours. |
 | `* *`    | User           | see all the texts and UI clearly                             | I don’t have to squint my eyes                               |
 | `* *`    | User           | import contacts from a file                                  | I can quickly fill in the address book with existing contact information. |
 | `* *`    | User           | export contacts to a file securely                           | I can share them with other authorized personnel or have a backup. |
 | `* *`    | Silly user     | receive confirmation before deleting a contact               | I don’t accidentally delete important information            |
 | `* *`    | User           | sort the patients according to appointment dates             | I can easily know which are the latest upcoming appointments |
-| `* *`    | User           | automatically see my frequently or recently accessed contacts in the dashboard | I can find them more easily.                                 |
 | `* *`    | User           | add a contact to my favorite list                            | I can quickly access important contacts                      |
 | `* *`    | User           | see alerts of duplicate contacts in the app                  | I can keep the contact list clean and avoid redundancy and confusion |
 | `* *`    | User           | tag patients with recurring appointments                     | I know those who need regular follow ups                     |
@@ -312,17 +207,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | User           | filter patients based on appointment dates                   | I can contact and remind them.                               |
 | `*`      | Potential user | see the app populated with some sample commands              | I can easily learn how to use the app.                       |
 | `*`      | User           | use the app to work offline                                  | I can use it even when there is no internet connection.      |
-| `*`      | User           | save addresses                                               | I have their location readily available.                     |
-| `*`      | User           | filter patients based on age groups                          | I can prioritize certain medical procedures                  |
-| `*`      | User           | export details of patients filtered by different criterias   | I can share them easily                                      |
-| `*`      | User           | view when each contact was added or last updated             | I know how up-to-date the information is                     |
-| `*`      | User           | set reminders to follow-up with certain contacts             | I can ensure good and punctual communication with patients.  |
-| `*`      | User           | print patient contact information directly from my address book | I can have a physical record if needed.                      |
-| `*`      | User           | archive inactive patient contacts rather than delete them    | I can keep their records without cluttering my contact list  |
-| `*`      | Expert user    | organise the patients into different albums                  | I can search for them in an organized way based on certain categories. |
-| `*`      | User           | manually log contact history with patients                   | I have a record of all communications and their corresponding dates |
-| `*`      | User           | receive alerts when a patient’s contact information hasn’t been updated in 5 years | I can reach out to check if it is updated                    |
-| `*`      | User           | set privacy preferences for each patient                     | their personal data is protected and only able to be accessed by authorized staff |
 
 ### Use cases
 
@@ -443,6 +327,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1b1. MediContact shows an error message specifying the incorrect format.
   
       Use case ends.
+
+* 4a. User clicks `Cancel`
+  Use case ends. 
 
 **Use case: Find a person**
 
@@ -690,10 +577,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: Confirmation dialog is triggered. <br><br>If confirmed, first contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: Confirmation dialog is triggered. <br><br>If confirmed, first contact is deleted from the list. Message reflecting delete action successful is shown.
       <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -704,11 +591,11 @@ testers are expected to do more *exploratory* testing.
        John Doe is an existing contact
 
     1. Test case: `delete John Doe`<br>
-       Expected: Confirmation dialog is triggered. <br><br>If confirmed, John Doe is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Confirmation dialog is triggered. <br><br>If confirmed, John Doe is deleted from the list. Message reflecting delete action successful is shown.
        <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
 
     1. Test case: `delete Jane Doe`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Error details shown in the status message.
 
 ### Editing a person
 
@@ -721,6 +608,12 @@ testers are expected to do more *exploratory* testing.
 
     3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
        Expected: Similar to previous results with relevant fields changed
+
+    4. Test case: `edit John Doe n/John Doe`<br>
+       Expected: Error message reflecting no changes detected
+
+    5. Test case: `edit John Doe n/John Doe b/35` (given that John Doe's age is not 35) <br>
+       Expected: Contact with name `John Doe` has age updated to 35
 
 2. Editing a non-existent person's field
 
@@ -807,8 +700,6 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case to try: `find somebody`, `find somebody 99999999`
        <br>Expected: Message displays that no one matches the criteria and list of contacts remain the same.
-
-### Importing an address book
 
 ### Listing contacts
 

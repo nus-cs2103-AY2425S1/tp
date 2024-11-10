@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -19,14 +20,13 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_VIEW_SUCCESS = "Viewing Note: %1$s";
     public static final String MESSAGE_FIELD_MISSING = "Both index and name must be provided.";
-    public static final String MESSAGE_INDEX_NOT_FOUND = "Invalid index provided..";
-    public static final String MESSAGE_NAME_NOT_FOUND = "Invalid person name provided.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows the details of the person identified "
-            + "by index number or full name of the person.\n"
+            + "by the full name or index in the address book.\n"
             + "Parameters: NAME or INDEX \n"
-            + "Example: " + COMMAND_WORD + " John Doe ";
+            + "Example: " + COMMAND_WORD + " John Doe\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     private final Name fullName;
     private final Index index;
@@ -82,11 +82,11 @@ public class ViewCommand extends Command {
      */
     private Person findPersonByName(List<Person> personList) throws CommandException {
         Optional<Person> personOptional = personList.stream()
-                .filter(person -> person.getName().equals(fullName))
+                .filter(person -> person.getName().toString().equalsIgnoreCase(fullName.toString()))
                 .findFirst();
 
         if (personOptional.isEmpty()) {
-            throw new CommandException(MESSAGE_NAME_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
         }
         return personOptional.get();
     }
@@ -102,7 +102,7 @@ public class ViewCommand extends Command {
         try {
             return personList.get(index.getZeroBased());
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandException(MESSAGE_INDEX_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 

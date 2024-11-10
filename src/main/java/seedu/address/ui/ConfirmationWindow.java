@@ -3,8 +3,11 @@ package seedu.address.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import seedu.address.commons.core.LogsCenter;
@@ -40,14 +43,22 @@ public class ConfirmationWindow extends UiPart<Stage> {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(contentText);
+
+        // Using text to solve UI constraint on Windows
+        Text text = new Text(contentText);
+        text.setWrappingWidth(500);
+
+        // Using VBox to adjust position of text as it is not automatically done
+        VBox contentBox = new VBox(text);
+        contentBox.setPadding(new Insets(25, 25, 10, 10));
+        alert.getDialogPane().setContent(contentBox);
 
         alert.getDialogPane()
-                .setStyle("-fx-background-color: #e0f7fa; -fx-font-size: 14px;");
+                .setStyle("-fx-background-color: derive(#CAE9FF, 50%); -fx-font-size: 16px;");
         alert.getDialogPane().lookupButton(ButtonType.OK)
-                .setStyle("-fx-background-color: #005b96; -fx-text-fill: #ffffff;");
+                .setStyle("-fx-background-color: #1B4965; -fx-text-fill: #ffffff;");
         alert.getDialogPane().lookupButton(ButtonType.CANCEL)
-                .setStyle("-fx-background-color: #99DDF8; -fx-text-fill: #000000;");
+                .setStyle("-fx-background-color: #5FA8D3; -fx-text-fill: #000000;");
 
         // Center the dialog on the main application window and make it modal.
         Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();

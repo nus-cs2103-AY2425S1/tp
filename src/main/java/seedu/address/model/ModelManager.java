@@ -138,6 +138,17 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} sorted alphabetically and
+     * backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getSortedPersonList() {
+        addressBook.sortByName();
+        return filteredPersons;
+    }
+
     @Override
     public int sortFilteredPersons() {
         logger.info("Sorting filtered person list by appointments.");
@@ -147,10 +158,10 @@ public class ModelManager implements Model {
             return -1;
         }
         addressBook.sortByAppointments();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         assert !filteredPersons.isEmpty() : "Filtered person list should not be empty after sorting.";
         return 1;
     }
-
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
