@@ -42,4 +42,17 @@ public class RoleTest {
         assertTrue(Role.isValidRoleName("Events (external)"));
     }
 
+    @Test
+    public void equals() {
+        Role president = new Role(Role.PRESIDENT);
+        // same object
+        assertTrue(president.equals(president));
+
+        // same role
+        assertTrue(new Role(Role.PRESIDENT).equals(new Role(Role.PRESIDENT)));
+
+        // not even a role class
+        assertFalse(new Role(Role.PRESIDENT).equals(null));
+    }
+
 }
