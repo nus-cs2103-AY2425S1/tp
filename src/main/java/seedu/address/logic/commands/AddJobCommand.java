@@ -27,7 +27,7 @@ public class AddJobCommand extends AddCommand<Job> {
             + PREFIX_COMPANY + "COMPANY "
             + PREFIX_SALARY + "MONTHLY_SALARY "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "[" + PREFIX_REQUIREMENTS + "REQUIREMENTS]... (Optional)\n"
+            + "[" + PREFIX_REQUIREMENTS + "REQUIREMENT]... (Optional)\n"
             + "Example: " + FULL_COMMAND + " "
             + PREFIX_NAME + "Waiter "
             + PREFIX_COMPANY + "Starbucks "
