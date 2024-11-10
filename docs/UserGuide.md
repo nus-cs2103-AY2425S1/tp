@@ -424,7 +424,7 @@ Action     | Format, Examples
 **Assign Wedding**    | `assign-wedding PERSON_INDEX w/WEDDING…​` or `asw PERSON_INDEX w/WEDDING…​` <br> e.g., `asw 2 w/Casey's Wedding w/Wedding August 29th`
 **Clear**  | `clear`
 **Create Tag**  | `create-tag t/TAG` or `ctag t/TAG` <br> e.g., `create-tag t/photographer`
-**Create Task**  | `create-task tk/TASK_DESCRIPTION [REMARKS]` or `ctask tk/TASK_DESCRIPTION [REMARKS]` <br> e.g., `create-task tk/Meet Caterer` <br> `ctask tk/Order Wedding Cake /by 2025-02-01` <br>
+**Create Task**  | `create-task tk/TASK_DESCRIPTION [REMARKS]` or `ctask tk/TASK_DESCRIPTION [REMARKS]` <br> e.g., `create-task tk/Meet Caterer` <br> `ctask tk/Order Wedding Cake d/2025-02-01` <br> `ctask tk/Bridal Gown Fittings d/2025-03-15 d/2025-03-17`
 **Create Wedding**  | `create-wedding w/WEDDING` or `cw w/WEDDING` <br> e.g., `cw w/JJ's Wedding`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `delete-tag t/TAG` or `dtag t/TAG` <br> e.g., `delete-tag t/photographer`
