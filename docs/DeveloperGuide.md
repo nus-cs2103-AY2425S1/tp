@@ -560,7 +560,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
 **Extensions**
 
-* 2a. PhysioPal detects that the client does not have a reminder note set.<br>
+* 1a. PhysioPal detects that the client does not have a reminder note set.<br>
   Use case resumes from step 3.
 
 **Use Case: UC07 - Displaying upcoming appointments on launch screen**
