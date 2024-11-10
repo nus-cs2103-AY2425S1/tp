@@ -43,8 +43,5 @@ public interface GoodsStorage {
      */
     void saveGoods(ReadOnlyReceiptLog goods) throws IOException;
 
-    /**
-     * @see #saveGoods(List)
-     */
     void saveGoods(ReadOnlyReceiptLog goods, Path filePath) throws IOException;
 }

@@ -51,7 +51,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
     /**
