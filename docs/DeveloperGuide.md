@@ -353,7 +353,7 @@ to record their students with their details, and access relevant information eas
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
+(For all use cases below, the **System** is the `GoonBook` and the **Actor** is the `Educator`, unless specified
 otherwise)
 
 **Use case: UC01 – Add new student**
@@ -414,7 +414,7 @@ Use case ends.
   Steps 4c1-4c2 are repeated until the data entered are correct.
   Use case resumes from step 5.
 
-**Use case: UC01 – Add new student**
+**Use case: UC02 – Search for student**
 
 **MSS**
 

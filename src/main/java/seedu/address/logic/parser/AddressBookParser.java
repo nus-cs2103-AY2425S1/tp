@@ -11,7 +11,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ConsecutiveCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -20,10 +19,10 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.GroupCommand;
-import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListGroupsCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -38,9 +37,6 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
-
-    private String lastCommandWord = null; // Track the last command executed
-    private String lastArgument = null;
 
     /**
      * Parses user input into command for execution.
@@ -63,89 +59,61 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        // Check if the command is consecutive
-        if (commandWord.equals(lastCommandWord) & arguments.equals(lastArgument)
-            && !commandWord.equals("delete") && !commandWord.equals("help")) {
-            return new ConsecutiveCommand(commandWord, arguments);
-        }
-        Command command;
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            command = new AddCommandParser().parse(arguments);
-            break;
+            return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-            command = new EditCommandParser().parse(arguments);
-            break;
+            return new EditCommandParser().parse(arguments);
 
         case ExportCommand.COMMAND_WORD:
-            command = new ExportCommand();
-            break;
+            return new ExportCommand();
 
         case DeleteCommand.COMMAND_WORD:
-            command = new DeleteCommandParser().parse(arguments);
-            break;
+            return new DeleteCommandParser().parse(arguments);
 
         case DeleteGroupCommand.COMMAND_WORD:
-            command = new DeleteGroupCommandParser().parse(arguments);
-            break;
+            return new DeleteGroupCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            command = new ClearCommand();
-            break;
+            return new ClearCommand();
 
         case FindGroupCommand.COMMAND_WORD:
-            command = new FindGroupCommandParser().parse(arguments);
-            break;
+            return new FindGroupCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
-            command = new FindCommandParser().parse(arguments);
-            break;
+            return new FindCommandParser().parse(arguments);
 
         case ImportCommand.COMMAND_WORD:
-            command = new ImportCommandParser().parse(arguments);
-            break;
+            return new ImportCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            command = new ListCommand();
-            break;
+            return new ListCommand();
 
-        case GroupsCommand.COMMAND_WORD:
-            command = new GroupsCommand();
-            break;
+        case ListGroupsCommand.COMMAND_WORD:
+            return new ListGroupsCommand();
 
         case GroupCommand.COMMAND_WORD:
-            command = new GroupCommandParser().parse(arguments);
-            break;
+            return new GroupCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
-            command = new ExitCommand();
-            break;
+            return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            command = new HelpCommand();
-            break;
+            return new HelpCommand();
 
         case TagCommand.COMMAND_WORD:
-            command = new TagCommandParser().parse(arguments);
-            break;
+            return new TagCommandParser().parse(arguments);
 
         case UntagCommand.COMMAND_WORD:
-            command = new UntagCommandParser().parse(arguments);
-            break;
+            return new UntagCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 
-
         }
-
-        // Only update lastCommandWord if parsing was successful
-        lastCommandWord = commandWord;
-        lastArgument = arguments;
-        return command;
     }
 
 }
