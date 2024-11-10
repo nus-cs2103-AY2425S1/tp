@@ -7,7 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -32,14 +31,13 @@ public class JsonSerializableAddressBookTest {
     private static final Path DUPLICATE_WEDDING_FILE = TEST_DATA_FOLDER.resolve("duplicateWeddingAddressBook.json");
     private static final Path DUPLICATE_TASK_FILE = TEST_DATA_FOLDER.resolve("duplicateTaskAddressBook.json");
 
-    @Disabled
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        assertEquals(typicalPersonsAddressBook, addressBookFromFile);
+        AddressBook typicalPersonsAddressBook = TypicalPersons.resetTypicalAddressBook();
+        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
     // Tests for invalid entities in Wedlinker storage

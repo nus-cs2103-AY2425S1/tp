@@ -25,7 +25,7 @@ public class AssignVendorCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Assigns the person identified by the index number used in the last person listing "
             + "as a vendor.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer) \n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
     private final Index targetIndex;
