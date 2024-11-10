@@ -13,7 +13,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser implements Parser<ListCommand> {
-
     private static final List<String> ACCEPTED_ARGUMENTS =
             List.<String>of("all", "contacts", "allcontacts");
 
@@ -37,6 +36,11 @@ public class ListCommandParser implements Parser<ListCommand> {
 
     private boolean validateArgument(String argument) {
         boolean isArgumentEmpty = argument.isEmpty();
+        boolean isArgumentPresentAndValid = checkifArgumentPresentAndValid(argument, isArgumentEmpty);
+        return isArgumentEmpty || isArgumentPresentAndValid;
+    }
+
+    private static boolean checkifArgumentPresentAndValid(String argument, boolean isArgumentEmpty) {
         boolean isArgumentPresentAndValid = false;
         if (!isArgumentEmpty) {
             List<String> commandDescription = List.of(argument.split("\\s+"));
@@ -44,6 +48,6 @@ public class ListCommandParser implements Parser<ListCommand> {
                     commandDescription.stream()
                             .allMatch(word -> ACCEPTED_ARGUMENTS.contains(word));
         }
-        return isArgumentEmpty || isArgumentPresentAndValid;
+        return isArgumentPresentAndValid;
     }
 }

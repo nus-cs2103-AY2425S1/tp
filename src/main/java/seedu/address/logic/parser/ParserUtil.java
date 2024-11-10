@@ -21,9 +21,7 @@ import seedu.address.model.contact.TelegramHandle;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     public static final String MESSAGE_NAME_FIELD_CANNOT_BLANK = "Name " + MESSAGE_BLANK_FIELD;
     public static final String MESSAGE_EMAIL_FIELD_CANNOT_BLANK = "Email " + MESSAGE_BLANK_FIELD;
     public static final String MESSAGE_TELEGRAM_HANDLE_FILED_CANNOT_BLANK =
@@ -162,5 +160,19 @@ public class ParserUtil {
         requireNonNull(nickname);
         String trimmedNickname = nickname.trim();
         return new Nickname(trimmedNickname);
+    }
+
+    /**
+     * Used by EditCommandParser and DeleteCommandParser to check if the number entered is a valid integer
+     * @param args the preamble (edit 1 ...)
+     * @return true if it is non-zero to MAX_INT, otherwise false (edit LARGE_NUMBER or delete -1)
+     */
+    public static boolean isInteger(String args) {
+        try {
+            Integer.parseInt(args); // can pass negative integers as well
+            return true;
+        } catch (Exception exp) {
+            return false;
+        }
     }
 }

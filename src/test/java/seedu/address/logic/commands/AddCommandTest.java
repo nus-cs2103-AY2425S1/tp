@@ -76,7 +76,7 @@ public class AddCommandTest {
         executeAssertionHelper(MESSAGE_DUPLICATE_FIELD_CONTACT, contactPresident, contactDuplicatePresident);
     }
 
-    private void executeAssertionHelper (
+    private void executeAssertionHelper(
             String expected,
             Contact validContact,
             Contact contactDuplicateField

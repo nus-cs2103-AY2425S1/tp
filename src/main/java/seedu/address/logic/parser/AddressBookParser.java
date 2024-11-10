@@ -30,7 +30,7 @@ public class AddressBookParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
     private static final int MAX_LENGTH = 1000;
-    private static final String MESSAGE_TOO_LONG = "The command inputted has more than "
+    public static final String MESSAGE_TOO_LONG = "The command inputted has more than "
             + MAX_LENGTH
             + " characters. Do not test me";
 
@@ -45,6 +45,8 @@ public class AddressBookParser {
         if (hasExceededMaxLength(userInput)) {
             throw new ParseException(MESSAGE_TOO_LONG);
         }
+
+        assert(userInput.length() <= MAX_LENGTH);
 
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {

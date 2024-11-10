@@ -112,12 +112,10 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownFilteredList = model.getFilteredContactList();
         List<Contact> allContactList = model.getAllContactList();
-        // System.out.println("attempting to execute EditCommand, targetIndex = " + targetIndex);
 
         if (targetIndex == null) {
             screenDuplicate(allContactList);
             setTargetIndex(lastShownFilteredList);
-            // System.out.println("Have set Target Index: " + targetIndex);
         }
         assert(targetIndex != null);
 
@@ -147,7 +145,6 @@ public class EditCommand extends Command {
                 .filter(contact -> contact.getName().equalsIgnoreCase(targetName))
                 .map(lastShownList::indexOf)
                 .reduce(invalidTargetIndex, (x, y) -> y);
-        // System.out.println("temp = " + temp);
         if (temp == invalidTargetIndex) {
             throw new CommandException(String.format(Messages.MESSAGE_CONTACT_NOT_IN_ADDRESS_BOOK,
                     targetName));

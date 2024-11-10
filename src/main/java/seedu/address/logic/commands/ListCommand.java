@@ -11,13 +11,9 @@ import seedu.address.model.Model;
  * Lists all contacts in the address book to the user.
  */
 public class ListCommand extends Command {
-
     public static final String COMMAND_WORD = "list";
-
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
-
     public static final String MESSAGE_FUNCTION = "List is to show all contacts, as opposed to find command.";
-
     public static final String MESSAGE_COMMAND_FORMAT = styleCommand(COMMAND_WORD);
     public static final String MESSAGE_COMMAND_FORMAT_ALT_VERSION_ONE =
             styleCommand(COMMAND_WORD + WHITESPACE + "all");

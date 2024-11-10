@@ -46,7 +46,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(FindCommand.MESSAGE_MISSING_PREFIX);
         }
 
-        // repeat in add command
+        // if a prefix does not immediately follow after the command word, error
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(FindCommand.MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX);
         }
@@ -73,13 +73,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (argMultimap.getValue(PREFIX_STUDENT_STATUS).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_STUDENT_STATUS).get();
             studentStatusKeywords = getKeywords(arg);
-
         }
         if (argMultimap.getValue(PREFIX_NICKNAME).isPresent()) {
             String arg = argMultimap.getValue(PREFIX_NICKNAME).get();
             nicknameKeywords = getKeywords(arg); // nickname no parsing problem
         }
-
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
             Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
             roleKeywords = roleList.stream().map(role -> role.roleName).toList();

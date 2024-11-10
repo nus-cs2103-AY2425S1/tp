@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.commands.AddCommand.MESSAGE_MISSING_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -140,6 +141,10 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
+        // everything is missing
+        assertParseFailure(parser, "",
+                MESSAGE_MISSING_DESCRIPTION);
+
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB
                         + STUDENT_STATUS_DESC_BOB + ROLE_DESC_ADMIN,

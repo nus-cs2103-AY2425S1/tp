@@ -88,6 +88,16 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredContactList().remove(0));
     }
 
+    @Test
+    public void getAddressBook_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getAddressBook().getContactList().remove(0));
+    }
+
+    @Test
+    public void getAllContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getAllContactList().remove(0));
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
