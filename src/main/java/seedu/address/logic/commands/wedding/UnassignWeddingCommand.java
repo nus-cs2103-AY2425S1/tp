@@ -88,26 +88,7 @@ public class UnassignWeddingCommand extends Command {
 
         updatedWeddings.removeAll(weddingsToRemove);
 
-        Person editedPerson;
-        if (personToEdit instanceof Vendor) {
-            editedPerson = new Vendor(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getTags(),
-                    updatedWeddings,
-                    personToEdit.getTasks());
-        } else {
-            editedPerson = new Person(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getTags(),
-                    updatedWeddings,
-                    personToEdit.getTasks());
-        }
+        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, updatedWeddings);
 
         // Remove Wedding from Person
         model.setPerson(personToEdit, editedPerson);

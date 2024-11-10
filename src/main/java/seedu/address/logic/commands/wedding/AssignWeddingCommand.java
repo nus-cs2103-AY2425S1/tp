@@ -137,26 +137,7 @@ public class AssignWeddingCommand extends Command {
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
         updatedWeddings.addAll(modelWeddings);
 
-        Person editedPerson;
-        if (personToEdit instanceof Vendor) {
-            editedPerson = new Vendor(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getTags(),
-                    updatedWeddings,
-                    personToEdit.getTasks());
-        } else {
-            editedPerson = new Person(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getTags(),
-                    updatedWeddings,
-                    personToEdit.getTasks());
-        }
+        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, updatedWeddings);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

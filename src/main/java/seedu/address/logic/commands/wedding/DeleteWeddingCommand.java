@@ -13,7 +13,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Deletes a wedding identified using its wedding name in the Wedlinker.
@@ -66,18 +68,9 @@ public class DeleteWeddingCommand extends Command {
                         for (Person person : model.getFilteredPersonList()) {
                             HashSet<Wedding> personWeddings = new HashSet<>(person.getWeddings());
                             if (personWeddings.contains(wedding)) {
-                                personWeddings.remove(wedding);
-                                Person newPerson = new Person(
-                                        person.getName(),
-                                        person.getPhone(),
-                                        person.getEmail(),
-                                        person.getAddress(),
-                                        person.getTags(),
-                                        personWeddings,
-                                        person.getTasks()
-                                );
+                                Person newPerson = PersonWeddingUtil.getNewPerson(person, personWeddings);
+                                newPerson.removeWedding(wedding);
                                 model.setPerson(person, newPerson);
-                                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                             }
                         }
                         model.deleteWedding(wedding);
