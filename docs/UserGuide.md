@@ -471,7 +471,7 @@ Displays the list of students who are either present or absent for a specific at
 
 You can create multiple attendance events in one command:
 
-- `createattendance e/Tutorial 1 e/Tutorial 2 e/Lecture 1`
+- `createattn e/Tutorial 1 e/Tutorial 2 e/Lecture 1`
     - Creates three events: "Tutorial 1", "Tutorial 2", and "Lecture 1".
 
 **Important Notes:**
@@ -515,10 +515,10 @@ Unmark multiple students as absent:
 
 List students based on their attendance status:
 
-- `listattendance e/Tutorial 1 s/present`
+- `listattn e/Tutorial 1 s/present`
     - Shows students marked as present for "Tutorial 1".
 
-- `listattendance e/Tutorial 1 s/absent`
+- `listattn e/Tutorial 1 s/absent`
     - Shows students marked as absent for "Tutorial 1".
 
 ### Common Errors and Solutions
@@ -608,9 +608,9 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
 **Exit** | `exit`
-**Create Attendance Event** | `createattn e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `createattendance e/Tutorial 1 e/Lab Session`
+**Create Attendance Event** | `createattn e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `createattn e/Tutorial 1 e/Lab Session`
 **Delete Attendance Event** | `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `deleteevent e/Tutorial 1 e/Lab Session`
 **List Attendance Events** | `listevents`
 **Mark Attendance** | `mark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `mark e/Tutorial 1 i/1 i/2`
 **Unmark Attendance** | `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `unmark e/Tutorial 1 i/1 i/2`
-**List Attendance** | `listattn e/EVENT_NAME s/STATUS`<br> e.g., `listattendance e/Tutorial 1 s/present`
+**List Attendance** | `listattn e/EVENT_NAME s/STATUS`<br> e.g., `listattn e/Tutorial 1 s/present`
