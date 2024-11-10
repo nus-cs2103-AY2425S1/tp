@@ -667,7 +667,7 @@ _Similar to UC10 except without extension 2b._
 
       Use case ends.
 
-- 2b. The details entered are invalid.
+- 2b. The details entered are invalid or are in the wrong format.
 
     - 2b1. System shows an error message.
 

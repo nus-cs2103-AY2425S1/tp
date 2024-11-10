@@ -94,7 +94,7 @@ Names with additional white spaces in between words will be taken as it is.
 The application will throw an error if you attempt to create two users with the same names
 
 **Phone Numbers:**
-Only Singapore phone numbers are allowed by the application. Meaning, that only phone numbers starting with the number 6, 8 or 9 and is exactly 8 digits in total is allowed.
+Only Singapore phone numbers are allowed by the application. Meaning, that only phone numbers starting with the number 6, 8 or 9 and are exactly 8 digits in total is allowed.
 </div>
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
@@ -370,7 +370,7 @@ Examples:
 
 Easily cycle through your previous **successfully executed** commands by using the Up and Down arrow keys on your keyboard.
 
-Format: `Up arrow`
+Format: the Up and down arrow key on your **keyboard**
 
 - Up Arrow: Pressing the Up arrow key allows you to scroll backward through your command history, one command at a time.
 - Down Arrow: Pressing the Down arrow key moves forward through your command history, allowing you to revisit more recent commands.
@@ -399,6 +399,13 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+---
+
+## Future Features
+
+1) While we are aware of the possibility of international numbers, for this iteration, we decided to focus on the local population.
+
 
 ---
 
