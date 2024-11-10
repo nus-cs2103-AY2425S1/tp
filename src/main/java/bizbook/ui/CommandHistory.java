@@ -28,7 +28,7 @@ public class CommandHistory {
      * @param command the command to add.
      * */
     public void addCommand(String command) {
-        assert (command != null);
+        assert command != null : "Command must not be null";
         history.add(command);
         currentIndex = history.size(); // Set to after the last command
         logger.info("Added command to command history: " + command);
