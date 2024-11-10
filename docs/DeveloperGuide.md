@@ -646,15 +646,21 @@ testers are expected to do more *exploratory* testing.
 
 1. Undoing a `delete` command
 
-   1. Prerequisites: The previous command is a `delete` command.
+   1. Prerequisites: The previous successfully executed command is a `delete` command.
    2. Test case: `undo`<br>
       Expected: The previous deletion is reverted. Details of the restored contact shown in the status message.
+
+1. Undoing a `clear` command
+
+   1. Prerequisites: The previous successfully executed command is a `clear` command.
+   2. Test case: `undo`<br>
+      Expected: All contacts that were cleared are restored. Result "Address book has been restored" shown in the status message.
 
 1. No command to undo
 
    1. Prerequisites: No undoable commands have been executed since the starting of the app.
    2. Test case: `undo`<br>
-      Expected: No command is undone. Error message displayed in the status message.
+      Expected: No command is undone. Error message "No commands to undo" displayed in the status message.
 
 ## **Appendix: Planned enhancements**
 
@@ -664,7 +670,7 @@ Team size: 5
 students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to 
 add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
 
-1. **Add the support for setting EmergencyName, EmergencyPhone and GraduationYear using the `add` command.**
+1. **Add support for setting EmergencyName, EmergencyPhone and GraduationYear using the `add` command.**
 The `add` command currently does not allow setting emergency contact details and graduation year of students.
 The only way to set these fields is through the `edit` command, which can be inconvenient for users.
 We plan to add support for setting EmergencyName, EmergencyPhone and GraduationYear to the `add` command.
