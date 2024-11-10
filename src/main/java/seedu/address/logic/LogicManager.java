@@ -56,8 +56,10 @@ public class LogicManager implements Logic {
         if (!checkFile.exists()) {
             try {
                 storage.saveAddressBook(model.getVersionedAddressBook());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (AccessDeniedException e) {
+                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
             }
         }
 
