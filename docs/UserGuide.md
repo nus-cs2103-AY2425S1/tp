@@ -497,7 +497,7 @@ cancel INDEX
 
 Valid Example:
 * `list -e` followed by `cancel 1` deletes the 1st event in the address book.
-![CancelEventExample1.png](images%2FCancelEventExample1.png)
+![CancelEventExample1.png](images/CancelEventExample1.png)
 
 
 
