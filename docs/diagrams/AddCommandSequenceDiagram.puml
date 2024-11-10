@@ -43,6 +43,7 @@ AddCommandParser --> AddressBookParser : r
 deactivate AddCommandParser
 
 AddCommandParser -[hidden]-> AddressBookParser
+destroy AddCommandParser
 
 AddressBookParser --> LogicManager : r
 deactivate AddressBookParser

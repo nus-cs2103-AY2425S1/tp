@@ -25,6 +25,7 @@ activate FSC
 return f
 return f
 return f
+destroy FSCP
 LM -> FSC ++ : execute(model)
 FSC -> Model ++ : updateFilteredPersonList(predicate)
 return

@@ -26,6 +26,7 @@ activate MFC
 return f
 return f
 return f
+destroy MCP
 LM -> MFC ++ : execute(model)
 MFC -> Model ++ : updateFilteredPersonList(predicate)
 return
