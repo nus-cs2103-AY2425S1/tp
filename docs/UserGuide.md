@@ -10,7 +10,7 @@ for use via a **Command Line Interface (CLI)** which improves speed of usage whi
 If you can type fast, PawPatrol can manage pet owner and pet data faster than traditional organisation apps.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
