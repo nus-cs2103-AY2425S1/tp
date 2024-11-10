@@ -280,6 +280,32 @@ findi i/swim
 ```
 <img src="images/findPplSwimming.png" alt="result for 'find i/swimming'" style="width: 80%;">
 
+Invalid Input: searching by multiple interests in the following formats is not supported:
+```plaintext
+findi i/reading i/swimming
+```
+```plaintext
+findi i/reading,i/swimming
+```
+```plaintext
+findi i/reading, i/swimming
+```
+```plaintext
+findi i/reading swimming
+```
+```plaintext
+findi i/reading,swimming
+```
+```plaintext
+findi i/reading, swimming
+```
+They will trigger an error message:
+```plaintext
+Invalid command format! 
+findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers.
+Parameters: i/KEYWORD
+```
+
 <br>
 
 ### Finding Contacts by Work Experience: `findw`
