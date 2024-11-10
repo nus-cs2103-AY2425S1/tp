@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("delete 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete 1")
+activate AddressBookParser
+
+create DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> AddressBookParser
+deactivate DeleteCommandParser
+
+AddressBookParser -> DeleteCommandParser : parse(arg)
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand : new DeleteCommand("CS3230")
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser
+deactivate DeleteCommand
+
+DeleteCommandParser --> AddressBookParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> AddressBookParser
+destroy DeleteCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteCommand : execute(model)
+activate DeleteCommand
+
+ref over DeleteCommand : Execute delete command
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+DeleteCommand -[hidden]-> LogicManager
+destroy DeleteCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml

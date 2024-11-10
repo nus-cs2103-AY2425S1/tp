@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":AddStudentCommandParser" as AddStudentCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "command:AddStudentCommand" as AddStudentCommand LOGIC_COLOR
+end box
+
+[-> AddStudentCommandParser : parse(...)
+activate AddStudentCommandParser
+
+create ParserUtil
+AddStudentCommandParser -> ParserUtil : parseName("John Doe")
+activate ParserUtil
+
+AddStudentCommandParser -> ParserUtil : parsePhone("98765432")
+
+AddStudentCommandParser -> ParserUtil : parseEmail("johnd@example.com")
+
+AddStudentCommandParser -> ParserUtil : parseAddress("John street, block 123, #01-01")
+
+AddStudentCommandParser -> ParserUtil : parseLessonTime("mon:12:00")
+
+AddStudentCommandParser -> ParserUtil : parseEducation("Primary")
+
+AddStudentCommandParser -> ParserUtil : parseGrade("0")
+
+AddStudentCommandParser -> ParserUtil : parseTags([])
+
+deactivate ParserUtil
+
+create AddStudentCommand
+AddStudentCommandParser -> AddStudentCommand : new AddStudentCommand(student)
+activate AddStudentCommand
+
+AddStudentCommand --> AddStudentCommandParser : command
+deactivate AddStudentCommand
+
+[<-- AddStudentCommandParser : command
+deactivate AddStudentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+[<-[hidden]- AddStudentCommandParser
+destroy AddStudentCommandParser
+
+@enduml

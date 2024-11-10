@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":AddParentCommandParser" as AddParentCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "command:AddParentCommand" as AddParentCommand LOGIC_COLOR
+end box
+
+[-> AddParentCommandParser : parse(...)
+activate AddParentCommandParser
+
+create ParserUtil
+AddParentCommandParser -> ParserUtil : parseName("John Doe")
+activate ParserUtil
+
+AddParentCommandParser -> ParserUtil : parsePhone("98765432")
+
+AddParentCommandParser -> ParserUtil : parseEmail("johnd@example.com")
+
+AddParentCommandParser -> ParserUtil : parseAddress("John street, block 123, #01-01")
+
+deactivate ParserUtil
+
+create AddParentCommand
+AddParentCommandParser -> AddParentCommand : new AddParentCommand(parent)
+activate AddParentCommand
+
+AddParentCommand --> AddParentCommandParser : command
+deactivate AddParentCommand
+
+[<-- AddParentCommandParser : command
+deactivate AddParentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+[<-[hidden]- AddParentCommandParser
+destroy AddParentCommandParser
+
+@enduml
