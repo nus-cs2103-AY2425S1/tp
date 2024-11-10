@@ -3,12 +3,15 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
+import static seedu.address.model.addresses.PublicAddressesComposition.MESSAGE_DUPLICATE_PUBLIC_ADDRESS;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -35,11 +38,8 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
         + "wallet1 " + PREFIX_PUBLIC_ADDRESS + "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
 
     public static final String MESSAGE_ADDPA_SUCCESS = "Added Person's Public Address: %1$s";
-    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: %1$s\n"
-        + "You may either:\n"
-        + "1. Use another label for the new public address\n"
-        + "2. Edit the existing public address for the current label"
-        + "(overwrite) using the editpa command\n";
+
+    private EditPersonDescriptor editPersonDescriptor;
 
     /**
      * Adds a public address to the person identified by the index number
@@ -50,6 +50,7 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
      */
     public AddPublicAddressCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         super(index, editPersonDescriptor);
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     private static Person mergePersons(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
@@ -77,6 +78,25 @@ public class AddPublicAddressCommand extends AbstractEditCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
+        // check if the public address already exists
+
+        String paToAdd = editPersonDescriptor.getPublicAddresses()
+                .map(PublicAddressesComposition::getOnePublicAddress)
+                .get()
+                .getPublicAddressString();
+
+        List<String> allPAs = model.getAddressBook().getPersonList().stream()
+                .flatMap(person -> person.getPublicAddressesComposition().getAllPublicAddresses().stream())
+                .map(PublicAddress::getPublicAddressString)
+                .toList();
+
+        for (String pa : allPAs) {
+            if (paToAdd.equals(pa)) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS, paToAdd));
+            }
+        }
+
         try {
             return super.execute(
                 model,
