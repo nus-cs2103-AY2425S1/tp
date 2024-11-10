@@ -42,9 +42,9 @@ By following these sections, you can quickly find the information you need and m
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
    * You can check your Java version by following the instructions [here](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line).
-   * If you do not have Java `17` or above installed in your Computer, you can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
+   * If you do not have Java `17` or above installed in your computer, you can download Java from [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
 2. Download the latest release of the `medconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-1/tp/releases).
 
