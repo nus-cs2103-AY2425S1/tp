@@ -108,6 +108,14 @@ Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 Examples:
 * `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
 
+<div markdown="span" class="alert alert-info">
+:exclamation: **About Owner's NRIC in list**<br>
+
+Due to PDPA regulations, only the last 3 digits and last letter of the NRIC will be shown in the list view.<br>
+The first 4 numbers of the NRIC will be replaced with a `X` to protect the privacy of the owner.
+
+</div>
+
 #### <u>Adding a pet</u>
 
 Adds a pet to PawPatrol.
