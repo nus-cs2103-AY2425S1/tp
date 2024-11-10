@@ -19,7 +19,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your CFG.
+3. Copy the file to the folder you want to use as the _home folder_ for CFG.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar contactsforgood.jar` command to run the application.<br>
    
@@ -32,7 +32,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
    * `list` : Lists all contacts.
 
    * `add r/volunteer h/30 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
-     contact named `John Doe` with a `volunteer` role to the Address Book.
+     contact named `John Doe` with a `volunteer` role to CFG.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -114,7 +114,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
 ### Adding a contact: `add`
 
-This command adds a contact to the address book.
+This command adds a contact to CFG.
 There are 4 types of contacts: Volunteer, Donor, Partner, Person(default)
 
 Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
@@ -152,13 +152,13 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from CFG.
 
 Format: `clear`
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from CFG.
 
 Format: `delete INDICES`
 
@@ -174,13 +174,13 @@ Format: `delete INDICES`
 </box>
 
 Examples:
-* `list` followed by `delete 2 4 6-8` deletes the 2nd, 4th, 6th, 7th, and 8th persons in the address book.
+* `list` followed by `delete 2 4 6-8` deletes the 2nd, 4th, 6th, 7th, and 8th persons in CFG.
 * `search n/Betsy` followed by `delete 1 3-5` deletes the 1st, 3rd, 4th, and 5th persons in the results of the
   `search` command.
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in CFG.
 
 Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
@@ -188,7 +188,7 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in the address book**.
+* The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in CFG**.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
@@ -237,7 +237,7 @@ Examples: <br>
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in CFG.
 
 Format: `list`
 
@@ -387,7 +387,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CFG data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -405,7 +405,7 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CFG home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
