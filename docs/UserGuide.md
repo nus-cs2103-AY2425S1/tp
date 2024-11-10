@@ -219,13 +219,14 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 </box>
 
 Examples: <br>
-1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role`: donor `group`: blood drive<br>
-2. **Person B:** `name`: Alex Yeoh `tag`: friends `phone number`: 91234567 `role`: volunteer <br>
-3. **Person C:** `name`: David Li `tag`: friends `phone number`: 81234123 `role`: person `group`: blood drive
-* `search n/john` returns persons with the name `john` like `John Doe`
-* `search g/blood drive` returns all persons in group `blood drive` like `John Doe` and `David Li`
-* `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
-  ![result for 'search alex david'](images/search_alex_david.png)
+1. **Person A:** `name`: Alex Yeoh `tag`: friends `phone number`: 87438807 `role`: person <br>
+2. **Person B:** `name`: Irfan Ibrahim  `tag`: classmates `phone number`: 92492021 `role`: person <br>
+3. **Person C:** `name`: Charlotte Oliveiro `tag`: neighbours `phone number`: 93210283 `role`: person
+* `search n/alex` returns persons with the name `alex` like `Alex Yeoh`.
+* `search r/person` returns all contacts with role `Person` like `Alex Yeoh`, `Irfan Ibrahim` and `Charlotte Oliveiro`.
+* `search n/charlotte t/neighbours p/93210283` returns all persons with name matching `charlotte`, tag matching `neighbours`, `phone number` 93210283 like `Charlotte Oliveiro`. <br>
+
+![result for 'search charlotte'](images/search_charlotte.png)
 
 ### Listing all persons : `list`
 
