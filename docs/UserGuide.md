@@ -1,7 +1,7 @@
 
 # Vendor Vault User Guide
 
-Vendor Vault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a  Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps.
+Vendor Vault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a  Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. Vendor Vault is targeted at small convenience/grocery stores. 
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -32,7 +32,7 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
@@ -52,7 +52,7 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help` `clear` and `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
 
 * For all parameters, starting and ending spaces are trimmed.
@@ -82,12 +82,12 @@ Action     | Format, Examples
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-delivery-add--d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-**[Delete](#deleting-a-delivery--delete--d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
-**[List](#listing-all-deliveries-list--d)**   | `list -d`
-**[Mark](#marking-a-delivery--mark--d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
-**[Find](#find-a-delivery-find--d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
-**[Sort](#sort-deliveries-sort--d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
+**[Add](#adding-a-delivery-add-d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**[Delete](#deleting-a-delivery-delete-d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
+**[List](#listing-all-deliveries-list-d)**   | `list -d`
+**[Mark](#marking-a-delivery-mark-d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+**[Find](#find-a-delivery-find-d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
+**[Sort](#sort-deliveries-sort-d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
 **[Upcoming](#upcoming-deliveries-upcoming)** | `upcoming aft/START_DATE bef/END_DATE`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
 
 
@@ -96,6 +96,7 @@ Action     | Format, Examples
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **[List](#viewing-all-deliveries-and-suppliers-list)**   | `list -a`
+**[Clear](#clearing-all-suppliers-and-deliveries-clear)**   | `clear`
 **[Help](#viewing-help-help)**   | `help`
 **[Exit](#exiting-the-program-exit)**   | `exit`
 
@@ -125,89 +126,140 @@ Format: `list -a`
 - At least one space between list and -a
 </box>
 
+### Clearing all suppliers and deliveries : `clear`
+
+Clear all data regarding suppliers and deliveries in vendor vault
+
+Format: `clear`
+
 ---
 
 ## <ins> Supplier Commands </ins>
 
 ### Adding a supplier: `add -s`
 
-Adds a supplier to the address book.
+Adds a supplier to VendorVault.
 
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
-<box type="tip" seamless>
+
+<box type="details" seamless>
 
 Parameters:
 
-- `n/NAME`: Must be alphanumeric, and must not be blank.
-- `p/PHONE`: Must be numeric, must contain at least 3 digits, and must not be blank.
-- `e/EMAIL`: Must be a valid email address, and must not be blank.
-- `com/COMPANY`: Must be alphanumeric, and must not be blank.
-- `[t/TAG]`: Must be alphanumeric, and must be between 1 and 50 (inclusive) characters long.
-- `[pro/PRODUCT]`: Must be alphanumeric, can include spaces, and must be between 1 and 50 (inclusive) characters long.
+- `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
+- `p/PHONE`: `PHONE` is the supplier's phone number. It must be numeric, and contain at least 3 digits.
+- `e/EMAIL`: `EMAIL` is the supplier's email address. It must be in a valid email address format, and cannot be blank.
+  - Please see [below](#valid-email-address-format) for more information on what constitutes a valid email address format.
+- `com/COMPANY`: `COMPANY` is the company associated with the supplier. It must be in a valid company name format, and cannot be blank.
+  - Please see [below](#valid-company-name-format) for more information on what constitutes a valid company name format.
+- `[t/TAG]`: `TAG` is the tag(s) associated with the supplier. It must be alphanumeric, and only contain between 1 and 50 (inclusive) characters.
+- `[pro/PRODUCT]`: `PRODUCT` is the product(s) associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
+  - One space is counted as one character.
+  - A product name cannot be made up of only spaces.
 
-**Tip:** A supplier can have any number of tags and products (including 0)
-
-**Tip:** A supplier has a default status of `active`
+**Tip:** A supplier can have any number of `TAG` and `PRODUCT` (including 0).
+- To include multiple `TAG`, use multiple `t/TAG`.
 
 </box>
 
 <box type="warning" seamless>
 
 **Warnings**:
-- At least one space between `add` and `-s`
-- Duplicate supplier will not be added again
-- A supplier is considered duplicate if they have the same `NAME` and `COMPANY`
-- Adding duplicate `TAG`/`PRODUCT` will result in only one copy added to the supplier
-- A tag/product is considered duplicate if they have the same `TAG`/`PRODUCT`
+- At least one space is needed between `add` and `-s`.
+- A warning will be given if the user tries to add a duplicate supplier.
+- A supplier is considered duplicate if they have the same `NAME` and `COMPANY`.
+  - Comparison between different `NAME`is case-sensitive.
+  - Comparison between different `COMPANY` is case-insensitive.
+- Adding duplicate `TAG`/`PRODUCT` will result in only one copy being added to the supplier.
+  - Comparison between different `TAG`/`PRODUCT` is case-sensitive.
+- A supplier has a default `STATUS` of `active`.
+
 </box>
 
 Examples:
-* `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
-* `add -s n/Betsy Crowe p/98223232 e/betsycrowe@example.com com/Newgates t/urgent pro/soap`
+- `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
+- `add -s n/Betsy Crowe p/98223232 e/betsycrowe@example.com com/Newgates t/urgent pro/soap`
 
 Expected output:
-* `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products [bread][rice]; Status: active`
-* `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products [soap]; Status: active`
+- `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companya; Tags: [owesMoney][friends]; Products: [bread][rice]; Status: active`
+- `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: newgates; Tags: [urgent]; Products: [soap]; Status: active`
 
 #### Here's how it would look like in the app:
+TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![add Command](images/addSupplierCommand.png)
+
+#### Valid email address format
+
+Valid email addresses are of the format: `local-part@domain`.  
+Both `local-part` and `domain` must start and end with alphanumeric characters.  
+Special characters cannot be used consecutively.
+
+`local-part` must be alphanumeric, or these special characters: `+.-_`.
+
+`domain` must be alphanumeric, or these special characters: `.-`.  
+`domain` can be separated into multiple parts with `.`, and the last part must be at least 2 alphanumeric characters.  
+- Each part must start and end with alphanumeric characters.
+- e.g. `example.com` is separated into two parts, `example` and `com`, and is a valid `domain`.
+
+Valid email address examples:
+- john.doe@example.com
+- user123@my-website.com
+- first.last@school.edu.sg
+
+Invalid email address examples:
+- john.@example.com (`local-part` (i.e. `john.`) cannot end in a `.`)
+- john--doe@example.com (Special character `-` cannot be used consecutively)
+- john.doe@example.c (Final `domain` part (i.e. `c`) must have at least 2 alphanumeric characters)
+
+#### Valid company name format
+
+Valid company names must be alphanumeric or punctuation characters, and spaces are allowed.  
+Punctuation characters include ``!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~``
 
 ### Listing all suppliers: `list -s`
 
-Shows a list of all suppliers in VendorVault. (The delivery list will not be affected)
+Shows a list of all suppliers in VendorVault. The delivery list will not be affected.
 
 Format: `list -s`
 
 <box type="warning" seamless>
 
 **Warnings**:
-- At least one space between list and -s
+- At least one space is needed between `list` and `-s`.
 - No other parameters should be given for this command.
-  </box>
+
+</box>
 
 ### Deleting a supplier : `delete -s`
 
-The `delete -s` command is used to delete a supplier from the list of suppliers in VendorVault.
-
+Deletes a supplier from the list of suppliers in VendorVault.
 
 Format: `delete -s INDEX`
-- `INDEX`: The index of the supplier in the list.
+
+<box type="details" seamless>
+
+Parameters:
+
+- `INDEX`: The index of the supplier to be deleted in the displayed list. Must be a positive numeric number.
+
+</box>
 
 <box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `delete` and `-s` is compulsory
-- No duplicate prefix can be used
+- At least one space is needed between `list` and `-s`.
+- Only one supplier can be deleted by one command.
+
 </box>
 
-#### Example
-To delete the supplier at index 3:
+Example:
+`delete -s 3`
 
-    delete -s 3
-
-A success message will be displayed if the supplier is successfully deleted.
+Expected output:
+Supplier at index 3 is deleted, assuming it existed initially. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
+TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![delete command](images/deleteSupplierCommand.png)
 
 ### Mark a supplier with a status : `mark -s`
@@ -447,7 +499,7 @@ To sort deliveries by cost in ascending order:
     sort -d so/a sb/c
 
 #### Here's how it would look like in the app:
-![sort command](images/sortDeliveryCommand.png)
+![sort command](images/sortDeliveriesCommand.png)
 
 ### Upcoming deliveries: `upcoming`
 
