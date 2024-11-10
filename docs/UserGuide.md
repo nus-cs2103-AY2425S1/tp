@@ -107,11 +107,20 @@ _Figure 1: CareLink main window with sample data_
   exit
   ```
 
-6. For detailed instructions on all commands, proceed to the [Features](#features) section.
+For detailed instructions on all commands, proceed to the [Features](#features) section.
 
 > **Tip:** Type `help` at any time to view the command guide.
 
 ---
+### Valid NRIC rules
+All NRICs should adhere to the following format and constraints:
+1. The NRIC must be 9 characters long.
+2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
+  - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
+  - 'F' and 'G' are for Foreigners.
+3. The next 7 characters must be digits.
+4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
+5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
 
 ## Features
 
@@ -168,6 +177,11 @@ Field Constraints:
 **The role must be either a patient or a caregiver or both**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For elderly patients, we allow multiple people to share the same email address. This is because a single caregiver may manage emails on behalf of multiple individuals, ensuring that important information reaches the right person even if they share a common contact.
+</div>
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
@@ -190,14 +204,6 @@ Possible Errors:
 
 - `Missing required field:` - Displayed when any required field is not provided (name, NRIC, phone, email, address, or role)
 
-NRIC should adhere to the following format and constraints:
-1. The NRIC must be 9 characters long.
-2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
-  - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
-  - 'F' and 'G' are for Foreigners.
-3. The next 7 characters must be digits.
-4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
-5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
 
 
 ### Linking a patient and a caregiver: `link`
@@ -257,6 +263,7 @@ Examples:
 <div class="alert alert-warning">
 <i>:warning:</i> <b>Warning:</b> CareLink does not check for duplicate notes. Please verify existing notes before adding new ones to avoid redundant medical information.
 </div>
+
 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -341,6 +348,11 @@ Finds persons based on the specified criteria using the provided prefixes.
 - `find role/caregiver` returns all caregivers.
 - `find p/1234567 e/johndoe@example.com` returns persons with phone number `1234567` or email address `johndoe@example.com`.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To navigate through multiple results more efficiently, try using the `Tab` key twice, followed by the `Up` and `Down` arrow keys to cycle through options. This eliminates the need for scrolling or using the mouse.
+</div>
+
+
 An example of using the find command in CareLink is given below.
 ![Find command example](images/findcommandexample.png)
 
@@ -378,6 +390,15 @@ Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 <div class="alert alert-warning">
 <i>:warning:</i> <b>Warning:</b> CareLink is designed for independent geriatricians' office hours. All appointments must start and end on the same day. For patient safety and doctor work-life balance, overnight appointments are not supported.
 </div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Appointment start and end times are displayed in a format that includes a "T" between the date and time (e.g., `2025-01-01T10:00`). This "T" serves as a separator and is part of the standard ISO 8601 date-time format, which ensures consistency across systems.
+</div>
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**
+When using the `addapp` command, ensure that the minutes in the start and end times do not exceed `:59`. For example, a valid time format is `10:30`, not `10:60`.
+</div>
+
+
+
 
 **Common errors and their meanings:**
 
