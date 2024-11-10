@@ -154,24 +154,22 @@ The AgentAssist GUI is designed with intuitive sections and color-coded elements
 <img src="images/UiSplitViewWithChartAnnotated.png" alt="UISplitViewWithChartAnnotated">
 
 #### <span style="color: #FF5C5C; font-size: 18px;">⬤</span> Command Box
-The command box provides a CLI-style input field where agents can type commands to execute various actions, such as searching for a client or updating details. This dual CLI-GUI functionality combines speed with clarity, allowing for command-line efficiency within a graphical environment.
+The command box provides a CLI-style input field where agents can type commands to execute various actions, such as searching for a client or updating details. This integration of CLI and GUI functionalities provides the efficiency of command-line input within a clear, visual interface.
 
 #### <span style="color: #FFC0CB; font-size: 18px;">⬤</span> Result Box
-Displays responses to commands, such as client details, action confirmations, or error messages with helpful hints. This immediate feedback helps agents quickly verify each action's outcome and maintain accuracy.
+Displays responses to commands, such as client details, action confirmations, or error messages with helpful hints. This immediate feedback helps agents to quickly verify outcomes, ensuring accuracy and efficiency with each action.
 
 #### <span style="color: #22C7FF; font-size: 18px;">⬤</span> Clients’ Contacts List
-A scrollable list showcasing client contact details in a concise format, with symbols in front of each field to identify it clearly. Quick labels display each client’s **credit card tier** and **case status** for agents to track the urgency of each case. This allows agents to view all key information at a glance and easily identify high-priority clients.
+A scrollable list that concisely displays client contact information, with icons identifying each field. Colored labels highlight each client’s **credit card tier** and **case status** for agents to track the urgency of each case. This allows agents to view all key information at a glance and easily identify high-priority clients.
 
 #### <span style="color: #016D90; font-size: 18px;">⬤</span> Client Detail Panel
-When a client is selected from the contacts list with the `view` command, this panel presents a detailed, scrollable view of their information in a split view format. This layout allows agents to see full details, especially when some information might be truncated in the contacts list. Important details, such as contact information, job, and income, are prominently displayed to help agents make informed, prioritized decisions.
+When a client is selected from the contacts list via the `view` command, this panel presents a detailed, scrollable view of their information in a split view format. This layout allows agents to see full details, especially when some information might be truncated in the contacts list. Important details, such as contact information, job, and income, are prominently displayed to help agents make informed, prioritized decisions.
 
 #### <span style="color: #B251CF; font-size: 18px;">⬤</span> Status Chart
-A pie chart provides a visual summary of client case statuses (e.g., **Urgent**, **Non-Urgent**, **NA**), giving agents a quick overview of their client workload distribution and priorities.
-To learn more about how to use commands in AgentAssist, proceed to the next section.
+A pie chart provides a visual summary of client case statuses (e.g., **Urgent**, **Non-Urgent**, **NA**), giving agents a clear overview of their workload distribution and case priorities.
 
 ### Tier Color Code for AgentAssist GUI:
-The tier is label with color-coded fill located next to a client's name on the list, or under a client's name 
-on Client Detail Panel, aiming to help represent the credit card tier. This will help agents quickly assess the importance of each client and serve them with right credit card promotion.
+Each client’s tier is represented with a color-coded label located beside their name in the client list or under their name in the Client Detail Panel. This visual aid helps agents quickly assess the importance of each client and serve them with tailored credit card promotions.
 
 #### <span style="color: #B59410; font-size: 18px;">⬤</span> Gold Tier
 
@@ -183,16 +181,15 @@ on Client Detail Panel, aiming to help represent the credit card tier. This will
 
 Clients that are not being assigned to any tier (**NA** tier) will not display a tier label on the UI.
 
-
 ### Status Color Code of AgentAssist GUI:
-The status is label with color-coded fill located next to a client's name on the list, or under a client's name
-on Client Detail Panel, aiming to represent case status: the urgency of the client's case, and help agents prioritize their actions.
+Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This system indicates the urgency level of each client’s case, helping agents prioritize tasks.
 
 #### <span style="color: #B22222; font-size: 18px;">⬤</span> Urgent Status
 #### <span style="color: #C46210; font-size: 18px;">⬤</span> Non-Urgent Status
 
-Clients that are assigned to **NA** status (don't need to follow up) will not display a status label on the UI. However, on the pie chart that visualizes the client case statuses, these clients are represented with a green color (<span style="color: #009E60; font-size: 18px;">⬤</span>) to indicate that their cases are marked as done.
+Clients with **NA** status (no follow-up required) do not display a status label on the UI. However, on the pie chart summarizing client case statuses, these clients are represented in green (<span style="color: #009E60; font-size: 18px;">⬤</span>) to indicate their cases are resolved.
 
+To learn more about how to use commands in AgentAssist, proceed to the next section.
 
 [↑ Return to Table of Contents](#table-of-contents)
 
