@@ -83,6 +83,8 @@ public class Task {
         if (deadline.getTime().isBefore(currentTime)
             && (this.status == Status.PENDING || this.status == Status.OVERDUE)) {
             this.status = Status.OVERDUE;
+        } else {
+            this.status = Status.PENDING;
         }
     }
 
