@@ -87,7 +87,8 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe s/m r/student p/987654321 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/John Doe s/m r/student p/98765431 e/johnd@example.com a/John street, block 123, #01-01`
+   ![results for 'add'](images/addExample.png)
 * `add n/Betsy Crowe s/f r/parent e/betsycrowe@example.com a/Newgate Street p/12345678`
 
 ### Listing all persons : `list`
@@ -112,6 +113,7 @@ Format: `edit INDEX [n/NAME] [s/SEX] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+   ![results for 'edit'](images/editExample.png)
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by attributes : `find`
@@ -120,7 +122,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find [INDEX] [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-#### General Search Rules
+#### General Rules
 * At least one of the optional fields must be provided.
 * If no matches to user input are found, an empty list is returned.
 * Attribute-Specific Requirements: Each attribute has specific search behaviors (see details below).
@@ -129,14 +131,14 @@ Format: `find [INDEX] [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 * Finds the person at the specified `INDEX` in the currently displayed list.
 * Index **must be a positive integer** (e.g., `1`, `2`, `3`, …).
 
-Examples
+Examples:
 * `list` followed by `find 2` shows the 2nd person in the displayed list.
 
 #### Name (`n/KEYWORDS`)
 * The order and case of keywords does not matter. For example, `find n/Hans Bo` will match both `Hans Gruber` and `Bo hans`.
 * You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
 
-Examples
+Examples:
 * `find n/John` returns `John Doe`, `Johnny Appleseed`
 * `find n/alex david` returns `Alex Yeoh`, `David Alex`
 * `find n/jo ap` returns `John Appleseed`, `Appleseed Johnny`
@@ -145,17 +147,19 @@ Examples
 * Case sensitive search
 * Only persons with tags that match all the exact tag names provided will be returned.
 
-Examples
+Examples:
 * `find t/friend t/colleague` returns persons tagged as both `friend` and `colleague`
 
 
 #### Other attributes (`p/PHONE`, `e/EMAIL`, `a/ADDRESS`)
-* Exact match is required for the attributes, there is no partial match functionality 
+* Case-sensitive search for address and email
+* Exact match is required for the attributes, there is no partial match functionality
 
-Examples
+Examples:
 * `find p/12345678` returns only the person with the exact phone number `12345678`
 * `find e/johndoe@example.com` returns only persons with the email `johndoe@example.com`
 * `find a/123 Clementi Ave 3` returns only persons with the exact address `123 Clementi Ave 3`
+   ![results for 'find'](images/findExample.png)
 
 
 ### Sorting persons by name: `sort`
@@ -170,7 +174,7 @@ Format: `sort PREDICATE`
 
 Examples:
 * `sort name` sorts the list alphabetically by name.
-  ![result for 'sort name'](images/sortMessage.png)
+   ![result for 'sort name'](images/sortNameExample.png)
 * `sort role` sorts the list alphabetically by role.
 * `sort phone` sorts the list alphabetically by phone.
 * `sort email` sorts the list alphabetically by email.
@@ -184,6 +188,7 @@ Format: `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
 #### General Rules
 * At least one of the optional fields must be provided.
+* Used to delete an individual contact
 * For attributes where duplicates may exist (such as names, addresses, and tags), if multiple matches are found, a list of possible matches will be displayed, allowing the user to choose.
 * If no contacts matching the user input are found, an empty list is returned.
 * For unique attributes (like index and phone number), Cher will directly delete the matching person.
@@ -193,7 +198,7 @@ Format: `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 * Index **must be a positive integer** (e.g., `1`, `2`, `3`, …).
 * The index is unique in the displayed list, so Cher directly deletes the person at that position.
 
-Examples
+Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the displayed list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
@@ -202,7 +207,7 @@ Examples
 * You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
 * If multiple persons match the partial name, Cher will display a list of matches for the user to choose from.
   
-Examples
+Examples:
 * `list` followed by `delete n/John` deletes the person with the name `John`.
 * If multiple persons have the name `John`, a list of these persons is displayed.
 
@@ -211,14 +216,14 @@ Examples
 * Exact match is required, partial phone numbers will not be matched.
 * Since phone numbers are unique, Cher will directly delete the person with that phone number.
 
-Examples
+Examples:
 * `list` followed by `delete p/98765432` deletes the person with the phone number `98765432` in the list.
 
 #### Address (`a/ADDRESS`)
 * Exact match is required, partial matches are not supported.
 * If multiple persons share the same address, Cher will display a list of matching persons for you to choose from.
 
-Examples
+Examples:
 * `delete a/123 Clementi Ave 3` deletes the person with the exact address `123 Clementi Ave 3`.
 * If multiple persons have the address `123 Clementi Ave 3` are found , a list of these persons is displayed.
 
@@ -227,9 +232,10 @@ Examples
 * Only the pereson with tags that match all the exact tag names provided will be deleted.
 * If multiple persons match the provided tags, Cher will display a list of matches for selection.
 
-Examples
-* `delete t/friend t/colleague` deletes persons tagged as both `friend` and `colleague`
-* If ultiple persons have both the tags `friend` and `colleague`, Cher will show a list of these persons for you to choose from.
+Examples:
+* `delete t/mon3-5 t/sec3` deletes the person tagged as both `mon3-5` and `sec3`
+  ![result for 'delete'](images/deleteExample.png)
+* If multiple persons have both the tags `mon3-5` and `sec3`, Cher will show a list of these persons for you to choose from.
 
 ### Deleting in a batch : `batch-delete`
 
@@ -255,6 +261,7 @@ Format: `mark INDEX`
 
 Example:
 * `list` followed by `mark 2` marks the attendance of the the 2nd person in the Cher.
+  ![results for 'mark'](images/mark-attendanceExample.png)
 
 ### Unmark attendance for a single student: `unmark`
 
@@ -278,6 +285,8 @@ Format: `reset-att`
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 To reset the attendance count of all students to 0, enter `list` to get a list of all contacts, then enter `reset-att`!
 </div>
+
+![results for 'reset-att'](images/reset-attendanceExample.png)
 
 ### Mark attendance for a group of students: `batch-mark`
 
@@ -303,17 +312,14 @@ The `select` command allows users to select one or more persons from the display
 
 Format: select INDEX [MORE_INDEXES]...
 
+* INDEX refers to the position of the person in the currently displayed list of persons.
+* INDEX **must be a positive integer** that refers to the position of a person in the list (starting from 1).
+* You can specify multiple indexes separated by spaces to select more than one person at a time.
+
 Examples:
-
-* `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts. The person at index 2 and 4 will be selected. The feedback box will display:
-  "Selected Person(s): [Name of person at index 2 and 4]" (e.g., "Selected Person(s): John Doe, Alice Tan").
 * `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show
-  only these selected contacts. The person at index 3, 5 and 7 will be selected. The feedback box will display:
-  "Selected Person(s): [Name of person at index 3, 5 and 7]" (e.g., "Selected Person(s): John Doe, Alice Tan, Joshua Chou").
+  only these selected contacts. The person at index 3, 5 and 7 will be selected. 
 
-Where INDEX refers to the position of the person in the currently displayed list of persons.
-- INDEX is a positive integer that refers to the position of a person in the list (starting from 1).
-- You can specify multiple indexes separated by spaces to select more than one person at a time.
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip: To increase efficiency when performing actions on multiple persons,
 consider combining the `select` command with other commands like `delete`, `mark`, or `batch-mark` for group operations.
@@ -388,8 +394,8 @@ Action | Format, Examples
 **Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
 **Mark** | `mark INDEX` <br> e.g., `mark 2`
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
-**Batch Mark** | `batch-mark`
-**Batch Unmark** | `batch-unmark`
-**Reset Attendance** | `reset-att`
+**Batch-Mark** | `batch-mark`
+**Batch-Unmark** | `batch-unmark`
+**Reset-Attendance** | `reset-att`
 **List** | `list`
 **Help** | `help`
