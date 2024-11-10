@@ -326,6 +326,7 @@ Format: `find (n/KEYWORD | r/KEYWORD)+`
 
 Example:
 * `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
+
   ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
 
 <box type="info" seamless>
