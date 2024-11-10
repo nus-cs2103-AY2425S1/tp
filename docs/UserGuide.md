@@ -202,7 +202,7 @@ Below are additional notes regarding certain prefixes. Please keep these in mind
 ##### d/
 1. There is no restriction on the date range, so unrealistic dates in the far future or past may be entered (e.g. `d/01-01-99`).
 
-###### fr/
+##### fr/
 NIL (all covered in Constraints)
 
 ##### to/
