@@ -97,20 +97,21 @@ any traditional point-and-click management app.
 
 ## Command summary
 
-Action     | Format, Examples
-:--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:
-**[Add](#adding-a-person-add)**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
-**[Clear](#clearing-all-entries-clear)**  | `clear`
-**[Delete](#deleting-a-person-delete)** | `delete INDEX`<br> e.g., `delete 3`
-**[Edit](#editing-a-person-edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**[Find by contact information](#finding-persons-by-contact-information-find)**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
-**[Delete tag](#deleting-a-persons-tag-deltag)** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**[Add tag](#adds-tags-to-a-specific-person-addtag)** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
-**[Categorize tag](#categorizing-a-tag-cattag)** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
-**[Undo action](#undo-a-command-undo)** | `undo`
-**[Redo action](#redo-a-command-redo)** | `redo`
-**[List](#listing-all-persons-list)**   | `list`
-**[Help](#viewing-help-help)**   | `help` 
+|                                     Action                                      |                                                        Format, Examples                                                         |
+|:-------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------:|
+|                         **[Add](#adding-a-person-add)**                         | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate` |
+|                    **[Clear](#clearing-all-entries-clear)**                     |                                                             `clear`                                                             |
+|                     **[Delete](#deleting-a-person-delete)**                     |                                               `delete INDEX`<br> e.g., `delete 3`                                               |
+|                       **[Edit](#editing-a-person-edit)**                        |         `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`         |
+| **[Find by contact information](#finding-persons-by-contact-information-find)** |                       `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`                       |
+|             **[Add tag](#adding-tags-to-a-specific-person-addtag)**             |                       `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`                        |
+|                **[Delete tag](#deleting-a-person-s-tag-deltag)**                |                                     `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`                                      |
+|                **[Categorize tag](#categorizing-a-tag-cattag)**                 |                    `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`                    |
+|                     **[Undo action](#undo-a-command-undo)**                     |                                                             `undo`                                                              |
+|                     **[Redo action](#redo-a-command-redo)**                     |                                                             `redo`                                                              |
+|                      **[List](#listing-all-persons-list)**                      |                                                             `list`                                                              |
+|                         **[Help](#viewing-help-help)**                          |                                                             `help`                                                              |
+
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
 
