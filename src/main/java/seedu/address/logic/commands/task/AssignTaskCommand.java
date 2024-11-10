@@ -72,7 +72,9 @@ public class AssignTaskCommand extends Command {
 
 
         if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1 , lastShownPersonList.size()
+            ));
         }
 
         Person personToEdit = lastShownPersonList.get(personIndex.getZeroBased());
@@ -87,7 +89,9 @@ public class AssignTaskCommand extends Command {
         Set<Task> updatedTasks = new HashSet<>(personToEdit.getTasks());
         for (Index taskIndex : taskIndexes) {
             if (taskIndex.getZeroBased() >= lastShownTaskList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+                throw new CommandException(String.format(
+                        Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, taskIndex.getOneBased(), 1, lastShownTaskList.size()
+                ));
             }
             Task newTask = lastShownTaskList.get(taskIndex.getZeroBased());
             if (updatedTasks.contains(newTask)) {
