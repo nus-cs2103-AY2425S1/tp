@@ -304,7 +304,7 @@ Format: `group g/GROUPNAME s/STUDENTNAME [s/STUDENTNAME]…​`
 
 - Each group must have a unique name.
 - `GROUPNAME` must be alphanumeric and allows whitespace (case-insensitive).
-- `STUDENTNAME` must match exactly (case-insensitive).
+- `STUDENTNAME` must match exactly (case-sensitive).
 - Group is successfully created only if all student names match.
 
 ![Group](images/Group.png)
