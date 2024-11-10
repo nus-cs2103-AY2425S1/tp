@@ -64,9 +64,15 @@ Highlights important information that you should know.
 Provides you with tips to use our system more effectively.
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Provides you with warnings about potential issues you might encounter.
+</div>
+
+Before we proceed with the commands, here are some important points to note on their formatting. These points will also be repeated in the command parameter summary for you to refer to easily at any point in time.
+
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Important:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
