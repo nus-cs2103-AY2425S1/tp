@@ -156,7 +156,7 @@
   </details>
 </box>
 
-<span class="features">General Features</span>
+<h3 class="features">General Features</h3>
 
 ##### Viewing help : `help`
 
@@ -262,7 +262,7 @@ Furthermore, certain edits can cause the WedLinker to behave in unexpected ways 
 
 <br>
 
-<span class="features">Person Features<span>
+<h3 class="features">Person Features</h3>
 
 ##### Adding a person: `add`
 
@@ -347,7 +347,7 @@ Examples:
 ---
 <br>
 
-<span class="features">Tag Features</span>
+<h3 class="features">Tag Features</h3>
 
 ##### Adding a tag : `create-tag`
 
@@ -424,7 +424,7 @@ Format: `delete-tag t/TAGNAME [f/]`
 ---
 <br>
 
-<span class="features">Wedding Features</span>
+<h3 class="features">Wedding Features</h3>
 
 ##### Adding a Wedding : `create-wedding`
 
@@ -494,7 +494,7 @@ Format: `delete-wedding w/WEDDINGNAME [f/]`
 ---
 <br>
 
-<span class="features">Task Features</span>
+<h3 class="features">Task Features</h3>
 
 ##### Creating a Task : `create-task`
 
@@ -575,7 +575,7 @@ Format: `unmark-task TASKINDEX`
 ---
 <br>
 
-<span class="features">Vendor Features</span>
+<h3 class="features">Vendor Features</h3>
 
 ##### Assigning a Vendor : `assign-vendor`
 Format: `assign-venor PERSONINDEX`
