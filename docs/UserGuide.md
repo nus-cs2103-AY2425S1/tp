@@ -31,7 +31,7 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
 4. Open a command terminal, `cd` to change directory to the folder your TalentHub is in, and use the `java -jar talenthub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+<img src="images/Ui.png" alt="Ui" style="display: block; margin: 0 auto; border-radius: 10px;">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -119,7 +119,10 @@ Note that John Doe does not have an address in this example.
 You can add the prefixes in any order you want!
 </div>
 
-![result for 'add person'](images/add_person.png)
+<figure style="text-align: center;">
+  <img src="images/add_person.png" alt="result for 'add person'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity</code></figcaption>
+</figure>
 
 ### Listing all persons : `list person`
 
@@ -129,7 +132,10 @@ Format: `list person`
 
 Example: Calling `list person` would yield the following output
 
-![result for 'list person'](images/list_person.png)
+<figure style="text-align: center;">
+  <img src="images/add_person.png" alt="list person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>list person</code></figcaption>
+</figure>
 
 ### Editing a person : `edit person`
 
@@ -162,7 +168,10 @@ Examples:
 - `edit person 7 p/91234567 e/ a/123 Clementi Rd` Edits the phone number and address of the 7th person to be `91234567` and `123 Clementi Rd` respectively and clears the email address.
 - `edit person 2 n/Bernice Yu a/ t/` Edits the name of the 2nd person to be `Bernice Yu` and clears the address and all existing tags.
 
-![result for 'edit person'](images/edit_person.png)
+<figure style="text-align: center;">
+  <img src="images/edit_person.png" alt="edit person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>edit person 7 p/91234567 e/ a/123 Clementi Rd</code></figcaption>
+</figure>
 
 ### Finding persons by name: `find person`
 
@@ -181,7 +190,10 @@ Examples:
 - `find person John` returns `john` and `John Doe`
 - `find person john bernice` returns `John Doe`, `Bernice Yu`
 
-![result for 'find person john bernice'](images/findJohnBerniceResult.png)
+<figure style="text-align: center;">
+  <img src="images/find_person.png" alt="find person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>find person john bernice</code></figcaption>
+</figure>
 
 ### Viewing person by name: `view person`
 
@@ -201,7 +213,10 @@ Examples:
 - `view person Bernice Yu` returns the details for `Bernice Yu`
 - `view person John Doe` returns the details for `John Doe`
 
-![result for 'view person john doe'](images/viewJohnDoeResult.png)
+<figure style="text-align: center;">
+  <img src="images/view_person.png" alt="view person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>view person John Doe</code></figcaption>
+</figure>
 
 ### Filtering person by tag: `filter person`
 
@@ -218,7 +233,10 @@ Examples:
 - `filter person Hairdresser` returns the person with tag `HairDresser`.
 - `filter person Celebrity` returns the person with tag `Celebrity`.
 
-![result for 'filter celebrity'](images/filterCelebrityResult.png)
+<figure style="text-align: center;">
+  <img src="images/filter_person.png" alt="filter person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>filter person Celebrity</code></figcaption>
+</figure>
 
 ### Deleting a person : `delete person`
 
@@ -239,17 +257,20 @@ Examples:
 - `list person` followed by `delete person 2` deletes the 2nd person in the address book.
 - `find person Bernice` followed by `delete person 1` deletes the 1st person in the results of the `find person` command.
 
-Users will be provided with the following prompt.
+<figure style="text-align: center;">
+  <img src="images/delete_person_confirmation.png" alt="delete person confirmation" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>delete person 7</code></figcaption>
+</figure>
 
-![result for 'delete person confirmation'](images/delete_person_confirmation.png)
+<figure style="text-align: center;">
+  <img src="images/pending_cancelled.png" alt="delete person cancelled" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>N</code> or <code>n</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
-Typing `N` or `n` and pressing enter would return the following message.
-
-![result for 'delete person N'](images/delete_person_reject.png)
-
-Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
-
-![result for 'delete person Y'](images/delete_person.png)
+<figure style="text-align: center;">
+  <img src="images/delete_person_confirmation.png" alt="delete person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
 ## Managing Events
 
@@ -278,13 +299,16 @@ The venue field is also optional!
 Examples:
 
 - `add event n/Oscars t/2022-03-27 10:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li` adds an event named `Oscars` with the time `2022-03-27 10:00 to 2022-03-27 18:00`, venue `Dolby Theatre`, celebrity `Alex Yeoh` and points of contact `Charlotte Oliveiro` and `David Li`.
-- `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon for John c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon for John`, celebrity `Bernice Yu` and no points of contact.
+- `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon`, celebrity `Bernice Yu` and no points of contact.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 You can add the prefixes in any order you want!
 </div>
 
-![result for 'add event'](images/add_event.png)
+<figure style="text-align: center;">
+  <img src="images/add_event.png" alt="result for 'add event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon  c/Bernice Yu</code></figcaption>
+</figure>
 
 ### Listing all events: `list event`
 
@@ -294,7 +318,10 @@ Format: `list event`
 
 Example: Calling `list event` would yield the following output
 
-![result for 'list event'](images/list_event.png)
+<figure style="text-align: center;">
+  <img src="images/list_event.png" alt="result for 'list event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>list event</code></figcaption>
+</figure>
 
 ### Editing an event : `edit event`
 
@@ -322,7 +349,10 @@ Examples:
 - `edit event 1 t/2024-03-21 v/Jane's Salon` Edits the time and venue of the 1st event to be `2024-03-21` and `Jane's Salon` respectively.
 - `edit event 2 n/Movie Screening v/ p/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue and points of contact.
 
-![result for 'edit event'](images/edit_event.png)
+<figure style="text-align: center;">
+  <img src="images/edit_event.png" alt="result for 'edit event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>edit event 2 n/Movie Screening v/ p/</code></figcaption>
+</figure>
 
 ### Finding events by name: `find event`
 
@@ -341,7 +371,10 @@ Examples:
 - `find event Hiking` returns `Hiking` and `Park Hiking`
 - `find event Hair Oscars` returns `Hair Cut`, `Oscars`
 
-![result for 'find event hair oscars'](images/findHairOscarsResult.png)
+<figure style="text-align: center;">
+  <img src="images/find_event.png" alt="result for 'find event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>find event Hair Oscars</code></figcaption>
+</figure>
 
 ### Viewing event by name: `view event`
 
@@ -362,7 +395,10 @@ Examples:
 - `view event Oscars` returns the details for `Oscars`
 - `view event Hair Cut` returns the details for `Hair Cut`
 
-![result for 'view event hair cut'](images/viewHairCutResult.png)
+<figure style="text-align: center;">
+  <img src="images/view_event.png" alt="result for 'view event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>view event Hair Cut</code></figcaption>
+</figure>
 
 ### Filtering events by celebrity name: `filter event`
 
@@ -383,7 +419,10 @@ Examples:
 - `filter event Alex Yeoh` returns the events for celebrity `Alex Yeoh`
 - `filter event Bernice Yu` returns the events for celebrity `Bernice Yu`
 
-![result for 'filter bernice yu'](images/filterBerniceYuResult.png)
+<figure style="text-align: center;">
+  <img src="images/filter_event.png" alt="result for 'filter event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>filter event Bernice Yu</code></figcaption>
+</figure>
 
 ### Deleting an event : `delete event`
 
@@ -405,7 +444,10 @@ Examples:
 - `list event` followed by `delete event 2` deletes the 2nd event in the address book.
 - `find event Oscars` followed by `delete event 1` deletes the 1st event in the results of the `find event` command.
 
-![result for 'delete event'](images/delete_event.png)
+<figure style="text-align: center;">
+  <img src="images/delete_event.png" alt="result for 'delete event'" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>delete event 4</code></figcaption>
+</figure>
 
 ### Clearing all events : `clear event`
 
@@ -417,17 +459,22 @@ Format: `clear event`
 Running this command will clear all events in TalentHub. This action is irreversible after confirmation.
 </div>
 
-Users will be provided with the following prompt.
+Example:
 
-![result for 'clear event confirmation'](images/clear_event_confirmation.png)
+<figure style="text-align: center;">
+  <img src="images/clear_event_confirmation.png" alt="clear person confirmation" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>clear event</code></figcaption>
+</figure>
 
-Typing `N` or `n` and pressing enter would return the following message.
+<figure style="text-align: center;">
+  <img src="images/pending_cancelled.png" alt="clear event cancelled" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>N</code> or <code>n</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
-![result for 'clear event N'](images/clear_event_reject.png)
-
-Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
-
-![result for 'clear event Y'](images/clear_event.png)
+<figure style="text-align: center;">
+  <img src="images/clear_event.png" alt="clear person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
 ## Utility Commands
 
@@ -441,17 +488,22 @@ Running this command will clear all persons and events in TalentHub. This action
 
 Format: `clear all`
 
-Users will be provided with the following prompt.
+Example:
 
-![result for 'clear all confirmation'](images/clear_all_confirmation.png)
+<figure style="text-align: center;">
+  <img src="images/clear_all_confirmation.png" alt="clear all confirmation" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>command: <code>clear all</code></figcaption>
+</figure>
 
-Typing `N` or `n` and pressing enter would return the following message.
+<figure style="text-align: center;">
+  <img src="images/pending_cancelled.png" alt="clear all cancelled" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>N</code> or <code>n</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
-![result for 'clear all N'](images/clear_all_reject.png)
-
-Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and return the following message.
-
-![result for 'clear all Y'](images/clear_all.png)
+<figure style="text-align: center;">
+  <img src="images/clear_all.png" alt="clear person" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Typing <code>Y</code> or <code>y</code> and pressing enter would return the following message.</figcaption>
+</figure>
 
 ### Exiting the program : `exit`
 
@@ -468,8 +520,10 @@ Format: `help`
 
 Example:
 
-![result for 'help'](images/help.png)
-![result for 'help window'](images/help-window.png)
+<figure style="text-align: center;">
+  <img src="images/help_popup.png" alt="help" style="display: block; margin: 0 auto; border-radius: 10px;">
+  <figcaption>Command: <code>help</code></figcaption>
+</figure>
 
 ### Saving the data
 
