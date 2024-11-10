@@ -20,15 +20,15 @@ experience to their clients without being weighed down by administrative burdens
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W11-4/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W11-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your PhysioPal.
+3. Copy the file to the folder you want to use as the _home folder_ for your PhysioPal.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar physiopal.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar physiopal.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/quickStart.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -59,7 +59,8 @@ experience to their clients without being weighed down by administrative burdens
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -107,6 +108,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
+* The parameter `NAME` is unique and case-insensitive, and it will be displayed in lowercase.
 * Persons in PhysioPal can share the same phone number, email and address.
 * Persons with dashes, commas, slashes and periods in name should be omitted. For example,
   persons with `s/o` or `d/o` in name should be entered as `s o` and `d o` respectively.
