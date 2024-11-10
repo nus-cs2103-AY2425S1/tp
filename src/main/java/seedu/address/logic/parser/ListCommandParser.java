@@ -26,7 +26,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         boolean isValidArgument = validateArgument(trimmedLowerArgs);
         if (!isValidArgument) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, " There shouldn't' be any words after "
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, " There shouldn't be any words after "
                             + "the list command word except for a few special cases. "
                             + String.format(
                                     MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD + " " + ListCommand.COMMAND_WORD)));
