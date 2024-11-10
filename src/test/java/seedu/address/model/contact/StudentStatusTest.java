@@ -53,4 +53,11 @@ public class StudentStatusTest {
         // different values -> returns false
         assertFalse(studentStatus.equals(new StudentStatus("phd")));
     }
+
+    @Test
+    public void isHashCode() {
+        StudentStatus aaron = new StudentStatus("Undergraduate 1");
+
+        assertTrue(aaron.hashCode() < 0);
+    }
 }

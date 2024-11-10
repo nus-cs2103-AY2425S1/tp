@@ -68,4 +68,24 @@ public class NicknameTest {
         // different values -> returns false
         assertFalse(nickname.equals(new Nickname("peter")));
     }
+
+    @Test
+    public void compareTo() {
+        Nickname aaron = new Nickname("aaron");
+        Nickname bbart = new Nickname("bbart");
+
+        // same nickname
+        assertTrue(aaron.compareTo(aaron) == 0);
+        // smaller nickname
+        assertTrue(aaron.compareTo(bbart) < 0);
+        // larger nickname
+        assertTrue(bbart.compareTo(aaron) > 0);
+    }
+
+    @Test
+    public void isHashCode() {
+        Nickname aaron = new Nickname("aaron");
+
+        assertTrue(aaron.hashCode() > 0);
+    }
 }

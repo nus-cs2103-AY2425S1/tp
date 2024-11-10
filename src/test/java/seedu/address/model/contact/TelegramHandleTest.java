@@ -59,4 +59,11 @@ public class TelegramHandleTest {
         // different values -> returns false
         assertFalse(telegramHandle.equals(new TelegramHandle("995k1")));
     }
+
+    @Test
+    public void isHashCode() {
+        TelegramHandle aaron = new TelegramHandle("aaron");
+
+        assertTrue(aaron.hashCode() > 0);
+    }
 }
