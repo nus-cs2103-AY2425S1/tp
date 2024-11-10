@@ -262,8 +262,8 @@ Format: `export format\EXPORT_FORMAT`
 * `format\EXPORT_FORMAT` specifies a file format for the contact data export.
 
 Examples:
-* `export format\csv` exports a copy of your contact data to `data/addressbook.csv`.
-* `export format\txt` exports a copy of your contact data to `data/addressbook.txt`.
+* `export format\csv` exports a copy of your contact data to `data/bae_addressbook.csv`.
+* `export format\txt` exports a copy of your contact data to `data/bae_addressbook.txt`.
 
 <box type="tip" seamless>
 
@@ -292,7 +292,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/bae_addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -315,12 +315,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
     * A confirmation message will appear onscreen after the export is complete.
 2. Navigate to the folder where BA€ was installed.
 3. Open the `/data/` folder.
-4. Open your data export file (`addressbook.csv`/`addressbook.txt`) in your application of choice.
+4. Open your data export file (`bae_addressbook.csv`/`bae_addressbook.txt`) in your application of choice.
 
 **Q**: How can I open my data in BA€ on a different computer?
 
 1. Install BA€ on your secondary computer.
-2. Copy your data file (`addressbook.json`) from BA€'s `/data/` folder on your primary computer.
+2. Copy your data file (`bae_addressbook.json`) from BA€'s `/data/` folder on your primary computer.
 3. Paste the copied data file in BA€'s `/data/` folder on your secondary computer.
 
 --------------------------------------------------------------------------------------------------------------------

@@ -575,7 +575,7 @@ testers are expected to do more *exploratory* testing.
 1. **Dealing with missing/corrupted data files**
    1. **Prerequisites:** BA€ is not running
    2. **Test case:**
-      1. To simulate a corrupted file, navigate to the data folder, and find addressbook.json
-      2. Delete addressbook.json
+      1. To simulate a corrupted file, navigate to the data folder, and find bae_addressbook.json
+      2. Delete bae_addressbook.json
       3. Launch BA€.
-   3. **Expected:** A new addressbook.json file will be created and it will be empty.
+   3. **Expected:** A new bae_addressbook.json file will be created and it will be empty.
