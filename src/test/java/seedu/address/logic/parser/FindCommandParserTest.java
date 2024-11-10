@@ -42,7 +42,7 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "\t S1234567Z  \n G1234567Z     ", expectedFindCommand);
 
 
-        // a patients with NRIC name followed by a normal name
+        // NRIC name followed by a normal name
         expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("S1234567Z", "Alice")));
         assertParseSuccess(parser, "S1234567Z Alice", expectedFindCommand);
@@ -50,7 +50,7 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "\t S1234567Z  \n Alice     ", expectedFindCommand);
 
-        // a patients with normal name followed by a NRIC name
+        // normal name followed by a NRIC name
         expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "S1234567Z")));
         assertParseSuccess(parser, "Alice S1234567Z", expectedFindCommand);
@@ -59,12 +59,16 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "Alice  \t S1234567Z  \n", expectedFindCommand);
 
 
-        // a patients with normal name followed by multiple NRIC names
+        // normal name followed by multiple NRIC names
         expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "S1234567Z", "G1234567Z")));
         assertParseSuccess(parser, "Alice S1234567Z G1234567Z", expectedFindCommand);
 
 
+        // name containing nric and other characters
+        expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("AliceS1234567Z")));
+        assertParseSuccess(parser, "AliceS1234567Z", expectedFindCommand);
 
     }
 
