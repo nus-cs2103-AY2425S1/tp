@@ -5,10 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.person.predicates.TelegramContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 public class TelegramContainsKeywordPredicateTest {
@@ -56,4 +63,12 @@ public class TelegramContainsKeywordPredicateTest {
         assertTrue(predicate.equals(predicateCopy));
     }
 
+    @Test
+    public void test_contactWithNoTelegramUsername_returnsFalse() {
+        List<String> keywords = Collections.singletonList("amybee");
+        TelegramContainsKeywordsPredicate predicate = new TelegramContainsKeywordsPredicate(keywords);
+        Person personWithNoTelegramUsername = new Person(new Name("Zeke Yaeger"), new Phone("8425131"),
+                new Email("zeke@example.com"), new Address("Eldia"), new TelegramUsername(null), new HashSet<>());
+        assertFalse(predicate.test(personWithNoTelegramUsername));
+    }
 }
