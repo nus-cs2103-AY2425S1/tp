@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.Arrays;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
