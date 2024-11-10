@@ -81,30 +81,30 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 ### Person-Related Commands
 | **Action**  | **Format**                                                                                                                                                    | **Example**                                                                                    |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| **Add**     | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                        | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
-| **Clear**   | `clear`                                                                                                                                                        | `clear`                                                                                        |
-| **Delete**  | `delete INDICES`                                                                                                                                               | `delete 1 2 3 5-7`                                                                             |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                  | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
-| **Search**  | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                                                 | `search n/john`                                                                                |
-| **List**    | `list`                                                                                                                                                         | `list`                                                                                         |
-| **Sort**    | `sort [s/SORT_OPTION]`                                                                                                                                         | `sort s/name`                                                                                  |
+| [**Add**](#adding-a-contact-add)    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                        | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
+| [**Clear**](#clearing-all-entries--clear)  | `clear`                                                                                                                                                        | `clear`                                                                                        |
+| [**Delete**](#deleting-a-person--delete) | `delete INDICES`                                                                                                                                               | `delete 1 2 3 5-7`                                                                             |
+| [**Edit**](#editing-a-person--edit)     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                  | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
+| [**Search**](#searching-persons-by-field-search)  | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                                                 | `search n/john`                                                                                |
+| [**List**](#listing-all-persons--list)    | `list`                                                                                                                                                         | `list`                                                                                         |
+| [**Sort**](#sorting-the-displayed-list-sort)    | `sort [s/SORT_OPTION]`                                                                                                                                         | `sort s/name`                                                                                  |
 
 ### Group-Related Commands
 | **Action**                       | **Format**                                                        | **Example**                                    |
 |----------------------------------|-------------------------------------------------------------------|------------------------------------------------|
-| **Create Group**                 | `createGroup g/GROUP_NAME m/[INDICES]`                            | `createGroup g/blood drive m/1 2 4-7`          |
-| **Add New Members to Group**     | `addToGroup g/GROUP_NAME m/[INDICES]`                             | `addToGroup g/beach cleanup m/1 2 3-6`         |
-| **Remove Existing Members from Group** | `removeFromGroup g/GROUP_NAME m/[INDICES]`             | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
-| **Edit Group Name**              | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`                 | `editGroupName g/blood drive g/blood donation` |
-| **Delete Group**                 | `deleteGroup g/GROUP_NAME`                                        | `deleteGroup g/blood donation`                 |
-| **List Groups**                  | `listGroups`                                                     | `listGroups`                                   |
+| [**Create Group**](#creating-a-group--creategroup)                 | `createGroup g/GROUP_NAME m/[INDICES]`                            | `createGroup g/blood drive m/1 2 4-7`          |
+| [**Add New Members to Group**](#adding-new-members-to-an-existing-group--addtogroup)    | `addToGroup g/GROUP_NAME m/[INDICES]`                             | `addToGroup g/beach cleanup m/1 2 3-6`         |
+| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group--removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`             | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
+| [**Edit Group Name**](#editing-a-groups-name--editgroupname)              | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`                 | `editGroupName g/blood drive g/blood donation` |
+| [**Delete Group**](#deleting-a-group-deletegroup)                 | `deleteGroup g/GROUP_NAME`                                        | `deleteGroup g/blood donation`                 |
+| [**List Groups**](#listing-groups-listgroups)                  | `listGroups`                                                     | `listGroups`                                   |
 
 ### General Commands
 | **Action**           | **Format** | **Example** |
 |----------------------|------------|-------------|
-| **Help**             | `help`     | `help`      |
-| **Get Emails**       | `email`    |      `email` |
-| **Exit Application** | `exit`     |      `exit` |
+| [**Help**](#viewing-help--help)            | `help`     | `help`      |
+| [**Get Emails**](#getting-emails-email)       | `email`    |      `email` |
+| [**Exit Application**](#exiting-the-program--exit) | `exit`     |      `exit` |
 
 ### Adding a contact: `add`
 
