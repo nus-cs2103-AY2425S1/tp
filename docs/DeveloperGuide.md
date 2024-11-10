@@ -6,9 +6,9 @@ title: Developer Guide
 ## Table of Contents
 
 - [Acknowledgements](#acknowledgements)
-- [Setting up, getting started](#Setting-up-getting-started)
-- [Design](#Design)
-  - [Architecture](#Architecture)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
   - [UI component](#ui-component)
   - [Logic component](#logic-component)
   - [Model component](#model-component)
@@ -606,7 +606,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Adding a company contact**
    - **Prerequisites**: Ensure that AdmiNUS is running and the contact list is visible.
-   - **Test case**: `company n/Newgate Prison i/Security p/1234567 e/newgateprison@example.com a/Newgate Prison t/prison facility`  
+   - **Test case**: `company n/Newgate Prison i/Security p/1234567 e/newgateprison@example.com a/Newgate Prison t/prison t/facility`  
      **Expected**: Company contact added successfully. Status message updates with details, timestamp updated.
    - **Test case**: `company n/Newgate p/invalid_phone e/email@domain.com a/Address`  
      **Expected**: No contact added. Error message shown in the status message. Status bar remains unchanged.
