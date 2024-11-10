@@ -29,9 +29,12 @@
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
+  * [Introduction]({{ baseUrl }}/UserGuide.html#introduction)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
-  * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [FAQs]({{ baseUrl }}/UserGuide.html#faqs)
+  * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
+  * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
+  * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)

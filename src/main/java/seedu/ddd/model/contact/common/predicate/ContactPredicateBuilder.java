@@ -18,7 +18,9 @@ import seedu.ddd.logic.parser.ArgumentMultimap;
 import seedu.ddd.logic.parser.ParserUtil;
 import seedu.ddd.logic.parser.exceptions.ParseException;
 import seedu.ddd.model.common.Id;
+import seedu.ddd.model.common.Name;
 import seedu.ddd.model.common.Tag;
+import seedu.ddd.model.contact.common.Address;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.common.Email;
 import seedu.ddd.model.contact.common.Phone;
@@ -60,6 +62,9 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addAddressPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            if (!Address.isValidAddress(argMultimap.getValue(PREFIX_ADDRESS).get())) {
+                throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_ADDRESS);
             String[] addressKeywords = args.split("\\s+");
             return combinedPredicate.and(new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)));
@@ -70,6 +75,9 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addEmailPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            if (!Email.isValidEmail(argMultimap.getValue(PREFIX_EMAIL).get())) {
+                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_EMAIL);
             Email email = new Email(args);
             combinedPredicate = combinedPredicate.and(new ContactEmailPredicate(email));
@@ -80,6 +88,9 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addPhonePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            if (!Phone.isValidPhone(argMultimap.getValue(PREFIX_PHONE).get())) {
+                throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_PHONE);
             Phone phoneNumber = new Phone(args);
             combinedPredicate = combinedPredicate.and(new ContactPhonePredicate(phoneNumber));
@@ -112,6 +123,9 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addNamePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            if (!Name.isValidName(argMultimap.getValue(PREFIX_NAME).get())) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_NAME);
             String[] nameKeywords = args.split("\\s+");
             combinedPredicate = combinedPredicate.and(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));

@@ -345,6 +345,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. System creates the contact and assigns a unique ID to the contact.
 6. System displays a success message confirming the creation of the contact.
 
+    Use case ends.
+
 **Extensions:**
 
 * 3a. System detects an error in the entered data (e.g., invalid phone number).
@@ -387,6 +389,13 @@ ___
   * 3a1. System displays an error message.
 
     Use case ends.
+  
+* 3b. System checks for association and find out this vendor/client is the last one related to a event.
+
+  * 3b1. System displays a message about the association.
+
+    Use case ends.
+
 
 
 **Guarantees**
@@ -418,6 +427,147 @@ ___
 * 2b. The list is empty.
 
   * 2b1. System informs the user that there are no saved contacts.
+
+    Use case ends.
+
+**Name: UC04 - Add Event**
+
+**Preconditions:**
+1.  Have at least one valid Client and one valid Vendor saved in System
+
+**Main Success Scenario (MSS):**
+1. Wedding planner selects the option to create a new event.
+2. System requests for details of the event.
+3. Wedding planner enters the required details (related client, related vendor, etc.).
+4. System validates the entered details (check for the format, duplication, etc.).
+5. System creates the event and assigns a unique ID to the event.
+6. System displays a success message confirming the creation of the event.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects an error in the entered data (e.g., invalid client ID).
+
+  * 3a1. System request the correct data.
+  * 3a2. Wedding planner enters the new data.
+
+    Use case resumes from step 4.
+  
+* 5a. The event already exists in the system (duplicate event).
+
+  * 5a1. System displays a message that the event already exists.
+    
+    Use case ends.
+
+**Name: UC05 - Delete Event**
+
+**Main Success Scenario (MSS):**
+1. Wedding planner requests to list all events.
+2. System displays a list of events.
+3. Wedding planner specifies which event he wished to delete.
+4. System displays a message for the successful deletion of the event.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. System is unable to locate the event to be deleted.
+
+  * 3a1. System displays an error message.
+
+    Use case ends.
+
+**Guarantees:**
+1. The event is successfully deleted from the system, and any persistent storage.
+
+**Name: UC06 - List all Events**
+
+**Preconditions:**
+1. Events are saved properly.
+
+**Main Success Scenario (MSS):**
+1. User requests for previously saved events.
+2. System displays the saved events to the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. System is unable to get saved events.
+
+  * 2a1. System informs the user that the file is corrupted.
+  
+    Use case ends.
+
+* 2b. The list is empty.
+
+  * 2b1. System informs the user that there are no saved events.
+
+    Use case ends.
+
+**Guarantees:**
+1. The user’s previously saved events will be listed with their details.
+2. Events are sorted based on when it was added.
+
+**Name: UC07 - Edit contact**
+
+**Preconditions:**
+Have at least valid contact type (client/vendor) stored in the system.
+
+**Main Success Scenario (MSS):**
+1. Wedding planner requests to list all contacts.
+2. System displays a list of contacts.
+3. Wedding planner specifies which contact he wishes to edit and enters the respective details (name, phone number etc.) he requests to change.
+4. System validates the entered detail (check for format, duplication, etc.).
+5. System updates the contact with the new provided details.
+6. System displays a success message confirming the creation of the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. System detects an error in the entered data (e.g. invalid phone number).
+
+  * 3a1. System requests the correct data.
+  * 3a2. Wedding planner enters new data.
+
+    Use case resumes from step 4.
+
+* 5a. The contact already exists in the system (duplicate contact).
+
+  * 5a1. System displays a message that the contact already exists.
+
+    Use case ends.
+
+**Guarantees:**
+1. The contact is successfully edited and the system and any persistent storage have updated this contact. Duplicate contact will not happen.
+
+**Name: UC08 - Help**
+
+**Main Success Scenario (MSS):**
+1. Wedding planners want to see product related material.
+2. System pops out a new window with the hyperlink to the product website.
+
+    Use case ends.
+
+**Name: UC09 - Clear**
+
+**Main Success Scenario (MSS):**
+1. Wedding planner decides to clear the database.
+2. System clear the whole database and update the local JSON file.
+
+    Use case ends.
+
+**Name: UC10 - Exit**
+
+**Main Success Scenario (MSS):**
+1. Wedding planner decides to exit the system.
+2. System saves the data to the local JSON file and terminates the program.
 
     Use case ends.
 

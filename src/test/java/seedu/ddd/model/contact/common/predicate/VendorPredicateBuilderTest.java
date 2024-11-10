@@ -51,6 +51,14 @@ public class VendorPredicateBuilderTest {
         assertFalse(predicateBuilder.build().test(new VendorBuilder().withService("benSOn Nguyen").build()));
     }
     @Test
+    public void testArgumentMultimap_doesNotContainValidService_throwsParseExceptionError() {
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        // Not alphanumeric input
+        argMultimap.put(PREFIX_SERVICE, "catering n/Jane");
+        ContactPredicateBuilder predicateBuilder = new VendorPredicateBuilder(argMultimap);
+        assertThrows(ParseException.class, predicateBuilder::build);
+    }
+    @Test
     public void testArgumentMultimap_doesNotContainService_throwsParseExceptionError() {
         ArgumentMultimap argMultimap = new ArgumentMultimap();
         argMultimap.put(PREFIX_SERVICE, "");

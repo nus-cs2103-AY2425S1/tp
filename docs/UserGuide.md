@@ -23,9 +23,9 @@ DDD is tailored specifically to the needs of **wedding planners**, and is design
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your DDD.
+3. Copy the file to the folder you want to use as the `HOME_FOLDER` for your DDD.
 
-4. Open a command terminal, use `cd path_to_folder` command to access the folder you put the jar file in, and use the `java -jar ddd.jar` command to run the application.<br>
+4. Open a command terminal, use `cd HOME_FOLDER` command to access the folder you put the jar file in, and use the `java -jar ddd.jar` command to run the application.<br>
 
 A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
@@ -35,23 +35,19 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
    </br>
    Here are some example commands you can try with the sample data:
 
-  * `list -c` : Lists all clients.
-
-  * `clear` : Deletes all contacts.
-
-  * `add -e n/Amazing Wedding des/by the beach d/2025-01-01 c/0 v/1` : Adds an event named `Amazing Wedding` to DDD.
-
   * `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 t/budget t/pets` : Adds a client named `Jane Doe` to DDD.
 
   * `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget` : Adds a vendor named `ABC Catering` to DDD.
 
-  * `delete 2` : Deletes the 2nd contact shown in the current list.
+  * `add -e n/Amazing Wedding des/by the beach d/2025-01-01 c/0 v/1` : Adds an event named `Amazing Wedding` to DDD.
 
-  * `clear` : Deletes all contacts.
+  * `list` : Lists all contacts.
 
   * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+<box type="tip" header="**Tip:**" >
+  Refer to the <md>[Features](#features)</md> below for details of each command.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -74,11 +70,15 @@ DDD also allows you to tag contacts with your own tags. This is quite handy if y
 
 ### Clients
 
-`Client` entries represent a generic contact with no additional fields.
+`Client` entries represent a generic contact with no additional fields. These are contacts who have contracted your event planning service.
 
 ### Vendors
 
-`Vendor` entries contain an extra `service` field. DDD does not currently support vendors providing multiple services.
+`Vendor` entries contain an extra `service` field. These are contacts who provide a particular type of service for events (e.g. catering, flowers, etc).
+
+<box type="tip" header="**Tip:**" >
+DDD does not currently support vendors providing multiple services. Instead, you can add multiple contacts to represent each service. These entries should be named differently to prevent duplication.
+</box>
 
 ### Events
 
@@ -94,48 +94,51 @@ Events allow you to group contacts together in a sensible and seamless manner li
 
 ![Event Demo](images/eventDemo.png)
 
-### Use Case
-
-Here's how you might use our app:
-
-1. You have a new client who has enlisted your help to plan their big day.
-2. You've settled most of the details, but you haven't found a suitable catering service yet.
-3. Use DDD to search your existing catering vendors!
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
-**Notes about the command format:**<br>
-
-Documentation style conventions are based on [Google's guide](https://developers.google.com/style/code-syntax).
-
-* Words in `UPPER_CASE` are the parameters that must be supplied by the user.<br>
-  e.g. in `list n/NAME`, `NAME` is a parameter which can be used as `list n/NAME`.
-
-* `-TYPE_FLAG` can be either `-c`, `v` or `-e` for commands allowing specifying of type.
-  e.g. in `list -TYPE_FLAG`, `-TYPE_FLAG` can allow for filtering all clients with `-c` or vendor with `-v`
-or events with `-e`.
-
-* Parameters wrapped in **square brackets** are optional arguments.<br>
-  e.g. in `add n/NAME ... [t/TAG ...]`, `TAG` is an optional argument
-
-* Parameters wrapped in **curly brackets** are mutually exclusive arguments (i.e. only 1 should be specified).<br>
-  e.g. in `add {-c | -v s/SERVICE} ...`, `-c` and `-v s/SERVICE` are mutually exclusive arguments.
-
-* Items with `…`​ after them can be used one or more times.<br>
-  e.g. `c/CLIENT_ID…​` can be used as `c/1`, `c/1 c/2` etc.
-
-* Items with `…`​ after them and wrapped in **square brackets** can be used zero or more times.<br>
-  e.g. `[t/TAG…​]` can be used as ` ` (i.e. 0 times), `t/vegan`, `t/vegan t/budget` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER -c`, `p/PHONE_NUMBER -c n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+<box type="info" header="**Notes about the command format:**">
+    <ul>
+      <li>
+        Documentation style conventions are based on <a href="https://developers.google.com/style/code-syntax">Google's guide for CLI syntax</a>.<br>    
+      </li>
+      <li>
+        Words in <code>UPPER_CASE</code> are the parameters that must be supplied by the user.<br>
+        <ul><li>e.g. in <code>list n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>list n/NAME</code>.</li></ul>
+      </li>
+      <li>
+        <code>-TYPE_FLAG</code> can be either <code>-c</code>, <code>-v</code> or <code>-e</code> for commands allowing specifying of type.<br>
+        <ul><li>e.g. in <code>list -TYPE_FLAG</code>, <code>-TYPE_FLAG</code> can allow for filtering all clients with <code>-c</code> or vendor with <code>-v</code> or events with <code>-e</code>.</li></ul>
+      </li>
+      <li>
+        Parameters wrapped in <strong>square brackets</strong> are optional arguments.<br>
+        <ul><li>e.g. in <code>add n/NAME ... [t/TAG…​]</code>, <code>TAG</code> is an optional argument.</li></ul>
+      </li>
+      <li>
+        Parameters wrapped in <strong>curly brackets</strong> are mutually exclusive arguments (i.e. only 1 should be specified).<br>
+        <ul><li>e.g. in <code>add {-c | -v s/SERVICE} ...</code>, <code>-c</code> and <code>-v s/SERVICE</code> are mutually exclusive arguments.</li></ul>
+      </li>
+      <li>
+        Items with <code>…</code>​ after them can be used one or more times.<br>
+        <ul><li>e.g. <code>c/CLIENT_ID…​</code> can be used as <code>c/1</code>, <code>c/17 c/22</code> etc.</li></ul>
+      </li>
+      <li>
+        Items with <code>…</code>​ after them and wrapped in <strong>square brackets</strong> can be used zero or more times.<br>
+        <ul><li>e.g. <code>[t/TAG…​]</code> can be used as <code> </code> (i.e. 0 times), <code>t/vegetarian</code>, <code>t/budget conscious t/small scale</code> etc.</li></ul>
+      </li>
+      <li>
+        Parameters can be in any order.<br>
+        <ul><li>e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER -c</code>, <code>p/PHONE_NUMBER -c n/NAME</code> is also acceptable.</li></ul>
+      </li>
+      <li>
+        Extraneous parameters for commands that do not take in parameters (such as <code>list</code>, <code>help</code>, <code>exit</code> and <code>clear</code>) will be ignored.<br>
+        <ul><li>e.g. if the command specifies <code>list abc</code>, it will be interpreted as <code>list</code>.</li></ul>
+      </li>
+      <li>
+        If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+      </li>
+    </ul>
+</box>
 
 ### Viewing Help: `help`
 
@@ -161,12 +164,9 @@ Examples:
 * `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`
 * `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget`
 
-<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
-  <div>
-    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
-    A contact can have any number of tags (including 0).
-  </div>
-</div>
+<box type="tip" header="**Tip:**" >
+  A contact can have any number of tags (including 0).
+</box>
 
 
 Note:
@@ -206,13 +206,9 @@ Example:
 * `list -v s/catering`
 * `list -e des/wedding`
 
-<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
-  <div>
-    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
-    All parameters are optional! Leaving them out will list all contacts (clients and vendors) by default.
-  </div>
-</div>
-
+<box type="tip" header="**Tip:**" >
+  All parameters are optional! Leaving them out will list all contacts (clients and vendors) by default.
+</box>
 
 Notes:
 * The `-c`, `-v` and `-e` flags can be used to decide what type of data to list.
@@ -224,12 +220,9 @@ Notes:
 * Contacts matching any keywords in all fields will be returned (i.e. `AND` search). e.g. `list -c n/Jane Doe a/Blk 123` will list all clients with names containing **ANY** of `Jane` or `Doe` **AND** address containing **ANY** of `Blk` or `123`.
 * Refer to the specifications of the parameters [here](#parameters).
 
-<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
-  <div>
-    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
-    To search for an event by name, you will need to specify the <code style="background-color: #66a3ff; padding: 2px 4px; border-radius: 3px; color: #ffffff;">-e</code> flag.
-  </div>
-</div>
+<box type="tip" header="**Tip:**" >
+  To search for an event by name, you will need to specify the <code>-e</code> flag.
+</box>
 
 ### Editing a Contact
 
@@ -240,12 +233,10 @@ Format:
 edit {INDEX | id/ID} [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG…​]
 ```
 
-<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
-  <div>
-    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
-    Although all the parameters are optional, you must specify at least one field to make an edit!
-  </div>
-</div>
+<box type="warning" header="**Caution**">
+  Although all the parameters are optional, you must specify at least one field to make an edit!
+</box>
+
 
 Examples:
 * `edit 1 p/91234567`
@@ -268,21 +259,17 @@ delete INDEX
 
 Examples:
 * `delete 1`
-<div style="background-color: #0066ff; padding: 15px; border-radius: 8px; display: flex; align-items: center; color: #ffffff;">
-  <div>
-    <span style="font-size: 15px; margin-right: 10px;">💡</span><strong>Tip:</strong>
-    <code style="background-color: #66a3ff; padding: 2px 4px; border-radius: 3px; color: #ffffff;">delete</code> can delete either an
-    <code style="background-color: #66a3ff; padding: 2px 4px; border-radius: 3px; color: #ffffff;">Event</code> or a 
-    <code style="background-color: #66a3ff; padding: 2px 4px; border-radius: 3px; color: #ffffff;">Contact</code> depending on what is currently displayed
-  </div>
-</div>
+
+<box type="tip" header="**Tip:**" >
+  <code>delete</code> can delete either an event or a contact depending on what is currently displayed.
+</box>
 
 Notes:
 * `INDEX` should be the one-based index position of the contact or event displayed on the screen.
 * The command is highly dependent on what is displayed on the screen, i.e., `delete 1` will have different results when preceded by different `list` options.
 * To delete an event, the user has to enter `list -e` (with optional filters) to ensure the screen displays events, before entering the `delete` command.
 * Similarly, to delete contacts, the user has to enter `list` (with optional filters) to ensure the screen displays contacts, before entering the `delete` command.
-* You will not be allowed to delete clients and vendors that are the **sole** client/vendor of any event. In this case, you must delete the event before deleting the client/vendor.
+* You will not be allowed to delete clients and vendors that are the **sole** client/vendor of any event. In such a case, you must delete the event before deleting the client/vendor.
 * Refer to the specifications of the parameters [here](#parameters).
 
 ### Clearing All Entries : `clear`
@@ -292,6 +279,17 @@ Clears all contacts and events.
 Format:
 ```
 clear
+```
+
+### Viewing Help: `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format:
+```
+help
 ```
 
 ### Exiting the App : `exit`
@@ -307,33 +305,39 @@ exit
 
 DDD data are saved automatically as a JSON file `[JAR file location]/data/ddd.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless><strong>Caution:</strong>
-If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.</box>
+<box type="warning" header="**Caution**">
+  If your changes to the data file makes its format invalid, DDD will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it. Certain edits can cause the DDD to behave in unexpected ways (e.g., if a value entered is null/outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQs
 
-> **Q**: I accidentally deleted a contact. Is there an undo feature?<br>
+<box type="important" icon=":question:" seamless>
+  <strong>Q</strong>: I accidentally deleted a contact. Is there an undo feature?<br>
+  <strong>A</strong>: Nope. Unfortunately, <code>undo</code> has not been implemented.
+</box>
 
-**A**: Nope. Unfortunately, `undo` has not been implemented.
+<box type="important" icon=":question:" seamless>
+  <strong>Q</strong>: How do I edit events?<br>
+  <strong>A</strong>: Editing events will be implemented in a future release. For now, you will have to delete the existing event and create a new one with your desired details.
+</box>
 
-> **Q**: How do I edit events?<br>
 
-**A**: Editing events will be implemented in a future release. For now, you will have to delete the existing event and create a new one with your desired details.
+<box type="important" icon=":question:" seamless>
+  <strong>Q</strong>: I have a vendor that provides multiple services, but I can only indicate 1 service per vendor entry. What should I do?<br>
+  <strong>A</strong>: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provide 1 single service is so that searches via the <code>list</code> command can be more precise.
+</box>
 
->**Q**: I have a vendor that provides multiple services, but I can only indicate 1 service per vendor entry. What should I do?<br>
+<box type="important" icon=":question:" seamless>
+  <strong>Q</strong>: Can DDD be used by users who are not wedding planners (i.e. other event planners)?<br>
+  <strong>A</strong>: Yes! While DDD is targeted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
+</box>
 
-**A**: In such a scenario, you can create a second entry which is named differently to store the contact. The reason each vendor can only provide a single service is so that searches via the `list` command can be more precise.
-
-> **Q**: Can DDD be used by users who are not wedding planners (i.e. other event planners)?<br>
-
-**A**: Yes! While DDD is targeted at wedding planners, its features can be adapted to store contacts related to planning events, not just limited to weddings.
-
-> **Q**: How do I transfer my data to another Computer?<br>
-
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DDD home folder.
+<box type="important" icon=":question:" seamless>
+  <strong>Q</strong>: How do I transfer my data to another Computer?<br>
+  <strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DDD home folder.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -344,191 +348,41 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 --------------------------------------------------------------------------------------------------------------------
 
-<style>
-  table, th, td {
-    border: 1px solid #dddddd;
-    padding: 8;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  th {
-    background-color: #f2f2f2;
-    border-bottom: 2px solid #dddddd;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-</style>
-
 ## Command Summary
 
 ### `add`
 
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Format</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Create Client</strong></td>
-      <td>
-        <code>add -c n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]</code>
-      </td>
-      <td>
-        <code>add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget</code>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Create Vendor</strong></td>
-      <td>
-        <code>add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG ...]</code>
-      </td>
-      <td>
-        <code>add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget</code>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Create Event</strong></td>
-      <td>
-        <code>add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID ... v/VENDOR_ID ...</code>
-      </td>
-      <td>
-        <code>add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Action            | Format                                                                 | Example                                                                                     |
+| ----------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| **Create Client** | `add -c n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG ...]`                  | `add -c n/Jane Doe p/91234567 e/jd@gmail.com a/Blk 123 St 4 t/budget`                       |
+| **Create Vendor** | `add -v n/NAME p/PHONE e/EMAIL a/ADDRESS s/SERVICE [t/TAG ...]`        | `add -v n/ABC Catering p/98765432 e/abc@abc.com a/Blk 567 St 8 s/catering t/vegan t/budget` |
+| **Create Event**  | `add -e n/NAME des/DESCRIPTION d/DATE c/CLIENT_ID ... v/VENDOR_ID ...` | `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1 v/2`                    |
 
 ### `list`
 
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Format</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>List Contacts</strong></td>
-      <td>
-        <code>list</code>
-      </td>
-      <td>
-        <code>list</code>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>List Clients</strong></td>
-      <td>
-        <code>list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]</code>
-      </td>
-      <td>
-        <code>list -c n/Jane</code>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>List Vendors</strong></td>
-      <td>
-        <code>list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]</code>
-      </td>
-      <td>
-        <code>list -v s/catering</code>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>List Events</strong></td>
-      <td>
-        <code>list -e [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]</code>
-      </td>
-      <td>
-        <code>list -e des/wedding</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Action            | Format                                                                                      | Example               |
+| ----------------- | ------------------------------------------------------------------------------------------- | --------------------- |
+| **List Contacts** | `list`                                                                                      | `list`                |
+| **List Clients**  | `list -c [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID]`             | `list -c n/Jane`      |
+| **List Vendors**  | `list -v [n/NAME] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG ...] [id/ID] [s/SERVICE]` | `list -v s/catering`  |
+| **List Events**   | `list -e [n/NAME] [d/DATE] [des/DESCRIPTION] [id/ID]`                                       | `list -e des/wedding` |
+
 
 ### `edit`
 
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Format</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Edit by Index</strong></td>
-      <td>
-        <code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]</code>
-      </td>
-      <td>
-        <code>edit 1 p/91234567</code>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Edit by ID</strong></td>
-      <td>
-        <code>edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]</code>
-      </td>
-      <td>
-        <code>edit id/0 p/91234567 e/johndoe@example.com</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Action            | Format                                                                        | Example                                      |
+| ----------------- | ----------------------------------------------------------------------------- | -------------------------------------------- |
+| **Edit by Index** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]` | `edit 1 p/91234567`                          |
+| **Edit by ID**    | `edit id/ID [p/PHONE] [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SERVICE] [t/TAG ...]` | `edit id/0 p/91234567 e/johndoe@example.com` |
 
 ### Miscellaneous
 
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Format</th>
-      <th>Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Delete Contact/Event by Index</strong></td>
-      <td>
-        <code>delete INDEX</code>
-      </td>
-      <td>
-        <code>delete 1</code>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Clear Data</strong></td>
-      <td>
-        <code>clear</code>
-      </td>
-      <td>
-        <code>clear</code>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Help</strong></td>
-      <td>
-        <code>help</code>
-      </td>
-      <td>
-        <code>help</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Action                            | Format         | Example    |
+| --------------------------------- | -------------- | ---------- |
+| **Delete Contact/Event by Index** | `delete INDEX` | `delete 1` |
+| **Clear Data**                    | `clear`        | `clear`    |
+| **Help**                          | `help`         | `help`     |
+| **Exit**                          | `exit`         | `exit`     |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -536,13 +390,9 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 In case you need more information on the command parameters, here's a more comprehensive explanation of each parameter:
 
-- `Vendor`: A person who provides certain kinds of services
-- `Client`: A person who is getting married
-- `Event`: The wedding event
-
 ### Flags
 
-Some commands can be applied on clients, vendors and events. Use `-CONTACT_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
+Some commands can be applied on clients, vendors and events. Use `-TYPE_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
 
 * `-c`: flag to specify client related commands
 * `-v`: flag to specify vendor related commands
@@ -550,105 +400,13 @@ Some commands can be applied on clients, vendors and events. Use `-CONTACT_FLAG`
 
 ### Parameters
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Notes/Constraints</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>n/NAME</code></td>
-      <td>Name of contact/event</td>
-      <td>
-        <ul>
-          <li>should only alphanumeric characters or spaces, and it should not be blank</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>p/PHONE</code></td>
-      <td>Phone number of contact</td>
-      <td>
-        <ul>
-          <li>should only contain numbers</li>
-          <li>should have a length between 3 and 20 digits</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>e/EMAIL</code></td>
-      <td>Email address of contact</td>
-      <td>
-        <ul>
-          <li>follows the format <code>LOCAL_PART@DOMAIN_NAME</code></li>
-          <li><code>LOCAL_PART</code> should only contain alphanumeric characters or these special characters <code>+_.-</code></li>
-          <ul>
-            <li><code>LOCAL_PART</code> should not start or end with special characters</li>
-            <li><code>LOCAL_PART</code> can contain consecutive special characters, except for periods</li>
-          </ul>
-          <li><code>DOMAIN_NAME</code> should only contain alphanumeric characters and periods</li>
-          <ul>
-            <li><code>DOMAIN_NAME</code> consists of a set of domain labels separated by periods</li>
-            <li>domain labels should be at least 2 characters long</li>
-            <li>domain labels should start and end with alphanumeric characters</li>
-          </ul>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>a/ADDRESS</code></td>
-      <td>Address of contact</td>
-      <td>
-        <ul>
-          <li>can contain any value</li>
-          <li>should not be blank</li>
-        </ul>
-      </td>
-    </tr>
-    </tr>
-    <tr>
-      <td><code>s/SERVICE</code></td>
-      <td>Service provided by vendor</td>
-      <td>
-        <ul>
-          <li>should only contain alphanumeric characters and spaces</li>
-          <li>should not be blank</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>d/DATE</code></td>
-      <td>Date of event</td>
-      <td>
-        <ul>should follow one of these formats:
-          <ul>
-            <li><code>MM/dd/yyyy</code></li>
-            <li><code>yyyy-MM-dd</code></li>
-            <li><code>d MMM yyyy</code></li>
-          </ul>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>t/TAG</code></td>
-      <td>Tag associated with contact</td>
-      <td>
-        <ul>
-          <li>should only contain alphanumeric characters or dashes</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>id/ID</code></td>
-      <td>ID of contact/event</td>
-      <td>
-        <ul>
-          <li>configured by DDD</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Parameter   | Description                 | Notes/Contraints                                                                                                     |
+| ----------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `n/NAME`    | Name of contact/event       | <ul><li>Should only alphanumeric characters or spaces</li><li>Should not be blank</li><ul>                           |
+| `p/PHONE`   | Phone number of contact     | <ul><li>Should only contain numbers</li><li>Should have a length between 3 and 20 digits</li><ul>                    |
+| `e/EMAIL`   | Email address of contact    | <ul><li>Follows the format `LOCAL_PART@DOMAIN_NAME`</li><li>`LOCAL_PART` should only contain alphanumeric characters or these special characters `+_.-`</li><ul><li>`LOCAL_PART` should not start or end with special characters</li><li>`LOCAL_PART` can contain consecutive special characters, except for periods</li></ul><li>`DOMAIN_NAME` should only contain alphanumeric characters and periods</li><ul><li>`DOMAIN_NAME` consists of a set of domain labels separated by periods</li><li>Domain labels should be at least 2 characters long</li><li>Domain labels should start and end with alphanumeric characters</li></ul></ul> |
+| `a/ADDRESS` | Address of contact          | <ul><li>Can contain any value except slash (`/`)</li><li>Should not be blank</li><ul>                                |
+| `s/SERVICE` | Service provided by vendor  | <ul><li>Can contain any value except slash (`/`)</li><li>Should not be blank</li><ul>                                |
+| `t/TAG`     | Tag associated with contact | <ul><li>Should only contain alphanumeric characters or dashes</li></ul>                                              |
+| `d/DATE`    | Date of event               | <ul>Should follow one of these formats:<ul><li>`MM/dd/yyyy`</li><li>`yyyy-MM-dd`</li><li>`d MMM yyyy`</li></ul></ul> |
+| `id/ID`     | ID of contact/event         | <ul><li>This field is configured by DDD</li></ul>                                                                    |
