@@ -9,12 +9,12 @@ EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **re
 
 <br> **You are part of the ideal target audience of EZSTATE if you meet the following characteristics**:
 
-`Job`: Real Estate Agent focused on managing buyer and seller relationships 
-`Typing ability`: Comfortable with typing speeds of ~80 WPM or higher
-`Workflow Preference`: Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons
-`Tech Savviness`: Confident using command-based applications and prefers minimal mouse use
-`Work Style`: Handles multiple clients and properties simultaneously and values efficiency in contact and property management
-`Environment`: Works in a fast-paced setting where quick data entry and retrival are essential
+`Job`: Real Estate Agent focused on managing buyer and seller relationships <br>
+`Typing ability`: Comfortable with typing speeds of ~80 WPM or higher <br>
+`Workflow Preference`: Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons <br>
+`Tech Savviness`: Confident using command-based applications and prefers minimal mouse use <br>
+`Work Style`: Handles multiple clients and properties simultaneously and values efficiency in contact and property management <br>
+`Environment`: Works in a fast-paced setting where quick data entry and retrival are essential <br> 
 
 But do not worry if you do not meet every characteristic — EZSTATE is designed to be intuitive and efficient for all users!
 <br> Give it a try, and head over to our Quick Start guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
