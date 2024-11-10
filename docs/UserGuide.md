@@ -141,6 +141,9 @@ Refer to the [Features](#features) below for details of each command.
 
 - Unnecessary parameters (i.e. not mentioned in command format) will be ignored.<br>
 
+- [*Command words*](#command-word) and [*prefixes*](#prefix) are case-sensitive.<br>
+  e.g. `EDIT 1 n/John` and `edit 1 N/John` will raise an error.
+
 </div>
 
 ### Viewing help : `help`
@@ -624,6 +627,9 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 List of certain technical terms / uncommon words used in this user guide.
 
+### Command word
+- Word used at the beginning of each command denoting the action performed. Examples: `add`, `listemployees`, `filter`.
+
 ### Alphanumeric
 - Consisting of the letters A to Z (upper/lowercase) and the digits 0 to 9.
 
@@ -640,5 +646,9 @@ List of certain technical terms / uncommon words used in this user guide.
 
 ### Numeric
 - Consisting of the digits 0 to 9.
+
+### Prefix
+- 1 or more characters, followed by a `/`. 
+- Used in commands to indicate a value supplied by the user. Examples: `n/`, `id/`, `pid/`.
 
 [Return to Top](#table-of-contents)
