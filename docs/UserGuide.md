@@ -54,7 +54,7 @@ You can refer to the [FAQ](#frequently-asked-questions-quick-start) section belo
 
 3. Copy the file, make an empty folder in your `Documents` folder and paste `teacherspet.jar` in the new folder.
 
-4. Open a command terminal, enter `cd Downloads/NAME_OF_YOUR_FOLDER`. Then, enter `java -jar teacherspet.jar` to run the application.<br>
+4. Open a command terminal, enter `cd Documents/NAME_OF_YOUR_FOLDER`. Then, enter `java -jar teacherspet.jar` to run the application.<br>
    A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 ![Example UI](images/Ui.png)
