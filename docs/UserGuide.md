@@ -260,6 +260,10 @@ Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_N
 
 * MEETUP_TO must be a date/time that is later than MEETUP_FROM.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+When adding the MEETUP_FROM or MEETUP_TO, the `DD` parameter will take in any 2-digit number from 01 to 31. However, in some cases, such as February or April, the date 31 doesn't exist, in this case, instead of rejecting the input, the meet-up will be added but the date will be changed to the closest valid date in the same month. e.g. `2024-02-31 23:59` will create `2024-02-29 23:59`, `2024-04-31 12:00` will create `2024-04-30 12:00`, but `2024-04-32 12:00` will give an error since 32 is not a valid `DD` input.
+</div>
+
 * Buyers that exist in buyer list will be marked as purple, while those that don't will be marked as red, for more details [see the notes in MeetUp](#meet-ups)
 
 Examples:
@@ -268,7 +272,6 @@ Examples:
 Meet Ups with clashing timings will be displayed in red. Otherwise, the default display colour for timing is green.
 
 ![MeetUpClash](images/MeetUpClash.png)
-
 
 ### Editing a meet-up : `edit`
 
