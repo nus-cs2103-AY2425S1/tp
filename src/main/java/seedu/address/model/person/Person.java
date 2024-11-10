@@ -111,7 +111,7 @@ public class Person implements Comparable<Person> {
         }
 
         // If either party has no telegram username, then just check for uniqueness in phone and email
-        if (!getTelegramUsername().hasUsername() || !otherPerson.getTelegramUsername().hasUsername()) {
+        if (!getTelegramUsername().hasUsername() || !otherPerson.hasTelegramUsername()) {
             return otherPerson.getPhone().equals(getPhone())
                     || otherPerson.getEmail().equals(getEmail());
         }
@@ -238,5 +238,14 @@ public class Person implements Comparable<Person> {
         if (this.observer != null) {
             this.observer.update(this);
         }
+    }
+
+    /**
+     * Checks if the person has a Telegram username.
+     *
+     * @return {@code true} if the Telegram username is present; {@code false} otherwise.
+     */
+    public boolean hasTelegramUsername() {
+        return this.telegramUsername.hasUsername();
     }
 }
