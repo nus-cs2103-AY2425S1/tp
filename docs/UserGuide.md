@@ -7,7 +7,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 * [High quality]
   - User friendly interface: sleek list design to view all of your of internship applications.
 * [Streamlining management]
-  - Add, delete and update your internship applications: everything you need to manage your list of internship applications.
+  - Add, delete and update the status of your internship applications: everything you need to manage your list of internship applications.
 * [Insights]
   - Tailored summary of your list of internship applications so that you can gain hidden insights.
 
@@ -35,25 +35,36 @@ HireMe is a **free desktop application that helps you manage your extensive list
 
 ## Quick start
 
+### Part 1: Downloading HireMe and Getting started
+
+#### _Mac Users_
+
 1. Ensure you have Java `17` or above installed on your computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your HireMe.
+1. Copy the file to the folder you want to use as the _home folder_ for your HireMe. 
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hireme.jar` command to run the application.<br>
+3. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hireme.jar` command to run the application.<br>
 
+#### _Windows Users_
+
+1. Ensure you have Java `17` or above installed on your computer, if not download it from [here]().
+
+
+
+### Part 2: Using the HireMe application
     <br>A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br>
    Some example commands you can try:
 
-    * `/list` : Lists all your internship applications.
-
     * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24` : Adds an internship application at Google to HireMe.
 
     * `/delete 1` : Deletes the 1st internship application shown in the current list.
+
+    * `/list` : Lists all your internship applications.
 
     * `/clear` : Deletes all your internship applications.
 
@@ -258,7 +269,7 @@ Ans: You should not be editing the JSON data file directly. You should be using 
 Should the data file be corrupted, HireMe will discard all data and start with an empty data file.
 
 #### Q3: Can I find followed by filter to filter out the applications with a specific keyword?
-Ans: Currently, `/find` and `/filter` do not stack. These commands will find or filter based on all of your internship application entries.
+Ans: Currently, the effects of `/find` and `/filter` do not stack. These commands will find or filter based on all of your internship application entries.
 
 #### Q4: After I sort my internship applications, will a new entry be added in the right order automatically?
 Ans: New entries will not be inserted in the right order. They are inserted to the bottom of the list.

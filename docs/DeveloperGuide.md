@@ -502,17 +502,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User enters an invalid number of arguments.
-    * 1a1. HireMe shows an error message that explains how to use the sort command and what parameters are valid.
-    * 1a2. User enters new command.
-    Steps 1a1-1a2 are repeated until the command entered is valid.
-    Use case resumes from step 2.
+    * 1a1. HireMe shows an error message 
+  
+    Use case ends.
 
 
 * 1b. User enters an invalid order.
-    * 1b1. HireMe shows an error message that explains how to use the sort command and what parameters are valid.
-    * 1b2. User enters new command.
-      Steps 1b1-1b2 are repeated until the command entered is valid.
-      Use case resumes from step 2.
+    * 1b1. HireMe shows an error message.
+  
+      Use case ends.
 
 
 * 1c. User sorts an empty list.
@@ -638,8 +636,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. There are no internship entries.
-    * 1a1. HireMe shows a message indicating "no entries."
+* 1a. The user provided an extra parameter.
+    * 1a1. HireMe shows an error message.
 
       Use case ends.
 
@@ -708,6 +706,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. HireMe application closes and auto-saves the file.
 
    Use case ends.
+
+**Extensions**
+
+* 1a. The user provided an extra parameter.
+    * 1a1. HireMe shows an error message.
+
+      Use case ends.
+
+
 <br></br>
 
 ### Non-Functional Requirements
@@ -728,8 +735,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **REJECTED**: The user has rejected or been rejected from this internship application.
     - **ACCEPTED**: The user has accepted the offer for this internship.
 
-
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
+
+- **Command Line Interface (CLI)**: The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. As if giving instructions to execute a desired action.
 
 - **Command**: The string the user types into the HireMe application’s command bar to carry out a particular action.
 
@@ -738,6 +746,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Company Email**: The email of the company that the user is applying for an internship role at.
 
 - **Company Name**: The name of the company that the user is applying for an internship role at.
+
+- **Graphical User Interface (GUI)**: The user interacts with the computer using visual elements like buttons, icons and windows. 
 
 - **Role**: The role of the internship the user applied for.
 
