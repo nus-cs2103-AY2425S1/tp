@@ -128,6 +128,7 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* Conditions for each field is the same as the `add` command.
 
 Examples:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `john doe` to be `91234567` and `johndoe@example.com` respectively.
