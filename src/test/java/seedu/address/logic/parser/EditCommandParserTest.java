@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MAJOR_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -172,6 +173,12 @@ public class EditCommandParserTest {
         descriptor = new EditPersonDescriptorBuilder().withGroups(VALID_GROUP_TWO).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // multiple groups
+        userInput = targetIndex.getOneBased() + GROUP_DESC_TWO + GROUP_DESC_ONE;
+        descriptor = new EditPersonDescriptorBuilder().withGroups(VALID_GROUP_TWO, VALID_GROUP_ONE).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -205,6 +212,11 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENTID, PREFIX_NETID, PREFIX_MAJOR));
+
+        // duplicate valid values for groups
+        userInput = targetIndex.getOneBased() + GROUP_DESC_ONE + GROUP_DESC_ONE;
+
+        assertParseFailure(parser, userInput, Messages.MESSAGE_DUPLICATE_GROUPS);
     }
 
     @Test

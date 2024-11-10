@@ -86,9 +86,9 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> groups} into a {@code Set<Group>} if {@code groups} is non-empty.
+     * Parses {@code Collection<String> groups} into a {@code GroupList} if {@code groups} is non-empty.
      * If {@code groups} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Group>} containing zero groups.
+     * {@code GroupList} containing zero groups.
      */
     private Optional<GroupList> parseGroupsForEdit(Collection<String> groups) throws ParseException {
         assert groups != null;

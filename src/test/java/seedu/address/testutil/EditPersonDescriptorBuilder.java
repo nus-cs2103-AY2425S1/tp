@@ -75,7 +75,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code groups} into a {@code Set<Group>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code groups} into a {@code GroupList} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withGroups(String... groups) {

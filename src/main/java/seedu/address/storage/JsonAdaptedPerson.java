@@ -123,16 +123,21 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
         }
         final Comment modelComment = new Comment(comment);
+
         final GroupList modelGroups = new GroupList();
+
         for (JsonAdaptedGroup group : groups) {
             modelGroups.addGroup(group.toModelType());
         }
+
         List<Group> invalidGroups = modelGroups.getUnmodifiableGroups().stream()
                 .filter(groupName -> !Group.isValidGroupName(groupName.getGroupName()))
                 .collect(Collectors.toList());
+
         if (!invalidGroups.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
         }
+
         return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelGroups, modelYear, modelComment);
     }
 
