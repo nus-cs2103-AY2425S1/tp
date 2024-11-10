@@ -23,7 +23,7 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 
    <img src="images/quickStart.png" width="800"/>
 
-1. Open a command terminal (called `Terminal` on MacOS and `Command Prompt` on Windows). Change directory into the folder you put the jar file in using the command `cd`. For example, if you created your home folder `MediContact` in your Desktop type `cd Desktop/MediContact`. If you created your home folder `MediContact` in Documents, type `cd Documents/MediContact`. If you named your home folder some other FILENAME, replace `MediContact` with filename. 
+1. Open a command terminal (called `Terminal` on MacOS and `Command Prompt` on Windows). Change directory into the folder you put the jar file in using the command `cd`. Here are detailed instructions for how to change directory in [MacOS](https://youtu.be/VRFcEMPES7U) and in [Windows](https://www.youtube.com/watch?v=BfXh11ryBJg).
 
 1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory.
 
