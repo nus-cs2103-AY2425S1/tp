@@ -838,8 +838,6 @@ Method 2:
 
 ## Command summary
 
-## Command summary
-
 | Action                      | Format, Examples                                                                                               |
 |-----------------------------|----------------------------------------------------------------------------------------------------------------|
 | **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`                                                         |
