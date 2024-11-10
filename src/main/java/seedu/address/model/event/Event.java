@@ -1,6 +1,7 @@
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
@@ -22,7 +23,9 @@ import seedu.address.ui.Observer;
  * Represents an Event in the address book.
  */
 public class Event {
-    public static final String MESSAGE_CONSTRAINTS = "Event name should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Event name should not exceed 60 characters and "
+            + "should not be blank.";
+    public static final String VALIDATION_REGEX = ".{1,60}";
     private final String name;
     private final Set<Person> attendees;
     private final Set<Person> vendors;
@@ -37,12 +40,15 @@ public class Event {
      * @param name A valid event name.
      */
     public Event(String name) {
+        requireNonNull(name);
+        checkArgument(isValidEvent(name), MESSAGE_CONSTRAINTS);
         this.name = name;
         this.attendees = new HashSet<>();
         this.vendors = new HashSet<>();
         this.sponsors = new HashSet<>();
         this.volunteers = new HashSet<>();
     }
+
 
     /**
      * Constructs a {@code Event}.
@@ -57,6 +63,8 @@ public class Event {
     public Event(String name, Set<Person> attendees, Set<Person> vendors, Set<Person> sponsors,
                  Set<Person> volunteers) {
         requireNonNull(name);
+        requireNonNull(name);
+        checkArgument(isValidEvent(name), MESSAGE_CONSTRAINTS);
         this.name = name;
         this.attendees = attendees != null ? attendees : new HashSet<>();
         this.vendors = vendors != null ? vendors : new HashSet<>();
@@ -70,7 +78,10 @@ public class Event {
      * @param event {@code Event} that we want to copy.
      */
     public Event(Event event) {
-        this.name = event.getName();
+        String toCopyName = event.getName();
+        requireNonNull(toCopyName);
+        checkArgument(isValidEvent(toCopyName), MESSAGE_CONSTRAINTS);
+        this.name = toCopyName;
         this.attendees = event.getAttendees();
         this.vendors = event.getVendors();
         this.sponsors = event.getSponsors();
@@ -204,7 +215,7 @@ public class Event {
      * Returns true if a given string is a valid event.
      */
     public static boolean isValidEvent(String event) {
-        return !event.isEmpty();
+        return !event.isEmpty() && event.matches(VALIDATION_REGEX);
     }
 
     /**

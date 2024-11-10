@@ -234,6 +234,7 @@ public class EventTest {
     @Test
     public void isValidEvent_invalidInput_false() {
         assertFalse(Event.isValidEvent(""));
+        assertFalse(Event.isValidEvent("The longest event name in the history of mankind ever forever")); // 61 > 60
     }
 
     @Test
