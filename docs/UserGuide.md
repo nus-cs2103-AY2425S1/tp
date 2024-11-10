@@ -220,18 +220,19 @@ Examples:
 
 ### Transaction Management Commands
 
-#### Adding a Transaction to a specified client: `addt`
+#### Adding a transaction to a specified client: `addt`
 
 Format: `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 
 * Adds a transaction to the client at the specified `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The amount should be a number of up to two decimal places containing only digits (`0 - 9`), one decimal point (`.`) if needed and one minus sign (`-`) if needed.
+* The amount should be a number of up to two decimal places containing only digits (`0 - 9`), one decimal point (`.`) if needed and one minus sign (`-`) if needed with no blank spaces in between.
 e.g. `10, -100.5, 1000.55`
 * If the amount includes a decimal point, there should be at least one digit before and one digit after the decimal point. 
 e.g. `0.5`
 * If the amount includes a minus sign, the minus sign should be the first character e.g. `-100`
+* The amount should be within the range -1 billion (`-1000000000`) to 1 billion (`1000000000`).
 * The date should be in the format `YYYY-MM-DD` e.g. `2024-12-20`
 
 <box type="warning" seamless>
@@ -248,7 +249,7 @@ adds the transaction to the 1st client in the application.
 * `find David` followed by `addt 1 d/sell raw materials amt/200 o/Company XYZ dt/2024-09-01` 
 adds the transaction to the 1st client in the results of the `find` command.
 
-#### Listing Transactions for a specified client: `listt`
+#### Listing transactions for a specified client: `listt`
 
 Format: `listt INDEX`
 
@@ -266,7 +267,7 @@ Examples:
   ![result for 'listt 1'](images/listt.png)
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st client in the results of the `find` command.
 
-#### Deleting Transactions for a specified client: `deletet`
+#### Deleting transactions for a specified client: `deletet`
 
 Format: `deletet INDEX`
 
@@ -282,7 +283,7 @@ Format: `deletet INDEX`
 Examples:
 * `listt 1` followed by `deletet 1` loads the transaction list for the first client, then deletes the first transaction.
 
-#### Finding Transactions by description: `findt`
+#### Finding transactions by description: `findt`
 
 In a transaction list, finds all transactions with descriptions matching any of the given keywords.
 
