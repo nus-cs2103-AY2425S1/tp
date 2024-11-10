@@ -61,8 +61,6 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
-
    * `exit` : Exits the app.
 - For the full list of commands, refer to [Command Summary](#command-summary) below for more details of each command.
 
@@ -294,7 +292,7 @@ UniLink data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-UniLink data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+UniLink data are saved automatically as a JSON file `[JAR file location]/data/unilink.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -318,6 +316,7 @@ Furthermore, certain edits can cause the UniLink to behave in unexpected ways (e
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **[For macOS users] If you open the application in fullscreen** and then use the `help` command, the Help Window may sometimes display visual glitches (such as a black background). Despite this, the application will continue to function normally after closing the Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
