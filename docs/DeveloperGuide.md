@@ -1326,7 +1326,7 @@ testers are expected to do more _exploratory_ testing.
 
 **Group size:** 4
 
-**Total Enhancements:** x/8 (`2x4`)
+**Total Enhancements:** 5/8 (`2x4`)
 
 ### 1. Update Email Constraints
 
@@ -1372,3 +1372,11 @@ A reminder that this is the format accepted for `Group Name`: `[Module]-[Tutoria
 1. For `Module`, `CS2103` groups will come first, followed by `CS2103T` groups.
 2. For `Tutorial Group`, the letter will be compared first and sorted by alphabetical order. If there is a tie, the numerical part will be compared and sorted in descending order.
 3. For `Group Number`,if the sort feature reaches this section, it will be sorted by descending order of numerical value.
+
+### 5. Enhance Sort Student
+
+Currently, our system sorts `Students` by ASCII order.
+
+#### Enhancement
+
+We plan to update the sorting such that it sorts by alphabetical order instead.
