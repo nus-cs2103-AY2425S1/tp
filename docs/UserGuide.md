@@ -99,7 +99,7 @@ To use EZSTATES, type commands in the command box and press `Enter`. Here are a 
 
    * `buyer n/John Doe p/98765432 e/johnd@example.com` : Adds a buyer named `John Doe` with a phone number `98765432` and email `johnd@example.com`.
 
-   * `delete 1` : Deletes the contact at index 1 (e.g. "bob" according to the picture above).
+   * `deleteclient 1` : Deletes the contact at index 1 (e.g. "bob" according to the picture above).
 
    * `clear` : Deletes all contacts.
 
