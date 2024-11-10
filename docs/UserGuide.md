@@ -88,11 +88,13 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 * Items with `…`​ after them can be repeated or omitted entirely<br>
   e.g. `[t/TAG]…​` can be left blank, or used like `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Fields can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` will also work.
 
 * Anything after certain commands such as `help`, `list`, `exit` and `clear` will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Some fields don't have a character limit, but it's best to keep entries concise. Longer entries may make some details harder to view.
 
 * PDF Users
   * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -118,7 +120,9 @@ Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/M
 
 <box type="info" seamless>
 
-**Note:** You can add multiple tags (or none at all).
+**Note:** 
+* You can add multiple tags (or none at all).
+* To avoid duplicate entries, ensure each contact has a unique Telegram handle, phone number, or email address. You can add multiple contacts with the same name, as long as their contact details (Telegram handle, phone number, or email) are different.
 </box>
 
 Examples:
