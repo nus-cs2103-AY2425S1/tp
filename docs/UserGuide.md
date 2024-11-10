@@ -73,12 +73,12 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 | Action                                                             | Format, Examples                                                                                                                                                                                 |
 |--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Help](#viewing-help-help)**                                     | `help`                                                                                                                                                                                           |
-| **[Add](#adding-a-contact-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June`     |
+| **[Add](#adding-a-contact-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June & James`               |
 | **[Delete](#deleting-a-contact-del-followed-by-y-or-n)**           | `del n/NAME` followed by `y` or `n`<br> e.g., `del n/John Doe` followed by `y`                                                                                                                   |
 | **[Edit](#editing-a-contact-edit)**                                | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                                 |
 | **[List](#listing-all-contacts-list)**                             | `list`                                                                                                                                                                                           |
 | **[Add Wedding](#adding-a-wedding-add-wed--aw)**                   | `add-wed w/NAME & NAME v/VENUE d/DATE` or `aw w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add-wed w/ John & June v/Orchard Hotel d/12/12/2030` or `aw w/ John & June v/Orchard Hotel d/12/12/2030` |
-| **[Delete Wedding](#deleting-a-wedding-del-wed--dw)**              | `del-wed w/NAME & NAME` or `dw w/NAME & NAME` followed by `y` or `n`<br> e.g., `del-wed w/John Loh & Jean Tan` or `dw w/John Loh & Jean Tan` followed by `y`                                                                                                                             |
+| **[Delete Wedding](#deleting-a-wedding-del-wed--dw)**              | `del-wed w/NAME & NAME` or `dw w/NAME & NAME` followed by `y` or `n`<br> e.g., `del-wed w/John Loh & Jean Tan` or `dw w/John Loh & Jean Tan` followed by `y`                                     |
 | **[List Weddings](#listing-all-weddings-list-wed--lw)**            | `list-wed` or `lw`                                                                                                                                                                               |
 | **[Add Tag](#adding-tags-to-a-contact-tag-add--ta)**               | `tag-add n/NAME t/TAG...` or `ta n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James` or `ta n/John Doe t/June & James`                                                               |
 | **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG...` or `td n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James`                                                               |
@@ -87,6 +87,18 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 | **[Clear](#clearing-all-entries-clear-ab--cab-and-clear-wb--cwb)** | `clear-ab` or `cab` for address book and `clear-wb` or `cwb` for wedding book followed by `y` or `n`                                                                                             |
 | **[Exit](#exiting-the-program-exit)**                              | `exit`                                                                                                                                                                                           |
 --------------------------------------------------------------------------------------------------------------------
+
+<box type="important" seamless>
+
+**IMPORTANT:** Feel free to use this table and navigate to the features that interests you by clicking on the action words 😁 
+
+</box>
+
+<box type="tips" seamless>
+
+**TIPS:** Here's a quick tip! To navigate to the top of the page, use `Home` on Windows or `command + ↑` on Mac. 
+
+</box>
 
 ### Parameter Constraints
 The table below provides a brief explanation of each parameter encountered in the command summary above. It also details the constraints of each parameter used in a command.
@@ -116,7 +128,6 @@ The table below provides a brief explanation of each parameter encountered in th
 
 </box>
 
-
 | Parameter | Prefix | Definition | Case-sensitvity | Constraints | Examples |
 |--------------------|------|---------------------------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `NAME`             | `n/` | Name of the person.                               | Case-insensitive | - Only alphanumeric characters, spaces, `/`, and `.` are allowed. <br> - Should not be blank. <br> - If the name contains a `-`, a possible workaround is to replace the `-` with an empty spacing. | :+1: `Muhammad Ali` <br>:+1: `Henry s/o Nathan` <br>:+1: `Robert Downey Jr.` <br>:x: `Trent Alexander-Arnold` <br>:x: `@JohnnyBoi` |
@@ -130,15 +141,16 @@ The table below provides a brief explanation of each parameter encountered in th
 | `DATE`             | `d/` | Date of the wedding.                              | NA               | - Should be in the format `DD/MM/YYY`. <br> - Only numbers and `/` are allowed. <br> - Should not be blank. <br> - The range of dates allowed are `01/01/1900` to `31/12/2099` | :+1: `12/12/2025` <br> :x: `12th June 2021` <br> :x: `2025-09-03` <br> :x: `31/12/1899` <br> :x: `01/01/2100` |
 
 
-
 ## Features
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+** Important notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* KnottyPlanners do not accept any empty parameters, hence, please add in a placeholder value that you choose to replace an empty input (e.g. `p/000` or `a/nil` ).
 
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
@@ -180,7 +192,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 **IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
-* We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
+* We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`)    
 
 </box>
 
@@ -203,7 +215,9 @@ Format: `del n/NAME` followed by `y` or `n`
 
 <box type="important" seamless>
 
-**IMPORTANT:** `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+**IMPORTANT:** 
+* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+* If you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊
 
 </box>
 
@@ -245,8 +259,11 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 
 <box type="important" seamless>
 
-**IMPORTANT:** Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
+**IMPORTANT:** 
+* Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
 ['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
+* Multiple input of the same parameter can be added but only the last one will be accepted (e.g. `edit n/John p/111 p/222` will edit phone number to `222`)
+* If you edit a person with the same parameters, we will not alert you
 
 </box>
 
@@ -282,7 +299,15 @@ You can add a wedding to the list of weddings.
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DATE`
 
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
-* We will also alert you when you add a different wedding with the same name, we need your help to change their input name in these situations 😊.
+* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`.
+* To make adding a wedding easier, Knotty Planner will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+  Examples: `john & jane`, `JOHN   & jane` will all be formatted to `John & Jane`.
+
+<box type="important" seamless>
+
+**IMPORTANT:** Date must be a valid date in the format of **dd/MM/yyyy**.
+
+</box>
 
 ![add wedding message](images/addWeddingMsg.png)
 
@@ -306,7 +331,9 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 **IMPORTANT:** 
 
 * `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+* If you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
+* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding
 
 </box>
 
@@ -333,7 +360,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 </div>
 
 Examples:
-* `del-wed w/John Loh & Jean Tan` followed by `y` deletes the wedding named `John oh & Jean Tan` from the address book.
+* `del-wed w/John Loh & Jean Tan` followed by `y` deletes the wedding named `John Loh & Jean Tan` from the address book.
 * `dw w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
 ### Listing All Weddings: `list-wed` / `lw`
@@ -360,6 +387,8 @@ Format: `tag-add n/NAME t/TAG...` / `ta n/NAME t/TAG...`
 * The name of the tag must match the wedding that you want to add the contact to.
 
 * You can add one contact to multiple weddings in one go by specifying multiple tags in your command.
+
+* If multiple tags of the same wedding are added, KnottyPlanners will only process one and ignore the other tags for you. 
 
 </box>
 
@@ -484,6 +513,15 @@ Format:
 * `clear-ab` / `cab` followed by `y` clears all contacts in the address book.
 * `clear-wb` / `cwb` followed by `n` will not clear all weddings in the wedding book.
 
+<box type="important" seamless
+
+**IMPORTANT:** 
+
+* Both clear commands must be followed by either `y` or `n` command.
+* If you accidentally mistype or enter an unintended command, we suggest you to use `n` to cancel any pending clear operations to ensure everything runs smoothly😊
+
+</box>
+
 <div style="display: flex; justify-content: space-between;">
     <div style="text-align: center; width: 50%;">
         <img src="images/clearMsg1.png" alt="clear ab" style="width: 100%;">
@@ -520,8 +558,6 @@ There is no need to save manually.
 
 * Furthermore, certain edits can cause the KnottyPlanners to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
-</box>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -544,8 +580,5 @@ There is no need to save manually.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **List Command** ignores any extraneous parameters after the `list` command. This is a feature, not a bug.
-4. **Filter Command** returns the largest range of matches based on your input. This is a feature, not a bug.
-5. **Names and Wedding Names** are automatically formatted to have the first letter of each word capitalized. This is a feature, not a bug.
-
+3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`)
 --------------------------------------------------------------------------------------------------------------------
