@@ -215,6 +215,13 @@ To edit the details of an existing contact in WedLinker, type `edit` followed by
 * At least one of the optional fields must be provided.
 * Existing details will be updated to the input values.
 
+![img_1.png](img_1.png)
+<p align="center">
+The PERSON_NUMBER corresponds to each person's positioon in the `Person` list <br>
+</p>
+
+* In this example, the PERSON_NUMBER of 2 refers to the person named "Bernice Yu", and the command `edit 2 n/Bob Yu` will change the contact's name from "Bernice Yu" to "Bob Yu" 
+
 Examples:
 * To change the phone number of the first contact to 91234567, enter the command:  
   * `edit 1 p/91234567`
@@ -228,7 +235,7 @@ Use the delete command to remove a contact from WedLinker.
 
 Format: `delete PERSON_NUMBER`
 
-To remove a contact to WedLinker, type `delete` followed by the person's position number in the contact list
+To remove a contact from WedLinker, type `delete` followed by the person's position number in the contact list
 
 * The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​
 
@@ -271,7 +278,7 @@ To assign a tag to a contact, type `tag` followed by the person's position numbe
 * If the `Tag` does not exist, you can use the label `f/` to force the creation and assignment of the `Tag`.
 
 Examples:
-* To assign the tag named `Florist` to the first person in the list, enter the command:
+* To assign an existing tag named `Florist` to the first person in the list, enter the command:
     * `tag 1 t/Florist`
 * To assign a new tag named `Musician` (that doesn't currently exist) to the second person in the list, enter the command:
     * `tag 2 t/Musician f/`
@@ -353,6 +360,14 @@ Following that, type "edit-wedding" followed by the Wedding number enter the det
 * The index **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
+![img_4.png](img_4.png)
+<p align="center">
+The WEDDING_NUMBER corresponds to each Wedding's position in the `Wedding` list
+</p>
+
+* In this example, the WEDDING_NUMBER 2 refers to the wedding named "Wedding 2", and the command `edit-wedding 2 w/Bob's wedding` will change the Wedding name from "Wedding 2" to "Bob's Wedding".
+
+
 Examples:
 * To edit the address of the Wedding named `Wedding!`, to XYZ street:
     * First, identify the Wedding number by entering the command: `list-weddings`
@@ -420,6 +435,14 @@ Following that, type "assign-task" followed by assigned Person's positional numb
 
 * The `PERSON_NUMBER` and `TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
 
+![img_6.png](img_6.png)
+<p align="center">
+The TASK_NUMBER corresponds to each Task's position in the `Task` list
+</p>
+
+* In this example, the TASK_NUMBER 2 refers to the task with the description "Send invitations", and the command `assign-task 1 2` will assign the "Send invitations" task to the contact "Alex Yeoh".
+
+
 Examples:
 * To assign two tasks with the descriptions `Buy cake` and `Finalise itinery`:
     * Firstly, enter the command `list-tasks` to see all contacts and tasks.
@@ -437,6 +460,13 @@ To remove a `task` from a contact, type `unassign-task` followed by the Person's
 
 **Important Note:** The `PERSON_TASK_NUMBER` here refers to the task's position within a contact's assigned tasks, not the main task list number.* 
 * The `PERSON_NUMBER` and `PERSON_TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
+
+![img_7.png](img_7.png)
+<p align="center">
+The PERSON_TASK_NUMBER corresponds to each task's position within a contact's assigned tasks,
+</p>
+
+* In this example, the PERSON_TASK_NUMBER 3 for the first person refers to the task with the description "Send invitations", and the command `unassign-task 1 3` will remove the "Send invitations" task from the contact "Alex Yeoh".
 
 Examples:
 * To remove the tasks with the descriptions `Buy cake` and `Finalise itinery` from the first person in the contact list:
