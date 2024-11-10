@@ -948,6 +948,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix B: Planned Enhancements**
 
+Team Size: 5 members
+
 As we continue to develop PROperty, we are focused on refining and expanding its capabilities to better meet user needs. 
 Through identifying current limitations, we’re able to target areas that can benefit most from enhancement. 
 This section highlights our planned improvements, showcasing the steps we're taking to deliver a more comprehensive and effective solution for property agents.
