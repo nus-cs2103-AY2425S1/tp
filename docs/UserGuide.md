@@ -3,18 +3,16 @@ layout: page
 title: User Guide
 ---
 
-TalentHub is a desktop app designed for **Celebrity Talent Managers**, to help with the **management of celebrity and relevant industrial contacts**.
+Welcome to TalentHub, an all-in-one desktop app designed to help you and other **Celebrity Talent Managers** with the **management of celebrity and relevant industrial contacts**.
 
 TalentHub is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: CLI and GUI:**<br>
-This means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your contacts and your celebrities' events efficiently, while still having the ease of viewing all of them in a graphical format.
+Having access to both a Command Line Interface (CLI) and a Graphical User Interface (GUI) means that you can do everything by simply typing commands into the command box, and you can easily view and navigate results on the screen. This way, you can type fast and manage your contacts and your celebrities' events efficiently, while still having the ease of viewing all of them in a graphical format.
 
 </div>
-
-If you can type fast, and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
 
 * Table of Contents
 {:toc}
@@ -82,7 +80,7 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
 ### Adding a person: `add person`
 
-Adds a person to TalentHub.
+You can use to TalentHub to add a person to a contacts list!
 
 Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
