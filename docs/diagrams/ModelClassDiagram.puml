@@ -58,7 +58,7 @@ Person <|-right- Student
 Person <|-left- Guardian
 
 LessonSchedule --> UniqueLessonList
-Lesson *-left-> Student
+Lesson -left-> Student
 Lesson *--> Fee
 Lesson *--> StartDateTime
 Lesson *--> EndDateTime
