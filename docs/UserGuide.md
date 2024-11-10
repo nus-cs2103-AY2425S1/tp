@@ -152,6 +152,8 @@ Examples:
 
 - `find John` returns `john`, `John Doe` and `Johnny`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+**Result from `find alex david`:**
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -260,6 +262,11 @@ Format: `view INDEX`
 Examples:
 
 - `view 1` shows the contact details of the first person shown on the displayed person list.
+- `view 3`
+
+**Result from `view 3`:**
+
+  ![result for 'view 3'](images/ViewCommandResult.png)
 
 ### Pin a contact: `pin`
 
@@ -276,6 +283,10 @@ Examples:
 
 - `pin 1` pins the contact of the first person shown on the displayed person list into the pinned person list.
 
+**Result from `pin 1`:**
+
+  ![result for 'pin 1'](images/PinCommandResult.png)
+
 ### Unpin a contact: `unpin`
 
 Unpins the contact of a person from the pinned list.
@@ -290,6 +301,14 @@ Format: `unpin INDEX`
 Examples:
 
 - `unpin 1` unpins the contact of the first person shown on the pinned person list.
+
+**State before`unpin 1`:**
+
+  ![state before `unpin`](images/BeforeUnpin.png)
+
+**State after `unpin 1`:**
+
+  ![state after `unpin 1`](images/UnpinCommandResult.png)
 
 ### Undo a previously executed command: `undo`
 
@@ -365,6 +384,12 @@ Examples:
 
 - `toggle` changes the application theme.
 
+**GUI in light mode:**
+![GUI in light mode](images/UiInLightMode.png)
+
+**GUI in dark mode:**
+![GUI in dark mode](images/UiInDarkMode.png)
+
 ### Clear all entries : `clear`
 
 Clears all entries from the address book.
@@ -411,9 +436,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 | Action         | Format, Examples                                                                                                                                                          |
 |----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`     |
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`      |
 | **List**       | `list`                                                                                                                                                                    |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                             |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                       |
 | **Deletetag**  | `deletetag INDEX t/TAG` <br> e.g. `deletetag 1 t/Client`                                                                                                                  |
