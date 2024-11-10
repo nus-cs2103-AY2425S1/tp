@@ -310,7 +310,7 @@ Use case ends
 **MSS**
 1. User enters a command to edit all contacts with specific tags to new tag.
 2. Cher will change all contacts containing specified tags to the new tag.
-3. Cher will show the contacts that have been changed.<br>
+3. Cher will show the contacts that have the new tag.<br>
    Use case ends.
 
 **Extensions**
