@@ -18,7 +18,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
 
 
 /**
@@ -49,7 +48,6 @@ public class CreateDoctorCommandParser implements Parser<CreateDoctorCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Remark remark = new Remark("");
-        Set<Tag> tagList = new HashSet<>();
 
         Person doctor = new Person(name, role, phone, email, address, remark);
 
