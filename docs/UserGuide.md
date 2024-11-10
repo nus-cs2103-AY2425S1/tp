@@ -144,9 +144,9 @@ The help command provides guidance on using ClinicBuddy’s features to navigate
 
 Adds a patient to the address book.
 
-Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`
+Format: `add n/NAME a/AGE g/GENDER i/NRIC p/PHONE e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`
 
-* Names must contain alphanumeric characters and spaces. Case-sensitive
+* Names only allow alphanumeric characters and spaces. Case-sensitive
 * Age should only contain numbers and should be between 0-999 inclusive.
 * Gender is for biological gender and should only contain `M` for Male or `F` for Female. Case-insensitive.
 * NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier
@@ -323,7 +323,7 @@ Examples:
 
 Deletes the specified patient from ClinicBuddy.
 
-Format: `deleteappt NRIC /d dd-mm-yyyy HH:mm`
+Format: `deleteappt NRIC dd-mm-yyyy HH:mm`
 
 * Removes the appointment scheduled at the specified date and time for the patient identified by the given `NRIC`.
 * The NRIC refers to the unique identifier displayed in the current patient list.
@@ -332,7 +332,7 @@ Format: `deleteappt NRIC /d dd-mm-yyyy HH:mm`
 Example:
 * `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the patient identified by the NRIC s1234567z.
 
-Format: `deleteappt Index /d dd-mm-yyyy HH:mm` 
+Format: `deleteappt Index dd-mm-yyyy HH:mm` 
 
 * Removes the appointment scheduled at the specified date and time for the patient at the given Index.
 * The Index refers to the patient’s position in the displayed list.
