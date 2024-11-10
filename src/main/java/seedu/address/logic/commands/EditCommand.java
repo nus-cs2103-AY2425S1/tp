@@ -18,6 +18,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.ConfirmationHandler;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,6 +32,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ProfilePicFilePath;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.DuplicateWarningWindow;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -59,6 +61,9 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
+    private ConfirmationHandler confirmationHandler;
+
+
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
@@ -69,6 +74,22 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.confirmationHandler = new DefaultConfirmationHandler();
+    }
+
+    /**
+     * Overloaded constructor for testing purposes
+     * @param index
+     * @param editPersonDescriptor
+     */
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor,
+                       ConfirmationHandler confirmationHandler) {
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
+
+        this.index = index;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.confirmationHandler = confirmationHandler;
     }
 
     @Override
@@ -84,7 +105,10 @@ public class EditCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            boolean isConfirmed = confirmationHandler.confirm(editedPerson);
+            if (!isConfirmed) {
+                throw new CommandException(Messages.MESSAGE_USER_CANCEL);
+            }
         }
 
         model.setPerson(personToEdit, editedPerson);
@@ -288,6 +312,22 @@ public class EditCommand extends Command {
                     .add("tags", tags)
                     .add("hasPaid", hasPaid)
                     .toString();
+        }
+    }
+
+    /**
+     * Nested class for testing purposes
+     */
+    public static class DefaultConfirmationHandler implements ConfirmationHandler {
+        /**
+         * Bypasses UI popup for testing purposes
+         * @param person The duplicated person to be edited
+         * @return Whether the edit action proceeds or not
+         */
+        public boolean confirm(Person person) {
+            DuplicateWarningWindow duplicateWarningWindow = new DuplicateWarningWindow();
+            duplicateWarningWindow.show(person);
+            return duplicateWarningWindow.isConfirmed();
         }
     }
 }
