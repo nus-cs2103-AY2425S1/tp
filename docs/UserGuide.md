@@ -314,7 +314,7 @@ Use the create-wedding command to create a `Wedding` within WedLinker that can b
 
 Format: `create-wedding w/WEDDINGNAME`
 
-To create a `Wedding` in WedLinker, type `create-wedding` followed by the name of the wedding.
+To create a `Wedding`, type `create-wedding` followed by the name of the wedding.
 
 * The `WEDDINGNAME` is alphanumeric and can contain whitespaces.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
@@ -391,84 +391,138 @@ Examples:
 
 ### Creating a Task : `create-task`
 
-Creates one or more `Task` in WedLinker.
+Use the create-task command to creates one or more `Task`.
 
 Format: `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]`
 
-* Creates one or more `Task` in Wedlinker
-* Tasks may have no dates, a single date indicating a deadline, or two dates to define a start and end period.
+To create a `task`, type `create-task` followed by the description of the task. <br>
+You can also include up to two dates if needed, with a single date indicating a deadline and two dates to define a start and end period.
+
 * The dates must be specified with the format `d/YYYY-MM-DD`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
 * You can assign tasks to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task-) command.
 
-### Delete a Task : `delete-task`
+Examples:
+* To create a task with the description of `Buy cake`, enter the command:
+    * `create-task tk/Buy cake`
+* To create a task with the description of `Finalise itinery` with a specified deadline of `2024-12-22`, enter the command:
+    * `create-task tk/Finalise itinery d/2024-12-22`
 
-Deletes a `Task` from WedLinker
-
-Format: `delete-task INDEX`
-
-* Deletes the specific `Task` at the INDEX when in [list-tasks](#listing-all-tasks--list-tasks) view.
-* The index **must be a positive integer** 1, 2, 3, …​.
 
 ### Assigning a Task to a contact : `assign-task` 
 
-* Assigns one or more `Task` to a contact.
+Use the assign-task command to assign one or more `Task` to a contact.
 
-Format: `assign-task PERSONINDEX TASKINDEX [ADDITIONAL_TASKINDEX...]`
+Format: `assign-task PERSON_NUMBER TASK_NUMBER [ADDITIONAL_TASK_NUMBER]...`
 
-* Assigns one or more `Task` to a contact based on the indexes specified.
-* The indexes correspond to the indexes when in the [list-tasks](#listing-all-tasks--list-tasks) view.
-* The `PERSONINDEX` refers to the index of the person shown under the **People** column.
-* The `TASKINDEX` refers to the index of the task shown under the **Tasks** column
-* The index **must be a positive integer** 1, 2, 3, …​.
+To assign `task(s)` to a contact, enter the command [list-tasks](#listing-all-tasks--list-tasks) to identify the Task number in the `task` list. <br>
+Following that, type "assign-task" followed by assigned Person's positional number and Task number(s) of tasks you wish to assign.
 
+* The `PERSON_NUMBER` and `TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
+
+Examples:
+* To assign two tasks with the descriptions `Buy cake` and `Finalise itinery`:
+    * Firstly, enter the command `list-tasks` to see all contacts and tasks.
+    * Secondly, identify the Person's positional number of the person you wish to assign tasks to
+    * Thirdly, identify the Task numbers of the two tasks you wish to assign.
+    * Lastly, if the Person number is 1, and the task numbers are 2 and 3, enter the command: `assign-task 1 2 3`
+  
 ### Un-assigning a Task from a contact : `unassign-task` 
 
-* Un-assigns one or more `Task` from a contact.
+Use the unassign-task command to remove one or more `Task` from a contact.
 
-Format: `unassign-task PERSONINDEX TASKINDEX_OFPERSON [ADDITIONAL_TASKINDEX_OFPERSON...]`
+Format: `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER [ADDITIONAL_PERSON_TASK_NUMBER]...`
 
-* Un-assigns one or more `Task` from a contact.
-* The `PERSONINDEX` is the index of the person shown in the displayed person list.
-* The `TASKINDEX_OFPERSON` is the index of the task associated with the selected person.
-* The index **must be a positive integer** 1, 2, 3, …​.
+To remove a `task` from a contact, type `unassign-task` followed by the Person's positional number and the person's Task number(s) 
+
+**Important Note:** The `PERSON_TASK_NUMBER` here refers to the task's position within a contact's assigned tasks, not the main task list number.* 
+* The `PERSON_NUMBER` and `PERSON_TASK_NUMBER` **must be positive integers** 1, 2, 3, …​.
+
+Examples:
+* To remove the tasks with the descriptions `Buy cake` and `Finalise itinery` from the first person in the contact list:
+    * First, identify the assigned Task numbers of the two tasks assigned to the person
+    * If the assigned task numbers are 2 and 3, enter the command: `unassign-task 1 2 3`
 
 ### Mark a task as completed : `mark-task` 
 
-* Marks one or more `Task` as completed.
+Use the mark-task command to mark one or more `Task` as completed.
 
-Format: `mark-task TASKINDEX [ADDITIONAL_TASKINDEX...]`
+Format: `mark-task TASK_NUMBER [ADDITIONAL_TASKINDEX...]`
 
-* Marks one or more `Task` as completed based on the indexes specified.
-* The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
-* The index **must be a positive integer** 1, 2, 3, …​.
+To mark a `task` to be completed, enter the command [list-tasks](#listing-all-tasks--list-tasks) to identify the Task number(s) of task(s) you wish to mark <br>
+Following that, type `mark-task` followed by the Task number(s).
+
+* The TASK_NUMBER **must be a positive integer** 1, 2, 3, …​.
+
+Examples:
+* To mark the task with the description `Finalise itinery` as complete:
+    * First, identify the Task number of the task.
+    * If the Task number is 1, enter the command `mark-task 1`.
 
 ### Un-mark a task  : `unmark-task` 
 
-* Marks one or more `Task` as not completed.
+Use the unmark-task command to mark one or more `Task` as incomplete.
 
-Format: `unmark-task TASKINDEX [ADDITIONAL_TASKINDEX...]`
+Format: `unmark-task TASK_NUMBER [ADDITIONAL_TASK_NUMBER]`
 
-* Marks one or more `Task` as not completed based on the indexes specified.
-* The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
-* The index **must be a positive integer** 1, 2, 3, …​.
+To mark a `task` as incomplete, enter the command [list-tasks](#listing-all-tasks--list-tasks) to identify the Task number(s) of task(s) you wish to mark <br>
+Following that, type `unmark-task` followed by the Task number(s).
+
+* The `TASK_INDEX` **must be a positive integer** 1, 2, 3, …​.
+
+Examples:
+* To mark the completed task with the description `Finalise itinery` as incomplete:
+    * First, identify the Task number of the task.
+    * If the Task number is 1, enter the command `unmark-task 1`.
+
+### Delete a Task : `delete-task`
+
+Use the delete-task command to delete a specific `Task`.
+
+Format: `delete-task TASK_NUMBER`
+
+To delete a `task`, enter the command [list-tasks](#listing-all-tasks--list-tasks) to identify the Task number in the `task` list. <br>
+Following that, type "delete-task" and the task number of the task that you wish to delete.
+
+* The `TASK_NUMBER` **must be a positive integer** 1, 2, 3, …​.
+
+Examples:
+* To delete a task with the description `Buy cake`:
+    * First, identify the Task number by entering the command: `list-tasks`
+    * If the task number is 1, enter the command: `delete-task 1`
 
 ## Vendor Features
 
 ### Assigning a Vendor : `assign-vendor`
-Format: `assign-vendor PERSONINDEX`
 
-* Assigns an existing `Person` at the specified `Index` to become a `Vendor`.
-* The `Vendor` now can have `Tasks` assigned to it.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​.
+Use the assign-vendor command to designate a contact as a vendor.
+
+Format: `assign-vendor PERSON_NUMBER`
+
+To designate a contact as a vendor, type "assign-vendor" followed by the Person's positional number.
+
+* The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
+* The `Vendor` can have `Tasks` assigned to them.
+
+
+Examples:
+* To designate the first contact as a vendor, enter the command:
+    * `assign-vendor 1`.
 
 ### Unassigning a Vendor : `unassign-vendor`
-Format: `unassign-venor PERSONINDEX`
 
-* Unassigns a `Vendor` at the specified `Index` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​.
+Use the unassign-vendor command to remove a vendor designation from a contact, making them a regular contact in WedLinker.
+
+Format: `unassign-venor PERSON_NUMBER`
+
+To remove a vendor designation from a contact, type "unassign-vendor" followed by the Person's positional number.
+
+* The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
+* A regular contact cannot have `Tasks` assigned them.
+
+Examples:
+* To remove a vendor designation from the first contact, enter the command:
+    * `unassign-vendor 1`.
 
 --------------------------------------------------------------------------------------------------------------------
 
