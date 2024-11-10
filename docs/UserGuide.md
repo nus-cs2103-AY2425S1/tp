@@ -310,7 +310,7 @@ Prudy uses a command-line interface with **four primary categories** of commands
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored. e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 </div>
 
