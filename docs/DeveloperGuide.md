@@ -212,7 +212,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `liststudents`. Commands that do not modify the address book, such as `liststudents`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -1028,7 +1028,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is added. Error details shown.
 
 ### Finding a student (by course)
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
    Expected: Displays students details with course `CS2103T`.
@@ -1043,7 +1043,7 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Finding a student (by name)
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
    Expected: Displays students details with name `TestOne`.
@@ -1057,7 +1057,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Displays students with both John and Doe in their names.
 
 ### Editing a student
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `edit 1 n/TestOne p/11111111`<br>
    Expected: 1st student is edited. Details of the edited student is shown.
@@ -1073,7 +1073,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is edited. Error details shown.
 
 ### Deleting a student
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `delete 1`<br>
    Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
@@ -1100,7 +1100,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is added. Error details shown.
 
 ### Finding a student (by course)
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
    Expected: Displays students details with course `CS2103T`.
@@ -1111,7 +1111,7 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Finding a student (by name)
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
    Expected: Displays students details with name `TestOne`.
@@ -1121,7 +1121,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No Students Found. Error details shown.
 
 ### Editing a student
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `edit 1 n/TestOne p/11111111`<br>
    Expected: 1st student is edited. Details of the edited student is shown.
@@ -1133,7 +1133,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No student is edited. Error details shown.
 
 ### Deleting a student
-1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
 
 2. Test case: `delete 1`<br>
    Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
@@ -1244,10 +1244,10 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `addconsult d/2024-10-20 t/14:00` (when a consultation with the same date and time exists)  
    Expected: No consultation is added. Error message about duplicate consultation shown.
 
-### Listing all consultations: `listconsult`
+### Listing all consultations: `listconsults`
 
 1. Prerequisites: At least one consultation exists.
-2. Test case: `listconsult`  
+2. Test case: `listconsults`  
    Expected: Displays a list of all consultations.
 
 ### Adding students to a consultation: `addtoconsult`
@@ -1308,7 +1308,7 @@ with JSON, you can attempt to recover your data file by fixing issues in the fil
 ### Exporting data
 
 #### Exporting student data
-1. Prerequisites: List all students using the `list` command. Multiple students should be in the list.
+1. Prerequisites: List all students using the `liststudents` command. Multiple students should be in the list.
 
 2. Test case: `export students`<br>
    Expected: CSV file created in data directory and home directory. Success message shows number of students exported.
