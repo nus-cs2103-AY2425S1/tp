@@ -70,6 +70,6 @@ public class CsvAssignmentParser {
             throw new CommandException("Score must be between 0.0 and " + model.getMaxScore(asgnName));
         }
 
-        assignments.put(asgnName, new Assignment(asgnName, asgnScore));
+        assignments.put(asgnName, new Assignment(model.getAssignmentName(asgnName), asgnScore));
     }
 }
