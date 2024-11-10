@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.AddressBookParser.MESSAGE_TOO_LONG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,8 +34,14 @@ import seedu.address.testutil.ContactUtil;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
 public class AddressBookParserTest {
-
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void parseCommand_tooLongInput_throwsParseException() {
+        StringBuilder builder = new StringBuilder();
+        IntStream.rangeClosed(0, 1001).forEach(x -> builder.append("a"));
+        assertThrows(ParseException.class, MESSAGE_TOO_LONG, () -> parser.parseCommand(builder.toString()));
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
