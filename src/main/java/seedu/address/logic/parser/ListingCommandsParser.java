@@ -15,7 +15,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Custom parser for deciding which listing sub-command to use
  */
 public class ListingCommandsParser {
-    private static final Pattern LISTING_COMMAND_FORMAT = Pattern.compile("(?<commandWord>[^0-9]+)(?<arguments>.*)");
+    private static final Pattern LISTING_COMMAND_FORMAT = Pattern
+            .compile("(?<commandWord>[^0-9]+\\s+)(?<arguments>.*)");
 
     /**
      * Parses args to take out the "sub-command" (add/delete) before passing the respective Listing command
