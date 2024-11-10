@@ -632,11 +632,26 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancement**
 
-### Preferred Time: Allowing Overnight Range input
+### Preferred Time: Make Overnight Ranges Functional
 
+Preferred Time currently doesn't accept overnight range, e.g. "2300-0100" is currently not accepted.
+So users cannot add, edit overnight ranges to contacts. Using `findtime` command with overnight ranges
+also triggers "invalid command..." error.
 
+We plan to adjust the requirement so that overnight ranges will be accepted, which offers users more convenience
+as many gamers play late night to early hours in the morning. People usually don't have time during the day to game.
 
+Current workaround with the issue:    
+For range input `2300-0100`, users can break down to `2300-2359` and `0000-0100`. This shall work as valid inputs and `add`, 
+`edit`, and `findtime` should be able to work properly with this.
 
 ### FindTime Command: Adjustment on Boundary Overlapping
 
+FindTime Command `findtime` is currently border sensitive.   
+e.g.:   
+`findtime 2200-2300` will return you all the person cards whose preferred times overlap with `2200-2300`,
+with range `2100-2200` and `2300-2330` counted as overlapping. Which should not be the case, as there is 
+only overlap at the boundary.
+
+We plan to adjust the overlapping mechanism so that ranges meet only at the boundary will not be counted as overlapping.
 
