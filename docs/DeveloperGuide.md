@@ -747,7 +747,7 @@ The project was moderately difficult due to the complexity of managing multiple 
 - Testing: Writing comprehensive tests for the new features and ensuring they integrate well with existing functionality required substantial effort.
 
 #### Effort Required
-The project required a considerable ammount of effort in the following areas:
+The project required a considerable amount of effort in the following areas:
 - **Design and Architecture**: Significant time was spent on designing the architecture to support multiple entities and their interactions.
 - **Implementation**: Implementing the new features, especially the undo/redo functionality and policy management, required detailed coding and debugging.
 - **Testing**: Writing unit tests, integration tests, and ensuring high test coverage was time-consuming but essential for maintaining code quality.
