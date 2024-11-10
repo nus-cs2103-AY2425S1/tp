@@ -37,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -137,7 +137,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T15-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -279,27 +279,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                              | I want to …​                                                                                | So that I can…​                                                          |
-|----------|--------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | Tuition Center Administrators        | keep different levels of access for contact information                                     | keep sensitive information not accessible to unauthorized users          |
-| `* * *`  | Tuition Center Administrators        | search for contacts based on multiple criteria (name, role, or ID)                          | can find a specific person quickly without manually scrolling the list   |
-| `* * *`  | Tuition Center Administrators        | a user-friendly command-line interface with clear and concise command options               | quickly perform tasks without a usage guide                              |
+| Priority | As a …​                              | I want to …​                                                                                | So that I can…​                                                |
+|----------|--------------------------------------|---------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| `* * *`  | Tuition Center Administrators        | keep different levels of access for contact information                                     | keep sensitive information not accessible to unauthorized users |
+| `* * *`  | Tuition Center Administrators        | search for contacts based on multiple criteria (name, role, or ID)                          | find a specific person quickly without manually scrolling the list |
+| `* * *`  | Tuition Center Administrators        | a user-friendly command-line interface with clear and concise command options               | quickly perform tasks without a usage guide                    |
 | `* * *`  | Tuition Center Administrators        | manage, retrieve and update the contact information for teachers, students and parents      | smoothly communicate across all parties without any confusions or delays |
-| `* * *`  | Tuition Center Administrators        | able to perform mutliple actions at once                                                    | increase the productivity                                                |
-| `* * *`  | Tuition Center Administrators        | add note about individual students (e.g. learning preferences, special needs, etc)          | can personalise learning experience                                      |
-| `* *`    | Tuition Center Administrators        | send automated payment notifications to parents                                             | can ensure timely payments                                               |
-| `* *`    | Tuition Center Administrators        | integrate a billing system that automatically calculates monthly fees and generate invoices | can reduce workload                                                      |
-| `* *`    | Tuition Center Administrators        | log and track communication history with parents, teachers and students                     | ensure continuity in communication                                       |
+| `* * *`  | Tuition Center Administrators        | able to perform mutliple actions at once                                                    | boost efficiency by cutting down administrative time on repetitive tasks |
+| `* * *`  | Tuition Center Administrators        | add note about individual students (e.g. learning preferences, special needs, etc)          | personalise learning experience                                |
+| `* *`    | Tuition Center Administrators        | send automated payment notifications to parents                                             | ensure timely payments                                         |
+| `* *`    | Tuition Center Administrators        | integrate a billing system that automatically calculates monthly fees and generate invoices | lower administrative burden by minimising manual billing tasks |
+| `* *`    | Tuition Center Administrators        | log and track communication history with parents, teachers and students                     | ensure continuity in communication                             |
 
 
-### Use cases
-
-### System: EduTuTu
-
----
 
 
 ---
+## Use cases
 
 #### **Use Case UC01: Add Student**
 **Actor**: Administrator
@@ -357,7 +353,7 @@ Use case ends.
 **Actor**: Administrator
 
 **Main Success Scenario (MSS)**:
-1. Administrator types the command to search for students by name or class ID.
+1. Administrator types the command to search for students by any field.
 2. EduTuTu validates the search criteria.
 3. EduTuTu searches the system and outputs matching students with unique indices.
 
@@ -377,7 +373,7 @@ Use case ends.
 **Main Success Scenario (MSS)**:
 1. Administrator first searches for the student using the find command.
 2. EduTuTu displays a list of students with unique indices.
-3. Administrator types the command to mark a student's fees as paid, including the student index and date:
+3. Administrator types the command to mark a student's fees as paid, including the student index and date.
 4. EduTuTu validates the student index and date format.
 5. EduTuTu updates the student's record and logs the payment confirmation.
 
@@ -395,6 +391,92 @@ Use case ends.
 
 ---
 
+
+#### **Use Case UC06: Unmark Fees as Paid**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator first searches for the student using the `find` command.
+2. EduTuTu displays a list of students with unique indices.
+3. Administrator types the command to unmark a student's fees as paid, including the student index and date.
+4. EduTuTu validates the student index and month format.
+5. EduTuTu updates the student’s record, removing the payment record for the specified month, and logs the removal confirmation.
+
+Use case ends.
+
+**Extensions**:
+
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+- **3b. Invalid Date Format or Month**:
+    - 3b1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC07: Edit Student Record**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator first searches for the student using the `find` command.
+2. EduTuTu displays a list of students with unique indices.
+3. Administrator types the command to edit a student's record, including the student index.
+4. EduTuTu validates the student index.
+5. Administrator edits the selected the field with new value.
+6. EduTuTu updates the student’s record with the new information and logs a confirmation of the successful edit.
+
+Use case ends.
+
+**Extensions**:
+
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+- **5a. Invalid Field Value Entered**:
+    - 5a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
+#### **Use Case UC08: Display Class Pie Chart**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator types the command `pie` to view the distribution of students across classes.
+2. EduTuTu generates and displays a pie chart, representing the number of students per class, with each class labeled clearly.
+3. Administrator reviews the chart for insights into class sizes.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. No Students Enrolled in Classes**:
+    - 2a1. EduTuTu logs a message indicating that no data is available for display.
+    - **Use case ends.**
+
+---
+
+#### **Use Case UC09: Display Monthly Payment Bar Chart**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator types the command `bar` to view the monthly payment data.
+2. EduTuTu generates and displays a bar chart with the y-axis representing the number of students and the x-axis representing each month.
+3. Administrator reviews the chart for insights into monthly payment patterns.
+
+Use case ends.
+
+**Extensions**:
+
+- **2a. No Student Data Available**:
+    - 2a1. EduTuTu logs a message indicating that no student data is available for display.
+    - **Use case ends.**
+  
+
+---
 ### Non-Functional Requirements
 
 ---
@@ -465,11 +547,11 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: No persons in the list.
 
    1. Test case: `add n/Mario St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2105`<br>
-      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. There will be a new Person Card shown in the UI.
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. 
    2. Test case: `add n/Mario  St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2106`<br>
-      Expected: No person added. Error details shown in the status message. Status bar remains the same, no new person card added.
+      Expected: No person added. Error details shown in the status message. Status bar remains the same.
    3. Test case: `add n/Alice d/o Sally p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2107`<br>
-      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. There will be a new Person Card shown in the UI.
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message.
 
 ### Editing a person
 
@@ -478,13 +560,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `edit 1 c/CS2106`<br>
-      Expected: The first contact is updated with the new course code. Details of the updated contact shown in the status message. The person card in the UI is updated.
+      Expected: The first contact is updated with the new course code. Details of the updated contact shown in the status message.
    2. Test case: `edit 0 c/CS2106`<br>
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
    3. Test case: `edit 1 f/200`<br>
-      Expected: The second contact is updated with the new fee. Details of the updated contact shown in the status message. The person card in the UI is updated.
+      Expected: The second contact is updated with the new fee. Details of the updated contact shown in the status message.
    4. Test case: `edit 2 f/200 c/CS2106`<br>
-      Expected: The second contact is updated with the new fee and course code. Details of the updated contact shown in the status message. The person card in the UI is updated.
+      Expected: The second contact is updated with the new fee and course code. Details of the updated contact shown in the status message.
    5. Other incorrect edit commands to try: `edit`, `edit x`, `edit x f/200` (where x is larger than the list size)<br>
       Expected: Similar to 2nd test case above.
 
@@ -516,9 +598,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find n/Mario c/CS2105`<br>
      Expected: The person with the name Mario and class ID CS2105 is shown in the list. 
    2. Test case: `find n/Alice c/`<br>
-     Expected: The person with the name Alice is shown in the list.
+     Expected: Error message shown in status bar.
    3. Test case: `find n/ c/CS2105`<br>
-     Expected: The people with the class ID CS2105 is shown in the list.
+     Expected: Error message showin in status bad.
    4. Test case: `find n/ c/`<br>
      Expected: Error message shown in the status bar. 
 
@@ -584,7 +666,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `markpaid 1 m/2024-12`<br>
-      Expected: The first person is marked as paid for 2024-12. Details of the updated contact shown in the status message. The person card in the UI is updated.
+      Expected: The first person is marked as paid for 2024-12. Details of the updated contact shown in the status message.
    1. Test case: `markpaid 0 m/2023-10`<br>
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
 
@@ -593,6 +675,21 @@ testers are expected to do more *exploratory* testing.
    2. Other incorrect date format to try: `markpaid 1 m/2024-13`, `markpaid 1 m/13`, `markpaid 1 m/abc`<br>
       Expected: Similar to previous.
 
+### Unmarking MonthsPaid for a Specific Month
+
+1. Unmarking a Month as Paid
+
+    1. **Prerequisites**: Ensure there is a student record with a marked payment for the specified month. Use the `find` command to retrieve the student’s index.
+
+    2. **Test Case**: `unmarkpaid 1 m/2020-10`
+        - **Expected**: The payment record for the specified month is removed from the student’s record. A confirmation message logs the successful update, and the student's payment history no longer includes that month.
+
+    3. **Test Case**: `unmarkpaid 1 m/2020-13`
+        - **Expected**: An error message is logged, indicating an invalid date format. No changes are made to the student’s record, and the use case restarts from the search step.
+
+    4. **Test Case**: `unmarkpaid -10 m/2020-10`
+        - **Expected**: An error message is logged, indicating an invalid student index. No changes are made to any student records, and the use case restarts from the search step.
+       
 ### Viewing Command History
 
 1. Viewing command history
@@ -759,7 +856,15 @@ This section lists planned enhancements to address known feature flaws. These en
    **Current Issue:** Currently, each student in EduTuTu can only store up to one phone number.  
    **Planned Enhancement:** Modify EduTuTu to allow storage of multiple phone numbers (eg., Office Hp and Personal Phone Numbers)
 
-   
+
+9. **Enable handling of larger fees**  
+   **Current Issue:** Currently, the fees field only accepts up to 9 integers to prevent integer overflow.  
+   **Planned Enhancement:** Modify EduTuTu to allow the storage of larger fees & fees in the form of floats.
+
+10. **Enable handling for more special characters in names**  
+    **Current Issue:** Users may encounter issues when entering names with comma.  
+    **Planned Enhancement:** Modify EduTuTu to allow the storage of names with more special characters.
+ 
 These planned enhancements aim to improve usability, data validation, and user feedback within EduTuTu, addressing known issues while maintaining a smooth user experience.
 
 

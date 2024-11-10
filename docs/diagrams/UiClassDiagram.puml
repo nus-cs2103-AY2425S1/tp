@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
 
-package UI <<Rectangle>>{
+package UI <<Rectangle>> {
 Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
@@ -16,6 +16,7 @@ Class PersonCard
 Class StatusBarFooter
 Class CommandBox
 Class PiChartWindow
+Class BarChartWindow
 }
 
 package Model <<Rectangle>> {
@@ -31,12 +32,13 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
+MainWindow *-down-> "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 MainWindow *-down-> "0..1" PiChartWindow
+MainWindow *-down-> "0..1" BarChartWindow
 
 PersonListPanel -down-> "*" PersonCard
 
@@ -49,6 +51,7 @@ PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 PiChartWindow --|> UiPart
+BarChartWindow --|> UiPart
 
 PersonCard ..> Model
 UiManager -right-> Logic
