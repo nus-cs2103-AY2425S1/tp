@@ -420,7 +420,7 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 ---
 
 **Q**: I ran a command, but it didn’t seem to work. What went wrong?<br>  
-**A**: Check if you entered the command parameters in the correct format and order. Refer to the [Features](#features) section for detailed command syntax. Commands are case-insensitive, so don’t worry about capitalization, but ensure there are no extra spaces within commands.
+**A**: Check if you entered the command parameters in the correct format and order. For a quick glance at the correct syntax, refer to the [Command Summary](#command-summary) section. 
 
 ---
 
