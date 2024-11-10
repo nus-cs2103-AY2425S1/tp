@@ -8,6 +8,8 @@
 
 Medicontact is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
+This app is designed for GP clinics in Singapore, where all patients should have a valid Singapore phone number.
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -17,23 +19,32 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 1. Ensure you have Java `17` or above installed in your Computer. Instructions for Java `17` are available [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-1. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.4). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
+2. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.4). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
 
-1. Copy the file to the folder you want to use as the _home folder_ for MediContact. We recommend naming this folder `MediContact`. Place `MediContact.jar` in this folder.
+3. Copy the file to the folder you want to use as the _home folder_ for MediContact. 
 
    <img src="images/quickStart.png" width="800"/>
 
-1. Open a command terminal (called `Terminal` on MacOS and `Command Prompt` on Windows). Change directory into the folder you put the jar file in using the command `cd`. For example, if you created your home folder `MediContact` in your Desktop type `cd Desktop/MediContact`. If you created your home folder `MediContact` in Documents, type `cd Documents/MediContact`. If you named your home folder some other FILENAME, replace `MediContact` with filename. 
+4. Open a command terminal (`Terminal` on MacOS, `Command Prompt` on Windows). 
+5. Change directory into the folder you put the jar file in using the command `cd`:
+    - If the folder is on your Desktop type: `cd Desktop/MediContact`. 
+    - If it's in Documents, type `cd Documents/MediContact`. 
+    - If the folder has a different name, replace `MediContact` with your folder's name.
+      
+5. Once you're in the same directory as `MediContact.jar`, run the application with `java -jar MediContact.jar`.
 
-1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory.
+You're terminal should look something like this right before entering the last command. The redacted portion should show your current directory.
 
    <img src="images/quickStart1.png" width="800"/>
 
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
 
    <img src="images/Ui.png" width="800"/>
 
-1. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+6. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
 * `list` : Lists all contacts.
@@ -565,10 +576,20 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediContact home folder.
 
 **Q**: What should I do if I input an invalid command<br>
-**A**: Check out [Features](#features), or simple run `help` to see the full list of commands, and try entering a valid command again.
+**A**: Check out [Features](#features) or simple run `help` to see the full list of commands, and try entering a valid command again.
+
+**Q**: Where should I start if I am a novice to CLI?<br>
+**A**: Run help to check the format. For more information on each command's usage, check out the [Features](#features) section.
 
 **Q**: Can I have duplicate contacts in my address book? <br>
-**A**: Duplicate names are not permitted. Same names with different capatilised are considered duplicates.
+**A**: Duplicate names are not permitted. Contacts with the same name, even if capitalized differently, are considered duplicates.
+
+**Q**: Can I mark certain patients as high-priority?<br>
+**A**: Yes, you can use the `edit` command with tag prefix `t/` to tag patients as high-priority, or use `star` command to add them to a favourite list.
+
+**Q**: Is there a way to restore deleted or cleared contacts?<br>
+**A**: No, `delete` and `clear` actions are irreversible.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -581,23 +602,23 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action     | Format, Examples                                             |
-| ---------- | ------------------------------------------------------------ |
+| Action     | Format, Examples                                                                                                                                                                                                                    |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` |
-| **Clear**  | `clear`                                                      |
-| **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh` |
-| **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com` |
-| **Exit**   | `exit`                                                       |
-| **Filter** | `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`<br> e.g.,`filter b/70-79 t/medication t/Dr Tan` |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777` |
-| **Help**   | `help`                                                       |
-| **Import** | `import FILENAME.json`<br>e.g. `import patientRecords.json`  |
-| **List**   | `list` <br/>`list *` (to list starred contacts)              |
-| **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen` |
-| **Sort**   | `sort` (to sort contacts based on appointment dates)         |
-| **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` |
-| **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` |
-| **View**   | `view INDEX` or `view NAME` <br/> e.g., `view 3`, `view Alex Yeoh` |
+| **Clear**  | `clear`                                                                                                                                                                                                                             |
+| **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`                                                                                                                                                           |
+| **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com`                                                                          |
+| **Exit**   | `exit`                                                                                                                                                                                                                              |
+| **Filter** | `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`<br> e.g.,`filter b/70-79 t/medication t/Dr Tan`                                                          |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`                                                                                                                                                                      |
+| **Help**   | `help`                                                                                                                                                                                                                              |
+| **Import** | `import FILENAME.json`<br>e.g. `import patientRecords.json`                                                                                                                                                                         |
+| **List**   | `list` <br/>`list *` (to list starred contacts)                                                                                                                                                                                     |
+| **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`                                                                                                                 |
+| **Sort**   | `sort` (to sort contacts based on appointment dates)                                                                                                                                                                                |
+| **Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh`                                                                                                                                                                  |
+| **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh`                                                                                                                                                          |
+| **View**   | `view INDEX` or `view NAME` <br/> e.g., `view 3`, `view Alex Yeoh`                                                                                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
