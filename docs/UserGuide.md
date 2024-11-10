@@ -459,7 +459,7 @@ Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]
 
 * At least one of the `NAME` or `JOB` fields must be present.
 * `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
-* Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`.
+* Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`, `Photographer` will not match `Wedding Photographer`.
 * `filter` returns the largest range of matches based on your input
 
 <box type="tip" seamless>
