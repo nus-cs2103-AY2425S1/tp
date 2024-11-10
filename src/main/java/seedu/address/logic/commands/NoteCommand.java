@@ -79,7 +79,8 @@ public class NoteCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_NOTE_SUCCESS, personToEdit.getName(), editedPerson.getNote().toString()));
+        return new CommandResult(String.format(
+                MESSAGE_EDIT_NOTE_SUCCESS, personToEdit.getName(), editedPerson.getNote().toString()));
     }
 
     /**
