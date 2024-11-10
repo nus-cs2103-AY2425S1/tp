@@ -103,7 +103,7 @@ public class JsonAdaptedListing {
             throw new IllegalValueException(Area.MESSAGE_CONSTRAINTS);
         }
 
-        final Area modelArea = new Area(Integer.parseInt(area));
+        final Area modelArea = new Area(area);
 
         if (region == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Region.class.getSimpleName()));

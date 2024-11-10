@@ -166,9 +166,6 @@ public interface Model {
      */
     boolean hasListingsForBuyer(Person buyer);
 
-    // Returns the listing with the same name as {@code listing} exists in the address book.
-    //Person getPersonByName(Name name);
-
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Listing> getFilteredListingList();
 
@@ -183,4 +180,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredListingList(Predicate<Listing> predicate);
+
+    /**
+     * Updates relevant Listings when there is a change made to a Client
+     * Replaces all listings with the personToEdit with editedPerson.
+     */
+    void updateListingsAfterClientEdit(Person personToEdit, Person editedPerson);
 }

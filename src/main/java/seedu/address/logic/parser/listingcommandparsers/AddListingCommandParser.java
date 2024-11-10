@@ -9,9 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.listingcommands.AddListingCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -52,10 +54,13 @@ public class AddListingCommandParser implements Parser<AddListingCommand> {
         Area area = ParserUtil.parseArea(argMultimap.getValue(PREFIX_AREA).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Region region = ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION).get());
-        Name sellerName = ParserUtil.parseName(argMultimap.getValue(PREFIX_SELLER).get());
-        Set<Name> buyerNameList = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_BUYER));
+        Index sellerIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SELLER).get());
+        Set<Index> buyerIndexSet = new HashSet<>();
+        for (String buyerIndex : argMultimap.getAllValues(PREFIX_BUYER)) {
+            buyerIndexSet.add(ParserUtil.parseIndex(buyerIndex));
+        }
 
-        return new AddListingCommand(name, price, area, address, region, sellerName, buyerNameList);
+        return new AddListingCommand(name, price, area, address, region, sellerIndex, buyerIndexSet);
     }
 
     /**

@@ -71,8 +71,15 @@ The Gradle instructions provided are for macOS and Linux users. If you are using
 - Delete Appointment
 
 ### Milestone v1.3
+**Adding More Functionalities**
+- Create Listing 
+- Show All Listings
+- Delete Listing 
 
 ### Milestone v1.4
+
+### Milestone v1.5
+**Product Refinement**
 
 ## Design Overview
 

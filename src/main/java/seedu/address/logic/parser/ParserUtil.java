@@ -215,8 +215,7 @@ public class ParserUtil {
         if (!Area.isValidArea(areaTrimmed)) {
             throw new ParseException(Area.MESSAGE_CONSTRAINTS);
         }
-        int intArea = Integer.parseInt(areaTrimmed);
-        return new Area(intArea);
+        return new Area(areaTrimmed);
     }
 
     /**

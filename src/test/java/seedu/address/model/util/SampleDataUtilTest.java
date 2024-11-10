@@ -75,7 +75,7 @@ class SampleDataUtilTest {
         assertEquals("RC4", listing.getName().fullName);
         assertEquals("134 Clementi Ave", listing.getAddress().value);
         assertEquals("200000", listing.getPrice().getFormattedValue());
-        assertEquals(100, listing.getArea().getArea());
+        assertEquals("100", listing.getArea().getArea());
         assertEquals(Region.WEST, listing.getRegion());
 
         Person seller = listing.getSeller();

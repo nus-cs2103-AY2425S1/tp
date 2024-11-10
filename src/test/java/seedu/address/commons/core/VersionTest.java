@@ -146,4 +146,17 @@ public class VersionTest {
             int major, int minor, int patch, boolean isEarlyAccess) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
     }
+
+    @Test
+    public void compareTo_nonEarlyAccessGreaterThanEarlyAccess_returnsPositive() {
+        Version nonEarlyAccessVersion = new Version(1, 0, 0, false);
+        Version earlyAccessVersion = new Version(1, 0, 0, true);
+        assertTrue(nonEarlyAccessVersion.compareTo(earlyAccessVersion) > 0);
+    }
+
+    @Test
+    public void equals_sameInstance_returnsTrue() {
+        Version version = new Version(2, 3, 4, false);
+        assertTrue(version.equals(version));
+    }
 }

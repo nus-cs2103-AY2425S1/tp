@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.clientcommands.EditClientCommand;
 import seedu.address.logic.commands.clientcommands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -19,7 +20,6 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,10 +37,10 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
 
-        Name name;
+        Index index;
 
         try {
-            name = ParserUtil.parseName(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClientCommand.MESSAGE_USAGE),
                     pe);
@@ -66,7 +66,7 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
             throw new ParseException(EditClientCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditClientCommand(name, editPersonDescriptor);
+        return new EditClientCommand(index, editPersonDescriptor);
     }
 
     /**

@@ -78,7 +78,7 @@ public class ListingContainsKeywordsPredicateTest {
                 Arrays.asList("Sengkang", "NORTH", "500000", "St", "1500", "22"));
         assertFalse(predicate.test(new ListingBuilder().withName("Alice House")
                 .withAddress("Sengkang St 22")
-                .withArea(1500)
+                .withArea("1500")
                 .withRegion(Region.NORTH)
                 .withPrice("500000", new BigDecimal(500000))
                 .build()));

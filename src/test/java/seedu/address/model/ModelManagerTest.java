@@ -17,11 +17,16 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.exceptions.ListingNotFoundException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalListings;
+import seedu.address.testutil.TypicalPersons;
 
 public class ModelManagerTest {
 
@@ -267,4 +272,49 @@ public class ModelManagerTest {
         differentListings.addListing(PASIR_RIS);
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, differentListings)));
     }
+
+    @Test
+    public void updateListingsAfterClientEdit_buyerUpdatedInListings() {
+        ModelManager modelManager = new ModelManager();
+        modelManager.addListing(TypicalListings.PASIR_RIS);
+
+        Person originalBuyer = TypicalPersons.DANIEL;
+        Person updatedBuyer = new PersonBuilder(originalBuyer).withName("Updated Daniel").buildBuyer();
+
+        modelManager.updateListingsAfterClientEdit(originalBuyer, updatedBuyer);
+
+        Listing listing = modelManager.getListings().getListingList().get(0);
+        assertTrue(
+                listing.hasBuyer(updatedBuyer),
+                "The listing should have the updated buyer."
+        );
+        assertFalse(
+                listing.hasBuyer(originalBuyer),
+                "The listing should no longer have the original buyer."
+        );
+    }
+
+    @Test
+    public void updateListingsAfterClientEdit_sellerListingsUpdated() {
+        modelManager.addListing(TypicalListings.PASIR_RIS);
+        Person originalSeller = TypicalPersons.ALICE;
+        Person updatedSeller = TypicalPersons.BOB;
+
+        assertTrue(modelManager.hasListing(TypicalListings.PASIR_RIS),
+                "The listing should initially exist.");
+        assertEquals(originalSeller, modelManager.getListings().getListingList()
+                        .get(0).getSeller(),
+                "The seller should initially be ALICE.");
+
+        modelManager.updateListingsAfterClientEdit(originalSeller, updatedSeller);
+
+        Listing updatedListing = modelManager.getListings().getListingList().get(0);
+        assertEquals(updatedSeller, updatedListing.getSeller(),
+                "The listing should have the updated seller (BOB).");
+
+        assertFalse(modelManager.getListings().getListingList().stream()
+                        .anyMatch(listing -> listing.getSeller().equals(originalSeller)),
+                "There should be no listings with the original seller (ALICE) after the update.");
+    }
+
 }

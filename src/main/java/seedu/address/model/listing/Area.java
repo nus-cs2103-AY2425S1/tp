@@ -6,21 +6,22 @@ package seedu.address.model.listing;
  */
 public class Area {
     public static final String MESSAGE_CONSTRAINTS =
-            "Area should only contain numbers, and it should be at least 2 digits long";
-    private static final String VALIDATION_REGEX = "\\d{2,}";
+            "Area should only contain positive numbers and cannot start with zeroes, "
+                    + "and it should be at least 2 digits long";
+    private static final String VALIDATION_REGEX = "^[1-9]\\d{1,}$";
 
-    private final Integer squareMeters;
+    private final String squareMeters;
 
     /**
      * Constructs a {@code Area}.
      *
      * @param squareMeters The size of the listing in square meters.
      */
-    public Area(int squareMeters) {
+    public Area(String squareMeters) {
         this.squareMeters = squareMeters;
     }
 
-    public int getArea() {
+    public String getArea() {
         return this.squareMeters;
     }
 
@@ -33,7 +34,7 @@ public class Area {
 
     @Override
     public String toString() {
-        return String.format("%d", this.squareMeters);
+        return String.format("%s", this.squareMeters);
     }
 
     @Override

@@ -128,6 +128,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void updateListingsAfterClientEdit(Person personToEdit, Person editedPerson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setListing(Listing target, Listing editedListing) {
         throw new AssertionError("This method should not be called.");
     }

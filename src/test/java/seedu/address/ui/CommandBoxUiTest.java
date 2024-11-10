@@ -31,7 +31,7 @@ public class CommandBoxUiTest extends ApplicationTest {
     private final List<String> testCommandHistory = new ArrayList<>(Arrays.asList(
             "showclients",
             "buyer n/SOMEONE THAT WILL NEVER EXIST p/99999999 e/seanisthebest@gmail.com",
-            "delete SOMEONE THAT WILL NEVER EXIST",
+            "deleteclient 7",
             "showlistings"
     ));
 
@@ -43,7 +43,6 @@ public class CommandBoxUiTest extends ApplicationTest {
         FxToolkit.showStage();
         WaitForAsyncUtils.waitForFxEvents(20);
     }
-
     @AfterEach
     public void tearDown() throws TimeoutException {
         FxToolkit.cleanupStages();
@@ -84,6 +83,7 @@ public class CommandBoxUiTest extends ApplicationTest {
         robot.write("UNKNOWN COMMMAND");
         robot.type(KeyCode.ENTER);
         assertTrue(robot.lookup("#commandTextField").query().getStyleClass().contains(ERROR_STYLE_CLASS));
+        robot.type(KeyCode.ENTER);
+        assertTrue(robot.lookup("#commandTextField").query().getStyleClass().contains(ERROR_STYLE_CLASS));
     }
-
 }

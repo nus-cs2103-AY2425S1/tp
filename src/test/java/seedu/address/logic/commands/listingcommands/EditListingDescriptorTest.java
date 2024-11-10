@@ -75,7 +75,7 @@ public class EditListingDescriptorTest {
                 + editListingDescriptor.getArea().orElse(null) + ", address="
                 + editListingDescriptor.getAddress().orElse(null) + ", region="
                 + editListingDescriptor.getRegion().orElse(null) + ", seller="
-                + editListingDescriptor.getSellerName().orElse(null) + "}";
+                + editListingDescriptor.getSellerIndex().orElse(null) + "}";
 
         assertEquals(expected, editListingDescriptor.toString());
     }

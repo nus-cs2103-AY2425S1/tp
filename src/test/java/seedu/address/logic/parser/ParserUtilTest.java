@@ -274,14 +274,14 @@ public class ParserUtilTest {
     @Test
     void parseArea_validValueWithoutWhitespace_returnsArea() throws Exception {
         Area result = ParserUtil.parseArea(VALID_AREA);
-        Area expected = new Area(Integer.parseInt(VALID_AREA));
+        Area expected = new Area(VALID_AREA);
         assertEquals(expected, result);
     }
 
     @Test
     void parseArea_validValueWithWhitespace_returnsTrimmedArea() throws Exception {
         Area result = ParserUtil.parseArea(" " + VALID_AREA + " ");
-        Area expected = new Area(Integer.parseInt(VALID_AREA));
+        Area expected = new Area(VALID_AREA);
         assertEquals(result, expected);
     }
 

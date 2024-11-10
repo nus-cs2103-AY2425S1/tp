@@ -1,7 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_INPUT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -29,7 +29,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -75,9 +74,7 @@ public class LogicManagerTest {
 
         Buyer expectedBuyer = new PersonBuilder(AMY).buildBuyer();
 
-        // Adjust the expected message to match the actual message format
-        String expectedMessage = String.format("New buyer added: %s; Phone: %s; Email: %s; Appointment: "
-                        + "-; Tags: ",
+        String expectedMessage = String.format("New buyer added: %1s.\nPhone number: %2s and Email: %3s",
                 expectedBuyer.getName(), expectedBuyer.getPhone(), expectedBuyer.getEmail());
 
         model.addPerson(expectedBuyer);
@@ -97,9 +94,7 @@ public class LogicManagerTest {
                 .withTags() // No tags
                 .buildSeller();
 
-        // Construct the expected message based on the actual format produced by the application
-        String expectedMessage = String.format("New seller added: %s; Phone: %s; Email: %s; Appointment: "
-                        + "-; Tags: ",
+        String expectedMessage = String.format("New seller added: %1s.\nPhone number: %2s and Email: %3s",
                 expectedSeller.getName(), expectedSeller.getPhone(), expectedSeller.getEmail());
 
         // Execute the command and check for success
@@ -108,9 +103,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        Name invalidName = new Name("aaaaaaaaaaaaaaa");
-        String deleteCommand = "delete " + invalidName;
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_INPUT);
+        String invalidIndex = Integer.toString(model.getFilteredPersonList().size() + 1);
+        String deleteCommand = "deleteclient " + invalidIndex;
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -236,5 +231,25 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedBuyer);
         assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+    @Test
+    public void getAddressBook_returnsCorrectAddressBook() {
+        Model testModel = new ModelManager();
+        Logic testLogic = new LogicManager(testModel, new StorageManager(
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json")),
+                new JsonListingsStorage(temporaryFolder.resolve("listings.json"))));
+
+        assertEquals(testModel.getAddressBook(), testLogic.getAddressBook());
+    }
+    @Test
+    public void getListingsFilePath_returnsCorrectListingsFilePath() {
+        Model testModel = new ModelManager();
+        Logic testLogic = new LogicManager(testModel, new StorageManager(
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json")),
+                new JsonListingsStorage(temporaryFolder.resolve("listings.json"))));
+
+        assertEquals(testModel.getListingsFilePath(), testLogic.getListingsFilePath());
     }
 }

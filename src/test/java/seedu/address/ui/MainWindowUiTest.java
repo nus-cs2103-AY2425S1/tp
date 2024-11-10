@@ -9,6 +9,7 @@ import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import seedu.address.MainApp;
 
@@ -30,5 +31,15 @@ class MainWindowUiTest extends ApplicationTest {
         robot.write("help");
         robot.type(KeyCode.ENTER);
         assertTrue(robot.lookup("#helpMessage").query().isVisible());
+    }
+    @Test
+    void handleHelp_handlesListingsCommandCorrectly() {
+        FxRobot robot = new FxRobot();
+        robot.clickOn("#commandTextField");
+        robot.write("showlistings");
+        robot.type(KeyCode.ENTER);
+        TextArea resultDisplay = robot.lookup("#resultDisplay").query();
+        assertTrue(resultDisplay.getText().contains("Here are your listings!")
+                || resultDisplay.getText().contains("You have no listings available."));
     }
 }
