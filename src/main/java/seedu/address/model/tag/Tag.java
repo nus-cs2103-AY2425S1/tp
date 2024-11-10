@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names have a maximum length of 30 characters and"
-            + "should not contain any special characters such as '!', '@', etc.";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names have a maximum length of 30 characters including"
+            + " spaces and should not contain any special characters such as '!', '@', etc.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     public final String tagName;
