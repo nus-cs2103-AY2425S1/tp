@@ -3,12 +3,15 @@ layout: page
 title: User Guide
 ---
 
-ClinicConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClinicConnect can get your patient management tasks done faster than traditional GUI applications.
+ClinicConnect is the **the *ideal* patient management and appointment tracker system for health-screening clinics.** With *unique* functions and layouts tailored to your workflows as health screening clinic assistants, ClinicConnect can get your patient management tasks done faster, more efficiently, and hassle-free.
 
-* Table of Contents
+---
+
+## Table of Contents
+
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Quick start
 
@@ -19,10 +22,10 @@ ClinicConnect is a **desktop app for managing contacts, optimized for use via a 
 1. Copy the file to the folder you want to use as the _home folder_ for your ClinicConnectSystem.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clinicconnectsystem.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box at the top and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `home` : Lists all patients.
@@ -57,6 +60,10 @@ Highlights important information that you should know.
 Provides you with tips to use our system more effectively.
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can search for relevant info in the user guide by typing <code>Ctrl + F</code> for Windows and Linux computers and <code>⌘ + F</code> for Mac.
+</div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -65,7 +72,10 @@ Provides you with tips to use our system more effectively.
   e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n|NAME [al|ALLERGY` can be used as `n|John Doe al|friend` or as `n|John Doe`.
+  e.g `n|NAME [al|ALLERGY]` can be used as `n|John Doe al|friend` or as `n|John Doe`.
+
+* Parameters immediately preceding an ellipsis(...) can appear more than once, to add multiple arguments of the same type.<br>
+  e.g `al|ALLERGY...` can be used as `al|fish al|nuts` or `al|nuts`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n|NAME p|PHONE_NUMBER`, `p|PHONE_NUMBER n|NAME` is also acceptable.
@@ -114,12 +124,15 @@ Press `esc` to close the help window.
 You can keep the help windows open and refer to it while using our application.
 </div>
 
+To check out the list of all commands in ClinicConnect, click [here](#command-summary).
+
 ### Adding a patient: `add`
 
 Adds a new patient record into the system.
 
 Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER`
 
+![add result](images/addResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -135,14 +148,16 @@ Example: `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
 <br>
 Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
 
-For more information on each individual parameter click here
+For more information on each individual parameter click [here](#command-parameters-summary).
 
 ### Adding a patient with additional information: `addf`
 
 Adds a new patient record into the system with additional information.
 
-Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NO [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
+Format: `addf n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NO [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
 [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]`
+
+![addf message](images/addfResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -168,7 +183,7 @@ Examples:
    e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` adds a patient Lincoln Park with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
      and his allergy.
 
-For more information on each individual parameter click here
+For more information on each individual parameter click [here](#command-parameters-summary).
 
 ### Editing a patient: `edit`
 
@@ -177,6 +192,8 @@ Edits the information of an existing patient in the system by searching for thei
 Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NO] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
 [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL]
 [ec|EXISTING_CONDITIONS] [no|NOTES]`
+
+![edit message](images/editResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -225,7 +242,7 @@ Examples:
 * `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N.
 * `edit S9758366N al|wheat al|eggs rmal|fish` add wheat and eggs and remove fish allergies to the patient with NRIC S9758366N.
 
-For more information on each individual parameter click here
+For more information on each individual parameter click [here](#command-parameters-summary).
 
 ### Listing all patients : `home`
 
@@ -239,13 +256,13 @@ Format: `home`
 Home Command also informs you on the number of patients currently registered in the system.
 </div>
 
-### Booking an appointment: `bookappt`
 ### Booking an upcoming appointment: `bookappt`
 
 Book an upcoming appointment for an existing patient in the system for a health service provided by the clinic.
 
 Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 
+![bookappt result](images/bookapptResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -262,13 +279,15 @@ All parameters are compulsory
 Example:
 * `bookappt S9758366N dt|2024-12-29 13:00 h|Vaccination` books a Vaccination appointment for the given patient by NRIC at the specified time.
 
-For more information on each individual parameter click here
+For more information on each individual parameter click [here](#command-parameters-summary).
 
 ### Deleting an appointment : `deleteappt`
 
 Identifies a specific patient using NRIC and deletes the appointment specified.
 
 Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
+
+![deleteappt message](images/deleteapptResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -284,11 +303,15 @@ All parameters are compulsory
 Example:
 * `deleteappt T0123456A dt|2024-11-05 16:00`
 
+For more information on each individual parameter click [here](#command-parameters-summary).
+
 ### Filtering appointments : `filter`
 
 Filters existing patient records based on the specified parameters.
 
 Format: `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]`
+
+![filter result](images/filterResult.png)
 
 Start date and health service parameters are optional.
 End date parameter is compulsory.
@@ -310,11 +333,15 @@ Examples:
 *  `filter ed|2024-12-12 h|vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
 *  `filter sd|2012-10-01 ed|2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
 
+For more information on each individual parameter click [here](#command-parameters-summary).
+
 ### Viewing patients full profile: `view`
 
 Identifies the specific patient using NRIC and shows the full profile of the patient.
 
 Format: `view NRIC`
+
+![view result](images/viewResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -329,6 +356,8 @@ Example:
 Deletes the patient with the specified NRIC from the address book.
 
 Format: `delete NRIC`
+
+![delete message](images/deleteResult.png)
 
 * Deletes the patient at the specified `NRIC`.
 * The NRIC refers to the nric of the patient shown in the displayed patient list.
@@ -387,6 +416,9 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When adding or editing patient entries**, the combination of a NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
+system, despite this being an impossible combination of NRIC and birthdate for a patient.
+4. **When adding allergies**, plural and singular forms of the same substance will be accepted into the allergy list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -423,28 +455,140 @@ Not be blank
 Not start with a whitespace
 </li>
 <li>
-Should follow the format given below
+Should follow the specifications given below
 </li>
 </div>
 
-| Prefixes | Refers to                | Format                                                                                                                      | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|---------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `a|`    | Address                  | -                                                                                                                           | Can take any value, should not start with a whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `al|`  | Allergies to be added    | -                                                                                                                           | • Should contain only known allergies in the world <br> • Should contain only alphanumeric and whitespaces <br> • Singular and plural of allergies are the same and should not be added by user <br> • Check if allergy is present before adding                                                                                                                                                                                                                                                                                    |
-| `b|`   | Blood Type               | `A+` `A-` `B+` `B-` `AB+` `AB-` `O+` `O-`                                                                                   | Accepts all the known blood types in the world                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `d|`   | Date of Birth            | YYYY-MM-DD                                                                                                                  | Should follow the format and should not be after today's date                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `dt|`  | Appointment Date-Time    | YYYY-MM-DD HH:mm                                                                                                            | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `e|`   | Email                    | local-part@domain                                                                                                           | **Constraints for local-part:** <br> • Should only contain alphanumeric characters, and these special characters `+`, `_`, `.` and `-` <br> • Should not start or end with any special characters <br> <br> **Constraints for domain:** <br> • Made up of domain labels separated by periods <br> • End with a domain label at least 2 characters long <br> • Have each domain label start and end with alphanumeric characters <br> • Have each domain label consist of alphanumeric characters, separated only by hyphens, if any |
-| `ec|`  | Existing Conditions      | -                                                                                                                           | • Should contain only known medical conditions in the world <br> • Input multiple existing conditions separated by a `,`                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `ed|`  | End Date                 | YYYY-MM-DD                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `h|`   | Health Service           | `Blood Test` `Cancer Screening` `Vaccination` `Consult`                                                                     | Values of health service should only include the 4 types of health service provided                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `i|`   | NRIC                     | 9 characters: <br> • 1 uppercased alphabet at the start <br> • Followed by 7 digits <br> • 1 uppercased alphabet at the end | Starting uppercase alphabet should be `S` `T` `F` `G` `M`                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `n|`   | Name                     | -                                                                                                                           | • Should only contain alphanumeric characters and spaces <br> • Should not start with a whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `no|`  | Additional Notes         | -                                                                                                                           | Can take any value, should not start with a whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `nokn|` | Next-of-Kin Name         | -                                                                                                                           | • Should only contain alphanumeric characters and spaces <br> • Should not start with a whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `nokp|` | Next-of-Kin Phone Number | At least 3 digits long                                                                                                      | Should contain only numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `p|`   | Phone number             | At least 3 digits long                                                                                                      | Should contain only numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `rmal|` | Allergies to be removed  | -                                                                                                                           | • Should contain only known allergies in the world <br> • Should contain only alphanumeric and whitespaces <br> • Check if allergy is present before removing                                                                                                                                                                                                                                                                                                                                                                       |
-| `rl|`  | Health Risk Level        | `HIGH` `MEDIUM` `LOW`                                                                                                       | • Values of health risk level should only include the 3 types of risk level provided <br> • Each patient can only be tagged to one health risk level                                                                                                                                                                                                                                                                                                                                                                                |
-| `s|`   | Sex                      | `M` `F`                                                                                                                     | • Sex should only include the 2 types of sex provided <br> • Each patient can only be tagged to one sex <br> • Sex should be uppercased                                                                                                                                                                                                                                                                                                                                                                                             |
-| `sd|`  | Start Date               | YYYY-MM-DD                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center;">No.</th>
+      <th style="text-align:center;">Parameter</th>
+      <th style="text-align:center;">Prefix Format</th>
+      <th style="text-align:center;">Specifications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:center;">1</td>
+      <td style="text-align:center;">Address</td>
+      <td style="text-align:center;">a|</td>
+      <td>Takes all values.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">2</td>
+      <td style="text-align:center;">Allergy</td>
+      <td style="text-align:center;">al|</td>
+      <td>Takes all values.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">4</td>
+      <td style="text-align:center;">Birthdate</td>
+      <td style="text-align:center;">d|</td>
+      <td>Should follow the format YYYY-MM-DD. Should not be after today's date.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">5</td>
+      <td style="text-align:center;">Blood Type</td>
+      <td style="text-align:center;">b|</td>
+      <td>Should be either A/B/AB/O followed by the Rhesus factor (+/-).</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">6</td>
+      <td style="text-align:center;">Date and Time</td>
+      <td style="text-align:center;">dt|</td>
+      <td>Should follow the format YYYY-MM-DD HH:MM. Should not be before the current date and time.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">7</td>
+      <td style="text-align:center;">Email</td>
+      <td style="text-align:center;">e|</td>
+      <td>Should be of the format local-part@domain. The <code>local-part</code> section should only contain alphanumeric characters and the special characters <code>+_.-</code>. The <code>local-part</code> section may not start or end with special characters. The <code>domain</code> section must:
+        <ul>
+          <li>start with a domain name (<em>gmail</em>.com) at least 1 character long</li>
+          <li>end with a domain label (.<em>com</em>) at least 2 characters long</li>
+          <li>have each domain label start and end with alphanumeric characters</li>
+          <li>have each domain label consist only of alphanumeric characters, which can be separated by hyphens.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">8</td>
+      <td style="text-align:center;">Existing Condition</td>
+      <td style="text-align:center;">ec|</td>
+      <td>Takes all values.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">9</td>
+      <td style="text-align:center;">Health Risk</td>
+      <td style="text-align:center;">rl|</td>
+      <td>Should be either <code>HIGH</code>, <code>MEDIUM</code> or <code>LOW</code>. Case insensitive.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">10</td>
+      <td style="text-align:center;">Health Service</td>
+      <td style="text-align:center;">h|</td>
+      <td>Should be either <code>BLOOD TEST</code>, <code>CANCER SCREENING</code>, <code>VACCINATION</code>, or <code>CONSULT</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">11</td>
+      <td style="text-align:center;">Name</td>
+      <td style="text-align:center;">n|</td>
+      <td>Should only contain alphanumeric values (A-Z, 0-9) and spaces.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">12</td>
+      <td style="text-align:center;">Note</td>
+      <td style="text-align:center;">no|</td>
+      <td>Takes all values.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">13</td>
+      <td style="text-align:center;">NRIC</td>
+      <td style="text-align:center;">i|</td>
+      <td>Should be 9 digit uppercase sequence with an alphabet at the start and at the end. Starting character should either be an uppercase "S", "T", "F", "G" or "M", followed by 7 numbers and ending with an uppercase alphabet.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">14</td>
+      <td style="text-align:center;">Next-of-Kin Name</td>
+      <td style="text-align:center;">nokn|</td>
+      <td>Should only contain alphanumeric values (A-Z, 0-9) and spaces.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">15</td>
+      <td style="text-align:center;">Next-of-Kin Phone</td>
+      <td style="text-align:center;">nokp|</td>
+      <td>Should only contain numbers. Should be at least 3 digits long.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">16</td>
+      <td style="text-align:center;">Phone</td>
+      <td style="text-align:center;">p|</td>
+      <td>Should only contain numbers. Should be at least 3 digits long.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">17</td>
+      <td style="text-align:center;">Remove Allergy</td>
+      <td style="text-align:center;">rmal|</td>
+      <td>Takes all values. Can be multiple values</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">18</td>
+      <td style="text-align:center;">Sex</td>
+      <td style="text-align:center;">s|</td>
+      <td>Should either be uppercase characters M or F</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">19</td>
+      <td style="text-align:center;">Start Date</td>
+      <td style="text-align:center;">sd|</td>
+      <td>Should follow the format YYYY-MM-DD.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">20</td>
+      <td style="text-align:center;">End Date</td>
+      <td style="text-align:center;">ed|</td>
+      <td>Should follow the format YYYY-MM-DD.</td>
+    </tr>
+  </tbody>
+</table>
