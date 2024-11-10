@@ -7,152 +7,257 @@
 
 # LegacyLink User Guide
 
+![LegacyLink.png](images/LegacyLink.png)
 
-LegacyLink is a **desktop app designed to help you manage your family contacts and events effortlessly, especially optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, LegacyLink can get your contact and event management tasks done faster than traditional GUI apps.
+# Welcome to LegacyLink! 👋
 
-Whether you have a small, close-knit family or a large extended family, LegacyLink provides the tools you need to stay organized and connected!
+LegacyLink is your all-in-one family contact and event management solution, combining the speed of keyboard (CLI, standing for **C**ommand **L**ine **I**nterface) commands with the convenience of a modern interface.
+
+
+Perfect for managing both small, close-knit families and large extended family networks!
 <!-- * Table of Contents -->
 <page-nav-print />
 
+### 🎯 Key Features
+
+| Feature Category | What You Can Do |
+|-----------------|-----------------|
+| 👥 Contact Management | • Store family contact details<br>• Organize by relationships<br>• Quick search and updates |
+| 📅 Event Planning | • Schedule family gatherings<br>• Track event attendance<br>• Manage event details |
+| ⚡ Smart Interface | • Fast keyboard commands<br>• Visual contact lists<br>• Automatic saving |
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Quick start
+## 🚀 Quick Start Guide
 
-1. Ensure you have Java `17` or above installed in your Computer.
+--------------------------------------------------------------------------------------------------------------------
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-4/tp/releases).
+### 1. System Setup
+1. Download and install Java 17 from [the Java downloads page.](https://www.oracle.com/java/technologies/downloads/#java17)
+2. To check if Java is correctly installed:
+   1. Open your computer's command prompt/terminal
+           * **Windows**: Press `Win + R`, type `cmd`, and press Enter
+           * **Mac**: Open `Terminal` from Applications
+       * Type `java -version` and press Enter
+       * You should see a version number 17, something like the image below. <br>
+  
+![Java Version Check](images/JavaVersionCheck.png)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your LegacyLink.
+### 2. Download LegacyLink
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar legacylink.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Get the latest version (.jar file) from our [releases page](https://github.com/AY2425S1-CS2103T-T10-4/tp/releases).
+2. Specifically, look for a file named ``legacylink.jar`` and click on it to download.
+3. Save it in a folder where you want to store your LegacyLink data.
+   * Ideally, this should be new folder specifically for LegacyLink.
+
+### 3. Launch the Application
+1. Get your folder path:
+    * Open the file management application (i.e. file explorer for Windows, Finder for MacOS).
+    * Navigate to the folder containing the ``jar`` file.
+    * Copy the path from the address bar.
+2. Open your command prompt/terminal (see instructions above).
+3. Navigate to your LegacyLink folder:
+    * Type `cd` followed by a space
+    * **Windows**: Type your folder path (e.g., `cd C:\Users\YourName\LegacyLink`)
+    * **Mac/Linux**: Type your folder path (e.g., `cd /Users/YourName/LegacyLink`)
+    * *Pro tip: You can alternatively drag and drop your folder into the terminal after typing ``cd `` (with a space) to automatically fill in the path!*
+4. Run LegacyLink by typing: `java -jar legacylink.jar`
+5. Pressing enter will open up the LegacyLink window as shown below!
+
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands (full indepth guide below) you can try:
+### 4. Try These Basic Commands
 
-   * `list -p` : Lists all persons.
+We've prepopulated LegacyLink with some dummy data for you to play around and get a feel
+of how LegacyLink works!
+Here are some simple commands to get you started:
 
-   * `add -n John Doe -p 98765432 -e johnd@example.com -rs Father` : Adds a contact named `John Doe` with a relationship of `Father` to the Address Book.
+```
+📋 Essential Commands:
+----------------------------------------
+list -p     → Show all your contacts
+list -e     → Display all events
+help        → View all available commands
+```
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+Ready to explore more features? Continue reading our features overview below in the [what can you do with LegacyLink](#-what-can-you-do-with-legacylink) section or
+navigate to the [deepdive](#Features-Guide) section, where we break down each command in detail!
 
-   * `clear -e` : Deletes all events.
 
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Features
+# 🎯 What Can You Do With LegacyLink?
 
-Our **primary** features include:
 
-* Adding a person to the contact list
+Our **primary** features include the following:
 
-* Creating (scheduling) events
+### 📱 Essential Contact Features
+| Feature | Description | Command |
+|---------|-------------|----------|
+| Add Contacts | Create new family contact entries | `add -n NAME -p PHONE -e EMAIL -rs RELATIONSHIP` |
+| View Contacts | See your full contact list | `list -p` |
+| Search | Find specific family members | `find KEYWORD` |
 
-* Adding a person to the list of attendees for an event
+### 🎉 Event Management
+| Feature         | Description | Command |
+|-----------------|-------------|----------|
+| Schedule Events | Create family gatherings | `event -n NAME -sd DATE -ed DATE -l LOCATION` |
+| Add Attendees   | Include family members in events | `event ... -a ATTENDEES` |
+| View Events     | See all scheduled events | `list -e` |
 
-* Listing all contacts in the contact list
+### ✏️ Update & Modify
+Keep your information current with these features:
 
-* Listing all events (past and present)
+* **Contact Updates**
+    * Edit contact details
+    * Update relationships
+    * Modify phone numbers/emails
 
-<br/>
+* **Event Changes**
+    * Reschedule dates
+    * Change locations
+    * Update attendee lists
+    * Modify event names
 
-If you want to update information about a contact or event, you can: 
+### 🗑️ Cleanup & Organization
+Manage your data efficiently:
 
-* Edit a person's contact information
+* **Contact Management**
+    * Remove single contacts
+    * Clear all contacts
+    * Organize by relationships
 
-* Update event details (including name, date, location, and attendees)
+* **Event Cleanup**
+    * Cancel individual events
+    * Clear all events
+    * Remove specific attendees
 
-<br/>
+Refer to the [feature list below](#-features-overview) for detailed information of each command that is available in LegacyLink.
 
-If you wish to delete a contact or cancel an event, you can:
 
-* Delete a person from the contact list
 
-* Cancel an upcoming event
+# 📚 Features Overview
 
-* Clear (mass delete) all contacts
+## Contents
+- [General Commands](#general-commands)
+- [Managing Contacts](#managing-contacts)
+- [Organizing Events](#organizing-events)
 
-* Clear (mass delete) all events
-
-<br/>
-
-Refer to the feature list below for detailed information of each command that is available in LegacyLink.
 
 <panel header="Notes about the command format:" type="info" expanded no-close>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add -n NAME`, `NAME` is a parameter which can be used as `add -n John Doe`.
+> **Using This Guide:**
+> * Commands are case-sensitive (`help` works, `Help` doesn't)
+> * Words in `UPPER_CASE` are values you provide
+> * Parameters can be in any order
+    >   * For example, if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
+> * Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
+> * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+## General Commands
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
-* All commands are **case-sensitive**. <br>
-e.g. The command `Help` is different from `help` and therefore, results in an `Unknown command` error
-</panel>
-
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-Format: `help`
+### Get Help 💡
+**Format:**
+```
+help
+```
+* Shows a message (pictured below) with the link to access this user guide.
+* Use anytime you need assistance.
 
 ![help message](images/helpMessage.png)
 
-### Listing all persons : `list -p`
+### Save Your Data 💾
+* All changes are saved automatically
+* No manual saving needed
+* Data is stored in your LegacyLink folder
 
-Shows a list of all persons in the address book.
+### Exit LegacyLink 👋
+**Format:**
+```
+exit
+```
+* Closes the application
+* All data is automatically saved
+> ⚠️ **Warning:** No confirmation message is displayed. 
 
-Format: `list -p`
+### Editing The Data File
+
+LegacyLink data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json and [JAR file location]/data/eventbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, LegacyLink will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the LegacyLink to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+</box>
+
+
+
+## Managing Contacts
+
+### View Your Contact List 👥
+```
+list -p
+```
+* Shows all your family contacts in one view
+* Use this to check contact details or before using other commands
+
+![ListPersonCommand.png](images/ListPersonCommand.png)
 
 <box type="tip" seamless>
 
 **Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
 </box>
 
-![ListPersonCommand.png](images/ListPersonCommand.png)
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
+### Add a New Contact ➕
+**Format:**
+```
+add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP
+```
+* Adds a person to the address book.
+* All parameters `NAME`, `PHONE_NUMBER`, `EMAIL`, `RELATIONSHIP` must be present.
+* If you want to use special characters such as `d/o` or `s/o` in `name`, please omit the `/` and enter `so` and `do` instead.
 
 <box type="tip" seamless>
+
+**Rules to Remember:**
+
+| Field       | Requirements                                                                                                                                               |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name        | • Letters, numbers, and spaces only<br>• Cannot be blank                                                                                                   |
+| Phone       | • 3-15 digits<br>• Alphabetical characters (A-Z, a-z) and special characters (/ - _ ( )) are permitted. <br> • At least one digit is required in the number |
+| Email       | • Must be valid email format (example@domain.com)                                                                                                          |
+| Relationship| • Letters only<br>• Cannot be blank<br>• Note: Please enter a meaningful relationship that best describes the connection (e.g., "Friend," "Colleague," "Sibling").
+
+                                                                                                                   |
+
 
 **Note:** Names which are very long may not be fully displayed in the detailed person view, as displaying it would
 compromise the aesthetic of the User Interface and overall user experience. The person can still be identified through
 other information such as their phone number, email, and relationship.
 
-**Tip:** 
-* All parameters `NAME`, `PHONE_NUMBER`, `EMAIL`, `RELATIONSHIP` must be present.
-* **Names** should only contain alphanumeric characters and spaces, and it should not be blank.
-* **Phone numbers** should only contain numbers, and it should be at least 3 digits and at most 15 digits long.
-* **Emails** should be of the format local-part@domain.
-* **Relationships** should only contain alphabetic characters, and it should not be blank.
-* If you want to use special characters such as `d/o` or `s/o` in `name`, please omit the `/` and enter `so` and `do` instead.
 </box>
 
 Valid Example:
-* `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123`
+```
+add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123
+```
 * This command adds a person named Betsy Crowe with the phone number 98262123, email betsycrowe@example.com, and the relationship Mother to the address book.
 ![AddCommandExample1.png](images/AddCommandExample1.png)
 
 Invalid Example (Invalid Phone Number):
-* `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12`
+```
+add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12
+```
 * This command will result in the following error message since the phone number must be at least 3 digits long.
 ![AddCommandFailureInvalidPhone.png](images/AddCommandFailureInvalidPhone.png)
 
@@ -162,22 +267,29 @@ Invalid Example (Duplicate Persons):
 * The following error message will be shown:
 ![AddCommandDuplicate.png](images/AddCommandDuplicate.png)
 
-### Editing a person : `edit`
+  
 
-Edits an existing person in the address book.
+### Edit a Contact 📝
 
-Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
+**Format:**
+```
+edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]
+```
+* Edits an existing person in the address book.
+
 
 <box type="tip" seamless>
 
-**Tip:**
+**Tips:**
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Each of the optional fields can only be specified at most once. <br>
-e.g. `edit 1 -n Carmen -n Betsy` is an invalid command.
+  e.g. `edit 1 -n Carmen -n Betsy` is an invalid command.
 * Existing values will be updated to the input values.
 * If you want to use special characters such as `d/o` or `s/o` in `name`, please omit the `/` and enter `so` and `do` instead.
+  
 </box>
+
 
 Valid Example (One field edited):
 * `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
@@ -204,11 +316,15 @@ Invalid Example (Duplicate Persons):
 * The following error message will be shown:
   ![EditPersonDuplicateExample.png](images/EditPersonDuplicateExample.png)
 
-### Locating persons by name: `find`
+
+### Find Contacts By Name 🔍
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+**Format:**
+```
+find KEYWORD [MORE_KEYWORDS]
+```
 
 <box type="tip" seamless>
 
@@ -236,21 +352,19 @@ Valid Example (Found no person)
 * Note: since there are no `Magnus` in the contact, 0 person is listed.
 ![FindCommandExample3.png](images/FindCommandExample3.png)
 
-### Deleting a person : `delete`
+### Delete a Contact ❌
 
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
+**Format:** 
+```
+delete INDEX
+```
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="warning" seamless>
 
-**Warning:**
-* No confirmation message is displayed.
-* This action is irreversible, you will have to use `add` command to add the contact again. 
+> ⚠️ **Warning:** This action cannot be undone, no confirmation message is displayed! You will have to use `add` command to add the contact again. 
 </box>
 
 Valid Example:
@@ -262,25 +376,30 @@ Valid Example:
 * Assumes that only 1 person named `Charlotte` is found by the `find` command.
 ![DeleteCommandExample2.png](images/DeleteCommandExample2.png)
 
-### Clearing all persons : `clear -p`
+### Clearing All Contacts ❌❌
+**Format:**
+```
+clear -p
+```
 
 Clears all persons from the address book.
 
 <box type="warning" seamless>
 
-**Warning:**
-* No confirmation message is displayed.
-* This action is irreversible, you will have to use `add` command to add all the contacts again.
+> ⚠️ **Warning:** This action cannot be undone, no confirmation message is displayed! You will have to use `add` commands to add all the contacts again.
 </box>
 
-Format: `clear -p`
 ![ClearPersonCommand.png](images/ClearPersonCommand.png)
 
-### Listing all events : `list -e`
+## Organizing Events
 
-Shows a list of all events in the event book.
+### View All Events 📅
 
-Format: `list -e`
+**Format:**
+```
+list -e
+```
+* Shows a list of all events in the event book.
 
 <box type="tip" seamless>
 
@@ -289,12 +408,15 @@ Format: `list -e`
 
 ![ListEventCommand.png](images/ListEventCommand.png)
 
-### Adding an event: `event`
+### Create New Event 🎉
 
-Adds an event to the event book.
+**Format:**
+```
+event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION [-a ATTENDEES]
+```
+* Adds an event to the event book.
+* Dates are in (yyyy-mm-dd) format.
 
-Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION [-a ATTENDEES]` <br>
-**Note:** Dates are in (yyyy-mm-dd) format.
 
 
 <box type="tip" seamless>
@@ -325,12 +447,14 @@ Invalid Example:
 * This command will result in the following error message since the optional field `-a` is specified more than once.
 ![EventCommandInvalid2.png](images/EventCommandInvalid2.png)
 
-### Updating an event: `update`
+### Update Event Details ✏️
 
-Updates the details of an existing event in the address book.
+**Format:** 
+```
+update -i INDEX [-n NEW_NAME] [-sd NEW_START_DATE] [-ed NEW_END_DATE] [-l NEW_LOCATION] [-a NEW_ATTENDEES_INDICES] [-r REMOVED_ATTENDEES_INDICES]
+```
 
-Format: `update -i INDEX [-n NEW_NAME] [-sd NEW_START_DATE] [-ed NEW_END_DATE] [-l NEW_LOCATION] [-a NEW_ATTENDEES_INDICES] [-r REMOVED_ATTENDEES_INDICES]`
-
+* Updates the details of an existing event in the address book.
 **Note:** Dates are in (yyyy-mm-dd) format.
 
 <box type="tip" seamless>
@@ -358,47 +482,18 @@ Invalid Example:
 * This command will result in the following error message since the optional fields `-n` and `-a` are specified more than once.
 ![UpdateEventInvalid2.png](images/UpdateEventInvalid2.png)
 
-### Clearing all events : `clear -e`
+### Clearing All Events 🗑️
 
-Clears all events from the event book.
+**Format:**
+```
+clear -e`
+```
+* Clears all events from the event book.
+> ⚠️ **Warning:** No confirmation message is displayed. This action is irreversible, you will have to use `event` command to add all the events again.
 
-<box type="warning" seamless>
-
-**Warning:**
-* No confirmation message is displayed.
-* This action is irreversible, you will have to use `event` command to add all the events again.
-</box>
-
-Format: `clear -e`
 ![ClearEventCommand.png](images/ClearEventCommand.png)
 
-### Exiting the program : `exit`
 
-Exits the program.
-
-<box type="warning" seamless>
-
-**Warning:**
-* No confirmation message is displayed.
-</box>
-
-Format: `exit`
-
-### Saving the data
-
-LegacyLink data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-LegacyLink data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json and [JAR file location]/data/eventbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<box type="warning" seamless>
-
-**Caution:**
-If your changes to the data file makes its format invalid, LegacyLink will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the LegacyLink to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-
-</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
