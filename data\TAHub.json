@@ -1,0 +1,102 @@
+{
+  "persons" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "course" : "CS2103/T",
+    "tags" : [ "struggling" ],
+    "grades" : {
+      "12a" : {
+        "testName" : "12a",
+        "score" : 12.0,
+        "weightage" : 12.0
+      },
+      "12d" : {
+        "testName" : "12d",
+        "score" : 12.0,
+        "weightage" : 22.0
+      }
+    },
+    "attendances" : { }
+  }, {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "course" : "CS2105",
+    "tags" : [ "excellent", "active" ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "course" : "CS2101",
+    "tags" : [ "passive" ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "David Li",
+    "phone" : "91031282",
+    "email" : "lidavid@example.com",
+    "course" : "CS2030/S",
+    "tags" : [ "active" ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "Irfan Ibrahim",
+    "phone" : "92492021",
+    "email" : "irfan@example.com",
+    "course" : "CS2103/T LG17",
+    "tags" : [ "excellent" ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "Roy Balakrishnan",
+    "phone" : "92624417",
+    "email" : "royb@example.com",
+    "course" : "CS1231S",
+    "tags" : [ "average" ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "test",
+    "phone" : "123123",
+    "email" : "sdjfk@gmail.com",
+    "course" : "12312",
+    "tags" : [ ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "test@",
+    "phone" : "123123",
+    "email" : "sdjf1k@gmail.com",
+    "course" : "12312",
+    "tags" : [ ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "test/",
+    "phone" : "123123",
+    "email" : "sdjf@gmail.com",
+    "course" : "12312",
+    "tags" : [ ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "te'st",
+    "phone" : "123123",
+    "email" : "sdjf3k@gmail.com",
+    "course" : "12312",
+    "tags" : [ ],
+    "grades" : { },
+    "attendances" : { }
+  }, {
+    "name" : "te-st",
+    "phone" : "123123",
+    "email" : "sdjfk2@gmail.com",
+    "course" : "12312",
+    "tags" : [ ],
+    "grades" : { },
+    "attendances" : { }
+  } ]
+}
