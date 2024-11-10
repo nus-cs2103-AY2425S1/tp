@@ -3,12 +3,15 @@ layout: page
 title: User Guide
 ---
 
-ClinicConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClinicConnect can get your patient management tasks done faster than traditional GUI applications.
+ClinicConnect is the **the *ideal* patient management and appointment tracker system for health-screening clinics.** With *unique* functions and layouts tailored to your workflows as health screening clinic assistants, ClinicConnect can get your patient management tasks done faster, more efficiently, and hassle-free.
 
-* Table of Contents
+---
+
+## Table of Contents
+
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Quick start
 
@@ -19,10 +22,10 @@ ClinicConnect is a **desktop app for managing contacts, optimized for use via a 
 1. Copy the file to the folder you want to use as the _home folder_ for your ClinicConnectSystem.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clinicconnectsystem.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box at the top and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `home` : Lists all patients.
@@ -65,7 +68,10 @@ Provides you with tips to use our system more effectively.
   e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n|NAME [al|ALLERGY` can be used as `n|John Doe al|friend` or as `n|John Doe`.
+  e.g `n|NAME [al|ALLERGY]` can be used as `n|John Doe al|friend` or as `n|John Doe`.
+
+* Parameters immediately preceding an ellipsis(...) can appear more than once, to add multiple arguments of the same type.<br>
+  e.g `al|ALLERGY...` can be used as `al|fish al|nuts` or `al|nuts`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n|NAME p|PHONE_NUMBER`, `p|PHONE_NUMBER n|NAME` is also acceptable.
@@ -75,6 +81,148 @@ Provides you with tips to use our system more effectively.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+### Command Parameter Summary Table
+
+The table below shows the list of valid parameters that can be encountered in our functions, as well as their specifications.
+
+<div markdown="span" class="alert alert-primary">You can search for relevant info in the user guide by typing <code>Ctrl + F</code> for Windows and Linux computers and <code>⌘ + F</code> for Mac.
+</div>
+
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center;">No.</th>
+      <th style="text-align:center;">Parameter</th>
+      <th style="text-align:center;">Prefix Format</th>
+      <th style="text-align:center;">Specifications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:center;">1</td>
+      <td style="text-align:center;">Address</td>
+      <td style="text-align:center;">a|</td>
+      <td>Takes all values.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">2</td>
+      <td style="text-align:center;">Allergy</td>
+      <td style="text-align:center;">al|</td>
+      <td>Takes all values. Can be multiple values.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">4</td>
+      <td style="text-align:center;">Birthdate</td>
+      <td style="text-align:center;">d|</td>
+      <td>Should follow the format YYYY-MM-DD. Should not be after today's date.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">5</td>
+      <td style="text-align:center;">Blood Type</td>
+      <td style="text-align:center;">b|</td>
+      <td>Should be either A/B/AB/O followed by the Rhesus factor (+/-).</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">6</td>
+      <td style="text-align:center;">Date and Time</td>
+      <td style="text-align:center;">dt|</td>
+      <td>Should follow the format YYYY-MM-DD HH:MM. Should not be before the current date and time.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">7</td>
+      <td style="text-align:center;">Email</td>
+      <td style="text-align:center;">e|</td>
+      <td>Should be of the format local-part@domain. The <code>local-part</code> section should only contain alphanumeric characters and the special characters <code>+_.-</code>. The <code>local-part</code> section may not start or end with special characters. The <code>domain</code> section must:
+        <ul>
+          <li>start with a domain name (*gmail*.com) at least 1 character long</li>
+          <li>end with a domain label (.*com*) at least 2 characters long</li>
+          <li>have each domain label start and end with alphanumeric characters</li>
+          <li>have each domain label consist only of alphanumeric characters, which can be separated by hyphens.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">8</td>
+      <td style="text-align:center;">Existing Condition</td>
+      <td style="text-align:center;">ec|</td>
+      <td>Takes all values.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">9</td>
+      <td style="text-align:center;">Health Risk</td>
+      <td style="text-align:center;">rl|</td>
+      <td>Should be either <code>HIGH</code>, <code>MEDIUM</code> or <code>LOW</code>. Case insensitive.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">10</td>
+      <td style="text-align:center;">Health Service</td>
+      <td style="text-align:center;">h|</td>
+      <td>Should be either <code>BLOOD TEST</code>, <code>CANCER SCREENING</code>, <code>VACCINATION</code>, or <code>CONSULT</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">11</td>
+      <td style="text-align:center;">Name</td>
+      <td style="text-align:center;">n|</td>
+      <td>Should only contain alphanumeric values (A-Z, 0-9) and spaces.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">12</td>
+      <td style="text-align:center;">Note</td>
+      <td style="text-align:center;">no|</td>
+      <td>Takes all values.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">13</td>
+      <td style="text-align:center;">NRIC</td>
+      <td style="text-align:center;">i|</td>
+      <td>Should be 9 digit uppercase sequence with an alphabet at the start and at the end. Starting character should either be an uppercase "S", "T", "F", "G" or "M", followed by 7 numbers and ending with an uppercase alphabet.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">14</td>
+      <td style="text-align:center;">Next-of-Kin Name</td>
+      <td style="text-align:center;">nokn|</td>
+      <td>Should only contain alphanumeric values (A-Z, 0-9) and spaces.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">15</td>
+      <td style="text-align:center;">Next-of-Kin Phone</td>
+      <td style="text-align:center;">nokp|</td>
+      <td>Should only contain numbers. Should be at least 3 digits long.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">16</td>
+      <td style="text-align:center;">Phone</td>
+      <td style="text-align:center;">p|</td>
+      <td>Should only contain numbers. Should be at least 3 digits long.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">17</td>
+      <td style="text-align:center;">Remove Allergy</td>
+      <td style="text-align:center;">rmal|</td>
+      <td>Takes all values. Can be multiple values</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">18</td>
+      <td style="text-align:center;">Sex</td>
+      <td style="text-align:center;">s|</td>
+      <td>Should either be uppercase characters M or F</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">19</td>
+      <td style="text-align:center;">Start Date</td>
+      <td style="text-align:center;">sd|</td>
+      <td>Should follow the format YYYY-MM-DD.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;">20</td>
+      <td style="text-align:center;">End Date</td>
+      <td style="text-align:center;">ed|</td>
+      <td>Should follow the format YYYY-MM-DD.</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Viewing help : `help`
 
