@@ -31,8 +31,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 Name name = ParserUtil.parseName(str);
                 return new DeleteCommand(name);
             } catch (Exception ex) {
-                throw ex; // why it became successfull
-                // did not use the 2 parameter exception
+                throw ex;
             }
         }
 
@@ -49,10 +48,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Index index = ParserUtil.parseIndex(trimmedArgs);
             return new DeleteCommand(index);
         } catch (Exception exp) {
-            if (isInteger(trimmedArgs) || trimmedArgs.matches(regexNumber)
-                    /*|| trimmedArgs.matches("^[^a-zA-Z]*$")*/) {
-                throw new ParseException(exp.getMessage()); // no invalid command format
-                // -1, 0
+            if (isInteger(trimmedArgs) || trimmedArgs.matches(regexNumber)) {
+                // If param passed is an int but invalid, num too big or negative
+                throw new ParseException(exp.getMessage());
             }
             return createDeleteCommandByName(trimmedArgs); // no invalid command format
         }

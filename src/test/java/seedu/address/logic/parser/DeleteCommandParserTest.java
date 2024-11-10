@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.contact.Name;
 
@@ -49,6 +50,30 @@ public class DeleteCommandParserTest {
     public void parse_invalidNameArgs_throwsParseException() {
         assertParseFailure(parser, INVALID_NAME_DESC,
                 ParserUtil.MESSAGE_INVALID_NAME_FIELD);
+    }
+
+    @Test
+    public void parse_attemptToDeleteBothWays_throwsParseException() {
+        assertParseFailure(parser, "1 " + PREFIX_NAME + VALID_NAME_AMY, DeleteCommand.MESSAGE_DELETE_MULTIPLE_WAYS_FORBIDDEN);
+    }
+
+    @Test
+    public void parse_attemptToDeleteWithBlankName_throwsParseException() {
+        assertParseFailure(parser, "    ", DeleteCommand.MESSAGE_MISSING_INDEX_OR_FULL_NAME);
+    }
+
+    @Test
+    public void parse_attemptToDeleteByInvalidInt_throwsParseException() {
+        // num too big
+        assertParseFailure(parser, Integer.MAX_VALUE +  "1", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // negative num
+        assertParseFailure(parser, "-1", ParserUtil.MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_attemptToDeleteByInvalidName_throwsParseException() {
+        assertParseFailure(parser, "James&", Messages.MESSAGE_INVALID_NAME_FIELD_INPUT);
     }
 
 }
