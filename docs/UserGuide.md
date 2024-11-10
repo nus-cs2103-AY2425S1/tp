@@ -9,6 +9,47 @@ title: User Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## How to use the User Guide
+
+This User Guide is designed to help you navigate and make the most of ABCLI. It introduces the application's features and guides you from getting started to mastering each function, all without requiring any prior knowledge. Explore each section below:
+
+1. **[Table of Contents](#Table-of-Contents)**: Located at the start of the guide, this is useful whenever you want to locate a specific section or topic quickly.
+
+2. **[Application Overview](#Application-Overview)**: Refer to this section if you are new to ABCLI or want to understand its purpose and primary capabilities. It is ideal for getting a high-level understanding of how ABCLI can support your real estate tasks.
+
+3. **[Quick Start](#Quick Start)**: Use this section if you are setting up ABCLI for the first time. It provides step-by-step instructions to get the app running.
+
+4. **[Features](#Features)**: This is your go-to section as you start using ABCLI. Divided into [General](#General), [Buyers](#Buyer), [Meet Ups](Meet Ups), and [Properties](Properties), it details how to use each feature, including command formats, tips, and examples. Refer here whenever you need guidance on operating any part of the app.
+
+5. **[FAQ](#FAQ)**: Consult this section if you encounter issues or have questions about ABCLI’s functionality. It provides answers to common questions and can help resolve typical challenges.
+
+6. **[Known Issues](#Known-Issues)**: If ABCLI behaves unexpectedly, refer to this section to see if it’s a known issue. This section lists potential problems and workarounds, helping you troubleshoot effectively.
+
+7. **[Command Summary](#Command-Summary)**: Ideal as a quick reference guide, this section provides an overview of all available commands. Use it when you need to check the format or options for any command without going into full detail.
+
+8. **[Glossary](#Glossary)**: If you encounter any unfamiliar terms while using ABCLI or reading the guide, refer to the Glossary. It defines key terms to ensure clarity as you navigate the app.
+
+### Display Boxes
+Throughout the guide, you will see display boxes with additional information:
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ Look out for these when you want to enhance your user experience or learn best practices.
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Key Insights**
+ Refer to these boxes for extra insights and context about ABCLI features.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+ Pay attention to these warnings to avoid potential pitfalls or issues.
+</div>
+
+<div markdown="span" class="alert alert-primary">:rocket: **Future Enhancement:**
+ These boxes highlight features that are planned for future releases, keeping you informed about upcoming capabilities.
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
 ## Application Overview
 
 ABCLI is divided into three core modes, each dedicated to a key aspect of a real estate agent workflows:
@@ -25,17 +66,26 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer, you can get it [here](https://www.oracle.com/java/technologies/downloads/#java17).
+1. Install Java `17` or above: Ensure that Java 17 or a later version is installed on your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java17).
+   * MacOS users can refer to this [set of instructions](https://se-education.org/guides/tutorials/javaInstallationMac.html) for easier installation. 
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-2/tp/releases/).
+2. Download the latest ABCLI application: Get the latest `ABCLI.jar` file from the [release page](https://github.com/AY2425S1-CS2103T-F13-2/tp/releases/).  
 
-3. Copy the file to the folder you want to use as the _home folder_ for your application.
+3. Choose a storage folder: Move the `ABCLI.jar` file to the folder where you want to store and run the application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar abcli.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open the command terminal:  
+    * For Window users, in the folder containing `ABCLI.jar`, right-click the empty space and select “Open in Terminal”.
+    * For MacOS users, right-click the home folder, hover over “Services,” and select “New Terminal at Folder”.
+
+5. Run the application: Enter the command `java -jar ABCLI.jar` to start ABCLI.  
+
+6. Verify the GUI: If you are successful in opening the application, a GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+**Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
+</div>
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Enter commands: Type a command in the command box and press Enter to execute it. For example, typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `view` : Lists all buyers.
@@ -48,11 +98,7 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-**Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
-</div>
+8. Explore available features: Refer to the [Features](#features) section below for details on each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
