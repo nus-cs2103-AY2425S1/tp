@@ -804,16 +804,14 @@ Undoes the previous command ran.
 
 ##### Notes
 
-1. If you first open the application, you will be unable to undo because there is no data to undo. You can only undo
+1. If it is your first time opening the application, you will be unable to undo because there is no data to undo. You can only undo
    after you have made changes to the application.
 2. You can only undo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
    and not the commands which do not make any changes (find, list, help, exit commands).
-3. For every change you make to the application, it will be added to the version history of the application.
-4. The application stores up to 100 version histories. Hence you will only be able to undo up to 100 of your most recent
+3. For every change you make within the application, it will be added to the version history of the application.
+4. The application stores up to 100 version histories. Hence, you will only be able to undo up to 100 of your most recent
    versions.
 5. After running the command you will be brought to the default panel of the application (the student list panel).
-6. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
 
 #### Redoing change: `redo`
 
@@ -823,14 +821,11 @@ Format: `redo`
 
 ##### Notes
 
-1. If you first open the application, you will be unable to redo because there is no data to redo. You can only
+1. If it is your first time opening the application, you will be unable to redo because there is no data to redo. You can only
    redo the application after at least one undo has been executed.
 2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
-   and
-   not the commands which do not make any changes (find, list, help, exit commands).
+   and not the commands which do not make any changes (find, list, help, exit commands).
 3. After running the command you will be brought to the default panel of the application (the student list panel).
-4. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
 
 #### Viewing help : `help`
 
@@ -868,7 +863,7 @@ save manually.
 ### Editing the data file
 
 T_Assistant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
-welcome to update data directly by editing that data file.
+welcome to update data directly by editing that data file. 
 
 <box type="warning" seamless>
 
@@ -877,6 +872,8 @@ If your changes to the data file makes its format invalid, T_Assistant will disc
 data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br><br>
 Furthermore, certain edits can cause the T_Assistant to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+Changes done directly to the data file will **NOT** be registered by the application, i.e. `undo`/`redo` will not register these changes.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -886,7 +883,7 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous T_Assistant home folder and also copy over `versionHistory.json`.
+the data of your previous T_Assistant home folder and also copy over `versionHistory.json` if you wish to keep it.
 
 --------------------------------------------------------------------------------------------------------------------
 
