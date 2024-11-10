@@ -50,10 +50,7 @@ public class DeletePriorityCommand extends Command {
                     personToEdit.getTags(),
                     new PriorityLevel(3)); // reset to default priority level
 
-            model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            model.updateTasksForPerson(personToEdit, editedPerson);
-            model.setPerson(personToEdit, editedPerson);
+            model.updatePersonAndTasks(personToEdit, editedPerson);
             return new CommandResult(String.format("Priority level reset to default for %s",
                     editedPerson.getName()));
         } catch (IndexOutOfBoundsException e) {
