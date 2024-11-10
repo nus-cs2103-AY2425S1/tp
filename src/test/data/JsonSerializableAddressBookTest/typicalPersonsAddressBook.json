@@ -30,11 +30,11 @@
       "publicAddresses": {
         "SOL": [
           {
-            "address": "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA",
+            "address": "2rb4kogqbnwcxmdxwrcnrpijv94g5udcb7bp435fvfba",
             "label": "main"
           },
           {
-            "address": "44wP1ZSKZX4PDADKU2i14EyU8TsXdjZahxGNMryvv3Ty",
+            "address": "44wp1zskzx4pdadku2i14eyu8tsxdjzahxgnmryvv3ty",
             "label": "sub"
           }
         ]
@@ -52,7 +52,7 @@
       "publicAddresses": {
         "SOL": [
           {
-            "address": "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA",
+            "address": "2rb4kogqbnwcxmdxwrcnrpijv94g5udcb7bp435fvfba",
             "label": "main"
           }
         ]

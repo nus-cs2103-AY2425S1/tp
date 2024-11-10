@@ -19,11 +19,11 @@ public abstract class PublicAddress {
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND =
         "Can't find any Person with public address"
             + " inputted: %1$s";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR =
+    public static final String MESSAGE_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR =
         "Public Address contains only alphanumeric characters";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG =
+    public static final String MESSAGE_PUBLIC_ADDRESS_FAILURE_TOO_LONG =
         "Public Address for length BTC/ETH/SOL should be less than 44 characters";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_SHORT =
+    public static final String MESSAGE_PUBLIC_ADDRESS_FAILURE_TOO_SHORT =
         "Public Address for length BTC/ETH/SOL should be more than 26 characters";
 
     public final String publicAddress;
@@ -59,11 +59,11 @@ public abstract class PublicAddress {
      */
     public static void validatePublicAddress(String publicAddress) throws IllegalArgumentException {
         if (publicAddress.length() > 44) { //length of public address too long
-            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
+            throw new IllegalArgumentException(MESSAGE_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
         } else if (!(publicAddress.matches(VALIDATION_PUBLIC_ADDRESS_REGEX))) {
-            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
+            throw new IllegalArgumentException(MESSAGE_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
         } else if (publicAddress.length() < 26) { //length of public address too short
-            throw new IllegalArgumentException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_SHORT);
+            throw new IllegalArgumentException(MESSAGE_PUBLIC_ADDRESS_FAILURE_TOO_SHORT);
         }
     }
 
@@ -118,7 +118,7 @@ public abstract class PublicAddress {
      * @return String
      */
     public String getPublicAddressString() {
-        return publicAddress.toLowerCase();
+        return publicAddress;
     }
 
     /**
