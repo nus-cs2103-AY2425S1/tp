@@ -38,6 +38,16 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
+    /**
+     * Wraps the parseIndex method and provides more utility with regards to custom messages.
+     */
+    public static Index parseIndexWithMessage(String value, String errorMessage) throws ParseException {
+        try {
+            return ParserUtil.parseIndex(value);
+        } catch (ParseException e) {
+            throw new ParseException(errorMessage, e);
+        }
+    }
 
     /**
      * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
