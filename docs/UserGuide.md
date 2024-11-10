@@ -222,6 +222,10 @@ Clears all entries from the buyer list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the buyers from the BuyerList, and there is no way to undo this, you may lose your data permanently.
+</div>
+
 ## Meet Ups
 ![MeetUpModeInitialList](images/MeetUpModeInitialList.png)
 <div markdown="block" class="alert alert-info">
@@ -320,6 +324,10 @@ Clears all entries from the meet-up list.
 
 Format: `clear`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the meet-ups from the MeetUpList, and there is no way to undo this, you may lose your data permanently.
+</div>
+
 ## Properties
 ![PropertyModeInitialList](images/PropertyModeInitialList.png)
 <div markdown="block" class="alert alert-info">
@@ -404,6 +412,10 @@ Examples:
 Clears all entries from the property list.
 
 Format: `clear`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Using the clear command will delete all the properties from the PropertyList, and there is no way to undo this, you may lose your data permanently.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
