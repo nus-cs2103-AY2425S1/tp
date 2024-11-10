@@ -15,7 +15,7 @@ else ([valid command format])
 
     if() then ([duplicate person])
         :Receive error message;
-    else
+    else ([unique person or no such person exists])
         if() then ([no person found])
             :Receive error message;
         else([unique person])

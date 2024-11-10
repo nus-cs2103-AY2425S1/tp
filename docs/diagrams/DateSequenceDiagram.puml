@@ -15,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("date n/Alex Yeoh d/31/10/2024")
+[-> LogicManager : execute("date n/Alex Yeoh d/31/10/2024 1230")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("date n/Alex Yeoh d/31/10/2024")
+LogicManager -> AddressBookParser : parseCommand("date ...")
 activate AddressBookParser
 
 create DateCommandParser
@@ -28,7 +28,7 @@ activate DateCommandParser
 DateCommandParser --> AddressBookParser
 deactivate DateCommandParser
 
-AddressBookParser -> DateCommandParser : parse("n/Alex Yeoh d/31/10/2024")
+AddressBookParser -> DateCommandParser : parse("n/Alex Yeoh d/...")
 activate DateCommandParser
 
 create DateCommand

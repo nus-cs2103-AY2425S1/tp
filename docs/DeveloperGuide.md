@@ -21,9 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -89,14 +86,8 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("date n/Alex Yeoh d/31/10/2024")` API call as an example.
-
-![Interactions Inside the Logic Component for the `date n/Alex Yeoh d/31/10/2024` Command](images/DateSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">
-<strong>Note:</strong> The lifeline for <code>DateCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
-</div>
-
+Further illustrations of interactions within the `Logic` component will follow the feature explanations, focusing on dependencies between these features and the `Logic` class. 
+These diagrams and examples will clarify how `Logic` coordinates with other classes to process commands effectively, ensuring consistent operation and robust error handling across features.
 
 How the `Logic` component works:
 
@@ -158,83 +149,48 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Feature
-Users can seamlessly add patients to their Health Connect application.
-Patients must have a name, phone number, address, email, tag, and allergy assigned to them.
+Users can add patients to Health Connect, requiring a name, phone number, address, email, tag, and allergy.
+
 #### Features Architecture Design
-1. Parsing handled by AddCommandParser: The logic for parsing is contained within the AddCommandParser to ensure the arguments are consistently handled before passing the
-relevant parameters to the AddCommand class.
-
-    * Benefit: This structure simplifies the command classes, follows the Single responsibility principle.
-   * Challenge: The AddCommandParser needs to handle the parsing extremely carefully and ensure correctness since the parser is the crucial later between the user input and
-the excecution of the command
-2. Avoiding duplicates: The AddCommand checks the person being added and ensures that duplicates are caught early in the ModelManager. This provides immediate feedback
-and prevents incorrect and impossible states in the data model(eg. 2 people with same name, number and email).
-
-    * Benefit: The model is validated every time a new person is added. Hence, this ensures that the date in the Model and in Storage is always correct. This ensures the integrity of data.
-    * Challenge: This requires checks across classes in other components in the architecture. E.g. need to have a isDuplicate method in the person class and access it in the
-AddCommandParser class to check if the person being added already exists in the Health Connect address book.
-
-
-Note:
-Tags must be one of the following: High Risk, Medium Risk or Low Risk. This is to ensure that the doctor can classify each patient and attend to their needs accordingly.
-
-A person must have at least one allergy tag. If the person has no allergies the None allergy tag can be added to them. This is to ensure that the doctor is fully certain of the allergies that each patient has.
+1. Parsing in `AddCommandParser`: Parsing logic is handled by `AddCommandParser` to ensure consistency before passing parameters to `AddCommand`.
+    * Benefit: Simplifies command classes, following the Single Responsibility Principle.
+    * Challenge: Requires precise parsing as it bridges user input and command execution.
+2. Duplicate Prevention: `AddCommand` checks for duplicates via `ModelManager`, ensuring unique entries.
+    * Benefit: Ensures data integrity in both `Model` and `Storage`.
+    * Challenge: Requires checks across components, such as using `isDuplicate` method in `Person`.
 
 The activity diagram below illustrates the sequence of actions users will follow to add a new patient profile into the Health Connect application.
 
 <img src="images/AddPersonActivityDiagram.png" width="450"/>
 
-The sequence diagram below demonstrates the interaction among carious classes to add a new Person into the Health Connect Application.
-
-<img src="images/AddCommandSequenceDiagram.png" width="600"/>
-
-
 ### Delete Feature
-Users can easily delete patients from their Health Connect application. To remove a patient, users must specify the patient's unique identifier, such as their name, phone number, or email.
-The Delete feature allows for the removal of outdated or incorrect records, helping to maintain the integrity and relevance of the data within the application.
-
+Users can delete patients by specifying a unique identifier (name, phone number, or email), keeping the data accurate and relevant.
 #### Features Architecture Design
-1. Parsing handled by DeleteCommandParser: The logic for parsing is contained within the DeleteCommandParser to ensure that arguments are consistently handled before passing the relevant parameters to the DeleteCommand class.
+1. Parsing in `DeleteCommandParser`: Parsing is handled by `DeleteCommandParser`, passing parameters to `DeleteCommand`.
+   * Benefits and Challenges similar to Add Feature
+2. Error Prevention: `DeleteCommand` verifies the patient's existence in `ModelManager` before deletion.
+    * Benefit: Validates the patients presence, preserving data integrity.
+    * challenge: Requires a `matches` method in `Delete` to check records.
 
-    * Benefit: This structure keeps the DeleteCommand class focused on executing the delete operation, following the Single Responsibility Principle.
-    * Challenge: The DeleteCommandParser must ensure the accuracy of input parsing, as it acts as the crucial layer between user input and command execution. Incorrect parsing could result in unintended deletions.
-
-2. Preventing erroneous deletions: The DeleteCommand checks the specified patient against the existing records in the ModelManager to confirm their existence before deletion. This provides immediate feedback if the patient is not found and prevents accidental deletions.
-
-    * Benefit: Validating the existence of the patient before deletion preserves data integrity, ensuring that only valid deletions occur and preventing unintended modifications.
-    * Challenge: This requires checks across classes within the architecture. For example, a method like `matches` in the Delete class could be used by the DeleteCommand to verify the presence of the specified patient in Model's filtered list.
-
-This method would have dependencies on the Model class and the Person class. The class diagram of a delete person command is given
+This method would have dependencies on the `Model` class and the `Person` class. The class diagram of a delete person command is given
 to demonstrate the interactions among classes.
 
 <img src="images/DeleteClassDiagram.png" width="600"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, when executing the delete command in Heath Connect. Take `execute("delete n/Jason p/88502457")` API call as an example.
-
-![Interactions Inside the Logic Component for the `delete n/ Jason p/ 88502457` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">
-<strong>Note:</strong> The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
-</div>
-
 ### Edit Feature
-Users can easily edit patient information within the Health Connect application. To update a patient's details, users must specify the patient's index in the list, along with the fields to be updated. The Edit feature ensures that patient records remain accurate and up-to-date, maintaining the relevance and integrity of data within the application.
+Users can update patient information by specifying an index and the fields to be updated, ensuring accurate records.
 
 #### Features Architecture Design
-1. Parsing handled by EditCommandParser: The logic for parsing is contained within the EditCommandParser to ensure that arguments, including the specified index and fields to be updated, are consistently handled before passing the relevant parameters to the EditCommand class.
+1. Parsing in `EditCommandParser`: Parsing logic in `EditCommandParser` ensures consistency before passing parameters to `EditCommand`.
+    * Benefits and Challenges similar to Add Feature
 
-    * **Benefit:** This structure keeps the EditCommand class focused on executing the update operation, adhering to the Single Responsibility Principle.
-    * **Challenge:** The EditCommandParser must ensure precise parsing of input, as it acts as the essential intermediary between user input and command execution. Incorrect parsing could lead to unintended modifications of patient records.
+2. Index and Field Validation: `EditCommand` confirms the patient's presence in `ModelManager`.
+    * **Benefit:** Prevents errors, ensuring updates are applied only to valid records.
+    * **Challenge:** Requires checking with `Model`’s `filteredPersonList`.
 
-2. Validating index and fields during edits: The EditCommand checks the specified index to confirm the patient’s presence in the ModelManager before proceeding with the updates. This prevents errors and provides immediate feedback if the index is invalid.
-
-    * **Benefit:** Confirming the patient’s existence before editing preserves data integrity, ensuring updates are applied only to valid records.
-    * **Challenge:** This requires coordination across classes within the architecture. In the `execute` method, the index is checked with the `Model`'s filteredPersonList. This is to ensure validity within the Model's current list before applying changes.
-
-3. Checking for duplicate patients: After parsing and validating, the EditCommand verifies that the edited details do not create a duplicate patient entry within the list. If the update would cause the patient to match an existing record, the command will reject the changes and notify the user.
-
-    * **Benefit:** This check prevents duplicate records from being introduced into the system, ensuring data integrity and avoiding redundancy in the patient list.
-    * **Challenge:** This requires cross-checking the modified patient data with existing records in the ModelManager. The method like `isSamePerson` is implemented in the person class, accessible by the EditCommand, to detect and prevent any updates that would result in duplicate patient entries.
+3. Duplicate Check: `EditCommand` verifies that edits won’t create duplicate entries.
+    * **Benefit:** Prevents redundancy in patient records.
+    * **Challenge:** Cross-checks modified data with existing records via `isSamePerson`.
 
 The sequence diagram below illustrates the interactions within the `Logic` component, when executing the edit command in Heath Connect. Take `execute("edit 1 p/88991123")` API call as an example.
 
@@ -243,123 +199,48 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <strong>Note:</strong> The lifeline for <code>EditCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
 </div>
 
-The activity diagram below illustrates the sequence of actions users will follow to edit a patient profile into the Health Connect application.
+### Date Feature
 
-<img src="images/EditPersonActivityDiagram.png" width="600"/>
+The Date feature allows users to add, edit, and view appointment dates for each person in the address book, helping doctors maintain an organized schedule without conflicts.
 
-## Planned Features
-### \[Proposed\] Undo/redo feature
+#### Feature Architecture
+1. **Parsing in DateCommandParser**: `DateCommandParser` handles the parsing of date-related commands, ensuring dates are in the correct format (`d/M/yyyy`) before passing them to `DateCommand`.
+    - Benefits and Challenges similar to Add Feature
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+2. **Date Validation**: `DateCommand` enforces date format requirements and ensures compliance (e.g., `d/M/yyyy` with no spaces).
+    - **Benefit**: Provides users with immediate feedback on invalid formats, helping maintain data consistency.
+    - **Challenge**: Requires thorough validation logic to prevent incorrect or improperly formatted dates from being added.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+3. **Preventing Duplicate Dates Across the Model**: `DateCommand` checks for existing dates across all records to avoid scheduling conflicts for the doctor, ensuring no overlapping appointments.
+    - **Benefit**: Ensures accurate, conflict-free scheduling, giving doctors a reliable view of upcoming appointments.
+    - **Challenge**: Requires efficient cross-checks within the model to detect and prevent any duplicate appointment dates across all patient records.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+**Sequence Diagram**: Shows interactions within `Logic` when processing date commands, such as adding or editing an appointment date, ensuring no conflicts across the schedule.
+![Interactions Inside the Logic Component for the `date n/Alex Yeoh d/31/10/2024` Command](images/DateSequenceDiagram.png)
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
+<div markdown="span" class="alert alert-info">
+<strong>Note:</strong> The lifeline for <code>DateCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+### Filter Feature
 
-![UndoRedoState3](images/UndoRedoState3.png)
+The `filter` feature allows users to search for patients based on specific attributes such as tag, phone number, email, address, and allergies. It filters the list of patients to display only those who match the given parameters.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-### \[Proposed\] Adding an End Time to the Date Feature with Duplicate/Overlap Prevention
-
-To support effective scheduling, we propose adding an `end time` to the Date feature, along with functionality to prevent overlapping time slots. This will prevent double-booking, ensuring the doctor avoids conflicting appointments and maintains organized time management.
 #### Features Architecture Design
 
-1. **Data Model Update**
-    - Update the `Date` class to include an `endTime` field alongside `startTime`, using `LocalDate` for the date and `LocalTime` for `startTime` and `endTime` to distinguish between date and time clearly.
-      - Introduce an overlap-checking method `isOverlappingDate` within the `Date` class to determine if one `Date` object conflicts with another based on `startTime` and `endTime`.
+1. **Parsing handled by FilterCommandParser**: The logic for parsing the user’s search criteria is managed by the `FilterCommandParser`. It ensures that all parameters are interpreted correctly before passing them to the `FilterCommand` class for execution.
 
-2. **Command Parsing and Validation**
-    - Modify `AddDateCommandParser` to handle an additional `endTime` parameter, ensuring both `startTime` and `endTime` are correctly formatted.
-    - Validation rules:
-        - Confirm that `endTime` follows the correct format and is after `startTime`.
-        - **Overlap Check:** Ensure that any new date entry does not overlap with existing dates in `ModelManager`. If an overlap is detected, reject the command and provide the user with an error message indicating a scheduling conflict.
+    * **Benefit**: This keeps the `FilterCommand` focused on executing the filter operation, adhering to the Single Responsibility Principle.
+    * **Challenge**: The `FilterCommandParser` must handle various combinations of parameters accurately. Ensuring correctness in parsing is crucial since incorrect parameters could lead to empty or erroneous search results.
 
-3. **ModelManager Update**
-    - Add an `hasOverlappingDate(Date newDate)` method to `ModelManager` to verify against existing entries, ensuring no overlaps occur between appointments. This check maintains scheduling integrity across the application.
+2. **Filter Logic and AND/OR Conditions**: The filtering logic is handled by the `FilterCommand`, which processes the search criteria using AND logic for different attributes (e.g., both tag and allergy must match) and OR logic for the allergy attribute (e.g., matching any one of the listed allergies).
 
-4. **Command Class Modification**
-    - Update the `AddDateCommand` class to accommodate the `endTime` parameter. Before adding a new date, validate against `ModelManager` to ensure it does not conflict with current schedules.
+    * **Benefit**: This flexible search logic allows users to refine their searches and find patients who meet multiple criteria.
+    * **Challenge**: The `FilterCommand` needs to ensure that the AND and OR conditions are applied correctly and efficiently, especially when multiple allergies are involved.
 
-5. **User Interface Update**
-    - Adjust the UI to enable users to specify both `startTime` and `endTime` fields.
-    - Display an error message when scheduling conflicts arise, instructing users to select an alternate time slot for their appointment.
+The class diagram of a filter command is given to demonstrate the interactions among classes.
+<img src="images/FilterClassDiagram.png" width="800"/>
 
-6. **Storage Update**
-    - Modify the storage schema to include the `endTime` field, ensuring proper serialization and deserialization so that time data remains consistent when loading and saving appointments.
-
-
-The following class diagram shows the interaction between the classes given the new update
-
-<img src="images/BetterDateClassDiagram.png" width="650" />
-
-The following activity diagram summarizes what happens when a user executes the date command with the new end time improvement.
-
-<img src="images/BetterDateActivityDiagram.png" width="650" />
-
-
-#### Considerations
-
-- **Edge Cases:** Handle cases where `endTime` is equal to or before `startTime`, and verify that appointments on different dates do not incorrectly trigger overlaps.
-- **Testing:** Add unit tests to validate the following scenarios:
-    - Non-overlapping time slots are added successfully.
-    - Overlapping time slots are correctly identified, resulting in command rejection.
-    - Edge cases with adjacent `startTime` and `endTime` that do not overlap are handled as expected.
 
 ## Planned Enhancements
 
@@ -383,30 +264,9 @@ which is intended to streamline input and minimise errors without unnecessarily 
 ## **Implementation**
 This section describes some noteworthy details on how certain features are implemented.
 
-### Email Feature
 
-The email feature allows users to add, edit, and view email addresses for each person in the address book.
 
-#### Implementation
 
-The `Email` class represents a person's email address and is stored as a `String` in the `Person` class.
-
-### Allergy Feature
-
-The allergy feature allows users to add, edit and view allergies for each person in the address book.
-
-### Implementation
-
-The 'Allergy' class represents a persons Allergy.
-
-### Tag Feature
-
-The tag feature allows users to add, edit, and view tags for each person in the address book.
-
-### Implementation
-
-A tag is represented by the 'Tag' class and 'JsonAdaptedTag' is used for JSON serialization and deserialization.
-In this version a person can only have 3 possible tags: High Risk, Low Risk and Medium Risk
 
 ### Date Feature
 
@@ -418,18 +278,7 @@ The `Date` class represents a date.
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 

@@ -1,0 +1,61 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "  <<interface>>  \nParser" as Parser<FilterCommand>
+Class FilterCommandParser {
+    parser(String): FilterCommand
+}
+
+Class FilterCommand {
+  -predicate: PersonHasFeaturePredicate
+  execute(Model) : CommandResult
+}
+Class CommandResult
+
+Class ArgumentMultimap
+Class ParserUtil
+
+Class "  <<interface>>  \nPredicate" as Predicate<Person>
+
+Class PersonHasFeaturePredicate {
+  -phone : Phone
+  -email: Email
+  -tag: Tag
+  -address: Address
+  test(Person): boolean
+}
+
+Class "  <<interface>>  \nModel" as Model
+
+Class ModelManager {
+  -addressBook: AddressBook
+  -filteredPersons: FilteredList<Person>
+  updateFilteredPersonList(Predicate<Person>)
+}
+
+Class Phone
+Class Email
+Class Tag
+Class Address
+
+FilterCommandParser .up.|> Parser
+
+FilterCommandParser .down.> FilterCommand: initialize >
+FilterCommandParser .right.> ArgumentMultimap: utilizes >
+FilterCommandParser .right.> ParserUtil: utilizes >
+
+FilterCommand .down.> CommandResult: outputs >
+FilterCommand -right-> ModelManager: filters >
+
+ModelManager .up.|> Model
+ModelManager -right-> PersonHasFeaturePredicate: utilizes >
+
+
+PersonHasFeaturePredicate .up.|> Predicate
+PersonHasFeaturePredicate *-down-> Name: has >
+PersonHasFeaturePredicate *-down-> Phone: has >
+PersonHasFeaturePredicate *-down-> Email: has >
+PersonHasFeaturePredicate *-down-> Tag: has >
+PersonHasFeaturePredicate *-down-> Address: has >
+@enduml

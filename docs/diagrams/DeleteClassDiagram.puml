@@ -4,7 +4,6 @@ skinparam classAttributeIconSize 0
 
 Class "  <<interface>>  \nParser" as Parser<DeleteCommand>
 Class DeleteCommandParser {
-    -
     parser(String): DeleteCommand
 }
 

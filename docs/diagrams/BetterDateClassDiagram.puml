@@ -4,7 +4,6 @@ skinparam classAttributeIconSize 0
 
 Class "  <<interface>>  \nParser" as Parser<DateCommand>
 Class DateCommandParser {
-    -
     parser(String): DateCommand
 }
 
