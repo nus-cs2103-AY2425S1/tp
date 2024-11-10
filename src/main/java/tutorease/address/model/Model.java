@@ -103,11 +103,40 @@ public interface Model {
      */
     ReadOnlyLessonSchedule getLessonSchedule();
 
+    /**
+     * Sets the lesson schedule.
+     *
+     * @param lessonSchedule The new lesson schedule.
+     */
     void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule);
 
+    /**
+     * Gets the filtered lesson list.
+     *
+     * @return The filtered lesson list.
+     */
     ObservableList<Lesson> getFilteredLessonList();
 
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter the lesson list by.
+     */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
+
+    /**
+     * Returns true if the filtered person list is empty.
+     *
+     * @return A boolean indicating if the filtered person list is empty.
+     */
+    boolean filteredLessonListIsEmpty();
+
+    /**
+     * Gets the filtered person list size.
+     *
+     * @return The size of the filtered person list.
+     */
+    int getFilteredPersonListSize();
 
     /**
      * Adds the given lesson.
@@ -123,6 +152,7 @@ public interface Model {
      * @return A boolean indicating if the lesson is in the lessons schedule.
      */
     boolean hasLessons(Lesson lesson);
+
     /**
      * Deletes the given lesson.
      *

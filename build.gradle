@@ -66,7 +66,7 @@ dependencies {
 }
 
 run {
-    enableAssertions = true
+    enableAssertions = false
 }
 
 shadowJar {
