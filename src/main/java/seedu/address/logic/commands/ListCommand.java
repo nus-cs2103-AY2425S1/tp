@@ -23,7 +23,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
     public static final String MESSAGE_INVALID_SORT_FIELD = "Invalid sort field. "
-            + "Please use either 'name' or 'email'";
+            + "Please use either 'name', 'email', 'income' or 'age'.";
 
     private final String sortField;
     private final boolean isReverse;
@@ -65,11 +65,20 @@ public class ListCommand extends Command {
         case "name":
             return Comparator.comparing(person -> person.getName().fullName);
         case "email":
-            return Comparator.comparing(person -> person.getEmail().value);
+            return Comparator.comparing(
+                person -> person.getEmail() != null ? person.getEmail().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            );
         case "income":
-            return Comparator.comparing(person -> person.getIncome().value);
+            return Comparator.comparing(
+                person -> person.getIncome() != null ? person.getIncome().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            );
         case "age":
-            return Comparator.comparing(person -> person.getAge().value);
+            return Comparator.comparing(
+                person -> person.getAge() != null ? person.getAge().value : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            );
         default:
             throw new CommandException(MESSAGE_INVALID_SORT_FIELD);
         }

@@ -67,6 +67,8 @@ public class StringUtil {
      * Calculates the minimum number of single-character edits (insertions, deletions, or substitutions)
      * needed for the string {@code b} to become a substring of the string {@code a}.
      *
+     * This code was generated with the assistance of GitHub Copilot, an AI-powered code completion tool.
+     * 
      * @param a The string in which we want to find the substring.
      * @param b The string that we want to transform into a substring of {@code a}.
      * @return The minimum number of single-character edits needed for {@code b} to become a substring of {@code a}.
