@@ -783,8 +783,7 @@ help
 ```
 exit
 ```
-- The message `Terminating program…` is displayed.
-- After a brief delay, the program will close, effectively exiting the application.
+- After executing the command, the program will close, effectively exiting the application.
 
 
 
