@@ -581,14 +581,16 @@ Expected: A new buyer with the name `Betsy Crowe`and tags `urgent` and `referred
     1. Prerequisites: Switch to meet-up mode using the `switch m` command. Ensure that no meet-up with the subject `Discuss work plans` and from `2024-02-03 14:00` and to `2024-02-03 15:30` is present in the list.
 
     1. Test case: `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li`  
-    Expected: A new meet-up with the subject `Discuss work plans` is added to the list. Details of the added meet-up are shown in the status message. In the meet-up shown, if the added buyers (i.e. `Alex Yeoh`, `David Li`) do not exist in the buyer list, they are flagged as red.
+    Expected: A new meet-up with the subject `Discuss work plans` is added to the list. Details of the added meet-up are shown in the status message. Note:
+       * If the added buyers (i.e. `Alex Yeoh`, `David Li`) do not exist in the buyer list, they are flagged as red.  
+       * If the date-time ranges of the meet-up overlap with that of another meet-up, the from and to date-time of both overlapping meet-ups will be flagged as red.
 
    1. Test case: `add s/Invalid Meeting i/Discuss with team f/2024-02-04 14:00 t/2024-02-04 13:00 n/John Doe`  
    Expected: No meet-up is added. Error message indicating that from must be after to is shown as the status message.
 
 1. Adding an existing meet-up to the meet-up list
 
-    1. Prerequisites: Switch to meet-up mode using the `switch m command`. Ensure that a meet-up with the subject `Discuss work plans` and from `2024-02-03 14:00` and to `2024-02-03 15:30` is present in the list.
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. Ensure that a meet-up with the subject `Discuss work plans` and from `2024-02-03 14:00` and to `2024-02-03 15:30` is present in the list.
 
     1. Test case: `add s/Discuss work plans i/New information f/2024-02-03 14:00 t/2024-02-03 15:30 n/John Doe`  
 Expected: No meet-up is added. Error message indicating that the meet-up already exists is shown as the status message.
@@ -634,7 +636,7 @@ Expected: No property is added. Error message indicating that the property alrea
 
 1. Deleting a buyer while some buyers are filtered in the list
 
-   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only some buyer (fewer than full list) using relevant filters.
+   1. Prerequisites: Switch to buyer mode using the `switch b` command. Filter the buyer list using the `find` command to show only some buyers (fewer than full list) using relevant filters.
 
    1. Test case: `delete 1`    
    Expected: First (and only) buyer in the filtered list is deleted. Details of the deleted buyer are shown in the status message.
@@ -690,7 +692,7 @@ Expected: No property is added. Error message indicating that the property alrea
 
 1. Editing a meet-up while all meet-ups are being shown
 
-    1. Prerequisites: Switch to meet-up mode using the `switch m` command. List all buyers using the `view` command. Multiple meet-ups are present in the list.
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. List all meet-ups using the `view` command. Multiple meet-ups are present in the list.
 
     1. Test case: `edit 1 i/New information n/Adam`  
        Expected: First meet-up information and added buyers are updated. All other fields remain the same. Details of the edited meet-up are shown in the status message. Note that if added buyer (i.e. `Adam`) is not found in the buyer list, it will be flagged out as red.
@@ -709,7 +711,7 @@ Expected: No property is added. Error message indicating that the property alrea
 
 1. Editing a meet-up in a filtered list
 
-    1. Prerequisites: Switch to meet-up mode using the `switch m` command. Filter the meet-up list using the `find` command to show only some meet-up (fewer than full list) using relevant filters.
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. Filter the meet-up list using the `find` command to show only some meet-ups (fewer than full list) using relevant filters.
 
     1. Test case: `edit 1 i/New information`  
        Expected: First (and only) meet-up in the filtered list has its information updated. Details of the edited meet-up is shown in the status message.
@@ -719,7 +721,7 @@ Expected: No property is added. Error message indicating that the property alrea
 
 1. Attempting to edit to create a duplicate meet-up
 
-    1. Prerequisites: Switch to buyer mode using the `switch m` command. List all meet-up using the `view` command. At least two meet-ups present.
+    1. Prerequisites: Switch to meet-up mode using the `switch m` command. List all meet-ups using the `view` command. At least two meet-ups present.
 
     1. Test case: `edit 1 s/xt t/xt f/xf` (where xs, xt, xf are the subject, to and from of another existing meet-up in the list)  
        Expected: No changes are made. Error message indicating that meet-up already exists in application is shown as the status message.
