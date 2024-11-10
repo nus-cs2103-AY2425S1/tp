@@ -602,7 +602,7 @@ testers are expected to do more _exploratory_ testing.
 
 Team Size: 5
 
-1. **Planned Enhancement: Support Non-Numeric Room Identifiers**  
+1. **Planned Enhancement: Support Non-Numeric Room Identifiers**
    Currently, room identifiers must follow the format `block-floor-room number` (e.g., `10-3-100`), and only numeric values are supported for each component. We plan to enhance this feature by allowing non-numeric values for the `block`,`floor` and `room number`.
 
    **Example Requirement**:
@@ -612,7 +612,7 @@ Team Size: 5
    This change will add flexibility by supporting alphanumeric characters in the block and room sections.
 
 
-2. **Planned Enhancement: Partial Search for Session Names**  
+2. **Planned Enhancement: Partial Search for Session Names**
    Currently, users can only search for sessions by entering the exact first word of the session name using the `find_sessions` command. This can be inconvenient for users who want to list all sessions or search using only part of the session name. We can mitigate this by introducing a new command `find_sessions_partial`. 
 
    **Example Requirement**:
@@ -626,14 +626,14 @@ Team Size: 5
    Currently, users can only search for members by their full names, which can be challenging when managing a large number of members. Additionally, searching by room or other important fields, like the Telegram handle, is not supported.
 
    **Example Requirement**:
-   > Expand the `find_members` command to support searching by additional fields, such as `block/floor/room number` and `Telegram handle`.  
+   > Expand the `find_members` command to support searching by additional fields, such as `block/floor/room number` and `Telegram handle`.
    > Allow partial name matching in `find_members` to accommodate long names.
    > - Example: Users should be able to input a part of a member’s name, and the system will display all matching results.
 
    These enhancements will improve the usability of the `find_members` command, making it easier to locate members efficiently by various identifiers or by partial names.
 
 
-4. **Planned Enhancement: Command Aliases for Improved Usability**  
+4. **Planned Enhancement: Command Aliases for Improved Usability**
    The current command names (e.g., `add_session`, `add_member`) are lengthy and require the use of underscores, which can be cumbersome for users to type frequently.
 
    **Example Requirement**:
@@ -643,7 +643,7 @@ Team Size: 5
    This enhancement will streamline user interaction, making the application more efficient and user-friendly, especially for power users.
 
 
-5. **Planned Enhancement: `update_session` Command for Session Edits**  
+5. **Planned Enhancement: `update_session` Command for Session Edits**
    Currently, session details—including members, session name, date, and points—are fixed upon creation and cannot be modified, which is problematic when adjustments are necessary. The current solution is to delete the session and create a new session with the updated details.
 
    **Example Requirement**:
@@ -653,7 +653,7 @@ Team Size: 5
    This enhancement will improve flexibility and reduce the need for users to recreate sessions from scratch when updates are required.
 
 
-6. **Planned Enhancement: Filter and Sort Members by Tags**  
+6. **Planned Enhancement: Filter and Sort Members by Tags**
    The tag feature allows users to categorize members into different teams or groups, but it can become challenging to locate specific groups as the number of members increases.
 
    **Example Requirement**:
@@ -663,7 +663,7 @@ Team Size: 5
    By adding these features, users can better manage and view group associations at scale.
  
 
-7. **Planned Enhancement: Allow Manual Point Adjustments**  
+7. **Planned Enhancement: Allow Manual Point Adjustments**
    Currently, points can only be awarded or adjusted through sessions. This setup can be restrictive for users who need to manage points directly, without creating a session.
 
    **Example Requirement**:
