@@ -348,7 +348,7 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ---
 
 - **Special Comments**
-1. Refer to the Remarks section for prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t).
+1. Refer to the remarks and constraints for the following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t).
 
 #### Add Seller
 - **Command:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
@@ -418,7 +418,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >  ---
 
 - **Special Comments**
-1. Refer to the Remarks section for prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t).
+1. Refer to the remarks and constraints for the following prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t).
 
 #### Find
 - **Command:** `find KEYWORD [KEYWORD]...`
@@ -517,8 +517,8 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > 
 > ---
 
-- *Special Comments*
-1. Refer to [INDEX](#reference-types) constraints and the following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t).
+- **Special Comments**
+1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t).
 
 #### Delete Client
 - **Command:** `deleteclient INDEX`
@@ -555,7 +555,7 @@ Phone number: 977774444 and Email: bobby123@gmail.com`
 > 
 > ---
 
-- *Special Comments*
+- **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints.
 
 ---
@@ -613,8 +613,8 @@ Commands for managing appointments between user and clients.
 > 
 > ---
 
-- *Special Comments*
-Refer to [INDEX](#reference-types) constraints and the following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
+- **Special Comments**
+Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
 
 #### Delete Appointment
 - **Command:** `deleteapt INDEX`
@@ -641,8 +641,8 @@ Refer to [INDEX](#reference-types) constraints and the following prefixes: [d/](
 >
 > ---
 
-- *Special Comments*
-  Refer to [INDEX](#reference-types) constraints and the following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
+- **Special Comments**
+  Refer to [INDEX](#reference-types) constraints and the remarks & constraints for the following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
       
 ---
 
@@ -696,7 +696,7 @@ Commands for managing property listings and associating clients with listings.
 > ---
 
 - **Special Comments**
-1. Refer to the remarks for the following prefixes: [n/](#n) [pr/](#pr) [ar/](#ar) [add/](#add) [reg/](#reg) [sel/ & buy/](#sel--buy).
+1. Refer to the remarks and constraints for the following prefixes: [n/](#n) [pr/](#pr) [ar/](#ar) [add/](#add) [reg/](#reg) [sel/ & buy/](#sel--buy).
 
 #### Show Listings
 - **Command:** `showlistings`
@@ -782,6 +782,8 @@ Commands for managing property listings and associating clients with listings.
 >
 > ---
 
+- **Special Comments**
+1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints for the following prefix: [buy/](#sel--buy)
 
 #### Remove Buyers from Listing
 - **Command:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
