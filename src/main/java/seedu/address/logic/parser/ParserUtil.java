@@ -99,21 +99,26 @@ public class ParserUtil {
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code tag} is invalid or reserved.
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (trimmedTag.contains(":")) {
             String[] tagKeyValue = getTagKeyValue(trimmedTag);
+            if (Tag.isReservedTagName(tagKeyValue[0])) {
+                throw new ParseException(String.format(Tag.MESSAGE_TAG_NAME_IS_RESERVED, tagKeyValue[0]));
+            }
             return new Tag(tagKeyValue[0], tagKeyValue[1]);
         } else {
             if (!Tag.isValidTagName(trimmedTag)) {
                 throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
             }
+            if (Tag.isReservedTagName(trimmedTag)) {
+                throw new ParseException(String.format(Tag.MESSAGE_TAG_NAME_IS_RESERVED, trimmedTag));
+            }
             return new Tag(trimmedTag);
         }
-
     }
 
     private static String[] getTagKeyValue(String trimmedTag) throws ParseException {

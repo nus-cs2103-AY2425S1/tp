@@ -192,6 +192,23 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTag_reservedKey_returnsTrimmedTag() throws Exception {
+        String tagWithReservedKey = "DuplicatePhone";
+        assertThrows(ParseException.class,
+                String.format(Tag.MESSAGE_TAG_NAME_IS_RESERVED, tagWithReservedKey), ()
+                        -> ParserUtil.parseTag(tagWithReservedKey));
+    }
+
+    @Test
+    public void parseTag_reservedKeyAndAnyValue_returnsTrimmedTag() throws Exception {
+        String tagWithReservedKey = "DuplicatePhone";
+        String tagWithReservedKeyAndAnyValue = tagWithReservedKey + ":23";
+        assertThrows(ParseException.class,
+                String.format(Tag.MESSAGE_TAG_NAME_IS_RESERVED, tagWithReservedKey), ()
+                        -> ParserUtil.parseTag(tagWithReservedKeyAndAnyValue));
+    }
+
+    @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tag expectedTag = new Tag(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
