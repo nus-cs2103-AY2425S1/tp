@@ -27,12 +27,15 @@ public class FindPriceCommandParser implements Parser<FindPriceCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPriceCommand.MESSAGE_USAGE));
         }
 
-        if (!args.contains("$")) {
+
+        String[] tagKeywords = trimmedArgs.split("\\s+");
+
+        if (!(trimmedArgs.equals("$") || trimmedArgs.equals("$$")
+                || trimmedArgs.equals("$$$") || trimmedArgs.equals("$$$$"))) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_PRICE_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
 
-        String[] tagKeywords = trimmedArgs.split("\\s+");
         return new FindPriceCommand(new PriceContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
     }
 
