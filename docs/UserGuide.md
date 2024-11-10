@@ -186,11 +186,7 @@ Examples:
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
-<<<<<<< HEAD
-### Viewing patients full profile: `view`
-=======
 ### Viewing a patient's full profile: `view`
->>>>>>> 1fe142ea9195666318148b7c08383da3d0a7ae74
 
 Displays all information of an existing patient in the system with the corresponding NRIC.
 
