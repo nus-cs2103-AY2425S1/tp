@@ -242,6 +242,49 @@ Step 3. The parser will construct the `DeleteTagCommand` differently based on th
 
 Step 4. During `DeleteTagCommand#execute()`, the force flag is checked. If present, it unassigns all `Person` with the `Tag` tag1 before deleting tag1.
 
+### Tag Feature
+
+The Tag Feature allows users to store additional details of a Person in WedLinker.
+Tags would support the following functions:
+
+* `Create Tag` — Creates a `Tag` in WedLinker to be used as additional information of any `Person`.
+* `Tag` — Assigns `Tag` to a `Person.
+* `Untag` — Unassigns a `Tag` from a `Person`.
+* `Delete Tag` — Deletes the `Tag` from WedLinker.
+
+#### Implementation
+
+Given below is an example usage scenario and how Tags are used in WedLinker.
+
+Step 1. The user launches the application, `Tags` are loaded into the `Model`.
+
+Step 2. The user executes `create-tag t/Photographer`. WedLinker will create a Tag based on the name provided. In this case: `Photographer`.
+
+Step 3. The user executes `tag 1 t/Photographer` to tag the first `Person` with `Photographer`.
+
+Step 4. To view the Tags in WedLinker, use `list-tags`. This will switch the right panel to a Tag view.
+
+Step 5. The user executes `find t/Photographer` to find all `Person` that has the tag of `Photographer`.
+
+Step 6. The user executes `untag 1 t/Photographer`. WedLinker would remove the `Photographer` tag from the first person.
+
+Step 7. The user executes `delete-tag t/Photographer`. WedLinker would delete the `Photographer` tag.
+
+<box type="info" seamless>
+Tag supports the force functionality for easier usage.
+
+Force is supported for the following functions:
+- `Tag` (Creates the Tag if it does not already exist in WedLinker.)
+- `Delete Tag` (Unassigns all Person from the Tag before it is deleted.)
+  </box>
+
+<box type="warning" seamless>
+Known bugs:
+- Tag names have a limited length and would overflow in the People view. No issues to functionality. 
+  If long tags are required, it can be viewed with the `list-tags` command.
+  Alternatively, use `Task` to write longer information.
+</box>
+
 ### Wedding Feature
 
 #### Implementation
@@ -282,9 +325,11 @@ Force is supported for the following functions:
 - `Delete Wedding` (Unassigns all Person from the Wedding before it is deleted.)
 </box>
 
-<box type="info" seamless>
+<box type="warning" seamless>
 Known bugs:
-- Editing wedding names does not update the name of the Wedding when viewing the Person card.
+- Editing Wedding names does not update the name of the Wedding when viewing the Person card.
+- Wedding names have a limited length and would overflow in the People view. No issues to functionality.
+  If long Wedding names are required, it can be viewed with the `list-weddings` command.
 </box>
 
 ### Vendors
@@ -834,3 +879,21 @@ testers are expected to do more *exploratory* testing.
        The terminal from where `WedLinker.jar` is launched should log where the file is corrupted.
 
     3. If the data is beyond repair, delete the entire `docs` folder and the `AddressBook.json` file to start afresh.
+
+
+## Appendix: Planned Enhancements
+
+Team size: 5
+
+Based on the current implementation of WedLinker, there are known bugs and limitations that we are unable to resolve due to
+feature freeze. The plans to improve our features are as such.
+
+1. There is a small GUI bug that causes the overflow of names for Tags and Weddings which causes cosmetic flaws.
+Planned enhancements would be to truncate the name with `...`.
+2. There is a duplicate validation bug that allows the creation of duplicate Person, Wedding, Tag, Task, Tags.
+Planned enhancements would be to ensure parser strips all whitespace except one between the keywords before creating the
+respective command objects.
+3. There is a missing validation in unassign-task command that negates the check of whether a Person is a vendor, resulting 
+in an incorrect error message to be shown. However, there is no functionality flaws and application runs as intended.
+Planned enhancements would be to add validation to ensure the target person is a Vendor and show a more indicative error
+message.
