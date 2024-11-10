@@ -24,5 +24,4 @@ public interface ReadOnlyAddressBook {
 
     List<Event> getEventFromListOfNames(ObservableList<String> events);
 
-    boolean eventHasOverlapWithList(Event event, List<Event> volnEvents);
 }
