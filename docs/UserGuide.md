@@ -212,7 +212,8 @@ Tags a guest with the specified tag.
 
 Format: `tag INDEX…​ t/TAG…​`
 * Tag must have already been defined using `newtag` before tagging it to a guest.
-* The index(es) **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
+* There is a limit of 10 indexes that can be tagged in a single `tag` command.
+* The index(es) **must be within the index boundaries of the guest list**. ie. If there are 15 guests, INDEX accepts values from 1 to 15.
 * Attempting to tag guests with an invalid tag will not halt tagging of valid tags.<br> e.g. `friends` is a tag not created while `bride's side` is. The command `tag 1 t/friends t/bride's side` will still successfully tag `bride's side` on the guest indexed at 1. 
 * Attempting to tag guests with a tag already on some will not halt tagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `tag 1 2 t/friends` will still successfully tag `friends` on the guest indexed at 2.
 
