@@ -27,7 +27,7 @@ activate DeleteAppointmentCommandParser
 DeleteAppointmentCommandParser --> AddressBookParser
 deactivate DeleteAppointmentCommandParser
 
-AddressBookParser -> DeleteAppointmentCommandParser : parse("appointment-delete\nJohn Doe d/2024-10-28 1200")
+AddressBookParser -> DeleteAppointmentCommandParser : parse("John Doe d/2024-10-28 1200")
 activate DeleteAppointmentCommandParser
 
 create DeleteAppointmentCommand
