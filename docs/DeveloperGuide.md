@@ -186,9 +186,6 @@ The `Model` component,
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
