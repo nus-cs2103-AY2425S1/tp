@@ -268,6 +268,17 @@ Commands for creating, updating, and deleting buyers and sellers.
       > **Output**: This buyer already exists in the address book
       > 
       > ---
+<br>
+<div class="note" markdown="span">
+Adding a space between two names is treated as "adding a character". Hence,
+<br>`buyer n/alexyeoh` (0 space)
+<br>!= `buyer n/alex yeoh` (1 space)
+<br>!= `buyer n/alex  yeoh` (2 spaces)
+<br>.
+<br>.
+<br>.
+</div>
+
 - #### Add Seller Command
     - **Format:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
     - **Description:** Creates a new seller profile with specified details.
