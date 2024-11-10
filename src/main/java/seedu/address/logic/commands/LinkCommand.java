@@ -28,7 +28,7 @@ public class LinkCommand extends Command {
     public static final String COMMAND_WORD = "link";
 
     public static final String MESSAGE_USAGE =
-        COMMAND_WORD + ": Links a owner to a pet. "
+        COMMAND_WORD + ": Links a owner to a pet. \nNote: If you want to link multiple pets, ensure they are all unlinked first.\n"
         + "Usage: " + COMMAND_WORD + " OWNER_INDEX "
         + "[" + PREFIX_TO + "PET_INDEX]...\n"
         + "Example: " + COMMAND_WORD + " o12 "
