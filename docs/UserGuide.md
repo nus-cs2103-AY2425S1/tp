@@ -90,6 +90,10 @@ Back to [Quick Start](#quick-start)
 
 ---
 
+## General Commands 
+
+---
+
 ### Viewing help : `help`
 
 Shows you a message containing a link to a more in depth user guide to help you!
@@ -254,13 +258,29 @@ Examples:
 Expected Results:
 * If successful, you will be notified on which student you have deleted.
 
-Common Errors:
-* It is likely you are facing an error due to incorrect `INDEX` being used.
-* Within the application you will be notified on the exact error and how to rectify it.
+---
+
+### Clearing all entries : `clear`
+
+Lets you clears all your students entries from Teacher's Pet.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+All your students stored in Teacher's Pet will be deleted permanently and this command cannot be undone.
+If you wish to save a copy of the data, refer to [FAQ](#faq) for more info
+</div>
+
+
+Format: `clear`
 
 ---
 
+### Exiting the program : `exit`
 
+Lets you close the Teacher's Pet application.
+
+Format: `exit`
+
+---
 
 ## Managing Attendance
 
@@ -520,34 +540,13 @@ List students based on their attendance status:
     - **Solution:** Check the current student list and use valid indices.
 
 - **Combining Commands:**
-    - Use the `list`, `find`, or `show` commands to filter the student list before marking or unmarking attendance.
+    - Use the `find` or `show` commands to filter the student list before marking or unmarking attendance.
 
 - **Consistent Event Naming:**
     - Decide on a consistent naming convention for events to avoid confusion.
 
 - **Regularly List Events:**
     - Use `listevents` frequently to keep track of all your attendance events.
-
----
-### Clearing all entries : `clear`
-
-Lets you clears all your students entries from Teacher's Pet.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All your students stored in Teacher's Pet will be deleted permanently and this command cannot be undone.
-If you wish to save a copy of the data, refer to [FAQ](#faq) for more info
-</div>
-
-
-Format: `clear`
-
----
-
-### Exiting the program : `exit`
-
-Lets you close the Teacher's Pet application.
-
-Format: `exit`
 
 ---
 
@@ -559,7 +558,7 @@ Teacher's Pet data is saved in the hard disk automatically after any command tha
 
 ### Editing the data file (Advanced)
 
-Teacher's Pet data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Teacher's Pet data is saved automatically as a JSON file `[JAR file location]/data/students.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Teacher's Pet will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -609,9 +608,9 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
 **Exit** | `exit`
-**Create Attendance Event** | `createattendance e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `createattendance e/Tutorial 1 e/Lab Session`
+**Create Attendance Event** | `createattn e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `createattendance e/Tutorial 1 e/Lab Session`
 **Delete Attendance Event** | `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `deleteevent e/Tutorial 1 e/Lab Session`
 **List Attendance Events** | `listevents`
 **Mark Attendance** | `mark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `mark e/Tutorial 1 i/1 i/2`
 **Unmark Attendance** | `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `unmark e/Tutorial 1 i/1 i/2`
-**List Attendance** | `listattendance e/EVENT_NAME s/STATUS`<br> e.g., `listattendance e/Tutorial 1 s/present`
+**List Attendance** | `listattn e/EVENT_NAME s/STATUS`<br> e.g., `listattendance e/Tutorial 1 s/present`
