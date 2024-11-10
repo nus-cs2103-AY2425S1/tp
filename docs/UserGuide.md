@@ -274,7 +274,7 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-`filterTxn` command will overwrite an existing transaction filter state.
+The filtered condition remains active until another `filterTxn` command is issued or the transaction list is explicitly reset using `listTxn`.
 </div>
 
 Examples:<br>
