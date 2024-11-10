@@ -236,25 +236,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a new client
-2. System checks new client details.
-3. System assigns client an ID.
-4. System shows successfully added a new client message.
+1. User requests to add a new client.
+2. System shows successfully added a new client message.
 
 Use case ends.
 
 **Extensions**
 
-* 2a. Client details are invalid.
-    * 2a1. System shows invalid client details error message.
-    * 2a2. User enters new client details.
+* 1a. Client details are invalid.
+    * 1a1. System shows invalid client details error message.
+    * 1a2. User enters new client details.
 
-    Steps 2a1-2a2 are repeated until the data entered is correct
+    Steps 1a1-1a2 are repeated until the data entered is correct
 
     Use case resumes from step 3.
 
-* 2b. Client name is identical to another client that already exists inside the system.
-    * 2b1. System sends a warning about identical client to user.
+* 1b. Client name is identical to another client that already exists inside the system.
+    * 1b1. System sends a warning about identical client to user.
 
     Use case resumes from step 3.
 ---
@@ -301,20 +299,19 @@ Use case ends.
 **MSS**
 
 1.  User selects an insurance plan ID.
-2.  System checks if the ID is valid.
-3.  System has selected the insurance plan ID.
+2.  System has selected the insurance plan ID.
 
 Use case ends.
 
 **Extensions**
 
-* 2b. The insurance plan id is invalid.
-    * 2b1. System shows an error message to user.
+* 1b. The insurance plan id is invalid.
+    * 1b1. System shows an error message to user.
 
     Use case ends.
 
-* 3a. The client does not have the specified insurance plan.
-    * 3a1. System shows an error message to user.
+* 1a. The client does not have the specified insurance plan.
+    * 1a1. System shows an error message to user.
 
     Use case ends.
 
@@ -348,12 +345,6 @@ Use case ends.
 
 Use case ends.
 
-**Extensions**
-
-* 3a. The client does not have the specified insurance plan.
-    * 3a1. System shows an error message to user.
-
-    Use case ends.
 ---
 **Use case 07: View all claims of a client**
 
