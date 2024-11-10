@@ -69,7 +69,7 @@ benefits of a Graphical User Interface (GUI).
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` :
+    * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` : <br>
       Adds a patient named `John Doe` whose appointment is at `02 October 2024 18:30` to ClinicBuddy.
 
     * `delete S1234567Z` : Deletes the patient with the NRIC 'S1234567Z' in the current list.
@@ -104,7 +104,7 @@ benefits of a Graphical User Interface (GUI).
 
 <div markdown="block" class="alert alert-info">
 
-* Commands are in lower-case
+* Commands are in lower-case.<br>
   e.g. `add` is allowed, while `Add` or `aDD` will not be recognised.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -149,7 +149,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [ap
 * Names must contain alphanumeric characters and spaces. Case-sensitive
 * Age should only contain numbers and should be between 0-999 inclusive.
 * Gender is for biological gender and should only contain `M` for Male or `F` for Female. Case-insensitive.
-* NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier
+* NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier.
 * Phone numbers should only contain numbers, and it should be `3-10` digits long.
 * Addresses can take any values except a whitespace followed by a character and '/' (Eg. 'samplepark a/fe' is not allowed). Case-sensitive.
 * Emails should be of the format local-part@domain. Case-sensitive.
@@ -170,7 +170,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [ap
 Examples:
 
 * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient`
-* `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
+* `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/Patient e/betsycrowe@example.com h/Newgate Street p/1234567 t/A+`
 
 ![add patient](images/adding%20patient.png)
 
@@ -193,12 +193,11 @@ OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDR
 * You can remove all the patient’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-* `update 1 p/91234567 e/johndoe@example.com` Updates the phone number and email address of the 1st patient to be `91234567`
-  and `johndoe@example.com` respectively.
+* `update 1 p/91234567 e/johndoe@example.com` Updates the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+
 * `update 2 n/Betsy Crower t/` Updates the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-* `update S1234567Z p/91234567 e/johndoe@example.com` Updates the phone number and email address of the patient whose NRIC is 'S1234567Z' to be `91234567`
-  and `johndoe@example.com` respectively.
+* `update S1234567Z p/91234567 e/johndoe@example.com` Updates the phone number and email address of the patient whose NRIC is 'S1234567Z' to be `91234567` and `johndoe@example.com` respectively.
 
 ![update](images/update%20patient.png)
 
@@ -243,9 +242,10 @@ Examples:
 
 Clears all entries from ClinicBuddy.
 
+Format: `clear`
+
 ![clear](images/clearentries.png)
 
-Format: `clear`
 
 ### Listing all patients : `list`
 
@@ -549,27 +549,38 @@ the data of your previous AddressBook home folder.
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
    application before running the application again.
+
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
    is to manually restore the minimized Help Window.
-3. ClinicBuddy has a limit of storing only the 10 most recent backups. Once this limit is reached, older backups are automatically overwritten. This means that only the latest 10 backups are available for restoring data. To avoid accidental loss of older backups, users should download or move older backup files if they need to retain them long-term.
-4. ClinicBuddy requires specific formats for dates `dd/MM/yyyy` or `dd-MM-yyyy` and times `HH:mm`. If you input data in a different format, the program may display an error. <br>
+
+3. ClinicBuddy has a **limit of storing only the 10 most recent backups**. Once this limit is reached, older backups are automatically overwritten. This means that only the latest 10 backups are available for restoring data. To avoid accidental loss of older backups, users should download or move older backup files if they need to retain them long-term.
+
+4. ClinicBuddy **requires specific formats for dates** `dd/MM/yyyy` or `dd-MM-yyyy` and times `HH:mm`. If you input data in a different format, the program may display an error. <br>
    **Solution:** Double-check the format of date and time inputs before submission.
-5. The `restore` command overwrites current patient records with backup data. This could lead to unintentional loss of recent changes. <br>
+
+5. The `restore` command **overwrites current patient records with backup data**. This could lead to unintentional loss of recent changes. <br>
    **Solution:** Always create a new **backup before performing a restore to preserve current records.
-6. Updating operating hours will fail if there are existing appointments outside the new hours. <br>
+
+6. **Updating operating hours will fail** if there are existing appointments outside the new hours. <br>
    **Solution:** Use the `deleteappt` command to delete or `update` appointments that fall outside the proposed hours before making the update.
-7. If multiple backups have similar descriptions, it may be challenging to distinguish between them.<br>
+
+7. **If multiple backups have similar descriptions**, it may be challenging to distinguish between them.<br>
    **Solution:** Use unique and specific descriptions that include the patient names or specific changes to make backups more identifiable. Moreover, you can also refer to the time of the creation time.
-8. Backup descriptions longer than 250 characters will cause the operation to fail.<br>
+
+8. Backup descriptions **longer than 250 characters will cause the operation to fail**.<br>
    **Solution:** Ensure backup descriptions are concise and do not exceed the character limit.
-9. Attempting to restore from an invalid or unavailable index results in an error.<br>
+
+9. **Attempting to restore from an invalid or unavailable index** results in an error.<br>
    **Solution:** Use the `listbackups` command to verify available backup indexes before attempting a restore.
-10. When the backup limit (10 files) is reached, older backups are automatically overwritten without warning.<br>
+
+10. When the **backup limit (10 files) is reached, older backups are automatically overwritten** without warning.<br>
     **Solution:** Move older backups to a different folder if they need to be retained.
-11. The backup list is sorted by timestamp but may not match user expectations (e.g., expecting sorting by index).<br>
+
+11. The backup list is **sorted by timestamp** but may not match user expectations (e.g., expecting sorting by index).<br>
     **Solution:** Understand that backups are sorted by creation time, not index, to locate backups accurately.
-12. The restore operation requires confirmation, but users might overlook this step, causing confusion.<br>
+
+12. The restore operation **requires confirmation**, but users might overlook this step, causing confusion.<br>
     **Solution:** Pay attention to the confirmation message and respond as instructed (Y to confirm or any other key to cancel).
 
 --------------------------------------------------------------------------------------------------------------------
