@@ -349,7 +349,7 @@ Step 1. The user launches the application, `Persons` and `Vendors` are loaded in
 
 Step 2. The user executes `assign-vendor 1`. WedLinker will assign the `Person` at index 1 of the current displayed person list to become a `Vendor`. The user can now assign `Tasks` to this contact.
 
-Step 3. The user executes `unassign-vendor 1` to unassign the `Vendor` to become a non-. WedLinker includes the `Person` in the `Guest List`.
+Step 3. The user executes `unassign-vendor 1`. The contact has been is no longer a `Vendor`.
 
 ### Task
 
