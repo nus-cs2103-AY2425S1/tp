@@ -226,14 +226,23 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits a specified person in EduContacts.
+Edits a specified person in EduContacts. There are 2 usages:
 
-Format:
-```bash
-edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
-```
+1. Edits the details of the person identified by the studentId assigned to the corresponding student. Existing values will be overwritten by the input values.
 
+    Format:
+    ```bash
+    edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
+    ```
 
+2. Edits a module of the person identified. Existing values will be overwritten by the input module.
+
+    Format:
+    ```bash
+    edit ID m/ OLD_MODULE NEW_MODULE
+    ```
+
+In general, `edit` command:
 * Edits a person's details according to the fields specified.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
