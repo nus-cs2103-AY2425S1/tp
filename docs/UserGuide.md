@@ -323,16 +323,15 @@ If the addressgroup contains `Alice Pauline` and `Benson Meier`,
 
 ### Locating groups by name: `findGroup`
 
-Finds groups whose names contain any of the given keywords.
+Finds existing group(s) whose name contains the given keyword.
 
-Format: `findGroup KEYWORD [MORE_KEYWORDS]`
+Format: `findGroup KEYWORD`
 
 - The search is case-insensitive. e.g `class` will match `Class`
-- The order of the keywords matters. e.g. `class A` will not match `A class`
 - Only the group name is searched.
-- Only full words will be matched e.g. `class` will not match `clas`
-- Groups matching all keywords will be returned.
-  e.g. `class A` will return `class A` but not `class B`
+- findGroup is a partial name serach where if group names contain the keyword they will be matched e.g. `findGroup cla` will match `class 9A`
+- Groups containing the keyword will be returned.
+  e.g. `findGroup s` will return `shaun's study group` or `house group` but not `Running Group`
 
 ![FindGroup](images/FindGroup.png)
 
@@ -408,7 +407,7 @@ Examples:
 
 ## Importing and Exporting Data
 
-### Import students: `import CSV_FILE_LOCATION`
+### Import students: `import`
 
 Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
 
@@ -441,7 +440,7 @@ Exports all students in GoonBook to a .csv file.
 Format: `export`
 
 - Exports all students to fixed location as exported_data.csv
-- Location can be found at `[JAR FILE LOCATION]/exported_data.csv`
+- Location can be found at `[JAR FILE LOCATION]/data/exported_data.csv`
 
 ![Export](images/Export.png)
 
@@ -449,7 +448,7 @@ Format: `export`
 
 ### Exported csv data file location
 
-GoonBook csv data files are saved automatically as a .csv file at `[JAR file location/exported_data.csv]`.
+GoonBook csv data files are saved automatically as a .csv file at `[JAR file location/data/exported_data.csv]`.
 
 <div style="page-break-after: always"></div>
 
@@ -488,7 +487,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+- Import and Export feature to include Group support.
 
 ---
 
