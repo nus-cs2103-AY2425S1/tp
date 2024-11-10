@@ -222,6 +222,6 @@ public class MainWindow extends UiPart<Stage> {
 
         // Show the dialog and capture the result
         Optional<String> result = dialog.showAndWait();
-        return result.isPresent() && result.get().trim().equalsIgnoreCase("y");
+        return result.isPresent() && result.get().trim().equals("y");
     }
 }
