@@ -99,7 +99,7 @@ public class ExportCommand extends Command {
 
     /**
      * Parses a single tag from its JSON representation to its CSV representation.
-     * e.g. {\n \"friends\" : null\n} -> friends : null
+     * e.g. {\n \"friends\" : null\n} -> friends
      * @param tagString
      * @return a single parsed tag
      */
@@ -189,25 +189,25 @@ public class ExportCommand extends Command {
     }
 
     /**
-     * Calls methods that write to csv or txt format depending on the format specified
-     * @param jsonData
-     * @param headers
-     * @throws IOException
+     * Writes the address book data to a file in the specified format (CSV or TXT).
+     * (Credit: this JavaDoc comment was generated with the assistance of ChatGPT.)
+     * @param jsonData        The data parsed from the JSON file, represented as a list of maps,
+     *                        where each map corresponds to a person's details (key-value pairs).
+     * @param headers         The set of headers extracted from the JSON data, which are used
+     *                        as column headers in the CSV file or as keys in the TXT file.
+     * @param filePathAndName The file path and file name (without its file format) where the file will be written.
+     * @param format          The format to write the file in (CSV or TXT).
+     * @throws IOException    If an I/O error occurs while writing to the file.
      */
+
     static void writeFile(List<Map<String, String>> jsonData, Set<String> headers,
                           String filePathAndName, Format format) throws IOException {
         String formattedFilePath = filePathAndName + "." + format.getKeyword();
         switch (format) {
-        case CSV -> {
-            writeCsvFile(jsonData, headers, formattedFilePath);
-            break;
-        }
-        case TXT -> {
-            writeTxtFile(jsonData, headers, formattedFilePath);
-            break;
-        }
+        case CSV -> writeCsvFile(jsonData, headers, formattedFilePath);
+        case TXT -> writeTxtFile(jsonData, headers, formattedFilePath);
         default -> throw new IllegalArgumentException("Unknown/Unsupported file format");
-        };
+        }
     }
 
     static void writeCsvFile(List<Map<String, String>> jsonData, Set<String> headers, String csvFilePath)
