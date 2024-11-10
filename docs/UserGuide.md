@@ -112,7 +112,7 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
    - Type `java -jar PROperty.jar` into your computer's terminal and press "Enter".
 
     
-![Ui](images/user-guide-images/Ui.png)
+![Annotated_Ui](images/user-guide-images/Annotated_Ui.png)
 - The screenshot above showcases the various components of PROperty.
 
 
