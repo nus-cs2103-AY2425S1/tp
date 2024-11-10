@@ -948,6 +948,10 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 
 Furthermore, we believe that duplicate names are better managed based on how the tutor identifies them. Different people have different method of remembering people with the same name. For instance, given two `John`s, a tutor might identify them physically as `John 1` and `John 2` or by their surname, `John Doe` and `John Tan` . This identification should also be reflected in KonTActs to make it easy to distinguish the two students.
 
+**Q**: Why are duplicate fields like Email, Telegram and Github usernames allowed?<br>
+**A**: KonTActs recognizes that students may use the same usernames and emails across different points of contact. To provide greater flexibility in the application, KonTActs permits duplicate entries for email addresses, Telegram handles, and GitHub usernames.  
+
+
 {{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
