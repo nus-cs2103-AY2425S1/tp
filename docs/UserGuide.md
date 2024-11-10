@@ -48,7 +48,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 - Open up Command Prompt (for Windows) or Terminal (for Mac) and navigate to the home folder with `cd path-to/folder`
     - E.g. If my jar file is in a folder called 'Contacts' in a folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
 - Run UniLink by typing `java -jar UniLink.jar`
-- The app should open within a few seconds, showing some sample data that you can explore! 
+- The app should open within a few seconds, showing some sample data that you can explore!
 
 - **Using the Command Line**: New to the command line? Check out this [Command Line for Beginners](https://www.freecodecamp.org/news/command-line-for-beginners/) guide!
 
