@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
 public class Remark {
 
     public static final String VALIDATION_REGEX = "^.{1,200}$";
-    public static final String MESSAGE_CONSTRAINTS = "Remarks should be between 1 and 200 characters long.\n "
+    public static final String MESSAGE_CONSTRAINTS = "Remarks should be between 1 and 200 characters long.\n"
             + "It cannot be blank";
 
     public final String value;
