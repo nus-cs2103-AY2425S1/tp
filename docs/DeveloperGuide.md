@@ -1348,7 +1348,7 @@ This will allow users to better see all information rather than toggling through
 
 ### 3. Improve granularity of Find Student command
 
-Currently, the command returns all results that match any of the queries.
+Currently, our system returns all results that match any of the queries.
 
 #### Enhancement
 
@@ -1357,3 +1357,18 @@ We plan to include other parameters such as `sno`, `sn`, `e` to allow users to s
 Flags will be introduced to fine-tune the search such that the user can choose for the system to search if the fields contain the queries or if the fields start with the queries.
 Additionally, we will also change the command to return only results that match ALL queries given.
 
+### 4. Enhance Sort Group
+
+Currently, our system sorts `Groups` by ASCII order.
+
+#### Enhancement
+
+We plan to improve the sorting feature to sort by alphabetical and numerical order. 
+
+Below is a simplified process of how the sort will work:
+
+A reminder that this is the format accepted for `Group Name`: `[Module]-[Tutorial Group]-[Group Number]`
+
+1. For `Module`, `CS2103` groups will come first, followed by `CS2103T` groups.
+2. For `Tutorial Group`, the letter will be compared first and sorted by alphabetical order. If there is a tie, the numerical part will be compared and sorted in descending order.
+3. For `Group Number`,if the sort feature reaches this section, it will be sorted by descending order of numerical value.
