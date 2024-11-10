@@ -7,10 +7,10 @@
 
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-
 <?import javafx.scene.layout.GridPane?>
 
-<VBox fx:id="view" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.ScrollPane?>
+<VBox fx:id="view" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
     <Label id="viewTitle" fx:id="viewTitle" />
     <GridPane>
     <HBox alignment="BASELINE_LEFT" prefWidth="1250">
@@ -33,9 +33,11 @@
         <Label id="viewLabel" text="Roles: "/>
         <FlowPane fx:id="viewRoles" />
     </HBox>
-    <HBox alignment="BASELINE_LEFT">
+    <HBox alignment="TOP_LEFT" style="-fx-background-color: transparent">
         <Label id="viewLabel" text="Sessions Attended: "/>
-        <FlowPane fx:id="viewAttendance" />
+        <ScrollPane id="viewScroll" fx:id="viewScroll" maxHeight="200" style="-fx-background-color: transparent; -fx-background: transparent">
+            <FlowPane fx:id="viewAttendance" VBox.vgrow="ALWAYS"/>
+        </ScrollPane>
     </HBox>
     <stylesheets>
         <URL value="@ViewPersonCard.css"/>
