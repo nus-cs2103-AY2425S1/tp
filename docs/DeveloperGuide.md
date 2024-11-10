@@ -326,16 +326,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ConcertPhonebook` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC1 - Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ConcertPhonebook shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ConcertPhonebook deletes the person
 
     Use case ends.
 
@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. The given index is invalid.
 
-  - 3a1. AddressBook shows an error message.
+  - 3a1. ConcertPhonebook shows an error message.
 
     Use case resumes at step 2.
 
@@ -358,9 +358,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ConcertPhonebook shows a list of persons
 3.  User requests to add a person not in the list
-4.  AddressBook adds the person
+4.  ConcertPhonebook adds the person
 
     Use case ends.
 
@@ -368,13 +368,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. The list already contains the person's name.
 
-  - 3a1. AddressBook shows an error message.
+  - 3a1. ConcertPhonebook shows an error message.
 
     Use case ends.
 
 - 3b. The given contact details is invalid.
 
-  - 3b1. AddressBook shows an error message.
+  - 3b1. ConcertPhonebook shows an error message.
 
     Use case resumes at step 2.
 
@@ -385,9 +385,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ConcertPhonebook shows a list of persons
 3.  User requests to edit a person in the list
-4.  AddressBook edits the person
+4.  ConcertPhonebook edits the person
 
     Use case ends.
 
@@ -395,13 +395,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The list does not contain the person.
 
-  - 2a1. AddressBook shows an error message.
+  - 2a1. ConcertPhonebook shows an error message.
 
     Use case ends.
 
 - 3a. The given contact details/index is invalid.
 
-  - 3a1. AddressBook shows an error message.
+  - 3a1. ConcertPhonebook shows an error message.
 
     Use case resumes at step 2.
 
@@ -412,9 +412,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list concerts
-2.  AddressBook shows a list of concerts
+2.  ConcertPhonebook shows a list of concerts
 3.  User requests to delete a concert in the list
-4.  AddressBook adds the concert
+4.  ConcertPhonebook deletes the concert
 
     Use case ends.
 
@@ -426,7 +426,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. The given index is invalid.
 
-  - 3a1. AddressBook shows an error message.
+  - 3a1. ConcertPhonebook shows an error message.
 
     Use case resumes at step 2.
 
@@ -437,9 +437,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list concerts
-2.  AddressBook shows a list of concerts
+2.  ConcertPhonebook shows a list of concerts
 3.  User requests to add a concert not in the list
-4.  AddressBook adds the concert
+4.  ConcertPhonebook adds the concert
 
     Use case ends.
 
@@ -451,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. The given concert details is invalid.
 
-  - 3a1. AddressBook shows an error message.
+  - 3a1. ConcertPhonebook shows an error message.
 
     Use case resumes at step 2.
 
@@ -462,9 +462,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list concerts
-2.  AddressBook shows a list of concerts
+2.  ConcertPhonebook shows a list of concerts
 3.  User requests to edit a concert in the list
-4.  AddressBook edits the concert
+4.  ConcertPhonebook edits the concert
 
     Use case ends.
 
@@ -476,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. The given concert details/index is invalid.
 
-  - 3a1. AddressBook shows an error message.
+  - 3a1. ConcertPhonebook shows an error message.
 
     Use case resumes at step 2.
 
@@ -486,30 +486,75 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list concerts
-2.  AddressBook shows a list of concerts
-3.  User requests to list persons
-4.  AddressBook shows a list of persons
-5.  User requests to assign a person to a concert in the list
-6.  AddressBook assigns the person to the concert
+1.  User requests to list concerts and persons
+2.  ConcertPhonebook shows a list of concerts and persons
+3.  User requests to assign a person to a concert in the list
+4.  ConcertPhonebook assigns the person to the concert
 
     Use case ends.
 
 **Extensions**
 
-- 2a. The list does not contain the concert.
+- 2a. The list does not contain the concert/person.
 
   Use case ends.
 
-- 4a. The list does not contain the person.
+- 3a. The given person/concert is invalid.
 
-  Use case ends.
-
-- 5a. The given person/concert is invalid.
-
-  - 5a1. AddressBook shows an error message.
+  - 3a1. ConcertPhonebook shows an error message.
 
     Use case resumes at step 2.
+
+---
+
+**Use case: UC8 - Find person**
+
+**MSS**
+
+1. User request to find a person based on name/role
+2. ConcertPhonebook shows a list matched persons
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The given search keywords are invalid
+
+  Use case resumes at step 1.
+
+---
+
+**Use case: UC9 - Find concert**
+
+**MSS**
+
+1. User request to find a concert based on name
+2. ConcertPhonebook shows a list matched concerts.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The given search keywords are invalid
+
+  Use case resumes at step 1.
+
+---
+
+**Use case: UC9 - Find concert contact**
+
+**MSS**
+
+1. User request to find a concert contact based on person/concert.
+2. ConcertPhonebook shows a list matched concert contacts.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The given person/concert is invalid.
+
+  Use case resumes at step 1.
 
 ---
 
