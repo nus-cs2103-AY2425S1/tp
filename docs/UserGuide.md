@@ -264,6 +264,10 @@ Deletes the person with the specified `NAME` or the person at the specified `IND
 
 Format: `delete NAME` or `delete INDEX`
 
+<div markdown="span" class="alert alert-primary">:exclamation: **Tip:**
+The `delete NAME` feature will only delete if NAME is exact match with contact full name and if there is only 1 contact with that NAME.
+</div>
+
 * For deletion by `NAME`:
   * Deletes the person with the specified `NAME`.
   * Only delete if `NAME` is exact match with contact full name.
@@ -283,6 +287,10 @@ Format: `delete NAME` or `delete INDEX`
 Examples:
 * `delete Alice`: Deletes the person named Alice from the address book.
 * `delete 1`: Deletes the first person in the currently displayed list.
+* `delete alex`: If there is no alex in contact, display list has filtered based on the name "alex".
+  <img src="images/deleteAlex.png" alt="delete alex">
+* `delete Alex Yeoh`: If there is multiple Alex Yeo in contact, SalesContactPro prompt user to use `INDEX`.
+  <img src="images/deleteSameName.png" alt="delete same name">
 
 ### Clearing all entries: `clear`
 
