@@ -199,7 +199,7 @@ Examples:
 *  `edit 1 p/81234567 e/johndoe@example.com` Edits the phone number and email budget of the 1st buyer to be `81234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd buyer to be `Betsy Crower` and clears all existing tags.
 
-### Locating buyers: `find`
+### Finding buyers: `find`
 
 Finds existing buyers in existing buyer list based on keywords.
 
@@ -311,7 +311,7 @@ Format: `edit INDEX [s/MEETUP_SUBJECT] [i/MEETUP_INFO] [f/MEETUP_FROM] [t/MEETUP
 Examples:
 *  `edit 1 i/Meet with Johnny to show him houses. f/2024-10-28 10:00 t/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
 
-### Locating meet-ups: `find`
+### Finding meet-ups: `find`
 
 Finds meet-ups whose meet-up names contain any of the given keywords.
 
@@ -329,7 +329,7 @@ Examples:
 
 ### Deleting a meet-up : `delete`
 
-Deletes the specified meet-up from the buyer list.
+Deletes the specified meet-up from the meet-up list.
 
 Format: `delete INDEX`
 
@@ -401,7 +401,7 @@ Examples:
 *  `edit 1 p/91234567 s/100000` Edits the first property's landlord phone number and its asking price to be `91234567` and `100,000` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's landlord to be `Betsy Crower`.
 
-### Locating properties: `find`
+### Finding properties: `find`
 
 Find existing properties in the property list based on either name or address keywords.
 
