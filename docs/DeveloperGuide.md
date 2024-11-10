@@ -553,11 +553,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Physiotherapist <u>deletes a scheduled appointment for a client (UC05)</u>.
-2. PhysioPal <u>deletes the reminder note for client (UC04)</u>.
+2. PhysioPal deletes the reminder note for client.
 3. PhysioPal confirms deletion of appointment and displays a success message.
 
    Use case ends.
+   
+**Extensions**
 
+* 2a. PhysioPal detects that the client does not have a reminder note set.<br>
+  Use case resumes from step 3.
 
 **Use Case: UC07 - Displaying upcoming appointments on launch screen**
 
