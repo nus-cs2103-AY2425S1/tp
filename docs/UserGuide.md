@@ -63,7 +63,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
    ![Ui](images/Ui.png)<br><br>
 
 ### User Interface (UI) Overview
-The EZSTATE UI is organized into `five` key components:
+The EZSTATE UI is organized into **5** key components:
 
 ![ui](images/ui_overview_ug.png)
 
