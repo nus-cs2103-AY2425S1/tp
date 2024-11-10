@@ -69,17 +69,21 @@
 
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <VBox>
-                                            <Label fx:id="clearTextHeader"
-                                                   styleClass="text-command, text-command-header"/>
-                                            <VBox styleClass="text-inner-content" minWidth="400">
-                                                <Text fx:id="clearTextPurpose"
-                                                      styleClass="text-command, text-command-purpose"/>
-                                                <Label styleClass="text-fixed" text="Format:" />
-                                                <Label fx:id="clearTextFormat"
-                                                       styleClass="text-command-code, text-command" wrapText="true"/>
-                                                <Label styleClass="text-fixed" text="Example:" />
-                                                <Text fx:id="clearTextExample"
-                                                      styleClass="text-command, text-command-example"/>
+                                            <VBox>
+                                                <VBox>
+                                                    <Label fx:id="clearTextHeader"
+                                                           styleClass="text-command, text-command-header"/>
+                                                    <VBox styleClass="text-inner-content" minWidth="400">
+                                                        <Text fx:id="clearTextPurpose"
+                                                              styleClass="text-command, text-command-purpose"/>
+                                                        <Label styleClass="text-fixed" text="Format:" />
+                                                        <Label fx:id="clearTextFormat"
+                                                               styleClass="text-command-code, text-command" wrapText="true"/>
+                                                        <Label styleClass="text-fixed" text="Example:" />
+                                                        <Text fx:id="clearTextExample"
+                                                              styleClass="text-command, text-command-example"/>
+                                                    </VBox>
+                                                </VBox>
                                             </VBox>
                                         </VBox>
                                     </HBox>

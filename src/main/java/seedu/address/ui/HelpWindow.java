@@ -465,8 +465,10 @@ public class HelpWindow extends UiPart<Stage> {
             return;
         }
 
-        // type-casted to Hbox as every Text in helpWindow is wrapped by a Hbox as its parent
-        HBox box = (HBox) targetText.getParent().getParent().getParent();
+        /* type-casted to HBox as every Text in helpWindow is wrapped by a HBox as its 5th parent.
+         * The 5th parent is the HBox that when highlighted, the whole component will be highlighted.
+         */
+        HBox box = (HBox) targetText.getParent().getParent().getParent().getParent().getParent();
         Bounds bounds = box.getBoundsInParent();
         double yPadding = 100;
         double yOffset = bounds.getMinY() + yPadding;
@@ -483,14 +485,18 @@ public class HelpWindow extends UiPart<Stage> {
      */
     private void highlightText(Text targetText) {
         if (lastHighlighted != null) {
-            HBox prevBox = (HBox) lastHighlighted.getParent().getParent().getParent();
+            // The 5th parent is the HBox that when highlighted, the whole component will be highlighted.
+            HBox prevBox = (HBox) lastHighlighted.getParent().getParent().getParent().getParent().getParent();
             prevBox.setBackground(new Background(new BackgroundFill(
                     HIGHLIGHT_HOVER_BACKGROUND,
                     DEFAULT_CORNER_RADII,
                     new Insets(INSET_PADDING, INSET_PADDING, 0, INSET_PADDING))));
         }
-        // type-casted to Hbox as every Text in helpWindow is wrapped by a Hbox as its parent
-        HBox hBox = (HBox) targetText.getParent().getParent().getParent();
+
+        /* type-casted to HBox as every Text in helpWindow is wrapped by a HBox as its 5th parent.
+         * The 5th parent is the HBox that when highlighted, the whole component will be highlighted.
+         */
+        HBox hBox = (HBox) targetText.getParent().getParent().getParent().getParent().getParent();
         Background highlight = new Background(new BackgroundFill(
                 HIGHLIGHT_ACTIVE_BACKGROUND,
                 DEFAULT_CORNER_RADII,
