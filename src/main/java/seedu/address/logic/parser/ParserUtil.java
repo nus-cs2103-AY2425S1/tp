@@ -196,16 +196,27 @@ public class ParserUtil {
                 tutorials.add(parseTutorial(part.trim()));
             }
         } else if (tutorialInput.contains("-")) {
-            String[] range = tutorialInput.split("-");
-            if (range.length != 2) {
-                throw new ParseException(Tutorial.MESSAGE_INCORRECT_RANGE_INPUT);
+            int lastDashIndex = tutorialInput.lastIndexOf('-');
+            //Don't need to check for -1 since already checked that input contains '-'
+            if (lastDashIndex == 0) {
+                tutorials.add(parseTutorial(tutorialInput.trim()));
             }
-            int start = Integer.parseInt(range[0].trim());
-            int end = Integer.parseInt(range[1].trim());
-            if (start > end) {
+            Tutorial start;
+            Tutorial end;
+            String beforeDash = tutorialInput.substring(0, lastDashIndex).trim();
+            if (beforeDash.endsWith("-")) {
+                start = ParserUtil.parseTutorial(beforeDash.substring(0, beforeDash.length() - 1));
+                end = ParserUtil.parseTutorial(tutorialInput.substring(lastDashIndex));
+            } else {
+                start = ParserUtil.parseTutorial(beforeDash);
+                end = ParserUtil.parseTutorial(tutorialInput.substring(lastDashIndex + 1));
+            }
+            if (start.isAfter(end)) {
                 throw new ParseException(Tutorial.MESSAGE_INCORRECT_RANGE_ORDER);
             }
-            for (int i = start; i <= end; i++) {
+            int startTut = Integer.parseInt(start.getTutorialNumber());
+            int endTut = Integer.parseInt(end.getTutorialNumber());
+            for (int i = startTut; i <= endTut; i++) {
                 tutorials.add(parseTutorial(Integer.toString(i)));
             }
         } else {
