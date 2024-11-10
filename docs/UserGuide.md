@@ -62,10 +62,13 @@ Whether it be 5 staff members or 500 employees, HR Helper has the capability to 
 ## 2 About
 
 This user guide provides an overview for HR staff on the usage of HR Helper.
+
 It starts off with the simple steps you need to take to install the app, to ensure you have a smooth experience getting
 started.
+
 Afterward, it runs through the various commands available at your disposable to so you can use the app to its fullest 
 potential.
+
 Finally, frequently asked questions as well as known issues will be displayed so you can clarify any queries you might 
 have.
 
@@ -126,7 +129,7 @@ have.
 </box>
 
 
-### 4.1 Authentication :
+### 4.1 Authentication
 
 Login to HR Helper with your username and password.
 
@@ -167,7 +170,7 @@ Examples:
 
 <box type="warning" seamless>
 
-**Warning:** Clicking on the link will leave HR Helper.
+**Warning:** Navigating to the link will not close HR Helper. Do not leave your device unattended.
 </box>
 
 
@@ -272,7 +275,7 @@ Examples:
 </box>
 
 
-### 4.7 Locating employees by name: `find`
+### 4.7 Locating employees by name : `find`
 
 Finds employees whose names contain any of the given keywords.
 
@@ -330,7 +333,7 @@ Examples:
 </box>
 
 
-### 4.9 Sorting Employees: `sort`
+### 4.9 Sorting Employees : `sort`
 
 Sorts the displayed employees based on specified tags.
 
