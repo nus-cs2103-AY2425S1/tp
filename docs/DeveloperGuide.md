@@ -34,7 +34,8 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/nus-cs2103-AY2425S1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/nus-cs2103-AY2425S1/tp/blob/master/src/main/java/seedu/address/MainApp.java) is in charge of the app launch and shut down.
+
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -66,7 +67,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -83,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -122,7 +123,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddGuestCommandParser`, `DeleteGuestCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="750" height="720" />
 
@@ -136,7 +137,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" />
 
@@ -277,7 +278,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `BridalBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Add a Guest**
 
@@ -331,10 +332,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC03 - Update Details of Person**
+**Use Case: UC03 - Update details of Guest**
 
 **MSS**
-1. User selects an entry to update together with the fields to be updated.
+1. User selects Guest to update along with the fields to be updated.
 2. System saves the changes and notifies user of success.
 
    Use case ends.
@@ -350,12 +351,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1c. The new details result in a duplicate Person (i.e. same name, phone number and type)
-    * 1c1. System tells the user the Person already exists
+* 1c. The new details result in a duplicate Guest (i.e. same name, phone number and type)
+    * 1c1. System tells the user the Guest already exists
 
       Use case ends.
 
-**Use Case: UC04 - Delete a Guest**
+**Use Case: UC04 - Update details of Vendor**
+
+**MSS**
+1. User selects a Vendor to update along with the fields to be updated.
+2. System saves the changes and notifies user of success.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+    * 1a1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+* 1b. The new details are incomplete or invalid.
+    * 1b1. System shows an error message and requests the user to re-enter the details.
+
+      Use case resumes at step 1.
+
+* 1c. The new details result in a duplicate Vendor (i.e. same name, phone number and type)
+    * 1c1. System tells the user the Vendor already exists
+
+      Use case ends.
+
+**Use Case: UC05 - Delete a Guest**
 
 **MSS**
 1. User requests to delete a Guest entry.
@@ -374,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC05 - Delete a Vendor**
+**Use Case: UC06 - Delete a Vendor**
 
 **MSS**
 1. User requests to delete a Vendor entry.
@@ -393,7 +418,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC06 - Find Guests and Vendor with a particular field**
+**Use Case: UC07 - Find Guests and Vendor with a particular field**
 
 **MSS**
 1. User requests to find Guest and Vendor entries with a specified field (e.g., by category, name, RSVP status).
@@ -412,16 +437,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC07 - Get statistics**
+**Use Case: UC08 - Get statistics**
 
 **MSS**
-1. User requests to get statistics of entries.
+1. User requests to get statistics of all entries.
 2. System displays the statistics.
 
    Use case ends.
 
 **Extensions**
 * 1a. The input command was invalid (i.e. spelling error, etc.).
+
+    * 1a1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+**Use Case: UC09 - Clear all entries**
+
+**MSS**
+1. User requests to clear all entries.
+2. System clears all entries.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+
     * 1a1. System tells the user the command is unrecognised.
 
       Use case ends.
@@ -450,7 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 **Technical terms**
-* **Java**: Java is a programming language that BridalBuddy is written in. It is required to run the application.
+*  **Java**: Java is a programming language that BridalBuddy is written in. It is required to run the application.
 *  **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
 *  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus.
 *  **JAR**: Java Archive, A file format used to package Java applications and libraries into a single, compressed file
