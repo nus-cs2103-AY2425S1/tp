@@ -203,7 +203,7 @@ The following sequence diagram shows how a mark operation goes through the `Logi
 
 </div>
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+How a `mark` operation goes through the `Model` component is shown below:
 
 ![MarkAttendanceSequenceDiagram-Model](images/MarkAttendanceSequenceDiagram-Model.png)
 
@@ -346,12 +346,14 @@ Use Case ends.
 3. User requests to delete a specific contact at the list index.
 4. CCAConnect deletes the contact.
 
-Use Case ends.
+    Use Case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-  * Use Case ends.
+  
+  Use Case ends.
+
 
 * 3a. User inputs an invalid index.
   * 3a1. CCAConnect shows an error message.
@@ -367,16 +369,18 @@ Use Case ends.
 2. User provides the details of the contact, including fields like name, phone number, etc.
 3. System adds the contact to the list of contacts and displays the contact as a new entry in the list of contacts viewable by the user.
 
-Use Case ends.
+    Use Case ends.
 
 **Extensions**
 * 3a. System detects that user did not enter all the required fields.
     * 3a1. System shows user an error message.
-    * Use Case ends.
+    
+      Use Case ends.
 
-* 3b. System detects that user entered an invalid field.
-    * 3b1. System shows user an appropriate error message.
-    * Use Case ends.
+  * 3b. System detects that user entered an invalid field.
+      * 3b1. System shows user an appropriate error message.
+      
+        Use Case ends.
 
 <br>
 
@@ -387,16 +391,18 @@ Use Case ends.
 1. User searches the list of contacts with a query relating to a contact’s name.
 2. System displays the subset of contacts with the same name as the query
 
-Use Case ends.
+    Use Case ends.
 
 **Extensions**
 * 1a. User requests for a search, with no query.
     * 1a1. System displays an error to the user.
-    * Use Case ends.
+      
+      Use Case ends.
 
-* 2a. System fails to find any contacts related to the query.
-    * 2a1. System displays an empty list to the user.
-    * Use Case ends.
+  * 2a. System fails to find any contacts related to the query.
+      * 2a1. System displays an empty list to the user.
+      
+        Use Case ends.
 
 <br>
 
@@ -404,10 +410,10 @@ Use Case ends.
 **Actor: User**<br/>
 **MSS**
 
-User enters ‘list’ command to view information of all contacts.
-System opens up a new page with all contact information currently stored in data storage of CCAConnect.
+1. User enters ‘list’ command to view information of all contacts.
+2. System opens up a new page with all contact information currently stored in data storage of CCAConnect.
 
-Use Case ends.
+    Use Case ends.
 
 **Extensions**
 
@@ -425,7 +431,7 @@ Use Case ends.
 1. User requests to see all the available commands.
 2. CCAConnect displays all valid commands.
 
-Use Case ends.
+    Use Case ends.
 
 <br>
 
@@ -436,7 +442,7 @@ Use Case ends.
 1. User requests to see all members in the contacts.
 2. CCAConnect displays all members.
 
-Use Case ends.
+    Use Case ends.
 <br>
 
 <br>
@@ -445,24 +451,32 @@ Use Case ends.
 **Actor: User**<br/>
 **MSS**
 
-1. User requests to mark the attendance of members.
-2. User provides the details of the session (date) to mark attendance, and list of telegrams of members to be marked.
-3. System marks the attendance of the list of members on the specified date.
+1. User launches the application.
+2. User requests to mark the attendance of members.
+3. User provides the details of the session (date) to mark attendance, and list of telegrams of members to be marked.
+4. System marks the attendance of the list of members on the specified date.
 
-Use Case ends.
+    Use Case ends.
 
 **Extensions**
-* 1a. System detects that user did not enter all the required fields.
-    * 1a1. System shows user an error message.
-    * Use Case ends.
+* 1a. User checks all members in the contacts (UC07).
 
-* 1b. System detects that user entered an invalid field.
-    * 1b1. System shows user an appropriate error message.
-    * Use Case ends.
+* 1b. User views profile of specific member (UC01) to pre-check their attendance status.
 
-* 1c. System detects that user tried to mark the attendance of non-member contact.
-    * 1c1. System shows user an appropriate error message.
-    * Use Case ends.
+* 2a. System detects that user did not enter all the required fields.
+    * 2a1. System shows user an error message.
+  
+      Use Case ends.
+
+* 2b. System detects that user entered an invalid field.
+    * 2b1. System shows user an appropriate error message.
+        
+        Use Case ends.
+
+* 2c. System detects that user tried to mark the attendance of non-member contact.
+    * 2c1. System shows user an appropriate error message.
+  
+      Use Case ends.
 <br>
 
 <br>
@@ -471,24 +485,36 @@ Use Case ends.
 **Actor: User**<br/>
 **MSS**
 
-1. User requests to unmark the attendance of members.
-2. User provides the details of the session (date) to unmark attendance, and list of telegrams of members to be unmarked.
-3. System unmarks the attendance of the list of members on the specified date.
+1. User launches the application.
+2. User requests to unmark the attendance of members.
+3. User provides the details of the session (date) to unmark attendance, and list of telegrams of members to be unmarked.
+4. System unmarks the attendance of the list of members on the specified date.
 
-Use Case ends.
+    Use Case ends.
 
 **Extensions**
-* 1a. System detects that user did not enter all the required fields.
-    * 1a1. System shows user an error message.
-    * Use Case ends.
+* 1a. User checks all members in the contacts (UC07).
 
-* 1b. System detects that user entered an invalid field.
-    * 1b1. System shows user an appropriate error message.
-    * Use Case ends.
+* 1b. User views profile of specific member (UC01) to pre-check their attendance status.
 
-* 1c. System detects that user tried to unmark the attendance of non-member contact.
-    * 1c1. System shows user an appropriate error message.
-    * Use Case ends.
+* 2a. System detects that user did not enter all the required fields.
+    * 2a1. System shows user an error message.
+
+      Use Case ends.
+
+* 2b. System detects that user entered an invalid field.
+    * 2b1. System shows user an appropriate error message.
+
+      Use Case ends.
+
+* 2c. System detects that user tried to mark the attendance of non-member contact.
+    * 2c1. System shows user an appropriate error message.
+
+      Use Case ends.
+<br>
+
+
+
 ___
 
 ### Non-Functional Requirements
@@ -639,3 +665,17 @@ testers are expected to do more *exploratory* testing.
 - Check for proper handling of edge cases, such as extremely large or small input values.
 - Verify that the UI updates correctly and reflects the changes made by each feature.
 - Confirm that error messages and prompts are displayed appropriately for invalid operations.
+
+
+
+___
+
+## Future Enhancement
+
+1. Update error message of `mark` and `unmark` command when input contains telegram of non-member contact.
+
+   Current error message just warns user the input contains non-member telegram handle,
+   we plan to list the name of the non-member contacts in error message for more convenient marking in the next step.
+
+
+2. Add command to view members with attendance on the input date.

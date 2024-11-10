@@ -3,6 +3,7 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
+skinparam classAttributeIconSize 0
 
 ' Class Diagram for MarkAttendance Feature
 
@@ -33,7 +34,7 @@ class AttendanceMarkingCommand {
 class MarkAttendanceCommand {
     - List<Telegram> telegrams
     - Attendance attendance
-    + CommandResult execute(Model model) throws CommandException
+    + CommandResult execute(Model model)
 }
 
 

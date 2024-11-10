@@ -1,6 +1,7 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam style strictuml
 
 Actor User as user USER_COLOR
 Participant ":UI" as ui UI_COLOR

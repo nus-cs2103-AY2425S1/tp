@@ -110,7 +110,7 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
 | `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).   |
 | `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).             |
 | `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                    |
-| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                     |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.          |
 |                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact. |
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
@@ -119,6 +119,11 @@ A person is uniquely identified by his/her **telegram handle**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 A person can have any number of roles (including 0)
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+Member is a special type of contact in CCAConnect, attendance related command will only work for members.
+If you are adding a new member with `add` command, please add "member" (case-insensitive) as a role for the new contact.
 </div>
 
 #### Example
@@ -290,8 +295,6 @@ attendance
 #### Parameters
 This command does not take any additional parameters.
 
-If any extra input is provided, an error message will be displayed.
-
 #### Example
 ![result for 'attendance'](images/ListAttendanceResult.png)
 
@@ -312,7 +315,7 @@ mark t/TELEGRAM…​ d/DATE
 | Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
-| `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
+| `DATE`     | `d/`   | Yes         | `DATE` follows **ISO 8601 standard** with the format **YYYY-MM-DD**, e.g. `2024-10-19`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                               |
 
 #### Example
 
@@ -322,20 +325,12 @@ mark t/TELEGRAM…​ d/DATE
 
   ![result of command `mark t/alexYeoh t/berniceYu d/2024-11-07`](images/MarkCommandResult.png)
 
-* Mark attendance of contact with telegram `alexYeoh`, `berniceYu` first, then input command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07`
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**<br/>
 
-  ![result of command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07` if Alex and Bernice's attendance is marked before.png](images/RepeatedMarkCommandResult.png)  
+* If the input date matches the current date, the checkbox for marked members will be automatically selected upon successful attendance marking.
 
-* Mark attendance of a non-member contact `mark t/davidLi d/2024-11-07`
-
-  ![result of command `mark t/davidLi d/2024-11-07`](images/MarkNonMemberCommandResult.png)
-
-* Mark attendance from a list with non-exist telegrams `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`
-
-  ![result of command `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`](images/MarkNonExistCommandResult.png)
-
-
-
+* If the input telegrams include members who have already been marked on input date, the result will remind user of these repeatedly marked members while still marking other members as usual.
+</div>
 
 ### Unmarking attendance : `unmark`
 
@@ -355,7 +350,22 @@ unmark t/TELEGRAM…​ d/DATE
 | Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
-| `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
+| `DATE`     | `d/`   | Yes         | `DATE` follows **ISO 8601 standard** with the format **YYYY-MM-DD**, e.g. `2024-10-19`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                               |
+
+
+#### Example
+* `unmark t/alexYeoh t/berniceYu d/2024-11-10`
+
+    ![result of command `unmark t/alexYeoh t/berniceYu d/2024-11-10`](images/UnmarkCommandResult.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**<br/>
+
+* If the input date matches the current date, the checkbox for previously marked members will be automatically cleared upon successful attendance unmarking.
+
+* If the input telegrams include members who have already been unmarked on input date, the result will remind user of these repeatedly unmarked members while still unmarking other members as usual.
+
+</div>
+
 
 ### Clearing all entries : `clear`
 
