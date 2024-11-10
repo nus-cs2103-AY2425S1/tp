@@ -69,7 +69,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parts of the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -177,34 +177,6 @@ Expected output:
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![add Command](images/addSupplierCommand.png)
 
-#### Valid email address format
-
-Valid email addresses are of the format: `local-part@domain`.  
-Both `local-part` and `domain` must start and end with alphanumeric characters.  
-Special characters cannot be used consecutively.
-
-`local-part` must be alphanumeric, or these special characters: `+.-_`.
-
-`domain` must be alphanumeric, or these special characters: `.-`.  
-`domain` can be separated into multiple parts with `.`, and the last part must be at least 2 alphanumeric characters.  
-- Each part must start and end with alphanumeric characters.
-- e.g. `example.com` is separated into two parts, `example` and `com`, and is a valid `domain`.
-
-Valid email address examples:
-- john.doe@example.com
-- user123@my-website.com
-- first.last@school.edu.sg
-
-Invalid email address examples:
-- john.@example.com (`local-part` (i.e. `john.`) cannot end in a `.`)
-- john--doe@example.com (Special character `-` cannot be used consecutively)
-- john.doe@example.c (Final `domain` part (i.e. `c`) must have at least 2 alphanumeric characters)
-
-#### Valid company name format
-
-Valid company names must be alphanumeric or punctuation characters, and spaces are allowed.  
-Punctuation characters include ``!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~``
-
 ### Listing all suppliers: `list -s`
 
 Shows a list of all suppliers in VendorVault. The delivery list will not be affected.
@@ -262,7 +234,7 @@ Format: `mark -s INDEX STATUS`
 
 Parameters:
 - `INDEX`: The index of the supplier in the list. Must be a number greater than 0 and must not be blank.
-- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank. Parameters used are case-sensitive.
+- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank.
 
 </box>
 
@@ -273,7 +245,7 @@ Parameters:
 - At least one space between `-s` and `INDEX` is needed.
 - At least one space between `INDEX` and `STATUS` is needed.
 - Both parameters must be given.
-- Parameters used are case-sensitive.
+- `INDEX` and `STATUS` used are case-sensitive.
 - A supplier has a default status of `active`.
 - A supplier with an `inactive` status signifies that the supplier is not currently active for deliveries.
   However, marking an `active` supplier as `inactive` will not delete the delivery associated with the supplier from the delivery list
@@ -299,10 +271,11 @@ Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 
 Parameters:
 
-- `n/NAME`: Must be alphanumeric, and must not be blank. Parameters used are case-insensitive.
-- `com/COMPANY`: Must be alphanumeric or punctuation characters, and must not be blank. Parameters used are case-insensitive.
+- `n/NAME`: Must be alphanumeric, and must not be blank.
+- `com/COMPANY`: `COMPANY` is the company associated with the supplier. It must be in a valid company name format, and cannot be blank.
+    - Please see [below](#valid-company-name-format) for more information on what constitutes a valid company name format.
 - `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, 
-and must be between 1 and 50 (inclusive) characters long. Parameters used are case-insensitive.
+and must be between 1 and 50 (inclusive) characters long.
 
 <box type="tip" seamless>
 
@@ -316,11 +289,11 @@ the result will contain suppliers whose name contains "link" and company contain
 
 **Warnings**:
 - At least one non-empty parameter must be given.
-- No duplicate prefix can be used.
+- No duplicate parameters can be used.
 - At least one space between `find` and `-s` is needed.
 - At least one space between '-s' and the next parameter is needed.
-- At least one space between each parameter and the next prefix is needed.
-- Parameters used are case-insensitive.
+- When more than one parameter is used, at least one space between each parameter is needed.
+- `NAME`, `COMPANY` and `PRODUCT` are case-insensitive.
 </box>
 
 
@@ -341,9 +314,8 @@ This helps you to view the suppliers in a different order (ascending or descendi
 Format: `sort -s so/SORT_ORDER sb/SORT_BY`
 
 Parameters:
-- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending. Parameters used are case-sensitive.
-- `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name) 
-Parameters used are case-sensitive.
+- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending.
+- `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name)
 
 <box type="warning" seamless>
 
@@ -351,9 +323,9 @@ Parameters used are case-sensitive.
 - At least one space between `sort` and `-s` is needed.
 - At least one space between `-s` and `so` is needed.
 - At least one space between `SORT_ORDER` and `sb` is needed.
-- All prefixes and parameters must be given.
-- No duplicate prefix can be used.
-- Parameters used are case-sensitive.
+- All parameters must be given.
+- No duplicate parameters can be used.
+- `SORT_ORDER` and `SORT_BY` are case-sensitive.
 - The sort command will only sort all suppliers in VendorVault.
 - i.e.
     - If you have searched for a supplier using the `find` command,
@@ -440,6 +412,40 @@ Format: `list -d`
 
 </box>
 
+### Deleting a delivery : `delete -d`
+
+Deletes the specified delivery from the address book.
+
+Format: `delete -d INDEX`
+
+<box type="details" seamless>
+
+Parameters:
+- `INDEX`: The index of the delivery to be deleted in the displayed list. Must be a positive numeric number.
+
+</box>
+
+<box type="warning" seamless>
+
+**Warnings**:
+- At least one space is needed between `delete` and `-d`.
+- Spacing between `-d` and `INDEX` is not compulsory.
+- Only one delivery can be deleted one command.
+  - `delete -d 1 3 5` is not allowed.
+
+</box>
+
+Examples:
+- `delete -d 2`
+- `find -d pro/ bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
+
+Expected output:
+- Delivery at index 2 of the displayed list will be deleted, assuming there are at least 2 deliveries in the displayed list. Otherwise, an error message will be shown.
+- Delivery at index 1 of the displayed list will be deleted, assuming there is at least 1 delivery in the displayed list after the find command is executed. Otherwise, an error message will be shown.
+
+#### Here's how it would look like in the app:
+![delete delivery command](images/deleteDeliveryCommand.png)
+
 ### Marking a delivery : `mark -d`
 
 Marks the specified delivery in VendorVault with the specified `STATUS`.
@@ -477,40 +483,6 @@ Expected output:
 
 #### Here's how it would look like in the app:
 ![mark delivery command](images/markDeliveryCommand.png)
-
-### Deleting a delivery : `delete -d`
-
-Deletes the specified delivery from the address book.
-
-Format: `delete -d INDEX`
-
-<box type="details" seamless>
-
-Parameters:
-- `INDEX`: The index of the delivery to be deleted in the displayed list. Must be a positive numeric number.
-
-</box>
-
-<box type="warning" seamless>
-
-**Warnings**:
-- At least one space is needed between `delete` and `-d`.
-- Spacing between `-d` and `INDEX` is not compulsory.
-- Only one delivery can be deleted one command.
-  - `delete -d 1 3 5` is not allowed.
-
-</box>
-
-Examples:
-- `delete -d 2`
-- `find -d pro/ bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
-
-Expected output:
-- Delivery at index 2 of the displayed list will be deleted, assuming there are at least 2 deliveries in the displayed list. Otherwise, an error message will be shown.
-- Delivery at index 1 of the displayed list will be deleted, assuming there is at least 1 delivery in the displayed list after the find command is executed. Otherwise, an error message will be shown.
-
-#### Here's how it would look like in the app:
-![delete delivery command](images/deleteDeliveryCommand.png)
 
 ### Find a delivery: `find -d`
 
@@ -649,6 +621,35 @@ Exits the program.
 
 Format: `exit`
 
+#### Valid email address format
+
+Valid email addresses are of the format: `local-part@domain`.  
+Both `local-part` and `domain` must start and end with alphanumeric characters.  
+Special characters cannot be used consecutively.
+
+`local-part` must be alphanumeric, or these special characters: `+.-_`.
+
+`domain` must be alphanumeric, or these special characters: `.-`.  
+`domain` can be separated into multiple parts with `.`, and the last part must be at least 2 alphanumeric characters.
+- Each part must start and end with alphanumeric characters.
+- e.g. `example.com` is separated into two parts, `example` and `com`, and is a valid `domain`.
+
+Valid email address examples:
+- john.doe@example.com
+- user123@my-website.com
+- first.last@school.edu.sg
+
+Invalid email address examples:
+- john.@example.com (`local-part` (i.e. `john.`) cannot end in a `.`)
+- john--doe@example.com (Special character `-` cannot be used consecutively)
+- john.doe@example.c (Final `domain` part (i.e. `c`) must have at least 2 alphanumeric characters)
+
+#### Valid company name format
+
+Valid company names must be alphanumeric or punctuation characters, and spaces are allowed.  
+Punctuation characters include ``!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~``
+
+
 ### Saving the data
 
 VendorVault data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -722,10 +723,13 @@ Action     | Format, Examples
 
 ## Glossary
 
+* **CLI (Command-Line Interface)**: A text-based interface where users interact with the system by typing commands, as opposed to using a graphical interface with mouse clicks.
+* **Command**: An instruction given to the application to perform a specific action. They are entered by the user in a text-based format and are used to interact with and manage data.
+* **JAR File**: A Java ARchive file, which is a package file format that aggregates many Java class files and associated resources (text, images, etc.) into one file for distribution.
+* **Java**: Java is the main language used to build and manage the app’s features, ensuring it runs smoothly and securely.
+* **Parameter**: Contains words in `UPPER_CASE` that needs to be supplied by user. Some parameters also contain a prefix that should be followed by the user.
 * **Supplier Contact**: A record containing information about a supplier, including name, company, contact number, email, associated products and tags.
-* **Java**: 
 
-NEED UPDATE TERMS AT THE END!! CAN LMK IF YOU HAVE ANY IN THE PR OR SMTH
 
 
 [Back to Top](#vendor-vault-user-guide)
