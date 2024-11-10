@@ -25,14 +25,9 @@ public class AppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets an appointment for the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: NRIC, a/APPOINTMENT (in the format DD-MM-YYYY HH:MM)\n"
-            + "Example: " + COMMAND_WORD + " 1 a/25-12-2024 14:30";
+            + "Parameters: NRIC, app/APPOINTMENT (in the format DD-MM-YYYY HH:MM)\n"
+            + "Example: " + COMMAND_WORD + " S1234567A app/25-12-2024 14:30";
 
-    public static final String MESSAGE_SET_APPOINTMENT_SUCCESS = "Set Appointment for Person: %1$s";
-    public static final String MESSAGE_INVALID_APPOINTMENT_FORMAT = "Please use DD-MM-YYYY HH:MM.";
-    public static final String MESSAGE_NO_APPOINTMENT_PROVIDED = "Please provide a valid appointment date.";
-
-    //private final Index index;
     private final Nric nric;
     private final String appointmentString; // Store appointment string to convert to LocalDateTime
 

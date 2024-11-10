@@ -27,28 +27,29 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Nric("S1234567A"), new Address("Blk 30 Geylang Street 29', #06-40"), new Triage("1"), EMPTY_REMARK,
-                getTagSet("friends"), new Appointment("31-12-2024 00:00"), new LogList()),
+                new Nric("S1234567A"), new Address("Blk 30 Geylang Street 29', #06-40"), new Triage("1"),
+                    new Remark("Drug Allergy"), getTagSet("Diabetic"),
+                    new Appointment("31-12-2024 00:00"), new LogList()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Nric("S1234567B"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Triage("1"), EMPTY_REMARK,
-                getTagSet("colleagues", "friends"), new Appointment("30-12-2024 00:00"), new LogList()),
+                getTagSet("G6PD", "COPD"), new Appointment("30-12-2024 00:00"), new LogList()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Nric("S1234567C"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Triage("1"), EMPTY_REMARK,
-                getTagSet("neighbours"), new Appointment("01-05-2025 13:22"), new LogList()),
+                getTagSet("Diabetic", "G6PD"), new Appointment("01-05-2025 13:22"), new LogList()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Nric("S1234567D"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Triage("1"), EMPTY_REMARK,
-                getTagSet("family"), new Appointment("29-10-2024 23:59"), new LogList()),
+                getTagSet("Alzheimers"), new Appointment("29-10-2024 23:59"), new LogList()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Nric("S0123456Z"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Triage("1"), EMPTY_REMARK,
-                getTagSet("classmates"), null, new LogList()),
+                getTagSet("ALS"), null, new LogList()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Nric("S1234567E"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Triage("1"), EMPTY_REMARK,
-                getTagSet("colleagues"), null, new LogList())
+                getTagSet("Alzheimers", "Parkinsons"), null, new LogList())
         };
     }
 

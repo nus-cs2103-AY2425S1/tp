@@ -22,7 +22,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie (for names) OR find t/diabetic t/G6PD-Def";
+            + "Example: " + COMMAND_WORD + " alice bob charlie (for names) OR find tag/diabetic tag/G6PD";
 
     private final Predicate<Person> predicate;
 

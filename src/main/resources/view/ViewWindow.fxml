@@ -39,9 +39,9 @@
                         <Label fx:id="phone" styleClass="label-bright" text="\$phone" />
                         <Label fx:id="address" styleClass="label-bright" text="\$address" />
                         <Label fx:id="email" styleClass="label-bright" text="\$email" />
-                        <Label fx:id="remark" styleClass="label-bright" text="\$remark" />
-                        <Label fx:id="nric" styleClass="label-bright" text="\$nric"  />
+                        <Label fx:id="triage" styleClass="label-bright" text="\$triage" />
                         <Label fx:id="appointment" styleClass="label-bright" text="\$appointment" />
+                        <Label fx:id="remark" styleClass="label-bright" text="\$remark" />
                     </VBox>
                 </VBox>
                 <VBox styleClass="pane-with-border">

@@ -37,15 +37,15 @@ public class FindCommandParserTest {
         // Test valid tag-based search
         FindCommand expectedFindCommand =
                 new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList("Diabetic", "G6PD")));
-        assertParseSuccess(parser, "t/Diabetic t/G6PD", expectedFindCommand);
+        assertParseSuccess(parser, "tag/Diabetic tag/G6PD", expectedFindCommand);
 
         // multiple whitespaces between tag keywords
-        assertParseSuccess(parser, " \n t/Diabetic \n \t t/G6PD  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n tag/Diabetic \n \t tag/G6PD  \t", expectedFindCommand);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // Test invalid argument (e.g., empty string)
-        assertParseFailure(parser, "t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "tag/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 }

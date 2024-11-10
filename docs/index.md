@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: Murphy's List
 ---
 
 [![Java CI](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-W11-1a/tp/actions/workflows/gradle.yml)
@@ -16,11 +16,11 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
     * Keep track of current patients of the clinic
     * View pertinent medical information about the patient at a glance
     * Keep track of patient appointment dates
-* The project simulates an address book in the form of a desktop application ued for managing contact details.
+* The project simulates an address book in the form of a desktop application used for managing contact details.
     * It is **written in OOP fashion**. It provides a **reasonably well-written** code base.
     * It is **well-designed and documented**.
 * It is named `Murphy's List` (`ML` for short) because it was named after the medical prodigy `Sean Murphy` from the popular show `The Good Doctor`
-* For the detailed documentation of this project, see our **[Developer Guide](https://github.com/AY2425S1-CS2103T-W11-1a/tp/blob/master/docs/DeveloperGuide.md)**.
+* For the detailed documentation of this project, see our **[Developer Guide](./DeveloperGuide.md)**.
 * For a comprehensive list of instructions on how to use the app, see our **[User Guide](./UserGuide.md)**
 
 

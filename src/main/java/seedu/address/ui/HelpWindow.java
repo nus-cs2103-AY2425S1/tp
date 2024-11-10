@@ -15,45 +15,52 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "Refer to the User Guide for more info: "
+            + "https://ay2425s1-cs2103t-w11-1a.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "List of commands: \n\n"
             + "<<Viewing help>>\n"
             + "Format: help\n\n"
             + "<<Adding a person>>\n"
-            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/REMARK a/ADDRESS t/TRIAGE [tag/TAG]\n\n"
+            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS t/TRIAGE [tag/TAG]\n\n"
             + "<<Adding a remark>>\n"
             + "Format: remark NRIC r/REMARK\n\n"
-            + "<<Listing all persons>>\n"
-            + "Format: list\n\n"
             + "<<Adding an appointment>>\n"
             + "Format: appointment NRIC app/APPOINTMENT\n\n"
-            + "<<Editing a person>>\n"
-            + "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [r/REMARK] [a/ADDRESS] [t/TRIAGE] [tag/TAG]\n\n"
             + "<<Changing Triage Stages>>\n"
             + "Format: triage NRIC t/TRIAGE\n\n"
-            + "<<Locating persons by name>>\n"
-            + "Format: find KEYWORD [MORE_KEYWORDS]\n\n"
-            + "<<Deleting a person>>\n"
-            + "Format: delete NRIC\n\n"
+            + "<<Editing a person>>\n"
+            + "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [tag/TAG]\n\n"
+            + "<<Logging patient information>>\n"
+            + "Format: log NRIC DD-MM-YYYY HH:MM INFO\n\n"
+            + "<<Listing all persons>>\n"
+            + "Format: list\n\n"
             + "<<Sort persons by name or appointment>>\n"
             + "Format: sort name\n"
             + "Format: sort appointment\n\n"
+            + "<<Schedule patients by appointment time>>\n"
+            + "Format: schedule\n\n"
+            + "<<Locating persons by name>>\n"
+            + "Format: find KEYWORD [MORE_KEYWORDS]\n"
+            + "Format: find tag/TAG [MORE_TAGS]\n\n"
             + "<<View a person's details>>\n"
-            + "Format: view i/NRIC\n\n"
+            + "Format: view NRIC\n\n"
+            + "<<Deleting a person>>\n"
+            + "Format: delete NRIC\n\n"
             + "<<Clearing all entries>>\n"
             + "Format: clear\n\n"
             + "<<Exiting the program>>\n"
             + "Format: exit\n\n"
             + "List of SHORTCUT Commands: \n"
             + "add -> a | appointment -> appt | clear -> c | delete -> d | edit -> ed | exit -> ex\n"
-            + "find -> f | help -> h | list -> l | remark -> r | sort -> s | view -> v | triage -> t\n\n"
-            + "Refer to the user guide: "
-            + USERGUIDE_URL;
+            + "find -> f | help -> h | list -> l | remark -> r | sort -> s | view -> v | triage -> t\n\n";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
     private Button copyButton;
+
+    @FXML
+    private Label ugLink;
 
     @FXML
     private Label helpMessage;
@@ -69,6 +76,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        ugLink.setText(USERGUIDE_URL);
 
         // Make the window draggable
         getRoot().getScene().setOnMousePressed(event -> {

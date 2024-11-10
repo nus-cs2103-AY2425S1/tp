@@ -42,6 +42,8 @@ public class ViewWindow extends UiPart<Stage> {
     @FXML
     private Label appointment;
     @FXML
+    private Label triage;
+    @FXML
     private FlowPane tags;
     @FXML
     private VBox logListContainer;
@@ -53,16 +55,17 @@ public class ViewWindow extends UiPart<Stage> {
 
         feedback.setText(feedbackDisplayText);
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        remark.setText(person.getRemark().value);
-        nric.setText(person.getNric().value);
+        phone.setText("Phone number: " + person.getPhone().value);
+        address.setText("Address: " + person.getAddress().value);
+        email.setText("Email: " + person.getEmail().value);
+        remark.setText("Remarks: " + person.getRemark().value);
+        triage.setText("Triage stage: " + person.getTriage().value);
         appointment.setText("Appointment on " + person.getAppointment().formatDateTime());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         logList = FXCollections.observableArrayList(person.getLogEntries().getLogs());
+
     }
 
     /**
