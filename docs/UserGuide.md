@@ -252,6 +252,8 @@
   Welcome to StaffSync! Are you a Human Resources (HR) Manager that has a lot of potential hires and employees to manage? StaffSync allows you to manage your potential hires and employees on your desktop, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you type fast, you can complete your contact management tasks faster with StaffSync than with GUI apps.
 </p>
 
+<br>
+
 <h1 class="headers">Why Choose StaffSync?</h1>
 
 <p class="content content-special">
