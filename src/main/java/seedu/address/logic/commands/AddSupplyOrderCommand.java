@@ -37,7 +37,7 @@ public class AddSupplyOrderCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_ORDER + "1 1 2";
 
-    public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New supplier order added: \n%1$s";
+    public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New supply order added: \n%1$s";
 
     private final Name name;
     private final Phone phone;
