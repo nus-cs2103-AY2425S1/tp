@@ -673,6 +673,26 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+2. Deleting a person while a filtered list is being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Filter the list using the `find` command.
+
+   1. Test case: `delete 1`<br>
+      Expected: First contact in the filtered list is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+3. Deleting a person which has appointments linked to it
+
+   1. Prerequisites: Add an appointment for the person that is first in the list using the `add-appt` command.
+
+   1. Test case: `delete 1`<br>
+      Expected: Error message indicating the person has appointments linked to it. No person is deleted.
    
 ### Adding an appointment
 
@@ -702,12 +722,11 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete-appt UNIQUE_ID` (Appointment already deleted)  
        Expected: Error message indicating the appointment does not exist.
 
-2. Deleting an appointment with an invalid id
+1. Deleting an appointment using an invalid id.
 
-    1. Test case: `delete-appt UNIQUE_ID`  
-       Expected: Error message indicating an invalid id. No appointment is deleted.
+   1. Test case: `delete-appt UNIQUE_ID` (`UNIQUE_ID` is not a positive integer)  
+   Expected: Error message indicating an invalid id. No appointment is deleted.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
