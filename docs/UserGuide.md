@@ -288,8 +288,11 @@ Examples:
 * `delete Alice`: Deletes the person named Alice from SalesContactPro.
 * `delete 1`: Deletes the first person in the currently displayed list.
 * `delete alex`: If there is no alex in contact, display list has filtered based on the name "alex".
+
 <img src="images/deleteAlex.png" alt="delete alex">
+
 * `delete Alex Yeoh`: If there is multiple Alex Yeoh in contact, SalesContactPro prompt user to use `INDEX`.
+
 <img src="images/deleteSameName.png" alt="delete same name">
 
 ### Clearing all entries: `clear`
