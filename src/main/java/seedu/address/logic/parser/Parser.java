@@ -8,6 +8,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public interface Parser<T extends Command> {
 
+    String WHITESPACE_REGEX = ;
+
     /**
      * Parses {@code userInput} into a command and returns it.
      * @throws ParseException if {@code userInput} does not conform the expected format

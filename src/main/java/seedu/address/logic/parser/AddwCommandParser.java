@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -50,7 +51,7 @@ public class AddwCommandParser implements Parser<AddwCommand> {
         if (isNumeric(stringClient)) {
             index = ParserUtil.parseIndex(stringClient);
         } else {
-            String[] nameKeywords = stringClient.split("\\s+");
+            String[] nameKeywords = stringClient.split(ParserUtil.WHITESPACE_REGEX);
             predicate = new NameMatchesKeywordPredicate(Arrays.asList(nameKeywords));
         }
 
