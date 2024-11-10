@@ -109,7 +109,7 @@ public class FindCommandParserTest {
         // Test with valid module role keyword
         FindCommand expectedFindCommand =
                 new FindCommand(new ArrayList<>(List.of(
-                        new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRoleMap(List.of("CS2103T")))
+                        new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(List.of("CS2103T")))
                 )));
         assertParseSuccess(parser, " " + PREFIX_MODULE + "CS2103T", expectedFindCommand);
 
@@ -123,7 +123,7 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(new ArrayList<>(Arrays.asList(
                         new NameContainsKeywordsPredicate(List.of("Alice")),
-                        new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRoleMap(
+                        new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
                                 List.of("CS2103T")))
                 )));
         assertParseSuccess(parser, " " + PREFIX_NAME + "Alice " + PREFIX_MODULE + "CS2103T", expectedFindCommand);
@@ -135,7 +135,7 @@ public class FindCommandParserTest {
         // Test with multiple name and module role keywords
         expectedFindCommand = new FindCommand(new ArrayList<>(Arrays.asList(
                         new NameContainsKeywordsPredicate(List.of("Alice", "Bob")),
-                        new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRoleMap(
+                        new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
                                 List.of("CS2101", "CS2103T-TA")))
                 )));
         assertParseSuccess(parser, " " + PREFIX_NAME + "Alice " + PREFIX_NAME + "Bob " + PREFIX_MODULE
@@ -148,7 +148,7 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
                 new FindCommand(List.of(
                         new NameContainsKeywordsPredicate(List.of("Alice")),
-                        new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRoleMap(
+                        new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
                                 List.of("CS2103T")))
                 ), true);
         assertParseSuccess(parser, " " + FindCommand.CHAINED + " " + PREFIX_NAME
@@ -194,7 +194,7 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand =
             new FindCommand(List.of(
                 new TagContainsKeywordsPredicate(List.of("school", "office", "finance")),
-                new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRoleMap(
+                new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
                     List.of("CS2103T")))
             ));
         assertParseSuccess(parser, " " + PREFIX_MODULE + "CS2103T "
@@ -208,7 +208,7 @@ public class FindCommandParserTest {
             new FindCommand(List.of(
                 new NameContainsKeywordsPredicate(List.of("Alice")),
                 new TagContainsKeywordsPredicate(List.of("school", "office", "finance")),
-                new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRoleMap(
+                new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
                     List.of("CS2103T")))
             ));
         assertParseSuccess(parser, " " + PREFIX_NAME + "Alice "

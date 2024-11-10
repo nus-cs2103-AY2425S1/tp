@@ -229,6 +229,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> moduleRolePairs} into a {@code ModuleRoleMap}.
+     * This method will check for duplicate module codes.
      */
     public static ModuleRoleMap parseModuleRoleMap(Collection<String> moduleRolePairs) throws ParseException {
         requireNonNull(moduleRolePairs);
@@ -252,6 +253,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> moduleRolePairs} into a {@code List<ModuleRolePair>}.
+     * This method will not check for duplicate module codes.
      */
     public static List<ModuleRolePair> parseModuleRolePairs(Collection<String> moduleRolePairs) throws ParseException {
         requireNonNull(moduleRolePairs);

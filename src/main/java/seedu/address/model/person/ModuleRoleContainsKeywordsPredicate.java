@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -10,23 +12,26 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code ModuleRoleMap} matches any of the keywords given.
  */
 public class ModuleRoleContainsKeywordsPredicate implements Predicate<Person> {
-    private final ModuleRoleMap moduleRoleMapKeywords;
+    private final Set<ModuleRolePair> moduleRoleMapKeywords;
 
 
-    public ModuleRoleContainsKeywordsPredicate(ModuleRoleMap moduleRoleMapKeywords) {
+    public ModuleRoleContainsKeywordsPredicate(Set<ModuleRolePair> moduleRoleMapKeywords) {
         this.moduleRoleMapKeywords = moduleRoleMapKeywords;
+    }
+
+    public ModuleRoleContainsKeywordsPredicate(List<ModuleRolePair> moduleRoleMapKeywords) {
+        this.moduleRoleMapKeywords = new HashSet<>(moduleRoleMapKeywords);
     }
 
 
     /**
-     * Test if keywords contained in person's module role map.
+     * Test if keywords contained in {@code person}'s {@code ModuleRoleMap}.
      * @param person the input argument
-     * @return true if keywords contained else false
+     * @return true if any keyword is contained in {@code person}'s {@code ModuleRoleMap}, else false
      */
     public boolean test(Person person) {
         ModuleRoleMap personModuleRoleMap = person.getModuleRoleMap();
-        return moduleRoleMapKeywords.getRoles().entrySet().stream()
-                .anyMatch(entry -> entry.getValue().equals(personModuleRoleMap.getRoles().get(entry.getKey())));
+        return moduleRoleMapKeywords.stream().anyMatch(personModuleRoleMap::containsModuleRolePair);
     }
 
     @Override
@@ -54,8 +59,7 @@ public class ModuleRoleContainsKeywordsPredicate implements Predicate<Person> {
      * @return a List of string of module-role pairs.
      */
     public List<String> getModuleRolePairs() {
-        return moduleRoleMapKeywords.getData()
-                .stream()
+        return moduleRoleMapKeywords.stream()
                 .map(ModuleRolePair::toString)
                 .collect(Collectors.toList());
     }

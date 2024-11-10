@@ -29,7 +29,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
-import seedu.address.model.person.ModuleRoleMap;
+import seedu.address.model.person.ModuleRolePair;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -91,7 +91,7 @@ public class AddressBookParserTest {
         );
 
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
-        ModuleRoleMap moduleRoleMapKeywords = ParserUtil.parseModuleRoleMap(moduleRoleKeywords);
+        List<ModuleRolePair> moduleRoleMapKeywords = ParserUtil.parseModuleRolePairs(moduleRoleKeywords);
         ModuleRoleContainsKeywordsPredicate modulePredicate =
                 new ModuleRoleContainsKeywordsPredicate(moduleRoleMapKeywords);
         List<Predicate<Person>> expectedPredicates = new ArrayList<>();
