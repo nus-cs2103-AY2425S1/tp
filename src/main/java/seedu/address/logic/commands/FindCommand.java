@@ -32,7 +32,7 @@ public class FindCommand extends Command {
     public static final String CHAINED = "chained";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds persons by their names, module-role pairs or tags"
+            + ": Finds persons by their names, module-role pairs or tags "
             + "matching any (combination) of the specified keywords (case-insensitive)"
             + "and displays them as a numbered list.\n"
             + "To search from the previously displayed results, use 'find " + CHAINED + "'. \n"
