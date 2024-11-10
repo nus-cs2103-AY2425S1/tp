@@ -91,7 +91,7 @@ Format: `help`
 
 Adds a customer to the address book.
 
-Command aliases: `addc`<br>
+Command alias: `addc`<br>
 Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>
 Examples:
 * `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -134,14 +134,14 @@ Examples:
 
 Shows a list of all customers in the address book.
 
-Command aliases: `listc`<br>
+Command alias: `listc`<br>
 Format: `listcustomer`
 
 ### Editing a customer : `editcustomer`
 
 Edits an existing customer in the address book.
 
-Command aliases: `editc`<br>
+Command alias: `editc`<br>
 Format: `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>
 Examples:
 *  `editcustomer 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
@@ -165,7 +165,7 @@ Examples:
 
 Finds customers whose names contain any of the given keywords.
 
-Command aliases: `findc`<br>
+Command alias: `findc`<br>
 Format: `findcustomer KEYWORD [MORE_KEYWORDS]`<br>
 Examples:
 * `findcustomer John` returns `john` and `John Doe`
@@ -189,7 +189,7 @@ Examples:
 
 Deletes the specified customer from the address book.
 
-Command aliases: `deletec`<br>
+Command alias: `deletec`<br>
 Format: `deletecustomer CUSTOMER_INDEX`
 Examples:
 * `listcustomer` followed by `deletecustomer 2` deletes the 2nd customer in the address book.
@@ -208,7 +208,7 @@ Examples:
 
 Adds an order under a specified customer from the address book.
 
-Command aliases: `addo`<br>
+Command alias: `addo`<br>
 Format: `addorder CUSTOMER_INDEX i/ITEM d/DATE [q/QUANTITY]`<br>
 Examples:
 * `addorder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd customer in the address book.
@@ -235,7 +235,7 @@ Examples:
 
 List all orders of a specified customer from the address book.
 
-Command aliases: `listo`<br>
+Command alias: `listo`<br>
 Format: `listorder INDEX`<br>
 Examples:
 * `listcustomer` followed by `listorder 2` lists all orders of the 2nd customer in the address book.
@@ -255,7 +255,7 @@ Examples:
 
 Deletes an order from the selected customer's displayed order list.
 
-Command aliases: `deleteo`<br>
+Command alias: `deleteo`<br>
 Format: `deleteorder ORDER_INDEX`<br>
 Examples:
 * `deleteorder 1` deletes the order with index 1 from the selected customer.
@@ -276,7 +276,7 @@ Examples:
 
 Edits an order from the selected customer's displayed order list.
 
-Command aliases: `edito`<br>
+Command alias: `edito`<br>
 Format: `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]`<br>
 Examples:
 *  `editorder 1 i/Light bulb d/21-11-2025` edits the item and delivery date of the 1st order to be `Light bulb` and `21-11-2025` respectively.
@@ -300,7 +300,7 @@ Examples:
 
 Marks an order from the selected customer's displayed order list as completed.
 
-Command aliases: `marko`<br>
+Command alias: `marko`<br>
 Format: `markorder ORDER_INDEX`<br>
 Examples:
 * `markorder 1` marks the order with index 1 from the displayed order list as completed.
@@ -321,7 +321,7 @@ Examples:
 
 Reverts an order from the selected customer's displayed order list to pending.
 
-Command aliases: `unmarko`<br>
+Command alias: `unmarko`<br>
 Format: `unmarkorder ORDER_INDEX`<br>
 Examples:
 * `unmarkorder 1` reverts the order with index 1 from the displayed order list to pending.
@@ -342,7 +342,7 @@ Examples:
 
 Filters orders by the specified order status, under a selected customer from their displayed order list.
 
-Command aliases: `filtero`<br>
+Command alias: `filtero`<br>
 Format: `filterorder ORDER_STATUS`<br>
 Examples:
 * `filterorder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected customer being displayed.
