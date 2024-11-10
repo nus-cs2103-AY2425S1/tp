@@ -159,7 +159,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find John` returns `john` and `John Doe` _(search by name)_
+* `find alex` returns `Alex Yeoh` _(search by name)_
 * `find colleague` returns `Bernice Yu` and `Roy Balakrishnan` _(search by tag)_
 * `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
 
@@ -183,9 +183,9 @@ Each parameter can only contain one keyword.
 </div>
 
 Examples:
-* `filter n/John` : returns `john` and `John Doe` (filter by name)
+* `filter n/alex` : returns `Alex Yeoh` _(filter by name)_
 * `filter g/male t/new` : returns `James Li`, `Roy Balakrishnan` and `Linus Koo`. _(filter by gender and tag)_
-* `filter g/female t/new t/OLevels` : returns `Alex Yeoh` and `David Li` _(filter by gender and multiple tags)_
+* `filter g/male t/new t/OLevels` : returns `David Li` _(filter by gender and multiple tags)_
 * `filter g/female t/IB m/Physics` : return `Bernice Yu` _(filter by multiple conditions)_
 
 ### Deleting a student : `delete`
