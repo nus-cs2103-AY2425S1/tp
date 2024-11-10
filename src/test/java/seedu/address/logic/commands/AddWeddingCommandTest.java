@@ -29,6 +29,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Tag;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
+import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
 import seedu.address.testutil.WeddingBuilder;
 
 public class AddWeddingCommandTest {
@@ -51,7 +52,16 @@ public class AddWeddingCommandTest {
     }
 
     @Test
-    public void execute_duplicateWedding_throwsCommandException() {
+    public void execute_duplicateWedding_throwsDuplicateWeddingException() {
+        Wedding validWedding = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
+        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(validWedding);
+        ModelStub modelStub = new ModelStubWithDuplicateWeddingException();
+
+        assertThrows(CommandException.class,
+                AddWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> addWeddingCommand.execute(modelStub));
+    }
+
+    @Test public void execute_duplicateWedding_throwsCommandException() {
         Wedding validWedding = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
         AddWeddingCommand addWeddingCommand = new AddWeddingCommand(validWedding);
         ModelStub modelStub = new ModelStubWithWedding(validWedding);
@@ -59,6 +69,7 @@ public class AddWeddingCommandTest {
         assertThrows(CommandException.class,
                 AddWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> addWeddingCommand.execute(modelStub));
     }
+
 
     @Test
     public void execute_weddingWithDifferentPeople_addSuccessful() throws Exception {
@@ -83,6 +94,20 @@ public class AddWeddingCommandTest {
 
         assertThrows(CommandException.class,
                 "A wedding cannot involve marrying oneself", () -> addWeddingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_normalizedWedding_addSuccessful() throws Exception {
+        Wedding validWedding = new WeddingBuilder().withWeddingName("john loh & jean tan").build();
+        AddWeddingCommand addWeddingCommand = new AddWeddingCommand(validWedding);
+        ModelStubAcceptingWeddingAdded modelStub = new ModelStubAcceptingWeddingAdded();
+
+        CommandResult commandResult = addWeddingCommand.execute(modelStub);
+
+        Wedding expectedWedding = new WeddingBuilder().withWeddingName("John Loh & Jean Tan").build();
+        assertEquals(String.format(AddWeddingCommand.MESSAGE_SUCCESS, Messages.format(expectedWedding)),
+                commandResult.getFeedbackToUser());
+        assertEquals(List.of(expectedWedding), modelStub.weddingsAdded);
     }
 
     @Test
@@ -262,7 +287,7 @@ public class AddWeddingCommandTest {
         @Override
         public void deleteTagsWithWedding(Wedding weddingToDelete) {
             throw new AssertionError("This method should not be called.");
-        };
+        }
 
         @Override
         public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
@@ -348,5 +373,16 @@ public class AddWeddingCommandTest {
         }
     }
 
+    private class ModelStubWithDuplicateWeddingException extends ModelStub {
+        @Override
+        public void addWedding(Wedding wedding) throws DuplicateWeddingException {
+            throw new DuplicateWeddingException();
+        }
+
+        @Override
+        public ReadOnlyWeddingBook getWeddingBook() {
+            return new WeddingBook(); // Return a valid WeddingBook instead of throwing an AssertionError
+        }
+    }
 }
 
