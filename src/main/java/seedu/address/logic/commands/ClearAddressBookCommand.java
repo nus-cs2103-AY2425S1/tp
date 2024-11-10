@@ -21,7 +21,7 @@ public class ClearAddressBookCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        //Store the address book to be deleted in StaticContext
+        // Store the address book to be deleted in StaticContext
         StaticContext.setClearAddressBookPending(true);
 
         return new CommandResult(CONFIRMATION_PROMPT);

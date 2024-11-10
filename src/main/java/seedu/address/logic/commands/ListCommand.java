@@ -20,11 +20,21 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(generateSuccessMessage(model));
+    }
+
+    /**
+     * Returns {@code String} message result of ListCommand executed on {@code Model}.
+     */
+    public String generateSuccessMessage(Model model) {
         int numberOfPersons = model.getAddressBook().getPersonList().size();
-        String numberOfContacts = ", there are currently " + numberOfPersons + " contacts in your address book";
+
         if (numberOfPersons == 0) {
-            return new CommandResult(MESSAGE_EMPTY);
+            return MESSAGE_EMPTY;
         }
-        return new CommandResult(MESSAGE_SUCCESS + numberOfContacts);
+
+        String numberOfContacts = ", there are currently " + numberOfPersons + " contacts in your address book";
+        return MESSAGE_SUCCESS + numberOfContacts;
     }
 }

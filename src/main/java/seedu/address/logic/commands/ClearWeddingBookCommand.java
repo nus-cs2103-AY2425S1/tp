@@ -20,8 +20,10 @@ public class ClearWeddingBookCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        //Store the wedding book to be deleted in StaticContext
+
+        // Store the wedding book to be deleted in StaticContext
         StaticContext.setClearWeddingBookPending(true);
+
         return new CommandResult(CONFIRMATION_PROMPT);
     }
 }

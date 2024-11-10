@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.List;
 
@@ -39,7 +40,6 @@ public class DeleteWeddingCommand extends Command {
 
     /**
      * Creates a DeleteWeddingCommand to delete the Wedding with the specified {@code String}.
-     * @param weddingName
      */
     public DeleteWeddingCommand(String weddingName) {
         this.weddingName = weddingName.trim();
@@ -54,6 +54,8 @@ public class DeleteWeddingCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+
 
         if (weddingName.isEmpty()) {
             throw new CommandException(MESSAGE_MISSING_NAME);

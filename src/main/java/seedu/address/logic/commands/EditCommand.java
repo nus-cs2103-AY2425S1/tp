@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -75,9 +74,9 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        Person personToEdit = lastShownList.stream()
+        Person personToEdit = model.getFilteredPersonList().stream()
                 .filter(person -> person.getName().equals(currentName))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(String.format(MESSAGE_NO_MATCH_FOUND, currentName)));
@@ -92,6 +91,7 @@ public class EditCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
