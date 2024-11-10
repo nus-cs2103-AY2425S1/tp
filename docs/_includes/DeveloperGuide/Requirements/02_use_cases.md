@@ -61,7 +61,7 @@ Actor: New User
 
 **Extensions**
 - **2a.** The system finds no match.
-  - 2a1. The system displays an empty list.
+  - 2a1. The system displays an empty list with the message of 0 persons listed.
   - 2a2. Use case ends.
 - **2b.** The system finds multiple people with identical first or last names.
   - 2b1. The system displays the lists of found person along with a message for the user to specify which person.
