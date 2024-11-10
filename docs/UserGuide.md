@@ -219,7 +219,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * `NAME` can only contain **alphanumeric and spaces**.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
+Use `t/` to add new tags and `dt/` to delete specific tags from a client. 
 </div>
 
 Examples:
@@ -249,7 +249,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use the `list` or `find` command to determine the `INDEX` of the person you want to delete. 
+Use the `list` or `find` command to determine the `INDEX` of the client you want to delete. 
 </div>
 
 Examples:
@@ -318,7 +318,7 @@ Format: `show INDEX`
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `show` to view a person in-depth. 
+Use `show` to view a client in-depth. 
 </div>
 
 Examples:
