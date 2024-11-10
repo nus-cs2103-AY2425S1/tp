@@ -13,7 +13,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.person.HasCategoryPredicate;
+import seedu.address.model.person.PersonHasGoodsWithCategoriesPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
@@ -59,11 +59,11 @@ public class FindCommand extends Command {
         NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
                 new NameContainsKeywordsPredicate(keywords);
 
-        HasCategoryPredicate hasCategoryPredicate =
-                new HasCategoryPredicate(model, categoriesSet);
+        PersonHasGoodsWithCategoriesPredicate personHasGoodsWithCategoriesPredicate =
+                new PersonHasGoodsWithCategoriesPredicate(model, categoriesSet);
 
         Predicate<Person> combinedPredicate =
-                nameContainsKeywordsPredicate.or(hasCategoryPredicate);
+                nameContainsKeywordsPredicate.or(personHasGoodsWithCategoriesPredicate);
 
         model.updateFilteredPersonList(combinedPredicate);
 
