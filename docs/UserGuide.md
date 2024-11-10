@@ -367,7 +367,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 4. **If you add very long names, tags, or other information** (> 80 characters) to contacts, and the application window is not wide enough to display the entire line of text, the text will be truncated with `...` at the end.
 5. **If you want to add tags to an existing contact**, you need to type in all existing tags to retain them.
 6. **Advfilter does not accept mathematical expressions as values**. Mathematical expressions encompass any non-alphanumeric strings that include operators such as `+`, `-`, `/`, and `*`. Hence, commands such as `advfilter t\neighbours >= 10/3` will be considered invalid.
-7. **When you run the BA€ `.jar` for the first time, the first data export will produce an error.** To prevent this issue, ensure that an update operation (e.g., adding a contact) is performed first so that the addressbook.json file is created before attempting to use the export command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -386,6 +385,7 @@ Action     | Format, Examples
 **Advanced Filter** | `advfilter t\TAG OPERATOR VALUE…​`<br> e.g., `advfilter t\premium > 1000`
 **Sort** | `sort t\TAG DIRECTION`<br> e.g., `sort t\premium asc`
 **Export** | `export format\EXPORT_FORMAT`<br> e.g., `export format\csv`
+**Exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
