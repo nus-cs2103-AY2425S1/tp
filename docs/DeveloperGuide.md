@@ -89,7 +89,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("date n/Alex Yeoh d/31/10/2024")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("date n/Alex Yeoh d/31/10/2024 1230")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `date n/Alex Yeoh d/31/10/2024` Command](images/DateSequenceDiagram.png)
 
@@ -184,7 +184,7 @@ The activity diagram below illustrates the sequence of actions users will follow
 
 <img src="images/AddPersonActivityDiagram.png" width="450"/>
 
-The sequence diagram below demonstrates the interaction among carious classes to add a new Person into the Health Connect Application.
+The sequence diagram below demonstrates the interaction among various classes to add a new Person into the Health Connect Application.
 
 <img src="images/AddCommandSequenceDiagram.png" width="600"/>
 
