@@ -3,36 +3,92 @@ layout: page
 title: User Guide
 ---
 
-GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## About GoonBook
+
+GoonBook is a **modern desktop application designed for educators to efficiently manage their students**. It combines the speed and efficiency of a Command Line Interface (CLI) with an intuitive Graphical User Interface (GUI). Featuring robust student management capabilities including:
+
+- Quick student information lookup and editing
+- Smart grouping system for organizing students
+- Tag-based organization for tracking student attributes
+- Import/Export functionality for seamless data management
+- Automatic data saving and backup
+
+Perfect for educators who value efficiency and prefer keyboard-based interactions. With GoonBook, managing your student records becomes faster, simpler, and more organized than traditional GUI-only applications.
 
 ## **Table of Contents**
-1. [Quick start](#quick-start)
-2. [Features](#features)
+
+1. [Getting Help](#getting-help)
    1. [Viewing help](#viewing-help--help)
-   2. [Adding a person](#adding-a-person-add)
-   3. [Listing all persons](#listing-all-persons--list)
-   4. [Listing all groups](#listing-all-groups--listgroups)
-   5. [Editing a person](#editing-a-person--edit)
-   6. [Grouping students together](#grouping-students-together-group)
-   7. [Locating persons by name](#locating-persons-by-name-find)
-   8. [Locating groups by name](#locating-groups-by-name-findgroup)
-   9. [Adding a tag](#adding-a-tag-tag)
-   10. [Deleting a tag](#deleting-a-tag-untag)
-   11. [Deleting a person](#deleting-a-person-delete)
-   12. [Deleting a group](#deleting-a-group-deletegroup)
-   13. [Import students](#import-students-import-csv_file_location)
-   14. [Export students](#export-students-export)
-   15. [Clearing all entries](#clearing-all-entries--clear)
-   16. [Exiting the program](#exiting-the-program--exit)
-   17. [Saving the data](#saving-the-data)
-   18. [Editing the data file](#editing-the-data-file)
-   19. [Exported csv data file location](#exported-csv-data-file-location)
-   20. [Archiving data files](#archiving-data-files-coming-in-v20)
-3. [FAQ](#faq)
-4. [Known issues](#known-issues)
-5. [Command summary](#command-summary)
+2. [Managing Persons](#managing-persons)
+   1. [Adding a person](#adding-a-person-add)
+   2. [Listing all persons](#listing-all-persons--list)
+   3. [Editing a person](#editing-a-person--edit)
+   4. [Deleting a person](#deleting-a-person--delete)
+   5. [Finding a person](#locating-persons-by-name-find)
+3. [Managing Groups](#managing-groups)
+   1. [Listing all groups](#listing-all-groups--listgroups)
+   2. [Grouping students together](#grouping-students-together-group)
+   3. [Locating groups by name](#locating-groups-by-name-findgroup)
+   4. [Deleting a group](#deleting-a-group-deletegroup)
+4. [Managing Tags](#managing-tags)
+   1. [Adding a tag](#adding-a-tag--tag)
+   2. [Deleting a tag](#deleting-a-tag--untag)
+5. [Importing and Exporting Data](#importing-and-exporting-data)
+   1. [Import students](#import-students-import-csv_file_location)
+   2. [Export students](#export-students-export)
+   3. [Exported csv data file location](#exported-csv-data-file-location)
+6. [Data Management](#data-management)
+   1. [Clearing all entries](#clearing-all-entries--clear)
+   2. [Saving the data](#saving-the-data)
+   3. [Editing the data file](#editing-the-data-file)
+   4. [Archiving data files](#archiving-data-files-coming-in-v20)
+7. [Exiting the Program](#exiting-the-program)
+   1. [Exiting the program](#exiting-the-program--exit)
+8. [FAQ](#faq)
+9. [Known Issues](#known-issues)
+10. [Command Summary](#command-summary)
 
 ---
+
+## How to Use This Guide
+
+### Getting Started
+
+If you haven't installed GoonBook yet, start with the [Quick Start](#quick-start) section which will guide you through:
+
+- Installing Java 17
+- Downloading GoonBook
+- Setting up your workspace
+- Running your first command
+
+### Learning GoonBook
+
+Once GoonBook is running, familiarize yourself with:
+
+1. **Basic Interface**
+
+   - The command box for entering commands
+   - The student list panel
+   - The group management area
+   - The results display
+
+2. **Essential Features**
+   - [Adding students](#adding-a-person-add)
+   - [Creating groups](#grouping-students-together-group)
+   - [Managing tags](#adding-a-tag-tag)
+   - [Importing/Exporting data](#import-students-import-csv_file_location)
+
+### Quick References
+
+- For a complete list of commands, refer to the [Command Summary](#command-summary)
+- Experienced users can use this as a quick refresher
+- Each command includes examples of proper usage
+
+### Need Help?
+
+- Check the [FAQ](#faq) section for common questions
+- Review [Known Issues](#known-issues) if you encounter problems
+- Refer to the [Features](#features) section for detailed command usage
 
 ## Quick start
 
@@ -40,7 +96,7 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
 
 - If you are on MacOS do note you may need to download a specific JDK 17 version. More on this [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html#programming-language).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-4/tp/releases/tag/v1.5).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-4/tp/releases/).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your GoonBook.
 
@@ -97,6 +153,8 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
 
 <div style="page-break-after: always"></div>
 
+## Getting Help
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -106,6 +164,8 @@ Format: `help`
 ![help message](images/Help.png)
 
 <div style="page-break-after: always"></div>
+
+## Managing Persons
 
 ### Adding a person: `add`
 
@@ -138,16 +198,6 @@ Format: `list`
 
 <div style="page-break-after: always"></div>
 
-## Listing all groups : `listGroups`
-
-Shows a list of all groups in the Goon Book.
-
-Format: `listGroups`
-
-![ListGroup](images/ListGroup.png)
-
-<div style="page-break-after: always"></div>
-
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -169,25 +219,21 @@ Examples:
 
 <div style="page-break-after: always"></div>
 
-### Grouping students together: `group`
+### Deleting a person : `delete`
 
-Groups students together.
+Deletes the specified person from the address book.
 
-Format: `group [g/GROUPNAME] [s/STUDENTNAME]…​`
+Format: `delete INDEX`
 
-- Each group must have a unique name.
-- Only exact name matches will be added.
-- Only the name is searched.
+- Deletes the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …​
 
-![Group](images/Group.png)
-
+![Delete](images/Delete.png)
 Examples:
 
-- If the GoonBook contains `Bob` and `Tom` and a group called `Meow`
-- `group g/StudyGroup1 s/Bob s/Tom` groups `Bob` and `Tom`
-- `group g/Meow s/Bob s/Tom` returns `Group name already taken!!`
-- `group g/Meow s/Bob s/` returns `Please do not enter an empty string for student name!`
-- `group g/StudyGroup1 s/Bo` returns `The following students could not be found: Bo`<br>
+- `list` followed by `delete 2` deletes the 2nd person in the Goon book.
+- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 <div style="page-break-after: always"></div>
 
@@ -213,6 +259,40 @@ Examples:
 
 <div style="page-break-after: always"></div>
 
+## Managing groups
+
+## Listing all groups : `listGroups`
+
+Shows a list of all groups in the Goon Book.
+
+Format: `listGroups`
+
+![ListGroup](images/ListGroup.png)
+
+<div style="page-break-after: always"></div>
+
+### Grouping students together: `group`
+
+Groups students together.
+
+Format: `group [g/GROUPNAME] [s/STUDENTNAME]…​`
+
+- Each group must have a unique name.
+- Only exact name matches will be added.
+- Only the name is searched.
+
+![Group](images/Group.png)
+
+Examples:
+
+- If the GoonBook contains `Bob` and `Tom` and a group called `Meow`
+- `group g/StudyGroup1 s/Bob s/Tom` groups `Bob` and `Tom`
+- `group g/Meow s/Bob s/Tom` returns `Group name already taken!!`
+- `group g/Meow s/Bob s/` returns `Please do not enter an empty string for student name!`
+- `group g/StudyGroup1 s/Bo` returns `The following students could not be found: Bo`<br>
+
+<div style="page-break-after: always"></div>
+
 ### Locating groups by name: `findGroup`
 
 Finds groups whose names contain any of the given keywords.
@@ -234,6 +314,24 @@ Examples:
 - `findGroup GroupA GroupB` returns `GroupA`, GroupB<br>
 
 <div style="page-break-after: always"></div>
+
+### Deleting a group : `deleteGroup`
+
+Deletes the specified Group from the address book.
+
+Format: `deleteGroup GROUPNAME`
+
+- Deletes the group given the specific `GROUPNAME`.
+- The group name refers to the name shown in the group list.
+
+![DeleteGroup](images/DeleteGroup.png)
+Examples:
+
+- `groups` followed by `deleteGroup StudyGroup 1` deletes StudyGroup1
+
+<div style="page-break-after: always"></div>
+
+## Managing Tags
 
 ### Adding a tag : `tag`
 
@@ -262,41 +360,9 @@ Format: `untag INDEX t/TAG`
 
 <div style="page-break-after: always"></div>
 
-### Deleting a person : `delete`
+## Importing and Exporting Data
 
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-- Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
-
-![Delete](images/Delete.png)
-Examples:
-
-- `list` followed by `delete 2` deletes the 2nd person in the Goon book.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-<div style="page-break-after: always"></div>
-
-### Deleting a group : `deleteGroup`
-
-Deletes the specified Group from the address book.
-
-Format: `deleteGroup GROUPNAME`
-
-- Deletes the group given the specific `GROUPNAME`.
-- The group name refers to the name shown in the group list.
-
-![DeleteGroup](images/DeleteGroup.png)
-Examples:
-
-- `groups` followed by `deleteGroup StudyGroup 1` deletes StudyGroup1
-
-<div style="page-break-after: always"></div>
-
-## Import students: `import CSV_FILE_LOCATION`
+### Import students: `import CSV_FILE_LOCATION`
 
 Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
 
@@ -313,11 +379,12 @@ Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
 ![Import](images/Import.png)
 
 Examples:
+
 - `import /users/shaun/desktop/tp/test_students.csv`
 
 <div style="page-break-after: always"></div>
 
-## Export students: `export`
+### Export students: `export`
 
 Exports all students in GoonBook to a .csv file.
 
@@ -330,6 +397,14 @@ Format: `export`
 
 <div style="page-break-after: always"></div>
 
+### Exported csv data file location
+
+GoonBook csv data files are saved automatically as a .csv file at `[JAR file location/exported_data.csv]`.
+
+<div style="page-break-after: always"></div>
+
+## Data Management
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -339,6 +414,8 @@ Format: `clear`
 ![Clear](images/Clear.png)
 
 <div style="page-break-after: always"></div>
+
+## Exiting the Program
 
 ### Exiting the program : `exit`
 
@@ -353,10 +430,6 @@ GoonBook data are saved in the hard disk automatically after any command that ch
 ### Editing the data file
 
 GoonBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-## Exported csv data file location
-
-GoonBook csv data files are saved automatically as a .csv file at `[JAR file location/exported_data.csv]`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -385,21 +458,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                       |
-| ---------------- |------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 c/4B t/friend t/colleague`         |
-| **Clear**        | `clear`                                                                                                                |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
-| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER][c/CLASS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee c/4L`                           |
+| Action              | Format, Examples                                                                                                       |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Add**             | `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 c/4B t/friend t/colleague`         |
+| **Clear**           | `clear`                                                                                                                |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
+| **Delete Group**    | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER][c/CLASS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee c/4L`                           |
 | **Export Students** | `export`                                                                                                               |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                             |
-| **Find Group**   | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`                                                        |
-| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
-| **Create Group** | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie s/Martin s/Jianbing s/Shaun s/Wenjie` |
-| **Import**       | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                             |
-| **List Students**| `list`                                                                                                                 |
-| **List Groups**  | `listGroups`                                                                                                           |
-| **Tag**          | `tag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                       |
-| **Untag**        | `untag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                     |
-| **Help**         | `help`                                                                                                                 |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                             |
+| **Find Group**      | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`                                                        |
+| **Delete Group**    | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
+| **Create Group**    | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie s/Martin s/Jianbing s/Shaun s/Wenjie` |
+| **Import**          | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                             |
+| **List Students**   | `list`                                                                                                                 |
+| **List Groups**     | `listGroups`                                                                                                           |
+| **Tag**             | `tag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                       |
+| **Untag**           | `untag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                     |
+| **Help**            | `help`                                                                                                                 |
