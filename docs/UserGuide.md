@@ -6,7 +6,7 @@
 
 # SellSavvy User Guide
 
-SellSavvy is a lightweight and convenient desktop application for **managing your customers' contacts and their orders**, aiming to streamline your online drop-shipping management. It offers a centralised platform to **organise customer contacts, track order deliveries and store the data**. 
+SellSavvy is a lightweight and convenient desktop application for **managing your customers' contacts and their orders**, aiming to streamline your online drop-shipping management. It offers a centralised platform to **organise customer contacts, track order deliveries and store the data**.
 
 SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SellSavvy can get your drop-shipping management tasks done faster than traditional GUI apps.
 
@@ -36,7 +36,7 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
    * `deletecustomer 3` : Deletes the 3rd customer's contact and order list shown in the displayed customer list and order list.
 
    * `listorder 1` : Lists all orders under the 1st customer as a displayed order list.
-   
+
    * `addorder 1 i/Lamp d/20-12-2024 q/2` : Adds an order for a `Lamp` item to the displayed order list.
 
    * `markorder 1` : Marks the 1st order shown in the displayed order list as completed.
@@ -107,7 +107,7 @@ Examples:
 * If there is already a customer with similar `NAME` (same name excluding space and casing), a warning will be given.
 * `PHONE_NUMBER` should only contains numbers, and it should at least be 3 digits long.
 * `EMAIL` should be of the format `local-part` `@` `domain` and adhere to the following constraints:
-  * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). 
+  * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
   * The `local-part` may not start or end with any special characters.
   * This is followed by a '@' and then a `domain` name.
   * The `domain` name is made up of domain labels separated by periods.
@@ -420,20 +420,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                                | Command                     | Format and Examples                                                                                                                                                                 |
-|---------------------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add a customer**                    | `addcustomer`, `addc`       | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `addcustomer n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Add an order**                      | `addorder`, `addo`          | `addorder CUSTOMER_INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addorder 2 i/Lamp d/20-11-2024 q/3`                                                                                  |
-| **Clear**                             | `clear`                     |                                                                                                                                                                                     |
-| **Delete a customer**                 | `deletecustomer`, `deletec` | `deletecustomer CUSTOMER_INDEX`<br> e.g., `deletecustomer 3`                                                                                                                        |
-| **Delete an order**                   | `deleteorder`, `deleteo`    | `deleteorder ORDER_INDEX`<br> e.g. `deleteorder 2`                                                                                                                                  |
-| **Edit a customer**                   | `editcustomer`, `editc`     | `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `editcustomer 2 n/James Lee e/jameslee@example.com`                                |
-| **Edit an order**                     | `editorder`, `edito`        | `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]` <br> e.g. `editorder 1 i/Light bulb d/21-11-2025`                                                                            |
-| **Exit**                              | `exit`                      |                                                                                                                                                                                     |
-| **Filter orders by status**           | `filterorder`, `filtero`    | `filterorder ORDER_STATUS`<br> e.g. `filterorder Completed`                                                                                                                         |
-| **Find customer(s)**                  | `findcustomer`, `findc`     | `findcustomer KEYWORD [MORE_KEYWORDS]`<br> e.g. `findcustomer James Jake`                                                                                                           |
-| **Help**                              | `help`                      |                                                                                                                                                                                     |
-| **List all customers**                | `listcustomer`, `listc`     |                                                                                                                                                                                     |
-| **List all orders**                   | `listorder`, `listo`        | `listorder CUSTOMER_INDEX`<br> e.g. `listorder 3`                                                                                                                                   |
-| **Mark an order as completed**        | `markorder`, `marko`        | `markorder ORDER_INDEX`<br> e.g. `markorder 2`                                                                                                                                      |                                                                                                                                                                                                                                           
-| **Revert an order to pending status** | `unmarkorder`, `unmarko`    | `unmarkorder ORDER_INDEX`<br> e.g., `unmarkorder 2`                                                                                                                                 |
+| Action                                | Command                     | Format and Examples                                                                                                                                                                  |
+|---------------------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add a customer**                    | `addcustomer`, `addc`       | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `addcustomer n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
+| **Add an order**                      | `addorder`, `addo`          | `addorder CUSTOMER_INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addorder 2 i/Lamp d/20-11-2024 q/3`                                                                                   |
+| **Clear**                             | `clear`                     |                                                                                                                                                                                      |
+| **Delete a customer**                 | `deletecustomer`, `deletec` | `deletecustomer CUSTOMER_INDEX`<br> e.g., `deletecustomer 3`                                                                                                                         |
+| **Delete an order**                   | `deleteorder`, `deleteo`    | `deleteorder ORDER_INDEX`<br> e.g. `deleteorder 2`                                                                                                                                   |
+| **Edit a customer**                   | `editcustomer`, `editc`     | `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `editcustomer 2 n/James Lee e/jameslee@example.com`                                 |
+| **Edit an order**                     | `editorder`, `edito`        | `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]` <br> e.g. `editorder 1 i/Light bulb d/21-11-2025`                                                                             |
+| **Exit**                              | `exit`                      |                                                                                                                                                                                      |
+| **Filter orders by status**           | `filterorder`, `filtero`    | `filterorder ORDER_STATUS`<br> e.g. `filterorder Completed`                                                                                                                          |
+| **Find customer(s)**                  | `findcustomer`, `findc`     | `findcustomer KEYWORD [MORE_KEYWORDS]`<br> e.g. `findcustomer James Jake`                                                                                                            |
+| **Help**                              | `help`                      |                                                                                                                                                                                      |
+| **List all customers**                | `listcustomer`, `listc`     |                                                                                                                                                                                      |
+| **List all orders**                   | `listorder`, `listo`        | `listorder CUSTOMER_INDEX`<br> e.g. `listorder 3`                                                                                                                                    |
+| **Mark an order as completed**        | `markorder`, `marko`        | `markorder ORDER_INDEX`<br> e.g. `markorder 2`                                                                                                                                       |
+| **Revert an order to pending status** | `unmarkorder`, `unmarko`    | `unmarkorder ORDER_INDEX`<br> e.g., `unmarkorder 2`                                                                                                                                  |
