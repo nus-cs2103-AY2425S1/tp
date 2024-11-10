@@ -139,7 +139,9 @@ Adds a student to the address book.
 
 ##### Constraints
 
-* **NAME** must only contain alphanumeric characters and spaces.
+* **NAME** must only contain alphanumeric characters and spaces. 
+* **NAME** is case-insensitive, i.e. you can use `jOhN Doe`
+  and we will help you to format it to become `John Doe`
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and **END_TIME** are represented as `HHmm`.
