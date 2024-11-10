@@ -123,7 +123,7 @@ Adds a student to T_Assistant.
 
 ##### Notes
 
-1. `Student Number` is the unique identifier for each student, so no 2 students can have the same student number.
+1. `Student Number` is the unique identifier for each student, so no two students can have the same student number.
 2. `Tags` are case-insensitive, so `T1` and `t1` will be recognised as the same tags. T_Assistant will add the first
    instance of the repeated tag.
 3. For information on the constraints for each parameter used in this command, go
@@ -177,7 +177,7 @@ Edits the details of a student.
 
 1. `edit_s` edits the student identified by the index. It only accepts a valid index based on the list when `list_s` is called.
 2. Since `Student Number` is the unique identifier for each student, `Student Number` can't be edited.
-3. Tags are replaced if included in the argument, not appended.
+3. Editing of tags is not cumulative, i.e. tags will be replaced by the new set of tags.
 4. Tags are removed by entering `t/` without specifying any tags after it.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
@@ -334,10 +334,7 @@ Adds a group to the T_Assistant。
 
 ##### Notes
 
-1. `Group Name` is the unique identifier for each group, so no 2 groups can have the same group name.
-2. Group names must follow a three-part format: course type: either `CS2103` or `CS2103T`;
-   tutorial group: a letter followed by a number;
-   group number: any number
+1. `Group Name` is the unique identifier for each group, so no two groups can have the same group name.
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -500,7 +497,7 @@ Adds a task to a group or multiple groups.
 2. The group name inputs are case-insensitive. `cs2103-f11-1` will yield the same result as `CS2103-F11-1`.
 3. This command is relatively flexible in terms of the input parameters. You can input duplicate group names.
    The application simply ignores the duplicates and adds the task to the desired group.
-4. The command checks for the existence of the task, hence you cannot input a task which already exists. A task is
+4. This command checks for the existence of the task, hence you cannot input a task which already exists. A task is
    equal to another task when it has the same task name and deadline as it.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
@@ -570,6 +567,8 @@ Adds an existing task to the groups specified.
 2. `add_et_g` adds an existing task identified by the index. It only accepts a valid index
    based on the list when `list_t` is called.
 3. You can add an existing task to multiple groups.
+4. This command is relatively flexible in terms of the input parameters. You can input duplicate group names or group names that don't exist. 
+   1. The application simply ignores the duplicates and adds the task to the desired group. 
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -682,7 +681,7 @@ Edits a task from a group.
 
 This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-1 tn/Complete task 7`.
 
-<img src="images/screenshots/del_t.png" width="600">
+<img src="images/screenshots/edit_t_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -722,8 +721,7 @@ Marks a task as done or undone.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-2. You are unable to specify whether to mark a task as done or undone.
-3. If a task is done it will be marked as undone, and vice versa.
+3. If a task is complete it will be marked as pending/overdue, and vice versa.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -921,17 +919,17 @@ This section will inform you about what parameters are used in T_Assistant and t
 All parameters are case-insensitive when used for comparison unless stated otherwise.
 </box>
 
-| Parameter                | Constraints                                                                                                                                                                                                                                                                                      | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
-|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
-| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                                                                     | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
-| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                                                                       | `John Doe`                                    | `J0hn Doe$$`                                     |
+| Parameter                | Constraints                                                                                                                                                                                                                                                                                        | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
+| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                                                                       | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
+| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                                                                         | `John Doe`                                    | `J0hn Doe$$`                                     |
 | `e/`<br>Email            | Format: `local-part@domain-part` <br>`local-part` follows NUS email constraints<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
-| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                                                             | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
-| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a number<br>`Group Number` should be a number                                                                                            | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
-| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                                                                  | `Release tP v1.6`                             |                                                  |
-| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                                                                           | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
-| `q/`<br>Query            | No limitations                                                                                                                                                                                                                                                                                   | `iP`<br>`tP`                                  | `Complete iP`                                    |
-| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                                                         | `1`<br>`10`                                   | `-1`<br>`test`                                   |
+| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                                                               | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
+| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a number<br>`Group Number` should be a number                                                                                              | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
+| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                                                                    | `Release tP v1.6`                             |                                                  |
+| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                                                                             | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
+| `q/`<br>Query            | No limitations                                                                                                                                                                                                                                                                                     | `iP`<br>`tP v1.5`                             |                                                  |
+| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                                                           | `1`<br>`10`                                   | `-1`<br>`test`                                   |
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
