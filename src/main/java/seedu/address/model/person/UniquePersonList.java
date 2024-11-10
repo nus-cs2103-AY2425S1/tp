@@ -43,11 +43,12 @@ public class UniquePersonList implements Iterable<Person> {
     public String[] findSameField(Person toCheck) {
         requireNonNull(toCheck);
         for (Person person : internalList) {
+            boolean doBothHaveTelegramUsername = person.hasTelegramUsername() && toCheck.hasTelegramUsername();
             if (person.isSamePhone(toCheck)) {
                 return new String[] {"phone", person.getPhone().value};
             } else if (person.isSameEmail(toCheck)) {
                 return new String[] {"email", person.getEmail().value};
-            } else if (person.isSameTelegram(toCheck)) {
+            } else if (doBothHaveTelegramUsername && person.isSameTelegram(toCheck)) {
                 return new String[] {"telegram", person.getTelegramUsername().telegramUsername};
             }
         }
