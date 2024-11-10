@@ -437,24 +437,30 @@ Format: `unassign-venor PERSONINDEX`
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
-**Assign Wedding**    | `assign-wedding PERSON_INDEX w/WEDDING…​` or `asw PERSON_INDEX w/WEDDING…​` <br> e.g., `asw 2 w/Casey's Wedding w/Wedding August 29th`
+**Add**    | `add n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
+**Add Vendor**    | `add-vendor n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​` or `addv n/NAME [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME]…​ [w/WEDDING_NAME]…​` <br> e.g., `addv n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/florist`
+**Assign Vendor**    | `assign-vendor PERSON_INDEX` or `asv PERSON_INDEX` <br> e.g., `asv 2`
+**Assign Wedding**    | `assign-wedding PERSON_INDEX w/WEDDING_NAME…​ [p1/] [p2/] [f/]` or `asw PERSON_INDEX w/WEDDING_NAME…​ [p1/] [p2/] [f/]` <br> e.g., `asw 2 w/Casey's Wedding p1/ w/Wedding August 29th`
 **Clear**  | `clear`
-**Create Tag**  | `create-tag t/TAG` or `ctag t/TAG` <br> e.g., `create-tag t/photographer`
-**Create Task**  | `create-task tk/TASK_TYPE TASK_DETAILS` or `ctask tk/TASK_TYPE TASK_DETAILS` <br> e.g., `create-task tk/todo Order Wedding Cake` <br> `create-task tk/event Meet Caterer /from 2024-11-19 /to 2024-11-20` <br> `create-task tk/deadline Book Venue /by 2025-02-01`
-**Create Wedding**  | `create-wedding w/WEDDING` or `cw w/WEDDING` <br> e.g., `cw w/JJ's Wedding`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Delete Tag** | `delete-tag t/TAG` or `dtag t/TAG` <br> e.g., `delete-tag t/photographer`
-**Delete Task** | `delete-task INDEX` or `dtask INDEX` <br> e.g., `dtask 6`
-**Delete Wedding** | `delete-wedding w/WEDDING` or `dw w/WEDDING` <br> e.g., `delete-wedding w/Lav's Wedding`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Wedding**   | `edit-wedding WEDDING_INDEX [p1/PERSON_INDEX] [p2/PERSON_INDEX] [a/ADDRESS] [d/DATE]…​`<br> or <br> `ew WEDDING_INDEX [p1/PERSON_INDEX] [p2/PERSON_INDEX] [a/ADDRESS] [d/DATE]…​` <br> e.g.,`edit-wedding 2 p1/3 a/Jurong Christian Church`
+**Create Tag**  | `create-tag t/TAG_NAME` or `ctag t/TAG_NAME` <br> e.g., `create-tag t/photographer`
+**Create Task** | `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` or `ctask tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` <br> e.g., `create-task tk/Order Wedding Cake` <br> `ctask tk/Book Venue d/2025-02-01` <br> `create-task tk/Meet Caterer d/2024-11-19 d/2024-11-20`
+**Create Wedding**  | `create-wedding w/WEDDING_NAME` or `cw w/WEDDING_NAME` <br> e.g., `cw w/JJ's Wedding`
+**Delete** | `delete PERSON_INDEX`<br> e.g., `delete 3`
+**Delete Tag** | `delete-tag t/TAG_NAME [f/]` or `dtag t/TAG_NAME [f/]` <br> e.g., `delete-tag t/photographer`
+**Delete Task** | `delete-task TASK_INDEX` or `dtask TASK_INDEX` <br> e.g., `dtask 6`
+**Delete Wedding** | `delete-wedding w/WEDDING_NAME` or `dw w/WEDDING_NAME` <br> e.g., `delete-wedding w/Lav's Wedding`
+**Edit**   | `edit PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Wedding**   | `edit-wedding WEDDING_INDEX [a/ADDRESS] [d/DATE]`<br> or <br> `ew WEDDING_INDEX [a/ADDRESS] [d/DATE]` <br> e.g.,`edit-wedding 2 a/Jurong Christian Church`
 **Exit**   | `exit`
-**Find**   | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [w/WEDDING]`<br> e.g., `find n/James Jake`
+**Find**   | `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG_NAME] [w/WEDDING_NAME]`<br> e.g., `find n/James Jake`
 **Help**   | `help`
-**List**   | `list`
+**List**   | `list` 
 **List Weddings**   | `list-weddings` or `lw`
-**List Tasks**   | `list-tasks` or `lt`
-**Tag**   | `tag INDEX [t/TAG]…​` <br> e.g., `tag 2 t/florist t/photographer`
-**Unassign Wedding**    | `unassign-wedding PERSON_INDEX w/WEDDING…​` or `uw PERSON_INDEX w/WEDDING…​` <br> e.g., `uw 2 w/John's Wedding`
-**Untag**   | `untag INDEX [t/TAG]…​` <br> e.g., `untag 4 t/available t/chef`
+**List Tags**   | `list-tags` or `ltags`
+**List Tasks**   | `list-tasks` or `ltasks`
+**Mark Task** | `mark-task TASK_INDEX…​` or `mtask TASK_INDEX…​` <br> e.g., `mark-task 1 ` <br> `mtask 1 2 3`
+**Tag**   | `tag PERSON_INDEX [t/TAG_NAME]…​ [f/]` <br> e.g., `tag 2 t/florist t/photographer`
+**Unassign Vendor**    | `unassign-vendor PERSON_INDEX [f/]` or `uw PERSON_INDEX [f/]` <br> e.g., `unassign-vendor 3`
+**Unassign Wedding**    | `unassign-wedding PERSON_INDEX w/WEDDING_NAME…​` or `uw PERSON_INDEX w/WEDDING_NAME…​` <br> e.g., `uw 2 w/John's Wedding`
+**Unmark Task** | `unmark-task TASK_INDEX…​` or `untask TASKINDEX…​` <br> e.g., `untask 1 ` <br> `unmark-task 1 2 3`
+**Untag**   | `untag TASK_INDEX [t/TAG_NAME]…​` <br> e.g., `untag 4 t/available t/chef`
