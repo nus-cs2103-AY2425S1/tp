@@ -482,7 +482,6 @@ unless specified otherwise)
 
 ---
 
-
 **Use case: Mark assignment**
 
 **MSS**
@@ -588,24 +587,16 @@ unless specified otherwise)
 
       Use case ends.
 
-<<<<<<< HEAD
-=======
-* 1b. The student already has a remark.
-    * 1b1. TAchy shows a warning message.
-    * 1b2. TAchy asks if the Teacher wants to overwrite the remark.
-    * 1b3. Teacher confirms the overwrite.
-    * 1b4. TAchy records the new remark.
-
-      Use case resumes at step 2.
-
 ### Planned Enhancements:
 Team size: 5
 1. **Update Result display box to enable wrapping and be of greater vertical length:** So that users do not need to scroll in order to read the result display box.
 2. **Make tag names wrap if it exceeds the UI display:** The current display of tag names results in them exceeding the UI display if they are too long. Although it can be mitigated by enlarging the window size, it relies on using the mouse, which is not CLI-friendly.
 3. **Display student information in the window after the Add Student command:** The current implementation does not display the student information in the window after the Add Student command, unlike other commands like the Edit Student command. This should be fixed to maintain consistency.
 4. **Display more accurate error messages for unexpected prefixes and '/'s:** The current implementation will display a ```Index should be a non-zero unsigned integer and cannot be blank``` error message for a command that contains prefixes or '/'s that are not expected e.g. ```edit_student si/1 r/math```. However, it should display the command's respective invalid command message to facilitate better understanding.
-
->>>>>>> 43720c37653bcfa98b648f54fd1ce59838987be1
+5. **Enable Edit Assignment Command to edit graded assignment without losing its submission status and score:** The current implementation of the Edit Assignment command will reset the assignment's submission status and score to default values if the assignment is already graded. This should be fixed to allow the user to edit the assignment without losing its submission status and score.
+6. **Standardize the command success messages:** The current implementation of the command success messages is 
+   inconsistent. Some commands like `edit_student` displays student details, while others like `view_student` do not.
+   This should be standardized to ensure that users receive feedback in consistent formats.
 
 ### Non-Functional Requirements
 
@@ -679,8 +670,6 @@ testers are expected to do more *exploratory* testing.
        Expected: No student is displayed. Error message shown in the status bar.
     4. Test case: `view_student x` (where `x` is greater than the list size)<br>
        Expected: No student is displayed. Error message indicating the index is out of bounds.
-
-
 
 ### Deleting a student
 
