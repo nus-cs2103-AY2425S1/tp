@@ -33,9 +33,9 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Show CC">
+          <Menu mnemonicParsing="false" text="Toggle CC">
             <MenuItem fx:id="toggleConcertContactViewItem" mnemonicParsing="false"
-                      onAction="#handleToggleConcertContactView" text="Show CC" />
+                      onAction="#handleToggleConcertContactView" text="Toggle CC" />
           </Menu>
         </MenuBar>
 
