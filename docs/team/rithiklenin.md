@@ -5,7 +5,7 @@
 
 ### Project: Prudy
 
-Prudy is an application to help Prudential financial agents help manage their clients. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
+Prudy is an application to help Prudential financial agents manage their clients. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
