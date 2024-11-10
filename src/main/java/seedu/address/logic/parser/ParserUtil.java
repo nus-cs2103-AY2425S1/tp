@@ -251,6 +251,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> moduleRolePairs} into a {@code List<ModuleRolePair>}.
+     */
+    public static List<ModuleRolePair> parseModuleRolePairs(Collection<String> moduleRolePairs) throws ParseException {
+        requireNonNull(moduleRolePairs);
+
+        final List<ModuleRolePair> moduleRolePairList = new ArrayList<>();
+        for (String moduleRolePair : moduleRolePairs) {
+            moduleRolePairList.add(parseModuleRolePair(moduleRolePair));
+        }
+
+        return moduleRolePairList;
+    }
+
+    /**
      * Parses a {@code String description} into a {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      *
