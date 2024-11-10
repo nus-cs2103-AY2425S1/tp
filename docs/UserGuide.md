@@ -93,7 +93,7 @@ To use EZSTATE, type commands in the command box and press `Enter`. Here are a f
 
    * `exit` : Exits the app.
 
-Once you've tried out these basic commands, it's helpful to understand [how they are organized](#command-structure). This will make it easier to navigate and use the commands in EZSTATE effectively, and to grasp how each part functions.
+Once you've tried out these basic commands, it's helpful to understand [how they are organized](#command-structure). This will make it easier to navigate and use **all** commands in EZSTATE effectively, and to grasp how each part functions.
 
 ### Command Structure
 
@@ -141,11 +141,13 @@ The table below showcases the four different possible notations of prefixes:
 Note 1: Optional prefixes can be omitted and the command will still be executed successfully <br> _(assuming all other parts of the command are correctly inputted)_ 
 </div>
 
+<br>
+
 <div class="note" markdown="span">
 Note 2: Variadic prefixes allow you to enter multiple values for a single command by separating them with spaces. For example:
-
+<br>
 `t/friend t/colleague t/mentor`
-
+<br>
 This lets you add multiple tags at once, making it easier to input bulk data
 </div>
 
@@ -169,6 +171,7 @@ The prefixes used in **EZSTATE** are universal across all commands _(i.e. have t
 | sel/   | seller  | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `sel/1` `sel/2`                       | `sel/0`, `sel/-1`, `sel/abc`              |
 | buy/   | buyer   | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `buy/1` `buy/2`                       | `buy/0`, `buy/-2`, `buy/abc`              |
 
+Congratulations! You've successfully completed the Quick Start guide. The [next section](#features) offers an in-depth overview of all the commands available in EZSTATE.
 
 --------------------------------------------------------------------------------------------------------------------
 
