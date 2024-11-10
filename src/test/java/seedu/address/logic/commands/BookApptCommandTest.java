@@ -25,19 +25,20 @@ import seedu.address.model.patient.Nric;
 import seedu.address.model.patient.Patient;
 
 public class BookApptCommandTest {
-    
+
     private Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
 
     @Test
     public void execute_validAppointment_success() {
         Patient patientToBookAppt = DANIEL;
-        Appt validAppt = new Appt(LocalDateTime.parse("2025-01-28 13:00", FORMATTER), 
+        Appt validAppt = new Appt(LocalDateTime.parse("2025-01-28 13:00", FORMATTER),
             new HealthService("CONSULT"));
         BookApptCommand bookApptCommand = new BookApptCommand(patientToBookAppt.getNric(), validAppt);
-        String expectedMessage = String.format(BookApptCommand.MESSAGE_APPT_ADDED_SUCCESS, 
+        String expectedMessage = String.format(BookApptCommand.MESSAGE_APPT_ADDED_SUCCESS,
             patientToBookAppt.getName());
-        
-        CommandResult expectedCommandResult = new ShowPatientInfoCommandResult(expectedMessage, patientToBookAppt, true);
+
+        CommandResult expectedCommandResult = new ShowPatientInfoCommandResult(expectedMessage,
+            patientToBookAppt, true);
         ModelManager expectedModel = new ModelManager(model.getClinicConnectSystem(), new UserPrefs());
 
         assertCommandSuccess(bookApptCommand, model, expectedCommandResult, expectedModel);
@@ -46,7 +47,7 @@ public class BookApptCommandTest {
     @Test
     public void execute_nonExistentPatient_throwsCommandException() {
         Nric invalidNric = new Nric("S9999999A");
-        Appt validAppt = new Appt(LocalDateTime.parse("2025-01-28 13:00", FORMATTER), 
+        Appt validAppt = new Appt(LocalDateTime.parse("2025-01-28 13:00", FORMATTER),
             new HealthService("CONSULT"));
         BookApptCommand bookApptCommand = new BookApptCommand(invalidNric, validAppt);
         assertThrows(CommandException.class, () -> bookApptCommand.execute(model));
@@ -55,7 +56,7 @@ public class BookApptCommandTest {
     @Test
     public void execute_duplicateAppointment_throwsCommandException() {
         Patient patientToBookAppt = DANIEL;
-        Appt duplicateAppt = new Appt(LocalDateTime.parse("2030-06-06 22:00", FORMATTER), 
+        Appt duplicateAppt = new Appt(LocalDateTime.parse("2030-06-06 22:00", FORMATTER),
             new HealthService("CONSULT"));
         BookApptCommand bookApptCommand = new BookApptCommand(patientToBookAppt.getNric(), duplicateAppt);
         assertThrows(CommandException.class, () -> bookApptCommand.execute(model));
@@ -64,17 +65,17 @@ public class BookApptCommandTest {
     @Test
     public void execute_appointmentInPast_throwsCommandException() {
         Patient patientToBookAppt = DANIEL;
-        Appt pastAppt = new Appt(LocalDateTime.parse("2020-09-09 22:00", FORMATTER), 
+        Appt pastAppt = new Appt(LocalDateTime.parse("2020-09-09 22:00", FORMATTER),
             new HealthService("CONSULT"));
         BookApptCommand bookApptCommand = new BookApptCommand(patientToBookAppt.getNric(), pastAppt);
         assertThrows(CommandException.class, () -> bookApptCommand.execute(model));
     }
 
-    @Test 
+    @Test
     public void equals() {
-        Appt appt1 = new Appt(LocalDateTime.parse("2025-01-28 13:00", FORMATTER), 
+        Appt appt1 = new Appt(LocalDateTime.parse("2025-01-28 13:00", FORMATTER),
             new HealthService("CONSULT"));
-        Appt appt2 = new Appt(LocalDateTime.parse("2025-01-28 13:00", FORMATTER), 
+        Appt appt2 = new Appt(LocalDateTime.parse("2025-01-28 13:00", FORMATTER),
             new HealthService("CONSULT"));
         BookApptCommand bookApptCommand1 = new BookApptCommand(DANIEL.getNric(), appt1);
         BookApptCommand bookApptCommand2 = new BookApptCommand(FIONA.getNric(), appt2);

@@ -31,13 +31,14 @@ public class DeleteApptCommandTest {
     @Test
     public void execute_validDeleteAppt_success() {
         Patient patientToDeleteAppt = DANIEL;
-        Appt validAppt = new Appt(LocalDateTime.parse("2030-06-06 22:00", FORMATTER), 
+        Appt validAppt = new Appt(LocalDateTime.parse("2030-06-06 22:00", FORMATTER),
             new HealthService("Cancer Screening"));
-        DeleteApptCommand deleteApptCommand = new DeleteApptCommand(patientToDeleteAppt.getNric(), 
+        DeleteApptCommand deleteApptCommand = new DeleteApptCommand(patientToDeleteAppt.getNric(),
             validAppt.getDateTime());
         String expectedMessage = String.format(DeleteApptCommand.MESSAGE_DELETE_APPT_SUCCESS, validAppt);
 
-        CommandResult expectedCommandResult = new ShowPatientInfoCommandResult(expectedMessage, patientToDeleteAppt, true);
+        CommandResult expectedCommandResult = new ShowPatientInfoCommandResult(expectedMessage,
+            patientToDeleteAppt, true);
         ModelManager expectedModel = new ModelManager(model.getClinicConnectSystem(), new UserPrefs());
 
         assertCommandSuccess(deleteApptCommand, model, expectedCommandResult, expectedModel);
@@ -46,27 +47,27 @@ public class DeleteApptCommandTest {
     @Test
     public void execute_nonExistentPatient_throwsCommandException() {
         Nric invalidNric = new Nric("S9999999A");
-        Appt validAppt = new Appt(LocalDateTime.parse("2030-06-06 22:00", FORMATTER), 
+        Appt validAppt = new Appt(LocalDateTime.parse("2030-06-06 22:00", FORMATTER),
             new HealthService("Cancer Screening"));
         DeleteApptCommand deleteApptCommand = new DeleteApptCommand(invalidNric, validAppt.getDateTime());
         assertThrows(CommandException.class, () -> deleteApptCommand.execute(model));
     }
 
-    @Test 
+    @Test
     public void execute_nonExistentAppointment_throwsCommandException() {
         Patient patientToDeleteAppt = DANIEL;
-        Appt nonExistentAppt = new Appt(LocalDateTime.parse("2023-01-28 13:00", FORMATTER), 
+        Appt nonExistentAppt = new Appt(LocalDateTime.parse("2023-01-28 13:00", FORMATTER),
             new HealthService("CONSULT"));
-        DeleteApptCommand deleteApptCommand = new DeleteApptCommand(patientToDeleteAppt.getNric(), 
+        DeleteApptCommand deleteApptCommand = new DeleteApptCommand(patientToDeleteAppt.getNric(),
             nonExistentAppt.getDateTime());
         assertThrows(CommandException.class, () -> deleteApptCommand.execute(model));
     }
 
     @Test
     public void equals() {
-        Appt appt1 = new Appt(LocalDateTime.parse("2030-06-06 22:00", FORMATTER), 
+        Appt appt1 = new Appt(LocalDateTime.parse("2030-06-06 22:00", FORMATTER),
             new HealthService("Cancer Screening"));
-        Appt appt2 = new Appt(LocalDateTime.parse("2024-12-12 10:00", FORMATTER), 
+        Appt appt2 = new Appt(LocalDateTime.parse("2024-12-12 10:00", FORMATTER),
             new HealthService("Vaccination"));
         DeleteApptCommand deleteApptCommand1 = new DeleteApptCommand(DANIEL.getNric(), appt1.getDateTime());
         DeleteApptCommand deleteApptCommand2 = new DeleteApptCommand(CARL.getNric(), appt2.getDateTime());
