@@ -1,9 +1,5 @@
 package seedu.address.ui;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -29,14 +25,19 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL =
             "https://ay2425s1-cs2103t-t14-4.github.io/tp/UserGuide.html#quick-start";
 
-    public static final String HELP_WINDOW_MESSAGE =
-            "For more information, please refer to the user guide.";
+    public static final String HELP_WINDOW_MESSAGE = "For more information, please refer to the user guide.";
+
+    private static final String BACKET_INFO = "Note: The fields inside the square brackets are optional, "
+            + "though for some commands, at least 1 optional field must be given.";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
     private TableView<CommandSummary> commandTable;
+
+    @FXML
+    private StackPane bracketInfo;
 
     @FXML
     private StackPane moreInfo;
@@ -56,9 +57,13 @@ public class HelpWindow extends UiPart<Stage> {
         Label titleLabel = new Label("Command Summary");
         titleLabel.getStyleClass().add("help-title");
         mainContainer.getChildren().add(0, titleLabel);
-        Label infoLabel = new Label(HELP_WINDOW_MESSAGE); // Use HELP_MESSAGE for the label text
-        infoLabel.getStyleClass().add("label"); // Add CSS style
-        moreInfo.getChildren().add(infoLabel); // Add the label to moreInfo
+        Label braketLabel = new Label(BACKET_INFO);
+        braketLabel.getStyleClass().add("label");
+        bracketInfo.getChildren().add(braketLabel);
+
+        Label infoLabel = new Label(HELP_WINDOW_MESSAGE);
+        infoLabel.getStyleClass().add("label");
+        moreInfo.getChildren().add(infoLabel);
         moreInfo.setPrefHeight(30);
         initializeCommandTable();
     }
@@ -103,7 +108,7 @@ public class HelpWindow extends UiPart<Stage> {
                         "delete <INDEX>",
                         "delete 69"),
                 new CommandSummary("Edit Existing Client",
-                        "edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> "
+                        "edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] "
                                 + "[t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>] "
                                 + "[s/ <STATUS>]",
                         "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 "
@@ -139,7 +144,7 @@ public class HelpWindow extends UiPart<Stage> {
         );
 
         commandTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        commandTable.setPrefHeight(450);
+        commandTable.setPrefHeight(465);
     }
 
     /**
@@ -217,18 +222,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Opens the user guide in the default browser.
-     */
-    @FXML
-    private void openUserGuide() {
-        try {
-            Desktop.getDesktop().browse(new URI(USERGUIDE_URL));
-        } catch (IOException | URISyntaxException e) {
-            logger.warning("Error opening user guide: " + e.getMessage());
-        }
     }
 
     /**

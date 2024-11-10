@@ -9,10 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.Label?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -29,6 +26,7 @@
         </padding>
 
         <TableView fx:id="commandTable" VBox.vgrow="ALWAYS" />
+        <StackPane fx:id="bracketInfo" styleClass="bracket-info"/>
 
         <VBox fx:id="helpMessageContainer" styleClass="help-message-container">
           <StackPane fx:id="moreInfo" styleClass="more-info" />
