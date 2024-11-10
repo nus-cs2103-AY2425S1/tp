@@ -837,7 +837,7 @@ Method 2:
 <div style="page-break-after: always;"></div>
 
 ## Command summary
-Here's the updated table with the **Unmark Paid** action added:
+
 
 | Action                   | Format                                                                                                     |
 |--------------------------|------------------------------------------------------------------------------------------------------------|
