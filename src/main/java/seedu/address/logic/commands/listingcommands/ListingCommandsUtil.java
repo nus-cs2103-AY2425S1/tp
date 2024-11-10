@@ -23,8 +23,8 @@ import seedu.address.model.person.Role;
 public class ListingCommandsUtil {
 
     /**
-     * Throws an exception if the person is not a Buyer. The error message is
-     * formatted using {@link seedu.address.logic.commands.listingcommands.AddBuyersToListingCommand#MESSAGE_PERSON_NOT_BUYER}
+     * Throws an exception if the person is not a Buyer. The error message is formatted using
+     * {@link seedu.address.logic.commands.listingcommands.AddBuyersToListingCommand#MESSAGE_PERSON_NOT_BUYER}
      *
      * @param person the person to check
      * @param role the role of the person
