@@ -108,10 +108,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find all n/John` Command" />
 
-The sequence diagram below illustrates another interaction within the `Logic` component, taking `execute("demote 1")` API call as an example.
-
-<puml src="diagrams/DemoteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `demote 1` Command" />
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g. `DeleteCommandParser`) and uses it to parse the command.
@@ -192,6 +188,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 * Can type fast.
 * Prefers typing to mouse interactions.
 * Is reasonably comfortable using CLI apps.
+* Their company has employees with contract end dates.
 
 **Value proposition**:
 * Manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app.
@@ -297,6 +294,53 @@ Use case ends.
    * 1b1. The list is empty.
 
    Use case ends.
+
+**Use case: Promoting a potential hire to an employee**
+
+**MSS**
+
+1. User request to list person
+2. System shows a list of person
+3. User request to change a specific person in the list into an employee
+4. System changes the person to an employee
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+   Use case ends.
+
+* 3a. The person is already an employee.
+
+  * 3a1. System shows an error message
+
+    Use case resumes at step 2
+
+**Use case: Demoting an employee to a potential hire**
+
+**MSS**
+
+1. User request to list person
+2. System shows a list of person
+3. User request to change a specific person in the list into a potential hire
+4. System changes the person to a potential hire
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+   Use case ends.
+
+* 3a. The person is already a potential hire.
+
+    * 3a1. System shows an error message
+
+      Use case resumes at step 2
+
 
 **Use case: Ask for help**
 
@@ -721,8 +765,11 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Additional uml diagrams for other cases**
 
 <puml src="diagrams/ListSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `list all` Command" />
-Diagram for interactions inside the logic component for the `list all` command.
-</box>
+Diagram for interactions inside the `Logic` component, taking execute("list all") API call.
+
+<puml src="diagrams/DemoteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `demote 1` Command" />
+Diagram for interactions inside the `Logic` component, taking execute("demote 1") API call.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

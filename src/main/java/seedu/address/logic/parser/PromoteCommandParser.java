@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DemoteCommand;
 import seedu.address.logic.commands.PromoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContractEndDate;
@@ -22,7 +21,7 @@ public class PromoteCommandParser implements Parser<PromoteCommand> {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DemoteCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PromoteCommand.MESSAGE_USAGE));
         }
         String[] argsArray = trimmedArgs.split("\\s+");
 

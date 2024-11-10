@@ -31,6 +31,15 @@ public class PromoteCommandParserTest {
 
     @Test
     public void parse_invalidArguments_failure() {
+        // missing index and contract end date
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // missing contract end date
+        assertParseFailure(parser, "1" , MESSAGE_INVALID_FORMAT);
+
+        // missing index
+        assertParseFailure(parser, VALID_CONTRACT_END_DATE_BOB, MESSAGE_INVALID_FORMAT);
+
         // negative index
         assertParseFailure(parser, "-5 " + VALID_CONTRACT_END_DATE_BOB, MESSAGE_INVALID_FORMAT);
 
