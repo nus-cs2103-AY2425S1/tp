@@ -20,6 +20,9 @@ public class SortCommandParserTest {
     public void parse_validArgs_returnsSortCommand() {
         // Empty arguments should return a valid SortCommand.
         assertParseSuccess(parser, "", new SortCommand());
+
+        // white spaces only
+        assertParseSuccess(parser, "   ", new SortCommand());
     }
 
     @Test

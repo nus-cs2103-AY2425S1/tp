@@ -30,11 +30,29 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "  Alice   Bob  ", expectedFindCommand);
+
+        // name with integers
+        expectedFindCommand = new FindCommand(
+                new NameOrPhoneContainsKeywordsPredicate(Arrays.asList("Alice123")));
+        assertParseSuccess(parser, "Alice123", expectedFindCommand);
+
+        // only integers
+        expectedFindCommand = new FindCommand(
+                new NameOrPhoneContainsKeywordsPredicate(Arrays.asList("12345")));
+        assertParseSuccess(parser, "12345", expectedFindCommand);
+
+        // very long keyword
+        String longKeyword = "a".repeat(255);
+        expectedFindCommand = new FindCommand(
+                new NameOrPhoneContainsKeywordsPredicate(Arrays.asList(longKeyword)));
+        assertParseSuccess(parser, longKeyword, expectedFindCommand);
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "   *+/ ", MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "@!#%", MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "#Alice#", MESSAGE_CONSTRAINTS);
     }
 
 }
