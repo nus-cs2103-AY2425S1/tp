@@ -885,6 +885,8 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
 1. Edit a company
 
+   1. Prerequisites: List all companies using the `list` command. Multiple companies in the list.<br>
+
    1. Test case: `edit INDEX n/NAME` (where `NAME` is not the name of an existing company) <br>
       Expected: The company at the corresponding INDEX has its name changed to `NAME`. A message containing edit details is displayed in the result box.
 
