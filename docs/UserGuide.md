@@ -172,12 +172,14 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 **Parameter Reference:**
 * `INDEX`: Positive integer (1, 2, 3, ...)
 * `NAME`: Name of person/item
-* `PHONE_NUMBER`: Phone number
+* `PHONE_NUMBER`: Phone number (must be between 3 and 15 digits)
 
 
- **Note:** Phone number validation is not restrictive in BakeBuddy. Hence invalid phone numbers may be allowed to be added. We will aim to improve this feature in subsequent iterations. 
+ **Note:** Phone number is not restrictive in BakeBuddy. Hence invalid phone numbers may be allowed to be added. We will aim to improve phone number validation features in subsequent iterations. 
 
 * `EMAIL`: Email address
+
+**Note:** Email address is not restrictive in BakeBuddy. Hence invalid addresses may be allowed to be added. We will aim to improve email address validation features in subsequent iterations.
 * `ADDRESS`: Physical address
 * `INFORMATION`: Additional customer details
 * `INGREDIENTS_SUPPLIED`: List of ingredients (for suppliers)
