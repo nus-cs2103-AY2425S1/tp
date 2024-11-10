@@ -580,8 +580,9 @@ Format: `searchpa pa/PUBLIC_ADDRESS`
 <box type="tip" seamless>
 
 The field PUBLIC_ADDRESS is not cap sensitive.
-This command only searches the current list of public addresses displayed(eg if all contacts is displayed
-search pa will perform a global search. if a filtered list of contacts is displayed, search pa will perform a local
+This command only searches the current list of public addresses displayed (eg if all contacts are displayed
+search pa will perform a global search. if a filtered list of contacts are
+displayed, search pa will perform a local
 search on list of contacts displayed).
 </box>
 
