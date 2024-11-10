@@ -539,22 +539,23 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch & Shutdown
 
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file 
+      * **Expected:** Shows the GUI with a set of sample contacts and events. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      * **Expected:** The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
 
 ### Listing all persons
 
@@ -701,11 +702,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+**Dealing with missing/corrupted data files**
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. **Scenario:** Missing data files (i.e. `addressbook.json` and `eventbook.json`).
+   * This can be simulated by deleting the data files.
+   * **Expected Behavior:** LegacyLink starts with the sample contacts and sample event, with the new data files being automatically created.
+2. **Scenario:** Corrupted data files (i.e. `addressbook.json` and `eventbook.json`).
+   * This can be simulated by modifying the data files to contain malformed data.
+   * **Expected Behavior:** LegacyLink starts with empty event and contact books.
 
-1. _{ more test cases …​ }_
 
 ## **Appendix: Effort**
 
