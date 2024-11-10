@@ -376,7 +376,7 @@ Finds contacts whose tags are the same as the specified keyword.
 
 **Examples**:
 
-- `filtertag paidFee` finds contacts who have tags saved as `paidFee`
+- `filtertag paid` finds contacts who have tags saved as `paid`
 
 
 #### Tracking contacts by category: `track`
@@ -412,33 +412,35 @@ Adds additional specified tag(s) to the specified contact or all contacts withou
 
 **Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`
 
-| Parameter Name | Description                         | Required   |
-|----------------|-------------------------------------|------------|
-| `INDEX`        | Index number of the contact to tag  | Compulsory |
-| `t/TAG`        | Tag to add to the specified contact | Compulsory |
-| `t/MORE_TAG` |  More tags to add | Optional|
+| Parameter Name | Description                                                       | Required   |
+|----------------|-------------------------------------------------------------------|------------|
+| `INDEX`        | Index number of the contact to tag from the displayed person list | Compulsory |
+| `t/TAG`        | Tag to add to the specified contact                               | Compulsory |
+| `t/MORE_TAG` | More tags to add                                                  | Optional|
 
 **Format 2**: `tag all t/TAG [t/MORE_TAG]…​`
 
-| Parameter Name | Description                                                              | Required   |
-|----------------|--------------------------------------------------------------------------|------------|
+| Parameter Name | Description                                                                                                              | Required   |
+|----------------|--------------------------------------------------------------------------------------------------------------------------|------------|
 | `all`          | Indicates that the tagging operation applies to all contacts in the list | Compulsory |
-| `t/TAG`        | Tag to add to every contact in the list                                  | Compulsory |
-| `t/MORE_TAG`   | More tags to add                                                         | Optional|
+| `t/TAG`        | Tag to add to every contact in the list                                                                                  | Compulsory |
+| `t/MORE_TAG`   | More tags to add                                                                                                         | Optional|
 
-* Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided <br>
+* Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided
   no duplicate tag(s) are found in all contacts.
 
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
-
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The tag is case-insensitive. For example, `partner` will match `PartnEr`.
-* Only full words will be matched e.g. `partner` will not match `partners`.
-* The added tags are displayed on the contact in alphabetical order. <br>
-  e.g. `t/partner t/education` will display `education` before `partner`.
+* Constraints:
+  * `INDEX` **must be a positive integer** 1, 2, 3, …​
+  * `TAG` and `MORE_TAG`  must be alphanumeric characters, non-empty, and cannot contain spaces.
+* `tag all t/TAG` adds the tag `TAG` to all contacts currently shown in the list, not all contacts in the database.
+* For both formats 1 and 2, 
+  * The tag is case-insensitive. For example, `partner` will match `PartnEr`.
+  * Only full words will be matched e.g. `partner` will not match `partners`.
+  * The added tags are displayed on the contact in alphabetical order. <br>
+    e.g. `t/partner t/education` will display `education` before `partner`.
 
 </div>
 
@@ -447,8 +449,11 @@ Adds additional specified tag(s) to the specified contact or all contacts withou
 - `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list
 
 <div markdown="span" class="alert alert-primary">💡 **Tip:**
-Tag labelled with "paid" will have green background to indicate student has paid their membership fee.
+
+* To tag all students with the `paid` tag, simply use `track student` followed by `tag all t/paid`.
+*  `paid` tags are easily distinguishable! They have a green background to indicate that the student has paid their membership fee.
 </div>
+
 ![View Contact UI](images/paidTag.png)
 
 

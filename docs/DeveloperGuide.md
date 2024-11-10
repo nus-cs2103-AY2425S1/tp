@@ -634,6 +634,8 @@ testers are expected to do more *exploratory* testing.
      **Expected**: 2nd and 3rd contacts are deleted. Status message confirms the action, timestamp updated.
    - **Test case**: `delete 0`  
      **Expected**: No contact deleted. Error message shown. Status bar unchanged.
+   - **Test case**: `delete all`  
+     **Expected**: All contacts currently shown in the list are deleted. Status message confirms the action, timestamp updated.
 
 ### Locating persons by name
 
@@ -659,6 +661,8 @@ testers are expected to do more *exploratory* testing.
    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
    - **Test case**: `track student`  
      **Expected**: All student contacts are shown. Status message updates.
+   - **Test case**: `track company`  
+     **Expected**: All company contacts are shown. Status message updates.
    - **Test case**: `track non-category`  
      **Expected**: No contacts found. Error message shown. Status bar unchanged.
 
@@ -667,18 +671,22 @@ testers are expected to do more *exploratory* testing.
 1. **Adding tags to an existing contact**
    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
    - **Test case**: `tag 1 t/Y2 t/computerScience`  
-     **Expected**: Tags added to the first contact. Status message updates. Timestamp updated.
+     **Expected**: Tags added to the first contact currently shown in the list. Status message updates. Timestamp updated.
    - **Test case**: `tag 0 t/invalid`  
-     **Expected**: No tags added. Error message shown. Status bar unchanged.
+     **Expected**: No tag added. Error message shown. Status bar unchanged.
+   - **Test case**: `tag all t/contacted`  
+     **Expected**: Tag added to all contacts currently shown in the list. Status message updates. Timestamp updated.
 
 ### Deleting tag(s) from contact
 
 1. **Deleting tags from an existing contact**
-   - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+   - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed, where all contacts have the tag `contacted`.
    - **Test case**: `deletetag 1 t/Y2 t/computerScience`  
-     **Expected**: Tags removed from the first contact. Status message updates. Timestamp updated.
+     **Expected**: Tags removed from the first contact currently shown in the list. Status message updates. Timestamp updated.
    - **Test case**: `deletetag 0 t/invalid`  
      **Expected**: No tags removed. Error message shown. Status bar unchanged.
+   - **Test case**: `deletetag all t/contacted`  
+     **Expected**: Tag removed from all contacts currently shown in the list. Status message updates. Timestamp updated.
 
 ### Importing CSV files
 
