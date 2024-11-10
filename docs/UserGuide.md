@@ -439,6 +439,7 @@ Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **When editing Person or Event name in View mode**, the Person or Event being viewed will be exited and a blank screen will be displayed. The remedy is to use the `view` command to view the new Contact or Event name.
 3. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+4. **When using the `add person` and `add event` commands**, if you enter an empty prefix for tags and contacts to set as no tags or points of contacts (e.g., `t/` or `p/`), the application will not recognize the empty prefix. The remedy is to remove the prefix entirely if you are not adding any tags or points of contacts.
 
 ---
 
