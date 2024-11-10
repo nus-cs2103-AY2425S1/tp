@@ -45,13 +45,16 @@ public class TagCommandParserTest {
         // Missing tags or index should throw format error
         String missingTagInput = "1";
         String missingIndexInput = "t/friend";
-        String emptyInput = "";
+        String emptyInput = " ";
+        String missingTagNameInput = "t/ ";
 
         assertParseFailure(parser, missingTagInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         assertParseFailure(parser, missingIndexInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         assertParseFailure(parser, emptyInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, missingTagNameInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
     }
 
