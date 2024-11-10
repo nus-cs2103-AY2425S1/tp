@@ -341,7 +341,6 @@ Adds a group to the T_Assistant。
 
 1. `Group Name` is the unique identifier for each group, so no two groups can have the same group name.
 2. Leading 0s in `Group Name` will be truncated, e.g. `CS2103-F00012-002` will be read as `CS2103-F12-2`.
-3.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
