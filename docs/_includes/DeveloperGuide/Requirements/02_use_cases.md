@@ -74,7 +74,7 @@ Actor: New User
 **UC05 - List all Person**
 
 **MSS**
-1. A user requests to list all person after searching for a specific person.
+1. A user requests to list all person.
 2. The system resets the displayed filtered list.
 3. The system displays the list of all person.
    <br>Use case ends.<br>
