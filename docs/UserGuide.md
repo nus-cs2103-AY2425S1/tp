@@ -244,13 +244,15 @@ Format: `view`
 
 Adds a meet-up to the meet-up list.
 
-Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_NAME]…​`
+Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO n/BUYER_NAME [n/MORE_BUYER_NAMES]…​`
 
 * New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO.
 
 * MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`.
 
 * MEETUP_TO must be a date/time that is later than MEETUP_FROM.
+
+* There must be at least one BUYER_NAME added.
 
 * Buyers that exist in buyer list will be marked as green, while those that don't will be marked as red.
 

@@ -661,11 +661,13 @@ Expected: Properties with addresses containing the keywords "Aljunied," "Marsili
 
 ## **Appendix: Planned Enhancements**
 
+Our team size is 5.
+
 ### Support for special characters in names
 * We plan to add support for special characters in names such as Lupita Nyong'o, Adib S/O Tharman etc.
 
 ### Restriction of property types
-* Property types will be given restrictions in the future such that nonsensical types will not be accepted.
+* Property types will be given restrictions in the future such that nonsensical types will not be accepted. We will limit types to common ones such as `HDB`, `Landed Property`, `Condominium` etc.
 
 ### Improved duplication detection
 * Person duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
