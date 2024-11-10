@@ -451,26 +451,23 @@ MSS
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to store up to 1000 contacts persistently.
-3.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-5.  Should be able to store up to 10000 goods persistently.
-6.  Updating persistent storage should not result in unnecessary data modifications.
-7.  Startup time for the application should be less than 3 seconds on all _mainstream OS_.
-8.  The system should perform commands within 3 seconds on all _mainstream_OS.
-9.  The system should be not crash unexpectedly on all _mainstream OS_ during the performing of commands.
-10. The _help system_ must be easily accessible for users.
-11. All error messages should be readable (in layman's terms) and provide corrective actions whenever possible.
-12. Naming and functions of commands should be similar to it's meaning in natural english language, and should not be too abstract.
-13. The application must be able to export data in _commonly used formats_.
-14. The application must not require any internet connection to function.
-15. The codebase should be well documented with comments or JavaDoc to explain key modules and functions.
-16. The project is not required to handle any messaging functions between users and contacts.
-17. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
-18. Price of goods should not be negative.
-19. Quantity of goods should not be negative.
-20. Arrival date of goods should not be earlier than the current date.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to store up to 1000 contacts persistently.
+3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+4. Should be able to store up to 10000 goods persistently.
+5. Updating persistent storage should not result in unnecessary data modifications.
+6. Startup time for the application should be less than 3 seconds on all _mainstream OS_.
+7. The system should perform commands within 3 seconds on all _mainstream_OS.
+8. The system should be not crash unexpectedly on all _mainstream OS_ during the performing of commands.
+9. All error messages should be readable (in layman's terms) and provide corrective actions whenever possible.
+10. The application must be able to export data in _commonly used formats_.
+11. The application must not require any internet connection to function.
+12. The codebase should be well documented with comments or JavaDoc to explain key modules and functions.
+13. The project is not required to handle any messaging functions between users and contacts.
+14. Key functions in the project should be tested with JUnit, with a minimal coverage of 75%.
+15. Price of goods should not be negative.
+16. Quantity of goods should not be negative.
+17. Arrival date of goods should not be earlier than the current date.
 
 ### Glossary
 
