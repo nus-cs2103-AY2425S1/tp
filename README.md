@@ -4,7 +4,7 @@
 
 ## This is ClinicConnect
 
-ClinicConnect is a unified platform for clinic assistants in private health screening clinics to manage incoming and current patient details. Clinic assistants can then perform many tasks in a single platform.
+ClinicConnect is the **the *ideal* patient management and appointment tracker system for health-screening clinics.** With *unique* functions and layouts tailored to your workflows as health screening clinic assistants, ClinicConnect can get your patient management tasks done faster, more efficiently, and hassle-free.
 
 * For the detailed documentation of this project, see the **[ClinicConnect Product Website](https://ay2425s1-cs2103t-f10-2.github.io/tp/)**.
 
