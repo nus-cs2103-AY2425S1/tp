@@ -408,7 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Use case ends.
 
 **Extensions:**
-* 3a. Wrong add command
+* 3a. Wrong edit command
     * 3a1. GAB responds with wrong command format error message
     * 3a2. User enters new data
     * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
