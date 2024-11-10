@@ -25,12 +25,17 @@ public class DeleteYCommand extends Command {
     public static final String MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS = "Address book has been cleared!";
     public static final String MESSAGE_DELETE_WEDDING_BOOK_SUCCESS = "Wedding book has been cleared!";
     public static final String MESSAGE_NO_PENDING_OPERATION = "No pending delete operation.";
+
+    public static final String MESSAGE_MODIFY_BEFORE_DELETE = """
+            Delete operation failed. If you modified the person (any field) before pressing y or n:
+            Re-enter the modified person's details and delete again.
+            We have reverted the delete operation to prevent accidental operations.""";
     private final Person personToDelete;
     private final Wedding weddingToDelete;
 
     /**
      * Creates a DeleteYCommand to delete the specified {@code Person} once the confirmation is given.
-     * @param personToDelete
+     * @param personToDelete Person to be deleted.
      */
     public DeleteYCommand(Person personToDelete) {
         this.personToDelete = personToDelete;
@@ -39,7 +44,7 @@ public class DeleteYCommand extends Command {
 
     /**
      * Creates a DeleteYCommand to delete the specified {@code Wedding} once the confirmation is given.
-     * @param weddingToDelete
+     * @param weddingToDelete Wedding to be deleted.
      */
     public DeleteYCommand(Wedding weddingToDelete) {
         this.weddingToDelete = weddingToDelete;
@@ -80,6 +85,7 @@ public class DeleteYCommand extends Command {
         }
 
         if (!(weddingToDelete == null)) {
+
             model.deleteTagsWithWedding(weddingToDelete);
             model.deleteWedding(weddingToDelete);
             // Clear history of weddingToDelete from StaticContext once delete operation is done
@@ -89,6 +95,12 @@ public class DeleteYCommand extends Command {
         }
 
         if (!(personToDelete == null)) {
+
+            if (!(model.hasExactPerson(personToDelete))) {
+                StaticContext.clearStaticContext();
+                throw new CommandException(MESSAGE_MODIFY_BEFORE_DELETE);
+            }
+
             Person personToDeleteWithNoTag = model.personWithAllTagsRemoved(personToDelete);
             model.deletePerson(personToDeleteWithNoTag);
             // Clear history of personToDelete from StaticContext once delete operation is done
