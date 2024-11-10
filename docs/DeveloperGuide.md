@@ -646,13 +646,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Undoing a `delete` command
 
-   1. Prerequisites: The previous command is a `delete` command
+   1. Prerequisites: The previous command is a `delete` command.
    2. Test case: `undo`<br>
       Expected: The previous deletion is reverted. Details of the restored contact shown in the status message.
 
 1. No command to undo
 
-   1. Prerequisites: No undoable commands have been executed since the starting of the app
+   1. Prerequisites: No undoable commands have been executed since the starting of the app.
    2. Test case: `undo`<br>
       Expected: No command is undone. Error message displayed in the status message.
 
