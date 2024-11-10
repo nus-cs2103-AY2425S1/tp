@@ -6,7 +6,7 @@
 
 #  UGTeach User Guide
 
-UGTeach is a **desktop app for managing your students' contacts** that aims to empower undergraduate private tutors to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
+UGTeach is a **desktop app for managing your students' contacts** that aims to empower **Singapore-based undergraduate private tutors** to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
 
 Whether you're a Command Line Interface (CLI) pro or new to command lines, **we've got you covered**. Our app offers both a **CLI interface for advanced users** and a **GUI for those who prefer a more visual experience**.
 If you can type fast, UGTeach can get your contact management tasks done **faster than traditional GUI apps**.
@@ -61,12 +61,21 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
-**Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
+**Owe**    | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
 **Income**  | `income`
 **Remind**   | `remind`
 **Clear**  | `clear`
 **Exit**   | `exit`
+
+<box type="warning" header="##### Notes">
+
+* The prefixes (e.g. `a/`, `s/` or `paid`) are case-insensitive, i.e. you can use `a/`, `s/` or `pAId/` instead.
+
+* You should not use the prefixes in any other cases, e.g. as content of **ADDRESS**.
+</box>
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -94,7 +103,6 @@ Action     | Format, Examples
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-<div style="page-break-after: always;"></div>
 
 ### Viewing help : `help`
 
@@ -104,6 +112,16 @@ Shows a message explaining how to access the help page.
 
 **Format**: `help`
 
+### Listing all students: `list`
+
+Shows a list of all students in the address book.
+
+**Format:** `list`
+
+**Output:**
+![listResult.png](images/listResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a student: `add`
 
@@ -145,6 +163,8 @@ Adds a student to the address book.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a student: `edit`
 
 Edits an existing student in the address book.
@@ -163,29 +183,18 @@ Edits an existing student in the address book.
 <box type="important" header="##### Constraints">
 
 * The <md>**INDEX**</md> refers to the index number shown in the **displayed student** list. The index **must be a positive integer** 1, 2, 3, …​
-
 * At least one of the optional fields must be provided. You may refer to
 [Constraints of Add command](#constraints) for acceptable values of each field.
-
 * Existing values will be updated to the input values.
 </box>
 
 <box type="tip" header="##### Tips">
 
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
-[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settle-payments-from-students-settle)
+[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
-
 * <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
 </box>
-
-<div style="page-break-after: always;"></div>
-
-### Listing all students: `list`
-
-Shows a list of all students in the address book.
-
-Format: `list`
 
 <div style="page-break-after: always;"></div>
 
@@ -208,6 +217,8 @@ Deletes the specified student from the address book.
 * The **INDEX must be a positive integer** 1, 2, 3, …​
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Finding students' information: `find`
 
@@ -251,7 +262,7 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 ### Receiving payment from a student: `pay`
 
-Updates the amount of tuition fee paid by the specified student after a lesson.
+Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
 
 **Format:** `pay INDEX hr/HOURS_PAID`
 
@@ -279,7 +290,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 
 ### Recording unpaid tuition fee of a student: `owe`
 
-Updates the amount of tuition fee owed by a specified student after a lesson.
+Updates the amount of tuition fee owed by a specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
 
 **Format:** `owe INDEX hr/HOURS_OWED`
 
@@ -305,17 +316,17 @@ Updates the amount of tuition fee owed by a specified student after a lesson.
 
 <div style="page-break-after: always;"></div>
 
-### Settle payments from students: `settle`
+### Settling outstanding fees from students: `settle`
 
-Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student.
+Updates the amount of tuition fee paid and the amount of tuition fee owed by the student after the student pays for his/her outstanding tuition fees.
 
 **Format:** `settle INDEX amount/AMOUNT`
 
 **Example:**
-* `settle 1 amount/500.00`
+* `settle 1 amount/50.00`
 
 **Output:**
-![settleResult.jpg](images%2FsettleResult.jpg)
+![settleResult.png](images/settleResult.png)
 
 <box type="important" header="##### Constraints">
 
@@ -324,8 +335,6 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 * **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
 
 </box>
-
-<div style="page-break-after: always;"></div>
 
 ### Showing income data: `income`
 
@@ -361,11 +370,15 @@ to find your schedule for a specific day of the week.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all data from the data file of UGTeach.
+
+<box type="warning" header ="##### Caution">
+
+This action is irreversible and your deleted data cannot be recovered. 
+
+</box>
 
 **Format:** `clear`
-
-<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
@@ -386,14 +399,8 @@ If your changes to the data file makes its format invalid, UGTeach will discard 
 Furthermore, certain edits can cause the application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-
-
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 

@@ -114,6 +114,22 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " d/Monday Tuesday n/Alice1 Bob", expectedFindCommand);
     }
 
+    @Test
+    public void parse_validArgsMixedCasePrefixes_returnsFindCommand() {
+        FindCommand expectedFindCommand = new FindCommand(Arrays.asList(
+                schedulePredicateKeywords,
+                namePredicateKeywords)
+        );
+
+        // mixed-case prefix n/
+        assertParseSuccess(parser, " N/Alice1 Bob d/Monday Tuesday", expectedFindCommand);
+
+        // mixed-case prefix d/
+        assertParseSuccess(parser, " n/Alice1 Bob D/Monday Tuesday", expectedFindCommand);
+
+        // mixed-case both prefixes
+        assertParseSuccess(parser, " N/Alice1 Bob D/Monday Tuesday", expectedFindCommand);
+    }
 
 
 

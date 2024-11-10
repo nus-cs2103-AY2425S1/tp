@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DESC_MIXED_CASE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -72,5 +73,15 @@ public class SettleCommandParserTest {
         String userInput = INDEX_FIRST_STUDENT.getOneBased() + VALID_AMOUNT_DESC + INVALID_AMOUNT_DESC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
+    }
+
+    @Test
+    public void parse_validValueMixedCase_success() {
+        SettleAmount settleAmount = new SettleAmount("5.00");
+        String userInput = INDEX_FIRST_STUDENT.getOneBased() + " " + VALID_AMOUNT_DESC_MIXED_CASE;
+
+        SettleCommand expectedCommand = new SettleCommand(INDEX_FIRST_STUDENT, settleAmount);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
