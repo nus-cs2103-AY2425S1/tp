@@ -29,6 +29,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+
         if (keywords.isEmpty()) {
             return false;
         }

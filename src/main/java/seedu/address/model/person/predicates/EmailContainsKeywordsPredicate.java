@@ -28,6 +28,9 @@ public class EmailContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        if (person.getEmail() == null) {
+            return false;
+        }
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword)
                                     || person.getEmail().value.toLowerCase().contains(keyword.toLowerCase()));
