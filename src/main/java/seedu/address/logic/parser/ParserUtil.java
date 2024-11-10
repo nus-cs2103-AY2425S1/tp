@@ -159,7 +159,7 @@ public class ParserUtil {
             return LocalDateTime.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
             if (e.getCause() != null) {
-                throw new ParseException("Invalid date");
+                throw new ParseException("Invalid date or time");
             } else {
                 throw new ParseException("Date must be in the format: " + AttendanceList.DATE_TIME_FORMAT);
             }
