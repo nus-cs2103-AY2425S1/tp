@@ -164,19 +164,23 @@ Adds a student to AdmiNUS.
 student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
-| Parameter Name   | Description                                                                                    | Required   |
-| ---------------- |------------------------------------------------------------------------------------------------| ---------- |
-| `n/NAME`         | Name of the student                                                                            | Compulsory |
-| `id/STUDENT_ID`  | Student ID issued by NUS (must be 7 digits enclosed with two capital letters, e.g., A1234567Z) | Compulsory |
-| `p/PHONE_NUMBER` | Contact number                                                                                 | Compulsory |
-| `e/EMAIL`        | Email address                                                                                  | Compulsory |
-| `a/ADDRESS`      | Physical address                                                                               | Compulsory |
-| `t/TAG`          | Tags to categorize contact (cannot contain spaces)                                             | Optional   |
+| Parameter Name   | Description                                                                                                                                                                                                                                                                                                                                                                          | Required   |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------- |
+| `n/NAME`         | Name of the student (can include alphanumeric characters, spaces, and the `/` character for common name formats like s/o or d/o, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., n/).                                                                                                                                                               | Compulsory |
+| `id/STUDENT_ID`  | Student ID issued by NUS (must be 7 digits enclosed with two capital letters, e.g., A1234567Z)                                                                                                                                                                                                                                                                                       | Compulsory |
+| `p/PHONE_NUMBER` | Contact number (must be at least 3 digits)                                                                                                                                                                                                                                                                                                                                           | Compulsory |
+| `e/EMAIL`        | Email address in the format local-part@domain and must adhere to the following constraints: 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. | Compulsory |
+| `a/ADDRESS`      | Physical address (can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., n/))                                                                                                                                                                                                                                                          | Compulsory |
+| `t/TAG`          | Tags to categorize contact (must be alphanumeric characters and no spaces)                                                                                                                                                                                                                                                                                                           | Optional   |
 
 <div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
 
 <div markdown="span" class="alert alert-primary">💡 **Tip:**
 A student can have any number of tags (including 0).
+</div>
+
+<div markdown="span" class="alert alert-warning"> ⚠️ **Important**: 
+Important: While names can include / for valid formats, using parameter-like sequences (e.g., n/, p/) within the name field will result in an error.
 </div>
 
 **Examples**:
@@ -560,6 +564,8 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 - **_CSV (Comma-separated values)_** : A text file format that uses commas to separate values, and newlines to separate records.
 - **_GUI (Graphical User Interface)_** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
 - **_NUS Club Administrator_** : An NUS club admin user responsible for managing contacts of students, companies, etc.
+<a name="parameter-like-sequence"></a>
+- **_Parameter-like Sequence_**: A combination of a forward slash (/) and a single character that resembles the prefixes used in commands (e.g., n/, p/, e/). These are used to specify input fields in commands and should not appear in any text fields.
 - **_Relative Path_** : A file path that is relative to the current working directory of the user or application.
 - **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z).
 - **_Tag_** : A keyword or label associated with a contact that allows for easy grouping and filtering.
