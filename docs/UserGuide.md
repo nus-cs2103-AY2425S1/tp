@@ -524,9 +524,11 @@ Deletes the public address of a person.
 
 Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
+
 * Deletes the public address of the person at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
+
 
 * The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
   `SOL` etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
@@ -536,10 +538,15 @@ Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
   that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the person 
   at the specified `INDEX` will be deleted. This field is **case-insensitive**.
 
+* The Wallet Name is Case-sensitive. It will not work unless the Wallet Name is exactly the same as the one in the
+  contact.
+
 Examples:
+
 
 * `deletepa 1 c/BTC l/wallet1` deletes the public address of the first person in the BTC network with the wallet name
   `wallet1`.
+
 
 * `deletepa 3 c/BTC` deletes all the public addresses of the third person in the BTC network.
 
