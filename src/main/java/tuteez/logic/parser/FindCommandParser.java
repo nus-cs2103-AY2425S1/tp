@@ -1,5 +1,6 @@
 package tuteez.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static tuteez.logic.Messages.MESSAGE_EMPTY_KEYWORD;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_PREFIX_FOR_FIND;
@@ -8,6 +9,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
+import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,11 +39,8 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
+        requireNonNull(args);
+        validateNonEmptyArgs(args, FindCommand.MESSAGE_USAGE);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS,
                 PREFIX_TAG, PREFIX_LESSON_DAY, PREFIX_LESSON_TIME);
 
