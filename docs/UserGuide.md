@@ -549,7 +549,7 @@ You can manage the appointments through different commands, which can be seen in
 
 ##### Adding an appointment: `add appt`
 
-You can an appointment to DocTrack. 
+You can add an appointment to DocTrack. 
 
 **Format**: `add appt i/PERSON_ID ty/APPOINTMENT_TYPE d/DATE_TIME [s/SICKNESS] [m/MEDICINE]`
 - The format of `DATE_TIME` is `yyyy-MM-dd HH:mm`. For example, `2025-03-20 10:30`.
