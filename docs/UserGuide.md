@@ -412,6 +412,7 @@ A client can have any number of tags (including 0).
 🔔
 **Note:**
 * `NAME` currently does not accept special characters such as `/`, `@`, and `,`. This functionality will be added in coming updates. For more information on the requirements of each arguments, refer back to [Arguments](#4-4-arguments).
+* Clients are considered duplicates if `NAME` and `PHONE` match with another existing client.
 </div>
 
 **On success:**
