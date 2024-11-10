@@ -746,6 +746,7 @@ The table below provides the definitions for the key terms we will be using thro
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Term      | Definition                                                                                                                                                                         |
 |-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Alphanumeric | Refers to characters in Standard English, including the 26 letters of the Latin alphabet and the numbers 0-9.                                                                   |
 | Command   | An input that is given to the application to perform a specific action. Commands are typically entered via the command box in the application.                                     |
 | CLI       | Command Line Interface (CLI) is a type of text-based interface that is used to interact with software via commands.                                                                |
 | GUI       | Graphical User Interface (GUI) is a type of interface that allows users to interact with electronic devices through graphical icons and visual indicators.                         |
@@ -755,7 +756,6 @@ The table below provides the definitions for the key terms we will be using thro
 | Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.                                   |
 | Prefix    | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter. |
 | Preamble  | A preamble refers to text before the first valid prefix.                                                                                                                           |
-| Alphanumeric | Refers to characters in Standard English, including the 26 letters of the Latin alphabet and the numbers 0-9. |
 
 [Back to Table of Contents](#table-of-contents)
 
