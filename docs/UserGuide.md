@@ -86,9 +86,9 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-## List of Commands
-### Contact Management
-#### General Contacts
+# List of Commands
+## Contact Management
+### General Contacts
 
 | Command | Format | Example |
 | --- | --- | --- |
@@ -107,7 +107,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 | --- | --- | --- |
 | [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]` | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
 
-#### Supplier Specific
+### Supplier Specific
 
 | Command | Format | Example |
 | --- | --- | --- |
@@ -115,8 +115,8 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-### Order Management
-#### Customer Orders
+## Order Management
+### Customer Orders
 
 | Command | Format | Example |
 | --- | --- | --- |
@@ -137,8 +137,8 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-### Catalogue Management
-#### Ingredient Catalogue
+## Catalogue Management
+### Ingredient Catalogue
 
 | Command | Format | Example |
 | --- | --- | --- |
@@ -146,7 +146,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 | [Remove Ingredient](#remove-ingredient-command) | `removeIngredient NAME` | `removeIngredient Flour` |
 | [View Ingredient Catalogue](#view-ingredientcatalogue-command) | `viewIngredientCatalogue` | `viewIngredientCatalogue` |
 
-#### Pastry Catalogue
+### Pastry Catalogue
 
 | Command | Format | Example |
 | --- | --- | --- |
@@ -156,7 +156,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-### General Commands
+## General Commands
 
 | Command                     | Format | Example |
 |-----------------------------| --- | --- |
@@ -187,9 +187,9 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## FAQ
+# FAQ
 
-### Q1: Why can't I see the new order under the customer's/supplier's contact details immediately after adding it?
+## Q1: Why can't I see the new order under the customer's/supplier's contact details immediately after adding it?
 **A:** When you add a new order, you need to follow these steps to see it reflected in the contact details:
 1. First, add the order using the appropriate command (`addCustomerOrder` or `addSupplyOrder`)
 2. Click the refresh button in the user interface
@@ -197,7 +197,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 This refresh step is necessary to ensure all order information is properly synchronized with the contact details.
 
-### Q2: How can I easily find the correct Product IDs when adding orders?
+## Q2: How can I easily find the correct Product IDs when adding orders?
 **A:** When adding orders, you can use these tips to find the correct Product IDs:
 
 For Customer Orders:
@@ -223,48 +223,51 @@ For Supply Orders:
    > addSupplyOrder n/Tim p/81234567 o/1 2
    ```
 
-### Q3: Do I need to refresh after deleting orders too?
+## Q3: Do I need to refresh after deleting orders too?
 **A:** Yes, the same refresh process applies when deleting orders:
 1. Delete the order using `deleteCustomerOrder` or `deleteSupplyOrder`
 2. Click the refresh button in the UI
 3. The order will be removed from the contact's information
 
-### Q4: What happens if I use a wrong Product ID in my order?
+## Q4: What happens if I use a wrong Product ID in my order?
 **A:** If you use a Product ID that doesn't exist in the catalogue:
 - The system will show an error message
 - The order won't be created
 - You should check the catalogue again using `viewPastryCatalogue` or `viewIngredientCatalogue` to verify the correct IDs
 
-### Q5: Can I add multiple products with the same ID in one order?
+## Q5: Can I add multiple products with the same ID in one order?
 **A:** Yes, you can repeat Product IDs in your order if the customer wants multiple of the same item. For example:
 ```
 addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
 
-### Q6: How do I tag Contact?
+## Q6: How do I tag Contact?
 
 
-### Q7: Are the command case sensitive?
+## Q7: Are the command case sensitive?
 
-### Q8: Ui Alignment table center row.
+## Q8: Ui Alignment table center row.
 
-### Q9 minimise screen some are hide open wide screen
+## Q9 minimise screen some are hide open wide screen
 
-### Q10 Unrealistically long email and phone number
+## Q10 Unrealistically long email and phone number
 
-### Q11 the order list is sorted in such a way pending order first
+## Q11 the order list is sorted in such a way pending order first
 
-### Q12 Add collection date to remark and quantity to remark as well
+## Q12 Add collection date to remark and quantity to remark as well
 
-### Q13 how to view all customers
-
-## Glossary
+## Q13 how to view all customers
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Features
+# Glossary
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+# Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -288,7 +291,7 @@ This would add three units of product ID 1 to the order.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### **Add Contact Command**
+## **Add Contact Command**
 Adds a new contact to the bakery’s database. This will be useful for other important contacts such as the delivery men and bakery assistants.
 
 ```bash
@@ -307,7 +310,7 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 ```
 ![screenshot](images/Screenshot-2.png)
 
-### **Add Customer Command**
+## **Add Customer Command**
 Adds a new customer to the bakery’s customer database.
 
 ```bash
@@ -327,7 +330,7 @@ addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
 ```
 ![screenshot](images/Screenshot-3.png)
 
-### **Add Customer Order Command**
+## **Add Customer Order Command**
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
 New customer will be added with the name if phone number not found in contacts.
 
@@ -354,7 +357,7 @@ addCustomerOrder n/John Doe p/98765432 o/1 2 3 r/Delivery at 6pm
 ```
 ![screenshot](images/Screenshot-4.png)
 
-### **Add Ingredient Command**
+## **Add Ingredient Command**
 Adds a new ingredient to the bakery's ingredient catalogue, along with its cost.
 
 ```bash
@@ -370,7 +373,7 @@ addIngredient Syrup 3.50
 ```
 ![screenshot](images/Screenshot-1.png)
 
-### **Add Pastry Command**
+## **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue.
 
 ```bash
@@ -395,7 +398,7 @@ For example, typing **addPastry Croissant 3.50 Flour Cream Sugar** would add a p
 with "Flour," "Cream," and "Sugar" listed as its ingredients. By using this command, bakery owners can easily track of 
 all their pastries and ingredient needs, making it more convenient for bakery owners to manage their list of pastries.
 
-### **Add Supplier Command**
+## **Add Supplier Command**
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
@@ -425,7 +428,7 @@ will add a supplier named "Tim" with phone number "81234567," email "emily@examp
 and supplying "salt" and "chocolate" as the supplied ingredients for the bakery. This command simplifies the tracking 
 of supplier contacts and ingredient sources, helping bakery owners efficiently manage supplier relationships.
 
-### **Add Supply Order Command**
+## **Add Supply Order Command**
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
 
 <div class="alert alert-info">
@@ -459,14 +462,14 @@ For example, typing **addSupplyOrder n/John Doe p/98765432 o/1 2 3** creates a s
 This command helps bakery owners efficiently manage incoming supplies, track supply orders by product ID, and streamline 
 the ordering process for necessary ingredients.
 
-### **Clear All Command**
+## **Clear All Command**
 Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
 
 ```bash
 clear
 ```
 
-### **Delete Contact Command**
+## **Delete Contact Command**
 Deletes the contact details of specified person from the address book.
 
 ```bash
@@ -481,7 +484,7 @@ deleteContact 1
 ```
 ![screenshot](images/ss deletecontact.png)
 
-### **Delete Customer Order Command**
+## **Delete Customer Order Command**
 Deletes a customer order from the customer order list at the specified index.
 
 ```bash
@@ -495,7 +498,7 @@ deleteCustomerOrder INDEX
 deleteCustomerOrder 2
 ```
 ![screenshot](images/ss deletecustomerorder.png)
-### **Delete Supply Order Command**
+## **Delete Supply Order Command**
 Deletes a supply order from the supply order list at the specified index.
 
 ```bash
@@ -509,7 +512,7 @@ deleteSupplyOrder INDEX
 deleteSupplyOrder 1
 ```
 ![screenshot](images/ss deletesupplyorder.png)
-### **Edit Contact Command**
+## **Edit Contact Command**
 Update the contact details of an existing contact in the address book, including persons, customers, and suppliers. 
 
 ```bash
@@ -530,13 +533,13 @@ editContact 1 p/91150335
 ```
 ![screenshot](images/ss editcontact.png)    
 
-### **Exit Command**
+## **Exit Command**
 Exits the program.
 
 ```bash
 exit
 ```
-### **Filter Contact Command**
+## **Filter Contact Command**
 Filter and list contacts in the address book based on specified tags.
 
 ```bash
@@ -551,7 +554,7 @@ filterContact t/Customer
 ```
 ![screenshot](images/ss filter.png)
 
-### **Find persons by name**
+## **Find persons by name**
 Finds persons whose names contain any of the given keywords.
 
 ```bash
@@ -574,7 +577,7 @@ find Charlotte Bernice
 ```
 ![findcommand.png](images/findcommand.png)
 
-### **List Command**
+## **List Command**
 Lists all contacts in the bakery's address book.
 
 ***Example:***
@@ -583,7 +586,7 @@ list
 ````
 ![listcommandui.png](images/listcommandui.png)
 
-### **Help Command**
+## **Help Command**
 Displays a link to our user guide that provides detailed information on how to use the application.
 
 ***Example:***
@@ -592,7 +595,7 @@ help
 ````
 ![helpcommandui.png](images/helpcommandui.png)
 
-### **Mark Customer Order Command**
+## **Mark Customer Order Command**
 Mark the customer order status as done.
 
 ```bash
@@ -607,7 +610,7 @@ markCustomerOrder 1
 ```
 ![markcustomerorderui.png](images/markcustomerorderui.png)
 
-### **Mark Supply Order Command**
+## **Mark Supply Order Command**
 Mark the supplier order status as done.
 
 ```bash
@@ -622,7 +625,7 @@ markSupplyOrder 1
 ```
 ![marksupplyorderui.png](images/marksupplyorderui.png)
 
-### ***Remark Command***
+## **Remark Command**
 Edits the remark of the person identified by the index number used in the last person listing. 
 The existing remark will be overwritten.
 
@@ -640,7 +643,7 @@ remark 1 r/Regular customer
 ```
 ![remarkcommandui.png](images/remarkcommandui.png)
 
-### **Remove Ingredient Command**
+## **Remove Ingredient Command**
 Removes an existing ingredient from the bakery's ingredient catalogue.
 
 ```bash
@@ -660,7 +663,7 @@ For instance, entering removeIngredient Flour will delete the ingredient "Flour"
 ![removeIngredientFail.png](images%2FremoveIngredientFail.png)
 
 
-### **Remove Pastry Command**
+## **Remove Pastry Command**
 Removes an existing pastry from the bakery's pastry catalogue.
 
 ```bash
@@ -679,7 +682,7 @@ The Remove Pastry Command allows the bakery to maintain an up-to-date catalogue 
 For example, entering removePastry Croissant will remove "Croissant" from the catalogue. If the pastry does not exist, an error message will be shown.
 ![removePastryFail.png](images%2FremovePastryFail.png)
 
-### **Unmark Customer Order Command**
+## **Unmark Customer Order Command**
 Unmark the customer order status as pending.
 
 ```bash
@@ -694,7 +697,7 @@ unmarkCustomerOrder 1
 ```
 ![unmarkcustomerorderui.png](images/unmarkcustomerorderui.png)
 
-### **Unmark Supply Order Command**
+## **Unmark Supply Order Command**
 Unmark the supply order status as pending.
 
 ```bash
@@ -709,7 +712,7 @@ umarkSupplyOrder 1
 ```
 ![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
-### **View IngredientCatalogue Command**
+## **View IngredientCatalogue Command**
 Displays the current list of ingredients available in the bakery’s ingredient catalogue.
 
 ```bash
@@ -725,7 +728,7 @@ The View Ingredient Catalogue Command provides a detailed list of all ingredient
 
 For instance, typing viewIngredientCatalogue displays the full catalogue for ingredient, enabling the bakery to verify all available ingredients in the catalogue.
 
-### **View PastryCatalogue Command**
+## **View PastryCatalogue Command**
 Displays the current list of pastries available in the bakery’s pastry catalogue.
 
 ```bash
