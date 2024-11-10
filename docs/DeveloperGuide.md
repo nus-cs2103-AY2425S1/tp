@@ -304,24 +304,6 @@ The following activity diagram summarizes what happens when a user interacts wit
 
 * Implement a feature to clear the command history.
 
-### NRIC Validation
-NRICs are stored in the `Nric` class. The method `Nric#isValidNric(String nric)` is used to validate the NRIC.
-
-#### Implementation
-The NRIC validation is done by checking if the NRIC is in the correct format, with this Regex pattern `"[STFG]\\d{7}[A-Z]"`.
-
-Thereafter, the NRIC is checked for its validity using the checksum algorithm that the Singapore Government uses. This algorithm is widely public and is as follows:
-
-1. Multiply each number in the NRIC by a weight. The mapping is as follows, in order, `2, 7, 6, 5, 4, 3, 2` (e.g. the weight of the first digit is `2`, that of the second digit is `7`)
-2. Sum up the products of the multiplication.
-3. If the first letter of the NRIC is `T` or `G`, add `4` to the sum.
-4. Get the remainder of the sum divided by `11`.
-5. Find the checksum alphabet based on this remainder to checksum mapping:
-   * If the first letter is `S` or `T`: The checksum mapping is `0=J, 1=Z, 2=I, 3=H, 4=G, 5=F, 6=E, 7=D, 8=C, 9=B, 10=A`.
-   * If the first letter is `F` or `G`: The checksum mapping is `0=X, 1=W, 2=U, 3=T, 4=R, 5=Q, 6=P, 7=N, 8=M, 9=L, 10=K`.
-   * For example, if the remainder is `3` and the first letter is `S`, the checksum alphabet is `H`.
-6. Check if the last letter of the NRIC is the same as the checksum alphabet. If it is, the NRIC is valid, otherwise, it is invalid.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

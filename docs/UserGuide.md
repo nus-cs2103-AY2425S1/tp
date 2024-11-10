@@ -70,7 +70,7 @@ ContactMate is a **desktop app for managing clients (Singaporeans and Permanent 
 
 Field | Description                                                                                                                                        | Constraints, Examples
 --------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------
-**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Must be valid (i.e. issued by the Singapore Government). e.g., `S1803269D`
+**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Must be valid (i.e. issued by the Singapore Government), except valid NRICs starting with `M`. Refer to the [FAQ](#faq) section for more info. e.g., `S1803269D`
 **Name** | Name of the elderly.                                                                                                                               | Any word consisting only of alphabets, numbers or spaces. e.g., `John Doe`, `Alice`, `Bob`
 **Phone Number** | Phone number of the elderly.                                                                                                                       | Any number, 3 digits or longer. e.g., `98765432`, `91234567`
 **Email** | Email address of the elderly.                                                                                                                      | Any valid email address. e.g., `bob@gmail.com`
@@ -282,6 +282,12 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 
 **Q**: How do I save my data?<br>
 **A**: ContactMate ensures your data is saved automatically after every command.
+
+**Q**: They keep saying that the NRIC is invalid. What should I do?<br>
+**A**: ContactMate uses an algorithm to check the validity of the NRIC. Please ensure that you have not typed any digit or character wrongly. Otherwise, confirm with the elderly that they have given you the correct NRIC. 
+
+**Q**: Why can't I add an elderly with an NRIC starting with `M`?<br>
+**A**: Please check if you have the correct NRIC. NRICs starting with `M` are only issued to foreigners and are not valid for the Singaporeans and Permanent Residents in the Befriending Program.
 
 --------------------------------------------------------------------------------------------------------------------
 
