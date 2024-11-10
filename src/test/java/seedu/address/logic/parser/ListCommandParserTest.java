@@ -59,8 +59,8 @@ public class ListCommandParserTest {
 
     @Test
     public void parse_withNonEmptyPreamble_throwsParseException() {
-        assertParseFailure(parser,WHITESPACE + "B", INVALID_COMMAND_FORMAT);
-        assertParseFailure(parser,WHITESPACE + "/" + PREFIX_LIST_ALL, INVALID_COMMAND_FORMAT);
-        assertParseFailure(parser,WHITESPACE + "BOB" + PREFIX_LIST_ARCHIVE, INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "B", INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "/" + PREFIX_LIST_ALL, INVALID_COMMAND_FORMAT);
+        assertParseFailure(parser, "BOB" + PREFIX_LIST_ARCHIVE, INVALID_COMMAND_FORMAT);
     }
 }
