@@ -54,7 +54,9 @@
 * [6.5 Adding a Task to a Student](#6-5-adding-a-task-to-a-student)
 
 [7. Appendix: Planned Enhancements](#7-appendix-planned-enhancements)
-* [7.1 Lesson Time](#7-1-lesson-time)
+* [7.1 Update subject and lesson time cumulatively](#7-1-update-subject-and-lesson-time-cumulatively)
+* [7.2 Names with special characters](#7-2-names-with-special-characters)
+* [7.3 Multiple students with the same name](#7-3-multiple-students-with-the-same-name)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -116,7 +118,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g., `CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -483,7 +485,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tuition teacher     | quickly access my student's emergency contact                                               | contact them in an emergency                                                                                         |
 | `* * *`  | tuition teacher     | record notes on each student's progress                                                     | provide personalised attention and address their specific learning needs in future lessons                           |
 | `* * *`  | tuition teacher     | search for students based on their name, school level or subject                            | save time during lesson preparation and while teaching                                                               |
-| `* *`    | tuition teacher     | add tasks for each student                                                                  | keep track of outstanding tasks that need to be done for that student (e.g. marking assignments)                     |
+| `* *`    | tuition teacher     | add tasks for each student                                                                  | keep track of outstanding tasks that need to be done for that student (e.g., marking assignments)                    |
 | `* *`    | tuition teacher     | view tasks for a specific student                                                           | have an overview of outstanding tasks that need to be done for that student                                          |
 | `* *`    | tuition teacher     | view all tasks of all students                                                              | have a comprehensive overview of all tasks, ensuring I can prioritize effectively and manage my workload efficiently |
 | `* *`    | tuition teacher     | delete tasks for a specific student                                                         | ensure only outstanding tasks are displayed                                                                          |
@@ -575,13 +577,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-**Use case: Find students with a common attribute (e.g. `Name`, `Level`, `Subject`)**
+**Use case: Find students with a common attribute (e.g., `Name`, `Level`, `Subject`)**
 
 **MSS**
 
 1. Tuition teacher requests to list students.
 2. EduManage shows a list of all students.
-3. Tuition teacher requests to view all students with a common attribute by inputting a common attribute (e.g. a partial name, level or subject).
+3. Tuition teacher requests to view all students with a common attribute by inputting a common attribute (e.g., a partial name, level or subject).
 4. EduManage displays all students that match the inputted attribute (students with names, levels, or subjects that match the search term).
 
    Use case ends.
@@ -884,8 +886,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Emergency contact**: The contact to use if an emergency happens during the tutoring period.
-* **Level**: The year and track of study a student is currently at, e.g. Secondary 3 Normal (Academic) (`S3 NA`).
-* **Subject**: The subject the student is receiving tuition for, e.g. `Math`, `English`, `Literature`. The Subject must correspond with the Level of the student.
+* **Level**: The year and track of study a student is currently at, e.g., Secondary 3 Normal (Academic) (`S3 NA`).
+* **Subject**: The subject the student is receiving tuition for, e.g., `Math`, `English`, `Literature`. The Subject must correspond with the Level of the student.
 
 [(Back to Top)](#edumanage-developer-guide)
 
@@ -937,11 +939,14 @@ testers are expected to do more *exploratory* testing.
        Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
        address `123 Clementi`, subject tags `S1 NA MATH` and `S1 NA PHYSICS`, and lesson times `WED-17:00-19:00` and `SUN-12:00-14:00` is added.
 
-    3. Other valid test cases: Change the capitalisation and spacing between words for the name, level, subject for
+    3. Other valid test cases: Change the capitalisation and length of existing spacing between words for the name, level, subject for
        any of the above test cases. Some examples:
-       1. Multiple spaces in name: `add n/alice   lee p/91234567 e/91234567 a/123 Clementi l/s1 na s/math s/physics lt/SUN-12:00-14:00 lt/WED-17:00-19:00`
-       2. Different casing for level and subject: `add n/alice lee p/91234567 e/91234567 a/123 Clementi l/S1 nA s/mATh s/PhySIcs lt/SUN-12:00-14:00 lt/WED-17:00-19:00`
-       Expected: Similar to previous.
+
+       1. Multiple spaces in name: `add n/alice   lee p/91234567 e/91234567 a/123 Clementi l/s1 na s/math s/physics lt/SUN-12:00-14:00 lt/WED-17:00-19:00`<br>
+          Expected: Similar to previous.
+
+       2. Different casing for level and subject: `add n/alice lee p/91234567 e/91234567 a/123 Clementi l/S1 nA s/mATh s/PhySIcs lt/SUN-12:00-14:00 lt/WED-17:00-19:00`<br>
+          Expected: Similar to previous.
 
 3. **Invalid Test Cases**
 
@@ -1021,18 +1026,20 @@ testers are expected to do more *exploratory* testing.
 
 Given below are the planned enhancements for future versions of EduManage.
 
-### 7.1 Lesson Time
+### 7.1 Update subject and lesson time cumulatively
 
-Currently, lesson time is not cumulative; using the `update` command replaces all previous lesson times with the new values
-provided. This behavior can be inconvenient, especially when adding additional lesson times. We plan to enhance this feature
-to allow cumulative updates to lesson times, enabling users to add new times without overwriting existing ones.
+Currently, both subjects and lesson times are not updated cumulatively; using the `update` command replaces all previous
+entries with the new values provided. This behavior can be inconvenient, especially when users want to add additional
+subjects or lesson times without removing existing ones. We plan to enhance this feature to allow cumulative updates to
+both subjects and lesson times, enabling users to add new subjects and lesson times without overwriting existing entries
+by changing the behaviour of the `update` command.
 
 ### 7.2 Names with special characters
 
-Currently, only alphanumeric names are allowed. Users are advised to omit special characters or replace them with spaces.
+Currently, only alphanumeric names are allowed. Users are advised to omit special characters (e.g., `,`, `-`, `/`) or replace them with spaces.
 A future version will include support for names with special characters to accommodate a wider range of naming conventions.
 
-### 7.3 Multiple Students with the same name
+### 7.3 Multiple students with the same name
 
 Currently, EduManage does not support multiple students with identical names. As a workaround, users can differentiate these
 students by adding numbering to their names (e.g., "John Doe 1," "John Doe 2"). We plan to accommodate this in the future by

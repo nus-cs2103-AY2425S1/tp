@@ -53,14 +53,14 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 ## 1. Quick Start
 
-1. Ensure you have Java `17` or above installed in your computer.
+1. Ensure you have [Java `17`](#6-glossary-table) or above installed in your computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for EduManage.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a [command terminal](#6-glossary-table), `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.<br>
+   A [GUI](#6-glossary-table) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
    <br>
@@ -392,7 +392,7 @@ EduManage data are saved in the hard disk automatically after any command that c
 
 #### 3.3.2 Editing the Data File
 
-EduManage data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Users are not advised to edit the data file directly.
+EduManage data are saved automatically as a [JSON file](#6-glossary-table) `[JAR file location]/data/addressbook.json`. Users are not advised to edit the data file directly.
 
 <box type="warning" seamless>
 
@@ -452,7 +452,7 @@ Exits EduManage.
 
 ## 5. Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file (found in the same folder as `EduManage.jar`) created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the [GUI](#6-glossary-table) will open off-screen. The remedy is to delete the `preferences.json` file (found in the same folder as `EduManage.jar`) created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Names** with special characters such as `/` and `,` are not allowed. As such, valid names such as `Aditi D/O Ramesh`
     and `Tan Jun Wei, Justin` will be considered invalid. To work around this issue, we recommend simply omitting the
