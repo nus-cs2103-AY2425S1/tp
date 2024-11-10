@@ -983,8 +983,8 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
    1. Requisites: The company corresponding to `INDEX` has at least one application.
 
    1. Test case: `view INDEX` <br>
-      Expected: Only the selected company is shown in the company list. The `DESCRIPTIONS` of the applications of the 
-      company are fully visible. A message displaying the name of the company to view is shown
+      Expected: Only the selected company is shown in the company list. The `DESCRIPTION` of all the applications for the 
+      selected company are fully visible. A message displaying the name of the company to view is shown.
    
    1. Try invalid fields: `view`, `view 0`, `view x`, `...` (where `x` is larger than the list size) <br>
       Expected: No application details of any companies are shown, company list remains unchanged. An error message with details should be displayed in the results box.
