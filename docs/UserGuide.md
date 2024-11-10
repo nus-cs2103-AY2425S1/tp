@@ -115,7 +115,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 ### Adding a contact: `add`
 
 This command adds a contact to CFG.
-Contacts can belong to one of four roles: Volunteer, Donor, Partner, Person(default, if no role is specified).
+There are 4 types of contacts: Volunteer, Donor, Partner, Person (default).
 
 Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
