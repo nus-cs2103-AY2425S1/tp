@@ -63,7 +63,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
 5.  Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead and enjoy the rest of the guide!
 
 ### GUI Overview
-The EZSTATE GUI is organized into **5** key components:
+The EZSTATE GUI is organized into **five** key components:
 
 ![ui](images/ui_overview_ug.png)
 
@@ -187,7 +187,7 @@ Before proceeding, make sure you have reviewed the [Command Structure](#command-
 </div>
 
 <br>
-EZSTATE features (i.e. commands) are divided into four main categories:
+EZSTATE features (i.e. commands) are divided into **four** main categories:
 
 1. [Client Management Commands](#1-client-management-commands)
 2. [Appointment Management Commands](#2-appointment-management)
