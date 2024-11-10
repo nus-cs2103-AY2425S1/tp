@@ -13,7 +13,7 @@ public class GoodsCategoryPredicate implements Predicate<GoodsReceipt> {
     private final GoodsCategories category;
 
     /**
-     * Constructor for CategoryPredicate.
+     * Constructs a predicate that checks if good receipt has the goods category.
      */
     public GoodsCategoryPredicate(GoodsCategories category) {
         requireNonNull(category);

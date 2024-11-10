@@ -9,7 +9,7 @@ public class DeliveredPredicate implements Predicate<GoodsReceipt> {
     private final boolean isDelivered;
 
     /**
-     * Constructor for DeliveredPredicate.
+     * Constructs a predicate that checks if good receipt is delivered.
      */
     public DeliveredPredicate(boolean isDelivered) {
         this.isDelivered = isDelivered;

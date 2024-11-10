@@ -13,7 +13,7 @@ public class SupplierNamePredicate implements Predicate<GoodsReceipt> {
     private final Name name;
 
     /**
-     * Constructor for SupplierNamePredicate.
+     * Constructs a predicate that checks if goods receipt has the supplier name.
      */
     public SupplierNamePredicate(Name name) {
         requireNonNull(name);
