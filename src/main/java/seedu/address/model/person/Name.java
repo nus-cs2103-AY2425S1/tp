@@ -27,6 +27,7 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
+        assert name != null : "Name cannot be null";
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
     }

@@ -40,6 +40,7 @@ public class FilterStatusCommandParser implements Parser<FilterStatusCommand> {
             }
         }
 
+        assert statusKeywords.length > 0 : "At least one status keyword is expected";
         return new FilterStatusCommand(new StatusContainsKeywordsPredicate(Arrays.asList(statusKeywords)));
     }
 }

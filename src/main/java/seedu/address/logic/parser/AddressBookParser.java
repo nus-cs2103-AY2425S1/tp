@@ -42,6 +42,7 @@ public class AddressBookParser {
      * @throws ParseException If the user input does not conform to the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(

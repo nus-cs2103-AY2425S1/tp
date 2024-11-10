@@ -5,7 +5,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":HRPlatformParser" as HRPlatformParser LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "r:ListCommand" as ListCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -17,16 +17,16 @@ end box
 [-> LogicManager : execute("list")
 activate LogicManager
 
-LogicManager -> HRPlatformParser : parseCommand("list")
-activate HRPlatformParser
+LogicManager -> AddressBookParser : parseCommand("list")
+activate AddressBookParser
 
 ' Create ListCommand
 create ListCommand
-HRPlatformParser -> ListCommand : new ListCommand()
+AddressBookParser -> ListCommand : new ListCommand()
 activate ListCommand
 
-HRPlatformParser --> LogicManager : ListCommand
-deactivate HRPlatformParser
+AddressBookParser --> LogicManager : ListCommand
+deactivate AddressBookParser
 
 LogicManager -> ListCommand : execute(model)
 activate ListCommand

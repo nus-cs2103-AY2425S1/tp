@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,8 +35,10 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private CommandBox commandBox;
     private HelpWindow helpWindow;
     private ReportBugWindow reportBugWindow;
+    private OverviewPanel overviewPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -46,13 +50,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem reportBugItem;
 
     @FXML
+    private MenuItem summaryMenuItem;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane statusbarPlaceholder;
+    private StackPane overviewPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -83,7 +90,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAcceleratorsBugReport() {
-        setAccelerator(reportBugItem, KeyCombination.valueOf("F2"));
+        setAccelerator(reportBugItem, KeyCombination.valueOf("F10"));
     }
 
     /**
@@ -92,7 +99,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
-
         /*
          * TODO: the code below can be removed once the bug reported here
          * https://bugs.openjdk.java.net/browse/JDK-8131666
@@ -116,26 +122,25 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-    /**
-     * Fills up all the placeholders of this window.
-     */
     void fillInnerParts() {
-        //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        //personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
-        resultDisplay = new ResultDisplay();
+        this.resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        this.overviewPanel = new OverviewPanel();
+
+        // Display summary data as default
+        Map<String, Long> summaryData = logic.getSummaryData(); // Assume `getSummaryData` returns a valid summary map
+        overviewPanel.showSummary(summaryData);
+
+        overviewPanelPlaceholder.getChildren().add(overviewPanel.getRoot());
+
+        this.personListPanel = new PersonListPanel(logic.getFilteredPersonList(), overviewPanel);
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
-    /**
-     * Sets the default size based on {@code guiSettings}.
-     */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
@@ -175,6 +180,38 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays the summary in the command result panel.
+     */
+    @FXML
+    public void handleSummary() {
+        try {
+            executeCommand("summary");
+            showSummaryInOverviewPanel();
+        } catch (CommandException | ParseException e) {
+            logger.warning("Failed to execute summary command: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Displays the summary in the command result panel.
+     */
+    private void showSummaryInOverviewPanel() {
+        Map<String, Long> summaryData = logic.getSummaryData();
+        overviewPanel.showSummary(summaryData);
+    }
+
+    /**
+     * Updates the {@code OverviewPanel} to display the details of a specified {@code Person}.
+     *
+     * @param person The person whose details are to be displayed in the overview panel.
+     */
+    public void showOverviewPanel(Person person) {
+        if (overviewPanel != null) {
+            overviewPanel.updateOverviewDetails(person);
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -207,6 +244,18 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            String[] feedbackToUser = commandResult.getFeedbackToUser().split(" ");
+            if (feedbackToUser[0].equals("Viewed")) {
+                int index = Integer.parseInt(commandText.split(" ")[1]);
+                System.out.println(index);
+                personListPanel.selectPersonAtIndex(index - 1);
+            }
+
+            // Check if the commandText was the summary command and update the overview panel accordingly
+            if (commandText.trim().equalsIgnoreCase("summary")) {
+                showSummaryInOverviewPanel();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -222,4 +271,5 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
 }

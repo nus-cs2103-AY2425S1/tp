@@ -4,7 +4,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":HRPlatformParser" as HRPlatformParser LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -17,17 +17,17 @@ end box
 [-> LogicManager : execute("delete 2")
 activate LogicManager
 
-LogicManager -> HRPlatformParser : parseCommand("delete 2")
-activate HRPlatformParser
+LogicManager -> AddressBookParser : parseCommand("delete 2")
+activate AddressBookParser
 
 create DeleteCommandParser
-HRPlatformParser -> DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> HRPlatformParser
+DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-HRPlatformParser -> DeleteCommandParser : parse("2")
+AddressBookParser -> DeleteCommandParser : parse("2")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -37,14 +37,14 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser :
 deactivate DeleteCommand
 
-DeleteCommandParser --> HRPlatformParser : d
+DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> HRPlatformParser
+DeleteCommandParser -[hidden]-> AddressBookParser
 destroy DeleteCommandParser
 
-HRPlatformParser --> LogicManager : d
-deactivate HRPlatformParser
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
 
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand

@@ -37,6 +37,18 @@ public class Person {
                   DesiredRole desiredRole, Skills skills, Experience experience,
                   Status status, Note note, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, desiredRole, skills, experience, status, note, tags);
+
+        assert name != null : "Name should not be null";
+        assert phone != null : "Phone should not be null";
+        assert email != null : "Email should not be null";
+        assert address != null : "Address should not be null";
+        assert desiredRole != null : "DesiredRole should not be null";
+        assert skills != null : "Skills should not be null";
+        assert experience != null : "Experience should not be null";
+        assert status != null : "Status should not be null";
+        assert note != null : "Note should not be null";
+        assert tags != null : "Tags should not be null";
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +59,8 @@ public class Person {
         this.status = status;
         this.note = note;
         this.tags.addAll(tags);
+
+        assert !tags.contains(null) : "Tags should not contain null values";
     }
 
     public Name getName() {

@@ -27,6 +27,7 @@ public class Experience {
      */
     public Experience(String experience) {
         requireNonNull(experience);
+        assert experience != null : "Experience cannot be null";
         checkArgument(isValidExperience(experience), MESSAGE_CONSTRAINTS);
         value = experience;
     }
