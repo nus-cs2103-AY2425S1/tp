@@ -725,12 +725,10 @@ testers are expected to do more *exploratory* testing.
 7. Adding a customer with missing compulsory field.
 
    1. Test case: `addcustomer n/Lim Kai Xuan e/su@example.com a/69, Sembawang Road. #01-01` <br>
-   
-   2. Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
+      Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
 
-   3. Test case: `addcustomer n/Lim Kai Xuan e/su@example.com p/12345678` <br>
-
-   4. Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
+   2. Test case: `addcustomer n/Lim Kai Xuan e/su@example.com p/12345678` <br>
+      Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
 
 ### Listing all customers
 
@@ -791,6 +789,7 @@ testers are expected to do more *exploratory* testing.
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
         - At least 1 customer is listed.
         - The customer to be edited is not `Betsy Crowe`.
+       
     2. Test case: `editcustomer 1 n/betsy crowe` <br>
        Expected: The customer is successfully edited. A warning and details of the edited customer shown in the status message.
 
@@ -812,8 +811,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least one customer is listed.
 
     2. Test case: `editcustomer 1 n/@#$%` <br>
-
-    3. Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
+       Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
    
 ### Deleting a customer
 
@@ -832,7 +830,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting a customer from a filtered customer list using the command alias.
 
-    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
+    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.<br>
        Example: `findcustomer john`
 
     2. Test case: `deletec 1`<br>
@@ -847,7 +845,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a unique order with all parameters specified while all customers is being shown.
 
-    1. Prerequisites: At least 1 customer is displayed in the customer list.
+    1. Prerequisites: 
+        - At least 1 customer is displayed in the customer list.
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
         - There are no orders similar to the order to be added under the first customer.
 
@@ -856,7 +855,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a unique order with optional field omitted using the command alias when the customer list is filtered.
 
-    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
+    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.<br>
        Example: `findcustomer bernice`
 
     2. Test case: `addo 1 i/Books d/02-03-2026` <br>
@@ -867,23 +866,25 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least 1 customer is displayed in the customer list.
 
     2. Test case: `addorder 1 i/books` <br>
+       Expected: No order is added. Error details shown in the status message. Status bar remains the same.
 
-    3. Expected: No order is added. Error details shown in the status message. Status bar remains the same.
-
-    4. Test case: `addo 1 q/100` <br>
-
-    5. Expected: No order is added. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `addo 1 q/100` <br>
+        Expected: No order is added. Error details shown in the status message. Status bar remains the same.
 
 4. Adding a [similar order](#similar).
 
-    1. Prerequisites: At least 1 customer is displayed in the customer list. Order similar to the order to be added under the first customer.
+    1. Prerequisites:
+        - At least 1 customer is displayed in the customer list.
+        - There is an existing order similar to the order to be added under the first customer.
 
     2. Test case: `addo 1 i/books d/02-03-2026` <br>
        Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
 
 5. Adding an order with delivery date elapsed.
 
-    1. Prerequisites: At least 1 customer is displayed in the customer list. No order similar to order to be added under the first customer.
+    1. Prerequisites: 
+        - At least 1 customer is displayed in the customer list.
+        - No order similar to order to be added under the first customer.
 
     2. Test case: `addo 1 i/phone d/02-03-2020` <br>
        Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list
@@ -906,17 +907,17 @@ testers are expected to do more *exploratory* testing.
 ### Filter orders by status.
 
 1. Filtering order list to display all `pending` orders.
-    1. Prerequisites: 
-        - All orders under a customer are listed using the `listorder` command with at least 1 order listed.
-        - Example `listorder 1`.
+
+    1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed.<br>
+       Example `listorder 1`.
 
     2. Test case: `filterorder pending` <br>
        Expected: Only pending orders remain in the order list. A success message shown in the status message.
 
 2. Filtering order list to display all `completed` orders. using the command alias.
-    1. Prerequisites:
-        - All orders under a customer are listed using the `listorder` command with at least 1 order listed.
-        - Example `listorder 1`.
+
+    1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed.<br>
+       Example `listorder 1`.
        
     2. Test case: `filterorder completed` <br>
        Expected: Only completed orders remain in the order list. A success message shown in the status message.
@@ -954,8 +955,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least one order is listed.
 
     2. Test case: `editorder 1 q/1 2` <br>
-
-    3. Expected: No order is edited. Error details shown in the status message. Status bar remains the same.
+       Expected: No order is edited. Error details shown in the status message. Status bar remains the same.
 
 ### Deleting an order
 
@@ -1002,8 +1002,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Marking an order from a filtered list as completed using the command alias.
 
-   1. Prerequisites:
-       - Orders filtered using `filterorder pending` command with at least 1 order listed. <br>
+   1. Prerequisites: Orders filtered using `filterorder pending` command with at least 1 order listed. <br>
 
    2. Test case: `marko 1`<br>
       Expected: First order is marked as completed. Details of the marked order shown in the status message. The marked order will disappear from the filtered order list as it is no longer `Pending`.
@@ -1039,8 +1038,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Reverting an order from a filtered list to pending status using the command alias.
 
-    1. Prerequisites:
-        - Prerequisites: Orders filtered using `filterorder completed` command with at least 1 order listed. <br>
+    1. Prerequisites: Orders filtered using `filterorder completed` command with at least 1 order listed. <br>
 
     2. Test case: `unmarko 1`<br>
        Expected: First order is reverted to pending status. Details of the unmarked order shown in the status message. The unmarked order will disappear from the filtered order list as it is no longer `completed`.
