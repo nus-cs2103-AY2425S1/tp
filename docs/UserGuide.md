@@ -107,7 +107,7 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 <div markdown="span" class="alert alert-info"> :notebook: **Note:** Field Constraints
 - Names should only contain alphabets, hyphens, dots, commas, forward slash and spaces, and be between 1 and 100 characters long.
 - Although / is allowed in names, you should use it carefully, input like m/ g/ n/ will still be recognised as prefix and may lead to unexpected behaviour.
-- Phone numbers should only contain numbers, and be exactly 8 digits long.
+- Phone numbers should only contain numbers, and be exactly 8 digits long. We do this because we are targeting private education institutions in Singapore.
 - Gender should be either `male` or `female`.
 - Module should consist of alphanumeric characters and spaces only, and it should be between 1 and 30 characters long.
 - Tag should consist of alphanumeric characters only, and it should be between 1 and 30 characters long.
