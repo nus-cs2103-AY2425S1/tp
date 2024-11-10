@@ -183,11 +183,11 @@ Constraints:
     - Must be an index number shown in the displayed patient list
 
 * **DATE_TIME**
-    - Must follow the format of d/M/yyyy HHmm
+    - Follows the format of d/M/yyyy HHmm
     - Can only contain numbers, '/', and spaces.
 
 * **DATE**
-    - Must follow the format of d/M/yyyy
+    - Follows the format of d/M/yyyy
     - Can only contain numbers and '/'
 
 ### Viewing help: `help`
@@ -320,7 +320,7 @@ Examples:
 
 ### Adding or updating an appointment date and time to a person : `date`
 
-Adds or updates the next appointment date and time of the specified person in the address book.
+Adds or updates the appointment date and time of the specified person in the address book. This for easy reference, so past appointments can be entered.
 
 Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 

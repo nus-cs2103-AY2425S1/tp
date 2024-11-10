@@ -247,7 +247,7 @@ The activity diagram below illustrates the sequence of actions users will follow
 
 <img src="images/EditPersonActivityDiagram.png" width="600"/>
 
-## Planned Enhancements
+## Planned Features
 ### \[Proposed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -361,19 +361,23 @@ The following activity diagram summarizes what happens when a user executes the 
     - Overlapping time slots are correctly identified, resulting in command rejection.
     - Edge cases with adjacent `startTime` and `endTime` that do not overlap are handled as expected.
 
+## Planned Enhancements
+
 Team Size: 5
 
-1. [insert date end time]
-2. Currently, the app accepts dates in the format d/M/yyyy HHmm (allowing optional leading zeros for day and month), which is intended to streamline input and minimise errors. 
-However, we recognise that users may be familiar with other common date and time formats. 
-To enhance usability and accommodate a wider range of preferences, we plan to allow additional formats such as MM-dd-yyyy HHmm in future updates.
-Currently, we’ve kept the error messages simple and focused on this format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date formats.
-3. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
-4. [Validation for Address: Address should be able to have "/n" or other prefixes]
-5. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
-6. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
-7. [Create his own tags and delete tags]
-8. 
+1. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
+2. [Validation for Address: Address should be able to have "/n" or other prefixes]
+3. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
+4. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
+5. [Create his own tags and delete tags]
+6. [insert date end time]
+7. **Warn user that date entered is in the past:** 
+Currently, the user is allowed to enter an appointment date and time from the past because this function is meant to be for easy reference of information, so the user might want to add past patients and their last appointment date.
+However, in the future, an enhancement can be added where the user is warned when a past date in the added. For example, 'WARNING: Date and time that was added has already passed.'
+8. **Specific error message about date format:**
+   Currently, the app accepts dates in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
+which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
+   In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date formats.
 
 
 ## **Implementation**
