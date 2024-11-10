@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.vendor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -19,7 +19,7 @@ import seedu.address.model.UserPrefs;
 
 public class UnassignVendorCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -30,7 +30,9 @@ public class UnassignVendorCommandTest {
 
         UnassignVendorCommand unassignVendorCommand = new UnassignVendorCommand(outOfBoundIndex);
 
-        assertCommandFailure(unassignVendorCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(unassignVendorCommand, model,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        1, model.getFilteredPersonList().size()));
     }
 
     @Test
@@ -39,20 +41,17 @@ public class UnassignVendorCommandTest {
         UnassignVendorCommand unassignVendorSecondCommand = new UnassignVendorCommand(INDEX_SECOND);
 
         // same object -> returns true
-        assertTrue(unassignVendorFirstCommand.equals(unassignVendorFirstCommand));
+        assertEquals(unassignVendorFirstCommand, unassignVendorFirstCommand);
 
         // same values -> returns true
         UnassignVendorCommand unassignVendorFirstCommandCopy = new UnassignVendorCommand(INDEX_FIRST);
-        assertTrue(unassignVendorFirstCommand.equals(unassignVendorFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(unassignVendorFirstCommand.equals(1));
+        assertEquals(unassignVendorFirstCommand, unassignVendorFirstCommandCopy);
 
         // null -> returns false
-        assertFalse(unassignVendorFirstCommand.equals(null));
+        assertNotEquals(null, unassignVendorFirstCommand);
 
         // different person -> returns false
-        assertFalse(unassignVendorFirstCommand.equals(unassignVendorSecondCommand));
+        assertNotEquals(unassignVendorFirstCommand, unassignVendorSecondCommand);
     }
 
     @Test
