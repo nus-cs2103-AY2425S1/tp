@@ -280,9 +280,9 @@ The `add` command allows users to add a `Person` to the `AddressBook`.
 
 To help you understand how the `add` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
+We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example.
 
-1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
+1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to add a person with the specified details.
 2. The `AddCommandParser` interprets the input.
 3. An `AddCommand` object is created.
 4. The `LogicManager` invokes the execute method of AddCommand.
@@ -369,9 +369,9 @@ The `edit` command allows users to edit a `Person` in the `AddressBook`.
 
 To help you understand how the `delete` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer` as an example, whereby the original `Expense` object has a `EXPENSE_NAME` of `Milk`.
 
-1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
+1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Interviewed note/Great candidate ex/5 years in HR dr/Software Engineer`, intending to edit the details of the person at index 1.
 2. The `EditCommandParser` interprets the input.
 3. An `EditCommand` object is created.
 4. The `LogicManager` invokes the execute method of `EditCommand`.
@@ -1019,7 +1019,7 @@ testers are expected to do more *exploratory* testing.
 
     1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-    2. **Test case**: `add n/John Doe p/12345678 e/johndoe@example.com a/123 Main St s/Java, C++ st/Active ex/2 dr/Software Engineer note/First contact`<br>
+    2. **Test case**: `add n/John Doe p/12345678 e/johndoe@example.com a/123 Main St s/Java, C++ st/Interviewed ex/2 dr/Software Engineer note/First contact`<br>
        **Expected**: New contact "John Doe" is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
 
     3. **Test case**: `add`<br>
@@ -1028,10 +1028,10 @@ testers are expected to do more *exploratory* testing.
     4. **Test case**: `add n/John Doe p/12345678`<br>
        **Expected**: No person is added. Error details about missing email and other required fields shown in the status message. Status bar remains the same.
 
-    5. **Test case**: `add n/John Doe p/abcdefgh e/johndoe@example.com a/123 Main St s/Java, C++ st/Active ex/2 dr/Software Engineer note/Invalid phone`<br>
+    5. **Test case**: `add n/John Doe p/abcdefgh e/johndoe@example.com a/123 Main St s/Java, C++ st/Interviewed ex/2 dr/Software Engineer note/Invalid phone`<br>
        **Expected**: No person is added. Error details about invalid phone number format shown in the status message. Status bar remains the same.
 
-    6. **Test case**: `add n/Jane Doe p/87654321 e/janedoe@example.com a/456 Elm St s/Python, HTML st/Active ex/3 dr/Web Developer note/Second contact`<br>
+    6. **Test case**: `add n/Jane Doe p/87654321 e/janedoe@example.com a/456 Elm St s/Python, HTML st/Interviewed ex/3 dr/Web Developer note/Second contact`<br>
        **Expected**: New contact "Jane Doe" is added to the list. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
 
 ### Deleting a person
@@ -1055,19 +1055,19 @@ testers are expected to do more *exploratory* testing.
 
     1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-    2. **Test case**: `edit 1 n/John Smith p/12345678 e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Active ex/4 dr/Project Manager note/Updated contact`<br>
+    2. **Test case**: `edit 1 n/John Smith p/12345678 e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Interviewed ex/4 dr/Project Manager note/Updated contact`<br>
        **Expected**: The first contact is updated to "John Smith". Details of the updated contact shown in the status message. Timestamp in the status bar is updated.
 
-    3. **Test case**: `edit 0 n/John Smith p/12345678 e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Active ex/4 dr/Project Manager note/Invalid index`<br>
+    3. **Test case**: `edit 0 n/John Smith p/12345678 e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Interviewed ex/4 dr/Project Manager note/Invalid index`<br>
        **Expected**: No person is edited. Error details shown in the status message. Status bar remains the same.
 
     4. **Test case**: `edit 1`<br>
        **Expected**: No person is edited. Error details about missing new details shown in the status message. Status bar remains the same.
 
-    5. **Test case**: `edit 1 n/John Smith p/abcdefgh e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Active ex/4 dr/Project Manager note/Invalid phone`<br>
+    5. **Test case**: `edit 1 n/John Smith p/abcdefgh e/johnsmith@example.com a/789 Maple Ave s/C#, SQL st/Interviewed ex/4 dr/Project Manager note/Invalid phone`<br>
        **Expected**: No person is edited. Error details about invalid phone number format shown in the status message. Status bar remains the same.
 
-    6. **Test case**: `edit 3 n/Jane Doe p/23456789 e/janedoe@example.com a/456 Elm St s/Python, HTML st/Active ex/3 dr/Web Developer note/Invalid index`<br>
+    6. **Test case**: `edit 3 n/Jane Doe p/23456789 e/janedoe@example.com a/456 Elm St s/Python, HTML st/Interviewed ex/3 dr/Web Developer note/Invalid index`<br>
        **Expected**: No person is edited. Error details shown in the status message. Status bar remains the same.
 
 ### Listing All People
