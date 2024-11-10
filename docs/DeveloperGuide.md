@@ -297,7 +297,7 @@ _{Explain here how the data archiving feature will be implemented}_
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-**Value proposition**: ConcertPhonebook allows concert organisers to add, delete and quickly sift through many contacts, from whom to obtain required resources or fulfill their professional obligations. Contacts will include roles, such as band, audience and staff. It provides an efficient CLI optimised for fast typists, complemented by a GUI for convenience.
+**Value proposition**: ConcertPhonebook allows concert organisers to add, delete and quickly sift through many contacts, from whom to obtain required resources or fulfill their professional obligations. Contacts will include roles, such as promoter, logistics, sound technician, etc. It provides an efficient CLI optimised for fast typists, complemented by a GUI for convenience.
 
 ### User stories
 
