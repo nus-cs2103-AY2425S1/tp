@@ -70,12 +70,12 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parts of the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. the parameter `add n/NAME` can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+* Parameters in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Parameters with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -91,6 +91,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
 ---
 
 ### Viewing help : `help`
@@ -105,19 +106,21 @@ Format: `help`
 
 ### Viewing all deliveries and suppliers : `list -a`
 
-Lists all suppliers and deliveries in the VendorVault.
+Lists all suppliers and deliveries in VendorVault.
 
 Format: `list -a`
 
-<box type="warning" seamless>
+<box type="caution" seamless>
+
 **Warnings**:
 - No other parameters should be given for this command.
 - Give at least one space between list and -a.
+
 </box>
 
 ### Clearing all suppliers and deliveries : `clear`
 
-Clear all data regarding suppliers and deliveries in vendor vault.
+Clears all data regarding suppliers and deliveries in vendor vault.
 
 Format: `clear`
 
@@ -131,8 +134,9 @@ Adds a supplier to VendorVault.
 
 Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]…​`
 
-Parameters:
+<box type="info" seamless>
 
+Parameters:
 - `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
 - `p/PHONE`: `PHONE` is the supplier's phone number. It must be numeric, and contain at least 3 digits.
 - `e/EMAIL`: `EMAIL` is the supplier's email address. It must be in a valid email address format, and cannot be blank.
@@ -144,21 +148,24 @@ Parameters:
   - One space is counted as one character.
   - A `PRODUCT` cannot be made up of only spaces.
 
+</box>
+
 <box type="tip" seamless>
 
-**Tip:** A supplier can have any number of `TAG` and `PRODUCT` (including 0).
+**Tips:** A supplier can have any number of `TAG` and `PRODUCT` (including 0).
 - To include multiple `TAG`/`PRODUCT`, use multiple `t/TAG`/`pro/PRODUCT` respectively.
 
 </box>
 
-<box type="warning" seamless>
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `add` and `-s`.
+- At least one space is needed between `-s` and the first parameter.
 - At least one space is needed between parameters.
-- A warning will be given if the user tries to add a duplicate supplier.
+- An error message will be shown if the user tries to add a duplicate supplier.
 - A supplier is considered duplicate if they have the same `NAME` and `COMPANY`.
-  - Comparison between different `NAME`is case-sensitive.
+  - Comparison between different `NAME` is case-sensitive.
   - Comparison between different `COMPANY` is case-insensitive.
 - Adding duplicate `TAG`/`PRODUCT` will result in only one copy being added to the supplier.
   - Comparison between different `TAG`/`PRODUCT` is case-sensitive.
@@ -170,7 +177,7 @@ Examples:
 - `add -s n/John Doe p/98765432 e/johnd@example.com com/companyA t/friends t/owesMoney pro/rice pro/bread`
 - `add -s n/Betsy Crowe p/98223232 e/betsycrowe@example.com com/Newgates t/urgent pro/soap`
 
-Expected output:
+Expected outputs:
 - `New supplier added: John Doe; Phone: 98765432; Email: johnd@example.com; Company: companyA; Tags: [owesMoney][friends]; Products: [bread][rice]; Status: active`
 - `New supplier added: Betsy Crowe; Phone: 98223232; Email: betsycrowe@example.com; Company: Newgates; Tags: [urgent]; Products: [soap]; Status: active`
 
@@ -184,7 +191,7 @@ Shows a list of all suppliers in VendorVault. The delivery list will not be affe
 
 Format: `list -s`
 
-<box type="warning" seamless>
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `list` and `-s`.
@@ -198,119 +205,139 @@ Deletes a supplier from the list of suppliers in VendorVault.
 
 Format: `delete -s INDEX`
 
-Parameters:
+<box type="info" seamless>
 
+Parameters:
 - `INDEX`: The index of the supplier to be deleted in the displayed list. It must be a number between 1 and the total number of suppliers displayed (inclusive), and cannot be blank.
 
-<box type="warning" seamless>
+</box>
+
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `list` and `-s`.
+- All parameters must be given.
 - Only one supplier can be deleted by one command.
+  - `delete -d 1 2` is not allowed.
 
 </box>
 
 Example:
-`delete -s 3`
+- `delete -s 3`
 
 Expected output:
-Supplier at index 3 is deleted, assuming there is at least three suppliers displayed. Otherwise, an error message will be shown.
+- Supplier at index 3 is deleted, assuming there is at least three suppliers displayed. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![delete command](images/deleteSupplierCommand.png)
 
-### Mark a supplier with a status : `mark -s`
+### Marking a supplier : `mark -s`
 
-The `mark` command is used to mark a supplier as either **active** or **inactive**.
-in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
+Marks a specified supplier with the specified status in VendorVault.
 
 Format: `mark -s INDEX STATUS`
 
-Parameters:
-- `INDEX`: The index of the supplier in the list. Must be a number greater than 0 and must not be blank.
-- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank.
+<box type="info" seamless>
 
-<box type="warning" seamless>
+Parameters:
+- `INDEX`: The index of the supplier to be marked in the displayed list. It must be a number between 1 and the total number of suppliers displayed (inclusive), and cannot be blank.
+- `STATUS`: The suppler status to change to. It must be one of the following values: `active`, `inactive`, and cannot be blank.
+
+</box>
+
+<box type="caution" seamless>
 
 **Warnings**:
-- At least one space between `mark` and `-s` is needed.
-- At least one space between `-s` and `INDEX` is needed.
-- At least one space between `INDEX` and `STATUS` is needed.
-- Both parameters must be given.
-- `INDEX` and `STATUS` used are case-sensitive.
-- A supplier has a default status of `active`.
+- At least one space is needed between `mark` and `-s`.
+- At least one space is needed between `-s` and `INDEX`.
+- At least one space is needed between `INDEX` and `STATUS`.
+- All parameters must be given.
+- At least one space is needed between parameters.
+- `STATUS` is case-sensitive.
+- An error message will be shown if the user tries to mark a supplier with the same status.
 - A supplier with an `inactive` status signifies that the supplier is not currently active for deliveries.
   However, marking an `active` supplier as `inactive` will not delete the delivery associated with the supplier from the delivery list
   or affect the delivery status in any way.
+
 </box>
 
-#### Example
-To mark the supplier at index 3 as active:
+Examples:
+- `mark -s 3 inactive`
+- Sorting by name using `sort -s so/a sb/n` followed by `mark -s 1 inactive`
 
-    mark -s 3 active
-
-A success message will be displayed if the supplier is successfully marked as active.
+Expected outputs:
+- Supplier at index 3 of the displayed list has status marked as `active`, assuming there is at least three suppliers displayed and the third supplier is not currently `INACTIVE`. Otherwise, an error message will be shown.
+- Supplier at index 1 of the displayed list has status marked as `inactive`, assuming there is at least one supplier displayed and the first supplier is not currently `INACTIVE`. Otherwise, an error message wil be shown.
 
 #### Here's how it would look like in the app:
 ![mark command](images/markSupplierCommand.png)
 
 ### Find a supplier: `find -s`
 
-The `find -s` command is used to find a supplier in VendorVault. 
-This helps you to search for a supplier based on the supplier name, company, or product. 
+Finds suppliers in VendorVault.
 
 Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 
-Parameters:
+<box type="info" seamless>
 
-- `n/NAME`: Must be alphanumeric, and must not be blank.
+Parameters:
+- `n/NAME`: `NAME` is the supplier's name. It must be alphanumeric, and cannot be blank.
 - `com/COMPANY`: `COMPANY` is the company associated with the supplier. It must be in a valid company name format, and cannot be blank.
     - Please see [below](#valid-company-name-format) for more information on what constitutes a valid company name format.
-- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, 
-and must be between 1 and 50 (inclusive) characters long.
+- `pro/PRODUCT`: `PRODUCT` is the product associated with the supplier. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
+    - One space is counted as one character.
+    - A `PRODUCT` cannot be made up of only spaces.
+
+</box>
 
 <box type="tip" seamless>
 
-**Tip:**
+**Tips:**
 - The find result(s) will contain/satisfy all the given parameters.
-- eg: If you execute the command `find -s n/link com/NU`, 
-the result will contain suppliers whose name contains "link" and company contains "NU" if any.
+  - Comparison between parameters is case-sensitive.
+- You can provide all the parameters or any combination of parameters, as long as at least one is given!
+
 </box>
 
-<box type="warning" seamless>
+<box type="caution" seamless>
 
 **Warnings**:
-- At least one non-empty parameter must be given.
+- At least one space is needed between `find` and `-s`.
+- - At least one space is needed between `-s` and the first parameter.
+- At least one parameter must be given.
 - No duplicate parameters can be used.
-- At least one space between `find` and `-s` is needed.
-- At least one space between '-s' and the next parameter is needed.
-- When more than one parameter is used, at least one space between each parameter is needed.
+  - `find -s n/an n/di` is not allowed.
+- At least one space is needed between parameters.
 - `NAME`, `COMPANY` and `PRODUCT` are case-insensitive.
+
 </box>
 
+Example:
+- `find -s n/link com/NU`
 
-#### Example
-To find the supplier whose name contains "link" and company contains "NU":
-
-    find -s n/link com/NU
-
+Expected output:
+- All suppliers with `name` containing `link` and `COMPANY` containing `NU` is shown.
 
 #### Here's how it would look like in the app:
 ![find command](images/findSupplierCommand.png)
 
 ### Sort suppliers: `sort -s`
 
-The `sort -s` command is used to sort suppliers according to the supplier name in VendorVault.
-This helps you to view the suppliers in a different order (ascending or descending).
+Sorts suppliers based on their name in VendorVault.
 
 Format: `sort -s so/SORT_ORDER sb/SORT_BY`
 
-Parameters:
-- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending.
-- `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name)
+<box type="info" seamless>
 
-<box type="warning" seamless>
+Parameters:
+- `SORT_ORDER`: The sorting order. It must be either `a` for ascending or `d` for descending, and cannot be blank.
+  - `SORT_ORDER` is case-sensitive.
+- `SORT_BY`: The field to sort by. It must be `n` for name, and cannot be blank.
+
+</box>
+
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space between `sort` and `-s` is needed.
@@ -319,21 +346,20 @@ Parameters:
 - All parameters must be given.
 - No duplicate parameters can be used.
 - `SORT_ORDER` and `SORT_BY` are case-sensitive.
-- The sort command will only sort all suppliers in VendorVault.
-- i.e.
-    - If you have searched for a supplier using the `find` command,
-      the sort command will not sort the previous results of the `find` command, but will sort all suppliers in VendorVault.
+- The sort command will sort all suppliers in VendorVault, not just the displayed list.
+  - e.g. If you have searched for suppliers using the `find` command, the sort command will not sort the previous results of the `find` command, but will sort all suppliers in VendorVault.
+
 </box>
 
+Example:
+- `sort -s so/a sb/n`
 
-#### Example
-To sort suppliers by name in descending order:
+Expected output:
+- Suppliers sorted by their `NAME` in ascending order are shown.
 
-    sort -s so/d sb/n
-
-A success message will be displayed if the suppliers are successfully sorted.
 #### Here's how it would look like in the app:
 ![sort command](images/sortSupplierCommand.png)
+
 ---
 
 ## <ins> Delivery Commands </ins>
@@ -344,8 +370,9 @@ Adds a delivery to VendorVault.
 
 Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY c/COST`
 
-Parameters:
+<box type="info" seamless>
 
+Parameters:
 - `on/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the date and time of delivery. It must be in dd-MM-yyyy hh:mm format, and cannot be blank.
 - `s/SUPPLIER_INDEX`:`SUPPLIER_INDEX` is the index of supplier currently displayed. It must be a number between 1 and the total number of suppliers currently displayed (inclusive), and cannot be blank.
 - `pro/PRODUCT`: `PRODUCT` is the product associated with the delivery. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
@@ -357,7 +384,9 @@ Parameters:
     - Accepted units for `QUANTITY` are `kg`, `g`, `L`, `mL`, `units`. 
 - `c/COST`: `COST` is the total cost for the delivery. It must be a number greater than 0 with up to 2 decimal places allowed, and cannot be blank.
 
-<type="tip" seamless>
+</box>
+
+<box type="tip" seamless>
 
 **Tips:** 
 - Day, month, hour and minute of DELIVERY_DATE_TIME must be in double digits!
@@ -365,13 +394,13 @@ Parameters:
 
 </box>
 
-<box type="warning" seamless>
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `add` and `-d`.
 - At least one space is needed between `-d` and the first parameter.
 - At least one space is needed between parameters.
-- A warning will be given if the user tries to add a duplicate delivery.
+- An error message will be shown if the user tries to add a duplicate delivery.
   - A delivery is considered duplicate and will not be added again if it has the same `DELIVERY_DATE_TIME`, `SUPPLIER`, `PRODUCT`, `QUANTITY`, `COST` and `STATUS` as an existing delivery.
       - Comparison between different `PRODUCT`is case-sensitive.
 - A delivery has a default `STATUS` of `PENDING`.
@@ -397,7 +426,7 @@ Shows a list of all deliveries in VendorVault. The supplier list will not be aff
 
 Format: `list -d`
 
-<box type="warning" seamless>
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `list` and `-d`.
@@ -411,19 +440,20 @@ Deletes the specified delivery from the address book.
 
 Format: `delete -d INDEX`
 
-<box type="details" seamless>
+<box type="info" seamless>
 
 Parameters:
-- `INDEX`: The index of the delivery to be deleted in the displayed list. Must be a positive numeric number.
+- `INDEX`: The index of the delivery to be deleted in the displayed list. It must be a number between 1 and the total number of deliveries displayed (inclusive), and cannot be blank.
 
 </box>
 
-<box type="warning" seamless>
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `delete` and `-d`.
 - Spacing between `-d` and `INDEX` is not compulsory.
-- Only one delivery can be deleted one command.
+- All parameters must be given.
+- Only one delivery can be deleted by one command.
   - `delete -d 1 3 5` is not allowed.
 
 </box>
@@ -441,33 +471,38 @@ Expected output:
 
 ### Marking a delivery : `mark -d`
 
-Marks the specified delivery in VendorVault with the specified `STATUS`.
+Marks the specified delivery with the specified status in VendorVault.
 
 Format: `mark -d INDEX STATUS`
 
+<box type="info" seamless>
+
 Parameters:
-
 - `INDEX`: The index of the delivery to be marked in the displayed list. It must be a number between 1 and the total number of deliveries displayed (inclusive), and cannot be blank.
-- `STATUS`: The status of delivery. It must be one of the following values: `PENDING`, `DELIVERED`, `CANCELLED`, and cannot be blank.
+- `STATUS`: The delivery status to change to. It must be one of the following values: `PENDING`, `DELIVERED`, `CANCELLED`, and cannot be blank.
 
-<box type="warning" seamless>
+</box>
+
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `mark` and `-d`.
 - At least one space is needed between `-d` and `INDEX`.
-- At least one space is needed between `INDEX` and `STATUS.
+- At least one space is needed between `INDEX` and `STATUS`.
+- All parameters must be given.
+- At least one space is needed between parameters.
 - `STATUS` is not case-sensitive. `pending`, `delivered`, `cancelled` can be accepted as well.
-- An error message will be given if the user tries to mark a delivery with a status that is the same as the existing status.
+- An error message will be shown if the user tries to mark a delivery with a status that is the same as the existing status.
 
 </box>
 
 Examples:
 - `mark -d 2 DELIVERED`
-- `find -d pro/ bread` followed by `mark -d 1 cancelled`
+- Searching by product using `find -d pro/bread` followed by `mark -d 1 cancelled`
 
-Expected output:
-- Delivery at index 2 of the displayed list has status shown as DELIVERED, assuming it has a different status initially. Otherwise, an error message will be shown.
-- Delivery at index 1 of the displayed list has status shown as CANCELLED, assuming it has a different status initially and there is at least one delivery in the displayed list after the find command is executed. Otherwise, an error message will be shown.
+Expected outputs:
+- Delivery at index 2 of the displayed list has status shown as `DELIVERED`, assuming there is at least 2 deliveries displayed and the second delivery has a different status initially. Otherwise, an error message will be shown.
+- Delivery at index 1 of the displayed list has status shown as `CANCELLED`, assuming there is at least 1 delivery displayed and the first delivery has a different status initially. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 ![mark delivery command](images/markDeliveryCommand.png)
@@ -478,7 +513,7 @@ Find deliveries based on attributes of the delivery, like the delivery date and 
 
 Format: `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`
 
-<box type="details" seamless>
+<box type="info" seamless>
 
 Parameters:
 
@@ -491,17 +526,25 @@ Parameters:
 
 </box>
 
-<box type="warning" seamless>
+<box type="tip" seamless>
+
+**Tips:**
+- The find result(s) will contain/satisfy all the given parameters.
+    - Comparison between parameters is case-sensitive.
+- You can provide all the parameters or any combination of parameters, as long as at least one is given!
+
+</box>
+
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `find` and `-d`.
-- At least one parameter must be given.
 - At least one space is needed between `-d` and the first parameter.
-- When using more than one parameter, at least one space is needed between parameters.
-- `STATUS` and `PRODUCT` are case-insensitive.
-- No duplicate parameter can be used.
+- At least one parameter must be given.
+- No duplicate parameters can be used.
   - `find -d pro/milk pro/bread` is not allowed.
-- Find result(s) will contain/satisfy all the given parameters.
+- At least one space is needed between parameters.
+- `STATUS` and `PRODUCT` are case-insensitive.
 
 </box>
 
@@ -517,21 +560,28 @@ Expected output:
 
 ### Sort deliveries: `sort -d`
 
-The `sort -d` command is used to sort deliveries in VendorVault based on the delivery cost, date and time or status.
-This helps you to view the deliveries in a different order (ascending or descending).
+Sorts deliveries based on their cost, date and time, and status in VendorVault.
 
 Format: `sort -d so/SORT_ORDER sb/SORT_BY`
 
-<box type="details" seamless>
+<box type="info" seamless>
 
 Parameters:
 
-- `so/SORT_ORDER`: `SORT_ORDER` must be either `a` for ascending or `d` for descending, and must not be blank.
-- `sb/SORT_BY`: `SORT_BY` must be either `c` for cost, `d` for date and time or `s` for status, and must not be blank.
+- `SORT_ORDER`: The sorting order. It must be either `a` for ascending or `d` for descending, and cannot be blank.
+    - `SORT_ORDER` is case-sensitive.
+- `SORT_BY`: The field to sort by. It must be either `c` for `COST`, `d` for `DELIVERY_DATE_TIME` or `s` for `STATUS`, and cannot be blank.
 
 </box>
 
-<box type="warning" seamless>
+<box type="caution" seamless>
+
+<box type="tip" seamless>
+
+**Tips:**
+- Sorting deliveries by status in ascending order will display deliveries in the following order: `CANCELLED`, `DELIVERED`, `PENDING`
+
+</box>
 
 **Warnings**:
 - At least one space is needed between `sort` and `-d`.
@@ -541,13 +591,8 @@ Parameters:
 - No duplicate parameter can be used.
   - `sort -d so/a sb/c sb/d` is not allowed.
 - `SORT_ORDER` and `SORT_BY` are case-sensitive.
-- Using `sort -d` command will sort and display all deliveries in VendorVault even if you have previously used the `find -d` command.
-
-</box>
-
-<box type="tip" seamless>
-
-**Tip:** Sorting deliveries by status in ascending order will display deliveries in the following order: `CANCELLED`, `DELIVERED`, `PENDING`
+- Using `sort -d` command will sort all deliveries in VendorVault, not just the displayed list.
+  - e.g. If you have searched for deliveries using the `find` command, the sort command will not sort the previous results of the `find` command, but will sort all deliveries in VendorVault.
 
 </box>
 
@@ -555,9 +600,7 @@ Example:
 - `sort -d so/a sb/c`
 
 Expected output:
-- All deliveries, if any, will be sorted by cost in ascending order.
-
-    
+- Deliveries sorted by their `COST` in ascending order are shown.
 
 #### Here's how it would look like in the app:
 ![sort command](images/sortDeliveriesCommand.png)
@@ -569,24 +612,27 @@ before or after a given date.
 
 Format: `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`
 
-Parameters:
+<box type="info" seamless>
 
+Parameters:
 - `aft/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the start date and time in which only deliveries with status`PENDING` after this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
 - `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` before this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
 
+</box>
+
 <box type="tip" seamless>
 
-**Tip:**
+**Tips:**
 - You can provide both parameters or just one parameter!
 
 </box>
 
-<box type="warning" seamless>
+<box type="caution" seamless>
 
 **Warnings**:
 - At least one space is needed between `upcoming` and the first parameter.
-- When using more than one parameter, at least one space is needed between parameters.
 - At least one parameter must be provided.
+- At least one space is needed between parameters.
 - If both parameters are provided, then only deliveries with status`PENDING` and `DELIVERY_DATE_TIME` between the two specified parameters are displayed (not inclusive).
 
 </box>
@@ -645,11 +691,13 @@ VendorVault data are saved in the hard disk automatically after any command that
 ### Editing the data file
 
 VendorVault automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file.
-<box type="warning" seamless>
+
+<box type="caution" seamless>
 
 **Caution:**
 - **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
 - Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 ---
