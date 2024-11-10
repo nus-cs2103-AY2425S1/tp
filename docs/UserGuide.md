@@ -42,7 +42,7 @@ Alerts you to potential issues or problems that may arise.
 
 1. Ensure that Java 17 is installed on your computer. 
    * Open a command terminal. 
-   * * For Windows users, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
+     * For Windows users, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
      * For Mac users, follow instructions [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac).
    * Type the following command to check the Java version:<br>
      ```
@@ -50,15 +50,15 @@ Alerts you to potential issues or problems that may arise.
      ```
    * If Java 17 is installed, you should see an output similar to: `java version "17.0.1" `
    * If you do not have Java 17, you can download it from [Oracle's official website](https://www.oracle.com/java/technologies/downloads/#java17).
-
+<br>
 2. Download the application
    * Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F12-1/tp/releases).
-
+<br>
 3. Set up the home folder
    * Choose a folder where you want to store your AddressBook data.
    * Copy the downloaded `.jar` file to this folder.
    * This folder will serve as the "home folder" for your AddressBook.
-
+<br>
 4. Run the application
    * Open a command terminal.
    * Navigate (`cd`) to the folder where you placed the `.jar` file.
@@ -86,7 +86,7 @@ Alerts you to potential issues or problems that may arise.
      java -jar contactcs.jar
      ```
    A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.<br>![Ui](images/Ui.png)
-
+<br>
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -99,8 +99,8 @@ Alerts you to potential issues or problems that may arise.
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+<br>
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
