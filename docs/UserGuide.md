@@ -66,7 +66,7 @@ SalesContactPro is a **CLI-first contact management system designed specifically
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Displays a summary of commands available.
 Shows a message explaining how to access the help page at the bottom.
@@ -83,6 +83,10 @@ Adds a person to the address book. People with **both** same **Name** and **Phon
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+While we allow any letter for names for flexibility, our primary language is English, and any formatting errors due to other languages is not part of our scope.
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
@@ -97,9 +101,11 @@ Shows a list of all persons in the address book. The list can be optionally sort
 
 Format: `list [s/SORT_FIELD] [r/]`
 
-* `s/SORT_FIELD`: The field to sort by. Valid values are:
-  * `name` - Sort by contact name
-  * `email` - Sort by email address
+* `s/SORT_FIELD`: The field to sort by, defaults to name if not specified. Valid values are:
+  * `name` - Sort by contact name in lexicographical order
+  * `email` - Sort by email address in lexicographical order
+  * `age` - Sort by age
+  * `income` - Sort by income
 * `r/`: Reverses the sort order (descending instead of ascending)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Important Note:**
@@ -123,17 +129,17 @@ Examples:
 Expected outcome for `list s/name`:
 ```
 Listed all persons
-Results: 
+Results:
 1. Alice Pauline (Phone: 94351253)
 2. Benson Meier (Phone: 98765432)
 ...
 ```
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in the address book. People with **both** same **Name** and **Phone** are not allowed.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -141,6 +147,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOM
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If multiple `i/` or `age/` fields are indicated, the app will use the last one for each.
+</div>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -170,15 +180,15 @@ Examples:
 
 Filters the displayed list of persons in the address book to include all persons who meet the specified criteria and displays them with index numbers.
 
-Format: `filter p/PHONE e/EMAIL a/ADDRESS t/TAG... i/INCOME_GROUP... age/AGE_CRITERIA...`
+Format: `filter [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [i/INCOME_GROUP…​] [age/AGE_CRITERIA…​]`
 
 Parameters:
 * `p/PHONE`: The phone number criteria to filter by. For multiple phone numbers, it checks if any phone number is present.
 * `e/EMAIL`: The email criteria to filter by. For multiple emails, it checks if any email is present.
 * `a/ADDRESS`: The address criteria to filter by. For multiple addresses, it checks if any address is present.
-* `t/TAG...`: The tags to filter by. For multiple tags, it checks if all tags are present.
-* `i/INCOME_GROUP...`: The income group criteria to filter by. Valid values are `none`, `low`, `medium`, and `high`.
-* `age/AGE_CRITERIA...`: The age criteria to filter by. A valid age criteria can only contain `<`, `>`, or numbers. If it contains `<` or `>`, there must only be a single instance of either of them, and only as the first character. It cannot contain both. If only numbers are given, equality is checked. For multiple age criteria, it checks if all age criteria are satisfied.
+* `t/TAG…​`: The tags to filter by. For multiple tags, it checks if all tags are present.
+* `i/INCOME_GROUP…​`: The income group criteria to filter by. Valid values are `none`, `low`, `medium`, and `high`. Multiple income values can be used in the same `i/`, and will check with an `OR` criteria.
+* `age/AGE_CRITERIA…​`: The age criteria to filter by. A valid age criteria can only contain `<`, `>`, or numbers. If it contains `<` or `>`, there must only be a single instance of either of them, and only as the first character. It cannot contain both. If only numbers are given, equality is checked. For multiple age criteria used in the same `age/`, it checks if all age criteria are satisfied.
 
 **Examples**:
 * `filter p/+65 e/example.com a/Clementi t/Inactive i/low age/>20 <60`: Filters the list to include all persons whose phone number contains `+65`, email contains `example.com`, address contains `Clementi`, have the tag `Inactive`, belong to the `low` income group, and are aged between 21 and 59.
@@ -193,9 +203,9 @@ Parameters:
 
 ### Managing contact notes: `notes`
 
-View, add, edit, or delete additional notes for any contact in your address book. Notes can help you remember important details about each contact.
+View, add, edit, or delete additional notes for any contact in your address book. Notes can help you remember important details about each contact. Each contact can only have 1 notes.
 
-Format: `notes [PARAMETER]`
+Format: `notes PARAMETER`
 
 Parameters:
 * View: `view/NAME` or `view/INDEX`
@@ -203,14 +213,19 @@ Parameters:
 * Edit: `edit/NAME` or `edit/INDEX`
 * Delete: `del/NAME` or `del/INDEX`
 
+<div markdown="span" class="alert alert-primary">:exclamation: **Tip:**
+The `notes add/` feature will replace the entire note, please use `notes edit/` to make modifications.
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+While we allow any character for notes for flexibility, our primary language is English, and any formatting errors due to other languages is not part of our scope.
+</div>
 <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
 When using a person's name:
-* If there are multiple contacts with similar names, Sales Contact Pro will display a filtered list of all matching contacts
+* If there are multiple contacts with similar names, SalesContactPro will display a filtered list of all matching contacts
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Using the person's index number from the last displayed list is often easier than typing their full name!
 </div>
-
 
 Examples:
 * `notes view/John Doe` or `notes view/1` - Views John Doe's notes
@@ -243,7 +258,7 @@ For deleting notes:
 Deleted notes for John Doe
 ```
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 Deletes the person with the specified `NAME` or the person at the specified `INDEX`
 
@@ -269,13 +284,13 @@ Examples:
 * `delete Alice`: Deletes the person named Alice from the address book.
 * `delete 1`: Deletes the first person in the currently displayed list.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Command History : `↑` `↓` 
+### Command History: `↑` `↓`
 Allows users to quickly access previously entered commands without retyping them using arrow keys.
 
 Format: `↑` or `↓`
@@ -288,13 +303,13 @@ Examples:
 - `↑` : Retrieve previous command in the command box.
 - `↓` : Retrieve next command in the command box.
 
-### Change theme : `F3`
+### Change theme: `F3`
 
 Allows users to toggle between light and dark theme with `F3` key
 
 Format: `F3`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -337,11 +352,13 @@ _Details coming soon ..._
 
 Action | Format, Examples
 -------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3` `delete James Ho`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find James Jake`
-**List** | `list [s/SORT_FIELD] [r/]` <br> • SORT_FIELD: `name`, `email`, `income`, or `age` <br> e.g., `list s/name`, `list s/email r/`, `list s/age`
-**Notes** | `notes PARAMETER` <br> • View: `notes view/NAME` or `notes view/INDEX` <br> • Add: `notes add/NAME nt/NOTES` or `notes add/INDEX nt/NOTES` <br> • Edit: `notes edit/NAME` or `notes edit/INDEX` <br> • Delete: `notes del/NAME` or `notes del/INDEX` <br> e.g., `notes view/1`, `notes add/James Ho nt/Prefers email`
-**Help** | `help`
+**[Add](#adding-a-person-add)** | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTES] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**[Delete](#deleting-a-person-delete)** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3` `delete James Ho`
+**[Edit](#editing-a-person-edit)** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…` <br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
+**[Find](#locating-persons-by-name-find)** | `find KEYWORD [KEYWORD]…` <br> e.g., `find James Jake`
+**[Filter](#filtering-persons-by-criteria-filter)** | `find KEYWORD [KEYWORD]...` <br> e.g., `find James Jake`
+**[List](#listing-all-persons-list)** | `list [s/SORT_FIELD] [r/]` <br> • SORT_FIELD: `name`, `email`, `income`, or `age` <br> e.g., `list s/name`, `list s/email r/`, `list s/age`
+**[Notes](#managing-contact-notes-notes)** | `notes PARAMETER` <br> • View: `notes view/NAME` or `notes view/INDEX` <br> • Add: `notes add/NAME nt/NOTES` or `notes add/INDEX nt/NOTES` <br> • Edit: `notes edit/NAME` or `notes edit/INDEX` <br> • Delete: `notes del/NAME` or `notes del/INDEX` <br> e.g., `notes view/1`, `notes add/James Ho nt/Prefers email`
+**[Help](#viewing-help-help)** | `help`
+**[Clear](#clearing-all-entries-clear)** | `clear`
+**[Exit](#exiting-the-program-exit)** | `help`
