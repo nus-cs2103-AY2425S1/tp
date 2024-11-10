@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.StudentId;
 
