@@ -446,7 +446,7 @@ Deletes the specified person from KonTActs.
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Deletes the person with the specified name.
-* The name refers to the full name of the person shown in the displayed person list.
+* The name refers to the full name of the person shown in KonTActs.
 * If a person matches the name but is not shown in the list, it will not be deleted.
   </box>
 
@@ -474,6 +474,13 @@ Launches GitHub repository of the specified person on the browser from KonTActs.
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Shortcut: `git n/NAME`**</md>
+</box>
+
+<box type="important" light>
+
+**Browser security restrictions**
+
+KonTActs will attempt to open GitHub in your default browser. Please note that some browser security settings or pop-up blockers may prevent this. Please ensure that your browser allows new tabs or windows to be open from external applications before using the command.
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -512,7 +519,7 @@ Opens a window at the side with the full details of the specified person from Ko
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * View the full details of the contact you specify.
-* `NAME` refers to the full name of the person shown in the displayed person list.
+* `NAME` refers to the full name of the person shown in KonTActs.
 * Calling `view` without any name parameter closes any windows previously opened by `view`.
 * Deleting or editing name of the current contact opened by `view` closes `view`.
   </box>
