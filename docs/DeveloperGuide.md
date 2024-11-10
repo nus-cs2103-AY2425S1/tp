@@ -990,7 +990,7 @@ At present, the PROperty does not indicate to the user when an export fails (e.g
 then edits information using the app and exports the csv again, 
 the second export will cause an error and the new CSV file will not be correctly exported.
 However, the PROperty GUI reflects that a second export command has been successfully executed, 
-even though the console shows that an error has been thrown.)
+even though the console shows that an error has been thrown).
 
 **Proposed Enhancement**
 
