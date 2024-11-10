@@ -234,6 +234,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | frequent user               | search for member's details based on active participation status                                                                                                                         | have a better sensing on member's involvement to choose for the next ExCo                                                        |
 | `*`      | intermediate user           | understand / be guided on the automation capabilities of this tool such as automatically updating particulars (year of study, graduation status, on exchange) when a new semester begins | use the app with ease                                                                                                            |
 | `*`      | user                        | view the PDPA stance the members have in terms of sending of info the 3rd parties                                                                                                        | know whether I am allowed to send member’s personal details to 3rd parties                                                       |
+| `* *`      | user                    | collate a list of Telegram handles of members under a particular group when I specify a category                                                                           | quickly send relevant messages, such as instructions or job opportunities.                                  |
+| `*`          | user                    | sort the members' details                                                                                                                                                  | view the full list of details with ease if needed.                                                          |
+| `* *`      | user who values efficiency | gather all the emails of the members                                                                                                                                       | quickly send semester newsletters or updates to all members via email.                                      |
+| `* *`        | efficient user          | retrieve contact details of a selected group of members interested in a specific industry (e.g., semicon company)                                                          | provide these details to companies.                                                                         |
+| `* *`        | user                    | verify whether the member's details in the database are the most updated                                                                                                   | confidently send them to third parties knowing that the data sent is correct.                               |
+| `*`        | user                    | archive data from past members or alumni to another location                                                                                                              | use them in the future, such as for passing alumni details to companies that wish to invite graduates only. |
+| `*`          | user                    | search for the relevant contact details of a particular past member                                                                                                        | contact them.                                                                                               |
+| `*`        | user                    | toggle between viewing current members' data and alumni data                                                                                                               | access the correct set of information when needed.                                                          |
+| `*`          | intermediate user       | find out about advanced functions in managing tools                                                                                                                        | explore additional features for managing members.                                                           |
+| `* *`      | intermediate user       | automatically register members' details into the database when the academic year starts                                                                                    | maintain efficient processes.                                                                               |
+| `* *`      | intermediate user       | automatically update particulars (year of study, graduation status, on exchange) when necessary, especially at the beginning of a new semester                             | ensure data accuracy with minimal manual effort.                                                            |
+| `* *`        | intermediate user       | generate a custom list of selected member information with only the needed details                                                                                         | easily retrieve the specific data required.                                                                 |
+| `* * *`      | user who values data privacy | set a password for the app                                                                                                                                                 | restrict access to only authorised individuals.                                                             |
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -622,65 +635,4 @@ This section outlines the planned future enhancements for the data_coNdUctorS ap
 
 ---
 
-### Undo and Redo Commands
-
-1. Adding undo/redo functionality for recent actions
-
-   1. Goal: Allow users to revert recent changes or repeat an undone action for ease of correction and experimentation.
-   
-   1. Planned Implementation: Introduce `undo` and `redo` commands that track changes to the contact list. These commands would store actions in a history log to reverse or repeat the last commands executed.
-   
-   1. Expected Outcome: Users gain flexibility in editing contacts by easily reversing or reapplying changes, enhancing user control over modifications.
-
----
-
-### Import and Export Functionality
-
-1. Enabling contacts import and export in CSV format
-
-   1. Goal: Provide options to import contact data from external sources and export the current contact list for external use.
-   
-   1. Planned Implementation: Implement `import` and `export` commands to handle CSV files. The `import` command would parse CSV files, while the `export` command would generate a CSV of the contact list.
-   
-   1. Expected Outcome: Users can easily transfer contacts between the app and other platforms, increasing the app's interoperability.
-
----
-
-### Customisable Fields
-
-1. Allowing users to add custom fields to contacts
-
-   1. Goal: Enable users to include additional information specific to their needs by adding custom fields to each contact.
-   
-   1. Planned Implementation: Modify the `add` and `edit` commands to accept optional custom fields (e.g., “Birthday,” “Social Media Handle”). Custom fields could be specified with a new prefix, such as `cf/Birthday`.
-   
-   1. Expected Outcome: This flexibility allows users to store more diverse contact information, tailoring the app to different group management needs.
-
----
-
-### Improved Pagination Controls
-
-1. Adding customisable page size for pagination
-
-   1. Goal: Allow users to control the number of contacts displayed per page, enhancing the usability of pagination for larger lists.
-   
-   1. Planned Implementation: Add a `setPageSize` command or settings option to specify the number of contacts displayed per page.
-   
-   1. Expected Outcome: Users can adjust page sizes to their preference, making navigation easier for both small and large contact lists.
-
----
-
-### Enhanced Data Validation
-
-1. Adding stronger data validation for input fields
-
-   1. Goal: Ensure that all data entered adheres to correct formats to prevent data inconsistencies and potential errors.
-   
-   1. Planned Implementation: Implement additional checks in the `add` and `edit` commands to validate data formats rigorously, such as requiring a specific format for phone numbers or dates.
-   
-   1. Expected Outcome: Reduced errors due to input mistakes, improving data quality and consistency within the contact list.
-
----
-
-This appendix provides an overview of enhancements planned for future releases of data_coNdUctorS, designed to improve user experience, add functionality, and support greater customization.
 
