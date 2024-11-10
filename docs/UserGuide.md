@@ -365,7 +365,7 @@ Parameters:
 
 Examples:
 * `list` followed by `mark -d 2 pending` marks the 2nd delivery in the address book with a pending status.
-* `find -d /pro bread` followed by `mark -d 1 cancelled` marks the 1st delivery in the results of the `find` command with a cancelled status.
+* `find -d pro/ bread` followed by `mark -d 1 cancelled` marks the 1st delivery in the results of the `find` command with a cancelled status.
 
 #### Here's how it would look like in the app:
 ![mark delivery command](images/markDeliveryCommand.png)
@@ -379,40 +379,45 @@ Format: `delete -d INDEX`
 Parameters:
 
 - `INDEX`: Must be a number greater than 0 and must not be blank.
-<box type="tip" seamless>
+<box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `delete` and `-d` is compulsory
-- No duplicate prefix can be used
+- A minimum of one spacing between `delete` and `-d` is compulsory
+- Spacing between `-d` and `INDEX` is not compulsory
+- Only one delivery at the specified `INDEX` can be deleted at a time
+  - `delete -d 1 3 5` is not allowed
 </box>
 
 Examples:
 * `list` followed by `delete -d 2` deletes the 2nd delivery in the address book.
-* `find -d /pro bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
+* `find -d pro/ bread` followed by `delete -d 1` deletes the 1st delivery in the results of the `find` command.
 
 #### Here's how it would look like in the app:
 ![delete delivery command](images/deleteDeliveryCommand.png)
 
 ### Find a delivery: `find -d`
 
-Find deliveries based on attributes of the delivery, like the delivery date and time, delivery status, supplier and product.
+Find deliveries based on attributes of the delivery, like the delivery date and time, status, supplier and product.
 
 Format: `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`
 
 Parameters:
 
-- `on/DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
-- `stat/STATUS`: Must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
-- `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
-<box type="tip" seamless>
+- `on/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` must be in dd-mm-yyyy hh:mm format and must not be blank.
+- `stat/STATUS`: `STATUS` must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
+- `s/SUPPLIER_INDEX`: `SUPPLIER_INDEX` must be a number greater than 0 and must not be blank.
+- `pro/PRODUCT`: `PRODUCT` must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
+    - One space is counted as one character.
+    - `PRODUCT` cannot be made up of only spaces.
+<box type="warning" seamless>
 
 **Warnings**:
 - A spacing between `find` and `-d` is compulsory
-- At least one prefix and parameter must be given
+- At least one parameter must be given
+- `STATUS` and `PRODUCT` are not case-sensitive
 - No duplicate prefix can be used
+  - `find -d pro/milk pro/bread` is not allowed
 - Find result(s) will contain/satisfy all the given parameters
-- Parameters used are case-insensitive
 </box>
 
 
