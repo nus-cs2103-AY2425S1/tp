@@ -417,7 +417,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > 
 >  ---
 
-- **Special Comments**<
+- **Special Comments**
 1. Refer to the Remarks section for prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t).
 
 #### Find
@@ -459,7 +459,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ---
 
 - **Special Comments**
-1. For cases where names consist of two or more parts (e.g. Wen Xuan), inputting `find Wen Xuan` results in finding clients containing `Wen` OR `Xuan` in their names, as per Use Case #2. 
+1. For cases where names consist of two or more parts (e.g. Wen Xuan), inputting `find Wen Xuan` results in finding clients containing `Wen` OR `Xuan` in their names, as per Successful Execution Use Case #2. 
 
 
 #### Edit Client
@@ -640,6 +640,9 @@ Refer to [INDEX](#reference-types) constraints and the following prefixes: [d/](
 > **Output**: The person index provided is invalid
 >
 > ---
+
+- *Special Comments*
+  Refer to [INDEX](#reference-types) constraints and the following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
       
 ---
 
@@ -692,6 +695,9 @@ Commands for managing property listings and associating clients with listings.
 > 
 > ---
 
+- **Special Comments**
+1. Refer to the remarks for the following prefixes: [n/](#n) [pr/](#pr) [ar/](#ar) [add/](#add) [reg/](#reg) [sel/ & buy/](#sel--buy).
+
 #### Show Listings
 - **Command:** `showlistings`
 - **Description:** Displays all current listings.
@@ -718,6 +724,7 @@ Commands for managing property listings and associating clients with listings.
 > ---
 
 - **Failed Execution:** NIL
+- **Special Comments:** NIL
 
 #### Add Buyers to Listing
 - **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
