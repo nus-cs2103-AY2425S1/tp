@@ -257,7 +257,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Status:** Scheduled for future release as current manual process provides a workable solution.
 
+### 4. Error Message Improvement
+**Current issue:** Error messages are inconsistent when users input incorrect values. Depending on the parameter that is incorrect, the messages vary in detail. For example:
+- ![img.png](images/incorrectPhoneEditError.png)
+- ![differentEditError.png](images/differentEditError.png)
+- ![editErrorWithHint.png](images/editErrorWithHint.png)
+These images illustrate varying error message formats for the edit command. While some messages provide the full command hint, others offer minimal guidance, leading to inconsistency across commands. This issue extends beyond the edit command, as other commands also lack a standardized level of information in error messages. Some messages only indicate the error, while others include additional guidance, by also displaying the command hint.
 
+Additionally, certain command hints could benefit from more clarity on constraints, especially for the `edit` command, which currently does not indicate that the `rn/` and `ra/` flags cannot be used simultaneously.
+
+**Proposed Enhancement:** Standardize error message types and improve command hints:
+- `Incorrect command format` type error messages - Triggered when required flags are missing..
+  - Message format: 'Incorrect command format' + command hint.
+- `Invalid flag values` type error messages - Triggered when all necessary flags are present, but one or more flag values are invalid.
+  - Message format: Flag-specific error messages + command hint.
+- Clarify edit command hint – Add information on the constraint preventing simultaneous use of rn/ and ra/ flags.
+
+**Status:** Scheduled for future release as the current error messages are still usable and help guide the user. Reason being:
+1. Current error messages adequately inform users. However, standardisation will enhance usability by reducing confusion and improving consistency. 
+2. The restriction on rn/ and ra/ flags is documented in the user guide, and an error is displayed when both flags are used together, thus users can learn of this constraint through multiple channels.
 
 --------------------------------------------------------------------------------------------------------------------
 
