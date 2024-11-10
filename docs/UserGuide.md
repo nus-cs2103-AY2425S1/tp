@@ -33,7 +33,7 @@ By the end of this guide, you'll be a ResearchRoster pro, saving time and stream
 
 ### Installation
 
-1. Download the `.jar` file of the latest release, from [here](https://github.com/AY2425S1-CS2103T-F08-2/tp/releases).
+1. Download the `.jar` file of the latest release, as stated [here](https://github.com/AY2425S1-CS2103T-F08-2/tp/releases).
 
 2. Move the `.jar` file into an empty folder.
 
@@ -114,19 +114,19 @@ _Refer to the [Features](#features) section for details of each command!_
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/STUDY_GROUP_TAG]` can be used as `n/John Doe t/1A` or as `n/John Doe`.
+  e.g., `n/NAME [t/STUDY_GROUP_TAG]` can be used as `n/John Doe t/1A` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/STUDY_GROUP_TAG]…​` can be used as ` ` (i.e. 0 times), `t/1A`, `t/1B t/Control` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g., `[t/STUDY_GROUP_TAG]…` can be used as ` ` (i.e., 0 times), `t/1A`, `t/1B t/Control` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
+  e.g., if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -135,7 +135,7 @@ _Refer to the [Features](#features) section for details of each command!_
 
 Shows a popup window with a clickable link to the User Guide.
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" width="400px">
 
 Format: `help`
 
@@ -143,12 +143,17 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​`
+Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of study group tags (including 0), and any extra duplicate study group tags will be ignored automatically.
+</div>
 
 * Email, gender and study group tags are **case-insensitive**.
-* Valid entries for names should only contain alphabet characters and spaces; numbers and special characters are not allowed. Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
+* Valid entries for names should only contain alphabet characters and spaces; numbers and special characters are not allowed. 
+* Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
 * Valid entries for gender are M/m/F/f.
-* Age must be a positive integer less than 150.
+* Age must be a non-negative integer between 0 and 150 (both inclusive).
 * Two contacts are considered **duplicates** if they share the same **email** address.
 
 Examples:
@@ -165,35 +170,45 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…​`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [d/DETAIL] [t/ADD_TAG]… [-t/DELETE_TAG]…`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Any extra duplicate study group tags in the input will be ignored automatically.
+</div>
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** (e.g., 1, 2, 3, …).
 * At least one of the optional fields must be provided.
 * When editing tags:
   * Prefix:`[t/ADD-TAG]`
-    - the added tags will be **appended** to the list of existing tags i.e adding of tags does not overwrite existing tags.
-    - if the tag name you entered to add **already exists**, the edit will be successful but you will get the warning:
+    - the added tags will be **appended** to the list of existing tags (i.e., adding of tags does not overwrite existing tags).
+    - if the tag name you entered to add **already exists**, the edit will be successful, but you will get the warning:
       `You tried adding an already existing study group tag.`
   * Prefix: `[-t/DELETE-TAG]`
     - the tags specified will be **deleted** from the list of existing tags.
-    - if the tag name you entered to delete **does not exist**, the edit will be successful but you will get the warning:
+    - if the tag name you entered to delete **does not exist**, the edit will be successful, but you will get the warning:
       `You tried removing a nonexistent study group tag.`
 * When editing **all other fields** : Existing values will be updated to the input values.
 
 Examples:
 *  `edit 1 a/29 e/johndoe@example.com` Edits the age and email address of the 1st person to be `29` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/1B -t/2B` Edits the name of the 2nd person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`
+*  `edit 2 n/Betsy Crower t/1B -t/2B` Edits the name of the 2nd person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`.
 
 ### Deleting persons : `delete`
 
-Deletes the specified persons from the address book.
+Deletes the specified person(s) from the address book.
 
 Format: `delete [INDEX | LowerBound-UpperBound]…`
 
+<<<<<<< HEAD
 * Deletes the person at the specified `INDEX` or range of indices.
 * At least one of the optional fields must be provided.
 * All input indices must be within the range.
+=======
+* At least one index or index range must be provided.
+* Deletes the person at the specified `INDEX` or range of indices.
+* The index must be within the number of participants in the list.
+>>>>>>> master
 * When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
 
 Examples:
@@ -214,19 +229,23 @@ Finds persons whose fields contain the given keywords.
 Format: `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`
 
 * At least one of the optional criteria must be provided.
-* Each criteria can have more than one keyword. e.g. `n/alice bob hans`
-* The search is case-insensitive. e.g. `n/hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `n/Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `n/Han` will not match `Hans`
+* Each criterion can have more than one keyword. e.g., `n/alice bob hans`.
+* The search is case-insensitive. e.g., `n/hans` will match `Hans`.
+* The order of the keywords does not matter. e.g., `n/Hans Bo` will match `Bo Hans`.
 * Persons matching at least one keyword for **every specified criteria** will be returned.
-  e.g. `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person
+  e.g., `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person.
+* Each criterion is matched based on the following:
+  * Name, Detail, Study Group Tag: Only full words will be matched e.g. `n/Han` will not match `Hans`, and `d/assign` will not match `To be assigned`.
+  * Email: Any substring will be matched e.g. `e/han` will match `hans@example.com`.
+  * Age: Only ages contained by the input age(s) and/or range(s) of ages will be matched e.g. `a/17 21-25` will match `17` and `25` but not `19`.
+  * Gender: Only exact genders will be matched e.g. `g/m` will not match `f` and `F`, but `g/m f` will match all genders.
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/roy li alex e/example.com g/m t/1A 1B 2B` returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`<br>
+* `find n/John` returns `john` and `John Doe`.
+* `find n/roy li alex e/example.com g/m t/1A 1B 2B` returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`.<br>
   ![result for 'find' multiple](images/findMultipleCriteria.png)
 
-* `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`
+* `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`.
 
 ### Clearing listed persons : `clear`
 
@@ -269,10 +288,10 @@ Format: `assign STUDY_GROUP [STUDY_GROUP …]`
 * Input study group names must not have duplicates.
 
 Examples:
-* `list` followed by `assign P90-Placebo P90-Experimental` assigns every person in the addressbook to either `P90-Placebo` or `P90-Experimental` study group, but not both.<br>
+* `list` followed by `assign P90-Placebo P90-Experimental` assigns every person in the address book to either `P90-Placebo` or `P90-Experimental` study group, but not both.<br>
   ![result for 'assign P90-Placebo P90-Experimental'](images/assignP90Result.png)
 
-* `find g/M` followed by `assign Male-Group` assigns every male in the addressbook to `Male-Group` study group.<br>
+* `find g/M` followed by `assign Male-Group` assigns every male in the address book to `Male-Group` study group.<br>
   ![result for 'assign Male-Group'](images/assignMaleGroupResult.png)
 
 ### Saving the data
@@ -283,10 +302,17 @@ ResearchRoster data is saved in the hard disk automatically after any command th
 
 ResearchRoster data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
+Example of a valid data file:
+<img src="images/valid_JSON_file.png" width="300px">
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ResearchRoster will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the ResearchRoster to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the ResearchRoster to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+### Setting session reminders `[coming in v2.0]`
+
+_Details coming soon ..._
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -312,14 +338,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
-**List** | `list`
-**Edit** | ``edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…​`​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`
-**Delete** | `delete [INDEX | INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`
-**Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`
-**Clear** | `clear` then `confirm`
-**Export** | `export FILENAME`<br> e.g., `export exported_email`
-**Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`
+Action | Format, Examples                                                                                                                                          
+--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help** | `help`                                                                                                                                                    
+**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`<br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C` 
+**List** | `list`                                                                                                                                                    
+**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [d/DETAIL] [t/ADD_TAG]… [-t/DELETE_TAG]…`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`          
+**Delete** | `delete [INDEX \| INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`                                                                                    
+**Exit** | `exit`                                                                                                                                                    
+**Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`                                    
+**Clear** | `clear` then `confirm`                                                                                                                                    
+**Export** | `export FILENAME`<br> e.g., `export exported_email`                                                                                                       
+**Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`                                                                        
