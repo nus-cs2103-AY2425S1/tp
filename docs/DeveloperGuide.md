@@ -875,7 +875,16 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a person
 
+<box type="info" seamless>
+      **Note:** The guide for the find command will be based on the sample address book created on application launch. The commands can be similarly
+        applied to edited data.
 
+      **Note:** 
+</box>
+
+1. Finding a person by name
+
+   1. 
 
 ### Deleting a person
 
