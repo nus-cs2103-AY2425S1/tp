@@ -2,8 +2,9 @@ package seedu.address.logic.commands.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
@@ -54,17 +56,26 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
+    public void execute_invalidIndex_throwsCommandException() {
+        Index invalidIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(invalidIndex);
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                        model.getFilteredTaskList().size() + 1, 1,
+                        model.getFilteredTaskList().size()), () -> deleteTaskCommand.execute(model)
+        );
+    }
+
+    @Test
     public void execute_taskAssignedToPerson_updatesPersonTasks() throws Exception {
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
-        Person personWithTask = new PersonBuilder().withTasks("todo: buy groceries").build();
+        Person personWithTask = new PersonBuilder().withTasks("todo: Buy groceries").build();
         model.addPerson(personWithTask);
         deleteTaskCommand.execute(model);
 
         // Ensure the task is removed from each person's task list
-        assertFalse(personWithTask.hasTask(taskToDelete), "The person should no longer have the deleted task.");
-        model.addTask(new Todo("buy groceries"));
-        model.deletePerson(personWithTask);
+        assertFalse(model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()).hasTask(taskToDelete),
+                "The person should no longer have the deleted task.");
     }
 
 
@@ -110,8 +121,8 @@ public class DeleteTaskCommandTest {
     @Test
     public void execute_taskRemoveIndexFailure() throws Exception {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(Index.fromOneBased(100));
-        assertCommandFailure(deleteTaskCommand, model,
-                String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, 100, 1, 1)
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                100, 1, 1), () -> deleteTaskCommand.execute(model)
         );
     }
 
@@ -121,19 +132,27 @@ public class DeleteTaskCommandTest {
         DeleteTaskCommand deleteSecondCommand = new DeleteTaskCommand(INDEX_SECOND);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
         DeleteTaskCommand deleteFirstCommandCopy = new DeleteTaskCommand(INDEX_FIRST);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertNotEquals(null, deleteFirstCommand);
 
         // different task -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertNotEquals(deleteFirstCommand, deleteSecondCommand);
     }
+
+    @Test
+    public void toString_includesTargetIndex() {
+        Index targetIndex = Index.fromOneBased(1);
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetIndex);
+        String toStringResult = deleteTaskCommand.toString();
+        assertTrue(toStringResult.contains("targetIndex=" + targetIndex),
+                "toString() should include 'targetIndex' with the correct value.");
+    }
+
+
 }

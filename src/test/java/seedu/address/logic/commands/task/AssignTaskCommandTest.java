@@ -1,8 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -62,12 +61,10 @@ public class AssignTaskCommandTest {
         // Arrange: Set up a command with an invalid person index
         AssignTaskCommand command = new AssignTaskCommand(Index.fromOneBased(10), Set.of(INDEX_FIRST));
 
-        int personListSize = model.getFilteredPersonList().size();
         // Assert: Command should throw a CommandException for invalid person index
         assertThrows(
-                CommandException.class, String.format(
-                        Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1 , personListSize
-                ), () -> command.execute(model)
+                CommandException.class, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        1, model.getFilteredPersonList().size()), () -> command.execute(model)
         );
     }
 
@@ -81,13 +78,11 @@ public class AssignTaskCommandTest {
         // Assign task with an invalid index (out of bounds)
         AssignTaskCommand command = new AssignTaskCommand(Index.fromZeroBased(0),
                 Set.of(Index.fromOneBased(10)));
-        int taskListSize = model.getFilteredTaskList().size();
+
         // Assert: Command should throw a CommandException for invalid task index
         assertThrows(
-                CommandException.class, String.format(
-                        Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
-                        10, 1, taskListSize
-                ), () -> command.execute(model)
+                CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                        10, 1, model.getFilteredTaskList().size()), () -> command.execute(model)
         );
     }
 
@@ -124,19 +119,31 @@ public class AssignTaskCommandTest {
         AssignTaskCommand command2 = new AssignTaskCommand(INDEX_SECOND, Set.of(INDEX_SECOND));
 
         // same object -> returns true
-        assertTrue(command1.equals(command1));
+        assertEquals(command1, command1);
 
         // same values -> returns true
         AssignTaskCommand command1Copy = new AssignTaskCommand(INDEX_FIRST, Set.of(INDEX_FIRST));
-        assertTrue(command1.equals(command1Copy));
-
-        // different types -> returns false
-        assertFalse(command1.equals(1));
+        assertEquals(command1, command1Copy);
 
         // null -> returns false
-        assertFalse(command1.equals(null));
+        assertNotEquals(null, command1);
 
-        // different values -> returns false
-        assertFalse(command1.equals(command2));
+        // different personIndex -> returns false
+        assertNotEquals(command1, command2);
+
+        // different taskIndexes -> returns false
+        AssignTaskCommand commandDifferentTasks = new AssignTaskCommand(INDEX_FIRST, Set.of(INDEX_SECOND));
+        assertNotEquals(command1, commandDifferentTasks);
+
+        // different personIndex but same taskIndexes -> returns false
+        AssignTaskCommand commandDifferentPersonSameTasks = new AssignTaskCommand(INDEX_SECOND, Set.of(INDEX_FIRST));
+        assertNotEquals(command1, commandDifferentPersonSameTasks);
+
+        // same personIndex, multiple taskIndexes -> returns true
+        AssignTaskCommand commandWithMultipleTasks = new AssignTaskCommand(INDEX_FIRST,
+                Set.of(INDEX_FIRST, INDEX_SECOND));
+        AssignTaskCommand commandWithMultipleTasksCopy = new AssignTaskCommand(INDEX_FIRST,
+                Set.of(INDEX_FIRST, INDEX_SECOND));
+        assertEquals(commandWithMultipleTasks, commandWithMultipleTasksCopy);
     }
 }

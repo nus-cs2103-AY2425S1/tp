@@ -67,7 +67,7 @@ public class UnassignWeddingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
             throw new CommandException(String.format(
                     MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()
             ));
@@ -128,10 +128,6 @@ public class UnassignWeddingCommand extends Command {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        }
-
-        if (!(other instanceof UnassignWeddingCommand)) {
-            return false;
         }
 
         UnassignWeddingCommand otherCommand = (UnassignWeddingCommand) other;
