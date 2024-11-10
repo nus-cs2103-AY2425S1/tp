@@ -301,6 +301,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * You can remove all the company’s tags by typing `t/` without
     specifying any tags after it.
 
+<box type="info" seamless>
+
+**Note:** A company's status is updated based on your applications to it, so you cannot manually change the status using the `edit` command.
+</box>
+
 Examples:
 *  `edit 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
 *  `edit 2 n/Goggle t/` Edits the name of the 2nd company to be `Goggle` and clears all existing tags.
