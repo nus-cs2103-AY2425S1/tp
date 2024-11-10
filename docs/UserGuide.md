@@ -21,20 +21,22 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tahub.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds.<br>
+   Note that the app will contain some sample data initially.<br>
    ![Ui](images/Ui.png)
+   You can use the `clear` command for a clean state.<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all students.
+   * `liststudents` : Lists all students.
 
    * `add n/John Doe p/98765432 e/johnd@example.com c/CS2103T;CS2101` : Adds a student named `John Doe` to TAHub.
 
-   * `delete 2` : Deletes the 2nd student shown in the current list.
+   * `delete 2` : Deletes the 2nd student shown in the current student list.
 
-   * `clear` : Deletes all students.
+   * `clear` : Deletes all students, consultations & lessons.
 
    * `exit` : Exits the app.
 
@@ -60,7 +62,7 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `liststudents`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -90,11 +92,11 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
 * `add n/Betsy Crowe e/betsycrowe@example.com p/1234567 c/CS2103T;CS2101`
 
-### Listing all students : `list`
+### Listing all students : `liststudents`
 
 Shows a list of all students in TAHub.
 
-Format: `list`
+Format: `liststudents`
 
 ### Editing a student : `edit`
 
@@ -145,8 +147,8 @@ Format: `delete INDEX[;INDEX]…`
 * Can delete multiple students at once by separating indices with semicolons (;).
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in TAHub.
-* `list` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
+* `liststudents` followed by `delete 2` deletes the 2nd student in TAHub.
+* `liststudents` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Adding a consultation : `addconsult`
@@ -163,9 +165,11 @@ Adds a new consultation to TAHub.
 * `addconsult d/2024-10-20 t/14:00`
 * `addconsult d/2024-11-05 t/09:00`
 
+
 ### Listing all consultations : `listconsults`
 
-Displays a list of all consultations in TAHub.
+Refreshes and displays the consultation list.
+Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
 
 **Format**: `listconsults`
 
@@ -325,10 +329,10 @@ Deletes lesson(s) from TAHub.
 
 Format: `deletelesson LESSON_INDEX[;LESSON_INDEX]…`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 
 Examples:
-* `deletelesson 1;2;3` deletes the lessons numbered 1,2,3 in the list
+* `deletelesson 1;2;3` deletes the lessons numbered 1,2,3 in the lesson list
 
 ### Adding a student to a lesson : `addtolesson`
 
@@ -337,10 +341,10 @@ that lesson inside the lesson list.
 
 Format: `addtolesson LESSON_INDEX [n/NAME]… [i/STUDENT_INDEX]…`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * At least one of the optional arguments must be provided. There must be at least one name or index.
 * `NAME` must be the full name of a student exactly as shown in the student list.
-* `STUDENT_INDEX` is the index of a student as displayed in the list.
+* `STUDENT_INDEX` is the index of a student as displayed in the student list.
 
 Examples:
 * `addtolesson 1 n/John Doe` adds `John Doe` to lesson number 1.
@@ -353,7 +357,7 @@ with them to that lesson, i.e. re-adding them defaults to no attendance and 0 pa
 
 Format: `removefromlesson LESSON_INDEX n/NAME [n/NAME]…`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * `NAME` must be the full name of a student in the lesson.
 
 Examples:
@@ -366,7 +370,7 @@ color of their name tag under a lesson - **green** for present and **red** for a
 
 Format: `marka LESSON_INDEX n/NAME [n/NAME]… a/ATTENDANCE`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * `NAME` must be the full name of a student in the lesson.
 * If multiple names are provided, all their attendances will be set to the given value.
 * `ATTENDANCE` must be one of the following: `Y`,`y`or`1` for yes (student is present) and `N`,`n`or`0` for no (student is absent).
@@ -385,7 +389,7 @@ will also automatically set their attendance to true.**
 
 Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 
-* `LESSON_INDEX` is the index of the lesson as displayed in the list.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * `NAME` must be the full name of a student in the lesson.
 * If multiple names are provided, all their participation points will be set to the given value.
 * `PARTICIPATION` must be an integer between 0 and 100 inclusive.
@@ -400,6 +404,11 @@ Examples:
 
 Refreshes and displays the lesson list.
 Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
+
+**Format**: `listlessons`
+
+**Example**:
+* `listlessons`
 
 ## Storage Operations
 
@@ -463,6 +472,3 @@ Action | Format, Examples
 **Mark Attendance for Lesson** | `marka INDEX n/NAME…​ a/ATTENDANCE`<br> e.g., `marka 3 n/Jack a/y` <br> e.g., `marka 3 n/Jack n/Jill a/1` <br> e.g., `marka 3 n/Jack a/n` <br> e.g., `marka 3 n/Jack a/0`
 **Mark Participation for Lesson** | `markp INDEX n/NAME…​ pt/POINTS`<br> e.g., `markp 3 n/Jack pt/75`
 **Remove from Lesson** | `removefromlesson INDEX n/NAME…​`<br> e.g., `removefromlesson n/Jake John` <br> e.g., `removefromlesson n/Jake n/John`
-
-
-
