@@ -321,18 +321,21 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                                                            | So that I can…​                                           |
-|----------|-----------------------------|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| `* * *`  | university student          | add a new contact with basic details like name, university, major, birthday, work experience, interests | start building my professional network from school        |
-| `* * *`  | university student          | delete a contact from my network                                                                        | keep my contact list clean and up-to-date                 |
-| `* * *`  | university student          | search for contacts by their university                                                                 | quickly find peers from the same university               |
-| `* * *`  | university student          | search for contacts by their major                                                                      | connect with peers in the same academic field             |
-| `* * *`  | aspiring university student | add internship or work experience to a contact                                                          | network with people who have relevant industry experience |
-| `* * *`  | aspiring university student | search for contacts by their internship or work experience                                              | network with people who have relevant industry experience |
-| `* * *`  | lonely university student   | add interests and hobbies to a contact                                                                  | remember what we have in common                           |
-| `* * *`  | sociable university student | search for contacts by their interests                                                                  | connect with people with similar interests                |
-| `* *`    | university student          | add what year or alumni a contact is in                                                       | filter my search better                                           |
-| `*`      | university student          | add social media links (e.g., LinkedIn, Instagram) to a contact                               | easily connect with them on other platforms                       |
+| Priority | As a …​                     | I want to …​                                                                                            | So that I can…​                                                            |
+|----------|-----------------------------|---------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | university student          | add a new contact with basic details like name, university, major, birthday, work experience, interests | start building my professional network from school                         |
+| `* * *`  | university student          | delete a contact from my network                                                                        | keep my contact list clean and up-to-date                                  |
+| `* * *`  | university student          | search for contacts by their university                                                                 | quickly find peers from the same university                                |
+| `* * *`  | university student          | search for contacts by their major                                                                      | connect with peers in the same academic field                              |
+| `* * *`  | aspiring university student | add internship or work experience to a contact                                                          | network with people who have relevant industry experience                  |
+| `* * *`  | aspiring university student | search for contacts by their internship or work experience                                              | network with people who have relevant industry experience                  |
+| `* * *`  | lonely university student   | add interests and hobbies to a contact                                                                  | remember what we have in common                                            |
+| `* * *`  | sociable university student | search for contacts by their interests                                                                  | connect with people with similar interests                                 |
+| `* * *`  | university student        | edit the contact details of an existing contact                     | keep their information current as they progress in their studies or career |
+| `* * *`  | university student        | update interests, work experience, or major of a contact            | reflect their latest accomplishments and interests                         |
+| `* * *`  | university student        | change the name, phone number, or email of a contact                | ensure my contact list has the most accurate and up-to-date information    |
+| `* *`    | university student          | add what year or alumni a contact is in                                                       | filter my search better                                                    |
+| `*`      | university student          | add social media links (e.g., LinkedIn, Instagram) to a contact                               | easily connect with them on other platforms                                |
 
 ---
 <div style="page-break-after: always;"></div>
