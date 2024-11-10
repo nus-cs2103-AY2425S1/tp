@@ -29,6 +29,7 @@ public class AddressTest {
         assertFalse(Address.isValidAddress(" ")); // spaces only
         assertFalse(Address.isValidAddress("/")); // forward slash only
         assertFalse(Address.isValidAddress("/Blk 123")); // starts with forward slash
+        assertFalse(Address.isValidAddress("/Blk/ 123")); // starts with forward slash
         assertFalse(Address.isValidAddress("Blk 123/456")); // forward slash in string
 
         // valid addresses
