@@ -114,7 +114,7 @@ public class DeleteCommand extends Command {
 
         if (toDelete.isSamePerson(model.getPersonToDisplay())) {
             model.setPersonToDisplay(null);
-          
+
             isPersonDetailsDeleted = true;
         }
 
