@@ -20,6 +20,9 @@ public class PersonIsRolePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        if (person.getRoles() == null) {
+            return false;
+        }
         return roles.stream()
                 .anyMatch(role -> person.getRoles().contains(role));
     }

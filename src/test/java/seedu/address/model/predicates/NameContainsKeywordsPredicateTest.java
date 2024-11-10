@@ -6,10 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
@@ -99,4 +103,27 @@ public class NameContainsKeywordsPredicateTest {
     }
 
 
+    @Test
+    public void test_nullAddress_returnsFalse() {
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
+                Collections.singletonList("Jurong"));
+        assertFalse(predicate.test(new PersonStubNullName()));
+    }
+
+    private class PersonStubNullName extends Person {
+        private Name name = null;
+
+        public PersonStubNullName() {
+            super(new seedu.address.model.person.Name("Alice"), new seedu.address.model.person.Phone("12345678"),
+                    new seedu.address.model.person.Email("test@gmail.com"),
+                    new seedu.address.model.person.Address("123, Jurong West Ave 6, #08-111"),
+                    new TelegramUsername("alice"),
+                    new HashSet<>());
+        }
+
+        @Override
+        public Name getName() {
+            return this.name;
+        }
+    }
 }

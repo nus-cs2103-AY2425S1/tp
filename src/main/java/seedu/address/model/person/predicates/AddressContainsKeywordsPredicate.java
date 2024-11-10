@@ -18,6 +18,7 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
      * @param keywords List of keywords to search for in the address field.
      */
     public AddressContainsKeywordsPredicate(List<String> keywords) {
+
         this.keywords =
                 keywords.stream()
                         .filter(keyword -> !keyword.isBlank())

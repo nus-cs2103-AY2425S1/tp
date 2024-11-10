@@ -5,10 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramUsername;
 import seedu.address.model.person.predicates.PhoneNumberContainsKeywordPredicate;
 import seedu.address.testutil.PersonBuilder;
 public class PhoneNumberContainsKeywordPredicateTest {
@@ -47,5 +51,29 @@ public class PhoneNumberContainsKeywordPredicateTest {
         PhoneNumberContainsKeywordPredicate predicate = new PhoneNumberContainsKeywordPredicate(keywords);
         assertTrue(predicate.test(new PersonBuilder().withPhone("12345678").build()));
         assertTrue(predicate.test(new PersonBuilder().withPhone("87654321").build()));
+    }
+
+    @Test
+    public void test_nullAddress_returnsFalse() {
+        PhoneNumberContainsKeywordPredicate predicate = new PhoneNumberContainsKeywordPredicate(
+                Collections.singletonList("Jurong"));
+        assertFalse(predicate.test(new PersonStubNullPhoneNumber()));
+    }
+
+    private class PersonStubNullPhoneNumber extends Person {
+        private Phone phone = null;
+
+        public PersonStubNullPhoneNumber() {
+            super(new seedu.address.model.person.Name("Alice"), new seedu.address.model.person.Phone("12345678"),
+                    new seedu.address.model.person.Email("test@gmail.com"),
+                    new seedu.address.model.person.Address("123, Jurong West Ave 6, #08-111"),
+                    new TelegramUsername("alice"),
+                    new HashSet<>());
+        }
+
+        @Override
+        public Phone getPhone() {
+            return this.phone;
+        }
     }
 }

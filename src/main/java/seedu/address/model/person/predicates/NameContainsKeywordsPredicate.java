@@ -33,6 +33,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         if (keywords.isEmpty()) {
             return false;
         }
+        if (person.getName() == null) {
+            return false;
+        }
         List<String> filteredKeywords = keywords.stream()
                 .filter(keyword -> !keyword.isBlank())
                 .collect(Collectors.toList());
