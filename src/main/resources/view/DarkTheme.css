@@ -396,6 +396,11 @@
     -fx-text-fill: white;
 }
 
+.viewWindow #assignment {
+-fx-font-family: "Segoe UI";
+    -fx-font-size: 20px;
+}
+
 .viewWindow #name  {
 -fx-font-family: "Segoe UI";
     -fx-font-size: 35px;

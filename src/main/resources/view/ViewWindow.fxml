@@ -10,7 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 
 <?import javafx.scene.control.ScrollPane?>
-<ScrollPane fitToWidth="true" fitToHeight="true">
+<?import javafx.scene.text.Text?>
+
+<ScrollPane fitToWidth="true" fitToHeight="true" maxHeight="Infinity">
     <VBox id="viewPane" fx:id="viewPane"
           xmlns:fx="http://javafx.com/fxml/1"
           styleClass = "viewWindow"
@@ -36,7 +38,7 @@
             <Label fx:id="email" text="\$email" />
         </HBox>
         <FlowPane fx:id="weekLabel"/>
-        <Label fx:id="assignment" text="\$assignment" />
+        <Text fx:id="assignment" text="\$assignment" fill="white"/>
     </VBox>
 </ScrollPane>
 
