@@ -162,7 +162,7 @@ Format: `help`
 <div markdown="block" class="alert alert-info">
   **:information_source: Note!**<br>
 The displayed contact will persist and edits will not be reflected until you select another contact or close the F.A.R.T book.If you made any changes to the current contact on display, kindly double-click on the same contact to refresh the detailed view.
-</div>
+</div> 
 
 --------------------------------------------------------------------------------------------------------------------
 
