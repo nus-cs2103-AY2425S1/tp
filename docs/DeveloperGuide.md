@@ -720,7 +720,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Customer with name `Foo Chao` or other similar name does not already exist in the address book.
 
     2. Test case: `addcustomer n/Foo Chao t/VVIP t/vvip e/su@example.com a/69, Sembawang Road. #01-01  p/12345678` <br>
-       Expected: The customer is successfully added with both similar tags.A warning and details of the added customer shown in the status message.
+       Expected: The customer is successfully added with both similar tags. A warning and details of the added customer shown in the status message.
 
 7. Adding a customer with missing compulsory field.
 
@@ -785,28 +785,28 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
 
-4. Editing a customer to a [similar name](#similar) as an existing customer.
+4. Editing a customer to a [name similar to an existing customer](#similar).
 
     1. Prerequisites:
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
         - At least 1 customer is listed.
         - The customer to be edited is not `Betsy Crowe`.
     2. Test case: `editcustomer 1 n/betsy crowe` <br>
-       Expected: The customer is successfully edit. A warning and details of the edited customer shown in the status message.
+       Expected: The customer is successfully edited. A warning and details of the edited customer shown in the status message.
 
 5. Editing a customer to have duplicate tags.
 
     1. Prerequisites: At least one customer is listed.
 
     2. Test case: `editcustomer 1 t/friends t/friends` <br>
-       Expected: The customer's tag is successfully edited with one of the duplicated tag ignored. Details of the edited customer shown in the status message.
+       Expected: The customer's tags is successfully edited with one of the duplicated tags ignored. Details of the edited customer shown in the status message.
 
 6. Editing a customer to have [similar tags](#similar).
 
     1. Prerequisites: At least one customer is listed.
 
     2. Test case: `editcustomer 1 t/Friends t/friends` <br>
-       Expected: The customer is successfully edited with both similar tags.A warning and details of the added customer shown in the status message.
+       Expected: The customer is successfully edited with both similar tags. A warning and details of the added customer shown in the status message.
 
 7. Editing a customer with invalid inputs.
     1. Prerequisites: At least one customer is listed.
@@ -836,21 +836,23 @@ testers are expected to do more *exploratory* testing.
        Example: `findcustomer john`
 
     2. Test case: `deletec 1`<br>
-       Expected: First customer is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First customer is deleted from the list. Details of the deleted customer shown in the status message.
 
     3. Test case: `deletec 0`<br>
        Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Adding an order
 
-**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with duplicate/similar names. You are advised to follow the test cases in order. <br>
+**Note:** Some of the test cases may depend on previous test cases, especially those on testing orders with duplicate/similar names. You are advised to follow the test cases in order. <br>
 
 1. Adding a unique order with all parameters specified while all customers is being shown.
 
-    1. Prerequisites: At least 1 customer is displayed in the customer list. No duplicate/similar order under the first customer.
+    1. Prerequisites: At least 1 customer is displayed in the customer list.
+        - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
+        - No order similar to the order to be added under the first customer.
 
     2. Test case: `addorder 1 i/Lamp d/20-11-2024 q/3`<br>
-       Expected: The order is successfully added. Details of the added order shown in the status message. Customer's order listed in the order list.
+       Expected: The order is successfully added. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
 
 2. Adding a unique order with optional field omitted using command aliases when the customer list is filtered.
 
@@ -858,7 +860,7 @@ testers are expected to do more *exploratory* testing.
        Example: `findcustomer bernice`
 
     2. Test case: `addo 1 i/Books d/02-03-2026` <br>
-       Expected: The order is successfully added. Details of the added order shown in the status message. Customer's order listed in the order list.
+       Expected: The order is successfully added. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list
 
 3. Adding an order with missing compulsory field(s).
 
@@ -877,14 +879,14 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least 1 customer is displayed in the customer list. No order similar to the order to be added under the first customer.
 
     2. Test case: `addo 1 i/books d/02-03-2026` <br>
-       Expected: The order is successfully added.A warning and details of the added order shown in the status message. Customer's order listed in the order list.
+       Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list
 
 5. Adding an order with delivery date elapsed.
 
     1. Prerequisites: At least 1 customer is displayed in the customer list. No order similar to order to be added under the first customer.
 
     2. Test case: `addo 1 i/phone d/02-03-2020` <br>
-       Expected: The order is successfully added.A warning and details of the added order shown in the status message. Customer's order listed in the order list.
+       Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list
    
 ### Listing all orders under a customer.
 
@@ -909,7 +911,7 @@ testers are expected to do more *exploratory* testing.
         - Example `listorder 1`.
 
     2. Test case: `filterorder pending` <br>
-       Expected: Only pending orders remains in the order list. A success message shown in the status message.
+       Expected: Only pending orders remain in the order list. A success message shown in the status message.
 
 2. Filtering order list to display all `completed` orders. using command aliases.
     1. Prerequisites:
@@ -917,7 +919,7 @@ testers are expected to do more *exploratory* testing.
         - Example `listorder 1`.
        
     2. Test case: `filterorder completed` <br>
-       Expected: Only completed orders remains in the order list. A success message shown in the status message.
+       Expected: Only completed orders remain in the order list. A success message shown in the status message.
 
 ### Editing an existing order
 
@@ -948,7 +950,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `edito 1 i/test d/21-11-2025 q/1` <br>
        Expected: The order is successfully edit. A warning and details of the edited order shown in the status message.
 
-4. Editing a customer with invalid inputs.
+4. Editing an order with invalid inputs.
     1. Prerequisites: At least one order is listed.
 
     2. Test case: `editorder 1 q/1 2` <br>
@@ -962,7 +964,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all customers using the `listorder 1` command with at least 1 order listed.
 
     2. Test case: `deleteorder 1`<br>
-       Expected: First order is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First order is deleted from the list. Details of the deleted order shown in the status message.
 
     3. Test case: `deleteorder 0`<br>
        Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
@@ -976,7 +978,7 @@ testers are expected to do more *exploratory* testing.
        Example: `filterorder pending`
 
     2. Test case: `deleteo 1`<br>
-       Expected: First order is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First order is deleted from the list. Details of the deleted order shown in the status message.
 
     3. Test case: `deleteo 0`<br>
        Expected: No order is deleted. Error details shown in the status message. Status bar remains the same.
@@ -1077,7 +1079,7 @@ testers are expected to do more *exploratory* testing.
 1. **Change the `CUSTOMER_INDEX` of `addorder` command to be optional when a customer's order list is open** <br>
     - **Problem:** Currently, we made the customer's index needed to be specified for `addorder` when the customer's order list is open but related commands like `editorder` and `filterorder` do not require a customer's index to be supplied.
     - **Solution:** We planned to make the customer's index for `addorder` optional when a particular customer's order list is already displayed.
-    - **Rationale:** User to remember the customer's index which seems unnecessary.
+    - **Rationale:** Requiring the user to remember the customer's index seems unnecessary.
 
 2. **Allows detection of wrong prefix for commands**
     - **Problem:** Currently, we only detect the relevant prefix for each command and treat every other prefix as part of the input.
