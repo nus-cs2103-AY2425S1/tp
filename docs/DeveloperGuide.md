@@ -29,7 +29,8 @@ title: Developer Guide
 ## **Acknowledgements**
 
 - HRConnect is a brownfield project based on [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
-- Certain parts of `Project` and `Assignment` related features contain altered code from the original [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)). 
+- Certain parts of `Project` and `Assignment` related features contain altered code from the original [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
+- Parts of the [User Guide](https://ay2425s1-cs2103t-t15-4.github.io/tp/UserGuide.html) and Developer Guide of HRConnect are based on those for the original [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
 
 
 [Return to Top](#table-of-contents)
@@ -48,7 +49,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document are located in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
