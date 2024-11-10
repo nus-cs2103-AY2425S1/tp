@@ -19,15 +19,15 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the client identified by the index number used in the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted client: %1$s";
     public static final String HELP_DELETE_COMMAND = "Delete Command\n"
             + "- Format: delete INDEX\n"
             + "- Example: delete 1\n"
-            + "- INDEX is the index of the customer displayed.";
+            + "- INDEX is the index of the client displayed.";
 
     private final Index targetIndex;
 

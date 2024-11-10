@@ -20,7 +20,7 @@ public class RemarkCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits or adds a remark to the customer identified "
+            + ": Edits or adds a remark to the client identified "
             + "by the index number passed into INDEX parameter. "
             + "Existing remark will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -28,14 +28,14 @@ public class RemarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "r/ Prefers a high-rise unit.";
 
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_EDIT_REMARK_SUCCESS = "Edited remark to Person: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to client: %1$s";
+    public static final String MESSAGE_EDIT_REMARK_SUCCESS = "Edited remark to client: %1$s";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from client: %1$s";
     public static final String HELP_REMARK_COMMAND = "Remark Command\n"
             + "- Format: remark INDEX r/[REMARKS]\n"
             + "- Example: remark 1 r/Prefers high rise apartments\n"
             + "- Items in the [square brackets] are optional.\n"
-            + "- If [REMARKS] is left blank, the remark will be deleted from the specified Person at INDEX.";
+            + "- If [REMARKS] is left blank, the remark will be deleted from the specified client at INDEX.";
 
     private final Index index;
     private final Remark remark;
