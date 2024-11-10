@@ -253,12 +253,32 @@ TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 
 ### Mark a supplier with a status : `mark -s`
 
-The `mark` command is used to mark a supplier as either **active** or **inactive**
+The `mark` command is used to mark a supplier as either **active** or **inactive**.
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
 
-Format: `mark -s SUPPLIER_INDEX STATUS`
-- `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank.
+Format: `mark -s INDEX STATUS`
+
+<box type="details" seamless>
+
+Parameters:
+- `INDEX`: The index of the supplier in the list. Must be a number greater than 0 and must not be blank.
+- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank. Parameters used are case-sensitive.
+
+</box>
+
+<box type="warning" seamless>
+
+**Warnings**:
+- At least one space between `mark` and `-s` is needed.
+- At least one space between `-s` and `INDEX` is needed.
+- At least one space between `INDEX` and `STATUS` is needed.
+- Both parameters must be given.
+- Parameters used are case-sensitive.
+- A supplier has a default status of `active`.
+- A supplier with an `inactive` status signifies that the supplier is not currently active for deliveries.
+  However, marking an `active` supplier as `inactive` will not delete the delivery associated with the supplier from the delivery list
+  or affect the delivery status in any way.
+</box>
 
 #### Example
 To mark the supplier at index 3 as active:
@@ -273,23 +293,34 @@ A success message will be displayed if the supplier is successfully marked as ac
 ### Find a supplier: `find -s`
 
 The `find -s` command is used to find a supplier in VendorVault. 
-This helps you find suppliers based on keyword search.
+This helps you to search for a supplier based on the supplier name, company, or product. 
 
 Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 
 Parameters:
 
-- `n/NAME`: Must be alphanumeric, and must not be blank.
-- `com/COMPANY`: Must be alphanumeric, and must not be blank.
-- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
+- `n/NAME`: Must be alphanumeric, and must not be blank. Parameters used are case-insensitive.
+- `com/COMPANY`: Must be alphanumeric or punctuation characters, and must not be blank. Parameters used are case-insensitive.
+- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, 
+and must be between 1 and 50 (inclusive) characters long. Parameters used are case-insensitive.
+
+<box type="tip" seamless>
+
+**Tip:**
+- The find result(s) will contain/satisfy all the given parameters.
+- eg: If you execute the command `find -s n/link com/NU`, 
+the result will contain suppliers whose name contains "link" and company contains "NU" if any.
+</box>
 
 <box type="warning" seamless>
 
 **Warnings**:
-- At least one non-empty parameter must be given
-- No duplicate parameter can be used
-- Find result(s) will contain/satisfy all the given parameters
-- Find feature is case-insensitive
+- At least one non-empty parameter must be given.
+- No duplicate prefix can be used.
+- At least one space between `find` and `-s` is needed.
+- At least one space between '-s' and the next parameter is needed.
+- At least one space between each parameter and the next prefix is needed.
+- Parameters used are case-insensitive.
 </box>
 
 
@@ -304,18 +335,31 @@ To find the supplier whose name contains "link" and company contains "NU":
 
 ### Sort suppliers: `sort -s`
 
-The `sort -s` command is used to sort suppliers in VendorVault.
-This helps you to view the suppliers in a different order (ascending or descending), based on the supplier name.
+The `sort -s` command is used to sort suppliers according to the supplier name in VendorVault.
+This helps you to view the suppliers in a different order (ascending or descending).
 
 Format: `sort -s so/SORT_ORDER sb/SORT_BY`
-- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending.
-- `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name)
+
+Parameters:
+- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending. Parameters used are case-sensitive.
+- `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name) 
+Parameters used are case-sensitive.
+
+<box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `add` and `-s` is compulsory
-- All prefixes and parameters must be given
-- No duplicate prefix can be used
-- Parameters used are **case-sensitive**
+- At least one space between `sort` and `-s` is needed.
+- At least one space between `-s` and `so` is needed.
+- At least one space between `SORT_ORDER` and `sb` is needed.
+- All prefixes and parameters must be given.
+- No duplicate prefix can be used.
+- Parameters used are case-sensitive.
+- The sort command will only sort all suppliers in VendorVault.
+- i.e.
+    - If you have searched for a supplier using the `find` command,
+      the sort command will not sort the previous results of the `find` command, but will sort all suppliers in VendorVault.
+</box>
+
 
 #### Example
 To sort suppliers by name in descending order:
