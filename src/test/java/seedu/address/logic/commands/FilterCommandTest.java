@@ -58,6 +58,12 @@ public class FilterCommandTest {
 
         // different person -> returns false
         assertFalse(firstFilterCommand.equals(secondFilterCommand));
+
+        // same value -> returns true
+        assertTrue(firstDescriptor.equals(new FilterPersonDescriptor(firstDescriptor)));
+
+        // different types -> returns false
+        assertFalse(firstDescriptor.equals(null));
     }
 
     @Test

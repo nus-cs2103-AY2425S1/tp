@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -83,14 +84,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * If {@code modules} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Module>} containing zero tags.
      */
-    private Optional<Set<Module>> parseModulesForFilter(Collection<String> modules) throws ParseException {
+    private Optional<Set<Module>> parseModulesForFilter(List<String> modules) throws ParseException {
         assert modules != null;
 
         if (modules.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> moduleSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
-        return Optional.of(ParserUtil.parseModules(moduleSet));
+        return Optional.of(ParserUtil.parseModules(modules));
     }
 
     /**

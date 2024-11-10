@@ -93,8 +93,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (modules.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> moduleSet = modules.size() == 1 && modules.contains("") ? Collections.emptySet() : modules;
-        return Optional.of(ParserUtil.parseModules(moduleSet));
+        return Optional.of(ParserUtil.parseModules(modules));
     }
 
 }

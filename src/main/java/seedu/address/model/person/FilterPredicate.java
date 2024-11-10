@@ -90,7 +90,7 @@ public class FilterPredicate implements Predicate<Person> {
         return filterPersonDescriptor.getModules()
                 .map(modules -> modules.stream()
                         .allMatch(module -> person.getModules().stream()
-                                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.module, keyword.module)))
+                                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(keyword.module, module.module)))
                 )
                 .orElse(true);
     }
@@ -104,7 +104,7 @@ public class FilterPredicate implements Predicate<Person> {
         return filterPersonDescriptor.getTags()
                 .map(tags -> tags.stream()
                         .allMatch(tag -> person.getTags().stream()
-                                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword.tagName)))
+                                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(keyword.tagName, tag.tagName)))
                 )
                 .orElse(true);
     }

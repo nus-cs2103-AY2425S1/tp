@@ -136,6 +136,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE]... [t/TAG]…​`
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
+<div markdown="span" class="alert alert-danger">⚠️ **Warning:**
+Editing modules will cause grades to disappear.
+</div>
+
 Examples:
 *  `edit 1 p/91234567` : Edits the phone number of the 1st person to be `91234567`.
 *  `edit 2 n/Betsy Crower t/` : Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
@@ -164,13 +168,15 @@ Examples:
 ### Filter students : `filter`
 
 You can filter students who meet all specified conditions.
+> ⚠️ **Caution:** This actions will only filter students from the data set, not from the person panel list.
 
 Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
 * At least one of the optional fields must be provided.
-* Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter except phone number.
-* At least 3 digits of number must be provided to filter phone number and it will return all matching numbers that contains specified number.
+* Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter.
+* Filtering by `grade` is not supported.
 * Students matching all the given conditions will be returned (i.e. `AND` search).
+* Filters with empty tag will return all students.
 
 <div markdown="span" class="alert alert-danger">⚠️ **Warning:**
 Each parameter can only contain one keyword.
