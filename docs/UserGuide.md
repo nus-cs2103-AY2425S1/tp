@@ -177,6 +177,11 @@ Field Constraints:
 **The role must be either a patient or a caregiver or both**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For elderly patients, we allow multiple people to share the same email address. This is because a single caregiver may manage emails on behalf of multiple individuals, ensuring that important information reaches the right person even if they share a common contact.
+</div>
+
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
