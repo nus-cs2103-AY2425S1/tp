@@ -38,17 +38,21 @@ This guide will walk you through everything you need to know about BakeBuddy, fr
 ### Step 1: Check if Your Computer is Ready
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
-1 Open your computer's terminal:
+1. Open your computer's terminal:
   - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
   - **For Mac**: Press Command + Space, type `terminal`, and press Enter 
-2 In the black window that appears, type exactly:
+
+2. In the black window that appears, type exactly:
    ```
    java --version
    ```
    and press Enter
-3 What you should see:
+
+3. What you should see:
   - ✅ If you see "Java version 17", you're ready to go!
   - ❌ If you see "command not found" or a number that is not 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
+
+<br>
 
 ### Step 2: Install BakeBuddy
 
