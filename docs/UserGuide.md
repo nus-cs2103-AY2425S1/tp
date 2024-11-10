@@ -271,6 +271,8 @@ Format: `clear`
 ### Finding a person: `findp`
 
 Finds persons whose names contain any of the given keywords.
+If the concertContact view is currently being shown, the application will switch to the view of persons and
+concerts instead.
 
 Format: `findp [n/NAME_KEYWORDS] [r/ROLE]`
 
@@ -290,6 +292,8 @@ Examples:
 ### Finding a concert: `findc`
 
 Finds concerts whose names contain any of the given keywords.
+If the concertContact view is currently being shown, the application will switch to the view of persons and
+concerts instead.
 
 Format: `findc n/NAME_KEYWORDS`
 
@@ -304,6 +308,7 @@ Examples:
 ### Finding a concertContact: `findcc`
 
 Finds all concertContacts that are associated to the person and the concert at the specified index.
+If the persons and concerts are currently being shown, the application will switch to the concertContact view instead.
 
 Format: `findcc [pi/PERSON_INDEX] [ci/CONCERT_INDEX]`
 
