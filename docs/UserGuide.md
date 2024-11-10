@@ -3,16 +3,41 @@ layout: page
 title: User Guide
 ---
 
-Teacher's Pet is a **desktop app for managing students, tailored for Teaching Assistants (TA) in the National University of Singapore (NUS)**. Teacher's Pet offers a lightweight, efficient solution optimized for small (<30 students) classes and works completely offline, promising performance even with an unstable network connection. 
+## Introduction 
 
-To get started with Teacher's Pet, kindly refer to our [Quick Start](#quick-start) guide. 
+Teacher's Pet is a **desktop app for managing students, tailored for Teaching Assistants (TA) in the National University of Singapore (NUS)**.
+With Teacher's Pet, you can easily add, edit, delete, and view student information, as well as track their attendance, all using only your keyboard.
+Teacher's Pet offers a lightweight, efficient solution optimized for small (<30 students) classes and works completely offline, promising performance even with an unstable network connection.
 
-If you simply need to find a command, you can refer to our [Command Summary](#command-summary) for the full list of commands and how to use them. 
+This user guide was designed to aid you in understanding how to use our product for your classroom needs.
+We recommend you to read this guide in sequence. That being said, do not worry if this guide seems overwhelming. 
+You can use our [Table of Contents](#table-of-contents) to navigate to different sections.
 
-Have a question? You might find the answer in our [FAQ](#faq) section.
+Our guide is structured as such:
+1. **Quick Start:** A quick guide on how to download and start Teacher's Pet
+2. **Commands:** An in-depth explanation on how to use our features
+3. **Command Summary:** A quick summary of all our commands
+3. **FAQ:** Answers to some common questions users have
+4. **Known Issues:** A list of known issues
+5. **Glossary:** The definition to some terms used in this guide 
 
+If you are new to Teacher's Pet, we recommend you to continue reading this guide sequentially (starting with [Quick Start](#quick-start)) to get a complete idea of how it works.
 
-* Table of Contents
+If you are already using Teacher's Pet, skipping to the [Commands](#commands) or [Command Summary](#command-summary) section may be more useful.
+
+### How to navigate this user guide
+
+Here are some symbols you may encounter in this user guide:
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+ This is a tip that may contain additional useful information
+</div>
+
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**  
+This contains some information on what you are not able to do
+</div>
+
+### Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -23,11 +48,11 @@ You can refer to the [FAQ](#frequently-asked-questions-quick-start) section belo
 
 1. Ensure you have Java `17` or above installed in your Computer. You may download Java 17 through [this link](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). 
 
-2. Download the latest `teacherspet.jar` file from [here](https://github.com/AY2425S1-CS2103T-W10-1/tp/releases/tag/v1.3). The downloaded file should be  found in your  `Downloads` folder.
+2. Download the latest `teacherspet.jar` file from [here](https://github.com/AY2425S1-CS2103T-W10-1/tp/releases/tag/v1.5.1). The downloaded file should be  found in your  `Downloads` folder.
 
 3. Copy the file, make an empty folder in your `Documents` folder and paste `teacherspet.jar` in the new folder.
 
-4. Open a command terminal, enter `cd Downloads/NAME_OF_YOUR_FOLDER`. Then, enter `java -jar teacherspet.jar` to run the application.<br>
+4. Open a command terminal, enter `cd Documents/NAME_OF_YOUR_FOLDER`. Then, enter `java -jar teacherspet.jar` to run the application.<br>
    A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 ![Example UI](images/Ui.png)
@@ -129,7 +154,7 @@ Here are some examples for you to try!
 
 ### Editing a student : `edit`
 
-Made a mistake? You can edit an existing student in Teacher's Pet.
+Need to change a student's details? You can edit an existing student in Teacher's Pet.
 
 Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`
 
@@ -138,10 +163,14 @@ Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GR
 * Existing values will be updated to the input values.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
+Need to delete a field? If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
 </div>
 
-Continuing from the previous example in `add`, you could try this
+<div markdown="span" class="alert alert-warning">:warning: **Warning:**  
+Note that you are unable to edit comments via the `edit` command
+</div>
+
+Continuing from the previous example in `add`, you could try this:
 *  `edit 1 m/ Science nid/e1234567` Edits the major and NUS NetID of the 1st student to be `Science` and `e1234567` respectively.
 *  `edit 2 n/Betsy Tan g/` Edits the name of the 2nd student to be `Betsy Tan` and clears all of Betsy's groups.
 
@@ -189,12 +218,12 @@ You can view a list of students in the same group(s)
 
 Format: show KEYWORDS
 
-* The KEYWORDS is the name of the group you would like to search for in your current list. For instance, use `group 1` (for group 1) …​
+* The KEYWORDS is/are the group name(s) or identifier(s) you would like to search for in your current list. For instance, use `group 1` or `1` or `group` (for group 1)
 * The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
 * The order of the keywords does not matter. e.g., `1 group` will match `group 1`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can search for substrings within the content, but the search will only return results where the content starts with the entered text. For example, searching for "gro" will match "group 1", but will not match "1 group".
+You can search for substrings within the content, but the search will only return results where the content starts with the entered text. For example, searching for "gro" will match "group 1", but not "1 group".
 </div>
 
 Here is an example you could try:
@@ -567,6 +596,30 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Help** | `help`
+**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/e1234567 m/Computer Science y/2 g/Group 4`
+**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`<br> e.g.,`edit 1 n/James Lee m/4`
+**Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
+**List** | `list`
+**Show** | `show GROUP_NAME`
+**Find** | `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`<br> e.g., `find n/ James Jake`, `find id/ A1234567E A2345678B`, `find n/ Alice id/ A1234567E`
+**Random** | `random`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Clear** | `clear`
+**Exit** | `exit`
+**Create Attendance Event** | `createattn e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `createattn e/Tutorial 1 e/Lab Session`
+**Delete Attendance Event** | `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `deleteevent e/Tutorial 1 e/Lab Session`
+**List Attendance Events** | `listevents`
+**Mark Attendance** | `mark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `mark e/Tutorial 1 i/1 i/2`
+**Unmark Attendance** | `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `unmark e/Tutorial 1 i/1 i/2`
+**List Attendance** | `listattn e/EVENT_NAME s/STATUS`<br> e.g., `listattn e/Tutorial 1 s/present`
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: Where is my data saved?<br>
@@ -593,24 +646,10 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Glossary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/e1234567 m/Computer Science y/2 g/Group 4`
-**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`<br> e.g.,`edit 1 n/James Lee m/4`
-**Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
-**List** | `list`
-**Show** | `show GROUP_NAME`
-**Find** | `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`<br> e.g., `find n/ James Jake`, `find id/ A1234567E A2345678B`, `find n/ Alice id/ A1234567E`
-**Random** | `random`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Clear** | `clear`
-**Exit** | `exit`
-**Create Attendance Event** | `createattn e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `createattn e/Tutorial 1 e/Lab Session`
-**Delete Attendance Event** | `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `deleteevent e/Tutorial 1 e/Lab Session`
-**List Attendance Events** | `listevents`
-**Mark Attendance** | `mark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `mark e/Tutorial 1 i/1 i/2`
-**Unmark Attendance** | `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `unmark e/Tutorial 1 i/1 i/2`
-**List Attendance** | `listattn e/EVENT_NAME s/STATUS`<br> e.g., `listattn e/Tutorial 1 s/present`
+
+[cols="1, 3", options="header"]
+|==============
+|Term                           | Explanation
+|Command Terminal               | A text based interface to type instructions to interact with a computer system

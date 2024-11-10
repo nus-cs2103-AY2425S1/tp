@@ -9,8 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to
-* the original source as well}
+* Our codebase was built off the [AB3 code base](https://github.com/se-edu/addressbook-level3)
+* AI was used in the generation of javadocs
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -574,6 +574,62 @@ Preconditions: Installed the application
 
       Use case ends.
 
+**Use Case: UC10 - Show Groups**
+
+**MSS:**
+
+1. TA enters the show command with at least one keyword (e.g., "group 1").
+2. TP searches the student database for students with groups matching the keyword(s).
+3. TP displays a list of students matching the search criteria.
+
+   Use case ends.
+
+**Extensions:**
+
+- 1a. TA does not provide any keywords.
+    - 1a1. TP displays an error message.
+
+      Use case resumes at step 1.
+
+
+- 2a. No students match the criteria.
+    - 2a1. TP displays a message that no students are found.
+    - 2a2. TP displays empty list
+
+      Use case ends.
+
+- 2b. Student database is empty
+    - 2b1. TP displays a message that no students are found.
+    - 2b2. TP displays empty list
+
+      Use case ends.
+
+**Use Case: UC11 - Edit a Student**
+
+**MSS:**
+
+1. TA enters the index of the student to be edited and the updated student details
+2. TP updates the new student record
+
+   Use case ends.
+
+**Extensions:**
+
+- 1a. TP detects that data is entered in an incorrect format
+    - 1a1. TP informs TA of the correct format
+
+      Use case resumes from step 1.
+
+- 1b. The index keyed in is invalid (eg. out of bounds, invalid character)
+    - 1b1. TP informs TA of the correct indexing format
+
+      Use case resumes from step 1.
+
+- 1c. The database of students is empty
+    - 1c1. TP informs TA that an empty list cannot be edited
+
+      Use case ends.
+
 ### Non-functional requirements
 
 1. The system shall be capable of handling an increase in users (up to 10,000) without requiring a complete redesign.
@@ -895,3 +951,21 @@ testers are expected to do more *exploratory* testing.
 
     Currently, the listattn feature shows status of all students for a given event. We plan to enhance this feature to allow TAs to track attendance of individual students across all events.
 
+- **Specificity of error message for Edit function**
+  
+  Currently, when users type in `edit 1 c/comment`, it gives the error message that the index must be a non-zero unsigned integer.
+  
+  As it may be confusing to users that they are unable to edit comments using the edit feature, an error message should be shown in this specific case.
+
+  Alternatively, in future iterations, the comment feature could be integrated into the `add` or `edit` feature.
+
+- **Add and delete group feature**
+
+  Currently, when users want to add a group, they have to use the `edit` feature to key in all existing groups alongside new ones.
+
+  For better usability, there could be individual functions to add and delete specific tags
+
+- **Warning for when edited fields are the same as previous fields**
+
+  Currently, when users use the `edit` feature to update a field that is exactly the same as before (eg. editing name from `Mary Tan` to `Mary Tan`), 
+  there is no warning shown. A message could be shown to warn the user in case this action was not intended.

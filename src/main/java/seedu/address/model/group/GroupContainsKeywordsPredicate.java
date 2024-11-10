@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Group} matches any of the keywords given.
- * Matching is case-insensitive and matches full words only.
+ * Matching is case-insensitive.
  */
 public class GroupContainsKeywordsPredicate implements Predicate<Person> {
     public static final String INVALID_GROUP = "Group found is in an invalid format";
@@ -41,21 +41,21 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         try {
             assert person != null : "Person cannot be null";
-            GroupList groupList = person.getGroupList();
+            GroupList groups = person.getGroupList();
 
-            if (groupList == null) {
+            if (groups == null) {
                 return false;
             }
 
-            if (!hasOnlyValidGroups(groupList)) {
+            if (!hasOnlyValidGroups(groups)) {
                 throw new ParseException(INVALID_GROUP);
             }
 
-            if (hasPrefixMatch(keywords, groupList)) {
+            if (hasPrefixMatch(keywords, groups)) {
                 return true;
             }
 
-            return hasWordInList(keywords, groupList);
+            return hasFullWordMatching(keywords, groups);
 
         } catch (ParseException pe) {
             logger.warning(pe.getMessage());
@@ -65,11 +65,11 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
 
     /**
      * Checks if the Group List only has valid groups
-     * @param groupList
+     * @param groups
      * @return boolean indicating if all the groups in the list are valid
      */
-    public boolean hasOnlyValidGroups(GroupList groupList) {
-        Set<Group> invalidGroups = groupList.getUnmodifiableGroups().stream()
+    public boolean hasOnlyValidGroups(GroupList groups) {
+        Set<Group> invalidGroups = groups.getUnmodifiableGroups().stream()
                 .filter(group -> !Group.isValidGroupName(group.getGroupName())).collect(Collectors.toSet());
 
         return invalidGroups.isEmpty();
@@ -80,11 +80,11 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
      * This matching is case-insensitive.
      *
      * @param keywords A list of keywords to check against the group names.
-     * @param groupList The GroupList containing the groups to check.
-     * @return {@code true} if any group name starts with any of the keywords, otherwise {@code false}.
+     * @param groups The GroupList containing the groups to check.
+     * @return boolean indicating if any group name starts with any of the keywords.
      */
-    public boolean hasPrefixMatch(List<String> keywords, GroupList groupList) {
-        return keywords.stream().anyMatch(keyword -> groupList.getUnmodifiableGroups().stream()
+    public boolean hasPrefixMatch(List<String> keywords, GroupList groups) {
+        return keywords.stream().anyMatch(keyword -> groups.getUnmodifiableGroups().stream()
                 .anyMatch(group -> group.getGroupName().toLowerCase().startsWith(keyword.toLowerCase())));
     }
 
@@ -93,12 +93,12 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
      * This matching is case-insensitive.
      *
      * @param keywords A list of keywords to check against the group names.
-     * @param groupList The GroupList containing the groups to check.
-     * @return {@code true} if any of the keywords are found as a complete word in any group name (case-insensitive),
-     *         otherwise {@code false}.
+     * @param groups The GroupList containing the groups to check.
+     * @return boolean indicating if any of the keywords are found as a complete word
+     *     in any group name (case-insensitive).
      */
-    public boolean hasWordInList(List<String> keywords, GroupList groupList) {
-        return groupList.getUnmodifiableGroups().stream().anyMatch(group -> keywords.stream()
+    public boolean hasFullWordMatching(List<String> keywords, GroupList groups) {
+        return groups.getUnmodifiableGroups().stream().anyMatch(group -> keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(group.getGroupName(), keyword)));
     }
 

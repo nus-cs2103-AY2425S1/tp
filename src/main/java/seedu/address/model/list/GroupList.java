@@ -37,7 +37,7 @@ public class GroupList implements Iterable<Group> {
     }
 
     /**
-     * Adds a group to the GroupList if it is modifiable and not already present.
+     * Adds a group to the GroupList if the GroupList is modifiable and the group is not already present.
      *
      * @param group The group to add.
      * @throws UnsupportedOperationException if the GroupList is not modifiable.
@@ -50,8 +50,9 @@ public class GroupList implements Iterable<Group> {
         String normalizedGroupName = group.getGroupName().trim().replaceAll("\\s+", " ");
 
         boolean isAdded = groups.stream().noneMatch(existing -> {
-            // Normalise existing group names as well before comparison
+            // Normalize existing group names as well before comparison
             String normalizedExistingGroupName = existing.getGroupName().trim().replaceAll("\\s+", " ");
+
             return normalizedExistingGroupName.equalsIgnoreCase(normalizedGroupName);
         });
 
@@ -105,7 +106,7 @@ public class GroupList implements Iterable<Group> {
     }
 
     public GroupList makeCopy() {
-        return new GroupList(this.groups);
+        return new GroupList(new HashSet<>(this.groups));
     }
 
     public int size() {

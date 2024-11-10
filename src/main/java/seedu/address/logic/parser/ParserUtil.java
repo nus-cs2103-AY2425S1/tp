@@ -221,7 +221,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> groups} into a {@code Set<Group>}.
+     * Parses {@code Collection<String> groups} into a {@code GroupList}.
      */
     public static GroupList parseGroups(Collection<String> groups) throws ParseException {
         requireNonNull(groups);
