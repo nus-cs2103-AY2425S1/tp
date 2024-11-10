@@ -216,11 +216,37 @@ Deletes the insurance plan (given by the `INSURANCE_ID`) from the client at the 
 
 Format: `deleteInsurance INDEX iid/INSURANCE_ID`
 
-* If the `INDEX` is invalid or the client does not have the insurance plan of id `INSURANCE_ID`, 
-the user will be informed with an error message.
+<box type="tip" seamless>
+    Parameters
+</box>
 
-Examples:
-* `deleteInsurance 1 iid/1` deletes the insurance plan of `INSURANCE_ID` 1 from the client at `INDEX` 1.
+1. `INDEX` : Must be a valid client index in the filtered list that is currently shown.
+   <br>
+2. `INSURANCE_ID` : Must be an existing valid ID that is currently supported.
+   <br> Currently supported IDs for insurance plans: `Basic Insurance Plan` : `0` & `Travel Insurance Plan`: `1`. <br>
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
+
+* If the `INDEX` is invalid, or the client does not have the insurance plan `INSURANCE_ID`, the
+  user will be informed with an error message.
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:warning:</md></span>
+    Warnings:
+</box>
+- The prefix `iid` is case-sensitive.
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `deleteInsurance 1 iid/1`
+<br>
+Output 1: `Deleted Insurance Plan: Travel Insurance Plan, from Client: Alex Yeoh`
 
 ### Adding a claim to the client : `addClaim`
 
