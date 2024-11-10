@@ -18,6 +18,7 @@ public class Company {
     public static final String VALIDATION_REGEX = "\\s*[\\p{Alnum}\\p{Punct}][\\p{Alnum}\\p{Punct} ]*\\s*";
 
     public final String value;
+    public final String displayValue;
 
     /**
      * Constructs a {@code Company}.
@@ -27,7 +28,8 @@ public class Company {
     public Company(String company) {
         requireNonNull(company);
         checkArgument(isValidCompany(company), MESSAGE_CONSTRAINTS);
-        this.value = company;
+        this.value = normalizeCompanyName(company);
+        this.displayValue = company;
     }
 
     /**
@@ -61,7 +63,7 @@ public class Company {
         }
 
         Company otherCompany = (Company) other;
-        return normalizeCompanyName(value).equals(normalizeCompanyName(otherCompany.value));
+        return value.equals(otherCompany.value);
     }
 
     @Override
