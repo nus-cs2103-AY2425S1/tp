@@ -120,6 +120,7 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]â€¦â
 <div markdown="span" class="alert alert-primary">:memo: **Note:**
 A contact can have any number of roles (including 0), and the Telegram username is optional. 
 The roles must be one of the following: attendee, vendor, volunteer and sponsor.
+Telegram usernames must start with an alphabet.
 </div>
 
 Examples:
