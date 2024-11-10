@@ -4,6 +4,7 @@ title: Developer Guide
 ---
 ## Table of Contents
 
+- [Acknowledgements](#acknowledgements)
 - [Setting up, Getting Started](#setting-up-getting-started)
 - [Design](#design)
   - [Architecture](#architecture)
@@ -33,7 +34,11 @@ title: Developer Guide
 
 
 --------------------------------------------------------------------------------------------------------------------
+## **Acknowledgements**
 
+This project is based on the AddressBook-Level 3 (AB-3) project created by the [SE-EDU initiative](https://se-education.org) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html), [GitHub Page](https://github.com/se-edu/addressbook-level3)).
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
