@@ -76,10 +76,10 @@ student contact details!
    [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) |
    [Linux](https://www.youtube.com/watch?v=dQw4w9WgXcQ)), `cd` into the folder
    you put the jar file in, and
-   run `java -jar addressbook.jar` to run the application.<br>
+   run `java -jar tahub-contacts.jar` to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![img_1.png](img_1.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g.
    typing **`help`** and pressing Enter will open the help window,
@@ -144,15 +144,15 @@ student contact details!
 **All** input fields **must** follow the following data formats:
 </box>
 
-| Field | Format |
-| :-----: | :----------------- |
+| Field | Format                                                                                                                                                                  |
+| :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `MATRICULATION_NUMBER` | must be a valid **NUS** matriculation number in the form `AxxxxxxxB`, where `A` is the fixed as 'A', `B` is any *uppercase* character, and `xxxxxxx` is any 7 integers. |
-| `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**. |
-| `PHONE_NUMBER` | must contain **numbers**, and it should be **at least 3 digits long**. |
-| `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm) |
-| `COURSE_CODE` | must be in the form `AAxxxxB` where `AA` is 2 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter. |
-| `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**. |
-| `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99. |
+| `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
+| `PHONE_NUMBER` | must contain **numbers**, and it should be **at least 3 digits long**.                                                                                                  |
+| `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm).                                                                        |
+| `COURSE_CODE` | must be in the form `AAxxxxB` where `AA` is 2 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                               |
+| `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
+| `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99.                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -291,7 +291,7 @@ Format: **`person-find KEYWORD [MORE_KEYWORDS]​​`**
 - The search is **case-insensitive**.
   - e.g `hans` will match `Hans`
 - The order of the keywords does not matter.
-  - e.g. `Hans` Bo will match Bo `Hans`
+  - e.g. `Hans Bo` will match `Bo Hans`
 - Only the **name** is searched.
 - Only **full words** will be **matched**.
   - e.g. `Han` will not match `Hans`
@@ -401,6 +401,12 @@ Format: **`course-delete c/COURSE_CODE`**
 </panel>
 </a>
 
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Enrollment Commands
+
 <a name="enroll">
 <panel header="#### Enrolling a student : `enroll`" expanded no-close no-switch>
 
@@ -410,7 +416,10 @@ Enrolls a student in a particular course and tutorial group.
 Format: **`enroll m/MATRICULATION_NUMBER c/COURSE_CODE tutut/TUTORIAL_ID`**
 </md></box>
 
-- Students already **enrolled** in this course and tutorial **cannot** be enrolled again.
+- `MATRICULATION_NUMBER` must be the matriculation number of an existing person.
+- `COURSE_CODE` must be the course code of an existing course.
+- `TUTORIAL_ID` is the tutorial that the tutor wishes to enroll the person in.
+- Students **already enrolled** in this course and tutorial **cannot** be enrolled again in the same course-tutorial combination.
 
 | **Examples** |
 | :--- |
@@ -426,10 +435,13 @@ Format: **`enroll m/MATRICULATION_NUMBER c/COURSE_CODE tutut/TUTORIAL_ID`**
 Unenrolls a student from a particular course and tutorial group that he/she is in.
 
 <box type="definition" seamless><md>
-Format: **`course-delete c/COURSE_CODE`**
+Format: **`unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
 
-- `COURSE_CODE` must be an existing course code.
+- `MATRICULATION_NUMBER` must be the matriculation number of an existing person.
+- `COURSE_CODE` must be the course code of an existing course.
+- `TUTORIAL_ID` is the tutorial that the tutor wishes to enroll the person in.
+- The combination of `MATRICULATION_NUMBER`, `COURSE_CODE` and `TUTORIAL_ID` must represent an existing enrollment.
 
 | **Examples** |
 | :--- |
@@ -575,9 +587,9 @@ You have been duly warned.
 
 ### Future
 
-#### Archiving data files
+#### Adding Support for more Course Codes and Tutorial IDs
 
-*TBC :D*
+- Currently, we only support course codes of a specific format, as mentioned [here](#data-formats). However, we are aware that there are rarer course codes such as `LAJ1201` and `GESS1003`. Due to time limitations, we are not able to support __all__ potential course codes and this could be fixed in a future iteration. Similarly, valid but rarer tutorial IDs with an additional character at the back like `T01A` will not be accepted in the current iteration.
 
 <br>
 
@@ -628,14 +640,14 @@ revert the change?<br>
 
 <!-- markdownlint-disable MD013 -->
 
-|           Action          |                                                                                                  Format, Examples                                                                                                   |
-|:--------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help                      | `help`                                                                                                                                                                                                              |
-| List Students             | `list`                                                                                                                                                                                                              |
-| Clear                     | `clear`                                                                                                                                                                                                             |
-| Exit                      | `exit`                                                                                                                                                                                                              |
+|           Action          | Format, Examples                                                                                                                                                                                                  |
+|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help                      | `help`                                                                                                                                                                                                            |
+| List Students             | `list`                                                                                                                                                                                                            |
+| Clear                     | `clear`                                                                                                                                                                                                           |
+| Exit                      | `exit`                                                                                                                                                                                                            |
 | Add Student               | `person-add m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br>e.g.`person-add m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| Find Students by Name     | `find KEYWORD [MORE_KEYWORDS]`<br>e.g.`find James Jake`                                                                                                                                                             |
+| Find Students by Name     | `find KEYWORD [MORE_KEYWORDS]`<br>e.g.`find James Jake`                                                                                                                                                           |
 | Edit Student              | `person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`person-edit m/A0296210X n/James Lee e/jameslee@example.com`                                                        |
 | Delete Student            | `person-delete m/MATRICULATION_NUMBER`<br>e.g.`person-delete m/A0296210X`                                                                                                                                         |
 | Add Course                | `course-add c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                         |

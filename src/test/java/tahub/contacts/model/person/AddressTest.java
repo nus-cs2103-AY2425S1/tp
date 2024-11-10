@@ -20,6 +20,12 @@ public class AddressTest {
     }
 
     @Test
+    public void constructor_addressWithNewline_throwsIllegalArgumentException() {
+        String invalidAddress = "\nfopppe";
+        assertThrows(IllegalArgumentException.class, () -> new Address(invalidAddress));
+    }
+
+    @Test
     public void isValidAddress() {
         // null address
         assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
