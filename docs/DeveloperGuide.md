@@ -292,11 +292,11 @@ _{more aspects and alternatives to be added}_
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation guide](./Documentation.md)
+* [Testing guide](./Testing.md)
+* [Logging guide](./Logging.md)
+* [Configuration guide](./Configuration.md)
+* [DevOps guide](./DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -501,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**:
 - **1a**: User enters an incomplete or improperly formatted `findw` command.
-  - **1a1**: UniVerse displays an error message indicating the proper format (e.g., "Invalid command format! Use: findw w/COMPANY[,ROLE][,YEAR]").
+  - **1a1**: UniVerse displays an error message indicating the proper format (e.g., "Invalid command format! Use: findw w/[ROLE]COMPANY[,YEAR]").
   - **1a2**: User re-enters the command with corrected input.
   - **1a3**: Use case resumes at step 1.
 - **2a**: No contacts match the specified work experience.
@@ -657,11 +657,11 @@ This command finds contacts by work experience. It requires a company name and a
 
 ***Expected:*** Lists all contacts who have worked at Amazon.
 
-**Test case 2:** `findw w/Meta,Intern`
+**Test case 2:** `findw w/Intern,Meta`
 
 ***Expected:***   Lists contacts who interned at Meta.
 
-**Test case 3:** `findw w/Google,Intern,2023`
+**Test case 3:** `findw w/Intern,Google,2023`
 
 ***Expected:*** Lists contacts who interned at Google in 2023.
 
