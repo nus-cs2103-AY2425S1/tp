@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AcademyAssist User Guide
+title: User Guide
 
 ---
 
@@ -36,9 +36,9 @@ title: AcademyAssist User Guide
 6. [Command summary](#command-summary)
 
 # Introduction
-Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers.
-This desktop application is designed to streamline your administrative tasks, allowing you to focus more
-on what truly matters - educating and nurturing young minds.
+Welcome to AcademyAssist, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
+This desktop application is designed to streamline your administrative tasks, allowing you to focus your efforts on 
+keeping operations smooth and organized for optimal student support.
 
 AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical
 User Interface (GUI).** This hybrid approach ensures that you can manage your student database with
@@ -70,6 +70,13 @@ Let's embark on this journey to simpler, faster, and more effective student mana
 again, type `help` and press Enter.
 
 7. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+When you first use AcademyAssist, some sample student contacts have been added to help you familiarise yourself with
+our features. Once you are ready to manage your tuition center's students, simply use the clear command
+to clear all existing contacts and reset the StudentID. Please note that this action is IRREVERSIBLE! 
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,11 +146,11 @@ contact will be treated as a duplicate and will not be allowed.
 * `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
   secondary school years 7 - 13).
 * `PHONE_NUMBER` should only contain number. It should be between 4 and 20 digits long with no spaces in between.
-* `EMAIL` should follow the format username@domain.
+* `EMAIL` should follow the format username@domain. 
 * `ADDRESS` allow any characters and should not be empty. The maximum length is 300 characters including spaces in 
 between. 
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the `s\` field. Only subjects that are 
-available within the tuition centre will be allowed.
+available within the tuition center will be allowed.
 * `[MORE_SUBJECTS]` is optional and can be repeated to add more subjects.
 <div markdown="span" class="alert alert-note">:memo: **Note:**
 Repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject 
@@ -158,6 +165,11 @@ Examples:
 * `add n\John Doe i\S1234567A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`
 
 ![Add Success Message](/images/add.png)
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Some contact fields such as address and email are intentionally hidden to avoid cluttering of information. To view all 
+the details of a student, you can use the [detail command] (#viewing-a-students-detail--detail).
+
+</div>
 
 ### Deleting a student : `delete`
 
@@ -195,12 +207,28 @@ taken(`s\ `).
 in the [add feature](#adding-a-student--add) section.
 * Although editing the NRIC is allowed, it must not match any other student's NRIC in the system. 
 An error message will be shown if a duplicate is detected.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+When editing a contact, the previously saved value of FIELD will be replaced entirely by NEW_VALUE. e.g. 'edit S00001 
+n\Henry Teo' replaces the name field of student S00001 with "Henry Tan". 
+
+</div>
 
 Examples:
 * `edit S00001 a\New_Address`
 * `edit s00002 p\91234567 a\New_Address`
 
 ![Edit Success Message](/images/edit.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To more efficiently add a subject to a person, see the [addsubject feature] (#adding-a-subject-to-a-student--addsubject)
+
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To delete a subject, you can use the edit command. e.g. student S00120 takes the subjects English and Math, but wishes to 
+drop the subject English, you can use the command 'edit S00120 s\Math'.
+
+</div>
 
 ### Listing all students : `list`
 
@@ -352,7 +380,7 @@ are taking each of the subjects.
 ## Utility Features
 ### Clearing all entries : `clear`
 
-Clears all student entries from the system.
+Clears all student entries from the system, and resets the studentID count to S00001.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This action is irreversible. All student entries will be deleted permanently.
@@ -436,18 +464,18 @@ the data of your previous AcademyAssist folder.<br><br>
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                                                                                                    |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**   | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` <br><br> e.g., `add n\John Doe i\T384859A yg\3 p/81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
-| **Delete Student**| `delete STUDENT_ID`<br><br> e.g., `delete S00001`                                                                                                                                                   |
-| **Edit Student**  | `edit STUDENT_ID FIELD\NEW_VALUE`<br> e.g.,`edit S00001 a\New_Address`                                                                                                                              |
-| **List Students** | `list`                                                                                                                                                                                              |
-| **View Student**  | `detail STUDENT_ID`<br><br> e.g., `detail S00001`                                                                                                                                                   |
-| **Find Student**  | `find NAME [MORE_NAMES]`<br><br> e.g., `find John Jane`                                                                                                                                             |
-| **Filter Students**| `filter FIELD\VALUE`<br><br> e.g., `filter yg\2`                                                                                                                                                    |
-| **Add Subject**   | `addsubject STUDENT_ID s\SUBJECT`<br><br> e.g., `addsubject S00003 Science`                                                                                                                         |
-| **Track Subjects**| `tracksubject`                                                                                                                                                                                      |
-| **Sort Students** | `sort s\FIELD`<br><br> e.g., `sort s\name`                                                                                                                                                          |
-| **Clear Data**    | `clear`                                                                                                                                                                                             |
-| **Get Help**      | `help`                                                                                                                                                                                              |
-| **Exit**          | `exit`                                                                                                                                                                                              |
+| Action            | Format, Examples                                                                                                                                                                                     |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**   | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` <br><br> e.g., `add n\John Doe i\T3840859A yg\3 p\81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
+| **Delete Student**| `delete STUDENT_ID`<br><br> e.g., `delete S00001`                                                                                                                                                    |
+| **Edit Student**  | `edit STUDENT_ID FIELD\NEW_VALUE`<br> e.g.,`edit S00001 a\New_Address`                                                                                                                               |
+| **List Students** | `list`                                                                                                                                                                                               |
+| **View Student**  | `detail STUDENT_ID`<br><br> e.g., `detail S00001`                                                                                                                                                    |
+| **Find Student**  | `find NAME [MORE_NAMES]`<br><br> e.g., `find John Jane`                                                                                                                                              |
+| **Filter Students**| `filter FIELD\VALUE`<br><br> e.g., `filter yg\2`                                                                                                                                                     |
+| **Add Subject**   | `addsubject STUDENT_ID s\SUBJECT`<br><br> e.g., `addsubject S00003 s\Science`                                                                                                                        |
+| **Track Subjects**| `tracksubject`                                                                                                                                                                                       |
+| **Sort Students** | `sort by\FIELD`<br><br> e.g., `sort by\name`                                                                                                                                                         |
+| **Clear Data**    | `clear`                                                                                                                                                                                              |
+| **Get Help**      | `help`                                                                                                                                                                                               |
+| **Exit**          | `exit`                                                                                                                                                                                               |
