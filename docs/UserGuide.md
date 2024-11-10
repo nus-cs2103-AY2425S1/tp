@@ -117,8 +117,10 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 3. Choose a storage folder: Move the `ABCLI.jar` file to the folder where you want to store and run the application.
 
 4. Open the command terminal:  
-    * For Window users, in the folder containing `ABCLI.jar`, right-click the empty space and select “Open in Terminal”.
-    * For MacOS users, right-click the home folder, hover over “Services,” and select “New Terminal at Folder”.
+    * For Windows users, in the folder containing `ABCLI.jar`, right-click the empty space and select “Open in Terminal”.<br>
+      ![WindowsGuide](images/WindowsGuide.png)
+    * For MacOS users, right-click the home folder, hover over “Services,” and select “New Terminal at Folder”.<br>
+      ![MacGuide](images/MacGuide.png)
 
 5. Run the application: Enter the command `java -jar ABCLI.jar` to start ABCLI.  
 
