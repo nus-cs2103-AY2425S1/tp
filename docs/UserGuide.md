@@ -265,7 +265,7 @@ Format: `view`
 
 Adds a meet-up to the meet-up list.
 
-Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_NAME]…​`
+Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO n/BUYER_NAME [n/BUYER_NAME]…​`
 
 * New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO.
 
@@ -273,7 +273,9 @@ Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_N
 
 * MEETUP_TO must be a date/time that is later than MEETUP_FROM.
 
-* Buyers that exist in buyer list will be marked as green, while those that don't will be marked as red.
+* Buyers that exist in buyer list will be marked as green, while those that don't exist will be marked as red.
+
+* Meet-ups must have at least one added buyer.
 
 Examples:
 * `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li `
@@ -469,7 +471,7 @@ Format: `clear`
     </tr>
     <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</tr>
     <tr><th>Find</th><td>Name</td><td>Prepend the prefix "n/" before the name to be searched. For constraints on the name, refer to Buyer > Add > Name</td></tr>
-    <tr><th colspan="3">MeetUp</th></tr>
+    <tr><th colspan="3">Meet-Up</th></tr>
     <tr>
     <th rowspan="5">Add</th>
     <td>Subject</td><td>Alphanumeric characters and spaces,should not be blank</td>
