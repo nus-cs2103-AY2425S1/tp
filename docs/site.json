@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titleSuffix": "SocialBook",
+  "faviconPath": "",
   "style": {
     "codeTheme": "light"
   },

@@ -40,7 +40,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 4, 0, true);
+    public static final Version VERSION = new Version(1, 5, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -196,8 +196,8 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping SocialBook ] =============================");
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveAppointments(model.getAppointmentList());
             storage.saveUserPrefs(model.getUserPrefs());
-            storage.saveAppointments(model.getFilteredAppointmentList());
         } catch (IOException e) {
             logger.severe("Failed to save the address book, preferences and appointments" + StringUtil.getDetails(e));
         }

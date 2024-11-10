@@ -43,9 +43,11 @@ public class Messages {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    public static final String MESSAGE_DELETE_SCHEME_PERSON_SUCCESS = "Deleted Scheme: %1$s";
+    public static final String MESSAGE_DELETE_SCHEME_PERSON_SUCCESS = "The following schemes have been "
+            + "deleted from %1$s:\n";
 
-    public static final String MESSAGE_ADD_SCHEME_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_ADD_SCHEME_PERSON_SUCCESS = "The following scheme has been added to %1$s:\n"
+            + "%2$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
