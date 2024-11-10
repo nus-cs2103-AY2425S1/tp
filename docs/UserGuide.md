@@ -144,8 +144,8 @@ ClinicConnect does not allow two patients with the same NRIC to exist in the sys
 Use this command to quickly add a patient with only the required information.
 </div>
 
-Example: `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
-<br>
+Example: 
+* `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
 Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
 
 For more information on each individual parameter click [here](#command-parameters-summary).
@@ -154,8 +154,8 @@ For more information on each individual parameter click [here](#command-paramete
 
 Adds a new patient record into the system with additional information.
 
-Format: `addf n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NO [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
-[nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]`
+Format: `addf n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
+[nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE_NUMBER] [al|ALLERGY]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]`
 
 ![addf message](images/addfResult.png)
 
@@ -167,7 +167,7 @@ ClinicConnect does not allow two patients with the same NRIC to exist in the sys
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Use this command if you want to add a patient with additional information in addition to the required fields
-(NAME, NRIC, SEX, DATE_OF_BIRTH, PHONE_NO)
+(NAME, NRIC, SEX, DATE_OF_BIRTH, PHONE_NUMBER)
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -177,11 +177,9 @@ Multiple allergies can be added using multiple "al|" prefixes
 Examples:
 * `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
    e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
-   al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care` adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
-     Next-of-Kin Name, Next-of-Kin Phone, Risk Level, Existing Conditions, Notes and his two allergies.
+   al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care` Adds a patient named Abraham Tan with all fields and two allergies
 * `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
-   e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` adds a patient Lincoln Park with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
-     and his allergy.
+   e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` Adds a patient named Lincoln Park with compulsory fields and some optional fields
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
