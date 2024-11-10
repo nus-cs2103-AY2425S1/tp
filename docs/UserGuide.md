@@ -36,7 +36,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 ![Ui](images/Ui.png)
 
-5. **Try Out Some Commands!**: Type the command in the command box and press Enter to see it in action!
+5. **Try Out Some Commands!** : Type the command in the command box and press Enter to see it in action!
 Here are a few examples:
     * `help` : Opens the help window. 
 
@@ -71,7 +71,7 @@ Our interface has a few key parts (check the image below for a visual guide):
 
 ![UiTut](images/UiTut.png)
 
-### Command Suggestion: Your Shortcut to Faster Commands
+### Command Suggestion: Shortcut to Faster Commands
 
 ![CommandPopUp](images/commandpopup.png)
 
@@ -124,7 +124,7 @@ Need a quick reference?
 * **Copying Commands from PDF**  
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-### Understanding Parameters
+### Understanding Commands Format
 * **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
   e.g. `add n/NAME` means you would type something like `add n/John Doe`.
 
@@ -143,13 +143,9 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 * **Ignored Extra Parameters** for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`)  
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+<br>
 
-
-</box>
-
-<box type="info" seamless>
-
-### Notes About Command Parameters:<br>
+### Notes About Parameters Format
 * `NAME` **only accepts alphanumeric characters and spaces**.  
   Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
 
@@ -162,10 +158,12 @@ If you are using a PDF version of this document, be careful when copying and pas
 Although duplicate contact names are not allowed, adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
 
 
-* `TIME-TIME` **must be within the same day**  
+* `TIME-TIME` **must be within the same day**.  
   Use the format `HHmm-HHmm` for time ranges within the same day.  
-  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
+  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.     
 
+  Currently users can work around with this issue by breaking the overnight range down into 2 separate ranges.     
+  e.g. `2300-0100` can be broken down into `2300-2359` and `0000-0100` and be accepted.
 
 * **No single points in time for `TIME-TIME`**
   The start and end times must be different (e.g. `1200-1200` is invalid).
@@ -190,7 +188,7 @@ Although duplicate contact names are not allowed, adding two separate contacts `
 | **FavGame**    | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                        |
 | **UnFavGame**  | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                                    |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                                    |
-| **FindGame**   | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find Overwatch League`                                                                                                                                                          |
+| **FindGame**   | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `findgame Overwatch League`                                                                                                                                                      |
 | **FindTime**   | `findtime TIME-TIME [TIME-TIME]…`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                                    |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                            |
 | **Clear**      | `clear`                                                                                                                                                                                                                        |
@@ -209,7 +207,7 @@ This section provides details on the usage of each command.
 
 ### Basic Commands
 
-**Viewing help :** `help`
+#### **Viewing help :** `help`
 
 Displays the help window. Also accessible by pressing the `F1` key.  
 
@@ -223,7 +221,7 @@ Output:
 
 <br>
 
-**Listing all persons :** `list`
+#### **Listing all persons :** `list`
 
 Lists all persons in GamerBook. Use this after you are done searching for someone!
 
@@ -231,7 +229,7 @@ Format: `list`
 Output: `Listed all persons`
 <br>
 
-**Adding a person :** `add`
+#### **Adding a person :** `add`
 
 Adds a person with optional details like phone, email, address, games, tags, and preferred time.
 
@@ -253,7 +251,7 @@ Examples:
 
 <br>
 
-**Editing a person :** `edit`
+#### **Editing a person :** `edit`
 
 Edits an existing person in the GamerBook.
 
@@ -278,7 +276,7 @@ Examples:
 *  `edit 2 n/Matthew g/Overwatch g/Valorant` Edits the name of the 2nd person to be `Matthew` with games `Overwatch` and `Valorant`.
 *  `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and preferred times.
 
-**Deleting a person :** `delete`
+#### **Deleting a person :** `delete`
 
 Deletes the specified person from the GamerBook.
 
@@ -297,7 +295,7 @@ Examples:
 
 <br>
 
-**Clearing all entries :** `clear`
+#### **Clearing all entries :** `clear`
 
 Clears all entries from the GamerBook.
 
@@ -315,7 +313,7 @@ Format: `exit`
 
 ### Game Management Commands
 
-**Adding a game :** `addgame`
+#### **Adding a game :** `addgame`
 
 Adds a game to an existing person in the GamerBook.
 
@@ -337,7 +335,7 @@ Examples:
 
 <br>
 
-**Editing a game :** `editgame`
+#### **Editing a game :** `editgame`
 
 Edits the game of an existing person in the GamerBook.
 
@@ -361,7 +359,7 @@ Examples:
 
 <br>
 
-**Deleting a game :** `deletegame`
+#### **Deleting a game :** `deletegame`
 
 Deletes the specified game from an existing person in the GamerBook.
 
@@ -376,7 +374,7 @@ Format: `deletegame INDEX g/GAME`
 
 <br>
 
-**Favouriting a game :** `favgame`
+#### **Favouriting a game :** `favgame`
 
 Gives a **singular** game under an existing person in the GamerBook the "favourite" status.
 
@@ -394,7 +392,7 @@ Examples:
 
 <br>
 
-**Un-favouriting a game :** `unfavgame`
+#### **Un-favouriting a game :** `unfavgame`
 
 Removes the "favourite" status from a **singular** game under an existing person in the GamerBook.
 
@@ -412,7 +410,7 @@ Examples:
 
 
 ### Search Commands
-**Locating persons by name :** `find`
+#### **Locating persons by name :** `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -435,7 +433,7 @@ Examples:
   
   <br>
 
-**Locating persons by game name :** `findgame`
+#### **Locating persons by game name :** `findgame`
 
 Finds persons whose games' names contain any of the given keywords.
 
@@ -458,7 +456,7 @@ Examples:
   
   <br>
 
-**Locating persons by time range :** `findtime`
+#### **Locating persons by time range :** `findtime`
 
 Finds persons whose preferred time ranges overlap with any of given time ranges.
 
@@ -490,7 +488,7 @@ one of the specified ranges.
 
 ### Utility Commands
 
-**Undoing previous command :** `undo`
+#### **Undoing previous command :** `undo`
 
 <box type="important" seamless>
 
@@ -507,13 +505,13 @@ Format: `undo`
 
 <br>
 
-**Saving the data file :** `save`
+#### **Saving the data file :** `save`
 
 Manually saves the data in another JSON file `[JAR file location]/data/save.json`.
 
 <br>
 
-**Loading the data file :** `load`
+#### **Loading the data file :** `load`
 
 Manually loads the data from JSON file `[JAR file location]/data/save.json`.
 
