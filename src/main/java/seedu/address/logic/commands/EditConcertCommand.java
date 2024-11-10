@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONCERTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONCERT_CONTACTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -86,6 +87,7 @@ public class EditConcertCommand extends Command {
 
         model.setConcert(concertToEdit, editedConcert);
         model.updateFilteredConcertList(PREDICATE_SHOW_ALL_CONCERTS);
+        model.updateFilteredConcertContactList(PREDICATE_SHOW_ALL_CONCERT_CONTACTS);
         return new CommandResult(String.format(MESSAGE_EDIT_CONCERT_SUCCESS, Messages.format(editedConcert)));
     }
 
