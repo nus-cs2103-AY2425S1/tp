@@ -73,6 +73,14 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
         this.receipts.setReceipts(receipts);
     }
 
+
+    /**
+     * Set Receipt
+     */
+    public void setReceipt(GoodsReceipt target, GoodsReceipt edited) {
+        this.receipts.setReceipt(target, edited);
+    }
+
     /**
      * Wrapper function for updating of delivery status
      * in the internal list.

@@ -16,7 +16,7 @@ public class ExportCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
 
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), model.getGoodsFiltered());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalGoodsReceipts());
 
     @Test
     public void execute_export_success() {

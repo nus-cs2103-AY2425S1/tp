@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.Caster;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ListGoodsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
@@ -36,6 +37,11 @@ public class ListGoodsCommandParser implements Parser<ListGoodsCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_GOODS_NAME, PREFIX_NAME);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CATEGORY, PREFIX_GOODS_NAME, PREFIX_NAME);
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListGoodsCommand.MESSAGE_USAGE));
+        }
 
         Predicate<GoodsReceipt> predicate = parsePredicate(argMultimap);
 

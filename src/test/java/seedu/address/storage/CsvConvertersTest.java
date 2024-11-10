@@ -42,10 +42,10 @@ public class CsvConvertersTest {
     }
 
     @Test
-    public void goodsDateConverter_incorrectDateFormat_throwIllegalArgumentException() {
+    public void goodsDateConverter_incorrectDateFormat_throwDateTimeParseException() {
         CsvConverters.GoodsDateConverter converter = new CsvConverters.GoodsDateConverter();
         String incorrectDateFormat = "2021-01-01";
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(DateTimeParseException.class, () -> {
             converter.convert(incorrectDateFormat);
         });
     }

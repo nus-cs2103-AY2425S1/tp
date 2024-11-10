@@ -176,6 +176,10 @@ public class GoodsReceipt {
         return this.quantity * this.price;
     }
 
+
+    public double getPrice() {
+        return this.price;
+    }
     /**
      * Return a new goods object with the new delivery status.
      */
