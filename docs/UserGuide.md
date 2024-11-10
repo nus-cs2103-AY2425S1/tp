@@ -93,7 +93,7 @@ Adds a person to the address book.
 
 - `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long.
 - `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any.
-- `ADDRESS` must not contain any of the prefixes (e.g. `\n`, `\ap`) and must not begin with a space.
+- `ADDRESS` must not contain any of the prefixes (e.g. `n/`, `ap/`) and must not begin with a space.
 - `AGE` must only contain characters 0-9 and must be 1-3 digits long.
 - `SEX` must only contain alphanumeric characters.
 - `FUTURE APPOINTMENT` should be in the format **dd/MM/yyyy HHmm** and be after your current time.
