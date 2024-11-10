@@ -1363,7 +1363,7 @@ Currently, our system sorts `Groups` by ASCII order.
 
 #### Enhancement
 
-We plan to improve the sorting feature to sort by alphabetical and numerical order. 
+We plan to improve the sorting feature to sort by alphabetical and numerical order.
 
 Below is a simplified process of how the sort will work:
 
