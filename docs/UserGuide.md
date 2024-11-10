@@ -324,18 +324,27 @@ findm m/Computer Science
 Finds contacts with a specific university.
 
 Format:
-
-```plaintext
+```
 findu u/UNIVERSITY
 ```
-
-- `u/UNIVERSITY`: University.
+- `u/UNIVERSITY`: The university to search for (case-sensitive).
 
 Example:
-
-```plaintext
+```
 findu u/NUS
 ```
+*Expected Output*: Lists all contacts associated with the National University of Singapore (NUS).
+
+<box type="info" seamless>
+
+**Note**:
+The `findu` command operates based on the **current list of contacts displayed**. To ensure you search from the full contact list, type `list` before using `findu`. This refreshes the view to show all contacts, allowing `findu` to accurately filter contacts from the complete data set.
+
+</box>
+
+**Example Workflow**:
+1. Type `list` to display all contacts.
+2. Use `findu u/NUS` to filter and show only contacts from NUS.
 
 <br>
 
