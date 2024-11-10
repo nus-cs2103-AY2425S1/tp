@@ -131,7 +131,8 @@ Social Media Handle Constraints: <br>
 Tag Constraints: <br>
 * A person can have any number of tags (including 0).
 * A tag can be added with or without a value. For example, `t\client` and `t\insurance:No` are both valid tags.
-* Only alphanumeric characters (alphabets and numbers) are supported in tags
+* Only alphanumeric characters (alphabets and numbers) are supported in tag names.
+* For tag values, only alphanumeric characters and periods in between numbers (eg `2.4`) are supported.
 * Multiple of the same tags are not supported for a single contact. For example, `t\policy` and `t\policy: 223302B` would not be supported for a single contact.
 * Negative numbers are not supported in tag values
 * Operations such as `+, -, *, /` are also not supported in tag values
