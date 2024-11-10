@@ -27,9 +27,11 @@ public class FilterCommand extends UndoableCommand {
             + "Parameters: [s/RSVPSTATUS] [t/TAG]...\n" + "At least one parameter must be provided.\n"
             + "Example: " + COMMAND_WORD + " s/1 t/bride's side";
     public static final String MESSAGE_TAG_NOT_CREATED = "Tag(s) must be created first using 'newtag' command: ";
-    public static final String MESSAGE_TAG_FILTER_ALREADY_EXISTS = "The following tags are already being filtered: ";
-    public static final String MESSAGE_STATUS_ALREADY_BEING_FILTERED = "The following statuses are not filtered "
-            + "as a status filter is already applied: ";
+    public static final String MESSAGE_TAG_FILTER_ALREADY_EXISTS = "The following tag(s) are already being filtered: ";
+    public static final String MESSAGE_EXISTING_STATUS_FILTERED = "The following RSVP status(es) are not filtered "
+            + "as a RSVP status currently being filtered. Clear existing filter(s) first: ";
+    public static final String MESSAGE_STATUS_ALREADY_BEING_FILTERED = "The following RSVP status(es) are already "
+            + "being filtered: ";
 
     private final Set<Tag> tagSet;
     private final Set<RsvpStatus> statusSet;
@@ -40,6 +42,8 @@ public class FilterCommand extends UndoableCommand {
     private final Set<Tag> invalidTagSet = new HashSet<>();
     private final Set<Tag> missingTagSet = new HashSet<>();
     private final Set<RsvpStatus> invalidStatusSet = new HashSet<>();
+    private final Set<RsvpStatus> duplicateStatusSet = new HashSet<>();
+
     private final StringBuilder successMessage = new StringBuilder();
     private final StringBuilder failureMessage = new StringBuilder();
     private final StringBuilder finalMessage = new StringBuilder();
@@ -77,8 +81,12 @@ public class FilterCommand extends UndoableCommand {
         }
 
         for (RsvpStatus status: statusSet) {
-            if (model.checkStatusFilterAlreadyExists(status)) {
-                invalidStatusSet.add(status);
+            if (model.checkStatusFilterAlreadyExists()) {
+                if (model.checkSpecificStatusFilterAlreadyExists(status)) {
+                    duplicateStatusSet.add(status);
+                } else {
+                    invalidStatusSet.add(status);
+                }
             } else {
                 validStatusSet.add(status);
             }
@@ -94,6 +102,7 @@ public class FilterCommand extends UndoableCommand {
         model.addTagFilters(validTagSet);
         model.addStatusFilters(validStatusSet);
         model.updateFilteredPersonList(predicate);
+
 
         updateSuccessMessage(model);
         updateFailedFiltersMessage();
@@ -125,7 +134,12 @@ public class FilterCommand extends UndoableCommand {
         }
 
         if (!invalidStatusSet.isEmpty()) {
-            failureMessage.append(MESSAGE_STATUS_ALREADY_BEING_FILTERED).append(invalidStatusSet.stream()
+            failureMessage.append(MESSAGE_EXISTING_STATUS_FILTERED).append(invalidStatusSet.stream()
+                    .map(RsvpStatus::getFilterFormat).collect(Collectors.joining(", "))).append("\n");
+        }
+
+        if (!duplicateStatusSet.isEmpty()) {
+            failureMessage.append(MESSAGE_STATUS_ALREADY_BEING_FILTERED).append(duplicateStatusSet.stream()
                     .map(RsvpStatus::getFilterFormat).collect(Collectors.joining(", "))).append("\n");
         }
     }
@@ -133,6 +147,7 @@ public class FilterCommand extends UndoableCommand {
     @Override
     public void undo(Model model) {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        System.out.println("removing: " + validStatusSet + validTagSet);
         model.removeFilters(validTagSet, validStatusSet);
         if (previousPredicate != null) {
             model.updateFilteredPersonList(previousPredicate);

@@ -266,7 +266,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean checkStatusFilterAlreadyExists(RsvpStatus status) {
+        public boolean checkStatusFilterAlreadyExists() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkSpecificStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
             throw new AssertionError("This method should not be called.");
         }
 

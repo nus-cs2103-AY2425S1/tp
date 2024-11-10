@@ -331,15 +331,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
+    public boolean checkStatusFilterAlreadyExists() {
         return (!statusFilters.isEmpty());
+    }
+
+    @Override
+    public boolean checkSpecificStatusFilterAlreadyExists(RsvpStatus rsvpStatus) {
+        return statusFilters.contains(rsvpStatus);
     }
 
     @Override
     public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
         this.tagFilters.removeAll(tagFilters);
         this.statusFilters.removeAll(statusFilters);
-
     }
 
     @Override
