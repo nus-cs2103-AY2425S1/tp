@@ -760,7 +760,7 @@ testers are expected to do more *exploratory* testing.
     2. Open terminal and change into the directory where the jar file is stored.
 
     3. Enter `java -jar WedLinker.jar` into the terminal to run the WedLinker application.<br>
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+       Expected: Shows the GUI with a set of sample contacts, weddings, tasks, and tags. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -769,7 +769,20 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by enter `java -jar WedLinker.jar` into the terminal again.<br>
        Expected: The most recent window size and location is retained.
 
-### Quick Guide
+3. Resetting sample data
+
+   1. Open the folder where the `Wedlinker.jar` file is.
+
+   2. Directly delete the `data` folder in the same directory.
+
+   3. Alternatively, open the `data` folder and delete the `addressbook.json` file stored there.
+
+   4. Re-launch the app by entering `java -jar WedLinker.jar` into the terminal again.<br>
+      Expected: Shows the GUI with a set of sample contacts, weddings, tasks, and tags.
+
+   5. Refer to [saving data](#saving-data) to understand how data is saved during operation.
+
+### Quick Guide to Prefixes and Commands
 
 1. WedLinker uses prefixes to parse the required fields for the commands.
    - name: `n/`
@@ -783,31 +796,40 @@ testers are expected to do more *exploratory* testing.
    - force: `f/`
 
 2. WedLinker has the following functions
-   - find for a person: `find`
+   - find a person: `find`
    - add a person: `add`
    - delete a person: `delete`
    - list all persons: `list`
-   - create a tag: `create-tag`
-   - delete a tag: `delete-tag`
+   - create a tag: `create-tag` or `ctag`
+   - delete a tag: `delete-tag` or `dtag`
    - tag a person: `tag`
    - untag a person: `untag`
-   - list all tags: `list-tags`
-   - create a task: `create-task`
-   - delete a task: `delete-task`
-   - assign a task to a vendor: `assign-task`
-   - unassign a task to a vendor: `unassign-task`
-   - mark a task as done: `mark-task`
-   - unmark a task as done: `unmark-task`
-   - list all task: `list-tasks`
-   - add a vendor: `add-vendor`
-   - assign a person as a vendor: `assign-vendor`
-   - unassign a person as a vendor: `unassign-vendor`
-   - create a wedding: `create-wedding`
-   - delete a wedding: `delete-wedding`
-   - assign a person to a wedding: `assign-wedding`
-   - unassign a person from a wedding: `unassign-wedding`
-   - edit a wedding: `edit-wedding`
-   - list all wedding: `list-weddings`
+   - list all tags: `list-tags` or `ltags`
+   - create a task: `create-task` or `ctask`
+   - delete a task: `delete-task` or `dtask`
+   - assign a task to a vendor: `assign-task` or `atask`
+   - unassign a task from a vendor: `unassign-task` or `unatask`
+   - mark a task as done: `mark-task` or `mtask`
+   - unmark a task as done: `unmark-task` or `untask`
+   - list all task: `list-tasks` or `ltasks`
+   - add a vendor: `add-vendor` or `addv`
+   - assign a person as a vendor: `assign-vendor` or `asv`
+   - unassign a person as a vendor: `unassign-vendor` or `uv`
+   - create a wedding: `create-wedding` or `cw`
+   - delete a wedding: `delete-wedding` or `dw`
+   - assign a person to a wedding: `assign-wedding` or `asw`
+   - unassign a person from a wedding: `unassign-wedding` or `uw`
+   - edit a wedding: `edit-wedding` or `ew`
+   - list all wedding: `list-weddings` or `lw`
+
+<box type="important">
+    Note the difference between similar command shortcuts. 'untask' unmarks a task as done, while 'unatask' unassigns a task from a vendor.
+    Similarly, 'ltags' can be used to list all tags, while 'ltasks' can be used to list all tasks (note the plural for both commands, 'tags' and 'tasks').  
+</box>
+
+### Finding a person
+
+
 
 ### Deleting a person
 
@@ -816,21 +838,50 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     3. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    4. Other incorrect delete commands to try:
+       * `delete`
+       * `delete x` (where x is an integer is larger than the list size)
+       * `delete e` (where e is a string, a non-integer, or any other data type)
+       * `delete 1 random` (where the list of persons has at least 1 person, and random is an extraneous input of any data type) <br>
+       
+        Expected: Similar to previous.
+
+2. Deleting a person when a filtered list is being shown
+
+    1. Prerequisites: List all persons using the `list` command. Use the `find` command to filter the list by either name, phone, address, email, tag, wedding, or task.
+    Multiple persons in the list, but not the same number as the list of all contacts.
+
+       1. **Tip:** If the sample data is loaded, this can be done by entering the `find n/c` command or the `find t/guest` command.
+       Refer to the [find command](#finding-a-person) for more details. 
+
+    2.  Test case: `delete 1` <br>
+        Expected: First contact in the filtered list is deleted. Details of the deleted contact shown in the status message. When listing all contacts,
+        contact that was first in the filtered list is deleted from the list.
+
+    3. Test case: `delete x` (where x is an integer greater than the number of persons shown in the current filtered list, but smaller than the number of all contacts)
+        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect test cases to try can be found at point 1.iv of [Deleting a person](#deleting-a-person)
+    
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Saving data altered during application use <br>
 
-    1. Upon booting up WedLinker and the contact/address/task list is not as per expected, open the `docs` folder where `WedLinker.jar` is stored.
+    1. Wedlinker automatically saves data to the hard disk during operation. Any operations that change details of contacts,
+    weddings, tags, or tasks will be saved immediately following the operations is successfully executed.
+
+
+2. Dealing with missing/corrupted data files
+
+    1. Upon booting up WedLinker and the contact/wedding/tag/task list is not as per expected, open the `data` folder where Wedlinker stores data.
    
-    2. Within the folder, open `AddressBook.json` and identify any mistakes with stored data.<br>
+    2. Within the folder, open `addressBook.json` and identify any mistakes with stored data.<br>
        The terminal from where `WedLinker.jar` is launched should log where the file is corrupted.
 
-    3. If the data is beyond repair, delete the entire `docs` folder and the `AddressBook.json` file to start afresh.
+    3. If the data is beyond repair, delete the entire `data` folder or the `AddressBook.json` file to start afresh with sample data.
