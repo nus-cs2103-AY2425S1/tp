@@ -234,11 +234,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | frequent user               | search for member's details based on active participation status                                                                                                                         | have a better sensing on member's involvement to choose for the next ExCo                                                        |
 | `*`      | intermediate user           | understand / be guided on the automation capabilities of this tool such as automatically updating particulars (year of study, graduation status, on exchange) when a new semester begins | use the app with ease                                                                                                            |
 | `*`      | user                        | view the PDPA stance the members have in terms of sending of info the 3rd parties                                                                                                        | know whether I am allowed to send member’s personal details to 3rd parties                                                       |
+| `* *`      | user                    | collate a list of Telegram handles of members under a particular group when I specify a category                                                                           | quickly send relevant messages, such as instructions or job opportunities.                                  |
+| `*`          | user                    | sort the members' details                                                                                                                                                  | view the full list of details with ease if needed.                                                          |
+| `* *`      | user who values efficiency | gather all the emails of the members                                                                                                                                       | quickly send semester newsletters or updates to all members via email.                                      |
+| `* *`        | efficient user          | retrieve contact details of a selected group of members interested in a specific industry (e.g., semicon company)                                                          | provide these details to companies.                                                                         |
+| `* *`        | user                    | verify whether the member's details in the database are the most updated                                                                                                   | confidently send them to third parties knowing that the data sent is correct.                               |
+| `*`        | user                    | archive data from past members or alumni to another location                                                                                                              | use them in the future, such as for passing alumni details to companies that wish to invite graduates only. |
+| `*`          | user                    | search for the relevant contact details of a particular past member                                                                                                        | contact them.                                                                                               |
+| `*`        | user                    | toggle between viewing current members' data and alumni data                                                                                                               | access the correct set of information when needed.                                                          |
+| `*`          | intermediate user       | find out about advanced functions in managing tools                                                                                                                        | explore additional features for managing members.                                                           |
+| `* *`      | intermediate user       | automatically register members' details into the database when the academic year starts                                                                                    | maintain efficient processes.                                                                               |
+| `* *`      | intermediate user       | automatically update particulars (year of study, graduation status, on exchange) when necessary, especially at the beginning of a new semester                             | ensure data accuracy with minimal manual effort.                                                            |
+| `* *`        | intermediate user       | generate a custom list of selected member information with only the needed details                                                                                         | easily retrieve the specific data required.                                                                 |
+| `* * *`      | user who values data privacy | set a password for the app                                                                                                                                                 | restrict access to only authorised individuals.                                                             |
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -246,90 +259,170 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Add a contact**
 
 **MSS**
-
-1.  User requests to add contact
-2.  AddressBook adds the contact
-
-    Use case ends.
+1. User launches the application.
+2. User enters the `add` command with contact details, including name, Telegram handle, email, student status, role(s), and optional nickname.
+3. Application validates input fields (e.g., unique email and Telegram handle).
+4. Application adds the contact to the address book.
+5. Application displays a confirmation message: "Contact added successfully."
+     Use case ends.
 
 **Extensions**
+- 2a. User provides incomplete or invalid data (e.g., incorrect email format).
+  - 2a1. Application displays an error message indicating the issue (e.g., "Error: Invalid email format").
+       Use case ends.
+- 3a. Duplicate contact details detected (e.g., duplicate email or Telegram handle).
+  - 3a1. Application displays an error message indicating the duplication.
+  - 3a2. User either corrects the details or cancels the add operation.
+    Use case ends.
 
-* 1a. Given contact has invalid or duplicate fields.
-    * 1a1. AddressBook shows an error message.
+---
 
-      Use case ends.
-
-* 1b. Given contact has duplicate 'name' field.
-    * 1a1. AddressBook shows an error message and prompts user to re-enter with nickname.
-
-      Use case ends.
-
-**Use case: Delete a contact**
+### Use Case: Listing All Contacts
 
 **MSS**
+1. User launches the application.
+2. User enters the `list` command with no additional parameters.
+3. Application displays all stored contacts.
+     Use case ends.
 
-1.  User requests to delete contact
-2.  AddressBook deletes the contact
+---
 
-    Use case ends.
+### Use Case: Deleting a Contact
+
+**MSS**
+1. User enters the `delete` command with the contact’s index or unique full name.
+2. Application removes the specified contact.
+3. Application displays a confirmation message with the deleted contact’s details.
+     Use case ends.
 
 **Extensions**
-
-* 1a. The given contact is not in the AddressBook
-    * 1a1. AddressBook shows an error message.
-
+- 1a. User provides an invalid index or name.
+  - 1a1. Application displays an error message: "Error: Contact not found."
       Use case ends.
-
-* 1b. Multiple matching contacts in the AddressBook
-    * 1b1. AddressBook shows list of all matching contacts.
-    * 1b2. User enters index of contact to delete
-
+- 1b. User enters a name that is not unique in the address book.
+  - 1b1. Application prompts the user to delete by index instead.
+  - 1b2. User enters index of contact to delete
       Use case resumes at step 2.
 
+---
 
-**Use case: Search for contact**
+### Use Case: Deleting a Contact in a Filtered List
 
 **MSS**
-
-1.  User requests to search for contact
-2.  AddressBook shows list of all matching contacts
-
-    Use case ends.
+1. User performs a search using `find` to filter contacts.
+2. User enters the `delete` command with an index from the filtered list.
+3. Application deletes the specified contact from the filtered list.
+4. Application displays a confirmation message.
+     Use case ends.
 
 **Extensions**
-
-* 1a. User did not provide the search input
-    * 1a1. AddressBook shows an error message.
-
+- 2a. User provides an invalid index or namenot in the filterest list.
+  - 2a1. Application displays an error message: "Error: Contact not found."
       Use case ends.
-* 1b. Given search input has invalid or duplicate fields.
-    * 1b1. AddressBook shows an error message.
+- 2b. User enters a name that is not unique in the address book.
+  - 2b1. Application prompts the user to delete by index instead.
+  - 2b2. User enters index of contact to delete
+      Use case resumes at step 2.
 
-      Use case ends.
-* 1c. Search input does not match any contact in the AddressBook
-    * 1c1. AddressBook shows an error message and prompts user to try searching under another field
+---
 
-      Use case ends.
-
-**Use case: List all contacts**
+### Use Case: Editing a Contact
 
 **MSS**
+1. User enters the `edit` command with the contact’s index or unique full name, specifying the fields to update.
+2. Application validates the updated details (e.g., unique Telegram handle).
+3. Application updates the contact’s details in the address book.
+4. Application displays a confirmation message: "Contact edited successfully."
+     Use case ends.
 
-1.  User requests to list all contacts
-2.  AddressBook shows list of all contacts
+**Extensions**
+- 1a. User provides incomplete, invalid, or duplicate data.
+  - 1a1. Application displays an error message indicating the issue.
+      Use case ends
+- 1b. User specifies a non-unique full name for editing.
+  - 1b1. Application prompts the user to edit by index.
+  - 1b2. User enters index of contact to delete
+      Use case resumes at step 2.
+- 1c. Contact not found (e.g., incorrect index or name not in list).
+  - 1c1. Application displays an error message: "Error: Contact not found."
+      Use case ends
 
-    Use case ends.
+---
 
-
-**Use case: Help to find list of contacts**
+### Use Case: Editing a Contact in a Filtered List
 
 **MSS**
+1. User performs a search using `find` to filter contacts.
+2. User enters the `edit` command with an index from the filtered list.
+3. Application updates the specified contact’s details in the filtered list.
+4. Application displays a confirmation message.
+     Use case ends
 
-1.  New user requests to see the list of commands
-2.  Data_coNdUctorS shows help list and URL to our User Guide
-3.  User goes to the User Guide link
+**Extensions**
+- 2a. User provides incomplete, invalid, or duplicate data.
+  - 2a1. Application displays an error message indicating the issue.
+      Use case ends
+- 2b. User specifies a non-unique full name for editing.
+  - 2b1. Application prompts the user to edit by index.
+  - 2b2. User enters index of contact to delete
+      Use case resumes at step 2.
+- 2c. Contact not found (e.g., incorrect index or name not in filtered list).
+  - 2c1. Application displays an error message: "Error: Contact not found."
+      Use case ends
 
-    Use case ends.
+---
+
+### Use Case: Finding a Contact by Details
+
+**MSS**
+1. User enters the `find` command with specific criteria, such as name or role etc.
+2. Application searches for contacts that match the criteria.
+3. Application displays a list of contacts that meet the search criteria, along with a status message: "Found contacts matching criteria."
+     Use case ends.
+
+**Extensions**
+- 1a. Search input does not match any contact in the AddressBook.
+  - 1a1. Application shows an error message and prompts user to try searching under another field
+      Use case ends.
+- 1b. User specifies an invalid role or student status.
+  - 1b1. Application displays an error message of invalid role/student status inputted
+      Use case ends.
+- 1c. User did not provide the search input
+  - 1c1. Application displays error message to input search criteria
+      Use case ends.
+
+---
+
+### Use Case: Clearing All Contacts
+
+**MSS**
+1. User enters the `clear` command.
+2. Application deletes all contacts.
+     Use case ends.
+
+---
+
+### Use Case: Help Information
+
+**MSS**
+1. User enters the `help` command.
+2. Application displays a general help message detailing available commands and how to access specific command help.
+3. User reads the displayed help message for command information.
+     Use case ends.
+
+**Extensions**
+- 1a. User enters `help COMMAND_WORD` (e.g., `help add`) to get detailed information on a specific command.
+  - 1a1. Application displays detailed usage information for the specified command, including the command format, required fields, and examples.
+      Use case continues to step 3.
+- 1b. User enters `help` with extraneous parameters (e.g., `help extra`).
+  - 1b1. Application shows an error message and prompts user to try `help` or `help COMMAND_WORD`.
+      Use case ends.
+
+**Alternate Paths**
+- 2a. User requests further assistance by following the provided link to the complete User Guide.
+  - 2a1. Application opens the User Guide in the default web browser, allowing the user to view more comprehensive instructions.
+      Use case ends.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -354,7 +447,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+This section provides a guide for performing manual testing on the data_coNdUctorS application. Each test case includes expected results and possible error messages for invalid inputs.
 
 <box type="info" seamless>
 
@@ -362,6 +455,8 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+
+---
 
 ### Launch and shutdown
 
@@ -378,11 +473,45 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+---
+
+### Adding a Contact
+
+1. Adding a valid contact
+
+   1. Prerequisites: Application is open, and user is on the main contact list screen.
+   
+   1. Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny`<br>
+      Expected: A new contact named "John Doe" is added to the contact list. Status message shows "Contact added successfully."
+      
+   1. Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny` executed twice <br>
+      Expected: No contact is added. Error message will be displayed due to duplicate fields
+
+   1. Test case: `add n/John Doe th/johnd123 e/john.doe(at)example.com ss/undergraduate 1 r/Admin`<br>
+      Expected: No contact is added. Error message displayed due to incorrect email format
+
+   1. Other incorrect add commands to try: `add`, `add n/`, `add th/username e/email.com`<br>
+      Expected: Error message displayed indicating missing or incorrect parameters.
+
+---
+
+### Listing All Contacts
+
+1. Listing contacts with no additional parameters
+
+   1. Prerequisites: Application is open with multiple contacts in the list.
+   
+   1. Test case: `list`<br>
+      Expected: All contacts are displayed in the list view. Status message shows "Listed all contacts."
+
+   1. Other variations to try: `list all`, `list contacts` or any variation of `all` and/or `contacts` after `list`<br>
+      Expected: Similar outcome to `list` command. All contacts are displayed.
+
+---
 
 ### Deleting a contact
 
-1. Deleting a contact while all contacts are being shown
+1. Deleting a contact while **ALL** contacts are being shown
 
    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
@@ -392,15 +521,198 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `delete UNIQUE_FULL_NAME`<br>
+      Expected: If UNIQUE_FULL_NAME is in the addressbook and there is only one FULL_NAME, deletes that contact.
 
-1. _{ more test cases …​ }_
+   1. Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
+      Expected: If NOT_UNIQUE_FULL_NAME is in the addressbook but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
 
+   1. Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
+      Expected: If FULL_NAME_NOT_IN_LIST is not in addressbook, no contact is deleted even if the name is present in the addressbook and error details shown in the status message.
+
+   1. Test case: `delete NOT_FULL_NAME`<br>
+      Expected: No contact is deleted and error details shown to delete by the full name of delete by index.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+      Expected: No contact is deleted. Error details shown in the status message for missing or invalid fields
+
+1. Deleting a contact while **SOME** contacts are being shown
+
+   1. Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
+
+   1. Test case: `delete 1`<br>
+      Expected: Similar to above.
+
+   1. Test case: `delete 0`<br>
+      Expected: Similar to above.
+      
+   1. Test case: `delete UNIQUE_FULL_NAME`<br>
+      Expected: If UNIQUE_FULL_NAME is in the filtered list and there is only one FULL_NAME, deletes that contact.
+
+   1. Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
+      Expected: If NOT_UNIQUE_FULL_NAME is in the filtered list but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
+
+   1. Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
+      Expected: If FULL_NAME_NOT_IN_LIST is not in filtered list, no contact is deleted even if the name is present in the addressbook and error details shown in the status message.
+
+   1. Test case: `delete NOT_FULL_NAME`<br>
+      Expected: No contact is deleted and error details shown to delete by the full name of delete by index.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete NOT_FULL_NAME`<br>
+      Expected: Similar to above.
+
+---
+
+### Editing a Contact
+
+1. Editing a contact while **ALL** contacts are being shown
+
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   
+   1. Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
+      Expected: First contact’s name changes to "Jane Smith" and Telegram handle to "jane_smith." Status message shows "Contact edited successfully."
+
+   1. Test case: `edit 99 n/Jane Smith`<br>
+      Expected: No contact is edited. Error message displayed: "Error: Contact not found. Please provide a valid index."
+
+   1. Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
+      Expected: If UNIQUE_FULL_NAME is in the addressbook and there is only one FULL_NAME, edits that contact.
+
+   1. Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
+      Expected: If NOT_UNIQUE_FULL_NAME is in the addressbook but not unique, no contact is edited and error details shown in the status message for user to edit via index.
+
+   1. Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
+      Expected: If FULL_NAME_NOT_IN_LIST is not in addressbook, no contact is edited even if the name is present in the addressbook and error details shown in the status message.
+
+   1. Test case: `edit NOT_FULL_NAME th/john_doe`<br>
+      Expected: No contact is edited and error details shown to edit by the full name of edit by index.
+
+   1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
+      Expected: Error message displayed for missing or invalid fields.
+      
+1. Editing a contact while **SOME** contacts are being shown
+
+   1. Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
+   
+   1. Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
+      Expected: Similar to above.
+
+   1. Test case: `edit 99 n/Jane Smith`<br>
+      Expected: Similar to above.
+
+   1. Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
+      Expected: If UNIQUE_FULL_NAME is in the filtered list and there is only one FULL_NAME, edits that contact.
+
+   1. Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
+      Expected: If NOT_UNIQUE_FULL_NAME is in the filtered list but not unique, no contact is edited and error details shown in the status message for user to edit via index.
+
+   1. Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
+      Expected: If FULL_NAME_NOT_IN_LIST is not in filtered list, no contact is edited even if the name is present in the addressbook and error details shown in the status message.
+
+   1. Test case: `edit NOT_FULL_NAME th/john_doe`<br>
+      Expected: No contact is edited and error details shown to edit by the full name of edit by index. 
+
+   1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
+      Expected: Similar to above.
+
+---
+
+### Finding a Contact
+
+1. Finding a contact by name and role
+
+   1. Prerequisites: Multiple contacts with different names and roles are present in the contact list.
+   
+   1. Test case: `find n/John r/Admin`<br>
+      Expected: Contacts matching "John" with role "Admin" are displayed in the list. Status message shows "Found contacts matching criteria."
+
+   1. Test case: `find n/FULL_NAME_NOT_IN_LIST r/Admin`<br>
+      Expected: No contacts are displayed. Status message shows "No contacts found matching the criteria."
+
+   1. Other incorrect find commands to try `find`, `find n/NOT_FULL_NAME r/ROLE_NOT_IN_LIST`<br>
+      Expected: If no contacts match, a message appears indicating no contacts found. If an invalid role is entered, an error message displays: "Error: Invalid role specified."
+
+---
+ 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Automatic Data Saving
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Application is running, and a contact has been added, edited, or deleted.
+   
+   1. Test case: Close and reopen the application.<br>
+      Expected: The changes made to contacts persist after reopening. The saved contacts appear as they were before closing the app.
 
-1. _{ more test cases …​ }_
+2. Data File Integrity
+
+   1. Prerequisites: The data file (`addressbook.json`) is accessible for manual editing.
+   
+   1. Test case: Manually edit the JSON file to include an invalid format or structure (e.g., remove a required field).<br>
+      Expected: Upon launching, the application detects the corrupted data and either resets to an empty state or prompts an error message like "Error: Invalid data format detected. Data reset to empty state."
+
+---
+
+### GUI Components
+
+1. Pagination
+
+   1. Prerequisites: Add enough contacts to exceed a single page (e.g., 11 or more contacts as each page displays 10).
+   
+   1. Test case: Use pagination controls (next, previous) or page navigation to view contacts on multiple pages.<br>
+      Expected: Pagination controls work as expected, allowing the user to navigate through the contact list. The status bar reflects the current page and total contacts.
+
+2. Footer Status Bar
+
+   1. Prerequisites: Add or delete a contact to observe changes in the footer.
+   
+   1. Test case: Add a contact, then delete a different contact.<br>
+      Expected: The footer updates in real-time, displaying the current total contacts and the path of the data file. Status message shows the results of the last action.
+
+### Additional Notes
+
+1. Testing Edge Cases
+
+   1. Prerequisites: Application is running with an open contact list.
+   
+   1. Test case: Add or edit a contact with special characters in fields, very long inputs, or boundary values (e.g., maximum allowed length for fields).<br>
+      Expected: The application handles special characters, lengthy inputs, and boundary values without crashing or error. If any input exceeds limits, a message such as "Error: Input exceeds allowed length" is shown.
+
+2. Common Mistakes
+
+   1. Prerequisites: Application is open and ready for input.
+   
+   1. Test case: Enter commonly mistaken commands or leave required fields blank (e.g., `delete` with no index, `find` with no criteria).<br>
+      Expected: Error messages are clear and descriptive, guiding the user to correct the input format. Status bar remains unaffected by failed commands.
+
+3. Data Reset
+
+   1. Prerequisites: The application has saved data that the user wishes to reset.
+   
+   1. Test case: Delete or replace the data JSON file and restart the application.<br>
+      Expected: The app initialises with an empty contact list, and a message indicates that no saved data was found, prompting a fresh start.
+
+---
+
+This appendix provides a comprehensive approach to testing the data_coNdUctorS app, ensuring each core feature and edge case is addressed. Error messages will appear on the screen if incorrect inputs are entered, helping users to correct their input efficiently.
+
+
+
+## Appendix: Planned Enhancements
+
+This section outlines the planned future enhancements for the data_coNdUctorS application to improve functionality, usability, and scalability.
+
+---
+
+### Advanced Error Messages
+
+1. Informing the User what is their specific issue with the command that they have inputted 
+
+   1. Goal: Quality of Life for users to understand which part of the command they inputted wrongly so they don't have to waste time
+  
+   1. Planned Implementation example: Editing a contact with the same `NAME` and `NICKNAME` as a current contact will result in an error message: "This Contact already exists in the address book". This is not very clear and so in the future, we could show that current contact to the user and show them which fields are duplicated
+      
+   1. Expected Outcome: Users will waste less time debugging their inputs, espeically for large address books.
+
+---
+
+
