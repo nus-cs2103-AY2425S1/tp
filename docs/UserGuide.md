@@ -77,6 +77,7 @@ Modern car workshops often face a variety of operational challenges:
 - **Poor record-keeping**: Relying on spreadsheets or paper records leads to inefficiencies, especially when managing vehicle histories, service issues, or specific vehicle details.
 - **Slow task execution**: Traditional systems require multiple clicks and navigation steps, slowing down workshop efficiency.
 
+<div style="page-break-after: always;"></div>
 
 ### **Our Solution**
 
@@ -85,8 +86,6 @@ MATER was designed to address these challenges directly:
 - **Streamlined command-based controls**: Users can type commands to perform tasks faster than by navigating through a typical GUI.
 - **Reliable data tracking**: Track issues and maintenance details with consistency, ensuring no information is lost and that clients receive high-quality service.
 
-
-<div style="page-break-after: always;"></div>
 
 ### **Product Overview**
 
