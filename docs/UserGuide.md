@@ -183,7 +183,7 @@ If you're an advanced user looking to edit the JSON file directly, head over to 
 ## Features
 
 <div class="alert" markdown="span">
-Before proceeding, make sure you have reviewed the [Command Structure](#command-structure) section or are already familiar with EZSTATE's command structure. This will ensure you can fully understand and use the features in this section. 
+Before proceeding, make sure you have reviewed the [Command Structure](#command-structure) section or are already familiar with EZSTATE's command structure. This will ensure you can fully understand and use all of EZSTATE's features. 
 </div>
 
 <br>
