@@ -4,47 +4,78 @@ title: User Guide
 ---
 
 
+
 # CareLink User Guide
+* Table of Contents
+{:toc}
 
-- [CareLink User Guide](#carelink-user-guide)
-  - [Quick start](#quick-start)
-  - [Features](#features)
-    - [Viewing help : `help`](#viewing-help--help)
-    - [Adding a person: `add`](#adding-a-person-add)
-    - [Linking a patient and a caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
-    - [Deleting a link between patient and a caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
-    - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
-    - [Listing all persons : `list`](#listing-all-persons--list)
-    - [Editing a person : `edit`](#editing-a-person--edit)
-    - [Locating persons by name, NRIC, phone, email, role, or tags: `find`](#locating-persons-by-name-nric-phone-email-role-or-tags-find)
-    - [Prefixes:](#prefixes)
-    - [Examples:](#examples)
-    - [Managing Appointments](#managing-appointments)
-      - [Adding an appointment: `addapp`](#adding-an-appointment-addapp)
-      - [Editing an appointment: `editapp`](#editing-an-appointment-editapp)
-      - [Updating Status of an appointment: `updatestatus`](#updating-status-of-an-appointment-updatestatus)
-      - [Deleting an appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
-      - [Locating appointments by date-time range: `findapp`](#locating-appointments-by-date-time-range-findapp)
-      - [Examples:](#examples-1)
-    - [Deleting a person : `delete`](#deleting-a-person--delete)
-    - [Clearing all entries: `clear confirm`](#clearing-all-entries-clear-confirm)
-    - [Exiting the program : `exit`](#exiting-the-program--exit)
-    - [Saving the data](#saving-the-data)
-    - [Editing the data file](#editing-the-data-file)
-    - [NRIC constraints](#nric-constraints)
-  - [FAQ](#faq)
-  - [Known Issues](#known-issues)
-  - [Command summary](#command-summary)
 
-CareLink is a desktop application designed for independent geriatricians managing elderly patients with chronic conditions. The application features a Command Line Interface (CLI) optimized for users who can type fast and prefer CLI over GUI, allowing efficient management of multiple patients.
+## Introduction
+
+Welcome to CareLink, your comprehensive patient management solution. As a Command Line Interface (CLI) application with a Graphical User Interface (GUI), CareLink helps independent  geriatricians streamline patient care management, appointment scheduling, and caregiver coordination.
+
+
+### What is CareLink?
+
+CareLink simplifies healthcare management through four core capabilities:
+* Efficient patient information tracking
+* Seamless caregiver coordination
+* Smart appointment scheduling
+* Comprehensive medical note management
+
+### Key Features
+
+* **Patient Management**
+  * Store and update patient records
+  * Track medical histories
+  * Search patient information
+  * Manage patient-caregiver relationships
+
+* **Appointment System**
+  * Schedule and track appointments
+  * Manage scheduling conflicts
+  * Set appointment reminders
+  * Monitor appointment status
+
+* **Caregiver Coordination**
+  * Link patients with caregivers
+  * Maintain caregiver contact information
+  * Track caregiver assignments
+  * Enable efficient communication
+
+* **Data Organization**
+  * Secure data storage
+  * Quick information retrieval
+  * Automated backups
+  * Advanced search capabilities
+
+
+### Who is CareLink For?
+
+CareLink is designed specifically for independent geriatricians who:
+* Manage multiple elderly patients with chronic conditions
+* Need to coordinate with caregivers
+* Require efficient appointment scheduling
+* Want to track patient histories and medical notes
+
+### How This Guide Helps You
+
+This user guide will walk you through:
+1. Setting up CareLink
+2. Managing patients and caregivers
+3. Scheduling appointments
+4. Recording medical notes
+5. Using advanced features
+
+For immediate setup, proceed to [Quick Start](#quick-start). For detailed feature information, visit the [Features](#features) section.
 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your CareLink.
+1. Copy the file to the folder you want to use as the **_home folder_** for your CareLink.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar carelink.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -492,15 +523,7 @@ If your changes to the data file makes its format invalid, CareLink will discard
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### NRIC constraints
-NRIC should adhere to the following format and constraints:
-1. The NRIC must be 9 characters long.
-2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
-   - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
-   - 'F' and 'G' are for Foreigners.
-3. The next 7 characters must be digits.
-4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
-5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
+
 ---
 
 ## FAQ
