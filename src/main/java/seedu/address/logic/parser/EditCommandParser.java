@@ -39,24 +39,35 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
 
         EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
-
         Index index = null;
-        Name name = null;
 
         String strPreamble = argMultimap.getPreamble();
+        setContactDescriptor(strPreamble, argMultimap, editContactDescriptor);
+
+        if (!editContactDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_MISSING_PREFIX); // Fields missing or at least 1....
+        }
+
+        // parse the index to edit, else parse the name
+        final String regexNumber = "^-*?[0-9]+$";
+        try {
+            index = ParserUtil.parseIndex(strPreamble);
+            return new EditCommand(index, editContactDescriptor);
+        } catch (ParseException pe) {
+            if (isInteger(strPreamble) || strPreamble.matches(regexNumber)) {
+                throw new ParseException(pe.getMessage());
+            }
+            return createEditCommandByName(strPreamble, editContactDescriptor);
+        }
+    }
+
+    private void setContactDescriptor(
+            String strPreamble,
+            ArgumentMultimap argMultimap,
+            EditContactDescriptor editContactDescriptor) throws ParseException {
         if (strPreamble.isEmpty()) {
             throw new ParseException(EditCommand.MESSAGE_MISSING_INDEX_OR_FULL_NAME);
         }
-
-        // for the future where we can apply polymorphism and not worry about .setName() .setHandle() etc
-        /*
-        List<Prefix> prefixList = List.of(PREFIX_NAME, PREFIX_TELEGRAM_HANDLE,
-                PREFIX_EMAIL, PREFIX_STUDENT_STATUS, PREFIX_NICKNAME);
-
-        prefixList.stream()
-                .map(argMultimap::getValue) // Stream<Optional<String>>
-                .map(x -> x.map(editContactDescriptor.set()))
-         */
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editContactDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -77,25 +88,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parseNickname(argMultimap.getValue(PREFIX_NICKNAME).get()));
         }
         parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editContactDescriptor::setAndSortRoles);
-
-        if (!editContactDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_MISSING_PREFIX); // Fields missing or at least 1....
-        }
-
-        // parse the index to edit, else parse the name
-        final String regexNumber = "^-*?[0-9]+$";
-        try {
-            index = ParserUtil.parseIndex(strPreamble);
-            return new EditCommand(index, editContactDescriptor);
-        } catch (ParseException pe) {
-            assert index == null;
-            if (isInteger(strPreamble) || strPreamble.matches(regexNumber)
-                    /*|| strPreamble.matches("^[^a-zA-Z]*$")*/) {
-                throw new ParseException(pe.getMessage());
-                // -1, 0
-            }
-            return createEditCommandByName(strPreamble, editContactDescriptor);
-        }
     }
 
     private EditCommand createEditCommandByName(String strPreamble, EditContactDescriptor editContactDescriptor)
@@ -110,14 +102,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     private boolean isInteger(String args) {
-        try {
-            Integer.parseInt(args); // can pass negative integers as well
-            return true;
-        } catch (Exception exp) {
-            return false;
-        }
+        return ParserUtil.isInteger(args);
     }
-
 
     /**
      * Parses {@code Collection<String> roles} into a {@code Set<Role>} if {@code roles} is non-empty.

@@ -13,8 +13,7 @@ import seedu.address.model.contact.Contact;
 /**
  * Container for user visible messages.
  */
-public class
-Messages {
+public class Messages {
     public static final String LINE_BREAK = "\n";
     public static final String WHITESPACE = " ";
     public static final String COMMAND_FORMAT_PREAMBLE = "Command Format:";

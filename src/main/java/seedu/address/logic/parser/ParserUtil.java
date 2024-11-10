@@ -163,4 +163,18 @@ public class ParserUtil {
         String trimmedNickname = nickname.trim();
         return new Nickname(trimmedNickname);
     }
+
+    /**
+     * Used by EditCommandParser and DeleteCommandParser to check if the number entered is a valid integer
+     * @param args the preamble (edit 1 ...)
+     * @return true if it is non-zero to MAX_INT, otherwise false (edit LARGE_NUMBER or delete -1)
+     */
+    public static boolean isInteger(String args) {
+        try {
+            Integer.parseInt(args); // can pass negative integers as well
+            return true;
+        } catch (Exception exp) {
+            return false;
+        }
+    }
 }

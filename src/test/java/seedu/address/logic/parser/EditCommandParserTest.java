@@ -177,6 +177,20 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_attemptToEditByInvalidInt_throwsParseException() {
+        // num too big
+        assertParseFailure(parser, Integer.MAX_VALUE +  "1" + EMAIL_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // negative num
+        assertParseFailure(parser, "-1" + EMAIL_DESC_BOB, ParserUtil.MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_missingIndexOrName_throwsParseException() {
+        assertParseFailure(parser, EMAIL_DESC_AMY, EditCommand.MESSAGE_MISSING_INDEX_OR_FULL_NAME);
+    }
+
+    @Test
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_CONTACT;
