@@ -909,3 +909,5 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 Team size: 5
 
 1. **Make `NAME` field less restrictive**: Currently, only alphanumeric characters are permitted, which means names like "Ernst & Young" and "UI/UX developer" cannot be accurately represented. We plan to expand the set of special characters allowed in the `NAME` field to support a wider range of company names and applications.
+
+2. **Make Index error message clearer**: Currently, the `withdraw` command gives an error message of "Index is not a non-zero unsigned integer." when an incorrect company or application index is supplied. We plan to make this message clearer by changing it to "Index is not a positive integer".
