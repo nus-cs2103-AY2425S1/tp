@@ -468,9 +468,9 @@ _Details coming soon ..._
 GoonBook is a brownfield software project based off AddressBook Level-3, taken under the CS2103T Software Engineering module held by the School of Computing at the National University of Singapore.
 
 Java dependencies:
-- JavaFX for GUI 
+- JavaFX for GUI
 - JUnit5 for testing
 
 Documentation dependencies:
-- Jekyll for rendering the website 
+- Jekyll for rendering the website
 - PlantUML for creating UML diagrams
