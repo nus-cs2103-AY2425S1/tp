@@ -1431,6 +1431,21 @@ These instructions only provide a starting point for testers to work on; testers
   3. Test Case: `favourite`  
      **Expected:** Lists all contacts marked as favourites at the front of the contact list.
 
+### Adding Birthday
+
+1. **Adding a Person's Birthday**
+
+  1. Prerequisites: Having contacts in the list
+  2. Test case: `birthday 1 b/1986-08-23`
+  3. **Expected:** Adds birthday for the person at index 1.
+
+### Reminder for Birthday
+1. **Viewing Reminder for a Person's Birthday**
+ 
+  1. Prerequisites: Having contacts in the list whose birthday is stated and is within a week from today.
+  2. Test case: `birthday 1 b/<date witihin a week>`
+  3. **Expected:** When the app is closed and re-opened, a reminder showing the person's birthday shows on the result display.
+
 ### Deleting a Person
 
 1. **Deleting a Contact from the List**
