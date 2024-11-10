@@ -193,6 +193,17 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseSubject_emptyValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(""));
+    }
+
+    @Test
+    public void parseSubjects_emptyList_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubjects(Collections.emptyList()));
+    }
+
     @Test
     public void parseClasses_emptyValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseClasses(" "));
