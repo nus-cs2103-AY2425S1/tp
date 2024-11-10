@@ -350,6 +350,10 @@ Use case ends.
 - 1a. Details are not properly formatted or complete.
   - 1ai. System displays an error message.   
     Use case ends.
+- 1b. No goods are found.
+  - 1bi. System displays an empty list of goods.
+  - 1bii. System displays a feedback saying that no goods are found.  
+  Use case ends.
 
 #### UC11: Export goods data
 
