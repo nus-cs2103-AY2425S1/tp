@@ -63,8 +63,16 @@ public class ExportCommandTest {
         assertEquals("seedu.address.logic.commands.ExportCommand{format=CSV}", testCommand.toString());
     }
     @Test
-    public void parseValidTag() {
+    public void parseValidTagMacOs() {
         String input = "\"{\\n  \\\"neighbours\\\" : null\\n}\"";
+        String expectedOutput = "neighbours";
+        String result = parseTags(input);
+        assertEquals(expectedOutput, result);
+    }
+
+    @Test
+    public void parseValidTagWindows() {
+        String input = "\"{\\r\\n  \\\"neighbours\\\" : null\\r\\n}\"";
         String expectedOutput = "neighbours";
         String result = parseTags(input);
         assertEquals(expectedOutput, result);
