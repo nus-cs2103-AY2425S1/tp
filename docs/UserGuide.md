@@ -232,6 +232,10 @@ Format: `clear`
 
 * Note how the mode is highlighted by `Viewing: Meet Ups` above the command line
 
+* Note how each meet-up contains buyer, if the buyer exists in the BuyerList, it will be marked as purple, else red. The matching here is done by case-sensitive matching, e.g. `Alex Yeoh` will only be purple if there is `Alex Yeoh` in the Buyer List, not `Alex yeoh` or `alex yeoh` or `Alex`.
+
+* However, if an existing buyer's name is edited, the buyer shown in meet-ups won't update accordingly and will just change from purple to red, e.g. in the image above, if the name of `Alex Yeoh` was changed in the BuyerList to `Alex Yeo`, in the meet-up mode, both meetings would still display `Alex Yeoh` but in red now.
+
 </div>
 
 ### Viewing all meet-ups : `view`
@@ -246,13 +250,13 @@ Adds a meet-up to the meet-up list.
 
 Format: `add s/MEETUP_SUBJECT i/MEETUP_INFO f/MEETUP_FROM t/MEETUP_TO [n/BUYER_NAME]…​`
 
-* New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO.
+* New meet-ups must have at least one unique non-duplicate aspect from these three fields: MEETUP_SUBJECT, MEETUP_FROM, MEETUP_TO. Else, it will be marked as a duplicate meet-up.
 
 * MEETUP_FROM and MEETUP_TO fields should follow the format `YYYY-MM-DD HH:MM`.
 
 * MEETUP_TO must be a date/time that is later than MEETUP_FROM.
 
-* Buyers that exist in buyer list will be marked as green, while those that don't will be marked as red.
+* Buyers that exist in buyer list will be marked as purple, while those that don't will be marked as red.
 
 Examples:
 * `add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li `
