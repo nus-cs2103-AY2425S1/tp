@@ -81,6 +81,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
 ## Command summary
 ### Person-Related Commands
+<<<<<<< HEAD
 | **Action**                                       | **Format**                                                                                                                     | **Example**                                                                                    |
 |--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-contact-add)                 | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`       | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
@@ -111,6 +112,34 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 | [**Exit Application**](#exiting-the-program--exit) | `exit`     | `exit`      |
 
 --------------------------------------------------------------------------------------------------------------------
+=======
+| **Action**  | **Format**                                                                                                                                                    | **Example**                                                                                    |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-contact-add)    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                        | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
+| [**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                                        | `clear`                                                                                        |
+| [**Delete**](#deleting-a-person-delete) | `delete INDICES`                                                                                                                                               | `delete 1 2 3 5-7`                                                                             |
+| [**Edit**](#editing-a-person-edit)     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                  | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
+| [**Search**](#searching-persons-by-field-search) | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                                                 | `search n/john`                                                                                |
+| [**List**](#listing-all-persons-list)  | `list`                                                                                                                                                         | `list`                                                                                         |
+| [**Sort**](#sorting-the-displayed-list-sort) | `sort [s/SORT_OPTION]`                                                                                                                                         | `sort s/name`                                                                                  |
+
+### Group-Related Commands
+| **Action**                       | **Format**                                                        | **Example**                                    |
+|----------------------------------|-------------------------------------------------------------------|------------------------------------------------|
+| [**Create Group**](#creating-a-group-creategroup)                 | `createGroup g/GROUP_NAME m/[INDICES]`                            | `createGroup g/blood drive m/1 2 4-7`          |
+| [**Add New Members to Group**](#adding-new-members-to-an-existing-group-addtogroup)  | `addToGroup g/GROUP_NAME m/[INDICES]`                             | `addToGroup g/beach cleanup m/1 2 3-6`         |
+| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group-removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`             | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
+| [**Edit Group Name**](#editing-a-groups-name-editgroupname)             | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`                 | `editGroupName g/blood drive g/blood donation` |
+| [**Delete Group**](#deleting-a-group-deletegroup)                 | `deleteGroup g/GROUP_NAME`                                        | `deleteGroup g/blood donation`                 |
+| [**List Groups**](#listing-groups-listgroups)                  | `listGroups`                                                     | `listGroups`                                   |
+
+### General Commands
+| **Action**           | **Format** | **Example** |
+|----------------------|------------|-------------|
+| [**Help**](#viewing-help-help)            | `help`     | `help`      |
+| [**Get Emails**](#getting-emails-email)      | `email`    |      `email` |
+| [**Exit Application**](#exiting-the-program-exit) | `exit`     |      `exit` |
+>>>>>>> master
 
 ### Adding a contact: `add`
 
@@ -358,7 +387,13 @@ Format: `listGroups`
 
 * The group size and up to three members are displayed for each group.
 * If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
-  ![result for 'list groups'](images/list-groups.png)
+
+<box type="tip" seamless>
+
+**Tip:** To view all members of a group with more than 3 people, use `search g/GROUP_NAME`.
+</box>
+
+![result for 'list groups'](images/list-groups.png)
 
 ### Viewing help : `help`
 
