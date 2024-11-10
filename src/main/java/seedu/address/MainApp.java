@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -188,7 +189,7 @@ public class MainApp extends Application {
             int len = months.length;
             for (int i = 0; i < len; i++) {
                 String month = months[i].name().toLowerCase();
-                if (month.equals(checkMonth) && date == 1 && !person.getLastPaidDate().equals(today)) {
+                if (month.equals(checkMonth) && date == 1 && !person.getLastPaidDate().equals(new LastPaidDate(today))) {
                     Person updatedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                             person.getAddress(), person.getBirthday(), person.getTags(), false,
                             person.getLastPaidDate(), new Frequency("0"), person.getProfilePicFilePath());
