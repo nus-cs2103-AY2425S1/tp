@@ -164,7 +164,7 @@ The prefixes used in **EZSTATE** are universal across all commands.
 | fr/    | from    | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `from` time must precede `to` time.                                                                                                                                                                                                                                                          | `fr/0800`, `fr/08:00`                 | `fr/2500`, `fr/100`, `fr/8am`             |
 | to/    | to      | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `to` time must supercede `from` time.                                                                                                                                                                                                                                                        | `to/1000`, `to/10:00`                 | `to/2500`, `to/110`, `to/`                |
 | pr/    | price   | Price should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `6` digits long.                                                                                                                                                                                                                                            | `pr/100000`, `pr/45000000`            | `pr/000123`, `pr/-1000`, `pr/12`          |
-| ar/    | area    | Area should only contain `positive` numbers and cannot start with `zeroes`, and it should be at least `2` digits long.                                                                                                                                                                                                                                              | `ar/10`, `ar/100`                     | `ar/01`, `ar/-5`, `ar/`                   |
+| ar/    | area    | Area should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `2` digits long.                                                                                                                                                                                                                                             | `ar/10`, `ar/100`                     | `ar/01`, `ar/-5`, `ar/`                   |
 | add/   | address | Addresses can take any values, and it should not be `blank`.                                                                                                                                                                                                                                                                                                        | `add/123 PASIR RIS (S)123456`         | `add/`                                    |
 | reg/   | region  | Only the following `9` regions are allowed: `EAST`, `WEST`, `NORTHEAST`, `SOUTH`, `NORTH`, `NORTHWEST`, `SOUTHEAST`, `SOUTHWEST`, `CENTRAL`.                                                                                                                                                                                                                        | `reg/east` `reg/northeast`            | `reg/xyz`, `reg/invalidregion`            |
 | sel/   | seller  | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `sel/1` `sel/2`                       | `sel/0`, `sel/-1`, `sel/abc`              |
@@ -211,9 +211,21 @@ NIL (all covered in Constraints)
 ##### pr/
 1. While only positive values are allowed, there’s no limit on maximum value, allowing extremely high prices (e.g., pr/9999999999) which may affect the display of data.
 2. As per constraints, prices like `1000000.50` are not allowed.
-3. 
 
+##### ar/
+1. The unit of measurement is `m^2`.
+2. There's no maximum limit, so values like ar/99999999999999999999999999999 will pass, which may affect the display of data.
+3. As per constraints, areas like `1000.50` are not allowed.
 
+##### add/
+1. Unrealistically long addresses passes but will affect the display of data.
+2. Since addresses accept any value, symbols and non-standard characters (e.g. `add/123 *^&`) will pass.
+
+##### reg/
+1. Regions are case-insensitive (i.e. `reg/east` and `reg/East` are the same).
+
+##### sel/ & buy/
+1. Leading zeroes are allowed but will be trimmed (i.e. `sel/01` and `sel/1` refer to the same seller).
 
 
 Congratulations - you've successfully completed the Quick Start guide!
