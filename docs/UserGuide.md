@@ -3,11 +3,6 @@
   title: "User Guide"
   pageNav: 4
 ---
-<style>
-    :target {
-      scroll-margin-top: 400px;
-    }
-</style>
 
 # PlanPerfect User Guide
 PlanPerfect is designed to streamline the way wedding planners manage their contacts and organize wedding events. 
