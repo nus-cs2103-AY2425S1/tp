@@ -88,6 +88,7 @@ Here is a quick look at the various sections in this user guide:
 - Ensure you have Java `17` or above installed in your computer.
   
   To check if you have Java `17` installed, open up a command terminal in your computer, type `java -version` and press <kbd>Enter</kbd>.
+
   If you do not have Java `17` installed, you can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 ### Setting up
