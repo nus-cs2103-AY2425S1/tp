@@ -102,8 +102,15 @@ Format: `list [s/SORT_FIELD] [r/]`
   * `email` - Sort by email address
 * `r/`: Reverses the sort order (descending instead of ascending)
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Important Note:**
+Sorting is case-sensitive. When sorting by name:
+* Names starting with uppercase letters (e.g., "Alice") appear before names starting with lowercase letters (e.g., "bob")
+* To ensure consistent sorting, it is recommended to always capitalize the first letter of names when adding contacts
+* Example sort order: "Alice", "Bob", "Charlie", "alice", "bob"
+</div>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Sorting helps you quickly find contacts! For example, sort by name to easily locate someone alphabetically, or sort by age to see your youngest or oldest contacts.
+If you notice names appearing lower in the sorted list than expected, check if they were entered with correct capitalization. You can use the `edit` command to fix the capitalization if needed.
 </div>
 
 Examples:
