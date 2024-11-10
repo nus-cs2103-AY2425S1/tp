@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/arnav12344.png" width="200px">
 
 [[github](https://github.com/arnav12344)] 
-[[portfolio](team/arnav.md)]
+[[portfolio](team/arnav12344.md)]
 
 * Role: Developer, Admin
 * Responsibilities: Data
