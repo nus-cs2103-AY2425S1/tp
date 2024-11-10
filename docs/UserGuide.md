@@ -43,9 +43,13 @@ title: User Guide
 6. [Command summary](#command-summary)
 
 # Introduction
-Welcome to **AcademyAssist**, your ultimate solution for <span style="color:lightgreen; font-weight:bold">efficient student contact management</span>, targeted at tuition centers operating in Singapore.
+Welcome to **AcademyAssist**, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
 This desktop application is designed to streamline your administrative tasks, allowing you to focus your efforts on 
 keeping operations smooth and organized for optimal student support.
+
+AcademyAssist is designed for a diverse range of users, primarily targeting tuition center administrators and 
+administrative staff. Whether you are responsible for managing student information or need quick access to data for 
+efficient operations, AcademyAssist is here to help.
 
 AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical
 User Interface (GUI).** This hybrid approach ensures that you can manage your student database with
@@ -124,7 +128,8 @@ You may refer to the [Command Summary](#command-summary) section for a quick ove
 3. **Message Box**: Displays messages to the user. Which includes success messages, error messages, and help messages.
 4**Student List**: Displays the list of students in the system.
 
-### Sample Commands
+### Using AcademyAssist 
+To interact with AcademyAssist, type your commands into the command box and press Enter.
 Here are some sample commands you can try out to get started:
 1. Add a student: `add n\John Doe i\S1234567A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`
 2. Edit a student: `edit S00001 a\Clementi Street 14`
@@ -136,6 +141,9 @@ Here are some sample commands you can try out to get started:
 8. Filter students by year group: `filter yg\2`
 9. Add a subject to a student: `addsubject S00001 s\Science`
 10. Track the number of students taking each subject: `tracksubject`
+
+No worries if you make a mistake - AcademyAssist will guide you through the messages displayed in the message box.
+You can also use the `help` command to view the help window at any time.
 
 ### Conclusion
 You are now ready to use AcademyAssist! If you encounter any issues during installation or usage, please refer to this documentation or contact us via our email (academyassist@gmail.com). Enjoy using the application!
@@ -541,7 +549,33 @@ the data of your previous AcademyAssist folder.<br><br>
 | **Get Help**      | `help`                                                                                                                                                                                               |
 | **Exit**          | `exit`                                                                                                                                                                                               |
 
+## Command Parameters Reference
+| **Command**             | **Parameter**     | **Prefix** | **Description**                                                                    | **Constraints**                                                                                                                                                 |
+|-------------------------|-------------------|------------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**         | `NAME`            | `n\ `      | Name of the student.                                                               | 2-255 characters, only alphabets, spaces, and special characters (-/'), cannot start/end with special characters, no consecutive special characters and spaces. |
+|                         | `NRIC`            | `i\ `      | NRIC number of the student.                                                        | Must start with `S, T, F, G, M`, followed by 7 digits and an alphabet (e.g., S1234567A).                                                                        |
+|                         | `YEARGROUP`       | `yg\ `     | Year group of the student.                                                         | Must be a number between 1-13.                                                                                                                                  |
+|                         | `PHONE`           | `p\ `      | Phone number of the student.                                                       | 4-20 digits long, no spaces.                                                                                                                                    |
+|                         | `EMAIL`           | `e\ `      | Email address of the student.                                                      | Must follow the format username@domain.                                                                                                                         |
+|                         | `ADDRESS`         | `a\ `      | Address of the student.                                                            | Maximum 300 characters, can contain any characters, cannot be empty.                                                                                            |
+|                         | `SUBJECT`         | `s\ `      | Subject(s) the student is enrolled in.                                             | Must be one of the available subjects; can add multiple subjects using repeated `s\` fields.                                                                    |
+| **Delete Student**      | `STUDENT_ID`      | -          | ID of the student to be deleted.                                                   | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
+| **Edit Student**        | `STUDENT_ID`      | -          | ID of the student to be edited.                                                    | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
+|                         | `FIELD`           | -          | Field to be edited (e.g., Name, NRIC, Year Group, Phone, Email, Address, Subject). | Must be the prefix of one of the specified fields.                                                                                                              |
+|                         | `NEW_VALUE`       | -          | New value for the specified field.                                                 | Must follow the constraints of the specified field.                                                                                                             |
+| **List Students**       | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
+| **View Student Detail** | `STUDENT_ID`      | -          | ID of the student whose details are to be viewed.                                  | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
+| **Find Student**        | `KEYWORD`         | -          | Keyword(s) to search for student names.                                            | Must be between 2-255 characters long, only alphabets, spaces, and special characters (-/').                                                                    |
+| **Filter Students**     | `FIELD`           | -          | Field to filter by (year group or subject).                                        | Must be either `yg` for year group or `s` for subject.                                                                                                          |
+|                         | `VALUE`           | -          | Value to filter by.                                                                | Must match the corresponding field value.                                                                                                                       |
+| **Add Subject**         | `STUDENT_ID`      | -          | ID of the student to whom subjects are to be added.                                | Must be in the format S followed by a 5-digit number (e.g., S00001).                                                                                            |
+|                         | `SUBJECT`         | `s\`       | Subject(s) to be added to the student's record.                                    | Must be one of the available subjects; can add multiple subjects using repeated `s\` fields.                                                                    |
+| **Track Subjects**      | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
+| **Clear Data**          | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
+| **Get Help**            | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
+| **Exit**                | -                 | -          | No parameters required.                                                            | -                                                                                                                                                               |
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## Glossary
 1. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
