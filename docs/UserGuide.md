@@ -268,7 +268,7 @@ From an initial state of the address book as shown above, typing in the commands
 
 <box type="important" seamless>
 
-**Important:** If you want to transfer your data to a VBook application in another computer, use `:export` instead of directly copying the data file over. Refer to the [FAQ](#FAQ) for a detailed guide on this.
+**Important:** If you want to transfer your data to a VBook application in another computer, use `:export` instead of directly copying the data file over. Refer to the [FAQ](#faq) for a detailed guide on this.
 
 </box>
 
@@ -405,7 +405,7 @@ Furthermore, certain edits can cause the VBook to behave in unexpected ways (e.g
 **Q**: How do I transfer my data to another computer?<br>
 **A**: To transfer your data over, follow these steps:
 1. Export your data from your current computer by running `:export`.
-2. Install VBook in the other computer (refer to [Quick Start](#Quick-start) for more information).
+2. Install VBook in the other computer (refer to [Quick Start](#quick-start) for more information).
 3. Overwrite the empty data file in the new computer's `data/addressbook.json` with the `addressbook.json` file from your export in Step 1.
 4. Run VBook and your data should appear in your new computer.
 

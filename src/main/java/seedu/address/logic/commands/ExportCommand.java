@@ -118,7 +118,7 @@ public class ExportCommand extends Command {
      */
     public File chooseExportLocation(Stage stage) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Export Address Book");
+        fileChooser.setTitle("Export VBook");
 
         // Set the initial file name
         fileChooser.setInitialFileName("addressbook.json");
