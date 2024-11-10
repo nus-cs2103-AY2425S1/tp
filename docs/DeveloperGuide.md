@@ -195,7 +195,7 @@ This section describes some noteworthy details on how certain features are imple
 - ![img.png](images/incorrectPhoneEditError.png)
 - ![differentEditError.png](images/differentEditError.png)
 - ![editErrorWithHint.png](images/editErrorWithHint.png)
-These images illustrate varying error message formats for the edit command. While some messages provide the full command hint, others offer minimal guidance, leading to inconsistency across commands. This issue extends beyond the edit command, as other commands also lack a standardized level of information in error messages. Some messages only indicate the error, while others include additional guidance, by also displaying the command hint.
+These images illustrate varying error message formats for the `edit` command. While some messages provide the full command hint, others offer minimal guidance, leading to inconsistency across commands. This issue extends beyond the edit command, as other commands also lack a standardized level of information in error messages. Some messages only indicate the error, while others include additional guidance, by also displaying the command hint.
 
 Additionally, certain command hints could benefit from more clarity on constraints, especially for the `edit` command, which currently does not indicate that the `rn/` and `ra/` flags cannot be used simultaneously.
 
@@ -209,6 +209,13 @@ Additionally, certain command hints could benefit from more clarity on constrain
 **Status:** Scheduled for future release as the current error messages are still usable and help guide the user. Reason being:
 1. Current error messages adequately inform users. However, standardisation will enhance usability by reducing confusion and improving consistency. 
 2. The restriction on rn/ and ra/ flags is documented in the user guide, and an error is displayed when both flags are used together, thus users can learn of this constraint through multiple channels.
+
+### 5. Warning for Edit Commands with Inputs Identical to Current Values
+**Current issue:** Users are not warned when the inputs for the `edit` command are the identical to the current values, resulting in no changes.
+
+**Proposed Enhancement:** Add a confirmation prompt when the inputs are verified to make no changes to the client.
+
+**Status:** Scheduled for future releases as the lack of confirmation prompt does not affect the intended functionality.
 
 --------------------------------------------------------------------------------------------------------------------
 
