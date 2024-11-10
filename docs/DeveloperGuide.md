@@ -1101,3 +1101,4 @@ However, there are people with legal names that include symbols and special char
 This will be useful as it allows doctors to save time by adding multiple appointments for a patient in one go for patients with recurring appointments, instead of typing the same command multiple times.
 
 3. **Improve Email Validation**: MediBase3 does not currently check if the email ends with a top-level domain (TLD) such as `.com` or `.org`. We plan to enhance the validation for email addresses to also check if the domain provided contains an actual top-level domain apart from the other existing constraints.
+
