@@ -6,7 +6,7 @@
 
 # T_Assistant User Guide
 
-T_Assistant is a **desktop app for CS2103 tutors managing their students, groups and tasks** optimized for use via a
+T_Assistant is a **desktop app for CS2103 tutors managing their students, groups and tasks** optimized for use via a Command
 Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 If you can type fast, T_Assistant can get your contact management tasks done faster than traditional GUI apps.
