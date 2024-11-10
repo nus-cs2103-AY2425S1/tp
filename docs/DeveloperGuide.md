@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -108,7 +108,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `VolunteerDeleteCommandParser`) and uses it to parse the command.
-   - However, if it is a command that creates a new event (e.g. /v new), AddressBookParser creates an instance of `VolunteerCommandParser`, which then creates the `VolunteerNewCommandParser` to parse the command.
+    - However, if it is a command that creates a new event (e.g. /v new), AddressBookParser creates an instance of `VolunteerCommandParser`, which then creates the `VolunteerNewCommandParser` to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a volunteer).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -220,32 +220,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <br/>
 For the following use cases, the `Actors` are defined as the Management Staff of Volunteer Organisations, and the `System` is defined as VolunSync, unless specified otherwise.
 
-#### UC01. Create Event
-
-**Description**: Create a new event in the system.
-
-**Preconditions**: NA
-
-**MSS**:
-1. User enters the event's details.
-2. User submits the event's details to the system.
-3. System checks if all required information is present, and that all information is valid.
-4. System creates the new event and confirms creation to the user.
-
-**Extensions**:
-- 3a. Information provided is incomplete or invalid.
-  - 3ai. System displays error and returns to step 1.
-    Use Case Ends.
-- 4a. Event creation fails.
-  - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
-    Use Case Ends.
-
-**Guarantees**:
-- New event is stored in the system if all required information is present and valid.
-
-<div style="page-break-after: always;"></div>
-
-#### UC02. Create Volunteer
+#### UC01. Create Volunteer
 
 **Description**: Create a new Volunteer in the system.
 
@@ -254,74 +229,27 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **MSS**:
 1. User enters the volunteer's details.
 2. User submits the volunteer's details to the system.
-3. System checks if all required information is present, and that all information is valid.
+3. System checks if all required information is present and valid, and that no existing volunteer has the same name as the new volunteer.
 4. System creates the new event and confirms creation to the user.
    Use Case Ends.
 
 **Extensions**:
 - 3a. Information provided is incomplete or invalid.
-   - 3ai. System displays error and returns to step 1.
-     Use Case Ends.
+    - 3ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 3b. Volunteer with the same name already exists.
+    - 3bi. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
 - 4a. Volunteer creation fails.
-   - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
-     Use Case Ends.
+    - 4ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
 
 **Guarantees**:
 - New volunteer is stored in the system if all required information is present and valid.
 
-#### UC03. Assign Volunteer to Event
-
-**Description**: Assign a volunteer to a specific event.
-
-**Preconditions**:
-- Event exists in the system.
-- Volunteer is registered in the system.
-
-**MSS**:
-1. User queries all volunteers and events.
-2. System displays list of all volunteers and events.
-3. User selects the desired volunteer and event to assign the volunteer to.
-4. User submits the information to the system.
-5. System adds the volunteer to the event and confirms addition.<br/>
-   Use Case Ends.
-
-<div style="page-break-after: always;"></div>
-
-**Extensions**:
-- 2a. No volunteers and/or events are found.
-  - 2ai. System notifies user and prompts user to create a new volunteer ([UC02 - Create Volunteer](#uc02-create-volunteer)) and / or event ([UC01 - Create Event](#uc01-create-event)).<br/>
-   Use Case Ends.<br/><br/>
-- 5a. Volunteer is already assigned to the event.
-  - 5ai. System notifies user.
-  - 5aii. Volunteer remains assigned to the event.<br/>
-    Use Case Ends.<br/><br/>
-- 5b. Volunteer is assigned to another event occurring at the same time.
-  - 5bi. System notifies user.
-  - 5bii. Volunteer is not assigned to the event.<br/>
-    Use Case Ends.
-
-**Guarantees**:
-- Volunteer is associated with the event in the system if the volunteer is not assigned to another event occurring at the same time.
-
-#### UC04. Find Event by Name
-
-**Description**: Search for an event by their name.
-
-**Preconditions**: NA
-
-**MSS**:
-1. User enters a keyword to search for.
-2. System looks up all events with names containing the keyword.
-3. System notifies the number of matches found and displays the list of events whose names contains the keyword.<br/>
-   Use Case Ends.
-
-**Extensions**:
-- 2a. No events with names containing the keyword are found.
-    - 2ai. System notifies user and displays all events.<br/>
-      Use Case Ends.
-
-
-#### UC05. Find Volunteer by Name
+#### UC02. Find Volunteer by Name
 
 **Description**: Search for a volunteer by their name.
 
@@ -335,8 +263,325 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Extensions**:
 - 2a. No volunteers whose names contains the keyword are found.
-  - 2ai. System notifies user and displays all volunteers.<br/>
-    Use Case Ends.
+    - 2ai. System notifies user and displays all volunteers.<br>
+      Use Case Ends.
+
+#### UC03. Delete Volunteer
+
+**Description**: Delete a volunteer from the system.
+
+**Preconditions**: Volunteer must exist in the system.
+
+**MSS**:
+1. User selects the volunteer to delete.
+2. User confirms deletion.
+3. System deletes the volunteer and confirms deletion to the user.<br>
+   Use Case Ends.
+
+**Extensions**:
+- 1a. Volunteer does not exist in the system.
+    - 1ai. System notifies user, and prompts the user to select a valid volunteer. Returns to step 1.
+
+#### UC04. Add a Free Day to a Volunteer
+
+**Description**: Add a free day to a volunteer's schedule.
+
+**Preconditions**: Volunteer must exist in the system.
+
+**MSS**:
+1. User selects the volunteer to add a free day to.
+2. User selects the date(s) to add as a free day.
+3. User submits the information to the system.
+4. System checks if the volunteer is already available on the selected date(s).
+5. System adds the free day to the volunteer's schedule and confirms addition.<br>
+   Use Case Ends.
+
+**Extensions**:
+- 3a. Volunteer does not exist in the system.
+    - 1ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 3b. Information provided is incomplete or invalid.
+    - 3bi. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 4a. Volunteer is already available on the selected date(s).
+    - 4ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 5a. Free day addition fails.
+    - 5ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+#### UC05. Remove a Free Day from a Volunteer
+
+**Description**: Remove a free day from a volunteer's schedule.
+
+**Preconditions**: Volunteer must exist in the system.
+
+**MSS**:
+
+1. User selects the volunteer to remove a free day from.
+2. User selects the date(s) to remove as a free day.
+3. User submits the information to the system.
+4. System checks if the volunteer is available on the selected date(s).
+5. System removes the free day from the volunteer's schedule and confirms removal.<br/>
+   Use Case Ends.
+
+**Extensions**:
+- 3a. Volunteer does not exist in the system.
+    - 3ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 3b. Information provided is incomplete or invalid.
+    - 3bi. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 4a. Volunteer is not available on the selected date(s).
+    - 4ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 5a. Free day removal fails.
+    - 5ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+#### UC06. Assign Volunteer to Event
+
+**Description**: Assign a volunteer to a specific event.
+
+**Preconditions**: Event and Volunteer exists in the system.
+
+**MSS**:
+1. User queries all volunteers and events.
+2. System displays list of all volunteers and events.
+3. User selects the desired volunteer and event to assign the volunteer to.
+4. User submits the information to the system.
+5. System adds the volunteer to the event and confirms addition.<br/>
+   Use Case Ends.
+
+**Extensions**:
+- 4a. The volunteer and/or event does not exist in the system.
+    - 4ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 4a. Volunteer is already assigned to the event.
+    - 4bi. System notifies user.
+    - 4bii. Volunteer remains assigned to the event.<br>
+      Use Case Ends.<br><br>
+
+- 4c. Volunteer is assigned to another event on the same day.
+    - 4ci. System notifies user of the clash.
+    - 4cii. Volunteer is not assigned to the event.<br>
+      Use Case Ends.
+
+**Guarantees**:
+- Volunteer is associated with the event in the system if the volunteer is not assigned to another event occurring at the same time.
+
+#### UC07. Un-assign Volunteer from Event
+
+**Description**: Un-assign a volunteer from a specific event.
+
+**Preconditions**: Volunteer and Event must exist in the system.
+
+**MSS**:
+
+1. User queries all volunteers and events.
+2. System displays list of all volunteers and events.
+3. User selects the desired volunteer and event to un-assign the volunteer from.
+4. User submits the information to the system.
+5. System removes the volunteer from the event and confirms removal.<br/>
+   Use Case Ends.
+
+**Extensions**:
+- 4a. The volunteer and/or event does not exist in the system.
+    - 4ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 4a. Volunteer is not assigned to the event.
+    - 4bi. System notifies user.
+    - 4bii. Volunteer remains unassigned from the event.<br>
+      Use Case Ends.
+
+#### UC08. List All Events a Volunteer is Assigned to
+
+**Description**: List all events a volunteer is assigned to.
+
+**Preconditions**: Volunteer must exist in the system.
+
+**MSS**:
+
+1. User selects the volunteer to view assigned events.
+2. User submits the information to the system.
+3. System displays the list of events the volunteer is assigned to.<br/>
+   Use Case Ends.
+
+**Extensions**:
+
+- 2a. Volunteer does not exist in the system.
+    - 2ai. System notifies user prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+- 3a. Volunteer is not assigned to any events.
+    - 3ai. System displays an empty list.<br>
+      Use Case Ends.
+
+#### UC09. Create Event
+
+**Description**: Create a new event in the system.
+
+**Preconditions**: NA
+
+**MSS**:
+1. User enters the event's details.
+2. User submits the event's details to the system.
+3. System checks if all required information is present, and that all information is valid.
+4. System creates the new event and confirms creation to the user.
+
+**Extensions**:
+- 3a. Information provided is incomplete or invalid.
+    - 3ai. System displays error and prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 3b. Event with the same name already exists.
+    - 3bi. System notifies user and prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 4a. Event creation fails.
+    - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.<br>
+      Use Case Ends.
+
+#### UC10. Find Event by Name
+
+**Description**: Search for an event by its name.
+
+**Preconditions**: NA
+
+**MSS**:
+1. User enters a keyword to search for.
+2. System looks up all events with names containing the keyword.
+3. System notifies the number of matches found and displays the list of events whose names contains the keyword.<br>
+   Use Case Ends.<br>
+
+**Extensions**:
+- 2a. No events with names containing the keyword are found.
+    - 2ai. System notifies user and displays all events.<br>
+      Use Case Ends.
+
+#### UC11. Delete Event
+
+**Description**: Delete an event from the system.
+
+**Preconditions**: Event must exist in the system.
+
+**MSS**:
+
+1. User selects the event to delete.
+2. User submits the information to the system.
+3. System deletes the event and confirms deletion to the user.<br>
+   Use Case Ends.
+
+**Extensions**:
+
+- 2a. Event does not exist in the system.
+    - 2ai. System notifies user and prompts the user to select a valid event.<br>
+      Use Case Ends.<br><br>
+
+- 3a. Event deletion fails.
+    - 3ai. System notifies user and prompts the user to edit the event details.<br>
+      Use Case Ends.
+
+#### UC12. List All Volunteers Assigned to an Event
+
+**Description**: List all volunteers assigned to a specific event.
+
+**Preconditions**: Event must exist in the system.
+
+**MSS**:
+
+1. User selects the event to view assigned volunteers.
+2. User submits the information to the system.
+3. System displays the list of volunteers assigned to the event.<br>
+   Use Case Ends.
+
+**Extensions**:
+
+- 2a. Event does not exist in the system.
+    - 2ai. System notifies user and prompts the user to select a valid event.<br>
+      Use Case Ends.<br><br>
+
+- 3a. No volunteers are assigned to the event.
+    - 3ai. System displays an empty list.<br>
+      Use Case Ends.
+
+#### UC13. List All Volunteers Available for an Event
+
+**Description**: List all volunteers available for a specific event.
+
+**Preconditions**: Event must exist in the system.
+
+**MSS**:
+
+1. User selects the event to view available volunteers.
+2. User submits the information to the system.
+3. System displays the list of volunteers available for the event.<br>
+   Use Case Ends.
+
+**Extensions**:
+
+- 2a. Event does not exist in the system.
+    - 2ai. System notifies user and prompts the user to select a valid event.<br>
+      Use Case Ends.<br><br>
+
+- 3a. No volunteers are available for the event.
+    - 3ai. System displays an empty list.<br>
+      Use Case Ends.
+
+#### UC14. Find Help
+
+**Description**: Navigate to the User Guide to find help.
+
+**Preconditions**: NA
+
+**MSS**:
+
+1. User enters the help command.
+2. System opens the User Guide webpage in a browser.<br>
+   Use Case Ends.
+
+#### UC15. List all Events and Volunteers
+
+**Description**: List all events and volunteers in the system.
+
+**Preconditions**: NA
+
+**MSS**:
+
+1. User queries all events and volunteers.
+2. System displays the list of all events and volunteers.<br>
+   Use Case Ends.
+
+#### UC16. Export Volunteer and Event Information
+
+**Description**: Export volunteer and event information to a CSV file.
+
+**Preconditions**: NA
+
+**MSS**:
+
+1. User enters the export command.
+2. System exports all volunteer and event information to a CSV file.<br>
+   Use Case Ends.
+
+#### UC17. Close Application
+
+**Description**: Close the application.
+
+**Preconditions**: NA
+
+**MSS**:
+
+1. User enters the exit command.
+2. System closes the application.<br>
+   Use Case Ends.
 
 #### UML Use Case Diagram
 
@@ -394,27 +639,27 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file to launch VolunSync. <br/>
-   Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimum.
-   <br/><img src="images/ui.png" width="400" />
+    2. Double-click the jar file to launch VolunSync. <br/>
+       Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimum.
+       <br/><img src="images/Ui.png" width="400" />
 
-   3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start)
+    3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start)
 
 2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file. <br/>
-   Expected: The most recent window size and location should be retained.
+    2. Re-launch the app by double-clicking the jar file. <br/>
+       Expected: The most recent window size and location should be retained.
 
 3. Exiting the app
 
-   1. Click the close button in the top right corner of the window or using the `exit` command.<br/>
-    Expected: The application should close without any errors.
+    1. Click the close button in the top right corner of the window or using the `exit` command.<br/>
+       Expected: The application should close without any errors.
 
-   2. Upon re-launching the application, the window should appear in the same size and location as when the app was last closed.
+    2. Upon re-launching the application, the window should appear in the same size and location as when the app was last closed.
 
 ### Adding an event
 
@@ -467,16 +712,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a volunteer while all volunteers are being shown
 
-   1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
+    1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
 
-   2. Test case: `/v del 1`<br>
-      Expected: First volunteer is deleted from the list. The status message should reflect the successful deletion of the volunteer.
+    2. Test case: `/v del 1`<br>
+       Expected: First volunteer is deleted from the list. The status message should reflect the successful deletion of the volunteer.
 
-   3. Test case: `/v del 0`<br>
-      Expected: No volunteer is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `/v del 0`<br>
+       Expected: No volunteer is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `del 1`, `/v del x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `del 1`, `/v del x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 <div style="page-break-after: always;"></div>
 
@@ -484,18 +729,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Assigning a volunteer to an event while all volunteers and events are being shown
 
-   1. Prerequisites: List all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
+    1. Prerequisites: List all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
 
-   2. Test case: `assign e/ 1 v/ 1`<br>
+    2. Test case: `assign e/ 1 v/ 1`<br>
        Expected: The volunteer is assigned to the event. The status message should reflect the successful assignment of the volunteer to the event. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
        ![Volunteer Assigned to Event](images/AssignVolunteerToEvent.png)
 
-   3. Test case: `assign e/ 1 v/ 0`<br>
+    3. Test case: `assign e/ 1 v/ 0`<br>
        Expected: The volunteer is not assigned to the event. Error details shown in the status message. The event should not be reflected in the list of events of the volunteer, and the volunteer should not be reflected in the list of volunteers of the event as shown below.<br/>
        ![Volunteer not Assigned to Event](images/UnassignVolunteerFromEvent.png)
 
-   4. Other incorrect assign commands to try: `assign`, `assign e/ 1`, `...`<br>
-      Expected: Similar to previous.
+    4. Other incorrect assign commands to try: `assign`, `assign e/ 1`, `...`<br>
+       Expected: Similar to previous.
 
 <div style="page-break-after: always;"></div>
 
@@ -509,12 +754,12 @@ testers are expected to do more *exploratory* testing.
        Expected: The volunteer is unassigned from the event. The status message should reflect the successful un-assignment of the volunteer from the event. The event should be removed from the list of events of the volunteer, and the volunteer should be removed from the list of volunteers of the event as shown below.<br/>
        ![Volunteer not Assigned to Event](images/UnassignVolunteerFromEvent.png)
 
-   3. Test case: `unassign e/ 1 v/ 0`<br>
+    3. Test case: `unassign e/ 1 v/ 0`<br>
        Expected: The volunteer remains assigned to the event. Error details shown in the status message. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
        ![Volunteer Assigned to Event](images/AssignVolunteerToEvent.png)
 
-   4. Other incorrect unassign commands to try: `unassign`, `unassign e/ 1`, `...`<br>
-      Expected: Similar to previous.
+    4. Other incorrect unassign commands to try: `unassign`, `unassign e/ 1`, `...`<br>
+       Expected: Similar to previous.
 
 <div style="page-break-after: always;"></div>
 
