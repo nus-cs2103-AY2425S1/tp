@@ -70,6 +70,9 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addEmailPredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            if (!Email.isValidEmail(argMultimap.getValue(PREFIX_EMAIL).get())) {
+                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_EMAIL);
             Email email = new Email(args);
             combinedPredicate = combinedPredicate.and(new ContactEmailPredicate(email));
@@ -80,6 +83,9 @@ public class ContactPredicateBuilder {
     private Predicate<Contact> addPhonePredicate(ArgumentMultimap argMultimap, Predicate<Contact> combinedPredicate)
             throws ParseException {
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            if (!Phone.isValidPhone(argMultimap.getValue(PREFIX_PHONE).get())) {
+                throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            }
             String args = verifyNoEmptyInput(argMultimap, PREFIX_PHONE);
             Phone phoneNumber = new Phone(args);
             combinedPredicate = combinedPredicate.and(new ContactPhonePredicate(phoneNumber));
