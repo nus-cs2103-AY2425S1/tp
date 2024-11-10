@@ -5,7 +5,7 @@ title: User Guide
 
 <link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
 
-EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts, listings, and appointments.
+**EZSTATE** is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts, listings, and appointments.
 
 <br> **You are part of the ideal target audience of EZSTATE if you meet the following characteristics**:
 
@@ -16,8 +16,8 @@ EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **re
 * `Work Style` : Handles multiple clients and properties simultaneously and values efficiency in contact and property management
 * `Environment` : Works in a fast-paced setting where quick data entry and retrival are essential
 
-But do not worry if you do not meet every characteristic — EZSTATE is designed to be **intuitive and efficient for all users**.
-<br> Give it a try, and head over to our Quick Start guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
+But do not worry if you do not meet every characteristic — **EZSTATE** is designed to be **intuitive and efficient for all users**.
+<br> Give it a try, and head over to our Quick Start guide to get started and see how **EZSTATE** can make your contact and property management tasks faster and easier!
 
 * Table of Contents
 {:toc}
@@ -26,7 +26,7 @@ But do not worry if you do not meet every characteristic — EZSTATE is designed
 
 ## Quick Start Guide
 
-Welcome to EZSTATE! This guide will walk you through installing the app and getting started with basic commands.
+Welcome to **EZSTATE**! This guide will walk you through installing the app and getting started with basic commands.
 
 ### Installation Steps
 
@@ -46,27 +46,22 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
     cd path/to/your/folder
 
     ```
-    <br>
-    
     <div class="note" markdown="span">
     (Windows Users) Alternatively, you can open the folder where the `.jar` file  is located,
     right click on any space inside the folder and click `Open in Terminal`.
     </div>
-   
-   <br>
 
    Then run the app with:
     ```bash
     java -jar ezstate.jar
    
     ```
-    <br>
    
    A GUI should appear in a few seconds as shown below. Note that the initial launch of the app will contain some sample data.<br><br>
    ![Ui](images/Ui.png)<br><br>
 
 ### Basic Commands
-To use EZSTATE, type commands in the command box and press Enter. Here are a few to try:
+To use **EZSTATE**, type commands in the command box and press Enter. Here are a few to try:
 
    * `help` : Opens the help window showing all commands.
 
@@ -86,9 +81,9 @@ Explore the Features section for a full list of commands and their uses.
 
 ### Command Structure
 
-In this section, we will explore the general format of commands in EZSTATES.
+In this section, we will explore the general format of commands in **EZSTATE**.
 
-Commands in EZStates follow the same structure:
+Commands in **EZSTATE** follow the same structure:
 
 `commandWord (REFERENCE) (PREFIXES)` 
 
@@ -123,7 +118,7 @@ Optional fields can be omitted and the command will still be executed successful
 #### Prefix Types
 
 <div class="note" markdown="span">
-The prefixes used in EZSTATES are universal across all commands <br> _(i.e. have the same constraints and remarks)_
+The prefixes used in **EZSTATE** are universal across all commands <br> _(i.e. have the same constraints and remarks)_
 </div>
 <br>
 
