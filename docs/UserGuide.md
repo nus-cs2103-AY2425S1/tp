@@ -97,6 +97,8 @@ MATER offers a feature-rich platform with the following capabilities:
 
 <div style="page-break-after: always;"></div>
 
+<br>
+
 ### **User Base**
 
 MATER is designed for **small to medium-sized car workshop managers** and their team members who:
@@ -104,8 +106,6 @@ MATER is designed for **small to medium-sized car workshop managers** and their 
 - **Prefer a hands-on approach** to managing their client lists with minimal steps.
 
 Whether you're a workshop owner, a mechanic, or an administrative staff member responsible for managing records, MATER empowers you to achieve efficient, accurate, and consistent data handling with ease.
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -210,8 +210,6 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 <h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">help</span></h3>
 
 Shows a message explaining how to access the help page.
@@ -227,8 +225,7 @@ Shows a message explaining how to access the help page.
 
 <img src="images/helpMessage.png" alt="help message" width="500" height="300">
 
-
----
+<div style="page-break-after: always;"></div>
 
 <h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-client</span></h3>
 
