@@ -22,7 +22,7 @@ public class AddConcertContactCommand extends Command {
 
     public static final String COMMAND_WORD = "addcc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": links the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Links the person identified "
             + "by the index number used in the displayed person list to the concert identified by the "
             + "index number used in the displayed concert list.\n"
             + "Parameters: " + PREFIX_PERSON + "PERSON_INDEX (must be a positive integer) "
