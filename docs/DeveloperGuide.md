@@ -253,11 +253,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -293,7 +288,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                | I want to …​                                      | So that I can…​                                                                                            |
 |----------|------------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `* * *`  | first time shop owner  | can get help on using the application             | I can quickly get up to speed with all the commands                                                        |
+| `* * *`  | first time shop owner  | learn how to use the application                  | I can familiarize myself with all the commands                                                             |
 | `* * *`  | shop owner             | view all my supplier contacts                     |                                                                                                            |
 | `* * *`  | shop owner             | add supplier contact                              |                                                                                                            |
 | `* * *`  | shop owner             | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
@@ -311,9 +306,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | shop owner             | find deliveries by date                           | I can find the deliveries happening on a certain date                                                      |
 | `* *`    | shop owner             | find deliveries by supplier                       | I can find the deliveries associated with a supplier                                                       |
 | `* *`    | shop owner             | find deliveries by supplier status                | I can find the deliveries that are pending or have been delivered or cancelled                             |
-| `* *`    | shop owner             | sort list of deliveries by delivery cost          | I can view the deliveries in ascending/descending order sorted by delivery cost                            |
-| `* *`    | shop owner             | sort list of deliveries by delivery date and time | I can view the deliveries in ascending/descending order sorted by delivery date and time                   |
-| `* *`    | shop owner             | sort list of deliveries by delivery status        | I can view the deliveries in ascending/descending order sorted by delivery status                          |
+| `* *`    | shop owner             | sort list of deliveries by delivery cost          | I can quickly identify high-cost or low-cost deliveries and manage my expenses more effectively            |
+| `* *`    | shop owner             | sort list of deliveries by delivery date and time | I can easily find upcoming deliveries and focus on the urgent deliveries first                             |
+| `* *`    | shop owner             | sort list of deliveries by delivery status        | I can maintain a clear overview of which deliveries have been delivered, cancelled or pending              |
 | `* *`    | shop owner             | view deliveries that are upcoming                 | I can view the deliveries that are within a certain time period                                            |
 | `* `     | shop owner             | edit supplier contact                             | I can easily alter contact information in the address book when suppliers change their contact information |
 | `* `     | shop owner             | edit delivery information                         | I can edit upcoming deliveries without changing other fields                                               |
@@ -568,13 +563,13 @@ ___
 2. The application should take no longer than 5 seconds to launch and load all necessary data (e.g., contacts, deliveries) on any supported platform.
 
 #### Scalability Requirements
-3. The system should be able to handle at least 100 contacts and 200 deliveries without noticeable degradation in performance
+3. The system should be able to handle at least 100 contacts and 200 deliveries without noticeable degradation in performance.
 
 #### Usability Requirements
-4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
+4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 #### Compatibility / Portability Requirements
-5. Should work on any mainstream OS as long as it has Java 17 or above installed without requiring platform-specific dependencies
+5. Should work on any mainstream OS as long as it has Java 17 or above installed without requiring platform-specific dependencies.
 6. The product should work as a standalone JAR file, not exceeding 100MB in size without needing an installer.
 
 #### Data Requirements
@@ -582,7 +577,7 @@ ___
 8. The system should ensure that the data file remains consistent and free from corruption across system crashes or improper shutdowns.
 
 #### Security Requirements
-9. The system should ensure that user data (e.g., supplier contacts, delivery information) is only accessible by the user of the local machine
+9. The system should ensure that user data (e.g., supplier contacts, delivery information) is only accessible by the user of the local machine.
 
 #### Maintainability Requirements
 10. The system should follow Object-Oriented Programming (OOP) principles to facilitate future maintenance and feature additions.
@@ -603,7 +598,7 @@ ___
 * **Delivery Information**: Details about a specific delivery, including date, supplier, products, and status.
 * **Human-Editable File**: A plain text file that can be easily opened, read, and modified by users, typically in formats such as JSON, CSV, or TXT, without needing specialised software.
 * **JAR File**: A Java ARchive file, which is a package file format that aggregates many Java class files and associated resources (text, images, etc.) into one file for distribution.
-* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS.
 * **OOP (Object-Oriented Programming)**: A programming paradigm based on the concept of objects, which can contain data and methods.
 * **Supplier Contact**: A record containing information about a supplier, including name, contact details, and associated products.
 * **Unit and Integration Testing**:
