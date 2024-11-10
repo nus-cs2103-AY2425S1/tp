@@ -33,13 +33,13 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 
     * `list` : Lists all owners and pets.
 
-    * `owner i/S0000001I n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` : Adds a contact named `John Doe` to PawPatrol.
+    * `owner i/T1234567J n/Jeff Miller p/98765432 e/jeff@example.com a/311, Holland Ave 1, #22-25` : Adds a contact named `Jeff Miller` to PawPatrol.
 
     * `delete o3` : Deletes the 3rd owner shown in the current list.
 
-    * `link o1 t/p1` : Links 1st owner shown to 1st pet shown.
+    * `link o6 t/p1` : Links 6th owner shown to 1st pet shown.
 
-    * `clear` : Deletes all owners and pets in PawPatrol.
+    * `clear` : Deletes all owners and pets in PawPatrol. (You are recommended to do this before using this app in your clinic).
 
     * `exit` : Exits the app.
 
@@ -67,9 +67,6 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list owners`, `list pets` and `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
@@ -94,14 +91,7 @@ Adds a pet owner to PawPatrol.
 <li><code>IC_NUMBER</code>: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
 <li><code>NAME</code>: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
 <li><code>PHONE</code>: Must contain exactly 8 digits.</li>
-<li><code>EMAIL</code>: Should follow a standard email format of local-part@domain and adhere to the following constraints:
-<ul>
-<li>The local-part should only contain alphanumeric characters and the following special characters (excluding the apostrophes) '+', '_', '.', '-'.</li>
-<li>The local-part may not start or end with any special characters.</li>
-<li>The domain name is made up of domain labels separated by periods. There must be at least 2 domain labels.</li>
-<li>Each domain label must be between 1 and 63 characters long, begin and end with an alphanumeric character and may contain hyphens (-) in the middle but not at the start or end</li>
-<li>The last domain label (Top-Level Domain (TLD)) must only contain letters (e.g. <code>.com</code>) or be a valid TLD combination like <code>.co.uk</code>.</li>
-</ul>
+<li><code>EMAIL</code>: Should follow a standard email format of local-part@domain and adhere to <a href="https://snov.io/knowledgebase/what-is-a-valid-email-address-format/" target="_blank">standard email constraints</a>
 </li>
 <li><code>ADDRESS</code>: Can contain any characters, but must be at least 3 characters long.</li>
 </ul>
@@ -111,6 +101,8 @@ Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
 Examples:
 * `owner i/S1234567D n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`
+
+> 2 owners may not share the same IC_NUMBER and will be deemed as duplicate
 
 <div markdown="span" class="alert alert-info">
 
@@ -140,6 +132,9 @@ Adds a pet to PawPatrol.
 </ul>
 </ul>
 </div>
+
+> 2 pets are deemed as duplicates when they have matching name, species, breed, age and sex.
+> This behavior is expected to be improved in future to allow multiple pets with similar characteristics.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -376,6 +371,7 @@ _Details coming soon ..._
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 2. **Accidental clearing of data** using the `clear` command may lead to data being lost. [Backups of the data file](#saving-a-backup-data-file) should be made frequently by copying out the JSON file to another location on your computer.
 3. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again. This file can be found in `[JAR file location]/data/preferences.json` similar to [other data files](#saving-the-data).
+4. **Multiple pets with similar characteristics** (name, age, sex, breed and species) are currently not allowed and would be flagged as a duplicate. Future versions are to allow this behavior with a recommendation to always link a pet to an owner.
 
 --------------------------------------------------------------------------------------------------------------------
 
