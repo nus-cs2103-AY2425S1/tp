@@ -18,7 +18,7 @@ public class DeleteApptCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteApptCommand() {
-        LocalDateTime apptDateTime = LocalDateTime.parse("2030-06-06 22:00", Appt.FORMATTER);
+        LocalDateTime apptDateTime = LocalDateTime.parse("2030-06-06 22:00", Appt.STRICT_FORMATTER);
         String userInput = DANIEL.getNric() + " dt|2030-06-06 22:00";
         DeleteApptCommand expectedCommand = new DeleteApptCommand(DANIEL.getNric(), apptDateTime);
 
