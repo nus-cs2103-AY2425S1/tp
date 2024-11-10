@@ -96,7 +96,7 @@ public interface Model {
      * Returns the current predicate used by the filtered person list.
      * Should not return {@code null}.
      */
-    Predicate<? super Person> getFilteredPersonListPredicate();
+    Predicate<Person> getFilteredPersonListPredicate();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
