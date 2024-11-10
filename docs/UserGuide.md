@@ -252,6 +252,12 @@ Format: `renameTag ot/OLDTAG nt/NEWTAG`
 
 </div>
 
+Examples:
+* Suppose we have a group of contacts with an existing tag `supplier`. We want to update all of these tags to `exSupplier`. <br>
+`renameTag ot/supplier nt/exSupplier` <br>
+![renameTag example](images/renameTagExample.png)
+
+
 #### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
