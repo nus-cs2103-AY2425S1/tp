@@ -28,7 +28,6 @@
 
   <!-- Original Left scrollbar -->
 
-<!--
   <nav id="site-nav">
     <div class="site-nav-top">
       <div class="fw-bold mb-2" style="font-size: 1.25rem;">Site Map</div>
@@ -36,12 +35,12 @@
     <div class="nav-component slim-scroll">
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
-* [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
+* [User Guide]({{ baseUrl }}/UserGuide.html)
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
   * [FAQ]({{ baseUrl }}/UserGuide.html#frequently-asked-questions)
-* [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
+* [Developer Guide]({{ baseUrl }}/DeveloperGuide.html)
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
@@ -49,28 +48,27 @@
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
   </nav>
--->
 
-<!-- Original Right scrollbar (shift to left) -->
-  <nav id="page-nav">
-    <div class="nav-component slim-scroll">
-      <page-nav />
-    </div>
-  </nav>
+
+
+
 
 <!-- Main Content -->
   <div id="content-wrapper">
     {{ content }}
   </div>
 
+  <!-- Right scrollbar -->
+
+  <nav id="page-nav">
+    <div class="nav-component slim-scroll">
+      <page-nav />
+    </div>
+  </nav>
 
   <scroll-top-button></scroll-top-button>
 </div>
