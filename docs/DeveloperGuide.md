@@ -93,6 +93,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete contact 1")` API call as an example.
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the diagram below, we see that the command `delete contact 1` causes the function `deletePerson(p)` to be invoked. In fact, `Person` is our class implementation for contacts. For the rest of this document, please note that "person" and "contact" are used interchangeably to refer to the same thing.
+</div>
+
 ![Interactions Inside the Logic Component for the `delete contact 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
