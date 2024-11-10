@@ -1969,32 +1969,70 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 #### Sort all _clients_ by name
 
-1. Sorting the entire True Rental's database by name.
+Sorting the entire True Rental's database by name.
 
-    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+<box type="warning">
 
-    2. Test case: `sort`<br>
-       Expected: Client list will be sorted in alphabetical order by name. A command success message for name will be
-       displayed in the result display box.
+**Prerequisites**: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `sort`
+
+<box type="success">
+
+Client list will be sorted in alphabetical order by name. A command success message for name will be
+displayed in the result display box.
+
+</box>
+
+</box>
 
 #### Clear
 
-1. Clearing the entire True Rental's database, wiping all clients and their respective rental information.
+Clearing the entire True Rental's database, wiping all clients and their respective rental information.
 
-    1. Prerequisites: There are more than 1 client and 1 rental information in the application.
+<box type="warning">
 
-    2. Test case: `clear`<br>
-       Expected: Both client list panel and rental information list panel will be empty with all data being cleared. A
-       command success message will be displayed in the result display box.
+**Prerequisites**: There are more than 1 client and 1 rental information in the application.
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `clear`
+
+<box type="success">
+
+Both client list panel and rental information list panel will be empty with all data being cleared. A command success message will be displayed in the result display box.
+
+</box>
+
+</box>
 
 #### Exit
 
-1. Safely exiting `TrueRental` application.
+Safely exiting `TrueRental` application.
 
-    1. Prerequisites: Run the application
+<box type="warning">
 
-    2. Test case: `exit`
-       Expected: The application will exit and be closed safely.
+**Prerequisites**: Run the application
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 1**: `exit`
+
+<box type="success">
+
+The application will exit and be closed safely.
+
+</box>
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
