@@ -630,10 +630,21 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## Known Issues
 
 1. **Multiple Monitor Setup**: The GUI may open off-screen when switching from multi-monitor to single-monitor setup.
-   - Solution: Delete `preferences.json` and restart the application.
+   - **Solution**: Delete `preferences.json` and restart the application.
 
 2. **Help Window**: After minimizing the Help Window, using the `help` command, `Help` menu, or `F1` shortcut will not open a new window.
-   - Solution: Manually restore the minimized Help Window.
+   - **Solution**: Manually restore the minimized Help Window.
+
+3. **Resized Window Visibility**: Reducing the window size below a certain threshold can obscure interface elements, impacting usability.
+   - **Solution**: For optimal use, we recommend a screen resolution of at least 1280x720 pixels and maintaining a minimum window size for clarity.
+
+4. **Long Tag Handling**: When adding an excessively long tag, it may hide other tags in the display rather than wrapping or truncating.
+   - **Solution**: Avoid using overly long tags. Optimally, long tags should truncate with an ellipsis (`...`) once they reach the edge of the GUI. See example below:
+
+     **Example Input:**
+     ```
+     edit S7012345B t/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+     ```
 
 ---
 
