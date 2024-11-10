@@ -77,22 +77,42 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+## Command summary
+### Person-Related Commands
+| **Action**  | **Format**                                                                                                                                                    | **Example**                                                                                    |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **Add**     | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                        | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
+| **Clear**   | `clear`                                                                                                                                                        | `clear`                                                                                        |
+| **Delete**  | `delete INDICES`                                                                                                                                               | `delete 1 2 3 5-7`                                                                             |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                  | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
+| **Search**  | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                                                 | `search n/john`                                                                                |
+| **List**    | `list`                                                                                                                                                         | `list`                                                                                         |
+| **Sort**    | `sort [s/SORT_OPTION]`                                                                                                                                         | `sort s/name`                                                                                  |
 
-Shows a message explaining how to access the help page.
+### Group-Related Commands
+| **Action**                       | **Format**                                                        | **Example**                                    |
+|----------------------------------|-------------------------------------------------------------------|------------------------------------------------|
+| **Create Group**                 | `createGroup g/GROUP_NAME m/[INDICES]`                            | `createGroup g/blood drive m/1 2 4-7`          |
+| **Add New Members to Group**     | `addToGroup g/GROUP_NAME m/[INDICES]`                             | `addToGroup g/beach cleanup m/1 2 3-6`         |
+| **Remove Existing Members from Group** | `removeFromGroup g/GROUP_NAME m/[INDICES]`             | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
+| **Edit Group Name**              | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`                 | `editGroupName g/blood drive g/blood donation` |
+| **Delete Group**                 | `deleteGroup g/GROUP_NAME`                                        | `deleteGroup g/blood donation`                 |
+| **List Groups**                  | `listGroups`                                                     | `listGroups`                                   |
 
-![help message](images/helpMessage.png)
-
-Format: `help`
-
+### General Commands
+| **Action**           | **Format** | **Example** |
+|----------------------|------------|-------------|
+| **Help**             | `help`     | `help`      |
+| **Get Emails**       | `email`    |      `email` |
+| **Exit Application** | `exit`     |      `exit` |
 
 ### Adding a contact: `add`
 
-This command adds a contact to the address book. 
-There are 4 types of contacts: Volunteer, Donor, Partner, Person(default) 
+This command adds a contact to the address book.
+There are 4 types of contacts: Volunteer, Donor, Partner, Person(default)
 
-Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ 
-        [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
+Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
+[h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
 - `ROLE` (Optional): Specifies the type of contact. If not provided, the contact will be added as a general `Person`.
 - `NAME`: The contact's full name (case-insensitive).
@@ -101,14 +121,14 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - `ADDRESS`: The contact's physical address.
 - `TAG` (Optional): Additional tags associated with the contact.
 - Role-specific fields(not required for `Person`)
-  - **Volunteer**: `h/HOURS` :required for volunteers, representing contributed hours.
-  - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
-  - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date. The 
-    date should be in the **YYYY-MM-DD** format and must be a valid date (e.g., 2024-11-07).
+    - **Volunteer**: `h/HOURS` :required for volunteers, representing contributed hours.
+    - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
+    - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date. The
+      date should be in the **YYYY-MM-DD** format and must be a valid date (e.g., 2024-11-07).
 
 Note:
-Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of 
-`Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT` 
+Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of
+`Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT`
 is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
 If the specified role does not match with the specified field, the add command will be deemed invalid.
 
@@ -122,58 +142,51 @@ Examples:
 * `add r/volunteer h/10 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add r/donor d/100 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/rich`
 
-### Listing all persons : `list`
+### Clearing all entries : `clear`
 
-Shows a list of all persons in the address book.
+Clears all entries from the address book.
 
-Format: `list`
+Format: `clear`
 
-### Sorting the displayed list: `sort`
+### Deleting a person : `delete`
 
-Sorts the currently visible list of persons by a specified field. 
+Deletes the specified person from the address book.
 
-Format: `sort [s/SORT_OPTION]`
+Format: `delete INDICES`
 
-* You can use `sort` to arrange the contacts in the list you're currently viewing, whether it's the full list or a subset from commands like `search`.
-* If no sort option is provided, `sort` will restore the currently displayed list to its default order (i.e. the order in which contacts were added).
-* The sort order remains active until you apply a new sort option.
-* For *role-specific* sort options (e.g. `hours`):
-  * Role contacts are sorted by the relevant criterion. 
-  * Non-role contacts are placed at the back.
+* Deletes the person(s) at the specified `INDICES`.
 
-<box type="info" seamless>
 
-**Supported sort options include**:
-* `name`: Sorts contacts alphabetically by name [^1].
-* `hours`: Sorts volunteers by hours contributed (in descending order).
-* `donations`: Sorts donors by donation amount (in descending order).
-* `end_date`: Sorts partners by partnership end date (from earliest to latest).
+<box type="tip" seamless>
+
+**Tip:** Be careful when using the `delete` command.
+* Even if you are currently viewing a list of groups, the delete command will still apply to the last displayed person list.
+* Ensure you are viewing the correct list before deleting.
+
 </box>
 
 Examples:
-* `sort`
-* `sort s/name`
-* `sort s/hours`
-
-[^1]: For names with numbers, sorting follows **alphabetical order first**, then **numerical order** (e.g. "alfred" < "alfred2" < "ben")
+* `list` followed by `delete 2 4 6-8` deletes the 2nd, 4th, 6th, 7th, and 8th persons in the address book.
+* `search n/Betsy` followed by `delete 1 3-5` deletes the 1st, 3rd, 4th, and 5th persons in the results of the
+  `search` command.
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
 Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
-         [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
+[h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in the address book**.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
-  * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
-  * Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
-  * For `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+    * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.
+    * Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,
+    * For `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.
 * If the resulting role does not have the specified field, the edit will be invalid.
 
 Examples:
@@ -212,35 +225,42 @@ Examples: <br>
 * `search n/john` returns persons with the name `john` like `John Doe`
 * `search g/blood drive` returns all persons in group `blood drive` like `John Doe` and `David Li`
 * `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
-    ![result for 'search alex david'](images/search_alex_david.png)
+  ![result for 'search alex david'](images/search_alex_david.png)
 
+### Listing all persons : `list`
 
-### Deleting a person : `delete`
+Shows a list of all persons in the address book.
 
-Deletes the specified person from the address book.
+Format: `list`
 
-Format: `delete INDICES`
+### Sorting the displayed list: `sort`
 
-* Deletes the person(s) at the specified `INDICES`.
+Sorts the currently visible list of persons by a specified field.
 
+Format: `sort [s/SORT_OPTION]`
 
-<box type="tip" seamless>
+* You can use `sort` to arrange the contacts in the list you're currently viewing, whether it's the full list or a subset from commands like `search`.
+* If no sort option is provided, `sort` will restore the currently displayed list to its default order (i.e. the order in which contacts were added).
+* The sort order remains active until you apply a new sort option.
+* For *role-specific* sort options (e.g. `hours`):
+    * Role contacts are sorted by the relevant criterion.
+    * Non-role contacts are placed at the back.
 
-**Tip:** Be careful when using the `delete` command.
-* Even if you are currently viewing a list of groups, the delete command will still apply to the last displayed person list. 
-* Ensure you are viewing the correct list before deleting.
+<box type="info" seamless>
 
-</box>
+**Supported sort options include**:
+* `name`: Sorts contacts alphabetically by name [^1].
+* `hours`: Sorts volunteers by hours contributed (in descending order).
+* `donations`: Sorts donors by donation amount (in descending order).
+* `end_date`: Sorts partners by partnership end date (from earliest to latest).
+  </box>
 
 Examples:
-* `list` followed by `delete 2 4 6-8` deletes the 2nd, 4th, 6th, 7th, and 8th persons in the address book.
-* `search n/Betsy` followed by `delete 1 3-5` deletes the 1st, 3rd, 4th, and 5th persons in the results of the 
-  `search` command.
-### Clearing all entries : `clear`
+* `sort`
+* `sort s/name`
+* `sort s/hours`
 
-Clears all entries from the address book.
-
-Format: `clear`
+[^1]: For names with numbers, sorting follows **alphabetical order first**, then **numerical order** (e.g. "alfred" < "alfred2" < "ben")
 
 ### Creating a group : `createGroup`
 
@@ -333,6 +353,13 @@ Format: `listGroups`
 
 ![result for 'list groups'](images/list-groups.png)
 
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
 ### Getting emails: `email`
 
 Copies to system clipboard the emails of all persons in the
@@ -377,22 +404,3 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` <br> e.g., `add r/volunteer h/19 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDICES`<br> e.g., `delete 1 2 3 5-7`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Search**   | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`<br> e.g., `search n/john`
-**List**   | `list`
-**Sort**   | `sort [s/SORT_OPTION]`
-**Help**   | `help`
-**Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
-**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
-**Remove Existing Members from Group** | `removeFromGroup g/GROUP_NAME m/[INDICES]`
-**Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
-**Delete Group** | `deleteGroup g/GROUP_NAME`
-**List Groups**  | `listGroups`
-**Get Emails**   | `email`
