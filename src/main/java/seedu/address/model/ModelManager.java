@@ -19,7 +19,6 @@ import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Inventory;
 import seedu.address.model.product.Pastry;
 import seedu.address.model.product.PastryCatalogue;
 import seedu.address.storage.Storage;
@@ -40,7 +39,6 @@ public class ModelManager implements Model {
     private final CustomerOrderList customerOrderList;
     private final ObservableList<SupplyOrder> supplyOrderObservableList;
     private final ObservableList<CustomerOrder> customerOrderObservableList;
-    private final Inventory inventory;
     private final Storage storage; // Add Storage as a field
 
     /**
@@ -76,9 +74,6 @@ public class ModelManager implements Model {
         this.ingredientCatalogue = ingredientCatalogue;
         this.pastryCatalogue = pastryCatalogue;
         this.storage = storage;
-
-        // Initialize inventory with the ingredient catalogue
-        this.inventory = new Inventory(ingredientCatalogue);
 
         // Associate orders with persons after all objects are initialized
         associateOrdersWithPersons();
@@ -275,8 +270,4 @@ public class ModelManager implements Model {
         return supplyOrderList;
     }
 
-    @Override
-    public Inventory getInventory() {
-        return inventory;
-    }
 }

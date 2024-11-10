@@ -15,8 +15,6 @@ import seedu.address.logic.commands.AddIngredientCommand;
 import seedu.address.logic.commands.AddPastryCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.AddSupplyOrderCommand;
-import seedu.address.logic.commands.CheckIngredientStockCommand;
-import seedu.address.logic.commands.CheckPastryStockCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -36,7 +34,6 @@ import seedu.address.logic.commands.RemovePastryCommand;
 import seedu.address.logic.commands.UnmarkCustomerOrderCommand;
 import seedu.address.logic.commands.UnmarkSupplyOrderCommand;
 import seedu.address.logic.commands.ViewIngredientCatalogueCommand;
-import seedu.address.logic.commands.ViewInventoryCommand;
 import seedu.address.logic.commands.ViewPastryCatalogueCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -102,17 +99,11 @@ public class AddressBookParser {
         case AddPastryCommand.COMMAND_WORD:
             return new AddPastryCommandParser().parse(arguments);
 
-        case CheckPastryStockCommand.COMMAND_WORD:
-            return new CheckPastryStockCommandParser().parse(arguments);
-
         case RemovePastryCommand.COMMAND_WORD:
             return new RemovePastryCommandParser().parse(arguments);
 
         case AddIngredientCommand.COMMAND_WORD:
             return new AddIngredientCommandParser().parse(arguments);
-
-        case CheckIngredientStockCommand.COMMAND_WORD:
-            return new CheckIngredientStockCommandParser().parse(arguments);
 
         case RemoveIngredientCommand.COMMAND_WORD:
             return new RemoveIngredientCommandParser().parse(arguments);
@@ -146,9 +137,6 @@ public class AddressBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
-
-        case ViewInventoryCommand.COMMAND_WORD:
-            return new ViewInventoryCommand();
 
         case MarkCustomerOrderCommand.COMMAND_WORD:
             return new MarkCustomerOrderCommandParser().parse(arguments);
