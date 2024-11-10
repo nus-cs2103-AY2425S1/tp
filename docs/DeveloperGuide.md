@@ -268,6 +268,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned Enhancements**
+
+This section is a list of fixes that we propose to add in the near future, to improve some of ClubConnect's known feature flaws.
+
+1. **Allow events with duplicate names to be added**: The current `add_event` command is too restrictive as it only allows events of unique names to be added to ClubConnect's event list. However, we understand that our users often have recurring events, and such a restriction on the `add_event` command would ruin their user experience. We plan to allow events of the same name but non-overlapping duration window in the future, i.e. `Orbital Workshop from 1 Oct 2024 to 7 Oct 2024` and `Orbital Workshop from 10 Oct 2024 to 14 Oct 2024` can co-exist in ClubConnect's event list.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Requirements**
 
 ### Product scope
