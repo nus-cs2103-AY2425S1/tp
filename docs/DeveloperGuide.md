@@ -564,7 +564,7 @@ Use case ends.
   
     Use case resumes at step 2.
 
-[**Find Student**
+**Use case: Find Student**
 
 **MSS**
 
@@ -589,6 +589,7 @@ Use case ends.
   - 3a1. T_Assistant shows an error message.
   
     Use case ends.
+
 
 **Use case: Add a Group**
 
@@ -794,7 +795,7 @@ Use case ends.
 
       Use case ends.
 
-**Find Group**
+**Use case: Find Group**
 
 **MSS**
 
@@ -945,7 +946,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-**Find Task**
+**Use case: Find Task**
 
 **MSS**
 
