@@ -2,6 +2,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <head-bottom>
@@ -67,7 +68,7 @@
   <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
     <a href="{{baseUrl}}/AboutUs.html" class="nav-link" style="color: #E83E8C; font-weight: bold; text-decoration: none;">About Us</a>
     <a href="https://github.com/AY2425S1-CS2103T-F15-4/tp" target="_blank" class="nav-link" style="color: #E83E8C; font-weight: bold; text-decoration: none;">
-      <md>:fab-github:</md>
+      <i class="fab fa-github"></i>
     </a>
   </div>
 </footer>
