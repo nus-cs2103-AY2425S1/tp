@@ -223,7 +223,7 @@ Commands for creating, updating, and deleting buyers and sellers.
 ![showClients](images/Ui.png)
 
 #### Add Buyer
-    - **Format:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
+- **Format:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
     - **Description:** Creates a new buyer profile with specified details.
     - **Successful Execution:**
       > ---
@@ -281,23 +281,25 @@ Commands for creating, updating, and deleting buyers and sellers.
       Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
       Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
       >
-      > **User Error #4**: Buyer already exists 
-      > 
+      > **User Error #4**: Buyer already exists
+      >
       > **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
-      > 
+      >
       > **Output**: This buyer already exists in the address book
-      > 
+      >
       > ---
-<br>
-<div class="note" markdown="span">
-Adding a space between two names is treated as "adding a character". Hence,
-<br>`buyer n/alexyeoh` (0 space)
-<br>!= `buyer n/alex yeoh` (1 space)
-<br>!= `buyer n/alex  yeoh` (2 spaces)
-<br>.
-<br>.
-<br>.
-</div>
+
+    <br>
+    <div class="note" markdown="span">
+    Adding a space between two names is treated as "adding a character". Hence,
+    <br>`buyer n/alexyeoh` (0 space)
+    <br>!= `buyer n/alex yeoh` (1 space)
+    <br>!= `buyer n/alex  yeoh` (2 spaces)
+    <br>.
+    <br>.
+    <br>.
+    </div>
+    <br>
 
 - #### Add Seller
     - **Format:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
