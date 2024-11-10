@@ -372,7 +372,7 @@ to record their students with their details, and access relevant information eas
 | `* *`    | educator | search for groups by name                                                  | find information about specific groups of students                                                             |
 | `* *`    | educator | store additional information about students on grades, attendance or notes | better access and organise student information                                                                 |
 | `* *`    | educator | edit a student’s details                                                   | correct mistakes or update new information about the student                                                   |
-| `* *`    | educator | filter searched students by grades, attendance or notes                    | quickly find specific students or groups based on specific criteria                                            |
+| `* *`    | educator | filter searched students by name                                           | quickly find specific students                                                                                 |
 | `*`      | educator | use security measures for student data                                     | protect sensitive information and control access to parental data                                              |
 
 ### Use cases
