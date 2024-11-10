@@ -886,6 +886,14 @@ testers are expected to do more *exploratory* testing.
        Expected:
        - All customers with `alex` or `david` in their names are listed. A success message shown in the status message.
        - If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.
+
+3. Finding customer who does not exist in the address book.
+
+    1. Prerequisites: Customer with name containing `khengyang` (case-insensitive) does not already exist in the address book.
+
+    2. Test case: `findcustomer khengyang` <br>
+       Expected: No customers listed. A success message shown in the status message. A message informing user that no related customers are found is shown in the customer list.
+
    
 ### Editing an existing customer
 
