@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSIGN_POLICY;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSIGN_POLICY_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.POLICY_END_DATE_EARLIER_THAN_START;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGN_POLICY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
@@ -47,6 +48,10 @@ public class AssignPolicyCommandParserTest {
         // invalid policy --> end date earlier than start date
         assertParseFailure(parser, "1" + POLICY_END_DATE_EARLIER_THAN_START,
                 String.format(Policy.END_DATE_BEFORE_START_DATE));
+
+        //invalid start date
+        assertParseFailure(parser, "1" + INVALID_ASSIGN_POLICY_START_DATE,
+                String.format(Policy.MESSAGE_CONSTRAINTS));
     }
 
     @Test
