@@ -64,7 +64,7 @@ SpleetWaise builds on [AddressBook Level 3 (AB3)](https://se-education.org/addre
 
 * Parameters' input that collide with existing prefixes may cause error to be thrown.<br>
   e.g. `editTxn 1 desc/John owes me for our afternoon date/meeting` may not be accepted as `date/` is a prefix in editTxn command.<br>
-  **Tip:** Use `\/` to add parameter inputs that contain `/` character. e.g. `editTxn 1 desc/John owes me for our afternoon date\/meeting`
+  > :bulb: **Tip:** Use `\/` to add parameter inputs that contain `/` character. e.g. `editTxn 1 desc/John owes me for our afternoon date\/meeting`
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
@@ -132,13 +132,13 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
   * The status is optional. If the status is not provided, the default status is `Not Done`.
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-danger">
 :exclamation: Important: Transactions with identical values in specific fields are considered duplicates and cannot be added to the transaction book. A transaction is identified as a duplicate if the following fields match exactly: `INDEX` (if it represents the same person at this index), `AMOUNT`, `DESCRIPTION`, and `DATE`. Together, these fields must create a unique combination for each transaction.
-</div>
 
-> For consistency and to avoid redundancy, identical transactions with the same details across all fields will not be added to the transaction book. This ensures that each entry remains unique, preventing accidental duplicates and maintaining the clarity of transaction records. If a similar transaction occurs on a different occasion in the same day with the same contact, we recommend users to tweak the desc field to reflect the specific context.<br>
+> If a similar transaction occurs on a different occasion in the same day with the same contact, we recommend users to tweak the desc field to reflect the specific context.<br>
 >
 > For example:<br> - `addTxn 1 amt/2.50 desc/sean owes me for morning latte`<br> - `addTxn 1 amt/2.50 desc/sean owes me for afternoon latte`
+</div>
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
