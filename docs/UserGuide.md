@@ -387,7 +387,7 @@ This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
 
 #### Editing a Group: `edit_g`, `eg`
 
-Explanation of what command does.
+Edits the specified group in T_Assistant.
 
 **Format**: `edit_g i/INDEX gn/GROUP_NAME`
 
