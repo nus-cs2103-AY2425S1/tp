@@ -500,8 +500,8 @@ Use case ends.
 
 **MSS**
 
-1. User requests to filter persons with tag `keywords`
-2. TalentHub processes and list person(s) with tag `keywords`
+1. User requests to filter persons with `tag`
+2. TalentHub processes and list person(s) with `tag`
 
    Use case ends.
 
@@ -610,8 +610,7 @@ Use case ends.
 **Use case: UC13 - Delete Event**
 
 1. Talent Manager requests to delete a specific event in the list
-2. TalentHub requests for confirmation of deletion
-3. TalentHub deletes the event
+2. TalentHub deletes the event
 
    Use case ends.
 
@@ -635,21 +634,6 @@ Use case ends.
 
       Use case ends.
 
-* 2a. Talent Manager confirms the deletion.
-
-    * Use case resumes from step 3.
-
-* 2b. Talent Manager cancels the deletion.
-
-    * 2b1. TalentHub outputs an successful cancellation message.
-
-      Use case ends.
-
-* 2c. The parameter is missing or invalid.
-
-    * 2b1. TalentHub outputs an error message specifying the issue.
-
-      Use case resumes from step 2.
 
 **Use case: UC14 - List All Events**
 
@@ -696,8 +680,8 @@ Use case ends.
 
 **MSS**
 
-1. User requests to filter event by celebrity's name `keywords`
-2. TalentHub processes and list celebrity named `keywords`'s events
+1. User requests to filter event by celebrity's name
+2. TalentHub processes and list target celebrity's events
 
    Use case ends.
 
