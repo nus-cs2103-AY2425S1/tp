@@ -170,19 +170,24 @@ class JsonAdaptedPerson {
         }
         final DateOfCreation modalDateOfCreation = new DateOfCreation(LocalDate.parse(dateOfCreation));
         final History modelHistory = History.fromJsonEntries(modalDateOfCreation, historyEntries);
+        final Birthday modelBirthday;
         if (birthday == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Birthday.class.getSimpleName()));
         }
-        try {
-            LocalDate.parse(birthday);
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
+        if (birthday.isEmpty()) {
+            modelBirthday = EMPTY_BIRTHDAY;
+        } else {
+            try {
+                LocalDate.parse(birthday);
+            } catch (DateTimeParseException e) {
+                throw new IllegalValueException(MESSAGE_INVALID_DATE_FORMAT);
+            }
+            if (!Birthday.isValidBirthday(birthday)) {
+                throw new IllegalValueException(Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
+            }
+            modelBirthday = new Birthday(birthday);
         }
-        if (!Birthday.isValidBirthday(birthday)) {
-            throw new IllegalValueException(Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
-        }
-        final Birthday modelBirthday = birthday.isEmpty() ? EMPTY_BIRTHDAY : new Birthday(birthday);
 
         // Convert properties from JsonAdaptedProperty to PropertyList
         final PropertyList modelProperties = new PropertyList();

@@ -1,16 +1,31 @@
 ---
-layout: page
-title: User Guide
+# RealConnect User
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+RealConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Real Connect can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+--------------------------------------------------------------------------------------------------------------------
+### Table of Contents
+1. [Quick Start](#quick-start)
+2. [Command Structure](#command-structure)
+3. [Features](#features)
+    - [Viewing help](#viewing-help--help)
+    - [Adding a person](#adding-a-person--add)
+    - [Listing all persons](#listing-all-persons--list)
+    - [Sorting contacts](#sorting-contacts--sort)
+    - [Editing a person](#editing-a-person--edit)
+    - [Adding history to a person](#adding-history-to-a-person--log)
+    - [Remarking a person](#remarking-a-person--remark)
+    - [Single page person view](#single-page-person-view--view)
+    - [Adding a Property](#adding-a-property--addproperty)
+4. [Parameter Requirements](#parameter-requirements)
+5. [Command Summary](#command-summary)
+6. [Coming Soon](#coming-soon)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+### Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -18,33 +33,49 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar RealConnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
+
+## Command Structure
+Real Connect uses the following intuitive structure for the most of its functions:
+##### Commands on existing users
+E.g. `add`: `<Command> <X/parameter...>`
+
+##### Commands on Non-existing users
+E.g. `addProperty`: `<Command> <Index> <X/parameter>`
+
+##### Functional commands
+E.g. `help`: `<Command>`
+
+> X is a placeholder for prefixes
+
+Insert example command picture
+
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
@@ -53,6 +84,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters to the functions may have specific requirements. More information can be found here. [See Parameter Requirements](#parameter-requirements)
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -74,20 +107,22 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ---
 
+
+
 ### Adding a person: `add`
 
-Adds a new contact with details such as name, phone number, physical address, birthday, email, social media handles, and remarks.
+Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks.
 
 **Command Format:**  
-`add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>] [t/<Tag>]`
+`add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>]…​ [t/<Tag>]…​`
 
-- `n/` Full name (mandatory)
-- `p/` Phone number (mandatory)
-- `a/` Address (mandatory)
-- `b/` Birthday (optional)
-- `e/` Email (optional)
-- `r/` Remark (optional)
-- `t/` Tag (optional)
+- `n/` Full name (mandatory) (exact duplicate not allowed, case-sensitive)
+- `p/` Phone number (mandatory) (duplicate allowed as shared organization contact number may be used)
+- `a/` Address (mandatory) (duplicate allowed as shared organization address may be used)
+- `b/` Birthday (optional) (duplicate allowed)
+- `e/` Email (mandatory) (duplicate allowed as shared organization email may be used)
+- `r/` Remark (optional) (multiple allowed but only the last one will be recorded) (duplicate allowed)
+- `t/` Tag (optional) (multiple allowed and all will be added) (duplicate allowed)
 
 <div markdown="span" class="alert alert-primary">💡 <strong>Tip:</strong> 
 A person can have any number of tags (including 0)
@@ -141,7 +176,10 @@ Edits an existing person in the address book.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
+- You can remove the person’s remark by typing `r/` without remark message.
+- You can remove the person’s birthday by typing `b/` without birthday date.
+- Note that edit tag will overwrite exist list of tags to the new list of tags entered. Make sure to copy the existing tags you want to keep when editing.
 - Note that history and property **cannot be edited**
 
 
@@ -161,7 +199,8 @@ Format: `log INDEX [d/DATE] l/LOG`
 * Adds a new history entry to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 * Date is optional, and must be no earlier than the date of creation of the person, and not in the future, if to be included.
 * If date is not included the date of the history entry to be added will be today, system time, by default.
-* Date format must be in `yyyy-mm-dd`.
+* Date format **must** be in `yyyy-mm-dd`.
+* Log message **cannot be empty**.
 
 Examples:
 * `log 1 d/2024-08-08 l/meet up` add a log entry to the first person in the address book, `meet up` on 2024-08-08.
@@ -174,15 +213,18 @@ Examples:
 
 ### Remarking a person : `remark`
 
-Add or edit remark to an existing person in the address book.
+Add or edit remark to an existing person in the address book. Note that although multiple remarks may be entered,
+only the last (most up to date one) will be recorded.
 
-Format: `remark INDEX r/REMARK`
+Format: `remark INDEX r/REMARK]…​`
 
 * Add or edit remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 
 Examples:
 * `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
   ![result for 'remark 1 r/remark message'](images/Remark.png)
+* `remark 1 r/first remark r/second remark` adds remark message `second remark` to the first person.
+  ![result for 'remark 1 r/remark message'](images/MultipleRemark.png)
 
 ### Single page person view: `view`
 
@@ -197,6 +239,15 @@ Format: `view INDEX`
 Examples:
 *   `view 1` Shows the person located as index position 1 in the address book.
     ![result for 'ViewWindow'](images/ViewWindow.png)
+
+> ###### ⚠️ **Warning**
+> The view window is optimized as a pop-up, hence while there is no limit to word entries, multiple long entries (i.e., above 50 characters) may be truncated.
+
+> ###### 💡 **Tip**
+> If lower sections in the detail window are not displayed in full due to small screen size or long list length, resize the window or using the scroll bar for better visual experience.
+
+> ###### 💡 **Tip**
+> You can resize the detail window to extremely small size in case it blocks view of other windows.
 
 
 ### Adding a Property: `addProperty`
@@ -226,7 +277,14 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. <br>
+
+> ###### ⚠️ **Warning**
+> Commands that alter the ordering of the original list like `favourite` and `sort` will show the full list again.
+
+
+> ###### 💡 **Tip**
+> Note that the list given by `find` may not be complete, therfore it is recommended to use `list` to display the full list, before carrying out operations on other contacts that may be hidden by `find` command.
 
 **Command Format:**
 `find KEYWORD [ADDITIONAL_KEYWORDS]`
@@ -246,11 +304,13 @@ Finds persons whose names contain any of the given keywords.
 
 ### Marking a person as favourite: `favourite`
 
-Mark a specific person from the address book as favourite by assigning a special favourite label.
+Mark a specific person from the address book as favourite by assigning a special favourite tag.
+Using this command on an already favourited person will remove the person from favourite
+by removing the special favourite tag.
 
 Format: `favourite INDEX`
 
-* Mark the person at the specified `INDEX` as favourite. 
+* Mark the person at the specified `INDEX` as favourite.
 * If the person is already marked favourite, the person is removed from favourite.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -261,7 +321,7 @@ Examples:
 
 Format: `favourite`
 
-* Bring all persons marked as favourite to the front.
+* Bring all persons marked as favourite to the front. Note that when the list is modified, e.g. some contacts are unfavourited, the user needs to use `favourite` command again to sort by favourite in the modified person list.
 
 Examples:
 * `favourite` followed by `favourite 2` brings the previously 2nd person who has been marked to the front (1st).
@@ -297,21 +357,24 @@ Clears all entries from the address book.
 
 Exits the program.
 
+> ###### ⚠️ **Warning**
+> Users are strongly encouraged to use `exit` command to close the application when there is a person detail window active. Closing by clicking the close button may cause the detail window to not automatically closed.
+
+
 **Command Format:**  
 `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data of RealConnect are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data of RealConnect are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+> ###### ⚠️ **Warning**
+> If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
 
 ---
 
@@ -320,19 +383,24 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Stores a contact’s birthday
 
 **Command Format:**  
-`birthday <ContactID> d/<Birthday Date>`
+`birthday INDEX b/<Birthday Date>`
 
-- `d/` The contact’s birthday in `MM-DD` or `YYYY-MM-DD` format.
+- `b/` The contact’s birthday `yyyy-mm-dd` format.
 
 **Examples:**
-- `birthday 123 d/1990-05-15`
-- `birthday 456 d/09-25`
+- `birthday 123 b/1990-05-15`
 
 ---
 
 ### Birthday Reminder
 
 Displays a contacts' birthday if they are happening within a week from the system's current date.
+Note that the reminder is only shown when the application is launched,
+any command feedback shown will clear the reminder. To view the reminder again restart the application.
+
+> ###### 💡 **Tip**
+> Note that the reminder is only shown when the application is launched,
+any command feedback shown will clear the reminder. To view the reminder again restart the application.
 
 **Command Format:**
 None, as it is an automatic feature.
@@ -361,20 +429,43 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Parameter Requirements
+| Paramter | Requirement                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example                                                                              |
+|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| Name     | Only Alpha-numeric                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | ❌ Shanmugam S/O Balakrishnan <br> ✅ Shanmugam Son of Balakrishnan<br/>✅ Chris Paul 3 |
+| Birthday | yyyy-mm-dd                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | ❌ 2021/09/09 <br>❌ 09-09 <br> ✅ 2021-09-09<br/>                                      |
+| Log Date | yyyy-mm-dd                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | ❌ 2021/09/09 <br>❌ 09-09 <br> ✅ 2021-09-09<br/>                                      |
+| Email    | local-part@domain<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: end with a domain label at least 2 characters long; have each domain label start and end with alphanumeric characters; have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | ❌ 1/@d10 <br> ❌ hello@a.c<br/>✅ 1@a.com<br/>✅ ho@gmail.com                           |
+| address  | No contraint (right-to-left scripts will be displayed left-to-right)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | ✅ 123 Orchard<br/> ✅ 乌节路 123 号<br/> ✅ 123 بستان                                      |
+
+
+--------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                         |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [r/REMARK] [t/TAG]`<br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
-| **Clear All Contacts** | `clear`                                                                                                                                                                  |
-| **Delete Contact**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                      |
-| **Edit Contact**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                              |
-| **Find Contacts**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                                     |
-| **List All Contacts**  | `list`                                                                                                                                                                   |
-| **Help**               | `help`                                                                                                                                                                   |
-| **Sort Contacts**      | `sort asc/desc`<br> e.g., `sort asc`                                                                                                                                     |
-| **Log Interaction**    | `log INDEX [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                                |
-| **Add/Edit Remark**    | `remark INDEX r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                               |
-| **View Contact**       | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
-| **Favourite Contact**  | `favourite [INDEX]`<br> e.g., `favourite 123` or `favourite`                                                                                                             |
-| **Add/Edit Birthday**  | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
+| Action                  | Format, Examples                                                                                                                                                         |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [r/REMARK] [t/TAG]`<br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
+| **Clear All Contacts**  | `clear`                                                                                                                                                                  |
+| **Delete Contact**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                      |
+| **Edit Contact**        | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                              |
+| **Find Contacts**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                                     |
+| **List All Contacts**   | `list`                                                                                                                                                                   |
+| **Help**                | `help`                                                                                                                                                                   |
+| **Sort Contacts**       | `sort asc/desc`<br> e.g., `sort asc`                                                                                                                                     |
+| **Log Interaction**     | `log INDEX [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                                |
+| **Add/Edit Remark**     | `remark INDEX r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                               |
+| **View Contact**        | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
+| **Favourite Contact**   | `favourite INDEX`(on not favourited person)<br> e.g., `favourite 123`                                                                                                    |
+| **Unfavourite Contact** | `favourite INDEX`(on already favourited person) <br> e.g., `favourite 123`                                                                                               |
+| **Favourite Contact**   | `favourite`<br> e.g., `favourite`                                                                                                                                        |
+| **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
+--------------------------------------------------------------------------------------------------------------------
+## Coming soon:
+### Editing and deleting log entries
+* Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
+### Editing and deleting of properties
+### More flexible date input formatting
+### Confirmation upon unusual input when adding properties
+* Currently RealConnect accepts any non-negative integer values for property attributes number of bathrooms and bedrooms. Additional confirmation dialog will be implemented in the future to prompt the user to confirm unusually large input like 2000 bathrooms, to mitigate the chance of user mistakes.
+### Allow closing App by clicking close button
+* RealConnect as a CLI App currently support closing the application by command `exit`, force closing by clicking the close button of the window while person detail window is up may cause the detail card window to not close properly. In the future our team will focus on the GUI interaction more to resolve this issue.  
