@@ -354,6 +354,8 @@ Format: `addlog INDEX r/REMARK [d/DATE]`
 
 Examples:
 * `addlog 2 r/Client is doing well d/2022-12-12 14:00` adds a log entry to the 2nd client with the remark `Client is doing well` and the date `2022-12-12 14:00`.
+* `find n/Alice` followed by `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the results of the `find` command.
+* `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the case management system with the remark `Client is doing well` and the current date and time.
 
 ### Deleting a log entry : `deletelog`
 
@@ -369,6 +371,8 @@ Format: `deletelog INDEX l/LOG_INDEX`
 
 Examples:
 * `deletelog 2 l/3` deletes the 3rd log entry from the 2nd client in the case management system.
+* `find n/Alice` followed by `deletelog 1 l/2` deletes the 2nd log entry from the 1st client in the 
+  results of the `find` command.
 
 ### Clearing all entries : `clear`
 
