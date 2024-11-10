@@ -72,7 +72,6 @@ public class DeleteCommand extends Command {
         } else {
             List<Person> lastShownList = model.getPersonList();
             Person personToDelete = null;
-            
             for (Person person : lastShownList) {
                 if (person.getIdentityNumber().equals(identityNumber)) {
                     personToDelete = person;
