@@ -24,7 +24,7 @@ public class MarkCustomerOrderCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_ORDER_SUCCESS = "Marked customer order as completed: %1$s";
+    public static final String MESSAGE_MARK_ORDER_SUCCESS = "Marked customer order as completed:";
     public static final String MESSAGE_ORDER_ALREADY_COMPLETED = "The order at index %1$s is already completed.";
     public static final String MESSAGE_INSUFFICIENT_STOCK = "Not enough stock to fulfill the order.";
     public static final String MESSAGE_INVALID_INDEX = "The index provided is invalid.";
@@ -51,8 +51,8 @@ public class MarkCustomerOrderCommand extends Command {
 
         List<? extends Product> items = customerOrder.getItems();
 
+        /* inventory function to remove
         Map<Integer, Integer> requiredIngredients = new HashMap<>();
-
         for (Product product : items) {
             if (product instanceof Pastry pastry) {
                 for (Ingredient ingredient : pastry.getIngredients()) {
@@ -62,11 +62,15 @@ public class MarkCustomerOrderCommand extends Command {
                 }
             }
         }
+        */
+
         customerOrder.setStatus(OrderStatus.COMPLETED);
 
         customerOrderList.removeOrder(targetIndex - 1);
         customerOrderList.addOrder(customerOrder);
-        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, targetIndex));
+
+        String resultMessage = MESSAGE_MARK_ORDER_SUCCESS + "\n" + customerOrder.toString();
+        return new CommandResult(resultMessage);
     }
 
     @Override
