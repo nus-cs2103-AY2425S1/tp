@@ -16,7 +16,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -85,28 +84,10 @@ public class UnassignWeddingCommand extends Command {
         if (!updatedWeddings.containsAll(weddingsToRemove)) {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
+
         updatedWeddings.removeAll(weddingsToRemove);
 
-        Person editedPerson;
-        if (personToEdit instanceof Vendor) {
-            editedPerson = new Vendor(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getTags(),
-                    updatedWeddings,
-                    personToEdit.getTasks());
-        } else {
-            editedPerson = new Person(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getTags(),
-                    updatedWeddings,
-                    personToEdit.getTasks());
-        }
+        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, updatedWeddings);
 
         // Remove Wedding from Person
         model.setPerson(personToEdit, editedPerson);

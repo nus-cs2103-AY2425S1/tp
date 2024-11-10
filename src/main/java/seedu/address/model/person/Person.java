@@ -19,6 +19,14 @@ import seedu.address.model.wedding.Wedding;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    private static final Person BLANK_PERSON = new Person(
+            new Name("BLANK"),
+            new Phone(""),
+            new Email(""),
+            new Address(""),
+            new HashSet<>(),
+            new HashSet<>(),
+            new HashSet<>());
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -56,6 +64,13 @@ public class Person {
         this.tags.addAll(person.getTags());
         this.weddings.addAll(person.getWeddings());
         this.tasks.addAll(person.getTasks());
+    }
+
+    /**
+     * Returns the blanks person singleton of Person class
+     */
+    public static Person getBlankPerson() {
+        return BLANK_PERSON;
     }
 
     /**
@@ -221,6 +236,15 @@ public class Person {
     public void addWedding(Wedding wedding) {
         requireNonNull(wedding);
         weddings.add(wedding);
+    }
+
+    /**
+     * Removes the specified wedding from this person's assigned weddings.
+     *
+     * @param wedding The wedding to remove.
+     */
+    public void removeWedding(Wedding wedding) {
+        weddings.remove(wedding);
     }
 
     /**

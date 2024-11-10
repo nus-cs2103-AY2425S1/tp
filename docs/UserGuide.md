@@ -120,33 +120,19 @@ Format: `list`
 
 Shows a list of all [Weddings](#wedding-features) in the WedLinker.
 
-Format: `list-weddings`
+Format: `list-weddings` or `lw`
 
 ### Listing all Tasks : `list-tasks`
 
 Shows a list of all [Tasks](#task-features) in the WedLinker
 
-Format: `list-tasks`
+Format: `list-tasks` or `ltasks`
 
-### Locating contacts by any field, similar to a search function: `find`
+### Listing all Tags : `list-tags`
 
-Finds all persons based on the specified keywords (case-insensitive) after the prefix representing the field, and displays them as a list with index numbers.
+Shows a list of all [Tags](#tag-features) in the WedLinker
 
-Format: `find PREFIX KEYWORD [KEYWORD]…​`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`.
-* The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
-* The search will return partial matches and full matches.
-* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix. 
-* Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
-* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
-
-* `find p/973` returns all Contacts whose phone number contains 973
-* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
-![result for 'find n/alex n/david'](images/findCommandName.png)
-* `find t/friends` returns all Contacts tagged with 'guest' <br>
-![result for `find t/guest](images/findCommandTag.png)
-* `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
+Format: `list-tags` or `ltags`
 
 ### Clearing all entries : `clear`
 
@@ -189,9 +175,13 @@ Adds a person to the address book.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDDING]…​`
 
+* **People in Wedlinker cannot have the same names**
+  * So, if `John Doe` is already in Wedlinker, adding another `John Doe` with different details will not work
+* If the tags or weddings specified in the add command do not exist yet, they will be created
+
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** A person can have any number of tags or weddings (including 0)
 </box>
 
 Examples:
@@ -226,6 +216,26 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Locating contacts by any field, similar to a search function: `find`
+
+Finds all persons based on the specified keywords (case-insensitive) after the prefix representing the field, and displays them as a list with index numbers.
+
+Format: `find PREFIX KEYWORD [KEYWORD]…​`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
+* The search will return partial matches and full matches.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix.
+* Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
+
+* `find p/973` returns all Contacts whose phone number contains 973
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find n/alex n/david'](images/findCommandName.png)
+* `find t/friends` returns all Contacts tagged with 'guest' <br>
+  ![result for `find t/guest](images/findCommandTag.png)
+* `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
+
 ## Tag Features
 
 ### Adding a tag : `create-tag`
@@ -237,6 +247,9 @@ Format: `create-tag t/TAGNAME`
 * The `TAGNAME` is alphanumeric and can contain whitespaces.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
+* Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag
+
+
 
 ### Assign tag to contact : `tag`
 
@@ -249,6 +262,11 @@ Format: `tag INDEX t/TAGNAME [f/]`
 * The index **must be a positive integer** 1, 2, 3, …​.
 * The `Tag` must exists in WedLinker before it can be assigned.
 * If the `Tag` does not exist, you can use `f/` to force the creation and assignment of the `Tag`.
+
+<box type="tip" seamless>
+
+**Tip:** To see all current tags, use the [list-tags](#listing-all-tags--list-tags) command
+</box>
 
 ### Unassign tag to contacts : `untag`
 

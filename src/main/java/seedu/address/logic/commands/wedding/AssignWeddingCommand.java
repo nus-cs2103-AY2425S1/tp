@@ -19,7 +19,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -83,6 +82,8 @@ public class AssignWeddingCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
+        Set<Wedding> modelWeddings = new HashSet<>();
+
         for (Map.Entry<Wedding, String> entry : weddingsToAdd.entrySet()) {
             Wedding wedding = entry.getKey();
 
@@ -98,8 +99,11 @@ public class AssignWeddingCommand extends Command {
                 }
             }
 
+            // Work with the model's copy of the wedding
+            wedding = model.getWedding(wedding);
+
             // Check if person is already assigned to the wedding
-            if (model.getWedding(wedding).hasPerson(personToEdit)) {
+            if (wedding.hasPerson(personToEdit)) {
                 throw new CommandException(String.format(
                         MESSAGE_WEDDING_ALREADY_ASSIGNED, personToEdit.getName()
                 ));
@@ -107,37 +111,36 @@ public class AssignWeddingCommand extends Command {
             Wedding editedWedding = wedding.clone();
             String type = entry.getValue();
             switch (type) {
-            case "p1" -> editedWedding.setPartner1(personToEdit);
-            case "p2" -> editedWedding.setPartner2(personToEdit);
-            case "g" -> editedWedding.addToGuestList(personToEdit);
-            default -> { }
+            case "p1":
+                if (editedWedding.hasPartner1()) {
+                    Person modelPartner1 = model.getPerson(editedWedding.getPartner1());
+                    modelPartner1.removeWedding(wedding);
+                    model.setPerson(modelPartner1, modelPartner1);
+                }
+                editedWedding.setPartner1(model.getPerson(personToEdit));
+                break;
+            case "p2":
+                if (editedWedding.hasPartner2()) {
+                    Person modelPartner2 = model.getPerson(editedWedding.getPartner2());
+                    modelPartner2.removeWedding(wedding);
+                    model.setPerson(modelPartner2, modelPartner2);
+                }
+                editedWedding.setPartner2(model.getPerson(personToEdit));
+                break;
+            case "g":
+                editedWedding.addToGuestList(model.getPerson(personToEdit));
+                break;
+            default:
+                break;
             }
             model.setWedding(wedding, editedWedding);
+            modelWeddings.add(editedWedding);
         }
 
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
-        updatedWeddings.addAll(weddingsToAdd.keySet());
+        updatedWeddings.addAll(modelWeddings);
 
-        Person editedPerson;
-        if (personToEdit instanceof Vendor) {
-            editedPerson = new Vendor(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getTags(),
-                    updatedWeddings,
-                    personToEdit.getTasks());
-        } else {
-            editedPerson = new Person(
-                    personToEdit.getName(),
-                    personToEdit.getPhone(),
-                    personToEdit.getEmail(),
-                    personToEdit.getAddress(),
-                    personToEdit.getTags(),
-                    updatedWeddings,
-                    personToEdit.getTasks());
-        }
+        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, updatedWeddings);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
