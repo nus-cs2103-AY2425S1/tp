@@ -78,7 +78,7 @@ Example:
 
 * Add `$` after the input name to indicate **exact** name.<br>
   * This is useful when a client's name is a prefix of another client's name.
-  
+
   e.g. `delete John Doe$` will delete the contact with the name `John Doe`.<br>
   e.g. If there are two client named `David Li` and `David Lim`, typing `delete David Li$` will delete the client with the name `David Li`.
 
@@ -96,7 +96,7 @@ Example:
 
 | Command            | Constraints                                                                                                                                                                                                                                              | Examples                                                                                          |
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `NAME`             | <br> - Must start with a letter <br> - Must contain more than 1 character <br> - **First** character: only letters <br> - **Last** character: only letters or parentheses <br> - **Middle** characters: letters, parentheses, or slashes                 | **Valid**: `John Doe`, `John (NUS)`, `John S/O Bob` <br> **Invalid**: `A`, `John 123`, `!John Doe` | 
+| `NAME`             | <br> - Must start with a letter <br> - Must contain more than 1 character <br> - **First** character: only letters <br> - **Last** character: only letters or parentheses <br> - **Middle** characters: letters, parentheses, or slashes                 | **Valid**: `John Doe`, `John (NUS)`, `John S/O Bob` <br> **Invalid**: `A`, `John 123`, `!John Doe` |
 | `PHONE_NUMBER`     | - Only numbers <br> - Exactly 8 digits                                                                                                                                                                                                                   | **Valid**: `12345678` <br> **Invalid**: `123456789`, `abc`                                        |
 | `EMAIL`            | <br> - Format: `local-part@domain` <br> - Local-part: alphanumeric and (+_.-) but cannot start/end with special characters <br> - Domain: ends with at least 2 characters; each label is alphanumeric, may contain hyphens but cannot start/end with them | **Valid**: `example@mail.com` <br> **Invalid**: `@mail.com`, `example@com`, `example@.com`        |
 | `ADDRESS`          | <br> - Allowed characters: letters, numbers, `,#-():;`                                                                                                                                                                                                   | **Valid**: `John street, block 123, #01-01` <br> **Invalid**: `$Block 69`                         |
@@ -107,7 +107,7 @@ Example:
 | `INDEX`            | <br> - Must be a positive integer                                                                                                                                                                                                                        | **Valid**: `1`, `2`, `3` <br> **Invalid**: `0`, `-1`                                              |
 
 ### Note
-* `NAME` is case-insensitive. The first letter of every word will be automatically converted to capital letter and the rest to small letters. This is 
+* `NAME` is case-insensitive. The first letter of every word will be automatically converted to capital letter and the rest to small letters. This is
 to ensure that 2 names with the same letters but different cases are not considered as different names. e.g. `john doe` and `John Doe` are considered the same name and cannot be added as 2 different clients.
 
 
@@ -189,7 +189,7 @@ Result for `delete John Doe`:
 
 ### Locating clients by key information: `find`
 
-Finds clients by `NAME`, `PHONE_NUMBER`, `ADDRESS` or `CLIENT_TYPE`. 
+Finds clients by `NAME`, `PHONE_NUMBER`, `ADDRESS` or `CLIENT_TYPE`.
 
 #### Locating by `NAME`
 Format: `find n/NAME` or `fn NAME` or `find NAME$`
@@ -240,7 +240,7 @@ Result for `find a/tampines`:
 ![result for 'fa tampines`](images/result_for_find_address.png)
 
 
-#### Locating by `CLIENT_TYPE` 
+#### Locating by `CLIENT_TYPE`
 Format: `find c/CLIENT_TYPE…​` or `fc CLIENT_TYPE…​`
 * The search is case-insensitive. e.g `investment` will match `Investment`
 * Only the `CLIENT_TYPE` of the person is searched.
@@ -265,7 +265,7 @@ specific clients. The reminder list is a list of reminders that can be added,
 deleted, and edited.
 
 
-#### Adding Reminder: `radd` 
+#### Adding Reminder: `radd`
 
 Adds a reminder to the reminder list.
 
@@ -417,7 +417,7 @@ _Details coming soon ..._
 | Action                | Format, Examples                                                                                                                                                                                     |
 |-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Help                  | `help`                                                                                                                                                                                               |
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​ ` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` |    
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLIENT_TYPE d/DESCRIPTION…​ ` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/Plan A c/Plan A d/crimefighter` |
 | **Delete**            | `delete NAME`<br> e.g `delete JAMES`                                                                                                                                                                 |
 | **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLIENT_TYPE] [d/DESCRIPTION]`<br> e.g `edit 2 n/James Lee e/jameslee@example.com`                                                     |
 | **Find Name**         | `find n/NAME` or `fn NAME` <br> e.g `find n/John` or `fn John`                                                                                                                                       |
@@ -426,7 +426,7 @@ _Details coming soon ..._
 | **Find Client Type**  | `find c/CLIENT_TYPE` or `fc CLIENT_TYPE`<br/> e.g `find c/Investment` or `fc Investment`                                                                                                             |
 | **Add Reminder**      | `radd n/NAME dt/DATETIME d/DESCRIPTION` or `ra /NAME dt/DATETIME d/DESCRIPTION` <br> e.g `radd n/John dt/2024-01-01 12:00 d/Appointment` or `ra n/John dt/2024-01-01 12:00 d/Appointment`            |
 | **Delete Reminder**   | `rdelete INDEX` or `rd INDEX` <br> e.g `rdelete 1` or `rd INDEX`                                                                                                                                     |
-| **Edit Reminder**     | `redit INDEX [dt/DATETIME] [d/DESCRIPTION]` or `re INDEX [dt/DATETIME] [d/DESCRIPTION]` <br> e.g `redit 1 [dt/2024-02-02 13:00] [d/Review]` or `re 1 [dt/2024-02-02 13:00] [d/Review]`               |                                                                                                                                                    
+| **Edit Reminder**     | `redit INDEX [dt/DATETIME] [d/DESCRIPTION]` or `re INDEX [dt/DATETIME] [d/DESCRIPTION]` <br> e.g `redit 1 [dt/2024-02-02 13:00] [d/Review]` or `re 1 [dt/2024-02-02 13:00] [d/Review]`               |
 | **View**              | `view NAME`<br> e.g., `view James`                                                                                                                                                                   |
 | **Sort**              | `sort`                                                                                                                                                                                               |
 | **List**              | `list`                                                                                                                                                                                               |

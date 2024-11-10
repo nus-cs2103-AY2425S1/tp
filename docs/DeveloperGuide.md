@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` and `Reminder` object residing in the `Model`. (For eg. `PersonListPanel` , `PersonCard`, `ReminderListPanel`, `ReminderCard`)
+* depends on some classes in the `Model` component, as it displays `Person` and `Reminder` object residing in the `Model`. (For e.g. `PersonListPanel` , `PersonCard`, `ReminderListPanel`, `ReminderCard`)
 
 ### Logic component
 
@@ -101,10 +101,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `ClientHubParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -166,10 +166,10 @@ the following operations:
 
 Given below is an example usage scenario and how the add reminder mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `ClientHub` will be initialized with an empty reminder list and a initial.
+Step 1. The user launches the application for the first time. The `ClientHub` will be initialized with an empty reminder list and an initial.
 Client list.
 
-Step 2. The user finds a client in the client list to add a reminder for for eg. `Alice Pauline`. The
+Step 2. The user finds a client in the client list to add a reminder for e.g. `Alice Pauline`. The
 User will then execute `radd n/Alice Pauline dt/2022-10-10 12:00 d/lunch` command to add a reminder for Alice Pauline.
 The `radd` command calls `ClientHub#addReminder()`, causing the reminder to be added to the reminder list.
 
@@ -180,7 +180,7 @@ The following sequence diagram shows how an add reminder operation goes through 
 Similarly, how an add reminder operation goes through the `Model` component is shown below:
 ![AddReminderSequenceDiagram-Model.png](images/AddReminderSequenceDiagram-Model.png)
 
-The following activity diagram summarizes what happens when a user executes a add reminder command:
+The following activity diagram summarizes what happens when a user executes an add reminder command:
 ![AddReminderCommandActivity.png](images/AddReminderCommandActivity.png)
 
 
@@ -212,7 +212,7 @@ The following activity diagram summarizes what happens when a user executes a ad
 * Need a system that provides quick access to relevant client information, including financial plans, policy expiration dates, and client details.
 * Often handle tasks that involve tracking insurance policies, renewals, and financial documents.
 
-**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (eg. Track insurance policies) as well as create reminders for meet ups with them. Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information of their clients and important dates their clients.
+**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (e.g. Track insurance policies) as well as create reminders for meet ups with them. Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information of their clients and important dates their clients.
 
 
 ### User stories
@@ -258,15 +258,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. ClientHub shows an error message informing user that required field(s) are missing
 
     Step 1 is repeated until user inputs all required fields.
- 
+
 
 * 1c. ClientHub detects a duplicate client
 
-  * 1c1. ClientHub informs user that there is more than one client with the same name and prompt the user to input a 
+  * 1c1. ClientHub informs user that there is more than one client with the same name and prompt the user to input a
     different name.
-    
+
     Step 1 is repeated until user inputs a unique name.
-  
+
 
 **Use case: Delete a client**
 
@@ -287,7 +287,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Step 1 is repeated until user inputs the correct format.
 
 * 1b. ClientHub detects that the given name is not in the list
- 
+
     * 1b1. ClientHub shows an error message that the name is not in the list
 
         Use case ends.
@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Search for a client**
 
-**MSS** 
+**MSS**
 1. User inputs the command to search for a client
 2. ClientHub searches for the client
 3. ClientHub shows the client details
@@ -449,7 +449,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Step 1 is repeated until user inputs the correct format.
 * 2a. ClientHub detects the given index is out of range
     * 2a1. ClientHub shows an error message that the index is out of range
-        
+
         Step 1 is repeated until user inputs the correct format.
 
 
@@ -469,13 +469,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Step 1 is repeated until user inputs the correct format.
 * 2a. ClientHub detects the given index is out of range
     * 2a1. ClientHub shows an error message that the index is out of range
-        
+
         Step 1 is repeated until user inputs the correct format.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 client's client without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3.  Should be able to load client's client within 2 seconds to provide a smooth user experience.
 4.  As the number of clients increases, the app should be able to handle the increased data load without significant degradation in performance.
 5.  A financial advisor with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
@@ -485,7 +485,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private client Detail**: A client detail that is not meant to be shared with others
 * **Client**: A person or company that is in the client list
 * **Client Type**: A category used to describe the relationship or status of a client, such as VIP and standard.
@@ -504,25 +504,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-#### 1. Initial launch 
+#### 1. Initial launch
 
 * **For Mac**
 
-    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
-    2. Open Terminal 
+    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`.
+    2. Open Terminal
     3. Inside the terminal enter: `cd Downloads/ClientHub`
     4. Then enter:`java -jar clienthub.jar`
-       * Expected: Shows the GUI with a set of sample clients. 
+       * Expected: Shows the GUI with a set of sample clients.
        * The window size may not be optimum.
 
 
 * **For Windows**
 
-    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
+    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`.
     2. Open PowerShell
     3. Inside the Command Prompt enter: `cd Downloads/ClientHub`
-    4. Then enter:`java -jar clienthub.jar` 
-       * Expected: Shows the GUI with a set of sample clients. 
+    4. Then enter:`java -jar clienthub.jar`
+       * Expected: Shows the GUI with a set of sample clients.
        * The window size may not be optimum.
 
 #### 2. Saving window preferences
@@ -537,13 +537,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Test case: `delete Ahmad`<br>
+   2. Test case: `delete Ahmad`<br>
       Expected: Contact with name "Ahmad" is deleted. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete x` (where x is a number) <br>
+   3. Test case: `delete x` (where x is a number) <br>
       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a client not in the list) <br>
+   4. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a client not in the list) <br>
       Expected: Similar to previous.
 
 
@@ -554,7 +554,7 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Checking if changes in data are saved
-   1. Use any of the data changing commands eg.`add` `delete` `edit`.
+   1. Use any of the data changing commands e.g.`add` `delete` `edit`.
    2. Exit ClientHub with `exit` or closing the window.
    3. Re-launch the app by double-clicking the jar file. <br>
       Expected: Changes made previously are loaded into the displayed data
@@ -565,37 +565,25 @@ Team size: 5
 
 Given below are some planned future enhancements for the app.
 
-[//]: # (### Feature: Reminder Clear)
+1. Make Find Stackable: The current find does not stack on top of each other.
+We plan to make it able to stack. For example, doing a `find n/Alice` into a `find p/9874`
+will first find all clients that have the name `Alice` and then find the clients in this filtered list that have a phone number
+with `9874`.
 
-[//]: # ()
-[//]: # (- **Description**: Allows the user to clear all reminders at once.)
 
-[//]: # (- **Rationale**: This feature will help the user to clear all reminders at once, which will be useful when the user wants to start fresh with a new set of reminders.)
+2. Disallow Duplicate Phone Numbers: Currently, the app allows the user to add clients with the same phone number which
+generally does not occur, thus we plan to make the app disallow adding clients with the same phone number, which will prevent
+any accidental additions of clients with the same phone number.
 
-[//]: # (- **Format**: `rclear` or `rc`)
 
-### Feature: Stackable Find
+3. Allow Phone Numbers of different lengths: Currently, the app only allows phone numbers of 8 for Singaporean Phone numbers, we plan to make the app
+able to take in Numbers from other countries such as Malaysia to accommodate to FAs that have clients outside of Singapore
 
-- **Description**: Allows the user to find clients based on multiple criteria as well as make the 2nd or 3rd find find from previous results.
-  - **Example**: `find n/Alice p/98765432` will find clients with name `Alice` and phone number `98765432`.
-  - **Example**: `find n/Alice` followed by `find p/98765432` will find clients with name `Alice` and then find clients with phone number `98765432` from the results of the first find.
-- **Rationale**: This feature will help the user to find clients based on multiple criteria, which will be useful when the user wants to narrow down the search results.
-- **Format**: `find KEYWORD [KEYWORD]...`
 
-### Feature: More Powerful Phone Number
+4. More flexible Add: Currently, the app requires the user to input all fields when adding a client, we plan to make the app more flexible by allowing the user to input only the necessary fields when adding a client.
+Certain fields such as Description and Address may be unnecessary for some FAs to keep track of. So to increase their efficiency, we plan to make the app allow the user to input only the necessary fields when adding a client
+such as Name, Phone Number and Client Type.
 
-- **Description**:
-1. Allows the user to input phone numbers that are not from Singapore
-2. Allow the user to add in prefix depending on if its hand phone number or home number
-3. Adding in Duplicate protection for phone numbers
-  - **Example**: `add n/Alice p/+135 1234 5678 ...` will add a client with the region code of `+135` and number `1234 5678`.
-- **Rationale**: This feature will help the phone nummber feature is now more powerful and can handle more types of phone numbers as well as
-protect the user from entering duplicate phone numbers.
-
-### Feature: More flexible Add
-
-- **Description**: Allow users to dictate what fields they want to add for a client.
-  - **Example**: `add n/Alice p/98765432` will add a client with name `Alice` and phone number `98765432`.
-  - Fields deemed optional to user such as email, address, client type, and description will be left blank.
-  - But fields such as name and phone number will be required.
-- **Rationale**: This feature will help the user to add clients with only the necessary fields, which will be useful when the user wants to quickly add a client without filling in all the fields.
+5. All for more flexible Reminder Editing: Currently, the app only allows the user to edit the name of a person if they have no reminders,
+this is quite restrictive and may cause some inconveniences for users. Thus, we plan to make the app allow the user to edit the name of a person even if
+they have reminders. This will allow the user to make changes to the client's name without having to delete all the reminders first.
