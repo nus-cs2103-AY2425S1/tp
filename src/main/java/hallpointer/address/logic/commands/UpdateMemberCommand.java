@@ -87,10 +87,12 @@ public class UpdateMemberCommand extends Command {
 
         Member memberToUpdate = lastShownList.get(index.getZeroBased());
         Member updatedMember = createUpdatedMember(memberToUpdate, updateMemberDescriptor);
-    
+        if (!memberToUpdate.isSameMember(updatedMember) && model.hasMember(updatedMember)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
+        }
         long matchCount = model.getFilteredMemberList().stream()
-        .filter(member -> member.isSameMember(updatedMember))
-        .count();
+            .filter(member -> member.isSameMember(updatedMember))
+            .count();
 
         if (memberToUpdate.isSameMember(updatedMember) && matchCount > 1) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
