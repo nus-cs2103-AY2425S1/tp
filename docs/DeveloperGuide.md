@@ -663,3 +663,8 @@ Team size: 5
 1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of 
 students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to 
 add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
+
+1. **Add the support for setting EmergencyName, EmergencyPhone and GraduationYear using the `add` command.**
+The `add` command currently does not allow setting emergency contact details and graduation year of students.
+The only way to set these fields is through the `edit` command, which can be inconvenient for users.
+We plan to add support for setting EmergencyName, EmergencyPhone and GraduationYear to the `add` command.
