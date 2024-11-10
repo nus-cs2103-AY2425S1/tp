@@ -704,4 +704,3 @@ Team size: 5
 1. **Improve find command search flexibility**: The current search functionality is limited when searching for strings containing alphanumeric characters followed by special characters (e.g. "29," in an address), or special characters followed by alphanumeric characters (e.g "#03-02" in a unit number). Users may not find their intended client if they do not explicitly state the exact string due to this restriction (e.g. using `find 29` to find a client with the address `Blk 30 Geylang Street 29, #06-40` will result in no clients being found. We plan to enhance the search feature to allow partial matches on numeric values regardless of punctuation or spacing. This update will improve the user experience by showing relevant contact details even if the input includes numbers adjacent to punctuation marks.
 
 [_Back to Top_](#table-of-contents)
-
