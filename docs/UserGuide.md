@@ -493,6 +493,10 @@ To delete an appointment, you only need the start time. The end time is not requ
 
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
 
+<div markdown="span" class="alert alert-primary">:warning: **Note:**
+When using date ranges for searching appointments, ensure your end date comes after your start date. For example, searching from 01/01/2024 to 30/12/2024 is valid, but searching from 01/01/2025 to 30/10/2024 will always return 0 results since no appointments can exist in an impossible time range.
+</div>
+
 An example of the result obtained from the `findapp` command is given below.
 ![Find Appointment command example](images/findappointment.png)
 
