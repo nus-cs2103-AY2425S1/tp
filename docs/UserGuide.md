@@ -207,7 +207,8 @@ Adds student(s) to a group.
 ##### Notes
 
 1. The group with the `Group Name` and student(s) with the `Student Number`(s) must both exist in T_Assistant.
-2. For information on the constraints for each parameter used in this command, go
+2. The max size for a `Group` is 5 `Students`.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
