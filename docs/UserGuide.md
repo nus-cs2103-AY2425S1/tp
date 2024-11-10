@@ -121,6 +121,7 @@ Constraints:
 * Tags must be at most 40 characters long, and must be alphanumeric
 * Maximum length for a name is 256 characters long, and must be alphanumeric
 * Maximum phone number is 16 numbers
+* Phone numbers with area codes (e.g. +65) are not supported.
 * Maximum email length is 256 characters
 <box type="tip" seamless>
 **Tip:** A student can have any number of tags (including 0)
@@ -174,6 +175,7 @@ Constraints:
 * Tags must be at most 40 characters long, and must be alphanumeric
 * Maximum length for a name is 256 characters long, and must be alphanumeric
 * Maximum phone number is 16 numbers
+* Phone numbers with area codes (e.g. +65) are not supported.
 * Maximum email length is 256 characters
   <box type="tip" seamless>
   **Tip:** A student can have any number of tags (including 0)
