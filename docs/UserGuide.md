@@ -286,7 +286,7 @@ You can add the prefixes in any order you want!
 
 ### Listing all events: `list event`
 
-This command allows us to view a list of all events on TalentHub!
+This command allows you to view a list of all events on TalentHub!
 
 Format: `list event`
 
@@ -384,7 +384,7 @@ Examples:
 
 ### Deleting an event : `delete event`
 
-This command allow you to delete the specified event from the list of events on TalentHub!
+This command allows you to delete the specified event from the list of events on TalentHub!
 
 Format: `delete event INDEX`
 
