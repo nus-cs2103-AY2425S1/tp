@@ -663,6 +663,7 @@ markCustomerOrder 1
 ```
 ![markcustomerorderui.png](images/markcustomerorderui.png)
 
+**Note:** Orders are arranged from top (pending orders) to bottom (completed orders), hence marking an order will cause it to go the bottom of the supply order list.
 ### **Mark Supply Order Command**
 Mark the supplier order status as done.
 
@@ -677,7 +678,7 @@ markSupplyOrder INDEX
 markSupplyOrder 1
 ```
 ![marksupplyorderui.png](images/marksupplyorderui.png)
-
+**Note:** Orders are arranged from top (pending orders) to bottom (completed orders), hence marking an order will cause it to go the bottom of the customer order list.
 ### ***Remark Command***
 Edits the remark of the person identified by the index number used in the last person listing. 
 The existing remark will be overwritten.
