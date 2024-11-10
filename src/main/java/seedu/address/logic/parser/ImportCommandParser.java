@@ -35,13 +35,12 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(
                 String.format("%s\n%s", MESSAGE_INVALID_PATH, ImportCommand.MESSAGE_USAGE));
         }
-        
+
         if (!args.trim().endsWith(".csv")) {
             throw new ParseException(
                 String.format("%s\n%s", MESSAGE_INVALID_FILE_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
 
-        
         return new ImportCommand(path);
 
     }
