@@ -182,6 +182,7 @@ Below are additional notes regarding certain prefixes. Please keep these in mind
 6. Names can consist only of numbers, but use caution, as this may cause confusion when displayed alongside the client's index.
 7. Allowable Edge Cases: Names can include single characters or initials (e.g. `n/A` is valid). While this is allowed, single-letter names might be confusing in lists with similar entries (e.g. `n/A`, `n/B`, etc.).
 8. Names with excessive leading or trailing spaces are treated as names withouit (e.g. `n/Alice Johnson               ` = `n/Alice Johnson`).
+9. There is a known issue with the n/ prefix. Please refer to the [Known Issues](#known-issues) section.
 
 ##### p/
 1. It is permissible for different clients to have the same phone number.
@@ -1067,6 +1068,7 @@ Furthermore, certain edits can cause EZSTATE to **behave in unexpected ways** (e
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **For the n/ prefix**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen).
 
 --------------------------------------------------------------------------------------------------------------------
 
