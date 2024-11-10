@@ -176,7 +176,7 @@ The `Model` component handles the data and state management for the app, storing
     * **Data Storage**:
         * Maintains address book data, including lists of `Person`, `Wedding`, `Tag` and `Task` objects.
     * **Filtered Views**:
-        * Provides filtered lists of `Person`, `Wedding`, `Tag` and `Task` objects (e.g., search results), exposing these as unmodifiable `ObservableList`s. This allows the UI to automatically update in response to changes.
+        * Provides filtered lists of `Person` objects (e.g., search results), exposing these as unmodifiable `ObservableList`s. This allows the UI to automatically update in response to changes.
     * **User Preferences**:
         * Stores user preferences in a `UserPref` object, which is accessible externally as `ReadOnlyUserPref`.
     * **Independence**:
@@ -231,22 +231,22 @@ The force feature is applicable for the following commands:
 * `Assign Wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
 * `Delete Wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
 
-The force functionality can be used with the above functions by including f/ at the end of the command. Additional inputs following the f/ is extraneous and would be discarded.
+The force functionality can be used with the above functions by including f/ at the end of the command. Additional inputs following the f/ are extraneous and would be discarded.
 
-Example usage: delete-tag t/Tag1 f/
+Example usage: delete-tag t/Photographer f/
 
-Step 1. The user excutes `delete-tag t/Tag1 f/`.
+Step 1. The user executes `delete-tag t/Photographer f/`.
 
 Step 2. The parser will search through the user input to find f/. f/ is implemented as a `Prefix`. User inputs after f/ will be ignored.
 
 Step 3. The parser will construct the `DeleteTagCommand` differently based on the presence of the force flag.
 
-Step 4. During `DeleteTagCommand#execute()`, the force flag is checked. If present, it unassigns all `Person` with the `Tag` tag1 before deleting tag1.
+Step 4. During `DeleteTagCommand#execute()`, the force flag is checked. If present, it unassigns all `Persons` with the `Tag` Photographer before deleting Photographer.
 
 ### Tag Feature
 
 The Tag Feature allows users to store additional details of a Person in WedLinker.
-Tags would support the following functions:
+Tags support the following functions:
 
 * `Create Tag` — Creates a `Tag` in WedLinker to be used as additional information of any `Person`.
 * `Tag` — Assigns `Tag` to a `Person.
@@ -259,17 +259,18 @@ Given below is an example usage scenario and how Tags are used in WedLinker.
 
 Step 1. The user launches the application, `Tags` are loaded into the `Model`.
 
-Step 2. The user executes `create-tag t/Photographer`. WedLinker will create a Tag based on the name provided. In this case: `Photographer`.
+Step 2. The user executes `create-tag t/Photographer`. WedLinker will check if `Photographer` already exist. 
+WedLinker will create a Tag based on the name provided if the `Tag` does not exist. In this case: `Photographer`.
 
 Step 3. The user executes `tag 1 t/Photographer` to tag the first `Person` with `Photographer`.
 
-Step 4. To view the Tags in WedLinker, use `list-tags`. This will switch the right panel to a Tag view.
+Step 4. The user executes `list-tags` to view all `Tags` in WedLinker. This will switch the right panel to a Tag view.
 
 Step 5. The user executes `find t/Photographer` to find all `Person` that has the tag of `Photographer`.
 
-Step 6. The user executes `untag 1 t/Photographer`. WedLinker would remove the `Photographer` tag from the first person.
+Step 6. The user executes `untag 1 t/Photographer`. WedLinker removes the `Photographer` tag from the first person.
 
-Step 7. The user executes `delete-tag t/Photographer`. WedLinker would delete the `Photographer` tag.
+Step 7. The user executes `delete-tag t/Photographer`. WedLinker deletes the `Photographer` tag.
 
 <box type="info" seamless>
 Tag supports the force functionality for easier usage.
@@ -281,8 +282,8 @@ Force is supported for the following functions:
 
 <box type="warning" seamless>
 Known bugs:
-- Tag names have a limited length and would overflow in the People view. No issues to functionality. 
-  If long tags are required, it can be viewed with the `list-tags` command.
+- Tag names with very long names overflow in the People view. No issues to functionality. 
+  Longer tag names can be viewed as truncated in the Tag view. Tag view can be accessed using the list-tags command.
   Alternatively, use `Task` to write longer information.
 </box>
 
@@ -328,9 +329,8 @@ Force is supported for the following functions:
 
 <box type="warning" seamless>
 Known bugs:
-- Editing Wedding names does not update the name of the Wedding when viewing the Person card.
-- Wedding names have a limited length and would overflow in the People view. No issues to functionality.
-  If long Wedding names are required, it can be viewed with the `list-weddings` command.
+- Wedding names with very long names overflow in the People view. No issues to functionality. 
+  Longer Wedding names can be viewed as truncated in the Wedding view. Wedding view can be accessed using the list-weddings command.
 </box>
 
 ### Vendors
@@ -891,10 +891,14 @@ feature freeze. The plans to improve our features are as such.
 
 1. There is a small GUI bug that causes the overflow of names for Tags and Weddings which causes cosmetic flaws.
 Planned enhancements would be to truncate the name with `...`.
-2. There is a duplicate validation bug that allows the creation of duplicate Person, Wedding, Tag, Task, Tags.
+2. There is a duplicate validation bug that allows the creation of certain "duplicate" Person, Wedding, Tag, Task, Tags.
+For example, John Doe and John  Doe, would be considered duplicates although in the real world, the user likely refers to
+the same person.
 Planned enhancements would be to ensure parser strips all whitespace except one between the keywords before creating the
 respective command objects.
 3. There is a missing validation in unassign-task command that negates the check of whether a Person is a vendor, resulting 
-in an incorrect error message to be shown. However, there is no functionality flaws and application runs as intended.
+in an incorrect error message to be shown.
+The error message indicates that there are no tasks in the person's list, rather than indicating that the person is not a Vendor.
+However, there is no functionality flaws and application runs as intended.
 Planned enhancements would be to add validation to ensure the target person is a Vendor and show a more indicative error
 message.
