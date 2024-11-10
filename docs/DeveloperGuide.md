@@ -18,7 +18,9 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 * We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
 * ChatGPT was used to check for errors and generate some test cases.
-* We referred to our TA's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide
+  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java
+  * It was also used for the usage of `.getStyleClass()` & `.add()` methods in PersonCard.java to display the information clearly.
+* We referred to our TA (Wu Xiaoyun) team's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide.
 
 ---
 
@@ -82,7 +84,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -101,7 +103,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -144,7 +146,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -167,7 +169,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -588,6 +590,15 @@ Duplicate names)
 {{ newPage }}
 
 ---
+
+## **Appendix: Planned Enhancements**
+
+Team member count: 5
+
+1. **Implement commands to add/edit assignment details:** Currently, one has to edit the `kontacts.json` file manually to add or remove assignment details. We are planning to create commands which can add/edit assignment details (such as assignment name `Ex04` and its respective `maxGrade` fields) to the `assignment.json` file. This is to make the adding/editing of new assignments easier for the TAs.
+2. **Include validation for telegram ID:** In future updates, we are planning to provide proper telegram ID validation to ensure that there can not be two people with the same telegram IDs.
+3. **Add flexibility to attendance:** Currently, the maximum number of weeks that can be inputted is 13 since there are 13 weeks in a semester. However, we plan for the TA to edit this for his/her preference especially since special terms are also present.
+
 
 ## **Appendix: Instructions for manual testing**
 
