@@ -114,7 +114,7 @@ public class SortCommand extends Command {
             return Double.compare(p1TagDouble, p2TagDouble);
         }
         if (p1TagDouble == null && p2TagDouble == null) {
-            return p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue);
+            return p1Tag.get().tagValue.compareToIgnoreCase(p2Tag.get().tagValue);
         }
         return (p1TagDouble != null)
                 ? -1
