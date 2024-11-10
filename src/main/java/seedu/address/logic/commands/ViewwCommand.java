@@ -94,8 +94,8 @@ public class ViewwCommand extends Command {
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
-                    lastShownList.size()));
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX, targetIndex.getOneBased(), lastShownList.size()));
         }
         Wedding weddingToView = lastShownList.get(targetIndex.getZeroBased());
         model.updateFilteredWeddingList(p -> p.equals(weddingToView));

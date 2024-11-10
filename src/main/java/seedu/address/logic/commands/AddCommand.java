@@ -44,9 +44,6 @@ public class AddCommand extends Command {
             + PREFIX_WEDDING + "1";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
-    public static final String MESSAGE_PHONE_EXIST = "This number already exists in the address book";
-    public static final String MESSAGE_EMAIL_EXIST = "This email already exists in the address book";
     public static final String MESSAGE_WEDDING_DOES_NOT_EXIST = "Wedding %d is not in the list.";
 
 
@@ -67,13 +64,13 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_CONTACT);
         }
         if (model.hasPhone(toAdd)) {
-            throw new CommandException(MESSAGE_PHONE_EXIST);
+            throw new CommandException(Messages.MESSAGE_PHONE_EXIST);
         }
         if (model.hasEmail(toAdd)) {
-            throw new CommandException(MESSAGE_EMAIL_EXIST);
+            throw new CommandException(Messages.MESSAGE_EMAIL_EXIST);
         }
 
         generateWeddingJobs(model);

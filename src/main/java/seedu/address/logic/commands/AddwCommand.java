@@ -40,11 +40,11 @@ public class AddwCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
-    public static final String MESSAGE_ALREADY_A_CLIENT = "This person is already a client for another wedding";
+    public static final String MESSAGE_ALREADY_A_CLIENT = "This person is already a client for another wedding.";
 
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to set as client.\n"
-                    + "Find the index from the list below and type edit INDEX ...\n"
+                    + "Find the index from the list below and type c/INDEX ...\n"
                     + "Example: " + COMMAND_WORD + "n/WEDDING NAME c/1 ...";
 
     private final Index index;
@@ -136,8 +136,8 @@ public class AddwCommand extends Command {
         }
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    lastShownList.size()));
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased(), lastShownList.size()));
         }
 
         return lastShownList.get(index.getZeroBased());

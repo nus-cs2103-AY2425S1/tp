@@ -20,16 +20,16 @@ public class Messages {
 
     // Parsing Messages
     // Parse by index usages
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid, please "
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index %d provided is invalid, please "
             + "enter an index that is between 1 and %1$d";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX =
-            "The wedding index provided is invalid, please "
+            "The wedding index %d provided is invalid, please "
             + "enter an index that is between 1 and %1$d";
     // Parse by name usages
     public static final String MESSAGE_INVALID_PERSON = "This person does not exist in the address book";
 
 
-    // List Messages
+    // List Command Messages
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_PERSONS_LISTED_NAME_OVERVIEW = "%1$d persons listed with name %2$s!";
 
@@ -37,6 +37,11 @@ public class Messages {
     // Duplicate Messages
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
+    public static final String MESSAGE_PHONE_EXIST = "This number already exists in the address book";
+    public static final String MESSAGE_EMAIL_EXIST = "This email already exists in the address book";
+
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
