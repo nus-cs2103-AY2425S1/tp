@@ -982,6 +982,22 @@ Users may not find their intended client if they do not explicitly state the exa
 We plan to enhance the search feature to allow partial matches on numeric values regardless of punctuation or spacing. 
 This enhancement will improve the user experience by showing relevant contact details even if the input includes numbers adjacent to punctuation marks.
 
+### 3. Enhance Export Feature to Handle Export Errors.
+
+**Feature Flaw in Current Implementation**
+
+At present, the PROperty does not indicate to the user when an export fails (e.g. If the user exports a csv file and opens it, 
+then edits information using the app and exports the csv again, 
+the second export will cause an error and the new CSV file will not be correctly exported.
+However, the PROperty GUI reflects that a second export command has been successfully executed, 
+even though the console shows that an error has been thrown.)
+
+**Proposed Enhancement**
+
+We plan to enhance the export feature by implementing error handling should there be a failed export. 
+This enhancement will improve the user experience by informing the user when their export has failed,
+and prevent confusion when the user checks their CSV file to find there has been no updates to its contents.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix C: Instructions for Manual Testing**
