@@ -183,6 +183,8 @@ Examples:
   - Edits the class and phone number of the 1st student to be `A11` and `91234567` respectively.
 - `edit 2`
   - Returns `At least one field to edit must be provided.`
+- `edit 1 c/W-08`
+  - Returns `Student's class names cannot be empty and should be alphanumeric`
 
 <div style="page-break-after: always"></div>
 
@@ -277,6 +279,8 @@ Examples:
   - Successfully tags 1st student to `needs consult` tag and `quiet` tag
 - `tag 1 t/QUIET`
   - Returns `Tag(s) already exist`
+- `tag 100 t/hardworking`
+  - If contains fewer than 100 students, returns `The person index provided is invalid`
 
 <div style="page-break-after: always"></div>
 
@@ -318,6 +322,8 @@ Examples:
   - Successfully deletes the 2nd person in the Goon book.
 - `find Betsy` followed by `delete 1`
   - Successfully deletes the 1st person in the results of the `find` command.
+- `delete 100`
+  - If contains fewer than 100 students, returns `The index provided is greater than the max students`
 
 <div style="page-break-after: always"></div>
 
@@ -362,6 +368,9 @@ Format: `import CSV_FILE_LOCATION`
 
 Examples:
 - `import /Users/martin/CODE/tp/data/exported_data.csv`
+  - Successfully imports data
+- `import /invalid/path`
+  - Returns `Invalid path!`
 
 <div style="page-break-after: always"></div>
 
