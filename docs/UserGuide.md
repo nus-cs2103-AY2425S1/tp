@@ -639,12 +639,16 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
    - **Solution**: For optimal use, we recommend a screen resolution of at least 1280x720 pixels and maintaining a minimum window size for clarity.
 
 4. **Long Tag Handling**: When adding an excessively long tag, it may hide other tags in the display rather than wrapping or truncating.
-   - **Solution**: Avoid using overly long tags. Optimally, long tags should truncate with an ellipsis (`...`) once they reach the edge of the GUI. See example below:
+   - **Solution**: Avoid using overly long tags. Optimally, long tags should truncate with an ellipsis (`...`) once they reach the edge of the GUI.
 
-     **Example Input:**
-     ```
-     edit S7012345B t/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-     ```
+5. **Phone Number Field Length**: The phone number field allows for very long entries, which may not be practical. The field currently accepts a minimum of 3 digits, which is shorter than standard international phone numbers.
+   - **Workaround**: For best results, enter phone numbers within a typical range of 7–15 digits. Numbers exceeding 15 digits may not display or function as expected.
+
+
+
+
+
+
 
 ---
 
