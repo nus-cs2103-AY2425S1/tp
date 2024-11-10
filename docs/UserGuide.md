@@ -329,14 +329,15 @@ Format: `delete-wedding w/WEDDINGNAME [f/]`
 
 ### Creating a Task : `create-task`
 
-Creates a `Task` in WedLinker
+Creates one or more `Task` in WedLinker.
 
-Format: `create-task tk/TASKDESCRIPTION [REMARKS]`
+Format: `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]`
 
+* Creates one or more `Task` in Wedlinker
 * Tasks may have no dates, a single date indicating a deadline, or two dates to define a start and end period.
-* The dates can be specified under `REMARKS` with the format `d/YYYY-MM-DD`
+* The dates must be specified with the format `d/YYYY-MM-DD`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
-* Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task-) command.
+* You can assign tasks to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task-) command.
 
 ### Delete a Task : `delete-task`
 
@@ -349,43 +350,51 @@ Format: `delete-task INDEX`
 
 ### Assigning a Task to a contact : `assign-task` 
 
-Format: `assign-task PERSONINDEX TASKINDEX`
+* Assigns one or more `Task` to a contact.
 
-* Assigns a `Task` to a contact.
+Format: `assign-task PERSONINDEX TASKINDEX [ADDITIONAL_TASKINDEX...]`
+
+* Assigns one or more `Task` to a contact based on the indexes specified.
 * The indexes correspond to the indexes when in the [list-tasks](#listing-all-tasks--list-tasks) view.
 * The `PERSONINDEX` refers to the index of the person shown under the **People** column.
 * The `TASKINDEX` refers to the index of the task shown under the **Tasks** column
-* The indexes **must be positive integers** 1, 2, 3, …​.
+* The index **must be a positive integer** 1, 2, 3, …​.
 
 ### Un-assigning a Task from a contact : `unassign-task` 
 
-Format: `unassign-task PERSONINDEX TASKINDEX_OFPERSON`
+* Un-assigns one or more `Task` from a contact.
 
-* Un-assigns a `Task` from a contact.
+Format: `unassign-task PERSONINDEX TASKINDEX_OFPERSON [ADDITIONAL_TASKINDEX_OFPERSON...]`
+
+* Un-assigns one or more `Task` from a contact.
 * The `PERSONINDEX` is the index of the person shown in the displayed person list.
 * The `TASKINDEX_OFPERSON` is the index of the task associated with the selected person.
-* The indexes **must be positive integers** 1, 2, 3, …​.
+* The index **must be a positive integer** 1, 2, 3, …​.
 
 ### Mark a task as completed : `mark-task` 
 
-Format: `mark-task TASKINDEX`
+* Marks one or more `Task` as completed.
 
-* Marks a `Task` as completed.
+Format: `mark-task TASKINDEX [ADDITIONAL_TASKINDEX...]`
+
+* Marks one or more `Task` as completed based on the indexes specified.
 * The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
-* The index **must be a positive integers** 1, 2, 3, …​.
+* The index **must be a positive integer** 1, 2, 3, …​.
 
 ### Un-mark a task  : `unmark-task` 
 
-Format: `unmark-task TASKINDEX`
+* Marks one or more `Task` as not completed.
 
-* Marks a `Task` as not completed.
+Format: `unmark-task TASKINDEX [ADDITIONAL_TASKINDEX...]`
+
+* Marks one or more `Task` as not completed based on the indexes specified.
 * The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
-* The index **must be a positive integers** 1, 2, 3, …​.
+* The index **must be a positive integer** 1, 2, 3, …​.
 
 ## Vendor Features
 
 ### Assigning a Vendor : `assign-vendor`
-Format: `assign-venor PERSONINDEX`
+Format: `assign-vendor PERSONINDEX`
 
 * Assigns an existing `Person` at the specified `Index` to become a `Vendor`.
 * The `Vendor` now can have `Tasks` assigned to it.
@@ -423,7 +432,7 @@ Action     | Format, Examples
 **Assign Wedding**    | `assign-wedding PERSON_INDEX w/WEDDING…​` or `asw PERSON_INDEX w/WEDDING…​` <br> e.g., `asw 2 w/Casey's Wedding w/Wedding August 29th`
 **Clear**  | `clear`
 **Create Tag**  | `create-tag t/TAG` or `ctag t/TAG` <br> e.g., `create-tag t/photographer`
-**Create Task**  | `create-task tk/TASK_TYPE TASK_DETAILS` or `ctask tk/TASK_TYPE TASK_DETAILS` <br> e.g., `create-task tk/todo Order Wedding Cake` <br> `create-task tk/event Meet Caterer /from 2024-11-19 /to 2024-11-20` <br> `create-task tk/deadline Book Venue /by 2025-02-01`
+**Create Task**  | `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` or `ctask tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` <br> e.g., `create-task tk/Order Wedding Cake` <br> `create-task tk/Book Venue d/2025-02-01` <br> `create-task tk/Meet Caterer d/2024-11-19 d/2024-11-20`
 **Create Wedding**  | `create-wedding w/WEDDING` or `cw w/WEDDING` <br> e.g., `cw w/JJ's Wedding`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `delete-tag t/TAG` or `dtag t/TAG` <br> e.g., `delete-tag t/photographer`
@@ -437,6 +446,8 @@ Action     | Format, Examples
 **List**   | `list`
 **List Weddings**   | `list-weddings` or `lw`
 **List Tasks**   | `list-tasks` or `lt`
+**Mark Task**   | `mark-task TASKINDEX [ADDITIONAL_TASKINDEX...]` or `mtask TASKINDEX [ADDITIONAL_TASKINDEX...]` <br> e.g., `mark-task 1 ` <br>  `mark-task 1 2 3`
 **Tag**   | `tag INDEX [t/TAG]…​` <br> e.g., `tag 2 t/florist t/photographer`
 **Unassign Wedding**    | `unassign-wedding PERSON_INDEX w/WEDDING…​` or `uw PERSON_INDEX w/WEDDING…​` <br> e.g., `uw 2 w/John's Wedding`
+**Unmark Task**   | `unmark-task TASKINDEX [ADDITIONAL_TASKINDEX...]` or `untask TASKINDEX [ADDITIONAL_TASKINDEX...]` <br> e.g., `unmark-task 1 ` <br>  `unmark-task 1 2 3`
 **Untag**   | `untag INDEX [t/TAG]…​` <br> e.g., `untag 4 t/available t/chef`
