@@ -999,9 +999,6 @@ Java `11` or above installed.
 3. **Candidate Profile**:
 - A record containing all relevant details about a job applicant, including contact information, skills, experience, and interview notes.
 
-4. **Interview Schedule**:
-- The process of setting a date and time for a job applicant to be interviewed by the recruiter or hiring manager.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
