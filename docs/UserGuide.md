@@ -420,6 +420,19 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 - **Special Comments**
 1. Refer to the remarks and constraints for the following prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t).
 
+#### Show Clients
+- **Command:** `showclients`
+- **Description:** Displays all clients in the system.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Displaying all clients in the system
+> 
+> **Input**: `showclients`
+> 
+> **Output**: Here are your clients!
+> 
+> ---
+
 #### Find
 - **Command:** `find KEYWORD [KEYWORD]...`
 - **Description:** Finds the specified client(s) based on the provided keywords.
@@ -557,6 +570,8 @@ Phone number: 977774444 and Email: bobby123@gmail.com`
 
 - **Special Comments**
 1. Refer to [INDEX](#reference-types) constraints.
+
+
 
 ---
 
@@ -724,7 +739,8 @@ Commands for managing property listings and associating clients with listings.
 > ---
 
 - **Failed Execution:** NIL
-- **Special Comments:** NIL
+- **Special Comments:**
+1. You are able to show an empty list of listings, as per Successful Execution Use Case #2
 
 #### Add Buyers to Listing
 - **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
@@ -848,6 +864,9 @@ Commands for managing property listings and associating clients with listings.
 > 
 > ---
 
+- **Special Comments**
+1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints for the following prefix: [buy/](#sel--buy)
+
 #### Delete Listing
 - **Command:** `deletelisting INDEX`
 - **Description:** Deletes a specified listing.
@@ -870,6 +889,9 @@ Commands for managing property listings and associating clients with listings.
 > **Output**: This listing does not exist in EZSTATE
 >
 > ---
+
+- **Special Comments**
+1. Refer to [INDEX](#reference-types) constraints.
 
 #### Clear Listing
 - **Command:** `clearlistings`
