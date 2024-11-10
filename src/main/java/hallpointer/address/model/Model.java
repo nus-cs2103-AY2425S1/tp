@@ -84,13 +84,21 @@ public interface Model {
      */
     void setMember(Member target, Member updatedMember);
 
-    /** Returns an unmodifiable view of the filtered member list */
-    ObservableList<Member> getFilteredMemberList();
-
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMemberList(Predicate<Member> predicate);
+
+    /** Returns an unmodifiable view of the filtered member list */
+    ObservableList<Member> getFilteredMemberList();
+
+    /**
+     * Returns the number of times a member with the same identity as {@code member} exists in HallPointer.
+     *
+     * @param member The member to count occurrences of.
+     * @return The number of times the member appears in HallPointer.
+     */
+    int countMemberOccurrences(Member member);
 }

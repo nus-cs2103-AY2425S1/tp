@@ -96,16 +96,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteMember(Member target) {
-        requireNonNull(target);
-        hallPointer.removeMember(target);
-    }
-
-    @Override
     public void addMember(Member member) {
         requireNonNull(member);
         hallPointer.addMember(member);
         updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
+    }
+
+    @Override
+    public void deleteMember(Member target) {
+        requireNonNull(target);
+        hallPointer.removeMember(target);
     }
 
     @Override
@@ -124,6 +124,18 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Member> getFilteredMemberList() {
         return filteredMembers;
+    }
+
+    /**
+     * Returns the number of times a member with the same identity as {@code member} exists in HallPointer.
+     *
+     * @param member The member to count occurrences of.
+     * @return The number of times the member appears in HallPointer.
+     */
+    @Override
+    public int countMemberOccurrences(Member member) {
+        requireNonNull(member);
+        return hallPointer.countMemberOccurrences(member);
     }
 
     @Override

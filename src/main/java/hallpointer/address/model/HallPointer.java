@@ -94,14 +94,16 @@ public class HallPointer implements ReadOnlyHallPointer {
         members.remove(member);
     }
 
-    //// util methods
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("members", members)
-                .toString();
+    /**
+     * Wraps all data at the hall-pointer level
+     * Duplicates are not allowed (by .isSameMember comparison)
+     */
+    public int countMemberOccurrences(Member member) {
+        requireNonNull(member);
+        return members.countOccurrences(member);
     }
+
+    //// util methods
 
     @Override
     public ObservableList<Member> getMemberList() {
@@ -125,5 +127,12 @@ public class HallPointer implements ReadOnlyHallPointer {
     @Override
     public int hashCode() {
         return members.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("members", members)
+                .toString();
     }
 }
