@@ -71,6 +71,13 @@ again, type `help` and press Enter.
 
 7. Refer to the [Features](#features) below for details of each command.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+When you first use AcademyAssist, some sample student contacts have been added to help you familiarise yourself with
+our features. Once you are ready to manage your tuition center's students, simply use the clear command
+to clear all existing contacts and reset the StudentID. Please note that this action is IRREVERSIBLE! 
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
@@ -139,11 +146,11 @@ contact will be treated as a duplicate and will not be allowed.
 * `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
   secondary school years 7 - 13).
 * `PHONE_NUMBER` should only contain number. It should be between 4 and 20 digits long with no spaces in between.
-* `EMAIL` should follow the format username@domain.
+* `EMAIL` should follow the format username@domain. 
 * `ADDRESS` allow any characters and should not be empty. The maximum length is 300 characters including spaces in 
 between. 
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the `s\` field. Only subjects that are 
-available within the tuition centre will be allowed.
+available within the tuition center will be allowed.
 * `[MORE_SUBJECTS]` is optional and can be repeated to add more subjects.
 <div markdown="span" class="alert alert-note">:memo: **Note:**
 Repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject 
@@ -158,6 +165,11 @@ Examples:
 * `add n\John Doe i\S1234567A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`
 
 ![Add Success Message](/images/add.png)
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Some contact fields such as address and email are intentionally hidden to avoid cluttering of information. To view all 
+the details of a student, you can use the [detail command] (#viewing-a-students-detail--detail).
+
+</div>
 
 ### Deleting a student : `delete`
 
@@ -368,7 +380,7 @@ are taking each of the subjects.
 ## Utility Features
 ### Clearing all entries : `clear`
 
-Clears all student entries from the system.
+Clears all student entries from the system, and resets the studentID count to S00001.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This action is irreversible. All student entries will be deleted permanently.
