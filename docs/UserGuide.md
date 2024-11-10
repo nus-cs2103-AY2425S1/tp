@@ -247,7 +247,7 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
 #### Wedding Fields
 
 - **Wedding Name**:
-    - Cannot be blank 
+    - Cannot be blank
     - Must follow same restrictions as Person names:
            - Maximum 70 characters
            - Can only contain alphabets, spaces, apostrophes (') and hyphens (-)
@@ -424,13 +424,13 @@ Finds persons whose names contain any of the given keywords.
 
 Displays detailed information about a specified person.
 
-- **Formats**: 
+- **Formats**:
   - By Index: `view INDEX`
   - By Name: `view NAME`
 - **Notes**:
     - Case-insensitive matching.
     - Matches names containing the entire keyword.
-    - Wedding list is only updated when one unique person is found. 
+    - Wedding list is only updated when one unique person is found.
     - When multiple matches are found, only the person list is updated
 - **Information Displayed**:
     - Personal details (name, phone, email, address).

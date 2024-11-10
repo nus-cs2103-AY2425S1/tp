@@ -335,7 +335,7 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
     - **1e1.** Error message displayed in result display.
         - Use case ends.
 - **1f.** Role is not one word
-    - **1f1.** Error message is displayed in result display.  
+    - **1f1.** Error message is displayed in result display.
 - **1g.** Wedding is blank when prefix is inputted, or is not one word
     - **1g1.** Error message is displayed in result display.
 - **1h.** Wedding field is not an index.
@@ -541,7 +541,7 @@ Success action: Details of edited contact shown in the status message, person in
    1. Test case: `edit`<br>
       Test case: `edit 1`<br>
       Expected: No person is edited. `edit` command format is shown in the status message.
-    
+
    1. Test case: `edit 0 [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]`<br>
       Test case: `edit x [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]` (where x is a negative number) <br>
       Expected: No wedding added. `edit` command format is shown in the status message.
@@ -586,7 +586,7 @@ Success action: Details of edited contact shown in the status message, person in
 
 ### Viewing a person
 
-Success action: When a person is successfully viewed, the details of the viewed contact is shown in the person list. Status message shows that that contact is viewed. 
+Success action: When a person is successfully viewed, the details of the viewed contact is shown in the person list. Status message shows that that contact is viewed.
 The weddings involved of the person will be reflected in the wedding list on the right.
 
 #### Viewing with INDEX
@@ -605,7 +605,7 @@ The weddings involved of the person will be reflected in the wedding list on the
        Expected: Error message prompting the user to choose an index within the range shown.
 
     1. Other incorrect view commands to try: `view`, `view x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii). 
+       Expected: Similar to point #1(iii).
 
 1. Viewing a person while a partial list of contacts is shown.
 
@@ -702,7 +702,6 @@ The weddings involved of the person will be reflected in the wedding list on the
 
     1. Test cases used can be the same since `filter` searches from the entire list of contacts, rather than only the partial list.
 
-    
 ### Adding a Wedding
 Success action: When wedding is successfully added, the details of the added wedding is shown in the status message and reflected in the wedding list.
 
@@ -776,7 +775,7 @@ Success action: When wedding is successfully edited, the details of the updated 
 ### Viewing weddings
 
 Success action: When wedding is successfully viewed, the details of the viewed wedding is shown in the status message and reflected in wedding list.
-The persons involved in the viewed wedding will be shown in the person list. 
+The persons involved in the viewed wedding will be shown in the person list.
 
 #### Viewing weddings using INDEX
 
@@ -796,7 +795,7 @@ The persons involved in the viewed wedding will be shown in the person list.
     1. Other incorrect vieww commands to try: `vieww`, `vieww x` (where x is a negative integer)<br>
        Expected: Similar to point #1(iii).
 
-1. Viewing of a wedding while a partial list of weddings is shown. 
+1. Viewing of a wedding while a partial list of weddings is shown.
 
     1. Prerequisite: List some of the weddings using `vieww NAME` command, where a partial list of weddings that matches NAME will be shown, assuming there are multiple of such weddings.
 
@@ -877,7 +876,7 @@ Success action: When a person is successfully assigned:
 
     1. Test case: `assign x r/photographer` (where x is an invalid index (< 0, 0 , larger than list size)))<br>
        Expected: Error message shown about invalid person index.
-   
+
     1. Test case: `assign 1 r/`<br>
        Expected: Role of first person in list is removed. Success action carried out
 
@@ -952,7 +951,7 @@ Success action: When a person is successfully assigned:
     1. Test case: `assign 1 w/1 w/2`<br>
        Expected: Error message about already being assigned to wedding 1.
 
-### Removing wedding jobs assigned to a person 
+### Removing wedding jobs assigned to a person
 
 #### Removing with INDEX of person list and wedding list
 
