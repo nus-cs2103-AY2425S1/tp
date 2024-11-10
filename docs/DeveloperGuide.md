@@ -503,4 +503,4 @@ testers are expected to do more *exploratory* testing.
 
 2. Dealing with corrupted data files 
    1. Add a new field `"newField" : "newField"` to a client. Expected: All data is lost. The app starts on a clean slate.
-   2. Remove `"remark"` field from a client. Expected: The client with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
+   2. Remove `"insurancePlans"` field from a client. Expected: All data is lost. The app starts on a clean slate.
