@@ -46,7 +46,7 @@ tasks done faster than traditional GUI apps.
 1. Type commands in the command box and press Enter to execute them. e.g. typing **`help`** and pressing Enter will open the help window. 
    Some example commands you can try:
 
-   * `add n/John David p/98765432 e/johnd@gmail.com a/Jurong East, Block 71, #04-19, 672381` : Adds a contact named `John David` with the specified details to your contacts.
+   * `add n/John David p/98765432 e/johnd@gmail.com a/Jurong East, Block 71, #04-19, 672381` : Adds a [contact](#contact) named `John David` with the specified details to your contacts.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list in view.
    
@@ -193,6 +193,7 @@ Adds one or more tags to a specific contact in the address book.
 * Tags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
 * Tags specified in the command must be alphanumeric.
 * You can specify multiple tags in the same command by separating the tags with a space.
+* As such, each tag must be 1 word (i.e. does not contain spaces)
 * Adding a tag to a contact who already has the tag will show an error message.
 
 <box type="warning">
@@ -542,6 +543,14 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 <br><br/>
 
 <div style="page-break-after: always;"></div>
+
+## Glossary
+
+| Term                               | Explanation                                                                                                                                                                                            |
+|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <a id="contact">Person/Contact</a> | Used interchangeably. Represents a **unique** individual in the contact list. Contacts are considered duplicate if they have identical phone numbers.                                                  |
+| <a id="wedding">Wedding</a>        | Represents a **unique** wedding event in the contact list. Any number of contacts can be assigned to a Wedding.<br/>Weddings are considered duplicate if they have identical names (case-insensitive). |
+| <a id="tag">Tag</a>                | A short, one word descriptor that can be attached to a contact (max 6 per contact). Tags cannot have the name 'all' as it is a reserved keyword.                                                       | 
 
 ## Command summary
 
