@@ -222,9 +222,28 @@ A success message will be displayed if the supplier is successfully deleted.
 The `mark` command is used to mark a supplier as either **active** or **inactive**
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
 
+<box type="tip" seamless>
+
+**Tip:**
+- A supplier has a default status of `active`
+- A supplier with an `inactive` status signifies that the supplier is not currently active for deliveries. 
+However, marking an `active` supplier as `inactive` will not delete the delivery associated with the supplier from the delivery list 
+or affect the delivery status in any way.
+</box>
+
 Format: `mark -s SUPPLIER_INDEX STATUS`
 - `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
 - `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank.
+
+<box type="warning" seamless>
+
+**Warnings**:
+- A spacing between `mark` and `-s` is compulsory.
+- A spacing between `-s` and `SUPPLIER_INDEX` is compulsory.
+- A spacing between `SUPPLIER_INDEX` and `STATUS` is compulsory.
+- Both parameters must be given.
+- Parameters used are case-sensitive.
+</box>
 
 #### Example
 To mark the supplier at index 3 as active:
@@ -239,7 +258,7 @@ A success message will be displayed if the supplier is successfully marked as ac
 ### Find a supplier: `find -s`
 
 The `find -s` command is used to find a supplier in VendorVault. 
-This helps you find suppliers based on keyword search.
+This helps you to search for a supplier based on the supplier name, company, or product. 
 
 Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 
@@ -254,10 +273,19 @@ Parameters:
 **Warnings**:
 - At least one non-empty parameter must be given
 - No duplicate parameter can be used
-- Find result(s) will contain/satisfy all the given parameters
-- Find feature is case-insensitive
+- A spacing between `find` and `-s` is compulsory
+- A spacing between `-s` and the first parameter is compulsory
+- A spacing between each parameter and the next prefix is compulsory
+- Parameters used are case-insensitive
 </box>
 
+<box type="tip" seamless>
+
+**Tip:**
+- The find result(s) will contain/satisfy all the given parameters.
+- eg: If you execute the command `find -s n/link com/NU`, 
+the result will contain suppliers whose name contains "link" and company contains "NU" if any.
+</box>
 
 #### Example
 To find the supplier whose name contains "link" and company contains "NU":
@@ -270,18 +298,32 @@ To find the supplier whose name contains "link" and company contains "NU":
 
 ### Sort suppliers: `sort -s`
 
-The `sort -s` command is used to sort suppliers in VendorVault.
-This helps you to view the suppliers in a different order (ascending or descending), based on the supplier name.
+The `sort -s` command is used to sort suppliers according to the supplier name in VendorVault.
+This helps you to view the suppliers in a different order (ascending or descending).
 
 Format: `sort -s so/SORT_ORDER sb/SORT_BY`
-- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending.
+- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending. 
 - `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name)
+
+<box type="warning" seamless>
 
 **Warnings**:
 - A spacing between `add` and `-s` is compulsory
+- A spacing between `-s` and `so` is compulsory
+- A spacing between `SORT_ORDER` and `sb` is compulsory
 - All prefixes and parameters must be given
 - No duplicate prefix can be used
 - Parameters used are **case-sensitive**
+</box>
+
+<box type="tip" seamless>
+
+**Tip:**
+- The sort command will only sort all suppliers in VendorVault.
+- eg: 
+    - If you have searched for a supplier using the `find` command, 
+  the sort command will not sort the results of the `find` command.
+</box>
 
 #### Example
 To sort suppliers by name in descending order:
