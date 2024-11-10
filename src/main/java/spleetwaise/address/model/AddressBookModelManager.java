@@ -20,6 +20,8 @@ public class AddressBookModelManager implements AddressBookModel {
 
     private static final Logger logger = LogsCenter.getLogger(AddressBookModelManager.class);
 
+    private Predicate<Person> currPredicate = PREDICATE_SHOW_ALL_PERSONS;
+
     private final AddressBook addressBook;
     private final FilteredList<Person> filteredPersons;
 
@@ -67,7 +69,7 @@ public class AddressBookModelManager implements AddressBookModel {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPersonList();
     }
 
     @Override
@@ -89,8 +91,14 @@ public class AddressBookModelManager implements AddressBookModel {
     }
 
     @Override
+    public void updateFilteredPersonList() {
+        filteredPersons.setPredicate(currPredicate);
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        currPredicate = predicate;
         filteredPersons.setPredicate(predicate);
     }
 

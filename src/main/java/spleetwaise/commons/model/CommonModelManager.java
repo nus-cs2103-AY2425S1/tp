@@ -142,6 +142,12 @@ public class CommonModelManager implements CommonModel {
     }
 
     @Override
+    public void updateFilteredPersonList() {
+        requireNonNull(addressBookModel, "AddressBook model cannot be null");
+        addressBookModel.updateFilteredPersonList();
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(addressBookModel, "AddressBook model cannot be null");
         addressBookModel.updateFilteredPersonList(predicate);

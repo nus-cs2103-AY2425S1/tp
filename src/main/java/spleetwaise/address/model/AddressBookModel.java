@@ -49,6 +49,12 @@ public interface AddressBookModel {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Updates the filter of the filtered person list to reuse existing filter. By default, existing filter is show all
+     * person.
+     */
+    void updateFilteredPersonList();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.

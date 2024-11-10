@@ -103,6 +103,7 @@ public class EditCommandTest {
 
         AddressBookModel expectedModel = new AddressBookModelManager(
                 new AddressBook(model.getAddressBook()));
+        CommandTestUtil.showPersonAtIndex(expectedModel, TypicalIndexes.INDEX_FIRST_PERSON);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
