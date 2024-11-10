@@ -59,8 +59,6 @@ public class RightPanel extends UiPart<Region> {
     private Label youAreOwedLabel;
     @FXML
     private Button filterBtn;
-    @FXML
-    private CheckBox trackUndoneBalanceOnlyCheckBox;
 
     /**
      * Creates a {@code RightPanel} with the given {@code ObservableList<Transaction>} to display.
@@ -68,18 +66,12 @@ public class RightPanel extends UiPart<Region> {
     public RightPanel(CommandBox cb) {
         super(FXML);
 
-        // Initial balance track undone balance only
-        trackUndoneBalanceOnlyCheckBox.setSelected(true);
-
         commandBox = cb;
         CommonModelManager commonModel = CommonModelManager.getInstance();
 
         ObservableList<Transaction> txns = commonModel.getFilteredTransactionList();
         // Add listener to automatically update balances when the list changes
         txns.addListener((ListChangeListener.Change<? extends Transaction> c) -> updateBalances());
-        // Add listener to update balance whenever the checkbox changes
-        trackUndoneBalanceOnlyCheckBox.selectedProperty()
-                .addListener((observable, oldValue, newValue) -> updateBalances(newValue));
 
         // Initial balance update
         updateBalances();
@@ -97,21 +89,14 @@ public class RightPanel extends UiPart<Region> {
     }
 
     /**
-     * Updates the balance labels based on whether trackUndoneBalanceOnlyCheckBox is checked.
-     */
-    private void updateBalances() {
-        updateBalances(trackUndoneBalanceOnlyCheckBox.isSelected());
-    }
-
-    /**
      * Updates the balance labels based on the current transactions.
      */
-    private void updateBalances(boolean isTrackingUndoneBalanceOnly) {
+    private void updateBalances() {
         ObservableList<Transaction> txns = CommonModelManager.getInstance().getFilteredTransactionList();
 
         // Create predicates for each balance type (owe and owed)
-        FilterCommandPredicate youOweFilter = createBalanceFilter(isTrackingUndoneBalanceOnly, NEGATIVE_SIGN);
-        FilterCommandPredicate youAreOwedFilter = createBalanceFilter(isTrackingUndoneBalanceOnly, POSITIVE_SIGN);
+        AmountSignFilterPredicate youOweFilter = new AmountSignFilterPredicate(NEGATIVE_SIGN);
+        AmountSignFilterPredicate youAreOwedFilter = new AmountSignFilterPredicate(POSITIVE_SIGN);
 
         youOweLabel.setText(
                 "You Owe $" + calculateBalance(txns, youOweFilter).toString());
@@ -120,34 +105,13 @@ public class RightPanel extends UiPart<Region> {
     }
 
     /**
-     * Creates a filter predicate based on the undone status and amount sign.
-     *
-     * @param isTrackingUndoneBalanceOnly Whether to include only "undone" balances.
-     * @param sign                        The sign of the balance (positive for "owed" or negative for "owe").
-     * @return A FilterCommandPredicate to apply the specified filters.
-     */
-    private FilterCommandPredicate createBalanceFilter(boolean isTrackingUndoneBalanceOnly, String sign) {
-        ArrayList<Predicate<Transaction>> predicates = new ArrayList<>();
-
-        // Add status predicate if tracking only undone balances
-        if (isTrackingUndoneBalanceOnly) {
-            predicates.add(new StatusFilterPredicate(new Status(NOT_DONE_STATUS)));
-        }
-
-        // Add amount sign predicate
-        predicates.add(new AmountSignFilterPredicate(sign));
-
-        return new FilterCommandPredicate(predicates);
-    }
-
-    /**
      * General method to calculate balance based on a filtering condition.
      *
      * @param txns   The list of transactions to filter and sum.
-     * @param filter The combined predicate to filter transaction.
+     * @param filter The predicate to filter transaction.
      * @return The sum of amounts that match the filter condition.
      */
-    private BigDecimal calculateBalance(ObservableList<Transaction> txns, FilterCommandPredicate filter) {
+    private BigDecimal calculateBalance(ObservableList<Transaction> txns, Predicate<Transaction> filter) {
         return txns.stream()
                 .filter(filter)
                 .map(Transaction::getAmount)
