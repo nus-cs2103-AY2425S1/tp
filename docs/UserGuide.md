@@ -385,6 +385,11 @@ Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 <div class="alert alert-warning">
 <i>:warning:</i> <b>Warning:</b> CareLink is designed for independent geriatricians' office hours. All appointments must start and end on the same day. For patient safety and doctor work-life balance, overnight appointments are not supported.
 </div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Appointment start and end times are displayed in a format that includes a "T" between the date and time (e.g., `2025-01-01T10:00`). This "T" serves as a separator and is part of the standard ISO 8601 date-time format, which ensures consistency across systems.
+</div>
+
+
 
 **Common errors and their meanings:**
 
