@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -31,6 +32,8 @@ import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.exceptions.IllegalPersonTypeException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
@@ -105,7 +108,7 @@ public class EditCommand extends Command {
         } else if (personToEdit instanceof Parent parentToEdit) {
             editedPerson = createEditedPerson(parentToEdit, editPersonDescriptor);
         } else {
-            throw new IllegalArgumentException("Unsupported person type: " + personToEdit.getClass());
+            throw new IllegalPersonTypeException(personToEdit);
         }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -113,6 +116,9 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        editLinks(editedPerson, personToEdit, model);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_UNARCHIVED_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
@@ -150,6 +156,93 @@ public class EditCommand extends Command {
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedLessonTime, updatedEducation,
                 updatedGrade, updatedParentName, updatedTags, updatedIsPinned, updatedIsArchived);
+    }
+
+    private void editLinks(Person editedPerson, Person personToEdit, Model model) throws CommandException {
+        if (editedPerson instanceof Student) {
+            editLinksForStudent((Student) editedPerson, (Student) personToEdit, model);
+            return;
+        }
+
+        if (editedPerson instanceof Parent) {
+            editLinksForParent((Parent) editedPerson, model);
+            return;
+        }
+
+        throw new IllegalPersonTypeException(editedPerson);
+    }
+
+    private void editLinksForStudent(Student student, Student studentToEdit, Model model) throws CommandException {
+        Name parentName = student.getParentName();
+        if (parentName == null) {
+            return; // Student has no parent in AddressBook
+        }
+
+        try {
+            Person link = model.personFromName(parentName);
+            if (!(link instanceof Parent parent)) {
+                throw new CommandException("Invalid linked parent found: " + Messages.format(link));
+            }
+            Parent editedParent = createEditedParent(parent, student, studentToEdit);
+            model.setPerson(parent, editedParent);
+        } catch (PersonNotFoundException e) {
+            // Not supposed to reach here
+        }
+    }
+
+    private void editLinksForParent(Parent parent, Model model) throws CommandException {
+        Set<Name> childrenNames = parent.getChildrensNames();
+        Set<Student> children = new HashSet<>();
+
+        for (Name childName : childrenNames) {
+            try {
+                Person link = model.personFromName(childName);
+                if (!(link instanceof Student child)) {
+                    throw new CommandException("Invalid linked child found: " + Messages.format(link));
+                }
+                children.add(child);
+            } catch (PersonNotFoundException e) {
+                // Not supposed to reach here
+            }
+        }
+
+        for (Student child : children) {
+            Student editedChild = createEditedChild(child, parent);
+            model.setPerson(child, editedChild);
+        }
+    }
+
+    private Student createEditedChild(Student child, Parent parent) {
+        Name name = child.getName();
+        Phone phone = child.getPhone();
+        Email email = child.getEmail();
+        Address address = child.getAddress();
+        LessonTime lessonTime = child.getLessonTime();
+        Education education = child.getEducation();
+        Grade grade = child.getGrade();
+        Name parentName = parent.getName();
+        Set<Tag> tags = child.getTags();
+        boolean isPinned = child.isPinned();
+        boolean isArchived = child.isArchived();
+
+        return new Student(name, phone, email, address, lessonTime, education, grade, parentName, tags, isPinned,
+                isArchived);
+    }
+
+    private Parent createEditedParent(Parent parent, Student student, Student studentToEdit) {
+        Name parentName = parent.getName();
+        Phone parentPhone = parent.getPhone();
+        Email parentEmail = parent.getEmail();
+        Address parentAddress = parent.getAddress();
+        Set<Name> childrenNames = parent.getChildrensNames().stream().filter(name -> name != studentToEdit.getName())
+                .collect(Collectors.toSet());
+        childrenNames.add(student.getName());
+        Set<Tag> parentTags = parent.getTags();
+        boolean isPinned = parent.isPinned();
+        boolean isArchived = parent.isArchived();
+
+        return new Parent(parentName, parentPhone, parentEmail, parentAddress, childrenNames, parentTags, isPinned,
+                isArchived);
     }
 
     @Override
