@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.exceptions.ScoreExceedsMaxScoreException;
 
 /**
- * Represents an Assignment in TAchy.
+ * Represents an Assignment in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Assignment {

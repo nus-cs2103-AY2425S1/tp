@@ -34,7 +34,7 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT_NAME + "Assignment 1 "
             + PREFIX_ASSIGNMENT_MAX_SCORE + "100";
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
-    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in TAchy";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book";
     private final Index index;
     private final AssignmentDescriptor toAddDescriptor;
 

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Assignment's name in TAchy.
+ * Represents an Assignment's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class AssignmentName {

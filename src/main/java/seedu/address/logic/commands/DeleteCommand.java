@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from TAchy.
+ * Deletes a student identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
