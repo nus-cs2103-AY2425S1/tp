@@ -1058,6 +1058,19 @@ A user might expect `find c/` to find students who are taking no courses.
 However, this is not the case, and will result in confusion.<br>
 Hence, this command should not execute successfully.
 
+**<u>Make participation not accept + before the number</u>**
+
+**Description**
+
+Currently, the participation argument in the `markp` command accepts the use of `+` before it,
+i.e. `+3` is treated as `3`.
+This should be treated as an invalid format.
+
+**Rationale**
+
+Though not strictly wrong, the index parser currently already checks for `+` and treats it as invalid.
+For consistency, this should also apply to participation.
+
 ### Glossary
 
 * **Attendance**: Student's Presence/Absence for a Lesson

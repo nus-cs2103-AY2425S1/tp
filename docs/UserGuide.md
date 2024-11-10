@@ -429,6 +429,8 @@ Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 * `PARTICIPATION` must be an integer between 0 and 100 inclusive.
 * There must be exactly 1 `PARTICIPATION` argument, e.g. `pt/3 pt/3` is not allowed.
 * The participation score is set **exactly** to the given value. It does not add onto students' existing score.
+* Due to a bug in the current version, a `+` before the participation value will be accepted, i.e. `+3` is treated as
+`3`. This will be removed in a future release.
 
 Examples:
 * `markp 1 n/John Doe pt/3` marks `John Doe` as having 3 participation marks for lesson number 1.
