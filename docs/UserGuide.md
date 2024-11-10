@@ -19,7 +19,7 @@ KeyContacts allows you to
 &nbsp;
 
 KeyContacts is optimized for use via a Command Line Interface (CLI) while still being aesthetically pleasing and easy to use.
-If you type fast, you can complete your contact management tasks much faster with KeyContacts than GUI apps.
+If you type fast, you can complete your contact management tasks much faster with KeyContacts than with GUI apps.
 
 <!-- * Table of Contents -->
 
