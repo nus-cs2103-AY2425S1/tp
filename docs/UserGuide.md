@@ -494,6 +494,7 @@ _Details coming soon ..._
     - **Planned Solution**: We plan to introduce stricter input validation to prevent numbers-only entries for these fields in future versions.
 4. **When adding a new user**, the birthday field is compulsory.
 5. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
+6. **When adding a new user**, the birthday field can be a date in the future. 
 ---
 
 ## Command Summary
