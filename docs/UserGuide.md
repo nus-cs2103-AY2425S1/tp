@@ -478,6 +478,7 @@ Valid Example (Multiple field updated):
 Invalid Example:
 * `update -i 3 -n New Year's Party -n Christmas Celebration -a 1 2 -a 4 5`
 * This command will result in the following error message since the optional fields `-n` and `-a` are specified more than once.
+
 ![UpdateEventInvalid2.png](images/UpdateEventInvalid2.png)
 
 ### Cancelling Events ❌
