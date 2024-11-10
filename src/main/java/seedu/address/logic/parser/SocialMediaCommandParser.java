@@ -37,8 +37,7 @@ public class SocialMediaCommandParser implements Parser<SocialMediaCommand> {
             String message = pe.getMessage();
             if (message.equals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
                 throw pe;
-            }
-            else {
+            } else {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, SocialMediaCommand.MESSAGE_USAGE), pe);
             }
