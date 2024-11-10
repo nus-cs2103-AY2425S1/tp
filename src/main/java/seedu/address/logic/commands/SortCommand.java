@@ -19,6 +19,7 @@ import seedu.address.model.tag.Tag;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
+    public static final String ASCENDING_KEYWORD = "ASC";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the contact list by tag values in ascending or descending order.\n"
@@ -45,72 +46,13 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
-        Predicate<Person> predicateMatch = person -> {
-            boolean tagMatches = tagName != null && !tagName.isEmpty()
-                    && person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
-            return tagMatches;
-        };
-
-        Comparator<Person> sortOrderComparator = new Comparator<Person>() {
-            @Override
-            public int compare(Person p1, Person p2) {
-                Optional<Tag> p1Tag = p1.getTags().stream().filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
-                        .findFirst();
-                Optional<Tag> p2Tag = p2.getTags().stream().filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
-                        .findFirst();
-
-                int compareResult = 0;
-
-                if (p1Tag.isEmpty() || p2Tag.isEmpty()) {
-                    return compareResult;
-                }
-
-                if (p1Tag.get().tagValue == null && p2Tag.get().tagValue == null) {
-                    return compareResult;
-                } else if (p1Tag.get().tagValue == null) {
-                    return 1;
-                } else if (p2Tag.get().tagValue == null) {
-                    return -1;
-                }
-
-                Double p1TagDouble = tryParseDouble(p1Tag.get().tagValue);
-                Double p2TagDouble = tryParseDouble(p2Tag.get().tagValue);
-
-                if (p1TagDouble != null && p2TagDouble != null) {
-                    if (p1TagDouble > p2TagDouble) {
-                        compareResult = 1;
-                    } else if (p1TagDouble < p2TagDouble) {
-                        compareResult = -1;
-                    }
-                } else if (p1TagDouble == null && p2TagDouble == null) {
-                    if (p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue) > 0) {
-                        compareResult = 1;
-                    } else if (p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue) < 0) {
-                        compareResult = -1;
-                    }
-                } else if (p1TagDouble != null) {
-                    compareResult = -1;
-                } else if (p2TagDouble != null) {
-                    compareResult = 1;
-                }
-
-                if (sortOrder.equalsIgnoreCase("ASC")) {
-                    return compareResult;
-                } else {
-                    return -compareResult;
-                }
-            }
-        };
-
+        Predicate<Person> predicateMatch = this::predicateMatch;
+        Comparator<Person> sortOrderComparator = this::sortOrderComparator;
         model.updateFilteredPersonList(predicateMatch, sortOrderComparator);
-
         List<Person> filteredList = model.getFilteredPersonList();
-
         if (filteredList.isEmpty()) {
             return new CommandResult(MESSAGE_NO_CONTACT_FOUND);
         }
-
         return new CommandResult(constructSuccessMessage(this.tagName));
     }
 
@@ -131,16 +73,87 @@ public class SortCommand extends Command {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof SortCommand)) {
             return false;
         }
-
         SortCommand otherCommand = (SortCommand) other;
-
-        boolean isTagNameEqual = (tagName == null && otherCommand.tagName == null)
+        return (tagName == null && otherCommand.tagName == null)
                 || (tagName != null && tagName.equals(otherCommand.tagName));
-        return isTagNameEqual;
+    }
+
+    private boolean predicateMatch(Person person) {
+        return tagName != null
+                && !tagName.isEmpty()
+                && person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
+    }
+
+    private int sortOrderComparator(Person p1, Person p2) {
+        Optional<Tag> p1Tag = getTagByName(p1);
+        Optional<Tag> p2Tag = getTagByName(p2);
+
+        if (areTagsEmpty(p1Tag, p2Tag)) {
+            return 0;
+        }
+        if (isEitherTagNull(p1Tag, p2Tag)) {
+            return compareNullTagValues(p1Tag, p2Tag);
+        }
+
+        Double p1TagDouble = tryParseDouble(p1Tag.get().tagValue);
+        Double p2TagDouble = tryParseDouble(p2Tag.get().tagValue);
+
+        int compareResult = getCompareResult(p1TagDouble, p2TagDouble, p1Tag, p2Tag);
+
+        return determineComparisonOrder(compareResult, sortOrder.equalsIgnoreCase(ASCENDING_KEYWORD));
+    }
+
+    private static int getCompareResult(Double p1TagDouble,
+                                        Double p2TagDouble,
+                                        Optional<Tag> p1Tag,
+                                        Optional<Tag> p2Tag) {
+        if (p1TagDouble != null && p2TagDouble != null) {
+            return Double.compare(p1TagDouble, p2TagDouble);
+        }
+        if (p1TagDouble == null && p2TagDouble == null) {
+            return p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue);
+        }
+        return (p1TagDouble != null)
+                ? -1
+                : 1;
+    }
+
+
+    private boolean areTagsEmpty(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        return (p1Tag.isEmpty() || p2Tag.isEmpty());
+    }
+
+    private boolean isEitherTagNull(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        return (p1Tag.get().tagValue == null || p2Tag.get().tagValue == null);
+    }
+
+    private boolean areBothTagsNull(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        return (p1Tag.get().tagValue == null && p2Tag.get().tagValue == null);
+    }
+
+    private int compareNullTagValues(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        if (areBothTagsNull(p1Tag, p2Tag)) {
+            return 0;
+        } else if (p1Tag.get().tagValue == null) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    private Optional<Tag> getTagByName(Person person) {
+        return person.getTags().stream()
+                .filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
+                .findFirst();
+    }
+
+    private int determineComparisonOrder(int compareResult, boolean isAscending) {
+        return isAscending
+                ? compareResult
+                : -compareResult;
     }
 
     @Override
@@ -152,8 +165,7 @@ public class SortCommand extends Command {
 
     Double tryParseDouble(String value) {
         try {
-            double d = Double.parseDouble(value);
-            return d;
+            return Double.parseDouble(value);
         } catch (NumberFormatException e) {
             return null;
         }

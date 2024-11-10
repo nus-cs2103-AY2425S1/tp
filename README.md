@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-W14-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-W14-2/tp/actions)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/UG_Images/Ui.png)
 
 BA€ is an address book for salespeople to store sales-related information about their clients.<br>
 

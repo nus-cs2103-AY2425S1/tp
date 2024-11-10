@@ -105,21 +105,38 @@ public class ParserUtil {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (trimmedTag.contains(":")) {
-            String[] tagKeyValue = trimmedTag.split(":");
-            if (!Tag.isValidTagName(tagKeyValue[0])) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-            }
-            if (!Tag.isValidTagName(tagKeyValue[1])) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-            }
+            String[] tagKeyValue = getTagKeyValue(trimmedTag);
             return new Tag(tagKeyValue[0], tagKeyValue[1]);
         } else {
             if (!Tag.isValidTagName(trimmedTag)) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
             }
             return new Tag(trimmedTag);
         }
 
+    }
+
+    private static String[] getTagKeyValue(String trimmedTag) throws ParseException {
+        String[] tagKeyValue = trimmedTag.split(":");
+
+        // Account for the possibility that the tag is just a lone colon.
+        // i.e. edit 1 t\:
+        if (tagKeyValue.length == 0) {
+            throw new ParseException(Tag.MESSAGE_TAG_NAMES_CANNOT_BE_EMPTY);
+        }
+        if (tagKeyValue.length == 1) {
+            throw new ParseException(Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING);
+        }
+        if (!Tag.isValidTagName(tagKeyValue[0])) {
+            if (tagKeyValue[0].isEmpty()) {
+                throw new ParseException(Tag.MESSAGE_TAG_NAME_OR_VALUE_MISSING);
+            }
+            throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
+        }
+        if (!Tag.isValidTagValue(tagKeyValue[1])) {
+            throw new ParseException(Tag.MESSAGE_TAG_VALUES_SHOULD_BE_ALPHANUMERIC);
+        }
+        return tagKeyValue;
     }
 
     /**

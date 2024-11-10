@@ -51,7 +51,8 @@
             <MenuItem mnemonicParsing="false" text="Sort by Tags" onAction="#handleSortByTags" />
           </Menu>
           <Menu mnemonicParsing="false" text="Export">
-            <MenuItem mnemonicParsing="false" text="Export to CSV" onAction="#handleExport" />
+            <MenuItem mnemonicParsing="false" text="Export to CSV" onAction="#handleCsvExport" />
+            <MenuItem mnemonicParsing="false" text="Export to TXT" onAction="#handleTxtExport" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />

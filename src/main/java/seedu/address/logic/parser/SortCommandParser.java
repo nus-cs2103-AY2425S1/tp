@@ -35,7 +35,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         String tag = matcher.group("tag");
         String sortOrder = matcher.group("sortOrder");
         if (!isValidTagName(tag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
         }
         if ((tag == null || tag.isEmpty())
                 || (sortOrder == null || sortOrder.isEmpty() || (!sortOrder.equalsIgnoreCase("ASC")

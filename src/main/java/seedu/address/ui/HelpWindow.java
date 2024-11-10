@@ -56,16 +56,17 @@ public class HelpWindow extends UiPart<Stage> {
 
     private void setHelpText() {
         helpTextFlow.getChildren().addAll(
-                createHeader("BA€ 1.4 Help                                                    "),
+                createHeader("BA€ 1.6 Help                                                    "),
                 createParagraph(
-                        "Welcome to BA€ 1.4, your powerful ally in optimizing recurring sales.",
+                        "Welcome to BA€ 1.6, your powerful ally in optimizing recurring sales.",
                         "This guide will help you navigate the key features and commands of BA€."
                 ),
                 createHeader("Key Features and Commands"),
                 createFeature(
                         "Adding a Client: add",
                         "Add a new client to your database with detailed information.",
-                        "add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS [t/TAG]...",
+                        "add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS [fi\\FINANCIALINFO] \n [s\\SOCIALMEDIAHANDLE]"
+                        + "[t\\TAG]…\u200B [t\\TAG:value]…\u200B",
                         "add n\\Acme Corp p\\91234567 e\\contact@acme.com a\\123 Business Ave, Suite 100, "
                                 + "\n Metropolis t\\industry:tech t\\size:enterprise "
                                 + "fi\\Annual contract: €50,000 s\\@acmecorp"
@@ -73,25 +74,26 @@ public class HelpWindow extends UiPart<Stage> {
                 createFeature(
                         "Listing Clients: list",
                         "View all clients in your database.",
-                        "list                                                                                       ",
+                        "list                                                                                  ",
                         null
                 ),
                 createFeature(
                         "Finding Clients: find",
-                        "Search for clients using keywords.                                                          ",
+                        "Search for clients by name using keywords.                                         ",
                         "find KEYWORD [MORE_KEYWORDS]",
                         "find Acme Corp"
                 ),
                 createFeature(
                         "Smart Filtering: filter",
                         "Quickly identify client groups based on tags or name.",
-                        "filter [CRITERIA]",
+                        "filter [n\\NAME] [t\\TAG]…\u200B",
                         "filter t\\friend n\\John"
                 ),
                 createFeature(
                         "Editing Client Information: edit",
                         "Update existing client details.",
-                        "edit INDEX [n\\NAME] [p\\PHONE] [e\\EMAIL] [a\\ADDRESS] [t\\TAG]...",
+                        "edit INDEX [n\\NAME] [p\\PHONE] [e\\EMAIL] [a\\ADDRESS] [fi\\FINANCIALINFO]"
+                                + " \n [s\\SOCIALMEDIAHANDLE] " + "[t\\TAG]…\u200B [t\\TAG:value]…\u200B",
                         "edit 1 p\\98765432 e\\newemail@acme.com"
                 ),
                 createFeature(
@@ -102,20 +104,26 @@ public class HelpWindow extends UiPart<Stage> {
                 ),
                 createFeature(
                         "Advanced Filtering: advfilter",
-                        "Organize your client list based on custom priority metrics.",
-                        "advfilter [t\\tag] [OPERATOR] [VALUE]",
-                        "advfilter t\\renewal_date <= 90days "
+                        "Organize your client list based on custom priority metrics.                       ",
+                        "advfilter t\\tag [OPERATOR] [VALUE]",
+                        "advfilter t\\age <= 50 "
+                ),
+                createFeature(
+                        "Sorting by tags: sort",
+                        "Sort your client list based on tag values                                          ",
+                        "sort t\\tag asc/desc",
+                        "sort t\\age asc "
                 ),
                 createFeature(
                         "Data Export: export",
                         "Export your client data for analysis or reporting.",
-                        "export format/[file format]",
-                        "export format/csv                                               "
+                        "export format\\[file format]",
+                        "export format\\csv                                                                   "
                 ),
                 createFeature(
                         "Clearing All Entries: clear",
                         "Remove all clients from your database.",
-                        "clear                                                 ",
+                        "clear                                                                             ",
                         null
                 ),
                 createFeature(

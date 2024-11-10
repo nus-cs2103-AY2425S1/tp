@@ -194,6 +194,7 @@ public class ExportCommandTest {
         assertEquals("\"Ahmad\",\"32109876\",\"kumar@kgoomail.com\"", lines.get(3));
     }
 
+    // Test case written by ChatGPT and adjusted to match output in txt file
     @Test
     public void writeFileTest_txtFormatted() throws IOException {
         List<Map<String, String>> jsonData = new ArrayList<>();
@@ -211,7 +212,7 @@ public class ExportCommandTest {
 
         List<String> lines = Files.readAllLines(txtPath);
 
-        // Verify output
+        // Check first entry
         assertEquals("{", lines.get(0));
         assertEquals("  name | Johnny Appleseed", lines.get(1));
         assertEquals("  phone | 93321121", lines.get(2));
@@ -223,7 +224,7 @@ public class ExportCommandTest {
         assertEquals("}", lines.get(8));
         assertEquals("", lines.get(9)); // Blank line between records
 
-        // Validate the second entry
+        // Check second entry
         assertEquals("{", lines.get(10));
         assertEquals("  name | Kumar", lines.get(11));
         assertEquals("  phone | ", lines.get(12));
@@ -235,6 +236,7 @@ public class ExportCommandTest {
         assertEquals("}", lines.get(18));
     }
 
+    // Test case written by ChatGPT and adjusted to check for unsupported format
     @Test
     public void writeFile_unsupportedFormat_throwsIllegalArgumentException() {
         List<Map<String, String>> jsonData = new ArrayList<>();
@@ -242,13 +244,10 @@ public class ExportCommandTest {
         Set<String> headers = new LinkedHashSet<>(Arrays.asList("name", "phone"));
 
         String filePathAndName = "test";
-
-        // Assuming there is an unsupported format defined
-        // (or if Format is an enum, you could use null or another value)
         Format unsupportedFormat = ExportCommand.matchFormat("invalid");
-        // Ensure the format is unsupported
+        // Check format is unsupported
         assertEquals(unsupportedFormat, Format.UNSUPPORTED);
-        // Expect IllegalArgumentException when calling writeFile with an unsupported format
+        // Check that IllegalArgumentException is thrown when calling writeFile with an unsupported format
         assertThrows(IllegalArgumentException.class, () -> {
             ExportCommand.writeFile(jsonData, headers, filePathAndName, unsupportedFormat);
         });
