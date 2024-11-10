@@ -8,7 +8,7 @@ start
 :User inputs add command;
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
-while () is ([invalid input or is duplicate])
+while () is ([invalid input OR is duplicate])
     :UGTeach shows error message;
     :User modifies input;
 endwhile ([else])

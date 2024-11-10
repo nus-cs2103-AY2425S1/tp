@@ -184,9 +184,9 @@ On execution, `AddCommand` first queries the supplied model if it contains a stu
 
 Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
-The following diagram summarizes how UGTeach handles the add command. User behaviours (e.g. retyping the wrong input, editing clashing schedules) will not be included.
+The following diagram summarizes how a user may add a student into UGTeach.
 
-<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram" width="900"/>
+<puml src="diagrams/UserAddCommandActivityDiagram.puml" alt="UserAddCommandActivityDiagram" width="600"/>
 
 <div style="page-break-after: always;"></div>
 
