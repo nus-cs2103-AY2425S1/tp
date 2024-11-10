@@ -118,7 +118,7 @@ together.
 
 **Main components of the architecture**
 
-**`Main`** consists of two classes: [`Main`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)). It is in charge of the app launch and shut down.
+**`Main`** consists of two classes: [`Main`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is in charge of the app launch and shut down.
 * At app launch: it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down: it shuts down the other components and invokes cleanup methods where necessary.
 
