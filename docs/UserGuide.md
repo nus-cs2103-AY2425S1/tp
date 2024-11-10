@@ -16,7 +16,7 @@ EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **re
 * `Work Style` : Handles multiple clients and properties simultaneously and values efficiency in contact and property management
 * `Environment` : Works in a fast-paced setting where quick data entry and retrival are essential
 
-But do not worry if you do not meet every characteristic — EZSTATE is designed to be intuitive and efficient for all users!
+But do not worry if you do not meet every characteristic — EZSTATE is designed to be **intuitive and efficient for all users**.
 <br> Give it a try, and head over to our Quick Start guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
 
 * Table of Contents
@@ -31,7 +31,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
 ### Installation Steps
 
 1. Ensure you have Java `17` or above installed in your Computer. You can check by opening a command terminal and typing:
-    ```terminal
+    ```bash
     java -version
     
     ```
@@ -42,8 +42,8 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
 3. Copy the file to the folder you want to use as the _home folder_ for EZSTATE.
 
 4. Open a command terminal and navigate to the folder with the `.jar` file by typing:
-    ```terminal
-     cd path/to/your/folder
+    ```bash
+    cd path/to/your/folder
     
     ```
     <br>
@@ -56,7 +56,7 @@ Welcome to EZSTATE! This guide will walk you through installing the app and gett
    <br>
 
    Then run the app with:
-    ```terminal
+    ```bash
     java -jar ezstate.jar
    
     ```
