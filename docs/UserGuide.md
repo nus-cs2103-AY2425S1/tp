@@ -350,13 +350,17 @@ Format:
 ```
 findu u/UNIVERSITY
 ```
-- `u/UNIVERSITY`: The university to search for (case-sensitive).
+- `u/UNIVERSITY`: The university to search for (case-sensitive). **Partial matches** are supported, allowing any contact with a university name that partially matches the keyword to be listed.
 
-Example:
+Example: Find contacts associated with SUTD.
+- **Exact Match**:
+```plaintext
+findu u/SUTD
 ```
-findu u/NUS
+- **Partial Match**:
+```plaintext
+findu u/SUT
 ```
-*Expected Output*: Lists all contacts associated with the National University of Singapore (NUS).
 
 <box type="info" seamless>
 
