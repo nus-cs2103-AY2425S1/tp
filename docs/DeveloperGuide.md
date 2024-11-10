@@ -15,7 +15,7 @@ title: Developer Guide
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [Setting up and getting started](https://ay2425s1-cs2103t-w12-2.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -210,8 +210,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | General user                             | View event details per volunteer       | See which events a volunteer participated in                                         |
 | `*`      | HR department employee                   | View volunteer participation history   | Track volunteer engagement with past events                                          |
 | `*`      | General user                             | Toggle view options for events         | Customize how events are displayed in the app                                        |
-| `*`      | General user                             | Dark mode                              | Enhance the app's user experience for those who prefer a darker interface            |
-| `*`      | General user                             | Accessibility features                 | Improve usability for visually impaired users through larger fonts and color changes |
+| `*`      | General user                             | Toggle Dark mode                       | Enhance the app's user experience for those who prefer a darker interface            |
+| `*`      | General user                             | Toggle Accessibility features          | Improve usability for visually impaired users through larger fonts and color changes |
 
 <div style="page-break-after: always;"></div>
 
@@ -219,7 +219,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/>
 For the following use cases, the `Actors` are defined as the Management Staff of Volunteer Organisations, and the `System` is defined as VolunSync, unless specified otherwise.
-
 
 
 **Guarantees**:
@@ -238,7 +237,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 2. User submits the volunteer's details to the system.
 3. System checks if all required information is present and valid, and that no existing volunteer has the same name as the new volunteer.
 4. System creates the new event and confirms creation to the user.
-   Use Case Ends.
+   <br/> Use Case Ends.
 
 **Extensions**:
 - 3a. Information provided is incomplete or invalid.
@@ -460,7 +459,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Description**: Search for an event by its name.
 
-**Preconditions**: NA
+**Preconditions**: There are some events in the system.
 
 **MSS**:
 1. User enters a keyword to search for.
@@ -608,7 +607,7 @@ This diagram shows the main actor (Management Staff) and their interactions with
 ### Non-Functional Requirements
 
 1. The system should work on any mainstream OS with Java 17 or above.
-2. The system should be able to handle up to 1000 volunteers, events, and donors without noticeable performance degradation.
+2. The system should be able to handle up to 1000 volunteers and events without noticeable performance degradation.
 3. A user should be able to perform common tasks (add, delete, view) within 5 seconds for typical usage.
 4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
 5. System response time for any action should be less than 1 second for all operations.
