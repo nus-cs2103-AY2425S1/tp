@@ -786,3 +786,9 @@ Assumption: The index and module are valid
 Expected: Grade the first student's math as 95.
 2. Test case `grade 1 m/Math s/999`<br>
 Expected: No one will be graded, an error message will be shown.
+
+## **Planned Enhancements**
+1. Support for phone numbers that are not strictly 8 digits.
+2. User customization of pass/fail grade boundary.
+3. Support for grades that are in decimal values.
+4. Add a way to view grades without hovering over the class, preferably without using the mouse.
