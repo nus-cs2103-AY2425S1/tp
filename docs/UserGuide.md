@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "User Guide"
-    pageNav: 3
+  title: "User Guide"
+  pageNav: 3
 ---
 
 # GamerBook Pro Max User Guide
@@ -559,17 +559,17 @@ Manually loads the data from JSON file `[JAR file location]/data/save.json`.
 
 ### Data storage
 
-GamerBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+GamerBook data is saved automatically as a JSON file at the location `[JAR file location]/data/addressbook.json`.
 
-GamerBook data are saved in the hard automatically after any command that changes the data.
+GamerBook data is saved automatically after any command that changes the data.
 
-GamerBook data are loaded from `[JAR file location]/data/addressbook.json` automatically when you open the app.
+GamerBook data is loaded from `[JAR file location]/data/addressbook.json` automatically when you open the app.
 
 <br>
 
 ### Editing the data file
 
-GamerBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
+GamerBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json` after every command. Advanced users are
 welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
