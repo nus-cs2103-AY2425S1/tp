@@ -53,7 +53,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_SUMMARY_ACTION = "Add";
     public static final String COMMAND_SUMMARY_FORMAT =
             ":add -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]\n"
-            + ":a -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-l LOCATION] [-t TAG]… -[r REMARK]";
+            + ":a -n NAME [-p PHONE_NUMBER] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]";
     public static final String COMMAND_SUMMARY_EXAMPLES =
             ":add -n James Ho -p 98765432 -e jamesho@example.com -l 123, "
                    + "Clementi Rd, 1234665 -t friend -r My favourite colleague" + "\n"
