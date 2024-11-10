@@ -1020,7 +1020,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `marko 1`<br>
        Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
 
-### Reverts an order to pending status.
+### Reverting an order to pending status.
 
 1. Reverting an order to pending status while all orders under a customer are being shown.
 
@@ -1048,7 +1048,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `unmarko 0`<br>
        Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
 
-3. Reverting an order which is already pending to pending.
+3. Attempting to revert a order which currently pending.
 
     1. Prerequisites:
         - At least 1 order listed. <br>
