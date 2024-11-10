@@ -387,18 +387,19 @@ Filters and lists persons whose fields match the specified keywords.
     - Case-insensitive search.
     - Returns persons matching any of the fields (logical `OR` search).
 - **Field-Specific Matching**:
-    - **Name**: Allow partial matches. 'filter n/Al Ye' will allow Alex Yeoh to be filtered.
+    - **Name**: Allow partial matches.
     - **Role**: Requires exact role match.
-    - **Email**: Requires exact email match.
+    - **Email**: Requires substring email match.
     - **Phone**: Requires exact number match.
     - **Address**: Allows partial matches.
 - **Examples**:
-    - `filter n/John` returns persons named `John`.
+    - `filter n/John` returns persons with names containing `John`.
+    - `filter n/Al Ye` returns persons with names containing both `Al` and `Ye`.
     - `filter r/vendor` returns persons with role `vendor`.
-    - `filter e/john@gmail.com` returns persons whose emails contain "john@gmail.com".
+    - `filter e/john@gmail.com` returns persons with emails containing `john@gmail.com`.
     - `filter p/91234567` returns the person with phone number `91234567`.
-    - `filter n/John r/vendor` returns persons whose name contains substring `John` or role `vendor`.
-    - `filter e/john@gmail.com a/Jurong` returns persons whose email contains "john@gmail.com" or address contains "Jurong".
+    - `filter n/John r/vendor` returns persons with names containing `John` or with role `vendor`.
+    - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".
       ![Multi-field filter results](images/multi_filter_weddings_unfiltered.png)<br>
       *`filter n/David r/florist e/mike` Example of filtering results showing matched persons, weddings remain unfiltered*
 
