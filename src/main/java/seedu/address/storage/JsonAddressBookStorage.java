@@ -65,9 +65,6 @@ public class JsonAddressBookStorage implements AddressBookStorage {
                     Files.deleteIfExists(Path.of(PASSWORD_PATH));
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                    // Directly return default address book
-                } finally {
-                    return Optional.empty();
                 }
             }
 
