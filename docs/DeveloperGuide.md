@@ -361,6 +361,20 @@ The following activity diagram summarizes what happens when a user executes the 
     - Overlapping time slots are correctly identified, resulting in command rejection.
     - Edge cases with adjacent `startTime` and `endTime` that do not overlap are handled as expected.
 
+Team Size: 5
+
+1. [insert date end time]
+2. Currently, the app accepts dates in the format d/M/yyyy HHmm (allowing optional leading zeros for day and month), which is intended to streamline input and minimise errors. 
+However, we recognise that users may be familiar with other common date and time formats. 
+To enhance usability and accommodate a wider range of preferences, we plan to allow additional formats such as MM-dd-yyyy HHmm in future updates.
+Currently, we’ve kept the error messages simple and focused on this format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date formats.
+3. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
+4. [Validation for Address: Address should be able to have "/n" or other prefixes]
+5. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
+6. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
+7. [Create his own tags and delete tags]
+8. 
+
 
 ## **Implementation**
 This section describes some noteworthy details on how certain features are implemented.
@@ -797,10 +811,10 @@ testers are expected to do more *exploratory* testing.
 
 2. Attempting to edit to create a duplicate patient
     
-     1. Prerequisites: Ensure "Alaya" with the contact details is already in the contact list.
+     1. Prerequisites: Ensure "Alice" with the contact details is already in the contact list.
     
-     2. Test case: `edit 1 n/Alice p/90967209
-        Expected Error Message: This person already exists in the address book
+     2. Test case: `edit 3 n/Alice p/90967209
+        Expected Error Message: Error. This edit will result in a person that already exists in the address book.
 
 ### Filtering patients
 

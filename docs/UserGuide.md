@@ -183,11 +183,11 @@ Constraints:
     - Must be an index number shown in the displayed patient list
 
 * **DATE_TIME**
-    - Must follow the format of dd/MM/YYYY HHmm
+    - Must follow the format of d/M/yyyy HHmm
     - Can only contain numbers, '/', and spaces.
 
-* **DATE_ONLY**
-    - Must follow the format of dd/MM/YYYY
+* **DATE**
+    - Must follow the format of d/M/yyyy
     - Can only contain numbers and '/'
 
 ### Viewing help: `help`
@@ -332,11 +332,18 @@ Additional Details:
 * To remove the date and time from a person, use `d/None` in the command.
 * 2 patients cannot have the same date and time for the appointment
 * When no date and time is set, no date and time is displayed.
+* In the command format, the brackets around `n/NAME`, `p/PHONE`, and `e/EMAIL` indicate that these fields are flexible in their order and selection. 
+This does not mean that all three fields can be left out. 
+Instead, it allows the user to include any one or more of these fields, but at least one must be provided. 
+This flexibility helps in cases where only one of these details is available or relevant, but still ensures there is enough information to uniquely identify a contact.
 * This feature supports the year 0001 onwards. Any years before that is not supported.
 * The month must be between 1 and 12.
 * The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year.
 * The time is in the 24-hour format. (e.g. 1800 for 6:00 PM)
-* The format of the date and time, as well the values must be valid, or there will be an error.
+* The format of the date and time, as well the values must be valid, or there will be an error. Note that, to allow fast typing and avoid unnecessary inconvenience, leading zeroes for day and month is allowed in the format and will be parsed. 
+(e.g. 01/01/2024 1400 will be parsed the same way as 1/1/2024 1400)
+* For consistency and ease of validation, spaces between slashes in the date (e.g., 1 / 1 / 2024) are not allowed. This ensures that all dates are uniformly formatted, which helps prevent errors and speeds up processing. Please enter dates without spaces, such as 1/1/2024 or 01/01/2024.
+* The app allows users to enter dates and times that are in the past to provide flexibility in managing and storing patient information. This feature prevents unnecessary limitations, enabling healthcare professionals to record historical data, update past appointments, and maintain a comprehensive record of all patient interactions, even those that have already occurred.
 
 
 Examples:
@@ -358,7 +365,7 @@ Examples:
 Filters the list to return patients who have an appointment of the given day. <br>
 (i.e. shows the healthcare professional's schedule for the day)
 
-Format: `schedule d/[DATE_ONLY]`
+Format: `schedule d/[DATE]`
 
 [Parameter Constraints](#parameter-constraints).
 
@@ -366,6 +373,7 @@ Additional Details:
 * Date in the `schedule` feature differs from the date in the `date` feature.
 * Date in the `schedule` feature does not accept a time.
 * All patients with an appointment date on that given day will be listed regardless of what their appointment time is.
+* Refer to additional details under the [appointment date feature](#adding-or-updating-an-appointment-date-and-time-to-a-person--date) above for details on the date format and valid values.  
 
 Examples:
 * `schedule d/23/10/2024`
@@ -457,9 +465,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 - **Appointment Date**: Sets an appointment date and time for an entry.
     - Format: `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE_TIME`
-    - - Example: `date n/Nayana d/26/05/2024 1230`
+    - - Example: `date n/Nayana d/26/5/2024 1230`
 
-- **Schedule**: Schedules an entry for a specific date.
-    - Format: `schedule d/DATE_ONLY`
-    - - Example: `schedule d/26/05/2004`
+- **Schedule**: Finds schedule for user by showing patients with appointments on a specific date.
+    - Format: `schedule d/DATE`
+    - - Example: `schedule d/26/5/2004`
 
