@@ -142,6 +142,12 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_preamblePresent_throwsParseException() {
+        String userInput = "abc" + NAME_QUERY;
+        assertParseFailure(parser, userInput, FindCommand.MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX);
+    }
+
+    @Test
     public void parse_multipleRepeatedFields_failure() {
         // valid followed by empty
         String userInput = NAME_QUERY + " " + PREFIX_NAME;
