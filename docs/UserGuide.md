@@ -40,7 +40,7 @@ Having access to both a Command Line Interface (CLI) and a Graphical User Interf
 
    - `delete person 3` : Deletes the 3rd person shown in the current list after receiving confirmation from you.
 
-   - `clear all` : Deletes all events and persons after receiving confirmation from you.
+   - `clear all` : Deletes all events and persons after receiving confirmation from you. This will permanently delete all data currently saved on TalentHub!
 
     <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
     Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
