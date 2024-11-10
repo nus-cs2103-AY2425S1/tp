@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Supply Central is a **desktop app for managing suppliers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SupplyCentral can get your supplier management tasks done faster than traditional GUI apps. This app aims to resolve the pain points of small business owners by helping them with information handling. This app is based on the Address Book 3 (AB3) project.
+Supply Central is a **desktop app for managing suppliers, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SupplyCentral can get your supplier management tasks done faster than traditional GUI apps. This app aims to resolve the pain points of small business owners (narrowed to the Singapore context) by helping them with information handling. This app is based on the Address Book 3 (AB3) project.
 
 * Table of Contents
 {:toc}
