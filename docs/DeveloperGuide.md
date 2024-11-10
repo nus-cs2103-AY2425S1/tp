@@ -721,19 +721,11 @@ otherwise)
     
     `Invalid command format!`
     
-    `favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.`
+    `view: Displays the full information of the person identified by the index number used in the last person listing. View window can be closed by the "close" command.`
     
-    `Two usage formats are supported:`
+    `Parameters: INDEX (must be a positive integer)`
     
-    `1. To mark a person as favourite: Specify the index of the person in the displayed list.`
-    
-    `   Parameters: INDEX (must be a positive integer)`
-    
-    `   Example: favourite 1`
-    
-    `2. To sort all favourite persons to the top: Use the command without any parameters.`
-    
-    `   Example: favourite`
+    `Example: view 1`
     
   - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
