@@ -42,7 +42,7 @@ If done correctly, a GUI similar to the image below should appear in a few secon
 
    * `list` : Lists all current (i.e. not archived) contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 pri/HIGH income/2000 famsize/3 r/Promises to pay back next week. t/friends t/owesMoney` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 pri/HIGH income/2000 famsize/3 r/Promises to pay back next week. t/friends t/owesMoney` : Adds a contact named `John Doe` to SocialBook with these specified details.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
