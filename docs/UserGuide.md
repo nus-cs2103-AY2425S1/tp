@@ -180,9 +180,10 @@ Edits the details of a student.
 
 1. `edit_s` edits the student identified by the index. It only accepts a valid index based on the list when `list_s` is called.
 2. Since `Student Number` is the unique identifier for each student, `Student Number` can't be edited.
-3. Editing of tags is not cumulative, i.e. tags will be replaced by the new set of tags.
-4. Tags are removed by entering `t/` without specifying any tags after it.
-5. For information on the constraints for each parameter used in this command, go
+3. At least 1 optional parameter must be provided, else an error will be thrown.
+4. Editing of tags is not cumulative, i.e. tags will be replaced by the new set of tags.
+5. Tags are removed by entering `t/` without specifying any tags after it.
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -674,9 +675,10 @@ Edits a task from a group.
 
 1. The index must be valid and should be the index of target task in the group's task list.
 2. `Group Name` must exist in the T_Assistant.
-3. This command is case-insensitive.
+3. At least 1 optional parameter must be provided, else an error will be thrown.
+4. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-4. For information on the constraints for each parameter used in this command, go
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -701,9 +703,10 @@ Edits a task from all groups that contain it.
 ##### Notes
 
 1. The index must be valid and should be the index of task list.
-2. This command is case-insensitive.
+2. At least 1 optional parameter must be provided, else an error will be thrown.
+3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-3. For information on the constraints for each parameter used in this command, go
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
