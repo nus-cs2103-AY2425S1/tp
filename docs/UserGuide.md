@@ -421,16 +421,21 @@ Deletes the specified delivery from the address book.
 
 Format: `delete -d INDEX`
 
-Parameters:
+<box type="details" seamless>
 
+Parameters:
 - `INDEX`: Must be a number greater than 0 and must not be blank.
+
+</box>
+
 <box type="warning" seamless>
 
 **Warnings**:
-- A minimum of one spacing between `delete` and `-d` is compulsory
+- A spacing between `delete` and `-d` is compulsory
 - Spacing between `-d` and `INDEX` is not compulsory
 - Only one delivery at the specified `INDEX` can be deleted at a time
   - `delete -d 1 3 5` is not allowed
+
 </box>
 
 Examples:
@@ -446,6 +451,8 @@ Find deliveries based on attributes of the delivery, like the delivery date and 
 
 Format: `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`
 
+<box type="details" seamless>
+
 Parameters:
 
 - `on/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` must be in dd-mm-yyyy hh:mm format and must not be blank.
@@ -454,20 +461,26 @@ Parameters:
 - `pro/PRODUCT`: `PRODUCT` must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
     - One space is counted as one character.
     - `PRODUCT` cannot be made up of only spaces.
+
+</box>
+
 <box type="warning" seamless>
 
 **Warnings**:
 - A spacing between `find` and `-d` is compulsory
 - At least one parameter must be given
+- A spacing between `-d` and the first parameter is compulsory
+- When using more than one parameter, a spacing between parameters is compulsory
 - `STATUS` and `PRODUCT` are not case-sensitive
-- No duplicate prefix can be used
+- No duplicate parameter can be used
   - `find -d pro/milk pro/bread` is not allowed
 - Find result(s) will contain/satisfy all the given parameters
+
 </box>
 
 
 #### Example
-To find deliveries of product "milk" on "28-06-2025 17:00" :
+To find deliveries of products that contains "milk" on "28-06-2025 17:00" :
 
     find -d on/ 28-06-2025 17:00 pro/ milk
 
@@ -476,22 +489,38 @@ To find deliveries of product "milk" on "28-06-2025 17:00" :
 
 ### Sort deliveries: `sort -d`
 
-The `sort -d` command is used to sort deliveries in VendorVault.
-This helps you to view the deliveries in a different order, based on the delivery cost, date or status.
+The `sort -d` command is used to sort deliveries in VendorVault based on the delivery cost, date or status.
+This helps you to view the deliveries in a different order (ascending or descending).
 
 Format: `sort -d so/SORT_ORDER sb/SORT_BY`
 
+<box type="details" seamless>
+
 Parameters:
 
-- `SORT_ORDER`: Must be either `a` for ascending or `d` for descending, and must not be blank.
-- `SORT_BY`: Must be either 'c' for cost, `d` for date or `s` for status, and must not be blank.
-<box type="tip" seamless>
+- `so/SORT_ORDER`: `SORT_ORDER` must be either `a` for ascending or `d` for descending, and must not be blank.
+- `sb/SORT_BY`: `SORT_BY` must be either 'c' for cost, `d` for date or `s` for status, and must not be blank.
+
+</box>
+
+<box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `add` and `-d` is compulsory
-- All prefixes and parameters must be given
-- No duplicate prefix can be used
-- Parameters used are **case-sensitive**
+- A spacing between `sort` and `-d` is compulsory
+- A spacing between `-d` and `so/SORT_ORDER` is compulsory
+- A spacing between `so/SORT_ORDER` and `sb/SORT_BY` is compulsory 
+- All parameters must be given
+- No duplicate parameter can be used
+  - `sort -d so/a sb/c sb/d` is not allowed
+- `SORT_ORDER` and `SORT_BY` are **case-sensitive**
+- Using `sort -d` command will sort and display all deliveries in VendorVault even if you have previously used the `find -d` command
+
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** Sorting deliveries by status in ascending order will display deliveries in the following order: `CANCELLED`, `DELIVERED`, `PENDING`
+
 </box>
 
 #### Example
@@ -542,11 +571,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+VendorVault data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file.
+VendorVault automatically saves your data as a JSON file `[JAR file location]/data/vendorvault.json`. Advanced users are welcome to update data directly by editing that data file.
 <box type="warning" seamless>
 
 **Caution:**
@@ -575,6 +604,13 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **Supplier Contact**: A record containing information about a supplier, including name, company, contact number, email, associated products and tags.
+* **Java**: 
+
+NEED UPDATE TERMS AT THE END!! CAN LMK IF YOU HAVE ANY IN THE PR OR SMTH
 
 
 [Back to Top](#vendor-vault-user-guide)
