@@ -6,7 +6,7 @@ pageNav: 3
 
 # TechConnect User Guide
 
-TechConnect is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can are looking for job opportunities, TechConnect can help you manage your applications more efficiently than traditional GUI apps.
+TechConnect is a **desktop app for managing internship applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can are looking for internship opportunities, TechConnect can help you manage your applications more efficiently than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
