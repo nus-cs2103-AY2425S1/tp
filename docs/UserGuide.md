@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## About GoonBook
+GoonBook is a **desktop app for educators that manage a large number of students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). You can organise your students effectively with relevant student details and grouping function. You can also find your students conveniently using their names or groups. If you are a fast-typer, GoonBook can allow you to keep track of your students faster than any traditional GUI apps, without ever having to touch your mouse.
 
 - Table of Contents
   {:toc}
@@ -70,7 +71,7 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -78,13 +79,17 @@ Format: `help`
 
 
 
-### Adding a person: `add`
+### Adding a student: `add`
 
-Adds a person to the address book.
+Adds a student to the address book.
 
 Format: `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​`
 
-- Name of person is case-insensitive - same name but different casing is considered duplicate.
+- Students of same `NAME` is considered duplicate.
+- `NAME` is case-insensitive. It must be alphanumeric and allows whitespace.
+- `CLASS` must be alphanumeric.
+- `PHONE_NUMBER` must be at least 3 digits long and only contain numbers.
+- `TAG` must be alphanumeric and allows whitespace. It must be within 30 characters.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -94,53 +99,66 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-- `add n/Song Si Mew c/W08 p/10110011 t/Japanese`
+- `add n/Song Si Mew c/W08 p/10110011`
+  - Successfully adds new student `Song Si Mew` from class `W08` and phone number `10110011` successfully.
+- `add n/SONG SI MEW c/W08 p/10110011`
+  - Returns `This student already exists in the address book`
 - `add n/Aaron Tan c/G12 p/11110011 t/Trivial t/CS `
+  - Successfully adds new student `Aaron Tan` from class `G12`, phone number `11110011`, tags `Trivial` and `CS` successfully.
+- `add n/Beh Wen Jie c/ p/`
+  - Returns `Student's class names cannot be empty and should be alphanumeric`
+- `add n/Beh Wen Jie c/S09 p/###`
+  - Returns `Phone numbers should only contain numbers, and it should be at least 3 digits long`
 
-### Listing all persons : `list`
+### Listing all students: `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the address book.
 
 Format: `list`
 
 ![List](images/List.png)
 
-### Editing a person : `edit`
+### Editing a student: `edit`
 
-Edits an existing person in the address book.
+Edits an existing student in the address book.
 
-Format: `edit INDEX [n/ NAME] [p/ PHONE] [c/ STUDENT CLASS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [c/CLASS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
+- When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+- You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
 
 ![Edit](images/Edit.png)
 
 Examples:
 
-- `edit 1 c/ 4L` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+- `edit 1 c/A11 p/91234567`
+  - Edits the class and phone number of the 1st student to be `A11` and `91234567` respectively.
+- `edit 2`
+  - Returns `At least one field to edit must be provided.`
 
 ### Grouping students together: `group`
 
 Groups students together.
 
-Format: `group [g/GROUPNAME] [s/STUDENTNAME]…​`
+Format: `group g/GROUPNAME s/STUDENTNAME [s/STUDENTNAME]…​`
 
-- Only exact name matches will be added
-- Only the name is searched.
-- Only one student is added at a time.
+- `GROUPNAME` must be alphanumeric and allows whitespace.
+- `STUDENTNAME` must match exactly (case-insensitive).
+- Group is successfully created only if all student names match.
 
 ![Group](images/Group.png)
 
 Examples:
 
-- If the addressgroup contains `Bob` and `Tom`
-- `group g/StudyGroup1 s/Bob s/Tom` groups `Bob` and `Tom`
-- `group g/StudyGroup1 s/Bo` returns `No students found!`<br>
+If the addressgroup contains `Alice Pauline` and `Benson Meier`,
+- `group g/Study Group 1 s/alice pauline s/benson meier`
+  - Successfully groups `Alice Pauline` and `Benson Meier` into `StudyGroup1`.
+- `group g/Study Group 2 s/ali`
+  - Returns `The following students could not be found: ali`
 
 ### Locating persons by name: `find`
 
