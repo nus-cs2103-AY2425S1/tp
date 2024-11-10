@@ -24,9 +24,9 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        // If the user provides a tag search prefix (e.g., "t/diabetic"), search by tags
-        if (trimmedArgs.startsWith("t/")) {
-            String tagKeywords = trimmedArgs.replace("t/", "").trim();
+        // If the user provides a tag search prefix (e.g., "tag/diabetic"), search by tags
+        if (trimmedArgs.startsWith("tag/")) {
+            String tagKeywords = trimmedArgs.replace("tag/", "").trim();
 
             if (tagKeywords.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
