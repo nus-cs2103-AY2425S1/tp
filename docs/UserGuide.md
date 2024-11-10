@@ -38,6 +38,7 @@ Let’s begin and get you up to speed with AgentAssist!
    - 5.4 [General Commands](#54-general-commands)
    - 5.5 [Saving Data](#55-saving-data)
    - 5.6 [Modifying the Data File](#56-modifying-the-data-file)
+   - 5.7 [Modifying the Window Size](#57-modifying-the-window-size)
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
 8. [Command Summary](#8-command-summary)
@@ -97,15 +98,18 @@ Welcome to AgentAssist. Here’s how to get up and running quickly and easily.
 
 Ensure you have **Java 17** installed on your computer. AgentAssist is optimized for **Java 17**, and using other versions may affect performance or functionality. If you already have Java 17 installed, you can skip this step.
 
+To verify you have Java 17 installed: <a id="verify-java-version"></a>
+* [Open your terminal (or command prompt)](#step-4-run-the-application) and type:
+```
+java -version
+```
+* If you see Java 17 in the output, you’re good to go!
+
 To install Java 17:
 * Visit the Java download page from [Oracle](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 * Download the appropriate installer for your operating system (Windows, macOS, or Linux).
 * Follow the installation instructions on the website to complete the setup.
-* Once installed, verify the installation by [opening your terminal (or command prompt)](#step-4-run-the-application) and typing:
-    ```
-    java -version
-    ```
-* If you see Java 17 in the output, you’re good to go!
+* Once installed, verify the installation as per the [section above](#verify-java-version).
 
 ### Step 2: Download the AgentAssist application
 
