@@ -1,39 +1,39 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
 /**
  * A CommandBox component that is part of the UI, allowing the user to input commands.
- * The CommandBox supports autocomplete functionality for command input, including autocompleting
- * command words and parameters, and displaying suggestions for the current command context.
- *
- * <p>
- * Users can press the Control key for autocompletion when typing a command or parameter.
- * This component dynamically updates the suggestion based on the user's input and the available
- * commands in the command syntax map.
- * </p>
- *
- * <p>
- * The CommandBox listens for user input, and upon submission, it delegates the execution
- * of the command to the provided.
- * </p>
+ * This version provides simple word-by-word autocomplete suggestions based on the command syntax map.
  */
 public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private static final Map<String, String> commandSyntaxMap = new HashMap<>();
-    private String currentSuggestion = "";
+    private static final Map<String, List<String>> commandParameterOrder = new HashMap<>();
+    private static final Map<String, String> parameterMap = new HashMap<>();
+    private static final String DEFAULT_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt;"
+            + " -fx-text-fill: white;";
+    private static final String INPUT_NEEDED_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt;"
+            + " -fx-text-fill: #fb5252;";
+    private boolean isProgrammaticChange = false;
+
     @FXML
     private TextField commandTextField;
     @FXML
@@ -42,17 +42,16 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
 
     static {
-
         // Initialize command syntax map
         commandSyntaxMap.put("add", "add n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME "
                 + "ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP "
                 + "dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
         commandSyntaxMap.put("addec", "addec ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE "
-                        + "ecrs/EMERGENCY_CONTACT_RELATIONSHIP");
+                + "ecrs/EMERGENCY_CONTACT_RELATIONSHIP");
         commandSyntaxMap.put("archive", "archive [DESCRIPTION]");
         commandSyntaxMap.put("clear", "clear");
         commandSyntaxMap.put("delete", "delete INDEX [ec/EMERGENCY_CONTACT_INDEX]");
-        commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/ECINDEX "
+        commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/EMERGENCY_CONTACT_INDEX "
                 + "ecname/EMERGENCY_CONTACT_NAME ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME "
                 + "dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
         commandSyntaxMap.put("find", "find KEYWORD [MORE_KEYWORDS]");
@@ -65,30 +64,282 @@ public class CommandBox extends UiPart<Region> {
         commandSyntaxMap.put("redo", "redo");
         commandSyntaxMap.put("undo", "undo");
 
+        // Initialize parameter mappings
+        parameterMap.put("n/", "n/NAME");
+        parameterMap.put("p/", "p/PHONE");
+        parameterMap.put("e/", "e/EMAIL");
+        parameterMap.put("a/", "a/ADDRESS");
+        parameterMap.put("ecname/", "ecname/EMERGENCY_CONTACT_NAME");
+        parameterMap.put("ecphone/", "ecphone/EMERGENCY_CONTACT_PHONE");
+        parameterMap.put("ecrs/", "ecrs/EMERGENCY_CONTACT_RELATIONSHIP");
+        parameterMap.put("dname/", "dname/DOCTOR_NAME");
+        parameterMap.put("dphone/", "dphone/DOCTOR_PHONE");
+        parameterMap.put("demail/", "demail/DOCTOR_EMAIL");
+        parameterMap.put("t/", "t/TAG");
+        parameterMap.put("ec/", "ec/EMERGENCY_CONTACT_INDEX");
+
+        // Initialize command-specific parameter order
+        commandParameterOrder.put("add", Arrays.asList(
+                "n/", "p/", "e/", "a/", "ecname/", "ecphone/", "ecrs/", "dname/", "dphone/", "demail/", "t/"
+        ));
+        commandParameterOrder.put("addec", Arrays.asList(
+                "ecname/", "ecphone/", "ecrs/"
+        ));
+        commandParameterOrder.put("edit", Arrays.asList(
+                "n/", "p/", "e/", "a/", "ec/", "ecname/", "ecrs/", "dname/", "dphone/", "demail/", "t/"
+        ));
+        commandParameterOrder.put("delete", Arrays.asList(
+                "ec/"
+        ));
     }
+
     /**
-     * Creates a CommandBox component that allows users to input and execute commands.
-     * It also provides autocomplete suggestions for commands and parameters.
+     * Creates a CommandBox with the given CommandExecutor.
+     * This command box provides an interactive command interface with suggestions based on command syntax.
+     * Suggestions are shown for:
+     * - Available commands when typing command keywords
+     * - Parameter syntax for commands with parameters
+     * - Next parameter in sequence after completing each parameter
      *
-     * @param commandExecutor The executor responsible for executing commands input by the user.
+     * @param commandExecutor Lambda function that executes the entered command text
      */
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-
-        // Handle text changes
+        // Listen for ANY text changes to reset ALL styles
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            setStyleToDefault();
+            resetStyle();
+            commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS); // Remove error class too
+
             handleTextChanged(newValue);
         });
 
-        // Handle Control key release for autocomplete
-        commandTextField.setOnKeyReleased(event -> {
+        // Add control key handler
+        commandTextField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.CONTROL) {
-                handleControlCompletion();
+                handleControlPressed();
                 event.consume();
             }
         });
+    }
+    private void resetStyle() {
+        commandTextField.setStyle(DEFAULT_STYLE);
+    }
+
+
+    private String findShortestCommandMatch(String partial) {
+        if (partial.isEmpty()) {
+            return null;
+        }
+
+        String shortestMatch = null;
+
+        // Changed to require exact case matching
+        for (String command : commandSyntaxMap.keySet()) {
+            if (command.startsWith(partial)) {
+                if (shortestMatch == null || command.length() < shortestMatch.length()) {
+                    shortestMatch = command;
+                }
+            }
+        }
+
+        return shortestMatch;
+    }
+
+    private void handleControlPressed() {
+        // Trim excess spaces but keep the input intact
+        String input = commandTextField.getText().replaceAll("\\s+$", ""); // Remove trailing spaces
+
+        // First check for single word commands
+        if (!input.contains(" ")) {
+            String match = findShortestCommandMatch(input.trim());
+            if (match != null) {
+                if (match.equals(input)) {
+                    // Check if command requires INDEX
+                    String syntax = commandSyntaxMap.get(match);
+                    if (syntax.contains("INDEX")) {
+                        commandTextField.setStyle(INPUT_NEEDED_STYLE);
+                        return;
+                    }
+                    // If no INDEX needed, proceed with parameter autocomplete
+                    String nextParam = getNextParameter(match, match);
+                    if (nextParam != null) {
+                        String nextPrefix = nextParam.substring(0, nextParam.indexOf('/') + 1);
+                        commandTextField.setText(match + " " + nextPrefix);
+                        commandTextField.positionCaret(commandTextField.getText().length());
+                    }
+                } else {
+                    // Just complete the command
+                    commandTextField.setText(match);
+                    commandTextField.positionCaret(match.length());
+                }
+            }
+            return;
+        }
+
+        // Check if input sequence is valid before proceeding with any autocomplete
+        if (!isValidPreSlashSequence(input)) {
+            return; // Do not autocomplete if sequence is invalid
+        }
+
+        String[] parts = input.split("\\s+");
+        String command = parts[0];
+        String lastPart = parts[parts.length - 1];
+
+        // If last part ends with a slash, turn red (user needs to input value)
+        if (lastPart.endsWith("/")) {
+            commandTextField.setStyle(INPUT_NEEDED_STYLE);
+            return;
+        }
+
+        // Check if the last part contains a valid prefix and value
+        if (lastPart.contains("/")) {
+            String prefix = lastPart.substring(0, lastPart.indexOf('/') + 1);
+            String value = lastPart.substring(lastPart.indexOf('/') + 1).trim();
+
+            // If there's a value after the slash
+            if (!value.isEmpty()) {
+                String nextParam = getNextParameter(command, input.trim());
+                if (nextParam != null) {
+                    String nextPrefix = nextParam.substring(0, nextParam.indexOf('/') + 1);
+                    // Always add just one space before new parameter
+                    commandTextField.setText(input.trim() + " " + nextPrefix);
+                    commandTextField.positionCaret(commandTextField.getText().length());
+                }
+                return;
+            }
+        }
+
+        // Rest of parameter autocompletion
+        if (!commandSyntaxMap.containsKey(command)) {
+            return;
+        }
+
+        String nextParam = getNextParameter(command, input.trim());
+        if (nextParam != null) {
+            String nextPrefix = nextParam.substring(0, nextParam.indexOf('/') + 1);
+            // Always add just one space
+            commandTextField.setText(input.trim() + " " + nextPrefix);
+            commandTextField.positionCaret(commandTextField.getText().length());
+        }
+    }
+
+    private boolean isValidPreSlashSequence(String input) {
+        String command = input.split("\\s+")[0];
+        if (!commandSyntaxMap.containsKey(command)) {
+            return false;
+        }
+
+        String fullSyntax = commandSyntaxMap.get(command);
+
+        if (fullSyntax.contains("INDEX") || fullSyntax.contains("KEYWORD")) {
+            String[] inputParts = input.trim().split("\\s+");
+            if (inputParts.length > 1) {
+                if (fullSyntax.contains("INDEX")) {
+                    fullSyntax = fullSyntax.replace("INDEX", inputParts[1]);
+                } else {
+                    fullSyntax = fullSyntax.replace("KEYWORD", inputParts[1]);
+                }
+            }
+        }
+
+        // Find the longest matching prefix in the input
+        String longestPrefix = null;
+        int longestPrefixLength = 0;
+        for (String prefix : parameterMap.keySet()) {
+            if (input.contains(prefix) && prefix.length() > longestPrefixLength) {
+                longestPrefix = prefix;
+                longestPrefixLength = prefix.length();
+            }
+        }
+
+        // If no prefix found or input is shorter than what we found so far
+        if (longestPrefix == null) {
+            return true; // Allow typing to continue
+        }
+
+        int inputSlashPos = input.indexOf('/');
+        int syntaxSlashPos = fullSyntax.indexOf('/');
+
+        String inputToCompare = (inputSlashPos == -1) ? input : input.substring(0, inputSlashPos);
+        String syntaxToCompare = fullSyntax.substring(0, syntaxSlashPos);
+
+        if (inputToCompare.length() > syntaxToCompare.length()) {
+            return false;
+        }
+
+        for (int i = 0; i < inputToCompare.length(); i++) {
+            if (inputToCompare.charAt(i) != syntaxToCompare.charAt(i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+
+    private boolean hasInvalidParameterStructure(String input) {
+        String[] parts = input.split("\\s+");
+        String command = parts[0];
+
+        // Create a set of valid prefixes for easier lookup
+        Set<String> validPrefixes = new HashSet<>(parameterMap.keySet());
+
+        // Check each part that contains a slash
+        for (String part : parts) {
+            int slashIndex = part.indexOf('/');
+            if (slashIndex != -1) {
+                // Find the longest valid prefix that matches this part
+                String longestPrefix = null;
+                int longestLength = 0;
+
+                for (String prefix : validPrefixes) {
+                    if (part.startsWith(prefix) && prefix.length() > longestLength) {
+                        longestPrefix = prefix;
+                        longestLength = prefix.length();
+                    }
+                }
+
+                // If we found a valid prefix
+                if (longestPrefix != null) {
+                    // Check if there are any more slashes after this valid prefix
+                    if (part.indexOf('/', slashIndex + 1) != -1) {
+                        return true; // Invalid structure
+                    }
+                } else {
+                    // No valid prefix found for this part with a slash
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean hasProperSpaceBeforePrefix(String input, String prefix) {
+        int prefixPos = input.lastIndexOf(prefix);
+        if (prefixPos <= 0) {
+            return false;
+        }
+
+        // Get the last space before this prefix
+        int lastSpacePos = input.lastIndexOf(' ', prefixPos);
+        if (lastSpacePos == -1) {
+            return false; // No space found before prefix at all
+        }
+
+        // Get the text between the last space and this prefix
+        String textBetween = input.substring(lastSpacePos + 1, prefixPos);
+
+        // Check if there are any valid prefixes in the text between
+        // This handles cases like "namep/" or "phonee/"
+        for (String validPrefix : parameterMap.keySet()) {
+            if (textBetween.contains(validPrefix)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private void handleTextChanged(String input) {
@@ -97,228 +348,167 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        String[] words = input.split("\\s+");
-        String commandPrefix = words[0];
+        // New section for command suggestions - removed toLowerCase()
+        if (!input.contains(" ")) {
+            StringBuilder suggestions = new StringBuilder();
+            boolean foundMatch = false;
 
-        // Find the best matching command
-        String bestMatch = findBestMatchingCommand(commandPrefix);
+            List<String> commands = new ArrayList<>(commandSyntaxMap.keySet());
+            Collections.sort(commands);
 
-        if (bestMatch != null) {
-            String fullSyntax = commandSyntaxMap.get(bestMatch);
-            suggestionLabel.setText(fullSyntax);
-            suggestionLabel.setVisible(true);
-            currentSuggestion = fullSyntax;
-
-            if (bestMatch.equals(commandPrefix)) {
-                processParameters(input, fullSyntax, words);
+            for (String command : commands) {
+                if (command.startsWith(input.trim())) {
+                    if (foundMatch) {
+                        suggestions.append(" | ");
+                    }
+                    suggestions.append(commandSyntaxMap.get(command));
+                    foundMatch = true;
+                }
             }
-        } else {
+
+            if (foundMatch) {
+                suggestionLabel.setText(suggestions.toString());
+                suggestionLabel.setVisible(true);
+                return;
+            }
+        }
+
+        String[] parts = input.split("\\s+");
+        String command = parts[0];
+
+        // If command isn't recognized, hide suggestion
+        if (!commandSyntaxMap.containsKey(command)) {
             suggestionLabel.setVisible(false);
-        }
-    }
-
-    /**
-     * Finds the best matching command based on the given prefix.
-     * Prioritizes shorter matches first and only moves to longer commands
-     * when the prefix uniquely matches the longer command.
-     */
-    private String findBestMatchingCommand(String prefix) {
-        String bestMatch = null;
-
-        for (String cmd : commandSyntaxMap.keySet()) {
-            if (cmd.startsWith(prefix)) {
-                if (bestMatch == null || cmd.length() < bestMatch.length()) {
-                    bestMatch = cmd;
-                }
-                // If the prefix fully matches the command, use the longer one
-                if (cmd.equals(prefix)) {
-                    return cmd;
-                }
-            }
-        }
-        return bestMatch;
-    }
-
-
-    private void processParameters(String input, String fullSyntax, String[] words) {
-        StringBuilder consumedSyntax = new StringBuilder(words[0]);
-        String[] syntaxParts = fullSyntax.split("\\s+");
-
-        int syntaxIndex = 1; // Start after command word
-        boolean hideSuggestion = false;
-
-        // Split input by spaces to properly handle multi-word parameters
-        String[] inputParts = input.split("\\s+");
-        String currentPrefix = null;
-        StringBuilder currentValue = new StringBuilder();
-
-        // Skip the command word and process input parameters
-        for (int i = 1; i < inputParts.length; i++) {
-            String part = inputParts[i];
-
-            // Check if this is a new parameter prefix
-            if (part.contains("/")) {
-                // If we had a previous parameter, add it to consumed syntax
-                if (currentPrefix != null) {
-                    consumedSyntax.append(" ").append(currentPrefix).append(currentValue);
-                    syntaxIndex++;
-                }
-
-                // Start a new parameter
-                currentPrefix = part.substring(0, part.indexOf("/") + 1);
-                currentValue = new StringBuilder(part.substring(part.indexOf("/") + 1));
-
-                // Skip this parameter in the syntax index
-                while (syntaxIndex < syntaxParts.length && syntaxParts[syntaxIndex].startsWith(currentPrefix)) {
-                    syntaxIndex++;
-                }
-
-                // Hide suggestion while typing parameter
-                if (!input.endsWith(" ")) {
-                    hideSuggestion = true;
-                    suggestionLabel.setVisible(false);
-                    return;
-                }
-            } else if (currentPrefix != null) {
-                // Continue building the current parameter value
-                currentValue.append(" ").append(part);
-            }
-
-            // Move to the next parameter if we're at a valid breakpoint
-            if (currentPrefix != null && input.endsWith(" ")) {
-                boolean hasNextParameter = false;
-                if (i + 1 < inputParts.length) {
-                    hasNextParameter = inputParts[i + 1].contains("/");
-                }
-
-                if (hasNextParameter) {
-                    consumedSyntax.append(" ").append(currentPrefix).append(currentValue);
-                    currentPrefix = null;
-                    currentValue = new StringBuilder();
-                    syntaxIndex++;
-                }
-            }
-        }
-
-        // Add the current parameter if we were building one
-        if (currentPrefix != null) {
-            consumedSyntax.append(" ").append(currentPrefix).append(currentValue);
-        }
-
-        // Prepare remaining syntax to append as a suggestion
-        StringBuilder remainingSyntax = new StringBuilder();
-        if (!hideSuggestion && syntaxIndex < syntaxParts.length) {
-            if (input.endsWith(" ") && (currentPrefix == null || currentValue.length() > 0)) {
-                String nextParam = syntaxParts[syntaxIndex];
-                remainingSyntax.append(" ").append(nextParam);
-
-                // Add remaining parameters
-                for (int i = syntaxIndex + 1; i < syntaxParts.length; i++) {
-                    remainingSyntax.append(" ").append(syntaxParts[i]);
-                }
-            }
-        }
-
-        // Update the suggestion label
-        if (!hideSuggestion && remainingSyntax.length() > 0) {
-            suggestionLabel.setText(consumedSyntax.toString() + remainingSyntax);
-            suggestionLabel.setVisible(true);
-        } else {
-            suggestionLabel.setVisible(false);
-        }
-    }
-
-    /**
-     * Handles autocompletion based on the current input when the Control key is pressed.
-     */
-    private void handleControlCompletion() {
-        String input = commandTextField.getText().trim();
-        if (input.isEmpty()) {
             return;
         }
 
-        String[] words = input.split("\\s+");
-        String command = words[0];
+        // Special handling for commands without slash parameters
+        if (!commandSyntaxMap.get(command).contains("/")) {
+            // If just the command is typed
+            if (input.trim().equals(command)) {
+                suggestionLabel.setText(commandSyntaxMap.get(command));
+                suggestionLabel.setVisible(true);
+                return;
+            }
 
-        // Find the best matching command based on the prefix
-        String bestMatch = findBestMatchingCommand(command);
+            // For list command with optional sort order
+            if (command.equals("list") && parts.length == 1) {
+                suggestionLabel.setText(commandSyntaxMap.get(command));
+                suggestionLabel.setVisible(true);
+                return;
+            }
 
-        if (bestMatch != null) {
-            // If the best match is the same as the command, we want to suggest parameters
-            if (bestMatch.equals(command)) {
-                // If the command has parameters, suggest the next part of the command
-                String fullSyntax = commandSyntaxMap.get(bestMatch);
-                String[] syntaxParts = fullSyntax.split("\\s+");
+            // Hide suggestions once parameters are being typed for non-slash commands
+            suggestionLabel.setVisible(false);
+            return;
+        }
 
-                // Track already entered parameters to determine the next suggestion
-                int syntaxIndex = 1; // Start after the command word
-                StringBuilder consumedSyntax = new StringBuilder(command);
+        // Regular handling for slash-parameter commands
+        if (hasInvalidParameterStructure(input)) {
+            suggestionLabel.setVisible(false);
+            return;
+        }
 
-                // Determine which parts of the syntax have already been entered
-                for (int i = 1; i < words.length; i++) {
-                    String part = words[i];
-                    if (syntaxIndex < syntaxParts.length && syntaxParts[syntaxIndex].equals(part)) {
-                        // If the input matches the current expected syntax part, move forward
-                        consumedSyntax.append(" ").append(part);
-                        syntaxIndex++;
-                    } else if (part.contains("/")) {
-                        // If the input is a parameter with a slash, move forward in the syntax parts
-                        consumedSyntax.append(" ").append(part);
-                        syntaxIndex++;
-                    }
-                }
+        if (!isValidPreSlashSequence(input)) {
+            suggestionLabel.setVisible(false);
+            return;
+        }
 
-                // Skip already entered parameters
-                while (syntaxIndex < syntaxParts.length && isParameterAlreadyEntered(input, syntaxParts[syntaxIndex])) {
-                    syntaxIndex++;
-                }
+        // Find the last parameter prefix in the input with longest match
+        String longestPrefix = null;
+        int lastPrefixPos = -1;
+        int longestPrefixLength = 0;
+        String restOfInput = "";
 
-                // If there are remaining parameters or words to suggest
-                if (syntaxIndex < syntaxParts.length) {
-                    String nextPart = syntaxParts[syntaxIndex];
-                    String completion;
-
-                    if (nextPart.contains("/")) {
-                        // It's a parameter, e.g., n/NAME, so autocomplete the prefix
-                        completion = nextPart.substring(0, nextPart.indexOf("/") + 1);
-                    } else {
-                        // It's a regular word like INDEX, so autocomplete the entire word
-                        completion = nextPart;
-                    }
-
-                    // Add the next part to the input
-                    String newText = input + (input.endsWith(" ") ? "" : " ") + completion;
-                    commandTextField.setText(newText);
-                    commandTextField.positionCaret(newText.length());
-                    return;
-                }
-            } else {
-                // If the current input doesn't fully match the best match,
-                // autocomplete to the best match command without further parameters
-                String newText = bestMatch;
-
-                // Check if there are additional parameters for the command
-                String fullSyntax = commandSyntaxMap.get(bestMatch);
-                if (fullSyntax.split("\\s+").length > 1) {
-                    newText += " "; // Add trailing space if there are parameters expected
-                }
-
-                commandTextField.setText(newText);
-                commandTextField.positionCaret(newText.length());
-                currentSuggestion = fullSyntax;
+        for (String prefix : parameterMap.keySet()) {
+            int pos = input.lastIndexOf(prefix);
+            if (pos > -1 && hasProperSpaceBeforePrefix(input, prefix) && prefix.length() > longestPrefixLength) {
+                lastPrefixPos = pos;
+                longestPrefix = prefix;
+                longestPrefixLength = prefix.length();
+                restOfInput = input.substring(pos + prefix.length());
             }
         }
+
+        // We just typed the command
+        if (input.trim().equals(command)) {
+            suggestionLabel.setText(commandSyntaxMap.get(command));
+            suggestionLabel.setVisible(true);
+            return;
+        }
+
+        // If no valid prefix with proper spacing found, hide suggestion
+        if (longestPrefix == null) {
+            suggestionLabel.setVisible(false);
+            return;
+        }
+
+        // If we just typed a properly spaced prefix
+        if (restOfInput.trim().isEmpty()) {
+            String paramValue = parameterMap.get(longestPrefix).substring(longestPrefix.length());
+            String beforePrefix = input.substring(0, lastPrefixPos);
+            suggestionLabel.setText(beforePrefix + longestPrefix + paramValue);
+            suggestionLabel.setVisible(true);
+            return;
+        }
+
+        // If we're typing a value (not ended with space)
+        if (!input.endsWith(" ")) {
+            suggestionLabel.setVisible(false);
+            return;
+        }
+
+        // If we just pressed space after completing a value
+        if (input.endsWith(" ")) {
+            String nextParam = getNextParameter(command, input.trim());
+            if (nextParam != null) {
+                suggestionLabel.setText(input.trim() + " " + nextParam);
+                suggestionLabel.setVisible(true);
+                return;
+            }
+        }
+
+        suggestionLabel.setVisible(false);
     }
 
+    private String getNextParameter(String command, String currentInput) {
+        List<String> paramOrder = commandParameterOrder.get(command);
+        if (paramOrder == null) {
+            return null;
+        }
 
-    private boolean isParameterAlreadyEntered(String input, String parameter) {
-        String[] inputWords = input.split("\\s+");
-        for (String word : inputWords) {
-            if (word.startsWith(parameter.substring(0, parameter.indexOf("/") + 1))) {
-                return true;
+        // Create a set of completed prefixes
+        Set<String> completedPrefixes = new HashSet<>();
+
+        // Split input into parts and process each part in order
+        String[] parts = currentInput.split("\\s+");
+        for (int i = 1; i < parts.length; i++) {
+            String part = parts[i];
+            // Find the longest matching prefix for this part
+            String matchedPrefix = null;
+            for (String prefix : paramOrder) {
+                if (part.startsWith(prefix) && (matchedPrefix == null || prefix.length() > matchedPrefix.length())) {
+                    matchedPrefix = prefix;
+                }
+            }
+
+            // If we found a prefix and there's a value after it, mark it as completed
+            if (matchedPrefix != null) {
+                String value = part.substring(matchedPrefix.length());
+                if (!value.isEmpty()) {
+                    completedPrefixes.add(matchedPrefix);
+                }
             }
         }
-        return false;
+
+        // Find the first uncompleted parameter in the order
+        for (String prefix : paramOrder) {
+            if (!completedPrefixes.contains(prefix)) {
+                return parameterMap.get(prefix);
+            }
+        }
+
+        return null;
     }
 
     @FXML
@@ -330,29 +520,29 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            isProgrammaticChange = true; // Flag that this is a programmatic change
             commandTextField.setText("");
+            isProgrammaticChange = false; // Reset the flag
             suggestionLabel.setVisible(false);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
     }
 
-    private void setStyleToDefault() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
-    }
 
     private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = commandTextField.getStyleClass();
-        if (!styleClass.contains(ERROR_STYLE_CLASS)) {
-            styleClass.add(ERROR_STYLE_CLASS);
+        if (!commandTextField.getStyleClass().contains(ERROR_STYLE_CLASS)) {
+            commandTextField.getStyleClass().add(ERROR_STYLE_CLASS);
         }
     }
 
     /**
-     * Functional interface for executing commands.
+     * Functional interface for command execution in the CommandBox.
+     * Implementations should handle parsing and execution of command text entered by users.
+     * Commands can throw CommandException for execution errors or ParseException for invalid syntax.
      */
     @FunctionalInterface
     public interface CommandExecutor {
-        CommandResult execute(String commandText) throws CommandException, ParseException;
+        void execute(String commandText) throws CommandException, ParseException;
     }
 }
