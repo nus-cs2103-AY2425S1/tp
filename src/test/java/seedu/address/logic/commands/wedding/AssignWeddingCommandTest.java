@@ -2,11 +2,14 @@ package seedu.address.logic.commands.wedding;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.CLIVE_WEDDING;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,12 +19,16 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandTestUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
@@ -32,12 +39,12 @@ public class AssignWeddingCommandTest {
     public void assignWedding_success() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         Map<Wedding, String> weddingsToAdd = new HashMap<>() {
-            { put(AMY_WEDDING, "g"); }
+            { put(CLIVE_WEDDING, "g"); }
         };
         AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
                 INDEX_FIRST, weddingsToAdd, false);
 
-        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS, "Amy's Wedding",
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS, "Clive's Wedding",
                 personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -125,6 +132,55 @@ public class AssignWeddingCommandTest {
                 addedWeddings,
                 personToEdit.getName().toString());
         CommandTestUtil.assertCommandSuccess(assignWeddingCommand, model, expectedMessage, model);
-
     }
+
+    @Test
+    public void execute_invalidPersonIndex_throwsCommandException() {
+        Map<Wedding, String> weddingsToAdd = new HashMap<>() {
+            { put(CLIVE_WEDDING, "g"); }
+        };
+        AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
+                Index.oneBasedNoConstraints(model.getFilteredPersonList().size() + 1),
+                weddingsToAdd, false);
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                1, model.getFilteredPersonList().size() + 1), () -> assignWeddingCommand.execute(model));
+    }
+
+    @Test
+    public void execute_personAlreadyAssignedToWedding_throwsCommandException() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Map<Wedding, String> weddingsToAdd = new HashMap<>() {
+            { put(AMY_WEDDING, "g"); }
+        };
+
+        // Manually assign wedding to person
+        model.setPerson(personToEdit, new Person(personToEdit.getName(),
+                personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(),
+                personToEdit.getTags(), Set.of(AMY_WEDDING), personToEdit.getTasks()));
+
+        AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(INDEX_FIRST, weddingsToAdd, false);
+        assertThrows(CommandException.class,
+                String.format(Messages.MESSAGE_WEDDING_ALREADY_ASSIGNED,
+                        personToEdit.getName()), () -> assignWeddingCommand.execute(model));
+    }
+
+    @Test
+    public void execute_assignWeddingToVendor_success() throws CommandException {
+        //get first index and make that person vendor
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Vendor vendor = new Vendor(personToEdit);
+        model.setPerson(personToEdit, vendor);
+
+        Map<Wedding, String> weddingsToAdd = new HashMap<>() {
+            { put(BOB_WEDDING, "p1"); }
+        };
+        AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(INDEX_FIRST, weddingsToAdd, true);
+        CommandResult result = assignWeddingCommand.execute(model);
+
+        String expectedMessage = String.format(Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS,
+                "Bob's Wedding", vendor.getName());
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertTrue(model.getWedding(BOB_WEDDING).hasPerson(vendor));
+    }
+
 }

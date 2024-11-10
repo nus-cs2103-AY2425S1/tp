@@ -8,6 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -15,6 +19,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Adds a person to the address book.
@@ -58,6 +64,33 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON);
         }
+
+        // Creates weddings for all new ones and assigns person to all wedding guest lists
+        for (Wedding wedding : toAdd.getWeddings()) {
+            if (!model.hasWedding(wedding)) {
+                model.addWedding(wedding);
+            }
+            wedding.addToGuestList(toAdd);
+        }
+
+        // Gets model's version of all weddings that need to be added
+        Set<Wedding> modelWeddings = toAdd.getWeddings().stream().map(model::getWedding)
+                .collect(Collectors.toCollection(HashSet::new));
+        // Replaces all versions of weddings in person with model version
+        toAdd.setWeddings(modelWeddings);
+
+        // Creates tags for all new ones and increases tag count for all
+        for (Tag tag : toAdd.getTags()) {
+            if (!model.hasTag(tag)) {
+                model.addTag(tag);
+            }
+            tag.increaseTaggedCount();
+        }
+
+        // Gets model's version of all tags that need to be added
+        Set<Tag> modelTags = toAdd.getTags().stream().map(model::getTag).collect(Collectors.toCollection(HashSet::new));
+        // Replaces all versions of tags in person with model version
+        toAdd.setTags(modelTags);
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(Messages.MESSAGE_ADD_PERSON_SUCCESS, Messages.format(toAdd)));

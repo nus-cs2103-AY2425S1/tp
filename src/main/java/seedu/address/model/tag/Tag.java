@@ -25,6 +25,17 @@ public class Tag {
     }
 
     /**
+     * Constructs a {@code Tag}.
+     * @param tagName A valid {@code TagName}.
+     * @param taggedCount The number of people tagged with this tag.
+     */
+    public Tag(TagName tagName, int taggedCount) {
+        requireNonNull(tagName);
+        this.tagName = tagName;
+        this.taggedCount = taggedCount;
+    }
+
+    /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {

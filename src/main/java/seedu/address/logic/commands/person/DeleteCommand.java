@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -45,6 +46,15 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+
+        // Make sure person is deleted from the all weddings they are previously assigned to
+        for (Wedding wedding : personToDelete.getWeddings()) {
+            wedding = model.getWedding(wedding);
+            wedding.removePerson(personToDelete);
+        }
+
+        model.updateFilteredWeddingList(Model.PREDICATE_SHOW_ALL_WEDDINGS);
+
         return new CommandResult(String.format(
                 Messages.MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)
         ));
