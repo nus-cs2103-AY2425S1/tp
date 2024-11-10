@@ -171,13 +171,14 @@ The prefixes used in **EZSTATE** are universal across all commands _(i.e. have t
 | sel/   | seller  | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `sel/1` `sel/2`                       | `sel/0`, `sel/-1`, `sel/abc`              |
 | buy/   | buyer   | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                            | `buy/1` `buy/2`                       | `buy/0`, `buy/-2`, `buy/abc`              |
 
-Congratulations! You've successfully completed the Quick Start guide. 
+Congratulations - you've successfully completed the Quick Start guide!
 
-The [next section](#features) offers an in-depth overview of all the commands available in EZSTATE.
+The [next section](#features) offers an **in-depth overview** of all the commands available in EZSTATE.
 
 Curious about how EZSTATE stores data? Check out the [storage section](#saving-the-data) for more information.
 
 If you're an advanced user looking to edit the JSON file directly, head over to [this section](#editing-the-data-file) for more information.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -937,9 +938,10 @@ EZSTATE data are saved in the hard disk automatically after any command that cha
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+<div markdown="span" class="alert">
+**Caution:**
+If your changes to the data file makes its format invalid, EZSTATE will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause EZSTATE to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -951,7 +953,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EZSTATE home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -966,10 +968,10 @@ _Details coming soon ..._
 
  Action     | Format, Examples                                                                                                                    
 ------------|-------------------------------------------------------------------------------------------------------------------------------------
- **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com`                                    
+ **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com`                                 
  **Clear**  | `clear`                                                                                                                             
  **Delete** | `delete NAME`<br> e.g. `delete James Ho`                                                                                            
- **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com` <br> e.g.`edit 2 n/James Voo` 
+ **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com` <br> e.g.`edit 2 n/James Voo`
  **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                          
  **List**   | `list`                                                                                                                              
  **Help**   | `help`                                                                                                                              
