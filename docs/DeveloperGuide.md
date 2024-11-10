@@ -96,6 +96,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
+And the sequence diagram below illustrates the interactions when `execute("deleteevent 1")` is called instead:
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteEventSequenceDiagram.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
