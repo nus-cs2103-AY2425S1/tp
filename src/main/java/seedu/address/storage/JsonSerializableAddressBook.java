@@ -62,17 +62,24 @@ class JsonSerializableAddressBook {
         List<Patient> patientList = new ArrayList<>();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
+
             if (person instanceof Doctor) {
-                doctorList.add((Doctor) person);
+                Doctor doctor = (Doctor) person;
+                if (addressBook.hasDoctor(doctor)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                }
+                doctorList.add(doctor);
+                addressBook.addDoctor(doctor);
             }
 
             if (person instanceof Patient) {
-                patientList.add((Patient) person);
+                Patient patient = (Patient) person;
+                if (addressBook.hasPatient(patient)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                }
+                patientList.add(patient);
+                addressBook.addPatient(patient);
             }
-            addressBook.addPerson(person);
         }
 
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {
