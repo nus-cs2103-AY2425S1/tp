@@ -206,6 +206,8 @@ as a placeholder claim for now.
 - Same claim ID cannot be added to different plans of the same person.
 - A claim is considered a duplicate if there exists another claim of same claim ID for the same person.
 - Claim ID is always capitalised in the system so b1234 is the considered the same as B1234.
+- Do not add a "-" or "+" sign or any other special characters including but not limited to "$", "£" and "€" infront of
+the claim amount.
 
 <box type="info">
     <span circle slot="icon" class="text-danger"><md>:book:</md></span>
