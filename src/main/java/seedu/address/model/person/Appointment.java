@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Person's appointment in the address book.
@@ -12,12 +13,9 @@ public class Appointment {
     /** Message constraints that indicate the valid format for appointments. */
     public static final String MESSAGE_CONSTRAINTS = "Appointments should be of the format DD-MM-YYYY HH:MM";
 
-    /** Regex for validating appointment format. */
-    public static final String VALIDATION_REGEX =
-            "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4}) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$";
-
     /** Formatter for displaying and parsing appointment date and time. */
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     /** The date and time value of the appointment. */
     public final LocalDateTime value;
@@ -42,7 +40,12 @@ public class Appointment {
      * @return {@code true} if the string is a valid appointment date, otherwise {@code false}.
      */
     public static boolean isValidAppointment(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalDateTime.parse(test, FORMATTER);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**

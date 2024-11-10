@@ -5,10 +5,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Log;
@@ -49,16 +49,17 @@ public class LogCommandParser implements Parser<LogCommand> {
         try {
             nric = new Nric(nricString);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException("NRIC provided is invalid.");
         }
 
         // Parse the date and time
         String dateTimeString = argParts[1] + " " + argParts[2];
         LocalDateTime dateTime;
         try {
-            dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+            dateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
+                    .withResolverStyle(ResolverStyle.STRICT));
         } catch (Exception e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LogCommand.MESSAGE_USAGE));
+            throw new ParseException("Date and time provided are invalid.");
         }
 
         // Join the remaining parts to form the logString

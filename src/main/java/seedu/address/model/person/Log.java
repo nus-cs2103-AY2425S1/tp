@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -11,8 +12,11 @@ import java.util.stream.Collectors;
 public class Log {
     public static final String MESSAGE_CONSTRAINTS =
             "Timestamp must be in format of DD-MM-YYYY HH:MM and log messages should not be blank";
-    public static final String VALIDATION_REGEX =
-            "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4}) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$";
+
+    /** Formatter for displaying and parsing appointment date and time. */
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")
+            .withResolverStyle(ResolverStyle.STRICT);
+
     private final String logString;
     private final LocalDateTime timestamp;
 
@@ -55,9 +59,15 @@ public class Log {
         }
 
         String timestamp = logEntryParts[0] + " " + logEntryParts[1];
-        String logMessage = logEntryParts[2];
 
-        return timestamp.matches(VALIDATION_REGEX) && !logMessage.isBlank();
+        try {
+            LocalDateTime.parse(timestamp, FORMATTER);
+        } catch (Exception e) {
+            return false;
+        }
+
+        String logMessage = logEntryParts[2];
+        return !logMessage.isBlank();
     }
 
     /**
@@ -85,7 +95,7 @@ public class Log {
      */
     @Override
     public String toString() {
-        return timestamp.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " " + logString;
+        return timestamp.format(DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")) + " " + logString;
     }
 
     /**
