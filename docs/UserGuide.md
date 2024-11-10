@@ -34,7 +34,7 @@ at the National University of Singapore. While optimised for use via a Command L
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com s/IFG r/friends r/owesMoney` : Adds a person named `John Doe` to the local database, with the given details.
+   * `add n/John Doe p/98765432 e/johnd@example.com r/friends r/owesMoney` : Adds a person named `John Doe` to the local database, with the given details.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -91,8 +91,22 @@ A person can have zero or more roles.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 r/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 r/criminal`
+
+To add specific roles to a person, you can use the following commands: 
+1. add ... r/athlete - <faculty> - <sport1>, {sport2}, {sport3}...
+2. add ... r/referee - <faculty> - <sport1>, {sport2}, {sport3}...
+3. add ... r/committee - <branch> - <position>
+4. add ... r/committee - Sports - <position> - <faculty>
+5. add ... r/sponsor - <company name>
+6. add ... r/volunteer - <volunteerRole>
+
+Please see a summary of the list of roles, including all IFG Sports, below:
+[More features](#more-features)
+
+Example:
+* `add n/John Doe p/98765432 e/john@mail.com r/athlete - COM - Soccer Men`
 
 ### Listing all persons : `list`
 
@@ -326,7 +340,7 @@ Volunteer Roles (Code - Role Name):
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROLES]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/friend r/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`

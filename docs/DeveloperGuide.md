@@ -569,7 +569,32 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+1. _{ more test cases …​ }
+
+
+### Adding a person
+
+1. Adding a person with all fields
+
+   1. Prerequisites: No persons in the list.
+
+      1. Test case: `add n/Alice p/91234567 e/alice@mail.com r/
+         Expected: A person with the given details is added to the list. Details of new contact shown in the status message. Timestamp in the status bar is updated.
+      1. Test case: `add n/Bob p/98765432
+         Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
 1. _{ more test cases …​ }_
+
+### Editing a person
+
+1. Editing a person with all fields
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `edit 1 n/Alice Paul p/91234567
+      Expected: First contact is updated with the new details. Details of the updated contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `edit 0 n/Bob Paul
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
 
 ### Deleting a person
 
@@ -587,6 +612,18 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Adding an event
+
+Coming soon...
+
+### Editing an event
+
+Coming soon...
+
+### Deleting an event
+
+Coming soon...
 
 ### Saving data
 
