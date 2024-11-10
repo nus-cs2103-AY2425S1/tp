@@ -181,9 +181,21 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
+- `NAME` must be at least one character long, and should only contain alphanumeric characters and spaces.
+- `PHONE_NUMBER` must be at least 3-digit long, and should only contain numbers.
+- `EMAIL` must be a valid email address.
+- `ADDRESS` must be at least one character long.
+- `TAG` must be at least one character long, and should only contain alphanumeric characters and spaces.
 
-**Tip:** A person can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
+<box type="note" seamless>
+
+**Note:**
+
+- `NAME` is case-sensitive (e.g., `John Doe` is different from `john doe`).
+
+- Two contacts are considered duplicate if they have the same name (case-sensitive).
+
+- A person can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
 </box>
 
 Examples:
@@ -198,9 +210,9 @@ Adds a property which a client wants to buy to the address book. The property is
 
 Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="note" seamless>
 
-**Tip:** A property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
+**Note:** A property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
 </box>
 
 Examples:
@@ -217,9 +229,9 @@ Adds a property which a client wants to sell to the address book. The property i
 
 Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="note" seamless>
 
-**Tip:** A Property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
+**Note:** A Property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
 </box>
 
 Examples:
