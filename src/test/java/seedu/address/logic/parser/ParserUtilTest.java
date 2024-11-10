@@ -33,9 +33,11 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_TUTORIAL_1 = "0";
     private static final String INVALID_TUTORIAL_2 = "a";
+    private static final String INVALID_TUTORIAL_3 = "-";
     private static final String INVALID_TUTORIAL_FORMAT = "1-2-4";
     private static final String INVALID_TUTORIAL_NUMBER_IN_LIST = "[1,13]";
-    private static final String INVALID_TUTORIAL_NUMBER_IN_RANGE = "1-13";
+    private static final String INVALID_TUTORIAL_NUMBER_IN_RANGE_1 = "1-13";
+    private static final String INVALID_TUTORIAL_NUMBER_IN_RANGE_2 = "1--2";
     private static final String INVALID_TUTORIAL_RANGE = "5-3";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -249,6 +251,12 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_1));
     }
 
+    // EP: Non-numbers input
+    @Test
+    public void parseTutorials_dash_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_3));
+    }
+
     // EP: Positive numbers
     @Test
     public void parseTutorials_validValueWithoutWhitespace_returnsTutorial() throws Exception {
@@ -285,7 +293,12 @@ public class ParserUtilTest {
     // 4. Test for invalid tutorial number in range (e.g., 1-13)
     @Test
     public void parseTutorials_invalidTutorialNumberInRange_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_RANGE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_RANGE_1));
+    }
+
+    @Test
+    public void parseTutorials_negativeTutorialNumberInRange_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorials(INVALID_TUTORIAL_NUMBER_IN_RANGE_2));
     }
 
     // EP: No keywords
