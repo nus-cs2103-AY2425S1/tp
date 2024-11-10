@@ -634,7 +634,7 @@ _Details coming soon ..._
   A feature grouping within TalentSG that includes functions related to candidates and job roles, such as adding, listing, and filtering candidates.
 
 - **Filter**:
-  A command that narrows down displayed candidates based on specific criteria, such as "status" or "skills," simplifying searching and management.
+  A command that narrows down displayed candidates based on specific criteria, such as "status" or "skills," simplifies searching and management.
 
 ### Resources & Links
 
@@ -642,10 +642,10 @@ _Details coming soon ..._
   Underlined and often blue text within the document that, when clicked, redirects to external resources, guides, or downloads. Requires an internet connection.
 
 - **File Path**:
-  The directory location on your computer where specific files are stored (e.g., `[JAR file location]/data/addressbook.json`), often used when accessing or editing files.
+  The directory location on your computer where specific files are stored (e.g., `[JAR file location]/data/addressbook.json`), is often used when accessing or editing files.
 
 - **Backup**:
-  A saved copy of the data file, recommended before making manual changes to avoid data loss.
+  A saved copy of the data file, is recommended before making manual changes to avoid data loss.
 
 ### Status Glossary
 
@@ -665,7 +665,7 @@ The **Status** field in TalentSG indicates the applicant’s current stage in th
   > **Note**: If an applicant voluntarily withdraws or declines the offer, it can be marked as "Rejected" for record-keeping. Use tags or notes to clarify details, such as `tag/withdrawn` for easy future reference.
 
 #### Additional Tips
-- **Customizing Status Tracking**: HR professionals may add tags (e.g., `tag/withdrew`) for additional details alongside the main status.
+- **Customizing Status Tracking**: HR professionals may add tags (e.g., `t/withdrew`) for additional details alongside the main status.
 - **Updating Status**: Ensure that statuses are updated promptly to reflect the most current applicant stage, improving recruitment tracking and reducing confusion.
 
 ---
@@ -678,7 +678,7 @@ The **Status** field in TalentSG indicates the applicant’s current stage in th
 
 **Expected Behavior**: Ideally, the **Overview Panel** should also be cleared when the list is empty, as no candidates are available for viewing.
 
-**Reason**: This behavior occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
+**Reason**: This behaviour occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
 
 **Potential Solution**:
 - Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
@@ -687,6 +687,6 @@ The **Status** field in TalentSG indicates the applicant’s current stage in th
 
 **Current Workaround**: Users can manually select a new candidate (if available) or restart the app to refresh the **Overview Panel**.
 
-**Future Development**: Since implementing this change would require code modifications not feasible in version 1.6, this feature could be considered for future updates.
+**Future Development**: Since implementing this change would require code modifications that are not feasible in version 1.6, this feature could be considered for future updates.
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
