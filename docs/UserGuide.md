@@ -309,6 +309,8 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
+**Warning**: If you want to remove a contact from a wedding, use the unassign command instead of the delete command. 
+The delete command deletes the contact from the address book entirely.
 <br><br/>
 
 #### Sort all entries: `sort`
@@ -538,6 +540,8 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 **Q**: What if my contact or wedding name contains symbols such as @, (, ) and /?
 **A**: PlanPerfect currently only supports alphanumeric contact and wedding names. We understand that there are names containing these characters, and plan to include support for these characters in a future release.
 
+**Q**: What do I do if the data I entered does not appear in full or is truncated which I do not want?
+**A**: You can expand your window size to view the full details of the information you entered, do this for all fields you can't fully see.
 <br><br/>
 
 ## Known issues
