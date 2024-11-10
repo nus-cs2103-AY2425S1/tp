@@ -534,31 +534,131 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   i. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   ii. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   i. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   ii. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a person
+### Viewing all Guests and Vendors
 
-1. Deleting a person while all persons are being shown
+1. Test case: `list`<br>
+    Expected: All Guests and Vendors are displayed in their respective lists. Total number of Guests (pending, coming, not coming) and Vendors are displayed in the status message.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Adding a Guest
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Test case: `add_guest n/Nick Fury p/96753452 e/nickfury@avengers.com a/219 West 47th Street, New York City, New York rsvp/A r/H t/boss t/avenger`<br>
+     Expected: A new guest is added to the end of the Guest list. Details of the Guest are displayed in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+2. Test case: `add_guest n/Peter Parker p/92458634 e/peter@school.com a/20 Ingram Street, New York City, New York`<br>
+    Expected: A new guest is added to the end of the Guest list. Details of the Guest are displayed in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+3. Test case: `add_guest n/Nick Fury p/96753452 e/nickfury@duplicate.com a/Duplicate City`<br>
+    Expected: No Guest is added. Error details shown in the status message. Status bar remains the same.
+
+### Adding a Vendor
+
+1. Test case: `add_vendor n/Henry Pym p/84568869 e/pym@quantum.com a/31 Albert Street, San Francisco c/Pym Technologies b/1000 t/AUX t/visuals`<br>
+    Expected: A new vendor is added to the end of the Vendor list. Details of the Vendor are displayed in the status message.
+
+2. Test case: `add_vendor n/Stephen Strange p/86759432 e/stephen@mystic.com a/177A Bleecker Street, Manhattan, New York City c/The Sanctum Sanctorum`<br>
+    Expected: A new vendor is added to the end of the Vendor list. Details of the Vendor are displayed in the status message.
+
+3. Test case: `add_vendor n/Henry Pym p/84568869 e/pym@duplicate.com a/Duplicate City c/Duplicate Technologies`<br>
+    Expected: No Vendor is added. Error details shown in the status message. Status bar remains the same.
+
+### Editing a Guest
+
+1. Test case: `edit_guest 1 rsvp/A`<br>
+   Expected: First Guest's RSVP status is updated in the list. Details of the edited Guest is displayed in the status message.
+
+2. Test case: `edit_guest 2 p/99313358 a/21 Jump Street, Brooklyn, New York t/shield`<br>
+   Expected: Second Guest's RSVP status is updated in the list. Details of the edited Guest is displayed in the status message.
+
+3. Test case: Try editing a Guest such that it has the same name and phone number as another Guest on the list.<br>
+   Expected: No Guest is edited. Error details shown in the status message.
+
+### Editing a Vendor
+
+1. Test case: `edit_vendor 1 c/Coca Cola`<br>
+    Expected: First Vendor's company is updated in the list. Details of the edited Vendor is displayed below the input panel.
+
+2. Try editing other vendors with different parameters. Multiple parameters can be specified for each command as well, same as the second test case of edit guest.<br>
+    Expected: The Vendor at the specified index will be edited with the specified fields. Details of the edited Vendor is displayed in the status message.
+
+3. Test case: Try editing a Vendor such that it has the same name and phone number as another Vendor on the list.<br>
+    Expected: No Vendor is edited. Error details shown in the status message. Status bar remains the same.
+
+### Deleting a Guest
+
+Prerequisites: List all Guests and Vendors using the `list` command. Multiple Guests and Vendors in each list.
+
+1. Test case: `delete_guest 1`<br>
+    Expected: First Guest is deleted from the Guest list. Details of the deleted Guest shown in the status message. Timestamp in the status bar is updated.
+
+2. Test case: `delete_guest 0`<br>
+    Expected: No Guest is deleted. Error details shown in the status message. Status bar remains the same.
+
+3. Other incorrect delete commands to try: `delete_guest`, `delete_guest x`, `...` (where x is larger than the guest list size)<br>
+    Expected: Similar to previous.
+
+### Deleting a Vendor
+
+Prerequisites: List all Guests and Vendors using the `list` command. Multiple Guests and Vendors in each list.
+
+1. Test case: `delete_vendor 1`<br>
+   Expected: First Vendor is deleted from the Guest list. Details of the deleted Vendor shown in the status message. Timestamp in the status bar is updated.
+
+2. Test case: `delete_vendor 0`<br>
+   Expected: No Vendor is deleted. Error details shown in the status message. Status bar remains the same.
+
+3. Other incorrect delete commands to try: `delete_vendor`, `delete_vendor x`, `...` (where x is larger than the guest list size)<br>
+   Expected: Similar to previous.
+
+### Finding Guest(s)/Vendor(s)
+
+1. Test case: `find n/Thor`
+    Expected: All Guests and Vendors with the word `Thor`in the name are displayed in their respective lists. Total number of Guests (pending, coming, not coming) and Vendors found will be displayed in the status message.
+
+2. Test case: `find t/agent`
+    Expected: All Guests and Vendors with the tag `agent` are displayed in their respective lists. Total number of Guests (pending, coming, not coming) and Vendors found will be displayed in the status message.
+
+3. Test case: Try using the `find` command with more than one field specified.
+    Expected: No change in the Guests and Vendors displayed. Error details shown in the status message. Status bar remains the same.
+
+### Viewing Statistics
+
+1. Test case: `stats`
+    Expected: All Guests and Vendors are displayed in their respective lists. Total number of Guests (pending, coming, not coming) and Vendors will be displayed in the status message.
+
+### Clearing both lists
+
+1. Test case: `clear`
+    Expected: All Guests and Vendors deleted from their respective lists. Both lists have no contacts displayed. Success message is displayed in the status message.
+
+### Exiting Bridalbuddy
+
+1. Test case: `exit`
+    Expected: Bridalbuddy closes.
+
+### Saving Data
+
+1. Dealing with missing data file
+    i. Delete the file named `addressbook.json` located in the data folder.
+    ii. Relaunch Bridalbuddy
+    iii. Run the command `clear`
+        Expected: A new empty `addressbook.json` file is created in the `data` folder. Sample Guests and Vendors are deleted.
+
+2. Dealing with corrupted data file
+    i. Open the `addressbook.json` file located in the `data` folder with a text editor.
+    ii. Corrupt the file by deleting a few characters. Save the file.
+    iii. Relaunch Bridalbuddy.
+        Expected: No Guests and Vendors will be displayed in the Bridalbuddy.
 
 --------------------------------------------------------------------------------------------------------------------
 
