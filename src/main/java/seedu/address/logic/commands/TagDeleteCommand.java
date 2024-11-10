@@ -58,6 +58,8 @@ public class TagDeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         List<Person> matchingPersons = model.getFilteredPersonList().stream()
                 .filter(person -> person.getName().fullName.equalsIgnoreCase(name.toString()))
                 .toList();
@@ -83,11 +85,12 @@ public class TagDeleteCommand extends Command {
     /**
      * Edits the original set of tags to remove the tags that need to be deleted.
      *
-     * @param ogTags     the original Set of tags of the person.
-     * @param deleteTags the Set of tags to be deleted from the person.
-     * @return the edited Set of tags that no longer include the deleted tags.
+     * @param ogTags     the original {@code Set} of tags of the person.
+     * @param deleteTags the {@code Set} of tags to be deleted from the person.
+     * @return the edited {@code Set} of tags that no longer include the deleted tags.
      */
-    public Set<Tag> getTagsAfterDelete(Set<Tag> ogTags, Set<Tag> deleteTags) {
+    public static Set<Tag> getTagsAfterDelete(Set<Tag> ogTags, Set<Tag> deleteTags) {
+        assert deleteTags != null;
         Set<Tag> copyOgTags = new HashSet<>(ogTags);
         copyOgTags.removeAll(deleteTags);
         return copyOgTags;
@@ -112,14 +115,17 @@ public class TagDeleteCommand extends Command {
      * Generates a message after deleting tags from a person.
      * The message varies depending on whether the tags existed and were successfully deleted.
      *
-     * @param personToEdit the original person before deletion.
-     * @param editedPerson the person after tags have been deleted.
-     * @param model        the model in which the command operates.
-     * @return the result message to display to the user.
+     * @param personToEdit the original {@code Person} before deletion.
+     * @param editedPerson the {@code Person} after tags have been deleted.
+     * @param model        the {@code Model} in which the command operates.
+     * @return the result message {@code String} to display to the user.
      */
     private String generateDeleteMessage(Person personToEdit, Person editedPerson, Model model) {
         Set<Tag> tagsInBoth = new HashSet<>(personToEdit.getTags());
         Set<Tag> tagsInNeither = new HashSet<>(tagsToDelete);
+
+        assert tagsInBoth != null;
+        assert tagsInNeither != null;
 
         if (!personToEdit.getTags().containsAll(tagsToDelete)) {
             tagsInBoth.retainAll(tagsToDelete);
@@ -135,8 +141,7 @@ public class TagDeleteCommand extends Command {
                         Messages.tagSetToString(tagsInNeither), Messages.getName(personToEdit));
 
                 String tagsExist = String.format(MESSAGE_DELETE_TAG_SUCCESS, Messages.tagSetToString(tagsInBoth),
-                        Messages.getName(editedPerson), Messages.getName(editedPerson),
-                        Messages.tagSetToString(tagsInBoth));
+                        Messages.getName(editedPerson));
 
                 return tagsNotExist + tagsExist;
             }

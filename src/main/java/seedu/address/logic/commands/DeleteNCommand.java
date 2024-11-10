@@ -35,6 +35,7 @@ public class DeleteNCommand extends Command {
         StaticContext.setClearAddressBookPending(false);
         // Clear the clearWeddingBookPending flag from StaticContext
         StaticContext.setClearWeddingBookPending(false);
+
         return new CommandResult(MESSAGE_CANCEL_DELETE);
     }
 

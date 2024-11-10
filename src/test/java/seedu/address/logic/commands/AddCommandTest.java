@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -101,27 +102,13 @@ public class AddCommandTest {
     }
 
     @Test
-    public void getWeddingfromTags_weddingsExist_returnsWeddings() {
+    public void handleWeddingDoesntExist_allWeddingsExist_returnsEmptyMessage() throws CommandException {
         ModelStubWithWeddings modelStub = new ModelStubWithWeddings();
         Set<Tag> tags = Set.of(new Tag("Jeremy & Jane"), new Tag("Antonio Olivera & Ramiya d/o Karthik"));
-        List<Wedding> weddings = new AddCommand(new PersonBuilder().build()).getWeddingfromTags(modelStub, tags);
-        assertEquals(2, weddings.size());
-    }
-
-    @Test
-    public void getWeddingfromTags_noWeddingsExist_returnsEmptyList() {
-        ModelStubWithWeddings modelStub = new ModelStubWithWeddings();
-        Set<Tag> tags = Set.of(new Tag("Non Existent & Wedding"));
-        List<Wedding> weddings = new AddCommand(new PersonBuilder().build()).getWeddingfromTags(modelStub, tags);
-        assertTrue(weddings.isEmpty());
-    }
-
-    @Test
-    public void handleWeddingDoesntExist_allWeddingsExist_returnsEmptyMessage() {
-        ModelStubWithWeddings modelStub = new ModelStubWithWeddings();
-        Set<Tag> tags = Set.of(new Tag("Jeremy & Jane"), new Tag("Antonio Olivera & Ramiya d/o Karthik"));
-        String message = new AddCommand(new PersonBuilder().build()).handleWeddingDoesntExist(modelStub, tags);
-        assertEquals("", message);
+        Person validPerson = new PersonBuilder().withName("John Doe").build();
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -325,6 +312,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public String messageWeddingDoesNotExist(Set<Tag> editedTags) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void clearAllPersonTags() {
             throw new AssertionError("This method should not be called.");
         }
@@ -395,6 +387,37 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setPersonInWedding(Person editedPerson, Person personToEdit) {
+            List<Wedding> weddingList = getWeddingFromTags(editedPerson.getTags());
+
+            List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                    .toList();
+
+            for (Set<Person> set : weddingParticipantsSet) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
+
+        @Override
+        public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+            List<String> predicate = tags
+                    .stream().map(Tag::getTagName).collect(Collectors.toList());
+
+            List<Wedding> list = new ArrayList<>();
+
+            for (Wedding wedding : getFilteredWeddingList()) {
+                for (String tagName : predicate) {
+                    if (wedding.getWeddingName().toString().equals(tagName)) {
+                        list.add(wedding);
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        @Override
         public ObservableList<Wedding> getFilteredWeddingList() {
             return filteredWeddings;
         }
@@ -406,6 +429,7 @@ public class AddCommandTest {
     }
 
     private class ModelStubWithWeddings extends ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
         private final WeddingBook weddingBook = new WeddingBook();
 
         ModelStubWithWeddings() {
@@ -414,6 +438,54 @@ public class AddCommandTest {
             weddingBook.addWedding(new Wedding(new WeddingName("Antonio Olivera & Ramiya d/o Karthik"),
                     new Venue("Venue2"),
                     new Date("10/12/2025")));
+        }
+
+        @Override
+        public boolean hasExactPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::equals);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+
+        @Override
+        public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+            List<String> predicate = tags
+                    .stream().map(Tag::getTagName).collect(Collectors.toList());
+
+            List<Wedding> list = new ArrayList<>();
+
+            for (Wedding wedding : getFilteredWeddingList()) {
+                for (String tagName : predicate) {
+                    if (wedding.getWeddingName().toString().equals(tagName)) {
+                        list.add(wedding);
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        @Override
+        public void setPersonInWedding(Person editedPerson, Person personToEdit) {
+            List<Wedding> weddingList = getWeddingFromTags(editedPerson.getTags());
+
+            List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                    .toList();
+
+            for (Set<Person> set : weddingParticipantsSet) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
         }
 
         @Override

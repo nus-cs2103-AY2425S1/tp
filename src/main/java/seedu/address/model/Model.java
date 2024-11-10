@@ -203,6 +203,15 @@ public interface Model {
     List<Wedding> getWeddingFromTags(Set<Tag> tags);
 
     /**
+     * Generates message based on whether tag can be added, which depends on whether wedding exists or not.
+     *
+     * @param editedTags Set of tags that exist as a wedding as well.
+     * @return String message stating whether tag exists as a wedding or not.
+     * @throws CommandException if none of the weddings corresponding to the tags exist.
+     */
+    String messageWeddingDoesNotExist(Set<Tag> editedTags) throws CommandException;
+
+    /**
      * Removes all tags from every person by removing them from all tagged wedding
      */
     void clearAllPersonTags();

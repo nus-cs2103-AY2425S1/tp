@@ -13,11 +13,15 @@ import static seedu.address.testutil.TypicalWeddings.WEDDING_TWO;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Tag;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.WeddingBookBuilder;
 
@@ -30,6 +34,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new WeddingBook(), new WeddingBook(modelManager.getWeddingBook()));
     }
 
     @Test
@@ -122,6 +127,21 @@ public class ModelManagerTest {
     @Test
     public void getFilteredWeddingList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredWeddingList().remove(0));
+    }
+
+    @Test
+    public void getWeddingFromTags_weddingsExist_returnsWeddings() {
+        modelManager.addWedding(WEDDING_ONE);
+        Set<Tag> tags = Set.of(new Tag("John Loh & Jean Tan"));
+        List<Wedding> weddings = modelManager.getWeddingFromTags(tags);
+        assertEquals(1, weddings.size());
+    }
+
+    @Test
+    public void getWeddingFromTags_noWeddingsExist_returnsEmptyList() {
+        Set<Tag> tags = Set.of(new Tag("Non Existent & Wedding"));
+        List<Wedding> weddings = modelManager.getWeddingFromTags(tags);
+        assertTrue(weddings.isEmpty());
     }
 
     @Test
