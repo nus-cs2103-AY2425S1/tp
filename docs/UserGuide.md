@@ -57,7 +57,7 @@ Welcome to **EZSTATE**! This guide will walk you through installing the app and 
    
     ```
    
-   A GUI should appear in a few seconds as shown below. Note that the initial launch of the app will contain some sample data.<br><br>
+   A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
 
 ### Basic Commands
