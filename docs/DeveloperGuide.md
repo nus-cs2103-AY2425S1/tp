@@ -4,26 +4,31 @@ title: Developer Guide
 ---
 
 **Team**: T11-04
+<br>
 **Name**: EZSTATES
 
 **User Target Profile**:
-This product is for freelance real estate agents who have to manage numerous property transactions and client interactions. It caters to those who need a fast, efficient tool to organize all their client data, track deals, and wish to streamline their workflow through command-line operations.
+This product is for real estate agents who have to manage numerous client information and their relevant property transactions.
+It caters to those who need a fast, efficient tool to organize all their client data, track listings, and wish to streamline their workflow through command-line operations.
 
 **Value Proposition**:
-EZSTATES provides freelance real estate agents quick access to client details, categorized by their property’s needs and interests through a user-friendly CLI, streamlining operations by enabling swift and intuitive command-line interactions. This simplifies their workflow, boosts efficiency, and enhances their client service.
+EZSTATES provides freelance real estate agents quick access to client details, categorized by their property’s needs and interests through a user-friendly CLI, streamlining operations by enabling swift and intuitive command-line interactions. 
+This simplifies their workflow, boosts efficiency, and enhances their client service.
 
 * Table of Contents
 {:toc}
-
 
 ## Acknowledgements
 
 This project is adapted from the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/)
 
-
 ## Getting started
 
 ### Setting up
+
+<div class="note" markdown="span"> 
+:bulb: If you would like test our EZSTATES, you can refer to our [quick start](userguide.md#quick-start) in our user guide.
+</div>
 
 In order to develop for EZSTATES you can follow the steps we have provided below:
 
@@ -50,8 +55,7 @@ Ensure that the project is set up locally:
     ```bash
     ./gradlew run
     ```
-
-
+   
 The Gradle instructions provided are for macOS and Linux users. If you are using Windows, please refer to the [official documentation](https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:using_wrapper) on using the Gradle Wrapper  (i.e. `./gradlew`) on Windows.
 
 ## Development Milestones
@@ -62,24 +66,27 @@ The Gradle instructions provided are for macOS and Linux users. If you are using
 - Update AboutUs.md
 
 ### Milestone v1.2
-**Adding Basic Functionalities**
-- Create Client Profile
-- List
-- Add Property
-- Delete Client Profile
-- Add Appointment
-- Delete Appointment
+**Deciding MVP features**
+- Divided features amongst group mates
 
 ### Milestone v1.3
-**Adding More Functionalities**
-- Create Listing 
-- Show All Listings
-- Delete Listing 
+**Minimum Viable Product**
+- Creating clients
+- Deleting clients
+- Editing clients
+- Creating appointments
+- Deleting appointments
 
 ### Milestone v1.4
+**Alpha Release**
+- Create Buyer
+- Create seller
+- Listings
+- Help Bot
+- Git Commit script
 
 ### Milestone v1.5
-**Product Refinement**
+**Beta Release**
 
 ## Design Overview
 
@@ -92,7 +99,8 @@ The Gradle instructions provided are for macOS and Linux users. If you are using
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the App. EZSTATES utilises the existing architecture from
+AB3 and adds its own features and components to facilitate client and listing management.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -111,7 +119,7 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-**How the architecture components interact with each other**
+<!--[**How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
@@ -126,15 +134,11 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 <img src="images/ComponentManagers.png" width="300" />
 
-The sections below give more details of each component.
+The sections below give more details of each component.]-->
 
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
-
-![Structure of the UI Component](images/UiClassDiagram.png)
-
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -144,6 +148,301 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+### UI layout
+
+EZSTATES is built with users who prefer using their keyboard. Hence, all commands are accessible through CLI interactions.
+
+When the app is first opened, the user is able to immediately see the `MainWindow`.
+EZSTATES displays a default message in the `ResultDisplay` which helps new users navigate
+the application.
+
+**PICTURE**
+
+EZSTATES contains 5 main UI components which will be elaborated in the [UI Components](#ui-components) section.
+
+#### UI Components
+
+EZSTATES contains 4 main UI components: 
+1. MainWindow
+    - [MainWindow Design](#mainwindow-design)
+    - [MainWindow Implementation](#mainwindow-implementation)
+2. HelpWindow 
+    - [HelpWindow Design](#helpwindow-design)
+    - [HelpWindow Implementation](#helpwindow-implementation)
+3. Chat Window
+    - [ChatWindow Design](#chatwindow-design)
+    - [ChatWindow Implementation](#chatwindow-implementation)
+4. MoreInfo Window
+    - [MoreInfoWindow Design]()
+    - [MoreInfoWindow Implementation]()
+5. Confirmation Dialog
+    - [Confirmation Dialog Design]()
+    - [Confirmation Dialog Implementation]()
+
+#### MainWindow Design
+
+![Structure of the UI Component](images/UiClassDiagram.png)
+
+`MainWindow` consists of five main components `CommandBox`, `ResultDisplay`, `PersonListPanel`,`ListingListPanel`, `StatusBarFooter`.
+
+The `CommandBox` allows users to enter commands into the application.
+
+The `ResultDisplay` displays the result from entering a command.
+
+The `PersonListPanel` is a scrollable list of clients. This list is updated when a user executes a command that interacts
+with his list of `clients` such as `buyer`, `seller`, `deleteclient` and `showclients`. 
+
+The `ListingListPanel` is a scrollable list of listings. This list is updated when a user executes a command that interacts
+with his list of `listings` such as `listing`, `deletelisting`, `deletelisting` and `showlistings`.
+
+The `StatusBarFooter` is a pane which contains the `ChatWindow`.
+
+#### MainWindow Implementation
+
+These 5 components form the `MainWindow`: 
+1. `CommandBox`: Command input box
+2. `ResultDisplay`: Command results box
+3. `PersonListPanel`: Person list pane
+4. `ListingListPane`: Listing list pane
+5. `StatusBarFooter`: Contains the `ChatWindow` button
+
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `UI` components utilise JavaFx to render the components. The layout of these components are defined in their
+matching .fxml files in `src/main/resources/view` folder. For example, the layout for `CommandBox` is found in
+`CommandBox.fxml`.
+
+This section will go through some additional information about each component in the `MainWindow`.
+
+#### 1. Command Box
+- The `CommandBox` is the main method by which the user interacts with EZSTATES.
+- The user types inputs into the `CommandBox` and hits `ENTER` to give a command to EZSTATES.
+- At any point in time, the user can press the `UP` and `DOWN` arrow keys to navigate the history of past inputs. 
+
+<div class="note" markdown="span"> 
+:bulb: The history of past inputs is refreshed every single time EZSTATES is closed and re-opened. Additionally, the history preserves
+all inputs given by the user, including duplicate and invalid inputs.
+</div>
+
+#### 2.Result Display
+- The `ResultDisplay` provides feedback to the user.
+- The `ResultDisplay` is scrollable if the output message is too long.
+
+#### 3. PersonListPanel
+- The `PersonListPanel` contains the `clients` stored in EZSTATES.
+- The information of a relevant `client` is displayed using the `PersonCard` component
+- The `PersonListPanel` is a view of `PersonCard` components.
+- Commands such as `find` will filter the `PersonListPanel` to show certain `clients` based on a given predicate. Commands
+such as `showclients` displays all possible `clients` in the `PersonListPanel`.
+- A newly added `client` is added to the bottom of the `PersonListPanel`.
+
+    #### PersonCard
+    - The `PersonCard` is the component that displays the essential information of a `client`.
+    - `Client ID`
+        - The `Client ID` specifies the `INDEX` value associated to the specific `client` relative to the position of 
+        the `PersonCard` in the `PersonListPanel`.
+        - The user will utilise the `Client ID` as an argument to run certain commands such as `deleteclient` and `editclient`.
+    - `Client Name`
+        - This box specifies the `name` of the `client`.
+    - `Client Phone Number`
+        - This box specifies the `phone` number of the `client`.
+    - `Client Email`
+        - This box specifies the `email` of the `client`.
+    - `Client Appointment`
+        - This box specifies the `Date` and `Time` of an `Appointment` with the relevant `client`. 
+    - `Client Tags`
+        - The green ribbons in the box define a tag for the client. 
+
+<div class="note" markdown="span"> 
+:bulb: Certain fields that the user can input in EZSTATES are allowed values that can exceed the UI`s ability to fully
+display them. This design choice can be seen in fields such as the `client name`.
+
+IMAGE HERE LOLOLOL
+
+Our team has accounted for this as we do not wish to enforce arbitrary limits on the user. To account for this, we have 
+implemented proper UI/UX design to wrap the overflown text. Additionally, the `moreinfo` command allows users to view the 
+fully expanded details of their client.
+</div>    
+
+#### 4. ListingListPanel
+- This component mirrors the design implementation of `PersonListPanel`.
+- The `ListingListPanel` contains the `listings` stored in EZSTATES.
+- The information of a relevant `listing` is displayed using the `ListingCard` component
+- The `ListingListPanel` is a view of `ListingCard` components.
+- Commands such as `showlistings` displays all possible `listings` in the `ListingsListPanel`.
+- A newly added `listing` is added to the bottom of the `ListingListPanel`.
+
+  #### ListingCard
+    - The `ListingCard` is the component that displays the essential information of a `listing`.
+    - `Listing ID`
+        - The `Listing ID` specifies the `INDEX` value associated to the specific `listing` relative to the position of
+          the `ListingCard` in the `ListingListPanel`.
+        - The user will utilise the `Listing ID` as an argument to run certain commands such as `deletelisting` and `editlisting`.
+    - `Listing Name`
+        - This box specifies the `name` of the `listing`.
+    - `Listing Price`
+        - This box specifies the `price` of the `listing`.
+    - `Listing Area`
+        - This box specifies the `area` of the `listing`.
+    - `Listing Address`
+        - This box specifies the `address` of the `listing`.
+    - `Listing Seller`
+        - This box specifies the `seller` of the `listing`.
+        - There can be only one `seller` for each `listing`.
+        - Every `listing` must have one `seller`.
+    - `Listing Buyers`
+        - This box specifies the `buyers` of the `listing`. 
+        - There can be more than one `buyer` for each `listing`.
+    - `Listing Region`
+        - This box specifies the `region` of the `listing`.
+
+<div class="note" markdown="span"> 
+:bulb: The `Listing Region` color pattern follows the same colour scheme as the Mass Transportation System (MRT) in
+Singapore. 
+</div>       
+
+#### 5. Status Bar Footer
+- This component is a visual element located at the bottom of the `MainWindow`
+- The `StatusBarFooter` contains a button to access the `ChatWindow` via GUi means.
+
+#### HelpWindow Design
+
+The `HelpWindow` can be accessed by pressing the `F1` keyboard shortcut or by utilising the `help` command in the
+`CommandBox`.
+
+The window is split into two areas. One area is the link to the EZSTATES user guide. The other area displays a scrollable
+view of the common commands in EZSTATES.
+
+**IMAGE**
+
+#### HelpWindow Implementation
+
+The `HelpWindow` is a view that contains the User Guide Link and displays some Common Commands.
+
+1. User Guide Link
+- The text on the left of the buttons contains the relevant `HELP_MESSAGE` which is a link to the EZSTATES user guide.
+- The first `Button` which writes `Copy URL` copies the URL of the link in the `HELP_MESSAGE` onto the user's clipboard.
+- The second `Button` which writes `Open in Browser` opens the link in the `HELP_MESSAGE` in the use's default browser.
+
+2. Common Commands
+- This scrollable view below the User Guide Link describes the common commands of EZSTATES in a `TextArea`.
+
+#### ChatWindow Design
+
+The `ChatWindow` is a chatbot that can be opened by entering the `chatbot` command or by pressing the `Chat with us!` button
+in the bottom right corner of the application.
+
+Upon accessing this feature, a new window opens with 3 main components:`chatArea`, `userInput` and `Send`.
+
+**IMAGE**
+
+The `chatArea` displays the conversation between the user, identified by the header `You:` at the front of each sentence, and
+the chatbot, identified by the `Assistant: ` at the front of each sentence.
+
+The `userInput` is an input field where the user can enter a prompt to the chatbot. The prompt can be sent to the chatbot
+either by pressing `ENTER` on the keyboard or by pressing the `Send` button.
+
+The `Send` button sends the prompt written in the `userInput` to the chatbot. The button does not send empty inputs to the 
+chatbot.
+
+<div class="note" markdown="span"> 
+:bulb: To facilitate the target audience which prefers CLI-focused interactions, the user can interact with all functions of the 
+chatbot using only keyboard inputs. This is achieved in two ways. <br>
+Firstly, when the `ChatWindow` is opened, the user can immediately start typing in the `userInput` without having to
+click on the `inputArea`. This works for subsequent prompts as well. <br>
+Secondly, the chatbot can be closed by prompting the bot with a `bye` message.
+</div>     
+
+#### ChatWindow Implementation
+
+1. `chatArea`
+   - Utilises if-else logic and validity checks to determine what response the chatbot
+   should reply to a certain prompt. The logic that is reponsible for the chatbot's response is `getResponse()`.
+2. `getResponse()`
+   - Method in `ChatWindow` that returns a response based on the user's input.
+   - The method utilises regular expressions to identify specific keywords and actions within the 
+   user's message.
+   - For each command, the method provides a usage example and syntax as a response.
+   - The full logic can be found [here]().
+3. `userInput`
+    - A `TextField` that sends the user prompt to the `getResponse()` method.
+4. `Send`
+    - A button to send the `userInput` through GUI means.
+
+#### MoreInfoWindow Design
+
+The `MoreInfoWindow` provides additional information to the user. The window can be accessed using the `moreinfo` command
+and an appropriate `INDEX` argument. The window can be closed by entering the `ESC` button or by closing the window using 
+the cursor.
+
+When opened, this window shows the same fields in the `PersonCard` but in greater detail. This is achieved 
+by displaying the fields with greater length to provide a complete overview of the `client` details
+to the user.
+
+**IMAGE** 
+
+Additionally, there is a `clientRemarksLabel` and `remarkInput` which provides users with another field
+to specify characteristics or information about their user which can be hidden from the `MainWindow` as this 
+remark is only displayed within the `MoreInfoWindow`.
+
+<div class="note" markdown="span"> 
+:bulb: The `clientRemarksLabel` allows a maximum of 400 characters to be entered. This was chosen due to the small space
+allocated for the remarks, which is a trade-off made to display other relevant `client` information.
+
+Additionally, the `clientRemarksLabel` is saved in EZSTATES when the application is closed and preserved when it is opened.
+</div> 
+
+#### MoreInfoWindow Implementation
+
+`MoreInfoWindow` utilises the `MoreInfoController` class to handle the logic and UI rendering of the window.
+
+`MoreInfoWindow` sets up a new `Stage` to display the client details in a separate window, loads the .FXML file and binds
+it to the `MoreInfoController`. `MoreInfoWindow` then passes the `client` to the `MoreInfoController`.
+
+`MoreInfoController` handles `client` fields, the `client` picture and the user's `remarkInput`.
+
+#### ConfirmationDialog Design
+
+The `ConfirmationDialog` is a window that opens when the user utilises the `deleteclient` command. 
+
+This window requests the user to make a Yes/No decision to confirm the deletion of the `client`.
+
+The window displays the `name` of the `client` and that the `client` has an active `listing`. A `client` has an active listing
+if he/she is a `seller` of a `listing`.
+
+<div markdown="span" class="alert alert-primary">
+A `client` without an active listing will not be open a `ConfirmationDialog` upon deletion.
+</div>
+
+This window is developed as a fail-safe for users to protect against deletions of `clients` that is a `seller` of a `listing`
+since a `listing` cannot exist without its `seller`.
+
+<div class="note" markdown="span"> 
+:bulb: To facilitate the target audience which prefers CLI-focused interactions, the `ConfirmationDialog` window can be interacted with fully
+keyboard-only inputs. <br>
+In the window, the user can navigate between the Yes/No buttons using the `LEFT ARROW <` and `RIGHT ARROW >` keys. To confirm their
+decision, they can do so by pressing `ENTER`. Additionally, they can also exit the window by using the `ESC` key.
+</div>
+
+#### ConfirmationDialog Implementation
+
+Similar to the `MoreInfoWindow` implementation, the `ConfirmationDialog` utilises the `ConfirmationDialogController` to handle the logic
+and UI rendering of the window.
+
+`ConfirmationDialog` sets up a new `Stage` to display the delete confirmation in a separate window, loads the .FXML file and binds
+it to the `ConfirmationDialogController`. `Window` then passes the `client` to the `MoreInfoController`.
+
+`MoreInfoController` handles the logic for which button has been pressed by the user and displays the `client` name in the window.
+
+<div class="note" markdown="span"> 
+:bulb: Why is it beneficial to create a Controller class?
+<br>
+This approach keeps the code modular and organized through the **Separation of Concerns** design principle. 
+The `Window` class handles the window setup and layout loading exclusively while the `Controller` class manages all
+UI interactions and dynamically updates the UI utilising `set` methods. By dividing responsibilities between classes, this
+simplifies code, improves maintainability and enhances reusability.
+</div>
 
 ### Logic component
 
@@ -195,7 +494,6 @@ The `Model` component,
 
 </div>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -210,7 +508,6 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
-
 
 ## Features and Implementation
 
