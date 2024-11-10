@@ -303,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `LegacyLink` and the **Actor** is the `user`, unless specified otherwise)
 
-### **Use case 1: Add contact**
+### Use case 1: Add contact
 
 **MSS**
 1. User enters name, phone number, email and relationship of the contact.
@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *a. At any time, User chooses to cancel adding a contact Use case ends.
 
-### **Use case 2: Delete contact**
+### Use case 2: Delete contact
 
 **MSS**
 
@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-### **Use case 3: View all contacts**
+### Use case 3: View all contacts
 
 **MSS**
 
@@ -361,7 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-### **Use case 4: Update information of contact**
+### Use case 4: Update information of contact
 
 **MSS**
 
@@ -404,7 +404,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-### **Use case 5: Add event**
+### Use case 5: Add event
 
 **MSS**
 
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *a At any time, Users chooses to cancel the adding.
 
 
-### **Use case 6: Delete an event**
+### Use case 6: Delete an event
 
 **Preconditions:**
 
@@ -473,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends
 
-### **Use case 8: Update event information**
+### Use case 8: Update event information
 
 **MSS**
 
@@ -518,6 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. 
 
 *{More to be added}*
 
@@ -708,6 +709,31 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ## **Appendix: Effort**
+
+### Difficulty Level
+Compared to AddressBook 3 (AB3), LegacyLink introduces events creation and management. Our project integrates both Person and Event, each with unique attributes and interdependencies, which requires more complex data models and more flexible UI components to them. 
+
+### Challenges Faced
+1. **UI Flexibility:** We required a UI that could dynamically adapt based on the results of user commands, allowing for contextually relevant displays that update in real time. For instance, when updating the events attended by a given person, we had to ensure that the updated details are also reflected on the detailed view of the person. This required a deeper understanding of JavaFX’s features, such as dynamic pane switching, conditional rendering, and event-driven updates, which many of us are unfamiliar with.
+
+2. **Brownfield development**: Since AB3 is already a functional product with a range of features, we had to understand the codebase and build upon it. This means that all of us have to have a good understanding of each component and its dependencies which adds a layer of complexity. Furthermore, we also had to refactor parts of the code in order to make our system accommodate different entity types.
+
+### Effort Required
+1. **UI Design for CLI and GUI Integration:** This integration was challenging as it required the UI to respond dynamically to command inputs, display error messages, and present updated detailed views for both persons and events.
+
+2. **Multi-Entity Management:** Expanding from a single-entity system to a dual-entity system required restructuring the codebase to accommodate flexible handling and interactions between entities.
+
+3. **Documentation:** Comprehensive user guide and developer guide for all commands, data handling procedures, and error cases to assist users and developers.
+
+### Achievements of the Project
+1. **Comprehensive Family Contact and Event Manager:** LegacyLink provides users with an all-in-one solution to manage both family contacts and family events. Its unique CLI + GUI interface allows users to manage contacts and events efficiently with keyboard-based commands while benefiting from a visual interface for clarity.
+
+2. **Clear and User-Friendly Documentation:** LegacyLink’s comprehensive guide covers every feature, command, and tips, supporting users of all technical levels.
+
+
+### Reuse and Effort Savings
+1. **Data Storage**: We used the same storage component to handle storing of Person and Event into a JSON file.
+
 
 ## **Appendix: Planned Enhancements**
 
