@@ -112,7 +112,7 @@ Events allow you to group contacts together in a sensible and seamless manner li
       </li>
       <li>
         Parameters wrapped in <strong>square brackets</strong> are optional arguments.<br>
-        <ul><li>e.g. in <code>add n/NAME ... [t/TAG…​]</code>, <code>TAG</code> is an optional argument.</li></ul>
+        <ul><li>e.g. in <code>add n/NAME ... [t/TAG…​]</code>, <code>t/TAG</code> is an optional argument.</li></ul>
       </li>
       <li>
         Parameters wrapped in <strong>curly brackets</strong> are mutually exclusive arguments (i.e. only 1 should be specified).<br>
@@ -195,7 +195,7 @@ Example:
 * `list -e des/wedding`
 
 <box type="info" header="**Note:**" >
-  All parameters are optional! Running `list` by itself will list all contacts (clients and vendors) by default. If the input is <code>list abc</code>, <code>abc<code> will be discarded and the input will be treated as `list`. 
+  All parameters are optional! Running <code>list</code> by itself will list all contacts (clients and vendors) by default. If the input is <code>list abc</code>, <code>abc</code> will be discarded and the input will be treated as <code>list</code>. 
 </box>
 
 Notes:
