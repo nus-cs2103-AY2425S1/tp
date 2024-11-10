@@ -54,7 +54,8 @@ public class HasGoodsCategoryPredicateTest {
         Set<GoodsCategories> firstCategorySet = Set.of(GoodsCategories.CONSUMABLES);
         Set<GoodsCategories> secondCategorySet = Set.of(GoodsCategories.LIFESTYLE, GoodsCategories.SPECIALTY);
 
-        PersonHasGoodsWithCategoriesPredicate firstPredicate = new PersonHasGoodsWithCategoriesPredicate(firstModel, firstCategorySet);
+        PersonHasGoodsWithCategoriesPredicate firstPredicate =
+                new PersonHasGoodsWithCategoriesPredicate(firstModel, firstCategorySet);
 
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
@@ -108,13 +109,15 @@ public class HasGoodsCategoryPredicateTest {
         assertFalse(secondPredicate.test(CARL));
 
         // No categories
-        PersonHasGoodsWithCategoriesPredicate thirdPredicate = new PersonHasGoodsWithCategoriesPredicate(model, Set.of());
+        PersonHasGoodsWithCategoriesPredicate thirdPredicate =
+                new PersonHasGoodsWithCategoriesPredicate(model, Set.of());
         assertFalse(thirdPredicate.test(ALICE));
         assertFalse(thirdPredicate.test(BOB));
         assertFalse(thirdPredicate.test(CARL));
 
         // Non-matching category
-        PersonHasGoodsWithCategoriesPredicate fourthPredicate = new PersonHasGoodsWithCategoriesPredicate(model, Set.of(GoodsCategories.SPECIALTY));
+        PersonHasGoodsWithCategoriesPredicate fourthPredicate =
+                new PersonHasGoodsWithCategoriesPredicate(model, Set.of(GoodsCategories.SPECIALTY));
         assertFalse(fourthPredicate.test(ALICE));
         assertFalse(thirdPredicate.test(BOB));
         assertFalse(thirdPredicate.test(CARL));
@@ -125,10 +128,11 @@ public class HasGoodsCategoryPredicateTest {
         Model model = getDefaultModel();
         Set<GoodsCategories> categoriesSet = Set.of(
                 GoodsCategories.LIFESTYLE, GoodsCategories.CONSUMABLES, GoodsCategories.SPECIALTY);
-        PersonHasGoodsWithCategoriesPredicate predicate = new PersonHasGoodsWithCategoriesPredicate(model, categoriesSet);
+        PersonHasGoodsWithCategoriesPredicate predicate =
+                new PersonHasGoodsWithCategoriesPredicate(model, categoriesSet);
 
-        String expected = PersonHasGoodsWithCategoriesPredicate.class.getCanonicalName() + "{model=" + model + ", categoriesSet="
-                + categoriesSet + "}";
+        String expected = PersonHasGoodsWithCategoriesPredicate.class.getCanonicalName()
+                + "{model=" + model + ", categoriesSet=" + categoriesSet + "}";
         assertEquals(expected, predicate.toString());
     }
 }

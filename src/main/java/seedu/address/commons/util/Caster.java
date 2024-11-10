@@ -9,9 +9,9 @@ import java.util.function.Function;
 public class Caster<T> implements Function<T, T> {
     /**
      * Helps to cast an object to its supertype implicitly.
+     * @param <T> the supertype to cast to
      * @param o the object
      * @return the same object
-     * @param <T> the supertype to cast to
      */
     public static <T> T cast(T o) {
         return o;

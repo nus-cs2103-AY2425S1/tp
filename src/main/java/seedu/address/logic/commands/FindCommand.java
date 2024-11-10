@@ -13,9 +13,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.person.PersonHasGoodsWithCategoriesPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonHasGoodsWithCategoriesPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.

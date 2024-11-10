@@ -9,7 +9,6 @@ import static seedu.address.storage.CsvConverters.PersonNameConverter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import com.opencsv.bean.CsvBindByName;

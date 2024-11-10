@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ListGoodsCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goodsreceipt.GoodsCategoryPredicate;
 import seedu.address.model.goodsreceipt.GoodsNamePredicate;

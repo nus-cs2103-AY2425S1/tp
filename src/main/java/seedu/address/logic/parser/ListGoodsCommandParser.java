@@ -61,14 +61,16 @@ public class ListGoodsCommandParser implements Parser<ListGoodsCommand> {
                 .orElse(TRUE_PREDICATE);
     }
 
-    private static Optional<SupplierNamePredicate> parseSupplierNamePredicate(ArgumentMultimap argMultimap) throws ParseException {
+    private static Optional<SupplierNamePredicate> parseSupplierNamePredicate(
+            ArgumentMultimap argMultimap) throws ParseException {
         Optional<Name> name = arePrefixesPresent(argMultimap, PREFIX_NAME)
                 ? Optional.of(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()))
                 : Optional.empty();
         return name.map(SupplierNamePredicate::new);
     }
 
-    private static Optional<GoodsCategoryPredicate> parseGoodsCategoryPredicate(ArgumentMultimap argMultimap) throws ParseException {
+    private static Optional<GoodsCategoryPredicate> parseGoodsCategoryPredicate(
+            ArgumentMultimap argMultimap) throws ParseException {
         Optional<GoodsCategories> goodsCategory = arePrefixesPresent(argMultimap, PREFIX_CATEGORY)
                 ? Optional.of(ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get()))
                 : Optional.empty();
