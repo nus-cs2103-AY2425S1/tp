@@ -71,6 +71,12 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component" width="800" />
 
+<box type="info" seamless>
+
+**Note** The `UiPart` class that UI components inherit from was removed the class diagram to reduce clutter.
+
+</box>
+
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -124,6 +130,12 @@ How commands work:
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/eventtory/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="640" />
+
+<box type="info" seamless>
+
+**Note** The classes representing the fields of the models `Vendor`, `Event` and `Association` were not included to reduce the clutter of the diagram.
+
+</box>
 
 
 The `Model` component,
@@ -184,7 +196,7 @@ For better understanding, refer to the sequence diagram below which illustrates 
 
 During the execution of the command itself, the behaviour of the command depends on the current view of the user, as shown in the following sequence diagram:
 
-<puml src="diagrams/AssignSequenceDiagram.puml" width="800" />
+<puml src="diagrams/AssignSequenceDiagram.puml" width="600" />
 
 #### Changes to Model
 
