@@ -116,7 +116,7 @@ Alerts you to potential issues or problems that may arise.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in sqaure brackets and with `+` after them can be used zero or more times.<br>
+* Items in square brackets and with `+` after them can be used zero or more times.<br>
   e.g. `[t/TAG]+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Items in **round** brackets and with `+` after them can be used one or more times.<br>
