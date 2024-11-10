@@ -303,7 +303,7 @@ _Details coming soon ..._
 ### Date of Last Visit
 * Dates of last visit are optional for contacts, and are denoted by the `d/` prefix.
 * Dates of last visit are confined to the `DD-MM-YYYY` format.
-* The date provided must be valid, and before the current date. This prevents accidental entering of future dates.
+* The date provided must be valid, i.e., either today's date or any date before today. This prevents accidental entering of future dates.
 * To indicate no date of last visit for a contact, you can `add` a contact without the `d/` prefix, or with a `d/` followed by whitespace.
 
 ### Emergency Contact
