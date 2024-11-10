@@ -247,7 +247,7 @@ Exits the program.
 Format: `exit`
 
 ### Navigating the Command History
-You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys. Before using the arrow keys, ensure that the command box is in focus (i.e. you have just clicked on the command box).
+You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys. Before using the arrow keys, ensure that the command box is already in focus (if you are unsure, click on the command box to refocus on it).
 
 ### Duplicate detection
 Duplicate entries (elderly) are entries with the same NRIC (case-insensitive). ContactMate will not allow duplicate entries, and will stop you from adding (`add`) or editing (`edit`) an elderly if it would result in a duplicate entry.
