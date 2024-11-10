@@ -19,19 +19,20 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for CFG.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar contactsforgood.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   
+5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+   ![Ui](images/Ui.png)<br>
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
    * `add r/volunteer h/30 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a 
-     contact named `John Doe` with a `volunteer` role to the Address Book.
+     contact named `John Doe` with a `volunteer` role to CFG.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -39,9 +40,10 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -88,7 +90,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -96,57 +98,61 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
 ## Command summary
 ### Person-Related Commands
-| **Action**  | **Format**                                                                                                                                                    | **Example**                                                                                    |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-contact-add)    | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                        | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
-| [**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                                        | `clear`                                                                                        |
-| [**Delete**](#deleting-a-person-delete) | `delete INDICES`                                                                                                                                               | `delete 1 2 3 5-7`                                                                             |
-| [**Edit**](#editing-a-person-edit)     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`                                  | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
-| [**Search**](#searching-persons-by-field-search) | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                                                 | `search n/john`                                                                                |
-| [**List**](#listing-all-persons-list)  | `list`                                                                                                                                                         | `list`                                                                                         |
-| [**Sort**](#sorting-the-displayed-list-sort) | `sort [s/SORT_OPTION]`                                                                                                                                         | `sort s/name`                                                                                  |
+| **Action**                                       | **Format**                                                                                                                     | **Example**                                                                                    |
+|--------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-contact-add)                 | `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`       | `add r/volunteer  n/James Ho p/81234567 e/jamesho@example.com a/123, Clementi Rd, 123456 h/19` |
+| [**Clear**](#clearing-all-entries--clear)        | `clear`                                                                                                                        | `clear`                                                                                        |
+| [**Delete**](#deleting-a-person--delete)         | `delete INDICES`                                                                                                               | `delete 1 2 3 5-7`                                                                             |
+| [**Edit**](#editing-a-person--edit)              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]` | `edit 2 n/James Lee e/jameslee@example.com`                                                    |
+| [**Search**](#searching-persons-by-field-search) | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`                                                                                 | `search n/john`                                                                                |
+| [**List**](#listing-all-persons--list)           | `list`                                                                                                                         | `list`                                                                                         |
+| [**Sort**](#sorting-the-displayed-list-sort)     | `sort [s/SORT_OPTION]`                                                                                                         | `sort s/name`                                                                                  |
+
+<div style="page-break-after: always;"></div>
 
 ### Group-Related Commands
-| **Action**                       | **Format**                                                        | **Example**                                    |
-|----------------------------------|-------------------------------------------------------------------|------------------------------------------------|
-| [**Create Group**](#creating-a-group-creategroup)                 | `createGroup g/GROUP_NAME m/[INDICES]`                            | `createGroup g/blood drive m/1 2 4-7`          |
-| [**Add New Members to Group**](#adding-new-members-to-an-existing-group-addtogroup)  | `addToGroup g/GROUP_NAME m/[INDICES]`                             | `addToGroup g/beach cleanup m/1 2 3-6`         |
-| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group-removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`             | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
-| [**Edit Group Name**](#editing-a-groups-name-editgroupname)             | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`                 | `editGroupName g/blood drive g/blood donation` |
-| [**Delete Group**](#deleting-a-group-deletegroup)                 | `deleteGroup g/GROUP_NAME`                                        | `deleteGroup g/blood donation`                 |
-| [**List Groups**](#listing-groups-listgroups)                  | `listGroups`                                                     | `listGroups`                                   |
+| **Action**                                                                                          | **Format**                                        | **Example**                                    |
+|-----------------------------------------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------|
+| [**Create Group**](#creating-a-group--creategroup)                                                  | `createGroup g/GROUP_NAME m/[INDICES]`            | `createGroup g/blood drive m/1 2 4-7`          |
+| [**Add New Members to Group**](#adding-new-members-to-an-existing-group--addtogroup)                | `addToGroup g/GROUP_NAME m/[INDICES]`             | `addToGroup g/beach cleanup m/1 2 3-6`         |
+| [**Remove Existing Members from Group**](#removing-members-from-an-existing-group--removefromgroup) | `removeFromGroup g/GROUP_NAME m/[INDICES]`        | `removeFromGroup g/blood drive m/1 2 3 5-7`    |
+| [**Edit Group Name**](#editing-a-groups-name--editgroupname)                                        | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME` | `editGroupName g/blood drive g/blood donation` |
+| [**List Groups**](#listing-groups-listgroups)                                                       | `listGroups`                                      | `listGroups`                                   |
+| [**Delete Group**](#deleting-a-group-deletegroup)                                                   | `deleteGroup g/GROUP_NAME`                        | `deleteGroup g/blood donation`                 |
 
 ### General Commands
-| **Action**           | **Format** | **Example** |
-|----------------------|------------|-------------|
-| [**Help**](#viewing-help-help)            | `help`     | `help`      |
-| [**Get Emails**](#getting-emails-email)      | `email`    |      `email` |
-| [**Exit Application**](#exiting-the-program-exit) | `exit`     |      `exit` |
+| **Action**                                         | **Format** | **Example** |
+|----------------------------------------------------|------------|-------------|
+| [**Help**](#viewing-help--help)                    | `help`     | `help`      |
+| [**Get Emails**](#getting-emails-email)            | `email`    | `email`     |
+| [**Exit Application**](#exiting-the-program--exit) | `exit`     | `exit`      |
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a contact: `add`
 
-This command adds a contact to the address book.
-There are 4 types of contacts: Volunteer, Donor, Partner, Person(default)
+This command adds a contact to CFG.
+There are 4 types of contacts: Volunteer, Donor, Partner, Person (default).
 
 Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
 - `ROLE` (Optional): Specifies the type of contact. If not provided, the contact will be added as a general `Person`.
 - `NAME`: The contact's full name (case-insensitive).
-- `PHONE_NUMBER`: The contact's phone number.
-- `EMAIL`: The contact's email address.
+- `PHONE_NUMBER`: The contact's phone number (Any length is allowed, accommodating 3-digit emergency numbers to 15-digit international numbers).
+- `EMAIL`: The contact's email address (Only **english** emails are currently supported).
 - `ADDRESS`: The contact's physical address.
-- `TAG` (Optional): Additional tags associated with the contact.
+- `TAG` (Optional): Additional tags associated with the contact (A contact can have any number of tags, including none).
 - Role-specific fields(not required for `Person`)
   - **Volunteer**: 
-    -  `h/HOURS` :required for volunteers, representing contributed hours.
+    -  `h/HOURS` - Represents contributed hours.
   - **Donor**:
-  - `d/DONATED_AMOUNT`: Required for donors, representing the total donation amount in thousands of USD.
+  - `d/DONATED_AMOUNT` - Represents total donation amount in thousands of USD.
       - The amount can include **up to two decimal places** for precision (e.g., `123.45` represents 123,450 USD).
       - The amount is always displayed in thousands of dollars. For very large numbers, **scientific notation** will 
         be used automatically (e.g., `12345678` will be displayed as `1.2345678E7`, equivalent to 12,345,678 thousand USD)
   - **Partner**: 
-    - `ped/PARTNERSHIP_END_DATE` (Required): Represents the partnership's end date.
+    - `ped/PARTNERSHIP_END_DATE` - Represents the partnership's end date.
       - The date must be in the **YYYY-MM-DD** format.
       - The date **must be a valid date**:
           - A valid date is one that has existed in the past or will exist in the future. Both past and future dates are accepted as long as they are actual calendar dates.
@@ -165,24 +171,31 @@ Note:
 2. **Contact Uniqueness**: Contacts are distinguished **by their names only**. This means duplicate names are not allowed in the address book. However, multiple contacts can share the same phone number or email address if their names are unique.
 
 
-<box type="tip" seamless>
+<box type="info" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Role-specific fields must match the specified role:**
+* For `Volunteer`, `h/HOURS` is required.
+* For `Donor`, `d/DONATED_AMOUNT` is required. 
+* For `Partner`, `ped/PARTNERSHIP_END_DATE` is required. 
+* If the specified role does not match the provided role-specific fields, the `add` command will be deemed invalid.
+
 </box>
 
 Examples:
 * `add r/volunteer h/10 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add r/donor d/100 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/rich`
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from CFG.
 
 Format: `clear`
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from CFG.
 
 Format: `delete INDICES`
 
@@ -198,13 +211,13 @@ Format: `delete INDICES`
 </box>
 
 Examples:
-* `list` followed by `delete 2 4 6-8` deletes the 2nd, 4th, 6th, 7th, and 8th persons in the address book.
+* `list` followed by `delete 2 4 6-8` deletes the 2nd, 4th, 6th, 7th, and 8th persons in CFG.
 * `search n/Betsy` followed by `delete 1 3-5` deletes the 1st, 3rd, 4th, and 5th persons in the results of the
   `search` command.
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in CFG.
 
 Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
@@ -212,8 +225,8 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in the address book**.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in CFG**.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
     * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.
@@ -251,17 +264,18 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 </box>
 
 Examples: <br>
-1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role`: donor `group`: blood drive<br>
-2. **Person B:** `name`: Alex Yeoh `tag`: friends `phone number`: 91234567 `role`: volunteer <br>
-3. **Person C:** `name`: David Li `tag`: friends `phone number`: 81234123 `role`: person `group`: blood drive
-* `search n/john` returns persons with the name `john` like `John Doe`
-* `search g/blood drive` returns all persons in group `blood drive` like `John Doe` and `David Li`
-* `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
-  ![result for 'search alex david'](images/search_alex_david.png)
+1. **Person A:** `name`: Alex Yeoh `tag`: friends `phone number`: 87438807 `role`: person <br>
+2. **Person B:** `name`: Irfan Ibrahim  `tag`: classmates `phone number`: 92492021 `role`: person <br>
+3. **Person C:** `name`: Charlotte Oliveiro `tag`: neighbours `phone number`: 93210283 `role`: person
+* `search n/alex` returns persons with the name `alex` like `Alex Yeoh`.
+* `search r/person` returns all contacts with role `Person` like `Alex Yeoh`, `Irfan Ibrahim` and `Charlotte Oliveiro`.
+* `search n/charlotte t/neighbours p/93210283` returns all persons with name matching `charlotte`, tag matching `neighbours`, `phone number` 93210283 like `Charlotte Oliveiro`. <br>
+
+![result for 'search charlotte'](images/search_charlotte.png)
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in CFG.
 
 Format: `list`
 
@@ -281,7 +295,8 @@ Format: `sort [s/SORT_OPTION]`
 <box type="info" seamless>
 
 **Supported sort options include**:
-* `name`: Sorts contacts alphabetically by name [^1].
+* `name`: Sorts contacts alphabetically by name.
+  * For names with numbers, sorting follows **alphabetical order first**, then **numerical order** (e.g. "alfred" < "alfred2" < "ben").
 * `hours`: Sorts volunteers by hours contributed (in descending order).
 * `donations`: Sorts donors by donation amount (in descending order).
 * `end_date`: Sorts partners by partnership end date (from earliest to latest).
@@ -291,8 +306,6 @@ Examples:
 * `sort`
 * `sort s/name`
 * `sort s/hours`
-
-[^1]: For names with numbers, sorting follows **alphabetical order first**, then **numerical order** (e.g. "alfred" < "alfred2" < "ben")
 
 ### Creating a group : `createGroup`
 
@@ -348,7 +361,6 @@ Example:
 **Tip:** For ease of use, first list out the people in the group using the `search` command, then remove persons using this command.
 </box>
 
-
 ### Editing a group's name : `editGroupName`
 
 Edits the name of a group that currently exists.
@@ -363,6 +375,21 @@ Example:
 * `editGroupName g/blood drive 2024 g/charity run` renames an existing group called
   `blood drive 2024` into `charity run`.
 
+### Listing groups: `listGroups`
+Shows a list of all existing groups.
+
+Format: `listGroups`
+
+* The group size and up to three members are displayed for each group.
+* If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
+
+<box type="tip" seamless>
+
+**Tip:** To view all members of a group with more than 3 people, use `search g/GROUP_NAME`.
+</box>
+
+![result for 'list groups'](images/list-groups.png)
+
 ### Deleting a group: `deleteGroup`
 
 Deletes a group.
@@ -375,25 +402,9 @@ Format: `deleteGroup g/GROUP_NAME`
 Example:
 * `deleteGroup g/blood drive 2024`
 
-### Listing groups: `listGroups`
-Shows a list of all existing groups.
-
-Format: `listGroups`
-
-* The group size and up to three members are displayed for each group.
-* If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
-* 
-<box type="tip" seamless>
-
-**Tip:** To view all members of a group with more than 3 people, use `search g/GROUP_NAME`.
-</box>
-
-![result for 'list groups'](images/list-groups.png)
-
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
-
 ![help message](images/helpMessage.png)
 
 Format: `help`
@@ -412,7 +423,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CFG data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -429,8 +440,53 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: Can I use CFG offline?<br>  
+**A**: Yes! CFG is fully offline, storing data locally. You can manage contacts and use all commands without an internet connection, making it convenient and accessible anywhere.
+
+---
+
+**Q**: How do I transfer my data to another computer?<br>  
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file containing the data from your previous CFG home folder.
+
+---
+
+**Q**: How does CFG handle duplicate contacts?<br>  
+**A**: CFG checks for duplicates by comparing contact names. If a contact with the same name already exists, CFG will prevent the addition of a duplicate. Modify the name slightly or add unique identifiers if you need to create a similar entry.
+
+---
+
+**Q**: I ran a command, but it didn’t seem to work. What went wrong?<br>  
+**A**: Check if you entered the command parameters in the correct format and order. For a quick glance at the correct syntax, refer to the [Command Summary](#command-summary) section. 
+
+---
+
+**Q**: How can I improve search accuracy in CFG?<br>  
+**A**: For more precise search results:
+- Use multiple prefixes (e.g., `search n/John t/friend`) to filter by multiple criteria.
+- Remember that searches are case-insensitive but require exact word matches.
+- If your search results are too broad, refine them with additional criteria.
+
+---
+
+**Q**: How do I view all members in a large group?<br>  
+**A**: Use `search g/GROUP_NAME` to display all members, regardless of the group size.
+
+---
+
+**Q**: Can a contact belong to multiple groups?<br>  
+**A**: Yes, a contact can be a member of multiple groups. Simply use the `addToGroup` command with the contact’s index to include them in additional groups without affecting their membership in existing groups.
+
+---
+
+**Q**: Can I add or remove multiple members from a group at once?<br>  
+**A**: Yes, CFG allows you to add or remove several members from a group in a single command. Use the `createGroup` or `addToGroup` command with a space-separated list of indices or a closed range to add multiple members. Similarly, use the `removeFromGroup` command with multiple indices or ranges to remove members efficiently. 
+
+---
+
+**Q**: Can I rename a group without changing its members?<br>  
+**A**: Yes, you can use the `editGroupName` command to change a group’s name while keeping its members intact. Just specify the old name and the new name, and the group will be updated without losing any contacts.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -438,6 +494,4 @@ Furthermore, certain edits can cause the ContactsForGood to behave in unexpected
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
 
