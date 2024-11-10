@@ -527,6 +527,7 @@ Exits the program.
 
 Format: `exit`
 
+* You should **only** utilise the `exit` command to close the application. Unintended issues or bugs may occur if you utilize other methods to close the application.
 * There is no visual example as the programme will close after inputting the `exit` command.
 
 Example:
