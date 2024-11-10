@@ -43,7 +43,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Edit a transaction.\n"
                     + "Parameters: INDEX (must be a positive integer) "
-                    + "[" + PREFIX_PHONE + "CONTACT] "
+                    //+ "[" + PREFIX_PHONE + "CONTACT] "
                     + "[" + PREFIX_AMOUNT + "AMOUNT] "
                     + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
                     + "[" + PREFIX_DATE + "DATE] "
