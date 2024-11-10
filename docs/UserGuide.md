@@ -802,7 +802,9 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 > ⚠️ **Danger:**
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
 >
-> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.**
+> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. 
+> 
+>**Only modify the data file if you're confident in doing so correctly.**
 
 [↑ Return to Table of Contents](#table-of-contents)
 
