@@ -135,13 +135,8 @@ Notes on Command Formats:
 
 <p>
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (`help`, `exit` and `clear`) will be ignored.<br>
   * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-<p>
-
-* If additional parameters are supplied for commands that do not use said parameters, they will be ignored as well.
-  * e.g. if the command specifies `list v/ e/ n/NAME`, where the `NAME` parameter is not used for the `list` command, it will be interpreted as `list v/ e/`.
 
 <p>
 
@@ -160,13 +155,14 @@ Creates a vendor or event in EventTory.
 
 Format:
 * To create a vendor: `create v/ n/VENDOR_NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]…​`
-* To create en event: `create e/ n/EVENT_NAME on/DATE [t/TAG]…​`
+* To create an event: `create e/ n/EVENT_NAME on/DATE [t/TAG]…​`
 
 Note:
-If parameters are provided for the `v/` and `e/` flags, they will be ignored.
+* If parameters are provided for the `v/` and `e/` flags, they will be ignored.
 <box type="tip" seamless><br>
 Tip: A vendor or event can have any number of tags (including 0).
 </box>
+* If an event or a vendor already has the exact same name (case-sensitive), the command will fail and an error message will be displayed.
 
 Examples:
 * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew`
@@ -191,6 +187,7 @@ Note:
     * e.g. `edit v/1 t/` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be edited.
 * When editing tags, the existing tags of the vendor/event will be **overridden**.
     * Tags cannot be added cumulatively.
+        * e.g. if the first vendor has a tag `food`, to add another tag `urgent`, the command would be `edit v/1 t/food t/urgent`
     * You can remove all tags from a vendor/event by typing `t/` without specifying any tags after it.
 
 Examples:
@@ -300,7 +297,12 @@ Note:
 * All attributes of the `Vendor` or `Event` are searched, i.e. name, phone number, date, descriptions and tags.
 * Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
   * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
+* If user is viewing an event or a vendor, the `find` command will affect the assignable list only. Assigned list is not affected.
+* To search the date field of events, the displayed format of dates should be followed.
+  * e.g. `find v/ -11-` will return events dated in November.
+  * String matching is used to search date fields, so the keywords `November` and `Nov` will not match a date with month `11`.
 * If no matches are found, the user will be informed and the current view will remain unchanged.
+* If no keyword is provided, the operation will fail.
 
 Examples:
 * `find v/ catering` returns `catering` and `Catering Solutions`
