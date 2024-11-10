@@ -7,7 +7,7 @@ title: User Guide
 
 EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts, listings, and appointments.
 
-<br> You are part of the ideal target audience of EZSTATE if you meet the following characteristics:
+<br> **You are part of the ideal target audience of EZSTATE if you meet the following characteristics**:
 
 `Job`: Real Estate Agent focused on managing buyer and seller relationships 
 `Typing ability`: Comfortable with typing speeds of ~80 WPM or higher
