@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -52,5 +53,19 @@ public class StudentCard extends UiPart<Region> {
         student.getCourses().stream()
                 .sorted(Comparator.comparing(course -> course.courseCode))
                 .forEach(course -> courses.getChildren().add(new Label(course.courseCode)));
+
+        // Delay UI by 0.1s
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Platform.runLater(() -> cardPane.getParent().requestLayout());
+        }
+
+        // Ui Doesn't Properly Update Unless this Line of Code is run
+        Platform.runLater(() -> {
+            if (cardPane.getParent() != null) {
+                cardPane.getParent().requestLayout();
+            }
+        });
     }
 }
