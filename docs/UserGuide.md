@@ -154,7 +154,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 **IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
-* We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`)    
+* We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`)    
 
 </box>
 
@@ -184,7 +184,9 @@ Format: `del n/NAME` followed by `y` or `n`
 
 <box type="important" seamless>
 
-**IMPORTANT:** `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+**IMPORTANT:** 
+* `del n/NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+* If you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊
 
 </box>
 
@@ -223,6 +225,7 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 * Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
 ['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
 * Multiple input of the same parameter can be added but only the last one will be accepted (e.g. `edit n/John p/111 p/222` will edit phone number to `222`)
+* If you edit a person with the same parameters, we will not alert you
 
 </box>
 
@@ -258,7 +261,7 @@ You can add a wedding to the list of weddings.
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DATE`
 
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
-* We will also alert you when you add a different wedding with the same name, we need your help to change their input name in these situations 😊.
+* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`.
 * To make adding a wedding easier, Knotty Planner will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
   Examples: `john & jane`, `JOHN   & jane` will all be formatted to `John & Jane`.
 
@@ -290,6 +293,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 **IMPORTANT:** 
 
 * `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
+* If you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
 * As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding
 
@@ -462,6 +466,15 @@ Format:
 * `clear-ab` / `cab` followed by `y` clears all contacts in the address book.
 * `clear-wb` / `cwb` followed by `n` will not clear all weddings in the wedding book.
 
+<box type="important" seamless
+
+**IMPORTANT:** 
+
+* Both clear commands must be followed by either `y` or `n` command.
+* If you accidentally mistype or enter an unintended command, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly😊
+
+</box>
+
 <div style="display: flex; justify-content: space-between;">
     <div style="text-align: center; width: 50%;">
         <img src="images/clearMsg1.png" alt="clear ab" style="width: 100%;">
@@ -472,6 +485,8 @@ Format:
         <div>Clear Wedding Book</div>
     </div>
 </div>
+
+
 
 ### Exiting the Program: `exit`
 
