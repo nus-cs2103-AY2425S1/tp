@@ -15,10 +15,10 @@ Optimised via combining both Command Line Interface (CLI) and an intuitive Graph
 <div style="page-break-after: always;"></div>
 
 ## How to use this User Guide
-Our user guide is tailored to ensure you can fully unlock the potential of MediBase3, whether you're new to MediBase3 or have been using the application for quite some time.
-In this section, we aim to provide you with the necessary tools to effectively navigate and utilize the guide.
+This guide is designed to help you make the most of MediBase3, whether you’re a new or experienced user. 
+It provides all the necessary information to effectively navigate and utilise MediBase3’s features.
 
-Each aspect of MediBase3 is split into different sections, which are accessible via the Table of Contents above.
+Each part of MediBase3 is covered in separate sections, accessible through the Table of Contents above.
 
 **For new MediBase3 users:**
 1. We **recommend** that you refer to the [Glossary](#glossary) section to understand the key terms used in the guide.
@@ -192,8 +192,8 @@ the constraints of each parameter when used in a command.
 {: .alert .alert-warning}
 > :exclamation: **Caution:** 
 >
-> Ensure that all parameters adhere to the constraints mentioned below. 
-> Otherwise, the command will not be executed, and an error message will be displayed.
+> * Ensure that all parameters adhere to the constraints mentioned below. Otherwise, the command will not be executed, and an error message will be displayed.
+> * Any mention of Alphanumeric characters refers to those in **Standard English** (i.e. 26 characters of the Latin alphabet). Accented or diacritical characters (e.g., é, ü, ç) and characters from other languages are currently **not supported**.
 
 
 | Parameter          | Definition                                                                                                 | Constraints                                                                                                                                                                                                                                                                                                                                                                            | Examples                                                                                                                          |
@@ -405,6 +405,7 @@ Adds one or more medical conditions to an existing patient in MediBase3.
 > * **At least one** `CONDITION` must be provided. 
 >   - e.g. `addMedCon i/S1234567A` is invalid.
 > * Each medical condition can only be added once per patient.
+> * If both unique and duplicate conditions are entered in a single command, an error will be returned, and none of the conditions will be added.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 <div style="page-break-after: always;"></div>
@@ -441,6 +442,7 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 > * **At least one** `CONDITION` must be provided. 
 >   - e.g. `delMedCon i/S1234567A` is invalid.
 > * The patient must have the specified condition for it to be removed; otherwise, an error message will display.
+> * If both unique and non-existent conditions are entered in a single command, an error will be returned, and none of the conditions will be deleted.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 <div style="page-break-after: always;"></div>
@@ -472,6 +474,7 @@ Adds one or more allergies to an existing patient in MediBase3.
 > * **At least one** `ALLERGY` must be provided. 
 >   - e.g. `addAllergy i/S1234567A` is invalid.
 > * Each allergy can only be added once per patient.
+> * If both unique and duplicate allergies are entered in a single command, an error will be returned, and none of the allergies will be added.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 <div style="page-break-after: always;"></div>
@@ -508,6 +511,7 @@ Deletes one or more allergies from an existing patient in MediBase3.
 > * **At least one** `ALLERGY` must be provided. 
 >   - e.g. `delAllergy i/S1234567A` is invalid.
 > * The patient must have the specified `ALLERGY` for it to be removed; otherwise, an error message will be displayed.
+> * If both unique and non-existent allergies are entered in a single command, an error will be returned, and none of the allergies will be deleted.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 **Example**:
