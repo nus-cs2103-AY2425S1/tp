@@ -69,8 +69,7 @@ public class TransactionBookParserTest {
 
     @Test
     public void parseCommand_editTxnCommand() throws ParseException {
-        EditCommand command = (EditCommand) parser.parseCommand(
-                String.format("editTxn 1 p/%s", TypicalPersons.ALICE.getPhone()));
+        EditCommand command = (EditCommand) parser.parseCommand("editTxn 1 amt/10");
         assertNotNull(command);
     }
 }

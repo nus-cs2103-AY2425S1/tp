@@ -1,6 +1,5 @@
 package spleetwaise.transaction.logic.parser;
 
-import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static spleetwaise.commons.testutil.Assert.assertThrows;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.AddressBookModelManager;
-import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
@@ -72,10 +70,6 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         // single invalid fields
         CommandParserTestUtil.assertParseFailure(
-                parser, "1 " + PREFIX_PHONE + "notAPhoneNumber", Phone.MESSAGE_CONSTRAINTS);
-        CommandParserTestUtil.assertParseFailure(
-                parser, "1 " + PREFIX_PHONE + "12345678", ParserUtil.MESSAGE_PHONE_NUMBER_IS_UNKNOWN);
-        CommandParserTestUtil.assertParseFailure(
                 parser, "1 " + PREFIX_AMOUNT + "notAnAmount", Amount.MESSAGE_CONSTRAINTS);
         CommandParserTestUtil.assertParseFailure(
                 parser, "1 " + PREFIX_DESCRIPTION + "", Description.MESSAGE_CONSTRAINTS);
@@ -91,7 +85,6 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         EditCommand.EditTransactionDescriptor descriptor = new EditCommand.EditTransactionDescriptor();
-        descriptor.setPerson(TypicalPersons.ALICE);
         descriptor.setAmount(new Amount("100"));
         descriptor.setDescription(new Description("hello"));
         descriptor.setDate(new Date("01012024"));
@@ -99,10 +92,8 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(Index.fromOneBased(1), descriptor);
 
         CommandParserTestUtil.assertParseSuccess(
-                parser, String.format(
-                        "1 p/%s amt/100 desc/hello date/01012024 cat/TEST",
-                        TypicalPersons.ALICE.getPhone().toString()
-                ),
+                parser,
+                "1 amt/100 desc/hello date/01012024 cat/TEST",
                 expectedCommand
         );
     }
@@ -110,15 +101,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         EditCommand.EditTransactionDescriptor descriptor = new EditCommand.EditTransactionDescriptor();
-        descriptor.setPerson(TypicalPersons.ALICE);
         descriptor.setDescription(new Description("hello"));
         EditCommand expectedCommand = new EditCommand(Index.fromOneBased(1), descriptor);
 
         CommandParserTestUtil.assertParseSuccess(
-                parser, String.format(
-                        "1 p/%s desc/hello",
-                        TypicalPersons.ALICE.getPhone().toString()
-                ),
+                parser,
+                "1 desc/hello",
                 expectedCommand
         );
     }

@@ -78,6 +78,9 @@ public class Person {
     /**
      * Returns true if both persons have the same name and phone number. This defines a notion of equality between two
      * persons based on their identity.
+     * <br>
+     * Note: The current implementation is case-sensitive for names, meaning "John" and "john" are treated as different
+     * individuals. This is planned to be updated in a future release to be case-insensitive.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {

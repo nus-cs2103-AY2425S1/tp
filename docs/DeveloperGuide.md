@@ -111,10 +111,13 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
    2. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
       Expected: Assuming no duplicates, a new contact named John Doe is added to the list. Details of the added contact shown in the status message.
 
-   3. Test case: `add n/ p/ e/ a/`<br>
+   3. Test cases: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` when John Doe with phone 98765432 already exists in the address book <br>
+      Expected: No person is added. Error details shown in the status message with `This person already exists in the address book`. Status bar remains the same.
+
+   4. Test case: `add n/ p/ e/ a/`<br>
       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect add commands to try: `add n/John Doe`, `add p/98765432`, `add e/johnd@example.com`, `add a/John street, block 123, #01-01`<br>
+   5. Other incorrect add commands to try: `add n/John Doe`, `add p/98765432`, `add e/johnd@example.com`, `add a/John street, block 123, #01-01`<br>
       Expected: Similar to previous.
 
 ### Editing a person

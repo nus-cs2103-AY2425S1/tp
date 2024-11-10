@@ -34,6 +34,12 @@ public class JsonAdaptedAmountTest {
     }
 
     @Test
+    public void testConstructor_string_null() {
+        // Test creating an instance with a null string
+        assertThrows(IllegalValueException.class, () -> (new JsonAdaptedAmount((String) null)).toModelType());
+    }
+
+    @Test
     public void testConstructor_amount_positiveAmount() {
         // Create an Amount object
         Amount amount = new Amount(VALID_AMOUNT_POSITIVE);

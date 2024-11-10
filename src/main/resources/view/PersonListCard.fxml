@@ -3,10 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17">
     <GridPane HBox.hgrow="ALWAYS">
@@ -26,7 +26,7 @@
                 </Label>
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true"/>
             </HBox>
-            <FlowPane fx:id="tags"/>
+            <TilePane fx:id="tags"/>
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
             <Label fx:id="address" styleClass="cell_small_label" text="\$address"/>
             <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
