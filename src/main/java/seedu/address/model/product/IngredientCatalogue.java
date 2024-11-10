@@ -32,6 +32,10 @@ public class IngredientCatalogue extends Catalogue {
         this(SampleDataUtil.getDefaultIngredients());
     }
 
+    public static void setInstance(IngredientCatalogue ingredientCatalogue) {
+        instance = ingredientCatalogue;
+    }
+
     /**
      * Deletes an ingredient from the catalogue by its ID.
      *
