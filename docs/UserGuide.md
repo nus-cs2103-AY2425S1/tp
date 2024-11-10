@@ -386,7 +386,7 @@ Format: `mark -d INDEX STATUS`
 
 Parameters:
 
-- `INDEX`: Must be a number greater than 0 and must not be blank.
+- `INDEX`: Must be a number between 1 and the total number of deliveries displayed (inclusive), and cannot be blank
 - `STATUS`: Must be one of the following: `PENDING`, `DELIVERED`, `CANCELLED` and must not be blank.
 <box type="tip" seamless>
 
@@ -413,7 +413,7 @@ Format: `delete -d INDEX`
 <box type="details" seamless>
 
 Parameters:
-- `INDEX`: Must be a number greater than 0 and must not be blank.
+- `INDEX`: The index of the delivery to be deleted in the displayed list. Must be a positive numeric number.
 
 </box>
 
@@ -422,7 +422,7 @@ Parameters:
 **Warnings**:
 - At least one space is needed between `delete` and `-d`.
 - Spacing between `-d` and `INDEX` is not compulsory.
-- Only one delivery at the specified `INDEX` can be deleted at a time.
+- Only one delivery can be deleted one command.
   - `delete -d 1 3 5` is not allowed.
 
 </box>
@@ -448,9 +448,9 @@ Format: `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`
 
 Parameters:
 
-- `on/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` must be in dd-mm-yyyy hh:mm format and must not be blank.
+- `on/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` must be in dd-MM-yyyy hh:mm format and must not be blank.
 - `stat/STATUS`: `STATUS` must be one of the following: PENDING, DELIVERED, CANCELLED and must not be blank.
-- `s/SUPPLIER_INDEX`: `SUPPLIER_INDEX` must be a number greater than 0 and must not be blank.
+- `s/SUPPLIER_INDEX`: `SUPPLIER_INDEX` must be a number between 1 and the total number of suppliers displayed (inclusive), and cannot be blank.
 - `pro/PRODUCT`: `PRODUCT` must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
     - One space is counted as one character.
     - `PRODUCT` cannot be made up of only spaces.
@@ -464,7 +464,7 @@ Parameters:
 - At least one parameter must be given.
 - At least one space is needed between `-d` and the first parameter.
 - When using more than one parameter, at least one space is needed between parameters.
-- `STATUS` and `PRODUCT` are not case-sensitive.
+- `STATUS` and `PRODUCT` are case-insensitive.
 - No duplicate parameter can be used.
   - `find -d pro/milk pro/bread` is not allowed.
 - Find result(s) will contain/satisfy all the given parameters.
@@ -483,7 +483,7 @@ Expected output:
 
 ### Sort deliveries: `sort -d`
 
-The `sort -d` command is used to sort deliveries in VendorVault based on the delivery cost, date or status.
+The `sort -d` command is used to sort deliveries in VendorVault based on the delivery cost, date and time or status.
 This helps you to view the deliveries in a different order (ascending or descending).
 
 Format: `sort -d so/SORT_ORDER sb/SORT_BY`
@@ -493,7 +493,7 @@ Format: `sort -d so/SORT_ORDER sb/SORT_BY`
 Parameters:
 
 - `so/SORT_ORDER`: `SORT_ORDER` must be either `a` for ascending or `d` for descending, and must not be blank.
-- `sb/SORT_BY`: `SORT_BY` must be either 'c' for cost, `d` for date or `s` for status, and must not be blank.
+- `sb/SORT_BY`: `SORT_BY` must be either `c` for cost, `d` for date and time or `s` for status, and must not be blank.
 
 </box>
 
