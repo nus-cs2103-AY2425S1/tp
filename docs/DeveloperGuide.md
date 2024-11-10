@@ -300,6 +300,11 @@ The sequence diagram below illustrates the above process of adding a person into
 
 <img src="images/AddCommandSequenceDiagram.png" width="550" />
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for AddCommand is very similar to the sequence diagrams for the following
+commands: DeleteCommand, EditCommand, FindCommand, FilterCommand, as its implementation is much like that of them.
+</div>
+
 ---
 
 ### Delete Person Feature
@@ -343,6 +348,11 @@ We will be using the user input `delete 1` as an example.
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
 
 <img src="images/DeleteCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for DeleteCommand is very similar to the sequence diagrams for the following
+commands: AddCommand, EditCommand, FindCommand, FilterCommand, as its implementation is much like that of them.
+</div>
 
 ---
 
@@ -389,6 +399,11 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 The sequence diagram below illustrates the above process of editing a person's details in TalentSG.
 
 <img src="images/EditCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for EditCommand is very similar to the sequence diagrams for the following
+commands: AddCommand, DeleteCommand, FindCommand, FilterCommand, as its implementation is much like that of them.
+</div>
 
 ---
 
@@ -476,6 +491,11 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 <img src="images/FindCommandSequenceDiagram.png" width="800" />
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for FindCommand is very similar to the sequence diagrams for the following
+commands: AddCommand, DeleteCommand, EditCommand, FilterCommand, as its implementation is much like that of them.
+</div>
+
 ---
 
 ### Filter Status Feature
@@ -533,6 +553,11 @@ We will be using the user input `filter Interviewed` as an example.
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
 
 <img src="images/FilterStatusCommandSequenceDiagram.png" width="800" />
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note**: The sequence diagram for FilterCommand is very similar to the sequence diagrams for the following
+commands: AddCommand, DeleteCommand, EditCommand, FindCommand, as its implementation is much like that of them.
+</div>
 
 ---
 
