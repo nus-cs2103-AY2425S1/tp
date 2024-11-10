@@ -77,7 +77,8 @@ public class UntagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+
+        Set<Tag> tagsToKeep = new HashSet<>();
 
         if (personToEdit.getTags().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
@@ -87,17 +88,29 @@ public class UntagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
-        if (!updatedTags.containsAll(tagsToRemove)) {
-            throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
-        }
-
-        for (Tag tag : updatedTags) {
-            if (tagsToRemove.contains(tag)) {
-                tag.decreaseTaggedCount();
+        // Checks whether the model has all the specified weddings AND if the person has all the weddings assigned
+        for (Tag tag : tagsToRemove) {
+            if (!model.hasTag(tag)) {
+                throw new CommandException(
+                        Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
+            }
+            if (!personToEdit.hasTag(tag)) {
+                throw new CommandException(Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
             }
         }
 
-        updatedTags.removeAll(tagsToRemove);
+        // Stores weddings from model that we want to remove - already guaranteed that are all within the model
+        HashSet<Tag> modelTagsToRemove = tagsToRemove.stream().map(model::getTag)
+                .collect(Collectors.toCollection(HashSet::new));
+
+        // Already checks that person has all weddings, so can go ahead and remove
+        for (Tag tag : personToEdit.getTags()) {
+            if (!modelTagsToRemove.contains(tag)) {
+                tagsToKeep.add(tag);
+            } else {
+                tag.decreaseTaggedCount();
+            }
+        }
 
         Person editedPerson;
         if (personToEdit instanceof Vendor) {
@@ -106,7 +119,7 @@ public class UntagCommand extends Command {
                     personToEdit.getPhone(),
                     personToEdit.getEmail(),
                     personToEdit.getAddress(),
-                    updatedTags,
+                    tagsToKeep,
                     personToEdit.getWeddings(),
                     personToEdit.getTasks());
         } else {
@@ -115,7 +128,7 @@ public class UntagCommand extends Command {
                     personToEdit.getPhone(),
                     personToEdit.getEmail(),
                     personToEdit.getAddress(),
-                    updatedTags,
+                    tagsToKeep,
                     personToEdit.getWeddings(),
                     personToEdit.getTasks());
         }
