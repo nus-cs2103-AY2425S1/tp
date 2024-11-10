@@ -37,8 +37,6 @@ public class UnstarCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNSTAR_PERSON_SUCCESS = "Unstarred Person: %1$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "The person's name provided is invalid";
-    public static final String MESSAGE_INVALID_INDEX = "The person's index provided is invalid";
     public static final String MESSAGE_ALREADY_UNSTARRED = "%1$s is not starred";
 
     private final Name targetName;

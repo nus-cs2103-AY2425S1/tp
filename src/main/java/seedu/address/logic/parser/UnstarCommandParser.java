@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDE
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UnstarCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
@@ -26,23 +27,20 @@ public class UnstarCommandParser implements Parser<UnstarCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnstarCommand.MESSAGE_USAGE));
         }
 
-
-        try {
+        if (isNumber(trimmedArgs)) {
             Index index = ParserUtil.parseIndex(trimmedArgs);
             return new UnstarCommand(index);
-        } catch (ParseException pe) {
-
-            if (trimmedArgs.matches("[^\\d]*")) {
-                try {
-                    Name name = ParserUtil.parseName(trimmedArgs);
-                    return new UnstarCommand(name);
-                } catch (ParseException pe2) {
-                    throw new ParseException(pe2.getMessage(), pe2);
-                }
-            } else {
-                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
         }
+
+        if (Name.isValidName(trimmedArgs)) {
+            Name name = ParserUtil.parseName(trimmedArgs);
+            return new UnstarCommand(name);
+        }
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnstarCommand.MESSAGE_USAGE));
+    }
+
+    private boolean isNumber(String index) {
+        return index.matches("-?\\d+");
     }
 }
 

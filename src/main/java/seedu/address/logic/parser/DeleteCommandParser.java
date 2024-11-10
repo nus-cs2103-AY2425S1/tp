@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.UnstarCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
@@ -26,23 +27,19 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-
-        try {
+        if (isNumber(trimmedArgs)) {
             Index index = ParserUtil.parseIndex(trimmedArgs);
             return new DeleteCommand(index);
-        } catch (ParseException pe) {
-            if (trimmedArgs.matches("[^\\d]*")) { // Checks if the input does not contain digits
-                try {
-                    Name name = ParserUtil.parseName(trimmedArgs);
-                    return new DeleteCommand(name);
-                } catch (ParseException pe2) {
-                    // If name parsing fails, throw the specific name-related error message
-                    throw new ParseException(pe2.getMessage(), pe2);
-                }
-            } else {
-                // If it's not a name and not a valid index, throw an invalid index message
-                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
         }
+
+        if (Name.isValidName(trimmedArgs)) {
+            Name name = ParserUtil.parseName(trimmedArgs);
+            return new DeleteCommand(name);
+        }
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    private boolean isNumber(String index) {
+        return index.matches("-?\\d+");
     }
 }
