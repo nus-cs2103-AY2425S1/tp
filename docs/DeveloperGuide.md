@@ -173,14 +173,14 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("cdelete 1")` API
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("rview 1")` API
 call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `cdelete 1` Command" />
+<puml src="diagrams/ViewRentalSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `rview 1` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifeline for `ViewRentalCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 
 </box>
