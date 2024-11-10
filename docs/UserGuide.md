@@ -74,42 +74,86 @@ administrators.
 ## 2. Command Instructions
 ### Command Format Guidelines
 
-* `[ ]`: Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+- **Optional Parameters**: Parameters in square brackets `[ ]` are **optional**.
+  <br> e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* `…`: Items with `…` after them can be used multiple times including zero times.
 
-* `UPPER_CASE`: Words in `UPPER_CASE` are the parameters to be supplied by the user.
+- **Repeatable Parameters**: Parameters followed by `…` can be used **zero or more times**.
+  <br> e.g. `n/NAME [t/TAG]…` can be used as `n/John Doe t/friend t/family` or as `n/John Doe`.
 
-* `INDEX`: Refers to the index number shown in the displayed person list.
 
-* `MONTH_PAID`: Refers to the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+- **Parameters in `UPPER_CASE`**: These represent user-supplied values.
+  <br> e.g. `MONTH_PAID` should be replaced with a value like `2024-10`.
 
-* `KEYWORD`: Refers to the search term used to find persons.
 
-* `MORE_KEYWORDS`: Refers to additional search terms used to find persons.
+- **INDEX**: Refers to the index number of a person shown in the displayed person list.
+  <br> e.g. `1` for the first person in the list.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* `n/` is for name, `p/` is for phone number, `e/` is for email, `a/` is for address, `f/` is for fees, `c/` is for class ID, and `t/` is for tags.
+- **KEYWORD** and **MORE_KEYWORDS**: These are search terms used to find persons.
+  <br> e.g. `John Doe`, `John Doe friend`.
 
-* The commands help, list, exit, pie, bar and clear do not accept parameters; any provided parameters will be disregarded.  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* EduTuTu allows the handling of alphanumeric characters, some special characters and spaces . Emojis are not supported.
+- **Parameter Order**: Parameters can be in **any order**.
+  <br> e.g. If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+- **Prefixes**: They are consistent across every command that uses prefixes.
+  <br> `n/` for **name**
+  <br> `p/` for **phone number**
+  <br> `e/` for **email**
+  <br> `a/` for **address**
+  <br> `f/` for **fees**
+  <br> `c/` for **class ID**
+  <br> `m/` for **month paid**
+  <br> `t/` for **tags**
+
+
+- **Commands Without Parameters**: Provided parameters will be **ignored**.
+  <br> e.g. `help 123` will be interpreted as `help`.
+
+
+- **Copying Commands from PDF**
+  <br> If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Space characters surrounding line breaks **may be omitted when copied over** to the application.
+
 
 ### Field Constraints
-* Names support alphanumeric characters and spaces. In addition, it supports the addition of special characters of common name formats.
 
-* Phone numbers accepts hyphen and spaces between the numbers and + (for country code) as special characters. Only one or zero hyphen/spaces are allowed. eg.(91088231, 9108 8231, 9108-8231, +6591088231)
+- **Name**: Accepts **alphanumeric** characters and **spaces**.
+  <br> e.g. `John Doe`
 
-* Fees accepts only a maximum of only 9 digits due to integer overflow constraints.
 
-* Class ID does not accept special characters.
+- **Phone Number**: Accepts **digits**. A **hyphen/space** between numbers, and a **plus character** as the first character can be added. **At most one hyphen/space/plus can be entered.**
+  <br> e.g. `91088231`, `9108 8231`, `9108-8231`, `+65 91088231` are **valid**.
+  <br> e.g. `9123-4567 8910`, `123 456 789`, `+96+91234567` are **invalid**.
 
-* Tags support alphanumeric characters without spaces.
+
+- **Email**: Accepts **alphanumeric** characters, and the following **special characters**: `@+_.-`
+  <br> e.g. `joe@duck.com`, `johnny_123@gmail.com`, `joe@localhost`
+  <br> For more detailed information, refer to the Internet Protocol Standards ([RGC 5322 Section 3.4.1](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1)).
+
+
+- **Address**: No specific restrictions.
+  <br> e.g. `Kent Ridge 123123`
+  <br> Note: Rare characters such as **emojis** and **Chinese characters** are not guaranteed to be displayed properly.
+
+
+- **Fees**: Accepts a **maximum of 9 digits** due to technical constraints. **Must be a whole number**.
+  <br> e.g. `0`, `500`, `123456789` are **valid**.
+  <br> e.g. `10.50`, `12345678910` are **invalid**.
+
+
+- **Class ID**: Accepts alphanumeric characters only. **Spaces are not accepted.**
+  <br> e.g. `12345`
+
+
+- **Month Paid**: Uses the format `YYYY-MM`. It must be within the range `1900-01` to `2099-12` inclusive.
+  <br> e.g. `2024-01`, `2024-12` are **valid**.
+  <br> e.g. `2024-1`, `2024-13` are **invalid**.
+
+
+- **Tag**: Accepts alphanumeric characters only. **Spaces are not accepted.**
+  <br> e.g. `friend`, `family`, `class123`
 
 [Back to Table of Contents](#table-of-contents)
 
