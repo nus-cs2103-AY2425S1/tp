@@ -436,14 +436,12 @@ Use case ends.
 8.  The app should have a log of user actions for debugging purposes.
 9.  The app should help users validate their inputs for their client's claim information as they are adding or deleting the inputs based on known market standards.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Insurance Agent**: The user of the app.
 * **Client**: A potential customer who is keen on purchasing an insurance plan or a customer who has purchased at least one insurance plan from the insurance agent.
-* **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system.
+* **Insurance Plan ID**: A unique ID assigned to the insurance plan by the system. 
 * **Valid Insurance Plan ID**: An insurance plan ID that exists in the system.
 * **Claim**: A formal request by a client for reimbursement for losses that are covered by specific insurance plans.
 <!-- (the above definition was obtained from: https://www.iciciprulife.com/insurance-claim.html) -->
@@ -477,7 +475,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a client
 
@@ -494,12 +491,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
