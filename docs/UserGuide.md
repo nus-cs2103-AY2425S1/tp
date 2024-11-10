@@ -153,7 +153,7 @@ Note:
 <box type="tip" seamless><br>
 Tip: A vendor or event can have any number of tags (including 0).
 </box>
-* If an event or a vendor already has the same name, command will fail and error message will be displayed.
+* If an event or a vendor already has the same name (exact matching - case sensitive), command will fail and error message will be displayed.
 
 Examples:
 * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew`
