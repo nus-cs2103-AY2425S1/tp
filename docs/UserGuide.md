@@ -156,7 +156,7 @@ The prefixes used in **EZSTATE** are universal across all commands _(i.e. have t
 ## Features
 
 <div class="alert" markdown="span">
-You are strongly recommended to read through [Command Structure](#CommandStructure) before proceeding with this section!
+Please read through [Command Structure](#CommandStructure) before proceeding with this section!
 </div>
 
 <br>
