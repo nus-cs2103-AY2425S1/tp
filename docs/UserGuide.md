@@ -343,8 +343,6 @@ Cancels a lesson at a specific date and start time for the specified student in 
 Format: `cancel INDEX dt/DATE st/START_TIME`
 
 * Cancels a lesson for the student at the specified `INDEX`, on the specified `DATE` that starts at the specified `START_TIME`.
-* Cancelling a makeup lesson will remove it from the student's list of makeup lessons.
-* Cancelling a regular lesson adds it to a list of cancelled lessons. This is shared across students in the same group.
 * `DATE` must be a valid date in the format `DD-MM-YYYY`.
 * `DATE` must match the student's lesson `DATE`, and `START_TIME` must match the student's lesson `START_TIME`.
 * `START_TIME` must be in 24-hour format (`HH:MM`).
