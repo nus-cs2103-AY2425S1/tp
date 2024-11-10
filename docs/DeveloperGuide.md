@@ -646,6 +646,35 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+
+1. Adding a person with only compulsory parameters specified.
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com` <br>
+      Expected: John Doe is added to the address book with a success message, as shown below.
+      ![add success](images/AddCommandTestSuccessMessage.png)
+
+2. Adding a person with all possible parameters specified.
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com r/05-0523 a/311, Clementi Ave 2, #02-25 t/Floor10 t/Table Tennis t/Floor 5` <br>
+      Expected: John Doe is added to the address books with all the other details and a success message.
+
+3. Adding a person with some compulsory parameters missing.
+   1. Test case: `add n/John Doe` <br>
+      Expected: An error message is shown stating that the command format is incorrect and showing the user the correct format.
+   2. Test case: `add n/John Doe e/johnd@example.com r/05-0523 a/311, Clementi Ave 2, #02-25 t/Floor10 t/Table Tennis t/Floor 5` <br>
+      Expected: Similar to (i)
+
+4. Adding a person with data that does not conform to data validation.
+   1. Test case: `add n/John Doe p/abcd e/johnd@example.com` <br>
+      Expected: An error message is shown informing the user about the correct data format for PHONE.
+   2. Test case: `add n/John Doe p/1234567 e/HAI`
+      Expected: An error message is shown informing the user about the correct data format for EMAIL
+
+5. Adding a person with duplicate phone or email.
+   1. Prerequisites: There is at least one person in the address book.
+   2. Test case: 
+      1. Step 1: `add n/John Doe p/12345678 e/johnd@example.com` <br>
+      2. Step 2: `add n/Alex Yeoh p/12345678 e/johnd@example.com` <br>
+         Expected: An error message appears informing the user that there is already someone with that phone number in the address book.
 
 ## **Appendix: Planned enhancements**
 
