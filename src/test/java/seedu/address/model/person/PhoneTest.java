@@ -35,6 +35,12 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("934--999")); // Double hyphen between digits
         assertFalse(Phone.isValidPhone("934  999")); // Double space between digits
         assertFalse(Name.isValidName("999- 934")); // Hyphen and space between 2 characters
+        assertFalse(Phone.isValidPhone("++9344 8293")); // Two pluses
+        assertFalse(Phone.isValidPhone("+9344+8293")); // Plus in the middle of the phone
+        assertFalse(Phone.isValidPhone("344+-8293"));
+        assertFalse(Phone.isValidPhone("344 +8293"));
+        assertFalse(Phone.isValidPhone("+")); // Just a plus
+
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
@@ -45,6 +51,9 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("92-9")); // Phone number with at least 3 digits in total
         assertTrue(Phone.isValidPhone("987 983-834")); // Number with space and hyphen
         assertTrue(Phone.isValidPhone("987 983-834  ")); // Number with trailing whitespaces
+        assertTrue(Phone.isValidPhone("+65 9344 8293")); // Number with country code
+        assertTrue(Phone.isValidPhone("+6593448293")); // Country code but no spaces
+        assertTrue(Phone.isValidPhone("+65 9344-8293")); // Mix of hyphens, spaces and country code
     }
 
     @Test
