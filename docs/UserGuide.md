@@ -114,7 +114,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 * `EMAIL`: Email address
 * `ADDRESS`: Physical address
 * `INFORMATION`: Additional customer details (Only alphanumerical characters)
-* `INGREDIENTS_SUPPLIED`: List of ingredients' name (for suppliers)
+* `INGREDIENTS_SUPPLIED`: List of ingredients' name (comma-separated)
 * `COST`: Numeric value
 * `PASTRYID`: Product identification numbers from the pastry catalogue
 * `INGREDIENTID`: Product identification numbers from the ingredient catalogue
@@ -145,17 +145,18 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [List](#list-command)                     | `list`                                                                      | `list`                                                               |
 | [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
 
-## **Customer and Supplier Specific Contact Management**
+<div style="page-break-after: always;"></div>
 
-| Command | Format                                                                               | Example |
-| --- |--------------------------------------------------------------------------------------| --- |
-| [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]...` | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
-| [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]...` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
+## **Customer and Supplier Contact Management**
+
+| Command | Format                                                                                        | Example |
+| --- |-----------------------------------------------------------------------------------------------| --- |
+| [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]...`          | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
+| [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [s/INGREDIENTS_SUPPLIED] [t/TAG]...` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
 
 <div style="page-break-after: always;"></div>
 
-## **Order Management**
-### **Customer Orders**
+## **Customer Order Management**
 
 | Command | Format                                                                                | Example |
 | --- |---------------------------------------------------------------------------------------| --- |
@@ -164,8 +165,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX`                                                             | `markCustomerOrder 1` |
 | [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX`                                                           | `unmarkCustomerOrder 1` |
 
-<div style="page-break-after: always;"></div>
-#### **Supply Orders**
+## **Supply Order Management**
 
 | Command | Format                                                                  | Example |
 | --- |-------------------------------------------------------------------------| --- |
@@ -176,8 +176,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 
 <div style="page-break-after: always;"></div>
 
-## **Catalogue Management**
-### **Ingredient Catalogue**
+## **Ingredient Catalogue Management**
 
 | Command | Format | Example |
 | --- | --- | --- |
@@ -185,7 +184,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Remove Ingredient](#remove-ingredient-command) | `removeIngredient NAME` | `removeIngredient Flour` |
 | [View Ingredient Catalogue](#view-ingredientcatalogue-command) | `viewIngredientCatalogue` | `viewIngredientCatalogue` |
 
-### **Pastry Catalogue**
+## **Pastry Catalogue Management**
 
 | Command | Format                                                 | Example |
 | --- |--------------------------------------------------------| --- |
@@ -352,7 +351,7 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 Adds a new customer to the bakery’s customer database.
 
 ```bash
-addCustomer n/NAME p/PHONE_NUMBER i/INFORMATION [e/EMAIL] [a/ADDRESS] [t/TAG]...
+addCustomer n/NAME p/PHONE_NUMBER [i/INFORMATION] [e/EMAIL] [a/ADDRESS] [t/TAG]...
 ```
 - **Parameters:**
   - `n/NAME`: The customer's name. This has to be alphanumerical.
@@ -440,12 +439,12 @@ all their pastries and ingredient needs, making it more convenient for bakery ow
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
-addSupplier n/NAME p/PHONE_NUMBER s/INGREDIENTS_SUPPLIED [e/EMAIL] [a/ADDRESS] [t/TAG]...
+addSupplier n/NAME p/PHONE_NUMBER [s/INGREDIENTS_SUPPLIED] [e/EMAIL] [a/ADDRESS] [t/TAG]...
 ```
 - **Parameters:**
     - `n/NAME`: The supplier's name. This has to be alphanumerical.
     - `p/PHONE_NUMBER`: The supplier's phone number. This has to be unique in the contacts list and have more than 3 digits.
-    - `s/INGREDIENTS_SUPPLIED`: List of ingredients supplied, comma separated
+    - `s/INGREDIENTS_SUPPLIED`: (Optional) List of ingredients supplied, comma separated
     - `e/EMAIL`: (Optional) The supplier's email address.
     - `a/ADDRESS`: (Optional) The supplier's address.
     - `t/TAG`: (Optional) Tags for additional supplier information. Only a single word can be used as a tag. Can have multiple prefixes.
