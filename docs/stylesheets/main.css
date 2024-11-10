@@ -74,23 +74,25 @@ mark {
   width: 300px;
 }
 
-#site-nav {
-  border-right: 1px solid lightgrey;
-  padding-bottom: 20px;
-  z-index: 999;
-}
+/*#site-nav {*/
+/*  border-right: 1px solid lightgrey;*/
+/*  padding-bottom: 20px;*/
+/*  z-index: 999;*/
+/*}*/
 
-.site-nav-top {
-  margin: 0.8rem 0;
-  padding: 0 12px 12px 12px;
-}
+/*.site-nav-top {*/
+/*  margin: 0.8rem 0;*/
+/*  padding: 0 12px 12px 12px;*/
+/*}*/
 
 .nav-component {
   overflow-y: auto;
 }
 
 #page-nav {
-  border-left: 1px solid lightgrey;
+    border-right: 2px solid lightgrey;
+    padding-bottom: 20px;
+    z-index: 999;
 }
 
 @media screen and (max-width: 1299.98px) {
