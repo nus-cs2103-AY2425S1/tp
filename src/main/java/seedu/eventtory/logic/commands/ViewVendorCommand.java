@@ -31,6 +31,10 @@ public class ViewVendorCommand extends ViewCommand {
         requireNonNull(model);
         Vendor vendorToView = IndexResolverUtil.resolveVendor(model, targetIndex);
 
+        // Reset filtered vendor list to prevent not being able to find the vendor after viewing
+        if (model.getUiState().getValue().isEventDetails()) {
+            model.updateFilteredVendorList(Model.PREDICATE_SHOW_ALL_VENDORS);
+        }
         model.viewVendor(vendorToView);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(vendorToView)));
