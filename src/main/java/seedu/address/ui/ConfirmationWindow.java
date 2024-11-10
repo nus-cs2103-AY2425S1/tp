@@ -3,8 +3,11 @@ package seedu.address.ui;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import seedu.address.commons.core.LogsCenter;
@@ -40,7 +43,15 @@ public class ConfirmationWindow extends UiPart<Stage> {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(contentText);
+
+        // Using text to solve UI constraint on Windows
+        Text text = new Text(contentText);
+        text.setWrappingWidth(500);
+
+        // Using VBox to adjust position of text as it is not automatically done
+        VBox contentBox = new VBox(text);
+        contentBox.setPadding(new Insets(25, 25, 10, 10));
+        alert.getDialogPane().setContent(contentBox);
 
         alert.getDialogPane()
                 .setStyle("-fx-background-color: derive(#CAE9FF, 50%); -fx-font-size: 16px;");

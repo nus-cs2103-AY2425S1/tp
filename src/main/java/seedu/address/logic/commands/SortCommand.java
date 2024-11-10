@@ -23,8 +23,6 @@ public class SortCommand extends Command {
         if (noAppointment == -1) {
             throw new CommandException(NO_APPOINTMENT_FOUND);
         }
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
