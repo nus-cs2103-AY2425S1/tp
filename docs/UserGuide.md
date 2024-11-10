@@ -88,7 +88,7 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Person constraints:**<br>
+**:warning: Person constraints**<br>
 
 - A person's name must be unique (case-sensitive).
 
@@ -99,18 +99,18 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Optionals** <br>
+**:information_source: Optionals** <br>
 
-A person can have any number of tags or none at all!
-The address and email address fields are also optional!
+A person can have any number of `tags` or none at all!
+The `address` and `email` fields are also optional!
 
 </div>
 
 Examples:
 
 - `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity` adds a person named `John Doe` with the phone number `98765432`, email address `johnd@example.com` and tag `Celebrity`.
-<div markdown="block" class="alert alert-info">
-Note that John Doe does not have an address in this example.
+<div markdown="block" class="alert alert-info">:pushpin:<br> 
+Note that John Doe does not have an `address` in this example.
 </div>
 
 - `add person n/Bernice Yu e/berniceyu@example.com a/Yu Apartment p/99272758 t/Hairdresser` adds a person named `Bernice Yu` and the email address `berniceyu@example.com`, address `Yu Apartment`, phone number `99272758` and tag `Hairdresser`.
@@ -150,7 +150,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Person constraints:**<br>
+**:warning: Person constraints**<br>
 
 - A person's name must be unique (case-sensitive).
 
@@ -159,7 +159,7 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - A person's phone number must be unique.
 </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
 You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
 </div>
 
@@ -249,7 +249,7 @@ Format: `delete person INDEX`
 - The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from all events' contact lists. This action is irreversible after confirmation.
+When you delete a person, you will also delete `events` which the person is the celebrity for, and you remove the person from all `event`s' contact lists. This action is irreversible after confirmation.
 </div>
 
 Examples:
@@ -282,14 +282,15 @@ Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…�
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Event constraints:**<br>
+**:warning: Event constraints**<br>
 
 - The celebrity and all points of contacts must be existing persons in TalentHub.
+- You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
 </div>
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:Optionals** <br>
+**:information_source: Optionals** <br>
 
 An event can have any number of points of contact or none at all!
 The venue field is also optional!
@@ -334,10 +335,10 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - Existing values will be updated to the input values.
 
 <div markdown="block" class="alert alert-info">
-
-**:information_source: Event constraints:**<br>
+**:warning: Event constraints**<br>
 
 - The celebrity and all points of contacts must be existing persons in TalentHub.
+- You cannot add an event with the same `Celebrity` and overlapping `Time` as an existing event.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
