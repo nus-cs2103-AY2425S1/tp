@@ -260,7 +260,6 @@ public class MainWindow extends UiPart<Stage> {
                 && currentlyViewedClient.equals(commandResult.getDeletedClient())) {
             handleCloseCommand();
         }
-
         if (commandResult.isShowHelp()) {
             handleHelp();
         }
