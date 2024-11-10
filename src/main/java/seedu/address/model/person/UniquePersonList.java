@@ -122,6 +122,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         Person personToArchive = internalList.get(index);
+
+        if (personToArchive.isArchived()) {
+            return;
+        }
+
         personToArchive.setArchived(true);
     }
 
@@ -141,6 +146,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         Person personToArchive = internalList.get(index);
+
+        if (!personToArchive.isArchived()) {
+            return;
+        }
+
         personToArchive.setArchived(false);
     }
 

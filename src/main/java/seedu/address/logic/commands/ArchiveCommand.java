@@ -61,7 +61,7 @@ public class ArchiveCommand extends Command {
         assert resultMessages.size() == targetIndices.size();
 
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        model.updateFilteredPersonList(lastShownPredicate.and(Model.PREDICATE_SHOW_UNARCHIVED_PERSONS));
+        model.updateFilteredPersonList(lastShownPredicate);
 
         if (resultMessages.size() == 1) {
             return new CommandResult(String.format(MESSAGE_ARCHIVE_PERSON_SUCCESS, resultMessages.get(0)));
