@@ -314,16 +314,27 @@ HireMe data are saved in the hard disk automatically after any command that chan
 Ans: HireMe data are saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
 
 #### Q2: Can I edit the data file directly?
-Ans: You should not be editing the JSON data file directly. You should be using the commands as mentioned above to augment any data.
-Should the data file be corrupted, HireMe will discard all data and start with an empty data file.
+Ans: You are strongly encouraged to **not** edit the JSON data file directly. You can use the commands as mentioned above to augment any data.
+Should the changes made to the data file causes the format to be invalid, HireMe will discard all data and start with an empty data file.
+It is highly recommended to make a copy of the date file before editing it. <br>
 
-#### Q3: Can I find followed by filter to filter out the applications with a specific keyword?
+Users should only edit the data file only if they are confident in updating it correctly.
+
+#### Q3: What is considered valid, when editing the JSON data file directly?
+Ans: Data entries are valid, if they are achievable through a sequence of commands. <br>
+
+Examples: <br>
+Having `30/02/24` is an invalid `dateString` field for an application, as there is no sequence of commands that will lead to an application having the respective date.<br>
+
+Having `REJECTED` is a valid `statusString` field for an application, as the user can `/add` an internship and update the status via `/reject`.
+
+#### Q4: Can I find followed by filter to filter out the applications with a specific keyword?
 Ans: Currently, `/find` and `/filter` do not stack. These commands will find or filter based on all of your internship application entries.
 
-#### Q4: After I sort my internship applications, will a new entry be added in the right order automatically?
+#### Q5: After I sort my internship applications, will a new entry be added in the right order automatically?
 Ans: New entries will not be inserted in the right order. They are inserted to the bottom of the list.
 
-#### Q5: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
+#### Q6: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
 Ans: Yes! You are not required to close the window. Any changes made will be reflected immediately in the pie chart.
 
 --------------------------------------------------------------------------------------------------------------------

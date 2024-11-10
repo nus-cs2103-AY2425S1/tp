@@ -1089,4 +1089,3 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancements**
 The team consists of 5 members.
 Given below are enhancements planned for future versions.
-
