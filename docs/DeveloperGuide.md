@@ -488,7 +488,6 @@ unless specified otherwise)
 
 ---
 
-
 **Use case: Mark assignment**
 
 **MSS**
@@ -593,14 +592,6 @@ unless specified otherwise)
     * 1a1. TAchy shows an error message.
 
       Use case ends.
-
-* 1b. The student already has a remark.
-    * 1b1. TAchy shows a warning message.
-    * 1b2. TAchy asks if the Teacher wants to overwrite the remark.
-    * 1b3. Teacher confirms the overwrite.
-    * 1b4. TAchy records the new remark.
-
-      Use case resumes at step 2.
 
 
 ### Non-Functional Requirements
