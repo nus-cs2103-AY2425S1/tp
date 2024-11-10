@@ -22,9 +22,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        if (args.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
         Set<Index> indices = new HashSet<>();
 
         String[] parts = args.trim().split("\\s+");
@@ -34,39 +31,36 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 String[] range = part.split("-");
                 if (range.length != 2) {
                     throw new ParseException(
-                            DeleteCommand.MESSAGE_FULL_RANGE);
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_FULL_RANGE));
                 }
+                int start;
+                int end;
                 try {
-                    int start = Integer.parseInt(range[0].trim());
-                    int end = Integer.parseInt(range[1].trim());
-                    if (start <= 0 || end <= 0) {
-                        throw new ParseException(
-                                DeleteCommand.MESSAGE_INVALID_INPUT);
-                    }
+                    start = Integer.parseInt(range[0].trim());
+                    end = Integer.parseInt(range[1].trim());
                     // Check for valid range
                     if (start > end) {
-                        throw new ParseException(
-                                DeleteCommand.MESSAGE_INVALID_RANGE);
+                        throw new ParseException("Invalid range: " + part);
                     }
+                } catch (NumberFormatException | ParseException e) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_INVALID_RANGE), e);
+                }
+                try {
                     for (int i = start; i <= end; i++) {
                         indices.add(ParserUtil.parseIndex(String.valueOf(i)));
                     }
-                } catch (NumberFormatException e) {
+                } catch (ParseException e) {
                     throw new ParseException(
-                            DeleteCommand.MESSAGE_INVALID_INPUT);
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
                 }
             } else {
                 // Handle individual index
                 try {
-                    int index = Integer.parseInt(part.trim());
-                    if (index <= 0) {
-                        throw new ParseException(
-                                DeleteCommand.MESSAGE_INVALID_INPUT);
-                    }
                     indices.add(ParserUtil.parseIndex(part.trim()));
-                } catch (NumberFormatException e) {
+                } catch (ParseException e) {
                     throw new ParseException(
-                            DeleteCommand.MESSAGE_INVALID_INPUT);
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
                 }
             }
         }

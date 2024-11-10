@@ -9,8 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Name must consist only of letters.\n"
-            + "Each name part is separated by exactly one space.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Name should only contain alphabet characters and spaces.\n"
             + "Both given name and surname should be included.";
 
     /*

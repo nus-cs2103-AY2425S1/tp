@@ -21,9 +21,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX_1 | LOWER_BOUND-UPPER_BOUND\n"
-            + " [INDEX_2]...\n"
-            + " [INDEX_3-INDEX_4]...\n"
+            + "Parameters: [INDEX | LOWER-UPPER] ...\n"
             + " (must be positive integer(s))\n"
             + "Example: " + COMMAND_WORD + " 1 3 5-9 20";
 
@@ -35,8 +33,6 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_FULL_RANGE = "Both the lower and upper bounds should be present.\n"
             + "Ensure there are no spaces around the hyphen in range inputs. Example: 1-5";
-
-    public static final String MESSAGE_INVALID_INPUT = "Invalid input: Must be positive integer.\n";
 
     private final List<Index> targetIndices;
 

@@ -146,7 +146,7 @@ Adds a person to the address book.
 Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​`
 
 * Email, gender and study group tags are **case-insensitive**.
-* Valid entries for names must consist only of letters; numbers and special characters are not allowed. Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
+* Valid entries for names should only contain alphabet characters and spaces; numbers and special characters are not allowed. Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
 * Valid entries for gender are M/m/F/f.
 * Age must be a positive integer less than 150.
 * Two contacts are considered **duplicates** if they share the same **email** address.
@@ -189,9 +189,10 @@ Examples:
 
 Deletes the specified persons from the address book.
 
-Format: `delete INDEX | LowerBound-UpperBound [INDEX]… [LowerBound-UpperBound]…`
+Format: `delete [INDEX | LowerBound-UpperBound]…`
 
 * Deletes the person at the specified `INDEX` or range of indices.
+* At least one of the optional fields must be provided.
 * All input indices must be within the range.
 * When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
 
