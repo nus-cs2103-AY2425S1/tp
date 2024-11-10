@@ -140,6 +140,7 @@ Adds a student to the address book.
 ##### Constraints
 
 * **NAME** must only contain alphanumeric characters and spaces.
+* **ADDRESS** has no restrictions.
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
 * **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
 * **START_TIME** and **END_TIME** are represented as `HHmm`.
