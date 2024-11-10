@@ -176,6 +176,7 @@ Constraints:
         1. `High Risk`
         2. `Medium Risk`
         3. `Low Risk`
+    - Note: tags are case insensitive.
       
 * **ALLERGY**
     - Only include alphanumeric characters, spaces, and commas.
