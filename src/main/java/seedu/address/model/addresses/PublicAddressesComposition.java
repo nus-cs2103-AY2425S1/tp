@@ -29,7 +29,8 @@ public class PublicAddressesComposition {
     public static final String MESSAGE_DUPLICATE_LABEL =
         "Label %1$s under the network %2$s already exists.";
 
-    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: duplicate label or public address\n%1$s\n";
+    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: %1$s\n"
+        + INDENT + "duplicate label or public address";
 
     private final Map<Network, Set<PublicAddress>> publicAddresses;
 
