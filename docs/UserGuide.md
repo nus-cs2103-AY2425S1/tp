@@ -7,7 +7,7 @@
     :target:before {
     content: "";
     display: block;
-    height: 200px;
+    height: 50px;
 }
 </style>
 
