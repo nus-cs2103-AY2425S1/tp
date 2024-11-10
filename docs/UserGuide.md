@@ -219,6 +219,7 @@ The `undo` command allows you to reverse the last action performed, helping you 
 
 1. **Use Undo After a Mistake**: If you accidentally delete or modify a contact, you can quickly use `undo` to revert the last action and restore the previous state. <br>
 2. **Undo Works Only for Modifying Commands**: Only actions that modify the address book (like `add`, `edit`, or `delete`) can be undone. Commands like `list`, `filter`, or `find` do not trigger the undo mechanism. The reasoning behind this is that we consider them as view commands, not action commands that alter student data.
+3. **Undo Resets to Full View**: After using `undo`, the program will display all students in the address book, letting you confirm that your last change has been successfully reverted.
 </div>
 
 <div markdown="span" class="alert alert-secondary">
@@ -270,6 +271,8 @@ The `redo` command allows you to reapply the last action that was undone, restor
 
 1. **Use Redo to Restore Actions**: If you’ve undone an action by mistake, `redo` lets you reapply the change quickly. It’s useful when you second-guess your decision.
 2. **Redo Works Only After Undo**: `redo` will only work if an action has been undone previously. If you haven’t undone an action, `redo` will not perform anything.
+3. **Redo Resets to Full View**: After using `redo`, the program will show all students in the address book, allowing you to verify that your last action has been reapplied successfully.
+
 </div>
 
 <div markdown="span" class="alert alert-secondary">
@@ -283,10 +286,10 @@ Why does `redo` not work after I’ve made new changes to the address book? <br>
 Executing a command that modifies the address book (like `add`, `edit`, or `delete`) will **clear the redo stack**. This means once you undo a change and then modify the address book again, you will lose the ability to redo the previous undone action.
 </div>
 
-#### Example Scenario:
+#### Example Scenario (Continuation from Undo):
 1. You undo a deletion of a contact.
     - *After Undo:* [After Undo Command] – The deleted contact is restored.
-2. You decide to redo the action and restore the contact again.
+2. You decide to redo the action and delete the contact again.
     - *After Redo:* [After Redo Command] – The contact is deleted once more.
 
 **[After Redo Command]**
