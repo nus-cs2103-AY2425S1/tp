@@ -619,7 +619,7 @@ filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
     - See [Filtering By Income](#filter-by-income) for more information.
 
-For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
+For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
 **Examples:**
 - Filter clients by name:
@@ -640,18 +640,26 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
 **Matching Criteria & Filter Behavior:**
 
-- **Substring Matching: (For most fields)**
-  Searches for most fields use **substring matching**, meaning the search term must match part of the field in the same order as it appears in the client record.
-    - **Example:**
-      If a client’s name is `Gordon Moore`, the search term `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
+- **Name/Address/Job/Remarks (Substring Matching)**
+  - Searches in these fields use **substring matching**, where the search term must match a portion of the field in the exact order it appears in the client record.
+  - **Example:**
+    If a client’s name is `Gordon Moore`, search terms like `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
 
-- **Filtering by Tier (Prefix Matching):**
-  Tier searches use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
+- **Email Address (Substring Matching)**:
+  - To filter by email address, enter a valid email in the required format (refer to [4.4 Arguments](#44-arguments)). This will return substring matches for the email provided. 
+  - **Example:** Entering `emily@gmail` or `emily@gmail.co` will match `emily@gmail.com`, as partial matches within a valid email format are allowed. However, inputs like `emily` will be rejected, as they do not meet the full email format requirement.
+
+- **Phone Number (Exact Match)**: 
+  - To filter by phone number, enter a complete and valid phone number (refer to [4.4 Arguments](#44-arguments)). This filter requires an exact match with the specified phone number.
+  - **Example:** If a client’s phone number is `92601234`, only the exact format `92601234` will match. Variations such as `82601234` will not match, and inputs that are not valid phone numbers, like `9260`, `9260 1234`, or `12601234`, will not be accepted.
+
+- **Tier (Prefix Matching):**
+    - Tier filtering use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
     - **Example:**
       If a client has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
-- **Filtering by Income (Using Comparison Operators):** <a id="filter-by-income"></a>
-  Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find clients whose income meets certain criteria.
+- **Income (Using Comparison Operators):** <a id="filter-by-income"></a>
+    - Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find clients whose income meets certain criteria.
 
     - **Equal to (`=`):**
       Use `=` to find clients with a specific income.
@@ -675,13 +683,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Error:**
     - If no valid flags are used:
       ```
+      Invalid command format!
       filter: Searches for all clients whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
-
       Parameters: <FLAG>/ <SEARCH TERM>
-
       Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
-
-      Example: filter n/ Alice p/ 91112222 i/ >2000
+      Example: filter n/ Alice p/ 9111222
+      This will find all clients whose names contain 'Alice'and whose phone number is '91112222'.
       ```
     - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to all the invalid search terms.
 
