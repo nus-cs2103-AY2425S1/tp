@@ -62,6 +62,7 @@ public class Messages {
                 + "Phone: " + personDescriptor.getPhone() + "\n"
                 + "Email: " + personDescriptor.getEmail() + "\n"
                 + "Address: " + personDescriptor.getAddress() + "\n"
+                + "Status: " + personDescriptor.getStatus() + "\n"
                 + "Tags: " + personDescriptor.getTags().toString() + "\n";
     }
 
