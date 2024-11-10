@@ -103,7 +103,6 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = 
 * Extra whitespaces between names are trimmed. E.g., <code>John&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doe</code> is the same as `John Doe`.
 * Adding duplicate persons with the same name is not allowed.
 * Phone numbers should contain at least 3 digits.
-* Income value should be a decimal value between `0` (inclusive) and `2^31 - 1` (inclusive)
 * For optional parameters like `PRIORITY, INCOME, FAMILY SIZE`, if not specified, their values will be defaulted to `LOW, 0, 1` respectively.
 
 <box type="info" seamless>
