@@ -240,7 +240,7 @@ add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP
 
 **Note:** Names which are very long may not be fully displayed in the detailed person view, as displaying it would
 compromise the aesthetic of the User Interface and overall user experience. The person can still be identified through
-other information such as their phone number, email, and relationship.
+other information such as their phone number, email, and relationship. Additionally, relationship tags are case-sensitive.
 
 </box>
 
