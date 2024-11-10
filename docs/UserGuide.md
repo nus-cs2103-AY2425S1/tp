@@ -171,7 +171,7 @@ Examples:
 Adds or updates the social media handle to an existing person.
 Perfect for contacts who keep changing their handles.
 
-Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
+Format: `socialMedia INDEX <ig/USERNAME fb/USERNAME cs/USERNAME>`
 
 <div markdown="block" class="alert alert-info">
 
@@ -188,7 +188,6 @@ Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
   e.g., `socialMedia 1 ig/first cs/second` will only add the handle `[cs-second]` to the user.
 
 </div>
-
 
 Examples:
 *  Updates the first contact Alex's social media to `[cs-alexsells]`. <br>
