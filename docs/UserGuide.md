@@ -262,6 +262,7 @@ Examples:
 * `add n/Google LLC t/FAANG e/contact@google.com p/1234567 t/tech`
 
 ![add a company](images/addCommand.png)
+> Result after executing `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -286,6 +287,7 @@ Examples:
 * `apply 3 n/Devops Engineer Intern d/Requires knowledge in networks as/OFFERED`
 
 ![create application](images/applyCommand.png)
+> Result after executing `apply 2 n/Product Management Intern d/Requires Figma as/OA`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -365,6 +367,7 @@ Examples:
 *  `edit 2 n/Goggle t/` Edits the name of the 2nd company to be `Goggle` and clears all existing tags.
 
 ![edit company details](images/editCommand.png)
+> Result after executing `edit 1 p/91234567 e/company@example.com`
 
 [back to features](#features)
 
@@ -389,6 +392,7 @@ Format: `fav INDEX`
 </box>
 
 ![FavouriteACompany](images/favCommand.png)
+> Result after executing `fav 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -433,6 +437,7 @@ Format: `view INDEX`
 * Shows the application details of the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
 ![view application descriptions](images/viewCommand.png)
+> Result after executing `view 1`
 
 <box type="tip" seamless>
 
@@ -466,6 +471,7 @@ Format: `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
 ![updated application](images/updateCommand.png)
+> Result after executing `update c/1 app/1 as/OFFERED`
 
 <box type="tip" seamless>
 
@@ -495,6 +501,7 @@ The index refers to the index number shown in the displayed company list. The in
 </box>
 
 ![withdrawn application](images/withdrawCommand.png)
+> Result after executing `withdraw c/2 app/1`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -507,6 +514,7 @@ Format: `reopen INDEX`
 * The company at the provided index **must have status** `CLOSED`.
 
 ![reopened for applications](images/reopenCommand.png)
+> Result after executing `reopen 1`
 
 ### Exiting the program : `exit`
 
