@@ -151,8 +151,6 @@ Refer to the [feature list below](#-features-overview) for detailed information 
 - [Organizing Events](#organizing-events)
 
 
-<panel header="Notes about the command format:" type="info" expanded no-close>
-
 > **Using This Guide:**
 > * Commands are case-sensitive (`help` works, `Help` doesn't)
 > * Words in `UPPER_CASE` are values you provide
@@ -481,6 +479,27 @@ Invalid Example:
 * `update -i 3 -n New Year's Party -n Christmas Celebration -a 1 2 -a 4 5`
 * This command will result in the following error message since the optional fields `-n` and `-a` are specified more than once.
 ![UpdateEventInvalid2.png](images/UpdateEventInvalid2.png)
+
+### Cancelling Events ❌
+**Format:**
+```
+cancel INDEX
+```
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="warning" seamless>
+
+> ⚠️ **Warning:** This action cannot be undone, no confirmation message is displayed! You will have to use `event` command to add the event again.
+
+</box>
+
+Valid Example:
+* `list -e` followed by `cancel 1` deletes the 1st event in the address book.
+![CancelEventExample1.png](images/CancelEventExample1.png)
+
+
 
 ### Clearing All Events 🗑️
 
