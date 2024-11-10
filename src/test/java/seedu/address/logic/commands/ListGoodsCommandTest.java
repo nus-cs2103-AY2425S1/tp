@@ -12,12 +12,11 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.ListGoodsCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.goodsreceipt.CategoryPredicate;
+import seedu.address.model.goodsreceipt.GoodsCategoryPredicate;
 import seedu.address.model.goodsreceipt.GoodsNamePredicate;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.SupplierNamePredicate;
@@ -43,7 +42,7 @@ public class ListGoodsCommandTest {
 
     @Test
     public void execute_categoryKeyword_matchingGoodsReturned() {
-        Predicate<GoodsReceipt> predicate = new CategoryPredicate(GoodsCategories.CONSUMABLES);
+        Predicate<GoodsReceipt> predicate = new GoodsCategoryPredicate(GoodsCategories.CONSUMABLES);
         ListGoodsCommand command = new ListGoodsCommand(predicate);
         expectedModel.updateFilteredReceiptsList(predicate);
         String statisticsString = String.format(ListGoodsCommand.MESSAGE_STATISTICS, 10, 100.00);
@@ -97,8 +96,8 @@ public class ListGoodsCommandTest {
 
     @Test
     public void equals() {
-        ListGoodsCommand cmd = new ListGoodsCommand(ListGoodsCommandParser.DUMMY_PREDICATE);
-        Predicate<GoodsReceipt> testPredicate = new CategoryPredicate(GoodsCategories.CONSUMABLES);
+        ListGoodsCommand cmd = new ListGoodsCommand(p -> true);
+        Predicate<GoodsReceipt> testPredicate = new GoodsCategoryPredicate(GoodsCategories.CONSUMABLES);
         ListGoodsCommand unequalCmd = new ListGoodsCommand(testPredicate);
 
         // Check if the object is equal to itself

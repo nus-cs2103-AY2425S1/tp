@@ -20,7 +20,7 @@ import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.testutil.GoodsBuilder;
 import seedu.address.testutil.GoodsReceiptBuilder;
 
-public class HasCategoryPredicateTest {
+public class HasGoodsCategoryPredicateTest {
 
     private Model getDefaultModel() {
         Model model = new ModelManager();

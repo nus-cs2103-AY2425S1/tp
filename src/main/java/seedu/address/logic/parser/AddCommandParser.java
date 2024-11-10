@@ -37,14 +37,18 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS);
+
+        Person person = parsePerson(argMultimap);
+
+        return new AddCommand(person);
+    }
+
+    private static Person parsePerson(ArgumentMultimap argMultimap) throws ParseException {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
-        Person person = new Person(name, phone, address, tagList);
-
-        return new AddCommand(person);
+        return new Person(name, phone, address, tagList);
     }
 
     /**

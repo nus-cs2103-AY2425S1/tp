@@ -34,6 +34,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_TAG);
 
+        Name targetName = parseName(argMultimap);
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS);
+
+        EditPersonDescriptor editPersonDescriptor = parseEditPersonDescriptor(argMultimap);
+        return new EditCommand(targetName, editPersonDescriptor);
+    }
+
+    private static Name parseName(ArgumentMultimap argMultimap) throws ParseException {
         Name targetName;
 
         try {
@@ -41,9 +50,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
+        return targetName;
+    }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS);
-
+    private static EditPersonDescriptor parseEditPersonDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+        // Get Args
         Optional<String> nameArg = argMultimap.getValue(PREFIX_NAME);
         Optional<String> phoneArg = argMultimap.getValue(PREFIX_PHONE);
         Optional<String> addressArg = argMultimap.getValue(PREFIX_ADDRESS);
@@ -51,6 +62,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ? Optional.empty()
                 : Optional.of(argMultimap.getAllValues(PREFIX_TAG));
 
+        // Parse Args
         Optional<Name> name = nameArg.isPresent()
                 ? Optional.of(ParserUtil.parseName(nameArg.get()))
                 : Optional.empty();
@@ -65,11 +77,11 @@ public class EditCommandParser implements Parser<EditCommand> {
                         tagArgs.get().stream().filter(s -> !s.isEmpty()).toList()))
                 : Optional.empty();
 
+        // Validate
         if (name.isEmpty() && phone.isEmpty() && address.isEmpty() && tags.isEmpty()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor(name, phone, address, tags);
-        return new EditCommand(targetName, editPersonDescriptor);
+        return new EditPersonDescriptor(name, phone, address, tags);
     }
 }

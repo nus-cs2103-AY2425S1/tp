@@ -26,19 +26,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY);
 
-        String keywordsArg = argMultimap.getPreamble().trim();
+        List<String> keywords = parseKeywords(argMultimap);
 
-        List<String> keywords = Arrays.stream(keywordsArg.split("\\s+"))
-                .filter(x -> !x.isEmpty())
-                .collect(Collectors.toList());
-
-        Set<GoodsCategories> categorySet;
-        try {
-            categorySet = ParserUtil.parseGoodsCategories(
-                    argMultimap.getAllValues(PREFIX_CATEGORY));
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE), pe);
-        }
+        Set<GoodsCategories> categorySet = parseCategorySet(argMultimap);
 
         if (keywords.isEmpty() && categorySet.isEmpty()) {
             throw new ParseException(
@@ -46,5 +36,24 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         return new FindCommand(keywords, categorySet);
+    }
+
+    private static Set<GoodsCategories> parseCategorySet(ArgumentMultimap argMultimap) throws ParseException {
+        Set<GoodsCategories> categorySet;
+        try {
+            categorySet = ParserUtil.parseGoodsCategories(
+                    argMultimap.getAllValues(PREFIX_CATEGORY));
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE), pe);
+        }
+        return categorySet;
+    }
+
+    private static List<String> parseKeywords(ArgumentMultimap argMultimap) {
+        String keywordsArg = argMultimap.getPreamble().trim();
+
+        return Arrays.stream(keywordsArg.split("\\s+"))
+                .filter(x -> !x.isEmpty())
+                .collect(Collectors.toList());
     }
 }

@@ -4,13 +4,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GOODS_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import seedu.address.commons.util.Caster;
 import seedu.address.logic.commands.ListGoodsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.goodsreceipt.CategoryPredicate;
+import seedu.address.model.goodsreceipt.GoodsCategoryPredicate;
 import seedu.address.model.goodsreceipt.GoodsNamePredicate;
 import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.goodsreceipt.SupplierNamePredicate;
@@ -20,13 +23,8 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new ListGoodsCommand object with the given predicate.
  */
 public class ListGoodsCommandParser implements Parser<ListGoodsCommand> {
-    // Dummy predicate for no provided args
-    public static final Predicate<GoodsReceipt> DUMMY_PREDICATE = new Predicate<GoodsReceipt>() {
-        @Override
-        public boolean test(GoodsReceipt gr) {
-            return true;
-        }
-    };
+
+    public static final Predicate<GoodsReceipt> TRUE_PREDICATE = r -> true;
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListGoodsCommand
@@ -36,32 +34,44 @@ public class ListGoodsCommandParser implements Parser<ListGoodsCommand> {
     public ListGoodsCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_GOODS_NAME, PREFIX_NAME);
-        Predicate<GoodsReceipt> predicate = null;
 
-        // check for the three optional inputs and chain if needed
-        if (arePrefixesPresent(argMultimap, PREFIX_GOODS_NAME)) {
-            // Allow for partial matches here
-            String matchName = argMultimap.getValue(PREFIX_GOODS_NAME).get();
-            Predicate<GoodsReceipt> goodsNamePredicate = new GoodsNamePredicate(matchName);
-            predicate = (predicate == null) ? goodsNamePredicate : predicate.and(goodsNamePredicate);
-        }
-        if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY)) {
-            GoodsCategories category = ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-            Predicate<GoodsReceipt> categoryPredicate = new CategoryPredicate(category);
-            predicate = (predicate == null) ? categoryPredicate : predicate.and(categoryPredicate);
-        }
-        if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Predicate<GoodsReceipt> supplierNamePredicate = new SupplierNamePredicate(name);
-            predicate = (predicate == null) ? supplierNamePredicate : predicate.and(supplierNamePredicate);
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CATEGORY, PREFIX_GOODS_NAME, PREFIX_NAME);
 
-        // default predicate to return all items
-        if (predicate == null) {
-            predicate = DUMMY_PREDICATE;
-        }
+        Predicate<GoodsReceipt> predicate = parsePredicate(argMultimap);
 
         return new ListGoodsCommand(predicate);
+    }
+
+    private static Predicate<GoodsReceipt> parsePredicate(ArgumentMultimap argMultimap) throws ParseException {
+        List<Optional<? extends Predicate<GoodsReceipt>>> predicates = List.of(
+                parseGoodsNamePredicate(argMultimap),
+                parseGoodsCategoryPredicate(argMultimap),
+                parseSupplierNamePredicate(argMultimap));
+        return predicates
+                .stream()
+                .flatMap(Optional::stream)
+                .map(new Caster<Predicate<GoodsReceipt>>())
+                .reduce(Predicate::and)
+                .orElse(TRUE_PREDICATE);
+    }
+
+    private static Optional<SupplierNamePredicate> parseSupplierNamePredicate(ArgumentMultimap argMultimap) throws ParseException {
+        Optional<Name> name = arePrefixesPresent(argMultimap, PREFIX_NAME)
+                ? Optional.of(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()))
+                : Optional.empty();
+        return name.map(SupplierNamePredicate::new);
+    }
+
+    private static Optional<GoodsCategoryPredicate> parseGoodsCategoryPredicate(ArgumentMultimap argMultimap) throws ParseException {
+        Optional<GoodsCategories> goodsCategory = arePrefixesPresent(argMultimap, PREFIX_CATEGORY)
+                ? Optional.of(ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get()))
+                : Optional.empty();
+        return goodsCategory.map(GoodsCategoryPredicate::new);
+    }
+
+    private static Optional<GoodsNamePredicate> parseGoodsNamePredicate(ArgumentMultimap argMultimap) {
+        Optional<String> goodsName = argMultimap.getValue(PREFIX_GOODS_NAME);
+        return goodsName.map(GoodsNamePredicate::new);
     }
 
     /**

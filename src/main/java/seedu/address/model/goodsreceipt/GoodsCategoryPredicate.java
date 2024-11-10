@@ -9,13 +9,13 @@ import seedu.address.model.goods.GoodsCategories;
 /**
  * Tests that a {@code Person}'s {@code Goods}'s {@code Category} matches the category given.
  */
-public class CategoryPredicate implements Predicate<GoodsReceipt> {
+public class GoodsCategoryPredicate implements Predicate<GoodsReceipt> {
     private final GoodsCategories category;
 
     /**
      * Constructor for CategoryPredicate.
      */
-    public CategoryPredicate(GoodsCategories category) {
+    public GoodsCategoryPredicate(GoodsCategories category) {
         requireNonNull(category);
         this.category = category;
     }
@@ -32,11 +32,11 @@ public class CategoryPredicate implements Predicate<GoodsReceipt> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CategoryPredicate otherCategoryPredicate)) {
+        if (!(other instanceof GoodsCategoryPredicate otherGoodsCategoryPredicate)) {
             return false;
         }
 
-        return category.equals(otherCategoryPredicate.category);
+        return category.equals(otherGoodsCategoryPredicate.category);
     }
 
     @Override
