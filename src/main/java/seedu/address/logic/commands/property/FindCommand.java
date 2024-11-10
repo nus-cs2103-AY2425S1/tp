@@ -23,7 +23,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all properties whose names or addresses contain"
             + " any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "You should only find by name or address but not both.\n"
-            + "Parameters: n/KEYWORD [MORE_KEYWORDS]... OR a/KEYWORD [MORE_KEYWORDS]\n"
+            + "Parameters: n/KEYWORD [MORE_KEYWORDS]... OR a/KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Jake\n"
             + "Example: " + COMMAND_WORD + " "
