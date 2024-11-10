@@ -1227,3 +1227,42 @@ Over the course of the project, the group achieved the following:
 * Built upon AB3 to create a contact management system specifically tailored to the needs of private tutors
 * Gained familiarity with the software development process, e.g. forking workflow, documentation, sprints etc.
 * Improved technical proficiency with tools such as IntelliJ IDE, JUnit, GitHub etc.
+
+## Appendix: Planned Enhancements
+Team Size: 5. Hence, maximum number of planned enhancements is **10**.
+
+### 1. Hide archived contacts when using the find command.
+* **Current Situation**: When using the `find` command, all contacts that match the given keywords will be displayed, even if they were archived.
+* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `find`, only unarchived contacts will be displayed.
+
+### 2. Hide archived contacts when using the findtag command.
+* **Current Situation**: When using the `findtag` command, all contacts that match the given keywords will be displayed, even if they were archived.
+* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `findtag`, only unarchived contacts will be displayed.
+
+### 3. Hide archived contacts when using the findday command.
+* **Current Situation**: When using the `findday` command, all contacts that match the given keywords will be displayed, even if they were archived.
+* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `findday`, only unarchived contacts will be displayed.
+
+### 4. Prevent pinning of already pinned contacts.
+* **Current Situation**: Pinning already pinned contacts is allowed, and displays a success message.
+* **Proposed Improvement**: Add an error message to inform the user that the contact is already pinned.
+
+### 5. Prevent unpinning of already unpinned contacts.
+* **Current Situation**: Unpinning already unpinned contacts is allowed, and displays a success message.
+* **Proposed Improvement**: Add an error message to inform the user that the contact is already unpinned.
+
+### 6. Improve name validation to allow for special characters.
+* **Current Situation**: Names must be alphanumeric, hence characters such as '/', ',' or '-' are not allowed to be input into the Address Book despite their prevalence in names in real life.
+* **Proposed Improvement**: Update the name validation to allow for special characters to be included in names.
+
+### 7. Improve Grade Command success message.
+* **Current Situation**: Current success message for the GradeCommand is "Added grade to Person: PERSON_NAME", even though the GradeCommand can be used to edit a student's grade as well.
+* **Proposed Improvement**: Update the success message to "Edited grade of Person: PERSON_NAME"
+
+### 8. Maintain the same displayed list when editing contacts.
+* **Current Situation**: Upon a successful edit of a contact, the displayed list will update to show the list of all unarchived contacts.
+* **Proposed Improvement**: Maintain the same list of contacts from before the edit command was executed, and display the updated information of the edited person.
+
+### 9. Maintain the same displayed list when editing contacts' grades.
+* **Current Situation**: Upon a successful edit of the grade a contact, the displayed list will update to show the list of all unarchived contacts.
+* **Proposed Improvement**: Maintain the same list of contacts from before the grade command was executed, and display the updated information of the edited person.
