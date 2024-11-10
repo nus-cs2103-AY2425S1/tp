@@ -5,6 +5,12 @@ mark {
   padding-bottom: 0;
 }
 
+body {
+  font-size: 1rem;                 /* Default font size for body text */
+  color: #222;                     /* Default text color */
+  line-height: 1.6;                /* Adjusts line spacing for readability */
+}
+
 .indented {
   padding-left: 20px;
 }
@@ -133,6 +139,17 @@ mark {
   #page-nav {
     display: none;
   }
+
+  /* Styling for print-friendly Table of Contents */
+  .page-nav-print {
+    font-family: Arial, sans-serif;  /* Set font */
+    font-size: 0.9rem;               /* Font size */
+    font-weight: bold;
+    color: #1a73e8;                  /* Custom color  */
+    margin-bottom: 20px;             /* Space below TOC */
+    padding: 10px;                   /* Space around TOC */
+  }
+
 
   /* Reduce font size when printing */
   h1 {
