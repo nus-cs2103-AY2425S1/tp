@@ -77,11 +77,14 @@ Event *--> "1..*" Client
 Event *--> "1..*" Vendor
 
 Contact -[hidden]up--> I
+Contact -[hidden]left--> Event
 UniqueContactList -[hidden]right-> I
+Client -[hidden]left--> Vendor
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Contact
+ModelManager --> "~*" Contact : filteredContacts
+ModelManager --> "~*" Event : filteredEvents
 @enduml
