@@ -194,10 +194,9 @@ Adds a person to the address book.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDDING]…​`
 
-<box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . -
+* A person can have any number of tags or weddings (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
@@ -206,14 +205,15 @@ Examples:
 <box type="tip" seamless>
 
 **Tip:** Adding a person with tags or weddings that do not exist in Wedlinker will create all the tags and weddings!
+Created weddings will have the person automatically assigned to their guest lists.
 </box>
 
+<box type="warning" seamless>
 
-* Similarly, extraneous prefixes (e.g. n/ or tk/) for commands that do not take in those prefixes will be processed as part of other inputs.<br>
-    * e.g. when [adding a person](#adding-a-person-add), you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
-      `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
-
-
+**Warning:** Extraneous prefixes in the add command will be processed as part of other inputs.<br>
+* e.g. when adding a person, you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+`add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
+</box>
 
 
 
