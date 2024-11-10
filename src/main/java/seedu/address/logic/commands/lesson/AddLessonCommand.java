@@ -56,6 +56,10 @@ public class AddLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (newLesson.getDate().getLocalDateValue().getYear() == 0) {
+            throw new CommandException("Invalid date. Year '0000' is not allowed.");
+        }
+
         try {
             model.addLesson(newLesson);
             return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newLesson)), COMMAND_TYPE);

@@ -1017,11 +1017,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a student
 1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
-    Expected: Student `TestOne` is added to the list. Details of the added student is shown.
+   Expected: Student `TestOne` is added to the list. Details of the added student is shown.
+
 2. Test case: `add n/TestOne p/11111111`<br>
    Expected: No student is added. Error details shown.
+
 3. Test case: `add n/TestOne e/test1@example.com c/CS2103T`<br>
    Expected: No student is added. Error details shown.
+   
 4. Test case: `add n/Test1 p/11111111 e/test1@example.com c/CS2103T`<br>
    Expected: No student is added. Error details shown.
 

@@ -40,6 +40,19 @@ public class AddLessonCommandTest {
     }
 
     @Test
+    public void execute_invalidYear0000_throwsCommandException() {
+        // Lesson with an invalid year "0000"
+        Lesson invalidLesson = new LessonBuilder().withDate("0000-01-01").withTime("10:00").build();
+        AddLessonCommand addLessonCommand = new AddLessonCommand(invalidLesson);
+
+        ModelStubAcceptingLessonAdded modelStub = new ModelStubAcceptingLessonAdded();
+
+        // Check that CommandException is thrown due to invalid year
+        assertThrows(CommandException.class, "Invalid date."
+            + " Year '0000' is not allowed.", () -> addLessonCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Lesson jan1stLesson = new LessonBuilder().withDate("2024-01-01").build();
         Lesson feb2ndLesson = new LessonBuilder().withDate("2024-02-02").build();

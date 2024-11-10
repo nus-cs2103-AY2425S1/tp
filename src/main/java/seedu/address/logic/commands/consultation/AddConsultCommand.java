@@ -54,6 +54,9 @@ public class AddConsultCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        if (newConsult.getDate().getLocalDateValue().getYear() == 0) {
+            throw new CommandException("Invalid date. Year '0000' is not allowed.");
+        }
 
         // Check if the model already has a consultation with the same date and time
         if (model.hasConsult(newConsult)) {

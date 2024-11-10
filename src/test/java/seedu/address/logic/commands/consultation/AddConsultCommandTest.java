@@ -80,6 +80,18 @@ public class AddConsultCommandTest {
         assertEquals(addConsultCommand.getCommandType(), CommandType.CONSULT);
     }
 
+    @Test
+    public void execute_invalidYear0000_throwsCommandException() {
+        // Consultation with an invalid year "0000"
+        Consultation invalidConsultation = new ConsultationBuilder().withDate("0000-01-01").withTime("10:00").build();
+        AddConsultCommand addConsultCommand = new AddConsultCommand(invalidConsultation);
+
+        ModelStubAcceptingConsultAdded modelStub = new ModelStubAcceptingConsultAdded();
+
+        assertThrows(CommandException.class, "Invalid date."
+            + " Year '0000' is not allowed.", () -> addConsultCommand.execute(modelStub));
+    }
+
     /**
      * A Model stub that always accept the consult being added.
      */
