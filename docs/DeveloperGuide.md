@@ -1254,73 +1254,184 @@ Given below are instructions to test the app manually.
 <div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> 
 These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
 
+### Launch and Shutdown
 
-### Launch and shutdown
+1. **Initial Launch**
 
-1. Initial launch
+  1. Download the jar file and copy it into an empty folder.
+  2. Run `java -jar RealConnect.jar` in the same directory.  
+     **Expected:** The GUI displays with a set of sample contacts. The window size may not be optimal.
 
-  1. Download the jar file and copy into an empty folder
+2. **Saving Window Preferences**
 
-  1. run `java -jar RealConnect.jar` in the same directory Expected: Shows the GUI with a set of sample contacts. The window size may not be
-     optimum.
+  1. Resize the window to an optimal size. Move the window to a different location and close it.
+  2. Re-launch the app by running the jar file again.  
+     **Expected:** The window opens with the last used size and location.
 
-1. Saving window preferences
+### Viewing Help
 
-  1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+1. **Viewing Help Information**
 
-  1. Re-launch the app by double-clicking the jar file.<br>
-     Expected: The most recent window size and location is retained.
+  1. Test case: `help`  
+     **Expected:** Displays help information with a guide to commands
 
-1. _{ more test cases …​ }_
+### Adding a Person
 
-### Deleting a person
+1. **Adding Persons with Various Details**
 
-1. Deleting a person while all persons are being shown
+  1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
+     **Expected:** John Doe is added to the contact list with the specified details.
 
-  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+  2. Test case: `add n/Alice Tan p/91234567 a/123 Orchard Road, #10-01 b/1990-08-15 e/alice.tan@example.com r/Interested in modern properties t/prospect t/follow-up`  
+     **Expected:** Alice Tan is added with multiple tags and a remark.
 
-  2. Test case: `delete 1`<br>
-     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-     Timestamp in the status bar is updated.
+  3. Invalid Input Cases: Test with missing mandatory fields  
+     **Expected:** Error message is displayed indicating missing information.
 
-  3. Test case: `delete 0`<br>
-     Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Listing Contacts
 
-  4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-     Expected: Similar to previous.
+1. **Listing All Persons**
 
-1. _{ more test cases …​ }_
+  1. Execute `list`.  
+     **Expected:** Displays all persons stored in the address book.
 
-### View Window
+### Sorting Contacts
 
-1. Viewing a person while all persons are shown
+1. **Sorting the Contact List**
 
-  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+  1. Prerequisites: Multiple contacts with various names.
+  2. Test Case: `sort asc`  
+     **Expected:** Contacts are sorted in alphabetical order (A-Z) by name.
 
-  2. Test case: `view 1`<br>
-     Expected: First contact is shown from the list. Success message displayed.
+  3. Test Case: `sort desc`  
+     **Expected:** Contacts are sorted in reverse alphabetical order (Z-A).
 
-  3. Test case: `delete 0`<br>
-     Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Editing a Person
 
-  4. Other incorrect delete commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
-     Expected: Similar to previous.
+1. **Editing Details of a Person**
 
-   **For the following tests, a view window should already be open**
+  1. Prerequisites: Have a contact list with multiple entries.
+  2. Test case: `edit 1 p/91234567 e/johndoe@example.com`  
+     **Expected:** Person at index 1's phone number and email are updated to new details.
 
-  5. Test case: `close` <br>
-     Expected: Current displayed view window closes if there is one currently. Error message if there is not.
+  3. Test case: `edit 2 n/Betsy Crowe t/`  
+     **Expected:** Name of the person at index 2 changes, and all tags are cleared.
 
-  6. Test case: `edit 1 n/<insert any name>`<br>
-     Expected: Current view window updates to show the updated name, provided it is the view window of the aforementioned contact.
+### Deleting a Person
 
+1. **Deleting a specific Person**
 
+  1. Prerequisites: List has multiple persons using the `list` command.
+  2. Test Case: `delete 1`  
+     **Expected:** First contact is deleted from the list. The status message shows details of the deletion.
 
+  3. Test Case: Enter invalid indices (e.g., `delete 0` or `delete x` where x exceeds list size)  
+     **Expected:** No person is deleted. Error message shown.
 
-### Saving data
+### Sorting Contacts
 
-1. Dealing with missing/corrupted data files
+1. **Sorting the Contact List**
 
-  1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+  1. Prerequisites: Multiple contacts understood by their names.
+  2. Test Case: `sort asc`  
+     **Expected:** Contacts are sorted in ascending order (A-Z) by name.
 
-1. _{ more test cases …​ }_
+  3. Test Case: `sort desc`  
+     **Expected:** Contacts are sorted in descending order (Z-A).
+
+### Remarking a Person
+
+1. **Adding or Editing Remarks**
+
+  1. Test case: `remark 1 r/remark message`  
+     **Expected:** Adds or updates remark to say 'remark message' for the 1st person.
+
+### Single Page Person View
+
+1. **Viewing a Person's Details**
+
+  1. Test case: `view 1`  
+     **Expected:** Displays all information about the person at index 1 in a new window.
+
+### Adding a Property
+
+1. **Adding Property to a Contact**
+
+  1. Prerequisites: Have contacts in the list.
+  2. Test case: `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000`  
+     **Expected:** Adds a property listing to the person at index 1.
+
+### Adding History to a Person
+
+1. **Adding History Entries**
+
+  1. Prerequisites: Contact list exists with entries.
+  2. Test case: `log 1 d/2024-08-08 l/meet up`  
+     **Expected:** Adds a history entry about a meet up on 2024-08-08 for the first person.
+
+### Closing Single Page Person View
+
+1. **Closing the Person View Window**
+
+  1. Test case: `close`  
+     **Expected:** Closes the currently open person view window.
+
+### Locating Persons by Name
+
+1. **Finding Contacts**
+
+  1. Test case: `find John`  
+     **Expected:** Lists contacts whose names include 'John'.
+
+### Managing Favourites
+
+1. **Marking and Unmarking as Favourite**
+
+  1. Prerequisites: Have a contact list with multiple entries.
+  2. Test case: `favourite 2`  
+     **Expected:** Toggles the favourite status of the contact at index 2. If the contact was not a favourite, it is added to favourites, and vice versa.
+
+  3. Test Case: `favourite`  
+     **Expected:** Lists all contacts marked as favourites at the front of the contact list.
+
+### Deleting a Person
+
+1. **Deleting a Contact from the List**
+
+  1. Prerequisites: Contact list with several entries.
+  2. Test case: `delete 2`  
+     **Expected:** Deletes the contact at index 2 from the address book. Confirmation message is shown.
+
+  3. Invalid indices: Enter commands like `delete 0` or `delete 1000`  
+     **Expected:** Error message indicating invalid index.
+
+### Clearing All Entries
+
+1. **Clearing Contacts in the Address Book**
+
+  1. Test case: `clear`  
+     **Expected:** All entries are removed from the address book. Confirmation message is displayed.
+
+### Exiting Application
+
+1. **Closing the Application Safely**
+
+  1. Test case: `exit`  
+     **Expected:** Closes the application orderly. Users are advised to exit via this command to ensure all views are properly shut down.
+
+### Exploratory Testing
+
+- **Extreme Input Values:** Try inputs with long strings or special characters.
+  **Expected:** Proper validation errors without app crashes.
+- **Calling Commands in Succession:** Rapidly execute different commands.  
+  **Expected:** The app should handle sequential commands without becoming unresponsive.
+
+### Saving Data
+
+1. Perform various `add`/`edit`/`delete` operations.  
+   **Expected:** Data should save automatically and persist after closing and reopening the app.
+
+2. Simulating a Missing or Corrupted Data File:
+  - Remove or corrupt the data file in `/data/addressbook.json`
+  - Re-launch the app.  
+    **Expected:** The app initializes with default data, showing error or warning messages about missing or corrupted data.

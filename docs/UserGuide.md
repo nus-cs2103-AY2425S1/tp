@@ -16,8 +16,18 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
     - [Editing a person](#editing-a-person--edit)
     - [Adding history to a person](#adding-history-to-a-person--log)
     - [Remarking a person](#remarking-a-person--remark)
-    - [Single page person view](#single-page-person-view--view)
-    - [Adding a Property](#adding-a-property--addproperty)
+    - [Single page person view](#single-page-person-view-view)
+    - [Adding a Property](#adding-a-property-addproperty)
+    - [Closing single page person view](#closing-single-page-person-view-close)
+    - [Locating persons by name](#locating-persons-by-name-find)
+    - [Marking a person as favourite](#marking-a-person-as-favourite-favourite)
+    - [Deleting a person](#deleting-a-person--delete)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Exiting the program](#exiting-the-program--exit)
+    - [Store Birthday of a contact](#store-birthday-of-a-contact-birthday)
+    - [Birthday Reminder](#birthday-reminder)
+4. [FAQ](#faq)
+5. [Known issues](#known-issues)
 4. [Parameter Requirements](#parameter-requirements)
 5. [Command Summary](#command-summary)
 6. [Coming Soon](#coming-soon)
@@ -407,12 +417,6 @@ None, as it is an automatic feature.
 
 ![Birthday Reminder Example](images/Birthday.png)
 
----
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -455,11 +459,11 @@ _Details coming soon ..._
 | **Log Interaction**     | `log INDEX [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                                |
 | **Add/Edit Remark**     | `remark INDEX r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                               |
 | **View Contact**        | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
-| **Favourite Contact**   | `favourite INDEX`(on not favourited person)<br> e.g., `favourite 123`                                                                                                    |
-| **Unfavourite Contact** | `favourite INDEX`(on already favourited person) <br> e.g., `favourite 123`                                                                                               |
-| **Favourite Contact**   | `favourite`<br> e.g., `favourite`                                                                                                                                        |
-| **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
---------------------------------------------------------------------------------------------------------------------
+| **Favourite Contact**   | `favourite INDEX` (on not favourited person)<br> e.g., `favourite 123`                                                                                                 |
+| **Unfavourite Contact** | `favourite INDEX` (on already favourited person)<br> e.g., `favourite 123`                                                                                             |
+| **Add Property**        | `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUMBER_OF_BEDROOMS bath/NUMBER_OF_BATHROOMS price/PRICE`<br> e.g., `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` |
+| **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 b/2001-03-04`                                                                                                      |
+
 ## Coming soon:
 ### Editing and deleting log entries
 * Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
