@@ -38,27 +38,28 @@ This guide will walk you through everything you need to know about BakeBuddy, fr
 ### Step 1: Check if Your Computer is Ready
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
-1. Open your computer's terminal:
+1 Open your computer's terminal:
   - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
   - **For Mac**: Press Command + Space, type `terminal`, and press Enter 
-2. In the black window that appears, type exactly:
+2 In the black window that appears, type exactly:
    ```
    java --version
    ```
    and press Enter
-3. What you should see:
-  - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
-  - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
+3 What you should see:
+  - ✅ If you see "Java version 17", you're ready to go!
+  - ❌ If you see "command not found" or a number that is not 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
+
 ### Step 2: Install BakeBuddy
 
-1. Download BakeBuddy:
+1 Download BakeBuddy:
   - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
   - Look for the file named `bakebuddy.jar`
   - Click on it to download
-2. Create a home for BakeBuddy:
+2 Create a home for BakeBuddy:
   - Create a new folder on your computer named `BakeBuddy`
   - Move the downloaded `bakebuddy.jar` file into this folder
-3. Start BakeBuddy:
+3 Start BakeBuddy:
   - Open your terminal (like in Step 1)
   - Type `cd ` (with a space after cd)
   - Drag your BakeBuddy folder into the terminal window (this fills in the location automatically!)
@@ -76,7 +77,8 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
-Refer to the [List of Commands](#list-of-commands) on the next page and [Features](#features) below for details of each command.
+Refer to the [FAQ](#faq) to see some of the common doubts.
+Refer to the [List of Commands](#list-of-commands) on the next page (which is grouped by logic and less detailed) and [Features](#features) below (which is alphabetically sorted) for details of each command.
 ![screenshot](images/Screenshot-5.png)
 
 <div style="page-break-after: always;"></div>
@@ -171,15 +173,15 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 
 **Parameter Reference:**
 * `INDEX`: Positive integer (1, 2, 3, ...)
-* `NAME`: Name of person/item
-* `PHONE_NUMBER`: Phone number
+* `NAME`: Name of person/item (Only alphanumerical characters)
+* `PHONE_NUMBER`: Phone number (Unique in the contacts list and more than 3 digits)
 * `EMAIL`: Email address
 * `ADDRESS`: Physical address
-* `INFORMATION`: Additional customer details
+* `INFORMATION`: Additional customer details (Only alphanumerical characters)
 * `INGREDIENTS_SUPPLIED`: List of ingredients (for suppliers)
 * `COST`: Numeric value
 * `PRODUCTID`: Product identification numbers
-* `TAG`: Category or label
+* `TAG`: Category or label (Only a single word can be used as a tag)
 * `REMARK`: Additional comments
 
 **Format Notes:**
@@ -247,6 +249,11 @@ addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
 
+### Q6: How do I tag Contact?
+
+
+## Glossary
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -278,14 +285,14 @@ This would add three units of product ID 1 to the order.
 Adds a new contact to the bakery’s database. This will be useful for other important contacts such as the delivery men and bakery assistants.
 
 ```bash
-addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]
+addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [t/MORETAGS...]
 ```
 - **Parameters:**
-  - `n/NAME`: The person's name.
-  - `p/PHONE_NUMBER`: The person's phone number.
+  - `n/NAME`: The person's name. This has to be alphanumerical.
+  - `p/PHONE_NUMBER`: The person's phone number. This has to be unique in the contacts list and have more than 3 digits.
   - `e/EMAIL`: (Optional) The person's email address.
   - `a/ADDRESS`: (Optional) The person's address.
-  - `t/TAG`: (Optional) Tags for additional person information.
+  - `t/TAG`: (Optional) Tags for additional person information. Only a single word can be used as a tag. Can have multiple prefixes.
 
 **Example:**
 ```bash
@@ -297,15 +304,15 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 Adds a new customer to the bakery’s customer database.
 
 ```bash
-addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]
+addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG] [t/MORETAGS...]
 ```
 - **Parameters:**
-  - `n/NAME`: The customer's name.
-  - `p/PHONE_NUMBER`: The customer's phone number.
+  - `n/NAME`: The customer's name. This has to be alphanumerical.
+  - `p/PHONE_NUMBER`: The customer's phone number. This has to be unique in the contacts list and have more than 3 digits.
   - `e/EMAIL`: (Optional) The customer's email address.
   - `a/ADDRESS`: (Optional) The customer's address.
-  - `s/INFORMATION`: (Optional) Additional information of the customer such as dietary preference.
-  - `t/TAG`: (Optional) Tags for additional customer information.
+  - `s/INFORMATION`: (Optional) Additional information of the customer such as dietary preference (Alphanumerical).
+  - `t/TAG`: (Optional) Tags for additional customer information. Only a single word can be used as a tag. Can have multiple prefixes.
 
 **Example:**
 ```bash
@@ -315,6 +322,7 @@ addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
 
 ### **Add Customer Order Command**
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
+New customer will be added with the name if phone number not found in contacts.
 
 <div class="alert alert-info">
 ⚠️ **Important Information**  
@@ -328,8 +336,8 @@ To view the new order in the customer's contact details:<br>
 addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REMARK]
 ```
 - **Parameters:**
-  - `n/NAME`: (Optional) The customer's name.
-  - `p/PHONE_NUMBER`: The phone number of the customer (new customer will be added with the name if phone number not found in contacts).
+  - `n/NAME`: (Optional) The customer's name. This has to be alphanumerical.
+  - `p/PHONE_NUMBER`: The customer's phone number. This has to be unique in the contacts list and have more than 3 digits.
   - `o/PRODUCTID`: One or more pastry IDs for the items being ordered.
   - `r/REMARK`: (Optional) Information about the customer order.
 
@@ -384,15 +392,15 @@ all their pastries and ingredient needs, making it more convenient for bakery ow
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
-addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]
+addSupplier n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [s/INGREDIENTS_SUPPLIED] [t/TAG] [t/MORETAGS...]
 ```
 - **Parameters:**
-    - `n/NAME`: The supplier's name.
-    - `p/PHONE_NUMBER`: The supplier's phone number.
-    - `e/EMAIL`: The supplier's email address.
-    - `a/ADDRESS`: The supplier's address.
-    - `s/INGREDIENTS_SUPPLIED`: List of ingredients supplied, comma separated
-    - `t/TAG`: (Optional) Tags for additional supplier information.
+    - `n/NAME`: The supplier's name. This has to be alphanumerical.
+    - `p/PHONE_NUMBER`: The supplier's phone number. This has to be unique in the contacts list and have more than 3 digits.
+    - `e/EMAIL`: (Optional) The supplier's email address.
+    - `a/ADDRESS`: (Optional) The supplier's address.
+    - `s/INGREDIENTS_SUPPLIED`: (Optional) List of ingredients supplied, comma separated
+    - `t/TAG`: (Optional) Tags for additional supplier information. Only a single word can be used as a tag. Can have multiple prefixes.
 
 **Example:**
 ```bash
@@ -422,12 +430,13 @@ To view the new order in the supplier's contact details: <br>
 </div>
 
 ```bash
-addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
+addSupplyOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REMARK]
 ```
 - **Parameters:**
-    - `n/NAME`: The supplier's name.
-    - `p/PHONE_NUMBER`: The phone number of the supplier.
+    - `n/NAME`: (Optional) The supplier's name. This has to be alphanumerical.
+    - `p/PHONE_NUMBER`: The phone number of the supplier. This has to be unique in the contacts list and have more than 3 digits.
     - `o/PRODUCTID`: One or more product IDs for the items being supplied.
+    - `r/REMARK`: (Optional) Information about the customer order.
 
 **Example:**
 ```bash
@@ -495,19 +504,6 @@ Removes all entries from the bakery’s address book, including customers, suppl
 ```bash
 clear
 ```
-**Example:**
-```bash
-clear
-```
-![Clear.png](images%2FClear.png)
-
-The Clear All Command clears all data in the address book, removing all stored records such as customer and supplier
-details and inventory items.
-
-For example, typing **clear** will remove all customer, supplier and inventory information from the address book.
-This command provides a quick way to delete all existing records in one go, allowing bakery owners to reset their
-address book fully. It is helpful when bakery owners want a fresh start or data needs to be purged for any reason.
-This command ensures the address book is empty and ready for new entries.
 
 ### **Delete Contact Command**
 Deletes the contact details of specified person from the address book.
@@ -556,16 +552,16 @@ deleteSupplyOrder 1
 Update the contact details of an existing contact in the address book, including persons, customers, and suppliers. 
 
 ```bash
-editContact INDEX [FIELDS...]
+editContact INDEX FIELDS [moreFIELDS...]
 ```
-- **[FIELDS...]:**
-    - `n/NAME`: (optional) The person's name.
-    - `p/PHONE_NUMBER`: (optional) The person's phone number.
+- **[FIELDS]:**
+    - `n/NAME`: (optional) The person's name. This has to be alphanumerical.
+    - `p/PHONE_NUMBER`: (optional) This has to be unique in the contacts list and have more than 3 digits.
     - `e/EMAIL`: (Optional) The person's email address.
     - `a/ADDRESS`: (Optional) The person's address.
     - `i/INFORMATION`: (Optional, for customers only) Additional information of the customer such as dietary preference.
     - `s/INGREDIENTS SUPPLIED`: (Optional, for suppliers only) Ingredients supplied of a supplier.
-    - `t/TAG`: (Optional) Tags for additional customer information.
+    - `t/TAG`: (Optional) Tags for additional customer information. Only a single word can be used as a tag. Can have multiple prefixes.
 
 **Example:**
 ```bash
