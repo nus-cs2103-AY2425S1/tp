@@ -538,9 +538,6 @@ Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
   that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the person 
   at the specified `INDEX` will be deleted. This field is **case-insensitive**.
 
-* The Wallet Name is Case-sensitive. It will not work unless the Wallet Name is exactly the same as the one in the
-  contact.
-
 Examples:
 
 

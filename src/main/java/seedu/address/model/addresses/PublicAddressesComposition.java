@@ -443,7 +443,7 @@ public class PublicAddressesComposition {
         if (networkAddresses != null) {
             // Remove the address with matching label
             Set<PublicAddress> updatedAddresses = networkAddresses.stream()
-                .filter(addr -> !addr.label.equals(label))
+                .filter(addr -> !addr.label.equalsIgnoreCase(label))
                 .collect(Collectors.toSet());
 
             // If set is empty after removal, remove the network entirely
