@@ -34,15 +34,29 @@ UniVerse is more than just a **desktop app for managing contacts**—it is a pla
    open the help window.<br>
    Some example commands you can try:
 
-   - `list` : Lists all contacts.
+    - `list`: Lists all contacts.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 u/NUS m/Computer Science b/13-12-2003`:
+      Adds a contact named **John Doe** to the address book.
 
-   - `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 u/NUS m/Computer Science b/13-12-2003` : Adds a contact named `John Doe` to the Address Book.
+      <box type="info" seamless>
+      
+      **Note**: The `add` command supports **optional fields** such as:
+        - `w/WORK_EXPERIENCE`: Specifies past work or internships (e.g., `w/Intern,Google,2023`).
+        - `i/INTEREST`: Adds interests to a contact (e.g., `i/Photography`).
+        - `t/TAG`: Tags to label the contact (e.g., `t/friends`).
+      
+      </box>
 
-   - `findu u/NUS` : Finds all contacts who study at NUS.
+      These fields can be added to make contact information more detailed. Here’s an example with optional fields included:
+      ```markdown
+       add n/Alice Tan p/91234567 e/alice@example.com a/Blk 123 Clementi Ave 3, #05-10 u/NTU m/Engineering b/15-04-2000 w/Intern,Google,2023 i/Photography t/friend
+      ```
 
-   - `findi i/Swimming i/Reading` : Finds all contacts whose interests include studying and reading.
-
-   - `exit` : Exits the app.
+    - `addi in/1 i/Reading`:
+      Adds an interest called **Reading** to the contact at index 1.
+    - `findu u/NUS`: Finds all contacts studying at **NUS**.
+    - `findi i/Swimming`: Finds all contacts whose interests include **Swimming**.
+    - `exit`: Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
