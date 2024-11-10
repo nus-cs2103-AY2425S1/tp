@@ -107,7 +107,7 @@ Parameters:
 - `p/PHONE_NUMBER`: 8-15 digit phone number.
 - `e/EMAIL`: Email address in `local-part@domain` format.
 - `a/ADDRESS`: Contact's address.
-- `u/UNIVERSITY`: University name.
+- `u/UNIVERSITY`: University name. It is case-sensitive.
 - `m/MAJOR`: Major or field of study.
 - `b/BIRTHDATE`: Date of birth in `dd-mm-yyyy` format.
 - `[w/WORK_EXPERIENCE]`: Work experience in the format `ROLE,COMPANY,YEAR`.
@@ -267,7 +267,7 @@ findi i/Swimming
 
 ### Finding Contacts by Work Experience: `findw`
 
-Finds contacts with specific work experiences based on **company** and optionally **role** and **year** from the currently displayed list.
+Finds contacts with specific work experiences based on **company** and optionally **role** and **year**.
 
 Format:
 
@@ -325,6 +325,9 @@ findm m/Computer Science
 
 Finds contacts with a specific university from the currently displayed list.
 
+<box type="tip" seamless>
+**Tip:** University name is case-sensitive.
+</box>
 Format:
 
 ```plaintext
