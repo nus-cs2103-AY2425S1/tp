@@ -183,6 +183,7 @@ Examples:
 * `/list` followed by `/accept 2` marks the status of the 2nd application in the list as accepted.
 * `/pending 3` changes the status of the 3rd application in the current list to pending.
 * `/reject 1` changes the status of the 1st application in the current list to rejected.
+* `/filter pending` followed by `/accept 1` changes the status of the 1st application to accepted. The application will hence no longer be on the list shown on the application since it no longer has a `pending` status.
 * `/list` followed by `/accept 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
 
 <br>
