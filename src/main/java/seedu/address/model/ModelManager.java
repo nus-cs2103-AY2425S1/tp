@@ -165,11 +165,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return addressBook.getPersonList();
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

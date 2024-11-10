@@ -125,7 +125,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `schedule 1 sd/2024-10-24` Command](images/ScheduleSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("sort n/asc"")` API call as an example.
@@ -341,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `BlitzBiz` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a contact**
+**Use case: UC01 - Delete a contact**
 
 **MSS**
 
@@ -355,78 +355,281 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
+  
+   Use case ends.
 
 * 3a. The given index is invalid.
-
     * 3a1. BlitzBiz shows an error message.
-
+  
       Use case resumes at step 2.
 
-**Use case: Add a contact**
+**Use case: UC02 - Restore a contact**
+
+Preconditions: User has deleted a contact
 
 **MSS**
 
-1.  User requests to add a contact
-2.  BlitzBiz requests for name, phone number, and email address minimally
-3.  User enters contact details
-4.  BlitzBiz asks for confirmation
-5.  User confirms
-6.  BlitzBiz adds the contact
+1. User restores the deleted contact
+2. The contact is restored to BlitzBiz
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The entered details do not follow the correct format.
-   *  3a1. BlitzBiz requests for the correct details.
-      3a2. User enters new details.
-      Steps 3a1-3a2 are repeated until the data entered are correct.
-      Use case resumes from step 4.
+* 2a. The contact has been added back using the add command
+    * 2a1. BlitzBiz shows an error message.
 
-* *a. At any time, User chooses to cancel the transfer.
-      *a1. BlitzBiz requests to confirm the cancellation.
-      *a2. User confirms the cancellation.
-      Use case ends.
+    Use case ends.
 
-**Use case: Find contacts by name**
+**Use case: UC03 - Add a contact**
 
 **MSS**
 
-1.  User requests to view a contact by name
-2.  BlitzBiz requests for a prefix of the contact name
-3.  User enters name prefix
-4.  BlitzBiz displays all contacts containing the prefix in their name
+1.  User requests to add a contact by providing name, and at least one of the contact's phone number, email or address
+2.  BlitzBiz adds the contact to the list with the provided details
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The command does not follow the correct format.
-   *  3a1. BlitzBiz displays an error message.
-      3a2. User enters new command.
-      Steps 3a1-3a2 are repeated until the command format entered is correct.
-      Use case resumes from step 4.
+* 1a. The entered phone number, email or address do not follow the correct format.
+   *  1a1. BlitzBiz displays an error message
+   *  1a2. User enters new details.
+   *  Steps 1a1-1a2 are repeated until the data entered are in the correct format.
+      
+     Use case resumes from step 2.
+* 1b. The contact already exist
+   *  1b1. BlitzBiz displays an error message
+   
+    Use case ends.
+* 1c. User did not enter a phone number, email or address
+    *  1c1. BlitzBiz displays an error message
+    *  1c2. User enters new parameters.
+    *  Steps 1c1-1c2 are repeated until at least one parameter is entered.
+       
+    Use case resumes from step 2.
 
-* 4a. There are no contacts containing the prefix in their name.
-      4a1. BlitzBiz informs the user that there were no matches found.
-      Use case ends.
 
-*{More to be added}*
+**Use case: UC04 - Find contacts by name**
+
+**MSS**
+
+1.  User requests to find a contact by name
+2.  BlitzBiz displays contacts that matches the name provided
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not enter a name.
+   *  1a1. BlitzBiz displays an error message.
+   *   1a2. User enters new name to find.
+   *   Steps 1a1-1a2 are repeated until a name to find is entered.
+      
+   Use case resumes from step 2.
+
+* 2a. There are no contacts containing the prefix in their name.
+   *   2a1. BlitzBiz informs the user that there were no matches found.
+    
+    Use case ends.
+
+**Use case: UC05 - Rename Tag**
+
+**MSS**
+
+1.  User requests to rename a tag by providing a new tag name to change the old tag name into
+2.  BlitzBiz renames all the tags with the old tag name to the new tag name and displays the updated list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did provide all required fields or entered a wrong field.
+    *  1a1. BlitzBiz displays an error message.
+    *   1a2. User enters new command.
+    *   Steps 1a1-1a2 are repeated until the command format entered is correct.
+     
+    Use case resumes from step 2.
+
+* 1b. The new tag does not follow requirements.
+    *  1a1. BlitzBiz displays an error message.
+    *   1a2. User enters new command with new tag.
+    *   Steps 1a1-1a2 are repeated until the new tag entered is valid.
+     
+    Use case resumes from step 2.
+
+* 2a. There are no tags with the old tag name.
+    *  2a1. BlitzBiz informs the user that there were no matches found.
+ 
+   Use case ends.
+
+* 2b. There are contacts with both the old tag and new tag.
+   * 2b1. BlitzBiz informs the user that contacts which will result in duplicated tags will not be updated.
+
+    Use case ends.
+
+**Use case: UC06 - Social Media**
+
+**MSS**
+
+1.  User requests to add a social media handle to a contact by providing exactly one social media platform and handle name
+2.  BlitzBiz adds the social media to the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not provide exactly one social media platform or handle or entered an invalid field.
+    *  1a1. BlitzBiz displays an error message.
+    *   1a2. User enters new command.
+    *   Steps 1a1-1a2 are repeated until the command format entered is correct.
+       
+    Use case resumes from step 2.
+
+* 1b. The handle does not follow requirements.
+    *  1a1. BlitzBiz displays an error message.
+    *   1a2. User enters new command with new handle.
+    *   Steps 1a1-1a2 are repeated until the handle entered is valid.
+       
+    Use case resumes from step 2.
+
+**Use case: UC07 - Filter contact list by tag(s)**
+
+**MSS**
+
+1.  User requests to filter the contact list by providing tag(s) to filter by.
+2.  BlitzBiz displays the filter list of contacts with the given tag(s).
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The entered tag(s) do not follow the correct format.
+    *  1a1. BlitzBiz requests for the correct format.
+    *   1a2. User enters again in the new format.
+    *   Steps 1a1-1a2 are repeated until the format entered is correct.
+       
+    Use case resumes from step 2.
+
+* 2a. No contacts with the tag(s) are found.
+    * 2a1. BlitzBiz informs the user that there were no matches found.
+      
+    Use case ends.
+
+**Use case: UC08 - Sort list of contacts**
+
+**MSS**
+
+1.  User requests to sort contact list by name or schedules in ascending or descending order.
+2.  BlitzBiz displays the sorted list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User did not enter order to sort by.
+    *  1a1. BlitzBiz will sort by ascending order by default.
+
+    Use case ends.
+* 1b. User requested to sort by both name or schedule or did not provide a field to sort by.
+    * 1b1. BlitzBiz displays error message.
+    * 1b2. User enters again with only one field to sort by.
+    *  Steps 1b1-1b2 are repeated until user provides one field to sort by.
+      
+    Use case resumes from step 2.
+
+**Use case: UC09 - Search for contacts by schedules**
+
+**MSS**
+
+1.  User requests to search the contact list for contacts by providing a starting datetime and an ending datetime
+2.  BlitzBiz displays the searched list of contacts with schedules within the start and end datetime.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User only entered start time but not end time.
+    *  1a1. BlitzBiz searches for schedules that starts later than the given start time.
+
+* 1b. User only entered end time.
+    *  1b1. BlitzBiz searches for schedules that ends before the end time.
+
+* 1c. User enters an end time before start time.
+    * 1c1. BlitzBiz displays error message.
+    * 1c2. User enters again with a later end time than start time.
+    *  Steps 1c1-1c2 are repeated until the format entered is correct.
+      
+    Use case resumes from step 2.
+* 1b. Some contacts only has a schedule date but not time.
+    *  1b1. BlitzBiz searches under the assumption that the contacts without a schedule time information has a schedule time of 00:00
+  
+    Use case ends.
+
+* 2a. No contacts with schedules in the given range are found.
+    * 4a1. BlitzBiz informs the user that there were no matches found.
+      
+     Use case ends.
+
+**Use case: UC10 - Add/Edit Schedule**
+
+**MSS**
+
+1.  User requests to add/edit a schedule of a contact by providing the schedule name, schedule date and schedule time
+2.  BlitzBiz displays list after updating the contact with the new schedule details.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The contact does not exist.
+    *  1a1. BlitzBiz displays an error message.
+
+    Use case ends.
+* 1b. The user did not enter a schedule name or schedule time.
+    *  1b1. BlitzBiz only adds/edits the schedule date.
+  
+     Use case ends.
+* 1c. The user did not provide a schedule date.
+    *  1c1. BlitzBiz displays an error message.
+    *  1c2. User enters the parameters again.
+    *  Steps 1c1-1c2 are repeated until a schedule date is entered.
+
+    Use case ends.
+*  1d. The user provided an invalid schedule date/ schedule time/ schedule name.
+    *  1d1. BlitzBiz displays an error message.
+    *  1d2. User enters the parameters again.
+    *  Steps 1d1-1d2 are repeated until the format entered is correct.
+
+  Use case resumes from step 2.
+
+**Use case: UC11 - Backup data**
+
+**MSS**
+
+1.  User requests to back up the contact list.
+2.  BlitzBiz creates an address.json file with the contact list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The addressbook.json file already exist.
+    *  1a1. BlitzBiz overwrites the old file. 
+  
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to load within 4 seconds while holding up to 1000 contacts.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The system should have an uptime of 99.9%.
-5.  The product must be intuitive to people without technical background.
-6.  For critical user actions such as searching for a contact or updating information, the system must respond within 1 second for up to 90% of operations.
-7.  The program should have a size of less than 100MB even with 1000 contacts.
-8.  The application should function fully when offline.
-9.  When a user executes a command there should be clear feedback on whether the task was successful.
-10. The user should be notified on the reason why the command they give is not working(i.e. incorrect input, lack of contacts in system)
+4. The product must be intuitive to people without technical background.
+5. For critical user actions such as searching for a contact or updating information, the system must respond within 1 second for up to 90% of operations.
+6. The program should have a size of less than 100MB even with 1000 contacts.
+7. The application should function fully when offline.
+8. When a user executes a command there should be clear feedback on whether the task was successful.
+9. The user should be notified on the reason why the command they give is not working(i.e. incorrect input, lack of contacts in system)
 
 *{More to be added}*
 
@@ -458,7 +661,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file 
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 

@@ -15,7 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/jiaaaaen.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Created `socialMedia` and `renameTag` commands.
 
 ### Tan Yi Long
 
@@ -44,4 +44,4 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/LiuYJ2002)]
 [[portfolio](https://www.linkedin.com/in/liu-yujia-26b167203/)]
 
-* Role:
+* Role: Testing of application. Addition of `sort` and `search` command. Assisted with `filter` command and updating parameter requirements for `add` and `edit` commands.

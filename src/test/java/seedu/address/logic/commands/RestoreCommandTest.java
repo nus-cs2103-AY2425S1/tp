@@ -158,10 +158,6 @@ public class RestoreCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public ObservableList<Person> getPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     private class ModelStubWithDeletedPerson extends ModelStub {
