@@ -232,10 +232,11 @@ Congratulations - you've successfully completed the Quick Start guide!
 
 The [next section](#features) offers an **in-depth overview** of all the commands available in EZSTATE.
 
+<div class="note" markdown="span">
 Curious about how EZSTATE stores data? Check out the [storage section](#saving-the-data) for more information.
-
+<br>
 If you're an advanced user looking to edit the JSON file directly, head over to [this section](#editing-the-data-file) for more information.
-
+</div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
