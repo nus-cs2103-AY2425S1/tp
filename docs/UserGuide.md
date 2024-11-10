@@ -351,7 +351,7 @@ Format: `cancel INDEX dt/DATE st/START_TIME`
 
 
 Example:
-* `cancel 1 dt/15-10-2024 st/16:00` cancels a lesson on 15-10-2024, starting at 4pm for the 1st student.
+* `cancel 1 dt/15-10-2024 st/16:00` cancels a lesson on 15th Oct 2024, starting at 4pm for the 1st student.
 
 <box type="info" light theme="primary">
 
@@ -376,7 +376,7 @@ Format: `uncancel INDEX dt/DATE`
 * `DATE` must match the student's cancelled lesson `DATE`.
 
 Example:
-* `uncancel 1 dt/20-10-2024` uncancels a regular lesson on 20-10-2024 for the 1st student.
+* `uncancel 1 dt/20-10-2024` uncancels a regular lesson on 20th Oct 2024 for the 1st student.
 
 <box type="info" light theme="primary">
 
@@ -560,13 +560,6 @@ Student directory data is saved in the hard disk automatically after any command
 
 <br>
 
-**Help, why does it keep telling me that my date needs to be a valid date?**<br>
-Firstly, make sure that your date is a real date that exists (take note of the 29th of February on non leap years). 
-Next, make sure that your date is following the `DD-MM-YYYY` format (pay attention to the hyphens in between). <br>
-_Example: `30-10-2024` is allowed, while `30/10/2024` is not allowed._
-
-<br>
-
 **Can I edit the saved data file manually?**<br>
 Student directory data is saved automatically as a JSON file at `[JAR file location]/data/studentdirectory.json`. <br>Advanced users are welcome to update data directly by editing that data file.
 
@@ -587,6 +580,13 @@ You can do so by copying the data file over to the other computer as follows:
 2. Download KeyContacts in the other computer.
 3. Run KeyContacts in the other computer. This will generate a `data` folder containing a sample `studentdirectory.json` file.
 4. Replace this sample data file with the data file you copied from your previous computer.
+
+<br>
+
+**Help, why does it keep telling me that my date needs to be a valid date?**<br>
+Firstly, make sure that your date is a real date that exists (take note of the 29th of February on non leap years). 
+Next, make sure that your date is following the `DD-MM-YYYY` format (pay attention to the hyphens in between). <br>
+_Example: `30-10-2024` is allowed, while `30/10/2024` is not allowed._
 
 <br>
 
@@ -621,5 +621,5 @@ Action     | Format, Examples
 **[Sort](#sorting-students-sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
 **[Clear](#clearing-all-entries-clear)**  | `clear`
 **[Undo](#undoing-the-last-command-undo)**   | `undo`
-**[Redo](#undoing-the-last-undo-command-redo)**   | `redo`
+**[Redo](#redoing-the-last-undo-command-redo)**   | `redo`
 **[Exit](#exiting-the-program-exit)**   | `exit`
