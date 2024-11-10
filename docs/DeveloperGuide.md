@@ -561,13 +561,18 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned enhancements**
 
+Team size: 5
+
 Given below are some planned future enhancements for the app.
 
-### Feature: Reminder Clear
+[//]: # (### Feature: Reminder Clear)
 
-- **Description**: Allows the user to clear all reminders at once.
-- **Rationale**: This feature will help the user to clear all reminders at once, which will be useful when the user wants to start fresh with a new set of reminders.
-- **Format**: `rclear` or `rc`
+[//]: # ()
+[//]: # (- **Description**: Allows the user to clear all reminders at once.)
+
+[//]: # (- **Rationale**: This feature will help the user to clear all reminders at once, which will be useful when the user wants to start fresh with a new set of reminders.)
+
+[//]: # (- **Format**: `rclear` or `rc`)
 
 ### Feature: Stackable Find
 
