@@ -283,7 +283,7 @@ How an OweCommand operation goes through the `Model` component is shown below:
 **Target user profile**:
 * is a full-time university student in Singapore with a fixed schedule.
 * is giving private tuition to a significant number of students
-* has a need to manage a significant number of tutees' information
+* has a need to manage a significant number of students' information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
