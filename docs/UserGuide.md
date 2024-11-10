@@ -277,7 +277,7 @@ Format: `edit INDEX [s/MEETUP_SUBJECT] [i/MEETUP_INFO] [f/MEETUP_FROM] [t/MEETUP
 * You can remove all the meet-up's buyers by typing `n/` without specifying any tags after it.
 
 Examples:
-*  `edit 1 i/Meet with Johnny to show him houses. from/2024-10-28 10:00 to/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
+*  `edit 1 i/Meet with Johnny to show him houses. f/2024-10-28 10:00 t/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
 
 ### Locating meet-ups: `find`
 
