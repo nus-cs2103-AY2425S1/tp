@@ -5,7 +5,7 @@ title: User Guide
 
 <link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
 
-**EZSTATE** is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts, listings, and appointments.
+EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **real estate agents** who manage buyer and seller contacts, listings, and appointments.
 
 <br> **You are part of the ideal target audience of EZSTATE if you meet the following characteristics**:
 
@@ -16,8 +16,8 @@ title: User Guide
 * `Work Style` : Handles multiple clients and properties simultaneously and values efficiency in contact and property management
 * `Environment` : Works in a fast-paced setting where quick data entry and retrival are essential
 
-But do not worry if you do not meet every characteristic — **EZSTATE** is designed to be **intuitive and efficient for all users**.
-<br> Give it a try, and head over to our Quick Start guide to get started and see how **EZSTATE** can make your contact and property management tasks faster and easier!
+But do not worry if you do not meet every characteristic — EZSTATE is designed to be **intuitive and efficient for all users**.
+<br> Give it a try, and head over to our Quick Start guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
 
 * Table of Contents
 {:toc}
@@ -26,7 +26,7 @@ But do not worry if you do not meet every characteristic — **EZSTATE** is desi
 
 ## Quick Start Guide
 
-Welcome to **EZSTATE**! This guide will walk you through installing the app and getting started with basic commands.
+Welcome to EZSTATE! This guide will walk you through installing the app and getting started with basic commands.
 
 ### Installation Steps
 
@@ -63,7 +63,7 @@ Welcome to **EZSTATE**! This guide will walk you through installing the app and 
    ![Ui](images/Ui.png)<br><br>
 
 ### Basic Commands
-To use **EZSTATE**, type commands in the command box and press `Enter`. Here are a few to try:
+To use EZSTATE, type commands in the command box and press `Enter`. Here are a few to try:
 
    * `help` : Opens the help window showing all commands.
 
@@ -84,16 +84,16 @@ Explore the Features section for a full list of commands and their uses.
 
 ### Command Structure
 
-In this section, we will explore the command structure in **EZSTATE** before delving into the **Features** section. 
+In this section, we will explore the command structure in EZSTATE before delving into the **Features** section. 
 <br>
 
-Understanding the command structure in **EZSTATE** is essential for efficient navigation and use of the app’s features. 
-Each command in **EZSTATE** is designed to follow a clear, consistent format, allowing you to manage clients, listings, and appointments with precision and speed. 
+Understanding the command structure in EZSTATE is essential for efficient navigation and use of the app’s features. 
+Each command in EZSTATE is designed to follow a clear, consistent format, allowing you to manage clients, listings, and appointments with precision and speed. 
 By mastering this structure, you will find it easier to remember commands and customize inputs, making your experience smoother and enabling you to accomplish tasks more effectively. 
 
-This section breaks down the structure, reference, and prefixes used across all commands, so you can quickly become proficient with **EZSTATE**.
+This section breaks down the structure, reference, and prefixes used across all commands, so you can quickly become proficient with EZSTATE.
 
-Commands in **EZSTATE** follow the same structure:
+Commands in EZSTATE follow the same structure:
 
 `commandWord (REFERENCE) (PREFIXES)` 
 
