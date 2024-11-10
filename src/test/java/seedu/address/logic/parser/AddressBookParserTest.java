@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_HELP_PROMPT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.AddressBookParser.MESSAGE_TOO_LONG;
+import static seedu.address.logic.parser.ListCommandParser.NO_UNACCEPTABLE_WORDS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 
@@ -104,8 +105,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_listWithInvalidWords_throwsParseException() {
         assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, " There shouldn't' be any words after "
-                        + "the list command word except for a few special cases. "
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, NO_UNACCEPTABLE_WORDS
                         + String.format(MESSAGE_HELP_PROMPT, HelpCommand.COMMAND_WORD
                         + " " + ListCommand.COMMAND_WORD)), ()-> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
