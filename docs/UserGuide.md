@@ -157,7 +157,7 @@ Note that `\n` characters will be interpreted as new lines in the log entry. In 
 
 **Format**: `addentry i/IDENTITY_NUMBER d/DATE`
 * **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
-* **DATE** should be in the format `DD-MMM-YYYY`.
+* **DATE** should be in the format `DD MMM YYYY`.
   Examples:
 * `addentry i/S1234567D d/20 May 2024` opens a new window to add a log entry for the contact with NRIC `S1234567D` on the date `20 May 2024`.
 * Example:</br>
@@ -356,7 +356,7 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
     - `s/STATUS` - Statuses of the patients which can only be HIGH, LOW, MEDIUM, DISCHARGED AND NEW.
     - `l/LOG_ENTRY` - Description of the session with the patient.
     - `i/IDENTITY_NUMBER` - Unique identifier (e.g., NRIC or FIN) of the patient.
-    - `d/DATE` - Date of the log entry in the format `DD-MMM-YYYY`.
+    - `d/DATE` - Date of the log entry in the format `DD MMM YYYY`.
     - `INDEX` - Index number of the patient in the list.
     - `KEYWORD` - Search keyword(s) to find patients.
     - `MORE_KEYWORDS` - Additional search keywords.
