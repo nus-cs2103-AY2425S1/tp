@@ -255,7 +255,7 @@ addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
 ### Q5: How do I add orders for customers/suppliers with a large order?
-**A:** For now,
+**A:** For now, you can use the "remarks" to specify the order quantity instead 
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
