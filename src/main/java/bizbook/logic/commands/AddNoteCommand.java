@@ -28,7 +28,7 @@ public class AddNoteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "n/NOTE\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "n/High profile client.";
+            + "n/High profile client";
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added note to Person: %1$s";
     public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";
