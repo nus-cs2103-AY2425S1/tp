@@ -340,27 +340,27 @@ Examples:
 * `listTxn` followed by `markDone 2` marks the 2nd transaction in the transaction book as done.
 * If a done transaction is marked as done again, the transaction remains done.
 
-### Unmarking a transaction as done : `markUndone`
+### Marking a transaction as not done : `markUndone`
 
-Unmarks a specified transaction from the transaction book as undone.
+Marks a specified transaction from the transaction book as not done. Here, the word 'undone' is equivalent to not done.   
 
 Format: `markUndone INDEX`
 
-* Unmarks a transaction at the specified `INDEX` as undone.
+* Marks a transaction at the specified `INDEX` as not done.
 * The index refers to the index number shown in the displayed transaction list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** By default, a new transaction is undone.
+:bulb: **Tip:** By default, a new transaction is not done.
 </div>
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** If a done transaction is marked as undone, the existing done icon for the transaction in GUI disappears. 
+:bulb: **Tip:** If a done transaction is marked as not done, the existing done icon for the transaction in GUI disappears. 
 </div>
 
 Examples:
 
-* `listTxn` followed by `markUndone 2` unmarks the 2nd transaction in the transaction book as undone.
-* if an undone transaction is marked as undone again, the transaction remains undone.
+* `listTxn` followed by `markUndone 2` marks the 2nd transaction in the transaction book as not done.
+* if a not done transaction is marked as not done again, the transaction remains not done.
 
 ### Exiting the program : `exit`
 
