@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_SEEN;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -64,6 +65,9 @@ public class AddReminderCommand extends Command {
         }
 
         Person personForReminder = lastShownList.get(targetIndex.getZeroBased());
+
+        assert Objects.nonNull(personForReminder);
+
         toAdd = new Reminder(reminderDate, reminderDescription, personForReminder.getName());
 
         if (model.hasReminder(toAdd)) {
