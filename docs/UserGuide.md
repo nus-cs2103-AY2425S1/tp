@@ -253,6 +253,9 @@ addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
 
+### Q6: Why is the UI not scrollable when not in full screen?
+**A:** Due to the UI configuration of BakeBuddy, the middle column is non-scrollable when minimized. To prevent this from happening, please use BakeBuddy in full screen.
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
