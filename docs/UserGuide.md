@@ -297,7 +297,7 @@ Deletes the contact(s) at the specified indices from AdmiNUS.
 
 <div markdown="span" class="alert alert-primary">💡 **Tip**:
 
-To delete all students with the `oneYearMembership` tag, simply use `filtertag t/oneYearMembership` followed by `delete all`
+To delete all students with the `oneYearMembership` tag, simply use `filtertag oneYearMembership` followed by `delete all`
  </div>
 
 **Examples**:
@@ -437,7 +437,7 @@ Tag labelled with "paid" will have green background to indicate student has paid
 
 Deletes the specified tag(s) from the specified contact.
 
-**Format 1**: `deletetag INDEX t/TAG [t/MORE_TAG]`
+**Format 1**: `deletetag INDEX t/TAG [t/MORE_TAG]…​`
 
 | Parameter Name | Description                                  | Required   |
 |----------------|----------------------------------------------|------------|
@@ -454,7 +454,7 @@ Deletes the specified tag(s) from the specified contact.
 
 </div>
 
-**Format 2**: `deletetag ALL t/TAG [t/MORE_TAG]`
+**Format 2**: `deletetag ALL t/TAG [t/MORE_TAG]…​`
 
 | Parameter Name | Description                                                               | Required   |
 |----------------|---------------------------------------------------------------------------|------------|
@@ -462,6 +462,22 @@ Deletes the specified tag(s) from the specified contact.
 | `t/TAG`        | Tag to be deleted from every contact in the list associated with the tag  | Compulsory |
 | `t/MORE_TAG`   | More tags to be deleted                                                   | Optional   |
 
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+
+* `deletetag all t/TAG` deletes the tag `TAG` from all contacts currently shown in the list, not all contacts in the database.
+* `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
+* For both formats 1 and 2, 
+  * The tag is case-sensitive. For example, `partner` will not match `PartnEr`.
+  * Only full words will be matched e.g. `partner` will not match `partners`.
+</div>
+
+<div markdown="span" class="alert alert-primary">💡
+ **Tip**:
+
+To delete all contacts with the `Y3` tag, simply use `filtertag Y3` followed by `deletetag all t/Y3`
+ </div>
 
 **Examples**:
 
@@ -575,17 +591,17 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 | **Add a student** | `student n/NAME id/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`      |
 | **Clear**         | `clear`                                                                                             | `clear`                                                                                                             |
-| **Delete**        | `delete INDEX [MORE_INDEX]`                                                                         | `delete 3` or `delete 2 4`                                                                                          |
+| **Delete**        | `delete INDEX [MORE_INDEX]…​`                                                                         | `delete 3` or `delete 2 4`                                                                                          |
 | **Edit**          | `edit INDEX [n/NAME] [id/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
-| **Filtertag**     | `filtertag KEYWORD [MORE_KEYWORDS]`                                                                 | `filtertag bestie` or `filtertag bestie slay`                                                                       |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                      | `find James Jake`                                                                                                   |
+| **Filtertag**     | `filtertag KEYWORD [MORE_KEYWORDS]…​`                                                                 | `filtertag bestie` or `filtertag bestie slay`                                                                       |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]…​`                                                                      | `find James Jake`                                                                                                   |
 | **List**          | `list`                                                                                              | `list`                                                                                                              |
 | **Help**          | `help`                                                                                              | `help`                                                                                                              |
 | **Help Window**   | `helpwindow`                                                                                        | `helpwindow`                                                                                                        |
 | **Track**         | `track CATEGORY`                                                                                    | `track student`                                                                                                     |
 | **View**          | `view INDEX`                                                                                        | `view 1`                                                                                                            |
-| **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]`                                                                      | `tag 1 t/year2 t/computerScience`                                                                                   |
-| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                                | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                        |
+| **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]…​`                                                                      | `tag 1 t/year2 t/computerScience`                                                                                   |
+| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]…​`                                                                | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                        |
 | **Import CSV**    | `import FILE_PATH`                                                                                  | `import C:\Users\user\data\File.csv` or `import data/File.csv`                                                      |
 | **Export CSV**    | `export FILE_PATH`                                                                                  | `export C:\Users\user\data\File.csv` or `import data/File.csv`                                                      |
 | **Exit**          | `exit`                                                                                              | `exit`                                                                                                              |
