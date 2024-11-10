@@ -5,7 +5,7 @@ title: Developer Guide
 
 ## Table of Contents
 * [Acknowledgements](#acknowledgements)
-* [Setting up, getting started](#setting-up-getting-started)
+* [Setting Up, Getting Started](#setting-up-getting-started)
 * [Design](#design)
     * [Architecture](#architecture)
     * [Logic component](#logic-component)
@@ -25,7 +25,7 @@ title: Developer Guide
     * [Glossary](#glossary)
 * [Appendix-B: Planned Enhancements](#appendix-b-planned-enhancements)
     * [Enhance Phone Numbers to Accept Special Characters](#enhance-phone-numbers-to-accept-special-characters)
-* [Appendix-C: Instructions for manual testing](#appendix-c-instructions-for-manual-testing)
+* [Appendix-C: Instructions for Manual Testing](#appendix-c-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
     * [Adding a client](#adding-a-client)
     * [Deleting a client](#deleting-a-client)
@@ -42,7 +42,7 @@ ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossar
 as well as the JavaDocs for code written by BuffWuff1712
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -968,7 +968,7 @@ and use dashes for better readability. This enhancement will provide greater fle
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix C: Instructions for manual testing**
+## **Appendix C: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
