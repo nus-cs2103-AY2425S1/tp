@@ -172,15 +172,19 @@ Step 3. To unassign the `Event` from the vendor, use the command `unassign 1`. T
 
 The `AssignCommand` and `UnassignCommand` classes were introduced to represent these commands. To support parsing the arguments to both commands, the `AssignCommandParser` and `UnassignCommandParser` classes were added.
 
-For better understanding, refer to the sequence diagram below which illustrates the execution of the `assign` command:
+For better understanding, refer to the sequence diagram below which illustrates the execution of the `assign` command. The first sequence diagram shows what happens when a user enters the assign command:
 
-<puml src="diagrams/AssignSequenceDiagram.puml" width="800" />
+<puml src="diagrams/AssignParserSequenceDiagram.puml" width="800" />
 
 <box type="info" seamless>
 
 **Note:** The lifeline for `AssignCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
+
+During the execution of the command itself, the behaviour of the command depends on the current view of the user, as shown in the following sequence diagram:
+
+<puml src="diagrams/AssignSequenceDiagram.puml" width="800" />
 
 #### Changes to Model
 
