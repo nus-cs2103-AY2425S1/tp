@@ -303,7 +303,7 @@ Invalid Example:
 * This command will result in the following error message since at least one of the optional fields must be provided.
 ![EditPersonInvalid1.png](images/EditPersonInvalid1.png)
 
-Invalid Example (Multiple parameters:
+Invalid Example (Multiple parameters):
 * `edit 1 -n Carmen -n Betsy -p 12345678 -p 87654321 -e example@email.com -e example@gmail.com -rs Brother -rs Mother`
 * This command will result in the following error message since each value should be edited at most once.
 ![EditPersonInvalid2.png](images/EditPersonInvalid2.png)
@@ -478,6 +478,7 @@ Valid Example (Multiple field updated):
 Invalid Example:
 * `update -i 3 -n New Year's Party -n Christmas Celebration -a 1 2 -a 4 5`
 * This command will result in the following error message since the optional fields `-n` and `-a` are specified more than once.
+
 ![UpdateEventInvalid2.png](images/UpdateEventInvalid2.png)
 
 ### Cancelling Events ❌
