@@ -5,9 +5,34 @@ title: User Guide
 
 BizBook (BB) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BB can get your contact management tasks done faster than traditional GUI apps.
 
-- Table of Contents
-  {:toc}
-
+## Table of Contents
+1. [Quick start](#Quick-start)
+2. [Features](#Features)
+  2.1 [Viewing help : `help`](#viewing-help--help)
+  2.2 [Adding a person: `add`](#adding-a-person-add)
+  2.3 [Listing all persons : `list`](#listing-all-persons--list)
+  2.4 [Editing a person : `edit`](#editing-a-person--edit)
+  2.5 [Locating persons by name: `find`](#locating-persons-by-name-find)
+  2.6 [Deleting a person : `delete`](#deleting-a-person--delete)
+  2.7 [Delete a tag of an existing contact: `deletetag`](#delete-a-tag-of-an-existing-contact-deletetag)
+  2.8 [Add a note to an existing contact: `addnote`](#add-a-note-to-an-existing-contact-addnote)
+  2.9 [Edit a note of an existing contact: `editnote`](#edit-a-note-of-an-existing-contact-editnote)
+  2.10 [Deleting a note from an existing contact: `deletenote`](#deleting-a-note-from-an-existing-contact-deletenote)
+  2.11 [View an existing contact’s details : `view`](#view-an-existing-contacts-details--view)
+  2.12 [Pin a contact: `pin`](#pin-a-contact-pin)
+  2.13 [Unpin a contact: `unpin`](#unpin-a-contact-unpin)
+  2.14 [Undo a previously executed command: `undo`](#undo-a-previously-executed-command-undo)
+  2.15 [Redo a previously executed undo command: `redo`](#redo-a-previously-executed-undo-command-redo)
+  2.16 [Import a contact list : `import`](#import-a-contact-list--import)
+  2.17 [Export the contact list : `export`](#export-the-contact-list--export)
+  2.19 [Change the application’s theme : `toggle`](#change-the-applications-theme--toggle)
+  2.20 [Clear all entries : `clear`](#clear-all-entries--clear)
+  2.21 [Exit the program : `exit`](#exit-the-program--exit)
+  2.22 [Saving the data](#saving-the-data)
+  2.23 [Editing the data file](#editing-the-data-file)
+3. [FAQ](#faq)
+4. [Known issues](#known-issues)
+5. [Command summary](#command-summary)
 ---
 
 ## Quick start
