@@ -319,6 +319,8 @@ public class ModelManager implements Model {
                 return event != null && !isVendorAssignedToEvent(vendor, event);
             };
             return combinePredicates(notAssociatedPredicate, suppliedVendorFilterPredicate.getValue());
+        } else if (currentUiState.getValue().isVendorDetails()) {
+            return PREDICATE_SHOW_ALL_VENDORS;
         }
         return suppliedVendorFilterPredicate.getValue();
     }
@@ -330,6 +332,8 @@ public class ModelManager implements Model {
                 return vendor != null && !isVendorAssignedToEvent(vendor, event);
             };
             return combinePredicates(notAssociatedPredicate, suppliedEventFilterPredicate.getValue());
+        } else if (currentUiState.getValue().isEventDetails()) {
+            return PREDICATE_SHOW_ALL_EVENTS;
         }
         return suppliedEventFilterPredicate.getValue();
     }
