@@ -261,7 +261,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### **Command Feature**
 
-`add n/NAME p/PHONE NUMBER e/EMAIL ADDRESS a/ADDRESS s/SKILLS st/STATUS ex/EXPERIENCE dr/DESIRED ROLE note/[NOTE] t/[TAG]`,
+`add n/NAME p/PHONE NUMBER e/EMAIL ADDRESS a/ADDRESS s/SKILLS st/STATUS ex/EXPERIENCE dr/DESIRED ROLE [note/NOTE] [t/TAG]`,
 where note and tag are optional fields
 
 #### **Command Feature Purpose**
@@ -350,7 +350,7 @@ The sequence diagram below illustrates the above process of deleting a person fr
 
 #### **Command Feature**
 
-`edit INDEX n/[NAME] p/[PHONE NUMBER] e/[EMAIL ADDRESS] a/[ADDRESS] s/[SKILLS] st/[STATUS] ex/[EXPERIENCE] dr/[DESIRED ROLE] note/[NOTE] t/[TAG]`
+`edit INDEX n/[NAME] p/[PHONE NUMBER] e/[EMAIL ADDRESS] a/[ADDRESS] s/[SKILLS] st/[STATUS] ex/[EXPERIENCE] dr/[DESIRED ROLE] [note/NOTE] [t/TAG]`
 where all the fields are optional.
 
 #### **Command Feature Purpose**
