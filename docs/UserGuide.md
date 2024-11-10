@@ -159,7 +159,7 @@ Format: `/delete INDEX`
 Examples:
 * `/list` followed by `/delete 2` deletes the 2nd application in the list.
 * `/find Google` followed by `/delete 1` deletes the 1st application in the results of the `/find` command.
-* `/list` followed by `/delete 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
+* `/list` followed by `/delete 4` when you only have 3 internship applications returns an error message.
 
 <p>Before and after images of the first example</p>
 <div style="display: flex;">
@@ -214,7 +214,10 @@ Examples:
 * `/pending 3` changes the status of the 3rd application in the current list to pending.
 * `/reject 1` changes the status of the 1st application in the current list to rejected.
 * `/filter pending` followed by `/accept 1` changes the status of the 1st application to accepted. The application will hence no longer be on the list shown on the application since it no longer has a `pending` status.
-* `/list` followed by `/accept 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
+* `/list` followed by `/accept 4` when you only have 3 internship applications returns an error message.
+
+Note:
+*  It’s possible to update the application at index `INDEX` to its current status. For instance, you may use `/accept INDEX` to accept an application at index `INDEX` that is already accepted, `/pending INDEX` to mark an application at index `INDEX` as pending if it’s already pending, or `/reject INDEX` to reject an application at index `INDEX` that is already rejected.
 
 <p>Before and after images of the first example</p>
 <div style="display: flex;">

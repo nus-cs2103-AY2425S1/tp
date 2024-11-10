@@ -247,13 +247,10 @@ Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turn
 `setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
 
 ### Update the Status of an Internship Application
-The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the command input, creating a `StatusCommandParser` to interpret the request.
+The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`. 
+For clarity, some implementation details are omitted to avoid low-level specifics, focusing only on the high-level process of updating the internship application status.
 
-<puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
-
-The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
-
-`AddressBookParser`:
+AddressBookParser:
 1. Parses the command (e.g., `/accept 1`) and creates a `StatusCommandParser`.
 2. `StatusCommandParser` extracts the index and maps the command to the appropriate `Status` enum value (`PENDING`, `ACCEPTED`, or `REJECTED`). If either the index or status is invalid, a `ParseException` is thrown.
 3. If parsing succeeds, a `StatusCommand` is created with `targetIndex` and the specified `Status`.
@@ -558,7 +555,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS (Main Success Scenario)**
 
 1. The user requests to change the status of an internship application by specifying an index and the desired status (e.g., `/accept 2`, `/reject 3`, `/pending 4`).
-2. HireMe validates the provided index to ensure it is within the range of the current list.
 3. HireMe updates the status of the specified internship application to `ACCEPTED`, `REJECTED`, or `PENDING`.
 4. HireMe displays a confirmation message indicating that the status has been successfully updated.
 
@@ -566,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user provides an invalid index (e.g., non-positive or non-integer value).
+* 1a. The user provides an invalid index (e.g., non-positive or non-integer value or integer out of range).
     * 1a1. HireMe displays an error message indicating that the index is invalid.
 
       Use case ends.
