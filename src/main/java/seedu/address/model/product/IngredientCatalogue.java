@@ -41,7 +41,7 @@ public class IngredientCatalogue extends Catalogue {
     public void deleteProduct(int id) {
         Product product = productCatalogue.remove(id);
         if (product instanceof Ingredient) {
-            ingredientByName.remove((product).getName().toLowerCase());
+            ingredientByName.remove(product.getName().toLowerCase());
         }
     }
 
