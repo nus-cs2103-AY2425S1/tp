@@ -132,6 +132,7 @@ Adds a patient to the app.
 
 Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
+* **IDENTITY_NUMBER** has to be a valid NRIC(It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a checksum letter (e.g., S1234567D).";))
 
 Examples:
 * `add n/John Doe i/S7783844I p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW`
@@ -152,6 +153,8 @@ Creates a separate pop up window to add new log entry for a patient, with the co
 After entering the details, click the `Save` button to add the log entry to the patient's log list, 'Cancel' to discard the log entry. Closing the window directly will also discard the log entry.
 
 Note that `\n` characters will be interpreted as new lines in the log entry. In both the `LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
+
+Note that this feature is intended to cater to power users who prefer a more detailed log entry. If you prefer a more straightforward log entry, you can use the `addlog` command directly.
 
 > **💡 Tip:** Alternatively, use **"Ctrl + Enter"** to save the log entry on Windows and **"Cmd + Enter"** on Mac.
 
@@ -178,9 +181,9 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd patient to be `Betsy Crower`.
 
-### Locating patients by name: `find`
+### Locating patients by name and identity number: `find`
 
-Finds patients whose names contain any of the given keywords.
+Finds patients whose names or identity number contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -355,7 +358,7 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
     - `a/ADDRESS` - Address details.
     - `s/STATUS` - Statuses of the patients which can only be HIGH, LOW, MEDIUM, DISCHARGED AND NEW.
     - `l/LOG_ENTRY` - Description of the session with the patient.
-    - `i/IDENTITY_NUMBER` - Unique identifier (e.g., NRIC or FIN) of the patient.
+    - `i/IDENTITY_NUMBER` - Unique identifier (e.g., NRIC or FIN) of the patient. Must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a checksum letter (e.g., S1234567D).
     - `d/DATE` - Date of the log entry in the format `DD-MMM-YYYY`.
     - `INDEX` - Index number of the patient in the list.
     - `KEYWORD` - Search keyword(s) to find patients.
@@ -392,4 +395,11 @@ This data is not to be used for any purposes beyond application testing. Unautho
 | 8         | G7191281M       |
 | 9         | S4998948B       |
 | 10        | T3692411F       |
+
+## **Future Updates**
+
+1. **Search by sub-strings**  
+   Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
+
+
 
