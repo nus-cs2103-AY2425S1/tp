@@ -332,33 +332,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add contact
-2.  User inputs the contact details
-3.  User requests to add the contact
-4.  Medicontact adds the contact
+1. User requests to add contact.
+2. User inputs the contact details.
+3. MediContact adds the contact.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Necessary field is missing
+* 2a. Necessary field is missing.
+    * 2a1. MediContact shows an error message indicating which field is missing.
+  
+      Use case ends.
 
-    * 2a1. Medicontact shows an error message indicating which field is missing
-    * 2a2. Use case ends.
-
-* 2b. Wrong format in input
-
-    * 2b1.Medicontact shows an error message specifying the incorrect format.
-    * 2b2. Use case ends.
+* 2b. Wrong format in input.
+    * 2b1.MediContact shows an error message specifying the incorrect format.
+  
+      Use case ends.
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list persons. 
+2.  MediContact shows a list of persons. 
+3.  User requests to delete a specific person in the list. 
+4.  MediContact requests for confirmation. 
+5.  User confirms to delete. 
+6.  MediContact deletes the person.
 
     Use case ends.
 
@@ -368,11 +369,80 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given index or name is invalid.
+  - 3a1. AddressBook shows an error message.
+  
+    Use case resumes at step 2.
+  
+* 4a. User chooses to cancel the deletion.
 
-    * 3a1. AddressBook shows an error message.
+  Use case ends.
 
-      Use case resumes at step 2.
+**Use case: Clear address book**
+
+**MSS**
+
+1.  User requests to clear address book. 
+2.  MediContact requests for confirmation. 
+3.  User confirms to clear. 
+4.  MediContact clears the address book.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User chooses to cancel the clear action.
+
+  Use case ends.
+
+**Use case: Edit a person**
+
+**MSS**
+
+1. User requests to list persons.
+2. MediContact shows a list of persons.
+3. User requests to edit a person and specifies edited fields. 
+4. MediContact updates the person. 
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given name is invalid. 
+  - 3a1. MediContact shows an error message.
+
+    Use case ends.
+
+* 3b. No specified field or any field specified is in the wrong format.
+  - 3b1. MediContact shows an error message.
+
+    Use case ends.
+
+
+**Use case: Filter a person**
+
+**MSS**
+
+1. User requests to filter contacts and specifies the criteria.
+2. Medication shows a list of persons matching details.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. Criterion is missing.
+    - 1a1. MediContact shows an error message.
+
+      Use case ends.
+
+- 1b. Wrong format in input
+    - 1b1. MediContact shows an error message specifying the incorrect format.
+  
+      Use case ends.
 
 **Use case: Find a person**
 
@@ -380,30 +450,136 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to find contact
 2. User inputs the find command with contact details
-3. Medicontact shows a list of persons matching details
+3. MediContact shows a list of persons matching details
+
    Use case ends.
 
 **Extensions**
 
 - 2a. Necessary field is missing
-  - 2a1. Medicontact shows an error message indicating which field is missing
-  - 2a2. Use case ends.
+  - 2a1. MediContact shows an error message indicating which field is missing.  
+  
+    Use case ends.
+  
 - 2b. Wrong format in input
-  - 2b1.Medicontact shows an error message specifying the incorrect format.
-  - 2b2. Use case ends.
-- 2c. No match in users
-  - 2b1.Medicontact shows an error message specifying that there are no users that match the query.
-  - 2b2. Use case ends.
+  - 2b1.MediContact shows an error message specifying the incorrect format.
+  
+    Use case ends.
+  
+**Use case: Import address book**
+
+**MSS**
+
+1. User requests to import address book.
+2. User inputs the import command with new address book file name.
+3. MediContact imports the data.
+4. MediContact replaces original data with new data.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. File is not in the same folder as application JAR file.
+    - 2a1. MediContact shows an error message indicating file not found.
+
+      Use case ends.
+
+- 2b. File is not in JSON format.
+    - 2b1.MediContact shows an error message indicating wrong file format.
+
+      Use case ends.
+  
+- 2c. File is not in expected format of MediContact data.
+    - 2c1.MediContact shows an error message indicating invalid JSON format.
+
+      Use case ends.
+
 
 **Use case: List contacts**
 
 **MSS**
 
-1. User requests to list contacts
-2. User inputs the list command
-3. Medicontact shows a list of contacts
+1. User requests to list contacts.
+2. User inputs the list command.
+3. MediContact shows a list of contacts.
+
    Use case ends.
 
+**Use case: List starred contacts**
+
+**MSS**
+
+1. User requests to list starred contacts.
+2. User inputs the list star command.
+3. MediContact shows a list of starred contacts.
+
+   Use case ends.
+
+**Use case: Star a person**
+
+**MSS**
+
+1. User requests to list persons.
+2. MediContact shows a list of persons.
+3. User requests to add a person into starred list.
+4. User inputs the star command with index or full name of the person.
+5. MediContact adds the person into starred list.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 4a. Name or index given is invalid
+    - 4a1. MediContact shows an error message indicating invalid name or index.
+
+      Use case ends.
+
+**Use case: Sort contacts**
+
+**MSS**
+
+1. User requests to sort contacts.
+2. User inputs the sort command.
+3. MediContact sorts the displayed list of contacts by appointments.
+
+**Extensions**
+
+- 2a. No contact with appointment dates found.
+
+    - 2a1. MediContact shows an error message.
+    - 2a2. MediContact sorts the contacts alphabetically.
+  
+      Use case ends.
+
+
+**Use case: View note**
+
+**MSS**
+
+1. User requests to list persons.
+2. MediContact shows a list of persons.
+3. User requests to view a person's note.
+4. User inputs the view command with index or full name of the person.
+5. MediContact shows the person's contact with the note.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The list is empty.
+
+  Use case ends.
+
+- 4a. Name or index given is invalid
+    - 4a1. MediContact shows an error message indicating invalid name or index.
+
+      Use case ends.
+
+  
 ### Non-Functional Requirements
 
 1. Technical:
