@@ -634,7 +634,7 @@ Commands for managing appointments between user and clients.
 > ---
 
 - **Special Comments**
-Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
+1. Refer to [INDEX](#reference-types) constraints and the remarks and constraints following prefixes: [d/](#d) [fr/](#fr) [to/](#to).
 
 #### Delete Appointment
 - **Command:** `deleteapt INDEX`
