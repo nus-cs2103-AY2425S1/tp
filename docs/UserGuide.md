@@ -101,14 +101,14 @@ Tags also only accepts a **maximum** of 30 characters.
 Notes on Command Formats:
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-(Commands are incomplete and for illustrative purposes only)<br>
+(Commands are incomplete and are for illustrative purposes only)<br>
   e.g. `create v/ n/VENDOR_NAME`, `VENDOR_NAME` is a parameter which is specified by the user:
   * `create v/ n/Kimberly's Flowers`.
 
 <p>
 
 * Items in square brackets are **optional**.<br>
-(Commands are incomplete and for illustrative purposes only)<br>
+(Commands are incomplete and are for illustrative purposes only)<br>
   e.g. `create e/ n/EVENT_NAME [t/TAG]` can be used as:
   * `create e/ n/Stagecraft Solutions t/backstage-crew` or as;
   * `create e/ n/Stagecraft Solutions`.
