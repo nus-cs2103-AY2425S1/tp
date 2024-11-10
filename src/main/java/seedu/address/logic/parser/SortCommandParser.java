@@ -25,12 +25,12 @@ public class SortCommandParser implements Parser<SortCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        String[] params = args.trim().split(" ");
+        String[] params = args.trim().split(" ", 2);
         boolean isReversed = false;
 
         if (params.length == 1) {
             args = params[0].trim();
-        } else if (params.length == 2) {
+        } else {
             args = params[0].trim();
             if (params[1].trim().equals(SortCommand.ARGUMENT_WORD_DESC)) {
                 isReversed = true;
@@ -40,9 +40,6 @@ public class SortCommandParser implements Parser<SortCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
             }
-        } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         if (args.equals(SortNameCommand.ARGUMENT_WORD)) {
