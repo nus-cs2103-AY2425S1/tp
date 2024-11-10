@@ -86,43 +86,64 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 
 # **Glossary and Command Formats**
 
-## Contact Types
+## **Contact Types**
+
+<div markdown="block" class="alert alert-info">
 - **Contact**: Any person or entity stored in BakeBuddy's database, including customers, suppliers, and other business contacts
 - **Customer**: A person or business who purchases pastries from your bakery
 - **Supplier**: A person or business who provides ingredients or materials to your bakery
+</div>
 
-## Order-Related Terms
+## **Order-Related Terms**
+
+<div markdown="block" class="alert alert-info">
 - **Customer Order**: A record of pastries ordered by a customer, including quantity, delivery details, and status
 - **Supply Order**: A record of ingredients ordered from a supplier, including quantity and status
 - **Order Status**:
   - *Pending*: Order that has not been fulfilled yet
   - *Done*: Order that has been completed and delivered/received
+</div>
 
-## Product Management
+## **Product Management**
+
+<div markdown="block" class="alert alert-info">
 - **Pastry Catalogue**: Complete list of pastries your bakery offers, including prices and required ingredients
 - **Ingredient Catalogue**: Complete list of ingredients used in your bakery, including costs and supplier information
 - **Product ID**: Unique identifier assigned to each pastry or ingredient in the catalogues
+</div>
 
-## UI Elements
+## **UI Elements**
+
+<div markdown="block" class="alert alert-info">
 - **Index**: The number shown beside each item in a list, used for referencing items in commands
+</div>
 
-## Cost Management
+## **Cost Management**
+
+<div markdown="block" class="alert alert-info">
 - **COST**:
   - For ingredients: Purchase price from supplier
   - For pastries: Selling price to customer
+</div>
 
-## Contact Management
+## **Contact Management**
+
+<div markdown="block" class="alert alert-info">
 - **Filter**: Process of showing only contacts with specific tags
 - **Tag**: Label that can be applied to contacts for easy categorization (e.g., "VIP", "Wholesale", "Regular")
 - **Remark**: Additional notes about a contact 
+</div>
 
-## Order Processing
-- **Mark/Unmark**: Commands to toggle the completion status of an order
-- **Clear**: Command to remove all data from the system
+## **Order Processing**
 
 <div markdown="block" class="alert alert-info">
+- **Mark/Unmark**: Commands to toggle the completion status of an order
+- **Clear**: Command to remove all data from the system
+</div>
 
-**Notes about the command format:**<br>
+## **Command Format**
+
+<div markdown="block" class="alert alert-info">
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
@@ -140,8 +161,12 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
 
-**Parameter Reference:**
+## **Parameter Reference**
+
+<div markdown="block" class="alert alert-info">
+
 * `INDEX`: Positive integer (1, 2, 3, ...)
 * `NAME`: Name of person/item (Only alphanumerical characters)
 * `PHONE_NUMBER`: Phone number (Unique in the contacts list and more than 3 digits)
