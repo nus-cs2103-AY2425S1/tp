@@ -342,7 +342,7 @@ Examples:
 
 ### Marking a transaction as not done : `markUndone`
 
-Marks a specified transaction from the transaction book as not done. Here, the word 'undone' is equivalent to not done.   
+Marks a specified transaction from the transaction book as not done. Here, the word 'undone' is equivalent to not done.
 
 Format: `markUndone INDEX`
 
