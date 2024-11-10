@@ -35,28 +35,15 @@ ClinicConnect is the **the *ideal* patient management and appointment tracker sy
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `ClinicConnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-F10-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your ClinicConnectSystem.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clinicconnectsystem.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ClinicConnect.jar` command to run the application.<br>
    A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box at the top and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `home` : Lists all patients.
-
-   * `add n|John Doe i|T0123456A p|98765432 s|M d|1990-12-29` : Adds a patient named `John Doe` to the ClinicConnect system.
-
-   * `delete T0123456A` : Deletes the patient with the NRIC "T0123456A" shown in the current list.
-
-   * `clear` : Deletes all patients.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#clinicconnect-features) below for details of each command.
+1. Refer to the [Features](#clinicconnect-features) below for instructions on the available commands.
 
 --------------------------------------------------------------------------------------------------------------------
 ## ClinicConnect Features
