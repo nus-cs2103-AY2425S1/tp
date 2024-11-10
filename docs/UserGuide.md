@@ -129,7 +129,7 @@ A person can have any number of tags (including 0)
 - Note that Name, Phone Number, Email and Address are compulsory fields. 
 - We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not 
 particularly sensitive as compared to Identification Number etc.
-- Email does not check for `.com` specifically at the end of each email as custom domain names exist. E.g. `@u.nus.edu`
+- The email validation does not check for the presence of a period (.) after the "@" symbol, and it does not verify any specific domain extension. It only ensures that the domain name after the "@" is at least two characters long. E.g. `@u.nus.edu`
 
 Examples:
 
@@ -442,7 +442,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## Future Features
 
 1) While we are aware of the possibility of international numbers, for this iteration, we decided to focus on the local population. Support for these numbers is planned in a future release.
-
+2) The current email validation does not check for the presence of a period (.) after the "@" symbol and only ensures that the domain name after the "@" is at least two characters long. Checking for the period is planned in a future release.
 
 ---
 
