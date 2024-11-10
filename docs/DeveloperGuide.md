@@ -162,6 +162,7 @@ The `Model` component handles the data and state management for the app, storing
     * The `Model` stores various types of data:
         * `Person` objects within a `UniquePersonList`.
         * `Wedding` objects within a `UniqueWeddingList`.
+        * `Tag` objects within a `UniqueTagList`.
         * `Task` objects within a `UniqueTaskList`.
 
 
@@ -173,9 +174,9 @@ The `Model` component handles the data and state management for the app, storing
     
 3. **Responsibilities**:
     * **Data Storage**:
-        * Maintains address book data, including lists of `Person`, `Wedding`, and `Task` objects.
+        * Maintains address book data, including lists of `Person`, `Wedding`, `Tag` and `Task` objects.
     * **Filtered Views**:
-        * Provides filtered lists of `Person`, `Wedding`, and `Task` objects (e.g., search results), exposing these as unmodifiable `ObservableList`s. This allows the UI to automatically update in response to changes.
+        * Provides filtered lists of `Person`, `Wedding`, `Tag` and `Task` objects (e.g., search results), exposing these as unmodifiable `ObservableList`s. This allows the UI to automatically update in response to changes.
     * **User Preferences**:
         * Stores user preferences in a `UserPref` object, which is accessible externally as `ReadOnlyUserPref`.
     * **Independence**:
