@@ -94,7 +94,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​`
   * Invalid inputs may include those that contain special characters such as `*`, `@`, `#`, `!`, `^`, `%`, `$`, or other characters that are not English, such as Arabic, Chinese or Latin scripts like `Æ`.
 * The `REMARK` input should be a string of words with a limit of 120 characters.
 
-:exclamation: **Important:** Two identical person with duplicated fields cannot be added into the address book. The duplicated fields refers to `NAME` and `PHONE_NUMBER` fields where combined it should form a unique person.<br>
+<div markdown="span" class="alert alert-danger">
+:exclamation: Important: Duplicate entries for a person cannot be added to the address book. A person is considered a duplicate if both the `NAME` and `PHONE_NUMBER` fields match an existing entry. Together, these fields must create a unique identifier for each person in the address book.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -126,16 +128,24 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
 * The `DESCRIPTION` is case-sensitive and accepts a string of words with a limit of 120 characters.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
   * The date is optional. If the date is not provided, the current date will be used.
-* The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'.
-  * The status is optional. If the status is not provided, the default status is 'Not Done'.
+* The `STATUS` accepts case-sensitive string that is either `Done` or `Not Done`.
+  * The status is optional. If the status is not provided, the default status is `Not Done`.
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
-:exclamation: **Important:** Two identical Transactions with duplicated fields cannot be added into the transaction book. The duplicated fields refers to `INDEX` (where the person at the INDEX is the same), `AMOUNT`, `DESCRIPTION`, and `DATE` fields where combined it should form a unique transaction.<br>
+<div markdown="span" class="alert alert-danger">
+:exclamation: Important: Transactions with identical values in specific fields are considered duplicates and cannot be added to the transaction book. A transaction is identified as a duplicate if the following fields match exactly: `INDEX` (if it represents the same person at this index), `AMOUNT`, `DESCRIPTION`, and `DATE`. Together, these fields must create a unique combination for each transaction.
+</div>
+
 > For consistency and to avoid redundancy, identical transactions with the same details across all fields will not be added to the transaction book. This ensures that each entry remains unique, preventing accidental duplicates and maintaining the clarity of transaction records. If a similar transaction occurs on a different occasion in the same day with the same contact, we recommend users to tweak the desc field to reflect the specific context.<br>
 >
 > For example:<br> - `addTxn 1 amt/2.50 desc/sean owes me for morning latte`<br> - `addTxn 1 amt/2.50 desc/sean owes me for afternoon latte`
 
+<div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
+</div>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A transaction can have any number of categories (including 0)
+</div>
 
 Examples:
 
@@ -385,7 +395,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut`F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Case Sensitivity in Names May Result in Perceived Duplicates in Address Book**: Currently, SpleetWaise treats names as case-sensitive, meaning that variations like "bob", "bOb", "boB", "Bob", "BOB", and "BoB" are considered distinct entries. This may lead to perceived duplicate entries if consistent capitalization is not used. For example, "Alex Yeoh" and "alex yeoh" would be stored as separate contacts, even if both entries have the same phone number. The intended behavior in future releases is for case-insensitive handling, where entries like "Alex Yeoh" and "alex yeoh" with the same phone number would be considered duplicates and not allowed. Until this update, users are advised to maintain consistent capitalization when adding contacts to avoid unintentional duplicates.
+3. **Case Sensitivity in Names May Result in Perceived Duplicates in Address Book**: Currently, SpleetWaise treats names as case-sensitive, meaning that variations like “bob”, “bOb”, “boB”, “Bob”, “BOB”, and “BoB” are considered distinct entries (even when all Bobs have the same phone number). This may lead to perceived duplicate entries if consistent capitalisation is not used. For example, “Alex Yeoh” and “alex yeoh” would be stored as separate contacts, even if both entries have the same phone number. The intended behavior in future releases is for case-insensitive handling, where entries like “Alex Yeoh” and “alex yeoh” with the same phone number would be considered potential duplicates and a warning or alert could be displayed to the user. Until this update, users are advised to maintain consistent capitalisation when adding contacts to avoid unintentional duplicates.
 4. **Email Validation Allows Certain Invalid Formats**: The current email validation allows some entries that may not be valid email formats. For instance, “123@123” is accepted even though it lacks a fully qualified domain. This occurs because the validation does not strictly enforce the requirement for a complete domain structure (e.g., "123.com" instead of just "123"). Future improvements aim to refine this validation to align more closely with real-world email standards. Until then, users are advised to enter email addresses in standard formats (e.g., “username@example.com”) to avoid unexpected behavior.
 5. **Phone Number Validation Lacks Support for International Formats**: The current phone number validation requires that phone numbers only contain numeric characters and be at least 3 digits long. However, this limitation may not adequately support users with international contacts, as it lacks flexibility for common international number formats that include country codes (e.g., +65 91234567 or +1 123-456-7890). This may pose a problem for students who frequently communicate with international friends. Future improvements aim to support international phone number formats by allowing optional country codes and special characters such as + and -. In the meantime, users are advised to store international numbers in a consistent, numeric-only format (e.g., without + or spaces) to ensure compatibility with the current app constraints.
 6. **Lack of Support for Multiple Phone Numbers per Contact**: Currently, each contact can only store a single phone number. This limitation may be inconvenient for users who need to save multiple numbers for a single person, such as a mobile and home number or alternative international contact numbers. Future enhancements may include support for storing multiple phone numbers for each contact. Until then, users who need to save additional phone numbers for a contact may consider creating a separate entry with a label in the contact’s name (e.g., “Alex Yeoh - Home” and “Alex Yeoh - Mobile”) 
