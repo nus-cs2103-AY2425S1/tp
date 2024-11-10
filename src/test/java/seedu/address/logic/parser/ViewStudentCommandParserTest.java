@@ -23,7 +23,7 @@ public class ViewStudentCommandParserTest {
     @Test
     public void parse_missingArg_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteCommand.MESSAGE_USAGE));
+                ViewStudentCommand.MESSAGE_USAGE));
     }
 
     @Test
