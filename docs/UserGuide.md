@@ -59,7 +59,7 @@ UniVerse is more than just a **desktop app for managing contacts**—it is a pla
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-- Note that name cannot include prefixes that are already part of our commands
+- Note that name cannot include prefixes that are already part of our commands.
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -105,7 +105,7 @@ add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/UNIVERSITY m/MAJOR b/BIRTHDATE [w/
 
 Parameters:
 
-- `n/NAME`: Full name of the contact. These can't be tags that a.
+- `n/NAME`: Full name of the contact.
 - `p/PHONE_NUMBER`: 8-15 digit phone number.
 - `e/EMAIL`: Email address in `local-part@domain` format.
 - `a/ADDRESS`: Contact's address.
