@@ -18,11 +18,46 @@ KeyContacts allows you to
 
 &nbsp;
 
-KeyContacts is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, KeyContacts can get your contact management tasks done much faster than traditional GUI apps.
+KeyContacts is optimized for use via a Command Line Interface (CLI) while still being aesthetically pleasing and easy to use.
+If you type fast, you can complete your contact management tasks much faster with KeyContacts than with GUI apps.
 
 <!-- * Table of Contents -->
-<page-nav-print />
+
+<br>
+
+---
+
+## Table of Contents
+
+* [**Quick Start**](#quick-start)
+* [**Command Overview**](#command-overview)
+* [**Student Commands**](#student-commands)
+  * [Adding a student: `add`](#adding-a-student-add)
+  * [Deleting a student: `delete`](#deleting-a-student-delete)
+  * [Editing a student: `edit`](#editing-a-student-edit)
+  * [Assigning piano pieces to a student: `assign`](#assigning-piano-pieces-to-a-student-assign)
+  * [Unassigning piano pieces from a student: `unassign`](#unassigning-piano-pieces-from-a-student-unassign)
+* [**Lesson Commands**](#lesson-commands)
+  * [Scheduling a regular lesson: `schedule`](#scheduling-a-regular-lesson-schedule)
+  * [Scheduling a makeup lesson: `makeup`](#scheduling-a-makeup-lesson-makeup)
+  * [Cancelling a lesson: `cancel`](#cancelling-a-lesson-cancel)
+  * [Uncancelling a cancelled regular lesson: `uncancel`](#uncancelling-a-cancelled-regular-lesson-uncancel)
+* [**General Commands**](#general-commands)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [Listing all students: `list`](#listing-all-students-list)
+  * [Viewing the schedule: `view`](#viewing-the-schedule-view)
+  * [Finding students: `find`](#finding-students-find)
+  * [Sorting students: `sort`](#sorting-students-sort)
+  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  * [Undoing the last command: `undo`](#undoing-the-last-command-undo)
+  * [Redoing the last undone command: `redo`](#redoing-the-last-undone-command-redo)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
+* [**FAQ**](#faq)
+* [**Known issues**](#known-issues)
+* [**Command Summary**](#command-summary)
+
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -109,7 +144,7 @@ Each command consists of a **command word**, and zero or more **parameters**.<br
   **Example:** If the command specifies `help 123`, it will be interpreted as `help`.
 
 
-<box type="warning" light seamless >
+<box type="warning" light >
 
 **Caution:**
 
@@ -126,7 +161,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 A student has a **name**, **phone number**, **address**, **grade level** and optionally, a **group**. <br> Students with
 the same group name _(case-insensitive)_ will have synced [lessons](#lesson-commands).
 
-<box type="tip" light seamless >
+<box type="tip" light >
 
 **Note:**
 
@@ -145,7 +180,7 @@ Action     | Format, Examples
 <br>
 <br>
 
-### Adding a student: `add`
+### Adding a student : `add`
 
 Adds a student to the student directory.
 
@@ -155,8 +190,15 @@ Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
 * If an existing group is provided, the student will be assigned all the lessons of the other students in the group.
 
 Examples:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1`
+* `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1` adds a student named `John Doe` with phone number `98765432`, address `John Street, block 123, #01-01`, grade level `LCM 1` no group.
+* `add n/Mary Sue p/87654321 a/Mary avenue, block 51, #10-10 gl/ABRSM 1 g/Jack's Group` adds a student named `Mary Sue` with phone number `87654321`, address `Mary avenue, block 51, #10-10`, grade level `ABRSM 1` and group `Jack's Group`. Mary Sue will have `Jack's Group`'s lessons.
 
+<box type="info" light theme="primary">
+
+**Tip:**
+
+Does the app keep telling you that you are trying to insert a duplicate student? Check that you are not entering a student that already exists in the directory! See our definition of duplicate students [here](#student-commands).
+</box>
 <br>
 <br>
 
@@ -186,21 +228,23 @@ revert your action.
 
 Edits an existing student in the student directory.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`
 
 * Edits the student at the specified `INDEX`.
 * If the group is left blank (`g/`), the student will be removed from any existing group.
-* Removing a student from a group also removes all the student's lessons.
-* At least one of the optional fields must be provided.
+* Removing a student from a group also **removes all the student's lessons**.
+* **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st student to be `Jane Doe` and `91234567` respectively.
+*  `edit 1 n/Jane Doe p/91234567` edits the name and phone number of the 1st student to be `Jane Doe` and `91234567` respectively.
+*  `edit 1 n/Penelope g/` removes the 1st student from their group, while also editing their name to be `Penelope`.
+*  `edit 2 g/Jack's Group` moves the 2nd student into the group `Jack's Group`. The 2nd student will also be updated to have `Jack's Group`'s lessons.
 
 <br>
 <br>
 
-### Assigning piano pieces to a student: `assign`
+### Assigning piano pieces to a student : `assign`
 
 Assigns piano pieces to a student in the student directory.
 
@@ -210,24 +254,24 @@ Format: `assign INDEX pn/PIECE_NAME...`
 * Existing values will remain unchanged.
 
 Examples:
-*  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
+*  `assign 1 pn/Etude pn/Moonlight Sonata` adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
 
 <br>
 <br>
 
-### Unassigning piano pieces from a student: `unassign`
+### Unassigning piano pieces from a student : `unassign`
 
 Unassigns piano pieces from a student in the student directory.
 
 Format: `unassign INDEX [pn/PIECE_NAME]...`
 
 * Unassigns piano pieces from the student at the specified `INDEX`.
-* All piano pieces provided must be already assigned to the student
+* All piano pieces provided must be already assigned to the student.
 * If no piano pieces are provided, all piano pieces will be unassigned from the student.
 
 Examples:
-*  `unassign 1 pn/Etude pn/Moonlight Sonata` Removes `Etude` and `Moonlight Sonata` from the 1st student's piano pieces.
-
+*  `unassign 1 pn/Etude pn/Moonlight Sonata` removes `Etude` and `Moonlight Sonata` from the 1st student's piano pieces.
+*  `unassign 2` clears all the 2nd student's piano pieces.
 <br>
 <br>
 
@@ -242,15 +286,14 @@ lessons for each student.
 
 **Tip:**
 
-We will let you know if any two lessons clash with each other!<br>
-If you try to run a command which results in 2 lessons clashing, an error will be shown.
+If you try to run a command which results in 2 lessons clashing, we will be sure to catch it and let you know!
 </box>
 Listed below are the currently supported lesson commands.
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **[Schedule](#scheduling-a-regular-lesson-schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
-**[Makeup](#scheduling-a-makeup-lesson-makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
+**[Makeup](#scheduling-a-makeup-lesson-makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 dt/25-12-2022 st/12:00 et/14:00`
 **[Cancel](#cancelling-a-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
 **[Uncancel](#uncancelling-a-cancelled-regular-lesson-uncancel)** |  `uncancel INDEX dt/DATE` <br> e.g. `uncancel 1 dt/14-10-2024`
 
@@ -259,18 +302,19 @@ Action     | Format, Examples
 
 ### Scheduling a regular lesson : `schedule`
 
-Schedules a regular lesson for the specified student in the student directory.
+Schedules a **weekly recurring** regular lesson for the specified student in the student directory.
 
 Format: `schedule INDEX d/DAY st/START_TIME et/END_TIME`
 
 * Schedules the regular lesson for the student at the specified `INDEX`. 
 * Regular lessons are shared across students in the same group.
-* If the student already has an existing regular lesson, it will be overwritten by the new regular lesson given.
+* If the student already has an existing regular lesson, **it will be overwritten** by the new regular lesson given.
+* If the student is part of a group, the entire group's regular lesson will be overwritten as well.
 * `DAY` must be a day of the week (e.g. Monday, Tuesday etc.) or its 3-letter abbreviation (e.g. Mon, Tue etc.). This parameter is case-insensitive.
 * `START_TIME` and `END_TIME` must be in 24-hour format (`HH:MM`), and `START_TIME` must be before `END_TIME`.
 
 Example:
-* `schedule 1 d/Tuesday st/16:00 et/18:00` Schedules a regular lesson on Tuesday, 4-6pm for the 1st student.
+* `schedule 1 d/Tuesday st/16:00 et/18:00` schedules a regular lesson every Tuesday, 4-6pm for the 1st student.
 
 <br>
 <br>
@@ -284,10 +328,10 @@ Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 * Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * Makeup lessons are shared across students in the same group.
 * `DATE` must be a valid date in the format `DD-MM-YYYY`.
-* `START_TIME` and `END_TIME` must be in 24-hour format (`HH:MM`), and `START_TIME` must be before `END_TIME`.
+* `START_TIME` and `END_TIME` must be in 24-hour format (`HH:MM`) and `START_TIME` must be before `END_TIME`.
 
 Examples:
-* `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
+* `makeup 1 dt/25-12-2024 st/12:00 et/14:00` schedules a makeup lesson on 25th December 2024, 12-2pm for the 1st student.
 
 <br>
 <br>
@@ -298,7 +342,7 @@ Cancels a lesson at a specific date and start time for the specified student in 
 
 Format: `cancel INDEX dt/DATE st/START_TIME`
 
-* Cancels a lesson for the student at the specified `INDEX`.
+* Cancels a lesson for the student at the specified `INDEX`, on the specified `DATE` that starts at the specified `START_TIME`.
 * Cancelling a makeup lesson will remove it from the student's list of makeup lessons.
 * Cancelling a regular lesson adds it to a list of cancelled lessons. This is shared across students in the same group.
 * `DATE` must be a valid date in the format `DD-MM-YYYY`.
@@ -307,7 +351,16 @@ Format: `cancel INDEX dt/DATE st/START_TIME`
 
 
 Example:
-* `cancel 1 dt/15-10-2024 st/16:00` Cancels a lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
+* `cancel 1 dt/15-10-2024 st/16:00` cancels a lesson on 15th Oct 2024, starting at 4pm for the 1st student.
+
+<box type="tip" light>
+
+**Note:**
+
+The cancel command supports cancelling **both regular and makeup lessons**!<br>
+Canceled makeup lessons will be removed, while canceled regular lessons appear as a list of dates in the student card.
+
+</box>
 
 <br> 
 <br>
@@ -324,7 +377,14 @@ Format: `uncancel INDEX dt/DATE`
 * `DATE` must match the student's cancelled lesson `DATE`.
 
 Example:
-* `uncancel 1 dt/20-10-2024` Uncancels a regular lesson on 20-10-2024 for the 1st student.
+* `uncancel 1 dt/20-10-2024` uncancels a regular lesson on 20th Oct 2024 for the 1st student.
+
+<box type="info" light theme="primary">
+
+**Tip:**
+
+The `uncancel` command only allows uncancelling of regular lessons. To uncancel a makeup lesson, simply reschedule it with the [makeup](#scheduling-a-makeup-lesson-makeup) command.
+</box>
 
 <br>
 
@@ -343,7 +403,7 @@ Action     | Format, Examples
 **[Sort](#sorting-students-sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
 **[Clear](#clearing-all-entries-clear)**  | `clear`
 **[Undo](#undoing-the-last-command-undo)**   | `undo`
-**[Redo](#undoing-the-last-undo-command-redo)**   | `redo`
+**[Redo](#redoing-the-last-undone-command-redo)**   | `redo`
 **[Exit](#exiting-the-program-exit)**   | `exit`
 
 <br>
@@ -379,27 +439,29 @@ Format: `view [dt/DATE]`
 * `DATE` must be in the format `DD-MM-YYYY`.
 
 Examples:
-* `view` Displays the schedule for the current week.
-* `view dt/01-11-2024` Displays the schedule for 28 Oct 2024 (Monday) to 3 Nov 2024 (Sunday).
+* `view` displays the schedule for the current week.
+* `view dt/01-11-2024` displays the schedule for 28 Oct 2024 (Monday) to 3 Nov 2024 (Sunday).
 
 <br>
 <br>
 
-### Finding students: `find`
+### Finding students : `find`
 
 Finds students whose personal details match inputs.
 
 Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is **case-insensitive**. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `n/Hans p/88197184` will fetch same list as `p/88197184 n/Hans`
 * Only the name, phone number, address, grade level and group is searched.
-* Partial inclusion of keyword will be considered a match
+* Partial inclusion of keyword will be considered a match.
+* **At least one** of the optional fields must be provided.
 * Students matching all fields will be returned (i.e. `AND` search).
   e.g. `n/Hans p/88191784` will return `Hans Gruber; 88197184`, but not`Hans Goretzka; 88197188`
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
+* `find n/John` returns all students with `John` in their name, such as `john` and `Johnny Doe`
+* `find n/will p/8113` returns all students with `will` in their name **and** phone number containing `8113`, such as <br>`william; 82381134` but **not** `will; 81148923`
 
 <br>
 <br>
@@ -413,12 +475,21 @@ Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [
 * The order of prefixes DOES matter. If there are ties in the first field, later fields will be used to tie-break.
 * Only name, phone number, address, grade level and group are valid fields to sort by.
 * The sorting order must be `ASC` or  `DESC`, and is case-insensitive.
+* **At least one** of the optional fields must be provided.
 
 To clear the sorting conditions, use the command `sort clear`.
 
 Examples:
 * `sort n/ASC` sorts the students by name in ascending order.
 * `sort gl/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks using name in ascending order.
+
+<box type="tip" light >
+
+**Note:**
+
+All sorting is performed in ASCII order, meaning lower-cased letters are considered larger than all upper-cased letters.
+For example, "A" comes before "B", but "a" comes after "B".
+</box>
 
 <br>
 <br>
@@ -429,11 +500,11 @@ Clears all entries from the student directory.
 
 Format: `clear`
 
-<box type="warning" light seamless >
+<box type="info" light theme="primary">
 
-**Caution:**
+**Tip:**
 
-If you accidentally used the `clear` command, do not worry since you can use the `undo` command to revert your action! <br>
+Accidentally used the `clear` command? No need to worry! You can use the `undo` command to revert your action! <br>
 Do <b>NOT</b> exit out of the application before you undo, as this will lose your data forever.
 </box>
 <br>
@@ -449,15 +520,16 @@ Format: `undo`
 
 **Tip:**
 
-1. Undo only affects commands that **modified the student directory**. <br>
-   **Example:** If you ran the command `delete 1` to delete student `Alex Yeo`, followed by the command `find Bernice`, running `undo` will restore student `Alex Yeo`.
+1. Undo only affects commands that **modify student entries**. <br>
+   For example, if you ran the command `delete 1` to delete student `Alex Yeo`, followed by the command `find Bernice`, running `undo` will restore student `Alex Yeo`.
 
-2. You can undo <b>multiple</b> commands in a row that modified the student directory.
+2. You can undo **multiple** commands in a row that modified the student directory.
 </box>
+
 <br>
 <br>
 
-### Undoing the last undo command: `redo`
+### Redoing the last undone command : `redo`
 
 Reverts the effects of the `undo` command if it was the last command run that modified the student directory.
 
@@ -466,8 +538,9 @@ Format: `redo`
 
 **Tip:**
 
-You can redo **multiple** undo commands in a row.
+You can redo **multiple** undone commands in a row.
 </box>
+
 <br>
 <br>
 
@@ -476,26 +549,20 @@ You can redo **multiple** undo commands in a row.
 Exits the program.
 
 Format: `exit`
-<br>
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-**Q**: How do I save my data?<br>
-**A**: Student directory data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+**How do I save my data?**<br>
+Student directory data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 <br>
 
-**Q**: Help, why does it keep telling me that my date needs to be a valid date?<br>
-**A**: Firstly, make sure that your date is a real date that exists (take note of the 29th of February on non leap years). 
-Next, make sure that your date is following the `DD-MM-YYYY` format (pay attention to the hyphens in between). <br>
-**Example:** `30-10-2024` is allowed, while `30/10/2024` is not allowed.
-
-<br>
-
-**Q**: Can I edit the saved data file manually?<br>
-**A**: Student directory data is saved automatically as a JSON file at <br>`[JAR file location]/data/studentdirectory.json`. Advanced users are welcome to update data directly by editing that data file.
+**Can I edit the saved data file manually?**<br>
+Student directory data is saved automatically as a JSON file at `[JAR file location]/data/studentdirectory.json`. <br>Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" light>
 <b>Caution:</b><br>
@@ -508,24 +575,29 @@ Hence, it is recommended to take a backup of the file before editing it.
 
 <br>
 
-**Q**: How do I transfer my data to another computer?<br>
-**A**: You can do so by copying the data file over to the other computer as follows:
-1. Make a copy of the `studentdirectory.json` file in the data folder.
-2. Install KeyContacts in the other computer.
+**How do I transfer my data to another computer?**<br>
+You can do so by copying the data file over to the other computer as follows:
+1. Copy the `studentdirectory.json` file in the data folder over to the other computer.
+2. Download KeyContacts in the other computer.
 3. Run KeyContacts in the other computer. This will generate a `data` folder containing a sample `studentdirectory.json` file.
 4. Replace this sample data file with the data file you copied from your previous computer.
 
 <br>
+
+**Help, why does it keep telling me that my date needs to be a valid date?**<br>
+Firstly, make sure that your date is a real date that exists (take note of the 29th of February on non leap years). 
+Next, make sure that your date is following the `DD-MM-YYYY` format (pay attention to the hyphens in between). <br>
+_Example: `30-10-2024` is allowed, while `30/10/2024` is not allowed._
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.<br><br>
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-<br>
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -550,5 +622,5 @@ Action     | Format, Examples
 **[Sort](#sorting-students-sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
 **[Clear](#clearing-all-entries-clear)**  | `clear`
 **[Undo](#undoing-the-last-command-undo)**   | `undo`
-**[Redo](#undoing-the-last-undo-command-redo)**   | `redo`
+**[Redo](#redoing-the-last-undone-command-redo)**   | `redo`
 **[Exit](#exiting-the-program-exit)**   | `exit`
