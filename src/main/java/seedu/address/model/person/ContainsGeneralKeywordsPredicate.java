@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
+// Solution below adapted from https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/model/person/NameContainsKeywordsPredicate.java.
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
