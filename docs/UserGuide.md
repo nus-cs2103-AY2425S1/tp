@@ -229,14 +229,12 @@ add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP
 
 **Rules to Remember:**
 
-| Field       | Requirements                                                                                                                                               |
-|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name        | • Letters, numbers, and spaces only<br>• Cannot be blank                                                                                                   |
-| Phone       | • 3-15 digits<br>• Alphabetical characters (A-Z, a-z) and special characters (/ - _ ( )) are permitted. <br> • At least one digit is required in the number |
-| Email       | • Must be valid email format (example@domain.com)                                                                                                          |
-| Relationship| • Letters only<br>• Cannot be blank<br>• Note: Please enter a meaningful relationship that best describes the connection (e.g., "Friend," "Colleague," "Sibling").
-
-                                                                                                                   |
+| Field       | Requirements                                                                                                                                                                                                                                                 |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name        | • Letters, numbers, and spaces only<br>• Cannot be blank                                                                                                                                                                                                     |
+| Phone       | • 3-15 digits<br>• Alphabetical characters (A-Z, a-z) and special characters (/ - _ ( )) are permitted. <br> • At least one digit is required in the number                                                                                                  |
+| Email       | • Must be valid email format (example@domain.com)                                                                                                                                                                                                            |
+| Relationship| • Letters only<br>• Cannot be blank<br>• Note: Please enter a meaningful relationship that best describes the connection <br>(e.g., "Friend," "Colleague," "Sibling"). <br>• Note: Relationships are case-sensitive (e.g. brother is different from Brother) |
 
 
 **Note:** Names which are very long may not be fully displayed in the detailed person view, as displaying it would
@@ -257,7 +255,7 @@ Invalid Example (Invalid Phone Number):
 add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12
 ```
 * This command will result in the following error message since the phone number must be at least 3 digits long.
-![AddCommandFailureInvalidPhone.png](images/AddCommandFailureInvalidPhone.png)
+![AddCommandInvalidExample1.png](images/AddCommandInvalidExample1.png)
 
 Invalid Example (Duplicate Persons):
 * Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` already exists.
