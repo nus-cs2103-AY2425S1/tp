@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import spleetwaise.address.logic.Messages;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Address;
 import spleetwaise.address.model.person.Email;
 import spleetwaise.address.model.person.Name;
@@ -106,7 +107,7 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList();
+        model.updateFilteredPersonList(AddressBookModel.PREDICATE_SHOW_ALL_PERSONS);
 
         updatePersonsInTransactions(model, personToEdit, editedPerson);
 
