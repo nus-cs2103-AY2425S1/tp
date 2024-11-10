@@ -1,7 +1,7 @@
 
 # VendorVault User Guide
 
-VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. Vendor Vault is targeted at small convenience/grocery stores. 
+VendorVault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a Command Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. VendorVault is targeted at small convenience/grocery stores. 
 
 --- 
 
@@ -54,7 +54,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
    * `list -a` : Lists all suppliers and deliveries.
 
-   * `add -s n/John Doe p/98765432 e/johnd@example.com com/John street, block 123, #01-01 pro/iPhone` : Adds a supplier named `John Doe` to the VendorVault.
+   * `add -s n/John Doe p/98765432 e/johnd@example.com com/John street, block 123, #01-01 pro/iPhone` : Adds a supplier named `John Doe` to VendorVault.
 
    * `delete -d 3` : Deletes the 3rd delivery shown in the current delivery list.
 
@@ -82,12 +82,12 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * For the commands `help` `clear` and `exit`, extra information/words following the command after a space will be ignored.<br>
-  e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
+  e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`. However, `exit1` will not be recognized as a command
 
-* For all parameters, starting and ending spaces are trimmed.
+* For all parameters, starting and ending spaces will be trimmed.
 
-* For all commands except `find` and `sort`, the displayed list of suppliers/deliveries will be the unfiltered and unsorted list of all suppliers/deliveries.<br>
-  For `find` and `sort` commands, the displayed list will be the corresponding filtered/sorted list of supplier/deliveries.
+* For all commands except `find`, `sort` and `upcoming`, the displayed list of suppliers/deliveries will be the unfiltered and unsorted list of all suppliers/deliveries after executing the command.<br>
+  For `find`, `sort` and `upcoming` commands, the displayed list will be the corresponding filtered/sorted list of supplier/deliveries. 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -112,7 +112,7 @@ Format: `list -a`
 <box type="warning" seamless>
 **Warnings**:
 - No other parameters should be given for this command.
-- At least one space between list and -a
+- Give at least one space between list and -a
 </box>
 
 ### Clearing all suppliers and deliveries : `clear`
@@ -534,7 +534,7 @@ Action     | Format, Examples
 **[Delete](#deleting-a-supplier-delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
 **[List](#listing-all-suppliers-list-s)**   | `list -s`
 **[Mark](#mark-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
-**[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>` <br> e.g., `find -s n/link com/NU`
+**[Find](#find-a-supplier-find-s)**   | `find -s n/KEYWORD_FOR_SUPPLIER NAME> com/KEYWORD_FOR_SUPPLIER_COMPANY pro/<KEYWORD_FOR_SUPPLIER_PRODUCT>` <br> e.g., `find -s n/link com/NU`
 **[Sort](#sort-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
 
