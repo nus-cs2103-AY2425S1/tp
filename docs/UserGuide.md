@@ -4,12 +4,9 @@
   pageNav: 4
 ---
 <style>
-    :target:before {
-    content: "";
-    display: block;
-    height: 200px;
-    margin: -200px;
-}
+    :target {
+      scroll-margin-top: 180px;
+    }
 </style>
 
 # PlanPerfect User Guide
