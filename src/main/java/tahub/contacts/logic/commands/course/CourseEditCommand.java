@@ -30,9 +30,9 @@ public class CourseEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the course identified "
             + "by its course code. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: COURSE_CODE (must be course code of an existing course) "
+            + "Parameters: " + PREFIX_COURSE_CODE + "COURSE_CODE (must be course code of an existing course) "
             + "[" + PREFIX_NAME + "COURSE_NAME]\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_COURSE_CODE + "CS1101S "
             + PREFIX_NAME + "Programming basics";
 
