@@ -574,12 +574,21 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 
 ### Sorting list based on Appointment Dates : `sort`
 
-Sorts the persons in the address book on the basis of their appointment dates. Any contacts without appointments will 
-remain sorted alphabetically at the end of the list.
+Sorts the persons in the address book on the basis of their earliest appointment dates.
 
 **Format**: `sort`
 
 * No other parameters should be supplied.
+
+<box type="tip" seamless>
+
+**Remarks**:
+
+- If contacts share an appointment timing, they will be sorted alphabetically by name.
+
+- Any contacts without appointments will remain sorted alphabetically at the end of the list.
+
+</box>
 
 **Input**<br>
 
