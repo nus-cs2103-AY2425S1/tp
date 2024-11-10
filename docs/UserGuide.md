@@ -28,7 +28,7 @@ But do not worry if you do not meet every characteristic — EZSTATE is designed
 
 Welcome to EZSTATE! This guide will walk you through installing the app and getting started with basic commands.
 
-### Installation  Steps
+### Installation Steps
 
 1. Ensure you have Java `17` or above installed in your Computer. You can check by opening a command terminal and typing:
     ```terminal
