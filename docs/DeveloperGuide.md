@@ -532,6 +532,7 @@ Use case ends.
 **Use case: Edit a Student**
 
 **MSS**
+
 1. Users requests to list students.
 2. T_Assistant shows a list of students.
 3. User requests to edit a Student's information from the list.
@@ -562,6 +563,32 @@ Use case ends.
   - 3c1.  T_Assistant shows an error message.
   
     Use case resumes at step 2.
+
+[**Find Student**
+
+**MSS**
+
+1. User inputs a command to find students with specific keywords.
+
+2. T_Assistant processes the input and searches for students matching the keywords.
+
+3. T_Assistant displays a list of students who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+  - 1a1. T_Assistant shows an error message indicating the correct format.
+    
+    Use case ends.
+
+- 3a. No Student match the search criteria.
+
+  - 3a1. T_Assistant shows an error message.
+  
+    Use case ends.
 
 **Use case: Add a Group**
 
@@ -767,6 +794,32 @@ Use case ends.
 
       Use case ends.
 
+**Find Group**
+
+**MSS**
+
+1. User inputs a command to find groups with specific keywords.
+
+2. T_Assistant processes the input and searches for groups matching the keywords.
+
+3. T_Assistant displays a list of groups who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+    - 1a1. T_Assistant shows an error message indicating the correct format.
+
+      Use case ends.
+
+- 3a. No Group match the search criteria.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case ends.
+
 **Use case: List all Tasks**
 
 **MSS**
@@ -891,6 +944,32 @@ Use case ends.
     - 3c1.  T_Assistant shows an error message.
 
       Use case resumes at step 2.
+
+**Find Task**
+
+**MSS**
+
+1. User inputs a command to find tasks with specific keywords.
+
+2. T_Assistant processes the input and searches for tasks matching the keywords.
+
+3. T_Assistant displays a list of tasks who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+    - 1a1. T_Assistant shows an error message indicating the correct format.
+
+      Use case ends.
+
+- 3a. No Task match the search criteria.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
