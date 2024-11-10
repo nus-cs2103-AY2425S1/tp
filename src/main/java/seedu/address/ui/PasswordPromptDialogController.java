@@ -54,6 +54,7 @@ public class PasswordPromptDialogController {
         } else if (PasswordManager.isPasswordCorrect(inputPassword, null)) {
             dialog.close();
         } else {
+            passwordField.clear();
             showAlert("Incorrect Password!", "Please try again.");
         }
     }
