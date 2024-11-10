@@ -144,8 +144,8 @@ Edits an existing customer in the address book.
 Command aliases: `editc`<br>
 Format: `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>
 Examples:
-*  `editcustomer 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st customer to be `91234567` and `johndoe@example.com` respectively.
-*  `editc 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
+*  `editcustomer 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd customer to be `91234567` and `johndoe@example.com` respectively.
+*  `editc 1 n/Betsy Crower t/` Edits the name of the 1st customer to be `Betsy Crower` and clears all existing tags.
 
 <box type="important">
 
@@ -304,8 +304,8 @@ Marks an order from the selected customer's displayed order list as completed.
 Command aliases: `marko`<br>
 Format: `markorder ORDER_INDEX`<br>
 Examples:
-* `markorder 1` marks the order with index 1 from the displayed order list as completed.
-* `listorder 1` followed by `marko 2` selects the 1st customer in the address book and marks the 2nd order under the 1st customer as completed.
+* `markorder 2` marks the order with index 2 from the displayed order list as completed.
+* `listorder 1` followed by `marko 1` selects the 1st customer in the address book and marks the 1st order under the 1st customer as completed.
   ![result for 'marko 1'](images/markOrder.png)
 
 <box type="important">
@@ -328,6 +328,7 @@ Format: `unmarkorder ORDER_INDEX`<br>
 Examples:
 * `unmarkorder 1` reverts the order with index 1 from the displayed order list to pending.
 * `listorder 1` followed by `unmarko 2` selects the 1st customer in the address book and reverts the 2nd order under the 1st customer to pending.
+  ![result for 'unmarko 2'](images/unmarkOrder.png)
 
 <box type="important">
 
