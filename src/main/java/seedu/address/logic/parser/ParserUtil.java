@@ -34,8 +34,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index should be a non-zero unsigned integer and within "
-            + "the length of current list.";
+    public static final String MESSAGE_INVALID_INDEX = "index should not be zero or a negative integer or outside the "
+            + "length of the current list.";
 
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Date is not a valid calendar date "
             + "or is not in the following accepted formats:\ndd/MM/yyyy or "
