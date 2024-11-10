@@ -8,7 +8,7 @@ title: User Guide
 The **AgentAssist User Guide** is here to help you unlock the full potential of **AgentAssist** and take your credit card sales to the next level. This guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
 
 In this guide, you'll learn how to:
-* **Set Up AgentAssist**
+* **Set Up AgentAssist** to be used to manage clients.
 * **Navigate and Use Key Features** like contact management, filtering, and more.
 * **Optimize Your Workflow** with shortcuts, data export/import, and automatic saving.
 
@@ -145,9 +145,54 @@ Find or create a folder on your computer where you want to store the AgentAssist
 
 ## 3.2 Graphical User Interface (GUI) Layout
 
-<img src="images/UiSplitView.png" alt="UISplitView">
+<img src="images/UiSplitViewWithChart.png" alt="UISplitViewWithChart">
 
+The AgentAssist GUI is designed with intuitive sections and color-coded elements to optimize usability for credit card sales agents. Here’s an overview of the layout:
+
+### Main Components of the AgentAssist GUI:
+
+<img src="images/UiSplitViewWithChartAnnotated.png" alt="UISplitViewWithChartAnnotated">
+
+#### <span style="color: #FF5C5C; font-size: 18px;">⬤</span> Command Box
+The command box provides a CLI-style input field where agents can type commands to execute various actions, such as searching for a client or updating details. This dual CLI-GUI functionality combines speed with clarity, allowing for command-line efficiency within a graphical environment.
+
+#### <span style="color: #FFC0CB; font-size: 18px;">⬤</span> Result Box
+Displays responses to commands, such as client details, action confirmations, or error messages with helpful hints. This immediate feedback helps agents quickly verify each action's outcome and maintain accuracy.
+
+#### <span style="color: #22C7FF; font-size: 18px;">⬤</span> Clients’ Contacts List
+A scrollable list showcasing client contact details in a concise format, with symbols in front of each field to identify it clearly. Quick labels display each client’s **credit card tier** and **case status** for agents to track the urgency of each case. This allows agents to view all key information at a glance and easily identify high-priority clients.
+
+#### <span style="color: #016D90; font-size: 18px;">⬤</span> Client Detail Panel
+When a client is selected from the contacts list with the `view` command, this panel presents a detailed, scrollable view of their information in a split view format. This layout allows agents to see full details, especially when some information might be truncated in the contacts list. Important details, such as contact information, job, and income, are prominently displayed to help agents make informed, prioritized decisions.
+
+#### <span style="color: #B251CF; font-size: 18px;">⬤</span> Status Chart
+A pie chart provides a visual summary of client case statuses (e.g., **Urgent**, **Non-Urgent**, **NA**), giving agents a quick overview of their client workload distribution and priorities.
 To learn more about how to use commands in AgentAssist, proceed to the next section.
+
+### Tier Color Code for AgentAssist GUI:
+The tier is label with color-coded fill located next to a client's name on the list, or under a client's name 
+on Client Detail Panel, aiming to help represent the credit card tier. This will help agents quickly assess the importance of each client and serve them with right credit card promotion.
+
+#### <span style="color: #B59410; font-size: 18px;">⬤</span> Gold Tier
+
+#### <span style="color: #C0C0C0; font-size: 18px;">⬤</span> Silver Tier
+
+#### <span style="color: #804a00; font-size: 18px;">⬤</span> Bronze Tier
+
+#### <span style="color: #5C0002; font-size: 18px;">⬤</span> Reject Tier
+
+Clients that are not being assigned to any tier (**NA** tier) will not display a tier label on the UI.
+
+
+### Status Color Code of AgentAssist GUI:
+The status is label with color-coded fill located next to a client's name on the list, or under a client's name
+on Client Detail Panel, aiming to represent case status: the urgency of the client's case, and help agents prioritize their actions.
+
+#### <span style="color: #B22222; font-size: 18px;">⬤</span> Urgent Status
+#### <span style="color: #C46210; font-size: 18px;">⬤</span> Non-Urgent Status
+
+Clients that are assigned to **NA** status (don't need to follow up) will not display a status label on the UI. However, on the pie chart that visualizes the client case statuses, these clients are represented with a green color (<span style="color: #009E60; font-size: 18px;">⬤</span>) to indicate that their cases are marked as done.
+
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -171,7 +216,6 @@ Let's take a look at the structure in more detail:
 | **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> This guide may represent it as a placeholder using `<ARGUMENT>`. | `John Doe`, `john@example.com` |
 
 Here's an example that uses multiple flags and arguments:
-Here's an example that uses multiple flags and arguments:
 ```
 add n/ John Doe e/ john@example.com
 ```
@@ -185,19 +229,19 @@ A command is the action that AgentAssist will perform, such as adding, deleting,
 
 Here is a reference table that briefly summarizes available commands:
 
-| **Command** | **Description**                                        |
-|-------------|--------------------------------------------------------|
-| `add`       | Adds a new client to the system.                       |
-| `edit`      | Modifies details of an existing client.                |
-| `delete`    | Removes a client from the system.                      |
-| `list`      | Displays all clients currently stored in the system.   |
-| `filter`    | Filters clients based on specified criteria            |
-| `view`      | Opens a split view showing detailed client information |
-| `close`     | Closes the split view of client details                |
-| `clear`     | Deletes all clients from the system.                   |
-| `undo`      | Undoes latest command.                                 |
-| `help`      | Displays a list of available commands and their usage. |
-| `exit`      | Exits the AgentAssist application.                     |
+| **Command** | **Description**                                         |
+|-------------|---------------------------------------------------------|
+| `add`       | Adds a new client to the system.                        |
+| `edit`      | Modifies details of an existing client.                 |
+| `delete`    | Removes a client from the system.                       |
+| `list`      | Displays all clients currently stored in the system.    |
+| `filter`    | Filters clients based on specified criteria.            |
+| `view`      | Opens a split view showing detailed client information. |
+| `close`     | Closes the split view of client details.                |
+| `clear`     | Deletes all clients from the system.                    |
+| `undo`      | Undoes latest command.                                  |
+| `help`      | Displays a list of available commands and their usage.  |
+| `exit`      | Exits the AgentAssist application.                      |
 
 Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
@@ -239,7 +283,7 @@ Refer to the table below for more details.
 | **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
 |----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             |
-| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                                               |
+| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 6, 8 or 9                                            |
 | `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                                                  |
 | `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   |
@@ -413,7 +457,7 @@ edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/
 ```
 - Mandatory Field: `<INDEX>`, at least one of the Optional Fields
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
-- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command.
+- **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command. Additional, if multiple remarks are added using the `ra/` prefix, only the first 3 remarks will be shown in the list view and the rest can only be seen after using the [view command](#541-viewing-a-clients-details).
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments).
 
@@ -457,30 +501,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
           Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
           Example Usage: 'edit 1 p/91234567 e/johndoe@example.com'
           ```
-  - Error caused by invalid values for some fields
-      - Message:
-        ```
-        Invalid command format!
-        <INDIVIDUAL FIELD'S ERROR MESSAGES>...
-        ```
-
-- **On Error**
-    - Error caused by invalid index
-        - Message:
-          ```
-          Invalid command format!
-          edit: Edits the details of the client identified by the index number used in the displayed client list. Existing values will be overwritten by the input values. Any fields unspecified will not be modified.
-          Required Parameters: INDEX (must be a positive integer)
-          Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
-          Example Usage: 'edit 1 p/91234567 e/johndoe@example.com'
-          ```
     - Error caused by invalid values for some fields
         - Message:
           ```
           Invalid command format!
           <INDIVIDUAL FIELD'S ERROR MESSAGES>...
           ```
-
 
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
@@ -585,7 +611,7 @@ list
 
 **Command Format:**
 ```
-filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>
+filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>]
 ```
 - **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left empty.
 - **Special Syntax for Income (i/)**:
@@ -593,7 +619,7 @@ filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
     - See [Filtering By Income](#filter-by-income) for more information.
 
-For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
+For detailed explanations for the matching criteria of each flag and the acceptable arguments, scroll down to **Matching Criteria & Filter Behavior** and refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
 **Examples:**
 - Filter clients by name:
@@ -614,18 +640,26 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
 **Matching Criteria & Filter Behavior:**
 
-- **Substring Matching: (For most fields)**
-  Searches for most fields use **substring matching**, meaning the search term must match part of the field in the same order as it appears in the client record.
-    - **Example:**
-      If a client’s name is `Gordon Moore`, the search term `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
+- **Name/Address/Job/Remarks (Substring Matching)**
+  - Searches in these fields use **substring matching**, where the search term must match a portion of the field in the exact order it appears in the client record.
+  - **Example:**
+    If a client’s name is `Gordon Moore`, search terms like `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
 
-- **Filtering by Tier (Prefix Matching):**
-  Tier searches use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
+- **Email Address (Substring Matching)**:
+  - To filter by email address, enter a valid email in the required format (refer to [4.4 Arguments](#44-arguments)). This will return substring matches for the email provided. 
+  - **Example:** Entering `emily@gmail` or `emily@gmail.co` will match `emily@gmail.com`, as partial matches within a valid email format are allowed. However, inputs like `emily` will be rejected, as they do not meet the full email format requirement.
+
+- **Phone Number (Exact Match)**: 
+  - To filter by phone number, enter a complete and valid phone number (refer to [4.4 Arguments](#44-arguments)). This filter requires an exact match with the specified phone number.
+  - **Example:** If a client’s phone number is `92601234`, only the exact format `92601234` will match. Variations such as `82601234` will not match, and inputs that are not valid phone numbers, like `9260`, `9260 1234`, or `12601234`, will not be accepted.
+
+- **Tier (Prefix Matching):**
+    - Tier filtering use **prefix matching**, meaning the search term must match the beginning of the tier exactly.
     - **Example:**
       If a client has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
-- **Filtering by Income (Using Comparison Operators):** <a id="filter-by-income"></a>
-  Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find clients whose income meets certain criteria.
+- **Income (Using Comparison Operators):** <a id="filter-by-income"></a>
+    - Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find clients whose income meets certain criteria.
 
     - **Equal to (`=`):**
       Use `=` to find clients with a specific income.
@@ -649,13 +683,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Error:**
     - If no valid flags are used:
       ```
+      Invalid command format!
       filter: Searches for all clients whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
-
       Parameters: <FLAG>/ <SEARCH TERM>
-
       Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
-
-      Example: filter n/ Alice p/ 91112222 i/ >2000
+      Example: filter n/ Alice p/ 9111222
+      This will find all clients whose names contain 'Alice'and whose phone number is '91112222'.
       ```
     - If a search term fails to meet the requirements (e.g., invalid phone number length), the system will display usage hints specific to all the invalid search terms.
 
@@ -723,7 +756,11 @@ close
 undo
 ```
 - Reverts all changes of the previous command.
-- **Note:** This command can only be used after a permanent change has been made (e.g. after using the edit command).
+- **Note:** This command is only used on the latest command which made a permanent change to the list of clients. If there have been no previous permanent changes, this command will not work at all. The commands that `undo` works on are:
+  - add
+  - edit
+  - delete
+  - clear
 - **Note:** You can only use `undo` once. Using `undo` 2 times in a row has the same effect as not using the `undo` command at all.
 
 ### 5.4.4 Help Menu
@@ -769,7 +806,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 > ⚠️ **Danger:**
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
 >
-> Incorrect data modifications may also cause unexpected behavior. **Only modify the data file if you're confident in doing so correctly.**
+> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.**
 
 [↑ Return to Table of Contents](#table-of-contents)
 
