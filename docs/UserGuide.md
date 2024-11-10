@@ -23,7 +23,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your address book.
+3. Copy the file to the folder you want to use as the _home folder_ for UGTeach.
 
 4. Open a command terminal, `cd` into the folder that you put the jar file in.
 
@@ -37,7 +37,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`: Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`: Adds a contact named `John Doe` to the UGTeach data file.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -114,7 +114,7 @@ Shows a message explaining how to access the help page.
 
 ### Listing all students: `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in UGTeach.
 
 **Format:** `list`
 
@@ -125,7 +125,7 @@ Shows a list of all students in the address book.
 
 ### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to UGTeach.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
@@ -168,7 +168,7 @@ Adds a student to the address book.
 
 ### Editing a student: `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in UGTeach.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
@@ -201,7 +201,7 @@ for convenient ways to update the paid amount and owed amount.
 
 ### Deleting a student : `delete`
 
-Deletes the specified student from the address book.
+Deletes the specified student from UGTeach.
 
 **Format:** `delete INDEX`
 
@@ -268,7 +268,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson. 
 **Format:** `pay INDEX hr/HOURS_PAID`
 
 **Example:**
-* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
+* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in UGTeach.
   
 **Output:**
 ![payResult.png](images/payResult.png)
