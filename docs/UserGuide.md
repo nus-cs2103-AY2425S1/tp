@@ -284,7 +284,7 @@ Format: `view company INDEX`
 * Views all contacts and jobs associated with a company at the specified `INDEX`.
 * The index refers to the index number shown in the displayed company list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Using this command **requires all lists to be fully shown beforehand**.
+* Note: It is not necessary to display all contacts and jobs before using this command; the command will work regardless of whether lists are fully shown.
 
 Examples:
 * If a job is from a company at index 1, `view company 1` will show the job
