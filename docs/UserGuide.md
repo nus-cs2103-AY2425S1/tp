@@ -123,10 +123,13 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
 
 * The `INDEX` refers to the index of the person currently displayed in the address book panel (as we are adding the transaction related to the person).
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` symbol should be added before the number to indicate negative amount, indicating the transaction is one that the user owes the chosen person at the index.
+  * Amount with an absolute value less than 1 dollar should have a leading 0.
   * Positive Amount Transaction indicates someone owes the user an amount.<br>
     e.g. `addTxn 1 amt/12.30 desc/John owes me for dinner` indicates that John owes the user S$12.30.
   * Negative Amount Transaction indicates the user owes someone an amount.<br>
     e.g. `addTxn 1 amt/-24.30 desc/I owe John for dinner` indicates that the user owes John S$24.30.
+  * Amount with value equivalent of 0 is not allowed and will be considered as invalid input as transaction with 0 
+    amount does not make sense and would be considered as spam.
 * The `DESCRIPTION` is case-sensitive and accepts a string of words with a limit of 120 characters.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
   * The date is optional. If the date is not provided, the current date will be used.
@@ -212,6 +215,7 @@ Format: `editTxn INDEX [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [cat/CATEGORY
 * When editing categories, the existing categories of the transaction will be removed i.e adding of categories is not
   cumulative.
 * You can remove all the person’s categories by typing `cat/` without specifying any categories after it.
+* Other parameter specification, please refer to `addTxn` parameter specification section.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Status can be edited via `markDone` or `markUndone` command.
@@ -260,6 +264,9 @@ Format: `filterTxn [INDEX] [amt/AMOUNT] [desc/DESCRIPTION] [date/DATE] [status/S
 * The `INDEX` refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` symbol should be added before the number to indicate negative amount, indicating the transaction is one that the user owes the chosen person at the index. Results will display transactions with the exact amount if it exists.
+  * Amount with an absolute value less than 1 dollar should have a leading 0.
+  * Amount with value equivalent of 0 is not allowed and will be considered as invalid input as transaction with 0
+    amount does not make sense and would be considered as spam.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
 * The `DESCRIPTION` accepts a string of words.
   * The description filter is case-insensitive and allows partial matching. e.g `hans` will match `Hansolo Danello`
