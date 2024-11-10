@@ -419,7 +419,7 @@ Use case ends.
 **Extensions**
 
 * 3a. The claim has already been closed for the client.
-    * 3a1. System shows an error message.
+    * 3a1. System shows that claim is closed with no error.
 
     Use case ends.
 ---
