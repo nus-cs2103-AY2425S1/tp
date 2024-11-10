@@ -172,7 +172,7 @@ public class UpdateCommandTest {
                 .withName(VALID_NAME_BOB).build();
         UpdateCommand updateCommand = new UpdateCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(updateCommand, model, Messages.MESSAGE_INDEX_OUT_OF_RANGE);
     }
 
     /**
@@ -189,7 +189,7 @@ public class UpdateCommandTest {
         UpdateCommand updateCommand = new UpdateCommand(outOfBoundIndex,
                 new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(updateCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(updateCommand, model, Messages.MESSAGE_INDEX_OUT_OF_RANGE);
     }
 
     @Test

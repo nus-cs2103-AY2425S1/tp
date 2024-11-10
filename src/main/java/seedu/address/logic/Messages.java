@@ -21,6 +21,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_APPOINTMENT_NOT_FOUND = "Person does not have this appointment";
+    public static final String MESSAGE_INDEX_OUT_OF_RANGE = "Index should be a non-zero unsigned integer and within "
+            + "the length of current list.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

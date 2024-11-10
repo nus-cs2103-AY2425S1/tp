@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_NRIC;
 import static seedu.address.logic.commands.AddCommand.MESSAGE_APPOINMENT_OUTSIDE_OPERATING_HOURS;
 import static seedu.address.logic.commands.AddCommand.MESSAGE_APPOINTMENT_TAKEN;
 import static seedu.address.logic.commands.AddCommand.MESSAGE_DUPLICATE_PERSON;
@@ -135,7 +136,7 @@ public class UpdateCommand extends Command {
                     .toList();
 
             if (matchingPersons.isEmpty()) {
-                throw new CommandException(MESSAGE_NOT_EDITED);
+                throw new CommandException(MESSAGE_INVALID_PERSON_NRIC);
             } else if (matchingPersons.size() == 1) {
                 personToEdit = matchingPersons.get(0);
             } else {
@@ -145,7 +146,7 @@ public class UpdateCommand extends Command {
         } else { // for index
             assert index != null;
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INDEX_OUT_OF_RANGE);
             }
 
             personToEdit = lastShownList.get(index.getZeroBased());
