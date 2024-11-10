@@ -245,6 +245,7 @@ Additional Details:
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. 
 * You cannot remove a person's tag using the edit feature, as the tag is a required field.
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
    <br>
