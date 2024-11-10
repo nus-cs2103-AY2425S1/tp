@@ -514,7 +514,7 @@ Precondition: Student exists in the system.
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC07 - List all lessons**  
+**Use Case: UC08 - List all lessons**
 **MSS:**
 
 1. Tutor keys in required fields to list all lessons.
