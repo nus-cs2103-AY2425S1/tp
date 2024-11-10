@@ -124,6 +124,25 @@ The table below provides a brief explanation of each parameter encountered in th
     - `  Wedding Photographer ` is formatted to `Wedding Photographer`
     - `Adam &    Harry` is formatted to `Adam & Harry` 
 
+
+**Duplication Detection in KnottyPlanners:**
+
+This section details what constitutes as a duplicate in KnottyPlanners.
+KnottyPlanners uses names to distiniguish contacts from one another. However, due to autoformatting, duplicates may not be exact matches and therefore, may not be immediately obvious to you, the user.
+Each parameter is followed by examples that explains if the input is considered a duplicate in KnottyPlanners.
+
+`NAME`
+* `Jeremy Ng` is equivalent to `JEREMY NG`, `Jeremy    Ng`, `jeremy ng` and `    jeremy ng    `.
+* `Jeremy Ng` is NOT the same as `Jeremy Lin`.
+
+`JOB`
+* `Head Chef` is equivalent to `HEAD CHEF`, `Head   Chef`, `head chef` and `    head chef    `.
+* `Head Chef` is NOT the same as `Head Waiter`.
+
+`TAG` and `WEDDING NAME`
+* `John Stones & Mary Jane` is equivalent to `JOHN STONES & MARY JANE`, `John   Stones &   Mary Jane`, `john stones & mary jane` and `     John Stones & Mary Jane      `.
+* `John Stones & Mary Jane` is NOT the same as `Mary Jane & John Stones`.
+
 </box>
 
 
