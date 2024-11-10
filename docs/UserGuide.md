@@ -82,7 +82,7 @@ This combination of efficiency and clarity ensures that you can manage your wedd
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/guest`, `t/guest t/photographer` etc.
 
-* Commands in WedLinker uses prefix to specify the parameters, the prefixes are stated as such:
+* Commands in WedLinker uses prefixes to specify the parameters. The prefixes are stated as such:
   * n/ Name
   * a/ Address
   * p/ Phone Number
@@ -90,12 +90,17 @@ This combination of efficiency and clarity ensures that you can manage your wedd
   * t/ Tag
   * w/ Wedding
   * tk/ Task
+  * d/ Date
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  * e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Similarly, extraneous prefixes (e.g. n/ or tk/) for commands that do not take in those prefixes will be processed as part of other inputs.<br>
+  * e.g. when [adding a person](#adding-a-person-add), you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+  `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -197,6 +202,20 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDD
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
 * `add n/Betsy Crowe e/betsycrowe@example.com a/ABC Photo Studio p/1234567 t/Photographer`
+
+<box type="tip" seamless>
+
+**Tip:** Adding a person with tags or weddings that do not exist in Wedlinker will create all the tags and weddings!
+</box>
+
+
+* Similarly, extraneous prefixes (e.g. n/ or tk/) for commands that do not take in those prefixes will be processed as part of other inputs.<br>
+    * e.g. when [adding a person](#adding-a-person-add), you can specify the prefixes `n/, p/, e/, a/, t/, and w/`. If the command specifies
+      `add n/Betsy Crowe d/2020-04-11 tk/Buy place settings`, it will be interpreted as adding a person with the name `Betsy Crowe d/2020-04-11 tk/Buy place settings`
+
+
+
+
 
 ### Editing a person : `edit`
 
