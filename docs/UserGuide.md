@@ -269,6 +269,10 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the currently displayed list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Before deleting a doctor or patient, ensure that there are no appointments associated with them. Deleting a doctor or patient will cause the app to throw an error, and the user will have to delete the appointments associated with the doctor or patient first.
+</div>
+
 **Examples:**
 * `list-patient` followed by `delete 2` deletes the 2nd patient in the address book.
 * `find-doctor Jane` followed by `delete 1` deletes the 1st doctor in the results of the `find-doctor` command.
