@@ -403,7 +403,7 @@ Format: `archive [DESCRIPTION]`
 
 **Examples**
 * `archive` Archives the current address book data to a timestamped data file.
-* `archive "before major update"`<br>Archives the current address book data to a timestamped data file with the description "before major update".
+* `archive before major update`<br>Archives the current address book data to a timestamped data file with the description "before major update".
 
 [↑ Back to top](#table-of-contents)
 
