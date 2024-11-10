@@ -50,36 +50,6 @@ public class EditCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_COMMAND_FORMAT);
 
     private EditCommandParser parser = new EditCommandParser();
-
-    /*
-    @Test
-    public void parse_missingParts_failure() {
-        // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
-
-        // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
-
-        // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
-    }
-
-    @Test
-    public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
-
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
-
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
-    }
-    */
-
     // Format {edit 1 <desc>} example of <desc>: " n/James&"
     @Test
     public void parse_invalidParameter_failure() {
@@ -117,7 +87,7 @@ public class EditCommandParserTest {
                 + VALID_TELEGRAM_HANDLE_AMY, ParserUtil.MESSAGE_INVALID_NAME_FIELD);
     }
 
-    // {edit Alex Yeoh n/Amy Bee ...}
+    // command entered: edit Alex Yeoh n/Amy Bee ...}
     // Parsing with name
     @Test
     public void parse_withNameToEdit_success() {
@@ -134,7 +104,7 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    // {edit Alex Yeoh n/Amy Bee ...}
+    // command entered: edit Alex Yeoh n/Amy Bee ...
     @Test
     public void parse_invalidNameToEdit_failure() {
         String userInput = DEFAULT_NAME + "&" + NAME_DESC_AMY;
