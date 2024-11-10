@@ -346,7 +346,8 @@ If your changes to the data file makes its format invalid, Clientell will discar
 For some cases, the app can autocorrect some mistakes:<br>
 * Extraneous key-value pairs (i.e irrelevant fields/info) are ignored<br>
 * Copies of relevant key-value pairs (e.g multiple names/companies) only admit the last copy<br>
-As a rule of thumb: if the edits you make could've been achieved by using the commands normally and legally, then the edits are valid. Most common mistakes include updating the file to include illegal values. Therefore, edit the data file only if you are confident that you can update it correctly.
+As a rule of thumb: if the edits you make could've been achieved by using the commands normally and legally, then the edits are valid. Most common mistakes include updating the file to include illegal values. Therefore, edit the data file only if you are confident that you can update it correctly.<br>
+Lastly, never update the JSON file while the app is running. As the data saves at the end of a session (e.g when you `exit`), it will override the JSON file (i.e you will lose all manual changes to the JSON)
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
