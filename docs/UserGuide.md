@@ -6,7 +6,13 @@
 
 # FindingbrUdders User Guide
 
-FindingbrUdders is a **desktop app for managing contacts and scheduling meetings, optimized for use via a Command Line Interface (CLI)**. The Graphical User Interface (GUI) displays contact details systematically, in a more human-readable format, while still allowing for fast typists to utilise the CLI and type out the desired commands.
+Has CS become too stressful? Tired of connecting through Talent Connect, LinkedIn, or even NUSConfessIT? 
+Want to form a more personal relationship full of genuine human touch? Let's make finding benefactors, dependable colleagues, and insightful mentors easier for you!
+
+FindingbrUdders is a **desktop app designed exclusively for School of Computing (SoC) students** to manage contacts and schedule meetings, keeping track of the countless friends
+you can make along the way during your university journey. As anUdder (a person in the contact book or the user), you can add new people you meet (other Udders) to the app via a simple to use
+Command Line Interface (CLI). Furthermore, you can edit, update and keep track of meetings with others in an organised fashion. 
+You will _**never forget**_ the meaningful connections you make or the meetings you have after using findingbrUdders!
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -52,11 +58,11 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
 5. Right-click on the `.jar` file and select `Open with` and then `Java(TM) Platform SE binary`. 
 
-   Alternatively, you can also run the `.jar` file by opening a command terminal, typing `cd` into the folder you put the jar file in, and using the `java -jar findingbrudders.jar` command to run the application.
+   Alternatively, you can also run the `.jar` file by opening a command terminal, typing `cd` into the folder you put the jar file in, and using the`java -jar findingbrudders.jar` command to run the application.
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data to help you get started.<br>
 
-![Ui](images/Ui4.png) 
+![Ui](images/Ui4.png)
 
 1. Type the command in the command box at the bottom and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -73,6 +79,20 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
 2. Refer to the [Features](#features) below for details of each command.
 
+<box type="warning">
+
+**IMPORTANT:** Take note that you should **not** edit the _JSON file_ in your directory directly while the app is running or before running.
+</box>
+
+<box type="tip">
+
+### Before you start...
+
+* **anUdder** refers to anyone using the findingbrUdders app and all the contacts in the app
+* **brUdder** refers to anyone who the user thinks is a good friend and mentee users as well
+* **mUdder** refers to anyone who is capable of teaching other Udders according to the user
+</box>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -81,6 +101,10 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 <box type="info">
 
 **Notes about the command format:**<br>
+
+* For all commands involving tags, take note that tags can only be **one word** containing alphanumeric characters (i.e **no spaces**).
+
+* For all commands, the command word **should not** be _capitalised_.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -100,6 +124,8 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+
+
 ### Viewing help : `help` 💡
 
 Shows a message via a popup window explaining how to access the help page.
@@ -116,9 +142,22 @@ Adds an Udder to the address book.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE m/MAJOR [t/TAG]…​`
 
+**Constraints:**
+
+    1. Names should only contain alphanumeric characters and spaces, and it should not be blank.
+    2. Phone numbers should only contain numbers, and it should be at least 3 digits long.
+    3. Roles should only be 'brUdder' or 'mUdder' and it can't be blank.
+    4. Major can only be one of the following: ‘cs’, ‘bza’, ‘ceg’, ‘isys’, ‘isec’.
+    5. Emails should be of the format local-part@domain and the local-part should only contain alphanumeric characters
+    6. Addresses can take any values, and it should not be blank
+
+* When you type in an `add` command after a `find` command, the displayed list will **reset** from the filtered results.
+* A duplicate contact would mean that the name of the contact is different but the rest of the fields can be the same.
+* The name of the contact is _case-sensitive_ so `John Doe` and `JoHn DoE` are treated as 2 different contacts; Be careful in inputting names!
+
 <box type="tip">
 
-**Tip:** An Udder can have any number of tags (including 0)
+**Tip:** An Udder can have any number of tags (including 0) but if there are duplicate tags (i.e same tag), they will be compressed into one tag.
 </box>
 
 **Examples:**
@@ -128,7 +167,7 @@ Adds an Udder to the address book.
 
 ### Listing all Udders : `list` 📜
 
-Shows a list of all Udders in the address book.
+Shows a list of all Udders in the address book. 
 
 **Format:** `list`
 
@@ -142,14 +181,16 @@ Shows a list of all meetings with all Udders, arranged in chronological order.
 
 Edits an existing Udder in the address book.
 
-**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]…​`
 
+* Although all parameters are given as optional, **_at least one must be present_** for the command to be **valid**!
 * Edits the Udder at the specified `INDEX`. The index refers to the index number shown in the displayed Udder list.
 * When editing tags, the existing tags of the Udder will be removed i.e adding of tags is not cumulative.
-* You can remove all the Udder’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the Udder’s tags by typing `t/` without specifying any tags after it.
+* When you type in an `edit` command after a `find` command, the displayed list will **reset** from the filtered results.
 
 <box type="warning">
+
 **IMPORTANT:** This command will follow the indexing shown on the Udders list.
 </box>
 
@@ -159,29 +200,37 @@ Edits an existing Udder in the address book.
 
 ### Scheduling a meeting with an Udder : `schedule` 🗓️
 
-Schedules a meeting with an Udder from the specified start time to end time, at the location.
+Schedules a meeting with an Udder from the specified start time to end time, at the location as shown in the format below
 
 **Format:** `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
 
 * Automatically detects any clash in meetings with other Udders.
+* Whitespace **within** a parameter is not allowed (i.e st/21-10-2024 __ 10:00) is not allowed as it will be treated as the invalid format.
+* Dates **over 29th February** in the month of February will lead to unexpected behaviour in the app!
+* Furthermore, dates should be **_valid dates_** and in inputting invalid ones, the app will show unexpected behaviour!
 
 <box type="warning">
+
 **IMPORTANT:** This command will follow the indexing shown on the Udders list.
 </box>
 
 **Examples:**
-*  `schedule 10 st/25-12-2002 00:00 et/25-12-2002 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 00:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
+*  `schedule 10 st/25-12-2002 00:00 et/25-12-2002 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 12:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
 *  `schedule 1 st/09-10-2024 09:00 et/09-10-2024 10:00 l/The Terrace` schedules a meeting with the 1st Udder starting from `9th October 2024, 09:00 a.m.` and ending at `9th October 2024, 10:00 a.m.`, at `The Terrace`.
 
 ### Edit meeting with an Udder: `editm` ✏️
 
 Edits the specified meeting with an Udder from the meetings list.
 
-**Format:** `editm INDEX [n/] [st/] [et/] [l/]`
+**Format:** `editm INDEX [n/NAME] [st/DD-MM-YY] [et/DD-MM-YY] [l/LOCATION]`
 
+* Use the `list` command before editing any meeting!
 * Edits a meeting with anUdder at the specified meeting `INDEX`.
 * The index refers to the index number shown in the displayed meetings list.
 * At least one field of the meeting must be changed.
+* Take note that the `NAME` field is case-sensitive!
+* Dates **over 29th February** in the month of February will lead to unexpected behaviour in the app!
+* Furthermore, dates should be **_valid dates_** and in inputting invalid ones, the app will show unexpected behaviour!
 
 **Examples:**
 *  `editm 1 st/09-10-2024 10:00` Edits the start time of the 1st meeting to be `09-10-2024 10:00`.
@@ -191,12 +240,14 @@ Edits the specified meeting with an Udder from the meetings list.
 
 Finds Udders by specified keywords for each field.
 
-**Format:** `find [n/] [p/] [t/] [a/] [e/] [m/] [r/]`
+**Format:** `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [t/TAG_KEYWORD] [a/ADDRESS_KEYWORD] [e/EMAIL_KEYWORD] [m/MAJOR_KEYWORD] [r/ROLE_KEYWORD]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
+* For finding Udders based on **EMAIL_KEYWORD**, the keyword provided has to be a valid email (i.e 123example@gmail.com) using exact string matching.
 
 <box type="warning">
+
 **IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
 </box>
 
@@ -233,7 +284,7 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd Udder in the address book.
-* `find Bernice` followed by `delete 1` deletes the 1st Udder in the results of the `find` command.
+* `find n/Bernice` followed by `delete 1` deletes the 1st Udder in the results of the `find` command.
 
 ### Clearing all Udders : `clear` 🧹
 
@@ -253,16 +304,13 @@ Udder data are saved in the hard disk automatically after any command that chang
 
 ### Editing the data file
 
-Udder data are saved automatically as a JSON file `[JAR file location]/data/findingbrudders.json`. Advanced users are welcome to update data directly by editing that data file.
-
 <box type="warning">
 
-**Caution:**
-If your changes to the data file makes its format invalid, FindingbrUdders will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it. You can do this by copying the `findingbrudders.json` file to a different folder.<br>
-Furthermore, certain edits can cause the FindingbrUdders to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Udder data are saved automatically as a JSON file `[JAR file location]/data/findingbrudders.json`. This JSON file is to not be edited directly by you and serves as a database for the contact book.
+Changing this file directly can lead to undesirable behaviour of the app.
 </box>
 
-### Finding Udders online via Cloud `[coming in v2.0]` ☁️
+### More exciting features coming in `[v2.0]`
 
 _Details coming soon ..._
 
@@ -295,7 +343,7 @@ Solution: manually restore the minimized Help Window.
 
 | Action              | Format, Examples                                                                                                                                                                        |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE m/MAJOR [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/is r/brUdder t/friend` |
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE m/MAJOR [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/cs r/brUdder t/friend` |
 | **Clear**           | `clear`                                                                                                                                                                                 |
 | **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
 | **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
