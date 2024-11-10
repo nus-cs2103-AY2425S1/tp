@@ -909,3 +909,73 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `exit`<br>
        Expected: The app closes.
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Enhancement 1**: Make deletion of suppliers with pending deliveries throw a warning and error message.
+   * **Description**: The current implementation allows users to delete suppliers with pending deliveries without any warning. 
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to delete a supplier with pending deliveries.
+     * e.g. "Warning: Unable to delete supplier. There are pending deliveries associated with this supplier."
+
+
+2. **Enhancement 2**: Make marking an active supplier with pending deliveries inactive throw a warning and error message.
+   * **Description**: The current implementation allows users to mark active suppliers with pending deliveries as inactive without any warning.
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to mark an active supplier with pending deliveries as inactive.
+     * e.g. "Warning: Unable to mark supplier as inactive. There are pending deliveries associated with this supplier."
+     
+
+3. **Enhancement 3**: Allow users to create their own units for quantity of products.
+   * **Description**: The current implementation only allows for a fixed set of units for quantity of products (e.g. kg, g, l, ml). 
+   * **Tasks**:
+     * We plan to allow users to define their own units for quantity of products.
+     * e.g. "add -d on/18-01-2023 15:00 s/1 pro/bread q/500 customUnit c/5.50"
+     
+
+4. **Enhancement 4**: Make adding a delivery of a product that is not supplied by the supplier throw a warning and error message.
+   * **Description**: The current implementation allows users to add a delivery of a product that is not supplied by the supplier without any warning.
+   * **Tasks**:
+     * We plan to add a warning message when a user tries to add a delivery of a product that is not supplied by the supplier.
+     * e.g. "Warning: Unable to add delivery. The product is not supplied by the selected supplier."
+     
+
+5. **Enhancement 5**: Make adding supplier tags check for duplicates case-insensitively and throw a warning message.
+   * **Description**: The current implementation allows users to add duplicate tags with different case (e.g. "friends" and "Friends").
+   * **Tasks**:
+     * We plan to check for duplicate tags case-insensitively and throw a warning message.
+     * e.g. "Warning: Duplicate tag 'friends' already exists. Please use a different tag."
+     
+
+6. **Enhancement 6**: Make mark supplier command less sensitive to spacing for consistency.
+   * **Description**: The current implementation is not sensitive to spacing in other commands but is sensitive to spacing in the mark supplier command.
+   * e.g. "mark -s 1 active" is allowed and "mark -s1 active" is not allowed. 
+   * **Tasks**:
+     * We plan to make the mark supplier command less sensitive to spacing for consistency.
+     * e.g. "mark -s 1 active" and "mark -s1 active" should have the same effect.
+
+
+7. **Enhancement 7**: Make upcoming command throw an error when trying to find deliveries with end date earlier than start date.
+   * **Description**: The current implementation allows users to find deliveries with end date earlier than start date without any warning.
+   * **Tasks**:
+     * We plan to add an error message when a user tries to find deliveries with end date earlier than start date.
+     * e.g. "Error: End date should be later than start date."
+
+
+8. **Enhancement 8**: Allow for adding a supplier name with special characters.
+   * **Description**: The current implementation only allows for alphanumeric characters in the supplier name.
+   * **Tasks**:
+     * We plan to allow for adding a supplier name with special characters.
+     * e.g. "add -s n/John Doe & Sons p/98765432
+
+
+9. **Enhancement 9**: Better error message for invalid date or month in commands that require date input.
+   * **Description**: The current implementation does not provide a clear error message when an invalid date of a valid format is entered.
+   * e.g. "add -d on/32-01-2023 15:00 s/1 pro/bread q/500 g c/5.50"
+   * Error Message: DELIVERY_DATE_TIME should be in the format dd-MM-yyyy HH:mm and must not be blank.
+   * **Tasks**:
+     * We plan to provide a better error message for invalid date of a valid format in commands that require date input.
+     * e.g. "Error: Invalid date. Please enter a valid date in the format dd-MM-yyyy HH:mm."
+

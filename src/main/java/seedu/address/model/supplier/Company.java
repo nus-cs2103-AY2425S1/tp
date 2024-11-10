@@ -49,7 +49,7 @@ public class Company {
 
     @Override
     public String toString() {
-        return value;
+        return displayValue;
     }
 
     @Override
