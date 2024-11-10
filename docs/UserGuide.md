@@ -78,14 +78,11 @@ Adds a person to Cher.
 Format: `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 * Name can only contain alphabets and spaces. 
-
 * Role can either be ```student``` or ```parent```, case-insensitive.
-
 * Sex can either be ```f``` or ```m```, case-insensitive.
-
 * Phone numbers can contain only numbers and should be exactly 8 digits long. 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
 A person can have any number of tags (including 0)
 </div>
 
@@ -128,23 +125,23 @@ Format: `find [INDEX] [n/KEYWORDS] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
 * If no matches to user input are found, an empty list is returned.
 * Attribute-Specific Requirements: Each attribute has specific search behaviors (see details below).
 
-##### Index (`INDEX`)
+#### Index (`INDEX`)
 * Finds the person at the specified `INDEX` in the currently displayed list.
-* Index must be a positive integer (e.g., `1`, `2`, `3`, …).
+* Index **must be a positive integer** (e.g., `1`, `2`, `3`, …).
 
 Examples
 * `list` followed by `find 2` shows the 2nd person in the displayed list.
 
-##### Name (`n/KEYWORDS`)
+#### Name (`n/KEYWORDS`)
 * The order and case of keywords does not matter. For example, `find n/Hans Bo` will match both `Hans Gruber` and `Bo hans`.
 * You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
 
 Examples
-* `find n/John` → returns `John Doe`, `Johnny Appleseed`
-* `find n/alex david` → returns `Alex Yeoh`, `David Alex`
-* `find n/jo ap` → returns `John Appleseed`, `Appleseed Johnny`
+* `find n/John` returns `John Doe`, `Johnny Appleseed`
+* `find n/alex david` returns `Alex Yeoh`, `David Alex`
+* `find n/jo ap` returns `John Appleseed`, `Appleseed Johnny`
 
-###### Tags (`t/TAG`)
+#### Tags (`t/TAG`)
 * Case sensitive search
 * Only persons with tags that match all the exact tag names provided will be returned.
 
@@ -152,13 +149,13 @@ Examples
 * `find t/friend t/colleague` returns persons tagged as both `friend` and `colleague`
 
 
-##### Other attributes (`p/PHONE`, `e/EMAIL`, `a/ADDRESS`)
+#### Other attributes (`p/PHONE`, `e/EMAIL`, `a/ADDRESS`)
 * Exact match is required for the attributes, there is no partial match functionality 
 
 Examples
 * `find p/12345678` returns only the person with the exact phone number `12345678`
-* `find e/johndoe@example.com` → returns only persons with the email `johndoe@example.com`
-* `find a/123 Clementi Ave 3` → returns only persons with the exact address `123 Clementi Ave 3`
+* `find e/johndoe@example.com` returns only persons with the email `johndoe@example.com`
+* `find a/123 Clementi Ave 3` returns only persons with the exact address `123 Clementi Ave 3`
 
 
 ### Sorting persons by name: `sort`
@@ -185,55 +182,54 @@ Deletes the specified person from Cher.
 
 Format: `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
-### General Rules
-- **Case-insensitive**: The search for names and tags is not case-sensitive, so `john` will match `John`.
-- **Behavior with Duplicates**: For attributes where duplicates may exist (such as names, addresses, and tags), if multiple matches are found, a list of possible matches will be displayed, allowing the user to choose.
-- **Direct Deletion**: For unique attributes (like index and phone number), Cher will directly delete the matching person.
+#### General Rules
+* At least one of the optional fields must be provided.
+* For attributes where duplicates may exist (such as names, addresses, and tags), if multiple matches are found, a list of possible matches will be displayed, allowing the user to choose.
+* If no contacts matching the user input are found, an empty list is returned.
+* For unique attributes (like index and phone number), Cher will directly delete the matching person.
 
-### Attribute-Specific Deletion Rules
+#### Index (`INDEX`)
+* Deletes the person at the specified `INDEX` in the currently displayed list.
+* Index **must be a positive integer** (e.g., `1`, `2`, `3`, …).
+* The index is unique in the displayed list, so Cher directly deletes the person at that position.
 
-### Index (`INDEX`)
-- Deletes the person at the specified `INDEX` in the currently displayed list.
-- **Index** must be a positive integer (e.g., `1`, `2`, `3`, …).
-- **Unique Match**: The index is unique in the displayed list, so Cher directly deletes the person at that position.
-
-### Examples
+Examples
 - `list` followed by `delete 2` deletes the 2nd person in the displayed list.
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Partial Name (`n/KEYWORDS`)
-- Deletes the person with a name that **matches partially** with the specified `PARTIAL_NAME`.
-- **Case-insensitive** and **order-independent**: The order of keywords does not matter, and case is ignored (e.g., `delete John` matches both `john doe` and `Doe John`).
-- **Partial Word Matching from the Start of Each Name Part**: You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
-- **Multiple Matches**: If multiple persons match the partial name, Cher will display a list of matches for the user to choose from.
+#### Name (`n/KEYWORDS`)
+* The order and case of keywords does not matter. For example, `find n/Hans Bo` will match both `Hans Gruber` and `Bo hans`.
+* You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
+* If multiple persons match the partial name, Cher will display a list of matches for the user to choose from.
+  
+Examples
+* `list` followed by `delete n/John` deletes the person with the name `John`.
+* If multiple persons have the name `John`, a list of these persons is displayed.
 
-### Examples
-- `list` followed by `delete John` deletes the person with the name `John`.
-- If multiple persons have the name `John`, a list of these persons is displayed for selection.
+#### Phone Number (`p/PHONE`)
+* Deletes the person with the specified full phone number.
+* Exact match is required, partial phone numbers will not be matched.
+* Since phone numbers are unique, Cher will directly delete the person with that phone number.
 
-### Phone Number (`p/PHONE`)
-- Deletes the person with the specified **full** `PHONE_NUMBER`.
-- **Exact Match Required**: Partial phone numbers will not be matched.
-- **Unique Match**: Since phone numbers are unique, Cher will directly delete the person with that phone number.
+Examples
+* `list` followed by `delete p/98765432` deletes the person with the phone number `98765432` in the list.
 
-### Examples
-- `list` followed by `delete 98765432` deletes the person with the phone number `98765432` in the list.
+#### Address (`a/ADDRESS`)
+* Exact match is required, partial matches are not supported.
+* If multiple persons share the same address, Cher will display a list of matching persons for you to choose from.
 
-### Address (`a/ADDRESS`)
-- Deletes the person with the specified **full** `ADDRESS`.
-- **Exact Match Required**: The address must be complete; partial matches are not supported.
-- **Multiple Matches**: If multiple persons share the same address, Cher will display a list of matching persons for the user to choose from.
+Examples
+* `delete a/123 Clementi Ave 3` deletes the person with the exact address `123 Clementi Ave 3`.
+* If multiple persons have the address `123 Clementi Ave 3` are found , a list of these persons is displayed.
 
-### Examples
-- `delete a/123 Clementi Ave 3` deletes the person with the exact address `123 Clementi Ave 3`.
+#### Tags (`delete t/TAG…`)
+* Case sensitive search
+* Only the pereson with tags that match all the exact tag names provided will be deleted.
+* If multiple persons match the provided tags, Cher will display a list of matches for selection.
 
-### Tags (`delete t/TAG…`)
-- Deletes persons based on specified tags. Multiple tags can be used for broader filtering.
-- **Full Tag Name Required**: Only persons with tags that match the exact names provided will be considered.
-- **Multiple Matches**: If multiple persons match the provided tags, Cher will display a list of matches for selection.
-
-### Examples
-- `delete t/friend t/colleague` deletes persons tagged as both `friend` and `colleague` if they are unique; otherwise, Cher will show a list of matching persons.
+Examples
+* `delete t/friend t/colleague` deletes persons tagged as both `friend` and `colleague`
+* If ultiple persons have both the tags `friend` and `colleague`, Cher will show a list of these persons for you to choose from.
 
 ### Deleting in a batch : `batch-delete`
 
@@ -279,7 +275,7 @@ Resets the attendance count of all students in displayed list to 0.
 
 Format: `reset-att`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
 To reset the attendance count of all students to 0, enter `list` to get a list of all contacts, then enter `reset-att`!
 </div>
 
@@ -319,7 +315,7 @@ Where INDEX refers to the position of the person in the currently displayed list
 - INDEX is a positive integer that refers to the position of a person in the list (starting from 1).
 - You can specify multiple indexes separated by spaces to select more than one person at a time.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** To increase efficiency when performing actions on multiple persons,
+<div markdown="span" class="alert alert-primary">:bulb: Tip: To increase efficiency when performing actions on multiple persons,
 consider combining the `select` command with other commands like `delete`, `mark`, or `batch-mark` for group operations.
 For example: - `select 1 2 3` followed by `delete` will delete persons at indexes 1, 2, and 3.
 - `select 4 5 6` followed by `batch-mark` will mark attendance for all selected persons. </div>
@@ -357,7 +353,7 @@ Data are saved in the hard disk automatically after any command that changes the
 
 Data are saved automatically as a JSON file `[JAR file location]/data/cher.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: Caution:
 If your changes to the data file makes its format invalid, Cher will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
@@ -384,11 +380,11 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `delete 3`
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
+**Find** | `find [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `find James Jake`
 **Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
 **Mark** | `mark INDEX` <br> e.g., `mark 2`
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
