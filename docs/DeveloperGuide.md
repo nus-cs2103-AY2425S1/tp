@@ -288,7 +288,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                | I want to …​                                      | So that I can…​                                                                                            |
 |----------|------------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `* * *`  | first time shop owner  | learn how to use the application                  | I can familiarize myself with all the commands                                                             |
+| `* * *`  | first time shop owner  | learn how to use the application                  | I can better use the application to store and manage my supplier contacts and deliveries                   |
 | `* * *`  | shop owner             | view all my supplier contacts                     |                                                                                                            |
 | `* * *`  | shop owner             | add supplier contact                              |                                                                                                            |
 | `* * *`  | shop owner             | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
