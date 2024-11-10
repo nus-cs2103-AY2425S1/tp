@@ -203,8 +203,6 @@ The following sequence diagram shows how a mark operation goes through the `Logi
 
 </div>
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
 ![MarkAttendanceSequenceDiagram-Model](images/MarkAttendanceSequenceDiagram-Model.png)
 
 The `unmark` command does the opposite with the similar flow between `Logic` and `Model` component.

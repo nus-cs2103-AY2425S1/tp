@@ -96,7 +96,7 @@ Adds a person to the address book.
 
 #### Format
 ```
-add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
+add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/ or nf/ (NOT BOTH)]
 ```
 
 #### Alias
@@ -104,14 +104,18 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
 
 #### Parameters
 
-| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                      |
-|----------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                            |
-| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).   |
-| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).             |
-| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                    |
-| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                     |
-|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact. |
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                     |
+|----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                           |
+| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                  |
+| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                            |
+| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                   |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                                                                    |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                |
+|                | `nf/`  | No          | Represents the non-favouriting of a contact.<br> This keyword should be included to optionally indicate that the contact is not a favourite contact. Contacts are not favourite by default. |
+
+* Both `f/` and `nf/` cannot be present in the command at once. 
+* Both `f/` and `nf/` can be absent in the command, in which the contact is not favourited by default.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 A person is uniquely identified by his/her **telegram handle**
@@ -144,7 +148,7 @@ Edits an existing person in the address book.
 
 #### Format
 ```
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TELEGRAM] [r/ROLE]…​ [f/ or nf/ (NOT BOTH)]
 ```
 #### Alias
 `e` can be used in place of `edit`.
@@ -205,6 +209,10 @@ When using `find`, at least **one** of the optional parameters must be included.
 
 * The search is case-insensitive for all parameters. E.g `hans` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+Invalid parameters will be accepted and 0 people will be returned.
+</div>
 
 #### Example
 ##### Usage: Find by name
@@ -495,19 +503,19 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action                | Format                                                                  | Example Usage                                                           |
-|-----------------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​`                | `add n/James Ho p/82224444 e/jamesho@example.com t/jamesho r/logistics` |
-| **Clear**             | `clear`                                                                 | `clear`                                                                 |
-| **Delete**            | `delete INDEX`                                                          | `delete 3`                                                              |
-| **Delete Profile**    | `deleteProfile PROFILE`                                                 | `deleteProfile alice`                                                   |
-| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​` | `edit 2 n/James Lee e/jameslee@example.com`                             |
-| **Find**              | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`   | `find n/James Jake`                                                     |
-| **Sort**              | `sort ORDER`                                                            | `sort ASC`                                                              |
-| **Switch**            | `switch PROFILE`                                                        | `switch alice`                                                          |
-| **List**              | `list`                                                                  | `list`                                                                  |
-| **Help**              | `help`                                                                  | `help`                                                                  |
-| **Attendance**        | `attendance`                                                            | `attendance`                                                            |
-| **Mark Attendance**   | `mark t/TELEGRAM…​ d/DATE`                                              | `mark t/berniceYu t/alexYeoh d/2024-11-02`                              |
-| **Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                            | `unmark t/berniceYu d/2024-11-02`                                       |
-| **View**              | `view t/TELEGRAM_HANDLE`                                                | `view t/bob12`                                                          |
+| Action                | Format                                                                                        | Example Usage                                                           |
+|-----------------------|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/ or nf/ (NOT BOTH)]`              | `add n/James Ho p/82224444 e/jamesho@example.com t/jamesho r/logistics` |
+| **Clear**             | `clear`                                                                                       | `clear`                                                                 |
+| **Delete**            | `delete INDEX`                                                                                | `delete 3`                                                              |
+| **Delete Profile**    | `deleteProfile PROFILE`                                                                       | `deleteProfile alice`                                                   |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TELEGRAM] [r/ROLE] [f/ or nf/ (NOT BOTH)]` | `edit 2 n/James Lee e/jameslee@example.com`                             |
+| **Find**              | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`                         | `find n/James n/Jake`                                                   |
+| **Sort**              | `sort ORDER`                                                                                  | `sort ASC`                                                              |
+| **Switch**            | `switch PROFILE`                                                                              | `switch alice`                                                          |
+| **List**              | `list`                                                                                        | `list`                                                                  |
+| **Help**              | `help`                                                                                        | `help`                                                                  |
+| **Attendance**        | `attendance`                                                                                  | `attendance`                                                            |
+| **Mark Attendance**   | `mark t/TELEGRAM…​ d/DATE`                                                                    | `mark t/berniceYu t/alexYeoh d/2024-11-02`                              |
+| **Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                                                  | `unmark t/berniceYu d/2024-11-02`                                       |
+| **View**              | `view t/TELEGRAM`                                                                             | `view t/bob12`                                                          |
