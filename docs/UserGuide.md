@@ -2,13 +2,13 @@
 
 HireMe is a **free desktop application that helps you manage your extensive list of internship applications.**
 
-* [Easy to use]
+* **Easy to use**
   - Type simple commands: If you can type fast, HireMe can get your internship tracking tasks done faster than traditional apps.
-* [High quality]
+* **High quality**
   - User friendly interface: sleek list design to view all of your of internship applications.
-* [Streamlining management]
+* **Streamlined management**
   - Add, delete and update your internship applications: everything you need to manage your list of internship applications.
-* [Insights]
+* **Detailed Insights**
   - Tailored summary of your list of internship applications so that you can gain hidden insights.
 
 <!-- TOC -->
@@ -30,6 +30,17 @@ HireMe is a **free desktop application that helps you manage your extensive list
   * [FAQ](#faq)
   * [Command summary](#command-summary)
 <!-- TOC -->
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Overview of target users
+
+If you are a Computer Science undergraduate who **does not have much time**, can **type fast** and want to **better manage your internship applications**,
+HireMe is the perfect solution for you! Sometimes, tracking internship applications can be troublesome and time-consuming. 
+We understand the importance of tracking as it allows you to follow up on your applications. Hence, we came up with HireMe to help you
+**stay organised without having to put in much effort** because we know that you may be busy with your coursework. Let's get you
+started with HireMe!
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -105,8 +116,14 @@ Format: `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 * It must be in the format `dd/mm/yy`, and each field must be double digits (e.g. 01 is valid while 1 is not)
 
 Examples:
-* `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 * `/add r/Data Scientist Intern n/Facebook e/fb@example.com d/21/10/24`
+* `/add n/Google r/Software Engineer Intern e/google@gmail.com d/01/01/24`
+
+<p>Before and after images of the second example</p>
+<div style="display: flex;">
+  <img src="images/add-before.png" width="500" alt="Add-Before" style="margin-right: 20px;">
+  <img src="images/add-after.png" width="500" alt="Add-After">
+</div>
 
 <br>
 
@@ -134,6 +151,12 @@ Examples:
 * `/find Google` followed by `/delete 1` deletes the 1st application in the results of the `/find` command.
 * `/list` followed by `/delete 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
 
+<p>Before and after images of the first example</p>
+<div style="display: flex;">
+  <img src="images/delete-before.png" width="500" alt="Delete-Before" style="margin-right: 20px;">
+  <img src="images/delete-after.png" width="500" alt="Delete-After">
+</div>
+
 <br>
 
 ### Finding applications by company name: `/find`
@@ -153,6 +176,13 @@ Examples:
 * `/find face` returns `Facebook`
 * `/find app` returns `Apple`, but not `CashApp`
 * `/find young` returns `Ernest & Young`
+* `/find amaZoN NetFlix` returns `Amazon` and `Netflix`
+
+<p>Before and after images of the last example</p>
+<div style="display: flex;">
+  <img src="images/find-before.png" width="500" alt="Find-Before" style="margin-right: 20px;">
+  <img src="images/find-after.png" width="500" alt="Find-After">
+</div>
 
 <br>
 
@@ -175,6 +205,12 @@ Examples:
 * `/reject 1` changes the status of the 1st application in the current list to rejected.
 * `/list` followed by `/accept 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
 
+<p>Before and after images of the first example</p>
+<div style="display: flex;">
+  <img src="images/accept-status-before.png" width="500" alt="Accept-Status-Before" style="margin-right: 20px;">
+  <img src="images/accept-status-after.png" width="500" alt="Accept-Status-After">
+</div>
+
 <br>
 
 ### Filtering internship applications by status: `/filter`
@@ -191,6 +227,12 @@ Examples:
 * `/filter accepted` displays all the internship applications that have a status of accepted.
 * `/filter rejected` displays all the internship applications that have a status of rejected.
 
+<p>Before and after images of the second example</p>
+<div style="display: flex;">
+  <img src="images/filter-before.png" width="500" alt="Filter-Before" style="margin-right: 20px;">
+  <img src="images/filter-after.png" width="500" alt="Filter-After">
+</div>
+
 <br>
 
 ### Sorting internship applications: `/sort`
@@ -206,6 +248,12 @@ Format: `/sort ORDER`
 Examples:
 * `/sort earliest` displays the internship application list sorted according to the earliest applications first.
 * `/sort latest` displays the internship application list sorted according to the latest applications first.
+
+<p>Before and after images of the first example</p>
+<div style="display: flex;">
+  <img src="images/sort-before.png" width="500" alt="Sort-Before" style="margin-right: 20px;">
+  <img src="images/sort-after.png" width="500" alt="Sort-After">
+</div>
 
 <br>
 
