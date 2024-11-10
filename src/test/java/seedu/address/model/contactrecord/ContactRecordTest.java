@@ -27,11 +27,47 @@ public class ContactRecordTest {
         // valid date in contact record
         assertTrue(ContactRecord.isValidContactRecord("2020-01-01"));
 
-        // Invalid Month
+        // Leap Year
+        assertTrue(ContactRecord.isValidContactRecord("2020-02-29"));
+
+        // Invalid Years
+
+        // less than 4 digits
+        assertFalse(ContactRecord.isValidContactRecord("202-01-01"));
+
+        // alphabets
+        assertFalse(ContactRecord.isValidContactRecord("WORD-01-01"));
+
+        // Invalid Months
+
+        // more than 12
         assertFalse(ContactRecord.isValidContactRecord("2020-13-01"));
 
-        // Invalid Day
+        // less than 1
+        assertFalse(ContactRecord.isValidContactRecord("2020-00-01"));
+
+        // alphabet
+        assertFalse(ContactRecord.isValidContactRecord("2020-Aug-01"));
+
+        // Invalid Days
+
+        // more than 31
         assertFalse(ContactRecord.isValidContactRecord("2020-01-32"));
+
+        // less than 1
+        assertFalse(ContactRecord.isValidContactRecord("2020-01-00"));
+
+        // alphabet
+        assertFalse(ContactRecord.isValidContactRecord("2020-01-AA"));
+
+        // more than 30 in April
+        assertFalse(ContactRecord.isValidContactRecord("2020-04-31"));
+
+        // more than 29 in February
+        assertFalse(ContactRecord.isValidContactRecord("2020-02-30"));
+
+        // more than 28 in February on a non-leap year
+        assertFalse(ContactRecord.isValidContactRecord("2023-02-29"));
 
         // Invalid Day and Month
         assertFalse(ContactRecord.isValidContactRecord("2020-13-32"));
@@ -41,9 +77,6 @@ public class ContactRecordTest {
 
         // Time in contact record
         assertFalse(ContactRecord.isValidContactRecord("2020-01-01 12:00"));
-
-        // Non Leap year
-        assertFalse(ContactRecord.isValidContactRecord("2023-02-29"));
     }
 
     @Test
