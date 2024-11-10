@@ -305,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | User             | Edit contacts                                                            | Update my contacts' information upon changes           |
 | `* *`    | User             | Filter contacts by tag                                                   | Find specific profiles of interest quickly             |
 | `* *`    | User             | Archive contacts                                                         | Prevent clutter in my contacts without a full deletion |
-| `* *`    | First-time user  | See help messages                                                        | learn how to use the app                               |
+| `* *`    | First-time user  | See help messages                                                        | Learn how to use the app                               |
 | `* *`    | User             | See a confirmation message before I clear/delete                         | Avoid accidentally deleting all my data                |
 | `*`      | User             | View which wedding service providers a client is paired with              | Easily find contacts associated with a wedding         |
 | `*`      | User             | Add notes for a specific contact                                         | Add my own details                                     |

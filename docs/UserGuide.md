@@ -192,6 +192,13 @@ Adds one or more tags to a specific contact in the address book.
 * You can specify multiple tags in the same command by separating the tags with a space.
 * Adding a tag to a contact who already has the tag will show an error message.
 
+<box type="info" seamless>
+
+**Note:**
+You cannot tag contacts with the word 'all'. It is restricted for the `untag` command to remove all of a contact's tags at once.
+
+</box>
+
 Examples:
 * `tag 1 t/photographer` adds the tag 'photographer' to the contact at index 1.
 * `tag 2 t/baker florist` adds the tags 'baker' and 'florist' to the contact at index 2.
