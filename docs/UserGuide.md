@@ -116,7 +116,7 @@ add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/UNIVERSITY m/MAJOR b/BIRTHDATE [w/
 Parameters:
 
 - `n/NAME`: Full name of the contact.
-- `p/PHONE_NUMBER`: 8-15 digit phone number.
+- `p/PHONE_NUMBER`: Numeric input of any length.
 - `e/EMAIL`: Email address in a valid format.
 - `a/ADDRESS`: Contact's address.
 - `u/UNIVERSITY`: University name.
@@ -215,6 +215,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
 ```
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- The index should not be longer than 1000. 
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -435,6 +436,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When adding a new user**, the birthday field is compulsory. 
 
 ---
 

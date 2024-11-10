@@ -664,7 +664,7 @@ This command finds contacts by work experience. It requires a company name and a
 
 ### 5. Finding Contacts by Major: `findm`
 
-This command finds contacts by major. It requires a major. Major is case insensitive. 
+This command finds contacts by major. It requires a major. Major is case insensitive. [UserGuide.md](UserGuide.md)
 
 **Test case 1:** `findm m/Business`
 
