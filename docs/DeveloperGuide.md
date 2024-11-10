@@ -666,50 +666,242 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
    2. Open a terminal and navigate to the folder containing the jar file.
-   3. Run the command `java -jar NovaCare.jar`<br>Expected: The app launches with a set of sample patients. The window size may not be optimal.
+   3. Run the command `java -jar NovaCare.jar`<br>Expected: The app launches with a set of sample patients. The window size may not be optimal.<br></br>
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by running the command `java -jar NovaCare.jar`.<br>Expected: The most recent window size and location is retained.
 
-3._{ more test cases …​ }_
+### Adding a Patient
+
+Adding a patient to NovaCare
+
+   1. Test case: `add n/John Doe p/11111111 e/johndoe@example.com a/Blk 2 Bishan St 11 #06-230 t/Diabetic`
+      * Expected: New patient added with confirmation message<br>`New patient added: John Doe; Phone: 11111111; Email: johndoe@example.com; Address: Blk 2 Bishan St 11 #06-230; Tags: [Diabetic]`
+   2. Test case: Add the same patient as above
+      * Expected: Error message<br>`This patient already exists in the NovaCare`
+   3. Test case: `add n/John Doe e/johndoe@example.com a/Blk 2 Bishan St 11 #06-230 t/Diabetic`
+      * Expected: Error message<br>`Invalid command format!`<br>`add: Adds a patient to the NovaCare. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`<br>`Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Diabetic`
+   4. Test case: `add n/John Doe p/invalid e/johndoe@example.com a/Blk 2 Bishan St 11 #06-230 t/Diabetic`
+      * Expected: Error message specific to invalid field<br>`Phone numbers should only contain numbers, and it should be at least 3 digits long`
+   5. Other incorrect add commands to try: Any inputs with missing or invalid compulsory fields (name, phone number, email and address)
+      * Expected: Similar to test cases 3 and 4
 
 ### Deleting a Patient
 
-1. Deleting a patient while all patients are being shown
+Deleting a patient while all patients are being shown<br>
 
-   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-   2. Test case: `delete 1`<br>Expected: First contact is deleted from the list. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
-   3. Test case: `delete 0`<br>Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>Expected: Similar to previous.
+Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
-### Saving data
+   1. Test case: `delete 1`
+      * Expected: First contact is deleted from the list. Confirmation details of the deleted patient shown in the status message.
+   2. Test case: `delete 0`
+      * Expected: Error message<br>`Invalid command format!`<br>`delete: Deletes the patient identified by the index number used in the displayed patient list.`<br>`Parameters: INDEX (must be a positive integer)`<br>`Example: delete 1`
+   3. Test case: `delete x`, where `x` is a number larger than the size of the patient list
+      * Expected: Error message<br>`The patient index provided is invalid`
+   4. Other incorrect delete commands to try: `delete`, `delete test`
+      * Expected: Similar to test case 2
 
-1. All data is written to file specified in `preferences.json`
+### Editing a Patient
 
-   1. By default, the data is saved in the file `"addressBookFilePath" : "data\\addressbook.json"`.
-   2. Whenever a command is used to modify the data (e.g., `add`, `delete`, `edit`), the data is saved into the file indicated in `preferences.json`.
+Editing a patient's details while all patients are being shown<br>
+
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list.
+
+1. Test case: `edit 1 p/22222222 e/john.doe@example.com`
+    * Expected: Second patient in the list has their phone number and email edited. Confirmation details of the deleted patient shown in the status message.
+2. Test case: `edit 0 n/Test`
+    * Expected: Error message<br>`Invalid command format!`<br>`edit: Edits the details of the patient identified by the index number used in the displayed patient list. Existing values will be overwritten by the input values.`<br>`Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br>`Example: edit 1 p/91234567 e/johndoe@example.com`
+3. Test case: `edit x n/Test`, where `x` is a number larger than the size of the patient list
+    * Expected: Error message<br>`The patient index provided is invalid`
+4. Test case: `edit 1`
+    * Expected: Error message<br>`At least one field to edit must be provided.`
+5. Test case: `edit 1 n/`
+    * Expected: Error message specific to invalid field<br>`Names should only contain alphanumeric characters and spaces, and it should not be blank`
+6. Test case: Edit patient to have the same name and phone number as another patient in the patient list
+    * Expected: Error message<br>`This patient already exists in the NovaCare`
+7. Other correct edit commands to try: Any inputs with valid fields
+    * Expected: Simmilar to test case 1
+8. Other incorrect delete commands to try: Any inputs with invalid fields
+    * Expected: Similar to test case 5
+
+### Finding a Patient
+
+Finding a patient while all patients are being shown<br>
+
+Prerequisites: List all patients using the `list` command. Multiple patients in the list. One patient with first name `John`, another patient with last name `Doe`, no patients with first or last name `Richard`.
+
+1. Test case: `find John Doe`
+    * Expected: NovaCare lists all patients with first or last name as `John` or `Doe`, with a success message<br>`2 patients listed!`
+2. Test case: `find david`
+    * Expected: No patients listed, with message<br>`The patient list is empty.`
+3. Test case: `find`
+    * Expected: Error message<br>`Invalid command format!`<br>`find: Finds all patients whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.`<br>`Parameters: KEYWORD [MORE_KEYWORDS]...`<br>`Example: find alice bob charlie`
+4. Other incorrect delete commands to try: Any other inputs with patient names not in the patient list
+    * Expected: Similar to test case 2
+
+### Changing/ Resetting Priority Level
+
+Changing a priority level of a patient
+
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list.
+
+1. Test case: `priority 1 l/1`
+    * Expected: Priority level 1 is assigned to the patient with index 1. Details of the priority update are displayed in the status message<br>`Priority level 1 successfully set for John Doe`
+2. Test case: `priority 1 l/reset`
+    * Expected: Priority level reset to 3 for the patient with index 1. Details of the priority update are displayed in the status message<br>`Priority level reset to default for John Doe`
+3. Test case: `deletelevel 1`
+    * Expected: Priority level reset to 3 for the patient with index 1. Details of the priority update are displayed in the status message<br>`Priority level reset to default for John Doe`
+4. Test case: `priority x l/2` where `x` is less than or equals to 0 or a number larger than the size of the patient list
+    * Expected: Error message<br>`Invalid patient ID. Please enter a valid patient identifier.`
+5. Test case: `priority` 
+    * Expected: Error message<br>`Invalid command format!`<br>`priority: Sets the priority level for a patient identified by the index number used in the displayed patient list.`<br>`Parameters: INDEX l/LEVEL (LEVEL must be 1, 2, or 3 or 'reset' for default level)`<br>`Example: priority 1 l/2`<br>`Example: priority 2 l/reset`
+6. Test case: `priority 1 l/x` where `x` is not `1`, `2`, `3` or `reset`
+    * Expected: Error message<br>`Invalid priority level. Please enter a valid integer (1, 2, or 3) or 'reset'.`
+7. Other incorrect priority commands to try: `priority 1 l/`
+    * Expected: Similar to test case 6
+
+### Adding Emergency Contact
+
+Adding an emergency contact of a patient
+
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list.
+
+1. Test case: `emergency 1 n/Charlotte Doe p/33333333`
+    * Expected: Emergency contact with name `Charlotte Doe` and number `33333333` added to patient with index 1. Details of the emergency contact update are displayed in the status message<br>`Added emergency contact to John Doe: Charlotte Doe, 33333333`
+2. Test case: Add another emergency contact to the same patient as above
+    * Expected: Error message<br>`John Doe already has a saved emergency contact`
+3. Test case: `emergency`
+    * Expected: Error message<br>`Invalid command format!`<br>`emergency: Edits the emergency contact details of the patient identified by the index number used in the last patient listing.`<br>`Parameters: INDEX (must be a positive integer) n/[EMERGENCY CONTACT NAME]p/[EMERGENCY CONTACT NUMBER`<br>`Example: emergency 1 n/Richard Ng p/82943718`
+4. Test case: `emergency x n/Charlotte Doe p/33333333` where `x` a number larger than the size of the patient list
+    * Expected: Error message<br>`The patient index provided is invalid`
+5. Test case: `emergency 1 n/Charlotte Doe`
+    * Expected: Error message<br>`Please make sure both name and phone number is filled! Command details:`<br>`emergency: Edits the emergency contact details of the patient identified by the index number used in the last patient listing.`<br>`Parameters: INDEX (must be a positive integer) n/[EMERGENCY CONTACT NAME]p/[EMERGENCY CONTACT NUMBER`<br>`Example: emergency 1 n/Richard Ng p/82943718`
+6. Test case: `emergency 1 n/Charlotte Doe p/1`
+    * Expected: Error message specific to invalid field<br>`Phone numbers should only contain numbers, and it should be at least 3 digits long`
+7. Other incorrect priority commands to try: Any other inputs with either missing or invalid name or phone number fields
+    * Expected: Similar to test cases 5 and 6
+
+### Deleting Emergency Contact
+
+Deleting the emergency contact of a patient
+
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list.
+
+1. Test case: `deleteemergency 1`
+    * Expected: Emergency contact of patient with index 1 is deleted. Details of the emergency contact deletion are displayed in the status message<br>`Removed emergency contact (Charlotte Doe, 33333333) from John Doe`
+2. Test case: Delete emergency contact for the same patient as above
+    * Expected: Error message<br>`John Doe does not have a saved emergency contact`
+3. Test case: `deleteemergency`
+    * Expected: Error message<br>`Invalid command format!`<br>`deleteemergency: Deletes the emergency contact details of the patient identified by the index number used in the last patient listing.`<br>`Parameters: INDEX (must be a positive integer)`<br>`Example: deleteemergency 1`
+4. Test case: `deleteemergency x` where `x` a number larger than the size of the patient list
+    * Expected: Error message<br>`The patient index provided is invalid`
+5Other incorrect priority commands to try: `deleteemergency 0`, `deleteemergency test`
+    * Expected: Similar to test case 3
 
 ### Adding a Task
 
-1. Adding a task to a patient while all patients are being shown
+Adding a task to a patient while all patients and tasks are being shown
 
-   1. Prerequisites: Patient should already exist in the list.
-   2. Test case: `addtask 1 d/Eat Medication`<br>Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated.
-   3. Test case: `addtask 0 d/Eat Medication`<br>Expected: No task is added. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
-   4. Other incorrect add task commands to try: `addtask`, `addtask x d/`, `addtask 1 d/` (where x is an invalid patient ID or description is missing)<br>Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list.
 
-### Changing Priority Level
+1. Test case: `addtask 1 d/Check blood pressure`
+    * Expected: Task "Check blood pressure" is added to the task list for the patient with index 1. Details of the added task are displayed in the status message<br>`New task added: Check blood pressure`
+2. Test case: `addtask`
+    * Expected: Error message<br>`Invalid command format!`<br>`addtask: Adds a task to the task list. Parameters: INDEX d/DESCRIPTION`<br>`Example: addtask 1 d/Buy medication`
+3. Test case: `addtask x d/Check blood pressure` where `x` a number larger than the size of the patient list
+    * Expected: Error message<br>`The patient index provided is invalid`
+4. Other incorrect add task commands to try: `addtask 1 d/`, `addtask 0 d/Check blood pressure`
+    * Expected: Similar to test case 2
 
-1. Changing a priority level of a patient
+### Deleting a Task
 
-   1. Prerequisites: List all patients using the `list` command. Patient should already exist in the list.
-   2. Test case: `priority 1 l/2`<br>Expected: Priority level 2 is assigned to the patient with ID 1. Details of the priority update are shown in the status message. Timestamp in the status bar is updated.
-   3. Test case: `priority 0 l/2`<br>Expected: No priority is assigned. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
-   4. Other incorrect priority commands to try: `priority`, `priority x l/`, `priority 1 l/` (where x is an invalid patient ID or the priority level is missing or invalid)<br>Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
+Deleting a task for a patient while all patients and tasks are being shown
 
-For additional commands and further testing guidelines, refer to Help section in NovaCare.
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list.
+
+1. Test case: `deletetask 1`
+    * Expected: Deletes task with index 1 in the task list. Details of the deleted task are displayed in the status message<br>`Deleted Task: Check blood pressure for John Doe`
+2. Test case: `deletetask`
+    * Expected: Error message<br>`Invalid command format!`<br>`deletetask: Deletes the task identified by the index number used in the displayed task list.`<br>`Parameters: INDEX (must be a positive integer)`<br>`Example: deletetask 1`
+3. Test case: `deletetask x` where `x` a number larger than the size of the task list
+    * Expected: Error message<br>`The task index provided is invalid`
+4. Other incorrect add task commands to try: `deletetask 0`, `deletetask test`
+    * Expected: Similar to test case 2
+
+### Finding a Task
+
+Finding a task for a patient while all patients are being shown
+
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list and a task for patient with index 1.
+
+1. Test case: `findtask 1`
+    * Expected: Task(s) for the patient with index 1 is/ are listed in the task list, with a success message<br>`1 tasks listed!`
+2. Test case: `findtask`
+    * Expected: Error message<br>`Invalid command format!`<br>`findtask: Finds all tasks related to the patient identified by the index number used in the displayed patient list and displays them as a list with index numbers.`<br>`Parameters: PATIENT_INDEX (must be a positive integer)`<br>`Example: findtask 1`
+3. Test case: `findtask x` where `x` a number larger than the size of the patient list
+    * Expected: Error message<br>`The patient index provided is invalid`
+4. Other incorrect add task commands to try: `findtask 0`, `findtask test`
+    * Expected: Similar to test case 2
+
+### Marking a Task
+
+Marking a task for a patient while all patients and tasks are being shown
+
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list and an unmarked task for patient with index 1.
+
+1. Test case: `marktask 1`
+    * Expected: Task for the patient with index 1 is marked in the task list, with success message<br>`Marked task as complete: Check blood pressure for John Doe`
+2. Test case: `marktask`
+    * Expected: Error message<br>`Invalid command format!`<br>`marktask: Marks the task identified by the index number used in the displayed task list as complete.`<br>`Parameters: INDEX (must be a positive integer)`<br>`Example: marktask 1`
+3. Test case: `marktask x` where `x` a number larger than the size of the task list
+    * Expected: Error message<br>`The task index provided is invalid`
+4. Other incorrect add task commands to try: `marktask 0`, `marktask test`
+    * Expected: Similar to test case 2
+
+### Unmarking a Task
+
+Unmarking a task for a patient while all patients and tasks are being shown
+
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list and a marked task for patient with index 1.
+
+1. Test case: `unmarktask 1`
+    * Expected: Task for the patient with index 1 is unmarked in the task list, with success message<br>`Marked task as incomplete: Check blood pressure for John Doe`
+2. Test case: `unmarktask`
+    * Expected: Error message<br>`Invalid command format!`<br>`unmarktask: Marks the task identified by the index number used in the displayed task list as incomplete.`<br>`Parameters: INDEX (must be a positive integer)`<br>`Example: unmarktask 1`
+3. Test case: `unmarktask x` where `x` a number larger than the size of the task list
+    * Expected: Error message<br>`The task index provided is invalid`
+4. Other incorrect add task commands to try: `unmarktask 0`, `unmarktask test`
+    * Expected: Similar to test case 2
+
+### Listing all Incomplete Tasks
+
+Listing all tasks that are incomplete while all patients are being shown
+
+Prerequisites: List all patients using the `list` command. At least 1 patient in the list and one marked and unmarked task each for the patient with index 1.
+
+1. Test case: `listincomplete`
+    * Expected: All incomplete tasks in the task list are displayed, with success message<br>`Listed all incomplete tasks`
+
+### Saving data
+
+1. All data is written to file called `addressbook.json`
+
+   1. By default, the data is saved in the file `"addressbook.json"`, found in the `data` folder.
+   2. Whenever a command is used to modify the data (e.g., `add`, `delete`, `edit`), the data is saved into the file.
+
+2. Dealing with missing data file
+
+   1. To simulate a missing file, in the same folder as the `NovaCare.jar` file, navigate to the `data` folder and delete the addressbook.json file in the folder. 
+   2. Re-launch NovaCare. 
+       * Expected: NovaCare will be re-populated with a default list of patients. A new addressbook.json file will be created in the data folder after closing the app or executing a command.
+
+3. Dealing with corrupted data entries
+
+   1. To simulate a corrupted data entry, in the same folder as the `NovaCare.jar` file, navigate to the `data` folder and open the addressbook.json file in the folder. Edit one of the compulsory fields such as phone number to be invalid (e.g. change the phone number to "d"). Save the addressbook.json file.
+   2. Re-launch NovaCare.
+       * Expected: NovaCare will launch, making sure to skip the invalid entry. The invalid entry will be removed from the addressbook.json file after executing a command.
 
 --------------------------------------------------------------------------------------------------------------------
 
