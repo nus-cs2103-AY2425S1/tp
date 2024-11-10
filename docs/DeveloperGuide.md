@@ -38,6 +38,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -129,6 +130,7 @@ The structure is simple:
 * They also contain their own respective error messages.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -385,10 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 1b. Contact to find does not exist.
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again.
-
-      Steps 1b1-1b2 repeat until input format is valid.
+    * 1b1. CampusConnect shows empty contact list.
 
       Use case ends.
 
@@ -454,16 +453,8 @@ before the command was executed.
    Use case ends
 
 **Extensions**
-* 1a. Input format is invalid.
+* 1a. No earlier data to revert.
     * 1a1. CampusConnect shows error message.
-    * 1a2. User enters input again.
-
-      Steps 1a1-1a2 repeat until input format is valid.
-
-      Use case ends.
-
-* 1b. No earlier data to revert.
-    * 1b1. CampusConnect shows error message.
 
       Use cases ends.
 
@@ -478,16 +469,8 @@ before the command was executed.
    Use case ends.
 
 **Extensions:**
-* 1a. Invalid Input Format:
-    * 1a1. CampusConnect displays an error message indicating the input format is invalid.
-    * 1a2. The user re-enters the input.
-
-      Steps 1a1-1a2 repeat until the input format is valid.
-
-      Use case ends.
-
-* 1b. No More Commands to Redo:
-    * 1b1. CampusConnect displays an error message indicating that there are no more commands to redo.
+* 1a. No More Commands to Redo:
+    * 1a1. CampusConnect displays an error message indicating that there are no more commands to redo.
 
       Use case ends.
 

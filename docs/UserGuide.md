@@ -28,8 +28,8 @@ any traditional point-and-click management app.
 1. Copy the file to the folder you want to use as the _home folder_ for your CampusConnect.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar CampusConnect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app does not contain any sample data.<br>
+   ![EmptyUi](images/EmptyUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -38,7 +38,7 @@ any traditional point-and-click management app.
 
    * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` with phone number `98765432` and email `johnd@example.com` to CampusConnect.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 1` : Deletes the 1st contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -221,9 +221,6 @@ Format: `deltag INDEX t/TAG`
 Examples:
 * `deltag 1 t/friend` 
 deletes the friend tag of the first person in the list.
-
-Disallowed examples:
-* `deltag 2 t/classmate t/neighbour` will not succeed as it tries to delete 2 tags at once.
 
 ### Categorizing a tag : `cattag`
 
