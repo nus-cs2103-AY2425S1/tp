@@ -84,7 +84,7 @@ public class SortCommand extends Command {
         }
 
         model.sortPersonList(comparator);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, getExactParameter(parameter), order));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, getExactParameter(parameter), getExactOrder(order)));
     }
 
     /**
@@ -102,6 +102,20 @@ public class SortCommand extends Command {
             return "next payment date";
         default:
             return prefix;
+        }
+    }
+
+    /**
+     * Returns the exact order name.
+     */
+    public String getExactOrder(String order) {
+        switch (order) {
+        case "asc":
+            return "ascending";
+        case "desc":
+            return "descending";
+        default:
+            return order;
         }
     }
 

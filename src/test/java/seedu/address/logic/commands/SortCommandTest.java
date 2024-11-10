@@ -27,7 +27,7 @@ public class SortCommandTest {
         Comparator<Person> comparator = Person.getNameComparator();
         expectedModel.sortPersonList(comparator);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "name", "asc");
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "name", "ascending");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
@@ -37,7 +37,7 @@ public class SortCommandTest {
         Comparator<Person> comparator = Person.getNameComparator().reversed();
         expectedModel.sortPersonList(comparator);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "name", "desc");
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "name", "descending");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
@@ -47,7 +47,7 @@ public class SortCommandTest {
         Comparator<Person> comparator = Person.getAppointmentDateComparator();
         expectedModel.sortPersonList(comparator);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "appointment date", "asc");
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "appointment date", "ascending");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
@@ -57,7 +57,7 @@ public class SortCommandTest {
         Comparator<Person> comparator = Person.getAppointmentDateComparator().reversed();
         expectedModel.sortPersonList(comparator);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "appointment date", "desc");
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "appointment date", "descending");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
@@ -67,7 +67,7 @@ public class SortCommandTest {
         Comparator<Person> comparator = Person.getBirthdayComparator();
         expectedModel.sortPersonList(comparator);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "birthday", "asc");
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "birthday", "ascending");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
@@ -77,7 +77,7 @@ public class SortCommandTest {
         Comparator<Person> comparator = Person.getBirthdayComparator().reversed();
         expectedModel.sortPersonList(comparator);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "birthday", "desc");
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "birthday", "descending");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
@@ -87,7 +87,7 @@ public class SortCommandTest {
         Comparator<Person> comparator = Person.getPayDateComparator();
         expectedModel.sortPersonList(comparator);
 
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "next payment date", "asc");
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "next payment date", "ascending");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
