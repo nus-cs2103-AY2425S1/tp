@@ -336,7 +336,9 @@ Adds a group to the T_Assistant。
 ##### Notes
 
 1. `Group Name` is the unique identifier for each group, so no two groups can have the same group name.
-3. For information on the constraints for each parameter used in this command, go
+2. Leading 0s in `Group Name` will be truncated, e.g. `CS2103-F00012-002` will be read as `CS2103-F12-2`.
+3. 
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -928,7 +930,7 @@ All parameters are case-insensitive when used for comparison unless stated other
 | `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                          | `John Doe`                                    | `J0hn Doe$$`                                     |
 | `e/`<br>Email            | Format: `local-part@domain-part`<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
 | `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
-| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a number<br>`Group Number` should be a number                                               | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
+| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a positive number<br>`Group Number` should be a positive number                             | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
 | `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                     | `Release tP v1.6`                             |                                                  |
 | `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                              | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
 | `q/`<br>Query            | No limitations                                                                                                                                                                                                                                      | `iP`<br>`tP v1.5`                             |                                                  |
