@@ -111,6 +111,7 @@ Examples:
 ### Adding a remark to a patient profile : `remark`
 
 Adds a remark to a specified patient profile.
+> 💡 **Note:** You can only specify **one** remark to add
 
 Format: `remark NRIC r/REMARK`
 
