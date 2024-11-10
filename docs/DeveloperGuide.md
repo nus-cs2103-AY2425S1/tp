@@ -21,9 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
