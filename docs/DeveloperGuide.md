@@ -295,6 +295,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Target user profile**:
 The target user is an insurance agent working with Prudential, responsible for managing a substantial portfolio of clients. This user has specific needs and preferences for effectively managing clients, policies, and claims in a high-volume environment.
 
+<box type="info" seamless>
+
+**Note:** Prudential insurance agents were chosen as the target users for Prudy because the development team has extensive experience working with Prudential agents in the past. This background allowed the team to design Prudy with a deep understanding of the agents' specific needs and daily challenges, ensuring the tool aligns closely with their workflow.
+
+</box>
+
 Key attributes of the target user include:
 * **Role and Responsibilities:** The user is a Prudential insurance agent who needs to efficiently oversee and update client records, including individual policies and claims
 * **Client Management Requirements:** The user regularly manages a large number of clients and requires an organized and efficient system to track and access client information swiftly
