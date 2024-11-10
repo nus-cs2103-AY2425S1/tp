@@ -54,12 +54,13 @@ Person *--> "*" Tag
 Student *--> "1" Grade
 Student *--> "1" Education
 Student *--> "1" LessonTime
-Student "child" <--right-> "parent"Parent:"                     "
-
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+
+Student *-right-> "parent" Name
+Parent *-left-> "children" Name
 
 ModelManager --> "~* filtered" Person
 @enduml
