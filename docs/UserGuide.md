@@ -37,8 +37,8 @@ title: AcademyAssist User Guide
 
 # Introduction
 Welcome to AcademyAssist, your ultimate solution for efficient student contact management in tuition centers.
-This desktop application is designed to streamline your administrative tasks, allowing you to focus more
-on what truly matters - educating and nurturing young minds.
+This desktop application is designed to streamline your administrative tasks, allowing you to focus your efforts on 
+keeping operations smooth and organized for optimal student support.
 
 AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical
 User Interface (GUI).** This hybrid approach ensures that you can manage your student database with
@@ -201,6 +201,11 @@ Examples:
 * `edit s00002 p\91234567 a\New_Address`
 
 ![Edit Success Message](/images/edit.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To more efficiently add a subject to a person, see the [addsubject feature] (#adding-a-subject-to-a-student--addsubject)
+
+</div>
 
 ### Listing all students : `list`
 
