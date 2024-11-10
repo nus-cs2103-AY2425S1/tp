@@ -290,7 +290,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-- concert organisers who manages many different groups of contacts
+- concert organisers who manage many different groups of contacts
 - for different concerts
 - prefer desktop apps over other types
 - can type fast
