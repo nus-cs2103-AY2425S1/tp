@@ -121,7 +121,7 @@ Having a problem? Read here to see some common issues that may arise while you a
 
 <br>
 
-2. You can download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It 
+2. You can download our latest release file from [here](https://github.com/AY2425S1-CS2103T-W10-2/tp/releases). It 
    is a `.jar` file. For more information, you can refer to: 
    - [What is a JAR file?](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html)
    - [How to run a JAR file](https://stackoverflow.com/questions/5774970/run-jar-file-in-command-prompt).
