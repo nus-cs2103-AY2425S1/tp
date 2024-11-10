@@ -34,7 +34,7 @@ public class SampleDataUtil {
                 LocalDate.parse("2023-11-11", DateTimeUtil.DEFAULT_DATE_PARSER));
         Client[] people = new Client[]{
             new Client(new Name("Alex Yeoh"),
-                        new Company("Tech Innovations Pte Ltd"),
+                        new Company("Tech Innovations Pte Ltd."),
                         new Phone("87438807"),
                         new Email("alexyeoh@example.com"),
                         new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -62,7 +62,7 @@ public class SampleDataUtil {
                         getTagSet("finance"),
                         List.of(transaction1, transaction2)),
             new Client(new Name("Irfan Ibrahim"),
-                        new Company("Educational Systems Pte Ltd"),
+                        new Company("Educational Systems Pte Ltd."),
                         new Phone("92492021"),
                         new Email("irfan@example.com"),
                         new Address("Blk 47 Tampines Street 20, #17-35"),

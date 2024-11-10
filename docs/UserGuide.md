@@ -191,8 +191,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex creative` returns `Alex Yeoh`, `Charlotte Oliveiro`, whose company matches `creative`<br>
-  ![result for 'find alex creative'](images/findAlexCreativeResult.png =600x)
+* `find alex innovative` returns `Alex Yeoh`, `Roy Balakrishnan`, whose company matches `innovative`<br>
+  ![result for 'find alex innovative'](images/findAlexInnovativeResult.png)
 
 #### Deleting a client : `delete`
 
@@ -285,7 +285,7 @@ Format: `findt KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `invest material` will match `Material Invest`
 * Only the description is searched.
 * Only full words will be matched e.g.  `invest` will not match `investing`
-* clients matching at least one keyword will be returned (i.e. `OR` search).
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `investing material` will return `material purchase`, `future investing`
 
 <box type="warning" seamless>
@@ -311,7 +311,8 @@ Format: `summary s/START_MONTH e/END_MONTH`
 </box>
 
 Examples:
-* `listt 1` followed by `summary s/2024-09 e/2024-10` summarises the transactions of client 1 within the month of September and October 2024.
+* `listt 6` followed by `summary s/2023-09 e/2023-10` summarises the transactions of client 6 within the month of September and October 2023.
+  ![result for 'summary s/2023-09 e/2023-10'](images/summaryResult.png)
 
 ### Data Management
 
@@ -354,13 +355,23 @@ Furthermore, certain edits can cause the Clientell to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Future Enhancements
+
+1. **Matching partial words for `find` and `findt` commands.**<br>
+Currently, only full words are matched. E.g. `Han` doesn't match `Hans`. 
+In the future, we plan to allow partial word matches.
+2. **Finding clients and transactions by other fields.**<br>
+Currently, only names and companies are searchable for clients, and only descriptions are searchable for transactions.
+In the future, we plan to allow searching by other fields e.g. phone number, address.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
