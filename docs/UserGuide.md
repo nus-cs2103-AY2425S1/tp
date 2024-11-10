@@ -232,15 +232,15 @@ or affect the delivery status in any way.
 </box>
 
 Format: `mark -s SUPPLIER_INDEX STATUS`
-- `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `INDEX`: Must be a number greater than 0 and must not be blank.
 - `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank.
 
 <box type="warning" seamless>
 
 **Warnings**:
 - A spacing between `mark` and `-s` is compulsory.
-- A spacing between `-s` and `SUPPLIER_INDEX` is compulsory.
-- A spacing between `SUPPLIER_INDEX` and `STATUS` is compulsory.
+- A spacing between `-s` and `INDEX` is compulsory.
+- A spacing between `INDEX` and `STATUS` is compulsory.
 - Both parameters must be given.
 - Parameters used are case-sensitive.
 </box>
