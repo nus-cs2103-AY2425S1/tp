@@ -455,7 +455,7 @@ Not be blank
 Not start with a whitespace
 </li>
 <li>
-Should follow the specifications given below
+Should follow the specifications given below:
 </li>
 </div>
 
@@ -505,9 +505,9 @@ Should follow the specifications given below
       <td style="text-align:center;">e|</td>
       <td>Should be of the format local-part@domain. The <code>local-part</code> section should only contain alphanumeric characters and the special characters <code>+_.-</code>. The <code>local-part</code> section may not start or end with special characters. The <code>domain</code> section must:
         <ul>
-          <li>start with a domain name (<em>gmail</em>.com) at least 1 character long</li>
-          <li>end with a domain label (.<em>com</em>) at least 2 characters long</li>
-          <li>have each domain label start and end with alphanumeric characters</li>
+          <li>start with a domain name (<em>gmail</em>.com) at least 1 character long.</li>
+          <li>end with a domain label (.<em>com</em>) at least 2 characters long.</li>
+          <li>have each domain label start and end with alphanumeric characters.</li>
           <li>have each domain label consist only of alphanumeric characters, which can be separated by hyphens.</li>
         </ul>
       </td>
@@ -570,13 +570,13 @@ Should follow the specifications given below
       <td style="text-align:center;">17</td>
       <td style="text-align:center;">Remove Allergy</td>
       <td style="text-align:center;">rmal|</td>
-      <td>Takes all values. Can be multiple values</td>
+      <td>Takes all values. Can be multiple values.</td>
     </tr>
     <tr>
       <td style="text-align:center;">18</td>
       <td style="text-align:center;">Sex</td>
       <td style="text-align:center;">s|</td>
-      <td>Should either be uppercase characters M or F</td>
+      <td>Should either be uppercase characters M or F.</td>
     </tr>
     <tr>
       <td style="text-align:center;">19</td>
