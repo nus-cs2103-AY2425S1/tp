@@ -153,7 +153,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy feature implementation details of KnottyPlanners.
 
-### Wedding
+### [Wedding](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/model/wedding/Wedding.java) - Class for Wedding Events
 
 The `Wedding` class represents a wedding event in KnottyPlanners. It includes details such as the wedding name, venue,
  date and participants. The `Wedding` class supports the following functions:
@@ -163,14 +163,20 @@ The `Wedding` class represents a wedding event in KnottyPlanners. It includes de
 * `List Weddings`: Lists all `Weddings` in KnottyPlanners.
 * `View Wedding`: Displays participants of a specific `Wedding`.
 
-### StaticContext for Deletion and Clear
+Refer to our [**User Guide**](https://ay2425s1-cs2103t-w13-4.github.io/tp/UserGuide.html) for more information on how to use these functions associated with the Wedding Class.
 
-`StaticContext` is a utility class used to manage the state of pending operations in KnottyPlanners. It helps in handling deletion and clear operations by maintaining boolean flags and references to the entities to be deleted or cleared. The `StaticContext` class supports the following functions:
+### [StaticContext](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/logic/StaticContext.java) - Confirmation Prompting for Deletion and Clear Commands
 
-* `setClearAddressBookPending`: Sets the boolean flag indicating whether the address book clear operation is pending.
-* `setClearWeddingBookPending`: Sets the boolean flag indicating whether the wedding book clear operation is pending.
-* `setPersonToDelete`: Sets the reference to the `Person` to be deleted.
-* `setWeddingToDelete`: Sets the reference to the `Wedding` to be deleted.
+`StaticContext` is a utility class used to manage the state of pending operations in KnottyPlanners. It helps in handling deletion and clear commands by maintaining boolean flags and references to the entities to be deleted or cleared. 
+
+The `StaticContext` class supports the following functions:
+
+| Function                          | Associated Command                           |
+|-----------------------------------|----------------------------------------------|
+| `setClearAddressBookPending`      | `clear-ab` / `cab`                           |
+| `setClearWeddingBookPending`      | `clear-wb` / `cwb`                           |
+| `setPersonToDelete`               | `del n/NAME & NAME`                          |
+| `setWeddingToDelete`              | `del-wed n/NAME & NAME` / `dw n/NAME & NAME` |
 
 Here is an example usage scenario and how `StaticContext` is used in KnottyPlanners.
 
