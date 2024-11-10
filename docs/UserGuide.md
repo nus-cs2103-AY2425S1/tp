@@ -12,24 +12,24 @@ management applications.
 
 1. [Quick start](#Quick-Start)
 2. [Features](#features)
-    1. [Viewing help](#viewing-help--help)
-    2. [Listing all persons](#listing-all-persons--listp)
-    3. [Listing all concerts](#listing-all-concerts--listc)
-    4. [Listing all persons and concerts](#listing-all-persons-and-concerts--list)
-    5. [Listing all concertContacts](#listing-all-concertcontacts--listcc)
-    6. [Adding a Person](#adding-a-person-addp)
-    7. [Adding a Concert](#adding-a-concert-addc)
-    8. [Adding a ConcertContact](#adding-a-concertcontact-addcc)
-    9. [Deleting a person](#deleting-a-person--deletep)
-    10. [Deleting a concert](#deleting-a-concert--deletec)
-    11. [Deleting a concertContact](#deleting-a-concertcontact--deletecc)
-    12. [Clearing All Entries](#clearing-all-entries--clear)
-    13. [Finding a person](#finding-a-person-findp)
-    14. [Finding a concert](#finding-a-concert-findc)
-    15. [Finding a concertContact](#finding-a-concertcontact-findcc)
-    16. [Editing a person](#editing-a-person--editp)
-    17. [Editing a concert](#editing-a-concert--editc)
-    18. [Exiting programme](#exiting-the-program--exit)
+   1. [Viewing help](#viewing-help--help)
+   2. [Listing all persons](#listing-all-persons--listp)
+   3. [Listing all concerts](#listing-all-concerts--listc)
+   4. [Listing all persons and concerts](#listing-all-persons-and-concerts--list)
+   5. [Listing all concertContacts](#listing-all-concertcontacts--listcc)
+   6. [Adding a Person](#adding-a-person-addp)
+   7. [Adding a Concert](#adding-a-concert-addc)
+   8. [Adding a ConcertContact](#adding-a-concertcontact-addcc)
+   9. [Deleting a person](#deleting-a-person--deletep)
+   10. [Deleting a concert](#deleting-a-concert--deletec)
+   11. [Deleting a concertContact](#deleting-a-concertcontact--deletecc)
+   12. [Clearing All Entries](#clearing-all-entries--clear)
+   13. [Finding a person](#finding-a-person-findp)
+   14. [Finding a concert](#finding-a-concert-findc)
+   15. [Finding a concertContact](#finding-a-concertcontact-findcc)
+   16. [Editing a person](#editing-a-person--editp)
+   17. [Editing a concert](#editing-a-concert--editc)
+   18. [Exiting programme](#exiting-the-program--exit)
 3. [FAQ](#faq)
 4. [Known Issues](#known-issues)
 5. [Command Summary](#command-summary)
@@ -53,45 +53,45 @@ management applications.
    open the help window.<br>
    Some example commands you can try:
 
-    - `help` : Shows a message explaining how to access the help page.
+   - `help` : Shows a message explaining how to access the help page.
 
-    - `listp` : Lists all contacts in the ConcertPhonebook.
+   - `listp` : Lists all contacts in the ConcertPhonebook.
 
-    - `listc` : Lists all concerts in the ConcertPhonebook.
+   - `listc` : Lists all concerts in the ConcertPhonebook.
 
-    - `list` : Lists all contacts and concerts in the ConcertPhonebook.
+   - `list` : Lists all contacts and concerts in the ConcertPhonebook.
 
-    - `listcc` : Lists all concertContacts in the ConcertPhonebook.
+   - `listcc` : Lists all concertContacts in the ConcertPhonebook.
 
-    - `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/organiser t/friends` : Adds a
-      contact named `John Doe` to the ConcertPhonebook.
+   - `addp n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/organiser t/friends` : Adds a
+     contact named `John Doe` to the ConcertPhonebook.
 
-    - `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010` : Adds a concert
-      named `Coachella` to the ConcertPhonebook.
+   - `addc n/Coachella a/81800 51st Ave, Indio, Southern California, United States d/2024-12-20 1010` : Adds a concert
+     named `Coachella` to the ConcertPhonebook.
 
-    - `addcc pi/1 ci/1` : Links the 1st person to the 1st concert.
+   - `addcc pi/1 ci/1` : Links the 1st person to the 1st concert.
 
-    - `deletep 1` : Deletes the 1st person shown in the current person list.
+   - `deletep 1` : Deletes the 1st person shown in the current person list.
 
-    - `deletec 1` : Deletes the 1st concert shown in the current concert list.
+   - `deletec 1` : Deletes the 1st concert shown in the current concert list.
 
-    - `deletecc 1` : Deletes the 1st concertContact shown in the current concertContact list.
+   - `deletecc 1` : Deletes the 1st concertContact shown in the current concertContact list.
 
-    - `clear` : Deletes all contacts.
+   - `clear` : Deletes all contacts.
 
-    - `findp n/alice bob charlie r/organiser` : Finds person(s) named either `Alice`, `Bob` or `Charlie` with
-      an `organiser` role from the ConcertPhonebook.
+   - `findp n/alice bob charlie r/organiser` : Finds person(s) named either `Alice`, `Bob` or `Charlie` with
+     an `organiser` role from the ConcertPhonebook.
 
-    - `findc n/coachella glastonbury` : Finds concert(s) named either `Coachella` or `Glastonbury` from the
-      ConcertPhonebook.
+   - `findc n/coachella glastonbury` : Finds concert(s) named either `Coachella` or `Glastonbury` from the
+     ConcertPhonebook.
 
-    - `findcc pi/1 ci/1` : Finds the concertContact between the 1st person and 1st concert.
+   - `findcc pi/1 ci/1` : Finds the concertContact between the 1st person and 1st concert.
 
-    - `editp 1 n/John Doe` : Edits the name of the 1st person shown in the current person list to `John Doe`.
+   - `editp 1 n/John Doe` : Edits the name of the 1st person shown in the current person list to `John Doe`.
 
-    - `editc 1 n/Coachella` : Edits the name of the 1st concert shown in the current concert list to `Coachella`.
+   - `editc 1 n/Coachella` : Edits the name of the 1st concert shown in the current concert list to `Coachella`.
 
-    - `exit` : Exits the app.
+   - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -209,7 +209,7 @@ Format: `addc n/NAME a/ADDRESS d/DATE`
 - Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
 - **FYI**: If user were to add a date that does not exist where the day is less than 32, closest date in the same month
   will be added
-  e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
+  e.g. `2024-04-31 1159` will be stored as `2024-04-30 1159`
 
 Examples:
 
@@ -348,7 +348,7 @@ Format: `editc INDEX [n/NAME] [a/ADDRESS] [d/DATE]`
 - Existing values will be updated to the input values.
 - Date must be in the 'YYYY-MM-DD hhmm' format e.g `d/2025-01-21 1010`
 - FYI: If user were to add a date that does not exist, closest date in the same month will be added
-  e.g. `31-04-2024 1159` will be stored as `30-04-2024 1159`
+  e.g. `2024-04-31 1159` will be stored as `2024-04-30 1159`
 
 Examples:
 
@@ -403,7 +403,7 @@ the data of your previous AddressBook home folder.
 ## Command summary
 
 | Action                       | Format, Examples                                                                                                                                                             |
-|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Help**                     | `help`                                                                                                                                                                       |
 | **List Person**              | `listp`                                                                                                                                                                      |
 | **List Concerts**            | `listc`                                                                                                                                                                      |
