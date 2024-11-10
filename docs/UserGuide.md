@@ -9,58 +9,74 @@ EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **re
 
 <br> You are part of the ideal target audience of EZSTATE if you meet the following characteristics:
 
-`Job`: Real Estate Agent focused on residential or commercial property sales (i.e. listings)
+`Job`: Real Estate Agent focused on managing buyer and seller relationships 
 `Typing ability`: Comfortable with typing speeds of ~80 WPM or higher
 `Workflow Preference`: Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons
-`Tech Savviness`: Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons
+`Tech Savviness`: Confident using command-based applications and prefers minimal mouse use
 `Work Style`: Handles multiple clients and properties simultaneously and values efficiency in contact and property management
 `Environment`: Works in a fast-paced setting where quick data entry and retrival are essential
 
-But don’t worry if you don’t meet every characteristic — EZSTATE is designed to be intuitive and efficient for all users. 
-<br> Give it a try, and see how it can make your contact and property management tasks faster and easier!
+But do not worry if you do not meet every characteristic — EZSTATE is designed to be intuitive and efficient for all users!
+<br> Give it a try, and head over to our Quick Start guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## Quick Start Guide
 
-In this quick start guide, you'll learn how to install EZSTATES. 
-<br>
-<br>
-**(OPTIONAL)** You'll also learn how our commands work to kickstart the application. 
+Welcome to EZSTATE! This guide will walk you through installing the app and getting started with basic commands.
 
-<div class="note" markdown="span"> 
-While learning our command structure is optional, we highly recommend reviewing this section to make using EZSTATES much easier.
-</div>
+### Installation  Steps
 
-### Installation 
-
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. You can check by opening a command terminal and typing:
+    ```terminal
+    java -version
+    
+    ```
+    If you need `Java`, you can download it from Java Downloads.
 
 2. Download the latest `.jar` file from [EZSTATES Releases](https://github.com/AY2425S1-CS2103T-F11-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for EZSTATE.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ezstate.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
+4. Open a command terminal and navigate to the folder with the `.jar` file by typing:
+    ```terminal
+     cd path/to/your/folder
+   
+    ```
+   <br>
+
+   Then run the app with:
+    ```terminal
+    java -jar ezstate.jar
+   
+    ```
+    <br>
+   
+   A GUI should appear in a few seconds as shown below. Note that the initial launch of the app will contain some sample data.<br><br>
    ![Ui](images/Ui.png)<br><br>
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Basic Commands
+To use EZSTATE, type commands in the command box and press Enter. Here are a few to try:
 
-   * `showclients` : Lists all contacts.
+   * `help` : Opens the help window showing all commands.
 
-   * `buyer n/John Doe p/98765432 e/johnd@example.com` : Adds a buyer named `John Doe` to the Address Book.
+   * `showclients` : Lists all contacts in the system.
 
-   * `delete 1` : Deletes the index you chose.(Eg in this case 1 would be Alex Yeoh according to the picture below).
+   * `buyer n/John Doe p/98765432 e/johnd@example.com` : Adds a buyer named `John Doe` with a phone number `98765432` and email `johnd@example.com`.
+
+   * `delete 1` : Deletes the contact at index 1.(e.g. "Alex Yeoh" according to the picture above).
 
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) for command details.
+<div class="note" markdown="span">
+Explore the Features section for a full list of commands and their uses.
+</div>
+
 
 ### Command Structure
 
