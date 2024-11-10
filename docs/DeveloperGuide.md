@@ -878,3 +878,7 @@ for Mathematics on Monday (1500-1600) and Science on Wednesday (1200-1400).
 1. **Allow phone numbers from other countries:** Currently, UGTeach only allow Singapore formatted phone numbers. However, the user might provide tuition to international students who do not a Singapore number.
 Hence, we plan to **ease the restriction on phone numbers** to allow phone number with length **ranging from 3 to 17** since the shortest and longest
 phone number in the world are 3 and 17 respectively, according to the [World Population Review](https://worldpopulationreview.com/country-rankings/phone-number-length-by-country).
+
+1. **Improve UI to be horizontally scrollable**: Currently, UGTeach only allows vertical scrolling. 
+Hence 'extreme' inputs (e.g., a person name with 1000 characters) are **truncated** which might affect the normal usage of UGTeach.
+Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so that users can view 'extreme' inputs.
