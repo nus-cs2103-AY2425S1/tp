@@ -226,68 +226,68 @@ Commands for creating, updating, and deleting buyers and sellers.
 - **Format:** `buyer n/NAME p/PHONE e/EMAIL [t/TAG]...`
 - **Description:** Creates a new buyer profile with specified details.
 - **Successful Execution:**
-  > ---
-  >
-  > **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `bobby123@gmail.com`
-  >
-  > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
-  >
-  > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
-  >
-  > ---
-  >
-  > **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `bobby123@gmail.com`, tags `friend`, `owner`
-  >
-  > **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
-  >
-  > **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
-  >
-  > ---
+> ---
+>
+> **Use Case #1**: Adding a buyer named `Bobby` with phone number `91124444` and email `bobby123@gmail.com`
+>
+> **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com`
+>
+> **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+>
+> ---
+>
+> **Use Case #2**: Adding a buyer named `Bobby` with phone number `91124444`, email `bobby123@gmail.com`, tags `friend`, `owner`
+>
+> **Input**: `buyer n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
+>
+> **Output**: New buyer added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+>
+> ---
 
 - **Failed Execution:**
-  > ---
-  >
-  > **User Error #1**: Missing `NAME` field
-  >
-  > **Input**: `buyer p/91124444 e/bobby123@gmail.com`
-  >
-  > **Output**: <br>
+> ---
+>
+> **User Error #1**: Missing `NAME` field
+>
+> **Input**: `buyer p/91124444 e/bobby123@gmail.com`
+>
+> **Output**: <br>
 Invalid command format! <br>
 buyer: Adds a buyer to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
 Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-  >
-  > ---
-  >
-  > **User Error #2**: Missing `PHONE` field
-  >
-  > **Input**: `buyer n/Bobby e/bobby123@gmail.com`
-  >
-  > **Output**: <br>
+>
+> ---
+>
+> **User Error #2**: Missing `PHONE` field
+>
+> **Input**: `buyer n/Bobby e/bobby123@gmail.com`
+>
+> **Output**: <br>
 Invalid command format! <br>
 buyer: Adds a buyer to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
 Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-  >
-  > ---
-  >
-  > **User Error #3**: Missing `EMAIL` field
-  >
-  > **Input**: `buyer n/Bobby p/91124444`
-  >
-  > **Output**: <br>
+>
+> ---
+>
+> **User Error #3**: Missing `EMAIL` field
+>
+> **Input**: `buyer n/Bobby p/91124444`
+>
+> **Output**: <br>
 Invalid command format! <br>
 buyer: Adds a buyer to the address book. <br>
 Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
 Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-  >
-  > **User Error #4**: Buyer already exists
-  >
-  > **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
-  >
-  > **Output**: This buyer already exists in the address book
-  >
-  > ---
+>
+> **User Error #4**: Buyer already exists
+>
+> **Input**: `buyer n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_
+>
+> **Output**: This buyer already exists in the address book
+>
+> ---
 
 <br>
 <div class="note" markdown="span">
@@ -301,128 +301,128 @@ Adding a space between two names is treated as "adding a character". Hence,
 </div>
 <br>
 
-- #### Add Seller
-    - **Format:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
-    - **Description:** Creates a new seller profile with specified details.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Adding a seller named `Bobby` with phone number `91124444` and email `john123@gmail.com`
-      >
-      > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com`
-      >
-      > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
-      >
-      > ---
-      >
-      > **Use Case #2**: Adding a seller named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
-      >
-      > **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
-      >
-      > **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
-      >
-      > ---
-  
-    - **Failed Execution:**
-      > ---
-      > 
-      > **User Error #1**: Missing `NAME` field
-      >
-      > **Input**: `seller p/91124444 e/bobby123@gmail.com`
-      >
-      > **Output**: <br>
-        Invalid command format! <br>
-        seller: Adds a seller to the address book. <br>
-        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-        Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > ---
-      >
-      > **User Error #2**: Missing `PHONE` field
-      >
-      > **Input**: `seller n/Bobby e/bobby123@gmail.com`
-      >
-      > **Output**: <br>
-        Invalid command format! <br>
-        seller: Adds a seller to the address book. <br>
-        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-        Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > ---
-      > **User Error #3**: Missing `EMAIL` field
-      >
-      > **Input**: `seller n/Bobby p/91124444`
-      >
-      > **Output**: <br>
-        Invalid command format! <br>
-        seller: Adds a seller to the address book. <br>
-        Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
-        Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
-      >
-      > ---
-      > 
-      > **User Error #4**: Seller already exists
-      > 
-      > **Input**: `seller n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_ 
-      > 
-      > **Output**: This buyer already exists in the address book
-      > 
-      >  ---
+#### Add Seller
+- **Format:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
+- **Description:** Creates a new seller profile with specified details.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Adding a seller named `Bobby` with phone number `91124444` and email `john123@gmail.com`
+>
+> **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com`
+>
+> **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags:
+>
+> ---
+>
+> **Use Case #2**: Adding a seller named `Bobby` with phone number `91124444`, email `john123@gmail.com`, tags `friend`, `owner`
+>
+> **Input**: `seller n/Bobby p/91124444 e/bobby123@gmail.com t/friend t/owner`
+>
+> **Output**: New seller added: Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]
+>
+> ---
 
-- #### Find
-    - **Format:** `find KEYWORD [KEYWORD]...`
-    - **Description:** Finds the specified client(s) based on the provided keywords.
-    - **Successful Execution:**
-      > ---
-      > **Use Case #1**: Finding `Bob`
-      >
-      > **Input**: `find Bob`
-      >
-      > **Output**: 1 persons listed!
-      >
-      > ![bob](images/bob.png)
-      >
-      > ---
-      >
-      > **Use Case #2**: Finding `Bob` OR `Winter`
-      >
-      > **Input**: `find Bob Winter`
-      >
-      > **Output**: 2 persons listed!
-      >
-      > ![bobwinter](images/bob_winter.png)
-      >
-      > ---
+- **Failed Execution:**
+> ---
+> 
+> **User Error #1**: Missing `NAME` field
+>
+> **Input**: `seller p/91124444 e/bobby123@gmail.com`
+>
+> **Output**: <br>
+Invalid command format! <br>
+seller: Adds a seller to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+>
+> ---
+>
+> **User Error #2**: Missing `PHONE` field
+>
+> **Input**: `seller n/Bobby e/bobby123@gmail.com`
+>
+> **Output**: <br>
+Invalid command format! <br>
+seller: Adds a seller to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+>
+> ---
+> **User Error #3**: Missing `EMAIL` field
+>
+> **Input**: `seller n/Bobby p/91124444`
+>
+> **Output**: <br>
+Invalid command format! <br>
+seller: Adds a seller to the address book. <br>
+Parameters: n/NAME p/PHONE e/EMAIL [t/TAG]...<br>
+Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
+>
+> ---
+> 
+> **User Error #4**: Seller already exists
+> 
+> **Input**: `seller n/Bobby p/83485111 e/bobby1234@gmail.com` <br>_(Assuming name `Bobby` already exists)_ 
+> 
+> **Output**: This buyer already exists in the address book
+> 
+>  ---
 
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `find Bob` = `find BOB` = `find bOb` _(not exhaustive)_
-    </div>
-    <br>
+#### Find
+- **Format:** `find KEYWORD [KEYWORD]...`
+- **Description:** Finds the specified client(s) based on the provided keywords.
+- **Successful Execution:**
+> ---
+> **Use Case #1**: Finding `Bob`
+>
+> **Input**: `find Bob`
+>
+> **Output**: 1 persons listed!
+>
+> ![bob](images/bob.png)
+>
+> ---
+>
+> **Use Case #2**: Finding `Bob` OR `Winter`
+>
+> **Input**: `find Bob Winter`
+>
+> **Output**: 2 persons listed!
+>
+> ![bobwinter](images/bob_winter.png)
+>
+> ---
 
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `find Wen Xuan` != `find WenXuan`
-    <br>
-    <br>
-    First command finds names with `wen` OR `xuan`
-    <br>
-    Second command finds names with `wenxuan`
-    </div> 
-    <br>    
+<br>
+<div class="note" markdown="span">
+NAME is case-insensitive: 
+`find Bob` = `find BOB` = `find bOb` _(not exhaustive)_
+</div>
+<br>
 
-    - **Failed Execution:**
-      > ---
-      >
-      > **Use Case**: Client not found
-      > 
-      > **Input**: `find Bob7`
-      > 
-      > **Output**: 0 persons listed!
-      > 
-      > ![noclients](images/no_clients.png)
-      > 
-      > ---
+<div class="alert" markdown="span">
+However, NAME is space-sensitive:
+`find Wen Xuan` != `find WenXuan`
+<br>
+<br>
+First command finds names with `wen` OR `xuan`
+<br>
+Second command finds names with `wenxuan`
+</div> 
+<br>    
+
+- **Failed Execution:**
+> ---
+>
+> **Use Case**: Client not found
+> 
+> **Input**: `find Bob7`
+> 
+> **Output**: 0 persons listed!
+> 
+> ![noclients](images/no_clients.png)
+> 
+> ---
 
 - #### Edit Client
     - **Format:** `editclient INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...`
