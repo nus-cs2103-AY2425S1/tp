@@ -1,4 +1,71 @@
-.list-cell {
-    -fx-padding: 8;
-    -fx-wrap-text: true;
+.root {
+    -fx-background-color: #1d1d1d;
+}
+
+.scene {
+    -fx-background-color: #1d1d1d;
+}
+
+.help-window {
+    -fx-background-color: #1d1d1d;
+}
+
+.content-box {
+    -fx-background-color: #1d1d1d;
+}
+
+.scroll-pane {
+    -fx-background-color: #1d1d1d;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: #1d1d1d;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: #2a2a2a;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #3e3e3e;
+}
+
+.help-text-flow {
+    -fx-padding: 10;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-background-color: #1d1d1d;
+}
+
+.help-text {
+    -fx-font-size: 14px;
+    -fx-fill: #e0e0e0;
+}
+
+.help-text-flow .text {
+    -fx-line-spacing: 5px;
+    -fx-fill: #e0e0e0;
+}
+
+#copyButton {
+    -fx-background-color: #3e3e3e;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+#copyButton:hover {
+    -fx-background-color: #4a4a4a;
+}
+
+#copyButton:pressed {
+    -fx-background-color: #2e2e2e;
+}
+
+#helpMessage {
+    -fx-text-fill: #b3b3b3;
+    -fx-font-size: 12px;
+}
+
+#helpMessageContainer {
+    -fx-background-color: #2a2a2a;
+    -fx-padding: 10px;
 }
