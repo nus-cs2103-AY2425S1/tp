@@ -347,6 +347,9 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 >
 > ---
 
+- **Special Comments**
+1. Refer to the Remarks section for prefixes: [n/](#n) [p/](#p) [e/](#e) [t/](#t)
+
 #### Add Seller
 - **Command:** `seller n/NAME p/PHONE e/EMAIL [t/TAG]...`
 - **Description:** Creates a new seller profile with specified details.
@@ -414,6 +417,9 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > 
 >  ---
 
+- **Special Comments**<
+1. Refer to the Remarks section for prefixes: [n/](#n), [p/](#p), [e/](#e), [t/](#t)
+
 #### Find
 - **Command:** `find KEYWORD [KEYWORD]...`
 - **Description:** Finds the specified client(s) based on the provided keywords.
@@ -451,6 +457,10 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ![noclients](images/no_clients.png)
 > 
 > ---
+
+- **Special Comments**
+1. For cases where names consist of two or more parts (e.g. Wen Xuan), inputting `find Wen Xuan` results in finding clients containing `Wen` OR `Xuan` in their names, as per Use Case #2. 
+
 
 #### Edit Client
 - **Command:** `editclient INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...`
@@ -506,6 +516,9 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > **Output**: The person index provided is invalid
 > 
 > ---
+
+- *Special Comments*
+1. Refer to
 
 #### Delete Client
 - **Command:** `deleteclient INDEX`
