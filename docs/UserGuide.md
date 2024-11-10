@@ -135,6 +135,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Clients matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The results of this command will be cleared after the execution of the next successful
+  command. The list of clients would revert to showing the full list of all clients saved in the app.
 
 <box type="warning" seamless>
     <span circle slot="icon"><md>:warning:</md></span>
@@ -151,10 +153,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 Input 1: `find alex yu`
 <br>
 Output 1: ![result for 'find alex yu'](images/findalexyuResult.png)
-
-**Note**: the results of this command will be cleared after the execution of the next successful
-command. The list of clients would revert to showing the full list of all clients saved in the app.
-
 
 ### Deleting a client : `delete`
 
