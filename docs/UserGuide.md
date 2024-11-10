@@ -156,6 +156,14 @@ Before continuing, here are some important information you need to know about th
 
 Before diving into our features, do note that we set some specifications for naming and such. You might want to read this section if you keep getting an `Invalid command format!` message, or want to find out more intricate details about InternBuddy. Otherwise, skip to [add command](#adding-a-company-add) to begin.
 
+<box type="warning" seamless>
+
+**Note about extra parameters:** We advise that you follow the command format of each command strictly (some exceptions apply) to avoid
+unexpected behaviour when running commands. This means you **should not** put extra parameters unless allowed, and you **should
+not** put parameters that are not recognised by the command.
+
+</box>
+
 <box type="info" seamless>
 
 **Important notes about the command format:**<br>
@@ -301,6 +309,22 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the company will be removed i.e adding of tags is not cumulative.
 * You can remove all the company’s tags by typing `t/` without
     specifying any tags after it.
+
+<box type="tip" seamless>
+
+**tip:** InternBuddy will show what changes you have made to company in the results box, so that you can verify that you
+have made the right edits!
+</box>
+
+<box type="info" seamless>
+
+**Note about `edit` command**: 
+* Currently, InternBuddy does not check if the parameters you provide are exactly same as it
+the existing parameters for that company. So please be mindful when entering your inputs, especially if you are making small changes (eg: `PHONE: 98765432 -> 98675432`).
+* After running the `edit` command, the view will return to showing the full list of companies, so do be mindful when running consecutive edits to prevent changing the wrong
+Company's information.
+</box>
+
 
 Examples:
 *  `edit 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
@@ -474,6 +498,10 @@ _Details coming soon ..._
 
 **Q**: Must I install java 17 or above to use InternBuddy? <br>
 **A**: Yes, InternBuddy uses libraries implemented in java 17 or above, it will not work without it.
+
+**Q**: Do I have to follow the order of parameters specified by the commands? <br>
+**A**: If the parameter has a prefix (eg: `n/NAME`), you can specify them in any order you like! However, parameters with no prefix (eg: `INDEX`)
+must appear as the first input after the command.
 
 **Q**: How do I add a new company with multiple tags? <br>
 **A**: To add a company with multiple tags, use the add command with multiple t/ tags. Example: `add n/Google LLC e/contact@google.com t/tech t/FAANG t/software`

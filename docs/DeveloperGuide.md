@@ -909,3 +909,8 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 Team size: 5
 
 1. **Make `NAME` field less restrictive**: Currently, only alphanumeric characters are permitted, which means names like "Ernst & Young" and "UI/UX developer" cannot be accurately represented. We plan to expand the set of special characters allowed in the `NAME` field to support a wider range of company names and applications.
+
+1. **Improved `edit` command**: Currently, the `edit` command does not check that if user is trying to do a redundant edit (eg: changing email to the same email), 
+which may result in error-prone users (when trying do a minor update like `PHONE: 98765432 -> 98675432`) mistakenly thinking that they have edited the company successfully. In addition, after
+the edit is done, the full list of companies is then shown (instead of showing the current filtered list of companies) which is inconvenient for those doing multiple updates consecutively. We plan to
+fix this by <ins>1) preventing users from doing redundant edits</ins> and <ins>2) keeping the existing list of companies displayed instead of showing every company after the edit</ins>.
