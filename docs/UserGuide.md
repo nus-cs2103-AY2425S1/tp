@@ -120,7 +120,8 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
 
 ### Step 3: Try Your First Commands
 
-Now that PROperty is running, let's try using the different commands available. All you have to do is to type the command in the command box and press Enter to execute it. 
+Now that PROperty is running, let's try using the different commands available.
+All you have to do is to type the command in the command box and press Enter to execute it. 
 Some example commands you can try are:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
@@ -131,6 +132,9 @@ Some example commands you can try are:
 
 * `listing add 2 t/HDB a/Adam street, block 456, #03-03` : Adds a listing for the client with index 2 in PROperty.
 
+<div markdown="block" class="alert alert-primary">
+:bulb: Recommended Window Size<br> For the best experience, use PROperty at full screen on your PC.
+</div>
 
 Refer to the [Features](#features) below for details of each command.
 
