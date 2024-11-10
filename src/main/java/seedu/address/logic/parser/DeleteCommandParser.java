@@ -21,15 +21,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         String trimmedArg = args.trim();
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE);
+        String preamble = argMultimap.getPreamble(); // Assuming preamble is used for ID
         argMultimap.verifyNoDuplicateStudentId(args);
 
-        if (trimmedArg.isEmpty()) {
+        if (trimmedArg.isEmpty() || preamble.isEmpty() || ParserUtil.hasWhitespace(preamble)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        String studentIdString = argMultimap.getPreamble(); // Assuming preamble is used for ID
-        StudentId studentId = ParserUtil.parseStudentId(studentIdString);
+        StudentId studentId = ParserUtil.parseStudentId(preamble);
 
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
             String moduleName = argMultimap.getValue(PREFIX_MODULE).get();

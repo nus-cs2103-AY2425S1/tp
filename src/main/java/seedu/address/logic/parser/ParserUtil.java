@@ -2,10 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -134,18 +130,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
-     */
-    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
-        requireNonNull(roles);
-        final Set<Role> roleSet = new HashSet<>();
-        for (String roleName : roles) {
-            roleSet.add(parseRole(roleName));
-        }
-        return roleSet;
-    }
-
-    /**
      * Parses a {@code String course} into a {@code Course}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -227,5 +211,9 @@ public class ParserUtil {
 
     public static String makeLowercase(String input) {
         return input.toLowerCase();
+    }
+
+    public static boolean hasWhitespace(String input) {
+        return input.contains(" ");
     }
 }
