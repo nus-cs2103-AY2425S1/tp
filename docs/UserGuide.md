@@ -170,7 +170,7 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
   - The local-part should only contain alphanumeric characters and the special characters +_.-
   - The local-part may not start or end with special characters.
   - This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods (e.g. `u.nus.edu`).
-- Address must be: Any characters are valid
+- Address must be: Any characters are valid (except for `/`)
 - Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces, each should be 50 characters or fewer
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
