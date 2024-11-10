@@ -25,14 +25,13 @@ import seedu.address.ui.Observer;
 public class Event {
     public static final String MESSAGE_CONSTRAINTS = "Event name should not exceed 60 characters and "
             + "should not be blank.";
+    public static final String VALIDATION_REGEX = ".{1,60}";
     private final String name;
     private final Set<Person> attendees;
     private final Set<Person> vendors;
     private final Set<Person> sponsors;
     private final Set<Person> volunteers;
     private Observer observer;
-
-    public static final String VALIDATION_REGEX = ".{1,60}";
 
     /**
      * Constructs a {@code Event}.
