@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.CategoryContainsKeywordPredicate;
 
 /**
- * Tracks and lists all persons in the address book who are in the specified category to the user.
+ * Tracks and lists all persons in the contact list who are in the specified category to the user.
  */
 public class TrackCommand extends Command {
 
@@ -32,6 +32,7 @@ public class TrackCommand extends Command {
     private final String category;
 
     /**
+     * Constructor for tracking and listing all persons from the specified category.
      * @param categoryPredicate the category to track from the list of predefined categories
      */
     public TrackCommand(CategoryContainsKeywordPredicate categoryPredicate) {
@@ -60,7 +61,6 @@ public class TrackCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof TrackCommand t)) {
             return false;
         }

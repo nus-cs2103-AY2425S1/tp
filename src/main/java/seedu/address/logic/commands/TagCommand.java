@@ -19,7 +19,7 @@ import seedu.address.model.person.student.Student;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds tag(s) to an existing person in the list without overwriting existing tags.
+ * Adds tag(s) to an existing person in the contact list without overwriting existing tags.
  */
 public class TagCommand extends Command {
 
@@ -59,7 +59,7 @@ public class TagCommand extends Command {
     }
 
     /**
-     * Constructor for adding tags to all persons in the list.
+     * Constructor for adding tags to all persons in the displayed list.
      * @param tagsToAdd Set of tags to be added to all persons.
      */
     public TagCommand(Set<Tag> tagsToAdd) {
@@ -116,7 +116,7 @@ public class TagCommand extends Command {
     }
 
     /**
-     * Checks if the person already has the specified tag, ignoring case.
+     * Checks if the person already has the specified case-insensitive tag.
      * @param person The person to check.
      * @param tag The tag to check for.
      * @return True if the person has the tag, false otherwise.
