@@ -1,7 +1,11 @@
 ---
   layout: default.md
   title: "User Guide"
+  pageNav: 3
 ---
+
+<img src="images/wardwatch_banner.png" alt="wardwatch-logo" style="pointer-events: none;">
+
 # WardWatch User Guide
 
 WardWatch (WW) is a **desktop app targeted towards doctors and nurses for managing patients information in hospitals**, optimized for use via a [Command Line Interface (CLI)](#glossary) while still having the benefits of a [Graphical User Interface (GUI)](#glossary). If you can type fast, WW can get your patient management tasks done faster than traditional GUI apps.
