@@ -855,3 +855,26 @@ testers are expected to do more *exploratory* testing.
        e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Planned Enhancement**
+
+Given below are the planned enhancements for UGTeach (to be implemented in the future).
+
+**Team size: 5**
+
+1. **Make Add Command fields shorter:** The current `add command` have 7 compulsory parameters which might be tedious and long even for users who can type fast.
+We plan to make the `add command` shorter by making the `email` field **optional**. This is the **new format:**
+`add n/NAME p/PHONE_NUMBER a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [e/EMAIL] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`, where parameters in square brackets are optional.
+
+1. **Allow students to have multiple classes:** Currently, UGTeach only allow 1 student to have 1 subject and 1 schedule. UGTeach also forbid users from recording duplicated contacts.
+Hence, users are unable to record multiple classes for students who require tuition for **more than one subject**. 
+We plan to combine the `subject` and `schedule` parameters to form a `class` parameter that takes in 1 or more classes seperated by comma(s). For instance, the input
+`edit 1 class/Mathematics Monday-1500-1600, Science Wednesday-1200-1400` would mean the first student in UGTeach is receiving tuitions
+for Mathematics on Monday (1500-1600) and Science on Wednesday (1200-1400).
+
+1. **Allow phone numbers from other countries:** Currently, UGTeach only allow Singapore formatted phone numbers. However, the user might provide tuition to international students who do not a Singapore number.
+Hence, we plan to **ease the restriction on phone numbers** to allow phone number with length **ranging from 3 to 17** since the shortest and longest
+phone number in the world are 3 and 17 respectively, according to the [World Population Review](https://worldpopulationreview.com/country-rankings/phone-number-length-by-country).
