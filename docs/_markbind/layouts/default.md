@@ -64,8 +64,8 @@
   <scroll-top-button></scroll-top-button>
 </div>
 
-<footer style="background-color: #333; color: white; padding: 20px; text-align: center;">
-  <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+<footer style="background-color: #333; color: white; text-align: center; padding: 10px 0; font-size: 0.9rem;">
+  <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
     <a href="{{baseUrl}}/AboutUs.html" class="nav-link" style="color: #E83E8C; font-weight: bold; text-decoration: none;">About Us</a>
     <a href="https://github.com/AY2425S1-CS2103T-F15-4/tp" target="_blank" class="nav-link" style="color: #E83E8C; font-weight: bold; text-decoration: none;">
       <i class="fab fa-github"></i>
