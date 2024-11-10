@@ -129,7 +129,10 @@ Adds a pet to PawPatrol.
 <li>Pet breed: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
 <li>Pet age: Must only contain numbers, and it should be 1 or 2 digits long.</li>
 <li>Pet sex: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female respectively).</li>
-<li>Pet tags: Must be alphanumeric and should only contain a single word each. Avoid having long tags.</li>
+<li>Pet tags: Must be alphanumeric and should only contain a single word each.</li>
+<ul>
+<li>Ensure that tags are short in length. Avoid long tags</li>
+</ul>
 </ul>
 </div>
 
