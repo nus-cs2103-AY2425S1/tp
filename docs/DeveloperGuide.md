@@ -764,8 +764,9 @@ Use case ends.
    able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be for a single user only.
 5. Data should be stored in a human editable text file.
-6. Should not depend on any remote server.
-7. Should be packaged into a single JAR file
+6. Should be able to store up to 100 version histories.
+7. Should not depend on any remote server.
+8. Should be packaged into a single JAR file
 
 _{More to be added}_
 
