@@ -12,6 +12,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/wkxcass.png" width="200px">
 
 [[github](https://github.com/wkxcass)]
+[[portfolio](team/wkxcass.md)]
 
 * Role: Code quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
