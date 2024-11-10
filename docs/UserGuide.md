@@ -361,7 +361,7 @@ Format: `addToGroup g/GROUP_NAME m/INDICES`
 * There must already exist a group with the name `GROUP_NAME`. The indices
 must be valid indices.
 * If either of the above conditions are not met, the command will fail.
-* The address book differentiates group names by checking both the characters and the number of spaces. Blood Drive
+* CFG differentiates group names by checking both the characters and the number of spaces. Blood Drive
     with a single space is NOT the same group as Blood&nbsp;&nbsp;&nbsp;Drive.
 
 Example:
