@@ -24,7 +24,8 @@ public class SearchModeSearchCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/Amy Bob Charlie";
 
     public static final String MESSAGE_SUCCESS = "Added %1$s Contacts who fit search parameter.";
-    public static final String MESSAGE_NO_PERSONS_FOUND = "No Contacts found with the search parameter.";
+    public static final String MESSAGE_NO_PERSONS_FOUND = "No contacts found with the search parameter.\n"
+            + "Either that or the contact is already in the search results.";
 
     //maintains a set of predicates, reducing them to get the final predicate in execute
     private final Set<Predicate<Person>> predicates = new HashSet<>();
@@ -44,8 +45,6 @@ public class SearchModeSearchCommand extends Command {
         int originalSize = model.getFilteredPersonList().size();
         Predicate<Person> predicate = predicates.stream().reduce(Predicate::and).orElse(x -> true);
         Predicate<Person> newPredicate = currPredicate.or(predicate);
-
-
 
         model.updateFilteredListWithExclusions(newPredicate);
         int updatedSize = model.getFilteredPersonList().size();

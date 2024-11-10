@@ -27,6 +27,9 @@ public class TelegramContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        if (!person.hasTelegramUsername()) {
+            return false;
+        }
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getTelegramUsername().toString(), keyword)
                                     || person.getTelegramUsername().toString()
