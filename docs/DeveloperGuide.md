@@ -474,7 +474,9 @@ We plan to make it a label to solve the issue.
 We plan to make Prudy inform the user which parameters they left out instead of throwing a general error message.
 4. **Add feature to ensure emails contain a valid domain:** Currently Prudy only checks if email contains both local part and domain.
 We plan to enhance the checks by checking if the domain is valid i.e. contains both domain name and top level domain.
-5. 
+5. **Enhance the visuals for policy in the UI:** We plan to enhance the presentation of information for policy and claims.
+6. **Make emails case-insensitive:** Currently emails is case-sensitive which does not make sense as capital letters do not affect email addresses in any way. Therefore, we plan to make emails case-insensitive.
+7. **Make claims case-insensitive:** Currently, claims are case-sensitive and therefore do not detect duplicates when descriptions differ only in letter casing (e.g., Accident Claim vs. accident claim). We plan to convert claims to lowercase before storing.
 
 --------------------------------------------------------------------------------------------------------------------
 
