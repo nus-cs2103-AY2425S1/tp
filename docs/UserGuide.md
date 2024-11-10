@@ -95,7 +95,7 @@ Explore the [Features](#features) section for a full list of commands and their 
 
 ### Command Structure
 
-In this section, we will explore the command structure in EZSTATE before delving into the **Features** section. 
+In this section, we will explore the command structure in EZSTATE before delving into the [Features](#features) section. 
 <br>
 
 Understanding the command structure in EZSTATE is essential for efficient navigation and use of the app’s features. 
