@@ -193,7 +193,7 @@ the constraints of each parameter when used in a command.
 > :exclamation: **Caution:** 
 >
 > * Ensure that all parameters adhere to the constraints mentioned below. Otherwise, the command will not be executed, and an error message will be displayed.
-> * Any mention of Alphanumeric characters refers to those in **Standard English** (i.e. 26 characters of the Latin alphabet). Accented or diacritical characters (e.g., é, ü, ç) and characters from other languages are currently **not supported**.
+> * Accented or diacritical characters (e.g., é, ü, ç) and characters from other languages are currently **not supported**.
 
 
 | Parameter          | Definition                                                                                                 | Constraints                                                                                                                                                                                                                                                                                                                                                                            | Examples                                                                                                                          |
@@ -755,6 +755,7 @@ The table below provides the definitions for the key terms we will be using thro
 | Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.                                   |
 | Prefix    | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter. |
 | Preamble  | A preamble refers to text before the first valid prefix.                                                                                                                           |
+| Alphanumeric | Refers to characters in Standard English, including the 26 letters of the Latin alphabet and the numbers 0-9. |
 
 [Back to Table of Contents](#table-of-contents)
 
