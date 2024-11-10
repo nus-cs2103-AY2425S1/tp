@@ -255,12 +255,32 @@ TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 
 ### Mark a supplier with a status : `mark -s`
 
-The `mark` command is used to mark a supplier as either **active** or **inactive**
+The `mark` command is used to mark a supplier as either **active** or **inactive**.
 in VendorVault. This helps you keep track of which suppliers are currently active for deliveries and which are not.
 
-Format: `mark -s SUPPLIER_INDEX STATUS`
-- `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank.
+Format: `mark -s INDEX STATUS`
+
+<box type="details" seamless>
+
+Parameters:
+- `INDEX`: The index of the supplier in the list. Must be a number greater than 0 and must not be blank.
+- `STATUS`: Must be one of the following: `active`, `inactive` and must not be blank. Parameters used are case-sensitive.
+
+</box>
+
+<box type="warning" seamless>
+
+**Warnings**:
+- At least one space between `mark` and `-s` is needed.
+- At least one space between `-s` and `INDEX` is needed.
+- At least one space between `INDEX` and `STATUS` is needed.
+- Both parameters must be given.
+- Parameters used are case-sensitive.
+- A supplier has a default status of `active`.
+- A supplier with an `inactive` status signifies that the supplier is not currently active for deliveries.
+  However, marking an `active` supplier as `inactive` will not delete the delivery associated with the supplier from the delivery list
+  or affect the delivery status in any way.
+</box>
 
 #### Example
 To mark the supplier at index 3 as active:
@@ -275,23 +295,34 @@ A success message will be displayed if the supplier is successfully marked as ac
 ### Find a supplier: `find -s`
 
 The `find -s` command is used to find a supplier in VendorVault. 
-This helps you find suppliers based on keyword search.
+This helps you to search for a supplier based on the supplier name, company, or product. 
 
 Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 
 Parameters:
 
-- `n/NAME`: Must be alphanumeric, and must not be blank.
-- `com/COMPANY`: Must be alphanumeric, and must not be blank.
-- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
+- `n/NAME`: Must be alphanumeric, and must not be blank. Parameters used are case-insensitive.
+- `com/COMPANY`: Must be alphanumeric or punctuation characters, and must not be blank. Parameters used are case-insensitive.
+- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, 
+and must be between 1 and 50 (inclusive) characters long. Parameters used are case-insensitive.
+
+<box type="tip" seamless>
+
+**Tip:**
+- The find result(s) will contain/satisfy all the given parameters.
+- eg: If you execute the command `find -s n/link com/NU`, 
+the result will contain suppliers whose name contains "link" and company contains "NU" if any.
+</box>
 
 <box type="warning" seamless>
 
 **Warnings**:
-- At least one non-empty parameter must be given
-- No duplicate parameter can be used
-- Find result(s) will contain/satisfy all the given parameters
-- Find feature is case-insensitive
+- At least one non-empty parameter must be given.
+- No duplicate prefix can be used.
+- At least one space between `find` and `-s` is needed.
+- At least one space between '-s' and the next parameter is needed.
+- At least one space between each parameter and the next prefix is needed.
+- Parameters used are case-insensitive.
 </box>
 
 
@@ -306,18 +337,31 @@ To find the supplier whose name contains "link" and company contains "NU":
 
 ### Sort suppliers: `sort -s`
 
-The `sort -s` command is used to sort suppliers in VendorVault.
-This helps you to view the suppliers in a different order (ascending or descending), based on the supplier name.
+The `sort -s` command is used to sort suppliers according to the supplier name in VendorVault.
+This helps you to view the suppliers in a different order (ascending or descending).
 
 Format: `sort -s so/SORT_ORDER sb/SORT_BY`
-- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending.
-- `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name)
+
+Parameters:
+- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending. Parameters used are case-sensitive.
+- `SORT_BY`: Must be 'n' for name. (Current version of VendorVault only supports sorting by name) 
+Parameters used are case-sensitive.
+
+<box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `add` and `-s` is compulsory
-- All prefixes and parameters must be given
-- No duplicate prefix can be used
-- Parameters used are **case-sensitive**
+- At least one space between `sort` and `-s` is needed.
+- At least one space between `-s` and `so` is needed.
+- At least one space between `SORT_ORDER` and `sb` is needed.
+- All prefixes and parameters must be given.
+- No duplicate prefix can be used.
+- Parameters used are case-sensitive.
+- The sort command will only sort all suppliers in VendorVault.
+- i.e.
+    - If you have searched for a supplier using the `find` command,
+      the sort command will not sort the previous results of the `find` command, but will sort all suppliers in VendorVault.
+</box>
+
 
 #### Example
 To sort suppliers by name in descending order:
@@ -333,75 +377,105 @@ A success message will be displayed if the suppliers are successfully sorted.
 
 ### Adding a delivery: `add -d`
 
-Adds a delivery to the address book.
+Adds a delivery to VendorVault.
 
-Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST`
+Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY c/COST`
+
+<box type="details" seamless>
 
 Parameters:
 
-- `on/DELIVERY_DATE_TIME`: Must be in dd-MM-yyyy hh:mm format, and must not be blank.
-- `s/SUPPLIER_INDEX`: Must be a number greater than 0, and must not be blank.
-- `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
-- `q/QUANTITY`: Must be a number greater than 0 followed by a space, and unit and must not be blank.
-- `c/COST`: Must be a number greater than 0 with up to 2 decimal places allowed, and must not be blank.
-<box type="tip" seamless>
+- `on/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the date and time of delivery. It must be in dd-MM-yyyy hh:mm format, and cannot be blank.
+- `s/SUPPLIER_INDEX`:`SUPPLIER_INDEX` is the index of supplier currently displayed. It must be a number between 1 and the total number of suppliers currently displayed (inclusive), and cannot be blank.
+- `pro/PRODUCT`: `PRODUCT` is the product associated with the delivery. It must be alphanumeric, only contain between 1 and 50 (inclusive) characters, and spaces are also allowed.
+    - One space is counted as one character.
+    - `PRODUCT` cannot be made up of only spaces.
+- `q/QUANTITY`: `QUANTITY` is the amount of product to be delivered with units. It must be a number greater than 0 followed by a space, and a unit, and must not be blank.
+    - `QUANTITY` cannot have decimal places.
+    - `QUANTITY` units are case sensitive.
+    - Accepted units for `QUANTITY` are `kg`, `g`, `L`, `mL`, `units`. 
+- `c/COST`: `COST` is the total cost for the delivery. It must be a number greater than 0 with up to 2 decimal places allowed, and cannot be blank.
 
-**Tip:** Day and month of date must be in double digits!
+**Tips:** 
+- Day, month, hour and minute of DELIVERY_DATE_TIME must be in double digits!
+  - example: 03-03-2024 02:01
+
 </box>
 
 <box type="warning" seamless>
 
 **Warnings**:
-- A spacing between `add` and `-d` is compulsory
-- A delivery is considered duplicate if they have the same DATE, TIME, SUPPLIER, PRODUCT and COST
-- Duplicate delivery will not be added again
-- No duplicate prefix can be used
-- Units for QUANTITY is case-sensitive
+- At least one space is needed between `add` and `-d`.
+- At least one space is needed between `-d` and the first parameter.
+- At least one space is needed between parameters.
+- A warning will be given if the user tries to add a duplicate delivery.
+  - A delivery is considered duplicate and will not be added again if it has the same `DELIVERY_DATE_TIME`, `SUPPLIER`, `PRODUCT`, `QUANTITY`, `COST` and `STATUS` as an existing delivery.
+      - Comparison between different `PRODUCT`is case-sensitive.
+- A delivery has a default `STATUS` of `PENDING`.
+- A delivery cannot be added if the supplier of the chosen `SUPPLIER_INDEX` has status `INACTIVE`.
+
 </box>
 
-#### Example
+Examples:
+- `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/25.50`
+- `add -d on/19-12-2022 08:00 s/2 pro/rice q/50 kg c/50.20 `
 
-    add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50
+Expected output:
+- Delivery details is shown and paired to supplier at index 1, assuming there is at least one supplier displayed. Otherwise, an error message will be shown.
+- Delivery details is shown and paired to supplier at index 2, assuming there is at least two suppliers displayed. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
+TO UPDATE IMAGE AFTER FINAL UPDATE TO APPLICATION!!!
 ![add delivery command](images/addDeliveryCommand.png)
 
 ### Listing all deliveries: `list -d`
 
-Shows a list of all supplier in the VendorVault. (The supplier list will not be affected)
+Shows a list of all deliveries in VendorVault. The supplier list will not be affected.
 
 Format: `list -d`
-
 
 <box type="warning" seamless>
 
 **Warnings**:
+- At least one space is needed between `list` and `-d`.
 - No other parameters should be given for this command.
-- At least one space between list and -a
+
 </box>
 
 ### Marking a delivery : `mark -d`
 
-Marks the specified delivery from the address book with the specified `STATUS`.
+Marks the specified delivery in VendorVault with the specified `STATUS`.
 
 Format: `mark -d INDEX STATUS`
 
+<box type="details" seamless>
+
 Parameters:
 
-- `INDEX`: Must be a number greater than 0 and must not be blank.
-- `STATUS`: Must be one of the following: `PENDING`, `DELIVERED`, `CANCELLED` and must not be blank.
-<box type="tip" seamless>
+- `INDEX`: The index of the delivery to be marked in the displayed list. It must be a number between 1 and the total number of deliveries displayed (inclusive), and cannot be blank.
+- `STATUS`: The status of delivery. It must be one of the following values: `PENDING`, `DELIVERED`, `CANCELLED`, and cannot be blank.
 
-**Warnings**:
-- A spacing between `mark` and `-d` is compulsory
-- Both parameters must be given
-- Parameters used are case-insensitive
+
 </box>
 
+<box type="warning" seamless>
+
+**Warnings**:
+- At least one space is needed between `mark` and `-d`.
+- At least one space is needed between `-d` and `INDEX`.
+- At least one space is needed between `INDEX` and `STATUS.
+- `STATUS` is not case-sensitive. `pending`, `delivered`, `cancelled` can be accepted as well.
+- An error message will be given if the user tries to mark a delivery with a status that is the same as the existing status.
+
+</box>
 
 Examples:
-* `list` followed by `mark -d 2 pending` marks the 2nd delivery in the address book with a pending status.
-* `find -d /pro bread` followed by `mark -d 1 cancelled` marks the 1st delivery in the results of the `find` command with a cancelled status.
+- `mark -d 2 DELIVERED`
+- `find -d pro/ bread` followed by `mark -d 1 cancelled`
+
+Expected output:
+- Delivery at index 2 of the displayed list has status shown as DELIVERED, assuming it has a different status initially. Otherwise, an error message will be shown.
+- Delivery at index 1 of the displayed list has status shown as CANCELLED, assuming it has a different status initially and there is at least one delivery in the displayed list after the find command is executed. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 ![mark delivery command](images/markDeliveryCommand.png)
@@ -491,34 +565,44 @@ To sort deliveries by cost in ascending order:
 
 ### Upcoming deliveries: `upcoming`
 
-The `upcoming` command is used to view pending deliveries in VendorVault.
-You can choose to view all pending deliveries within a specified date range or
+Shows a list of pending deliveries in VendorVault based on delivery date and time. You can choose to view all pending deliveries within a specified date range or
 before or after a given date.
 
-Format: `upcoming aft/START_DATE bef/END_DATE`
+Format: `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`
+
+<box type="details" seamless>
 
 Parameters:
 
-- `aft/START_DATE`: Must be in dd-mm-yyyy hh:mm format.
-- `bef/END_DATE`: Must be in dd-mm-yyyy hh:mm format.
-<box type="tip" seamless>
-**Tip:** You can provide both START_DATE and END_DATE!
+- `aft/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the start date and time in which only deliveries with status`PENDING` after this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
+- `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` before this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
 
-**Warnings**:
-- A spacing between `upcoming` and the first parameter is compulsory
-- At least one parameter must be provided
-- No duplicate prefix can be used
-- The prefixes `aft/` and `bef/` are **case-sensitive**
+**Tip:**
+- You can provide both parameters or just one parameter!
+
 </box>
 
-#### Example
+<box type="warning" seamless>
 
-To view pending deliveries between two dates:
+**Warnings**:
+- At least one space is needed between `upcoming` and the first parameter.
+- When using more than one parameter, at least one space is needed between parameters.
+- At least one parameter must be provided.
+- If both parameters are provided, then only deliveries with status`PENDING` and `DELIVERY_DATE_TIME` between the two specified parameters are displayed (not inclusive).
 
-    upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00
+</box>
+
+Examples:
+- `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+- `upcoming aft/19-12-2022 08:00`
+
+Expected output:
+- All deliveries with status `PENDING` and `DELIVERY_DATE_TIME` after 19-12-2022 08:00 and before 18-06-2023 17:00 are shown.
+- All deliveries with status `PENDING` and `DELIVERY_DATE_TIME` after 19-12-2022 08:00 are shown.
 
 #### Here's how it would look like in the app:
 ![upcoming command](images/upcomingCommand.png)
+
 ---
 ### Exiting the program : `exit`
 
