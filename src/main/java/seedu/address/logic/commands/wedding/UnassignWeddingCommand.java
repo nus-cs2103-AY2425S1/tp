@@ -68,7 +68,9 @@ public class UnassignWeddingCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(
+                    MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()
+            ));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());

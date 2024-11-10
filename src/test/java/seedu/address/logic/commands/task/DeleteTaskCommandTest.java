@@ -3,6 +3,7 @@ package seedu.address.logic.commands.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -104,6 +105,14 @@ public class DeleteTaskCommandTest {
         model.deletePerson(person2);
         model.addTask(new Todo("buy groceries"));
 
+    }
+
+    @Test
+    public void execute_taskRemoveIndexFailure() throws Exception {
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(Index.fromOneBased(100));
+        assertCommandFailure(deleteTaskCommand, model,
+                String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, 100, 1, 1)
+        );
     }
 
     @Test
