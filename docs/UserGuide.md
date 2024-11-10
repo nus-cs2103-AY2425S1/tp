@@ -224,7 +224,7 @@ Shows a message explaining how to access the help page.
 
 <img src="images/helpMessage.png" alt="help message" width="500" height="300">
 
-<br><br>
+<br>
 
 <h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-client</span></h3>
 
@@ -324,8 +324,6 @@ Adds a car to a client.
 ```shell
 add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 ```
-
-<div style="page-break-after: always;"></div>
 
 **Parameters:**
 
