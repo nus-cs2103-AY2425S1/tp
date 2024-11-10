@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-T15-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T15-1/tp/actions)
 
-![image](https://github.com/user-attachments/assets/a0260908-89a7-45ae-9e0c-e27a61c86d36)
+![image](docs/images/uiWithDescription.png)
 
 * TrueRental is **a team project for CS2103T-T15-1**.<br>
   Motivation:
