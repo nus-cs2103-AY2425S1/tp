@@ -921,7 +921,7 @@ Finding a patient by providing keyword(s) from their name
 
 [Back to Table of Contents](#table-of-contents)
 
-### Finding a patient by their `NRIC`
+### Finding a patient by their NRIC
 
 Finding a patient by providing their `NRIC`
 
