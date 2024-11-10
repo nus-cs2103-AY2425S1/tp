@@ -50,8 +50,8 @@ public class CommandBox extends UiPart<Region> {
                 + "ecrs/EMERGENCY_CONTACT_RELATIONSHIP");
         commandSyntaxMap.put("archive", "archive [DESCRIPTION]");
         commandSyntaxMap.put("clear", "clear");
-        commandSyntaxMap.put("delete", "delete INDEX [ec/ECINDEX]");
-        commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/ECINDEX "
+        commandSyntaxMap.put("delete", "delete INDEX [ec/EMERGENCY_CONTACT_INDEX]");
+        commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/EMERGENCY_CONTACT_INDEX "
                 + "ecname/EMERGENCY_CONTACT_NAME ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME "
                 + "dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
         commandSyntaxMap.put("find", "find KEYWORD [MORE_KEYWORDS]");
@@ -76,7 +76,7 @@ public class CommandBox extends UiPart<Region> {
         parameterMap.put("dphone/", "dphone/DOCTOR_PHONE");
         parameterMap.put("demail/", "demail/DOCTOR_EMAIL");
         parameterMap.put("t/", "t/TAG");
-        parameterMap.put("ec/", "ec/ECINDEX");
+        parameterMap.put("ec/", "ec/EMERGENCY_CONTACT_INDEX");
 
         // Initialize command-specific parameter order
         commandParameterOrder.put("add", Arrays.asList(
