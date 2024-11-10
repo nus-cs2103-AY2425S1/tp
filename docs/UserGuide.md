@@ -644,6 +644,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 5. **Phone Number Field Length**: The phone number field allows for very long entries, which may not be practical. The field currently accepts a minimum of 3 digits, which is shorter than standard international phone numbers.
    - **Workaround**: For best results, enter phone numbers within a typical range of 7–15 digits. Numbers exceeding 15 digits may not display or function as expected.
 
+6. **Full-Screen Help Window**: When the app is in full-screen mode, clicking the help button opens the Help Window in a new full-screen view rather than as a pop-up overlay.
+   - **Solution**: Exit full-screen mode before opening the Help Window to have it display as a pop-up.
+
 
 
 
