@@ -14,7 +14,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_PATIENTS_LISTED_OVERVIEW = "There are currently %1$d patients registered"
+    public static final String MESSAGE_PATIENTS_LISTED_OVERVIEW = "There %1$s currently %2$d %3$s registered"
            + " in the ClinicConnect system";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
