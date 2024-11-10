@@ -66,14 +66,14 @@ public class UnassignWeddingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
             throw new CommandException(String.format(
                     MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()
             ));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
+        Set<Wedding> modelWeddingsToKeep = new HashSet<>();
 
         if (personToEdit.getWeddings().isEmpty()) {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
@@ -83,13 +83,29 @@ public class UnassignWeddingCommand extends Command {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
 
-        if (!updatedWeddings.containsAll(weddingsToRemove)) {
-            throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
+        // Checks whether the model has all the specified weddings AND if the person has all the weddings assigned
+        for (Wedding wedding : weddingsToRemove) {
+            if (!model.hasWedding(wedding)) {
+                throw new CommandException(
+                        MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
+            }
+            if (!personToEdit.hasWedding(wedding)) {
+                throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
+            }
         }
 
-        updatedWeddings.removeAll(weddingsToRemove);
+        // Stores weddings from model that we want to remove - already guaranteed that are all within the model
+        HashSet<Wedding> modelWeddingsToRemove = weddingsToRemove.stream().map(model::getWedding)
+                .collect(Collectors.toCollection(HashSet::new));
 
-        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, updatedWeddings);
+        // Already checks that person has all weddings, so can go ahead and remove
+        for (Wedding wedding : personToEdit.getWeddings()) {
+            if (!modelWeddingsToRemove.contains(wedding)) {
+                modelWeddingsToKeep.add(wedding);
+            }
+        }
+
+        Person editedPerson = PersonWeddingUtil.getNewPerson(personToEdit, modelWeddingsToKeep);
 
         // Remove Wedding from Person
         model.setPerson(personToEdit, editedPerson);
@@ -109,10 +125,6 @@ public class UnassignWeddingCommand extends Command {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        }
-
-        if (!(other instanceof UnassignWeddingCommand)) {
-            return false;
         }
 
         UnassignWeddingCommand otherCommand = (UnassignWeddingCommand) other;
