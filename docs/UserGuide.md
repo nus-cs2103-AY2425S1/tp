@@ -165,7 +165,12 @@ Constraints:
 * **EMAIL**
     - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
     - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
-
+* **ADDRESS**
+    - Address cannot be blank
+    - Since an address can consist of any combination of characters (including `/`), there are no restrictions on the input format for this field. 
+    - Be aware that adding unrecognized parameters (e.g., /g) after the address tag `a/` will not trigger an error. 
+      - For example, `add n/John Doe p/98765432 e/johnd@example.com a/123 Elm Street g/[unrecognized parameter] t/low risk m/None` 
+      will still be accepted as valid input without any errors.
 * **TAG**
     - A patient must have one of the following priority tags:
         1. `High Risk`
