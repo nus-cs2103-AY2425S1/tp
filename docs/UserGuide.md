@@ -245,7 +245,16 @@ Examples:
 
 Finds all persons based on the specified keywords after the prefix representing the field, and displays them as a list with index numbers.
 
-Format: `find PREFIX KEYWORD [KEYWORD]…​`
+Format: `find PREFIX_TAG KEYWORD [KEYWORD]…​`
+
+* Available prefixes that can be used as the `PREFIX_TAG`:
+    * n/ Name
+    * a/ Address
+    * p/ Phone Number
+    * e/ Email
+    * t/ Tag
+    * w/ Wedding
+    * tk/ Task
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
