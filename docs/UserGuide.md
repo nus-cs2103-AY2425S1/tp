@@ -184,14 +184,6 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDD
   * So, if `John Doe` is already in Wedlinker, adding another `John Doe` with different details will not work
 * If the tags or weddings specified in the add command do not exist yet, they will be created
 
-<box type="tip" seamless>
-
-**Tip:** 
-* A person can have any number of tags or weddings (including 0)
-* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
-
-</box>
-
  
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
@@ -199,8 +191,13 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip:** Adding a person with tags or weddings that do not exist in Wedlinker will create all the tags and weddings!
+**Tip:** 
+* Adding a person with tags or weddings that do not exist in Wedlinker will create all the tags and weddings!
 Created weddings will have the person automatically assigned to their guest lists.
+
+* A person can have any number of tags or weddings (including 0)
+
+* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
 </box>
 
 <box type="warning" seamless>
