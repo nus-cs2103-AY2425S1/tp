@@ -102,6 +102,7 @@ The table below provides a brief explanation of each parameter encountered in th
 **Autoformatting in KnottyPlanners:**<br>
 
 * KnottyPlanners aligns with industry standards by automatically formatting the `NAME`, `JOB`, `TAG` and `WEDDING NAME` fields.
+* All other fields that are not mentioned above are not formatted and will be saved based on your user input.
 
 * For each field:
     - The first letter of each word is auto-capitalised.
