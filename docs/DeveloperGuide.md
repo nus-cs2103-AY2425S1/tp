@@ -687,7 +687,7 @@ testers are expected to do more *exploratory* testing.
 2.  Delete an Event:
 
     1. Type `delete e/2` <br>
-       Expected: The second event in the list is removed from EventTory if it does not have any assign vendor. Else, deletion will fail.
+       Expected: The second event in the list is removed from EventTory if it does not have any assigned vendor. Else, deletion will fail.
 
 ### List Command
 

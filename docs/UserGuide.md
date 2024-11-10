@@ -288,7 +288,11 @@ Note:
 * All attributes of the `Vendor` or `Event` are searched, i.e. name, phone number, date, descriptions and tags.
 * Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
   * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
+* If user is viewing an event or a vendor, the `find` command will affect the assignable list only. Assigned list is not affected.
+* To find an event according to its `date`, the displayed format should be followed.
+  * e.g. `find v/ -11-` will return events dated in November.
 * If no matches are found, the user will be informed and the current view will remain unchanged.
+* If no keyword is provided, the operation will fail.
 
 Examples:
 * `find v/ catering` returns `catering` and `Catering Solutions`
