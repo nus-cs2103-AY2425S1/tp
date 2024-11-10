@@ -40,4 +40,8 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
+
+    public List<String> getKeywords() {
+        return keywords;
+    }
 }

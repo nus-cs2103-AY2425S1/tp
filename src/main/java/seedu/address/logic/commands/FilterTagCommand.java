@@ -3,12 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
- * Filters and lists all persons in address book whose tags contain any of the argument keywords.
+ * Filters and lists all persons in the address book whose tags contain any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FilterTagCommand extends Command {
@@ -20,6 +19,8 @@ public class FilterTagCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " friend colleague";
 
+    public static final String MESSAGE_SUCCESS = "%d contact(s) with tag(s): %s listed.";
+
     private final TagContainsKeywordsPredicate predicate;
 
     public FilterTagCommand(TagContainsKeywordsPredicate predicate) {
@@ -30,8 +31,11 @@ public class FilterTagCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        int listSize = model.getFilteredPersonList().size();
+        String keywords = String.join(", ", predicate.getKeywords());
+        String resultMessage = String.format(MESSAGE_SUCCESS, listSize, keywords);
+
+        return new CommandResult(resultMessage);
     }
 
     @Override
