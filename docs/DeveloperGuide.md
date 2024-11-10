@@ -391,7 +391,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 <br/><br/>
 
-**Use case: UC04 - Tag a contact**
+**Use case: UC04 - Edit a contact**
+
+**MSS**
+
+1. Wedding planner requests to edit the personal details of an existing contact
+2. PlanPerfect edits the contact's as specified by the wedding planner
+3. PlanPerfect shows a success message to the wedding planner.
+
+**Extensions**
+* 1a. The input format for adding the contact is invalid.
+
+    * 1a1. PlanPerfect shows an error message requesting for the correct input format.
+
+      Use case ends.
+* 1b. Wedding planner requests to edit a contact's phone number to one that is held by another contact
+
+   *  1b1.  PlanPerfect shows an error message that the input phone number already exists in PlanPerfect.
+
+      Use case ends.
+<br/><br/>
+
+**Use case: UC05 - Tag a contact**
 
 **MSS**
 
@@ -412,7 +433,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC05 - Untag a contact**
+**Use case: UC06 - Untag a contact**
 
 **MSS**
 
@@ -433,7 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC06 - List contacts by tag**
+**Use case: UC07 - List contacts by tag**
 
 **MSS**
 
@@ -450,7 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC07 - Find contact by name**
+**Use case: UC08 - Find contact by name**
 
 **MSS**
 
@@ -469,7 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC08 - Getting help**
+**Use case: UC09 - Getting help**
 
 **MSS**
 
@@ -480,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC09 - Sort contacts alphabetically**
+**Use case: UC10 - Sort contacts alphabetically**
 
 **MSS**
 
@@ -491,7 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC10 - Filter contacts by tag**
+**Use case: UC11 - Filter contacts by tag**
 
 **MSS**
 
@@ -510,7 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br/><br/>
 
-**Use case: UC11 - Clear all wedding and contact data**
+**Use case: UC12 - Clear all wedding and contact data**
 
 **MSS**
 
@@ -531,7 +552,7 @@ Use case ends.
 
 <br/><br/>
 
-**Use case: UC12 - View contacts of a specified wedding**
+**Use case: UC13 - View contacts of a specified wedding**
 
 **MSS**
 
@@ -551,11 +572,24 @@ Use case ends.
 <br/><br/>
 
 
-**Use case: UC13- Add a wedding**
+**Use case: UC14 - Add a wedding**
+
+**MSS**
+
+1. Wedding planner requests to add a new wedding.
+2. PlanPerfect adds the wedding with the specified details to PlanPerfect
+
+   Use case ends.
+
+**Extensions**
+* 1a. User provides invalid details about a wedding to PlanPerfect.
+  * 1a1. PlanPerfect shows an error message detailing why the details provided are invalid.
+
+    Use case ends.
 
 <br/><br/>
 
-**Use case: UC14 - Delete a wedding**
+**Use case: UC15 - Delete a wedding**
 
 **MSS**
 
@@ -573,7 +607,7 @@ Use case ends.
 
 <br/><br/>
 
-**Use case: UC15 - Edit a wedding**
+**Use case: UC16 - Edit a wedding**
 
 **MSS**
 
