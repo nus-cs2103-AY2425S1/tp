@@ -25,7 +25,7 @@ EZSTATE is a Command Line Interface (CLI) desktop app designed specifically **re
 * `Work Style` : Handles multiple clients and properties simultaneously and values efficiency in contact and property management
 * `Environment` : Works in a fast-paced setting where quick data entry and retrival are essential
 
-But do not worry if you do not meet every characteristic — EZSTATE is designed to be **intuitive and efficient for all users**. Give it a try, and head over to our [Quick Start](#quick-start-guide) guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
+But do not worry if you do not meet every criterion — EZSTATE is designed to be **intuitive and efficient for all users**. Give it a try, and head over to our [Quick Start](#quick-start-guide) guide to get started and see how EZSTATE can make your contact and property management tasks faster and easier!
 
 * Table of Contents
 {:toc}
