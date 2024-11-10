@@ -21,6 +21,17 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         try {
             List<Index> indices = ParserUtil.parseIndexes(args);
+
+            if (indices.size() == 1) {
+                return new DeleteCommand(indices);
+            }
+
+            for (int i = 1; i < indices.size(); i++) {
+                if (indices.get(i).equals(indices.get(i - 1))) {
+                    throw new ParseException("Indices must be unique");
+                }
+            }
+
             return new DeleteCommand(indices);
         } catch (ParseException pe) {
             throw new ParseException(

@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box "Logic Layer" LOGIC_COLOR_T1
+    participant "e:EditCommand" as EditCommand LOGIC_COLOR
+    participant "<<class>>\nEditCommand" as EditCommandClass LOGIC_COLOR
+    participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model Layer" MODEL_COLOR_T1
+    participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> EditCommand : execute(model)
+activate EditCommand
+
+EditCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> EditCommand : lastShownList
+deactivate Model
+
+EditCommand -> EditCommand : get(index)
+alt index out of bounds
+    EditCommand -> EditCommand : throw CommandException (invalid index)
+end
+
+EditCommand -> EditCommand : personToEdit = lastShownList.get(index)
+
+alt Person is not Student and contains education field
+    EditCommand -> EditCommand : throw CommandException (education on non-student)
+end
+
+alt Person is not Student and contains lesson time field
+    EditCommand -> EditCommand : throw CommandException (lesson time on non-student)
+end
+
+EditCommand -> EditCommandClass : createEditedPerson(personToEdit, editPersonDescriptor)
+activate EditCommandClass
+EditCommandClass --> EditCommand : editedPerson
+deactivate EditCommandClass
+
+alt editedPerson is duplicate
+    EditCommand -> EditCommand : throw CommandException (duplicate person)
+end
+
+EditCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+Model --> EditCommand
+deactivate Model
+
+EditCommand -> Model : updateFilteredPersonList()
+activate Model
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult : new CommandResult(message)
+activate CommandResult
+CommandResult --> EditCommand : result
+deactivate CommandResult
+
+[<-- EditCommand : result
+deactivate EditCommand
+
+@enduml
