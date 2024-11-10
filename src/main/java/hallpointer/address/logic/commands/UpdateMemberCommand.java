@@ -91,10 +91,9 @@ public class UpdateMemberCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
         //not ideal
-        long matchCount = model.getFilteredMemberList().stream()
-            .filter(member -> member.isSameMember(updatedMember))
-            .count();
-
+        
+        long matchCount = model.countMemberOccurrences(updatedMember);
+        
         if (memberToUpdate.isSameMember(updatedMember) && matchCount > 1) {
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
