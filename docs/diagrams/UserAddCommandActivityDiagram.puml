@@ -6,30 +6,19 @@ skinparam ArrowFontSize 12
 
 start
 :User inputs add command;
-:UGTeach parses the input;
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
-if () then ([invalid input])
-    :UGTeach shows message
-            for invalid input;
-    stop
+while () is ([invalid input or is duplicate])
+    :UGTeach shows error message;
+    :User modifies input;
+endwhile ([else])
+:UGTeach adds student to the list;
+if () then ([new schedule clashes])
+    :UGTeach shows success message
+            with clashing schedules;
 else ([else])
-    :UGTeach creates the new student;
-    if () then ([else])
-        :UGTeach adds student
-           to the address book;
-        if () then ([else])
-            :UGTeach shows success message;
-            stop
-        else ([new schedule clashes])
-            :UGTeach shows success message
-                      with clashing schedules;
-            stop
-        endif
-    else ([is duplicate])
-        :UGTeach shows message
-                   for duplicate;
-    stop
+    :UGTeach shows success message;
 endif
+stop
 
 @enduml
