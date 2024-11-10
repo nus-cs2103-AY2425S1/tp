@@ -6,6 +6,7 @@
 
 # BA€ User Guide
 
+Thank you for choosing BA€! We understand how crucial it is for salespeople like you to stay organized and efficient, especially when managing a large network of clients and making recurring sales. BA€ is designed to be your reliable assistant, helping you streamline your sales process by quickly storing and retrieving client information, so you can focus on building strong, lasting relationships and closing deals. With our powerful command-line functionality and intuitive interface, we aim to make your contact management smoother and faster than ever before.
 BA€ is a desktop app for managing contacts, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI). If you can type fast, BA€ can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
@@ -96,21 +97,45 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS fi\FINANCIALINFO s\SOCIALMEDIAHANDLE [t\TAG] [t\TAG:value]…​`
-
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0).
-A tag can be added with or without a value. For example, `t\client` and `t\insurance:No` are both valid tags.
-</box>
+Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE] [t\TAG]…​ [t\TAG:value]…​`
 
 <box type="warning" seamless>
 
+Name Constraints: <br>
+* Names have to be unique, duplicates are not allowed, regardless of case. For example, `John Doe` and `john doe` would be considered duplicates and if one is already in the address book, the other will not be allowed to be added. We suggest adding some additional information to differentiate your contacts from one another, such as `John Tan NUS` instead of just `John Tan`
+* Names must consist only of alphanumerics, spaces, forward slashes and apostrophes
+* Names must not be longer than 200 characters
+
+Phone Number Constraints: <br>
+* Phone numbers must consist of digits `0` to `9`, with the option of a `+` sign at the beginning for the country code
+* Phone numbers must not be more than 30 digits long
+
+Email Address Constraints: <br>
+* Email should be of the format `local@domain`
+* `local` must only contain alphanumeric characters and these special characters, excluding the parentheses, (`+_.-`)
+* `local` must not start or end with any special characters
+* `domain` must only consist of alphanumeric characters, with no more than one hyphen (`-`) or period (`.`) in between any 2 alphanumeric characters.
+* `domain` must end with at least 2 characters that are not a period (`.`)
+* Duplication is not prevented/checked for, as it might be possible for some of our users' clients to be contacted through the same person, such as a secretary.
+
+Address Constraints: <br>
+* Address can take any characters except for `\`, but cannot begin with a space and cannot be blank
+
+Financial Info Constraints: <br>
+* Financial Info can take any valid characters except for `\`
+* If multiple Financial Info entries are provided, only the last one will be recorded. For example, in `fi\high income fi\millionaire` only `millionaire` will be stored
+
+Social Media Handle Constraints: <br>
+* Social Media Handle can take any valid characters except for `\`
+* If multiple Social Media Handle entries are provided, only the last one will be recorded. For example, in `s\@john123 s\@john456` only `@john456` will be stored
+
 Tag Constraints: <br>
-* Only alphanumeric characters (alphabets and numbers) are supported in tags<br>
-* Multiple of the same tags are not supported for a single contact<br>
-* Negative numbers are not supported in tag values<br>
-* Operations such as `+, -, *, /` are also not supported in tag values<br>
+* A person can have any number of tags (including 0).
+* A tag can be added with or without a value. For example, `t\client` and `t\insurance:No` are both valid tags.
+* Only alphanumeric characters (alphabets and numbers) are supported in tags
+* Multiple of the same tags are not supported for a single contact. For example, `t\policy` and `t\policy: 223302B` would not be supported for a single contact.
+* Negative numbers are not supported in tag values
+* Operations such as `+, -, *, /` are also not supported in tag values
 
 </box>
 
@@ -128,7 +153,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [t\TAG]…​`
+Format: `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE\ [t\TAG]…​ [t\TAG:value]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -136,6 +161,7 @@ Format: `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [t\TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t\` without
     specifying any tags after it.
+* The same restrictions of input values seen in the `add` command apply here.
 
 Examples:
 *  `edit 1 p\91234567 e\johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -179,6 +205,7 @@ Filters the contact list by name and/or tags.
 
 Format: `filter [n\NAME] [t\TAG]…​`
 
+* At least one of the optional fields must be provided.
 * Filters the contact list by name and/or tags.
 * `n\NAME` specifies a name (or partial name) to filter by.
 * `t\TAG` specifies a tag to filter by. You can provide multiple tags.
@@ -341,10 +368,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS fi\FINANCIALINFO s\SOCIALMEDIAHANDLE [t\TAG]…​` <br> e.g., `add n\James Ho p\22224444 e\jamesho@example.com a\123, Clementi Rd, 1234665 t\friend t\colleague`
+**Add**    | `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE] [t\TAG]…​ [t\TAG:value]…​`` <br> e.g., `add n\James Ho p\22224444 e\jamesho@example.com a\123, Clementi Rd, 1234665 t\friend t\colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n\NAME] [p\PHONE_NUMBER] [e\EMAIL] [a\ADDRESS] [t\TAG]…​`<br> e.g.,`edit 2 n\James Lee e\jameslee@example.com`
+**Edit**   | `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [fi\FINANCIALINFO] [s\SOCIALMEDIAHANDLE\ [t\TAG]…​ [t\TAG:value]…​` <br> e.g.,`edit 2 n\James Lee e\jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
