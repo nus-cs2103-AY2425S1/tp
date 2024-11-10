@@ -596,8 +596,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 1. A user with above-average typing speed (> 40 Words Per Minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 2. The product should be a single-user system.
 3. The product should not rely on a remote server.
-4. It should accommodate up to 250 elderly without performance slowdowns of more than 3 seconds during typical usage.
-5. The product should generally respond within two seconds.
+4. It should accommodate up to 250 elderly without performance slowdowns of more than 10 seconds during typical usage.
+5. The product should generally respond within five seconds.
 6. The product should work on Windows, Linux and Mac as long as they have `Java 17` installed.
 7. The product should not use a Database Management System.
 8. The data should be stored locally and should be in a human editable text file.
