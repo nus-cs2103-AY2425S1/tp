@@ -26,6 +26,8 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
    A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.jpeg)
 
+1. The program is loaded up with some default data. If you wish to clear the data, enter `clear` in the command box and press Enter.
+
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
