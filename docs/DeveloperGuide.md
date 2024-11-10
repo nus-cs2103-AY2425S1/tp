@@ -4,7 +4,32 @@ title: Developer Guide
 ---
 
 - Table of Contents
-  {:toc}
+
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [UI component](#ui-component)
+   3. [Logic component](#logic-component)
+   4. [Model component](#model-component)
+   5. [Storage component](#storage-component)
+   6. [Common classes](#common-classes)
+4. [Implementation](#implementation)
+   1. [Proposed Undo/redo feature](#proposed-undoredo-feature)
+      1. [Proposed Implementation](#proposed-implementation)
+      2. [Design considerations](#design-considerations)
+   2. [Proposed Data archiving](#proposed-data-archiving)
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix: Requirements](#appendix-requirements)
+   1. [Product scope](#product-scope)
+   2. [User Stories](#user-stories)
+   3. [Use cases](#use-cases)
+   4. [Non-Functional Requirements](#non-functional-requirements)
+   5. [Glossary](#glossary)
+7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+   1. [Launch and shutdown](#launch-and-shutdown)
+   2. [Deleting a person](#deleting-a-person)
+   3. [Saving data](#saving-data)
 
 ---
 
@@ -103,7 +128,7 @@ The `UI` component,
 - executes user commands using the `Logic` component.
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Person` object and `Group` object residing in the 
+- depends on some classes in the `Model` component, as it displays `Person` object and `Group` object residing in the
   `Model`.
 
 ### Logic component
@@ -336,20 +361,19 @@ to record their students with their details, and access relevant information eas
 
 ### User Stories
 
-| Priority | As a …​    | I want to …​                                                              | So that I can…​                                                                                                 |
-|----------|------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| `* * *`  | educator   | add a new student                                                        | include all students I have currently in my app                                                               |
-| `* * *`  | educator   | delete a student                                                         | keep my database of students concise with only currently relevant students                                     |
-| `* * *`  | educator   | search for students by name                                              | find information about specific students                                                                      |
-| `* *`    | educator   | search for groups by name                                                | find information about specific groups of students                                                            |
-| `* *`    | educator   | store additional information about students on grades, attendance or notes | better access and organise student information                                                               |
-| `* *`    | educator   | edit a student’s details                                                 | correct mistakes or update new information about the student                                                  |
-| `* *`    | educator   | filter searched students by grades, attendance or notes                  | quickly find specific students or groups based on specific criteria                                           |
-| `*`      | educator   | group students                                                          | efficiently manage classes, group-based activities, assignments, and projects                                |
-| `*`      | educator   | delete groups                                                           | correct mistakes by deleting a group                                                                         |
-| `*`      | educator   | import and export student data from other systems                        | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
-| `*`      | educator   | use security measures for student data                                   | protect sensitive information and control access to parental data                                            |
-
+| Priority | As a …​  | I want to …​                                                               | So that I can…​                                                                                                |
+| -------- | -------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `* * *`  | educator | add a new student                                                          | include all students I have currently in my app                                                                |
+| `* * *`  | educator | delete a student                                                           | keep my database of students concise with only currently relevant students                                     |
+| `* * *`  | educator | search for students by name                                                | find information about specific students                                                                       |
+| `* *`    | educator | search for groups by name                                                  | find information about specific groups of students                                                             |
+| `* *`    | educator | store additional information about students on grades, attendance or notes | better access and organise student information                                                                 |
+| `* *`    | educator | edit a student’s details                                                   | correct mistakes or update new information about the student                                                   |
+| `* *`    | educator | filter searched students by grades, attendance or notes                    | quickly find specific students or groups based on specific criteria                                            |
+| `*`      | educator | group students                                                             | efficiently manage classes, group-based activities, assignments, and projects                                  |
+| `*`      | educator | delete groups                                                              | correct mistakes by deleting a group                                                                           |
+| `*`      | educator | import and export student data from other systems                          | streamline data management and avoid manual entry, ensuring compatibility with school databases or grade books |
+| `*`      | educator | use security measures for student data                                     | protect sensitive information and control access to parental data                                              |
 
 ### Use cases
 
