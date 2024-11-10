@@ -89,6 +89,19 @@ public class HallPointerTest {
         assertEquals(expected, hallPointer.toString());
     }
 
+    @Test
+    public void countMemberOccurrences_memberNotInList_returnsZero() {
+        Member member = new MemberBuilder().build();
+        assertEquals(0, hallPointer.countMemberOccurrences(member));
+    }
+
+    @Test
+    public void countMemberOccurrences_memberInList_returnsCorrectCount() {
+        Member member = new MemberBuilder().build();
+        hallPointer.addMember(member);
+        assertEquals(1, hallPointer.countMemberOccurrences(member));
+    }
+
     /**
      * A stub ReadOnlyHallPointer whose members list can violate interface constraints.
      */
