@@ -1110,11 +1110,23 @@ Deleting an existing appointment from a patient
 
 Team size: 5
 
-1. **Allow names to include symbols and special characters**: As of the current version of MediBase3, names are restricted to both alphanumerics and spaces only. 
+1. **Allow names to include symbols and special characters**
+
+As of the current version of MediBase3, names are restricted to both alphanumerics and spaces only. 
 However, there are people with legal names that include symbols and special characters, such as 'Nagaratnam s/o Suppiah'. In the future, we will loosen the restrictions for names to allow users to input names with any special characters and symbols.
 
-2. **Improve `addAppt` command to allow users to add multiple appointments at once**: Currently, users can only add one appointment at a time using the `addAppt` command. We plan to enhance the `addAppt` command to allow users to add multiple appointments at once.
+2. **Improve `addAppt` command to allow users to add multiple appointments at once**
+
+Currently, users can only add one appointment at a time using the `addAppt` command. We plan to enhance the `addAppt` command to allow users to add multiple appointments at once.
 This will be useful as it allows doctors to save time by adding multiple appointments for a patient in one go, instead of typing the same command multiple times.
 
-3. **Improve Email Validation**: MediBase3 does not currently check if the email ends with a top-level domain (TLD) such as `.com` or `.org`. We plan to enhance the validation for email addresses to also check if the domain provided contains an actual top-level domain apart from the other existing constraints.
+3. **Improve Email Validation**
 
+MediBase3 does not currently check if the email ends with a top-level domain (TLD) such as `.com` or `.org`. We plan to enhance the validation for email addresses to also check if the domain provided contains an actual top-level domain apart from the other existing constraints.
+
+4. **Allow partial addition of medical conditions and allergies**
+
+Currently, when adding multiple medical conditions or allergies with the `addMedCon` or `addAllergy` commands, the entire command is rejected if any of the specified conditions or allergies already exist for the patient. 
+This means that none of the conditions or allergies are added, even if some are new. 
+In the future, we plan to enhance this feature by partially accepting the command, only rejecting the duplicate entries and successfully adding the new ones. 
+This change will improve efficiency for busy doctors by reducing redundant error messages and ensuring that valid inputs are processed, optimising the application for real-world use cases.
