@@ -503,17 +503,17 @@ Precondition: Student exists in the system.
 1. TutorEase deletes the lesson for the student.  
    Use case ends.
 
-**Extensions:**
+**Extensions**:
 
-* **1a.** TutorEase detects bad or wrongly formatted inputs.
-    * **1a1.** TutorEase prompts Tutor with correct format.
-    * **1a2.** Tutor enters new data.  
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-* **1b.** TutorEase detects that the student does not exist.
-    * **1b1.** TutorEase prompts Tutor to key in data for a student that exists.
-    * **1b2.** Tutor enters new data.  
+* **1b**. TutorEase detects that the student does not exist.
+    * **1b1**. TutorEase prompts Tutor to key in data for a student that exists.
+    * **1b2**. Tutor enters new data.  
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
@@ -525,11 +525,11 @@ Precondition: Student exists in the system.
 1. TutorEase lists all lessons.    
    Use case ends.
 
-**Extensions:**
+**Extensions**:
 
-* **1a.** TutorEase detects bad or wrongly formatted inputs.
-    * **1a1.** TutorEase prompts Tutor with correct format.
-    * **1a2.** Tutor enters new data.  
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
@@ -540,11 +540,11 @@ Precondition: Student exists in the system.
 1. TutorEase lists lessons that match the requirement.    
    Use case ends.
 
-**Extensions:**
+**Extensions**:
 
-* **1a.** TutorEase detects bad or wrongly formatted inputs.
-    * **1a1.** TutorEase prompts Tutor with correct format.
-    * **1a2.** Tutor enters new data.  
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.  
 
@@ -553,18 +553,19 @@ Precondition: Student exists in the system.
     * **1b2**. Tutor enters a new keyword or cancels the search.  
       Use case resumes from Step 2 or ends if cancelled.
 
-*Use Case: UC10 - Clear all entries**  
+**Use Case: UC10 - Clear all entries**  
+
 **MSS:**
 
 1. Tutor keys in clear command.
 1. TutorEase clears all entries about contacts and lessons.    
    Use case ends.
 
-**Extensions:**
+**Extensions**:
 
-* **1a.** TutorEase detects bad or wrongly formatted inputs.
-    * **1a1.** TutorEase prompts Tutor with correct format.
-    * **1a2.** Tutor enters new data.  
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
