@@ -85,7 +85,6 @@ MATER was designed to address these challenges directly:
 - **Streamlined command-based controls**: Users can type commands to perform tasks faster than by navigating through a typical GUI.
 - **Reliable data tracking**: Track issues and maintenance details with consistency, ensuring no information is lost and that clients receive high-quality service.
 
-<div style="page-break-after: always;"></div>
 
 ### **Product Overview**
 
@@ -96,6 +95,7 @@ MATER offers a feature-rich platform with the following capabilities:
 - **Status Tracking**: Mark clients as checked in or out for better tracking of in-progress services.
 - **Automatic Data Storage**: MATER saves all data automatically, minimising the risk of accidental data loss.
 
+<div style="page-break-after: always;"></div>
 
 ### **User Base**
 
