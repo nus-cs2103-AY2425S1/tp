@@ -275,13 +275,45 @@ Format:
 findi i/INTEREST
 ```
 
-- `i/INTEREST`: Interest to search for.
+- `i/INTEREST`: Interest to search for. **Partial matches** are allowed, meaning any contact with an interest that partially matches the provided keyword will be listed.
 
-Example:
-
+Example: Finds contacts with the interest "swimming."
+- **Exact Match**: 
 ```plaintext
-findi i/Swimming
+findi i/swimming
 ```
+- **Partial Match**: 
+```plaintext
+findi i/swim
+```
+<img src="images/findPplSwimming.png" alt="result for 'find i/swimming'" style="width: 80%;">
+
+Invalid Input: **searching by multiple interests** is not supported and will trigger an error message:
+```plaintext
+Invalid command format! 
+findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers.
+Parameters: i/KEYWORD
+```
+Invalid formats:
+```plaintext
+findi i/reading i/swimming
+```
+```plaintext
+findi i/reading,i/swimming
+```
+```plaintext
+findi i/reading, i/swimming
+```
+```plaintext
+findi i/reading swimming
+```
+```plaintext
+findi i/reading,swimming
+```
+```plaintext
+findi i/reading, swimming
+```
+
 
 <br>
 
@@ -292,7 +324,7 @@ Finds contacts with specific work experiences based on **company** and optionall
 Format:
 
 ```plaintext
-findw w/COMPANY[,ROLE][,YEAR]
+findw w/ROLE,COMPANY,YEAR
 ```
 
 - **`COMPANY`**: Required. The name of the company to search for.
@@ -316,12 +348,10 @@ Examples:
   ```
 - Find contacts who interned at Google in 2024:
   ```plaintext
-  findw w/Google,Intern,2024
+  findw w/Intern,Google,2024
   ```
 
 <br>
-
-#### Finding Contacts by University: `findu`
 
 Finds contacts with a specific university from the currently displayed list.
 
@@ -332,13 +362,17 @@ Format:
 ```
 findu u/UNIVERSITY
 ```
-- `u/UNIVERSITY`: The university to search for (case-sensitive).
+- `u/UNIVERSITY`: The university to search for (case-sensitive). **Partial matches** are supported, allowing any contact with a university name that partially matches the keyword to be listed.
 
-Example:
+Example: Find contacts associated with SUTD.
+- **Exact Match**:
+```plaintext
+findu u/SUTD
 ```
-findu u/NUS
+- **Partial Match**:
+```plaintext
+findu u/SUT
 ```
-*Expected Output*: Lists all contacts associated with the National University of Singapore (NUS).
 
 <box type="info" seamless>
 
@@ -363,13 +397,18 @@ Format:
 findm m/MAJOR
 ```
 
-- `m/MAJOR`: Major or field of study.
+- `m/MAJOR`: Major or field of study. **Partial matches** are supported, so any contact with a major that partially matches the provided keyword will be included.
 
-Example:
-
+Example: Finds contacts with the major "Computer Science"
+- **Exact Match**:
 ```plaintext
 findm m/Computer Science
 ```
+- **Partial Match**:
+```plaintext
+findm m/Comp
+```
+<img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 80%;">
 
 <br>
 
