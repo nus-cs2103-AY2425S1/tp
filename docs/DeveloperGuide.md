@@ -240,7 +240,7 @@ This follows the activity diagram shown below:
 
 ![DeleteActivityDiagram.png](images%2FDeleteActivityDiagram.png)
 
-The prompt for confirmation by the user seen here is also used in the `clear` command. The rationale behind this confirmation prompt was to ensure that users didn't end up losing precious data if they changed their minds later on or accidentally inputted the command.
+The user confirmation prompt shown here is also used in the `clear` command. This prompt is intended to help prevent accidental data loss by allowing users to confirm their decision, providing an opportunity to reconsider or correct any unintended command input.
 
 
 ## Planned enhancements
