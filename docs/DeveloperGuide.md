@@ -627,23 +627,34 @@ testers are expected to do more *exploratory* testing.
 
 1. Other incorrect delete tag commands to try: `deltag`, `deltag M t/x` (where M is larger than the list size or smaller than 0), `deltag 1 x`<br>
    Expected: No deleting of tags will occur and an error message will be displayed.
-   
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned enhancements**
+
+Team size: 5
+
+1. Change the font color for tags: Currently, the font color for `GENERAL` tags is grey, making them less noticeable. We plan to use a higher-contrast font color to make tags more prominent and easier to read.
+2. Allow adding overseas phone number: The app currently supports only Singaporean phone number. We aim to expand functionality to include valid international numbers, complete with country codes.
+3. Allow certain special characters: We currently only allow alphanumeric characters and whitespaces. We plan to support additional characters, such as hyphens, to better accommodate real-world naming conventions.
+4. Make duplicate contact error message more specific: : The current error message for duplicate contacts, “This person already exists in CampusConnect,” is too general. We plan to enhance it by specifying the name of the existing contact that duplicates the one the user is attempting to add.
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Future features**
 Below is a list of features that we feel would further enhance the user experience.
 
-  |              Feature               | Description                                                                                                          |
-  |:----------------------------------:|----------------------------------------------------------------------------------------------------------------------|
-  |         Clustering of tags         | Group tags of the same categories together in the UI's display of the tags list.                                     |
-  |            Pin contacts            | Keep selected contacts constantly shown at the top of the contacts list.                                             |
-  |     Customize category colors      | Change the colors of the categories to the user's preference.                                                        |
-  | Multiple phone numbers per contact | Allow more than one number per contact to accommodate multiple contact numbers and overseas phone number is allowed. |
-  |     Custom fields for contacts     | Add custom fields to the contacts added.                                                                             |
-  |      Custom shortcut commands      | Add custom shortcut commands to streamline actions within the application.                                           |
-  |    Delete tag from all contacts    | Remove a specific tag from all contacts at once.                                                                     |
-  |             Dark mode              | Include a dark mode theme for easier viewing in low light conditions.                                                |
-  |      Copy contact information      | Enable copying of contact information to reduce errors from manual copying.                                          |
-  |          Export contacts           | Provide an option to export contact information for easier sharing.                                                  |
+  |              Feature               | Description                                                                      |
+  |:----------------------------------:|----------------------------------------------------------------------------------|
+  |         Clustering of tags         | Group tags of the same categories together in the UI's display of the tags list. |
+  |            Pin contacts            | Keep selected contacts constantly shown at the top of the contacts list.         |
+  |     Customize category colors      | Change the colors of the categories to the user's preference.                    |
+  |    Multiple numbers per contact    | Allow more than one number per contact to accommodate multiple contact numbers.  |
+  |     Custom fields for contacts     | Add custom fields to the contacts added.                                         |
+  |      Custom shortcut commands      | Add custom shortcut commands to streamline actions within the application.       |
+  |    Delete tag from all contacts    | Remove a specific tag from all contacts at once.                                 |
+  |             Dark mode              | Include a dark mode theme for easier viewing in low light conditions.            |
+  |      Copy contact information      | Enable copying of contact information to reduce errors from manual copying.      |
+  |          Export contacts           | Provide an option to export contact information for easier sharing.              |
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
