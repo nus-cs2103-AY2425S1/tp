@@ -104,9 +104,9 @@ public class SortCommandTest {
         assertEquals("Charlie", sortedList.get(1).getName().fullName);
         assertEquals("Bob", sortedList.get(2).getName().fullName);
         assertEquals("Eve", sortedList.get(3).getName().fullName);
-        assertEquals("Hriendo", sortedList.get(4).getName().fullName);
-        assertEquals("Friendo", sortedList.get(5).getName().fullName);
-        assertEquals("Griendo", sortedList.get(6).getName().fullName);
+        assertEquals("Friendo", sortedList.get(4).getName().fullName);
+        assertEquals("Griendo", sortedList.get(5).getName().fullName);
+        assertEquals("Hriendo", sortedList.get(6).getName().fullName);
     }
 
     // Test descending with Tags with string value
@@ -129,9 +129,9 @@ public class SortCommandTest {
 
         List<Person> sortedList = model.getFilteredPersonList();
 
-        assertEquals("Griendo", sortedList.get(0).getName().fullName);
-        assertEquals("Friendo", sortedList.get(1).getName().fullName);
-        assertEquals("Hriendo", sortedList.get(2).getName().fullName);
+        assertEquals("Hriendo", sortedList.get(0).getName().fullName);
+        assertEquals("Griendo", sortedList.get(1).getName().fullName);
+        assertEquals("Friendo", sortedList.get(2).getName().fullName);
         assertEquals("Eve", sortedList.get(3).getName().fullName);
         assertEquals("Bob", sortedList.get(4).getName().fullName);
         assertEquals("Charlie", sortedList.get(5).getName().fullName);
