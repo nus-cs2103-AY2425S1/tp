@@ -162,6 +162,7 @@ public class Member {
         subtractPoints(target.getPoints());
     }
 
+    //@@author {taggyhan}
     /**
      * Returns true if both members have the same name or same telegram (not case-sensitive).
      * This is used to check for duplicates in HallPointer.
@@ -170,7 +171,7 @@ public class Member {
         // Check for duplicate based only on name and telegram
         return otherMember != null
                 && (otherMember.getName().equals(getName())
-                || otherMember.getTelegram().value.equalsIgnoreCase(this.getTelegram().value));
+                || otherMember.getTelegram().equals(getTelegram()));
     }
 
     /**
