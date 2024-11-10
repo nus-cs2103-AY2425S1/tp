@@ -83,7 +83,7 @@ Term           | Explanation
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add_student n/NAME`, `NAME` is a parameter which can be used as `add_student n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Science` or as `n/John Doe`.
@@ -96,6 +96,8 @@ Term           | Explanation
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* To prevent Java integer overflow issues, all integer values—including indices and scores—must be within the range of -2,147,483,648 to 2,147,483,647.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -247,8 +249,9 @@ Deletes an assignment belonging to a student based on the student's index number
 
 Format: `delete_assignment si/INDEX ai/INDEX`
 
-* Deletes the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student
+* Deletes the assignment at the specified `INDEX`. The indices refer to the index numbers shown in the displayed student
   list and the assignment list on the student detail panel respectively.
+  ![result for `edit_assignment si/1 ai/2 an/Math Assignment ms/100`](images/editAssignment1.png)
 
 Constraints:
 * The index **must be a positive integer** 1, 2, 3, …
