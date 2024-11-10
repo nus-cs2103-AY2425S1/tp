@@ -39,12 +39,11 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
-
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
@@ -129,7 +128,7 @@ How the parsing works:
 <div style="page-break-after: always;"></div>
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="800" />
 
@@ -144,7 +143,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -330,14 +329,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters command to create new student entry.
-1. System displays success message and command line is cleared.
+1. UGTeach displays success message and command line is cleared.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. System detects error in entered command.
-    * 1a1. System displays error message and does not clear command line.
+* 1a. UGTeach detects error in entered command.
+    * 1a1. UGTeach displays error message and does not clear command line.
     * 1a2. User enters new command.<br>
   Steps 1a1-1a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 2.
@@ -347,19 +346,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters command to view all entries.
-1. System displays list with all entries to the user.
+1. UGTeach displays list with all entries to the user.
 
    Use case ends.
 
 **Extension**
-* 1a. System detects error in entered command.
-    * 1a1. System displays error message and does not clear command line.
+* 1a. UGTeach detects error in entered command.
+    * 1a1. UGTeach displays error message and does not clear command line.
     * 1a2. User enters new command.<br>
   Steps 1a1-1a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 2.<br><br>
 
-* 1b. System detects the list is empty.
-    * 1b1. System shows an empty list.<br> 
+* 1b. UGTeach detects the list is empty.
+    * 1b1. UGTeach shows an empty list.<br> 
   Use case ends.
 
 <div style="page-break-after: always;"></div>
@@ -369,13 +368,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to read total earnings and total amount owed by the students. 
-1. System displays total earnings and total amount owed to the user.
+1. UGTeach displays total earnings and total amount owed to the user.
 
    Use case ends.
 
 **Extension**
-* 1a. System detects error in entered command.
-    * 1a1. System displays error message and does not clear command line.
+* 1a. UGTeach detects error in entered command.
+    * 1a1. UGTeach displays error message and does not clear command line.
     * 1a2. User enters new command.<br>
   Steps 1a1-1a2 are repeated until all details entered are correct.<br> 
   Use case resumes from step 2.
@@ -387,16 +386,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>find a student(UC05)</ins>.
 1. User enters command to delete a specific student.
-1. System displays list with specified student deleted from the list.
+1. UGTeach displays list with specified student deleted from the list.
 
    Use case ends.
 
 **Extensions**
-* 1a. System cannot find the specified student.<br>
+* 1a. UGTeach cannot find the specified student.<br>
     Use case ends.<br><br>
   
-* 2a. System detects error in format of entered command.
-    * 2a1. System displays error message and does not clear command line.
+* 2a. UGTeach detects error in format of entered command.
+    * 2a1. UGTeach displays error message and does not clear command line.
     * 2a2. User enters command with new index.<br>
   Steps 2a1-2a2 are repeated until index entered is correct.<br>
   Use case resumes from step 3.
@@ -408,17 +407,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to find students based on the specified keywords.
-1. System displays list with students with matching details.
+1. UGTeach displays list with students with matching details.
 
    Use case ends.
 
 **Extensions**
-* 1a. System cannot find any student with the specified keyword.
-    * 1a1. System displays an empty list.<br>
+* 1a. UGTeach cannot find any student with the specified keyword.
+    * 1a1. UGTeach displays an empty list.<br>
   Use case ends.<br><br>
     
-* 1b. System detects error in entered command.
-    * 1b1. System displays error message and does not clear command line.
+* 1b. UGTeach detects error in entered command.
+    * 1b1. UGTeach displays error message and does not clear command line.
     * 1b2. User enters new command.<br>
   Steps 1a1-1a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 2.
@@ -430,19 +429,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>find a student(UC05)</ins>.
 1. User enters command to record payment received from the specified student after a lesson.
-1. System updates the total tuition fee paid by the student.
-1. System displays success message.
+1. UGTeach updates the total tuition fee paid by the student.
+1. UGTeach displays success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
+* 1a. UGTeach cannot find the specified student.
+    * 1a1. User <ins>adds the student to UGTeach(UC01)</ins>.<br>
   Use case resumes from step 1.<br><br>
 
-* 2a. System detects error in entered command.
-    * 2a1. System displays error message and does not clear command line.
+* 2a. UGTeach detects error in entered command.
+    * 2a1. UGTeach displays error message and does not clear command line.
     * 2a2. User enters new command.<br>
   Steps 2a1-2a2 are repeated until all details entered are correct.<br> 
   Use case resumes from step 3.
@@ -455,19 +454,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>find a student(UC05)</ins>.
 1. User enters command to update amount of tuition fee owed by the specified student after a lesson.
-1. System updates the total tuition fee owed by the student.
-1. System displays success message.
+1. UGTeach updates the total tuition fee owed by the student.
+1. UGTeach displays success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
+* 1a. UGTeach cannot find the specified student.
+    * 1a1. User <ins>adds the student to UGTeach (UC01)</ins>.<br>
       Use case resumes from step 1.<br><br>
 
-* 2a. System detects error in entered command.
-    * 2a1. System displays error message and does not clear command line.
+* 2a. UGTeach detects error in entered command.
+    * 2a1. UGTeach displays error message and does not clear command line.
     * 2a2. User enters new command.<br>
       Steps 2a1-2a2 are repeated until all details entered are correct.<br>
       Use case resumes from step 3.
@@ -478,19 +477,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <ins>find a student(UC05)</ins>.
 1. User enters command to settle outstanding fees for the specified student.
-1. System updates the total tuition fee paid and total tuition fee owed by the student.
-1. System displays success message.
+1. UGTeach updates the total tuition fee paid and total tuition fee owed by the student.
+1. UGTeach displays success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
+* 1a. UGTeach cannot find the specified student.
+    * 1a1. User <ins>adds the student to UGTeach (UC01)</ins>.<br>
   Use case resumes from step 1.<br><br>
 
-* 2a. System detects error in entered command.
-    * 2a1. System displays error message and does not clear command line.
+* 2a. UGTeach detects error in entered command.
+    * 2a1. UGTeach displays error message and does not clear command line.
     * 2a2. User enters new command.<br>
   Steps 2a1-2a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 3.
