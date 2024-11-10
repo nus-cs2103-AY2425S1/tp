@@ -207,7 +207,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their phone number if required.                     |
 | `* * *`              | HR Manager | view email addresses of employees/potential hire.                 | contact them if its not an emergency.                        |
 | `* * *`              | HR Manager | insert email address of my employees/potential hire.               | retrieve their email address if required.                    |
-| `* * *`              | HR Manager | delete data through the UI.                                       | delete users who are incorrectly added.                      |
 | `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them. |
 | `* *`                | New user   | be shown some basic functions.                                    | learn the basic functions of the product.                    |
 | `* *`                | New user   | view the user guide easily.                                       | learn more functions of the product whenever I want.         |
@@ -224,12 +223,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  System shows a list of persons
-3.  User requests to delete a specific person in the list of the correct shown type
-4.  System deletes the person
+1.  User requests to list persons.
+2.  System shows a list of persons.
+3.  User requests to delete a specific person in the list of the correct shown type.
+4.  System deletes the person.
    
-      Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -256,7 +255,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add an employee.
 2. System saves the employee's information.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -264,45 +263,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    * 1a1. System shows an error message.
 
-   Use case resumes at step 1.
+      Use case resumes at step 1.
 
 * 1b. The user requests to add a potential hire.
 
    * 1b1. System saves the potential hire's information.
 
-   Use case ends.
+      Use case ends.
 
 **Use case: Find a person**
 
 **MSS**
 
 1. User requests to find based on name.
-2. System displays a list of people who have the name.
+2. System displays a list of person who have the name.
 
-Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. The input syntax is invalid
+* 1a. The input syntax is invalid.
 
    * 1a1. System shows an error message.
 
-   Use case resumes at step 1.
+      Use case resumes at step 1.
 
 * 1b. There is no name that fits the search.
 
    * 1b1. The list is empty.
 
-   Use case ends.
+      Use case ends.
+
+* 1c. User requests to find employees by name.
+
+   * 1c1. System displays a list of employees who have the name.
+
+      Use case ends.
+
+* 1d. User requests to find potential hires by name.
+
+   * 1d1. System displays a list of potential hires who have the name.
+
+      Use case ends.
+
+* 1e. User requests to find based on phone number.
+
+   * 1e1. System displays a list of person who have the phone number.
+
+      Use case ends.
+
+* 1f. User requests to find based on email.
+
+   * 1f1. System displays a list of person who have the email.
+
+      Use case ends.
+
+* 1g. User requests to find based on department.
+
+   * 1g1. System displays a list of person who have the department.
+
+      Use case ends.
+
+* 1h. User requests to find based on role.
+
+   * 1h1. System displays a list of person who have the role.
+
+      Use case ends.
 
 **Use case: Promoting a potential hire to an employee**
 
 **MSS**
 
-1. User request to list person
-2. System shows a list of person
-3. User request to change a specific person in the list into an employee
-4. System changes the person to an employee
+1. User request to list person.
+2. System shows a list of person.
+3. User request to change a specific person in the list into an employee.
+4. System changes the person to an employee.
 
    Use case ends.
 
@@ -314,18 +349,18 @@ Use case ends.
 
 * 3a. The person is already an employee.
 
-  * 3a1. System shows an error message
+  * 3a1. System shows an error message.
 
-    Use case resumes at step 2
+      Use case resumes at step 2.
 
 **Use case: Demoting an employee to a potential hire**
 
 **MSS**
 
-1. User request to list person
-2. System shows a list of person
-3. User request to change a specific person in the list into a potential hire
-4. System changes the person to a potential hire
+1. User request to list person.
+2. System shows a list of person.
+3. User request to change a specific person in the list into a potential hire.
+4. System changes the person to a potential hire.
 
    Use case ends.
 
@@ -337,10 +372,94 @@ Use case ends.
 
 * 3a. The person is already a potential hire.
 
-    * 3a1. System shows an error message
+   * 3a1. System shows an error message.
 
-      Use case resumes at step 2
+      Use case resumes at step 2.
 
+**Use case: List contacts in the addressbook**
+
+**MSS**
+
+1. User requests to list all persons.
+2. System shows a list of persons.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+   Use case ends.
+
+* 1b. The user requests to list all employees.
+
+   * 1b1. System shows a list of employees.
+
+      Use case ends.
+
+* 1c. The user requests to list all potential hires.
+
+   * 1c1. System shows a list of potential hires.
+
+      Use case ends.
+
+**Use case: Sort the addressbook**
+
+**MSS**
+
+1. User requests to list person.
+2. System shows a list of person.
+3. User requests to sort the list of persons by name.
+4. System shows the list of person sorted by name in ascending order.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User filters the list to not show all persons.
+
+   * 1a1. System shows a filtered list.
+
+      use case resumes at step 3, but only the shown person are sorted.
+
+* 3a. User requests to sort the list of person by name in ascending order.
+
+   * 3a1. System shows the list of person sorted by name in ascending order.
+
+      Use case ends.
+
+* 3b. User requests to sort the list of person by name in descending order.
+
+   * 3b1. System shows the list of person sorted by name in descending order.
+
+      Use case ends.
+   
+* 3c. User requests to sort the list of person by date.
+
+   * 3c1. System shows the list of person sorted by date in ascending order.
+
+      Use case ends.
+
+* 3d. User requests to sort the list of person by role.
+
+   * 3d1. System shows the list of person sorted by role in ascending order.
+
+      Use case ends.
+
+* 3e. User requests to sort the list of person by department.
+
+   * 3e1. System shows the list of person sorted by department in ascending order.
+
+      Use case ends.
+
+**Use case: Clear the addressbook**
+
+**MSS**
+
+1. User requests to clear the addressbook
+2. System clears the addressbook
+
+   Use case ends.
 
 **Use case: Ask for help**
 
@@ -380,13 +499,14 @@ Use case ends.
 
 ### Glossary
 
-* **GUI**: Graphical User Interface - User interface which allows users interact with the application through components such as icons, buttons and menus
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **MVP**: Minimum Viable Product - The minimum set of features that is required to make the product usable by the target user
-* **Alpha Release**: A version of the software that is feature complete but may have bugs
-* **Release Candidate**: A version of the software that is feature complete and has no known bugs
-* **Public Release**: A version of the software that is released to the public with any bugs squashed after Release Candidate
+* **Alpha Release**: A version of the software that is feature complete but may have bugs.
+* **CLI**: Command line interface - Text based user interface which allows user to type instructions directly to the computer to perform certain tasks.
+* **GUI**: Graphical User Interface - User interface which allows users interact with the application through components such as icons, buttons and menus.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **MVP**: Minimum Viable Product - The minimum set of features that is required to make the product usable by the target user.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Public Release**: A version of the software that is released to the public with any bugs squashed after Release Candidate.
+* **Release Candidate**: A version of the software that is feature complete and has no known bugs.
 
 --------------------------------------------------------------------------------------------------------------------
 
