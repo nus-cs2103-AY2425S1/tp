@@ -93,6 +93,21 @@ AgentAssist allows you to manage client data like names, phone numbers, emails, 
 Welcome to AgentAssist. Here’s how to get up and running quickly and easily.
 
 ## 3.1 Installation
+
+### Quick Check: Do I Already Have Java 17?
+Before installing Java, you can check if it’s already on your computer:
+1. **Open a terminal** (or command prompt):
+    - **Windows**: Press Windows Key + R, type cmd, and press Enter.
+    - **macOS**: Press Command + Space, type Terminal, and press Enter.
+    - **Linux**: Open your Terminal application.
+2. **Type the following command and press Enter:**
+   ```
+    java -version
+   ```
+3. **Review the output:**
+   - If the output shows "Java 17," you’re ready to go and can skip to **Step 2**.
+   - If Java 17 is not installed, continue with **Step 1** below.
+
 ### Step 1: Install Java
 
 Ensure you have **Java 17** installed on your computer. AgentAssist is optimized for **Java 17**, and using other versions may affect performance or functionality. If you already have Java 17 installed, you can skip this step.
@@ -107,7 +122,11 @@ To install Java 17:
     ```
 * If you see Java 17 in the output, you’re good to go!
 
-### Step 2: Download the AgentAssist application
+> ℹ️ **What is Java?**
+>
+> Java is the platform that this AgentAssist runs on, providing the environment needed for smooth operation across different types of computers. Java is also used by many popular desktop applications, such as Minecraft and Apache OpenOffice. By using Java, we ensure that our app performs reliably on all supported systems, including Windows, macOS, and Linux.
+
+### Step 2: Download the AgentAssist application**
 
 Download the latest version of the `.jar` file from the AgentAssist [repository](https://github.com/AY2425S1-CS2103T-T14-4/tp/releases).
 
