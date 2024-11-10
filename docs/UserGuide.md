@@ -216,6 +216,7 @@ any number of digits for dollars but must be exactly 2 digits for cents. The cla
 user will be informed with an error message.
 * Claim Amount can be 0, in case the claim details have not been finalised and the user wishes to use the claim as
 as a placeholder claim for now.
+* Claim amount is in Singapore dollars.
 * Claims are opened with a default status of "open".
 * To simulate real world conditions, we have fixed the claim ID to always follow a specific format which
   is alphabet + 4-digit number. All other format of claims will be considered invalid.
