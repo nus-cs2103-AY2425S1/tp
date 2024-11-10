@@ -19,7 +19,7 @@ public class BookApptCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsBookApptCommand() {
-        LocalDateTime dateTime = LocalDateTime.parse("2024-12-12 14:00", Appt.FORMATTER);
+        LocalDateTime dateTime = LocalDateTime.parse("2024-12-12 14:00", Appt.STRICT_FORMATTER);
         Appt appt = new Appt(dateTime, new HealthService("CONSULT"));
         String userInput = VALID_NRIC_AMY + " dt|2024-12-12 14:00" + " " + "h|CONSULT";
         BookApptCommand expectedCommand = new BookApptCommand(new Nric(VALID_NRIC_AMY), appt);
