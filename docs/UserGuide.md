@@ -252,6 +252,14 @@ Examples:
 * `find pet fluffy megatron` returns `Fluffy`, `Megatron` as shown in the image below.<br>
   ![result for 'find fluffy megatron'](images/findFluffyMegatron.jpeg)
 
+<div markdown="block" class="alert alert-info">
+**:information_source: About find and UI:**<br>
+<ul>
+<li>Only the list that is selected by the <code>find</code> will be updated. The other list will remain the same.</li>
+<li>This allows for the possibility to find <code>owners</code> then find <code>pets</code> without disrupting the other list.</li>
+</ul>
+</div>
+
 ### Deleting an entity : `delete`
 
 Deletes the specified owner or pet from PawPatrol.
