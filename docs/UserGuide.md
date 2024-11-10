@@ -145,6 +145,12 @@ Shows a message explaining how to access the help page (User Guide).
 
 Format: `help`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+`F1` key can be used to display the help message. <br>
+
+</div>
+
 ### Listing all persons : `listp`
 
 Shows a list of all persons in the ConcertPhonebook.
