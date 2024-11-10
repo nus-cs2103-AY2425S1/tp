@@ -162,7 +162,7 @@ Examples:
 
 Format: `list`
 
-Shows a list of all contacts in the address book.
+Shows a list of all contacts in the contact list.
 
 * Use this command to return to the view of all your contacts after using commands such as `filter` and `view` that display a subset of contacts.
 
@@ -172,7 +172,7 @@ Shows a list of all contacts in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
-Edits an existing contact in the address book.
+Edits an existing contact in the contact list.
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -198,12 +198,12 @@ Examples:
 
 Format: `tag INDEX t/TAG1 TAG2 ...`
 
-Adds one or more tags to a specific contact in the address book.
+Adds one or more tags to a specific contact in the contact list.
 
 * Tags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
 * Tags specified in the command must be alphanumeric.
 * You can specify multiple tags in the same command by separating the tags with a space.
-* As such, each tag must be 1 word (i.e. does not contain spaces)
+* As such, each tag must be 1 word (i.e. does not contain spaces).
 * Adding a tag to a contact who already has the tag will show an error message.
 
 <box type="warning">
@@ -222,7 +222,7 @@ Examples:
 
 Format: `untag INDEX t/TAG1 TAG2 ...` or `untag INDEX t/all`
 
-Removes one or more tags from a specific contact in the address book.
+Removes one or more tags from a specific contact in the contact list.
 
 * Untags the contact at the specified `INDEX`. The index refers to the index number shown next to the contact in the contact list. The index **must be a positive integer** 1, 2, 3, ...
 * If you only want to remove specific tags from the contact, at least one tag to remove must be specified.
@@ -239,7 +239,7 @@ Examples:
 
 Format: `taglist`
 
-Lists the active tags across *all* contacts in the address book.
+Lists the active tags across *all* contacts in the contact list.
 'Active tag' refers to a tag that currently assigned to at least 1 contact in your PlanPerfect application.<br>
 
 * Lists active tags in alphabetical order.
@@ -308,14 +308,14 @@ Examples:
 
 Format: `delete INDEX`
 
-Deletes the specified contact from the address book.
+Deletes the specified contact from the contact list.
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of contacts currently listed.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `list` followed by `delete 2` deletes the 2nd contact in the contact list.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 **Warning**: If you want to remove a contact from a wedding, use the unassign command instead of the delete command. 
@@ -330,7 +330,7 @@ Sorts the contacts in the current view in alphabetical order.
 
 <box type="warning">
 
-You will not be able to recover the previous sorting of your contacts after the running the `sort` command.
+You will not be able to recover the previous sorting of your contacts after the running the `sort` command. If you sort your contacts while in a wedding view, the list of all contacts will also be sorted.
 
 </box>
 
@@ -363,7 +363,7 @@ In this section, note that:
 
 Format: `addw n/WEDDING_NAME d/DATE (in DD/MM/YYYY format) [c/CONTACT1_INDEX CONTACT2_INDEX ...]`
 
-Adds a wedding to PlanPerfect with the specified date. Optionally allows users to pre-assign contacts to the wedding.
+Adds a wedding to PlanPerfect with the specified date. Optionally allows you to pre-assign contacts to the wedding.
 
 * Running this command will create a new wedding in the weddings panel, allowing you to use its wedding index to execute relevant commands on that wedding.
 * Wedding names must be alphanumeric, with a maximum length of 30 characters.
@@ -402,7 +402,7 @@ Format: `view WEDDING_INDEX`
 Displays contacts assigned to the wedding at the specified `WEDDING_INDEX`. 
 
 * The index **must be a positive integer** 1, 2, 3, …​ and must be not exceed the total number of weddings currently listed.
-* Please refer to the 'General Notes' at the start of the Features section to learn more about how entering a wedding view using this command affects the behaviour of other commands
+* Please refer to the 'General Notes' at the start of the Features section to learn more about how entering a wedding view using this command affects the behaviour of other commands.
 
 Examples:
 * `view 2` displays a list of all contacts involved in the 2nd wedding on the wedding list.
@@ -552,7 +552,7 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 **A**: No, checking for duplicates in wedding names is **case-sensitive**.
 
 **Q**: **How are duplicate contacts determined?**
-**A**: Two contacts are considered duplicates if they have the **same phone number**. An error message will be shown if you attempt to add a duplicate contact or edit the phone number of a contact to be the same as another phone number already in the contacts list. 
+**A**: Two contacts are considered duplicates if they have the **same phone number**. An error message will be shown if you attempt to add a duplicate contact or edit the phone number of a contact to be the same as another phone number already in the contact list. 
 
 <br><br/>
 
