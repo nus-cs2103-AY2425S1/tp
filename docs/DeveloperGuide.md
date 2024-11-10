@@ -605,7 +605,7 @@ testers are expected to do more *exploratory* testing.
       1. Test case: `addtag 0 t/volleyball` <br>
       1. Test case: `addtag 3 t/homie` <br>
       1. Test case: `addtag 2` <br>
-         Expected: No new tag added. Error details shown in the status message. All status bar remain the same.
+         Expected: No new tag added. Error details shown in the status message..
 
 ### Finding a person
 
