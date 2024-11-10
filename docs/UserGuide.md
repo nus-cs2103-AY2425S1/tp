@@ -68,6 +68,8 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+## General Commands
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -75,6 +77,18 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Clearing all entries : `clear`
+
+Clears all entries from TAHub.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ## Student Commands
 
@@ -151,6 +165,36 @@ Examples:
 * `liststudents` followed by `delete 2;3` deletes the 2nd and 3rd student in TAHub.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+### Exporting student data : `export`
+
+Exports the current list of students to a CSV file.
+
+Format: `export [-f] FILENAME`
+
+* Exports student data to 'FILENAME.csv' in both the data directory and user's home directory
+* The `-f` flag is optional and allows overwriting of existing files
+* The filename cannot contain periods (.) or slashes (/ or \)
+
+Examples:
+* `export students` creates students.csv containing current student list
+* `export -f backup` overwrites backup.csv if it exists
+
+### Importing student data : `import`
+
+Imports students from a CSV file into TAHub.
+
+Format: `import FILENAME`
+
+* The CSV file must have the header: Name,Phone,Email,Courses
+* Students with validation errors will be logged in error.csv
+* Duplicate students are skipped and logged
+
+Examples:
+* `import students.csv` imports student data from students.csv
+* `import ~/documents/students.csv` imports from the home directory
+
+## Consultation Commands
+
 ### Adding a consultation : `addconsult`
 
 Adds a new consultation to TAHub.
@@ -159,14 +203,14 @@ Adds a new consultation to TAHub.
 
 * The date and time should not conflict with any existing consultation.
 * Date format: `YYYY-MM-DD`
-* Time format: `HH:MM`
+* Time format: `HH:mm`
 
 **Examples**:
 * `addconsult d/2024-10-20 t/14:00`
 * `addconsult d/2024-11-05 t/09:00`
 
 
-### Listing all consultations : `listconsults`
+### Refreshing the consultation list : `listconsults`
 
 Refreshes and displays the consultation list.
 Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
@@ -174,7 +218,7 @@ Useful to fix minor UI glitches, e.g. the display not updating after adding a st
 **Format**: `listconsults`
 
 **Example**:
-* `listconsults`
+* `listconsults` 
 
 ### Adding students to a consultation : `addtoconsult`
 
@@ -191,8 +235,6 @@ index must be provided.
 * `addtoconsult 1 n/John Doe n/Harry Ng`
 * `addtoconsult 2 i/3 i/5` (adds students at indices 3 and 5 in the student list to the 2nd consultation)
 
----
-
 ### Removing students from a consultation : `removefromconsult`
 
 Removes specified students from a consultation, identified by its index.
@@ -203,8 +245,6 @@ Removes specified students from a consultation, identified by its index.
 
 **Examples**:
 * `removefromconsult 1 n/John Doe n/Harry Ng` (removes students named John Doe and Harry Ng from the 1st consultation)
-
----
 
 ### Deleting consultations : `deleteconsult`
 
@@ -217,20 +257,6 @@ Deletes one or more consultations from TAHub by their indices.
 **Examples**:
 * `deleteconsult 2`
 * `deleteconsult 1;3;5` (deletes the 1st, 3rd, and 5th consultations)
-
-### Exporting student data : `export`
-
-Exports the current list of students to a CSV file.
-
-Format: `export [-f] FILENAME`
-
-* Exports student data to 'FILENAME.csv' in both the data directory and user's home directory
-* The `-f` flag is optional and allows overwriting of existing files
-* The filename cannot contain periods (.) or slashes (/ or \)
-
-Examples:
-* `export students` creates students.csv containing current student list
-* `export -f backup` overwrites backup.csv if it exists
 
 ### Exporting consultation data : `exportconsult`
 
@@ -245,20 +271,6 @@ Format: `exportconsult [-f] FILENAME`
 Examples:
 * `exportconsult sessions` creates sessions.csv containing current consultation list
 * `exportconsult -f consultbackup` overwrites consultbackup.csv if it exists
-
-### Importing student data : `import`
-
-Imports students from a CSV file into TAHub.
-
-Format: `import FILENAME`
-
-* The CSV file must have the header: Name,Phone,Email,Courses
-* Students with validation errors will be logged in error.csv
-* Duplicate students are skipped and logged
-
-Examples:
-* `import students.csv` imports student data from students.csv
-* `import ~/documents/students.csv` imports from the home directory
 
 ### Importing consultation data : `importconsult`
 
@@ -275,18 +287,6 @@ Format: `importconsult FILENAME`
 Examples:
 * `importconsult sessions.csv` imports consultation data from sessions.csv
 * `importconsult ~/documents/consultations.csv` imports from the home directory
-
-### Clearing all entries : `clear`
-
-Clears all entries from TAHub.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 # Lessons
 
@@ -322,6 +322,16 @@ Format: `addlesson d/DATE t/TIME`
 
 * `DATE` must be in the format `YYYY-MM-DD`, and must be a valid date.
 * `TIME` must be in the format `HH:mm`, and must be a valid time.
+
+### Refreshing the lesson list : `listlessons`
+
+Refreshes and displays the lesson list.
+Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
+
+**Format**: `listlessons`
+
+**Example**:
+* `listlessons`
 
 ### Deleting a lesson : `deletelesson`
 
@@ -399,16 +409,6 @@ Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 Examples:
 * `markp 1 n/John Doe pt/3` marks `John Doe` as having 3 participation marks for lesson number 1.
 * `markp 2 n/John Doe n/Jane Doe pt/5` marks `John Doe` and `Jane Doe` as having 5 participation marks for lesson number 2.
-
-### Refreshing the lesson list : `listlessons`
-
-Refreshes and displays the lesson list.
-Useful to fix minor UI glitches, e.g. the display not updating after adding a student.
-
-**Format**: `listlessons`
-
-**Example**:
-* `listlessons`
 
 ## Storage Operations
 

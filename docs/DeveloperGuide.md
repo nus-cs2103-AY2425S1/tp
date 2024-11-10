@@ -947,7 +947,7 @@ Use case ends.
     <br>
     Use case ends.
 * 2d. Participation Score is Positive & Valid.
-  * 2d1. TAHub marks the student's attendance as Present
+  * 2d1. TAHub marks the student's attendance as Present.
     <br>
     Use case resumes from step 3.
 
