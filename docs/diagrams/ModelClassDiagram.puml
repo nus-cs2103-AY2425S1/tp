@@ -53,7 +53,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> TelegramUsername
+Person *--> "0..1" TelegramUsername
 Person *--> "~* some" Role
 
 Person -[hidden]up--> I
