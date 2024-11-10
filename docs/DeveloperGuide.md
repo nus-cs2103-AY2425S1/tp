@@ -97,7 +97,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="500"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -152,6 +152,9 @@ The `Storage` component,
 * can save both student directory data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `StudentDirectoryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<br>
+<br>
 
 ### Common classes
 
@@ -211,7 +214,7 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" width="500" />
 
 <box type="info" seamless>
 
@@ -258,8 +261,9 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -289,6 +293,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Manage students' schedules faster than a typical mouse/GUI driven app
 * Accommodate students who need to reschedule, making for a flexible scheduling tool
 * Track students' learning over time, enabling piano teachers to monitor students' grade and progress on piano pieces
+
+<br>
+<br>
 
 ### User stories
 
@@ -326,6 +333,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user             | view a summary of my income for the month                   | track my earnings                            |
 | `*`      | user             | track attendance for each student                           | see how consistent they are with lessons     |
 | `*`      | user             | track the progress of each student on their assigned pieces | monitor their improvement                    |
+
+<br>
+<br>
 
 ### Use cases
 
@@ -372,8 +382,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes from step 2.
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 #### Use case: Delete a student (UC03)
 
@@ -442,8 +450,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 #### Use case: Sort students (UC07)
 
 **MSS**
@@ -508,8 +514,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Use case resumes from step 2.
 ---
 
-<div style="page-break-after: always;"></div>
-
 #### Use case: Unassign piano pieces from a student (UC10)
 
 **MSS**
@@ -548,6 +552,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 #### Use case: Schedule a make-up lesson (UC12)
 
 **MSS**
@@ -575,8 +581,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 #### Use case: Cancel a lesson session (UC13)
 
 **MSS**
@@ -595,6 +599,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Use case resumes from step 2.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use case: Uncancel a lesson session (UC14)
 
@@ -648,8 +654,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 #### Use case: Redo the last undone command (UC17)
 
 **MSS**
@@ -674,6 +678,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+---
+
+<br>
+<br>
+
 ### Non-Functional Requirements
 
 1.  **Cross-Platform Compatibility**: Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -686,6 +695,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8.  **Data Security**: The application should ensure that private contact details are not accidentally exposed or shared without the user’s consent.
 9.  **Minimal Learning Curve**: The system should be easy to learn for users familiar with basic command-line applications, providing clear error messages and help documentation for new users.
 10. **Scalability**: The system design should allow for future fields or features without major architectural changes.
+
+<br>
+<br>
 
 ### Glossary
 
@@ -765,8 +777,6 @@ testers are expected to do more *exploratory* testing.
    
     3. Test case: `assign 2 pn/Waltz pn/Etude`<br>
        **Expected**: "Waltz" and "Etude" are assigned to the second student.
-
-<div style="page-break-after: always;"></div>
 
 ### Unassigning Piano Pieces from a Student
 1. Unassign piano pieces
