@@ -51,20 +51,21 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Company expectedcompany = new CompanyBuilder(MICROSOFT).withTags(VALID_TAG_TECH).build();
+        Company expectedCompany = new CompanyBuilder(MICROSOFT).withTags(VALID_TAG_TECH)
+                .withStatus("INTERESTED").withApplications().build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
                         + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + TAG_DESC_TECH,
-                new AddCommand(expectedcompany));
+                new AddCommand(expectedCompany));
 
 
         // multiple tags - all accepted
-        Company expectedcompanyMultipleTags = new CompanyBuilder(MICROSOFT).withTags(VALID_TAG_TECH, VALID_TAG_SOFTWARE)
+        Company expectedCompanyMultipleTags = new CompanyBuilder(MICROSOFT).withTags(VALID_TAG_TECH, VALID_TAG_SOFTWARE)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT
-                        + TAG_DESC_SOFTWARE + TAG_DESC_TECH, new AddCommand(expectedcompanyMultipleTags));
+                        + TAG_DESC_SOFTWARE + TAG_DESC_TECH, new AddCommand(expectedCompanyMultipleTags));
     }
 
     @Test
@@ -133,12 +134,23 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // todo: add test for the other optional fields
+        // no phone
+        Company expectedCompanyNoPhone = new CompanyBuilder(MICROSOFT).withNoPhone().withTags(VALID_TAG_TECH)
+                .withStatus("INTERESTED").withApplications().build();
+        assertParseSuccess(parser, NAME_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT
+                + TAG_DESC_TECH, new AddCommand(expectedCompanyNoPhone));
+
+        // no address
+        Company expectedCompanyNoAddress = new CompanyBuilder(MICROSOFT).withNoAddress().withTags(VALID_TAG_TECH)
+                .withStatus("INTERESTED").withApplications().build();
+        assertParseSuccess(parser, NAME_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
+                + TAG_DESC_TECH, new AddCommand(expectedCompanyNoAddress));
+
         // zero tags
-        Company expectedcompany = new CompanyBuilder(GOOGLE).withTags().withApplications()
+        Company expectedCompanyNoTags = new CompanyBuilder(GOOGLE).withTags().withApplications()
                 .withStatus("INTERESTED").build();
         assertParseSuccess(parser, NAME_DESC_GOOGLE + PHONE_DESC_GOOGLE + EMAIL_DESC_GOOGLE
-                        + ADDRESS_DESC_GOOGLE, new AddCommand(expectedcompany));
+                + ADDRESS_DESC_GOOGLE, new AddCommand(expectedCompanyNoTags));
     }
 
     @Test

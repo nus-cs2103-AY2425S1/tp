@@ -44,7 +44,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/internbuddy/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/internbuddy/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -76,13 +76,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/internbuddy/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CompanyListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/internbuddy/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -93,7 +93,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/internbuddy/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -125,7 +125,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/internbuddy/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -148,7 +148,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-1/tp/tree/master/src/main/java/seedu/internbuddy/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -338,7 +338,7 @@ The `fav`/`unfav` command allows users to mark specified a `Company` as favourit
 will appear at the top of the company list at all times along with other favourited companies (provided that they are not hidden by other commands like `find`).
 
 The `fav` command is facilitated by `FavCommand` and `FavCommandParser`. Similarly, `unfav` command is facilitated by
-`UnfavCommand` and `UnfavCommandParser`. For brevity, we refer to both using `XXFavCommand` and `XXFavCommanParser`
+`UnfavCommand` and `UnfavCommandParser`. For brevity, we refer to both using `XXFavCommand` and `XXFavCommandParser`
 Since they function similarly.
 
 The following methods and operations are involved:
@@ -616,7 +616,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **CLI**: Command Line Interface, a method of interacting with software using typed commands rather than a graphical interface.
-* **PR**: Pull Request, a request submitted by a contributor to merge code changes into a repository's main codebase, commonly used in GitHub for code reviews and collaboration.
 * **CSV**: Comma Separated Values, a text file format that uses commas to separate values, and newlines to separate records.
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange [format](https://www.json.org/json-en.html).
 
@@ -654,9 +653,16 @@ Prerequisites: <prerequisites>
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Ensure you have Java `17` or above installed in your Computer by opening up your terminal application (for macOS it's called `Terminal`, and for Windows: `Command Prompt`), followed by executing `java -version`.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
+   1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases) (scroll down to assets to find it!).
+
+   1. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
+
+   1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in.
+
+   1. Use the `java -jar internbuddy.jar` command to run the application.<br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
@@ -676,11 +682,11 @@ Prerequisites: <prerequisites>
 
 1. Add a company to favourites
 
-   1. Prerequisites: The company to test is not favourited (ie: The "star" in the top-right corner of the company panel is not yellow)
+   1. Prerequisites: The company to test is not favourited (ie: The "star" in the top-right corner of the company panel is not yellow).
 
    1. Test case: `fav INDEX` <br>
-      Expected: The company corresponding to `INDEX` is now favourited (The "star" in the top-right corner of the company panel is yellow)
-      A message showing the favourite company is displayed in the results box
+      Expected: The company corresponding to `INDEX` is now favourited (The "star" in the top-right corner of the company panel is yellow).
+      A message showing the favourite company is displayed in the results box.
 
         <box type="info" seamless>
 
@@ -722,11 +728,10 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
 1. Add a new company to InternBuddy
 
-   1. Prerequisites: The company to add is not already present in the company list (ie: using `list` command does not show a company with the same name)
+   1. Prerequisites: The company to add is not already present in the company list (ie: using `list` command does not show a company with the same name).
 
    1. Test case: `add n/NAME e/EMAIL` <br>
-      Expected: The company with the `NAME` and `EMAIL` is added to the end of the company list. Details of the company are shown in the
-      results box. The added company also should have the status `INTERESTED` and is not favourited.
+      Expected: The company with the `NAME` and `EMAIL` is added to the end of the company list. Details of the company are shown in the results box. The added company also should have the status `INTERESTED` and is not favourited.
 
    1. Try adding using optional fields: `add n/NAME e/EMAIL p/PHONE_NUMBER`, `add n/NAME e/EMAIL t/TAG t/OTHER_TAG`, `...` <br>
       Expected: Similar to previous test, except now it shows the other optional fields added.
@@ -736,7 +741,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
 1. Add an already existing company to InternBuddy
 
-   1. Prerequisites: The added company to test already exists in the company list (ie: you can find the company with the same name from the company list after using `list`)
+   1. Prerequisites: The added company to test already exists in the company list (ie: you can find the company with the same name from the company list after using `list`).
 
    1. Test case: `add n/SAME_NAME e/EMAIL` (where `SAME_NAME` is the name of another exiting company) <br>
       Expected: No company is added. Error message indicating the company is already present is shown in the result box.
@@ -816,8 +821,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 1. Edit the status of an application
 
    1. Test case: `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APP_STATUS` <br>
-      Expected: The application corresponding to `APPLICATION_INDEX` for the company at `COMPANY_INDEX` of the list has its
-      application status changed to `APP_STATUS`.
+      Expected: The application corresponding to `APPLICATION_INDEX` for the company at `COMPANY_INDEX` of the list has its application status changed to `APP_STATUS`.
 
    1. Try invalid command formats: `update`, `update COMPANY_INDEX app/APPLICATION_INDEX as/APP_STATUS`, `update c/COMPANY_INDEX app/APPLICATION_INDEX as/INVALID_APP_STATUS` <br>
       Expected: No application is updated. An error message with details is displayed in the results box.
@@ -829,8 +833,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
    1. Prerequisites: The company corresponding to `COMPANY_INDEX` has multiple applications.
 
    1. Test case: `withdraw c/COMPANY_INDEX app/APP_INDEX` <br>
-      Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed. A message containing the details
-      of the removed application is displayed in the results box.
+      Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed. A message containing the details of the removed application is displayed in the results box.
 
    1. Try invalid fields: `withdraw`, `withdraw COMPANY_INDEX app/APP_INDEX`, `withdraw c/INVALID_INDEX app/APP_INDEX`, `...` <br>
       Expected: No application is removed. An error message with details should be displayed in the results box.
@@ -841,8 +844,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
     1. Test case: `withdraw c/COMPANY_INDEX app/APP_INDEX` <br>
        Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed.
-       The application status of the company is changed to `CLOSED`. A message containing the details
-       of the removed application is displayed in the results box.
+       The application status of the company is changed to `CLOSED`. A message containing the details of the removed application is displayed in the results box.
 
 ### Saving data
 
