@@ -23,14 +23,14 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
      */
     public FindTagCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+        String[] tagKeywords = trimmedArgs.split("\\s+");
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9\\s]");
+        Matcher matcher = pattern.matcher(trimmedArgs);
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
-
-        String[] tagKeywords = trimmedArgs.split("\\s+");
-        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-        Matcher matcher = pattern.matcher(trimmedArgs);
 
         if (matcher.find()) {
             throw new ParseException(
