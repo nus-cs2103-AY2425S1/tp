@@ -13,7 +13,7 @@ import seedu.address.model.healthservice.HealthService;
 
 public class ApptTest {
 
-    @Test 
+    @Test
     public void constructor_validArgs_success() {
         LocalDateTime dateTime = LocalDateTime.parse("2024-12-12 13:00", Appt.STRICT_FORMATTER);
         HealthService healthService = new HealthService("CONSULT");
@@ -24,7 +24,7 @@ public class ApptTest {
         assertEquals(healthService, appt.getHealthService());
     }
 
-    @Test 
+    @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Appt(null, null));
     }
@@ -78,7 +78,7 @@ public class ApptTest {
         assertFalse(appt.equals(1));
 
         // different values -> returns false
-        assertFalse(appt.equals(new Appt(LocalDateTime.parse("2024-12-12 14:00", Appt.STRICT_FORMATTER), 
+        assertFalse(appt.equals(new Appt(LocalDateTime.parse("2024-12-12 14:00", Appt.STRICT_FORMATTER),
             healthService)));
     }
 }
