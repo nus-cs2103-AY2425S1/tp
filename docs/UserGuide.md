@@ -117,13 +117,15 @@ Adds a contact to the address book.
 
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
-<div markdown="span" class="alert alert-primary">**Note:**
-A contact can have any number of roles (including 0), and the Telegram username is optional. The roles must be one of the following: attendee, vendor, volunteer and sponsor.
+<div markdown="span" class="alert alert-primary">:memo: **Note:**
+A contact can have any number of roles (including 0), and the Telegram username is optional. 
+The roles must be one of the following: attendee, vendor, volunteer and sponsor.
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe e/bc@gmail.com a/New Street p/1234567 t/betsyyy r/sponsor`
+
 
 ![Successfully added a contact](images/AppImages/FeaturesAddCommand.png)
 
