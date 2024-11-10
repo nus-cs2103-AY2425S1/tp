@@ -385,10 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 1b. Contact to find does not exist.
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again.
-
-      Steps 1b1-1b2 repeat until input format is valid.
+    * 1b1. CampusConnect shows empty contact list.
 
       Use case ends.
 
@@ -454,16 +451,8 @@ before the command was executed.
    Use case ends
 
 **Extensions**
-* 1a. Input format is invalid.
+* 1a. No earlier data to revert.
     * 1a1. CampusConnect shows error message.
-    * 1a2. User enters input again.
-
-      Steps 1a1-1a2 repeat until input format is valid.
-
-      Use case ends.
-
-* 1b. No earlier data to revert.
-    * 1b1. CampusConnect shows error message.
 
       Use cases ends.
 
@@ -478,16 +467,8 @@ before the command was executed.
    Use case ends.
 
 **Extensions:**
-* 1a. Invalid Input Format:
-    * 1a1. CampusConnect displays an error message indicating the input format is invalid.
-    * 1a2. The user re-enters the input.
-
-      Steps 1a1-1a2 repeat until the input format is valid.
-
-      Use case ends.
-
-* 1b. No More Commands to Redo:
-    * 1b1. CampusConnect displays an error message indicating that there are no more commands to redo.
+* 1a. No More Commands to Redo:
+    * 1a1. CampusConnect displays an error message indicating that there are no more commands to redo.
 
       Use case ends.
 
