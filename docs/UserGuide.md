@@ -5,7 +5,7 @@
 ---
 <style>
     :target {
-      scroll-margin-top: 180px;
+      scroll-margin-top: 400px;
     }
 </style>
 
