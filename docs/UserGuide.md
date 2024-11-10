@@ -14,11 +14,11 @@ SalesContactPro is a **CLI-first contact management system designed specifically
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your SalesContactPro.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar SalesContactPro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -27,7 +27,7 @@ SalesContactPro is a **CLI-first contact management system designed specifically
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to SalesContactPro.
 
    * `delete John Doe` : Deletes the John Doe contact.
 
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book. People with **both** same **Name** and **Phone** are not allowed.
+Adds a person to SalesContactPro. People with **both** same **Name** and **Phone** are not allowed.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
@@ -97,7 +97,7 @@ Examples:
 
 ### Listing all persons: `list`
 
-Shows a list of all persons in the address book. The list can be optionally sorted by various fields to help you organize and find contacts more efficiently.
+Shows a list of all persons in SalesContactPro. The list can be optionally sorted by various fields to help you organize and find contacts more efficiently.
 
 Format: `list [s/SORT_FIELD] [r/]`
 
@@ -137,7 +137,7 @@ Results:
 
 ### Editing a person: `edit`
 
-Edits an existing person in the address book. People with **both** same **Name** and **Phone** are not allowed.
+Edits an existing person in SalesContactPro. People with **both** same **Name** and **Phone** are not allowed.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INCOME<none/low/mid/high>] [age/AGE] [t/TAG]…​`
 
@@ -158,7 +158,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords. If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
+Finds persons whose names contain any of the given keywords. If no exact match is found, SalesContactPro displays the names in decreasing order of similarity to search term.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -168,7 +168,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Partial words will be matched e.g. `Han` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* If no exact match is found, the address book displays the names in decreasing order of similarity to search term.
+* If no exact match is found, SalesContactPro displays the names in decreasing order of similarity to search term.
 
 Examples:
 * `find John` returns `john`, `John Doe`, and `Johnny`
@@ -178,7 +178,7 @@ Examples:
 
 ### Filtering persons by criteria: `filter`
 
-Filters the displayed list of persons in the address book to include all persons who meet the specified criteria and displays them with index numbers.
+Filters the displayed list of persons in SalesContactPro to include all persons who meet the specified criteria and displays them with index numbers.
 
 Format: `filter [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [i/INCOME_GROUP…​] [age/AGE_CRITERIA…​]`
 
@@ -203,7 +203,7 @@ Parameters:
 
 ### Managing contact notes: `notes`
 
-View, add, edit, or delete additional notes for any contact in your address book. Notes can help you remember important details about each contact. Each contact can only have 1 notes.
+View, add, edit, or delete additional notes for any contact in SalesContactPro. Notes can help you remember important details about each contact. Each contact can only have 1 notes.
 
 Format: `notes PARAMETER`
 
@@ -264,16 +264,20 @@ Deletes the person with the specified `NAME` or the person at the specified `IND
 
 Format: `delete NAME` or `delete INDEX`
 
+<div markdown="span" class="alert alert-primary">:exclamation: **Tip:**
+The `delete NAME` feature will only delete if NAME is exact match with contact full name and if there is only 1 contact with that NAME.
+</div>
+
 * For deletion by `NAME`:
   * Deletes the person with the specified `NAME`.
   * Only delete if `NAME` is exact match with contact full name.
   * Delete is case-insensitive. e.g `hans` will delete `Hans`.
   * If no exact match, list will be filtered based on given `NAME`.
-    AddressBook will then prompt user to use fullname or `INDEX`.
+    SalesContactPro will then prompt user to use fullname or `INDEX`.
   * If no exact and partial match,
-    AddressBook will then prompt user to use another `NAME` or `INDEX`.
+    SalesContactPro will then prompt user to use another `NAME` or `INDEX`.
   * If more than 1 exact match, list will be filtered based on given `NAME`.
-    AddressBook will then prompt user to use `INDEX` instead.
+    SalesContactPro will then prompt user to use `INDEX` instead.
 
 * For deletion by `INDEX`:
   * Deletes the person at the specified INDEX.
@@ -281,12 +285,16 @@ Format: `delete NAME` or `delete INDEX`
   * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `delete Alice`: Deletes the person named Alice from the address book.
+* `delete Alice`: Deletes the person named Alice from SalesContactPro.
 * `delete 1`: Deletes the first person in the currently displayed list.
+* `delete alex`: If there is no alex in contact, display list has filtered based on the name "alex".
+  <img src="images/deleteAlex.png" alt="delete alex">
+* `delete Alex Yeoh`: If there is multiple Alex Yeo in contact, SalesContactPro prompt user to use `INDEX`.
+  <img src="images/deleteSameName.png" alt="delete same name">
 
 ### Clearing all entries: `clear`
 
-Clears all entries from the address book.
+Clears all entries from SalesContactPro.
 
 Format: `clear`
 
@@ -317,15 +325,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SalesContactPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SalesContactPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, SalesContactPro will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the SalesContactPro to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -337,7 +345,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SalesContactPro home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
