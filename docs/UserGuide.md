@@ -154,7 +154,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 **IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
-* We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊 (e.g.`John 1` or `John from school`)    
+* We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`)    
 
 </box>
 
@@ -222,7 +222,7 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 **IMPORTANT:** 
 * Tags can't be edited, so if you'd like to change a tag, simply delete the existing one using
 ['tag-del'](#deleting-tags-from-a-contact) and add a new one using ['tag-add'](#adding-tags-to-a-contact)!
-* Multiple input of the same parameter can be added but only the last one will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`)
+* Multiple input of the same parameter can be added but only the last one will be accepted (e.g. `edit n/John p/111 p/222` will edit phone number to `222`)
 
 </box>
 
@@ -311,7 +311,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 </div>
 
 Examples:
-* `del-wed w/John Loh & Jean Tan` followed by `y` deletes the wedding named `John oh & Jean Tan` from the address book.
+* `del-wed w/John Loh & Jean Tan` followed by `y` deletes the wedding named `John Loh & Jean Tan` from the address book.
 * `dw w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
 ### Listing All Weddings: `list-wed` / `lw`
