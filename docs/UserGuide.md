@@ -75,7 +75,6 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
    You should see the BakeBuddy window appear as follows!
 
-
 ### Step 3: Try Your First Commands
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
@@ -87,53 +86,76 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 <div style="page-break-after: always;"></div>
 
 # **List of Commands**
+
+<div markdown="block" class="alert alert-info">
+
+**Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
 ## **Contact Management**
 ### General Contacts
 
-| Command | Format | Example |
-| --- | --- | --- |
-| [Add Contact](#add-contact-command) | `addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]` | `addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road` |
-| [Delete Contact](#delete-contact-command) | `deleteContact INDEX` | `deleteContact 1` |
-| [Edit Contact](#edit-contact-command) | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` | `editContact 1 p/91150335` |
-| [Filter Contact](#filter-contact-command) | `filterContact t/TAG [MORE_TAGS...]` | `filterContact t/Customer` |
-| [Find](#find-persons-by-name) | `find KEYWORD [MORE_KEYWORDS]` | `find Charlotte Bernice` |
-| [List](#list-command) | `list` | `list` |
-| [Remark](#remark-command) | `remark INDEX r/REMARK` | `remark 1 r/Regular customer` |
+| Command                                   | Format                                                                      | Example                                                              |
+|-------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
+| [Add Contact](#add-contact-command)       | `addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...`         | `addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road` |
+| [Delete Contact](#delete-contact-command) | `deleteContact INDEX`                                                       | `deleteContact 1`                                                    |
+| [Edit Contact](#edit-contact-command)     | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` | `editContact 1 p/91150335`                                           |
+| [Filter Contact](#filter-contact-command) | `filterContact t/TAG [MORE_TAGS]...`                                        | `filterContact t/Customer`                                           |
+| [Find](#find-persons-by-name)             | `find KEYWORD [MORE_KEYWORDS]`                                              | `find Charlotte Bernice`                                             |
+| [List](#list-command)                     | `list`                                                                      | `list`                                                               |
+| [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
 
 <div style="page-break-after: always;"></div>
 #### Customer Specific
 
-| Command | Format | Example |
-| --- | --- | --- |
-| [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]` | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
+| Command | Format                                                                               | Example |
+| --- |--------------------------------------------------------------------------------------| --- |
+| [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]...` | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
 
 ### Supplier Specific
 
-| Command | Format | Example |
-| --- | --- | --- |
-| [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
+| Command | Format                                                                                  | Example |
+| --- |-----------------------------------------------------------------------------------------| --- |
+| [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]...` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
 
 <div style="page-break-after: always;"></div>
 
 ## **Order Management**
 ### Customer Orders
 
-| Command | Format | Example |
-| --- | --- | --- |
-| [Add Customer Order](#add-customer-order-command) | `addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDSs...] [r/REMARK]` | `addCustomerOrder n/John p/98765432 o/1 2 3 r/Delivery at 6pm` |
-| [Delete Customer Order](#delete-customer-order-command) | `deleteCustomerOrder INDEX` | `deleteCustomerOrder 2` |
-| [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX` | `markCustomerOrder 1` |
-| [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX` | `unmarkCustomerOrder 1` |
+| Command | Format                                                                                  | Example |
+| --- |-----------------------------------------------------------------------------------------| --- |
+| [Add Customer Order](#add-customer-order-command) | `addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDSs]... [r/REMARK]` | `addCustomerOrder n/John p/98765432 o/1 2 3 r/Delivery at 6pm` |
+| [Delete Customer Order](#delete-customer-order-command) | `deleteCustomerOrder INDEX`                                                             | `deleteCustomerOrder 2` |
+| [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX`                                                               | `markCustomerOrder 1` |
+| [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX`                                                             | `unmarkCustomerOrder 1` |
 
 <div style="page-break-after: always;"></div>
 #### Supply Orders
 
-| Command | Format | Example |
-| --- | --- | --- |
-| [Add Supply Order](#add-supply-order-command) | `addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]` | `addSupplyOrder n/John p/98765432 o/1 2 3` |
-| [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX` | `deleteSupplyOrder 1` |
-| [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX` | `markSupplyOrder 1` |
-| [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX` | `unmarkSupplyOrder 1` |
+| Command | Format                                                                  | Example |
+| --- |-------------------------------------------------------------------------| --- |
+| [Add Supply Order](#add-supply-order-command) | `addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs]...` | `addSupplyOrder n/John p/98765432 o/1 2 3` |
+| [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX`                                               | `deleteSupplyOrder 1` |
+| [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX`                                                 | `markSupplyOrder 1` |
+| [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX`                                               | `unmarkSupplyOrder 1` |
 
 <div style="page-break-after: always;"></div>
 
@@ -148,11 +170,11 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 ### Pastry Catalogue
 
-| Command | Format | Example |
-| --- | --- | --- |
-| [Add Pastry](#add-pastry-command) | `addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...]` | `addPastry Croissant 3.50 Flour Cream Sugar` |
-| [Remove Pastry](#remove-pastry-command) | `removePastry NAME` | `removePastry Croissant` |
-| [View Pastry Catalogue](#view-pastrycatalogue-command) | `viewPastryCatalogue` | `viewPastryCatalogue` |
+| Command | Format                                                 | Example |
+| --- |--------------------------------------------------------| --- |
+| [Add Pastry](#add-pastry-command) | `addPastry NAME COST INGREDIENT [MORE_INGREDIENTS]...` | `addPastry Croissant 3.50 Flour Cream Sugar` |
+| [Remove Pastry](#remove-pastry-command) | `removePastry NAME`                                    | `removePastry Croissant` |
+| [View Pastry Catalogue](#view-pastrycatalogue-command) | `viewPastryCatalogue`                                  | `viewPastryCatalogue` |
 
 <div style="page-break-after: always;"></div>
 
@@ -239,7 +261,7 @@ addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
 
-## Q5: How are orders sorted in the list?
+## **Q5: How are orders sorted in the list?**
 **A:** Orders are automatically sorted in this priority:
 1. Pending orders (shown first)
 - Sorted by date added (newest first)
@@ -252,7 +274,7 @@ This sorting helps you:
 - Maintain an organized workflow
 
 
-## Q6: How do I tag contacts with multiple tags?
+## **Q6: How do I tag contacts with multiple tags?**
 **A:** You can add multiple tags to contacts in several ways:
 1. When creating a new contact:
    ```
@@ -267,14 +289,14 @@ Tags are useful for:
 - Marking special status (e.g., t/VIP, t/Priority)
 - Noting preferences (e.g., t/NutFree, t/Halal)
 
-## Q7: Are the commands case-sensitive?
+## **Q7: Are the commands case-sensitive?**
 **A:** Yes, commands and parameter prefixes are case-sensitive, but parameter values are not. For example:
 - ✅ `addContact n/John p/12345678` (correct)
 - ❌ `AddContact n/John p/12345678` (wrong - command must be lowercase)
 - ❌ `addcontact N/John P/12345678` (wrong - prefixes must be lowercase)
 - ✅ `addContact n/JOHN p/12345678` (correct - name can be any case)
 
-## Q8: Why is my table not aligned properly in the UI?
+## **Q8: Why is my table not aligned properly in the UI?**
 **A:** The table alignment may appear off if:
 1. The window is too narrow - try widening your application window
 2. There are very long entries - try using shorter entries or abbreviations
@@ -283,7 +305,7 @@ To ensure optimal viewing:
 - Keep the window width as wide as possible
 - Use reasonable length entries
 
-## Q9: Why are some UI elements hidden when I minimize the screen?
+## **Q9: Why are some UI elements hidden when I minimize the screen?**
 **A:** BakeBuddy is optimized for a minimum window size of 800x600 pixels. When the window is smaller:
 1. Some UI elements may be hidden to prevent overlap
 2. Use the scroll bars to navigate hidden content
@@ -294,11 +316,11 @@ For the best experience:
 - Use full screen mode for optimal viewing
 - Avoid resizing to minimum dimensions
 
-## Q10: Are there limits to email and phone number length?
+## **Q10: Are there limits to email and phone number length?**
 **A:** There are several constraints to email and phone number.
 - Phone numbers:
   - Minimum: 3 digits
-  - Maximum: No limit. Not advisable to input long phone number as it may disrupt the UI display.
+  - Maximum: 15 digits
   - Must be unique in the contact list
 - Email addresses:
   - Maximum: No limit. Not advisable to input long phone number as it may disrupt the UI display.
@@ -310,40 +332,18 @@ For the best experience:
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-# Glossary
+# **Glossary**
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-# Features
-
-<div markdown="block" class="alert alert-info">
-
-**Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `addContact n/NAME`, `NAME` is a parameter which can be used as `addContact n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+# **Features**
 
 ## **Add Contact Command**
 Adds a new contact to the bakery’s database. This will be useful for other important contacts such as the delivery men and bakery assistants.
 
 ```bash
-addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [t/MORETAGS...]
+addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...
 ```
 - **Parameters:**
   - `n/NAME`: The person's name. This has to be alphanumerical.
@@ -362,7 +362,7 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 Adds a new customer to the bakery’s customer database.
 
 ```bash
-addCustomer n/NAME p/PHONE_NUMBER i/INFORMATION [e/EMAIL] [a/ADDRESS] [t/TAG] [t/MORETAGS...]
+addCustomer n/NAME p/PHONE_NUMBER i/INFORMATION [e/EMAIL] [a/ADDRESS] [t/TAG]...
 ```
 - **Parameters:**
   - `n/NAME`: The customer's name. This has to be alphanumerical.
@@ -391,7 +391,7 @@ To view the new order in the customer's contact details:<br>
 </div>
 
 ```bash
-addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REMARK]
+addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTID]... [r/REMARK]
 ```
 - **Parameters:**
   - `n/NAME`: (Optional) The customer's name. This has to be alphanumerical.
@@ -425,7 +425,7 @@ addIngredient Syrup 3.50
 Adds a new pastry to the bakery's pastry catalogue.
 
 ```bash
-addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...]
+addPastry NAME COST INGREDIENT [MORE_INGREDIENTS]...
 ```
 - **Parameters:**
     - `NAME`: The name of the pastry.
@@ -450,7 +450,7 @@ all their pastries and ingredient needs, making it more convenient for bakery ow
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
-addSupplier n/NAME p/PHONE_NUMBER s/INGREDIENTS_SUPPLIED [e/EMAIL] [a/ADDRESS] [t/TAG] [t/MORETAGS...]
+addSupplier n/NAME p/PHONE_NUMBER s/INGREDIENTS_SUPPLIED [e/EMAIL] [a/ADDRESS] [t/TAG]...
 ```
 - **Parameters:**
     - `n/NAME`: The supplier's name. This has to be alphanumerical.
@@ -488,7 +488,7 @@ To view the new order in the supplier's contact details: <br>
 </div>
 
 ```bash
-addSupplyOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REMARK]
+addSupplyOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs]... [r/REMARK]
 ```
 - **Parameters:**
     - `n/NAME`: (Optional) The supplier's name. This has to be alphanumerical.
@@ -564,7 +564,7 @@ deleteSupplyOrder 1
 Update the contact details of an existing contact in the address book, including persons, customers, and suppliers. 
 
 ```bash
-editContact INDEX FIELDS [moreFIELDS...]
+editContact INDEX FIELDS [moreFIELDS]...
 ```
 - **[FIELDS]:**
     - `n/NAME`: (optional) The person's name. This has to be alphanumerical.
@@ -606,7 +606,7 @@ filterContact t/Customer
 Finds persons whose names contain any of the given keywords.
 
 ```bash
-find KEYWORD [MORE_KEYWORDS]
+find KEYWORD [MORE_KEYWORDS]...
 ```
 - **Parameters:**
     - `KEYWORD`: The keyword to search for.
