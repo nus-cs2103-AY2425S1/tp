@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.TypicalAssignments.DEADLINE_C;
 import static seedu.address.testutil.TypicalAssignments.GRADE_90;
 import static seedu.address.testutil.TypicalAssignments.GRADE_NULL;
@@ -19,10 +18,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.AssignmentName;
-import seedu.address.model.assignment.AssignmentQuery;
+import seedu.address.model.assignment.*;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.StudentBuilder;
 
 class EditAssignmentCommandTest {
@@ -177,5 +176,51 @@ class EditAssignmentCommandTest {
         // Expect a CommandException due to no student found
         assertThrows(CommandException.class, () -> command.execute(model),
                 EditAssignmentCommand.MESSAGE_NO_STUDENT_FOUND);
+    }
+
+    @Test
+    public void equalsMethod() {
+        AssignmentName assignmentName1 = new AssignmentName("Math Quiz");
+        AssignmentName assignmentName2 = new AssignmentName("Science Quiz");
+        Name name1 = new Name("Jane Doe");
+        Name name2 = new Name("John Doe");
+        StudentNumber studentNumber1 = new StudentNumber("A1234567L");
+        StudentNumber studentNumber2 = new StudentNumber("A1234568M");
+        AssignmentQuery assignmentQuery1 = new AssignmentQuery(new Assignment(assignmentName1, new Deadline("2024-10-09"),
+                new Status("N"), new Grade("NULL")));
+        AssignmentQuery assignmentQuery2 = new AssignmentQuery(new Assignment(assignmentName2, new Deadline("2024-10-10"),
+                new Status("N"), new Grade("NULL")));
+
+        EditAssignmentCommand command1 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1);
+        EditAssignmentCommand command2 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1);
+        EditAssignmentCommand command3 = new EditAssignmentCommand(name1, assignmentName2, assignmentQuery1);
+        EditAssignmentCommand command4 = new EditAssignmentCommand(name2, assignmentName1, assignmentQuery1);
+        EditAssignmentCommand command5 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1, studentNumber1);
+        EditAssignmentCommand command6 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery1, studentNumber2);
+        EditAssignmentCommand command7 = new EditAssignmentCommand(name1, assignmentName1, assignmentQuery2);
+
+        // Same object
+        assertEquals(command1, command1);
+
+        // Different objects, same values
+        assertEquals(command1, command2);
+
+        // Different assignment names
+        assertNotEquals(command1, command3);
+
+        // Different student names
+        assertNotEquals(command1, command4);
+
+        // Different student numbers
+        assertNotEquals(command5, command6);
+
+        // Different assignment queries
+        assertNotEquals(command1, command7);
+
+        // Null
+        assertNotEquals(command1, null);
+
+        // Different types
+        assertNotEquals(command1, new Object());
     }
 }
