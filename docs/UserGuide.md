@@ -104,9 +104,10 @@ Before continuing, here are some important information you need to know about th
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases) (scroll down to assets to find it!).
 
-1. Copy/move the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
 
-1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in
+1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in.
+
 1. Use the `java -jar internbuddy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -132,17 +133,17 @@ Before continuing, here are some important information you need to know about th
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                              |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action       | Format, Examples                                                                                                                                                                  |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
-| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                     |
-| **Clear**    | `clear`                                                                                                                                                                       |
-| **Delete**   | `delete INDEX`                                                                                                                                                                |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                     |
-| **Exit**     | `exit`                                                                                                                                                                        |
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                     |
-| **Help**     | `help`                                                                                                                                                                        |
-| **List**     | `list`                                                                                                                                                                        |
+| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
+| **Clear**    | `clear`                                                                                                                                                                           |
+| **Delete**   | `delete INDEX`                                                                                                                                                                    |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                         |
+| **Exit**     | `exit`                                                                                                                                                                            |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
+| **Help**     | `help`                                                                                                                                                                            |
+| **List**     | `list`                                                                                                                                                                            |
 | **Reopen**   | `reopen INDEX`                                                                                                                                                                    |
 | **View**     | `view INDEX`                                                                                                                                                                  |
 | **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                        |
@@ -164,6 +165,10 @@ Before diving into our features, do note that we set some specifications for nam
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Optiver`.
 
+* Letters preceding the `/` before parameters (if present) are prefixes that the app uses to determine that parameter. It is **case-sensitive** and thus
+  must be used exactly as shown <br>
+  e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another. 
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/Optiver t/financial` or as `n/Optiver`.
 
@@ -173,18 +178,21 @@ Before diving into our features, do note that we set some specifications for nam
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* `NAME` would be the company's name, InternBuddy only allows alphanumeric characters (letters and numbers) to represent it. <br>
+* `NAME` would be the company's name, InternBuddy only allows alphanumeric characters (letters and numbers only) and spaces to represent it. <br>
   e.g. `7Eleven` is allowed but not `7-Eleven` because `-` is neither a letter nor a number.
 
 * `PHONE_NUMBER` is the company's phone number. Company phone numbers should be at least 3 digits long, does not take into account the `+` prefix and must be all numbers.
   e.g. `85092323`, `0122345677`
 
-* InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters again (letters and numbers). The following special characters `+ - _ .` are allowed in `local-part` but note that:
+* InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters as well (letters and numbers only). The following special characters `+ - _ .` are allowed in `local-part` but note that:
     1. `local-part` can't begin or end with any special characters.
     2. `local-part` can't have consecutive special characters in it.
     3. The only special characters allowed in `domain` are periods (`.`) are allowed in `domain` and follows the 2 rules for `local-part` above.
+    4. Each word between periods in `domain` (e.g. `nus` and `edu` in `nus.edu`) must be at least 2 characters long.
 
     e.g. `abc-123+spam@nus.edu.sg`
+
+* `TAG` acts like a label or a category that you assign to a company, it must be a single word and use only alphanumeric characters, meaning no spaces or special symbols.
 
 * Commands are **case-sensitive**, meaning they must be typed exactly as shown. <br>
   e.g. to use the `add` command to add a company, type `add n/Tencent e/tencent@gmail.com`. Variations like `ADD ...`, `Add ...`, or `adD ...` will not work.
@@ -240,7 +248,7 @@ and will be `APPLIED` if not specified.
 
 <box type="tip" seamless>
 
-**Tip:** applying to a company automatically changes the company's status to `applied`.
+**Tip:** applying to a company automatically changes the company's status to `APPLIED`. (This is not the same as `APPLICATION_STATUS`)
 </box>
 
 Examples:
@@ -348,13 +356,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `inc` will match `Inc`
 * The order of the keywords does not matter. e.g. `Ltd Pte` will match `Pte Ltd`
-* Only the name is searched.
-* Only full words will be matched e.g. `Inc` will not match `Incorporated`
-* companies matching at least one keyword will be returned (i.e. `OR` search).
+* Partial keywords will be matched e.g. `Inc` will match `Incorporated`
+* Companies matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Tech Bro` will return `Good Tech`, `Bro Inc`
 
 Examples:
-* `find Inc` returns `inc` and `Apple Inc`
+* `find Inc` returns `inc`, `Incorporated` and `Apple Inc`
 * `find apple facebook` returns `Apple`, `Facebook`<br>
   ![result for 'find apple facebook'](images/findAppleFacebookResult.png)
 
@@ -407,6 +414,12 @@ The index refers to the index number shown in the displayed company list. The in
 **tip:** `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
 </box>
 
+<box type="info" seamless>
+
+**Note**: Currently, InternBuddy does not check if the `APPLICATION_STATUS` you provide is different from the current value. Therefore, please
+check that you have put the correct `APPLICATION_STATUS` to ensure that you correctly update it.
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Withdrawing application for a company: `withdraw`
@@ -415,7 +428,7 @@ Removes an internship record for an existing company in the address book.
 
 Format: `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`
 
-* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`.
+* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `COMPANY_INDEX`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
@@ -445,17 +458,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+InternBuddy data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+InternBuddy data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Warning:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, InternBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause InternBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -492,6 +505,11 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **If running `java -jar internbuddy.jar` gives error**, such as terminal displaying an error, ensure that Java 17 or higher is installed. Run `java -version` to check your version. For Mac users, check if you have followed the advisory given [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html).
+4. **Indicating multiple `APPLICATION_STATUS` in `apply` command**, if you specify more than one `APPLICATION_STATUS` (eg: `apply n/SWE Intern d/Requires Java as/APPLIED as/OA`) will result in InternBuddy in applying the last `APPLICATION_STATUS` (`OA` in the given example); provided that the last `APPLICATION_STATUS` is valid.
+5. **Indicating multiple parameters in `update` command**, if you specify multiple parameters with the same prefix, only the right most parameter will be used by InternBuddy. <br>
+   For instance, `update c/1 app/2 as/OA c/2 app/3 app/4 as/REJECTED` will be read the same as `update c/2 app/4 as/REJECTED` and will run if the read values are valid. 
+6. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to 1000 companies, each with 1000 applications. Entering values beyond this range (e.g., greater than 1000) may lead to undefined behavior, so please ensure indexes stay within the specified bounds.
+7. The error message for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the domain name between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the user guide.
 
 [back to top](#internbuddy-user-guide)
 
@@ -510,7 +528,7 @@ _Details coming soon ..._
 - **JSON** (JavaScript Object Notation): A lightweight data-interchange format that is easy for humans to read and write and for machines to parse and generate. InternBuddy uses JSON to store its data files.
 - **Index**: A number used to identify the position of a company or application in a list. InternBuddy commands often require an index to reference a specific company or application.
 - **Home Folder**: The directory where InternBuddy stores its data and related files on your computer.
-- **APPLIED / OA / INTERVIEWED / OFFERED / ACCEPTED / REJECTED**: The various statuses that can describe an application’s progress in the hiring process within InternBuddy.
+- **APPLIED / OA (Online Assessment) / INTERVIEWED / OFFERED / ACCEPTED / REJECTED**: The various statuses that can describe an application’s progress in the hiring process within InternBuddy.
 - **Backup**: A copy of the data file created to prevent loss of information. The backup can be used to restore the AddressBook in case of accidental data loss.
 - **JSON File Location**: The file path where InternBuddy stores its data, which can be manually edited or transferred to another computer.
 - **Company**: Refers to an entity in the AddressBook. We refer to any contact in our AddressBook as Company.
