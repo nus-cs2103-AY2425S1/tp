@@ -559,3 +559,38 @@ testers are expected to do more *exploratory* testing.
    3. Re-launch the app by double-clicking the jar file. <br>
       Expected: Changes made previously are loaded into the displayed data
 
+## **Appendix: Planned enhancements**
+
+Given below are some planned future enhancements for the app.
+
+### Feature: Reminder Clear
+
+- **Description**: Allows the user to clear all reminders at once.
+- **Rationale**: This feature will help the user to clear all reminders at once, which will be useful when the user wants to start fresh with a new set of reminders.
+- **Format**: `rclear` or `rc`
+
+### Feature: Stackable Find
+
+- **Description**: Allows the user to find clients based on multiple criteria as well as make the 2nd or 3rd find find from previous results.
+  - **Example**: `find n/Alice p/98765432` will find clients with name `Alice` and phone number `98765432`.
+  - **Example**: `find n/Alice` followed by `find p/98765432` will find clients with name `Alice` and then find clients with phone number `98765432` from the results of the first find.
+- **Rationale**: This feature will help the user to find clients based on multiple criteria, which will be useful when the user wants to narrow down the search results.
+- **Format**: `find KEYWORD [KEYWORD]...`
+
+### Feature: More Powerful Phone Number
+
+- **Description**:
+1. Allows the user to input phone numbers that are not from Singapore
+2. Allow the user to add in prefix depending on if its hand phone number or home number
+3. Adding in Duplicate protection for phone numbers
+  - **Example**: `add n/Alice p/+135 1234 5678 ...` will add a client with the region code of `+135` and number `1234 5678`.
+- **Rationale**: This feature will help the phone nummber feature is now more powerful and can handle more types of phone numbers as well as
+protect the user from entering duplicate phone numbers.
+
+### Feature: More flexible Add
+
+- **Description**: Allow users to dictate what fields they want to add for a client.
+  - **Example**: `add n/Alice p/98765432` will add a client with name `Alice` and phone number `98765432`.
+  - Fields deemed optional to user such as email, address, client type, and description will be left blank.
+  - But fields such as name and phone number will be required.
+- **Rationale**: This feature will help the user to add clients with only the necessary fields, which will be useful when the user wants to quickly add a client without filling in all the fields.
