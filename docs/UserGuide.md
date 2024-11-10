@@ -402,6 +402,11 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Glossary
+* **CLI**: Command-line interface where you interact with the system using your keyboard.
+* **GUI**: is an interface between a user and a computer program or website which uses visual elements in order to interact with the user.
+* **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
+--------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
