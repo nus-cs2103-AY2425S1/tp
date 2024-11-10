@@ -30,8 +30,8 @@ import seedu.address.model.Model;
  * 3. The data and headers are then written to the CSV file (writeCsvFile).
  */
 public class ExportCommand extends Command {
-    public static final int DISTANCE_TO_TAG_FRONT = 6;
-    public static final int DISTANCE_TO_TAG_BACK = 3;
+    public static final int DISTANCE_TO_TAG_FRONT = 2;
+    public static final int DISTANCE_TO_TAG_BACK = 2;
 
     public static final String COMMAND_WORD = "export";
 
@@ -42,12 +42,16 @@ public class ExportCommand extends Command {
             + "./data/bae_addressbook.%1$s in the specified format.";
 
     public static final String FAILURE_MESSAGE = "Error exporting address book to %1$s";
-    public static final String BACKWARD_SLASH_REGEX = "\\\\";
-    public static final String INVERTED_COMMA_REGEX = "\"";
+    public static final String BACKWARD_SLASH = "\\\\";
+    public static final String INVERTED_COMMA = "\"";
     public static final String EMPTY_STRING = "";
 
     public static final String DEFAULT_FILEPATH = "data/";
     public static final String DEFAULT_FILENAME = "bae_addressbook";
+    public static final String NULL_VALUE = "\\b : null\\b";
+    public static final String LEFT_CURLY_BRACKET = "\\{";
+    public static final String RIGHT_CURLY_BRACKET = "}";
+    public static final String NEWLINE_OR_CARRIAGE_RETURN = "\\\\r|\\\\n";
 
     /**
      * Class that handles Format enum type used in ExportCommand
@@ -101,25 +105,20 @@ public class ExportCommand extends Command {
      */
     static String parseTags(String tagString) {
         // Remove leading and trailing whitespace
-        tagString = tagString.trim();
-
-        // Check if the string starts with { and ends with }
-        if (tagString.startsWith("\"{") && tagString.endsWith("}\"")) {
-            // Remove the outer braces
-            tagString = tagString.substring(DISTANCE_TO_TAG_FRONT, tagString.length() - DISTANCE_TO_TAG_BACK);
-
-            // Split by : and take the first part
-            String[] parts = tagString.split(":");
-            if (parts.length > 0) {
-                // Trim and remove quotes from the tag name
-                String trimmedKey = parts[0].trim()
-                        .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
-                        .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
-                String trimmedValue = parts[1].trim()
-                        .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
-                        .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
-                return trimmedKey + " : " + trimmedValue;
-            }
+        tagString = tagString.replaceAll(NEWLINE_OR_CARRIAGE_RETURN, EMPTY_STRING)
+                .replaceAll(BACKWARD_SLASH + INVERTED_COMMA, EMPTY_STRING)
+                .replaceAll(NULL_VALUE, EMPTY_STRING)
+                .replaceAll(INVERTED_COMMA + LEFT_CURLY_BRACKET, EMPTY_STRING)
+                .replaceAll(RIGHT_CURLY_BRACKET + INVERTED_COMMA, EMPTY_STRING)
+                .trim();
+        // Split the tagString; the first part represents the tag's key.
+        // If there's a second part, it represents the tag's value.
+        String[] parts = tagString.split(":");
+        boolean tagHasValue = parts.length == 2;
+        String trimmedKey = parts[0].trim();
+        if (tagHasValue) {
+            String trimmedValue = parts[1].trim();
+            return trimmedKey + " : " + trimmedValue;
         }
         // If the format doesn't match, return the original string
         return tagString;
@@ -190,25 +189,25 @@ public class ExportCommand extends Command {
     }
 
     /**
-     * Calls methods that write to csv or txt format depending on the format specified
-     * @param jsonData
-     * @param headers
-     * @throws IOException
+     * Writes the address book data to a file in the specified format (CSV or TXT).
+     * (Credit: this JavaDoc comment was generated with the assistance of ChatGPT.)
+     * @param jsonData        The data parsed from the JSON file, represented as a list of maps,
+     *                        where each map corresponds to a person's details (key-value pairs).
+     * @param headers         The set of headers extracted from the JSON data, which are used
+     *                        as column headers in the CSV file or as keys in the TXT file.
+     * @param filePathAndName The file path and file name (without its file format) where the file will be written.
+     * @param format          The format to write the file in (CSV or TXT).
+     * @throws IOException    If an I/O error occurs while writing to the file.
      */
+
     static void writeFile(List<Map<String, String>> jsonData, Set<String> headers,
                           String filePathAndName, Format format) throws IOException {
         String formattedFilePath = filePathAndName + "." + format.getKeyword();
         switch (format) {
-        case CSV -> {
-            writeCsvFile(jsonData, headers, formattedFilePath);
-            break;
-        }
-        case TXT -> {
-            writeTxtFile(jsonData, headers, formattedFilePath);
-            break;
-        }
+        case CSV -> writeCsvFile(jsonData, headers, formattedFilePath);
+        case TXT -> writeTxtFile(jsonData, headers, formattedFilePath);
         default -> throw new IllegalArgumentException("Unknown/Unsupported file format");
-        };
+        }
     }
 
     static void writeCsvFile(List<Map<String, String>> jsonData, Set<String> headers, String csvFilePath)
@@ -247,7 +246,8 @@ public class ExportCommand extends Command {
                                 .replace("\"", "")
                                 .replace(",", "")
                                 .replace("\\n", "")
-                                .replace("\\", "");
+                                .replace("\\", "")
+                                .replace("\\r", "");
                     }
 
                     writer.printf("  %s | %s%n", header, cellValue);
