@@ -909,3 +909,5 @@ Team size: 5
 1. **Make `NAME` field less restrictive**: Currently, only alphanumeric characters are permitted, which means names like "Ernst & Young" and "UI/UX developer" cannot be accurately represented. We plan to expand the set of special characters allowed in the `NAME` field to support a wider range of company names and applications.
 
 2. **Support for country codes in the `PHONE_NUMBER` field**: Currently, only numeric phone numbers without country codes are accepted, making it difficult to record numbers for international companies. We plan to enhance the AddressBook to accommodate country codes, enabling support for a broader range of company phone numbers.
+
+3. **Ability to remove optional fields for companies**: Currently, once an optional field is added to a company, it cannot be removed. We plan to enhance the `edit` command to allow users to clear optional fields, providing greater flexibility in managing company information.
