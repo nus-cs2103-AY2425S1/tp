@@ -33,6 +33,19 @@ public class IngredientCatalogue extends Catalogue {
     }
 
     /**
+     * Deletes an ingredient from the catalogue by its ID.
+     *
+     * @param id The ID of the ingredient to delete.
+     */
+    @Override
+    public void deleteProduct(int id) {
+        Product product = productCatalogue.remove(id);
+        if (product instanceof Ingredient) {
+            ingredientByName.remove((product).getName().toLowerCase());
+        }
+    }
+
+    /**
      * Sets nextProductId to the highest ID in productCatalogue + 1.
      */
     private void setNextProductId() {
