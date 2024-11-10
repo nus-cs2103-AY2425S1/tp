@@ -193,7 +193,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Product scope
 
-**Target user profile**: A Business owner managing a small business who frequently procures goods from suppliers.
+**Target user profile**: A business owner managing a small business who frequently procures goods from suppliers.
 
 **Persona**: Ms. Balakrishnan is a business owner of a small convenience store (mama shop) located in tampines. She finds it difficult to track her procurements, and is bad with numbers.
 
@@ -226,177 +226,137 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `SupplyCentral` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `SupplyCentral` and the **Actor** is the `User`, unless specified otherwise)
 
-#### UC1: Delete a contact
+#### UC1: Add a supplier
 
-- Precondition: -
-- Postcondition: Specified contact is deleted
+**MSS**
+1. User enters details to add a supplier.
+2. System adds the supplier.  
+Use case ends.
 
-##### MSS
-
-1. User submits contact information to be deleted.
-2. System checks if contact information is properly formatted.
-3. System checks if contact exists.
-4. System deletes the specified contact.
-
-##### Extensions
-
-- 2a. Contact information is not properly formatted.
-
-    - 2ai. System displays an error message.
-
-      Use case ends.
-
-- 3a. Contact does not exist.
-
-    - 3ai. System displays an error message.
-
+**Extensions**
+- 1a. Details are not properly formatted or complete.
+  - 1a1. System shows an error message.  
+  Use case ends.
+- 1b. The supplier to add already exist in the system.
+  - 1bi. System shows an error message.  
   Use case ends.
 
-#### UC2: Add a contact
+#### UC2: Delete all suppliers
 
-- Precondition: -
-- Postcondition: Contact is added to system.
+**MSS**
+1. User requests to delete all suppliers.
+2. System deletes all suppliers and their goods.  
+Use case ends.
 
-##### MSS
+#### UC3: Delete a supplier
 
-1. User submits contact information.
-2. System checks contact information is properly formatted.
-3. System checks if it doesn't exist already.
-4. System adds contact information.
+**MSS**
+1. User enters details to delete a supplier.
+2. System deletes the supplier and the supplier's goods.  
+Use case ends.
 
-##### Extensions
-
-- 2a. The contact information is not properly formatted.
-
-  - 2a1. System shows an error message
-  
+**Extensions**
+- 1a. Details are not properly formatted or complete.
+  - 1ai. System displays an error message.   
+  Use case ends.
+- 1b. Supplier does not exist.
+  - 1bi. System displays an error message.  
   Use case ends.
 
-- 3a. The contact information already exists (i.e. duplicated contact names)
+#### UC4: Edit a supplier
 
-    - 3ai. System shows an error message
+**MSS**
+1. User enters details to edit a supplier.
+2. System edits the supplier.  
+Use case ends.
 
+**Extensions**
+- 1a. Details are not properly formatted or complete.
+  - 1ai. System displays an error message.  
+  Use case ends.
+
+#### UC5: Find suppliers
+
+**MSS**
+1. User enters details to find suppliers.
+2. System displays a list of suppliers filtered by the details.  
+Use case ends.
+
+**Extensions**
+- 1a. Details are not properly formatted or complete.
+  - 1ai. System displays an error message.  
+  Use case ends.
+
+#### UC6: List suppliers
+
+**MSS**
+1. User requests to view all suppliers.
+2. System displays a view of all suppliers.  
+Use case ends.
+
+#### UC7: Display help menu
+
+**MSS**
+1. User requests a help menu.
+2. System displays the help menu.  
+Use case ends.
+
+#### UC8: Add a goods to a supplier
+
+**MSS**
+1. User enters details to add a goods to a supplier.
+2. System adds the good to the supplier.  
+Use case ends.
+
+**Extensions**
+- 1a. Details are not properly formatted or complete.
+  - 1ai. System displays an error message.  
+  Use case ends.
+- 1b. The supplier does not exist.
+  - 1bi. System displays an error message.  
+  Use case ends.
+- 1c. The goods to add already exist with the supplier.
+  - 1ci. System display an error message.  
+  Use case ends.
+
+#### UC9: Delete a goods from a supplier
+
+**MSS**
+1. User enters details to delete a goods from a supplier.
+2. System deletes the goods from the supplier.  
+Use case ends.
+
+**Extensions**
+- 1a. Details are not properly formatted or complete.
+  - 1ai. System displays an error message.   
+  Use case ends.
+- 1b. The supplier does not exist.
+  - 1bi. System displays an error message.  
+  Use case ends.
+- 1c. The goods from the supplier does not exist.
+  - 1ci. System displays an error message.  
+  Use case ends.
+
+#### UC10: View goods
+
+**MSS**
+1. User enters details to view goods.
+2. System displays a filtered view of goods as specified by the details.  
+Use case ends.
+
+**Extensions**
+- 1a. Details are not properly formatted or complete.
+  - 1ai. System displays an error message.   
     Use case ends.
 
-#### UC3: View contacts
+#### UC11: Export goods data
 
-- Precondition: -
-- Postcondition: Contacts stored (if any) are displayed to the user.
-- Actors: User
-
-#### MSS
-
-1. User chooses to view contacts.
-2. System displays details of the contact.
-
-   Use case ends.
-
-#### Extensions
-
-- 2a. There are no recorded contacts
-  - 2a1. System displays an error message.
-
-    Use case ends.
-
-#### UC4: Add goods to a supplier
-
-- Precondition: At least one contact exists.
-- Postcondition: Goods are added to the contact.
-- Actors: User
-
-#### MSS
-
-1. User chooses to add goods to a supplier.
-2. User inputs the goods to add to the supplier.
-3. System adds goods to the supplier.
-
-   Use case ends.
-
-### Extensions
-
-- 2a. Goods information is incomplete.
-   - 2ai. System displays an error message.
-
-      Use case ends.
-
-- 2b. The provided goods information exists (i.e. duplicated goods information)
-   - 2bi. System displays an error message.
-
-      Use case ends.
-
-#### UC5: Delete goods from supplier
-
-- Precondition: The supplier has goods tagged to it.
-- Postcondition: The specified goods is removed from the supplier.
-- Actors: User
-
-#### MSS
-
-1. User chooses a contact
-2. User chooses to delete goods from the supplier.
-3. The specified goods is deleted from the contact.
-
-   Use case ends.
-
-### UC6: View Goods
-
-- Precondition: -
-- Postcondition: Goods information is displayed.
-- Actors: User
-
-### MSS
-
-1. User chooses to view goods.
-2. System displays goods information.
-
-   Use case ends.
-
-#### UC7: Edit contact
-
-- Precondition: At least one contact exists.
-- Postcondition: Selected contact is edited to the user's specifications.
-- Actors: User
-
-#### MSS
-
-1. User chooses a contact.
-2. User chooses to edit the contact.
-3. System prompts user for their edits.
-4. User submits contact information.
-5. System checks if the contact information is properly formatted.
-6. System checks if the contact already exists in the system.
-7. System updates contact information.
-
-#### Extensions
-
-- 5a. The contact information is not properly formatted.
-  - 2a1. System displays an error message.
-
-    Use case ends.
-
-- 6a. The contact information already exists in the system (i.e. duplicated contact names)
-  - 6a1. System displays an error message.
-
-    Use case ends.
-
-#### UC8: Export Csv
-- Precondition:
-- Postcondition: csv is generated based on goods displayed to the user
-- Actors: User
-
-MSS
-1. User chooses to export 
-2. System generates a csv based on goods displayed to the user
-3. Use case ends 
-
-#### UC9: Clear suppliers and goods
-
-MSS
-1. User chooses to clear 
-2. System clear all supplier contacts as well as goods
-3. Use case ends
+**MSS**
+1. User requests to export goods data.
+2. System generates a csv based on goods displayed to the user.  
+Use case ends.
 
 ### Non-Functional Requirements
 
