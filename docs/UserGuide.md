@@ -6,7 +6,7 @@ title: User Guide
 ## Introduction 
 
 Teacher's Pet is a **desktop app for managing students, tailored for Teaching Assistants (TA) in the National University of Singapore (NUS)**.
-With Teacher's Pet, you can easily add, edit, delete, and view student information, as well as track their attendance, all using the command line.
+With Teacher's Pet, you can easily add, edit, delete, and view student information, as well as track their attendance, all using only your keyboard.
 Teacher's Pet offers a lightweight, efficient solution optimized for small (<30 students) classes and works completely offline, promising performance even with an unstable network connection.
 
 This user guide was designed to aid you in understanding how to use our product for your classroom needs.
@@ -24,8 +24,6 @@ Our guide is structured as such:
 If you are new to Teacher's Pet, we recommend you to continue reading this guide sequentially (starting with [Quick Start](#quick-start)) to get a complete idea of how it works.
 
 If you are already using Teacher's Pet, skipping to the [Commands](#commands) or [Command Summary](#command-summary) section may be more useful.
-
-Have a question? You might find the answer in our [FAQ](#faq) section.
 
 ### How to navigate this user guide
 
