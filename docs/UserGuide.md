@@ -132,6 +132,7 @@ Adds a new patient record into the system.
 
 Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER`
 
+![add result](images/addResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -153,8 +154,10 @@ For more information on each individual parameter click [here](#command-paramete
 
 Adds a new patient record into the system with additional information.
 
-Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NO [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
+Format: `addf n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NO [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
 [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]`
+
+![addf message](images/addfResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -189,6 +192,8 @@ Edits the information of an existing patient in the system by searching for thei
 Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NO] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
 [nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL]
 [ec|EXISTING_CONDITIONS] [no|NOTES]`
+
+![edit message](images/editResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -258,6 +263,7 @@ Book an upcoming appointment for an existing patient in the system for a health 
 
 Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 
+![bookappt result](images/bookapptResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -282,6 +288,8 @@ Identifies a specific patient using NRIC and deletes the appointment specified.
 
 Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
 
+![deleteappt message](images/deleteapptResult.png)
+
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
 <ul>
@@ -303,6 +311,8 @@ For more information on each individual parameter click [here](#command-paramete
 Filters existing patient records based on the specified parameters.
 
 Format: `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]`
+
+![filter result](images/filterResult.png)
 
 Start date and health service parameters are optional.
 End date parameter is compulsory.
@@ -332,6 +342,8 @@ Identifies the specific patient using NRIC and shows the full profile of the pat
 
 Format: `view NRIC`
 
+![view result](images/viewResult.png)
+
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
 NRIC provided must be a valid NRIC currently in the system.
@@ -345,6 +357,8 @@ Example:
 Deletes the patient with the specified NRIC from the address book.
 
 Format: `delete NRIC`
+
+![delete message](images/deleteResult.png)
 
 * Deletes the patient at the specified `NRIC`.
 * The NRIC refers to the nric of the patient shown in the displayed patient list.
@@ -405,6 +419,7 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When adding or editing patient entries**, the combination of a NRIC starting with the character "S" and a birthdate after 1 January 2000 will be accepted by the 
 system, despite this being an impossible combination of NRIC and birthdate for a patient.
+4. **When adding allergies**, plural and singular forms of the same substance will be accepted into the allergy list.
 
 --------------------------------------------------------------------------------------------------------------------
 
