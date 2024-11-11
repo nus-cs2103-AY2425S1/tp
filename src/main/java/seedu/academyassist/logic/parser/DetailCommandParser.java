@@ -22,6 +22,7 @@ public class DetailCommandParser implements Parser<DetailCommand> {
      */
     public DetailCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         try {
             StudentId studentId = ParserUtil.parseStudentId(args);
             return new DetailCommand(studentId);

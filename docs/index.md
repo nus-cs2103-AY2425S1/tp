@@ -7,10 +7,10 @@ title: AcademyAssist
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W11-3/tp/graph/badge.svg?token=QVD7ELWRCB)](https://codecov.io/gh/AY2425S1-CS2103T-W11-3/tp)
 ![Ui](images/Ui.png)
 
-**AcademyAssist is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**AcademyAssist is a desktop application for managing your student details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using AcademyAssist, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing AcademyAssist, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
