@@ -381,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `TrueRental` application and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case 01: Add a [_client_](#glossary-client)**
+#### Use case 1: Add a [_client_](#glossary-client)
 
 **MSS**
 
@@ -423,7 +423,7 @@ otherwise)
 
   Use case ends.
 
-**Use case 02: Add a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
+#### Use case 2: Add a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)
 
 **MSS**
 
@@ -474,7 +474,7 @@ otherwise)
 
   Use case ends.
 
-**Use case 03: Find a [_client_](#glossary-client)**
+#### Use case 3: Find a [_client_](#glossary-client)
 
 **MSS**
 
@@ -511,7 +511,7 @@ otherwise)
 
   Use case ends.
 
-**Use case 04: Edit a [_client_](#glossary-client)'s information**
+#### Use case 4: Edit a [_client_](#glossary-client)'s information
 
 **MSS**
 
@@ -545,7 +545,7 @@ otherwise)
 
   Use case ends.
 
-**Use case 05: Edit a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)**
+#### Use case 5: Edit a [_client_](#glossary-client)'s [_rental information_](#glossary-rental-information)
 
 **MSS**
 
@@ -579,7 +579,7 @@ otherwise)
 
   Use case ends.
 
-**Use case 06: Delete a [_client_](#glossary-client)**
+#### Use case 6: Delete a [_client_](#glossary-client)
 
 **MSS**
 
@@ -605,7 +605,7 @@ otherwise)
 
   Use case ends.
 
-**Use case 07: Delete a [_rental information_](#glossary-rental-information) from a [_client_](#glossary-client)**
+#### Use case 7: Delete a [_rental information_](#glossary-rental-information) from a [_client_](#glossary-client)
 
 **MSS**
 
@@ -631,7 +631,7 @@ otherwise)
 
   Use case ends.
 
-**Use case 08: Re-visit previously entered commands**
+#### Use case 8: Revisit previously entered commands
 
 **MSS**
 
@@ -657,9 +657,10 @@ otherwise)
 
     * 3a1. System fills command box with empty command
 
+
   Use case ends.
 
-**Use case 09: Sort a [_client_](#glossary-client) list by name**
+#### Use case 9: Sort a [_client_](#glossary-client) list by name
 
 **MSS**
 
