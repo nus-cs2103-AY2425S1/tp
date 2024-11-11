@@ -31,7 +31,7 @@ public class HomeCommand extends Command {
      * creates the success message based on the size of the patient size in model
      */
     public static String successMessageCreator(Model model) {
-        int size = model.getFilteredPatientList().size();
+        int size = model.getPatientSize();
         String isOrAre;
         String patientOrPatients;
         if (size == 1) {
