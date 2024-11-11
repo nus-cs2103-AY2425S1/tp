@@ -27,10 +27,10 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    private static final String DEFAULT_PHONE = "00000000";
-    private static final String DEFAULT_EMAIL = "default@email.net";
-    private static final String DEFAULT_TELEGRAMHANDLE = "@TelegramDefault";
-    private static final String DEFAULT_MODNAME = "AA0000";
+    private static final String DEFAULT_PHONE = null;
+    private static final String DEFAULT_EMAIL = null;
+    private static final String DEFAULT_TELEGRAMHANDLE = null;
+    private static final String DEFAULT_MODNAME = null;
 
     private final String name;
     private String phone;

@@ -40,7 +40,7 @@ public class ImportCommand extends Command {
         List<File> jsonFiles;
         CsvToJsonConverter converter;
         try {
-             converter = new CsvToJsonConverter(toImport);
+            converter = new CsvToJsonConverter(toImport);
         } catch (IllegalArgumentException iae) {
             throw new CommandException(iae.getMessage());
         }
@@ -54,7 +54,7 @@ public class ImportCommand extends Command {
         try {
             importer.importAllJsonFiles(model);
         } catch (ImporterException e) {
-            throw new CommandException(e);
+            throw new CommandException(e.getMessage());
         }
 
         return new CommandResult(MESSAGE_SUCCESS);

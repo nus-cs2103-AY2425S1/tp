@@ -51,9 +51,6 @@ class JsonSerializableAddressBook {
             if (skipDuplicate && !jsonAdaptedPerson.isValidPerson()) {
                 continue;
             }
-            if (jsonAdaptedPerson.hasEmptyContactInfo() && skipDuplicate) {
-                jsonAdaptedPerson.fillEmptyContactInfo();
-            }
             if (skipDuplicate) {
                 jsonAdaptedPerson.clearInvalidContactInfo();
             }
