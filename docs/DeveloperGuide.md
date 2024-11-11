@@ -634,7 +634,7 @@ Update the budget tracking feature to allow users to input their preferred curre
 This enhancement would enable planners to use a symbol that reflects their local currency, making the budget tracking experience more intuitive and globally accessible. 
 This change would improve clarity and provide a more personalized experience for users in various regions.
 
-### Extend clear command to clear Guests and Vendors Separately
+### Extend `clear` command to clear Guests and Vendors Separately
 
 **Feature Flaw in Current Implementation**
 The existing `clear` command in BridalBuddy deletes all Guests and Vendors. 
