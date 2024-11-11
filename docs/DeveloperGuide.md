@@ -824,7 +824,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix B: Planned Enhancements**
 
-Team Size: 5 members
+**Team Size:** 5 members
 
 As we continue to develop PROperty, we are focused on refining and expanding its capabilities to better meet user needs. 
 Through identifying current limitations, we’re able to target areas that can benefit most from enhancement. 
