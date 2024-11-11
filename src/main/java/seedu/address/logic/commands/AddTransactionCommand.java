@@ -39,6 +39,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_OTHER_PARTY + "Company XYZ "
             + PREFIX_DATE + "2024-10-20";
 
+
     public static final String MESSAGE_ADD_TRANSACTION_SUCCESS = "Added new transaction %1$s\nto %2$s";
 
     private final Index index;
@@ -46,8 +47,8 @@ public class AddTransactionCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(AddTransactionCommand.class);
 
     /**
-     * @param index index of selected client in client list to add transaction to
-     * @param transaction transaction to add
+     * @param index Index of selected client in client list to add transaction to.
+     * @param transaction Transaction to add.
      */
     public AddTransactionCommand(Index index, Transaction transaction) {
         requireAllNonNull(index, transaction);
@@ -76,21 +77,20 @@ public class AddTransactionCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Client clientToEdit = lastShownList.get(index.getZeroBased());
-        assert clientToEdit != null : "Client should not be null";
-
-        if (clientToEdit.checkIsOverflow(toAdd.getAmount())) {
+        Client selectedClient = lastShownList.get(index.getZeroBased());
+        assert selectedClient != null : "Client should not be null";
+        if (selectedClient.checkIsOverflow(toAdd.getAmount())) {
             throw new CommandException(Messages.MESSAGE_DOUBLE_OVERFLOW);
         }
 
-        List<Transaction> transactions = new ArrayList<>(clientToEdit.getTransactions());
+        List<Transaction> transactions = new ArrayList<>(selectedClient.getTransactions());
         transactions.add(toAdd);
         transactions.sort(new TransactionDateComparator());
 
-        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getCompany(), clientToEdit.getPhone(),
-                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), transactions);
-
-        model.setClient(clientToEdit, editedClient);
+        Client editedClient = new Client(selectedClient.getName(), selectedClient.getCompany(),
+                selectedClient.getPhone(), selectedClient.getEmail(), selectedClient.getAddress(),
+                selectedClient.getTags(), transactions);
+        model.setClient(selectedClient, editedClient);
 
         return new CommandResult(String.format(MESSAGE_ADD_TRANSACTION_SUCCESS, Messages.format(toAdd),
                 Messages.format(editedClient)));

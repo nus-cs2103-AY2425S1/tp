@@ -7,11 +7,12 @@ import java.util.Comparator;
  */
 public class TransactionDateComparator implements Comparator<Transaction> {
     /**
-     * Compares two transactions by date.
-     * @param t1 the first transaction to be compared.
-     * @param t2 the second transaction to be compared.
-     * @return  the comparator value which is a negative integer, zero, or a positive integer
-     *     as the date of t1 is more recent than, equal to, or less recent than the date of t2.
+     * Compares two transactions by date and returns the comparator value which is a negative integer, zero, or
+     * a positive integer as the date of t1 is more recent than, equal to, or less recent than the date of t2.
+     *
+     * @param t1 The first transaction to be compared.
+     * @param t2 The second transaction to be compared.
+     * @return The comparator value.
      */
     @Override
     public int compare(Transaction t1, Transaction t2) {

@@ -152,9 +152,8 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String amount} into a {@code Double}.
-     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code amount} is invalid.
+     * @throws ParseException If the given {@code amount} is invalid.
      */
     public static Double parseAmount(String amountStr) throws ParseException {
         requireNonNull(amountStr);
@@ -179,13 +178,14 @@ public class ParserUtil {
     }
 
     /**
-     * Throws a {@code ParseException} if the amount is out of range.
+     * Throws a {@code ParseException} If the amount is out of range.
      */
     public static void verifyAmountIsWithinRange(double amount) throws ParseException {
         double minAmount = -1000000000;
         double maxAmount = 1000000000;
 
         if (amount < minAmount || amount > maxAmount) {
+            logger.fine("ParseException caused by amount out of range.");
             throw new ParseException(MESSAGE_AMOUNT_OUT_OF_RANGE);
         }
 
@@ -194,7 +194,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String date} into a {@code LocalDate}.
      *
-     * @throws ParseException if the given {@code date} is invalid.
+     * @throws ParseException If the given {@code date} is invalid.
      */
     public static LocalDate parseDate(String dateStr) throws ParseException {
         requireNonNull(dateStr);
