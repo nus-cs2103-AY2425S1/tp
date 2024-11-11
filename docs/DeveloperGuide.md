@@ -135,12 +135,18 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 </div>
 
 
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("backup"")` API call as an example.
+![Interactions Inside the Logic Component for the `backup` Command](images/BackupSequenceDiagram.png)
+
+
+
+
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
-<img src="images/BackupSequenceDiagram.png" width="450" />
 
 The `Model` component,
 
@@ -345,10 +351,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts
-2.  BlitzBiz shows a list of contacts
-3.  User requests to delete a specific person in the list
-4.  BlitzBiz deletes the person
+1.  User requests to list contacts.
+2.  BlitzBiz shows a list of contacts.
+3.  User requests to delete a specific person in the list.
+4.  BlitzBiz deletes the person.
 
     Use case ends.
 
@@ -369,14 +375,14 @@ Preconditions: User has deleted a contact
 
 **MSS**
 
-1. User restores the deleted contact
-2. The contact is restored to BlitzBiz
+1. User restores the deleted contact.
+2. BlitzBiz restores the most recently deleted contact.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The contact has been added back using the add command
+* 2a. The contact has been added back using the add command.
     * 2a1. BlitzBiz shows an error message.
 
     Use case ends.
@@ -385,8 +391,8 @@ Preconditions: User has deleted a contact
 
 **MSS**
 
-1.  User requests to add a contact by providing name, and at least one of the contact's phone number, email or address
-2.  BlitzBiz adds the contact to the list with the provided details
+1.  User requests to add a contact by providing name, and at least one of the contact's phone number, email or address.
+2.  BlitzBiz adds the contact to the list with the provided details.
 
     Use case ends.
 
@@ -414,8 +420,8 @@ Preconditions: User has deleted a contact
 
 **MSS**
 
-1.  User requests to find a contact by name
-2.  BlitzBiz displays contacts that matches the name provided
+1.  User requests to find a contact by name.
+2.  BlitzBiz displays contacts that matches the name provided.
 
     Use case ends.
 
@@ -437,8 +443,8 @@ Preconditions: User has deleted a contact
 
 **MSS**
 
-1.  User requests to rename a tag by providing a new tag name to change the old tag name into
-2.  BlitzBiz renames all the tags with the old tag name to the new tag name and displays the updated list
+1.  User requests to rename a tag by providing a new tag name to change the old tag name into.
+2.  BlitzBiz renames all the tags with the old tag name to the new tag name and displays the updated list.
 
     Use case ends.
 
@@ -472,7 +478,7 @@ Preconditions: User has deleted a contact
 
 **MSS**
 
-1.  User requests to add a social media handle to a contact by providing exactly one social media platform and handle name
+1.  User requests to add a social media handle to a contact by providing exactly one social media platform and handle name.
 2.  BlitzBiz adds the social media to the contact.
 
     Use case ends.
@@ -542,7 +548,7 @@ Preconditions: User has deleted a contact
 
 **MSS**
 
-1.  User requests to search the contact list for contacts by providing a starting datetime and an ending datetime
+1.  User requests to search the contact list for contacts by providing a starting datetime and an ending datetime.
 2.  BlitzBiz displays the searched list of contacts with schedules within the start and end datetime.
 
     Use case ends.
@@ -575,7 +581,7 @@ Preconditions: User has deleted a contact
 
 **MSS**
 
-1.  User requests to add/edit a schedule of a contact by providing the schedule name, schedule date and schedule time
+1.  User requests to add/edit a schedule of a contact by providing the schedule name, schedule date and schedule time.
 2.  BlitzBiz displays list after updating the contact with the new schedule details.
 
     Use case ends.
@@ -876,7 +882,7 @@ We detail some achievements accomplished by completing our iteration of the proj
 
 1. Our team has a smaller number of members (only 4 members, compared to the norm of 5), so more complex features could not have been implemented. <br>
    We instead focused on features that are useful to users, and thought about our key value proposition, whilst maintaining the fact that the app is primarily for contact management.
-2. Testing was an expect that we found tedious and required a lot of effort. <br>
+2. Testing was an aspect that we found tedious and required a lot of effort. <br>
    Relying on the testing code infrastructure used in AB3 greatly helped to make the testing process more modular. <br>
    For example, when creating the tests for the `schedule` command, it was greatly inspired by the existing test infrastructure of the `edit` command.
 3. While our project still focuses on managing contacts like AB3, our project introduces more complexity by managing multiple more entity types like schedules and social media while also incorporating viewing, utility and data management features.
