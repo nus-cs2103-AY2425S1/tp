@@ -30,7 +30,7 @@
         
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
-  * [Features]({{ baseUrl }}/UserGuide.html#features)
+  * [Feature Details]({{ baseUrl }}/UserGuide.html#feature-details)
     * [General Notes about Command Format]({{ baseUrl }}/UserGuide.html#general-notes-about-command-format)
     * [Adding a Contact: add]({{ baseUrl }}/UserGuide.html#adding-a-contact-add)
     * [Editing a Contact: edit]({{ baseUrl }}/UserGuide.html#editing-a-contact-edit)
@@ -54,15 +54,8 @@
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
-    * [Pagination]({{ baseUrl }}/DeveloperGuide.html#pagination)
-    * [Status Bar Footer -- How to Reflect the Total Number of Contacts]({{ baseUrl }}/DeveloperGuide.html#status-bar-footer----how-to-reflect-the-total-number-of-contacts)
   * [Documentation, Logging, Testing, Configuration, Dev-Ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
-    * [Product Scope]({{ baseUrl }}/DeveloperGuide.html#product-scope)
-    * [User Stories]({{ baseUrl }}/DeveloperGuide.html#user-stories)
-    * [Use Cases]({{ baseUrl }}/DeveloperGuide.html#use-cases)
-    * [Non-Functional Requirements]({{ baseUrl }}/DeveloperGuide.html#non-functional-requirements)
-    * [Glossary]({{ baseUrl }}/DeveloperGuide.html#glossary)
   * [Appendix: Instructions for Manual Testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
   * [Appendix: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancements)
     
