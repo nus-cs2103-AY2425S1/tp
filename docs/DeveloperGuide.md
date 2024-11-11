@@ -107,7 +107,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 2")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -373,6 +373,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: Count employees**
+
+**Preconditions**: HR staff is logged in.
+
+**MSS**
+
+1.  HR staff wants to count the number of employees in the list
+2.  HR Helper returns the number of employees that match the filtered tag or name.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No employees match the tag or name requested
+
+    Use case ends.
+
+* 1b. The command format input does not follow the one prescribed.
+    
+    * 1b1. An error message showing the correct command format is displayed.
+
+    Use case ends.
+
 **Use case: Delete an employee**
 
 **Preconditions**: HR staff is logged in.
@@ -506,8 +529,8 @@ Team size: 5
 
 1. HR staff can change their username and password to keep their account secure. 
 2. HR staff can track maternity leave of up to 6 months.
-3. add enhancement here
-4. add enhancement here
+3. Allow for the `count` command to count number of favorited employees.
+4. Enhance the GUI to make it more visually appealing.
 5. add enhancement here
 6. add enhancement here
 7. add enhancement here
