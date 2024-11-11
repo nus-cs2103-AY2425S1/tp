@@ -173,9 +173,9 @@ Commands in EZSTATES follow the same structure:
 
 #### Reference Types
 
-| REFERENCE | Meaning                                  | Constraints                                                     | Remarks                                                                                                        |
-|-----------|------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| INDEX     | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists |
+| REFERENCE           | Meaning                                  | Constraints                                                     | Remarks                                                                                                        |
+|---------------------|------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| INDEX<sup>1,2</sup> | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists |
 
 **Notes:**
 1. Since `INDEX` is **one-based**, the first item in the list cannot start with `0`.
@@ -195,24 +195,19 @@ Prefixes follow the same structure:
 and can be either optional or mandatory, and variadic or not variadic.
 The table below showcases the four different possible notations of prefixes:
 
-|              | Mandatory       | Optional          |
-|--------------|-----------------|-------------------|
-| Not variadic | prefix/Value    | [prefix/Value]    |
-| Variadic     | prefix/Value... | [prefix/Value]... |
+|                      | Mandatory       | Optional<sup>1</sup> |
+|----------------------|-----------------|----------------------|
+| Not variadic         | prefix/Value    | [prefix/Value]       |
+| Variadic<sup>2</sup> | prefix/Value... | [prefix/Value]...    |
 
-<div class="note" markdown="span">
-Note 1: Optional prefixes can be omitted and the command will still be executed successfully <br> _(assuming all other parts of the command are correctly inputted)_ 
-</div>
+**Notes:**
+1. Optional prefixes can be omitted and the command will still be executed successfully _(assuming all other parts of the command are correctly inputted)_. 
+2. Variadic prefixes allow you to enter multiple values for a single command by separating them with spaces. For example:
+   <br>
+   `t/friend t/colleague t/mentor`
+   <br>
+   This lets you add multiple tags at once, making it easier to input bulk data.
 
-<br>
-
-<div class="note" markdown="span">
-Note 2: Variadic prefixes allow you to enter multiple values for a single command by separating them with spaces. For example:
-<br>
-`t/friend t/colleague t/mentor`
-<br>
-This lets you add multiple tags at once, making it easier to input bulk data
-</div>
 
 #### Prefix Types
 
