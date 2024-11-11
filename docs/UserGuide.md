@@ -497,10 +497,19 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com> t/friends t/owesMoney
 > ![img_3.png](images/img_3.png)
 > 
 > ---
+> 
+> **Use Case #2**: Displaying all clients in the system (where there are none)
+> 
+> **Input**: `showclients`
+> 
+> **Output**: You currently have no clients in the list.
+> ![img_4.png](images/img_6.png)
+> 
+> ---
 
 - **Failed Execution:** NIL
 - **Special Comments**
-1. You are able to execute showclients on an empty list of clients.
+1. You are able to execute showclients on an empty list of clients, as per Successful Execution Use Case #2
 
 #### Find
 - **Command:** `find KEYWORD [KEYWORD]...`
