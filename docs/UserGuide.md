@@ -33,7 +33,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAHub.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds.
+   A GUI similar to the one below should appear in a few seconds.
 
    <img alt="StartUpPage" src="images/StartUpPage.png" width="580"/>
 
@@ -112,7 +112,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
         - Open the folder where you saved the `.jar` file.
         - To get the full path of the folder:
             1. Right-click on the folder and select **Properties**.
-            2. In the **General** tab, you will see the **Location** field. Copy the location path. (Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`))
+            2. In the **General** tab, you will see the **Location** field. Copy the location path. (Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g. `C:\Users\YourName\Documents\TAHub`))
         - Open the **Command Prompt**:
             - Press `Windows + R`, type `cmd`, and press Enter.
         - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
@@ -228,7 +228,7 @@ Adds a person to the TAHub.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 
-- `NAME`, `PHONE_NUMBER`, and `EMAIL` should correspond to valid name, phone number, and email of the person.
+- `NAME`, `PHONE_NUMBER`, and `EMAIL` should correspond to a valid name, phone number, and email of the person.
 - `COURSE` refers to the course this person is taking.
 - `TAG` refers to any additional information about the person and should only contain alphanumeric characters. A person can have any number of tags (including 0).
 - There should be no person with the same email and course after adding someone.
@@ -302,7 +302,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`
+- `find Alex David` returns `Alex Yeoh`, `David Li`
 
 Expected output:
 
@@ -324,7 +324,7 @@ Examples:
 
 - `list` followed by `delete 2`<br>
   Deletes the 2nd person in the TAHub.
-- `find John` followed by `delete 1`<br>
+- `find Alex` followed by `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
 Expected output:
@@ -349,12 +349,12 @@ Examples:
 
 - `addGrade 2 n/Midterm s/85 w/30`<br>
   Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 30% weightage.
-- `find Betsy` followed by `addGrade 1 n/Final Exam s/92 w/30`<br>
+- `find Alex` followed by `addGrade 1 n/midterm s/85 w/30`<br>
   Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "Final Exam" and 30% weightage.
 
 Expected output:
 
-<img alt="result for &#39;find John&#39; followed by &#39;addGrade 1 n/Midterm s/85 w/30&#39;" src="images/addGrade.png" width="580"/>
+<img alt="result for &#39;find Alex&#39; followed by &#39;addGrade 1 n/midterm s/85 w/30&#39;" src="images/addGrade.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -377,7 +377,7 @@ Examples:
 
 Expected output:
 
-<img alt="result for &#39;find John&#39; followed by &#39;deleteGrade 1 n/Midterm&#39;" width="580" src="images/deleteGrade.png"/>
+<img alt="result for &#39;find Alex&#39; followed by &#39;deleteGrade 1 n/midterm&#39;" width="580" src="images/deleteGrade.png"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -450,12 +450,12 @@ Examples:
 
 - `mark 2 d/31/01/2024 10:00 m/Attended`<br>
   Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
-- `find John` followed by `mark 1 d/31/01/2024 12:00 m/Absent`<br>
-  Sets the attendance to 'Absent' on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
+- `find Alex` followed by `mark 1 d/31/01/2024 12:00 m/Absent`<br>
+  Sets the attendance to 'Absent' on 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
 
-<img alt="result for &#39;find John&#39; followed by &#39;mark 1 d/31/01/2024 12:00 m/Absent&#39;" src="images/markAttendance.png" width="580"/>
+<img alt="result for &#39;find Alex&#39; followed by &#39;mark 1 d/31/01/2024 12:00 m/Absent&#39;" src="images/markAttendance.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -472,12 +472,12 @@ Examples:
 
 - `unmark 2 d/31/01/2024 10:00`<br>
   Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
-- `find John` followed by `unmark 1 d/31/01/2024 12:00`<br>
-  Deletes the attendance on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
+- `find Alex` followed by `unmark 1 d/31/01/2024 12:00`<br>
+  Deletes the attendance on 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
 
-<img alt="result for &#39;find John&#39; followed by &#39;unmark 1 d/31/01/2024 12:00&#39;" src="images/unmarkAttendance.png" width="580"/>
+<img alt="result for &#39;find Alex&#39; followed by &#39;unmark 1 d/31/01/2024 12:00&#39;" src="images/unmarkAttendance.png" width="580"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -529,7 +529,7 @@ TAHub data are saved automatically as a JSON file `[JAR file location]/data/TAHu
 
 **Caution:**
 If your changes to the data file makes its format invalid, TAHub will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the TAHub to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the TAHub to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -587,29 +587,29 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 
 ### Person Commands
 
-| Action     | Format, Examples                                                                                                                                    |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/CS2103/T t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                             |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                 |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                          |
+| Action     | Format, Examples                                                                                                                                   |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com c/CS2103/T t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                            |
+| **Delete** | `delete INDEX`<br> e.g. `delete 3`                                                                                                                 |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                          |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                          |
 
 ### Grade Commands
 
-| Action                | Format, Examples                                                                             |
-|-----------------------|----------------------------------------------------------------------------------------------|
-| **Add/Edit Grade**    | `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE` <br> e.g., `addGrade 1 n/Midterm s/85 w/30` |
-| **Delete Grade**      | `deleteGrade INDEX n/TEST_NAME` <br> e.g., `deleteGrade 1 n/Midterm`                         |
-| **Grade Aggregation** | `aggGrade OPERATION [n/TEST_NAME]` <br> e.g., `aggGrade median n/Midterm`                    |
+| Action                | Format, Examples                                                                            |
+|-----------------------|---------------------------------------------------------------------------------------------|
+| **Add/Edit Grade**    | `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE` <br> e.g. `addGrade 1 n/Midterm s/85 w/30` |
+| **Delete Grade**      | `deleteGrade INDEX n/TEST_NAME` <br> e.g. `deleteGrade 1 n/Midterm`                         |
+| **Grade Aggregation** | `aggGrade OPERATION [n/TEST_NAME]` <br> e.g. `aggGrade median n/Midterm`                    |
 
 ### Attendance Commands
 
-| Action                | Format, Examples                                                                        |
-|-----------------------|-----------------------------------------------------------------------------------------|
-| **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended` |
-| **Unmark Attendance** | `unmark INDEX d/DATE_TIME` <br> e.g., `unmark 1 d/31/01/2024 10:00`                     |
-| **Filter Absentees**  | `absentees d/DATE_TIME` <br> e.g., `absentees d/31/01/2024 10:00`                       |
+| Action                | Format, Examples                                                                       |
+|-----------------------|----------------------------------------------------------------------------------------|
+| **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g. `mark 1 d/31/01/2024 10:00 m/Attended` |
+| **Unmark Attendance** | `unmark INDEX d/DATE_TIME` <br> e.g. `unmark 1 d/31/01/2024 10:00`                     |
+| **Filter Absentees**  | `absentees d/DATE_TIME` <br> e.g. `absentees d/31/01/2024 10:00`                       |
 
 ### General Commands
 
