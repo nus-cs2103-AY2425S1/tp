@@ -83,7 +83,6 @@ public class PersonEditCommand extends Command {
         Person personToEdit = getStudentFromPersonList(lastShownList, matriculationNumber);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-
         // Get all SCAs associated with the person before editing
         StudentCourseAssociationList scaList = model.getStudentScaList();
         List<StudentCourseAssociation> personScas = scaList.get(personToEdit);
@@ -91,7 +90,7 @@ public class PersonEditCommand extends Command {
         // Update the person
         model.setPerson(personToEdit, editedPerson);
 
-        // Update all SCAs with the edited person
+        // Update all SCAs with the edited person immediately
         for (StudentCourseAssociation oldSca : personScas) {
             StudentCourseAssociation newSca = new StudentCourseAssociation(
                     editedPerson,
@@ -102,7 +101,10 @@ public class PersonEditCommand extends Command {
             model.setStudentCourseAssociation(oldSca, newSca);
         }
 
+        // Force an immediate update of the filtered list
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // Return with a flag indicating this was a person edit command
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

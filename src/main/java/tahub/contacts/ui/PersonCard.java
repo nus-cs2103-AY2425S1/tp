@@ -23,6 +23,7 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
 
     public final Person person;
+    private final Logic logic;
 
     private AttendanceWindow attendanceWindow;
 
@@ -58,7 +59,15 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Logic logic, Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        this.logic = logic;
         attendanceWindow = new AttendanceWindow(person, logic);
+        updateCardContent(displayedIndex);
+    }
+
+    /**
+     * Updates all content in the card
+     */
+    private void updateCardContent(int displayedIndex) {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
@@ -66,6 +75,14 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         attendance.setText("Attendance");
+        updateCourseTags();
+    }
+
+    /**
+     * Updates the course tags immediately
+     */
+    private void updateCourseTags() {
+        tags.getChildren().clear();
 
         // Get all courses the student is enrolled in
         ObservableList<StudentCourseAssociation> scaList = logic.getStudentScas(person)
@@ -74,21 +91,19 @@ public class PersonCard extends UiPart<Region> {
         // Add course codes as tags
         for (StudentCourseAssociation sca : scaList) {
             Label courseLabel = new Label(sca.getCourse().courseCode.toString());
-            courseLabel.getStyleClass().add("course-tag"); // Add this style class for course tags
+            courseLabel.getStyleClass().add("course-tag");
             tags.getChildren().add(courseLabel);
         }
+
+        // Force immediate layout update
+        tags.requestLayout();
     }
 
     /**
-     * Creates the person tags by getting updated course information from the model
+     * Refreshes the card content
      */
-    private void updateTags(Person person) {
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-        // Force a layout pass to ensure immediate visual update
-        tags.requestLayout();
+    public void refresh(int displayedIndex) {
+        updateCardContent(displayedIndex);
     }
 
     @FXML
