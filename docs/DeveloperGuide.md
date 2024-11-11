@@ -207,25 +207,25 @@ The `PaginationPanel` contains the following member/class variables:
 
 * `ROWS_PER_PAGE`: Represents the number of items to display in a single page.
 * `currentPageIndex`: Represents the index (0-indexed) of the current page, it is shared among all instances and hence `static`.
-* `personList`: A **reference** of `ObservableList<Person>` from `Logic` during the initialization of UI.
+* `contactList`: A **reference** of `ObservableList<Person>` from `Logic` during the initialization of UI.
 
 #### Implementation of Constructor
 
 The constructor of `PaginationPanel` takes in a reference of `ObservableList<Person>` and stores it as a member variable.
-Since it is _observable_, the pagination listens to the event when there is an update of `personList`, this is implemented by
-`this.personList.addListener(this::onListItemsChanged)`. Then the constructor initializes the pagination component.
+Since it is _observable_, the pagination listens to the event when there is an update of `contactList`, this is implemented by
+`this.contactList.addListener(this::onListItemsChanged)`. Then the constructor initializes the pagination component.
 
 
 #### Steps to Update the List when there is a Change
 
-Since the constructor adds a listener that listens to `onListItemsChanged` event on `personList`.
+Since the constructor adds a listener that listens to `onListItemsChanged` event on `contactList`.
 The `onListItemsChanged` simply invokes `initPagination` to re-render the list displayed.
 It takes the following steps to make the update:
 
-1. Calculate the number of pages by `personList.size()` and `ROWS_PER_PAGE`. The `Math::max` ensures that there is **at least one** page
+1. Calculate the number of pages by `contactList.size()` and `ROWS_PER_PAGE`. The `Math::max` ensures that there is **at least one** page
 even when there is no item. Then it updates the page count of the pagination.
-2. Calculate the starting index of sublist from `personList`.
-3. Calculate the end index of sublist from `personList`. The `Math::min` makes sure that the index does not go beyond the list size. Hence,
+2. Calculate the starting index of sublist from `contactList`.
+3. Calculate the end index of sublist from `contactList`. The `Math::min` makes sure that the index does not go beyond the list size. Hence,
 when there is less than the default `ROWS_PER_PAGE` number of items to render, it can correctly render all remaining items without the risk of
 triggering `ArrayIndexOutOfBoundException`.
 4. Get the sublist to be rendered based on the calculated `fromIndex` and `endIndex`.
