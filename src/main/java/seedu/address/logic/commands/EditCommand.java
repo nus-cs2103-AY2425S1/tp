@@ -79,7 +79,6 @@ public class EditCommand extends Command {
         requireNonNull(nric);
         requireNonNull(editPersonDescriptor);
 
-        //this.index = index;
         this.nric = nric;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
         this.predicate = new NricMatchesPredicate(nric.toString());
