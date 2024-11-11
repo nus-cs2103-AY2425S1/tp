@@ -83,20 +83,20 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 **`AttendanceWindow` Class**
 
 The `AttendanceWindow` Class represents a window displaying the attendance records of students in a specific tutorial group. It,
 * depends on the `Logic` component, as they need to execute commands to update the attendance.
-* depends on the `Model` component, as they need to access the `Person` objects to display the attendance.
+* depends on the `Model` component, as they need to access the `Student` objects to display the attendance.
 * listens for changes to the `Model` data so that the table view can be refreshed and updated with the modified data
 
 
 **`AttendanceRow` Class**
 
 The `AttendanceRow` class represents a single row in the attendance table, displaying a student's name and attendance status for each date. It,
-* depends on the `Model` component, as they need to access the `Person` objects to display the attendance.
+* depends on the `Model` component, as they need to access the `Student` objects to display the attendance.
 * listens for changes to the `Model` data so that the row can be refreshed and updated with the modified data
 
 Each `AttendanceRow` is updated in real-time as the underlying attendance records are modified, allowing the UI to maintain up-to-date attendance statuses for each student.
@@ -122,7 +122,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -415,6 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Data retention policy**: Guidelines regarding what data should be kept, how long data should be kept and more.
 * **CLI - interface**: Any application that mainly takes in input via text, not necessarily through a command console.
 * **Privacy**: Personal details that are not meant to be shared with others.
+* **Automated Tests** : Tests that are run automatically to ensure that the application is working as expected.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -447,19 +448,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a Student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The student `John` is in the list
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `deletes n/John`<br>
+       Expected: `John` is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `deletes n/Jane`<br>
+       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect delete commands to try: `deletes`, `deletes x/`, `...` (where x is any invalid prefix)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
