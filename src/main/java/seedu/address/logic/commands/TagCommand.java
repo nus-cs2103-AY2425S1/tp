@@ -68,7 +68,7 @@ public class TagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Student> lastShownList = model.getAddressBook().getStudentList();
 
         Optional<Student> optionalStudentToTag = lastShownList.stream()
                 .filter(x -> x.getName()

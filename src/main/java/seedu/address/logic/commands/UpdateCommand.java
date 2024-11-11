@@ -78,7 +78,7 @@ public class UpdateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Student> lastShownList = model.getAddressBook().getStudentList();
         if (name.fullName.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_UPDATE);
         }
