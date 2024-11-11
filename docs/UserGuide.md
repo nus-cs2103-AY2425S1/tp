@@ -246,7 +246,6 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find n/alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
-  ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
 
 #### Delete by name
 Format `delete NAME` or `delete n/NAME`
