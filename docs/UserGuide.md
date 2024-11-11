@@ -17,12 +17,12 @@ HireMe is a **free desktop application that helps you manage your extensive list
 * _Easy to use_
   - **Type simple commands:** If you can type fast, HireMe can get your internship tracking tasks done faster than traditional apps.
 * _User friendly interface_
-  - **Simple design:** view all your internship applications and statuses at a glance.
+  - **Simple design:** View all your internship applications and statuses at a glance.
 * _Streamlining management_
   - **Core features:** Add, delete and find entries.
   - **Advanced features:** Update status, sort, filter by status and view chart. 
-* _Detailed Insights_
-  - **Tailored summary**: gain hidden insights from your list of internship applications.
+* _Detailed insights_
+  - **Tailored summary**: Gain hidden insights from your list of internship applications.
 
 <br></br>
 ### Table of Contents
@@ -44,7 +44,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
     * [Listing all internship applications : `/list`](#listing-all-internship-applications-list)
     * [Deleting an internship application : `/delete`](#deleting-an-internship-application-delete)
     * [Finding applications by company name: `/find`](#finding-applications-by-company-name-find)
-    * [Updating the Status of an internship application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
+    * [Updating the status of an internship application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
     * [Filtering internship applications by status: `/filter`](#filtering-internship-applications-by-status-filter)
     * [Sorting internship applications: `/sort`](#sorting-internship-applications-sort)
     * [Clearing all entries : `/clear`](#clearing-all-entries-clear)
@@ -58,6 +58,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
       * [Unable to see the full text on the screen](#unable-to-see-the-full-text-on-the-screen)
   * [Command summary](#command-summary)
   * [Glossary](#glossary)
+  * [Acknowledgements](#acknowledgements)
 <!-- TOC -->
 
 
@@ -65,7 +66,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 
 ## Overview of target users
 
-If you’re a Computer Science undergraduate who **doesn’t have much time**, can **type quickly**, and wants to **better manage your internship applications**, HireMe is the perfect solution for you! Tracking internship applications can sometimes be troublesome and time-consuming. We understand the importance of tracking, as it allows you to follow up on your applications. That’s why we created HireMe to help you **stay organized without much effort**, knowing you may be busy with coursework. Let’s get you started with HireMe
+If you’re a Computer Science undergraduate who **doesn’t have much time**, can **type quickly**, and wants to **better manage your internship applications**, HireMe is the perfect solution for you! Tracking internship applications can sometimes be troublesome and time-consuming. We understand the importance of tracking, as it allows you to follow up on your applications. That’s why we created HireMe to help you **stay organized without much effort**, knowing that you may be busy with coursework. Let’s get you started with HireMe.
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to use our User Guide
@@ -77,11 +78,11 @@ First time using **HireMe**? Don't worry! We've got you covered! This tutorial w
 
 Before continuing, here are some important information you need to know about the User Guide:
 1. There are two different kinds of boxes that provide extra information.
-    * *Notice boxes* provide important information that you should take note of.
+    * *Note boxes* provide important information that you should take note of.
 
       <box type="info" seamless>
       
-      **Notice:** This is a notice box.
+      **Note:** This is a Note box.
       </box>
 
     * *Warning boxes* provide a warning about certain errors that might occur as a precaution for incorrect usage.
@@ -102,7 +103,7 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 1. Ensure that you have Java `17` or above installed on your computer for the hireme application to run. If not, download the latest version of Java from their [website](https://www.oracle.com/sg/java/technologies/downloads/).
 
 
-2. Download `hireme.jar` file from our [github](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
+2. Download `hireme.jar` file from our [GitHub](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.6).
 
     ![downloadhireme](images/DownloadHireMe.png)
 
@@ -120,7 +121,7 @@ For steps 5 and 6, refer to **either** [Mac Users](#mac-users) **or** [Windows U
 Continue to [Using the terminal](#using-the-terminal) after completing steps 5 and 6.
 <br></br>
 #### _Mac users_
-5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
+5. Use Mac's spotlight search (Command + Space bar) and type Terminal, click on open. 
 
     <img src="images/MacTerminal.png" alt="macsterminal" width="810"/> <br>
    
@@ -129,17 +130,17 @@ Continue to [Using the terminal](#using-the-terminal) after completing steps 5 a
     ![openmacterminal](images/OpenMacTerminal.png)
     
 
-6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`. <br>
+6. Click into the folder created in step 3. Right click on the `hireme.jar` file and select `Get Info`. <br>
 
    ![macfilepathinfo](images/Macfilepathinfo.png)
     <br></br>
-    On the new open that pops up, left click on `Where` and copy the file path.
+    On the new window that pops up, right click on `Where` and copy the file path.
 
    <img src="images/Macfilepath.png" alt="macfilepath" width="810"/>
    <br></br>
 
 #### _Windows users_
-5. Use windows search and type Terminal, click on open.<br>
+5. Use Windows' search and type Terminal, click on `Open`.<br>
 
    ![windowsterminal](images/WindowsTerminal.png)
 <br></br>
@@ -173,7 +174,7 @@ You will see a window like this. <br>
 
 
 #### _Using the HireMe application_
-A GUI similar to the below should appear in a few seconds. It is encouraged to **expand the window to full screen** for better viewability. Note how the app contains some sample data.<br>
+A GUI similar to the one below should appear in a few seconds. It is encouraged to **expand the window to full screen** for better viewability. Note how the app contains some sample data.<br>
 
    ![Ui](images/LabelledUi.png)
 
@@ -211,13 +212,13 @@ Refer to [Troubleshooting](#troubleshooting) if you are facing problems for sett
 * Extraneous parameters for commands that do not take in parameters (such as `/help`, `/list`, `/exit`, `/clear` and `/chart`) are not permitted.<br>
   e.g. if the command specifies `/help 123` instead of `/help`, an "Invalid command format!" error message will be shown.
 
-* Command names must be in **lower case only**.<br>
+* Command names must be in **lowercase only**.<br>
   e.g. `/list` is acceptable but `/List` and `/LIST` are not.
 
 </box>
 
 <br></br>
-### Viewing help : `/help`
+### Viewing help: `/help`
 
 Shows a message explaining how you can access the help page.
 
@@ -255,7 +256,7 @@ Examples:
 
 <br></br>
 
-### Listing all internship applications : `/list`
+### Listing all internship applications: `/list`
 
 Shows a list of all of your internship applications in HireMe.
 
@@ -263,7 +264,7 @@ Format: `/list`
 
 <br></br>
 
-### Deleting an internship application : `/delete`
+### Deleting an internship application: `/delete`
 
 Deletes the specified internship application from HireMe.
 
@@ -356,7 +357,7 @@ Filters all of your existing internship applications with specified status.
 Format: `/filter STATUS`
 
 * Valid statuses are `pending`, `accepted` or `rejected` only.
-* The status is case-insensitive. (e.g. `"pending"`, `"PenDiNg"` and `"PENDING"` are all allowed.)
+* The status is **case-insensitive**. (e.g. `"pending"`, `"PenDiNg"` and `"PENDING"` are all allowed.)
 
 Examples:
 * `/filter pending` displays all the internship applications that have a status of pending.
@@ -378,7 +379,7 @@ Sorts your internship applications in **ascending / descending** order based on 
 Format: `/sort ORDER`
 
 * There are only two orders that are valid: `earliest` or `latest` only.
-* The order is case-insensitive. (e.g. `"earliest"`, `"eaRLiEsT"` and `"EARLIEST"` are all allowed.)
+* The order is **case-insensitive**. (e.g. `"earliest"`, `"eaRLiEsT"` and `"EARLIEST"` are all allowed.)
 * Once you sort the list, even if you exit the application and reopen it, the list remains sorted unless you add more internship applications.
 * Even if you find or filter the list, sorting it afterwards will also sort the entire main list.
 
@@ -394,13 +395,13 @@ Examples:
 
 <br></br>
 
-### Clearing all entries : `/clear`
+### Clearing all entries: `/clear`
 
 Clears all of your internship application entries from the HireMe application.
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 This removes all the internship applications that you have been tracking. You will not be able to revert and get back your saved data once this command is executed.
 </box>
 
@@ -418,7 +419,7 @@ Format: `/chart`
 
 <br></br>
 
-### Exiting the program : `/exit`
+### Exiting the program: `/exit`
 
 Exits the HireMe application.
 
@@ -436,13 +437,13 @@ HireMe data are saved in the hard disk automatically after any command that chan
 Get your questions or doubts about HireMe's functionality and details answered here. If you have further questions, you can contact us through our email `hireme@gmail.com`.
 
 #### Q1: Where is the data for the application stored?
-Ans: HireMe data are saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
+Ans: HireMe's data is saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
 <br></br>
 
 #### Q2: Can I edit the data file directly?
 Ans: You are strongly encouraged to **not** edit the JSON data file directly. You can use the commands as mentioned above to augment any data.
-Should the changes made to the data file causes the format to be invalid, HireMe will discard all data and start with an empty data file.
-It is highly recommended to make a copy of the date file before editing it. <br>
+Should the changes made to the data file cause the format to be invalid, HireMe will discard all data and start with an empty data file.
+It is highly recommended to make a copy of the data file before editing it. <br>
 
 Users should only edit the data file only if they are confident in updating it correctly.
 <br></br>
@@ -494,15 +495,15 @@ Try opening the window to full screen or scroll to view the full text. Avoid inp
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `/help`
-**Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g., `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
+**Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g. `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 **List**   | `/list`
-**Delete** | `/delete INDEX`<br> e.g., `/delete 3`
-**Find**   | `/find KEYWORD [ADDITIONAL_KEYWORDS]`<br> e.g., `/find Google Facebook`
-**Accept** | `/accept INDEX`<br> e.g., `/accept 2`
-**Pending**| `/pending INDEX`<br> e.g., `/pending 3`
-**Reject** | `/reject INDEX`<br> e.g., `/reject 1`
-**Filter** | `/filter STATUS`<br> e.g., `/filter pending`
-**Sort**   | `/sort ORDER`<br> e.g., `/sort earliest`
+**Delete** | `/delete INDEX`<br> e.g. `/delete 3`
+**Find**   | `/find KEYWORD [ADDITIONAL_KEYWORDS]`<br> e.g. `/find Google Facebook`
+**Accept** | `/accept INDEX`<br> e.g. `/accept 2`
+**Pending**| `/pending INDEX`<br> e.g. `/pending 3`
+**Reject** | `/reject INDEX`<br> e.g. `/reject 1`
+**Filter** | `/filter STATUS`<br> e.g. `/filter pending`
+**Sort**   | `/sort ORDER`<br> e.g. `/sort earliest`
 **Clear**  | `/clear`
 **Chart**  | `/chart`
 **Exit**   | `/exit`
@@ -516,14 +517,14 @@ Term     | Definition
 **Action**    | The task carried out by the HireMe application such as Add, Delete, Update entries. 
 **Alphanumeric**    | Consisting of both letters and numbers. 
 **Application Status**   | - **PENDING**: The internship application is currently in progress. <br> - **REJECTED**: The user has rejected or been rejected from this internship application. <br>- **ACCEPTED**: The user has accepted the offer for this internship.
-**Command** | The string the user types into the HireMe application’s command bar to carry out a particular action.
+**Command** | The input the user types into the HireMe application’s command bar to carry out a particular action.
 **Command Bar** | The input bar at the top of the HireMe application which allows users to type in a string command.
 **Company Email** | The email of the company that the user is applying for an internship role at.
 **Company Name** | The name of the company that the user is applying for an internship role at.
 **Command Line Interface (CLI)** | The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. 
 **Filepath** | The location through which a file can be accessed in a file system.
 **Graphical User Interface (GUI)** | The user interacts with the computer using visual elements like buttons, icons and windows.
-**Index** | The index of the internship application displayed in the list.
+**Index** | The application number of the internship application displayed in the list.
 **Java** | A programming language for coding applications, websites and other software.
 **Java Archive (Jar)** | A file format used to package multiple files into one file for distribution. 
 **JavaScript Object Notation (JSON)** | A readable format to represent structured data, which is commonly used for web applications.
@@ -532,5 +533,12 @@ Term     | Definition
 **Role** | The role of the internship the user applied for.
 **Terminal** | A text-based interface for interacting with a computer. It allows users to execute commands and view the results.
 
+--------------------------------------------------------------------------------------------------------------------
 
+## Acknowledgements
 
+We would like to acknowledge the following contributions:
+
+We started with a general [AB3 user guide](https://se-education.org/addressbook-level3/UserGuide.html) template and adapted it to the functional requirements of HireMe. We also used [MarkBind](https://markbind.org/) which is a third party library to generate a dynamic user guide website from Markdown text.
+
+AI tools such as ChatGPT were also used to check for grammatical errors.
