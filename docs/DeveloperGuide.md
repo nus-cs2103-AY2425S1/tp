@@ -801,7 +801,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Download the jar file from [this link](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases) and copy into an empty folder
 
-   3. Run the application by typing `java -jar "[CS2103T-F10-3][NUStates].jar"` in a terminal from the folder with `[CS2103T-F10-3][NUStates].jar`. The window size may not be optimum.
+   3. Run the application by typing `java -jar "NUStates.jar"` in a terminal from the folder with `[CS2103T-F10-3][NUStates].jar`. The window size may not be optimum.
 
 2. Saving window preferences
 
