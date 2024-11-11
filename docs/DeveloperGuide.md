@@ -830,15 +830,34 @@ testers are expected to do more *exploratory* testing.
 
 1. Restore the last person deleted
 
-    1. Prerequisites: The person has to be deleted within the same section.
+    1. Prerequisites: The person has to be deleted within the same session.
     2. Test case: `restore` <br>
        Expected: The deleted person is restored.
 
 2. Deleted person is added back before using `restore`
 
-    1. Prerequisites: A person is deleted in the same section and added back with the `add` command
+    1. Prerequisites: NA
+    2. Test case: <br>
+         1.`add n/test p/12345678` <br>
+         2.`delete` (added person index) <br>
+         3.`add n/test p/12345678` <br>
+         4.`restore` <br>
+       Expected: `This person already exists in the address book` error is displayed
+
+3. Another person is edited to have the same name as deleted person before using `restore`.
+
+    1. Prerequisites: NA
+    2. Test case: <br>
+       1.`add n/test p/12345678` <br>
+       2.`delete` (added person index) <br>
+       3.`edit (another person index) n/test` <br>
+       4.`restore` <br>
+       Expected: `This person already exists in the address book` error is displayed
+
+4. There is no deleted person.
+    1. Prerequisites: No contacts are deleted.
     2. Test case: `restore` <br>
-       Expected: No change.
+       Expected: `Person has to be deleted previously to be restored` error message is shown
 
 ### Backup
 
