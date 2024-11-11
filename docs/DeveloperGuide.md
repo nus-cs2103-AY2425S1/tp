@@ -819,7 +819,7 @@ Currently, MedConnect's duplicate person detection only works within each class.
 
 ### Whitespaces in names
 
-Currently, MedConnect is able to remove leading and trailing whitespaces from names. However, the functionality to remove whitespaces in between words in a name is not yet implemented. We plan to implement this in the future to prevent users from entering names such as `Bob     Ross` in the future as it may reduce readability.
+Currently, MedConnect is able to remove leading and trailing whitespaces from names. However, the functionality to remove whitespaces in between words in a name is not yet implemented. We plan to implement this in the future to prevent users from entering names with excessive whitespaces between words in the future as it may reduce readability.
 
 ### Multiple Language Support
 
