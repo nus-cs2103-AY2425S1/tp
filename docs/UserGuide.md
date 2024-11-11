@@ -413,7 +413,8 @@ customers and record the ingredients supplied for suppliers. A general contact d
 
 For example, to handle orders being collected by someone else, use the remarks field to specify the collector:
 ```
-addCustomerOrder n/John p/91234567 o/1 2 r/Collector: Mary (sister), Collection: 25/12/2024 6pm
+addCustomerOrder n/John p/91234567 o/1 2 r/Collector: Mary (sister), 
+Collection: 25/12/2024 6pm
 ```
 This system helps maintain clean contact records while still allowing flexibility in order collection arrangements.
 
