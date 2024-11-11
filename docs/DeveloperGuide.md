@@ -388,12 +388,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 3a. Tutor enters an invalid deadline for the assignment.
     * 3a1. Teletutors App prompts the user to enter a valid deadline.
-    * 3a2. Tutor re-enters a valid date for the deadline or uses the correct format if he typed it in the wrong format previously. 
+    * 3a2. Tutor re-enters a valid date for the deadline or uses the correct format if he typed it in the wrong format previously.
       Use case resumes from step 4.
   
 * 3b. Tutor enters an invalid grade for the assignment.
     * 3b1. Teletutors App prompts the user to enter a valid weightage.
-    * 3b2. Tutor re-enters a valid weightage for the assignment. 
+    * 3b2. Tutor re-enters a valid weightage for the assignment.
       Use case resumes from step 4.
 
 

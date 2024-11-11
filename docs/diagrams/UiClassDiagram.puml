@@ -57,6 +57,8 @@ UiManager -right-> Logic
 MainWindow -left-> Logic
 AttendanceWindow -left-> Logic
 
+AttendanceRow -[hidden]down- StudentCard
+StudentCard -[hidden]right- Model
 StudentListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
