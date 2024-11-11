@@ -1365,7 +1365,7 @@ Prerequisites: Have a contact list with entries.
 ### Deleting a Person
 
 <div markdown="span" class="alert alert-info">:information_source: 
-Prerequisites: Have a contact list with multiple entries.
+Prerequisites: Have a contact list with entries.
 </div>
   2. Test Case: `delete 1`  
      **Expected:** First contact is deleted from the list. The status message shows details of the deletion.
@@ -1390,7 +1390,7 @@ Prerequisites: Have a contact list with multiple entries.
 ### Remarking a Person
 
 <div markdown="span" class="alert alert-info">:information_source: 
-Prerequisites: Have a contact list with multiple entries.
+Prerequisites: Have a contact list with entries.
 </div>
 
   1. Test case: `remark 1 r/remark message`  
@@ -1483,7 +1483,7 @@ Prerequisites: Have a contact list with multiple entries.
 **Marking and Unmarking as Favourite**
 
 <div markdown="span" class="alert alert-info">:information_source: 
-Prerequisites: Have a contact list with multiple entries.
+Prerequisites: Have a contact list with entries.
 </div>
 
 
