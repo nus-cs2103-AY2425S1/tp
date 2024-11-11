@@ -93,7 +93,7 @@ This section tells you what information you will find in each of the sections of
 4. Open a command terminal, navigate to the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
     > If you need any help opening a command terminal, you may refer to the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
     
-    > If you need any help with navigating to the folder with the jar file, you may refer to the relevant information [here](https://www.wikihow.com/Change-Directories-in-Command-Prompt#:~:text=Open%20the%20Command%20Prompt%20(CMD,the%20root%20of%20the%20drive. ) (for Windows users) or [here](https://iboysoft.com/wiki/cd-mac-terminal.html) (for macOS users).
+    > If you need any help with navigating to the folder with the jar file, you may refer to the relevant information [here](https://www.wikihow.com/Change-Directories-in-Command-Prompt) (for Windows users) or [here](https://iboysoft.com/wiki/cd-mac-terminal.html) (for macOS users).
 
     An interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
