@@ -200,6 +200,20 @@ Invalid usages
 </div>
 {% endraw %}
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+The student to be added cannot have the same name and phone number as an existing student.
+
+If there is a student with name `John Doe` and phone number `87654321` in the list:
+
+`add n/John Doe p/87654321...` is not allowed
+
+`add n/John Doe p/98765432...` is allowed
+
+`add n/Jane Doe p/87654321...` is allowed
+
+</div>
+
 #### **3.2 Creating a new tutorial**
 
 Command: `createtut`
@@ -380,7 +394,7 @@ Invalid usages
 
 ### **5. Editing and updating data**
 
-The commands in this section are used edit records on the system, such as student information, tutorial information, payment, and attendance status
+The commands in this section are used to edit records on the system, such as student information, tutorial information, payment, and attendance status
 
 - [Editing student’s details](#51-editing-a-student)  
 - [Logging fees](#52-logging-fees-for-tutorial)  
@@ -445,6 +459,20 @@ Invalid usage:
 * Format errors, check [here](#12-format-errors)
 </div>
 {% endraw %}
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+The student cannot be edited to have the same name and phone number as an existing student.
+
+If there is a student with name `John Doe` and phone number `87654321` in the list:
+
+`add n/John Doe p/87654321...` is not allowed
+
+`add n/John Doe p/98765432...` is allowed
+
+`add n/Jane Doe p/87654321...` is allowed
+
+</div>
 
 #### **5.2 Logging fees for tutorial**
 
@@ -781,6 +809,14 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Command: `help`
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Extraneous parameters for commands that do not take in parameters (such as help, list, exit and clear) will be ignored.
+
+- e.g. if the command specifies help 123, it will be interpreted as help.
+
+</div>
 
 ---
 
