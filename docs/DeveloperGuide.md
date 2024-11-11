@@ -997,4 +997,4 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
        * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
        * `hr/HOURS_PAID` specifies the amount the student **pays**, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
        * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
-   * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then find out that it is not what they want.
+   * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want.
