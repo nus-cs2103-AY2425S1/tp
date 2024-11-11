@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# Data coNdUctorS Developer Guide
+# data_coNdUctorS Developer Guide
 
 ## Table of Contents
 - [Acknowledgements](#acknowledgements)
@@ -83,7 +83,7 @@ public class LabelResizeExamp1e extends Application {
 public void start(Stage primaryStage) { 
     // Create a Label with initial text 
     Label label = new Label("Hello, JavaFX!"); 
-    label.setSty1e("-fx-background-color: lightblue;); // Set a background color for 
+    label.setSty1e("-fx-background-color: lightblue;); 
 
     // Create a CardPane (or ny parent container) 
     StackPane cardPane = new StackPane();
@@ -93,13 +93,19 @@ public void start(Stage primaryStage) {
     // Add a Listener to monitor the width of the cardPane (parent container) 
     cardPane.widthProperty().addListener ((new ChangeListener<Number>() { 
         @Override
-        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-            double parentWidth = newValue.doubleValue(); // Get the new width of the card pane
-            double labelWidth = label.getWidth(); // Get the current width of the card pane
+        public void changed(
+                ObservableValue<? extends Number> observable, 
+                Number oldValue, 
+                Number newValue) {
+            // Get the new width of the card pane
+            // Get the current width of the card pane
+            double parentWidth = newValue.doubleValue(); 
+            double labelWidth = label.getWidth();
             
                 // Check if the label's with exceeds the parent width, and adjust if necessary
                 if (labelWidth > parentWidth) {
-                    label.setPrefWidth(parentWidth); // Set the label width to match the parent width
+                    // Set the label width to match the parent width
+                    label.setPrefWidth(parentWidth); 
                     }
                 });
             }
@@ -174,8 +180,6 @@ Car "1" -- "1" Engine : has
 class defines a class, and you can use modifiers like `-` for private and `+` for public.
 `"1" -- "1"` represents a relationship between `Car` and `Engine` (like a one-to-one relationship).
 
-
-FULL EXAMPLE CODE
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -354,6 +358,7 @@ This `allContacts` can be obtained subsequently by the `LogicManager` with a met
 
 ## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
+Please refer to the following documents for further information:
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)

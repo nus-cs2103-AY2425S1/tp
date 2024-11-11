@@ -10,7 +10,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Table of Contents
+## Table of Contents
 
 - [Quick Start](#quick-start)
 - [Command Summary](#command-summary)
