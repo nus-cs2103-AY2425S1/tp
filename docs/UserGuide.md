@@ -29,7 +29,7 @@ student contact details!
 
 ## Table of Contents
 
-- [Quick Start :rocket:](#QUICK-START)
+- [Quick Start :rocket:](#QUICKSTART)
 - [Features :computer:](#FEATURES)
   - [MAIN Commands](#main-commands)
     - [Viewing help : `help`](#help)
@@ -63,12 +63,12 @@ student contact details!
 
 <div style="page-break-after: always;"></div>
 
-<a name="QUICK-START">
+<a name="QUICKSTART">
 
 ## Quick start :rocket:
 
 1. Ensure you have Java `17` or above installed in your Computer.
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases).
 3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
    - Make sure that this folder is **empty**.
 4. Open a command terminal
@@ -591,7 +591,7 @@ You have been duly warned.
 
 #### Adding Support for more Course Codes and Tutorial IDs
 
-- Currently, we only support course codes of a specific format, as mentioned [here](#data-formats). However, we are aware that there are rarer course codes such as `LAJ1201` and `GESS1003`. Due to time limitations, we are not able to support __all__ potential course codes and this could be fixed in a future iteration. Similarly, valid but rarer tutorial IDs with an additional character at the back like `T01A` will not be accepted in the current iteration.
+- Currently, we only support course codes of a specific format, as mentioned [here](#data-formats). However, we are aware that there are rarer course codes such as `LAJ1201` and `GESS1003`. Due to time limitations, we are not able to support **all** potential course codes and this could be fixed in a future iteration. Similarly, valid but rarer tutorial IDs with an additional character at the back like `T01A` will not be accepted in the current iteration.
 
 <br>
 
