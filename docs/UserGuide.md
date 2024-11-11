@@ -675,7 +675,7 @@ Displaying the detailed information window can be done in two ways:
   <!-- Output Section -->
   <div style="width: 45%; margin-bottom: 20px; margin-top: 0px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
-    <img src="images/infocommandoutput.png" alt="Info Command Output 1" style="width: 100%; margin-top: 10px;" />
+    <img src="images/infocommandoutput.png" alt="Info Command Output 1" style="width: 100%; margin-top: 15px;" />
   </div>
 
 </div>
@@ -693,7 +693,7 @@ Displaying the detailed information window can be done in two ways:
   <!-- Output Section -->
   <div style="width: 45%; margin-bottom: 30px; margin-top: 15px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
-    <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%; margin-top: 10px;" />
+    <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%; margin-top: 18px;" />
   </div>
 
 </div>
