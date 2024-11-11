@@ -22,6 +22,8 @@ Class Name
 Class Phone
 Class Tag
 Class Favorite
+Class Department
+Class Leave
 
 Class I #FFFFFF
 }
@@ -46,6 +48,8 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 Person *--> Favorite
+Person *--> Department
+Person *--> Leave
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
