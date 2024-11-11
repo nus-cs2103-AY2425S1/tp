@@ -39,6 +39,8 @@ public class AddLogCommand extends Command {
      * Creates an AddLogCommand to add the specified log to the person.
      */
     public AddLogCommand(IdentityNumber identityNumber, Log log) {
+        requireNonNull(identityNumber);
+        requireNonNull(log);
         this.identityNumber = identityNumber;
         this.log = log;
     }
