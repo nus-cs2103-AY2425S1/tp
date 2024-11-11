@@ -525,7 +525,7 @@ testers are expected to do more *exploratory* testing.
 </div>
 
 ### Command prefixes
-  
+ 
 | Prefix Constant              | Abbreviation |
 |------------------------------|--------------|
 | `PREFIX_NAME`                | `n/`         |
@@ -537,7 +537,7 @@ testers are expected to do more *exploratory* testing.
 | `PREFIX_DAY_DATE`            | `y/`         |
 | `PREFIX_ID`                  | `z/`         |
     
-    
+     
 ### Launch and shutdown
 
 1. Initial launch
