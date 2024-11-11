@@ -685,7 +685,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case resumes from step 2.
 
-**Use case: UC12 - Locating persons**
+**Use case: UC12 - Finding persons**
 
 **MSS**
 
@@ -817,9 +817,9 @@ and does not accept duplicate names, so there will never be a case where more th
        **Expected**: No contact is edited. Error details shown in the status message.
 
 
-### Locating persons
+### Finding persons
 
-1. Locating a person by name while all clients are being shown.
+1. Finding a person by name while all clients are being shown.
 
     1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, add the contact by using the command:<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 
@@ -829,7 +829,7 @@ and does not accept duplicate names, so there will never be a case where more th
 
     4. **Test case**: `find Han`<br>**Expected**: No contact is shown in the results if no client's name contains "han". Error details shown in the status message.
 
-2. Locating a person by phone number while all clients are being shown.
+2. Finding a person by phone number while all clients are being shown.
 
     1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "john doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches. Total number of the matched contacts is shown in the status message.
 
@@ -1030,7 +1030,7 @@ Modify the UI to display names as they were originally entered, preserving their
 
 Our project aims to provide an efficient contact management system for a physiotherapist 
 with a large client base, building on AddressBook Level 3 (AB3). Additional features include scheduling appointments,
-setting reminder notes, tracking treatment history, type, and payment history. These improvements are
+setting reminder notes, tracking patient appointments, type, and payment. These improvements are
 aimed to provide a cost-effective solution to help physiotherapists save time, money and manpower on
 repetitive tasks.
 

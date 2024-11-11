@@ -28,7 +28,7 @@ activate ViewClientCommandParser
 ViewClientCommandParser --> AddressBookParser
 deactivate ViewClientCommandParser
 
-AddressBookParser -> ViewClientCommandParser : parse("view John Doe")
+AddressBookParser -> ViewClientCommandParser : parse("John Doe")
 activate ViewClientCommandParser
 
 activate ClientUtil
