@@ -15,6 +15,9 @@ benefits of a Graphical User Interface (GUI).
 
 <div style="page-break-after: always;"></div>
 
+**New to ClinicBuddy? Check out [Quick Start](#quick-start)**
+
+
 1. [Quick Start](#quick-start)
 2. [Features](#features)
     - [Viewing Help](#viewing-help--help)
@@ -48,14 +51,15 @@ benefits of a Graphical User Interface (GUI).
 <div style="page-break-after: always;"></div>
 
 ## Quick start
+### Installation
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F11-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your ClinicBuddy.
+3. Copy the file to the folder you want to use as the _home folder_ for ClinicBuddy.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clinicbuddy.jar` command to run
+4. Open a command terminal, `cd` into the folder you have put the jar file in, and use the `java -jar clinicbuddy.jar` command to run
    the application.<br>
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -63,38 +67,39 @@ benefits of a Graphical User Interface (GUI).
 
 <div style="page-break-after: always;"></div>
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-   open the help window.<br>
-   Some example commands you can try:
+### Trying out the application
 
-    * `list` : Lists all contacts.
+Typing a command in the command box and pressing _Enter_ will execute it. e.g. typing **`help`** and pressing _Enter_
+   opens the help window.<br>
 
-    * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` : <br>
+Here are some example commands you can try:
+* `list` : Lists all contacts.
+* `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient` : <br>
       Adds a patient named `John Doe` whose appointment is at `02 October 2024 18:30` to ClinicBuddy.
 
-    * `delete S1234567Z` : Deletes the patient with the NRIC 'S1234567Z' in the current list.
+* `delete S1234567Z` : Deletes the patient with the NRIC 'S1234567Z' in the current list.
 
-    * `clear` : Deletes all contacts.
+* `clear` : Deletes all contacts.
 
-    * `exit` : Exits the app.
+* `exit` : Exits the app.
 
-    * `backup update John's age` : Creates a backup with a specific descriptive naming.
+* `backup update John's age` : Creates a backup with a specific descriptive naming.
    
-    * `backup` : Creates a backup by default naming (`manual_backup`).
+* `backup` : Creates a backup by default naming (`manual_backup`).
    
-    * `restore 0` : Restores backup file from the /backups/ path with the naming starts with index 0.
+* `restore 0` : Restores backup file from the /backups/ path with the naming starts with index 0.
    
-    * `listbackups` : Lists all available backup files in the /backups/ path.
+* `listbackups` : Lists all available backup files in the /backups/ path.
 
-    * `find S1234567Z` : Finds the patient that has the NRIC
+* `find S1234567Z` : Finds the patient that has the NRIC
 
-    * `find John` : Finds the patient named 'John'
+* `find John` : Finds the patient named 'John'
 
-    * `update S1234567Z p/91234567 e/johndoe@example.com` : Updates the email address of the patient with provided NRIC.
+* `update S1234567Z p/91234567 e/johndoe@example.com` : Updates the email address of the patient with provided NRIC.
 
-    * `update 1 p/91234567 e/johndoe@example.com` : Updates the email address of the first patient in the list.
+* `update 1 p/91234567 e/johndoe@example.com` : Updates the email address of the first patient in the list.
    
-    *  `hours o/08:30 c/18:30` : Updates the Operating Hours to 8:30 to 18:30.
+*  `hours o/08:30 c/18:30` : Updates the Operating Hours to 8:30 to 18:30.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -134,7 +139,7 @@ benefits of a Graphical User Interface (GUI).
 
 Format: `help`
 
-The help command provides guidance on using ClinicBuddy’s features to navigate and utilize the app.
+The help command provides guidance on using ClinicBuddy’s features. It opens a window showing the supported commands and their respective help messages.
 
 ![help message](images/helpMessage.png)
 
@@ -159,10 +164,12 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC p/PHONE e/EMAIL h/ADDRESS [apt/APPOINT
 * Appointments cannot carry over into the next day. (Eg. an Appointment from 23:58 to 00:13 will not be allowed)
 * Appointments can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- A person can have any number of tags (including 0)
+<div markdown="span" class="alert alert-primary">:warning: **Note:** A person can have any number of tags (including 0).
  </div>
- <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-warning">:bulb: **Tip:**
+ Try using tags to describe the patient! This helps you to remember specific information about them.
+ </div>
+ <div markdown="span" class="alert alert-warning">:bulb: **Tip:**
  There is a unique tag for Blood Type, Try putting a tag named 'A+'
  </div>
 
@@ -178,7 +185,7 @@ Examples:
 
 ### Updating a patient : `update`
 
-Updates an existing patient in ClinicBuddy by searching for their index or NRIC.
+Update an existing patient in ClinicBuddy by searching for their index or NRIC.
 
 Format:
 `update INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​ `  
@@ -201,7 +208,7 @@ Examples:
 
 ![update](images/update%20patient.png)
 
-<div markdown="span" class="alert alert-warning">:bangbang: Note:
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
 Updating only works if the displayed list contains the entry you are updating. Hence, attempting to update a record
 by NRIC if the record is not currently displayed will not work.
  </div>
@@ -227,7 +234,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-<div markdown="span" class="alert alert-warning">:bangbang: Note:
+<div markdown="span" class="alert alert-primary">:bangbang: **Warning**
 Deletions only work if the displayed list contains the entry you are deleting. Hence, attempting to delete a record
 by NRIC if the record is not currently displayed will not work.
  </div>
@@ -345,17 +352,17 @@ Deletes the specified patient from ClinicBuddy.
 Format: `deleteappt NRIC DATE HH:mm`
 
 * Removes the appointment scheduled at the specified date and time for the patient identified by the given `NRIC`.
-* The NRIC refers to the unique identifier displayed in the current patient list.
-* The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
+* `NRIC` refers to the unique identifier displayed in the current patient list.
+* `NRIC` **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
 
 Example:
 * `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, for the patient identified by the NRIC s1234567z, assuming 12:12 falls within his appointment window.
 
-Format: `deleteappt Index DATE HH:mm` 
+Format: `deleteappt INDEX DATE HH:mm` 
 
 * Removes the appointment scheduled at the specified date and time for the patient at the given Index.
-* The Index refers to the patient’s position in the displayed list.
-* The Index **must be a positive whole number no larger than the size of the list.**
+* `INDEX` refers to the patient’s position in the displayed list.
+* `INDEX` **must be a positive whole number no larger than the size of the list.**
 
 Example:
 * `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024 for the patient at index 1 of the displayed list, assuming 12:12 falls within his appointment window.
@@ -387,12 +394,12 @@ Examples:
 
 ### Saving the data
 
-ClinicBuddy data are saved in the hard disk automatically after any command that changes the data. There is no need to
+ClinicBuddy data is saved in the hard disk automatically after any command that changes the data. There is no need to
 save manually.
 
 ### Editing the data file
 
-- ClinicBuddy data are saved automatically as a JSON file `[JAR file location]/data/clinicbuddy.json`. 
+- ClinicBuddy data is saved automatically as a JSON file `[JAR file location]/data/clinicbuddy.json`. 
 - Advanced users are welcome to update data directly by editing that data file. 
 - If your changes to the data file makes its format invalid, ClinicBuddy will discard all data and start with an empty data file at the next run. 
 - Hence, it is recommended to take a backup of the file before editing it.
@@ -546,7 +553,7 @@ the data of your previous AddressBook home folder.
 **Q**: How are backups sorted in the listbackups command?<br>
 **A**: Backups are listed in descending order by their creation timestamp, with the most recent backup appearing at the top.
 
-**Q**: Is there a limit on the number of backups I can store?
+**Q**: Is there a limit on the number of backups I can store?<br>
 **A**: Yes. ClinicBuddy retains only the 10 most recent backups for storage efficiency. Older backups are automatically overwritten when a new backup is created.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -593,22 +600,22 @@ the data of your previous AddressBook home folder.
 
 ## Command summary
 
- Action                | Format, Examples                                                                                                                                                                                                                              
------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Help**              | `help`  
- **Add**               | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`  
- **Update**            | `update INDEX/NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​` <br> e.g.,`update 2 n/James Lee e/jameslee@example.com`                                                                 
- **Delete**            | `delete` NRIC <br> `delete` Index <br> e.g., `delete S1234567Z`, `delete 1`
- **Clear**             | `clear`                  
- **List**              | `list` 
- **Find**              | `find` NRIC <br> `find NAME` [MORE_NAMES] <br> e.g., `find S1234567Z`, `find James Jake`  
- **Bookings**          | `bookings` DATE <br> e.g., `bookings 01/02/2024`
- **Delete Appointments** | `deleteappt` NRIC DATE HH:mm <br> `deleteappt` Index DATE HH:mm <br> e.g., `deleteappt s1234567z 01-01-2024 12:12`, `deleteappt 1 01-01-2024 12:12` 
- **Hours**             | `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]` <br> e.g., `hours`, `hours o/09:30 c/18:00`, `hours o/09:30 c/18:00`                                                                                                                                                                                                     
- **Backup**            | `backup` [Description] <br> e.g., `backup` `backup After updating John's contact info`  
- **ListBackups**       | `listbackups`
- **Restore**           | `restore` Index <br> e.g., `restore 1`   
- **Exit**              | `exit`
+ Action                  | Format, Examples                                                                                                                                                                                                                                                                                                          
+-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**                 | `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​` <br> e.g., `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/12/10/2024 15:30 t/Patient`                                                                            
+ **Update**              | `update INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`<br> `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​` <br> e.g.,`update 2 n/James Lee e/jameslee@example.com`, `update S1234567Z n/Alex Dee` 
+ **Delete**              | `delete NRIC` <br> `delete INDEX` <br> e.g., `delete S1234567Z`, `delete 1`                                                                                                                                                                                                                                               
+ **Clear**               | `clear`                                                                                                                                                                                                                                                                                                                   
+ **List**                | `list`                                                                                                                                                                                                                                                                                                                    
+ **Find**                | `find NRIC` <br> `find NAME [MORE_NAMES]` <br> e.g., `find S1234567Z`, `find James Jake`                                                                                                                                                                                                                                  
+ **Bookings**            | `bookings DATE` <br> e.g., `bookings 01/02/2024`                                                                                                                                                                                                                                                                          
+ **Delete Appointments** | `deleteappt NRIC DATE HH:mm` <br> `deleteappt Index DATE HH:mm` <br> e.g., `deleteappt s1234567z 01-01-2024 12:12`, `deleteappt 1 01-01-2024 12:12`                                                                                                                                                                       
+ **Hours**               | `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]` <br> e.g., `hours`, `hours o/09:30 c/18:00`, `hours o/09:30 c/18:00`                                                                                                                                                                                                            
+ **Backup**              | `backup [DESCRIPTION]` <br> e.g., `backup` `backup After updating John's contact info`                                                                                                                                                                                                                                    
+ **ListBackups**         | `listbackups`                                                                                                                                                                                                                                                                                                             
+ **Restore**             | `restore INDEX` <br> e.g., `restore 1`                                                                                                                                                                                                                                                                                    
+ **Help**                | `help`                                                                                                                                                                                                                                                                                                                    
+ **Exit**                | `exit`                                                                                                                                                                                                                                                                                                                    
 
                                                                                                                                                                                                     
 
