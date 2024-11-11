@@ -1234,8 +1234,8 @@ testers are expected to do more *exploratory* testing.
 4. **Improve display of longer messages or entries**
    - **Problem:** Currently, longer messages or entries can be cut off, especially for users with smaller resolution/larger scale.
    - **Example:** ![longMessages](images/longMessages.png)
-   - **Solution:** Improve text wrapping and allow customisable/resizeable GUI.
-   - **Rationale:** Longer messages/entries being cut off may be inconvenient for certain users (e.g. being required to scroll left/right to read an error message). Hence, providing text wrapping, allowing users to customise the GUI (e.g. whether they prefer to display an ellipsis, wrap text, etc.) and resize the GUI will give them more freedom to adjust based on their preferences and for convenience.
+   - **Solution:** Improve text wrapping, allow customisable GUI and resizable UI parts.
+   - **Rationale:** Longer messages/entries being cut off may be inconvenient for certain users (e.g. being required to scroll left/right to read an error message). Hence, providing text wrapping, allowing users to customise the GUI (e.g. whether they prefer to display an ellipsis, wrap text, etc.) and resize the UI parts will give them more freedom to adjust based on their preferences and for convenience.
 
 
 5. **Include a warning if there is only one domain label provided for email**
