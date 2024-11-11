@@ -12,11 +12,11 @@ Given below are my contributions to the project.
 ## V1.3
 
 * **Enhancements to existing features**:
-  * Updated the Edit command to use NRIC field instead of index [\#62](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/58)
+  * Updated the Edit command to use NRIC field instead of index [\#58](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/58)
 
 
 * **Enhancements to existing features**:
-  * Updated the Delete command to use NRIC field instead of index [\#62](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/88)
+  * Updated the Delete command to use NRIC field instead of index [\#88](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/88)
 
 
 * **Documentation**:
@@ -25,8 +25,14 @@ Given below are my contributions to the project.
 
 
 ## V1.4
-* **New Feature**: Add Edit Appointment Command feature [\#106](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/147)
+
+* **New Feature**: Add Edit Appointment Command feature [\#106](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/106)
   * What it does: Provides a way to edit specific appointments
   * Justification: This feature enables the doctor to edit.appointments quickly.
   * Highlights: This is an enhancement to the existing addedit which provides brief details on all persons.
+
+## V1.5
+* **Enhancements to existing features**:
+  * Updated command line syntax for Edit Appointment command to make it more intuitive[\#162](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/162)
+  * Changed fields of Edit Appointment command to make the fields optional[\#172](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/172)
 
