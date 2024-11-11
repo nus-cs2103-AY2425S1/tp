@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,13 @@ class JsonAdaptedOrderHistoryTest {
     }
 
     @Test
+    void toModelType_invalidOrder_throwsIllegalValueException() {
+        LocalDateTime time = LocalDateTime.of(24, 12, 15, 01, 30);
+        JsonAdaptedOrderHistory jsonOrderHistory = new JsonAdaptedOrderHistory("p-z", time.toString());
+        assertThrows(IllegalValueException.class, jsonOrderHistory::toModelType);
+    }
+
+    @Test
     void toModelType_validInput_success() {
         LocalDateTime time = LocalDateTime.of(24, 12, 15, 01, 30);
         OrderHistory history = new OrderHistory(new Order("pizza"), time);
@@ -29,7 +37,7 @@ class JsonAdaptedOrderHistoryTest {
         try {
             assertEquals(history, jsonOrderHistory.toModelType());
         } catch (IllegalValueException e) {
-            System.out.println(e);
+            fail();
         }
     }
 }
