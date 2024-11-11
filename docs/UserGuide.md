@@ -81,6 +81,7 @@ For immediate setup, you can proceed to [Quick Start](#quick-start). For detaile
   - Press Enter
   - If you see “Java version 17”, you are all set!
   - If you see any other error/ java version, visit [Java’s download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
+
 2. Download the latest CareLink `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T13-4/tp/releases).
 
 3. Copy the file to your desired CareLink **home folder**.
@@ -107,6 +108,7 @@ _Figure 1: CareLink main window with sample data_
   ```
 
 - Views help:<br>
+
   ```
   help
   ```
@@ -145,26 +147,30 @@ For detailed instructions on all commands, you can proceed to the [Features](#fe
 ### Command Input Guide
 
 - **Using Parameters**
+
   - Words in `UPPER_CASE` are placeholders for your input.
     - Example: In `add n/NAME`, replace `NAME` with the person's name, like `add n/John Doe`.
 
 - **Optional and Repeating Items**
+
   - **Square Brackets** `[ ]` mean the item is optional.
     - Example: `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply `n/John Doe`.
   - **Ellipses** `...` indicate that items can repeat.
     - Example: `[t/TAG]...` allows for multiple tags: `t/friend t/family t/elderly`.
 
 - **Flexible Order**
+
   - Parameters can be entered in any order.
     - Example: `n/NAME p/PHONE_NUMBER` is the same as `p/PHONE_NUMBER n/NAME`.
 
 - **Ignoring Extra Parameters**
+
   - For commands that don’t need additional information, extra input is ignored.
     - Example: `help 123` is the same as `help`.
 
 - **Copying Commands from PDF**
   - If copying commands from a PDF, check for any missing spaces, as line breaks may remove spaces when pasted.
-</div>
+  </div>
 
 ### Viewing help : `help`
 
@@ -224,6 +230,7 @@ When the command succeeds, you’ll see the following message confirming that th
 _Figure 3: Success message displayed after adding a patient_
 
 Possible Errors:
+
 - `This person already exists in the address book` - Displayed when trying to add a person with an NRIC that already exists.
 - `Roles should only be 'PATIENT' or 'CAREGIVER'` - Displayed when an invalid role is provided.
 - `Missing required field:` - Displayed when any required field is not provided (name, NRIC, phone, email, address, or role).
@@ -248,6 +255,7 @@ When the command succeeds, the patient will be linked to the caregiver and the f
 _Figure 5: Success message displayed after linking a patient with a caregiver_
 
 **Possible Errors:**
+
 - `This link already exists in CareLink` - Displayed when you are attempting to create a link that already exists.
 - `Cannot link same people` - Displayed when you are trying to link a person to themselves.
 - `Incorrect NRIC. Caregiver and Patient not found` - Displayed when both NRICs cannot be found in CareLink.
@@ -297,12 +305,12 @@ The example below shows how to add notes to a person using CareLink:
 ![AddNote command example](images/AddNoteExample.png)
 _Figure 8: Example of using the `addnote` command to add a note to a patient's record_
 
-
 When the command succeeds, the notes will be added to the person and the following message will be displayed:
 ![AddNote command success](images/AddNoteSuccessExample.png)
 _Figure 9: Success message displayed after adding a note to a patient's record_
 
 Possible Errors:
+
 - `Person not found` - When the person's NRIC entered cannot be found in the system
 
 #### Listing all persons : `list`
@@ -376,7 +384,9 @@ When the command succeeds, you can notice that David is removed and hence no lon
 _Figure 14: Display after a successful delete command, showing the removed person is no longer listed_
 
 **Possible Errors:**
+
 - `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
+
 #### Finding a person : `find`
 
 **Format**: `find [n/NAME] [nric/NRIC] [p/PHONE] [e/EMAIL] [role/ROLE] [t/TAG]…​`
@@ -411,7 +421,6 @@ To navigate through multiple results more efficiently, try using the `Tab` key t
 The example of using the find command in CareLink appears below:
 ![Find command example](images/findcommandexample.png)
 _Figure 10: Example of using the `find` command to locate a person in CareLink_
-
 
 When the command succeeds, the persons found will be displayed with comprehensive information about each of them.
 ![Find command success](images/findcommandsucceed.png)
@@ -457,6 +466,7 @@ When using the `addapp` command, ensure that the minutes in the start and end ti
 </div>
 
 **Common errors and their meanings:**
+
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink.
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g 01/01/2025).
 - `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g 14:30).
@@ -465,7 +475,6 @@ When using the `addapp` command, ensure that the minutes in the start and end ti
 - `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot.
 - `Please do not enter anything before the keywords` - Do not add anything between the command word `addapp`. The keywords here refer to the parameters.
 
-
 #### Editing an appointment: `editapp`
 
 **Use this command to edit an existing appointment for a person in CareLink**
@@ -473,6 +482,7 @@ When using the `addapp` command, ensure that the minutes in the start and end ti
 Use this command format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`
 
 **Constraints**
+
 - The `NRIC` must belong to a person already in CareLink.
 - `DATE` Use the format `DD/MM/YYYY` (e.g 01/01/2025).
 - `START_TIME` and `END_TIME` must be in 24-hour format `HH:MM` (e.g 14:30).
@@ -549,6 +559,7 @@ To delete an appointment, you only need the start time. The end time is not requ
 </div>
 
 **Common errors and their meanings:**
+
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink.
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g. 01/01/2025).
 - `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g. 14:30).
@@ -581,6 +592,7 @@ The example below of the result obtained from the `findapp` command appears belo
 _Figure 12: Example of using the `findapp` command to locate appointments within a specific date-time range_
 
 **Possible Errors:**
+
 - `Invalid date. Please use the DD/MM/YYYY format` - When the date format is incorrect.
 - `Invalid time. Please use the HH:MM format` - When the time format is incorrect.
 
@@ -634,7 +646,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CareLink home folder.
 
 ### Valid NRIC rules
+
 Make sure each NRIC adheres to the following format and constraints:
+
 1. The NRIC must be 9 characters long.
 2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
 
@@ -651,35 +665,39 @@ Make sure each NRIC adheres to the following format and constraints:
 
 1. **Multiple Monitor Setup**: The GUI may open off-screen when switching from multi-monitor to single-monitor setup.
 
-  - **Solution**: Delete `preferences.json` and restart the application.
+   - **Solution**: Delete `preferences.json` and restart the application.
 
 2. **Help Window**: After minimizing the Help Window, using the `help` command, `Help` menu, or `F1` shortcut will not open a new window.
 
-  - **Solution**: Manually restore the minimized Help Window.
+   - **Solution**: Manually restore the minimized Help Window.
 
 3. **Resized Window Visibility**: Reducing the window size below a certain threshold can obscure interface elements, impacting usability.
 
-  - **Solution**: For optimal use, we recommend a screen resolution of at least 1280x720 pixels and maintaining a minimum window size for clarity.
+   - **Solution**: For optimal use, we recommend a screen resolution of at least 1280x720 pixels and maintaining a minimum window size for clarity.
 
 4. **Long Tag Handling**: When adding an excessively long tag, it may hide other tags in the display rather than wrapping or truncating.
 
-  - **Solution**: Avoid using overly long tags. Optimally, long tags should truncate with an ellipsis (`...`) once they reach the edge of the GUI.
+   - **Solution**: Avoid using overly long tags. Optimally, long tags should truncate with an ellipsis (`...`) once they reach the edge of the GUI.
 
 5. **Phone Number Field Length**: The phone number field allows for very long entries, which may not be practical. The field currently accepts a minimum of 3 digits, which is shorter than standard international phone numbers.
 
-  - **Workaround**: For best results, enter phone numbers within a typical range of 7–15 digits. Numbers exceeding 15 digits may not display or function as expected.
+   - **Workaround**: For best results, enter phone numbers within a typical range of 7–15 digits. Numbers exceeding 15 digits may not display or function as expected.
 
 6. **Full-Screen Help Window**: When the app is in full-screen mode, clicking the help button opens the Help Window in a new full-screen view rather than as a pop-up overlay.
 
-  - **Solution**: Exit full-screen mode before opening the Help Window to have it display as a pop-up.
+   - **Solution**: Exit full-screen mode before opening the Help Window to have it display as a pop-up.
 
 7. **Inconsistent NRIC Censorship in Success Messages**: In some success messages, the NRIC appears fully displayed, while in others, it is censored
 
-  - **Impact**: This inconsistency is purely visual and does not affect system functionality or data integrity.
+   - **Impact**: This inconsistency is purely visual and does not affect system functionality or data integrity.
 
 8. **Model Not Updated After `find` or `findapp` Commands**: When executing certain commands immediately following `find` or `findapp` commands, the UI would continue to display the result from `find` or `findapp`commands.
 
-- **Workaround**: Use the `list` command immediately after `find` or `findapp` commands to refresh and update the model.
+   - **Workaround**: Use the `list` command immediately after `find` or `findapp` commands to refresh and update the model.
+
+9. **After editing a person, the existing links are lost**: When a person is edited, the existing links no longer remain.
+
+   - **Workaround**: While we actively fix this, you can relink your patients and caregivers using the `link` command just as easily. We would recommend to add a note to the person when you first link the person to keep a record, as well as easily relink if required.
 
 ---
 
