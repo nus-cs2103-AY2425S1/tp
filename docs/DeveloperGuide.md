@@ -1231,17 +1231,17 @@ Over the course of the project, the group achieved the following:
 ## Appendix: Planned Enhancements
 Team Size: 5. Hence, maximum number of planned enhancements is **10**.
 
-### 1. Hide archived contacts when using the find command.
-* **Current Situation**: When using the `find` command, all contacts that match the given keywords will be displayed, even if they were archived.
-* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `find`, only unarchived contacts will be displayed.
+### 1. Hide archived contacts when using find commands.
+* **Current Situation**: When using find commands, all contacts that match the given keywords will be displayed, even if they were archived.
+* **Proposed Improvement**: Move archived contacts to a separate list, so that they do not show up when using find commands.
 
-### 2. Hide archived contacts when using the findtag command.
-* **Current Situation**: When using the `findtag` command, all contacts that match the given keywords will be displayed, even if they were archived.
-* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `findtag`, only unarchived contacts will be displayed.
+### 2. Prevent archiving of already archived contacts.
+* **Current Situation**: Archiving already archived contacts is allowed, and displays a success message.
+* **Proposed Improvement**: Add an error message to inform the user that the contact is already archived.
 
-### 3. Hide archived contacts when using the findday command.
-* **Current Situation**: When using the `findday` command, all contacts that match the given keywords will be displayed, even if they were archived.
-* **Proposed Improvement**: Implement an additional filter on the displayed contacts, such that when using `findday`, only unarchived contacts will be displayed.
+### 3. Prevent unarchiving of already unarchived contacts.
+* **Current Situation**: Unarchiving already unarchived contacts is allowed, and displays a success message.
+* **Proposed Improvement**: Add an error message to inform the user that the contact is already unarchived.
 
 ### 4. Prevent pinning of already pinned contacts.
 * **Current Situation**: Pinning already pinned contacts is allowed, and displays a success message.
@@ -1255,18 +1255,14 @@ Team Size: 5. Hence, maximum number of planned enhancements is **10**.
 * **Current Situation**: Names must be alphanumeric, hence characters such as '/', ',' or '-' are not allowed to be input into the Address Book despite their prevalence in names in real life.
 * **Proposed Improvement**: Update the name validation to allow for special characters to be included in names.
 
-### 7. Improve Grade Command success message.
-* **Current Situation**: Current success message for the GradeCommand is "Added grade to Person: PERSON_NAME", even though the GradeCommand can be used to edit a student's grade as well.
-* **Proposed Improvement**: Update the success message to "Edited grade of Person: PERSON_NAME"
-
-### 8. Maintain the same displayed list when editing contacts.
+### 7. Maintain the same displayed list when editing contacts.
 * **Current Situation**: Upon a successful edit of a contact, the displayed list will update to show the list of all unarchived contacts.
 * **Proposed Improvement**: Maintain the same list of contacts from before the edit command was executed, and display the updated information of the edited person.
 
-### 9. Maintain the same displayed list when editing contacts' grades.
+### 8. Maintain the same displayed list when editing contacts' grades.
 * **Current Situation**: Upon a successful edit of the grade a contact, the displayed list will update to show the list of all unarchived contacts.
 * **Proposed Improvement**: Maintain the same list of contacts from before the grade command was executed, and display the updated information of the edited person.
 
-### 10. Improve input validation for `findday` command to only take in days of the week.
+### 9. Improve input validation for `findday` command to only take in days of the week.
 * **Current Situation**: Users can input any value for the `DAY` parameter of the `findday` command.
 * **Proposed Improvement**: Create an enum of valid `DAY` inputs (i.e. the days of the week), and display an error message to the user if the value input to the `DAY` parameter does not match any of the valid inputs.
