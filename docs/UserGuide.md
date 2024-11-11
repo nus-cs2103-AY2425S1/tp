@@ -411,11 +411,11 @@ Format: `assign-task PERSON_NUMBER TASK_NUMBER` or `atask PERSON_NUMBER TASK_NUM
 
 ### Unassigning a Task from a contact : `unassign-task` 
 
-Format: `unassign-task PERSON_NUMBER TASK_NUMBER`
+Format: `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER`
 
 * Un-assigns a `Task` from a contact.
 * The `PERSON_NUMBER` is the index of the person shown in the displayed person list. 
-* The `TASK_NUMBER` is the index of the task in the person's task list. e.g. if the contact with `PERSON_NUMBER` 4 has 2 tasks assigned, you would use the following command to unassign the person's second task: `unassign-task 4 2`.
+* The `PERSON_TASK_NUMBER` is the index of the task in the person's task list. e.g. if the contact with `PERSON_NUMBER` 4 has 2 tasks assigned, you would use the following command to unassign the person's second task: `unassign-task 4 2`.
 * The indexes **must be positive integers** 1, 2, 3, …​.
 
 ### Marking a task as completed : `mark-task` or `mtask`
