@@ -994,4 +994,3 @@ Expected: Attendance cleared. Success message shown.
 1. Add a `course-list` command to list all courses so that user can view courses in the system.
 2. Add support for more Tutorial IDs by changing the regular expressions (i.e:`VALIDATION_REGEX`) used to accommodate other valid tutorial ids (e.g: T01A).
 3. Modify all commands that takes in `m/MATRICULATION_NUMBER` to allow option of accepting index of the person in the list.
-

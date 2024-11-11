@@ -145,6 +145,7 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 
 - Items in square brackets are optional.<br>
 <<<<<<< HEAD
+<<<<<<< HEAD
   e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
 =======
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -155,6 +156,9 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
    (i.e. 0 times), `t/friend`, `t/friend t/family`
   etc.
 >>>>>>> master
+=======
+  e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
+>>>>>>> 65b2133aca34831d2baea8f0c028e8a7e33e3dea
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME`
@@ -665,7 +669,6 @@ data file only if you are confident that you can update it correctly.
 
 You have been duly warned.
 </box>
-
 
 ### Coming Soon
 
