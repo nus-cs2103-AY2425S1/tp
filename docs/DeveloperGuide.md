@@ -209,14 +209,14 @@ The `PaginationPanel` contains the following member/class variables:
 * `currentPageIndex`: Represents the index (0-indexed) of the current page, it is shared among all instances and hence `static`.
 * `personList`: A **reference** of `ObservableList<Person>` from `Logic` during the initialization of UI.
 
-#### Implementation of Constructor ####
+#### Implementation of Constructor
 
 The constructor of `PaginationPanel` takes in a reference of `ObservableList<Person>` and stores it as a member variable.
 Since it is _observable_, the pagination listens to the event when there is an update of `personList`, this is implemented by
 `this.personList.addListener(this::onListItemsChanged)`. Then the constructor initializes the pagination component.
 
 
-#### Steps to Update the List when there is a Change ####
+#### Steps to Update the List when there is a Change
 
 Since the constructor adds a listener that listens to `onListItemsChanged` event on `personList`.
 The `onListItemsChanged` simply invokes `initPagination` to re-render the list displayed.
