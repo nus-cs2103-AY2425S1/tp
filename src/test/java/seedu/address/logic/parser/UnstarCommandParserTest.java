@@ -86,6 +86,8 @@ public class UnstarCommandParserTest {
         // Assuming names cannot contain special characters, like '@'
         assertParseFailure(parser, "John @ Doe",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnstarCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, PREAMBLE_SPECIAL_CHARACTERS,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnstarCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -100,7 +102,7 @@ public class UnstarCommandParserTest {
 
         // Test with minimum integer index
         assertParseFailure(parser, String.valueOf(Integer.MIN_VALUE),
-                ParserUtil.MESSAGE_INVALID_INDEX);
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
     }
 }

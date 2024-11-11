@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_SPECIAL_CHARACTERS;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -113,21 +114,24 @@ public class ViewCommandParserTest {
     public void parse_invalidZeroIndex_throwsParseException() {
         // case 0 - boundary value
         String userInput = "0";
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void parse_invalidIndexMinInt_throwsParseException() {
         // case - minimum integer
         String userInput = String.valueOf(Integer.MIN_VALUE);
-        assertParseFailure(parser, userInput, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void parse_invalidName_throwsParseException() {
         // name
         String userInput = "Alice /";
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, PREAMBLE_SPECIAL_CHARACTERS,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
 }
