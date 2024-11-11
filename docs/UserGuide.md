@@ -39,8 +39,8 @@ Refer to the sidebar if you are on the website.
 --------------------------------------------------------------------------------------------------------------------
 ## Overview
 
-**InternBuddy** is an offline desktop application for university students studying a STEM major to manage
-the contacts of companies that they are potentially applying or have already applied for internships.
+**InternBuddy** is an offline desktop application for university students pursuing a STEM degree to manage 
+the contacts of companies that they are potentially applying for or have already applied for internships. 
 
 **InternBuddy** allows users to:
 * store and manage companies' contact information for various internship applications.
@@ -65,10 +65,10 @@ First time using **InternBuddy**? Don't worry! We've got you covered! This tutor
 
 Before continuing, here are some important information you need to know about the User Guide:
 1. There are 3 different kinds of boxes that provide extra information.
-    * *Tip boxes* provide tips or helpful advise on how to use a certain feature found in **InternBuddy**.
-
+    * *Tip boxes* provide tips or helpful advice on how to use a certain feature found in **InternBuddy**.
+   
       <box type="tip" seamless>
-
+   
       **Tip:** This is a tip box.
       </box>
 
@@ -144,10 +144,10 @@ The blurred image below shows an annotated overview of **InternBuddy's** GUI:
 The **GUI** is divided into five main sections:
 
 1. **Menu Bar**: Contains options like `Help` and `File` for easy access to essential commands.
-1. **Command Box**: The area where you can type and execute commands by pressing Enter.
-1. **Result Display Box**: Shows the results of your commands and any error messages.
-1. **Company List**: Displays the current list of companies in a card-like format, making it easy to view and manage.
-1. **Status Bar**: Displays the file path of the loaded data file, alongside our trusty companion, `InternBuddy`, who will be with you throughout your journey.
+2. **Command Box**: The area where you can type and execute commands by pressing Enter.
+3. **Result Display Box**: Shows the results of your commands and any error messages.
+4. **Company List**: Displays the current list of companies in a card-like format, making it easy to view and manage.
+5. **Status Bar**: Displays the file path of the loaded data file, alongside our trusty companion, `InternBuddy`, who will be with you throughout your journey.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -194,8 +194,8 @@ not** put any parameters or prefixes that are not recognised by the command.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Optiver`.
 
 * Letters preceding the `/` before parameters (if present) are prefixes that the app uses to determine that parameter. It is **case-sensitive** and thus
-  must be used exactly as shown <br>
-  e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another.
+  must be used exactly as shown. <br>
+  e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another. 
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/Optiver t/financial` or as `n/Optiver`.
@@ -213,8 +213,8 @@ not** put any parameters or prefixes that are not recognised by the command.
   e.g. `85092323`, `0122345677`
 
 * InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters as well (letters and numbers only). The following special characters `+ - _ .` are allowed in `local-part` but note that:
-    1. `local-part` can't begin or end with any special characters.
-    2. `local-part` can't have consecutive special characters in it.
+    1. `local-part` cannot begin or end with any special characters.
+    2. `local-part` cannot have consecutive special characters in it.
     3. The only special characters allowed in `domain` are periods (`.`) are allowed in `domain` and follows the 2 rules for `local-part` above.
     4. Each word between periods in `domain` (e.g. `nus` and `edu` in `nus.edu`) must be at least 2 characters long.
 
@@ -247,8 +247,9 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip 1:** A company can have any number of tags (including 0) <br>.
-**Tip 2:** A company requires a name and email at the minimum.
+**Tip 1:** A company can have any number of tags (including 0) <br>
+**Tip 2:** Tags can be a useful way to categorise different companies into various groups! <br>
+**Tip 3:** A company requires a name and email at the minimum
 </box>
 
 <box type="info" seamless>
@@ -320,7 +321,7 @@ have made the right edits!
 
 **Note about `edit` command**:
 * Currently, InternBuddy does not check if the parameters you provide are exactly the same as the existing parameters for
-  the selected company. So please be mindful when entering your inputs, especially if you are making small changes (eg: `PHONE: 98765432 -> 98675432`).
+the selected company. So please be mindful when entering your inputs, especially if you are making small changes (eg: `PHONE: 98765432 -> 98675432`).
 * If you are current in the filtered view of a `find` or `view` command, an execution of `edit` command will return the application
   view to the full list of companies. Hence, please be mindful when running consecutive edits to prevent accidental changes to wrong company.
 *  A company's status is updated based on your applications to it, so you cannot manually change the status using the `edit` command.
@@ -586,6 +587,7 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 7. **The error message** for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the `domain` between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the notes in [features](#features).
 8. `InternBuddy` **currently accepts invalid phone numbers**, such as those exceeding 15 digits. Users who enter an incorrect phone number by mistake can correct it using the `edit` command.
 9. **Typo in error message for `withdraw`**, if you try to withdraw an application from a company with no applications, the message `NAME has no applications to update!`, when it should be `NAME has no applications to withdraw!`.
+10. `InternBuddy` **currently has no limit on the tag length.** However, with the default window size, the tag may overrun the screen if it exceeds 62 characters, causing the favourites star to no longer remain visible. If a tag length longer than 62 characters is required, adjustments to the window size can be made accordingly.
 
 [back to top](#internbuddy-user-guide)
 
