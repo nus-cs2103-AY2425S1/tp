@@ -67,7 +67,7 @@ public class SelectCommand extends Command {
     }
 
     /**
-     * Formats a list of indexes into a comma-separated string for display.
+     * Formats a list of indexes into a comma-separated string for Select Command result display.
      *
      * @param indexes The list of indexes to be formatted.
      * @return A comma-separated string of index numbers, or an empty string if the list is empty.
@@ -81,7 +81,7 @@ public class SelectCommand extends Command {
     }
 
     /**
-     * Formats a list of selected persons' names into a comma-separated string for display.
+     * Formats a list of selected persons' names into a comma-separated string for Select Command result display.
      *
      * @param persons The list of selected persons.
      * @return A comma-separated string of selected persons' names, or "none" if the list is empty.
