@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ClientWindow clientWindow;
     private List<Person> personList;
 
     @FXML
@@ -163,7 +164,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleShowClient(Person client) {
-        ClientWindow clientWindow = new ClientWindow(client);
+        if (clientWindow != null && clientWindow.isShowing()) {
+            clientWindow.hide();
+        }
+
+        // Create and show a new client window
+        clientWindow = new ClientWindow(client);
         clientWindow.show();
     }
 
@@ -176,6 +182,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
+        if (clientWindow != null && clientWindow.isShowing()) {
+            clientWindow.hide();
+        }
         logger.info("Closing application...");
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());

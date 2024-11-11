@@ -553,11 +553,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Physiotherapist <u>deletes a scheduled appointment for a client (UC05)</u>.
-2. PhysioPal <u>deletes the reminder note for client (UC04)</u>.
+2. PhysioPal deletes the reminder note for client.
 3. PhysioPal confirms deletion of appointment and displays a success message.
 
    Use case ends.
+   
+**Extensions**
 
+* 1a. PhysioPal detects that the client does not have a reminder note set.<br>
+
+    Use case resumes from step 3.
 
 **Use Case: UC07 - Displaying upcoming appointments on launch screen**
 
@@ -980,6 +985,44 @@ and does not accept duplicate names, so there will never be a case where more th
    1. If the data file is missing, a new empty client contact list is created in the given directory.
    2. If the data file is corrupted, the corrupted file is cleared and an empty client contact list is returned.
    3. The data file is saved automatically after each command that modifies the data file.
+
+## **Appendix: Planned Enhancements**
+
+**Team Size - 5**
+
+### **1. Support Multiple clients with the Same Name**
+**Current Feature Flaw**<br>
+
+PhysioPal currently does not allow duplicate names, which does not reflect real-world scenarios where different clients may have identical names.
+
+**Proposed Implementation**<br>
+1. Modify the `add` command to support adding multiple clients with the same name.
+   1. Exact duplicate entries (where all fields are identical) will still be disallowed.
+2. Update commands to accept both `INDEX` and `NAME` formats (i.e. `COMMAND INDEX [parameters]` or `COMMAND NAME [parameters]`).
+   1. <b>Index format</b>: Each client is uniquely identified by their index.
+   2. <b>Name format</b>:
+      1. <b>Single Match</b>: The command executes as usual.
+      2. <b>Multiple Matches</b>:
+         - A list of all clients with the same name is displayed.
+         - Users can select the desired client by modifying the command input to include the appropriate index number.
+
+### **2. Allow Special Characters in Names**
+**Current Feature Flaw**<br>
+
+PhysioPal does not accept names with `.` , `/`, `-` or `,` which might be in a person's legal name.
+
+**Proposed Implementation**<br>
+
+Change the check in the add command to allow for special characters in names.
+
+### **3. Enhance Name Display**
+**Current Feature Flaw**<br>
+
+PhysioPal's UI displays all names in lowercase, which may not reflect the actual case formatting of users' names.    
+
+**Proposed Implementation**<br>
+
+Modify the UI to display names as they were originally entered, preserving their case formatting.
 
 ## **Appendix: Effort**
 
