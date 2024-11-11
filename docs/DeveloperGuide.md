@@ -245,13 +245,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -637,9 +630,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Planned Enhancements**
 
-Team Size: 5
+Team size: 5
 
-1. 
+1. Ability to add appointment and remark to a patient's profile using the add command.
+2. Support whitespaces in tags. For example, `t/heart disease` should be a single valid tag.
+3. Patient should be able to have multiple upcoming appointments and multiple remarks.
+4. Ability to edit patient's remark in the edit command.
+5. View window should automatically update after editing patient's details or logging a new entry.
+6. Additional command shortcuts for `log` and `schedule` commands.
+7. Make commands case-insensitive. For example, `Add` should be treated the same as `add`.
+8. GUI for error messages should be more user-friendly as currently there is a need to scroll to see the full error message. For example, a pop-up window could be used to display the error message.
+9. Triage should indicate level of severity of patient's condition on the GUI for new users.
+10. Log success message should indicate that logged entries can be viewed using the`view` command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
