@@ -9,7 +9,7 @@ Tired of using paper or Microsoft Excel to track your student details? No worrie
 
 StoreClass (SC) is a desktop app designed exclusively for teachers from private organizations e.g. tuition centers to manage their students. As teachers, you can interact with the app by keying in your commands to StoreClass's chat bot, and your student details will be updated and saved automatically.
 
-Paired also with a revolutionary AutoComplete feature, StoreClass helps you manage your student details more effectively, efficiently and most importantly, reliably.
+Paired also with a revolutionary Autocomplete feature, StoreClass helps you manage your student details more effectively, efficiently and most importantly, reliably.
 ## Table of Contents
 * Table of Contents
 {:toc}

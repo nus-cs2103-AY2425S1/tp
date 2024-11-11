@@ -13,6 +13,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * Our team member isaactodo's iP chatbot code. https://github.com/isaactodo/ip
+* Solution for max sized context menu for Autocomplete feature adapted from https://stackoverflow.com/questions/51272738/javafx-contextmenu-max-size-has-no-effect.
 * Code for sidebar of UG and DG inspired by ChatGPT.
 
 --------------------------------------------------------------------------------------------------------------------
