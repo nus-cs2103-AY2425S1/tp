@@ -24,7 +24,7 @@ If you can type fast, PawPatrol can manage pet owner and pet data faster than tr
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar pawpatrol.jar` command to run the application.<br>
    A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.jpeg)
+   ![Ui](images/Ui.png)
 
 1. The program is loaded up with some default data. If you wish to clear the data, enter `clear` in the command box and press Enter.
 

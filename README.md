@@ -2,7 +2,7 @@
 
 # PawPatrol: Veterinary Address Book and Patient Management System
 
-![Ui](docs/images/Ui.jpeg)
+![Ui](docs/images/Ui.png)
 PawPatrol is designed to be a core tool for veterinary clinics to manage client and patient data efficiently. Its primary function is as an address book for pet owners, with extensions to handle detailed patient records for animals. The goal is to provide a lightweight but scalable system for veterinarians to track essential information, including medical history, appointments, and billing.
 
 ## Key Features

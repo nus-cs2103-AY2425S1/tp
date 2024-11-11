@@ -6,7 +6,7 @@ title: PawPatrol
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 
-![Ui](images/Ui.jpeg)
+![Ui](images/Ui.png)
 
 **PawPatrol is a desktop application for managing veterinary clinics' manage their patient data.**
 It allows the clinic to add and edit 2 types of entities, owners and pets. PawPatrol also allows the user to link 
