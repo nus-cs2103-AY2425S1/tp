@@ -1,0 +1,82 @@
+
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title AddToConsultCommand Sequence Diagram
+
+box Logic
+Participant ":LogicManager" as LogicManager LOGIC_COLOR
+Participant ":AddressBookParser" as addressBookParser LOGIC_COLOR_T3
+Participant ":AddToConsultCommandParser" as AddToConsultCommandParser LOGIC_COLOR_T2
+Participant ":AddToConsultCommand" as AddToConsultCommand LOGIC_COLOR_T1
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+end box
+
+-[UI_COLOR]> LogicManager : execute("addtoconsult 1 n/John Doe i/3")
+activate LogicManager LOGIC_COLOR
+
+'Logic manager calls AddressBookParser and passes the command
+LogicManager -[LOGIC_COLOR]> addressBookParser : parseCommand("addtoconsult 1 n/John Doe i/3")
+activate addressBookParser LOGIC_COLOR_T3
+
+'AddressBookParser creates an instance of the parser
+create AddToConsultCommandParser
+addressBookParser -[LOGIC_COLOR_T3]> AddToConsultCommandParser : AddToConsultCommandParser(arguments)
+activate AddToConsultCommandParser LOGIC_COLOR_T2
+
+AddToConsultCommandParser --[LOGIC_COLOR_T2]> addressBookParser
+deactivate AddToConsultCommandParser
+
+' AddressBookParser calls the parse command
+addressBookParser -[LOGIC_COLOR_T3]> AddToConsultCommandParser : parse("addtoconsult 1 n/John Doe i/3")
+activate AddToConsultCommandParser LOGIC_COLOR_T2
+
+'Within the parse command, the parser creates an instance of the command
+create AddToConsultCommand
+AddToConsultCommandParser --[LOGIC_COLOR_T2]> AddToConsultCommand : AddToConsultCommand(index, studentNames, indices)
+activate AddToConsultCommand LOGIC_COLOR_T1
+
+AddToConsultCommand --[LOGIC_COLOR]> AddToConsultCommandParser
+deactivate AddToConsultCommand LOGIC_COLOR_T1
+
+'parser returns the command to the AddressBookParser
+AddToConsultCommandParser --[LOGIC_COLOR_T2]> addressBookParser : AddToConsultCommand
+deactivate AddToConsultCommandParser
+
+AddToConsultCommandParser --[hidden]> addressBookParser : AddToConsultCommand
+destroy AddToConsultCommandParser
+
+addressBookParser --[LOGIC_COLOR_T3]> LogicManager : AddToConsultCommand
+deactivate addressBookParser
+
+'LogicManager calls command.execute
+LogicManager -[LOGIC_COLOR]> AddToConsultCommand : execute(model)
+activate AddToConsultCommand LOGIC_COLOR_T1
+
+'get filteredConsultationList
+AddToConsultCommand -[LOGIC_COLOR]> model : getFilteredConsultationList()
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> AddToConsultCommand
+deactivate model
+
+'get filteredStudentList
+AddToConsultCommand -[LOGIC_COLOR]> model : filteredStudentList()
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> AddToConsultCommand
+deactivate model
+
+'After adding students, return new consultation
+AddToConsultCommand --[LOGIC_COLOR]> LogicManager : CommandResult
+deactivate AddToConsultCommand LOGIC_COLOR_T1
+AddToConsultCommand --[hidden]> LogicManager : CommandResult
+destroy AddToConsultCommand
+
+[<-[UI_COLOR]-LogicManager : CommandResult
+
+@enduml

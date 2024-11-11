@@ -1,0 +1,38 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title addStudent Method Sequence Diagram
+
+box "AddToConsultCommand"
+participant ":AddToConsultCommand" as client LOGIC_COLOR
+end box
+
+box Consultation
+participant ":Consultation" as consultation MODEL_COLOR
+end box
+
+
+
+client -> consultation : addStudent(student)
+activate consultation
+
+    consultation -> consultation : hasStudent(student)
+    activate consultation
+
+    consultation -> consultation :
+    deactivate consultation
+
+alt student already exists
+
+    consultation -> client : nothing is added, exception thrown
+
+else student doesn't exist
+
+    consultation -> client : add student to arraylist
+
+end alt
+
+deactivate consultation
+
+@enduml

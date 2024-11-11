@@ -2,8 +2,42 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+
+# Table of Contents
+
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+- [Implementation](#implementation)
+  - [Proposed Undo/Redo feature](#proposed-undoredo-feature)
+  - [Consultation Management](#proposed-consultation-management)
+  - [Data Import / Export Feature](#data-import--export-feature)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Adding a student](#adding-a-student)
+  - [Finding a student (by course)](#finding-a-student-by-course)
+  - [Finding a student (by name)](#finding-a-student-by-name)
+  - [Editing a student](#editing-a-student)
+  - [Deleting a student](#deleting-a-student)
+  - [Lesson Test Cases](#lesson-test-cases)
+  - [Consultation Test Cases](#consultation-test-cases)
+  - [Saving data](#saving-data)
+  - [Exporting data](#exporting-data)
+  - [Importing data](#importing-data)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
