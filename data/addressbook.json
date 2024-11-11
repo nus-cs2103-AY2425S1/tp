@@ -4,7 +4,7 @@
     "phone" : "93456789",
     "email" : "davidng@example.com",
     "availableDate" : "2023-10-27",
-    "involvedIn" : [ "Tree Planting" ]
+    "involvedIn" : [ ]
   }, {
     "name" : "John Doe",
     "phone" : "98765432",
@@ -22,7 +22,7 @@
     "phone" : "12341234",
     "email" : "lol@lol.com",
     "availableDate" : "2023-10-28",
-    "involvedIn" : [ "Charity Run" ]
+    "involvedIn" : [ ]
   } ],
   "events" : [ {
     "eventName" : "Beach Cleanup",
@@ -39,7 +39,7 @@
     "endTime" : "11:00",
     "location" : "Marina Bay",
     "description" : "5km run to raise funds for charity",
-    "volunteers" : [ "Jason Wang" ]
+    "volunteers" : [ ]
   }, {
     "eventName" : "Food Donation Drive",
     "date" : "2023-10-27",
@@ -55,7 +55,7 @@
     "endTime" : "13:00",
     "location" : "Bishan Park",
     "description" : "Tree planting event to promote sustainability",
-    "volunteers" : [ "David Ng" ]
+    "volunteers" : [ ]
   }, {
     "eventName" : "Blood Donation Drive",
     "date" : "2023-10-26",
