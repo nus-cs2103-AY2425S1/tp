@@ -126,8 +126,7 @@ To install Java 17:
 ### Step 2: Download the AgentAssist application
 
 Download the latest version of the `.jar` file from the AgentAssist [repository](https://github.com/AY2425S1-CS2103T-T14-4/tp/releases).
-
-[comment]: # (TODO: Add image of GitHub Releases page with annotations to show user the file to install.)
+![img.png](images/ReleasePage.png)
 
 ### Step 3: Choose a Folder
 
