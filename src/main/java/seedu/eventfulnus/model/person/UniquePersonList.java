@@ -146,18 +146,4 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
-
-
-    /**
-     * Finds a person in the list by name.
-     */
-    public Person findPerson(String person) {
-        for (int i = 0; i < internalList.size(); i++) {
-            Person otherPerson = internalList.get(i);
-            if (otherPerson.getName().equals(person)) {
-                return otherPerson;
-            }
-        }
-        return null;
-    }
 }

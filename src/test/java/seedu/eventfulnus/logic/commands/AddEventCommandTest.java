@@ -49,7 +49,7 @@ public class AddEventCommandTest {
         Set<Person> participants = new HashSet<>();
         Event validEvent = new Event(Sport.CHESS,
                 new Pair<>(Faculty.COM, Faculty.NUSC),
-                new Venue("Stadium"),
+                new Venue("UT AUD2"),
                 LocalDateTime.parse("2024 09 20 1000", Event.DATE_TIME_PARSE_FORMATTER),
                 participants);
         AddEventCommand addEventCommand = new AddEventCommand(validEvent);

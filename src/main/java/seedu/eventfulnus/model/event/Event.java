@@ -26,7 +26,8 @@ public class Event implements Comparable<Event> {
     // Class fields
     public static final DateTimeFormatter DATE_TIME_PARSE_FORMATTER = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
     public static final DateTimeFormatter DATE_TIME_DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    public static final String MESSAGE_CONSTRAINTS = "DateTime should be entered in the format of yyyy MM dd HHmm";
+    public static final String MESSAGE_CONSTRAINTS = "DateTime is not valid or "
+            + "not entered in 'yyyy MM dd HHmm' format.";
 
     // Identity fields
     private final EventName name;
@@ -149,6 +150,7 @@ public class Event implements Comparable<Event> {
 
         return otherEvent != null
                 && otherEvent.getName().equals(getName())
+                && otherEvent.getVenue().equals(getVenue())
                 && otherEvent.getDateTime().equals(getDateTime());
     }
 

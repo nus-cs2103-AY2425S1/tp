@@ -3,6 +3,7 @@ package seedu.eventfulnus.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -14,8 +15,6 @@ import javafx.util.Pair;
 import seedu.eventfulnus.commons.core.index.Index;
 import seedu.eventfulnus.commons.util.StringUtil;
 import seedu.eventfulnus.logic.parser.exceptions.ParseException;
-import seedu.eventfulnus.model.AddressBook;
-import seedu.eventfulnus.model.ModelManager;
 import seedu.eventfulnus.model.event.Event;
 import seedu.eventfulnus.model.event.Venue;
 import seedu.eventfulnus.model.person.Email;
@@ -315,24 +314,9 @@ public class ParserUtil {
         String trimmedDateTime = dateTime.trim();
         try {
             return LocalDateTime.parse(trimmedDateTime, Event.DATE_TIME_PARSE_FORMATTER);
-        } catch (Exception e) {
-            throw new ParseException(Event.MESSAGE_CONSTRAINTS, e);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Event.MESSAGE_CONSTRAINTS);
         }
-    }
-
-    /**
-     * Retrieves all {@link Person}s in the {@link AddressBook} of the
-     * {@link ModelManager} that match the {@link Sport}and {@link Faculty}
-     * provided, and returns them in a defensive copy of a{@link Set}<{@link Person}>.
-     */
-    public static Set<Person> parseDefaultParticipants(Sport sport, Pair<Faculty, Faculty> teams) {
-        PersonContainsKeywordsPredicate isAthleteOfGivenTeams = new PersonContainsKeywordsPredicate(
-                List.of("athlete", teams.getKey().toString(), teams.getValue().toString()));
-        PersonContainsKeywordsPredicate isAthleteOfGivenSport = new PersonContainsKeywordsPredicate(
-                List.of("athlete", sport.toString()));
-        Set<Person> defaultParticipants = new HashSet<>(
-                filteredPersonList.filtered(isAthleteOfGivenTeams).filtered(isAthleteOfGivenSport));
-        return new HashSet<>(defaultParticipants);
     }
 
     /**
