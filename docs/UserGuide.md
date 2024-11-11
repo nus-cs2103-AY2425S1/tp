@@ -171,7 +171,7 @@ However, dates exceeding the maximum possible (e.g., the 32nd of any month) will
 
 Symbol     | Parameter   | Constraints
 -----------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**-**  | `INDEX`     |- Refers to the index number shown in the displayed patient list.<br>- **Must be a positive integer** 1, 2, 3, …​
+**-**  | `INDEX`     |- Refers to the index number shown in the displayed patient list.<br>- **Must be a positive integer** 1, 2, 3, …​<br>- Must not be greater than `Integer.MAX_VALUE` of `2147483647`
 **-**  | `DATE`      |- **Must be of the form `dd-MM-yyyy`**, where `dd` is the day, `MM` is the month, and `yyyy` is the year.
 **-**  | `KEYWORD`   |- Cannot be empty.<br>- Accepts any character.
 
