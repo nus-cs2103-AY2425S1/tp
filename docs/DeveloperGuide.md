@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* [AB3](https://github.com/se-edu/addressbook-level3) for the basic structure of the application.
+* This software, User Guide (UG), and Developer Guide (DG) are built based on the [AB3](https://github.com/se-edu/addressbook-level3) project.
 
 --------------------------------------------------------------------------------------------------------------------
 
