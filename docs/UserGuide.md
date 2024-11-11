@@ -241,7 +241,7 @@ Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ (if the number given is larger than MAX_INT (2147483647), **it is a non-zero unsigned integer**)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
