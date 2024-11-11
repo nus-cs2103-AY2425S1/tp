@@ -162,23 +162,27 @@ Examples:
    ![results for 'find'](images/findExample.png)
 
 
-### Sorting persons by name: `sort`
+### Sorting persons: `sort`
 
-Sorts list of persons alphabetically by specified predicate.
+Sorts list of persons in a case-insensitive order based on ASCII values, 
+meaning letters and numbers are organized as if in alphabetical and numerical order, 
+with no distinction between uppercase and lowercase letters.
 
-Format: `sort PREDICATE`
+Format: `sort [name] [role] [phone] [email] [address]`
 
-* Sorts the list alphabetically by given predicate.
-* The predicate refers to attributes used to sort the list by.
-* The predicate **must be a valid attribute** name, role, phone, email and address only
+* Exactly one of the optional fields is required
+* The field refers to attributes used to sort the list by.
+* The field **must be a valid attribute** name, role, phone, email or address.
+* The field is case-insensitive. <br>
+e.g. Both `sort name` and `sort NAME` will be accepted.
 
 Examples:
-* `sort name` sorts the list alphabetically by name.
-   ![result for 'sort name'](images/sortNameExample.png)
-* `sort role` sorts the list alphabetically by role.
-* `sort phone` sorts the list alphabetically by phone.
-* `sort email` sorts the list alphabetically by email.
-* `sort address` sorts the list alphabetically by address.
+* `sort phone` returns list sorted by phone number.
+* `sort name` returns list sorted by name.
+  ![result for 'sort name'](images/sortMessage.png)
+
+:exclamation: **Caution:** using `list`, `edit`, `mark`, `unmark`, `batch-mark`, `batch-unmark`, `reset-att`, 
+or `add` command after the `sort` command will revert the list to its original, unsorted order.
 
 ### Deleting a person : `delete`
 
@@ -398,13 +402,16 @@ Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME r/ROLE s/SEX p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student s/M p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
+**Add** | `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
 **Clear** | `clear`
 **Delete** | `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `delete 3`
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `find James Jake`
+**Edit** | `edit INDEX [n/NAME] [s/SEX] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
+**Sort** | `sort [name] [role] [phone] [email] [address] `<br> Only one optional field should be given <br> e.g., `sort name`
 **Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
 **Mark** | `mark INDEX` <br> e.g., `mark 2`
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
