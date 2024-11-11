@@ -170,7 +170,7 @@ Refer to the [Features](#features) below for details of each command.
   e.g. for `add n/NAME`, `NAME` is a parameter which you input, such as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. for `n/NAME [t/TAG]`, you can either input the parameters as `n/John Doe t/seller` or `n/John Doe`.
+  e.g. for `n/NAME [t/TAG]`, you can either input the parameters `n/John Doe t/seller` or `n/John Doe`.
 
 * Items proceeded by `…`​ can be input any number of times.<br>
   e.g. `[t/TAG]…​` can be either have no input, or be input as `t/seller`, or `t/seller t/landlord` etc.
