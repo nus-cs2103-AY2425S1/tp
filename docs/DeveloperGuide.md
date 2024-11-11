@@ -1083,3 +1083,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `/exit` to close the window.<br>
    Expected: The window should close.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+The team consists of 5 members.
+Given below are enhancements planned for future versions.
