@@ -37,6 +37,7 @@ public class EditScheduleCommand extends Command {
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_INVALID_SCHEDULE_INDEX = "The schedule index provided is invalid.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_EMPTY_CONTACT_LIST = "You must have at least one contact in the schedule.";
 
     private final Index targetIndex; // The index of the schedule in the displayed schedule list
     private final EditScheduleDescriptor editScheduleDescriptor;
@@ -95,7 +96,10 @@ public class EditScheduleCommand extends Command {
                 Messages.formatMeetings(updatedMeeting)));
     }
 
-    private static List<UUID> getUpdatedContactUids(Meeting meetingToEdit, List<UUID> newContactUids) {
+    private static List<UUID> getUpdatedContactUids(
+            Meeting meetingToEdit,
+            List<UUID> newContactUids
+    ) throws CommandException {
         List<UUID> previousContactUids = meetingToEdit.getContactUids();
 
         List<UUID> updatedContactUids = new ArrayList<>();
@@ -110,8 +114,11 @@ public class EditScheduleCommand extends Command {
             }
         }
 
-        // check if updated contact list is empty, if so, revert to previous contact list
-        updatedContactUids = updatedContactUids.isEmpty() ? previousContactUids : updatedContactUids;
+        // Check if updated contact list is empty, if so, throw an exception
+        if (updatedContactUids.isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_CONTACT_LIST);
+        }
+
         return updatedContactUids;
     }
 
