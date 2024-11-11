@@ -1115,7 +1115,7 @@ Deleting an existing appointment from a patient
 
 Team size: 5
 
-1\. **Enhance Name Validation to support special characters and improve formatting**
+1\. **Enhance Name Validation**
 
    Currently, MediBase3 restricts patient names to alphanumerics and spaces only, preventing the inclusion of common symbols, hyphens, and accented characters that are often found in legal names (e.g., 'Nagaratnam s/o Suppiah', 'Anya Taylor-Joy', 'Sergio Pérez'). Additionally, the app allows leading, trailing, and multiple consecutive spaces, which can result in inconsistent formatting.
 
