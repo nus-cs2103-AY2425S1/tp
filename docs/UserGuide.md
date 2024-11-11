@@ -120,26 +120,10 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 
 <div style="page-break-after: always;"></div>
 
-
 ## **UI Elements**
 
 <div markdown="block" class="alert alert-info">
 - **Index**: The number shown beside each item in a list, used for referencing items in commands
-</div>
-
-## **Contact Management**
-
-<div markdown="block" class="alert alert-info">
-- **Filter**: Process of showing only contacts with specific tags
-- **Tag**: Label that can be applied to contacts for easy categorization (e.g., "VIP", "Wholesale", "Regular")
-- **Remark**: Additional notes about a contact 
-</div>
-
-## **Order Processing**
-
-<div markdown="block" class="alert alert-info">
-- **Mark/Unmark**: Commands to toggle the completion status of an order
-- **Clear**: Command to remove all data from the system
 </div>
 
 ## **Command Format**
@@ -162,6 +146,23 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+<div style="page-break-after: always;"></div>
+
+## **Contact Management**
+
+<div markdown="block" class="alert alert-info">
+- **Filter**: Process of showing only contacts with specific tags
+- **Tag**: Label that can be applied to contacts for easy categorization (e.g., "VIP", "Wholesale", "Regular")
+- **Remark**: Additional notes about a contact 
+</div>
+
+## **Order Processing**
+
+<div markdown="block" class="alert alert-info">
+- **Mark/Unmark**: Commands to toggle the completion status of an order
+- **Clear**: Command to remove all data from the system
 </div>
 
 ## **Parameter Reference**
@@ -418,8 +419,6 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 ```
 
 ![screenshot](images/Screenshot-2.png)
-
-<div style="page-break-after: always;"></div>
 
 **Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
 ![screenshot](images/Screenshot-6.png)
