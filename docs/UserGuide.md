@@ -578,7 +578,7 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **If the name, tag, or course has known prefix**, the application will interpret it as parameters. The remedy is to avoid using any known prefixes as parameters.
+3. **If the name, tag, or course has known prefix (e.g. c/method e/a)**, the application will interpret it as another parameters. The remedy is to avoid using any known prefixes as parameters.
 
 ---
 <div style="page-break-after: always;"></div>
