@@ -541,6 +541,30 @@ Given below are instructions to test the app manually.
     1. Type the command `exit` into the command box and press enter.<br>
        Expected: The app and GUI closes.
 
+### Adding a contact
+
+1. Adding a contact for a Student.
+
+    1. Test case: `contact add n/Norbeast p/99243312 e/Norbeast12@beast.com a/Kent Ridge MRT r/Student t/Master`<br>
+       Expected: A student is added to the contacts. Details of the added student are shown in the status message.
+
+    1. Test case: `contact add n/NowBeast p/223 a/Kent Ridge MRT r/Student t/Master`<br>
+       Expected: No contact is added. Error details are shown in the status message.
+
+    1. Test case: `contact add n/CookBeast p/44627732 e/Norbea4st12@beast.com r/Student`<br>
+       Expected: No contact is added. Error details are shown in the status message.
+
+1. Adding a contact for a Guardian.
+
+   1. Test case: `contact add n/ETAN p/2774213 e/etan@man.com a/Tampines MRT r/Guardian t/Father`<br>
+      Expected: A guardian is added to the contacts. Details of the added guardian are shown in the status message.
+
+   1. Test case: `contact add n/Mac p/44421367 a/Chicken MRT r/Guardian t/Master`<br>
+      Expected: No contact is added. Error details are shown in the status message.
+
+   1. Test case: `contact add n/Pizza p/556785 e/Cooking@beast.com r/Guardian`<br>
+      Expected: No contact is added. Error details are shown in the status message.
+
 ### Listing all contacts
 
 1. List all contacts in TutorEase.
@@ -552,6 +576,34 @@ Given below are instructions to test the app manually.
 
     1. Test case: `lesson list 0`<br>
        Expected: All contacts are shown.
+
+### Editing a contact
+
+1. Editing a contact when there are contacts shown on the contact list.
+
+   1. Prerequisites: There are multiple contacts shown on the contact list.
+   
+   1. Test case: `contact edit 1 n/Chicken`<br>
+      Expected: First contact's name is edited. Details of the edited contact shown in the status message.
+
+   1. Test case: `contact edit 1 p/992`<br>
+      Expected: First contact's phone number is edited. Details of the edited contact is shown in the status message.
+
+   1. Test case: `contact edit 1 r/Student`<br>
+      Expected: Contact is not edited. Error details are shown in the status message.
+
+1. Editing a contact when there are contacts shown on the filtered contact list.
+
+    1. Prerequisites: At least one contact is shown on the contact list.
+
+    1. Test case: `contact edit 1 n/Duck`<br>
+       Expected: First contact's name is edited. Details of the edited contact are shown in the status message.
+
+    1. Test case: `contact edit 1 p/8842`<br>
+       Expected: First contact's phone number is edited. Details of the edited contact are shown in the status message.
+
+    1. Test case: `contact edit 1 r/Student`<br>
+       Expected: Contact is not edited. Error details are shown in the status message.
 
 ### Deleting a person
 
