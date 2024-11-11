@@ -64,12 +64,7 @@ public class DeleteCommandTest {
     public void execute_validNricFilteredList_success() {
         showPersonByNric(model, NRIC_FIRST_PERSON);
 
-        Optional<Person> personWithMatchingNric = model.getFilteredPersonList().stream()
-                .filter(person -> NRIC_FIRST_PERSON.equals(person.getNric()))
-                .findFirst();
-        Person personToDelete = personWithMatchingNric.orElse(null);
-
-        assertNotNull(personToDelete);
+        Person personToDelete = model.getFilteredPersonList().get(0);
 
         DeleteCommand deleteCommand = new DeleteCommand(NRIC_FIRST_PERSON);
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
@@ -77,7 +72,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -110,14 +105,5 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(targetNric);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetNric=" + targetNric + "}";
         assertEquals(expected, deleteCommand.toString());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }

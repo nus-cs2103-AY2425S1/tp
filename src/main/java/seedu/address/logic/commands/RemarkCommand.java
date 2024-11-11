@@ -83,6 +83,7 @@ public class RemarkCommand extends Command {
 
             return new CommandResult(generateSuccessMessage(editedPerson));
         } else {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
         }
     }

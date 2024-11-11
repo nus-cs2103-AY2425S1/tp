@@ -114,19 +114,19 @@ public class EditCommand extends Command {
             Person personToEdit = model.getFilteredPersonList().get(0);
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-            if (!personToEdit.isSamePerson(editedPerson)) {
+            NricMatchesPredicate checkExistingNric = new NricMatchesPredicate(editedPerson.getNric().toString());
+            model.updateFilteredPersonList(checkExistingNric);
+
+            if (!personToEdit.isSamePerson(editedPerson) && !model.getFilteredPersonList().isEmpty()) {
                 model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-                NricMatchesPredicate checkExistingNric = new NricMatchesPredicate(editedPerson.getNric().toString());
-                model.updateFilteredPersonList(checkExistingNric);
-                if (!model.getFilteredPersonList().isEmpty()) {
-                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-                }
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
             }
 
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
         } else {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
         }
     }

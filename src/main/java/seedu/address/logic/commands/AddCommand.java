@@ -66,26 +66,12 @@ public class AddCommand extends Command {
         model.updateFilteredPersonList(predicate);
         if (model.getFilteredPersonList().isEmpty()) {
             model.addPerson(toAdd);
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
         } else {
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        /*//check if person already exists in database
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        //check if specified NRIC already exists in database
-        List<Person> existingPersons = model.getAddressBook().getPersonList();
-        Optional<Person> existingPersonWithSameNric = existingPersons.stream()
-                        .filter(person -> person.getNric().equals(toAdd.getNric()))
-                        .findAny();
-        if (existingPersonWithSameNric.isPresent()) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.addPerson(toAdd);*/
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

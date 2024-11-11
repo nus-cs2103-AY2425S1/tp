@@ -61,6 +61,7 @@ public class DeleteCommand extends Command {
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else {
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
         }
     }
