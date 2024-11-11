@@ -660,7 +660,7 @@ Team size: 4<br>
 values for names and tags in the future. E.g. `add n/L'Éclat Culinaire p/12345678 e/test@email.com a/Pasir Ris pr/$$$ t/Crème brûlée`.
 2. **Allow spaces and special characters within phone numbers:** The current implementation of adding contacts with phone numbers does not allow spaces and only allows numbers. It would be more practical if
 spaces and special characters are allowed for longer phone numbers with specific area and country codes. For example: `12345678` is what can be accepted currently. We plan on allowing phone numbers like: `+65 1234 5678`.
-3. **Fix grammar for 1 restaurant listed:** Currently the string that is returned when 1 restaurant is found in any filter command is as follows: `1 restaurants listed!`, which is grammatically incorrect. We plan on 
+3. **Correct grammar for "1 restaurants listed" message:** Currently the string that is returned when 1 restaurant is found in any filter command is as follows: `1 restaurants listed!`, which is grammatically incorrect. We plan on 
 fixing this in the future to: `1 restaurant listed!`
 4. **Improve tags error message:** Currently tags are only allowed to be alphanumeric values, if the user were to search `tags $$$$`, the response of `0 restaurants listed!` is the output. However, a better implementation would have been 
 for the source code to first check if the keywords fits the current criteria for what is allowed as tags before finding. If the conditions were not met, a more appropriate response could have been displayed, one example 
