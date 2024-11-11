@@ -45,7 +45,12 @@ at the National University of Singapore. While optimised for use via a Command L
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com s/IFG r/friends r/owesMoney` : Adds a person named `John Doe` to the local database, with the given details.
+   * `add n/John Doe p/98765432 e/johnd@example.com r/MC` : Adds a person named `John Doe` to the local database, with these details:
+      * 98765432 as a phone number
+      * johnd@example.com as an email
+      * An emcee role
+      
+     Note that roles are added through a shortcut. Shortcuts can be found [here.](#using-shortcuts-coming-in-v20)
 
    * `delete 3` : Deletes the 3rd person shown in the current list of people.
 
@@ -87,8 +92,6 @@ Refer to the [Features](#features) below for details of each command.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-## Persons
-
 ### Viewing help : `help`
 
 Shows a message explaining how to use some of the commands. Also contains a link to this guide.
@@ -96,6 +99,8 @@ Shows a message explaining how to use some of the commands. Also contains a link
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+## Persons
 
 ### Adding a person: `add`
 
@@ -110,6 +115,8 @@ A person can have zero or more roles.
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/athlete`
 * `add n/Betsy Crowe p/98213132 e/betsycrowe@example.com r/volunteer`
+
+
 
 ### Listing all persons : `list`
 
