@@ -312,25 +312,25 @@ Examples:
 
 ### Updating the status of an Internship Application: `/accept`, `/pending`, `/reject`
 
-Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED.
+Use these commands to update the status of a specified internship application to `ACCEPTED`, `PENDING`, or `REJECTED`.
 
 Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
 
 * `/accept INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `ACCEPTED`.
 * `/pending INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `PENDING`.
 * `/reject INDEX`: Changes the status of the application at index `INDEX` in the displayed list to `REJECTED`.
-*  The `INDEX` refers to the position of the application in the current displayed list. The index is relative to the list shown on the screen after filtering or listing commands.
+*  The `INDEX` refers to the position of an application in the displayed list, relative to the current filtered or listed view.
 * `INDEX` **must be a positive integer** (e.g., 1, 2, 3, …).
-* `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than 5 applications in the displayed list).
+* `INDEX` **must be a valid number** for the displayed list length (e.g., `/reject 5` is invalid if there are fewer than five applications in the displayed list).
 
-**Important:** Commands like `/accept`, `/pending`, and `/reject` work on the displayed list, not the entire application database. For example, if you have 10 total applications, but after using `/filter ACCEPTED` only 5 applications are shown, then `/reject 5` will target the last item on this filtered list.
+**Important:** Commands like `/accept`, `/pending`, and `/reject` work on the displayed list, not the entire application database. For example, if you have ten total applications, but after using `/filter ACCEPTED` only five applications are shown, then `/reject 5` will target the last item on this filtered list.
 
 **Examples:**
-1. `/list` followed by `/accept 2`: Changes the status of the 2nd application in the full list to `ACCEPTED`.
-2. `/pending 3`: Changes the status of the 3rd application in the currently displayed list to `PENDING`.
-3. `/reject 1`: Changes the status of the 1st application in the currently displayed list to `REJECTED`.
-4. `/filter PENDING` followed by `/accept 1`: Updates the status of the 1st application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
-5. `/list` followed by `/accept 4` when there are only 3 internship applications returns an error message.
+1. `/list` followed by `/accept 2`: Changes the status of the second application in the displayed list to `ACCEPTED`.
+2. `/pending 3`: Changes the status of the third application in the currently displayed list to `PENDING`.
+3. `/reject 1`: Changes the status of the first application in the currently displayed list to `REJECTED`.
+4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
+5. `/list` followed by `/accept 4` when there are only three internship applications returns an error message.
 
 <p>These are the before and after images of the first example</p>
 <div style="display: flex;">
