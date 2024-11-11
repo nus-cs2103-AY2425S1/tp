@@ -247,7 +247,8 @@ The class diagram of a filter command is given to demonstrate the interactions a
 Team Size: 5
 
 1. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
-2. [Validation for Address: Address should be able to have "/n" or other prefixes]
+2. **Allow address to have "/n" or other prefixes:**
+    Currently, address validation does not allow certain characters, preventing users from adding addresses with newline characters ("/n") or special prefixes. Enhancing this to allow specific characters, like "/n" for multi-line addresses, would give users more flexibility to enter detailed or complex addresses.
 3. [expand to allow d/o in the name even though d/ is for date command. mention that right now the work around is writing d o instead of d/o]
 4. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
 5. [Create his own tags and delete tags]
