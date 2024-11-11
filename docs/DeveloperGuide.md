@@ -209,10 +209,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 The Date feature allows users to add, edit, and view appointment dates for each person in the address book, helping doctors maintain an organized schedule without conflicts.
 
 #### Feature Architecture
-1. **Parsing in DateCommandParser**: `DateCommandParser` handles the parsing of date-related commands, ensuring dates are in the correct format (`d/M/yyyy`) before passing them to `DateCommand`.
+1. **Parsing in DateCommandParser**: `DateCommandParser` handles the parsing of date-related commands, ensuring dates are in the correct format (`d/M/yyyy HHmm`) before passing them to `DateCommand`.
     - Benefits and Challenges similar to Add Feature
 
-2. **Date Validation**: `DateCommand` enforces date format requirements and ensures compliance (e.g., `d/M/yyyy` with no spaces).
+2. **Date Validation**: `DateCommand` enforces date format requirements and ensures compliance (e.g., `d/M/yyyy HHmm`).
     - **Benefit**: Provides users with immediate feedback on invalid formats, helping maintain data consistency.
     - **Challenge**: Requires thorough validation logic to prevent incorrect or improperly formatted dates from being added.
 
