@@ -203,7 +203,7 @@ The sequence diagram below models the interactions between the different compone
 
 #### Example Usage
 1. User inputs the command `view Alice Tan`.
-2. The system displays the details of "alice tan," including name, contact information, address, condition, and any scheduled appointments.
+2. The system displays the details of "alice tan," including name, phone number, email, address, condition, reminder note and any scheduled appointments.
 3. This information is shown in a pop-up or a designated UI section for easy access by the user.
 
 ### Reminder Note Feature
@@ -245,7 +245,7 @@ The sequence diagram below models the interactions between the different compone
 3. A `DeleteAppointmentCommand` object is created.
 4. The `DeleteAppointmentCommandParser` object returns the `DeleteAppointmentCommand` object.
 5. The `LogicManager` object calls the `execute` method of `DeleteAppointmentCommand`.
-6. The `execute` method then invokes the `deleteAppointment` method of its `Model` argument to delete the specified appointment.
+6. The `execute` method then invokes the `setPerson` method of its `Model` argument to delete the specified appointment.
 7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their appointments.
 8. The `execute` method returns a `CommandResult` which contains data indicating the completion of the `DeleteAppointmentCommand`.
 
@@ -287,7 +287,7 @@ for the execution of `appointment-list` command.
 
 #### Example Usage
 1. User inputs the command `appointment-list`.
-2. The system displays the number and list of all upcoming appointments," including notes of the appointments(if any)
+2. The system displays the number and list of all upcoming appointments, including notes of the appointments (if any).
 3. This information is shown in the status message.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -325,19 +325,19 @@ allowing flexibility to tailor the address book to specific needs.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                | I want to …​                                         | So that I can…​                                               |
-|----------|----------------------------------------|------------------------------------------------------|---------------------------------------------------------------|
-| `* * *`  | new user                               | see usage instructions                               | refer to instructions when I forget how to use the App        |
-| `* * *`  | physiotherapist                        | add new client contact information                   | retrieve client details when needed.                          |
-| `* * *`  | physiotherapist                        | delete outdated or irrelevant client information     | keep my database clean and relevant                           |
-| `* * *`  | physiotherapist                        | search for client contact information by name        | enables swift retrieval of specific client details            |
-| `* * *`  | physiotherapist                        | search for client contact information by number      | access the client’s details when name is not readily recalled |
-| `* * *`  | physiotherapist                        | view client information in a neatly displayed format | look through the client's details in depth                    |
-| `* * *`  | physiotherapist                        | schedule appointments for my clients                 | keep track of my daily sessions and avoid double bookings     |
-| `* *`    | physiotherapist                        | record payment for client appointments               | easily track and manage payment information                   |
-| `* *`    | physiotherapist                        | edit client information                              | make changes to erroneous or outdated client details          |
-| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments  | ensure that no client is missed                               |
-| `* *`    | physiotherapist with many appointments | see upcoming appointments listed at the top          | prominently see what I need to do in order to manage my schedule |
+| Priority | As a …​                                | I want to …​                              | So that I can…​                                                  |
+|----------|----------------------------------------|-------------------------------------------|------------------------------------------------------------------|
+| `* * *`  | new user                               | see usage instructions                    | refer to instructions when I forget how to use the App           |
+| `* * *`  | physiotherapist                        | add new client contact information        | keep track of a record of client details                         |
+| `* * *`  | physiotherapist                        | delete outdated or irrelevant client information | keep my database clean and relevant                              |
+| `* * *`  | physiotherapist                        | search for client contact information by name | quickly retrieve specific client details                         |
+| `* * *`  | physiotherapist                        | search for client contact information by number | access the client’s details when name is not readily recalled    |
+| `* * *`  | physiotherapist                        | view client information in a neatly displayed format | look through the client's details in depth                       |
+| `* * *`  | physiotherapist                        | schedule appointments for my clients      | keep track of my daily sessions and avoid double bookings        |
+| `* *`    | physiotherapist                        | record payment details for client appointments | easily track and manage payment information                      |
+| `* *`    | physiotherapist                        | edit client information                   | make changes to erroneous or outdated client details             |
+| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments | ensure that no appointments are missed                           |
+| `* *`    | physiotherapist with many appointments | see upcoming appointments listed          | prominently see what I need to do in order to manage my schedule |
 
 
 
@@ -639,7 +639,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Client do not exist.
+* 1a. Client does not exist.
 
     * 1a1. PhysioPal requests for correct data.
     * 1a2. Physiotherapist enters new data.
@@ -740,7 +740,7 @@ and Personal Data Protection Act (PDPA), so that I manage client data in a compl
 * **MSS**: Main Success Scenario.
 * **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
 * **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the physiotherapist keep track of when they need to follow up with the client.
-* **Tag**: A label to indicate the treatment type of the client.
+* **Tag**: A label to indicate the client's condition.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1004,10 +1004,10 @@ PhysioPal currently does not allow duplicate names, which does not reflect real-
 1. Modify the `add` command to support adding multiple clients with the same name.
    1. Exact duplicate entries (where all fields are identical) will still be disallowed.
 2. Update commands to accept both `INDEX` and `NAME` formats (i.e. `COMMAND INDEX [parameters]` or `COMMAND NAME [parameters]`).
-   1. <b>Index format</b>: Each client is uniquely identified by their index.
-   2. <b>Name format</b>:
-      1. <b>Single Match</b>: The command executes as usual.
-      2. <b>Multiple Matches</b>:
+   <br> <b>Index format</b>: Each client is uniquely identified by their index.
+   <br> <b>Name format</b>:
+      * <b>Single Match</b>: The command executes as usual.
+      * <b>Multiple Matches</b>:
          - A list of all clients with the same name is displayed.
          - Users can select the desired client by modifying the command input to include the appropriate index number.
 
@@ -1085,11 +1085,27 @@ Currently, if a user calls the `edit` command but does not change any informatio
 
 ### 9. Enable Information Wrapping in Client Window
 **Current Feature Flaw**  
+
 PhysioPal currently truncates long client details (address, email, name, and medical condition) in the client window, limiting readability.
 
 **Proposed Implementation**
+
 1. Modify `ClientWindow` to enable wrapping for long fields, ensuring full details are visible across multiple lines.
 2. Use `Text` or `TextArea` components with word-wrapping for address, email, and medical condition fields. The name field will also wrap if it exceeds the header width.
+
+### 10. Add 'Appointment Date In The Past' Prompt Message
+
+**Current Feature Flaw**
+
+PhysioPal currently does not have an error message or prompt when the user tries to use `appointment-list` with a date and time
+filter that was in the past (i.e. after the current local system time) and displays `Listed 0 upcoming appointments.`. <br>
+Hence the user may be confused as to why no appointments are returned on a past appointment date.
+
+**Proposed Implementation**
+
+1. Modify `appointment-list` command to detect that given date and time filter is in the past.
+2. Other than displaying `Listed 0 upcoming appointments.`, display in a new line to inform the user that
+`Date and Time you have given are in the past. I am designed to display only upcoming appointments.`.
 
 ## **Appendix: Effort**
 
