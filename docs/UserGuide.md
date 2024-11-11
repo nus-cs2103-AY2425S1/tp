@@ -235,11 +235,24 @@ Reads the specified file to import from and adds the persons to ClubConnect.
 
 Format: `import FILENAME`
 
+* The file must be located in the data folder of the application directory.
+* The specified file name must exactly match the name of the file to import from.
+* The file name must end with `.csv`.
+
+<box type="tip" seamless>
+
+**Tip:** The import command is designed to work specifically with files exported by the app. If you export data using the export command, you can re-import it as needed using the same file.
+</box>
+
+<box type="warning" seamless>
+
+**Caution:**
+Avoid editing or modifying the exported file. Any changes to its structure, format, or data may lead to errors during import, as the app expects the file to retain the exact format of the exported data.
+</box>
+
 Examples:
-* `import contacts.csv` adds persons stored in `contacts.csv` to the ClubConnect.
-* The file has to be located in the data folder.
-* The specified file name has to exactly match the name of the file to import from.
-* Name of file to import contacts from must end with `.csv`.
+* `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
