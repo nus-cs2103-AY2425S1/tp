@@ -192,7 +192,7 @@ Format:
 OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`
 
 * Edits the patient at the specified `INDEX` or `NRIC`.
-* The **index** and **NRIC** refers to the index number and NRIC shown in the displayed patient list respectively.
+* The **index** and **NRIC** refer to the index number and NRIC shown in the displayed patient list respectively.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing **tags**, the existing tags of the patient will be removed (i.e adding of tags is not cumulative).
