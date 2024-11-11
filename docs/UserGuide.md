@@ -105,12 +105,11 @@ Adds a pet owner to PawPatrol.
 
 <div markdown="block" class="alert alert-primary">
 
-**:exclamation: More on NRIC fields:**<br>
-<ul>
-<li>Due to PDPA regulations, only the last 3 digits and last letter of the NRIC will be shown in the list view.
-<ul><li>The first 4 numbers of the NRIC will be replaced with a `X` to protect the privacy of the owner.</li></ul>
-</ul>
+**:exclamation: More on IC number fields:**<br>
+Due to [PDPA regulations](https://www.pdpc.gov.sg/-/media/Files/PDPC/PDF-Files/Advisory-Guidelines/Advisory-Guidelines-for-NRIC-Numbers---310818.pdf), only the last 3 digits and last letter of the IC number will be shown in the list view. 
+The first 4 numbers of the IC number will be replaced with a `X` to protect the privacy of the owner.
 </div>
+
 
 > 2 owners may not share the same IC_NUMBER and will be deemed as duplicate
 
