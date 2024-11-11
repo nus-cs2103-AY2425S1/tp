@@ -38,6 +38,7 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
     private static final String VALID_DATE_STRING = "1970-01-01";
     private static final String INVALID_DATE_STRING = "01-01-1970";
+    private static final String ANOTHER_INVALID_DATE_STRING = "1st January 1970";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -205,5 +206,11 @@ public class ParserUtilTest {
     @Test
     public void parseDate_invalidDateFormat_throwsDateTimeException() throws ParseException {
         assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_STRING));
+    }
+
+    @Test
+    public void parseBirthday_invalidDateFormat_throwsDateTimeException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_DATE_STRING));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(ANOTHER_INVALID_DATE_STRING));
     }
 }
