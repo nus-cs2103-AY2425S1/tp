@@ -210,11 +210,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public boolean eventHasOverlapWithList(Event event, List<Event> eventList) {
-        return this.eventManager.eventHasOverlapWithList(event, eventList);
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
