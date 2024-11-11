@@ -253,6 +253,15 @@ public class FilterCommandParserTest {
 
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
+    @Test
+    public void parse_emptyAllergy_throwsParseException() {
+        FilterCommandParser parser = new FilterCommandParser();
+
+        // Simulate user input with multiple emails
+        String userInput = " m/";
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
 
     @Test
     public void parse_multipleAddresses_throwsParseException() {
@@ -305,6 +314,7 @@ public class FilterCommandParserTest {
         String invalidAllergy3 = "Dust# Mold";
         String invalidAllergy4 = "Eggs*";
         String invalidAllergy5 = "Banana# Peels";
+        String invalidAllergy6 = "";
 
         Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy1),
                 "Error parsing allergy: " + invalidAllergy1);
@@ -316,6 +326,8 @@ public class FilterCommandParserTest {
                 "Error parsing allergy: " + invalidAllergy4);
         Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy5),
                 "Error parsing allergy: " + invalidAllergy5);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy5),
+              "Error parsing allergy: " + invalidAllergy5);
     }
 
     @Test

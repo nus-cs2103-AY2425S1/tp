@@ -78,10 +78,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         }
-
-        List<Allergy> allergies = argMultimap.getAllValues(PREFIX_ALLERGY).stream()
-                .map(this::parseAllergyWithHandling)
-                .collect(Collectors.toList());
+        List<Allergy> allergies;
+        try {
+            allergies = argMultimap.getAllValues(PREFIX_ALLERGY).stream()
+                  .map(this::parseAllergyWithHandling)
+                  .collect(Collectors.toList());
+        } catch (RuntimeException e) {
+            throw new ParseException(e.getMessage());
+        }
 
         return new FilterCommand(new PersonHasFeaturePredicate(tag, phone, email, address, allergies));
     }
@@ -93,7 +97,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         try {
             return ParserUtil.parseAllergy(allergy);
         } catch (ParseException e) {
-            throw new RuntimeException("Error parsing allergy: " + allergy, e);
+            if (allergy.strip().isEmpty()) {
+                throw new RuntimeException("Error parsing allergy: allergy cannot be empty");
+            }
+            throw new RuntimeException("Allergies should be a non-empty alphanumeric string, and may include \"\n"
+                  + "commas, spaces, hyphens, or periods. \n Error parsing allergy: " + allergy, e);
         }
     }
 

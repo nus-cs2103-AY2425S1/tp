@@ -23,11 +23,12 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the name, phone, or email.\n"
+            + ": Deletes the person identified by their name and/or phone and/or email.\n"
+            + "At least one identifier must be used."
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL  (at least one) \n"
+            + "[" + PREFIX_NAME + "NAME ]"
+            + "[" + PREFIX_PHONE + " PHONE] "
+            + "[" + PREFIX_EMAIL + " EMAIL] "
             + "Example: " + COMMAND_WORD + " n/John Doe";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
