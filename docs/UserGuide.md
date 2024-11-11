@@ -169,9 +169,9 @@ First-time users are strongly encouraged to read the Getting Started section bef
 
 4. Go to your command terminal by following the instructions below, depending on the OS that you use. 
 
-* Windows: Look at how to open a terminal [here.](https://www.lifewire.com/how-to-open-command-prompt-2618089)
-* MacOS: Look at how to open a terminal [here.](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.)
-* Linux: Look at how to open a terminal [here.](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)
+   * Windows: Look at how to open a terminal [here.](https://www.lifewire.com/how-to-open-command-prompt-2618089)
+   * MacOS: Look at how to open a terminal [here.](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.)
+   * Linux: Look at how to open a terminal [here.](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)
 
 5. Navigate to the directory that holds the `TrackMate.jar` application by using the [cd command](https://www.ibm.com/docs/en/aix/7.1?topic=directories-changing-another-directory-cd-command).
 
@@ -207,29 +207,29 @@ First-time users are strongly encouraged to read the Getting Started section bef
 
 The designated names for each component of the User Interface will be used consistently throughout the User Guide to ensure clarity and minimize confusion. Below is a detailed description of each component.
 
-* **Menu Box:** Positioned at the top of the interface, the menu bar offers access to a variety of functions and features within TrackMate.
+* **Menu Box:** The menu bar, located at the top of the interface, provides access to various functions and features within TrackMate.
 
 * **Logo:** This represents the logo of our application, TrackMate.
 
-* **Command Box:** This designated area is where users can input commands for TrackMate to execute.
+* **Command Box:** This section allows users to enter commands for TrackMate to execute.
 
-* **Result Box:** Prominently displayed on the interface, this box shows the results of executed commands.
+* **Result Box:**  The box shows the results of executed commands at the interface.
 
 * **Student List Panel:** This panel visually represents the roster of students stored within TrackMate.
 
-* **Student Panel Card:** Within the Student List Panel, each student is depicted in a concise overview displayed in card format.
+* **Student Panel Card:** Within the Student List Panel, each student is depicted with their details displayed in card format.
 
-* **Student Card:** To view detailed information about an individual student, users can refer to the Student Card, which provides comprehensive details stored in the system.
+* **Student Card:** Users can view detailed information about a student by referring to the Student Card, which displays comprehensive information stored in the system.
 
 #### 3.2.2 Additional UI Components:
 
 ![AdditionalUIComponents.png](images/AdditionalUIComponents.png)
 
-* **Index:** This component indicates the position of each student in the Student List Panel.
+* **Index:** This component displays the position of each student in the Student List Panel.
 
-* **Student Name:**  The Student Name appears in both the Student Card and Student Panel Card. It represents the name of the Student.
+* **Student Name:** The Student Name is displayed in both the Student Card and the Student Panel Card, representing the student’s name.
 
-* **Student Id:** Every student will be assigned to a student id before being added to a system. Take note that the student id is unique and is an easy way to identify a student.
+* **Student Id:** Each student is assigned a unique student ID before being added to the system. This ID serves as a simple way to identify a student.
 
 * **Tutorial Class allocated to student:** This component appears just below the student id. The component displays the tutorial class that the student is allocated to.
   * Tutorial class are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
