@@ -918,7 +918,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
 
 
 1. **Allow negative HOURS_OWED for `owe`:** Currently, UGTeach only allow **positive multiples of 0.5** for the hours specified in the `owe command`. Hence, if users have used the `owe command` on mistake,
-   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's owed amount field using the `edit command`.
+   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's `owedAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was owed by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `owe command`. If users were to make a mistake in the `owe command`, he can enter the same `owe command`, but with the negative hours specified.
    e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount by the student by 3 hours instead.
@@ -937,10 +937,10 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want. <br>
 
 1. **Allow negative HOURS_PAID and negative AMOUNT for the new `pay` command `pay hr/HOURS_PAID | amount/AMOUNT`:** Currently, UGTeach only allows **positive multiples of 0.5** for the hours specified in the `pay command`. Hence, if users have used the `pay command` on mistake,
-   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's paid amount field using the `edit command`.
+   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's `paidAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was paid by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `pay` command. If users were to make a mistake in the `pay command`, he can enter the same `pay command`, but with the negative hours specified.
-   e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount by the student by 3 hours instead.
+   e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount by the student by 3 hours * `rate` field of that student instead.
    He can first type `pay 1 hr/-2` to "undo" the previous `pay command`, and type `pay 1 hr/3` this time for the correct update.
    Special cases that we handle:
     * `hr/0` will still not be accepted.
