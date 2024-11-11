@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.link.Link;
 
 /**
  * Represents the result of a command execution.
@@ -16,6 +17,9 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+    /** how the application changes the GUI */
+    private ViewToggler viewToggler;
+
     /** The application should exit. */
     private final boolean exit;
 
@@ -26,6 +30,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.viewToggler = new ViewToggler(feedbackToUser);
     }
 
     /**
@@ -33,6 +38,10 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
+        this(feedbackToUser, false, false);
+    }
+
+    public CommandResult(String feedbackToUser, Link link) {
         this(feedbackToUser, false, false);
     }
 
@@ -46,6 +55,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public String getCommandType() {
+        return viewToggler.getCommandType();
     }
 
     @Override

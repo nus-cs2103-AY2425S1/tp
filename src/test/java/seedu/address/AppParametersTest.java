@@ -21,8 +21,8 @@ public class AppParametersTest {
 
     @Test
     public void parse_validConfigPath_success() {
-        parametersStub.namedParameters.put("config", "config.json");
-        expected.setConfigPath(Paths.get("config.json"));
+        parametersStub.namedParameters.put("config", "data/config.json");
+        expected.setConfigPath(Paths.get("data/config.json"));
         assertEquals(expected, AppParameters.parse(parametersStub));
     }
 

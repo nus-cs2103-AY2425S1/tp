@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" spacing="10">
+    <!-- Label for Owners -->
+    <Label text="Owners" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-opacity: 1;"/>
+    <!-- Owner List -->
+    <ListView fx:id="ownerListView" VBox.vgrow="ALWAYS"
+              style="-fx-border-color: red; -fx-border-width: 2; -fx-background-color: lightgray;" />
+</VBox>

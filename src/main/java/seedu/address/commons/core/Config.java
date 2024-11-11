@@ -12,11 +12,11 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Config {
 
-    public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
+    public static final Path DEFAULT_CONFIG_FILE = Paths.get("data/config.json");
 
     // Config values customizable through config file
     private Level logLevel = Level.INFO;
-    private Path userPrefsFilePath = Paths.get("preferences.json");
+    private Path userPrefsFilePath = Paths.get("data/preferences.json");
 
     public Level getLogLevel() {
         return logLevel;

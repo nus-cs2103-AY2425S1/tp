@@ -36,6 +36,15 @@ public class CommandResultTest {
     }
 
     @Test
+    public void compareLists() {
+
+        CommandResult commandResult = new CommandResult("feedback");
+
+        assertTrue(commandResult.equals(new CommandResult("feedback")));
+
+    }
+
+    @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");
 

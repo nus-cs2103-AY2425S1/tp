@@ -39,6 +39,30 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code text}.
+     *   Ignores case, and the text may appear anywhere in the sentence.
+     *   <br>examples:<pre>
+     *      containsTextIgnoreCase("ABc def", "abc") == true
+     *      containsTextIgnoreCase("ABc def", "DEF") == true
+     *      containsTextIgnoreCase("ABc def", "AB") == true
+     *      containsTextIgnoreCase("ABc def", "ABc def") == true
+     *      containsTextIgnoreCase("ABc def", "ABc defg") == false
+     *      </pre>
+     * @param sentence
+     * @param text
+     * @return
+     */
+    public static boolean containsTextIgnoreCase(String sentence, String text) {
+        requireNonNull(sentence);
+        requireNonNull(text);
+
+        String preppedText = text.trim();
+        checkArgument(!preppedText.isEmpty(), "Text parameter cannot be empty");
+
+        return sentence.toLowerCase().contains(preppedText.toLowerCase());
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
