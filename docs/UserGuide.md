@@ -347,7 +347,7 @@ Opens a window with instructions on how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format: `help`<br>
 Keybind: F1 key
 
 ### Exiting the program : `exit`
