@@ -330,14 +330,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The given name is invalid (i.e., name is empty or does not start with an alphabet).
     * 1a1. App shows an error message to tell the user that the given name is invalid.  
       Use case ends.
-* 1b. The given phone number is invalid (i.e., phone number is not an 8-digit number and/or does not start with 6, 8, or 9).
+* 1b. The given phone number is invalid (i.e., Phone numbers should only contain numbers, and it should be at least 3 digits long).
     * 1b1. App shows an error message to tell the user that the given phone number is invalid.  
       Use case ends.
-* 1c. The given email is invalid (i.e., email does not follow normal email address format).
-    * 1c1. App shows an error message to tell the user that the given email is invalid.  
-      Use case ends.
-* 1d. The given contact is a duplicate of another contact in the list.
-    * 1d1. App shows an error message to tell the user that the contact already exists in the list.  
+* 1c. The given contact is a duplicate of another contact in the list.
+    * 1c1. App shows an error message to tell the user that the contact already exists in the list.  
       Use case ends.
 
 ---
@@ -646,6 +643,37 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Deleting multiple persons
+1. Deleting multiple valid contacts by indices.
+
+   1. Test case: mass_delete 1 3 5 
+      Expected: Contacts at indices 1, 3, and 5 are deleted from the address book. A success message is shown indicating that contacts with these indices have been successfully deleted.
+
+1. Deleting contacts with a mix of valid and invalid indices.
+
+   1. Test case: mass_delete 1 10 2 
+      Expected: Contacts at indices 1 and 2 are deleted. Index 10 is invalid (assuming the list has fewer than 10 contacts). A success message is shown, indicating deletion of valid indices, followed by a message listing the invalid input 10.
+
+1. Deleting contacts with all invalid indices.
+
+   1. Test case: mass_delete 10 20 30 
+      Expected: No contacts are deleted. An error message is shown indicating that no valid contact indices were provided for deletion.
+
+1. Deleting contacts with non-integer inputs.
+
+   1. Test case: mass_delete 1 two 3 
+      Expected: Contacts at indices 1 and 3 are deleted. The input two is invalid. A success message is shown for valid deletions, followed by a message listing the invalid input two.
+
+1. Deleting contacts with duplicate indices.
+
+   1. Test case: mass_delete 2 2 4 
+      Expected: Contacts at indices 2 and 4 are deleted. A success message is shown indicating successful deletion of contacts at these indices. Duplicate indices do not affect the operation beyond the first valid occurrence.
+
+1. Deleting contacts with no indices provided.
+
+   1. Test case: mass_delete 
+      Expected: No contacts are deleted. An error message is shown indicating that no valid contact indices were provided for deletion.
+
 ### Adding an event
 
 1. Adding a new unique event.
@@ -675,6 +703,43 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `add_event n/Meeting d/Duplicate Meeting f/2024-01-01 t/2024-01-01`  
       Expected: No event is added. Error details (Duplicate Event) shown in the status message.
+
+### Editing an event
+
+1. Editing an existing event.
+
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: The event at index 1 is updated with the new name Updated Meeting, description Updated description, start date 2024-10-02, and end date 2024-10-11. Details of the edited event are shown in the status message. 
+   
+   1. Test case: edit_event 1 n/ d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Name) shown in the status message.
+
+   1. Test case: edit_event 1 d/ f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Description) shown in the status message.
+
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-1002 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Date Format) shown in the status message.
+
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-11 t/2024-10-02 
+      Expected: No changes are made. Error details (End date cannot be earlier than start date) shown in the status message.
+
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-02-30 
+   Expected: No changes are made. Error details (Invalid Date Format) shown in the status message.
+
+1. Editing an event with an invalid index.
+
+   1. Test case: edit_event 10 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Event Index) shown in the status message.
+
+1. Editing an event without specifying any changes. 
+
+   1. Test case: edit_event 1 
+      Expected: No changes are made. Error details (No changes specified for the event) shown in the status message.
+
+1. Editing an event to have the same name as another existing event. 
+
+   1. Test case: edit_event 1 n/Existing Event Name d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Duplicate Event) shown in the status message.
 
 ### Unassigning an event from a person
 
