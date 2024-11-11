@@ -642,7 +642,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 3. User removes unwanted tags.
 
-<<<<<<< HEAD
 4. PROperty provides real-time feedback to the user.
    
    Use case ends.
@@ -859,10 +858,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 3. User deselects or removes unwanted tags.
 
-4. PROperty updates the contact's tag list.
-=======
 4. PROperty updates the client's tag list.
->>>>>>> ccbf707a70b8f8a12fe706416e99b86fe7560615
 
 5. PROperty confirms that the tags have been updated.
    
@@ -918,7 +914,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. User types in invalid index for client.
 
-    - 1a1. PROperty informs user of invalid index and .
+    - 1a1. PROperty informs user of invalid index.
 
       Use case ends.
 
