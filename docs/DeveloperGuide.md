@@ -79,6 +79,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -96,6 +97,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Customer` and `Order` objects residing in the `Model`.
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -129,6 +131,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCustomerCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCustomerCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddOrderCommandParser`, `DeleteCustomerCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14a-2/tp/blob/master/src/main/java/seedu/sellsavvy/model/Model.java)
@@ -144,6 +147,7 @@ The `Model` component,
   * Each `Customer` stores the currently 'selected' `Order` objects (e.g., results of a filter query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Order>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+<div style="page-break-after: always;"></div>
 
 <box type="info" seamless>
 
