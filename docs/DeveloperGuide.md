@@ -529,6 +529,68 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: Edit a Student**
+
+**MSS**
+
+1. Users requests to list students.
+2. T_Assistant shows a list of students.
+3. User requests to edit a Student's information from the list.
+4. T_Assistant updates the Student's information as per user's input.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Student does not exist.
+
+  - 3a1. T_Assistant shows an error message.
+  
+    Use case resumes at step 2.
+  
+- 3b. The input Student parameters to edit are invalid.
+  
+  - 3b1. T_Assistant shows an error message.
+  
+    Use case resumes at step 2.
+
+- 3c. No changes are made to the Student’s information.
+  
+  - 3c1.  T_Assistant shows an error message.
+  
+    Use case resumes at step 2.
+
+**Use case: Find Student**
+
+**MSS**
+
+1. User inputs a command to find students with specific keywords.
+
+2. T_Assistant processes the input and searches for students matching the keywords.
+
+3. T_Assistant displays a list of students who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+  - 1a1. T_Assistant shows an error message indicating the correct format.
+    
+    Use case ends.
+
+- 3a. No Student match the search criteria.
+
+  - 3a1. T_Assistant shows an error message.
+  
+    Use case ends.
+
+
 **Use case: Add a Group**
 
 **MSS**
@@ -586,6 +648,40 @@ Use case ends.
 - 3a. The Group parameters are invalid.
 
     - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Edit a Group**
+
+**MSS**
+1. Users requests to list groups.
+2. T_Assistant shows a list of groups.
+3. User requests to edit a Group's information from the list.
+4. T_Assistant updates the Group's information as per user's input.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Group does not exist.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The input Group parameters to edit are invalid.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3c. No changes are made to the Group’s information.
+
+    - 3c1.  T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -699,6 +795,32 @@ Use case ends.
 
       Use case ends.
 
+**Use case: Find Group**
+
+**MSS**
+
+1. User inputs a command to find groups with specific keywords.
+
+2. T_Assistant processes the input and searches for groups matching the keywords.
+
+3. T_Assistant displays a list of groups who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+    - 1a1. T_Assistant shows an error message indicating the correct format.
+
+      Use case ends.
+
+- 3a. No Group match the search criteria.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case ends.
+
 **Use case: List all Tasks**
 
 **MSS**
@@ -753,6 +875,100 @@ Use case ends.
 - 1a. The Group/Task parameters are invalid.
 
     - 1a1. T_Assistant shows an error message.
+
+      Use case ends.
+
+**Use case: Edit a Task for all Groups having the task**
+
+**MSS**
+1. Users requests to list tasks.
+2. T_Assistant shows a list of tasks.
+3. User requests to edit a Task's information from the list.
+4. T_Assistant updates the Task's information as per user's input.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Student does not exist.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The input Task parameters to edit are invalid.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3c. No changes are made to the Task’s information.
+
+    - 3c1.  T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Edit a Task for a Group**
+
+**MSS**
+1. Users requests to list a group's tasks.
+2. T_Assistant shows a list of tasks.
+3. User requests to edit a Task's information from the list.
+4. T_Assistant updates the Task's information as per user's input.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The list is empty.
+
+  Use case ends.
+
+- 3a. The selected Task does not exist.
+
+    - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The input Task parameters to edit are invalid.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3c. No changes are made to the Task’s information.
+
+    - 3c1.  T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Find Task**
+
+**MSS**
+
+1. User inputs a command to find tasks with specific keywords.
+
+2. T_Assistant processes the input and searches for tasks matching the keywords.
+
+3. T_Assistant displays a list of tasks who match the search criteria.
+
+Use case ends.
+
+**Extensions**
+
+- 1a. The input format is incorrect or missing keywords.
+
+    - 1a1. T_Assistant shows an error message indicating the correct format.
+
+      Use case ends.
+
+- 3a. No Task match the search criteria.
+
+    - 3a1. T_Assistant shows an error message.
 
       Use case ends.
 
