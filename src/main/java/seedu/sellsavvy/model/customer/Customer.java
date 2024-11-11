@@ -101,7 +101,7 @@ public class Customer {
 
     /**
      * Returns true if any of the tags is similar to other tags of the same customer.
-     * Two tag names are considered similar if they are same without considering space and casing.
+     * Two tag names are considered similar if they are the same without considering space and casing.
      */
     public boolean hasSimilarTags() {
         return tags.stream().anyMatch(
