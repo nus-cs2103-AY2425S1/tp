@@ -132,8 +132,7 @@ Displays  an alphabetical list of all available commands for quick and easy refe
 **Format:** `help`
 
 **Example**
-- `help` displays the help page
----
+- `help` displays the help page 
 
 ### Adding a member:
 
@@ -155,7 +154,7 @@ Adds a member to HallPointer. A member must have a name, room assignment, and Te
 
 **Tips**
 - A member can have any number of tags (including 0).
-- If you have multiple members with the same name, consider adding a distinguishing initial or number (e.g. "Daniel L", "Daniel O", "Daniel 2").
+- If you have multiple members with the same name, consider adding a distinguishing initial or number (e.g. "Daniel L", "Daniel 2").
 
 </box>
 
