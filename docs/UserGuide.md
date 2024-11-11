@@ -13,7 +13,7 @@
 </pic>
 </center>
 
-KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who works at the National University of Singapore, School of Computing.
+KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who works at the National University of Singapore, School of Computing.**
 
 KonTActs streamlines contact management, helping you keep track of your students contact, attendance and assignment information more effectively compared to traditional GUI apps. 
 
@@ -707,7 +707,7 @@ Imports contacts based on CSV file
 * The CSV file must contain information about at least 1 person
 * The data fields for Name, Email, Telegram, Github is compulsory
   * Do note that each of these field have their own restrictions 
-  [(refer above)](#i-classfa-solid-fa-user-plusi-adding-a-person-add)
+  [(defined above)](#adding-a-person-add)
 * Tags format: enclose tag in square brackets ("[tag]"). If a person has multiple tags, separate the tags within 
 the same entry with commas. (e.g."[tag1],[tag2],[tag3].....")
   * Duplicate tags will be ignored (e.g."[Group1],[Group1]" will be treated as "[Group1]")
