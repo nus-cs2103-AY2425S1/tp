@@ -805,7 +805,7 @@ This section outlines the planned future enhancements for the data_coNdUctorS ap
 
 ### Case Insensitivity for All Contact Fields
 
- 1. Some Contact fields are case-sensitive so errors arise during duplicate contacts being loaded into the 
+ 1. Some Contact fields are case-sensitive so errors arise during duplicate contacts being loaded into the address book
 
    1. Goal: Reduce accidental duplicates to enhance the user experience when interacting with the contact list.
 
