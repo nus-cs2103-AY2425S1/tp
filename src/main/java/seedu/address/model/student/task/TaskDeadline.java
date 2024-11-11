@@ -12,7 +12,8 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskDeadline(String)}
  */
 public class TaskDeadline {
-    public static final String MESSAGE_CONSTRAINTS = "Task deadline should be in the format YYYY-MM-DD";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Task deadline should be in the format YYYY-MM-DD or date provided is invalid.";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public final LocalDate taskDeadline;
 

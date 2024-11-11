@@ -1026,6 +1026,8 @@ testers are expected to do more *exploratory* testing.
 
 Given below are the planned enhancements for future versions of EduManage.
 
+**Team size**: 5.
+
 ### 7.1 Update subject and lesson time cumulatively
 
 Currently, both subjects and lesson times are not updated cumulatively; using the `update` command replaces all previous
