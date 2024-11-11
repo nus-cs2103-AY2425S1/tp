@@ -174,8 +174,8 @@ A GUI similar to the below should appear in a few seconds. It is encouraged to e
     * `/exit` : Exits the app.
 
 
-Refer to the [Features](#features) below for more details of each command. 
-Check [Troubleshooting](#troubleshooting) if you are facing problems for setting up.
+Refer to the [Features](#features) below for more details of each command. Check [Troubleshooting](#troubleshooting) if you are facing problems for setting up.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
