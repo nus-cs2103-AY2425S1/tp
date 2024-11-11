@@ -80,6 +80,8 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 Feel free to use this command summary table and navigate to the features that interests you by clicking on the action words 😁
@@ -115,6 +117,8 @@ All delete and clear operations (except `tag-del`) in KnottyPlanners will be fol
 
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Parameter Constraints
 The table below provides a brief explanation of each parameter encountered in the command summary above. It also details the constraints of each parameter used in a command.
@@ -177,6 +181,7 @@ Each parameter is followed by examples that explains if the input is considered 
 | `VENUE`        | `v/`   | Location of the wedding.                          | Case-sensitive   | - All values are allowed. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                                                    | :+1: `Fullerton Hotel, Ballroom 1, #01-05`                                                                                                            |
 | `DATE`         | `d/`   | Date of the wedding.                              | NA               | - Should be in the format `DD/MM/YYY`. <br> - Only numbers and `/` are allowed. <br> - Should not be blank. <br> - The range of dates allowed are `01/01/1900` to `31/12/2099`                                                                                                                                                                                                                           | :+1: `12/12/2025` <br> :x: `12th June 2021` <br> :x: `2025-09-03` <br> :x: `31/12/1899` <br> :x: `01/01/2100`                                         |
 
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -215,6 +220,7 @@ Format: `help`
 
 ![help message](images/helpmsg.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a Contact: `add`
 
@@ -240,6 +246,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, Blk 123, #01-04 j/Photographer`
 * `add n/Betsy Crowe p/90341259 e/betsycrowe@example.com a/Newgate Center j/Caterer t/Stacy & Sam` P.S. The wedding `Stacy & Sam` must be created first using `add-wed` command!
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a Contact: `del` followed by `y` or `n`
 
@@ -285,6 +293,8 @@ Examples:
 * `del n/John Doe` followed by `y` deletes the person named `John Doe` from the address book.
 * `del n/John Doe` followed by `n` cancels the delete operation.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a Contact: `edit`
 
 You can edit an existing contact's details (name, phone number, email, address and job).
@@ -329,6 +339,8 @@ Examples:
 *  `edit n/James new/Clark e/clarknewemail@example.com j/Florist` Edits the name, email and job to be
    `James`, `clarknewemail@example.com` and `Florist` respectively.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing All Contacts: `list`
 
 You can now view all contacts in the order they were added in!
@@ -336,6 +348,8 @@ You can now view all contacts in the order they were added in!
 Format: `list`
 
 ![list message](images/listMsg.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a Wedding: `add-wed` / `aw`
 
@@ -359,6 +373,8 @@ Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DAT
 Examples:
 * `add-wed w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
 * `aw w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a Wedding: `del-wed` / `dw`
 
@@ -407,6 +423,8 @@ Examples:
 * `del-wed w/John Loh & Jean Tan` followed by `y` deletes the wedding named `John Loh & Jean Tan` from the address book.
 * `dw w/Jonus Ho & Izzat Syazani` followed by `n` cancels the delete operation.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing All Weddings: `list-wed` / `lw`
 
 You can now view all weddings in the order they were added in!
@@ -414,6 +432,8 @@ You can now view all weddings in the order they were added in!
 Format: `list-wed` / `lw`
 
 ![list wedding message](images/listWedding.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Tagging a Contact
 
@@ -450,6 +470,8 @@ Examples:
 *  `tag-add n/John Doe t/Adam and Steve` Adds the tag `Adam and Steve` to John Doe.
 *  `ta n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Adds the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` to Betsy Crower.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting Tag(s) from a Contact: `tag-del` / `td`
 Remove your contacts from a particular wedding!
 
@@ -482,6 +504,8 @@ Format: `tag-del n/NAME t/TAG [t/TAG]...` / `td n/NAME t/TAG [t/TAG]...`
 Examples:
 *  `tag-del n/John Doe t/Adam and Steve` Removes the tag `Adam and Steve` from John Doe.
 *  `td n/Betsy Crower t/Lacy & Bacy t/Peter & Mary t/Jonny & Bonny` Removes the tags `Lacy & Bacy`, `Peter & Mary`, and `Jonny & Bonny` from Betsy Crower.
+
+<div style="page-break-after: always;"></div>
 
 ### Filtering Contacts by Name and Job: `filter` / `fil`
 
@@ -520,6 +544,8 @@ Examples:
 * `fil n/jonus n/harry j/photographer` returns `Jonus`, `Harry` and all photographers that are in your contacts.
 * `fil j/host j/caterer` returns all hosts and caterers that are in your contacts.
 
+<div style="page-break-after: always;"></div>
+
 ### View Wedding: `view-wed` / `vw`
 
 You can view a list of all contacts tagged to the specified wedding.
@@ -546,6 +572,8 @@ Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 Examples:
 * `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding.
 * `vw Ahmad & Esther` returns `Halim` who is the best man for Ahmad and `Jia Zhun` who is a photographer for that wedding as well.
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing All Entries in Address Book: `clear-ab` / `cab`
 
