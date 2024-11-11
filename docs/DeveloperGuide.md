@@ -512,10 +512,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
+
+[//]: # (The non-functional requirements below were inspired by https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html)
+
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-[//]: # (The non-functional requirement below inspired by https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html)
-
 1. The user interface should work appear seamlessly for screens with standard resolutions (1920x1080) and higher.
 1. The user interface should be easy to navigate and intuitive, with clear labels, and large enough texts. 
 1. The application should provide clear help sections for users, explaining how to use its features.
@@ -801,7 +801,7 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
-1. Using owe command from a filtered list.
+2. Using owe command from a filtered list.
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
@@ -956,7 +956,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
 
 
     The main purpose for allowing negative hours and negative amount for the new `pay command` is to allow user to "undo" his mistakes made due to him specifying the wrong number of hours paid or the wrong amount settled by the student.
-    Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.<br><br>
+    Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.
 
 
 1. **Enforce double confirmation for clear command:** The current `clear command` clears all the students in the list without any confirmation from the user.
@@ -966,7 +966,6 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     While this might be slightly inconvenient for the fast typists, as the user will have to type more to confirm the deletion of all students in the list, this will prevent accidental deletion of all students in the list, thereby reducing the risk of complete data loss.
     We believe that the benefits of preventing accidental deletion of all students in the list outweigh the slight inconvenience of having to type more to confirm the deletion of all students in the list.
 
-
 1. **Enhance storage component to save data in a backup file**: Assuming user have not changed the `preferences.json` file, the current storage component for UGTeach only saves data in the `ugteach.json` file. If the `ugteach.json` file is corrupted or deleted, **all** the data will be lost.
     This might be inconvenient for the user, as the user might accidentally delete the `ugteach.json` file or the file might be corrupted due to some reasons.
     Therefore, we plan to save data in a backup file named `ugteachbackup.json`. The `ugteachbackup.json` file will be updated whenever the `ugteach.json` file is updated.
@@ -975,6 +974,8 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This will prevent accidental data loss due to the deletion or corruption of the `ugteach.json` file.<br>
     Example of the two files:<br>
     ![backupDataFile.png](images/backupData.png)
+
+    <div style="page-break-after: always;"></div>
 
     The following code snippet shows the planned enhancement for the storage component to save data in a backup file. Specifically, this will be the updated `saveAddressBook` method for `JsonAddressBookStorage` class.
     ```java
