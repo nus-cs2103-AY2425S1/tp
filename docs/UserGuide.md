@@ -57,7 +57,6 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
     <img src="images/QuickStart.png" alt="Ui" width="350"/>
     <br>
     <em>Figure 1: Shows what the application should look like</em>
-</div>
 
 
 5. Type a command in the command box and press Enter to execute it. For example, typing **`help`** and pressing Enter will open the help window.<br>
