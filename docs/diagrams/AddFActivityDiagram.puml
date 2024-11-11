@@ -6,7 +6,7 @@ start
 :AddFCommand is executed;
 
 if () then ([patient is in model])
-    :Throw duplicate patient exception;
+    :Throw CommandException: Duplicate patient;
 else ([else])
     :Add patient to the model;
 endif

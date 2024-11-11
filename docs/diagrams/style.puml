@@ -62,6 +62,7 @@ skinparam Sequence {
     FontName Arial
 }
 
+
 skinparam Participant {
     FontColor #FFFFFFF
     Padding 20
@@ -75,5 +76,5 @@ skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
 
 hide footbox
-hide members
+hide empty members
 hide circle
