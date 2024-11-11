@@ -74,6 +74,7 @@ public class SearchAppointmentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        // This execute method relied on GPT to help check the correctness of the code.
         requireNonNull(model);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Predicate<Person> predicate = person -> {
@@ -122,17 +123,15 @@ public class SearchAppointmentCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        // Short circuit if the same object
+        // This method made use of ChatGPT to ensure its correctness when comparing the Command objects
         if (other == this) {
             return true;
         }
 
-        // Instance of handles nulls and type check
         if (!(other instanceof SearchAppointmentCommand)) {
             return false;
         }
 
-        // Cast and compare the dateTime attribute
         SearchAppointmentCommand otherCommand = (SearchAppointmentCommand) other;
         return this.startDateTime.equals(otherCommand.startDateTime)
                 && this.endDateTime.equals(otherCommand.endDateTime);

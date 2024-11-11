@@ -115,6 +115,7 @@ public class SearchBirthdayCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        // This method made use of ChatGPT to ensure its correctness when comparing the Command object
         if (other == this) {
             return true;
         }

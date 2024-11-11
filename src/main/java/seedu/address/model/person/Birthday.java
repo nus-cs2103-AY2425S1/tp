@@ -14,7 +14,7 @@ public class Birthday {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Birthdays should be in the format 'yyyy-MM-dd', "
-                    + "must be a valid date, and must be a date after today's date.";
+                    + "must be a valid date, and must be a date before today's date.";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -29,7 +29,8 @@ public class Birthday {
      * @param dateStr A valid date string.
      */
     public Birthday(String dateStr) {
-        requireNonNull(dateStr);
+        requireNonNull(dateStr); // check entry is not null
+        // check valid birthday input
         checkArgument(isValidBirthday(dateStr), MESSAGE_CONSTRAINTS);
         date = parseDate(dateStr);
         this.value = date.format(FORMATTER);
@@ -48,10 +49,11 @@ public class Birthday {
     /**
      * Returns true if a given string is a valid birthday date.
      */
-    public static boolean isValidBirthday(String test) {
-        requireNonNull(test);
+    public static boolean isValidBirthday(String input) {
+        requireNonNull(input);
         try {
-            LocalDate testBirthday = LocalDate.parse(test, FORMATTER);
+            LocalDate testBirthday = LocalDate.parse(input, FORMATTER);
+            // compare current date with birthday. If birthday exceeds current, throw an exception
             return testBirthday.isBefore(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
@@ -65,8 +67,9 @@ public class Birthday {
 
     @Override
     public boolean equals(Object other) {
-        return this == other // short circuit if same object
-                || (other instanceof Birthday // instanceof handles nulls
+        // This method made use of ChatGPT to ensure its correctness when comparing the birthday object
+        return this == other
+                || (other instanceof Birthday
                 && date.equals(((Birthday) other).date));
     }
 

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_POLICY_NAME;
 import static seedu.address.logic.Messages.MESSAGE_SUCCESS_SEARCH_POLICY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEARCH_POLICY;
 
@@ -33,7 +33,7 @@ public class SearchPolicyCommand extends Command {
     public SearchPolicyCommand(String policyName) throws CommandException {
         requireNonNull(policyName);
         if (!isValidPolicyName(policyName)) {
-            throw new CommandException(MESSAGE_INVALID_POLICY_FORMAT);
+            throw new CommandException(MESSAGE_INVALID_POLICY_NAME);
         }
         this.policyName = policyName;
     }
@@ -52,12 +52,13 @@ public class SearchPolicyCommand extends Command {
      * @param input The string to normalize.
      * @return The normalized string.
      */
+
     private String normalizeString(String input) {
         return input.replaceAll("\\s+", "").toLowerCase();
     }
 
     /**
-     * Checks if the given person has the specified policy.
+     * Checks if the given person has the specified policy based on the policy name.
      *
      * @param person The person to check.
      * @param policyName The name of the policy.
@@ -86,6 +87,8 @@ public class SearchPolicyCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        // This method made use of ChatGPT to ensure its correctness when comparing the Command object
+
         if (other == this) {
             return true;
         }

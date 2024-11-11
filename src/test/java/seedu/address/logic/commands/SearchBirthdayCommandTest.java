@@ -128,8 +128,6 @@ public class SearchBirthdayCommandTest {
         String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_BIRTHDAY, "on " + date);
         try {
             SearchBirthdayCommand command = new SearchBirthdayCommand(date);
-
-            // Update expected model to filter only AMY
             expectedModel.updateFilteredPersonList(person -> person.getBirthday() != null
                     && person.getBirthday().toString().equals(date));
             assertCommandSuccess(command, model, expectedMessage, expectedModel);

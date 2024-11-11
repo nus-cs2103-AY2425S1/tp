@@ -18,9 +18,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * Represents an insurance policy in the address book.
  */
 public class Policy {
-
-    public static final String MESSAGE_CONSTRAINTS = "Policy details should be in the format 'policyName startDate "
-            + "endDate' paydate amountDue, where dates are in 'yyyy-MM-dd' format.";
+    public static final String MESSAGE_CONSTRAINTS = "Policy name, start date, and end date are required. "
+            + "Dates must follow the 'yyyy-MM-dd' format.";
 
     public static final String START_DATE_MUST_BE_AFTER_THE_NINETIES = "Insurance has been around in the 1900s! "
             + "Please input a date after that";
@@ -31,6 +30,7 @@ public class Policy {
     public static final String START_EQ_END = "Start date and end date cannot be the same!";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    //This regular expression was converted by chatgpt from normal regular expression to java regular expression
     private static final String TOSTRINGFORMATTER = "([\\w\\s]+)\\s+\\((\\d{4}-\\d{2}-\\d{2})\\s*"
             + "to\\s*(\\d{4}-\\d{2}-\\d{2})\\)\\s*"
            + "(?:\\$([0-9.]+)\\s*due\\s*on\\s*(\\d{4}-\\d{2}-\\d{2})|(?<paid>Fully Paid))";
@@ -230,6 +230,7 @@ public class Policy {
 
     @Override
     public boolean equals(Object other) {
+        // This method made use of ChatGPT to ensure its correctness when comparing the policy objects
         return this == other
                 || (other instanceof Policy
                 && policyName.equals(((Policy) other).policyName)

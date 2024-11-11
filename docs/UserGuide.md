@@ -82,7 +82,7 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 
 4. Run the Application:
     - **Option 1: Double-Click:**
-      Simply double-click the `AgentConnect.jar` file to start the application.  
+      Simply double-click the `AgentConnect.jar` file to start the application. If this method does not work, try Option 2 below.
     - **Option 2: Use Command Prompt:**
       Open the Command Prompt (Windows) or Terminal (Mac/Linux), navigate to the folder containing the `AgentConnect.jar` file, and type:
       ```
@@ -98,7 +98,7 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 
 5. **Application Interface:** A user interface similar to the below should appear in a few seconds.
 
-6. ![help message](images/Ui.png)
+    ![help message](images/Ui.png)
 
 6. **Try It Out:**
     - **Enter a Command:**
@@ -133,8 +133,15 @@ Users engage with the AgentConnect application by inputting a series of commands
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* AgentConnect automatically checks and corrects dates to ensure that they are valid, helping to prevent scheduling errors.
+  * If a date is entered with an invalid day (eg. `2028-02-30`), Agent Connect will adjust it to the nearest valid date within the month, such as `2028-02-29`. This intelligent replacement only applies to dates up to the 31st day of any month.
+  * This applies to only adding, assigning and editing function only.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+* Before every prefix, ensure that there is a whitespace at the front. Else, the command might not work. (E.g. `add n/John p/889955` will work but `add n/Johnp/889955` will not work.)
+
+* For commands that requires datetime input, ensure that there is a whitespace between the date and the time (E.g. `2024-10-10 13:00`)
 
 ### Viewing Help : `help`
 
@@ -191,34 +198,27 @@ Format:
 `add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<HOME ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT TIME>`
 
 - **Parameters**:
-    * Birthday should be in `yyyy-mm-dd`
-    * Appointment should be in `yyyy-mm-dd HH:mm` and accept both past and future dates
-    * Phone number can only be 3 to 8 digits long
-    * Clients with the same name and address are considered as duplicates
-    * The system standardises addresses by removing commas, spaces, and hyphens and making
+    * Name can only contain alphanumeric and spaces. 
+    * Birthday should be in `yyyy-mm-dd` and only can be a date before today's date.
+    * Appointment should be in `yyyy-mm-dd HH:mm` and accept only future dates.
+    * Phone number can only be 3 to 8 digits long.
+    * Client's name can contain whitespaces. `John Doe` and `John    Doe` will be considered as 2 different client.
+    * Clients with the same name and address are considered as duplicates. 
+    * Do note that the names are case-sensitive. 
+    * The system standardises addresses by removing special characters such as commas, spaces, and hyphens and making
       all characters lowercase. This means that "311, Clementi Ave 5, unit 02-2" and
       "311 Clementi ave 5 unit 022" (without commas) will be treated as the same client address.
 
-Examples:
-* The command below adds a new client to the client list with the following information:
-    * Client name: John Doe
-    * Client number: 98765432
-    * Client email: johnd@example.com
-    * Home address: John street, block 123, #01-01
-    * Client birthday: 2000-12-12
-    * Client next appointment: 2024-12-12 12:00  
-    `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
-
+Example:
 * The command below adds a new client to the client list with the following information:
     * Client name: Betsy Crowe
     * Client number: 1234567
     * Client email: betsycrowe@example.com
     * Home address: Newgate Prison
     * Client birthday: 2001-10-10
-    * Client next appointment: 2024-12-01 09:00  
+    * Client next appointment: 2024-12-01 09:00 
     `add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
-    ![result for 'find alex david'](images/addUI.png)
-
+    ![result for 'add john doe'](images/addUI.png)
 ---
 
 ### Deleting a client : `delete`
@@ -247,6 +247,11 @@ Examples:
   delete Betsy Crowe
   ```
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Upon entering the delete command, a pop up for confirmation will appear. Do not close or minimize the
+CLI interface when the pop up is displayed. This will cause the program to crash.
+</div>
+
 ---
 
 ### Listing all clients : `list`
@@ -268,6 +273,7 @@ Format:
 
   * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
   * At least one of the optional fields must be provided.
+  * Clients with the same name and address are considered as duplicates.
   * Existing values will be updated to the input values.
   * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
   * You can remove all the client’s tags by typing `t/` without
@@ -384,10 +390,6 @@ Format:
   * Clients matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-<div markdown="span" class="alert alert-info">💡 **Tip:**
-When using the find command, incorporating multiple keywords can help narrow down search results more effectively.
-</div>
-
 Examples:
 - **Search by Specific Keyword**: Finds all client's name that contains the keyword.
     ```
@@ -500,6 +502,11 @@ Example:
 
 The policy management section contain commands that allows you to manage policy-related information, such as assigning policy, deleting policy and updating policy payment.
 
+<div markdown="span" class="alert alert-info"> **Note:**
+
+At times, after assigning a policy to a client or deleting a policy, the user interface may not immediately display the updates. You can try double-clicking on another client's profile card and then returning to the target profile card to see the changes reflected. Alternatively, you can use the `find` or `search` commands to trigger a UI refresh.
+</div>
+
 | **Action**                                                                 | **Command Format**                                                                                           | **Command Example**                                                                         |
 |----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | [Assign a Policy](#assigning-a-policy--assign)                             | `assign INDEX pon/<POLICY_NAME> pos/<START_DATE> poe/<END_DATE> paydate/<PAYMENT_DUE_DATE> amt/<AMOUNT_DUE>` | `assign 1 pon/Health Insurance pos/2022-01-01 poe/2023-01-01 paydate/2022-12-01 amt/300.00` |
@@ -513,19 +520,15 @@ Assign policy to a client.
 Format: 
 `assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> /paydate <INSURANCE DUE DATE> /amt <AMOUNT DUE>`
 - **Parameters**:
+    * `POLICY NAME` is case-sensitive.
     * `POLICY START DATE` and `POLICY END DATE` refer to the duration of the policy's coverage.
     * `POLICY START DATE` and `POLICY END DATE` must be in the format `yyyy-mm-dd`.
     * `POLICY START DATE` and `POLICY END DATE` cannot be the same date.
+    * `POLICY START DATE` can only start from 1900-01-01 and onwards.
     * `INSURANCE DUE DATE` must be in the format `yyyy-mm-dd`.
     * `INSURANCE DUE DATE` cannot be earlier than the `POLICY START DATE`.
     * `INSURANCE DUE DATE` cannot be later than the `POLICY START DATE`.
-    * `AMOUNT DUE` must be a positive number with up to 2 decimal places.
-
-<div markdown="span" class="alert alert-info"> **Note:**
-Sometimes, after assigning a policy to a client, the user interface may not reflect the changes
-immediately. If this occurs, try double-clicking on the particular client profile card.
-The user interface will show the assigned policy.
-</div>
+    * `AMOUNT DUE` must be a positive number with up to 2 decimal places (`$` sign is not required. For example, /amt 200.00 or /amt 358.00 is the correct format)
 
 Example:
 * Assign a policy to the client listed at index 1 with the following information:
@@ -611,11 +614,11 @@ Examples:
 
 ## Advanced Features
 
-| **Action**                                          | **Command Format** | **Command Example** |
-|-----------------------------------------------------|--------------------|---------------------|
-| [Undo the Last Deleted Work](#undo-a-command--undo) | `undo`             | `undo`              |
-| [Redo the Last Undo Work](#redo-a-command--redo)    | `redo`             | `redo`              |
-| [Clear All Entries](#clearing-all-entries--clear)   | `clear`            | `clear`             |
+| **Action**                                        | **Command Format** | **Command Example** |
+|---------------------------------------------------|--------------------|---------------------|
+| [Undo the Last Command](#undo-a-command--undo)    | `undo`             | `undo`              |
+| [Redo the Last Undo Work](#redo-a-command--redo)  | `redo`             | `redo`              |
+| [Clear All Entries](#clearing-all-entries--clear) | `clear`            | `clear`             |
 
 ### Undo a command : `undo`
 Undo the last command. This command works for add, edit, delete client and clear commands.
@@ -625,7 +628,8 @@ Format: `undo`
 
 * Undo the last command to restore the address book to the state before the last command.
 <div markdown="span" class="alert alert-info"> **Note:**
-The `undo` command does not work for assign and deletion of policies.
+The `undo` command does not work for assign and deletion of policies, so any commands before the assign/delete of policies
+will be undone. For example, if I add a client, assign a policy to that client, then enter undo, it will undo the add command.
 </div>
 
 Examples:
@@ -661,6 +665,9 @@ Format: `clear`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If you accidentally used the `clear` command and want to revert back, do not run any other commands.
 Run `undo` immediately to restore the data.
+
+Upon entering the clear command, a pop up for confirmation will appear. Do not close or minimize the
+CLI interface when the pop up is displayed. This will cause the program to crash.
 </div>
 
 ---
