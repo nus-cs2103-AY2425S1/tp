@@ -82,7 +82,7 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
    * Valid Examples: `john.doe@example.com`, `jane-doe123@example.com`
    * Invalid Examples: `john.doe.@example.com`, `john.doe@exa_mple.com`
 
-5. DATE OF BIRTH: Date of birth must not be a future date. Input must follow the format YYYY-MM-DD. <br> Prefix: `dob/`
+5. DATE OF BIRTH: Date of birth must not be a future date. Input must follow the format yyyy-MM-dd. <br> Prefix: `dob/`
 
 ### Optional Fields:
 
@@ -92,7 +92,7 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 
 3. FAMILY SIZE: Family size should be a positive integer. Default: 1 <br> Prefix: `famsize/`
 
-4. TAGS: Tag names should be alphanumeric. Default: Empty <br> Prefix: `t/`
+4. TAGS: Tag names should be alphanumeric. <br> Prefix: `t/`
 
 <box type="info" seamless>
 
