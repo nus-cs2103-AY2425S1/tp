@@ -447,8 +447,8 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         ```
         The following mandatory prefixes are missing: [...]
         Invalid command format!
-        add: Adds a client to the address book. Parameters: n/ NAME p/ PHONE e/ EMAIL a/ ADDRESS j/ JOB i/ INCOME [t/ TIER]...
-        [r/ REMARK]...[s/ STATUS]...
+        add: Adds a client to the address book. Parameters: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>]...
+        [r/ <REMARK>]...[s/ <STATUS>]...
         Example: 'add n/ John Doe p/ 98765432 e/ johnd@example.com a/ 311, Clementi Ave 2, #02-25 j/ doctor i/ 300 t/ GOLD r/ He is very smart s/ NON_URGENT'
         ```
   - Error caused by invalid values for some fields
@@ -456,8 +456,8 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         ```
         Invalid command format!
         <INDIVIDUAL FIELD'S ERROR MESSAGES>...
-        add: Adds a client to the address book. Parameters: n/ NAME p/ PHONE e/ EMAIL a/ ADDRESS j/ JOB i/ INCOME [t/ TIER]...
-        [r/ REMARK]...[s/ STATUS]...
+        add: Adds a client to the address book. Parameters: n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>]...
+        [r/ <REMARK>]...[s/ <STATUS>]...
         Example: 'add n/ John Doe p/ 98765432 e/ johnd@example.com a/ 311, Clementi Ave 2, #02-25 j/ doctor i/ 300 t/ GOLD r/ He is very smart s/ NON_URGENT'
         ```
 
@@ -531,7 +531,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
           Invalid command format!
           edit: Edits the details of the client identified by the index number used in the displayed client list. Existing values will be overwritten by the input values. Any fields unspecified will not be modified.
           Required Parameters: INDEX (must be a positive integer)
-          Optional Parameters: [n/ NAME] [p/ PHONE] [e/ EMAIL] [a/ ADDRESS] [j/ JOB] [i/ INCOME] [t/ TIER] [rn/ NEW REMARK] [ra/ ADD-ON TO EXISTING REMARK] [s/ STATUS]
+          Optional Parameters: [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]
           Example Usage: 'edit 1 p/ 91234567 e/ johndoe@example.com'
           ```
     - Error caused by invalid values for some fields
@@ -724,7 +724,7 @@ For detailed explanations for the matching criteria of each flag and the accepta
         Invalid command format!
         filter: Searches for all clients whose specified field contains the given substring (case-insensitive) and displays the results in a numbered list.
         Parameters: <FLAG>/ <SEARCH TERM>
-        Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
+        Flags: n/ <NAME>, p/ <PHONE>, e/ <EMAIL>, a/ <ADDRESS>, j/ <JOB>, i/ (=/</>) <INCOME> r/ <REMARK> t/ <TIER> s/ <STATUS>
         Example: filter n/ Alice p/ 9111222
         This will find all clients whose names contain 'Alice' and whose phone number is '91112222'.
         ```

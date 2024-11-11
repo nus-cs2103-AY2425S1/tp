@@ -624,21 +624,21 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: There must not be an existing client with the same name, phone number and email as the new client.
 
-    2. Test case: `add n/ NAME p/ PHONE e/ EMAIL a/ ADDRESS j/ JOB i/ INCOME`<br>
+    2. Test case: `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME>`<br>
        Expected: A client with the given details is added to the end of the list of clients. Details are shown in the results box and any details that are truncated can be seen by using the `view` command with the client's displayed index.
 
-    3. Test case: `add n/ NAME p/ PHONE e/ EMAIL a/ ADDRESS j/ JOB i/ INCOME t/ TIER r/ REMARK s/ Status`<br>
+    3. Test case: `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> t/ <TIER> r/ <REMARK> s/ Status`<br>
        Expected: A client with the given details, including the optional ones, is added to the end of the list of clients. Similar to previous. 
 
-   4. Missing compulsory fields: `add n/ NAME p/ PHONE`, `add n/ NAME p/ PHONE e/ EMAIL`, `...` <br>
+   4. Missing compulsory fields: `add n/ <NAME> p/ <PHONE>`, `add n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` <br>
       Expected: An error message is shown to user. No client is added. Missing fields are shown in the error message. 
 
-   5. Invalid command formats: `add`, `add n/ NAME p/ INVALID_PHONE e/ E/ EMAIL...`, `...` <br>
+   5. Invalid command formats: `add`, `add n/ <NAME> p/ <INVALID_PHONE> e/ E/ <EMAIL>...`, `...` <br>
        Expected: An error message is shown to user. No client is added. Error details shown in the status message.
 
 2. Add an existing client
     1. Prerequisites: There exists a client in AddressBook which has the same name, phone number and email as the client to be added.
-    2. Test case: `add n/ SAME_NAME p/ SAME_PHONE e/ SAME_EMAIL a/ ADDRESS j/ JOB i/ INCOME`<br>
+    2. Test case: `add n/ SAME_NAME p/ SAME_PHONE e/ SAME_EMAIL a/ <ADDRESS> j/ <JOB> i/ <INCOME>`<br>
        Expected: An error message indicating that the client already exists is shown to user. No client is added.
 
 ### Deleting a client
