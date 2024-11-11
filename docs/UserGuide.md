@@ -545,9 +545,9 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 - If the filtered result is empty (no matching entries), an error will be returned, and no file will be generated.
 
 **Examples:**
-- `download` — Exports all contacts or orders.
-- `download t/Vegan` — Exports only wthe contacts or orders tagged as "Vegan."
-- `download t/friend t/colleague` — Exports contacts or orders tagged as "friend" and "colleague."
+- `download` — Exports all contacts.
+- `download t/Vegan` — Exports only the contacts tagged as "Vegan."
+- `download t/friend t/colleague` — Exports contacts tagged as both, "friend" and "colleague."
 
 <div style="text-align: center;">
     <img src="images/dowload.png" alt="download" width="350"/>
@@ -558,7 +558,7 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 <div style="text-align: center;">
     <img src="images/download_shortcuts.png" alt="download shortcuts" width="350"/>
     <br>
-    <em>Figure 21: Shows only people with vegan tag being added</em>
+    <em>Figure 21: Shows only people with vegan tag being downloaded</em>
 </div>
 
 ---
