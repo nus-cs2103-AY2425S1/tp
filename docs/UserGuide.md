@@ -420,7 +420,7 @@ Finds persons whose names contain any of the given tag keywords.
 * At least one tag must be provided.
 * The order of the keywords does not matter. e.g. `t/friends t/family` will match `t/family t/friends`.
 * Only the tags are searched.
-* Only full tag name will be matched. e.g. `friend` will not match `friends`.
+* Only full tag names will be matched. e.g. `friend` will not match `friends`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `t/friends t/family` will return any contact tagged with `friend` or `family`.
 </box>
@@ -887,7 +887,7 @@ Calling `addGrade` without any fields will show the list of assignments in `assi
 
 <md>**Steps to set up assignment.json file:**</md>
 
-* The professor, before each semester, may update the assignment.json file to consist of the assignments present for that semeester.
+* The TA, before each semester, may update the assignment.json file to consist of the assignments present for that semester.
 * However, if there is a need for a manual update, please follow the steps as shown below. 
 
 1. Create a file name called `assignment.json` in the `/data` folder.
@@ -1004,7 +1004,7 @@ However, it is always good practice to have a local backup :D. You can do this w
 
 ### <i class="fa-solid fa-pen"></i> Editing the data file
 
-KonTActs data are saved automatically as a JSON file `[JAR file location]/data/kontacts.json`.
+KonTActs data are saved automatically as a JSON file `[JAR_file_location]/data/kontacts.json`.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
