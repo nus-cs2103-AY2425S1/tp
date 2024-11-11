@@ -924,7 +924,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
    e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's `owedAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was owed by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `owe command`. If users were to make a mistake in the `owe command`, he can enter the same `owe command`, but with the negative hours specified.
-   e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount of the student by 3 hours instead.
+   e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount of the student by 3 hours * `rate` instead.
    He can first type `owe 1 hr/-2` to 'undo' the previous owe command, and type `owe 1 hr/3` this time for the correct update.
    Special cases that we handle:
     * hr/0 will still not be accepted.
