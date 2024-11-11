@@ -115,6 +115,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 **Note:** The lifeline for `DeleteCustomerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+<div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
 
@@ -448,6 +449,7 @@ Use case ends.
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
   * The specified customer's details will be overwritten if the input parameters are valid.
+<div style="page-break-after: always;"></div>
 
 **MSS**
 
@@ -516,6 +518,7 @@ Use case ends.
 4. SellSavvy confirms the addition is successful by displaying the newly added order's details and customer's list of orders.
 
 Use case ends.
+<div style="page-break-after: always;"></div>
 
 **Extensions**
 
