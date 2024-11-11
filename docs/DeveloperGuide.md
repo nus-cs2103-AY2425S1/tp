@@ -21,7 +21,7 @@
     * [Create new internship application](#create-new-internship-application)
     * [List all internship applications](#list-all-internship-applications)
     * [Delete an internship application](#delete-an-internship-application)
-    * [Update the status of an Internship Application](#update-the-status-of-an-internship-application)
+    * [Update the status of an internship application](#update-the-status-of-an-internship-application)
     * [Find internship applications](#find-internship-applications)
     * [Filter internship applications](#filter-internship-applications)
     * [Sort internship application list](#sort-internship-application-list)
@@ -215,7 +215,9 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
   If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, it creates a new instance of `AddCommand` that corresponds to the user input.
 `AddCommand` comprises of the internship application to be added, which is an instance of `InternshipApplication`.
 
-Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then adds the internship application into the data.
+Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, then `AddCommand` adds the internship application into the data.
+
+> **_NOTE:_** HireMe identifies an entry as a duplicate if its `NAME`, `ROLE`, `EMAIL` and `DATE` match **(case-insensitive)** with those of an existing internship application entry. Attempting to add a duplicate will result in an error.
 
 <br></br>
 
@@ -247,27 +249,21 @@ Upon execution, `DeleteCommand` gets the internship application to be deleted an
 
 <br></br>
 
-### Update the status of an Internship Application
-The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the user input string, creating a `StatusCommandParser` to parse user input string.
+### Update the status of an internship application
+The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. The implementation of the status command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 
-<puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
+In this case, `AddressBookParser` creates `StatusCommandParser` to parse user input string.
 
-The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`. 
-For clarity, some implementation details are omitted to avoid low-level specifics, focusing only on the high-level process of updating the internship application status.
+![StatusSequenceDiagram](diagrams/StatusSequenceDiagram.puml)
 
-AddressBookParser:
-1. Parses the command (e.g., `/accept 1`) and creates a `StatusCommandParser`.
-2. `StatusCommandParser` extracts the index and maps the command to the appropriate `Status` enum value (`PENDING`, `ACCEPTED`, or `REJECTED`). If either the index or status is invalid, a `ParseException` is thrown.
-3. If parsing succeeds, a `StatusCommand` is created with `targetIndex` and the specified `Status`.
+The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
 
-Upon execution, `StatusCommand`:
-1. **Retrieves and Validates** the internship application by calling `model::getFilteredList`. If `targetIndex` is invalid, it throws a `CommandException`.
-2. **Updates the Status**: It creates a deep copy of the application, sets the new `Status`, and saves the updated application back with `model::setItem`.
-3. **Refreshes the Filtered List**: The previous filter predicate is reapplied using `model::updateFilteredList`.
+`AddressBookParser` first obtains the index from the user's input.  
+`AddressBookParser` ensures that there is only one keyword found, which is a number. If no valid keyword is found, `AddressBookParser` throws a `ParseException`. Otherwise, it creates a new instance of `StatusCommand` based on the user input, with the `StatusCommand` containing the target index and specified status.
 
-Finally, `StatusCommand` generates a `CommandResult` with a confirmation message, reflecting the updated status. This is then returned to `LogicManager`, completing the command execution.
-
+Upon execution, `StatusCommand` retrieves the internship application to be updated and calls `model::setItem` to update the status within the list.
 <puml src="diagrams/StatusActivityDiagram.puml" alt="StatusActivityDiagram" />
+> **_NOTE:_** The sequence diagram shows a simplified execution of the StatusCommand.
 
 The activity diagram above outlines the detailed flow for the `StatusCommand`, showing the decision points and actions taken during the command execution.
 
@@ -349,7 +345,7 @@ The implementation of the command follows the convention of a normal command, wh
 <puml src="diagrams/ExitSequenceDiagram.puml" alt="ExitSequenceDiagram" />
 
 `AddressBookParser` creates `ExitCommand`
-Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
+Upon execution, `ExitCommand` encapsulates the intent to close the application in `CommandResult`.
 
 > **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
@@ -1029,46 +1025,46 @@ testers are expected to do more *exploratory* testing.
 <br></br>
 
 ### Chart Window
-1. Open chart window
+1. Open Chart window
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the chart window is not opened.
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the Chart window is not opened.
    
     2. Test case `/chart`<br>
        Expected: Chart window opens.
 
-2. Open chart window with invalid command format
+2. Open Chart window with invalid command format
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the chart window is not opened.
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the Chart window is not opened.
    
     2. Test case: `/chart x`<br>
        Expected: An error message stating the valid use of the `/chart` command.
 
-3. Update chart window by updating status
+3. Update Chart window by updating status
 
-   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are the internship application at index 1 is of `PENDING` status and the chart window is already opened.
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are the internship application at index 1 is of `PENDING` status and the Chart window is already opened.
    
    2. Test case: `/accept 1`<br>
-      Expected: Pie chart on chart window to update accordingly.
+      Expected: Pie chart on Chart window to update accordingly.
 
-4. Update chart window by adding an internship application
+4. Update Chart window by adding an internship application
 
-   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application, `Google` is not in list, and the chart window is already opened.
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application, `Google` is not in list, and the Chart window is already opened.
    
    2. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/31/10/24`<br>
-      Expected: Pie chart on chart window to update accordingly.
+      Expected: Pie chart on Chart window to update accordingly.
 
-5. Update chart window by deleting an internship application
+5. Update Chart window by deleting an internship application
 
-   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at are at least two internship applications and the chart window is already opened.
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at are at least two internship applications and the Chart window is already opened.
    
    2. Test case: `/delete 1`<br>
-      Expected: Pie chart on chart window to update accordingly.
+      Expected: Pie chart on Chart window to update accordingly.
 
-6. Close chart window
+6. Close Chart window
 
    1. Prerequisites: Chart window is already opened.
    
-   2. Test case: Click on the close button on the Help window. <br>
+   2. Test case: Click on the close button on the Chart window. <br>
       Expected: Chart window closes.
 
 <br></br>
@@ -1137,4 +1133,27 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 The team consists of 5 members.
-Given below are enhancements planned for future versions.
+Given below are enhancements planned for future versions. <br>
+
+1. **Make 'Roles' and 'Company Names' less restrictive:** The current validator is too restrictive on what is allowed as `Role` and `Company Name`. 
+Valid roles such as: C++ Developer, C# Developer, R&D Specialist are currently flagged as invalid by the validator. 
+Similarly, valid company names such as: A*STAR, SK-II, Yahoo!, John's Bakery are also flagged as invalid by the validator. 
+We plan to loosen the restrictions for roles and company names, to be more inclusive of the possible roles and company names in the real world. <br>
+
+2. **Improve consistency in `find` feature:** Currently, while we prevent special characters in the `Company Name` (such as ~\`!@#),  
+we did not prevent the same characters from being used as keywords for the `find` feature. This leads to an inconsistent user experience, 
+since these characters would never be found in company names. We plan to be more consistent, 
+and check whether the keywords provided to the `find` command are valid characters that are allowed in `Company Name`. <br>
+
+3. **Make error message for `add` command more specific:** Currently, the error message provided when the user inputs an invalid `add` command is too generic. 
+For example, `/add n/Google r/SWE d/01/01/24` will provide an error message stating `Invalid command format!`. It does not provide additional information to the user, 
+on why the command is invalid. It could be improved to state the email field is missing. 
+We plan to improve the validator to be able to detect specifically why the command is invalid, and provide a more specific error message. <br>
+
+4. **Improve UI to deal with long texts:** The current application does not allow the user to scroll the list displayed on the application. 
+If there is a very long text, the text will be cut off and the use would have to maximise the application's window in order to see the full text. 
+We plan to implement scroll bars within the list displayed in the application, to allow the user to scroll and see any long texts. <br>
+
+5. **Improve the validator for `email`:** The current email validator flags valid emails as invalid, such as `faceb__k@fb.com.sg`. This could cause some inconvenience to the users. 
+We plan to fix the validator for email to allow for more valid emails. <br>
+

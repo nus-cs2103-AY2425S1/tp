@@ -44,7 +44,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateApplications_throwsDuplicateApplicationsException() {
-        // Two persons with the same identity fields
+        // Two internship applications with the same identity fields
         InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).build();
         List<InternshipApplication> newApplications = Arrays.asList(APPLE, editedApple);
         AddressBookStub newData = new AddressBookStub(newApplications);
@@ -89,7 +89,7 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose internship applications list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<InternshipApplication> applications = FXCollections.observableArrayList();

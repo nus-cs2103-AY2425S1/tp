@@ -17,7 +17,7 @@ case ( [User enters the command "/accept i"])
         an error message;
         stop
     endif
-case (  [User enters the command "/reject i"])
+case (   [User enters the command "/reject i"])
     if () then ([Index is valid])
         :Updates the internship application
         status to **REJECTED**;
@@ -41,3 +41,4 @@ endswitch
 :User receives a success message;
 stop
 @enduml
+

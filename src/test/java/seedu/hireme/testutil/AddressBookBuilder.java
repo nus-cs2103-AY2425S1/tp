@@ -6,7 +6,7 @@ import seedu.hireme.model.internshipapplication.InternshipApplication;
 /**
  * Represents a utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withApplication(APPLE).build();}
  */
 public class AddressBookBuilder {
 
@@ -21,7 +21,7 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code InternshipApplication} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withApplication(InternshipApplication application) {
         addressBook.addItem(application);

@@ -21,9 +21,10 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "/delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the internship application identified by the index number used in the displayed person list.\n"
+            + ": Deletes the internship application identified by the index number used in the displayed internship "
+            + "application list.\n"
             + "Parameters: INDEX (" + MESSAGE_INDEX_CONSTRAINT + ")\n"
-            + "Example: " + COMMAND_WORD + " 5" + "    (if total number of applications is <= 5)";
+            + "Example: " + COMMAND_WORD + " 5" + "    (if total number of applications is >= 5)";
 
     public static final String MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS = "Deleted internship application: %1$s";
 

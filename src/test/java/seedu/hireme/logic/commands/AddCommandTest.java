@@ -121,7 +121,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAppleCommand.equals(null));
 
-        // different person -> returns false
+        // different internship application -> returns false
         assertFalse(addAppleCommand.equals(addBofaCommand));
     }
 
@@ -218,7 +218,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single internship application.
      */
     private class ModelStubWithInternshipApplication extends ModelStub {
         private final InternshipApplication application;
@@ -236,7 +236,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the internship application being added.
      */
     private class ModelStubAcceptingInternshipApplicationAdded extends ModelStub {
         final ArrayList<InternshipApplication> internshipApplicationsAdded = new ArrayList<>();
