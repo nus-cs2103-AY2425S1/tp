@@ -401,7 +401,7 @@ App data are saved in the hard disk automatically after any command that changes
 
 ### Editing the data file
 
-App data are saved automatically as a JSON file `[JAR file location]/data/inSUREance.json`. Advanced users are welcome to update data directly by editing that data file.
+App data are saved automatically as a JSON file `[JAR file location]/data/InSUREance.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
