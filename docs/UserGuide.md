@@ -266,7 +266,7 @@ Note:
 * The details page includes assigned events/vendors as well as a list of assignable events/vendors.
   * If already viewing an event, vendors in both assigned and assignable lists can be chosen to be viewed, and vice versa.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
-  * e.g. `view v/2` can be run after `view v/1`. Even though the 1st vendor will not be visible when viewing the 2nd vendor, it can still be accessed and viewed.
+  * e.g. `view v/2` can be run after `view v/1`. Even though the vendor with index 1 will not be visible when viewing the vendor with index 2, it can still be accessed and viewed.
   * See [Off-Screen Operations](#off-screen-operations) for more details.
 * The current displayed indexes for items may change after issuing this command. See [Changing Indexes](#changing-indexes) for more details.
 
