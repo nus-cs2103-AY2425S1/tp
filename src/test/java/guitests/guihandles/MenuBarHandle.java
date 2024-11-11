@@ -5,6 +5,8 @@ import java.util.Arrays;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 
+//@@author GavinSin-reused
+// Reused from AB4's MainMenuHandle class with minor modifications
 /**
  * A handle for interacting with the application's menu bar during GUI tests.
  */

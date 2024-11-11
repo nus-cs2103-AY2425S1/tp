@@ -8,6 +8,8 @@ import org.testfx.api.FxRobot;
 import guitests.guihandles.exceptions.StageNotFoundException;
 import javafx.stage.Stage;
 
+//@@author GavinSin-reused
+// Reused from AB4's GuiRobot class with minor modifications
 /**
  * Provides utility methods to assist in GUI testing, extending the {@code FxRobot} functionality from the TestFX
  * framework. This class also supports handling headless mode and waiting for specific GUI events.

@@ -2,6 +2,8 @@ package guitests.guihandles;
 
 import javafx.stage.Stage;
 
+//@@author GavinSin-reused
+// Reused from AB4's MainWindowHandle class with minor modifications
 /**
  * A handle for the main application window, providing access to its various components such as the person list panel,
  * result display, command box, status bar, and menu bar.

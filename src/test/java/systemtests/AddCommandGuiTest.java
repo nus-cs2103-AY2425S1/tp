@@ -42,6 +42,8 @@ import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.PersonUtil;
 import spleetwaise.address.testutil.TypicalPersons;
 
+//@@author GavinSin-reused
+// Reused from AB4's AddCommandSystemTest class with minor modifications
 /**
  * GUI tests for the AddCommand in the address book application. Ensures that adding new persons via the command box
  * behaves as expected.

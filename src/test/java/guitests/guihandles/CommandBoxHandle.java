@@ -4,6 +4,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
+//@@author GavinSin-reused
+// Reused from AB4's CommandBoxHandle class with minor modifications
 /**
  * A handle for interacting with the command input box in the GUI. This class provides methods to manipulate and
  * retrieve information from a {@code TextField} used for command input.

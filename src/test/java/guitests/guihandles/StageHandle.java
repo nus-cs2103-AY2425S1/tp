@@ -10,6 +10,8 @@ import guitests.guihandles.exceptions.NodeNotFoundException;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
+//@@author GavinSin-reused
+// Reused from AB4's StageHandle class with minor modifications
 /**
  * Provides a handle to interact with a {@code Stage} in GUI tests. This abstract class serves as a base for specific
  * stage handles, enabling interaction with and querying of JavaFX {@code Stage} components.

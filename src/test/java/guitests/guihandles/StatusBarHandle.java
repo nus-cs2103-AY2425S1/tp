@@ -3,6 +3,8 @@ package guitests.guihandles;
 import javafx.scene.Node;
 import javafx.scene.control.Labeled;
 
+//@@author GavinSin-reused
+// Reused from AB4's StatusBarFooterHandle class with minor modifications
 /**
  * Handle for the status bar UI component in the application. This class provides methods to interact with and test the
  * state of the status bar, such as tracking changes in the save location status.

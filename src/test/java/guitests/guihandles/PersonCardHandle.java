@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import spleetwaise.address.model.person.Person;
 
+//@@author GavinSin-reused
+// Reused from AB4's PersonCardHandle class with minor modifications
 /**
  * A handle for a person card in the user interface, providing methods to access and retrieve the details of a person
  * displayed in the card.

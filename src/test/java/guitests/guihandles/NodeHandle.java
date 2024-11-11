@@ -8,6 +8,8 @@ import guitests.GuiRobot;
 import guitests.guihandles.exceptions.NodeNotFoundException;
 import javafx.scene.Node;
 
+//@@author GavinSin-reused
+// Reused from AB4's NodeHandle class with minor modifications
 /**
  * A generic class that provides functionality to interact with a specific JavaFX {@code Node}. This abstract class
  * serves as a base for handling specific types of nodes in GUI tests.
