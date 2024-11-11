@@ -283,6 +283,7 @@ This command will open your web browser and redirect you to the online User Guid
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### Listing all persons : `list`
 
@@ -300,6 +301,7 @@ Entering the `list` command returns the following result on your screen (using s
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### Finding a person : `find`
 
@@ -324,6 +326,7 @@ Entering the `find n/Steve` command returns the following result on your screen 
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### Clearing all entries : `clear`
 
@@ -339,6 +342,7 @@ Entering the `clear` command returns the following result on your screen:
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### Viewing statistics : `stats`
 
@@ -365,7 +369,7 @@ Format: `exit`
 
 [_Back to Top_](#table-of-contents)
 
----
+<div style="page-break-after: always"></div>
 
 ### **Guest Related Commands**
 
@@ -401,6 +405,7 @@ Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clement
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### Editing a guest : `edit_guest`
 
@@ -432,6 +437,7 @@ Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### Deleting a guest : `delete_guest`
 
@@ -484,6 +490,7 @@ Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clemen
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### Editing a vendor : `edit_vendor`
 
@@ -515,6 +522,7 @@ Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns th
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### Deleting a vendor : `delete_vendor`
 
