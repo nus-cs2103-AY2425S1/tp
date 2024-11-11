@@ -73,7 +73,7 @@ If your machine is **not running Java 17**, you may refer to the [FAQ section](#
 
 #### Step 2: Download the MediBase3 JAR File
 
-1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/download/v1.5/medibase3.jar) and scroll down all the way to 'Assets'.  You should see something like this:
+1. Go to [this link](https://github.com/AY2425S1-CS2103T-F12-3/tp/releases/tag/v1.6) and scroll down all the way to 'Assets'.  You should see something like this:
 
    {: .alert .alert-secondary}
    >![githubAssets.png](images/githubAssets.png)

@@ -281,7 +281,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 ![](images/CommitActivityDiagram.png){:width="250"}
 
 [Back to Table of Contents](#table-of-contents)
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -1112,7 +1112,7 @@ Deleting an existing appointment from a patient
 [Back to Table of Contents](#table-of-contents)
 
 
-## Appendix: Planned Enhancements
+## **Appendix: Planned Enhancements**
 
 Team size: 5
 
@@ -1160,3 +1160,6 @@ Team size: 5
 
   The current NRIC validation used in MediBase3 does not align with Singapore's checksum algorithm for NRICs. As such, MediBase3 does not check if the starting letter and starting 2 digits of the NRIC aligns with the given date of birth.
   This allows users to enter either incorrect date of births or NRICs that do not align with each other. We plan to enhance the NRIC validation to check for such discrepancies, specifically for patients born on or after 1 January 1968 where [this](https://en.wikipedia.org/wiki/National_Registration_Identity_Card#Structure_of_the_NRIC_number/FIN) rule applies.
+
+
+## **Appendix: Effort**
