@@ -5,7 +5,7 @@
     "email" : "berniceyu@example.com",
     "jobCode" : "HRD140572",
     "tag" : "TP",
-    "remark" : "very confident"
+    "remark" : ""
   }, {
     "name" : "CHARLOTTE OLIVEIRO",
     "phone" : "93210283",
@@ -38,6 +38,20 @@
     "name" : "VICELYA",
     "phone" : "888603766",
     "email" : "vicelyav@gmail.com",
+    "jobCode" : "123ABC",
+    "tag" : "A",
+    "remark" : ""
+  }, {
+    "name" : "VICELYA",
+    "phone" : "88306733",
+    "email" : "email@email.com",
+    "jobCode" : "123ABC",
+    "tag" : "A",
+    "remark" : ""
+  }, {
+    "name" : "HERAHI",
+    "phone" : "88306833",
+    "email" : "herahi@gmail.com",
     "jobCode" : "123ABC",
     "tag" : "A",
     "remark" : ""

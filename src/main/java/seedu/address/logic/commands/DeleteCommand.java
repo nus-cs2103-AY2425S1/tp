@@ -28,11 +28,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person with a positive integer index/name/email/phone\n"
-            + "Parameters:\n"
-            + "INDEX or\n"
-            + "n/NAME or\n"
-            + "e/EMAIL or\n"
-            + "p/PHONE or\n"
+            + "Parameters:\n{[INDEX] | [n/NAME] | [e/EMAIL] | [p/PHONE]}1\n"
             + "Examples:\n" + COMMAND_WORD + " 1\n"
             + COMMAND_WORD + " n/John Doe\n"
             + COMMAND_WORD + " e/johndoe@gmail.com\n"

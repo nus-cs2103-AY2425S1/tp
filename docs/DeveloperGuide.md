@@ -158,21 +158,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Find feature
-The `find` feature follows the sequence diagram here:
+The Find feature follows the sequence diagram here:
 <puml src="diagrams/FindSequenceDiagram.puml" width="550" />
 
 ### Mass Reject feature
-The `mass reject` feature follows the sequence diagram here:
+The Mass Reject feature follows the sequence diagram here:
 <puml src="diagrams/MassRejectSequenceDiagram.puml" width="550" />
 
 ### Delete feature
-The `delete` feature has 2 types of sequence. 
+The Delete feature has 2 types of sequence. 
 
 Deleting by index follows this sequence diagram:
 <puml src="diagrams/DeletePredicateSequenceDiagram.puml" width="550" />
 
 ### Statistics feature
-The `stats` feature follows the sequence diagram here:
+The Statistics feature follows the sequence diagram here:
 <puml src="diagrams/StatisticsSequenceDiagram.puml" width="550" />
 
 Like `ListCommand`, it does not require the use of its own parser, as it only calls upon the FilteredList of the

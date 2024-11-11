@@ -182,7 +182,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_deleteByEmailNotFound_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Email  invalidEmail= new Email("invalidemail@example.com");
+        Email invalidEmail = new Email("invalidemail@example.com");
         DeleteCommand deleteCommand = new DeleteCommand(invalidEmail);
         String expectedMessage = "No matching contacts found";
         assertCommandFailure(deleteCommand, model, expectedMessage);
@@ -203,7 +203,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_deleteByPhoneNotFound_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Phone  invalidPhone= new Phone("00000000");
+        Phone invalidPhone = new Phone("00000000");
         DeleteCommand deleteCommand = new DeleteCommand(invalidPhone);
         String expectedMessage = "No matching contacts found.";
         assertCommandFailure(deleteCommand, model, expectedMessage);

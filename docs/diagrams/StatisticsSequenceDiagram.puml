@@ -23,7 +23,7 @@ create StatisticsCommand
 AddressBookParser -> StatisticsCommand
 activate StatisticsCommand
 
-StatisticsCommand --> AddressBookParser
+StatisticsCommand --> AddressBookParser : s
 deactivate StatisticsCommand
 
 AddressBookParser --> LogicManager : s
