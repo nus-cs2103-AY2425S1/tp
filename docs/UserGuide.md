@@ -205,6 +205,7 @@ Examples:
 #### Name (`n/KEYWORDS`)
 * The order and case of keywords does not matter. For example, `find n/Hans Bo` will match both `Hans Gruber` and `Bo hans`.
 * You can search using a part of any name (first or last) as long as it starts with the given keywords. For example, `find jo ap` would return both `John Appleseed` and `Appleseed Johnny`.
+* If there is only a single match, Cher will directly delete the person and an empty list is displayed. Use the list command again to return to the full contact list.
 * If multiple persons match the partial name, Cher will display a list of matches for the user to choose from.
   
 Examples:
