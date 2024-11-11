@@ -52,10 +52,4 @@ public class RemovePersonFromEventParser implements Parser<RemovePersonFromEvent
         return new RemovePersonFromEventCommand(eventIndex, personIndex);
 
     }
-
-
-
-
-
-
 }
