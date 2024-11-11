@@ -183,8 +183,8 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 * `REMARK`: Additional comments
 
 **Format Notes:**
-* `[parameter]`: Optional parameter
-* `parameter...`: Parameter can be repeated
+* `[PARAMETER]`: Optional parameter
+* `PARAMETER...`: Parameter can be repeated
 * Parameters can be entered in any order
 * Commands and parameter prefixes are case-sensitive
 
@@ -196,15 +196,15 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 
 ## **General Contact Management**
 
-| Command                                   | Format                                                                      | Example                                                              |
-|-------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
-| [Add Contact](#add-contact-command)       | `addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...`         | `addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road` |
-| [Delete Contact](#delete-contact-command) | `deleteContact INDEX`                                                       | `deleteContact 1`                                                    |
-| [Edit Contact](#edit-contact-command)     | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` | `editContact 1 p/91150335`                                           |
-| [Filter Contact](#filter-contact-command) | `filterContact t/TAG [MORE_TAGS]...`                                        | `filterContact t/Customer`                                           |
-| [Find](#find-contact-command)             | `find KEYWORD [MORE_KEYWORDS]...`                                           | `find Charlotte Bernice`                                             |
-| [List](#list-command)                     | `list`                                                                      | `list`                                                               |
-| [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
+| Command                                   | Format                                                                        | Example                                                              |
+|-------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| [Add Contact](#add-contact-command)       | `addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...`           | `addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road` |
+| [Delete Contact](#delete-contact-command) | `deleteContact INDEX`                                                         | `deleteContact 1`                                                    |
+| [Edit Contact](#edit-contact-command)     | `editContact INDEX PARAMETER [MORE_PARAMETERS]...` | `editContact 1 p/91150335`                                           |
+| [Filter Contact](#filter-contact-command) | `filterContact t/TAG [t/MORE_TAGS]...`                                        | `filterContact t/Customer`                                           |
+| [Find](#find-contact-command)             | `find KEYWORD [MORE_KEYWORDS]...`                                             | `find Charlotte Bernice`                                             |
+| [List](#list-command)                     | `list`                                                                        | `list`                                                               |
+| [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                       | `remark 1 r/Regular customer`                                        |
 
 ## **Customer and Supplier Contact Management**
 
@@ -677,7 +677,7 @@ exit
 Filter and list contacts in the address book based on specified tags.
 
 ```bash
-filterContact t/TAG [MORE_TAGS]...
+filterContact t/TAG [t/MORE_TAGS]...
 ```
 - **Parameters:**
    - `t/TAG`: A tag to filter contacts by. Multiple tags can be specified by repeating the "t/" prefix with different tag values.
