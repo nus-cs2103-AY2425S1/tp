@@ -540,33 +540,31 @@ Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
 ### Retrieving public addresses of a contact : `retrievepa`
 
-Retrieves the public addresses of a contact.
+Retrieves public addresses with matching labels.
 
 Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
-* `WALLET_NAME` parameter is compulsory and specifies the label (or part of the label) of the public address(es) to be
-  retrieved. This field is **case-insensitive**.
-
-* `NETWORK` parameter is optional and specifies the ticker name for each network.
-  This field is **case-insensitive** <br />
-  Allowed values: `BTC|ETH|SOL`.
-
-* `PERSON_NAME` parameter is optional and specifies the name (or part of the name) of the contact(s) whose addresses
-  should be retrieved. This field is **case-insensitive**.
+| Parameter     | Explanation                                                   | Details                                                                                                                                                                                                          |
+|---------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `WALLET_NAME` | Label (or part of the label) of desired public addresses      | - This field is **case-insensitive**. `MAIN` and `main` are equivalent.                                                                                                                                          |
+| `NETWORK`     | Optional ticker name for network to filter for                | - This field is **case-insensitive**. `BTC` and `btc` are equivalent.<br />- Allowed values: `BTC, ETH, SOL`.<br />- If `NETWORK` is not provided, it will retrieve matching public addresses from all networks. |
+| `PERSON_NAME` | Optional name (or part of the name) of contacts to filter for | - This field is **case-insensitive**. `ALEX` and `alex` are equivalent.<br />- If `PERSON_NAME` is not provided, it will retrieve matching public addresses of all contacts.                                     |
 
 #### Examples
 
-* `retrievepa l/MyWallet`<br />
-  Retrieves all public addresses with labels containing "MyWallet" for all contacts and networks.
+* `retrievepa l/main wallet`<br />
+  Retrieves all public addresses with labels containing "main wallet" for all contacts and networks.
+  ![retrievepa label](images/retrievepa-label.png)
 
-* `retrievepa l/Daily c/BTC`<br />
-  Retrieves all BTC public addresses with labels containing "Daily" for all contacts.
+* `retrievepa l/Main c/ETH`<br />
+  Retrieves all ETH public addresses with labels containing "Main" for all contacts.
 
-* `retrievepa l/Savings n/John`<br />
-  Retrieves all public addresses with labels containing "Savings" for contacts whose names contain "John".
+* `retrievepa l/Business n/Alex`<br />
+  Retrieves all public addresses with labels containing "Business" for contacts whose names contain "Alex".
 
-* `retrievepa l/Business c/ETH n/Alice`<br />
-  Retrieves all ETH public addresses with labels containing "Business" for contacts whose names contain "Alice".
+* `retrievepa l/main c/btc n/bernice`<br />
+  Retrieves all BTC public addresses with labels containing "main" for contacts whose names contain "bernice".
+  ![retrievepa label](images/retrievepa-label-network-name.png)
 
 <br>
 
