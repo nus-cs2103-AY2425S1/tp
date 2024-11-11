@@ -220,7 +220,7 @@ n\Henry Teo' replaces the name field of student S00001 with "Henry Tan".
 
 Examples:
 * `edit S00001 a\New_Address`
-* `edit s00002 p\91234567 a\New_Address`
+* `edit S00002 p\91234567 a\New_Address`
 
 ![Edit Success Message](/images/edit.png)
 
