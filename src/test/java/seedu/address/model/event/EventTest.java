@@ -261,6 +261,14 @@ public class EventTest {
     }
 
     @Test
+    public void getAllPersons_noPersons_success() {
+        Event event = new Event("Event1");
+        Set<Person> emptySetOfPersons = new HashSet<>();
+
+        assertTrue(event.getAllPersons().equals(emptySetOfPersons));
+    }
+
+    @Test
     public void removePerson_fromMultipleRoles_success() {
         Event event = new Event("Event1");
         Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE,
@@ -355,5 +363,63 @@ public class EventTest {
         HashSet<Role> expectedRoles = new HashSet<>();
         expectedRoles.add(new Attendee());
         assertEquals(roles, expectedRoles);
+    }
+
+    @Test
+    public void isPersonInEvent_nullInput_false() {
+        Event event = new Event("Event1");
+        assertFalse(event.isPersonInEvent(null));
+    }
+
+    @Test
+    public void isPersonInEvent_personNotInEvent_false() {
+        Event event = new Event("Event1");
+
+        Person person1 = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE,
+                VALID_ROLE_VENDOR, VALID_ROLE_SPONSOR, VALID_ROLE_VOLUNTEER).withName("Aaron").build();
+        Person person2 = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE,
+                VALID_ROLE_VENDOR, VALID_ROLE_SPONSOR, VALID_ROLE_VOLUNTEER).withName("Betty").build();
+
+        try {
+            event.addPerson(person1, VALID_ROLE_ATTENDEE);
+            assertFalse(event.isPersonInEvent(person2));
+        } catch (Exception e) {
+            assert true;
+        }
+    }
+
+    @Test
+    public void clearAllContacts_eventDoesNotContainPerson_true() {
+        Event event = new Event("event1");
+        event.clearAllContacts();
+
+        Event emptyEventWithSameName = new Event("event1");
+
+        assertTrue(event.equals(emptyEventWithSameName));
+    }
+
+    @Test
+    public void clearAllContacts_eventContainsPersons_true() {
+        Event event = new Event("event1");
+
+        Person personAttendee = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
+        Person personSponsor = new PersonBuilder().withRoles(VALID_ROLE_SPONSOR).build();
+        Person personVendor = new PersonBuilder().withRoles(VALID_ROLE_VENDOR).build();
+        Person personVolunteer = new PersonBuilder().withRoles(VALID_ROLE_VOLUNTEER).build();
+
+        try {
+            event.addPerson(personAttendee, VALID_ROLE_ATTENDEE);
+            event.addPerson(personSponsor, VALID_ROLE_SPONSOR);
+            event.addPerson(personVendor, VALID_ROLE_VENDOR);
+            event.addPerson(personVolunteer, VALID_ROLE_VOLUNTEER);
+
+            event.clearAllContacts();
+
+            Event emptyEventWithSameName = new Event("event1");
+
+            assertTrue(event.equals(emptyEventWithSameName));
+        } catch (Exception e) {
+            assert false;
+        }
     }
 }
