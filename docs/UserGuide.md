@@ -282,7 +282,7 @@ Closes all attendance windows if any is currently open.
 | `tg/`  | Tutorial group should only be in the format of a letter followed by two numbers.                                                                                                                                                                           | valid: `tg/G01`</br> invalid: `tg/G1`                        |
 | `sn/`  | Student number should be in the format of a letter followed by 7 numbers and a letter.                                                                                                                                                                     | valid: `A1234567N` </br> invalid: `B1234567C`, `A123B`       |
 | `d/`   | Dates should be in the format YYYY-MM-DD                                                                                                                                                                                                                   | valid: `2024-12-01` </br> invalid: `2023-5-1`, `5-1-2024`    |
-| `g/`   | Grade is an integer between 0 and 100 inclusive or null.                                                                                                                                                                                                   | valid: `null`, `5`, `98` </br> invalid: `101`, `92.5`        |
+| `g/`   | Grade is an integer between 0 and 100 inclusive or "NULL" (Case Sensitive).                                                                                                                                                                                | valid: `NULL`, `5`, `98` </br> invalid: `101`, `92.5`, `null` |
 
 ### Adding Assignments : `adda`
 
