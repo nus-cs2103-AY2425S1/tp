@@ -47,7 +47,7 @@ activate ArgumentMultiMap
 ArgumentMultiMap --> ArgumentTokenizer
 deactivate ArgumentMultiMap
 
-ArgumentTokenizer --> AddFCommandParser : arguMultimap
+ArgumentTokenizer --> AddFCommandParser
 deactivate ArgumentTokenizer
 
 AddFCommandParser -> AddFCommandParser : arePrefixesPresent(...)
@@ -97,12 +97,6 @@ destroy ArgumentMultiMap
 ClinicConnectSystemParser --> LogicManager
 deactivate ClinicConnectSystemParser
 
-LogicManager -> AddFCommand : execute()
-activate AddFCommand
-
-
-AddFCommand --> LogicManager : result
-deactivate AddFCommand
 destroy AddFCommand
 [<--LogicManager
 deactivate LogicManager
