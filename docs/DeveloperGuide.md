@@ -220,14 +220,60 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 ## **Appendix: Planned Enhancements**
 
-1. Prefix enhancements
+**1. Prefix Enhancements**
 
-Currently: The view wedding command in KnottyPlanners does not require a need for a prefix to represent the wedding. Thus, when associating a wedding to a `Person`, it is done by _tagging_ them to it, making the prefix 't/'. 
+**Currently:** The view wedding command in KnottyPlanners does not require a need for a prefix to represent the wedding. Thus, when associating a wedding to a `Person`, it is done by _tagging_ them to it, making the prefix 't/'. 
 
-Plan: To make the association of `Wedding` and `Person` more intuitive, we will change the prefix from 't/' to 'w/', representing the `Wedding` that a `Person` is associated with.
+**Plan:** To make the association of `Wedding` and `Person` more intuitive, we will change the prefix from 't/' to 'w/', representing the `Wedding` that a `Person` is associated with.
 
-// Support for Multi-Languages
- 
+**2. Forced Deletion and Clearing**
+
+**Currently:** To prevent accidental deletions and clearing of data in KnottyPlanners, a user confirmation is currently required to ensure that the action is intentional.
+
+**Plan:** To include a force deletion or clearing command that enables the user to remove the data without KnottyPlanners requiring a confirmation from them.
+
+**3. Improved Filtering**
+
+**Currently:** The filter command in KnottyPlanners supports filtering by the name or job fields only.
+
+**Plan:** To allow users to filter with other fields such as phone number, address and email. To allow users to filter with other fields such as phone number, address and email.
+
+**4. Allow Copying of Information**
+
+**Currently:** KnottyPlanners is optimised for keyboard usage, and direct copying of information from the GUI is not supported.
+
+**Plan:** To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage.
+
+**5. Support for Long Inputs**
+
+**Currently:** KnottyPlanners only support inputs up till a reasonable amount of characters. As such, extreme inputs that exceed our limit can potentially hinder the viewing of information when the user does not resize the window.
+
+**Plan:** To handle extreme inputs of all fields with a long character count, ensuring that the information can still remain visible.
+
+**6. Index Referencing**
+
+**Currently:** KnottyPlanner requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in inefficiency when handling extremely long names.
+
+**Plan:** To allow users to reference the contact or wedding based on their index in the list, ensuring that the efficiency of KnottyPlanners is maintained.
+
+**7. Further CLI Support**
+
+**Currently:** Opening the help window creates an external popup that requires the user to close with a mouse or trackpad.
+
+**Plan:** Enhance CLI optimisation by allowing the user to close the popup without using a mouse or trackpad.
+
+**8. Contacts and Weddings Visibility**
+
+**Currently:** The address and wedding lists are in two separate views to help the wedding planner to be more focused and reduce cluttering of information. This can lead to an additional need to toggle between the wedding book and address book to recall the names of the wedding.
+
+**Plan:** To have an integrated view contains both the persons and weddings, allowing the association of persons to weddings to be done with less memory work.
+
+**9. Comprehensive Language Support**
+
+**Currently:** KnottyPlanners support names in English language without special characters such as "^" or non-English names.
+
+**Plan:** To have a more comprehensive language allowance for names with special characters and non-English names, making KnottyPlanners more inclusive. To maintain checks for incorrect entry of data, KnottyPlanners will then prompt the user if special characters have been used.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
@@ -295,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. KnottyPlanners shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 * 5a. The user cancels the deletion.
 
