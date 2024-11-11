@@ -739,7 +739,7 @@ hence reducing the usefulness of this command.
 This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
 we plan to adopt other ways of constructing the query to allow for more general search of module-role in the future.
 
-2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only description field of a contact can be deleted, by editing the contact description field with
+2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields of a contact can be deleted, by editing the contact description field with
 an empty string (For Example: `edit 9 d/` removes description of the ninth contact in the current list), and not any other optional fields such as phone, email and address.
 
 ![point2_screenshot_remove_description_example](images/Planned_Enhancements_Screenshots/Point2_RemoveDescriptionExample.png)
