@@ -87,11 +87,8 @@ Health Connect is an application designed to **streamline client management** fo
        ![Checking Java Version on Mac - Display](./images/QuickStartMacCheckVersionDisplay.png)
     4. Otherwise, proceed to step 2.
        <br>
-2. If you do not have the `Azul` version of Java `17` from the previous step, install the correct version of Java.
-    1. Proceed to the [official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17`.
-    2. Download the appropriate installer for Mac.
-    3. To ensure that you have the correct `Azul` version, follow the instructions on [this page](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-    4. After installation, follow the instructions in **Step 1**.
+2. If you do not have the `Azul` version of Java `17` from the previous step, install the correct version of Java by following the instructions on [this page](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   1. After installation, follow the instructions in **Step 1**.
        <br>
 3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/latest).
    <br>
