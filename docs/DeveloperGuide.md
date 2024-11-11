@@ -247,15 +247,12 @@ The sequence of the `addstudent` command is as follows:
 7. If `Student`, the user inputs are valid, and the Address Book does not contain the module, `AddStudentCommand` will
    successfully add the new `Student` into Address Book.
 
-<div style="page-break-after: always;"></div>
-
 The following two *Sequence Diagrams* shows how the `addstudent` command works:
 
 Here is the *Sequence Diagram* showing how the parser works:
 
 <puml src="diagrams/AddStudentParseSequenceDiagram.puml" />
 
-<div style="page-break-after: always;"></div>
 
 And here is the *Sequence Diagram* showing the command being executed:
 
@@ -301,15 +298,12 @@ The sequence of the `addparent` command is as follows:
 7. If `Parent`, the user inputs are valid, and the Address Book does not contain the module, `AddParentCommand` will
    successfully add the new `Parent` into Address Book.
 
-<div style="page-break-after: always;"></div>
 
 The following two *Sequence Diagrams* shows how the `addparent` command works:
 
 Here is the *Sequence Diagram* showing how the parser works:
 
 <puml src="diagrams/AddParentParseSequenceDiagram.puml" />
-
-<div style="page-break-after: always;"></div>
 
 And here is the *Sequence Diagram* showing the command being executed:
 
@@ -363,15 +357,12 @@ The format of the `delete` command can be found [here](https://ay2425s1-cs2103t-
 
 #### Feature details
 
-1. The user executes the `delete` command.
+1. The user executes the `delete` command. <br>
 2. If the index field is not provided, an error message with the correct command usage will be shown.
 3. If invalid index field is provided, an error message with the correct command usage will be shown. 
-4. If all previous steps are completed without exceptions, the new `Person` will be successfully deleted from the address book.
+4. If all previous steps are completed without exceptions, the `Person` will be successfully deleted from the address book.
 
 <br>
-
-<div style="page-break-after: always;"></div>
-
 
 The sequence of the `delete` command is as follows:<br>
 
@@ -380,14 +371,53 @@ The sequence of the `delete` command is as follows:<br>
 2. The `LogicManager` calls the `AddressBookParser#parseCommand` to parse the command.
 3. The `AddressBookParser` then creates a new `DeleteCommandParser` to parse the fields provided by the user and a new `DeleteCommand` is created.
 4. The `DeleteCommand` checks if the `index` is valid
-4. The `DeleteCommand` then checks if the `Model` contains a person with the same `ModuleCode` by calling `Model#getModule`.
 5. If the `index` is valid and `Model` contains the persons, the `DeleteCommand` calls `Model#deletePerson` to delete the person from the address book.
 
 The following sequence diagram shows how the `delete` command works:
 
-<puml src="diagrams/DeleteCommandSequenceDiagram.puml" />
+<puml src="diagrams/DeleteParseSequenceDiagram.puml" />
 
-<puml src="diagrams/DeleteCommandSequenceDiagram2.puml" width="600" />
+<puml src="diagrams/DeleteExecuteSequenceDiagram.puml" width="600" />
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+### Link Command
+
+#### Overview
+
+The `link` command is used to delete a person from the address book. The person can only be deleted if it is already present in the address book.<br>
+
+The format of the `link` command can be found [here](https://ay2425s1-cs2103t-t09-4.github.io/tp/UserGuide.html#link-a-parent-to-a-student-link).<br>
+
+#### Feature details
+
+1. The user executes the `link` command.
+2. If the index field is not provided, an error message with the correct command usage will be shown.
+3. If invalid index field is provided, an error message with the correct command usage will be shown.
+4. If all previous steps are completed without exceptions, the new `Person` will be successfully deleted from the address book.
+
+<br>
+
+The sequence of the `link` command is as follows:<br>
+
+1. The user inputs the `link` command.<br>
+   e.g. `link ch/Alex Yeoh pa/Bernice Yu`
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` to parse the command.
+3. The `AddressBookParser` then creates a new `LinkCommandParser` to parse the fields provided by the user and a new `LinkCommand` is created.
+4. The `LinkCommand` checks if the Student and Parent `name` is in the address book by calling `Model#personFromName`
+5. If the Student `name` is valid and `Model` contains the person, the `LinkCommand` creates a new Student by calling `LinkCommand#createLinkedChild`.
+6. If the Parent `name` is valid and `Model` contains the person, the `LinkCommand` creates a new Parent by calling `LinkCommand#createLinkedParent`.
+7. `LinkCommand` updates the Student and Parent in the address book by calling `Model:setPerson`.
+
+The following sequence diagram shows how the `link` command works:
+
+<puml src="diagrams/LinkParseSequenceDiagram.puml" />
+
+<puml src="diagrams/LinkExecuteSequenceDiagram.puml" width="600" />
 
 <br>
 
