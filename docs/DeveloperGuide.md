@@ -161,20 +161,20 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 The current `Event` class has a `Person` field that stores the `Person` object associated with the event. This is because the `Event` object should be aware of the `Person` object it is associated with. This ensures that when details of the `Person` object are updated, the `Event` object is aware of the changes and can update itself accordingly. This applies to the contact list in `Event` as well.
 
-Step 1: The user adds a new `Event` through the `add event` command. During execution of the command, the `Person` object associated with the `Event` is retrieved from the `Model` using the `findPerson` command.
+Step 1: The user adds a new `Event` through the `add event` command. During execution of the command, the `Person` object associated with the `Event` is retrieved from the `Model` using the `findPerson` method.
 
 The following sequence diagram shows how the `Event` object is created and associated with a `Person` object:
 ![AddEvent](images/AddEventSequenceDiagram.png)
 
-The following sequence diagram shows how `findPerson` command is executed and the `Person` object is retrieved:
+The following sequence diagram shows how `findPerson` method is executed and the `Person` object is retrieved:
 ![FindPerson](images/FindPersonSequenceDiagram.png)
 
-Step 2: The user updates the details of a `Person` object through the `edit person` command. During execution of the command, is done by updating the `Person` object in the `Model`, the updated `Person` replaces all `Event` associate with the original `Person` using the `replacePerosnInEvents` method.
+Step 2: The user updates the details of a `Person` object through the `edit person` command. During execution of the command, the updated `Person` replaces all original `Person` in relevant `Events` through the `replacePersonInEvents` method in the `Model`. 
 
 The following sequence diagram shows how the `Person` object is edited:
 ![EditPerson](images/EditPersonSequenceDiagram.png)
 
-The following sequence diagram shows how `findPerson` command is executed and the `Person` object is retrieved:
+The following sequence diagram shows how `replacePersonInEvents` method is executed and the original `Person` object is replaced with the updated `Person` object:
 ![ReplacePerson](images/ReplacePersonInEvents.png)
 
 ### \[Proposed\] Undo/redo feature
