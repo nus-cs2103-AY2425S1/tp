@@ -41,12 +41,12 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
 <br>
 4. [GUI Overview](#gui-overview)  
 <br>
-5. [Beginner's Tutorial](#beginners-tutorial)  
+5. [Beginner's Tutorial](#beginner-s-tutorial)  
    5.1 [Before You Begin](#before-you-begin)  
    5.2 [Exploring the Application](#exploring-the-application)  
    5.3 [Starting with a Clean Slate](#starting-with-a-clean-slate)  
    5.4 [Adding Your First Student](#adding-your-first-student)  
-   5.5 [Adding a Lesson to Your Student's Details](#adding-a-lesson-to-your-students-details)  
+   5.5 [Adding a Lesson to Your Student's Details](#adding-a-lesson-to-your-student-s-details)  
    5.6 [Editing Student Details](#editing-student-details)  
    5.7 [Deleting a Student](#deleting-a-student)  
    5.8 [Wrapping Up](#wrapping-up)  
@@ -780,15 +780,19 @@ With the ever-changing responsibilities of tutors, Tuteez evolves right alongsid
 ## Frequently Asked Questions
 
 **Q**: How do I transfer my data to another Computer?
+
 **A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tuteez home folder.
 
 **Q**: Can I add students with the same name?
+
 **A**: As of `V1.6` Tuteez uniquely identifies entries by name. Hence we recommend using a student's full name if there is an existing student with the same first name and surname. We hope to address this in the future, for more info checkout [future features](#exciting-features-in-the-future).
 
 **Q**: How can I view a student’s full details if their name or other fields are cut off in the left panel?
-**A**:If a field is truncated in the left panel, use the display command with the student’s index or full name to see all their details in the right panel.
+
+**A**: If a field is truncated in the left panel, use the display command with the student’s index or full name to see all their details in the right panel.
 
 **Q**: I can’t see the left or right panel content after moving the app to a new screen. What’s wrong?
+
 **A**: This is a known issue when switching screens. Try deleting the preferences.json file created by Tuteez, which will reset the display settings upon the next launch.
 
 [Take me back to Table of Contents](#table-of-contents)
