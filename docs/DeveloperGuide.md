@@ -250,14 +250,12 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC2 - Delete a contact
 
 **MSS**
-1. User enters delete contact command with the contact's full name.
-2. Cher shows list of contacts with name that matches user input.
-3. User re-enters delete command with index of the contact in list shown to delete.
-4. Cher prompts for delete confirmation.
-5. User confirms deletion.
-6. Cher deletes the contact from memory.
-7. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
-8. Cher shows a success message. <br>
+1. User enters delete contact command with a specified attribute.
+2. Cher shows list of contacts that matches user input.
+3. User re-enters delete command with the full attribute of the desired contact to delete.
+4. Cher deletes the contact from memory.
+5. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+6. Cher shows a success message. <br>
    Use case ends.
 
 **Extensions**
@@ -290,8 +288,9 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC5 - Batch delete
 **MSS**
 1. User enters a command to delete all contacts with specific tags.
-2. Cher will remove all contacts containing specified tags.
-3. Cher will show the contacts that have been removed.<br>
+2. Cher removes all contacts containing specified tags.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows the contacts that have been removed.<br>
    Use case ends.
 
 **Extensions**
@@ -317,8 +316,9 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC7 - Batch edit
 **MSS**
 1. User enters a command to edit all contacts with specific tags to new tag.
-2. Cher will change all contacts containing specified tags to the new tag.
-3. Cher will show the contacts that have been changed.<br>
+2. Cher changes all contacts containing specified tags to the new tag.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows all the contacts that have the new tag.<br>
    Use case ends.
 
 **Extensions**
@@ -326,7 +326,58 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
     - 1a1. Cher shows correct input format. <br>
       Use case ends.
 
-#### Use case: UG8 - Mark attendance
+
+#### Use case: UC8 - Find Contacts
+
+**MSS**
+1. User enters find contacts command with specified attribute.
+2. Cher shows list of contacts that matches user input.
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format.<br>
+      Use case ends.
+
+#### Use case: UC8 - Select contacts by index
+
+**MSS**
+1. User enters the select command with a list of indexes.
+2. Cher verifies that each index corresponds to a valid contact in the current list.
+3. Cher highlights or marks the selected contacts.
+4. Cher displays the selected contacts to the user.
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects an invalid or out-of-range index.
+    - 1a1. Cher shows an error message with the list of invalid indexes.
+      Use case ends.
+* 1b. User enters an index that is not displayed in the current displayed list.
+    - 1b1. Cher shows an error indicating the index is not displayed.
+      Use case ends.
+
+#### Use case: UC9 - Filter and then select contacts
+
+**MSS**
+1. User enters a filter command with criteria to narrow down the displayed list of contacts (e.g., by tags or names).
+2. Cher filters and displays only the contacts that match the specified criteria.
+3. User enters the select command with specific indexes from the filtered list.
+4. Cher highlights and displays the selected contacts to the user.
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects an error in user input for the filter criteria.
+    - 1a1. Cher shows an error message and provides the correct filter input format.
+      Use case ends.
+* 3a. Cher detects an invalid index or indexes outside the filtered list.
+    - 3a1. Cher displays an error message indicating the invalid indexes.
+      Use case ends.
+* 3b. No contacts match the filter criteria.
+    - 3b1. Cher shows a message that no contacts matched the criteria.
+      Use case ends.
+
+
+#### Use case: UG10 - Mark attendance
 **MSS**
 1. User enters mark command with the index of a specific contact.
 2. Cher increases the attendance count of the specified contact by 1.
@@ -342,7 +393,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    - 1b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
      Use case ends.
 
-#### Use case: UG9 - Unmark attendance
+#### Use case: UG11 - Unmark attendance
 **MSS**
 1. User enters unmark command with the index of a specific contact.
 2. Cher decreases the attendance count of the specified contact by 1.
@@ -361,7 +412,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
   - 1c1. Cher shows error message that the attebdabce count is already at 0. <br>
   Use case ends.
 
-#### Use case: UG10 - Reset attendance 
+#### Use case: UG12 - Reset attendance 
 **MSS**
 1. User enters the reset attendance command.
 2. Cher resets the attendance count of all students in list to 0.
@@ -374,7 +425,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
   - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
-#### Use case: UG11 - Mark group attendance
+#### Use case: UG13 - Mark group attendance
 **MSS**
 1. User enters the batch-mark command.
 2. Cher increases the attendance count of all students in the list by 1.
@@ -387,7 +438,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
   - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
-#### Use case: UG12 - Unmark group attendance
+#### Use case: UG14 - Unmark group attendance
 **MSS**
 1. User enters the batch-unmark command.
 2. Cher ignores students whose attendance count is already 0 and decreases the attendance count of other students by 1.
@@ -399,7 +450,6 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
   - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends. 
 
-     
 
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -458,13 +508,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Sorting persons
@@ -575,17 +625,21 @@ Execute the following:
 
 ### Batch deleting a group of people
 1. Deleting a group of people.
+   
    1. Prerequisites: <br>
    Execute the following:
       - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
-      - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
-      - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+      - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
+      - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
       - List all persons using the `list` command.
+        
    2. Test case: `batch-delete t/tag3` <br>
       Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
-   3. Test case: `batch-delete t/tag1 t/tag2` <br>
+   
+   4. Test case: `batch-delete t/tag1 t/tag2` <br>
       Expected: `test person 3` will be deleted. Feedback box will show detail of deleted person.
-   4. Test case: `batch-delete t/tag1` <br>
+      
+   6. Test case: `batch-delete t/tag1` <br>
       Expected: `test person 1`, `test person 2` will be deleted as `test person 3` is already deleted from the
       previous test case `iii`. Feedback box will show detail of deleted person.
 
@@ -594,18 +648,68 @@ Execute the following:
     1. Prerequisites: <br>
        Execute the following:
         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
-        - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
-        - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+        - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
+        - add n/test person 2 s/m r/student p/12543579 a/address e/sdgs@dfsh.dsfvc  t/tag1
+        - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
         - List all persons using the `list` command.
+          
     2. Test case: `batch-edit t/tag3 t/tag4` <br>
        Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
-    3. Test case: `batch-edit t/tag1 t/tag3` <br>
+   
+    4. Test case: `batch-edit t/tag1 t/tag3` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`. 
+
+    3. Test case: `batch-edit t/tag1 t/tag3` <br>
+       Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`.
+
        Contact entries will show a list of contacts that currently has `[tag3]`; `test person 1`, `test person 2`,
        `test person 3`, for this test assuming other contacts does not have the `[tag1]` as their tag.
-    4. Test case: `batch-edit t/tag2 t/tag4` <br>
+       
+    6. Test case: `batch-edit t/tag2 t/tag4` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag4]` <br>
        Contact entries will show a list of contacts that currently has `[tag4]`; `test person 3`.
+
+### Selecting Persons
+
+1. Select one person while all persons are being shown:
+    1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+    2. Test case: `select 2` where N > 2
+        - Expected: Contacts at indexes 2 is selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at index 2]" (e.g., "Selected Person(s): John Doe"). No errors are shown.
+
+2. Select multiple persons while all persons are being shown:
+   1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+   2. Test case: `select 1 2 4` where N > 4
+       - Expected: Contacts at indexes 1, 2, and 3 are selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at indexes 1, 2, and 4]" (e.g., "Selected Person(s): John Doe, Jane Smith, Bob Lee"). No errors are shown.
+   3. Test case: `select 1 7` where N > 7
+       - Expected: Similar to the previous. Contacts at indexes 1, 2 are selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at indexes 1 and 2]" (e.g., "Selected Person(s): John Doe, Bob Lee"). No errors are shown.
+
+3. Select with invalid indexes that do not match the currently displayed person list
+    1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+    2. Test case: `select 7` where N < 6
+       - Expected: The feedback box will display an error message: "The following indexes are invalid: 7." No changes are made to the contact list, and it remains as originally displayed.
+    3. Test case: `select 6 20 40` where N < 6
+       - Expected: Similar to the previous. The feedback box will display an error message: "The following indexes are invalid: 6, 20, 40." No changes are made to the contact list, and it remains as originally displayed.
+
+### Testing the Main Window
+
+1. Open the Main Window:
+   1. Prerequisites: Ensure that the application has started and the main window is initialized.
+   2. Test case: Launch the application and wait for the main window to appear.
+      - Expected: The main window should appear on the screen, showing the application layout with the menu bar, the person list panel, result display area (Feedback Box), command box, and status bar footer. No errors should be shown.
+   3. Test case: Try the functionalities of the UI, follow Selecting Persons 2.2
+      - Expected: Same as Selecting Persons 2.2 Expected. The Ui components should function without errors. The corresponding persons should be highlighted or indicated as selected in the UI.
+
+### Testing the Help Window
+
+1. Open the Help Window:
+   1. Prerequisites: Ensure that the main window is open and the application is running.
+   2. Test case: Press F1 or click the "Help" menu item, then click the dropdown menu button.
+      - Expected: The help window should appear, displaying the message: "Refer to the user guide: https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html". No errors should be shown, and the user guide should be loaded in the web view.
+
+2. Focus on an already opened Help Window:
+   1. Prerequisites: Ensure that the help window is open.
+   2. Test case: Press F1 again or click the "Help" menu item while the help window is already showing.
+      - Expected: The help window should gain focus and bring itself to the front. The URL "Refer to the user guide: https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html" should remain displayed in the help message label.
 
 ### Saving data
 
@@ -614,4 +718,27 @@ Execute the following:
    1. Delete all generated save file if there is any.
    2. Re-start the Cher application which will automatically regenerate the basic data.
    3. It will result in loss of data.
+
+
+### Finding persons
+
+1. Finding persons by tag
+      1. Prerequisites: <br>
+         Execute the following:
+         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
+         - add n/test person 2 s/m r/student p/12543579 a/address e/sdgs@dfsh.dsfvc  t/tag1
+         - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+         - List all persons using the `list` command.
+           
+      2. Test case: `find t/tag1`<br>
+         Expected: test person 1, test person 2, and test person 3 will be shown in the list of persons.
+         Feedback box will show number of persons listed.
+
+      3. Test case: `find t/tag2`<br>
+         Expected: test person 3 will be shown in the list of persons.
+         Feedback box will show number of persons listed.
+
+      4. Other incorrect find commands to try: `find`, `find x`, `...` (where x is larger than the list size)<br>
+         Expected: List of persons shown remains unchanged.
+         Feedback box shows error details regarding incorrect input format.
 
