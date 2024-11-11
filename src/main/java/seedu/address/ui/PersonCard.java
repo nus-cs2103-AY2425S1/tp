@@ -44,6 +44,7 @@ public class PersonCard extends UiPart<Region> {
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * GPT was used here to help with the usage of .getStyleClass() and .add methods.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
