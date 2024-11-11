@@ -47,8 +47,9 @@ public class CommandHistory {
      * @return the next command, or an empty string if at the end of the history
      */
     public String getNextCommand() {
-        if (currentIndex >= 0 && currentIndex < history.size()) {
-            return history.get(currentIndex++);
+        if (currentIndex >= 0 && currentIndex < history.size() - 1) {
+            currentIndex++;
+            return history.get(currentIndex);
         }
         return "";
     }
