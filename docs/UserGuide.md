@@ -384,7 +384,7 @@ Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 * The KEYWORD can contain any types of value: Strings, Numbers, Special Characters
 * The search is case-insensitive. e.g `condo` will match `Condo`
 * The order of the keywords does not matter. e.g. `condo 02-205` will match `02-205 condo`
-* All the criterias for a property are searched.
+* All the criteria for a property are searched.
 * No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
 * Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
@@ -597,9 +597,8 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window. 
+3. The **error message for `bought` in the UI** incorrectly states that multiple values can be entered for the actual price. This is not the case.--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
