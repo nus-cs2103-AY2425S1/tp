@@ -8,17 +8,24 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in ClientHub whose name contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds clients whose name, phone number, "
+            + "address or client type contain any of "
+            + "all specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: n/NAME or p/PHONE_NUMBER, or a/ADDRESS or c/CLIENT_TYPE\n"
+            + "Examples:\n"
+            + "- " + COMMAND_WORD + " alice wong\n"
+            + "- " + COMMAND_WORD + " p/91234567\n"
+            + "- " + COMMAND_WORD + " a/123, Jurong West Ave 6\n"
+            + "- " + COMMAND_WORD + " c/Investment Plan 1\n"
+            + "Additional Info:\n"
+            + "- The command can only take in one prefix at any point of time. (find n/NAME a/Address is invalid)\n";
 
     private final NameContainsKeywordsPredicate predicate;
 
@@ -31,7 +38,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                Messages.getMessagePersonsListedOverview(model.getDisplayPersons().size()));
     }
 
     @Override

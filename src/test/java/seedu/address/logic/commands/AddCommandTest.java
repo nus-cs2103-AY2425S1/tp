@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,12 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ClientHub;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClientHub;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.reminder.Reminder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -109,12 +111,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getClientHubFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setClientHubFilePath(Path clientHubFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,12 +126,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void addReminder(Reminder reminder) {
+
+        }
+
+        @Override
+        public int getDisplayPersonsListSize() {
+            return this.getDisplayPersons().size();
+        }
+
+        @Override
+        public int getDisplayRemindersListSize() {
+            return 0;
+        }
+
+        @Override
+        public void setClientHub(ReadOnlyClientHub newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyClientHub getClientHub() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -139,7 +156,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasReminder(Reminder reminder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteReminder(Reminder target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,12 +176,42 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public void setReminder(Reminder target, Reminder editedReminder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getDisplayPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Reminder> getDisplayReminders() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateUnfilteredList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateUnfilteredReminderList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredReminderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedPersonList(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -196,8 +253,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyClientHub getClientHub() {
+            return new ClientHub();
         }
     }
 

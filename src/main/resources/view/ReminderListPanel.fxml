@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER">
+        <Label text="Reminder List"
+               style="-fx-font-weight: bold;
+                  -fx-font-size: 30px;
+                  -fx-padding: 10 0 10 0;
+                  -fx-text-fill: #ffffff;
+                  -fx-alignment: center;
+                  -fx-underline: true;" />
+    </VBox>
+    <ListView fx:id="reminderListView" VBox.vgrow="ALWAYS" />
+</VBox>

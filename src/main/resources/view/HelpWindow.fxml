@@ -7,9 +7,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.ScrollPane?>
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -19,26 +22,231 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
-        <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
-          </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
-        </children>
-        <opaqueInsets>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </opaqueInsets>
-        <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </padding>
-      </HBox>
+      <VBox fx:id="helpMessageContainer" prefHeight="700" prefWidth="800" >
+
+        <!-- Help message and copy button -->
+        <VBox VBox.vgrow="NEVER">
+          <VBox.margin>
+            <Insets top="20" />  <!-- Adds space above the VBox -->
+          </VBox.margin>
+          <HBox fx:id="moreInfoContainer" alignment="CENTER">
+            <HBox styleClass="helpMessageWrapper">
+            <children>
+              <Label fx:id="helpMessage" alignment="CENTER" text="Label">
+                <HBox.margin>
+                  <Insets right="5.0" />
+                </HBox.margin>
+              </Label>
+              <Button fx:id="copyButton" alignment="CENTER" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+                <HBox.margin>
+                  <Insets left="5.0" />
+                </HBox.margin>
+              </Button>
+            </children>
+            <opaqueInsets>
+              <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+            </opaqueInsets>
+            <padding>
+              <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+            </padding>
+            </HBox>
+          </HBox>
+        </VBox>
+
+        <!-- Commands for ClientHub -->
+        <ScrollPane style="-fx-background-color: white; -fx-border-color: transparent;" fitToWidth="true" fitToHeight="true">
+          <VBox style="-fx-background-color: white; -fx-border-color: transparent;" spacing="14">
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="addHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="addHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="addHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="deleteHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="deleteHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="deleteHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="deleteHelp3" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="editHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="editHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="fnHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="fnHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="fnHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="fnHelp3" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="fpHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="fpHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="fpHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="faHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="faHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="faHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="fcHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="fcHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="fcHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="raHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="raHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="raHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="raHelp3" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="rdHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="rdHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="rdHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="reHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="reHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="reHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="viewHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="viewHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="viewHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label fx:id="viewHelp3" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="sortHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="sortHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label text="s" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="listHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="listHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
+                <Label text="li" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="clearHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="clearHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+            <VBox alignment="CENTER_LEFT" styleClass="commandContainer" VBox.vgrow="NEVER" spacing="5">
+              <Label fx:id="exitHelpHeader" alignment="CENTER_LEFT" styleClass="headerLabel" />
+              <HBox styleClass="commandWrapper">
+                <Label fx:id="exitHelp" alignment="CENTER_LEFT" styleClass="commandLabel" />
+              </HBox>
+              <padding>
+                <Insets bottom="5" left="10" right="10" top="5" />
+              </padding>
+            </VBox>
+
+          </VBox>
+        </ScrollPane>
+
+      </VBox>
     </Scene>
   </scene>
 </fx:root>

@@ -1,9 +1,12 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CLIENT_TYPE_DESC_A;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_A;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -18,6 +21,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -25,10 +30,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClientHub;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.model.reminder.Reminder;
+import seedu.address.storage.JsonClientHubStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -45,10 +51,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonClientHubStorage clientHubStorage =
+                new JsonClientHubStorage(temporaryFolder.resolve("clientHub.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(clientHubStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -60,8 +66,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = "delete invalidName";
+        assertCommandException(deleteCommand, MESSAGE_PERSON_NOT_FOUND);
+
     }
 
     @Test
@@ -83,8 +90,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getPersonList().remove(0));
     }
 
     /**
@@ -123,7 +130,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getClientHub(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -149,10 +156,10 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+        // Inject LogicManager with a ClientHubStorage that throws the IOException e when saving
+        JsonClientHubStorage clientHubStorage = new JsonClientHubStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+            public void saveClientHub(ReadOnlyClientHub clientHub, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -160,16 +167,67 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(clientHubStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveClientHub method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + CLIENT_TYPE_DESC_A + DESCRIPTION_DESC_A;
+        Person expectedPerson = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getClientHub_returnsNonNullClientHub() {
+        ReadOnlyClientHub clientHub = logic.getClientHub();
+        assertNotNull(clientHub, "ClientHub should not be null.");
+    }
+
+    @Test
+    public void getClientHub_returnsExpectedData() {
+        // Assuming model initially has an empty ClientHub
+        ReadOnlyClientHub clientHub = logic.getClientHub();
+        assertEquals(0, clientHub.getPersonList().size(), "ClientHub should initially contain no persons.");
+    }
+
+    @Test
+    public void getPersonList_returnsObservableListOfPersons() {
+        ObservableList<Person> personList = logic.getPersonList();
+        assertNotNull(personList, "Person list should not be null.");
+        assertEquals(0, personList.size(), "Initial person list should be empty.");
+    }
+
+    @Test
+    public void getReminderList_returnsObservableListOfReminders() {
+        ObservableList<Reminder> reminderList = logic.getReminderList();
+        assertNotNull(reminderList, "Reminder list should not be null.");
+        assertEquals(0, reminderList.size(), "Initial reminder list should be empty.");
+    }
+
+    @Test
+    public void getClientHubFilePath_returnsCorrectPath() {
+        Path clientHubFilePath = logic.getClientHubFilePath();
+        assertNotNull(clientHubFilePath, "ClientHub file path should not be null.");
+    }
+
+    @Test
+    public void getGuiSettings_returnsDefaultGuiSettings() {
+        GuiSettings guiSettings = logic.getGuiSettings();
+        assertNotNull(guiSettings, "GuiSettings should not be null.");
+        assertEquals(new GuiSettings(), guiSettings, "Initial GuiSettings should match default settings.");
+    }
+
+    @Test
+    public void setGuiSettings_updatesGuiSettings() {
+        GuiSettings newSettings = new GuiSettings(800, 600, 100, 100); // Custom GuiSettings for test
+        logic.setGuiSettings(newSettings);
+        assertEquals(newSettings, logic.getGuiSettings(), "GuiSettings should update to new values.");
+    }
+    @Test
+    public void getReminderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getReminderList().remove(0));
     }
 }

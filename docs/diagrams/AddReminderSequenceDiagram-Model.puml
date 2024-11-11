@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":ClientHub" as ClientHub MODEL_COLOR
+participant ":ReminderList" as ReminderList MODEL_COLOR
+end box
+
+[-> Model : addReminder(reminder)
+activate Model
+
+Model -> ClientHub : addReminder(reminder)
+activate ClientHub
+
+ClientHub -> ReminderList :add(reminder)
+activate ReminderList
+ReminderList --> ClientHub :
+deactivate ReminderList
+
+ClientHub --> Model :
+deactivate ClientHub
+
+[<-- Model
+deactivate Model
+
+@enduml

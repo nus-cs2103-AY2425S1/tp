@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ClientHubParser" as ClientHubParser LOGIC_COLOR
+participant "ar:AddReminderCommand" as AddReminderCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("radd n/Alice ...")
+activate LogicManager
+
+LogicManager -> ClientHubParser : parseCommand("radd n/Alice ...")
+activate ClientHubParser
+
+create AddReminderCommand
+ClientHubParser -> AddReminderCommand
+activate AddReminderCommand
+
+AddReminderCommand --> ClientHubParser
+deactivate AddReminderCommand
+
+ClientHubParser --> LogicManager : u
+deactivate ClientHubParser
+
+LogicManager -> AddReminderCommand : execute()
+activate AddReminderCommand
+
+AddReminderCommand -> Model : addReminder()
+activate Model
+
+Model --> AddReminderCommand
+deactivate Model
+
+AddReminderCommand --> LogicManager : result
+deactivate AddReminderCommand
+AddReminderCommand -[hidden]-> LogicManager : result
+destroy AddReminderCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

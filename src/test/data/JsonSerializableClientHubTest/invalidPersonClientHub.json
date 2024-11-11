@@ -1,0 +1,10 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street",
+    "clientTypes:": [ "client" ],
+    "description": "Embracing change can lead to new opportunities and growth, allowing us to discover our potential and navigate life's challenges with renewed strength."
+  } ]
+}

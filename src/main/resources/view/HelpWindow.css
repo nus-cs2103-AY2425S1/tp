@@ -1,13 +1,17 @@
-#copyButton, #helpMessage {
-    -fx-text-fill: white;
+#helpMessage{
+    -fx-text-fill: black;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-weight: bold;
+    -fx-background-color: #a232ea;
 }
 
+
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #570987;
 }
 
 #copyButton:armed {
@@ -15,5 +19,58 @@
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #ffffff;
+}
+
+#moreInfoContainer {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-min-height: 80;
+}
+
+.helpMessageWrapper{
+    -fx-background-color: #dedede;
+    -fx-min-height: 5;
+    -fx-min-width: 100;
+    -fx-content-display: CENTER;
+    -fx-alignment: CENTER;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 15;
+
+}
+
+.commandContainer {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+.headerLabel {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
+
+.commandLabel {
+    -fx-font-family: "Andale Mono";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+}
+
+.orLabel {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+.commandWrapper {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+    -fx-pref-width: 300;
+    -fx-pref-height: 100;
 }

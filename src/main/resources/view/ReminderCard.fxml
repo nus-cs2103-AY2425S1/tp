@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<HBox id="reminderCardPane" fx:id="reminderCardPane" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1" styleClass="reminder-card">
+
+    <!-- Main VBox that contains all the JavaFX UI Components-->
+    <VBox alignment="CENTER_LEFT" minHeight="70" spacing="8" style="-fx-padding: 15">
+        <padding>
+            <Insets bottom="5" left="15" right="5" top="5" />
+        </padding>
+
+
+        <!-- Name of the person -->
+        <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label fx:id="id" styleClass="cell_big_label">
+                <minWidth>
+                    <Region fx:constant="USE_PREF_SIZE" />
+                </minWidth>
+            </Label>
+            <Label fx:id="personName" styleClass="cell_big_label" text="\$personName" />
+        </HBox>
+
+        <!-- Date and Time -->
+        <VBox spacing="8">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Date:" styleClass="cell_small_label_bold"
+                       style="-fx-text-fill: red;"
+                       />
+                <Label fx:id="date" styleClass="" text="\$date" />
+            </HBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Time:" styleClass="cell_small_label_bold"
+                       style="-fx-text-fill: red;"/>
+                <Label fx:id="time" styleClass="" text="\$time" />
+            </HBox>
+
+            <Label text="Description:" styleClass="cell_small_label_bold" />
+
+            <HBox style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-background-radius: 5;
+                    -fx-pref-width: 265; -fx-pref-height: auto;">
+                <Label fx:id="description" text="\$description" wrapText="true" />
+            </HBox>
+        </VBox>
+
+    </VBox>
+</HBox>

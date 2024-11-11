@@ -1,0 +1,84 @@
+{
+  "_comment": "ClientHub save file which contains the same Person values as in TypicalPersons#getTypicalClientHub()",
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "clientTypes" : [ "Investment" ],
+    "description" : "A type",
+    "reminders" : [{
+      "personName" : "Alice Pauline",
+      "dateTime" : "2024-10-10 11:11",
+      "reminderDescription" : "Reminder 1"
+    }]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "clientTypes" : [ "Investment", "Savings" ],
+    "description" : "Likes to eat a lot",
+    "reminders" : [{
+      "personName" : "Benson Meier",
+      "dateTime" : "2024-11-10 06:11",
+      "reminderDescription" : "Reminder 2"
+    }]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "clientTypes" : [ "Investment", "Healthcare" ],
+    "description" : "Likes to eat a lot",
+    "reminders" : [{
+      "personName" : "Carl Kurz",
+      "dateTime" : "2024-12-10 07:11",
+      "reminderDescription" : "Reminder 3"
+    }]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "address" : "10th street",
+    "clientTypes" : [ "B" ],
+    "description" : "Likes to eat a lot",
+    "reminders" : []
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "94822241",
+    "email" : "werner@example.com",
+    "address" : "michegan ave",
+    "clientTypes" : [ "A" ],
+    "description" : "Likes to eat a lot",
+    "reminders" : []
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "94824271",
+    "email" : "lydia@example.com",
+    "address" : "little tokyo",
+    "clientTypes" : [ "A" ],
+    "description" : "Likes to eat a lot",
+    "reminders" : []
+  }, {
+    "name" : "George Best",
+    "phone" : "94824421",
+    "email" : "anna@example.com",
+    "address" : "4th street",
+    "clientTypes" : [ "A" ],
+    "description" : "Likes to eat a lot",
+    "reminders" : []
+  }, {
+    "name" : "Alice Potter",
+    "phone" : "99924422",
+    "email" : "APotter@example.com",
+    "address" : "china",
+    "clientTypes" : [ "A" ],
+    "description" : "Likes to eat a lot",
+    "reminders" : [{
+      "personName" : "Alice Potter",
+      "dateTime" : "2024-12-10 07:11",
+      "reminderDescription" : "Reminder 5"
+    }]
+  }]
+}

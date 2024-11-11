@@ -17,6 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -34,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewPersonWindow viewPersonWindow;
+    private ReminderListPanel reminderListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StackPane reminderListPanelPlaceholder;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -65,6 +71,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        // Initialise windows
         helpWindow = new HelpWindow();
     }
 
@@ -110,17 +117,27 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        // initialise person list panel
+        personListPanel = new PersonListPanel(logic.getPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        // initialise result display
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        // initialise reminder list panel
+        reminderListPanel = new ReminderListPanel(logic.getReminderList());
+        reminderListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
+
+        // initialise status bar
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getClientHubFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        // initialise command box
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+
     }
 
     /**
@@ -160,7 +177,23 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+
+        // If open, close the view person window
+        if (viewPersonWindow != null) {
+            viewPersonWindow.hide();
+        }
+
         primaryStage.hide();
+    }
+
+    @FXML
+    private void handleView() {
+        viewPersonWindow = new ViewPersonWindow(logic.getPersonList());
+        if (!viewPersonWindow.isViewShowing()) {
+            viewPersonWindow.show();
+        } else {
+            viewPersonWindow.focus();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -180,6 +213,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowView()) {
+                handleView();
             }
 
             if (commandResult.isExit()) {
