@@ -7,53 +7,54 @@
 # WardWatch Developer Guide
 
 <!-- * Table of Contents -->
-# Table of Contents
+## Table of Contents
 1. [Acknowledgements](#acknowledgements)
 2. [Setting Up, Getting Started](#setting-up-getting-started)
 3. [Design](#design)
-   1. [Architecture](#architecture)
-   2. [UI Component](#ui-component)
-   3. [Logic Component](#logic-component)
-   4. [Model Component](#model-component)
-   5. [Storage Component](#storage-component)
-   6. [Common Classes](#common-classes)
+   - [Architecture](#architecture)
+   - [UI Component](#ui-component)
+   - [Logic Component](#logic-component)
+   - [Model Component](#model-component)
+   - [Storage Component](#storage-component)
+   - [Common Classes](#common-classes)
 4. [Implementation](#implementation)
-   1. [Add Patient Feature](#add-patient-feature)
-   2. [Add Notes Feature](#add-notes-feature)
-   3. [Add Appointment Feature](#add-appointment-feature)
-   4. [Schedule date Feature](#schedule-date-feature)
+   - [Add Patient Feature](#add-patient-feature)
+   - [Add Notes Feature](#add-notes-feature)
+   - [Add Appointment Feature](#add-appointment-feature)
+   - [Schedule date Feature](#schedule-date-feature)
+   - [Find Feature](#find-feature)
 5. [Planned Enhancements](#planned-enhancements)
 6. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
 7. [Appendix: Requirements](#appendix-requirements)
-   1. [Product Scope](#product-scope)
-   2. [User Stories](#user-stories)
-   3. [Use Cases](#use-cases)
-   4. [Non-Functional Requirements](#non-functional-requirements)
-   5. [Glossary](#glossary)
+   - [Product Scope](#product-scope)
+   - [User Stories](#user-stories)
+   - [Use Cases](#use-cases)
+   - [Non-Functional Requirements](#non-functional-requirements)
+   - [Glossary](#glossary)
 8. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
-   1. [Launch and shutdown](#launch-and-shutdown)
-   2. [Adding a patient](#adding-a-patient)
-   3. [Editing a patient](#editing-a-patient)
-   4. [Deleting a patient](#deleting-a-patient)
-   5. [Searching for a patient](#searching-for-a-patient)
-   6. [Viewing a patient](#viewing-a-patient)
-   7. [Adding notes to a patient](#adding-notes-to-a-patient)
-   8. [Deleting notes from a patient](#deleting-notes-from-a-patient)
-   9. [Making an appointment](#making-an-appointment)
-   10. [Deleting an appointment](#deleting-an-appointment)
-   11. [Showing appointments on a particular date](#showing-appointments-on-a-particular-date)
-   12. [Showing all appointments](#showing-all-appointments)
+   - [Launch and shutdown](#launch-and-shutdown)
+   - [Adding a patient](#adding-a-patient)
+   - [Editing a patient](#editing-a-patient)
+   - [Deleting a patient](#deleting-a-patient)
+   - [Searching for a patient](#searching-for-a-patient)
+   - [Viewing a patient](#viewing-a-patient)
+   - [Adding notes to a patient](#adding-notes-to-a-patient)
+   - [Deleting notes from a patient](#deleting-notes-from-a-patient)
+   - [Making an appointment](#making-an-appointment)
+   - [Deleting an appointment](#deleting-an-appointment)
+   - [Showing appointments on a particular date](#showing-appointments-on-a-particular-date)
+   - [Showing all appointments](#showing-all-appointments)
 9. [Appendix: Efforts](#appendix-efforts)
-   1. [Complexity and Scope](#complexity-and-scope)
-   2. [Effort Invested](#effort-invested)
-   3. [Challenges Encountered](#challenges-encountered)
-   4. [Achievements](#achievements)
+   - [Complexity and Scope](#complexity-and-scope)
+   - [Effort Invested](#effort-invested)
+   - [Challenges Encountered](#challenges-encountered)
+   - [Achievements](#achievements)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -136,7 +137,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram. The same goes for subsequent sequence diagrams in this guide.
 </box>
 
 How the `Logic` component works:
@@ -144,18 +145,6 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command. 
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`. 
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve. 
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-Here is another example of interactions within the `Logic` component, taking `execute("delappt 1")` API call as an example.
-
-<puml src="diagrams/DeleteAppointmentSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
-
-Using this 
-
-1. When `Logic` is called upon to execute the `delappt 1` command, it is passed to an `AddressBookParser` object which in turn creates a `DeleteCommandParser` and uses it to parse the command. 
-2. This results in a `DeleteAppointmentCommand` object which is executed by the `LogicManager`. 
-3. The command can communicate with the `Model` when it is executed (e.g. to delete aa appointment from a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve. 
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -175,8 +164,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the application data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores two instances of currently 'selected' `Person` objects (e.g., results of a search query and a schedule query) as a _filtered_ patient list and a _filtered and sorted_ appointment list which are exposed to outsiders as two separate unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -187,7 +176,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both application data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -208,8 +197,8 @@ The `add` command allows users to add new patients. The command requires:
 - **Name** – Patient's name.
 - **ID** – Patient's unique ID.
 - **Ward** – Patient's Ward.
-- **Diagnosis** – Patient's Diagnosis.
-- **Medication** - Patient's Medication.
+- **Diagnosis** (Optional) – Patient's Diagnosis.
+- **Medication** (Optional) - Patient's Medication.
 
 Here is an activity diagram that summarises the key steps taken.
 <puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
@@ -231,7 +220,7 @@ During this parsing process:
 The **`AddCommand`** class performs the following when adding a patient:
 
 1. **Update Existing Patient Record**:  
-   The new `Person` instance will be added to the existing patient record in the **Model**.
+   The new `Person` instance will be added to the existing patient record in the `Model`.
 
 #### 3. Exceptions and warnings
 
@@ -240,14 +229,14 @@ The **`AddCommand`** class enforces validation rules to ensure non-duplicates an
 - **Ensuring non-duplicates**:
   Check that the new person added does not already exist in WardWatch, i.e. does not already exist a person with same `ID`.
 <br><br>
-- **Warnings**
+- **Warnings**:
   The command will also check for the presence of *special characters* in the `Ward` and `ID` fields. An appropriate warning will be displayed if they are present.
 
 ### Add Notes Feature
 
 #### Overview
 The `addnotes` command allows users to add notes to a specific patient. The command requires:
-- **Index** – Patient's index in the address book.
+- **Index** – Patient's index in the displayed patient list.
 - **Notes** - Patient notes that the user wishes to write for the specified patient.
 
 Here is a sequence diagram which showcases the flow of the program as well as the key steps taken.
@@ -255,37 +244,37 @@ Here is a sequence diagram which showcases the flow of the program as well as th
 
 #### 1. Parsing User Input
 The **`AddNotesCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
-- **Index** – Identifies the patient in the address book.
+- **Index** – Identifies the patient in the displayed patient list.
 - **Notes** - Patient notes that the user wishes to write for the specified patient.
 
 During this parsing process:
 - A `Notes` instance is created to hold the note details.
 
 #### 2. Executing the Command
-The **`AddNotesCommand`** class performs the following steps to add Notes to a patient:
+The **`AddNotesCommand`** class performs the following steps to add `Notes` to a patient:
 
 1. **Retrieve Patient Information**:  
-   Uses the `index` from the parser to locate the patient in the latest filtered list of patients.
+   Uses the index from the parser to locate the patient in the latest filtered list of patients.
 
 2. **Create New Person Instance with the Notes instance**:
-    - Combines patient information with the new `Notes` details.
-    - Creates a new updated `Person` instance, with the `Notes`.
+   - Combines patient information with the new `Notes` details.
+   - Creates a new updated `Person` instance, with the `Notes`.
 
 3. **Replace Existing Patient Record**:
-   The new `Person` instance, with the `Notes`, replaces the existing patient record in the **Model**.
+   The new `Person` instance, with the `Notes`, replaces the existing patient record in the `Model`.
 
 4. **Updating filtered list**:
-   The **Model** will then update the filtered list of patients to show all patients.
+   The `Model` will then update the filtered list of patients to show all patients.
 
 #### 3. Handling Invalid Date Inputs
 The **`AddNotesCommandParser`** and **`AddNotesCommand`** classes enforce validation rules to ensure that valid index and notes are being passed in.
 
 - **Valid index verification**:
-  - **AddNotesCommandParser** checks if the `Index` is an unsigned non-zero integer.
-  - **AddNotesCommand** checks if the `Index` is greater than the number of patients in the last displayed list.
+  - **`AddNotesCommandParser`** checks if the index is an unsigned non-zero integer.
+  - **`AddNotesCommand`** checks if the index is greater than the number of patients in the last displayed list.
   <br><br>
 - **Valid notes verification**:
-  - **AddNotesCommandParser** checks if the user input for `Notes` is empty and throws an error message stating that the user is unable to add empty notes to a patient.
+  - **`AddNotesCommandParser`** checks if the user input for notes is empty and throws an error message stating that the user is unable to add empty notes to a patient.
 
 ### Add Appointment Feature
 
@@ -312,26 +301,26 @@ During this parsing process:
 The **`AddAppointmentCommand`** class performs the following steps to add an appointment:
 
 1. **Retrieve Patient Information**:  
-   Uses the `index` from the parser to locate the patient in the latest filtered list of patients.
+   Uses the index from the parser to locate the patient in the latest filtered list of patients.
 
 2. **Create New Person Instance with Appointment**:
-    - utilises patient information from the current patient (identified by the index) and the new `Appointment` details.
-    - Creates an updated `Person` instance with patient information and appointment instance.
+    - Utilises patient information from the current patient (identified by the index) and the new `Appointment` details.
+    - Creates an new `Person` instance with patient information and `Appointment` instance.
 
 3. **Replace Existing Patient Record**:
-   The new `Person` instance, containing the appointment, replaces the existing patient record in the **Model**.
+   The new `Person` instance, containing the `Appointment`, replaces the existing patient record in the `Model`.
 
 #### 3. Handling Invalid Date Inputs
 The **`AddAppointmentCommandParser`** and **`AddAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:
 
 - **Format Verification**:
-    - **Parser** checks if the date and time format follows `dd-MM-yyyy-HH-mm`.
-    - **Parser** also ensures the **Start Date** is before or equal to the **End Date**.
-    - **Parser** also checks if date and time is valid.
+    - **`AddAppointmentCommandParser`** checks if the date and time format follows `dd-MM-yyyy-HH-mm`.
+    - It also ensures the **Start Date** is before or equal to the **End Date**.
+    - It also checks if date and time is valid.
       <br><br>
 
 - **Conflict Checking**:
-    - **Command** checks if the new appointment overlaps with any existing appointments for the patient.
+    - **`AddAppointmentCommand`** checks if the new appointment overlaps with any existing appointments for the patient.
     - If there is an overlap, an error message is thrown, preventing the appointment from being created.
     - If no overlap exists, the new appointment overrides any previous appointment.
 
@@ -341,10 +330,10 @@ The **`AddAppointmentCommandParser`** and **`AddAppointmentCommand`** classes en
 The `scheduledate` command allows users to filter the appointments occurring on a specified date. The command requires:
 - **Date** – Date regarding schedule of interest.
 
-<puml src="diagrams/ScheduleDateActivityDiagram.puml" alt="ScheduleDateActivityDiagram" />
+<puml src="diagrams/ScheduleDateSequenceDiagram.puml" alt="ScheduleDateSequenceDiagram" />
 
 #### 1. Parsing User Input
-The **`ScheduleDateCommandParser`** class is responsible for parsing user input. It uses ParserUtil extracting:
+The **`ScheduleDateCommandParser`** class is responsible for parsing user input. It uses `ParserUtil` extracting:
 - **Date** – Date regarding schedule of interest.
 
 During this parsing process:
@@ -353,21 +342,21 @@ During this parsing process:
 #### 2. Executing the Command
 The **`ScheduleDateCommand`** class performs the following steps to filter the appointments:
 
-1. **Update filteredAppointmentList**:  
-   Uses the `AppointmentContainsDatePredicate` from the parser to update filteredAppointmentList in **Model**.
+1. **Update filteredAppointments**:  
+   Uses the `AppointmentContainsDatePredicate` from the parser to update `filteredAppointments` in `Model`.
 
 2. **Display sortedAppointments**:
-   `sortedAppointments` will be updated with the updated filteredAppointmentList in **Model**.
+   `sortedAppointments` will be updated with the updated `filteredAppointments` in `Model`.
    `sortedAppointments` is displayed.
 
 #### 3. Handling Invalid Date Inputs
-The **`ScheduleDateCommandParser`** and **`ScheduleDateCommand`** classes enforce validation rules to ensure correct date format and scheduling logic:
+The **`ScheduleDateCommandParser`** class enforces validation rules to ensure correct date format and scheduling logic:
 
 - **Format Verification**:
-    - **Parser** checks if the date format follows `dd-MM-yyyy`.
-    - **Parser** checks if the date is valid.
+    - **`ScheduleDateCommandParser`** checks if the date format follows `dd-MM-yyyy`.
+    - It also checks if the date is valid.
 
-#### Find Command
+### Find Feature
 
 #### Overview
 The `find` command allows users to search through the entire patient list and filter it based on a given field and certain keywords. The command requires:
@@ -388,19 +377,19 @@ During the parsing process:
 #### 2. Executing the Command
 The **`FindCommand`** class performs the following steps to filter the patient list:
 
-1. **Update filteredPersons**:
-    Uses the `FieldContainsKeywordPredicate` from the parser to update filteredPersons in **Model**.
+1. **Update `filteredPersons`**:
+    Uses the `FieldContainsKeywordPredicate` from the parser to update `filteredPersons` in `Model`.
     This will perform a search on the specified field for every patient, returning `true` if any word in the field contains any of the keyword(s) as a substring.
 
-2. **Display filteredPersons**:
+2. **Display `filteredPersons`**:
     The displayed list of patients will automatically update with the new filteredPersons as it is an `ObservableList`.
 
 #### 3. Handling Invalid Inputs
-The **`FindCommandParser`** class enforce validation rules to ensure that the input is valid:
+The **`FindCommandParser`** class enforces validation rules to ensure that the input is valid:
 
 - **Format Verification**:
-  - **Parser** checks if there is one and only one field specified.
-  - **Parser** checks to ensure the search string is not empty.
+  - **`FindCommandParser`** checks if there is one and only one field specified.
+  - It also checks to ensure the search string is not empty.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Planned Enhancements**
@@ -408,7 +397,7 @@ The **`FindCommandParser`** class enforce validation rules to ensure that the in
 ### `Last edited` functionality
 Currently, there is no way to tell when a patient was last edited. This information might be crucial in a healthcare setting where the healthcare professional may need to know how recent the information is.<br><br>
 **Planned implementation**<br><br>
-We can make it such that a `Person` object contains a `LocalDateTime` field called `lastEdited` that keeps track of when the `Person` was last updated. This field will be updated whenever a new `Person` is created, be it from the `add` command or any of the other commands that edits a `Person`.
+We can make it such that a `Person` object contains a `LocalDateTime` field called `lastEdited` that keeps track of when the `Person` was last updated. This field will be updated whenever a new `Person` is created, be it from the `add` command or any of the other commands that edits a `Person`. The `lastEdited` field will be displayed in the result display screen.
 <br><br>
 
 ### Make "Index does not exist" error message more specific
@@ -430,18 +419,18 @@ As such we will also implement a `viewappt` command that allows users to view al
 ### Add command shortcut for longer commands
 Currently, some of the commands in WardWatch such as `scheduleall` and `scheduledate` are very long and may be hard to type for users. <br><br>
 **Planned implementation**<br><br>
-We plan to add command shortcuts for longer commands such as `sAll` and `sDate` for the commands `scheduleall` and `scheduledate` respectively. These command shortcuts will work alongside the original commands, meaning that whether the user types in `sAll` or `scheduleall`, wardwatch will recognise both as the `scheduleall` command. <br>
+We plan to add command shortcuts for longer commands such as `sAll` and `sDate` for the commands `scheduleall` and `scheduledate` respectively. These command shortcuts will work alongside the original commands, meaning that whether the user types in `sAll` or `scheduleall`, WardWatch will recognise both as the `scheduleall` command. <br>
 This is so that seasoned and more advanced users have the option to optimise their workflow by utilising the command shortcuts while newer users still have the option of using the more intuitive sounding commands which reduces the learning curve.
 <br><br>
 
 ### Fix `addnotes` command showing all patients
-Currently, the successful execution of an `addnotes` command will subsequently reset the last filtered list of patients to show all patients again. <br><br>
+Currently, the successful execution of an `addnotes` command will subsequently reset the last filtered list of patients to show all patients again. Resetting the displayed list may make it difficult for the user to confirm his/her changes. <br><br>
 **Planned implementation**<br><br>
 We plan to change the implementation of `addnotes` command such that the patient list will remain filtered after the successful addition of notes.
 <br><br>
 
 ### Make duplicate ID checking case-insensitive
-Currently, the checking for duplicate patient ID when creating a new patient is case-sensitive, meaning that patients with similar IDs except for the casing of letters will be considered different. For example, the IDs `P12345` and `p12345` will be considered different.<br><br>
+Currently, the checking for duplicate patient ID when creating a new patient is case-sensitive, meaning that patients with similar IDs except for the casing of letters will be considered different. For example, the IDs `P12345` and `p12345` will be considered different. This may increase user errors when they are searching for a specific patient.<br><br>
 **Planned implementation**<br><br>
 We plan to make the duplicate ID cross-checking case-insensitive such that similar IDs that differ only by casing will be considered as duplicate. This will help to reduce the room for human error when using our product.
 <br><br>
@@ -479,21 +468,22 @@ We plan to make the duplicate ID cross-checking case-insensitive such that simil
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                                                     | So that I can…​                                                                  |
-|----------|-----------------------------|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | new user                    | see usage instructions                                                                           | refer to instructions when I forget how to use the App                           |
-| `* * *`  | doctor                      | add a new patient                                                                                |                                                                                  |
-| `* * *`  | doctor                      | delete a patient                                                                                 | remove entries that I no longer need                                             |
-| `* * *`  | doctor                      | search for patients by name or ID                                                                | quickly find and review specific patient information                             |
-| `* *`    | doctor                      | hide private contact details                                                                     | minimize chance of someone else seeing them by accident                          |
-| `*`      | tech-savvy doctor           | have advanced search and filter options to quickly find and organize patient information         | easily manage large volumes of data                                              |
-| `***`    | nurse                       | view a patient's medication and treatment schedule, ward location and diagnosis all in one place | I can ensure medications are administered on time and in the correct dosage      |
-| `**`     | nurse                       | access a list of patients I am responsible for during my shift                                   | I can manage my time efficiently and ensure that all patients receive timely care |
-| `* * *`  | As a detail-oriented doctor | add notes to patients                                                                            | manage information about the patient                
-| `* * *`  | doctor                      | edit my patients' information                                                                    | I can update their conditions as they change                             
-| `* * *`  | forgetful doctor            | receive daily reminders on the current day's appointment                                         | I don’t overlook any important tasks or visit schedules.                             
+| Priority | As a …​                     | I want to …​                                                                                     | So that I can…​                                                                   |
+|----------|-----------------------------|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| `* * *`  | new user                    | see usage instructions                                                                           | refer to instructions when I forget how to use the App                            |
+| `* * *`  | doctor                      | add a new patient                                                                                |                                                                                   |
+| `* * *`  | doctor                      | delete a patient                                                                                 | remove entries that I no longer need                                              |
+| `* * *`  | doctor                      | search for patients by name or ID                                                                | quickly find and review specific patient information                              |
+| `* *`    | doctor                      | hide private contact details                                                                     | minimize chance of someone else seeing them by accident                           |
+| `*`      | tech-savvy doctor           | have advanced search and filter options to quickly find and organize patient information         | easily manage large volumes of data                                               |
+| `* * *`  | nurse                       | view a patient's medication and treatment schedule, ward location and diagnosis all in one place | ensure medications are administered on time and in the correct dosage             |
+| `* *`    | nurse                       | access a list of patients I am responsible for during my shift                                   | manage my time efficiently and ensure that all patients receive timely care |
+| `* * *`  | As a detail-oriented doctor | add notes to patients                                                                            | manage information about the patient                                              
+| `* * *`  | doctor                      | edit my patients' information                                                                    | update their conditions as they change                                      
+| `* * *`  | forgetful doctor            | receive daily reminders on the current day's appointment                                         | avoid overlooking any important tasks or visit schedules                          
+| `* * *`  | doctor                      | make appointments for my patients                                                                | keep track of my schedule                                                                    
+| `* * *`  | doctor                      | delete my patient's appointments                                                                 | keep my schedule updated                          
 
-*{More to be added}*
 
 ### Use Cases
 
@@ -503,36 +493,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor submits new patient information
-2. WardWatch displays a success message containing information of new patient
+1. Doctor submits new patient information.
+2. WardWatch displays a success message containing information of new patient.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The information entered is invalid
+* 1a. The information entered is invalid.
 
     * 1a1. WardWatch shows an invalid patient information error message.
 
       Use case resumes at step 1.
 
-* 1b. The format of the input is invalid
+* 1b. The format of the input is invalid.
     * 1b1. WardWatch shows an invalid format error message.
         
       Use case resumes at step 1.
 
 **Use case: UC02 - Delete a patient**
 
-**Preconditions**: WardWatch is displaying a non-empty list of patients
+**Preconditions**: WardWatch is displaying a non-empty list of patients.
+
 **MSS**
-1. Doctor requests to delete a specific patient from the displayed list
-2. WardWatch deletes the patient
+
+1. Doctor requests to delete a specific patient from the displayed list.
+2. WardWatch deletes the patient.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Doctor request to delete invalid patient
+* 1a. Doctor request to delete invalid patient.
 
     * 1a1. WardWatch shows an invalid patient message.
 
@@ -540,23 +532,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC03 - Update a patient**
 
-**Preconditions**: WardWatch is displaying a non-empty list of patients
+**Preconditions**: WardWatch is displaying a non-empty list of patients.
+
 **MSS**
 
-1. Doctor submits new patient information of specific patient
-2. WardWatch displays information of updated patient
+1. Doctor submits new patient information of specific patient.
+2. WardWatch displays information of updated patient.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The information entered is invalid
+* 1a. The information entered is invalid.
 
     * 1a1. WardWatch shows an invalid patient information error message.
 
       Use case resumes at step 1.
 
-* 1b. The format of the input is invalid
+* 1b. The format of the input is invalid.
     * 1b1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
@@ -565,42 +558,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor searches for patients
-2. WardWatch shows a list of patients matching the search
+1. Doctor searches for patients.
+2. WardWatch shows a list of patients matching the search.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Doctor tries to do an invalid search
+* 2a. Doctor tries to do an invalid search.
     * 2a1. WardWatch shows an invalid search error message.
         
         Use case resumes at step 1.
 
-* 2b. There is no patient that matches the search
+* 2b. There is no patient that matches the search.
 
     * 2b1. WardWatch shows that there are no matching patients.
 
         Use case ends.
 
-* 2c. The format of the input is invalid
+* 2c. The format of the input is invalid.
     * 2c1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
 
 **Use case: UC05 - View patient**
 
-**Preconditions**: WardWatch is displaying a non-empty list of patients
+**Preconditions**: WardWatch is displaying a non-empty list of patients.
+
 **MSS**
 
-1. Doctor request to view a specific patient from the list
-2. WardWatch displays information about the specific patient
+1. Doctor request to view a specific patient from the list.
+2. WardWatch displays information about the specific patient.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Doctor request to view invalid patient
+* 1a. Doctor request to view invalid patient.
 
     * 1a1. WardWatch shows an invalid patient message.
 
@@ -610,16 +604,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor request to list all patients
-2. WardWatch shows a list of all patients
+1. Doctor request to list all patients.
+2. WardWatch shows a list of all patients.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 2a. The list is empty.
 
-    * 2a1. WardWatch shows that list is empty
+    * 2a1. WardWatch shows that list is empty.
 
       Use case ends.
 
@@ -627,50 +621,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor submits new Appointment information for a patient
-2. WardWatch displays success message with the updated patient information
+1. Doctor submits new Appointment information for a patient.
+2. WardWatch displays success message with the updated patient information.
     
     Use case ends.
 
 **Extensions**
 
-* 1a. The information entered is invalid
+* 1a. The information entered is invalid.
 
     * 1a1. WardWatch shows an invalid Appointment information error message.
 
       Use case resumes at step 1.
 
-* 1b. The format of the input is invalid
+* 1b. The format of the input is invalid.
     * 1b1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
 
 **Use case: UC08 - Delete Appointment**
 
-**Preconditions**: WardWatch is displaying a non-empty list of patients
+**Preconditions**: WardWatch is displaying a non-empty list of patients.
+
 **MSS**
 
-1. Doctor request to delete an Appointment tied to a patient
-2. WardWatch deletes specified appointment
-3. WardWatch shows a success message
+1. Doctor request to delete an Appointment tied to a patient.
+2. WardWatch deletes specified appointment.
+3. WardWatch shows a success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The delete appointment command format entered is invalid
+* 1a. The delete appointment command format entered is invalid.
 
     * 1a1. WardWatch shows an incorrect format error message.
 
       Use case resumes at step 1.
 
-* 1b. Doctor requests to delete an Appointment from an invalid patient
+* 1b. Doctor requests to delete an Appointment from an invalid patient.
 
     * 1b1. WardWatch shows an invalid patient message.
 
       Use case resumes at step 1.
   
-* 1c. Doctor requests to delete a non-existing Appointment from a patient
+* 1c. Doctor requests to delete a non-existing Appointment from a patient.
 
     * 1c1. WardWatch shows patient does not have Appointment error message.
 
@@ -680,8 +675,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor <ins> deletes existing Appointment(UC08) </ins>
-2. Doctor <ins> adds new Appointment with updated details(UC07) </ins>
+1. Doctor <ins> deletes existing Appointment(UC08). </ins>
+2. Doctor <ins> adds new Appointment with updated details(UC07). </ins>
 
    Use case ends.
 
@@ -689,14 +684,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor request to see schedule for a certain day
-2. WardWatch shows a success message and displays all appointments for that day
+1. Doctor request to see schedule for a certain day.
+2. WardWatch shows a success message and displays all appointments for that day.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The date format is invalid
+* 1a. The date format is invalid.
 
     * 1a1. WardWatch shows an invalid date error message.
 
@@ -706,14 +701,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor request to see schedule for all days
-2. WardWatch displays all appointments for all days
+1. Doctor request to see schedule for all days.
+2. WardWatch displays all appointments for all days.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The schedule all command format is invalid
+* 1a. The schedule all command format is invalid.
 
     * 1a1. WardWatch shows an error message.
 
@@ -721,50 +716,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC12 - Add Notes tied to a specific patient**
 
-**Preconditions**: WardWatch is displaying a non-empty list of patients
+**Preconditions**: WardWatch is displaying a non-empty list of patients.
+
 **MSS**
 
-1. Doctor submits new Notes for a certain patient
-2. WardWatch displays a success message with the Patient information and the new Notes 
+1. Doctor submits new Notes for a certain patient.
+2. WardWatch displays a success message with the Patient information and the new Notes.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The information entered is invalid
+* 1a. The information entered is invalid.
 
     * 1a1. WardWatch shows an invalid Patient Notes information error message.
 
       Use case resumes at step 1.
 
-* 1b. The format of the input is invalid
+* 1b. The format of the input is invalid.
     * 1b1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
 
-**Use case: UC13 - delete Notes to a specific patient**
+**Use case: UC13 - delete Notes tied to a specific patient**
 
 **MSS**
 
-1. Doctor request to delete Notes for a certain Patient
-2. WardWatch deletes the Patient Notes
+1. Doctor request to delete Notes from a specific Patient.
+2. WardWatch deletes the Patient Notes.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The delete Notes command format entered is invalid
+* 1a. The delete Notes command format entered is invalid.
 
     * 1a1. WardWatch shows an incorrect format error message.
 
       Use case resumes at step 1.
 
-* 1b. Doctor requests to delete Notes from an invalid patient
+* 1b. Doctor requests to delete Notes from an invalid patient.
 
     * 1b1. WardWatch shows an invalid patient message.
 
-* 1c. Doctor requests to delete non-existing Notes from a patient
-*
+* 1c. Doctor requests to delete non-existing Notes from a patient.
+
     * 1c1. WardWatch shows Patient does not have Appointment error message.
 
       Use case resumes at step 1.
@@ -780,13 +776,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. The system should handle errors gracefully, providing meaningful messages to users without crashing.
 7. The system should be able to work offline, in the absence of internet connection.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Patient**: A person that has been designated to be under the care of the user(i.e. a doctor or nurse).
+* **Patient**: A person that has been designated to be under the care of the user (i.e. a doctor or nurse).
 * **Local Storage**: A text file, with read and write properties, located relative to the application file.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -806,15 +799,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the `.jar` file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. `cd` into the folder and run `java -jar wardwatch.jar` <br>Expected: Shows the GUI with a set of sample contacts.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by running the command above.<br>
        Expected: The most recent window size and location is retained.
 
 
@@ -836,16 +829,16 @@ testers are expected to do more *exploratory* testing.
        * Notes: `-`
        * Appointment: `-`
          <br><br>
-2. Adding a patient without optional fields (DIAGNOSIS and MEDICATION)
+2. Adding a patient without some optional fields (DIAGNOSIS or MEDICATION)
     * **Prerequisites:**
         * No patients in the list
         <br><br>
-    * **Test Case:** `add n/Kathy Prince i/P00002/D1 d/Gastrisitis`<br>
+    * **Test Case:** `add n/Kathy Prince i/P00002 w/D1 d/Gastrisitis`<br>
     * **Expected** A patient with the following fields is added to the list:
-        * Name: `John Doe`
-        * ID: `P00001`
-        * Ward: `A1`
-        * Diagnosis: `Type 1 Diabetes`
+        * Name: `Kathy Prince`
+        * ID: `P00002`
+        * Ward: `D1`
+        * Diagnosis: `Gastrisitis`
         * Medication: `-`
         * Notes: `-`
         * Appointment: `-`
@@ -880,7 +873,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a patient with all fields
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * First patient in the list does have fields that match the edited fields
           <br><br>
     * **Test Case:** `edit 1 n/Jeff Bean i/P10000 w/G5 d/influenza m/paracetomol`
@@ -895,7 +888,7 @@ testers are expected to do more *exploratory* testing.
         <br><br>
 2. Editing a patient with a few fields
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * First patient in the list does have fields that match the edited fields
           <br><br>
     * **Test Case 1:** `edit 1 n/Samuel Lee`
@@ -934,8 +927,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a patient while all patients are being shown
     * **Prerequisites:**
-        * Non-empty patient list
-        * List all patients using the `list` command
+        * Non-empty patient list is displayed
           <br><br>
     * **Test Case 1:** `delete 1`
     * **Expected:** First patient is deleted from the list. Details of the deleted contact shown in the status message.
@@ -952,22 +944,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding patients by their information.
    * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
          <br><br>
    * **Test Case 1:** `find n/Emily Tan`
-   * **Expected:** Displays all patients with **Name** `Emily Tan`.
+   * **Expected:** Displays all patients with **Name** that contains `Emily` or `Tan` as a substring.
      <br><br>
    * **Test Case 2:** `find i/P00001`
-   * **Expected:** Displays all patients with **ID** `P00001`.
+   * **Expected:** Displays all patients with **ID** that contains `P00001` as a substring.
      <br><br>
    * **Test Case 3:** `find w/A1`
-   * **Expected:** Displays all patients with **Ward** `A1`.
+   * **Expected:** Displays all patients with **Ward** that contains `A1` as a substring.
      <br><br>
    * **Test Case 4:** `find d/Diabetes`
-   * **Expected:** Displays all patients with **Diagnosis** `Diabetes`.
+   * **Expected:** Displays all patients with **Diagnosis** that contains `Diabetes` as a substring.
      <br><br>
    * **Test Case 5:** `find m/Metformin`
-   * **Expected:** Displays all patients with **Medication** `Metformin`.
+   * **Expected:** Displays all patients with **Medication** that contains `Metformin` as a substring.
      <br><br>
 ### Viewing a patient
 
@@ -975,7 +967,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Viewing a patient's information.
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
           <br><br>
     * **Test Case 1:** `view 1`
     * **Expected:** Displays the first patients information in the command result box.
@@ -986,7 +978,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding notes to a patient
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
           <br><br>
     * **Test Case:** `addnotes 1 pn/patient prone to falling `
     * **Expected:** The first patient in the list is updated with the following fields:
@@ -1000,7 +992,7 @@ testers are expected to do more *exploratory* testing.
           <br><br>
 2. Adding empty patient notes
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
           <br><br>
     * **Test Case:** `addnotes 1 pn/`
     * **Expected:** WardWatch throws an error informing the user that they are unable to add an empty note to a patient.
@@ -1011,7 +1003,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting notes from a patient that has notes
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * First patient in the list must have notes
           <br><br>
     * **Test Case:** `delnotes 1`
@@ -1026,7 +1018,7 @@ testers are expected to do more *exploratory* testing.
           <br><br>
 2. Deleting notes from a patient who does not have notes
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * First patient in the list must not have any notes
           <br><br>
     * **Test Case:** `delnotes 1`
@@ -1038,7 +1030,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding an appointment to a patient
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * The appointment the user adds must not overlap with any existing appointment
           <br><br>
     * **Test Case:** `makeappt 1 a/ Surgery s/ 01-01-2024-20-00 e/ 01-01-2024-23-00`
@@ -1053,11 +1045,11 @@ testers are expected to do more *exploratory* testing.
           <br><br>
 2. Adding an appointment that overlaps with other appointments
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * The appointment the user adds must overlap with an existing appointment
           <br><br>
     * **Test Case:** `makeappt 1 a/ Checkup s/ 02-01-2024-20-00 e/ 02-01-2024-23-00`
-    * **Expected:** Ward watch throws the error message `Appointment overlaps with another pre-existing appointment! Please check your schedule and try again`
+    * **Expected:** WardWatch throws the error message `Appointment overlaps with another pre-existing appointment! Please check your schedule and try again`
           <br><br>
 ### Deleting an appointment
 
@@ -1065,7 +1057,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting an appointment from a patient who has an appointment
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * First patient has an appointment
           <br><br>
     * **Test Case:** `delappt 1`
@@ -1080,11 +1072,11 @@ testers are expected to do more *exploratory* testing.
           <br><br>
 2. Deleting an appointment from a patient who has no appointment
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * First patient in the list has no appointment
           <br><br>
     * **Test Case:** `delappt 1`
-    * **Expected:** Ward watch throws the error message `The Patient indicated does not have an appointment`
+    * **Expected:** WardWatch throws the error message `The Patient indicated does not have an appointment`
       <br><br>
 ### Showing appointments on a particular date
 
@@ -1092,7 +1084,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Show schedule on a particular date which has appointments
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * At least one patient has an appointment
         * The date that you pass into the command as input has at least one appointment
           <br><br>
@@ -1101,11 +1093,11 @@ testers are expected to do more *exploratory* testing.
       <br><br>
 2. Show schedule on a particular date which has no appointments
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * The date that you pass into the command as input has 0 appointments
           <br><br>
     * **Test Case:** `scheduledate 02-01-2024`
-    * **Expected:** WardWatch shows the message `0 appointments on 02 January 2024 listed` and the appointments list shows no appointments.
+    * **Expected:** WardWatch shows the message `0 appointment(s) on 02 January 2024 listed` and the appointments list shows no appointments.
       <br><br>
 ### Showing all appointments
 
@@ -1113,7 +1105,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Show all appointments
     * **Prerequisites:**
-        * Non-empty patient list
+        * Non-empty patient list is displayed
         * At least one patient has an appointment
           <br><br>
     * **Test Case:** `scheduleall`
@@ -1146,8 +1138,14 @@ We revamped the interface to align with WardWatch’s new features and a healthc
 
 ### Newly Added Features
 
-**Appointment and Medication Tracking**  
-The appointment tracking features represent one of the most significant additions, necessitating major changes to existing structures and multiple new commands to manage appointment schedules. This feature was the most complex and required a substantial effort to coordinate data interactions across various entities.
+**Appointment Tracking**  
+The appointment tracking features represent one of the most significant additions, necessitating major changes to existing structures and multiple new commands to manage appointment schedules. This feature was the most complex and required a substantial effort to coordinate data interactions across various entities. We also had to factor in creating the class `AppointmentContainsDatePredicate` that implements Predicate<Person> such that the list can actually be filtered.
+
+**Appointments Scheduling**  
+Appointments scheduling was another big change we made for our application. It required a thorough understanding of storage management and the Java libraries such as `LocalDateTime` and `ObservableList`, etc. 
+
+**Notes**  
+Our team introduced Notes management commands, such as `addnotes` and `delnotes`, which involved creating new classes to support the Notes field and commands. We also took additional steps to ensure compatibility with existing command functionality.
 
 ## Challenges Encountered
 
@@ -1155,13 +1153,16 @@ The appointment tracking features represent one of the most significant addition
 One major hurdle was grasping the existing AB3 codebase, including the structure, class dependencies, and functionality. This required us to carefully analyze how existing features would interact with our additions, which took considerable time and planning.
 
 **Data Interaction Between New and Existing Entities**  
-Linking new entities like Appointment and Medication with the Person entity required a thoughtful approach. We needed to create a clear data structure to maintain relationships without introducing dependencies that could hinder usability.
+Linking new entities like Appointment with the Person entity required a thoughtful approach. We needed to create a clear data structure to maintain relationships without introducing dependencies that could hinder usability.
 
 **UI Space Constraints**  
 Designing a user-friendly interface within limited screen space was a significant challenge. We needed to balance providing sufficient information with maintaining a streamlined layout. After several iterations, we finalized a design that offers essential data without cluttering the interface.
 
-**Implementation of Appointments and Medications**  
-The appointment and medication functionalities were more intricate than anticipated. These features required careful planning to account for various scenarios in a collaborative environment. Regular discussions helped distribute tasks and address any arising conflicts efficiently.
+**Implementation new fields**  
+The addition of new fields such as diagnosis and medication functionalities were more intricate than anticipated. These features required careful planning to account for various scenarios, recognising the balance between restricting the user input to overstricting. Regular discussions helped to streamline our ideas tasks and address any arising issues efficiently.
+
+**Implementation of Appointments**  
+In particular, we faced difficulties when attempting to implement the schedule as an `ObservableList<Person>` as it not only had to be filtered, but also had to be sorted. Having to understand the API of `ObservableList` provided by JavaFX was challenging. We also had to factor in creating the class `AppointmentContainsDatePredicate` that implements `Predicate<Person>` such that the list can actually be filtered, which brought about additional complexity.
 
 **Data Management Strategy**  
 Deciding on a data management structure for appointments and medications presented additional challenges. We carefully considered how to balance the storage of patient data within main entities or across relevant contexts.
@@ -1170,4 +1171,4 @@ Deciding on a data management structure for appointments and medications present
 Testing and debugging were crucial for ensuring a stable and smooth experience for users. While unit testing was straightforward, identifying edge cases was challenging. Rigorous testing was essential to guarantee proper error handling and avoid application crashes due to unexpected inputs.
 
 ## Achievements
-In conclusion, our team manged to design and implement features, addressed bugs, and managed potential integration issues. Although we faced initial difficulties with complex features like appointment and medication management, collaboration enabled us to overcome these obstacles, ultimately achieving our goals for WardWatch.
+In conclusion, our team manged to design and implement features, addressed bugs, and managed potential integration issues. Although we faced initial difficulties with complex features like appointment and management, collaboration enabled us to overcome these obstacles, ultimately achieving our goals for WardWatch.
