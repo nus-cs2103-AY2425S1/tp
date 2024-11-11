@@ -229,6 +229,8 @@ Deletes the specified student from the address book.
 
 **[Command Word Alias](#command-word-alias):** `d`
 
+<div style="page-break-after: always;"></div>
+
 **Example Usage:** `delete 4`
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -272,6 +274,7 @@ Adds the month paid for specified months of a student, or all students.
 - `markpaid 1 m/2024-01` adds the month paid `2024-01` to that student, if it is absent.
 - `markpaid all m/2024-01` adds the month paid `2024-01` to all students currently displayed.
 
+<div style="page-break-after: always;"></div>
 
 **Example Usage:** `markpaid 1 m/2024-10`
 
@@ -322,6 +325,8 @@ Removes the month paid for specified months of a student, or all students.
 - `unmarkpaid 1 m/2024-01` removes the month paid `2024-01` from that student, if it is present.
 - `unmarkpaid all m/2024-01` removes the month paid `2024-01` from all students currently displayed.
 
+<div style="page-break-after: always;"></div>
+
 **Example Usage:** `unmarkpaid 1 m/2024-10`
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -366,6 +371,8 @@ Edits an existing student in the address book.
 
 **Examples of Edits:**
 - `edit 1 n/John Doe p/91234567` will edit that student to have the name `John Doe` and phone number `91234567`.
+
+<div style="page-break-after: always;"></div>
 
 **Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com`
 
@@ -413,6 +420,8 @@ The `list` command displays a all students currently stored in [EduTuTu](#edutut
 **[Command Word Alias](#command-word-alias):** `l`
 
 After entering the `list` command, all students stored will be displayed in the UI.
+
+<div style="page-break-after: always;"></div>
 
 **Example Usage:**
 
