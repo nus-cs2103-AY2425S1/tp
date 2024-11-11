@@ -202,6 +202,9 @@ Examples:
 Created weddings will have the person automatically assigned to their guest lists.
 
 * A person can have any number of tags or weddings (including 0)
+
+* A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
+
 </box>
 
 <box type="warning" seamless>
@@ -275,7 +278,9 @@ Format: `create-tag t/TAG_NAME` or`ctag t/TAG_NAME`
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
 * Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag
-
+* If you want to create a Tag with a long name, it might not be shown clearly in the list.</br>
+We recommend keeping names of Tags to a maximum of 50 characters long.</br>
+You can use [list-tags](#listing-all-tags--list-tags-or-ltags) instead for better visuals.
 
 ### Assigning tag to contact : `tag`
 
@@ -295,7 +300,7 @@ Format: `tag PERSON_NUMBER t/TAG_NAME... [f/]`
 
 <box type="tip" seamless>
 
-**Tip:** To see all current tags, use the [list-tags](#listing-all-tags--list-tags) command
+**Tip:** To see all current tags, use the [list-tags](#listing-all-tags--list-tags-or-ltags) command
 </box>
 
 Untags a `Tag` from a specified person in WedLinker
@@ -330,7 +335,10 @@ Format: `create-wedding w/WEDDING_NAME` or `cw w/WEDDING_NAME`
 * The `WEDDING_NAME` should only contain alphanumeric characters, spaces or the following characters: / . , ' & : ( )
 * `WEDDING_NAME` is case-insensitive.
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
-* Contacts can be assigned to the Wedding using the [assign-wedding](#assigning-contact-to-a-wedding-assign-wedding) command.
+* Contacts can be assigned to the Wedding using the [assign-wedding](#assigning-contact-to-a-wedding--assign-wedding-or-asw) command.
+* If you want to create a Wedding with a long name, it might not be shown clearly in the list.</br>
+  We recommend keeping names of Weddings to a maximum of 50 characters long.</br>
+  You can use [list-weddings](#listing-all-weddings--list-weddings-or-lw) instead for better visuals.
 
 ### Assigning contact to a Wedding : `assign-wedding` or `asw`
 
@@ -351,7 +359,7 @@ Edits the details of a `Wedding`.
 
 Format: `edit-wedding WEDDING_NUMBER [a/ADDRESS] [d/DATE]` or `ew WEDDING_NUMBER [a/ADDRESS] [d/DATE]`
 
-* Edits the specific `Wedding` at the `WEDDING_NUMBER` when in [list-weddings](#listing-all-weddings-list-weddings) view.
+* Edits the specific `Wedding` at the `WEDDING_NUMBER` when in [list-weddings](#listing-all-weddings--list-weddings-or-lw) view.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
@@ -389,7 +397,7 @@ Format: `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` or `ctask tk/TASK_DE
 * The dates can be specified under `DATE` with the format `d/YYYY-MM-DD`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
 * `TASK_NAME` is case-sensitive.
-* Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task) command.
+* Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task-or-atask) command.
 
 ### Deleting a Task : `delete-task` or `dtask`
 
@@ -397,7 +405,7 @@ Deletes a `Task` from WedLinker
 
 Format: `delete-task TASK_NUMBER` or `dtask TASK_NUMBER`
 
-* Deletes the specific `Task` at the `TASK_NUMBER` when in [list-tasks](#listing-all-tasks--list-tasks) view.
+* Deletes the specific `Task` at the `TASK_NUMBER` when in [list-tasks](#listing-all-tasks--list-tasks-or-ltasks) view.
 * The index **must be a positive integer** 1, 2, 3, …​.
 
 ### Assigning a Task to a contact : `assign-task` or `atask`
@@ -405,7 +413,7 @@ Format: `delete-task TASK_NUMBER` or `dtask TASK_NUMBER`
 Format: `assign-task PERSON_NUMBER TASK_NUMBER` or `atask PERSON_NUMBER TASK_NUMBER`
 
 * Assigns a `Task` to a contact.
-* The indexes correspond to the indexes when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The indexes correspond to the indexes when in the [list-tasks](#listing-all-tasks--list-tasks-or-ltasks) view.
 * The `PERSON_NUMBER` refers to the index of the person shown under the **People** column.
 * The `TASK_NUMBER` refers to the index of the task shown under the **Tasks** column
 * The indexes **must be positive integers** 1, 2, 3, …​.
@@ -424,7 +432,7 @@ Format: `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER` or `unatask PERSON_NUMB
 Format: `mark-task TASK_NUMBER...` or `mtask TASK_NUMBER...`
 
 * Marks a `Task` as completed.
-* The `TASK_NUMBER` correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The `TASK_NUMBER` correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks-or-ltasks) view.
 * The index **must be a positive integers** 1, 2, 3, …​.
 
 ### Unmarking a task  : `unmark-task` or `untask`
@@ -432,7 +440,7 @@ Format: `mark-task TASK_NUMBER...` or `mtask TASK_NUMBER...`
 Format: `unmark-task TASK_NUMBER...` or `untask TASK_NUMBER...`
 
 * Marks a `Task` as not completed.
-* The `TASK_NUMBER` correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
+* The `TASK_NUMBER` correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks-or-ltasks) view.
 * The index **must be a positive integers** 1, 2, 3, …​.
 
 ## Vendor Features

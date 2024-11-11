@@ -351,6 +351,14 @@ Step 2. The user executes `assign-vendor 1`. WedLinker will assign the `Person` 
 
 Step 3. The user executes `unassign-vendor 1` to unassign the `Vendor` to become a non-. WedLinker includes the `Person` in the `Guest List`.
 
+<box type="info" seamless>
+Vendor supports the force functionality for easier usage.
+
+Force is supported for the following functions:
+- `Unassign Vendor` (Unassigns all existing `Task` from the Vendor before downgrading to a `Person`.)
+
+</box>
+
 ### Task
 
 The `Task` Feature allows users to track `Tasks` when planning for a Wedding. `Tasks` can only be assigned to `Vendors`.
