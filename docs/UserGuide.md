@@ -365,7 +365,7 @@ A status bar that contains information about the number of contacts in the list 
 at the bottom of the app. It shows the total number of contacts being listed in the app.
 
 Examples:
-* `find n/Adam` may show only 1 contact out of 19. 1 refers to the found contact, 19 refers to the total contacts in address book.
+* `find n/Adam` may show only 1 contact out of 19. 1 refers to the number of found contacts, 19 refers to the total number of contacts in address book.
   ![ui of footer status bar](images/footer_status_bar_ui.png)
 
 <box type="definition" seamless>
