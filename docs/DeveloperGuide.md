@@ -933,47 +933,46 @@ testers are expected to do more *exploratory* testing.
 
 **Team size: 4**
 
-- **Allow Partial Matching in Find Feature**
+1. **Allow Partial Matching in Find Feature**
 
-  Currently, the `find` command matches students based on exact names or IDs. To improve usability, we plan to enhance the `find` command to allow partial matching of names. This will enable TAs to search for students even if they only remember part of the student's name.
+    Currently, the `find` command matches students based on exact names or IDs. To improve usability, we plan to enhance the `find` command to allow partial matching of names. This will enable TAs to search for students even if they only remember part of the student's name.
 
-  **Example Usage:**
+    **Example Usage:**
 
     - `find n/Alex` would match students with names like "Alex Yeoh", "Alexander Lee", or "Alexis Tan".
 
-  **Implementation Considerations:**
+    **Implementation Considerations:**
 
     - Modify the `NameContainsKeywordsPredicate` to check for partial matches.
     - Ensure that the search remains case-insensitive.
     - Update unit tests and documentation accordingly.
 
-- **Track attendance of students individually**
+2. **Track attendance of students individually**
 
     Currently, the listattn feature shows status of all students for a given event. We plan to enhance this feature to allow TAs to track attendance of individual students across all events.
 
-- **Specificity of error message for Edit function**
-  
-  Currently, when users type in `edit 1 c/comment`, it gives the error message that the index must be a non-zero unsigned integer.
-  
-  As it may be confusing to users that they are unable to edit comments using the edit feature, an error message should be shown in this specific case.
+3. **Add and delete group feature**
 
-  Alternatively, in future iterations, the comment feature could be integrated into the `add` or `edit` feature.
+    Currently, when users want to add a group, they have to use the `edit` feature to key in all existing groups alongside new ones.
 
-- **Add and delete group feature**
+    For better usability, there could be individual functions to add and delete specific tags
 
-  Currently, when users want to add a group, they have to use the `edit` feature to key in all existing groups alongside new ones.
+4. **Warning for when edited fields are the same as previous fields**
 
-  For better usability, there could be individual functions to add and delete specific tags
-
-- **Warning for when edited fields are the same as previous fields**
-
-  Currently, when users use the `edit` feature to update a field that is exactly the same as before (eg. editing name from `Mary Tan` to `Mary Tan`), 
+    Currently, when users use the `edit` feature to update a field that is exactly the same as before (eg. editing name from `Mary Tan` to `Mary Tan`), 
   there is no warning shown. A message could be shown to warn the user in case this action was not intended.
 
-- **Comments will show a preview and be expandable if they are long to see the full text**
+5. **Comments will show a preview and be expandable if they are long to see the full text**
 
-  Currently, when users use the `comment` feature there is no limit on how long comments can be. Thus, the full comment appears in the UI, which instead be expandable component to prevent overloading of information in the interface.
+    Currently, when users use the `comment` feature there is no limit on how long comments can be. Thus, the full comment appears in the UI, which instead be expandable component to prevent overloading of information in the interface.
 
-- **Enhance delete to support deleting of multiple students at once**
+6. **Enhance delete to support deleting of multiple students at once**
 
-  Currently, when users use the `delete` feature they can only delete one student at a time for example `delete 1` deletes the first student if available. In the future `delete 1 2 5` for example will be able to delete students at the index of 1, 2 and 5 on the list shown to improve efficiency.  
+    Currently, when users use the `delete` feature they can only delete one student at a time for example `delete 1` deletes the first student if available. In the future `delete 1 2 5` for example will be able to delete students at the index of 1, 2 and 5 on the list shown to improve efficiency.
+
+7.  **Add warnings for possible duplicate student**
+    Currently, students with same names but slightly different studentIDs do not generate a warning despite it likely being a user mistake. We plan to add in warnings for when the user tries to add a student with a similar name and similar studentID as an existing student in the list. Similar name means matching names without case sensitivity and without whitespace within the name (eg. `johndoe` is similar to `JOHN DOE`) and similar studentID means two studentIDs that differ by a single character, case-insensitive, for example `A1234567E` is similar to `a2234567e` (2nd character different) and `A1234567U` (Last character different). This accounts for the user trying to add a student that already exists and making a slight typo in the studentID. This applies for both the `add` and `edit` commands and the warning message will be appended to the end of the respective success messages as: `This person may already exist. Please check to ensure this person is not a duplicate.`. The commands will execute normally just with an additional warning to alert users.
+
+8. **Add warnings for Year inputs that may be mistakes**
+
+   Currently, there is no warning if a year such as '15' is inputted which is likely a user mistake since it is unlikely a student has been studying in NUS for 15 years. We plan to add in warnings for when the input to Year is >9. (Accounts for PhD students as well). The warning would apply for `add` and `edit` commands and would be appended to the end of the respective success messages as: `Year specified is larger than 9. Please check that this is not a mistake`. Note that the commands are allowed to execute, just with an additional warning to alert users to their possible mistake.
