@@ -273,8 +273,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COURSE] [t/TAG]…​`
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and removes all tags associated with the person.
+- `edit 1 p/91234567 e/johndoe@example.com`<br>
+  Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+- `edit 2 n/Betsy Crower t/`<br>
+  Edits the name of the 2nd person to be `Betsy Crower` and removes all tags associated with the person.
 
 Expected output:
 
@@ -297,7 +299,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find alex david` returns `Alex Yeoh`, `David Li`
 
 Expected output:
 
@@ -317,8 +319,10 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the TAHub.
-- `find John` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+- `list` followed by `delete 2`<br>
+  Deletes the 2nd person in the TAHub.
+- `find John` followed by `delete 1`<br>
+  Deletes the 1st person in the results of the `find` command.
 
 Expected output:
 
@@ -340,8 +344,10 @@ Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 
 Examples:
 
-- `addGrade 2 n/Midterm s/85 w/30` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 30% weightage.
-- `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
+- `addGrade 2 n/Midterm s/85 w/30`<br>
+  Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 30% weightage.
+- `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30`<br>
+  Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
 
 Expected output:
 
@@ -361,8 +367,10 @@ Format: `deleteGrade INDEX n/TEST_NAME`
 
 Examples:
 
-- `deleteGrade 2 n/Midterm` Deletes the grade for the "Midterm" test for the 2nd person in the list.
-- `find Betsy` followed by `deleteGrade 1 n/FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
+- `deleteGrade 2 n/Midterm`<br>
+  Deletes the grade for the "Midterm" test for the 2nd person in the list.
+- `find Betsy` followed by `deleteGrade 1 n/FinalExam`<br>
+  Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
 
 Expected output:
 
@@ -392,8 +400,10 @@ When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command chang
 
 Example:
 
-- `aggGrade median` Shows the median of the overall grade of the current filtered list.
-- `aggGrade median n/Midterm` Shows the median for midterm tests of the current filtered list.
+- `aggGrade median`<br>
+  Shows the median of the overall grade of the current filtered list.
+- `aggGrade median n/Midterm`<br>
+  Shows the median for midterm tests of the current filtered list.
 
 Expected output for `aggGrade median`:
 
@@ -418,8 +428,10 @@ Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
 
 Examples:
 
-- `mark 2 d/31/01/2024 10:00 m/Attended` Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
-- `find John` followed by `mark 1 d/31/01/2024 12:00 m/Absent` Sets the attendance to 'Absent' on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
+- `mark 2 d/31/01/2024 10:00 m/Attended`<br>
+  Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
+- `find John` followed by `mark 1 d/31/01/2024 12:00 m/Absent`<br>
+  Sets the attendance to 'Absent' on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
 
@@ -438,8 +450,10 @@ Format: `unmark INDEX d/DATETIME`
 
 Examples:
 
-- `unmark 2 d/31/01/2024 10:00` Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
-- `find John` followed by `unmark 1 d/31/01/2024 12:00` deletes the attendance on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
+- `unmark 2 d/31/01/2024 10:00`<br>
+  Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
+- `find John` followed by `unmark 1 d/31/01/2024 12:00`<br>
+  Deletes the attendance on the 12 PM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 Expected output:
 
@@ -458,7 +472,8 @@ Format: `absentees d/DATE_TIME`
 
 Examples:
 
-- `absentees d/31/01/2024 10:00` Finds all people who were absent on the 10 AM of January 31st, 2024.
+- `absentees d/31/01/2024 10:00`<br>
+  Finds all people who were absent on the 10 AM of January 31st, 2024.
 
 Expected output:
 
