@@ -209,7 +209,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Keywords provided must only consist of alphabets. Any other character provided will give an invalid argument error.
+Find command does not check for the presence of non-alphabetical characters in the keywords. If non-alphabetical characters are present, the app will still attempt to find the person with the given keywords and return an empty list.
 </div>
 
 **Examples:**
