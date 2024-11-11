@@ -188,7 +188,7 @@ Examples:
 
 ### Adding a Tutee: `addTutee`
 
-Adds a Tutee to VolunTier.
+Adds a tutee to VolunTier.
 
 Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​`
 
@@ -216,7 +216,7 @@ Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUB
 
 ### Adding a Lesson: `addLesson`
 
-Add a lesson in VolunTier between a tutor and tutee. A lesson must have a tutor, a tutee and a subject.
+Adds a lesson in VolunTier between a tutor and tutee. A lesson must have a tutor, a tutee and a subject.
 
 Format: `addLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT`
 
