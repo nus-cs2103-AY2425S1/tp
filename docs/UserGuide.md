@@ -52,7 +52,7 @@ StudentManagerPro (SMP) is a **desktop app for secondary school teachers in Sing
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -64,7 +64,13 @@ StudentManagerPro (SMP) is a **desktop app for secondary school teachers in Sing
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* All command parameters are case-sensitive (with the exception of `filter` and `sort` commands).<br>
+  e.g. addEcName command `addEcName 1 en/John` adds `John` as the emergency contact name of the first student in the list, following the case as provided by user input.<br>
+  e.g. filter command `filter n/hans` will match all students that have `hans` or `Hans` in their names.<br>
+  e.g. sort command `sort name` will produce the same result as `sort Name`.
 </box>
+
 
 ### Viewing help : `help`
 
