@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, the student's name is added to the system and can be used to track their academic progress.
@@ -368,7 +368,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -444,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -478,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -512,7 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -551,7 +551,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -586,7 +586,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -620,7 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -654,7 +654,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
-* User is logged in.
+ Application is open.
 * Student to be removed exists in the system.
 
 **Guarantees:**
@@ -691,7 +691,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, the attendance record for the student is added to the system and can be used to track their attendance history.
@@ -741,7 +741,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, the exam is added for all students currently in the system with a score of "NIL".
@@ -769,7 +769,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, the student's exam score is added to the specified exam in the student's profile and saved in the system.
@@ -803,7 +803,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, the submission is added for all students currently in the system with a status of "NIL".
@@ -831,7 +831,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, the student's submission status is added to the specified submission in the student's profile and saved in the system.
@@ -865,7 +865,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, the submission is deleted from all students currently in the system.
@@ -893,7 +893,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, student list displayed will be sorted.
@@ -918,7 +918,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: User is logged in.**
+**Preconditions: Application is open.**
 
 **Guarantees:**
 * If successful, student list displayed will be filtered according to the predicate provided.
