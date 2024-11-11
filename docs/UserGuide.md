@@ -192,6 +192,7 @@ Examples:
 * `findcustomer John` returns `john` and `John Doe`
 * `findc alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'findc alex david'](images/findAlexDavidResult.png)
+
 <div style="page-break-after: always;"></div>
 
 <box type="important">
