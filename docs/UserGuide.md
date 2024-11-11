@@ -277,6 +277,7 @@ Format: `listt INDEX`
 * Lists the transactions for the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list when using `list` or `find` command.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Transactions are listed from newest to oldest transaction by transaction date.
 
 <box type="warning" seamless>
 
