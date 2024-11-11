@@ -28,7 +28,7 @@ public class DeleteStudentCommand extends Command {
 
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list.";
 
-    public static final String MESSAGE_DUPLICATE_STUDENT = "There are more than 1 student of the same name.\n"
+    public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n"
             + "Their student numbers are as follows: %s" + "\n"
             + "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER" + " to delete the student.";
