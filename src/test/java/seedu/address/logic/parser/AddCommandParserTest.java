@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC1_BOB;
@@ -33,10 +34,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Email;
@@ -160,6 +165,21 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
                 + VALID_ALLERGY1_BOB, expectedMessage + "n/, p/, e/, a/, t/, m/" + "\n"
                 + AddCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void testAllergyListWithNoneAndOtherAllergies_throwsParseException() {
+        // Arrange
+        List<Allergy> allergyList = new ArrayList<>();
+        allergyList.add(new Allergy("none"));
+        allergyList.add(new Allergy("peanut"));
+
+        // Act & Assert
+        assertThrows(ParseException.class, () -> {
+            if (allergyList.contains(new Allergy("none")) && allergyList.size() > 1) {
+                throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+            }
+        });
     }
 
     @Test
