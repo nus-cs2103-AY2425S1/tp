@@ -237,10 +237,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-
-### \[Proposed\] Consultation Management
+### Consultation Management
 
 The consultation management feature enables TAs to schedule and manage consultation sessions with students. This section describes the implementation details of the consultation system.
 
@@ -975,7 +972,104 @@ Use case ends.
 8. The data should be stored locally and should be in a human editable text file.
 9. The software should work without requiring an installer.
 
-*{More to be added}*
+### Planned Enhancements
+
+**<u>Make command names case-insensitive</u>**
+
+**Description**
+
+Make command names case-insensitive, i.e. `Find` is safe to substitute for
+`find` in the `find` command.
+
+**Rationale**
+
+Users may make small mistakes in capitalisation when typing quickly.
+It can save time to ensure minor mistakes such as these in the command keyword
+(not the arguments) will not prevent the command from working.
+
+**<u>Allow students with same name to be added</u>**
+
+**Description**
+
+Allow students with the same name to be added (still case-sensitive).<br>
+Instead, disallow students with the same **phone number** or **email address** to be added.<br>
+Commands that currently use student **names** as arguments should instead use their **index**
+in the student list.
+
+**Rationale**
+
+It is arguably rarer for students to share a phone number or email address (university email?) with
+another student than it is to share a name.
+
+**<u>Allow more commands to use student index instead of full name</u>**
+
+**Description**
+
+Currently, some commands such as `marka` and `markp` require the user to type
+out the full name of the student.<br>
+Instead, change it so that they use the student's index in the student list, similar to commands
+like `addtolesson`.
+
+**Rationale**
+
+Under normal conditions, it is impossible for a consultation or lesson to have a student
+that is not in the student list. Thus, it is safe to specify students by their index
+in the student list.<br>
+Additionally, doing so is faster to type.
+
+**<u>Allow certain special characters to be used in names</u>**
+
+**Description**
+
+Allow more special characters such as `/` and `-` to be used in student names.
+
+**Rationale**
+
+It is possible for students' legal names to contain `-` (e.g. Mary-Ann) or `/` (e.g. S/O).
+Relaxing current restrictions to allow such characters will allow such names to be input.
+
+**<u>Add clearer error message for integers/indexes </u>**
+
+**Description**
+
+Currently, when an invalid or sufficiently large number is given as an index, the error message says:<br>
+Index is not an unsigned non-zero integer.
+This should be changed to specify the requirement that indexes should be between
+1 and `Integer.MAX_VALUE`.
+
+**Rationale**
+
+The current error message can be confusing for non-technical users who do not know what
+*unsigned* means, and misleading when it also shows for large inputs that exceed Java's
+integer limit, such as `104890385925902379`.
+Clearer error messages can help to mitigate such confusion.
+
+**<u>Make `find c/` throw an error</u>**
+
+**Description**
+
+Currently, `find c/` does not throw an error. Instead, it runs successfully but always
+returns 0 students.
+This should be changed so an appropriate error message is shown (courses cannot be empty).
+
+**Rationale**
+
+A user might expect `find c/` to find students who are taking no courses.
+However, this is not the case, and will result in confusion.<br>
+Hence, this command should not execute successfully.
+
+**<u>Make participation not accept + before the number</u>**
+
+**Description**
+
+Currently, the participation argument in the `markp` command accepts the use of `+` before it,
+i.e. `+3` is treated as `3`.
+This should be treated as an invalid format.
+
+**Rationale**
+
+Though not strictly wrong, the index parser currently already checks for `+` and treats it as invalid.
+For consistency, this should also apply to participation.
 
 ### Glossary
 
@@ -1014,78 +1108,6 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-3. _{ more test cases …​ }_
-
-### Adding a student
-1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
-    Expected: Student `TestOne` is added to the list. Details of the added student is shown.
-2. Test case: `add n/TestOne p/11111111`<br>
-   Expected: No student is added. Error details shown.
-3. Test case: `add n/TestOne e/test1@example.com c/CS2103T`<br>
-   Expected: No student is added. Error details shown.
-4. Test case: `add n/Test1 p/11111111 e/test1@example.com c/CS2103T`<br>
-   Expected: No student is added. Error details shown.
-
-### Finding a student (by course)
-1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
-
-2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
-   Expected: Displays students details with course `CS2103T`.
-3. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` does not Exist)<br>
-   Expected: No Students Found. Displays 0 students.
-4. Test case: `find c/1234`
-   Expected: No Students Found. Error details shown.
-5. Test case: `find c/CS2103T;CS2109S`
-   Expected: Displays students enrolled in either CS2103T or CS2109S.
-6. Test case: `find c/CS2103T c/CS2109S`
-   Expected: Displays students enrolled in both CS2103T and CS2109S.
-
-
-### Finding a student (by name)
-1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
-
-2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
-   Expected: Displays students details with name `TestOne`.
-3. Test case: `find n/TestOne` (Assuming Students with name `TestOne` does not Exist)<br>
-   Expected: No Students Found. Displays 0 students.
-4. Test case: `find n/Test1`
-   Expected: No Students Found. Error details shown.
-5.	Test case: `find n/John;Doe`
-   Expected: Displays students with either John or Doe in their names.
-6.	Test case: `find n/John n/Doe`
-   Expected: Displays students with both John and Doe in their names.
-
-### Editing a student
-1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
-
-2. Test case: `edit 1 n/TestOne p/11111111`<br>
-   Expected: 1st student is edited. Details of the edited student is shown.
-3. Test case: `edit 2 e/test1@example.com c/CS2103T`<br>
-   Expected: 2nd student is edited. Details of the edited student is shown.
-4. Test case: `edit 2 n/Test 2`<br>
-   Expected: No student is edited. Error details shown.
-5. Test case: `edit 1 c/CS2103T;CS2109S`
-   Expected: The first student’s previous courses are removed, and the courses are replaced with both CS2103T and CS2109S. Confirmation message is shown.
-6. Test case: `edit 1 c/CS2103T c/CS2109S`
-   Expected: The first student’s previous courses are removed, and the courses are replaced with both CS2103T and CS2109S. Confirmation message is shown.
-5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
-   Expected: No student is edited. Error details shown.
-
-### Deleting a student
-1. Prerequisites: List all students using the `liststudents` command. Multiple students in the list.
-
-2. Test case: `delete 1`<br>
-   Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
-3. Test case: `delete 0`<br>
-   Expected: No student is deleted. Error details shown in the status message.
-4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-   Expected: No student is deleted. Error details shown in the status message.
-5. Test case: `delete 1;2`
-   Expected: Both the 1st and 2nd students are deleted from the list. Confirmation message is shown.
-
-
-2. { more test cases …​ }_
 
 ### Student Test Cases
 

@@ -34,6 +34,7 @@ public class AddToLessonCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds students to the lesson identified "
             + "by the index number used in the displayed lesson list."
+            + "\nAt least one of the optional parameters must be provided."
             + "\nParameters: LESSON_INDEX "
             + "[" + PREFIX_NAME + "NAME]… "
             + "[" + PREFIX_INDEX + "INDEX]… "

@@ -15,22 +15,32 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer.<br>
+If you don't have Java, see this installation [guide](https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-1/tp/releases).<br>
+  Scroll down until you see this part. Click on `tahub.jar` to download it.
+  ![img](images/UgQuickStartDownload.png)
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tahub.jar` command to run the application.<br>
+
+3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.<br>
+  The _home folder_ is where other files such as the data file will be created.
+
+
+4. Open a command terminal and `cd` into the folder you put the jar file in.
+
+
+5. Type `java -jar addressbook.jar` and hit enter.<br>
    A GUI similar to the below should appear in a few seconds.<br>
-   Note that the app will contain some sample data initially.<br>
+   Note how the app contains some sample data.<br>
+
+
    ![Ui](images/Ui.png)
-   You can use the `clear` command for a clean state.<br>
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
-   * `liststudents` : Lists all students.
 
    * `add n/John Doe p/98765432 e/johnd@example.com c/CS2103T;CS2101` : Adds a student named `John Doe` to TAHub.
 
@@ -40,7 +50,8 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,6 +61,9 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
 **How do I read the command format?**<br>
 
+* Main command keywords are **case-sensitive** unless specified otherwise.<br>
+  e.g. `Find` and `Add` do not work for `find` and `add` respectively.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
@@ -57,7 +71,8 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
   e.g `n/NAME [c/COURSE]` can be used as `n/John Doe c/CS2103T` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[c/COURSE]…` can be used as ` ` (i.e. 0 times), `c/CS2103T;CS2101`, `c/CS2103T c/CS2101` etc.
+  e.g. `[c/COURSE]…` can be used as ` ` (i.e. 0 times), `c/CS2103T;CS2101` 
+(note that use of `;` is unique to only some fields), `c/CS2103T c/CS2101` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -67,6 +82,14 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+**Additional Notes**
+
+These apply to all commands unless specified otherwise.
+
+* When specifying an index, it should be between 1 and 2147483647, inclusive. The current error message
+may not reflect this requirement, but changes for clarification are planned in the future.
+* When specifying an index, leading zeroes are ignored, i.e. `001` is equivalent to `1`.
 
 ## General Commands
 
@@ -101,6 +124,20 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [c/COURSE]…`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of courses (including 0)
 </div>
+
+* `NAME` must only contain alphabetical characters, commas, and spaces.
+* `NAME` must be unique, i.e. no two students can have the same name.
+  * However, names are **case-sensitive**, i.e. `John Doe` is considered different from `john doe`.
+* `PHONE_NUMBER` should only contain numbers, and should be at least 3 numbers long.
+* `EMAIL` should conform to the format `local-part@domain` and:
+  * `local-part` should only contain alphanumeric characters and these special characters: `+` `_` `.` `-`.
+  * `local-part` must start and end with alphanumeric characters.
+  * `domain` must end with a domain label at least 2 characters long.
+  * `domain` must have each domain label start and end with alphanumeric characters.
+  * `domain` must have each domain label consist only of alphanumeric characters separated only if hyphens (if any).
+* `COURSE`s should begin with 2-4 letters, followed by 4 digits, followed by 0-2 letters.
+Example: `MA1100`, `GEA1000N`, `GESS1000T` etc.
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
@@ -237,6 +274,7 @@ Adds students to an existing consultation, specified by its index.
 * Student names (`n/NAME`) and/or student indices (`i/INDEX`) can be used to specify students. At least one name or
 index must be provided.
 * Students already in the consultation will not be added again, and an error message will be shown.
+* Student names are **case-sensitive**.
 
 **Examples**:
 * `addtoconsult 1 n/John Doe n/Harry Ng`
@@ -249,6 +287,8 @@ Removes specified students from a consultation, identified by its index.
 **Format**: `removefromconsult INDEX n/NAME [n/NAME]…`
 
 * `INDEX` is the index of the consultation from which the students will be removed.
+* Specify one or more students to remove by their names.
+* Student names are **case-sensitive**.
 
 **Examples**:
 * `removefromconsult 1 n/John Doe n/Harry Ng` (removes students named John Doe and Harry Ng from the 1st consultation)
@@ -360,7 +400,7 @@ Format: `addtolesson LESSON_INDEX [n/NAME]… [i/STUDENT_INDEX]…`
 
 * `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * At least one of the optional arguments must be provided. There must be at least one name or index.
-* `NAME` must be the full name of a student exactly as shown in the student list.
+* `NAME` must be the full name of a student exactly as shown in the student list. Names are **case-sensitive**.
 * `STUDENT_INDEX` is the index of a student as displayed in the student list.
 
 Examples:
@@ -375,7 +415,7 @@ with them to that lesson, i.e. re-adding them defaults to no attendance and 0 pa
 Format: `removefromlesson LESSON_INDEX n/NAME [n/NAME]…`
 
 * `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
-* `NAME` must be the full name of a student in the lesson.
+* `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
 
 Examples:
 * `removefromlesson 1 n/John Doe n/Jane Doe` removes `John Doe` and `Jane Doe` from lesson number 1.
@@ -388,7 +428,7 @@ color of their name tag under a lesson - **green** for present and **red** for a
 Format: `marka LESSON_INDEX n/NAME [n/NAME]… a/ATTENDANCE`
 
 * `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
-* `NAME` must be the full name of a student in the lesson.
+* `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
 * If multiple names are provided, all their attendances will be set to the given value.
 * `ATTENDANCE` must be one of the following: `Y`,`y`or`1` for yes (student is present) and `N`,`n`or`0` for no (student is absent).
 * There must be exactly 1 `ATTENDANCE` argument, e.g. `a/1 a/1` is not allowed.
@@ -407,11 +447,15 @@ will also automatically set their attendance to true.**
 Format: `markp LESSON_INDEX n/NAME [n/NAME]… pt/PARTICIPATION`
 
 * `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
+* `NAME` must be the full name of a student in the lesson. Names are **case-sensitive**.
+* `LESSON_INDEX` is the index of the lesson as displayed in the lesson list.
 * `NAME` must be the full name of a student in the lesson.
 * If multiple names are provided, all their participation points will be set to the given value.
 * `PARTICIPATION` must be an integer between 0 and 100 inclusive.
 * There must be exactly 1 `PARTICIPATION` argument, e.g. `pt/3 pt/3` is not allowed.
 * The participation score is set **exactly** to the given value. It does not add onto students' existing score.
+* Due to a bug in the current version, a `+` before the participation value will be accepted, i.e. `+3` is treated as
+`3`. This will be removed in a future release.
 
 Examples:
 * `markp 1 n/John Doe pt/3` marks `John Doe` as having 3 participation marks for lesson number 1.
