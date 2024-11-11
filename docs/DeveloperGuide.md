@@ -439,7 +439,7 @@ Use case ends.
 
 * 2a. Talent Manager confirms the deletion. 
 
-    * Use case resumes from step 3.
+  * Use case resumes from step 3.
 
 * 2b. Talent Manager cancels the deletion.
 
