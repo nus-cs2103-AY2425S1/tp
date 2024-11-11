@@ -29,7 +29,7 @@ If you are already using Teacher's Pet, skipping to the [Commands](#commands) or
 Here are some symbols you may encounter in this user guide:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
- This contains additional useful information
+ This contains useful tips to make full use of our application
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Information:**  
@@ -37,7 +37,7 @@ This contains some additional information
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This contains some important information that you should take note of
+This contains some important information or constraints that you should take note of
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -228,12 +228,12 @@ You can view a list of students in the same group(s)
 
 Format: `show KEYWORDS`
 
-* The KEYWORDS is/are the group name(s) or identifier(s) you would like to search for in your current list. For instance, use `group 1` or `1` or `group` (for group 1)
+* The KEYWORDS is/are the group name(s) or identifier(s) you would like to search for in your current list. For instance, use `group 1` or `1` or `group` (to search for `group 1`)
 * The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
 * The order of the keywords does not matter. e.g., `1 group` will match `group 1`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can search for substrings within the group names, but the search will only return results where the group names start with the entered text. For example, searching for "gro" will match "group 1", but not "1 group".
+You can search for substrings within the group names, but the search will only return results where the group names start with the entered text. For example, searching for `gro` will match `group 1`, but not `1 group`.
 </div>
 
 Here is an example you could try:
@@ -569,10 +569,10 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/e1234567 m/Computer Science y/2 g/Group 4`
-**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`<br> e.g.,`edit 1 n/James Lee m/4`
+**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`<br> e.g.,`edit 1 n/James Lee y/4`
 **Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
 **List** | `list`
-**Show** | `show GROUP_NAME`
+**Show** | `show KEYWORDS`
 **Find** | `find [n/ NAME_KEYWORDS] [id/ STUDENT_IDS]`<br> e.g., `find n/ James Jake`, `find id/ A1234567E A2345678B`, `find n/ Alice id/ A1234567E`
 **Random** | `random`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
