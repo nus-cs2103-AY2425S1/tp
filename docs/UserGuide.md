@@ -726,7 +726,7 @@ Imports contacts based on CSV file.
 location in the file system, starting from the root directory, so the file group12.csv at the /data directory will be
 imported regardless of where the program is run.)
 * `import path/../data/group12.csv` will import contacts from the CSV file (group12.csv) at the relative path. It moves
-up one level from the current directory and then navigates to data folder, and imports the csv file named "group12.csv".
+up one level from the current directory and then navigates to data folder, and imports the CSV file named "group12.csv".
   </box>
 
 </box>
@@ -809,14 +809,14 @@ Exports contacts based on contacts and their details stored in KonTActs.
 
 <md>**Examples:**</md>
 
-* `export path/data/group12.csv` will export the contacts in KonTActs as a csv file (group12.csv at the 
+* `export path/data/group12.csv` will export the contacts in KonTActs as a CSV file (group12.csv at the 
 RELATIVE path given).
 * Alternatively, `ex p/data/group12.csv` will do the exact same. It uses the shortcut command and parameter.
-* `export path//data/group12.csv` will export the contacts in KonTActs as a csv file named group12.csv at the
+* `export path//data/group12.csv` will export the contacts in KonTActs as a CSV file named group12.csv at the
 ABSOLUTE path given. (Absolute paths specify the exact location in the file system, starting from the root directory,
 so this file will be saved in the /data directory as group12.csv regardless of where the program is run.)
 * `export path/../data/group12.csv` will export contacts as a CSV file (group12.csv) to the relative path. It moves up 
-one level from the current directory and then navigates to data folder, and saves the csv file as "group12.csv".
+one level from the current directory and then navigates to data folder, and saves the CSV file as "group12.csv".
   </box>
 
 
