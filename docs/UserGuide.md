@@ -347,14 +347,6 @@ DLTbook supports the following commands:
 ## Basic Features
 --------------------------------------------------------------------------------------------------------------------
 
-
-## Contact Management Features
---------------------------------------------------------------------------------------------------------------------
-
-
-## Public Address Management Features
---------------------------------------------------------------------------------------------------------------------
-
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -364,6 +356,27 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 <br>
+--------------------------------------------------------------------------------------------------------------------
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+#### Format: `clear`
+
+<br>
+--------------------------------------------------------------------------------------------------------------------
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+#### Format: `exit`
+
+<br>
+--------------------------------------------------------------------------------------------------------------------
+
+## Contact Management Features
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a contact : `add`
@@ -393,11 +406,23 @@ Adds a contact to the address book.
 <br>
 --------------------------------------------------------------------------------------------------------------------
 
-### Listing all contacts : `list`
+### Deleting a contact : `delete`
 
-Shows a list of all contacts in the address book.
+Deletes the specified contact from the address book.
 
-#### Format: `list`
+#### Format: `delete INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+
+* The index refers to the index number shown in the displayed contact list.
+
+* The index **must be a positive integer** 1, 2, 3, …​
+
+#### Examples:
+
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -460,25 +485,15 @@ Finds contacts whose names contain any of the given keywords.
 <br>
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting a contact : `delete`
+### Listing all contacts : `list`
 
-Deletes the specified contact from the address book.
+Shows a list of all contacts in the address book.
 
-#### Format: `delete INDEX`
-
-* Deletes the contact at the specified `INDEX`.
-
-* The index refers to the index number shown in the displayed contact list.
-
-* The index **must be a positive integer** 1, 2, 3, …​
-
-#### Examples:
-
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+#### Format: `list`
 
 <br>
+--------------------------------------------------------------------------------------------------------------------
+## Public Address Management Features
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a public address to a contact : `addpa`
@@ -514,6 +529,36 @@ Adds a public address to a contact.
   `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
 
 ![img.png](img.png)
+
+<br>
+--------------------------------------------------------------------------------------------------------------------
+
+### Deleting a public address of a contact : `deletepa`
+
+Deletes the public address of a contact.
+
+#### Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
+
+* Deletes the public address of the contact at the specified `INDEX`. The index refers to the index number shown in the
+  displayed contact list.
+  The index **must be a positive integer** 1, 2, 3, …​
+
+
+* The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
+  `SOL` etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
+  Allowed values: `BTC|ETH|SOL`.
+
+* The `WALLET_NAME` parameter is not compulsory and specifies the wallet name of the public address
+  that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact
+  at the specified `INDEX` will be deleted. This field is **case-insensitive**.
+
+#### Examples:
+
+* `deletepa 1 c/BTC l/wallet1` deletes the public address of the first contact in the BTC network with the wallet name
+  `wallet1`.
+
+
+* `deletepa 3 c/BTC` deletes all the public addresses of the third contact in the BTC network.
 
 <br>
 --------------------------------------------------------------------------------------------------------------------
@@ -589,36 +634,6 @@ Retrieves the public addresses of a contact.
 <br>
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting a public address of a contact : `deletepa`
-
-Deletes the public address of a contact.
-
-#### Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
-
-* Deletes the public address of the contact at the specified `INDEX`. The index refers to the index number shown in the
-  displayed contact list.
-  The index **must be a positive integer** 1, 2, 3, …​
-
-
-* The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
-  `SOL` etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
-  Allowed values: `BTC|ETH|SOL`.
-
-* The `WALLET_NAME` parameter is not compulsory and specifies the wallet name of the public address
-  that will be deleted. If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact
-  at the specified `INDEX` will be deleted. This field is **case-insensitive**.
-
-#### Examples:
-
-* `deletepa 1 c/BTC l/wallet1` deletes the public address of the first contact in the BTC network with the wallet name
-  `wallet1`.
-
-
-* `deletepa 3 c/BTC` deletes all the public addresses of the third contact in the BTC network.
-
-<br>
---------------------------------------------------------------------------------------------------------------------
-
 ### Searching for a public address : `searchpa`
 
 Based on contacts displayed, it searches for a contact using the unique public address
@@ -661,24 +676,6 @@ Filters out a list of contacts with the public addresses of the specified networ
 
 * `filter c/BTC` filters a list of contacts with the public addresses of `BTC` and
   displays it with their respective list number.
-
-<br>
---------------------------------------------------------------------------------------------------------------------
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-#### Format: `clear`
-
-<br>
---------------------------------------------------------------------------------------------------------------------
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-#### Format: `exit`
 
 <br>
 --------------------------------------------------------------------------------------------------------------------
