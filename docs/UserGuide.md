@@ -161,7 +161,9 @@ addi in/INDEX i/INTEREST...
 
 - `in/INDEX`: Contact's position in the list.
 - `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters at most.
-- **Note:** Only interests newly added (i.e.were originally not part of the contact's interest list) will be shown on the display message.
+- **Note:** 
+  - Only interests newly added (i.e.were originally not part of the contact's interest list) will be shown on the display message.
+  - The first letter of each new interest added will automatically be capitalized in both the display message and in the `interests` field under the specified contact.
 
 Example:
 
