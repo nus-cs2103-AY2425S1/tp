@@ -592,10 +592,10 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 ## Glossary
 
 - **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
-  <a name="case-sensitive"></a>
-- **_Case-Sensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as distinct. For example, Apple, apple, and APPLE would be considered different values.
-  <a name="case-insensitive"></a>
+<a name="case-insensitive"></a>
 - **_Case-Insensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as the same. For example, Apple, apple, and APPLE would be considered equivalent values.
+<a name="case-sensitive"></a>
+- **_Case-Sensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as distinct. For example, Apple, apple, and APPLE would be considered different values.
 - **_Category_** : A label that represents the type of contact (e.g., student, company) used for filtering and sorting contacts.
 - **_CLI (Command Line Interface)_** : A text-based user interface through which users interact with the application by typing commands.
 - **_CSV (Comma-separated values)_** : A text file format that uses commas to separate values, and newlines to separate records.
