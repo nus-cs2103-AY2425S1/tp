@@ -18,8 +18,8 @@
    5. [Storage Component](#storage-component)
    6. [Common Classes](#common-classes)
 4. [Implementation](#implementation)
-   1. [(Proposed) Undo/redo feature](#proposed-undoredo-feature)
-   2. [(Proposed) Data archiving](#proposed-data-archiving)
+   1. [Add Patient Feature](#add-patient-feature)
+   2. [Add Appointment Feature](#add-appointment-feature)
 5. [Planned Enhancements](#planned-enhancements)
 6. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
 7. [Appendix](#appendix)
@@ -249,8 +249,8 @@ The **`MakeAppointmentCommand`** class performs the following steps to add an ap
    Uses the `index` from the parser to locate the patient in the address book.
 
 2. **Create New Person Instance with Appointment**:
-    - Combines patient information with the new `Appointment` details.
-    - Creates an updated `Person` instance, including the appointment data.
+    - utilises patient information from the current patient (identified by the index) and the new `Appointment` details.
+    - Creates an updated `Person` instance with patient information and appointment instance.
 
 3. **Replace Existing Patient Record**:
     - The new `Person` instance, containing the appointment, replaces the existing patient record in the **Model**.
@@ -267,20 +267,37 @@ The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes 
     - If there is an overlap, an error message is thrown, preventing the appointment from being created.
     - If no overlap exists, the new appointment overrides any previous appointment.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Planned Enhancements**
 
 ### `Last edited` functionality
-Currently, there is no way to tell when a patient was last edited. This information might be crucial in a healthcare setting where the healthcare professional may need to know how recent the information is.<br>
-**Planned implementation**<br>
+Currently, there is no way to tell when a patient was last edited. This information might be crucial in a healthcare setting where the healthcare professional may need to know how recent the information is.<br><br>
+**Planned implementation**<br><br>
 We can make it such that a `Person` object contains a `LocalDateTime` field called `lastEdited` that keeps track of when the `Person` was last updated. This field will be updated whenever a new `Person` is created, be it from the `add` command or any of the other commands that edits a `Person`.
+<br><br>
 
+### Make "Index does not exist" error message more specific
+Currently, whenever a user enters a command that requires `INDEX` as a parameter, such as the `view` or `delete` command, and enters an index that is greater than the number of patients in the displayed list, WardWatch will show the general `invalid command format` message followed by the command usage message. <br><br>
+**Planned implementation**<br><br>
+We plan to add more specific error messages in the case where users pass in an index that is not shows in the displayed patients list. 
+In the case where the index passed in is greater than the largest index in the displayed patient list, the error message `The index provided does not refer to any patient in the displayed list, please check the displayed list again!` will be shown
+In the case where the index passed in is negative, the error message `INDEX provided must be a positive integer, please try again!` will be shown
+<br><br>
 
+### Add appointment title and description and `viewappt` command
+Currently, our `makeappt` command only allows users to create appointments with a short description. This prevents users from adding too much information to the current description which may be restrictive.<br><br>
+**Planned implementation**<br><br>
+We plan to separate appointment title and description which gives users more flexibility. Appointment title will just be a short description such as `Surgery` or `Medical checkup` and support a character limit of 40. Appointment description will be for additional information about the appointment that the user may want to add. The appointment description will support a much longer character limit of 300 but will not be shown in the appointment list panel as the long inputs may cause issues with the UI. <br>
+As such we will also implement a `viewappt` command that allows users to view all information about the appointment including the new appointment description.
+<br><br>
+
+### Add command shortcut for longer commands
+Currently, some of the commands in WardWatch such as `scheduleall` and `scheduledate` are very long and may be hard to type for users. <br><br>
+**Planned implementation**<br><br>
+We plan to add command shortcuts for longer commands such as `sAll` and `sDate` for the commands `scheduleall` and `scheduledate` respectively. These command shortcuts will work alongside the original commands, meaning that whether the user types in `sAll` or `scheduleall`, wardwatch will recognise both as the `scheduleall` command. <br>
+This is so that seasoned and more advanced users have the option to optimise their workflow by utilising the command shortcuts while newer users still have the option of using the more intuitive sounding commands which reduces the learning curve.
+<br><br>
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -342,45 +359,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Doctor submits new patient information
-2. WardWatch displays information of new patient
+2. WardWatch displays a success message containing information of new patient
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The information format entered is invalid
+* 1a. The information entered is invalid
 
     * 1a1. WardWatch shows an invalid patient information error message.
 
       Use case resumes at step 1.
 
+* 1b. The format of the input is invalid
+    * 1b1. WardWatch shows an invalid format error message.
+        
+      Use case resumes at step 1.
+
 **Use case: UC02 - Delete a patient**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
-
-1. Doctor request to list patients
-2. WardWatch shows a list of patients
-3. Doctor request to delete a specific patient from the list
-4. WardWatch deletes the patient
+1. Doctor requests to delete a specific patient from the displayed list
+2. WardWatch deletes the patient
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 1a. Doctor request to delete invalid patient
 
-    * 2a1. WardWatch shows an empty list
+    * 1a1. WardWatch shows an invalid patient message.
 
-      Use case ends.
-
-* 3a. The given field is invalid
-
-    * 2a1. WardWatch shows an invalid field message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: UC03 - Update a patient**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
 
 1. Doctor submits new patient information of specific patient
@@ -390,9 +405,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The information format entered is invalid
+* 1a. The information entered is invalid
 
-    * 1a1. WardWatch shows an invalid format error message.
+    * 1a1. WardWatch shows an invalid patient information error message.
+
+      Use case resumes at step 1.
+
+* 1b. The format of the input is invalid
+    * 1b1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
 
@@ -407,48 +427,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The search field is invalid.
-    * 2a1. WardWatch shows an invalid field error message.
+* 2a. Doctor tries to do an invalid search
+    * 2a1. WardWatch shows an invalid search error message.
         
         Use case resumes at step 1.
 
 * 2b. There is no patient that matches the search
 
-    * 2b1. WardWatch shows that there is no matching patient.
+    * 2b1. WardWatch shows that there are no matching patients.
 
         Use case ends.
 
+* 2c. The format of the input is invalid
+    * 2c1. WardWatch shows an invalid format error message.
+
+      Use case resumes at step 1.
+
 **Use case: UC05 - View patient**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
 
-1. Doctor request to list patients
-2. WardWatch shows a list of patients
-3. Doctor request to view a specific patient from the list
-4. WardWatch displays information about the specific patient
+1. Doctor request to view a specific patient from the list
+2. WardWatch displays information about the specific patient
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 1a. Doctor request to view invalid patient
 
-    * 2a1. WardWatch shows that list is empty
+    * 1a1. WardWatch shows an invalid patient message.
 
-      Use case ends.
-
-* 3a. The patient entered does not exist
-
-    * 3a1. WardWatch shows an invalid index error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: UC06 - List patients**
 
 **MSS**
 
-1. Doctor request to list patients
-2. WardWatch shows a list of patients
+1. Doctor request to list all patients
+2. WardWatch shows a list of all patients
 
    Use case ends.
 
@@ -457,13 +475,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
 
     * 2a1. WardWatch shows that list is empty
-
-      Use case ends.
-
-* 2b. System is unable to retrieve the patient list.
-
-    * 2b1. WardWatch displays an error message indicating the failure to load the patient list.
-    * 2b2. The doctor is prompted to try again later or contact support.
 
       Use case ends.
 
@@ -471,68 +482,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor submits new Appointment information tied to a patient
-2. WardWatch displays Appointment information tied to that patient
+1. Doctor submits new Appointment information for a patient
+2. WardWatch displays success message with the updated patient information
     
     Use case ends.
 
 **Extensions**
 
-* 1a. The information format entered is invalid
+* 1a. The information entered is invalid
 
-    * 1a1. WardWatch shows an invalid description error message.
+    * 1a1. WardWatch shows an invalid Appointment information error message.
 
       Use case resumes at step 1.
 
-* 2a. The Appointment date format is invalid.
-
-    * 2a1. WardWatch shows an invalid date format error message.
+* 1b. The format of the input is invalid
+    * 1b1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
 
 **Use case: UC08 - Delete Appointment**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
 
-1. Doctor request appointments for a specific date
-2. WardWatch displays Appointments for the day
-3. Doctor request to delete a specific appointment tied to a patient
-4. WardWatch deletes specified appointment
+1. Doctor request to delete an Appointment tied to a patient
+2. WardWatch deletes specified appointment
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The delete appointment command format entered is invalid
+* 1a. The delete appointment command format entered is invalid
 
     * 1a1. WardWatch shows an incorrect format error message.
 
-      Use case resumes at step 3.
-  
-* 3b. The Appointment does not exist
-*
-    * 2a1. WardWatch shows an appointment does not exist error message.
+      Use case resumes at step 1.
 
-      Use case resumes at step 3.
+* 1b. Doctor requests to delete an Appointment from an invalid patient
+
+    * 1b1. WardWatch shows an invalid patient message.
+  
+* 1c. Doctor requests to delete a non-existing Appointment from a patient
+*
+    * 1c1. WardWatch shows patient does not have Appointment error message.
+
+      Use case resumes at step 1.
 
 **Use case: UC09 - Change Appointment**
 
 **MSS**
 
-1. Doctor request to delete a specific appointment tied to a patient
-2. WardWatch deletes Appointment
-3. Doctor submits new Appointment information tied to a patient
-4. WardWatch displays Appointment information tied to that patient
+1. Doctor <ins> deletes existing Appointment(UC08) </ins>
+2. Doctor <ins> adds new Appointment with updated details(UC07) </ins>
 
    Use case ends.
-
-**Extensions**
-
-* 3a. The information format entered is invalid
-
-    * 3a1. WardWatch shows an incorrect appointment format error message.
-
-      Use case resumes at step 1.
 
 **Use case: UC10 - See Schedule for a certain day**
 
@@ -601,8 +604,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. WardWatch shows a notes is already empty error message.
 
       Use case resumes at step 1.
-
-
 
 
 
@@ -956,38 +957,54 @@ testers are expected to do more *exploratory* testing.
     * **Expected:** WardWatch shows the message `Displayed all appointments` and the appointment list will show all appointments.
       <br><br>
 
-## **Appendix: Efforts**
+# Appendix: Efforts
 
-This appendix provides an overview of the effort and complexity involved in modifying the original AB3 (Address Book Level 3) to create WardWatch. WardWatch extends AB3’s basic structure to support a healthcare-focused system, which manages multiple entity types and introduces new functionalities like handling patient information, medications, and appointments.
+This section presents an overview of the work invested by our team in developing WardWatch. We will discuss the complexity and scope, obstacles encountered, and effort required to bring this project to completion.
 
-### Logic (Parser)
-1. The Parser component required significant modifications to accommodate the new entity types and fields introduced in WardWatch. Challenges included:
+## Complexity and Scope
+WardWatch expands on the Person entity originally found in AB3 by adding new entities, such as Appointment and Medication, to meet healthcare-specific demands. These additions introduced new requirements for feature interactions, data management, and storage, which proved more intricate than initially expected.
 
-    * **Tokenization**: Setting specific conditions for the tokenizer to handle new fields, such as medication and appointment, was complex. This required carefully configuring the tokenizer to recognize and differentiate between new input formats and ensure accurate data processing.
-    * **Input Validation**: To handle healthcare-related data, validation had to be strict to avoid incorrect entries. This involved refining the Parser logic to enforce stricter data checks than AB3, requiring additional time to test and ensure robust error handling.
+Beyond adapting AB3’s original features to better fit our target users, WardWatch introduces numerous commands to enhance the application’s usability, particularly for managing patient information and healthcare operations. Integrating these features smoothly with existing functionality demanded considerable attention to detail.
 
-2. The FindCommandParser was challenging to implement as we wanted the command to be able to search different fields of patients, which meant that there were many different scenarios we had to account for. This increase in complexity made it harder for us to ensure that error inputs would fail graciously, as there were now more cases to consider.
+While each of us contributed fewer lines of code than in individual assignments, the group project required substantial coordination and teamwork. This collaboration was essential to ensure cohesive integration and functionality across all new features.
 
-### Logic (Command)
-1. Creating new commands, especially the AddAppointment and AddMedication commands, presented unique challenges:
-    * **Command Structure Adaptation**: Extending the existing command structure for WardWatch was necessary to support new types of commands without impacting AB3’s base functionality. This required carefully designing new command classes to integrate seamlessly with existing entities.
-    * **Difficulty in Implementing AddAppointment**: The AddAppointment command was particularly challenging because it required understanding how to schedule and validate appointments within the existing architecture. This command also had to be compatible with patient data, ensuring appointments were correctly linked.
+## Effort Invested
 
-### Model
-1. The Model component needed restructuring to support multiple entity types, such as patients, medications, and appointments, which added complexity:
-   * **Data Relationships**: Establishing relationships between entities, such as linking patients with medications and appointments, was challenging. Designing these relationships in a way that allowed for seamless data manipulation without creating dependencies was an important aspect of the model redesign.
+### Improvements to Existing Features
 
-2. We had difficulty trying to implement a `SortedList` that was meant to keep track of the schedules that are meant to be shown, and returning them in a sorted manner. Challenges included:
-   * **List type**: Although it might have been more intuitive to create a `FilteredList` of `Appointment` rather than `Person`, we require certain details about the patient. Hence, we had to make the list keep track of `Person` to ensure this functionality.
-   * **Sorting a filtered list**: As we wanted to have the appointments be returned in order, we had to sort the list. However, we could not find a way to do this seamlessly, other than to create a `filteredList` and sort it from there. This could potentially be because of our lack of familiarity with `javaFX`.
-   
-### Storage
-1. With the addition of the `Appointment` class, we had to learn how the JSON format worked, and how we could utilise its functionalities to allow for the successful storing and reading of data, now that every `Person` has an `Appointment` field.
-2. It was necessary to get a basic understanding of how JSON files work. Upon creating our new Json class that adapts to appointment, a weak understanding of `@JsonCreator` property caused initial bugs where appointment information had issues being retrieved from the Json file format. This bug was eventually fixed with greater understanding of Json.
+**New Patient Data Fields**  
+To meet the requirements of a healthcare management application, additional fields—such as diagnosis, medications, notes, and appointments were incorporated to provide a more comprehensive patient profile.
 
-### UI
-1. UI Design required good understanding and identification of the relevant dependencies on the corresponding .fxml and .css files.
-2. To restructure and customise the UI, a firm understanding of UI elements such as the HBox, VBox and Stackpanes is necessary to layout the UI elements according. There was particularly a struggle understanding the effects of the growing Hbox and Vbox, as the space occupied is unexpected.
-3. Choice or colour to make the app aesthetic is also non-trivial as it is difficult to find matching colours that are aesthetic.
-4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements.
+**Enhanced Search Capabilities**  
+Our team upgraded the find command from AB3 to offer greater flexibility, allowing searches by not only name but also fields like diagnosis and medications. The enhanced find feature also enables filtering by specific criteria, which involved a full redesign of the search logic and thorough testing.
 
+**User Interface (UI) Enhancements**  
+We revamped the interface to align with WardWatch’s new features and a healthcare-oriented theme. Additionally, the UI logic was refined to enable future developers to make changes with ease.
+
+### Newly Added Features
+
+**Appointment and Medication Tracking**  
+The appointment tracking features represent one of the most significant additions, necessitating major changes to existing structures and multiple new commands to manage appointment schedules. This feature was the most complex and required a substantial effort to coordinate data interactions across various entities.
+
+## Challenges Encountered
+
+**Understanding the AB3 Codebase**  
+One major hurdle was grasping the existing AB3 codebase, including the structure, class dependencies, and functionality. This required us to carefully analyze how existing features would interact with our additions, which took considerable time and planning.
+
+**Data Interaction Between New and Existing Entities**  
+Linking new entities like Appointment and Medication with the Person entity required a thoughtful approach. We needed to create a clear data structure to maintain relationships without introducing dependencies that could hinder usability.
+
+**UI Space Constraints**  
+Designing a user-friendly interface within limited screen space was a significant challenge. We needed to balance providing sufficient information with maintaining a streamlined layout. After several iterations, we finalized a design that offers essential data without cluttering the interface.
+
+**Implementation of Appointments and Medications**  
+The appointment and medication functionalities were more intricate than anticipated. These features required careful planning to account for various scenarios in a collaborative environment. Regular discussions helped distribute tasks and address any arising conflicts efficiently.
+
+**Data Management Strategy**  
+Deciding on a data management structure for appointments and medications presented additional challenges. We carefully considered how to balance the storage of patient data within main entities or across relevant contexts.
+
+**Debugging and Testing**  
+Testing and debugging were crucial for ensuring a stable and smooth experience for users. While unit testing was straightforward, identifying edge cases was challenging. Rigorous testing was essential to guarantee proper error handling and avoid application crashes due to unexpected inputs.
+
+## Achievements
+In conclusion, our team manged to design and implement features, addressed bugs, and managed potential integration issues. Although we faced initial difficulties with complex features like appointment and medication management, collaboration enabled us to overcome these obstacles, ultimately achieving our goals for WardWatch.
