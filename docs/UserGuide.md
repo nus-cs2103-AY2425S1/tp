@@ -133,7 +133,8 @@ Let's go over some simple guidelines that will help you use VolunSync easily:
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * When copying multi-line commands from this guide, make sure the spaces between lines remain intact, especially if you're using a PDF version.
-* When keying in `Index`, it has to be a positive value
+
+* INDEX parameters accept a maximum positive value of `2147483647` any larger value would result in an invalid command format. It also has to be a positive value.
 
 </div>
 
@@ -247,7 +248,7 @@ It will delete the volunteer at the specified `VOLUNTEER_INDEX` from the databas
 
 Format: `/v del VOLUNTEER_INDEX`
 
-* The `INDEX` is the number you see next to their name in the list
+* The `INDEX` is the number you see to the left of their name in the list
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 Deleting a volunteer removes the volunteer from the list of participants of all events which the volunteer
@@ -292,7 +293,7 @@ It will add available dates to the volunteer with the specified `VOLUNTEER_INDEX
 
 Format: `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
 
-* The `INDEX` is the number you see next to their name in the list
+* The `INDEX` is the number you see to the left of their name in the list
 * Use `YYYY-MM-DD` format (like `2024-01-01`)
 * For multiple dates, separate them with commas (like `2024-11-28, 2024-11-29, 2024-11-30`)
 
@@ -312,7 +313,7 @@ It will remove available dates from the volunteer with the specified `VOLUNTEER_
 
 Format: `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
 
-* The `INDEX` is the number you see next to their name in the list
+* The `INDEX` is the number you see to the left of their name in the list
 * Use `YYYY-MM-DD` format (like `2024-01-01`)
 * For multiple dates, separate them with commas (like `2024-11-28, 2024-11-29, 2024-11-30`)
 
@@ -364,6 +365,28 @@ Examples:
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
+<div style="page-break-after: always;"></div>
+
+### Listing all events a volunteer is participating in: `/v view`
+
+Want to see which events a volunteer is joining? This command shows you everything they're signed up for.
+It will display all events the volunteer at the specified `INDEX` under the `Volunteers` display is participating in.<br/>
+
+Format: `/v view VOLUNTEER_INDEX`
+
+* The `INDEX` is the number you see to the left of their name in the list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
+
+Examples:
+
+* `/v view 1` displays the events the first volunteer is participating in.
+
+![View Volunteer Demo](images/commandDemo/ViewVolunteerDemo.png)
+
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -388,7 +411,7 @@ What you'll need:
 
 Examples:
 * `/e new n/Blood Donation Drive l/Red Cross Center d/2024-02-14 s/08:30 e/16:00 des/Organizing a blood donation drive` <br/>creates an event record for Blood Donation Drive with the specified details
-* `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00` <br/>creates an event record Buffet Lunch with the specified details
+* `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00` <br/>creates an event record for Buffet Lunch with the specified details
 
 ![New Event Demo](images/commandDemo/NewEventDemo.png)
 
@@ -425,7 +448,7 @@ It will delete the event with the specified `EVENT_INDEX` from the database.
 
 Format: `/e del EVENT_INDEX`
 
-* The `INDEX` is the number you see next to the event name in the list
+* The `INDEX` is the number you see to the left of the event name in the list
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 Deleting an event causes that event to be removed from all participants' list of events which they are involved in.
@@ -446,7 +469,7 @@ It will display all volunteers participating in the event at the specified `INDE
 
 Format: `/e view EVENT_INDEX`
 
-* The `INDEX` is the number you see next to the event name in the list
+* The `INDEX` is the number you see to the left of the event name in the list
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
@@ -466,7 +489,7 @@ It will filter the volunteer list to only show volunteers who can be assigned to
 
 Format: `/e filter INDEX`
 
-* The `INDEX` is the number you see next to the event name in the list
+* The `INDEX` is the number you see to the left of the event name in the list
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
@@ -554,8 +577,8 @@ These known issues are actively being worked on, and we are continuously improvi
 | Action                                                                                                               | Format                                                                                  | Examples                                                                         |
 |----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
 | **[Adding an event](#adding-an-event-e-new)**                                                                        | `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`       | `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`       |
-| **[Finding events by name](#finding-events-by-name--e-find)**                                                        | `/e del EVENT_INDEX`                                                                    | `/e del 1`                                                                       |
-| **[Deleting an event](#deleting-an-event--e-del-)**                                                                  | `/e find KEYWORD`                                                                       | `/e find Forest`                                                                 |
+| **[Deleting an event](#deleting-an-event--e-del-)**                                                                  | `/e del EVENT_INDEX`                                                                    | `/e del 1`                                                                       |
+| **[Finding events by name](#finding-events-by-name--e-find)**                                                        | `/e find KEYWORD`                                                                       | `/e find Forest`                                                                 |
 | **[Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)**     | `/e view EVENT_INDEX`                                                                   | `/e view 1`                                                                      |
 | **[Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter)** | `/e filter EVENT_INDEX`                                                                 | `/e filter 1`                                                                    |
 
