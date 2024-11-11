@@ -292,7 +292,7 @@ _Figure 9: Success message displayed after adding a note to a patient's record_
 
 Possible Errors:
 
-- `Incorrect NRIC. Person not found` - When either the patient's or caregiver's NRIC cannot be found
+- `Person not found` - When the person's NRIC entered cannot be found in the system
 
 #### Listing all persons : `list`
 
