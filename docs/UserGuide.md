@@ -89,6 +89,7 @@ All commands that use the indices shown in the displayed contact list can also b
 Shows a list of all persons stored in ClubConnect's contact list.
 
 Format: `list`
+
 ![result for 'list'](images/list.png)
 
 
@@ -219,7 +220,7 @@ Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
 * e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-> [!CAUTION]<br>
+> CAUTION!<br>
 > When multiple fields are specified, the order of the different fields in the command is ignored.<br>
 > Instead, the fields will be prioritised as follows(in decreasing order of priority):<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;Address -> Email -> Name -> Phone -> Tags -> Event<br>
@@ -274,18 +275,12 @@ Format: `import FILENAME`
 
 **Caution:**
 Avoid editing or modifying the exported file. Any changes to its structure, format, or data may lead to errors during import, as ClubConnect expects the file to retain the exact format of the exported data.
-</box>
 
 Examples:
-<<<<<<< HEAD
 * `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.
-
-=======
 * `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.<br>
   ![result for 'import contacts'](images/importContactsResult.png)
 
-  
->>>>>>> 135d339ef8512f92f5c8802ef6130462a13c589a
 --------------------------------------------------------------------------------------------------------------------
 
 ## Event Commands
@@ -489,7 +484,7 @@ Action             | Format, Examples
 **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Delete**         | `delete INDEX` or `delete CONTACT_NAME`<br> e.g., `delete 3`, `delete john doe`
-**Mass Delete**    | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2 a`
+**Mass Delete**    | `mass_delete INDEX1 INDEX2 ... INDEXN`<br> e.g., `mass_delete 1 2`
 **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Search**         | `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`<br> e.g., `search n/ Jake`
 **Export**         | `export`
