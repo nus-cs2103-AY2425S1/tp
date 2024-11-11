@@ -81,46 +81,12 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 3. For detailed command information, refer to the [Features](#features) section which contains comprehensive documentation for each command
 
 ![screenshot](images/Screenshot-5.png)
-\
+
 <div style="page-break-after: always;"></div>
 
 # **Glossary and Command Formats**
 
 ## **Contact Types**
-
-## Contact Types
-- **Contact**: Any person or entity stored in BakeBuddy's database, including customers, suppliers, and other business contacts
-- **Customer**: A person or business who purchases pastries from your bakery
-- **Supplier**: A person or business who provides ingredients or materials to your bakery
-
-## Order-Related Terms
-- **Customer Order**: A record of pastries ordered by a customer, including quantity, delivery details, and status
-- **Supply Order**: A record of ingredients ordered from a supplier, including quantity and status
-- **Order Status**:
-  - *Pending*: Order that has not been fulfilled yet
-  - *Done*: Order that has been completed and delivered/received
-
-## Product Management
-- **Pastry Catalogue**: Complete list of pastries your bakery offers, including prices and required ingredients
-- **Ingredient Catalogue**: Complete list of ingredients used in your bakery, including costs and supplier information
-- **Product ID**: Unique identifier assigned to each pastry or ingredient in the catalogues
-
-## UI Elements
-- **Index**: The number shown beside each item in a list, used for referencing items in commands
-
-## Cost Management
-- **COST**:
-  - For ingredients: Purchase price from supplier
-  - For pastries: Selling price to customer
-
-## Contact Management
-- **Filter**: Process of showing only contacts with specific tags
-- **Tag**: Label that can be applied to contacts for easy categorization (e.g., "VIP", "Wholesale", "Regular")
-- **Remark**: Additional notes about a contact 
-
-## Order Processing
-- **Mark/Unmark**: Commands to toggle the completion status of an order
-- **Clear**: Command to remove all data from the system
 
 <div markdown="block" class="alert alert-info">
 - **Contact**: Any person or entity stored in BakeBuddy's database, including customers, suppliers, and other business contacts
@@ -455,6 +421,8 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 **Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
 ![screenshot](images/Screenshot-2.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Add Customer Command**
 Adds a new customer to the bakery’s customer database.
 
@@ -475,6 +443,8 @@ addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
 ```
 ![screenshot](images/Screenshot-3.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Add Customer Order Command**
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
 New customer will be added with the name if phone number not found in contacts.
@@ -494,6 +464,8 @@ addCustomerOrder n/John Doe p/98765432 o/1 2 3 r/Delivery at 6pm
 ```
 ![screenshot](images/Screenshot-4.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Add Ingredient Command**
 Adds a new ingredient to the bakery's ingredient catalogue, along with its cost.
 
@@ -509,6 +481,8 @@ addIngredient NAME COST
 addIngredient Syrup 3.50 
 ```
 ![screenshot](images/Screenshot-1.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue.
@@ -534,6 +508,8 @@ bakery owner will sell it for, and a list of ingredients required to make it.
 For example, typing **addPastry Croissant 3.50 Flour Cream Sugar** would add a pastry named "Croissant" priced at $3.50, 
 with "Flour," "Cream," and "Sugar" listed as its ingredients. By using this command, bakery owners can easily track of 
 all their pastries and ingredient needs, making it more convenient for bakery owners to manage their list of pastries.
+
+<div style="page-break-after: always;"></div>
 
 ## **Add Supplier Command**
 Adds a new supplier to the bakery’s supplier database.
@@ -565,6 +541,8 @@ will add a supplier named "Tim" with phone number "81234567," email "emily@examp
 and supplying "salt" and "chocolate" as the supplied ingredients for the bakery. This command simplifies the tracking 
 of supplier contacts and ingredient sources, helping bakery owners efficiently manage supplier relationships.
 
+<div style="page-break-after: always;"></div>
+
 ## **Add Supply Order Command**
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
 
@@ -591,6 +569,8 @@ For example, typing **addSupplyOrder n/John Doe p/98765432 o/1 2 3** creates a s
 This command helps bakery owners efficiently manage incoming supplies, track supply orders by product ID, and streamline 
 the ordering process for necessary ingredients.
 
+<div style="page-break-after: always;"></div>
+
 ## **Clear All Command**
 Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
 
@@ -613,6 +593,8 @@ deleteContact 1
 ```
 ![screenshot](images/ss deletecontact.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Delete Customer Order Command**
 Deletes a customer order from the customer order list at the specified index.
 
@@ -627,6 +609,9 @@ deleteCustomerOrder INDEX
 deleteCustomerOrder 2
 ```
 ![screenshot](images/ss deletecustomerorder.png)
+
+<div style="page-break-after: always;"></div>
+
 ## **Delete Supply Order Command**
 Deletes a supply order from the supply order list at the specified index.
 
@@ -643,6 +628,8 @@ deleteSupplyOrder 1
 ![screenshot](images/ss deletesupplyorder.png)
 ## **Edit Contact Command**
 Update the contact details of an existing contact in the address book, including persons, customers, and suppliers. 
+
+<div style="page-break-after: always;"></div>
 
 ```bash
 editContact INDEX FIELDS [moreFIELDS]...
@@ -661,6 +648,8 @@ editContact INDEX FIELDS [moreFIELDS]...
 editContact 1 p/91150335
 ```
 ![screenshot](images/ss editcontact.png)    
+
+<div style="page-break-after: always;"></div>
 
 ## **Exit Command**
 Exits the program.
@@ -682,6 +671,8 @@ filterContact t/TAG [MORE_TAGS...]
 filterContact t/Customer
 ```
 ![screenshot](images/ss filter.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Find persons by name**
 Finds persons whose names contain any of the given keywords.
@@ -706,6 +697,8 @@ find Charlotte Bernice
 ```
 ![findcommand.png](images/findcommand.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **List Command**
 Lists all contacts in the bakery's address book.
 
@@ -724,6 +717,8 @@ help
 ````
 ![helpcommandui.png](images/helpcommandui.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Mark Customer Order Command**
 
 **Note:** Orders are arranged from top (pending orders) to bottom (completed orders), hence marking an order will cause it to go the bottom of the customer order list.
@@ -740,6 +735,8 @@ markCustomerOrder INDEX
 markCustomerOrder 1
 ```
 ![markcustomerorderui.png](images/markcustomerorderui.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Mark Supply Order Command**
 
@@ -758,6 +755,8 @@ markSupplyOrder 1
 ```
 ![marksupplyorderui.png](images/marksupplyorderui.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Remark Command**
 Edits the remark of the person identified by the index number used in the last person listing. 
 The existing remark will be overwritten.
@@ -775,6 +774,8 @@ remark INDEX r/REMARK
 remark 1 r/Regular customer
 ```
 ![remarkcommandui.png](images/remarkcommandui.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Remove Ingredient Command**
 Removes an existing ingredient from the bakery's ingredient catalogue.
@@ -795,6 +796,7 @@ The Remove Ingredient Command enables bakery owners to delete an ingredient from
 For instance, entering removeIngredient Flour will delete the ingredient "Flour" from the catalogue. Attempting to remove an ingredient that does not exist will result in an error message.
 ![removeIngredientFail.png](images%2FremoveIngredientFail.png)
 
+<div style="page-break-after: always;"></div>
 
 ## **Remove Pastry Command**
 Removes an existing pastry from the bakery's pastry catalogue.
@@ -815,6 +817,8 @@ The Remove Pastry Command allows the bakery to maintain an up-to-date catalogue 
 For example, entering removePastry Croissant will remove "Croissant" from the catalogue. If the pastry does not exist, an error message will be shown.
 ![removePastryFail.png](images%2FremovePastryFail.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Unmark Customer Order Command**
 Unmark the customer order status as pending.
 
@@ -830,6 +834,8 @@ unmarkCustomerOrder 1
 ```
 ![unmarkcustomerorderui.png](images/unmarkcustomerorderui.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Unmark Supply Order Command**
 Unmark the supply order status as pending.
 
@@ -844,6 +850,8 @@ unmarkSupplyOrder INDEX
 umarkSupplyOrder 1
 ```
 ![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **View IngredientCatalogue Command**
 Displays the current list of ingredients available in the bakery’s ingredient catalogue.
@@ -861,6 +869,8 @@ The View Ingredient Catalogue Command provides a detailed list of all ingredient
 
 For instance, typing viewIngredientCatalogue displays the full catalogue for ingredient, enabling the bakery to verify all available ingredients in the catalogue.
 
+<div style="page-break-after: always;"></div>
+
 ## **View PastryCatalogue Command**
 Displays the current list of pastries available in the bakery’s pastry catalogue.
 
@@ -876,6 +886,3 @@ viewPastryCatalogue
 The View Pastry Catalogue Command provides a comprehensive view of all pastries in the bakery in one-go, including their IDs, names, price and ingredients with the costs. This command is vital for keeping track of the pastries offered to customers and ingredients needed to produce them. 
 
 For example, entering viewPastryCatalogue shows the complete list of pastries, ensuring that bakery owners are aware of the available pastries.
-
-
-----------------------------------------------------------------------------------------------------------------------
