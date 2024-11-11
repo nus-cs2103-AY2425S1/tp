@@ -27,7 +27,7 @@ Here's a quick tip! To navigate back to the top of this page, use the `Home` key
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 
-If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMAND-F` for Mac to find exactly what you need!
+If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMAND-F` for Mac to find exactly what you need!
 
 <page-nav-print />
 
@@ -159,8 +159,7 @@ Each parameter is followed by examples that explains if the input is considered 
 * `John Stones & Mary Jane` is NOT the same as `Mary Jane & John Stones`.
 </box>
 
-
-
+  
 | Parameter      | Prefix  | Definition                                        | Case-Sensitivity | Constraints                                                                                                                                                                                                                                                                                                                                                                                               | Examples                                                                                                                                              |
 |----------------|---------|---------------------------------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `NAME`         | `n/`    | Name of the person.                               | Case-insensitive | - Only alphanumeric characters, spaces, `/`, and `.` are allowed. <br> - Should not be blank. <br> - If the name contains a `-`, a possible workaround is to replace the `-` with an empty spacing.                                                                                                                                                                                                       | :+1: `Muhammad Ali` <br>:+1: `Henry s/o Nathan` <br>:+1: `Robert Downey Jr.` <br>:x: `Trent Alexander-Arnold` <br>:x: `@JohnnyBoi`                    |
@@ -185,6 +184,9 @@ Each parameter is followed by examples that explains if the input is considered 
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Ensure that an empty space ` ` comes before each prefix. This will prevent your inputs from being misinterpreted by KnottyPlanners.<br>
+  eg. `edit n/john a/woodlandsj/job` will not be interpreted correctly. Rectify this by typing in `edit n/john a/woodlands j/job`.
 
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
@@ -370,7 +372,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 * `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information ☺️.
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
-* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding
+* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding.
 
 </box>
 
@@ -413,10 +415,10 @@ Format: `list-wed` / `lw`
 ### Adding Tag(s) to a Contact: `tag-add` / `ta`
 Add your contacts to a particular wedding!
 
-Format: `tag-add n/NAME t/TAG...` / `ta n/NAME t/TAG...`
+Format: `tag-add n/NAME t/TAG [t/TAG]...` / `ta n/NAME t/TAG [t/TAG]...`
 
+* At least one `TAG` field must be present.
 * The name of the tag must match the wedding that you want to add the contact to.
-
 * You can add one contact to multiple weddings in one go by specifying multiple tags in your command.
 
 <box type="important" seamless>
@@ -424,7 +426,6 @@ Format: `tag-add n/NAME t/TAG...` / `ta n/NAME t/TAG...`
 **IMPORTANT:** 
 
 * The wedding must already exist in the wedding book to successfully tag a person to a wedding.
-
 * If multiple tags of the same wedding are added, KnottyPlanners will only process one and ignore the other tags for you. 
 
 </box>
@@ -447,10 +448,10 @@ Examples:
 ### Deleting Tag(s) from a Contact: `tag-del` / `td`
 Remove your contacts from a particular wedding!
 
-Format: `tag-del n/NAME t/TAG...` / `td n/NAME t/TAG...`
+Format: `tag-del n/NAME t/TAG [t/TAG]...` / `td n/NAME t/TAG [t/TAG]...`
 
+* At least one `TAG` field must be present.
 * The name of the tag must match the wedding that you want to delete the contact from.
-
 * You can remove a contact from multiple weddings in one go by specifying multiple tags in your command.
 
 <box type="important" seamless>
@@ -458,7 +459,6 @@ Format: `tag-del n/NAME t/TAG...` / `td n/NAME t/TAG...`
 **IMPORTANT:** 
 
 * The wedding must already exist in the wedding book to successfully delete a person from a wedding.
-
 * If multiple tags of the same wedding are deleted, KnottyPlanners will only process one and ignore the other tags for you. 
 
 </box>
@@ -485,9 +485,9 @@ Conveniently search for contacts in your address book by name and/or job.
 Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]...`
 
 * At least one of the `NAME` or `JOB` fields must be present.
-* `KEYWORD` is not case-sensitive e.g. `photographer` will match `Photographer`.
+* `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`, `Photographer` will not match `Wedding Photographer`.
-* `filter` returns the largest range of matches based on your input
+* `filter` returns the largest range of matches based on your input.
 
 <box type="tip" seamless>
 
@@ -521,17 +521,18 @@ You can view a list of all contacts tagged to the specified wedding.
 
 Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
-* `view-wed` / `vw` shows participants based on wedding names that match the keyword
-* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g. `alice & bob` will not match `Bob & Alice`
+* `view-wed` / `vw` shows participants based on wedding names that match the keyword.
+* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `Sam` will not match `Sam Tan`, `ian & sky` will not match `Ian Pang & Sky Tan`.
 * Persons matching at least one keyword will not be returned (i.e. `AND` search)
-  e.g. `Alice` will not return `Alice & Bob`
+  e.g. `Alice` will not return `Alice & Bob`.
 
 <box type="important" seamless>
 
 **TAKE NOTE:**
 * No prefixes are required for this command.
-* If there are no contacts in the wedding, KnottyPlanners will display all weddings to allow you to conveniently view other weddings if needed.
+* If you are in the WeddingBook tab and the wedding you request to view has no participants, KnottyPlanners will display all weddings to allow you to conveniently view other weddings if needed.
+* If you are in the AddressBook tab and the wedding you request to view has no participants, KnottyPlanners will not display any participants.
 
 </box>
 
@@ -600,7 +601,7 @@ There is no need to save manually.
 
 ### Editing the Data File
 
-* KnottyPlanners data are saved automatically as a JSON file 
+* KnottyPlanners data are saved automatically as a JSON file.
   * `[JAR file location]/data/addressbook.json`.
   * `[JAR file location]/data/weddingbook.json`.
 * Advanced users are welcome to update data directly by editing that data file.
@@ -636,6 +637,6 @@ There is no need to save manually.
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
-3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`)
+2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`).
 --------------------------------------------------------------------------------------------------------------------
