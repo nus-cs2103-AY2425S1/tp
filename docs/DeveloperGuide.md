@@ -863,6 +863,11 @@ testers are expected to do more *exploratory* testing.
    - edit a wedding: `edit-wedding`
    - list all wedding: `list-weddings`
 
+---
+
+<h3 class="features">Person Features</h3>
+
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -877,6 +882,79 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
+
+
+---
+<h3 class="features">Wedding Features</h3>
+
+### Creating Wedding
+##### ... if `John's Wedding` is not in the list of weddings
+1. Test case: `create-wedding w/John's Wedding`<br>
+   Expected: `John's Wedding` is added to list of weddings. Details of the added wedding are shown.
+
+##### ... if `John's Wedding` is in the list of weddings
+1. Test case: `create-wedding w/John's Wedding`<br>
+   Expected: No weddings are added to list of weddings. Error details shown.
+
+### Deleting Wedding
+##### ... if `John's Wedding` is in the list of weddings
+1. Test case: `delete-wedding w/John's Wedding`<br>
+   Expected: `John's Wedding` is removed from list of weddings. Details of the removed wedding are shown.
+
+##### ... if `John's Wedding` is not in the list of weddings
+1. Test case: `delete-wedding w/John's Wedding`<br>
+   Expected: No weddings are removed from list of weddings. Error details shown.
+
+### Editing Wedding
+##### ... if there is only 1 wedding in the list
+1. Test case: `edit-wedding 1 w/John's Wedding a/Address1 d/2024-12-31 `<br>
+   Expected: 1st wedding's date is set as `John's Wedding`, with address `Address1` and date `2024-12-31`. Details of edited wedding are shown.
+
+1. Test case: `edit-wedding 2 w/John's Wedding a/Address1 d/2024-12-31 `<br>
+   Expected: No weddings are edited. Error details shown.
+
+### Assigning Wedding
+##### ... if `John's Wedding` is in the list && if the first contact is not already in John's Wedding
+1. Test case: `assign-wedding 1 w/John's Wedding`<br>
+   Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+
+1. Test case: `assign-wedding 1 w/John's Wedding p1/`<br>
+   Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
+
+1. Test case: `assign-wedding 1 w/John's Wedding p2/`<br>
+   Expected: 1st contact is put as `John's Wedding`'s Partner 2 and 1st contact has `John's Wedding` on its contact card.
+
+1. Test case: `assign-wedding 1 w/John's Wedding p1/ p2/`<br>
+   Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
+
+##### ... if `John's Wedding` is in the list && if the first contact is already in John's Wedding
+1. Test case: `assign-wedding 1 w/John's Wedding [p1/] [p2/]`<br>
+   Expected: No weddings are assigned to any contacts. Error details shown.
+
+##### ... if `John's Wedding` is not in the list
+1. Test case: `assign-wedding 1 w/John's Wedding [p1/] [p2/]`<br>
+   Expected: No contact is assigned. Error details shown.
+
+1. Test case: `assign-wedding 1 w/John's Wedding f/`<br>
+   Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+
+### Unassigning Wedding
+##### ... if first contact in `John's Wedding`
+1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
+   Expected: 1st contact is removed from `John's Wedding` and `John's Wedding` is removed from their contact card.
+
+##### ... if first contact not in `John's Wedding`
+1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
+   Expected: No weddings are unassigned. Error details shown.
+
+---
+<h3 class="features">Task Features</h3>
+
+---
+<h3 class="features">Tag Features</h3>
+
+---
 
 ### Saving data
 
