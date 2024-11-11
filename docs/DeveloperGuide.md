@@ -891,13 +891,14 @@ Team size: 5 members
 
 2. **List Checked-In Clients on the top of the list**: Currently, checked-in clients are listed in the order they were added. We plan to implement a feature to list checked-in clients at the top of the list to make it easier to identify which clients are currently checked in.
 
-3. **Add a feature to manage Issues directly**: Currently, the app only allows users to add, edit, and delete clients and cars and manage Issues through their commands. We plan to add a feature to manage issues directly. This will allow users to add, edit, and delete issues for each client.
+3. **Add a feature to manage Issues directly**: Currently, the app only allows users to modify clients and cars and manage Issues through their commands. We plan to add a feature to manage issues directly. This will allow users to manage the issues for each client.
 
-4. **Enhance `add-car` to include issue reporting**: Currently, the app only allows users to add cars to clients. We plan to enhance the `add-car` command to enable users to report issues directly when adding cars. This will allow users to document issues concurrently as they add cars to clients.
+4. **Add support for names with valid special characters**: Currently, the app only supports names with alphabets, numbers and spaces. We plan to add support for names with valid special characters such as hyphens, apostrophes, and periods. This will allow users to add clients with names that contain valid special characters, for example "John-Doe", "O'Neil", "Dr. Smith" and "John s/o Smith".
 
-5. **Allow users to have multiple cars**: Currently, each client can only have one car. We plan to allow users to have multiple cars for each client. This will allow users to keep track of multiple cars for each client.
+5. **Add support for car make with valid spaces and other special characters**: Currently, the app only supports car makes with alphabets and numbers. We plan to add support for car makes with valid special characters such as hyphens, apostrophes, and periods. This will allow users to add cars with makes that contain valid special characters, for example "Mercedes-Benz", "Land Rover", "Rolls-Royce" and "St. John".
 
-6. **Add support for foreign vehicles**: Currently, the app only supports vehicles with Singaporean VRNs. We plan to add support for foreign vehicles. This will allow users to add vehicles with foreign VRNs to the app.
+6. **Allow users to have multiple cars**: Currently, each client can only have one car. We plan to allow users to have multiple cars for each client. This will allow users to keep track of multiple cars for each client.
+
 
 7. **Update functionality of Check such that it doesn't reset the list**: Currently, when a user checks in/out a client after the `find` command, the list is reset to its full state. We plan to update the functionality of Check such that it doesn't reset the list. This will allow users to check in/out clients without changing the list.
 
