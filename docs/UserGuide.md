@@ -21,18 +21,30 @@
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-3/tp/releases).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-3/tp/releases).
+2. Copy the file to the folder you want to use as the _home folder_ for CFG.
 
-3. Copy the file to the folder you want to use as the _home folder_ for CFG.
+3. Open a command terminal. Run the `java -version` command to ensure you are using Java 17.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar contactsforgood.jar` command to run the application.<br>
-   
-5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+4. Use `cd` to navigate to the folder containing the `.jar` file.
+
+<box type="tip" seamless>
+
+* `cd` stands for "change directory".
+* e.g. `cd Documents/contactsforgood`
+
+</box> 
+
+5. Use the `java -jar contactsforgood.jar` command to run the application.
+
+6. Your command terminal should look similar to this after steps 4 and 5 (adjusted for your folder's path).
+   ![CommandTerminal](images/commandTerminal.png)<br>
+
+7. A GUI similar to the below should appear in a few seconds after running the `java -jar contactsforgood.jar` command. Note how the app contains some sample data.
    ![Ui](images/Ui.png)<br>
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+8. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -46,7 +58,7 @@
 
    * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+9. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -424,7 +436,7 @@ Deletes a group.
 
 Format: `deleteGroup g/GROUP_NAME`
 
-* Deletes group named `GROUP_NAME`
+* Deletes group named `GROUP_NAME`.
 * Group named `GROUP_NAME` must exist.
 
 Example:
