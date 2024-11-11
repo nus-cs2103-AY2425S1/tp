@@ -29,6 +29,7 @@ public class PersonListPanel extends UiPart<Region> {
         this.isVisualsEnabled = isVisualsEnabled;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell(mainWindow, isVisualsEnabled));
+
     }
 
     /**
