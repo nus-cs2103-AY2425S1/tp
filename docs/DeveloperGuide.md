@@ -775,7 +775,8 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-   1. Test case: Edit the addressbook.json 
+   1. Test case: Edit a record of a person in DorManagerPro.json to have a name containing `/`, which is an invalid character in DorManagerPro. <br>
+      Expected: On launch, the application has no contacts as it does not read files that contain invalid data.
 
 ### Exporting data
 
@@ -802,19 +803,19 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `import fp/./data/SaveFile.json`
    Expected: No information is imported into DorManagerPro. Error details shown in the status message.
 
-3. Trying to import a file that does not exist on the device
-   1. Test case: `import fp/./data/SaveFile4.json` where SaveFile4.json does not exist on the device <br>
-      Expected: Same as above.
-
-4. Importing a file that is not of json format
+3. Importing a file that is not of json format
    1. Prerequisites: There is a file not of json format on the device. In this case, it is assumed the file path to this file is `./data/text`.
    2. Test case: `import fp/./data/text`
       Expected: Same as above.
 
-5. Importing a folder
+4. Importing a folder
    1. Prerequisites: There is a folder on the device. In this case, it is assumed the file path to this file is `./data`.
    2. Test case: `import fp/./data`
       Expected: Same as above.
+
+5. Trying to import a file that does not exist on the device
+    1. Test case: `import fp/./data/SaveFile4.json` where SaveFile4.json does not exist on the device <br>
+       Expected: Same as above, with error message now instead specifying that the file path must correspond to an existing system path.
 
 
 ### Adding a person
