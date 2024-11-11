@@ -23,7 +23,7 @@ StudentManagerPro (SMP) is a **desktop app for managing students, optimized for 
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar studentmanagerpro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui.png](images%2FUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -140,11 +140,12 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 * Note on Emergency Contact Filtering
   * If a student does not have an emergency contact name or number saved, using filter en/ (for emergency contact names) or filter ep/ (for emergency contact numbers) will not return any results. To find these students, please use other attributes in your search criteria.
 * Support for Multiple Predicates: The filter command allows users to specify multiple values for a single attribute (e.g.multiple names) or combine multiple attributes for more refined filtering. 
-  e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will both display details for Alex and Bernice.
+  e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will both display details for Alex and Bernice. This will be true for all attributes.
   e.g. `filter s/F p/99999999` will display details of a female student with the phone number 99999999.
 * Special Considerations for Address Filtering: Unlike other fields, addresses with multiple words and spaces (e.g.123 Geylang Street) require careful handling in filters. 
-  * Filtering multiple addresses in one command works best for single-word addresses (e.g. `filter a/Geylang a/Lorong`).
-  * For addresses with spaces or longer phrases, apply filters one address at a time, such as `filter a/20 Geylang Road` followed by `filter a/30 Lorong Street`.
+  * For filtering an address or multiple addresses in one command only works for single-word addresses 
+  e.g. `filter a/Geylang` returns students with addresses at `Geylang`. 
+  e.g. `filter a/Geylang Street` performs an `OR` search, meaning all contacts with either `Geylang` or `Street` or both are returned.
 * When multiple predicates are filtered e.g. `filter s/F p/99999999`, an `AND` search is run to return the student with all of the attributes mentioned
 * When only one predicate is used but multiple values are provided e.g. `filter n/Alex Bernice`, an 'OR' search is run to return the students who are either Alex or Bernice.
 * When multiple predicates and multiple values are to be filtered, both an `OR` and an`AND` search is run:
