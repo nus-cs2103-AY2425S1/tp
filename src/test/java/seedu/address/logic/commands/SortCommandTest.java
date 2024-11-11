@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.SortCommand.ASC;
 import static seedu.address.logic.commands.SortCommand.DESC;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +29,15 @@ public class SortCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    }
+    @Test
+    public void constructor_invalidOrder_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new SortCommand("invalid_order", true));
+    }
+
+    @Test
+    public void constructor_nullOrder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new SortCommand(null, true));
     }
     @Test
     public void execute_sortAscendingNameSuccess() {
