@@ -93,7 +93,7 @@ public class EditContactCommand extends ContactCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            logger.warning("Invalid index: " + index.getOneBased() + " - out of bounds for current list size");
+            logger.warning("Invalid index: " + index.getZeroBased() + " - out of bounds for current list size");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
