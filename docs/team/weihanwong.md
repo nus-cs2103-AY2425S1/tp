@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added Storage Safety
   * What it does: Resets the `addressbook.json` to the seeded data when it is empty.
-  * Justification: This features simulates real-world scenario and is it also act as a backup for users and testers in the case when they performed `clear`. 
+  * Justification: This features simulates real-world scenario and is it also act as a backup for users and testers in the case when they performed `clear`.
   * Pull Requests: [\#54](https://github.com/AY2425S1-CS2103-F12-3/tp/pull/54)
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=WeiHanWong&tabRepo=AY2425S1-CS2103-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
