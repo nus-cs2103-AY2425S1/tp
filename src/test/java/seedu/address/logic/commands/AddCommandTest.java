@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
@@ -52,7 +53,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_NRIC, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -176,16 +177,27 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private final ObservableList<Person> filteredPersonList = FXCollections.observableArrayList();
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
+            filteredPersonList.add(person);
         }
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return filteredPersonList;
         }
     }
 
@@ -194,7 +206,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
-
+        final ObservableList<Person> filteredPersonList = FXCollections.observableArrayList();
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
@@ -210,6 +222,18 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            requireNonNull(predicate);
+
+            filteredPersonList.setAll(personsAdded.stream().filter(predicate).toList());
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return filteredPersonList;
         }
     }
 
