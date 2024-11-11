@@ -194,18 +194,24 @@ addw in/1 w/Engineer,Google,2023
 
 - `in/INDEX`: Index of contact user wishes to add work experience to. It needs to be a number from 1 to the total number of existing contacts in the contact list.
 - `w/ROLE,COMPANY,YEAR`: Work experience details user wishes to add.
-  - `ROLE`: Must be a single word without spaces and the first letter must be capitalized.
-  - `COMPANY`: Must be a single word without spaces and the first letter must be capitalized.
+  - `ROLE`: Must be a single word without spaces, start with a capital letter, consist only of alphabetic characters.
+  - `COMPANY`: Must be a single word without spaces, start with a capital letter, consist of alphabetic characters. `&` and `-` are the only special characters allowed.
   - `YEAR`: A four-digit year.
 - **Note:** If the specified contact already has existing work experience, it will just be replaced by the user input.
 
 Example:
 
 ```plaintext
-addw in/1 w/Intern,Google,2024
+addw in/1 w/Intern,Johnson&Johnson,2024
 ```
 
-- Adds the work experience `Intern,Google,2024` to the 1st person in the contact list.
+- Adds the work experience `Intern,Johnson&Johnson,2024` to the 1st person in the contact list.
+
+```plaintext
+addw in/2 w/Analyst,Procter-Gamble,2024
+```
+
+- Adds the work experience `Analyst,Procter-Gamble,2024` to the 2nd person in the contact list.
   
 <br>
 <div style="page-break-after: always;"></div>
@@ -557,7 +563,7 @@ _Details coming soon ..._
 4. **After deleting fields in json data file**, upon running the Universe app, the address book returned is empty but without an error message.
 5. **When adding a new contact**, the `birthday` field is compulsory and it is allowed to be a date in the future.
 6. **When adding `interests` to contacts**, running the `addi` command with multiple `in/` prefixes (e.g., `addi in/1 in/2 i/interest`), only the contact specified by the last index will receive the newly added interest. Therefore, users should specify only one `in/` prefix to avoid ambiguity.
-7. **When adding `work experience` to contacts**, `year` is allowed to be in the future.
+7. **When adding `work experience` to contacts**, the `role` and `company` fields for the `addw` command cannot contain numbers or special characters (other than `&` and `-` for `company` only). Additionally, `year` is allowed to be in the future.
 ---
 
 ## Glossary
