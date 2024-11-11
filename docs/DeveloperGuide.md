@@ -66,7 +66,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -580,7 +580,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Patient ID**: A unique identifier for a patient in a medical system
 * **Medical record**: A collection of data about a patient’s health history
 * **Description**: A textual summary associated with a appointment or medical record
@@ -588,6 +587,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Tag**: A keyword or term assigned to a piece of information (e.g., a patient) to describe or categorize it
 * **Command Line Interface**: A text-based interface for interacting with a computer program
 * **Graphical User Interface**: A visual interface for interacting with a computer program
+* **NRIC**: National Registration Identity Card, a unique identifier for Singapore residents
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -615,24 +615,20 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Person to delete is shown in the list.
 
    2. Test case: `delete S1234567A`<br>
-      Expected: Patient with NRIC S1234567A is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: Existing patient with NRIC S1234567A is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is not an NRIC)<br>
       Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
 
 ### Saving data
 
