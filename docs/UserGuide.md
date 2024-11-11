@@ -134,8 +134,8 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
       * each domain label must start and end with alphanumeric characters.
       * The final label is the top-level domain (TLD), which must be at least two alphabetic characters long.
   * Examples:
-    * Single-label domain: `example@gmail.com` (where `gmail.com` is the domain and `.com` is the TLD). 
-    * Multi-label domain: `example@u.nus.edu` (where `u.nus.edu` is the domain and `.edu` is the TLD).
+    * Valid: `example@gmail.com`, `user.name@sub-domain.example.com`, `example@u.nus.edu`.
+    * Invalid: `user..name@example.com` (consecutive dots in the `local-part`), `user.@example.com` (`local-part` ends with a special character), `user@-example.com` (domain label starts with a hyphen).
 
 <box type="info" seamless>
 
