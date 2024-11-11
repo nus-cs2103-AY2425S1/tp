@@ -100,7 +100,6 @@ public class ArchiveCommand extends Command {
                 personToModify.getEmail(),
                 personToModify.getAddress(),
                 personToModify.getPriority(),
-                personToModify.getRemark(),
                 personToModify.getDateOfBirth(),
                 personToModify.getIncome(),
                 personToModify.getFamilySize(),

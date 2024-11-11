@@ -23,7 +23,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
 import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
@@ -40,7 +39,6 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String priority;
-    private final String remark;
     private final String dateOfBirth;
     private final Double income;
     private final Integer familySize;
@@ -59,7 +57,6 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
             @JsonProperty("priority") String priority,
-            @JsonProperty("remark") String remark,
             @JsonProperty("dateOfBirth") String dateOfBirth,
             @JsonProperty("income") Double income,
             @JsonProperty("familySize") Integer familySize,
@@ -71,7 +68,6 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.priority = priority;
-        this.remark = remark;
         this.dateOfBirth = dateOfBirth;
         this.income = income;
         this.familySize = familySize;
@@ -93,7 +89,6 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         priority = source.getPriority().name();
-        remark = source.getRemark().value;
         dateOfBirth = source.getDateOfBirth().getValue().toString();
         income = source.getIncome().getValue();
         familySize = source.getFamilySize().getValue();
@@ -161,8 +156,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
         }
 
-        final Remark modelRemark = new Remark(remark == null ? "" : remark);
-
         if (dateOfBirth == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, DateOfBirth.class.getSimpleName()));
@@ -209,8 +202,8 @@ class JsonAdaptedPerson {
                 .map(UpdatedAt::new)
                 .orElseGet(UpdatedAt::now);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority, modelRemark,
-                modelDateOfBirth, modelIncome, modelFamilySize, modelTags, modelSchemes, modelUpdatedAt, isArchived);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPriority, modelDateOfBirth,
+                modelIncome, modelFamilySize, modelTags, modelSchemes, modelUpdatedAt, isArchived);
     }
 
     /**

@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -37,7 +36,6 @@ public class AddCommand extends Command {
             + "[" + PREFIX_PRIORITY + "PRIORITY = LOW] "
             + "[" + PREFIX_INCOME + "INCOME = 0] "
             + "[" + PREFIX_FAMILY_SIZE + "FAMILY_SIZE = 1] "
-            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -48,7 +46,6 @@ public class AddCommand extends Command {
             + PREFIX_PRIORITY + "HIGH "
             + PREFIX_INCOME + "2000 "
             + PREFIX_FAMILY_SIZE + "3 "
-            + PREFIX_REMARK + "Promises to pay back next week. "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
@@ -97,11 +94,10 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddCommand otherAddCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 

@@ -143,10 +143,6 @@ public class FindCommandParserTest {
         assertParseFailure(parser, " e/mary@example.com",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
-        // Prefix for remark not allowed
-        assertParseFailure(parser, " r/likes baseball",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-
         // Prefix for tag not allowed
         assertParseFailure(parser, " t/friends",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

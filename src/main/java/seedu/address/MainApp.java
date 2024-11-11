@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
@@ -81,27 +82,36 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         ReadOnlyAddressBook initialData;
+        List<Appointment> appointments = null;
+
         try {
-            initialData = storage.readAddressBook().orElseGet(() -> {
+            Optional<ReadOnlyAddressBook> addressBookOptional = storage.readAddressBook();
+            if (addressBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
-                return SampleDataUtil.getSampleAddressBook();
-            });
+                        + " populated with a sample SocialBook.");
+                initialData = SampleDataUtil.getSampleAddressBook();
+                appointments = new ArrayList<>();
+            } else {
+                initialData = addressBookOptional.get();
+            }
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty SocialBook.");
             initialData = new AddressBook();
+            appointments = new ArrayList<>();
         }
 
-        List<Appointment> appointments;
-        try {
-            appointments = storage.readAppointments().orElseGet(() -> {
-                logger.info("No appointment data found. Initializing with an empty appointment list.");
-                return new ArrayList<>();
-            });
-        } catch (DataLoadingException e) {
-            logger.warning("Failed to load appointment data. Initializing with an empty appointment list.");
-            appointments = new ArrayList<>();
+        // Read appointments only if address book was loaded successfully
+        if (appointments == null) {
+            try {
+                appointments = storage.readAppointments().orElseGet(() -> {
+                    logger.info("No appointment data found. Initializing with an empty appointment list.");
+                    return new ArrayList<>();
+                });
+            } catch (DataLoadingException e) {
+                logger.warning("Failed to load appointment data. Initializing with an empty appointment list.");
+                appointments = new ArrayList<>();
+            }
         }
 
         ModelManager modelManager = new ModelManager(initialData, appointments, userPrefs);
