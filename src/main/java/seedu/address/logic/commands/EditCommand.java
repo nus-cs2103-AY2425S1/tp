@@ -31,6 +31,7 @@ import seedu.address.model.wedding.Wedding;
 
 /**
  * Edits the details of an existing person in the address book.
+ * The details that can be edited are name, phone, email and address.
  */
 public class EditCommand extends Command {
 
@@ -65,8 +66,11 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * Creates a {@code EditCommand} object to edit the person at the specified {@code Index} or keyword.
+     *
+     * @param index {@code Index} of the person in the filtered person list to delete.
+     * @param predicate {@code NameMatchesKeywordPredicate} used to filter the person list to find the target person.
+     * @param editPersonDescriptor details of what is to be edited in the person.
      */
     public EditCommand(Index index, NameMatchesKeywordPredicate predicate, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(editPersonDescriptor);
@@ -123,11 +127,11 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Performs edit command logic when the input is an index.
+     * Returns the target person to edit, by index.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return the person to be edited
-     * @throws CommandException if the list is empty or if the index is invalid
+     * @param model {@code Model} which the command should operate on.
+     * @return the person to be edited.
+     * @throws CommandException if the list is empty or if the index is invalid.
      */
     public Person editWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -146,11 +150,11 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Performs edit command logic when the input is a {@code String}.
+     * Returns the target person to edit, by keyword.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return the person to be edited
-     * @throws CommandException if the filtered list using {@code predicate} is empty or contains more than 1 element
+     * @param model {@code Model} which the command should operate on.
+     * @return the person to be edited.
+     * @throws CommandException if the filtered list using {@code predicate} is empty or contains more than 1 element.
      */
     public Person editWithKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
@@ -167,8 +171,11 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Returns a {@code Person} with updated name, phone, email or address.
+     *
+     * @param personToEdit the target person.
+     * @param editPersonDescriptor details of what is to be edited in the person.
+     * @return updated {@code Person} with the edited information.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -280,6 +287,8 @@ public class EditCommand extends Command {
         /**
          * Sets {@code role} to this object's {@code role}.
          * A defensive copy of {@code role} is used internally.
+         *
+         * @param role the role to be set.
          */
         public void setRole(Role role) {
             this.role = role;

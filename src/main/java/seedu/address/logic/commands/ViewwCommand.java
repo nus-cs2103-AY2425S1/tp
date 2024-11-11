@@ -18,6 +18,7 @@ import seedu.address.model.wedding.Wedding;
 
 /**
  * Views wedding details of a person identified from the address book, using index or keyword.
+ * Keyword matching is case-insensitive.
  */
 public class ViewwCommand extends Command {
 
@@ -36,7 +37,6 @@ public class ViewwCommand extends Command {
             "Please specify the index of the wedding which wedding details you want to view.\n"
                     + "Find the index from the list below and type vieww INDEX\n"
                     + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_NO_WEDDING_DETAILS = "No wedding details found for: %1$s";
     public static final String MESSAGE_NO_CLIENT = "No client found for: %1$s";
     public static final String MESSAGE_MULTIPLE_CLIENT = "Multiple client found for: %1$s";
 
@@ -44,7 +44,10 @@ public class ViewwCommand extends Command {
     private final NameMatchesWeddingPredicate predicate;
 
     /**
-     * Creates a ViewwCommand to view the wedding details of the specified wedding
+     * Creates a {@code ViewwCommand} to view the wedding details of the specified wedding.
+     *
+     * @param targetIndex {@code Index} of the wedding in the filtered wedding list to view.
+     * @param predicate {@code NameMatchesWeddingPredicate} used to filter the wedding list to find the target wedding.
      */
     public ViewwCommand(Index targetIndex, NameMatchesWeddingPredicate predicate) {
         this.targetIndex = targetIndex;
@@ -81,11 +84,11 @@ public class ViewwCommand extends Command {
     }
 
     /**
-     * Performs view wedding command logic when the input is an index.
+     * Returns the target wedding by index.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return the person whose wedding details are to be viewed
-     * @throws CommandException if an invalid index is given
+     * @param model {@code Model} which the command should operate on.
+     * @return the target wedding to be viewed.
+     * @throws CommandException if the list is empty or if the index is invalid.
      */
     private Wedding viewWithIndex(Model model) throws CommandException {
         List<Wedding> lastShownList = model.getFilteredWeddingList();
@@ -104,11 +107,11 @@ public class ViewwCommand extends Command {
     }
 
     /**
-     * Performs view wedding command logic when the input is a {@code String}.
+     * Returns the target wedding by keyword.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return the person whose wedding details are to be viewed
-     * @throws CommandException if the filtered list using {@code predicate} is empty
+     * @param model {@code Model} which the command should operate on.
+     * @return the target wedding (if only one wedding matched) or null (if multiple wedding matched).
+     * @throws CommandException if the list resulting from {@code predicate} is empty.
      */
     private Wedding viewWithKeyword(Model model) throws CommandException {
         model.updateFilteredWeddingList(predicate);
@@ -125,10 +128,18 @@ public class ViewwCommand extends Command {
         }
     }
 
+    /**
+     * Updates the filtered person list with the client and vendors (if any) of the {@code weddingToView}.
+     *
+     * @param weddingToView the {@code Wedding} to be checked.
+     * @param model {@code Model} which the command should operate on.
+     * @throws CommandException if the {@code weddingToView} does not have a client or has multiple clients.
+     */
     private void updateClient(Wedding weddingToView, Model model) throws CommandException {
         ClientMatchesWeddingPredicate clientPredicate = new ClientMatchesWeddingPredicate(weddingToView);
         model.updateFilteredPersonList(clientPredicate);
         List<Person> filteredList = model.getFilteredPersonList();
+
         if (filteredList.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_NO_CLIENT, weddingToView.getName()));
         } else if (filteredList.size() == 1) {

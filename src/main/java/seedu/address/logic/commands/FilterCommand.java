@@ -26,8 +26,7 @@ import seedu.address.model.role.Role;
 /**
  * Filters and lists all persons in address book whose fields (name, role, email, phone, address)
  * match any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
- * Parameters: n/NAME [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]...
- * Example: filter n/John r/vendor e/john@example.com
+ * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
 
@@ -46,8 +45,14 @@ public class FilterCommand extends Command {
     private final Address address;
 
     /**
-     * Creates a FilterCommand to filter persons by the specified {@code name}, {@code role}, {@code email},
-     * {@code phone} and {@code address}.
+     * Creates a {@code FilterCommand} object to filter persons by the specified {@code name},
+     * {@code role}, {@code email}, {@code phone} and {@code address}.
+     *
+     * @param name the {@code Name} field to check against.
+     * @param role the {@code Role} field to check against.
+     * @param email the {@code Email} field to check against.
+     * @param phone the {@code Phone} field to check against.
+     * @param address the {@code Address} field to check against.
      */
     public FilterCommand(Name name, Optional<Role> role, Email email, Phone phone, Address address) {
         this.name = name;
