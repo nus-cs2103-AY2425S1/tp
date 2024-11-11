@@ -31,6 +31,7 @@
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
+  * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
@@ -40,6 +41,7 @@
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
+  * [Appendix: Planned Enhancement]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancement)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>

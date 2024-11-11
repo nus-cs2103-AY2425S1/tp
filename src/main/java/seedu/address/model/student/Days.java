@@ -11,7 +11,7 @@ public enum Days {
 
     public static final String MESSAGE_CONSTRAINTS = """
         Days should only contain the following values:
-        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+        MONDAY/TUESDAY/WEDNESDAY/THURSDAY/FRIDAY/SATURDAY/SUNDAY
         """;
     /**
      * Returns true if a given string is a valid day.
