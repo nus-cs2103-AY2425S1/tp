@@ -526,7 +526,7 @@ Furthermore, certain edits can cause the EduContacts to behave in unexpected way
 | **Delete**     | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`                                                                    |
 | **Edit**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`                                        |
 | **Grade**      | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`                                                                                                             |
-| **Add Module** | `module ID m/MODULE` <br> e.g., `add 12345678 m/CS2103T`                                                                                                                         |
+| **Add Module** | `module ID m/MODULE` <br> e.g., `module 12345678 m/CS2103T`                                                                                                                      |
 | **Filter**     | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`                                                                                                          |
 | **Find**       | `find ID`<br> e.g., `find 12345678`                                                                                                                                              |
 | **List**       | `list`                                                                                                                                                                           |
