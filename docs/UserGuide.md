@@ -419,7 +419,7 @@ Edits an existing patient in DocTrack.
 
 <box type="tip" light>
 
-**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags
+**Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags.
 
 </box>
 
@@ -491,7 +491,7 @@ Note that deleting a person will also delete all related appointments.
 
 <box type="tip" light>
 
-**Tip:** Make you have the correct index of the patient before deleting. Use `list person` to check
+**Tip:** Make sure you have the correct index of the patient before deleting. Use `list person` to check.
 
 </box>
 
@@ -684,7 +684,7 @@ You can find appointments whose person names and / or dates contain any of the g
 
 <box type="tip" light>
 
-**Tip:** Use the `find appt` command to filter out appointments for a certain day or patient
+**Tip:** Use the `find appt` command to filter out appointments for a certain day or patient.
 
 </box>
 
