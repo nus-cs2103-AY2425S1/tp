@@ -794,7 +794,8 @@ An example of a command that will trigger invalid date errors will be:`edit Javi
 
 4. **Set age boundaries for `filter age`**: Currently, the `filter` command allows any age range to be inputted, which 
 can lead to invalid or nonsensical ranges. We plan to set boundaries for the age filter to ensure that only valid age 
-ranges are accepted. The valid age range will be from 0 to 150.<br><br>
+ranges are accepted. The valid age range will be from 0 to 150. We will also check for string length to prevent any 
+overflow issues.<br><br>
 An example of a command that will trigger an invalid age range error will be: `filter b/151-200`
 
 5. **Introduce verification of phone numbers**: Currently, the application does not properly 
