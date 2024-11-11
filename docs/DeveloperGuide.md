@@ -523,7 +523,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Two persons in the list obtained from using the following `add` commands:
        ```
        add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
-       add n/Betsy Crowe e/betsycrowe@example.com c/CS1231S p/1234567 t/needs help
+       add n/Betsy Crowe e/betsycrowe@example.com c/CS1231S p/1234567
        ```
        Then list all persons using the `list` command.
 
