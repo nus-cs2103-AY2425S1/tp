@@ -73,6 +73,7 @@ Format: `help`
 ### Adding a restaurant: `add`
 
 Adds a restaurant to the address book.
+Note: Any restaurant filters will be reset upon running this command.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​`
 
@@ -98,6 +99,7 @@ Format: `list`
 ### Editing a restaurant : `edit`
 
 Edits an existing restaurant in the address book.
+Note: Any restaurant filters will be reset upon running this command.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATING] [t/TAG]…​`
 
@@ -152,6 +154,7 @@ Examples:
 ### Deleting a restaurant : `delete`
 
 Deletes the specified restaurant from the address book.
+Note: Any restaurant filters will be reset upon running this command.
 
 Format: `delete INDEX`
 
