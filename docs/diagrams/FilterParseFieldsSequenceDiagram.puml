@@ -10,7 +10,7 @@ participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 end box
 
 alt start date is present
-    FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(startDatePrefix)
+    FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(PREFIX_STARTDATE)
     activate ArgumentMultiMap
 
     ArgumentMultiMap --> FilterCommandParser
@@ -38,7 +38,7 @@ else no start date given
 end
 
 opt Health Service is present
-    FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(healthServicePrefix)
+    FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(PREFIX_HEALTHSERVICE)
     activate ArgumentMultiMap
 
     ArgumentMultiMap --> FilterCommandParser

@@ -56,7 +56,7 @@ activate FilterCommandParser
 FilterCommandParser --> FilterCommandParser
 deactivate FilterCommandParser
 
-FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(...)
+FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(PREFIX_ENDDATE)
 activate ArgumentMultiMap
 
 ArgumentMultiMap --> FilterCommandParser
@@ -88,7 +88,7 @@ deactivate FilterCommandParser
 destroy FilterCommandParser
 destroy ArgumentMultiMap
 
-ClinicConnectSystemParser --> LogicManager
+ClinicConnectSystemParser --> LogicManager : a
 deactivate ClinicConnectSystemParser
 
 LogicManager -> FilterCommand : execute()
