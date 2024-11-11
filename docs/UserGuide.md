@@ -639,6 +639,7 @@ List of certain technical terms / uncommon words used in this user guide.
 - It can be opened in Notepad, or other text or code editors.
 
 ### Numeric
-- Consisting of the digits 0 to 9.
+- Consisting only of the digits 0 to 9.
+- Does not include the negative sign (-), the decimal point (.), spaces, or other symbols.
 
 [Return to Top](#table-of-contents)
