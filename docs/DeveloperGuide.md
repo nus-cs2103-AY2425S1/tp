@@ -1266,3 +1266,7 @@ Team Size: 5. Hence, maximum number of planned enhancements is **10**.
 ### 9. Maintain the same displayed list when editing contacts' grades.
 * **Current Situation**: Upon a successful edit of the grade a contact, the displayed list will update to show the list of all unarchived contacts.
 * **Proposed Improvement**: Maintain the same list of contacts from before the grade command was executed, and display the updated information of the edited person.
+
+### 10. Improve input validation for `findday` command to only take in days of the week.
+* **Current Situation**: Users can input any value for the `DAY` parameter of the `findday` command.
+* **Proposed Improvement**: Create an enum of valid `DAY` inputs (i.e. the days of the week), and display an error message to the user if the value input to the `DAY` parameter does not match any of the valid inputs.
