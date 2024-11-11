@@ -23,7 +23,7 @@
 
       <VBox alignment="BOTTOM_CENTER" fx:id="helpMessageContainer" spacing="10">
         <children>
-          <ScrollPane fitToWidth="true">
+          <ScrollPane>
             <content>
               <Label fx:id="helpMessage" text="Label">
                 <HBox.margin>
