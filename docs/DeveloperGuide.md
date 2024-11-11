@@ -668,5 +668,5 @@ that would be a response to the above example, would be `tags should only be alp
 5. **Improve price error message:** Currently price are only allowed to be filtered by a given combination of the allowed price labels, if the user were to search `price $$$$$` or `price 4`, the response of `0 restaurants listed!` is the output. However, like the previous point, 
 a better implementation would have been for the source code to first check if the input were price labels before finding. If the conditions were not met, a more appropriate response could have been displayed, for example 
 `Price command only accepts a combination of the following: $ $$ $$$ $$$$`.
-6. **Improve edit command for checking phone numbers:** Currently a user can enter a really long phone number, e.g. `120 digits` when editing an already existing contact with the `edit` command. We plan on checking the user inputs in the future for the edit command so as to prevent such 
+6. **Limit phone number length in `edit` command:** Currently a user can enter a really long phone number, e.g. `120 digits` when editing an already existing contact with the `edit` command. We plan on checking the user inputs in the future for the edit command so as to prevent such 
 things from happening in the future.
