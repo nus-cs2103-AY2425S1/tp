@@ -76,11 +76,11 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 
 | Action                    | Format, Examples                                                                                                                                                     |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Add Order**             | `order ORDER`<br> e.g., `order pizza`                                                                                                                                |
+| **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pc/POSTALCODE [t/TAG]…​`<br> e.g., `add n/James Ho p/88737204 e/jamesho@example.com a/Blk 310, Clementi Rd pc/1234665 t/friend t/colleague` |
+| **Add Order to Application**      | `order ORDER`<br> e.g., `order pizza`                                                                                                                                |
 | **Add Order to Customer** | `put ORDER n/NAME`<br> e.g., `put cake n/Alex`                                                                                                                       |
 | **Add Shortcut**          | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
-| **Archive**               | `archive`<br> e.g., `archive 3`                                                                                                                                      |
+| **Archive**               | `archive INDEX`<br> e.g., `archive 3`                                                                                                                                      |
 | **Clear**                 | `clear`                                                                                                                                                              |
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
 | **Delete Order**          | `deleteOrder ORDER`<br> e.g., `deleteOrder pizza`                                                                                                                    |
@@ -508,7 +508,7 @@ Examples:
 </div>
 
 ---
-### **Archive customer: `archive`**
+### Archive customer: `archive`
 
 Archive a customer so that it doesn't show when we run `list`
 
@@ -527,11 +527,7 @@ Assuming there's at least one person that is unarchived.
 2. `archive 1`
 
 ---
-<<<<<<< HEAD
-### **List archived users: `listarchive`**
-=======
-### **List archived customer: `listarchive`**
->>>>>>> master
+### List archived customer: `listarchive`
 
 Shows all archived customers only in contact list
 
@@ -545,7 +541,7 @@ Assuming there's at least one person that is archived.
 1. `listarchive`
 
 ---
-### **Unarchive customer: `unarchive`**
+### Unarchive customer: `unarchive`
 
 Unarchive a customer so that it shows when we run `list`
 
@@ -565,7 +561,7 @@ Assuming there's at least one person that is archived.
 
 ---
 
-### **Downloading Customer Data: `download`**
+### Downloading Customer Data: `download`
 Exports the currently displayed contact list data as a CSV file with optional tag-based filtering.
 
 
