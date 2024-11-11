@@ -79,6 +79,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -96,6 +97,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Customer` and `Order` objects residing in the `Model`.
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -129,6 +131,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCustomerCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCustomerCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddOrderCommandParser`, `DeleteCustomerCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14a-2/tp/blob/master/src/main/java/seedu/sellsavvy/model/Model.java)
@@ -144,6 +147,7 @@ The `Model` component,
   * Each `Customer` stores the currently 'selected' `Order` objects (e.g., results of a filter query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Order>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+<div style="page-break-after: always;"></div>
 
 <box type="info" seamless>
 
@@ -170,6 +174,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.sellsavvy.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -266,8 +271,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `deletecustomer`, just save the customer being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1268,6 +1271,13 @@ testers are expected to do more *exploratory* testing.
    - **Problem:** Currently, the loaded sample data has customers who have tags such as `friends`, `neighbours`, etc.
    - **Solution:** Change the tags (and any relevant sample data) to fit more with the context of the target user.
    - **Rationale:** It is unlikely that a target user will label their customers as the current tags in the sample data. Making the sample data more relevant will allow users trying out the application to better simulate the experience of a target user using the application.
+<p><p/>
+
+7. **Allows case-insensitivity for relationship indicator in customer's `NAME`**
+    - **Problem:** Currently, we only allow the relationship indicator to be "S/O" or "D/O", which are in upper-case.
+    - **Example:** User tries to add a customer using `addc n/john s/o doe p/98765432 e/johnd@example.com a/John street`. An error message informs user that name is wrong.
+    - **Solution:** Add the functionality that allows the relationship indicator, namely "S/O" and "D/O", to be case-insensitive.
+    - **Rationale:** It is normal for a user to enter a customer name in any casing, including relationship indicator.
 
 ## **Appendix: Effort**
 

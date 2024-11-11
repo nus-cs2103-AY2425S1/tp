@@ -154,6 +154,8 @@ Edits an existing customer in the address book.
 
 Command alias: `editc`<br>
 Format: `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>
+<div style="page-break-after: always;"></div>
+
 Examples:
 *  `editcustomer 2 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 2nd customer to be `91234567` and `johndoe@example.com` respectively.
 *  `editc 1 n/Betsy Crower t/` Edits the name of the 1st customer to be `Betsy Crower` and clears all existing tags.
@@ -192,6 +194,7 @@ Examples:
   ![result for 'findc alex david'](images/findAlexDavidResult.png)
 
 <box type="important">
+<div style="page-break-after: always;"></div>
 
 ##### Constraints
 
@@ -265,6 +268,8 @@ List all orders of a specified customer from the address book.
 
 Command alias: `listo`<br>
 Format: `listorder CUSTOMER_INDEX`<br>
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `listcustomer` followed by `listorder 2` lists all orders of the 2nd customer in the address book.
 * `findcustomer Betsy` followed by `listo 1` lists all orders of the 1st customer from the list of customers found with "Betsy".
