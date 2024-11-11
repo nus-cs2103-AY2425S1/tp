@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should be in the following format, "
+            "Date should be valid and in the following format, "
                     + "YYYY-MM-DD.";
 
     // Use built-in formatter to parse and validate the date
