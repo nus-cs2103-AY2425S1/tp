@@ -12,8 +12,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Implements command to delete a tag from a person
- * format: deltag [INDEX] t/[TAG NAME]
+ * Implements command to delete a tag from a person.
+ * format: deltag [INDEX] t/[TAG NAME].
  */
 public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deltag";

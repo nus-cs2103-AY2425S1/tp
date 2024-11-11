@@ -59,7 +59,7 @@ public class VersionedCampusConnect {
     }
 
     /**
-     * Clear all undone data in the future stack.
+     * Clears all undone data in the future stack.
      */
     public void clearUndoneData() {
         future.clear();

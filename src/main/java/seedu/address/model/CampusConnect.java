@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -22,9 +21,6 @@ import seedu.address.model.tag.TagCategory;
 public class CampusConnect implements ReadOnlyCampusConnect {
 
     private final UniquePersonList persons;
-    private final Stack<ReadOnlyCampusConnect> prev = new Stack<>();
-    private final Stack<ReadOnlyCampusConnect> future = new Stack<>();
-
     private final VersionedCampusConnect versionedCampusConnect = new VersionedCampusConnect();
 
     /*
@@ -60,7 +56,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     }
 
     /**
-     * Recovers from previous states
+     * Recovers from previous state.
      */
     public ReadOnlyCampusConnect recoverPreviousState() throws UndoException {
         ReadOnlyCampusConnect out = versionedCampusConnect.extractOldData();
@@ -69,7 +65,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     }
 
     /**
-     * Recovers previously undone states
+     * Recovers the previously undone state.
      */
     public ReadOnlyCampusConnect recoverUndoneState() throws RedoException {
         ReadOnlyCampusConnect out = versionedCampusConnect.extractUndoneData();
@@ -151,7 +147,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     }
 
     /**
-     * Adds a new Tag to person
+     * Adds a new Tag to a person.
      */
     public void addPersonTags(Person p, Set<Tag> tagList) {
         persons.addPersonTags(p, tagList);

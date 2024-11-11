@@ -74,12 +74,12 @@ public interface Model {
 
     /**
      * Deletes a tag from a person.
-     * The person must exist as well as the tag
+     * The person must exist as well as the tag.
      */
     void deletePersonTag(Person p, Tag tag);
 
     /**
-     * Adds a set of tag to person
+     * Adds a set of tag to person.
      */
     void addPersonTags(Person p, Set<Tag>t);
 
@@ -131,12 +131,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Undoes the previous actions of users
+     * Undoes the previous actions of users.
      */
     void undoCampusConnect() throws CommandException;
 
     /**
-     * Restores state before previous undo actions of users
+     * Restores state before previous undo actions of users.
      */
     void redoCampusConnect() throws CommandException;
 
