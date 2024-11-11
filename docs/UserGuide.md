@@ -303,6 +303,11 @@ Format: `sort ORDER`
 
 * `ORDER` can be either `a`(ascending) or `d`(descending).
 
+<box type="info">
+
+**Note:** Sorting the list will override the original ordering of the candidate list.
+</box>
+
 Examples:
 * `find alex bernice david` followed by `sort d` sorts the resulting candidate list of the `find` command in descending order based on their interview scores.
 * `list` followed by `sort a` sorts the entire list of candidates in ascending order based on their interview scores, as shown below:
