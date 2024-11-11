@@ -13,7 +13,7 @@ GamerBook Pro Max lets you type quick commands using a Command Line Interface (C
 visuals of a Graphical User Interface (GUI).
 
 You get the best of both worlds: speedy command-based interactions with an intuitive, user-friendly display!
-If you can type fast, GamerBook can get your contact management tasks done faster than traditional GUI apps.
+If you can type fast, GamerBook Pro Max can get your contact management tasks done faster than traditional GUI apps.
 
 
 <!-- * Table of Contents -->
@@ -28,7 +28,8 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 ## Installation and Quick Start
 
 1. **Check your Java version**: Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or
-   above installed in your Computer. To check, open a command terminal (like Command Prompt) and type: `java -version`.
+   above installed in your Computer. To check, open a command terminal (like Command Prompt) and type: `java -version`.<br>
+   Ensure that the version returned is 17 or above, or install it if you have not done so.
 
 2. **Download GamerBook Pro Max**: Download the latest `gamerbook.jar` file
    from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).  
@@ -37,9 +38,9 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 3. **Set Up Your GamerBook Folder**: Copy the file to the folder you want to use as the _home folder_ for your
    GamerBook.
 
-4. **Run the App**: Open a command terminal([here](https://owlcation.com/stem/how-to-open-files-in-terminal#:~:text=Locating%20Your%20Terminal%20Application%20%28or%20Command%20Prompt%29%201,usually%20be%20opened%20using%20the%20Ctrl%2BAlt%2BT%20keyboard%20shortcut.)
- for more details about command terminal), use `cd` to navigate into the folder you put the jar file in, and use
+4. **Run the App**: Open a command terminal, use [`cd`](https://owlcation.com/stem/how-to-open-files-in-terminal) to navigate into the folder you put the jar file in, and use
    the `java -jar gamerbook.jar` command to run the application.<br>
+   **Alternative**: Click on the gamerbook.jar application icon as you would any normal app.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 ![Ui](images/Ui.png)
@@ -61,7 +62,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
     * `exit` : Exits the app.
 
-Refer to the [Features](#features) below for more details.
+Refer to the [Commands](#commands) below for more details.
 <br>
 <div style="page-break-after: always;"></div>
 
@@ -552,12 +553,19 @@ Output: `Address book has been saved!`
 
 Manually loads the data from JSON file `[JAR file location]/data/save.json`.  
 
-Format: `load`
+Format: `load`  
 Output: `The saved address book has been loaded!`
+
+<box type="warning" seamless>
+
+**Caution:**
+`load` is irreversible and cannot be undone by `undo`<br>
+All the data you have in `[JAR file location]/data/addressbook.json` prior to using `load` will be lost!
+</box>
 
 <br>
 
-#### Editing the data file
+#### **Editing the data file**
 
 GamerBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json` after every command. Advanced users are
 welcome to update data directly by editing that data file.
@@ -574,26 +582,94 @@ acceptable range). Therefore, edit the data file only if you are confident that 
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Important Notes about Command Formats
+
+<box type="info" seamless>
+
+* **Commands Are Case-Sensitive and All Lowercase**  
+  Make sure to type commands exactly as shown.  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
+
+
+* **Copying Commands from PDF**  
+  If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </box>
+
+### Understanding Commands Format
+<box type="info" seamless>
+
+* **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
+  e.g. `add n/NAME` means you would type something like `add n/John Doe`.
+
+
+* **Items in square brackets are optional**.  
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply `n/John Doe`.
+
+
+* **Items with `…`​ after them can be used multiple times.**  
+  e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
+
+
+* **Flexible Parameter Order**  
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+
+* **Ignored Extra Parameters** for commands that do not take in parameters (such as `help`, `list`, `exit`
+  and `clear`)  
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  <br>
+  </box>
+
+### Notes About Parameters Format
+<box type="info" seamless>
+
+* `NAME` **only accepts alphanumeric characters and spaces**.  
+  Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
+
+
+* `INDEX` **must be a must be a positive integer**  
+  If it’s not, you’ll see an invalid command format error.
+
+
+* `NAME` **is case-sensitive**.  
+  Although duplicate contact names are not allowed, adding two separate contacts `Bobby Ang` and `bobby ang` would be
+  allowed.
+
+
+* `TIME-TIME` **must be within the same day**.  
+  Use the format `HHmm-HHmm` for time ranges within the same day.  
+  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
+
+  Currently users can work around with this issue by breaking the overnight range down into 2 separate ranges.     
+  e.g. `2300-0100` can be broken down into `2300-2359` and `0000-0100` and be accepted.
+
+* `TIME-TIME`**cannot refer to a single point in time**
+  The start and end times must be different (e.g. `1200-1200` is invalid).
+
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install GamerBook on the new computer, and then copy the data file `addressbook.json` from your previous 
 GamerBook home folder to the new installation’s data folder, typically located at `[JAR file location]/data/addressbook.json`. Replace the empty data file on the new computer with your copied file.
 
-
 **Q**: What should I do if I accidentally delete someone from GamerBook?<br>
 **A**: You can use the `undo` command right after the delete command to restore the deleted person’s data, or use `load` if you have been saving frequently.
 
-**Q**: Should I ever use the `clear` command?
+**Q**: Should I ever use the `clear` command?<br>
 **A**: The `clear` command deletes all entries in GamerBook. You should use it mainly to clear the sample data that GamerBook starts with.
 
-**Q**: Why do my searches sometimes return unexpected results?  
+**Q**: Why do my searches sometimes return unexpected results?<br>
 **A**: GamerBook's search functions like `find` are case-insensitive, but they only match full words. If your search is not returning results, try again with full keywords like `John` instead of `J`.
 
-**Q**: Can I undo more than one command?  
+**Q**: Can I undo more than one command?<br>
 **A**: Yes! The `undo` command remembers your command history from when GamerBook was opened, and you can `undo` consecutive times.
 
-**Q**: Why did my GamerBook open blank when I had data saved previously?
+**Q**: Why did my GamerBook open blank when I had data saved previously?<br>
 **A**: You may have moved the data file `addressbook.json` or modified it incorrectly. We suggest saving frequently and avoid editing the `json` directly!
  <br>
 
