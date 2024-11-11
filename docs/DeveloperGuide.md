@@ -502,6 +502,18 @@ In the future, we will firstly modify the program, such that it no longer uses S
         assert addressBook.getPersonList().size() == initialSize;
     }
 ```
+
+**Note:** This will make the current implementation such that the list only sorts when a sort command is executed, i.e if you do a sort by name command, and the names become A, J, J, Z, then you add a B, the list will become A, J, J, Z, B.
+
+If you wish for the list to automatically sort as clients are added / edited, you will need to modify the addPerson and setPerson command in ModelManager. Simply add a check to test if a sort is activated, and if so, after the modification of the list, perform a sort. You can use the following code as an example:
+
+```
+ if (currentComparator != null && !isArchivedList) {
+    sortByComparator(currentComparator);
+}
+```
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
