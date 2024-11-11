@@ -33,10 +33,11 @@ public class DonatedAmount implements Comparable<DonatedAmount> {
     /**
      * Returns true if a given string is a valid representation of donated amount.
      *
-     * @param test The string to test.
+     * @param test The string to test. Must not be null.
      * @return True if the test string matches the validation regex.
      */
     public static boolean isValidAmount(String test) {
+        assert test != null : "The test string should not be null";
         return test.matches(VALIDATION_REGEX);
     }
 

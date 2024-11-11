@@ -309,14 +309,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ContactsForGood (CFG)` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ContactsForGood (CFG)` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Search for person(s)**
 
 **MSS**
 
-1.  User searches for a person by name
-2.  CFG shows a list of persons which fit the criteria
+1.  User searches for a person by name.
+2.  CFG shows a list of persons which fit the criteria.
 
     Use case ends.
 
@@ -334,16 +334,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to delete a specific person in the list
-4.  CFG deletes the person
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to delete a specific person in the list.
+4.  CFG deletes the person.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 
@@ -361,16 +361,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to add some number of volunteer hours to a specific person in the list
-4.  CFG adds the specified number of volunteer hours to the specified person's existing hours
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to add some number of volunteer hours to a specific person in the list.
+4.  CFG adds the specified number of volunteer hours to the specified person's existing hours.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
  
   Use case resumes at step 2.
 
@@ -384,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The specified person is not a Volunteer
+* 3b. The specified person is not a Volunteer.
 
     * 3b1. CFG shows an error message.
 
@@ -394,16 +394,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
-2.  CFG shows a list of relevant persons
-3.  User requests to get emails of persons on the list
-4.  CFG copies to the user's clipboard a list of all emails of persons on the list
+1.  User requests to list persons.
+2.  CFG shows a list of relevant persons.
+3.  User requests to get emails of persons on the list.
+4.  CFG copies to the user's clipboard a list of all emails of persons on the list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
 
   Use case resumes at step 2.
 
@@ -411,6 +411,208 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+
+**Use case: UC05 - Create a group**
+
+**MSS**
+
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to create a group, with specified persons in the list as members.
+4. CFG successfully creates the group.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
+
+  Use case resumes at step 2.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. A group with the same name already exists.
+  * 3a1. CFG shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC06 - List groups**
+
+**MSS**
+
+1. User requests to see all existing groups.
+2. CFG shows a list of all existing groups.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no existing groups.
+  * 2a1. CFG shows an empty list.
+
+    Use case ends.
+
+
+**Use case: UC07 - View members of a group**
+
+**MSS**
+
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to see members of a group.
+3. CFG lists all the members of the group.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User may not require a list of groups.
+  
+    Use case resumes at step 2.
+
+* 2a. The group with specified name does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+  
+* 3b. The group currently has no members.
+  * 3b1. CFG displays an empty list.
+
+    Use case ends.
+
+
+**Use case: UC08 - Add members to a group**
+
+**MSS**
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to add specified persons in the list to a group.
+4. CFG adds the persons to the group.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
+
+  Use case resumes at step 2.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. One or more of the specified indices is invalid.
+  * 3a1. CFG shows an error message.
+
+    Use case ends.
+* 3b. The group does not exist.
+  * 3b1. CFG shows an error message.
+
+    Use case ends.
+
+**Use case: UC09 - Remove members from a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to <ins>view members of a group (UC07)</ins>.
+3. User requests to remove one or more members from a group.
+4. CFG removes the specified members from the group.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User may not require a list of groups.
+    
+    Use case resumes at step 2.
+
+* 2a. User may not require viewing members in a group.
+
+    Use case resumes at step 3.
+
+* 3a. One or more of the specified indices is invalid.
+  * 3a1. CFG shows an error message.
+
+    Use case ends.
+   
+* 3b. The group does not exist.
+  * 3b1. CFG shows an error message.
+
+    Use case ends.
+* 3c. One or more of the specified members is not currently in the group.
+  * 3c1. CFG shows an error message.
+    
+    Use case ends.
+
+
+**Use case: UC10 - Rename a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to change the name of a group to a new name.
+3. CFG successfully renames the group.
+
+**Extensions**
+* 1a. User may not require a list of groups.
+
+  Use case resumes at step 2.
+* 2a. The group referenced by the user does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+* 2b. A group with the new name already exists.
+  * 2b1. CFG shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC11 - Delete a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>.
+2. User requests to delete a group.
+3. CFG deletes the group.
+
+    Use case ends.
+
+**Extensions**
+* 1a. User may not require a list of groups.
+
+    Use case resumes at step 2.
+* 2a. The group does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+
+
+**Use case: UC12 - Sort contacts**
+
+**MSS**
+1. User requests to list persons.
+2. CFG shows a list of relevant persons.
+3. User requests to sort the list by name.
+4. CFG shows the list of persons sorted by name.
+
+    Use case ends.
+
+**Extensions**
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>.
+
+  Use case resumes at step 2.
+* 2a. The list of persons is empty.
+
+    Use case ends
+* 3a. User could also request to sort by default order (insertion order), volunteer hours, donation amount, or partnership end date.
+  * 3a1. CFG would sort by the specified sort option instead.
+
+    Use case resumes at step 4.
+* 4a. User could continue to request for a different list of persons, by <ins>searching (UC01)</ins>,
+    <ins>viewing members in a group (UC07)</ins>, etc.
+  * 4a1. Sort option persists for the new list.
+
+    Use case ends.
 
 
 ### Non-Functional Requirements
@@ -476,20 +678,333 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app using the `java -jar contactsforgood.jar` command.<br>
        Expected: The most recent window size and location is retained.
 
+### Testing the empty ContactsForGood Application
+**Purpose:** To ensure that commands can be executed in an empty state without crashing the application.
+1. To begin, reset the application state to an empty state by using the `clear` command.
+   1. Test case: `list`  
+      **Expected:** "Listed all persons" should be printed. 
+      The area below the output should not have any contacts displayed.
+   
+   2. Test case: `listGroup`  
+      **Expected:** "Listed all groups" should be printed.
+      The area below the output should not have any groups displayed.
+   
+   3. Test case: `delete 1`  
+      **Expected:** The error message "One or more indices provided are invalid" should be printed.
+   
+   4. Test case: `edit 1 n/John`  
+      **Expected:** The error message "One or more indices provided are invalid" should be printed.
+   
+   5. Test case: `search n/John`   
+      **Expected:** "0 person(s) listed!" should be printed.
+      The area below the output should not have any contacts displayed.
+   
+   6. Test case: `sort s/name`   
+      **Expected:** "No persons found. The list is reset to its default order." should be printed.
+   
+   7. Test case: `addToGroup g/Blood Drive m/1`  
+      **Expected:** The error message "There is no group with name Blood Drive." should be printed.
+   
+   8. Test case: `removeFromGroup g/Blood Drive m/1`  
+      **Expected:** The error message "There is no group with name Blood Drive." should be printed.
+   
+   9. Test case: `editGroupName g/Blood Drive g/Blood Collection`  
+      **Expected:** The error message "The existing group with the given name could not be found."
+   
+   10. Other correct command formats can be tested and should print the similar messages as above.
+   
+   11. Incorrect command formats can be tested and should print the respective error messages.
+   
+   12. Lastly, after all these are done, one can test the following commands which will make the address book non-empty:
+       `add` and `createGroup`
+   
+   13. Test case: `add n/Nicholas Tan p/91234567 e/e1234567@u.nus.edu a/21 Lower Kent Ridge Rd, Singapore 119077`  
+       **Expected:** "New person added: Nicholas Tan; Phone: 91234567; Email: e1234567@u.nus.edu; 
+       Address: 21 Lower Kent Ridge Rd, Singapore 119077; Tags: " should be printed.
+   
+   14. Test case: `createGroup g/NUS m/1`  
+       **Expected:** "Created group NUS" should be printed.
+   
+### Adding a person
+
+1. Adding a person to the address book without the optional fields.
+   1. Test case:  
+      1. `add n/Nicholas Tan p/91234567 e/e1234567@u.nus.edu a/21 Lower Kent Ridge Rd, Singapore 119077`
+      2. `add n/Nicholas Tan p/91234567 e/e1234567@u.nus.edu a/21 Lower Kent Ridge Rd, Singapore 119077`  
+      **Expected:**  
+      If Nicholas Tan was previously added in step 13 of "Testing the empty ContactsForGood 
+      Application", both commands should print the error message: "This person already exists in the address book".  
+      Else, the first addition should print "New person added: Nicholas Tan; Phone: 91234567; Email: e1234567@u.nus.edu;
+      Address: 21 Lower Kent Ridge Rd, Singapore 119077; Tags: ", while the second addition should print the error message:
+      "This person already exists in the address book".
+2. Adding a person to the address book with the optional tag field.
+   1. Test case - with Tag:  
+      `add n/Abel Lee p/81234567 e/d1234567@u.nus.edu a/20 Lower Kent Ridge Rd, Singapore 119077 t/Student`  
+      **Expected:** "New person added: Abel Lee; Phone: 81234567; Email: d1234567@u.nus.edu; 
+      Address: 20 Lower Kent Ridge Rd, Singapore 119077; Tags: [Student]" should be printed.
+3. Adding a person to the address book with the optional role field.
+   1. Test case - with Partner Role:  
+      `add n/Jason Tan r/partner p/61234567 e/f1234567@u.nus.edu a/19 Lower Kent Ridge Rd, Singapore 119077 ped/2024-12-03`  
+      **Expected:** "New partner added: Jason Tan; Phone: 61234567; Email: d1234567@u.nus.edu; Address: 20 Lower Kent Ridge Rd,
+      Singapore 119077; Tags: ; Partnership End Date: 2024-12-03" is printed and the address book contains Jason Tan, 
+      with the label PARTNER and fields with the correct details.
+   2. Test case - with Volunteer Role:  
+      `add n/Bailey Ang r/volunteer p/91234568 e/g1234567@u.nus.edu a/18 Lower Kent Ridge Rd, Singapore 119077 h/19`
+      **Expected:** "New volunteer added: Bailey Ang; Phone: 91234568; Email: g1234567@u.nus.edu; Address: 
+      Singapore 119077; Tags: ; Hours: 19" is printed and the address book contains Bailey Ang, with the label
+      VOLUNTEER and fields with the correct details.
+   3. Test case - with Donor Role:  
+      `add n/Tyson Chua r/donor p/61234568 e/tysonchua22@mailer.com a/17 Lower Kent Ridge Rd, Singapore 119077 d/12`  
+      **Expected:** "New donor added: Tyson Chua; Phone: 61234568; Email: tysonchua22@mailer.com; 
+      Address: 17 Lower Kent Ridge Rd, Singapore 119077; Tags: ; Donated Amount: 12.0" is printed and the address book 
+      contains Tyson Chua, with the label DONOR and fields with the correct details.
+   4. Test case - with invalid Role: 
+      `add n/Mary r/Tester p/61234568 e/tysonchua22@mailer.com a/17 Lower Kent Ridge Rd, Singapore 119077 d/12`  
+      **Expected**: The error message "Invalid role. Valid roles are: Volunteer, Donor, Partner, Person." is printed.
+4. The tester should attempt testing with incorrect command formats and other combinations of prefixes, such as 
+   testing `r/` together with `t/`.
+
+### Edting a person
+
+This test section's prerequisite is that you have gone through the add person section above, and therefore you should
+have a person named "Jason Tan" who has the role `Partner`. It also assumes that Jason Tan has an index of `3` on the
+displayed person list. If he does not, you should use the respective index that he has on the displayed list, for the
+`INDEX` field in the edit command.
+
+1. Editing a person's name
+   1. Test case - edit to a name which does not exist:  
+   `edit 3 n/Jason Ong`  
+   **Expected:** "Edited partner: Jason Ong; Phone: 61234567; Email: d1234567@u.nus.edu; Address: 20 Lower Kent Ridge Rd,
+   Singapore 119077; Tags: ; Partnership End Date: 2024-12-03" should be printed. The name on the displayed list should 
+   be edited.
+   2. Test case - edit to a name which already exists:  
+   This command assumes that the person "Abel Lee" exists in the address book. If not, follow step 2i. in adding a person
+   to add this person to the address book.  
+   `edit 3 n/Abel Lee`  
+   **Expected:** "This person already exists in the address book." should be printed. No names should be changed.
+   3. Test case - edit to the same name:
+   `edit 3 n/Jason Ong`  
+   **Expected:** "Edited partner: Jason Ong; Phone: 61234567; Email: d1234567@u.nus.edu; Address: 20 Lower Kent Ridge Rd,
+   Singapore 119077; Tags: ; Partnership End Date: 2024-12-03" should be printed. However, no changes to the address book
+   should be observed.
+   
+2. Editing a person's role attribute
+   1. Test case - edit an attribute which exists for the person's role:  
+   `edit 3 ped/2024-12-11`  
+   **Expected:** "Edited partner: Jason Ong; Phone: 61234567; Email: d1234567@u.nus.edu; Address: 20 Lower Kent Ridge Rd,
+   Singapore 119077; Tags: ; Partnership End Date: 2024-12-11" should be printed. The End Date displayed for Jason Ong
+   on the address book should be changed to 2024-12-11.
+   2. Test case - edit an attribute which does not exist for the person's role:  
+   `edit 3 h/3`  
+   **Expected:** "Hours field should not exist for role: PARTNER" should be printed and no changes to the address book
+   should be observed.
+3. Editing no attributes
+   1. Test case:  
+   `edit 3`  
+   **Expected:** "At least one field to edit must be provided." should be printed and no changes to the address book 
+   should be observed.
+4. The tester should attempt testing editing of other fields and other invalid inputs.
+
+### Searching persons by field
+
+This test section's prerequisite is that you have gone through the add person section above, and therefore you should
+have a person named "Tyson Chua" who has the role `Donor`. It also assumes that Tyson Chua has an index of `4` on the
+displayed person list. If he does not, you should use the respective index that he has on the displayed list, for the
+`INDEX` field in the edit command.
+
+1. Search for a person with a field that exists in the app
+   1. Test case - field exists for the person:  
+   `search n/Tyson`  
+   **Expected:** "1 person listed!" is printed. The displayed list shows the person(s) who fulfill the search condition.
+   2. Test case - search for multiple people:  
+   `search n/Tyson Jason`  
+   **Expected:** "2 person(s) listed!" is printed. The displayed list shows the person(s) whose names contain Jason and Tyson.
+   3. Test case - search for a field that exists but no person has:  
+   `search n/Whoevenhassuchalongnameitsnotpossible`  
+   **Expected:** "0 person(s) listed!" is printed. The displayed list does not show anybody.
+   4. The tester can explore searching with other prefixes and incorrect inputs.
+2. Search for a person with a field that does not exist in the app
+   1. Test case:
+   `search name/Farhan`
+   **Expected:** The error message for invalid command, with examples of how to use the search command is printed.
+
+### Listing all persons
+
+This test section's prerequisite is that you have gone through the add person section above and added a few contacts.
+
+1. Listing all persons
+   1. Test case:  
+   `list`  
+   **Expected:** "Listed all persons." should be printed. All contacts added should be displayed below.
+   2. Test case - additional prefixes after are ignored:  
+   `list n/This should list as usual` should have the same behaviour as test case 1.
+
+### Sorting the displayed list
+
+This test section's prerequisite is that you have gone through the add person section above and added a few contacts.
+
+1. Sorting the address book while all persons are being shown
+   1. Test case - sort by name:  
+   `sort s/name`  
+   **Expected:** "Sorted by name." should be printed. Contacts should be arranged in alphabetical order.
+   2. Test case - sort by hours:  
+   `sort s/hours`  
+   **Expected:** "Sorted by hours." should be printed. Volunteers are at the top-most portion of the displayed list,
+   sorted by hours contributed in descending order. Other roles are still shown below the volunteers.
+   3. Testers should test the other 2 sort metrics, `s/donations` and `s/end_date` for donors and partners respectively.
+2. Sorting the address book while only searched users are being shown
+   1. This subsection assumes that you have 2 persons with person roles added during the add command test section.
+   2. Test case - search for persons with role person and sort by name:  
+      1. `search r/person`
+      2. `sort s/name`  
+      **Expected:** "Sorted by name." is printed and the address book displays contacts filtered based on the search
+      condition and sorted in alphabetical order.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Creating a group
+
+This test section's prerequisite is that you have gone through the add person section above and added at least 5 contacts.
+
+1. Creating a group while all persons are being shown
+   1. Test case - Group name is not in use:  
+   `createGroup g/Blood Drive m/1 2`  
+   **Expected:** "Created group Blood Drive" should be printed, and the first 2 people on the contact list should be in 
+   the group. The displayed list should change from a list of contacts to a list of groups.
+   2. Test case - Group name already in use:  
+   To do this, you must first do test case 1.  
+   `createGroup g/Blood Drive m/1 2`  
+   **Expected:** The error message "This group name already exists" should be printed, and no new groups should be 
+   created. If the user is currently looking at the contact list (not the group list), they **should not** be redirected to the group list.
+   3. Test case - Closed range indices:  
+   `createGroup g/Food Bank m/2-4`  
+   **Expected:** "Created group Food Bank" should be printed, and 3 people (the 2nd to 4th) on the contact list should be in
+      the group. The displayed list should change from a list of contacts to a list of groups.
+   4. Test case - Indices out of bounds:  
+   `createGroup g/Donation m/6`  
+   **Expected:** The error message "One or more indices provided are invalid." should be printed, and no new groups should be
+      created. If the user is currently looking at the contact list (not the group list), they **should not** be redirected to the group list.
+   5. The tester should try different invalid inputs, such as using the wrong format for `INDICES`.
+2. Creating a group while searched persons are being shown
+   1. Test case:
+      1. `search r/person`
+      2. `createGroup g/Donation m/1 2`  
+      **Expected:** "Created group Donation." should be printed, and the first 2 people on the currently searched list should be in
+      the group. The displayed list should change from a list of contacts to a list of groups.
+   2. The tester should try different invalid inputs and other combinations of search and createGroup.
+      
+
+### Adding new members to an existing group
+
+This test section's prerequisite is that you have gone through the add person section and create group section above.
+
+1. Adding members to a group while all persons are being shown
+   1. Test case:  
+   `addToGroup g/Blood Drive m/3 4`  
+   **Expected:** "The following users were added to the group Blood Drive: Jason Ong Nicholas Tan" should be printed.
+   The displayed list should change from a list of contacts to a list of groups. The group size of Blood Drive should
+   increase by 2. The members should be updated with the new members' names.
+   2. Test case - adding to group that does not exist:  
+   `addToGroup g/ThisGroupShouldNotExist m/1`  
+   **Expected:** "There is no group with name ThisGroupShouldNotExist." should be printed. No group size or members
+   should change.
+   3. The tester should try closed-range indices inputs and invalid inputs.
+2. Adding members to a group while searched contact list is being shown
+   1. Test case:  
+      1. `search r/person`
+      2. `addToGroup g/Food Bank m/1`  
+      **Expected:** "The following users were added to the group Food Bank: Abel Lee" should be printed. The first user
+      on the searched list should be added to the group Food Bank.
+   2. The tester should try other combinations of search and addToGroup, as well as invalid inputs.
+
+
+### Removing members from an existing group
+
+This test section's prerequisite is that you have gone through the add new members to existing group section.
+
+1. Removing members to a group while all persons are being shown
+   1. Test case:  
+   `removeFromGroup g/Blood Drive m/3 4`  
+   **Expected:** "The following users were removed to the group Blood Drive: Jason Ong Nicholas Tan" should be printed.
+   The displayed list should change from a list of contacts to a list of groups. The group size of Blood Drive should
+   decrease by 2. The members in the group should have been updated.
+   2. Test case - removing from group that does not exist:  
+      `removeFromGroup g/ThisGroupShouldNotExist m/1`  
+      **Expected:** "There is no group with name ThisGroupShouldNotExist." should be printed. No group size or members
+      should change.
+   3. Test case - removing a person who is not in a group:  
+      `removeFromGroup g/Food Bank m/5`  
+      **Expected:** "No users were removed from the group Food Bank. The following users were not in the group Food Bank
+      and therefore could not be removed from the group, the rest of the users have been removed accordingly: Tyson Chua"
+      should be printed, and no group size or members should change.
+   4. The tester should try closed-range indices inputs and invalid inputs.
+2. Removing members from a group while searched contact list is being shown
+    1. Test case:
+        1. `search r/person`
+        2. `removeFromGroup g/Food Bank m/1`  
+           **Expected:** "The following users were removed from the group Food Bank: Abel Lee" should be printed. The first user
+           on the searched list should be removed the group Food Bank.
+    2. The tester should try other combinations of search and addToGroup, as well as invalid inputs.
+
+### Editing a group's name
+
+This test section's prerequisite is that you have gone through the create group section and created a group named 
+`Blood Drive` and `Food Bank`.
+1. Renaming a group
+   1. Test case:  
+   `editGroupName g/Blood Drive g/Blood Drive 2024`  
+   **Expected:** "Edited group name from Blood Drive to Blood Drive 2024." should be printed. The group's name on the UI
+   should also have changed. 
+   2. Test case - renaming a group name that does not exist:  
+   This test case assumes you have done test case 1.  
+   `editGroupName g/Blood Drive g/Blood Drive 2024`  
+   **Expected:** The error message "The existing group with the given name could not be found." should be printed. No
+   group names should be changed.
+   3. Test case - renaming a group to a name that already exists:  
+   This test assumes you have done test case 1.  
+   `editGroupName g/Blood Drive 2024 g/Food Bank`  
+   **Expected:** "There already exists a group with the new name you have chosen." should be printed and no group names
+   should be changed.
+
+### Listing all groups
+
+This test section's prerequisite is that you have gone through the create group section above and created a few groups.
+
+1. Listing all groups
+    1. Test case:  
+       `listGroups`  
+       **Expected:** "Listed all groups." should be printed. All contacts added should be displayed below.
+    2. Test case - additional prefixes after are ignored:  
+       `listGroups n/This should list as usual` should have the same behaviour as test case 1.
+
+### Deleting a group
+
+This test section's prerequisite is that you have gone through the create group section above and created a few groups.
+
+1. Deleting a group
+   1. Test case:  
+      `deleteGroup g/Blood Drive 2024`  
+      **Expected:** "Deleted group Blood Drive 2024." should be printed. The group should be removed from the displayed
+      group list.
+   2. Test case - deleting a group name that does not exist:  
+      This test case assumes you have done test case 1.  
+      `deleteGroup g/Blood Drive 2024`  
+      **Expected:** The error message "Group with that name does not exist." should be printed. No
+      groups should be deleted.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
