@@ -135,6 +135,12 @@ public class ParserUtil {
      */
     public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
         requireNonNull(subjects);
+
+        // TODO: Reformat and remove magic literal
+        if (subjects.isEmpty()) {
+            throw new ParseException("Subjects cannot be empty.");
+        }
+
         final Set<Subject> subjectSet = new HashSet<>();
         for (String subjectName : subjects) {
             subjectSet.add(parseSubject(subjectName));
@@ -178,6 +184,8 @@ public class ParserUtil {
     public static Set<String> parseClasses(String classes) throws ParseException {
         requireNonNull(classes);
         String trimmedClasses = classes.trim();
+
+        // TODO: Reformat and remove magic literal
         if (trimmedClasses.isEmpty()) {
             throw new ParseException("Classes cannot be empty.");
         }
