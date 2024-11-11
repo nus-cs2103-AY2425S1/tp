@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.model.person.Reminder.FORMATTER;
+import static seedu.address.model.person.LastSeen.FORMATTER;
 
 import java.time.LocalDate;
 
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddReminderCommand;
+import seedu.address.model.person.Reminder;
 
 public class AddReminderCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -56,6 +57,10 @@ public class AddReminderCommandParserTest {
         // date is in the past
         assertParseFailure(parser, "1 d/01-01-2024" + DESCRIPTION_DESC,
                 "Reminder date cannot be in the past");
+
+        //date does not exist
+        assertParseFailure(parser, "1 d/30-02-2028" + DESCRIPTION_DESC,
+                Reminder.MESSAGE_CONSTRAINTS_DATE);
     }
 
     @Test

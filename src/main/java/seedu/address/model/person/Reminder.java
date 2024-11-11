@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -14,10 +13,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Represents a reminder in NetBook
  */
 public class Reminder {
-    public static final String MESSAGE_CONSTRAINTS_DATE = "Date should be in the format DD-MM-YYYY";
+    public static final String MESSAGE_CONSTRAINTS_DATE = "Date input is incorrect. Please check if the date is valid"
+            + " and follows the DD-MM-YYYY format";
     public static final String MESSAGE_CONSTRAINTS_DESCRIPTION = "Description should not be empty";
     public static final String VALIDATION_REGEX = "[^\\s].*";
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final LocalDate reminderDate;
     public final String reminderDescription;
     public final Name personToMeet;
@@ -36,7 +35,7 @@ public class Reminder {
         requireNonNull(personToMeet);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
         checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS_DESCRIPTION);
-        this.reminderDate = LocalDate.parse(date, FORMATTER);
+        this.reminderDate = LocalDate.parse(date, LastSeen.FORMATTER);
         this.reminderDescription = description;
         this.personToMeet = personToMeet;
     }
@@ -49,7 +48,7 @@ public class Reminder {
      */
     public static boolean isValidDate(String test) {
         try {
-            LocalDate.parse(test, FORMATTER);
+            LocalDate.parse(test, LastSeen.FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -72,7 +71,7 @@ public class Reminder {
      * @return reminderDate of Reminder
      */
     public String getReminderDateAsString() {
-        return reminderDate.format(FORMATTER);
+        return reminderDate.format(LastSeen.FORMATTER);
     }
 
     /**
