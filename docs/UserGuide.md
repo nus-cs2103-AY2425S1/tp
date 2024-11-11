@@ -13,6 +13,7 @@ appointments throughout your internship journey. NetBook utilises a Command Line
 efficiency, and keeps of everything you need for internships in an organised and beautiful manner.
 
 So, what are you waiting for! Try NetBook today!
+<div style="page-break-after: always;"></div>
 
 ### Table of Contents
 * [Quick Start](#quick-start)
@@ -37,7 +38,7 @@ So, what are you waiting for! Try NetBook today!
 * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
