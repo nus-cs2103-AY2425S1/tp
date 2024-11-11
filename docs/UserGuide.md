@@ -995,7 +995,7 @@ The buyer index specified is not a buyer:
 
 
 #### Edit Listing
-- **Command:** `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`
+- **Command:** `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]`
 - **Description:** Edits the details of the listing identified by the listing index number. **Buyers cannot be edited using this command.** Use addlistingbuyers or removelistingbuyers to manage buyers.
 - **Successful Execution:**
 > ---
@@ -1180,8 +1180,8 @@ Removed buyers: Alex Yeoh, Charlotte Oliveiro
 > **Input**: `removelistingbuyers 1 buy/2`
 >
 > **Output**: <br>
-The specified person is not a buyer: <br>
-2. Bernice Yu <br>
+The specified person is not a buyer:
+><br>2. Bernice Yu <br>
 >
 > ---
 > 
