@@ -21,7 +21,7 @@ public class UpdateOperatingHoursCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_OPENINGHOURS + "08:30 " + PREFIX_CLOSINGHOURS + "18:30";
     public static final String MESSAGE_SUCCESS = "Operating Hours updated: ";
     public static final String MESSAGE_FAILED = "There are some appointments are "
-            + "outside the new operating hours given. Opening time must also fall before Closing time in the same day";
+            + "outside the new operating hours given. Opening time must also fall before closing time in the same day";
 
     public final OperatingHours toUpdate;
 
