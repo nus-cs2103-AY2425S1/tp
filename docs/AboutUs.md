@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code quality
 
 ### Jun Long
 
@@ -36,7 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/junlongling)] [[portfolio](https://www.linkedin.com/in/junlong-ling-030b55200/)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation
 
 ### Tang Jun Kiat
 
@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](https://www.linkedin.com/in/tang-jun-kiat-0540582b6/)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Deliverables and deadlines
 
 ### Prakamya Singh
 
