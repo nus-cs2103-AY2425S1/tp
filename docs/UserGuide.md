@@ -349,7 +349,7 @@ Creates one or more new attendance events.
     - Duplicate event names within the same command are not allowed.
     - If an event with the same name already exists, the command will fail and indicate the first event which already exists.
 
-<div markdown="span" class="alert alert-info">**Note:**
+<div markdown="span" class="alert alert-info">:information_source: **Information:**  
 All students are marked as absent by default during the creation of an event.
 </div>
 
@@ -424,7 +424,7 @@ Marks one or more students as present for a specific attendance event.
 - **Existing Attendance:**
     - If a student is already marked as present for the event, they will be skipped. No warning or error message will be given, to allow for marking multiple students at once.
 
-<div markdown="span" class="alert alert-info">**Note:**
+<div markdown="span" class="alert alert-info">:information_source: **Information:**  
 If a student is not marked as present, they are automatically marked as absent for the event.
 </div>
 
