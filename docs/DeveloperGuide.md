@@ -689,6 +689,24 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a patient
+1. Adding a patient
+
+   1. Test case: `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1950 g/M t/elderly`
+      Expected: A new patient is added to the list. The status message shows the details of the added patient. Timestamp in the status bar is updated.
+   
+   1. Test case: `add-patient n/John Doe123 p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1950 g/M t/elderly`
+        Expected: Error message indicating the name format is wrong. No patient is added. Status bar remains the same.
+
+### Adding a doctor
+1. Adding a doctor
+
+   1. Test case: `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+        Expected: A new doctor is added to the list. The status message shows the details of the added doctor. Timestamp in the status bar is updated.
+
+   1. Test case: `add-doctor n/Jane Doe123 p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+        Expected: Error message indicating the name format is wrong. No doctor is added. Status bar remains the same.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -757,11 +775,3 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete-appt UNIQUE_ID` (`UNIQUE_ID` is not a positive integer)  
    Expected: Error message indicating an invalid id. No appointment is deleted.
 
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
