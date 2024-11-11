@@ -73,9 +73,9 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
-**Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **Owe**    | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **Income**  | `income`
 **Remind**   | `remind`
 **Clear**  | `clear`
@@ -222,7 +222,7 @@ Edits an existing student in UGTeach.
 <box type="tip" header="##### Tips">
 
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
-[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-students-settle)
+[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-a-student-settle)
 for convenient ways to update the paid amount and owed amount.
 * **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the student's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 </box>
@@ -295,44 +295,15 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 <div style="page-break-after: always;"></div>
 
-### Receiving payment from a student: `pay`
-
-Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pays for the outstanding fees.
-
-**Format:** `pay INDEX hr/HOURS_PAID`
-
-**Example:**
-* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in UGTeach.
-  
-**Before:**
-![payBefore.png](images/payBefore.png)
-
-**After:**
-![payAfter.png](images/payAfter.png)
-
-<box type="important" header="##### Constraints">
-
-* The **INDEX** refers to the index number shown in the displayed student list.
-* The **INDEX must be a positive integer** 1, 2, 3, …​
-* **HOURS_PAID** should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-
-</box>
-
-<box type="tip" header="##### Tips">
-
-* In case you made a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the PAID_AMOUNT to your preference.
-
-</box>
-
-<div style="page-break-after: always;"></div>
-
 ### Recording unpaid tuition fee of a student: `owe`
 
-Updates the amount of tuition fee owed by a specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
+Records the tuition fee that the student is unable to pay immediately after the lesson. 
+
+When he/she pays the outstanding fees at a later time, you should use the [`settle` command](#settling-outstanding-fees-from-a-student-settle) to settle the tuition fee owed by the student 
 
 **Format:** `owe INDEX hr/HOURS_OWED`
 
-**Example:** 
+**Example:**
 * `owe 1 hr/1.5` updates the tuition fee owed by the 1st student in the list.
 
 **Before:**
@@ -357,9 +328,9 @@ Updates the amount of tuition fee owed by a specified student after a lesson. Yo
 
 <div style="page-break-after: always;"></div>
 
-### Settling outstanding fees from students: `settle`
+### Settling outstanding fees from a student: `settle`
 
-Updates the amount of tuition fee paid and the amount of tuition fee owed by the student after the student pays for his/her outstanding tuition fees.
+Settles the amount owed by the student and adds it to the paid amount. To record payment which is not related to the owed amount, you may use the [`pay` command](#receiving-payment-from-a-student-pay).
 
 **Format:** `settle INDEX amount/AMOUNT`
 
@@ -379,6 +350,38 @@ Updates the amount of tuition fee paid and the amount of tuition fee owed by the
 * **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
 
 </box>
+
+### Receiving payment from a student: `pay`
+
+Updates the amount of tuition fee paid by the specified student after a lesson. 
+
+Recording payment using the `pay` command does not update the owed amount. You should use the [`settle` command](#settling-outstanding-fees-from-a-student-settle) to settle the tuition fee owed by the student after he/she pays the outstanding fees.
+
+**Format:** `pay INDEX hr/HOURS_PAID`
+
+**Example:**
+* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in UGTeach.
+
+**Before:**
+![payBefore.png](images/payBefore.png)
+
+**After:**
+![payAfter.png](images/payAfter.png)
+
+<box type="important" header="##### Constraints">
+
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX must be a positive integer** 1, 2, 3, …​
+* **HOURS_PAID** should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+
+</box>
+
+<box type="tip" header="##### Tips">
+
+* In case you made a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the PAID_AMOUNT to your preference.
+
+</box>
+
 
 ### Showing income data: `income`
 
