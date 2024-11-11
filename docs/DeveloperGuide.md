@@ -1525,20 +1525,6 @@ testers are expected to do more _exploratory_ testing.
 
 ---
 
-<div style="page-break-after: always;"></div>
-
-## **Appendix: Effort**
-
-[To be updated.]
-
-### Design Choices
-
-### Challenges Faced
-
-### Achievements
-
----
-
 ## **Appendix: Planned Enhancements**
 
 **Group size:** 4
