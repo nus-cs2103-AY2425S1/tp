@@ -6,33 +6,35 @@ title: User Guide
 BizBook (BB) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BB can get your contact management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
+
 1. [Quick start](#Quick-start)
 2. [Features](#Features)
-  2.1 [Viewing help : `help`](#viewing-help--help)
-  2.2 [Adding a person: `add`](#adding-a-person-add)
-  2.3 [Listing all persons : `list`](#listing-all-persons--list)
-  2.4 [Editing a person : `edit`](#editing-a-person--edit)
-  2.5 [Locating persons by name: `find`](#locating-persons-by-name-find)
-  2.6 [Deleting a person : `delete`](#deleting-a-person--delete)
-  2.7 [Delete a tag of an existing contact: `deletetag`](#delete-a-tag-of-an-existing-contact-deletetag)
-  2.8 [Add a note to an existing contact: `addnote`](#add-a-note-to-an-existing-contact-addnote)
-  2.9 [Edit a note of an existing contact: `editnote`](#edit-a-note-of-an-existing-contact-editnote)
-  2.10 [Deleting a note from an existing contact: `deletenote`](#deleting-a-note-from-an-existing-contact-deletenote)
-  2.11 [View an existing contact’s details : `view`](#view-an-existing-contacts-details--view)
-  2.12 [Pin a contact: `pin`](#pin-a-contact-pin)
-  2.13 [Unpin a contact: `unpin`](#unpin-a-contact-unpin)
-  2.14 [Undo a previously executed command: `undo`](#undo-a-previously-executed-command-undo)
-  2.15 [Redo a previously executed undo command: `redo`](#redo-a-previously-executed-undo-command-redo)
-  2.16 [Import a contact list : `import`](#import-a-contact-list--import)
-  2.17 [Export the contact list : `export`](#export-the-contact-list--export)
-  2.19 [Change the application’s theme : `toggle`](#change-the-applications-theme--toggle)
-  2.20 [Clear all entries : `clear`](#clear-all-entries--clear)
-  2.21 [Exit the program : `exit`](#exit-the-program--exit)
-  2.22 [Saving the data](#saving-the-data)
-  2.23 [Editing the data file](#editing-the-data-file)
+   2.1 [Viewing help : `help`](#viewing-help--help)
+   2.2 [Adding a person: `add`](#adding-a-person-add)
+   2.3 [Listing all persons : `list`](#listing-all-persons--list)
+   2.4 [Editing a person : `edit`](#editing-a-person--edit)
+   2.5 [Locating persons by name: `find`](#locating-persons-by-name-find)
+   2.6 [Deleting a person : `delete`](#deleting-a-person--delete)
+   2.7 [Delete a tag of an existing contact: `deletetag`](#delete-a-tag-of-an-existing-contact-deletetag)
+   2.8 [Add a note to an existing contact: `addnote`](#add-a-note-to-an-existing-contact-addnote)
+   2.9 [Edit a note of an existing contact: `editnote`](#edit-a-note-of-an-existing-contact-editnote)
+   2.10 [Deleting a note from an existing contact: `deletenote`](#deleting-a-note-from-an-existing-contact-deletenote)
+   2.11 [View an existing contact’s details : `view`](#view-an-existing-contacts-details--view)
+   2.12 [Pin a contact: `pin`](#pin-a-contact-pin)
+   2.13 [Unpin a contact: `unpin`](#unpin-a-contact-unpin)
+   2.14 [Undo a previously executed command: `undo`](#undo-a-previously-executed-command-undo)
+   2.15 [Redo a previously executed undo command: `redo`](#redo-a-previously-executed-undo-command-redo)
+   2.16 [Import a contact list : `import`](#import-a-contact-list--import)
+   2.17 [Export the contact list : `export`](#export-the-contact-list--export)
+   2.19 [Change the application’s theme : `toggle`](#change-the-applications-theme--toggle)
+   2.20 [Clear all entries : `clear`](#clear-all-entries--clear)
+   2.21 [Exit the program : `exit`](#exit-the-program--exit)
+   2.22 [Saving the data](#saving-the-data)
+   2.23 [Editing the data file](#editing-the-data-file)
 3. [FAQ](#faq)
 4. [Known issues](#known-issues)
 5. [Command summary](#command-summary)
+
 ---
 
 ## Quick start
@@ -120,15 +122,16 @@ The application will throw an error if you attempt to create two users with the 
 
 **Phone Numbers:**
 Only Singapore phone numbers are allowed by the application. Meaning, that only phone numbers starting with the number 6, 8 or 9 and are exactly 8 digits in total is allowed.
+
 </div>
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
-- Note that Name, Phone Number, Email and Address are compulsory fields. 
-- We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not 
-particularly sensitive as compared to Identification Number etc.
+- Note that Name, Phone Number, Email and Address are compulsory fields.
+- We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not
+  particularly sensitive as compared to Identification Number etc.
 - The email validation does not check for the presence of a period (.) after the "@" symbol, and it does not verify any specific domain extension. It only ensures that the domain name after the "@" is at least two characters long. E.g. `@u.nus.edu`
 
 Examples:
@@ -185,6 +188,7 @@ Examples:
 
 - `find John` returns `john`, `John Doe` and `Johnny`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -237,13 +241,15 @@ A person can have any number of notes (including 0)
 - Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
 - Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
 - Only one note may be added at a time. E.g. `addnote 1 n/High profile client`. If `addnote 1 n/Supplier 1 n/Supplier 2`
-is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
-feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
+  is input, only the far right note will be added. If one wishes to add notes quicker, he/she may simply use the up-arrow
+  feature to quickly re-enter the command as it requires fewer keystrokes than typing an additional `n/`.
 
 Examples:
 
 - `addnote 1 n/Supplier 1`
 - `addnote 2 n/Supplier 2`
+
+![result for 'addnote command'](images/addnoteResult.png)
 
 ### Edit a note of an existing contact: `editnote`
 
@@ -314,6 +320,8 @@ Examples:
 
 - `pin 1` pins the contact of the first person shown on the displayed person list into the pinned person list.
 
+![result for 'pin 3 command'](images/pinResult.png)
+
 ### Unpin a contact: `unpin`
 
 Unpins the contact of a person from the pinned list.
@@ -340,6 +348,7 @@ Format: `undo`
 - The undo feature will clear the focus person panel upon execution.
 
 Examples of commands tracked by undo:
+
 - `add`
 - `delete`
 - `clear`
@@ -396,14 +405,14 @@ Changes the application theme from light to dark or from dark to light.
 Format: `toggle`
 
 - If application is currently in light mode, toggle command will set it to dark mode.
-- If application is currently in dark mode, toggle command will set it to light mode. 
+- If application is currently in dark mode, toggle command will set it to light mode.
 - Please note that our application does not save your theme preference, so it will always open in dark mode by default.
 
 Examples:
 
 - `toggle` changes the application theme.
 
-### Navigating Command History : 
+### Navigating Command History :
 
 Easily cycle through your previous **successfully executed** commands by using the Up and Down arrow keys on your keyboard.
 
@@ -441,8 +450,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Future Features
 
-1) While we are aware of the possibility of international numbers, for this iteration, we decided to focus on the local population. Support for these numbers is planned in a future release.
-2) The current email validation does not check for the presence of a period (.) after the "@" symbol and only ensures that the domain name after the "@" is at least two characters long. Checking for the period is planned in a future release.
+1. While we are aware of the possibility of international numbers, for this iteration, we decided to focus on the local population. Support for these numbers is planned in a future release.
+2. The current email validation does not check for the presence of a period (.) after the "@" symbol and only ensures that the domain name after the "@" is at least two characters long. Checking for the period is planned in a future release.
 
 ---
 
@@ -467,7 +476,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## Command summary
 
 | Action              | Format, Examples                                                                                                                                                      |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **List**            | `list`                                                                                                                                                                |
 | **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
