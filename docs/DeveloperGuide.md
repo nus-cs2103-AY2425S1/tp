@@ -759,4 +759,4 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Instructions for manual testing**
 1. Being able to edit/delete order history of a customer 
-2. Being able to export customer order history into csvs file 
+2. Being able to export customer order history into csv file 
