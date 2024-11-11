@@ -6,15 +6,11 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant "ch:CommandHistory" as CommandHistory LOGIC_COLOR
+participant "c:Command" as Command LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-end box
-[-> LogicManager : execute(undo)
-activate LogicManager
-
-LogicManager -> AddressBookParser : parseCommand(undo)
+LogicManager -> AddressBookParser : parseCommand("undo")
 activate AddressBookParser
 
 create UndoCommand
@@ -30,16 +26,20 @@ deactivate AddressBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
-activate Model
+UndoCommand -> CommandHistory : getCommandInputHistory()
+activate CommandHistory
 
-Model --> UndoCommand
-deactivate Model
+CommandHistory --> UndoCommand : lastestCommand
+deactivate CommandHistory
+
+UndoCommand -> Command : undo()
+activate Command
+
+Command --> UndoCommand : result
+deactivate Command
 
 UndoCommand --> LogicManager : result
 deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
-destroy UndoCommand
 
 [<--LogicManager
 deactivate LogicManager

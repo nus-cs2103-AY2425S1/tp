@@ -23,15 +23,15 @@ than traditional GUI apps.
 ## Quick start
 
 1. Ensure you have **Java 17 or above** installed in your Computer.
-   *  How To Install Java ([Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html) | [MacOS](https://se-education.org/guides/tutorials/javaInstallationMac.html) | [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html))
+   *  How To Install Java 17 ([Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html) | [MacOS](https://se-education.org/guides/tutorials/javaInstallationMac.html) | [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html))
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-1/tp/releases).
-   * Under the **Assets** of the latest version of SocialBook, you should find the latest downloadable `socialbook.jar` file
+   * From the link, under the **Assets** of the latest version of SocialBook, you should find the latest downloadable `.jar` file named `socialbook.jar`.
 
-3. Copy this file into the _folder_ you want to use for SocialBook.
+3. Copy the `socialbook.jar` file into a _folder_ you want to use to put SocialBook.
    * Ensure that this _folder_ is **empty**.
 
-4. Open a command terminal, `cd` into the folder you put the `.jar` file in. After which enter `java -jar socialbook.jar` in the command terminal to run the application.
+4. Open a command terminal, `cd` into the folder you put the `socialbook.jar` file in. After which enter `java -jar socialbook.jar` in the command terminal to run the application.
    * How To Open Command Terminal ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) | [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) | [Linux](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))
    * How To Change Directory (`cd`) To Folder ([Windows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd) | [MacOS](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html) | [Linux](https://phoenixnap.com/kb/linux-cd-command))
    
@@ -453,7 +453,7 @@ Format: `deletescheme PERSON_INDEX i/SCHEME_INDEXS`
 
 Examples:
 * `deletescheme 1 i/1` deletes the 1st scheme from the 1st person in the address book.
-* `deletescheme 1 i/1, 2` deletes the 1st and 2nd scheme from the 1st person in the address book.
+* `deletescheme 1 i/1,2` deletes the 1st and 2nd scheme from the 1st person in the address book.
 
 ### Archiving a person: `archive`
 
@@ -496,6 +496,10 @@ Format: `undo`
 
 * Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear, addappt, deleteappt, editappt, addscheme, deletescheme, archive, unarchive
 * Undo can be called multiple times till there is no longer a previous command to execute.
+
+<box type="info" seamless>
+If you exit and reopen the app, undo would not work to undo past commands that were executed before the app was exited.
+</box>
 
 Examples:
 * `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
@@ -557,7 +561,8 @@ You can also navigate the calendar using these keyboard shortcuts:
 * `Ctrl + N`: Go to the next day
 * `Ctrl + T`: Go to today
 
-<box type="info">
+
+<box type="info" seamless>
 The current time marker (denoted by the red line on the right side of the calendar) is updated every 10 seconds.
 </box>
 

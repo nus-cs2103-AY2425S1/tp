@@ -23,6 +23,7 @@ public class GetCommandParser implements Parser<GetCommand> {
         int size = parameters.length;
         for (int i = 0; i < size; i++) {
             String trimmedParam = parameters[i].trim();
+            // Use of ChatGPT to generate regex
             if (!trimmedParam.matches("^[a-zA-Z]+$")) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
