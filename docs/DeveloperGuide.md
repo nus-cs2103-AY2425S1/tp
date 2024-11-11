@@ -1137,9 +1137,9 @@ The team consists of 5 members.
 Given below are enhancements planned for future versions. <br>
 
 1. **Make 'Role' and 'Company Name' in the `add` command less restrictive:** 
-- Current behaviour: The current validator is too restrictive on what is allowed as `Role` and `Company Name`. Valid roles such as: C++ Developer, C# Developer, R&D Specialist are currently flagged as invalid by the validator. Similarly, valid company names such as: A*STAR, SK-II, Yahoo!, John's Bakery are also flagged as invalid by the validator. <br></br>
-- Planned enhancement: We plan to loosen the restrictions for roles and company names by adjusting the regular expressions allowed. <br></br>
-- Justification: This allows the command to be more inclusive of the possible roles and company names in the real world. <br></br>
+   - Current behaviour: The current validator is too restrictive on what is allowed as `Role` and `Company Name`. Valid roles such as: C++ Developer, C# Developer, R&D Specialist are currently flagged as invalid by the validator. Similarly, valid company names such as: A*STAR, SK-II, Yahoo!, John's Bakery are also flagged as invalid by the validator. <br></br>
+   - Planned enhancement: We plan to loosen the restrictions for roles and company names by adjusting the regular expressions allowed. <br></br>
+   - Justification: This allows the command to be more inclusive of the possible roles and company names in the real world. <br></br>
 
 2. **Improve consistency in `find` feature:** Currently, while we prevent special characters in the `Company Name` (such as ~\`!@#),  
 we did not prevent the same characters from being used as keywords for the `find` feature. This leads to an inconsistent user experience, 
@@ -1162,6 +1162,18 @@ on why the command is invalid. The error message could be more specific to state
    - Planned enhancement: We plan to allow horizontal scrolling for an internship application card when there are long texts. <br></br>
    - Justification: This lets the user see the full text in application. <br></br>
 
-5. **Improve the validator for `email`:** The current email validator flags valid emails as invalid, such as `faceb__k@fb.com.sg`. This could cause some inconvenience to the users. 
-We plan to fix the validator for email to allow for more valid emails. <br>
+5. **Improve the validator for `email`** <br></br>
+   - Current behaviour: Although the current email validator accepts most valid email addresses, there are still certain valid email addresses (e.g. `faceb__k@fb.com.sg`) that it might incorrectly flag out as invalid addresses. <br></br>
+   - Planned enhancement: A fix for the email validator to accept valid emails with more combinations of special characters. <br></br>
+   - Justification: Company emails with uncommon combinations of special characters in their email addresses will be considered invalid and hence, users will not be able to include such internship application in the HireMe tracking system. <br></br>
+
+6. **User confirmation for `clear` command** <br></br>
+   - Current behaviour: The `clear` command clears all internship applications without asking for user confirmation. <br></br>
+   - Planned enhancement: HireMe to prompt the user for confirmation on `clear` command. If the user confirms, then all internship applications will be cleared. Otherwise, no action will be taken and the internship applications remain. <br></br>
+   - Justification: HireMe does not support any form of undo action and hence, there is no safety mechanism against accidental clearing of internship applications by the user. By having a confirmation, it ensures that `clear` is only carried out deliberately. <br></br>
+   
+7. **Backup file for storage** <br></br>
+   - Current behaviour: Internship applications data is stored in a single data file `hireme.json`. <br></br>
+   - Planned enhancement: A backup file that replicates the data in `hireme.json`. <br></br>
+   - Justification: Having only a single data file to store internship applications data means having a single point of failure when the data in corrupted or lost. A backup file that synchronously replicates the data in `hireme.json` ensures data redundancy. <br></br>
 
