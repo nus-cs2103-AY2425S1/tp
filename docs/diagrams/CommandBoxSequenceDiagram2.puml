@@ -4,8 +4,12 @@ skinparam ArrowFontStyle plain
 box UI UI_COLOR_T1
 participant ":CommandBox" as CommandBox UI_COLOR
 participant "event:KeyEvent" as KeyEvent UI_COLOR
-participant ":CommandHistory" as CommandHistory UI_COLOR
 participant ":TextField" as TextField UI_COLOR
+
+box LOGIC LOGIC_COLOR_T1
+participant ":CommandHistory" as CommandHistory LOGIC_COLOR
+end box
+
 
 [-> CommandBox: handleKeyPressed(KeyEvent event)
 activate CommandBox
@@ -28,7 +32,7 @@ alt command != null
 CommandBox -> CommandBox : updateCommandField()
 activate CommandBox
         CommandBox -> TextField : setText(command)
-        CommandBox -> TextField : positionCaret(command.length())
+        CommandBox -> TextField :  move cursor to end of text
 CommandBox --> CommandBox
 deactivate CommandBox
 end
