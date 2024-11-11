@@ -205,7 +205,7 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
   If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, it creates a new instance of `AddCommand` that corresponds to the user input.
 `AddCommand` comprises of the internship application to be added, which is an instance of `InternshipApplication`.
 
-Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then calls on `model::addItem` to add the internship application into the data.
+Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then adds the internship application into the data.
 
 
 ### List all internship applications
@@ -327,7 +327,6 @@ The implementation of the command follows the convention of a normal command, wh
 
 `AddressBookParser` creates `ExitCommand`
 Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
-`MainWindow` checks for the intent via `isExit`, after which, it calls `handleExit` to close the application.
 
 > **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
@@ -363,22 +362,23 @@ Upon execution, `ExitCommand` gets encapsulates the intent to close the applicat
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                       | I want to …​                                                     | So that …​                                                               |
-|----------|-------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | CS Undergraduate              | list all the internship applications                             | I can view all my past applications                                      |
-| `* * *`  | Forgetful CS Undergraduate    | have a link to HireMe's help page                                | I can see all the different commands that I can use                      |
-| `* * *`  | An efficient CS Undergraduate | type the commands                                                | I do not have to lift my fingers off the keyboard                        |
-| `* * *`  | CS Undergraduate              | add an internship application                                    | I can add on to the records of all the internships I have applied to     |
-| `* * *`  | CS Undergraduate              | delete an internship application                                 | I can remove invalid or irrelevant applications                          |
-| `* * *`  | CS Undergraduate              | save the internship application data locally                     | I will not lose my data when I exit the application                      |
-| `* * *`  | CS Undergraduate              | load the internship from a saved file                            | I can get back my data when I open the application                       |
-| `* * *`  | CS Undergraduate              | clear the list of internship application I have saved            | I can restart a new list in the next internship application cycle        |
-| `* * *`  | CS Undergraduate              | find internship applications by company name                     | I can quickly locate specific applications for review or updates         |
+| Priority | As a …​                       | I want to …​                                                                     | So that …​                                                               |
+|----------|-------------------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | CS Undergraduate              | list all the internship applications                                             | I can view all my past applications                                      |
+| `* * *`  | Forgetful CS Undergraduate    | have a link to HireMe's help page                                                | I can see all the different commands that I can use                      |
+| `* * *`  | An efficient CS Undergraduate | type the commands                                                                | I do not have to lift my fingers off the keyboard                        |
+| `* * *`  | CS Undergraduate              | add an internship application                                                    | I can add on to the records of all the internships I have applied to     |
+| `* * *`  | CS Undergraduate              | delete an internship application                                                 | I can remove invalid or irrelevant applications                          |
+| `* * *`  | CS Undergraduate              | save the internship application data locally                                     | I will not lose my data when I exit the application                      |
+| `* * *`  | CS Undergraduate              | load the internship from a saved file                                            | I can get back my data when I open the application                       |
+| `* * *`  | CS Undergraduate              | clear the list of internship application I have saved                            | I can restart a new list in the next internship application cycle        |
+| `* * *`  | CS Undergraduate              | find internship applications by company name                                     | I can quickly locate specific applications for review or updates         |
 | `* * *`  | CS Undergraduate              | update the status of an internship application to accepted, pending, or rejected | I can update the status of each application accurately                   |
-| `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application  | I can prioritize follow-ups with older applications                      |
-| `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications  | I can update my schedule accordingly                                     |
-| `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them | I can prioritize my time on checking up on these internship applications |
-| `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                             | I will not miss the deadline to accept                                   |
+| `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application                  | I can prioritize follow-ups with older applications                      |
+| `* *`    | Curious CS Undergraduate      | see a chart that summarises the statuses of all my applications                   | I know know the breakdown of each status                                 |
+| `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications                  | I can update my schedule accordingly                                     |
+| `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them                 | I can prioritize my time on checking up on these internship applications |
+| `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                                             | I will not miss the deadline to accept                                   |
 
 *{More to be added}*
 
