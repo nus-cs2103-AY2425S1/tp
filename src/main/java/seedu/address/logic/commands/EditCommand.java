@@ -27,9 +27,11 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
@@ -184,7 +186,7 @@ public class EditCommand extends Command {
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
         if (index.getZeroBased() >= deliveryList.size()) {
             throw new CommandException(
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, index.getOneBased())
+                String.format(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX, index.getOneBased())
             );
         }
 
@@ -196,6 +198,11 @@ public class EditCommand extends Command {
         assert editDeliveryDescriptor != null;
 
         Delivery editedDelivery = createEditedDelivery(deliveryToEdit, editDeliveryDescriptor);
+
+        if (editedDelivery.getItems().isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_ITEMS);
+        }
+
         inspectedPerson.setDelivery(deliveryToEdit, editedDelivery);
         return new CommandResult(
             String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, index.getOneBased(), Messages.format(editedDelivery))
@@ -227,16 +234,19 @@ public class EditCommand extends Command {
     private static Delivery createEditedDelivery(Delivery toEdit, EditDeliveryDescriptor descriptor) {
         assert toEdit != null;
 
-        seedu.address.model.delivery.Archive archive = toEdit.getArchive();
-
+        Archive archive = toEdit.getArchive();
+        DeliveryId deliveryId = toEdit.getDeliveryId();
         Set<ItemName> updatedItems = descriptor.getItems().orElse(toEdit.getItems());
         Address updatedAddress = descriptor.getAddress().orElse(toEdit.getAddress());
         Cost updatedCost = descriptor.getCost().orElse(toEdit.getCost());
+        Date date = toEdit.getDate();
+        Time time = toEdit.getTime();
         Eta updatedEta = descriptor.getEta().orElse(toEdit.getEta());
         Status updatedStatus = descriptor.getStatus().orElse(toEdit.getStatus());
         Set<Tag> updatedTags = descriptor.getTags().orElse(toEdit.getTags());
 
-        return new Delivery(updatedItems, updatedAddress, updatedCost, updatedEta, updatedStatus, updatedTags, archive);
+        return new Delivery(deliveryId, updatedItems, updatedAddress, updatedCost, date, time, updatedEta,
+                updatedStatus, updatedTags, archive);
     }
 
     @Override
@@ -481,11 +491,12 @@ public class EditCommand extends Command {
         }
 
         public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : new HashSet<>();
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags != null)
+                    ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         @Override

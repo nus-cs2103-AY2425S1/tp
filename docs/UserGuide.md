@@ -6,27 +6,33 @@
 
 # LogiLink User Guide
 
-LogiLink allows you to manage your contacts on your desktop with keyboard commands. If you type fast, you can complete your contact management tasks faster with LogiLink than with mouse-based apps.
+LogiLink is an all-in-one management tool designed for you, a logistics coordinator/manager, to efficiently manage your contacts and their associated delivery information from your desktop.
+Using only keyboard commands, you can easily add, edit, find, sort, and organize contacts, track delivery details and statuses, archive past transactions (— and much more!).
+
+
+If you type fast, you can complete your contact and delivery management tasks faster with LogiLink than with mouse-based apps.
+
+Currently, LogiLink is targeted towards a Singaporean userbase, with international support planned for future iterations. 
 
 <!-- * Table of Contents -->
 * [Quick start](#quick-start)
 * [Features](#features)
-  * [Viewing help: `help`](#viewing-help--help)
+  * [Viewing help: `help`](#viewing-help-help)
   * [Adding a contact or delivery: `add`](#adding-a-contact-or-delivery-add)
-  * [Listing all contacts: `list`](#listing-all-contacts--list)
+  * [Listing all contacts: `list`](#listing-all-contacts-list)
   * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
-  * [Locating contacts or deliveries by name: `find`](#locating-contacts-or-deliveries-by-name-find)
+  * [Locating contacts or deliveries by name: `find`](#locating-contacts-by-name-find)
   * [Locating deliveries by item: `finddel`](#locating-deliveries-by-item-finddel)
-  * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery--archive)
-  * [Unarchiving a contact or delivery: `unarchive`](#unarchiving-a-contact-or-delivery--unarchive)
+  * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery-archive)
+  * [Unarchiving a contact or delivery: `unarchive`](#unarchive-a-contact-or-delivery-unarchive)
   * [Sorting contacts or deliveries in ascending order: `asort`](#sorting-the-contacts-or-delivery-list-in-ascending-order-asort)
   * [Sorting contacts or deliveries in descending order: `dsort`](#sorting-the-contacts-or-delivery-list-in-descending-order-dsort)
-  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery--delete)
-  * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
-  * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee--assign)
-  * [Returning to the main window: `back`](#returning-to-the-main-window--back)
-  * [Clearing all entries: `clear`](#clearing-all-entries--clear)
-  * [Exiting the program: `exit`](#exiting-the-program--exit)
+  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery-delete)
+  * [Inspecting a contact: `inspect`](#inspecting-a-contact-inspect)
+  * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee-assign)
+  * [Returning to the main window: `back`](#returning-to-the-main-window-back)
+  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
 * [FAQ](#faq)
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
@@ -45,8 +51,11 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
 1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
+   - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.
+   <img src="images/openinterminal.png" alt="openinterminal" width="600">
+   
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" alt="ui" width="600">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -70,39 +79,52 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
 <box type="info" seamless>
 
 **Notes about the command format:**
-* There are two windows in this program:
-  - Main window: the default window you see when opening LogiLink.
-  - Inspect window: the window you see when inspecting a contact.<br></br>
+1. There are two windows in this program:
+  - **Main window**: the default window you see when opening LogiLink.
+    <img src="images/Ui.png" alt="ui" width="600">
+  - **Inspect window**: the window you see when inspecting a contact.
+    <img src="images/Ui2.png" alt="ui2" width="600">
+    <br></br>
 
-* Words in `UPPER_CASE` are parameters you need to provide.<br>
-  e.g. In `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
+2. Words in `UPPER_CASE` are parameters you need to provide.<br>
+   * Eg. `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
 
-* Square brackets [ ] mean that the parameter is optional.<br>
-  e.g `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
+1. Square brackets [ ] indicate the parameter is optional.<br>
+   * Eg. `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
 
-* Ellipsis (...) means you can repeat the parameter multiple times, or leave it out completely.<br>
-e.g. `[t/TAG]…​`lets you add any number of tags like `t/friend`, `t/friend t/family`, etc., or you can skip the tags altogether.
+1. Ellipsis `...` means you can repeat the parameter multiple times, or leave it out completely.<br>
+   * Eg. `[t/TAG]…​`lets you add any number of tags like `t/friend` or `t/friend t/family`, or you can skip the tags altogether.
 
-* You can enter parameters in any order.<br>
-  e.g. If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
+1. You can enter parameters in any order.<br>
+   * Eg. If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-*  Commands that do not require parameters (like `help`, `list`, `exit` and `clear`) will ignore anything extra you type.<br>
-  e.g. If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
+1. Commands that do not require parameters (`help`, `list`, `exit`, `clear`) will ignore anything extra you type.<br>
+   * Eg. If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Sometimes, the spaces around line-breaks may not copy correctly, which could cause issues when you paste them into
+1. If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Sometimes, the spaces around line-breaks may not copy correctly, which could cause issues when you paste them into
 the app.
 </box>
 
 ### Viewing help : `help`
 **<ins>When in the main or inspect window**
 
-Shows a help window with a list of available commands for the current window. You can click on any command button to automatically enter it into the command box.
+Shows a help window with a list of commonly used commands for the current window. You can click on any command button to automatically enter it into the command box.
 
-**Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
+<box type="info" seamless>
+
+**Note:**
+Does not show an exhaustive list of all available commands, only the most helpful. 
+
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** You can use the TAB, ENTER and ESC keys to navigate the help window.
+</box>
 
 Format: `help`
 
-![help window](images/helpWindow.png)
+<img src="images/helpWindow.png" alt="helpWindow" width="600">
 
 ### Adding a contact or delivery: `add`
 **<ins>When in the main window**
@@ -111,9 +133,22 @@ Adds a contact to the contacts list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
 
+* `ADDRESS` is further split into "`ADDRESS LINE`, s`POSTAL CODE`", where both parameters are required.
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/worker a/Newgate Prison, S123456 p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/employee a/Newgate Prison, S123456 p/12345678 t/criminal`
+
+<br>
+<box type="info" seamless>
+
+**Note:**<br>
+
+* In order to keep your address book organised, `NAME` has to be **unique**.
+* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear.
+* The default field for `[r/ROLE]` is client if left empty.
+
+</box>
 
 **<ins>When in the inspect window**
 
@@ -182,14 +217,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * **Case-insensitive search**: The search does not distinguish between upper or lower case. e.g `hans` will match `Hans`
 * **Keyword order does not matter**: You can enter keywords in any order. e.g. `Hans Bo` will match `Bo Hans`
 * **Only names are searched**: The search only looks at the contact's name, not other details like phone number or address.
-* **Matches full words only**: e.g. `Han` will not match `Hans`
+* **Matches partial words**: e.g. `Han` will match `Hans`
 * **"OR" search**: If a contact's name contains any of the keywords, it will be shown. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
-![result for 'find alex david'](images/findAlexDavidResult.png)
+<img src="images/findAlexDavidResult.png" alt="find" width="600">
 
 **<ins>When in the inspect window**
 
@@ -211,26 +246,33 @@ Format: `finddel ITEM [MORE_ITEMS]`
 
 Examples:
 * `finddel Chair` returns any delivery that contains the item chair.
-* `find Chair Desk` returns any delivery that contains the item chair, desk, or both.
+* `finddel Chair Desk` returns any delivery that contains the item chair, desk, or both.
 
 ### Archiving a contact or delivery : `archive`
 **<ins>When in the main window**
 
 Archives the specified contact(s) from the contacts list.<br>
-Archived contact(s) will be less visible and moved to the bottom of the list.
+Archived contact(s) will be less visible (greyed out) and moved to the bottom of the list.
 
-Format: `archive [INDEXES]...`
+Format: `archive INDEXES...`
 
 * Archive the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
+* `archive` works on archived and unarchived contact(s). 
 
 Examples:
-* `back` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+* `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
-Note:
-* You will not be able to use `inspect` and `edit` for archived contacts.
+<img src="images/archivedcontact.png" alt="archive_contact" width="600">
+
+<box type="info" seamless>
+
+**Note:**
+You will not be able to use `inspect` and `edit` for archived contacts.
+
+</box>
 
 **<ins>When in the inspect window**
 
@@ -241,24 +283,30 @@ Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
-Note:
-* You will not be able to use `edit` for archived deliveries.
+<img src="images/archiveddelivery.png" alt="archive_delivery" width="600">
+
+<box type="info" seamless>
+
+**Note:**
+You will not be able to use `edit` for archived deliveries.
+
+</box>
 
 ### Unarchive a contact or delivery : `unarchive`
 **<ins>When in the main window**
 
 Unarchives the specified contact(s) to restore their visibility in the contacts list, if they were previously archived.
 
-Format: `unarchive [INDEXES]...`
+Format: `unarchive INDEXES...`
 
 * Undoes the archive action for the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
-
+* `unarchive` works on archived and unarchived contact(s). 
 
 Examples:
-* `back` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
 
 **<ins>When in the inspect window**
 
@@ -274,7 +322,9 @@ Examples:
 
 Sorts all contacts in the contacts list by the specified attribute, from lowest to highest.
 
-Format `asort by/ [ATTRIBUTE]`
+Archived contacts will be sorted separately from unarchived contacts, and appear at the bottom of the contacts list.
+
+Format `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: date, email, name, phone, role.
 
@@ -286,7 +336,9 @@ Examples:
 
 Sorts all deliveries in the delivery list of a contact by the specified attribute, from lowest to highest.
 
-Format `asort by/ [ATTRIBUTE]`
+Archived deliveries will be sorted separately from unarchived deliveries, and appear at the bottom of the delivery list.
+
+Format: `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: address, cost, date, eta, id, status.
 
@@ -305,7 +357,7 @@ Simply use the same format as `asort`, but replace `asort` with `dsort`.
 
 Deletes the specified contact(s) from the contacts list.
 
-Format: `delete [INDEXES]...`
+Format: `delete INDEXES...`
 
 * Deletes the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
@@ -329,7 +381,7 @@ Examples:
 
 Inspects a specified contact from the contacts list to see their delivery list.
 
-Format: `inspect [INDEX]`
+Format: `inspect INDEX`
 
 * Inspects the contact at the specified `INDEX`.
 * The index is the number displayed next to the contact's name in the list.
@@ -337,6 +389,8 @@ Format: `inspect [INDEX]`
 
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
+
+<img src="images/Ui2.png" alt="ui2" width="600">
 
 **<ins>When in the inspect window**
 
@@ -357,6 +411,7 @@ Format: `assign INDEX n/EMPLOYEE_NAME`
 * The index is the number displayed at the top of a delivery in the delivery list of a contact.
 * The index **must be a positive number** (starting from 1).
 * The worker name should match an existing worker in the contact list.
+* This command works for both archived and unarchived delivery. 
 
 Examples:
 * `assign 1 n/Betsy Crowe` assigns first delivery of the current contact to employee Betsy Crowe.
@@ -373,13 +428,13 @@ Takes you back to the main window.
 Format: `back`
 
 ### Clearing all entries : `clear`
-**<ins>When in the main or inspect window**
+**<ins>When in the main window**
 
 Clears all contacts from the contacts list.
 
 Format: `clear`
 
-**<ins>When in the main or inspect window**
+**<ins>When in the inspect window**
 
 `clear` does not work in the inspect window.
 
@@ -428,9 +483,9 @@ Certain changes you make to the file could cause LogiLink to behave unexpectedly
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/Client a/123, Clementi Rd, S123456 t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
+**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [r/ROLE] …​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, S123456 r/client t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
 **Archive**| <ins>Both Windows:</ins><br> `archive INDEXES`<br> e.g., `archive 3`, `archive 3 4`
-**Assign** | <ins>Main Windows:</ins><br> Does not work <br><ins>Inpsect Windows:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
+**Assign** | <ins>Main Window:</ins><br> Does not work <br><ins>Inpsect Window:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
 **Back**   | <ins>Both Windows:</ins><br> `back`
 **Clear**  | <ins>Both Windows:</ins><br> `clear`
 **Delete** | <ins>Both Windows:</ins><br> `delete INDEXES`<br> e.g., `delete 3`, `delete 3 4`
@@ -439,7 +494,7 @@ Action     | Format, Examples
 **Find Delivery**| <ins>Main Window:</ins><br> Does not work <br><ins>Inspect Window:</ins><br> `finddel ITEM [MORE_ITEMS]` e.g., `finddel Monitor Mouse`
 **Help**   | <ins>Both Windows:</ins><br> `help`
 **Inspect**| <ins>Main Window:</ins><br> `inspect INDEX`<br> e.g., `inspect 2` <br><ins>Inspect Window:</ins><br> Does not work
-**List**   | <ins>Main Window:</ins><br> `list` or `list clients` or `list employees` <br><ins>Main Window:</ins><br> `list`
+**List**   | <ins>Main Window:</ins><br> `list` or `list clients` or `list employees` <br><ins>Inspect Window:</ins><br> `list`
 **Sort Ascending**| <ins>Both Windows:</ins><br> `asort by/ATTRIBUTE`
 **Sort Descending**| <ins>Both Windows:</ins><br> `dsort by/ATTRIBUTE`
 **Unarchive**| <ins>Both Windows:</ins><br> `unarchive INDEXES`<br> e.g., `unarchive 3`, `unarchive 3 4`
@@ -451,6 +506,6 @@ Action     | Format, Examples
 Terms            | Meaning
 -----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Archive**      |The action of moving an item, from an active or accessible state to a preserved state by reducing its immediate availability and visibility.
-**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
 **Client**    |A contact that has the role `client`
 **Employee**    |A contact that has the role `employee`
+**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.

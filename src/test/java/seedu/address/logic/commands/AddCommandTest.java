@@ -214,6 +214,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
+            return null;
+        }
+
+        @Override
         public ObservableList<Person> getOnlyClientList() {
             return null;
         }

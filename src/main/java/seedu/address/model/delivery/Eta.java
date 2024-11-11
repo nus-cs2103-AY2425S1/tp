@@ -32,6 +32,9 @@ public class Eta {
     public static boolean isValidEta(String test) {
         try {
             LocalDate parsedEta = LocalDate.parse(test);
+            if (parsedEta.toString().charAt(0) == '-') {
+                throw new DateTimeParseException("", test, 0);
+            }
         } catch (DateTimeParseException e) {
             return false;
         }
