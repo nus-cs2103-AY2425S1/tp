@@ -14,9 +14,10 @@ pageNav: 3
 ## **Acknowledgements**
 
 * [AB3](https://github.com/nus-cs2103-AY2425S1/tp) for being the base of our project.
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
 * [imPoster](https://github.com/AY2021S2-CS2103T-T12-4/tp), a CS2103T senior group where we adapted our `MainWindow.fxml` code from.
-* [Stackoverflow post on Java password hashing](https://stackoverflow.com/a/2861125): We followed this post from Stackoverflow to guide us in the password hashing function in `PasswordManager.java`.
+* [StackOverflow post on Java password hashing](https://stackoverflow.com/a/2861125): We followed this post from StackOverflow to guide us in the password hashing function in `PasswordManager.java`.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -34,7 +35,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
@@ -53,7 +54,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `:remove -i 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `:rm -i 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -77,14 +78,14 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The `UI` consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. Other than the `MainWindow`, we have created a `PasswordPromptDialog` that is used to prompt the user for a password when they try to access the app.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these `UI` parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* listens for changes to `Model` data so that the `UI` can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
@@ -99,7 +100,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute(":remove -i 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute(":rm -i 1")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `:remove -i 1` Command" />
 
@@ -113,7 +114,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to remove a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+   It can take several interactions (between the command object and the `Model`) to achieve the result.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -136,7 +137,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the `UI` can be bound to this list so that the `UI` automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -193,11 +194,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `:remove -i 5` command to add the 5th person in the address book. The `:remove` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `:remove -i 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `:rm -i 5` command to remove the 5th person in the address book. The `:rm` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `:rm -i 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `:add -n David …​` to add a new person. The `:add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `:add -n David` to add a new person. The `:add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -245,7 +246,7 @@ Step 5. The user then decides to execute the command `:list`. Commands that do n
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `:add -n David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `:clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `:add -n David` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -264,7 +265,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
     * Pros: Will use less memory (e.g. for `:remove`, just save the person being removed).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+    * Cons: We must ensure that the implementation of each individual command is correct.
 
 <br>
 <br>
@@ -274,7 +275,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Implementation
 The remove feature allows removal of a person from the address book. The user can remove a person by specifying the index of the person to remove. The user can also remove multiple persons by specifying multiple indexes of the persons to remove.
 
-How the remove Feature works:
+How the remove feature works:
 Format: `:remove -i INDEX1, INDEX2...`
 
 The `DeleteCommand` class has a method `DeleteCommand#execute(Model model)` that calls the ModelManager.\
@@ -282,14 +283,14 @@ The `ModelManager` class has a method `ModelManager#deletePerson(Person target)`
 The `AddressBook` class has a method `AddressBook#removePerson(Person key)` that removes a person from the UniquePersonList field `persons` in the `AddressBook` class.
 
 
-The following class diagram shows the relationships between the classes involved in the delete feature:
+The following class diagram shows the relationships between the classes involved in the remove feature:
 <puml src="diagrams/DeleteClassDiagram.puml" />
 
 The following sequence diagram shows how a remove operation goes through the `Logic` component:
 
 <puml src="diagrams/DeleteMultipleSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `:remove -i 1, 2, 3` Command" />
 
-Similarly, how a delete operation goes through the `Model` component is shown below:
+Similarly, how a remove operation goes through the `Model` component is shown below:
 
 <puml src="diagrams/DeleteSequenceDiagram-Model.puml" alt="DeleteSequenceDiagram-Model" />
 
@@ -315,7 +316,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The add feature allows a person to be added to the address book. It accepts parameters name, phone, address, email,
+The add feature allows a person to be added to the address book. It accepts the parameters name, phone, location, email,
 remark and tag. The name parameter is compulsory, while the rest are optional. Multiple tags are accepted for one
 person.
 
@@ -331,22 +332,6 @@ The parsing process is described in detail in this sequence diagram:
 
 <puml src="diagrams/AddSequenceDiagram-Tokenise.puml" alt="Interactions Inside the Logic Component for parsing" />
 
-The following sequence diagrams give examples of how a compulsory parameter, an optional parameter and a parameter that
-accepts multiple values at once is parsed.
-
-A compulsory parameter like `Name` is parsed as follows.
-
-<puml src="diagrams/AddSequenceDiagram-ParseName.puml" alt="Interactions Inside the Logic Component when parsing a name string" />
-
-An optional parameter like `Phone` is parsed as follows. `Email`, `Address` and `Remark` are also parsed similarly.
-
-<puml src="diagrams/AddSequenceDiagram-ParsePhone.puml" alt="Interactions Inside the Logic Component when parsing a phone string" />
-
-Finally, a parameter that accepts multiple values at once like `Tag` is parsed as follows.
-
-<puml src="diagrams/AddSequenceDiagram-ParseTags.puml" alt="Interactions Inside the Logic Component when parsing a collection of tags" />
-
-
 Similar to the remove feature, how an add operation goes through the `Model` component is shown below:
 <puml src="diagrams/AddSequenceDiagram-Model.puml" alt="AddSequenceDiagram-Model" />
 
@@ -357,7 +342,7 @@ Similar to the remove feature, how an add operation goes through the `Model` com
 ### Export Feature
 #### Implementation
 
-The `ExportCommand` class is responsible for exporting address book data to a user-specified location in `JSON` format. It provides flexibility in its usage by allowing a destination to be selected via a file chooser or by setting a predetermined destination file, which is particularly useful for testing purposes. The data to be exported is encrypted, and the `ExportCommand` handles decryption, export location selection, and file I/O operations. The following outlines its components and workflow.
+The `ExportCommand` class is responsible for exporting address book data to a user-specified location in JSON format. It provides flexibility in its usage by allowing a destination to be selected via a file chooser or by setting a predetermined destination file, which is particularly useful for testing purposes. The data to be exported is encrypted, and the `ExportCommand` handles decryption, export location selection, and file I/O operations. The following outlines its components and workflow.
 
 
 The `ExportCommand` class facilitates this export functionality and manages file I/O operations in a structured, asynchronous workflow.
@@ -448,10 +433,10 @@ The encryption mechanism is managed by the `EncryptionManager` class. This compo
 ```java
 // Encryption
 String jsonData = JsonUtil.toJsonString(new JsonSerializableAddressBook(addressBook));
-        byte[] encryptedData = EncryptionManager.encrypt(jsonData, this.keyPath);
+byte[] encryptedData = EncryptionManager.encrypt(jsonData, this.keyPath);
 
 // Decryption
-        jsonData = EncryptionManager.decrypt(encryptedData, this.keyPath);
+jsonData = EncryptionManager.decrypt(encryptedData, this.keyPath);
 ```
 #### Example Usage Scenario
 
@@ -537,15 +522,15 @@ The password management mechanism is handled by the `PasswordManager` class. Thi
 if (PasswordManager.readPassword(null) == null) {
         String newPassword = scanner.nextLine();
         PasswordManager.savePassword(newPassword, null);
-        }
+}
 
 // Verifying the password on subsequent starts
-        String inputPassword = scanner.nextLine();
-        if (PasswordManager.isPasswordCorrect(inputPassword, null)) {
+String inputPassword = scanner.nextLine();
+if (PasswordManager.isPasswordCorrect(inputPassword, null)) {
         // Handle correct password
-        } else {
+} else {
         // Handle wrong password
-        }
+}
 ```
 
 #### Example Usage Scenario
@@ -562,7 +547,7 @@ Step 3. On subsequent startups, the user is prompted to input their original pas
 
 </box>
 
-The following sequence diagram illustrates how the password management process operates:
+The following activity diagram illustrates how the password management process operates:
 
 <puml src="diagrams/PasswordManagementActivityDiagram.puml" alt="PasswordManagementActivityDiagram" />
 
@@ -624,8 +609,8 @@ Listed below are user stories for features that have already been implemented in
 | `* *`    | first-time user                            | quickly access a CLI command cheat sheet                         | learn essential commands without slowing down                             |
 | `* *`    | new user                                   | secure my contact data with a password                           | feel confident that my client information is protected                    |
 | `* *`    | new user                                   | choose to encrypt the contact data that is stored                | ensure my client information cannot be accessed from the storage location |
-| `* *`    | new and inexperienced user                 | undo actions like deletions (CTRL+Z)                             | recover data quickly if I make a mistake                                  |
-| `* *`    | new and inexperienced user                 | redo an action that was undone with undo (CTRL+SHIFT+Z)          | reapply an action if I realise I need it after undoing it                 |
+| `* *`    | new and inexperienced user                 | undo actions like deletions <kbd>CTRL+Z</kbd>                             | recover data quickly if I make a mistake                                  |
+| `* *`    | new and inexperienced user                 | redo an action that was undone with undo <kbd>CTRL+SHIFT+Z</kbd>          | reapply an action if I realise I need it after undoing it                 |
 | `* *`    | new and inexperienced user                 | be prompted with why an invalid command is invalid               | receive immediate and specific feedback if I type an invalid command|
 | `* *`    | returning user                             | search contacts using partial details (name, email)              | find relevant contacts faster                                             |
 | `* *`    | user whose contacts span multiple projects | tag contacts with a project or organisation name                 | organise my contacts better                                               |
@@ -642,13 +627,13 @@ Listed below are user stories for features that have already been implemented in
 Listed below are user stories that represent features that we have not implemented yet, but plan to in the future.
 | Priority | As a …​                                    | I want to …​                                                     | So that I can…​                                                           |
 |----------|--------------------------------------------|------------------------------------------------------------------|---------------------------------------------------------------------------|
-| `* *`    | new user                                   | import contacts from a CSV or another format (e.g. Apple's .vcf) | quickly populate my contact book without manual entry                     |
+| `* *`    | new user                                   | import contacts from a CSV or another format (e.g. Apple's .vcf) | use more data formats to quickly populate my address book                   |
 | `* *`    | new user                                   | open up a settings menu                                          | configure keyboard shortcuts |
 | `*`      | returning user                             | customise the app's theme                                        | make my user experience more personalised as I use the app more           |
 | `*`      | frequent user                              | navigate command history with arrow keys                         | quickly fill the search field and modify and execute previous commands    |
 | `*`      | programmer                                 | configure my shortcuts to be similar to my IDE shortcuts         | switch between my IDE and VBook more effectively                 |
 | `*`      | frequent user                              | pin important contacts                                           | have them appear at the top of my list for easy access                    |
-| `*`      | long time user                             | archive old contacts                                             | clean up my contact book without having to delete contacts                |
+| `*`      | long time user                             | archive old contacts                                             | clean up my address book without having to remove contacts                |
 
 <br>
 <br>
@@ -672,13 +657,13 @@ Listed below are user stories that represent features that we have not implement
 
     * 1a1. VBook shows an error message.
 
-      Use case resumes at step 2.
-* 1b. The name of the requested person is the same as an existing person in the addressbook.
+      Use case ends.
+* 1b. The name of the requested person is the same as an existing person in the address book.
     * 1b1. VBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
-**Use case: Edit a person's details**
+**Use case: UC02 - Edit a person's details**
 
 **MSS**
 
@@ -705,12 +690,12 @@ Listed below are user stories that represent features that we have not implement
     * 3b1. VBook shows an error message.
 
       Use case resumes at step 2.
-* 3c. The name of the requested person is the same as an existing person in the addressbook.
+* 3c. The name of the requested person is the same as an existing person in the address book.
     * 3c1. VBook shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: Remove a person**
+**Use case: UC03 - Remove a person**
 
 **MSS**
 
@@ -733,7 +718,7 @@ Listed below are user stories that represent features that we have not implement
 
       Use case resumes at step 2.
 
-**Use case: Find persons matching criteria**
+**Use case: UC04 - Find persons matching criteria**
 
 **MSS**
 
@@ -758,29 +743,37 @@ Listed below are user stories that represent features that we have not implement
 
 
 
-**Use case: Export data**
+**Use case: UC05 - Export data**
 
 **MSS**
 
 1.  User requests to export data.
+
 2.  VBook opens the file explorer window.
+
 3.  User chooses the destination and name of the exported data.
+
 4.  VBook exports the data to the destination folder in JSON format.
+    
     Use case ends.
 
 **Extensions**
 * 2a. User closes the file explorer window without selecting a destination.
-  Use case ends.
+
+     Use case ends.
+
 * 3a. The name of the exported data clashes with an existing name in the same file destination.
     * 3a1. The file explorer displays an error message.
+      
       Use case returns to step 2.
 
 * 3b. The user enters an invalid name.
-    * 3b1. The file explorer displaus an error message.
+    * 3b1. The file explorer displays an error message.
+      
       Use case returns to step 2.
 
 
-**Use case: Enter password**
+**Use case: UC06 - Enter password**
 
 **Preconditions:** User has already set a password previously.
 
@@ -789,43 +782,58 @@ Listed below are user stories that represent features that we have not implement
 2.  VBook displays a window prompting the user to enter a password.
 3.  User enters the correct password.
 4.  VBook closes the password prompt window and opens the main app window.
+    
     Use case ends.
 
 
 **Extensions**
 * 2a. User enters the wrong password.
     * 2a1. VBook displays an error message.
+      
       Use case returns to step 2.
 
 
-**Use case: Undo command**
+**Use case: UC07 - Undo command**
+
+**Preconditions:** At least one command that changes the address book has been entered.
+
 **MSS**
 1.  User requests to undo the last command.
+
 2.  VBook undoes the last change to the data.
-3.  Use case ends.
+
+    Use case ends.
 
 **Extensions**
-* 1a. There is no previously done add/edit/delete command found.
-    * 1a1. VBook displays a message that there are no more commands to undo.
-      Use case ends.
+* 1a. There is no previously done add/edit/remove command found.
+    * 1a1. VBook displays a message that there are no more commands to undo. 
+           
+       Use case ends.
 
 * 1b. User has undone more commands than the maximum amount allowed.
     * 1b1. VBook displays a message that there are no more commands to undo.
+      
       Use case ends.
 
 
-**Use case: Redo command**
+**Use case: UC08 - Redo command**
+
 **MSS**
 1.  User requests to redo the last undone command.
+
 2.  VBook redoes the last undone command.
+    
     Use case ends.
-    **Extensions**
+    
+**Extensions**
 * 1a. There is no previously undone command.
     * 1a1. VBook displays a message that there are no more commands to redo.
+      
       Use case ends.
 
 * 1b. User has redone more commands than the maximum amount allowed.
     * 1b1. VBook displays a message that there are no more commands to redo.
+      
       Use case ends.
 
 
@@ -836,11 +844,11 @@ Listed below are user stories that represent features that we have not implement
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  A user with above average typing speed of 60 words per minute for regular English text should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should work without any Internet connection.
 5.  Data is stored in an encrypted file that can be edited by exporting a decrypted version of the file from the GUI.
 6.  Commands should execute within 0.5 seconds under normal usage conditions.
-7.  Should use strong encryption standards for data storage and secure export/import.
+7.  Should use strong encryption standards for data storage and secure export.
 8.  Should support keyboard-only navigation for users with limited mouse access.
 
 <br>
@@ -858,7 +866,7 @@ Listed below are user stories that represent features that we have not implement
 ### Failing tests on Windows when run more than once
 
 1. In `EncryptionManagerTest.java`, temporary files are created before and deleted after each test for the Encryption and Export tests. Without this cleanup, subsequent runs of `./gradlew test` will fail.
-2. However, on Windows machine, the test will throw a `java.nio.file.FileSystemException` exception when attempting to delete the files due to the difference in how Windows processes manage files. [(Stackoverflow issue)](https://stackoverflow.com/questions/40706380/failed-to-delete-a-file-in-windows-using-java/40707174#40707174)
+2. However, on Windows machine, the test will throw a `java.nio.file.FileSystemException` exception when attempting to delete the files due to the difference in how Windows processes manage files. [(StackOverflow issue)](https://stackoverflow.com/questions/40706380/failed-to-delete-a-file-in-windows-using-java/40707174#40707174)
 3. A current workaround is to check if the OS is Windows, and skip the file deletion on cleanup. This has been implemented in our tests.
 4. However, before starting subsequent tests, you will need to manually delete the temporary `*test.key` files and `test` folder created, both in the root directory of {{ jarFile }}.
 5. This issue does not exist on Mac and Linux machines.
@@ -869,11 +877,12 @@ Listed below are user stories that represent features that we have not implement
 Team Size: 4
 1. **Make result display text selectable:** The current result display window can display text but users cannot select text to copy and paste into the command box. We plan to make the window selectable so users can copy and paste in example commands to try out.
 2. **Expanded contact information:** The current contact list wraps around long text so the user can see the information. However, this makes the list uneven and very long remarks can make one contact unreasonably long. We plan to create a contact page per contact that contains full information about every contact, while keeping a truncated view for the main window.
-3. **Improved input validation for tags:** Currently, our tags have no restriction on size, which cause them to exceed the UI space. We plan to add a maximum length for the tags to be 50 characters, as the longest English word is 45 characters.
+3. **Improved input validation for tags:** Currently, our tags have no restriction on size, which cause them to exceed the `UI` space. We plan to add a maximum length for the tags to be 50 characters, as the longest English word is 45 characters.
 4. **Add input validation for find command:** Currently, the find command does not check if parameters like name / phone number etc. are valid before executing the find command. We plan to add input validation for the find command so that searching with an invalid parameter will fail with an error.
 5. **Add input validation for location:** Currently, the location field takes in any values. However, this is not specific and the user can enter in values that are clearly not locations, such as `0000000`. Hence, we plan to split the location field into three distinct fields: postal code, street name, and block number. Input validation will ensure specificity, restrict ambiguity, and allow only valid special characters relevant to location data.
 6. **Add input validation for phone numbers:** The current phone number field does not have a strict limit on the kind of values it accepts. We plan to use regular expressions to validate phone number inputs.
 7. **Address integer overflow issues for index:** Currently, when a number larger than the maximum value for the data type `integer` is entered into our index field, the error message displays: `Invalid command format!` instead of `The person index provided is invalid`. This is likely due to an integer overflow error throwing a different exception than expected. We plan to fix this by adding a check for overflow and returning the appropriate error message afterwards.
+8. **Tampering with encrypted `vbook.json` data manually:** Doing so would result in an exception if the program attempts to decrypt the data (for example, on `:export` command). However, this exception is not handled gracefully on the Command box and instead, only shown in the console. We plan to fix this by adding a Command Exception on decryption error to inform the user that the data has been tampered with.
 --------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -887,61 +896,211 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-<br>
-<br>
+### Launch
 
-### Launch and shutdown
+1. **Initial launch:**
+    1. **Instructions:**
+        - Download the `.jar` file and copy it into an empty folder.
+        - Open a command terminal, change the directory (`cd`) to the folder where you saved the `{{ jarFile }}` file, and use the following command to run the application:
 
-1. Initial launch
+       ```shell
+       cd path/to/vbook
+       java -jar {{ jarFile }}
+       ```
 
-    1. Download the jar file and copy into an empty folder
-
-    1. Open a command terminal, change directory (`cd`) into the folder you put the `{{ jarFile }}` file in, and use the `java -jar {{ jarFile }}` command to run the application.<br>
-
-```shell
-cd path/to/vbook
-java -jar {{ jarFile }}
-```
-
-1. Saving window preferences
-
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-    1. Re-launch the app by using the same command above.<br>
-       Expected: The most recent window size and location is retained.
+2. **Saving window preferences:**
+    1. **Instructions:**
+        - Resize the window to an optimum size and move it to a different location on the screen.
+        - Close the window.
+    2. **Re-launch the app:**
+        - Re-open the application by using the same command above.
+    3. **Expected outcome:** The most recent window size and location should be retained.
 
 <br>
-<br>
+
+
+### Opening the Help Window
+
+1. **Basic help command:**
+
+    1. **Test case:** `:help`
+    2. **Expected outcome:** A help window should open, displaying a list of available commands with their syntax and descriptions.
+
+
+### Adding a person
+
+1. **Adding a new person with all details:**
+    1. **Test case:** `:add -n John Doe -p 91234567 -e johndoe@example.com -l 123, Clementi Rd, #01-01, S123456 -t Friend -r Met at a wedding`
+    2. **Expected outcome:** The new contact "John Doe" with all specified details should be added to the list, with a confirmation message displaying the details of the added contact.
+
+2. **Adding a person with only mandatory fields:**
+    1. **Test case:** `:add -n Jane Smith`
+    2. **Expected outcome:** "Jane Smith" should be added to the list with only the name field populated, and all other optional fields should be left blank.
+
+
+### Listing all persons
+
+1. **Basic list command to show all contacts:**
+    1. **Prerequisites:** Ensure there are multiple contacts in the list.
+    2. **Test case:** `:list`
+    3. **Expected outcome:** The app should display all contacts in the list, ordered by the date that each contact was added (older contacts on top).
+
+### Editing a person
+
+1. **Editing a person’s details with valid inputs:**
+    1. **Prerequisites:** Ensure a contact list with multiple persons, and select a person to edit.
+    2. **Test case:** `:edit 1 -n Jonathan Doe -p 92345678 -e jonathan.doe@example.com -l 456, Orchard Rd, #02-02, S654321 -t Family`
+    3. **Expected outcome:** The details of the first person in the list should be updated with the provided name, phone, email, address, and tag. A confirmation message should display the updated details.
+
+2. **Editing only a specific field:**
+    1. **Test case:** `:edit 1 -p 91234567`
+    2. **Expected outcome:** The phone number of the first person should be updated to "91234567," with all other fields remaining unchanged. A confirmation message should display the new contact information.
+
+### Export
+
+1. **Successful export to a chosen location:**
+    1. **Prerequisites:** Ensure the contact list has multiple persons added.
+    2. **Test case:** `:export`
+    3. **Steps:** Trigger the export command. When the file explorer opens, navigate to the desired location, set a file name of "contacts.json", and confirm.
+    4. **Expected outcome:** A JSON file named `contacts.json` is created in the selected location, containing the contact data. A confirmation message should display the successful export.
+
+2. **Export with existing file name in destination:**
+    1. **Prerequisites:** Ensure an existing file named `contacts.json` is present in the selected export location.
+    2. **Test case:** `:export`
+    3. **Steps:** Trigger the export command, select the same destination and enter the name `contacts.json` for the export.
+    4. **Expected outcome:** A prompt should appear asking for confirmation to overwrite the existing file. Confirming should replace the existing file with the new export, while canceling should leave the file unchanged.
+
+
+### Undo
+
+1. **Undo a recent add command:**
+    1. **Test case:** `:add -n John Doe -p 91234567 -e johndoe@example.com` followed by `:undo`
+    2. **Expected outcome:** The new contact "John Doe" should be removed from the list, and a confirmation message should display indicating the undo operation was successful.
+
+2. **Undo a recent edit command:**
+    1. **Prerequisites:** Ensure at least one contact is in the list.
+    2. **Test case:** `:edit 1 -p 92345678` followed by `:undo`
+    3. **Expected outcome:** The phone number of the contact at index 1 should revert to its previous value, with a message confirming the undo operation.
+
+### Redo
+
+1. **Redo a recent undo of an add command:**
+    1. **Prerequisites:** Add a new contact and then undo the action.
+    2. **Test case:** `:add -n John Doe -p 91234567 -e johndoe@example.com`, then `:undo`, followed by `:redo`
+    3. **Expected outcome:** The contact "John Doe" should reappear in the list after the `:redo` command, with a confirmation message indicating the redo was successful.
+
+2. **Redo a recent undo of an edit command:**
+    1. **Prerequisites:** Edit a contact’s details and then undo the edit.
+    2. **Test case:** `:edit 1 -p 92345678`, then `:undo`, followed by `:redo`
+    3. **Expected outcome:** The phone number of the contact at index 1 should be updated to "92345678" again after the `:redo` command, with a confirmation message.
+
+
+### Find
+
+1. **Find by full name:**
+    1. **Prerequisites:** Ensure the contact list contains a person named "John Doe."
+    2. **Test case:** `:find -n John Doe`
+    3. **Expected outcome:** The contact "John Doe" should be displayed in the search results, with a confirmation message indicating the number of matches found.
+
+2. **Find by partial name:**
+    1. **Prerequisites:** Ensure the contact list has multiple entries with names containing "John" (e.g., "John Doe," "Johnny Appleseed").
+    2. **Test case:** `:find -n John`
+    3. **Expected outcome:** All contacts with "John" in their names should be displayed in the search results, showing all relevant entries.
+
 
 ### Removing a person
 
-1. Removing a person while all persons are being shown
+1. **Removing the first person in the list:**
+    1. **Prerequisites:** List all persons using the `:list` command. Multiple persons are in the list.
+    2. **Test case:** `:remove -i 1`
+    3. **Expected outcome:** The first contact is removed from the list. A confirmation message displays the details of the removed contact.
 
-    1. Prerequisites: List all persons using the `:list` command. Multiple persons in the list.
+2. **Attempting to remove a person with an invalid index (zero):**
+    1. **Prerequisites:** Ensure the contact list has entries.
+    2. **Test case:** `:remove -i 0`
+    3. **Expected outcome:** No person is removed. An error message displays, indicating an invalid command format.
 
-    1. Test case: `:remove -i 1`<br>
-       Expected: First contact is removed from the list. Details of the removed contact shown in the status message.
 
-    1. Test case: `:remove -i 0`<br>
-       Expected: No person is removed. Error details shown in the status message.
+### Clearing all Persons
 
-    1. Other incorrect remove commands to try: `:remove -i`, `:remove -i x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. **Basic clear command to remove all contacts:**
+    1. **Prerequisites:** Ensure there are multiple contacts in the list.
+    2. **Test case:** `:clear`
+    3. **Expected outcome:** All contacts should be removed from the list, and a confirmation message should appear, indicating that the contact list has been cleared.
 
-<br>
-<br>
+2. **Clear command when the contact list is already empty:**
+    1. **Prerequisites:** Ensure the contact list is empty.
+    2. **Test case:** `:clear`
+    3. **Expected outcome:** No errors should occur, the display should remain unchanged, and a confirmation message should appear, indicating that the contact list has been cleared.
+
+### Quit Command
+
+1. **Basic quit command to exit the application:**
+    1. **Prerequisites:** Ensure the application is running.
+    2. **Test case:** `:quit`
+    3. **Expected outcome:** The application should close.
+
+2. **Quit command immediately after startup:**
+    1. **Prerequisites:** Open the application with no modifications made to the contact list.
+    2. **Test case:** `:quit`
+    3. **Expected outcome:** The application should close immediately without any prompt.
+
+
 
 ### Saving data
 
-1. Dealing with missing data files
+1. **Dealing with missing data files**
 
-    1. Prerequisites: There is an existing data/vbook.json file in the home folder of the .jar file.
-    2. Delete the data/vbook.json file. Close the address book and open it again.
+    1. **Prerequisites:** Ensure there is an existing `data/vbook.json` file in the home folder of the `.jar` file.
+    2. **Test case:** Delete the `data/vbook.json` file, close the address book, and then open it again.
+    3. **Expected outcome:** The data should be replaced with the sample data that appears when the app is first opened.
 
-       Expected: The data is replaced with the sample data that shows when the app is first open.
+
+### Password Prompt
+1. **Initial fresh startup - Cancelling prompt:**
+
+    1. **Prerequisites:** Ensure there is no `password.txt` file in the root directory of the project.
+    2. **Test case:** Start the program without a `password.txt` file. Press "Cancel" or close the password prompt using the cross button.
+    3. **Expected outcome**: The program exits gracefully. No `password.txt` file is created.
+
+2. **Initial fresh startup - Creating a new password**
+    1. **Prerequisites:** Ensure there is no `password.txt` file in the root directory of the project.
+    2. **Action:** Type a new password in the password prompt and confirm.
+    3. **Expected outcome:** The main GUI is displayed. A new `password.txt` file is created in the root directory containing the salted hash of the entered password.
+
+
+### Encryption Manager
+
+1. **Initial fresh startup**
+
+   1. **Prerequisites:** Ensure there is no `data/vbook.json` file or `vbook.jks` file in the root directory.
+
+   2. **Test case:** Start the program and invoke a GUI command (e.g., `:add`).
+
+   3. **Action:** Add a new entry using the GUI command.
+      
+   4. **Expected outcome:**
+      - A new `vbook.jks` file is created in the root directory, containing the encryption key.
+      - A `data/vbook.json` file is created. Attempting to open the file from the file explorer shows unreadable binary data.
+      - The GUI displays the data correctly.
+
+2. **Subsequent loads with existing `vbook.jks` and encrypted `vbook.json`**
+
+    1. **Prerequisites:** Ensure a valid `vbook.jks` file exists in the root directory and an encrypted `data/vbook.json` file is present.
+
+    2. **Test case:** Start the program.
+
+    3. **Action:** Launch the program.
+       
+    4. **Expected outcome:**
+       - The program reads the `data/vbook.json` file using the `vbook.jks` encryption key.
+       - The GUI displays the data correctly.
+       - Any GUI commands modify the encrypted `data/vbook.json` file, ensuring the file remains binary and unreadable outside the program.
+
+
 
 ## Appendix: Effort
 
 This project was challenging to implement, especially with our ambition of making it as keyboard-friendly as possible. Implementing keyboard shortcuts, as well as keyboard-friendly UI was not easy.
 
-While we didn't expand the fields much from AB3, certain features like the Export feature took us a lot of time to debug, especially given known bugs with the Windows system (see [failing tests on Windows when run more than once](#failing-tests-on-windows-when-run-more-than-once))
+While we didn't expand the fields much from AB3, certain features like the Export feature took us a lot of time to debug, especially given known bugs with the Windows system (see [failing tests on Windows when run more than once](#failing-tests-on-windows-when-run-more-than-once)). The password prompt with proper salted hashing and encryption features with standard encryption algorithms also add an additional layer of security.

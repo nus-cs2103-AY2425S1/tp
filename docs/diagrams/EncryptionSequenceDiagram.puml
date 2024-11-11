@@ -1,8 +1,12 @@
 @startuml
-participant User
-participant EncryptionManager
-participant KeyStore
-participant Cipher
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Security SECURITY_COLOR_T1
+participant User as ":User" SECURITY_COLOR
+participant EncryptionManager as EncryptionManager <<class>> SECURITY_COLOR
+participant KeyStore as ":KeyStore" SECURITY_COLOR
+participant Cipher as ":Cipher" SECURITY_COLOR
 
 User -> EncryptionManager: encrypt(plaintext, keyPath)
 activate EncryptionManager
