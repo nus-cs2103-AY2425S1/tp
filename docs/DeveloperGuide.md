@@ -604,6 +604,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+
 ### Launch and shutdown
 
 1. Initial launch
@@ -646,6 +647,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
 ### Adding a person
 
 1. Adding a person with only compulsory parameters specified.
@@ -661,13 +663,13 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/John Doe` <br>
       Expected: An error message is shown stating that the command format is incorrect and showing the user the correct format.
    2. Test case: `add n/John Doe e/johnd@example.com r/05-0523 a/311, Clementi Ave 2, #02-25 t/Floor10 t/Table Tennis t/Floor 5` <br>
-      Expected: Similar to (i)
+      Expected: Similar to (i).
 
 4. Adding a person with data that does not conform to data validation.
    1. Test case: `add n/John Doe p/abcd e/johnd@example.com` <br>
       Expected: An error message is shown informing the user about the correct data format for PHONE.
    2. Test case: `add n/John Doe p/1234567 e/HAI`
-      Expected: An error message is shown informing the user about the correct data format for EMAIL
+      Expected: An error message is shown informing the user about the correct data format for EMAIL.
 
 5. Adding a person with duplicate phone or email.
    1. Prerequisites: There is at least one person in the address book.
@@ -676,6 +678,48 @@ testers are expected to do more *exploratory* testing.
       2. Step 2: `add n/Alex Yeoh p/12345678 e/johnd@example.com` <br>
          Expected: An error message appears informing the user that there is already someone with that phone number in the address book.
 
+### Undo a command
+
+1. Undoing a `delete` command
+
+   1. Prerequisites: The previous successfully executed command is a `delete` command.
+   2. Test case: `undo`<br>
+      Expected: The previous deletion is reverted. Details of the restored contact shown in the status message.
+
+1. Undoing a `clear` command
+
+   1. Prerequisites: The previous successfully executed command is a `clear` command.
+   2. Test case: `undo`<br>
+      Expected: All contacts that were cleared are restored. Result "Address book has been restored" shown in the status message.
+
+1. No command to undo
+
+   1. Prerequisites: No undoable commands have been executed since the starting of the app.
+   2. Test case: `undo`<br>
+      Expected: No command is undone. Error message "No commands to undo" displayed in the status message.
+
+### Deleting all graduated students
+
+1. Deleting all graduated students when all persons are being shown.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with at least 1 person with GRADUATION_YEAR field earlier than the current year.
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
+      Expected: All persons with GRADUATION_YEAR field YEAR - 1 or earlier deleted from the address book. Status message informs the user that graduated students have been deleted, and deleted persons visibly disappear from the list of all students.
+   3. Test case: `clean dasd`, executed in YEAR, where YEAR is the current year. <br>
+      Expected: Similar to (ii). All trailing characters in a valid command is ignored.
+2. Deleting all graduated students when only some persons are being shown, or when no people are shown.
+   1. Prerequisites: Multiple persons in the list, with at least 1 person with GRADUATION_YEAR field earlier than the current year. Find a specific student with the `find` command, typing `find n/NAME`, replacing NAME with the name of any person in the address book.
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br>
+      Expected: All persons with GRADUATION_YEAR field YEAR - 1 or earlier deleted from the address book. Status message informs the user that graduated students have been deleted. However, if none of the graduated students have name NAME, the view does not change, as we continue to see the view of the address book after applying `find n\NAME`. Use `list` to see the effects of the deletion. An example is shown below with screenshots.
+      1. It is currently 2024. Alex is the only student with GRADUATION_YEAR 2023 or earlier. ![step 1](images/CleanManualTestingAfterFindStep1.png)
+      2. We execute `find n/Bernice`, such that only Bernice is in the view. ![step 2](images/CleanManualTestingAfterFindStep2.png)
+      3. We execute `clean`. The view remains the same. ![step 3](images/CleanManualTestingAfterFindStep2.png)
+      4. We execute `list` and see that Alex is deleted. ![step 4](images/CleanManualTestingAfterFindStep4.png)
+3. Attempting to delete all graduated students when there are none.
+   1. Prerequisites: No persons present in the address book with GRADUATION_YEAR field earlier than the current year.
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
+      Expected: An error message displayed informing the user that there are no graduated students to be deleted.
+
+
 ## **Appendix: Planned enhancements**
 
 Team size: 5
@@ -683,3 +727,33 @@ Team size: 5
 1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of 
 students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to 
 add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
+
+1. **Add support for setting EmergencyName, EmergencyPhone and GraduationYear using the `add` command.**
+The `add` command currently does not allow setting emergency contact details and graduation year of students.
+The only way to set these fields is through the `edit` command, which can be inconvenient for users.
+We plan to add support for setting EmergencyName, EmergencyPhone and GraduationYear to the `add` command.
+
+## **Appendix: Effort**
+
+### Overview
+
+As we have adapted AB3 for university dorm managers, our main efforts were in adding support for other necessary fields, enhancing the duplicate handling and data validation, and providing extra functions to streamline data saving, adding, updating and to safeguard against mistakes.
+This posed substantial difficulties for us, as we had to work within the AB3 model and implement the multiple features to be compatible with the rest of the app. 
+
+Here are some of the achievements of DorManagerPro:
+* Fields
+  * Added fields for room number, emergency contacts, and graduation year.
+  * Implemented relevant duplicate handling and field constraints for room number, emergency contacts, and graduation years.
+  * More specific and relevant field constraints and duplication handling for name, phone number, email address and tags.
+* Features
+  * All commands that change the state of the address book are now undoable!
+  * It is now possible to export the state of the address book to a json file.
+  * It is now possible to import a json file into the address book.
+  * It is now possible to delete all students who have graduated at once in one command.
+
+Lines of Code: 24608
+
+[comment]: Should we also estimate difficulty level and effort required??
+
+### Challenges faced
+
