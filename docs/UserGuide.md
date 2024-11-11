@@ -55,7 +55,7 @@ the process of accessing and updating resident student details. What's more, Dor
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. Its installer can be downloaded [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if you do not have it.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-4/tp/releases/).
 
@@ -111,7 +111,7 @@ the process of accessing and updating resident student details. What's more, Dor
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -129,7 +129,7 @@ Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 >
 > * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
 > * A person can have up to 10 tags (including 0).
-> * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
+> * `NAME` consists of alphabets, numbers, dashes (-), commas (,) and apostrophes (').
 > * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
 > * `EMAIL` should be of the format local-part@domain
 > * You cannot set emergency contact details when adding a person. Use the `edit` command to add emergency contact details.
@@ -168,8 +168,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all of a person’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -179,23 +178,20 @@ Examples:
 
 Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
 
-* any possible orders and combinations of the 3 parameters name, phone number and room number are applicable
-
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* All possible orders and combinations of the 3 parameters `NAME`, `PHONE` and `ROOM_NUMBER` are accepted
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched for `Name` e.g. `Han` will not match `Hans`
+* Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`
+* Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Only full words will be matched for room_number and phone_number, the arguments
-  should be exactly the same as the person's room number and phone number
-* Order of the tags do not matter `t/friends colleagues` works the same
+* The order of the tags does not matter e.g. `t/friends colleagues` works the same
   as `t/colleagues friends`
 
 Examples:
-* `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues`  
-  finds people whose both your friend and colleagues. 
-  They have Alex Jones as their name, 94509592 as their contact number, and lives in room 08-1234.
+* `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues` Finds people who have the tags `friends` and `colleagues`. 
+  They have must have the word Alex or Jones in their name, 94509592 as their contact number, and live in room 08-1234.
 
 ### Deleting a person : `delete`
 
@@ -206,14 +202,14 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* After user enters the command, the window will show a confirmation popout,
-  click 'OK' to continue, 'cancel' to abort the deletion.
+* There is a confirmation popout after the user enters the command but before the delete is actually done.
+  click `OK` to continue or `Cancel` to abort the deletion.
 
 ![delete popout](images/deleteConfirmation.png)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find Betsy` command.
 
 
 ### Clearing all entries : `clear`
@@ -242,7 +238,7 @@ This deletes all students who graduate in 2023 or earlier.
 
 ### Undoing the previous command : `undo`
 
-Undoes the previous command that changes the data in the address book.
+Undoes the most last command that changed the data in the address book.
 
 Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`, `import`.
 
@@ -256,7 +252,7 @@ Format: `exit`
 
 ### Saving the data
 
-DorManagerPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually although there is an option to do so in the `export` and `import` functions.
+DorManagerPro data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually, although there is an option to do so in the `export` and `import` functions.
 
 ### Manual saving: `export`
 
@@ -284,7 +280,8 @@ Format: `import fp/FILE_PATH`
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * `FILE_PATH` must correspond to an actual json file in the device.
-> * Use as `.` a folder to refer to the home folder.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
+> * Use `.` in the FILE_PATH to refer to the home folder of the application.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
+> * The home folder of the application is the folder that contains the jar file!
 
 Examples:
 
@@ -297,7 +294,7 @@ The following screenshot shows the results of executing `import fp/./data/11-08-
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
 > Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
-> However, if you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+> However, if you mistakenly entered this command, you can always undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
 
 
 ### Editing the data file
@@ -309,7 +306,7 @@ seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, DorManagerPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Similarly, when trying to import a invalid JSON file, DorManagerPro will raise an error and disallow the import to go through to prevent invalid data.<br>
+Similarly, when trying to import an invalid JSON file, DorManagerPro will raise an error and disallow the import to go through to prevent invalid data.<br>
 Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -319,7 +316,7 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. You can also use the import and export features to directly manage and modify JSON files that follow DorManagerPros format.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DorManagerPro home folder. You can also use the import and export features to directly manage and modify JSON files that follow DorManagerPros format.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -428,7 +425,7 @@ Duplicate handling:
 
 ### Emergency contact phone number
 
-Format: same as [Phone number](#phone-number)
+Format: Same as [Phone number](#phone-number)
 
 Constraints:
 Same as [Phone number](#phone-number)
