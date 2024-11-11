@@ -132,7 +132,7 @@ Adds a pet to PawPatrol.
 <li><code>NAME</code>: Must only contain alphanumeric characters, spaces, or hyphens, and it should not be blank.</li>
 <li><code>SPECIES</code>: Must only contain alphabetic characters, should be a single word, and it should not be blank.</li>
 <li><code>BREED</code>: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
-<li><code>AGE</code>: Must only contain numbers, and it should be 1 or 2 digits long.</li>
+<li><code>AGE</code>: Must only contain non-negative numbers, and it should be 1 or 2 digits long.</li>
 <li><code>SEX</code>: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female respectively).</li>
 <li><code>TAG</code>: Must be alphanumeric and should only contain a single word each.</li>
 <ul>
