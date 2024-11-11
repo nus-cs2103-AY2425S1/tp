@@ -68,8 +68,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/MainApp.java)) is in
+classes [`Main`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in
 charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -109,7 +109,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -120,9 +120,9 @@ visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/HelpWindow.fxml)
 
 The `UI` component,
 
@@ -134,7 +134,7 @@ The `UI` component,
 ### Logic component
 
 **API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/logic/Logic.java)
+** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -170,7 +170,7 @@ How the parsing works:
 ### Model component
 
 **API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/model/Model.java)
+** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -195,7 +195,7 @@ The `Model` component,
 ### Storage component
 
 **API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/budget/storage/Storage.java)
+** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -235,7 +235,7 @@ The diagram below shows the activity diagram for a user wanting to delete the fi
 
 <br></br>
 <br></br>
-<img src="images/DeleteMeetUpActivityDiagram.png" width="386" />
+<img src="images/DeleteMeetUpActivityDiagram.png" width="350" />
 
 --------------------------------------------------------------------------------------------------------------------
 
