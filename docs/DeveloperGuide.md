@@ -322,7 +322,7 @@ Additionally, certain command hints could benefit from more clarity on constrain
 2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
 
 ### 6. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
-**Current issue:** The current parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
+**Current issue:** The parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
 - `income` must be a full, valid Singapore personal phone number (8 digits, starting with 6, 8 or 9).
 - `email` must be in a valid email format (e.g., `username@domain`).
 
