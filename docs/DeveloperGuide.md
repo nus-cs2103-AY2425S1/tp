@@ -24,7 +24,6 @@ title: Developer Guide
 6. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
    1. [Launch and shutdown](#launch-and-shutdown)
    2. [Deleting a person](#deleting-a-person)
-   3. [Saving data](#saving-data)
 
 ---
 
