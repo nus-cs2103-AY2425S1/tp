@@ -266,6 +266,32 @@ The following activity diagram summarises what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Planned Enhancements**
+
+In the current v1.6 iteration, we are aware of certain feature flaws and possible areas for improvements. Below are some of the upcoming works scheduled to be addressed.<br>
+
+### **Fix `filter`, `add` and `undo` commands**
+Currently, running any `filter` command that changes the list displayed, followed by an `add` command that successfully adds a guest changes the displayed list to the full guest list as intended.<br>
+However, the filters inside the filter panel are not removed, which can hinder users from performing filter functions.<br>
+This would also imply that the `undo` command does not operate as intended after the `add` command.<br>
+A workaround is to run the command `list` to reset the filters after adding a guest.
+
+### **Standardise tag colours**
+The intention to differentiate tags by colours was to enable users to distinguish tags easily.<br>
+Currently, the colour of the tags changes randomly everytime the app is reopened.<br>
+We understand that experienced users may associate certain colours to certain tags. Thus, we plan to map each tag to a fixed colour, ensuring a standardised tag colour everytime the app is used.
+
+### **Rigorous checks on user inputs**
+Currently, fields like `Phone` accepts only 8 digits, but does not check whether the starting digit is a 6, 8, or 9 (in compliance with Singapore's phone numbers).<br>
+Other commands such as `newtag 1 t/friends` will successfully create a new tag called `friends` while ignoring the redundant input `1`.<br>
+To provide clarity and ease to users, we plan to have more rigorous checks and display clearer messages to the user. For the latter example, "The input '1' is ignored."
+
+### **Empty fields for `Email` and `Phone`**
+We understand that not both fields are always required. Users can contact guests either through phone or email.<br>
+Hence, we plan to only require one of the two fields to be inputted.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Requirements**
 
 ### Product Scope
@@ -529,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 3.
 
 **Use Case 10 (UC10)**: Undo Last Command<br>
-**Preconditions**: Last command was successfully executed.<br>
+**Preconditions**: Last command was successfully executed partially or fully.<br>
 **MSS**:
 
 1.  User enters the command to undo the last action.
@@ -574,7 +600,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Filter panel**: Shows the current filter predicates applied to the list
 * **New Tag**: Creates a new tag and adds it to the tag list
 * **Delete Tag**: Removes a tag from the tag list and all instances of it on all guests in the address book
-* **Undo**: Undoes the previous executed command
+* **Undo**: Undoes the last command if it was successfully executed partially or fully
 * **Untag**: Removes a tag from guest but does not remove it from the tag list or other guests not specified
 
 --------------------------------------------------------------------------------------------------------------------
@@ -592,9 +618,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   
+   1. Open a command terminal in your computer.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. `cd` into the folder you put the jar file in (e.g If the jar file is stored in `/Desktop/TestFile`, then the command should be `cd /Desktop/TestFile`).
+   
+   1. Use the `java -jar ab3myguest.jar` command to run the application. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
