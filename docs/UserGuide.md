@@ -390,6 +390,7 @@ Format: `assign INDEX n/EMPLOYEE_NAME`
 * The index is the number displayed at the top of a delivery in the delivery list of a contact.
 * The index **must be a positive number** (starting from 1).
 * The worker name should match an existing worker in the contact list.
+* This command works for both archived and unarchived delivery. 
 
 Examples:
 * `assign 1 n/Betsy Crowe` assigns first delivery of the current contact to employee Betsy Crowe.
