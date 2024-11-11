@@ -153,6 +153,11 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+Some of our classes are still named AddressBook instead of EduVault to honor the legacy code. Additionally,
+the name AddressBook aligns with the current functionality of the class.
+</div>
+
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
@@ -1483,9 +1488,9 @@ maintainability of our code. We went the extra mile for passion and our own lear
 ## **Appendix: Planned Enhancements**
 
 1. **Improve Responsiveness of User Interface**: Our current application uses JavaFX for the GUI. However, as the application
-has grown in complexity, users may occasionally experience lag and need to restart the GUI to view updated information.
-To address these issues, we plan to transition to an alternative GUI platform in the future to reduce lag and improve
-overall responsiveness.
+has grown in complexity, users may occasionally experience lag and need to refresh the GUI to view updated information.
+To address this issue, we plan to implement an automatic refresh functionality for our GUI after every command to 
+improve its responsiveness.
 2. **Fee Limit Warning**: Currently, there is no cap on the total fees that can be added for a student. To enhance user
 awareness, we plan to introduce a warning message if a student’s total fees exceed $2,000, allowing the user to confirm
 before proceeding. This will help prevent unintentional overcharging or overpaying. This will also prevent user from
@@ -1501,13 +1506,12 @@ improve categorization and management, we plan to add an “Education Level” (
 6. **Support For Special Characters in Names**: Currently, special characters such as '/' are not allowed in the name
 field.
 In the future, we plan to enhance the application to allow such characters in name inputs.
-UI responsiveness, particularly in handling smaller or larger window sizes, to improve usability across various screen configurations.
 7. **Batch Enroll/Unenroll for Multiple Students and Tutorials**: The current system allows enrolling or unenrolling one
 student into one tutorial at a time. We plan to add functionality for batch enrollments and unenrollments, allowing
 administrators to enroll or unenroll multiple students from a tutorial at once. As well as enroll and unenroll
 a student from multiple tutorials.
 8. **Enhance Error Message specificity**: Currently, certain error messages related to invalid user input are either too
-vague or not displayed at all. For instance, if a user includes a prefix that does not fall within the command's scope,
+vague or not displayed at all. Specifically, if a user includes a prefix that does not fall within the command's scope,
 the command will not return an error message. Instead, it might process the prefix as a string input and passes it to
 other fields, potentially causing additional errors. Moving forward, we plan to restrict the use of invalid prefixes based on
 the specific command to ensure more precise error handling.
