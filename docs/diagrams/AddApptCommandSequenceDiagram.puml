@@ -76,6 +76,6 @@ deactivate AddApptCommand LOGIC_COLOR
 destroy AddApptCommand
 Logic -[LOGIC_COLOR]> : save addressbook to storage
 ]-[STORAGE_COLOR]-> Logic
-Logic -[LOGIC_COLOR]> user : r
+Logic -[LOGIC_COLOR]-> user : r
 deactivate Logic LOGIC_COLOR
 @enduml
