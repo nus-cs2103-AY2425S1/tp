@@ -1,10 +1,9 @@
 package hallpointer.address.model.member;
 
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_SESSION_NAME_MEETING;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static hallpointer.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalMembers.ALICE;
@@ -20,8 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.SessionDate;
-import hallpointer.address.model.session.SessionName;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.SessionBuilder;
 
@@ -41,25 +38,32 @@ public class MemberTest {
         // same object -> returns true
         assertTrue(ALICE.isSameMember(ALICE));
 
-        // same name, all other attributes different -> returns true
+        // same name and different telegram, all other attributes different -> returns true
         Member updatedAliceSameName = new MemberBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
                 .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameMember(updatedAliceSameName));
 
-        // same telegram, all other attributes different -> returns true
+        // same telegram and different name, all other attributes different -> returns true
         Member updatedAliceSameTelegram = new MemberBuilder(ALICE).withName(VALID_NAME_BOB)
                 .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameMember(updatedAliceSameTelegram));
 
-        // different name and telegram, all other attributes same -> returns false
-        updatedAliceSameTelegram = new MemberBuilder(ALICE).withName(VALID_NAME_BOB)
-                .withTelegram(VALID_TELEGRAM_BOB).build();
-        assertFalse(ALICE.isSameMember(updatedAliceSameTelegram));
+        // same telegram and same name, all other attributes different -> returns true
+        Member updatedAliceSameNameAndTelegram = new MemberBuilder(ALICE)
+                .withRoom(VALID_ROOM_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSameMember(updatedAliceSameNameAndTelegram));
 
-        // name differs in case, all other attributes different -> returns true
-        Member updatedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase())
-                .withTelegram(VALID_TELEGRAM_AMY).withRoom(VALID_ROOM_AMY).withTags(VALID_TAG_HUSBAND)
-                .withSessions(new SessionBuilder(REHEARSAL).build()).build();
+        // different name and telegram, all other attributes same -> returns false
+        Member updatedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB)
+                .withTelegram(VALID_TELEGRAM_BOB).build();
+        assertFalse(ALICE.isSameMember(updatedAlice));
+
+        // name differs in case -> returns true
+        Member updatedBob = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toUpperCase()).build();
+        assertTrue(BOB.isSameMember(updatedBob));
+
+        // telegram differs in case -> returns true
+        updatedBob = new MemberBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB.toUpperCase()).build();
         assertTrue(BOB.isSameMember(updatedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
@@ -98,7 +102,9 @@ public class MemberTest {
     public void hasSession_sessionInMemberDifferentCase_returnsTrue() {
         Member member = new MemberBuilder(ALICE).build();
         member.addSession(new SessionBuilder(MEETING).build());
-        assertTrue(member.hasSession(new SessionBuilder(MEETING).withSessionName("meeting w1").build()));
+        assertTrue(member.hasSession(new SessionBuilder(MEETING)
+                .withSessionName(VALID_SESSION_NAME_MEETING.toLowerCase())
+                .build()));
     }
 
     @Test
@@ -110,16 +116,15 @@ public class MemberTest {
     @Test
     public void addSession_validSession_increasesSessions() {
         Member member = new MemberBuilder(ALICE).build();
-        Session newSession = new Session(new SessionName(VALID_NAME_BOB),
-                new SessionDate("16 Oct 2024"), new Point("10"));
-        member.addSession(newSession);
-        assertTrue(member.getSessions().contains(newSession));
-        assertEquals(newSession.getPoints(), member.getTotalPoints());
+        Session meeting = new SessionBuilder(MEETING).build();
+        member.addSession(meeting);
+        assertTrue(member.getSessions().contains(meeting));
+        assertEquals(meeting.getPoints(), member.getTotalPoints());
 
         Session rehearsal = new SessionBuilder(REHEARSAL).build();
         member.addSession(rehearsal);
         assertTrue(member.getSessions().contains(rehearsal));
-        assertEquals(rehearsal.getPoints().add(newSession.getPoints()),
+        assertEquals(rehearsal.getPoints().add(meeting.getPoints()),
                 member.getTotalPoints());
     }
 
@@ -130,10 +135,21 @@ public class MemberTest {
     }
 
     @Test
+    public void removeSession_sessionNotInMember_throwsIllegalArgumentException() {
+        Member member = new MemberBuilder(ALICE).build();
+        Session session = new SessionBuilder(MEETING).build();
+        Session toBeRemoved = new SessionBuilder(REHEARSAL).build();
+
+        assertThrows(IllegalArgumentException.class, () -> member.removeSession(toBeRemoved.getSessionName()));
+
+        member.addSession(session);
+        assertThrows(IllegalArgumentException.class, () -> member.removeSession(toBeRemoved.getSessionName()));
+    }
+
+    @Test
     public void removeSession_validSession_decreasesSessions() {
         Member member = new MemberBuilder(ALICE).build();
-        Session newSession = new Session(new SessionName(VALID_NAME_BOB),
-                new SessionDate("10 Nov 2025"), new Point("10"));
+        Session newSession = new SessionBuilder(MEETING).build();
         Session rehearsal = new SessionBuilder(REHEARSAL).build();
         member.addSession(rehearsal);
         member.addSession(newSession);
@@ -147,7 +163,13 @@ public class MemberTest {
     }
 
     @Test
-    public void equals() {
+    public void equals_nullOrDifferentType_false() {
+        assertFalse(ALICE.equals(null));
+        assertFalse(ALICE.equals(5));
+    }
+
+    @Test
+    public void equals_true() {
         // same values -> returns true
         Member aliceCopy = new MemberBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
@@ -155,12 +177,17 @@ public class MemberTest {
         // same object -> returns true
         assertTrue(ALICE.equals(ALICE));
 
-        // null -> returns false
-        assertFalse(ALICE.equals(null));
+        // same name up to case -> returns true
+        Member bobDifferentName = new MemberBuilder(BOB).withName(VALID_NAME_BOB.toUpperCase()).build();
+        assertTrue(BOB.equals(bobDifferentName));
 
-        // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        // same telegram up to case -> returns true
+        Member bobDifferentTelegram = new MemberBuilder(BOB).withTelegram(VALID_TELEGRAM_BOB.toUpperCase()).build();
+        assertTrue(BOB.equals(bobDifferentTelegram));
+    }
 
+    @Test
+    public void equals_differentDetails_false() {
         // different member -> returns false
         assertFalse(ALICE.equals(BOB));
 
@@ -183,6 +210,7 @@ public class MemberTest {
         // different sessions -> returns false
         updatedAlice = new MemberBuilder(ALICE)
                 .withSessions(new SessionBuilder(REHEARSAL).build()).build();
+        assertFalse(ALICE.equals(updatedAlice));
     }
 
     @Test

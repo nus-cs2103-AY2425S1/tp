@@ -30,13 +30,16 @@ public class RoomTest {
         assertFalse(Room.isValidRoom("--")); // dashes only
         assertFalse(Room.isValidRoom("-1-2-3")); // invalid number
         assertFalse(Room.isValidRoom("1-0.2-3")); // invalid decimal
+        assertFalse(Room.isValidRoom("1-0.-3")); // invalid decimal point
         assertFalse(Room.isValidRoom("+1-02-3")); // invalid symbol
 
         assertFalse(Room.isValidRoom("1-2-")); // missing numbers
+        assertFalse(Room.isValidRoom("1--3")); // missing numbers
+        assertFalse(Room.isValidRoom("-2-3")); // missing numbers
         assertFalse(Room.isValidRoom("1-2")); // insufficient input
         assertFalse(Room.isValidRoom("3 2 3")); // no dashes
 
-        assertFalse(Room.isValidRoom("-1-2-3-")); // too many dashes
+        assertFalse(Room.isValidRoom("-1-2-3")); // too many dashes
         assertFalse(Room.isValidRoom("1-2-3-4")); // incorrect extra input
         assertFalse(Room.isValidRoom("3-2-3 0")); // also incorrect extra input
 
@@ -45,7 +48,7 @@ public class RoomTest {
         assertTrue(Room.isValidRoom("1-2-0")); // 0 is also acceptable here
         assertTrue(Room.isValidRoom("001-00002-0")); // zero padding is fine
         assertTrue(Room.isValidRoom("1000-2000-3000")); // long room numbers
-        assertTrue(Room.isValidRoom("1000000000000-9-9")); // duplicate numbers
+        assertTrue(Room.isValidRoom("9-9-9")); // duplicate numbers
     }
 
     @Test
@@ -55,6 +58,14 @@ public class RoomTest {
         // same values -> returns true
         assertTrue(room.equals(new Room("10-2-3")));
 
+        // zero padding removal -> returns true
+        assertTrue(room.equals(new Room("10-02-3")));
+        assertTrue(room.equals(new Room("0010-02-3")));
+        assertTrue(room.equals(new Room("10-02-0003")));
+
+        // not zero padding -> returns false
+        assertFalse(room.equals(new Room("1-2-3")));
+
         // same object -> returns true
         assertTrue(room.equals(room));
 
@@ -63,15 +74,6 @@ public class RoomTest {
 
         // different types -> returns false
         assertFalse(room.equals(5.0f));
-
-        // zero padding removal -> returns true
-        assertTrue(room.equals(new Room("010-2-3")));
-        assertTrue(room.equals(new Room("10-02-3")));
-        assertTrue(room.equals(new Room("10-2-03")));
-        assertTrue(room.equals(new Room("010-02-003")));
-
-        // NOT zero padding removal -> returns false
-        assertFalse(room.equals(new Room("1-2-3")));
 
         // different values -> returns false
         assertFalse(room.equals(new Room("2-3-4")));
@@ -87,7 +89,7 @@ public class RoomTest {
         assertEquals(room.toString(), new Room("34-567-00089").toString());
         assertEquals(room.toString(), new Room("0034-0567-0089").toString());
 
-        // No zero padding
+        // Not zero padding
         assertFalse(new Room("10-1-1").toString().equals(new Room("1-1-1").toString()));
         assertFalse(new Room("1-100-1").toString().equals(new Room("1-1-1").toString()));
         assertFalse(new Room("1-1-10").toString().equals(new Room("1-1-1").toString()));

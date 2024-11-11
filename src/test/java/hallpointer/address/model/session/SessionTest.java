@@ -1,5 +1,6 @@
 package hallpointer.address.model.session;
 
+import static hallpointer.address.logic.commands.CommandTestUtil.VALID_SESSION_NAME_MEETING;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalSessions.MEETING;
 import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
@@ -28,7 +29,10 @@ public class SessionTest {
 
     @Test
     public void isSameSession() {
-        Session session = new SessionBuilder(REHEARSAL).build();
+        Session session = REHEARSAL;
+
+        // same values -> returns true
+        assertTrue(session.isSameSession(new SessionBuilder(REHEARSAL).build()));
 
         // null -> returns false
         assertFalse(session.isSameSession(null));
@@ -67,6 +71,11 @@ public class SessionTest {
 
         // different types -> returns false
         assertFalse(MEETING.equals(5.0f));
+
+        // same session name up to case -> returns true
+        Session updatedSessionDifferentName = new SessionBuilder(MEETING)
+                .withSessionName(VALID_SESSION_NAME_MEETING.toUpperCase()).build();
+        assertTrue(MEETING.equals(updatedSessionDifferentName));
 
         // different session name -> returns false
         Session updatedSession = new SessionBuilder(MEETING).withSessionName("Meeting W3").build();
