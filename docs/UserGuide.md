@@ -38,6 +38,7 @@ Let’s begin and get you up to speed with AgentAssist!
    - 5.4 [General Commands](#54-general-commands)
    - 5.5 [Saving Data](#55-saving-data)
    - 5.6 [Modifying the Data File](#56-modifying-the-data-file)
+   - 5.7 [Modifying the Preferences File](#57-modifying-the-window-size)
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
 8. [Command Summary](#8-command-summary)
@@ -97,15 +98,18 @@ Welcome to AgentAssist. Here’s how to get up and running quickly and easily.
 
 Ensure you have **Java 17** installed on your computer. AgentAssist is optimized for **Java 17**, and using other versions may affect performance or functionality. If you already have Java 17 installed, you can skip this step.
 
+To verify you have Java 17 installed: <a id="verify-java-version"></a>
+* [Open your terminal (or command prompt)](#step-4-run-the-application) and type:
+```
+java -version
+```
+* If you see Java 17 in the output, you’re good to go!
+
 To install Java 17:
 * Visit the Java download page from [Oracle](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 * Download the appropriate installer for your operating system (Windows, macOS, or Linux).
 * Follow the installation instructions on the website to complete the setup.
-* Once installed, verify the installation by [opening your terminal (or command prompt)](#step-4-run-the-application) and typing:
-    ```
-    java -version
-    ```
-* If you see Java 17 in the output, you’re good to go!
+* Once installed, verify the installation as per the [section above](#verify-java-version).
 
 ### Step 2: Download the AgentAssist application
 
@@ -275,10 +279,12 @@ Here’s a reference table of available flags and the type of data they correspo
 
 ## 4.4 Arguments
 
-Arguments are the values that follow each flag in a command. **Arguments cannot be empty**, and each must meet specific parsing and format requirements to ensure proper execution of the command.
+Arguments are the values that are used in a command. **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
+
+### 4.4.1  Flag Arguments
+Flag arguments are the values that follow each flag in a command.
 
 Refer to the table below for more details.
-
 
 | **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
 |----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
@@ -302,6 +308,24 @@ Refer to the table below for more details.
 > Ensure every flag is followed by a valid argument!
 >
 > Providing a flag without an accompanying argument will result in an error and prevent the command from executing properly.
+
+### 4.4.2 Non-Flag Arguments 
+
+Non-flag arguments are the values that do not have a corresponding tag. Currently, this only includes the `<INDEX>` argument.
+
+Refer to the table below for more details.
+
+| **Expected Argument** | **Description**                     | **Requirements**                                                                                             |
+|-----------------------|-------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `<INDEX>`             | The index of the item to be edited. | Positive number.<br/> • Must be less than or equal to the total number of clients in the current list view.  |
+
+> 💡 **Pro Tip:**
+> 
+> Indexes will change when the current list view changes!
+> 
+> Ensure that the index supplied is accurate to the current view.
+
+Note: There is a known issue when the supplied index argument is too large. For more information, see Section [7. Known Issues](#7-known-issues).
 
 <div style="page-break-after: always;"></div>
 
@@ -511,6 +535,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > 💡 **Pro Tip:**
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
 - **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
+  - This can be used to remove all remarks for a given client: `edit <INDEX> rn/NA` .
 
 
 
@@ -524,7 +549,6 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 delete <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
 * After entering the command, you will be asked for confirmation (y/yes) before deletion occurs.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
@@ -706,7 +730,6 @@ For detailed explanations for the matching criteria of each flag and the accepta
 view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
-* Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
 
 **Examples:**
 - **View client no.1**
@@ -801,12 +824,20 @@ AgentAssist **automatically saves** all client data to your computer after each 
 
 
 ## 5.6 Modifying the Data File
-The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file as `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
+The data in AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/data/agentassist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 > ⚠️ **Danger:**
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
 >
-> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.**
+> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.** 
+
+## 5.7 Modifying the Preferences File
+The window size settings for AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/preferences.json`. Advanced users are welcome to update the window size directly by editing that preferences file.
+- Note: The minimum window size for AgentAssist is fixed at 800x600.
+> ⚠️ **Danger:**
+> If the window size is set too large, the application will render incorrectly. 
+> 
+> Incorrect preference modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the preferences file if you're confident in doing so correctly.**
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -839,9 +870,11 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran'
+3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran'.
 4.  **Using non-english text input can cause visual bugs**. This release fully supports English text input only. Using non-English characters or text—especially those with right-to-left direction, like Arabic—may result in display problems, including incorrect text alignment, direction, and character rendering. We are actively working to expand support for international languages in future releases.
-5. **For index based commands**, negative inputs and inputs that are too large result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
+5. **For index based commands**, negative inputs and inputs larger than 2147483647 result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
+6. **For the edit command**, edits that do not result in changes to client details are currently considered valid. We are working on adding warnings to notify users of unchanged edits in future releases.
+
 
 [↑ Return to Table of Contents](#table-of-contents)
 
