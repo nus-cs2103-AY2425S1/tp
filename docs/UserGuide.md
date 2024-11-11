@@ -569,8 +569,7 @@ You can manage the appointments through different commands, which can be seen in
 **Notes:**
 
 **1.** Acceptable inputs for **Date and Time**:
-* The time is in 24-hour format, i.e. the value of `HH` ranges from `00` to `23`, while the value of `mm` 
-  ranges from `00` to `59`.<br>_**Example:** `2025-03-20 19:30`_
+* The time is in 24-hour format, i.e. `HH:mm` should be between `00:00` and `23:59`.
 * The date and time inputs are resolved "smartly" - meaning that certain incorrect dates will be allowed.<br> _**Example:**`2025-02-29 12:00` will be parsed as `2025-02-28 12:00`._
 
 </box>
