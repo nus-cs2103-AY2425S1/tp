@@ -85,20 +85,21 @@ public class TagCommand extends Command {
                     }
                 }
             }
-
             // Adds tags to all contacts
             for (Person person : lastShownList) {
                 Person updatedPerson = addTagsToPerson(person, tagsToAdd);
                 model.setPerson(person, updatedPerson);
             }
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_ADD_TAG_TO_ALL_SUCCESS, tagsToAdd));
+
+            String addedTags = addedTagsToString(tagsToAdd);
+
+            return new CommandResult(String.format(MESSAGE_ADD_TAG_TO_ALL_SUCCESS, addedTags));
         } else {
             assert index != null;
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(MESSAGE_INVALID_INDEX_OR_STRING);
             }
-
             assert index.getOneBased() > 0;
             Person personToEdit = lastShownList.get(index.getZeroBased());
             Person updatedPerson = addTagsToPerson(personToEdit, tagsToAdd);
@@ -106,10 +107,7 @@ public class TagCommand extends Command {
             model.setPerson(personToEdit, updatedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-            // Concatenates tags for success message
-            String addedTags = tagsToAdd.stream()
-                    .map(Tag::toString)
-                    .collect(Collectors.joining(", "));
+            String addedTags = addedTagsToString(tagsToAdd);
 
             return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, addedTags, Messages.format(updatedPerson)));
         }
@@ -125,6 +123,17 @@ public class TagCommand extends Command {
         return person.getTags().stream()
                 .map(t -> t.tagName.toLowerCase())
                 .anyMatch(existingTag -> existingTag.equals(tag.tagName.toLowerCase()));
+    }
+
+    /**
+     * Concatenates tags added for success message.
+     * @param tagsAdded The tags added.
+     * @return A string of all tags added.
+     */
+    private String addedTagsToString(Set<Tag> tagsAdded) {
+        return tagsAdded.stream()
+                .map(Tag::toString)
+                .collect(Collectors.joining(", "));
     }
 
     /**
