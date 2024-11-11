@@ -182,7 +182,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/2002-12-25 pri/MEDIUM t/criminal`
 
-### Listing all persons: `list`
+### Listing persons: `list`
 
 Shows a list of persons in the address book, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
 
@@ -490,6 +490,11 @@ Examples:
 **Info:** It is still possible to make changes to archived people
 </box>
 
+<box type="tip" seamless>
+
+**Tip:** To view archived persons, run `list archive/` or `list all/`
+</box>
+
 ### Unarchiving a person: `unarchive`
 
 Unarchives the specified person from the address book.
@@ -503,6 +508,11 @@ Format: `unarchive INDEX`
 
 Examples:
 * `list archive/` followed by `unarchive 1` unarchives the 1st person in the address book.
+
+<box type="tip" seamless>
+
+**Tip:** To view unarchived persons, run `list` or `list all/`
+</box>
 
 ### Undo the previous command: `undo`
 
@@ -603,7 +613,7 @@ The current time marker (denoted by the red line on the right side of the calend
 | Command          | Format, Examples                                                                                                                                                                                    |
 |------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **help**         | `help [COMMAND]`                                                                                                                                                                                    |
-| **add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                |
+| **add**          | `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [t/TAG]...​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 123456 dob/1990-12-19 pri/HIGH income/2000 famsize/3 t/father`|
 | **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                            |
 | **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
 | **find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                 |
