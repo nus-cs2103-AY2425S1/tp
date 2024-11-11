@@ -29,7 +29,7 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 <page-nav-print />
 
-<box type="tips" seamless>
+<box type="tip" seamless>
 
 * Here's a quick tip! To navigate back to the top of the pdf, use the `Home` key on Windows/Linux or `command + ↑` on Mac.
 * If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMAND-F` for Mac to find exactly what you need!
@@ -346,7 +346,7 @@ Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DAT
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
 * We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`).
 
-* <box type="important" seamless>
+<box type="important" seamless>
 
 **IMPORTANT:**
 
