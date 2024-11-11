@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ScheduleDateCommandParser" as ScheduleDateCommandParser LOGIC_COLOR
+participant ":AppointmentContainsDatePredicate" as AppointmentContainsDatePredicate LOGIC_COLOR
+participant ":ScheduleDateCommand" as ScheduleDateCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(scheduledate)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(scheduledate)
+activate AddressBookParser
+
+create ScheduleDateCommandParser
+AddressBookParser -> ScheduleDateCommandParser
+activate ScheduleDateCommandParser
+
+ScheduleDateCommandParser --> AddressBookParser
+deactivate ScheduleDateCommandParser
+
+AddressBookParser -> ScheduleDateCommandParser : parse(arguments)
+activate ScheduleDateCommandParser
+
+create AppointmentContainsDatePredicate
+ScheduleDateCommandParser -> AppointmentContainsDatePredicate
+activate AppointmentContainsDatePredicate
+
+AppointmentContainsDatePredicate --> ScheduleDateCommandParser
+deactivate AppointmentContainsDatePredicate
+
+create ScheduleDateCommand
+ScheduleDateCommandParser -> ScheduleDateCommand
+activate ScheduleDateCommand
+
+ScheduleDateCommand --> ScheduleDateCommandParser :
+deactivate ScheduleDateCommand
+
+ScheduleDateCommandParser --> AddressBookParser :
+deactivate ScheduleDateCommandParser
+
+ScheduleDateCommandParser -[hidden]-> AddressBookParser
+destroy ScheduleDateCommandParser
+
+AddressBookParser --> LogicManager :
+deactivate AddressBookParser
+
+LogicManager -> ScheduleDateCommand : execute(m)
+activate ScheduleDateCommand
+
+ScheduleDateCommand -> Model : updateFilteredAppointmentList(predicate)
+activate Model
+
+Model --> ScheduleDateCommand
+deactivate Model
+
+create CommandResult
+ScheduleDateCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ScheduleDateCommand
+deactivate CommandResult
+
+ScheduleDateCommand --> LogicManager :
+deactivate ScheduleDateCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
