@@ -1536,7 +1536,7 @@ Prerequisites: Have a contact list with multiple entries.
 
 ### Exploratory Testing
 
-- **Extreme Input Values:** Try inputs with long strings or special characters.
+- **Extreme Input Values:** Try inputs with long strings or special characters.<br>
   **Expected:** Proper validation errors without app crashes.
 - **Calling Commands in Succession:** Rapidly execute different commands.  
   **Expected:** The app should handle sequential commands without becoming unresponsive.
