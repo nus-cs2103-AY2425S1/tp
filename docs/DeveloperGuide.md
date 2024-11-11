@@ -237,14 +237,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to add a person or event.
 2. Eventory adds the person or event.
 
-    *Use case ends.*
-
-**Extensions**
-
-- **2a.** The given format is invalid.
-    - **2a1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
-
   *Use case ends.*
 
 ---
@@ -268,7 +260,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **3a.** The given index is invalid.
     - **3a1.** Eventory shows an error message.
-      *Use case resumes at step 2.*
+      *Use case resumes at step 2.*<br>
 
   *Use case ends.*
 
@@ -292,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **3a.** The given index is invalid.
     - **3a1.** Eventory shows an error message.
-      *Use case resumes at step 2.*
+      *Use case resumes at step 2.*<br>
 
   *Use case ends.*
 
@@ -362,15 +354,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **1a.** The given index is invalid.
     - **1a1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+      *Use case resumes at step 1.*<br>
 
-- **2b.** The event does not exist.
-    - **2b1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+- **1b.** The event does not exist.
+    - **1b1.** Eventory shows an error message.
+      *Use case resumes at step 1.*<br>
 
-- **2c.** The person is already linked to the event.
-    - **2c1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+- **1c.** The person is already linked to the event.
+    - **1c1.** Eventory shows an error message.
+      *Use case resumes at step 1.*<br>
 
   *Use case ends.*
 
@@ -387,17 +379,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- **2a.** The given index is invalid.
-    - **2a1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+- **1a.** The given index is invalid.
+    - **1a1.** Eventory shows an error message.
+      *Use case resumes at step 1.*<br>
 
-- **2b.** The event does not exist.
-    - **2b1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+- **1b.** The event does not exist.
+    - **1b1.** Eventory shows an error message.
+      *Use case resumes at step 1.*<br>
 
-- **2c.** The person is not already linked to the event.
-    - **2c1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+- **1c.** The person is not already linked to the event.
+    - **1c1.** Eventory shows an error message.
+      *Use case resumes at step 1.*<br>
       
   *Use case ends.*
 
