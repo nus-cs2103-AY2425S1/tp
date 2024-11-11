@@ -783,7 +783,9 @@ An example of a newly accepted command will be:`edit Javier n/Javiér`<br>
 2. **Improve our date package (Used by all commands that require a date)**: Currently, it is possible to input invalid
 dates such as `29/02/2025 1200` (Invalid leap year) or `31/06/2025 2400` (31st of June does not exist). With our intended
 improvement, an error message will be displayed if any instance of an invalid date is inputted.<br><br>
-A few examples of commands that will throw invalid date errors will be:`edit Javier ap/31/06/2025 2400` `filter ap/31/06/2025 - 29/02/2026`<br>
+A few examples of commands that will throw invalid date errors will be:<br>
+`edit Javier ap/31/06/2025 2400`<br>
+`filter ap/31/06/2025 - 29/02/2026`<br>
 
 3. **Introduce stricter constraints for `age`**: Currently our Age field accepts any value ranging from 0-999, which seems
 a tad too high. We plan to decrease the upper limit of the range to a more reasonable 150<br><br>
@@ -807,7 +809,11 @@ full patient list before specifying another patient, e.g., `view SECONDPATIENT`.
 The enhanced view command will allow the user to switch directly to another patient’s information without the need to 
 re-list all patients first.
 
-7. Kelly
+7. **Restrict a patient's sex**: Currently, we accept any alphanumerical input. However, this may not be reflective of 
+real-life behavior, despite the freedom it provides the user. Therefore, we plan to restrict the input for the sex field 
+to predefined values such as "Male", "Female", and "Other".<br><br>
+An example of a command that will throw an invalid sex error will be: `edit Javier s/Unknown`
+
 8. Kelly
 9. Otto
 10. Otto
