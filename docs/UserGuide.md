@@ -344,22 +344,22 @@ capabilities.
 
 DLTbook supports the following commands:
 
-| Command                                                                | Description                                                                            |
-|------------------------------------------------------------------------|----------------------------------------------------------------------------------------| 
-| [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                                 |
-| [**add**](#adding-a-contact-add)                                       | Adds a contact to the address book                                                     |
-| [**delete**](#deleting-a-contact-delete)                               | Deletes the specified contact from the address book                                    |
-| [**edit**](#editing-a-contact-edit)                                    | Edits an existing contact in the address book                                          |
-| [**find**](#finding-contacts-by-name-find)                             | Finds contacts whose names contain any of the given keywords                           |
-| [**list**](#listing-all-contacts-list)                                 | Shows a list of all contacts in the address book                                       |
-| [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                                     |
-| [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                                |
-| [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                          |
-| [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves public addresses with matching labels                                        |
-| [**searchpa**](#searching-for-a-public-address-searchpa)               | Based on contacts displayed, it searches for a contact using the unique public address |
-| [**filter**](#filtering-contacts-by-public-addresses-network-filter)   | Filters out a list of contacts with the public addresses of the specified network      |
-| [**clear**](#clearing-all-entries-clear)                               | Clears all entries from the address book                                               |
-| [**exit**](#exiting-the-program-exit)                                  | Exits the program                                                                      |
+| Command                                                                | Description                                                                             |
+|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------| 
+| [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page.                                 |
+| [**add**](#adding-a-contact-add)                                       | Adds a contact to the address book.                                                     |
+| [**delete**](#deleting-a-contact-delete)                               | Deletes the specified contact from the address book.                                    |
+| [**edit**](#editing-a-contact-edit)                                    | Edits an existing contact in the address book.                                          |
+| [**find**](#finding-contacts-by-name-find)                             | Finds contacts whose names contain any of the given keywords.                           |
+| [**list**](#listing-all-contacts-list)                                 | Shows a list of all contacts in the address book.                                       |
+| [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact.                                                     |
+| [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact.                                                |
+| [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact.                                          |
+| [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves public addresses with matching labels.                                        |
+| [**searchpa**](#searching-for-a-public-address-searchpa)               | Based on contacts displayed, it searches for a contact using the unique public address. |
+| [**filter**](#filtering-contacts-by-public-addresses-network-filter)   | Filters out a list of contacts with the public addresses of the specified network.      |
+| [**clear**](#clearing-all-entries-clear)                               | Clears all entries from the address book.                                               |
+| [**exit**](#exiting-the-program-exit)                                  | Exits the program.                                                                      |
 
 <box type="info" seamless>
 
@@ -602,12 +602,12 @@ Adds a public address to a contact.
 
 #### Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-| Parameter        | Explanation                                            | Details                                                                                                                                   |
-|------------------|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`          | The index of the contact in the displayed contact list | - The index **must be a positive integer** 1, 2, 3, ...<br/> - This field does not accept negative numbers or zero.                       |
-| `NETWORK`        | The network of the public address to be added          | - Allowed values: `BTC`, `ETH` and `SOL`<br/> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.             |
-| `WALLET_NAME`    | The wallet name of the public address to be added      | - This field is **case-insensitive**.                                                                                                     |
-| `PUBLIC_ADDRESS` | The public address to be added                         | - Only alphanumeric characters allowed.<br/>- The length should be **26 - 44 characters** long.<br/>- This field is **case-insensitive**. |
+| Parameter        | Explanation                                             | Details                                                                                                                                   |
+|------------------|---------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`          | The index of the contact in the displayed contact list. | - The index **must be a positive integer** 1, 2, 3, ...<br/> - This field does not accept negative numbers or zero.                       |
+| `NETWORK`        | The network of the public address to be added.          | - Allowed values: `BTC`, `ETH` and `SOL`<br/> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.             |
+| `WALLET_NAME`    | The wallet name of the public address to be added.      | - This field is **case-insensitive**.                                                                                                     |
+| `PUBLIC_ADDRESS` | The public address to be added.                         | - Only alphanumeric characters allowed.<br/>- The length should be **26 - 44 characters** long.<br/>- This field is **case-insensitive**. |
 
 * Adds a public address to a contact at the specified `INDEX`.
 
@@ -638,11 +638,11 @@ Deletes the public address of a contact.
 
 #### Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
-| Parameter     | Explanation                                              | Details                                                                                                                                                                      |
-|---------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`       | The index of the contact in the displayed contact list   | - The index **must be a positive integer** 1, 2, 3, ... <br> - This field does not accept negative numbers or zero.                                                          |
-| `NETWORK`     | The network of the public address to be deleted          | - Allowed values: `BTC, ETH, SOL` <br> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.                                                       |
-| `WALLET_NAME` | Optional wallet name of the public address to be deleted | - This field is **case-insensitive** <br> - If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact at the specified `INDEX` will be deleted. |
+| Parameter     | Explanation                                               | Details                                                                                                                                                                      |
+|---------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`       | The index of the contact in the displayed contact list.   | - The index **must be a positive integer** 1, 2, 3, ... <br> - This field does not accept negative numbers or zero.                                                          |
+| `NETWORK`     | The network of the public address to be deleted.          | - Allowed values: `BTC, ETH, SOL` <br> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.                                                       |
+| `WALLET_NAME` | Optional wallet name of the public address to be deleted. | - This field is **case-insensitive** <br> - If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact at the specified `INDEX` will be deleted. |
 
 <box type = "tip" seamless>
 
@@ -682,12 +682,12 @@ Edits an existing public address of a contact.
 
 #### Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-| Parameter        | Explanation                                            | Details                                                                                                                                   |
-|------------------|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`          | The index of the contact in the displayed contact list | - The index **must be a positive integer** 1, 2, 3, ...<br/> - This field does not accept negative numbers or zero.                       |
-| `NETWORK`        | The network of the public address to be edited         | - Allowed values: `BTC`, `ETH` and `SOL`<br/>- This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.              |
-| `WALLET_NAME`    | The wallet name of the public address to be added      | - This field is **case-insensitive**.                                                                                                     |
-| `PUBLIC_ADDRESS` | The updated public address                             | - Only alphanumeric characters allowed.<br/>- The length should be **26 - 44 characters** long.<br/>- This field is **case-insensitive**. |
+| Parameter        | Explanation                                             | Details                                                                                                                                   |
+|------------------|---------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`          | The index of the contact in the displayed contact list. | - The index **must be a positive integer** 1, 2, 3, ...<br/> - This field does not accept negative numbers or zero.                       |
+| `NETWORK`        | The network of the public address to be edited.         | - Allowed values: `BTC`, `ETH` and `SOL`<br/>- This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.              |
+| `WALLET_NAME`    | The wallet name of the public address to be added.      | - This field is **case-insensitive**.                                                                                                     |
+| `PUBLIC_ADDRESS` | The updated public address.                             | - Only alphanumeric characters allowed.<br/>- The length should be **26 - 44 characters** long.<br/>- This field is **case-insensitive**. |
 
 #### Examples
 
@@ -701,7 +701,8 @@ Edits an existing public address of a contact.
   ![editpa](images/editpa-1.png)
 
 * `editpa 1 c/BTC l/MAIN WALLET pa/bc1phkt4pgl42lad3mm2srne73y8a7zgam3cumrzmc`<br />
-  If the contact at index 1 exists and has a BTC public address labelled as "MAIN WALLET", public address will be updated to the new value and label will be updated to "MAIN WALLET" as `WALLET_NAME` is **case-insensitive**.
+  If the contact at index 1 exists and has a BTC public address labelled as "MAIN WALLET", public address will be
+  updated to the new value and label will be updated to "MAIN WALLET" as `WALLET_NAME` is **case-insensitive**.
 
   ![editpa](images/editpa-2.png)
 
@@ -721,11 +722,11 @@ Retrieves public addresses with matching labels.
 
 #### Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
-| Parameter     | Explanation                                                   | Details                                                                                                                                                                                                          |
-|---------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `WALLET_NAME` | The label (or part of the label) of desired public addresses  | - This field is **case-insensitive**. `MAIN` and `main` are equivalent.                                                                                                                                          |
-| `NETWORK`     | Optional ticker name for network to filter for                | - Allowed values: `BTC, ETH, SOL`.<br />- This field is **case-insensitive**. `BTC` and `btc` are equivalent.<br />- If `NETWORK` is not provided, it will retrieve matching public addresses from all networks. |
-| `PERSON_NAME` | Optional name (or part of the name) of contacts to filter for | - This field is **case-insensitive**. `ALEX` and `alex` are equivalent.<br />- If `PERSON_NAME` is not provided, it will retrieve matching public addresses of all contacts.                                     |
+| Parameter     | Explanation                                                    | Details                                                                                                                                                                                                          |
+|---------------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `WALLET_NAME` | The label (or part of the label) of desired public addresses.  | - This field is **case-insensitive**. `MAIN` and `main` are equivalent.                                                                                                                                          |
+| `NETWORK`     | Optional ticker name for network to filter for.                | - Allowed values: `BTC, ETH, SOL`.<br />- This field is **case-insensitive**. `BTC` and `btc` are equivalent.<br />- If `NETWORK` is not provided, it will retrieve matching public addresses from all networks. |
+| `PERSON_NAME` | Optional name (or part of the name) of contacts to filter for. | - This field is **case-insensitive**. `ALEX` and `alex` are equivalent.<br />- If `PERSON_NAME` is not provided, it will retrieve matching public addresses of all contacts.                                     |
 
 #### Examples
 
@@ -760,9 +761,9 @@ Based on contacts displayed, it searches for a contact using the unique public a
 
 #### Format: `searchpa pa/PUBLIC_ADDRESS`
 
-| Parameter        | Explanation          | Details                                                                                                                                                             | 
-|------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PUBLIC_ADDRESS` | a DLT public address | - Only alphanumeric characters allowed  <br/>  - The length should be more than 26 characters and less than 44 characters<br/> - This field is **case-insensitive** |
+| Parameter        | Explanation           | Details                                                                                                                                                                | 
+|------------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PUBLIC_ADDRESS` | A DLT public address. | - Only alphanumeric characters allowed.  <br/>  - The length should be more than 26 characters and less than 44 characters.<br/> - This field is **case-insensitive**. |
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
 
@@ -794,9 +795,9 @@ Filters out a list of contacts with the public addresses of the specified networ
 
 #### Format: `filter c/NETWORK`
 
-| Parameter | Explanation                                      | Details                                                                                                                       |
-|-----------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| `NETWORK` | The network of the public address to be filtered | - Allowed values: `BTC`, `ETH` and `SOL`<br/> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted. |
+| Parameter | Explanation                                       | Details                                                                                                                       |
+|-----------|---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| `NETWORK` | The network of the public address to be filtered. | - Allowed values: `BTC`, `ETH` and `SOL`<br/> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted. |
 
 * Filters out a list of contacts based on the `NETWORK` provided.
 
