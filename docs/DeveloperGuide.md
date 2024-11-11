@@ -177,7 +177,7 @@ The add command is used to add a new student to the address book. The `AddComman
 * All values corresponding to the prefixes that are provided must be non-empty and valid.
 
 If the constraints are not met, the `AddCommandParser` will throw a `ParseException` with an error message indicating the constraint that was violated.
-Otherwise, a new instance of `Student` is created with the values obtained from the user input. 
+Otherwise, a new instance of `Student` is created with the values obtained from the user input.
 A new instance of `AddCommand` is then created with the `Student` instance.
 
 On execution, `AddCommand` first queries the supplied model if it contains a student with both an identical name **and** an identical phone number. If no such student exists, `AddCommand` then calls on `model::addStudent` to add the student into the addressBook data.
@@ -961,3 +961,4 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This code snippet will handle the case even when user have changed their `addressBookFilePath` in the `preferences.json` file. The backup file will be saved in the **same directory** as the primary file, with the same name as the primary file, but with `"backup"` before `".json"`.
     The user will be informed of the backup file location and be recommended to only edit the primary data file, and not the backup file.<br>
     While the amount of storage needed might be slightly larger due to the backup file, this will prevent accidental data loss due to the deletion or corruption of the primary data file. Also, for our standalone application, the amount of storage needed for the backup file will likely not be significant, as the data stored in the `ugteach.json` file is likely not large.
+
