@@ -601,6 +601,8 @@ If your changes to this file makes its format invalid, HRConnect will discard al
 
 Likewise, certain edits can cause HRConnect to behave in unexpected ways. Therefore, edit the command history file only if you are confident of updating it correctly. <br>
 
+</div>
+
 ---
 
 ## FAQ
