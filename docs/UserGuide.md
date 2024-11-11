@@ -33,7 +33,7 @@ Thank you for choosing BA€! We know how important it is for salespeople to sta
 1. **Start the App**
    - Enter the following command: `java -jar tp.jar`
    - Within a few seconds, the BA€ Address Book interface should display and should look something like this: <br>
-     <img src="images/UG_Images/Ui.png" alt="Ui" width="600"/>
+     <img src="images/UG_Images/UiwLabels.png" alt="Ui" width="600"/>
 
 ### Using BA€
 
@@ -116,10 +116,10 @@ Email Address Constraints: <br>
 * `local` must not start or end with any special characters
 * `domain` must only consist of alphanumeric characters, with no more than one hyphen (`-`) or period (`.`) in between any 2 alphanumeric characters.
 * `domain` must end with at least 2 characters that are not a period (`.`)
-* Duplication is not prevented/checked for, as it might be possible for some of our users' clients to be contacted through the same contact, e.g. a common secretary.
+* Duplication is not prevented/checked for, as it might be possible for some of your users' clients to be contacted through the same contact, e.g. a common secretary.
 
 Address Constraints: <br>
-* Address can take any characters except for `\`, but cannot begin with a space and cannot be blank
+* Address can take any characters except for `\`, but cannot be blank
 
 Financial Info Constraints: <br>
 * Financial Info can take any valid characters except for `\`
@@ -142,6 +142,8 @@ Tag Constraints: <br>
   * Tags with values but have the same name as reserved tags are also not allowed (e.g. `t\DuplicatePhone:7`)
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 Command examples:
 * `add n\John Doe p\98765432 e\johnd@example.com a\123 John street fi\millionaire s\@jon3 t\client t\priority:high`
@@ -191,6 +193,8 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   <img src="images/UG_Images/findAlexDavidResult.png" alt="result for 'find alex david'" width="600"/>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a contacts : `delete`
 
 Deletes the specified contact from the address book.
@@ -228,7 +232,7 @@ Examples:
 * `filter n\John t\friend t\coworker` filters and displays contacts whose name contains "John" and who are tagged as both "friend" and "coworker".
 * `filter n\Jo n\Al t\worth` filters and displays contacts whose name contains "Jo" or "Al" and tagged as "worth" <br>
   <img src="images/UG_Images/filterJoAliWorth.png" alt="result for 'filter n/Jo n/Al t/worth'" width="600"/>
-
+<div style="page-break-after: always;"></div>
 <box type="tip" seamless>
 
 **Tip:** Use the command buttons provided to get command template
@@ -255,7 +259,7 @@ Examples:
 * `advfilter t\highPriority = Yes` would show all contacts that have the tag of highPriority and the value of Yes.
 * `advfilter t\neighbours >= 5` would show all contacts that have the tag of neighbours and a value of 5 or greater. <br>
   <img src="images/UG_Images/advfilterEg.png" alt="result for 'advfilter t/neighbours >= 5'" width="600"/>
-
+<div style="page-break-after: always;"></div>
 <box type="tip" seamless>
 
 **Tip:** Use the command button for Advanced Filter provided to get command template
@@ -286,7 +290,7 @@ that has empty tag value for premium.
 alphanumeric tag value for premium, then the contact with the smallest numeric-only tag value for premium, and lastly contact
 that has empty tag value for premium. <br>
   <img src="images/UG_Images/sortpremium.png" alt="result for 'sort t/premium asc'" width="600"/>
-
+<div style="page-break-after: always;"></div>
 <box type="tip" seamless>
 
 **Tip:** Use the command button for Sort provided to get command template
@@ -333,6 +337,7 @@ Format: `exit`
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<div style="page-break-after: always;"></div>
 
 ### Editing the data file
 
