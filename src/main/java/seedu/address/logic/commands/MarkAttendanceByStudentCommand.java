@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Marks the attendance of a student identified using it's displayed index from the address book.
+ * Marks the attendance of a student identified using it's displayed index.
  */
 public class MarkAttendanceByStudentCommand extends Command {
 

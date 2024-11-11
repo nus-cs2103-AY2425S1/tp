@@ -23,6 +23,7 @@ public class MarkAttendanceByTutorialCommandParser implements Parser<MarkAttenda
     /**
      * Parses the given {@code String} of arguments in the context of the MarkAttendanceByTutorialCommand
      * and returns a MarkAttendanceByTutorialCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkAttendanceByTutorialCommand parse(String args) throws ParseException {

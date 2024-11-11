@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.IsoFields;
 
 /**
- * Represents a Person's attendance in the address book.
+ * Represents a Student's attendance.
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
  */
 public class Attendance {
@@ -30,7 +30,7 @@ public class Attendance {
     }
 
     /**
-     * Returns true if a given string is a valid date format.
+     * Returns true if a given string is in the valid date format.
      */
     public static Boolean isValidAttendance(String test) {
         try {
@@ -42,7 +42,7 @@ public class Attendance {
     }
 
     /**
-     * Returns the date attended in the valid format
+     * Returns the date attended in the valid format.
      */
     @Override
     public String toString() {
@@ -50,7 +50,7 @@ public class Attendance {
     }
 
     /**
-     * Returns the date in a different format to be displayed in the UI
+     * Returns the date in a different format to be displayed in the UI.
      */
     public String toDisplayString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd MMM");
@@ -92,7 +92,6 @@ public class Attendance {
 
         return attendanceWeek == weekOfAttendanceToBeMarked && attendanceYear == yearOfAttendanceToBeMarked;
     }
-
 
 }
 

@@ -24,6 +24,7 @@ public class MarkAttendanceByStudentCommandParser implements Parser<MarkAttendan
     /**
      * Parses the given {@code String} of arguments in the context of the MarkAttendanceByStudentCommand
      * and returns a MarkAttendanceByStudentCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkAttendanceByStudentCommand parse(String args) throws ParseException {

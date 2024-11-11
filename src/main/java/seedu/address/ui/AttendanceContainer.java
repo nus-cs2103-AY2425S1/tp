@@ -25,9 +25,10 @@ public class AttendanceContainer extends UiPart<Region> {
 
     private static final String FXML = "AttendanceContainer.fxml";
 
-    public final ObservableList<Participation> participationList;
-
     private final Logger logger = LogsCenter.getLogger(AttendanceContainer.class);
+
+    private final ObservableList<Participation> participationList;
+
     @FXML
     private Label tutorial;
     @FXML
