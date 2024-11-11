@@ -57,6 +57,7 @@
 * [7.1 Update subject and lesson time cumulatively](#7-1-update-subject-and-lesson-time-cumulatively)
 * [7.2 Names with special characters](#7-2-names-with-special-characters)
 * [7.3 Multiple students with the same name](#7-3-multiple-students-with-the-same-name)
+* [7.4 Usage of reserved prefixes in parameters](#7-4-usgae-of-reserved-prefixes-in-parameters)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1050,10 +1051,14 @@ subjects or lesson times without removing existing ones. We plan to enhance this
 both subjects and lesson times, enabling users to add new subjects and lesson times without overwriting existing entries
 by changing the behaviour of the `update` command.
 
+***
+
 ### 7.2 Names with special characters
 
 Currently, only alphanumeric names are allowed. Users are advised to omit special characters (e.g., `,`, `-`, `/`) or replace them with spaces.
 A future version will include support for names with special characters to accommodate a wider range of naming conventions.
+
+***
 
 ### 7.3 Multiple students with the same name
 
@@ -1061,12 +1066,14 @@ Currently, EduManage does not support multiple students with identical names. As
 students by adding numbering to their names (e.g., "John Doe 1," "John Doe 2"). We plan to accommodate this in the future by
 relying on `INDEX` instead of `n/NAME` or `NAME` for commands.
 
-### 7.4 Usage of prefixes reserved in parameters
+***
+
+### 7.4 Usage of reserved prefixes in parameters
 
 Currently, EduManage does not check whether reserved prefixes are used within parameters. A future version will ensure that
 all prefixes reserved will be restricted from use in any parameters to prevent conflicts or unexpected behavior. This planned
 enhancement aims to improve system reliability by reducing potential errors arising from misuse of reserved prefixes.
 
-The prefixes include: `a/`, `e/`, `lt/`, `l/`, `n/`, `nt/`, `p/`, `s/`, `d/`, `t/`, `ti/`.
+The reserved prefixes are: `a/`, `e/`, `lt/`, `l/`, `n/`, `nt/`, `p/`, `s/`, `d/`, `t/`, `ti/`.
 
 [(Back to Top)](#edumanage-developer-guide)
