@@ -22,7 +22,7 @@ javaFX first via the following commands) <br>
    `sdk install java 17.0.11.fx-zulu` <br>
    `sdk default java 17.0.11.fx-zulu`
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T17-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -175,7 +175,7 @@ Format: `exit`
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![img.png](images/HelpWindow.png)
 
 Format: `help`
 
