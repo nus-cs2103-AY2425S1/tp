@@ -18,7 +18,7 @@ import seedu.address.model.wedding.WeddingName;
 import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
 
 /**
- * List out all the wedding tags
+ * Adds a wedding to the wedding book.
  */
 public class AddWeddingCommand extends Command {
 
@@ -59,8 +59,8 @@ public class AddWeddingCommand extends Command {
     /**
      * Executes the command and returns the result message.
      * @param model {@code Model} which the command should operate on.
-     * @return feedback message of the operation result for display
-     * @throws CommandException If the wedding already exists in the address book.
+     * @return feedback message {@code CommandResult} of the operation result for display
+     * @throws CommandException if the wedding already exists in the address book.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -104,7 +104,7 @@ public class AddWeddingCommand extends Command {
     /**
      * Returns a set of sets of names of existing weddings in the address book.
      * @param model {@code Model} which the command should operate on.
-     * @return a set of sets of names of existing weddings in the address book.
+     * @return a set of sets of names {@code Set<Set<String>>}} of existing weddings in the address book.
      */
     private static Set<Set<String>> getSets(Model model) {
         Set<Set<String>> existingWeddingsNamesSet = new HashSet<>();
