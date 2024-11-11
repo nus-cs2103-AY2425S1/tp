@@ -71,8 +71,8 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Invalid parameters will be ignored.
-  e.g. If the command only accepts `n/`, `a/`, and `t/` specifiers, then additional specifiers like `u/` or `e/` and their keywords will just be ignored.
+* Invalid specifiers might cause unexpected behavior.
+  e.g. If the command only accepts `n/`, `a/`, and `t/` specifiers, then additional specifiers like `u/` or `e/` might cause unexpected behavior (eg. error messages that do not make sense, or the specifier might be ignored).
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -393,7 +393,7 @@ welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, CareConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the CareConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause CareConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
