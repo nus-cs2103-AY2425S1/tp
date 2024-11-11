@@ -51,7 +51,9 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
    <br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+<div style="page-break-after: always;"></div>
+
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -64,7 +66,7 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -124,8 +126,6 @@ Action     | Format, Examples
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
-
-<div style="page-break-after: always;"></div>
 
 ### Viewing help : `help`
 
@@ -191,6 +191,8 @@ Adds a student to UGTeach.
 * You cannot add a duplicated student into UGTeach. Refer to [Glossary](#glossary) for more details on a duplicated student.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 <box type="tip" header="##### Tips">
 <markdown>
@@ -412,15 +414,13 @@ Shows the total amount of tuition fee that you have been paid, as well as the to
 
 **Format:** `income`
 
-**Examples**
+**Examples:**
 * Entering `income` when all entries are listed gives the total tuition fee paid, as well as the total amount that is owed.
 * Entering `find n/Alex` followed by `income` shows total tuition fee paid, as well as the total amount that is owed, from
   students whose name contains Alex
 
 **Output:**
 ![result for `income` when all entries listed](images/incomeResult.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Getting a reminder for today: `remind`
 
@@ -497,7 +497,8 @@ Please note:
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UGTeach home folder.
 
 --------------------------------------------------------------------------------------------------------------------
- 
+ <div style="page-break-after: always;"></div>
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
