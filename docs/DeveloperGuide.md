@@ -125,7 +125,7 @@ How the `AddressBookParser` works:
 * The newly created parser parses the user command and creates a `XYZCommand` object (e.g `DeleteCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g. `DeleteCommandParser`) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -152,7 +152,7 @@ Represents a contact within the address book. `Contact` can be either:
 
 Represents a wedding event.
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -164,7 +164,7 @@ The `Storage` component:
 * Inherits from both `DreamDayDesignerStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * Depends on `Model` since the data model of `Contact` and `Event` are defined within `Model`.
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.ddd.commons` package.
 
@@ -174,109 +174,12 @@ Classes used by multiple components are in the `seedu.ddd.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<!-- ### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedDreamDayDesigner`. It extends `DreamDayDesigner` with an undo/redo history, stored internally as an `dreamDayDesignerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedDreamDayDesigner#commit()` — Saves the current address book state in its history.
-* `VersionedDreamDayDesigner#undo()` — Restores the previous address book state from its history.
-* `VersionedDreamDayDesigner#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitDreamDayDesigner()`, `Model#undoDreamDayDesigner()` and `Model#redoDreamDayDesigner()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedDreamDayDesigner` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitDreamDayDesigner()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `dreamDayDesignerStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitDreamDayDesigner()`, causing another modified address book state to be saved into the `dreamDayDesignerStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitDreamDayDesigner()`, so the address book state will not be saved into the `dreamDayDesignerStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoDreamDayDesigner()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial DreamDayDesigner state, then there are no previous DreamDayDesigner states to restore. The `undo` command uses `Model#canUndoDreamDayDesigner()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoDreamDayDesigner()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `dreamDayDesignerStateList.size() - 1`, pointing to the latest address book state, then there are no undone DreamDayDesigner states to restore. The `redo` command uses `Model#canRedoDreamDayDesigner()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitDreamDayDesigner()`, `Model#undoDreamDayDesigner()` or `Model#redoDreamDayDesigner()`. Thus, the `dreamDayDesignerStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitDreamDayDesigner()`. Since the `currentStatePointer` is not pointing at the end of the `dreamDayDesignerStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_ -->
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Specific Guides**
 
 * [Documentation Guide](Documentation.md)
+* [Setting Up Guide](SettingUp.md)
 * [Testing Guide](Testing.md)
 * [Logging Guide](Logging.md)
 * [Configuration Guide](Configuration.md)
@@ -286,7 +189,7 @@ _{Explain here how the data archiving feature will be implemented}_ -->
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
 **Target user profile**:
 
@@ -298,7 +201,7 @@ Freelance wedding planners with many client and vendor contacts
 **Value proposition**: Provide a way to easily select suitable vendors for a wedding event given specific parameters such as budget, time, commission, client needs (e.g. culture, style), location.
 
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -331,7 +234,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | user with many vendors/client data | quickly access old data for vendors and clients             | avoid re-entering details when planning similar events                                |
 | `*` | seasoned user                      | use keyboard shortcuts                                      | work more quickly                                                                     |
 
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is `Dream Day Designer` and the **Actor** is the `Wedding planner`, unless specified otherwise)
 
@@ -582,7 +485,7 @@ Have at least valid contact type (client/vendor) stored in the system.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -593,7 +496,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
@@ -608,7 +511,7 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by running `java -jar ddd.jar` again.<br>
        Expected: The most recent window size and location is retained.
 
-### Adding a contact
+### Adding a Contact
 1. Adding a client to the existing contact list.
     1. Prerequisites: Address book is empty or does not contain `Contacts` that have the same `Name` or `Phone` as those used below.
     2. Test case: `add -c n/Alice p/91234567 e/alice@gmail.com a/1 Clementi Street Blk 25 t/vegan t/urgent`<br>
@@ -641,7 +544,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Add is unsuccessful due to invalid `Name` input. Error details shown in the status message. Status bar remains the same.
         1. Similar commands to try: Invalid inputs for `p/`, `e/`, `a/`, `s/` or `t/`. <br> Expected: Same as above.
 
-### Adding an event
+### Adding an Event
 1. Adding an event to the existing event list.
     1. Prerequisites: Address book is empty or does not contain `Events` that have the same `Name` as those used below.
     2. Test case: `add -e n/Sample Wedding des/Wedding reception d/2000-01-01 c/0 v/1`<br>
@@ -661,7 +564,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Add is unsuccessful due to invalid `Client` index. Error details shown in the status message. Status bar remains the same.
         1. Similar commands to try: Invalid index for `v/`. <br> Expected: Same as above.
 
-### Editing a contact
+### Editing a Contact
 1. Editing an existing contact in the contact list
     1. Prerequisites: Address book contains the `Contact` specified below.
     2. Test case: `edit id/1 n/Bob`<br>
@@ -718,7 +621,7 @@ testers are expected to do more *exploratory* testing.
     3. Other test cases specified above for `list` are applicable for `list -e`, and the relevant parameters include `n/`, `des/`, `d/`, `id/`. <br>
        Expected: Relevant events will be displayed. The rest of the expected behaviour is the same as above.
 
-### Deleting a record
+### Deleting a Record
 
 1. Deleting a record (`Contact` or `Event`) while multiple records are displayed
    1. Prerequisites: List contacts/events using the `list` command. Multiple records in the list.
@@ -729,7 +632,7 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size or non-positive)<br>
       Expected: Similar to previous.
 
-### Saving data
+### Saving Data
 
 1. Missing `ddd.json` file in the `data` folder
    1. Expected: `ddd.json` will be created in the `data` folder and populated with some sample data.
