@@ -486,6 +486,10 @@ Note to project: Security measures like encryption will not be implemented in th
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Encryption**: The process of converting data into a code to prevent unauthorized access, typically using algorithms and keys.
+* **Java**: It is a programming language and computing platform that's used to build applications and websites.
+* **Directory**: Also known as folder is a location for storing files or other folders on your computer.
+* **Alphanumeric**: Any collection of number characters and letters. E.g. A–Z, a-z and 0–9.
+* **Integer**: A number that is not a fraction; a whole number.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -836,6 +836,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## <i class="fa-solid fa-question"></i> FAQ
 
+**Q**: Is MediContact and Java free to download?<br>
+**A**: Yes, they are both free to download!
+
+**Q**: Is there any ads or in-app purchases in MediContact?<br>
+**A**: No, MediContact does not include any ads or in-app purchases. It is designed to provide a seamless and uninterrupted experience for users, with full functionality available upon download without additional costs.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediContact home folder.
 
