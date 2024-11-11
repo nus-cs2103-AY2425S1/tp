@@ -232,6 +232,11 @@ Format: `find [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/ad
 >
 > The find command performs an OR search, meaning that if multiple fields are specified, any match in any of the fields will return a result. Example: `/name Hans Bo` will return Hans Gruber, Bo Yang.
 
+{: .alert .alert-warning}
+> :exclamation: **Warning:**
+>
+> If the `find` command doesn't find any matches, it will automatically show all contacts in EduConnect.
+
 Examples:
 * `find /name John` returns `John` and `John Doe`
 * `find /name Mary /classes 7A` returns `Mary Tan` (who has the name "Mary") and `David Lee` (who teaches or is in class 7A) <br>
