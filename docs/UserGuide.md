@@ -211,7 +211,7 @@ Add meetings to user's schedule.
 Format: `add-schedule c/CONTACT n/NAME d/DATE t/TIME`
 - all fields must be present
 - duplicate prefixes would be replaced with latest prefix (e.g. t/1400 will be replaced by t/1600)
-- `c/CONTACT` the contact indices with respect to the currently displayed list of contacts.
+- `c/CONTACT` the contact indices with respect to the currently displayed list of contacts. Multiple contacts are allowed.
 - `n/NAME` description of the meeting.
 - `d/DATE` date must be in the format of dd-MM-YYYY.
 - `t/TIME` time must be in the format of hhmm (24 hours notation) .
