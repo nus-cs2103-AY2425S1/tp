@@ -241,7 +241,7 @@ The activity diagram below illustrates the workflow behind the execution of the 
 
 ![AddActivityDiagram](images/AddActivityDiagram.png)
 
-#### Design Considerations
+##### Design Considerations
 **Using `Nric` as an unique identifier** <br>
 Patients may have the same names and other fields. Therefore, unique NRICs will be used to distinguish between patients to prevent administrative errors.
 
