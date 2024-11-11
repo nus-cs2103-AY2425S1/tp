@@ -91,17 +91,6 @@ Given below are instructions to test the app manually.
    2. Re-launch the app<br>
       Expected: The most recent window size and location is retained.
 
-### Local GUI testing
-
-The available gradle tasks are: guiTests, nonGuiTests, allTests.
-
-- guiTests: all tests under `systemtests` package
-- nonGuiTests: all tests under `spleetwaise.address`, `spleetwaise.common`, `spleetwaise.transaction` packages
-- allTests: guiTests and nonGuiTests, nonGuiTests will be run before guiTests
-
-As an example, you can run `gradle nonGuiTests` in the gradle terminal for all tests excluding GUI related tests.
-You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > terminal icon _(Execute Gradle tasks)_.
-
 ### Adding a person
 
 1. Adding a person while all persons are being shown
