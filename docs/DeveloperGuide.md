@@ -165,9 +165,12 @@ The `find` feature follows the sequence diagram here:
 The `mass reject` feature follows the sequence diagram here:
 <puml src="diagrams/MassRejectSequenceDiagram.puml" width="550" />
 
+### Delete feature
+The `delete` feature follows the sequence diagram here:
+<puml src="diagrams/DeleteSequenceDiagram.puml" width="550" />
 
 ### Statistics feature
-The `statistics` feature follows the sequence diagram here:
+The `stats` feature follows the sequence diagram here:
 <puml src="diagrams/StatisticsSequenceDiagram.puml" width="550" />
 
 Like `ListCommand`, it does not require the use of its own parser, as it only calls upon the FilteredList of the
@@ -558,20 +561,32 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 3. Should work on any mainstream OS as long as it has Java `17` or above installed.
 4. The system should execute commands (such as adding, deleting, or listing contacts) within 1 second under normal loads (e.g., up to 1,000 contacts).
 5. Should be able to hold up to 1,000 persons without noticeable sluggishness in performance for typical usage.
-6. The system should support up to 1,000 concurrent users without performance degradation.
-7. A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-8. The system must be user-friendly and usable by individuals with no prior experience with contact management systems.
-9. Volatility: Transaction data should be stored persistently and remain available for a minimum of 10 years.
-10. Complete user documentation, including installation and setup instructions, must be provided.
-11. The system should be designed to allow for the addition of new modules without requiring a full redesign.
-12. The system should gracefully handle incorrect or incomplete inputs by providing meaningful error messages without crashing.
+6. A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+7. The system must be user-friendly and usable by individuals with no prior experience with contact management systems. 
+8. Volatility: Transaction data should be stored persistently and remain available for a minimum of 10 years. 
+9. Complete user documentation, including installation and setup instructions, must be provided. 
+10. The system should be designed to allow for the addition of new modules without requiring a full redesign. 
+11. The system should gracefully handle incorrect or incomplete inputs by providing meaningful error messages without crashing.
 
 
 ### Glossary
 
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Contact**: An entry in Talentcy address book that contains information about a particular person such as name, phone number, email address, and any other relevant details
-* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a contact to the address book)
+* **Applicant**: An individual who has submitted job application to the company. 
+* **Job Code** : A code that represents the company's specific job role. 
+* **Tag** : Interview stages that applicants will go through for a job before they could get hired. The following are the default tags and abbreviations in the address book:
+
+| Tag | Interview Stage                 | Definition                                                                  |
+|-----|---------------------------------|-----------------------------------------------------------------------------|
+| N   | New                             | New applicant                                                               |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled for the applicant  |
+| TC | Technical Interview Confirmed | Technical interview has been schedule for the applicant                     |                                           
+| BP | Behavioral Interview in Progress | Behavioral interview is in the process of being scheduled for the applicant |
+| BC | Behavioral Interview Confirmed | Behavioral interview has been scheduled for the applicant                   |
+| A| Accepted| Applicant has been accepted by the company                                  |
+| R | Rejected | Applicant has been rejected by the company                                  |
+
+* **Person**: A single entry in Talency address book that contains information about a particular applicant such as name, phone number, email address, and any other relevant details.
+* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a contact to the address book).
 
 --------------------------------------------------------------------------------------------------------------------
 

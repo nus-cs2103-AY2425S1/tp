@@ -32,9 +32,10 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a person
+    * named `John Doe` to the Address Book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd person shown in the current list.
 
     * `clear` : Deletes all contacts.
 
@@ -82,7 +83,7 @@ Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK]`
 
 <box type="tip" seamless>
 
-* Only one interview stage tag will be attached to a contact at any point of time.
+* Only one interview stage tag will be attached to a person at any point of time.
 </box>
 * If not specified, remark will be 'None' by default.
 
@@ -143,10 +144,10 @@ Format:
 
 Examples:
 * `find n/alex yeoh` returns `Alex Yeoh`, `Alex Yeoh Bin Sheng`, and `Dalex Yeohanes`
-* `find t/TP` returns the list of contacts with `TP` tag <br>
+* `find t/TP` returns the list of persons with `TP` tag <br>
   <img src="images/findTp.png" alt="result for 'findTp'" width="400"/>
 
-* `find n/alex yeoh t/TP` return the list of contacts with name containing `alex yeoh` whose tag is `TP`
+* `find n/alex yeoh t/TP` return the list of persons with name containing `alex yeoh` whose tag is `TP`
 
 ### Deleting a person : `delete`
 
@@ -163,13 +164,13 @@ Format:
 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If there are contacts with duplicate names, user must use `delete e/EMAIL` or `delete p/PHONE`
+* If there are persons with duplicate names, user must use `delete e/EMAIL` or `delete p/PHONE`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete n/Betsy` will delete contact with the full name Betsy.
-* `delete e/betsy@gmail.com` will delete the contact with the email betsy@gmail.com
+* `delete n/Betsy` will delete person with the full name Betsy.
+* `delete e/betsy@gmail.com` will delete the person with the email betsy@gmail.com
 
 
 ### Showing applicant statistics: `stats`
@@ -177,7 +178,7 @@ Examples:
 Format: 
 `stats`
 
-Shows the following statistics of the contact book at the time the command is called:
+Shows the following statistics of the address book at the time the command is called:
 - Total number of applicants.
 - Percentage of applicants in each interview stage regardless of job code.
 - Number of applicants for each job code and each interview stage for that job code.
@@ -192,7 +193,7 @@ Marks persons as "rejected" by updating their tags based on specified job code, 
 Format:
 `massreject {[j/JOB CODE] [t/TAG]}`
 
-* Updates contacts' tags to `r` (rejected) based on the specified criteria.
+* Updates person's tags to `r` (rejected) based on the specified criteria.
 * You can filter by job code only, tag only, or a combination of both.
 * If only a job code is provided, persons with the `a` (accepted) tag will be excluded from the update.
 * If both job code and tag are provided, they must exactly match the job code and tag.

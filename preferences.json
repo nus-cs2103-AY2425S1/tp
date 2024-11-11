@@ -4,7 +4,7 @@
     "windowHeight" : 600.0,
     "windowCoordinates" : {
       "x" : 270,
-      "y" : 24
+      "y" : 39
     }
   },
   "addressBookFilePath" : "data\\talentcy.json"
