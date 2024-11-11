@@ -47,6 +47,8 @@ If you type fast, you can complete your contact management tasks faster with Log
 1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
+   - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.
+   ![openinterminal](images/openinterminal.png)
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -104,7 +106,8 @@ Note:
 * Does not show an exhaustive list of all available commands, only the most helpful. 
 
 <box type="tip" seamless>
-**Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
+
+**Tip:** You can use the TAB, ENTER and ESC keys to navigate the help window.
 </box>
 
 Format: `help`
@@ -125,9 +128,10 @@ Examples:
 <br>
 Note: 
 
-* `NAME` is required to be unique, most users will not save 2 `Alex` into their contacts, they will distinguish them.
-* `EMAIL` and `PHONE` can be duplicated to give the user freedom, but there will be a warning.
 
+* In order to keep your address book organised, `NAME` has to be **unique**
+* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear
+* The default field for `[r/ROLE]` is client if left empty.
 
 **<ins>When in the inspect window**
 
@@ -241,7 +245,9 @@ Format: `archive [INDEXES]...`
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
 
 Examples:
-* `back` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+* `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+
+![after archiving contact](images/archivedcontact.png)
 
 Note:
 * You will not be able to use `inspect` and `edit` for archived contacts.
@@ -254,6 +260,8 @@ Archives the specified delivery or deliveries from the delivery list of a contac
 Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
+
+![after archiving delivery](images/archiveddelivery.png)
 
 Note:
 * You will not be able to use `edit` for archived deliveries.
@@ -304,7 +312,7 @@ Sorts all deliveries in the delivery list of a contact by the specified attribut
 
 Archived deliveries will be sorted separately from unarchived deliveries, and appear at the bottom of the delivery list.
 
-Format `asort by/ ATTRIBUTE`
+Format: `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: address, cost, date, eta, id, status.
 
@@ -448,7 +456,7 @@ Certain changes you make to the file could cause LogiLink to behave unexpectedly
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/client a/123, Clementi Rd, S123456 t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
+**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [r/ROLE] …​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, S123456 r/client t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
 **Archive**| <ins>Both Windows:</ins><br> `archive INDEXES`<br> e.g., `archive 3`, `archive 3 4`
 **Assign** | <ins>Main Windows:</ins><br> Does not work <br><ins>Inpsect Windows:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
 **Back**   | <ins>Both Windows:</ins><br> `back`
