@@ -137,22 +137,17 @@ Here is a partial and representative class diagram of the `Model` component:
 
 The `Model` component has the following responsibilites:
 
-- Storing the HallPointer data (i.e. any `Member` and `Session` objects, and application configuration files) in the hard disk.
-- stores the currently 'selected' `Member` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+- Storing the HallPointer data (i.e. any `Member` and `Session` objects) in memory for easy access.
+- Storing the currently 'selected' `Member` objects (e.g. the results of a search query) in a separate _filtered_ list, one which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed'. This allows the UI to observe the list and automatically update when the data in the list changes.
+- Storing a `UserPref` object that represents the user’s preferences, and exposing to the outside as a `ReadOnlyUserPref` object. 
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Hall Pointer`, which `Member` references. This allows `Hall Pointer` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
+It does not depend on any of the other three components, as the `Model` represents data entities of the application and domain, and thus should make sense on its own without depending on other components.
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/storage/Storage.java)
+
+Here is a partial and representative class diagram of the `Storage` component:
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
