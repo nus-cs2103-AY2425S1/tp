@@ -206,22 +206,22 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ### Date Feature
 
-The Date feature allows users to add, edit, and view appointment dates for each person in the address book, helping doctors maintain an organized schedule without conflicts.
+The Date feature allows users to add, edit, and view appointment dates and times for each person in the address book, helping doctors maintain an organized schedule without conflicts.
 
 #### Feature Architecture
-1. **Parsing in DateCommandParser**: `DateCommandParser` handles the parsing of date-related commands, ensuring date and time are in the correct format (`d/M/yyyy HHmm`) before passing them to `DateCommand`.
+1. **Parsing in DateCommandParser**: `DateCommandParser` handles the parsing of date-related commands, ensuring dates and times are in the correct format (`d/M/yyyy HHmm`) before passing them to `DateCommand`.
     - Benefits and Challenges similar to Add Feature
 
-2. **Date Validation**: `DateCommand` enforces date format requirements and ensures compliance (e.g., `d/M/yyyy HHmm`).
+2. **Date Validation**: `DateCommand` enforces date and time format requirements and ensures compliance (e.g., `d/M/yyyy HHmm`).
     - **Benefit**: Provides users with immediate feedback on invalid formats and values, helping maintain data consistency.
-    - **Challenge**: Requires thorough validation logic to prevent incorrect or improperly formatted dates from being added.
+    - **Challenge**: Requires thorough validation logic to prevent incorrect or improperly formatted dates and times from being added.
 
-3. **Preventing Duplicate Dates Across the Model**: `DateCommand` checks for existing date and time across all records to avoid scheduling conflicts for the doctor, ensuring no overlapping appointments.
+3. **Preventing Duplicate Dates and Times Across the Model**: `DateCommand` checks for existing dates and times across all records to avoid scheduling conflicts for the doctor, ensuring no overlapping appointments.
     - **Benefit**: Ensures accurate, conflict-free scheduling, giving doctors a reliable view of upcoming appointments.
     - **Challenge**: Requires efficient cross-checks within the model to detect and prevent any duplicate appointment dates across all patient records.
 
-**Sequence Diagram**: Shows interactions within `Logic` when processing date commands, such as adding or editing an appointment date, ensuring no conflicts across the schedule.
-![Interactions Inside the Logic Component for the `date n/Alex Yeoh d/31/10/2024` Command](images/DateSequenceDiagram.png)
+**Sequence Diagram**: Shows interactions within `Logic` when processing date commands, such as adding or editing an appointment date and time, ensuring no conflicts across the schedule.
+![Interactions Inside the Logic Component for the `date n/Alex Yeoh d/31/10/2024 1230` Command](images/DateSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">
 <strong>Note:</strong> The lifeline for <code>DateCommandParser</code> should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifeline continues until the end of the diagram.
@@ -277,14 +277,14 @@ for managing busy schedules.
 
 
 7. **Warn user that date entered is in the past:** 
-Currently, the user is allowed to enter an appointment date and time from the past because this function is meant to be for easy reference of information, so the user might want to add past patients and their last appointment date.
-However, in the future, an enhancement can be added where the user is warned when a past date in the added. For example, 'WARNING: Date and time that was added has already passed.'
+Currently, the user is allowed to enter an appointment date and time from the past because this function is meant to be for easy reference of information, so the user might want to add past patients and their last appointment.
+However, in the future, an enhancement can be added where the user is warned when a past date or time in the added. For example, 'WARNING: Date and time that was added has already passed.'
 
 
-8. **Specific error message about date format:**
-   Currently, the app accepts dates in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
+8. **Specific error message about date and time format:**
+   Currently, the app accepts dates and times in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
 which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
-   In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date formats.
+   In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date and time formats.
 
 9. **Accept other phone formats:**
 Currently, the app only accepts phone numbers that are 8 digits long and start with 3, 6, 8 or 9, according to Singapore's standard format for phone numbers. However, we understand that some users may key in their NOK's number, which may not be a Singapore number, as they might be based overseas. In the future, more phone formats can be added, such as including area codes and accepting more digits.
@@ -432,13 +432,13 @@ Preconditions: AddressBook has correct view, including client to edit
 
         Use case resumes from step 3.
 
-**Use case: Add appointment date for client**
+**Use case: Add appointment date and time for client**
 
 **MSS**
 
-1. User requests to add date and inputs the client's attributes and appointment date.
+1. User inputs the client's attributes and appointment date and time.
 2. AddressBook validates the input.
-3. AddressBook confirms the successful addition of appointment date to client. 
+3. AddressBook confirms the successful addition of appointment date and time to client. 
 
     Use case ends.
 
@@ -565,8 +565,8 @@ Preconditions: AddressBook has correct view, including client to edit
 * **Mainstream OS**: Windows, Linux, Unix, macOS.
 * **Patient Record**: A collection of patient's personal and medical information. This includes, but is not limited to, name, contact number, email, address, allergies, injuries sustained.
 * **Appointment**: A scheduled session between the healthcare provider and patient for medical consultation or treatment. This is marked in the AddressBook by the time, date and patient.
-* **Schedule**: A list of all patients' appointments, displaying the date and time and location of the appointments.
-* **Tag**: A label applied to a patient record, used to categorise and highlight specific medical information, such as allergies or conditions.
+* **Schedule**: A list of all patients' whose appointments is on a specific date.
+* **Tag**: A label applied to a patient record, used to categorise and highlight specific medical information, such as priority.
 * **Medical History**: Documentation of patient's past illnesses, treatments, surgeries and other medical related information.
 * **Allergy**: A known medical condition or sensitivity that a client has to specific substances or environmental factors (e.g., certain foods, medications, pollen).
     This information is recorded in the client’s profile to help healthcare providers avoid potential triggers and deliver appropriate care during visits.
@@ -726,6 +726,6 @@ After considerable discussion, we established that two entries (Person A and Per
 The latter two conditions prevent users from accidentally creating separate entries for the same person if only minor details, like email or phone number, change. 
 This approach maintains a cleaner, more accurate record-keeping system and reduces the risk of redundant data.
 
-Given the iterative nature of this project, we prioritized essential features in our initial development, including tags, filters, allergies, appointment dates, and finding schedule. 
+Given the iterative nature of this project, we prioritized essential features in our initial development, including tags, filters, allergies, appointment date and times, and finding schedule. 
 For each of these features, we focused on establishing clear logic and minimizing bugs, aiming for a robust and reliable experience for users from the outset. 
 This careful planning and attention to detail allowed us to build a solid foundation for HealthConnect, supporting its growth and adaptability.
