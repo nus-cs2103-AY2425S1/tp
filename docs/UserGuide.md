@@ -489,6 +489,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 6. **Contact name is a unique identifier**, this application uses the name of a contact as the unique identifier. This means that it cannot accept two of the same names in the application. Instead, consider adding the surname, use full names or, if really needed, adding numbers at the back of the name to distinguish different people.
 7. **Contact names are alphanumeric**, this application only allows users to enter alphanumeric names. This means that names that include "s/o" or "d/o" are not allowed. Alternatively, consider using "so", "do" or "son of" as a replacement.
 8. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
+9. **Notes with very long content will trail off with `...`**, instead of wrapping the text and displaying the hidden content on the next line.
 
 ---
 
