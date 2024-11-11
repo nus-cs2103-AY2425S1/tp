@@ -1,5 +1,7 @@
 package seedu.address.model.order;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Order represent an order ordered by a customer, each order is uniquely identified as its order name
  */
@@ -21,6 +23,8 @@ public class Order {
      * @param name of order
      */
     public Order(String name) {
+        requireNonNull(name);
+
         if (!isValidName(name)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }

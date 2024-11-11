@@ -34,6 +34,8 @@ public class PutOrderCommand extends Command {
      * @param name of the customer to add the order
      */
     public PutOrderCommand(String order, Name name) {
+        requireNonNull(order);
+        requireNonNull(name);
         this.order = order;
         this.name = name;
     }

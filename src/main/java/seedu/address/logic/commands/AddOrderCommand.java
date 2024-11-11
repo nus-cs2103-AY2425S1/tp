@@ -23,7 +23,12 @@ public class AddOrderCommand extends Command {
 
     private final String toAdd;
 
+    /**
+     * Create a new AddOrderCommand object
+     * @param name of the order
+     */
     public AddOrderCommand(String name) {
+        requireNonNull(name);
         this.toAdd = name;
     }
 

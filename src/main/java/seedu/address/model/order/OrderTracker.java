@@ -1,5 +1,7 @@
 package seedu.address.model.order;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +27,7 @@ public class OrderTracker {
      * @param order to add
      */
     public void add(Order order) {
+        requireNonNull(order);
         this.history.add(new OrderHistory(order));
         this.frequency.merge(order, 1, Integer::sum);
     }
@@ -34,6 +37,7 @@ public class OrderTracker {
      * @param order to add
      */
     public void add(OrderHistory order) {
+        requireNonNull(order);
         this.history.add(order);
         this.frequency.merge(order.getOrder(), 1, Integer::sum);
     }
@@ -43,6 +47,7 @@ public class OrderTracker {
      * @param history to add
      */
     public void add(ArrayList<OrderHistory> history) {
+        requireNonNull(history);
         for (OrderHistory orderHistory : history) {
             add(orderHistory);
         }

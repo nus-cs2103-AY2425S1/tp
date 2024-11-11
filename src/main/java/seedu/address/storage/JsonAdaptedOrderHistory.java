@@ -46,6 +46,9 @@ class JsonAdaptedOrderHistory {
         } catch (Exception e) {
             throw new IllegalValueException("Invalid timestamp format.");
         }
+        if (!Order.isValidName(order)) {
+            throw new IllegalValueException(Order.MESSAGE_CONSTRAINTS);
+        }
         return new OrderHistory(new Order(order), parsedTime);
     }
 }
