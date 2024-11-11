@@ -163,10 +163,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public CompanyListPanel getPersonListPanel() {
-        return companyListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *

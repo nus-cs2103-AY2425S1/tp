@@ -28,12 +28,12 @@ import seedu.address.testutil.CompanyBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullCompany_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_companyAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingCompanyAdded modelStub = new ModelStubAcceptingCompanyAdded();
         Company validCompany = new CompanyBuilder().build();
 
@@ -45,7 +45,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateCompany_throwsCommandException() {
         Company validCompany = new CompanyBuilder().build();
         AddCommand addCommand = new AddCommand(validCompany);
         ModelStub modelStub = new ModelStubWithCompany(validCompany);

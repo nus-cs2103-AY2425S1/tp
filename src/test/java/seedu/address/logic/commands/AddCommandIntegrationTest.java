@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateCompany_throwsCommandException() {
         Company companyInList = model.getAddressBook().getCompanyList().get(0);
         assertCommandFailure(new AddCommand(companyInList), model,
                 AddCommand.MESSAGE_DUPLICATE_COMPANY);
