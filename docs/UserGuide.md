@@ -347,8 +347,8 @@ Examples:
 - Sorting by name using `sort -s so/a sb/n` followed by `mark -s 1 inactive`
 
 Expected outputs:
-- Supplier at index 3 of the displayed list has status marked as `active`, assuming there is at least three suppliers displayed and the third supplier is not currently `inactive`. Otherwise, an error message will be shown.
-- Supplier at index 1 of the displayed list has status marked as `inactive`, assuming there is at least one supplier displayed and the first supplier is not currently `ianctive`. Otherwise, an error message wil be shown.
+- Supplier at index 3 of the displayed list will be marked as `active`, assuming there is at least three suppliers displayed and the third supplier is not currently `inactive`. Otherwise, an error message will be shown.
+- Supplier at index 1 of the displayed list will be status marked as `inactive`, assuming there is at least one supplier displayed and the first supplier is not currently `ianctive`. Otherwise, an error message wil be shown.
 
 #### Here's how it would look like in the app:
 ![mark command](images/markSupplierCommand.png)
@@ -602,8 +602,8 @@ Examples:
 - Searching by product using `find -d pro/bread` followed by `mark -d 1 cancelled`
 
 Expected outputs:
-- Delivery at index 2 of the displayed list has status shown as `DELIVERED`, assuming there is at least 2 deliveries displayed and the second delivery has a different status initially. Otherwise, an error message will be shown.
-- Delivery at index 1 of the displayed list has status shown as `CANCELLED`, assuming there is at least 1 delivery displayed and the first delivery has a different status initially. Otherwise, an error message will be shown.
+- Delivery at index 2 of the displayed list will be marked as `DELIVERED`, assuming there is at least 2 deliveries displayed and the second delivery has a different status initially. Otherwise, an error message will be shown.
+- Delivery at index 1 of the displayed list will be marked as `CANCELLED`, assuming there is at least 1 delivery displayed and the first delivery has a different status initially. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 ![mark delivery command](images/markDeliveryCommand.png)
