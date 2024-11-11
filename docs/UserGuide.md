@@ -1111,9 +1111,9 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > **Input**: `moreinfo`
 > 
 > **Output**:
-Invalid command format!
-moreinfoCLIENT_INDEX: Open a window to more information about the client.
-Example: moreinfo 1
+<br>Invalid command format!
+<br>moreinfoCLIENT_INDEX: Open a window to more information about the client.
+<br>Example: moreinfo 1
 > 
 > ---
 
