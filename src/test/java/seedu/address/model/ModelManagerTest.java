@@ -34,7 +34,7 @@ import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
-import seedu.address.model.tut.exceptions.TutNoFoundException;
+import seedu.address.model.tut.exceptions.TutNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.StudentBuilder;
 
@@ -136,7 +136,7 @@ public class ModelManagerTest {
 
     @Test
     public void assignTutorialTest_fail() {
-        assertThrows(TutNoFoundException.class, () -> modelManager.assignStudent(ALICE, TUTORIAL_ID));
+        assertThrows(TutNotFoundException.class, () -> modelManager.assignStudent(ALICE, TUTORIAL_ID));
     }
 
     @Test

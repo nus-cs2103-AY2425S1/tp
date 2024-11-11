@@ -813,3 +813,7 @@ Note: Users are expected to use the command `listAsg` to find out the assignment
         * Save the file.
     2. Re-launch the application.<br>
        Expected: The application detects the corrupted data file and displays an error message in the terminal. It will then start with an empty data set.
+
+### Future Enhancements
+1. For future enhancements, we plan to make the student profile more responsive to commands, such that when the selected students have their data edited, the student profile will update as well. 
+However, for now, for the student profile to update, double-click on the student card.

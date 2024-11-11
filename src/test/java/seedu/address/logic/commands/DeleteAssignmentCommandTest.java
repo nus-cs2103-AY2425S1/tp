@@ -24,7 +24,6 @@ import seedu.address.model.tut.TutorialList;
  * Contains unit tests for {@code DeleteAssignmentCommand}.
  */
 public class DeleteAssignmentCommandTest {
-    //TODO: Add a new sample ArrayList
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
             getTypicalAssignmentList(), new TutorialList());
 

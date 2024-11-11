@@ -24,7 +24,7 @@ import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
-import seedu.address.model.tut.exceptions.TutNoFoundException;
+import seedu.address.model.tut.exceptions.TutNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -42,7 +42,6 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
                         AssignmentList assignmentList, TutorialList tutorialList) {
-        //TODO: Add sample tutorialList for the test cases (see getTypicalStudentsList())
         requireAllNonNull(addressBook, userPrefs, assignmentList, tutorialList);
 
         logger.fine("Initializing with address book: " + addressBook + ", user prefs " + userPrefs
@@ -210,7 +209,7 @@ public class ModelManager implements Model {
         requireNonNull(student);
         requireNonNull(tutorialId);
         if (!tutorials.hasTutorial(tutorialId)) {
-            throw new TutNoFoundException();
+            throw new TutNotFoundException();
         }
         tutorials.assignStudent(student, tutorialId);
     }
