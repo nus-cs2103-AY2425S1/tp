@@ -730,7 +730,52 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
 
+### Difficulty
+The development of **AcademyAssist** presented a moderate to high difficulty level to our team. The project required a 
+solid understanding of Java programming, particularly in object-oriented design. Even though our team has prior experience
+with Java, the complexity of the project demanded a deeper understanding of JavaFX, which was new to most of us. But with
+the experience gained from developing the individual project before this, we were able to quickly adapt to the team project
+development.
+
+### Challenges Faced
+The main challenges faced by our team during the development of **AcademyAssist** were:
+1. **Designing the product**: The team had to spend a significant amount of time designing the product, including deciding
+on the features to include, the architecture of the application, and the user interface design. This required a lot of
+discussion and collaboration among team members.
+2. **Data Validation**: Implementing robust validation for user inputs was essential to prevent errors and ensure that 
+the data entered into the system was accurate and consistent. This involved defining multiple constraints for different 
+fields, such as name, NRIC, phone numbers, and email formats.
+3. **Ensure OOP Principles**: The team had to ensure that the codebase followed object-oriented programming principles to
+maintain code quality and readability. This involved designing classes with clear responsibilities, encapsulating data, and
+implementing inheritance and polymorphism where necessary.
+4. **Testing**: Writing comprehensive unit tests and integration tests to validate the functionality of the application was
+a challenging task. The team had to ensure that the tests covered all possible scenarios and edge cases to catch any bugs
+or issues in the development process.
+5. **Time Management**: Managing the project timeline and ensuring that all tasks were completed on time was a significant
+challenge. The team had to prioritize tasks, allocate resources effectively, and coordinate efforts to meet the project
+deadlines.
+
+### Achievements from the Project
+Despite the challenges faced, the team was able to successfully develop **AcademyAssist** and deliver a functional product
+through effective collaboration, communication, and problem-solving. Some of the key achievements from the project include:
+1. **Functional Product**: The team was able to develop a fully functional tuition center management application that
+incorporated the features and requirements specified in the project brief.
+2. **Collaboration**: The team worked well together, leveraging each member's strengths and skills to contribute to the
+project's success. Regular meetings, discussions, and feedback sessions helped to keep the project on track and ensure that
+everyone was aligned on the goals and objectives.
+3. **Learning and Growth**: The project provided an opportunity for team members to develop a functional application from
+an existing codebase (AB3), enhancing their programming skills, problem-solving abilities, and teamwork. 
+
+
+### Conclusion
+Overall, the development of **AcademyAssist** was a challenging but rewarding experience for our team. The project allowed
+us to apply our Java programming skills in a real-world context, collaborate effectively with team members, and deliver a
+functional product that met the requirements of the project brief. We learned valuable through the project, and we are proud
+of the work we have accomplished together.
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancement**
 Team size: 5
 ### 1. Delete subject feature
