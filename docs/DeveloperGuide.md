@@ -645,7 +645,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 * 2c. User provides multiple instances of the same field for the patient.
 
-    * 2b1. MediBase3 informs user of the error.
+    * 2c1. MediBase3 informs user of the error.
 
       Use case resumes at step 2.
 
