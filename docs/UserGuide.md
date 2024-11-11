@@ -247,8 +247,6 @@ Lists the active [tags](#glossary) across *all* [contacts](#glossary) in the con
 * Lists active tags in alphabetical order.
 * Useful to keep track of which tags you have used in order to maintain consistency.
 
-<br></br>
-
 <div style="page-break-after: always;"></div>
 
 #### Locating contacts by name: `find`
@@ -568,6 +566,7 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 <br><br/>
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
