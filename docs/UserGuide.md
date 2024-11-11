@@ -82,7 +82,6 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 Feel free to use this command summary table and navigate to the features that interests you by clicking on the action words 😁
 
