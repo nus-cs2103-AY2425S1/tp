@@ -92,16 +92,16 @@ Adds a guest to the guest list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Names cannot be more than 100 characters long.
-* Names are **case-sensitive**. eg. 'John Doe' is different from 'john doe'
+* Names are **case-sensitive**, for increased flexibility. eg. 'John Doe' is different from 'john doe'.
 * Guests with the exact same name cannot be added to the guest list. Users are advised to add their guests' last names or other identifiers if needed.
 * Phone numbers must be **exactly** 8 digits.
 * Tags must be created before they can be assigned to a guest. Refer to [newtag](#creating-a-new-tag-newtag) on how to create a tag.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A guest can have any number of tags (including 0)
+A guest can have any number of tags (including 0).
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com t/broom's side`
+* `add n/John Doe p/98765432 e/johnd@example.com t/groom's side`
 * `add n/Betsy Crowe p/81234567 e/betsycrowe@example.com t/bride's side`
 * `add n/Zeon p/81234567 e/zeon@example.com`
 
@@ -128,7 +128,7 @@ Examples:
 
 Edits an existing guest in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
 * Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. 
 * The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
@@ -136,13 +136,11 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * Fields which are not provided will not be edited.
 * All optional fields must adhere to the restrictions specified in the `add` command.
 * If the input values are valid, existing values will be updated to the input values.
-* When editing tags, the existing tags of the guest will be removed i.e. adding of tags is not cumulative.
-* You can remove all the guest’s tags by typing `t/` without
-  specifying any tags after it.
+* Tags cannot be edited using this command. Use `tag` or `untag` to do so instead.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com`
-*  `edit 1 n/Alan Yeoh t/`
+*  `edit 1 n/Alan Yeoh`
 
 
 ### Creating a new tag: `newtag`
@@ -404,7 +402,7 @@ Command | Format, Examples
 **List** | `list`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g. `add n/John Doe p/91234567 e/johndoe@example.com t/groom's side`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **NewTag** | `newtag t/TAG…​` <br> e.g. `newtag bride's side`
 **DeleteTag** | `deletetag t/TAG…​` <br> `deletetag -force t/TAG…​` <br>e.g. `deletetag t/bride's side` <br>e.g. `deletetag -force t/bride's side`
 **RenameTag** | `renametag t/TAG1 t/TAG2` <br> e.g. `renametag t/friends t/colleagues`
