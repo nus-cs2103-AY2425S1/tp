@@ -135,12 +135,18 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 </div>
 
 
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("backup"")` API call as an example.
+![Interactions Inside the Logic Component for the `backup` Command](images/BackupSequenceDiagram.png)
+
+
+
+
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
-<img src="images/BackupSequenceDiagram.png" width="450" />
 
 The `Model` component,
 
