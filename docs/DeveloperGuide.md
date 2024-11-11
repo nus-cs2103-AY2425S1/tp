@@ -392,8 +392,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <a style="text-decoration:underline;">list contacts (UC06)</a>
-2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
+1. Talent Manager <a style="text-decoration:underline;">lists contacts (UC06)</a>
+2. Talent Manager <a style="text-decoration:underline;">deletes contact (UC05)</a>
 
 Use case ends.
 
@@ -402,8 +402,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <a style="text-decoration:underline;">find contact (UC07)</a>
-2. Talent Manager <a style="text-decoration:underline;">delete contact (UC05)</a>
+1. Talent Manager <a style="text-decoration:underline;">finds contact by name (UC07)</a>
+2. Talent Manager <a style="text-decoration:underline;">deletes contact (UC05)</a>
 
 Use case ends.
 
@@ -590,8 +590,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <a style="text-decoration:underline;">List Events (UC14)</a>
-2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC13)</a>
+1. Talent Manager <a style="text-decoration:underline;">lists events (UC14)</a>
+2. Talent Manager <a style="text-decoration:underline;">deletes event (UC13)</a>
 
 Use case ends.
 
@@ -599,8 +599,8 @@ Use case ends.
 
 **MSS**
 
-1. Talent Manager <a style="text-decoration:underline;">Find Event (UC15)</a>
-2. Talent Manager <a style="text-decoration:underline;">Delete Event (UC13)</a>
+1. Talent Manager <a style="text-decoration:underline;">finds event by name (UC15)</a>
+2. Talent Manager <a style="text-decoration:underline;">deletes event (UC13)</a>
 
 Use case ends.
 
