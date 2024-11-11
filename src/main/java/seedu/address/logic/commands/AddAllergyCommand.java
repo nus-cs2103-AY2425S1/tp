@@ -61,7 +61,7 @@ public class AddAllergyCommand extends Command {
         if (!person.getNric().equals(this.nric)) {
             throw new CommandException(PATIENT_DOES_NOT_EXIST);
         }
-
+        assert person.getNric().equals(this.nric);
         Set<Allergy> updatedAllergySet = getUpdatedAllergySet(person);
 
         // Create the edited person with updated allergies.
