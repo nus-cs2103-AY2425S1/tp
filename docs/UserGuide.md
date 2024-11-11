@@ -189,6 +189,15 @@ For more explanation on the format and design of each input field, refer to the 
 
 </box>
 
+<box type="info" seamless>
+
+**Info: Input data containing prefixes**
+- Should any of the fields contain reserved prefixes (e.g. `add ... d/For a/b testing` contains `a/` which is reserved), the message will be split into multiple fields.
+- To work around this, you can add a character in front of the reserved prefix (e.g. `add ... d/For 'a/b testing`).
+- This issue will be fixed in a later version using a special delimiter to handle such cases.
+
+</box>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/CS1101S`. John is a CS1101S student.
   ![result for adding John Doe](images/addJohnDoeResult.png)
@@ -558,7 +567,9 @@ to be 500 characters which should be enough for most users.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+3. **There is an unused space below the command history box**. 
+![unused space](images/UiUnusedSpace.png)<br>
+As shown in the screenshot above, marked by the red box. This will be fixed in the next version.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
