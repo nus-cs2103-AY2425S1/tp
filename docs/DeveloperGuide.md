@@ -353,11 +353,11 @@ Use case ends.
 **Extensions:**
 
 * **1a.** TAHub detects invalid input (e.g., invalid email or phone number).  
-  1a1. TAHub requests correction of the invalid input.  
-  Use case ends.
+  * 1a1. TAHub requests correction of the invalid input.
+    Use case ends.
 * **1b.** TAHub detects that the contact already exists  
-  1b1. TAHub ignores the entry and notifies the TA.  
-  Use case ends.
+  * 1b1. TAHub ignores the entry and notifies the TA.  
+    Use case ends.
 
 ---
 
@@ -376,8 +376,8 @@ Use case ends.
 **Extensions:**
 
 * **1a.** TA enters a number that is out of bounds or not a number.  
-  1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
-  Use case ends.
+  * 1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
+    Use case ends.
 
 ---
 
@@ -396,11 +396,11 @@ Use case ends.
 **Extensions:**
 
 * **1a.** TAHub detects invalid input for the grade  
-  1a1. TAHub requests correction of the invalid input.  
-  Use case ends.
+  * 1a1. TAHub requests correction of the invalid input.  
+    Use case ends.
 * **1b.** TA attempts to record a grade for a test that has already been recorded.  
-  1b1. TAHub overwrites the previous grade and notifies the TA.  
-  Use case ends.
+  * 1b1. TAHub overwrites the previous grade and notifies the TA.  
+    Use case ends.
 
 ---
 
@@ -419,8 +419,8 @@ Use case ends.
 **Extensions:**
 
 * **1a.** TA enters a number that is out of bounds or not a number.  
-  1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
-  Use case ends.
+  * 1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
+    Use case ends.
 
 ---
 
@@ -439,12 +439,12 @@ Use case ends.
 **Extensions:**
 
 * **1a.** TAHub detects invalid input for the date.  
-  1a1. TAHub requests correction of the invalid input.  
-  1a2. TA provides corrected input.  
-  Use case ends.
+  * 1a1. TAHub requests correction of the invalid input.  
+  * 1a2. TA provides corrected input.  
+    Use case ends.
 * **1b.** TA attempts to record attendance for a date where attendance has already been marked.  
-  1b1. TAHub overwrites the previous attendance and notifies the TA.  
-  Use case ends.
+  * 1b1. TAHub overwrites the previous attendance and notifies the TA.  
+    Use case ends.
 
 ---
 
