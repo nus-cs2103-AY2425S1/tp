@@ -527,7 +527,7 @@ Format:
     * `POLICY START DATE` can only start from 1900-01-01 and onwards.
     * `INSURANCE DUE DATE` must be in the format `yyyy-mm-dd`.
     * `INSURANCE DUE DATE` cannot be earlier than the `POLICY START DATE`.
-    * `INSURANCE DUE DATE` cannot be later than the `POLICY START DATE`.
+    * `INSURANCE DUE DATE` cannot be later than the `POLICY END DATE`.
     * `AMOUNT DUE` must be a positive number with up to 2 decimal places (`$` sign is not required. For example, /amt 200.00 or /amt 358.00 is the correct format)
 
 Example:
