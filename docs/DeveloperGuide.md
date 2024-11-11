@@ -252,12 +252,6 @@ The `StatusCommand` updates the status of an internship application to `PENDING`
 
 <puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
 
-Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
-`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
-
-<br></br>
-
-### Update the Status of an Internship Application
 The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`. 
 For clarity, some implementation details are omitted to avoid low-level specifics, focusing only on the high-level process of updating the internship application status.
 
