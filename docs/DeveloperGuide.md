@@ -1121,7 +1121,6 @@ testers are expected to do more *exploratory* testing.
    * **Test case:** `exit`
    * **Expected:** All ClinicConnect windows closes and the application exits.
 
-
 ### Saving Data
 
 1. Saving of data.
@@ -1156,7 +1155,6 @@ testers are expected to do more *exploratory* testing.
 4. No NRIC keyed in when deleting a patient.
    * **Test case:** `delete`<br>
    * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
-
 
 
 ### Adding a patient with all fields
@@ -1235,3 +1233,54 @@ testers are expected to do more *exploratory* testing.
 4. No NRIC keyed in when viewing detailed information on a patient.
    * **Test case:** `view`<br>
      **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
+
+
+### Booking an upcoming appointment: `bookappt`
+
+1. Booking an upcoming appointment for a patient successfully.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. Appointment date and time entered must be valid.
+    * **Test case:** `bookappt T0123456A dt|2024-12-29 13:00 h|Consult`
+    * **Expected:** Success message is generated and the valid appointment is added to the patient with NRIC T0123456A.
+
+2. Booking an appointment with an invalid NRIC.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
+    * **Test case:** `bookappt T01234567A dt|2024-12-29 13:00 h|Consult`
+    * **Expected:** Error message is generated to show invalid NRIC format.
+
+3. Booking an appointment with an invalid date and time.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The health service entered must be valid.
+    * **Test case:** `bookappt T0123456A dt|2024-12-32 13:00 h|Consult`
+    * **Expected:** Error message is generated to show invalid date and time format.
+
+4. Booking an appointment with an invalid health service.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The appointment date and time entered must be valid.
+    * **Test case:** `bookappt T0123456A dt|2024-12-29 13:00 h|Con`
+    * **Expected:** Error message is generated to show invalid health service.
+
+6. Booking an appointment with no parameters.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
+    * **Test case:** `bookappt `
+    * **Expected:** Error message is generated to show no valid parameters.
+
+
+### Deleting an appointment: `deleteappt`
+
+1. Deleting an appointment for a patient successfully.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The appointment to be deleted must be an existing appointment of the patient.
+    * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00`
+    * **Expected:** Success message is generated and the valid appointment is deleted for the patient with NRIC T0123456A.
+
+2. Deleting an appointment with an invalid NRIC.
+    * **Prerequisite:** The appointment to be deleted must be an existing appointment of the patient.
+    * **Test case:** `deleteappt T01234567A dt|2024-12-29 13:00 h|Consult`
+    * **Expected:** Error message is generated to show invalid NRIC format.
+
+3. Deleting an appointment with an invalid date and time.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
+    * **Test case:** `deleteappt T0123456A dt|2024-12-32 13:00`
+    * **Expected:** Error message is generated to show invalid date and time format.
+
+4. Deleting an appointment with an invalid prefix.
+    * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
+    * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00 h|consult`
+    * **Expected:** Error message is generated to show invalid prefix entered.
