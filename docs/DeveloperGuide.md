@@ -274,7 +274,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 | Tutor | Generate monthly or weekly reports of my hours worked/earnings           | Track my productivity and workload                                                           | 3        |
 | Tutor | Know what I need to bring/prepare for all my lessons in the upcoming day | Adequately prepare for each lesson <br/>and ensure my students <br/>have necessary materials | 3        |
 | Tutor | Tag various students under the same lesson slot for group lessons        | Cater to different lesson types <br/>and optimize time                                       | 3        |
-| Tutor | Manage multiple locations for students                                   | Adjust if students have multiple locations <br/>for tuition                                  | 3        |
+| Tutor | Manage multiple locations for students                                   | Adjust if students have multiple locations for tuition                                  | 3        |
 
 ### Use cases
 

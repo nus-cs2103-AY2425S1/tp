@@ -4,7 +4,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import tutorease.address.commons.core.LogsCenter;
-import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -32,6 +31,7 @@ public class NumbersUtil {
         }
         return parsedValue;
     }
+
     /**
      * Parses a string into a double.
      *
