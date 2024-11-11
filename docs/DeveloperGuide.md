@@ -671,11 +671,11 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `add n/John Doe p/1234567 e/HAI`
       Expected: An error message is shown informing the user about the correct data format for EMAIL.
 
-5. Adding a person with duplicate phone or email.
+5. Adding a person with duplicate phone.
    1. Prerequisites: There is at least one person in the address book.
    2. Test case: 
       1. Step 1: `add n/John Doe p/12345678 e/johnd@example.com` <br>
-      2. Step 2: `add n/Alex Yeoh p/12345678 e/johnd@example.com` <br>
+      2. Step 2: `add n/Alex Yeoh p/12345678 e/heyhey@example.com` <br>
          Expected: An error message appears informing the user that there is already someone with that phone number in the address book.
 
 ### Undo a command
