@@ -41,8 +41,6 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
-<div style="page-break-after: always;"></div>
-
 **Main components of the architecture**
 
 **`Main`** (consisting of
@@ -76,6 +74,8 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
   API `interface` mentioned in the previous point.
+
+<div style="page-break-after: always;"></div>
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
@@ -124,10 +124,10 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
+<div style="page-break-after: always;"></div>
+
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
 call as an example.
-
-<div style="page-break-after: always;"></div>
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -145,9 +145,9 @@ How the `Logic` component works:
    several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
 <div style="page-break-after: always;"></div>
+
+Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
@@ -748,6 +748,8 @@ Team size : 5
 4. **Set multiple appointments** : ClinicBuddy only supports one appointment per patient, which is not suitable for patients that have multiple appointments for their different conditions. We plan to change the Appointment class such that it can accommodate multiple appointments: `update 1 apt/10/10/2024 10:30 10/12/2024 10:30` sets two appointments at 10 October 2024 10:30 and 10 December 2024 10:30 respectively.
 
 5. **Allow multiple appointments in same timings** : ClinicBuddy disallows clash in appointment timings, which is not suitable for clinics with multiple doctors present. We plan to let users set the number of doctors in the clinic and allow up to the number of doctors present for appointments to overlap at any given time: `doctors 2` sets the number of doctors available to `2`and there can only be up to `2` appointments overlap at any given time.
+
+<div style="page-break-after: always;"></div>
 
 6. **Proper NRIC Checksum** : ClinicBuddy validates an NRIC by checking if it follows the basic format as shown in the User Guide. We plan to implement the [NRIC checksum validation algorithm](https://userapps.support.sap.com/sap/support/knowledge/en/2572734) to ensure that the NRIC provided is properly verified.
 
