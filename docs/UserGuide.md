@@ -78,7 +78,7 @@ If you are an existing user looking for a specific feature, you can jump to the 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
 ## 2. Annotations box
-The following are annotations throughout this user guide that provide additional information to help you understand the NovaCare features better.
+The following are annotations throughout this user guide that provide additional information to help you understand NovaCare features better.
 
 <box type="info" seamless>
 
@@ -92,7 +92,7 @@ The following are annotations throughout this user guide that provide additional
 
 <box type="warning" seamless>
 
-**Warning:** Warns you about potential errors that you may face when using the NovaCare.
+**Warning:** Warns you about potential errors that you may face when using NovaCare.
 </box>
 
 [⬆️ Back to Table of Contents](#table-of-contents)
@@ -116,7 +116,7 @@ Upon successful installation, you should see something like this:<br></br>
 ![Mac Java](images/mac-java.png)
 
 ### Step 2. Download NovaCare [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
-1. Download the NovaCare [JAR](#10-glossary) file `NovaCareApp.jar` from the link provided by scrolling down to Assets as shown below.<br></br>
+1. Download NovaCare [JAR](#10-glossary) file `NovaCareApp.jar` from the link provided by scrolling down to Assets as shown below.<br></br>
    ![Assets](images/assets.png)<br></br>
 2. Click on the `NovaCareApp.jar` file to download it.
 3. Upon downloading save the app to your preferred location. (e.g. `Desktop`)
@@ -711,14 +711,14 @@ Example:
 
 #### 6.4.2 Clearing all entries: `clear`
 
-Clears all patient and tasks entry from NovaCare.
+Clears all patient and tasks entry in NovaCare.
 
 :pencil: Format: `clear`
 
 <box type="warning" seamless>
 
 **Warning:**
-Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.
+Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in NovaCare.
 **This action is irreversible!**
 </box>
 
