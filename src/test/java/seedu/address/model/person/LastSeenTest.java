@@ -15,8 +15,8 @@ public class LastSeenTest {
 
     @Test
     public void constructor_invalidLastSeen_throwsIllegalArgumentException() {
-        String invalidLastSeen = "2024-01-01";
-        assertThrows(IllegalArgumentException.class, () -> new LastSeen(invalidLastSeen));
+        String invalidFormat = "2024-01-01";
+        assertThrows(IllegalArgumentException.class, () -> new LastSeen(invalidFormat));
     }
 
     @Test
@@ -26,6 +26,7 @@ public class LastSeenTest {
         // invalid dates
         assertFalse(LastSeen.isValidDate("")); // empty string
         assertFalse(LastSeen.isValidDate(" ")); // spaces only
+        assertFalse(LastSeen.isValidDate("30-02-2024"));
         // valid dates
         assertTrue(LastSeen.isValidDate("01-02-2024"));
     }
