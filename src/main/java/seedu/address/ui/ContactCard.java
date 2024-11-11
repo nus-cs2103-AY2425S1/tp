@@ -74,7 +74,8 @@ public class ContactCard extends UiPart<Region> {
             nickname.getChildren().add(nicknameLabel);
         }
 
-        // event listener (code from somewhere)
+        // @@author cth06-Github-reused
+        // Reused from ChatGPT output with minor modifications, see developer guide
         final Label nicknameConfirm = nicknameLabel; // in order to be streamed in the event listener
         cardPane.widthProperty().addListener(new ChangeListener<Number>() {
             private Label[] labels = new Label[]{name, nicknameConfirm, email};
@@ -91,6 +92,7 @@ public class ContactCard extends UiPart<Region> {
                 });
             }
         });
+        // @@author
     }
 
     // @@author wuzengfu

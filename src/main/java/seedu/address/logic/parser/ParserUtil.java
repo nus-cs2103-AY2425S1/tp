@@ -163,13 +163,13 @@ public class ParserUtil {
     }
 
     /**
-     * Used by EditCommandParser and DeleteCommandParser to check if the number entered is a valid integer
-     * @param args the preamble (edit 1 ...)
-     * @return true if it is non-zero to MAX_INT, otherwise false (edit LARGE_NUMBER or delete -1)
+     * Checks if the number entered is a valid integer.
+     * @param args the preamble
+     * @return true if it is an integer containing 32 bits (i.e. -2147483648 to 2147483647), otherwise false
      */
     public static boolean isInteger(String args) {
         try {
-            Integer.parseInt(args); // can pass negative integers as well
+            Integer.parseInt(args); // can pass zero and negative integers as well
             return true;
         } catch (Exception exp) {
             return false;

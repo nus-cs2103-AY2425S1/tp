@@ -67,13 +67,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Contact> getFilteredContactList() {
-        return model.getFilteredContactList();
+    public ObservableList<Contact> getAllContactList() {
+        return model.getAllContactList();
     }
 
     @Override
-    public ObservableList<Contact> getAllContactList() {
-        return model.getAllContactList();
+    public ObservableList<Contact> getFilteredContactList() {
+        return model.getFilteredContactList();
     }
 
     @Override

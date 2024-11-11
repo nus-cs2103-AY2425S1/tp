@@ -30,11 +30,11 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns an unmodifiable view of the entire contact list in full*/
+    ObservableList<Contact> getAllContactList();
+
     /** Returns an unmodifiable view of the filtered list of contacts */
     ObservableList<Contact> getFilteredContactList();
-
-    /** Returns an unmodifiable view of the contact list in full*/
-    ObservableList<Contact> getAllContactList();
 
     /**
      * Returns the user prefs' address book file path.
