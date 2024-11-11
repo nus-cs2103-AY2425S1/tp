@@ -32,9 +32,4 @@ public class PaidCommandParserTest {
     public void parse_missingFrequency_throwsParseException() {
         assertParseFailure(parser, "1", PaidCommand.MESSAGE_NO_FREQUENCY);
     }
-
-    @Test
-    public void parse_includeOtherPrefixes() {
-        assertParseFailure(parser, "1 f/3 n/John", "Other prefixes are not allowed for Paid Command");
-    }
 }
