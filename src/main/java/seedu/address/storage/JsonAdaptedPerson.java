@@ -142,7 +142,7 @@ public class JsonAdaptedPerson {
         String phone = this.getPhone();
         String email = this.getEmail();
         String address = this.getAddress();
-        String hours = this.getHours().isEmpty() ? "0" : this.getHours();
+        String hours = this.getHours() == null || this.getHours().isEmpty() ? "0" : this.getHours();
         String role = this.getRole();
 
         final List<Subject> personSubjects = new ArrayList<>();

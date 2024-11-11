@@ -14,7 +14,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 
 /**
@@ -185,6 +187,22 @@ public class ModelManager implements Model {
     @Override
     public void commitAddressBook() {
         versionedAddressBook.commit();
+    }
+
+    /**
+     * Returns true if the model has person with the same phone number as the given phone.
+     */
+    public boolean hasDuplicatePhone(Phone phone) {
+        return getFilteredPersonList().stream()
+                .anyMatch(person -> person.getPhone().equals(phone));
+    }
+
+    /**
+     * Returns true if the model has person with the same email as the given email.
+     */
+    public boolean hasDuplicateEmail(Email email) {
+        return getFilteredPersonList().stream()
+                .anyMatch(person -> person.getEmail().equals(email));
     }
     //@@author
 
