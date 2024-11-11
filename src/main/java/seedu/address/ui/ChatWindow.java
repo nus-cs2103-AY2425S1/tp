@@ -524,7 +524,8 @@ public class ChatWindow {
      * @return True if the message indicates a request for more information; otherwise, false.
      */
     private boolean isMoreInfoMessage(String message) {
-        return Pattern.compile("\\b(m+o+r+e+\\s*i+n+f+o+|i+n+f+o+|v+i+e+w+\\s*d+e+t+a+i+l+s*)\\b").matcher(message).find();
+        return Pattern.compile("\\b(m+o+r+e+\\s*i+n+f+o+|i+n+f+o+|v+i+e+w+\\s*d+e+t+a+i+l+s*)\\b")
+                .matcher(message).find();
     }
 
     /**
