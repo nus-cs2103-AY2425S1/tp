@@ -174,11 +174,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ### Current Implementation
 
-#### Add Grade
-
+The _Sequence Diagram_ below shows how the components interact with each other for the general command scenario, such as `addGrade`.
 <puml src="diagrams/addGradeCommand.puml" alt="AddGrade" />
-
-#### Mark
 
 ### \[Proposed\] Undo/redo feature
 
