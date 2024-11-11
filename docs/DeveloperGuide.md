@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ContactsForGood (CFG)` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ContactsForGood (CFG)` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Search for person(s)**
 
@@ -410,6 +410,160 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
+
+
+**Use case: UC05 - Create a group**
+
+**MSS**
+
+1. User requests to list persons
+2. CFG shows a list of relevant persons
+3. User requests to create a group, with specified persons in the list as members
+4. CFG successfully creates the group
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+
+  Use case resumes at step 2.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. A group with the same name already exists.
+  * 3a1. CFG shows an error message telling the user that the group already exists.
+
+    Use case ends.
+
+
+**Use case: UC06 - List groups**
+
+**MSS**
+
+1. User requests to see all existing groups
+2. CFG shows a list of all existing groups
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no existing groups.
+  * 2a1. CFG shows an empty list.
+
+    Use case ends.
+
+
+**Use case: UC07 - View members of a group**
+
+**MSS**
+
+1. User requests to <ins>see a list of groups (UC06)</ins>
+2. User requests to see members of a group
+3. CFG lists all the members of the group
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User may not require a list of groups.
+  
+    Use case resumes at step 2.
+
+* 2a. The group with specified name does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+* 3b. The group currently has no members.
+  * 3b1. CFG displays an empty list.
+
+    Use case ends.
+
+
+**Use case: UC08 - Add members to a group**
+
+**MSS**
+1. User requests to list persons
+2. CFG shows a list of relevant persons
+3. User requests to add specified persons in the list to a group
+4. CFG adds the persons to the group
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+
+  Use case resumes at step 2.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. One or more of the specified indices is invalid.
+  * 3a1. CFG shows an error message.
+
+    Use case ends.
+* 3b. The group does not exist.
+  * 3b1. CFG shows an error message.
+
+    Use case ends.
+
+**Use case: UC09 - Remove members from a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>
+2. User requests to <ins>view members of a group (UC07)</ins>
+3. User requests to remove one or more members from a group
+4. CFG removes the specified members from the group
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User may not require a list of groups.
+    
+    Use case resumes at step 2.
+
+* 2a. User may not require viewing members in a group.
+
+    Use case resumes at step 3.
+
+* 3a. One or more of the specified indices is invalid.
+  * 3a1. CFG shows an error message.
+
+    Use case ends.
+   
+* 3b. The group does not exist.
+  * 3b1. CFG shows an error message.
+
+    Use case ends.
+* 3c. One or more of the specified members is not currently in the group.
+  * 3c1. CFG shows an error message.
+    
+    Use case ends.
+
+
+**Use case: UC10 - Delete a group**
+
+**MSS**
+1. User requests to <ins>see a list of groups (UC06)</ins>
+2. User requests to delete a group
+3. CFG deletes the group
+
+    Use case ends.
+
+**Extensions**
+* 1a. User may not require a list of groups.
+
+    Use case resumes at step 2.
+* 2a. The group does not exist.
+  * 2a1. CFG shows an error message.
+
+    Use case ends.
+
 
 
 
