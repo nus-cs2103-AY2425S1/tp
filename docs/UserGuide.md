@@ -139,16 +139,19 @@ Find or create a folder on your computer where you want to store the AgentAssist
     - **macOS**: press `Command + Space`, type `Terminal`, and press `Enter`.
     - **Linux**: open your **Terminal** application from the system menu.
 
+
 2. **Navigate your terminal to the folder where you saved the AgentAssist application:**
     - In the terminal, type: `cd <folder path>` and press **Enter**. (Replace <folder path> with the actual location of AgentAssist.)
     - For example, if AgentAssist is stored in your **Downloads** folder:
        - **Windows**: `cd C:\Users\<YourUsername>\Downloads`
        - **macOS/Linux**: `cd /Users/<YourUsername>/Downloads`
 
+
 3. **Run the application:**
     - In the terminal, type: `java -jar agentassist.jar` and press **Enter**.
     - After a few seconds, a window similar to the below image should appear. This is the AgentAssist interface, with sample contact information already loaded for you to explore.<br>
       <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
+
 
 4. 🎉 **Congratulations! AgentAssist is now up and running!**  
    You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
