@@ -568,6 +568,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1e1. App shows an error message to tell the user that the given person is not assigned to the given event.  
       Use case ends.
 
+**Use Case: UC12 - Assign Event to Person**
+
+**MSS:**
+1. User requests to assign an event to a person by providing an event name or an event index, and a person name or a person index.
+2. App assigns the specified event to the specified person.  
+   Use case ends.
+
+**Extensions:**
+* 1a. The given event name does not match any of the existing events.
+    * 1a1. App shows an error message to tell the user that the given event name does not exist.  
+      Use case ends.
+* 1b. The given event index does not exist, i.e., there are only 3 events in the displayed list, but the user inputs an index of 4.
+    * 1b1. App shows an error message to tell the user that the given event index is invalid.  
+      Use case ends.
+* 1c. The given person name does not match any of the existing persons.
+    * 1c1. App shows an error message to tell the user that the given person name does not exist.  
+      Use case ends.
+* 1d. The given person index does not exist, i.e., there are only 3 persons in the displayed list, but the user inputs an index of 4.
+    * 1d1. App shows an error message to tell the user that the given person index is invalid.  
+      Use case ends.
+* 1e. The given person is already assigned to the given event.
+    * 1e1. App shows an error message to tell the user that the given person is already assigned to the given event.  
+      Use case ends.
+
+**Use Case: UC13 - Export Contacts**
+
+**MSS:**
+1. User requests to export contacts.
+2. App retrieves the list of contacts.
+3. App prepares the export file.
+4. App saves the contact information to the file.
+5. App displays a success message confirming the export.  
+   Use case ends.
+
+**Extensions:**
+* 1a. An error occurs while preparing or saving the file.
+    * 1a1. App displays an error message indicating the export failed.  
+      Use case ends.
+
+**Use Case: UC14 - Import Contacts from CSV**
+
+**MSS:**
+1. User requests to import contacts by providing a file name.
+2. App checks if the specified file exists.
+3. App checks if the file format is correct.
+4. App reads the contacts from the file.
+5. App adds the contacts to the address book.
+6. App displays a success message confirming the import of contacts.  
+   Use case ends.
+
+**Extensions:**
+* 2a. The specified file does not exist.
+    * 2a1. App displays an error message indicating that the file does not exist.  
+      Use case ends.
+* 3a. The file format is incorrect (e.g., missing or incorrect headers, wrong file extension).
+    * 3a1. App displays an error message indicating that the file format is incorrect.  
+      Use case ends.
+* 4a. An error occurs while reading the file.
+    * 4a1. App displays an error message indicating there was an issue reading the file.  
+      Use case ends.
+
 ---
 
 ### Non-Functional Requirements
@@ -788,6 +849,88 @@ testers are expected to do more *exploratory* testing.
 
    6. Test case: `unassign_event p/1 ev/999999`  
      Expected: No person is unassigned from any event. Error details (Invalid Event Index) shown in the status message.
+
+### Assigning an Event to a Person
+
+1. Assigning an existing event to an existing person
+
+    1. **Prerequisites**: Ensure that the first person in the contact list is named `Alice` and the first event in the event list is named `Meeting`. Ensure that `Alice` is not already assigned to `Meeting` before each test case. More than 1 person and event should be present.
+
+    2. **Test case**: `assign_event p/1 ev/1`  
+       **Expected**: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+    3. **Test case**: `assign_event p/1 ev/meeting`  
+       **Expected**: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+    4. **Test case**: `assign_event p/alice ev/1`  
+       **Expected**: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+    5. **Test case**: `assign_event p/alice ev/meeting`  
+       **Expected**: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+    6. **Test case**: `assign_event p/2 ev/1`  
+       **Expected**: The person at index 2 is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+2. Person or Event does not exist
+
+    1. **Prerequisites**: Ensure that person `Bob` and event `Workshop` do not exist in the app. Ensure that person `Alice` and event `Meeting` exist in the app.
+
+    2. **Test case**: `assign_event p/bob ev/meeting`  
+       **Expected**: No person is assigned to `Meeting`. Error details (Person does not exist) shown in the status message.
+
+    3. **Test case**: `assign_event p/alice ev/workshop`  
+       **Expected**: No person is assigned to any event. Error details (Event does not exist) shown in the status message.
+
+    4. **Test case**: `assign_event p/0 ev/1`  
+       **Expected**: No person is assigned to the first event. Error details (Invalid Command Format) shown in the status message.
+
+    5. **Test case**: `assign_event p/1 ev/0`  
+       **Expected**: No person is assigned to any event. Error details (Invalid Command Format) shown in the status message.
+
+    6. **Test case**: `assign_event p/1 ev/999999`  
+       **Expected**: No person is assigned to any event. Error details (Invalid Event Index) shown in the status message.
+
+3. Person already assigned to the Event
+
+    1. **Prerequisites**: Ensure that `Alice` is already assigned to `Meeting`.
+
+    2. **Test case**: `assign_event p/1 ev/1`  
+       **Expected**: No new assignment is made. Error details (Person already assigned to Event) shown in the status message.
+
+    3. **Test case**: `assign_event p/alice ev/meeting`  
+       **Expected**: No new assignment is made. Error details (Person already assigned to Event) shown in the status message.
+
+### Exporting Contacts to CSV
+
+1. Exporting when the export file does not exist
+
+    1. **Prerequisites**: Ensure the `data` directory exists. Ensure that `ExportedContacts.csv` does not exist in the `data` directory before each test case.
+
+    2. **Test case**: `export`
+        - **Expected**: A success message confirms that contacts have been exported. Verify that `ExportedContacts.csv` now exists in the `data` directory.
+
+### Importing Contacts from CSV
+
+1. Importing from an existing, correctly formatted file
+
+    1. **Prerequisites**: Ensure the `data` directory contains a file named `contacts.csv` with correctly formatted contact information (headers: `Name,Phone Number,Email Address,Address,Tags`). Ensure that some of the contacts in `contacts.csv` are not already in the address book.
+
+    2. **Test case**: `import contacts.csv`
+        - **Expected**: A success message confirms that contacts from `contacts.csv` have been imported. Verify that the new contacts are now added to the address book, and existing contacts remain unchanged.
+
+2. Importing from a non-existent file
+
+    1. **Prerequisites**: Ensure that the `data` directory exists but does not contain a file named `nonexistent.csv`.
+
+    2. **Test case**: `import nonexistent.csv`
+        - **Expected**: No contacts are imported. An error message displays: "The specified file does not exist."
+
+3. Importing from a file with an incorrect format
+
+    1. **Prerequisites**: Ensure the `data` directory contains a file named `incorrect.csv` with improperly formatted content (e.g., missing headers or incorrect number of columns).
+
+    2. **Test case**: `import incorrect.csv`
+        - **Expected**: No contacts are imported. An error message displays: "The format of the specified file is incorrect."
 
 ### Saving data
 
