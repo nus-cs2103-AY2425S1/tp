@@ -3,8 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents the amount of fees that a student has paid.
+ * Represents the amount of fees that a student has paid/has to pay.
  * Different from payment class as this represents the action of student making the payment
+ * or the action fo recording new fees for the student
  * Guarantees: immutable;
  */
 public class Fees {
@@ -16,7 +17,7 @@ public class Fees {
     /**
      * Constructs an {@code Fees}.
      *
-     * @param fees String for payment status
+     * @param fees String that represents a positive integer amount
      */
     public Fees(String fees) {
         requireNonNull(fees);

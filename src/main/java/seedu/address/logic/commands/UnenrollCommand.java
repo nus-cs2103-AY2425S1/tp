@@ -39,7 +39,7 @@ public class UnenrollCommand extends Command {
     private final String subject;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a unenroll command object
      */
     public UnenrollCommand(Index index, String subject) {
         requireAllNonNull(index, subject);

@@ -88,7 +88,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
     }
 
     /**
-     * Replaces the list {@code internalList} with Participation objects from a new list{@code replacement}.
+     * Replaces this object with a new UniqueParticipationList object
      *
      * @param replacement new UniqueParticipationList
      */
