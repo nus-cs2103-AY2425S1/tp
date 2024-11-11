@@ -52,7 +52,7 @@ public class FindLessonCommand extends LessonCommand {
             return new CommandResult(Messages.MESSAGE_NO_LESSONS_FOUND);
         }
 
-        assert !model.filteredLessonListIsEmpty();
+        assert !model.filteredLessonListIsEmpty() : "filteredLessonList should not be empty";
         // Log the number of lessons found at INFO level
         logger.info("Found " + model.getFilteredLessonList().size() + " lessons.");
 
