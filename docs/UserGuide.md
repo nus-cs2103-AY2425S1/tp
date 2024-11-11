@@ -144,10 +144,10 @@ Examples:
 
 **Note:**<br>
 
-* In order to keep your address book organised, `NAME` has to be **unique**
-* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear
+* In order to keep your address book organised, `NAME` has to be **unique**.
+* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear.
 * The default field for `[r/ROLE]` is client if left empty.
-* `Address` needs to have the format: `[Address line], S[6-digit postal code]`
+* `Address` needs to have the format: `[Address line], S[6-digit postal code]`.
 
 </box>
 
