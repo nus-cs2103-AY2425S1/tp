@@ -146,8 +146,11 @@ Adds a student to the address book.
 **Example:**
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`
 
-**Output:**
-![addResult.jpeg](images/addResult.jpeg)
+**Before (using an empty UGTeach):**
+![addBefore.png](images/addBefore.png)
+
+**After:**
+![addAfter.png](images/addAfter.png)
 
 <box type="important">
 
@@ -199,8 +202,11 @@ Edits an existing student in the address book.
 
 * `edit 2 paid/1200.00 owed/0` edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
 
-**Output:**
-![editResult.png](images/editResult.png)
+**Before:**
+![editBefore.png](images/editBefore.png)
+
+**After:**
+![editAfter.png](images/editAfter.png)
 
 <box type="important" header="##### Constraints">
 
@@ -294,8 +300,11 @@ Updates the amount of tuition fee paid by the specified student after a lesson. 
 **Example:**
 * `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
   
-**Output:**
-![payResult.png](images/payResult.png)
+**Before:**
+![payBefore.png](images/payBefore.png)
+
+**After:**
+![payAfter.png](images/payAfter.png)
 
 <box type="important" header="##### Constraints">
 
@@ -322,8 +331,11 @@ Updates the amount of tuition fee owed by a specified student after a lesson. Yo
 **Example:** 
 * `owe 1 hr/1.5` updates the tuition fee owed by the 1st student in the list.
 
-**Output:**
-![oweResult.png](images/oweResult.png)
+**Before:**
+![oweBefore.png](images/oweBefore.png)
+
+**After:**
+![oweAfter.png](images/oweAfter.png)
 
 <box type="important" header="##### Constraints">
 
@@ -350,8 +362,11 @@ Updates the amount of tuition fee paid and the amount of tuition fee owed by the
 **Example:**
 * `settle 1 amount/50.00`
 
-**Output:**
-![settleResult.png](images/settleResult.png)
+**Before:**
+![settleBefore.png](images/settleBefore.png)
+
+**After:**
+![settleAfter.png](images/settleAfter.png)
 
 <box type="important" header="##### Constraints">
 
