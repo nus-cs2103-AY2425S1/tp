@@ -427,6 +427,10 @@ better to keep it, you can input `redo` after undo the change to restore it back
 * Taking the same example from the undo session:
   ![result for 'redo'](images/redoing.png)
 
+<box type="warning" seamless>
+The undo and redo functions do not persist between sessions. Any changes you undo or redo will only be remembered during the current session. Once you close the application or end the session, the history of your actions (undo and redo steps) is lost and cannot be accessed in future sessions.
+</box>
+
 ### Exiting the program: `exit`
 
 Exits the program.
