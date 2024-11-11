@@ -33,7 +33,6 @@ StudentManagerPro (SMP) is a **desktop app for managing students, optimized for 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/1A s/M r/1` : Adds a student named `John Doe` to the student list.
 
    * `delete 3` : Deletes the 3rd student contact shown in the current list.
-   * `delete 3` : Deletes the 3rd student contact shown in the current list.
 
    * `clear` : Deletes all student contacts.
 
