@@ -42,18 +42,18 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
-ModelManager -down-> ActiveTags
+ModelManager -down-> "1" ActiveTags
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *-down-> "1" UniquePersonList
 AddressBook *-down-> "1" UniqueWeddingList
 UniquePersonList ---> "~* all" Person
 UniqueWeddingList ---> "~* all" Wedding
-Person *-right-> PersonId
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *-right-> "1" PersonId
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 Person *--> "*" Tag
 
 ActiveTags ----> "~* active" Tag
