@@ -135,6 +135,8 @@ Adds a patient to the app.
 
 Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
+* **NAME** only supports alphanumeric characters and spaces as it is only meant for identifying patients.
+
 * **IDENTITY_NUMBER** has to be a **_valid NRIC_** (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g. S1234567D).";))
 
 * **PHONE_NUMBER** must be a valid Singapore mobile number. Our application only accepts mobile numbers, which should be 8 digits long and start with either '8' or '9' (e.g., 81234567 or 91234567).
@@ -153,6 +155,7 @@ Creates a new log entry for a specific patient. This command is typically used t
 * **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
 * **DATE** should be in the format `DD MMM YYYY`.
 * **LOG_ENTRY** is a description of the session with the patient.
+
   Examples:
 * `addlog i/S1234567D d/20 May 2024 l/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
 
@@ -161,6 +164,7 @@ Creates a new log entry for a specific patient. This command is typically used t
 1) For logs that requires input text to include some of our flags like `i/`, `d/` and `l/` please use `addentry` command instead.
 2) `\n` characters will be interpreted as new lines in the `l/LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
 3) Log entries that contains purely `\n` characters will be treated as a non-text entry which will disallow users from saving it as a log.
+4) Adding an older log is allowed, considering a user may want to move their logs from a physical notebook to the application.
   <br>
   <br>
 
@@ -267,8 +271,7 @@ Examples:
 
 ### Canceling a command : `cancel`
 
-Cancels the command that is currently being executed. This command is used to cancel the deletion of a patient and the
-clearing of MindMap.
+Cancels the command that is currently being executed. This command is used to cancel the action for `add`, `edit`, `delete`, and `clear`.
 
 Examples:
 * `delete i/S1234567D` followed by `cancel` cancels the deletion of the patient with NRIC S1234567D in MindMap.
@@ -457,4 +460,7 @@ This data is not to be used for any purposes beyond application testing. Unautho
 
 **Search by Sub-Strings**  
 Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
+
+**Force execution of commands that require confirmation**  
+To bypass confirmation for commands like `add`, `edit`, `delete` and `clear`, we plan to add a flag that allows users to force the execution of these commands.
 
