@@ -554,6 +554,8 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
+2. To avoid performance degradation, for now it is highly recommended that at most 300 `Guest`s and at most 300 `Vendor`s are tracked in the guest list and vendor list respectively at any point of time.
+
 [_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
