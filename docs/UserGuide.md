@@ -21,6 +21,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
   <page-nav-print />
 </div>
 
+<br>
 <div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -43,7 +44,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
 ![Ui](images/Ui.png)
 
-5. **Try Out Some Commands!** : Type the command in the command box and press Enter to see it in action!
+5. **Try Out Some Commands** : Type the command in the command box and press Enter to see it in action!
    Here are a few examples:
     * `help` : Opens the help window.
 
@@ -61,6 +62,7 @@ If you can type fast, GamerBook can get your contact management tasks done faste
     * `exit` : Exits the app.
 
 Refer to the [Features](#features) below for more details.
+<br>
 <div style="page-break-after: always;"></div>
 
 -------------------------------------------------
@@ -89,26 +91,18 @@ Each suggestion includes the command name, command format and any required detai
 
 <box type="tip" seamless>
 
-To scroll through the suggestions:
+**To scroll through the suggestions**:
 
 * Press `shift + up` or `shift + down` and the **current selection** will be highlighted in **blue**.  
   _In the image above, the **current selection** would be `editgame`._
 
-</box>
-
-<box type="tip" seamless>
-
-Quickly complete your commands!
+**To quickly complete your commands**:
 
 * If your **current selection** is correct press `tab` to autocomplete it within the command box.
 
-</box>
+**To look for a quick reference**:
 
-<box type="tip" seamless>
-
-Need a quick reference?
-
-* The PopUp stays open as you finish typing your command, so you can check it for syntax or details if you need them.
+* The PopUp stays open as you finish typing your command, so you can check it for syntax or details of the command you want to use.
 
 </box>
 
@@ -119,6 +113,76 @@ Need a quick reference?
 * Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it!
 
 * The PopUp will adjust its position to stay fully visible, even if your app window is partially off-screen.
+
+</box>
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Important Notes about Command Formats
+
+<box type="info" seamless>
+
+* **Commands Are Case-Sensitive and All Lowercase**  
+  Make sure to type commands exactly as shown.  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
+
+
+* **Copying Commands from PDF**  
+  If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+  as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </box>
+
+### Understanding Commands Format
+<box type="info" seamless>
+
+* **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
+  e.g. `add n/NAME` means you would type something like `add n/John Doe`.
+
+
+* **Items in square brackets are optional**.  
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply `n/John Doe`.
+
+
+* **Items with `…`​ after them can be used multiple times.**  
+  e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
+
+
+* **Flexible Parameter Order**  
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+
+* **Ignored Extra Parameters** for commands that do not take in parameters (such as `help`, `list`, `exit`
+  and `clear`)  
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  <br>
+  </box>
+
+### Understanding Parameters Format
+<box type="info" seamless>
+
+* `NAME` **only accepts alphanumeric characters and spaces**.  
+  Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
+
+
+* `INDEX` **must be a must be a positive integer**  
+  If it’s not, you’ll see an invalid command format error.
+
+
+* `NAME` **is case-sensitive**.  
+  Although duplicate contact names are not allowed, adding two separate contacts `Bobby Ang` and `bobby ang` would be
+  allowed.
+
+
+* `TIME-TIME` **must be within the same day**.  
+  Use the format `HHmm-HHmm` for time ranges within the same day.  
+  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
+
+  Currently users can work around with this issue by breaking the overnight range down into 2 separate ranges.     
+  e.g. `2300-0100` can be broken down into `2300-2359` and `0000-0100` and be accepted.
+
+* `TIME-TIME`**cannot refer to a single point in time**
+  The start and end times must be different (e.g. `1200-1200` is invalid).
 
 </box>
 
@@ -144,7 +208,7 @@ Need a quick reference?
 | [**FavGame**](#favouriting-a-game-favgame)               | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                        |
 | [**UnFavGame**](#un-favouriting-a-game-unfavgame)        | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                                    |
 | [**Find**](#locating-persons-by-name-find)               | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                                    |
-| [**FindGame**](#locating-persons-by-game-name-findgame)  | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find Overwatch League`                                                                                                                                                          |
+| [**FindGame**](#locating-persons-by-game-name-findgame)  | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `findgame Overwatch League`                                                                                                                                                  |
 | [**FindTime**](#locating-persons-by-time-range-findtime) | `findtime TIME-TIME [TIME-TIME]…`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                                    |
 | [**Undo**](#undoing-previous-command-undo)               | `undo`                                                                                                                                                                                                                         |
 | [**Save**](#saving-the-data-file-save)                   | `save`                                                                                                                                                                                                                         |
@@ -193,16 +257,13 @@ Adds a person with optional details like phone, email, address, games, tags, and
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`  
 Output: `New person added: DETAILS…`
-<box type="tip" seamless>
 
-**Notes about adding!**
-
+**Notes**:
 * A person can have any number of tags, games and preferred times (including 0).
 * `TIME-TIME` should be in the format `HHmm-HHmm` and **must be a valid time range within the same day.**  
   e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
 * `TIME-TIME` **time ranges cannot be a single point in time.**
   e.g. `1200-1200` is not a valid time range.
-  </box>
 
 Examples:
 
@@ -218,21 +279,15 @@ Edits an existing person in the GamerBook.
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​`  
 Output: `Edited Person: DETAILS…`
 
-<box type="tip" seamless>
-
+**Notes**:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-  </box>
-
-<box type="info" seamless>
-
 * Existing values will be updated to the input values.
 * When editing tags, games or preferred times, the existing tags/games/preferred times of the person will be removed i.e
   adding of tags/games is not cumulative.
 * You can remove all the person’s tags/games/preferred times by typing `t/`, `g/` or `pt/` without
   specifying any tags after it.
-  </box>
 
 Examples:
 
@@ -252,12 +307,10 @@ Deletes the specified person from the GamerBook.
 Format: `delete INDEX`  
 Output: `Deleted Person: DETAILS…`   
 
-<box type="tip" seamless>
-
+**Notes**:
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-  </box>
 
 Examples:
 
@@ -280,7 +333,7 @@ Output: `Address book has been cleared!`
 Exits the program.
 
 Format: `exit`  
-Output: None
+Output: The GamerBook application window will be closed.
 
 <br>
 
@@ -297,17 +350,11 @@ Adds a game to an existing person in the GamerBook.
 Format: `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`  
 Output: `Added Game to Person: DETAILS…`
 
-<box type="tip" seamless>
-
+**Notes**:
 * Adds a game `GAME` to the person at the specified `INDEX`. The index refers to the index number shown in the displayed
   person list. The index **must be a positive integer** 1, 2, 3, …​
-  </box>
-
-<box type="info" seamless>
-
 * If the game `GAME` already exists for that person, it will not be added. It may be edited using the `editgame` command
   instead.
-  </box>
 
 Examples:
 
@@ -324,18 +371,11 @@ Edits the game of an existing person in the GamerBook.
 Format: `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`  
 Output: `Edited Game: DETAILS…`  
 
-<box type="tip" seamless>
-
+**Notes**:
 * Edits the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-
 * At least one of the optional fields must be provided.
-  </box>
-
-<box type="info" seamless>
-
 * Existing values will be updated to the input values.
-  </box>
 
 Examples:
 
@@ -352,12 +392,14 @@ Deletes the specified game from an existing person in the GamerBook.
 Format: `deletegame INDEX g/GAME`  
 Output: `Deleted Game from Person: DETAILS…`  
 
-<box type="tip" seamless>
-
+**Notes**:
 * Deletes the game `GAME` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-  </box>
+
+Examples:
+
+* `deletegame 1 g/Overwatch` Deletes the game `Overwatch` of the 1st person in the list(if there is a game `Overwatch` associated to the person). 
 
 <br>
 
@@ -368,13 +410,11 @@ Gives a **singular** game under an existing person in the GamerBook the "favouri
 Format: `favgame INDEX g/GAME`
 Output: `Favourited Game: GAME`  
 
-<box type="info" seamless>
-
+**Notes**:
 * Favourites the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in the
   displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Favourited games are denoted by a star icon.
 * There will be no observable change if this command is used on a game that is already given the "favourite" status.
-  </box>
 
 Examples:
 
@@ -389,13 +429,11 @@ Removes the "favourite" status from a **singular** game under an existing person
 Format: `unfavgame INDEX g/GAME`  
 Output: `Unfavourited Game: GAME`  
 
-<box type="info" seamless>
-
+**Notes**:
 * Un-favourites the game `GAME` of the person at the specified `INDEX`. The index refers to the index number shown in
   the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Once un-favourited, the star icon for that particular game should disappear.
 * There will be no observable change if this command is used on a game that is not set to "favourite" status.
-  </box>
 
 Examples:
 
@@ -416,15 +454,13 @@ Finds persons whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]…`  
 Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
-<box type="important" seamless>
-
+**Notes**:
 * The search is **case-insensitive**. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-  </box>
 
 Examples:
 
@@ -441,15 +477,13 @@ Finds persons whose games' names contain any of the given keywords.
 Format: `findgame KEYWORD [MORE_KEYWORDS]…`   
 Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
-<box type="important" seamless>
-
+**Notes**:
 * The search is **case-insensitive**. e.g `lol` will match `LoL`
 * The order of the keywords does not matter. e.g. `Impact Genshin` will match `Genshin Impact`
 * Only the name of games is searched.
 * Only full words will be matched e.g. `Legends` will not match `Legend`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Honkai Impact` will return `Genshin Impact`, `Honkai Star Rail`
-  </box>
 
 Examples:
 
@@ -466,24 +500,16 @@ Finds persons whose preferred time ranges overlap with any of given time ranges.
 Format: `findtime TIME-TIME [TIME-TIME]…`  
 Output: `NUMBER persons listed!` where `NUMBER` is the number of matches.  
 
-<box type="tip" seamless>
-
+**Notes**:
 * `TIME-TIME` should be in the format `HHmm-HHmm` and must be a valid time range within the same day.  
   e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
 * `TIME-TIME` time ranges cannot be a single point in time.
   e.g. `1200-1200` is not a valid time range.
-
-You can enter more than one time range to search for.
-
-You can enter the same time twice e.g. `2300-2300` to only search that time.
-</box>
-
-<box type="info" seamless>
-
+* You can enter more than one time range to search for.
+* You can enter the same time twice e.g. `2300-2300` to only search that time.
 * The search is border-sensitive. e.g. `1200-1300` will match `1300-1400`
 * The order of ranges does not matter.
 * Persons matching at least one range will be returned(i.e. `OR` search).
-  </box>
 
 Examples:
 
@@ -492,6 +518,7 @@ Examples:
   one of the specified ranges.
 
 <br>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -560,79 +587,7 @@ file at the next run. Hence, it is recommended to take a backup of the file befo
 Furthermore, certain edits can cause the GamerBook to behave in unexpected ways (e.g., if a value entered is outside the
 acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
 <br></br>
-
---------------------------------------------------------------------------------------------------------------------
-
-## Important Notes about Command Formats
-
-<box type="info" seamless>
-
-* **Commands Are Case-Sensitive and All Lowercase**  
-  Make sure to type commands exactly as shown.  
-  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
-
-
-* **Copying Commands from PDF**  
-  If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
-
-### Understanding Commands Format
-<box type="info" seamless>
-
-* **Words in `UPPER_CASE`** are placeholders for you to replace with your own input.  
-  e.g. `add n/NAME` means you would type something like `add n/John Doe`.
-
-
-* **Items in square brackets are optional**.  
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or simply `n/John Doe`.
-
-
-* **Items with `…`​ after them can be used multiple times.**  
-  e.g. `[t/TAG]…​` can be used as `t/friend`, `t/friend t/family` etc.
-
-
-* **Flexible Parameter Order**  
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-
-* **Ignored Extra Parameters** for commands that do not take in parameters (such as `help`, `list`, `exit`
-  and `clear`)  
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  <br>
-  </box>
-
-### Notes About Parameters Format
-<box type="info" seamless>
-
-* `NAME` **only accepts alphanumeric characters and spaces**.  
-  Names with special characters like `Flora-Ann` should be adapted by using spaces instead.
-
-
-* `INDEX` **must be a must be a positive integer**  
-  If it’s not, you’ll see an invalid command format error.
-
-
-* `NAME` **is case-sensitive**.  
-  Although duplicate contact names are not allowed, adding two separate contacts `Bobby Ang` and `bobby ang` would be
-  allowed.
-
-
-* `TIME-TIME` **must be within the same day**.  
-  Use the format `HHmm-HHmm` for time ranges within the same day.  
-  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
-
-  Currently users can work around with this issue by breaking the overnight range down into 2 separate ranges.     
-  e.g. `2300-0100` can be broken down into `2300-2359` and `0000-0100` and be accepted.
-
-* `TIME-TIME`**cannot refer to a single point in time**
-  The start and end times must be different (e.g. `1200-1200` is invalid).
-
-</box>
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -658,6 +613,7 @@ GamerBook home folder to the new installation’s data folder, typically located
 **Q**: Why did my GamerBook open blank when I had data saved previously?
 **A**: You may have moved the data file `addressbook.json` or modified it incorrectly. We suggest saving frequently and avoid editing the `json` directly!
 
+ <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -668,5 +624,6 @@ GamerBook home folder to the new installation’s data folder, typically located
    application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard
    shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy
-   is to manually restore the minimized Help Window.  
+   is to manually restore the minimized Help Window.
+
 --------------------------------------------------------------------------------------------------------------------
