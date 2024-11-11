@@ -5,7 +5,7 @@ title: User Guide
 
 MediContacts is a **desktop app for managing contacts of patients and doctors**, as well as **keeping track of their appointments.**
 
-Our app is built for receptionists working in small clinics, who need to manage thousands of patients and doctors, and keep track of their appointments.
+Our app is built for receptionists working in small clinics, who need to manage thousands of patients and doctors, while keeping track of their appointments.
 
 It is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContacts can not only get your contact management tasks done faster than traditional systems adopted by clinics, but also efficiently keep track of appointments between registered doctors and patients.
 
@@ -22,7 +22,7 @@ Action | Format (with examples)
 [**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br><br> e.g. `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
 [**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br><br> e.g. `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1950 g/M t/elderly`
 [**Add Appointment**](#adding-an-appointment-add-appt) | `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME` <br><br> e.g. `add-appt pn/John Doe dn/Jane Doe d/23-04-2024 t/1100`
-[**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1355`
+[**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1231`
 [**List**](#listing-all-persons-list) | `list`
 [**List Doctors**](#listing-all-doctors-list-doctor) | `list-doctor`
 [**List Patients**](#listing-all-patients-list-patient) | `list-patient`
@@ -61,9 +61,9 @@ Action | Format (with examples)
    
    * `list-patient`: Lists all patients.
 
-   * `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`: Adds a doctor named Jane Doe to the Address Book.
+   * `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`: Adds a doctor named Jane Doe to the address book.
    
-   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`: Adds a patient named John Doe to the Address Book.
+   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`: Adds a patient named John Doe to the address book.
 
    * `add-appt pn/John Doe dn/Jane Doe d/23-12-2024 t/1100`: Adds an appointment between a patient named John Doe and a doctor named Jane Doe on 23rd December 2024 (1100hrs).
 
@@ -123,8 +123,12 @@ Adds a doctor to the address book.
 
 Format: `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​`
 
+* Doctors are uniquely identified by their names hence their names must be unique in order for them to be added.
+* The check for uniqueness is case-sensitive. e.g. `Jane Doe` is considered different from `jane doe`
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.
+The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.<br>
+Hence for common abbreviations with special characters such as `s/o` or `d/o`, use `s o`, `son of`, `d o`, or `daughter of` instead. 
 </div>
 
 **Examples:**
@@ -137,8 +141,12 @@ Adds a patient to the address book.
 
 Format: `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​`
 
+* Patients are uniquely identified by their names hence their names must be unique in order for them to be added.
+* The check for uniqueness is case-sensitive. e.g. `John Doe` is considered different from `john doe`
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.
+The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.<br>
+Hence for common abbreviations with special characters such as `s/o` or `d/o`, use `s o`, `son of`, `d o`, or `daughter of` instead. 
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -205,13 +213,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The app will only search for persons with matching names.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* Partial words will be matched e.g. `Hans B` will match `Hans Bo`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only persons matching all keywords will be returned (i.e. `AND` search).
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only persons matching the entire input will be returned (i.e. `AND` search).<br>
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Find command does not check for the presence of non-alphabetical characters in the keywords. If non-alphabetical characters are present, the app will still attempt to find the person with the given keywords and return an empty list.
+Keywords provided must only consist of alphabets. Any other character provided will result in an empty list being returned.
 </div>
 
 **Examples:**
@@ -227,9 +237,11 @@ Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
 
 * The app will only search for doctors with matching names.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* Partial words will be matched e.g. `Hans B` will match `Hans Bo`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only doctors matching all keywords will be returned (i.e. `AND` search).
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only doctors matching the entire input will be returned (i.e. `AND` search).<br>
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -248,9 +260,11 @@ Format: `find-patient KEYWORD [MORE_KEYWORDS]`
 
 * The app will only search for patients with matching names.
 * The search is case-insensitive. e.g. `hans` will match `Hans`
-* Partial words will be matched e.g. `Hans B` will match `Hans Bo`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
 * The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
-* Only patients matching all keywords will be returned (i.e. `AND` search).
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only patients matching the entire input will be returned (i.e. `AND` search).<br>
   e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -272,7 +286,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Before deleting a doctor or patient, ensure that there are no appointments associated with them. Deleting a doctor or patient will cause the app to throw an error, and the user will have to delete the appointments associated with the doctor or patient first.
+Before deleting a doctor or patient, ensure that there are no appointments associated with them. Otherwise, deleting that doctor or patient will give an error, prompting the user to delete all appointments associated with them first.
 </div>
 
 **Examples:**
@@ -297,12 +311,12 @@ MediContacts data are saved in the hard disk automatically after any command mod
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 The app can only save a maximum of 10,000 appointments. If the limit is reached, the app may react in unexpected ways.
-Therefore, ensure that the data file is regularly archived to prevent data loss.
+Therefore, ensure that the data file is regularly archived to prevent data loss and any unexpected behaviour.
 </div>
 
 ### Editing the data file
 
-MediContacts data are saved automatically as a JSON file `[WORKING DIRECTORY]/data/addressbook.json`, where [WORKING DIRECTORY] is the directory the user is running the jar file. Advanced users are welcomed to update the data directly by editing that data file.
+MediContacts data are saved automatically as a JSON file `[WORKING DIRECTORY]/data/addressbook.json`, where [WORKING DIRECTORY] is the directory the user is running the JAR file. Advanced users are welcomed to update the data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, MediContacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to save a backup of the file before editing it.<br>
