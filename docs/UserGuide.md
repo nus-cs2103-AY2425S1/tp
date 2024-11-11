@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 ## What is VolunSync?
-Welcome to VolunSync! We've created this friendly Human Resource Management System (HRMS) specially for nonprofits to help manage their wonderful volunteers. Think of VolunSync as your helpful assistant that makes it easy to coordinate volunteers, organize events, keep track of hours, and stay in touch with everyone – all in one place.
+Welcome to VolunSync! We've created this friendly Human Resource Management System (HRMS) specially for nonprofits to help manage their wonderful volunteers. Think of VolunSync as your helpful assistant that makes it easy to coordinate volunteers and organize events all in one place.
 
 ## Before You Start
 
@@ -103,6 +103,8 @@ Let's get you started with VolunSync! Just follow these simple steps:
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command Format Guidelines
 
@@ -276,7 +278,7 @@ It will display all events the volunteer at the specified `INDEX` under the `Vol
 
 Format: `/v view VOLUNTEER_INDEX`
 
-* The `INDEX` is the number you see next to their name in the list
+* The `INDEX` is the number you see to the left of their name in the list
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
@@ -338,7 +340,7 @@ It will add a volunteer with the specified `VOLUNTEER_INDEX` to the list of part
 
 Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
-* The `INDEX` refers to the numbers shown next to both the volunteer and event names
+* The `INDEX` refers to the numbers shown on the left of both the volunteer and event names on their respective lists
 
 Examples:
 * `assign v/3 e/2` assigns the third volunteer on the volunteer list to the list of participants of the second event on the event list.
@@ -361,7 +363,7 @@ It will remove a volunteer with the specified `VOLUNTEER_INDEX` to the list of p
 
 Format: `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`
 
-* The `INDEX` refers to the numbers shown next to both the volunteer and event names
+* The `INDEX` refers to the numbers shown on the left of both the volunteer and event names on their respective lists
 
 Examples:
 * `unassign v/2 e/2` removes the second volunteer on the volunteer list from the list of participants of the second event on the event list.
@@ -570,15 +572,16 @@ These known issues are actively being worked on, and we are continuously improvi
 
 ### Volunteer Commands
 
-| Action                                                                                               | Format                                                   | Examples                                                      |
-|------------------------------------------------------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|
-| **[Add a volunteer](#adding-a-volunteer-v-new)**                                                     | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE` | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` |
-| **[Find volunteers by name](#finding-volunteers-by-name--v-find)**                                   | `/v find KEYWORD`                                        | `/v find Anne`                                                |
-| **[Delete a volunteer](#deleting-a-volunteer--v-del)**                                               | `/v del VOLUNTEER_INDEX`                                 | `/v del 1`                                                    |
-| **[Add available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)**              | `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`            | `/v free i/1 d/2024-11-28, 2024-11-29`                        |
-| **[Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)** | `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`          | `/v unfree i/1 d/2024-11-28, 2024-11-29`                      |
-| **[Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)**                         | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                | `assign v/1 e/2`                                              |
-| **[Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)**         | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`              | `unassign v/1 e/2`                                            |
+| Action                                                                                                              | Format                                                   | Examples                                                      |
+|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|
+| **[Add a volunteer](#adding-a-volunteer-v-new)**                                                                    | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE` | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` |
+| **[Find volunteers by name](#finding-volunteers-by-name--v-find)**                                                  | `/v find KEYWORD`                                        | `/v find Anne`                                                |
+| **[Delete a volunteer](#deleting-a-volunteer--v-del)**                                                              | `/v del VOLUNTEER_INDEX`                                 | `/v del 1`                                                    |
+ | **[Listing all events participated in by a volunteer](#listing-all-events-a-volunteer-is-participating-in-v-view)** | `/v view VOLUNTEER_INDEX`                                | `/v view 1`                                                   |
+| **[Add available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)**                             | `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`            | `/v free i/1 d/2024-11-28, 2024-11-29`                        |
+| **[Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)**                | `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`          | `/v unfree i/1 d/2024-11-28, 2024-11-29`                      |
+| **[Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)**                                        | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                | `assign v/1 e/2`                                              |
+| **[Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)**                        | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`              | `unassign v/1 e/2`                                            |
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
