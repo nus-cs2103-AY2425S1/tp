@@ -430,7 +430,7 @@ Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `999
 **A**: Copy the `clientell.json` data file you want to transfer. On your other device and in the application directory (the folder containing the app), if there's already an existing data file, replace it with your version (preferably saving the replaced copy somewhere). Otherwise if there's no such file, safely paste the file inside the folder.
 
 **Q**: What should I do if the application won't start? <br>
-**A**: First verify Java 17 or above is installed correctly. If the problem persists, check if the `clientell.json` file is corrupted, and use a backup of the file (recommended) or rectify the mistakes in the file (not recommended).
+**A**: First verify Java `17` or above is installed correctly. If the problem persists, check if the `clientell.json` file is corrupted, and use a backup of the file (recommended) or rectify the mistakes in the file (not recommended).
 
 **Q**: Can I customize the data file location?<br>
 **A**: Currently, the data file location is fixed to the application directory (i.e it's in the same place as the app file). However, you can copy the data elsewhere (or if you're tech-savvy, create a [symbolic link](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux) )
@@ -457,18 +457,20 @@ Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `999
 ## Technical Help
 Here is a collection of helpful info regarding setting up the application.
 
-**Linux**
+Downloading Java `17` for various operating systems (OS):
+
+Linux:
 - **x64**: **Debian Package** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.deb)
 - **ARM 64**: **RPM Package** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-aarch64_bin.rpm)
 
-**macOS**
+macOS:
 - **ARM 64**: **DMG Installer** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_macos-aarch64_bin.dmg)
 - **x64**: **DMG Installer** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_macos-x64_bin.dmg)
 
-**Windows**
+Windows:
 - **x64**: **Installer (.exe)** - [Download](https://download.oracle.com/java/17/archive/jdk-17.0.12_windows-x64_bin.exe)
 
-**Accessing Terminal**
+**Accessing Terminal**<br>
 On Windows:
    - **Method 1**: Press **Windows Key + R**, type `cmd`, and press **Enter** to open the Command Prompt.
    - **Method 2**: For PowerShell, right-click on the **Start** button and select **Windows PowerShell** or **Terminal** (on Windows 11).
@@ -485,7 +487,7 @@ On Linux:
 
 Once open, you can enter commands like `java -version` or `java -jar path/to/yourfile.jar` directly in the terminal.
 
-**Check Java Version**
+**Check Java Version**<br>
 To see if Java is installed and verify its version, use the following command:
 
 ```bash
@@ -494,7 +496,7 @@ java -version
 
 You should see information about the Java version, like `java version "17.0.12"`. If Java is not installed, this command may return an error or say "command not found."
 
-**Run a JAR File**
+**Run a JAR File**<br>
 Once Java is installed, you can run a JAR file using:
 
 ```bash
@@ -506,7 +508,7 @@ java -jar path/to/yourfile.jar
 
 To change directories in the terminal, you use the `cd` (change directory) command, followed by the path to the directory you want to access.
 
-**Changing Directory**
+**Changing Directory**<br>
 To a specific directory:
    ```bash
    cd path/to/directory
