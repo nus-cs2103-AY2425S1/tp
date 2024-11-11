@@ -212,9 +212,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]...`          | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
 | [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [s/INGREDIENTS_SUPPLIED] [t/TAG]...` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
 ## **Customer Order Management**
 
 | Command | Format                                                                                | Example |
@@ -233,7 +230,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX`                                                 | `markSupplyOrder 1` |
 | [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX`                                               | `unmarkSupplyOrder 1` |
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **Ingredient Catalogue Management**
@@ -420,8 +416,13 @@ addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...
 ```bash
 addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 
 ```
-**Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
+
 ![screenshot](images/Screenshot-2.png)
+
+<div style="page-break-after: always;"></div>
+
+**Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
+![screenshot](images/Screenshot-6.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -526,7 +527,7 @@ addSupplier n/NAME p/PHONE_NUMBER [s/INGREDIENTS_SUPPLIED] [e/EMAIL] [a/ADDRESS]
 - **Parameters:**
     - `n/NAME`: The supplier's name. This has to be alphanumerical.
     - `p/PHONE_NUMBER`: The supplier's phone number. This has to be unique in the contacts list and have more than 3 digits.
-    - `s/INGREDIENTS_SUPPLIED`: (Optional) List of ingredients supplied, comma separated
+    - `s/INGREDIENTS_SUPPLIED`: (Optional) List of ingredients supplied, comma separated. This must exist in the catalogue.
     - `e/EMAIL`: (Optional) The supplier's email address.
     - `a/ADDRESS`: (Optional) The supplier's address.
     - `t/TAG`: (Optional) Tags for additional supplier information. Only a single word can be used as a tag. Can have multiple prefixes.
@@ -534,19 +535,9 @@ addSupplier n/NAME p/PHONE_NUMBER [s/INGREDIENTS_SUPPLIED] [e/EMAIL] [a/ADDRESS]
 **Example:**
 ```bash
 addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
-03-04 s/salt, chocolate
+03-04 s/chocolate
 ```
 ![Add Supplier.png](images%2FAdd%20Supplier.png)
-
-The Add Supplier Command allows bakery owners to add a new supplier to the address book records. The supplier is specified
-with all relevant contact details and ingredients supplied to the bakery. This command accepts the supplier's name, 
-phone number, email address, residential address, and a list of ingredients the supplier provides, with an option to
-include a tag for additional information. 
-
-For example, typing **addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate** 
-will add a supplier named "Tim" with phone number "81234567," email "emily@example.com," located at "456 Cupcake Road, Block 123, #03-04," 
-and supplying "salt" and "chocolate" as the supplied ingredients for the bakery. This command simplifies the tracking 
-of supplier contacts and ingredient sources, helping bakery owners efficiently manage supplier relationships.
 
 <div style="page-break-after: always;"></div>
 
