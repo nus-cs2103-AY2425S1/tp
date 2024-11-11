@@ -12,17 +12,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parse the delete tag command.
+ * Parses the delete tag command.
  */
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     /**
-     * Parses the given string of arguments in the context of Delete tag command.
+     * Parses the given string of arguments in the context of delete tag command.
      * and returns DeleteTagCommand object for execution.
      * @throws ParseException if user input does not conform the expected input
      */
     public DeleteTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        // assert !args.isEmpty(); // This causes error to not be displayed properly
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         Index index;
