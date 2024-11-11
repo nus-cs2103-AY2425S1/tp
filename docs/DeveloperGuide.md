@@ -476,16 +476,16 @@ Those without any stars are user stories that were considered but will not be im
 | `* * *`  | user                      | delete contacts that are no longer needed                                                                            | I can remove unnecessary contacts and have a more organised address book.                                                                                           |
 | `* * *`  | user                      | search for contacts by name, address, phone number, email, wedding and task                                          | I can find specific contacts that I am looking for.                                                                                                                 |
 | `* * *`  | user                      | create tags                                                                                                          | I can have special categories for non traditional clients.                                                                                                          |
-| `* * *`  | user                      | edit information such as the contact number and address of each contact                                              | all contacts have the most updated information.                                                                                                                     |
+|  `* *`   | user                      | edit information such as the contact number and address of each contact                                              | I can ensure all contacts have the most updated information.                                                                                                        |
 |  `* *`   | user                      | clear all the contacts in the system                                                                                 | I can clear all my contacts quickly without having to individually delete them if I want to add in a completely new set of contacts.                                |
 |  `* *`   | user                      | assign each guest contact its dietary requirements status                                                            | I can track the dietary requirement of each guest.                                                                                                                  |
 |  `* *`   | user                      | sort contacts by alphabetical order                                                                                  | I can easily find the contacts required in a large address book.                                                                                                    |
 |  `* *`   | user                      | assign additional information for each contact                                                                       | I can include important notes that may not fit into other categories, such as reminders for what the contact might need.                                            |
 |  `* *`   | first-time user           | see some sample contacts already available in the app                                                                | I can try out the different features without needing to add my own data (e.g allocating people to wedding, allocating task to contacts).                            |
 |  `* *`   | careless, first-time user | reload the sample contacts into the app                                                                              | I can continue trying out different features without needing to add my own data in case I accidentally cleared the contacts.                                        |
-|  `* *`   | first-time user           | see a help message showing all the commands/feature I can use                                                        | I can try out all the different features by referring to the message.                                                                                               |
+|  `* *`   | first-time user           | see a help message linking to a guide on the features and how the features can be used                               | I can easily try out all the different features with correct formats by referring to the linked guide.                                                              |
 |  `* *`   | lazy user                 | want to use command keyword shortcuts                                                                                | I can quickly use commands without needing to type the full command word.                                                                                           |
-|  `* *`   | lazy user                 | want to by pass certain restrains of the command                                                                     | I can quickly use commands to bypass controls in a safe manner.                                                                                                     |
+|  `* *`   | lazy user                 | want to bypass certain restrains of the command                                                                     | I can quickly use commands to bypass controls in a safe manner.                                                                                                     |
 |  `* *`   | user                      | assign tasks to certain contacts                                                                                     | I can track which tasks have been assigned to each contact.                                                                                                         |
 |  `* *`   | user                      | update the status of tasks of contacts                                                                               | I can track whether tasks have been completed or not.                                                                                                               |
 |  `* *`   | busy user                 | add multiple wedding events                                                                                          | I can track contacts for multiple weddings at once.                                                                                                                 |
@@ -520,9 +520,9 @@ Those without any stars are user stories that were considered but will not be im
 
 (For all use cases below, the **System** is the `WedLinker` and the **Actor** is the `user`, unless specified otherwise)
 
-> Use Cases beginning with 'UC' cover core Wedlinker functionalities.
+> Use Cases beginning with 'UC' cover core WedLinker functionalities.
 >
-> Use Cases beginning with 'UCSH' cover non-core Wedlinker functionalities.
+> Use Cases beginning with 'UCSH' cover non-core WedLinker functionalities.
 ---
 ### **Use case: UC01 — List all Contacts**
 
@@ -809,7 +809,7 @@ testers are expected to do more *exploratory* testing.
     2. Open the terminal and change into the directory where the jar file is stored.
 
     3. Enter `java -jar WedLinker.jar` into the terminal to run the WedLinker application.<br>
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+       Expected: Shows the GUI with a set of sample contacts, weddings, tasks, and tags. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -818,7 +818,20 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by enter `java -jar WedLinker.jar` into the terminal again.<br>
        Expected: The most recent window size and location is retained.
 
-### Quick Guide
+3. Resetting sample data
+
+   1. Open the folder where the `WedLinker.jar` file is.
+
+   2. Directly delete the `data` folder in the same directory.
+
+   3. Alternatively, open the `data` folder and delete the `addressbook.json` file stored there.
+
+   4. Re-launch the app by entering `java -jar WedLinker.jar` into the terminal again.<br>
+      Expected: Shows the GUI with a set of sample contacts, weddings, tasks, and tags.
+
+   5. Refer to [saving data](#saving-data) to understand how data is saved during operation.
+
+### Quick Guide to Prefixes and Commands
 
 1. WedLinker uses prefixes to parse the required fields for the commands.
    - name: `n/`
@@ -833,57 +846,423 @@ testers are expected to do more *exploratory* testing.
 <br>
 
 2. WedLinker has the following functions
-   - find for a person: `find`
+   - find a person: `find`
    - add a person: `add`
    - delete a person: `delete`
    - list all persons: `list`
-   - create a tag: `create-tag`
-   - delete a tag: `delete-tag`
+   - create a tag: `create-tag` or `ctag`
+   - delete a tag: `delete-tag` or `dtag`
    - tag a person: `tag`
    - untag a person: `untag`
-   - list all tags: `list-tags`
-   - create a task: `create-task`
-   - delete a task: `delete-task`
-   - assign a task to a vendor: `assign-task`
-   - unassign a task to a vendor: `unassign-task`
-   - mark a task as done: `mark-task`
-   - unmark a task as done: `unmark-task`
-   - list all task: `list-tasks`
-   - assign a person as a vendor: `assign-vendor`
-   - unassign a person as a vendor: `unassign-vendor`
-   - create a wedding: `create-wedding`
-   - delete a wedding: `delete-wedding`
-   - assign a person to a wedding: `assign-wedding`
-   - unassign a person from a wedding: `unassign-wedding`
-   - edit a wedding: `edit-wedding`
-   - list all wedding: `list-weddings`
+   - list all tags: `list-tags` or `ltags`
+   - create a task: `create-task` or `ctask`
+   - delete a task: `delete-task` or `dtask`
+   - assign a task to a vendor: `assign-task` or `atask`
+   - unassign a task from a vendor: `unassign-task` or `unatask`
+   - mark a task as done: `mark-task` or `mtask`
+   - unmark a task as done: `unmark-task` or `untask`
+   - list all task: `list-tasks` or `ltasks`
+   - assign a person as a vendor: `assign-vendor` or `asv`
+   - unassign a person as a vendor: `unassign-vendor` or `uv`
+   - create a wedding: `create-wedding` or `cw`
+   - delete a wedding: `delete-wedding` or `dw`
+   - assign a person to a wedding: `assign-wedding` or `asw`
+   - unassign a person from a wedding: `unassign-wedding` or `uw`
+   - edit a wedding: `edit-wedding` or `ew`
+   - list all wedding: `list-weddings` or `lw`
 
-### Deleting a person
+
+<box type="important">
+    Note the difference between similar command shortcuts. 'untask' unmarks a task as done, while 'unatask' unassigns a task from a vendor.
+    Similarly, 'ltags' can be used to list all tags, while 'ltasks' can be used to list all tasks (note the plural for both commands, 'tags' and 'tasks').  
+</box>
+
+<br>
+
+### Person Features
+
+#### Finding a person
+
+<box type="info" seamless>
+      **Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
+        applied to edited data, but specific expected results will differ. <br>
+      **Suggestion:** Refer to User Guide for additional test cases, such as multiple prefixes or blank keywords.
+</box>
+
+1. Finding a person by name
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+
+   2. Test case: `find n/alex` <br>
+      Expected: The contact `Alex Yeoh` is shown in the `Person` view. If this contact has been deleted and no other contacts whose
+      names have the keyword `Alex` are in the system, an empty `Person` list is shown. The status message reflects the success of the find command.
+
+   3. Test case:  `find n/B` <br>
+      Expected: The contacts `Bernice Yu`, `Irfan Ibrahim`, and `Roy Balakrishnan` are shown in the `Person` view. If any of these contacts
+      have been deleted, they are not shown in the `Person` list. The status message reflects the success of the find command.
+
+   4. Test case:  `find n/roy n/Irf` <br>
+      Expected: The contacts `Irfan Ibrahim` and `Roy Balakrishnan` are shown in the `Person` view. If any of these contacts
+      have been deleted, they are not shown in the `Person` list. The status message reflects the success of the find command.
+
+   5. Test case:  `find n/NAMETHATDOESNOTEXIST` (where NAMETHATDOESNOTEXIST is not part of the names of any `Person` in the system)
+      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+   6. Test case: `find n/X` (where X is a character unsupported in `Person` names)
+      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+   7. Other incorrect find name commands to try:
+      * `find`
+      * `find n/` (where name keyword is blank)
+      * `find n/XXX e/` (where XXX is any name keyword, and e/ is any other valid prefix in WedLinker)
+
+      Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br>
+
+2. Finding a person by address
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+
+    2. Test case: `find a/30` <br>
+       Expected: The contacts `Alex Yeoh` and `Bernice Yu` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find a/serangoon a/Aljunied`
+       Expected: The contacts `Bernice Yu`, `David Li`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case:  `find a/%%%` (where %%%  is not part of the address of any addresses of any `Person` in the system) <br>
+      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Other incorrect find address commands to try:
+        * `find`
+        * `find a/` (where name keyword is blank)
+        * `find a/XXX p/` (where XXX is any address keyword, and p/ is any other valid prefix in WedLinker)
+
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br>
+
+3. Finding a person by phone
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+
+    2. Test case: `find p/88` <br>
+       Expected: The contact `Alex Yeoh` is shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find p/92` <br>
+       Expected: The contacts `Bernice Yu`, `Irfan Ibrahim`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case:  `find p/XXXXXXXXXX` (where XXXXXXXXXX is not part of the phone number of any phone numbers of any `Person` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Other incorrect find phone commands to try:
+        * `find`
+        * `find p/` (where name keyword is blank)
+        * `find p/XXX t/` (where XXX is any phone keyword, and t/ is any other valid prefix in WedLinker)
+
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br>
+
+4. Finding a person by email
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+
+    2. Test case: `find e/LI` <br>
+       Expected: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find e/er e/ro` <br>
+       Expected: The contacts `Bernice Yu` and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case: `find e/XXXX@XXX.XXX` (where XXXX@XXX.XXX is not part of the email of any emails of any `Person` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Other incorrect find email commands to try:
+        * `find`
+        * `find e/` (where email keyword is blank)
+        * `find e/XXX a/` (where XXX is any email keyword, and a/ is any other valid prefix in WedLinker)
+
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br>
+
+5. Finding a person by tag
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+       1. **Tip**: You can also enter the `list-tags` or `ltags` command to list all tags in the system. <br>
+
+    2. Test case: `find t/guest` <br>
+       Expected: The contacts `Bernice Yu` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find t/photographer t/HOTEL MANAGER` <br>
+       Expected: The contacts `Alex Yeoh` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case: `find t/NONEXISTENTTAG` (where NONEXISTENTTAG is not a `Tag` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Test case:  `find t/UNASSIGNEDTAG` (where UNASSIGNEDTAG is a `Tag` in the system, but there are no `Persons` tagged with it) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    6. Other incorrect find tag commands to try:
+        * `find`
+        * `find t/` (where tag keyword is blank)
+        * `find t/XXX a/` (where XXX is any tag keyword, and a/ is any other valid prefix in WedLinker)
+
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br>
+
+6. Finding a person by wedding
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+        1. **Tip**: You can also enter the `list-weddings` or `lw` command to list all weddings in the system. <br>
+
+    2. Test case: `find w/wedding 2` <br>
+       Expected: The contact `Charlotte Oliveiro` is shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find w/August w/Case` <br>
+       Expected: The contacts `Alex Yeoh`, `Charlotte Oliveiro`, and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case: `find w/NONEXISTENTWEDDING` (where NONEXISTENTWEDDING is not a `Wedding` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Test case:  `find w/UNASSIGNEDWEDDING` (where UNASSIGNEDWEDDING is a `Wedding` in the system, but there are no `Persons` assigned to it) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    6. Test case:  `find w/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+
+    7. Test case:  `find w/tom's wedding t/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+
+    8. Other incorrect find wedding commands to try:
+        * `find`
+        * `find w/` (where wedding keyword is blank)
+        * `find w/XXX p/` (where XXX is any wedding keyword, and a/ is any other valid prefix in WedLinker)
+
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br>
+
+7. Finding a person by task
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+        1. **Tip**: You can also enter the `list-tasks` or `ltasks` command to list all tasks in the system. <br>
+
+    2. Test case: `find tk/invitations` <br>
+       Expected: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find tk/send tk/hair` <br>
+       Expected: The contacts `David Li` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case: `find tk/NONEXISTENTTASK` (where NONEXISTENTTASK is not a `Task` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Test case:  `find tk/UNASSIGNEDTASK` (where UNASSIGNEDTASK is a `Task` in the system, but there are no `Persons` assigned to it) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    6. Other incorrect find task commands to try:
+        * `find`
+        * `find tk/` (where task keyword is blank)
+        * `find tk/XXX e/` (where XXX is any task keyword, and a/ is any other valid prefix in WedLinker)
+       
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command. 
+
+<br>
+
+#### Listing persons
+
+1. Listing persons when viewing all persons.
+
+   1. Test case: `list` <br>
+    Expected: `Person` list displayed will remain unchanged, and all persons in the `Person` list will be shown.
+
+2. Listing persons when viewing a filtered view of persons.
+
+   1. Test case: `list` <br>
+    Expected: `Person` list displayed will change to show all persons in the `Person` list.
+
+<br>
+
+#### Adding a person
+
+1. Adding a person
+
+   1. Prerequisites: List all persons using the `list` command. At least one person in the list.
+
+   2. Test case: `add n/Nancy Drew p/9911882 e/nancy.drew@hotmail.com` <br>
+      Expected: A new contact with name `Nancy Drew`, phone `9911882`, and email `nancy.drew@hotmail.com` is added to the `Person` list.
+
+   3. Test case: `add n/Tatiana Komarova w/NEW WEDDING t/NEW TAG` (where NEW WEDDING and NEW TAG are a wedding and tag, respectively, that do not yet exist in WedLinker) <br>
+      Expected: A new contact with name `Tatiana Komarova` is added to the `Person` list. A new tag with name `NEW TAG` is added to the `Tag` list.
+      A new wedding with name `NEW WEDDING` is added to the `Wedding` list. The new contact, `Tatiana Komarova`, will be tagged with `NEW TAG` and
+      will be assigned to the wedding `NEW WEDDING`.
+
+   4. Test case (following Test case 4): `add n/Tatiana Komarova` <br>
+      Expected: The `Person` list remains unchanged. System displays an error indicating that the person already exists in WedLinker.
+
+   5. Test case: `add n/Felicia D'Alimaty w/EXISTING WEDDING t/EXISTING TAG` (where EXISTING WEDDING and EXISTING TAG are a wedding and tag, respectively, that exist in WedLinker) <br>
+      Expected: A new contact with name `Felicia D'Alimaty` is added to the `Person` list. No new tags or weddings will be created. The new contact, `Felicia D'Alimaty`, will be tagged with `EXISTING TAG` and
+      will be assigned to the wedding `EXISTING WEDDING`.
+
+   6. Other incorrect add commands to try:
+      * `add`
+      * `add n/NAME e/EMAIL@email.com tk/TASK` (where tk/ is the task prefix, and the email field restricts input values according to the User Guide)
+      * `add n/` (with a blank name keyword)
+      Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br>
+
+#### Editing a person
+
+1. Editing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `edit 1 p/9927364`<br>
+       Expected: First contact has their phone number updated to `9927364`. Details of the edited contact shown in the status message.
+       List of `Persons` is updated to show the first contact's new details.
+
+    3. Test case: `edit 2 a/Blk 99, Adams Avenue e/newemail@gmail.com` (assuming there are at least 2 people in the current `Person` list displayed) <br>
+       Expected: Second contact has their address updated to `Blk 99, Adams Avenue` and their email updated to `newemail@gmail.com`. Details of the edited contact shown in the status message.
+       List of `Persons` is updated to show the second contact's new details.
+
+    4. Incorrect delete commands to try:
+        * `edit`
+        * `edit 1` (where no prefixes are specified)
+        * `edit x a/Blk 99` (where x is an integer larger than the list size)
+        * `edit 1 tk/XXX` (where tk/ is the task prefix, which the edit command does not support - similarly, can test w/ and t/ prefixes)
+
+       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+
+<br> 
+
+2. Editing a person when a filtered list is being shown.
+
+    1. Prerequisites: List all persons using the `list` command. Use the `find` command to filter the list by either name, phone, address, email, tag, wedding, or task.
+    Multiple persons in the list, but not the same number as the list of all contacts.
+
+       1. **Tip:** If the sample data is loaded, this can be done by entering the `find n/c` command or the `find t/guest` command.
+       Refer to the [find command](#finding-a-person) for more details. 
+
+    2. Valid test cases similar to 1.2 and 1.3 of [Editing a person](#editing-a-person) can be tested in filtered view.
+
+    3. Incorrect test cases similar to 1.4 of [Editing a person](#editing-a-person) can be tested in filtered view, accounting for the lesser
+       number of `Persons` in the currently displayed list.
+
+
+<br>
+
+#### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     3. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    4. Other incorrect delete commands to try:
+       * `delete`
+       * `delete x` (where x is an integer larger than the list size)
+       * `delete e` (where e is a string, a non-integer, or any other data type)
+       * `delete 1 random` (where the list of persons has at least 1 person, and random is an extraneous input of any data type) <br>
+       
+        Expected: Similar to previous.
+
+<br>
+
+2. Deleting a person when a filtered list is being shown
+
+    1. Prerequisites: List all persons using the `list` command. Use the `find` command to filter the list by either name, phone, address, email, tag, wedding, or task.
+    Multiple persons in the list, but not the same number as the list of all contacts.
+
+       1. **Tip:** If the sample data is loaded, this can be done by entering the `find n/c` command or the `find t/guest` command.
+       Refer to the [find command](#finding-a-person) for more details. 
+
+    2.  Test case: `delete 1` <br>
+        Expected: First contact in the filtered list is deleted. Details of the deleted contact shown in the status message. When listing all contacts,
+        contact that was first in the filtered list is deleted from the list.
+
+    3. Test case: `delete x` (where x is an integer greater than the number of persons shown in the current filtered list, but smaller than the number of all contacts)
+        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect test cases to try can be found at point 1.iv of [Deleting a person](#deleting-a-person)
+
+<br>
+
+### Vendor Features
+
+#### Assigning vendors
+   
+<box type="info" seamless>
+   **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+   </box>
+
+1. Assigning a `Person` as a vendor
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, not all of whom are `Vendors`.
+
+   2. Test case: `assign-vendor 2` (assuming the second `Person` **is not** a `Vendor`) <br>
+      Expected: Contact 2 is updated to be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor assignment.
+
+   3. Test case (following Test case 2): `assign-vendor 2` (assuming the second `Person` **is now** a `Vendor`) <br> 
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 2 is already a `Vendor`.
+
+   4. Test case: `assign-vendor` <br>
+         Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
+
+<br>
+
+#### Unssigning vendors
+
+<box type="info" seamless>
+      **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+</box>
+
+1. Unassigning a `Person` as a vendor
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, some of whom are `Vendors`.
+
+   2. Test case: `unassign-vendor 1` (assuming the first `Person` **is** a `Vendor` with no tasks assigned) <br>
+      Expected: Contact 1 is updated to no longer be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor unassignment.
+
+   3. Test case (following Test case 2): `unassign-vendor 1` (assuming the first `Person` is now **no longer** a `Vendor`) <br>
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is not a `Vendor`.
+
+   4. Test case: `unassign-vendor 4` (assuming the fourth `Person` **is** a `Vendor` with tasks assigned) <br>
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is a `Vendor` with tasks still assigned.
+
+   5. Test case: `unassign-vendor 4 f/` (assuming the fourth `Person` **is** a `Vendor` with tasks assigned) <br>
+      Expected: Contact 4 is updated to no longer be a `Vendor` and the `Person` list is updated to show this. All previously assigned tasks are removed from contact 4.
+      Status message shows successful vendor unassignment.
+
+   6. Test case: `assign-vendor` <br>
+      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
+
+<br>
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Saving data altered during application use <br>
 
-    1. Upon booting up WedLinker and the contact/address/task list is not as per expected, open the `docs` folder where `WedLinker.jar` is stored.
+    1. WedLinker automatically saves data to the hard disk during operation. Any operations that change details of contacts,
+    weddings, tags, or tasks will be saved immediately following the operations is successfully executed.
+
+
+2. Dealing with missing/corrupted data files
+
+    1. Upon booting up WedLinker and the contact/wedding/tag/task list is not as per expected, open the `data` folder where WedLinker stores data.
    
-    2. Within the folder, open `AddressBook.json` and identify any mistakes with stored data.<br>
+    2. Within the folder, open `addressBook.json` and identify any mistakes with stored data.<br>
        The terminal from where `WedLinker.jar` is launched should log where the file is corrupted.
 
-    3. If the data is beyond repair, delete the entire `docs` folder and the `AddressBook.json` file to start afresh.
+    3. If the data is beyond repair, delete the entire `data` folder or the `addressbook.json` file to start afresh with sample data.
 
+<br>
 
 ## Appendix: Planned Enhancements
 
