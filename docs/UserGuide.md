@@ -707,7 +707,7 @@ Clears all entries from KonTActs.
 <box type="important">
 
 This action is <b><i><u>IRREVERSIBLE</u></i></b> and it <b><i><u>cannot be undone</u></i></b>! You would lose all the
-contacts if not [**exported**](#exporting-data-into-csv-file-export)! 
+contacts if they are not [**exported**](#exporting-data-into-csv-file-export)! 
 
 </box>
 
@@ -994,8 +994,8 @@ Calling `addGrade` without any fields will show the list of assignments in `assi
 
 </box>
 
+--------------------------------------------------------------------------------------------------------------------
 
-{{ newPage }}
 
 ### <i class="fa-solid fa-square-minus"></i> Removing grades from a contact : `removeGrade`
 
