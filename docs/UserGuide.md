@@ -6,13 +6,13 @@
 
 # MindMap User Guide
 
-MindMap is a **desktop application that helps you manage your contacts efficiently, combining the speed of typing commands with the ease of a visual interface.**
+MindMap is a **desktop application that helps you manage your patients' contacts and session logs efficiently, combining the speed of typing commands with the ease of a visual interface.**
 
-It’s designed for professionals like therapist who work with many patients and prefer a fast, straightforward tool.
+It’s designed for professionals like therapists who conduct counselling sessions with multiple patients and prefer a fast and optimised tool.
 
-With MindMap, you can accomplish tasks quickly by typing simple commands, and get a clear, user-friendly screen to view and organise your contacts.
+With MindMap, you can accomplish tasks quickly by typing simple commands, and get a clear user-friendly screen to view and organise your patient details.
 
-If you’re comfortable typing, MindMap can help you get patient management tasks done much faster than traditional apps that rely heavily on point-and-click with a mouse.
+If you’re comfortable typing, MindMap can help you accelerate patient management tasks compared to those traditional apps that rely heavily on point-and-click gestures for the same actions.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -22,7 +22,7 @@ If you’re comfortable typing, MindMap can help you get patient management task
 ## Quick start
 
 1. **Check Your Java Version**  
-   Make sure Java **version 17** or above is installed on your computer. <br> <box type="info" seamless>Java is a software platform that lets you run certain types of applications, including `.jar` files. [Learn more about Java here](https://www.java.com/en/download/faq/whatis_java.xml). <br> To check your current Java version, [learn more here](https://www.java.com/en/download/help/version_manual.html). <br>[Download Java here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if needed. </box>
+   Make sure Java **version 17** or above is installed on your computer. <br> <box type="info" seamless>Java is a software platform that lets you run certain types of applications, including `.jar` files. [Learn more about Java here](https://www.java.com/en/download/faq/whatis_java.xml).<br> <br> To check your current Java version, [learn more here](https://www.java.com/en/download/help/version_manual.html). <br>[Download Java here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) if needed. </box>
 
 
 2. **Download MindMap**  
@@ -35,6 +35,7 @@ If you’re comfortable typing, MindMap can help you get patient management task
 
 4. **Open a Terminal**
    <br> <box type="info" seamless> We’ll use the Terminal (or PowerShell on Windows) to enter a few simple commands to launch the MindMap app. </box>
+
     - **For Windows**:
         - Open the Start menu, type “Windows PowerShell”, and click on it to open.
 
@@ -42,9 +43,11 @@ If you’re comfortable typing, MindMap can help you get patient management task
         - Press `Command + Space` to open the search bar.
         - Type "Terminal" and select it from the results.
 
+
 5. **Get the Folder Path**
     - For **Windows**: Hold `Shift` and `Right-click` the folder containing the `.jar` file and select **Copy as Path**.
     - For **Mac**: [Follow these steps](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://macpaw.com/how-to/copy-file-path-mac%23:~:text%3DControl%252Dclick%2520or%2520right%252Dclick%2520on%2520the%2520file%2520in%2520Finder,path%2520wherever%2520you%2520need%2520it.&ved=2ahUKEwiUn6S_jseJAxWVxzgGHTVQJQsQFnoECBQQAw&usg=AOvVaw22hRilijfEWC_nmiYfJzmQ) to copy the folder path.
+
 
 6. **Navigate to the Folder in Terminal**  
    In the terminal, type the following line and press Enter:
@@ -63,12 +66,9 @@ If you’re comfortable typing, MindMap can help you get patient management task
 
 8. **Get Started with the App**  
    In a few seconds, you'll see the MindMap interface open with some sample contacts to explore.
-> **NOTE**: The app contains some sample data.<br>
+
+> **NOTE**: You should see something like this. The app also contains some sample data.<br>
 ![img_1.png](img_1.png)
-
-> Stay Tuned: New UI Arriving Soon!
-![Ui](images/Ui.png)
-
 
 9. **Try Out Some Commands**  
    Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -78,9 +78,9 @@ If you’re comfortable typing, MindMap can help you get patient management task
 
     * `add n/Ben Tan i/S1234567D p/82226688 e/bentan@gmail.com a/Block 322 Jurong East Street 31, #01-01 s/NEW` : Adds a patient named `Ben Tan` to the app.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current patient list.
 
-    * `clear` : Deletes all patients and their log.
+    * `clear` : Deletes all patients and their logs (if any).
 
     * `exit` : Exits the app. 
 
@@ -100,12 +100,12 @@ If you’re comfortable typing, MindMap can help you get patient management task
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [s/STATUS]` can be used as `n/Ben Tan s/LOW` or as `n/Ben Tan`.
-* 
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* 
-* All commmand flags are in lower case.
-* e.g. l/ is the lower case of L and i/ is the lower case of I
+
+* All commmand flags are in lower case. <br>
+  e.g. `l/` is the lower case of L and `i/` is the lower case of I
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -115,9 +115,11 @@ If you’re comfortable typing, MindMap can help you get patient management task
 
 <box type="warning" seamless>
 
-Our application uses Singapore’s NRIC system extensively. To ensure NRICs are valid, we’ve included a simple verification feature. You can test this feature with sample NRIC number/FIN from the [provided list](#sample-nric). 
+Our application uses Singapore’s NRIC system extensively for the Identity Number field `i/`. To ensure NRICs are valid, we’ve included a simple verification feature. You can test this feature with sample NRIC number/FIN from the [provided list](#sample-nric). 
 
 </box>
+<br>
+<br>
 
 ### Viewing help : `help`
 
@@ -126,20 +128,24 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
+<br>
+<br>
 
 ### Adding a patient: `add`
 
 Adds a patient to the app.
-* **After using `add`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind.
+* **After using `add`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind. 
+* Note that typing any other commands other than `confirm` or `cancel` will cancel this operation.
 
 Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
-* **IDENTITY_NUMBER** has to be a valid NRIC(It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a checksum letter (e.g., S1234567D).";))
+* **IDENTITY_NUMBER** has to be a valid NRIC (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g., S1234567D).";))
 
 Examples:
 * `add n/Ben Tan i/S1234567D p/82226688 e/bentan@gmail.com a/Block 322 Jurong East Street 31, #01-01 s/NEW`
 * `add n/Ally Lim i/S0022445F e/allylim@gmail.com a/12 Kent Ridge Drive p/92221100 s/NEW`
+<br>
+<br>
 
 ### Adding a log: `addlog`
 Creates a new log entry for a specific patient. This command is typically used to keep track of sessions or important notes related to each session.
@@ -150,15 +156,18 @@ Creates a new log entry for a specific patient. This command is typically used t
   Examples:
 * `addlog i/S1234567D d/20 May 2024 l/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
 
+**Note:**
+
+1) For logs that requires input text to include some of our flags like `i/`, `d/` and `l/` please use `addentry` command instead.
+2) `\n` characters will be interpreted as new lines in the `l/LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
+3) Log entries that contains purely `\n` characters will be treated as a non-text entry which will disallow users from saving it as a log.
+  <br>
+  <br>
+
 ### Adding a log entry: `addentry`
-Creates a separate pop up window to add new log entry for a patient, with the corresponding `i/IDENTITY_NUMBER` `d/DATE` previous inputted.
+Creates a **separate pop up window** to add new log entry for a patient, with the corresponding `i/IDENTITY_NUMBER` `d/DATE` previously inputted.
 
-After entering the details, click the `Save` button to add the log entry to the patient's log list, 'Cancel' to discard the log entry. Closing the window directly will also discard the log entry.
-
-Note that `\n` characters will be interpreted as new lines in the log entry. In both the `LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
-
-Note that this feature is intended to cater to power users who prefer a more detailed log entry. If you prefer a more straightforward log entry, you can use the `addlog` command directly.
-
+After entering the details, click the `Save` button to add the log entry to the patient's log list, `Cancel` to discard the log entry. Closing the window directly will also discard the log entry.
 > **💡 Tip:** Alternatively, use **"Ctrl + Enter"** to save the log entry on Windows and **"Cmd + Enter"** on Mac.
 
 **Format**: `addentry i/IDENTITY_NUMBER d/DATE`
@@ -168,6 +177,16 @@ Note that this feature is intended to cater to power users who prefer a more det
 * `addentry i/S1234567D d/20 May 2024` opens a new window to add a log entry for the contact with NRIC `S1234567D` on the date `20 May 2024`.
 * Example:</br>
   ![img.png](img.png)
+<br>
+
+**Note:**
+
+1) Compared to `addlog` this command allows users to type in flags like `i/`, `d/` and `l/` in the log entry field. This is useful for users who want to include these flags in their log entry.
+2) `\n` characters will be interpreted as new lines in the `l/LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
+3) This feature is intended to cater to power users who prefer a more detailed log entry. If you prefer a more straightforward log entry, you can use the `addlog` command directly.
+4) Log entries that contains purely `\n` characters will be treated as a non-text entry which will disallow users from saving it as a log.
+<br>
+<br>
 
 ### Editing a patient : `edit`
 
@@ -183,6 +202,8 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS]
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit S1234567D n/Benson Lim` Edits the name of the patient with the specified `NRIC` to be `Benson Lim`.
+   <br>
+   <br>
 
 ### Locating patients by name or NRIC: `find`
 
@@ -192,17 +213,18 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name or full NRIC is searched.
 * For Names:
-* Only full words will be matched e.g. `Han` will not match `Hans`
+  Only full words will be matched e.g. `Han` will not match `Hans`
 * For NRIC:
-* Only the Full NRIC will be matched .e.g `S123` will not match `S1234567D`.
+  Only the Full NRIC will be matched .e.g `S123` will not match `S1234567D`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+<br>
+<br>
 
 ### Deleting a patient : `delete`
 
@@ -219,6 +241,8 @@ Examples:
 * `delete i/S1234567D` deletes the patient with NRIC S1234567D in the address book.
 * `list` followed by `delete 2` deletes the 2nd patient in MindMap.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+  <br>
+  <br>
 
 ### Clearing all entries : `clear`
 
@@ -228,7 +252,8 @@ Format: `clear`
 
 * **After using `clear`, type `confirm` to proceed with the clearing of all entries**. You can also use `cancel` if you change your mind.
 > **⚠️ Warning:** This deletes **ALL** of the patient contacts and their respective session logs. This action is non-reversible.
-
+<br>
+<br>
 
 ### Confirming a command : `confirm`
 
@@ -237,6 +262,8 @@ Confirms the command that is currently being executed. This command is used to c
 Examples:
 * `delete i/S1234567D` followed by `confirm` deletes the patient with NRIC S1234567D in MindMap.
 * `clear` followed by `confirm` clears all entries in the MindMap.
+  <br>
+  <br>
 
 ### Canceling a command : `cancel`
 
@@ -246,12 +273,16 @@ clearing of MindMap.
 Examples:
 * `delete i/S1234567D` followed by `cancel` cancels the deletion of the patient with NRIC S1234567D in MindMap.
 * `clear` followed by `cancel` cancels the clearing of the MindMap.
+  <br>
+  <br>
 
 ### Listing all patients : `list`
 
 Shows a list of all patients in the app.
 
 Format: `list`
+<br>
+<br>
 
 ### Listing Session logs: `logs`
 
@@ -269,18 +300,22 @@ Example:
 Only the `logs` command will bring up the list of logs for the specific patient. Any other command will bring you right back to the patient list.
 
 </box>
-
-
+<br>
+<br>
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+<br>
+<br>
 
 ### Saving the data
 
 MindMap data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<br>
+<br>
 
 ### Editing the data file
 
@@ -303,7 +338,13 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
 **Q**: Can the new **M** FIN series introduced in Singapore From 1 January 2022 onwards be used?<br>
 **A**:Unfortunately, no. Our application only supports the format of the **F** and **G** FIN series, and for the **S** and **T** series for the NRIC. Also note that while most valid NRIC/FIN are able to be recognised by our application, some would inevitably fail as the Singapore Government does not disclose the true method to verify NRIC/FIN.
 
+**Q**: Why can't I edit or delete logs?<br>
+**A**: With regard to medical records, our research shows that it seems unethical to post-date or back-date medical information[1]. Moreover, our software is not designed to keep track of time stamps and medical information changes. As such there will be no way of detecting malicious practices. Hence, given the potential legal issues, we have decided to disallow the editing and deletion of logs.
 
+However, there are mechanisms in place to prevent accidental inputs. The existence of save buttons in `addentry` helps prevent accidental saves as well as the text box being designed in a way that completely disallows users from saving empty logs.
+
+[1] Singapore Medical Council. (2016). Ethical Code and Ethical Guidelines. Section B3 (6) and B4 (5). Retrieved from
+https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-smc-ethical-code-and-ethical-guidelines---(13sep16).pdf
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -372,7 +413,6 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
 
 * **Other Commands**:
     - **Help** shows a guide for using all commands.
-
 ---
 
 ## **Sample NRICs**
@@ -398,10 +438,12 @@ This data is not to be used for any purposes beyond application testing. Unautho
 | 9         | S4998948B       |
 | 10        | T3692411F       |
 
-## **Future Updates**
+## **Stay Tuned: Future enhancements coming!**
+>New UI Arriving Soon!
+![Ui](images/Ui.png)
 
 1. **Search by sub-strings**  
    Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow users to search for sub-strings within names.
-
+2. 
 
 
