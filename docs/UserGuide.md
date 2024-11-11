@@ -440,7 +440,7 @@ Edits the details of an existing wedding.
     - At least one optional field must be provided.
     - Client cannot be changed after creation.
     - Existing values will be updated to the new values.
-    - Date and venue must adhere to validation rules.
+    - Date and venue must adhere to validation rules specified in the [Validation Rules for Wedding Fields](#wedding-fields).
 - **Examples**:
     - `editw w/1 n/Sunset Wedding`
         - Changes the name of the wedding at index 1 to "Sunset Wedding".
