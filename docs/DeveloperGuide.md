@@ -367,7 +367,13 @@ The activity diagram below illustrates the workflow behind the execution of the 
 ![EditActivityDiagram](images/EditActivityDiagram.png)
 
 ##### Design Consideration
+**Using `Nric` Field as a Unique Identifier**<br>
+Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `edit` command since both commands are fundamentally similar.
 
+**Adding prefixes to add and remove allergies**<br>
+We decided to use the `al|` prefix to add allergies and `rmal|` to remove allergies as this simplifies the process of updating a patient's allergies. 
+Instead of requiring the user to retype all current allergies whenever they want to edit the patient, we allow for cumulative updating of allergies. 
+This design reduces redundant data entry, minimises input errors, and aligns with the fact that allergies typically do not go away.
 
 #### Delete Command : `delete`
 The `delete` command is used to delete a patient entry from the patient list.
