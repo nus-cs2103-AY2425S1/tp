@@ -20,12 +20,23 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   1. To check if you have Java installed, open a command terminal:
+      * Windows: Open Windows PowerShell or open the start menu and enter `cmd`.
+      * MacOS: Open the Terminal app or press Cmd and spacebar together and enter `terminal`.
+      * Linux: Open the Terminal app or press the "Ctrl + Alt + T" keys simultaneously.
+   2. In the terminal, type `java -version`.
+   3. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
+   4. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
+   5. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
+2. Download the latest `.jar` File:
+    * Download the `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
+    * By default, the jar file would be saved in the Downloads folder.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your address book.
 
 4. Open a command terminal, `cd` into the folder that you put the jar file in.
+   * For example, if the jar file is still in the Downloads folder, type `cd Downloads`
 
 5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
@@ -97,7 +108,7 @@ Action     | Format, Examples
 
 * No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER**.
 
-> Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
+  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
 
 * For commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`), any extra text that comes after the command word will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
@@ -142,11 +153,15 @@ Adds a student to the address book.
 
 ##### Constraints
 
-* **NAME** must only contain alphanumeric characters and spaces.
+* **NAME** must only contain alphanumeric characters and spaces. 
+  * **NAME** is case-insensitive.
+* **ADDRESS** has no restrictions.
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME` (strictly no space in between).
-* **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
-* **START_TIME** and **END_TIME** are represented as `HHmm`.
-* **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
+  * **DAY_OF_THE_WEEK** is one of `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
+  * **DAY_OF_THE_WEEK** is case-insensitive.
+  * **START_TIME** and **END_TIME** are represented as `HHmm`.
+* **PHONE_NUMBER** should be 8 digits that starts with 3, 6, 8 or 9.
+  > Reason: This constraint follows the convention set by Singapore's National Numbering Plan.
 * **RATE** is the tuition fee per hour. It must meet the following criteria:
   * It is a positive numeric value with at most 2 decimal places.
   * Minimum: $0.01 (must be a positive value)
@@ -158,12 +173,13 @@ Adds a student to the address book.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
+  * **SUBJECT** is case-insensitive.
 
 </box>
 
 <box type="tip" header="##### Tips">
 
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+* **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the students's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 * UGTeach will inform you of clashing schedules. You can modify them using the [`edit` command](#editing-a-student-edit).
   ![clashingSchedule.png](images/clashingSchedule.png)
 
@@ -199,7 +215,7 @@ Edits an existing student in the address book.
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
 [`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
-* <b>ADDRESS</b> can be used to store place of tuition. E.g. You can store tutee's address if the tuition happens at their place or you can store `My Place` if the tuition is at your place.
+* **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the student's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 </box>
 
 <div style="page-break-after: always;"></div>
@@ -411,6 +427,11 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Glossary
+* **CLI**: Command-line interface, where you interact with the system using your keyboard.
+* **GUI**: allows you to interact with your computer through text-based commands. It provides a way to run programs, navigate through files and directories, manage processes, and perform various other tasks.
+* **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
+--------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
