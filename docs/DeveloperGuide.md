@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
-* Libraries used: 
+* Libraries used:
   * [JavaFX](https://openjfx.io/)
   * [Jackson](https://github.com/FasterXML/jackson)
   * [JUnit5](https://github.com/junit-team/junit5)
@@ -250,7 +250,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 * 3a. GAB detects an error in tags command format.
-   * 3a1. GAB responds with a command error message and requests correct data. 
+   * 3a1. GAB responds with a command error message and requests correct data.
    * 3a2. User enters new data.
    * Steps 3a1-3a2 are repeated until the command format entered is correct.
    * Use case resumes at step 4.
@@ -435,9 +435,8 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 ## Appendix: Planned Enhancements
-
-- Enhance duplicate detection 
+- Enhance duplicate detection
   - Include address field, not just name to detect duplicates
   - Handle case-insensitive duplicates
     - Currently, the app does not handle case-insensitive duplicates. For example, "McDonalds" and "mcdonalds" are treated as different restaurants.
-  - Allow non-alphanumeric characters in restaurant names
+- Allow non-alphanumeric characters in restaurant names
