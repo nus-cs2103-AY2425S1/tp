@@ -41,13 +41,16 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. Download it [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T14-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AdmiNUS.
 
-4. Open a command terminal, type `cd your_file_path` into the folder you put the jar file in, and use the `java -jar adminus.jar` command to run the application.<br>
+4. Open a [command terminal](https://www.freecodecamp.org/news/command-line-for-beginners/#heading-terminal), and run the following commands:
+   * `cd your_file_path_to_folder` which takes you to the folder you put the jar file in.
+   * `java -jar AdmiNUS.jar` command to run the application.<br>
+   
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Gui](images/GuiExample.png)
 
