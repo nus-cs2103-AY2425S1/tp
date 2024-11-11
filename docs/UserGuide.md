@@ -1200,7 +1200,7 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **For the n/ prefix**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen).
+3. **For the n/ prefix**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified. 
 4. **For the add/ prefix**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
 5. **For the moreinfo command**, the `Output` for User Error #2 has a missing parameters line where the CLIENT_INDEX should be. Refer to the Special Comments section under [More Info](#more-info) for more clarification.
 6. **For the chatbot**, the text input field appears in black, which does not contrast well with its gray background.
