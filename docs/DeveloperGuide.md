@@ -595,3 +595,4 @@ Team Size: 5
 4. Allow for automatic capitalization for supplier names. Currently, inputting a lower cased supplier name into the relevant commands does not automatically capitalize it appropriately.
 5. Add case insensitivity for tags. Currently, identical tags that differ only in letter casing are considered as unique tags.
 6. Enhance error handling for the address parameter by providing specific feedback on which part of the input is invalid. The error message should clearly inform the user about the exact issue, such as incorrect street name, invalid postal code, or missing building name information.
+7. Update the error message for adding goods to clarify that the quantity must be a positive integer excluding 0. Currently, it states that the quantity must be a non-negative integer, but the program does not accept 0 as a valid quantity. Adjust the message to accurately reflect this requirement.
