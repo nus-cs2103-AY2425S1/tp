@@ -1,5 +1,7 @@
 package tahub.contacts.ui;
 
+import java.util.Comparator;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +14,6 @@ import tahub.contacts.logic.Logic;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 
-import java.util.Comparator;
 
 /**
  * A UI component that displays information of a {@code Person}.
