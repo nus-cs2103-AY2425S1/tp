@@ -31,7 +31,6 @@ public class AddCommand extends Command {
             + PREFIX_TUTORIALID + "T1001";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
     public static final String MESSAGE_DUPLICATE_STUDENTID = "This student ID already exists in the address book: ";
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "The tutorial ID provided doesn't exist! \nTutorial ID: ";
 
@@ -50,10 +49,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        /*if (model.hasStudent(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-        }*/
 
         if (model.hasStudentWithId(toAdd.getStudentId())) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + toAdd.getStudentId());
@@ -79,11 +74,9 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddCommand otherAddCommand)) {
             return false;
         }
-
-        AddCommand otherAddCommand = (AddCommand) other;
 
         boolean haveTutorialId;
         if (tutorialId != null) {
