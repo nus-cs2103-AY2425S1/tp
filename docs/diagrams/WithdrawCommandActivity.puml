@@ -1,0 +1,32 @@
+@startuml
+skinparam {
+  backgroundColor white
+  ArrowColor black
+  ArrowThickness 2
+  ActivityBackgroundColor green
+  ActivityBorderColor #2980B9
+  ActivityFontColor white
+}
+start
+:User withdraws application\n(executes WithdrawCommand);
+
+if () then ([Command is invalid])
+    :Displays message for invalid command format;
+else ([Valid command])
+    :Gets company by index;
+
+    :Gets application by index;
+
+    :Removes application from the company;
+
+    if () then ([else])
+        :Changes company status to "CLOSED";
+    else ([Application list is not empty])
+    endif
+    :Displays updated company in current list view;
+    :Displays success message;
+
+endif
+
+stop
+@enduml
