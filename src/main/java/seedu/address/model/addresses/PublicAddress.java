@@ -10,12 +10,12 @@ import java.util.Objects;
  */
 public abstract class PublicAddress {
 
-    public static final String DEFAULT_LABEL = "default"; // TODO: Remove once placeholder is no longer needed
+    public static final String DEFAULT_LABEL = "default";
 
     public static final String MESSAGE_LABEL_CONSTRAINTS =
-        "Public Address Labels should not be blank"; // TODO: Update constraints
+        "Public Address Labels should not be blank";
     public static final String VALIDATION_PUBLIC_ADDRESS_REGEX = "^[a-zA-Z0-9]*$";
-    public static final String VALIDATION_LABEL_REGEX = "[^\\s].*"; // TODO: Update regex
+    public static final String VALIDATION_LABEL_REGEX = "[^\\s].*";
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND =
         "Can't find any Person with public address"
             + " inputted: %1$s";

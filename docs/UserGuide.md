@@ -77,11 +77,13 @@ We’ll walk you through each feature, so you can discover with ease **DLTbooks*
 
 [Back to Top]
 
---------------------------------------------------------------------------------------------------------------------
+
 
 <div style="page-break-after: always"></div>
 
-# Beginner's Guide
+
+
+## Beginner's Guide
 
 <panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded>
 
@@ -168,12 +170,14 @@ Here’s how you can start using DLTbook:
 
 <box type="info" seamless>
 
-- **Note**: Java 17 or newer is required to run DLTbook
+**Note:**
 
-- **Note**: If you have multiple versions of Java installed, you may need to specify the path to the correct version
-  when running DLTbook
+- Java 17 or newer is required to run DLTbook
 
-- **Note**: If you're using a Mac, you may need to install the Java Development Kit (JDK) instead of the Java Runtime
+- If you have multiple versions of Java installed, you may need to specify the path to the correct version
+  of DLTbook
+
+- If you're using a Mac, you may need to install the Java Development Kit (JDK) instead of the Java Runtime
   Environment (JRE)
 
   </box>
@@ -272,7 +276,7 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 
 - Visit our [Detailed Features Guide](#features) below
 
-- Check our [Troubleshooting Guide](link-to-troubleshooting) if you run into any issues
+- Check our [Common Errors](#common-errors) if you run into any issues
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -702,9 +706,26 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AddressBook home folder.
+
+
+**Q**: Can I integrate it with other Crypto Wallet services? (eg. Metamask,etc.)<br>
+**A**: We are planning to add integration with other Crypto wallets in the future.
+
+
+**Q**: Does it support other Crypto Networks? (eg. BNB, Polygon, etc.)<br>
+**A**: Right now, we only support BTC, ETH and SOL. We are planning to support these networks in the future.
+
+
+**Q**: Can I use it on my phone?<br>
+**A**: DLTbook is a desktop application and is not supported on mobile devices.
+
+**Q**: How do I report a bug?<br>
+**A**: You can report a bug by creating an issue on our [GitHub repository](https://github.com/AY2425S1-CS2103T-T08-1/tp/issues).
+
+**Q**: Can I use it offline?<br>
+**A**: Yes, DLTbook is a desktop application and does not require an internet connection to run.
 
 --------------------------------------------------------------------------------------------------------------------
 
