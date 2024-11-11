@@ -9,14 +9,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import tutorease.address.commons.core.LogsCenter;
-import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a DateTime in the address book.
  */
 public class DateTime implements Comparable<DateTime> {
-    private static Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
+    private static Logger logger = LogsCenter.getLogger(DateTime.class);
     private final LocalDateTime dateTime;
 
     /**
@@ -79,6 +78,7 @@ public class DateTime implements Comparable<DateTime> {
         DateTime otherDateTime = (DateTime) other;
         return dateTime.equals(otherDateTime.dateTime);
     }
+
     /**
      * Compares this date time with another date time.
      *
