@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-PROperty is a **desktop app for property agents managing clients' contact details and their property listings,
+PROperty is a **desktop app for property agents managing contacts and their property listings,
 optimized for use via a Command Line Interface** [(CLI)](#technical-terms) while still having the benefits of a Graphical User Interface [(GUI)](#technical-terms).
-If you can type fast, PROperty can get your client and property management tasks done faster than traditional GUI apps.
+If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
 PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
 and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It is much
@@ -121,7 +121,7 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
    
      ![Annotated_Ui](images/user-guide-images/Annotated_Ui.png)
    
-   - The image above showcases the various components of PROperty.
+   - The screenshot above showcases the various components of PROperty.
 
 
 <div class="no-print" markdown="span">
@@ -198,7 +198,7 @@ Adds a client to PROperty.
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​`
 
 - `NAME` and `PHONE_NUMBER` fields must be provided.
-  - `NAME` can only contain **alphanumeric characters and spaces**.
+  - `NAME` can only contain **alphanumeric and spaces**.
 -  Client tags are added in a case-insensitive manner. e.g `t/buyer` or `t/BUYER` will both add the `Buyer` tag.
 -  Refer to the [Tag Table](#tag-table) for a complete list of client tags.
 - A client is considered the "same" as another client based on matching values in: `NAME` and `PHONE_NUMBER`.
@@ -243,7 +243,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
   * This option **can not be used** with any other tag options (i.e `t/seller dt/buyer`).
-* `NAME` can only contain **alphanumeric characters and spaces**.
+* `NAME` can only contain **alphanumeric and spaces**.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Use `t/` to add new tags and `dt/` to delete specific tags from a client. 
@@ -254,10 +254,10 @@ Examples:
 1. `edit 1 p/87438807 e/alexyeoh@example.com` edits the phone number and email address of the `1st` client to be `87438807` and `alexyeoh@example.com` respectively.
 
 
-2. `edit 2 n/Betsy Crower t/` edits the name of the second client to be `Betsy Crower` and clears all existing tags.
+2. `edit 2 n/Betsy Crower t/` edits the name of the `2nd` client to be `Betsy Crower` and clears all existing tags.
 
 
-3. `edit 2 t/condo` edits the tag of the second client to be `condo`.
+3. `edit 2 t/condo` edits the tag of the `2nd` client to be `condo`.
 
 Visual example of correct output [Example `1.`]:
 
@@ -285,10 +285,10 @@ Use the `list` or `find` command to determine the `INDEX` of the client you want
 
 Examples:
 
-1. `list` followed by `delete 2` deletes the client at index `2` listed in PROperty.
+1. `list` followed by `delete 2` deletes the 2nd client listed in PROperty.
 
 
-2. `find Betsy` followed by `delete 1` deletes the client at index `1` in the **results of the `find` command**.
+2. `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 Visual example of correct output [Example `1.`]:
 
@@ -366,10 +366,10 @@ Use `show` to view a client in-depth.
 
 Examples:
 
-1. `show 2` shows the name, client information, tags, and property listings of the client at index `2` in PROperty.
+1. `show 2` shows the name, client information, tags, and property listings of the second client in the PROperty.
 
 
-2. `show 7` shows the name, client information, tags, and property listings of the client at index `7` in PROperty.
+2. `show 7` shows the name, client information, tags, and property listings of the seventh client in the PROperty.
 
 Visual example of correct output [Example `1.`]:
 
