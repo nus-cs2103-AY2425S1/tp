@@ -196,6 +196,10 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd elderly in ContactMate.
 * `find Betsy` followed by `delete 1` deletes the 1st elderly in the results of the `find` command.
 
+<div markdown="block" class="alert alert-danger">
+    :warning: **Warning:** This action is irreversible. Please be sure before deleting.
+</div>
+
 ### Marking an elderly : `mark`
 
 Marks the specified elderly from the current person list as called. 
