@@ -15,7 +15,7 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer. <br>
-   You may install Java `17` from [here](https://www.openlogic.com/openjdk-downloads?field_java_parent_version_target_id=807&field_operating_system_target_id=All&field_architecture_target_id=All&field_java_package_target_id=All)
+   You may install Java `17` from [here](https://www.openlogic.com/openjdk-downloads?field_java_parent_version_target_id=807&field_operating_system_target_id=All&field_architecture_target_id=All&field_java_package_target_id=All).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-2/tp/releases).
 
@@ -34,7 +34,7 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
 
    * `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer named `John Doe` to the displayed customer list.
 
-   * `deletecustomer 3` : Deletes the 3rd customer's contact and order list shown in the displayed customer list and their corresponding order list.
+   * `deletecustomer 3` : Deletes the 3rd customer's contact shown in the displayed customer list and their corresponding order list.
 
    * `listorder 1` : Lists all orders under the 1st customer as a displayed order list.
 
@@ -57,7 +57,7 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addcustomer n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -239,13 +239,13 @@ Examples:
 
 ##### Constraints
 
-* Add an order under the customer at the specified `CUSTOMER_INDEX`, with a default `pending` status.
+* Add an order under the customer at the specified `CUSTOMER_INDEX`, with a default `Pending` status.
 * The index refers to the index number shown in the displayed customer list.
 * The index and quantity **must be a positive integer** 1, 2, 3, …​
 * 'ITEM' can contain any printable characters, but it should not be blank.
 * Date must follow the following format: `DD-MM-YYYY`
 * If the quantity is not provided, the quantity will be set to a default value of **1**.
-* If there already exists a pending order with similar item(same item excluding space and casing), identical quantity and date under that customer, a warning will be given.
+* If there already exists a pending order with similar item (same item excluding space and casing), identical quantity and date under that customer, a warning will be given.
 * If the order `DATE` has elapsed the current date, a warning will be given.
 
 </box>
@@ -427,9 +427,6 @@ If your changes to the data file makes its format invalid, SellSavvy will discar
 Furthermore, certain edits can cause the SellSavvy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
