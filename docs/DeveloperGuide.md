@@ -523,16 +523,84 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list all/` command. Ensure there are multiple persons in this list.
+    1. Prerequisites: List all persons using the `list all/` command. Ensure there are multiple persons in this list.
 
-   1. Test case: `delete 1,2`<br>
-      Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message.
-   2. Test case: `delete 1,1,1,2`<br>
-      Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message. 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details about invalid format shown in the display message.
-   4. Test case: `delete 1,10000`<br>
-      Expected: No person is deleted. Error details about invalid index shown in the display message.
+    1. Test case: `delete 1,2`<br>
+       Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message.
+    2. Test case: `delete 1,1,1,2`<br>
+       Expected: First and second person is deleted from the list. Names of the deleted people shown in the display message.
+    3. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details about invalid format shown in the display message.
+    4. Test case: `delete 1,10000`<br>
+       Expected: No person is deleted. Error details about invalid index shown in the display message.
+    5. Test case: `delete`<br>
+       Expected: No person is deleted. Error details about invalid format shown in the display message.
+
+### Adding a scheme to a person
+
+1. Adding a scheme to the specified person in the list
+
+    1. Prerequisites: List current persons using the `list` command. Ensure there are multiple persons in this list. Specified person must be eligible for at least one scheme. Schemes that the person is eligible for can be checked using `scheme INDEX` where index is the person's index.
+
+    2. Test case: `addscheme 1 i/1`<br>
+       Expected: The first scheme in the list of schemes the first person is eligible for will be added to that person. Name of the person and added scheme shown in the display message.
+    3. Test case: `addscheme 0 i/0`<br>
+       Expected: No scheme is added to person. Error details about invalid format shown in the display message.
+    4. Test case: `addscheme 1`<br>
+       Expected: No scheme is added to person. Error details about invalid format shown in the display message.
+    5. Test case: `addscheme`<br>
+       Expected: No scheme is added to person. Error details about invalid format shown in the display message.
+
+### Deleting schemes from a person
+
+1. Deleting schemes from the specified person in the list
+
+    1. Prerequisites: List current persons using the `list` command. Ensure there are multiple persons in this list. Specified person must have at least two schemes added to them. Schemes that the person is eligible for can be checked using `scheme INDEX` where index is the person's index.
+
+    2. Test case: `deletescheme 1 i/1`<br>
+       Expected: The first scheme in the list of schemes the first person has added to them will be deleted. Name of the person and deleted scheme shown in the display message.
+    3. Test case: `deletescheme 1 i/1,2`<br>
+       Expected: The first and second scheme in the list of schemes the first person has added to them will be deleted. Name of the person and deleted schemes shown in the display message.
+    4. Test case: `deletescheme 0 i/0`<br>
+       Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
+    5. Test case: `deletescheme 1`<br>
+       Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
+    6. Test case: `deletescheme`<br>
+       Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
+
+### Adding an appointment to a person
+
+1. Adding appointment to the specified person in the list
+
+    1. Prerequisites: List current persons using the `list` command. Ensure there are multiple persons in this list. Ensure date and time of appointment you are adding does not conflict with any existing appointments.
+
+    2. Test case: `addappt 1 date/2024-11-15 from/16:00 to/18:00`<br>
+       Expected: An appointment with the first person at that date and time period is added to the appointment list. Name of the person and appointment's date and time period shown in the display message.
+    3. Test case: `addappt 0 date/2024-11-15 from/16:00 to/18:00`<br>
+       Expected: No appointment added to person. Error details about invalid index shown in the display message.
+    4. Test case: `addappt 1 date/15 Nov 2024 from/16:00 to/18:00`<br>
+       Expected: No appointment added to person. Error details about invalid date format shown in the display message.
+    5. Test case: `addappt 1 date/2024-11-15 from/16:00 to/10:00`<br>
+       Expected: No appointment added to person. Error details about invalid time period shown in the display message.
+    6. Test case: `addappt 1 date/2024-11-15`<br>
+       Expected: No appointment added to person. Error details about invalid format shown in the display message.
+    7. Test case: `addappt 1 from/16:00 to/18:00`<br>
+       Expected: No appointment added to person. Error details about invalid format shown in the display message.
+    8. Test case: `addappt`<br>
+       Expected: No appointment added to person. Error details about invalid format shown in the display message.
+
+### Deleting an appointment
+
+1. Deleting appointment in the appointment list
+
+    1. Prerequisites: List appointment list using the `listappt` command. Ensure there are multiple appointments in this list.
+
+    2. Test case: `deleteappt 1`<br>
+       Expected: The first appointment in the appointment list is deleted. Name of the person the deleted appointment belonged to and that appointment's date and time period are shown in the display message.
+    3. Test case: `deleteappt 0`<br>
+       Expected: No appointment deleted. Error details about invalid format shown in the display message.
+    4. Test case: `deleteappt`<br>
+       Expected: No appointment deleted. Error details about invalid format shown in the display message.
 
 ### Archiving a person
 
@@ -547,7 +615,7 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `archive john`<br>
        Expected: No person is archived. Error details about invalid format shown in the display message.
     5. Test case: `archive`<br>
-         Expected: No person is archived. Error details about invalid format shown in the display message.
+       Expected: No person is archived. Error details about invalid format shown in the display message.
 
 2. Archiving an already archived person
 
@@ -560,16 +628,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Unarchiving a person while all archived persons are being shown
 
-   1. Prerequisites: List archived persons using the `list archive/` command. Ensure there are multiple persons in this list.
+    1. Prerequisites: List archived persons using the `list archive/` command. Ensure there are multiple persons in this list.
 
-   2. Test case: `unarchive 1`<br>
-     Expected: First person is unarchived from the list. Name of the archived person shown in the display message.
-   3. Test case: `unarchive 0`<br>
-     Expected: No person is unarchived. Error details about invalid format shown in the display message.
-   4. Test case: `unarchive john`<br>
-     Expected: No person is unarchived. Error details about invalid format shown in the display message.
-   5. Test case: `unarchive`<br>
-     Expected: No person is unarchived. Error details about invalid format shown in the display message.
+    2. Test case: `unarchive 1`<br>
+       Expected: First person is unarchived from the list. Name of the archived person shown in the display message.
+    3. Test case: `unarchive 0`<br>
+       Expected: No person is unarchived. Error details about invalid format shown in the display message.
+    4. Test case: `unarchive john`<br>
+       Expected: No person is unarchived. Error details about invalid format shown in the display message.
+    5. Test case: `unarchive`<br>
+       Expected: No person is unarchived. Error details about invalid format shown in the display message.
 
 2. Unarchiving a current person
 
