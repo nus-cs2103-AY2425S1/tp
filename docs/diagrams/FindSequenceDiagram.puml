@@ -21,7 +21,7 @@ participant "filteredPersons:FilteredList<Person>" as FilteredList #3993C4
 [-> LogicManager : execute("find f/")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find f/")")
+LogicManager -> AddressBookParser : parseCommand("find f/")
 activate AddressBookParser
 
 create FindCommandParser
@@ -64,8 +64,6 @@ deactivate FilteredList
 
 Model --> FindCommand :
 deactivate Model
-
-
 
 create CommandResult
 FindCommand -> CommandResult
