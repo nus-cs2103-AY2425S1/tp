@@ -668,7 +668,7 @@ Displaying the detailed information window can be done in two ways:
   <!-- Input Section -->
   <div style="width: 45%; margin-bottom: 20px;">
     <p><b>Input:</b> User enters the `info 1` command to display detailed information for the first student.</p>
-    <img src="images/infocommand1.png" alt="Info Command Input 1" style="width: 100%;" />
+    <img src="images/infocommand1.png" alt="Info Command Input 1" style="width: 100%; height: auto; max-height: 300px;" />
   </div>
 
   <!-- Output Section -->
@@ -678,6 +678,7 @@ Displaying the detailed information window can be done in two ways:
   </div>
 
 </div>
+
 
 #### Method 2:
 **Example Usage:**
