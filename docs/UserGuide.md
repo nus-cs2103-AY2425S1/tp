@@ -50,6 +50,8 @@ done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Features
 
 <box type="info" seamless>
