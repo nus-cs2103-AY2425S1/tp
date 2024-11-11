@@ -33,7 +33,7 @@ You can reach us at the email `xingye[at]u.nus.edu`
 
 <img src="images/miuna9890.png" width="200px">
 
-[[github](http://github.com/miuna9890/tp)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/miuna9890/tp)]
 
 * Role: Developer
 * Responsibilities: Data
