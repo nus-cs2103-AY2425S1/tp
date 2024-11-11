@@ -46,7 +46,7 @@ Having access to both a Command Line Interface (CLI) and a Graphical User Interf
     Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
     </div>
 
-    - `exit` : Exits the app.<br>
+    - `exit` : Exits the app.<br><br>
 
 6. Refer to the [Features](#features) below for details of each command.
 
