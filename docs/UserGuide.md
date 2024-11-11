@@ -712,6 +712,17 @@ view <INDEX>
 - **On Success:**
     - A split view opens showing the selected client's complete information
     - The main list remains visible and functional on the left while detailed information appears on the right
+    - The image below the GUI before and after using `view 1`:
+        <div style="display: flex; gap: 10px;">
+            <figure markdown>
+                <img src="images/UIBeforeView.png" alt="UI Before View" style="width: 100%;">
+                <figcaption>Before View</figcaption>
+            </figure>
+            <figure markdown>
+                <img src="images/UIAfterView.png" alt="UI After View" style="width: 100%;">
+                <figcaption>After View</figcaption>
+            </figure>
+        </div>
 - **On Error:**
     - Invalid index error message:
       ```
@@ -737,6 +748,17 @@ close
 - **On Success:**
     - The split view closes
     - The main list view returns to full width
+    - The image below the GUI before and after using `close`:
+      <div style="display: flex; gap: 10px;">
+          <figure markdown>
+              <img src="images/UIAfterView.png" alt="UI Before View" style="width: 100%;">
+              <figcaption>Before Close</figcaption>
+          </figure>
+          <figure markdown>
+              <img src="images/UIAfterClose.png" alt="UI After View" style="width: 100%;">
+              <figcaption>After Close</figcaption>
+          </figure>
+      </div>
 - **On Error:**
     - No error messages are shown; the command is simply ignored if no split view is open
 
@@ -766,8 +788,8 @@ help
 ```
 - Opens up a dialog box that provides:
     - **Command summary table** with command format and basic examples
-    - **Hyperlink to the User Guide**
-
+    - **Button to copy User Guide link** for easy access to the full user guide for more information.
+    ![HelpWindow](images/HelpWindow.png)
 
 
 
@@ -779,7 +801,6 @@ help
 ```
 exit
 ```
-- The message `Terminating program…` is displayed.
 - After a brief delay, the program will close, effectively exiting the application.
 
 
