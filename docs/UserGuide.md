@@ -125,7 +125,7 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
 * Adds a buyer with the specified `BUYER_NAME`, `BUYER_PHONE_NUMBER`, and `BUYER_EMAIL`.
 * The `BUYER_NAME` should ignore case sensitivity and not be empty. Each word is separated by a single space or apostrophe and has a character limit of 747 ([longest name](https://www.guinnessworldrecords.com/world-records/67285-longest-personal-name) in the world is 747 characters).
 * The `BUYER_PHONE_NUMBER` should only contain 8 numbers in the range [0-9] and can only start with '3', '6', '8' or '9' (as per the format for Singapore phone numbers). Spaces are not allowed between the 8 numbers.
-* The `BUYER_EMAIL` should follow the format `local-part@domain` and adhere to the following constraints:
+* The `BUYER_EMAIL` should be of the format `local-part@domain` and adhere to the following constraints:
   * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+`, `_`, `.`, `-`). 
     * The `local-part` may not start or end with any special characters and must not contain consecutive special characters.
   * This is followed by an `@` and then a `domain`.
@@ -134,8 +134,7 @@ Format: `addbuyer n/BUYER_NAME p/BUYER_PHONE_NUMBER e/BUYER_EMAIL`
       * each domain label must start and end with alphanumeric characters.
       * The final label is the top-level domain (TLD), which must be at least two alphabetic characters long.
   * Examples:
-    * Valid: `example@gmail.com`, `user.name@sub-domain.example.com`, `example@u.nus.edu`.
-    * Invalid: `user..name@example.com` (consecutive dots in the `local-part`), `user.@example.com` (`local-part` ends with a special character), `user@-example.com` (domain label starts with a hyphen).
+    * `example@gmail.com`, `example@u.nus.edu`.
 
 <box type="info" seamless>
 

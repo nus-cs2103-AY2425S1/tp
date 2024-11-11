@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
-    public static final String MESSAGE_CONSTRAINTS = "Emails should follow the format: "
+    public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format "
             + "local-part@domain and adhere to the following constraints:\n"
             + "\t1. The local-part should only contain alphanumeric characters "
             + "and these special characters, excluding "
@@ -25,10 +25,7 @@ public class Email {
             + "\t\t\t- The final label is the top-level domain (TLD), which must be at least "
             + "two alphabetic characters long.\n"
             + "\t4. Examples:\n"
-            + "\t\t- Valid: example@gmail.com, user.name@sub-domain.example.com, example@u.nus.edu\n"
-            + "\t\t- Invalid: user..name@example.com (consecutive dots in the local-part), "
-            + "user.@example.com (local-part ends with a special character), "
-            + "user@-example.com (domain label starts with a hyphen).";
+            + "\t\t- example@gmail.com, example@u.nus.edu";
 
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
