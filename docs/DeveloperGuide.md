@@ -172,6 +172,17 @@ The following activity diagram summarises what happens when a user executes the 
 
 insert activity diagram for seed command for loop
 
+### View feature
+
+#### Implementation
+
+The view feature toggles the card status of a contact in SocialBook to either show all of their information or an abridged version of it.
+
+The view command works just like any other `Command` object and how a `Command` object communicates with the `Model` is explained in the [Logic component](#Logic-component).
+
+The activity diagram below shows how a view command toggles the card status of a contact:
+
+insert activity diagram for view command
 
 
 ### \[Proposed\] Undo/redo feature
