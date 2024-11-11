@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -632,6 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Audit**: A record of all changes made in the system, including who made the changes and when.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Planned Enhancements**
 Team Size: 5
 1. **Update `add-patient` and `add-doctor` commands to check the date of birth and phone number input for logical inputs**
@@ -673,12 +674,22 @@ Team Size: 5
       2. Address field: Limit to 100 characters, allowing detailed addresses without causing layout overflow.
    3. These restrictions will be enforced at both the command parsing level (to provide immediate feedback) and the model level (to ensure consistency).
    4. If the input exceeds the maximum length, the user will receive an error message explaining the character limit.
+
 7. **Ensure Minimum Window Size for Improved Layout** 
    1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
    2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
-8. **Sort Appointment by Date** 
+
+8. **Increasing the maximum number of appointments.** 
+   1. Currently, the maximum number of appointments that can be stored is 10,000.
+   2. We plan to increase this limit to a number that cannot be realistically reached, while ensuring the appointment IDs are still concise.
+  
+9. **Ensure Minimum Window Size for Improved Layout** 
+   1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
+   2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
+10. **Sort Appointment by Date** 
    1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
    2. Sorting of appointments will be in ascending order (earliest to latest).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
