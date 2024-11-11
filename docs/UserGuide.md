@@ -413,9 +413,7 @@ Example:
 
 ### 4.2 Tutorial Data Related Commands:
 
->**Warning:** This application is only catered to only one module.
->
->**Warning:** One student can only be added to one tutorial.
+>**Warning:** This application is only catered to only one module, thus one student can only be added to one tutorial.
 
 #### 4.2.1 Adding a tutorial: `addTut`
 
