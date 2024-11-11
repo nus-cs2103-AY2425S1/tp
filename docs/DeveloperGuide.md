@@ -511,7 +511,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a client
 
-1. Deleting a client in the Client List View
+1. Deleting a client in the client list view
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
@@ -524,7 +524,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. Deleting a client in the Transaction List View
+2. Deleting a client in the transaction list view
    1. Prerequisites: List all transactions of a client, such as the first, using the `listt 1` command.
   
     1. Test case: `delete 0`<br>
@@ -538,7 +538,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a transaction to a client 
 
-1. Adding a transaction in the Client List View.
+1. Adding a transaction in the client list view.
 
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
@@ -556,7 +556,7 @@ testers are expected to do more *exploratory* testing.
        
 
 
-2. Adding a transaction in Transaction List View.
+2. Adding a transaction in transaction list view.
 
     1. Prerequisites: List transactions for a client using the `listt INDEX` command.
 
@@ -566,7 +566,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing transactions for a client
 
-1. Listing transactions in the Client List View.
+1. Listing transactions in the client list view.
 
     1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
@@ -579,7 +579,7 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect listt commands to try: `listt`, `listt x` (where x is larger than the list size), `listt hello`<br>
        Expected: Similar to previous.
 
-2. Listing transactions in the Transaction List View.
+2. Listing transactions in the transaction list view.
 
     1. Prerequisites: List transactions for a client using the `listt INDEX` command.
 
