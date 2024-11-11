@@ -374,7 +374,6 @@ Use Case ends.
 **Extensions**
 
 * 2a. The list is empty.
-  
   Use Case ends.
 
 
@@ -397,14 +396,11 @@ Use Case ends.
 **Extensions**
 * 3a. System detects that user did not enter all the required fields.
     * 3a1. System shows user an error message.
-    
       Use Case ends.
 
   * 3b. System detects that user entered an invalid field.
       * 3b1. System shows user an appropriate error message.
-      
         Use Case ends.
-
 <br>
 
 **Use Case: UC04 - Search for a contact**<br/>
@@ -424,9 +420,7 @@ Use Case ends.
 
   * 2a. System fails to find any contacts related to the query.
       * 2a1. System displays an empty list to the user.
-      
         Use Case ends.
-
 <br>
 
 **Use Case: UC05 - List all contacts**<br/>
@@ -488,20 +482,16 @@ Use Case ends.
 
 * 2a. System detects that user did not enter all the required fields.
     * 2a1. System shows user an error message.
-  
       Use Case ends.
 
 * 2b. System detects that user entered an invalid field.
     * 2b1. System shows user an appropriate error message.
-        
         Use Case ends.
 
 * 2c. System detects that user tried to mark the attendance of non-member contact.
     * 2c1. System shows user an appropriate error message.
-  
       Use Case ends.
 <br>
-
 <br>
 
 **Use Case: UC09 - Unmark attendance of members**<br/>
@@ -564,21 +554,17 @@ Use Case ends.
 **MSS**
 1. User requests to delete a profile.
 2. CCAConnect deletes the specified profile.
-
     Use Case ends.
 
 **Extensions**
 * 2a. The specified profile is invalid.
     * 2a.1 CCAConnect shows an error message.
-    
       Use Case ends.
 * 2b. The specified profile is the current profile.
     * 2b.1 CCAConnect shows an error message.
-    
       Use Case ends.
 * 2c. The specified profile does not exist.
     * 2c1. CCAConnect shows an error message.
-    
       Use Case ends.
 
 ___
