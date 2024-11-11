@@ -19,7 +19,7 @@ This app is designed for GP clinics in Singapore, where all patients should have
 
 1. Ensure you have Java `17` or above installed in your Computer. Instructions for Java `17` are available [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-2. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.6). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
+2. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.6b). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
 
 3. Copy the file to the folder you want to use as the _home folder_ for MediContact. 
 
