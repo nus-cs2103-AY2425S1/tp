@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import spleetwaise.address.model.person.Person;
 
+//@@author GavinSin-reused
+// Reused from AB4's PersonListPanelHandle class with minor modifications
 /**
  * Handle for the person list panel UI component in the application. This class provides methods to interact with and
  * test the state of the list of persons, including navigation, selection, and card retrieval functionalities.

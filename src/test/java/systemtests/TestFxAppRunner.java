@@ -28,6 +28,8 @@ import spleetwaise.address.testutil.TestUtil;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.ui.CommandBox;
 
+//@@author GavinSin-reused
+// Reused from AB4's AddressBookSystemTest class with minor modifications
 /**
  * This class serves as a base class for tests that require the use of the application's GUI and TestFx setup.
  */

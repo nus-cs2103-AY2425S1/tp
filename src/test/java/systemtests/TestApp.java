@@ -22,6 +22,8 @@ import spleetwaise.commons.exceptions.DataLoadingException;
 import spleetwaise.commons.model.UserPrefs;
 import spleetwaise.commons.storage.UserPrefsStorage;
 
+//@@author GavinSin-reused
+// Reused from AB4's TestApp class with minor modifications
 /**
  * TestApp extends MainApp to facilitate testing by setting up the application with configurable data and user
  * preferences. It allows initializing an address book with specific test data and provides access to various
