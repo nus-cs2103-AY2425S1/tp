@@ -14,19 +14,8 @@ Class UserPrefs
 
 Class UniquePatientList
 Class Patient
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Nric
-Class BirthDate
-Class Sex
-Class AllergyList
-Class BloodType
-Class HealthRisk
-Class ExistingCondition
-Class Note
-Class ApptList
+Class FilteredAppointment
+Class Appt
 
 Class I #FFFFFF
 }
@@ -41,30 +30,17 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyClinicConnectSystem
 ModelManager -left-> "1" ClinicConnectSystem
 ModelManager -right-> "1" UserPrefs
+ModelManager -down-> "*" FilteredAppointment
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 ClinicConnectSystem *--> "1" UniquePatientList
+FilteredAppointment *--> "1" Appt
+FilteredAppointment *--> "1" Patient
 UniquePatientList --> "~* all" Patient
-Patient *--> Nric
-Patient *--> BirthDate
-Patient *--> Sex
-Patient *--> ApptList
-Patient *--> AllergyList
-Patient *--> BloodType
-Patient *--> ExistingCondition
-Patient *--> HealthRisk
-Patient *--> Name
-Patient *--> Phone
-Patient *--> Email
-Patient *--> Address
-Patient *--> "*" Note
 
 Patient -[hidden]up--> I
 UniquePatientList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Patient
 @enduml
