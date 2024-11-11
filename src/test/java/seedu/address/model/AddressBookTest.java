@@ -187,8 +187,8 @@ public class AddressBookTest {
         Tut nonExistentTutorial = new Tut(new TutName(TUT_NAME), TUTORIAL_CLASS);
 >>>>>>> 04c7c729727982716375d9db0e0bbe8847aebe3f
 
-        // Expect TutNoFoundException when trying to assign ALICE to a non-existent tutorial
-        assertThrows(TutNoFoundException.class, () -> addressBook.assignStudent(ALICE, nonExistentTutorial));
+        // Expect TutNotFoundException when trying to assign ALICE to a non-existent tutorial
+        assertThrows(TutNotFoundException.class, () -> addressBook.assignStudent(ALICE, nonExistentTutorial));
     }
 
     @Test

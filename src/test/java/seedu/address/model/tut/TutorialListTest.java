@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.exceptions.DuplicateTutorialException;
-import seedu.address.model.tut.exceptions.TutNoFoundException;
+import seedu.address.model.tut.exceptions.TutNotFoundException;
 import seedu.address.testutil.Assert;
 
 
@@ -84,7 +84,7 @@ public class TutorialListTest {
     @Test
     public void deleteTutorialTest_notExist_success() {
         TutorialList tutorialList = new TutorialList();
-        assertThrows(TutNoFoundException.class, () -> tutorialList.deleteTutorial(TUTORIAL1));
+        assertThrows(TutNotFoundException.class, () -> tutorialList.deleteTutorial(TUTORIAL1));
     }
     @Test
     public void deleteStudentTest() {

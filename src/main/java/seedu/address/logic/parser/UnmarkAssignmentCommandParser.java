@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UnmarkAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.Assignment;
@@ -40,6 +41,10 @@ public class UnmarkAssignmentCommandParser implements Parser<UnmarkAssignmentCom
         }
 
         String title = argMultimap.getValue(PREFIX_NAME).get();
+
+        if (title.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_EMPTY_ASSIGNMENT_TITLE);
+        }
 
         Assignment assignment = new Assignment(title, LocalDateTime.now());
         return new UnmarkAssignmentCommand(index.getZeroBased(), assignment);

@@ -138,6 +138,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write tutorial data to file: " + filePath);
         tutorialStorage.saveTutorials(tutorialList, filePath);
     }
-
-    // ================ Tutorial methods ==============================
 }
