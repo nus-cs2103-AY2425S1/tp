@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,10 @@ public class AddSupplyOrderCommand extends Command {
 
         person.addOrder(supplyOrder);
         model.addSupplyOrder(supplyOrder);
+
+        // Update personList
+        model.setPerson(person, person);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_ADD_SUPPLY_ORDER_SUCCESS, supplyOrder.viewOrder()));
     }
