@@ -6,7 +6,7 @@
 
 # BridalBuddy User Guide
 
-BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a Command Line Interface [(CLI)](#glossary)** while retaining the advantages of a Graphical User Interface [(GUI)](#glossary).
+BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a text-based interface** while retaining the advantages of a visual and mouse-based interface.
 It is an app targeted at wedding planners to help them streamline guest and vendor management for their clients.
 
 As wedding planners, you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
@@ -90,7 +90,7 @@ This section tells you what information you will find in each of the sections of
 3. Copy the file to the folder you want to use as the _home folder_ for your BridalBuddy application.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
-   A [(GUI)](#glossary) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   An interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
     > If you need any help opening a command terminal, you may find the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
 
@@ -398,9 +398,11 @@ This command will allow you to edit the details of the guest identified by the `
 
 **Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...`
 
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
 > :warning: If you attempt to edit the details of an existing guest such that they end up with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
-> :warning: At least one field of a `Guest` has to be changed to properly utilise the `edit_guest` command without error.
+> :warning: At least 1 field of a `Guest` has to be specified for the command to be valid.
 
 * :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
 
@@ -427,9 +429,11 @@ This command will help you delete a guest from your existing guest list, identif
 
 **Format:** `delete_guest INDEX`
 
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
 
-   * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+   * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `delete_guest 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
 **Example Usage:** `delete_guest 1`
 
@@ -477,9 +481,11 @@ This command will allow you to edit the details of the vendor identified by the 
 
 **Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
 > :warning: If you attempt to edit the details of an existing vendor such that they end up with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
-> :warning: At least one field of a `Vendor` has to be changed to properly utilise the `edit_vendor` command without error.
+> :warning: At least 1 field of a `Vendor` has to be specified for the command to be valid.
 
 * :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
 
@@ -506,9 +512,11 @@ This command will help you delete a vendor from your existing vendor list, ident
 
 **Format:** `delete_vendor INDEX`
 
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list currently displayed on your screen**.
 
-   * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall vendor list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
+   * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall vendor list, entering `find n/John` followed by `delete_vendor 1` would still delete the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
 
 **Example Usage:** `delete_vendor 1`
 
@@ -557,6 +565,8 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 2. To avoid performance degradation, for now it is highly recommended that at most 300 `Guest`s and at most 300 `Vendor`s are tracked in the guest list and vendor list respectively at any point of time.
 
+3. When inputting the `INDEX` for commands which require an `INDEX`, if the `INDEX` is larger than the 2147483647, an `Invalid command format` error message will be displayed instead of an error message specifying that the `Guest`/`Vendor` `INDEX` provided exceeds the number of guests/vendors (if applicable).
+
 [_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -586,8 +596,6 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 | Term/Keyword                       | Definition                                                                                                 |
 |------------------------------------|------------------------------------------------------------------------------------------------------------|
-| **Command Line Interface (CLI)**   | An interface that allows you to interact with our program by inputting lines of text called command-lines. |
-| **Graphical User Interface (GUI)** | An interface that displays information to you and allows you to interact with visual elements.             |
 | **Prefix**                         | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.              |
 
 
