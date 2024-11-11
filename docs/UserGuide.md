@@ -323,7 +323,7 @@ Format: `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GR
 
 Adds an assignment to all students from the specified tutorial group
 
-Format: `attattg tg/TUTORIAL_GROUP a/ASSIGNMENT_NAME d/DEADLINE`
+Format: `addatg tg/TUTORIAL_GROUP a/ASSIGNMENT_NAME d/DEADLINE`
 * Adds an assignment to the students with `TUTORIAL_GROUP`.
 * Assignments default to not submitted and ungraded.
 
