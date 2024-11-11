@@ -86,6 +86,7 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
     e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Murphy's List does not support whitespaces in **tags**; each tag must be a single alphanumeric word.<br>
