@@ -119,6 +119,7 @@ and to associate jobs to companies.
 * The billing date is a number from 1 to 28 that signifies the day of the month
 (with reference to the start of the month) that a company will pay their
 employees' salaries.
+* Future enhancement: accommodate for more billing date formats (reference from end of the month).
 
 Examples:
 * `add company n/Google a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000`

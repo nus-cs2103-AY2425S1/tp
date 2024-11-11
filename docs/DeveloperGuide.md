@@ -353,7 +353,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 1. User requests to list companies
 2. TalentConnect shows a list of companies
 3. User requests to delete a specific company in the list
-4. TalentConnect deletes the company and deletes all jobs associated with the company
+4. TalentConnect deletes the company, deletes all jobs associated with the company, and unmatches all contacts matched with the aforementioned jobs.
 5. TalentConnect returns an updated list of companies, jobs, and contacts along with a success message
 
    Use case ends.
@@ -479,10 +479,6 @@ and the **Actor** is the `user`, unless specified otherwise)
     
         Use case resumes at step 2.
 
-* 3a. Either one or both lists are empty.
-    
-    Use case ends.
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -561,3 +557,4 @@ screen by how well the contact's skill match up to the job's requirements or to 
 * **Enable support for `find company`**  
 * **Enable support for `edit job`**  
 * **Enable support for `edit company`**  
+* **Enable support for more billing date formats (from end of month)**
