@@ -181,7 +181,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete S1234567A` command to delete the person with NRIC S1234567A in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete S1234567A` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -580,7 +580,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Patient ID**: A unique identifier for a patient in a medical system
 * **Medical record**: A collection of data about a patient’s health history
 * **Description**: A textual summary associated with a appointment or medical record
