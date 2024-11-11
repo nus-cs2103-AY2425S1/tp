@@ -145,8 +145,8 @@ public class ParserUtil {
         try {
             parsedDate = LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format or invalid date. " +
-                    "Please provide a correct date in YYYY-MM-DD format.");
+            throw new ParseException("Invalid date format or invalid date. "
+                    + "Please provide a correct date in YYYY-MM-DD format.");
         }
 
         return parsedDate;
