@@ -217,6 +217,8 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
 
 Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, then `AddCommand` adds the internship application into the data.
 
+> **_NOTE:_** HireMe identifies an entry as a duplicate if its `NAME`, `ROLE`, `EMAIL` and `DATE` match **(case-insensitive)** with those of an existing internship application entry. Attempting to add a duplicate will result in an error.
+
 <br></br>
 
 ### List all internship applications
