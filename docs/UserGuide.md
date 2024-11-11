@@ -497,6 +497,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 7. **Contact names are alphanumeric**, this application only allows users to enter alphanumeric names. This means that names that include "s/o" or "d/o" are not allowed. Alternatively, consider using "so", "do" or "son of" as a replacement.
 8. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
 
+---
+
 ## Command summary
 
 | Action              | Format, Examples                                                                                                                                                      |
