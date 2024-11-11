@@ -75,7 +75,7 @@ public class Messages {
                 .append("; Date and Time: ")
                 .append(event.getDateTimeDisplayString());
         builder.append("; Participants: ");
-        event.getParticipants().forEach(builder::append);
+        event.getParticipants().stream().map(Messages::formatPerson).forEach(builder::append);
         return builder.toString();
     }
 }
