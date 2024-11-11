@@ -259,13 +259,46 @@ The **`MakeAppointmentCommand`** class performs the following steps to add an ap
 The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:
 
 - **Format Verification**:
-    - **Parser** checks if the date format follows `dd-MM-yyyy-HH-mm`.
+    - **Parser** checks if the date and time format follows `dd-MM-yyyy-HH-mm`.
     - **Parser** also ensures the **Start Date** is before or equal to the **End Date**.
+    - **Parser** also checks if date and time is valid.
 
 - **Conflict Checking**:
     - **Command** checks if the new appointment overlaps with any existing appointments for the patient.
     - If there is an overlap, an error message is thrown, preventing the appointment from being created.
     - If no overlap exists, the new appointment overrides any previous appointment.
+
+### Schedule Date Feature
+
+#### Overview
+The `scheduledate` command allows users to filter the appointments occuring on a specified date. The command requires:
+- **Date** – Date regarding schedule of interest.
+
+<puml src="diagrams/ScheduleDateActivityDiagram.puml" alt="ScheduleDateActivityDiagram" />
+
+#### 1. Parsing User Input
+The **`ScheduleDateCommandParser`** class is responsible for parsing user input. It uses ParserUtil extracting:
+- **Date** – Date regarding schedule of interest.
+
+During this parsing process:
+- An `AppointmentContainsDatePredicate` instance is created to hold the date predicate details.
+
+#### 2. Executing the Command
+The **`ScheduleDateCommand`** class performs the following steps to filter the appointments:
+
+1. **Update filteredAppointmentList**:  
+   Uses the `AppointmentContainsDatePredicate` from the parser to update filteredAppointmentList in **Model**.
+
+2. **Display sortedAppointments**:
+   `sortedAppointments` will be updated with the updated filteredAppointmentList in **Model**.
+   `sortedAppointments` is displayed.
+
+#### 3. Handling Invalid Date Inputs
+The **`ScheduleDateCommandParser`** and **`ScheduleDateCommand`** classes enforce validation rules to ensure correct date format and scheduling logic:
+
+- **Format Verification**:
+    - **Parser** checks if the date format follows `dd-MM-yyyy-HH-mm`.
+    - **Parser** checks if the date is valid.
 
 ### \[Proposed\] Data archiving
 
