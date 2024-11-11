@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import seedu.address.logic.commands.RemarkCommand;
@@ -26,7 +26,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         try {
             nric = ParserUtil.parseNric(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_NRIC, RemarkCommand.MESSAGE_USAGE), pe);
         }
         String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
         return new RemarkCommand(nric, new Remark(remark));
