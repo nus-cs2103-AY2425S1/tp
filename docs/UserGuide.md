@@ -192,7 +192,7 @@ Format: `list-weddings` or `lw`
 
 <br>
 
-#### Listing all Tasks`
+#### Listing all Tasks
 
 You can see a list of all [Tasks](#creating-one-or-more-tasks) in the WedLinker by entering the command `list-tasks`.
 
