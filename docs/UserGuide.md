@@ -9,6 +9,8 @@
 
 # TAHub Contacts User Guide
 
+## Introduction
+
 If *you* are a busy Computer Science student juggling Teaching Assistant roles and
 struggling to keep track of *your* many
 students, *TAHub Contacts* is a desktop application for *you* to easily manage *your*
@@ -29,6 +31,16 @@ configurable, text-based commands into a terminal.
 (*Or if you've already taken/suffered/enjoyed `CS2030S`*)
 
 </box>
+
+### Overview
+
+*TAHub Contacts* allows you to easily:
+
+- Manage your students
+- Organise them by course and tutorial group
+- Mark attendance
+
+Interested? Head down to [quick start](#QUICKSTART) to get started!
 
 <!-- This section exists to correct a Markbind rendering bug. Don't worry about it-->
 <a name="TEMPFIX"><md>
@@ -107,7 +119,7 @@ configurable, text-based commands into a terminal.
    - `clear` : Deletes all contacts.
    - `exit` : Exits the app.
 
-6. Refer to the [Features](#FEATURES) below for details of each command.
+6. Refer to the [Features](#FEATURES) below for the *juicy* details of each command.
    Alternatively check the [Command Summary](#CMD-SUMMARY) for a quick
    list of the available commands. Have fun!
 
@@ -132,7 +144,9 @@ configurable, text-based commands into a terminal.
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as `` (i.e. 0 times), `t/friend`, `t/friend t/family`
+  e.g. `[t/TAG]…​` can be used as
+  ``
+   (i.e. 0 times), `t/friend`, `t/friend t/family`
   etc.
 
 - Parameters can be in any order.<br>
@@ -149,6 +163,8 @@ configurable, text-based commands into a terminal.
   pasting commands that span multiple lines as space characters surrounding
   line-breaks may be omitted when copied over to the application.
 </box>
+
+</a>
 
 ### Data Formats
 
@@ -640,6 +656,8 @@ data file only if you are confident that you can update it correctly.
 
 You have been duly warned.
 </box>
+
+<br>
 
 ### Future
 
