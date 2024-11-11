@@ -258,6 +258,7 @@ Deletes the specified member from HallPointer.
 
 ![result for 'delete_member 2'](images/deleteMemberResult.png)
 ---
+<div style="page-break-after: always;"></div>
 
 ### Adding a Session:
 
@@ -284,6 +285,7 @@ Adds a session to HallPointer and associates it with specified members. A sessio
 
 ![result for 'add_session'](images/addSessionResult.png)
 ---
+<div style="page-break-after: always;"></div>
 
 ### Locating Members with Associated Sessions by Name:
 
@@ -349,7 +351,7 @@ Data is saved in the hard disk automatically after any command that changes the 
 
 ### Editing the data file
 
-HallPointer data is saved automatically as a JSON file at `[JAR file location]/data/hallpointer.json`.
+HallPointer data is saved automatically as a JSON file at `[JAR file location]/data/hallpointer.json`. Advanced users are welcome to update data directly by editing that data file. 
 
 <box type="warning" seamless>
 
