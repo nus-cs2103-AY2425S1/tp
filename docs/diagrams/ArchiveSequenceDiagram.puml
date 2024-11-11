@@ -1,31 +1,102 @@
 @startuml
+!include style.puml
+skinparam ArrowFontStyle plain
 
-participant Logic
-participant ArchiveCommand
-participant Model
-participant "person:Person"
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ArchiveCommandParser" as ArchiveCommandParser LOGIC_COLOR
+participant "a:ArchiveCommand" as ArchiveCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
 
-Logic -> ArchiveCommand : execute()
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "lastShownList:List" as List MODEL_COLOR
+participant "person:Person" as Person MODEL_COLOR
+participant "modifiedPerson:Person" as ModifiedPerson MODEL_COLOR
+end box
+
+[-> LogicManager : execute("archive 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("archive 1")
+activate AddressBookParser
+
+create ArchiveCommandParser
+AddressBookParser -> ArchiveCommandParser
+activate ArchiveCommandParser
+
+ArchiveCommandParser --> AddressBookParser
+deactivate ArchiveCommandParser
+
+AddressBookParser -> ArchiveCommandParser : parse("1")
+activate ArchiveCommandParser
+
+create ArchiveCommand
+ArchiveCommandParser -> ArchiveCommand
+activate ArchiveCommand
+
+ArchiveCommand --> ArchiveCommandParser
+deactivate ArchiveCommand
+
+ArchiveCommandParser --> AddressBookParser : a
+deactivate ArchiveCommandParser
+ArchiveCommandParser -[hidden]-> AddressBookParser
+destroy ArchiveCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> ArchiveCommand : execute(m)
+activate ArchiveCommand
+
 ArchiveCommand -> Model : getFilteredPersonList()
-ArchiveCommand -> "person:Person" : check if person is archived
+
+activate Model
+Model -> List
+deactivate List
+Model --> ArchiveCommand : lastShownList
+deactivate Model
+
+ArchiveCommand -> List : get(0)
+activate List
+
+List -> Person
+List --> ArchiveCommand : person
+deactivate List
+ArchiveCommand -> Person : isArchived()
+
 alt shouldArchive is true and person is not archived
-    create "modifiedPerson:Person"
-    ArchiveCommand -> "modifiedPerson:Person" : Person(..., isArchived=true)
-    activate "modifiedPerson:Person"
+    create ModifiedPerson
+    ArchiveCommand -> ModifiedPerson : Person(isArchived=true)
+    activate ModifiedPerson
+    ModifiedPerson --> ArchiveCommand : modifiedPerson
+    deactivate ModifiedPerson
     ArchiveCommand -> Model : setPerson(person, modifiedPerson)
-    deactivate "modifiedPerson:Person"
-    ArchiveCommand -> Logic : result
+
 else shouldArchive is false and person is archived
-    create "modifiedPerson:Person"
-    ArchiveCommand -> "modifiedPerson:Person" : Person(..., isArchived=false)
-    activate "modifiedPerson:Person"
+    create ModifiedPerson
+    ArchiveCommand -> ModifiedPerson : Person(isArchived=false)
+    activate ModifiedPerson
+    ModifiedPerson --> ArchiveCommand : modifiedPerson
+    deactivate ModifiedPerson
     ArchiveCommand -> Model : setPerson(person, modifiedPerson)
-    deactivate "modifiedPerson:Person"
-    ArchiveCommand -> Logic : result
-else person already in desired state
-    ArchiveCommand -> Logic : return error "Person is currently archived/unarchived"
+
 end
 
-deactivate "person:Person"
+deactivate Person
 
+create CommandResult
+ArchiveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ArchiveCommand
+deactivate CommandResult
+
+ArchiveCommand --> LogicManager : r
+deactivate ArchiveCommand
+
+[<-- LogicManager
+deactivate LogicManager
 @enduml
