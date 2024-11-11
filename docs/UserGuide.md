@@ -521,13 +521,13 @@ Action | Format, Examples
 **Import Consultations** | `importconsult FILENAME`<br> e.g., `importconsult sessions.csv` (relative) <br>e.g., `importconsult ~/Documents/sessions.csv` (home)
 **Add Consultation** | `addconsult d/DATE t/TIME`<br> e.g., `addconsult d/2024-10-20 t/14:00`
 **Add to Consultation** | `addtoconsult INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtoconsult 1 n/James Jake n/John Jill i/2 i/3`
+**Remove from Consultation** | `removefromconsult INDEX n/NAME…​`<br> e.g., `removefromconsult 1 n/Jake John` <br> e.g., `removefromconsult 1 n/Jake n/John`
 **Delete Consultations** | `deleteconsult INDEX [;INDEX]…​`<br> e.g., `deleteconsult 3` <br> e.g., `deleteconsult 2;3;4`
 **List Consultations** | `listconsults`
-**Remove from Consultation** | `removefromconsult INDEX n/NAME…​`<br> e.g., `removefromconsult n/Jake John` <br> e.g., `removefromconsult n/Jake n/John`
 **Add Lesson** | `addlesson d/DATE t/TIME`<br> e.g., `addlesson d/2024-10-20 t/14:00`
 **Add to Lesson** | `addtolesson INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtolesson 1 n/James Jake n/John Jill i/2 i/3`
+**Remove from Lesson** | `removefromlesson INDEX n/NAME…​`<br> e.g., `removefromlesson 1 n/Jake John` <br> e.g., `removefromlesson 1 n/Jake n/John`
 **Delete Lesson** | `deletelesson INDEX [;INDEX]…​`<br> e.g., `deletelesson 3` <br> e.g., `deletelesson 2;3;4`
 **List Lessons** | `listlessons`
 **Mark Attendance for Lesson** | `marka INDEX n/NAME…​ a/ATTENDANCE`<br> e.g., `marka 3 n/Jack a/y` <br> e.g., `marka 3 n/Jack n/Jill a/1` <br> e.g., `marka 3 n/Jack a/n` <br> e.g., `marka 3 n/Jack a/0`
 **Mark Participation for Lesson** | `markp INDEX n/NAME…​ pt/POINTS`<br> e.g., `markp 3 n/Jack pt/75`
-**Remove from Lesson** | `removefromlesson INDEX n/NAME…​`<br> e.g., `removefromlesson n/Jake John` <br> e.g., `removefromlesson n/Jake n/John`
