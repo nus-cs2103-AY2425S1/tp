@@ -543,8 +543,6 @@ Given below are instructions to test the app manually.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -559,14 +557,12 @@ Given below are instructions to test the app manually.
    
     1. Other incorrect delete commands to try: `contact delete`, `contact delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-   
-1. _{ more test cases …​ }_
 
 ### Deleting a lesson
 
-1. Deleting a lesson when there are lessons shown in the lesson schedule
+1. Deleting a lesson when there are lessons shown in the lesson schedule.
 
-    1. Prerequisites: There are multiple lessons in the lesson schedule _{ may change when we can filter lessons}_
+    1. Prerequisites: There are multiple lessons in the lesson schedule
 
     1. Test case: `lesson delete 1`<br>
        Expected: First lesson is deleted from the lesson schedule. Details of the deleted lesson shown in the status message.
@@ -576,6 +572,44 @@ Given below are instructions to test the app manually.
 
     1. Other incorrect delete commands to try: `lesson delete`, `lesson delete x`, `...` (where x is larger 
        than the list size)<br>
+       Expected: Similar to previous.
+
+
+2. Deleting a lesson when there are lessons shown in the filtered lesson schedule
+
+    1. Prerequisites: Executed a lesson find command and there are multiple lessons in the filtered lesson 
+       schedule
+
+    1. Test case: `lesson delete 1`<br>
+       Expected: First lesson is deleted from the filtered lesson schedule. Details of the deleted lesson 
+       shown in the status message.
+
+    1. Test case: `lesson delete 0`<br>
+       Expected: No lesson is deleted. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `lesson delete`, `lesson delete x` (where x is larger
+       than the filtered list size)<br>
+       Expected: Similar to previous.
+
+### Finding a lesson
+
+1. Finding a lesson when there are lessons shown in the lesson schedule
+
+    1. Prerequisites: There are multiple lessons in the lesson schedule, with at least one lesson with a 
+       student whose name is `Alice` and at least one lesson with a student whose name is `Bob`. None of the 
+       lessons have a student whose name is `Test` or contains the word `Test`. These names are 
+       case-insensitive.
+
+    1. Test case: `lesson find Alice`<br>
+       Expected: Lessons with student whose name is `Alice` or contains the word `Alice` will be displayed 
+       on the lesson panel. There should be at least one as per the prerequisites.
+
+    1. Test case: `lesson find Test`<br>
+       Expected: No lesson is found. Details shown in the status message.
+
+    1. Other incorrect delete commands to try: `lesson find`, `lesson find x` (where x is a name of a 
+       student who does not have a lesson, a name that does not belong to any of the students that have a 
+       lesson or a word that is not in the names of the students that have a lesson)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
