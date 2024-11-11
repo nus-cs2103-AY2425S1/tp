@@ -73,18 +73,18 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
 
-        final Name modelName = convertName();
-        final StudentId modelStudentId = convertStudentId();
-        final Email modelEmail = convertEmail();
-        final Major modelMajor = convertMajor();
-        final Year modelYear = convertYear();
-        final Comment modelComment = convertComment();
-        final GroupList modelGroups = convertGroups();
+        final Name modelName = convertStringToName();
+        final StudentId modelStudentId = convertStringToStudentId();
+        final Email modelEmail = convertStringToEmail();
+        final Major modelMajor = convertStringToMajor();
+        final Year modelYear = convertStringToYear();
+        final Comment modelComment = convertStringToComment();
+        final GroupList modelGroups = convertStringToGroups();
 
         return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelGroups, modelYear, modelComment);
     }
 
-    private Name convertName() throws IllegalValueException {
+    private Name convertStringToName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -95,7 +95,7 @@ class JsonAdaptedPerson {
         return new Name(name);
     }
 
-    private StudentId convertStudentId() throws IllegalValueException {
+    private StudentId convertStringToStudentId() throws IllegalValueException {
         if (studentId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     StudentId.class.getSimpleName()));
@@ -106,7 +106,7 @@ class JsonAdaptedPerson {
         return new StudentId(studentId);
     }
 
-    private Email convertEmail() throws IllegalValueException {
+    private Email convertStringToEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -117,7 +117,7 @@ class JsonAdaptedPerson {
         return Email.makeEmail(email);
     }
 
-    private Major convertMajor() throws IllegalValueException {
+    private Major convertStringToMajor() throws IllegalValueException {
         if (major == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
         }
@@ -128,7 +128,7 @@ class JsonAdaptedPerson {
         return Major.makeMajor(major);
     }
 
-    private Year convertYear() throws IllegalValueException {
+    private Year convertStringToYear() throws IllegalValueException {
         if (year == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Year.class.getSimpleName()));
         }
@@ -139,14 +139,14 @@ class JsonAdaptedPerson {
         return Year.makeYear(year);
     }
 
-    private Comment convertComment() throws IllegalValueException {
+    private Comment convertStringToComment() throws IllegalValueException {
         if (comment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
         }
         return new Comment(comment);
     }
 
-    private GroupList convertGroups() throws IllegalValueException {
+    private GroupList convertStringToGroups() throws IllegalValueException {
         GroupList modelGroups = new GroupList();
 
         for (JsonAdaptedGroup group : groups) {

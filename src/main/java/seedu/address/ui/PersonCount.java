@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
@@ -26,12 +25,12 @@ public class PersonCount extends UiPart<Region> {
      */
     public PersonCount(ObservableList<Person> filteredPersonList, ReadOnlyAddressBook addressBook) {
         super(FXML);
+        
         this.addressBook = addressBook;
 
         personCountDisplay.setText(String.format(DISPLAY_FORMAT, filteredPersonList.size(),
                 addressBook.getPersonList().size()));
 
-        // Adds a listener to the filteredPersonList
         filteredPersonList.addListener((ListChangeListener<Person>) c -> {
             if (c.next()) {
                 int displayNum = c.getList().size();
