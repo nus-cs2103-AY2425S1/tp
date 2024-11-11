@@ -293,6 +293,8 @@ For Supply Orders:
    filterContact t/Customer
    ```
 
+<div style="page-break-after: always;"></div>
+
 ## **Q3: How do I add collection dates and large quantities to orders?**
 **A:** You can include collection dates and quantities in the order's remark field:
 ```
@@ -325,6 +327,7 @@ This sorting helps you:
 - Keep track of recent completions
 - Maintain an organized workflow
 
+<div style="page-break-after: always;"></div>
 
 ## **Q6: How do I tag contacts with multiple tags?**
 **A:** You can add multiple tags to contacts in several ways:
@@ -356,6 +359,8 @@ Tags are useful for:
 To ensure optimal viewing:
 - Keep the window width as wide as possible
 - Use reasonable length entries
+
+<div style="page-break-after: always;"></div>
 
 ## **Q9: Why are some UI elements hidden when I minimize the screen?**
 **A:** BakeBuddy is optimized for a minimum window size of 800x600 pixels. When the window is smaller:
@@ -558,9 +563,6 @@ addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]...
 addSupplyOrder n/John Doe p/98765432 o/1 2 3
 ```
 ![Add Supply Order.png](images%2FAdd%20Supply%20Order.png)
-
-The Add Supply Order Command enables bakery owners to add a new order from a supplier by specifying the supplier's name,
-phone number, and a list of product IDs from the ingredient catalogue, identifying which items are included in the order.
 
 For example, typing **addSupplyOrder n/John Doe p/98765432 o/1 2 3** creates a supply order for a supplier named
 "John Doe" with phone number "98765432," ordering products with IDs "1," "2," and "3" from the ingredient catalogue.
