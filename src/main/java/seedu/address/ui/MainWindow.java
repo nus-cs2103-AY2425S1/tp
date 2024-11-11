@@ -118,6 +118,13 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.setWidth(defaultWidth);
         primaryStage.setHeight(defaultHeight);
 
+        // So the image when no guests/vendors don't overflow the container
+        // Since it has fixed size xd
+        primaryStage.setMinWidth(615.0);
+
+        // So everything vertically gets shown (since no scroll)
+        primaryStage.setMinHeight(690.0);
+
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
