@@ -495,16 +495,31 @@ directly by editing that data file.
 
 ## Upcoming features
 
-### Mass Adding / Bulk Importing of Contacts
-Have a whole list of contacts to add? We will introduce a bulk importing feature in our next iteration!
+### More functionality for Names
+Know two different "Wen Jie"s or "Amanda Tan"s? We will add more flexibility with names in our next iteration!
+We also want to allow names with special characters to be more inclusive.
 
-### Priority Scheduling
-Want to ensure you do not schedule multiple schedules on the same date and time?
-We will add more flexibility to our `schedule` feature next!
+### More functionality for Social Media Accounts
+Did someone delete their account? We will be adding a feature for you to delete the handles from their contacts!
 
 ### Country Code in Phone Numbers
 Have contacts from different parts of the world?
-We aim to bring even more flexibility for the phone numbers of contacts by allowing you to key in country codes in the app's next iteration!
+We aim to bring even more flexibility for the phone numbers by including country codes and a wider range of phone number lengths!
+
+### Error Message Readability
+We understand some of our error messages can be quite long.
+We hope to help you identify more specifically the issues you are facing with more specific and targeted error messages!
+
+### Multiple Similar Fields per Contact
+Know someone with multiple phone numbers? Maybe they have a business and office phone. Perhaps a customer with multiple social media handles?
+In our next iteration, we want to expand the number of phone numbers, emails, addresses and social media handles you can add to each contact!
+
+### More Functionality for `edit` 
+Not sure if you have already updated a contact's information?
+We will inform you if the edits you make to a contact did not edit any information!
+
+### More Functionality for Emails
+Emails in the next iteration will be required to have at least two domain labels (e.g. `gmail.com`).
 
 --------------------------------------------------------------------------------------------------------------------
 
