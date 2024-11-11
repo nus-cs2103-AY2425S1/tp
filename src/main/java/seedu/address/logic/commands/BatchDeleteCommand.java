@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,6 +34,8 @@ public class BatchDeleteCommand extends Command {
     public static final String MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS = "Deleted: %1$s\n";
     public static final String MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG = "No person with Tag(s) %s is found";
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private final Set<Tag> tags;
 
     private final PersonContainsTagsPredicate predicate;
@@ -52,11 +56,13 @@ public class BatchDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("----------------Execute batch-delete----------------");
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = new ArrayList<>(model.getFilteredPersonList());
 
         if (lastShownList.isEmpty()) {
+            logger.info("No Person deleted");
             return new CommandResult(String.format(MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG, tags));
         }
 
@@ -69,7 +75,10 @@ public class BatchDeleteCommand extends Command {
             );
             model.deletePerson(person);
         }
+        logger.info("Person(s) deleted: "
+                + lastShownList.stream().map(person -> person.getName().toString()).toList());
 
+        logger.info("----------------Execute batch-edit successful----------------");
         return new CommandResult(feedbackToUser.toString());
     }
 
