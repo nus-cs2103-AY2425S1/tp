@@ -371,6 +371,8 @@ Use case ends.
 
 **Use case: Delete a client**
 
+**Preconditions: Financial consultant is in client list view**
+
 **MSS**
 
 1. Financial consultant enters the delete command with the client index
@@ -383,9 +385,6 @@ Use case ends.
 * 2a. The financial consultant enters an invalid client index.
     * 2a1. Clientell shows an error message.
     * Use case ends.
-* 2b. The financial consultant uses the command in the transaction list view.
-    * 2b1. Clientell shows an error message.
-    * Use case ends.
 
 **Use case: List all clients**
 
@@ -396,6 +395,8 @@ Use case ends.
 Use case ends.
 
 **Use case: Search for a client by name**
+
+**Preconditions: Financial consultant is in client list view**
 
 **MSS**
 
@@ -408,11 +409,10 @@ Use case ends.
 * 2a. No matching clients found.
     * 2a1. Clientell informs the financial consultant that no matches were found.
     * Use case ends.
-* 2b. The financial consultant uses the command in the transaction list view.
-    * 2b1. Clientell shows an error message.
-    * Use case ends.
 
 **Use case: Add a transaction to a client's record**
+
+**Preconditions: Financial consultant is in client list view**
 
 **MSS**
 
@@ -426,14 +426,13 @@ Use case ends.
 * 2a. The financial consultant enters invalid transaction details or an invalid client index.
     * 2a1. Clientell shows an error message.
     * Use case ends.
-* 2b. The financial consultant uses the command in the transaction list view.
-    * 2b1. Clientell shows an error message.
-    * Use case ends.
 * 2c. The financial consultant inputs an amount that is too large to be handled.
     * 2c1. Clientell shows an error message.
     * Use case ends.
 
 **Use case: View list of transactions for a specific client**
+
+**Preconditions: Financial consultant is in client list view**
 
 **MSS**
 
@@ -446,11 +445,10 @@ Use case ends.
 * 2a. The financial consultant enters an invalid client index.
     * 2a1. Clientell shows an error message.
     * Use case ends.
-* 2b. The financial consultant uses the command in the transaction list view.
-    * 2b1. Clientell shows an error message.
-    * Use case ends.
 
 **Use case: Delete a transaction from a client's record**
+
+**Preconditions: Financial consultant is in transaction list view**
 
 **MSS**
 
@@ -464,11 +462,10 @@ Use case ends.
 * 2a. The financial consultant enters an invalid client index or transaction index.
     * 2a1. Clientell shows an error message.
     * Use case ends.
-* 2b. The financial consultant uses the command in the client list view.
-    * 2b1. Clientell shows an error message.
-    * Use case ends.
 
 **Use case: Search transactions by description**
+
+**Preconditions: Financial consultant is in transaction list view**
 
 **MSS**
 
@@ -480,9 +477,6 @@ Use case ends.
 
 * 2a. No matching transactions found.
     * 2a1. Clientell informs the financial consultant that no matches were found.
-    * Use case ends.
-* 2b. The financial consultant uses the command in the client list view.
-    * 2b1. Clientell shows an error message.
     * Use case ends.
 
 ### Non-Functional Requirements
