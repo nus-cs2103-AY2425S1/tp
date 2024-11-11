@@ -127,14 +127,14 @@ Action     | Format, Examples
 
 <div style="page-break-after: always;"></div>
 
-
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
+**Format**: `help`
+
 ![help message](images/helpMessage.png)
 
-**Format**: `help`
 
 ### Listing all students: `list`
 
@@ -370,6 +370,8 @@ Settles the amount owed by the student and adds it to the paid amount. To record
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Receiving payment from a student: `pay`
 
 Updates the amount of tuition fee paid by the specified student after a lesson. 
@@ -401,6 +403,7 @@ Recording payment using the `pay` command does not update the owed amount. You s
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Showing income data: `income`
 
@@ -452,6 +455,8 @@ Exits the program.
 
 **Format:** `exit`
 
+<div style="page-break-after: always;"></div>
+
 ### Saving the data
 
 UGTeach data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -502,5 +507,5 @@ Please note:
 1. **a/ might not recognise addresses that contains prefixes**, unless the prefix is not separated by a space from `a/`.<br>
 e.g. `edit 1 a/n/Next Door` will edit the first student's address to be `n/Next Door`, but `edit 1 a/ at n/Next Door` will edit the first student's address to be  `at`, and edit the student's name to be `Next Door`.<br>
 The remedy is to avoid using prefixes in the address field. Rest assured that this issue is unlikely to affect daily use cases as it is unlikely for Singapore addresses to contain prefixes.
-1. **Rounding up to 2 decimal places** in the `pay` and `owe` commands can result in a minor difference of tuition fee based on the number of hours one session lasts. For example, with the rate of $100.01/hr, `pay 1 hr/3` returns $300.03 of payment, but typing `pay 1 hr/1.5` twice returns $300.04 in total. However, this issue is less likely to impact tutors, as their hourly rates typically do not extend to two decimal places. Therefore, in most cases, the differences would be negligible. 
+1. **Rounding up to 2 decimal places** in the `pay` and `owe` commands can result in a minor difference of tuition fee based on the number of hours one session lasts. For example, with the rate of $100.01/hr, `pay 1 hr/3` returns a payment $300.03, but typing `pay 1 hr/1.5` twice returns $300.04 in total. However, this issue is less likely to impact tutors, as their hourly rates typically do not extend to two decimal places. Therefore, in most cases, the differences would be negligible. 
 --------------------------------------------------------------------------------------------------------------------
