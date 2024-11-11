@@ -120,8 +120,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCustomerCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCustomerCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g. `DeleteCustomerCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCustomerCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a customer).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -131,8 +131,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCustomerCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCustomerCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddOrderCommandParser`, `DeleteCustomerCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCustomerCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g. `AddCustomerCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g. `AddOrderCommandParser`, `DeleteCustomerCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 <div style="page-break-after: always;"></div>
 
 ### Model component
@@ -532,7 +532,7 @@ Use case ends.
 * 2b. SellSavvy detects that there is a parameter not satisfying its constraints.
     * 2b1. SellSavvy states the constraints of the invalid parameter.
 
-  Use case ends
+  Use case ends.
 
 
 * 2c. SellSavvy detects that there are no customers with the specified index.
@@ -758,7 +758,7 @@ Use case ends.
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. Should be able to hold up to 100 customers and/or 1000 orders without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be able to be used offline (i.e. without internet connection)
+4. Should be able to be used offline (i.e. without internet connection).
 5. Should log user inputs and errors for analysis and debugging.
 6. The system should respond within 2 seconds from any user input.
 
@@ -793,7 +793,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
@@ -806,7 +806,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Saving changes in data
 
-   1. Prerequisites: Has at least 1 customer listed using `listcustomer` in the GUI
+   1. Prerequisites: Has at least 1 customer listed using `listcustomer` in the GUI.
 
    1.  Add an order under a customer using the `addorder` command.<br>
       Example: `addorder 1 i/Lamp d/20-11-2024 q/3`
@@ -889,7 +889,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `findcustomer bernice` <br>
        Expected:
-       - All customers with 'bernice' in their names are listed. A success message shown in the status message.
+       - All customers with `bernice` in their names are listed. A success message shown in the status message.
        - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
        <p><p/>
 
@@ -1076,7 +1076,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `filterorder pending` <br>
        Expected: Only pending orders remain in the order list. A success message shown in the status message.
 
-2. Filtering order list to display all `completed` orders. using the command alias.
+2. Filtering order list to display all `completed` orders using the command alias.
 
     1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed.<br>
        Example `listorder 1`.
