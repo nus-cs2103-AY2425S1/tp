@@ -115,15 +115,15 @@ Each company in TechConnect is represented by the following fields, each with sp
 
 ### Notes about the Command Format
 
-| Format Note                                                                                                                                                                                                             | Example                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Words in `UPPER_CASE` are parameters to be supplied by the user.                                                                                                                                                        | e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.                   |
-| Items in square brackets are optional.                                                                                                                                                                                  | e.g., `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.                        |
-| Items with `…` after them can be used multiple times, including zero times.                                                                                                                                             | e.g., `[t/TAG]…` can be used as ` ` (i.e., 0 times), `t/bigTech`, `t/bigTech t/BigCompany`, etc.    |
+| Format Note                                                                                                                                                                                                             | Example                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |----------------------------------------------------------------------------------------------------|
+| Words in `UPPER_CASE` are parameters to be supplied by the user.                                                                                                                                                        | e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.                  |
+| Items in square brackets are optional.                                                                                                                                                                                  | e.g., `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.                       |
+| Items with `…` after them can be used multiple times, including zero times.                                                                                                                                             | e.g., `[t/TAG]…` can be used as, `t/difficulty_HIGH`, `t/bigTech`, etc.                |
 | Parameters can be in any order.                                                                                                                                                                                         | e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. |
-| Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.                                                                                        | e.g., if the command specifies `help 123`, it will be interpreted as `help`.                        |
-| If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application. | N/A                                                                                                 |
-| Commands are case-sensitive.                                                                                                                                                                                            | e.g., `ADD` will not work when trying to add a company, use `add` instead.                          |
+| Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.                                                                                        | e.g., if the command specifies `help 123`, it will be interpreted as `help`.                       |
+| If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application. | N/A                                                                                                |
+| Commands are case-sensitive.                                                                                                                                                                                            | e.g., `ADD` will not work when trying to add a company, use `add` instead.                         |
 
 ---
 
@@ -168,7 +168,7 @@ p/1234567 t/salary_high cp/www.meta-career-url.com r/Leading tech company
 ### Special Tag Values
 
 When using the `add` command, certain **tags** have special values.
-Each Company can only have 1 tag for each type (e.g. can't have 2 Salary Tags)
+Each Company can only have 1 tag for each type (e.g. can't have 2 Salary Tags). If duplicate tag types are provided,
 **only the first tag value will be recorded** and any extra tags will be ignored
 
 Below are the supported categories:
@@ -188,7 +188,7 @@ These tags must be written using the following format (note the underscore):
 - Work-Life Balance tag: `t/wlb_VALUE`
 
 **Note:** Any additional underscores or characters after the given format,
-like in `t/salary_VALUE_extra`, will be ignored.
+like in `t/salary_VALUE_extra`, `_extra` will be ignored.
 
 **Example:**
 
@@ -199,7 +199,7 @@ add n/Google p/98765432 e/google@example.com a/John street, block 123,
 
 **Outcome**:
 
-<img src="images/TagCommandOutcome.png" alt="TagCommandOutcome" width="400" height="300"/>
+<img src="images/TagCommandOutcome.png" alt="TagCommandOutcome4" width="400" height="300"/>
 
 ---
 
@@ -215,12 +215,13 @@ The **`Period`** tag is used to specify:
 
   - **Part-time**
 
+
 - **YEAR**: Any year between **2000 and 2500**
 
 Tag format: `t/period_SEASON_YEAR`
 
 **Note:** Any additional underscores or characters after the given format,
-like in `t/period_SEASON_YEAR_hello`, will be ignored.
+like in `t/period_SEASON_YEAR_hello`, `_hello` will be ignored.
 
 **Example:**
 
@@ -231,7 +232,7 @@ cp/www.shopee-career-url.com t/period_summer_2025
 
 **Outcome**:
 
-<img src="images/TagCommandOutcome2.png" alt="TagCommandOutcome2" width="400" height="300"/>
+<img src="images/TagCommandOutcome2.png" alt="TagCommandOutcome3" width="400" height="300"/>
 
 ##### **Unsupported and Invalid Tag values**
 
@@ -279,7 +280,7 @@ bookmark 1
 
 **Outcome**:
 
-<img src="images/BookmarkOutcome.png" alt="BookmarkOutcome" width="400" height="300"/>
+<img src="images/BookmarkOutcome.png" alt="BookmarkOutcome2" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -302,10 +303,6 @@ Format: `removebm INDEX`
 removebm 1
 ```
 
-**Outcome**:
-
-<img src="images/RemoveBookmarkOutcome.png" alt="RemoveBookmarkOutcome" width="400" height="300"/>
-
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -322,9 +319,6 @@ Format: `bmlist`
 bmlist
 ```
 
-**Outcome**:
-
-<img src="images/BookmarkListOutcome.png" alt="BookmarkListOutcome" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -418,9 +412,6 @@ find bigTech
 
 Returns companies with bigTech tag
 
-**Outcome**:
-
-<img src="images/Rename.png" alt="Rename" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -466,15 +457,6 @@ status 1 as/Applied
 ```
 
 modifies the application status of the company at index 1 to `Applied`.<br>
-**Outcome**:
-
-**Before**
-
-<img src="images/StatusBefore.png" alt="StatusBefore" width="400" height="300"/>
-
-**After**
-
-<img src="images/StatusAfter.png" alt="StatusAfter" width="400" height="300"/>
 
 ```
 status 2 as/
@@ -486,11 +468,11 @@ Removes the application status from the 2nd company.
 
 **Before**
 
-<img src="images/StatusRemoveBefore.png" alt="StatusRemoveBefore" width="400" height="300"/>
+<img src="images/StatusRemoveBefore.png" alt="StatusRemoveBefore1" width="400" height="300"/>
 
 **After**
 
-<img src="images/StatusRemoveAfter.png" alt="StatusRemoveAfter" width="400" height="300"/>
+<img src="images/StatusRemoveAfter.png" alt="StatusRemoveAfter1" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
