@@ -765,7 +765,7 @@ view <INDEX>
 - **On Success:**
     - A split view opens showing the selected client's complete information
     - The main list remains visible and functional on the left while detailed information appears on the right
-    - The image below the GUI before and after using `view 1`:
+    - The images below show the GUI before and after using `view 1`:
         <div style="display: flex; gap: 10px;">
             <figure markdown>
                 <img src="images/UIBeforeView.png" alt="UI Before View" style="width: 100%;">
