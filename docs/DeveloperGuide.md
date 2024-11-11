@@ -21,8 +21,8 @@
     * [Create new internship application](#create-new-internship-application)
     * [List all internship applications](#list-all-internship-applications)
     * [Delete an internship application](#delete-an-internship-application)
+    * [Update the status of an Internship Application](#update-the-status-of-an-internship-application)
     * [Find internship applications](#find-internship-applications)
-    * [Update the Status of an Internship Application](#update-the-status-of-an-internship-application)
     * [Filter internship applications](#filter-internship-applications)
     * [Sort internship application list](#sort-internship-application-list)
     * [Clear](#clear)
@@ -232,23 +232,12 @@ Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the 
 
 Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
 
+### Update the status of an Internship Application
+The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the command input, creating a `StatusCommandParser` to interpret the request.
 
-### Find internship applications
-The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
-In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
+<puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
 
-<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
-
-`AddressBookParser` first obtains the keyword from the user's input.
-`AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
-Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
-  `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
-
-Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
-`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
-
-### Update the Status of an Internship Application
-The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`. 
+The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
 For clarity, some implementation details are omitted to avoid low-level specifics, focusing only on the high-level process of updating the internship application status.
 
 AddressBookParser:
@@ -266,6 +255,21 @@ Finally, `StatusCommand` generates a `CommandResult` with a confirmation message
 <puml src="diagrams/StatusActivityDiagram.puml" alt="StatusActivityDiagram" />
 
 The activity diagram above outlines the detailed flow for the `StatusCommand`, showing the decision points and actions taken during the command execution.
+
+### Find internship applications
+The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
+
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+
+`AddressBookParser` first obtains the keyword from the user's input.
+`AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
+Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
+  `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
+
+Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
+`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
+
 
 ### Filter internship applications
 
