@@ -88,7 +88,6 @@ public class ContractEndDateTest {
         assertEquals(0, contractEndDate.compareTo(ContractEndDate.of("2020-02-28")));
 
         // comapre to earlier value -> returns 1
-        System.out.println(contractEndDate.compareTo(earlyContractEndDate) + "\n\n\n\n");
         assertEquals(1, contractEndDate.compareTo(earlyContractEndDate));
 
         // compare to later value -> returns -1
