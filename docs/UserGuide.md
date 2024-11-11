@@ -231,6 +231,9 @@ Make sure you have:
 
 <br>
 
+<br>
+
+
 ### Exploring the Application
 Upon launching the application, you should see a window similar to the one below:
 
@@ -245,6 +248,8 @@ Above the *Command Box*, you will find the *Results Box*, which displays the res
 
 <br>
 
+<br>
+
 ### Starting with a Clean Slate
 Let us start by clearing the sample data that comes with the application. Type `clear` in the Command Box and press <kbd>Enter</kbd>.
 
@@ -253,6 +258,8 @@ You should see a message indicating that all entries have been cleared, and the 
 If everything went well, you'll be greeted by this view:
 
 ![clear_command](images/clear_command.png)
+
+<br>
 
 <br>
 
@@ -272,6 +279,8 @@ If everything went well, you'll be greeted by this view:
 
 ℹ️ **Info**: For more details on the `add` command, please refer to the [Add Command](#adding-a-student-add) section.
 </div>
+
+<br>
 
 <br>
 
@@ -306,6 +315,8 @@ If everything went well, you'll be greeted by this view:
 
 <br>
 
+<br>
+
 ### Deleting a Student
 John Doe has decided to stop engaging your tuition services, and you wish to remove him from your list of students.
 
@@ -316,6 +327,8 @@ John Doe should now be removed from your list of students.
 If everything went well, you'll be greeted by this view:
 
 ![delete_command](images/delete_command_tutorial.png)
+
+<br>
 
 <br>
 
@@ -369,6 +382,8 @@ If you are in doubt, type this command to access the online user guide tailored 
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Adding a Student: `add`
 
 You can add a new student and their personal details to your list of students.
@@ -398,6 +413,8 @@ Examples:
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Deleting a Student: `delete`
 
 You can delete a specified student from Tuteez.
@@ -422,6 +439,8 @@ Examples:
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Editing a Student: `edit`
 
 You can edit an existing student's details in Tuteez to update outdated information on the fly.
@@ -442,6 +461,8 @@ Examples:
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Listing All Students: `list`
 
 You can easily view the list of all your students in Tuteez on the left panel.
@@ -449,6 +470,8 @@ You can easily view the list of all your students in Tuteez on the left panel.
 **Format**: `list`
 
 [Take me back to Table of Contents](#table-of-contents)
+<br>
+
 <br>
 
 ### Adding a Remark: `addremark`
@@ -472,6 +495,8 @@ Examples:
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Deleting a Remark: `deleteremark`
 
 You can delete a remark for a specific student in Tuteez.
@@ -491,6 +516,8 @@ Examples:
 * `delrmk 2 ri/1` Deletes the first remark of the second student in the displayed student list.
 
 [Take me back to Table of Contents](#table-of-contents)
+<br>
+
 <br>
 
 ### Adding Lessons: `addlesson`
@@ -531,6 +558,8 @@ Examples:
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Deleting Lessons: `deletelesson`
 
 You can remove lesson(s) from a specific student in Tuteez.
@@ -559,6 +588,8 @@ Examples:
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Searching for Students: `find`
 
 You can find students whose names, addresses, tags or lessons contain any of the given keywords. 
@@ -583,6 +614,8 @@ Examples:
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Displaying Student Information: `display`
 
 You can view all the details of a student you recorded in Tuteez on the right panel.
@@ -598,6 +631,8 @@ Examples:
 * `display john doe` Shows the details of student John Doe in the list, if they were to be found.
 
 [Take me back to Table of Contents](#table-of-contents)
+<br>
+
 <br>
 
 ### Navigating Command History: <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> <a id="navigating-command-history"></a>
@@ -622,6 +657,8 @@ These keyboard shortcuts will allow you to navigate through your command history
 [Take me back to Table of Contents](#table-of-contents)
 <br>
 
+<br>
+
 ### Clearing All Entries: `clear`
 
 You can clear all student entries from Tuteez.
@@ -634,6 +671,8 @@ You can clear all student entries from Tuteez.
 </div>
 
 [Take me back to Table of Contents](#table-of-contents)
+<br>
+
 <br>
 
 ### Exiting the Program: `exit`
