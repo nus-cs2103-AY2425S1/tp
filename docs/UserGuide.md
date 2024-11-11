@@ -178,8 +178,8 @@ Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = 
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 pri/HIGH income/2000 famsize/3 t/friends t/owesMoney`
-* `add n/Betsy Crowe dob/1992-08-12 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/2002-12-25 pri/MEDIUM t/criminal`
 
 ### Listing persons: `list`
 
