@@ -119,7 +119,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -258,7 +258,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                 | delete contacts                                                     | remove incorrect or unnecessary entries                |
 | `* * *`  | user                                                 | view contacts                                                       | access the contacts' details                           |
 | `* * *`  | user                                                 | mark attendance for each tutorial session                           | easily keep a record of student participation          |
-| `* *`    | user with many persons in my address book            | search for a student by keywords (e.g. name/student ID)             | quickly access their details                           |
+| `* *`    | user with many students in my address book           | search for a student by keywords (e.g. name/student ID)             | quickly access their details                           |
 | `* *`    | user with a large address book with diverse contacts | be able to sort my contacts using specific attributes               | find contacts based on the attributes more easily      |
 | `* *`    | user                                                 | filter students by their performance                                | identify those that need additional help               |
 | `* *`    | user                                                 | update a student's contact information                              | maintain accurate records                              |
@@ -278,11 +278,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `ConTActs` and the **Actor** is the `user`, unless specified otherwise)
 
-**UC01: Add contact**
+**UC01: Add student**
 
 **MSS**
 1. User requests to add a student
-2. ConTActs adds the contact to the list
+2. ConTActs adds the student to the list
 
     Use case ends.
 
@@ -294,13 +294,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. Contact already exists.
+* 1b. Student already exists.
 
     * 1b1. ConTActs shows an error message.
 
       Use case resumes at step 1.
 
-**UC02: Delete contact**
+**UC02: Delete student**
 
 **MSS**
 
@@ -323,7 +323,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**UC03: Find contacts**
+**UC03: Find students**
 
 
 **MSS**
@@ -383,30 +383,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3d1. The list is empty.
   
-        ConTActs shows error message that there is no Person to modify.
+        ConTActs shows error message that there are no students to modify.
         
         Use case resumes at step 5.
   
     * 3d2. List is not empty.
     
-        ConTActs will modify all tutorials for every Person.
+        ConTActs will modify all tutorials for every student.
 
 **UC05: Edit student details**
 
 **MSS**
 
-1.  User requests to list persons.
-2.  ConTActs shows a list of persons. 
-3.  User requests to edit the details of a person in the list by specifying the index and the fields to update. 
+1.  User requests to list students.
+2.  ConTActs shows a list of students. 
+3.  User requests to edit the details of a student in the list by specifying the index and the fields to update. 
 4.  ConTActs verifies that the index is valid and that the fields provided contain acceptable values. 
-5.  ConTActs modifies the person’s details as requested. 
+5.  ConTActs modifies the student’s details as requested. 
 6.  ConTActs shows the updated unfiltered list after modification.
 
     Use case ends.
 
 **Extensions**
 
-* 3a.  The index provided does not correspond to any person in the list.
+* 3a.  The index provided does not correspond to any student in the list.
 
     * 3a1. ConTActs shows an error message indicating the index is invalid.
 
@@ -430,22 +430,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-* 3e. The edited person would duplicate an existing person in the address book (e.g., same student ID or email as another person).
+* 3e. The edited student would duplicate an existing student in the address book (e.g., same student ID or email as another student).
 
-    * 3e1. ConTActs shows an error message indicating that such a person already exists.
+    * 3e1. ConTActs shows an error message indicating that such a student already exists.
 
       Use case resumes at step 3.
   
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3.  The user interface should be optimized for CLI interaction. Users should be able to accomplish tasks more efficiently using commands than using the mouse.
 4.  Should provide clear, informative error messages in the event of invalid inputs or commands to provide sufficient guidance on how to correct it.
-5.  The contacts data, such as student details and tutorial attendance, should be stored in a durable format that supports easy retrieval.
+5.  ConTActs' data, such as student details and tutorial attendance, should be stored in a durable format that supports easy retrieval.
 6. Should work without internet connection.
 7. All commands should run under 2 seconds.
-8. Contact data stored should be secure and adhere to local laws such as PDPA.
+8. Student data stored should be secure and adhere to local laws such as PDPA.
 
 ### Glossary
 
@@ -484,24 +484,24 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Editing attendance status
 Prerequisites: Ensure more than one contact is present. These tests can and should be done sequentially.
-1. Marking attendance as present for a person
+1. Marking attendance as present for a contact
    1. Test case: `mark 1 tut/1`<br>
    Expected: First contact's tutorial box 1 turns green.
    2. Test case: `mark 1 tut/1-2`<br>
@@ -525,7 +525,7 @@ Prerequisites: Ensure more than one contact is present. These tests can and shou
       5. Launch the application once more.
    2. Expected Behavior
       1. The application should detect the missing data file.
-      2. A new, empty data file with sample data should be created upon launching the application.
+      2. A new data file with sample data should be created upon launching the application.
 
 2. Dealing with corrupted data files
 
@@ -538,4 +538,4 @@ Prerequisites: Ensure more than one contact is present. These tests can and shou
       6. Launch the application once more.
    2. Expected Behavior
        1. The application should detect the file is corrupted.
-       2. A new, empty data file should be created upon launching the application.
+       2. Application launches with no contacts displayed in the GUI.
