@@ -48,7 +48,7 @@ title: User Guide
 
 7. [Planned Features](#planned-features)
 
-8. [Command summary](#command-summary)
+8. [Glossary](#glossary)
 
 # Introduction
 Welcome to **AcademyAssist**, your ultimate solution for efficient student contact management, targeted at tuition centers operating in Singapore.
@@ -127,7 +127,7 @@ You may refer to the [Command Summary](#command-summary) section for a quick ove
 
 ### User Interface Overview
 
-<img src="images/UiOverview.png" alt="UI overview" width="600"/>
+<img src="images/UiOverview.png" alt="UI overview" width="1000"/>
 
 1. **Top Bar**: Contains the following buttons
     * **Help**: Click on this to view the help window.
