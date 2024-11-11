@@ -120,8 +120,8 @@ The following constraints apply to both the `add` and `edit` commands:
           * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
             different block, different unit` will successfully add both `John Doe` and `John 
             doe` to the case management system.
-  * Acceptable name format: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`.
-  * Unacceptable name format: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`.
+  * Acceptable name formats: `John Doe`, `John`, `Doe`, `John Doe Jr 3rd`, `John Doe Jr`.
+  * Unacceptable name formats: ``, `John@Doe`, `John Doe Jr. 3rd`, `John Doe Jr.`.
 
 * Client's phone number should only contain numbers, without spaces and special characters.
   * The phone number is recommended to be within 20 characters long to be displayed properly.
