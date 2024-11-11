@@ -428,7 +428,7 @@ Since they function similarly.
 The following methods and operations are involved:
 * `XXFavCommand#execute(Model model)` &mdash; (Un)Favourites the specified `Company`.
 * `Model#setCompany(Company targetCompany, Company updatedCompany` &mdash; Replaces the existing company in the model with
-the same `Company` but with its `IsFavourite` set to `true` or `false` depending on `XXFavCommand`
+the same `Company` but with its `isFavourite` set to `true` or `false` depending on `XXFavCommand`
 * `AddressBook#setCompany(Company target, Company editedCompany` &mdash; Commits the changes to the address book.
 * `UniqueCompanyList#setCompany(Company target, Company editedCompany)` &mdash; Updates internal list, sorting by favourited companies.
 
@@ -436,7 +436,7 @@ the same `Company` but with its `IsFavourite` set to `true` or `false` depending
 
 Step 1. The user selects a company and executes the `XXfav` command with the corresponding company list index.
 
-Step 2. The `XXFavCommand` fetches the selected company `companyToEdit` and creates an identical company `editedCompany` but with the updated `IsFavourite` field and
+Step 2. The `XXFavCommand` fetches the selected company `companyToEdit` and creates an identical company `editedCompany` but with the updated `isFavourite` field and
 calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company in the model with the updated one.
 
 Step 3. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`; the address book replaces
