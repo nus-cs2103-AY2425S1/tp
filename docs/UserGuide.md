@@ -56,7 +56,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 1. Download BakeBuddy:
   - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
-  - Look for the file named `bakebuddy.jar`
+  - Look for the file named `BakeBuddy.jar`
   - Click on it to download
 2. Create a home for BakeBuddy:
   - Create a new folder on your computer named `BakeBuddy`
@@ -72,107 +72,58 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
     ```
    You should see the BakeBuddy window appear as follows in the next page!
 
+<div style="page-break-after: always;"></div>
+
 ## **Step 3: Try Your First Commands**
 
 Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
 
-1. First, check out the [List of Commands](#list-of-commands) section to understand what BakeBuddy can do
+1. First, check out the [Glossary](#glossary-and-command-formats) and [List of Commands](#list-of-commands) sections to understand what BakeBuddy can do
 2. Review the [FAQ](#faq) to clear any initial doubts
 3. For detailed command information, refer to the [Features](#features) section which contains comprehensive documentation for each command
 
 ![screenshot](images/Screenshot-5.png)
-\
+
 <div style="page-break-after: always;"></div>
 
 # **Glossary and Command Formats**
 
 ## **Contact Types**
 
-## Contact Types
-- **Contact**: Any person or entity stored in BakeBuddy's database, including customers, suppliers, and other business contacts
-- **Customer**: A person or business who purchases pastries from your bakery
-- **Supplier**: A person or business who provides ingredients or materials to your bakery
-
-## Order-Related Terms
-- **Customer Order**: A record of pastries ordered by a customer, including quantity, delivery details, and status
-- **Supply Order**: A record of ingredients ordered from a supplier, including quantity and status
-- **Order Status**:
-  - *Pending*: Order that has not been fulfilled yet
-  - *Done*: Order that has been completed and delivered/received
-
-## Product Management
-- **Pastry Catalogue**: Complete list of pastries your bakery offers, including prices and required ingredients
-- **Ingredient Catalogue**: Complete list of ingredients used in your bakery, including costs and supplier information
-- **Product ID**: Unique identifier assigned to each pastry or ingredient in the catalogues
-
-## UI Elements
-- **Index**: The number shown beside each item in a list, used for referencing items in commands
-
-## Cost Management
-- **COST**:
-  - For ingredients: Purchase price from supplier
-  - For pastries: Selling price to customer
-
-## Contact Management
-- **Filter**: Process of showing only contacts with specific tags
-- **Tag**: Label that can be applied to contacts for easy categorization (e.g., "VIP", "Wholesale", "Regular")
-- **Remark**: Additional notes about a contact 
-
-## Order Processing
-- **Mark/Unmark**: Commands to toggle the completion status of an order
-- **Clear**: Command to remove all data from the system
-
 <div markdown="block" class="alert alert-info">
 - **Contact**: Any person or entity stored in BakeBuddy's database, including customers, suppliers, and other business contacts
 - **Customer**: A person or business who purchases pastries from your bakery
-- **Supplier**: A person or business who provides ingredients or materials to your bakery
+- **Supplier**: A person or business who provides ingredients to your bakery
 </div>
 
 ## **Order-Related Terms**
 
 <div markdown="block" class="alert alert-info">
-- **Customer Order**: A record of pastries ordered by a customer, including quantity, delivery details, and status
-- **Supply Order**: A record of ingredients ordered from a supplier, including quantity and status
+- **Customer Order**: A record of pastries ordered by a customer, including status and other details
+- **Supply Order**: A record of ingredients ordered from a supplier, including status and other details
 - **Order Status**:
   - *Pending*: Order that has not been fulfilled yet
   - *Done*: Order that has been completed and delivered/received
 </div>
 
+
 ## **Product Management**
 
 <div markdown="block" class="alert alert-info">
 - **Pastry Catalogue**: Complete list of pastries your bakery offers, including prices and required ingredients
-- **Ingredient Catalogue**: Complete list of ingredients used in your bakery, including costs and supplier information
+- **Ingredient Catalogue**: Complete list of ingredients used in your bakery, including costs 
 - **Product ID**: Unique identifier assigned to each pastry or ingredient in the catalogues
+- **Cost**:
+  - For ingredients: Purchase price from supplier
+  - For pastries: Selling price to customer
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## **UI Elements**
 
 <div markdown="block" class="alert alert-info">
 - **Index**: The number shown beside each item in a list, used for referencing items in commands
-</div>
-
-## **Cost Management**
-
-<div markdown="block" class="alert alert-info">
-- **COST**:
-  - For ingredients: Purchase price from supplier
-  - For pastries: Selling price to customer
-</div>
-
-## **Contact Management**
-
-<div markdown="block" class="alert alert-info">
-- **Filter**: Process of showing only contacts with specific tags
-- **Tag**: Label that can be applied to contacts for easy categorization (e.g., "VIP", "Wholesale", "Regular")
-- **Remark**: Additional notes about a contact 
-</div>
-
-## **Order Processing**
-
-<div markdown="block" class="alert alert-info">
-- **Mark/Unmark**: Commands to toggle the completion status of an order
-- **Clear**: Command to remove all data from the system
 </div>
 
 ## **Command Format**
@@ -195,6 +146,23 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
+<div style="page-break-after: always;"></div>
+
+## **Contact Management**
+
+<div markdown="block" class="alert alert-info">
+- **Filter**: Process of showing only contacts with specific tags
+- **Tag**: Label that can be applied to contacts for easy categorization (e.g., "VIP", "Wholesale", "Regular")
+- **Remark**: Additional notes about a contact 
+</div>
+
+## **Order Processing**
+
+<div markdown="block" class="alert alert-info">
+- **Mark/Unmark**: Commands to toggle the completion status of an order
+- **Clear**: Command to remove all data from the system
 </div>
 
 ## **Parameter Reference**
@@ -234,12 +202,9 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Delete Contact](#delete-contact-command) | `deleteContact INDEX`                                                       | `deleteContact 1`                                                    |
 | [Edit Contact](#edit-contact-command)     | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` | `editContact 1 p/91150335`                                           |
 | [Filter Contact](#filter-contact-command) | `filterContact t/TAG [MORE_TAGS]...`                                        | `filterContact t/Customer`                                           |
-| [Find](#find-persons-by-name)             | `find KEYWORD [MORE_KEYWORDS]`                                              | `find Charlotte Bernice`                                             |
+| [Find](#find-contact-command)             | `find KEYWORD [MORE_KEYWORDS]...`                                           | `find Charlotte Bernice`                                             |
 | [List](#list-command)                     | `list`                                                                      | `list`                                                               |
 | [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Customer and Supplier Contact Management**
 
@@ -247,9 +212,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | --- |-----------------------------------------------------------------------------------------------| --- |
 | [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]...`          | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
 | [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [s/INGREDIENTS_SUPPLIED] [t/TAG]...` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Customer Order Management**
 
@@ -260,39 +222,32 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX`                                                             | `markCustomerOrder 1` |
 | [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX`                                                           | `unmarkCustomerOrder 1` |
 
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
 ## **Supply Order Management**
 
-| Command | Format                                                                  | Example |
-| --- |-------------------------------------------------------------------------| --- |
-| [Add Supply Order](#add-supply-order-command) | `addSupplyOrder n/NAME p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTIDs]...` | `addSupplyOrder n/John p/98765432 o/1 2 3` |
-| [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX`                                               | `deleteSupplyOrder 1` |
-| [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX`                                                 | `markSupplyOrder 1` |
-| [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX`                                               | `unmarkSupplyOrder 1` |
+| Command | Format                                                                           | Example |
+| --- |----------------------------------------------------------------------------------| --- |
+| [Add Supply Order](#add-supply-order-command) | `addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTIDs]... [r/REMARK]` | `addSupplyOrder n/John p/98765432 o/1 2 3` |
+| [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX`                                                        | `deleteSupplyOrder 1` |
+| [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX`                                                          | `markSupplyOrder 1` |
+| [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX`                                                        | `unmarkSupplyOrder 1` |
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## **Ingredient Catalogue Management**
 
-| Command | Format | Example |
-| --- | --- | --- |
-| [Add Ingredient](#add-ingredient-command) | `addIngredient NAME COST` | `addIngredient Syrup 3.50` |
-| [Remove Ingredient](#remove-ingredient-command) | `removeIngredient NAME` | `removeIngredient Flour` |
-| [View Ingredient Catalogue](#view-ingredientcatalogue-command) | `viewIngredientCatalogue` | `viewIngredientCatalogue` |
+| Command                                                         | Format | Example |
+|-----------------------------------------------------------------| --- | --- |
+| [Add Ingredient](#add-ingredient-command)                       | `addIngredient NAME COST` | `addIngredient Syrup 3.50` |
+| [Remove Ingredient](#remove-ingredient-command)                 | `removeIngredient NAME` | `removeIngredient Flour` |
+| [View Ingredient Catalogue](#view-ingredient-catalogue-command) | `viewIngredientCatalogue` | `viewIngredientCatalogue` |
 
 ## **Pastry Catalogue Management**
 
-| Command | Format                                                 | Example |
-| --- |--------------------------------------------------------| --- |
-| [Add Pastry](#add-pastry-command) | `addPastry NAME COST INGREDIENT [MORE_INGREDIENTS]...` | `addPastry Croissant 3.50 Flour Cream Sugar` |
-| [Remove Pastry](#remove-pastry-command) | `removePastry NAME`                                    | `removePastry Croissant` |
-| [View Pastry Catalogue](#view-pastrycatalogue-command) | `viewPastryCatalogue`                                  | `viewPastryCatalogue` |
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+| Command                                                 | Format                                                 | Example |
+|---------------------------------------------------------|--------------------------------------------------------| --- |
+| [Add Pastry](#add-pastry-command)                       | `addPastry NAME COST INGREDIENT [MORE_INGREDIENTS]...` | `addPastry Croissant 3.50 Flour Cream Sugar` |
+| [Remove Pastry](#remove-pastry-command)                 | `removePastry NAME`                                    | `removePastry Croissant` |
+| [View Pastry Catalogue](#view-pastry-catalogue-command) | `viewPastryCatalogue`                                  | `viewPastryCatalogue` |
 
 ## **General Commands**
 
@@ -338,10 +293,13 @@ For Supply Orders:
    filterContact t/Customer
    ```
 
+<div style="page-break-after: always;"></div>
+
 ## **Q3: How do I add collection dates and large quantities to orders?**
 **A:** You can include collection dates and quantities in the order's remark field:
 ```
-addCustomerOrder n/John p/91234567 o/1 2 r/Collection: 25/12/2024 6pm, Qty: 2x Croissant, 3x Muffin
+addCustomerOrder n/John p/91234567 o/1 2 r/Collection: 25/12/2024 6pm, Qty: 2x 
+Croissant, 3x Muffin
 ```
 
 Best practices for remarks:
@@ -355,9 +313,7 @@ Best practices for remarks:
 ```
 addCustomerOrder n/John p/98765432 o/1 1 1
 ```
-This would add three units of product ID 1 to the order.
-### Q5: How do I add orders for customers/suppliers with a large order?
-**A:** For now, you can use the "remarks" to specify the order quantity instead 
+This would add three units of ingredient ID 1 to the order.
 
 ## **Q5: How are orders sorted in the list?**
 **A:** Orders are automatically sorted in this priority:
@@ -371,6 +327,7 @@ This sorting helps you:
 - Keep track of recent completions
 - Maintain an organized workflow
 
+<div style="page-break-after: always;"></div>
 
 ## **Q6: How do I tag contacts with multiple tags?**
 **A:** You can add multiple tags to contacts in several ways:
@@ -403,6 +360,8 @@ To ensure optimal viewing:
 - Keep the window width as wide as possible
 - Use reasonable length entries
 
+<div style="page-break-after: always;"></div>
+
 ## **Q9: Why are some UI elements hidden when I minimize the screen?**
 **A:** BakeBuddy is optimized for a minimum window size of 800x600 pixels. When the window is smaller:
 1. Some UI elements may be hidden to prevent overlap
@@ -416,6 +375,7 @@ For the best experience:
 
 ## **Q10: Are there limits to email and phone number length?**
 **A:** There are several constraints to email and phone number.
+
 - Phone numbers:
   - Minimum: 3 digits
   - Maximum: 15 digits
@@ -425,15 +385,39 @@ For the best experience:
   - Must follow standard email format (xxx@xxx.xxx)
   - Special characters allowed: . _ - @
 
+
 ## **Q11: Can I add two contacts with the same phone number?**
 **A:** No, phone number is the unique identification number in the contact book. When a different name is attached to an 
 order with a phone number that is already in the address book, the person's name in the address book will be treated as 
 the entity who places the order.
 
-## **Q12: What is the point of having an addCustomer and addSupplier command?**
-**A:** Customers and suppliers have unique tags. Customers have an information tag while suppliers have an ingredients supplied tag. A generic person does not.
+<div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+## **Q12: Can I place a customer order from a supplier or vice versa?**
+**A:** Yes, you can. You can feel free to add customer orders from a supplier (or less frequently, place supply orders 
+to a customer). They will be distinguished by the order type under the person's contact card. However, the additional 
+information of suppliers and customers will remain the same - ingredients supplied and information respectively. For 
+additional remarks, please use the remark feature.
+
+## **Q13: What is the point of having an addCustomer and addSupplier command?**
+**A:** Customers and suppliers have unique tags. We can record additional information such as dietary preference for 
+customers and record the ingredients supplied for suppliers. A general contact does not have this feature.
+
+## **Q14: Why doesn't the name I provide in addCustomerOrder/addSupplyOrder match what's displayed?**
+**A:** When adding a order, the system prioritizes the contact information already in your contact list:
+- If the phone number exists in your contacts:
+  - The order will be linked to the existing contact name, ignoring any new name provided
+  - This ensures consistency and prevents duplicate contacts with the same phone number
+- If the phone number is new:
+  - A new contact will be created with the provided name and phone number
+
+For example, to handle orders being collected by someone else, use the remarks field to specify the collector:
+```
+addCustomerOrder n/John p/91234567 o/1 2 r/Collector: Mary (sister), 
+Collection: 25/12/2024 6pm
+```
+This system helps maintain clean contact records while still allowing flexibility in order collection arrangements.
+
 <div style="page-break-after: always;"></div>
 
 # **Features**
@@ -455,14 +439,20 @@ addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...
 ```bash
 addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 
 ```
-**Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
+
 ![screenshot](images/Screenshot-2.png)
+
+**Note:** Phone number must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
+![screenshot](images/Screenshot-6.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Add Customer Command**
 Adds a new customer to the bakery’s customer database.
 
 ```bash
-addCustomer n/NAME p/PHONE_NUMBER [i/INFORMATION] [e/EMAIL] [a/ADDRESS] [t/TAG]...
+addCustomer n/NAME p/PHONE_NUMBER [i/INFORMATION] [e/EMAIL] [a/ADDRESS] 
+[t/TAG]...
 ```
 - **Parameters:**
   - `n/NAME`: The customer's name. This has to be alphanumerical.
@@ -474,16 +464,20 @@ addCustomer n/NAME p/PHONE_NUMBER [i/INFORMATION] [e/EMAIL] [a/ADDRESS] [t/TAG].
 
 **Example:**
 ```bash
-addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 i/Allergic to peanuts
+addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
+03-04 i/Allergic to peanuts
 ```
 ![screenshot](images/Screenshot-3.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Add Customer Order Command**
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
 New customer will be added with the name if phone number not found in contacts.
 
 ```bash
-addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYID]... [r/REMARK]
+addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYID]... 
+[r/REMARK]
 ```
 - **Parameters:**
   - `n/NAME`: (Optional) The customer's name. This has to be alphanumerical.
@@ -498,6 +492,8 @@ A resulting customer order will be added to Customer Order list, tagged to the d
 addCustomerOrder n/John Doe p/98765432 o/1 2 3 r/Delivery at 6pm 
 ```
 ![screenshot](images/Screenshot-4.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Add Ingredient Command**
 Adds a new ingredient to the bakery's ingredient catalogue, along with its cost.
@@ -514,6 +510,8 @@ addIngredient NAME COST
 addIngredient Syrup 3.50 
 ```
 ![screenshot](images/Screenshot-1.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue.
@@ -540,46 +538,43 @@ For example, typing **addPastry Croissant 3.50 Flour Cream Sugar** would add a p
 with "Flour," "Cream," and "Sugar" listed as its ingredients. By using this command, bakery owners can easily track of 
 all their pastries and ingredient needs, making it more convenient for bakery owners to manage their list of pastries.
 
+<div style="page-break-after: always;"></div>
+
 ## **Add Supplier Command**
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
-addSupplier n/NAME p/PHONE_NUMBER [s/INGREDIENTS_SUPPLIED] [e/EMAIL] [a/ADDRESS] [t/TAG]...
+addSupplier n/NAME p/PHONE_NUMBER [s/INGREDIENTS_SUPPLIED] [e/EMAIL] [a/ADDRESS] 
+[t/TAG]...
 ```
 - **Parameters:**
     - `n/NAME`: The supplier's name. This has to be alphanumerical.
     - `p/PHONE_NUMBER`: The supplier's phone number. This has to be unique in the contacts list and have more than 3 digits.
-    - `s/INGREDIENTS_SUPPLIED`: (Optional) List of ingredients supplied, comma separated
+    - `s/INGREDIENTS_SUPPLIED`: (Optional) List of ingredients supplied, comma separated. This must exist in the catalogue.
     - `e/EMAIL`: (Optional) The supplier's email address.
     - `a/ADDRESS`: (Optional) The supplier's address.
     - `t/TAG`: (Optional) Tags for additional supplier information. Only a single word can be used as a tag. Can have multiple prefixes.
 
 **Example:**
 ```bash
-addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 s/salt, chocolate
+addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
+03-04 s/chocolate
 ```
 ![Add Supplier.png](images%2FAdd%20Supplier.png)
 
-The Add Supplier Command allows bakery owners to add a new supplier to the address book records. The supplier is specified
-with all relevant contact details and ingredients supplied to the bakery. This command accepts the supplier's name, 
-phone number, email address, residential address, and a list of ingredients the supplier provides, with an option to
-include a tag for additional information. 
-
-For example, typing **addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate** 
-will add a supplier named "Tim" with phone number "81234567," email "emily@example.com," located at "456 Cupcake Road, Block 123, #03-04," 
-and supplying "salt" and "chocolate" as the supplied ingredients for the bakery. This command simplifies the tracking 
-of supplier contacts and ingredient sources, helping bakery owners efficiently manage supplier relationships.
+<div style="page-break-after: always;"></div>
 
 ## **Add Supply Order Command**
-Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
+Adds a supplier order by providing the supplier's name, phone number and the ingredient IDs from the ingredient catalogue.
 
 ```bash
-addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]... [r/REMARK]
+addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]... 
+[r/REMARK]
 ```
 - **Parameters:**
     - `n/NAME`: (Optional) The supplier's name. This has to be alphanumerical.
     - `p/PHONE_NUMBER`: The phone number of the supplier. This has to be unique in the contacts list and have more than 3 digits.
-    - `o/INGREDIENTID`: One or more product IDs for the items being supplied.
+    - `o/INGREDIENTID`: One or more ingredient IDs for the items being supplied.
     - `r/REMARK`: (Optional) Information about the customer order.
 
 A resulting supply order will be added to Supply Order list, tagged to the date which the order enters our system.
@@ -589,14 +584,7 @@ A resulting supply order will be added to Supply Order list, tagged to the date 
 addSupplyOrder n/John Doe p/98765432 o/1 2 3
 ```
 ![Add Supply Order.png](images%2FAdd%20Supply%20Order.png)
-
-The Add Supply Order Command enables bakery owners to add a new order from a supplier by specifying the supplier's name,
-phone number, and a list of product IDs from the ingredient catalogue, identifying which items are included in the order.
-
-For example, typing **addSupplyOrder n/John Doe p/98765432 o/1 2 3** creates a supply order for a supplier named
-"John Doe" with phone number "98765432," ordering products with IDs "1," "2," and "3" from the ingredient catalogue.
-This command helps bakery owners efficiently manage incoming supplies, track supply orders by product ID, and streamline 
-the ordering process for necessary ingredients.
+<div style="page-break-after: always;"></div>
 
 ## **Clear All Command**
 Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
@@ -620,6 +608,8 @@ deleteContact 1
 ```
 ![screenshot](images/ss deletecontact.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Delete Customer Order Command**
 Deletes a customer order from the customer order list at the specified index.
 
@@ -634,6 +624,9 @@ deleteCustomerOrder INDEX
 deleteCustomerOrder 2
 ```
 ![screenshot](images/ss deletecustomerorder.png)
+
+<div style="page-break-after: always;"></div>
+
 ## **Delete Supply Order Command**
 Deletes a supply order from the supply order list at the specified index.
 
@@ -648,13 +641,16 @@ deleteSupplyOrder INDEX
 deleteSupplyOrder 1
 ```
 ![screenshot](images/ss deletesupplyorder.png)
+
+<div style="page-break-after: always;"></div>
+
 ## **Edit Contact Command**
-Update the contact details of an existing contact in the address book, including persons, customers, and suppliers. 
+Update the contact details of an existing contact in the address book, including persons, customers, and suppliers.
 
 ```bash
-editContact INDEX FIELDS [moreFIELDS]...
+editContact INDEX PARAMETER [MORE_PARAMETERS]...
 ```
-- **[FIELDS]:**
+- **Parameters:**
     - `n/NAME`: (optional) The person's name. This has to be alphanumerical.
     - `p/PHONE_NUMBER`: (optional) This has to be unique in the contacts list and have more than 3 digits.
     - `e/EMAIL`: (Optional) The person's email address.
@@ -669,6 +665,8 @@ editContact 1 p/91150335
 ```
 ![screenshot](images/ss editcontact.png)    
 
+<div style="page-break-after: always;"></div>
+
 ## **Exit Command**
 Exits the program.
 
@@ -679,7 +677,7 @@ exit
 Filter and list contacts in the address book based on specified tags.
 
 ```bash
-filterContact t/TAG [MORE_TAGS...]
+filterContact t/TAG [MORE_TAGS]...
 ```
 - **Parameters:**
    - `t/TAG`: A tag to filter contacts by. Multiple tags can be specified by repeating the "t/" prefix with different tag values.
@@ -690,7 +688,9 @@ filterContact t/Customer
 ```
 ![screenshot](images/ss filter.png)
 
-## **Find persons by name**
+<div style="page-break-after: always;"></div>
+
+## **Find Contact Command**
 Finds persons whose names contain any of the given keywords.
 
 ```bash
@@ -713,6 +713,8 @@ find Charlotte Bernice
 ```
 ![findcommand.png](images/findcommand.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **List Command**
 Lists all contacts in the bakery's address book.
 
@@ -729,7 +731,8 @@ Displays a link to our user guide that provides detailed information on how to u
 ```bash
 help
 ````
-![helpcommandui.png](images/helpcommandui.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Mark Customer Order Command**
 
@@ -748,6 +751,8 @@ markCustomerOrder 1
 ```
 ![markcustomerorderui.png](images/markcustomerorderui.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Mark Supply Order Command**
 
 **Note:** Orders are arranged from top (pending orders) to bottom (completed orders), hence marking an order will cause it to go the bottom of the supply order list.
@@ -764,6 +769,8 @@ markSupplyOrder INDEX
 markSupplyOrder 1
 ```
 ![marksupplyorderui.png](images/marksupplyorderui.png)
+
+<div style="page-break-after: always;"></div>
 
 ## **Remark Command**
 Edits the remark of the person identified by the index number used in the last person listing. 
@@ -783,6 +790,8 @@ remark 1 r/Regular customer
 ```
 ![remarkcommandui.png](images/remarkcommandui.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Remove Ingredient Command**
 Removes an existing ingredient from the bakery's ingredient catalogue.
 
@@ -799,9 +808,7 @@ removeIngredient Flour
 ![removeIngredient.png](images%2FremoveIngredient.png)
 The Remove Ingredient Command enables bakery owners to delete an ingredient from their catalogue. This is useful for removing ingredients no longer used or mistakenly added. After execution, the system confirms the removal by displaying a success message.
 
-For instance, entering removeIngredient Flour will delete the ingredient "Flour" from the catalogue. Attempting to remove an ingredient that does not exist will result in an error message.
-![removeIngredientFail.png](images%2FremoveIngredientFail.png)
-
+<div style="page-break-after: always;"></div>
 
 ## **Remove Pastry Command**
 Removes an existing pastry from the bakery's pastry catalogue.
@@ -819,8 +826,7 @@ removePastry Croissant
 ![removePastry.png](images%2FremovePastry.png)
 The Remove Pastry Command allows the bakery to maintain an up-to-date catalogue by removing pastries that are discontinued or incorrectly added. On successful removal, the system displays a confirmation message.
 
-For example, entering removePastry Croissant will remove "Croissant" from the catalogue. If the pastry does not exist, an error message will be shown.
-![removePastryFail.png](images%2FremovePastryFail.png)
+<div style="page-break-after: always;"></div>
 
 ## **Unmark Customer Order Command**
 Unmark the customer order status as pending.
@@ -837,6 +843,8 @@ unmarkCustomerOrder 1
 ```
 ![unmarkcustomerorderui.png](images/unmarkcustomerorderui.png)
 
+<div style="page-break-after: always;"></div>
+
 ## **Unmark Supply Order Command**
 Unmark the supply order status as pending.
 
@@ -852,7 +860,9 @@ umarkSupplyOrder 1
 ```
 ![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
-## **View IngredientCatalogue Command**
+<div style="page-break-after: always;"></div>
+
+## **View Ingredient Catalogue Command**
 Displays the current list of ingredients available in the bakery’s ingredient catalogue.
 
 ```bash
@@ -868,7 +878,9 @@ The View Ingredient Catalogue Command provides a detailed list of all ingredient
 
 For instance, typing viewIngredientCatalogue displays the full catalogue for ingredient, enabling the bakery to verify all available ingredients in the catalogue.
 
-## **View PastryCatalogue Command**
+<div style="page-break-after: always;"></div>
+
+## **View Pastry Catalogue Command**
 Displays the current list of pastries available in the bakery’s pastry catalogue.
 
 ```bash
@@ -883,6 +895,3 @@ viewPastryCatalogue
 The View Pastry Catalogue Command provides a comprehensive view of all pastries in the bakery in one-go, including their IDs, names, price and ingredients with the costs. This command is vital for keeping track of the pastries offered to customers and ingredients needed to produce them. 
 
 For example, entering viewPastryCatalogue shows the complete list of pastries, ensuring that bakery owners are aware of the available pastries.
-
-
-----------------------------------------------------------------------------------------------------------------------
