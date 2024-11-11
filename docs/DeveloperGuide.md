@@ -111,7 +111,7 @@ How the `Logic` component works:
     - For example, if it is a command that creates a new event (e.g. /e new), AddressBookParser creates an instance of `EventCommandParser`, which then creates the `EventNewCommandParser` to parse the command using other classes shown in the diagram below.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `EventNewCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to create a new event).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and `Model` and other classes within the model package e.g `AddressBook`, `EventManager`) to achieve.
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object, `Model` and other classes within the model package e.g `AddressBook`, `EventManager`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 <div style="page-break-after: always;"></div>
@@ -236,19 +236,19 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **Extensions**:
 
 - 3a. Information provided is invalid or incomplete.
-    - 3ai. System notifies the user, prompts them to edit the provided details.<br>
+    - 3ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 3b. Volunteer with the same name already exists.
-    - 3bi. System notifies the user, prompts them to edit the provided details.<br>
+    - 3bi. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 4a. Volunteer creation fails.
-    - 4ai. System notifies the user, prompts them to edit the provided details.<br>
+    - 4ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 **Guarantees**:
-- New volunteer is stored in the system if all required information is present and valid.
+- New volunteer is stored in the system if all required information is present, valid and if no other volunteer with the same name already exists.
 
 #### UC02. Find Volunteer by Name
 
@@ -268,7 +268,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **Extensions**:
 
 - 3a. Information provided is invalid or incomplete.
-    - 3ai. System notifies the user, prompts them to edit the provided details.<br>
+    - 3ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 4a. No volunteers whose names contains the keyword are found.
@@ -279,7 +279,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Description**: Delete a volunteer from the system.
 
-**Preconditions**: Target volunteer must exist in the system.
+**Preconditions**: Volunteer must exist in the system.
 
 **MSS**:
 1. User queries all volunteers.
@@ -293,7 +293,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Extensions**:
 - 5a. Information provided is invalid or incomplete.
-    - 5ai. System notifies the user, prompts them to edit the provided details.<br>
+    - 5ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 #### UC04. Add a Free Day to a Volunteer
@@ -316,15 +316,15 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **Extensions**:
 
 - 6a. Information provided is invalid or incomplete.
-    - 5ai. System notifies the user, prompts them to edit the provided details.<br>
+    - 6ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 7a. Volunteer is already available on the selected date(s).
-    - 7ai. System notifies user prompts the user to edit the provided details.<br>
+- 7a. Volunteer is already available on one or more of the selected date(s).
+    - 7ai. System notifies the user. Volunteer's available dates do not change. <br>
       Use Case Ends.<br><br>
 
 - 8a. Free day addition fails.
-    - 8ai. System notifies user prompts the user to edit the provided details.<br>
+    - 8ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 #### UC05. Remove a Free Day from a Volunteer
@@ -349,19 +349,19 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **Extensions**:
 
 - 6a. Information provided is invalid or incomplete.
-    - 6ai. System notifies the user, prompts them to edit the provided details.<br>
+    - 6ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 7a. Volunteer is not available on the selected date(s).
-    - 7ai. System notifies the user, prompts them to edit the provided details.<br>
+    - 7ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 8a. Volunteer is assigned to events on the days that the user is trying to remove as free.
-  - 8ai. System notifies the user, prompts them to unassign the volunteer from the affected events first. <br>
+  - 8ai. System notifies the user and prompts them to unassign the volunteer from the affected events first. <br>
     Use Case Ends. <br><br>
 
 - 9a. Free day removal fails.
-    - 9ai. System notifies the user, prompts them to edit the provided details.<br>
+    - 9ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 #### UC06. Assign Volunteer to Event
@@ -376,10 +376,8 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 3. User selects the desired volunteer and event to assign the volunteer to.
 4. User submits the information to the system.
 5. System checks if all required information is present and valid.
-6. System checks if the volunteer is already assigned to the event.
-7. System checks if the volunteer is free on the day of the event.
-8. System checks if the volunteer is already assigned to any other events with clashing timing.
-9. System adds the volunteer to the event and confirms addition.<br/>
+6. System checks if the volunteer is already assigned to the event, free on the day of the even and if they are already assigned to any other event with clashing timing.
+7. System adds the volunteer to the event and confirms addition.<br/>
    Use Case Ends.
 
 **Extensions**:
@@ -393,15 +391,19 @@ For the following use cases, the `Actors` are defined as the Management Staff of
     - 6aii. Volunteer remains assigned to the event.<br>
       Use Case Ends.<br><br>
 
-- 7a. Volunteer is not free on the day of the event.
-    - 7ai. System notifies the user.
-    - 7aii. Volunteer is not assigned to the event.<br>
+- 6b. Volunteer is not free on the day of the event.
+    - 6bi. System notifies the user.
+    - 6bii. Volunteer is not assigned to the event.<br>
       Use Case Ends.<br><br>
 
-- 8b. Volunteer is assigned to another event that clashes with the timing of the event the user is attempting to assign.
-    - 8bi. System notifies user of the clash.
-    - 8bii. Volunteer is not assigned to the event.<br>
+- 6c. Volunteer is assigned to another event that clashes with the timing of the event the user is attempting to assign.
+    - 6ci. System notifies user of the clash.
+    - 6cii. Volunteer is not assigned to the event.<br>
       Use Case Ends.
+
+- 7a. Assignment fails.
+    - 7ai. System notifies the user and prompts them to edit the provided details.<br>
+      Use Case Ends.<br><br>
 
 **Guarantees**:
 - Volunteer is associated with the event in the system if the volunteer passes all the relevant system checks.
@@ -419,7 +421,8 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 3. User selects the desired volunteer and event to un-assign the volunteer from.
 4. User submits the information to the system.
 5. System checks if all required information is present and valid.
-6. System removes the volunteer from the event and confirms removal.<br/>
+6. System checks if the volunteer is assigned to the event.
+7. System removes the volunteer from the event and confirms removal.<br/>
    Use Case Ends.
 
 **Extensions**:
@@ -433,6 +436,10 @@ For the following use cases, the `Actors` are defined as the Management Staff of
     - 6bii. Volunteer remains unassigned from the event.<br>
       Use Case Ends.
 
+- 7a. Un-assignment fails.
+    - 7ai. System notifies the user and prompts them to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
 #### UC08. List All Events a Volunteer is Assigned to
 
 **Description**: List all events a volunteer is assigned to.
@@ -441,8 +448,8 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **MSS**:
 
-1. User queries all volunteers and events.
-2. System displays list of all volunteers and events.
+1. User queries all volunteers.
+2. System displays list of all volunteers.
 3. User selects the volunteer to view assigned events.
 4. User submits the information to the system.
 5. System checks if all required information is present and valid.
@@ -468,7 +475,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **MSS**:
 1. User enters the event's details.
 2. User submits the event's details to the system.
-3. System checks if all required information is present, valid and that no other event with the same name already exists.
+3. System checks if all required information is present, valid and if no other event with the same name already exists.
 4. System creates the new event and confirms creation to the user.
 
 **Extensions**:
