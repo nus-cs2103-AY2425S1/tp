@@ -140,7 +140,10 @@ public class MarkAppointmentCommandTest {
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
-
+        @Override
+        public  ObservableList<Person> getAllPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ObservableList<Person> getFilteredPersonList() {
             return null;
