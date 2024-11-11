@@ -696,3 +696,45 @@ testers are expected to do more *exploratory* testing.
 
     6. If the data file is successfully repaired, running `TAHub.jar` should result in the old data being displayed back in the application.
 
+---
+
+## **Appendix: Planned enhancements**
+
+Team size: 5
+
+1. **Allow more characters to be put in names**:
+   The current validation rule for names is to allow all combinations of alphanumeric characters, spaces, slashes, and the character @.
+   While we have attempted to cover most cases by allowing slashes and @, there are other special characters we have not accounted for, such as commas, hyphens, and apostrophes.
+   We plan to allow these characters so that users can put in their names exactly according to their legal name.
+
+2. **Make input validation for names more strict**:
+   On the other hand, simply allowing all combinations of characters in names may lead to users inputting nonsensical names.
+   While this is not strictly a problem, we plan to integrate extra validation rules for names, e.g. ensuring that slashes are used in appropriate contexts like in 's/o' or 'd/o'.
+   This will help users avoid adding invalid names by mistake into the address book.
+
+3. **Add support for filtering based on course names for related commands**:
+   Some commands like `aggGrade` may benefit from a feature to filter persons based on their courses, especially for TAs that teach more than one courses.
+   In `aggGrade`, it would be useful for TAs to calculate the mean grade for a specific course, as opposed to all courses that they teach.
+   Therefore, we plan to add either an extension to `aggGrade` or a new command (or both) to allow filtering based on course names.
+
+4. **Allow course names to contain prefixes**:
+   While the `Course` class allow any non-empty string value to be used as a course name, this is not entirely true as course names
+   containing prefixes, i.e. characters matching the regex `[a-z]/.*`, can cause issues with the parser. For example, using course name
+   `COURSE e/invalid` will always result in an error because the parser recognizes the `e/invalid` substring as an email prefix, as opposed to part of the course name.
+   However, this is a rare scenario and there is a simple workaround by adding a space before the slash character.
+   In the next iterations, we plan to fix this issue or come up with an alternative to allow course names with these special characters.
+
+5. **Consistent use of status and error messages**:
+   Currently, the messages for each command can differ in format quite significantly.
+   For example, the `edit` command will always show the entire details of the edited person upon a successful command, while the `addGrade` command only repeats the test name added and the person being added.
+   We plan to align the format of these messages to make it easier for users to understand the output of each command.
+
+6. **Make error messages more informative**:
+   Most error messages currently are quite generic and sometimes do not provide much information on what went wrong.
+   It would be useful if the error could point to the exact part of the command that caused the error, and suggest possible solutions to the user.
+   This is what we plan to do in the next iterations.
+
+7. **Make date and time parsing less strict**:
+   Currently, the date and time parsing is quite strict, requiring the user to input the date and time in a specific format.
+   We plan to make the parsing less strict, allowing the user to input the date and time in a more natural way, e.g. `31-01-2024 1200` or `Jan 31, 2024, 12pm` instead of `31/01/2024 12:00`.
+
