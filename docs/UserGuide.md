@@ -63,7 +63,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
    Note how the app:
    * contains some sample data 
    * displays contacts in [alphabetical order]
-   * utilises [Pagination] where 10 contacts are displayed per page at any one time 
+   * utilises [Pagination](#displaying-contacts-in-pages----pagination) where 10 contacts are displayed per page at any one time 
    * shows both the total number of contacts stored in the app and the number of contacts listed in the displayed pages in the status bar footer</br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -129,7 +129,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 //& ARE HELP AND LIST CONSIDERED "COMMANDS THAT DO NOT TAKE IN PARAMETERS?"
 // no
 
-* The COMMAND_WORD is **case-insensitive**. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
+* The COMMAND_WORD is **not case-sensitive**. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
 
 * A limit of 1000 characters //& REPHRASE IF NEEDED
 
@@ -286,13 +286,12 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
 
 * Role field `[r/ROLE]`:
     * Can be repeated any number of times e.g. `find r/Vice President r/Admin` &rarr; valid
-    * Have to take a valid role value (Refer to **Tip** section above in [adding a contact](#adding-a-contact-add))<br>
+    * Have to take a valid role value (Refer to [role constraints](#role)) <br>
       e.g. `find r/pres` &rarr; invalid<br>
       e.g. `find r/President` &rarr; valid
-    * Case-insensitive e.g. `find r/pResiDent` &rarr; valid
-    * Only perfect matches returned
-    * Specifying multiple roles returns contacts who own all specified roles
-      e.g. `find r/Vice President r/Admin` will only return contacts which holds **both** Roles.
+    * Not case-sensitive e.g. `find r/pResiDent` &rarr; valid
+    * Specifying multiple roles returns contacts holding all specified roles
+      e.g. `find r/Vice President r/Admin` will only return contacts holding **both** Roles.
 * All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
     * The order of the keywords does not matter. e.g. query `Hans Bo` will match `Bo Hans`
     * Substring matching e.g. query `Han` will match `Hans`, but query `Hans` will not match `Han`
@@ -436,10 +435,19 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 <div style="page-break-after: always;"></div>
 
-//& TO REVIEW IF EDITS IS OKAY
 ## What is considered as Invalid Contacts
 
-There must not be duplicate fields. For example, if there are contacts with the following data:
+**Identity conflict:** <br/>
+- No two contacts are allowed to share the *same identity* in the address book. <br/>
+- Two contacts are considered to have the same identity if they share the same `Name` and `Nickname`. <br/>
+- Note that `Nickname` is case-sensitive, e.g. `nn/alice` and `nn/Alice` are considered different nicknames.
+
+**Duplicate fields** <br/>
+- No two contacts are allowed to share the *same fields* for `Telegram Handle`, `Email`, and `Nickname`.
+- Note that `Telegram Handle`, `Email`, and `Nickname` are all case-sensitive, and will only be considered duplicate entries if the case matches exactly.
+- In the entire address book, there can only be 1 President.
+
+For example, if there are contacts with the following data:
 
 `n/Alice Tan th/alicetan123 e/alicetan123@example.com ss/phd r/Marketing`<br>
 `n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny` <br>
@@ -481,14 +489,23 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 | [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                                 | `Events(Internal)`                                                                                              |
 | [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                                         |                                                                                                                 |
 
-*_By default, all fields must be non-empty when prefix is specified except for nickname field_ //& CHECK IF OKAY
+*_By default, all fields must be non-empty when prefix is specified_
+
+<box type="tip" seamless>
+
+**Tip:** Case sensitivity
+- `Telegram Handle`, `Email`, and `Nickname` are case-sensitive, and will retain the exact format as provided by the user.
+- `Name`, `Student Status`, and `Role` are not case-sensitive, and will be automatically converted into their official format.
+
+</box>
 
 ### Name
 - Must contain english alphabets and spaces only, with the following exceptions:
     - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
       - A blank space must come before and after `S/O` or `D/O`
     - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
-- Must not be blank
+- Must not be blank.
+- Will be automatically converted to Start Case (i.e. Only the first letter of every word is in upper-case). 
 
 ### Telegram Handle
 - Must contain alphabets, numbers and underscores only.
@@ -530,12 +547,6 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 
 ### Nickname
 - Is an optional field.
-
-<box type="tip" seamless>
-
-**Tip:** Case sensitivity issues? (it's not just about name by further extention)
-&// ISSUE 285
-</box>
 
 <div style="page-break-after: always;"></div>
 
