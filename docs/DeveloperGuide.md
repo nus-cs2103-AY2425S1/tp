@@ -594,7 +594,7 @@ Use case ends.
 **MSS**
 
 1. User requests to delete a wedding with specified details.
-2. PlanPerfect deletes the wedding and removes it from the weddings panel view.
+2. PlanPerfect deletes the wedding.
 
    Use case ends.
 
@@ -612,8 +612,7 @@ Use case ends.
 **MSS**
 
 1. User requests to edit the name and/or date of the wedding.
-2. PlanPerfect edits the wedding as specified and updates the wedding name and date in the weddings panel
-   view.
+2. PlanPerfect edits the wedding as specified.
 
    Use case ends.
 
