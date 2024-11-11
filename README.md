@@ -1,7 +1,7 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-T15-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T15-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T15-4/tp/graph/badge.svg?token=134QRO3UI3)](https://codecov.io/gh/AY2425S1-CS2103T-T15-4/tp)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/uiExample.png)
 
 # HRConnect
 
