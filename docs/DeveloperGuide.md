@@ -228,9 +228,12 @@ The `unmark` command does the opposite with the similar flow between `Logic` and
 
 The `find` command relies on the various `Predicate` classes, each of which encapsulates specific criteria to determine whether a contact matches the search conditions. These `Predicate` classes enable flexible and modular search logic, allowing the `find` command to filter contacts based on attributes such as `Name`, `Telegram`, `Role`, `FavouriteStatus`.
 
-The following sequence diagram shows how a `find f/` command goes through both `Logic` component and interacts with `Model`
+The following sequence diagram shows how a `find f/` command goes through both `Logic` component and interacts with `Model`:
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ### Switch Profile Feature
 The `switch` command allows users to manage contacts with distinct contexts by switching between profiles. Each profile represents an independent contact list within the application which allows for better organization (e.g. 'master-list', 'recreational-team' etc.).
