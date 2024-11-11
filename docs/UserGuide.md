@@ -64,6 +64,12 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
 * Parameters can be in any order.<br>
   e.g. the `add` command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Only leading and trailing spaces in tag and guest names will be ignored, for increased flexibility.
+  e.g. `bride's friend` and `bride's  side` are considered different tags.
+  e.g. `John Doe` and `John  Doe` are considered different guests.
+  e.g. `  bride's friend` and `bride's side` are considered the same tag.
+  e.g. `john doe  ` and `john doe` are considered the same guest.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `undo`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -82,15 +88,16 @@ Shows a list of **all** guests in the guest list.
 
 Format: `list`
 
-### Adding a guest: `add`
+### Adding a guest : `add`
 
 Adds a guest to the guest list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Names cannot be more than 100 characters long.
-* Names are **case-sensitive**. eg. 'John Doe' is different from 'john doe'.
+* Names are **case-sensitive**, for increased flexibility. e.g. 'John Doe' is different from 'john doe'.
 * Names can only consist of alphanumeric characters and spaces.
-* Guests with the exact same name cannot be added to the guest list. Users are advised to add their guests' last names or other identifiers if needed.
+* Duplicate guests (with the exact same name) cannot be added to the guest list. Users are advised to add their guests' last names or other identifiers if needed.
+
 * Phone numbers must be **exactly** 8 digits.
 * Tags must be created before they can be assigned to a guest. Refer to [newtag](#creating-a-new-tag-newtag) on how to create a tag.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -114,7 +121,7 @@ Format: `delete INDEX`
 * Deletes the guest at the specified `INDEX`.
 * Only one guest can be deleted in each delete command.
 * The index refers to the index number shown in the displayed guest list.
-* The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
+* The index **must be within the index boundaries of the guest list**. i.e. If there are 10 guests, INDEX accepts values from 1 to 10.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd guest in the guest list.
@@ -125,33 +132,34 @@ Examples:
 
 Edits an existing guest in the currently displayed guest list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL]`
 
-* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. 
-* The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
+* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list.
+* The index **must be within the index boundaries of the guest list**. i.e. If there are 10 guests, INDEX accepts values from 1 to 10.
 * At least one of the optional fields must be provided.
 * Fields which are not provided will not be edited.
 * Editing the guest without changing the fields is allowed. e.g. The guest at index 1 of the displayed list is Alex Yeoh. Running `edit 1 n/Alex Yeoh` will be successful though none of the fields are changed. 
 * All optional fields must adhere to the restrictions specified in the `add` command.
 * If the input values are valid, existing values will be updated to the input values.
-* When editing tags, the existing tags of the guest will be removed i.e. adding of tags is not cumulative.
-* You can remove all the guest’s tags by typing `t/` without
-  specifying any tags after it.
+* Tags associated with a guest cannot be edited using this command. Use `tag` or `untag` to do so instead.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com`
-*  `edit 1 n/Alan Yeoh t/`
+*  `edit 1 n/Alan Yeoh`
 
 
-### Creating a new tag: `newtag`
+### Creating a new tag : `newtag`
 
 Creates new tag(s) that can be used to tag guests with.
 
 Format: `newtag t/TAG1…​`
+
 * Each tag name cannot be more than 50 characters long.
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
-* Leading and trailing spaces are ignored. e.g `newtag t/ bride's side  t/ groom's side  ` is the same as `newtag t/bride's side t/groom's side`.
+* Duplicate tags are **not** allowed.
+* Tag names are **case-insensitive**. e.g. `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
+* Only 30 (or fewer) tags can exist in the tag list at any point. Attempts to add tags that could exceed this limit will not be allowed.
 * Additional leading entries will be ignored. e.g. `newtag 1 t/bride's side` is the same as `newtag t/bride's side`.
 * Duplicate tags (with the same name) are **not** allowed.
 * Tag names are **case-insensitive**. e.g `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
@@ -168,17 +176,18 @@ Examples:
 * `newtag t/bride's side t/groom's side`
 
 
-### Deleting an existing tag: `deletetag`
+### Deleting an existing tag : `deletetag`
 
 Deletes existing tag(s) defined previously.
 
 Format: `deletetag [-force] t/TAG1…​`
+
 * Each tag name cannot be more than 50 characters long.
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
-* Leading and trailing spaces are ignored. e.g `deletetag t/ bride's side  t/ groom's side` is the same as `deletetag t/bride's side t/groom's side`.
-* Additional leading entries will be ignored. e.g. `deletetag 1 t/bride's side` is the same as `deletetag t/bride's side`.
 * User cannot delete a tag that has not been added via `newtag` before.
+* Tag names are **case-insensitive**. e.g. `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
+* Additional leading entries will be ignored. e.g. `deletetag 1 t/bride's side` is the same as `deletetag t/bride's side`.
 * If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
 * Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
 * Attempting to delete tags with a mix of invalid and valid names at once will result in an error.
@@ -200,20 +209,22 @@ Renames a tag currently in the tag list.
 
 Format: `renametag t/TAG1 t/TAG2`
 
-* Renames the tag `TAG1` to become `TAG2`.
+* Renames the tag `TAG1` (target) to become `TAG2`.
 * Only one tag can be renamed in each rename command.
-* The new tag name cannot be a tag already in the current tag list<br>e.g. `friends` and `colleagues` already exist in the tag list. `renametag t/friends t/colleagues` is an invalid command.
-* The target tag must be a tag that has been defined via `newtag` before. e.g. `friends` is a predefined tag but `colleagues` is not. `renametag t/colleagues t/friends` is an invalid command.
+* The new tag name cannot be a tag already in the current tag list.<br>e.g. `friends` and `colleagues` already exist in the tag list. `renametag t/friends t/colleagues` is an invalid command.
+* The target tag must be a tag that is already in the current tag list.<br>e.g. `friends` already exists in the tag list but `colleagues` does not. `renametag t/colleagues t/friends` is an invalid command.
+* Extra parameters are not allowed.
 
 Examples:
 * `renametag t/friends t/colleagues`
 
 
-### Tagging a guest: `tag`
+### Tagging a guest : `tag`
 
 Tags a guest with the specified tag.
 
 Format: `tag INDEX…​ t/TAG…​`
+
 * Tag must have already been defined using `newtag` before tagging it to a guest.
 * There is a limit of 10 indexes that can be tagged in a single `tag` command.
 * The index(es) **must be within the index boundaries of the guest list**. ie. If there are 15 guests, INDEX accepts values from 1 to 15.
@@ -230,11 +241,12 @@ Examples:
 ![tagCommand](images/tagCommand.png)
 
 
-### Removing a tag from a guest: `untag`
+### Removing a tag from a guest : `untag`
 
 Removes a tag from a guest.
 
 Format: `untag INDEX…​ t/TAG…​`
+
 * A guest must already have the tag for it to be removed.
 * Index(es) of the guest(s) must be within valid range (i.e. greater than 0 and less than or equals to the current shown list length)
 * Duplicate tags in the input will be ignored. e.g. `untag 1 t/friends t/friends` will successfully execute assuming the guest at index 1 has the tag `friends`.
@@ -253,8 +265,9 @@ Examples:
 Toggles the RSVP status for a guest between `Coming`, `Not Coming` and `Pending`.
 
 Format: `setrsvp INDEX s/STATUS_INDEX`
+
 * Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list.
-* The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
+* The index **must be within the index boundaries of the guest list**. i.e. If there are 10 guests, INDEX accepts values from 1 to 10.
 * `STATUS_INDEX` accepts 3 possible values:
   * `1` represents `Coming`
   * `2` represents `Not Coming`
@@ -276,6 +289,7 @@ Example:
 Filters the currently shown list based on RSVP status or tag. Filter predicates are displayed in the filter panel.
 
 Format: `filter [s/STATUS_INDEX] [t/TAG]…​`
+
 * At least one of the optional fields must be provided.
 * `STATUS_INDEX` accepts 3 possible values:
     * `1` represents `Coming`
@@ -284,6 +298,7 @@ Format: `filter [s/STATUS_INDEX] [t/TAG]…​`
 * The filter accepts multiple predicates. For example, `filter t/bride's side t/neighbours` and `filter s/3 t/neighbours` are both valid commands.
 * Note that `filter s/3 t/neighbours` is equivalent to stacking the commands `filter s/3` and `filter t/neighbours` into a single command, or running `filter t/neighbours s/3`.
 * Only one RSVP status can be used for filtering in each command, but multiple tags can be used. i.e `filter s/1 s/2` is not a valid command.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can clear all filters by running the `list` command.
 </div>
@@ -300,7 +315,7 @@ Example:
 ![filterCommand](images/filterCommand.png)
 
 
-### Locating guests by name: `find`
+### Locating guests by name : `find`
 
 Finds guests whose names contain any of the given keywords.
 
@@ -312,9 +327,9 @@ Format: `find KEYWORD…​`
 * Only full words will be matched e.g. `Ale` will not match `Alex`.
 * Guests matching at least one keyword will be returned. i.e. `OR` search.
   e.g. `Alex Yu` will return `Alex Yeoh`, `Bernice Yu` and `Terrence Yu`.
-* Find will apply to the whole list, not the currently filtered list, 
- ignoring all previous filter and find commands.
- i.e. `find alex bernice` is not the same as `find alex` followed by `find bernice`.
+* Find will apply to the whole list, not the currently filtered list,
+  ignoring all previous filter and find commands.
+  i.e. `find alex bernice` is not the same as `find alex` followed by `find bernice`.
 
 Examples:
 * `find alex`
@@ -413,8 +428,8 @@ Command | Format, Examples
 **Help** | `help`
 **List** | `list`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g. `add n/John Doe p/91234567 e/johndoe@example.com t/groom's side`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **NewTag** | `newtag t/TAG…​` <br> e.g. `newtag bride's side`
 **DeleteTag** | `deletetag t/TAG…​` <br> `deletetag -force t/TAG…​` <br>e.g. `deletetag t/bride's side` <br>e.g. `deletetag -force t/bride's side`
 **RenameTag** | `renametag t/TAG1 t/TAG2` <br> e.g. `renametag t/friends t/colleagues`
@@ -426,4 +441,3 @@ Command | Format, Examples
 **Clear** | `clear`
 **Undo** | `undo`
 **Exit** | `exit`
-
