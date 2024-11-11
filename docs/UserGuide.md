@@ -60,10 +60,10 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 3. Copy the file to the folder you want to use as the _home folder_ for EduManage.
 
 4. Open a [command terminal](#6-glossary-table), `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.<br>
-   A [GUI](#6-glossary-table) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A [GUI](#6-glossary-table) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
 
    ![Ui](images/Ui.png)
-   <br>
+   <br><br>
    
 5. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -93,21 +93,21 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 | Index |                             Action                              |                                                        Format                                                        |                                               Example(s)                                               |
 |:-----:|:---------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:|
-|   1   |           [Add a student](#311-adding-a-student-add)            |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/98765432 e/93838420 a/311, Clementi Ave 2, #02-25 l/S1 NT s/MATH lt/SUN-11:00-13:00` |
-|   2   |       [Delete a student](#312-deleting-a-student-delete)        |                                                    `delete INDEX`                                                    |                                               `delete 2`                                               |
-|   3   |       [Update a student](#313-updating-a-student-update)        | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                               `update Alex Yeoh n/James Lee e/99999999`                                |
-|   4   |          [Find student(s)](#314-finding-students-find)          |                       `find n/NAME [NAME]…​` or `find l/LEVEL` or `find s/SUBJECT [SUBJECT]…​`                       |                         `find n/Alex David` or `find l/S2 NA` or `find s/MATH`                         |
-|   5   |       [List all students](#315-listing-all-students-list)       |                                                        `list`                                                        |                                                 `list`                                                 |
-|   6   |           [Tag a student](#316-tagging-a-student-tag)           |                                         `tag n/NAME [l/LEVEL] [s/SUBJECT]…​`                                         |                                    `tag n/John Doe l/S1 NT s/MATH`                                     |
-|   7   |     [Record Note for a student](#317-recording-notes-note)      |                                                `note n/NAME nt/NOTE`                                                 |                            `note n/John Doe nt/Doing well in all subjects`                             |
-|   8   | [View a specific student](#318-viewing-a-specific-student-view) |                                                    `view n/NAME`                                                     |                                           `view n/John Doe`                                            |
-|   9   |      [Add Task for a student](#321-adding-a-task-addtask)       |                                 `addtask n/NAME t/TASK_DESCRIPTION d/TASK_DEADLINE`                                  |                          `addtask n/John Doe t/Mark assignment d/2024-12-25`                           |
-|  10   |  [Delete Task for a student](#322-deleting-a-task-deletetask)   |                                          `deletetask n/NAME ti/TASK_INDEX`                                           |                                      `deletetask n/John Doe ti/1`                                      |
-|  11   |  [Update Task for a student](#323-updating-a-task-updatetask)   |                       `updatetask n/NAME ti/TASK_INDEX [t/TASK_DESCRIPTION] [d/TASK_DEADLINE]`                       |                              `updatetask n/John Doe ti/2 t/Mark homework`                              |
-|  12   |       [View all Tasks](#324-viewing-all-tasks-viewtasks)        |                                                     `viewtasks`                                                      |                                              `viewtasks`                                               |
-|  13   |            [Clear](#333-clearing-all-students-clear)            |                                                       `clear`                                                        |                                                `clear`                                                 |
-|  14   |                 [Help](#341-viewing-help-help)                  |                                                        `help`                                                        |                                                 `help`                                                 |
-|  15   |               [Exit](#342-exiting-edumanage-exit)               |                                                        `exit`                                                        |                                                 `exit`                                                 |
+|   1   |          [Add a student](#3-1-1-adding-a-student-add)           |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`         | `add n/James Ho p/98765432 e/93838420 a/311, Clementi Ave 2, #02-25 l/S1 NT s/MATH lt/SUN-11:00-13:00` |
+|   2   |      [Delete a student](#3-1-2-deleting-a-student-delete)       |                                                    `delete INDEX`                                                    |                                               `delete 2`                                               |
+|   3   |      [Update a student](#3-1-3-updating-a-student-update)       | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​` |                               `update Alex Yeoh n/James Lee e/99999999`                                |
+|   4   |         [Find student(s)](#3-1-4-finding-students-find)         |                       `find n/NAME [NAME]…​` or `find l/LEVEL` or `find s/SUBJECT [SUBJECT]…​`                       |                         `find n/Alex David` or `find l/S2 NA` or `find s/MATH`                         |
+|   5   |       [List all students](#3-1-5-listing-all-students-list)       |                                                        `list`                                                        |                                                 `list`                                                 |
+|   6   |           [Tag a student](#3-1-6-tagging-a-student-tag)           |                                         `tag n/NAME [l/LEVEL] [s/SUBJECT]…​`                                         |                                    `tag n/John Doe l/S1 NT s/MATH`                                     |
+|   7   |     [Record Note for a student](#3-1-7-recording-notes-note)      |                                                `note n/NAME nt/NOTE`                                                 |                            `note n/John Doe nt/Doing well in all subjects`                             |
+|   8   | [View a specific student](#3-1-8-viewing-a-specific-student-view) |                                                    `view n/NAME`                                                     |                                           `view n/John Doe`                                            |
+|   9   |      [Add Task for a student](#3-2-1-adding-a-task-addtask)       |                                 `addtask n/NAME t/TASK_DESCRIPTION d/TASK_DEADLINE`                                  |                          `addtask n/John Doe t/Mark assignment d/2024-12-25`                           |
+|  10   |  [Delete Task for a student](#3-2-2-deleting-a-task-deletetask)   |                                          `deletetask n/NAME ti/TASK_INDEX`                                           |                                      `deletetask n/John Doe ti/1`                                      |
+|  11   |  [Update Task for a student](#3-2-3-updating-a-task-updatetask)   |                       `updatetask n/NAME ti/TASK_INDEX [t/TASK_DESCRIPTION] [d/TASK_DEADLINE]`                       |                              `updatetask n/John Doe ti/2 t/Mark homework`                              |
+|  12   |       [View all Tasks](#3-2-4-viewing-all-tasks-viewtasks)        |                                                     `viewtasks`                                                      |                                              `viewtasks`                                               |
+|  13   |            [Clear](#3-3-3-clearing-all-students-clear)            |                                                       `clear`                                                        |                                                `clear`                                                 |
+|  14   |                 [Help](#3-4-1-viewing-help-help)                  |                                                        `help`                                                        |                                                 `help`                                                 |
+|  15   |               [Exit](#3-4-2-exiting-edumanage-exit)               |                                                        `exit`                                                        |                                                 `exit`                                                 |
 
 ***
 <div style="page-break-after: always;"></div>
@@ -264,7 +264,7 @@ Find students by either their name, level or subject(s).
 * `find l/S3 NA` returns all students tagged with level `S3 NA`.
 * `find s/MATH` returns all students tagged with subject `MATH`.
 * `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`.
-* `find n/alex david` returns `Alex Yeoh`, `David Li`.<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`.<br><br>
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 ***
@@ -339,8 +339,7 @@ Views a specific student on the right side window.
 </box>
 
 **Examples:**
-* `view n/Alex Yeoh`
-
+* `view n/Alex Yeoh`<br><br>
   ![view student](images/view_student.png)
 
 [(Back to Top)](#edumanage-user-guide)
