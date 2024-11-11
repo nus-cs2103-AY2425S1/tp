@@ -517,7 +517,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 
 - **Failed Execution:** NIL
 - **Special Comments**
-1. You are able to execute showclients on an empty list of clients, as per Successful Execution Use Case #2
+1. You are able to execute `showclients` on an empty list of clients, as per Successful Execution Use Case #2
 
 #### Find
 - **Command:** `find KEYWORD [KEYWORD]...`
