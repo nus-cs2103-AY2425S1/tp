@@ -114,7 +114,7 @@ Format:<br>`add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE…​ 
 
 <box type="definition" seamless>
 
-**Action:** Adds a contact to the address book. (parameters do not need to be in order, NICKNAME is optional)
+**Action:** Adds a contact to the address book. (parameters do not need to be in order, nn/NICKNAME is optional)
 </box>
 
 <box type="tip" seamless>
