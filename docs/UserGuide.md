@@ -207,7 +207,7 @@ Format: `deleteall`
 
 <box type="tip" seamless>
 
-**IMPORANT:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
+**IMPORTANT:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
 
 </box>
 
