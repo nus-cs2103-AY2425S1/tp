@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project was adapted from [AB-3's codebase](https://github.com/se-edu/addressbook-level3).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -244,17 +244,9 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -521,7 +513,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC10 - Unassign event from person**
+**Use case: UC10 - Edit event**
+
+**MSS:**
+
+1. User requests to edit an existing event by providing the index of the event in the list and optionally providing new details such as an event name, event description, event start date, and event end date.
+2. App updates the event with the provided details.
+   Use case ends.
+
+**Extensions:**
+* 1a. The given index is invalid (i.e., index is out of bounds).
+    * 1a1. App shows an error message to tell the user that the specified event index is invalid. 
+      Use case ends.
+* 1b. No changes are specified for the event. 
+    * 1b1. App shows an error message to tell the user that no changes were made to the event. 
+      Use case ends.
+* 1c. The updated event name is invalid (i.e., name is empty or does not start with an alphabet). 
+    * 1c1. App shows an error message to tell the user that the given name is invalid. 
+      Use case ends.
+* 1d. The updated event description is invalid (i.e., description is empty or consists of only whitespaces). 
+    * 1d1. App shows an error message to tell the user that the given description is invalid. 
+      Use case ends.
+* 1e. The updated event duration is invalid (i.e., dates are not in the correct format YYYY-MM-DD or dates are not valid, e.g. 30 Feb 2024 or event end date is earlier than the start date). 
+    * 1e1. App shows an error message to tell the user that the given event dates are not valid. 
+      Use case ends.
+* 1f. The updated event has the same name as another event in the list. 
+    * 1f1. App shows an error message to tell the user that an event with the same name already exists in the list. 
+      Use case ends.
+
+**Use case: UC11 - Unassign event from person**
 
 **MSS:**
 1. User requests to unassign an event from a person by providing an event name or an event index, and a person name or a person index.
