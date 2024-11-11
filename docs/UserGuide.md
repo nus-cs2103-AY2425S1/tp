@@ -669,12 +669,12 @@ Furthermore, certain edits can cause the TrackMate to behave in unexpected ways 
 
 ## 5. FAQ 
 
-
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackMate home folder.
 
 **Q**: Can this app be used to handle multiple modules?              
 **A**: While this app allows for flexibility in naming your tutorials, it should not be used to handle multiple modules.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 6 Known issues
