@@ -108,6 +108,7 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         CommandResult commandResult;
+
         Command command = addressBookParser.parseCommand(commandText);
 
         // If there is no command to confirm, we should not

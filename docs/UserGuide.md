@@ -4,8 +4,6 @@ title: User Guide
 ---
 
 CareConnect is a **CLI-first** **case management application** that enables social workers to efficiently manage client details, appointments, and priorities. Repeated chores including data entry and search will be streamlined via simple CLI inputs, easing the mental load of the social workers, allowing them to focus more on delivering high-quality care and support for the clients.
-CareConnect is best viewed in a **desktop** environment with **full screen**. You may see some 
-content being cut-off if the window size is too small.
 
 * Table of Contents
 {:toc}
@@ -14,7 +12,7 @@ content being cut-off if the window size is too small.
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed on your computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-2/tp/releases).
 
@@ -24,6 +22,9 @@ content being cut-off if the window size is too small.
    command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+
+1. Note that CareConnect is best viewed in a **desktop** environment with **full screen**. You may see some
+   content being cut-off if the window size is too small.
 
 1. Type the command in the command box.
 
@@ -197,8 +198,8 @@ Format: `view INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `view 2` opens up the record of the 2nd client in the case management system.
-* `find Betsy` followed by `delete 1` opens up the record of the 1st client in the results of the `find` command.
+* `list` followed by `view 2` opens up the record of the 2nd client in the displayed client list.
+* `find n/Betsy` followed by `delete 1` opens up the record of the 1st client in the results of the `find` command.
 
 ### Tagging a client: `tag`
 
@@ -299,6 +300,9 @@ Format: `delete INDEX`
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Note that the `delete` command requires confirmation. You will be prompted to key in either `y` or `n` after
+the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
+execute another command until the `delete` command is either confirmed or cancelled.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the case management system.
@@ -335,6 +339,9 @@ Format: `deletelog INDEX l/LOG_INDEX`
 * The `LOG_INDEX` refers to the index number shown in the displayed log list.
 * The log index **must be a positive integer** 1, 2, 3, …​
 * The log index is specific to the client at the specified `INDEX`.
+* Note that the `deletelog` command requires confirmation. You will be prompted to key in either `y` or `n` after 
+  the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
+  execute another command until the `deletelog` command is either confirmed or cancelled.
 
 Examples:
 * `deletelog 2 l/3` deletes the 3rd log entry from the 2nd client in the case management system.
@@ -346,6 +353,9 @@ Examples:
 Clears all entries from the case management system.
 
 Format: `clear`
+* Note that the `clear` command requires confirmation. You will be prompted to key in either `y` or `n` after
+  the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
+  execute another command until the `clear` command is either confirmed or cancelled.
 
 ### Exiting the program : `exit`
 
@@ -391,7 +401,7 @@ Furthermore, certain edits can cause the CareConnect to behave in unexpected way
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CareConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -410,7 +420,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **List** | `list`
-**View** | `view INDEX` <br> e.g., `delete 3`
+**View** | `view INDEX` <br> e.g., `view 3`
 **Tag** | `tag INDEX t/TAG_NAME` <br> e.g., `tag 1 t/highPriority`
 **Untag** | `untag INDEX t/TAG_NAME` <br> e.g., `untag 1 t/highPriority`
 **Set Appointment** | `setappointment INDEX d/[YYYY-MM-DD]` <br> e.g., `setappointment 1 d/2024-11-23`
