@@ -35,43 +35,43 @@ The user guide contains formatting to highlight important info. The standards us
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Quick Start](#quick-start)
   - [Some commands to get started](#some-commands-to-get-started)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
-  - **Employee Commands**
-  - [Adding an employee : `add`](#adding-an-employee--add)
-  - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
-  - [Editing an employee : `edit`](#editing-an-employee--edit)
-  - [Filtering employees by skills : `filter`](#filtering-employees-by-skills--filter)
-  - [Locating employees by name : `find`](#locating-employees-by-name--find)
-  - [Deleting an employee : `delete`](#deleting-an-employee--delete)
-  - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
-  - **Project Commands**
-  - [Adding a project : `addproject`](#adding-a-project--addproject)
-  - [Listing all projects : `listprojects`](#listing-all-projects--listprojects)
-  - [Listing all members of a project : `listprojectmembers`](#listing-all-members-of-a-project--listprojectmembers)
-  - [Editing a project : `editproject`](#editing-a-project--editproject)
-  - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
-  - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
-  - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
-  - **Assignment Commands**
-  - [Create assignment : `assign`](#create-assignment--assign)
-  - [List assignments : `listassignments`](#list-assignments--listassignments)
-  - [Delete assignment : `unassign`](#delete-assignment--unassign)
-  - **Other Commands**
+  - [Employee commands](#employee-commands)
+    - [Adding an employee : `add`](#adding-an-employee--add)
+    - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
+    - [Editing an employee : `edit`](#editing-an-employee--edit)
+    - [Filtering employees by skills : `filter`](#filtering-employees-by-skills--filter)
+    - [Locating employees by name : `find`](#locating-employees-by-name--find)
+    - [Deleting an employee : `delete`](#deleting-an-employee--delete)
+    - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
+  - [Project commands](#project-commands)
+    - [Adding a project : `addproject`](#adding-a-project--addproject)
+    - [Listing all projects : `listprojects`](#listing-all-projects--listprojects)
+    - [Listing all members of a project : `listprojectmembers`](#listing-all-members-of-a-project--listprojectmembers)
+    - [Editing a project : `editproject`](#editing-a-project--editproject)
+    - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
+    - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
+    - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
+  - [Assignment commands](#assignment-commands)
+    - [Create assignment : `assign`](#create-assignment--assign)
+    - [List assignments : `listassignments`](#list-assignments--listassignments)
+    - [Delete assignment : `unassign`](#delete-assignment--unassign)
   - [Exiting the program : `exit`](#exiting-the-program--exit)
   - [Traversing command history](#traversing-command-history)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
   - [Editing the command history save file](#editing-the-command-history-save-file)
 - [FAQ](#faq)
-- [Known Issues](#known-issues)
+- [Known issues](#known-issues)
 - [Command Summary](#command-summary)
-  - [Employee Commands](#employee-commands)
-  - [Project Commands](#project-commands)
-  - [Assignment Commands](#assignment-commands)
-  - [Other Commands](#other-commands)
+  - [Summary of employee commands](#summary-of-employee-commands)
+  - [Summary of project commands](#summary-of-project-commands)
+  - [Summary of assignment commands](#summary-of-assignment-commands)
+  - [Summary of other commands](#summary-of-other-commands)
 - [Glossary](#glossary)
   - [Command word](#command-word)
   - [Alphanumeric](#alphanumeric)
@@ -116,7 +116,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
    - `listprojects`: Lists all projects.
 
-   - `addproject pid/3 pn/Project Charlie s/Backend`: Adds a project named `Project Charlie` with skill  `Backend`.
+   - `addproject pid/3 pn/Project Charlie s/Backend`: Adds a project named `Project Charlie` with skill `Backend`.
 
    - `deleteproject 3`: Deletes the 3rd project in the displayed project list.
 
@@ -171,7 +171,9 @@ Format: `help`
 
 [Return to Top](#table-of-contents)
 
-### Adding an employee : `add`
+### Employee commands
+
+#### Adding an employee : `add`
 
 **Adds an employee** to the address book.
 
@@ -214,7 +216,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all employees : `listemployees`
+#### Listing all employees : `listemployees`
 
 Shows a **list of all employees** in the address book.
 
@@ -228,7 +230,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Editing an employee : `edit`
+#### Editing an employee : `edit`
 
 **Edits an existing employee** in the address book.
 
@@ -255,7 +257,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Filtering employees by skills : `filter`
+#### Filtering employees by skills : `filter`
 
 **Finds employees who have at least one skill or tag matching** at least one of the search items.
 
@@ -280,7 +282,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Locating employees by name : `find`
+#### Locating employees by name : `find`
 
 **Finds employees whose names contain any of the given keywords.**
 
@@ -305,7 +307,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Deleting an employee : `delete`
+#### Deleting an employee : `delete`
 
 **Deletes the specified employee** from the address book.
 
@@ -326,7 +328,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Clearing all employee entries : `clear`
+#### Clearing all employee entries : `clear`
 
 **Clears all employee entries** from the address book.
 
@@ -342,7 +344,9 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Adding a project : `addproject`
+### Project commands
+
+#### Adding a project : `addproject`
 
 **Adds a new project** to HRConnect.
 
@@ -365,7 +369,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all projects : `listprojects`
+#### Listing all projects : `listprojects`
 
 Shows a list of **all stored projects**.
 
@@ -379,8 +383,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-
-### Listing all members of a project : `listprojectmembers`
+#### Listing all members of a project : `listprojectmembers`
 
 Shows a list of **all project members of the specified project**.
 
@@ -399,8 +402,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-
-### Editing a project : `editproject`
+#### Editing a project : `editproject`
 
 **Edits an existing project** in the address book.
 
@@ -425,7 +427,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Finding projects by name : `findproject`
+#### Finding projects by name : `findproject`
 
 **Finds projects whose names contain any of the given keywords**.
 
@@ -448,7 +450,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Deleting a project : `deleteproject`
+#### Deleting a project : `deleteproject`
 
 **Deletes the specified project <span style="color:red">and all its assignments</span>** from HRConnect.
 
@@ -470,7 +472,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Clear all project entries : `clearproject`
+#### Clear all project entries : `clearproject`
 
 **Clears all project entries** from HRConnect.<br>
 
@@ -486,7 +488,9 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Create assignment : `assign`
+### Assignment commands
+
+#### Create assignment : `assign`
 
 **Creates an assignment** between an Employee and a Project.
 
@@ -510,7 +514,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### List assignments : `listassignments`
+#### List assignments : `listassignments`
 
 Shows a list of **all stored assignments**.
 
@@ -525,7 +529,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Delete assignment : `unassign`
+#### Delete assignment : `unassign`
 
 **Deletes an assignment** between an Employee and a Project.<br>
 This does not delete the Employee nor the Project.
@@ -618,7 +622,7 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 
 ---
 
-## Known Issues
+## Known issues
 
 1. **If your computer has multiple displays**, if you move the application to a secondary display, and later switch to using only the primary display, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -630,7 +634,7 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 
 ## Command Summary
 
-### Employee Commands
+### Summary of employee commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -644,7 +648,7 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 
 [Return to Top](#table-of-contents)
 
-### Project Commands
+### Summary of project commands
 
 | Action                          | Format, Examples                                                                                                  |
 |---------------------------------|-------------------------------------------------------------------------------------------------------------------|
@@ -658,7 +662,7 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 
 [Return to Top](#table-of-contents)
 
-### Assignment Commands
+### Summary of assignment commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -668,7 +672,7 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 
 [Return to Top](#table-of-contents)
 
-### Other Commands
+### Summary of assignment commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
