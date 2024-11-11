@@ -1,9 +1,9 @@
 
 ---
 
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 
 ---
 
@@ -13,28 +13,28 @@
 
 
 <!-- Table of Contents -->
-- [VolunTier User Guide](#voluntier-user-guide)
+
 - [Quick start](#quick-start)
-  - [Installation of application](#installation-of-application)
+    - [Installation of application](#installation-of-application)
 - [Features](#features)
-  - [Viewing help](#viewing-help--help)
-  - [Adding a Tutor](#adding-a-tutor-addtutor)
-  - [Adding a Tutee](#adding-a-tutee-addtutee)
-  - [Adding a Lesson](#adding-a-lesson-addlesson)
-  - [Listing all persons](#listing-all-persons--list)
-  - [Editing a person](#editing-a-person--edit)
-  - [Locating persons by name](#locating-persons-by-name-find)
-  - [Locating persons by subject](#locating-persons-by-subject-findsubject)
-  - [Deleting a person](#deleting-a-person--delete)
-  - [Deleting a lesson](#deleting-a-lesson--deletelesson)
-  - [Viewing a person's details](#viewing-a-persons-details--view)
-  - [Undoing a command](#undoing-a-command--undo)
-  - [Redoing a command](#redoing-a-command--redo)
-  - [Viewing command history](#viewing-command-history--history)
-  - [Viewing chart of tutors’ volunteer hours](#viewing-chart-of-tutors-volunteer-hours--vtc)
-  - [Clearing all entries](#clearing-all-entries--clear)
-  - [Importing people from CSV files](#importing-people-from-csv-files--import)
-  - [Exiting the program](#exiting-the-program--exit)
+    - [Viewing help](#viewing-help--help)
+    - [Adding a Tutor](#adding-a-tutor-addtutor)
+    - [Adding a Tutee](#adding-a-tutee-addtutee)
+    - [Adding a Lesson](#adding-a-lesson-addlesson)
+    - [Listing all persons](#listing-all-persons--list)
+    - [Editing a person](#editing-a-person--edit)
+    - [Locating persons by name](#locating-persons-by-name-find)
+    - [Locating persons by subject](#locating-persons-by-subject-findsubject)
+    - [Deleting a person](#deleting-a-person--delete)
+    - [Deleting a lesson](#deleting-a-lesson--deletelesson)
+    - [Viewing a person's details](#viewing-a-persons-details--view)
+    - [Undoing a command](#undoing-a-command--undo)
+    - [Redoing a command](#redoing-a-command--redo)
+    - [Viewing command history](#viewing-command-history--history)
+    - [Viewing chart of tutors’ volunteer hours](#viewing-chart-of-tutors-volunteer-hours--vtc)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Importing people from CSV files](#importing-people-from-csv-files--import)
+    - [Exiting the program](#exiting-the-program--exit)
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
@@ -44,7 +44,6 @@
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-
 
 
 ## Introduction
@@ -69,7 +68,6 @@ Tutor and Tutees can both be referred to as Person.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar VolunTier.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -112,6 +110,16 @@ Search for command prompt or Powershell in the start menu.
 ```shell
 Ctrl + Alt + T
 ```
+--------------------------------------------------------------------------------------------------------------------
+### User Interface
+
+![Ui](images/UiOverview.png)
+
+1. **Tabs**: Provides access to the File and Help options.
+2. **Person List**: Displays the list of tutors and tutees.
+3. **Response Box**: Shows feedback for users from the VolunTier app.
+4. **Tutor Hours Chart**: Displays a bar chart when the `vtc` command is used.
+5. **Command Box**: The area where user commands are entered.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,7 +162,7 @@ Ctrl + Alt + T
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 
-* For users who have used VolunTier before can jump to [Command Summary](# Command summary)
+* For users who have used VolunTier before can jump to [Command Summary](#Command-summary)
 
 
   </box>
@@ -170,7 +178,7 @@ Format: `help`
 
 ### Adding a Tutor: `addTutor`
 
-Adds a Tutor to VolunTier.
+Adds a tutor to VolunTier.
 
 Format: `addTutor \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​`
 
@@ -180,13 +188,15 @@ Examples:
 
 ### Adding a Tutee: `addTutee`
 
-Adds a tutee to VolunTier.
+Adds a Tutee to VolunTier.
 
 Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​`
 
 <box type="tip" seamless>
 
 **Tips:**
+
+* Names can include alphanumeric characters as well as the special characters `/`, `,`, and `-`.
 
 * Phone number must be 8 integer digits and start with 8, 9, or 6.
 
@@ -199,8 +209,9 @@ Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUB
 
 * A person can have any number of subjects (including 0).
 
-* There are only the basic 3 subjects (math, science, english) in VolunTier currently
-  </box>
+
+</box>
+
 
 
 ### Adding a Lesson: `addLesson`
@@ -256,7 +267,8 @@ Examples:
 
 ### Locating persons by subject: `findSubject`
 
-Finds persons who have any of the subject(s).
+Finds persons who have any of the SUBJECT(s).
+
 
 Format: `findSubject SUBJECT [MORE_SUBJECTS]`
 
@@ -292,14 +304,14 @@ Deletes the specified lesson from VolunTier.
 
 Format: `deleteLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT`
 
-* Deletes the lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX`, and subject.
+* Deletes the lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX` for the specified SUBJECT.
 
 Examples:
 * `findSubject Math` followed by `deleteLesson 2 5 \s Math` deletes the lesson between the Tutor with index 2 and the Tutee with index 5.
 
 ### Viewing a person's details : `view`
 
-Displays the details of a person that might not be shown in their card.
+Displays additional details of a person that might not be shown on their card.
 
 Format: `view INDEX`
 
@@ -441,6 +453,12 @@ Furthermore, certain edits can cause the VolunTier to behave in unexpected ways 
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: Can I customize the subjects offered in VolunTier?
+**A**: Currently, VolunTier supports only three basic subjects: Math, Science, and English. Custom subjects are not supported, but this feature may be considered in future updates.
+
+**Q**: Is it possible to export my data from VolunTier?
+**A**: VolunTier currently does not support an export feature directly. However, you can manually copy the addressbook.json file from the data folder and use it as a backup or to transfer data to another instance.
 
 --------------------------------------------------------------------------------------------------------------------
 
