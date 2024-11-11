@@ -53,6 +53,8 @@ involved in IFG events.** Learn more about IFG [here](https://www.instagram.com/
 
    An event has a sport, two teams competing against each other, a venue, a date and time, and optionally some participants that correspond to people in the app.
 
+
+<div style="page-break-after: always;"></div>
 8. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -153,6 +155,8 @@ After:
 
 You may check a summary of the list of roles, faculties, sports, positions, and more via [this link](#using-shortcuts).
 
+
+<div style="page-break-after: always;"></div>
 ### Listing all persons : `list`
 
 Shows a list of all persons in the database.
@@ -186,6 +190,7 @@ After:
 ![after-edit](https://github.com/user-attachments/assets/0b61bc24-bb6a-45a9-b558-a3c8c0d36cb1)
 
 
+<div style="page-break-after: always;"></div>
 ### Locating persons by name: `find`
 
 Finds all persons whose names or attributes contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
@@ -204,6 +209,8 @@ Examples:
 * `find John David` returns `John Doe`, `David Li`<br>
   ![result for 'find John David'](images/find-johndavid-result.png)
 
+
+<div style="page-break-after: always;"></div>
 ### Deleting a person : `delete`
 
 Deletes the specified person from the database.
@@ -264,6 +271,8 @@ After:
 
 Please take note that faculties and sports use ONLY shortcuts found in [this section](#using-shortcuts).
 
+
+<div style="page-break-after: always;"></div>
 ### Editing an event : `editevent`
 
 Edits an existing event in the database.
@@ -290,6 +299,7 @@ After:
 ![after-editevent](https://github.com/user-attachments/assets/0a428cdd-1cb0-4f58-9cc9-eede6087707f)
 
 
+<div style="page-break-after: always;"></div>
 ### Listing all events : `listevent`
 
 Shows a list of all events in the database.
