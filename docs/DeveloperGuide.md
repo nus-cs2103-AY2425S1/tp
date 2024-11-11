@@ -191,10 +191,6 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 <puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<box type="info" seamless>
-
-</box>
-
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
