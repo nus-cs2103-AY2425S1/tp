@@ -5,13 +5,15 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TransactionBookParser" as TransactionBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant "m:Model" as Model MODEL_COLOR
+box CommonModel MODEL_COLOR_T1
+participant "<<class>> CommonModel" as CommonModel MODEL_COLOR
+participant "model:CommonModel" as CommonModelInstance MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete 1")
@@ -46,14 +48,21 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
+LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
-activate Model
 
-Model --> DeleteCommand
-deactivate Model
+DeleteCommand -> CommonModel : getInstance()
+activate CommonModel
+
+CommonModel --> DeleteCommand : model
+deactivate CommonModel
+
+DeleteCommand -> CommonModelInstance : deletePerson(1)
+activate CommonModelInstance
+
+CommonModelInstance --> DeleteCommand
+deactivate CommonModelInstance
 
 create CommandResult
 DeleteCommand -> CommandResult

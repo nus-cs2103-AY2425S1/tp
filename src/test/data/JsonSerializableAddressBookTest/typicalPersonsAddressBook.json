@@ -1,46 +1,75 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
-  } ]
+  "persons": [
+    {
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4a",
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "remark": "alice is poor",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4b",
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "remark": "benson is rich",
+      "tags": [
+        "owesMoney",
+        "friends"
+      ]
+    },
+    {
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4c",
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "email": "heinz@example.com",
+      "address": "wall street",
+      "remark": "",
+      "tags": []
+    },
+    {
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4d",
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "address": "10th street",
+      "remark": "DANIEL IS IN DEBT",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4e",
+      "name": "Elle Meyer",
+      "phone": "9482224",
+      "email": "werner@example.com",
+      "address": "michegan ave",
+      "remark": "",
+      "tags": []
+    },
+    {
+      "id": "5db6c966-11cf-4f7a-82bb-535d6e6a1e4f",
+      "name": "Fiona Kunz",
+      "phone": "9482427",
+      "email": "lydia@example.com",
+      "address": "little tokyo",
+      "remark": "",
+      "tags": []
+    },
+    {
+      "id": "6b76c348-7794-4ae9-be28-74e4820bb224",
+      "name": "George Best",
+      "phone": "9482442",
+      "email": "anna@example.com",
+      "address": "4th street",
+      "remark": "",
+      "tags": []
+    }
+  ]
 }

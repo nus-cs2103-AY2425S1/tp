@@ -3,57 +3,81 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+We are a team based in
+the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Goh Yong Jing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gohyongjing.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[email](e0693145@u.nus.edu)]
+[[LinkedIn](https://www.linkedin.com/in/yong-jing-goh-948605219/)]
+[[Github](https://github.com/gohyongjing)]
 
-* Role: Project Advisor
+- Role: Project Advisor
 
-### Jane Doe
+### See Yang Zhi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seeyangzhi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://yangzhi.dev)]
+[[github](https://github.com/SeeYangZhi)]
+[[portfolio](team/seeyangzhi.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Team Lead
+- Responsibilities:
+    - Scheduling and tracking
+      - In charge of defining, assigning, and tracking project tasks.
+    - Deliverables and deadlines
+      - Ensure project deliverables are done on time and in the right format.
+    - Documentation
+      - Responsible for the quality of various project documents.
 
-### Johnny Doe
+### Sean Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seanlim.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/seanlim)]
+[[bsky](https://seanlkx.bsky.social/)]
+[[portfolio](team/seanlim.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: In charge of `Model`, Code Quality
+- Responsibilities:
+    - Manage model-related components of SpleetWaise.
+    - Code Reviews to uphold coding standards.
 
-### Jean Doe
+### Dong Qianbo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rollingpencil.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/rollingpencil)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: In charge of `Storage`, Integration
+- Responsibilities:
+    - Ensure data format are consistent.
+    - In charge of versioning of the code, maintaining the code repository, and
+      integrating various parts of the software to create a whole.
 
-### James Doe
+### He Yiheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dino-nuggies.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Dino-Nuggies)]
 
-* Role: Developer
-* Responsibilities: UI
+- Current role: In charge of `Logic`
+- Responsibilities: 
+  - Act as the gatekeeper of quality for `Logic` component
+
+### Gavin Sin
+
+<img src="images/gavinsin.png" width="200px">
+
+[[github](http://github.com/gavinsin)]
+
+- Role: In charge of `UI`, Testing
+- Responsibilities: Manage the UI for SpleetWaise to ensure consistency. Code
+  Testing to ensure bug-free application.

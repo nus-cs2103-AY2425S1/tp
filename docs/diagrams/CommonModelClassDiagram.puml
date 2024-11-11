@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model as ModelPackage <<Rectangle>>{
+Class "<<interface>>\nAddressBookModel" as AbModel
+Class "<<interface>>\nTransactionBookModel" as TbModel
+Class "AddressBookModelManager" as AbModelManager
+Class "TransactionBookModelManager" as TbModelManager
+Class "<<interface>>\nCommonModel" as Model
+Class "<<interface>>\nReadOnlyUserPrefs" as IUserPrefs
+Class "UserPrefs" as UserPrefs
+Class "<<facade>>\n<<singleton>>\nCommonModelManager" as CommonModel
+
+
+Class I #FFFFFF
+}
+
+AbModelManager .up.|> AbModel
+TbModelManager .up.|> TbModel
+Model -down-|> AbModel
+Model -down-|> TbModel
+
+Class HiddenOutside #FFFFFF
+HiddenOutside .down.> Model
+
+Model .right.> IUserPrefs
+UserPrefs .up.|> IUserPrefs
+
+CommonModel .up.|> Model
+CommonModel -right-> "1" UserPrefs
+CommonModel -right-> "1" TbModelManager
+CommonModel -right-> "1" AbModelManager
+
+@enduml
