@@ -611,30 +611,22 @@ Examples:
 
 ### Searching for a public address : `searchpa`
 
-Searches for a public address.
+Based on contacts displayed, it searches for a contact using the unique public address
 
 Format: `searchpa pa/PUBLIC_ADDRESS`
 
-
-<box type="tip" seamless>
-
-
-
-</box>
+| Parameter        | Explanation          | Constraints                                                                                                               | Safeguards                                                                                      |
+|------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `PUBLIC_ADDRESS` | a DLT public address | - Only alphanumeric characters allowed  <br/>  - The length should be more than 26 characters and less than 44 characters | This field is **case-insensitive** and searches for contacts based on lowercase public address. |
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
 
-* The `PUBLIC_ADDRESS` parameter specifies the public address to be added.
-  The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only
-  contain alphanumeric characters.
-*
-
-This field is **case-insensitive** and will be converted to lowercase.
-
-* This command only searches the current list of public addresses displayed (eg if all contacts are displayed
-  searchpa will perform a global search. if a filtered list of contacts are
+<box type="tip" seamless>
+This command only searches the current list of public addresses displayed (e.g. if all contacts are displayed
+  searchpa will perform a global search. if a filtered list of contacts
   displayed, searchpa will perform a local
   search on list of contacts displayed).
+  </box>
 
 Examples:
 
@@ -642,6 +634,7 @@ Examples:
   address `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` and displays the contact and wallet to
   which it belongs.
 
+![searchpa](images/searchpa.png)
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
