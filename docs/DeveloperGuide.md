@@ -149,6 +149,7 @@ The `Logic` component processes user inputs passed through the UI, utilizing a s
       <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
       <box type="info" seamless>
+      
       **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X), but due to a PlantUML limitation, it continues to the end of the diagram.
       </box>
 
@@ -710,7 +711,7 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
 
 ---
 
-## **Use case: UC24 — Assigning a Vendor**
+### **Use case: UC24 — Assigning a Vendor**
 
 **MSS**
 
@@ -1065,9 +1066,10 @@ testers are expected to do more *exploratory* testing.
 #### Finding a person
 
 <box type="info" seamless>
-      **Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
-        applied to edited data, but specific expected results will differ. <br>
-      **Suggestion:** Refer to User Guide for additional test cases, such as multiple prefixes or blank keywords.
+
+**Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
+applied to edited data, but specific expected results will differ. <br>
+**Suggestion:** Refer to User Guide for additional test cases, such as multiple prefixes or blank keywords.
 </box>
 
 1. Finding a person by name
@@ -1381,8 +1383,9 @@ testers are expected to do more *exploratory* testing.
 #### Assigning vendors
    
 <box type="info" seamless>
-   **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
-   </box>
+
+**Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+</box>
 
 1. Assigning a `Person` as a vendor
 
@@ -1402,7 +1405,8 @@ testers are expected to do more *exploratory* testing.
 #### Unssigning vendors
 
 <box type="info" seamless>
-      **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
+
+**Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
 </box>
 
 1. Unassigning a `Person` as a vendor
@@ -1663,7 +1667,7 @@ resolve these issues were higher than if we had opted to be safe and tweak AB3 j
 #### Achievements:
 As of 12 Nov 2024, WedLinker has:
 
-- [Most LoC (lines of code) in AY2425 S1 CS2103T](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=AY2425S1-CS2103T-F15-4%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20) at 21284
+- [Most LoC in AY2425 S1 CS2103T](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=AY2425S1-CS2103T-F15-4%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20)
 - **20** new commands as compared to the original AB3
 
 ---
