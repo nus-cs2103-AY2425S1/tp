@@ -152,6 +152,7 @@ of any currently displayed contact that you wish to edit. <br>
 </box>
 
 In both methods of editing:
+* Only contacts shown in the displayed list can be edited.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing roles, the existing roles of the contact will be removed.
