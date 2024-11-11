@@ -19,4 +19,5 @@ Client *--> Company
 Client *--> Phone
 Client *--> Email
 Client *--> Address
+Client *--> "*" Transactions
 @enduml
