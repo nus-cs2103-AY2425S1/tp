@@ -579,7 +579,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: The requested restaurant has to be currently saved.<br>
       The first test case below assumes the user has not added any more restaurants with the price label of `$`.
 
-   1. Test case: `tags $`<br>
+   1. Test case: `price $`<br>
       Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
    1. Test case: `price expensive`<br>
