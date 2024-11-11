@@ -37,7 +37,7 @@ public class FilterCommand extends Command {
 
         model.filterAppts(dateFilter);
 
-        int apptsFiltered = model.getFilteredAppts().size();
+        int apptsFiltered = model.getPatientSize();
 
         String apptLabel = apptsFiltered == 1 ? "appt" : "appts";
 

@@ -91,6 +91,19 @@ destroy ArgumentMultiMap
 ClinicConnectSystemParser --> LogicManager
 deactivate ClinicConnectSystemParser
 
+LogicManager -> FilterCommand : execute()
+activate FilterCommand
+
+<style>
+Reference {
+  BackgroundColor White
+}
+</style>
+ref over FilterCommand, AppointmentDateFilter : filter all appointments and return result
+
+
+FilterCommand --> LogicManager : result
+deactivate FilterCommand
 destroy FilterCommand
 [<--LogicManager
 deactivate LogicManager
