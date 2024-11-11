@@ -1297,10 +1297,17 @@ testers are expected to do more *exploratory* testing.
 <p><p/>
 
 7. **Allows case-insensitivity for relationship indicator in customer's `NAME`**
-    - **Problem:** Currently, we only allow the relationship indicator to be "S/O" or "D/O", which are in upper-case.
-    - **Example:** User tries to add a customer using `addc n/john s/o doe p/98765432 e/johnd@example.com a/John street`. An error message informs user that name is wrong.
-    - **Solution:** Add the functionality that allows the relationship indicator, namely "S/O" and "D/O", to be case-insensitive.
-    - **Rationale:** It is normal for a user to enter a customer name in any casing, including relationship indicator.
+   - **Problem:** Currently, we only allow the relationship indicator to be "S/O" or "D/O", which are in upper-case.
+   - **Example:** User tries to add a customer using `addc n/john s/o doe p/98765432 e/johnd@example.com a/John street`. An error message informs user that name is wrong.
+   - **Solution:** Add the functionality that allows the relationship indicator, namely "S/O" and "D/O", to be case-insensitive.
+   - **Rationale:** It is normal for a user to enter a customer name in any casing, including relationship indicator.
+<p><p/>
+
+8. **Allow users to input customer name instead of index for commands with `CUSTOMER_INDEX` parameter**
+   - **Problem:** Currently, we only allow using customer index to identify customers. This may take longer for some users who prefer to use customer names to refer to customers.
+   - **Solution:** Allow customers to be referenced by both name or index. This should however come with a check where customers should not have a positive integer as their name.
+   - **Rationale:** When taking actions (e.g. adding orders), some users may remember or are given the name of the customer. This allows them to directly take action for the customer instead of using the `findcustomer` command first if they have a lot of customers in their list.
+<p><p/>
 
 <div style="page-break-after: always;"></div>
 
