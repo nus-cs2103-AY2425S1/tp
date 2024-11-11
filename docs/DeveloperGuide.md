@@ -514,55 +514,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User types command to add patient
-2.  ClinicConnect requests relevant information
-3.  User keys in relevant information
-4.  ClinicConnect adds patient to the system
-5.  ClinicConnect shows a success message
+1. User types the command and information needed to add a new patient.
+2. ClinicConnect adds the patient to the system.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given information is invalid.
+* 1a. The given information is invalid.
+    * 1a1. ClinicConnect shows an error message and requests for the information again.
+    
+        This step is repeated until the information entered is valid.
+        
+        Use case resumes from step 1.
 
-  * 2a1. ClinicConnect shows an error message
-  * 2a2. ClinicConnect requests for the information again
-
-    Steps 2a1-2a2 are repeated until the information entered is valid.
-
-    Use case resumes from step 2.
-
-* 3a. The given patient's NRIC already exists in the system.
-
-    * 3a1. ClinicConnect shows an error message
-
+* 1b. The patient with the corresponding NRIC already exists in the system.
+    * 1b1. ClinicConnect shows an error message.
+    
         Use case ends.
 
-**Use case: Book appointment for patient**
+**Use case: Book an upcoming appointment for a patient**
 
 **MSS**
 
-1.  User types command to book appointment time with date, time and patient's NRIC
-2.  ClinicConnect creates a new appointment in the system
-3.  ClinicConnect shows a success message
+1.  User types the command to book an upcoming appointment for the patient with the corresponding NRIC.
+2.  ClinicConnect books an upcoming appointment for the patient.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given information is invalid.
+* 1a. The given information is invalid.
 
-    * 2a1. ClinicConnect shows an error message
+    * 1a1. ClinicConnect shows an error message and requests for the information again.
+
+        This step is repeated until the information entered is valid.
+        
+        Use case resumes from step 1.
+
+* 1b. The patient with the corresponding NRIC is not found.
+
+    * 1b1. ClinicConnect shows an error message.
 
         Use case ends.
 
-* 3a. The given appointment time already exists for the patient.
+* 1c. The given appointment date and time already exists for the patient.
 
-    * 3a1. ClinicConnect shows an error message
+    * 1b1. ClinicConnect shows an error message.
 
         Use case ends.
 
+* 1d. The given appointment date and time are in the past.
+
+    * 1c1. ClinicConnect shows an error message.
+
+        Use case ends.
 
 **Use case: Delete a patient**
 
