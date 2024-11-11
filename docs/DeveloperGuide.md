@@ -220,7 +220,7 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 ## **Appendix: Planned Enhancements**
 
-1. Prefix enhancements
+1. Prefix Enhancements
 
 Currently: The view wedding command in KnottyPlanners does not require a need for a prefix to represent the wedding. Thus, when associating a wedding to a `Person`, it is done by _tagging_ them to it, making the prefix 't/'. 
 
@@ -232,13 +232,13 @@ Currently: To prevent accidental deletions and clearing of data in KnottyPlanner
 
 Plan: To include a force deletion or clearing command that allows the user to remove the data without KnottyPlanners requiring a confirmation from them.
 
-4. Allow copying of information
+4. Allow Copying of Information
 
 Currently: As KnottyPlanners is optimised for keyboard usage, interactions with the GUI through direct copying of information is not supported.
 
 Plan: To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage.
 
-5. Support for long inputs
+5. Support for Long Inputs
 
 Currently: KnottyPlanners only support inputs up till XXX characters. As such, extreme inputs that exceed our limit can potentially hinder the viewing of information when the user does not resize the window.
 
@@ -256,16 +256,18 @@ Currently: Opening the help window creates an external popup that requires the u
 
 Plan: Enhance CLI optimisation by allowing the user to close the popup without using a mouse.
 
-8. Enhance contacts and weddings visibility
+8. Contacts and Weddings Visibility
 
 Currently: The address and wedding lists are in two separate views to help the wedding planner to be more focused and reduce cluttering of information. This can lead to an additional need to toggle between the wedding book and address book to recall the names of the wedding.
 
 Plan: To have an integrated view contains both the persons and weddings, allowing the association of persons to weddings to be done with less memory work.
 
+9. Comprehensive Language Support
 
+Currently: KnottyPlanners support names in English language without special characters such as "^".
 
-// Support for Multi-Languages
- 
+Plan: To have a more comprehensive language allowance for names with special characters, making KnottyPlanners more inclusive. To maintain checks for incorrect entry of data, KnottyPlanners will then prompt the user if special characters have been used.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
