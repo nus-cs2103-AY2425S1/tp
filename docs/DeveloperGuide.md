@@ -635,7 +635,7 @@ _Similar to UC10 except without extension 2b._
 
       Use case ends.
 
-**Use case: UC16 - Toggle application's theme** 
+**Use case: UC16 - Toggle application's theme**
 
 **MSS**
 
@@ -661,7 +661,7 @@ _Similar to UC10 except without extension 2b._
     - 2a1. System displays an error message indicating the failure reason.
 
       Use case resumes from step 1.
-  
+
 - 3a. Multiple previous commands available.
 
     - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.

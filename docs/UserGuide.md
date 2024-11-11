@@ -126,8 +126,8 @@ Only Singapore phone numbers are allowed by the application. Meaning, that only 
 A person can have any number of tags (including 0)
 </div>
 
-- Note that Name, Phone Number, Email and Address are compulsory fields. 
-- We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not 
+- Note that Name, Phone Number, Email and Address are compulsory fields.
+- We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not
 particularly sensitive as compared to Identification Number etc.
 - The email validation does not check for the presence of a period (.) after the "@" symbol, and it does not verify any specific domain extension. It only ensures that the domain name after the "@" is at least two characters long. E.g. `@u.nus.edu`
 
@@ -396,14 +396,14 @@ Changes the application theme from light to dark or from dark to light.
 Format: `toggle`
 
 - If application is currently in light mode, toggle command will set it to dark mode.
-- If application is currently in dark mode, toggle command will set it to light mode. 
+- If application is currently in dark mode, toggle command will set it to light mode.
 - Please note that our application does not save your theme preference, so it will always open in dark mode by default.
 
 Examples:
 
 - `toggle` changes the application theme.
 
-### Navigating Command History : 
+### Navigating Command History :
 
 Easily cycle through your previous **successfully executed** commands by using the Up and Down arrow keys on your keyboard.
 
