@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+title Filter Activity Diagram (Filter & Display Clients)
+start
+:Check for the presence of
+every flag and argument and
+parse them;
+if () then ([Argument meets parsing requirements])
+    :Create Predicate object specific to a flag
+    (Repeat for each flag/argument present);
+
+    :Combine all the Predicate objects to
+    create CombinedPredicate object;
+
+    :Evaluate CombinedPredicate for a client;
+    :Create Predicate object specific to a flag
+    (Repeat for each client);
+
+    if () then ([CombinedPredicate evaluates to True])
+        :Add Client to Filtered List;
+    else ([else])
+
+    endif
+    :Display filtered client list;
+else ([else])
+    :Show specified error message
+    for the failed argument;
+endif
+stop
+@enduml
