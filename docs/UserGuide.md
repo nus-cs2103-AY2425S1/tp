@@ -19,24 +19,24 @@ This guide will walk you through HallPointer’s main features and show you step
 
 ## Table of Contents
 
-- [Getting Started Quickly](#Getting-Started-Quickly)
+- [Getting Started Quickly](#getting-started-quickly)
 - [Command Summary](#command-summary)
 - [Features](#features)
-  - [Viewing help : `help`](#viewing-help--help)
-  - [Adding a member: `add_member`](#adding-a-member-add_member)
-  - [Listing all members : `list`](#listing-all-members--list)
-  - [Updating a member : `update_member`](#updating-a-member--update_member)
-  - [Locating members by name: `find_members`](#locating-members-by-name-find_members)
-  - [Deleting a member : `delete_member`](#deleting-a-member--delete_member)
-  - [Adding a session: `add_session`](#adding-a-session-add_session)
-  - [Locating members with associated sessions by name: `find_sessions`](#locating-members-with-associated-sessions-by-name-find_sessions)
-  - [Deleting a session: `delete_session`](#deleting-a-session-delete_session)
-  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-  - [Exiting the program : `exit`](#exiting-the-program--exit)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
+  - [Viewing Help](#viewing-help-help)
+  - [Adding a Member](#adding-a-member)
+  - [Listing All Members](#listing-all-members)
+  - [Updating a Member](#updating-a-member)
+  - [Locating Members by Name](#locating-members-by-name)
+  - [Deleting a Member](#deleting-a-member)
+  - [Adding a Session](#adding-a-session)
+  - [Locating Members with Associated Sessions by Name](#locating-members-with-associated-sessions-by-name)
+  - [Deleting a Session](#deleting-a-session)
+  - [Clearing All Entries](#clearing-all-entries)
+  - [Exiting the Program](#exiting-the-program)
+  - [Saving the Data](#saving-the-data)
+  - [Editing the Data File](#editing-the-data-file)
 - [FAQ](#faq)
-- [Known issues](#known-issues)
+- [Known Issues](#known-issues)
 
 
 ---
@@ -127,7 +127,7 @@ Displays  an alphabetical list of all available commands for quick and easy refe
 - `help` displays the help page
 ---
 
-### Adding a member: `add_member`
+### Adding a member:
 
 Adds a member to Hall Pointer. A member must have a name, room assignment, and Telegram username. You can also add tags to help categorize members.
 
@@ -139,6 +139,7 @@ Adds a member to Hall Pointer. A member must have a name, room assignment, and T
 
 - **Unique Name**: Each member must have a unique name. This is necessary to prevent confusion between members and to ensure accurate tracking. 
 - **Unique Telegram Username**: Each member must have a unique Telegram username, as telegram account is personal and each username can only be used by one person at a time.
+- **Room Number**: `ROOM_NUMBER` should be in the format `BLOCK-FLOOR-ROOM` and each field should be numeric.
 - **Shared Rooms Allowed**: Multiple members can be assigned to the same room to accommodate shared living arrangements.
 
 </box>
@@ -158,7 +159,7 @@ Adds a member to Hall Pointer. A member must have a name, room assignment, and T
 ![result for 'add_member n/John Doe r/4-3-301 t/johndoe123'](images/addCommandResult.png)
 ---
 
-### Listing all members : `list`
+### Listing all members:
 
 Shows a list of all members registered in Hall Pointer.
 
@@ -170,7 +171,7 @@ Shows a list of all members registered in Hall Pointer.
 ![result for 'list'](images/listCommandResult.png)
 ---
 
-### Updating a member : `update_member`
+### Updating a member: 
 
 Updates an existing member in Hall Pointer.
 
@@ -202,7 +203,7 @@ Updates an existing member in Hall Pointer.
 ![result for 'update_member 1 t/johndoe123_updated n/Johnson Doe'](images/updateCommandResult.png)
 ---
 
-### Locating members by name: `find_members`
+### Locating members by name:
 
 Finds members whose names contain any of the given keywords.
 
@@ -230,7 +231,7 @@ Finds members whose names contain any of the given keywords.
 
 ---
 
-### Deleting a member : `delete_member`
+### Deleting a member:
 
 Deletes the specified member from Hall Pointer.
 
@@ -250,7 +251,7 @@ Deletes the specified member from Hall Pointer.
 ![result for 'delete_member 2'](images/deleteMemberResult.png)
 ---
 
-### Adding a Session: `add_session`
+### Adding a Session:
 
 Adds a session to Hall Pointer and associates it with specified members. A session contains a name, date, and points awarded to each member attending the session. You can add multiple members to a session.
 
@@ -282,7 +283,7 @@ Adds a session to Hall Pointer and associates it with specified members. A sessi
 ![result for 'add_session'](images/addSessionResult.png)
 ---
 
-### Locating Members with Associated Sessions by Name: `find_sessions`
+### Locating Members with Associated Sessions by Name:
 
 This command finds members who have attended sessions with names that contain any of the specified keywords.
 
@@ -305,7 +306,7 @@ This command finds members who have attended sessions with names that contain an
 
 ---
 
-### Deleting a Session: `delete_session`
+### Deleting a Session:
 
 Deletes a session associated with one or more members in Hall Pointer.
 
@@ -322,7 +323,7 @@ Deletes a session associated with one or more members in Hall Pointer.
 
 ---
 
-### Clearing all entries : `clear`
+### Clearing all entries:
 
 Clears all entries from Hall Pointer.
 
@@ -330,7 +331,7 @@ Clears all entries from Hall Pointer.
 
 ---
 
-### Exiting the program : `exit`
+### Exiting the program:
 
 Exits the program.
 
