@@ -43,7 +43,7 @@ WardWatch (WW) is a **desktop app targeted towards doctors and nurses for managi
 8. [Command Summary](#command-summary)
 
 ---
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"> </div>
 
 # Quick start
 
@@ -351,7 +351,7 @@ Examples:
 
 ### Adding notes to a patient : `addnotes`
 
-<img src="images/addNotes.png" alt="result for 'addnotes'" style="pointer-events: none; width: 100%; height: auto;">
+<img src="images/addnotes.png" alt="result for 'addnotes'" style="pointer-events: none; width: 100%; height: auto;">
 
 Adds notes to an existing patient in WardWatch.
 
