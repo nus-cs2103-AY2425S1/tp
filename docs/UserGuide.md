@@ -14,7 +14,7 @@ To prevent manipulation of the data stored in this application, it is recommende
 
 </box>
 
-### Discaimer
+### Disclaimer
 
 <box type="info" seamless>
 The names of contacts in DLTbook do not support special symbols and only accepts characters from the English alphabet.
@@ -47,25 +47,21 @@ Go to the [Features](#features) section for a detailed guide on all available co
 
 ## Quick Start
 
-### System Requirements
+1. **Check System Requirements**: Ensure you have Java 17 or newer installed on your computer
 
-- **Java 17 or newer installed**
+    <box type="info" seamless>
+    
+    Not sure if you have Java? Check out [Setup Guide](#setup-guide)
+    
+    </box>
 
-<box type="info" seamless>
+2. **Download**: Download the latest release of [DLTbook.jar](https://github.com/AY2425S1-CS2103T-T08-1/tp/releases)
 
-Not sure if you have Java? Check out [Setup Guide](#setup-guide)
+3. **Install**: Create a folder and move DLTbook.jar to it according to the [Setup Guide](#setup-guide) 
 
-</box>
+4. **Start**: Open Terminal and run `java -jar DLTbook.jar`
 
-### Quick Installation
-
-1. **Download**: Download the latest release of [DLTbook.jar](https://github.com/AY2425S1-CS2103T-T08-1/tp/releases)
-
-2. **Install**: Create a folder and move DLTbook.jar there
-
-3. **Start**: Open Terminal and run `java -jar DLTbook.jar`
-
-4. **Try it Out**: If you are an experienced user, skip to [Try It Out!](#try-it-out) for a guide of the basic commands
+5. **Try it Out**: If you are an experienced user, skip to [Try It Out!](#try-it-out) for a guide of the basic commands
    or go to [Features](#features) for a detailed list of all commands.
 
 ## Beginner's Guide
@@ -154,12 +150,14 @@ Here’s how you can start using DLTbook:
 
 <box type="info" seamless>
 
-- **Note**: Java 17 or newer is required to run DLTbook
+**Note:**
 
-- **Note**: If you have multiple versions of Java installed, you may need to specify the path to the correct version
-  when running DLTbook
+- Java 17 or newer is required to run DLTbook
 
-- **Note**: If you're using a Mac, you may need to install the Java Development Kit (JDK) instead of the Java Runtime
+- If you have multiple versions of Java installed, you may need to specify the path to the correct version
+  of DLTbook
+
+- If you're using a Mac, you may need to install the Java Development Kit (JDK) instead of the Java Runtime
   Environment (JRE)
 
   </box>
