@@ -226,6 +226,8 @@ This section provides details on the usage of each command.
 
 ### Basic Commands
 
+<br>
+
 #### **Viewing help :** `help`
 
 Displays the help window. Also accessible by pressing the `F1` key.
@@ -326,7 +328,7 @@ Output: `Address book has been cleared!`
 
 <br>
 
-#### Exiting the program : `exit`
+#### **Exiting the program :** `exit`
 
 Exits the program.
 
@@ -335,7 +337,9 @@ Output: The GamerBook application window will be closed.
 
 ### Game Management Commands
 
-#### Adding a game : `addgame`
+<br>
+
+#### **Adding a game :** `addgame`
 
 Adds a game to an existing person in the GamerBook.
 
@@ -433,6 +437,8 @@ Examples:
 
 ### Search Commands
 
+<br>
+
 #### **Locating persons by name :** `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -504,6 +510,8 @@ Examples:
   one of the specified ranges.
 
 ### Utility Commands
+
+<br>
 
 #### **Undoing previous command :** `undo`
 

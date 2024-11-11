@@ -30,10 +30,11 @@
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Installation and Quick Start]({{ baseUrl }}/UserGuide.html#installation-and-quick-start)
   * [Exploring the GUI]({{ baseUrl }}/UserGuide.html#exploring-the-gui)
-  * [Features]({{ baseUrl }}/UserGuide.html#features)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
+  * [Important Notes about Command Formats]({{ baseUrl }}/UserGuide.html#important-notes-about-command-formats)
   * [Commands]({{ baseUrl }}/UserGuide.html#commands)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
+  * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
   
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
