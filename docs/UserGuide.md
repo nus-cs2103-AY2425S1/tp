@@ -7,18 +7,16 @@
 # Tuteez User Guide
 <br>
 
-## Welcome aboard tuteez
+## Welcome aboard Tuteez
 
-Welcome to Tuteez – a **powerful desktop address book application designed specifically for private tutors** to make **managing student contacts and lesson schedules simple and stress-free**.
-Tuteez enables you to effortlessly organise your students' details in one centralised application, allowing you to easily access and update their information whenever you need to.
+Welcome to Tuteez – a **powerful desktop address book application** designed specifically for **private tutors** to **manage student contacts and lesson schedules**.
+With Tuteez, you can effortlessly keep all your student information organized and accessible in one place, so every information you need is right at your fingertips.
 
-Optimized for efficiency, Tuteez combines the speed of a Command Line Interface (CLI) with the user-friendly benefits of a Graphical User Interface (GUI), giving you the best of both worlds.
+Tuteez provides both a Command Line Interface (CLI), allowing quick, keyboard-based commands for speed, and a Graphical User Interface (GUI) with intuitive buttons, menus, and displays for easy navigation.
 
-We understand that managing student contacts can feel overwhelming, especially with countless details to remember. Worry no more, because Tuteez is here to help you with that!
-With Tuteez, you can start focusing more on what truly matters – your teaching, and less on the administrative work.
+By letting Tuteez handle your organizational tasks, you can focus on what matters most: teaching. 
 
-This comprehensive guide will walk you through the various features of Tuteez. Let’s dive in and explore how Tuteez can simplify your tutoring experience!
-
+In this guide, we will walk you through Tuteez’s key features and demonstrate how it can transform your tutoring experience.
 <br>
 
 ### Table of Contents
@@ -87,16 +85,22 @@ This comprehensive guide will walk you through the various features of Tuteez. L
 <br>
 
 Here is a quick look at the various sections in this user guide:
-- **[Quick start](#quick-start)**: A fast-track section to get Tuteez up and running in no time. It includes setup instructions and a list of essential commands you can try out immediately.
-- **[GUI Overview](#gui-overview)**: A quick overview of the user interface of Tuteez, with explanations of the left and right panels.
-- **[Beginner's Tutorial](#beginners-tutorial)**: A step-by-step guide for new users to get started with Tuteez. It includes instructions on adding students, editing details, scheduling lessons, and deleting students.
-- **[Features](#features)**: This section covers all the key commands in Tuteez, providing detailed descriptions of each function. You’ll learn how to add students, manage lessons, add remarks, and more.
-- **[Things you should definitely know](#things-you-should-definitely-know)**: Important information about constraints and limitations of the current version of Tuteez.
-- **[Future Features](#future-features)**: A sneak peek into the exciting features that will be added to Tuteez in future updates.
-- **[FAQ](#faq)**: Answers to the most frequently asked questions about Tuteez.
-- **[Known issues](#known-issues)**: A list of known issues that you may encounter while using Tuteez.
-- **[Command summary](#command-summary)**: A quick reference guide summarising all the commands available in Tuteez.
+- **[Quick start](#quick-start)**: A fast-track section to get Tuteez up and running in no time. It includes setup instructions and a list of essential commands you can try out immediately. <br>
+- **[GUI Overview](#gui-overview)**: A quick overview of the user interface of Tuteez, with explanations of the left and right panels. <br>
+- **[Beginner's Tutorial](#beginner-s-tutorial)**: A step-by-step guide for new users to get started with Tuteez. It includes instructions on adding students, editing details, scheduling lessons, and deleting students. <br>
+- **[Features](#features)**: This section covers all the key commands in Tuteez, providing detailed descriptions of each function. You’ll learn how to add students, manage lessons, add remarks, and more. <br>
+- **[Things you should definitely know](#things-you-should-definitely-know)**: Important information about constraints and limitations of the current version of Tuteez. <br>
+- **[Future Features](#future-features)**: A sneak peek into the exciting features that will be added to Tuteez in future updates. <br>
+- **[FAQ](#faq)**: Answers to the most frequently asked questions about Tuteez. <br>
+- **[Known issues](#known-issues)**: A list of known issues that you may encounter while using Tuteez. <br>
+- **[Command summary](#command-summary)**: A quick reference guide summarising all the commands available in Tuteez. <br>
 
+#### Recommended Sections Based on User Experience
+
+| **User Experience** | **Recommended Sections** |
+|---------------------|--------------------------|
+| **Beginner**        | We highly recommend starting with the [Beginner's Tutorial](#beginner-s-tutorial) to get comfortable with Tuteez’s essential features and commands. |
+| **Advanced User**   | Feel free to skip directly to the [Command Summary](#command-summary) for a quick overview of all commands available in Tuteez. |
 <br>
 
 ### How to Read this Guide
@@ -146,6 +150,7 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 
 4. Run the application by entering the following command: `java -jar tuteez.jar`<br>
    A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data for your reference.<br>
+
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
@@ -161,7 +166,7 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 
    * `exit` : Exits the app.
 
-6. You may refer to the [Beginner's Tutorial](#beginners-tutorial) to get a hands-on walkthrough of the application, or refer to the [Features](#features) section below for details of each command.
+6. You may refer to the [Beginner's Tutorial](#beginner-s-tutorial) to get a hands-on walkthrough of the application, or refer to the [Features](#features) section below for details of each command.
 
 <br>
 
@@ -201,6 +206,7 @@ Make sure you have:
 
 ### Exploring the Application
 Upon launching the application, you should see a window similar to the one below:
+
 ![Ui](images/Ui.png)
 
 The *left panel* displays the list of students you have added. Separated from the left panel by a divider is the *right panel* displays the details of the selected student.
@@ -215,6 +221,7 @@ Let us start by clearing the sample data that comes with the application. Type `
 You should see a message indicating that all entries have been cleared, and the list of students should now be empty.
 
 If everything went well, you'll be greeted by this view:
+
 ![clear_command](images/clear_command_tutorial.png)
 
 <br>
@@ -228,9 +235,10 @@ This means that you've added a student named `John Doe`, with the phone number `
 and address `Jurong West`.
 
 If everything went well, you'll be greeted by this view:
+
 ![add_command](images/add_command_tutorial.png)
 
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">
     ℹ️ **Info**: For more details on the `add` command, please refer to the [Add Command](#adding-a-student-add) section.
 </div>
 
@@ -244,6 +252,7 @@ Let's try entering the following command: `addlesson 1 l/Monday 0900-1100`
 This means that you've added a lesson for `John Doe` on `Monday` from `9 am to 11 am`.
 
 If everything went well, you'll be greeted by this view:
+
 ![addlesson_command](images/addlesson_command_tutorial.png)
 
 <br>
@@ -256,9 +265,10 @@ Let's try entering the following command: `edit 1 e/johndoe@gmail.com`
 John's email address should now be updated to `johndoe@gmail.com` and the updated email address should be reflected in Tuteez.
 
 If everything went well, you'll be greeted by this view:
+
 ![edit_command](images/edit_command_tutorial.png)
 
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">
     ℹ️ **Info**: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student-edit) section.
 </div>
 
@@ -272,6 +282,7 @@ Let's try entering the following command: `delete John Doe`
 John Doe should now be removed from your list of students.
 
 If everything went well, you'll be greeted by this view:
+
 ![delete_command](images/delete_command_tutorial.png)
 
 <br>
@@ -329,9 +340,9 @@ This command will allow you to add a new student and their personal details to y
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`
 
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: Only the **name** and **phone number** are required fields. The other fields are optional.</div>
+<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: Only the **name** and **phone number** are required fields. The other fields are optional.</div>
 
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message. <br> To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)</div>
+<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message. <br> To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)</div>
 
 
 Acceptable values for each parameter:
@@ -345,7 +356,7 @@ Acceptable values for each parameter:
 | TAG          | Tag names can include letters, numbers, and spaces                                                                                                                         | Primary 4          |
 | lesson       | The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space | monday 1500-1700   |
 
-<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can add any number of tags and lessons to a student (or you could also omit them)</div>
+<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can add any number of tags and lessons to a student (or you could also omit them)</div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -389,7 +400,7 @@ Format: `addremark INDEX r/REMARK` to add a remark to the student at the specifi
 * Adds a new remark to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
 * You can add any text as a remark, and remarks are displayed in the order they were added.
 
-<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can also use the abbreviated command `addrmk` as a shortcut for `addremark`.</div>
+<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can also use the abbreviated command `addrmk` as a shortcut for `addremark`.</div>
 
 Examples:
 * `addremark 1 r/Great progress in Math` Adds the remark "Great progress in Math" to the first student.
@@ -421,9 +432,9 @@ Format: `addlesson INDEX l/LESSON [l/LESSON]…​`
 * You can add multiple lessons to a student at once.
 * Lessons have to start with the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
 
-<div style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.</div>
-
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)</div>
+<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.</div>
+<br>
+<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)</div>
 
 Examples:
 * `addlesson 1 l/Monday 0900-1100` Adds a lesson on Monday from 9 am to 11 am to the first student.
@@ -446,7 +457,7 @@ Examples:
 * `deletelesson 1 li/1` Deletes the first lesson of the first student.
 * `dellsn 2 li/2 li/3` Deletes the second and third lessons of the second student.
 
-<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: Want to delete multiple lessons at once? Simply specify multiple different lesson indices in the parameters.</div>
+<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: Want to delete multiple lessons at once? Simply specify multiple different lesson indices in the parameters.</div>
 
 <br>
 
@@ -486,7 +497,7 @@ Format: `delete INDEX` or `delete NAME`
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** such as 1, 2, 3, …​
 
-<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can also use the abbreviated command `del` as a shortcut for `delete`.
+<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can also use the abbreviated command `del` as a shortcut for `delete`.</div>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
@@ -513,16 +524,16 @@ Examples:
 
 ### Navigating command history: <kbd>&uarr;</kbd> or <kbd>&darr;</kbd>
 
-These keyboard shortcuts will allow you to navigate through your command history in the command box, making it easy to access and reuse previous commands.
+These keyboard shortcuts will allow you to navigate through your command history in the command box, making it easy to access and reuse previously executed commands.
 
 Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 
 * <kbd>&uarr;</kbd> will allow you to navigate to the previous command you have entered.
 * <kbd>&darr;</kbd> will allow you to navigate to the next command you have entered.
 
-<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: Use these shortcuts to quickly access and reuse previous commands without having to retype them.</div>
+<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: Use these shortcuts to quickly access and reuse previous commands without having to retype them.</div>
 
-<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: If your previous or next command is invalid, there will not be any command displayed in the command box.</div>
+<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: Only correctly executed commands are saved. Commands that result in errors will not be added to the history.</div>
 
 <br>
 
@@ -530,7 +541,7 @@ Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 
 This will allow you clears all student entries from Tuteez.
 
-<div style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**:  This action is irreversible and will wipe your existing data from the application. Make backups of your data if you need to, and use this command with caution!</div>
+<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**:  This action is irreversible and will wipe your existing data from the application. Make backups of your data if you need to, and use this command with caution!</div>
 
 Format: `clear`
 
@@ -540,7 +551,7 @@ Format: `clear`
 
 This command will allow you to shut down and exit the program.
 
-<div style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**: This action will close the application. You will need to relaunch the application to use it again.</div>
+<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**: This action will close the application. You will need to relaunch the application to use it again.</div>
 
 Format: `exit`
 
