@@ -407,6 +407,7 @@ Examples:
   e.g. using `filterorder pending` followed by marking the first order in the filtered list as completed will remove that order from the current filtered list.
 
 </box>
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
