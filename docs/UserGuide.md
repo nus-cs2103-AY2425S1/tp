@@ -808,7 +808,7 @@ Deletes all tutorial, student and participation records
 Command:  `clear`
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-EduVault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/addressbook.json` before executing.
+EduVault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/eduvault.json` before executing.
 </div>
 
 ---
@@ -845,7 +845,7 @@ There is no need to save manually.
 ---
 
 ### **10. Editing the data file**
-EduVault data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`.
+EduVault data is saved automatically as a JSON file at `[JAR file location]/data/eduvault.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**

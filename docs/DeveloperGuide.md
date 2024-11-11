@@ -1099,7 +1099,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data files
 
-  * Prerequisites: Save file exists (the default location and name is `[JAR file location]/data/addressbook.json`)
+  * Prerequisites: Save file exists (the default location and name is `[JAR file location]/data/eduvault.json`)
 
   * Test case: Rename, move, or delete the save file
 
@@ -1107,7 +1107,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Dealing with corrupt data files
 
-  * Prerequisites: Save file exists (the default location and name is `[JAR file location]/data/addressbook.json`)
+  * Prerequisites: Save file exists (the default location and name is `[JAR file location]/data/eduvault.json`)
 
   * Test case: Edit the save file to be an invalid JSON format (eg. removing the closing brace `}` at the end of the file), 
 or adding an invalid object as outlined in [Storage feature](#storage-feature).
