@@ -275,6 +275,8 @@ After:
 
 **Value proposition**: To be able to manage contacts faster than a typical mouse/GUI driven app, and able to associate goods to contacts and suppliers for an easier and more comprehensive business management experience.
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -537,6 +539,7 @@ testers are expected to do more *exploratory* testing.
       Expected: System will provide an error message indicating the correct usage.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
