@@ -39,10 +39,11 @@ public class Date implements Comparable<Date> {
     /**
      * Returns true if a given string is a valid date in the format yyyy-MM-dd.
      *
-     * @param test The string to test.
+     * @param test The string to test. Must not be null.
      * @return True if the test string is a valid date in the specified format.
      */
     public static boolean isValidDate(String test) {
+        assert test != null : "The test string should not be null";
         try {
             LocalDate.parse(test, FORMATTER);
             return true;

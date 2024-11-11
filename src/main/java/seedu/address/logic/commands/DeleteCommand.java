@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -26,9 +28,22 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Entries(s): \n";
 
+    private static final String LOG_PERSON_OUT_OF_RANGE = "Invalid index encountered: The provided index %d is "
+            + "greater+than the total number of entries in the person list";
+
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
+
     private final List<Index> targetIndices;
 
+    /**
+     * Creates a DeleteCommand to delete the specified persons based on their indices.
+     *
+     * @param targetIndices A list of indices identifying the persons to be deleted.
+     *                      Must not be null, but can be empty if no deletion is required.
+     * @throws AssertionError If {@code targetIndices} is null.
+     */
     public DeleteCommand(List<Index> targetIndices) {
+        assert targetIndices != null : "targetIndices should not be null";
         this.targetIndices = targetIndices;
     }
 
@@ -43,6 +58,7 @@ public class DeleteCommand extends Command {
     private void validateIndices(List<Index> targetIndices, Integer lastShownListSize) throws CommandException {
         for (Index targetIndex : targetIndices) {
             if (targetIndex.getZeroBased() >= lastShownListSize) {
+                logger.severe(LOG_PERSON_OUT_OF_RANGE);
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
         }
