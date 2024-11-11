@@ -63,7 +63,6 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 5. Open a command terminal (repeat Step 1) and navigate to the folder with the `.jar` file by typing:
     ```bash
     cd path/to/your/folder
-
     ```
     <div class="note" markdown="span">
     Alternatively, you can open the folder where the `.jar` file  is located,
@@ -74,7 +73,6 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
    Then inside terminal, run the app with:
     ```bash
     java -jar EZSTATES.jar
-   
     ```
    
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
@@ -103,7 +101,6 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 5. Open Terminal (repeat Step 1) and navigate to the folder with the `.jar` file by typing:
     ```bash
     cd path/to/your/folder
-
     ``` 
     <div class="note" markdown="span">
     Alternatively, you can open the folder where the `.jar` file  is located,
@@ -114,7 +111,6 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
    Then inside terminal, run the app with:
    ```bash
    java -jar EZSTATES.jar
-
     ```
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
@@ -123,7 +119,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 ### GUI Overview
 The EZSTATES GUI is organized into **five** key components:
 
-   ![ui](images/ui_overview_ug.png)
+   ![ui](images/img_11.png)
 
 * `Menu Bar`: Located at the top left, this includes options such as `File` and `Help` for managing settings and accessing support.
 * `Command Box`: The main area where users can enter commands to interact with the app.
@@ -145,8 +141,6 @@ To use EZSTATES, type commands in the command box and press `Enter`. Here are a 
    * `buyer n/John Doe p/98765432 e/johnd@example.com` : Adds a buyer named `John Doe` with a phone number `98765432` and email `johnd@example.com`.
 
    * `deleteclient 1` : Deletes the contact at index 1 (e.g. "bob" according to the picture above).
-
-   * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -178,7 +172,7 @@ Commands in EZSTATES follow the same structure:
 | INDEX<sup>1,2</sup> | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists |
 
 **Notes:**
-1. Since `INDEX` is **one-based**, the first item in the list cannot start with `0`.
+1. Since `INDEX` is **one-based** (i.e. starts from 1), the first item in the list cannot start with `0`.
 2. EZSTATES handles errors related to the `INDEX` parameter in two ways: 
    1. If `INDEX` is an invalid number (e.g., non-positive integers, numbers larger than Integer.MAX_VALUE, or non-integer values like 4.5), it will be flagged as an invalid command format. 
    2. If `INDEX` is a valid integer but exceeds the size of the currently displayed list (client/listing), it will be flagged as an invalid index. Supported values are [1, displayed list size].
@@ -217,7 +211,7 @@ The prefixes used in **EZSTATES** are universal across all commands.
 |--------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|-------------------------------------------|
 | n/     | name    | Names should only contain `alphanumeric` characters and `spaces`, and it should not be `blank`.                                                                                                                                                                                                                                                                                                                   | `n/wen xuan`, `n/muhammad`, `n/sean2` | `n/!@#`, `n/`                             |
 | p/     | phone   | Phone numbers should only contain `numbers`, and it should be at least `3` digits long.                                                                                                                                                                                                                                                                                                                           | `p/123`, `p/91230000`                 | `p/12`, `p/abc123`, `p/`                  |
-| e/     | email   | Emails must follow the format `local-part@domain`. The local-part can contain alphanumeric characters and special characters (`+_.-`), but cannot start or end with special characters. The special characters cannot be consecutive. The domain must have at least one label, with each label starting and ending with alphanumeric characters and being at least 2 characters long. Labels can contain hyphens. | `e/bobby@gmail.com`, `e/123@123`      | `e/bobby`, `e/123@.com`, `e/@example.com` |
+| e/     | email   | Emails must follow the format `local-part@domain`. The local-part can contain alphanumeric characters and special characters (`+_.-`), but cannot start or end with special characters. The special characters cannot be consecutive. The domain must have at least one label, with each label starting and ending with alphanumeric characters and being at least 2 characters long. Labels can contain hyphens. | `e/bob@gmail.com`, `e/123@123`        | `e/bobby`, `e/123@.com`, `e/@example.com` |
 | t/     | tag     | Tag names should be `alphanumeric`.                                                                                                                                                                                                                                                                                                                                                                               | `t/friend1`, `t/colleague`, `t/`      | `t/friend@1`, `t/123@abc`                 |
 | d/     | date    | Dates should be in the format `dd-MM-yy` or `ddMMyy` (e.g., 25-12-24 or 251224).                                                                                                                                                                                                                                                                                                                                  | `d/08-12-24`, `d/081224`              | `d/32-13-24`, `d/123456`, `d/`            |
 | fr/    | from    | Times should be in the format `HH:mm` or `HHmm` (e.g., 0900 or 09:00). `from` time must precede `to` time.                                                                                                                                                                                                                                                                                                        | `fr/0800`, `fr/08:00`                 | `fr/2500`, `fr/100`, `fr/8am`             |
@@ -225,7 +219,7 @@ The prefixes used in **EZSTATES** are universal across all commands.
 | pr/    | price   | Price should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `6` digits long.                                                                                                                                                                                                                                                                                          | `pr/100000`, `pr/45000000`            | `pr/000123`, `pr/-1000`, `pr/12`          |
 | ar/    | area    | Area should only contain `positive` integers and cannot start with `zeroes`, and it should be at least `2` digits long.                                                                                                                                                                                                                                                                                           | `ar/10`, `ar/100`                     | `ar/01`, `ar/-5`, `ar/`                   |
 | add/   | address | Addresses can take any values, and it should not be `blank`.                                                                                                                                                                                                                                                                                                                                                      | `add/123 PASIR RIS (S)123456`         | `add/`                                    |
-| reg/   | region  | Only the following `9` regions are allowed: `EAST`, `WEST`, `NORTHEAST`, `SOUTH`, `NORTH`, `NORTHWEST`, `SOUTHEAST`, `SOUTHWEST`, `CENTRAL`.                                                                                                                                                                                                                                                                      | `reg/east` `reg/northeast`            | `reg/xyz`, `reg/invalidregion`            |
+| reg/   | region  | Only the following `9` regions are allowed: `NORTH`, `SOUTH`, `EAST`, `WEST`, `NORTHEAST`, `SOUTHEAST`, `NORTHWEST`, `SOUTHWEST`, `CENTRAL`.                                                                                                                                                                                                                                                                      | `reg/east` `reg/northeast`            | `reg/xyz`, `reg/invalidregion`            |
 | sel/   | seller  | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                                                                          | `sel/1` `sel/2`                       | `sel/0`, `sel/-1`, `sel/abc`              |
 | buy/   | buyer   | Can only take non-zero unsigned integer.                                                                                                                                                                                                                                                                                                                                                                          | `buy/1` `buy/2`                       | `buy/0`, `buy/-2`, `buy/abc`              |
 
@@ -314,8 +308,8 @@ EZSTATES features (i.e. commands) are divided into **four** main categories:
 1. [Client Management Commands](#1-client-management-commands)
     - [Add Buyer](#add-buyer) (`buyer`) 
     - [Add Seller](#add-seller) (`seller`)
-    - [Find Clients](#find) (`find`)
     - [Show Clients](#show-clients) (`showclients`)
+    - [Find Clients](#find) (`find`)
     - [Edit Client](#edit-client) (`editclient`)
     - [Delete Client](#delete-client) (`deleteclient`)
 2. [Appointment Management Commands](#2-appointment-management) 
@@ -323,9 +317,9 @@ EZSTATES features (i.e. commands) are divided into **four** main categories:
     - [Delete Appointment](#delete-appointment) (`deleteapt`)
     - [Filter Appointments](#today) (`today`)
 3. [Listing Management Commands](#3-listing-management) 
-    - [Add Listing](#add-listing) (`listing`)
-    - [Find Listings]() (`findlisting`)
+    - [Add Listing](#add-listing) (`listing`) 
     - [Show Listings](#show-listings) (`showlistings`)
+    - [Find Listings](#find-listings) (`findlisting`)
     - [Edit Listing](#edit-listing) (`editlisting`)
     - [Add Buyers to Listing](#add-buyers-to-listing) (`addlistingbuyers`)
     - [Remove Buyers from Listing](#remove-buyers-from-listing) (`removelistingbuyers`)
@@ -523,7 +517,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 
 - **Failed Execution:** NIL
 - **Special Comments**
-1. You are able to execute showclients on an empty list of clients, as per Successful Execution Use Case #2
+1. You are able to execute `showclients` on an empty list of clients, as per Successful Execution Use Case #2
 
 #### Find
 - **Command:** `find KEYWORD [KEYWORD]...`
@@ -555,7 +549,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 >
 > **User Error**: Client not found
 > 
-> **Input**: `find Bob7`
+> **Input**: `find noMatchingClients`
 > 
 > **Output**: 0 persons listed!
 > 
@@ -630,7 +624,7 @@ Phone number: 97774444 and Email: bobby321@gmail.com!
 >
 > ---
 > 
-> **User Error #2**: Entering out-of-bounds index (larger than number of clients)
+> **User Error #2**: Client index out of bounds (larger than number of clients)
 > 
 > **Input**: `editclient 100 n/Bobby`
 > 
@@ -674,7 +668,7 @@ Phone number: 977774444 and Email: bobby123@gmail.com`
 <br>Example: deleteclient 1
 >
 > ---
-> **User Error #2**: Entering out-of-bounds index (larger than number of clients)
+> **User Error #2**: Client index out of bounds (larger than number of clients)
 > 
 > **Input**: `deleteclient 100`
 > 
@@ -746,11 +740,11 @@ Date: 09-10-24 (From: 10:00 To: 12:00)
 > 
 > **User Error #3**: No index found / Invalid type / Negative integer
 >
-> **Input #a**: `apt -1`
+> **Input #a**: `apt d/20-10-24 fr/0800 to/1000` 
 >
 > **Input #b**: `apt aa`
 > 
-> **Input #c**: `apt d/20-10-24 fr/0800 to/1000`
+> **Input #c**: `apt -1`
 >
 > **Output**: <br>
 Invalid command format! <br>
@@ -759,23 +753,20 @@ Parameters: INDEX (must be a positive integer) d/ [DATE in ddMMyy] fr/ [FROM] to
 Example: apt 1 d/ 201224 fr/ 0800 to/ 1000
 >
 > ---
-> > ---
-> **User Error #1**: Client index out of bounds
+> 
+> **User Error #4**: Client index out of bounds
 >
-> **Input**: `deleteapt 100`
+> **Input**: `apt 100 d/20-10-24 fr/0800 to/1000`
 >
-> **Output**: The person index provided is invalid
+> **Output**: The person index provided is invalid!
 >
-> --- 
-> **User Error #4**: The `From` time is later than `To`
+> ---
 >
-> **Input #a**: `apt d/111124 fr/0900 to/0800`
+> **User Error #5**: The `From` time is later than `To`
 >
-> **Output**: <br>
-Invalid command format! <br>
-apt: Adds an appointment to a client identified by the index number used in the displayed person list. Existing appointment will be overwritten with the new appointment. <br>
-Parameters: INDEX (must be a positive integer) d/ [DATE in ddMMyy] fr/ [FROM] to/ [TO] <br>
-Example: apt 1 d/ 201224 fr/ 0800 to/ 1000
+> **Input**: `apt d/111124 fr/0900 to/0800`
+>
+> **Output**: Invalid from and to timings! From timing cannot be after to timing.
 >
 > ---
 
@@ -852,6 +843,9 @@ Example: deleteapt 1
 > ![todayfailed](images/todayfailed.png)
 >
 > ---
+
+- **Special Comments:** NIL
+
 ---
 
 ### 3. Listing Management
@@ -891,7 +885,7 @@ Address: 123 PASIR RIS (S)123456
 
 - **Failed Execution:**
 > ---
-> **User Error #1**: Attempting to add a listing for a non-existent seller
+> **User Error #1**: Seller index out of bounds
 >
 > **Input**: `listing n/Warton House pr/400000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/100`
 >
@@ -899,7 +893,7 @@ Address: 123 PASIR RIS (S)123456
 >
 > ---
 > 
-> **User Error #2**: Attempting to add non-existent buyers to a listing
+> **User Error #2**: Buyer index out of bounds
 > 
 > **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/100`
 > 
@@ -912,8 +906,8 @@ Address: 123 PASIR RIS (S)123456
 > **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/1 buy/1`
 >
 > **Output**: <br>
-The seller index specified is not a seller: <br>
-1. Alex Yeoh
+The seller index specified is not a seller:
+><br>1. Alex Yeoh
 >
 > ---
 >
@@ -922,8 +916,8 @@ The seller index specified is not a seller: <br>
 > **Input**: `listing n/Warton House pr/400000 ar/100 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/2`
 >
 > **Output**: <br>
-The buyer index specified is not a buyer: <br>
-2. Bernice Yu
+The buyer index specified is not a buyer:
+><br>2. Bernice Yu
 >
 > ---
 
@@ -960,23 +954,44 @@ The buyer index specified is not a buyer: <br>
 1. You are able to show an empty list of listings, as per Successful Execution Use Case #2
 
 #### Find Listings
-- **Command:** `findlisting KEYWORD [KEYWORD]`
+- **Command:** `findlisting KEYWORD [KEYWORD]...`
 - **Description:** Finds the specific listing(s) based on the provided keywords
 - **Successful Execution:**
 > ---
+> **Use Case #1**: Finding listings with `David` 
 > 
+> **Input**: `findlisting david`
 > 
+> **Output**: 2 listings listed!
+> ![img.png](images/img_9.png)
+>
+> ---
 > 
+> **Use Case #2**: Finding listings with `David` OR `House`
 > 
+> **Input**: `findlisting david house`
 > 
-> 
-> 
-> 
-> 
+> **Output**: 3 listings listed!
+> ![img_7.png](images/img_7.png)
+>
 > ---
 
+- **Failed Execution:**
+> ---
+> **User Error**: No matching listings
+> 
+> **Input**: `findlisting noMatchingListings`
+> 
+> **Output**: 0 listings listed!
+> ![img_8.png](images/img_8.png)
+> 
+> ---
+- **Special Comments**
+1. Similar to `find` command, for cases where names consist of two or more parts (e.g. David House), inputting `findlisting David House` results in finding listings containing `David` OR `House` in their names, as per Successful Execution Use Case #2.
+
+
 #### Edit Listing
-- **Command:** `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`
+- **Command:** `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]`
 - **Description:** Edits the details of the listing identified by the listing index number. **Buyers cannot be edited using this command.** Use addlistingbuyers or removelistingbuyers to manage buyers.
 - **Successful Execution:**
 > ---
@@ -987,6 +1002,8 @@ The buyer index specified is not a buyer: <br>
 > **Output**: 
 Successfully edited listing: RC445.
 Address: test
+> 
+> ---
 > 
 > **Use Case #2**: Editing listing `RC4` region to become `central`
 > 
@@ -1007,6 +1024,7 @@ Address: test
 > **Output**: The listing index provided is invalid!
 > 
 > ---
+> 
 > **User Error #2**: Changing name to pre-existing name (or address)
 > 
 > **Input**: `editlisting 1 n/RC5` _(assuming RC5 already exists in the system)_
@@ -1014,6 +1032,7 @@ Address: test
 > **Output**: This listing name / address already exists in the system.
 > 
 > ---
+> 
 > **User Error #3**: No prefixes provided
 > 
 > **Input**: `editlisting 1`
@@ -1021,6 +1040,7 @@ Address: test
 > **Output**: At least one field to edit must be provided.
 > 
 > ---
+> 
 > **User Error #4**: No index found / Invalid type / Negative integer
 >
 > **Input #a**: `editlisting n/aaaa`
@@ -1031,7 +1051,7 @@ Address: test
 >
 > **Output**: <br>
 Invalid command format! <br>
-editlisting: Edits the details of the listing identified by the listing index number. Buyers cannot be edited using this command. Use addlistingbuyers or removelistingbuyers to manage buyers. <br>
+editlisting: Edits the details of the listing identified by the listing index number. Buyers cannot be edited using this command. Use `addlistingbuyers` or `removelistingbuyers` to manage buyers. <br>
 Parameters: LISTING_INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]... <br>
 Example: editlisting 2 pr/450000 ar/1200
 >
@@ -1042,7 +1062,7 @@ Example: editlisting 2 pr/450000 ar/1200
 2. There is a known issue where a listing can be edited to assign a buyer as its seller. This will also be documented under [Known Issues](#known-issues) for reference.
 
 #### Add Buyers to Listing
-- **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
+- **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...`
 - **Description:** Associates buyers with a specified listing.
 - **Successful Execution:**
 > ---
@@ -1082,12 +1102,16 @@ Address: 123 Clementi Ave
 > 
 > --- 
 > 
-> **User Error #2**: Buyer not found
-> 
-> **Input**: `addlistingbuyers 1 buy/100`
-> 
-> **Output**: The person index provided is invalid!
-> 
+> > **User Error #2**: Buyer index not found / Invalid type / Negative integer
+>
+> **Input #a**: `addlistingbuyers 1 buy/`
+>
+> **Input #b**: `addlistingbuyers 1 buy/aa`
+>
+> **Input #c**: `addlistingbuyers 1 buy/-1`
+>
+> **Output**: Index is not a non-zero unsigned integer.
+>
 > ---
 > 
 > **User Error #3**: Person is not a buyer
@@ -1114,7 +1138,7 @@ Example: addlistingbuyers 1 buy/1 buy/3
 2. There is a minor known issue regarding the failure messsage for User Error #4. The Result Display should show `LISTING_INDEX` instead of `LISTING_NAME`. This will also be documented under [Known Issues](#known-issues) for reference.
 
 #### Remove Buyers from Listing
-- **Command:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
+- **Command:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES]...`
 - **Description:** Removes buyers associated with a specified listing.
 - **Successful Execution:**
 > ---
@@ -1144,10 +1168,10 @@ Removed buyers: Alex Yeoh, Charlotte Oliveiro
 > 
 > ---
 > 
-> **User Error #2**: Buyer index not found / Invalid type / Negative integer 
+> **User Error #2**: Buyer index not found / Invalid type / Negative integer
 >
-> **Input #a**: `removelistingbuyers 1 buy/1000`
->
+> **Input #a**: `removelistingbuyers 1 buy/`
+> 
 > **Input #b**: `removelistingbuyers 1 buy/aa`
 >
 > **Input #c**: `removelistingbuyers 1 buy/-1`
@@ -1161,8 +1185,8 @@ Removed buyers: Alex Yeoh, Charlotte Oliveiro
 > **Input**: `removelistingbuyers 1 buy/2`
 >
 > **Output**: <br>
-The specified person is not a buyer: <br>
-2. Bernice Yu <br>
+The specified person is not a buyer:
+><br>2. Bernice Yu <br>
 >
 > ---
 > 
@@ -1173,6 +1197,25 @@ The specified person is not a buyer: <br>
 > **Output**: <br>
 The specified buyer Alex Yeoh is not a buyer of the listing RC4. <br>
 Address: 134 Clementi Ave.
+> 
+> ---
+> 
+> **User Error #5**: Buyer index out of bounds
+> 
+> **Input**: `removelistingbuyers 1 buy/1000`
+> 
+> **Output**: The person index provided is invalid!
+> 
+> ---
+> 
+> **User Error #6**: Missing `buy/` prefix
+> 
+> **Input**: `removelistingbuyers 1`
+> 
+> **Output**: 
+> <br>Invalid command format!
+> <br>removelistingbuyers: Removes buyers from the listing identified by its index number used in the displayed listing list Parameters: LISTING_INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...
+> <br>Example: removelistingbuyers 1 buy/1 buy/3
 > 
 > ---
 
@@ -1226,7 +1269,7 @@ Example: deletelisting 1
 - **Description:** Deletes ALL listings.
 - **Successful Execution:**
 > ---
-> **Use Case**: Clear all listings in addressbook
+> **Use Case**: Clear all listings in EZSTATES
 >
 > **Input**: clearlistings
 >
@@ -1246,7 +1289,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 - **Description:** Clears all clients and listings.
 - **Successful Execution:**
 > ---
-> **Use Case**: Fresh addressbook and listings
+> **Use Case**: Clear all clients and listings in EZSTATES
 >
 > **Input**: clear
 >
@@ -1307,6 +1350,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > ---
 
 - **Failed Execution:**
+> ---
 > **User Error #1**: Client index out of bounds
 >
 > **Input**: `moreinfo 100`
@@ -1327,7 +1371,7 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
 > ---
 
 - **Special Comments:**
-1. Refer to the remarks and constraints for the following prefix: [n/](#n)
+1. Refer to [INDEX](#reference-types) constraints.
 2. The `Output` for User Error #2 has a missing parameters line where the CLIENT_INDEX should be. The intended look is:
    <br>Invalid command format!
    <br>moreinfo: Open a window to more information about the client.
@@ -1337,43 +1381,56 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
    <br> This is a known issue which will also be documented under [Known Issues](#known-issues) for future reference.
 
 #### Chat Window
+
+<div class="alert" markdown="span">
+**ALERT:** For this command, `input` refers to the command box **inside** the chat window, and not the one in EZSTATES main GUI.
+<br>
+<br>
+For clarity, the first `Output` demonstration will utilise a screenshot. Subsequent `Output` demonstrations will be written out. It will be understood that they are referring to the output inside the `Result Display` of the chat window. 
+
+</div>
+
 - **Command:** `chatbot`
 - **Description:** Opens a chatbot that answers basic queries.
 - **Successful Execution:**
 > ---
 > **Use Case #1**: Valid Greeting
 >
-> **Input**:
-![validGreeting.png](images%2FvalidGreeting.png)
-**Output**:
-![outputFromValidGreeting.png](images%2FoutputFromValidGreeting.png)
+> **Input**: `hello`
+> 
+> **Output**:
+> 
+> ![outputFromValidGreeting.png](images%2FoutputFromValidGreeting.png)
+> 
 > ---
 >
 > **Use Case #2**: Valid Query
 >
-> **Input**:
-![validQuery.png](images%2FvalidQuery.png)
-**Output**:
-![outputFromValidQuery.png](images%2FoutputFromValidQuery.png)
+> **Input**: `how do i add a listing`
+>
+>**Output**:
+<br>Assistant: This is how to add a listing!<br>
+listing n/{name} pr/{price} ar/{area} add/{address} reg/{region} sel/{seller} (Optional: buy/{buyer1} buy/{buyer2} ...)
+>
 > ---
 >
 > **Use Case #3**: Valid Farewell
 >
-> **Input**:
-![validGoodbye.png](images%2FvalidGoodbye.png)
-**Output**:
-![outputFromValidGoodbye.png](images%2FoutputFromValidGoodbye.png)
+> **Input**: `see ya`
+>
+> **Output**: Assistant: Goodbye! Have a great day!
+>
 > ---
 
 - **Failed Execution:**
 > ---
 > **User Error #1**: Invalid Query
 >
-> **Input**:
-![invalidInput.png](images%2FinvalidInput.png)
+> **Input**: `invalid input`
 >
-> **Output**:
-![outputOfInvalidInput.png](images%2FoutputOfInvalidInput.png)
+> **Output**: Assistant: I'm sorry, I didn't understand that. Can you please
+rephrase?
+>
 > ---
 
 - **Special Comments:**
@@ -1387,7 +1444,7 @@ EZSTATES data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file:<br><br> `[JAR file location]/data/addressbook.json`<br><br>**Advanced users** are welcome to update data directly by editing that data file.
+EZSTATES data are saved automatically as a JSON file:<br><br> `[JAR file location]/data/addressbook.json`<br><br>**Advanced users** are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert">
 **Caution:**
@@ -1403,18 +1460,21 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EZSTATES home folder.
 
+**Q**: Where can I find more help or report bugs?<br>
+**A**: For more help, refer to the User Guide or reach out to the project’s repository on [GitHub](https://github.com/AY2425S1-CS2103T-F11-4/tp). If you encounter any bugs or issues, please submit an issue report through the GitHub Issues section.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **For the n/ prefix**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified. 
-4. **For the add/ prefix**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
-5. **For the Edit Listing command**, users can modify listings to assign a buyer as the seller of a listing.
-6. **For the Add Buyers to Listing command**, the Result Display displays an incorrect error message.
-7. **For the MoreInfo command**, the `Output` for User Error #2 has a missing **parameters** line where the CLIENT_INDEX should be. Refer to the Special Comments section under [More Info](#more-info) for more clarification.
-8. **For the Chatbot**, the text input field appears in black, which does not contrast well with its gray background.
+3. **For the [n/ prefix](#n)**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified. 
+4. **For the [add/ prefix](#add)**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
+5. **For the [Edit Listing command](#edit-listing)**, users can modify listings to assign a buyer as the seller of a listing.
+6. **For the [Add Buyers to Listing command](#add-buyers-to-listing)**, the Result Display displays an incorrect error message.
+7. **For the [MoreInfo command](#more-info)**, the `Output` for User Error #2 has a missing **parameters** line where the CLIENT_INDEX should be. Refer to the Special Comments section under [More Info](#more-info) for more clarification.
+8. **For the [Chatbot](#chat-window)**, the text input field appears in black, which does not contrast well with its gray background.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1424,14 +1484,19 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 |--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Buyer**                  | `buyer n/NAME p/PHONE e/EMAIL`<br>e.g., `buyer n/James Ho p/22224444 e/jamesho@example.com`                                                                                                       |
 | **Add Seller**                 | `seller n/NAME p/PHONE e/EMAIL`<br>e.g., `seller n/James Ho p/22224444 e/jamesho@example.com`                                                                                                     |
-| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`                                                                                                                                         |
+| **Show Clients**               | `showclients`                                                                                                                                                                                     |
+| **Find Clients**               | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`                                                                                                                                         |
 | **Edit Client**                | `editclient INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`<br>e.g., `editclient 2 n/James Lee e/jameslee@example.com`<br>e.g., `editclient 2 n/James Voo t/Friend t/Colleague`             |
 | **Delete Client**              | `deleteclient INDEX`<br>e.g., `deleteclient 3`                                                                                                                                                    |
+| **Schedule Appointment**       | `apt INDEX d/DD-MM-YY fr/HHmm to/HHmm` OR `apt INDEX d/ddMMyy fr/HH:mm to/HH:mm`<br>e.g, `apt 1 d/08-10-24 fr/19:00 to/21:00`<br>e.g, `apt 1 d/091024 fr/1000 to/1200`                            |
+| **Delete Appointment**         | `deleteapt INDEX`<br>e.g, `deleteapt 1`                                                                                                                                                           |
+| **Filter Appointments**        | `today`                                                                                                                                                                                           |
 | **Add Listing**                | `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`<br>e.g., `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1` |
 | **Show Listings**              | `showlistings`                                                                                                                                                                                    |
-| **Edit Listing**               | `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`<br>e.g., `editlisting 2 pr/450000 ar/1200`                                                                        |
-| **Add Buyers to Listing**      | `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `addlistingbuyers 1 buy/1 buy/3`                                                                                    |
-| **Remove Buyers from Listing** | `removelistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `removelistingbuyers 1 buy/1 buy/3`                                                                              |
+| **Find Listings**              | `findlisting KEYWORD [KEYWORD]...`<br>e.g, `findlisting david`<br>e.g, `findlisting david house`                                                                                                  |
+| **Edit Listing**               | `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]`<br>e.g., `editlisting 2 pr/450000 ar/1200`                                                                           |
+| **Add Buyers to Listing**      | `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...`<br>e.g., `addlistingbuyers 1 buy/1 buy/3`                                                                                    |
+| **Remove Buyers from Listing** | `removelistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...`<br>e.g., `removelistingbuyers 1 buy/1 buy/3`                                                                              |
 | **Delete Listing**             | `deletelisting INDEX`<br>e.g., `deletelisting 1`                                                                                                                                                  |
 | **Clear Listings**             | `clearlistings`                                                                                                                                                                                   |
 | **Clear**                      | `clear`                                                                                                                                                                                           |
@@ -1439,3 +1504,29 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 | **Help**                       | `help`                                                                                                                                                                                            |
 | **More Info**                  | `moreinfo INDEX`<br>e.g., `moreinfo 1`                                                                                                                                                            |
 | **Chat Window**                | `chatbot`                                                                                                                                                                                         |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary of Terms
+
+| **Term**           | **Definition**                                                                                                                                                                                                                                                                                                                                                             |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **.json**          | A lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. In EZSTATES, `.json` files are used to store and exchange data, such as user contact details or listings, in a structured and easily accessible way. JSON files consist of key-value pairs and can be used to store complex data structures. |
+| **Index**          | A number representing the position of an item in a list. In EZSTATES, it is commonly used to refer to client or listing positions. Valid index values are positive integers within the bounds of the displayed list.                                                                                                                                                       |
+| **Command**        | A directive given to the EZSTATES application, typically entered by the user, that triggers specific actions such as adding, editing, or deleting data (e.g., `add`, `edit`, `delete`).                                                                                                                                                                                    |
+| **Buyer**          | A person or entity interested in purchasing properties. In EZSTATES, buyers can be added and associated with listings.                                                                                                                                                                                                                                                     |
+| **Seller**         | A person or entity who is selling properties. In EZSTATES, sellers are added and associated with properties they wish to sell.                                                                                                                                                                                                                                             |
+| **Listing**        | A property available for sale in EZSTATES. Each listing contains details such as price, area, and the seller associated with it.                                                                                                                                                                                                                                           |
+| **GUI**            | Graphical User Interface. The visual interface of the application that allows users to interact with the system via buttons, fields, and other visual elements. In EZSTATES, the GUI includes features like adding, editing, and viewing client details.                                                                                                                   |
+| **Client**         | A person or entity whose contact details are managed in the system. A client can either be a buyer, a seller, or both, depending on their interaction with the listings.                                                                                                                                                                                                   |
+| **Command Prefix** | A specific keyword or shorthand that precedes arguments in a command. Examples include `add/`, `edit/`, and `delete/` for actions in the EZSTATES CLI. Each prefix is followed by specific parameters for the desired action.                                                                                                                                              |
+| **Data File**      | A file that stores all of the data associated with EZSTATES, such as contacts, listings, and appointments. These are often stored in `.json` format and can be loaded into the app.                                                                                                                                                                                        |
+| **Tag**            | A label associated with a client or listing, used for categorization or filtering. Tags can be added, modified, or removed for clients or listings in EZSTATES.                                                                                                                                                                                                            |
+| **Valid Index**    | A valid index refers to an index number that is within the range of available items, such as clients or listings. Indexes must be positive integers and not exceed the total number of items in the list.                                                                                                                                                                  |
+| **Invalid Index**  | An invalid index refers to a number that is either non-positive, exceeds the total number of items in the list, or is not a valid integer. The system will return an error when such an index is used.                                                                                                                                                                     |
+| **Command Error**  | An error caused by an invalid command, such as missing required parameters, incorrect formatting, or invalid argument values. EZSTATES provides feedback to help correct the command.                                                                                                                                                                                      |
+| **Known Issue**    | A documented problem or limitation within the software that is known to the developers. These issues may have workarounds or fixes pending in future releases.                                                                                                                                                                                                             |
+| **App Launch**     | The initial startup of EZSTATES, where the app loads and displays a GUI for user interaction. On the first launch, sample data may be shown to help users get started.                                                                                                                                                                                                     |
+| **Sample Data**    | Predefined data loaded into the application on its initial launch to demonstrate features. Users can edit, delete, or replace this data with their own information.                                                                                                                                                                                                        |
+| **Exit Command**   | The command used to close the EZSTATES application. The command is typically `exit`, which allows users to safely terminate the application session.                                                                                                                                                                                                                       |
+| **Help Command**   | A command that provides the user with a list of available commands and their descriptions, often used to get guidance on how to use the application.                                                                                                                                                                                                                       |
