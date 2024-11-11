@@ -98,8 +98,6 @@
                 <Label fx:id="deleteHelp1" alignment="CENTER_LEFT" styleClass="commandLabel" />
                 <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
                 <Label fx:id="deleteHelp2" alignment="CENTER_LEFT" styleClass="commandLabel" />
-                <Label text="   or   " alignment="CENTER_LEFT" styleClass="orLabel" />
-                <Label fx:id="deleteHelp3" alignment="CENTER_LEFT" styleClass="commandLabel" />
               </HBox>
               <padding>
                 <Insets bottom="5" left="10" right="10" top="5" />

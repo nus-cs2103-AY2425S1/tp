@@ -26,14 +26,13 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String EDIT_HELP_HEADER = "Edit contacts: ";
     public static final String EDIT_HELP = "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE";
     public static final String DELETE_HELP_HEADER = "Delete contacts by name: ";
-    public static final String DELETE_HELP_1 = "delete NAME";
-    public static final String DELETE_HELP_2 = "d NAME";
-    public static final String DELETE_HELP_3 = "delete NAME/";
+    public static final String DELETE_HELP_1 = "delete NAME$";
+    public static final String DELETE_HELP_2 = "d NAME$";
     public static final String CLEAR_HELP_HEADER = "Delete all contacts from ClientHub: ";
     public static final String CLEAR_HELP = "clear";
     public static final String FN_HELP_HEADER = "Find contacts by name: ";
-    public static final String FN_HELP_1 = "find n/NAME";
-    public static final String FN_HELP_2 = "fn NAME";
+    public static final String FN_HELP_1 = "find n/NAME$";
+    public static final String FN_HELP_2 = "fn NAME$";
     public static final String FP_HELP_HEADER = "Find contacts by phone number: ";
     public static final String FP_HELP_1 = "find p/PHONE";
     public static final String FP_HELP_2 = "fp PHONE";
@@ -46,14 +45,14 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String SORT_HELP_HEADER = "Sort contacts by name: ";
     public static final String SORT_HELP = "sort";
     public static final String VIEW_HELP_HEADER = "View a contact's full information: ";
-    public static final String VIEW_HELP_1 = "view NAME";
-    public static final String VIEW_HELP_2 = "v NAME";
+    public static final String VIEW_HELP_1 = "view NAME$";
+    public static final String VIEW_HELP_2 = "v NAME$";
     public static final String RA_HELP_HEADER = "Add a reminder for a contact: ";
-    public static final String RA_HELP_1 = "radd n/NAME dt/DATE and TIME d/DESCRIPTION";
-    public static final String RA_HELP_2 = "ra n/NAME dt/DATE and TIME d/DESCRIPTION";
+    public static final String RA_HELP_1 = "radd n/NAME$ dt/DATE and TIME d/DESCRIPTION";
+    public static final String RA_HELP_2 = "ra n/NAME$ dt/DATE and TIME d/DESCRIPTION";
     public static final String RE_HELP_HEADER = "Edit a reminder for a contact: ";
-    public static final String RE_HELP_1 = "redit INDEX dt/DATE and TIME d/DESCRIPTION";
-    public static final String RE_HELP_2 = "re INDEX dt/DATE and TIME d/DESCRIPTION";
+    public static final String RE_HELP_1 = "redit INDEX [dt/DATE and TIME] [d/DESCRIPTION]";
+    public static final String RE_HELP_2 = "re INDEX [dt/DATE and TIME] [d/DESCRIPTION]";
     public static final String RD_HELP_HEADER = "Delete a reminder for a contact: ";
     public static final String RD_HELP_1 = "rdelete INDEX";
     public static final String RD_HELP_2 = "rd INDEX";
@@ -97,9 +96,6 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label deleteHelp2;
-
-    @FXML
-    private Label deleteHelp3;
 
     @FXML
     private Label clearHelpHeader;
@@ -222,7 +218,6 @@ public class HelpWindow extends UiPart<Stage> {
         editHelp.setText(EDIT_HELP);
         deleteHelp1.setText(DELETE_HELP_1);
         deleteHelp2.setText(DELETE_HELP_2);
-        deleteHelp3.setText(DELETE_HELP_3);
         clearHelp.setText(CLEAR_HELP);
         fnHelp1.setText(FN_HELP_1);
         fnHelp2.setText(FN_HELP_2);
