@@ -735,10 +735,10 @@ feature in future iterations.
 3. **Delete lessons by index**: Lessons currently must be deleted by their descriptions only. This is done with the
 expectation that lessons are created much less frequently than students and are important not to delete without backup.
 However, the team sees value in providing a Quality of Life change to delete these lessons by index once the deletion
-commands have been railguarded by the `undo` command in future iterations.
+commands have been rail-guarded by the `undo` command in future iterations.
 
 4. **Markall/unmarkall based on current view**: Presently, marking / unmarking of every student's paid status works
-regardless of the current filtered student list. For future itreations, we shall work on developing a variant of
+regardless of the current filtered student list. For future iterations, we shall work on developing a variant of
 the `markall` / `unmarkall` commands only marks / unmarks all students in the current view.
 
 5. **Keep student filter when editing**: Presently, after the student list has been filtered, the editing of a 
