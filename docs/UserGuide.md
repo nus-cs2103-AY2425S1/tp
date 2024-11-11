@@ -319,12 +319,40 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: What is the format required by the data file?<br>
+**A**: A sample structure of the `addressbook.json` file can be seen here.
+  ```
+  {
+    "persons" : [ {
+      "name" : "Alex Yeoh",
+      "email" : "alexyeoh@example.com",
+      "gender" : "M",
+      "age" : "19",
+      "detail" : "To be assigned",
+      "studyGroupTags" : [ "1A", "T" ]
+    }, {
+      "name" : "Bernice Yu",
+      "email" : "berniceyu@example.com",
+      "gender" : "M",
+      "age" : "19",
+      "detail" : "",
+      "studyGroupTags" : [ ]
+    },
+    { more persons here ...}
+    ]
+  }
+  ```
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When opening the url to the User Guide on WSL2**, the operation might fail silently. The remedy is to copy the url link, and manually open the page in your browser.
+4. **When exporting to a directory**, if the directory does not exist, the export will fail due to `unexpected I/O error`. The remedy is to create the required directory in the same folder as the `researchroster.jar` file.
+5. **When editing a person**, you can add and remove the same tag in one command. As tags are added before they are removed, the duplicate tags will be processed without any visible change (with respect to the duplicate tag) to the person. An incorrect warning "`You tried removing a non-existent study group tag`" is then displayed.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -332,15 +360,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples                                                                                                                                          
+Action | Format, Examples
 --------|-----------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help** | `help`                                                                                                                                                    
-**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`<br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C` 
-**List** | `list`                                                                                                                                                    
-**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [d/DETAIL] [t/ADD_TAG]… [-t/DELETE_TAG]…`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`          
-**Delete** | `delete [INDEX \| INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`                                                                                    
-**Exit** | `exit`                                                                                                                                                    
-**Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`                                    
-**Clear** | `clear` then `confirm`                                                                                                                                    
-**Export** | `export FILENAME`<br> e.g., `export exported_email`                                                                                                       
-**Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`                                                                        
+**Help** | `help`
+**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`<br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
+**List** | `list`
+**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [d/DETAIL] [t/ADD_TAG]… [-t/DELETE_TAG]…`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`
+**Delete** | `delete [INDEX \| INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`
+**Exit** | `exit`
+**Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`
+**Clear** | `clear` then `confirm`
+**Export** | `export FILENAME`<br> e.g., `export exported_email`
+**Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`

@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. ResearchRoster shows an error message.
 
       Use case restarts.
-  
+
 * 1b. User attempts to add an existing person (of duplicate email address).
 
     * 1b1. ResearchRoster shows an error message.
@@ -798,6 +798,24 @@ MSS
 * **UI**: User Interface - The medium through which users interact with a system, encompassing both graphical (*GUI*) and text-based (*CLI*) elements
 * **GUI**: Graphical User Interface - A visual-based interface where users interact with the system through graphical elements like icons and windows
 * **CLI**: Command Line Interface - A text-based interface where users interact with the system by typing commands
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Make opening url from `help` window work on WSL2**: There are reported cases where clicking the User Guide link from the help window is not working (failing silently) on WSL2. While we are unable to reproduce the bug at the moment, we plan to look into and fix it, allowing it to either work as intended or fail more gracefully.
+2. **Relax constraints on name field**: The current constraint on Names only allows alphabet characters and spaces, and requires 2 words (first and last name). We plan to loosen these constraints to allow for some special characters like `/` in `s/o`, as well as numeric characters for names like `Alexander the 3rd`.
+3. **Relax constraints on study group tag field**: The current constraint on Study Group Tags only allows alphanumeric characters and dashes. We plan to loosen these constraints to allow for more special characters to increase the expressiveness of the study group tags.
+4. **Resolve conflicting tag operations (adding and removing) in `edit` command**: When editing a person's record, the user can choose to add and remove the same tag (in any order) and the result would be no change made with respect to the tag, as well as an incorrect error message. We plan to take the order of adding/removing tags into consideration when applying changes to a person, and output an error message when duplicate tags (for adding and removing) are detected in the inputs.
+5. **Enforce non-empty tag arguments in `edit` command**: When editing a person's record, the user can choose to input no arguments behind tag prefixes, for e.g., `edit 1 t/` or `edit 1 -t/`, and the command will run and succeed without making any changes. We plan to return an error message, disallowing empty arguments for tag prefixes.
+6. **Disallowing consecutive spaces in names**: When adding and editing names, the user can add a name with consecutive spaces within, for e.g. `John   Doe`, which will fail without pointing out the disallowed consecutive spaces. We plan to make the error message point out the reason for failure: `The name contains consecutive spaces, which is not allowed.`
+7. **Include more information in help command**: The `help` command currently opens a window with a link to the User Guide. We plan to include a command summary in the output message of the `help` command as a quick reference guide.
+8. **Improve cancellation signal for `clear` process**: The `clear` process can be cancelled by typing anything (including non-command words). The current message for non-command word cancellation is to show an `unknown command` error, but silently succeed in cancelling the `clear` process. We plan to add a message to inform the user the `clear` process is successfully cancelled.
+9. **Designate specific word for cancelling clear process**: We plan to designate a specific word (e.g., cancel) to cancel clearing. This is to reduce potential confusion a user may have during the clearing process.
+10. **Improve error messages for failed exports due to non-existent filepath**: The current `unexpected I/O error` message for a non-existent filepath is too general. We plan to make the error message also mention the reason the export failed.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
