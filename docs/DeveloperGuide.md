@@ -1094,6 +1094,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editorder 1 i/Light bulb d/21-11-2025` <br>
        Expected: The order is successfully edited. Details of the edited order shown in the status message.
 
+<div style="page-break-after: always;"></div>
+
 2. Editing an order in a filtered order list using the command alias.
 
     1. Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed. <br>
@@ -1145,6 +1147,8 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `deleteo 0`<br>
        Expected: No order is deleted. Error details shown in the status message. Status bar remains the same.
+
+<div style="page-break-after: always;"></div>
 
 ### Marking an order as completed
 
