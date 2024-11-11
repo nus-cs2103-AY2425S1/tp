@@ -551,7 +551,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Message displays no restaurants found.
 
    1. Other incorrect find commands to try: `find`<br>
-      Expected: Invalid command format!. Description, parameters and an example of the right use of the `find` command is shown.
+      Expected: Error details shown in the status message. Status bar remains the same.
 
 
 
@@ -569,7 +569,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Message displays no restaurants found.
 
    1. Other incorrect find commands to try: `tags`<br>
-      Expected: Invalid command format!. Description, parameters and an example of the right use of the `tags` command is shown.
+      Expected: Error details shown in the status message. Status bar remains the same.
 
 
 ### Filtering by price
@@ -586,7 +586,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Message displays no restaurants found. 
 
    1. Other incorrect find commands to try: `price`<br>
-      Expected: Invalid command format!. Description, parameters and an example of the right use of the `price` command is shown.
+      Expected: Error details shown in the status message. Status bar remains the same.
 
 
 ### Rating a restaurant
