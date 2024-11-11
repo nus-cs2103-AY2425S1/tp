@@ -15,6 +15,7 @@ public class Group {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Group name should not be blank and is 100 characters or less including spaces between words";
+    // AI was used to generate regex
     public static final String VALIDATION_REGEX = "^.{1,100}$";
     private static final Logger logger = LogsCenter.getLogger(Group.class);
     public final String groupName;
