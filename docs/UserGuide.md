@@ -585,6 +585,9 @@ _Details coming soon ..._
 **Q**: Will editing / deleting Students in the Student List change the details of existing students in the Consultation / Lesson List?<br>
 **A**: Yes. Any changes made to Students will be reflected immediately in the Consultation & Lesson List.<br>
 
+**Q**: Can I Import / Export Lesson Data in TAHub?<br>
+**A**: No. The Feature for Importing/Exporting Lesson Data has not implemented in the current version. Our Team has plans to implement this feature in next version.<br>
+
 **Q**: Does TAHub require Internet Connection?<br>
 **A**: No. After installation, TAHub does not require internet connection.
 
