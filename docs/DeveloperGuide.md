@@ -917,7 +917,7 @@ testers are expected to do more *exploratory* testing.
 
 # Appendix G: Effort
 
-This section presents an overview of the work invested by our team in developing WardWatch. We will discuss the complexity, obstacles encountered, and effort required to bring this project to completion.
+This section presents an overview of the work invested by our team in developing WardWatch. We will discuss the complexity and scope, obstacles encountered, and effort required to bring this project to completion.
 
 ## Complexity and Scope
 WardWatch expands on the Person entity originally found in AB3 by adding new entities, such as Appointment and Medication, to meet healthcare-specific demands. These additions introduced new requirements for feature interactions, data management, and storage, which proved more intricate than initially expected.
@@ -931,7 +931,7 @@ While each of us contributed fewer lines of code than in individual assignments,
 ### Improvements to Existing Features
 
 **New Patient Data Fields**  
-To meet the requirementsx` of a healthcare management application, additional fields—such as diagnosis, medications, notes, and appointments—were incorporated to provide a more comprehensive patient profile.
+To meet the requirements` of a healthcare management application, additional fields—such as diagnosis, medications, notes, and appointments—were incorporated to provide a more comprehensive patient profile.
 
 **Enhanced Search Capabilities**  
 Our team upgraded the find command from AB3 to offer greater flexibility, allowing searches by not only name but also fields like diagnosis and medications. The enhanced find feature also enables filtering by specific criteria, which involved a full redesign of the search logic and thorough testing.
@@ -962,7 +962,7 @@ The appointment and medication functionalities were more intricate than anticipa
 Deciding on a data management structure for appointments and medications presented additional challenges. We carefully considered how to balance the storage of patient data within main entities or across relevant contexts.
 
 **Debugging and Testing**  
-Testing and debugging were crucial for ensuring a stable and smooth experience for users. While unit testing was straightforward, identifying edge cases, especially for import/export functions, was challenging. Rigorous testing was essential to guarantee proper error handling and avoid application crashes due to unexpected inputs.
+Testing and debugging were crucial for ensuring a stable and smooth experience for users. While unit testing was straightforward, identifying edge cases was challenging. Rigorous testing was essential to guarantee proper error handling and avoid application crashes due to unexpected inputs.
 
 ## Achievements
-In conclusion, our team successfully implemented all planned features, addressed bugs, and managed potential integration issues. Although we faced initial difficulties with complex features like appointment and medication management, collaboration enabled us to overcome these obstacles, ultimately achieving our goals for WardWatch.
+In conclusion, our team manged to design and implement features, addressed bugs, and managed potential integration issues. Although we faced initial difficulties with complex features like appointment and medication management, collaboration enabled us to overcome these obstacles, ultimately achieving our goals for WardWatch.
