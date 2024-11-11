@@ -563,7 +563,8 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 ## Known issues
 
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-2. If you're using CCAConnect **across two days**, in order for the attendance status of members to be updated (e.g. _marked present at 11:59pm today, not present at 12:00am the next day_), you would have to **execute any other command** to trigger the re-render of the card to display the update attendance status.
+
+2. If you're using CCAConnect **across two days**, in order for the attendance status of members to be updated (e.g. _marked present at 11:59pm today, not present at 12:00am the next day_), you would have to **execute any other command** to update the card so that the most recent attendance status is displayed.
 
 --------------------------------------------------------------------------------------------------------------------
 
