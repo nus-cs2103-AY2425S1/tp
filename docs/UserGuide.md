@@ -69,9 +69,11 @@ This User Guide is designed to help you navigate and make the most of ABCLI. It 
 
 6. **[Known Issues](#known-issues)**: If ABCLI behaves unexpectedly, refer to this section to see if it’s a known issue. This section lists potential problems and workarounds, helping you troubleshoot effectively.
 
-7. **[Command Summary](#command-summary)**: Ideal as a quick reference guide, this section provides an overview of all available commands. Use it when you need to check the format or options for any command without going into full detail.
+7. **[Glossary](#glossary)**: If you encounter any unfamiliar terms while using ABCLI or reading the guide, refer to the Glossary. It defines key terms to ensure clarity as you navigate the app.
 
-8. **[Glossary](#glossary)**: If you encounter any unfamiliar terms while using ABCLI or reading the guide, refer to the Glossary. It defines key terms to ensure clarity as you navigate the app.
+8. **[Command Summary](#command-summary)**: Ideal as a quick reference guide, this section provides an overview of all available commands. Use it when you need to check the format or options for any command without going into full detail.
+
+9. **[Acceptable Ranges for Parameters](#acceptable-parameters)**: This section provides a handy reference for troubleshooting, listing the valid input ranges and constraints for each command. Use it to ensure your command inputs satisfy the required constraints.
 
 <a id="display-boxes"></a>
 <span style="font-size: 20px; font-weight: bold; color: #d67d3e">Display Boxes</span>
@@ -437,8 +439,7 @@ Format: `edit INDEX [s/MEETUP_SUBJECT] [i/MEETUP_INFO] [f/MEETUP_FROM] [t/MEETUP
 * The index must be a positive integer 1, 2, 3, …​. If the index is not a positive integer, the error message shown will be `invalid command format`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing buyers, the existing buyers will be removed i.e adding of buyers is not cumulative
-* You can remove all the meet-up's buyers by typing `n/` without specifying any tags after it.
+* When editing buyers associated to the meet-up, the existing buyers will be removed i.e adding of buyers is not cumulative
 
 Examples:
 *  `edit 1 i/Meet with Johnny to show him houses. f/2024-10-28 10:00 t/2024-10-28 12:00` Edits the info, meet-up start time, and meet-up end time of the 1st meet-up to be `Meet with Johnny to show him houses.`, `2024-10-28 10:00` and `2024-10-28 12:00` respectively.
@@ -607,7 +608,7 @@ Using the clear command will delete all the properties from the list of properti
 <span style="font-size: 30px; font-weight: bold; color: #d67d3e">FAQ</span>
 
 **Q**: Can I use ABCLI without any programming knowledge?  
-**A**: Yes, ABCLI is designed to be user-friendly and does not require any coding skills. Follow the User Guide to learn the commands and usage patterns, and you’ll be able to use ABCLI effectively.
+**A**: Yes, ABCLI is designed to be user-friendly and does not require any coding skills. Follow the User Guide to learn the commands and usage patterns, and you will be able to use ABCLI effectively.
 
 **Q**: What operating systems are compatible with ABCLI?  
 **A**: ABCLI can be run on any system that supports Java `17` or above, including Windows, macOS, and Linux. Refer to [quick start](#Quick-Start) for the step-by-step installation guide.
@@ -622,7 +623,7 @@ Using the clear command will delete all the properties from the list of properti
 **A**: Install the app in the other computer and overwrite the empty data files (`buyerlist.json`, `meetuplist.json`, and `propertylist.json`) it creates with the respective files that contain your previous data (which should be in the old `buyerlist.json`, `meetuplist.json`, and `propertylist.json`).
 
 **Q**: Where can I find my local data files?<br>
-**A**: In the same folder that contains your app `Abcli.jar`, there should be a folder called `data` which contains `buyerlist.json`, `meetuplist.json`, and `propertylist.json`.
+**A**: In the same folder that contains your app `ABCLI.jar`, there should be a folder called `data` which contains `buyerlist.json`, `meetuplist.json`, and `propertylist.json`.
 
 **Q**: How do I add Meet-Ups or Properties? I can only add Buyers<br>
 **A**: You are likely in the `Buyer Mode` indicated by the `Viewing: Buyers` shown at the top bar, to switch to `MeetUp Mode`, use `switch m`, and to switch to `Property Mode`, use `switch p`. For more details, see [switching parser modes](#general-switch).
@@ -775,7 +776,7 @@ Using the clear command will delete all the properties from the list of properti
         <td><b>Add</b></td>
         <td><code>add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​</code><br> e.g., <code>add n/James Ho p/22224444 e/jamesho@example.com a/1200000 t/friend t/colleague</code></td>
         <td><code>add s/SUBJECT i/INFO f/MEETUP_FROM t/MEETUP_TO n/BUYER_NAME [n/MORE_BUYER_NAMES]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Jason to discuss the March Project n/Alex Yeoh n/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
-        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
+        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/PROPERTY_TYPE</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
     </tr>
     <tr>
         <td><b>Edit</b></td>
