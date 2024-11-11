@@ -249,7 +249,7 @@ Format: `delete person INDEX`
 - The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-When you delete a person, you will also delete `events` which the person is the celebrity for, and you remove the person from all `event`s' contact lists. This action is irreversible after confirmation.
+When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from all events' contact lists. This action is irreversible after confirmation.
 </div>
 
 Examples:
