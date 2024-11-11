@@ -960,20 +960,41 @@ The buyer index specified is not a buyer: <br>
 1. You are able to show an empty list of listings, as per Successful Execution Use Case #2
 
 #### Find Listings
-- **Command:** `findlisting KEYWORD [KEYWORD]`
+- **Command:** `findlisting KEYWORD [KEYWORD]...`
 - **Description:** Finds the specific listing(s) based on the provided keywords
 - **Successful Execution:**
 > ---
+> **Use Case #1: Finding listings with `David` 
 > 
+> **Input**: `findlisting david`
 > 
+> **Output**: 2 listings listed!
+> ![img.png](images/img_9.png)
+>
+> ---
 > 
+> **Use Case #2**: Finding listings with `David` OR `House`
 > 
+> **Input**: `findlisting david house`
 > 
+> **Output**: 3 listings listed!
+> ![img_7.png](images/img_7.png)
+>
+> ---
+
+- **Failed Execution:**
+> ---
+> **User Error: No matching listings
 > 
+> **Input**: `findlisting noMatchingListings`
 > 
-> 
+> **Output**: 0 listings listed!
+> ![img_8.png](images/img_8.png)
 > 
 > ---
+- **Special Comments**
+1. Similar to `find` command, for cases where names consist of two or more parts (e.g. David House), inputting `findlisting David House` results in finding listings containing `David` OR `House` in their names, as per Successful Execution Use Case #2.
+
 
 #### Edit Listing
 - **Command:** `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`
