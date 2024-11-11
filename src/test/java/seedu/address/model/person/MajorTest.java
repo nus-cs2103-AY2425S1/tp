@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -9,42 +10,49 @@ import org.junit.jupiter.api.Test;
 public class MajorTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void factory_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Major.makeMajor(null));
     }
 
     @Test
+    public void factory_emptyMajor_returnsSameInstance() {
+        Major expectedMajor = Major.makeMajor("");
+        assertSame(expectedMajor, Major.makeMajor(""));
+    }
+
+
+    @Test
     public void isValidMajor() {
-        // null address
+        // null major
         assertThrows(NullPointerException.class, () -> Major.isValidMajor(null));
 
-        // invalid addresses
+        // invalid majors
         assertFalse(Major.isValidMajor("")); // empty string
         assertFalse(Major.isValidMajor(" ")); // spaces only
 
-        // valid addresses
-        assertTrue(Major.isValidMajor("Blk 456, Den Road, #01-355"));
+        // valid majors
+        assertTrue(Major.isValidMajor("Computer Science"));
         assertTrue(Major.isValidMajor("-")); // one character
-        assertTrue(Major.isValidMajor("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Major.isValidMajor("Information Security")); // long major
     }
 
     @Test
     public void equals() {
-        Major address = Major.makeMajor("Valid Address");
+        Major major = Major.makeMajor("Valid Major");
 
         // same values -> returns true
-        assertTrue(address.equals(Major.makeMajor("Valid Address")));
+        assertTrue(major.equals(Major.makeMajor("Valid Major")));
 
         // same object -> returns true
-        assertTrue(address.equals(address));
+        assertTrue(major.equals(major));
 
         // null -> returns false
-        assertFalse(address.equals(null));
+        assertFalse(major.equals(null));
 
         // different types -> returns false
-        assertFalse(address.equals(5.0f));
+        assertFalse(major.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(address.equals(Major.makeMajor("Other Valid Address")));
+        assertFalse(major.equals(Major.makeMajor("Other Valid Major")));
     }
 }

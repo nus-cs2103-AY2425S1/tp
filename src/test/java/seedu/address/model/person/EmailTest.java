@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -9,14 +11,20 @@ import org.junit.jupiter.api.Test;
 public class EmailTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void factory_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> Email.makeEmail(null));
     }
 
     @Test
-    public void constructor_invalidEmail_throwsIllegalArgumentException() {
+    public void factory_invalidEmail_throwsIllegalArgumentException() {
         String invalidEmail = "Tom@Jerry.com";
         assertThrows(IllegalArgumentException.class, () -> Email.makeEmail(invalidEmail));
+    }
+
+    @Test
+    public void factory_emptyEmail_returnsSameInstance() {
+        Email expectedEmail = Email.makeEmail("");
+        assertSame(expectedEmail, Email.makeEmail(""));
     }
 
     @Test
@@ -29,7 +37,7 @@ public class EmailTest {
         assertFalse(Email.isValidEmail(" ")); // spaces only
 
         // missing parts
-        assertFalse(Email.isValidEmail("@u.nus.edu")); // missing local part
+        assertFalse(Email.isValidEmail("@u.nus.edu")); // missing netid
         assertFalse(Email.isValidEmail("e1234567u.nus.edu")); // missing '@' symbol
         assertFalse(Email.isValidEmail("e1234567@")); // missing domain name
 
