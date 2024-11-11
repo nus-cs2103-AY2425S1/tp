@@ -6,6 +6,8 @@
 
 # Tuteez User Guide
 
+
+
 ## Welcome aboard tuteez
 
 Welcome to Tuteez – a **powerful desktop address book application designed specifically for private tutors** to make **managing student contacts and lesson schedules simple and stress-free**.
@@ -19,15 +21,14 @@ With Tuteez, you can start focusing more on what truly matters – your teaching
 This comprehensive guide will walk you through the various features of Tuteez. Let’s dive in and explore how Tuteez can simplify your tutoring experience!
 
 
+
 ### Table of Contents
 
 <!-- TOC start -->
-
 1. [Welcome Aboard Tuteez](#welcome-aboard-tuteez)
     1.1 [Table of Contents](#table-of-contents)
     1.2 [User Guide Overview](#user-guide-overview)
-
-2 [How to use this Guide](#how-to-use-this-guide)
+    1.3 [How to Read this Guide](#how-to-read-this-guide)
 
 2. [Quick start](#quick-start)
     2.1 [Prerequisites](#prerequisites)
@@ -76,8 +77,8 @@ This comprehensive guide will walk you through the various features of Tuteez. L
 10. [Glossary](#glossary)
 
 11. [Command Summary](#command-summary)
-
 <!-- TOC end -->
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -95,9 +96,10 @@ Here is a quick look at the various sections in this user guide:
 - **[Command summary](#command-summary)**: A quick reference guide summarising all the commands available in Tuteez.
 
 
+
 --------------------------------------------------------------------------------------------------------------------
 
-## How to Use this Guide
+### How to Read this Guide
 
 Here's how to read this User Guide! We use these visual styles to help you navigate better:
 
@@ -112,6 +114,8 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 | <div style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Note**</div>     | For additional information.             |
 | <div style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**</div> | A caution or important warning.         |
 | <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**</div>    | Helpful tips to make your experience smoother. |
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -153,6 +157,8 @@ Here's how to read this User Guide! We use these visual styles to help you navig
    * `exit` : Exits the app.
 
 6. You may refer to the [Beginner's Tutorial](#beginners-tutorial) to get a hands-on walkthrough of the application, or refer to the [Features](#features) section below for details of each command.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -244,6 +250,8 @@ Congratulations! 😁 You've successfully completed the beginner's tutorial for 
 You're now ready to move on to more advanced features and commands that Tuteez has to offer.
 Simply visit the [Features](#features) section to learn more about the various commands available to you.
 
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -270,13 +278,16 @@ Simply visit the [Features](#features) section to learn more about the various c
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+
+
 ### Viewing help: `help`
 
 If you are confused while using the app any point in time, you may use this command to view the help message which explains how to access the web-based user guide.
 
+Format: `help`
+
 ![help message](images/helpMessage.png)
 
-Format: `help`
 
 
 ### Adding a student: `add`
@@ -285,11 +296,21 @@ This command will allow you to add a new student and their personal details to y
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`
 
-- Only the **name** and **phone number** are required fields. The other fields are optional.
-- The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
-    - Example: `l/monday 0900-1100` or `l/Wednesday 1400-1600`
-    - You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message.
-    > :information_source: **Info**: To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
+> :information_source: **Info**: Only the **name** and **phone number** are required fields. The other fields are optional.
+
+> :information_source: **Info**: You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message. <br> To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
+
+
+Acceptable values for each parameter:
+
+| Parameter    | Format                                                                                                                                                                     | Example            |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| NAME         | Start the name with a letter, and you’re welcome to include letters, numbers, spaces, and these special characters: `-`, `'`, `.`, `,`, `(`, `)`, `&`, `/`                 | John Doe           |
+| PHONE_NUMBER | Enter a phone number with numbers only, that is at least 3 digits long                                                                                                     | 912345678          |
+| EMAIL        | Email should follow the format local-part@domain                                                                                                                           | johndoe@gmail.com  |
+| ADDRESS      | Addresses can contain any characters                                                                                                                                       | Jurong West #09-11 |
+| TAG          | Tag names can include letters, numbers, and spaces                                                                                                                         | Primary 4          |
+| lesson       | The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space | monday 1500-1700   |
 
 <box type="tip" seamless>
 
@@ -298,13 +319,17 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] 
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Math l/ monday 0900-1100`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Math l/monday 0900-1100`
+
+
 
 ### Listing all students: `list`
 
 This command will help you view the list of all your students in Tuteez on the left panel.
 
 Format: `list`
+
+
 
 ### Editing a student: `edit`
 
@@ -323,6 +348,8 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
+
+
 ### Adding a Remark: `addremark` or `addrmk`
 
 This simple command will allow you to add a remark for a specific student in Tuteez.
@@ -340,6 +367,8 @@ Format: `addremark INDEX r/REMARK` to add a remark to the student at the specifi
 Examples:
 * `addremark 1 r/Great progress in Math` Adds the remark "Great progress in Math" to the first student.
 
+
+
 ### Deleting a Remark: `deleteremark` or `delrmk`
 
 This command will allow you to delete a remark for a specific student in Tuteez.
@@ -351,6 +380,8 @@ Format: `deleteremark INDEX ri/REMARK_INDEX` to add a remark to the student at t
 
 Examples:
 * `deleteremark 1 ri/2` Deletes the second remark of the first student in the displayed student list.
+
+
 
 ### Adding Lessons: `addlesson` or `addlsn`
 
@@ -369,6 +400,8 @@ Format: `addlesson INDEX l/LESSON [l/LESSON]…​`
 Examples:
 * `addlesson 1 l/Monday 0900-1100` Adds a lesson on Monday from 9 am to 11 am to the first student.
 * `addlesson 2 l/Tuesday 1400-1600 l/Thursday 1400-1600` Adds lessons on Tuesday and Thursday from 2 pm to 4 pm to the second student.
+
+
 
 ### Deleting Lessons: `deletelesson` or `dellsn`
 
@@ -389,6 +422,8 @@ Examples:
 
 **Tip:** Want to delete multiple lessons at once? Simply specify multiple different lesson indices in the parameters.
 </box>
+
+
 
 ### Searching for Students: `find`
 
@@ -413,6 +448,8 @@ Examples:
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
+
+
 ### Deleting a student: `delete` or `del`
 
 This simple command allows you to delete the specified student from Tuteez.
@@ -434,6 +471,8 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the first student in the results of the `find` command.
 * `delete John Doe` deletes the student with the full name "John Doe" from the address book, ignoring case sensitivity.
 
+
+
 ### Displaying Student Information: `display`
 
 This helpful command will help you view comprehensive personal information of a student in Tuteez on the right panel.
@@ -447,6 +486,8 @@ Examples:
 * `display 1` Shows the details of the first student in the list.
 * `display 3` Shows the details of the third student in the list.
 * `display john doe` Shows the details of student John Doe in the list, if they were to be found.
+
+
 
 ### Navigating command history: <kbd>&uarr;</kbd> or <kbd>&darr;</kbd>
 
@@ -464,12 +505,16 @@ Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 
 > :information_source: **Info**: If your previous or next command is invalid, there will not be any command displayed in the command box.
 
+
+
 ### Clearing all entries: `clear`
 
 This will allow you clears all student entries from Tuteez.
 > :warning: **Warning**: This action is irreversible and will wipe your existing data from the application. Make backups of your data if you need to, and use this command with caution!
 
 Format: `clear`
+
+
 
 ### Exiting the program: `exit`
 
@@ -480,7 +525,11 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
+
+
 ## Things you should definitely know
+
+
 
 ### Constraints on adding a lesson
 
@@ -498,6 +547,8 @@ This means the following constraints apply:
 
 Look forward to [future updates](#future-features) for group tuition support!
 
+
+
 ### Current Limitations
 
 As of `V1.5`, our app has a few limitations outlined below. Rest assured, we plan to resolve them in [future updates](#future-features)
@@ -507,9 +558,13 @@ As of `V1.5`, our app has a few limitations outlined below. Rest assured, we pla
 1. After using the find command to locate student(s), running most other commands will reset the left panel to the default view, similar to calling `list`.
 1. Tags that are too long are cut off on the left panel.
 
+
+
 ### Saving the data
 
 Tuteez data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+
 
 ### Editing the data file
 
@@ -524,6 +579,7 @@ Furthermore, certain edits can cause Tuteez to behave in unexpected ways (e.g., 
 
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## Future Features
 
 With the ever-changing responsibilities of tutors, Tuteez evolves right alongside you, adding new features to support your journey. Here’s what’s in store for future updates!
@@ -536,6 +592,8 @@ With the ever-changing responsibilities of tutors, Tuteez evolves right alongsid
 
 --------------------------------------------------------------------------------------------------------------------
 
+
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -543,12 +601,16 @@ With the ever-changing responsibilities of tutors, Tuteez evolves right alongsid
 
 --------------------------------------------------------------------------------------------------------------------
 
+
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+
 
 ## Glossary
 
@@ -558,6 +620,8 @@ These are the key terms used throughout the user guide:
 - **CLI**: Command Line Interface, a type of text-based user interface that allows users to interact with the application by typing commands.
 
 --------------------------------------------------------------------------------------------------------------------
+
+
 
 ## Command summary
 
