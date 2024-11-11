@@ -14,7 +14,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 - [Quick Start](#quick-start)
 - [Command Summary](#command-summary)
-- [Features](#features)
+- [Features](#feature-details)
   - [General Notes about Command Format](#general-notes-about-command-format)
   - [Adding a Contact: add](#adding-a-contact-add)
   - [Editing a Contact: edit](#editing-a-contact-edit)
@@ -102,7 +102,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Features
+## Feature Details
 //& Found why the clicking of Features didnt work, issue I forgot, but the fix is in _markbind/layouts/default.md
 
 <box type="info" seamless>
@@ -162,9 +162,12 @@ Examples:
 * `add n/Alex Yeoh th/alexyeoh123 e/alexyeoh@example.com ss/masters r/President r/Admin`
 ![result for 'add'](images/addAlexYeohResult.png)
 
+<box type="tip" seamless>
+
 Note:
 * `add` command will fail if you try to add a person who is already in the address book. You may refer to [invalid contacts](#what-is-considered-as-invalid-contacts) to see what is considered as having the same identity.
 * `add` command will fail if you attempt to add a person with a duplicate field as an existing contact, please refer to [invalid contacts](#what-is-considered-as-invalid-contacts) for more information.
+</box>
 
 <div style="page-break-after: always;"></div>
 
@@ -230,12 +233,11 @@ Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ (if the number given is larger than MAX_INT (2147483647), **it is a non-zero unsigned integer**)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find n/alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
-  ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
 
 #### Delete by name
 Format `delete NAME` or `delete n/NAME`
@@ -304,6 +306,11 @@ Examples:
 * `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
+<box type="tip" seamless>
+
+**Note:** Searching by Name does not include Nicknames (and vice versa). `find n/Alex` does not include Contacts with the field `nn/alex`
+* If you do not find the contact via searching by Name, you may want to search via Nickname instead.
+</box>
 
 <box type="tip" seamless>
 
@@ -465,14 +472,14 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 
 ## Contact Fields Constraints
 
-| Field                                   | Prefix* | Valid examples                                                                                                      | Invalid examples     |
-|-----------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|----------------------|
-| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` | `James&`             |
-| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                    | `@ginatan123`        |
-| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-website.com.sg`                                                                                   | `gina_tan@`          |
-| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                    | `u 1`<br/> `under 5` |
-| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                |    `Events(Internal)` |
-| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                        |            |
+| Field                                   | Prefix* | Valid examples                                                                                                                       | Invalid examples                                                                                                |
+|-----------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Jane Smith@Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` | `James&`<br/> spaces must come before and after `D/O` or `S/O` &rarr; <br/> `RaviS/ORamasamy`<br/>`DeviD/ORajaratnam` |
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                                     | `@ginatan123`                                                                                                   |
+| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-web.com`                                                                                                           | `gina_tan@`                                                                                                     |
+| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                                     | `u 1`<br/> `under 5`                                                                                            |
+| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                                 | `Events(Internal)`                                                                                              |
+| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                                         |                                                                                                                 |
 
 *_By default, all fields must be non-empty when prefix is specified except for nickname field_ //& CHECK IF OKAY
 
@@ -494,7 +501,6 @@ Assuming the above entry in the address book, you must enter an add / edit comma
   - Must only contain alphabets, numbers, and special characters `+_.-`.
   - Must not start or end with any special characters.
 - DOMAIN //& EDIT TO ADDRESS ISSUE 247 and 278
-  - Domains must be made up of domain labels separated by periods.
   - Domains must end with a domain label at least 2 characters long.
   - Each domain label must only contain alphabets, numbers, and `-`, if any.
   - Each domain label must not start or end with `-`.
