@@ -129,6 +129,8 @@ Shows a list of all persons in NetBook.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person : `edit` or `ed`
 
 Edits an existing person in NetBook.
@@ -163,6 +165,8 @@ Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex david o/meta` returns `David Li from Meta`
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting persons : `sort` or `s`
 
 Sorts the list of persons according to the given criteria
@@ -195,6 +199,8 @@ Preference types: `default`, `high`, `low`, `distant`, `recent`
 Examples: 
 * `save_sort high`
 * `svp default`
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete` or `del`
 
@@ -229,7 +235,17 @@ Clears all entries from the NetBook.
 
 Format: `clear` or `c`
 
+<div style="page-break-after: always;"></div>
+
 ## Reminder Management
+
+<div markdown="block" class="alert alert-info">
+
+**Notes about the reminders**
+
+* Duplicate reminders are not allowed. A reminder is considered duplicate if the reminder is tagged to the same person, has the same date, and description field.
+
+</div>
 
 ### Creating a reminder: `remind` or `rem`
 
@@ -267,6 +283,8 @@ Examples:
 Reminders cannot be edited. To make changes, delete the original reminder and create a new one with updated details.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit` or `ex`
 
 Exits the program.
@@ -294,6 +312,7 @@ Furthermore, certain edits can cause NetBook to behave in unexpected ways (e.g.,
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NetBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
