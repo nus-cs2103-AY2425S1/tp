@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "a:ArchiveCommand" as ArchiveCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "person:Person" as Person MODEL_COLOR
+participant "modifiedPerson:Person" as ModifiedPerson MODEL_COLOR
+end box
+
+LogicManager -> ArchiveCommand : execute(m)
+activate ArchiveCommand
+
+ArchiveCommand -> Person : isArchived()
+
+alt shouldArchive is true and person is not archived
+    create ModifiedPerson
+    ArchiveCommand -> ModifiedPerson : Person(isArchived=true)
+    activate ModifiedPerson
+    ModifiedPerson --> ArchiveCommand : modifiedPerson
+    deactivate ModifiedPerson
+    ArchiveCommand -> Model : setPerson(person, modifiedPerson)
+
+else shouldArchive is false and person is archived
+    create ModifiedPerson
+    ArchiveCommand -> ModifiedPerson : Person(isArchived=false)
+    activate ModifiedPerson
+    ModifiedPerson --> ArchiveCommand : modifiedPerson
+    deactivate ModifiedPerson
+    ArchiveCommand -> Model : setPerson(person, modifiedPerson)
+
+end
+
+deactivate Person
+
+create CommandResult
+ArchiveCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ArchiveCommand
+deactivate CommandResult
+
+ArchiveCommand --> LogicManager : r
+deactivate ArchiveCommand
+
+@enduml

@@ -4,6 +4,12 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+class Person {
+    - isArchived : boolean
+}
+
+show Person fields
+
 SocialBook *-right-> "1" UniquePersonList
 SocialBook *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniquePersonList
