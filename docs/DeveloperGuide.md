@@ -262,10 +262,10 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* people who work in management/administration of tuition centres
-* manages a tuition centre of small to medium size
+* people who work in management/administration of tuition centres in **Singapore**
+* manages a tuition centre of **small to medium size (roughly a few hundred students)**
 
-**Value proposition**: Centralizes contact details, tracks student data, maintains a teacher directory, and offers functions that improve administrative efficiency and organization for a tuition centre.
+**Value proposition**: Centralizes contact details, tracks student data and offers functions that improve administrative efficiency and organization for a tuition centre.
 
 
 
@@ -280,21 +280,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | administrator of a tuition centre | add a new person                    | add new contacts for newly enrolled students                            |
 | `* * *`  | administrator of a tuition centre | delete a student                    | remove students that are no longer enrolled                             |
 | `* * *`  | administrator of a tuition centre | find a student by name              | locate details of students without having to go through the entire list |
-| `* * *`  | administrator of a tuition centre | add class taken by student          | see what class a student is currently taking                            |
+| `* * *`  | administrator of a tuition centre | add subjects taken by student       | add student's subject details without creating a new entry              |
 | `* *`    | administrator of a tuition centre | filter students based on a category | easily see all students that fall under that category                   |
 | `* *`    | administrator of a tuition centre | edit student contact                | update student details when they are changed                            |
 | `* *`    | new user                          | see what commands are available     | refer to instructions when I forget how to use the App                  |
 | `*`      | administrator of a tuition centre | clear all contacts                  | empty the address book for a new academic year                          |
 | `*`      | administrator of a tuition centre | track class size                    | see if classes are nearing capacity or undersubscribed                  |
-| `*`      | administrator                     | add emergency contact to a student  | quickly find out who to contact at once glance if the situation arises  |
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AcademyAssist` and the **Actor** is the `administrator`, unless specified otherwise)
 
-**Use case: UC1 - Add a person**
+**Use case: UC1 - Add a student**
 
 **MSS**
 
@@ -306,11 +304,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Extensions**
 
-* 2a. The name is not provided/invalid format
-  * 2a1. System requests name in correct format
-  * 2a2. User re-enters the correct/missing name
+* 2a. Details are not provided/invalid format
+  * 2a1. System gives error message and requests for details in correct format
+  * 2a2. User re-enters the correct/missing information
 
-    Steps 2a1-2a2 are repeated until the name in the specified format is provided
+    Steps 2a1-2a2 are repeated until the information in the specified format is provided
+
     Use case resumes at step 3
 
 * 2b. The student entered has already been added
@@ -318,63 +317,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends
 
-* 2c. The phone number is missing or invalid
-  * 2c1. System requests for a valid phone number
-  * 2c2. User re-enters the correct phone number.
+* 2c. Student capacity has been reached 
+  * 2c1. System gives a warning to users that it is exceeding student limit
 
-    Steps 2c1-2c2 are repeated until a valid phone number is provided
-    Use case resumes from step 3
-
-* 2d. The IC/FIN number is missing or invalid
-  * 2d1. System requests for a valid IC/FIN number
-  * 2d2. User re-enters the correct IC/FIN number
-
-    Steps 2d1-2d2 are repeated until a valid IC/FIN number is provided
-    Use case resumes from step 3
-
-* 2e. The email is invalid
-  * 2e1. System requests for a valid email
-  * 2e2. User re-enters the correct email
-
-    Steps 2e1-2e2 are repeated until a valid email is provided
-    Use case resumes from step 3
-
-* 2f. The class taken/academic year is missing or invalid
-  * 2f1. System requests for a valid class/academic year
-  * 2f2. User re-enters the correct class/academic year
-
-    Steps 2f1-2f2 are repeated until a valid class/academic year is provided
-    Use case resumes from step 3
+    Use case ends
 
 ---
 
-**Use case: UC2 - Delete a person**
+**Use case: UC2 - Delete a student**
 
 **MSS**
 
 1. User chooses to delete a student
-2. System deletes the student's information
+2. System deletes the student and all information related to the student
 3. System informs user that the student has been successfully deleted
 
-    Use case ends
+   Use case ends
 
    **Extensions**
 
-* 1a. The format of the details provided are incorrect
-  * 1a1. System requests input in correct format
-  * 1a2. User re-enters the correct/missing details
+* 1a. The student to be deleted does not exist
+  * 1a1. System alerts user that there is no such student found
+  * 1a2. User re-enters the correct information
 
-    Steps 1a1-1a2 are repeated until the fields in the specified format are provided
+    Steps 1a1-1a2 are repeated until student to be deleted exists 
+
+    Use case resumes at step 2
+
+* 1b. The details of the student to be deleted is in the wrong format
+  * 1b1. System gives error message and requests for details in correct format
+  * 1b2. User re-enters the correct information
+
+    Steps 1b1-1b2 are repeated until the details in the specified format are provided
 
     Use case resumes at step 2
 
 ---
 
-**Use case: UC3 - Edit a person**
+**Use case: UC3 - Edit a student**
 
 **MSS**
 
-1. User chooses to edit a student's details
+1. User chooses a student's details to edit
 2. System updates the student's details based on new input
 3. System informs user that details have been updated
 
@@ -382,27 +366,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Extensions**
 
-* 1a. User enters an incorrect format for the Student ID
-  * 1a1. System requests input in correct format
-  * 1a2. User re-enters the correct Student ID
+* 1a. User chooses a student that doesn't exist to edit
+  * 1a1. System alerts user that there is no such student found
+  * 1a2. User re-enters the correct information
 
-    Steps 1a1-1a2 are repeated until the correct format is entered
+    Steps 1a1-1a2 are repeated until student to be edited exists
+
+    Use case resumes at step 2
+
+* 1b. User enters an invalid field or missing new input
+  * 1b1. System requests for the correct field/new input
+  * 1b2. User re-enters the correct field or new input
+
+    Steps 1b1-1b2 are repeated until the information in correct format is entered
+  
     Use case resumes from step 2
-
-* 1b. User enters an invalid format for the field or new input.
-  * 1b1. System requests for input in correct format
-  * 1b2. User re-enters the correct field and new input
-
-    Steps 1b1-1b2 are repeated until the correct format is entered.
-    Use case resumes from step 2.
 
 ---
 
-**Use case: UC4 - View all people**
+**Use case: UC4 - View all students**
 
 **MSS**
 
-1. User chooses to view all student contact details
+1. User chooses to list all student contact details
 2. System displays a list of students with their relevant details
 
     Use case ends
@@ -415,18 +401,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends
 
 * 1b. No students are found in the system
-  * 1b1. System informs user that there are no students added
+  * 1b1. System gives a blank list
 
     Use case ends
 
 ---
 
-**Use case: UC5 - Finding a person**
+**Use case: UC5 - Finding a student**
 
 **MSS**
 
-1. User initiates a search for a specific student
-2. System displays the details of the matching student(s)
+1. User initiates a search for a student
+2. System displays the matching student(s)
 
     Use case ends
 
@@ -462,6 +448,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a2. User re-enters the correct clear command
 
     Steps 1a1-1a2 are repeated until the correct command is entered
+  
     Use case resumes from step 2
 
 * 1b. System encounters an internal error while trying to clear the contact book
@@ -471,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC7 - Displaying a User Guide**
+**Use case: UC7 - Displaying a Help Window**
 
 **MSS**
 
@@ -486,34 +473,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User tries to sort students by their name/class
-2. System arranges the students in alphabetical order by name/class
-3. System displays students sorted by their name/class in ascending order
+1. User wants to arrange students by their name/subject/studentId/yearGroup
+2. System arranges the students in alphabetical order by name/subject and ascending order by yearGroup/studentId
+3. System displays students sorted correctly
 
     Use case ends
 
    **Extensions**
 
 * 1a. User tries to sort by an invalid field
-  * 1a1. System informs user to sort using only name or class
+  * 1a1. System informs user to sort using only name/subject/studentId/yearGroup
   * 1a2. User re-enters the command with a valid field.
 
-    Steps 1a1-1a2 are repeated until only name or class is entered as the field
+    Steps 1a1-1a2 are repeated until only name/subject/studentId/yearGroup is entered as the field
     Use case resumes from step 2.
 
-* 2a. There are no students added
-  * 2a1. System shows a blank screen
+* 1b. There are no students added
+  * 1b1. System shows a blank screen
 
     Use case ends
 
 ---
+
+**Use case: UC9 - Viewing a student's complete details**
+
+**MSS**
+
+1. User wants to view all details of a student
+2. 
+3. System displays all information of the student
+
+   Use case ends
+
+   **Extensions**
+
+* 1a. User tries to sort by an invalid field
+    * 1a1. System informs user to sort using only name/subject/studentId/yearGroup
+    * 1a2. User re-enters the command with a valid field.
+
+      Steps 1a1-1a2 are repeated until only name/subject/studentId/yearGroup is entered as the field
+      Use case resumes from step 2.
+
+* 1b. There are no students added
+    * 1b1. System shows a blank screen
+
+      Use case ends
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 #### Data Requirements
-1.  Should be able to hold up to 500 persons including personal details, contact information, and emergency contacts, without a significant performance drop.
+1.  Should be able to hold up to 500 students including personal details, contact information, and emergency contacts, without a significant performance drop.
 2.  All data should be persistent, meaning it must be saved even after the application is closed, ensuring no data loss between sessions.
 
 #### Environment Requirements
@@ -533,14 +544,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Testability
 9.  The system should include automated unit tests and integration tests to validate all major components.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Administrator**: Tutors and admin staff at the tuition centre.
 * **CLI (Command Line Interface)**: A text-based interface that allows users to interact with software by typing commands.
-* **Emergency Contact**: A secondary contact person, typically a guardian or family member, to reach out in case of an emergency involving a student.
 * **MSS (Main Success Scenario)**: The primary flow of actions in a use case that leads to a successful outcome.
 * **Extension (in use cases)**: Alternative flows that might arise due to errors or exceptions while performing the main success scenario.
 * **NFR (Non-Functional Requirements)**: Specifications that describe the qualities and constraints of a system, such as performance, reliability, and security, rather than its specific functions.
