@@ -1061,7 +1061,7 @@ Example: editlisting 2 pr/450000 ar/1200
 2. There is a known issue where a listing can be edited to assign a buyer as its seller. This will also be documented under [Known Issues](#known-issues) for reference.
 
 #### Add Buyers to Listing
-- **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
+- **Command:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...`
 - **Description:** Associates buyers with a specified listing.
 - **Successful Execution:**
 > ---
@@ -1133,7 +1133,7 @@ Example: addlistingbuyers 1 buy/1 buy/3
 2. There is a minor known issue regarding the failure messsage for User Error #4. The Result Display should show `LISTING_INDEX` instead of `LISTING_NAME`. This will also be documented under [Known Issues](#known-issues) for reference.
 
 #### Remove Buyers from Listing
-- **Command:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
+- **Command:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES]...`
 - **Description:** Removes buyers associated with a specified listing.
 - **Successful Execution:**
 > ---
@@ -1452,9 +1452,9 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 | **Add Listing**                | `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`<br>e.g., `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1` |
 | **Show Listings**              | `showlistings`                                                                                                                                                                                    |
 | **Find Listings**              | `findlisting KEYWORD [KEYWORD]...`<br>e.g, `findlisting david`<br>e.g, `findlisting david house`                                                                                                  |
-| **Edit Listing**               | `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]...`<br>e.g., `editlisting 2 pr/450000 ar/1200`                                                                        |
-| **Add Buyers to Listing**      | `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `addlistingbuyers 1 buy/1 buy/3`                                                                                    |
-| **Remove Buyers from Listing** | `removelistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`<br>e.g., `removelistingbuyers 1 buy/1 buy/3`                                                                              |
+| **Edit Listing**               | `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]`<br>e.g., `editlisting 2 pr/450000 ar/1200`                                                                           |
+| **Add Buyers to Listing**      | `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...`<br>e.g., `addlistingbuyers 1 buy/1 buy/3`                                                                                    |
+| **Remove Buyers from Listing** | `removelistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...`<br>e.g., `removelistingbuyers 1 buy/1 buy/3`                                                                              |
 | **Delete Listing**             | `deletelisting INDEX`<br>e.g., `deletelisting 1`                                                                                                                                                  |
 | **Clear Listings**             | `clearlistings`                                                                                                                                                                                   |
 | **Clear**                      | `clear`                                                                                                                                                                                           |
