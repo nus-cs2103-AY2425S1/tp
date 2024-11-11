@@ -229,8 +229,12 @@ Format: `archive [INDEXES]...`
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
-Note:
-* You will not be able to use `inspect` and `edit` for archived contacts.
+<box type="info" seamless>
+
+**Note:**
+You will not be able to use `inspect` and `edit` for archived contacts.
+
+</box>
 
 **<ins>When in the inspect window**
 
@@ -241,8 +245,12 @@ Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
-Note:
-* You will not be able to use `edit` for archived deliveries.
+<box type="info" seamless>
+
+**Note:**
+You will not be able to use `edit` for archived deliveries.
+
+</box>
 
 ### Unarchive a contact or delivery : `unarchive`
 **<ins>When in the main window**
