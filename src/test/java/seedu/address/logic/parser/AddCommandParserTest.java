@@ -178,6 +178,8 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB
                 + ALLERGY_DESC2_BOB, Allergy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB + ALLERGY_DESC2_BOB, Allergy.MESSAGE_CONSTRAINTS);
     }
 
 
