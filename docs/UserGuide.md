@@ -13,8 +13,8 @@
 </pic>
 </center>
 
-KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who works at the National University of
-Singapore, School of Computing.
+
+KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who works at the National University of Singapore, School of Computing.**
 
 KonTActs streamlines contact management, helping you keep track of your students contact, attendance and assignment 
 information more effectively compared to traditional GUI apps. 
@@ -55,15 +55,18 @@ To get started,
 
 3. Copy the file to the folder you want to use as the _home folder_ for KonTActs.
 
-4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar KonTActs.jar` to run
-the application and type `view name/Alex Yeoh`.<br>
+
+4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar kontacts.jar` to run the application. 
+
+5. Once the application starts, type `view name/Alex Yeoh` into the command box as shown in the picture below.<br>
+
    A interface similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![quick start GUI on launch](images/quickStartLaunchScreenshot.png)
+   ![quick start GUI on launch](images/updatedQuickStartLaunchScreenshot.png)
    {{ newPage }}
 --------------------------------------------------------------------------------------------------------------------
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-open the help window.<br>
+
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -77,9 +80,9 @@ open the help window.<br>
    * The GUI should now look something like this.<br>
    ![quick start GUI after commands](images/quickStartResultScreenshot.png)
 
-   * `clear` : Deletes all contacts. THIS IS AN IRREVERSIBLE ACTION.
+   * `clear` : Deletes all contacts. <b>THIS IS AN IRREVERSIBLE ACTION.</b>
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
    <br><br>
 
 {{ newPage }}
@@ -246,8 +249,10 @@ Eg. `n/John` or `name/John`
 
 <md>**Email restrictions**</md>
 Emails should be of the format `local-part@domain` and adhere to the following constraints:
-1. `local-part` should only contain English alphanumeric characters and `+`, `_` , `.` , `-`. 
-2. `local-part` may not start or end with any special characters.
+1. `local-part` should only contain English alphanumeric characters and `+`, `_` , `.` , `-`.
+The `local-part` name:
+    - may not start or end with any special characters.
+    - may not have any consecutive special characters.
 3. This is followed by an `@` and then a `domain` name. The domain name is made up of domain labels separated by periods.
 The `domain name` must:
     - end with a domain label at least 2 characters long.
@@ -462,7 +467,7 @@ Deletes the specified person from KonTActs.
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Deletes the person with the specified name.
-* The name refers to the full name of the person shown in the displayed person list.
+* The name refers to the full name of the person shown in KonTActs.
 * If a person matches the name but is not shown in the list, it will not be deleted.
   </box>
 
@@ -491,6 +496,13 @@ Launches GitHub repository of the specified person on the browser from KonTActs.
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Shortcut: `git n/NAME`**</md>
+</box>
+
+<box type="important" light>
+
+**Browser security restrictions**
+
+KonTActs will attempt to open GitHub in your default browser. Please note that some browser security settings or pop-up blockers may prevent this. Please ensure that your browser allows new tabs or windows to be open from external applications before using the command.
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -531,7 +543,7 @@ Opens a window at the side with the full details of the specified person from Ko
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * View the full details of the contact you specify.
-* `NAME` refers to the full name of the person shown in the displayed person list.
+* `NAME` refers to the full name of the person shown in KonTActs.
 * Calling `view` without any name parameter closes any windows previously opened by `view`.
 * Deleting or editing name of the current contact opened by `view` closes `view`.
   </box>
@@ -727,10 +739,11 @@ up one level from the current directory and then navigates to data folder, and i
   "Assignments", "WeeksPresent"} (Case-insensitive).
 * The CSV file must contain information about at least 1 person.
 * The data fields for Name, Email, Telegram, Github is compulsory.
-  * Do note that each of these field have their own restrictions.
-  [(refer above)](#i-classfa-solid-fa-user-plusi-adding-a-person-add)
+  * Do note that each of these field have their own restrictions. These are defined in the 
+  [(add command)](#adding-a-person-add)
   * Do note that @ is a special character in Excel formula. Hence, if editing in Excel, please input "'@TELEGRAM"
   instead of "@TELEGRAM".
+
 * Tags format: enclose tag in square brackets ("[tag]"). If a person has multiple tags, separate the tags within 
 the same entry with commas. (e.g."[tag1],[tag2],[tag3].....")
   * Duplicate tags will be ignored. (e.g."[Group1],[Group1]" will be treated as "[Group1]")
@@ -860,19 +873,47 @@ Adds an assignment and its grades to a contact.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* Assignments that can be added to a contact are specified in path `/data/assignment.json`.
-* If `assignment.json` is missing from `/data`, KonTActs will load a default assignment database.
-* `assignment.json` needs to be manually created in `/data`.
+* Assignments that can be added to a contact are specified in path `data/assignment.json`.
+* If `assignment.json` is missing from `data`, KonTActs will load a default assignment database.
+* `assignment.json` needs to be manually created in `data`.
 * Each assignment must have a unique `ASSIGNMENT_NAME`.
 * If `SCORE` has more than 2 decimal places, its display will be truncated to 2 decimal places.
 
   </box>
 
+
+</box>
+
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
 
-Example with the following assignment.json file:
+
+`addGrade name/JohnDoe assignment/Ex01 score/5` will add an assignment name `Ex01` with score 5 to contact JohnDoe.
+Alternatively, `ag n/JohnDoe a/Ex01 s/5` will do the same using the shortcut command and parameters.
+
+`addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
+as the input score is greater than the max, as specified in the `assignment.json` file.
+
+`addGrade n/JohnDoe a/Ex05 s/5` will not add the assignment to contact JohnDoe
+as the assignment is not specified `assignment.json`
+</box>
+
+<box type="success" icon=":fa-solid-lightbulb:" light>
+
+Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
+</box>
+
+<box type="success" icon=":fa-solid-book:" light>
+
+<md>**Steps to set up assignment.json file:**</md>
+
+* The professor, before each semester, may update the assignment.json file to consist of the assignments present for that semeester.
+* However, if there is a need for a manual update, please follow the steps as shown below. 
+
+1. Create a file name called `assignment.json` in the `/data` folder.
+2. Copy the following format into the .json file.
+
 ```json
 {
   "assignments" : [
@@ -889,19 +930,41 @@ Example with the following assignment.json file:
   ]
 }
 ```
-`addGrade name/JohnDoe assignment/Ex01 score/5` will add an assignment name `Ex01` with score 5 to contact JohnDoe.
-Alternatively, `ag n/JohnDoe a/Ex01 s/5` will do the same using the shortcut command and parameters.
 
-`addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
-as the input score is greater than the max, as specified in the `assignment.json` file.
+3. To add more assignments, add the following part in curly braces after the last assignment.
 
-`addGrade n/JohnDoe a/Ex05 s/5` will not add the assignment to contact JohnDoe
-as the assignment is not specified in `assignment.json`.
-   </box>
+```json
+    {
+      "name": "Ex04",
+      "maxScore": 15
+    }
+```
 
-<box type="success" icon=":fa-solid-lightbulb:" light>
+4. It should look something similar to this now.
 
-Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
+```json
+{
+  "assignments" : [
+    {
+      "name": "Ex01",
+      "maxScore": 10
+    }, {
+      "name": "Ex02",
+      "maxScore": 10
+    }, {
+      "name": "Ex03",
+      "maxScore": 15
+    }, {
+      "name": "Ex04",
+      "maxScore": 15
+    }
+  ]
+}
+```
+5. You may repeat step 3 for as many new assignments you require.
+6. Save the file and re-run the application to load the new assignment.json file. You will then be able to use the newly included assignments!
+7. To delete an assignment, remove the code block of the assignment you want to delete as shown in step 3, and re-do step 6 again.
+
 </box>
 
 
@@ -994,6 +1057,10 @@ have different method of remembering people with the same name. For instance, gi
 them physically as `John 1` and `John 2` or by their surname, `John Doe` and `John Tan` . This identification should
 also be reflected in KonTActs to make it easy to distinguish the two students.
 
+**Q**: Why are duplicate fields like Email, Telegram and Github usernames allowed?<br>
+**A**: KonTActs recognizes that students may use the same usernames and emails across different points of contact. To provide greater flexibility in the application, KonTActs permits duplicate entries for email addresses, Telegram handles, and GitHub usernames.  
+
+
 {{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1010,10 +1077,8 @@ to manually restore the minimized Help Window.
 "Function is not valid" error. The remedy is to prefix the telegram username with an apostrophe `'` to escape from the
 command function. For example: typing `'@james`.
 ![excel known issue](images/excelKnownIssue.png)
-4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is
-intended so that the list view does not become cluttered with too much information.
-5. Names that contains the `/` characters will cause konTActs to show an error message although a person can legally
-have `/` in their legal name such as `Kumar S/O Mahesh`. This is a limitation within konTActs as it uses the
-`/` charcter internally. The solution for this is to totally omit the `/` altogether. In this case, the name may be
-added as `Kumar SO Mahesh` or `Kumar son of Mahesh` depending on your preference.
+4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is intended so that the list view does not become cluttered with too much information.
+5. Names that contains the `/` characters will cause konTActs to show an error message although a person can legally have `/` in their legal name such as `Kumar S/O Mahesh`. This is a limitation within konTActs as it uses the `/` charcter internally. The solution for this is to totally omit the `/` altogether. In this case, the name may be added as `Kumar SO Mahesh` or `Kumar son of Mahesh` depending on your preference.
+6. **When closing the View Window**, you will not be able to scroll if the mouse hovers over the area previously occupied by the View Window. To fix this, move the mouse to the left side of the window before scrolling.
+7. **If you are using a small window** and have a person with a long tag, their attendance record will not wrap around, and the last few weeks may not be visible. To see the remaining attendance, increase the window width. 
 --------------------------------------------------------------------------------------------------------------------
