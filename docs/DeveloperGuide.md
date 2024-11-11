@@ -974,6 +974,6 @@ testers are expected to do more *exploratory* testing.
 
   Currently, when users use the `comment` feature there is no limit on how long comments can be. Thus, the full comment appears in the UI, which instead be expandable component to prevent overloading of information in the interface.
 
-  - **Enhance delete to support deleting of multiple students at once**
+- **Enhance delete to support deleting of multiple students at once**
 
   Currently, when users use the `delete` feature they can only delete one student at a time for example `delete 1` deletes the first student if available. In the future `delete 1 2 5` for example will be able to delete students at the index of 1, 2 and 5 on the list shown to improve efficiency.  
