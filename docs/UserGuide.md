@@ -1026,6 +1026,7 @@ and use the `import` command to import the data file that you previously exporte
    (duplicate clients, missing field, etc.)
 8. The message for confirmation prompts state `y/n`, which implies you can only use `n` to cancel the command. However,
    any input other than `y`/`yes` leads to cancellation.
+9. An error occurs in the background when you first launch TrueRental, due to the absence of the `CommandHistory` storage file. The file will subsequently be created after the user enters his/her first `TrueRental's` command. This will not hinder your experience.
 
 --------------------------------------------------------------------------------------------------------------------
 
