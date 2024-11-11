@@ -539,3 +539,17 @@ Prerequisites: Ensure more than one contact is present. These tests can and shou
    2. Expected Behavior
        1. The application should detect the file is corrupted.
        2. Application launches with no contacts displayed in the GUI.
+
+---
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. We plan to support the use of special characters within names (e.g: `/`, `-`) to allow for TAs to input names as precisely as needed.
+
+
+2. We plan to support to addition of multiple duplicate names into ConTActs. i.e: 2 different people can have the same name. 
+This is sensible as names are non-unique, and we have other unique fields such as STUDENT_ID to check for duplicates.
+
+
+3. We plan to make the EMAIL field case-insensitive.
