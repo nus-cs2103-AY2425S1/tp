@@ -1292,8 +1292,6 @@ testers are expected to do more *exploratory* testing.
 
 ### Ui
 * Ui can be adjusted such that long names and phone numbers will not be truncated when added into StudentManagerPro.
-* For commands with index, a specific error message can be added for missing index instead of the generic invalid command format error message so that users can easily find the error in their command.
-* Instead of just showing an empty data file when a user adds an invalid format to the data file, an error message can be shown when the app is opened.
 * Update help command to show a command summary instead of a link to the UG.
 
 ### Sex
@@ -1305,28 +1303,17 @@ testers are expected to do more *exploratory* testing.
 ### EcName / EcNumber
 * Combine `addEcName` and `addEcNumber` into one command.
 
-### Edit
-* Edit command can be changed such that the student list is not unfiltered after the command is called.
-
 ### Filter
 * Allow filtering by phone numbers using predicates less than 3 digits long.
 
 ### Sort
 * Sort in descending order.
-* Sort by more than one attribute at a time (sort by student class, and within each class sort by register number)
-* Edit sort command to use simpler command for faster typing.
 
 ### Exam / Submission
-* Exam Score can accept whole numbers and automatically convert them to one decimal point in the future to make it more intuitive for users.
-* Exam Name can accept special characters that may be valid exam names to give users more input flexibility.
-* Submission Status can be adjusted to be case-insensitive in the future to make it more convenient for users.
-* Exam Score and Submission Status can be removed with a blank user input in their respective fields instead of “NIL” for consistency with other features.
 * Include the ability to assign specific exams and submissions to selected groups and not automatically to all students, allowing for customized tests and assignments for different sets of students.
 * Exams and Submissions can be automatically added for new students being added to the list, instead of having the user add them manually.
 
 ### Attendance
-* Adding attendance can be adjusted such that it does not show the entire unfiltered contact list every time it is added.
-* “addAttendance” command can be changed to “trackAbsenteeism” to reduce confusion since the command can delete the records as well.
 * As only dates in the current year are allowed when adding attendance, the command can be adjusted such that it only requires users to enter the date in the form of DD-MM.
 
 --------------------------------------------------------------------------------------------------------------------
