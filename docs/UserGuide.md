@@ -626,6 +626,9 @@ deleteSupplyOrder INDEX
 deleteSupplyOrder 1
 ```
 ![screenshot](images/ss deletesupplyorder.png)
+
+<div style="page-break-after: always;"></div>
+
 ## **Edit Contact Command**
 Update the contact details of an existing contact in the address book, including persons, customers, and suppliers. 
 
@@ -715,7 +718,6 @@ Displays a link to our user guide that provides detailed information on how to u
 ```bash
 help
 ````
-![helpcommandui.png](images/helpcommandui.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -793,9 +795,6 @@ removeIngredient Flour
 ![removeIngredient.png](images%2FremoveIngredient.png)
 The Remove Ingredient Command enables bakery owners to delete an ingredient from their catalogue. This is useful for removing ingredients no longer used or mistakenly added. After execution, the system confirms the removal by displaying a success message.
 
-For instance, entering removeIngredient Flour will delete the ingredient "Flour" from the catalogue. Attempting to remove an ingredient that does not exist will result in an error message.
-![removeIngredientFail.png](images%2FremoveIngredientFail.png)
-
 <div style="page-break-after: always;"></div>
 
 ## **Remove Pastry Command**
@@ -813,9 +812,6 @@ removePastry Croissant
 ```
 ![removePastry.png](images%2FremovePastry.png)
 The Remove Pastry Command allows the bakery to maintain an up-to-date catalogue by removing pastries that are discontinued or incorrectly added. On successful removal, the system displays a confirmation message.
-
-For example, entering removePastry Croissant will remove "Croissant" from the catalogue. If the pastry does not exist, an error message will be shown.
-![removePastryFail.png](images%2FremovePastryFail.png)
 
 <div style="page-break-after: always;"></div>
 
