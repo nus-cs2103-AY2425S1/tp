@@ -133,7 +133,7 @@ How commands work:
 
 <box type="info" seamless>
 
-**Note** The classes representing the fields of the models `Vendor`, `Event` and `Association` were not included to reduce the clutter of the diagram.
+**Note** To reduce visual clutter, auxiliary classes within the `Vendor`, `Event` and `Association` classes have been omitted from the diagram.
 
 </box>
 
