@@ -24,39 +24,41 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
       * Windows: Open Windows PowerShell or open the start menu and enter `cmd`.
       * MacOS: Open the Terminal app or press Cmd and spacebar together and enter `terminal`.
       * Linux: Open the Terminal app or press the "Ctrl + Alt + T" keys simultaneously.
-   2. In the terminal, type `java -version`.
-   3. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
-   4. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
-   5. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   1. In the terminal, type `java -version`.
+   1. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
+   1. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
+   1. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` File:
+1. Download the latest `.jar` File:
     * Download the `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
     * By default, the jar file would be saved in the Downloads folder.
 
-3. Copy the file to the folder you want to use as the _home folder_ for your address book.
+1. Copy the file to the folder you want to use as the _home folder_ for UGTeach.
 
-4. Open a command terminal, `cd` into the folder that you put the jar file in.
+1. Before you run the application for the **first time**, ensure that your _home folder_ **does not contain** a `config.json` and `preferences.json` file. If it does, delete them.
+
+1. Open a command terminal, `cd` into the folder that you put the jar file in.
    * For example, if the jar file is still in the Downloads folder, type `cd Downloads`
 
-5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
+1. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
    <br>
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`: Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`: Adds a contact named `John Doe` to the UGTeach data file.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app. 
+   * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -108,7 +110,7 @@ Action     | Format, Examples
 
 * No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER**.
 
-  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
+  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**.
 
 * For commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`), any extra text that comes after the command word will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
@@ -128,7 +130,7 @@ Shows a message explaining how to access the help page.
 
 ### Listing all students: `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in UGTeach.
 
 **Format:** `list`
 
@@ -139,7 +141,7 @@ Shows a list of all students in the address book.
 
 ### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to UGTeach.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
@@ -192,7 +194,7 @@ Adds a student to the address book.
 
 ### Editing a student: `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in UGTeach.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
@@ -228,7 +230,7 @@ for convenient ways to update the paid amount and owed amount.
 
 ### Deleting a student : `delete`
 
-Deletes the specified student from the address book.
+Deletes the specified student from UGTeach.
 
 **Format:** `delete INDEX`
 
@@ -273,7 +275,8 @@ Finds students whose names contain any of the given keywords *and* their tuition
 <box type="tip" header="##### Tips">
 <markdown>
 
-* The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list).
+
+* The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list)).
 <br> i.e. The `find` command will not be affected by the previous `find` command.
 * The search result list will be ordered based on the students' index in the full list.
 * The search is case-insensitive. e.g. `alex` will match `Alex`
@@ -298,7 +301,7 @@ Updates the amount of tuition fee paid by the specified student after a lesson. 
 **Format:** `pay INDEX hr/HOURS_PAID`
 
 **Example:**
-* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
+* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in UGTeach.
   
 **Before:**
 ![payBefore.png](images/payBefore.png)
@@ -414,7 +417,7 @@ Clears all data from the data file of UGTeach.
 
 <box type="warning" header ="##### Caution">
 
-This action is irreversible and your deleted data cannot be recovered. 
+This action is irreversible and your deleted data cannot be recovered. Do not use this command unless you are sure you want to delete **all data**.
 
 </box>
 
@@ -432,11 +435,19 @@ UGTeach data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-UGTeach data are saved automatically as a JSON file `[JAR file location]/data/ugteach.json`. Advanced users are welcome to update data directly by editing that data file.
+UGTeach data are saved automatically as a JSON file `[JAR file location]/data/ugteach.json`. Advanced users can update data directly by editing that data file, although **not recommended**.
 
 <box type="warning" header="##### Caution">
-If your changes to the data file makes its format invalid, UGTeach will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+<markdown>
+If you are **not fully comfortable with JSON formatting** or **unsure about the data constraints specified in this guide**, we **strongly advise** against directly editing the data file.
+
+However, if you choose to proceed, we recommend creating a backup (e.g., by copying the file to another location) to safeguard against potential errors.
+
+Please note:
+* **Invalid format**: If your edits render the file format invalid, UGTeach will reset to an empty data file on the next run.
+* **Unexpected behavior**: Certain edits—such as entering values outside the acceptable range or causing duplicate entries—can result in unpredictable application behavior, such as complete wipe out of data. Only proceed if you are confident in making accurate updates.
+
+</markdown>
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -448,12 +459,12 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 * **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
-
+ 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UGTeach home folder.
 
 --------------------------------------------------------------------------------------------------------------------
-
+ 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
