@@ -285,6 +285,7 @@ Adds a session to HallPointer and associates it with specified members. A sessio
 
 ![result for 'add_session'](images/addSessionResult.png)
 ---
+<div style="page-break-after: always;"></div>
 
 ### Locating Members with Associated Sessions by Name:
 
