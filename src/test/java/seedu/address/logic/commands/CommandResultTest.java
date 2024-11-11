@@ -14,7 +14,9 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false)));
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, true, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -33,6 +35,12 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+
+        // different showPersonList -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, false)));
+
+        // different showEventList -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, true)));
     }
 
     @Test
@@ -57,7 +65,8 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit() + ", showPersonList=" + commandResult.isShowPersonList()
+                + ", showEventList=" + commandResult.isShowEventList() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

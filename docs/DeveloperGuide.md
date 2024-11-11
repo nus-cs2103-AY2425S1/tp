@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project was adapted from [AB-3's codebase](https://github.com/se-edu/addressbook-level3).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F09-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F09-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F09-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F09-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F09-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F09-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).  
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F09-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -130,7 +130,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.  
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -139,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F09-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -244,17 +244,9 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -268,11 +260,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned Enhancements**
+
+This section is a list of fixes that we propose to add in the near future, to improve some of ClubConnect's known feature flaws.
+
+1. **Allow events with duplicate names to be added**: The current `add_event` command is too restrictive as it only allows events of unique names to be added to ClubConnect's event list. However, we understand that our users often have recurring events, and such a restriction on the `add_event` command would ruin their user experience. We plan to allow events of the same name but non-overlapping duration window in the future, i.e. `Orbital Workshop from 1 Oct 2024 to 7 Oct 2024` and `Orbital Workshop from 10 Oct 2024 to 14 Oct 2024` can co-exist in ClubConnect's event list.
+2. **Allow contacts / events to start with a non-alphabet**: Our app currently only allow contacts / events that start with an alphabet. However, we understand that users might want to add contacts / events that start with a non-alphabet, such as `2025 Orbital Workshop`. To improve user experience, we plan to allow contacts / events to start with any character (while still making other commands that uses indexes and names work).
+3. **Display contact and event lists concurrently**: Our app currently only displays one list at a time (either contact or event list). Users would need to use `list` / `list_events` to display the contact / event list. However, we understand that this might be inconvenient for users, especially when using the `assign` and `unassign` commands, where users need to remember the index of the contact / event to use these commands using indices. To improve user experience, we plan to display the contact and event lists side-by-side, so that users do not need to type `list` / `list_events` to display the contacts / events, and make it easier to use `assign` and `unassign` commands. In addition, this would also fix the current GUI issue that we have, which shows an empty box at the bottom of the screen for contact list, and right below the status message for event list.
+4. **Change EVENT_DESCRIPTION to be optional**: The current `add_event` command is designed such that the event's description is a compulsory field. However, we understand that not all events have a description to it. Some events' names are self-explanatory and do not require a description. To improve user experience, we plan to make the `EVENT_DESCRIPTION` field optional in the future to provide more convenience.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Requirements**
 
 ### Product scope
 
-**Target user profile**: 
+**Target user profile**:
 
 Computing Club Committee members
 
@@ -319,73 +322,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC01 - Add contact**  
-**Actor:** User  
+**Use case: UC01 - Add contact**
+
 **MSS:**
 1. User requests to add a contact.
 2. App adds the contact.  
    Use case ends.
 
 **Extensions:**
-* 1a. The given name is invalid (i.e., name is empty or does not start with an alphabet).
+* 1a. The given name is invalid (i.e. name is empty or does not start with an alphabet).
     * 1a1. App shows an error message to tell the user that the given name is invalid.  
       Use case ends.
-* 1b. The given phone number is invalid (i.e., phone number is not an 8-digit number and/or does not start with 6, 8, or 9).
+* 1b. The given phone number is invalid (i.e., Phone numbers should only contain numbers, and it should be at least 3 digits long).
     * 1b1. App shows an error message to tell the user that the given phone number is invalid.  
       Use case ends.
-* 1c. The given email is invalid (i.e., email does not follow normal email address format).
-    * 1c1. App shows an error message to tell the user that the given email is invalid.  
-      Use case ends.
-* 1d. The given contact is a duplicate of another contact in the list.
-    * 1d1. App shows an error message to tell the user that the contact already exists in the list.  
+* 1c. The given contact is a duplicate of another contact in the list.
+    * 1c1. App shows an error message to tell the user that the contact already exists in the list.  
       Use case ends.
 
 ---
 
-**Use case: UC02 - Edit contact**  
-**Actor:** User  
+**Use case: UC02 - Edit contact**
+
 **MSS:**
 1. User requests to edit a contact by providing the index and the parameters to be changed.
 2. App changes the contact.  
    Use case ends.
 
 **Extensions:**
-* 1a. User provides an invalid contact index (i.e., negative index or index exceeding size of list).
+* 1a. User provides an invalid contact index (i.e. non-positive index or index exceeding size of list).
     * 1a1. App shows an error message to tell the user that the contact does not exist.  
       Use case ends.
-* 1b. User provides an invalid name (i.e., name does not start with an alphabet).
+* 1b. User provides an invalid name (i.e. name is empty or does not start with an alphabet).
     * 1b1. App shows an error message to tell the user that the contact name is not valid.  
       Use case ends.
-* 1c. User provides an invalid phone number (i.e., phone number is not numerical).
+* 1c. User provides an invalid phone number (i.e. phone number is not a number or is not at least 3 digits long).
     * 1c1. App shows an error message that the phone number is not valid.  
       Use case ends.
-* 1d. User provides an invalid email address (i.e., email address does not have a domain).
+* 1d. User provides an invalid email address (i.e. email does not follow normal email address format).
     * 1d1. App shows an error message that the email address is not valid.  
+      Use case ends.
+* 1e. User provides a name that is the same as another contact's name.
+    * 1e1. App shows an error message to tell the user that the contact already exists in the list.  
       Use case ends.
 
 ---
 
-**Use case: UC03 - Delete contact by index**  
-**Actor:** User  
+**Use case: UC03 - Delete contact by index**
+
 **MSS:**
 1. User requests to list contacts.
 2. App shows a list of contacts.
-3. User requests to delete a specific contact by index in the list.
+3. User requests to delete a specific contact by index in the displayed list.
 4. App deletes the contact at the specified index.  
    Use case ends.
 
 **Extensions:**
-* 2a. The list is empty.
-    * 2a1. App shows an error message to tell the user the list is empty.  
-      Use case ends.
-* 3a. The given index is invalid (i.e., index does not exist or is not a positive integer).
+* 3a. The given index is invalid (i.e. non-positive index or index exceeding size of displayed list).
     * 3a1. App shows an error message to tell the user that the given index is invalid.  
+      Use case ends.
+* 3b. No index is provided.
+    * 3b1. App shows an error message to tell the user that the command format is invalid.  
       Use case ends.
 
 ---
 
-**Use case: UC04 - Delete contact by name**  
-**Actor:** User  
+**Use case: UC04 - Delete contact by name**
+
 **MSS:**
 1. User requests to delete a specific contact by name in the list.
 2. App deletes the contact with the specified name.  
@@ -395,14 +398,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The given name does not exist.
     * 1a1. App shows an error message to tell the user that the given name does not exist.  
       Use case ends.
-* 1b. There are multiple contacts with the same name.
-    * 1b1. App shows an error message to tell the user that there are multiple contacts with the same name and to delete by index instead.  
+* 1b. No name is provided.
+    * 1b1. App shows an error message to tell the user that the command format is invalid.  
       Use case ends.
 
 ---
 
-**Use case: UC05 - Search for contact by criteria**  
-**Actor:** User  
+**Use case: UC05 - Search for contact by criteria**
+
 **MSS:**
 1. User specifies criteria and keywords.
 2. App shows a list of contacts that match the provided criteria and keywords.  
@@ -418,11 +421,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. No keywords are provided.
     * 1c1. App shows an error message to tell the user that no keywords have been provided.  
       Use case ends.
-  
+
 ---
 
-**Use case: UC06 - Label a contact**  
-**Actor:** User  
+**Use case: UC06 - Label a contact**
+
 **MSS:**
 1. User requests to label a contact with a specified tag by name or ID in the list.
 2. App labels the specified contact with the specified tag.  
@@ -447,31 +450,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC07 - Mass Delete**  
-**Actor:** User  
+**Use case: UC07 - Mass Delete**
+
 **MSS:**
-1. User requests to mass delete contacts by providing a list of contact IDs.
-2. App validates the provided contact IDs.
-3. App deletes the valid contacts.
-4. App logs the success message indicating the number of contacts deleted.  
+1. User requests to mass delete contacts by providing a list of contact indices.
+2. App validates the provided contact indices.
+3. App deletes the contacts whose indices were provided by the user.
+4. App tells the user the contacts that were successfully deleted.
    Use case ends.
 
 **Extensions:**
-* 2a. No contact IDs provided.  
-    * 1a1. App shows an error message to tell the user that the given name does not exist.  
+* 2a. No contact IDs provided.
+    * 2a1. App shows an error message to tell the user that the given name does not exist.  
       Use case ends.
-* 2b. Invalid contact ID(s) provided.
-    * 2b1. App shows an error message to tell the user that the contact is invalid and ask the user to provide valid contact IDs  
+* 2b. Invalid contact index(s) provided.
+    * 2b1. App shows an error message to tell the user that the contact index(s) is invalid and ask the user to provide valid contact indices.  
       Use case ends.
-* 2c. Duplicate contact IDs provided.
-    * 2c1. App handles duplicates internally, ensuring each ID is processed once.
-    * 2c2. Logs the message "Successfully deleted [number] contacts."  
+* 2c. Duplicate contact indices provided.
+    * 2c1. App handles duplicates internally, ensuring each index is processed once.
       Use case resumes at step 2.
 
 ---
 
-**Use case: UC08 - Filter content by type**  
-**Actor:** User  
+**Use case: UC08 - Filter content by type**
+
 **MSS:**
 1. User requests to filter contacts by specifying an event type.
 2. App validates the provided event type.
@@ -486,6 +488,84 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. No contacts associated with the specified event type.
     * 2b1. App returns an empty list.
     * 2b2. Logs the message "Filtered 0 contacts for event type: [eventType]."  
+      Use case ends.
+
+---
+
+**Use case: UC09 - Add event**
+
+**MSS:**
+1. User requests to add an event by providing an event name, event description, event start date, and event end date.
+2. App adds the event.  
+   Use case ends.
+
+**Extensions:**
+* 1a. The given event name is invalid (i.e. name is empty or does not start with an alphabet).
+    * 1a1. App shows an error message to tell the user that the given name is invalid.  
+      Use case ends.
+* 1b. The given event description is invalid (i.e. description is empty or consists of only whitespaces).
+    * 1b1. App shows an error message to tell the user that the given description is invalid.  
+      Use case ends.
+* 1c. The given event duration is invalid (i.e. dates are not in the correct format `YYYY-MM-DD` or dates are not valid, e.g. `2024-02-30` or event end date is earlier than the start date).
+    * 1c1. App shows an error message to tell the user that the given event dates are not valid.  
+      Use case ends.
+* 1d. The given event has the same name as another event in the list.
+    * 1d1. App shows an error message to tell the user that the event already exists in the list.  
+      Use case ends.
+
+---
+
+**Use case: UC10 - Edit event**
+
+**MSS:**
+
+1. User requests to edit an existing event by providing the index of the event in the list and optionally providing new details such as an event name, event description, event start date, and event end date.
+2. App updates the event with the provided details.
+   Use case ends.
+
+**Extensions:**
+* 1a. The given index is invalid (i.e., index is out of bounds).
+    * 1a1. App shows an error message to tell the user that the specified event index is invalid. 
+      Use case ends.
+* 1b. No changes are specified for the event. 
+    * 1b1. App shows an error message to tell the user that no changes were made to the event. 
+      Use case ends.
+* 1c. The updated event name is invalid (i.e., name is empty or does not start with an alphabet). 
+    * 1c1. App shows an error message to tell the user that the given name is invalid. 
+      Use case ends.
+* 1d. The updated event description is invalid (i.e., description is empty or consists of only whitespaces). 
+    * 1d1. App shows an error message to tell the user that the given description is invalid. 
+      Use case ends.
+* 1e. The updated event duration is invalid (i.e., dates are not in the correct format YYYY-MM-DD or dates are not valid, e.g. 30 Feb 2024 or event end date is earlier than the start date). 
+    * 1e1. App shows an error message to tell the user that the given event dates are not valid. 
+      Use case ends.
+* 1f. The updated event has the same name as another event in the list. 
+    * 1f1. App shows an error message to tell the user that an event with the same name already exists in the list. 
+      Use case ends.
+
+**Use case: UC11 - Unassign event from person**
+
+
+**MSS:**
+1. User requests to unassign an event from a person by providing an event name or an event index, and a person name or a person index.
+2. App unassigns the event specified from the person specified.  
+   Use case ends.
+
+**Extensions:**
+* 1a. The given event name does not match any of the existing events.
+    * 1a1. App shows an error message to tell the user that the given event name does not exist.  
+      Use case ends.
+* 1b. The given event index does not exist, i.e. there are only 3 events in the displayed list, but the user inputs an index of 4.
+    * 1b1. App shows an error message to tell the user that the given event index is invalid.  
+      Use case ends.
+* 1c. The given person name does not match any of the existing persons.
+    * 1c1. App shows an error message to tell the user that the given person name does not exist.  
+      Use case ends.
+* 1d. The given person index does not exist, i.e. there are only 3 persons in the displayed list, but the user inputs an index of 4.
+    * 1d1. App shows an error message to tell the user that the given person index is invalid.  
+      Use case ends.
+* 1e. The given person was not previously assigned to the given event.
+    * 1e1. App shows an error message to tell the user that the given person is not assigned to the given event.  
       Use case ends.
 
 ---
@@ -518,6 +598,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface - a text-based interface where you can input commands that interact with a computer's operating system
+* **GUI**: Graphical User Interface - a type of user interface through which users interact with electronic devices via visual indicator representations
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -536,18 +618,21 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open your favourite CLI (Command Prompt, Windows Powershell, Terminal).
+   
+   3. `cd` into the folder containing the jar file. 
+   
+   4. Run `java -jar clubconnect.jar`.  
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   2. Re-launch the app by double-clicking the jar file.  
+      Expected: The most recent window size and location is retained.
 
 ### Deleting a person
 
@@ -555,21 +640,160 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`  
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`  
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)  
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Deleting multiple persons
+1. Deleting multiple valid contacts by indices.
+
+   1. Test case: mass_delete 1 3 5 
+      Expected: Contacts at indices 1, 3, and 5 are deleted from the address book. A success message is shown indicating that contacts with these indices have been successfully deleted.
+
+1. Deleting contacts with a mix of valid and invalid indices.
+
+   1. Test case: mass_delete 1 10 2 
+      Expected: Contacts at indices 1 and 2 are deleted. Index 10 is invalid (assuming the list has fewer than 10 contacts). A success message is shown, indicating deletion of valid indices, followed by a message listing the invalid input 10.
+
+1. Deleting contacts with all invalid indices.
+
+   1. Test case: mass_delete 10 20 30 
+      Expected: No contacts are deleted. An error message is shown indicating that no valid contact indices were provided for deletion.
+
+1. Deleting contacts with non-integer inputs.
+
+   1. Test case: mass_delete 1 two 3 
+      Expected: Contacts at indices 1 and 3 are deleted. The input two is invalid. A success message is shown for valid deletions, followed by a message listing the invalid input two.
+
+1. Deleting contacts with duplicate indices.
+
+   1. Test case: mass_delete 2 2 4 
+      Expected: Contacts at indices 2 and 4 are deleted. A success message is shown indicating successful deletion of contacts at these indices. Duplicate indices do not affect the operation beyond the first valid occurrence.
+
+1. Deleting contacts with no indices provided.
+
+   1. Test case: mass_delete 
+      Expected: No contacts are deleted. An error message is shown indicating that no valid contact indices were provided for deletion.
+
+
+### Adding an event
+
+1. Adding a new unique event.
+
+   1. Test case: `add_event n/Meeting d/Monday Meeting f/2024-01-01 t/2024-01-01`  
+      Expected: An event with the name `Meeting` will be added to the event list. Details of added event shown in the status message.
+
+   2. Test case: `add_event n/ d/Monday Meeting f/2024-01-01 t/2024-01-01`  
+      Expected: No event is added. Error details (Invalid Name) shown in the status message.
+
+   3. Test case: `add_event d/Monday Meeting f/2024-01-01 t/2024-01-01`  
+      Expected: No event is added. Error details (Invalid Command Format) shown in the status message.
+
+   4. Test case: `add_event n/Meeting d/  f/2024-01-01 t/2024-01-01`  
+      Expected: No event is added. Error details (Invalid Description) shown in the status message.
+
+   5. Test case: `add_event n/Meeting d/Monday Meeting f/2024-0101 t/2024-01-01`  
+      Expected: No event is added. Error details (Invalid Date Format) shown in the status message.
+
+   6. Test case: `add_event n/Meeting d/Monday Meeting f/2024-01-01 t/2023-01-01`  
+      Expected: No event is added. Error details (End date cannot be earlier than start date) shown in the status message.
+
+   7. Test case: `add_event n/Meeting d/Monday Meeting f/2024-01-01 t/2024-02-30`  
+      Expected: No event is added. Error details (Invalid Date Format) shown in the status message.
+
+2. Adding an event with the same name as an existing event.
+
+   1. Test case: `add_event n/Meeting d/Duplicate Meeting f/2024-01-01 t/2024-01-01`  
+      Expected: No event is added. Error details (Duplicate Event) shown in the status message.
+
+### Editing an event
+
+1. Editing an existing event.
+
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: The event at index 1 is updated with the new name Updated Meeting, description Updated description, start date 2024-10-02, and end date 2024-10-11. Details of the edited event are shown in the status message. 
+   
+   1. Test case: edit_event 1 n/ d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Name) shown in the status message.
+
+   1. Test case: edit_event 1 d/ f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Description) shown in the status message.
+
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-1002 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Date Format) shown in the status message.
+
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-11 t/2024-10-02 
+      Expected: No changes are made. Error details (End date cannot be earlier than start date) shown in the status message.
+
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-02-30 
+   Expected: No changes are made. Error details (Invalid Date Format) shown in the status message.
+
+1. Editing an event with an invalid index.
+
+   1. Test case: edit_event 10 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Event Index) shown in the status message.
+
+1. Editing an event without specifying any changes. 
+
+   1. Test case: edit_event 1 
+      Expected: No changes are made. Error details (No changes specified for the event) shown in the status message.
+
+1. Editing an event to have the same name as another existing event. 
+
+   1. Test case: edit_event 1 n/Existing Event Name d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Duplicate Event) shown in the status message.
+
+
+### Unassigning an event from a person
+
+1. Unassigning an existing event from an existing person
+
+   1. Prerequisites: Ensure that the first person in the contact list is named `Alice` and the first event in the event list is named `Meeting`. Ensure that only `Alice` is assigned to `Meeting` before each test case. More than 1 person and event should be present.
+
+   2. Test case: `unassign_event p/1 ev/1`  
+      Expected: `Alice` is unassigned from `Meeting` in the status message.
+
+   3. Test case: `unassign_event p/1 ev/meeting`  
+      Expected: `Alice` is unassigned from `Meeting` in the status message.
+
+   4. Test case: `unassign_event p/alice ev/1`  
+      Expected: `Alice` is unassigned from `Meeting` in the status message.
+
+   5. Test case: `unassign_event p/alice ev/meeting`  
+      Expected: `Alice` is unassigned from `Meeting` in the status message.
+
+   6. Test case: `unassign_event p/2 ev/1`  
+      Expected: No person is unassigned from `Meeting`. Error details (Person not assigned to Event) shown in the status message.
+
+2. Event / Person does not exist
+
+   1. Prerequisites: Ensure that person `Bob` and event `Workshop` do not exist in the app. Ensure that person `Alice` and event `Meeting` exists in the app.
+
+   2. Test case: `unassign_event p/bob ev/meeting`  
+     Expected: No person is unassigned from `Meeting`. Error details (Person does not exist) shown in the status message.
+
+   3. Test case: `unassign_event p/alice ev/workshop`  
+     Expected: No person is unassigned from any event. Error details (Event does not exist) shown in the status message.
+
+   4. Test case: `unassign_event p/0 ev/1`  
+     Expected: No person is unassigned from the first event. Error details (Invalid Command Format) shown in the status message.
+
+   5. Test case: `unassign_event p/1 ev/0`  
+     Expected: No person is unassigned from any event. Error details (Invalid Command Format) shown in the status message.
+
+   6. Test case: `unassign_event p/1 ev/999999`  
+     Expected: No person is unassigned from any event. Error details (Invalid Event Index) shown in the status message.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Go to the folder you put the `clubconnect.jar` file. There should be a `data` folder in the same folder.
+   2. Double-click the `data` folder to go into the folder. There should be a `clubconnect.json` file inside.
+   3. Delete the `clubconnect.json` file.
 
-1. _{ more test cases …​ }_

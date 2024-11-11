@@ -3,13 +3,16 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -34,6 +37,21 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains a person with the same name (case-insensitive) as the given argument.
+     */
+    public boolean containsName(Name nameToCheck) {
+        requireNonNull(nameToCheck);
+        return internalList.stream().anyMatch(p -> p.getName().equalsLowerCase(nameToCheck));
+    }
+
+    /**
+     * Returns true if the list contains a person with the same ID as the given argument.
+     */
+    public boolean containsId(int idToCheck) {
+        return internalList.stream().anyMatch(p -> p.getId() == idToCheck);
     }
 
     /**
@@ -79,6 +97,17 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    /**
+     * Gets all the persons whose names are the same (case-insensitive) as the given argument.
+     */
+    public List<Person> getPersonsWithName(Name name) {
+        requireNonNull(name);
+        if (this.containsName(name)) {
+            return internalList.stream().filter(p -> p.getName().equalsLowerCase(name)).toList();
+        }
+        return new ArrayList<>();
+    }
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -95,6 +124,47 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Assigns an event to a person.
+     */
+    public void assignEventToPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        if (internalList.contains(person)) {
+            Person editedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getAddress(),
+                    person.getTags(), person.getEventIds(), person.getId());
+            editedPerson.addEventId(event.getEventId());
+            setPerson(person, editedPerson);
+        }
+    }
+
+    /**
+     * Removes an assigned event from a person.
+     */
+    public void unassignEventFromPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        if (internalList.contains(person)) {
+            Person editedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getAddress(),
+                    person.getTags(), person.getEventIds(), person.getId());
+            editedPerson.removeEventId(event.getEventId());
+            setPerson(person, editedPerson);
+        }
+    }
+
+    /**
+     * Removes an event from all {@code Person} objects in the address book.
+     * Used when deleting an event from the address book.
+     */
+    public void unassignEventFromAllPersons(Event event) {
+        requireNonNull(event);
+        for (Person person : internalList) {
+            if (person.checkAssignedToEvent(event)) {
+                unassignEventFromPerson(person, event);
+            }
+        }
     }
 
     /**
