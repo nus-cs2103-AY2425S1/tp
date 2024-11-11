@@ -847,18 +847,18 @@ _Details coming soon ..._
 **Q**: How do I access my data?<br>
 **A**: 
 
-- Step 1: Open the folder that contains vendorvault.jar and the data folder
+- Step 1: Open the folder that contains vendorvault.jar and the data folder.
 
 ![VendorVault_Folder](images/VendorVaultFolder.png)
 
-- Step 2: Open the folder named "data" to access the data file "vendorvault.json"
+- Step 2: Open the folder named "data" to access the data file "vendorvault.json". This vendorvault.json file contains the stored data.
 
 ![Data_Folder](images/DataFile.png)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**:
 
-- Step 1: Download the vendorvault.jar file and place it into an empty folder on a computer of your choice.
+- Step 1: Download the vendorvault.jar file and place it into an empty folder on your new computer.
 
 - Step 2: Run the app and execute the `exit` command to create a data folder.
 
