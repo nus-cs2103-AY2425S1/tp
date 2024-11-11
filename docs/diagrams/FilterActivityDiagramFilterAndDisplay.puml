@@ -17,7 +17,7 @@ if () then ([arguments meets parsing requirements])
         else ([else])
         endif
     repeat while () is ([else])
-    -> [All clients have been evaluated];
+    -> [all clients have been evaluated];
 
     :Display filtered list of clients;
 else ([else])
