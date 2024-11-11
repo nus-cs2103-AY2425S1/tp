@@ -17,6 +17,16 @@ width: 50%;"/>
 <box type="info" light theme="primary">
 <b>DocTrack</b> is a desktop application for <b>general practitioners (GPs)</b> to quickly access patient contact 
 details, appointments, and treatment records.
+
+<br><sbr>
+
+DocTrack aims to be the bridge for medical practitioners in smaller clinics 
+towards digitalisation of their administrative efforts, with focus on contact management and visit history tracking.
+
+<br>
+We plan on helping you simplify and speed-up the administrative burden of patient management 
+through an intuitive and efficient application.
+
 </box>
 
 With **DocTrack**, you can take the first step towards digitalisation of your practice!
