@@ -137,18 +137,11 @@ Here is a partial and representative class diagram of the `Model` component:
 
 The `Model` component has the following responsibilites:
 
-- Storing the HallPointer data (i.e. any `Member` and `Session` objects, and application configuration files) in the hard disk.
-- stores the currently 'selected' `Member` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+- Storing the HallPointer data (i.e. any `Member` and `Session` objects) in memory for easy access.
+- Exposing the currently 'selected' `Member` objects (e.g. the results of a search query) as a separate and unmodifiable `ObservableList<Member>` that can be 'observed', allowing the UI to observe this list and automatically update the UI when the data in this list changes.
+- Store a `UserPref` object that represents the user’s preferences, and expose it to outside components as a `ReadOnlyUserPref` object. 
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Hall Pointer`, which `Member` references. This allows `Hall Pointer` to only require one `Tag` object per unique tag, instead of each `Member` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
+Since `Model` represents the data entities of this application and problem domain, it should make sense on its own without dependencies on other components. And thus this component does not depend on any of the other three components.
 
 ### Storage component
 
