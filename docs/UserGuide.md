@@ -73,7 +73,7 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [tag/TAG]` can be used as `n/John Doe tag/Parkinsons` or as `n/John Doe`.
 
-* Items with `…` after them can be used multiple times, including zero times.  
+* Items with `…` after them can be used multiple times, including zero times.
   For example, `[tag/TAG]…` can be used as follows:
 
   - Not at all (i.e., ` ` )
@@ -87,8 +87,8 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**  
-Murphy's List does not support whitespaces in **tags**; each tag must be a single alphanumeric word.<br>  
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Murphy's List does not support whitespaces in **tags**; each tag must be a single alphanumeric word.<br>
 Murphy's List also does not automatically check for invalid email formats, so please take caution when adding/editing patient information. *(Email validation will be included in a future release.)*
 </div>
 
@@ -376,5 +376,6 @@ You can check your Java version by running `java -version` in the command termin
 | `sort`        | `s`      | Sorts the list of patients               |
 | `triage`      | `t`      | Change triage stage of a patient         |
 | `view`        | `v`      | Views detailed patient information       |
+
 
 > **Note:** Shortcuts for `log`and `schedule` are not included but will be available in a future update.
