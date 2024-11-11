@@ -535,6 +535,31 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `listt x`<br>
        Expected: UI still shows the transactions list. Error details shown in the status message. Status bar remains the same.
 
+### Finding transactions
+
+1. Finding transactions in the client list view.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `findt buy`<br>
+       Expected: Error details informing of environment discrepancy shown in the status message.
+
+2. Finding transactions in the transaction list view.
+
+    1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+    2. Test case: `findt invest`<br>
+       Expected: All transactions whose description contain "invest" are shown. Details of the search shown in the status message.
+
+    3. Test case: `findt`<br>
+       Expected: Error details informing of missing search parameter shown in the status message.
+
+    4. Test case: `findt fhodolkg`<br>
+       Expected: No transaction is shown due to no matching transactions. Details of the search shown in the status message.
+
+    5. Test case: `findt invest stocks`<br>
+       Expected: All transactions whose description contain "invest" or "stocks" are shown. Details of the search shown in the status message.
+
 ### Saving data
 
 1. Missing data file
