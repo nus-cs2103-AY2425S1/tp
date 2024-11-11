@@ -183,7 +183,7 @@ section for more details.
 
 ### Listing all beneficiaries : `list`
 
-Shows a list of all beneficiaries in the case management system.
+Lists of all beneficiaries in the case management system.
 
 Format: `list`
 
@@ -223,6 +223,7 @@ Format: `untag INDEX t/TAG`
 
 * Removes the tag from the client at the specific `INDEX`.
 * Only one tag can be removed at once.
+  * If you would like to remove all tags on a client, use the [`edit`](https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#editing-a-client--edit) command instead
 * If the tag is not found, a warning will be displayed.
 
 Example:
