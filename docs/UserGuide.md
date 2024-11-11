@@ -27,10 +27,21 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 3. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data. For example, if you put `ccaconnect.jar` in a folder named `CCA`, then `CCA` will the _home folder_.
 
-4. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in. E.g. If you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
+4. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in.
+
+<div markdown="span" class="alert alert-primary">**Example:**<br/>
+On **Mac/Linux**, if you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
     ```dtd
     cd ~/Desktop/CCA
     ```
+</div>
+
+<div markdown="span" class="alert alert-primary">**Example:**<br/>
+On **Windows**, if you placed `ccaconnect.jar` in the `C:\Users\User1\Desktop\CCA` folder, type in the following command:
+    ```dtd
+    cd C:\Users\User1\Desktop\CCA
+    ```
+</div>
 
 5. Launch the CCAConnect application by typing in the following command:
     ```dtd
@@ -58,28 +69,27 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 ## Features
 
-<details>
-  <summary style="font-weight:600;font-size:20px;">Notes about the command format:</summary>
+<div markdown="span" class="alert alert-warning">:information_source: **Notes about the command format:**<br/>
 
 * Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user.<br>
     * e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.<br><br>
 * Items in square brackets are optional.<br>
-    * e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.<br><br>
+  * e.g <code>n/NAME [r/ROLE]</code> can be used as <code>n/John Doe r/exco</code> or as <code>n/John Doe</code>.<br><br>
 * Items in square brackets are optional.<br>
-    * e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.<br><br>
+  * e.g <code>n/NAME [r/ROLE]</code> can be used as <code>n/John Doe r/exco</code> or as <code>n/John Doe</code>.<br><br>
 * Items with <code>…</code>​ after them can be used multiple times. If the item is optional, e.g. <code>[r/ROLE]…​</code>, it can also be used zero times<br>
     * e.g. <code>[r/ROLE]…​</code> can be used as <code> </code> (i.e. 0 times), <code>r/exco</code>, <code>r/member r/exco</code> etc. <br><br>
 * Parameters can be in any order.<br>
     * e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.<br><br>
-* The parameter prefixes (e.g. <code>n/</code>) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
-</details>
+* The parameter prefixes (e.g. <code>n/</code>) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for parameters that allow `/`, using parameter prefixes without a leading space within the parameter (e.g. `n/a` within `ROLE`) is allowed.
+</div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Opens a new window that displays a list of all available commands along with their usage instructions.
 
@@ -104,21 +114,23 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/ or nf/ (NOT BOTH
 
 #### Parameters
 
-| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                         |
-|----------------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                               |
-| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                      |
-| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                |
-| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                       |
-| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                                                                        |
-|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                    |
-|                | `nf/`  | No          | Represents the non-favouriting of a contact.<br> This keyword should be included to optionally indicate that the contact is not a favourite contact.<br> Contacts are not favourite by default. |
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9), and only contain digits with no spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> `EMAIL` should be of the format *local-part@domain*, and adhere to the following constraints:<br/> 1. The *local-part* should only contain alphanumeric characters and these special characters (+ _ % . -), excluding the parentheses.<br/> The *local-part* may not start or end with any special characters.<br/> 2. This is followed by an '@', and ten a domain name. The domain name is made up of domain labels, separated by periods.<br/> The domain name must:<br/> - end with a domain label at least 2 characters long<br/> - have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
+| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
-* Both `f/` and `nf/` cannot be present in the command at once.
-* Both `f/` and `nf/` can be absent in the command, in which the contact is not favourited by default.
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**<br/>
+A person is uniquely identified by his/her **telegram handle**.<br/>
+E.g. Once a person with telegram handle `alexYeoh` is added, no other contacts can be created with `alexYeoh` as the telegram handle.<br/>
+</div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
-A person is uniquely identified by his/her **telegram handle**.
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**<br/>
+Valid telegram handles follow the requirements set by Telegram. See [link](https://telegram.org/faq#:~:text=Q%3A%20What%20can%20I%20use,TeleGram%20is%20the%20same%20user).).<br/>
+Since Telegram treats their handles as case-insensitive, CCAConnect also treats the telegram field as case-insensitive.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
@@ -129,7 +141,7 @@ A person can have any number of roles (including 0).
 * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe12`
 * `a n/Betsy Crowe r/chairperson e/betsycrowe@example.com t/betsyC p/81234567 r/member f/`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book. <br/>
 This can be used to reset the list of contacts back to its unfiltered state.
@@ -142,7 +154,7 @@ list
 #### Alias
 `l` can be used in place of `list`.
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in the address book.
 
@@ -155,16 +167,16 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TELEGRAM] [r/ROLE]…​ [f/ or nf/ (
 
 #### Parameters
 
-| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                           |
-|----------------|--------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/>  It must be a positive unsigned integer and must not exceed the size of the displayed contact list. |
-| `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                                                 |
-| `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                                                        |
-| `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                                                  |
-| `TELEGRAM`     | `t/`   | No          | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                                         |
-| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative.                     |
-|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                                      |
-|                | `nf/`  | No          | Represents unfavouriting of a contact. <br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                                              |
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/>  It must be a positive unsigned integer and must not exceed the size of the displayed contact list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9), and only contain digits with no spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/>`EMAIL` should be of the format *local-part@domain*, and adhere to the following constraints:<br/> 1. The *local-part* should only contain alphanumeric characters and these special characters (+ _ % . -), excluding the parentheses.<br/> The *local-part* may not start or end with any special characters.<br/> 2. This is followed by an '@', and ten a domain name. The domain name is made up of domain labels, separated by periods.<br/> The domain name must:<br/> - end with a domain label at least 2 characters long<br/> - have each domain label start and end with alphanumeric characters<br/> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
+| `TELEGRAM`     | `t/`   | No          | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|                | `nf/`  | No          | Represents the unfavouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -246,6 +258,13 @@ Composing all 4 types of search will give an `OR` search, a contact that has at 
 Sorts the list of contacts by name, in a user-specified order.<br/>
 Sorting works together with the `find` command, meaning that if you sort after reducing the number of listed contacts, the sorting occurs for those listed contacts.
 
+<div markdown="span" class="alert alert-primary">:exclamation: **Note:**<br/><br/>
+`sort` orders the list of contacts in alphabetical order of their names, and this action is case-insensitive.<br/>
+E.g. The letters `A` and `a` will both be treated as `a`.<br/>
+Symbols will be sorted according to the ordering specified by the American Standard Code of Information Interchange (ASCII).<br/>
+E.g. With ascending sort, `{` will be ordered behind the alphabets, since that is its position on the ASCII table
+</div>
+
 #### Format
 `sort ORDER`
 
@@ -258,14 +277,10 @@ Sorting works together with the `find` command, meaning that if you sort after r
 |-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `ORDER`   |        | Yes         | `ORDER` can only take the form of 3 possible options:<br/> `asc` - sorts by name in ascending order. <br/> `desc` - sorts by name in descending order. <br/> `og` - sorts by name in the original order, based on the initial positioning of the contacts. |
 
-### Example
-* `sort asc` sorts the current list of contacts by name, in ascending order.
+#### Example
+* `sort asc` sorts the current list of contacts by name, in ascending order
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
-Even though `sort` orders the list of contacts in alphabetical order of their names, this action is case-insensitive. This means that the letters `A` and `a` will be treated equally, for instance.
-</div>
-
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 Deletes the specified person from the address book.
 
@@ -281,7 +296,7 @@ delete INDEX
 
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                                               |
 |-----------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list.  | 
+| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list.  |
 
 * The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`.
 
@@ -309,7 +324,7 @@ If any extra input is provided, an error message will be displayed.
 #### Example
 ![result for 'attendance'](images/ListAttendanceResult.png)
 
-### Marking attendance : `mark`
+### Marking attendance: `mark`
 
 Marks attendance for **members** with specified Telegram handles on a specific date.
 
@@ -353,7 +368,7 @@ Do not be alarmed if your checkbox looks different from the one displayed in the
 </div>
 
 
-### Unmarking attendance : `unmark`
+### Unmarking attendance: `unmark`
 
 Unmarks attendance for **members** with specified Telegram handles on a specific date.
 
@@ -374,7 +389,7 @@ unmark t/TELEGRAM…​ d/DATE
 | `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
 
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the address book.
 
@@ -391,7 +406,7 @@ clear
 `c` can be used in place of `clear`.
 
 
-### Viewing a specific contact : `view`
+### Viewing a specific contact: `view`
 
 Views all the contact information of the specified contact.
 
@@ -415,7 +430,7 @@ Examples:
 The use of any other commands (other than another <code>view</code> command) will close the view page and revert back to the list of contacts!
 </div>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Safely exits the program.
 
@@ -427,6 +442,7 @@ exit
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
 To ensure data is saved properly, always use the `exit` command or the window's close button to exit. Using any unintended exit methods may lead to data loss.
 </div>
+
 
 ### Switching a profile : `switch`
 The `switch` command offers an alternative way to organize your contacts by creating separate profiles, each tailored to a specific context or purpose.
@@ -538,7 +554,7 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 | **Delete Profile**    | `deleteProfile PROFILE`                                                                       | `deleteProfile alice`                                                   |
 | **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TELEGRAM] [r/ROLE] [f/ or nf/ (NOT BOTH)]` | `edit 2 n/James Lee e/jameslee@example.com`                             |
 | **Find**              | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`                         | `find n/James n/Jake`                                                   |
-| **Sort**              | `sort ORDER`                                                                                  | `sort ASC`                                                              |
+| **Sort**              | `sort ORDER`                                                                                  | `sort asc`                                                              |
 | **Switch**            | `switch PROFILE`                                                                              | `switch alice`                                                          |
 | **List**              | `list`                                                                                        | `list`                                                                  |
 | **Help**              | `help`                                                                                        | `help`                                                                  |
