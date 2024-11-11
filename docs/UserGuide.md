@@ -101,7 +101,7 @@ the process of accessing and updating resident student details. What's more, Dor
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `clean` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -139,7 +139,7 @@ Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 > <span style="color:Tomato"> WARNING! </span> <br>
 >
 > * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
-> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
 > * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
 
 
@@ -188,11 +188,13 @@ Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
 * In the name search, persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Only full words will be matched, for ROOM_NUMBER and PHONE the arguments
-  should be exactly the same as the person's ROOM_NUMBER and PHONE_NUMBER
+  should be exactly the same as the person's ROOM_NUMBER and PHONE
 * Order of the TAGs do not matter, `t/friends t/colleagues` works the same
   as `t/colleagues t/friends`
 * Tag search is case-sensitive, `Friends` will not match `friends`
 * In tag search, the contacts have to contain all the specified TAGs in order to match
+* If the user inputs multiple fields in parameter, then only the contacts that match all the field
+in the parameter will be listed out.
 
 Examples:
 * `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`  
