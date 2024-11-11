@@ -7,10 +7,8 @@ title: User Guide
 Thank you for choosing AdmiNUS as your go-to contact management tool. Designed specifically for [NUS Club Administrators](#nus-club-admin). AdmiNUS aims to make your contact management experience easy and efficient. Whether you prefer the speed of typing commands or the clarity of a user-friendly GUI, AdmiNUS has you covered.
 
 ---
-
 ## Why Choose AdmiNUS?
 AdmiNUS streamlines contact management by combining the speed of CLI commands with an intuitive GUI. It is especially useful for [NUS Club Administrator](#nus-club-admin) who need to manage contacts efficiently for events, vendors, and participants.
-
 ### What AdmiNUS Offers:
 * Add, edit, delete, and search student and company contacts easily.
 
@@ -21,7 +19,6 @@ AdmiNUS streamlines contact management by combining the speed of CLI commands wi
 * Import and export contact data via CSV files to facilitate data sharing.
 
 The application is designed to optimize workflows for users managing events, coordinating groups, and ensuring smooth communication.
-
 ## Example Use Case
 Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
 
@@ -285,11 +282,12 @@ edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS]
 ```
 Edited Person: (details of the updated contact)
 ```
+
 | Parameter Name   | Description                               | Constraint                                                                                                                                                                                                                                                                                                                                                                                           | Required                                                                              |
 | ---------------- |-------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
 | `INDEX`          | Index number of the contact to edit       | Positive integer only (e.g., 1, 2, 3)                                                                                                                                                                                                                                                                                                                                                                | Compulsory                                                                            |
 | `n/NAME`         | Updated name of the contact               | Can include alphanumeric characters, spaces, and the `/` character but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                            | Optional                                                                              |
-| `id/STUDENT_ID`  | Updated student ID (for students only)    | Must be 9 characters long, beginning with the letter `A`, followed by 7 digits, and ending with any uppercase letter (e.g., `A1234567Z`)                                                                                                                                                                                                                                                                                                                             | Optional                                                                              |
+| `id/STUDENT_ID`  | Updated student ID (for students only)    | Must be 9 characters long, beginning with the letter `A`, followed by 7 digits, and ending with any uppercase letter (e.g., `A1234567Z`)                                                                                                                                                                                                                                                                                                                            | Optional                                                                              |
 | `i/INDUSTRY`     | Updated industry type (for companies only) | Include only alphanumerical characters and spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                | Optional                                                                                                                                                  |
 | `p/PHONE_NUMBER` | Updated phone number                      | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                      | Optional                                                                                                                                                  |
 | `e/EMAIL`        | Updated email address                     | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Optional                                                                                                                                                  |
@@ -357,7 +355,7 @@ Deleted Contacts:
 
 * Split the indices by spaces.
 
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed contact list.
 
 * `delete all` deletes all contacts currently shown in the list, not all contacts in the database.
 
@@ -441,7 +439,7 @@ Finds contacts whose tags are the same as the specified keyword.
 
 **Examples**:
 
-- `filtertag paidFee` finds contacts who have tags saved as `paidFee`
+- `filtertag paidFee` finds contacts who have tags saved as `paidFee`.
 
 
 #### Tracking contacts by category: `track`
@@ -454,8 +452,8 @@ Tracks and lists all contacts who are in the category of the specified keyword.
 
 **Examples**:
 
-- `track student` finds contacts with category `student`
-- `track company` finds contacts with category `company`
+- `track student` finds contacts with category `student`.
+- `track company` finds contacts with category `company`.
 
 ![track UI](images/trackUI.png)
 
@@ -498,10 +496,14 @@ Adds additional specified tag(s) to the specified contact or all contacts withou
 
 🔔 **Notes**: <br>
 
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed contact list.
+
 * The index **must be a positive integer** 1, 2, 3, …​
+
 * The tag is case-insensitive. For example, `partner` will match `PartnEr`.
+
 * Only full words will be matched e.g. `partner` will not match `partners`.
+
 * The added tags are displayed on the contact in alphabetical order. <br>
   e.g. `t/partner t/education` will display `education` before `partner`.
 
@@ -509,7 +511,7 @@ Adds additional specified tag(s) to the specified contact or all contacts withou
 
 **Examples**:
 
-- `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list
+- `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list.
 
 <div markdown="span" class="alert alert-primary">💡 **Tip:**
 Tag labelled with "paid" will have green background to indicate student has paid their membership fee.
@@ -533,7 +535,8 @@ Deletes the specified tag(s) from the specified contact.
 
 🔔 **Notes**: <br>
 
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed contact list.
+
 * The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
