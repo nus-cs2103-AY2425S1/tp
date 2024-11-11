@@ -21,7 +21,6 @@ import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -117,15 +116,6 @@ public class ParserUtil {
         } catch (IllegalArgumentException e) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
-    }
-
-    /**
-     * Parses a {@code String remark} into a {@code Remark}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static Remark parseRemark(String remark) {
-        requireNonNull(remark);
-        return new Remark(remark.trim());
     }
 
     /**

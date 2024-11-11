@@ -29,7 +29,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
-import seedu.address.model.person.Remark;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -76,16 +75,6 @@ public class EditCommandTest {
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_specifiedRemarkField_shouldModifyRemark() {
-        helper.execute_specifiedRemarkField_shouldModifyRemark("This is a remark!");
-    }
-
-    @Test
-    public void execute_specifiedEmptyRemarkField_shouldModifyRemark() {
-        helper.execute_specifiedRemarkField_shouldModifyRemark("");
     }
 
     @Test
@@ -232,38 +221,6 @@ public class EditCommandTest {
 
     private class Helper {
 
-        public void execute_specifiedRemarkField_shouldModifyRemark(String remarkString) {
-            Remark remark = new Remark(remarkString);
-
-            Person personToBeEdited = model.getFilteredPersonList()
-                    .get(INDEX_FIRST_PERSON.getZeroBased());
-
-            Person personToBeExpected = new Person(
-                    personToBeEdited.getName(),
-                    personToBeEdited.getPhone(),
-                    personToBeEdited.getEmail(),
-                    personToBeEdited.getAddress(),
-                    personToBeEdited.getPriority(),
-                    remark,
-                    personToBeEdited.getDateOfBirth(),
-                    personToBeEdited.getIncome(),
-                    personToBeEdited.getFamilySize(),
-                    personToBeEdited.getTags(),
-                    personToBeEdited.getUpdatedAt());
-
-            EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
-                    .withRemark(remark.value)
-                    .build();
-
-            EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-
-            Model expectedModel = generateExpectedModel(personToBeEdited, personToBeExpected);
-
-            String expectedMessage = generateExpectedSuccessMessage(personToBeExpected);
-
-            assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-        }
-
         public void execute_specifiedPriorityField_shouldModifyPriority(Priority priority) {
             assertNotNull(priority);
 
@@ -276,7 +233,6 @@ public class EditCommandTest {
                     personToBeEdited.getEmail(),
                     personToBeEdited.getAddress(),
                     priority,
-                    personToBeEdited.getRemark(),
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
                     personToBeEdited.getFamilySize(),

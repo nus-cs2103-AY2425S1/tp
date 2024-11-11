@@ -6,9 +6,12 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
 import seedu.address.model.scheme.SchemeRetrieval;
@@ -48,7 +51,7 @@ public class StatisticsCommand extends Command {
         allStats.add(highPriorityPeople(lastShownPersonList));
         allStats.add(mediumPriorityPeople(lastShownPersonList));
         allStats.add(lowPriorityPeople(lastShownPersonList));
-        allStats.add(appointmentsSoon(lastShownAppointmentList));
+        allStats.add(appointmentsSoon(lastShownPersonList, lastShownAppointmentList));
         allStats.add(eligibleForScheme(lastShownPersonList));
 
         resultMessage = String.join("\n", allStats);
@@ -109,12 +112,16 @@ public class StatisticsCommand extends Command {
     /**
      * Returns a message with number of people with appointments within a week or less from the current time.
      *
-     * @param currList current list of appointments.
+     * @param currPersonList current list of persons.
+     * @param currAppointmentList current list of appointments.
      * @return string message of number of people with appointments within a week or less from current time.
      */
-    public static String appointmentsSoon(List<Appointment> currList) {
-        long appointmentsSoon = currList.stream()
-                .filter(appointment -> isWithinAWeek(appointment.date()))
+    public static String appointmentsSoon(List<Person> currPersonList, List<Appointment> currAppointmentList) {
+        Set<Name> names = currPersonList.stream().map(Person::getName).collect(Collectors.toSet());
+
+        long appointmentsSoon = currAppointmentList.stream()
+                .filter(appointment -> names.contains(appointment.name()) // O(1) lookup
+                        && isWithinAWeek(appointment.date()))
                 .count();
         return String.format(MESSAGE_DISPLAY_APPOINTMENTS_SOON, appointmentsSoon);
     }

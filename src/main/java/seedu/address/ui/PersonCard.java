@@ -49,8 +49,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label familySize;
     @FXML
-    private Label remark;
-    @FXML
     private Label updatedAt;
     @FXML
     private FlowPane tags;
@@ -75,13 +73,6 @@ public class PersonCard extends UiPart<Region> {
         case LOW -> "priority-low";
         });
         priority.setText(person.getPriority().name());
-
-        String value = person.getRemark().value;
-        if (value.isEmpty()) {
-            remark.setManaged(false);
-        } else {
-            remark.setText(value);
-        }
 
         dateOfBirth.setText(String.format("%s (Age: %d)", person.getDateOfBirth(), getPersonAge(person)));
         householdIncome.setText(String.format("[Household Income] %s", person.getIncome()));
