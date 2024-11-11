@@ -9,8 +9,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project is based on the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the [SE-EDU initiative](https://se-education.org).
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the [SE-EDU initiative](https://se-education.org). 
+* This project uses a [LogFormatter](https://github.com/AY2425S1-CS2103T-W13-2/tp/blob/master/src/main/java/careconnect/commons/core/LogFormatter.java) 
+that is adapted from Manuel Moser's implementation [here](https://stackoverflow.com/questions/53211694/change-color-and-format-of-java-util-logging-logger-output-in-eclipse).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +25,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** `.puml` files are used to create diagrams in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -257,6 +258,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -265,7 +267,24 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
+
 --------------------------------------------------------------------------------------------------------------------
+
+
+## Planned Enhancements
+
+- Currently, if the application is waiting for a command to be confirmed, users are not allowed to execute any other
+command, and will be prompted to confirm by keying in 'y' or 'n' into the command box. However, the application will 
+still attempt to parse the user's input and display a parse error message if the input is not a valid command. This
+causes the previous command feedback to be overridden, which may lead to confusion for the user. This is not fixed in
+the current version (v1.6) as the current behavior inconveniences the user but there is a way to work around it,
+i.e., user will still be prompted to confirm his previous command. The application will prevent user from executing
+any other command which is the correct behavior, it is just that the feedback provided might be confusing. Ideally, the
+message requesting for confirmation should supersede any parse error message.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## **Appendix: Requirements**
 
@@ -395,8 +414,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Semantic search**: A search technique that understands user intent by analyzing the meaning and context of terms, providing more relevant results than keyword-based search.
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 

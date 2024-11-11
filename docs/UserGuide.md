@@ -12,7 +12,7 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed on your computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-2/tp/releases).
 
@@ -112,8 +112,8 @@ Format: `view INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `view 2` opens up the record of the 2nd client in the case management system.
-* `find Betsy` followed by `delete 1` opens up the record of the 1st client in the results of the `find` command.
+* `list` followed by `view 2` opens up the record of the 2nd client in the displayed client list.
+* `find n/Betsy` followed by `view 1` opens up the record of the 1st client in the results of the `find` command.
 
 ### Editing a client : `edit`
 
@@ -153,7 +153,7 @@ Format: `untag INDEX t/TAG`
 
 * Removes the tag from the client at the specific `INDEX`.
 * Only one tag can be removed at once
-* If the tag is not found, a warining will be displayed
+* If the tag is not found, a warning will be displayed
 
 Example:
 - `untag 1 t/urgent`
@@ -221,6 +221,9 @@ Format: `delete INDEX`
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Note that the `delete` command requires confirmation. You will be prompted to key in either `y` or `n` after
+the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
+execute another command until the `delete` command is either confirmed or cancelled.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the case management system.
@@ -251,12 +254,18 @@ Format: `deletelog INDEX l/LOG_INDEX`
 * The `LOG_INDEX` refers to the index number shown in the displayed log list.
 * The log index **must be a positive integer** 1, 2, 3, …​
 * The log index is specific to the client at the specified `INDEX`.
+* Note that the `deletelog` command requires confirmation. You will be prompted to key in either `y` or `n` after 
+  the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
+  execute another command until the `deletelog` command is either confirmed or cancelled.
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the case management system.
 
 Format: `clear`
+* Note that the `clear` command requires confirmation. You will be prompted to key in either `y` or `n` after
+  the entering the command, which will either confirm or cancel the command, respectively. You will not be allowed to
+  execute another command until the `clear` command is either confirmed or cancelled.
 
 ### Exiting the program : `exit`
 
@@ -302,7 +311,7 @@ Furthermore, certain edits can cause the CareConnect to behave in unexpected way
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CareConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -320,7 +329,7 @@ Action | Format, Examples
 **Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **List** | `list`
-**View** | `view INDEX` <br> e.g., `delete 3`
+**View** | `view INDEX` <br> e.g., `view 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Tag** | `tag INDEX t/TAG_NAME` <br> e.g., `tag 1 t/highPriority`
 **Untag** | `untag INDEX t/TAG_NAME` <br> e.g., `untag 1 t/highPriority`
