@@ -18,22 +18,22 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 <!-- * Table of Contents -->
 * [Quick start](#quick-start)
 * [Features](#features)
-  * [Viewing help: `help`](#viewing-help--help)
+  * [Viewing help: `help`](#viewing-help-help)
   * [Adding a contact or delivery: `add`](#adding-a-contact-or-delivery-add)
-  * [Listing all contacts: `list`](#listing-all-contacts--list)
+  * [Listing all contacts: `list`](#listing-all-contacts-list)
   * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
-  * [Locating contacts or deliveries by name: `find`](#locating-contacts-or-deliveries-by-name-find)
+  * [Locating contacts or deliveries by name: `find`](#locating-contacts-by-name-find)
   * [Locating deliveries by item: `finddel`](#locating-deliveries-by-item-finddel)
-  * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery--archive)
-  * [Unarchiving a contact or delivery: `unarchive`](#unarchiving-a-contact-or-delivery--unarchive)
+  * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery-archive)
+  * [Unarchiving a contact or delivery: `unarchive`](#unarchive-a-contact-or-delivery-unarchive)
   * [Sorting contacts or deliveries in ascending order: `asort`](#sorting-the-contacts-or-delivery-list-in-ascending-order-asort)
   * [Sorting contacts or deliveries in descending order: `dsort`](#sorting-the-contacts-or-delivery-list-in-descending-order-dsort)
-  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery--delete)
-  * [Inspecting a contact: `inspect`](#inspecting-a-contact--inspect)
-  * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee--assign)
-  * [Returning to the main window: `back`](#returning-to-the-main-window--back)
-  * [Clearing all entries: `clear`](#clearing-all-entries--clear)
-  * [Exiting the program: `exit`](#exiting-the-program--exit)
+  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery-delete)
+  * [Inspecting a contact: `inspect`](#inspecting-a-contact-inspect)
+  * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee-assign)
+  * [Returning to the main window: `back`](#returning-to-the-main-window-back)
+  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
 * [FAQ](#faq)
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
@@ -111,8 +111,12 @@ the app.
 
 Shows a help window with a list of commonly used commands for the current window. You can click on any command button to automatically enter it into the command box.
 
-Note: 
-* Does not show an exhaustive list of all available commands, only the most helpful. 
+<box type="info" seamless>
+
+**Note:**
+Does not show an exhaustive list of all available commands, only the most helpful. 
+
+</box>
 
 <box type="tip" seamless>
 
@@ -137,12 +141,15 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/employee a/Newgate Prison, S123456 p/12345678 t/criminal`
 
 <br>
-Note: 
+<box type="info" seamless>
 
-* In order to keep your address book organised, `NAME` has to be **unique**
-* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear
+**Note:**<br>
+
+* In order to keep your address book organised, `NAME` has to be **unique**.
+* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear.
 * The default field for `[r/ROLE]` is client if left empty.
-* `Address` needs to have the format: `[Address line], S[6-digit postal code]`
+
+</box>
 
 **<ins>When in the inspect window**
 
@@ -254,14 +261,19 @@ Format: `archive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
+* `archive` works on archived and unarchived contact(s). 
 
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
 <img src="images/archivedcontact.png" alt="archive_contact" width="600">
 
-Note:
-* You will not be able to use `inspect` and `edit` for archived contacts.
+<box type="info" seamless>
+
+**Note:**
+You will not be able to use `inspect` and `edit` for archived contacts.
+
+</box>
 
 **<ins>When in the inspect window**
 
@@ -274,8 +286,12 @@ Examples:
 
 <img src="images/archiveddelivery.png" alt="archive_delivery" width="600">
 
-Note:
-* You will not be able to use `edit` for archived deliveries.
+<box type="info" seamless>
+
+**Note:**
+You will not be able to use `edit` for archived deliveries.
+
+</box>
 
 ### Unarchive a contact or delivery : `unarchive`
 **<ins>When in the main window**
@@ -288,10 +304,10 @@ Format: `unarchive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
-
+* `unarchive` works on archived and unarchived contact(s). 
 
 Examples:
-* `back` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
 
 **<ins>When in the inspect window**
 
@@ -396,6 +412,7 @@ Format: `assign INDEX n/EMPLOYEE_NAME`
 * The index is the number displayed at the top of a delivery in the delivery list of a contact.
 * The index **must be a positive number** (starting from 1).
 * The worker name should match an existing worker in the contact list.
+* This command works for both archived and unarchived delivery. 
 
 Examples:
 * `assign 1 n/Betsy Crowe` assigns first delivery of the current contact to employee Betsy Crowe.
@@ -490,6 +507,6 @@ Action     | Format, Examples
 Terms            | Meaning
 -----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Archive**      |The action of moving an item, from an active or accessible state to a preserved state by reducing its immediate availability and visibility.
-**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
 **Client**    |A contact that has the role `client`
 **Employee**    |A contact that has the role `employee`
+**Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.

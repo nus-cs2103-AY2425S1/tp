@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_ADDRESS,
                         PREFIX_TAG);
             //Check if name is present
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommand.MESSAGE_USAGE_PERSON));
