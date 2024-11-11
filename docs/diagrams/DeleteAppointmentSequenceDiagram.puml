@@ -49,7 +49,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteAppointmentCommand : execute(m)
 activate DeleteAppointmentCommand
 
-DeleteAppointmentCommand -> Model : deleteAppointment(Person target, Schedule appointment)
+DeleteAppointmentCommand -> Model : setPerson(personToEdit, editedPerson)
 activate Model
 
 Model --> DeleteAppointmentCommand
