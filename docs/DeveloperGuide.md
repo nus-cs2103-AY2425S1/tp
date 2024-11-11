@@ -207,8 +207,9 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 **Target user profile**: NUS SOC Teaching Assistants managing students
 
 **Value proposition**:
-* Easier management of administrative tasks
-* Easier for users who are more proficient with _CLI - interface_
+* Easier management of administrative tasks (e.g. tracking student attendance, assignments, and grades)
+* Increases productivity of users who are more proficient with _CLI - interface_
+* Provides a more organised way to manage student data
 * Separate work and personal tasks / messages
 
 
