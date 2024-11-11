@@ -600,6 +600,28 @@ The sequence diagram below illustrates the above process of deleting a person fr
 
 <img src="images/ViewCommandSequenceDiagram.png" width="800" />
 
+#### **Design Considerations**
+
+## Aspect: Command-Based Updates vs. Direct Modifications in `executeCommand`
+
+### Alternative 1 (Current choice): Direct Update in `executeCommand`
+Modify UI components such as `personListPanel` and `overviewPanel` directly within `executeCommand`, without relying
+solely on `CommandResult` to signal UI updates.
+
+- **Pros**: Provides immediate control over UI elements based on the command type (e.g., selecting a person in 
+`personListPanel` or showing the summary in `overviewPanel`). This approach eliminates the need to interpret `CommandResult` externally, centralizing UI updates in `executeCommand`.
+- **Cons**: Tightly couples the `executeCommand` method with the internal details of UI components. This can make the 
+`MainWindow` class harder to maintain or extend, especially if more components or command types are added.
+
+### Alternative 2: Use `CommandResult` with External Processing
+Use `CommandResult` as an intermediate data structure, allowing other methods or classes to handle the UI updates based on `CommandResult`.
+
+- **Pros**: Maintains separation of concerns by keeping `executeCommand` focused on obtaining a result, 
+while another part of the codebase interprets and applies `CommandResult`. This separation is beneficial for 
+maintainability, extensibility, and testing, especially when handling multiple types of commands.
+- **Cons**: Additional handlers may need to be implemented for different `CommandResult` types, potentially leading to extra code complexity.
+
+
 ---
 
 ### Summary Feature
@@ -644,6 +666,33 @@ The sequence diagram below illustrates the above process of executing the `summa
 
 ![SummaryCommandSequenceDiagram.png](images%2FSummaryCommandSequenceDiagram.png)
 
+#### **Design Considerations**
+
+## Aspect: Separation of Concerns in `SummaryCommand`
+
+### Alternative 1: Refactor Counting and Formatting into Separate Helper Methods
+Refactor the counting and formatting logic into separate helper methods or utility classes, separating the data processing (counting) from the presentation (formatting).
+
+- **Pros**:
+    - Promotes separation of concerns by clearly dividing the responsibility for counting and formatting, making the code easier to understand and maintain.
+    - Easier to test each part of the functionality independently, as the counting logic and formatting can be tested in isolation.
+    - More extensible: Additional logic (e.g., more complex formatting) can be added without affecting the core data processing.
+
+- **Cons**:
+    - Requires refactoring the existing logic into multiple parts, increasing the number of methods or classes.
+    - Adds complexity in managing additional methods or classes.
+
+### Alternative 2: Handling Counting and Formatting Together in `SummaryCommand`
+The `SummaryCommand` currently handles both counting the application statuses and formatting the summary message in the `execute` method.
+
+- **Pros**:
+    - Simplicity: All logic related to the summary is in one place, making it straightforward to understand in the context of a single command.
+    - Fewer classes to manage, keeping the flow of logic centralized.
+
+- **Cons**:
+    - Mixing counting logic and presentation logic (formatting the summary) within the same method violates the principle of separation of concerns.
+    - Makes it harder to extend or test each part of the logic independently.
+    - Reduces maintainability as the class grows, as any changes to either the counting or formatting logic will require modifications in the same place.
 ---
 
 ### Help Feature
@@ -1001,6 +1050,9 @@ Java `11` or above installed.
 
 3. **Candidate Profile**:
 - A record containing all relevant details about a job applicant, including contact information, skills, experience, and interview notes.
+
+4. **Mainstream OS:**:
+- Windows, Linux, Unix, MacOS
 
 --------------------------------------------------------------------------------------------------------------------
 
