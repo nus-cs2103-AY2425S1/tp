@@ -583,6 +583,78 @@ Using the clear command will delete all the properties from the PropertyList, an
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Acceptable value ranges for parameters
+
+<table>
+    <tr><th>Command</th><th>Parameter</th><th>Acceptable inputs</th></tr>
+    <tr><th colspan="3">General</th></tr>
+    <tr><th>View</th><td colspan="2">No parameters required</td></tr>
+    <tr><th>Clear</th><td colspan="2">No parameters required</td></tr>
+    <tr><th>Help</th><td colspan="2">No parameters required</td></tr>
+    <tr>
+        <th>Delete</th>
+        <td>Index</td>
+        <td>Positive integers only.
+            <br>Integers less than 1 will cause an invalid command format error.
+            <br>Integers greater than the number of contacts displayed in the given mode are invalid.</td>
+    </tr>
+    <tr><th colspan="3">Buyer</th></tr>
+    <tr><th rowspan="5">Add</th><td>Name</td><td>Alphanumeric characters and space, should not be blank</td></tr>
+    <tr><td>Phone</td><td>Numbers, at least 3 digits long</td></tr>
+    <tr>
+        <td>Email</td>
+        <td>Emails should be of the format local-part@domain and adhere to the following constraints:
+            <br>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+            <br>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br>The domain name must:
+            <br>- end with a domain label at least 2 characters long<br>- have each domain label start and end with alphanumeric characters
+            <br>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+            <br>Special characters (+_.-) can only be used to separate alphanumeric values and not be put together consecutively.
+        </td>
+    </tr>
+    <tr>
+        <td>Budget</td>
+        <td>It should be a positive integer more than 0 and not be blank. 
+            <br>It can contain commas at the right positions (exactly 3 digits after each comma) 
+            <br>E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). </td>
+    </tr>
+    <tr><td>Tag</td><td>Tags names should only contain alphanumeric and dashes</td></tr>
+    <tr>
+        <th rowspan="2">Edit</th>
+        <td>Index</td><td>Refer to General > Delete > Index</td>
+    </tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</tr>
+    <tr><th>Find</th><td>Name</td><td>Prepend the prefix "n/" before the name to be searched. For constraints on the name, refer to Buyer > Add > Name</td></tr>
+    <tr><th colspan="3">Meet-Up</th></tr>
+    <tr>
+    <th rowspan="5">Add</th>
+    <td>Subject</td><td>Alphanumeric characters and spaces,should not be blank</td>
+    </tr>
+    <tr><td>Info</td><td>Must have at least one non-whitespace character</td></tr>
+    <tr><td>From</td><td rowspan="2">Format: YYYY-MM-DD HH:mm</td></tr>
+    <tr><td>To</td></tr>
+    <tr><td>Added Buyers</td><td>Alphanumeric characters and spaces, should not be blank</td></tr>
+    <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for MeetUp > Add</tr>
+    <tr><th>Find</th><td>Subject</td><td>Prepend the prefix "s/" before the subject to be searched. For constraints on the subject, refer to MeetUp > Add > Subject</td></tr>
+    <tr><th colspan="3">Property</th></tr>
+    <tr><th rowspan="5">Add</th><td>Landlord Name</td><td>Alphanumeric characters and spaces,should not be blank</td></tr>
+    <tr><td>Phone</td><td>Numbers, at least 3 digits long</td></tr>
+    <tr>
+        <td>Asking Price</td>
+        <td>It should be a positive integer more than 0 and not be blank. 
+            <br>It can contain commas at the right positions (exactly 3 digits after each comma) 
+            <br>E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). </td>
+    </tr>
+    <tr><td>Address</td><td>Can take any values, and it should not be blank</td></tr>
+    <tr><td>Property Type</td><td>Can take any values, and it should not be blank</td></tr>
+    <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Property > Add</tr>
+    <tr><th rowspan="2">Find</th><td>Landlord Name</td><td>Prepend the prefix "n/" before the landlord's name to be searched. For constraints on the landlord's name, refer to Property > Add > Landlord Name</td></tr>
+    <tr><td>Address</td><td>Prepend the prefix "a/" before the address to be searched. For constraints on the address, refer to Property > Add > Address</td></tr>
+</table>
+
+--------------------------------------------------------------------------------------------------------------------
+
 <a id="faq"></a>
 <span style="font-size: 30px; font-weight: bold; color: #baa856">FAQ</span>
 
@@ -634,8 +706,8 @@ Using the clear command will delete all the properties from the PropertyList, an
     <tr>
         <td><b>Add</b></td>
         <td><code>add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​</code><br> e.g., <code>add n/James Ho p/22224444 e/jamesho@example.com a/1200000 t/friend t/colleague</code></td>
-        <td><code>add s/SUBJECT i/INFO f/FROM t/TO [a/ADDED_BUYERS]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Jason to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
-        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE…​</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
+        <td><code>add s/SUBJECT i/INFO f/FROM t/TO a/ADDED_BUYERS [a/ADDED_BUYERS]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Jason to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
+        <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
     </tr>
     <tr>
         <td><b>Edit</b></td>
@@ -651,9 +723,9 @@ Using the clear command will delete all the properties from the PropertyList, an
     </tr>
     <tr>
         <td><b>Find</b></td>
-        <td><code>find n/KEYWORD [MORE_KEYWORDS]</code><br> e.g., <code>find n/James Jake</code></td>
-        <td><code>find s/KEYWORD [MORE_KEYWORDS]</code><br> e.g., <code>find Project </code></td>
-        <td><code>find [a/KEYWORD] [n/KEYWORD] [MORE_KEYWORDS]</code><br> e.g., <code>find a/Lakefront</code></td>
+        <td><code>find n/KEYWORD [MORE_KEYWORDS]…​</code><br> e.g., <code>find n/James Jake</code></td>
+        <td><code>find s/KEYWORD [MORE_KEYWORDS]…​</code><br> e.g., <code>find Project </code></td>
+        <td><code>find [a/KEYWORD] [n/KEYWORD] [MORE_KEYWORDS]…​</code><br> e.g., <code>find a/Lakefront</code></td>
     </tr>
     <tr>
         <td><b>Clear</b></td>
