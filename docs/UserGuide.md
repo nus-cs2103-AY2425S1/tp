@@ -194,6 +194,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 - `NAME` is case-sensitive (e.g., `John Doe` is different from `john doe`).
 
 - Two contacts are considered duplicate if they have the same name (case-sensitive).
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
