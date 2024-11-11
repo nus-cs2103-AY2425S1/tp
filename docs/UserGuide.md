@@ -214,6 +214,8 @@ the constraints of each parameter when used in a command.
 [Back to Table of Contents](#table-of-contents)
 
 
+<div style="page-break-after: always;"></div>
+
 {: .alert .alert-info}
 > **:information_source: Notes about the command format:**
 > 
@@ -510,6 +512,8 @@ Deletes one or more allergies from an existing patient in MediBase3.
 > * If both unique and non-existent allergies are entered in a single command, an error will be returned, and none of the allergies will be deleted.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
+<div style="page-break-after: always;"></div>
+
 **Example**:
 * `delAllergy i/S1234567A al/Peanuts` deletes the allergy `Peanuts` from the patient with `NRIC` `S1234567A`.
 
@@ -540,6 +544,8 @@ Sets Priority to an existing patient in MediBase3.
 
 **Example**:
 * `setPriority i/S1234567A !/HIGH` will set the Priority of patient with NRIC `S1234567A` to `HIGH`.
+
+<div style="page-break-after: always;"></div>
 
 {: .alert .alert-secondary}
 >![result for setPriority command example](images/setPriorityCommand.png)
@@ -604,11 +610,12 @@ Finds patients whose names contain any of the given keywords.
 >   - e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 
-<div style="page-break-after: always;"></div>
 
 **Example**:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
+
+<div style="page-break-after: always;"></div>
 
 {: .alert .alert-secondary}
 >![result for 'find alex david'](images/findCommand.png)
