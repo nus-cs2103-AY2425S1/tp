@@ -362,10 +362,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
 * 3a. The given contact details are invalid.
 
     * 3a1. KnottyPlanners shows an error message.
@@ -393,25 +389,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KnottyPlanners shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. The given wedding name is in an invalid format.
 
     * 1b1. KnottyPlanners shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 1c. The given contact name is invalid.
 
     * 1c1. KnottyPlanners shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 1d. The tag already exists for that contact.
 
     * 1d1. KnottyPlanners shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 **Use case: UC04 - Delete a tag from a contact**
 
@@ -558,10 +554,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
 
 * 3a. The given wedding name is invalid or fields are missing/invalid.
 
