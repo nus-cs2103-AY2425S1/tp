@@ -30,7 +30,9 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
+  * [Introduction]({{ baseUrl }}/UserGuide.html#welcome-to-legacylink)
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start-guide)
+  * [Overview]({{ baseUrl }}/UserGuide.html#what-can-you-do-with-legacylink)
   * [Features]({{ baseUrl }}/UserGuide.html#features-overview)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
@@ -39,7 +41,6 @@
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
-  * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)

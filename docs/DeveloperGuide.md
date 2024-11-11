@@ -213,7 +213,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at step 2.
 
-*a. At any time, User chooses to cancel adding a contact Use case ends.
+* *a. At any time, User chooses to cancel adding a contact Use case ends.
 
 ### Use case 2: Delete contact
 
@@ -287,10 +287,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
-*a. At anytime, User can choose to cancel updating the contact.
+* *a. At anytime, User can choose to cancel updating the contact.
 
-    *a1. System does not update any contact details.
-    Use case ends.
+    * a1. System does not update any contact details.
+      Use case ends.
 
 
 ### Use case 5: Add event
@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case resumes at step 1.
 
 
-*a At any time, Users chooses to cancel the adding.
+* *a At any time, Users chooses to cancel the adding.
 
 
 ### Use case 6: Delete an event
@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. If the User cancels deleting the event, the event is kept and the use case ends.
 
-*a. If the user exits the application without confirming, the event is kept and the use case ends.
+* *a. If the user exits the application without confirming, the event is kept and the use case ends.
 
 ### Use Case 7: View All Events
 **MSS**
@@ -399,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-*a At any time, User chooses to cancel the edit.
+* *a At any time, User chooses to cancel the edit.
 
 
 ### Non-Functional Requirements
@@ -407,9 +407,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. 
-
-*{More to be added}*
 
 ### Glossary
 
