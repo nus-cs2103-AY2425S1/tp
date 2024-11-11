@@ -13,6 +13,7 @@
 
 ## **Acknowledgements**
 
+- Codebase adapted from [AddressBook3](https://se-education.org/addressbook-level3/)
 - Libraries
   used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
