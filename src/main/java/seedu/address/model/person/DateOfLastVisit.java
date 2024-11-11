@@ -15,7 +15,7 @@ import java.time.format.ResolverStyle;
 public class DateOfLastVisit implements Comparable<DateOfLastVisit> {
 
     public static final String MESSAGE_CONSTRAINTS = "Date of last visit should be in dd-MM-yyyy format.\n"
-            + "Ensure the date entered is not later than today. ";
+            + "Ensure the date entered is valid and not later than today. ";
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
