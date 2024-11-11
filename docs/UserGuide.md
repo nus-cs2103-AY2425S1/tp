@@ -540,6 +540,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Keyword**                                        | The word you want to search for in a `find` or `finddoc` command.                                                                                                                                                                 | Searching for a patient named Bernice Yu could be done by using keywords `Bern` or `Yu`.                                                                                                                          |
 | **Parameter**                                      | Information that you are required to provide to the MedConnect command.                                                                                                                                                           | `NAME` and `EMAIL` are examples of parameters you have to provide in an [`add`](#adding-a-patient-add) command.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters. |
 
+[↑ Back to top](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Valid Inputs for Patient parameters
