@@ -626,7 +626,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case: UC01 - Add a patient
 **Guarantees:**<br>
-* A patient will be added to the system
+A patient will be added to the system if the patient is not already in the system
 
 **MSS:**
 
@@ -642,19 +642,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Step 1a1 is repeated until the input entered is valid containing all the required parameters<br>
       Use case resumes from step 2.
 <br>
-
+<br>
 
 * 1b. User inputs an invalid prefix.
     * 1b1. ClinicConnect shows an error message saying the prefix is invalid.<br>
       Step 1b1 is repeated until the input entered only contains valid prefixes<br>
       Use case resumes from step 2.
 <br>
-
+<br>
 
 * 1c. User inputs a field in the wrong format.
     * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
       Step 1c1 is repeated until the field is in the correct format<br>
       Use case resumes from step 2.
+<br>
 <br>
 
 
@@ -662,6 +663,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1d1. ClinicConnect prompts the user to fix the field that is has a duplicate prefix.<br>
       Step 1d1 is repeated until the input entered has distinct prefixes<br>
       Use case resumes from step 2.
+<br>
 <br>
 
 
@@ -672,7 +674,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Use case: UC02 - Add a patient with all fields
 **Guarantees:**<br>
-* A patient will be added to the system
+A patient will be added to the system if the patient is not already in the system
 
 **MSS:**
 
@@ -716,11 +718,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Step 1e1 is repeated until a new NRIC that is not in the system is inputted<br>
       Use case resumes from step 2.
 
-**Use case: Book an upcoming appointment for a patient**
+#### Use case: UC03 - Book an upcoming appointment for a patient
+**Preconditions:** The patient with the corresponding NRIC is already registered in the system.<br>
+**Guarantees:** Appointments only will be booked if they consist of valid date and time in the future
 
 **MSS**
-Preconditions: The patient with the corresponding NRIC is already registered in the system.
-Guarantees: Appointments only will be booked if they consist of valid date and time in the future
 
 1.  User types the command to book an upcoming appointment for the patient with the corresponding NRIC.
 2.  ClinicConnect books an upcoming appointment for the patient successfully.
@@ -745,7 +747,7 @@ Guarantees: Appointments only will be booked if they consist of valid date and t
       Use case resumes from step 2.
 
 * 1d. User inputs an NRIC that does not exist in the system due to a typo.
-    * 1c1. ClinicConnect shows an error message and prompts the user to input a valid NRIC of an existing patient in the system.<br>
+    * 1d1. ClinicConnect shows an error message and prompts the user to input a valid NRIC of an existing patient in the system.<br>
       Step 1d1 is repeated until the field is in the correct format.<br>
       Use case resumes from step 2.
 
@@ -759,11 +761,11 @@ Guarantees: Appointments only will be booked if they consist of valid date and t
       Step 1f1 is repeated until the field is in the correct format.<br>
       Use case resumes from step 2.
 
-**Use case: Delete an appointment for a patient**
+#### Use case: US04 - Delete an appointment for a patient
+**Preconditions:** The patient with the corresponding NRIC is already registered in the system.<br>
+**Guarantees:** Valid appointments will be deleted if they are already in the patient's list of appointments.
 
 **MSS**
-Preconditions: The patient with the corresponding NRIC is already registered in the system.
-Guarantees: Valid appointments will be deleted if they are already in the patient's list of appointments.
 
 1.  User types the command to delete an appointment for the patient with the corresponding NRIC.
 2.  ClinicConnect deletes an appointment for the patient successfully.
@@ -788,7 +790,7 @@ Guarantees: Valid appointments will be deleted if they are already in the patien
       Use case resumes from step 2.
 
 * 1d. User inputs an NRIC that does not exist in the system due to a typo.
-    * 1c1. ClinicConnect shows an error message and prompts the user to input a valid NRIC of an existing patient in the system.<br>
+    * 1d1. ClinicConnect shows an error message and prompts the user to input a valid NRIC of an existing patient in the system.<br>
       Step 1d1 is repeated until the field is in the correct format.<br>
       Use case resumes from step 2.
 
