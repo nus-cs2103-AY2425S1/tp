@@ -1,13 +1,15 @@
 {
   "persons": [ {
     "name": "Valid Person",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "id": "P12345",
+    "ward" : "A1",
+    "diagnosis" : "E. coli infection",
+    "medication" : "Ciprofloxacin (Cipro)"
   }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "name": "Person With Invalid Id, Ward and Medication Field",
+    "id": "P12D45",
+    "ward" : "B 2",
+    "diagnosis" : "HIV/AIDS",
+    "medication" : "Emtricitabine (FTC)"
   } ]
 }

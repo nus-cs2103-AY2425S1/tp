@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_WITH_SPECIAL_CHAR_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WARD_WITH_SPECIAL_CHAR_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -22,6 +24,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.appointment.AppointmentContainsDatePredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -54,9 +57,57 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_personWithWardWithSpecialCharShowsWarning_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder()
+                .withWard(VALID_WARD_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(Messages.WARD_SPECIAL_CHARACTER
+                        + AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithIdWithSpecialCharShowsWarning_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder()
+                .withId(VALID_ID_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(Messages.ID_SPECIAL_CHARACTER
+                        + AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithWardAndIdWithSpecialCharShowsWarning_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder()
+                .withId(VALID_ID_WITH_SPECIAL_CHAR_BOB)
+                .withWard(VALID_WARD_WITH_SPECIAL_CHAR_BOB)
+                .build();
+
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(Messages.WARD_ID_SPECIAL_CHARACTER
+                        + AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").withId("P12345").withWard("A1")
+                .withDiagnosis("Celiac Disease").withMedication("gluten-free diet").build();
+        Person bob = new PersonBuilder().withName("Bob").withId("P54321").withWard("B3")
+                .withDiagnosis("Celiac Disease").withMedication("gluten-free diet").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -156,6 +207,35 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public String getFilteredAppointmentDate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAppointmentList(AppointmentContainsDatePredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getSortedAppointmentList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<Person> getAllAppointmentsList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void updateAllAppointmentsList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasOverlappingAppointment(Person newAppointmentPerson) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

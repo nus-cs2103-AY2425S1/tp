@@ -27,15 +27,22 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("^")); // only invalid special character
+        assertFalse(Name.isValidName("Alice2")); // contains digit
+        assertFalse(Name.isValidName("peter*")); // contains invalid special character
+        assertFalse(Name.isValidName("Alice2*^")); // contains both digit and invalid special character
+        assertFalse(Name.isValidName("This is a crazy long name that is definitely longer than "
+                + "50 characters")); // name longer than 50 characters
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("Kara Wong Yoon En (Huang Yun En)")); // with parenthesis
+        assertTrue(Name.isValidName("Ravinchandra s/o Murugamy")); // with slash
+        assertTrue(Name.isValidName("Turritopsis Teo En-Ming")); // with dash
+        assertTrue(Name.isValidName("Tan Cheng Bock @ Adrian Tan")); // with @
+        assertTrue(Name.isValidName("Kurt Tay, Superstar")); // with comma
+        assertTrue(Name.isValidName("Teo En-Ming s/o Teo, Siao-Meng (Xiao Ming)"));
     }
 
     @Test

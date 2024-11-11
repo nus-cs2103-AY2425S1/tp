@@ -9,16 +9,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Names can include alphabetic characters, spaces,"
+            + " rounded brackets, hyphen, forward-slashes, @, and commas.\n"
+            + "It must contain at least 1 alphabetic character and has a character limit of 50.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
+    public static final String VALIDATION_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z ()/,@-]{1,50}$";
+
+    public final String value;
 
     /**
      * Constructs a {@code Name}.
@@ -28,7 +30,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        value = name;
     }
 
     /**
@@ -41,7 +43,7 @@ public class Name {
 
     @Override
     public String toString() {
-        return fullName;
+        return value;
     }
 
     @Override
@@ -56,12 +58,12 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return value.equals(otherName.value);
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return value.hashCode();
     }
 
 }

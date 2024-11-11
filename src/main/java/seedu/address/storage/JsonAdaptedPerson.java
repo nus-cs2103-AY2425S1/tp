@@ -1,21 +1,17 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Diagnosis;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Ward;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -23,40 +19,42 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
     private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String id;
+    private final String ward;
+    private final String diagnosis;
+    private final String medication;
+    private final String notes;
+    private final JsonAdaptedAppointment appointment;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("id") String id,
+                             @JsonProperty("ward") String ward, @JsonProperty("diagnosis") String diagnosis,
+                             @JsonProperty("medication") String medication, @JsonProperty("notes") String notes,
+                             @JsonProperty("appointment") JsonAdaptedAppointment appointment) {
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
+        this.id = id;
+        this.ward = ward;
+        this.diagnosis = diagnosis;
+        this.medication = medication;
+        this.notes = notes;
+        this.appointment = appointment;
     }
 
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        name = source.getName().value;
+        id = source.getId().value;
+        ward = source.getWard().value;
+        diagnosis = source.getDiagnosis().value;
+        medication = source.getMedication().value;
+        notes = source.getNotes().value;
+        appointment = source.getAppointment() != null ? new JsonAdaptedAppointment(source.getAppointment()) : null;
     }
 
     /**
@@ -65,10 +63,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -78,32 +72,51 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Id.isValidId(id)) {
+            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Id modelId = new Id(id);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (ward == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Ward.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!Ward.isValidWard(ward)) {
+            throw new IllegalValueException(Ward.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Ward modelWard = new Ward(ward);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (diagnosis == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Diagnosis.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Diagnosis.isValidDiagnosis(diagnosis)) {
+            throw new IllegalValueException(Diagnosis.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Diagnosis modelDiagnosis = new Diagnosis(diagnosis);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (medication == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Medication.class.getSimpleName()));
+        }
+        if (!Medication.isValidMedication(medication)) {
+            throw new IllegalValueException(Medication.MESSAGE_CONSTRAINTS);
+        }
+        final Medication modelMedication = new Medication(medication);
+
+        if (notes == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Notes.class.getSimpleName()));
+        }
+        if (!Notes.isValidNote(notes)) {
+            throw new IllegalValueException(Notes.MESSAGE_CONSTRAINTS);
+        }
+        final Notes modelNotes = new Notes(notes);
+
+        final Appointment modelAppointment = (appointment != null) ? appointment.toModelType() : null;
+
+        return new Person(modelName, modelId, modelWard, modelDiagnosis, modelMedication, modelNotes, modelAppointment);
     }
 
 }

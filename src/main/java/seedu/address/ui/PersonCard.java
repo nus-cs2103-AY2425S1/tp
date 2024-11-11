@@ -1,16 +1,16 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+import static seedu.address.commons.util.DateUtil.getDisplayableDateTime;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
+
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -33,27 +33,52 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label patientId;
     @FXML
-    private Label address;
+    private Label ward;
     @FXML
-    private Label email;
+    private Label diagnosis;
     @FXML
-    private FlowPane tags;
+    private Label medication;
+    @FXML
+    private Label notes;
+    @FXML
+    private Label appointmentDescription;
+    @FXML
+    private Label appointmentStart;
+    @FXML
+    private Label appointmentEnd;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        name.setText(person.getName().value);
+        patientId.setText("ID: " + person.getId().value);
+        ward.setText("Ward: " + person.getWard().value);
+        setAppointmentFields(person);
+    }
+
+    private void setAppointmentFields(Person person) {
+        if (person.getAppointment() != null) {
+            showAppointmentFields(person);
+        } else {
+            hideAppointmentFields();
+        }
+    }
+
+    private void showAppointmentFields(Person person) {
+        appointmentDescription.setText(person.getAppointmentDescription());
+        appointmentStart.setText(getDisplayableDateTime(person.getAppointmentStart()));
+        appointmentEnd.setText(getDisplayableDateTime(person.getAppointmentEnd()));
+    }
+
+    private void hideAppointmentFields() {
+        appointmentDescription.setVisible(false); // Hide the label
+        appointmentStart.setVisible(false);
+        appointmentEnd.setVisible(false);
     }
 }
