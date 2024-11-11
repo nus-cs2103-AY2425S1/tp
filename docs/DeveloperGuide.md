@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -107,7 +107,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Ui` to show an alert dialog and obtain confirmation from user.
-1. When user confirms the action (selects "OK"), the command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When user confirms the action (selects "OK"), the command can communicate with the `Model` when it is executed (e.g. to delete a patient).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -186,26 +186,26 @@ Furthermore, it can provide easy categorisation and filtering of patients.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                  | So that I can…​                                               |
-|----------| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Priority | As a …​         | I want to …​                                                  | So that I can…​                                                                                |
+|----------| -------------- | ------------------------------------------------------------ |------------------------------------------------------------------------------------------------|
 | `* * *`  | New user       | add a new contact with multiple phone numbers (e.g. home, mobile, email address) | manage patient contact information and have multiple options for reaching them in an emergency. |
-| `* * *`  | User           | delete a contact                                             | remove outdated or incorrect contact information             |
-| `* * *`  | User           | list all contacts in one dashboard                           | easily view all the contacts that I have added.              |
-| `* * *`  | User           | find the patient contact by a keyword                        | I can search the patients’ contact instantly.                |
-| `* *`    | User           | edit an existing patient contact                             | I can update their details when necessary.                   |
-| `* *`    | User           | see all the texts and UI clearly                             | I don’t have to squint my eyes                               |
-| `* *`    | User           | import contacts from a file                                  | I can quickly fill in the address book with existing contact information. |
-| `* *`    | User           | export contacts to a file securely                           | I can share them with other authorized personnel or have a backup. |
-| `* *`    | Silly user     | receive confirmation before deleting a contact               | I don’t accidentally delete important information            |
-| `* *`    | User           | sort the patients according to appointment dates             | I can easily know which are the latest upcoming appointments |
-| `* *`    | User           | add a contact to my favorite list                            | I can quickly access important contacts                      |
-| `* *`    | User           | see alerts of duplicate contacts in the app                  | I can keep the contact list clean and avoid redundancy and confusion |
-| `* *`    | User           | tag patients with recurring appointments                     | I know those who need regular follow ups                     |
-| `* *`    | Expert User    | categorize patients based on medical conditions, assigned doctor(s) and/or treatment plan | I can prioritize urgent conditions and streamline patient management. |
-| `* *`    | User           | add notes to a contact                                       | I can remember important information about that person.      |
-| `*`      | User           | filter patients based on appointment dates                   | I can contact and remind them.                               |
-| `*`      | Potential user | see the app populated with some sample commands              | I can easily learn how to use the app.                       |
-| `*`      | User           | use the app to work offline                                  | I can use it even when there is no internet connection.      |
+| `* * *`  | User           | delete a contact                                             | remove outdated or incorrect contact information                                               |
+| `* * *`  | User           | list all contacts in one dashboard                           | easily view all the contacts that I have added.                                                |
+| `* * *`  | User           | find the patient contact by a keyword                        | I can search the patients’ contact instantly.                                                  |
+| `* *`    | User           | edit an existing patient contact                             | I can update their details when necessary.                                                     |
+| `* *`    | User           | see all the texts and UI clearly                             | I don’t have to squint my eyes                                                                 |
+| `* *`    | User           | import contacts from a file                                  | I can quickly fill in the address book with existing contact information.                      |
+| `* *`    | User           | export contacts to a file securely                           | I can share them with other authorized patientnel or have a backup.                            |
+| `* *`    | Silly user     | receive confirmation before deleting a contact               | I don’t accidentally delete important information                                              |
+| `* *`    | User           | sort the patients according to appointment dates             | I can easily know which are the latest upcoming appointments                                   |
+| `* *`    | User           | add a contact to my favorite list                            | I can quickly access important contacts                                                        |
+| `* *`    | User           | see alerts of duplicate contacts in the app                  | I can keep the contact list clean and avoid redundancy and confusion                           |
+| `* *`    | User           | tag patients with recurring appointments                     | I know those who need regular follow ups                                                       |
+| `* *`    | Expert User    | categorize patients based on medical conditions, assigned doctor(s) and/or treatment plan | I can prioritize urgent conditions and streamline patient management.                          |
+| `* *`    | User           | add notes to a contact                                       | I can remember important information about that patient.                                       |
+| `*`      | User           | filter patients based on appointment dates                   | I can contact and remind them.                                                                 |
+| `*`      | Potential user | see the app populated with some sample commands              | I can easily learn how to use the app.                                                         |
+| `*`      | User           | use the app to work offline                                  | I can use it even when there is no internet connection.                                        |
 
 ### Use cases
 
@@ -234,16 +234,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
-**Use case: Delete a person**
+**Use case: Delete a patient**
 
 **MSS**
 
-1.  User requests to list persons. 
-2.  MediContact shows a list of persons. 
-3.  User requests to delete a specific person in the list. 
+1.  User requests to list patients. 
+2.  MediContact shows a list of patients. 
+3.  User requests to delete a specific patient in the list. 
 4.  MediContact requests for confirmation. 
 5.  User confirms to delete. 
-6.  MediContact deletes the person.
+6.  MediContact deletes the patient.
 
     Use case ends.
 
@@ -279,14 +279,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Edit a person**
+**Use case: Edit a patient**
 
 **MSS**
 
-1. User requests to list persons.
-2. MediContact shows a list of persons.
-3. User requests to edit a person and specifies edited fields. 
-4. MediContact updates the person. 
+1. User requests to list patients.
+2. MediContact shows a list of patients.
+3. User requests to edit a patient and specifies edited fields. 
+4. MediContact updates the patient. 
 
     Use case ends.
 
@@ -307,12 +307,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 
-**Use case: Filter a person**
+**Use case: Filter a patient**
 
 **MSS**
 
 1. User requests to filter contacts and specifies the criteria.
-2. Medication shows a list of persons matching details.
+2. Medication shows a list of patients matching details.
 
    Use case ends.
 
@@ -328,13 +328,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
-**Use case: Find a person**
+**Use case: Find a patient**
 
 **MSS**
 
 1. User requests to find contact
 2. User inputs the find command with contact details
-3. MediContact shows a list of persons matching details
+3. MediContact shows a list of patients matching details
 
    Use case ends.
 
@@ -399,15 +399,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: Star a person**
+**Use case: Star a patient**
 
 **MSS**
 
-1. User requests to list persons.
-2. MediContact shows a list of persons.
-3. User requests to add a person into starred list.
-4. User inputs the star command with index or full name of the person.
-5. MediContact adds the person into starred list.
+1. User requests to list patients.
+2. MediContact shows a list of patients.
+3. User requests to add a patient into starred list.
+4. User inputs the star command with index or full name of the patient.
+5. MediContact adds the patient into starred list.
 
    Use case ends.
 
@@ -444,11 +444,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons.
-2. MediContact shows a list of persons.
-3. User requests to view a person's note.
-4. User inputs the view command with index or full name of the person.
-5. MediContact shows the person's contact with the note.
+1. User requests to list patients.
+2. MediContact shows a list of patients.
+3. User requests to view a patient's note.
+4. User inputs the view command with index or full name of the patient.
+5. MediContact shows the patient's contact with the note.
 
    Use case ends.
 
@@ -518,10 +518,10 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app.<br>
       Expected: List of contacts are the same as before.
 
-### Adding a person
-1. Adding a person
+### Adding a patient
+1. Adding a patient
 
-   1. Prerequisites: List all persons using `list` command. Multiple persons in the list.
+   1. Prerequisites: List all patients using `list` command. Multiple patients in the list.
 
    2. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
       Expected: Bryan Lim is added to the list.
@@ -544,12 +544,12 @@ testers are expected to do more *exploratory* testing.
    8. Test case: `add n/Bryan Lim p/98765432 e/bryan@example.com a/5 Hilly Road b/23 s/`<br>
       Expected: No contact is added to the list, error message regarding gender should be shown.
 
-2. Adding a duplicate person
-    1. Prerequisites: List all persons using `list` command. Multiple persons in the list.<br>
+2. Adding a duplicate patient
+    1. Prerequisites: List all patients using `list` command. Multiple patients in the list.<br>
        Person with name `Bryan Lim` should already be in list.
 
     2. Test case: `add n/Bryan Lim p/00000000 e/different_bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
-       Expected: No contact is added to the list, error message regarding person already existing should be shown.
+       Expected: No contact is added to the list, error message regarding patient already existing should be shown.
 
     3. Test case: `add n/Bryan Sim p/00000000 e/different_bryan@example.com a/5 Hilly Road b/23 s/Male`<br>
        Expected: Bryan Lim is added to the list.
@@ -566,36 +566,36 @@ testers are expected to do more *exploratory* testing.
     3. Test case: Click on `Cancel`<br>
        Expected: Address book is unchanged
 
-### Deleting a person
+### Deleting a patient
 
-1. Deleting a person via index while all persons are being shown
+1. Deleting a patient via index while all patients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
    1. Test case: `delete 1`<br>
       Expected: Confirmation dialog is triggered. <br><br>If confirmed, first contact is deleted from the list. Message reflecting delete action successful is shown.
-      <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
+      <br><br>If cancelled, no patient is deleted, message reflecting delete action being cancelled is shown.
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No patient is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. Deleting a person via name while all persons are being shown
+1. Deleting a patient via name while all patients are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br>
+    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.<br>
        John Doe is an existing contact
 
     1. Test case: `delete John Doe`<br>
        Expected: Confirmation dialog is triggered. <br><br>If confirmed, John Doe is deleted from the list. Message reflecting delete action successful is shown.
-       <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
+       <br><br>If cancelled, no patient is deleted, message reflecting delete action being cancelled is shown.
 
     1. Test case: `delete Jane Doe`<br>
-       Expected: No person is deleted. Error details shown in the status message.
+       Expected: No patient is deleted. Error details shown in the status message.
 
-### Editing a person
+### Editing a patient
 
-1. Editing a person's fields
+1. Editing a patient's fields
 
     1. Prerequisites: Person named `John Doe` must exist.
 
@@ -611,7 +611,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `edit John Doe n/John Doe b/35` (given that John Doe's age is not 35) <br>
        Expected: Contact with name `John Doe` has age updated to 35
 
-2. Editing a non-existent person's field
+2. Editing a non-existent patient's field
 
     1. Prerequisites: Person named `John Doe` must not exist.
 
@@ -621,7 +621,7 @@ testers are expected to do more *exploratory* testing.
     3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
        Expected: Similar to previous results.
 
-3. Editing a person with no fields
+3. Editing a patient with no fields
 
     1. Test case: `edit John Doe`<br>
        Expected: Error message reflecting at least one field must be provided.
@@ -629,7 +629,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `edit Non Existent Person`<br>
        Expected: Similar to previous results.
 
-4. Clearing a persons appointments and tags
+4. Clearing a patients appointments and tags
 
     1. Prerequisites: Person named `John Doe` must exist.
 
@@ -716,12 +716,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a contact's notes
 
-1. Adding new notes to an existing person
+1. Adding new notes to an existing patient
 
     1. Test cases: `note Bryan ap/01/01/2025 r/Allergic to Ibuprofen`, `note John m/10mg Panadol`<br>
-       Expected: Notes are added to person (Behaviour is very similar to Edit Command's appointments and tags)
+       Expected: Notes are added to patient (Behaviour is very similar to Edit Command's appointments and tags)
 
-2. Removing note's fields of an existing person
+2. Removing note's fields of an existing patient
 
     1. Test cases: `note Bryan ap/ r/`, `note John m/`<br>
        Expected: Respective Note fields are removed (Behaviour is very similar to Edit Command's appointments and tags)
@@ -735,7 +735,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Starring a contact
 
-1. Starring an unstarred person
+1. Starring an unstarred patient
 
     1. Prerequisite: Address book is populated with contacts.
 
@@ -751,7 +751,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `star somebody`<br>
        Expected: Error message reflecting name provided is invalid
 
-2. Starring a starred person
+2. Starring a starred patient
     1. Prerequisite: First contact is starred
 
     2. Test case: `star 1`, `star x` (where x is the name of the first contact)<br>
@@ -759,7 +759,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Unstarring a contact
 
-1. Unstarring a starred person
+1. Unstarring a starred patient
 
     1. Prerequisite: Address book is populated with contacts.
 
@@ -775,7 +775,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `unstar somebody`<br>
        Expected: Error message reflecting name provided is invalid
 
-2. Starring a starred person
+2. Starring a starred patient
 
     1. Prerequisite: First contact is unstarred
 
@@ -784,12 +784,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing a contacts details
 
-1. Viewing an existent person
+1. Viewing an existent patient
 
     1. Test case: `view 1`, `view John`<br>
        Expected: Person's details are shown
 
-2. Viewing a non-existent person
+2. Viewing a non-existent 
 
     1. Test case: `view 0`, `view -1`, `view x` (where x is larger than the list size)<br>
        Expected: Error message reflecting index provided is invalid.
