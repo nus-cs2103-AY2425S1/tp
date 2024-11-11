@@ -574,8 +574,7 @@ Given below are instructions to test the app manually.
        than the list size)<br>
        Expected: Similar to previous.
 
-
-2. Deleting a lesson when there are lessons shown in the filtered lesson schedule.
+1. Deleting a lesson when there are lessons shown in the filtered lesson schedule.
 
     1. Prerequisites: Executed a lesson find command and there are multiple lessons in the filtered lesson 
        schedule.
