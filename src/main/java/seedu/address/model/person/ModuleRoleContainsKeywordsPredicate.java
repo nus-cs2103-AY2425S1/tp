@@ -12,15 +12,15 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code ModuleRoleMap} matches any of the keywords given.
  */
 public class ModuleRoleContainsKeywordsPredicate implements Predicate<Person> {
-    private final Set<ModuleRolePair> moduleRoleMapKeywords;
+    private final Set<ModuleRolePair> moduleRoleKeywords;
 
 
-    public ModuleRoleContainsKeywordsPredicate(Set<ModuleRolePair> moduleRoleMapKeywords) {
-        this.moduleRoleMapKeywords = moduleRoleMapKeywords;
+    public ModuleRoleContainsKeywordsPredicate(Set<ModuleRolePair> moduleRoleKeywords) {
+        this.moduleRoleKeywords = moduleRoleKeywords;
     }
 
-    public ModuleRoleContainsKeywordsPredicate(List<ModuleRolePair> moduleRoleMapKeywords) {
-        this.moduleRoleMapKeywords = new HashSet<>(moduleRoleMapKeywords);
+    public ModuleRoleContainsKeywordsPredicate(List<ModuleRolePair> moduleRoleKeywords) {
+        this.moduleRoleKeywords = new HashSet<>(moduleRoleKeywords);
     }
 
 
@@ -31,7 +31,7 @@ public class ModuleRoleContainsKeywordsPredicate implements Predicate<Person> {
      */
     public boolean test(Person person) {
         ModuleRoleMap personModuleRoleMap = person.getModuleRoleMap();
-        return moduleRoleMapKeywords.stream().anyMatch(personModuleRoleMap::containsModuleRolePair);
+        return moduleRoleKeywords.stream().anyMatch(personModuleRoleMap::containsModuleRolePair);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class ModuleRoleContainsKeywordsPredicate implements Predicate<Person> {
             return false;
         }
 
-        return moduleRoleMapKeywords.equals(otherModuleContainsKeywordsPredicate.moduleRoleMapKeywords);
+        return moduleRoleKeywords.equals(otherModuleContainsKeywordsPredicate.moduleRoleKeywords);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", moduleRoleMapKeywords).toString();
+        return new ToStringBuilder(this).add("keywords", moduleRoleKeywords).toString();
     }
 
     /**
@@ -59,7 +59,7 @@ public class ModuleRoleContainsKeywordsPredicate implements Predicate<Person> {
      * @return a List of string of module-role pairs.
      */
     public List<String> getModuleRolePairs() {
-        return moduleRoleMapKeywords.stream()
+        return moduleRoleKeywords.stream()
                 .map(ModuleRolePair::toString)
                 .collect(Collectors.toList());
     }
