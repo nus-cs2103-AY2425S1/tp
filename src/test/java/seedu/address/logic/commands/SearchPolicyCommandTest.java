@@ -31,20 +31,14 @@ public class SearchPolicyCommandTest {
         SearchPolicyCommand searchFirstCommand = new SearchPolicyCommand("HealthInsurance");
         SearchPolicyCommand searchSecondCommand = new SearchPolicyCommand("AutoInsurance");
 
-        // same object -> returns true
         assertTrue(searchFirstCommand.equals(searchFirstCommand));
 
-        // same values -> returns true
         SearchPolicyCommand searchFirstCommandCopy = new SearchPolicyCommand("healthinsurance"); // different case
         assertTrue(searchFirstCommand.equals(searchFirstCommandCopy));
 
-        // different types -> returns false
         assertFalse(searchFirstCommand.equals(1));
 
-        // null -> returns false
         assertFalse(searchFirstCommand.equals(null));
-
-        // different policyName -> returns false
         assertFalse(searchFirstCommand.equals(searchSecondCommand));
     }
 

@@ -46,6 +46,7 @@ public class AssignPolicyCommand extends Command {
     private final Policy policy;
     private Person personBeforeEdit;
 
+    //chatgpt to produce javadocs
     /**
      * Creates an AssignPolicyCommand to assign the specified {@code policy} to a person
      * at the specified {@code index}.
@@ -61,6 +62,7 @@ public class AssignPolicyCommand extends Command {
         this.policy = policy;
     }
 
+    //chatgpt to produce javadocs
     /**
      * Executes the command to assign the policy to the person at the specified index.
      *
