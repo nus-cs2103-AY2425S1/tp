@@ -301,38 +301,38 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                | So that I can…​                             |
-|----------|------------------|-------------------------------------------------------------|---------------------------------------------|
-| `* * *`  | user             | cancel a particular lesson session                          | account for student availability            |
-| `* * *`  | user             | schedule a make-up lesson for students who missed           | manage lesson rescheduling efficiently      |
-| `* * *`  | user             | save a student’s lesson timing                              | know when I will meet them                  |
-| `* * *`  | user             | save the data and retrieve them after restarting the app    | ensure my data is persistent                |
-| `* * *`  | user             | view a list of all my students                              | keep track of all my students               |
-| `* * *`  | user             | delete a student when they stop taking lessons              | keep my records clean                       |
-| `* * *`  | new user         | view the list of commands                                   | know what commands I can run                |
-| `* * *`  | user             | add a piano piece to a student                              | track what piece they are working on        |
-| `* * *`  | user             | save a student’s address                                    | know where to travel for tutoring           |
-| `* * *`  | user             | see the grade level of a student                            | tailor the lesson to their proficiency      |
-| `* * *`  | user             | save a student's contact                                     | easily contact them for tutoring            |
-| `* * *`  | user             | undo my last command                                        | revert the effects of a wrong command       |
-| `* * *`  | user             | redo a command that I undid                                 | revert the effects of a wrong undo          |
-| `* *`    | user             | modify the details of each record                           | change particulars when needed              |
-| `* *`    | user             | sort the record by student name, lesson day, contact, etc.  | find specific records easily                |
-| `* *`    | user             | see students scheduled for a particular day                 | know my schedule for the day                |
-| `* *`    | user             | search students based on name, day of lesson, or category   | locate a student efficiently                |
-| `* *`    | user             | export my student data to a CSV file                        | back up my records or share them with others |
-| `*`      | user             | track the purchase and sale of learning materials           | manage inventory and ensure reimbursement   |
-| `*`      | user             | generate reports on each student’s progress                 | share them with parents or guardians        |
-| `*`      | user             | view a timetable for the week                               | prepare my schedule                         |
-| `*`      | new user         | receive prompts/suggestions when I type a command wrongly   | get help using the system                   |
-| `*`      | experienced user | use shortcuts/aliases for commands                          | perform common tasks faster                 |
-| `*`      | user             | group my students together if they are in the same class    | view their information easier               |
-| `*`      | user             | track whether each student has paid for the month           | collect my fees on time                     |
-| `*`      | user             | keep track of how much each student should pay for lessons  | manage fees easier                          |
-| `*`      | user             | write down miscellaneous notes for each student             | recall them before each lesson              |
-| `*`      | user             | view a summary of my income for the month                   | track my earnings                           |
-| `*`      | user             | track attendance for each student                           | see how consistent they are with lessons    |
-| `*`      | user             | track the progress of each student on their assigned pieces | monitor their improvement                   |
+| Priority | As a …​          | I want to …​                                                | So that I can…​                              |
+|--------|------------------|-------------------------------------------------------------|----------------------------------------------|
+| `* * *` | user             | cancel a particular lesson session                          | account for student availability             |
+| `* * *` | user             | schedule a make-up lesson for students who missed           | manage lesson rescheduling efficiently       |
+| `* * *` | user             | save a student’s lesson timing                              | know when I will meet them                   |
+| `* * *` | user             | save the data and retrieve them after restarting the app    | ensure my data is persistent                 |
+| `* * *` | user             | view a list of all my students                              | keep track of all my students                |
+| `* * *` | user             | delete a student when they stop taking lessons              | keep my records clean                        |
+| `* * *` | new user         | view the list of commands                                   | know what commands I can run                 |
+| `* * *` | user             | add a piano piece to a student                              | track what piece they are working on         |
+| `* * *` | user             | save a student’s address                                    | know where to travel for tutoring            |
+| `* * *` | user             | see the grade level of a student                            | tailor the lesson to their proficiency       |
+| `* * *` | user             | save a student's contact                                    | easily contact them for tutoring             |
+| `* * *` | user             | undo my last command                                        | revert the effects of a wrong command        |
+| `* * *` | user             | redo a command that I undid                                 | revert the effects of a wrong undo           |
+| `* *`  | user             | modify the details of each record                           | change particulars when needed               |
+| `* *`  | user             | sort the students by personal particulars                   | find specific records easily                 |
+| `* *`  | user             | see students scheduled for a particular day                 | know my schedule for the day                 |
+| `* *`  | user             | search students based on personal particulars               | locate a student efficiently                 |
+| `*`    | user             | export my student data to a CSV file                        | back up my records or share them with others |
+| `*`    | user             | track the purchase and sale of learning materials           | manage inventory and ensure reimbursement    |
+| `*`    | user             | generate reports on each student’s progress                 | share them with parents or guardians         |
+| `*`    | user             | view a timetable for the week                               | prepare my schedule                          |
+| `*`    | new user         | receive prompts/suggestions when I type a command wrongly   | get help using the system                    |
+| `*`    | experienced user | use shortcuts/aliases for commands                          | perform common tasks faster                  |
+| `*`    | user             | group my students together if they are in the same class    | view their information together              |
+| `*`    | user             | track whether each student has paid for the month           | collect my fees on time                      |
+| `*`    | user             | keep track of how much each student should pay for lessons  | manage fees easier                           |
+| `*`    | user             | write down miscellaneous notes for each student             | recall them before each lesson               |
+| `*`    | user             | view a summary of my income for the month                   | track my earnings                            |
+| `*`    | user             | track attendance for each student                           | see how consistent they are with lessons     |
+| `*`    | user             | track the progress of each student on their assigned pieces | monitor their improvement                    |
 
 <br>
 <br>
@@ -681,7 +681,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  **Cross-Platform Compatibility**: Should work on Windows, MacOS and Linux as long as it has Java `17` or above installed.
+1.  **Cross-Platform Compatibility**: Should work on any _Mainstream OS_ as long as it has Java `17` or above installed.
 2.  **Performance**: Should be able to hold up to 100 students without a noticeable sluggishness in performance for typical usage.
 3.  **Optimised for CLI Users**: A user with above average typing speed (50 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  **CLI Responsiveness**: Commands executed through the CLI should respond within 1 second under normal load (e.g. with 100 contacts).
