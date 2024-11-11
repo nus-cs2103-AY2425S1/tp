@@ -202,6 +202,7 @@ Format: `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​`
 - `NAME` is case-insensitive. It must be alphanumeric and allows whitespace.
 - `CLASS` must be alphanumeric.
 - `PHONE_NUMBER` must be at least 3 digits long and only contain numbers.
+- `PHONE_NUMBER` has support for `+` for the extension code.
 - `TAG` must be alphanumeric and allows whitespace. It must be within 30 characters.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -242,11 +243,18 @@ Edits an existing student in the address book.
 Format: `edit INDEX [n/NAME] [p/PHONE] [c/CLASS] [t/TAG]…​`
 
 - Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- `INDEX` refers to the index number shown in the displayed person list.
+- `NAME` is case-insensitive. It must be alphanumeric and allows whitespace.
+- `CLASS` must be alphanumeric.
+- `PHONE_NUMBER` must be at least 3 digits long and only contain numbers.
+- `PHONE_NUMBER` has support for `+` for the extension code.
+- `TAG` must be alphanumeric and allows whitespace. It must be within 30 characters.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
 - You can remove all the student’s tags by typing `t/` without
   specifying any tags after it.
+- You can add multiple `t/` to add more than one tag.
 
 ![Edit](images/Edit.png)
 
@@ -268,7 +276,7 @@ Deletes the specified student from the address book.
 Format: `delete INDEX`
 
 - Deletes the student at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- `INDEX` refers to the index number shown in the displayed person list.
 - `INDEX` **must be a positive integer** 1, 2, 3, …​
 
 ![Delete](images/Delete.png)
@@ -407,6 +415,7 @@ Format: `tag INDEX t/TAG [t/TAG]…​`
 
 - Ability to add more than one tag at once by doing another `t/TAG` after.
 - `INDEX` **must be a positive integer** 1, 2, 3, …​
+- `INDEX` refers to the index number shown in the displayed person list.
 - `TAG` must be alphanumeric and allows whitespace. It must be within 30 characters.
 - `TAG` will be converted to all lowercase characters.
 
@@ -430,6 +439,7 @@ Deletes a tag of a specified student.
 Format: `untag INDEX t/TAG [t/TAG]…​`
 
 - `INDEX` **must be a positive integer** 1, 2, 3, …​
+- `INDEX` refers to the index number shown in the displayed person list.
 - `TAG` letters must match exactly (case-insensitive)
 
 ![UnTag](images/Untag.png)
@@ -576,6 +586,17 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Help**            | `help`                                                                                                                               |
 
 ---
+
+---
+## Glossary
+
+**CLASS (placeholder)** : Is the the field for users to input student classes.
+**CLI** : Command Line Interface, where you enter commands.
+**INDEX (placeholder)** : Refers to the index number shown in the displayed person list.
+**KEYWORD (placeholder)** : Is the text we use search for a group or student.
+**NAME (placeholder)** : Is the the field for users to input student's names.
+**PHONE_NUMBER (placeholder)** : Is the the field for users to input student's phone numbers.
+**TAG (placeholder)** : Is the the field for users to input student tags.
 
 ## Acknowledgements
 
