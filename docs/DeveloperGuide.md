@@ -333,9 +333,9 @@ and provide at least one of these fields to edit:
 
 ##### Parsing User Input
 The `EditCommandParser` class parses the user input to extract the NRIC of the patient to be edited and the new details of the patient.
-It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments. 
+It first makes use of the `ArgumentTokenizer` class to ensure that the correct prefixes are present and then tokenizes all the input arguments.
 This returns an `ArgumentMultiMap` object which has extracted the NRIC of the patient to be edited and all values associated with each prefix.
-After `EditCommandParser` ensures that the extracted NRIC is not empty and valid, 
+After `EditCommandParser` ensures that the extracted NRIC is not empty and valid,
 the `ArgumentMultiMap` object is then used to ensure that there are no duplicate prefixes (except for `al` and `rmal` which are used for adding and removing allergies).
 `EditCommandParser` then calls the `createEditPatientDescriptor()` method which checks the presence of values for each prefix and parse them accordingly to populate the fields to be updated.
 This returns an `EditPatientDescriptor` object which is used to create an `EditCommand` object.
@@ -352,9 +352,9 @@ The sequence diagram below illustrates the process behind creating an `EditPatie
 ![CreateEditPatientDescriptor](images/CreateEditPatientDescriptor.png)
 
 ##### Executing the Command
-The `execute` method in `EditCommand` class first searches the system to ensure that the NRIC of the patient to edit exists in the system. 
-It then calls `createEditedPatient` method to create a new `editedPatient` object with the updated details from `editPersonDescriptor`. 
-The `editedPatient` object is checked against the system to ensure that the edited patient is not a duplicate. 
+The `execute` method in `EditCommand` class first searches the system to ensure that the NRIC of the patient to edit exists in the system.
+It then calls `createEditedPatient` method to create a new `editedPatient` object with the updated details from `editPersonDescriptor`.
+The `editedPatient` object is checked against the system to ensure that the edited patient is not a duplicate.
 It is then used to replace the patient to edit through the `setPatient` method in the `Model` component.
 
 The activity diagram below illustrates the workflow behind the execution of the `edit` command:
@@ -366,8 +366,8 @@ The activity diagram below illustrates the workflow behind the execution of the 
 Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `edit` command since both commands are fundamentally similar.
 
 **Adding prefixes to add and remove allergies**<br>
-We decided to use the `al` prefix to add allergies and `rmal` to remove allergies as this simplifies the process of updating a patient's allergies. 
-Instead of requiring the user to retype all current allergies whenever they want to edit the patient, we allow for cumulative updating of allergies. 
+We decided to use the `al` prefix to add allergies and `rmal` to remove allergies as this simplifies the process of updating a patient's allergies.
+Instead of requiring the user to retype all current allergies whenever they want to edit the patient, we allow for cumulative updating of allergies.
 This design reduces redundant data entry, minimises input errors, and aligns with the fact that allergies typically do not go away.
 
 #### Delete Command : `delete`
@@ -1061,8 +1061,8 @@ Displays appointments that matches with the specified `HealthService`.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
+1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2.  The system should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should be able to perform all of its functions without depending on external APIs.
 5.  Should start up in less than 5 seconds on an average device running any _mainstream OS_ with Java `17` or above installed.
@@ -1076,8 +1076,13 @@ Displays appointments that matches with the specified `HealthService`.
 * **API (Application Programming Interface)**: A set of rules and tools that allows one piece of software to communicate with another.
 * **Component**: A modular part of a software system that has a well-defined purpose.
 * **Command**: A specific instruction given to the system to perform an action.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Health Service**: Health screening services provided by health screening clinics.
+* **Next-of-Kin**: A contact person to be contacted in the event of an accident, illness, or decline in a patient's condition.
+* **Appointment**: A scheduled time for a patient to undergo a specified health service.
+* **Note**: Helpful information about the patient that does not fit into any of the other information categories.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1133,18 +1138,51 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a patient
 
-1. Deleting a patient while all patients are being shown
+1. Deleting a patient with a valid NRIC found in the patient list.
 
-   1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
+   * **Prerequisites:** The patient list contains a patient entry with the NRIC "T0123456A".
+   * **Test case:** `delete T0123456A`.
+   * **Expected:** The patient entry with the corresponding NRIC is deleted from the patient list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
+2. No patient with the corresponding valid NRIC found in the patient list when deleting a patient.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
+   * **Test case:** `delete S0000001X`.
+   * **Expected:** No patient is deleted. Patient not found error details shown in the status message.
+
+
+3. Keying in an invalid NRIC when deleting a patient.
+   * **Test case:** `delete T000001X`.
+   * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
+
+
+4. No NRIC keyed in when deleting a patient.
+   * **Test case:** `delete`.
+   * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
+
+
+
+### Adding a patient with all fields
+1. Adding a patient with all required and optional fields
+   * **Prerequisites:**
+     * No patients in the list
+   * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571 e|jakejake@gmail.com a|Blk 555, Clementi Avenue, S123555 b|O+ nokn|Tio Wei Hsein nokp|91874918 al|Nuts al|Shellfish rl|LOW ec|High Blood Pressure no|Patient has anger management issues`<br>
+     **Expected:** A patient with the following fields is added to the system
+     * Name: `Jake Tio`
+     * NRIC: `T0171281N`
+     * Sex: `M`
+     * Date-of-Birth: `2001-10-27`
+     * Phone Number: `98178571`
+     * Email: `jakejake@gmail.com`
+     * Address: `Blk 555, Clementi Avenue, S123555`
+     * Blood Type: `O+`
+     * Next-of-Kin Name: `Tio Wei Hsein`
+     * Next-of-Kin Phone: `91874918`
+     * Allergies: `Nuts` & `Shellfish`
+     * Health Condition: `LOW`
+     * Existing Condition: `High Blood Pressure`
+     * Note: `Patient has anger management issues`
 
 
 ### Adding Patient: `add`
@@ -1178,6 +1216,40 @@ command: `add`
 ### Filtering Appointments: `Filter`
 command: `filter`
 
+2. Adding a patient with only the required fields
+    * **Prerequisites:**
+        * No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571`<br>
+      **Expected:** A patient with the following fields is added to the system
+        * Name: `Jake Tio`
+        * NRIC: `T0171281N`
+        * Sex: `M`
+        * Date-of-Birth: `2001-10-27`
+        * Phone Number: `98178571`
+
+
+3. Adding a patient with all the required fields and 1 optional field
+    * **Prerequisites:**
+        * No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571 e|jakejake@gmail.com`<br>
+      **Expected:** A patient with the following fields is added to the system
+        * Name: `Jake Tio`
+        * NRIC: `T0171281N`
+        * Sex: `M`
+        * Date-of-Birth: `2001-10-27`
+        * Phone Number: `98178571`
+        * Email: `jakejake@gmail.com`
+
+
+4. Adding a patient with missing required fields
+    * **Prerequisites:**
+        * No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27`<br>
+      **Expected:** An error is shown stating `Invalid commmand format`
+
+### Filtering Appointments: `Filter`
+command: `filter`
+
 
 1. Filtering appointments with all valid fields
 
@@ -1194,8 +1266,3 @@ command: `filter`
 
     * **Test case (invalid end date):** `filter ed|2027/10-10`
         * **Expected:** An error message saying that the date entered is invalid and should follow the format of YYYY-MM-DD.
-
-
-
-
-
