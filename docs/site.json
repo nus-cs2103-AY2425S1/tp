@@ -1,7 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "UniLink",
-  "faviconPath": "images/SeEduLogo.png",
+  "titleSuffix": "",
+  "faviconPath": "images/UniLink-Logo.png",
   "style": {
     "codeTheme": "light"
   },
