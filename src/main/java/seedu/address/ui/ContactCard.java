@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -63,8 +62,7 @@ public class ContactCard extends UiPart<Region> {
         telegramHandle.setText(telegramPrelabel + contact.getTelegramHandle().value);
         studentStatus.setText(contact.getStudentStatus().value);
         email.setText(contact.getEmail().value);
-        contact.getRoles().stream()
-                .sorted(Comparator.comparing(role -> role.getRoleIndex()))
+        contact.getRoles()
                 .forEach(role -> roles.getChildren().add(getRoleLabel(role)));
         String nicknameObtained = contact.getNickname().value;
         Label nicknameLabel = null;
