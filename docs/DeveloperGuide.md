@@ -95,7 +95,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<b>Note:</b> The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
@@ -128,7 +128,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<b>Note:</b> An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelLessonDiagram.puml" width="450" />
 
@@ -184,10 +184,10 @@ Step 3. The user executes `add n/David …​` to add a new student. The `add` c
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<b>Note:</b> If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 </box>
 
-<div markdown="span" lesson="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitEdulog()`, so the edulog state will not be saved into the `eduLogStateList`.
+<div markdown="span" lesson="alert alert-info">:information_source: <b>Note:</b> If a command fails its execution, it will not call `Model#commitEdulog()`, so the edulog state will not be saved into the `eduLogStateList`.
 
 </div>
 
@@ -196,7 +196,7 @@ Step 4. The user now decides that adding the student was a mistake, and decides 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<b>Note:</b> If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -207,7 +207,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<b>Note:</b> The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
@@ -217,7 +217,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <box type="info" seamless>
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<b>Note:</b> If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
@@ -671,8 +671,8 @@ Use case ends.
 Given below are instructions to test the app manually.
 
 <box type="info" seamless>
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+<b>Note:</b> These instructions only provide a starting point for testers to work on;
+testers are expected to do more <b>exploratory</b> testing.
 
 </box>
 
