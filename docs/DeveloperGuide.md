@@ -157,7 +157,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Clear Command : `clear`
 
-#### Exit Command : `Exit`
+#### Exit Command : `exit`
 
 ### Patient Management Features
 
@@ -198,8 +198,7 @@ In this example, it takes an `addf` command: `execute(addf n|Abraham Tan i|S9758
 
 ![AddFSequenceDiagram](images/AddFSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddFCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddFCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddFCommandParser</code>,<code>ArgumentMultiMap</code> and <code>AddFCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
 The parsing of the fields is as follows:
 ![AddFParseFieldsSequenceDiagram](images/AddFParseFieldsSequenceDiagram.png)
 
