@@ -483,9 +483,12 @@ Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view weddings
 ### **Use case: UC03 — List all Tasks**
 Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view tasks instead of contacts.
 
+### **Use case: UC04 — List all Tags**
+Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view tags instead of contacts.
+
 ---
 
-### **Use case: UC04 — Create a Contact**
+### **Use case: UC05 — Create a Contact**
 
 **MSS**
 
@@ -504,13 +507,16 @@ Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view tasks in
 
       Use case ends.
 
-### **Use case: UC05 — Create a Wedding**
+### **Use case: UC06 — Create a Wedding**
 Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a wedding to WedLinker instead of a Contact
 
-### **Use case: UC06 — Create a Task**
+### **Use case: UC07 — Create a Task**
 Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a task to WedLinker instead of a Contact
 
-### **Use case: UC07 — Add Phone Number to Contact**
+### **Use case: UC08 — Create a Tag**
+Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a tag to WedLinker instead of a Contact
+
+### **Use case: UC09 — Add Phone Number to Contact**
 
 **Guarantees:**
 * No duplicate phone numbers will be stored in two different contacts.
@@ -534,15 +540,15 @@ Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a task to 
 
       Use case resumes at step 1.
 
-### **Use case: UC08 — Add Address to Contact** 
+### **Use case: UC10 — Add Address to Contact** 
 Similar to [<ins>UC07](#use-case-uc07-add-phone-number-to-contact) except duplicated addresses are allowed
 
-### **Use case: UC09 — Add Email to Contact**
+### **Use case: UC11 — Add Email to Contact**
 Similar to [<ins>UC07](#use-case-uc07-add-phone-number-to-contact) except duplicated email addresses are allowed
 
 ---
 
-### **Use case: UC10 — Search for Contacts by Name**
+### **Use case: UC12 — Search for Contacts by Name**
 
 **MSS**
 
@@ -551,32 +557,32 @@ Similar to [<ins>UC07](#use-case-uc07-add-phone-number-to-contact) except duplic
 
     Use case ends.
 
-### **Use case: UC11 — Search for Contacts by Tag**
+### **Use case: UC13 — Search for Contacts by Tag**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by tag.
 
-### **Use case: UC12 — Search for Contacts by Wedding**
+### **Use case: UC14 — Search for Contacts by Wedding**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by wedding.
 
-### **Use case: UC13 — Search for Contacts by Phone Number**
+### **Use case: UC15 — Search for Contacts by Phone Number**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by phone number.
 
-### **Use case: UC14 — Search for Contacts by Address**
+### **Use case: UC16 — Search for Contacts by Address**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by address.
 
-### **Use case: UC15 — Search for Contacts by Email Address**
+### **Use case: UC17 — Search for Contacts by Email Address**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by email address.
 
 ---
 
-### **Use case: UC16 — Search for Wedding by Wedding Name**
+### **Use case: UC18 — Search for Wedding by Wedding Name**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for wedding by wedding name.
 
-### **Use case: UC17 — Search for Task by Task Name**
+### **Use case: UC19 — Search for Task by Task Name**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for task by task name.
 
 ---
 
-### **Use case: UC18 — Delete Contact**
+### **Use case: UC20 — Delete Contact**
 
 **MSS**
 
@@ -595,13 +601,13 @@ Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except search
     * 2a1. System shows an error message prompting the user to delete a valid contact.
       Use case resumes at step 1.
 
-### **Use case: UC19 — Delete Wedding**
+### **Use case: UC21 — Delete Wedding**
 Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting wedding.
 
-### **Use case: UC20 — Delete Task**
+### **Use case: UC22 — Delete Task**
 Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting task.
 
-### **Use case: UC21 — Delete Tag**
+### **Use case: UC23 — Delete Tag**
 Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting tag.
 
 ---
@@ -641,6 +647,26 @@ Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting tag.
 
 ### **Use case: UCSH02 — Edit details for a Wedding**
 Similar to [<ins>USCH01](#use-case-ucsh01-edit-details-for-a-contact) except editing for wedding.
+
+### **Use case: UCSH03 — Mark task(s) as completed**
+
+**MSS**
+
+1. User <ins>lists all tasks (UC03)</ins>.
+2. User requests to mark specified task(s) as completed.
+3. AddressBook displays the updated task status of the specified task(s) in the list of tasks.
+
+**Extensions**
+* 1a. The list is empty.
+  Use case ends.
+
+* 2a. The given index is invalid.
+    * 2a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 1.
+    * 
+### **Use case: UCSH04 — Mark task(s) as incomplete**
+Similar to [<ins>USCH03](#use-case-ucsh03-mark-tasks-as-completed) except editing for wedding.
 
 ### **Use case: UCSH03 — Clear all contacts**
 
