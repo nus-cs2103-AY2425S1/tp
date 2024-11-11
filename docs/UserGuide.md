@@ -746,11 +746,11 @@ Date: 09-10-24 (From: 10:00 To: 12:00)
 > 
 > **User Error #3**: No index found / Invalid type / Negative integer
 >
-> **Input #a**: `apt -1`
+> **Input #a**: `apt d/20-10-24 fr/0800 to/1000` 
 >
 > **Input #b**: `apt aa`
 > 
-> **Input #c**: `apt d/20-10-24 fr/0800 to/1000`
+> **Input #c**: `apt -1`
 >
 > **Output**: <br>
 Invalid command format! <br>
