@@ -541,17 +541,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Find a restaurant by its saved name
 
-  1. Prerequisites: The requested restaurant has to be currently saved.<br>
-The first test case below assumes the user has not added any more restaurants with the name Swenswen.
+   1. Prerequisites: The requested restaurant has to be currently saved.<br>
+   The first test case below assumes the user has not added any more restaurants with the name Swenswen.
 
-  1. Test case: `find swenswen`<br>
-     Expected: 1 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+   1. Test case: `find swenswen`<br>
+      Expected: 1 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
-  1. Test case: `find !@#`<br>
-     Expected: Message displays no restaurants found.
+   1. Test case: `find !@#`<br>
+      Expected: Message displays no restaurants found.
 
-  1. Other incorrect find commands to try: `find`<br>
-     Expected: Invalid command format!. Description, parameters and an example of the right use of the `find` command is shown.
+   1. Other incorrect find commands to try: `find`<br>
+      Expected: Invalid command format!. Description, parameters and an example of the right use of the `find` command is shown.
 
 
 
@@ -559,35 +559,83 @@ The first test case below assumes the user has not added any more restaurants wi
 
 1. Find a restaurant by its tag names
 
-1. Prerequisites: The requested restaurant has to be currently saved.<br>
-The first test case below assumes the user has not added any more restaurants with the tag halal.
+   1. Prerequisites: The requested restaurant has to be currently saved.<br>
+   The first test case below assumes the user has not added any more restaurants with the tag halal.
 
-1. Test case: `tags halal`<br>
-   Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+   1. Test case: `tags halal`<br>
+      Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
 
-1. Test case: `tags $$$`<br>
-   Expected: Message displays no restaurants found.
+   1. Test case: `tags $$$`<br>
+      Expected: Message displays no restaurants found.
 
-1. Other incorrect find commands to try: `tags`<br>
-   Expected: Invalid command format!. Description, parameters and an example of the right use of the `tags` command is shown.
+   1. Other incorrect find commands to try: `tags`<br>
+      Expected: Invalid command format!. Description, parameters and an example of the right use of the `tags` command is shown.
 
 
 ### Filtering by price
 
 1. Find a restaurant by its price labels
 
+   1. Prerequisites: The requested restaurant has to be currently saved.<br>
+      The first test case below assumes the user has not added any more restaurants with the price label of `$`.
+
+   1. Test case: `tags $`<br>
+      Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+
+   1. Test case: `price expensive`<br>
+      Expected: Message displays no restaurants found. 
+
+   1. Other incorrect find commands to try: `price`<br>
+      Expected: Invalid command format!. Description, parameters and an example of the right use of the `price` command is shown.
+
+
+### Rating a restaurant
+
+1. Rating a restaurant while all restaurants are being shown
+
 1. Prerequisites: The requested restaurant has to be currently saved.<br>
-   The first test case below assumes the user has not added any more restaurants with the price label of `$`.
 
-1. Test case: `tags $`<br>
-   Expected: 3 restaurant listed!. Details of the restaurant message is shown on the right hand side.
+    1. Test case: `rate 1 r/2`<br>
+       Expected: First contact is given a rating of `2` from the list. Left hand side displays updated rating for the restaurant.
 
-1. Test case: `price expensive`<br>
-   Expected: Message displays no restaurants found. 
+    1. Test case: `rate 0`<br>
+       Expected: No restaurant is rated. Error details shown in the status message. Status bar remains the same.
 
-1. Other incorrect find commands to try: `price`<br>
-   Expected: Invalid command format!. Description, parameters and an example of the right use of the `price` command is shown.
+    1. Other incorrect delete commands to try: `rate`<br>
+       Expected: Similar to previous.
 
+
+### Favourite a restaurant
+
+1. Favourite a restaurant while all restaurants are being shown
+
+1. Prerequisites: The requested restaurant has to be currently saved.<br>
+
+    1. Test case: `fav 2`<br>
+       Expected: Second contact has its border highlighted orange and brought to the top of the list as the first index.
+
+    1. Test case: `fav 0`<br>
+       Expected: No restaurant is turned to favourite. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `fav`<br>
+       Expected: Similar to previous.
+
+
+### Un-favourite a restaurant
+
+1. Un-favourite a restaurant while all restaurants are being shown
+
+1. Prerequisites: The requested restaurant has to be currently saved and is a favourite restaurant as shown above in the previous test.<br>
+    In the test case below, we assume that the first restaurant in the list is a favourite as described by the previous test case mentioned above.
+
+    1. Test case: `unfav 1`<br>
+       Expected: First contact has its border un-highlighted and brought back to its original index in the list before being set as a favourite.
+
+    1. Test case: `unfav 0`<br>
+       Expected: No favourite restaurant is turned back to normal. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `unfav`<br>
+       Expected: Similar to previous.
 
 
 
