@@ -1137,28 +1137,24 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a patient
 
 1. Deleting a patient with a valid NRIC found in the patient list.
-
    * **Prerequisites:** The patient list contains a patient entry with the NRIC "T0123456A".
-   * **Test case:** `delete T0123456A`.
+   * **Test case:** `delete T0123456A`<br>
    * **Expected:** The patient entry with the corresponding NRIC is deleted from the patient list. Details of the deleted contact shown in the status message.
 
 
 2. No patient with the corresponding valid NRIC found in the patient list when deleting a patient.
-
    * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
-   * **Test case:** `delete S0000001X`.
+   * **Test case:** `delete S0000001X`<br>
    * **Expected:** No patient is deleted. Patient not found error details shown in the status message.
 
 
 3. Keying in an invalid NRIC when deleting a patient.
-
-   * **Test case:** `delete T000001X`.
+   * **Test case:** `delete T000001X`<br>
    * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
 
 
 4. No NRIC keyed in when deleting a patient.
-
-   * **Test case:** `delete`.
+   * **Test case:** `delete`<br>
    * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
 
 
@@ -1220,26 +1216,22 @@ testers are expected to do more *exploratory* testing.
 ### Viewing detailed information on a patient
 
 1. Viewing detailed information on a patient with a valid NRIC found in the patient list.
-
    * **Prerequisites:** The patient list contains a patient entry with the NRIC "T0123456A".
-   * **Test case:** `view T0123456A`.
-   * **Expected:** Detailed information on the patient entry with the corresponding NRIC is shown. Command success message shown in the status message.
+   * **Test case:** `view T0123456A`<br>
+     **Expected:** Detailed information on the patient entry with the corresponding NRIC is shown. Command success message shown in the status message.
 
 
 2. No patient with the corresponding valid NRIC found in the patient list when viewing detailed information on a patient.
-
    * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
-   * **Test case:** `view S0000001X`.
-   * **Expected:** Detailed information is not shown. Patient not found error details shown in the status message.
+   * **Test case:** `view S0000001X`<br>
+     **Expected:** Detailed information is not shown. Patient not found error details shown in the status message.
 
 
 3. Keying in an invalid NRIC when viewing detailed information on a patient.
-
-   * **Test case:** `view T000001X`.
-   * **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
+   * **Test case:** `view T000001X`<br>
+     **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
 
 
 4. No NRIC keyed in when viewing detailed information on a patient.
-
-   * **Test case:** `view`.
-   * **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
+   * **Test case:** `view`<br>
+     **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
