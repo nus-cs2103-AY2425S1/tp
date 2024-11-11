@@ -1,6 +1,10 @@
 package seedu.eventfulnus.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_PARTICIPANT;
+import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_SPORT;
+import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_TEAM;
+import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import seedu.eventfulnus.logic.Messages;
 import seedu.eventfulnus.logic.commands.exceptions.CommandException;
@@ -17,7 +21,17 @@ public class AddEventCommand extends Command {
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
     public static final Object MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
             + "Parameters: "
-            + "VALUE";
+            + PREFIX_SPORT + "SPORT "
+            + PREFIX_TEAM + "TEAM1 "
+            + PREFIX_TEAM + "TEAM2 "
+            + PREFIX_VENUE + "VENUE "
+            + "[" + PREFIX_PARTICIPANT + "PARTICIPANT]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_SPORT + "Chess "
+            + PREFIX_TEAM + "COM "
+            + PREFIX_TEAM + "FASS "
+            + PREFIX_VENUE + "Stadium "
+            + PREFIX_PARTICIPANT + "Alice ";
 
     private final Event toAdd;
 
