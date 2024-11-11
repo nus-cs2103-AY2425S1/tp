@@ -335,7 +335,7 @@ for list of valid tags:
 
 ## Context Menu Options
 
-Context menu options allow users to perform typical text actions, which are available in the command box and feedback box.
+Context menu options allow users to perform typical text actions, which are available in the command box and feedback box. To see the context menu options, click right on the command box or feedback box.
 
 <box type="info" seamless>
 
