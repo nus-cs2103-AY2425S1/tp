@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG`
+Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK]`
 
 <box type="tip" seamless>
 
@@ -102,13 +102,11 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010 t/N`
 * `add n/Betsy Crowe t/BP e/betsycrowe@example.com j/AB1301 p/1234567`
 
-### Listing persons based on attribute : `list`
+### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book. `list` does not take in any parameters.
 
-Format:
-
-`list`
+Format: `list`
 
 
 
@@ -116,12 +114,12 @@ Format:
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be updated.
 * Existing values will be updated to the input values.
-* You can use the `edit` command to reapply the same values to a person without making any changes.
+  * You can use the `edit` command to reapply the same values to a person without making any changes.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -140,8 +138,9 @@ Format:
 Examples:
 * `find n/alex yeoh` returns `Alex Yeoh`, `Alex Yeoh Bin Sheng`, and `Dalex Yeohanes`
 * `find t/TP` returns the list of contacts with `TP` tag <br>
-  <img src="images/findTp.png" alt="result for 'findTp'" width="400"/>
-
+    <p align="center">
+        <img src="images/findTp.png" alt="result for 'findTp'" width="300"/>
+    </p>
 * `find n/alex yeoh t/TP` return the list of contacts with name containing `alex yeoh` whose tag is `TP`
 
 ### Deleting a person : `delete`
