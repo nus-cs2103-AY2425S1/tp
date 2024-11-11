@@ -22,7 +22,9 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient identified by either the index number used in the displayed person list or"
             + " the Identity Number.\n"
-            + "Parameters: INDEX(must be a positive integer) or i/NRIC (must be 9 characters)\n"
+            + "Parameters: INDEX(must be a positive integer) or i/NRIC (NRIC must be 9 characters long, "
+            + "starting with 'S', 'T', 'F', or 'G', followed by 7 digits and ending with a checksum letter "
+            + "(e.g., S1234567D))\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " " + PREFIX_IDENTITY_NUMBER + "S1234567A";
 
     public static final String MESSAGE_INDEX_AND_IDENTITY_NUMBER = "Please provide either an index "
