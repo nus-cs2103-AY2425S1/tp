@@ -262,10 +262,12 @@ The `CombinedPredicate` is applied to each client in AgentAssist, evaluating whe
 
 ## Planned enhancements
 
+Team Size: 5
+
 ### 1. Multi-Language Support
 **Current Issue:** Non-English text input can cause visual bugs, including reversed text display.
 
-**Proposed Solution:** Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
+**Proposed Enhancement:** Replace the default system font with a universal font that supports multiple languages. See [this reference](https://stackoverflow.com/questions/42854957/javafx-strange-space-characters-in-arabic) for implementation details.
 
 ### 2. Support for Forward Slash in Names
 **Current Issue:** Names containing forward slashes (e.g., `Ramesh s/o Ravichandran`) are incompatible with `add`, `edit`, and `filter` commands due to two problems:
@@ -713,7 +715,6 @@ testers are expected to do more *exploratory* testing.
 ### Editing a client
 
 1. Editing a client while all clients are being shown
-
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
     2. Test case: `edit 1 n/ <NAME>`<br>
          Expected: The name of the client in index 1 will be changed to <NAME>.
@@ -732,6 +733,41 @@ testers are expected to do more *exploratory* testing.
 2. Editing a client after having filtered based on a criteria
     1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
     2. Functions similar to above example except that the indexes to be used are based on the new list shown.
+
+### Filter for clients
+1. Filtering for a client based on a criteria
+   1. Test case: `filter n/ <NAME>`<br>
+      Expected: The list will display all clients with names that include <NAME>.
+   2. Test case: `filter n/ <NAME> p/ <PHONE>`<br>
+      Expected: The list will display all clients with names that include <NAME> and phones that match <PHONE>.
+   3. Test case: `filter i/ =<INCOME>`<br>
+      Expected: The list will display all clients with incomes that match <INCOME>.
+   4. Other correct filter commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
+      Expected: Similar to previous.
+   5. Test case: `filter i/ x<INCOME>` (where x is an invalid income operator)<br>
+      Expected: An error message is shown to the user. Error details shown in the status message.
+   6. Other incorrect filter commands to try:<br>
+      `filter f/<INVALID_VALUE>` (where f is a valid flag),<br>
+      `edit 1 y/<VALUE>` (where y is an invalid flag) <br>
+      Expected: Similar to previous.
+
+### Viewing a client
+1. Viewing a client while all clients are being shown
+    1. Prerequisites: List all clients using the `list` command. At least one client in the list.
+    2. Test case: `view 1`<br>
+       Expected: The detailed view of the client in index 1 will be shown.
+   3. Test case: `view 0 n/ <NAME>`<br>
+       Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
+
+2. Viewing a client after having filtered based on a criteria
+    1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
+    2. Functions similar to above example except that the indexes to be used are based on the new list shown.
+
+### Closing the detailed view of a client
+1. Closing the view of the currently viewed client
+   1. Prerequisites: The detailed view of a client is currently open.
+   2. Test case: `close`<br>
+      Expected: The detailed view closes.
 
 ### Saving data
 
