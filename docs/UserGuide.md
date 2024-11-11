@@ -74,7 +74,7 @@ Please ensure that you have the following:
    Some example commands you can try:
 
    * `list` : Lists all contacts.
-   * `addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend t/colleague` : Adds a student named James Ho in GOATS.
+   * `addstudent n/James Ho p/91715131 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend` : Adds a student named James Ho in GOATS.
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    * `clear` : Deletes all contacts.
    * `exit` : Exits the app.
