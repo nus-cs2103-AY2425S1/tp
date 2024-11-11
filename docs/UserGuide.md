@@ -661,7 +661,6 @@ Opens a window with detailed information of a specified student.
 
 Displaying the detailed information window can be done in two ways:
 
-<div style="page-break-after: always;"></div>
 
 #### Method 1:
 **Example Usage:**
@@ -670,7 +669,7 @@ Displaying the detailed information window can be done in two ways:
   <!-- Input Section -->
   <div style="width: 45%; margin-bottom: 20px; margin-top: -10px;">
     <p><b>Input:</b> User enters the `info 1` command to display detailed information for the first student.</p>
-    <img src="images/infocommand1.png" alt="Info Command Input 1" style="width: 100%;" />
+    <img src="images/infocommand1.png" alt="Info Command Input 1" style="width: 90%;" />
   </div>
 
   <!-- Output Section -->
@@ -680,6 +679,7 @@ Displaying the detailed information window can be done in two ways:
   </div>
 
 </div>
+
 
 
 
