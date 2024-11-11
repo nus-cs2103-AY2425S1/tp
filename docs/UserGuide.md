@@ -122,7 +122,8 @@ E.g. `help`: `<Command>`
 
 ### Adding a person : `add`
 
-Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks.
+Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks. Note that
+although multiple birthdays and remarks may be entered, only the last (most up to date one) will be recorded.
 
 **Command Format:**  
 `add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>]…​ [t/<Tag>]…​`
@@ -177,7 +178,8 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the address book. Note that although multiple birthdays and remarks may be entered,
+only the last (most up to date one) will be recorded.
 
 **Command Format:**  
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]…​`
@@ -391,7 +393,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ### Store Birthday of a Contact: `birthday`
 
-Stores a contact’s birthday
+Stores a contact’s birthday. Note that although multiple birthdays may be entered,
+only the last (most up to date one) will be recorded.
 
 **Command Format:**  
 `birthday INDEX b/<Birthday Date>`
