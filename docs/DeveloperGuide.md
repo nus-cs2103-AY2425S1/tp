@@ -585,3 +585,6 @@ testers are expected to do more *exploratory* testing.
 
 ### Area Code For Phone Numbers
    - Support area codes in phone numbers (e.g. +6598765432)
+
+### No Numbers In Name 
+   - Prevent user from entering any numbers in the name field (e.g. n/John 11234)
