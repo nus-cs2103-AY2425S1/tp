@@ -24,7 +24,7 @@ public class DeleteAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the patient identified by their NRIC or Index used in the patient list.\n"
             + "Parameters: NRIC (must be a valid NRIC), Date(dd-MM-yyyy), 24h time(HH:mm)\n"
-            + "Example: " + COMMAND_WORD + " s1234567z 01-01-2024 12:12 OR \n"
+            + "Example: " + COMMAND_WORD + " s1234567z 01-01-2024 12:12 \n"
             + "Parameters: Index (must be a valid Index in the list), Date(dd-MM-yyyy), 24h time(HH:mm)\n"
             + "Example: " + COMMAND_WORD + " 1 01-01-2024 12:12";
 
