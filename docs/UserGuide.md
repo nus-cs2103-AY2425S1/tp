@@ -403,7 +403,7 @@ This command will help you add a new guest to the bottom of the existing overall
 
 Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
 
-<img src="images/addGuestCommand.png" alt="add guest_command" width="850" height="600">
+<img src="images/addGuestCommand.png" alt="add guest_command" width="800" height="550">
 
 [_Back to Top_](#table-of-contents)
 
@@ -435,7 +435,7 @@ This command will allow you to edit the details of the guest identified by the `
 
 Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
-<img src="images/editGuestCommand.png" alt="add guest_command" width="850" height="600">
+<img src="images/editGuestCommand.png" alt="add guest_command" width="800" height="550">
 
 [_Back to Top_](#table-of-contents)
 
@@ -488,7 +488,7 @@ This command will help you add a new vendor to the bottom of the existing overal
 
 Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
 
-<img src="images/addVendorCommand.png" alt="add guest_command" width="850" height="600">
+<img src="images/addVendorCommand.png" alt="add guest_command" width="800" height="550">
 
 [_Back to Top_](#table-of-contents)
 
@@ -520,7 +520,7 @@ This command will allow you to edit the details of the vendor identified by the 
 
 Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
 
-<img src="images/editGuestCommand.png" alt="add guest_command" width="850" height="600">
+<img src="images/editGuestCommand.png" alt="add guest_command" width="800" height="550">
 
 [_Back to Top_](#table-of-contents)
 
