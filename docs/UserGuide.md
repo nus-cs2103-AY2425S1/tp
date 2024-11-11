@@ -32,6 +32,11 @@ Here are some symbols you may encounter in this user guide:
  This contains additional useful information
 </div>
 
+
+<div markdown="span" class="alert alert-info">:information_source: **Information:**  
+This contains some additional information
+</div>
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This contains some important information that you should take note of
 </div>
@@ -165,8 +170,12 @@ Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GR
 Need to delete a field? If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
 </div>
 
-<div markdown="span" class="alert alert-warning">:warning: **Warning:**  
-Note that you are unable to edit comments via the `edit` command
+<div markdown="span" class="alert alert-info">:information_source: **Information:**  
+Note that you are unable to edit comments via the `edit` command.
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source: **Information:**  
+There should be no additional arguments between the INDEX and the first prefix (e.g n/)
 </div>
 
 Continuing from the previous example in `add`, you could try this:

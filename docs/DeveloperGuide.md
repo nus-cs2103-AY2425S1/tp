@@ -577,7 +577,7 @@ Preconditions: Installed the application
 
       Use case ends.
 
-**Use Case: UC10 - Show Groups**
+**Use Case: UC11 - Show Groups**
 
 **MSS:**
 
@@ -607,7 +607,7 @@ Preconditions: Installed the application
 
       Use case ends.
 
-**Use Case: UC11 - Edit a Student**
+**Use Case: UC12 - Edit a Student**
 
 **MSS:**
 
