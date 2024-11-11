@@ -779,8 +779,8 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **Buying Price**: The price in which the buyer is willing to buy the property.
 * **Actual Price**: The price for which the property is actually bought or sold.
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
-* **L Order**: A sorting method where elements are arranged in ascending order, from the smallest to the largest value.
-* **H Order**: A sorting method where elements are arranged in descending order, from the largest to the smallest value.
+* **L Order**: A sorting method where elements are arranged in ascending order, from the lowest to the highest value.
+* **H Order**: A sorting method where elements are arranged in descending order, from the highest to the lowest value.
 
 ### Planned Enhancements
 
