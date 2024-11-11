@@ -67,6 +67,14 @@ $alert-bg-level:                    -10 !default;
 $alert-border-level:                -9 !default;
 $alert-color-level:                 6 !default;
 
+// Define keyboard button colors, border radius, and padding.
+// Inspired by [Bootstrap CSS](https://getbootstrap.com)
+$kbd-border-radius:                 $border-radius !default;
+$kbd-padding-y:                     .1875rem !default;
+$kbd-padding-x:                     .375rem !default;
+$kbd-color:                         $body-bg !default;
+$kbd-bg:                            $body-color !default;
+
 // Request a color level
 // scss-docs-start color-level
 @function color-level($color: $primary, $level: 0) {

@@ -11,6 +11,8 @@ PROperty is useful for property agents because it saves their time by allowing e
 and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It is much
 simpler to use while being even more functional than alternatives on the market.
 
+<div class="page-break"></div>
+
 ## Table of Contents
 * [User Guide Essentials](#user-guide-essentials)
     * [Icon Legend](#icon-legend)
@@ -47,6 +49,8 @@ simpler to use while being even more functional than alternatives on the market.
     * [Client Tags](#client-tags)
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
+
 ## User Guide Essentials
 
 ### Icon Legend
@@ -79,6 +83,7 @@ This section outlines the topics covered in each part of the guide, helping you 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## Quick Start
 
@@ -115,8 +120,8 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
    - Copy the downloaded `PROperty.jar` file into this folder.
 3. Start PROperty:
    - Open your computer's terminal in the folder where PROperty is by either:
-     - **For Windows:** `Shift + Right-Click` in the folder where PROperty is and clicking on "Open PowerShell Window Here".
-     - **For Mac:** `Control + Click` on the folder where PROperty is and clicking on "New Terminal at Folder".
+     - **For Windows:** <kbd>Shift</kbd> + <kbd>Right-Click</kbd> in the folder where PROperty is and clicking on "Open PowerShell Window Here".
+     - **For Mac:** <kbd>Control</kbd> + <kbd>Left-Click</kbd> on the folder where PROperty is and clicking on "New Terminal at Folder".
    - Type `java -jar PROperty.jar` into your computer's terminal and press "Enter".
    
      ![Annotated_Ui](images/user-guide-images/Annotated_Ui.png)
@@ -145,7 +150,9 @@ Some example commands you can try are:
 * `listing add 2 t/HDB a/Adam street, block 456, #03-03` : Adds a listing for the client with index 2 in PROperty.
 
 <div markdown="block" class="alert alert-primary">
-:bulb: Recommended Window Size<br> For the best experience, use PROperty at full screen on your PC.
+:bulb: Recommended Window Size
+
+For the best experience, use PROperty at full screen on your PC.
 </div>
 
 Refer to the [Features](#features) below for details of each command.
@@ -157,6 +164,7 @@ Refer to the [Features](#features) below for details of each command.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## Features
 
@@ -679,6 +687,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## FAQ
 
@@ -717,6 +726,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## Command Summary
 
@@ -760,6 +770,7 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ## Glossary
 
