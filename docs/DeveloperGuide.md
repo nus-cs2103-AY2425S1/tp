@@ -1098,7 +1098,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addEcNumber 1 ep/`<br>
        Expected: First student will have his emergency contact number deleted. Name of student with the emergency contact number deleted will be shown in the status message.
     
-    4. Test case: `addEcNumber 1 ep/123`<br>
+    4. Test case: `addEcNumber 1 ep/123 456`<br>
        Expected: No emergency contact number is changed. Error details shown in the status message.
 
     5. Other incorrect addEcNumber commands to try:<br> 
