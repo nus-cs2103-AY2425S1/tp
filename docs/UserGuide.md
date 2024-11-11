@@ -349,7 +349,7 @@ Some initial commands to try:
 * `add n/ Jane Doe p/ 87654321 e/ jane@example.com a/ 123 Jane Road j/ doctor i/ 120000`: Adds Jane Doe to your database with detailed contact information, job title, and income.
 
 **Editing a Client's Information**
-* `edit 1 p/ 12345678`: Updates the phone number of the first client in your list to `12345678`.
+* `edit 1 p/ 92345678`: Updates the phone number of the first client in your list to `92345678`.
 * `edit 4 rn/ Updated remark(s) here`: Replaces the remark(s) of the fourth client with "Updated remark(s) here".
 
 **Removing a Client**

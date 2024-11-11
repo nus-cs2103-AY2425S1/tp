@@ -312,9 +312,7 @@ These requirements can be restrictive for agents who may prefer more flexible fi
 **Status:** Scheduled for future release due to current timeline priorities.
 
 ### 7. Prevent Duplicate Client Entries by Standardizing Name Formatting
-**Current issue:** Client names are currently considered distinct if they contain minor differences in whitespace (e.g., `John Doe` vs. `John  Doe`). This can lead to duplicate entries due to minor typos when using the `add` or `edit` commands.
-
-This can result in duplication of clients when using the `add` or `edit` command due to typos.
+**Current issue:** Duplicate client entries can occur when minor differences in whitespace are present in names due to user input errors (e.g., `John Doe` vs. `John   Doe`). These variations, often caused by unintentional typos when using the `add` or `edit` commands, are currently treated as distinct entries.
 
 **Proposed Enhancement:** Standardize client names by trimming excess whitespace from each part of the name before storing and comparing entries. This ensures that variations in spacing do not create duplicates.
 
