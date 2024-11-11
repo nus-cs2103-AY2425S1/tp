@@ -23,8 +23,8 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof PhoneContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((PhoneContainsKeywordsPredicate) other).keywords)); // state check
+        return other == this
+                || (other instanceof PhoneContainsKeywordsPredicate
+                && keywords.equals(((PhoneContainsKeywordsPredicate) other).keywords));
     }
 }
