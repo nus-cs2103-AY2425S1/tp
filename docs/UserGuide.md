@@ -546,7 +546,7 @@ Listed all persons under category: CATEGORY
 Adds additional specified tag(s) to the specified contact or all contacts in the list provided no duplicate tags(s) are found in all contacts without overwriting existing tags.
 
 **Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`<br>
-Tagging operation applies to specified contact in the list
+Tagging operation applies to specified contact in the list.
 
 **Expected message**:
 
@@ -809,7 +809,7 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 **Navigation Box** <br>
 [Back to Top](#why-choose-adminus) <br>
-[Back to Table of Content](#table-of-contents) <br>
+[Back to Table of Contents](#table-of-contents) <br>
 [Back to Basic commands](#basic-commands)<br>
 [Back to Contact management](#contact-management)<br>
 [Back to Advanced commands](#advanced-commands)<br>
@@ -864,24 +864,24 @@ A: You can use the `delete INDEX [MORE_INDEX]…​` command to delete multiple 
 
 ## Command summary
 
-| **Action**                      | **Format**                                                                                              | **Example**                                                                                                             |
-|---------------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **Viewing help**                | `help`                                                                                                  | `help`                                                                                                                  |
-| **Link to the user guide**      | `helpwindow`                                                                                            | `helpwindow`                                                                                                            |
-| **Listing all contacts**        | `list`                                                                                                  | `list`                                                                                                                  |
-| **Viewing a contact**           | `view INDEX`                                                                                            | `view 1`                                                                                                                |
-| **Clearing all entries**        | `clear`                                                                                                 | `clear`                                                                                                                 |
-| **Exiting the program**         | `exit`                                                                                                  | `exit`                                                                                                                  |
-| **Adding a student**            | `student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`      |
-| **Adding a company**            | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                   | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison t/facility`        |
-| **Editing a contact**           | `edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`      | `edit 2 n/James Lee e/jameslee@example.com`                                                                             |
-| **Deleting contact(s)**         | `delete INDEX [MORE_INDEX]…​` <br> `delete all`                                                        | `delete 3` or `delete 2 4` or `delete all`                                                                              |
-| **Locating persons by name**    | `find KEYWORD [MORE_KEYWORDS]…​`                                                                        | `find James Jake`                                                                                                       |
-| **Filtering contacts by tag**   | `filtertag KEYWORD [MORE_KEYWORDS]…​`                                                                   | `filtertag bestie` or `filtertag bestie slay`                                                                           |
-| **Tracking contacts by category** | `track CATEGORY`                                                                                      | `track student`                                                                                                         |
-| **Adding tag(s) to contact**    | `tag INDEX t/TAG [t/MORE_TAG]…​` <br> `tag all t/TAG [t/MORE_TAG]…​`                                     | `tag 1 t/year2 t/computerScience` or `tag all t/year2 t/computerScience`                                                |
-| **Deleting tag(s) from contact** | `deletetag INDEX t/TAG [t/MORE_TAG]…​` <br> `deletetag all t/TAG [t/MORE_TAG]…​`                         | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                            |
-| **Importing CSV files**         | `import FILE_PATH`                                                                                      | `import C:\Users\user\data\File.csv` or `import data/File.csv`                                                          |
-| **Exporting CSV files**         | `export FILE_PATH`                                                                                      | `export C:\Users\user\data\File.csv` or `export data/File.csv`                                                          |
+| **Action**                      | **Format**                                                                                          | **Example**                                                                                                             |
+|---------------------------------|-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| **Viewing help**                | `help`                                                                                              | `help`                                                                                                                  |
+| **Link to the user guide**      | `helpwindow`                                                                                        | `helpwindow`                                                                                                            |
+| **Listing all contacts**        | `list`                                                                                              | `list`                                                                                                                  |
+| **Viewing a contact**           | `view INDEX`                                                                                        | `view 1`                                                                                                                |
+| **Clearing all entries**        | `clear`                                                                                             | `clear`                                                                                                                 |
+| **Exiting the program**         | `exit`                                                                                              | `exit`                                                                                                                  |
+| **Adding a student**            | `student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`      |
+| **Adding a company**            | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison t/facility`        |
+| **Editing a contact**           | `edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                             |
+| **Deleting contact(s)**         | -`delete INDEX [MORE_INDEX]…​` <br> -`delete all`                                                   | `delete 3` or `delete 2 4` or `delete all`                                                                              |
+| **Locating persons by name**    | `find KEYWORD [MORE_KEYWORDS]…​`                                                                    | `find James Jake`                                                                                                       |
+| **Filtering contacts by tag**   | `filtertag KEYWORD [MORE_KEYWORDS]…​`                                                               | `filtertag bestie` or `filtertag bestie slay`                                                                           |
+| **Tracking contacts by category** | `track CATEGORY`                                                                                    | `track student`                                                                                                         |
+| **Adding tag(s) to contact**    | -`tag INDEX t/TAG [t/MORE_TAG]…​` <br> -`tag all t/TAG [t/MORE_TAG]…​`                              | `tag 1 t/year2 t/computerScience` or `tag all t/year2 t/computerScience`                                                |
+| **Deleting tag(s) from contact** | -`deletetag INDEX t/TAG [t/MORE_TAG]…​` <br> -`deletetag all t/TAG [t/MORE_TAG]…​`                  | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                            |
+| **Importing CSV files**         | `import FILE_PATH`                                                                                  | `import C:\Users\user\data\File.csv` or `import data/File.csv`                                                          |
+| **Exporting CSV files**         | `export FILE_PATH`                                                                                  | `export C:\Users\user\data\File.csv` or `export data/File.csv`                                                          |
 
-[Back to the table of contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)
