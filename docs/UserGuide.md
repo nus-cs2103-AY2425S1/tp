@@ -360,7 +360,7 @@ Format: `deleteappt NRIC DATE HH:mm`
 * `NRIC` must start with 'S', 'T', 'F', 'G' or 'M', have 7 digits, and end with a letter.
 
 Example:
-* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, for the patient identified by the NRIC s1234567z, assuming 12:12 falls within his appointment window.
+* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, for the patient identified by the NRIC S1234567Z, assuming 12:12 falls within his appointment window.
 
 Format: `deleteappt INDEX DATE HH:mm` 
 
