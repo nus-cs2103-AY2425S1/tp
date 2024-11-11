@@ -226,26 +226,28 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits a specified person in EduContacts. There are 2 usages:
+Edits a specified person details or module in EduContacts.
+Usages:
 
-1. Edits the details of the person identified by the studentId assigned to the corresponding student. Existing values will be overwritten by the input values.
+**1. Edit person details:**
 
-    Format:
-    ```bash
-    edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
-    ```
+   Format:
 
-2. Edits a module of the person identified. Existing values will be overwritten by the input module.
+```bash
+edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
+```
+  * Updates the details of the person identified by the studentId assigned to the corresponding student. 
+  * At least one of the optional fields must be provided.
+  * Existing values will be overwritten by the input values.
 
-    Format:
-    ```bash
-    edit ID m/ OLD_MODULE NEW_MODULE
-    ```
+**2. Edit person's module:**
 
-In general, `edit` command:
-* Edits a person's details according to the fields specified.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+  Format:
+```bash
+edit ID m/ OLD_MODULE NEW_MODULE
+```
+  * Updates a module of the person identified by the studentId.
+  * Existing module (`OLD_MODULE`) will be overwritten by the input module (`NEW_MODULE`).
 
 Examples:
 *  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
@@ -276,29 +278,43 @@ Examples:
 
 ### Listing persons by certain attributes : `filter`
 
-Filters person contacts based on their names, courses and modules.
+Filters person contacts by name, course, or module.
+Usages:
+
+**1. Filter by name:**
 
 Format:
 ```bash
-filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
+filter n/KEYWORD [MORE_KEYWORDS]
 ```
 
-* **For filtering by names:**
   * Use prefix `n/`.
   * Only full words will be matched e.g. `Han` will not match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+    e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+**2. Filter by Module:**
+
+Format:
+```bash
+filter m/KEYWORD
+```
 
 <!-- -->
 
-* **For filtering by Module:**
   * Use prefix `m/`.
   * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will match modules like "CS2103T" and "CS2101."
 
+**3. Filter by course:**
+
+Format:
+```bash
+filter c/KEYWORD
+```
+
 <!-- -->
 
-* **For filtering by Course:**
   * Use prefix `c/`
   * Partial matching is supported, but the first keyword must match the beginning of the course name.
     e.g `Engineer` will match courses like "Engineering" but not "Civil Engineering".
@@ -309,7 +325,7 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 </box>
 
 Examples:
-* `filter n/John` will return a list of all persons with `John` in their name e.g. `john` and `John Doe`.
+* `filter n/John` will return a list of all persons with `John` in their name e.g. `John Smith` and `John Doe`.
 * `filter m/CS2103T` will return a list of all persons with module `CS2103T`.
 * `filter c/Computer Science` will return a list of all persons with course `Computer Science`.
 * `filter n/alex david` will return a list of all persons with `alex` or `david` in their name e.g.  `Alex Yeoh`, `David Li` (the result of this command is shown in the screenshot below).
