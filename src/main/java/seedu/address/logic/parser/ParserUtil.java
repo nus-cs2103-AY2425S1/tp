@@ -1,19 +1,24 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -66,6 +71,67 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String nric} into a {@code Nric}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param nric The Nric to be parsed.
+     * @return The parsed Nric.
+     * @throws ParseException if the given {@code nric} is invalid.
+     */
+    public static Nric parseNric(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedNric = nric.trim();
+        if (!Nric.isValidNric(trimmedNric)) {
+            throw new ParseException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        return new Nric(trimmedNric);
+    }
+
+    /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param gender The Gender to be parsed.
+     * @return The parsed Gender.
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code String dateOfBirth} into a {@code DateOfBirth}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param dob The DateOfBirth to be parsed.
+     * @return The parsed DateOfBirth.
+     * @throws ParseException if the given {@code dob} is invalid.
+     */
+    public static DateOfBirth parseDateOfBirth(String dob) throws ParseException {
+        requireNonNull(dob);
+        String trimmedDob = dob.trim();
+
+        if (!DateUtil.isCorrectDateFormat(trimmedDob)) {
+            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS_WRONG_FORMAT);
+        }
+
+        if (!DateUtil.isValidDate(trimmedDob)) {
+            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS_DATE_DOES_NOT_EXIST);
+        }
+
+        if (!DateOfBirth.isValidDateOfBirth(trimmedDob)) {
+            throw new ParseException(DateOfBirth.MESSAGE_CONSTRAINTS_FUTURE_DATE);
+        }
+
+        return new DateOfBirth(trimmedDob);
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -96,29 +162,59 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses and validates the given allergy string.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @param allergyStr The allergy string to parse.
+     * @return A {@code Allergy} object.
+     * @throws ParseException If the allergy string is empty, exceeds 30 characters, or contains invalid characters.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Allergy parseAllergy(String allergyStr) throws ParseException {
+        requireNonNull(allergyStr);
+        if (allergyStr.isEmpty()) {
+            throw new ParseException("Allergy " + MESSAGE_EMPTY_FIELD);
+        } else if (allergyStr.length() > 30) {
+            throw new ParseException("Allergy " + MESSAGE_CONSTRAINTS_LENGTH);
+        } else if (!allergyStr.matches(Allergy.VALIDATION_REGEX)) {
+            throw new ParseException("Allergy " + MESSAGE_CONSTRAINTS_ALPHANUMERIC);
         }
-        return new Tag(trimmedTag);
+        return new Allergy(allergyStr);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a string representing a priority and returns a {@link Priority} object.
+     *
+     * @param priorityStr the string representing the priority to be parsed.
+     * @return A {@link Priority} object corresponding to the provided priority string.
+     * @throws ParseException if the provided string does not conform to the expected
+     *         format or is invalid as per the priority constraints defined in the
+     *         {@link Priority} class.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Priority parsePriority(String priorityStr) throws ParseException {
+        requireNonNull(priorityStr);
+        String trimmedPriority = priorityStr.trim().toUpperCase();
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new Priority(trimmedPriority);
+    }
+
+    /**
+     * Parses and validates the given medical condition string.
+     *
+     * @param medConStr The medical condition string to parse.
+     * @return A {@code MedCon} object.
+     * @throws ParseException If the medical condition string is empty, exceeds 30 characters,
+     *     or contains invalid characters.
+     */
+    public static MedCon parseMedCon(String medConStr) throws ParseException {
+        requireNonNull(medConStr);
+        if (medConStr.isEmpty()) {
+            throw new ParseException("Medical condition " + MESSAGE_EMPTY_FIELD);
+        } else if (!medConStr.matches(MedCon.VALIDATION_REGEX)) {
+            throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_ALPHANUMERIC);
+        } else if (medConStr.length() > 30) {
+            throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_LENGTH);
+        }
+        return new MedCon(medConStr);
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<HBox id="cardPane" fx:id="cardPane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21.0.3-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <VBox alignment="CENTER_LEFT" minHeight="105" spacing="5.0" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <HBox alignment="BASELINE_LEFT">
+                <Label fx:id="date" styleClass="appointment-date" text="\$date" />
+                <Label fx:id="timePeriod" styleClass="appointment-time" text="\$timePeriod" />
+            </HBox>
+            <Label fx:id="appointmentName" styleClass="appointment-header" text="\$appointmentName" />
+            <Label fx:id="personName" styleClass="appointment-normal" text="\$personName" />
+            <Label fx:id="personNric" styleClass="appointment-normal" text="\$personNric" />
+        </VBox>
+      <columnConstraints>
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+</HBox>

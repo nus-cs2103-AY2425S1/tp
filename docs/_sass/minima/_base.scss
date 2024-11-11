@@ -141,8 +141,8 @@ blockquote {
   color: $brand-color;
   border-left: 4px solid $brand-color-light;
   padding-left: $spacing-unit / 2;
-  @include relative-font-size(1.125);
-  font-style: italic;
+  font-size: $base-font-size;
+  //font-style: italic;
 
   > :last-child {
     margin-bottom: 0;
@@ -288,7 +288,7 @@ table {
     text-align: center;
   }
   .site-header:before {
-    content: "AB-3";
+    content: "Medibase3";
     font-size: 32px;
   }
 }

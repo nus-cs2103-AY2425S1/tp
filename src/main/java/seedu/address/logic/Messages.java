@@ -12,12 +12,17 @@ import seedu.address.model.person.Person;
  */
 public class Messages {
 
+    public static final String MESSAGE_EMPTY_FIELD = "field should not be empty";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_PERSON_NRIC_NOT_FOUND = "The patient with the specified NRIC does not exist";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d patients listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_CONSTRAINTS_LENGTH =
+            "length should not exceed the limit of 30 characters";
+    public static final String MESSAGE_CONSTRAINTS_ALPHANUMERIC =
+            "name(s) should be alphanumeric, \nand multiple spaces are not allowed between letters and/or words.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -37,15 +42,43 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
+                .append("\nNRIC: ")
+                .append(person.getNric())
+                .append("\nGender: ")
+                .append(person.getGender())
+                .append("\nDate of Birth: ")
+                .append(person.getDateOfBirth())
+                .append("\nPhone: ")
                 .append(person.getPhone())
-                .append("; Email: ")
+                .append("\nEmail: ")
                 .append(person.getEmail())
-                .append("; Address: ")
+                .append("\nAddress: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("\nPriority: ")
+                .append(person.getPriority());
+
+        builder.append("\nMedical Conditions: ");
+        appendWithComma(builder, person.getMedCons());
+
+        builder.append("\nAppointments: ");
+        appendWithComma(builder, person.getAppointments());
+
+        builder.append("\nAllergies: ");
+        appendWithComma(builder, person.getAllergies());
+
         return builder.toString();
     }
 
+    /**
+     * Appends the {@code toAppend} to the {@code builder} with a comma.
+     *
+     * @param builder The StringBuilder to append to.
+     * @param toAppend The Set to append.
+     */
+    private static void appendWithComma(StringBuilder builder, Set<?> toAppend) {
+        String result = toAppend.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
+        builder.append(result);
+    }
 }

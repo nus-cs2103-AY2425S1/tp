@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,6 +18,9 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+
+    private final ArrayList<String> history = new ArrayList<>();
+    private int historyIndex = 0;
 
     private final CommandExecutor commandExecutor;
 
@@ -35,17 +41,55 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandEntered() {
+    private void handleCommandEntered(KeyEvent event) {
         String commandText = commandTextField.getText();
-        if (commandText.equals("")) {
+        switch(event.getCode()) {
+        case ENTER:
+            if (commandText.equals("")) {
+                return;
+            }
+
+            history.add(commandText);
+            try {
+                commandExecutor.execute(commandText);
+                commandTextField.setText("");
+            } catch (CommandException | ParseException e) {
+                setStyleToIndicateCommandFailure();
+            }
+
+            historyIndex = history.size();
+            break;
+        case UP:
+            historyIndex -= 1;
+            setCommandFieldToHistory();
+            break;
+        case DOWN:
+            historyIndex += 1;
+            setCommandFieldToHistory();
+            break;
+        default:
+            break; // do nothing on default
+            // can even add effects or anything or update statusbar
+        }
+    }
+
+    private void setCommandFieldToHistory() {
+        if (history.isEmpty()) {
             return;
         }
 
-        try {
-            commandExecutor.execute(commandText);
+        if (historyIndex < 0) {
+            historyIndex = 0;
+        }
+
+        if (historyIndex > history.size()) {
+            historyIndex = history.size();
+        }
+
+        if (historyIndex == history.size()) {
             commandTextField.setText("");
-        } catch (CommandException | ParseException e) {
-            setStyleToIndicateCommandFailure();
+        } else {
+            commandTextField.setText(history.get(historyIndex));
         }
     }
 

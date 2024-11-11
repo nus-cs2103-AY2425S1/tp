@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.model.person.Person;
 
 /**
@@ -31,6 +33,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label nric;
+    @FXML
+    private Label dateOfBirth;
+    @FXML
+    private Label gender;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -39,7 +47,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane allergies;
+    @FXML
+    private FlowPane priority;
+    @FXML
+    private FlowPane appointments;
+    @FXML
+    private FlowPane medCons;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,13 +61,70 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        nric.setText(person.getNric().value);
+        dateOfBirth.setText(person.getDateOfBirth().value);
+        gender.setText(person.getGender().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        generateFlowPaneBubbles("Priority: ", "label-text", priority);
+        generateFlowPaneBubbles("Medical Conditions: ", "label-text", medCons);
+        generateFlowPaneBubbles("Allergies: ", "label-text", allergies);
+        generateFlowPaneBubbles("Appointments: ", "label-text", appointments);
+
+        applyPriorityBackground(priority, person.getPriority().priority);
+        addLabelsToFlowPane(person.getMedCons(), medCons);
+        addLabelsToFlowPane(person.getAllergies(), allergies);
+        addLabelsToFlowPane(person.getAppointments(), appointments);
+    }
+
+    private void generateFlowPaneBubbles(String textName, String className, FlowPane flowPane) {
+        Text text = new Text(textName);
+        text.getStyleClass().add(className);
+        flowPane.getChildren().add(text);
+    }
+
+    private <T extends Comparable<T>> void addLabelsToFlowPane(Set<T> items, FlowPane flowPane) {
+        items.stream()
+                .sorted(Comparator.naturalOrder())
+                .forEach(item -> flowPane.getChildren().add(new Label(item.toString())));
+    }
+
+    // Apply background color styles based on the priority value
+    private void applyPriorityBackground(FlowPane flowPane, String priorityValue) {
+        // Set up the label for priority
+        Label priorityLabel = new Label(person.getPriority().priority);
+        priorityLabel.getStyleClass().add("priority-label");
+
+        // Remove any existing priority styles
+        priority.getStyleClass().removeAll("priority-high-bg", "priority-medium-bg",
+                "priority-low-bg", "priority-none-bg");
+
+        // Add the new label with the corresponding background style
+        switch (priorityValue) {
+        case "HIGH":
+            priorityLabel.getStyleClass().add("priority-high-bg");
+            break;
+        case "MEDIUM":
+            priorityLabel.getStyleClass().add("priority-medium-bg");
+            break;
+        case "LOW":
+            priorityLabel.getStyleClass().add("priority-low-bg");
+            break;
+        case "NONE":
+            priorityLabel.getStyleClass().add("priority-none-bg");
+            break;
+        default:
+            break;
+        }
+
+        // Add the label to the FlowPane
+        priorityLabel.setStyle("-fx-text-fill: black;");
+        priority.getChildren().add(priorityLabel);
+
     }
 }

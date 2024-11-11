@@ -1,10 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.NricMatchesPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +16,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -76,12 +80,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    public Optional<Person> fetchPersonIfPresent(NricMatchesPredicate nricPredicate);
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    ObservableList<OwnedAppointment> getFilteredAppointmentList();
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 }
