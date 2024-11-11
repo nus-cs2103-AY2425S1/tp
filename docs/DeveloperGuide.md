@@ -820,6 +820,23 @@ Given below are instructions to test the app manually.
 2. Test case: `editContact 10 p/91234567` (index out of range)
     - **Expected:** Error message indicating the index is invalid.
 
+### Adding a customer order
+
+#### Adding a new customer order
+1. Prerequisites: Ensure that the customer exists in the address book and the pastries to be ordered are available in the pastry catalogue.
+2. Test case: addCustomerOrder n/Caleb p/94519909 o/1 2
+    - **Expected:** The order for Caleb is added successfully with the specified pastries. A success message is displayed. 
+3. Test case: addCustomerOrder n/Charlotte Oliveiro p/93210283 o/1 2
+    - **Expected:** The order for Charlotte Oliveiro is added successfully with the specified pastries. A success message is displayed.
+
+#### Adding with invalid data
+1. Test case: addCustomerOrder n/Caleb p/94519909 o/100
+    - **Expected:** Error message indicating that pastry must be added to the pastry catalogue using the addPastry command before it can be ordered.
+2. Test case: addCustomerOrder n/Unknown Customer p/9800 0001 o/1 2
+    - **Expected:** Error message indicating that the specified customer does not exist in the address book.
+3. Test case: addCustomerOrder n/Caleb p/94519909 o/-1
+    - **Expected:** Error message indicating that the pastry id cannot be negative.
+
 ### Deleting a customer order
 
 #### Deleting an existing customer order
@@ -836,6 +853,23 @@ Given below are instructions to test the app manually.
     - **Expected:** Error message indicating an invalid index.
 2. Test case: `deleteCustomerOrder 100` (index out of range)
     - **Expected:** Error message indicating the index is invalid.
+
+### Adding a supply order
+
+#### Adding a new supply order
+1. Prerequisites: Ensure that the supplier exists in the address book and the ingredients to be ordered are available in the ingredient catalogue.
+2. Test case: addSupplyOrder n/Donald Trump p/98126599 o/1 2 
+  - **Expected:** The order for Donald Trump is added successfully with the specified ingredients. A success message is displayed.
+3. Test case: addSupplyOrder n/Supplier ABC p/87431111 o/1 2
+  - **Expected:** The order for Supplier ABC is added successfully with the specified ingredients. A success message is displayed.
+
+#### Adding with invalid data
+1. Test case: addSupplyOrder n/Donald Trump p/98126599 o/100
+  - **Expected:** Error message indicating that ingredient must be added to the ingredient catalogue using the addIngredient command before it can be ordered.
+2. Test case: addSupplyOrder n/Unknown Supplier p/9800 0001 o/1 2
+  - **Expected:** Error message indicating that the specified supplier does not exist in the address book.
+3. Test case: addSupplyOrder n/Donald Trump p/98126599 o/-1
+  - **Expected:** Error message indicating that the ingredient id cannot be negative.
 
 ### Adding a pastry
 
