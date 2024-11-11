@@ -74,7 +74,7 @@ Let’s get started and see how PlanPal can transform your event planning journe
 This section outlines how to effectively navigate the PlanPal User Guide. Whether you're new to the application or a
 returning user, these tips will help you make the most of the document.
 
-### 2.1 Navigating the Document:
+### 2.1 Navigating the Document
 
 - **Table of Contents:** The Table of Contents at the start provides a clear overview of all topics covered.
 Simply click on a section title to jump directly to that part of the guide.
@@ -82,7 +82,7 @@ Simply click on a section title to jump directly to that part of the guide.
 - **Section Organisation:** Each section is divided into clear headings and subheadings, making it easy to locate
 specific topics or commands.
 
-### 2.2 Sections:
+### 2.2 Sections
 
 Below is a summary of the main sections in this User Guide and what you can expect from each one.
 
