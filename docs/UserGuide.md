@@ -228,12 +228,12 @@ You can view a list of students in the same group(s)
 
 Format: `show KEYWORDS`
 
-* The KEYWORDS is/are the group name(s) or identifier(s) you would like to search for in your current list. For instance, use `group 1` or `1` or `group` (to search for `group 1`)
+* The KEYWORDS is/are the group name(s) or identifier(s) you would like to search for in your current list. For instance, use `group 1` or `1` or `group` to search for `group 1`
 * The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
 * The order of the keywords does not matter. e.g., `1 group` will match `group 1`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can search for substrings within the group names, but the search will only return results where the group names start with the entered text. For example, searching for `gro` will match `group 1`, but not `1 group`.
+You can search for substrings within the group names, but the search will only return results where the group names start with the entered text. For example, searching for `gro` will find `group 1`, but not `1 group`, as `1 group` does not begin with `gro`.
 </div>
 
 Here is an example you could try:
