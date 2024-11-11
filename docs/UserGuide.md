@@ -80,13 +80,13 @@ Refer to the [Command Summary](#command-summary) section below for a quick overv
 
 | Action             | Format / Examples                                                                                                                                                 |
 | ------------------ |-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add member**     | `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4-3-301 t/jamesho123 tag/friend tag/colleague` |
-| **Update member**  | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`        |
+| **Add member**     | `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_USERNAME [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4-3-301 t/jamesho123 tag/friend tag/colleague` |
+| **Update member**  | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_USERNAME] [tag/TAG]…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`        |
 | **Delete member**  | `delete_member INDEX`<br> e.g., `delete_member 3`                                                                                                                 |
-| **Add session**    | `add_session s/NAME d/DATE p/POINTS m/INDEX…​` <br> e.g., `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`                                                   |
-| **Delete session** | `delete_session s/NAME m/INDEX…`<br> e.g., `delete_session s/Rehearsal m/1 m/3`                                                                                 |
-| **Find members**   | `find_members KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find_members James Jake`                                                                                        |
-| **Find sessions**  | `find_sessions KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find_sessions Team meeting`                                                                                    |
+| **Add session**    | `add_session s/NAME d/DATE p/POINTS m/INDEX…​` <br> e.g., `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`                                                     |
+| **Delete session** | `delete_session s/NAME m/INDEX…`<br> e.g., `delete_session s/Rehearsal m/1 m/3`                                                                                   |
+| **Find members**   | `find_members KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find_members James Jake`                                                                                       |
+| **Find sessions**  | `find_sessions KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find_sessions Team meeting`                                                                                   |
 | **List**           | `list`                                                                                                                                                            |
 | **Clear**          | `clear`                                                                                                                                                           |
 | **Help**           | `help`                                                                                                                                                            |
@@ -118,19 +118,21 @@ Refer to the [Command Summary](#command-summary) section below for a quick overv
 
 ### Viewing help : `help`
 
-Displays instructions for accessing the help page, which includes an alphabetical list of all available commands for quick and easy reference.
+Displays  an alphabetical list of all available commands for quick and easy reference and a link to the user guide.
 
 ![help message](images/helpMessage.png)
 
 **Format:** `help`
 
+**Example**
+- `help` displays the help page
 ---
 
 ### Adding a member: `add_member`
 
-Adds a member to Hall Pointer.
+Adds a member to Hall Pointer. A member must have a name, room assignment, and Telegram username. You can also add tags to help categorize members.
 
-**Format:** `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
+**Format:** `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_USERNAME [tag/TAG]…​​`
 
 <box type="tip" seamless>
 
@@ -143,16 +145,17 @@ Adds a member to Hall Pointer.
 **Constraints:**<br>
 
 - **Unique Name**: Each member must have a unique name. This is necessary to prevent confusion between members and to ensure accurate tracking.
-- **Unique Telegram Handle**: Each member must have a unique Telegram handle, as this is a personal identifier for each user.
+- **Unique Telegram Username**: Each member must have a unique Telegram username, as this is a personal identifier for each user.
 - **Shared Rooms Allowed**: Multiple members can be assigned to the same room to accommodate shared living arrangements.
 
 </box>
 
 **Examples:**
 
-- `add_member n/John Doe r/4-3-301 t/johndoe123`
-- `add_member n/Betsy Crowe s/o Alice Crowe r/2-5-120 t/betsy_crowe tag/logistics`
-
+- `add_member n/John Doe r/4-3-301 t/johndoe123` adds a member with name `John Doe` in room `4-3-301` and Telegram username `johndoe123`.
+- `add_member n/Betsy Crowe s/o Alice Crowe r/2-5-120 t/betsy_crowe tag/logistics` adds a member with name `Betsy Crowe` in room `2-5-120`, Telegram username `betsy_crowe`, and tag `logistics`.
+ 
+![result for 'add_member n/John Doe r/4-3-301 t/johndoe123'](images/addCommandResult.png)
 ---
 
 ### Listing all members : `list`
@@ -162,7 +165,7 @@ Shows a list of all members registered in Hall Pointer.
 **Format:** `list`
 
 **Example:**
--`list` shows all members in Hall Pointer.
+- `list` shows all members in Hall Pointer.
 
 ![result for 'list'](images/listCommandResult.png)
 ---
@@ -171,7 +174,12 @@ Shows a list of all members registered in Hall Pointer.
 
 Updates an existing member in Hall Pointer.
 
-**Format:** `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
+**Format:** `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_USERNAME] [tag/TAG]…​​`
+
+**Constraints:**
+
+- **Unique Name**: Each member must still have a unique name after updating.
+- **Unique Telegram Username**: Each member must still have a unique Telegram username after updating.
 
 <box type="tip" seamless>
 
@@ -185,9 +193,11 @@ Updates an existing member in Hall Pointer.
 
 **Examples:**
 
-- `update_member 1 t/johndoe123_updated n/Johnson Doe` updates the Telegram handle and name of the 1st member to be `johndoe123_updated` and `Johnson Doe`, respectively.
+- `update_member 1 t/johndoe123_updated n/Johnson Doe` updates the Telegram username and name of the 1st member to be `johndoe123_updated` and `Johnson Doe`, respectively.
 - `update_member 2 n/Betsy Crower tag/` updates the name of the 2nd member to be `Betsy Crower` and clears all existing tags.
 
+
+  ![result for 'update_member 1 t/johndoe123_updated n/Johnson Doe'](images/updateCommandResult.png)
 ---
 
 ### Locating members by name: `find_members`
@@ -211,6 +221,8 @@ Finds members whose names contain any of the given keywords.
 
 - `find_members John` returns `john` and `John Doe`
 - `find_members alex david` returns `Alex Yeoh` and `David Li`<br>
+
+
   ![result for 'find_members alex david'](images/findAlexDavidResult.png)
 
 ---
@@ -232,11 +244,12 @@ Deletes the specified member from Hall Pointer.
 - `list` followed by `delete_member 2` deletes the 2nd member in Hall Pointer.
 - `find_members Betsy` followed by `delete_member 1` deletes the 1st member in the results of the `find` command.
 
+![result for 'delete_member 2'](images/deleteMemberResult.png)
 ---
 
 ### Adding a Session: `add_session`
 
-Adds a session to Hall Pointer and associates it with specified members.
+Adds a session to Hall Pointer and associates it with specified members. A session contains a name, date, and points awarded. You can associate multiple members with a session.
 
 **Format:** `add_session s/NAME d/DATE p/POINTS m/INDEX...`
 
@@ -250,7 +263,7 @@ Adds a session to Hall Pointer and associates it with specified members.
 
 **Constraints:**<br>
 
-- **Unique Session Name**: Each session name must be unique. This ensures that each session is distinct and prevents duplicate records. If you have multiple similar sessions, consider naming them sequentially (e.g., "Rehearsal 1", "Rehearsal 2").
+- **Unique Session Name**: Each session name must be unique within a member. This ensures that each session is distinct and prevents duplicate records. If you have multiple similar sessions, consider naming them sequentially (e.g., "Rehearsal 1", "Rehearsal 2").
 
 </box>
 
@@ -258,6 +271,7 @@ Adds a session to Hall Pointer and associates it with specified members.
 
 - `list` followed by `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3` adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with the members at indexes 1 and 3 in the displayed list.
 
+![result for 'add_session'](images/addSessionResult.png)
 ---
 
 ### Locating Members with Associated Sessions by Name: `find_sessions`
@@ -266,21 +280,19 @@ This command finds members who have attended sessions with names that contain an
 
 **Format:** `find_sessions KEYWORD [MORE_KEYWORDS]`
 
-> **Tips:**
->
-> - **Case-Insensitive Search:** The search is case-insensitive. For example, `meeting` will match `Meeting`.
-> - **Order of Keywords:** The order of keywords does not affect the search results. For example, `AGM meeting` will match sessions with names containing either `AGM` or `meeting`.
-> - **Full Word Matching:** Only full words are matched; e.g., `team` will not match `tea`.
-> - **OR Search:** Members with sessions that match at least one keyword will be returned. For example, `find_sessions AGM meeting` will return members with sessions named `AGM meeting` or `team meeting`.
-> - **Independence from Displayed Members:** The search includes all members in HallPointer, not just those currently displayed.
-> - **Duplicate Session Display:** If multiple members are associated with the same session (e.g., "team bonding"), `find_sessions` will display this session once for each member who attended it. This behavior ensures all keyword matches are fully shown and is not a bug.
+**Tips:**
+- **Case-Insensitive Search:** The search is case-insensitive. For example, `meeting` will match `Meeting`.
+- **Order of Keywords:** The order of keywords does not affect the search results. For example, `AGM meeting` will match sessions with names containing either `AGM` or `meeting`.
+- **Full Word Matching:** Only full words are matched; e.g., `team` will not match `tea`.
+- **OR Search:** Members with sessions that match at least one keyword will be returned. For example, `find_sessions AGM meeting` will return members with sessions named `AGM meeting` or `team meeting`.
+- **Independence from Displayed Members:** The search includes all members registered in HallPointer, not just those currently displayed.
 
 **Examples:**
 
 - `find_sessions Team` – Returns any member associated with sessions named "Team meeting," "Team bonding," etc.
 - `find_sessions AGM meeting` – Returns members associated with sessions such as "AGM meeting" or "team meeting."
 
-  ![result for 'find_sessions team'](images/findTeamResult.png)
+
 
 ---
 
@@ -293,6 +305,8 @@ Deletes a session associated with one or more members in Hall Pointer.
 **Examples:**
 
 - `list` followed by `delete_session s/Rehearsal m/1 m/3` Deletes the session named "Rehearsal" for the members at indexes 1 and 3 in the displayed list.
+
+![result for 'delete_session'](images/deleteSessionResult.png)
 
 ---
 
