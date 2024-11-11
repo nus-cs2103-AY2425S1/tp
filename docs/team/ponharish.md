@@ -92,3 +92,7 @@ Given below are my contributions to the project.
   * Update `EditAppointmentCommand` [\#213](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/213)
     * Updated `EditAppointmentCommand` to handle the case when patient is not found.
 
+## V1.6
+* **Documentation**:
+  * Developer Guide:
+    * Fixed errors in the Developer Guide.
