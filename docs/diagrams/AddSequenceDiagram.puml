@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute add new client
 activate LogicManager
 
-LogicManager -> AgentAssistParser : parse add command
+LogicManager -> AgentAssistParser : parseCommand(userInput)
 activate AgentAssistParser
 
 create AddCommandParser
@@ -27,7 +27,7 @@ activate AddCommandParser
 AddCommandParser --> AgentAssistParser
 deactivate AddCommandParser
 
-AgentAssistParser -> AddCommandParser : parse add command
+AgentAssistParser -> AddCommandParser : parse(args)
 activate AddCommandParser
 
 create AddCommand

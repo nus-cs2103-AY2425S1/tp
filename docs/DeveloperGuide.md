@@ -193,9 +193,8 @@ There are a total of 3 checks that occur:
 - **Flag Validation:** Checks that all required flags are present and that there are no invalid flags.
 - **Value Validation:** Checks that the values provided for each specified flag are valid.
 - **Duplicate Check:** Checks that there is no existing client with the same details (same `name`, `phone` and `email`) to prevent duplicate entries.
-![AddActivityDiagram-Add_Activity_Diagram.png]
 
-(images%2FAddActivityDiagram-Add_Activity_Diagram.png)
+![AddActivityDiagram.png](images%2FAddActivityDiagram.png)
 
 Note: The error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
 
@@ -225,7 +224,7 @@ To execute the delete command, users must specify a valid client index from the 
 1. The index is a **positive number**.
 2. The index is **within the bounds** of the currently viewed client list.
 
-Here is a high-level view of the methods involved when the `delete` command is executed, and the user approves of the deletion after a confirmation prompt is showed.
+Here is a high-level view of the methods involved when the user inputs `delete 1`, and approves of the deletion after a confirmation prompt is showed.
 ![DeleteSequenceDiagram.png](images%2FDeleteSequenceDiagram.png)
 
 This follows the activity diagram shown below:
@@ -312,14 +311,21 @@ These requirements can be restrictive for agents who may prefer more flexible fi
 
 **Status:** Scheduled for future release due to current timeline priorities.
 
-### 7. Warning for Edit Commands with Inputs Identical to Current Values
+### 7. Prevent Duplicate Client Entries by Standardizing Name Formatting
+**Current issue:** Duplicate client entries can occur when minor differences in whitespace are present in names due to user input errors (e.g., `John Doe` vs. `John   Doe`). These variations, often caused by unintentional typos when using the `add` or `edit` commands, are currently treated as distinct entries.
+
+**Proposed Enhancement:** Standardize client names by trimming excess whitespace from each part of the name before storing and comparing entries. This ensures that variations in spacing do not create duplicates.
+
+**Status:** Scheduled for future release due to current timeline priorities.
+
+### 8. Warning for Edit Commands with Inputs Identical to Current Values
 **Current issue:** Users are not warned when the inputs for the `edit` command are the identical to the current values, resulting in no changes.
 
 **Proposed Enhancement:** Add a confirmation prompt when the inputs are verified to make no changes to the client.
 
 **Status:** Scheduled for future releases as the lack of confirmation prompt does not affect the intended functionality.
 
-### 8. Edit Command for Remark Improvement
+### 9. Edit Command for Remark Improvement
 **Current Issue:** Users are unable to edit specific sections of `remark` using the `edit` command. To make specific changes, users have to remove all remarks before re-entering them with the changes.
 
 **Proposed Enhancement:** Improve the `edit` command functionality for flag `/ra` such that it displays a text-editable window with that allows for the entire remark text to be edited.
@@ -512,16 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U7 - Remove all remarks about a client**
-
-**MSS**
-
-1.  User performs <u> Edit remarks about a client (U4)</u>.
-2.  User removes all existing remarks through editing.
-
-    Use case ends.
-
-**Use case: U8 - Clear clients' contacts**
+**Use case: U7 - Clear clients' contacts**
 
 **MSS**
 
@@ -540,7 +537,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U9 - Undo the most recent change**
+**Use case: U8 - Undo the most recent change**
 
 **MSS**
 1. User requests to undo the last change made to the list of contacts.
@@ -556,7 +553,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U10 - Exit**
+**Use case: U9 - Exit**
 
 **MSS**
 
@@ -628,7 +625,28 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a client
+
+1. Adding a new client to AgentAssist
+
+    1. Prerequisites: There must not be an existing client with the same name, phone number and email as the new client.
+
+    2. Test case: `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME>`<br>
+       Expected: A client with the given details is added to the end of the list of clients. Details are shown in the results box and any details that are truncated can be seen by using the `view` command with the client's displayed index.
+
+    3. Test case: `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> t/ <TIER> r/ <REMARK> s/ Status`<br>
+       Expected: A client with the given details, including the optional ones, is added to the end of the list of clients. Similar to previous. 
+
+   4. Missing compulsory fields: `add n/ <NAME> p/ <PHONE>`, `add n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` <br>
+      Expected: An error message is shown to user. No client is added. Missing fields are shown in the error message. 
+
+   5. Invalid command formats: `add`, `add n/ <NAME> p/ <INVALID_PHONE> e/ E/ <EMAIL>...`, `...` <br>
+       Expected: An error message is shown to user. No client is added. Error details shown in the status message.
+
+2. Add an existing client
+    1. Prerequisites: There exists a client in AddressBook which has the same name, phone number and email as the client to be added.
+    2. Test case: `add n/ <SAME_NAME> p/ <SAME_PHONE> e/ <SAME_EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME>` (where <SAME_NAME>, <SAME_PHONE> and <SAME_EMAIL> are the name, phone number and email of an existing client) <br>
+       Expected: An error message indicating that the client already exists is shown to user. No client is added.
 
 ### Deleting a client
 
