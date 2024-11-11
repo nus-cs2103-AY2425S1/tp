@@ -156,7 +156,15 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Patient and Add Doctor Features
-This feature allows users to add new patients and doctors to MediContacts. The implementation of this feature involves the following classes:
+This feature allows users to add new patients and doctors to MediContacts.
+
+Given below is an example usage scenario and how the `add-patient` command behaves at each step.
+
+Step 1. The user launches the application for the first time. MediContacts will be loaded in with the information stored in the `addressbook.json` file.
+
+Step 2. The user executes `add-patient` command, with all the required parameters and with valid inputs. The `add-patient` command will indirectly call `Model#addPerson()` to add the new patient to the address book.
+
+
 See below sequence diagram for the `add-patient` command:
 ![AddPatientSequenceDiagram](images/AddPatientSequenceDiagram.png)
 
