@@ -245,14 +245,14 @@ Examples:
 
 Finds all persons based on the specified keywords after the prefix representing the field, and displays them as a list with index numbers.
 
-Format: `find n/NAME...` or `find p/PHONE...` or `find e/EMAIL...` or `find a/ADDRESS...` or `find t/TAG_NAME...` or `find w/WEDDING_NAME...` or `find tk/TASK_NAME`
+Format: `find n/NAME...` or `find p/PHONE...` or `find e/EMAIL...` or `find a/ADDRESS...` or `find t/TAG_NAME...` or `find w/WEDDING_NAME...` or `find tk/TASK_NAME...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
 * The keyword after the prefix must be specified and cannot be empty. e.g. `find a/` is not allowed as the keyword to search should be specified.
 * The search will return partial matches and full matches.
-* Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix.
-* Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* Only one field can be searched at a time, but multiple keywords can be searched for the same field by placing each keyword after the appropriate prefix. e.g. to search for people that live in either Neighborhood 1 or Neighborhood 2, you can enter the command find a/Neighborhood 1 a/Neighborhood 2. This will return all contacts that have either of these in their address.
+* Only the first prefix entered will be used for the search. For example, if you enter `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
 * The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
 * `find p/973` returns all Contacts whose phone number contains 973
@@ -388,7 +388,7 @@ Format: `create-task tk/TASK_DESCRIPTION [d/DATE] [d/DATE]` or `ctask tk/TASK_DE
 * Tasks may have no dates, a single date indicating a deadline, or two dates to define a start and end period.
 * The dates can be specified under `DATE` with the format `d/YYYY-MM-DD`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
-* `TASK_NAME` is case-insensitive.
+* `TASK_NAME` is case-sensitive.
 * Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task) command.
 
 ### Deleting a Task : `delete-task` or `dtask`
