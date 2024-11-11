@@ -69,9 +69,9 @@ Overview of key features:
 
 1. Java is the toolset that will allow you to use VendorVault on your system. Hence, first you need to ensure that you have Java `17` or above installed on your Computer. If you are unsure, you can check by following the steps below:
    - 1a. Open up your command terminal. 
-     * Windows users can open the terminal by typing in `Command Prompt` in the search bar located at the bottom left of the screen. (If unsure, follow this [guide]().)
-     * Mac users can open the terminal by typing in `Terminal` using the spotlight search bar (accessed by pressing Command + Space). (If unsure, follow this [guide]().)
-     * Linux users can open for the command terminal by searching for the `Terminal` or `Console` in the Applications Menu. (If unsure, follow this [guide]().)
+     * Windows users can open the terminal by typing in `Command Prompt` in the search bar located at the bottom left of the screen. 
+     * Mac users can open the terminal by typing in `Terminal` using the spotlight search bar (accessed by pressing Command + Space). 
+     * Linux users can open for the command terminal by searching for the `Terminal` or `Console` in the Applications Menu.
    
    - 1b. Type in java -version to check if you have Java installed. If you have Java installed you should see something like this:
      ![Terminal Example showcasing java version](images/intro/terminalJavaVersion.png)
@@ -111,7 +111,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
    * `exit` : Exits the app.
 
-8. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#3-features) below for details of each command.
 <br>
 
 [[Back to Table of Contents]](#table-of-contents)
