@@ -150,7 +150,7 @@ Adds a student to the address book.
 ![addBefore.png](images/addBefore.png)
 
 **After:**
-![addBAfter.png](images/addAfter.png)
+![addAfter.png](images/addAfter.png)
 
 <box type="important">
 
