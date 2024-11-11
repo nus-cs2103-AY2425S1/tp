@@ -2,13 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDate;
 
@@ -32,9 +26,7 @@ public class PaidCommandParser implements Parser<PaidCommand> {
     @Override
     public PaidCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FREQUENCY, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_BIRTHDAY, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FREQUENCY);
 
         Index index;
         try {
@@ -43,15 +35,8 @@ public class PaidCommandParser implements Parser<PaidCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!argMultimap.getValue(PREFIX_FREQUENCY).isPresent() || argMultimap.getValue(PREFIX_FREQUENCY).isEmpty()) {
+        if (!argMultimap.getValue(PREFIX_FREQUENCY).isPresent()) {
             throw new ParseException(PaidCommand.MESSAGE_NO_FREQUENCY);
-        }
-
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() || argMultimap.getValue(PREFIX_PHONE).isPresent()
-                || argMultimap.getValue(PREFIX_EMAIL).isPresent() || argMultimap.getValue(PREFIX_ADDRESS).isPresent()
-                || argMultimap.getValue(PREFIX_BIRTHDAY).isPresent() || argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            throw new ParseException("Other prefixes are not allowed for Paid Command");
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FREQUENCY);
