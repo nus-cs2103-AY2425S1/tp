@@ -9,7 +9,7 @@ Overview of key features:
 * Multi-level Filtering
 * Sort supplier contacts and delivery information
 
---- 
+--- {.thick-1}
 # Table of Contents
 <!-- * Table of Contents -->
 1. [How to get started](#1-how-to-get-started)
@@ -51,7 +51,7 @@ Overview of key features:
     - 7.3. [Delivery-specific Commands](#7-3-delivery-specific-commands)
 8. [Glossary](#8-glossary)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 1. How to get started
 
@@ -63,7 +63,7 @@ Overview of key features:
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 2. Setting up VendorVault 
 
@@ -116,7 +116,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 3. Features
 
@@ -159,7 +159,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 ### 3.2.1. Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message containing a link to this user guide.
 
 Format: `help`
 
@@ -809,7 +809,7 @@ Punctuation characters include ``!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~``
 
 [[Back to Table of Contents]](#table-of-contents)
 
----
+--- {.thick-1}
 
 # 4. Managing your data
 
@@ -837,7 +837,7 @@ _Details coming soon ..._
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 5. FAQ
 
@@ -847,20 +847,29 @@ _Details coming soon ..._
 **Q**: How much space will VendorVault take up?<br>
 **A**: We recommend that you have at least 13MB of available storage space to use VendorVault.
 
+**Q**: How do I access my data?<br>
+**A**: 
+
+step 1: Open the folder that contains vendorvault.jar and the data folder
+
+![VendorVault_Folder](images/VendorVaultFiles.png)
+
+step 2: Open the folder named "data" to access the data file "vendorvault.json"
+
+![Data_Folder](images/DataFolder.png)
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**:
 
 step 1: Download the vendorvault.jar file and place it into an empty folder on a computer of your choice.
 
-step 2: Open the jar file and run the `exit` command to create a data folder.
+step 2: Run the app and execute the `exit` command to create a data folder.
 
-step 3: On the previously used computer, open the folder that contains vendorvault.jar and then open the folder labeled "data".
+step 3: On the previously used computer, copy the vendorvault.jar file which can be accessed by following the "How do I access my data?" FAQ above.
+
+step 4: Transfer the copied file to the newly created data folder (circled in red) in the new computer.
 
 ![VendorVault_Folder](images/VendorVaultFolder.png)
-
-step 4: Copy the vendorvault.json file and transfer it to the newly created data folder (refer to picture in step 3) in the new computer.
-
-![Data_Folder](images/DataFolder.png)
 
 **Q**: Will I be able to see my data the next time I use VendorVault after exiting?<br>
 **A**: Yes, all existing data that you have added will be loaded automatically and displayed.
@@ -873,7 +882,7 @@ step 4: Copy the vendorvault.json file and transfer it to the newly created data
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 6. Known issues
 
@@ -882,7 +891,7 @@ step 4: Copy the vendorvault.json file and transfer it to the newly created data
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 7. Command Summary
 
@@ -921,7 +930,7 @@ Action     | Format, Examples
 
 [[Back to Table of Contents]](#table-of-contents)
 
----
+--- {.thick-1}
 
 # 8. Glossary
 
