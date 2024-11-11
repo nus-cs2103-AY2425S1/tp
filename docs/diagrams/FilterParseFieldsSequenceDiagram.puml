@@ -37,7 +37,7 @@ else no start date given
 
 end
 
-alt Health Service is present
+opt Health Service is present
     FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(healthServicePrefix)
     activate ArgumentMultiMap
 
