@@ -76,11 +76,8 @@ This section outlines the topics covered in each part of the guide, helping you 
 6. [Glossary](#glossary) – Get familiar with key terms and definitions used throughout the guide.
 7. [_Back to Top_](#table-of-contents) – Easily return to the table of contents with this shortcut.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 <div class="page-break"></div>
@@ -103,11 +100,8 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
    - ✅ If you see "java 17" or "openjdk 17" (or any number above 17), you're ready to go!
    - ❌ If you see "command not found" or a java version below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Step 2: Install PROperty
 
@@ -128,12 +122,8 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
    
    - The image above showcases the various components of PROperty.
 
-
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Step 3: Try Your First Commands
 
@@ -157,11 +147,8 @@ For the best experience, use PROperty at full screen on your PC.
 
 Refer to the [Features](#features) below for details of each command.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 <div class="page-break"></div>
@@ -193,11 +180,8 @@ Refer to the [Features](#features) below for details of each command.
 
 </div>
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -230,11 +214,8 @@ Visual example of correct output (Example 1):
 
 ![AddCommandShowcase.png](images/user-guide-images/AddCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Editing a client : `edit`
 
@@ -273,11 +254,8 @@ Visual example of correct output (Example 1):
 
 ![EditCommandShowcase.png](images/user-guide-images/EditCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Deleting a client : `delete`
 
@@ -304,11 +282,8 @@ Visual example of correct output (Example 1):
 
 ![DeleteCommandShowcase.png](images/user-guide-images/DeleteCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Listing all clients : `list`
 
@@ -330,11 +305,8 @@ Visual example of correct output:
 
 ![ListCommandShowcase.png](images/user-guide-images/ListCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Sorting all clients : `sort`
 
@@ -354,11 +326,8 @@ Visual example of correct output [Example `1.`]:
 
 ![SortCommandShowcase.png](images/user-guide-images/SortCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Showing property listings of a client : `show`
 
@@ -385,11 +354,8 @@ Visual example of correct output (Example 1):
 
 ![Show Command](images/user-guide-images/ShowCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Locating clients by name: `find`
 
@@ -434,11 +400,8 @@ Visual example of correct output (Specific Find) (Example 2):
 
 ![SpecificFindCommandShowcase.png](images/user-guide-images/SpecificFindCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Locating clients by tag: `findtag`
 
@@ -466,11 +429,8 @@ Visual example of correct output (Example 1):
 
 ![Find tag command](images/user-guide-images/FindtagCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Clearing all entries : `clear`
 
@@ -486,11 +446,8 @@ Example:
 
 1. `clear` clears all clients and their data from PROperty.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Managing Remarks : `remark`
 
@@ -530,11 +487,7 @@ Visual example of correct output (Example 3):
 
 ![MultipleRemarkAddCommandShowcase](images/user-guide-images/MultipleRemarkAddCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
-
-</div>
 
 
 ### Adding a property listing : `listing add`
@@ -568,11 +521,8 @@ Visual example of correct output (Example 3):
 
 ![ListingAddMultipleTagShowcase.png](images/user-guide-images/ListingAddMultipleTagShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Deleting a property listing : `listing delete`
 
@@ -597,11 +547,8 @@ Visual example of correct output (Example 1):
 
 ![ListingDeleteCommandShowcase.png](images/user-guide-images/ListingDeleteCommandShowcase.png)
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Exporting your contacts : `export`
 
@@ -622,11 +569,8 @@ Example:
 
 1. `export` exports your current client data in PROperty into a CSV file.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Exiting the program : `exit`
 
@@ -641,11 +585,8 @@ Example:
 
 1. `exit` exits PROperty.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Open help menu: `help`
 
@@ -657,21 +598,15 @@ Example:
 
 1. `help` results in a popup window which contains all the commands in PROperty for easy reference during use.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Saving the data
 
 PROperty data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Editing the data file
 
@@ -682,11 +617,8 @@ If your changes to the data file results in an invalid format, PROperty may not 
 Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range, or manually add tags not stated in the glossary etc). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 <div class="page-break"></div>
@@ -708,11 +640,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 **Q**: Is there a way to restore a deleted client?<br>
 **A**: Unfortunately, it is not possible to restore a deleted client. We strongly recommend that you regularly save a backup of your clients to prevent accidental data loss.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -721,11 +650,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 1. In a multi-screen setup, should you move PROperty to a secondary screen and subsequently revert to using only the primary screen, the PROperty GUI may open off-screen. To resolve this issue, you should delete the `preferences.json` file created by the PROperty before launching it again. 
 2. If you minimise the Help Window and subsequently execute the `help` command, the original Help Window will remain minimised, and no new Help Window will appear. To resolve this issue, you should manually restore the minimised Help Window.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 <div class="page-break"></div>
@@ -750,11 +676,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 | **Export**         | `export`                                                                                                                                                            |
 | **Sort**           | `sort`                                                                                                                                                              |
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -765,11 +688,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 | Property | HDB, CONDO, RESIDENTIAL, LANDED, EC, COMMERCIAL, RETAIL, INDUSTRIAL, OFFICE, WAREHOUSE, SHOPHOUSE, TERRACE, SEMIDET, BUNGALOW, DETACHED, GCB, PENTHOUSE, MIXED, SERVAPT, DORM |
 | Client   | BUYER, SELLER, LANDLORD, TENANT, DEVELOPER, INVESTOR, MANAGER, CONTRACTOR                                                                                                 |
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 <div class="page-break"></div>
@@ -784,11 +704,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **Java**: A high-level, object-oriented programming language used for building cross-platform applications.
 - **JSON**: JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. JSON is commonly used for transmitting data in web applications.
 
-<div class="no-print" markdown="span">
-
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Property Tags
 - **HDB**: Public housing flats governed by the Housing & Development Board.
@@ -812,11 +729,9 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **SERVAPT**: Furnished serviced apartments, typically with extended-stay services.
 - **DORM**: Dormitories, often used as shared housing for students or workers.
 
-<div class="no-print" markdown="span">
 
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 ### Client Tags
 - **BUYER**: Prospective property purchasers.
@@ -828,10 +743,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **MANAGER**: Those managing property operations, tenant relations, or maintenance.
 - **CONTRACTOR**: Professionals providing construction, renovation, or repair services.
 
-<div class="no-print" markdown="span">
 
 [_Back to Top_](#table-of-contents)
 
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
