@@ -5,9 +5,9 @@
 Thank you for choosing **HireMe** to simplify your internship journey.
 With so many positions to apply for, managing applications becomes a real challenge, on top of classes, projects, and exams.
 **HireMe** is here to keep you organised and focused on landing your dream internship.
-In this guide, new users will find everything you need to get started while experienced users can user the [command summary](#command-summary) as a quick reference. If you have some questions or doubts, refer to the [FAQ](#faq) section. Let's dive in and make your internship search a little easier!
+Let's dive in and make your internship search a little easier!
 
-<span style="color: #ff6978;">*Use HireMe to get hired now!*</span>
+<span style="color: #ff6978;">**_Use HireMe to get hired now!_**</span>
 <br></br>
 
 ## Overview of User Guide
@@ -62,11 +62,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 
 ## Overview of target users
 
-If you are a Computer Science undergraduate who **does not have much time**, can **type fast** and want to **better manage your internship applications**,
-HireMe is the perfect solution for you! Sometimes, tracking internship applications can be troublesome and time-consuming. 
-We understand the importance of tracking as it allows you to follow up on your applications. Hence, we came up with HireMe to help you
-**stay organised without having to put in much effort** because we know that you may be busy with your coursework. Let's get you
-started with HireMe!
+If you’re a Computer Science undergraduate who **doesn’t have much time**, can **type quickly**, and wants to **better manage your internship applications**, HireMe is the perfect solution for you! Tracking internship applications can sometimes be troublesome and time-consuming. We understand the importance of tracking, as it allows you to follow up on your applications. That’s why we created HireMe to help you **stay organized without much effort**, knowing you may be busy with coursework. Let’s get you started with HireMe
 
 --------------------------------------------------------------------------------------------------------------------
 ## How to use our User Guide
@@ -77,7 +73,7 @@ First time using **HireMe**? Don't worry! We've got you covered! This tutorial w
 * Is there a burning question you want answers for? The [FAQ](#faq) might have the answer.
 
 Before continuing, here are some important information you need to know about the User Guide:
-1. There are 2 different kinds of boxes that provide extra information.
+1. There are two different kinds of boxes that provide extra information.
     * *Notice boxes* provide important information that you should take note of.
 
       <box type="info" seamless>
@@ -100,10 +96,10 @@ Before continuing, here are some important information you need to know about th
 This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading-hireme) **once**, and **repeat** [Part 2](#part-2-using-the-hireme-application) **each time** you wish to use HireMe.
 
 ### Part 1: Setting up and downloading HireMe
-1. Ensure that you have Java `17` or above installed on your computer for the hireme application to run. If not, download the latest version of Java from their website [here](https://www.oracle.com/sg/java/technologies/downloads/).
+1. Ensure that you have Java `17` or above installed on your computer for the hireme application to run. If not, download the latest version of Java from their [website](https://www.oracle.com/sg/java/technologies/downloads/).
 
 
-2. Download `hireme.jar` file from our github [here](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
+2. Download `hireme.jar` file from our [github](https://github.com/AY2425S1-CS2103T-W09-3/tp/releases/tag/v1.5).
 
     ![downloadhireme](images/DownloadHireMe.png)
 
@@ -116,10 +112,10 @@ This section has two parts: complete [Part 1](#part-1-setting-up-and-downloading
 
 <br></br>
 ### Part 2: Using the HireMe application
-For steps 5 and 6, refer to **either** [Mac Users](#_mac-users_) **or** [Windows Users](#_windows-users_) section that matches your computer system.
+For steps 5 and 6, refer to **either** [Mac users](#_mac-users_) **or** [Windows users](#_windows-users_) section that matches your computer system.
 Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5 and 6.
 <br></br>
-#### _Mac Users_
+#### _Mac users_
 5. Use mac spotlight search (Command + Space bar) and type Terminal, click on open. 
 
     <img src="images/MacTerminal.png" alt="macsterminal" width="700"/>
@@ -132,21 +128,23 @@ Continue to [Using the terminal](#_using-the-terminal_) after completing steps 5
 6. Click into the folder created in step 3. Left click on the `hireme.jar` file and select `Get Info`.
    ![macfilepathinfo](images/Macfilepathinfo.png)
 
-    On the new open that pops up, left click on `Where` and copy the file path.
+    On the new window that pops up, left click on `Where` and copy the file path.
    <img src="images/Macfilepath.png" alt="macfilepath" width="300"/>
    <br></br>
 
-#### _Windows Users_
-7. Use windows search and type Terminal, click on open. 
+#### _Windows users_
+5. Use windows search and type Terminal, click on open. 
    ![windowsterminal](images/WindowsTerminal.png)
 <br></br>
 You will see a window like this.
    ![openwindows](images/OpenWindowsTerminal.png)
 
 
-8. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.
+6. Click into the folder created in step 3. Click on the empty space of the bar located at the top and copy the file path.
    ![windowsfilepath](images/Windowsfilepath.png)
-    _file path here is highlighted in blue_
+   <box type="info" seamless>
+   <strong>Note:</strong> File path here is highlighted in blue
+   </box>
    <br></br>
 
 #### _Using the terminal_
@@ -165,16 +163,16 @@ You will see a window like this.
 
 
 #### _Using the HireMe application_
-A GUI similar to the below should appear in a few seconds. It is encouraged to expand the window to full screen for better viewability. Note how the app contains some sample data.<br>
+A GUI similar to the below should appear in a few seconds. It is encouraged to **expand the window to full screen** for better viewability. Note how the app contains some sample data.<br>
 
    ![Ui](images/LabelledUi.png)
 
 9. Type the command in the command box and press Enter to execute it. (e.g. typing **`/help`** and pressing Enter will open the help window.)<br></br>
    Some example commands you can try:
 
-    * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24` : Adds an internship application at Google to HireMe.
+    * `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`: Adds an internship application at Google to the list of added entries.
 
-    * `/delete 1` : Deletes the 1st internship application shown in the displayed list.
+    * `/delete 1` : Deletes the first internship application shown in the displayed list.
 
     * `/list` : Lists all your internship applications.
 
@@ -185,7 +183,8 @@ A GUI similar to the below should appear in a few seconds. It is encouraged to e
     * `/exit` : Exits the app.
 
 
-Refer to the [Features](#features) below for more details of each command. Check [Troubleshooting](#troubleshooting) if you are facing problems for setting up.
+Refer to the [Features](#features) below for more details of each command. <br>
+Refer to [Troubleshooting](#troubleshooting) if you are facing problems for setting up.
 
 --------------------------------------------------------------------------------------------------------------------
 
