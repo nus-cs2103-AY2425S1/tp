@@ -922,6 +922,8 @@ Given below are instructions to test the app manually.
 3. Test case: addSupplyOrder n/Donald Trump p/98126599 o/-1
   - **Expected:** Error message indicating that the ingredient id cannot be negative.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a pastry
 
 1. Prerequisites: Ensure that the ingredients required for the pastry are already available in the ingredient catalogue.
