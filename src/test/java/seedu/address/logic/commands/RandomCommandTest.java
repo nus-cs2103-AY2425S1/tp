@@ -29,7 +29,7 @@ public class RandomCommandTest {
             CommandResult result = new RandomCommand().execute(model);
 
             // First check that CommandResult is a success
-            assertEquals(new CommandResult(RandomCommand.MESSAGE_SUCCESS + "\n", false, false), result);
+            assertEquals(new CommandResult(String.format(RandomCommand.MESSAGE_SUCCESS, ""), false, false), result);
 
             // Check that model updates with only one person in the filteredlist
             // We do not check if displayed person is truly random since that uses java.util.random which is already

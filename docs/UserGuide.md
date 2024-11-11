@@ -168,15 +168,16 @@ Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GR
 * Existing values will be updated to the input values.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Need to delete a field? If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
+ Need to delete a field? If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Information:**  
-Note that you are unable to edit comments via the `edit` command.
-</div>
+<div markdown="block" class="alert alert-info">
 
-<div markdown="span" class="alert alert-info">:information_source: **Information:**  
-There should be no additional arguments between the INDEX and the first prefix (e.g `edit 1 blah n/ John` is wrong and should instead be `edit 1 n/ John`)
+:information_source: **Information:** 
+
+When using the `edit` command, note that:
+* You are unable to edit comments via the `edit` command.
+* There should be no additional arguments between the `INDEX` and the first prefix (e.g n/)
 </div>
 
 Continuing from the previous example in `add`, you could try this:
@@ -330,10 +331,12 @@ Teacher's Pet allows you to create and manage attendance events, such as lecture
  
 **General Contraints**
 
+
 * **Event Names:**
   * Event names cannot be empty.
   * Event names cannot contain the `/` character.
   * Event names are case-insensitive when matching existing events and checking for duplicates.
+
 
 * **Student Indices:**
   * Each index must be a positive integer corresponding to a student in the current displayed list.
@@ -501,27 +504,34 @@ Displays the list of students who are either present or absent for a specific at
 
 **Common Errors and Solutions**
 
+
 * **Invalid Command Format:**
    * If you include extra text or parameters not specified in the command format, you will receive an error.
    * **Solution:** Ensure your command matches the specified format exactly.
+
 
 * **Event Not Found:**
    * If you attempt to mark, unmark, or list attendance for an event that does not exist.
    * **Solution:** Use `listevents` to view existing events and ensure the event name is correct.
 
+
 * **Duplicate Entries:**
   * If you specify duplicate event names or indices within the same command.
   * **Solution:** Remove duplicates so each event name or index appears only once.
+
 
 * **Invalid Indices:**
    * If you specify indices that are not positive integers or do not correspond to any student in the displayed list.
    * **Solution:** Check the current student list and use valid indices.
 
+
 * **Combining Commands:**
    * Use the `find` or `show` commands to filter the student list before marking or unmarking attendance.
 
+
 * **Consistent Event Naming:**
    * Decide on a consistent naming convention for events to avoid confusion. (eg. `Tutorial 1`, `Tutorial 2`...)
+
 
 * **Regularly List Events:**
    * Use `listevents` frequently to keep track of all your attendance events.

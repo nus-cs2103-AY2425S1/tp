@@ -105,11 +105,11 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Major updatedAddress = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
+        Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
         GroupList updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroupList());
         Year updatedYear = editPersonDescriptor.getYear().orElse(personToEdit.getYear());
         Comment updatedComment = editPersonDescriptor.getComment().orElse(personToEdit.getComment());
-        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress,
+        return new Person(updatedName, updatedStudentId, updatedEmail, updatedMajor,
                 updatedGroups, updatedYear, updatedComment);
     }
 

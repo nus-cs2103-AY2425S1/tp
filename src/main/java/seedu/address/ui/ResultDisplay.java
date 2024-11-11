@@ -43,6 +43,7 @@ public class ResultDisplay extends UiPart<Region> {
         if (styleClass.contains(ERROR_STYLE)) {
             return;
         }
+
         styleClass.add(ERROR_STYLE);
     }
 
