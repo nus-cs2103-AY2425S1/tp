@@ -38,7 +38,7 @@ Let’s begin and get you up to speed with AgentAssist!
    - 5.4 [General Commands](#54-general-commands)
    - 5.5 [Saving Data](#55-saving-data)
    - 5.6 [Modifying the Data File](#56-modifying-the-data-file)
-   - 5.7 [Modifying the Preferences File](#57-modifying-the-window-size)
+   - 5.7 [Modifying the Preferences File](#57-modifying-the-preferences-file)
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
 8. [Command Summary](#8-command-summary)
@@ -123,11 +123,10 @@ To install Java 17:
 >
 > Java is the platform that this AgentAssist runs on, providing the environment needed for smooth operation across different types of computers. Java is also used by many popular desktop applications, such as Minecraft and Apache OpenOffice. By using Java, we ensure that our app performs reliably on all supported systems, including Windows, macOS, and Linux.
 
-### Step 2: Download the AgentAssist application**
+### Step 2: Download the AgentAssist application
 
 Download the latest version of the `.jar` file from the AgentAssist [repository](https://github.com/AY2425S1-CS2103T-T14-4/tp/releases).
-
-[comment]: # (TODO: Add image of GitHub Releases page with annotations to show user the file to install.)
+![img.png](images/ReleasePage.png)
 
 ### Step 3: Choose a Folder
 
@@ -143,7 +142,7 @@ Find or create a folder on your computer where you want to store the AgentAssist
 
 2. **Navigate your terminal to the folder where you saved the AgentAssist application:**
     - In the terminal, type: `cd <folder path>` and press **Enter**. (Replace <folder path> with the actual location of AgentAssist.)
-    - For example, if **AgentAssist** is stored in your **Downloads** folder:
+    - For example, if AgentAssist is stored in your **Downloads** folder:
        - **Windows**: `cd C:\Users\<YourUsername>\Downloads`
        - **macOS/Linux**: `cd /Users/<YourUsername>/Downloads`
 
@@ -170,22 +169,22 @@ The AgentAssist GUI is designed with intuitive sections and color-coded elements
 <img src="images/UiSplitViewWithChartAnnotated.png" alt="UISplitViewWithChartAnnotated">
 
 #### <span style="color: #FF5C5C; font-size: 18px;">⬤</span> Command Box
-The command box provides a CLI-style input field where agents can type commands to execute various actions, such as searching for a client or updating details. This integration of CLI and GUI functionalities provides the efficiency of command-line input within a clear, visual interface.
+The command box provides a CLI-style input field where you can type commands to execute various actions, such as searching for a client or updating details. This integration of CLI and GUI functionalities provides the efficiency of command-line input within a clear, visual interface.
 
 #### <span style="color: #FFC0CB; font-size: 18px;">⬤</span> Result Box
-Displays responses to commands, such as client details, action confirmations, or error messages with helpful hints. This immediate feedback helps agents to quickly verify outcomes, ensuring accuracy and efficiency with each action.
+Displays responses to commands, such as client details, action confirmations, or error messages with helpful hints. This immediate feedback helps you to quickly verify outcomes, ensuring accuracy and efficiency with each action.
 
 #### <span style="color: #22C7FF; font-size: 18px;">⬤</span> Clients’ Contacts List
-A scrollable list that concisely displays client contact information, with icons identifying each field. Colored labels highlight each client’s **credit card tier** and **case status** for agents to track the urgency of each case. This allows agents to view all key information at a glance and easily identify high-priority clients.
+A scrollable list that concisely displays client contact information, with icons identifying each field. Colored labels highlight each client’s **credit card tier** and **case status** to empower you to track the urgency of each case. This allows you to view all key information at a glance and easily identify high-priority clients.
 
 #### <span style="color: #016D90; font-size: 18px;">⬤</span> Client Detail Panel
-When a client is selected from the contacts list via the `view` command, this panel presents a detailed, scrollable view of their information in a split view format. This layout allows agents to see full details, especially when some information might be truncated in the contacts list. Important details, such as contact information, job, and income, are prominently displayed to help agents make informed, prioritized decisions.
+When a client is selected from the contacts list via the `view` command, this panel presents a detailed, scrollable view of their information in a split view format. This layout allows you to see full details, especially when some information might be truncated in the contacts list. Important details, such as contact information, job, and income, are prominently displayed to help you make informed, prioritized decisions.
 
 #### <span style="color: #B251CF; font-size: 18px;">⬤</span> Status Chart
-A pie chart provides a visual summary of client case statuses (e.g., **Urgent**, **Non-Urgent**, **NA**), giving agents a clear overview of their workload distribution and case priorities.
+A pie chart provides a visual summary of client case statuses (e.g., **Urgent**, **Non-Urgent**, **NA**), giving you a clear overview of your workload distribution and case priorities.
 
 ### Tier Color Code for AgentAssist GUI:
-Each client’s tier is represented with a color-coded label located beside their name in the client list or under their name in the Client Detail Panel. This visual aid helps agents quickly assess the importance of each client and serve them with tailored credit card promotions.
+Each client’s tier is represented with a color-coded label located beside their name in the client list or under their name in the Client Detail Panel. This visual aid helps you quickly assess the importance of each client and serve them with tailored credit card promotions.
 
 #### <span style="color: #B59410; font-size: 18px;">⬤</span> Gold Tier
 
@@ -198,12 +197,12 @@ Each client’s tier is represented with a color-coded label located beside thei
 Clients that are not being assigned to any tier (**NA** tier) will not display a tier label on the UI.
 
 ### Status Color Code of AgentAssist GUI:
-Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This system indicates the urgency level of each client’s case, helping agents prioritize tasks.
+Case statuses are also color-coded and appear next to a client’s name in the list or below their name in the Client Detail Panel. This system indicates the urgency level of each client’s case, helping you prioritize tasks.
 
 #### <span style="color: #B22222; font-size: 18px;">⬤</span> Urgent Status
 #### <span style="color: #C46210; font-size: 18px;">⬤</span> Non-Urgent Status
 
-Clients with **NA** status (no follow-up required) do not display a status label on the UI. However, on the pie chart summarizing client case statuses, these clients are represented in green (<span style="color: #009E60; font-size: 18px;">⬤</span>) to indicate their cases are resolved.
+Clients with **NA** status (no follow-up required) have no status label on the UI but are represented in green (<span style="color: #009E60; font-size: 18px;">⬤</span>) on the status pie chart to indicate that their cases are resolved or need no attention.
 
 To learn more about how to use commands in AgentAssist, proceed to the next section.
 
@@ -222,11 +221,11 @@ Each command in AgentAssist consists of three key components: the **command**, *
 
 Let's take a look at the structure in more detail:
 
-| **Components**  | **Description**                                                                                                                                           | **Example**                    |
-|:----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------|
-| **Command**     | The action you want AgentAssist to perform.                                                                                                               | `add`                          |
-| **Flag(s)**     | Modifiers that specify what kind of data is being handled. <br/><br/>Flag(s) are typically 1-2 letters followed by a backslash.                           | `n/`, `e/`, `r/`, `rn/`        |
-| **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> This guide may represent it as a placeholder using `<ARGUMENT>`. | `John Doe`, `john@example.com` |
+| **Components**  | **Description**                                                                                                                                                                                                                    | **Example**                    |
+|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------|
+| **Command**     | The action you want AgentAssist to perform.                                                                                                                                                                                        | `add`                          |
+| **Flag(s)**     | Modifiers that specify what kind of data is being handled. <br/><br/>Flag(s) are typically 1-2 letters followed by a backslash.                                                                                                    | `n/`, `e/`, `r/`, `rn/`        |
+| **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> This guide may represent it as a placeholder using `<ARGUMENT>`.                                                                          | `John Doe`, `john@example.com` |
 
 Here's an example that uses multiple flags and arguments:
 ```
@@ -291,6 +290,8 @@ Here’s a reference table of available flags and the type of data they correspo
 Arguments are the values that are used in a command. 
 - Arguments typically follow after a corresponding flag, with the exception of `<INDEX>`.
 - **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
+- When an argument is entered, any spaces before or after the argument are **ignored**. Example: `add n/ John Doe` and `add n/John Doe` are equivalent. Both pass the argument value of `John Doe`.
+- In this guide we often add a space before any arguments to improve readability, however this is purely cosmetic (i.e., it is still correct without a space).
 
 ### 4.4.1  Flag Arguments
 Flag arguments are the values that follow each flag in a command.
@@ -336,7 +337,7 @@ Refer to the table below for more details.
 > 
 > Ensure that the index supplied is accurate to the current view.
 
-Note: There is a known issue when the supplied index argument is too large. For more information, see Section [7. Known Issues](#7-known-issues).
+**Note**: There is a known issue when the supplied index argument is too large. For more information, see [Known Issues in Section 7](#7-known-issues).
 
 <div style="page-break-after: always;"></div>
 
@@ -344,21 +345,21 @@ Note: There is a known issue when the supplied index argument is too large. For 
 To get started, simply type a command into the command box and hit **Enter**.
 
 Some initial commands to try:
-**Viewing All Clients**
+**Listing All Clients**
 * `list`: This command displays all clients currently in your database, making it easy to browse through entries.
 
 **Adding a New Client**
-* `add n/Jane Doe p/87654321 e/jane@example.com a/123 Jane Road j/doctor i/120000`: Adds Jane Doe to your database with detailed contact information, job title, and income.
+* `add n/ Jane Doe p/ 87654321 e/ jane@example.com a/ 123 Jane Road j/ doctor i/ 120000`: Adds Jane Doe to your database with detailed contact information, job title, and income.
 
 **Editing a Client's Information**
-* `edit 1 p/12345678`: Updates the phone number of the first client in your list to `12345678`.
-* `edit 4 rn/Updated remark(s) here`: Replaces the remark(s) of the fourth client with "Updated remark(s) here".
+* `edit 1 p/ 12345678`: Updates the phone number of the first client in your list to `12345678`.
+* `edit 4 rn/ Updated remark(s) here`: Replaces the remark(s) of the fourth client with "Updated remark(s) here".
 
 **Removing a Client**
 * `delete 3`: Removes the third client from your list. Ensure you have the correct index to avoid deleting the wrong client.
 
 **Searching for a Client**
-* `filter n/Jane`: Finds all clients named Jane in your database. It’s a powerful tool for quickly locating clients or filtering for a specific type of client.
+* `filter n/ Jane`: Finds all clients named Jane in your database. It’s a powerful tool for quickly locating clients or filtering for a specific type of client.
 
 **Viewing Detailed Client Information**
 * `view 1`: Opens a split view showing detailed information for the first client in your list.
@@ -375,7 +376,7 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 >
 > Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
 >
-> For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
+> For example, use `filter j/ doctor` to display all doctors, then `edit 2 a/ 321 New Address` to update the address for the second listed doctor.
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -423,7 +424,7 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 * Mandatory Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`
 * Optional Fields: `t/`, `r/`, `s/`
 
-For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
+Refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments), for detailed explanations of each flag and acceptable arguments
 
 **Examples:**
 - Add new client (without optional fields):
@@ -873,6 +874,8 @@ Install the app in the other computer and overwrite the empty data file it creat
 
 ### How do I change the remarks, credit card tier, or status of an existing client?
 Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the visible `Tier` or `Status` label of a client, use `t/ NA` or `s/ NA` with the `edit` command.
+
+**Note**: If you append to a remark with the value `NA` (an empty remark), it will be replaced with the new remark, without any blank lines appearing.
 
 ### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
