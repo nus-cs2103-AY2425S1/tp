@@ -1154,7 +1154,7 @@ Team size: 5
 8\. **Include Command Overview in Help Pop-Up**
 
   Currently, the pop-up that appears after using the `help` command only provides a link to the detailed user guide. Users are also required to copy the URL given, open a new browser and navigate away from the application to view the commands available.
-  We plan to include a command overview in the pop-up that will display a list of all available commands and their respective constraints. This will allow users to quickly view the commands available without having to navigate away from the application.
+  We plan to include a Command Overview in the pop-up that will display a list of all available commands and their respective constraints. This will allow users to quickly view the commands available without having to navigate away from the application.
 
 9\. **Improve NRIC validation**
 
