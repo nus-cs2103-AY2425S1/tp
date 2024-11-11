@@ -183,7 +183,7 @@ Examples:
 
 Note:
 * `NAME` refers to the full name of contact displayed (to edit) while `n/NAME2` is an input to change the contact's name to (to change to).
-* `edit` command will fail if you enter a duplicate field that an existing contact has as seen in section [invalid contacts](#what-is-considered-as-invalid-contacts)
+* `edit` command will fail if you enter a duplicate field as an existing contact as seen in section [invalid contacts](#what-is-considered-as-invalid-contacts)
 * In the event of `NAME` matching to multiple contacts that exist, you will have to `find NAME` followed by `edit INDEX PARAMETER...` to choose which contact of the specified `NAME` you wish to edit.
 </box>
 
