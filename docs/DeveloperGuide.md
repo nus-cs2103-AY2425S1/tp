@@ -378,13 +378,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AgentAssist` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: U1 - Delete a client**
+**Use case: U1 - List all clients**
 
 **MSS**
 
-1.  User requests to list clients.
-2.  AgentAssist shows a list of clients.
-3.  User requests to delete a specific client in the list.
+1. User requests to see the entire list of clients.
+2. AgentAssist shows a list of clients.
+
+    Use case ends.
+
+**Use case: U2 - Delete a client**
+
+**MSS**
+
+1.  User performs <u>Filter for a client (U4)</u> or <u>List all clients (U1)</u>.
+2.  AgentAssist returns a list of clients.
+3.  User requests to delete a specific client in the list, using the index of the client of the list.
 4.  AgentAssist asks user for confirmation.
 5.  User confirms.
 6.  AgentAssist deletes the client.
@@ -402,15 +411,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AgentAssist shows an error message.
 
       Use case resumes at step 2.
-* 4a. User declines to give confirmation
+* 4a. User declines to give confirmation.
   * 4a1. AgentAssist shows a cancellation message.
   * 4a2. Nothing is changed.
 
-**Use case: U2 - Add a Client**
+**Use case: U3 - Add a Client**
 
 **MSS**
 
-1.  User requests to add a user.
+1.  User requests to add a client.
 2.  AgentAssist adds a client.
 3.  AgentAssist returns a success message.
 
@@ -423,12 +432,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: U3 - Filter for a client**
+**Use case: U4 - Filter for a client**
 
 **MSS**
 
-1.  User requests to view a client using an attribute like name to filter for the client.
-2.  AgentAssist returns a list of users which match the filter set in step 1.
+1.  User requests to search for a client using an attribute like name to filter for the client.
+2.  AgentAssist returns a list of clients which match the filter set in step 1.
 3. AgentAssist returns a success message.
 
     Use case ends.
@@ -439,17 +448,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AgentAssist shows an invalid parameter error message.
 
       Use case resumes at step 1.
-* 1b. No users in the existing data pass the filter
+* 1b. No clients in the existing data pass the filter.
     * 1b1. AgentAssist shows a blank list.
 
       Use case ends.
 
-**Use case: U4 - Edit a Client**
+**Use case: U5 - Edit a Client**
 
 **MSS**
 
-1. User performs <u>Filter for a client(U3)</u> or requests to list all clients.
-2. AgentAssist returns a list of all users which match the filter in step 1.
+1. User performs <u>Filter for a client (U4)</u> or <u>List all clients (U1)</u>.
+2. AgentAssist returns a list of clients.
 3. User specifies which client and attribute they would like to edit, using the index of the client of the list.
 4. AgentAssist edits the selected client.
 5. AgentAssist returns a success message.
@@ -478,11 +487,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
-**Use case: U5 - View a client**
+**Use case: U6 - View a client**
 
 **MSS**
 
-1.  User performs <u>Filter for a client (U3)</u> or requests to list all clients.
+1.  User performs <u>Filter for a client (U4)</u> or requests to <u>List all clients (U1)</u>.
 2.  AgentAssist returns a list of people, with the client in it.
 3.  User requests to view a client, using the index of the client of the list.
 4.  AgentAssist returns a detailed view of the client and a success message.
@@ -496,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
-**Use case: U6 - Close detailed view**
+**Use case: U7 - Close detailed view**
 
 **MSS**
 
@@ -505,16 +514,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U7 - Remove all remarks about a client**
+**Use case: U8 - Remove all remarks about a client**
 
 **MSS**
 
-1.  User performs <u> Edit remarks about a client (U4)</u>.
+1.  User performs <u> Edit remarks about a client (U5)</u>.
 2.  User removes all existing remarks through editing.
 
     Use case ends.
 
-**Use case: U8 - Clear clients' contacts**
+**Use case: U9 - Clear clients' contacts**
 
 **MSS**
 
@@ -533,7 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U9 - Undo the most recent change**
+**Use case: U10 - Undo the most recent change**
 
 **MSS**
 1. User requests to undo the last change made to the list of contacts.
@@ -549,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U10 - Exit**
+**Use case: U11 - Exit**
 
 **MSS**
 
