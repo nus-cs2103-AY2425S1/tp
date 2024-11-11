@@ -46,6 +46,7 @@ To get started, you can read the introduction below, which shows all the differe
 <page-nav-print></page-nav-print>
 
 <br>
+
 ---
 
 <div style="page-break-after: always;"></div>
@@ -209,17 +210,14 @@ This would be a good time to run the `clear person` command, to start afresh wit
 
 All interactions with the DocTrack platform are done through a series of **commands** 
 (explained in <a href="#command-overview" class="badge bg-primary">Command Overview</a>) entered by you. 
-- These commands allow you to perform various **tasks**, such as adding, editing, listing, deleting, finding,
-and clearing persons/appointments. 
-- The commands are designed to be flexible and user-friendly. 
-  - You can add fields in any order.
-  - You can add multiple entries for specific fields.
+- These commands allow you to perform various **tasks**, such as adding, editing, listing, deleting, finding, and clearing persons/appointments. 
+- The commands are designed to be flexible and user-friendly.
 
 <box type="tip" light>
 
 Here are some **key points** to keep in mind when you are using the commands:
 
-- Appointments are sorted by date and Patients are sorted in chronological order.
+- **Appointments** are sorted by **date**. **Patients** are sorted in **chronological** order.
 - You should supply **all** the fields (words in **`UPPER_CASE`**) that are needed for a command.<br>
   _**Example:** In `add person n/NAME`, **`NAME`** is a field which can be used as `add person n/John Doe`._
 
@@ -271,8 +269,7 @@ The following sections describe the various commands you can use in the DocTrack
 ---
 
 <a href="#person-commands" class="badge bg-dark">Person commands</a>
-Click this section to know more about the commands, or click on the individual commands below for information 
-specific to those commands.
+⬅ Click on this section to know more about the commands you can use to manage the list of persons. You can also click on the individual commands below for information specific to these commands.
 
 | Action                                                      | Format                                                                                    | Examples                                                                                                       |
 |-------------------------------------------------------------|-------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
@@ -288,8 +285,7 @@ specific to those commands.
 ---
 
 <a href="#appointment-commands" class="badge bg-dark">Appointment commands</a>
-Click this section to know more about the commands, or click on the individual commands below for information
-specific to those commands.
+⬅ Click on this section to know more about the commands you can use to manage the appointments. You can also click on the individual commands below for information specific to these commands.
 
 | Action                                                                   | Format                                                                                                                   | Examples                                                              |
 |--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
@@ -305,8 +301,8 @@ specific to those commands.
 ---
 
 <a href="#general-commands" class="badge bg-dark">General commands</a>
-Click this section to know more about the commands, or click on the individual commands below for information
-specific to those commands.
+⬅ Click on this section to know more about the general commands. You can
+also click on the individual commands below for information specific to these commands.
 
 | Action                                | Format | Examples |
 |---------------------------------------|--------|----------|
