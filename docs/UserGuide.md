@@ -8,6 +8,8 @@ pageNav: 4
 
 VBook is a **desktop application for freelance software developers to store and organise client contact details and log client preferences.** VBook is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
+VBook (VimBook) is inspired by the Vim editor, where users can edit, navigate, and program faster with the keyboard than using a mouse. Hence, our commands and theme are inspired by the style of Vim.
+
 Software developers who type fast can get their contact management tasks done at lightning speed with VBook's keyboard-only navigation feature. With advanced privacy features like password protection and encryption, VBook ensures that software developers’ client details remain secure and confidential at all times.
 
 <!-- * Table of Contents -->
@@ -26,7 +28,7 @@ Software developers who type fast can get their contact management tasks done at
 
 1. Ensure you have Java `17` or above installed in your computer. For Mac users, you should use the specific `Azul JDK 17` distribution following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `{{ jarFile }}` file from [here](https://github.com/AY2425S1-CS2103T-F12-4/tp/releases/tag/v1.5).
+2. Download the latest `{{ jarFile }}` file from [here](https://github.com/AY2425S1-CS2103T-F12-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for VBook.
 
@@ -51,11 +53,11 @@ java -jar {{ jarFile}}
 
 ![VBook_annotated.png](images/VBook_annotated.png)
 
-1) Contacts are shown in the Display List.
-2) Commands are typed in the Command Box.
-3) Results will be displayed in the Result Display.
+7) Type any command in the Command Box and press <kbd>ENTER</kbd> to execute it. For example, typing **`:help`** and pressing <kbd>ENTER</kbd> will open the help window.
 
-7. Type any command in the Command Box and press <kbd>ENTER</kbd> to execute it. For example, typing **`:help`** and pressing <kbd>ENTER</kbd> will open the help window.
+<box type="info" seamless>
+    The application contains sample contacts. To remove them, type <code>:clear</code> and press <kbd>ENTER</kbd>.
+</box>
 
 For a summary of all our commands, refer to this table below:
 
@@ -64,6 +66,8 @@ For a summary of all our commands, refer to this table below:
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
+
+* All commands are in lowercase.
 
 * Words in `UPPERCASE` are the parameters to be supplied by the user.<br>
   e.g. in `:add -n NAME`, `NAME` is a parameter which can be used as `:add -n John Doe`.
@@ -85,6 +89,28 @@ For a summary of all our commands, refer to this table below:
 
 </box>
 
+<box type="info" seamless>
+
+**Notes about the parameters:**<br>
+
+* Some parameters have restrictions on the values they accept:
+
+    * **Names** should only contain alphanumeric characters and spaces, and it should not be blank.
+    * **Phone numbers** should only contain numbers, and it should be at least 3 digits long. Duplicates are allowed because a single phone number may be used by multiple people, such as a company number.
+    * **Emails** should be of the format local-part@domain and adhere to the following constraints:
+        1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (`+_.-`). The local-part may not start or end with any special characters.
+        2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+           The domain name must:
+            - end with a domain label at least 2 characters long
+            - have each domain label start and end with alphanumeric characters
+            - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    * **Locations** can take any values.
+    * **Tags** should be alphanumeric, only one word long, and under 50 characters.
+    * **Remarks** should only contain alphanumeric characters and spaces.
+    * **Phone numbers**, **Emails**, **Locations**, **Tags** and **Remarks** can be shared by contacts. This is because people in an organisation may share the same information.
+
+</box>
+
 Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -93,6 +119,8 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Commands
 
+<br>
+
 #### View Help
 
 > Shows a command cheatsheet, as well as a link to access this user guide.
@@ -100,6 +128,9 @@ Refer to the [Features](#features) below for details of each command.
 
 **Format** `:help`\
 **Shortcut:** `:h`
+
+<br>
+<br>
 
 #### Add Person
 
@@ -121,7 +152,7 @@ Refer to the [Features](#features) below for details of each command.
 
 From an initial state of the address book as shown above, typing in the commands below will result in an output as shown below.
 
-1. To add a client you met at a wedding named "Jack Lee", key in
+1. To add a client named "Jack Lee", key in
    `:add -n Jack Lee`.
 
 ![addJackLee.png](images/addJackLee.png){width=60%}
@@ -132,6 +163,9 @@ From an initial state of the address book as shown above, typing in the commands
 
 ![addIvyKing.png](images/addIvyKing.png){width=60%}
 
+<br>
+<br>
+
 #### List All
 
 > Shows a list of all persons in the address book.
@@ -139,11 +173,14 @@ From an initial state of the address book as shown above, typing in the commands
 **Format:** `:list`\
 **Shortcut:** `:ls`
 
+<br>
+<br>
+
 #### Edit Person
 
 > Edits an existing person in the address book.
 
-**Format:** `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]…​`\
+**Format:** `:edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]…​ [-r REMARK]`\
 **Shortcut:** `:ed​`
 
 * Edits the person at the specified index. The index refers to the index number shown in the displayed person list.
@@ -168,11 +205,14 @@ From an initial state of the address book as shown above, typing in the commands
 
 ![editBetsyCrower.png](images%2FeditBetsyCrower.png){width=60%}
 
+<br>
+<br>
+
 #### Find Person
 
-> Finds persons whose names contain any of the given keywords.
+>  Finds contacts that match any specified search criteria, including name, phone number, email, location, tags, or remark.
 
-**Format:** `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`\
+**Format:** `:find [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]…​ [-r REMARK]`\
 **Shortcut:** `:f`
 
 * The search is case-insensitive. \
@@ -193,6 +233,9 @@ From an initial state of the address book as shown above, typing in the commands
 1. To find a person named "Alice" with location "789 Oak St", key in `:find -n alice -l oak`.
 
 ![findAlice.png](images/findAlice.png){width=60%}
+
+<br>
+<br>
 
 #### Remove Person
 
@@ -220,6 +263,9 @@ From an initial state of the address book as shown above, typing in the commands
 
 ![removeBetsy.png](images/removeBetsy.png){width=60%}
 
+<br>
+<br>
+
 #### Undo
 
 > Reverts the address book to the state before the last change.\
@@ -239,6 +285,9 @@ From an initial state of the address book as shown above, typing in the commands
 
 </box>
 
+<br>
+<br>
+
 #### Redo
 
 > Reapplies the last change to the address book that was undone with the `:undo` command.\
@@ -257,6 +306,9 @@ From an initial state of the address book as shown above, typing in the commands
 
 </box>
 
+<br>
+<br>
+
 #### Export Data
 
 > Exports the address book data to a specified file in JSON format. Upon command, user will be prompted to
@@ -272,12 +324,18 @@ From an initial state of the address book as shown above, typing in the commands
 
 </box>
 
+<br>
+<br>
+
 #### Clear Data
 
 > Clears all entries from the address book's data.
 
 **Format:** `:clear`\
 **Shortcut:** `:cl`
+
+<br>
+<br>
 
 #### Quit Program
 
@@ -301,14 +359,17 @@ From an initial state of the address book as shown above, typing in the commands
 | Redo          | `:r`     |
 | Export Data   | `:exp`   |
 | Clear Data    | `:cl`    |
-| Quit          | `:q`     |
+| Quit Program  | `:q`     |
 
+
+<br>
+<br>
 
 ### Keyboard Shortcuts
 There are two modes in VBook: Command Box and UI Navigation. The following keyboard shortcuts are available in each mode.
 
 #### Command Box
-* <kbd>Ctrl + Z</kbd> - Undo the last change in the command box.
+* <kbd>Ctrl + Z</kbd> -  Undo the most recently typed words within the command box. This does not affect executed commands.
 * <kbd>F1</kbd> - Open the Help Window.
 * <kbd>ESC</kbd> - Go back to UI Navigation Mode.
 
@@ -324,6 +385,8 @@ There are two modes in VBook: Command Box and UI Navigation. The following keybo
 
 ### Privacy and Security
 
+<br>
+
 #### Password Prompt
 **Initial Setup:**
 When you launch VBook for the first time, you’ll be prompted to create a new password. This password will be used to control access to your address book.
@@ -331,7 +394,7 @@ When you launch VBook for the first time, you’ll be prompted to create a new p
 <box type="info">
 
 **Info:**
-The password will be hashed with a salt and saved into a `password.txt` file stored in the same directory as {{ jarFile }}.
+The password will be hashed with a salt and saved into a `password.txt` file stored in the same directory as `{{ jarFile }}`.
 
 </box>
 
@@ -341,7 +404,7 @@ Each time you open VBook, you’ll be prompted to enter your password. This ensu
 <box type="warning">
 
 **Caution:**
-If you forget your password, there is no way to retrieve your data. To re-enter the application, you can delete the `password.txt` file located in the same directory as VBook.jar. 
+If you forget your password, there is no way to retrieve your data. To re-enter the application, you can delete the `password.txt` file located in the same directory as `VBook.jar`.
 However, deleting this file will also permanently erase all your address book data. This safeguard is designed to prevent unauthorized users from bypassing the password prompt.
 
 </box>
@@ -351,6 +414,9 @@ However, deleting this file will also permanently erase all your address book da
 **Tip:** Store your password in a secure place to avoid losing access to your data.
 
 </box>
+
+<br>
+<br>
 
 #### Encryption
 **How it Works:**
@@ -370,14 +436,19 @@ Encryption only happens the first time you make changes to the address book from
 
 ## File Management
 
+<br>
+
 ### Save Data
 
-> VBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+> VBook data is saved in the hard disk automatically after any command that changes the data. There is no need to
 > save manually.
+
+<br>
+<br>
 
 ### Edit Data File
 
-> The encrypted VBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+> The encrypted VBook data are saved automatically as a JSON file `[JAR file location]/data/vbook.json`.
 
 <box type="warning">
 
@@ -385,7 +456,7 @@ Encryption only happens the first time you make changes to the address book from
 Do not make changes to the encrypted JSON file, as it can corrupt the data and make it unreadable. If you want to manually edit the data file, follow these instructions:
 
 1. Export your data by running `:export`.
-2. Overwrite the empty data file in the new computer's `data/addressbook.json` with the `addressbook.json` file from your export in Step 1.
+2. Overwrite the empty data file in the new computer's `data/vbook.json` with the `vbook.json` file from your export in Step 1.
 3. Run VBook and your modified data should appear.
 
 </box>
@@ -406,7 +477,7 @@ Furthermore, certain edits can cause the VBook to behave in unexpected ways (e.g
 **A**: To transfer your data over, follow these steps:
 1. Export your data from your current computer by running `:export`.
 2. Install VBook in the other computer (refer to [Quick Start](#quick-start) for more information).
-3. Overwrite the empty data file in the new computer's `data/addressbook.json` with the `addressbook.json` file from your export in Step 1.
+3. Overwrite the empty data file in the new computer's `data/vbook.json` with the `vbook.json` file from your export in Step 1.
 4. Run VBook and your data should appear in your new computer.
 
 <box type="tip" seamless>

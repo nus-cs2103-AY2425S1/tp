@@ -64,8 +64,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String COMMAND_SUMMARY_ACTION = "Edit";
     public static final String COMMAND_SUMMARY_FORMAT =
-            ":edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…\n"
-                    + ":ed INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…";
+            ":edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]\n"
+                    + ":ed INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]";
     public static final String COMMAND_SUMMARY_EXAMPLES =
             ":edit 2 -n James Lee -e jameslee@example.com\n"
                     + ":ed 2 -n James Lee -e jameslee@example.com";

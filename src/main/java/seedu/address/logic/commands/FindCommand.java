@@ -46,8 +46,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_SUMMARY_ACTION = "Find";
     public static final String COMMAND_SUMMARY_FORMAT =
-            ":find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…\n"
-                    + ":f [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…";
+            ":find [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]\n"
+                    + ":f [-n NAME] [-p PHONE] [-e EMAIL] [-l LOCATION] [-t TAG]… [-r REMARK]";
     public static final String COMMAND_SUMMARY_EXAMPLES =
             ":find -n david -l serangoon\n"
                     + ":f -n david -l serangoon";
