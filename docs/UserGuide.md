@@ -178,11 +178,15 @@ Adds a student to the address book.
 </box>
 
 <box type="tip" header="##### Tips">
+<markdown>
 
+* If your student's **NAME** contains special character, you should replace it with a suitable alternative.
+    <i>Example: </i> If your student's name is `S/O John`, you may work around it by replacing it with `S O John` or `Son Of John`, or any alternatives if you deem suitable.
 * **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the students's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 * UGTeach will inform you of clashing schedules. You can modify them using the [`edit` command](#editing-a-student-edit).
   ![clashingSchedule.png](images/clashingSchedule.png)
 
+</markdown>
 </box>
 
 <div style="page-break-after: always;"></div>
@@ -215,6 +219,8 @@ Edits an existing student in the address book.
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
 [`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-students-settle)
 for convenient ways to update the paid amount and owed amount.
+* If your student's **NAME** contains special character, you should replace it with a suitable alternative.
+    <i>Example: </i> If your student's name is `S/O John`, you may work around it by replacing it with `S O John` or `Son Of John`, or any alternatives if you deem suitable.
 * **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the student's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 </box>
 
@@ -444,7 +450,7 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
-1. **n/ only accepts alphanumeric characters and spaces**, which might not be suitable for names with special characters, e.g. `Ravi S/O Ramasamy, Devi D/O Rajaratnam`. The workaround is to replace the `S/O` with `so` or `son of`, likewise for `D/O`.
+1. **n/ only accepts alphanumeric characters and spaces**, which might not be suitable for names with special characters, e.g. `Ravi S/O Ramasamy, Devi D/O Rajaratnam`. The workaround is to not include the special characters. E.g. replace the `S/O` with `s o` or `son of`, likewise for `D/O`.
 1. **a/ might not recognise addresses that contains prefixes**, unless the prefix is not separated by a space from `a/`.<br>
 e.g. `edit 1 a/n/Next Door` will edit the first student's address to be `n/Next Door`, but `edit 1 a/ at n/Next Door` will edit the first student's address to be  `at`, and edit the student's name to be `Next Door`.<br>
 The remedy is to avoid using prefixes in the address field. Rest assured that this issue is unlikely to affect daily use cases as it is unlikely for Singapore addresses to contain prefix-like words.
