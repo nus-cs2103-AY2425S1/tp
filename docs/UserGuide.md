@@ -13,7 +13,7 @@ If you are a technical user experienced with CLI feel free to jump right into [q
 ### What is Command Line Interface? 🤔
 Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently on a computer. For example, type `list` in the interface and press enter, the user interface will show you all the contacts you have, simple right! Don't worry if you are still unsure about CLI, it's very easy to pick it up! 😁
 
-### Why use Command Line Interface ? 
+### Why use Command Line Interface? 
 * **Efficiency:** Perform tasks faster by replacing multiple mouse clicks into a single line of text ✅
 * **Precision:** Avoid mis-clicking and mistakes as CLI will execute the exact command you type 💯
 * **Offline:** CLI does not require internet and allows you to use it anywhere 👩‍💻
@@ -82,8 +82,9 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 <div style="page-break-after: always;"></div>
 
+
 ## Command Summary
-Feel free to use this command summary table and navigate to the features that interests you by clicking on the action words 😁
+Feel free to use this command summary table and navigate to the features that interests you by clicking on the action words. 😁
 
 | Action                                                                       | Format, Examples                                                                                                                                                                                     |
 |------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -352,7 +353,7 @@ You can add a wedding to the list of weddings.
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DATE`
 
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
-* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`).
+* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them. 😊(e.g. `John & Jane Local` and `John & Jane Overseas`).
 
 <box type="important" seamless>
 
@@ -385,7 +386,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 **IMPORTANT:** 
 
-* `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information ☺️.
+* `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected. Refer to [Command Summary](#command-summary) for more information. ☺️
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
 * As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed-dw) and ['add-wed'](#adding-a-wedding-add-wed-aw) to change details of a wedding.
 
@@ -609,7 +610,7 @@ Format:
 
 **IMPORTANT:** 
 
-* The clear command must be followed by either `y` or `n` command. Refer to [Command Summary](#command-summary) for more information ☺️.
+* The clear command must be followed by either `y` or `n` command. Refer to [Command Summary](#command-summary) for more information. ☺️
 
 </box>
 
