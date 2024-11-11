@@ -678,8 +678,8 @@ Team Size: 5
    2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
 
 10. **Sort Appointment by Date** 
-   1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
-   2. Sorting of appointments will be in ascending order (earliest to latest).
+    1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
+    2. Sorting of appointments will be in ascending order (earliest to latest).
 
 11. **Fix UI bug regarding date of birth**
     1. Intended Behaviour: For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected. (e.g. 30-02-2024 will return 29-02-2024)
