@@ -879,7 +879,8 @@ testers are expected to do more *exploratory* testing.
 
 <box type="info" seamless>
       **Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
-        applied to edited data, but specific expected results will differ.
+        applied to edited data, but specific expected results will differ. <br>
+      **Suggestion:** Refer to User Guide for additional test cases, such as multiple prefixes or blank keywords.
 </box>
 
 1. Finding a person by name
@@ -1003,27 +1004,51 @@ testers are expected to do more *exploratory* testing.
        Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
 
 
-6. Finding a person by tag
+6. Finding a person by wedding
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
         1. **Tip**: You can also enter the `list-weddings` or `lw` command to list all weddings in the system. <br>
 
-    2. Test case: `find t/guest` <br>
-       Expected: The contacts `Bernice Yu` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+    2. Test case: `find w/wedding 2` <br>
+       Expected: The contact `Charlotte Oliveiro` is shown in the `Person` view. The status message reflects the success of the find command.
 
-    3. Test case: `find t/photographer t/HOTEL MANAGER` <br>
-       Expected: The contacts `Alex Yeoh` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+    3. Test case: `find w/August w/Case` <br>
+       Expected: The contacts `Alex Yeoh`, `Charlotte Oliveiro`, and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case: `find t/NONEXISTENTTAG` (where NONEXISTENTTAG is not a `Tag` in the system) <br>
+    4. Test case: `find w/NONEXISTENTWEDDING` (where NONEXISTENTWEDDING is not a `Wedding` in the system) <br>
        Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    5. Test case:  `find t/UNASSIGNEDTAG` (where UNASSIGNEDTAG is a `Tag` in the system, but there are no `Persons` tagged with it) <br>
+    5. Test case:  `find w/UNASSIGNEDWEDDING` (where UNASSIGNEDWEDDING is a `Wedding` in the system, but there are no `Persons` assigned to it) <br>
        Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    6. Test case:  `find t/` <br>
+    6. Test case:  `find w/` <br>
        Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
 
-    7. Test case:  `find t/photographer a/` <br>
+    7. Test case:  `find w/tom's wedding t/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+
+
+6. Finding a person by task
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+        1. **Tip**: You can also enter the `list-tasks` or `ltasks` command to list all tasks in the system. <br>
+
+    2. Test case: `find tk/invitations` <br>
+       Expected: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find w/August w/Case` <br>
+       Expected: The contacts `Alex Yeoh`, `Charlotte Oliveiro`, and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case: `find w/NONEXISTENTWEDDING` (where NONEXISTENTWEDDING is not a `Wedding` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Test case:  `find w/UNASSIGNEDWEDDING` (where UNASSIGNEDWEDDING is a `Wedding` in the system, but there are no `Persons` assigned to it) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    6. Test case:  `find tk/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+
+    7. Test case:  `find w/tom's wedding t/` <br>
        Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
 
 
