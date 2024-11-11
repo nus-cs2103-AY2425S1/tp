@@ -87,18 +87,23 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        String jsonFilePath = DEFAULT_FILEPATH + DEFAULT_FILENAME + "." + Format.JSON;
+        String jsonFilePath = buildJsonFilePath();
         try {
             List<Map<String, String>> jsonData = readAndParseJson(jsonFilePath);
             Set<String> headers = extractHeaders(jsonData);
-            writeFile(jsonData,
-                    headers,
-                    DEFAULT_FILEPATH + DEFAULT_FILENAME,
-                    this.format);
+            writeFile(jsonData, headers, getFilePath(), this.format);
         } catch (IOException e) {
             return new CommandResult(String.format(FAILURE_MESSAGE, this.format.getKeyword()));
         }
         return new CommandResult(String.format(SUCCESS_MESSAGE, this.format.getKeyword()));
+    }
+
+    private static String getFilePath() {
+        return DEFAULT_FILEPATH + DEFAULT_FILENAME;
+    }
+
+    private static String buildJsonFilePath() {
+        return getFilePath() + "." + Format.JSON;
     }
 
     /**
@@ -129,40 +134,45 @@ public class ExportCommand extends Command {
     }
 
     static List<Map<String, String>> readAndParseJson(String filePath) throws IOException {
-        List<Map<String, String>> jsonData = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        JsonNode rootNode = objectMapper.readTree(new File(filePath));
+        JsonNode rootNode = readJsonFromFile(filePath);
         JsonNode persons = rootNode.get("persons");
+        return addPersonsToJson(persons);
+    }
 
+    private static JsonNode readJsonFromFile(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readTree(new File(filePath));
+    }
+
+    private static List<Map<String, String>> addPersonsToJson(JsonNode persons) {
+        List<Map<String, String>> jsonData = new ArrayList<>();
         for (JsonNode person : persons) {
             Map<String, String> personInfo = new LinkedHashMap<>();
-
-            person.fields().forEachRemaining(entry -> {
-                String header = entry.getKey(); // e.g. name, email, tags, etc.
-                JsonNode value = entry.getValue(); // e.g. the value associated with the header
-
-                // isTextual checks if a JsonNode represents a basic JSON String value.
-                if (value.isTextual()) {
-                    personInfo.put(header, value.asText());
-                    // Note that the tags in bae_addressbook.json are stored in an array literal.
-                    // Therefore, we can't process tags in the same way as we do other variables
-                    // (e.g. name, phone, etc.)
-                } else if (value.isArray() && header.equals("tags")) {
-                    List<String> tags = new ArrayList<>();
-                    for (JsonNode tag : value) {
-                        tags.add(parseTags(tag.toString()));
-                    }
-                    personInfo.put(header, String.join(COMMA + SPACE, tags));
-                } else {
-                    personInfo.put(header, value.toString());
-                }
-            });
-
+            person.fields().forEachRemaining(entry -> parsePerson(entry, personInfo));
             jsonData.add(personInfo);
         }
-
         return jsonData;
+    }
+
+    private static void parsePerson(Map.Entry<String, JsonNode> entry, Map<String, String> personInfo) {
+        String header = entry.getKey(); // e.g. name, email, tags, etc.
+        JsonNode value = entry.getValue(); // e.g. the value associated with the header
+
+        // isTextual checks if a JsonNode represents a basic JSON String value.
+        if (value.isTextual()) {
+            personInfo.put(header, value.asText());
+            // Note that the tags in bae_addressbook.json are stored in an array literal.
+            // Therefore, we can't process tags in the same way as we do other variables
+            // (e.g. name, phone, etc.)
+        } else if (value.isArray() && header.equals("tags")) {
+            List<String> tags = new ArrayList<>();
+            for (JsonNode tag : value) {
+                tags.add(parseTags(tag.toString()));
+            }
+            personInfo.put(header, String.join(COMMA + SPACE, tags));
+        } else {
+            personInfo.put(header, value.toString());
+        }
     }
 
     static Set<String> extractHeaders(List<Map<String, String>> jsonData) {
