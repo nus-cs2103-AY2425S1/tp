@@ -202,6 +202,15 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+
+### Interaction between entities 
+
+<puml src="diagrams/EntityClassDiagram.puml" width="300" />
+
+The interaction between our three entities - `Student`, `Group` and `Task` can be seen in the diagram above.
+
+The diagram has been simplified by omitting their attributes.
+
 ---
 
 <div style="page-break-after: always;"></div>
