@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Represents a reminder in NetBook
  */
 public class Reminder {
-    public static final String MESSAGE_CONSTRAINTS_DATE = "Date input is incorrect. Please check if the date is valid and "
-            + "follows the DD-MM-YYYY format";
+    public static final String MESSAGE_CONSTRAINTS_DATE = "Date input is incorrect. Please check if the date is valid"
+            + " and follows the DD-MM-YYYY format";
     public static final String MESSAGE_CONSTRAINTS_DESCRIPTION = "Description should not be empty";
     public static final String VALIDATION_REGEX = "[^\\s].*";
     public final LocalDate reminderDate;
