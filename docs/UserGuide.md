@@ -65,8 +65,10 @@ done faster than traditional GUI apps.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `deleteall`, `undo`) will be ignored.<br>
+* Extraneous parameters for commands that **do not** take in parameters (such as `help`, `list`, `exit`, `deleteall`, `undo`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Extraneous parameters for commands that **do** take in parameters (such as `adds`, `deletes`) will result in undefined behaviour.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
@@ -182,6 +184,12 @@ Examples:
 * `deletes n/John Tan` deletes the student with the exact name `John Tan` from the contact list.
 * `deletes n/Betsy sn/A0123456X` deletes the student with the exact name `Betsy` and student number `A0123456X` from the contact list.
 
+### Clearing all data and deleting all students : `deleteall`
+
+Deletes all students from the contact list.
+
+Format: `deleteall`
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -199,6 +207,12 @@ Examples:
 Marks attendance of student for a particular date with the specified details.
 
 Format: `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`
+
+Examples:
+* If `Adam Lee` is a unique name, `markat n/Adam Lee dt/2024-12-12 pr/p` marks the student with the name `Adam Lee` present on `2024-12-12`.
+* If `Mary Tan` is a unique name, `markat n/Mary Tan dt/2024-09-11 pr/a` marks the student with the name `Mary Tan` present on `2024-09-11`.
+* If there are multiple students with the name `Adam Lee`, `markat n/Adam Lee dt/2024-12-12 pr/p sn/A1234567Z` marks the student with the name `Adam Lee` and student number `A1234567Z` present on `2024-12-12`.
+* If there are multiple students with the name `Mary Tan`, `markat n/Mary Tan dt/2024-09-11 pr/a sn/A0123456X` marks the student with the name `Mary Tan` and student number `A0123456X` absent on `2024-09-11`.
 
 ### Marking Tutorial Group Attendance to Present : `markpresentall`
 
@@ -326,11 +340,11 @@ _Details coming soon ..._
 
 | Action                                          | Format, Examples                                                                                                                                                              |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                                         | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`                                                        |
-| **Clear**                                       | `deleteall`                                                                                                                                                                   |
-| **Delete**                                      | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                                                                              |
-| **Edit**                                        | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                     |
-| **View**                                        | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                                                                    |
+| **Add Student**                                 | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`                                                        |
+| **Clear Contact List**                          | `deleteall`                                                                                                                                                                   |
+| **Delete Student**                              | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                                                                              |
+| **Edit Student**                                | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                     |
+| **View Student(s)**                             | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                                                                    |
 | **List**                                        | `list`                                                                                                                                                                        |
 | **Help**                                        | `help`                                                                                                                                                                        |
 | **Undo**                                        | `undo`                                                                                                                                                                        |

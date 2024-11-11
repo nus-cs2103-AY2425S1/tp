@@ -18,6 +18,7 @@ public class GetAttendanceByTgCommandParser implements Parser<GetAttendanceByTgC
     public GetAttendanceByTgCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_GROUP);
         argMultimap.verifyNoInvalidPrefixesFor(args);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_GROUP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIAL_GROUP) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

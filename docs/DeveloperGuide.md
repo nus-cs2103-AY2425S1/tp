@@ -264,17 +264,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Grading an assignment (for one student)**
 
-**Actor: Tutor, Student**
-
 **MSS**
 
 1.  Tutor requests to add a new assignment for the specified student upon release of the assignment.
 2.  Teletutors App confirms the assignment has been successfully added and displays the newly added assignment.
-3.  Student completes and submits the assignment.
-4.  Tutor requests to mark the assignment's submission status as submitted.
-5.  Teletutors App confirms the assignment has been successfully marked as submitted and displays the assignment as submitted.
-6.  Tutor requests to give the assignment a grade.
-7.  Teletutors App confirms the assignment has been successfully graded and displays the grade for the assignment.
+3.  Upon receiving the assignment, tutor requests to mark the assignment's submission status as submitted.
+4.  Teletutors App confirms the assignment has been successfully marked as submitted and displays the assignment as submitted.
+5.  Tutor requests to give the assignment a grade.
+6.  Teletutors App confirms the assignment has been successfully graded and displays the grade for the assignment.
     
     Use case ends.
 
@@ -438,13 +435,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Launch the jar using the java -jar command Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Launch the jar using the java -jar command Expected: Shows the GUI with no contacts currently. The window size may not be optimum.
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by using the java -jar command.<br>
        Expected: The most recent window size and location is retained.
 
 
