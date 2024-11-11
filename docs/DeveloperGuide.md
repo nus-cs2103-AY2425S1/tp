@@ -90,7 +90,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1,2")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -192,16 +192,25 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
 </box>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+### Data archiving
 
---------------------------------------------------------------------------------------------------------------------
+The data archiving feature allows users to mark contacts as archived rather than permanently deleting them.
+Archiving can be used to manage inactive or unneeded contacts without losing historical information or
+requiring deletion, which is irreversible after the app has been exited or closed.
+
+#### Implementation Details
+The archiving feature is implemented using the `ArchiveCommand` class, which uses a boolean flag `shouldArchive`
+to handle both archiving and unarchiving actions. Instead of directly modifying the `Person` object, which is immutable,
+a new `Person` instance is created with the updated archive status.
+
+<puml src="diagrams/ArchiveSequenceDiagram.puml" width="650" />
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -334,7 +343,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User keys in command to open help manual.
 2. SocialBook displays help manual.
 3. User closes help manual.
-4. SocialBook displays previously shown screen.
 	
     Use case ends.
 
@@ -344,7 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. SocialBook displays detailed command instructions.
 
-    Use case ends.
+      Use case ends.
 
 	
 **Use case: UC05 - Edit existing information of a person**
@@ -370,10 +378,87 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
+**Use case: UC06 - Check eligibility for assistance**
+
+**MSS:**
+
+1. User chooses which person to check eligibility for assistance.
+2. SocialBook displays what schemes the person is eligible for.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. SocialBook detects missing or invalid input.
+    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a2. User corrects the input and enters the command again.
+    * Steps 1a1-1a2 are repeated until the user enters a correct input.
+    
+      Use case resumes from step 2.
+
+
+**Use case: UC07 - Add a scheme to a person**
+
+**MSS**
+1. User <ins>checks what schemes a person is eligible for (UC06).</ins>
+2. User selects a scheme to add to the person.
+3. SocialBook adds the scheme to the person and displays the updated information.
+
+    Use case ends.
+
+**Extensions:**
+* 2a. SocialBook detects missing or invalid input.
+    * 2a1. SocialBook informs user that the index is invalid.
+    * 2a2. User corrects the input and enters the command again.
+    * Steps 2a1-2a2 are repeated until the user enters a correct input.
+
+        Use case resumes from step 3.
+  
+* 2b.  The scheme is already added to the person.
+    * 2b1. SocialBook informs user that the scheme is already added to the person.
+        
+      Use case ends.
+
+**Use case: UC08 - View what schemes a person is under**
+1. User chooses which person to check .
+2. SocialBook displays what schemes the current person is under.
+
+    Use case ends.
+
+**Extensions:**
+
+* 1a. SocialBook detects missing or invalid input.
+    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a2. User corrects the input and enters the command again.
+    * Steps 1a1-1a2 are repeated until the user enters a correct input.
+
+      Use case resumes from step 2.
+
+**Use case: UC09 - Delete schemes from a person**
+
+**MSS**
+1. User <ins>checks what schemes a person is under (UC08).</ins>
+2. User selects a scheme to delete from the person.
+3. SocialBook deletes the scheme from the person and displays the updated information.
+
+   Use case ends.
+
+**Extensions:**
+* 2a. SocialBook detects missing or invalid input.
+    * 2a1. SocialBook informs user that the index is invalid.
+    * 2a2. User corrects the input and enters the command again.
+    * Steps 2a1-2a2 are repeated until the user enters a correct input.
+
+      Use case resumes from step 3.
+
+* 2b. User chooses to delete more than 1 scheme at a time.
+    * 2b1. SocialBook deletes the schemes from the person and displays the updated information.
+      
+      Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on most _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should be usable by a novice and does not require prior training.
@@ -384,10 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **API**: Application programming interfaces, which defines the standards and protocols that allow different software components to communicate with one another.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Custom command aliases**: Alternative command names that work the same if called as the actual command name.
-* **Breadth-first iterative development**: Evolves all major components and functionality areas in parallel, producing a working product at the end of each iteration
-
+* **CLI**: A text-based interface that allows users to interact with software or operating systems by typing commands, offering precise control over tasks.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -436,6 +518,49 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `delete 1,10000`<br>
       Expected: No person is deleted. Error details about invalid index shown in the display message.
 
+### Archiving a person
+
+1. Archiving a person while all persons are being shown
+
+    1. Prerequisites: List persons using the `list all/` command. Ensure there are multiple persons in the list, including both archived and current (i.e. not archived) persons.
+
+    2. Test case: `archive <index_of_current_person>`<br>
+       Expected: The specified person is marked as archived in the list. His/her name is shown in the display message.
+    3. Test case: `archive 0`<br>
+       Expected: No person is archived. Error details about invalid format shown in the display message.
+    4. Test case: `archive john`<br>
+       Expected: No person is archived. Error details about invalid format shown in the display message.
+    5. Test case: `archive`<br>
+         Expected: No person is archived. Error details about invalid format shown in the display message.
+
+2. Archiving an archived person
+
+    1. Prerequisites: At least one person in the list is already archived.
+
+    2. Test case: `archive <index_of_archived_person>`<br>
+       Expected: No change in the list. Error message is displayed indicating that the person is currently archived.
+
+### Unarchiving a person
+
+1. Unarchiving a person while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list all/` command. Ensure there are multiple persons in the list, including both archived and current (i.e. not archived) persons.
+
+   2. Test case: `unarchive <index_of_archived_person>`<br>
+     Expected: The specified person is marked as not archived in the list. His/her name is shown in the display message.
+   3. Test case: `unarchive 0`<br>
+     Expected: No person is unarchived. Error details about invalid format shown in the display message.
+   4. Test case: `unarchive john`<br>
+     Expected: No person is unarchived. Error details about invalid format shown in the display message.
+   5. Test case: `unarchive`<br>
+     Expected: No person is unarchived. Error details about invalid format shown in the display message.
+
+2. Unarchiving a current person
+
+    1. Prerequisites: At least one person in the list is currently not archived.
+
+    2. Test case: `unarchive <index_of_current_person>`<br>
+       Expected: No change in the list. Error message is displayed indicating that the person is currently not archived.
 
 ### Saving data
 

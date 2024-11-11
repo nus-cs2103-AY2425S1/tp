@@ -40,7 +40,10 @@ public class DeleteSchemeCommandParser implements Parser<DeleteSchemeCommand> {
         ArrayList<Index> schemeIndex = new ArrayList<>();
         for (String index : indexArr) {
             try {
-                schemeIndex.add(ParserUtil.parseIndex(index));
+                Index currentIndex = ParserUtil.parseIndex(index);
+                if (!schemeIndex.contains(currentIndex)) {
+                    schemeIndex.add(currentIndex);
+                }
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         DeleteSchemeCommand.MESSAGE_USAGE), pe);

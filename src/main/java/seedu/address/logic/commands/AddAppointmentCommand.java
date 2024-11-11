@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
@@ -49,6 +50,7 @@ public class AddAppointmentCommand extends Command {
      * Creates an AddAppointmentCommand to schedule an appointment with a person at the specified index.
      */
     public AddAppointmentCommand(Index index, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        requireAllNonNull(index, date, startTime, endTime);
         this.index = index;
         this.date = date;
         this.startTime = startTime;
