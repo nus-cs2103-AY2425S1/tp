@@ -96,9 +96,9 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 ![Ui](images/intro/Ui.png)
 <br>
 
-5. In the application the box that says `Enter command here ... ` is called the command box. This is where you will input in your commands. 
+5. In the application, the box that says **Enter command here ...** is called the command box. This is where you will input in your commands. 
 
-6. The box below the command box is called the `results display box`. This is where the result of your inputted command will be displayed. 
+6. The box below the command box is called the **results display box**. This is where the result of your inputted command will be displayed. 
 
 7. Type commands in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
