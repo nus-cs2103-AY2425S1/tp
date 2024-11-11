@@ -53,6 +53,7 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 
 - [Quick Start :rocket:](#QUICKSTART)
 - [Features :computer:](#FEATURES)
+  - [Data Formats](#data-formats)
   - [MAIN Commands](#main-commands)
     - [Viewing help : `help`](#help)
     - [Listing all students : `list`](#list)
@@ -181,7 +182,7 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 | `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
 | `PHONE_NUMBER` | must only contain **numbers**, and it should be **at least 3 digits long**.                                                                                             |
 | `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm).                                                                        |
-| `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 2 or 3 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                               |
+| `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 1 or more *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                     |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
 | `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99.                                                                  |
 
@@ -374,6 +375,8 @@ Format: **`person-delete m/MATRICULATION_NUMBER​​`**
 
 <div style="page-break-after: always;"></div>
 
+<a name="course-commands">
+
 ### Course Commands
 
 This is for managing the **courses** you are (or previously were, *cuz why not*)
@@ -381,7 +384,7 @@ teaching.
 
 <box type="warning">
 
-Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [:fa-solid-link: data format](#data-formats)!
+Reminder: where used, parameters must follow the [:fa-solid-link: data format](#data-formats)!
 </box>
 
 <a name="course-add">
@@ -392,6 +395,9 @@ Adds a course to TAHub Contacts.
 <box type="definition" seamless><md>
 Format: **`course-add c/COURSE_CODE n/COURSE_NAME`**
 </md></box>
+
+- `COURSE_CODE` must be unique and follow the `COURSE_CODE` [format](#data-formats)
+- `COURSE_NAME` must follow the `COURSE_NAME` [format](#data-formats)
 
 | **Examples** |
 | :--- |
@@ -411,7 +417,7 @@ Format: **`course-edit c/COURSE_CODE n/COURSE_NAME`**
 </md></box>
 
 - `COURSE_CODE` must be an existing course code.
-- `COURSE_NAME` is the new course name and must only contain alphanumeric characters or spaces **and** follow the `COURSE_NAME` [format](#data-formats).
+- `COURSE_NAME` is the new course name and must follow the `COURSE_NAME` [format](#data-formats).
 - Note that it is **not possible** to **edit** the course code. If you want to do so, create a **new course** with the different code.
 
 | **Examples** |
@@ -440,6 +446,13 @@ Format: **`course-delete c/COURSE_CODE`**
 <box type="important">
 
 **Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
+</box>
+
+The courses are stored in file `data/courselist.json` for easy import/export.
+
+<box type="important">
+
+**Caution:** If any of the fields in `courselist.json` are invalid, no courses will be loaded and may result in data loss.
 </box>
 
 </panel>
@@ -716,22 +729,22 @@ So be careful especially when you're using desctructive (deletion) commands!
 
 <!-- markdownlint-disable MD013 -->
 
-|           Action          | Format, Examples                                                                                                                                                                                                  |
-|:--------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help                      | `help`                                                                                                                                                                                                            |
-| List Students             | `list`                                                                                                                                                                                                            |
-| Clear                     | `clear`                                                                                                                                                                                                           |
-| Exit                      | `exit`                                                                                                                                                                                                            |
-| Add Student               | `person-add m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br>e.g.`person-add m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| Find Students by Name     | `person-find KEYWORD [MORE_KEYWORDS]`<br>e.g.`person-find James Jake`                                                                                                                                             |
-| Edit Student              | `person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`person-edit m/A0296210X n/James Lee e/jameslee@example.com`                                                        |
-| Delete Student            | `person-delete m/MATRICULATION_NUMBER`<br>e.g.`person-delete m/A0296210X`                                                                                                                                         |
-| Add Course                | `course-add c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                         |
-| Edit Course               | `course-edit c/COURSE_CODE n/NAME`<br>e.g.`course-edit c/CS1101S n/Programming Basics`                                                                                                                              |
-| Delete Course             | `course-delete c/COURSE_CODE n/NAME`<br>e.g.`course-delete c/CS3230`                                                                                                                                                |
+| Action                    | Format, Examples                                                                                                                                                                                                       |
+|:--------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help                      | `help`                                                                                                                                                                                                                 |
+| List Students             | `list`                                                                                                                                                                                                                 |
+| Clear                     | `clear`                                                                                                                                                                                                                |
+| Exit                      | `exit`                                                                                                                                                                                                                 |
+| Add Student               | `person-add m/MATRICULATION_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`<br>e.g.`person-add m/A0177310M n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`      |
+| Find Students by Name     | `person-find KEYWORD [MORE_KEYWORDS]`<br>e.g.`person-find James Jake`                                                                                                                                                  |
+| Edit Student              | `person-edit m/MATRICULATION_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br>e.g.`person-edit m/A0296210X n/James Lee e/jameslee@example.com`                                                             |
+| Delete Student            | `person-delete m/MATRICULATION_NUMBER`<br>e.g.`person-delete m/A0296210X`                                                                                                                                              |
+| Add Course                | `course-add c/COURSE_CODE n/COURSE_NAME`<br>e.g.`add c/CS1101S n/Programming Methodology 1`                                                                                                                            |
+| Edit Course               | `course-edit c/COURSE_CODE n/NAME`<br>e.g.`course-edit c/CS1101S n/Programming Basics`                                                                                                                                 |
+| Delete Course             | `course-delete c/COURSE_CODE`<br>e.g.`course-delete c/CS3230`                                                                                                                                                          |
 | Enroll Student            | `enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`enroll m/A1234567Y c/CS1101S  tut/T10`                                                                                                           |
 | Unenroll Student          | `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`unenroll m/A1234567Y c/CS1101S  tut/T10`                                                                                                       |
-| Mark Present           | `attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend attend m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
+| Mark Present              | `attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-present m/A1234567Y c/CS1101S  tut/T10`                                                                                           |
 | Mark Absence              | `attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-absent m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
 | Remove Attendance Session | `attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-remove m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
 | Clear Attendance          | `attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-clear m/A1234567Y c/CS1101S  tut/T10`                                                                                               |

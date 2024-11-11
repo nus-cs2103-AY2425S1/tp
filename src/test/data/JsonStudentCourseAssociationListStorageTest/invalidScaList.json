@@ -1,0 +1,33 @@
+{
+  "scas" : [ {
+    "matricNumber" : "A2345678",
+    "courseCode" : "MA1521",
+    "tutorial" : {
+      "tutorialId" : "T01",
+      "course" : {
+        "courseCode" : "MA1521",
+        "courseName" : "Calculus I"
+      }
+    },
+    "attendance" : {
+      "attendanceList" : [ {
+        "isSessionAttended" : true
+      }, {
+        "isSessionAttended" : false
+      }]
+    }
+  }, {
+    "matricNumber" : "A1234567X",
+    "courseCode" : "CS21n03T",
+    "tutorial" : {
+      "tutorialId" : "T02",
+      "course" : {
+        "courseCode" : "CS2103T",
+        "courseName" : "Software Engineering"
+      }
+    },
+    "attendance" : {
+      "attendanceList" : []
+    }
+  } ]
+}

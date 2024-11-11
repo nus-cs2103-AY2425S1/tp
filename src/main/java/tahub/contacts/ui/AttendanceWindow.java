@@ -11,6 +11,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import tahub.contacts.commons.core.LogsCenter;
 import tahub.contacts.logic.Logic;
+import tahub.contacts.logic.commands.exceptions.CommandException;
+import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.AttendanceSession;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
@@ -204,10 +206,18 @@ public class AttendanceWindow extends UiPart<Stage> {
     @FXML
     private void handleMarkPresent() {
         if (currentSca != null) {
-            currentSca.getAttendance().addAttendedLesson();
-            refreshDisplay();
+            String commandText = "attend-present m/" + currentSca.getStudent().getMatricNumber()
+                    + " c/" + currentSca.getCourse().courseCode.toString()
+                    + " tut/" + currentSca.getTutorial().getTutorialId();
+            try {
+                logic.execute(commandText);
+                refreshDisplay();
+            } catch (CommandException | ParseException e) {
+                logger.severe("Failed to mark attendance as present: " + e.getMessage());
+            }
         }
     }
+
     /**
      * Handles the action of marking a student as absent for a new attendance session.
      * Updates the attendance record and refreshes the display.
@@ -215,8 +225,15 @@ public class AttendanceWindow extends UiPart<Stage> {
     @FXML
     private void handleMarkAbsent() {
         if (currentSca != null) {
-            currentSca.getAttendance().addAbsentLesson();
-            refreshDisplay();
+            String commandText = "attend-absent m/" + currentSca.getStudent().getMatricNumber()
+                    + " c/" + currentSca.getCourse().courseCode.toString()
+                    + " tut/" + currentSca.getTutorial().getTutorialId();
+            try {
+                logic.execute(commandText);
+                refreshDisplay();
+            } catch (CommandException | ParseException e) {
+                logger.severe("Failed to mark attendance as present: " + e.getMessage());
+            }
         }
     }
 

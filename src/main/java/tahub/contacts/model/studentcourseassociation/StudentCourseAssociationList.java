@@ -229,6 +229,14 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
     }
 
     /**
+     * Removes zero or more SCAs containing the specified course.
+     */
+    public void remove(Course course) {
+        requireNonNull(course);
+        internalList.removeIf(sca -> sca.getCourse().equals(course));
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<StudentCourseAssociation> asUnmodifiableObservableList() {
