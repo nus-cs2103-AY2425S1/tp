@@ -394,29 +394,40 @@ Format: `aggGrade OPERATION [n/TEST_NAME]`
 - `median`: Taking **median**
 
 Without the `[n/TEST_NAME]` parameter, the command performs the selected aggregation `OPERATION` on the **overall grade** of the current filtered list.
+**This includes persons without any grades listed**, for which the overall grade is taken as 0.00.
 
 When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command changes to perform the selected aggregation `OPERATION` **only on
-`TEST_NAME` tests** of the current filtered list.
+`TEST_NAME` tests** of the current filtered list. This will only include **persons who have the specified test recorded in their grade list**.
 
 Example:
 
 - `aggGrade mean`<br>
-  Shows the mean of the overall grade of the current filtered list.
+  Shows the mean of the overall grade of the current filtered list.<br>
+  Expected output:
+
+  ![result for 'aggGrade mean'](images/aggGrade_mean_normal.png)
+
+  In this example, `aggGrade mean` calculates the mean of the overall grades of Alex Yeoh and Bernice Yu, which are 86.40 and 87.00 respectively.
+
+- `aggGrade min`<br>
+  Shows the minimum of the overall grade of the current filtered list (including persons with no grades).<br>
+  Expected output:
+
+  ![result for 'aggGrade min'](images/aggGrade_min_normal.png)
+
+  In this example, `aggGrade min` calculates the minimum of the overall grades of Alex Yeoh and Bernice Yu, which are 86.40 and 0.00 respectively.
+
+<div style="page-break-after: always;"></div>
+
 - `aggGrade mean n/final`<br>
-  Shows the mean for final tests of the current filtered list.
+  Shows the mean for final tests of the current filtered list.<br>
+  Expected output:
 
-Expected output for `aggGrade mean`:
+  ![result for 'aggGrade mean n/final'](images/aggGrade_mean_filtered.png)
 
-![result for 'aggGrade mean'](images/aggGrade_normal.png)
-
-In the example above, `aggGrade mean` calculates the mean of the overall grades of Alex Yeoh and Bernice Yu, which are 86.40 and 87.00 respectively.
-
-Expected output for `aggGrade mean n/final`:
-
-![result for 'aggGrade mean n/final'](images/aggGrade_filtered.png)
-
-In the example above, `aggGrade mean n/final` calculates the mean of the final grades of **people who have their final tests recorded in their grade list**.
-In this case, only Alex Yeoh and Bernice Yu have their final marks recorded, which are 87.00 and 90.00 respectively.
+  In this example, `aggGrade mean n/final` calculates the mean of the final grades of **persons who have their final tests recorded in their grade list**.
+  Only Alex Yeoh and Bernice Yu have their final marks recorded, which are 87.00 and 90.00 respectively.
+  Other persons like Charlotte Oliveiro are not included in the calculation.
 
 <div style="page-break-after: always;"></div>
 
