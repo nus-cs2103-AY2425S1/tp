@@ -10,7 +10,7 @@
 
 ## **Acknowledgements**
 
-* Our friend Lenzork, for their unsolicited contribution to our GitHub repository by providing a comprehensive list of gifts. 
+* Our friend Lenzork, for his unsolicited contribution to our GitHub repository by providing a comprehensive list of gifts. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
