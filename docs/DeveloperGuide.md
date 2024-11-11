@@ -528,46 +528,96 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a person
+1. Adding people
+    1. Test case: `add n/NAME p/PHONE`<br>
+       Expected: Contact with the given NAME and PHONE are added into the contact list.
+    3. Test case: `add n/NAME p/PHONE ...` with other fields like email, income, age, notes, tags<br>
+       Expected: Contact with the given fields are added into the contact list.
+    4. Other incorrect add commands to try: `add`, `add n/NAME`, `...` (where the parameters are invalid, or NAME or PHONE are missing)<br>
+       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
+### Editing a person
+1. Editing people
+    1. Prerequisites: List all persons using the `list` command. At least 1 person in the list.
+    2. Test case: `edit INDEX n/NAME`<br>
+       Expected: Contact at the given INDEX will have their NAME updated, provided it doesn't create a duplicate.
+    3. Test case: `edit INDEX x/y...` (where x is any valid parameter and y any valid value satisfying the parameter's constraints)<br>
+       Expected: Contact at the given INDEX will have their fields updated, provided it doesn't create a duplicate.
+    4. Other incorrect add commands to try: `edit`, `edit x n/NAME`, `...` (where x is an invalid index, or where the parameters are invalid)<br>
+       Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete NAME` with non-similar names<br>
+       Expected: Contact whose name matches exactly is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete NAME` with similar names<br>
+       Expected: Contact whose name matches similarly are displayed. Status message prompts user to delete by index.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
+### Finding a person
 1. Finding people while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with one or more contacts containing the word `Roy`
-   2. Test case: `find Roy`<br>
-      Expected: Contacts containing `Roy` is displayed.
-   3. Test case: `find roy`<br>
-      Expected: Similar to previous.
-   4. Test case: `find royt`<br>
-      Expected: Contacts similar to `royt` is displayed.
-   5. Other find commands to try: `find x`, `...` (where x is any sequence of characters)<br>
-      Expected: Similar to previous.
-   5. Test case: `find`<br>
-      Expected: No person is found. Error details shown in the status message. Status bar remains the same.
+    2. Test case: `find Roy`<br>
+       Expected: Contacts containing `Roy` is displayed.
+    3. Test case: `find roy`<br>
+       Expected: Similar to previous.
+    4. Test case: `find royt`<br>
+       Expected: Contacts similar to `royt` is displayed.
+    5. Other find commands to try: `find x`, `...` (where x is any sequence of characters)<br>
+       Expected: Similar to previous.
+    5. Test case: `find`<br>
+       Expected: No person is found. Error details shown in the status message. Status bar remains the same.
 
+### Filtering a person
 1. Filtering people while all persons are being shown
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-   2. Test case: `filter p/+65`<br>
-      Expected: Contacts containing in their phone `+65` is displayed.
-   3. Test case: `filter p/+++`<br>
-      Expected: No person is found. Error details shown in the status message. Status bar remains the same.
-   4. Other incorrect filter commands to try: `filter p/x`, `...` (where x is any invalid phone number)<br>
-      Expected: Similar to previous.
-   5. Other incorrect filter commands to try: `filter y/x`, `...` (where x is any invalid field, and y is any valid field format)<br>
-      Expected: Similar to previous.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `filter p/+65`<br>
+       Expected: Contacts containing in their phone `+65` is displayed.
+    3. Test case: `filter p/+++`<br>
+       Expected: No person is found. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect filter commands to try: `filter p/x`, `...` (where x is any invalid phone number)<br>
+       Expected: Similar to previous.
+    5. Other incorrect filter commands to try: `filter y/x`, `...` (where x is any invalid field, and y is any valid field format)<br>
+       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Listing people
+1. Listing people while all persons are being shown
+    1. Prerequisites: Multiple persons in the list.
+    2. Test case: `list`<br>
+       Expected: Contacts displayed sorted by Name in ascending order.
+    3. Test case: `list s/name r/`<br>
+       Expected: Contacts displayed sorted by Name in descending order.
+    4. Test case: `list s/x` (where x is any valid sorting field of name, email, age, income)<br>
+       Expected: Contacts displayed sorted by x in ascending order.
+    5. Other incorrect list commands to try: `list s/x`, `...` (where x is any invalid sorting field)<br>
+       Expected: No person is found. Error details shown in the status message. Status bar remains the same.
+
+### Adding Notes
+1. Adding notes to people while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. At least 1 person in the list.
+    2. Test case: `notes add/NAME nt/NOTES`<br>
+       Expected: Contact matching NAME has notes added successfully as NOTES.
+    3. Test case: `notes view/NAME`<br>
+       Expected: Displays the notes saved on the contact matching NAME.
+    4. Test case: `notes edit/NAME`<br>
+       Expected: Shows a pop-up window to edit notes for the contact matching NAME and saves upon user confirmation.
+    5. Test case: `notes del/NAME`<br>
+       Expected: Removes the notes on the contact matching NAME.
+    6. Test case: `notes x/y` (where x is any valid PARAMETER, y any valid INDEX)<br>
+       Expected: Similar to above for NAME, but works with INDEX too.
+    7. Other incorrect filter commands to try: `notes x/y`, `...` (where x is any invalid PARAMETER, and y is any invalid INDEX or NAME)<br>
+       Expected: No person is found. Error details shown in the status message. Status bar remains the same.
 
 ### Saving data
 
