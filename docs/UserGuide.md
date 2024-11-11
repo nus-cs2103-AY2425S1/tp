@@ -179,7 +179,7 @@ Edits the contact at the specified `INDEX`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed.
-* You can remove all the contacts’s tags by typing `t/` without
+* You can remove all the contact's tags by typing `t/` without
   specifying any tags after it.
   </box>
 
