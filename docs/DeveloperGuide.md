@@ -338,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-### **1\. Use Case: Add a New Student Contact**
+#### **1\. Use Case: Add a New Student Contact**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
@@ -361,7 +361,7 @@ Use case ends.
 
 ---
 
-### **2\. Use Case: View Student Contact Information**
+#### **2\. Use Case: View Student Contact Information**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
@@ -381,7 +381,7 @@ Use case ends.
 
 ---
 
-### **3\. Use Case: Record Student Grade**
+#### **3\. Use Case: Record Student Grade**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
@@ -404,7 +404,7 @@ Use case ends.
 
 ---
 
-### **4\. Use Case: View Student Grades**
+#### **4\. Use Case: View Student Grades**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
@@ -424,7 +424,7 @@ Use case ends.
 
 ---
 
-### **5\. Use Case: Mark Attendance**
+#### **5\. Use Case: Mark Attendance**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
