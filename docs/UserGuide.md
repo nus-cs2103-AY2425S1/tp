@@ -290,7 +290,7 @@ Records the tuition fee that the student is unable to pay immediately after the 
 
 ### Settling outstanding fees from students: `settle`
 
-Settles the amount repaid by the student and adds it to the paid amount. To record payment which is not related to the owed amount, you may use the [`pay` command](#receiving-payment-from-a-student-pay).
+Settles the amount owed by the student and adds it to the paid amount. To record payment which is not related to the owed amount, you may use the [`pay` command](#receiving-payment-from-a-student-pay).
 
 **Format:** `settle INDEX amount/AMOUNT`
 
@@ -310,7 +310,7 @@ Settles the amount repaid by the student and adds it to the paid amount. To reco
 
 ### Receiving payment from a student: `pay`
 
-Updates the amount of tuition fee paid by the specified student after a lesson. 
+Updates the amount of tuition fee paid by the specified student immediately after a lesson. 
 
 Recording payment using the `pay` command does not update the owed amount. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pays the outstanding fees.
 
