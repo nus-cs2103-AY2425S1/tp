@@ -65,6 +65,11 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
+
+While the `Storage` component provides an abstraction layer for persistent data, it also exposes access to specific data structures, such as `ReadOnlyHallPointer` and `UserPrefs`. This design balances abstraction with the need for practical access to certain data classes critical to the application’s functionality.
+
+Ideally, the `Storage` interface would fully abstract storage details by exposing methods like `getHallPointerData()` or `getUserPreferences()`, thus hiding specifics like `ReadOnlyHallPointer`. However, for simplicity and to meet the application’s needs, `Storage` directly returns these specific data structures.
+
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
@@ -449,49 +454,43 @@ None.
 
 ### **HallPointer Developer Glossary**
 
-1.  **CLI (Command Line Interface):**\
-    A text-based interface where commands are typed to interact with HallPointer. The CLI is central to the application's functionality, enabling efficient management of CCA members and sessions.
-
-2.  **GUI (Graphical User Interface):**\
-    The visual interface, built using JavaFX, that complements the CLI by displaying information on members, sessions, and hall points.
-
-3.  **Hall Points:**\
+1. **Hall Points:**\
     Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
 
-4.  **Member:**\
+2. **Member:**\
     A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
 
-5.  **Session:**\
+3. **Session:**\
     A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
 
-6.  **Tag:**\
+4. **Tag:**\
     Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
 
-7.  **Command:**\
+5. **Command:**\
     A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
 
-8.  **Model Component:**\
+6. **Model Component:**\
     Manages data and business logic within HallPointer, including members, sessions, and hall points. The Model component keeps data in memory for efficient access.
 
-9.  **Storage Component:**\
+7. **Storage Component:**\
     Responsible for data persistence, handling read/write operations to save members, sessions, and preferences in JSON format.
 
-10. **Logic Component:**\
-    Manages command parsing and execution. It receives CLI commands, processes them through parsers, and interacts with the Model to update data.
+8. **Logic Component:**\
+   Manages command parsing and execution. It receives CLI commands, processes them through parsers, and interacts with the Model to update data.
 
-11. **Parser:**\
-    A part of the Logic component that interprets CLI input, converting it into specific command actions that HallPointer can execute.
+9. **Parser:**\
+   A part of the Logic component that interprets CLI input, converting it into specific command actions that HallPointer can execute.
 
-12. **Gradle:**\
+10. **Gradle:**\
     A build automation tool used for dependency management, compiling code, running tests, and packaging the application. Gradle also supports creating a JAR file for distribution.
 
-13. **JUnit:**\
+11. **JUnit:**\
     A Java testing framework for writing and running tests to validate the functionality of HallPointer's components.
 
-14. **MainApp:**\
+12. **MainApp:**\
     The main entry point for HallPointer, responsible for initializing and starting the application, setting up dependencies between components, and managing the overall flow.
 
-15. **User Preferences:**\
+13. **User Preferences:**\
     Settings such as window size and logging levels that can be customized by users and saved in a configuration file (`config.json`) for Hall Pointer.
 
 
@@ -572,7 +571,8 @@ testers are expected to do more _exploratory_ testing.
 1. Dealing with missing/corrupted data files
 
     1. Open the hallpointer.json file located in the data directory (this file is created after the app is first launched). Modify it by deleting the name of the first entry.
-       **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
+
+        **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
 
 2. Confirming data persistence
 
