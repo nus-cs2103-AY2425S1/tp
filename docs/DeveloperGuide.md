@@ -128,8 +128,6 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
@@ -329,12 +327,12 @@ Priorities:
 
 **Main Success Scenario (MSS):**
 
-1. User requests to add a contact with a name, email, and optionally a phone number, address, and tags.
+1. User requests to add a contact with a name, email, and optionally a phone number and address.
 2. System validates the input fields:
     * a. Checks if the name is valid (alphabets and spaces only).
     * b. Checks if the email format is valid and unique.
     * c. (Optional) Checks if the phone number is valid (8 digits) and unique.
-    * d. (Optional) Validates address and tags.
+    * d. (Optional) Validates address.
 3. System adds the contact if all validations pass.
 4. System displays a success message, "New contact added: [Contact details]."
 
@@ -359,7 +357,7 @@ Priorities:
 **Main Success Scenario (MSS):**
 
 1. User requests to view all contacts.
-2. System retrieves and displays the list of all contacts with their details (name, phone number, email, address, tags).
+2. System retrieves and displays the list of all contacts with their details (name, phone number, email, address).
 3. User views the list to get an overview of student contact information.
 
    Use case ends.</panel>
@@ -408,10 +406,10 @@ Priorities:
 
 **Main Success Scenario (MSS):**
 
-1. User requests to edit the contact by providing the matriculation number of the contact and the fields to update (name, phone, email, address, tags).
+1. User requests to edit the contact by providing the matriculation number of the contact and the fields to update (name, phone, email, address).
 2. System validates the provided matriculation number and input fields:
     * a. Checks if the contact with the given matriculation number exists.
-    * b. Validates the new name, email, phone, address, and tags as per the same rules as in the add contact case.
+    * b. Validates the new name, email, phone and address as per the same rules as in the add contact case.
 3. System updates the contact with the new details if all validations pass.
 4. System displays a success message, "Contact updated: [Updated contact details]."
 
@@ -588,8 +586,8 @@ Priorities:
 
 **Main Success Scenario (MSS):**
 
-1. User requests to search for students with additional filters (e.g., by grade, tag, or other criteria).
-2. System prompts the user to specify the filters (e.g., grade range, specific tag, etc.).
+1. User requests to search for students with additional filters (e.g., by grade, or other criteria).
+2. System prompts the user to specify the filters (e.g., grade range etc.).
 3. User specifies the filters and submits the search request.
 4. System retrieves students that match the specified filters and displays the filtered list.
 
