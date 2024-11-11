@@ -452,6 +452,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to exit the program.
 2. StaffSync closes.
 
+   Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -552,7 +554,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a duplicate employee
 
-    1. Prerequisites: The employee `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09` should already be added
+    1. Prerequisites: The employee `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09` should already be added.
 
     2. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
        Expected: John Doe should not be added since he already exists.
@@ -592,7 +594,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a duplicate potential hire
 
-    1. Prerequisites: The potential hire `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE` should already be added
+    1. Prerequisites: The potential hire `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE` should already be added.
 
     2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
        Expected: John Doe should not be added since he already exists.
@@ -964,10 +966,10 @@ valid, but it should not be.
 
 8. We will use a better duplicate detection method such as NRIC to detect duplicates. Currently, if there are 2 people 
 named "John Doe", it will be impossible to insert them. The duplicate detection is also flawed as "John Doe" and
-"john doe" are seen as different people
+"john doe" are seen as different people.
 
 9. We will cater to different types of contract in the future. For example, contracts with no contract end date.
 
 10. We will improve find command to search for users based on similarity score like Google's search engine. For example,
  "find n/John Doe" will return all the names with "John Doe" first before returning the names with "John" and the names 
-with "Doe"
+with "Doe".
