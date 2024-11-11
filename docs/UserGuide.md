@@ -327,7 +327,7 @@ Format: `list [all]... [contacts]...`
 <box type="definition" seamless>
 
 **Action:** Shows a list of all contacts in the address book.
-* optional parameters of `all` or `contacts` or any combinations and permutations of these two words are accepted
+* optional parameters of `all` or `contacts` or any combinations and permutations of these two words separated by spaces are accepted
 </box>
 
 
