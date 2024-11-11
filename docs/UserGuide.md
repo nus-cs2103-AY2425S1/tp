@@ -36,7 +36,7 @@ Your terminal should look something like this right before entering the last com
     A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 
-    <img src="images/Ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+<img src="images/Ui.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
 
 7. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
