@@ -325,8 +325,10 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 <box type="warning">
+
 If you want to remove a contact from a [wedding](#glossary), use the unassign command instead of the delete command.
 The delete command deletes the contact from the address book entirely.
+
 </box>
 <br><br/>
 

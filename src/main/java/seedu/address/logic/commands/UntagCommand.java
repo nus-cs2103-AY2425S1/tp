@@ -72,7 +72,7 @@ public class UntagCommand extends Command {
                 this.removeTags(personToEdit.getTags(), tagsToRemoveFromPerson));
 
         model.setPerson(personToEdit, editedPerson);
-        model.getActiveTags().decrementTag(tagsToRemoveFromPerson);
+        model.getActiveTags().decrementTags(tagsToRemoveFromPerson);
 
         return new CommandResult(generateSuccessMessage(editedPerson, tagsToRemoveFromPerson));
     }

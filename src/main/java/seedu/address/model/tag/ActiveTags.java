@@ -52,7 +52,7 @@ public class ActiveTags {
      * Removes Tags from ActiveTags, and updates their respective occurrences
      * @param tagSet The Set of Tag to update
      */
-    public void decrementTag(Set<Tag> tagSet) {
+    public void decrementTags(Set<Tag> tagSet) {
         for (Tag t : tagSet) {
             Integer i = tagMap.get(t);
             if (i == 1) {
@@ -69,13 +69,13 @@ public class ActiveTags {
         String tagName = t.tagName;
         if (!tagColorMap.containsKey(tagName)) {
             String assigned = tagColors[tagColorMap.size() % tagColors.length]; // If more tags than colors, loops back
-            tagColorMap.put(tagName, assigned);
+            tagColorMap.put(tagName.toLowerCase(), assigned);
         }
     }
 
     private void unassignTagColor(Tag t) {
         String tagName = t.tagName;
-        tagColorMap.remove(tagName);
+        tagColorMap.remove(tagName.toLowerCase());
     }
 
     public HashMap<Tag, Integer> getMap() {
