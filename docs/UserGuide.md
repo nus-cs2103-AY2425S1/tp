@@ -165,7 +165,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 * **Single Predicate with Multiple Values**: an `OR` search is run.
   * e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` returns students with names `Alex` or `Bernice`. This will be true for all other attributes.
 
-* **Multiple Predicates**: an `AND` search is run to return students with all attributes mentioned. 
+* **Multiple Predicates**: an `AND` search is run to return students with all attributes mentioned.
   * e.g. `filter s/F p/99999999` returns female students with the phone number 99999999.
 
 * **Multiple Predicates with Multiple Values**: both an `OR` and an`AND` search is run.
@@ -176,7 +176,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 
   * Reversing the order of phone numbers, `filter n/Alex Bernice p/92443567 99999999` still returns Alex and Bernice.
   * e.g. `filter n/Alex Bernice p/99999999 92443567 88888888`, only Alex and Bernice are returned.
-  * e.g. `filter n/Alex Bernice Christine p/99999999 92443567 00000000`, only Alex and Bernice are returned, as Christine's phone number does not match as seen below.
+  * e.g. `filter n/Alex Bernice Christine p/99999999 92443567 00000000`, only Alex and Bernice are returned, as Christine's phone number does not match.
 
 
 Examples:
@@ -212,7 +212,7 @@ Format: `addEcName INDEX en/[ECNAME]`
 * Adds the emergency contact's name `ECNAME` to the person at the specified `INDEX`
 * Deletes the emergency contact's name at the specified `INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​ 
-* Names should contain only alphabets. Names with numbers are also allowed. For names with legal operators (e.g. `Jack s/o Jason`), please write the full phrase instead (e.g. `Jack son of Jason`).
+* Names should contain only **alphabets**. Names with **numbers** are also allowed. For names with legal operators (e.g. `Jack s/o Jason`), please write the full phrase instead (e.g. `Jack son of Jason`).
 
 Examples:
 * `addEcName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person in the list.
