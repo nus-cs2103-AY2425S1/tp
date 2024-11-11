@@ -197,6 +197,8 @@ A person can have any number of tags (including 0)
 
 <div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, the `NAME` field does not support hyphens. Only letters, numbers, and spaces are allowed. We recommend entering names without hyphens to avoid errors or replacing them with an acceptable alternative such as a space should you wish to do so</div>
 
+<div markdown="span" class="alert alert-warning"> **:warning: Important:** Currently, tags are case-insensitive. We recommend adopting a consistent practice for naming tags to avoid duplication of tags in future. For example, you could choose to make all tags lowercase.</div>
+
 Examples:
 
 - `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
