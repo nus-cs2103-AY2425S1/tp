@@ -250,6 +250,7 @@ Format: `add_event n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/EVENT_E
 
 * The date inputs must be in the format `YYYY-MM-DD`.
 * `EVENT_NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `EVENT_DESCRIPTION` cannot contain only white space.
 
 <box type="info" seamless>
 
@@ -270,6 +271,7 @@ Format: `edit_event INDEX n/EVENT_NAME d/EVENT_DESCRIPTION f/EVENT_START_DATE t/
 * `INDEX` refers to the index number shown in the displayed event list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `EVENT_NAME` must start with an alphabet and should only contain alphabets and numbers.
+* `EVENT_DESCRIPTION` cannot contain only white space.
 * The date inputs must be in the format `YYYY-MM-DD`.
 * At least one of the optional fields (`EVENT_NAME`, `EVENT_DESCRIPTION`, `EVENT_START_DATE`, `EVENT_END_DATE`) must be provided to make changes.
 
