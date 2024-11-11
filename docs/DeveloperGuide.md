@@ -739,6 +739,117 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `schedule 1 st/16:00`
       Expected: The schedule command fails as there is no schedule date provided.
 
+
+### Sorting a contact
+
+1. Sort contact list by name 
+
+    1. Prerequisites: Contact list should contain contacts
+    2. Test case: `sort n/asc` and `sort n/` <br>
+       Expected: Contact list is sorted alphabetically by name in ascending order
+
+    3. Test case: `sort n/desc`<br>
+       Expected: Contact list is sorted alphabetically by name in descending order
+
+2. Sort contact list by schedule
+
+    1. Prerequisites: Contact list should contain contacts with schedules
+
+    2. Test Case: `sort sch/asc` and `sort sch/` <br>
+       Expected: Contact list is sorted by schedule datetime in ascending order.
+
+    3. Test Case: `sort sch/desc`
+       Expected: Contact list is sorted by schedule datetime in descending order.
+
+### Filter by tags
+
+1. Filter by a single tag
+
+    1. Prerequisites: Some contacts should have a tag called `friends`.
+    2. Test case: `filter t/friends` <br>
+       Expected: Contact list displays only contacts with a tag called `friends`.
+
+2. Filter by multiple tags
+
+    1. Prerequisites: Contact list should contain contacts with both tags called `friends` and `classmastes`.
+
+    2. Test Case: `filter t/friends t/classmates` <br>
+       Expected: Contact list displays only contacts with both tags called `friends` and `classmastes`.
+
+### Search by schedule
+
+1. Search for schedules after a starting time
+
+    1. Prerequisites: Some contacts should have schedules with datetime after `2024-09-09 18:00`.
+    2. Test case: `search b/2024-09-09 18:00` <br>
+       Expected: Contact list displays the contacts with schedules after `2024-09-09 18:00`.
+
+2. Search for schedules before an end time
+
+    1. Prerequisites: Some contacts should have schedules with datetime before `2024-11-11 18:00`.
+
+    2. Test Case: `search en/2024-11-11 18:00` <br>
+       Expected: Contact list displays the contacts with schedules before `2024-11-11 18:00`.
+
+3. Search for schedules between a starting and an end time
+
+    1. Prerequisites: Some contacts should have schedules between `2024-09-09 18:00` and `2024-11-11 18:00`.
+
+    2. Test Case: `search b/2024-09-09 18:00 en/2024-11-11 18:00` <br>
+       Expected: Contact list displays the contacts with schedules between `2024-09-09 18:00` and `2024-11-11 18:00`.
+
+### renameTags
+
+1. rename existing tags to a new tag
+
+    1. Prerequisites: Some contacts should have tags called `friends`.
+    2. Test case: `renameTag ot/friends nt/bestFriends` <br>
+       Expected: Contact list updates the contact's tags to `bestFriends`.
+
+2. rename tags that don't exist
+
+    1. Prerequisites: None of the contacts has a tag called `classmates`.
+    2. Test case: `renameTag ot/classmates nt/bestFriends` <br>
+       Expected: The command fails with an error thrown.
+
+### Adding social media
+
+1. Adding a social media account to a contact
+
+    1. Prerequisites: The list contains at least one contact.
+    2. Test case: `socialMedia 1 fb/John` <br>
+       Expected: The contact will be updated showing a facebook account named John.
+
+2. Adding multiple social media account to a contact
+
+    1. Prerequisites: The list contains at least one contact.
+    2. Test case: `socialMedia 1 fb/John ig/John` <br>
+       Expected: The contact will only be updated showing an instagram account named John but not facebook account.
+
+### Restore
+
+1. Restore the last person deleted
+
+    1. Prerequisites: The person has to be deleted within the same section.
+    2. Test case: `restore` <br>
+       Expected: The deleted person is restored.
+
+2. Deleted person is added back before using `restore`
+
+    1. Prerequisites: A person is deleted in the same section and added back with the `add` command
+    2. Test case: `restore` <br>
+       Expected: No change.
+
+### Backup
+
+1. Create a backup file
+
+    1. Prerequisites: A data file exists at the data storage location `[JAR file location]/data/addressbook.json` and it is not the first command after downloading BlitzBiz.
+    2. Test case: `backup` <br>
+       Expected: Creates a backup save of the current BlitzBiz data at `[JAR file location]/backup/addressbook.json`.
+
+
+
 ## **Appendix: Effort**
 
 This section describes the difficulties and challenges faced while working on this Brownfield project.
