@@ -132,16 +132,22 @@ public class ParserUtil {
      *
      * @param date The date string to be parsed.
      * @return A {@code LocalDate} object representing the parsed date.
-     * @throws ParseException If the input string does not follow the 'YYYY-MM-DD' format or is null.
+     * @throws ParseException If the input string does not follow the 'YYYY-MM-DD' format or is otherwise invalid.
      */
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        LocalDate parsedDate;
+
         try {
-            return LocalDate.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE);
+            parsedDate = LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format. Please use YYYY-MM-DD.");
+            throw new ParseException("Invalid date format or invalid date. "
+                    + "Please provide a correct date in YYYY-MM-DD format.");
         }
+
+        return parsedDate;
     }
 
     /**
