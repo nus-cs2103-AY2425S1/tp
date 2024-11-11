@@ -415,7 +415,7 @@ Examples:
 
 ### List all patient appointment: `scheduleall`
 
-![scheduleall result](images/scheduleall.png)
+<img src="images/scheduleall.png" alt="scheduleall result" style="pointer-events: none; width: 100%; height: auto;">
 
 Lists all the appointments assigned to every patient.
 
