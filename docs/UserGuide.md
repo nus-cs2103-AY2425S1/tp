@@ -229,13 +229,33 @@ Deletes the specified client from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
+<box type="tip" seamless>
+    Parameters
+</box>
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd client in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+1. `INDEX` : Must be a valid client index in the filtered list that is currently shown.
+
+<box type="warning" seamless>
+    <span circle slot="icon"><md>:bulb:</md></span>
+    Note the following:
+</box>
+
+* Deletes the client at the specified `INDEX` from the **current** displayed list on the app.
+* If the `INDEX` is invalid, the user will be informed with an error message.
+
+<box type="info">
+    <span circle slot="icon" class="text-danger"><md>:book:</md></span>
+    Examples:
+</box>
+
+Input 1: `list` followed by `delete 3`
+<br>
+Output 1: `Deleted Client: Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com; Address: Blk 11 Ang Mo Kio Street 74, #11-04; Insurance Plans: No added plans; Open Claims: No open claims; Tags: [neighbours]`
+
+Input 2: `find Betsy` followed by `delete 1`
+<br>
+Output 2: `Deleted Client: Betsy Crower; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Insurance Plans: No added plans; Open Claims: No open claims; Tags:`
+
 
 ### Adding an insurance plan to a client : `addInsurance`
 
