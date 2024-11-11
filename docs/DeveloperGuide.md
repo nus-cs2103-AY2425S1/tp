@@ -94,20 +94,21 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("inputString")` API call as an example. <br>
+`inputString` refers to any valid addClaimCommandInput that can be passed in.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/add-claim/AddClaimSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `addClaim` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `AddClaimCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `AddClaimCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddClaimCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to add a claim to a client).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -154,12 +155,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 Do note we have 4 members in our group.
 
 ### 1. addClaim ID
-A single claim ID can be added to multiple users. i.e. `B1100` can be added to both client `A` and client `B` with no error. This will be fixed in a future version such that claim ID is unique across
-all clients.
+A single claim ID can be added to multiple users. i.e. `B1100` can be added to both client `A` and client `B` with no error.
+This will be fixed in a future version such that claim ID is unique across all clients.
 
 ### 2. addClaim amount
 Claim amount can currently exceed 1 million. In the future, a restriction will be placed on the claim amount such that if
-the claim amount is over 1 million, it will be rejected with an appropriate error message. This is in line with our restriction on claim amount (claim amount cannot exceed 1 million)
+the claim amount is over 1 million, it will be rejected with an appropriate error message. This is in line with our
+restriction on claim amount (claim amount cannot exceed 1 million)
 
 ### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
 Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
@@ -169,7 +171,21 @@ the same full name with different contact details but it will be unreasonably ra
 number, email and addresses simultaneously.
 
 ### 4. Flexible Command Keywords.
-Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we will make command keywords case-insensitive in a future update by parsing the prefixes differently.
+Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we
+will make command keywords case-insensitive in a future update by parsing the prefixes differently.
+
+### 5. No Wrapping for very long ui details
+Currently, if the name, tags or other details are very long, they are cut off in the UI. This will be fixed in a future
+version by enabling wrapping for texts in the UI such that they are more easily viewable.
+
+### 6. Some common names are not allowed to be entered
+Currently, our app does not allow some common Singaporean names with some special characters to be entered. An example
+is "s/o" or "d/o". This will be fixed in a future version because we will change the way we parse the add and edit
+commands.
+
+### 7. Currently, our find function only supports finding by name
+This may not be ideal when you want to search clients by what insurance plans or claim ID they have. This will be supported
+in a future version when we enhance the search function to search by either insurance plan type or claim ID.
 
 --------------------------------------------------------------------------------------------------------------------
 
