@@ -539,7 +539,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a restaurant by name
 
-2. Find a restaurant by its saved name
+1. Find a restaurant by its saved name
 
    a. Prerequisites: The requested restaurant has to be currently saved.<br>
    The first test case below assumes the user has not added any more restaurants with the name Swenswen.
@@ -557,7 +557,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering by tags
 
-3. Find a restaurant by its tag names
+1. Find a restaurant by its tag names
 
    a. Prerequisites: The requested restaurant has to be currently saved.<br>
    The first test case below assumes the user has not added any more restaurants with the tag halal.
@@ -574,7 +574,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering by price
 
-4. Find a restaurant by its price labels
+1. Find a restaurant by its price labels
 
    a. Prerequisites: The requested restaurant has to be currently saved.<br>
       The first test case below assumes the user has not added any more restaurants with the price label of `$`.
@@ -591,7 +591,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Rating a restaurant
 
-5. Rating a restaurant while all restaurants are being shown
+1. Rating a restaurant while all restaurants are being shown
 
     a. Prerequisites: The requested restaurant has to be currently saved.<br>
 
@@ -607,7 +607,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Favourite a restaurant
 
-6. Favourite a restaurant while all restaurants are being shown
+1. Favourite a restaurant while all restaurants are being shown
 
     a. Prerequisites: The requested restaurant has to be currently saved.<br>
       In the test case below, we assume that none of the restaurants in the list were previously marked as favourite. 
@@ -624,7 +624,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Un-favourite a restaurant
 
-7. Un-favourite a restaurant while all restaurants are being shown
+1. Un-favourite a restaurant while all restaurants are being shown
 
     a. Prerequisites: The requested restaurant has to be currently saved and is a favourite restaurant as shown above in the previous test.<br>
        In the test case below, we assume that the first restaurant in the list is marked as favourite as described by the previous test case mentioned above.
