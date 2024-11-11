@@ -280,44 +280,6 @@ public class AutoSuggestionTextField extends TextField {
     }
 
     /**
-     * "Suggestion" specific listners
-     */
-    private void setListner() {
-        //Add "suggestions" by changing text
-        this.textProperty().addListener((observable, oldValue, newValue) -> {
-            String enteredText = this.getText();
-            //hide suggestion if nothing has been entered
-            if (enteredText == null || enteredText.isEmpty()) {
-                suggestionPopup.hide();
-            } else {
-                //filter all possible suggestions depends on "Text", case insensitive
-                List<String> filteredEntries = popUpFilter(commandSet, enteredText);
-                if (!filteredEntries.isEmpty()) {
-                    //build popup - list of "CustomMenuItem"
-                    populatePopup(filteredEntries, enteredText);
-                    //no suggestions -> hide
-                } else {
-                    suggestionPopup.hide();
-                }
-            }
-        });
-
-        // Modified listener for handling Enter key when popup is open
-        this.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                commandBox.handleCommandEntered();
-                // Optionally hide the popup only after a command has been processed
-                suggestionPopup.hide();
-                event.consume(); // Prevent JavaFX default hiding behavior
-            }
-        });
-
-        this.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
-            suggestionPopup.hide();
-        });
-    }
-
-    /**
      * Filters the command set based on the input string.
      * Returns a list of commands that match the beginning of the input text.
      *
@@ -339,17 +301,18 @@ public class AutoSuggestionTextField extends TextField {
      * @param filteredList The list of matching commands to display.
      * @param searchRequest The search text used to filter the commands.
      */
-    public void populatePopup(List<String> filteredList, String searchRequest) {
+    public List<Label> populatePopup(List<String> filteredList, String searchRequest) {
         //List of "suggestions"
-        List<TextFlow> menuItems = new LinkedList<>();
+        List<Label> menuItems = new LinkedList<>();
         for (int i = 0; i < filteredList.size(); i++) {
             final String result = filteredList.get(i);
             //label with graphic (TextFlow) to highlight matching prefix
             Label entryLabel = new Label();
             entryLabel.setGraphic(buildTextFlow(result, searchRequest));
             entryLabel.setPrefHeight(20);
-
+            menuItems.add(entryLabel);
         }
+        return menuItems;
     }
 
 
