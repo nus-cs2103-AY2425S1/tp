@@ -544,6 +544,7 @@ Assuming that `Vendor` `Bruce Banner` has an `INDEX` of 1 on the existing vendor
 
 [_Back to Top_](#table-of-contents)
 
+<div style="page-break-after: always"></div>
 
 ### **Other Useful Features**
 
@@ -587,7 +588,7 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 
 [_Back to Top_](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Command summary**
 
