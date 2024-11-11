@@ -178,13 +178,13 @@ Note: The goods category of goods will also be reflected on the supplier as a ta
 
 ### Deletion of Goods : `deletegoods`
 
-Deletes the specified goods from the specified supplier.
+Deletes all of the specified goods from the specified supplier.
 
 Format: `deletegoods n/NAME gn/GOODS_NAME`
 
 Examples:
 
-* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes the oldest goods record that has name `Gardenia Milk Bread` that belongs to the supplier `John Doe`. 
+* `deletegoods n/John Doe gn/Gardenia Milk Bread` deletes all goods record that has name `Gardenia Milk Bread` that belongs to the supplier `John Doe`. 
 
 ### View statistics for Goods : `viewgoods`
 
@@ -263,7 +263,6 @@ This is a **key** feature of our application and deliveries are automatically ma
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Deleting goods from supplier**, if you delete goods from a specific supplier and there are multiple goods of the same name from that supplier, only the oldest entry will be deleted. This may not be intuitive for users as the deletion message does not specify which has been deleted.
 
 --------------------------------------------------------------------------------------------------------------------
 
