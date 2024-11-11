@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Allergy {
     public static final String MESSAGE_CONSTRAINTS = "ERROR: Invalid allergies format. "
             + "Allergies should be a non-empty alphanumeric string, and may include "
-            + "commas, spaces, hyphens, or periods.";
+            + "commas, spaces, hyphens, or periods. If one allergy is None, you cannot input multiple allergies.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum},\\s.-]+";
     public static final String MESSAGE_FIELD_MISSING_FORMAT = "Person's Allergy field is missing!";
     public final String allergyName;

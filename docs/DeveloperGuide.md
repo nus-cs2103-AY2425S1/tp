@@ -251,7 +251,8 @@ The class diagram of a filter command is given to demonstrate the interactions a
 
 Team Size: 5
 
-1. [Error Validation for CliSyntax: Expand to include prefixes outside of the given list]
+1. **Error Validation for CliSyntax:**
+   Making sure the system checks if the user enters any unexpected or incorrect symbols. If the user does, the system will let them know what the correct options are, helping avoid confusion and mistakes.
 
 
 2. **Allow address to have "/n" or other prefixes:**
@@ -262,7 +263,8 @@ Team Size: 5
 This enhancement would allow users to input "d/o" in names without triggering conflicts, offering more flexibility and ensuring that date-related commands are unaffected by name entries.
 
 
-4. [edit Allergy (rn it replaces not adds because if not there is no way to delete an allergy from the list) possible enhancement is an allergy feature where you an specify if you want to add delete or replace allergy from the list]
+4. **Add, Delete, or Replace Allergy Functionality:**
+   Allow users to specify whether they want to add, delete, or replace an allergy in the list. This enhancement would give users more control over their allergy list as currently the system only replaces allergies.
 
 
 5. **Adding a customizable tags feature:** Currently, the app only supports the default tags `High Risk`, `Medium Risk` and `Low Risk`.
@@ -612,7 +614,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add n/John`<br>
        Expected: Following parameters are missing : p/, e/, a/, t/, m/
-       add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG [m/ALLERGY]...
+       add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG m/ALLERGY...
        Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Low Risk m/Peanuts
    
 3. Adding a duplicate patient
