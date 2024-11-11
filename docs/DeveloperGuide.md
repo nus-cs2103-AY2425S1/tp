@@ -918,7 +918,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
 
 
 1. **Allow negative HOURS_OWED for `owe`:** Currently, UGTeach only allow **positive multiples of 0.5** for the hours specified in the `owe command`. Hence, if users have used the `owe command` on mistake,
-   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's `owed` field using the `edit` command.
+   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's owed amount field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was owed by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `owe command`. If users were to make a mistake in the `owe command`, he can enter the same `owe command`, but with the negative hours specified.
    e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount by the student by 3 hours instead.
@@ -932,12 +932,12 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
 1. **Integrate `pay` and `settle` command to reduce user confusion:** In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. Having two commands for the two similar use cases might confuse new users.
     * In the future version, we plan to integrate the 2 commands into 1 command: `pay hr/HOURS_PAID | amount/AMOUNT`.
         * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
-        * `hr/HOURS_PAID` specifies the amount the student **pays**, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
+        * `hr/HOURS_PAID` specifies number of hours the student **pays** for, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
         * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
     * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want. <br>
 
 1. **Allow negative HOURS_PAID and negative AMOUNT for the new `pay` command `pay hr/HOURS_PAID | amount/AMOUNT`:** Currently, UGTeach only allows **positive multiples of 0.5** for the hours specified in the `pay command`. Hence, if users have used the `pay command` on mistake,
-   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's `paid` field using the `edit` command.
+   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's paid amount field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was paid by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `pay` command. If users were to make a mistake in the `pay command`, he can enter the same `pay command`, but with the negative hours specified.
    e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount by the student by 3 hours instead.
@@ -946,7 +946,7 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     * `hr/0` will still not be accepted.
     * When the resulting paid amount of the student that user want to update is less than 0, the command will not be executed and an error message will be shown.
      
-    Similarly, we plan to also allow a **negative number with at most 2 decimal places** as a valid AMOUNT when the user need to "undo" the previous settlement of the owed amount.
+    Similarly, we plan to also allow a **negative number with at most 2 decimal places** as a valid AMOUNT when the user needs to "undo" the previous settlement of the owed amount.
     Special cases that we handle:
     * `amount/0` will still not be accepted.
     *  When the resulting paid amount of the student that the user want to update is less than 0, the command will not be executed and an error message will be shown.
