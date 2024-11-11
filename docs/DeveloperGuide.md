@@ -183,9 +183,9 @@ On execution, `AddCommand` first queries the supplied model if it contains a stu
 
 Finally, `AddCommand` queries the model to see if the student's schedule clashes with others in the address book. If conflicts are found, a warning message is displayed along with the conflicting students.
 
-Below is an activity diagram when [Adding a new student](#add-a-new-student)
+The following diagram summarizes how a user may add a student into UGTeach.
 
-<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
+<puml src="diagrams/UserAddCommandActivityDiagram.puml" alt="UserAddCommandActivityDiagram" width="600"/>
 
 <div style="page-break-after: always;"></div>
 
@@ -535,13 +535,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Abstraction and Cohesion**: Abstraction is hiding all but relevant data in order to reduce complexity and increase efficiency. Cohesion is the degree which elements belong together.
+* **API**: Application Programming Interface, a set of programming code that enables data transmission between one software and another.
+* **CLI**: Command-line interface, where you interact with the system using your keyboard.
 * **DBMS**: Database Management System, a software providing tools for structural data storage.
-* **CLI**: Command-line interface where you interact with the system using your keyboard
-* **API**: Application Programming Interface, a set of programming code that enables data transmission between one software and another
-* **Abstraction and Cohesion**: Abstraction is hiding all but relevant data in order to reduce complexity and increase efficiency. Cohesion is the degree which elements belong together
-* **Version Control System**: Version control is the practice of tracking and managing changes to software code, and there are many version control systems such as Git, Apache Subversion etc
-
+* **JAR**: Java ARchive, a file format based on the popular ZIP file format and is used for aggregating many files into one. Click [here](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html) to find out more.
+* **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
+* **Mainstream OS**: Windows, Linux, Unix, macOS.
+* **Version Control System**: Version control is the practice of tracking and managing changes to software code, and there are many version control systems such as Git, Apache Subversion etc.
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -854,3 +855,32 @@ testers are expected to do more *exploratory* testing.
        e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Planned Enhancement**
+
+Given below are the planned enhancements for UGTeach (to be implemented in the future).
+
+**Team size: 5**
+
+1. **Make Add Command fields shorter:** The current `add command` has 7 compulsory parameters which might be tedious and long even for users who can type fast.
+We plan to make the `add command` shorter by making the `email` field **optional**. This is the **new format:**
+`add n/NAME p/PHONE_NUMBER a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [e/EMAIL] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`, where parameters in square brackets are optional.
+
+1. **Allow students to have multiple classes:** Currently, UGTeach only allow 1 student to have 1 subject and 1 schedule. UGTeach also forbid users from duplicating contacts.
+Hence, users are unable to record multiple classes for students who require tutoring for **more than one subject**. 
+Therefore, we plan to combine the `subject` and `schedule` parameters to form a `class` parameter that takes in 1 or more classes (comma-separated). For instance, the input
+`edit 1 class/Mathematics Monday-1500-1600, Science Wednesday-1200-1400` would mean the first student in UGTeach is receiving tutoring
+for Mathematics on Monday (1500-1600) and Science on Wednesday (1200-1400).
+
+1. **Allow phone numbers from other countries:** Currently, UGTeach only allows Singapore phone numbers as we assumed that students (local or international) should have a Singapore number. 
+However, the user might provide tuition to international students who do not have a Singapore number.
+Hence, we plan to **ease the restriction on phone numbers** to allow phone numbers **ranging from 3-digits to 17-digits** since the shortest and longest
+phone number in the world are 3 and 17 digits long respectively, according to the [World Population Review](https://worldpopulationreview.com/country-rankings/phone-number-length-by-country).
+
+1. **Improve UI to be horizontally scrollable**: Currently, UGTeach only allows vertical scrolling as it is unlikely for students to have an extremely long name or email.
+Hence 'extreme' inputs (e.g., name with 1000 characters) are **truncated** which might interfere with the normal usage of UGTeach.
+Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so that users can view 'extreme' inputs.
