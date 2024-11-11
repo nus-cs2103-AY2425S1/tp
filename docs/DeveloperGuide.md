@@ -349,7 +349,7 @@ Step 1. The user launches the application, `Persons` and `Vendors` are loaded in
 
 Step 2. The user executes `assign-vendor 1`. WedLinker will assign the `Person` at index 1 of the current displayed person list to become a `Vendor`. The user can now assign `Tasks` to this contact.
 
-Step 3. The user executes `unassign-vendor 1`. The contact has been is no longer a `Vendor`.
+Step 3. The user executes `unassign-vendor 1`. The contact is no longer a `Vendor` and exists as a non-`Vendor` `Person` in WedLinker.
 
 <box type="info" seamless>
 Vendor supports the force functionality for easier usage.
@@ -562,7 +562,7 @@ Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view tasks in
 Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a wedding to WedLinker instead of a Contact
 
 ### **Use case: UC06 — Create a Task**
-Similar to [<ins>UC04]( #use-case-uc04-create-a-contact) except adding a task to WedLinker instead of a Contact
+Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a task to WedLinker instead of a Contact
 
 ### **Use case: UC07 — Add Phone Number to Contact**
 
@@ -892,7 +892,7 @@ feature freeze. The plans to improve our features are as such.
 
 1. **Resolve name overflow for Tags and Weddings**: Currently, there is a small GUI bug that occurs when the names of Tags and Weddings are excessively long, causing them to overflow, which causes cosmetic flaws.
 The planned enhancement would be to truncate the name with an ellipses `...`.
-2. **Duplicate validation for Person, Wedding, Task and Tag entities**: Currently, there is a duplicate validation bug that allows the creation of certain "duplicate" Person, Wedding, Task and Tags.
+2. **Duplicate validation for Person, Wedding, Task and Tag entities**: Currently, there is a duplicate validation bug that allows the creation of certain "duplicate" Person, Wedding, Task and Tag objects.
 For example, "John Doe" and "John  Doe" (the same name but with an extra space), are not recognised as duplicates in WedLinker although they are likely to refer to the same entity in the real world.
 The planned enhancement would be to update the parser to normalise input by stripping all extra whitespace, leaving only a single space between keywords, before creating the respective command objects.
 This will ensure that entries with excessive spaces are treated as duplicates where appropriate.
