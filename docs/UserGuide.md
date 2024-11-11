@@ -161,7 +161,7 @@ Designed to streamline the workflow of TAs, TAHub goes beyond basic contact mana
 
 6. Refer to the [Features](#features) section below for details of each command.
 
---
+---
 <div style="page-break-after: always;"></div>
 
 ## Features
@@ -231,6 +231,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 - `NAME`, `PHONE_NUMBER`, and `EMAIL` should correspond to valid name, phone number, and email of the person.
 - `COURSE` refers to the course this person is taking.
 - `TAG` refers to any additional information about the person and should only contain alphanumeric characters. A person can have any number of tags (including 0).
+- There should be no person with the same name or email after adding someone.
 
 <box type="tip" seamless>
 
@@ -267,6 +268,7 @@ Edits an existing person in the TAHub.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COURSE] [t/TAG]…​`
 
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- There should be no person with the same name or email after editing someone.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
