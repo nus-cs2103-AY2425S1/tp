@@ -50,7 +50,7 @@ have.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HRHelper.v1.5.jar` command to run the application.
 
-1. Login to HR Helper.<br>
+1. A login window similar to the below should appear in a few seconds. Login to HR Helper.<br>
    ![image](images/authentication.png){width=1200}
 
 1. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -108,7 +108,7 @@ Login to HR Helper with your username and password.
 
 Format:
 
-![image](images/authentication.png){width=1200}
+![image](images/HRHelperLoginOutput.png){width=1200}
 
 <box type="tip" seamless>
 
@@ -117,8 +117,6 @@ Format:
 
 Examples:
 * For this version, the username is `admin` and password is `12345678`.
-
-![image](images/HRHelperLoginOutput.png){width=1200}
 
 <box type="warning" seamless>
 
