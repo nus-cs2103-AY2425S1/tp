@@ -325,19 +325,19 @@ allowing flexibility to tailor the address book to specific needs.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                | I want to …​                                         | So that I can…​                                               |
-|----------|----------------------------------------|------------------------------------------------------|---------------------------------------------------------------|
-| `* * *`  | new user                               | see usage instructions                               | refer to instructions when I forget how to use the App        |
-| `* * *`  | physiotherapist                        | add new client contact information                   | retrieve client details when needed.                          |
-| `* * *`  | physiotherapist                        | delete outdated or irrelevant client information     | keep my database clean and relevant                           |
-| `* * *`  | physiotherapist                        | search for client contact information by name        | enables swift retrieval of specific client details            |
-| `* * *`  | physiotherapist                        | search for client contact information by number      | access the client’s details when name is not readily recalled |
-| `* * *`  | physiotherapist                        | view client information in a neatly displayed format | look through the client's details in depth                    |
-| `* * *`  | physiotherapist                        | schedule appointments for my clients                 | keep track of my daily sessions and avoid double bookings     |
-| `* *`    | physiotherapist                        | record payment for client appointments               | easily track and manage payment information                   |
-| `* *`    | physiotherapist                        | edit client information                              | make changes to erroneous or outdated client details          |
-| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments  | ensure that no client is missed                               |
-| `* *`    | physiotherapist with many appointments | see upcoming appointments listed at the top          | prominently see what I need to do in order to manage my schedule |
+| Priority | As a …​                                | I want to …​                              | So that I can…​                                                  |
+|----------|----------------------------------------|-------------------------------------------|------------------------------------------------------------------|
+| `* * *`  | new user                               | see usage instructions                    | refer to instructions when I forget how to use the App           |
+| `* * *`  | physiotherapist                        | add new client contact information        | keep track of a record of client details                         |
+| `* * *`  | physiotherapist                        | delete outdated or irrelevant client information | keep my database clean and relevant                              |
+| `* * *`  | physiotherapist                        | search for client contact information by name | quickly retrieve specific client details                         |
+| `* * *`  | physiotherapist                        | search for client contact information by number | access the client’s details when name is not readily recalled    |
+| `* * *`  | physiotherapist                        | view client information in a neatly displayed format | look through the client's details in depth                       |
+| `* * *`  | physiotherapist                        | schedule appointments for my clients      | keep track of my daily sessions and avoid double bookings        |
+| `* *`    | physiotherapist                        | record payment details for client appointments | easily track and manage payment information                      |
+| `* *`    | physiotherapist                        | edit client information                   | make changes to erroneous or outdated client details             |
+| `* *`    | physiotherapist with many appointments | set reminders for myself for follow-up appointments | ensure that no appointments are missed                           |
+| `* *`    | physiotherapist with many appointments | see upcoming appointments listed          | prominently see what I need to do in order to manage my schedule |
 
 
 
@@ -639,7 +639,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Client do not exist.
+* 1a. Client does not exist.
 
     * 1a1. PhysioPal requests for correct data.
     * 1a2. Physiotherapist enters new data.
