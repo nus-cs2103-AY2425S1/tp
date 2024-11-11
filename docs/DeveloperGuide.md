@@ -1086,5 +1086,3 @@ Currently, the only way to set the status of a company from `closed` to `interes
 
 6. **Better handling of extreme inputs**: Currently, when an input field is excessively long, it can lead to faulty behaviour or incorrect error messages being displayed.
 Phone numbers will be capped at 15 digits as per the international limit, tags will be truncated to prevent interference with the GUI layout.
-
-7. **
