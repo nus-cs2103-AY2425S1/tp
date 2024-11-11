@@ -209,7 +209,7 @@ public class ParserUtil {
      */
     public static List<String> parseSearchKeywords(List<String> keywordArgument) {
         requireNonNull(keywordArgument);
-        List<String> keywords = Arrays.asList(keywordArgument.get(0).split(" "));
+        List<String> keywords = Arrays.asList(keywordArgument.get(0).split("\\s+"));
         return keywords;
     }
 }
