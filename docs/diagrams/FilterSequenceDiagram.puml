@@ -23,7 +23,7 @@ activate ClinicConnectSystemParser
 
 create FilterCommandParser
 ClinicConnectSystemParser -> FilterCommandParser
-activate FilterCommandParser                               
+activate FilterCommandParser
 
 FilterCommandParser --> ClinicConnectSystemParser
 deactivate FilterCommandParser

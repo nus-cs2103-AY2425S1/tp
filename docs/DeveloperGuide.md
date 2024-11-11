@@ -364,10 +364,10 @@ The `deleteappt` command uses `Nric` as a unique identifier to delete an appoint
 The `filter` command lets users search for a list of patients' appointments based on a date range and health service.
 
 The user can specify the
-* end date of the date range 
+* end date of the date range
 
 and optionally provide the
-* start date of the date range 
+* start date of the date range
 * `HealthService` that matches the purpose of the appointment
 
 If the start date is not provided, the start date is set to today's date. Furthermore, if health service is not provided, all appointments in
@@ -395,21 +395,21 @@ The parsing of the fields is as follows:
 ##### Executing the Command
 
 The `FilterCommand` class then filters through all the appointments in the `Model` component and selects those which lie within the date range and matches the healthservice.
-This is done though the `filterAppts` method in the `Model` component. This method iterates through all patients and checks if 
+This is done though the `filterAppts` method in the `Model` component. This method iterates through all patients and checks if
 each appointment falls within the date range and matches the `HealthService` if provided.
 
-The filtered appointments are then sorted and stored in the model. 
+The filtered appointments are then sorted and stored in the model.
 
 ![FilterExecuteSequenceDiagram](images/FilterExecuteSequenceDiagram.png)
 
 #### Design Considerations
 
-The `filter` command is designed such that the user has versatility in filtering appointments. 
+The `filter` command is designed such that the user has versatility in filtering appointments.
 
-1. If the user specifies all fields, the appointments that lie within the date range and matches the `HealthService` will be returned. 
-2. If the user specifies the end date and health service, the appointment that lies from today's date to end date and matches the `HealthService` will be displayed. 
+1. If the user specifies all fields, the appointments that lie within the date range and matches the `HealthService` will be returned.
+2. If the user specifies the end date and health service, the appointment that lies from today's date to end date and matches the `HealthService` will be displayed.
 3. If the user specifies the start and end date, all appointments that lies from start to end date will be shown.
-4. If the user only specifies end date, all appointments that lies from today's to end date will be displayed. 
+4. If the user only specifies end date, all appointments that lies from today's to end date will be displayed.
 5. If the user wants to show appointments on a single day, the user can specify the start and end date as the same date.
 
 
