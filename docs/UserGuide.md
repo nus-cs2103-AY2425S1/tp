@@ -389,6 +389,7 @@ _Details coming soon ..._
 4. **Multiple pets with similar characteristics** (exactly the same name, species, breed, age and sex) are currently not allowed and would be flagged as duplicates. Future versions are to allow this behavior with a recommendation to always link a pet to an owner.
 5. **Starting a pet's age with a zero** for single-digit pet ages (01, 02, 03 years) could lead to duplicate entries if another pet exits in the database with all characteristics the same and their age keyed in without a zero at the start (1, 2 or 3 years). Future versions will rectify this behaviour by ignoring the zero if the pet's age is between 0 and 9 years.
 6. **A gap appears between the message box and the list** when using the `list owners` or `list pets` command. This gap will be removed in future versions.
+7. **Irregular white lines** appear sometimes, in the section displaying all the links, after entering a valid `link` command. This issue will be remedied in future versions.
 
 --------------------------------------------------------------------------------------------------------------------
 

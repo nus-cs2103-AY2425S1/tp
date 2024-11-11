@@ -410,7 +410,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Workflow**: The sequence of processes involved in providing veterinary care, including appointment scheduling, examination, treatment, and follow-up.
 ---
 
-## **Appendix: Instructions for manual testing**
+# **Appendix:**
+## **Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -579,3 +580,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `exit`<br>
       Expected: The app closes.
+
+## **Planned Enhancements**
+
+Team size: 5
+1. **Enhance search functionality**: Users can search for pets and owners based on other attributes. For owners, attributes such as ID, contact number, email and address. For pets, attributes such as species, breed, age, sex and tags.
+2. **Improve error messages**: Make them standardized, consistent and clearer.
+3. **Improve text validation and formatting**: Make data more consistent such as by removing extra spaces in names. (e.g. the input `john    doe` will be saved as `john doe`)
+4. **UI updates**: To fix occasional irregular white lines that appear in output box, wrap text that is currently truncated in the UI and enlarge the output box to remove the gap that appears when using the `list owners` or `list pets` command.
+5. **Improve the intuitiveness of command formats**: Commands will be made more intuitive for users. For example, the `link` command would be simpler for users without the use of the `t/` prefix.
+6. **Automatically make back-ups of data file**: This will prevent data from being accidentally lost when using the `clear` command. A copy of the JSON file will be made frequently and saved in the user's computer.
+7. **Allow multiple pets with similar characteristics**: (exactly the same name, species, breed, age and sex) as long as they are linked to different owners. The user will be prompted to link an existing pet to its owner before a duplicate pet can be added. 
+8. **Truncate zeroes at the start of a pet's age**: for single-digit pet ages (01, 02, 03 years) could lead to duplicate entries if another pet exits in the database with all characteristics the same and their age keyed in without a zero at the start (1, 2 or 3 years). Future versions will rectify this behaviour by ignoring the zero if the pet's age is between 0 and 9 years.
+9. **Improve link/unlink commands**: When an invalid `link` or `unlink` command is entered, it will specify the exact reason why that command failed. (e.g. a multiple `link` where 1 or more pairs is already linked or doing an `unlink` where 1 or more pairs is missing from the database)
