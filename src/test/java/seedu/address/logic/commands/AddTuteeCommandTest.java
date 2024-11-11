@@ -26,9 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.testutil.TuteeBuilder;
@@ -199,16 +197,6 @@ public class AddTuteeCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasDuplicateEmail(Email email) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasDuplicatePhone(Phone phone) {
             throw new AssertionError("This method should not be called.");
         }
 

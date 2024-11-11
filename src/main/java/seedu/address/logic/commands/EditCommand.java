@@ -101,16 +101,6 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (model.hasDuplicatePhone(editedPerson.getPhone())
-                && !personToEdit.getPhone().equals(editedPerson.getPhone())) {
-            throw new CommandException("This phone number is already in use.");
-        }
-
-        if (model.hasDuplicateEmail(editedPerson.getEmail())
-                && !personToEdit.getEmail().equals(editedPerson.getEmail())) {
-            throw new CommandException("This email address is already in use.");
-        }
-
         for (Lesson l : model.getAssociatedLessons(personToEdit)) {
             model.deleteLesson(l);
             if (editedPerson.isTutor()) {
