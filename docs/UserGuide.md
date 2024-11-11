@@ -765,6 +765,17 @@ view <INDEX>
 - **On Success:**
     - A split view opens showing the selected client's complete information
     - The main list remains visible and functional on the left while detailed information appears on the right
+    - The images below show the GUI before and after using `view 1`:
+        <div style="display: flex; gap: 10px;">
+            <figure markdown>
+                <img src="images/UIBeforeView.png" alt="UI Before View" style="width: 100%;">
+                <figcaption>Before View</figcaption>
+            </figure>
+            <figure markdown>
+                <img src="images/UIAfterView.png" alt="UI After View" style="width: 100%;">
+                <figcaption>After View</figcaption>
+            </figure>
+        </div>
 - **On Error:**
     - Error caused by invalid index
       - Message:
@@ -794,6 +805,17 @@ close
 - **On Success:**
     - The split view closes.
     - The main list view returns to full width.
+    - The images below show the GUI before and after using `close`:
+      <div style="display: flex; gap: 10px;">
+          <figure markdown>
+              <img src="images/UIAfterView.png" alt="UI Before View" style="width: 100%;">
+              <figcaption>Before Close</figcaption>
+          </figure>
+          <figure markdown>
+              <img src="images/UIAfterClose.png" alt="UI After View" style="width: 100%;">
+              <figcaption>After Close</figcaption>
+          </figure>
+      </div>
 - **On Error:**
     - No error messages are shown; the command is simply ignored if no split view is open.
 
@@ -824,7 +846,7 @@ help
 - Opens up a dialog box that provides:
     - **Command summary table** with command format and basic examples
     - **Link to the User Guide**
-
+    ![HelpWindow](images/HelpWindow.png)
 
 
 
