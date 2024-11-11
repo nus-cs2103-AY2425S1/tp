@@ -13,10 +13,12 @@ The Greatest Offline AddressBook for Teaching Students, or GOATS, is an **offlin
 <br><br>
 The GOATS app is intended for **private tutors** who possess knowledge of basic computer skills (such as installing, downloading and navigating files) and the command terminal. In addition, GOATS is optimised for fast typists with prior experience in using the Command Line Interface (CLI). So, if you can type fast, GOATS can get your student management tasks done faster than traditional Address Book applications!
 <br><br>
-This User Guide provides a guide of how to set up GOATS and a description of useful commands that you can use. If you are a beginner or a first-time user, we recommend that you start with the [Quick start](#quick-start) section. Otherwise, feel free to explore the various features either through the [Command Summary](#command-summary) or the Table of Contents right below this section.
-<br><br><br>
-This User Guide also includes highlighted sections to aid in your reading:
+This User Guide provides a guide of how to set up GOATS and a description of useful commands that you can use.
+Please first ensure that you meet the [Minimum System Requirements](#minimum-system-requirements) in order to run GOATS.
+After that, if you are a beginner or a first-time user, we recommend that you start with the [Quick Start](#quick-start) section. Otherwise, feel free to explore the various features either through the [Command Summary](#command-summary) or the Table of Contents.
 <br><br>
+This User Guide also includes highlighted sections to aid in your reading:
+<br>
 
 <box type="info">
 
@@ -44,15 +46,31 @@ This User Guide also includes highlighted sections to aid in your reading:
 
 ---
 
-## Quick start
+## Minimum System Requirements
 
-1. Ensure you have Java `17` or above installed in your Computer. Please refer to [this](https://www3.cs.stonybrook.edu/~amione/CSE114_Course/materials/resources/InstallingJava17.pdf) guide for more details.
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-4/tp/releases).
-3. Copy the file to the folder you want to use as the _home folder_ for your GOATS.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar GOATS.jar` command to run the application.<br>
+Please ensure that you have the following:
+* A computer running on Windows, macOS or Linux.
+* Ensure you have **Java 17** or above installed on your computer.
+  * To check if you have Java 17 installed on your computer, follow the following steps:
+    1. Open a Command Terminal.
+       * On Windows: Open up `Windows Powershell` from the list of applications.
+       * On Linux: Click on the `Activities` item at the top left of the screen, then type in `terminal` and open the displayed application.
+       * On macOS: Type in `terminal` in the search field in the list of applications and open the displayed application.
+    2. Type in the following command: `java -version`.
+    3. If the response contains `java version "17.x.x"` or higher, you’re all set!
+    4. Otherwise, please refer to [this guide](https://www3.cs.stonybrook.edu/~amione/CSE114_Course/materials/resources/InstallingJava17.pdf) to download Java 17.
+
+## Quick Start
+
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-4/tp/releases).
+2. Copy the file to the folder you want to use as the **home folder** for GOATS.
+3. Open a Command Terminal. For those unfamiliar with opening a command terminal, follow the instructions in the [Minimum System Requirements](#minimum-system-requirements).
+4. Type in the following command to navigate to the GOATS home folder: `cd`, followed by the location of your home folder.<br>
+   e.g. `cd Documents/GOATS_Home_Folder`
+5. Type in the following command to launch the GOATS application: `java -jar GOATS.jar`<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. You are ready to start using GOATS! Try out some example commands in the command box and press Enter to execute them.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -60,7 +78,7 @@ This User Guide also includes highlighted sections to aid in your reading:
    * `delete 3` : Deletes the 3rd contact shown in the current list.
    * `clear` : Deletes all contacts.
    * `exit` : Exits the app.
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -141,7 +159,7 @@ Format: `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lt/LESSON_TIME edu/E
 
 **Examples:**
 
-* `addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 edu/primary lt/wed:13:00 t/friend t/colleague` adds a student named `James Ho` to the address book
+* `addstudent n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 134665 edu/primary lt/wed:13:00 t/friend t/colleague` adds a student named `James Ho` to the address book
 * `addstudent n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal edu/Secondary lt/tue:00:03` adds a student named `Betsy Crowe` to the address book.
 </box>
 
