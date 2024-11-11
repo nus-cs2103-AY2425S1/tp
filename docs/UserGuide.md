@@ -6,7 +6,7 @@ pageNav: 3
 
 # data_coNdUctorS User Guide
 
-data_coNdUctorS is a **desktop address book application for managing contact details of members in NUS Co-Curricular Activity (CCAs) groups**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, data_coNdUctorS can get your contact management tasks done faster than traditional GUI apps.
+data_coNdUctorS is a **desktop address book application for managing contact details of members in NUS Co-Curricular Activity (CCA) groups**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, data_coNdUctorS can get your contact management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -187,6 +187,7 @@ of any currently displayed contact that you wish to edit. <br>
 
 In both methods of editing:
 * Only contacts shown in the displayed list can be edited.
+* After the command is successfully executed, the full contact list will be displayed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing roles, the existing roles of the contact will be removed.
@@ -311,6 +312,13 @@ Examples:
 * `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`<br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
+
+<box type="tip" seamless>
+
+**Tip:** How to revert back to the full contact list after `find`? <br>
+* Execute command `list` to display the full contact list. Refer to [List](#listing-all-contacts-list) for more details.
+* The displayed list will automatically revert to the full list after the successful execution of `add` or `edit`.
+</box>
 
 <div style="page-break-after: always;"></div>
 
