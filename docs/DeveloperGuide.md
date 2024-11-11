@@ -1003,6 +1003,30 @@ testers are expected to do more *exploratory* testing.
        Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
 
 
+6. Finding a person by tag
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+        1. **Tip**: You can also enter the `list-weddings` or `lw` command to list all weddings in the system. <br>
+
+    2. Test case: `find t/guest` <br>
+       Expected: The contacts `Bernice Yu` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find t/photographer t/HOTEL MANAGER` <br>
+       Expected: The contacts `Alex Yeoh` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case: `find t/NONEXISTENTTAG` (where NONEXISTENTTAG is not a `Tag` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Test case:  `find t/UNASSIGNEDTAG` (where UNASSIGNEDTAG is a `Tag` in the system, but there are no `Persons` tagged with it) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    6. Test case:  `find t/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+
+    7. Test case:  `find t/photographer a/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+
+
 
 <br>
 
@@ -1061,6 +1085,8 @@ testers are expected to do more *exploratory* testing.
        The terminal from where `WedLinker.jar` is launched should log where the file is corrupted.
 
     3. If the data is beyond repair, delete the entire `data` folder or the `AddressBook.json` file to start afresh with sample data.
+
+<br>
 
 ## Appendix: Planned Enhancements
 
