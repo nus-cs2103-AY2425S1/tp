@@ -154,12 +154,12 @@ Format: `newtag t/TAG1…​`
 * Each tag name cannot be more than 50 characters long.
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
-* Leading and trailing spaces are ignored. e.g. `newtag t/ bride's side  t/ groom's side  ` is the same as `newtag t/bride's side t/groom's side`.
-* Duplicate tags (with the exact same name) are **not** allowed.
+* Duplicate tags are **not** allowed.
 * Tag names are **case-insensitive**. e.g. `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
 * Only 30 (or fewer) tags can exist in the tag list at any point. Attempts to add tags that could exceed this limit will not be allowed.
 * Attempting to add tags with mix of invalid and valid names at once will result in an error.
 * Attempting to add a mix of duplicate and non-duplicate tags at once will only allow the non-duplicate tags to be added.
+* Any extra parameters (that do not have the prefix `t/`) will be ignored.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may add any number of tags at once (as long as the total number does not exceed 30). e.g. `newtag t/bride's side t/groom's side t/friends`
@@ -179,11 +179,11 @@ Format: `deletetag [-force] t/TAG1…​`
 * Each tag name cannot be more than 50 characters long.
 * Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
 * Tag name cannot be empty, or consist of only whitespaces.
-* Leading and trailing spaces are ignored. e.g. `deletetag t/ bride's side  t/ groom's side` is the same as `deletetag t/bride's side t/groom's side`.
 * User cannot delete a tag that has not been added via `newtag` before.
 * If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
 * Tag names are **case-insensitive**. e.g. `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
 * Attempting to delete a mix of existing and non-existent tags at once will only allow the existing tags to be deleted.
+* Any extra parameters (that do not have the prefix `t/`) will be ignored.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may delete any number of tags at once. e.g. `deletetag t/bride's side t/groom's side t/friends`
@@ -205,6 +205,7 @@ Format: `renametag t/TAG1 t/TAG2`
 * Only one tag can be renamed in each rename command.
 * The new tag name cannot be a tag already in the current tag list.<br>e.g. `friends` and `colleagues` already exist in the tag list. `renametag t/friends t/colleagues` is an invalid command.
 * The target tag must be a tag that is already in the current tag list.<br>e.g. `friends` already exists in the tag list but `colleagues` does not. `renametag t/colleagues t/friends` is an invalid command.
+* Extra parameters are not allowed.
 
 Examples:
 * `renametag t/friends t/colleagues`
