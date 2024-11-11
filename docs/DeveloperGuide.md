@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project was built on the [AddressBook Level-3](https://se-education.org/addressbook-level3/) as part of a student software engineering project. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -466,7 +466,7 @@ testers are expected to do more *exploratory* testing.
 3. Shutting down
   1. Test case: `exit`<br>
      Expected: The app shuts down and the window closes. A JSON file `clientell.json` is generated in the data file directory if there previously wasn't; otherwise, it updates with any new changes.
-  1. Test case: Click the `X` button on the window
+  2. Test case: Click the `X` button on the window<br>
      Expected: Identical to above.
 
 ### Deleting a client
@@ -475,25 +475,25 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No client is deleted. Error details informing of invalid command shown in the status message.
   
-  1. Test case: `delete x`, where `x` is exactly 1 more than client list size<br>
+    4. Test case: `delete x`, where `x` is exactly 1 more than client list size<br>
       Expected: No client is deleted. Error detail informing out of range index shown in the status message.
 
-   1. Test case: `delete`<br>
+   5. Test case: `delete`<br>
       Expected: No client is deleted. Error details informing of missing index parameter shown in the status message.
 
-1. Deleting a client in the transaction list view
+2. Deleting a client in the transaction list view
    1. Prerequisites: List all transactions of a client, such as the first, using the `listt 1` command.
   
-    1. Test case: `delete 0`<br>
-      Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
+    2. Test case: `delete 0`<br>
+      Expected: No client is deleted. Error detail informing of invalid command shown in the status message.
 
-    2. Test case: `delete 1`<br>
+    3. Test case: `delete 1`<br>
       Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
 
@@ -533,7 +533,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addt 0 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
        Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid command format shown in the status message.
 
-   4Test case: `addt x d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17` (where x is larger than list size)<br>
+   4. Test case: `addt x d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17` (where x is larger than list size)<br>
        Expected: Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid index shown in the status message.
 
 2. Adding a transaction in transaction list view.
@@ -601,14 +601,19 @@ testers are expected to do more *exploratory* testing.
 2. Summarising transactions in the transaction list view.
 
    1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
    2. Test case: `summary s/2024-12 e/2024-12`<br>
       Expected: The transactions from `2024-12-01` to `2024-12-31` are shown. The total amount of these transactions is shown in the status message.
+
    3. Test case: `summary s/2024-11 e/2025-01`<br>
       Expected: The transactions from `2024-11-01` to `2025-01-31` are shown. The total amount of these transactions is shown in the status message.
+
    4. Test case: `summary s/2024-11 e/2024-10`<br>
       Expected: Error details informing of invalid date range shown in the status message.
+
    5. Test case: `summary s/2024-11 e/2024-13`<br>
       Expected: Error details informing of invalid month or incorrect format shown in the status message.
+
    6. Test case: `summary s/11-2024 e/12-2024`<br>
       Expected: Error details informing of invalid month or incorrect format shown in the status message.
 
@@ -633,7 +638,7 @@ testers are expected to do more *exploratory* testing.
 3. Editing while app is active
 
    1. Prerequisite: The app is active
-   1. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.
+   2. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.
       Expected: The legal edit is overwritten by the new data from the app's most recent session.
 
 
@@ -645,8 +650,21 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 1. Overload `listt` to not take in an index in transaction list view, to view the whole transactions list for the selected client.
+
 2. Improve `find` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
+
 3. Improve `findt` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
+
 4. Improve `find` to take in additional logic info to specify what fields to search for. Existing implementation searches for name OR company. Future enhancement will allow user to specify the search with greater granularity e.g company OR address, (name AND email AND company) OR tags, etc.
+
 5. Improve data saving/loading of corrupted files. Currently, corruption in data file causes app to launch with empty book, and any updates in this session, upon the session's termination, will override the existing corrupted data file. Future enhancement will launch the app with a specified error to inform that the data file is corrupted, and disables usage until the corrupted data file is corrected/recovered. This is to ensure the corrupted data file (which may be important and only suffering from a minor typo) is not permanently lost.
+
 6. Improve implementation of `tags` to support more complex tag relationships. Currently, tags are simply in a list. Future enhancement allows more intricate relationship between tags to better model real world relationships via hierachial structure, likely implemented with nested lists and some global info. For example, it can be specified that the tags `bakery` `hawker` inherent from tag `FnB`, so any tag with `bakery` would also be auto-tagged with `FnB` for other purposes like searching.
+
+7. Overload `add` to add transactions if the relevant fields for adding a transaction is given. Currently, `add` and `addt` are separate commands. In future implementation, `addt` will be subsumed and overloaded in `add` for a more intuitive user experience. For example, if `add` is supplied with `n/NAME` (and other client fields), it adds a client; if supplied with `INDEX` (and other transaction fields), it adds a transaction to the specified indexed client.
+
+8. Overload `find` to find transactions if the relevant fields for finding a transaction are given. Currently, `find` and `findt` are separate commands. In future implementation, `findt` will be subsumed and overloaded in `find` for a more intuitive user experience. This will also work in conjunction with enhancement 4, in which `find` is enhanced with more customisable, granular logic. For example, if `find` is supplied with usual keywords and used in the client list view, it performs a search in the client list; if supplied with other keywords and used in the transaction list view, it performs a serach on the indexed client's transaction list.
+
+9. Overload `delete` to delete transactions if the relevant fields for deleting a transaction are given. Currently, `delete` and `deletet` are separate commands. In future implementation, `deletet` will be subsumed and overloaded in `delete` for a more intuitive user experience. For example, `delete INDEX` deletes the indexed client while in the client list view, and deletes the indexed transaction while in the transaction list view.
+
+
