@@ -8,6 +8,7 @@
 
 <!-- TOC -->
 * [HireMe Developer Guide](#hireme-developer-guide)
+  * [**Acknowledgements**](#acknowledgements)
   * [**Setting up, getting started**](#setting-up-getting-started)
   * [**Design**](#design)
     * [Architecture](#architecture)
@@ -47,6 +48,12 @@
     * [Exit HireMe](#exit-hireme-application)
 <!-- TOC -->
 <page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Acknowledgements**
+HireMe is based on the AddressBook-Level3 project created by the SE-EDU initiative, and it incorporates the following third-party libraries: JavaFX, Jackson, JUnit5.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
