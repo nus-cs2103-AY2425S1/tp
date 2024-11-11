@@ -715,6 +715,14 @@ find Charlotte Bernice
 
 <div style="page-break-after: always;"></div>
 
+## **Help Command**
+Displays a link to our user guide that provides detailed information on how to use the application.
+
+***Example:***
+```bash
+help
+````
+
 ## **List Command**
 Lists all contacts in the bakery's address book.
 
@@ -723,14 +731,6 @@ Lists all contacts in the bakery's address book.
 list
 ````
 ![listcommandui.png](images/listcommandui.png)
-
-## **Help Command**
-Displays a link to our user guide that provides detailed information on how to use the application.
-
-***Example:***
-```bash
-help
-````
 
 <div style="page-break-after: always;"></div>
 
