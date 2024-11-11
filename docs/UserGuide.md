@@ -260,6 +260,15 @@ Closes all attendance windows if any is currently open.
 
 ## Assignment Commands
 
+| Prefix | Constraints                                                                                                                                                                                                                                                | Example                                                      |
+|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| `n/`   | Names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, name fields do not allow **special characters** like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" respectively | valid: `n/John Doe`</br> invalid: `n/`, `n/Thiru S/o Damith` |
+| `a/`   | Assignment names should only contain alphanumeric characters and spaces, and it should not be blank. </br> Additionally, assignment names should be **unique**.                                                                                            | valid: `a/Assignment 5` </br> invalid:`a/ Assignmment@2`     |
+| `tg/`  | Tutorial group should only be in the format of a letter followed by two numbers.                                                                                                                                                                           | valid: `tg/G01`</br> invalid: `tg/G1`                        |
+| `sn/`  | Student number should be in the format of a letter followed by 7 numbers and a letter.                                                                                                                                                                     | valid: `A1234567N` </br> invalid: `B1234567C`, `A123B`       |
+| `d/`   | Dates should be in the format YYYY-MM-DD                                                                                                                                                                                                                   | valid: `2024-12-01` </br> invalid: `2023-5-1`, `5-1-2024`    |
+| `g/`   | Grade is an integer between 0 and 100 inclusive or null.                                                                                                                                                                                                   | valid: `null`, `5`, `98` </br> invalid: `101`, `92.5`        |
+
 ### Adding Assignments : `adda`
 
 Adds an assignment to the specified student
@@ -276,7 +285,7 @@ with `STUDENT_NUMBER` and `NAME`.
 
 Deletes an assignment for the specified student
 
-Format: `adda n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`
+Format: `deletea n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`
 * Deletes an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided, 
 this deletes the assignment for the student with `STUDENT_NUMBER` and `NAME`.
 * If there is more than one student with `NAME`, a student number must be provided.
