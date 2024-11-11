@@ -293,13 +293,13 @@ the subject(s) tagged must be valid for the previously assigned level.
 <box type="tip" seamless>
 
 **Tips:** 
-* To tag multiple subjects, use the format `s/FIRST_SUBJECT s/SECOND_SUBJECT ...`.
+* To tag multiple subjects, use the format `s/FIRST_SUBJECT s/SECOND_SUBJECT …​`.
 * To clear all existing level and subject tags, use `l/NONE NONE`.
 </box>
 
 **Examples:**
 * `tag n/John Doe l/S3 NA s/ENGLISH`
-* `tag n/Jane Smith s/MATH` only works if `Jane Smith` has a `level` assigned previously.
+* `tag n/Jane Smith s/MATH` only works if `Jane Smith` has a level assigned previously.
 * `tag n/Alex Yeoh l/S4 IP s/A_MATH s/ E_MATH`
 
 ***
