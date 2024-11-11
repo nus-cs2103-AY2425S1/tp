@@ -1048,6 +1048,24 @@ Displays appointments that matches with the specified `HealthService`.
       Use case resumes from step 2.
       <br>
 
+#### Use case: UC11 - Clear data in ClinicConnect
+
+**MSS:**
+
+1.  User types the command to clear all patient records in ClinicConnect.
+2.  ClinicConnect deletes all the patient records from the system successfully.
+
+    Use case ends.
+
+#### Use case: UC12 - Exit ClinicConnect
+
+**MSS:**
+
+1.  User types the command to exit ClinicConnect.
+2.  ClinicConnect GUI closes successfully.
+
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
