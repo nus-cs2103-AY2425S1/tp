@@ -18,11 +18,11 @@ data_coNdUctorS is a **desktop address book application for managing contact det
   - [General Notes about Command Format](#general-notes-about-command-format)
   - [Adding a Contact: add](#adding-a-contact-add)
   - [Editing a Contact: edit](#editing-a-contact-edit)
-    - [Edit by index](#edit-by-index)
-    - [Edit by name](#edit-by-name)
+  - [Edit by index](#edit-by-index)
+  - [Edit by name](#edit-by-name)
   - [Deleting a Contact: delete](#deleting-a-contact-delete)
-    - [Delete by index](#delete-by-index)
-    - [Delete by name](#delete-by-name)
+  - [Delete by index](#delete-by-index)
+  - [Delete by name](#delete-by-name)
   - [Finding Contacts by Contact Details: find](#finding-contacts-by-contact-details-find)
   - [Listing all Contacts: list](#listing-all-contacts-list)
   - [Viewing Help: help](#viewing-help-help)
@@ -61,25 +61,25 @@ data_coNdUctorS is a **desktop address book application for managing contact det
    ![Ui](images/main_window_ui.png)
    
    Note how the app:
-   * contains some sample data 
-   * displays contacts in [alphabetical order]
-   * utilises [Pagination](#displaying-contacts-in-pages----pagination) where 10 contacts are displayed per page at any one time 
-   * shows both the total number of contacts stored in the app and the number of contacts listed in the displayed pages in the status bar footer</br>
+   * Contains some sample data 
+   * Displays contacts in alphabetical order
+   * Utilises [Pagination](#displaying-contacts-in-pages----pagination) where 10 contacts are displayed per page at any one time 
+   * Shows both the number of contacts listed in the displayed pages and the total number of contacts stored in the app in the status bar footer</br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list`: Lists all contacts.
 
-    * `add n/John Doe th/johnny_9876_haha ss/undergraduate 3 e/johnd@example.com r/Admin` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe th/johnny_9876_haha ss/undergraduate 3 e/johnd@example.com r/Admin`: Adds a contact named `John Doe` to the Address Book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current displayed list.
+    * `delete 3`: Deletes the 3rd contact shown in the current displayed list.
 
-    * `clear` : Deletes all contacts.
+    * `clear`: Deletes all contacts.
 
-    * `exit` : Exits the app.
+    * `exit`: Exits the app.
 
-6. Refer to [Command Summary](#command-summary) for a general overview of the commands available
+6. Refer to [Command Summary](#command-summary) for a general overview of the commands available.
 
 7. Refer to [Features](#feature-details) below for the details of each command feature and UI features.
 
@@ -111,8 +111,8 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 * Terminologies used to refer to a specific part of the command format are shown below:
 ![Description for Command Line](images/commandLineDescription.png)
 
-* Words in `UPPER_CASE` are the **fields** (underlined in image) to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a **field** which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are to be supplied by the user.<br>
+  e.g. `add n/NAME` can be used as `add n/John Doe`.
 
 * Items in square brackets are **optional**.<br>
   e.g `n/NAME [nn/NICKNAME]` can be used as `n/John Doe nn/johnnyboiiii` or as `n/John Doe`.
@@ -126,9 +126,9 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.<br>
 
-* The COMMAND_WORD is **not case-sensitive**. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
+* The COMMAND_WORD is **not case-sensitive**. (eg. add; ADD; aDd are all interpreted as `add`)
 
-* A limit of 1000 characters 
+* User input is limited to 1000 characters.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -185,11 +185,11 @@ In both methods of editing:
 * When editing roles, the existing roles of the contact will be removed.
 
 #### Edit by index
-Format:<br> `edit INDEX [n/NAME2] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
+Format:<br> `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 
 * Edits the contact at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed contact list. 
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ (if the number given is larger than MAX_INT (2147483647), **it will be treated as a non-zero unsigned integer**)
 
 Examples:<br>
 
@@ -197,10 +197,10 @@ Examples:<br>
 *  `edit 2 r/Admin r/President` <br> Edits the roles of the 2nd displayed contact to be `Admin` and `President`, this replaces all existing roles of the contact.
 
 #### Edit by name
-Format:<br> `edit NAME [n/NAME2] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
-* Edits the contact specified by `NAME`.
-* The `NAME` has to be an exact match to an existing contact which is displayed.
-* The `NAME` is not case-sensitive.
+Format:<br> `edit FULL_NAME [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
+* Edits the contact specified by `FULL_NAME`.
+* The `FULL_NAME` has to be an exact match to an existing contact which is displayed.
+* The `FULL_NAME` is not case-sensitive.
 
 Examples:
 *  `edit alex yeoh th/johndoe123 e/johndoe@example.com` <br> Edits the telegram handle and email address of the contact `Alex Yeoh` to be `johndoe123` and `johndoe@example.com` respectively.
@@ -209,9 +209,10 @@ Examples:
 <box type="tip" seamless>
 
 Note:
-* `NAME` refers to the full name of contact displayed (to edit) while `n/NAME2` is an input to change the contact's name to (to change to).
-* `edit` command will fail if you enter a duplicate field as an existing contact as seen in section [invalid contacts](#what-is-considered-as-invalid-contacts)
-* In the event of `NAME` matching to multiple contacts that exist, you will have to `find NAME` followed by `edit INDEX PARAMETER...` to choose which contact of the specified `NAME` you wish to edit.
+* `FULL_NAME` refers to the full name of contact displayed (to edit) while `n/NAME` is an input to change the contact's name to.
+* `edit` command will fail if the changes would result in the edited contact having the same identity as another existing contact, as described in section [invalid contacts](#what-is-considered-as-invalid-contacts).
+* `edit` command will fail if you enter a duplicate field as an existing contact as seen in section [invalid contacts](#what-is-considered-as-invalid-contacts).
+* In the event of `FULL_NAME` matching to multiple contacts that exist, you will have to `find FULL_NAME` followed by `edit INDEX PARAMETER...` to choose which contact of the specified `FULL_NAME` you wish to edit.
 </box>
 
 <div style="page-break-after: always;"></div>
@@ -221,7 +222,7 @@ Note:
 
 **Action:**
 Deletes the specified contact from the address book.<br> You may delete by specifying the index of
-the contact in the displayed address book, or you by specifying the full name
+the contact in the displayed address book, or by specifying the full name
 of any currently displayed contact that you wish to delete. <br>
 </box>
 
@@ -230,20 +231,20 @@ Format: `delete INDEX`
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​ (if the number given is larger than MAX_INT (2147483647), **it is a non-zero unsigned integer**)
+* The index **must be a positive integer** 1, 2, 3, …​ (if the number given is larger than MAX_INT (2147483647), **it will be treated as a non-zero unsigned integer**)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find n/alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 #### Delete by name
-Format `delete NAME` or `delete n/NAME`
+Format `delete FULL_NAME` or `delete n/FULL_NAME`
 
-* Delete the contact whose name matches the specified `NAME`.
+* Delete the contact whose name matches the specified `FULL_NAME`.
 * Only contacts shown in the displayed contact list will be deleted. 
 * `find n/alex` followed by `delete Amy Gould` would not work, since Amy Gould would not be displayed.
-* The `NAME` has to be an exact match to an existing contact in the displayed list.
-* The `NAME` is not case-sensitive.
+* The `FULL_NAME` has to be an exact match to an existing contact in the displayed list.
+* The `FULL_NAME` is not case-sensitive.
 
 Examples:
 * Both `delete Amy Gould` and `delete n/Amy Gould` delete the user whose name is `Amy Gould` (not case-sensitive) in the address book.
@@ -252,20 +253,20 @@ Examples:
 <box type="tip" seamless>
 
 Note: 
-* You may not delete by multiple ways concurrently. (eg. `delete NAME n/NAME2` or `delete INDEX n/NAME`)
-* In the event of `NAME` matching to multiple contacts that exist, you will have to `find NAME` followed by `edit INDEX PARAMETER...` to choose which contact of the specified `NAME` you wish to edit.
+* You may not delete by multiple ways concurrently. (eg. `delete FULL_NAME n/FULL_NAME_2` or `delete INDEX n/FULL_NAME`)
+* In the event of `FULL_NAME` matching to multiple contacts that exist, you will have to `find FULL_NAME` followed by `edit INDEX PARAMETER...` to choose which contact of the specified `FULL_NAME` you wish to edit.
 </box>
 
 <box type="tip" seamless>
 
 **Tip:** How to edit / delete contacts by full names when more than 1 contact has the same name?<br>
 
-* If you input `edit` or `delete` followed by a `REPEATED_FULL_NAME` in the address book, an error will arise, prompting you to delete by index instead
+* If you input `edit` or `delete` followed by a `REPEATED_FULL_NAME` in the address book, an error will arise, prompting you to delete by index instead.
 * Hence, you should:
   1. Use the command `find REPEATED_FULL_NAME` which can be found [below](finding-contacts-by-contact-details-find)
   2. This displays the contacts with the `REPEATED_FULL_NAME`
-  3. Search for the one you want to edit / delete and note down its `index`
-  4. Edit / Delete accordingly based on the `index`
+  3. Search for the one you want to edit / delete and note down its `INDEX`
+  4. Edit / Delete accordingly by the `INDEX`
 
 </box>
 
@@ -290,19 +291,19 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
       e.g. `find r/pres` &rarr; invalid<br>
       e.g. `find r/President` &rarr; valid
     * Not case-sensitive e.g. `find r/pResiDent` &rarr; valid
-    * Specifying multiple roles returns contacts holding all specified roles
-      e.g. `find r/Vice President r/Admin` will only return contacts holding **both** Roles.
+    * Specifying multiple roles returns contacts holding all specified roles.
+      e.g. `find r/Vice President r/Admin` will only return contacts holding **both** roles.
 * All other fields `[n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [nn/NICKNAME]`:
-    * The order of the keywords does not matter. e.g. query `Hans Bo` will match `Bo Hans`
-    * Substring matching e.g. query `Han` will match `Hans`, but query `Hans` will not match `Han`
-    * Each keyword is treated as a separate substring e.g. both keywords in query `Hans Ansbo` will match `Hansbo`
+    * The order of the keywords does not matter. e.g. query `Hans Bo` will match `Bo Hans`.
+    * Substring matching e.g. query `Han` will match `Hans`, but query `Hans` will not match `Han`.
+    * Each keyword is treated as a separate substring e.g. both keywords in query `Hans Ansbo` will match `Hansbo`.
     * Contacts matching only one keyword will not be returned (i.e. `AND` search).
-      e.g. query `Hans Bo` will match `Hans Boey` and `Hans Jobo` but not `Hans Gruber`
+      e.g. query `Hans Bo` will match `Hans Boey` and `Hans Jobo` but not `Hans Gruber`.
 
 Examples:
-* `find n/john` returns `Johnny Tan` and `John Doe`<br>
-* `find n/harlot olive ss/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`<br>
-* `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`<br>
+* `find n/john` returns `Johnny Tan` and `John Doe`. <br>
+* `find n/harlot olive ss/masters` returns `Charlotte Oliveiro`, who holds the student status `masters`. <br>
+* `find r/Admin r/President` returns `Joanna Carroll` who holds both roles, but not `Alex Yeoh` who only holds the role `Admin`. <br>
   ![result for 'find r/Admin r/President'](images/findRoleAdminPresidentResult.png)
 
 <box type="tip" seamless>
@@ -327,17 +328,12 @@ Format: `list [all]... [contacts]...`
 <box type="definition" seamless>
 
 **Action:** Shows a list of all contacts in the address book.
-* optional parameters of `all` or `contacts` or any combinations and permutations of these two words separated by spaces are accepted
+* Optional parameters of `all` or `contacts` or any permutations of these two words separated by spaces are accepted
+
 </box>
 
 
 ![list message](images/listSuccess.png)
-
-
-<box type="info" seamless>
-
-**Information:** Alphabetical Sorting?
-</box>
 
 ### Viewing Help: `help`
 
@@ -359,7 +355,7 @@ This also prompts the user to do `help COMMAND_WORD` where COMMAND_WORD refers t
 * `clear`
 * `exit`
 
-From this, the user can get quick reminder on how to use the various commands without having to refer to the User Guide
+From this, the user can get a quick reminder on how to use the various commands without having to refer to the User Guide.
 
 <div style="page-break-after: always;"></div>
 
@@ -457,18 +453,14 @@ For example, if there are contacts with the following data:
 
 ![example john doe](images/ExampleJohnDoe.png) 
 
-Assuming the above entry in the address book, you must enter an add / edit command with the following constraints with the following fields:
-1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname`. Nickname must be **unique**. If a Contact with a Name without a Nickname already exist, another same Name without Nickname cannot be added / edited.
-2. Must not have the same `Telegram Handle`. Each Telegram Handle must be **unique**
-3. Must not have the same `Email`. Each Email must be **unique**
-4. Must not have more than one `Role` labelled as `President`. Can only have one `President`
+Assuming the above entry in the address book, the following parameters passed into edit / add are considered valid / invalid:
 
-| Case      | Valid                                                                                                                                             | Invalid                                                                                                                                                                                                                                                       |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1         | `n/John Doe nn/notJohnny ...` &rarr; same Name but different Nickname <br/> `n/Alice Tan nn/anyNickname ...` &rarr; same Name but unique Nickname | `n/John Doe nn/Johnny ...` &rarr; there is already a contact with name John Doe AND Nickname Johnny<br/>`n/John Depp nn/Johnny ...` &rarr; there is already a Nickname Johnny<br/>`n/Alice Tan ...` &rarr; &rarr; Alice Tan without a nickname already exists |
-| 2         | `th/notalicetan123 ...`<br/> `th/notjohndoe ...`                                                                                                  | `th/johndoe ...`       &rarr; telegram handle already belongs to an existing contact                                                                                                                                                                          |
-| 3         | `e/notjohnd@example.com ...`                                                                                                                      | `e/johnd@example.com ...`     &rarr; email already belongs to an existing contact                                                                                                                                                                             |
-| 4         | `r/Admin r/Marketing ...` (and `r/President` not inside)                                                                                          | `r/Admin r/President ...` &rarr; John is already President                                                                                                                                                                                                    |
+| Case      | Valid                                                                                                                                             | Invalid                                                                                                                                                                                                                                               |
+|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1         | `n/John Doe nn/notJohnny ...` &rarr; same Name but different Nickname <br/> `n/Alice Tan nn/anyNickname ...` &rarr; same Name but unique Nickname | `n/John Doe nn/Johnny ...` &rarr; John Doe with nickname Johnny already exists<br/>`n/John Depp nn/Johnny ...` &rarr; nickname Johnny already belongs to an existing contact<br/>`n/Alice Tan ...` &rarr; Alice Tan without a nickname already exists |
+| 2         | `th/notalicetan123 ...`<br/> `th/notjohndoe ...`                                                                                                  | `th/johndoe ...`       &rarr; telegram handle already belongs to an existing contact                                                                                                                                                                  |
+| 3         | `e/notjohnd@example.com ...`                                                                                                                      | `e/johnd@example.com ...`     &rarr; email already belongs to an existing contact                                                                                                                                                                     |
+| 4         | `r/Admin r/Marketing ...` (and `r/President` not inside)                                                                                          | `r/Admin r/President ...` &rarr; John is already President                                                                                                                                                                                            |
 
 
 
@@ -476,14 +468,14 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 
 ## Contact Fields Constraints
 
-| Field                                   | Prefix* | Valid examples                                                                                                                       | Invalid examples                                                                                                |
-|-----------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Jane Smith@Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` | `James&`<br/> spaces must come before and after `D/O` or `S/O` &rarr; <br/> `RaviS/ORamasamy`<br/>`DeviD/ORajaratnam` |
-| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                                     | `@ginatan123`                                                                                                   |
-| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-web.com`                                                                                                           | `gina_tan@`                                                                                                     |
-| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                                     | `u 1`<br/> `under 5`                                                                                            |
-| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                                 | `Events(Internal)`                                                                                              |
-| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                                         |                                                                                                                 |
+| Field                                   | Prefix* | Valid examples                                                                                                                              | Invalid examples                                                                                                       |
+|-----------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| [**NAME**](#name)                       | `n/`    | `Gina Tan`<br/> `Jane Smith @ Jones`<br/> `Jane Smith@Jones`<br/> `Ravi S/O Ramasamy`<br/> `Devi D/O Rajaratnam`<br/> `Janelle Wong (Jane)` | `James&`<br/> spaces must come before and after `D/O` or `S/O` &rarr; <br/> `RaviS/ORamasamy`<br/>`DeviD/ORajaratnam`  |
+| [**TELEGRAM HANDLE**](#telegram-handle) | `th/`   | `ginatan123`<br/> `jane_smith28`                                                                                                            | `@ginatan123`                                                                                                          |
+| [**EMAIL**](#email)                     | `e/`    | `gina_tan@example-web.com`                                                                                                                  | `gina_tan@`                                                                                                            |
+| [**STUDENT STATUS**](#student-status)   | `ss/`   | `Undergraduate 3`<br/> `Masters`<br/> `PhD`<br/>                                                                                            | `u 1`<br/> `undergraduate 7`                                                                                           |
+| [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                                        | `Events(Internal)`                                                                                                     |
+| [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                                                |                                                                                                                        |
 
 *_By default, all fields must be non-empty when prefix is specified_
 
@@ -498,7 +490,7 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 ### Name
 - Must contain English alphabets and spaces only, with the following exceptions:
     - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
-      - A blank space must come before and after `S/O` or `D/O`
+    - A blank space must come before and after `S/O` or `D/O`
     - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
 - Must not be blank.
 - Will be automatically converted to Start Case (i.e. Only the first letter of every word is in upper-case). 
@@ -538,8 +530,8 @@ Assuming the above entry in the address book, you must enter an add / edit comma
 
 <box type="info" seamless>
 
-**Information:** Role Sorting? (it's not just about name by further extension)
-&// ISSUE 285
+**Information:**
+Roles for each contact are displayed in the order listed above.
 </box>
 
 ### Nickname
