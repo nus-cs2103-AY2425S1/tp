@@ -41,6 +41,8 @@ pageNav: 3
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
 
+<page-nav-print />
+
 --------------------------------------------------------------------------------------------------------------------
 
 
