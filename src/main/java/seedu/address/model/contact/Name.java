@@ -15,20 +15,20 @@ public class Name {
     public static final String DAUGHTER_OF = "D/O";
     public static final String BRACKET_PAIR = "(INSERT_NAME)";
     public static final String OPEN_BRACKET = "(";
+    public static final String CLOSE_BRACKET = ")";
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain letter characters and spaces, it should neither be blank nor "
                     + "contain numbers. But the following cases are still allowed: " + ALIAS + ", " + SON_OF
                     + ", " + DAUGHTER_OF + ", " + BRACKET_PAIR + ". These cases can be used, but must only "
                     + "appear once. " + ALIAS + ", " + SON_OF + ", " + DAUGHTER_OF + " must be in the middle "
-                    + "of the name while " + BRACKET_PAIR + " must be after the given name (at the end of the"
-                    + " full name)";
+                    + "of the name while " + BRACKET_PAIR + " must be after the given " +
+                    "name (at the end of the full name)";
 
     // @@author cth06-Github-reused
     // Regex obtained mainly through chatGPT (see developer guide)
     public static final String VALIDATION_REGEX = "^([A-Za-z\\s]+)$";
     public static final String REGEX_OPEN_BRACKET = "\\" + OPEN_BRACKET; // to be compatible with regex
-    public static final String REGEX_CLOSE_BRACKET_AT_END_ONLY = ".*\\)$";
     // @@author
     public static final String REGEX_WHITESPACE_WITH_REPEATS = "\\s+";
 
@@ -56,7 +56,7 @@ public class Name {
         String validSpecialCharForRegex = identifyValidSpecialChar(testInNameCase);
         boolean hasNoSpecialChar = validSpecialCharForRegex.isEmpty();
         boolean hasOpenBracket = validSpecialCharForRegex.equals(OPEN_BRACKET);
-        boolean hasCloseBracketAtEnd = testInNameCase.matches(REGEX_CLOSE_BRACKET_AT_END_ONLY);
+        boolean hasCloseBracketAtEnd = testInNameCase.endsWith(CLOSE_BRACKET);
 
         // if no special character, just check that it is only alphabets
         if (hasNoSpecialChar) {
@@ -102,15 +102,20 @@ public class Name {
 
     private static String convertCase(String word) {
         assert !word.contains(SINGLE_WHITESPACE); // word here contains no whitespace characters
+        //assert word.toLowerCase().equals(word); // word input should already be in lower case
 
         if (word.equalsIgnoreCase(SON_OF) || word.equalsIgnoreCase(DAUGHTER_OF)) {
             return word.toUpperCase();
         }
 
-        String startingLetter = word.substring(0, 1);
-        if (startingLetter.equals(OPEN_BRACKET)) {
+        /*
+        if (word.contains(SON_OF.toLowerCase()) || word.contains(DAUGHTER_OF.toLowerCase())) {
+            return splitAndMergeWithCaps(word);
+        }*/
+
+        if (word.startsWith(OPEN_BRACKET)) {
             assert word.length() >= 2; // word is not just an open bracket
-            return startingLetter + Character.toUpperCase(word.charAt(1))
+            return OPEN_BRACKET + Character.toUpperCase(word.charAt(1))
                     + word.substring(2);
         }
 
@@ -119,6 +124,20 @@ public class Name {
         return Character.toUpperCase(word.charAt(0)) + word.substring(1);
         // @@author
     }
+
+    /*
+    private static String splitAndMergeWithCaps(String word) {
+        assert word.contains(SON_OF.toLowerCase()) || word.contains(DAUGHTER_OF.toLowerCase());
+        String specialChar = identifyValidSpecialChar(word);
+        String[] stringArray = word.split(specialChar.toLowerCase(), 2);
+        assert !stringArray[0].isEmpty();
+        if (stringArray.length == 1) {
+            return stringArray[0].charAt(0) + specialChar;
+        }
+        assert stringArray.length == 2;
+        return stringArray[0] + specialChar + stringArray[1];
+    }*/
+
 
     /**
      * Compares the name of another contact in alphabetical order.
