@@ -656,7 +656,7 @@ have adopted, which was to work on features that we could deliver by the stipula
 ## **Appendix: Planned Enhancements**
 Team size: 4<br>
 
-1. **Make add command accept non-alphanumeric values:** The current implementation for the add command is such where names and tags can only be saved as alphanumeric values. We plan to allow adding non-alphanumeric
+1. **Enhance `add` command to accept non-alphanumeric values:** The current implementation for the add command is such where names and tags can only be saved as alphanumeric values. We plan to allow adding non-alphanumeric
 values for names and tags in the future. E.g. `add n/L'Éclat Culinaire p/12345678 e/test@email.com a/Pasir Ris pr/$$$ t/Crème brûlée`.
 2. **Allow spaces and special characters within phone numbers:** The current implementation of adding contacts with phone numbers does not allow spaces and only allows numbers. It would be more practical if
 spaces and special characters are allowed for longer phone numbers with specific area and country codes. For example: `12345678` is what can be accepted currently. We plan on allowing phone numbers like: `+65 1234 5678`.
