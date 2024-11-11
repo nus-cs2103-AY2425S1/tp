@@ -227,19 +227,23 @@ Adds a person to the TAHub.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 
-Expected output:
-
-![result for 'add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends'](images/addPerson.png)
+- `NAME`, `PHONE_NUMBER`, and `EMAIL` should correspond to valid name, phone number, and email of the person.
+- `COURSE` refers to the course this person is taking.
+- `TAG` refers to any additional information about the person and should only contain alphanumeric characters. A person can have any number of tags (including 0).
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** TAs can use tags to keep small notes about students' progress and performance in class.
 </box>
 
 Examples:
 
 - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`
 - `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/needs help`
+
+Expected output:
+
+![result for 'add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/owesMoney t/friends'](images/addPerson.png)
 
 <div style="page-break-after: always;"></div>
 
