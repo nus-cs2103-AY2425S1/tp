@@ -115,7 +115,7 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 
 | **Call-outs**                                                                                   | **Description**                          |
 |-------------------------------------------------------------------------------------------------|------------------------------------------|
-| <div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">ℹ️ **Info**</div>     | For additional information.             |
+| <div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">ℹ️ **Info**</div>     | For additional information.             |
 | <div style="background-color: #FFA07A; padding: 4px; border-radius: 4px;">❗️️ **Warning**</div> | A caution or important warning.         |
 | <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**</div>  | Helpful tips to make your experience smoother. |
 
