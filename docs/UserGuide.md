@@ -13,7 +13,7 @@ For any terms that you are unfamiliar with, refer to the [Glossary of Terms](#gl
 <span style="font-size: 30px; font-weight: bold; color: #d67d3e">Table of Contents</span>
 
 * [How to use the User Guide](#how-to-user-guide)
-* [Display Boxes](#display-boxes)
+  * [Display Boxes](#display-boxes)
 * [Application Overview](#application-overview)
 * [Quick Start](#quick-start)
 * [Features](#features)
@@ -48,6 +48,7 @@ For any terms that you are unfamiliar with, refer to the [Glossary of Terms](#gl
 * [Known issues](#known-issues)
 * [Glossary of Terms](#glossary)
 * [Command summary](#command-summary)
+* [Acceptable Value Ranges for Parameters](#acceptable-parameters)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -133,12 +134,13 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 
 6. Verify the GUI: If you are successful in opening the application, a GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/Ui.png)
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-**Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
-</div>
+    <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+    **Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
+    </div>
 
 7. Here is a quick guide to the GUI.<br>
    ![GuiGuide](images/GuiGuide.png)
+
 8. Enter commands: Type a command in the command box and press Enter to execute it. For example, typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -182,10 +184,10 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
 </div>
 
 <a id="general"></a>
-<span style="font-size: 30px; font-weight: bold; color: #e0da87">General</span>
+<span style="font-size: 30px; font-weight: bold; color: #baa856">General</span>
 
 <a id="general-help"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Viewing help : `help`</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Viewing help : `help`</span>
 
 Shows a message explaining how to access the help page.
 
@@ -194,19 +196,19 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 <a id="general-exit"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Exiting the program : `exit`</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Exiting the program : `exit`</span>
 
 Exits the program.
 
 Format: `exit`
 
 <a id="general-save"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Saving the data</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Saving the data</span>
 
 Data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 <a id="general-edit"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Editing the data file</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Editing the data file</span>
 
 All data is saved automatically as a JSON file within the storage folder. Advanced users are welcome to update data directly by editing that data file.
 
@@ -219,7 +221,7 @@ Furthermore, certain edits can cause the JSON files to behave in unexpected ways
 </div>
 
 <a id="general-switch"></a>
-<span style="font-size: 20px; font-weight: bold; color: #e0da87">Switching parser modes : `switch`</span>
+<span style="font-size: 20px; font-weight: bold; color: #baa856">Switching parser modes : `switch`</span>
 
 Switches the parser mode to the specified parser mode.
 
@@ -446,11 +448,13 @@ Examples:
 
 Finds meet-ups whose meet-up names contain any of the given keywords.
 
-Format: `find s/KEYWORD`
+Format: `find s/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `meet` will match `Meet`
 * Only the meet-up name is searched.
 * Keyword will be matched to exact words, e.g. `meet` will not match `meeting`
+* Meet-ups matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Sales Closing` will return `Sales Meeting`, `Closing Meeting`
 
 <div markdown="span" class="alert alert-primary">:rocket: **Future Enhancement:**
 Planned update will allow searches using other attributes, such as: `f/FROM`, `t/TO`, and `n/ADDED_BUYER`.
@@ -490,7 +494,7 @@ Using the clear command will delete all the meet-ups from the list of meet-ups, 
 </div>
 
 <a id="properties"></a>
-<span style="font-size: 30px; font-weight: bold; color: #56d676">Properties</span>
+<span style="font-size: 30px; font-weight: bold; color: #2fba54">Properties</span>
 
 Properties represent each property in your portfolio. The property list helps you keep track of each property's details such as the landlord's name and phone number, as well as the property's address, type (e.g. apartment, landed house, etc) and asking price.
 
@@ -507,14 +511,14 @@ Properties represent each property in your portfolio. The property list helps yo
 </div>
 
 <a id="view-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Viewing all properties : `view`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Viewing all properties : `view`</span>
 
 Shows a list of all properties in the property list.
 
 Format: `view`
 
 <a id="add-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Adding a property: `add`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Adding a property: `add`</span>
 
 Adds a property to the property list.
 
@@ -530,7 +534,7 @@ Examples:
 * `add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium`
 
 <a id="edit-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Editing a property : `edit`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Editing a property : `edit`</span>
 
 Edits an existing property in the property list.
 
@@ -547,7 +551,7 @@ Examples:
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd property's landlord to be `Betsy Crower`.
 
 <a id="find-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Finding properties: `find`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Finding properties: `find`</span>
 
 Find existing properties in the property list based on either name or address keywords.
 
@@ -571,7 +575,7 @@ Examples:
 ![FindPropertySequence](images/FindPropertySequence.png)
 
 <a id="delete-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Deleting a property: `delete`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Deleting a property: `delete`</span>
 
 Deletes the specified property from the property list
 
@@ -587,7 +591,7 @@ Examples:
 * `find n/Adam` followed by `delete 2` deletes the 2nd property in the displayed results of the find command.
 
 <a id="clear-property"></a>
-<span style="font-size: 20px; font-weight: bold; color: #56d676">Clearing all properties : `clear`</span>
+<span style="font-size: 20px; font-weight: bold; color: #2fba54">Clearing all properties : `clear`</span>
 
 Clears all entries from the property list.
 
@@ -599,80 +603,8 @@ Using the clear command will delete all the properties from the list of properti
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Acceptable value ranges for parameters
-
-<table>
-    <tr><th>Command</th><th>Parameter</th><th>Acceptable inputs</th></tr>
-    <tr><th colspan="3">General</th></tr>
-    <tr><th>View</th><td colspan="2">No parameters required</td></tr>
-    <tr><th>Clear</th><td colspan="2">No parameters required</td></tr>
-    <tr><th>Help</th><td colspan="2">No parameters required</td></tr>
-    <tr>
-        <th>Delete</th>
-        <td>Index</td>
-        <td>Positive integers only.
-            <br>Integers less than 1 will cause an invalid command format error.
-            <br>Integers greater than the number of contacts displayed in the given mode are invalid.</td>
-    </tr>
-    <tr><th colspan="3">Buyer</th></tr>
-    <tr><th rowspan="5">Add</th><td>Name</td><td>Alphanumeric characters and space, should not be blank</td></tr>
-    <tr><td>Phone</td><td>Numbers, at least 3 digits long</td></tr>
-    <tr>
-        <td>Email</td>
-        <td>Emails should be of the format local-part@domain and adhere to the following constraints:
-            <br>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-            <br>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br>The domain name must:
-            <br>- end with a domain label at least 2 characters long<br>- have each domain label start and end with alphanumeric characters
-            <br>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-            <br>Special characters (+_.-) can only be used to separate alphanumeric values and not be put together consecutively.
-        </td>
-    </tr>
-    <tr>
-        <td>Budget</td>
-        <td>It should be a positive integer more than 0 and not be blank. 
-            <br>It can contain commas at the right positions (exactly 3 digits after each comma) 
-            <br>E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). </td>
-    </tr>
-    <tr><td>Tag</td><td>Tags names should only contain alphanumeric and dashes</td></tr>
-    <tr>
-        <th rowspan="2">Edit</th>
-        <td>Index</td><td>Refer to General > Delete > Index</td>
-    </tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</tr>
-    <tr><th>Find</th><td>Name</td><td>Prepend the prefix "n/" before the name to be searched. For constraints on the name, refer to Buyer > Add > Name</td></tr>
-    <tr><th colspan="3">Meet-Up</th></tr>
-    <tr>
-    <th rowspan="5">Add</th>
-    <td>Subject</td><td>Alphanumeric characters and spaces,should not be blank</td>
-    </tr>
-    <tr><td>Info</td><td>Must have at least one non-whitespace character</td></tr>
-    <tr><td>From</td><td rowspan="2">Format: YYYY-MM-DD HH:mm</td></tr>
-    <tr><td>To</td></tr>
-    <tr><td>Added Buyers</td><td>Alphanumeric characters and spaces, should not be blank</td></tr>
-    <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for MeetUp > Add</tr>
-    <tr><th>Find</th><td>Subject</td><td>Prepend the prefix "s/" before the subject to be searched. For constraints on the subject, refer to MeetUp > Add > Subject</td></tr>
-    <tr><th colspan="3">Property</th></tr>
-    <tr><th rowspan="5">Add</th><td>Landlord Name</td><td>Alphanumeric characters and spaces,should not be blank</td></tr>
-    <tr><td>Phone</td><td>Numbers, at least 3 digits long</td></tr>
-    <tr>
-        <td>Asking Price</td>
-        <td>It should be a positive integer more than 0 and not be blank. 
-            <br>It can contain commas at the right positions (exactly 3 digits after each comma) 
-            <br>E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). </td>
-    </tr>
-    <tr><td>Address</td><td>Can take any values, and it should not be blank</td></tr>
-    <tr><td>Property Type</td><td>Can take any values, and it should not be blank</td></tr>
-    <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
-    <tr><td colspan="2">The remaining parameters are the same as that for Property > Add</tr>
-    <tr><th rowspan="2">Find</th><td>Landlord Name</td><td>Prepend the prefix "n/" before the landlord's name to be searched. For constraints on the landlord's name, refer to Property > Add > Landlord Name</td></tr>
-    <tr><td>Address</td><td>Prepend the prefix "a/" before the address to be searched. For constraints on the address, refer to Property > Add > Address</td></tr>
-</table>
-
---------------------------------------------------------------------------------------------------------------------
-
 <a id="faq"></a>
-<span style="font-size: 30px; font-weight: bold; color: #baa856">FAQ</span>
+<span style="font-size: 30px; font-weight: bold; color: #d67d3e">FAQ</span>
 
 **Q**: Can I use ABCLI without any programming knowledge?  
 **A**: Yes, ABCLI is designed to be user-friendly and does not require any coding skills. Follow the User Guide to learn the commands and usage patterns, and you’ll be able to use ABCLI effectively.
@@ -716,7 +648,7 @@ Using the clear command will delete all the properties from the list of properti
 --------------------------------------------------------------------------------------------------------------------
 
 <a id="known-issues"></a>
-<span style="font-size: 30px; font-weight: bold; color: #ba6356">Known issues</span>
+<span style="font-size: 30px; font-weight: bold; color: #eb3f64">Known issues</span>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
@@ -835,20 +767,20 @@ Using the clear command will delete all the properties from the list of properti
     </tr>
     <tr>
         <td><b>View</b></td>
-        <td><code>view</code>
-        <td><code>view</code>
-        <td><code>view</code>
+        <td><code>view</code></td>
+        <td><code>view</code></td>
+        <td><code>view</code></td>
     </tr>
     <tr>
         <td><b>Add</b></td>
         <td><code>add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​</code><br> e.g., <code>add n/James Ho p/22224444 e/jamesho@example.com a/1200000 t/friend t/colleague</code></td>
-        <td><code>add s/SUBJECT i/INFO f/FROM t/TO a/ADDED_BUYER [a/ADDED_BUYER]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Jason to discuss the March Project a/Alex Yeoh a/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
+        <td><code>add s/SUBJECT i/INFO f/MEETUP_FROM t/MEETUP_TO n/BUYER_NAME [n/MORE_BUYER_NAMES]…​</code><br> e.g., <code>add s/Discuss work plans i/Meet with Jason to discuss the March Project n/Alex Yeoh n/David Li f/2024-02-03 14:00 t/2024-02-03 15:30 </code></td>
         <td><code>add n/LANDLORD_NAME a/ADDRESS p/PHONE s/ASKING_PRICE t/TYPE</code><br> e.g., <code>add n/Janice Tan a/123 West Coast #12-288 p/33334444 a/650000 t/HDB</code></td>
     </tr>
     <tr>
         <td><b>Edit</b></td>
         <td><code>edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​</code><br> e.g., <code>edit 2 n/James Lee e/jameslee@example.com</code></td>
-        <td><code>edit INDEX [s/SUBJECT] [i/INFO] [f/FROM] [t/TO] [n/ADDED_BUYER]…​</code><br> e.g., <code>edit 3 a/Alex Yeoh a/Ben Ten</code></td>
+        <td><code>edit INDEX [s/SUBJECT] [i/INFO] [f/MEETUP_FROM] [t/MEETUP_TO] [n/BUYER_NAME]…​</code><br> e.g., <code>edit 3 n/Alex Yeoh n/Ben Ten</code></td>
         <td><code>edit INDEX [n/LANDLORD_NAME] [a/ADDRESS] [p/PHONE] [a/ASKING_PRICE] [t/PROPERTY_TYPE]…​</code><br> e.g., <code>edit 2 n/Ben Tan a/East Coast Blk 20 #11-283 </code></td>
     </tr>
     <tr>
@@ -860,17 +792,90 @@ Using the clear command will delete all the properties from the list of properti
     <tr>
         <td><b>Find</b></td>
         <td><code>find n/KEYWORD [MORE_KEYWORDS]…​</code><br> e.g., <code>find n/James Jake</code></td>
-        <td><code>find s/KEYWORD [MORE_KEYWORDS]…​</code><br> e.g., <code>find Project </code></td>
-        <td><code>find [a/KEYWORD] [n/KEYWORD] [MORE_KEYWORDS]…​</code><br> e.g., <code>find a/Lakefront</code></td>
+        <td><code>find s/KEYWORD [MORE_KEYWORDS]…​</code><br> e.g., <code>find s/Project </code></td>
+        <td><code>find [a/KEYWORD] [MORE_KEYWORDS]…​ OR find [n/KEYWORD] [MORE_KEYWORDS]…​</code><br> e.g., <code>find a/Lakefront</code></td>
     </tr>
     <tr>
         <td><b>Clear</b></td>
-        <td><code>clear</code>
-        <td><code>clear</code>
-        <td><code>clear</code>
+        <td><code>clear</code></td>
+        <td><code>clear</code></td>
+        <td><code>clear</code></td>
     </tr>
     <tr>
         <td><b>Help</b></td>
         <td colspan="3"><code>help</code></td>
     </tr>
+</table>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<a id="acceptable-parameters"></a>
+<span style="font-size: 30px; font-weight: bold; color: #d67d3e">Acceptable Value Ranges for Parameters</span>
+
+<table>
+    <tr><th>Command</th><th>Parameter</th><th>Acceptable inputs</th></tr>
+    <tr><th colspan="3">General</th></tr>
+    <tr><th>View</th><td colspan="2">No parameters required</td></tr>
+    <tr><th>Clear</th><td colspan="2">No parameters required</td></tr>
+    <tr><th>Help</th><td colspan="2">No parameters required</td></tr>
+    <tr>
+        <th>Delete</th>
+        <td>Index</td>
+        <td>Positive integers only.
+            <br>Integers less than 1 will cause an invalid command format error.
+            <br>Integers greater than the number of contacts displayed in the given mode are invalid.</td>
+    </tr>
+    <tr><th colspan="3">Buyer</th></tr>
+    <tr><th rowspan="5">Add</th><td>Name</td><td>Alphanumeric characters and space, should not be blank</td></tr>
+    <tr><td>Phone</td><td>Numbers, at least 3 digits long</td></tr>
+    <tr>
+        <td>Email</td>
+        <td>Emails should be of the format local-part@domain and adhere to the following constraints:
+            <br>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+            <br>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br>The domain name must:
+            <br>- end with a domain label at least 2 characters long<br>- have each domain label start and end with alphanumeric characters
+            <br>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+            <br>Special characters (+_.-) can only be used to separate alphanumeric values and not be put together consecutively.
+        </td>
+    </tr>
+    <tr>
+        <td>Budget</td>
+        <td>It should be a positive integer more than 0 and not be blank. 
+            <br>It can contain commas at the right positions (exactly 3 digits after each comma) 
+            <br>E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). </td>
+    </tr>
+    <tr><td>Tag</td><td>Tags names should only contain alphanumeric and dashes</td></tr>
+    <tr>
+        <th rowspan="2">Edit</th>
+        <td>Index</td><td>Refer to General > Delete > Index</td>
+    </tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</tr>
+    <tr><th>Find</th><td>Name</td><td>Prepend the prefix "n/" before the name to be searched. For constraints on the name, refer to Buyer > Add > Name</td></tr>
+    <tr><th colspan="3">Meet-Up</th></tr>
+    <tr>
+    <th rowspan="5">Add</th>
+    <td>Subject</td><td>Alphanumeric characters and spaces,should not be blank</td>
+    </tr>
+    <tr><td>Info</td><td>Must have at least one non-whitespace character</td></tr>
+    <tr><td>From</td><td rowspan="2">Format: YYYY-MM-DD HH:mm</td></tr>
+    <tr><td>To</td></tr>
+    <tr><td>Added Buyers</td><td>Alphanumeric characters and spaces, should not be blank</td></tr>
+    <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for MeetUp > Add</tr>
+    <tr><th>Find</th><td>Subject</td><td>Prepend the prefix "s/" before the subject to be searched. For constraints on the subject, refer to MeetUp > Add > Subject</td></tr>
+    <tr><th colspan="3">Property</th></tr>
+    <tr><th rowspan="5">Add</th><td>Landlord Name</td><td>Alphanumeric characters and spaces,should not be blank</td></tr>
+    <tr><td>Phone</td><td>Numbers, at least 3 digits long</td></tr>
+    <tr>
+        <td>Asking Price</td>
+        <td>It should be a positive integer more than 0 and not be blank. 
+            <br>It can contain commas at the right positions (exactly 3 digits after each comma) 
+            <br>E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). </td>
+    </tr>
+    <tr><td>Address</td><td>Can take any values, and it should not be blank</td></tr>
+    <tr><td>Property Type</td><td>Can take any values, and it should not be blank</td></tr>
+    <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Property > Add</tr>
+    <tr><th rowspan="2">Find</th><td>Landlord Name</td><td>Prepend the prefix "n/" before the landlord's name to be searched. For constraints on the landlord's name, refer to Property > Add > Landlord Name</td></tr>
+    <tr><td>Address</td><td>Prepend the prefix "a/" before the address to be searched. For constraints on the address, refer to Property > Add > Address</td></tr>
 </table>
