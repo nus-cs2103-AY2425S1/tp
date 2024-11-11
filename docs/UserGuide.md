@@ -566,7 +566,7 @@ Finds contacts whose names contain any of the given keywords.
 
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/find_example.png)
 
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
@@ -701,8 +701,8 @@ Edits an existing public address of a contact.
   ![editpa](images/editpa-1.png)
 
 * `editpa 1 c/BTC l/MAIN WALLET pa/bc1phkt4pgl42lad3mm2srne73y8a7zgam3cumrzmc`<br />
-  If the contact at index 1 exists and has a BTC public address labelled as "MAIN WALLET", public address will be
-  updated to the new value and label will be updated to "MAIN WALLET" as `WALLET_NAME` is **case-insensitive**.
+  If the contact at index 1 exists and has a BTC public address labelled as "MAIN WALLET", public address will be updated to the new value and label will be updated to "MAIN WALLET" as `WALLET_NAME` is **case-insensitive**.
+
   ![editpa](images/editpa-2.png)
 
 <br>
