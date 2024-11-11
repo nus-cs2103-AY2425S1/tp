@@ -224,7 +224,7 @@ Examples:
 2. `add n/Betsy Crowe t/landlord e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567` adds a client named `Betsy Crowe` with a tag of `Landlord`, and email of `betsycrowe@example.com`, an address of `Flatbush Avenue, block 81, #02-02` and a phone number of `1234567`.
 
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output (Example 1):
 
 ![AddCommandShowcase.png](images/user-guide-images/AddCommandShowcase.png)
 
@@ -267,7 +267,7 @@ Examples:
 
 3. `edit 2 t/condo` edits the tag of the client at index `2` to be `condo`.
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output (Example 1):
 
 ![EditCommandShowcase.png](images/user-guide-images/EditCommandShowcase.png)
 
@@ -298,7 +298,7 @@ Examples:
 
 2. `find Betsy` followed by `delete 1` deletes the client at index `1` in the **results of the `find` command**.
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output (Example 1):
 
 ![DeleteCommandShowcase.png](images/user-guide-images/DeleteCommandShowcase.png)
 
@@ -379,7 +379,7 @@ Examples:
 
 2. `show 7` shows the name, client information, tags, and property listings of the client at index `7` in the PROperty.
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output (Example 1):
 
 ![Show Command](images/user-guide-images/ShowCommandShowcase.png)
 
@@ -424,11 +424,11 @@ Examples:
 
 4. `find s/Alex Yeoh s/23 Smith Street` is a specific find which only returns `Alex Yeoh` who has `23 Smith Street` as his address.
 
-Visual example of correct output (General Find) [Example `1.`]:
+Visual example of correct output (General Find) (Example 1):
 
 ![GeneralFindCommandShowcase.png](images/user-guide-images/GeneralFindCommandShowcase.png)
 
-Visual example of correct output (Specific Find) [Example `2.`]:
+Visual example of correct output (Specific Find) (Example 2):
 
 ![SpecificFindCommandShowcase.png](images/user-guide-images/SpecificFindCommandShowcase.png)
 
@@ -460,7 +460,7 @@ Examples:
 
 2. `findtag HDB buyer` returns clients tagged with either `HDB` or `buyer`.
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output (Example 1):
 
 ![Find tag command](images/user-guide-images/FindtagCommandShowcase.png)
 
@@ -516,15 +516,15 @@ Examples:
 
 3. `remark 1 r/Prefers Bukit Timah area r/Prefers Jurong area` only adds remark "Prefers Jurong area" to the client at index `1`.
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output (Example 1):
 
 ![RemarkAddCommandShowcase](images/user-guide-images/RemarkAddCommandShowcase.png)
 
-Visual example of correct output [Example `2.`]:
+Visual example of correct output (Example 2):
 
 ![RemarkRemoveCommandShowcase](images/user-guide-images/RemarkRemoveCommandShowcase.png)
 
-Visual example of correct output [Example `3.`]:
+Visual example of correct output (Example 3):
 
 ![MultipleRemarkAddCommandShowcase](images/user-guide-images/MultipleRemarkAddCommandShowcase.png)
 
@@ -558,11 +558,11 @@ Examples:
 
 3. `listing add 1 t/HDB t/condo a/NTU Road 321` adds a property listing to the client at index `1` with a listing type of `condo` and address of `NTU Road 321`.
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output (Example 1):
 
 ![ListingAddCommandShowcase.png](images/user-guide-images/ListingAddCommandShowcase.png)
 
-Visual example of correct output [Example `3.`]:
+Visual example of correct output (Example 3):
 
 ![ListingAddMultipleTagShowcase.png](images/user-guide-images/ListingAddMultipleTagShowcase.png)
 
@@ -591,7 +591,7 @@ Examples:
 - `listing delete 2 3` deletes the 3rd property listing from the client with index `2`.
 
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output (Example 1):
 
 ![ListingDeleteCommandShowcase.png](images/user-guide-images/ListingDeleteCommandShowcase.png)
 
