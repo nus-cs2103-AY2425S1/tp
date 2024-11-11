@@ -152,10 +152,4 @@ public interface Model {
      * @return The current supply order list.
      */
     SupplyOrderList getSupplyOrderList();
-
-    /**
-     * Returns the inventory.
-     *
-     * @return The current inventory.
-     */
 }

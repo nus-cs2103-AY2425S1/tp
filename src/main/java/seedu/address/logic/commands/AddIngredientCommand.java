@@ -23,7 +23,8 @@ public class AddIngredientCommand extends Command {
 
     public static final String MESSAGE_ADD_INGREDIENT_SUCCESS = "New ingredient added: %1$s";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the catalogue.";
-    public static final String MESSAGE_INVALID_COST = "The cost value entered is too large and may lead to inaccuracies. "
+    public static final String MESSAGE_INVALID_COST = "The cost value entered is too large and may lead to"
+        + " inaccuracies. "
             + "Please enter a reasonable cost value (e.g., less than 1000).";
 
     private final String name;

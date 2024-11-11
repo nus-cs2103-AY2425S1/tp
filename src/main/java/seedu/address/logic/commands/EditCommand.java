@@ -155,7 +155,8 @@ public class EditCommand extends Command {
 
         // Filter out customer or supplier tags from the updated tags
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags()).stream()
-                .filter(tag -> !tag.tagName.equalsIgnoreCase("Customer") && !tag.tagName.equalsIgnoreCase("Supplier"))
+                .filter(tag -> !tag.tagName.equalsIgnoreCase("Customer")
+                        && !tag.tagName.equalsIgnoreCase("Supplier"))
                 .collect(Collectors.toSet());
 
         // Merge original tags with updated tags
@@ -168,8 +169,8 @@ public class EditCommand extends Command {
             Information updatedInformation = editPersonDescriptor.getInformation()
                     .orElse(((Customer) personToEdit)
                     .getInformation());
-            Customer editedCustomer = new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation,
-                    updatedRemark, updatedTags);
+            Customer editedCustomer = new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                    updatedInformation, updatedRemark, updatedTags);
 
             // Update each order with the new editedCustomer
             for (Order order : retainedOrders) {
@@ -194,7 +195,8 @@ public class EditCommand extends Command {
             return editedSupplier;
         }
 
-        Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark,
+                updatedTags);
         // Update each order with the new editedPerson
         for (Order order : retainedOrders) {
             order.setOriginalPerson(editedPerson);
