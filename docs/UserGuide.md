@@ -403,6 +403,10 @@ Edits an existing client in MATER.
 edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...
 ```
 
+
+<div style="page-break-after: always;"></div>
+
+
 **Parameters:**
 
 | Parameter         | Requirements                                                                                                                                                                                                     | Explanation                                                         |
