@@ -12,6 +12,7 @@ title: Developer Guide
 * This project is based on the AddressBook-Level3 project created by the SE-EDU initiative.
 * Libraries used: JavaFX, Jackson, JUnit5
 * The undo and redo features were inspired by the proposed implementation found in [AB3's Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature).
+* The icons used were taken from [Flaticon](https://www.flaticon.com/).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -38,7 +39,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -60,7 +61,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -70,15 +71,15 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T13-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component:
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
@@ -87,7 +88,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -117,7 +118,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -138,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T13-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -199,7 +200,7 @@ The Emergency Contact object is also made up of attributes:
   * Cons: Add Command is lengthy to type out, might be hard to remember the syntax.
 * **Alternative 2:** Make only a few specific parameters compulsory.
   * Pros: Patient registration will be faster.
-  * Cons: If user forgets to update missing details, there will be no one to contact in an emergency.
+  * Cons: If user forgets to update missing details, during an emergency there might not be an emergency contact to call.
 
 We opted for Alternative 1 to make almost all parameters compulsory as the autocomplete feature we implemented will aid users in typing out the Add Command.
 
@@ -283,9 +284,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+  * Cons: We must ensure that the implementations of each individual command are correct.
 
 ### Data archiving
 
@@ -318,7 +317,7 @@ For example, the sequence diagram below illustrates the interactions within the 
 #### **Target User Profile:**
 
 - **User Role:** Healthcare Administrator
-- **Workplace:** Old folks home for dementia patients
+- **Workplace:** Elderly care home for dementia patients
 - **Responsibilities:**
     - Manage and update contact details for patients, doctors, and next-of-kin.
     - Respond quickly to emergency situations by accessing relevant contacts.
@@ -352,11 +351,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                 | familiarise myself with the app                 | play around with dummy data without compromising real patient data         |
 | `* * *`  | healthcare administrator | add new doctors and patients                    | easily reach out to them when needed                                       |
 | `* * *`  | healthcare administrator | update contact details                          | ensure all contact information is accurate and current                     |
-| `* *`    | healthcare administrator | search contacts by name or assigned doctor      | quickly find and connect with the right person in high-pressure situations |
 | `* * *`  | healthcare administrator | view patient emergency contact details          | notify next-of-kin during urgent medical events                            |
-| `* *`    | healthcare administrator | add multiple emergency contacts for each person | reach different emergency contacts when one is uncontactable               |
 | `* * *`  | healthcare administrator | assign doctors to patients                      | easily track which doctor is responsible for each patient                  |
 | `* * *`  | healthcare administrator | delete outdated patient contacts                | ensure all information is relevant and current                             |
+| `* * *`  | healthcare administrator | have my changes saved automatically             | ensure that I will not lose my changes if I close the app/the app crashes  |
+| `* *`    | healthcare administrator | add multiple emergency contacts for each person | reach different emergency contacts when one is uncontactable               |
+| `* *`    | healthcare administrator | search contacts by name or assigned doctor      | quickly find and connect with the right person in high-pressure situations |
 
 
 ### Intermediate User Stories
@@ -364,20 +364,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …                   | I want to …                              | So that I can…                                                               |
 |----------|--------------------------|------------------------------------------|------------------------------------------------------------------------------|
 | `* *`    | healthcare administrator | filter contacts by their doctor          | view a consolidated list of all the patients a doctor is responsible for     |
-| `* *`    | healthcare administrator | sort patients by their admission time    | provide appropriate care to longer-term patients                             |
+| `* *`    | healthcare administrator | sort patients by their name              | view the list of patients in a systematic manner                             |
 | `* *`    | healthcare administrator | tag important notes to patients          | remember special considerations about certain patients                       |
-| `* *`    | healthcare administrator | archive outdated contacts                | maintain a clean and relevant contact list without losing historical records |
-| `* *`    | healthcare administrator | load backup archived data                | restore a backup copy in case of data corruption or user error              |
+| `* *`    | healthcare administrator | archive contacts                         | ensure that I can retain older records for reference                         |
+| `* *`    | healthcare administrator | load backup archived data                | restore a backup copy in case of data corruption or user error               |
 
 ### Advanced User Stories
 
 | Priority | As a …                   | I want to …                                   | So that I can…                                                       |
 |----------|--------------------------|-----------------------------------------------|----------------------------------------------------------------------|
-| `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
 | `* *`    | healthcare administrator | import contact data in bulk                   | keep the database up-to-date without manual entry                    |
 | `* *`    | healthcare administrator | export contact information                    | provide it to others or have a backup in case of system failures     |
-| `* *`    | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
-| `*`      | healthcare administrator | secure access with user authentication        | ensure only authorized personnel can access or update sensitive data |
 
 ---
 
@@ -684,34 +681,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Error Handling and Feedback:**
   The system must provide **immediate feedback** (within 1 second) when an error occurs, such as invalid input or missing fields. The user should be able to correct errors without restarting the operation.
 
-#### 4. Security and Privacy Requirements:
-- **Data Encryption (Future Consideration):**
-  All sensitive patient and contact information must be encrypted when stored locally. The system should implement industry-standard encryption (e.g., AES-256) for both storage and transmission of data.
-
-- **User Authentication (Future Consideration):**
-  If the system evolves to handle multiple users, it must implement **role-based access control** with password authentication. Healthcare administrators should have different access levels than general staff.
-
-#### 5. Data and Storage Requirements:
+#### 4. Data and Storage Requirements:
 - **Human-Editable File Format:**
-  Contact information should be stored in a **human-readable and editable format** (e.g., `.txt` or `.csv`) so that administrators can manually access and modify data if needed.
+  Contact information should be stored in a **human-readable and editable format** (e.g., `.json` or `.csv`) so that administrators can manually access and modify data if needed.
 
 - **Data Integrity:**
   The system must ensure that no data is lost or corrupted during common operations (e.g., adding, updating, or deleting contacts). **Transaction-like behavior** must be implemented to ensure all data operations either succeed fully or fail without partially corrupting data.
 
-#### 6. Compatibility and Portability:
+#### 5. Compatibility and Portability:
 - **Cross-Platform Support:**
   MedConnect must be compatible with **mainstream operating systems** (Windows, macOS, Linux) and function seamlessly on systems with **Java 17 or higher** installed.
 
-#### 7. Compliance Requirements:
-- **Healthcare Data Regulations:**
-  MedConnect must adhere to local and international healthcare data protection regulations, such as **HIPAA** in the US, or similar regulations in other regions, ensuring the privacy and security of sensitive medical information.
-
-#### 8. Maintainability and Extensibility:
+#### 6. Maintainability and Extensibility:
 - **Modular Design:**
   The system must be designed with a modular structure, allowing future extensions such as additional data fields or user roles without requiring significant rework.
 
 - **Testability:**
-  MedConnect must be **easily testable**, with automated tests that can cover at least **80% of the codebase**. Each core feature (e.g., adding a contact, deleting outdated contacts) should have dedicated test cases.
+  MedConnect must be **easily testable**, with automated tests that can cover at least **70% of the codebase**. Each core feature (e.g., adding a contact, deleting outdated contacts) should have dedicated test cases.
 ---
 
 ### Glossary
@@ -728,27 +714,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Command-Line Interface (CLI)**: A method of interacting with MedConnect through typed text commands, allowing fast input for users who prefer typing over graphical interfaces.
 
-- **Modifier**: An additional parameter in commands used to filter or customize operations, such as viewing only specific types of contact details (e.g., emergency, email, phone).
-
 - **Mainstream Operating Systems**: Common operating systems on which MedConnect can run, including Windows, macOS, and Linux.
 
 - **Encryption**: The process of encoding sensitive data, such as patient information, to protect it from unauthorized access.
 
-- **HIPAA**: The Health Insurance Portability and Accountability Act, a US regulation that ensures the security and privacy of patient data. MedConnect must comply with such regulations in healthcare environments.
-
 - **Java 17**: The version of Java required to run MedConnect, which ensures compatibility and performance across different operating systems.
 
-- **Human-Editable File**: A data file format (e.g., `.txt` or `.csv`) that can be easily accessed and modified by healthcare administrators without needing special software.
-
-- **Role-Based Access Control (RBAC)**: A security mechanism that restricts access to data based on the user’s role, allowing different permissions for administrators and general staff (for future implementation).
+- **Human-Editable File**: A data file format (e.g., `.json` or `.csv`) that can be easily accessed and modified by healthcare administrators without needing special software.
 
 - **System Uptime**: The percentage of time that MedConnect is available and operational, measured as part of reliability goals.
 
 - **Backup**: The process of creating copies of MedConnect's data to ensure it can be restored in the event of data loss or system failure.
 
 - **Test Coverage**: The percentage of the system's code that is covered by automated tests, ensuring that key features and functionality are reliably tested.
-
-- **AES-256**: A widely-used encryption standard that secures sensitive data using a 256-bit encryption key, ensuring strong protection of patient information.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -804,11 +782,11 @@ testers are expected to do more *exploratory* testing.
     | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
     |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
     | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Deleted emergency contact: [PERSON DETAILS]        |
     | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
     | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
     | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
+    | `delete 1 ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
     | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
 
 
@@ -821,11 +799,11 @@ testers are expected to do more *exploratory* testing.
     | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
     |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
     | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Deleted emergency contact: [PERSON DETAILS]        |
     | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
     | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
     | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
+    | `delete 1 ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
     | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
 
 ### Adding a patient
@@ -838,15 +816,15 @@ testers are expected to do more *exploratory* testing.
 
    | Test case input                                  | Expected behaviour                                                 | Expected message                                                                                               |
    |--------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-   | `add n/Ryan p/98765432 xx/PARAMETER...`          | A new patient John Doe is added to the bottom of the patient list. | New person added: [PERSON DETAILS]                                                                             |
+   | `add n/Ryan p/98765432 xx/PARAMETER...`          | A new patient Ryan is added to the bottom of the patient list.     | New person added: [PERSON DETAILS]                                                                             |
    | `add n/Ryan n/Daniel p/98765432 xx/PARAMETER...` | Error message is shown.                                            | Multiple values specified for the following single-valued field(s): n/                                         |
    | `add n/Ryan`                                     | Error message is shown.                                            | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
    | `add`                                            | Error message is shown.                                            | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
    | `add n/`                                         | Error message is shown                                             | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
    | `add p/???`                                      | Error message is shown                                             | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
-   | `add n/John+Doe xx/PARAMETER`                    | Error message is shown                                             | Names should only contain alphanumeric characters and spaces, and it should not be blank                       |
-   | `add p/98@1532 xx/PARAMETER`                     | Error message is shown                                             | Phone numbers should only contain numbers, and it should be at least 3 digits long                             |
-   | `add ecrs/knight xx/PARAMETER`                   | Error message is shown                                             | Relationship type should be Parent, Child, Sibling, Spouse, Grandparent or Relative or their gendered variants |
+   | `add n/John+Doe xx/PARAMETER...`                 | Error message is shown                                             | Names should not be blank and should only contain alphanumeric characters, spaces or the following special characters: - . ( ) @ / '                       |
+   | `add p/98@1532 xx/PARAMETER...`                  | Error message is shown                                             | Phone numbers should only contain numbers, and it should be at least 3 digits long                             |
+   | `add ecrs/knight xx/PARAMETER...`                | Error message is shown                                             | Relationship type should be Parent, Child, Sibling, Spouse, Grandparent or Relative or their gendered variants |
 
 ### Editing a patient
 
@@ -859,12 +837,12 @@ testers are expected to do more *exploratory* testing.
    |--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
    | `edit 1 n/Ryan p/98765432 e/ryan@hotmail.com`                                                    | The name, phone and email of the first patient in the list is edited to the new values provided as arguments | Edited person: [PERSON DETAILS]                                                          |
    | `edit 1`                                                                                         | Error message is shown.                                                                                      | At least one field to edit must be provided.                                             |
-   | `edit 1 n/`                                                                                      | Error message is shown.                                                                                      | Names should only contain alphanumeric characters and spaces, and it should not be blank |
+   | `edit 1 n/`                                                                                      | Error message is shown.                                                                                      | Names should not be blank and should only contain alphanumeric characters, spaces or the following special characters: - . ( ) @ / ' |
    | `edit 1 n/John p/`                                                                               | Error message is shown.                                                                                      | Phone numbers should only contain numbers, and it should be at least 3 digits long       |
    | `edit`                                                                                           | Error message is shown                                                                                       | Invalid command format! [CORRECT COMMAND FORMAT]                                         |
    | `edit 2 ecname/John Doe`                                                                         | Error message is shown                                                                                       | At least one emergency contact index to edit must be provided.                           |
    | `edit 2 ec/2`                                                                                    | Error message is shown                                                                                       | At least one emergency contact field to edit must be provided.                           |
-   | `edit 1 ec/x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of emergency contacts) | Error message is shown                                                                                       | The emergency contact index provided is invalid                                          |
+   | `edit 1 ec/x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of emergency contacts) | Error message is shown                                                                                       | Index is not a non-zero unsigned integer.                                          |
    | `edit x n/Heather` <br> (x > number of contacts)                                                 | Error message is shown                                                                                       | The person index provided is invalid                                                     |
 
 ### Adding an emergency contact to a patient
@@ -880,8 +858,8 @@ testers are expected to do more *exploratory* testing.
     | `addec ecname/Sarah Lim ecphone/91234567 ecrs/Granddaughter`                       | Error message is shown.                                                                                      | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
     | `addec 1 ecname/Sarah Lim ecphone/91234567`                                        | Error message is shown.                                                                                      | Invalid command format! [CORRECT COMMAND FORMAT]                                                               |
     | `addec 1 ecname/Sarah Lim ecphone/91234567 ecrs/Neighbor`                          | Error message is shown                                                                                       | Relationship type should be Parent, Child, Sibling, Spouse, Grandparent or Relative or their gendered variants |
-    | `addec 2 ecname/D%#P! ecphone/91234567 ecrs/Son`                                   | Error message is shown                                                                                       | Names should only contain alphanumeric characters and spaces, and it should not be blank                       |
-    | `addec x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of contacts) | Error message is shown                                                                                       | The person index provided is invalid                                                                           |
+    | `addec 2 ecname/D%#P! ecphone/91234567 ecrs/Son`                                   | Error message is shown                                                                                       | Names should not be blank and should only contain alphanumeric characters, spaces or the following special characters: - . ( ) @ / '                       |
+    | `addec x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of contacts) | Error message is shown                                                                                       | Invalid command format! [CORRECT COMMAND FORMAT]                                                                           |
 
  ### Saving data
 
