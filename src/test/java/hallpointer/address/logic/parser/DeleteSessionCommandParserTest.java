@@ -17,11 +17,19 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.logic.commands.DeleteSessionCommand;
+import hallpointer.address.logic.commands.FindMemberCommand;
+import hallpointer.address.model.session.Session;
 import hallpointer.address.model.session.SessionName;
 
 public class DeleteSessionCommandParserTest {
 
     private final DeleteSessionCommandParser parser = new DeleteSessionCommandParser();
+
+    @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSessionCommand.MESSAGE_USAGE));
+    }
 
     @Test
     public void parse_validArgs_returnsDeleteSessionCommand() {
@@ -32,8 +40,13 @@ public class DeleteSessionCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // invalid index
         assertParseFailure(parser, " " + PREFIX_SESSION_NAME + "rehearsal " + PREFIX_MEMBER + "a",
                 String.format(MESSAGE_INVALID_INDEX, DeleteSessionCommand.MESSAGE_USAGE));
+
+        // invalid session name
+        assertParseFailure(parser, " " + PREFIX_SESSION_NAME + "# " + PREFIX_MEMBER + "1",
+                String.format(SessionName.MESSAGE_CONSTRAINTS, DeleteSessionCommand.MESSAGE_USAGE));
     }
 
     @Test
