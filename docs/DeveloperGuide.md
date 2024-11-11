@@ -81,7 +81,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete S1234567D`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -125,9 +125,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete S1234567D")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete S1234567D` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -422,6 +422,11 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
   - Use case ends.
 
 - **2b. Specified Patient NRIC Does Not Exist**:
+
+  - CareLink displays an error message, and link not formed.
+  - Use case ends.
+
+- **2c. NRIC Given For Patient/Caregiver Does Not Match The Respective Roles**:
   - CareLink displays an error message, and link not formed.
   - Use case ends.
 
@@ -835,6 +840,52 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 - 2c. Invalid Status:
   - CareLink displays an error message about the invalid status value.
+  - Use case ends.
+
+---
+
+### Use Case 14: Delete Link Between Patient and Caregiver
+
+- System: CareLink
+- Use Case: UC14 - Delete Link Between Patient and Caregiver
+- Actor: Geriatrician (Fred)
+
+#### Preconditions
+
+- Both the patient and caregiver exist in the system.
+- A link between the specified patient and caregiver exists.
+
+#### Guarantees
+
+- The link between the specified patient and caregiver is successfully deleted.
+- If the link does not exist or either party is not found, an error message is displayed.
+- The deletion action is confirmed and saved in the system.
+
+#### Main Success Scenario (MSS)
+
+1. Fred enters the deletelink command to remove the link between a specific patient and caregiver using their respective NRICs.
+2. CareLink validates that:
+   - The patient exists in the system.
+   - The caregiver exists in the system.
+   - A link between the specified patient and caregiver exists.
+3. CareLink deletes the link from the system.
+4. CareLink displays a confirmation message showing the successful deletion of the link.
+5. Use case ends.
+
+#### Extensions
+
+- 2a. Patient Not Found:
+
+  - CareLink displays an error message indicating that the patient cannot be found.
+  - Use case ends.
+
+- 2b. Caregiver Not Found:
+
+  - CareLink displays an error message indicating that the caregiver cannot be found.
+  - Use case ends.
+
+- 2c. Link Not Found:
+  - CareLink displays an error message indicating that no link exists between the specified patient and caregiver.
   - Use case ends.
 
 ---
