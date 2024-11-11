@@ -9,7 +9,7 @@ Overview of key features:
 * Multi-level Filtering
 * Sort supplier contacts and delivery information
 
---- 
+--- {.thick-1}
 # Table of Contents
 <!-- * Table of Contents -->
 1. [How to get started](#1-how-to-get-started)
@@ -63,7 +63,7 @@ Overview of key features:
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 2. Setting up VendorVault 
 
@@ -85,7 +85,7 @@ Overview of key features:
 
 4. Open the command terminal (same as step 1a), type `cd [path-to-your-folder]` (path to the folder you placed the jar file in step 3) and use the `java -jar vendorvault.jar` command in the terminal to run the application. <br></br>
    ![Starting up application](images/intro/startingApp.png) <br></br> If you encounter difficulties in this step, you may follow these guides below:
-    * Windows users follow this [guide](https://wiki.communitydata.science/Windows_terminal_navigation).
+    * Windows users follow this [guide](https://www.geeksforgeeks.org/change-directories-in-command-prompt/).
     * Mac users follow this [guide](https://darkroomphotos.com/mac-terminal-navigate-folders/).
     * Linux users follow this [guide](https://www.redhat.com/en/blog/Linux-file-navigation-commands).
 
@@ -115,7 +115,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 3. Features
 
@@ -157,7 +157,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 ### 3.2.1. Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message containing a link to this user guide.
 
 Format: `help`
 
@@ -806,7 +806,7 @@ Punctuation characters include ``!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~``
 
 [[Back to Table of Contents]](#table-of-contents)
 
----
+--- {.thick-1}
 
 # 4. Managing your data
 
@@ -821,7 +821,7 @@ VendorVault automatically saves your data as a JSON file `[JAR file location]/da
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warnings:**
 - **Backup before editing!** If the file is not edited correctly, VendorVault may not be able to read it which will cause all your data to be erased, and the app will start with an empty data file the next time you open it. <br>
 - Furthermore, certain edits can cause VendorVault to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
@@ -834,20 +834,58 @@ _Details coming soon ..._
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 5. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: What are the platforms that are compatible with VendorVault?<br>
+**A**: VendorVault can be used on macOS, Microsoft Windows and Linux systems.
 
-**Q**: Can I undo my commands?
+**Q**: How much space will VendorVault take up?<br>
+**A**: We recommend that you have at least 13MB of available storage space to use VendorVault.
+
+**Q**: How do I access my data?<br>
+**A**: 
+
+- Step 1: Open the folder that contains vendorvault.jar and the data folder.
+
+![VendorVault_Folder](images/VendorVaultFolder.png)
+
+- Step 2: Open the folder named "data" to access the data file "vendorvault.json". This vendorvault.json file contains the stored data.
+
+![Data_Folder](images/DataFile.png)
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**:
+
+- Step 1: Download the vendorvault.jar file and place it into an empty folder on your new computer.
+
+- Step 2: Run the app and execute the `exit` command to create a data folder.
+
+- Step 3: Delete the vendorvault.json file in the data folder (underlined in red) of the new computer.
+
+- Step 4: On the previously used computer, copy the vendorvault.jar file which can be accessed by following the "How do I access my data?" FAQ above.
+
+- Step 5: Transfer the copied file to the data folder (underlined in red) in the new computer.
+
+![VendorVault_Folder](images/UnderlinedData.png)
+
+**Q**: Will I be able to see my data the next time I use VendorVault after exiting?<br>
+**A**: Yes, all existing data that you have added will be loaded automatically and displayed.
+
+**Q**: Do I need to manually save my data before exiting VendorVault?<br>
+**A**: No, all data is saved automatically.
+
+**Q**: Do I need any prior technical knowledge to use VendorVault?<br>
+**A**: No, VendorVault is designed to be user-friendly and accessible, regardless of technical experience. However, being able to type fast can allow you to use the app more efficiently.
+
+**Q**: Can I undo my commands?<br>
 **A**: Currently there isn't a way to undo your commands. Hence, be careful before inputting in your commands!
 
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 6. Known issues
 
@@ -856,7 +894,7 @@ _Details coming soon ..._
 
 [[Back to Table of Contents]](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+--- {.thick-1}
 
 # 7. Command Summary
 
@@ -895,7 +933,7 @@ Action     | Format, Examples
 
 [[Back to Table of Contents]](#table-of-contents)
 
----
+--- {.thick-1}
 
 # 8. Glossary
 
