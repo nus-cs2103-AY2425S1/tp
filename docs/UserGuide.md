@@ -236,7 +236,7 @@ Deletes the specified student from the address book.
   <!-- Text Section -->
   <div style="display: flex; justify-content: space-around; width: 100%;">
     <div style="width: 45%;">
-      <p><b>Input:</b> User enters the `delete 4` command to remove the 3rd student in the displayed list.</p>
+      <p><b>Input:</b> User enters the `delete 4` command to remove the 4th student in the displayed list.</p>
     </div>
     <div style="width: 45%;">
       <p><b>Output:</b> The UI updates to reflect the deletion of the student.</p>
