@@ -12,7 +12,7 @@ The current version of MedConnect is only designed to support the **English lang
 Using MedConnect with other languages or across multiple countries and timezones may cause unexpected behaviour.
 </div>
 <br>
-MedConnect is a **desktop app designed for healthcare administrators in elderly care homes for dementia patients**. This app consolidates crucial contact information into a single, accessible database, allowing administrative staff to manage patient and doctor contacts efficiently under high-pressure conditions.
+MedConnect is a **desktop app designed for healthcare administrators in elderly care homes for dementia patients**. It consolidates crucial contact information into a single, accessible database, allowing administrative staff to manage patient and doctor contacts efficiently under high-pressure conditions.
 
 MedConnect combines the speed of a Command Line Interface ([CLI](#cli)) with the visual clarity of a Graphical User Interface ([GUI](#gui)), making it ideal for administrators who can type fast and need rapid access to information. MedConnect can get your contact management tasks done faster than traditional [GUI](#gui) apps.
 
@@ -26,6 +26,7 @@ With MedConnect, connecting with on-call doctors, family members, or other essen
 * Table of Contents
 {:toc}
 
+<div style="page-break-after: always;"></div>
 
 ## How to use this User Guide
 This User Guide is designed to help you understand and use MedConnect effectively. Here are some tips on how to navigate and use this guide:
@@ -43,7 +44,9 @@ By following these sections, you can quickly find the information you need and m
 [↑ Back to top](#table-of-contents)
 
 
-## Quick start
+<div style="page-break-after: always;"></div>
+
+## Quick Start
 
 1. Ensure you have Java `17` or above installed on your computer.
    * You can check your Java version by following the instructions [here](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line).
@@ -53,13 +56,17 @@ By following these sections, you can quickly find the information you need and m
 
 3. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
 
-4. *Windows:* Open the home folder and right-click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
-<img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows"><br><br>
-*MacOS:* Right-click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
-   <img src="images/Quickstart-new-terminal-MacOS.png" alt="New terminal on MacOS">
+4. For *Windows:* Open the home folder and right-click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.
 
-5. Type the command in the [command box](#command-box) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+    <img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows">
+   
+    <div style="page-break-after: always;"></div>
+   
+    For *MacOS:* Right-click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.
+
+    <img src="images/Quickstart-new-terminal-MacOS.png" alt="New terminal on MacOS"> <br><br>
+
+5. Type the command in the [command box](#command-box) and press `Enter` to execute it. Here are some example commands you can try:
 
    * `list` : [List](#listing-all-persons--list) all contacts.
 
@@ -78,8 +85,9 @@ By following these sections, you can quickly find the information you need and m
 
 [↑ Back to top](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
-## Quick Tutorial on MedConnect's [GUI](#gui)
+## Overview of [GUI](#gui)
 
 ![uitutorial](images/uitutorial.png)
 
@@ -110,6 +118,8 @@ By following these sections, you can quickly find the information you need and m
 
 [↑ Back to top](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -138,61 +148,38 @@ By following these sections, you can quickly find the information you need and m
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
 
-### Suggestion and Autocomplete Feature
+### Suggestions and Autocompletion
 
-### Overview
+The Command Box in MedConnect offers **suggestions** and **autocompletion** to assist users while typing commands. These features aim to enhance the command entry experience through reducing the need for memorising command formats and reducing the chance of errors.
 
-The CommandBox in the MedConnect application offers two major features to assist users while typing commands:
+#### Suggestions
 
-- **Suggestion**: Provides visible hints about the expected command syntax as the user types.
-- **Autocomplete**: Helps complete partially typed commands when pressing the `Control` key.
+Suggestions provide visible hints about the expected command format as the command is entered.
 
-These features aim to enhance the user's command entry experience, reduce the need for memorizing syntax, and avoid typing errors.
-
-
-### Suggestion Feature
 ![suggestion](images/Suggestion.png)
 
-> **Description**: As you begin typing a command, suggestions are displayed to provide context about the expected syntax. For example, if you start typing `add`, the suggestion will provide all required and optional parameters related to the `add` command.
+* If an incorrect entry is detected (e.g., type `adding` instead of `add`), the suggestion will be hidden to indicate a problem with the format.
 
-**Usage**:
-- As soon as you begin typing a valid command (e.g., `add`, `edit`, `find`), a suggestion will be displayed showing the entire command syntax.
-- If you make an incorrect entry (e.g., type `adding`), the suggestion will be hidden to indicate a problem with the syntax.
+**Examples**
+* Typing `add` will show the expected format for adding a patient: `add (n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)` where the words in brackets "()", are suggested by the system.
 
-**Example**:
-```
-add (n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)
 
-add n/Saajid Shaik p/82617860 (e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)
+#### Autocompletion
 
-where the words in brackets "()", are suggested by the system
-```
-This suggestion will be displayed as soon as you start typing `add`.
+Autocompletion helps to complete partially typed commands by pressing the `Control` key.
 
-### Autocomplete Feature
 ![Autocomplete demonstration](images/autocomplete.gif)
 
-> **Description**: The Autocomplete feature allows the user to complete partially typed commands or parameters by pressing the `Control` key.
+* If an incorrect entry is detected (e.g., type `adding` instead of `add`), autocompletion will be disabled to indicate a problem with the format.
 
-**Usage**:
-- When a command is partially typed (e.g., `ad`), pressing `Control` will automatically complete it to the full command (`add`).
-- When the command word 'add' is typed, we move on to the slash commands where the autocompletes stops at the slash to allow users to type their personal details. E.g. `add` ->`add n/`
-- Autocomplete works for command words as well as parameters, helping you quickly complete complex entries without fully typing each part.
-- Autocomplete will only work if the input before pressing `Control` is a part of a valid command.
+**Examples**:
+* Typing `ad` followed by pressing `Control` autocompletes the input to `add`.
+* Typing `add` followed by pressing `Control` autocompletes the input to `add n/`.
+* Typing `add n/Saajid Shaik` followed by pressing `Control` autocompletes the input to `add n/Saajid Shaik p/`.
 
-Do take note, for commands like `delete index`, since index can be any number, there will be no autocomplete as there is no meaning to autocomplete the name "INDEX" itself.
-Other examples include `add n/` -> `add n/ p/` as there is no value in autocomplete the name "NAME" itself.
-
-**Example**:
-- Type `add`, and then press `Control` to autocomplete `add n/`.
-- Type `add n/Saajid Shaik`, and then press `Control` to autocomplete `add n/Saajid Shaik p/`.
-
-### Additional Notes
-
-- **Incorrect Inputs**: If the input is incorrect or deviates from the expected syntax, suggestions will disappear, and autocomplete will not work. This helps users recognize mistakes early.
-- **Separation**: The suggestion is a passive visual cue, while autocomplete requires user action (pressing `Control`). Both features work together but serve different purposes.
-
+[↑ Back to top](#table-of-contents)
 
 ### Viewing help : `help`
 
@@ -438,7 +425,7 @@ Format: `clear`
 
 
 ### Undoing previous command : `undo`
-Restores the previous state of the address book after any change, such as an addition, edit, or deletion of a person or entry.
+Restores the previous state of the address book after any change, such as an addition, edit, or deletion of a patient.
 
 Format: `undo`
 
@@ -451,9 +438,13 @@ An action cannot be undone once you close the MedConnect application.
 
 ### Redoing previous command : `redo`
 
-Restores the state of the address book **after an undo operation has been executed**, effectively "redoing" the undone changes, such as an addition, edit, or deletion of a person or entry.
+Restores the state of the address book **after an undo operation has been executed**, effectively "redoing" the undone changes, such as an addition, edit, or deletion of a patient.
 
 Format: `redo`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+An action cannot be redone once you close the MedConnect application.
+</div>
 
 [↑ Back to top](#table-of-contents)
 
@@ -502,9 +493,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When typing commands in the CommandBox**, inserting a space, e.g. `he lp` in between `he` and `lp`, will cause the suggestion and autocorrection to bug out and display incorrectly.
+1. When using multiple screens, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+2. If you minimize the Help Window and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+3. When typing commands in the CommandBox, inserting a space, e.g. `he lp` in between `he` and `lp`, will cause the suggestion and autocorrection to bug out and display incorrectly.
+
 4. MedConnect supports up to 2,147,483,647 patient contacts. Attempting to add or edit more than this number of contacts may result in unexpected behaviour.
 
 [↑ Back to top](#table-of-contents)
