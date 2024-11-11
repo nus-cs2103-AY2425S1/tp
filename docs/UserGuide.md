@@ -102,6 +102,8 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 
 **Notes about the command format:**<br>
 
+* Whitespace **within** a parameter is not allowed for any command (i.e st/21-10-2024 __ 10:00) is not allowed as it will be treated as the invalid format.
+
 * For all commands involving tags, take note that tags can only be **one word** containing alphanumeric characters (i.e **no spaces**).
 
 * For all commands, the command word **should not** be _capitalised_.
@@ -205,7 +207,6 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 **Format:** `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
 
 * Automatically detects any clash in meetings with other Udders.
-* Whitespace **within** a parameter is not allowed (i.e st/21-10-2024 __ 10:00) is not allowed as it will be treated as the invalid format.
 * Dates **over 29th February** in the month of February will lead to unexpected behaviour in the app!
 * Furthermore, dates should be **_valid dates_** and in inputting invalid ones, the app will show unexpected behaviour!
 
