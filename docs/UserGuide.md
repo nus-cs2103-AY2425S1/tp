@@ -310,7 +310,7 @@ A **person** is a patient with several fields. The fields and their correspondin
 |------------------|--------|----------|----------|--------------------------------------------------------|
 | **Name**         | `n/`   | No       | No       | Only alphanumeric characters (Cannot start with space) |
 | **Phone number** | `p/`   | No       | No       | Positive integer of length 3-15 (Inclusive)            |
-| **Email**        | `e/`   | No       | No       | Refer to *                                             |
+| **Email**        | `e/`   | No       | No       | Refer to 1. below                                      |
 | **Address**      | `a/`   | No       | No       | Any value                                              |
 | **Status**       | `st/`  | No       | No       | Only alphanumeric characters                           |
 | **Tag(s)**       | `t/`   | Yes      | Yes      | Only alphanumeric characters                           |
@@ -318,7 +318,9 @@ A **person** is a patient with several fields. The fields and their correspondin
 You can identify these patients uniquely by their **patient ID (PID)** for easy reference. 
 
 ---
-* Emails must have a local part containing alphanumeric characters and specific symbols (`+_.-`) (not at the start or end), followed by `@`, and a domain part with labels separated by periods, ending in a label with at least two alphanumeric characters, and no labels starting or ending with hyphens.
+**Notes**
+
+1. Emails must have a local part containing alphanumeric characters and specific symbols (`+_.-`) (not at the start or end), followed by `@`, and a domain part with labels separated by periods, ending in a label with at least two alphanumeric characters, and no labels starting or ending with hyphens.
 
 <br>
 
@@ -408,6 +410,14 @@ Edits an existing patient in DocTrack.
 <box type="tip" light>
 
 **Tip:** When trying to add tags while keeping existing tags, remember to type in all the pre-existing tags with your new tags
+
+</box>
+
+<box type="info" light>
+
+**Note:** When editing the name of a person, the person's appointments will not reflect the name change until a reload
+of the application.
+
 </box>
 
 <box style="background: #eeeeee">
@@ -527,15 +537,19 @@ Note that this will also clear the appointment data.
 
 An **appointment** is defined by several fields. The fields and their corresponding prefixes are as follows:
 
-| Field               | Prefix | Optional | Multiple | Acceptable Inputs                 |
-|---------------------|--------|----------|----------|-----------------------------------|
-| **Person ID**       | `i/`   | No       | No       | Existing person ID                |
-| **Appointment Type**| `ty/`  | No       | No       | Any value                         |
-| **Date and Time**   | `d/`   | No       | No       | `yyyy-MM-dd HH:mm`                |
-| **Sickness**        | `s/`   | Yes      | No       | At least one alphabetic character |
-| **Medicine**        | `m/`   | Yes      | No       | At least one alphabetic character |
+| Field               | Prefix | Optional | Multiple | Acceptable Inputs                     |
+|---------------------|--------|----------|----------|---------------------------------------|
+| **Person ID**       | `i/`   | No       | No       | Existing person ID                    |
+| **Appointment Type**| `ty/`  | No       | No       | Any value                             |
+| **Date and Time**   | `d/`   | No       | No       | `yyyy-MM-dd HH:mm`. Refer to 1. below |
+| **Sickness**        | `s/`   | Yes      | No       | At least one alphabetic character     |
+| **Medicine**        | `m/`   | Yes      | No       | At least one alphabetic character     |
 
 You can manage the appointments through different commands, which can be seen in the table below:
+
+**Notes:**
+
+1. The date and time inputs are resolved "smartly" - meaning that certain incorrect dates will be allowed, e.g. `2025-02-29 12:00` will be parsed as `2024-02-28 12:00`. 
 
 <br>
 
@@ -620,6 +634,8 @@ You can an existing appointment in appointment book.
 **Examples**:
 
 - `edit appt 3 d/2024-12-05 13:00 m/Budesonide` edits the date and time and the medicine to be `2024-12-05 13:00` and `Budesonide` respectively.
+
+<br>
 
 <br>
 
@@ -939,3 +955,5 @@ folder, you can copy these files to another location as a backup.
 3. On **MacOS systems**, the bold fonts may appear slightly clipped.
 
 <br>
+
+4. Editing the name in the `edit person` command will not reflect the name change in the appointments until a reload of the application.
