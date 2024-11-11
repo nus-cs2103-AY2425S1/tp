@@ -15,8 +15,8 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagCategory;
 
 /**
- * Wraps all data at the CampusConnect level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the CampusConnect level.
+ * Duplicates are not allowed.
  */
 public class CampusConnect implements ReadOnlyCampusConnect {
 
