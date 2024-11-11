@@ -231,6 +231,11 @@ Removes all graduated students from the address book by removing all students wi
 
 Format: `clean`
 
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * If you execute `clean` after executing a `find` command, the search results of the `find` command remains in place. Use `list` to see the full effects of the `clean` command.
+> * This is such that the results of your query with `find` are not lost after applying `clean`. 
+
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
 > If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command-undo) for details!
