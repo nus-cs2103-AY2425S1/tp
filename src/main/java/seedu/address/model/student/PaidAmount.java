@@ -1,5 +1,7 @@
 package seedu.address.model.student;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 import seedu.address.logic.Messages;
@@ -53,10 +55,12 @@ public class PaidAmount extends Fee {
      * @return A new {@code PaidAmount} object with the updated total amount.
      */
     public PaidAmount updateValue(SettleAmount amount) throws CommandException {
-        if (!isValidPaidAmount(Double.toString(super.value + amount.value))) {
+        double roundedDecimal =
+                BigDecimal.valueOf(super.value + amount.value).setScale(2, RoundingMode.HALF_UP).doubleValue();
+        if (!isValidPaidAmount(Double.toString(roundedDecimal))) {
             throw new CommandException(Messages.MESSAGE_LIMIT);
         }
-        return new PaidAmount(Double.toString(super.value + amount.value));
+        return new PaidAmount(Double.toString(roundedDecimal));
     }
 
     public double getValue() {
