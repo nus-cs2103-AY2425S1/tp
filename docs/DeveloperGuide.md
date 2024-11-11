@@ -607,6 +607,6 @@ Given below are instructions to test the app manually.
        Expected: No lesson is found. Details shown in the status message.
 
     1. Other incorrect delete commands to try: `lesson find`, `lesson find x` (where x is a name of a 
-       student who does not have a lesson, a name that does not belong to any of the students that have a 
-       lesson or a word that is not in the names of the students that have a lesson)<br>
+       student who does not have a lesson, a name that does not belong to any of the students that have 
+       lessons or a word that is not in the names of the students that have lessons)<br>
        Expected: Similar to previous.
