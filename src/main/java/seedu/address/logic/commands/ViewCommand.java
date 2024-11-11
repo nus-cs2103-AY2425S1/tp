@@ -22,8 +22,8 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the person whose NRIC matches the specified "
             + "NRIC and displays the details.\n"
-            + "Parameters: " + PREFIX_NRIC + "NRIC (Nine characters, first and last alphabet, others digits)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NRIC + "S1234567D";
+            + "Parameters: NRIC (Nine characters, first and last alphabet, others digits)\n"
+            + "Example: " + COMMAND_WORD + " S1234567D";
 
     private final NricMatchesPredicate predicate;
 
