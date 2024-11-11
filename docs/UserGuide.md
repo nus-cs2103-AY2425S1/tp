@@ -177,6 +177,8 @@ Format: `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 >
 > The address, attendance and tag fields are optional when creating a student.
 > If not specified, attendance will default to 0.
+> 
+> The subject field is required at least once and can be repeated if needed. (e.g. `/subject Math /subject Science`)
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -206,6 +208,8 @@ Format: `teacher /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 > :information_source: **Note:**
 >
 > The address and tag fields are optional when creating a teacher.
+> 
+> The subject field is required at least once and can be repeated if needed. (e.g. `/subject Math /subject Science`)
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
