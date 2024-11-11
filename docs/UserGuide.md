@@ -531,7 +531,7 @@ Advanced users can edit the data file directly to modify the address book data.
 - **Email Addresses**:
     - Must follow strict validation rules (see [Validation Rules](#validation-rules)).
 - **Phone Numbers**:
-    - Must start with 8 or 9 and be exactly 8 digits long.
+    - Must start with 6, 8 or 9 and be exactly 8 digits long, i.e. valid Singaporean number.
 - **Copying Commands**:
     - When copying commands that span multiple lines (e.g., from a PDF), ensure that spaces are correctly included.
 ---
