@@ -40,7 +40,7 @@ public class ParserUtilTest {
     private static final String INVALID_SEX = "H";
     private static final String INVALID_STUDENT_CLASS = "A1";
     private static final String INVALID_EMERGENCY_CONTACT_NAME = "--";
-    private static final String INVALID_EMERGENCY_CONTACT_NUMBER = "1234";
+    private static final String INVALID_EMERGENCY_CONTACT_NUMBER = "+1234";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_ABSENT_DATE = "2024-10-32"; // Invalid date
     private static final String INVALID_ABSENT_REASON = "";
