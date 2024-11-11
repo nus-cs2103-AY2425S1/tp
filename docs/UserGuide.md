@@ -70,6 +70,9 @@ content being cut-off if the window size is too small.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Invalid parameters will be ignored.
+  e.g. If the command only accepts `n/`, `a/`, and `t/` tags, then additional tags like `u/` or `e/` and their keywords will just be ignored.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
