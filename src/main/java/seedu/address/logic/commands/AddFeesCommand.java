@@ -93,6 +93,7 @@ public class AddFeesCommand extends Command {
                 .filtered(participation -> participation.getStudent().isSamePerson(originalStudent));
 
         if (participationsToUpdate.isEmpty()) {
+            logger.warning(String.format(Messages.MESSAGE_LOGGER_FOR_EXCEPTION, AddFeesCommand.class));
             throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT,
                     updatedStudent.getName()));
         }

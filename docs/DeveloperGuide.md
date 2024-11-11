@@ -360,7 +360,7 @@ The implementation of the Unenroll feature is similar to that of the example giv
 
 When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
 
-### **Add Student and Create Tutorial feature**
+### Add Student and Create Tutorial feature
 
 The implementation of the Add Student and Create Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for **Add Student** feature when the user inputs `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  will be shown below.   
 
@@ -378,7 +378,7 @@ The main steps for execution are similar to the Enroll and Unenroll feature docu
 Between Add Student and Create Tutorial feature, the main difference is with regard to how they access the Model Component. Create Tutorial calls `hasTutorial(...)` and `createTutorial(...)`  method from the Model Component instead.
 </div>
 
-### **Delete Student and Close Tutorial feature**
+### Delete Student and Close Tutorial feature
 
 The implementation of the Delete Student and Close Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Delete Student feature when the user inputs `delete 1` will be shown below. 
 
@@ -1398,19 +1398,9 @@ or adding an invalid object as outlined in [Storage feature](#storage-feature).
 
 1. Marking payment of a student
 
-   * Prerequisites: Student is enrolled in at least one tutorial
-
    * Test case: `markpaid 1 pay/100`
 
       - Expected: Payment due decreases by 100 for the first student. If the amount paid is equal to payment due, the UI updates to show the fees are paid. If the amount paid is greater than the payment due, the advance amount will also be shown.
-
-2. Marking payment of a student that is not enrolled in any tutorial
-
-   * Prerequisites: Student is not enrolled in any tutorial
-
-   * Test case: `markpaid 1 pay/100`
-
-      - Expected: Payment is not updated for the first student. Error message is shown in the message box.
 
 ### Logging payment
 
