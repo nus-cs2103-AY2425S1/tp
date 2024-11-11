@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC1_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_NONE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -16,6 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HIGH_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LOW_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY1_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -40,6 +43,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -52,7 +56,7 @@ public class EditCommandParserTest {
 
 
     private static final String MESSAGE_INVALID_FORMAT =
-          String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -101,18 +105,18 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-              Name.MESSAGE_CONSTRAINTS);
+                Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HIGH_RISK
-              + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_HIGH_RISK;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_HIGH_RISK;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-              .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-              .withTags(VALID_TAG_HIGH_RISK).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_HIGH_RISK).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -124,7 +128,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-              .withEmail(VALID_EMAIL_AMY).build();
+                .withEmail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -187,21 +191,53 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInputHigh = targetIndex.getOneBased() + " " + PREFIX_TAG + "High Risk";
         EditPersonDescriptor descriptorHigh = new EditPersonDescriptorBuilder()
-              .withTags(VALID_TAG_HIGH_RISK).build();
+                .withTags(VALID_TAG_HIGH_RISK).build();
         EditCommand expectedCommandHigh = new EditCommand(targetIndex, descriptorHigh);
         assertParseSuccess(parser, userInputHigh, expectedCommandHigh);
 
         String userInputMedium = targetIndex.getOneBased() + " " + PREFIX_TAG + "Medium Risk";
         EditPersonDescriptor descriptorMedium = new EditPersonDescriptorBuilder()
-              .withTags("Medium Risk").build();
+                .withTags("Medium Risk").build();
         EditCommand expectedCommandMedium = new EditCommand(targetIndex, descriptorMedium);
         assertParseSuccess(parser, userInputMedium, expectedCommandMedium);
 
         String userInputLow = targetIndex.getOneBased() + " " + PREFIX_TAG + "Low Risk";
         EditPersonDescriptor descriptorLow = new EditPersonDescriptorBuilder()
-              .withTags(VALID_TAG_LOW_RISK).build();
+                .withTags(VALID_TAG_LOW_RISK).build();
         EditCommand expectedCommandLow = new EditCommand(targetIndex, descriptorLow);
         assertParseSuccess(parser, userInputLow, expectedCommandLow);
+    }
+
+    @Test
+    public void parse_allergyNoneWithOtherAllergies_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+
+        // Test case where "none" is combined with another allergy
+        String userInput = targetIndex.getOneBased() + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB;
+        assertParseFailure(parser, userInput, Allergy.MESSAGE_CONSTRAINTS);
+
+        // Test case where "none" is the only allergy, which should pass
+        userInput = targetIndex.getOneBased() + ALLERGY_DESC_NONE;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAllergies("None").build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleAllergiesWithoutNone_success() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+
+        // Check user input string is correct
+        String userInput = targetIndex.getOneBased() + ALLERGY_DESC1_BOB;
+
+        // Ensure EditPersonDescriptor is built with expected values
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAllergies(VALID_ALLERGY1_BOB).build();
+
+        // Expected command setup
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        // Check if parser processes input as expected
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
 
@@ -223,25 +259,25 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-              + TAG_DESC_LOW_RISK + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_LOW_RISK
-              + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HIGH_RISK;
+                + TAG_DESC_LOW_RISK + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_LOW_RISK
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HIGH_RISK;
 
         assertParseFailure(parser, userInput,
-              Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-              + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
+                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
-              Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
     }
 
     @Test
     public void parse_invalidPrefix_failure() {
         String userInputHigh = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + "High Risk";
         assertParseFailure(parser, userInputHigh + " d/12/2/2023 1230",
-              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
     }
 }
