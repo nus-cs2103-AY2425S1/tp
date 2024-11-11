@@ -639,3 +639,10 @@ testers are expected to do more *exploratory* testing.
 - Check for proper handling of edge cases, such as extremely large or small input values.
 - Verify that the UI updates correctly and reflects the changes made by each feature.
 - Confirm that error messages and prompts are displayed appropriately for invalid operations.
+
+## Appendix: Planned Enhancements
+Team Size: *5*<br/>
+
+1. Make `sort` success message more specific:<br>
+The current success message for `sort` does not distinguish between cases where there are contacts in the list, and the case where there are no contacts in the list.
+E.g. If a user executes `sort` on an empty contact list, the standard `sort` success message is displayed. Even though this is vacuously true, we plan to make the displayed message when there are no contacts in the contact list more specific: `There are no contacts to be sorted`.
