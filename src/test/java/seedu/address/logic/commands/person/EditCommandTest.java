@@ -41,7 +41,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person editedPerson = new PersonBuilder().withName("ed").withPhone("12345678").withAddress("ed Street")
+                .withTags("photographer").withEmail("ed@gmail.com").withWeddings("Amy's Wedding").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
 
@@ -60,11 +61,10 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(Messages.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -133,20 +133,6 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 1, model.getFilteredPersonList().size()));
-    }
-
-    @Test
-    public void execute_nonExistentWedding_failure() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withWeddings("New Wedding").build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_WEDDING_NOT_FOUND);
-    }
-
-    @Test
-    public void execute_nonExistentTag_failure() {
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags("New Tag").build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_TAG_NOT_FOUND);
     }
 
     /**
