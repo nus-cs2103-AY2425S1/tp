@@ -31,4 +31,16 @@ public class ListCommand extends Command {
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof ListCommand otherListCommand)) {
+            return false;
+        }
+        return true; // this sounds very strange
+    }
 }
