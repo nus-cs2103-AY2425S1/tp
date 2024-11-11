@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ADD_SCHEME_PERSON_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_PERSON;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD_SCHEME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +39,8 @@ public class AddSchemeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a scheme to the person identified by the "
             + "index number used in the displayed person list.\n"
-            + "This command can only be used after Scheme command.\n"
-            + "Parameters: PERSON_INDEX SCHEME_INDEX (both must be positive integers)\n"
+            + "Schemes available to the person can be viewed using the 'scheme' command.\n"
+            + "Parameters: PERSON_INDEX i/SCHEME_INDEX (both must be positive integers)\n"
             + "Example: " + COMMAND_WORD + " 1 i/1";
 
     private final Index personIndex;
@@ -87,9 +86,8 @@ public class AddSchemeCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_SCHEME_PERSON_SUCCESS, editedPerson.getName()));
-
+        return new CommandResult(String.format(MESSAGE_ADD_SCHEME_PERSON_SUCCESS, editedPerson.getName(),
+                targetScheme.getSchemeName()));
     }
 
     /**
