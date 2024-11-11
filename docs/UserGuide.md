@@ -225,7 +225,7 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 
 Edits the specified meeting with an Udder from the meetings list.
 
-**Format:** `editm INDEX [n/NAME] [st/DD-MM-YY] [et/DD-MM-YY] [l/LOCATION]`
+**Format:** `editm INDEX [n/NAME] [st/DD-MM-YYYY] [et/DD-MM-YYYY] [l/LOCATION]`
 
 * Use the `list` command before editing any meeting!
 * Edits a meeting with anUdder at the specified meeting `INDEX`.
