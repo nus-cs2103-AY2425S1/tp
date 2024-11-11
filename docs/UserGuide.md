@@ -14,19 +14,19 @@
 </center>
 
 
-KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who works at the National University of Singapore, School of Computing.**
+KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who work at the National University of Singapore, School of Computing.**
 
-KonTActs streamlines contact management, helping you keep track of your students contact, attendance and assignment 
+KonTActs streamlines contact management, helping you keep track of your students' contact, attendance and assignment 
 information more effectively compared to traditional GUI apps. 
 
-KonTActs' **main features** includes: 
+KonTActs' **main features** include: 
 1. Attendance tracking: Track student's weekly attendance.
 2. Assignment tracking: Add and manage student's assignment and grades.
 3. Contact detail storing: Store and manage student's contact information 
 4. Quick access to GitHub: Quickly access a student's GitHub repository.
 
 KonTActs **optimization features**:
-1. Fast typist: Uses a **Command Line Interface** (CLI) to navigate the application alongside a Graphical User Interface
+1. Fast typist: Provides a **Command Line Interface** (CLI) for navigation alongside a Graphical User Interface
 (GUI).
 2. Shortcut commands: Shortcut commands to boost productivity
 3. Terminal-like: Easily access previous commands  
@@ -48,11 +48,11 @@ KonTActs **optimization features**:
 
 To get started,
 
-1. Ensure you have Java `17` or above installed in your Computer. Refer [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html) for the specific version.
+1. Ensure you have Java `17` or above installed on your computer. Refer [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html) for the specific version.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T11-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for KonTActs.
+3. Copy the file to your chosen _home folder_ for KonTActs.
 
 
 4. Open a command terminal, `cd` into _home folder_ you put the jar file in, and enter `java -jar kontacts.jar` to run the application. 
@@ -69,7 +69,7 @@ To get started,
 
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   Examples of commands you can try:
 
     * `list` : Lists all contacts.
 
