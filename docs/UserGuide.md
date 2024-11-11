@@ -17,27 +17,7 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 <!-- * Table of Contents -->
 <page-nav-print />
 
----------------------- 
-## Table of Contents
-- [FindingbrUdders User Guide](#findingbrudders-user-guide)
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [Viewing Help: `help`](#viewing-help--help-)
-  - [Adding an Udder: `add`](#adding-an-udder-add-)
-  - [Listing all Udders: `list`](#listing-all-udders--list-)
-  - [Editing an Udder: `edit`](#editing-an-udder--edit-)
-  - [Scheduling a meeting with an Udder: `schedule`](#scheduling-a-meeting-with-an-udder--schedule-)
-  - [Locating Udders by keywords: `find`](#locating-udders-by-keywords-find-)
-  - [Deleting an Udder: `delete`](#deleting-an-udder--delete-)
-  - [Clearing all Udders:`clear`](#clearing-all-udders--clear-)
-  - [Exiting the program: `exit`](#exiting-the-program--exit-)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
-- [FAQ](#faq)
-- [Known issues](#known-issues)
-- [Command summary](#command-summary)
---------------------------------------------------------------------------------------------------------------------
-
+----------------------
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer. 
