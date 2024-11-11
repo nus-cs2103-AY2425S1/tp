@@ -408,8 +408,6 @@ Examples:
   Two persons listed that suits your keyword! <br>
   enters more specific name keywords to retrieve the ID of the person
 
-<div style="page-break-after: always;"></div>
-
 ### [Adding an Appointment](#command-summary): `addA`
 
 Adds an appointment to an existing patient with the specified `PATIENT_ID` and doctor with the specified `DOCTOR_ID` in the MedDict database.
@@ -578,6 +576,11 @@ Furthermore, certain edits can cause MedDict to behave in unexpected ways (e.g.,
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Known issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
 <div style="page-break-after: always;"></div>
 
 ## FAQ
@@ -600,14 +603,7 @@ Furthermore, certain edits can cause MedDict to behave in unexpected ways (e.g.,
 7. Go to where the new MedDict `.jar` file is located in, and repeat steps 2 to 3.
 8. Replace the new addressbook.json file in the current data folder with the previous addressbook.json file that you have copied or saved. You can do this by copying the addressbook.json file from the old data folder and pasting it in the new data folder. When prompted to overwrite, click yes. Alternatively, you can use a text editor of your choice to edit the new and old addressbook.json file, then copy and paste all the content from the old addressbook.json file to the new one.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
