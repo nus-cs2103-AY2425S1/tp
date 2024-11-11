@@ -92,8 +92,8 @@ If you are on the PDF, use the table of contents below to navigate the site.
 - The following commands (i.e. `list_s`, `list_g` and `sort` commands) will **throw an error** for extraneous parameters.
 
 - Using extraneous parameters/repeated parameters, unlike stated, in other commands might **result in an error**!
-  - Prefixes are detected if a space is in front of them, i.e. `gn/` will be detected as a prefix like this ` gn/`.
-  - If your input involves a parameter used in the command, consider using a backslash like this ` gn\`.
+  - Prefixes are detected if a space is in front of them, i.e. `gn/` will be detected as a prefix if entered like this ` (space)gn/`.
+  - If your input involves a parameter used in the command, consider using a backslash like this `gn\`.
 
 **Important**
 
