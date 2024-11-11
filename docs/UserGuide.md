@@ -36,6 +36,7 @@ The user guide contains formatting to highlight important info. The standards us
 ## Table of Contents
 
 - [Quick Start](#quick-start)
+  - [Some commands to get started:](#some-commands-to-get-started)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - **Employee Commands**
@@ -55,12 +56,15 @@ The user guide contains formatting to highlight important info. The standards us
   - [Deleting a project : `deleteproject`](#deleting-a-project--deleteproject)
   - [Clear all project entries : `clearproject`](#clear-all-project-entries--clearproject)
   - **Assignment Commands**
-  - [Create an assignment : `assign`](#create-assignment--assign)
-  - [List assignments : `listassignments`](#list-assignments--listassignments)
+  - [Create Assignment : `assign`](#create-assignment--assign)
+  - [List Assignments : `listassignments`](#list-assignments--listassignments)
   - [Delete Assignment : `unassign`](#delete-assignment-unassign)
   - **Other Commands**
   - [Exiting the program : `exit`](#exiting-the-program--exit)
-- [Saving / Editing the data file](#saving-the-data)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+  - [Traversing command history](#traversing-command-history)
+  - [Editing the command history save file](#editing-the-command-history-save-file)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -433,7 +437,7 @@ Examples:
 
 Expected output:
 - System message noting success
-- Projects matching criteria above  shown in the displayed project list
+- Projects matching criteria above shown in the displayed project list
 
 [Return to Top](#table-of-contents)
 
@@ -555,7 +559,7 @@ HRConnect data is saved automatically as a [*JSON*](#json) file `[JAR file locat
 Advanced users are welcome to update data directly by editing this data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to backup the file before editing it.<br>
 
 Furthermore, certain edits can cause HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. <br>
 
@@ -563,6 +567,28 @@ When editing employee and project IDs directly in the data file, take extra caut
 </div>
 
 [Return to Top](#table-of-contents)
+
+### Traversing command history
+
+HRConnect keeps a log of past commands entered, up to a maximum of the 50 latest commands. To access past commands, make sure that your cursor is in the command box (indicated within the red box below), then press the up (↑) and down (↓) arrow keys. This feature is similar to terminal or command prompt history.
+
+![cursorInCommandBox.png](images/cursorInCommandBox.png)
+
+- Press the up arrow key (↑) to navigate to the previous command.
+- Press the down arrow key (↓) to navigate to the next command.
+
+Previously entered commands are saved to disk (up to a maximum of 50 commands). Users can navigate to previous commands from earlier sessions as commands are saved across exit(s) of the application.
+
+[Return to Top](#table-of-contents)
+
+### Editing the command history save file
+
+Similar to [Editing the data file](#editing-the-data-file), advanced users are welcome to update their command history directly by editing `[JAR file location]/data/hrconnect.json`.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to this file makes its format invalid, HRConnect will discard all data and start with an empty file at the next run. Hence, it is recommended to backup the file before editing it.<br>
+
+Likewise, certain edits can cause HRConnect to behave in unexpected ways. Therefore, edit the command history file only if you are confident of updating it correctly. <br>
 
 ---
 
@@ -589,7 +615,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 1. **If your computer has multiple displays**, if you move the application to a secondary display, and later switch to using only the primary display, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Running and using multiple instances of HRConnect at the same time** will result in unpredictable behavior, including inconsistent data saving and displaying. 
+3. **Running and using multiple instances of HRConnect at the same time** will result in unpredictable behavior, including inconsistent data saving and displaying.
 
 [Return to Top](#table-of-contents)
 
@@ -672,7 +698,7 @@ List of certain technical terms / uncommon words used in this user guide.
 - Does not include the negative sign (-), the decimal point (.), spaces, or other symbols.
 
 ### Prefix
-- 1 or more characters, followed by a `/`. 
+- 1 or more characters, followed by a `/`.
 - Used in commands to indicate a value supplied by the user. Examples: `n/`, `id/`, `pid/`.
 
 [Return to Top](#table-of-contents)
