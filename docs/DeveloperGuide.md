@@ -420,7 +420,7 @@ Use case ends.
 2. EduTuTu displays a list of students with unique indices.
 3. Private tutor types the command to edit a student's record, including the student index.
 4. EduTuTu validates the student index.
-5. Administrator edits the selected the field with new value.
+5. Private tutor edits the selected the field with new value.
 6. EduTuTu updates the student’s record with the new information and logs a confirmation of the successful edit.
 
 Use case ends.
@@ -506,7 +506,6 @@ This version uses clear formatting with bullet points for better readability and
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Tuition Center Administrator**: The person responsible for overseeing the operations of the tuition center, managing contacts, scheduling, and communication with students, parents, and teachers.
 * **Data Migration**: The process of transferring data from one system to another. This feature ensures that contacts, communication history, and other data can be shared across different platforms or stakeholders.
 
 --------------------------------------------------------------------------------------------------------------------
