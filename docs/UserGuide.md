@@ -99,8 +99,6 @@ internet connectivity.
 
 - [Glossary](#glossary)
 
-<div style="page-break-after: always"></div>
-
 # Introduction
 
 **DLTbook**:
@@ -109,9 +107,9 @@ internet connectivity.
 - is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User
   Interface** (GUI).
 
-[Return to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always"></div>
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 ## Beginner's Guide
 
