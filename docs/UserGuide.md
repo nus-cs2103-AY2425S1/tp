@@ -101,7 +101,7 @@ the process of accessing and updating resident student details. What's more, Dor
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `clean` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -139,7 +139,7 @@ Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 > <span style="color:Tomato"> WARNING! </span> <br>
 > 
 > * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
-> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
 > * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
 
 
@@ -167,24 +167,26 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* * Once `ADDRESS`, `ROOM_NUMBER`, `EMERGENCY_NAME`, `EMERGENCY_PHONE`, and/or `GRADUATION_YEAR` has been specified, you cannot remove these fields.
+* Once `ADDRESS`, `ROOM_NUMBER`, `EMERGENCY_NAME`, `EMERGENCY_PHONE`, and/or `GRADUATION_YEAR` has been specified, you cannot remove these fields.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
-[!Note]
+> <span style="color:Gray"> NOTE! </span> <br>
+>
 > * A person can have up to 10 tags (including 0).
 > * `NAME` and `EMERGENCY_NAME` consist of alphabets, numbers, dashes (-) and apostrophes (').
-> * `PHONE` and `EMERGENCY_PHONE_NUMBER` consist of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
+> * `PHONE` and `EMERGENCY_PHONE` consist of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
 > * `EMAIL` should be of the format `local-part@domain`.
 > * `ROOM_NUMBER` should be of the format `##-####`, where # refers to integer values. 
 > * `GRADUATION_YEAR` should be of the format `2YYY`.
 > * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
-> [!Warning]
-> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
-> If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
 
+> <span style="color:Tomato"> WARNING! </span> <br>
+> 
+> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
+> * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -202,7 +204,7 @@ Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Only full words will be matched for room_number and phone_number, the arguments
+* Only full words will be matched for ROOM_NUMBER and PHONE, the arguments
   should be exactly the same as the person's room number and phone number
 * Order of the tags do not matter `t/friends colleagues` works the same
   as `t/colleagues friends`
@@ -367,7 +369,7 @@ Action     | Format, Examples
 
 ### Name
 
-Format: A sequence of alphanumeric characters corresponding to a student's name
+Format: A sequence of alphanumeric characters corresponding to a student's name.
 
 Constraints:
 * `name` can contain any alphanumeric character or whitespace.
@@ -375,12 +377,13 @@ Constraints:
 * `name` can be 1 to 300 characters long.
   
 Duplicate handling:
-* Two resident student contacts with the same name are not allowed
+* Two resident student contacts with the same name are not allowed.
+
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * Constraint rationale: Extremely long names would be difficult to process and display in the profile screen. It is rather common to use hyphens, commas and apostrophes to separate different sections of the name.
 > * Duplicate handling rationale: It is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
-> * Case-insensitive: `John Doe` is treated the same as `john doe`
+> * Case-insensitive: `John Doe` is treated the same as `john doe`.
 
 ### Phone number
 
@@ -421,32 +424,35 @@ Duplicate handling:
 
 ### Address
 
-Format: String of any value.
+Format: A sequence of characters corresponding to a student's address.
 
 Constraints:
-* The first character of the string cannot be a whitespace.
+* `address` cannot have a whitespace as the first character.
+* `address` can contain any character.
 
 Duplicate handling:
 * Any number of students can have the same address.
 
-> [!Note]
-> Constraint rationale: A whitespace cannot be the first character of the string, such that " " cannot be a valid input.
-> 
-> Duplicate handling rationale: The same address can have multiple residents. Records of students who have graduated and who lived in the address can also be maintained.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: A whitespace cannot be the first character of the string, such that " " cannot be a valid input.
+> * Duplicate handling rationale: The same address can have multiple residents. Records of students who have graduated and who lived in the address can also be maintained.
 
 ### Tags
 
-Format: Alphanumeric string.
+Format: A sequence of alphanumeric characters.
 
 Constraints:
-* Only alphanumeric characters and whitespaces are allowed.
-* 100 characters cannot be exceeded.
+* `tag` can contain any alphanumeric character or whitespace.
+* `tag` cannot have a whitespace as the first character.
+* `tag` can be 1 to 100 characters long.
 
 Duplicate handling:
 * Any number of students can have the same tag.
 
-> [!Note]
-> Constraint rationale: The character limit ensures that the tag is concise for easy referencing. Whitespaces are allowed to define more complex positions that the person may hold, such as "Volleyball captain".
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: The character limit ensures that the tag is concise for easy referencing. Whitespaces are allowed to define more complex positions that the person may hold, such as "Volleyball captain".
 
 
 ### Room number
@@ -461,26 +467,27 @@ Constraints:
 Duplicate handling:
 * Any number of students can have the same room number.
 
-> [!Note]
-> Constraint rationale: 2 and 4 digits are provided respectively to floor and unit numbers to accommodate dormitories with many floors and/or units.
-> 
-> Duplicate handling rationale: The same room can have multiple residents. Records of students who have graduated and who lived in the room can also be maintained.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: 2 and 4 digits are provided respectively to floor and unit numbers to accommodate dormitories with many floors and/or units.
+> * Duplicate handling rationale: The same room can have multiple residents. Records of students who have graduated and who lived in the room can also be maintained.
 
 
 ### Emergency contact name
 
-Format: A sequence of alphanumeric characters corresponding to a student's emergency contact name
+Format: A sequence of alphanumeric characters corresponding to a student's emergency contact name.
 
 Constraints:
 Same as [Name](#name)
 
 Duplicate handling:
 * Two residents can have the same emergency contact with the same name.
+
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * Constraint rationale: Same as [Name](#name)
 > * Duplicate handling rationale: It is possible for two residents to have the same emergency contact.
-> * Case-insensitive: `John Doe` is treated the same as `john doe`
+> * Case-insensitive: `John Doe` is treated the same as `john doe`.
 
 ### Emergency contact phone number
 
@@ -491,6 +498,7 @@ Same as [Phone number](#phone-number)
 
 Duplicate handling:
 * Two residents can have the same emergency contact with the same phone number.
+
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * Constraint rationale: Same as [Phone number](#phone-number)
@@ -498,7 +506,7 @@ Duplicate handling:
 
 ### Graduation year
 
-Format: `2YYY` to represent the year of graduation.
+Format: `2YYY` corresponding to the student's year of graduation.
 
 Constraints:
 * Start the graduation year with `2`.
@@ -507,5 +515,6 @@ Constraints:
 Duplicate handling:
 * Any number of students can have the same graduation year.
 
-> [!Note]
-> Constraint rationale: The first digit of graduation year is set to 2 to minimise typos.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: The first digit of graduation year is set to 2 to minimise typos.
