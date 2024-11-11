@@ -3,8 +3,28 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
-  {:toc}
+## **Table of Contents**
+
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI component](#ui-component)
+  * [Logic component](#logic-component)
+  * [Model component](#model-component)
+  * [Storage component](#storage-component)
+  * [Common classes](#common-classes)
+* [Implementation](#implementation)
+  * [Parser Mode Switching](#parser-mode-switching)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Apppendix: Product Details](#appendix-product-details)
+  * [Product scope](#product-scope)
+  * [User stories](#user-stories)
+  * [Use cases](#use-cases)
+  * [Non-Functional Requirements](#non-functional-requirements)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+* [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+* [Appendix: Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
