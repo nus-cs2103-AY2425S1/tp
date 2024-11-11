@@ -511,28 +511,26 @@ Action     | Format, Examples
 
 ## Glossary
 
-- **Application Status**:
-    - **PENDING**: The internship application is currently in progress.
-    - **REJECTED**: The user has rejected or been rejected from this internship application.
-    - **ACCEPTED**: The user has accepted the offer for this internship.<br>
+Term     | Definition
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Action**    | The task carried out by the HireMe application such as Add, Delete, Update entries. 
+**Alphanumeric**    | Consisting of both letters and numbers. 
+**Application Status**   | - **PENDING**: The internship application is currently in progress. <br> - **REJECTED**: The user has rejected or been rejected from this internship application. <br>- **ACCEPTED**: The user has accepted the offer for this internship.
+**Command** | The string the user types into the HireMe application’s command bar to carry out a particular action.
+**Command Bar** | The input bar at the top of the HireMe application which allows users to type in a string command.
+**Company Email** | The email of the company that the user is applying for an internship role at.
+**Company Name** | The name of the company that the user is applying for an internship role at.
+**Command Line Interface (CLI)** | The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. 
+**Filepath** | The location through which a file can be accessed in a file system.
+**Graphical User Interface (GUI)** | The user interacts with the computer using visual elements like buttons, icons and windows.
+**Index** | The index of the internship application displayed in the list.
+**Java** | A programming language for coding applications, websites and other software.
+**Java Archive (Jar)** | A file format used to package multiple files into one file for distribution. 
+**JavaScript Object Notation (JSON)** | A readable format to represent structured data, which is commonly used for web applications.
+**Order** | The order that the user would like the list to be in, based on the date of application.
+**Parameter** | The details needed for to perform specific commands. (e.g. Add command has a parameter for company name) 
+**Role** | The role of the internship the user applied for.
+**Terminal** | A text-based interface for interacting with a computer. It allows users to execute commands and view the results.
 
 
-- **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
-- **Command Line Interface (CLI)**: The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. As if giving instructions to execute a desired action.
-
-- **Command**: The string the user types into the HireMe application’s command bar to carry out a particular action.
-
-- **Command Bar**: The input bar at the top of the HireMe application which allows users to type in a string command.
-
-- **Company Email**: The email of the company that the user is applying for an internship role at.
-
-- **Company Name**: The name of the company that the user is applying for an internship role at.
-
-- **Graphical User Interface (GUI)**: The user interacts with the computer using visual elements like buttons, icons and windows.
-
-- **Role**: The role of the internship the user applied for.
-
-- **Index**: The index of the internship application displayed in the list.
-
-- **Order**: The order that the user would like the list to be in, based on the date of application.
