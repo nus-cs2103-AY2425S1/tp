@@ -9,18 +9,20 @@ In this guide, new users will find everything you need to get started while expe
 
 <span style="color: #ff6978;">*Use HireMe to get hired now!*</span>
 
-## Overview
+<br></br>
+
+## Overview of User Guide
 
 HireMe is a **free desktop application that helps you manage your extensive list of internship applications.** 
 
-* [Easy to use]
+* _Easy to use_
   - **Type simple commands:** If you can type fast, HireMe can get your internship tracking tasks done faster than traditional apps.
-* [User friendly interface]
+* _User friendly interface_
   - **Simple design:** view all your internship applications and statuses at a glance.
-* [Streamlining management]
+* _Streamlining management_
   - **Core features:** Add, delete and find entries.
   - **Advanced features:** Update status, sort, filter by status and view chart. 
-* [Insights]
+* _Detailed Insights_
   - **Tailored summary**: gain hidden insights from your list of internship applications.
 
 ### Table of Contents
@@ -29,6 +31,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
   * [Welcome to HireMe!](#welcome-to-hireme-)
   * [Overview](#overview)
     * [Table of Contents](#table-of-contents)
+    * [Overview of target users](#overview-of-target-users)
   * [Quick start](#quick-start)
     * [Part 1: Setting up and downloading HireMe](#part-1-setting-up-and-downloading-hireme)
     * [Part 2: Using the HireMe application](#part-2-using-the-hireme-application)
@@ -53,6 +56,18 @@ HireMe is a **free desktop application that helps you manage your extensive list
   * [Troubleshooting](#troubleshooting)
   * [Command summary](#command-summary)
 <!-- TOC -->
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Overview of target users
+
+If you are a Computer Science undergraduate who **does not have much time**, can **type fast** and want to **better manage your internship applications**,
+HireMe is the perfect solution for you! Sometimes, tracking internship applications can be troublesome and time-consuming. 
+We understand the importance of tracking as it allows you to follow up on your applications. Hence, we came up with HireMe to help you
+**stay organised without having to put in much effort** because we know that you may be busy with your coursework. Let's get you
+started with HireMe!
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,6 +154,7 @@ Check [troubleshooting](#troubleshooting) if you are facing problems for setting
 
 </box>
 
+<br></br>
 ### Viewing help : `/help`
 
 Shows a message explaining how you can access the help page.
@@ -147,7 +163,7 @@ Shows a message explaining how you can access the help page.
 
 Format: `/help`
 
-<br>
+<br></br>
 
 ### Adding an internship application: `/add`
 
@@ -158,14 +174,22 @@ Format: `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 * `NAME` must be alphanumeric but these special characters `_`,`&`,`/`,`.`,`:`,`(`, and `)` can also be used.
 * `ROLE` must be alphanumeric but these special characters `/` can also be used.
 * `EMAIL` must be a valid email address.
-* The `DATE` must be within the year 2000 and 2099. It also cannot be a future date which means that the date used must be before today or today's date.
+* The `DATE` must be within the year 2000 and the current year. It also cannot be a future date which means that the date used must be before today or today's date.
 * It must be in the format `dd/mm/yy`, and each field must be double digits (e.g. 01 is valid while 1 is not)
 
 Examples:
-* `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 * `/add r/Data Scientist Intern n/Facebook e/fb@example.com d/21/10/24`
+* `/add n/Google r/Software Engineer Intern e/google@gmail.com d/01/01/24`
 
-<br>
+<p>Before and after images of the second example</p>
+<div style="display: flex;">
+  <img src="images/add-before.png" width="350" alt="Add-Before" style="margin-right: 20px;">
+  <img src="images/add-after.png" width="350" alt="Add-After">
+</div>
+
+> **_NOTE:_**  HireMe considers an entry to be a duplicate of all of its fields match **(case-insensitive)** an existing internship application entry. An attempt to add duplicates will result in an error.
+<br></br>
+
 
 ### Listing all internship applications : `/list`
 
@@ -173,7 +197,7 @@ Shows a list of all of your internship applications in HireMe.
 
 Format: `/list`
 
-<br>
+<br></br>
 
 ### Deleting an internship application : `/delete`
 
@@ -191,17 +215,24 @@ Examples:
 * `/find Google` followed by `/delete 1` deletes the 1st application in the results of the `/find` command.
 * `/list` followed by `/delete 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
 
-<br>
+<p>Before and after images of the first example</p>
+<div style="display: flex;">
+  <img src="images/delete-before.png" width="350" alt="Delete-Before" style="margin-right: 20px;">
+  <img src="images/delete-after.png" width="350" alt="Delete-After">
+</div>
+
+<br></br>
 
 ### Finding applications by company name: `/find`
 
 Finds all of your applications whose company names contains words that starts with the specified characters.
 
-Format: `/find PATTERN`
+Format: `/find KEYWORD [ADDITIONAL_KEYWORDS]`
 
 * The search is **case-insensitive**. e.g. `goo` will match `Google`.
 * The search is **only for company names**.
 * The search uses **prefix search**.
+* The search allows for **more than 1 `KEYWORD`**
 * If you search for `go`, then you will see a list of all the internship applications that you have applied for
   whose companies have words starting with `go` in their names.
 
@@ -210,8 +241,15 @@ Examples:
 * `/find face` returns `Facebook`
 * `/find app` returns `Apple`, but not `CashApp`
 * `/find young` returns `Ernest & Young`
+* `/find amaZoN NetFlix` returns `Amazon` and `Netflix`
 
-<br>
+<p>Before and after images of the last example</p>
+<div style="display: flex;">
+  <img src="images/find-before.png" width="350" alt="Find-Before" style="margin-right: 20px;">
+  <img src="images/find-after.png" width="350" alt="Find-After">
+</div>
+
+<br></br>
 
 ### Updating the status of an internship application : `/accept`, `/pending`, `/reject`
 
@@ -230,9 +268,16 @@ Examples:
 * `/list` followed by `/accept 2` marks the status of the 2nd application in the list as accepted.
 * `/pending 3` changes the status of the 3rd application in the current list to pending.
 * `/reject 1` changes the status of the 1st application in the current list to rejected.
+* `/filter pending` followed by `/accept 1` changes the status of the 1st application to accepted. The application will hence no longer be on the list shown on the application since it no longer has a `pending` status.
 * `/list` followed by `/accept 4` when you only have 3 internship applications returns `The internship application index provided is invalid`.
 
-<br>
+<p>Before and after images of the first example</p>
+<div style="display: flex;">
+  <img src="images/accept-status-before.png" width="350" alt="Accept-Status-Before" style="margin-right: 20px;">
+  <img src="images/accept-status-after.png" width="350" alt="Accept-Status-After">
+</div>
+
+<br></br>
 
 ### Filtering internship applications by status: `/filter`
 
@@ -248,7 +293,13 @@ Examples:
 * `/filter accepted` displays all the internship applications that have a status of accepted.
 * `/filter rejected` displays all the internship applications that have a status of rejected.
 
-<br>
+<p>Before and after images of the second example</p>
+<div style="display: flex;">
+  <img src="images/filter-before.png" width="350" alt="Filter-Before" style="margin-right: 20px;">
+  <img src="images/filter-after.png" width="350" alt="Filter-After">
+</div>
+
+<br></br>
 
 ### Sorting internship applications: `/sort`
 
@@ -264,7 +315,13 @@ Examples:
 * `/sort earliest` displays the internship application list sorted according to the earliest applications first.
 * `/sort latest` displays the internship application list sorted according to the latest applications first.
 
-<br>
+<p>Before and after images of the first example</p>
+<div style="display: flex;">
+  <img src="images/sort-before.png" width="350" alt="Sort-Before" style="margin-right: 20px;">
+  <img src="images/sort-after.png" width="350" alt="Sort-After">
+</div>
+
+<br></br>
 
 ### Clearing all entries : `/clear`
 
@@ -278,11 +335,11 @@ This removes all the internship applications that you have been tracking. You wi
 
 Format: `/clear`
 
-<br>
+<br></br>
 
 ### Viewing status chart: `/chart`
 
-<img src="images/piechart.png" alt="drawing" width="500"/>
+<img src="images/piechart.png" alt="drawing" width="350"/>
 
 Opens a new window that displays a pie chart with summary data of the statuses of all of your internship applications.
 
@@ -313,17 +370,31 @@ Get your questions or doubts about HireMe's functionality and details answered h
 Ans: HireMe data are saved automatically as a JSON file `[JAR file location]/data/hireme.json`. You can make a backup of the file if you wish to.
 
 #### Q2: Can I edit the data file directly?
-Ans: You should not be editing the JSON data file directly. You should be using the commands as mentioned above to augment any data.
-Should the data file be corrupted, HireMe will discard all data and start with an empty data file.
+Ans: You are strongly encouraged to **not** edit the JSON data file directly. You can use the commands as mentioned above to augment any data.
+Should the changes made to the data file causes the format to be invalid, HireMe will discard all data and start with an empty data file.
+It is highly recommended to make a copy of the date file before editing it. <br>
 
-#### Q3: Can I find followed by filter to filter out the applications with a specific keyword?
-Ans: Currently, the effects of `/find` and `/filter` do not stack. These commands will find or filter based on all of your internship application entries.
+Users should only edit the data file only if they are confident in updating it correctly.
 
-#### Q4: After I sort my internship applications, will a new entry be added in the right order automatically?
+#### Q3: What is considered valid, when editing the JSON data file directly?
+Ans: Data entries are valid, if they are achievable through a sequence of commands. <br>
+
+Examples: <br>
+Having `30/02/24` is an invalid `dateString` field for an application, as there is no sequence of commands that will lead to an application having the respective date.<br>
+
+Having `REJECTED` is a valid `statusString` field for an application, as the user can `/add` an internship and update the status via `/reject`.
+
+#### Q4: Can I find followed by filter to filter out the applications with a specific keyword?
+Ans: Currently, `/find` and `/filter` do not stack. These commands will find or filter based on all of your internship application entries.
+
+#### Q5: After I sort my internship applications, will a new entry be added in the right order automatically?
 Ans: New entries will not be inserted in the right order. They are inserted to the bottom of the list.
 
-#### Q5: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
+#### Q6: Will adding / deleting new entries or changing the statuses of existing entries be reflected in the pie chart?
 Ans: Yes! You are not required to close the window. Any changes made will be reflected immediately in the pie chart.
+
+#### Q7: What is considered a valid email address format?
+Ans: If you have an existing email address account, it will be allowed by HireMe. You can check [here](https://verifalia.com/validate-email).
 
 --------------------------------------------------------------------------------------------------------------------
 ## Troubleshooting

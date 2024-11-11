@@ -191,6 +191,7 @@ Otherwise, it creates a new instance of `HelpCommand`.
 
 Upon execution, `HelpCommand` returns an instance of `CommandResult` which contains the help message.
 
+> **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
 ### Create new internship application
 The implementation of the create command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
@@ -327,6 +328,7 @@ The implementation of the command follows the convention of a normal command, wh
 Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
 `MainWindow` checks for the intent via `isExit`, after which, it calls `handleExit` to close the application.
 
+> **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -396,52 +398,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user does not include the company name.
+* 1a. The user has missing fields in input.
     * 1a1. HireMe shows an error message.
 
       Use case ends.
 
-
-* 1b. The user does not include the internship role.
+* 1b. The user provided some invalid input for field.
     * 1b1. HireMe shows an error message.
 
       Use case ends.
-
-
-* 1c. The user does not include the company email.
+  
+* 1c. The user provided multiple fields of the same type.
     * 1c1. HireMe shows an error message.
 
       Use case ends.
 
-
-* 1d. The user does not include the date of application.
-    * 1d1. HireMe shows an error message.
-
-      Use case ends.
-
-
-* 1e. The user provided an invalid company name.
-    * 1e1. HireMe shows an error message.
-
-      Use case ends.
-
-
-* 1f. The user provided an invalid internship role.
-    * 1f1. HireMe shows an error message.
-
-      Use case ends.
-
-
-* 1g. The user provided an invalid company email.
-    * 1g1. HireMe shows an error message.
-
-      Use case ends.
-
-
-* 1h. The user provided an invalid date of application.
-    * 1h1. HireMe shows an error message.
-
-      Use case ends.
+    
 
 <br></br>
 **System**: HireMe application
@@ -636,7 +608,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user provided an extra parameter.
+* 1a. The user provided extra argument(s) in command format.
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -655,6 +627,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. HireMe shows a summary chart of all internship entries.
 
    Use case ends.
+
+**Extensions**
+
+* 1a. The user provided extra argument(s) in command format.
+    * 1a1. HireMe shows an error message.
+
+      Use case ends.
 
 
 <br></br>
@@ -692,6 +671,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extensions**
+
+* 1a. The user provided extra argument(s) in command format.
+    * 1a1. HireMe shows an error message.
+
+      Use case ends.
+
 
 <br></br>
 **System**: HireMe application
@@ -709,7 +695,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user provided an extra parameter.
+* 1a. The user provided extra argument(s) in command format.
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -864,21 +850,21 @@ testers are expected to do more *exploratory* testing.
    1. Missing/Invalid Company Name test case: `/add n/ r/Software Engineer Intern e/google@gmail.com d/31/10/24` <br>
    Expected: An error message stating what is considered a valid Company Name.<br>
 
-      1. Other Invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.
+      1. Other Invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.<br>
 
    2. Missing/Invalid Role test case: `/add n/Google r/ e/google@gmail.com d/31/10/24` <br>
    Expected: An error message stating what is considered a valid Role.<br>
 
-      1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.
+      1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.<br>
 
    3. Missing/Invalid Email test case: `/add n/Google r/Software Engineer Intern e/ d/31/10/24`<br>
    Expected: An error message stating what is considered a valid Email.
 
-      1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.
+      1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.<br>
 
    4. Missing/Invalid Date test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/`<br>
    Expected: An error message stating what is considered a valid Date.
-      1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.
+      1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.<br>
 
 5. Adding internship application with missing field(s)
    1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
@@ -965,6 +951,7 @@ testers are expected to do more *exploratory* testing.
 5. Find with an empty pattern
 
     1. Prerequisites: The application should be running.
+   
     2. Test case: `/find`<br>
        Expected: An error message stating that the search pattern cannot be empty is displayed.
 
@@ -995,49 +982,57 @@ testers are expected to do more *exploratory* testing.
 
 ### Chart Window
 1. Open chart window
+
     1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the chart window is not opened.
    
     2. Test case `/chart`<br>
        Expected: Chart window opens.
 
 2. Open chart window with invalid command format
+
     1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the chart window is not opened.
    
     2. Test case: `/chart x`<br>
        Expected: An error message stating the valid use of the `/chart` command.
 
 3. Update chart window by updating status
+
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are the internship application at index 1 is of `PENDING` status and the chart window is already opened.
    
    2. Test case: `/accept 1`<br>
       Expected: Pie chart on chart window to update accordingly.
 
 4. Update chart window by adding an internship application
+
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application, `Google` is not in list, and the chart window is already opened.
    
    2. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/31/10/24`<br>
       Expected: Pie chart on chart window to update accordingly.
 
 5. Update chart window by deleting an internship application
+
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at are at least two internship applications and the chart window is already opened.
    
    2. Test case: `/delete 1`<br>
       Expected: Pie chart on chart window to update accordingly.
 
 6. Close chart window
+
    1. Prerequisites: Chart window is already opened.
    
    2. Test case: Click on the close button on the Help window. <br>
-      Expected: Help window closes.
+      Expected: Chart window closes.
 
 ### Filtering internship applications
 1. Filter with a valid status in uppercase
+
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application with `PENDING` status.
    
    2. Test case `/filter PENDING`<br>
       Expected: The list of internship applications should only display entries with `PENDING` status.
 
 2. Filter with a valid status in mixed case
+
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application with `PENDING` status.
        Expected: The list of internship applications remains empty.
     
@@ -1045,35 +1040,48 @@ testers are expected to do more *exploratory* testing.
       Expected: The list of internship applications should only display entries with `PENDING` status.
 
 3. Filter an empty list
+
     1. Prerequisites: Clear all internship applications using the `/clear` command.
 
     2. Test case `/filter PENDING`<br>
        Expected: The list of internship applications remains empty.
        
 4. Filter with an invalid status
+
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that the list is not empty.
    
    2. Test case `/filter approved`<br>
       Expected: An error message indicating that the status is invalid.
 
 5. Filter with an empty status
+
    1. Prerequisites: Clear all internship applications using the `/list` command. Ensure that the list is not empty.
    
    2. Test case `/filter`<br>
       Expected: An error message indicating that the status is invalid.
 
 ### Saving data
-1. **Auto saves file**
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that the list is not empty.
-   2. Test case: `/exit` and open the HireMe application again
-      Expected: The list of internship applications previously saved are displayed
+1. Auto saves file
+
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that the list is not empty.
+
+   2. Test case: `/exit` and open the HireMe application again<br>
+      Expected: The list of internship applications previously saved are displayed.
 
 
 ### Exit HireMe Application
 1. Exit via Window's close button
+
    1. Test case: Close the window by clicking on the Window's close button.<br>
    Expected: The window should close.
 
-2. Exit via exit command 
+2. Exit via exit command
+
    1. Test case: `/exit` to close the window.<br>
    Expected: The window should close.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+The team consists of 5 members.
+Given below are enhancements planned for future versions.
