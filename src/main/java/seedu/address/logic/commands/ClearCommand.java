@@ -7,7 +7,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Makes the address book ready for clearing and prompts for confirmation to clear.
+ * Makes the address book ready for clearing and
+ * prompts for confirmation to clear.
+ *
+ * The clear command helps them bulk delete entries very quickly
+ * It also support bulk deleting a filtered list
+ * The confirm command ensures that researchers think twice
+ * before clearing, so that they don't make irreversible mistakes
  */
 public class ClearCommand extends Command {
 
@@ -20,10 +26,20 @@ public class ClearCommand extends Command {
     private static boolean isClear;
 
 
+    /**
+     * Retrieves the current status of the 'isClear' flag.
+     *
+     * @return {@code true} if the 'isClear' flag is set to true, {@code false} otherwise.
+     */
     public static boolean getIsClear() {
         return ClearCommand.isClear;
     }
 
+    /**
+     * Sets the status of the 'isClear' flag.
+     *
+     * @param isClear the new value to set for the 'isClear' flag.
+     */
     public static void setIsClear(boolean isClear) {
         ClearCommand.isClear = isClear;
     }

@@ -82,6 +82,16 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    /**
+     * Executes the edit command, modifying the details of a person in the model's filtered person list.
+     * Ensures that no duplicate persons exist and validates the tags being added or removed.
+     *
+     * @param model the {@code Model} that the command should operate on.
+     * @return a {@code CommandResult} containing a success message with additional
+     *     information about any duplicate or non-existent tags.
+     * @throws CommandException if the index provided is out of bounds, the edited person would be a duplicate,
+     *                          or if the tags specified have certain conflicts.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -159,7 +169,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the corresponding field value
+     * Stores the details to edit the person with. Each non-empty field value
+     * will replace the corresponding field value
      * of the person.
      */
     public static class EditPersonDescriptor {
@@ -196,42 +207,96 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, email, age, gender, detail, studyGroupTags, tagsToRemove);
         }
 
+        /**
+         * Sets the name of the person.
+         *
+         * @param name the {@code Name} to set.
+         */
+
         public void setName(Name name) {
             this.name = name;
         }
+
+        /**
+         * Retrieves the name of the person, if present.
+         *
+         * @return an {@code Optional} containing the name, or an empty {@code Optional} if the name is not set.
+         */
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
 
+        /**
+         * Sets the email of the person.
+         *
+         * @param email the {@code Email} to set.
+         */
+
         public void setEmail(Email email) {
             this.email = email;
         }
+
+        /**
+         * Retrieves the email of the person, if present.
+         *
+         * @return an {@code Optional} containing the email, or an empty {@code Optional} if the email is not set.
+         */
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
 
+        /**
+         * Sets the gender of the person.
+         *
+         * @param gender the {@code Gender} to set.
+         */
         public void setGender(Gender gender) {
             this.gender = gender;
         }
 
+        /**
+         * Retrieves the gender of the person, if present.
+         *
+         * @return an {@code Optional} containing the gender, or an empty {@code Optional} if the gender is not set.
+         */
         public Optional<Gender> getGender() {
             return Optional.ofNullable(gender);
         }
 
+        /**
+         * Sets the age of the person.
+         *
+         * @param age the {@code Age} to set.
+         */
         public void setAge(Age age) {
             this.age = age;
         }
 
+        /**
+         * Retrieves the age of the person, if present.
+         *
+         * @return an {@code Optional} containing the age, or an empty {@code Optional} if the age is not set.
+         */
         public Optional<Age> getAge() {
             return Optional.ofNullable(age);
         }
 
+        /**
+         * Sets the detail of the person.
+         *
+         * @param detail the {@code Detail} to set, or {@code null} to clear the detail.
+         */
         public void setDetail(Detail detail) {
             this.detail = (detail != null) ? detail : null;
         }
 
+        /**
+         * Retrieves the detail of the person, if present.
+         *
+         * @return an {@code Optional} containing the detail, or an empty {@code Optional} if the detail is not set.
+         */
         public Optional<Detail> getDetail() {
             return Optional.ofNullable(detail);
         }

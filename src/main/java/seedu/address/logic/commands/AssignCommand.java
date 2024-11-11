@@ -21,7 +21,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.StudyGroupTag;
 
 /**
- * Assigns the current listed participants into study groups
+ * Assigns the current listed participants
+ * into study groups
  */
 public class AssignCommand extends Command {
 

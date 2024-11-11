@@ -17,6 +17,12 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all participants.";
     public static final String MESSAGE_EMPTY = "No saved participants to display.";
 
+    /**
+     * Executes the list command, updating the filtered person list to show all persons.
+     *
+     * @param model The model which contains the address book.
+     * @return CommandResult with a message indicating whether the list is displayed or if there are no participants.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

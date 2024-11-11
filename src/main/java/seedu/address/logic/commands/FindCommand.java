@@ -39,10 +39,22 @@ public class FindCommand extends Command {
 
     private final PredicateGroup predicates;
 
+    /**
+     * Constructs a FindCommand to find persons whose fields satisfy the given criteria.
+     *
+     * @param predicates The group of criteria to match against each person's fields.
+     */
     public FindCommand(PredicateGroup predicates) {
         this.predicates = predicates;
     }
 
+    /**
+     * Executes the find command, updating the list of persons in the model to display only those
+     * whose fields match all criteria in the specified PredicateGroup.
+     *
+     * @param model The model containing the list of persons.
+     * @return CommandResult containing the result message after finding matching persons.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -51,6 +63,12 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Compares this FindCommand to another object.
+     *
+     * @param other The object to be compared with this FindCommand.
+     * @return true if the object is an instance of FindCommand with the same predicates, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
