@@ -28,15 +28,15 @@ HiddenOutside ..> TutorEaseParser
 XYZContactCommand -up-|> Command
 XYZLessonCommand -up-|> Command
 
-TutorEaseParser .down.> ContactCommandParser: <<create>>
-TutorEaseParser .down.> LessonCommandParser: <<create>>
-ContactCommandParser .down.> XYZContactCommandParser: <<create>>
-LessonCommandParser .down.> XYZLessonCommandParser: <<create>>
+TutorEaseParser .down.> ContactCommandParser
+TutorEaseParser .down.> LessonCommandParser
+ContactCommandParser .down.> XYZContactCommandParser
+LessonCommandParser .down.> XYZLessonCommandParser
 
 
-XYZContactCommandParser ..> XYZContactCommand : <<create>>
-XYZLessonCommandParser ..> XYZLessonCommand : <<create>>
-TutorEaseParser ..> Command : <<use>>
+XYZContactCommandParser ..> XYZContactCommand
+XYZLessonCommandParser ..> XYZLessonCommand
+TutorEaseParser ..> Command
 
 ContactCommandParser .up.|> Parser
 LessonCommandParser .up.|> Parser

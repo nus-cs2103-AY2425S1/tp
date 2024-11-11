@@ -173,12 +173,12 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103-F11-2/tp/blob/master/src/main/java/tutorease/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml"/>
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `TutorEaseStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save contact data, lesson data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `TutorEaseStorage`, `LessonSchedule` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -229,7 +229,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 |------------------------------|--------------------------------------------------------------|---------------------------------------------------------------------|----------|
 | Potential user exploring app | Have a guided tour showing the functions upon first opening  | Have a better idea and <br/>navigate easily when using <br/>the app | 3        |
 | Potential user exploring app | See the test data inside the app (i.e. address book release) | Easily see how the app functions <br/>when it is in use             | 3        |
-| New user to the app          | Purge all test data                                          | Start writing in my own data                                        | 3        |
+| New user to the app          | Purge all sample data                                        | Start writing in my own data                                        | MVP      |
 
 ### Beginner to the software
 
@@ -326,7 +326,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.  
-      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
 **Use Case: UC04 - Edit contacts**
@@ -356,20 +356,15 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 **Extensions**:
 
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
-    * **1a1**. TutorEase prompts Tutor with correct format.
-    * **1a2**. Tutor enters new data.  
-      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+  * **1a1**. TutorEase prompts Tutor with correct format.  
+  * **1a2**. Tutor enters new data.  
+    Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+    Use case resumes from Step 2.  
+<br>
+* **1b**. No contacts found matching the entered keyword.
+    * **1b1**. TutorEase displays a message letting Tutor know that no contacts were found with the given keyword(s).
+    * **1b2**. Tutor enters a new keyword.  
       Use case resumes from Step 2.
-
-* **1b**. No contacts were found with the entered keyword.
-    * **1b1**. TutorEase displays an error message, showing no contacts have been found with the given keyword.
-    * **1b2**. Tutor enters a new valid keyword.  
-      Use case resumes from Step 2.  
-
-* **1c**. No contacts were found with the entered keyword.
-    * **1c1**. TutorEase displays an error message, showing no contacts have been found with the given keyword.
-    * **1c2**. Tutor cancels the search.  
-      Use case ends.
 
 **Use Case: UC06 - Add lesson for student**  
 
@@ -387,14 +382,14 @@ Precondition: Student exists in the system.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
-      Use case resumes from Step 2.
-
+      Use case resumes from Step 2.  
+<br>
 * **1b**. TutorEase detects that the student index is invalid.
     * **1b1**. TutorEase prompts Tutor to key in an index for a student that exists.
     * **1b2**. Tutor enters new data.  
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
-      Use case resumes from Step 2.
-
+      Use case resumes from Step 2.  
+<br>
 * **1c**. TutorEase detects there is an overlapping lesson at the specified date time.
     * **1c1**. TutorEase prompts Tutor that there is an overlapping lesson.
     * **1c2**. Tutor enters new data.  
@@ -415,13 +410,13 @@ Precondition: Student exists in the system.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
-      Use case resumes from Step 2.
-
-* **1b**. TutorEase detects that the student does not exist.
-    * **1b1**. TutorEase prompts Tutor to key in data for a student that exists.
-    * **1b2**. Tutor enters new data.  
+      Use case resumes from Step 2.  
+<br>
+* **1b.** TutorEase detects that the student does not exist.
+    * **1b1.** TutorEase prompts Tutor to key in data for a student that exists.
+    * **1b2.** Tutor enters new data.
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
-      Use case resumes from Step 2.
+      Use case resumes from Step 2.  
 
 **Use Case: UC08 - List all lessons**
 
@@ -452,13 +447,13 @@ Precondition: Student exists in the system.
 * **1a**. TutorEase detects bad or wrongly formatted inputs.
     * **1a1**. TutorEase prompts Tutor with correct format.
     * **1a2**. Tutor enters new data.  
-      Steps 1a1 to 1a2 are repeated until the data entered are correct.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
       Use case resumes from Step 2.  
-
-* **1b**. No lessons were found with the entered keyword.
-    * **1b1**.TutorEase displays an error message, showing no lessons have been found with the given keyword.
-    * **1b2**. Tutor enters a new keyword or cancels the search.  
-      Use case resumes from Step 2 or ends if cancelled.
+<br>
+* **1b**. No lessons found matching the entered keyword.
+    * **1b1**. TutorEase displays a message letting Tutor know that no lessons were found with the given keyword(s).
+    * **1b2**. Tutor enters a new keyword.  
+      Use case resumes from Step 2.
 
 **Use Case: UC10 - Clear all entries**  
 
@@ -485,20 +480,18 @@ Precondition: Student exists in the system.
 1. Data Requirements:
     - Size: System must be able to handle at least 1,000 student records, with each containing personal information and lesson schedules.
     - Volatility: Contact information is not expected to be changed frequently, but lessons schedules may change frequently. System must allow quick updates without issues.
-    - Data persistency: all students and lesson data should be stored and retrievable until entry has been deleted.
+    - Data persistency: All students and lesson data should be stored and retrievable until entry has been deleted.
 1. Environment Requirements:
     - Technical Compatability: System must be compatible with _Mainstream OS_ as long as it has Java `17` or above installed.
-    - Server Requirements: stored locally.
+    - Server Requirements: Stored locally.
 1. Capacity:
     - User Capacity: System is designed for local use and therefore for 1 local user.
-    - Data Capacity: as mentioned above within Data Requirements.
+    - Data Capacity: As mentioned above within Data Requirements.
 1. Documentation:
     - User Guide: A complete user guide will be provided for tutor, detailing every command and cover common troubleshooting scenarios.
     - Developer Guide: Comprehensive developer guide will be available, to facilitate future development and maintenance.
 1. Fault Tolerance:
     - Error handling: System should handle up to 90% of incorrect inputs (incorrect date formats, missing fields or etc) without crashing and should provide meaningful error messages to guide users to correct the input.
-1. Maintability:
-    - System should have modular components that are easily replaceable or upgradable without affecting the application.
 1. Portability:
     - System must be portable across devices with different operating systems, allowing tutors to install it easily.
 1. Quality:
@@ -506,8 +499,6 @@ Precondition: Student exists in the system.
     - Testing coverage: Unit tests should cover at least 60% of codebase, ensuring high reliability during future updates.
 1. Testability:
     - Automated Testing: System should support automated unit and integration testing for continuous integration, allowing future updates to be tested without manual intervention.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -532,16 +523,35 @@ Given below are instructions to test the app manually.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
    
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the command `java -jar tutorease.jar`
+       to run the application.<br>
+       Expected: The app launches and shows the GUI with some sample data.
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    
-    1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by using the command `java -jar tutorease.jar` in the command terminal.<br>
        Expected: The most recent window size and location is retained.
+
+1. Exiting the app
+
+    1. Type the command `exit` into the command box and press enter.<br>
+       Expected: The app and GUI closes.
+
+### Listing all contacts
+
+1. List all contacts in TutorEase.
+
+    1. Prerequisite: At least one contact exists in TutorEase.
+
+    1. Test case: `contact list`<br>
+       Expected: All contacts are shown.
+
+    1. Test case: `lesson list 0`<br>
+       Expected: All contacts are shown.
 
 ### Deleting a person
 
@@ -557,6 +567,41 @@ Given below are instructions to test the app manually.
    
     1. Other incorrect delete commands to try: `contact delete`, `contact delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
+
+### Adding a lesson
+
+1. Adding a lesson when all students are shown.
+
+   1. Prerequisite: At least one student exists in the contact list.
+
+   1. Test case: `lesson add sid/1 f/10 d/11-11-2024 12:00 h/1`<br>
+      Expected: A lesson is added to the student with index 1. Details of the added lesson shown in the status message.
+   
+   1. Test case: `lesson add sid/0 f/10 d/11-11-2024 12:00 h/1`<br>
+      Expected: No lesson is added. Error details shown in the status message.
+   
+   1. Test case: `lesson add sid/1 f/10 d/11-11-2024 12:00 h/1`<br>
+      Expected: No lesson is added. Error details shown in the status message.
+
+1. Adding a lessons on filtered contact list.
+
+   1. Prerequisite: At least one student exists in the contact list.
+
+   1. Test case: `lesson add sid/1 f/10 d/11-11-2024 12:00 h/1`<br>
+      Expected: A lesson is added to the student with index 1 in the filtered contact list. Details of the added lesson shown in the status message.
+
+### Listing all lessons
+
+1. List all lessons in the schedule.
+
+   1. Prerequisite: At least one lesson exists in the lesson schedule.
+
+   1. Test case: `lesson list`<br>
+      Expected: All lessons in the lesson schedule are shown.
+
+   1. Test case: `lesson list 0`<br>
+      Expected: All lessons in the lesson schedule are shown.
 
 ### Deleting a lesson
 
@@ -610,3 +655,12 @@ Given below are instructions to test the app manually.
        student who does not have a lesson, a name that does not belong to any of the students that have 
        lessons or a word that is not in the names of the students that have lessons)<br>
        Expected: Similar to previous.
+
+### Clearing TutorEase
+
+1. Clearing TutorEase when there are contacts and lessons.
+
+    1. Prerequisites: There are multiple contacts and lessons in the contact list and lesson schedule.
+
+    1. Test case: `clear`<br>
+       Expected: All contacts and lessons are cleared.
