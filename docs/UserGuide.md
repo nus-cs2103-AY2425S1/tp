@@ -17,9 +17,9 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
     - [Editing a person](#editing-a-person--edit)
     - [Adding history to a person](#adding-history-to-a-person--log)
     - [Remarking a person](#remarking-a-person--remark)
-    - [Single page person view](#single-page-person-view-view)
-    - [Adding a Property](#adding-a-property-addproperty)
-    - [Closing single page person view](#closing-single-page-person-view-close)
+    - [Single page person view](#single-page-person-view--view)
+    - [Adding a Property](#adding-a-property--addproperty)
+    - [Closing single page person view](#closing-single-page-person-view--close)
     - [Locating persons by name](#locating-persons-by-name-find)
     - [Marking a person as favourite](#marking-a-person-as-favourite-favourite)
     - [Deleting a person](#deleting-a-person--delete)
@@ -29,9 +29,9 @@ RealConnect is a **desktop app for managing contacts, optimized for use via a Co
     - [Birthday Reminder](#birthday-reminder)
 4. [FAQ](#faq)
 5. [Known issues](#known-issues)
-4. [Parameter Requirements](#parameter-requirements)
-5. [Command Summary](#command-summary)
-6. [Coming Soon](#coming-soon)
+6. [Parameter Requirements](#parameter-requirements)
+7. [Command Summary](#command-summary)
+8. [Coming Soon](#coming-soon)
 
 
 --------------------------------------------------------------------------------------------------------------------
