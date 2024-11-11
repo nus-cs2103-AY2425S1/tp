@@ -19,6 +19,7 @@ public class MedConContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        assert person != null;
         return person.getMedCons().stream()
                                   .anyMatch(medCon -> keywords.stream()
                                   .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(medCon.medConName, keyword)));
