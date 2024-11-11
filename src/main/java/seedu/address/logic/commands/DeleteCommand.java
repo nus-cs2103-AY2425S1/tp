@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         Set<Tag> removedTags = personToDelete.getTags();
         model.deletePerson(personToDelete);
-        model.getActiveTags().decrementTag(removedTags);
+        model.getActiveTags().decrementTags(removedTags);
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
