@@ -16,7 +16,8 @@ TAHub simplifies the role of Teaching Assistants by providing a centralized hub 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-If you don't have Java, see this installation [guide](https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html).
+To check your Computer's Java Version, see this [guide](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line).<br>
+If you don't have Java, see this installation [guide](https://docs.oracle.com/en/java/javase/23/install/overview-jdk-installation.html).<br>
 
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F13-1/tp/releases).<br>
@@ -575,8 +576,33 @@ _Details coming soon ..._
 
 ## FAQ
 
+**Q**: The Command I entered does not work. What's Wrong?<br>
+**A**: Check the Instructions for the Command Format in [Features](#features). Refer to the Examples provided as necessary.<br>
+
+**Q**: Can I run TAHub on a Windows, Mac or Linux Computer?<br>
+**A**: Yes. If your Computer has Java 17 or above installed, TAHub will work on Windows, Mac, and Linux Computers.<br>
+
+**Q**: Will editing / deleting Students in the Student List change the details of existing students in the Consultation / Lesson List?<br>
+**A**: Yes. Any changes made to Students will be reflected immediately in the Consultation & Lesson List.<br>
+
+**Q**: Does TAHub require Internet Connection?<br>
+**A**: No. After installation, TAHub does not require internet connection.
+
+**Q**: Where is the data for TAHub stored?<br>
+**A**: TAHub data are saved automatically as a JSON file in `[JAR file location]/data/addressbook.json`. You can make a backup of the file if you wish to.<br>
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAHub home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAHub home folder.<br>
+
+**Q**: Do I need to manually save the data?<br>
+**A**: TAHub saves automatically after any command that modifies the data. There is no need to save manually.<br>
+
+**Q**: Can I edit the JSON Data File directly<br>
+**A**: You are strongly <b>not</b> encouraged to edit the JSON data file directly.
+You can use the commands as mentioned in the [Features](#features) to augment any data.
+Should the changes made to the data file causes the format to be invalid, TAHub will discard all data and start with an empty data file.
+It is highly recommended to make a copy of the date file before editing it.
+However, Advanced users are welcome to update data directly by editing that data file.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
