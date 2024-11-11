@@ -141,7 +141,7 @@ The GUI is broken down into different **sections** as shown in the image below:
 1. **Command Box:** Type your commands here to interact with the application.
 2. **Result Display Box:** Displays the result of commands.
 3. **Patient List:** Displays all the patients in the application.
-4. **Task List:** Displays all the tasks for all patients.
+4. **Task List:** Displays all the tasks for all patients in the application.
 5. **Menu Bar:** Contains the `File` and `Help` menu. (to exit or view the help menu)
 
 [⬆️ Back to Table of Contents](#table-of-contents)
@@ -210,30 +210,30 @@ This section provides a detailed explanation of the features available in NovaCa
 
   `COMMAND prefix/PARAMETERS…​`
 
-  e.g. `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, 
-  * `add` is the `COMMAND`, 
-  * `n/`, `p/` and `e/` are `prefixes` and 
-  * `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are `PARAMETERS`.
+  e.g. `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+  * `add` is the `COMMAND`
+  * `n/`, `p/`, `e/` and `a/` are `prefixes`
+  * `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are `PARAMETERS`<br></br>
 
 * Words in `UPPER_CASE` are the [parameters](#10-glossary) **to be supplied by the user**.<br>
   e.g. in `add n/NAME`, `NAME` is a [parameter](#10-glossary) which can be used as `add n/John Doe`.
 
 * [Items in square brackets](#10-glossary) `[]` are **optional**.<br>
   e.g. `n/NAME [t/TAG]` can be used as:
-  * `n/John Doe t/Diabetic` , or as 
-  * `n/John Doe`.
+  * `n/John Doe t/Diabetic`
+  * `n/John Doe`.<br></br>
 
 * Items with `…`​ after them **can be used multiple times**, including zero times.<br>
   e.g. `[t/TAG]…​` can be used as:
   * ` ` (i.e. 0 times), 
   * `t/Diabetic`, 
-  * `t/Diabetic t/Allergic to shellfish` etc.
+  * `t/Diabetic t/Allergic to shellfish` etc.<br></br>
 
 * Parameters can be in **any order**.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * **Extraneous parameters** for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `listincomplete` and `listtask`) **will be ignored**.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. if the one inputs `help 123`, it will be interpreted as `help`.
 
 * All commands are **case-sensitive**.<br>
   e.g. `addtask 1 d/Eat medication at noon` is valid while `addTask 1 d/Eat medication at noon` is invalid, as command `addtask` is case-sensitive.
@@ -305,7 +305,7 @@ In NovaCare, these commands will allow you to modify your list of patients to su
 **Tip:**
 * A patient can have any number of tags (including 0).
 * A patient can have multiple tags.
-* Use `edit` command if you made a mistake in adding a patient.
+* Use `edit` [command](#6-2-3-editing-a-patient-edit) if you made a mistake in adding a patient.
 * Input parameters can be written in any order.
 </box>
 
@@ -379,7 +379,7 @@ Edited patient: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address
 
 #### 6.2.4 Locating patients by name: `find`
 
-**Finds patients whose name contains any of the given keywords.**
+**Finds all patient(s) whose name contains any of the given keywords.**
 
 :pencil: Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -438,7 +438,7 @@ Deleted Patient: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 3
 
 #### 6.2.6 Adding emergency contact: `emergency`
 
-**Adds an emergency contact and details to a patient in NovaCare.**
+**Adds emergency contact details to a patient in NovaCare.**
 
 :pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 
@@ -468,7 +468,7 @@ Added emergency contact to John Doe: Tom Tan, 91237171
 
 #### 6.2.7 Deleting emergency contact: `deleteemergency`
 
-**Deletes an emergency contact and its details from a patient in NovaCare.**
+**Deletes the emergency contact details from a patient in NovaCare.**
 
 :pencil: Format: `deleteemergency INDEX`
 
@@ -516,7 +516,7 @@ Priority level 2 successfully set for John Doe
 
 #### 6.2.9 Deleting priority level: `deletelevel`
 
-**Deletes a priority level to a patient in NovaCare, which resets it to the default value **3**.**
+**Deletes a priority level to a patient in NovaCare, resetting it to the default value level 3.**
 
 :pencil: Format: `deletelevel INDEX` or `priority INDEX l/reset`
 
@@ -615,7 +615,7 @@ Deleted Task: Eat paracetamol 1000mg for Betsy Crower
 
 #### 6.3.3 Marking a Task: `marktask`
 
-**Marks a task at a specific index.**
+**Marks a task at a specific index as "complete".**
 
 :pencil: Format: `marktask INDEX`
 
@@ -638,7 +638,7 @@ Marked task as complete: Clear diapers for John Doe
 
 #### 6.3.4 Unmarking a Task: `unmarktask`
 
-**Unmarks a task at a specific index.**
+**Unmarks a task at a specific index to be "incomplete".**
 
 :pencil: Format: `unmarktask INDEX`
 
@@ -676,7 +676,7 @@ Expected output:
 
 #### 6.3.6 Listing Tasks: `listtask`
 
-**Lists all tasks for all patients in NovaCare.**
+**Lists all tasks in NovaCare.**
 
 :pencil: Format: `listtask`
 
@@ -691,7 +691,7 @@ Listed all tasks
 
 #### 6.3.7 Listing Incomplete Tasks: `listincomplete`
 
-**Lists all incomplete tasks for all patients in NovaCare.**
+**Lists all "incomplete" tasks in NovaCare.**
 
 :pencil: Format: `listincomplete`
 
@@ -712,7 +712,7 @@ In NovaCare, these are the default commands for getting help, clearing and savin
 
 #### 6.4.1 Viewing help: `help`
 
-**Shows a message explaining how to access the help page.**
+**Shows the help window.**
 
 :pencil: Format: `help`
 
@@ -790,7 +790,7 @@ Furthermore, certain edits can cause NovaCare to have unexpected behavior
 </box>
 
 [⬆️ Back to Table of Contents](#table-of-contents)
-<br></br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. FAQ
@@ -836,6 +836,7 @@ Furthermore, certain edits can cause NovaCare to have unexpected behavior
 | **List**                     | `list`                                                                                                                                                   |
 | **Delete**                   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
+<br>
 
 ### 9.2 Task-Related Commands:
 | Action              | Format, Examples                                                                   |
@@ -847,7 +848,7 @@ Furthermore, certain edits can cause NovaCare to have unexpected behavior
 | **Mark Task**       | `marktask INDEX`<br> e.g., `marktask 1`                                            |
 | **Unmark Task**     | `unmarktask INDEX`<br> e.g., `unmarktask 1`                                        |
 | **List Incomplete** | `listincomplete`                                                                   |
-
+<br>
 
 ### 9.3 Other Commands:
 | Action    | Format, Examples |
@@ -857,6 +858,8 @@ Furthermore, certain edits can cause NovaCare to have unexpected behavior
 | **Exit**  | `exit`           |
 
 [⬆️ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## 10. Glossary
 As you read through the user guide, you may come across some terms that are unfamiliar to you. Here is a glossary of terms that you may encounter:
