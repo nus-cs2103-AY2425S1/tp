@@ -156,6 +156,7 @@ public class Member {
                 .findFirst() // get the first match, wrapped in Optional
                 .orElse(null); // return null if no match is found
         if (target == null) {
+            // Should not be reached given normal usage
             throw new IllegalArgumentException("Session not found: " + sessionName);
         }
         this.sessions.remove(target);
@@ -193,13 +194,14 @@ public class Member {
         return name.equals(otherMember.name)
                 && telegram.equals(otherMember.telegram)
                 && room.equals(otherMember.room)
-                && tags.equals(otherMember.tags);
+                && tags.equals(otherMember.tags)
+                && sessions.equals(otherMember.sessions);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegram, room, tags);
+        return Objects.hash(name, telegram, room, tags, sessions);
     }
 
     @Override

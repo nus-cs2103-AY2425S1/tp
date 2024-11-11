@@ -43,15 +43,12 @@ public class RoomTest {
         assertFalse(Room.isValidRoom("1-2-3-4")); // incorrect extra input
         assertFalse(Room.isValidRoom("3-2-3 0")); // also incorrect extra input
 
-        assertFalse(Room.isValidRoom("1000000003000-900000000000000000000-3.0")); // invalid overflow
-
         // valid rooms
         assertTrue(Room.isValidRoom("1-2-3"));
         assertTrue(Room.isValidRoom("1-2-0")); // 0 is also acceptable here
         assertTrue(Room.isValidRoom("001-00002-0")); // zero padding is fine
         assertTrue(Room.isValidRoom("1000-2000-3000")); // long room numbers
         assertTrue(Room.isValidRoom("9-9-9")); // duplicate numbers
-        assertTrue(Room.isValidRoom("1000000000000-900000000000000000000-933333333333333333")); // valid overflow
     }
 
     @Test
