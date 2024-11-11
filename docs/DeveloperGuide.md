@@ -634,7 +634,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `unfav 0`<br>
        Expected: No favourite restaurant is turned back to normal. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `unfav`<br>
+    1. Other incorrect Un-favourite commands to try: `unfav`<br>
        Expected: Similar to previous.
 
 
