@@ -143,7 +143,8 @@ How the parsing works:
 
 ![ModelClassDiagram.png](images%2FModelClassDiagram.png)
 **Note:** Some arrows might be blurred from the conversion between markdown and pdf. Here is a description in case arrows are not visible:
-- Person contains phone,address, email, name, tags and orders. (everything is optional except name and phone)
+- Person contains phone,address, email, name, tags ,remarks and orders. (everything is optional except name and phone)
+- Orders contain remarks (optional).
 - Customer and Supplier inherit from person.
 - Customer contains information (optional) and Supplier contains ingredients supplied (optional).
 - ModelManager has a filtered number of persons. UniquePersonList has all persons in the address book.
