@@ -202,7 +202,7 @@ Examples:
 
 Adds an emergency contact's number to the specified person in the student list.
 
-Format: `addEcNumber INDEX [ep/ECNUMBER]`
+Format: `addEcNumber INDEX ep/[ECNUMBER]`
 
 <box type="tip" seamless>
 
