@@ -171,6 +171,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code allergies} and {@code appointments} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            assert toCopy != null;
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);

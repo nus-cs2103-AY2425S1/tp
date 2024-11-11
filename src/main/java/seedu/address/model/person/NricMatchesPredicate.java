@@ -22,6 +22,7 @@ public class NricMatchesPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        assert person != null;
         return person.getNric().equals(nric);
     }
 
