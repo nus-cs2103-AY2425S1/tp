@@ -390,11 +390,11 @@ Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 * No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
 * Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo 02-05` will return `Alex Yeah`.
+  e.g. ` condo 02-05` will return `Alex Yeah` and `David Li`.
 
 Examples:
 * `findBuy condo` returns `Alex Yeoh`
-* `findBuy condo 02-05` returns `Alex Yeoh`<br>
+* `findBuy condo 02-05` will return `Alex Yeoh` and `David Li` <br>
   ![result for findBuy condo 02-05'](images/findProperty.png)
 
 
@@ -417,7 +417,6 @@ Format: `findSell KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findSell condo` returns `Alex Yeoh`
 * `findSell condo 02-05` returns `Alex Yeoh`<br>
-  ![result for findBuy condo 02-05'](images/findProperty.png)
 
 ## Listing Entries Commands
 
