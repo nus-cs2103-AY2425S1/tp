@@ -524,6 +524,8 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 
 #### Importing [CSV](#csv) Files: `import`
 
+The `import` command allows you to bring data from a CSV file into the application, enabling seamless population of your contacts database from external sources.
+
 **Format**: `import FILE_PATH`
 
 **[Absolute Path](#absolute-path)**:
@@ -542,13 +544,18 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 
 <div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
 - Windows paths use backslashes (e.g., `C:\\Users\\username\\data\\File.csv`).
-- Verify file format and read permissions.
+- Verify the file format is `.csv` and that you have read permissions.
 </div>
 
 **Troubleshooting**:
-- For errors like "file not found," confirm the path type (absolute vs. relative) and the file's existence.
+- For errors such as "file not found," confirm the path type (absolute vs. relative) and the file’s existence.
+- Ensure the application has access rights to the specified directory.
+
+---
 
 #### Exporting [CSV](#csv) Files: `export`
+
+The `export` command is used to save your current contacts database into a CSV file, enabling data sharing and backup.
 
 **Format**: `export FILE_PATH`
 
@@ -566,12 +573,13 @@ To delete all `Y3` tags from contacts, simply use `filtertag Y3` followed by `de
 - Relative: `export ./data/Output.csv`
 
 <div markdown="span" class="alert alert-info"> 📂 **Important Notes**:
-- Ensure directories exist before exporting. For Windows, use `\\` or `\\`.
+- Ensure that the directories exist before exporting. For Windows paths, use double backslashes (e.g., `C:\\Users\\user\\data\\File.csv`).
 - Files may be overwritten without warning.
 </div>
 
 **Troubleshooting**:
-- Confirm the file path is valid and distinguish between absolute and relative paths as needed. Adjust directory permissions if "permission denied" errors occur.
+- If an error occurs during export (e.g., "access denied"), check your write permissions for the specified directory.
+- Confirm the path ends with `.csv` to avoid format issues.
 
 ### Saving the data
 
