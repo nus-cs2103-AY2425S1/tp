@@ -128,6 +128,9 @@ class JsonAdaptedPerson {
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
         final Role modelRole = new Role(role);
 
         if (worker == null) {

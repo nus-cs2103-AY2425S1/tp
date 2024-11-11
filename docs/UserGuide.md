@@ -6,9 +6,14 @@
 
 # LogiLink User Guide
 
-LogiLink allows you, as a logistics coordinator, to manage your contacts on your desktop with keyboard commands. 
+LogiLink is an all-in-one management tool designed for you, a logistics coordinator/manager, to efficiently manage your contacts<sup>1</sup> and their associated delivery information from your desktop.
+Using only keyboard commands, you can easily add, edit, find, sort, and organize contacts, track delivery details and statuses, archive past transactions (— and much more!).
+<br><sup><small>1</small></sup> <small>"Contacts" referring to either employees or clients.</small>
 
-If you type fast, you can complete your contact management tasks faster with LogiLink than with mouse-based apps.
+
+If you type fast, you can complete your contact and delivery management tasks faster with LogiLink than with mouse-based apps.
+
+Currently, LogiLink is targeted towards a Singaporean userbase, with international support planned for future iterations. 
 
 <!-- * Table of Contents -->
 * [Quick start](#quick-start)
@@ -47,6 +52,8 @@ If you type fast, you can complete your contact management tasks faster with Log
 1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
+   - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.
+   ![openinterminal](images/openinterminal.png)
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -73,8 +80,8 @@ If you type fast, you can complete your contact management tasks faster with Log
 
 **Notes about the command format:**
 * There are two windows in this program:
-  - Main window: the default window you see when opening LogiLink.
-  - Inspect window: the window you see when inspecting a contact.<br></br>
+  - <u>**Main window**</u>: the default window you see when opening LogiLink.
+  - <u>**Inspect window**</u>: the window you see when inspecting a contact.<br></br>
 
 * Words in `UPPER_CASE` are parameters you need to provide.<br>
   e.g. In `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
@@ -104,7 +111,8 @@ Note:
 * Does not show an exhaustive list of all available commands, only the most helpful. 
 
 <box type="tip" seamless>
-**Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
+
+**Tip:** You can use the TAB, ENTER and ESC keys to navigate the help window.
 </box>
 
 Format: `help`
@@ -118,6 +126,8 @@ Adds a contact to the contacts list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
 
+* `ADDRESS` is further split into "`ADDRESS LINE`, s`POSTAL CODE`", where both parameters are required.
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/employee a/Newgate Prison, S123456 p/12345678 t/criminal`
@@ -125,9 +135,9 @@ Examples:
 <br>
 Note: 
 
-* `NAME` is required to be unique, most users will not save 2 `Alex` into their contacts, they will distinguish them.
-* `EMAIL` and `PHONE` can be duplicated to give the user freedom, but there will be a warning.
-
+* In order to keep your address book organised, `NAME` has to be **unique**
+* Duplicate `EMAIL` and `PHONE` are allowed but a warning will appear
+* The default field for `[r/ROLE]` is client if left empty.
 
 **<ins>When in the inspect window**
 
@@ -233,7 +243,7 @@ Examples:
 Archives the specified contact(s) from the contacts list.<br>
 Archived contact(s) will be less visible (greyed out) and moved to the bottom of the list.
 
-Format: `archive [INDEXES]...`
+Format: `archive INDEXES...`
 
 * Archive the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
@@ -242,6 +252,7 @@ Format: `archive [INDEXES]...`
 
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+![after archiving contact](images/archivedcontact.png)
 
 Note:
 * You will not be able to use `inspect` and `edit` for archived contacts.
@@ -255,6 +266,8 @@ Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
+![after archiving delivery](images/archiveddelivery.png)
+
 Note:
 * You will not be able to use `edit` for archived deliveries.
 
@@ -263,7 +276,7 @@ Note:
 
 Unarchives the specified contact(s) to restore their visibility in the contacts list, if they were previously archived.
 
-Format: `unarchive [INDEXES]...`
+Format: `unarchive INDEXES...`
 
 * Undoes the archive action for the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
@@ -304,7 +317,7 @@ Sorts all deliveries in the delivery list of a contact by the specified attribut
 
 Archived deliveries will be sorted separately from unarchived deliveries, and appear at the bottom of the delivery list.
 
-Format `asort by/ ATTRIBUTE`
+Format: `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: address, cost, date, eta, id, status.
 
@@ -323,7 +336,7 @@ Simply use the same format as `asort`, but replace `asort` with `dsort`.
 
 Deletes the specified contact(s) from the contacts list.
 
-Format: `delete [INDEXES]...`
+Format: `delete INDEXES...`
 
 * Deletes the contact(s) at the specified `INDEXES`.
 * The index is the number displayed next to the contact's name in the list.
@@ -347,7 +360,7 @@ Examples:
 
 Inspects a specified contact from the contacts list to see their delivery list.
 
-Format: `inspect [INDEX]`
+Format: `inspect INDEX`
 
 * Inspects the contact at the specified `INDEX`.
 * The index is the number displayed next to the contact's name in the list.
@@ -448,9 +461,9 @@ Certain changes you make to the file could cause LogiLink to behave unexpectedly
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/client a/123, Clementi Rd, S123456 t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
+**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [r/ROLE] …​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, S123456 r/client t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
 **Archive**| <ins>Both Windows:</ins><br> `archive INDEXES`<br> e.g., `archive 3`, `archive 3 4`
-**Assign** | <ins>Main Windows:</ins><br> Does not work <br><ins>Inpsect Windows:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
+**Assign** | <ins>Main Window:</ins><br> Does not work <br><ins>Inpsect Window:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
 **Back**   | <ins>Both Windows:</ins><br> `back`
 **Clear**  | <ins>Both Windows:</ins><br> `clear`
 **Delete** | <ins>Both Windows:</ins><br> `delete INDEXES`<br> e.g., `delete 3`, `delete 3 4`
@@ -459,7 +472,7 @@ Action     | Format, Examples
 **Find Delivery**| <ins>Main Window:</ins><br> Does not work <br><ins>Inspect Window:</ins><br> `finddel ITEM [MORE_ITEMS]` e.g., `finddel Monitor Mouse`
 **Help**   | <ins>Both Windows:</ins><br> `help`
 **Inspect**| <ins>Main Window:</ins><br> `inspect INDEX`<br> e.g., `inspect 2` <br><ins>Inspect Window:</ins><br> Does not work
-**List**   | <ins>Main Window:</ins><br> `list` or `list clients` or `list employees` <br><ins>Main Window:</ins><br> `list`
+**List**   | <ins>Main Window:</ins><br> `list` or `list clients` or `list employees` <br><ins>Inspect Window:</ins><br> `list`
 **Sort Ascending**| <ins>Both Windows:</ins><br> `asort by/ATTRIBUTE`
 **Sort Descending**| <ins>Both Windows:</ins><br> `dsort by/ATTRIBUTE`
 **Unarchive**| <ins>Both Windows:</ins><br> `unarchive INDEXES`<br> e.g., `unarchive 3`, `unarchive 3 4`
