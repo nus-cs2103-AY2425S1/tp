@@ -27,7 +27,7 @@ Here's a quick tip! To navigate back to the top of this page, use the `Home` key
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 
-If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMAND-F` for Mac to find exactly what you need!
+If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMAND-F` for Mac to find exactly what you need!
 
 <page-nav-print />
 
@@ -84,11 +84,11 @@ If you already know what to search for, use `CTRL-F` for Windows/Linus or `COMMA
 | **[Add Wedding](#adding-a-wedding-add-wed--aw)**                   | `add-wed w/NAME & NAME v/VENUE d/DATE` or `aw w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add-wed w/ John & June v/Orchard Hotel d/12/12/2030` or `aw w/ John & June v/Orchard Hotel d/12/12/2030` |
 | **[Delete Wedding](#deleting-a-wedding-del-wed--dw)**              | `del-wed w/NAME & NAME` or `dw w/NAME & NAME` followed by `y` or `n`<br> e.g., `del-wed w/John Loh & Jean Tan` or `dw w/John Loh & Jean Tan` followed by `y`                                     |
 | **[List Weddings](#listing-all-weddings-list-wed--lw)**            | `list-wed` or `lw`                                                                                                                                                                               |
-| **[Add Tag](#adding-tags-to-a-contact-tag-add--ta)**               | `tag-add n/NAME t/TAG...` or `ta n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James` or `ta n/John Doe t/June & James` or `ta n/John Doe t/June & James t/Jeremy & Maya`             |
-| **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG...` or `td n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James` or `td n/John Doe t/June & James t/Jeremy & Maya`             |
-| **[Filter](#filtering-contacts-by-name-and-job-filter--fil)**      | `filter n/KEYWORD` or `filter j/KEYWORD` or `fil n/KEYWORD` <br> e.g., `filter n/John` or `filter j/Photographer` or `fil n/Harry`                                                               |
+| **[Add Tag](#adding-tags-to-a-contact-tag-add--ta)**               | `tag-add n/NAME t/TAG [t/TAG]...` or `ta n/NAME t/TAG [t/TAG]...` <br> e.g., `tag-add n/John Doe t/June & James` or `ta n/John Doe t/June & James` or `ta n/John Doe t/June & James t/Jeremy & Maya`             |
+| **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG [t/TAG]...` or `td n/NAME t/TAG [t/TAG]...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James` or `td n/John Doe t/June & James t/Jeremy & Maya`             |
+| **[Filter](#filtering-contacts-by-name-and-job-filter--fil)**      | `filter [n/KEYWORD]... [j/KEYWORD]...` or `fil n[n/KEYWORD]... [j/KEYWORD]...` <br> e.g., `filter n/John` or `filter n/Sam j/Photographer` or `fil j/Caterer`                                                               |
 | **[View Wedding](#view-wedding-view-wed--vw)**                     | `view-wed NAME & NAME` or `vw NAME & NAME` <br> e.g., `view-wed John & Sarah` or `vw John & Sarah`                                                                                               |
-| **[Clear Address Book](#clearing-all-entries-in-address-book-clear-ab--cab)** | `clear-ab` followed by `y` or `n`                                                                                             |
+| **[Clear Address Book](#clearing-all-entries-in-address-book-clear-ab--cab)** | `clear-ab`  or `cab` followed by `y` or `n`                                                                                             |
 | **[Clear Wedding Book](#clearing-all-entries-in-wedding-book-clear-wb--cwb)** | `clear-wb` or `cwb` followed by `y` or `n`                                                                                             |
 | **[Exit](#exiting-the-program-exit)**                              | `exit`                                                                                                                                                                                           |
 --------------------------------------------------------------------------------------------------------------------
@@ -151,12 +151,12 @@ Each parameter is followed by examples that explains if the input is considered 
 | Parameter      | Prefix  | Definition                                        | Case-Sensitivity | Constraints                                                                                                                                                                                                                                                                                                                                                                                              | Examples                                                                                                                                              |
 |----------------|---------|---------------------------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `NAME`         | `n/`    | Name of the person.                               | Case-insensitive | - Only alphanumeric characters, spaces, `/`, and `.` are allowed. <br> - Should not be blank. <br> - If the name contains a `-`, a possible workaround is to replace the `-` with an empty spacing.                                                                                                                                                                                                      | :+1: `Muhammad Ali` <br>:+1: `Henry s/o Nathan` <br>:+1: `Robert Downey Jr.` <br>:x: `Trent Alexander-Arnold` <br>:x: `@JohnnyBoi`                    |
-| `PHONE`        | `p/`    | Phone number of the person.                       | NA               | - Only numbers and `+` are allowed. <br> - Should be at least 3 digits long. <br> - Should not be blank. <br> - There is no limit on the maximum length of phone numbers accepted to accommodate international phone numbers as well.                                                                                                                                                                    | :+1: `98765432` <br>:+1: `+65 9876 5432` <br>:x: `1234 5678 (HP) 1111-3333 (Office)`                                                                  |
+| `PHONE`        | `p/`    | Phone number of the person.                       | NA               | - Only numbers and `+` are allowed. <br> - Should be at least 3 digits long. <br> - Should not be blank. <br> - Should not have spaces in between numbers. <br> - There is no limit on the maximum length of phone numbers accepted to accommodate international phone numbers as well.                                                                                                                                                                    | :+1: `98765432` <br>:+1: `+6598765432` <br>:x: `1234 5678 (HP) 1111-3333 (Office)`                                                                  |
 | `EMAIL`        | `e/`    | Email address of the person.                      | Case-sensitive   | - Should be in the format `local-part@domain`. <br> - `local-part` should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. `local-part` may not start or end with any special characters, or contain consecutive special characters. <br> - `domain` must be at least 2 characters long, start and end with alphanumeric characters. <br> - Should not be blank. <br> | :+1: `gary@yahoo.com` <br>:x: `henry` <br>:x: `j++a@rocketmail.com`                                                                                   |
 | `ADDRESS`      | `a/`    | Address of the person.                            | Case-sensitive   | - All values are allowed. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                                                    | :+1: `Woodlands Dr 71, Blk 680C, #08-12, S721767`                                                                                                     |
 | `JOB`          | `j/`    | Occupation of the person.                         | Case-insensitive | - All values are allowed. <br> - Should not be blank. <br> - We recommend that only one job is assigned per person for a better user experience.                                                                                                                                                                                                                                                                                                                                                    | :+1: `DJ`                                                                                                                                             |
 | `TAG`          | `t/`    | A tag is the wedding associated with that person. | Case-insensitive | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the format `NAME & NAME`. <br> - Should not be blank.                                                                                                                                                                                                                                                           | :+1: `Ahmad & Esther` <br> :+1: `Kattar d/o Hanif & Xavier Lee` <br> :x: `Jerry and Stacy` <br> :x: `Farah x Adam`                                    |
-| `WEDDING NAME` | `w/`    | Name of a wedding.                                | Case-insensitive | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the exact format `NAME & NAME`. <br> - Both names must be unique <br> - Should not be blank.                                                                                                                                                                                                                    | :+1: `Henry & Terry`<br> :+1: `Eubanks Jr. & Ayesha` <br> :x: `Nwakame Dickson` <br> :x: `Siti n Syafie` <br> :x: `Jolyn &Max` <br> :x: `Sara & Sara` |
+| `WEDDING NAME` | `w/`    | Name of a wedding.                                | Case-insensitive | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the exact format `NAME & NAME`. <br> - Both names must be unique. <br> - Should not be blank.                                                                                                                                                                                                                    | :+1: `Henry & Terry`<br> :+1: `Eubanks Jr. & Ayesha` <br> :x: `Nwakame Dickson` <br> :x: `Siti n Syafie` <br> :x: `Jolyn &Max` <br> :x: `Sara & Sara` |
 | `VENUE`        | `v/`    | Location of the wedding.                          | Case-sensitive   | - All values are allowed. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                                                    | :+1: `Fullerton Hotel, Ballroom 1, #01-05`                                                                                                            |
 | `DATE`         | `d/`    | Date of the wedding.                              | NA               | - Should be in the format `DD/MM/YYY`. <br> - Only numbers and `/` are allowed. <br> - Should not be blank. <br> - The range of dates allowed are `01/01/1900` to `31/12/2099`                                                                                                                                                                                                                           | :+1: `12/12/2025` <br> :x: `12th June 2021` <br> :x: `2025-09-03` <br> :x: `31/12/1899` <br> :x: `01/01/2100`                                         |
 
@@ -171,6 +171,9 @@ Each parameter is followed by examples that explains if the input is considered 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * KnottyPlanners do not accept any empty parameters, hence, please add in a placeholder value that you choose to replace an empty input (e.g. `p/000` or `a/nil` ).
+
+* Ensure that an empty space ` ` comes before each prefix. This will prevent your inputs from being misinterpreted by KnottyPlanners.
+  eg. `edit n/john a/woodlandsj/job` will not be interpreted correctly. Rectify this by typing in `edit n/john a/woodlands j/job`.
 
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
@@ -211,8 +214,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 **IMPORTANT:**
 
-* If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
-* We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`)    
+* If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added.
+* We will also alert you when you add a different person with the same name, you can add in keywords in these situations to differentiate them 😊 (e.g. if `John` is duplicated, you can consider changing into `John Tan` or `John from school`).
 
 </box>
 
@@ -283,7 +286,7 @@ Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] 
 * Multiple inputs of the same parameter can be added but only the last one will be accepted.
 * Examples:
   - `edit n/John p/111 p/222` will edit John's phone number to `222`
-  - `edit n/John n/Gary a/Tampines Heights` will edit Gary's address to `Tampines Heights` (John's address will remain unedited)
+  - `edit n/John n/Gary a/Tampines Heights` will edit Gary's address to `Tampines Heights` (John's address will remain unedited).
 
 </box>
 
@@ -319,7 +322,7 @@ You can add a wedding to the list of weddings.
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE` / `aw w/NAME & NAME v/VENUE d/DATE`
 
 * If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
-* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`.
+* We will also alert you when you add a different wedding with the same name, you can add keywords into the wedding names in these situations to differentiate them 😊(e.g. `John & Jane Local` and `John & Jane Overseas`).
 
 ![add wedding message](images/addWeddingMsg.png)
 
@@ -345,7 +348,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 * `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
 * If you accidentally mistype or enter an unintended command before confirming, we suggest you to use `n` to cancel any pending delete operations to ensure everything runs smoothly 😊
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
-* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding
+* As we do not have an edit wedding command, please use ['del-wed'](#deleting-a-wedding-del-wed--dw) and ['add-wed'](#adding-a-wedding-add-wed--aw) to change details of a wedding.
 
 </box>
 
@@ -388,10 +391,10 @@ Format: `list-wed` / `lw`
 ### Adding Tag(s) to a Contact: `tag-add` / `ta`
 Add your contacts to a particular wedding!
 
-Format: `tag-add n/NAME t/TAG...` / `ta n/NAME t/TAG...`
+Format: `tag-add n/NAME t/TAG [t/TAG]...` / `ta n/NAME t/TAG [t/TAG]...`
 
+* At least one `TAG` field must be present.
 * The name of the tag must match the wedding that you want to add the contact to.
-
 * You can add one contact to multiple weddings in one go by specifying multiple tags in your command.
 
 <box type="important" seamless>
@@ -399,7 +402,6 @@ Format: `tag-add n/NAME t/TAG...` / `ta n/NAME t/TAG...`
 **IMPORTANT:** 
 
 * The wedding must already exist in the wedding book to successfully tag a person to a wedding.
-
 * If multiple tags of the same wedding are added, KnottyPlanners will only process one and ignore the other tags for you. 
 
 </box>
@@ -422,10 +424,10 @@ Examples:
 ### Deleting Tag(s) from a Contact: `tag-del` / `td`
 Remove your contacts from a particular wedding!
 
-Format: `tag-del n/NAME t/TAG...` / `td n/NAME t/TAG...`
+Format: `tag-del n/NAME t/TAG [t/TAG]...` / `td n/NAME t/TAG [t/TAG]...`
 
+* At least one `TAG` field must be present.
 * The name of the tag must match the wedding that you want to delete the contact from.
-
 * You can remove a contact from multiple weddings in one go by specifying multiple tags in your command.
 
 <box type="important" seamless>
@@ -433,7 +435,6 @@ Format: `tag-del n/NAME t/TAG...` / `td n/NAME t/TAG...`
 **IMPORTANT:** 
 
 * The wedding must already exist in the wedding book to successfully delete a person from a wedding.
-
 * If multiple tags of the same wedding are deleted, KnottyPlanners will only process one and ignore the other tags for you. 
 
 </box>
@@ -462,7 +463,7 @@ Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]
 * At least one of the `NAME` or `JOB` fields must be present.
 * `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`, `Photographer` will not match `Wedding Photographer`.
-* `filter` returns the largest range of matches based on your input
+* `filter` returns the largest range of matches based on your input.
 
 <box type="tip" seamless>
 
@@ -496,11 +497,11 @@ You can view a list of all contacts tagged to the specified wedding.
 
 Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
-* `view-wed` / `vw` shows participants based on wedding names that match the keyword
-* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`
+* `view-wed` / `vw` shows participants based on wedding names that match the keyword.
+* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `Sam` will not match `Sam Tan`, `ian & sky` will not match `Ian Pang & Sky Tan`.
 * Persons matching at least one keyword will not be returned (i.e. `AND` search)
-  e.g. `Alice` will not return `Alice & Bob`
+  e.g. `Alice` will not return `Alice & Bob`.
 
 <box type="warning" seamless>
 
@@ -513,8 +514,8 @@ Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 ![view-wed message](images/viewWeddingMsg.png)
 
 Examples:
-* `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding
-* `vw Ahmad & Esther` returns `Halim` who is a best man for Ahmad and `Jia Zhun` who is a photographer for that wedding
+* `view-wed Jane Lim & Tom Koh` returns `John Doe` who is a caterer for that wedding.
+* `vw Ahmad & Esther` returns `Halim` who is a best man for Ahmad and `Jia Zhun` who is a photographer for that wedding.
 
 ### Clearing All Entries in Address Book: `clear-ab` / `cab`
 
@@ -579,7 +580,7 @@ There is no need to save manually.
 
 ### Editing the Data File
 
-* KnottyPlanners data are saved automatically as a JSON file 
+* KnottyPlanners data are saved automatically as a JSON file.
   * `[JAR file location]/data/addressbook.json`.
   * `[JAR file location]/data/weddingbook.json`.
 * Advanced users are welcome to update data directly by editing that data file.
@@ -613,5 +614,5 @@ There is no need to save manually.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`)
+3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`).
 --------------------------------------------------------------------------------------------------------------------
