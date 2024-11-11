@@ -45,6 +45,13 @@ deactivate Model
 
 CleanCommand --> LogicManager : result
 deactivate CleanCommand
+
+LogicManager -> Model: pushToUndoStack(c)
+activate Model
+
+Model --> LogicManager
+deactivate Model
+
 CleanCommand -[hidden]-> LogicManager : result
 
 
