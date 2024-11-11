@@ -288,8 +288,9 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC5 - Batch delete
 **MSS**
 1. User enters a command to delete all contacts with specific tags.
-2. Cher will remove all contacts containing specified tags.
-3. Cher will show the contacts that have been removed.<br>
+2. Cher removes all contacts containing specified tags.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows the contacts that have been removed.<br>
    Use case ends.
 
 **Extensions**
@@ -307,8 +308,9 @@ Use case ends
 #### Use case: UC7 - Batch edit
 **MSS**
 1. User enters a command to edit all contacts with specific tags to new tag.
-2. Cher will change all contacts containing specified tags to the new tag.
-3. Cher will show the contacts that have been changed.<br>
+2. Cher changes all contacts containing specified tags to the new tag.
+3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
+4. Cher shows all the contacts that have the new tag.<br>
    Use case ends.
 
 **Extensions**
