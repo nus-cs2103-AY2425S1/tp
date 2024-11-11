@@ -163,7 +163,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The undo mechanism is facilitated by `Command` and `LogicManager`. `LogicManager` stores previously executed commands using a `CommandHistory` object. `Command` has the following operation:
 
-* `Command#undo()` — To be overridden by commands that are determined to be action commands.
+* `Command#undo()` — To be overridden by commands that we determine to be action commands.
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
