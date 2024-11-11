@@ -8,7 +8,7 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 * Table of Contents
 {:toc}
 
-<br>
+<div style="page-break-after: always"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -55,6 +55,7 @@ Try using the arrow key to navigate around the list until you find `John Doe`
    ![delete finished](images/quickStart_delete_2.png)
 10. That's all! Feel free to refer to the [Features](#features) below for more details on each command and other features included in CareConnect.
 
+<div style="page-break-after: always"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -83,6 +84,8 @@ Try using the arrow key to navigate around the list until you find `John Doe`
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+<div style="page-break-after: always"></div>
 
 ### Viewing help : `help`
 
@@ -399,6 +402,8 @@ If your changes to the data file makes its format invalid, CareConnect will disc
 Furthermore, certain edits can cause CareConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+<div style="page-break-after: always"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -413,6 +418,8 @@ Furthermore, certain edits can cause CareConnect to behave in unexpected ways (e
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always"></div>
 
 ## Command summary
 
