@@ -86,7 +86,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         AddCommand.MESSAGE_USAGE_DELIVERY));
             }
 
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_STATUS);
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ETA, PREFIX_ADDRESS, PREFIX_COST, PREFIX_STATUS);
             //Set default values if prefixes not present
             Eta eta = ParserUtil.parseEta(argMultimap.getValue(PREFIX_ETA).orElse("2026-10-12"));
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(
