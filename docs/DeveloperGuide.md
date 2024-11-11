@@ -299,6 +299,9 @@ Team Size: 5
 7. **Email validation**<br/>
     Update the email validation of the `Email` model to be more strict and check for a period in the domain. Currently,
     the validation permits `abc@aa`.
+8. **Long note content support**<br/>
+    Update the UI elements of notes to support text wrapping so extra long notes do not trail off with `...` but display
+    hidden content in the next line.
 
 ## **Appendix: Requirements**
 
