@@ -6,17 +6,17 @@ pageNav: 3
 
 # KnottyPlanners 💍🎀
 
-KnottyPlanners is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, KnottyPlanners can make organising weddings a walk in the park!
+KnottyPlanners is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, KnottyPlanners can make organising multiple weddings at once a walk in the park! 🌳 
+
+If you are a technical user experienced with CLI feel free to jump right into [quick start for technical users!](#quick-start-technical-users). If it's your first time, don't panic we will walk you through in this User Guide! 😊
 
 ### What is Command Line Interface? 🤔
-Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently on a computer. Don't worry if you are still unsure about CLI, we will walk you through in this User Guide! 😊
+Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently on a computer. For example, type `list` in the interface and press enter, the user interface will show you all the contacts you have, simple right! Don't worry if you are still unsure about CLI, it's very easy to pick it up! 😁
 
 ### Why use Command Line Interface ? 
 * **Efficiency:** Perform tasks faster by replacing multiple mouse clicks into a single line of text ✅
 * **Precision:** Avoid mis-clicking and mistakes as CLI will execute the exact command you type 💯
 * **Offline:** CLI does not require internet and allows you to use it anywhere 👩‍💻
-
-Here's a quick tip! To navigate back to the top of this page, use the `Home` key on Windows/Linux or `command + ↑` on Mac. 
 
 <!-- * Table of Contents -->
 ## Table of Contents
@@ -27,9 +27,14 @@ Here's a quick tip! To navigate back to the top of this page, use the `Home` key
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 
-If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMAND-F` for Mac to find exactly what you need!
-
 <page-nav-print />
+
+<box type="tips" seamless>
+
+* Here's a quick tip! To navigate back to the top of the pdf, use the `Home` key on Windows/Linux or `command + ↑` on Mac.
+* If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMAND-F` for Mac to find exactly what you need!
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +72,7 @@ If you already know what to search for, use `CTRL-F` for Windows/Linux or `COMMA
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanners.jar` command to run the application.
 
-5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
+5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details regarding each command.
 
 <box type="info" seamless>
 
@@ -186,7 +191,7 @@ Each parameter is followed by examples that explains if the input is considered 
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Ensure that an empty space ` ` comes before each prefix. This will prevent your inputs from being misinterpreted by KnottyPlanners.<br>
-  eg. `edit n/john a/woodlandsj/job` will not be interpreted correctly. Rectify this by typing in `edit n/john a/woodlands j/job`.
+  e.g. `edit n/john a/woodlandsj/job` will not be interpreted correctly. Rectify this by typing in `edit n/john a/woodlands j/job`.
 
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
@@ -485,7 +490,7 @@ Conveniently search for contacts in your address book by name and/or job.
 Format: `filter [n/KEYWORD]... [j/KEYWORD]...` / `fil [n/KEYWORD]... [j/KEYWORD]...`
 
 * At least one of the `NAME` or `JOB` fields must be present.
-* `KEYWORD` is not case-sensitive. e.g `photographer` will match `Photographer`.
+* `KEYWORD` is not case-sensitive. e.g. `photographer` will match `Photographer`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `sam` will not match `Sam Tan`, `Photographer` will not match `Wedding Photographer`.
 * `filter` returns the largest range of matches based on your input.
 
@@ -522,7 +527,7 @@ You can view a list of all contacts tagged to the specified wedding.
 Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
 * `view-wed` / `vw` shows participants based on wedding names that match the keyword.
-* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g `alice & bob` will not match `Bob & Alice`.
+* `NAME & NAME` has to be in the correct order as saved in your wedding book e.g. `alice & bob` will not match `Bob & Alice`.
 * Only full words will be matched e.g. `jak` will not match `Jake`, `Sam` will not match `Sam Tan`, `ian & sky` will not match `Ian Pang & Sky Tan`.
 * Persons matching at least one keyword will not be returned (i.e. `AND` search)
   e.g. `Alice` will not return `Alice & Bob`.
@@ -637,6 +642,6 @@ There is no need to save manually.
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 3. **Edit commands** can have multiple inputs of the same parameter but only the last input will be accepted (e.g. `edit n/John p/111 p/222` the edited phone number will become `222`).
 --------------------------------------------------------------------------------------------------------------------
