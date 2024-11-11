@@ -430,6 +430,9 @@ For the best experience:
 order with a phone number that is already in the address book, the person's name in the address book will be treated as 
 the entity who places the order.
 
+## **Q12: What is the point of having an addCustomer and addSupplier command?**
+**A:** Customers and suppliers have unique tags. Customers have an information tag while suppliers have an ingredients supplied tag. A generic person does not.
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -487,6 +490,8 @@ addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYID]... [r/REMARK
   - `p/PHONE_NUMBER`: The customer's phone number. This has to be unique in the contacts list and have more than 3 digits.
   - `o/PASTRYID`: One or more pastry IDs for the items being ordered.
   - `r/REMARK`: (Optional) Information about the customer order.
+  
+A resulting customer order will be added to Customer Order list, tagged to the date which the order enters our system.
 
 **Example:**
 ```bash
@@ -576,6 +581,8 @@ addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]... [r/
     - `p/PHONE_NUMBER`: The phone number of the supplier. This has to be unique in the contacts list and have more than 3 digits.
     - `o/INGREDIENTID`: One or more product IDs for the items being supplied.
     - `r/REMARK`: (Optional) Information about the customer order.
+
+A resulting supply order will be added to Supply Order list, tagged to the date which the order enters our system.
 
 **Example:**
 ```bash

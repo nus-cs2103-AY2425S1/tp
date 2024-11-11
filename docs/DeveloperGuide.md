@@ -142,6 +142,11 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 ![ModelClassDiagram.png](images%2FModelClassDiagram.png)
+**Note:** Some arrows might be blurred from the conversion between markdown and pdf. Here is a description in case arrows are not visible:
+- Person contains phone, email, information, name and optional tag
+- Customer and Supplier inherit from person
+- Customer and Supplier contains address
+- ModelManager has a filtered number of persons. UniquePersonList has all persons in the address book.
 
 The Model component is responsible for managing the core data of the application, structured based on the updated UML diagram.
 
@@ -909,4 +914,10 @@ Given below are instructions to test the app manually.
 2. **Replace click requirements with input commands on GUI**
 - Some GUI elements currently require a mouse click to function, such as the drop-down icon to display full contact profiles, and the refresh button. These can be replaced with inputs commands to follow the spirit of a command line application better.
 3. **Allow addition of "quantity" field when adding orders**
-- Given a scenario where a customer would order 30 Strawberry Waffles for example, it would require the user to input addCustomerOrder p/ o/1 1 1 1 1 .... (a total of 30 times) which is inefficient. The temporary solution is to add the quantity under "remarks", however we aim to add a quantity field when placing an order to reduce this redundancy.
+- Given a scenario where a customer would order 30 Strawberry Waffles for example, it would require the user to input addCustomerOrder p/ o/1 1 1 1 1 .... (a total of 30 times) which is inefficient. The resulting UI also displays Strawberry Waffles 30 times. The temporary solution is to add the quantity under "remarks", however we aim to add a quantity field when placing an order to reduce this redundancy.
+4. **Use better alignment for "Additional Details" field in customer and supplier profile, and order details under "Items" field**
+- The ingredients supplied and order details are not top aligned with the "Additional Details" and "Items" field respectively, making it less user-friendly to read. We aim to improve UI display for Contact cards in future iterations.
+5. **Allow different suppliers to offer different prices for ingredients**
+- Currently BakeBuddy assumes that the price of an ingredient is fixed no matter where it is sourced from. In future iterations we will allow differing costs for ingredients to model real world scenarios more.
+6. **Enable orders to be made for a future date**
+- Orders are tagged to the date which the order enters the system (i.e orders are tagged to the date which the order is made) currently. In future iterations we plan to allow orders to be made in advance, such as for an event scheduled for a later date.
