@@ -45,11 +45,11 @@ Health Connect is an application designed to **streamline client management** fo
     4. Otherwise, proceed to **Step 2**.
        <br>
 2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
-    1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+    1. Proceed to the [official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17`.
     2. Download the appropriate installer for Windows.
     3. After installation, follow the instructions in **Step 1**.
        <br>
-3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
+3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/latest).
    <br>
 4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
    <br>
@@ -68,12 +68,11 @@ Health Connect is an application designed to **streamline client management** fo
        <br>
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-    * `view` : Displays all contacts.
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
-    * `filter t/High Risk` : Displays all entries which are tagged High Risk.
-    * `clear` : Deletes all contacts.
-    * `exit` : Exits the app.
+    * `view`: Displays all contacts.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat`: Adds a contact named `John Doe` to the Address Book.
+    * `filter t/High Risk`: Displays all entries which are tagged High Risk.
+    * `clear`: Deletes all contacts.
+    * `exit`: Exits the app.
       <br>
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -88,11 +87,11 @@ Health Connect is an application designed to **streamline client management** fo
     4. Otherwise, proceed to step 2.
        <br>
 2. If you do not have Java `17` or above from the previous step, install the correct version of Java.
-    1. Proceed to the official website to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+    1. Proceed to the [official website](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17`: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
     2. Download the appropriate installer for Mac.
     3. After installation, follow the instructions in **Step 1**.
        <br>
-3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/tag/v1.4).
+3. Download the latest jar file [here](https://github.com/AY2425S1-CS2103T-T11-4/tp/releases/latest).
    <br>
 4. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
    <br>
@@ -111,12 +110,11 @@ Health Connect is an application designed to **streamline client management** fo
        <br>
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-    * `view` : Displays all contacts.
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat d/25th July 1989` : Adds a contact named `John Doe` to the Address Book.
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
-    * `filter t/High Risk` : Displays all entries which are tagged High Risk.
-    * `clear` : Deletes all contacts.
-    * `exit` : Exits the app.
+    * `view`: Displays all contacts.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/High Risk m/Wheat`: Adds a contact named `John Doe` to the Address Book.
+    * `filter t/High Risk`: Displays all entries which are tagged High Risk.
+    * `clear`: Deletes all contacts.
+    * `exit`: Exits the app.
       <br>
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -131,10 +129,10 @@ Health Connect is an application designed to **streamline client management** fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [p/PHONE]` can be used as `n/John Doe p/98765432` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. If the command specifies `help 123`, it will be interpreted as `help`.
@@ -144,6 +142,8 @@ Health Connect is an application designed to **streamline client management** fo
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+* If multiple tags `t/... t/...` are provided as an input only the last tag will be taken.
+    - For example: `add n/John Doe...t/Low Risk t/High Risk`. The patient John Doe will be assigned the tag `High Risk`.
 * The following are considered duplicate patients:
   * Same name AND same phone number
   * Same name AND same email
@@ -154,23 +154,28 @@ Health Connect is an application designed to **streamline client management** fo
 
 ### Parameter Constraints
 
-Constraints:
 * **NAME**
     - The string must be alphanumeric and contain at least one alphabetic character (i.e., it cannot consist entirely of numbers). Special characters allowed are space (' '), slash ('/'), and hyphen ('-').
-  
-* **PHONE NUMBER**
+    - However, since `d/` is a recognized parameter, names containing `d/o` are not accepted in this version of Health Connect (though `s/o` is allowed). 
+    - If a patient's name includes `d/o`, format it instead as such `d o`, for example, `Siti d o Raja`.
+* **PHONE**
     - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
-    - Only numeric characters are allowed
-  
+    - Only numeric characters are allowed.
 * **EMAIL**
     - Must follow a valid email format and include a domain [name]@[domain].[TLD] e.g. `name@example.com`
     - Can contain alphanumeric characters and special characters such as underscore `_`, period `.` and hyphens `-` before the `@` symbol
-
+* **ADDRESS**
+    - Address cannot be blank
+    - Since an address can consist of any combination of characters (including `/`), there are no restrictions on the input format for this field. 
+    - Be aware that adding unrecognized parameters (e.g., /g) after the address tag `a/` will not trigger an error. 
+      - For example, `add n/John Doe p/98765432 e/johnd@example.com a/123 Elm Street g/[unrecognized parameter] t/low risk m/None` 
+      will still be accepted as valid input without any errors.
 * **TAG**
     - A patient must have one of the following priority tags:
         1. `High Risk`
         2. `Medium Risk`
         3. `Low Risk`
+    - Note: tags are case-insensitive.
       
 * **ALLERGY**
     - Only include alphanumeric characters, spaces, and commas.
@@ -187,8 +192,10 @@ Constraints:
     - Can only contain numbers, '/', and spaces.
 
 * **DATE**
-    - Follows the format of d/M/yyyy
+    - Follows the format of `d/M/yyyy`
+    - `02/02/2024` and `2/2/2024` are both valid and accepted date formats.
     - Can only contain numbers and '/'
+    - No spaces are allowed within the date format. For example, `2/ 0 2/ 20 24` will result in an invalid date format error.
 
 ### Viewing help: `help`
 
@@ -202,9 +209,9 @@ Format: `help`
 
 Adds a patient to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY...` 
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG m/ALLERGY...` 
 
-[Parameter Constraints](#parameter-constraints).
+[Parameter Constraints](#parameter-constraints): `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `TAG`, `ALLERGY`
 
 Examples:
 
@@ -226,16 +233,16 @@ Format: `view`
 
 Edits an existing patient in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]...`
 
-[Parameter Constraints](#parameter-constraints).
+[Parameter Constraints](#parameter-constraints): `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `TAG`, `ALLERGY`
 
 Additional Details:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * **At least one of the optional fields must be provided**.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* When editing tags, the inputted tag will completely replace the current tag.
+* You cannot remove a person's tag using the edit feature, as the tag is a required field.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -249,13 +256,14 @@ Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-[Parameter Constraints](#parameter-constraints).
+[Parameter Constraints](#parameter-constraints): `NAME`
 
 Additional Details:
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* At least 1 keyword must be provided.
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -273,10 +281,11 @@ Filters the list to return patients who have the given features.
 
 Format: `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`
 
-[Parameter Constraints](#parameter-constraints).
+[Parameter Constraints](#parameter-constraints):`PHONE`, `EMAIL`, `ADDRESS`, `TAG`, `ALLERGY`
 
 Additional Details:
 * The search is case-sensitive.
+* At least 1 `PREFIX/FEATURE_NAME` must provided.
 * The order of the features does not matter. e.g. `t/ High Risk p/99999999` will match `p/99999999 t/ High Risk `
 * You can filter by **tag, email, allergy, address, phone number and allergies**
 * Only full words will be matched e.g. `99999999` will not match `999`
@@ -285,6 +294,7 @@ Additional Details:
 For example:
 filter t/High Risk m/Peanuts m/Dairy will return entries with the "High Risk" tag and any of the allergies "Peanuts" or "Dairy".
 filter m/Peanuts m/Dairy will return entries with either "Peanuts" or "Dairy" allergy, or both.
+* Specifying any parameters beyond those required will result in an error.
 * Filter requires at least one feature to filter by (e.g. ‘filter’ is an invalid format but ‘filter t/High Risk’ and ‘filter p/99999999’ are both accepted.
   e.g. `t/ High Risk p/99999999` will return all patients with tag `High Risk` and phone number `99999999`
 
@@ -305,7 +315,7 @@ Deletes the specified patient from the address book.
 
 Format: `delete [n/NAME] [p/PHONE] [e/EMAIL]`
 
-[Parameter Constraints](#parameter-constraints).
+[Parameter Constraints](#parameter-constraints): `NAME`, `PHONE`, `EMAIL`
 
 Additional Details:
 - Deletes the person that matches the following NAME, PHONE and/or EMAIL
@@ -324,7 +334,7 @@ Adds or updates the appointment date and time of the specified person in the add
 
 Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 
-[Parameter Constraints](#parameter-constraints).
+[Parameter Constraints](#parameter-constraints): `NAME`, `PHONE`, `EMAIL`, `DATE_TIME`
 
 Additional Details:
 * Adds or updates the next appointment date and time of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`
@@ -365,9 +375,9 @@ Examples:
 Filters the list to return patients who have an appointment of the given day. <br>
 (i.e. shows the healthcare professional's schedule for the day)
 
-Format: `schedule d/[DATE]`
+Format: `schedule d/DATE`
 
-[Parameter Constraints](#parameter-constraints).
+[Parameter Constraints](#parameter-constraints): `DATE`
 
 Additional Details:
 * Date in the `schedule` feature differs from the date in the `date` feature.
@@ -434,40 +444,18 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command Summary
 
-- **Add**: Adds a new entry with details like name, phone, email, address, tags, allergies, and dates.
-    - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE…​`
-    - Example: `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/High Risk t/colleague`
+| Action   | Format & Examples                                                                   | Examples                                                                                  |
+|----------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| Add      | `add n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG m/ALLERGY...`                    | `add n/James Ho p/98765432 e/jamesho@example.com a/123 Clementi Rd t/High Risk m/peanuts` |
+| Edit     | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]...` | `edit 2 n/James Lee e/jameslee@example.com`                                               |
+| Delete   | `delete [n/NAME] [p/PHONE] [e/EMAIL]`                                               | `delete n/Nayana p/98765432 e/nayana@gmail.com`                                           |
+| Clear    | `clear`                                                                             | -                                                                                         |
+| View     | `view`                                                                              | -                                                                                         |
+| Find     | `find KEYWORD [MORE_KEYWORDS]`                                                      | `find James Jake`                                                                         | 
+| Filter   | `filter PREFIX/FEATURE_NAME [PREFIX/FEATURE_NAME]`                                  | `filter t/High Risk`                                                                      |
+| Date     | `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`                                     | `date n/Jason Tan p/93823871 e/jasontan@gmail.com d/23/10/2024 1830`                                                                                          |
+| Schedule | `schedule d/DATE`                                                                   | `schedule d/23/10/2024`                                                                                          |
+| Exit     | `exit`                                                                              | -                                                                                         |
+| Help     | `help`                                                                              | -                                                                                         |
 
-- **Clear**: Clears all entries from the list.
-    - Format: `clear`
-
-- **Delete**: Deletes an entry at the specified index.
-    - Format: `delete [n/NAME] [p/PHONE] [e/EMAIL]`
-    - Example: `delete n/Nayana`
-
-- **Edit**: Edits an entry at the specified index with updated fields such as name, phone, email, address, or tags.
-    - Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-    - Example: `edit 2 n/James Lee e/jameslee@example.com`
-
-- **Find**: Finds entries that match the given keywords.
-    - Format: `find KEYWORD [MORE_KEYWORDS]`
-    - Example: `find James Jake`
-
-- **Filter**: Filters entries based on at least one parameter, such as name, phone, email, address, tag, or allergy.
-    - Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]`
-    - Example: `filter t/High Risk`
-
-- **View**: Displays all entries in the list.
-    - Format: `view`
-
-- **Help**: Shows help information for available commands.
-    - Format: `help`
-
-- **Appointment Date**: Sets an appointment date and time for an entry.
-    - Format: `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE_TIME`
-    - - Example: `date n/Nayana d/26/5/2024 1230`
-
-- **Schedule**: Finds schedule for user by showing patients with appointments on a specific date.
-    - Format: `schedule d/DATE`
-    - - Example: `schedule d/26/5/2004`
-
+--------------------------------------------------------------------------------------------------------------------
