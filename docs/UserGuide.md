@@ -18,11 +18,11 @@ data_coNdUctorS is a **desktop address book application for managing contact det
   - [General Notes about Command Format](#general-notes-about-command-format)
   - [Adding a Contact: add](#adding-a-contact-add)
   - [Editing a Contact: edit](#editing-a-contact-edit)
-    - [Edit by index](#edit-by-index)
-    - [Edit by name](#edit-by-name)
+  - [Edit by index](#edit-by-index)
+  - [Edit by name](#edit-by-name)
   - [Deleting a Contact: delete](#deleting-a-contact-delete)
-    - [Delete by index](#delete-by-index)
-    - [Delete by name](#delete-by-name)
+  - [Delete by index](#delete-by-index)
+  - [Delete by name](#delete-by-name)
   - [Finding Contacts by Contact Details: find](#finding-contacts-by-contact-details-find)
   - [Listing all Contacts: list](#listing-all-contacts-list)
   - [Viewing Help: help](#viewing-help-help)
@@ -327,8 +327,9 @@ Format: `list [all]... [contacts]...`
 
 <box type="definition" seamless>
 
-**Action:** Displays a list of all contacts in the address book sorted by names in alphabetical order.
-* optional parameters of `all` or `contacts` or any combinations and permutations of these two words are accepted.
+**Action:** Shows a list of all contacts in the address book.
+* Optional parameters of `all` or `contacts` or any permutations of these two words separated by spaces are accepted
+
 </box>
 
 
@@ -489,7 +490,7 @@ Assuming the above entry in the address book, the following parameters passed in
 ### Name
 - Must contain English alphabets and spaces only, with the following exceptions:
     - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
-      - A blank space must come before and after `S/O` or `D/O`
+    - A blank space must come before and after `S/O` or `D/O`
     - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
 - Must not be blank.
 - Will be automatically converted to Start Case (i.e. Only the first letter of every word is in upper-case). 

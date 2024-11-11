@@ -544,237 +544,237 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and Shutdown
 
-1. Initial launch
+Initial launch
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ---
 
 ### Adding a Contact
 
-1. Adding a valid contact
+- Adding a valid contact
 
-   1. Prerequisites: Application is open, and user is on the main contact list screen.
+   - Prerequisites: Application is open with no contacts in the list. (Execute `clear` to clear all contacts.)
    
-   1. Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny`<br>
-      Expected: A new contact named "John Doe" is added to the contact list. Status message shows "Contact added successfully."
-      
-   1. Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny` executed twice <br>
-      Expected: No contact is added. Error message will be displayed due to duplicate fields
+   - Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny`<br>
+     Expected: A new contact named "John Doe" is added to the contact list. Status message shows "Contact added successfully."
 
-   1. Test case: `add n/John Doe th/johnd123 e/john.doe(at)example.com ss/undergraduate 1 r/Admin`<br>
-      Expected: No contact is added. Error message displayed due to incorrect email format
+   - Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny` executed twice <br>
+     Expected: No contact is added. Error message will be displayed due to duplicate fields
 
-   1. Other incorrect add commands to try: `add`, `add n/`, `add th/username e/email.com`<br>
-      Expected: Error message displayed indicating missing or incorrect parameters.
+   - Test case: `add n/John Doe th/johnd123 e/john.doe(at)example.com ss/undergraduate 1 r/Admin`<br>
+     Expected: No contact is added. Error message displayed due to incorrect email format
+
+   - Other incorrect add commands to try: `add`, `add n/`, `add th/username e/email.com`<br>
+     Expected: Error message displayed indicating missing or incorrect parameters.
 
 ---
 
 ### Listing All Contacts
 
-1. Listing contacts with no additional parameters
+- Listing contacts with no additional parameters
 
-   1. Prerequisites: Application is open with multiple contacts in the list.
+   - Prerequisites: Application is open with multiple contacts in the list.
    
-   1. Test case: `list`<br>
-      Expected: All contacts are displayed in the list view. Status message shows "Listed all contacts."
+   - Test case: `list`<br>
+     Expected: All contacts are displayed in the list view. Status message shows "Listed all contacts."
 
-   1. Other variations to try: `list all`, `list contacts` or any variation of `all` and/or `contacts` after `list`<br>
-      Expected: Similar outcome to `list` command. All contacts are displayed.
+   - Other variations to try: `list all`, `list contacts` or any variation of `all` and/or `contacts` after `list`<br>
+     Expected: Similar outcome to `list` command. All contacts are displayed.
 
 ---
 
 ### Deleting a Contact
 
-1. Deleting a contact while **ALL** contacts are being shown
+- Deleting a contact while **ALL** contacts are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   - Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
-   1. Test case: `delete 1`<br>
+   - Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   - Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message.
 
-   1. Test case: `delete UNIQUE_FULL_NAME`<br>
+   - Test case: `delete UNIQUE_FULL_NAME`<br>
       Expected: If UNIQUE_FULL_NAME is in the addressbook and there is only one FULL_NAME, deletes that contact.
 
-   1. Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
+   - Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
       Expected: If NOT_UNIQUE_FULL_NAME is in the addressbook but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
 
-   1. Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
+   - Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
       Expected: If FULL_NAME_NOT_IN_LIST is not in addressbook, no contact is deleted even if the name is present in the addressbook and error details shown in the status message.
 
-   1. Test case: `delete NOT_FULL_NAME`<br>
+   - Test case: `delete NOT_FULL_NAME`<br>
       Expected: No contact is deleted and error details shown to delete by the full name of delete by index.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+   - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: No contact is deleted. Error details shown in the status message for missing or invalid fields
 
-1. Deleting a contact while **SOME** contacts are being shown
+- Deleting a contact while **SOME** contacts are being shown
 
-   1. Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
+   - Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
 
-   1. Test case: `delete 1`<br>
+   - Test case: `delete 1`<br>
       Expected: Similar to above.
 
-   1. Test case: `delete 0`<br>
+   - Test case: `delete 0`<br>
       Expected: Similar to above.
       
-   1. Test case: `delete UNIQUE_FULL_NAME`<br>
+   - Test case: `delete UNIQUE_FULL_NAME`<br>
       Expected: If UNIQUE_FULL_NAME is in the filtered list and there is only one FULL_NAME, deletes that contact.
 
-   1. Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
+   - Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
       Expected: If NOT_UNIQUE_FULL_NAME is in the filtered list but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
 
-   1. Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
+   - Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
       Expected: If FULL_NAME_NOT_IN_LIST is not in filtered list, no contact is deleted even if the name is present in the addressbook and error details shown in the status message.
 
-   1. Test case: `delete NOT_FULL_NAME`<br>
+   - Test case: `delete NOT_FULL_NAME`<br>
       Expected: No contact is deleted and error details shown to delete by the full name of delete by index.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete NOT_FULL_NAME`<br>
+   - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete NOT_FULL_NAME`<br>
       Expected: Similar to above.
 
 ---
 
 ### Editing a Contact
 
-1. Editing a contact while **ALL** contacts are being shown
+- Editing a contact while **ALL** contacts are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   - Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
    
-   1. Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
+   - Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
       Expected: First contact’s name changes to "Jane Smith" and Telegram handle to "jane_smith." Status message shows "Contact edited successfully."
 
-   1. Test case: `edit 99 n/Jane Smith`<br>
+   - Test case: `edit 99 n/Jane Smith`<br>
       Expected: No contact is edited. Error message displayed: "Error: Contact not found. Please provide a valid index."
 
-   1. Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
+   - Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
       Expected: If UNIQUE_FULL_NAME is in the addressbook and there is only one FULL_NAME, edits that contact.
 
-   1. Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
+   - Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
       Expected: If NOT_UNIQUE_FULL_NAME is in the addressbook but not unique, no contact is edited and error details shown in the status message for user to edit via index.
 
-   1. Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
+   - Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
       Expected: If FULL_NAME_NOT_IN_LIST is not in addressbook, no contact is edited even if the name is present in the addressbook and error details shown in the status message.
 
-   1. Test case: `edit NOT_FULL_NAME th/john_doe`<br>
+   - Test case: `edit NOT_FULL_NAME th/john_doe`<br>
       Expected: No contact is edited and error details shown to edit by the full name of edit by index.
 
-   1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
+   - Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
       Expected: Error message displayed for missing or invalid fields.
       
-1. Editing a contact while **SOME** contacts are being shown
+- Editing a contact while **SOME** contacts are being shown
 
-   1. Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
+   - Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
    
-   1. Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
+   - Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
       Expected: Similar to above.
 
-   1. Test case: `edit 99 n/Jane Smith`<br>
+   - Test case: `edit 99 n/Jane Smith`<br>
       Expected: Similar to above.
 
-   1. Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
+   - Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
       Expected: If UNIQUE_FULL_NAME is in the filtered list and there is only one FULL_NAME, edits that contact.
 
-   1. Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
+   - Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
       Expected: If NOT_UNIQUE_FULL_NAME is in the filtered list but not unique, no contact is edited and error details shown in the status message for user to edit via index.
 
-   1. Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
+   - Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
       Expected: If FULL_NAME_NOT_IN_LIST is not in filtered list, no contact is edited even if the name is present in the addressbook and error details shown in the status message.
 
-   1. Test case: `edit NOT_FULL_NAME th/john_doe`<br>
+   - Test case: `edit NOT_FULL_NAME th/john_doe`<br>
       Expected: No contact is edited and error details shown to edit by the full name of edit by index. 
 
-   1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
+   - Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
       Expected: Similar to above.
 
 ---
 
 ### Finding a Contact
 
-1. Finding a contact by name and role
+- Finding a contact by details
 
-   1. Prerequisites: Multiple contacts with different names and roles are present in the contact list.
+   - Prerequisites: Multiple contacts are present in the contact list.
    
-   1. Test case: `find n/John r/Admin`<br>
+   - Test case: `find n/John r/Admin`<br>
       Expected: Contacts matching "John" with role "Admin" are displayed in the list. Status message shows "Found contacts matching criteria."
 
-   1. Test case: `find n/FULL_NAME_NOT_IN_LIST r/Admin`<br>
+   - Test case: `find n/NAME_NOT_IN_LIST r/Admin`<br>
       Expected: No contacts are displayed. Status message shows "No contacts found matching the criteria."
 
-   1. Other incorrect find commands to try `find`, `find n/NOT_FULL_NAME r/ROLE_NOT_IN_LIST`<br>
+   - Other incorrect find commands to try `find`, `find n/NAME_NOT_IN_LIST r/ROLE_NOT_IN_LIST`<br>
       Expected: If no contacts match, a message appears indicating no contacts found. If an invalid role is entered, an error message displays: "Error: Invalid role specified."
 
 ---
  
 ### Saving Data
 
-1. Automatic Data Saving
+- Automatic Data Saving
 
-   1. Prerequisites: Application is running, and a contact has been added, edited, or deleted.
+   - Prerequisites: Application is running, and a contact has been added, edited, or deleted.
    
-   1. Test case: Close and reopen the application.<br>
+   - Test case: Close and reopen the application.<br>
       Expected: The changes made to contacts persist after reopening. The saved contacts appear as they were before closing the app.
 
-2. Data File Integrity
+- Data File Integrity
 
-   1. Prerequisites: The data file (`addressbook.json`) is accessible for manual editing.
+   - Prerequisites: The data file (`addressbook.json`) is accessible for manual editing.
    
-   1. Test case: Manually edit the JSON file to include an invalid format or structure (e.g., remove a required field).<br>
+   - Test case: Manually edit the JSON file to include an invalid format or structure (e.g., remove a required field).<br>
       Expected: Upon launching, the application detects the corrupted data and either resets to an empty state or prompts an error message like "Error: Invalid data format detected. Data reset to empty state."
 
 ---
 
 ### GUI Components
 
-1. Pagination
+- Pagination
 
-   1. Prerequisites: Add enough contacts to exceed a single page (e.g., 11 or more contacts as each page displays 10).
+   - Prerequisites: Add enough contacts to exceed a single page (e.g., 11 or more contacts as each page displays 10).
    
-   1. Test case: Use pagination controls (next, previous) or page navigation to view contacts on multiple pages.<br>
+   - Test case: Use pagination controls (next, previous) or page navigation to view contacts on multiple pages.<br>
       Expected: Pagination controls work as expected, allowing the user to navigate through the contact list. The status bar reflects the current page and total contacts.
 
-2. Footer Status Bar
+- Footer Status Bar
 
-   1. Prerequisites: Add or delete a contact to observe changes in the footer.
+   - Prerequisites: Add or delete a contact to observe changes in the footer.
    
-   1. Test case: Add a contact, then delete a different contact.<br>
+   - Test case: Add a contact, then delete a different contact.<br>
       Expected: The footer updates in real-time, displaying the current total contacts and the path of the data file. Status message shows the results of the last action.
 
 ---
 
 ### Additional Notes
 
-1. Testing Edge Cases
+- Testing Edge Cases
 
-   1. Prerequisites: Application is running with an open contact list.
+   - Prerequisites: Application is running with an open contact list.
    
-   1. Test case: Add or edit a contact with special characters in fields, very long inputs, or boundary values (e.g., maximum allowed length for fields).<br>
+   - Test case: Add or edit a contact with special characters in fields, very long inputs, or boundary values (e.g., maximum allowed length for fields).<br>
       Expected: The application handles special characters, lengthy inputs, and boundary values without crashing or error. If any input exceeds limits, a message such as "Error: Input exceeds allowed length" is shown.
 
-2. Common Mistakes
+- Common Mistakes
 
-   1. Prerequisites: Application is open and ready for input.
+   - Prerequisites: Application is open and ready for input.
    
-   1. Test case: Enter commonly mistaken commands or leave required fields blank (e.g., `delete` with no index, `find` with no criteria).<br>
+   - Test case: Enter commonly mistaken commands or leave required fields blank (e.g., `delete` with no index, `find` with no criteria).<br>
       Expected: Error messages are clear and descriptive, guiding the user to correct the input format. Status bar remains unaffected by failed commands.
 
-3. Data Reset
+- Data Reset
 
-   1. Prerequisites: The application has saved data that the user wishes to reset.
+   - Prerequisites: The application has saved data that the user wishes to reset.
    
-   1. Test case: Delete or replace the data JSON file and restart the application.<br>
+   - Test case: Delete or replace the data JSON file and restart the application.<br>
       Expected: The app initialises with an empty contact list, and a message indicates that no saved data was found, prompting a fresh start.
 
 ---
