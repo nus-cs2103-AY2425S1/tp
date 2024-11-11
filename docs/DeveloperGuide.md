@@ -890,7 +890,7 @@ testers are expected to do more _exploratory_ testing.
 
 ### Adding, Deleting, and Editing courses
 
-Similar to adding, deleting and editing persons, but with courses. 
+Similar to adding, deleting and editing persons, but with courses.
 
 The courses are stored in file `data/courselist.json`.
 
@@ -898,35 +898,36 @@ Warning: If any of the fields in `courselist.json` are invalid, no courses will 
 
 | Field | Format                                                                                                                                          |
 | :-----: |:------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COURSE_CODE` | must be in the form `A+xxxxB` where `A+` is 1 or more *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter. |
+| `COURSE_CODE` | must be in the form `A+xxxxB` where `A+` is 1 or more _uppercase_ letters, `xxxx` is a 4-digit number, `B` is an **optional** _uppercase_ letter. |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                 |
 Note: The course code is unique and cannot be duplicated.
-
 
 **Test sequence**
 
 Prerequisite: Ensure courses with course codes CS2103T and MA1521 are not already added.
 
 1. Adding `course-add c/COURSE_CODE n/COURSE_NAME`
+
 * 1.1 Test case: `course-add c/CS2103T n/Software Engineering`
   * Expected: A new course with course code `CS2103T` and course name `Software Engineering` is added. Success message shown.
 * 1.2 Test case: `course-add c/CS2103T n/Software Engineering`
   * Expected: Error message shown, as Course with course code `CS2103T` already exists.
 
 2. Editing `course-edit c/COURSE_CODE n/COURSE_NAME`
+
 * 2.1 Test Case: `course-edit c/CS2103T n/Software Engineering 1`.
   * Expected: The course with course code `CS2103T` is updated with the new course name `Software Engineering 1`. Success message shown.
 * 2.2 Test Case: `course-edit c/MA1521 n/Software Engineering 1`.
   * Expected: Error message shown, as Course with course code `MA1521` does not exist.
 
 3. Deleting `course-delete c/COURSE_CODE`
+
 * 3.1 Test Case: `course-delete c/CS2103T`
   * Expected: The course with course code `CS2103T` is deleted. Success message shown.
 * 3.2 Test Case: `course-delete c/MA1521`
   * Expected: Error message shown, as Course with course code `MA1521` does not exist.
 
 Note: The manual test cases are to be run sequentially (eg 1.1, 1.2, 2.1, 2.2 etc).
-
 
 ### Enrolling a student into a course and tutorial
 
@@ -991,7 +992,10 @@ Expected: Attendance cleared. Success message shown.
       **Expected**: TAHub Contacts loads with empty data.
 
 ## **Appendix: Planned Enhancements**
+
 1. Add a `course-list` command to list all courses so that user can view courses in the system.
 2. Add support for more Tutorial IDs by changing the regular expressions (i.e:`VALIDATION_REGEX`) used to accommodate other valid tutorial ids (e.g: T01A).
 3. Modify all commands that takes in `m/MATRICULATION_NUMBER` to allow option of accepting index of the person in the list.
 4. The `NAME` attribute for person shall have a maximum length of 50 characters.
+5. Add an `attendance` (or similar) command that opens the Attendance window instead of using a mouse to click the `Attendance` button.
+6. Add more detailed error messages that tell the user specifically what fields are missing instead of simply "required fields are missing"

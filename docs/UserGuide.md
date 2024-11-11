@@ -131,6 +131,8 @@ Interested? Head down to [quick start](#QUICKSTART) to get started!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### Example TA Workflow
 
 <box type="info" seamless>
@@ -308,8 +310,6 @@ The main basic commands for *TAHub Contacts*.
 
   </panel>
 </a>
-
-<div style="page-break-after: always;"></div>
 
 <a name="exit">
   <panel header="#### Exiting the program : `exit`" expanded no-close no-switch>
@@ -799,6 +799,8 @@ So be careful especially when you're using desctructive (deletion) commands!
 </a>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 <a name="CMD-SUMMARY">
 
