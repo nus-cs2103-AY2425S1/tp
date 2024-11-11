@@ -8,9 +8,9 @@
 
 Your Journey to Easier Inventory Management Starts Here! 📦
 
-InvenTrack is a simple desktop app specially designed for Inventory managers and local convenience store owners helps you manage the products and suppliers for your convenience store. It empowers you to manage your inventory and suppliers without restrictions. 
+As an inventory manager, advanced technical skills aren’t necessary to use Inventrack effectively. This guide will help you quickly understand and apply its essential features, making it easier to streamline your daily tasks. Since your main goal is accurate, efficient inventory tracking, we’ve kept instructions clear and practical, focusing on what you need to manage your store’s stock seamlessly.
 
-🎯 The app is fast and easy to use, especially if you’re comfortable typing!
+🎯 **Fast and Easy to Use:** If you’re comfortable with typing, navigating Inventrack will be especially intuitive!
 
 With InvenTrack, you can:
 
@@ -56,10 +56,10 @@ Before you can use InvenTrack, ensure you have Java version `17` or above instal
 To check if Java is installed:
   1. Open a command terminal using `cmd` in search (Command Prompt on Windows, Terminal on macOS/Linux). <br> Alternate way to open terminal: right-click on the opened folder or desktop, select `Open in terminal` option.
   2. Type the following command and press Enter:
-    ```
-    java -version
-    ```
-     If Java is installed, you should see the version number. <br> If Java is not installed, download it from the [official website](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
+      ```
+      java -version
+      ```
+If Java is installed, you should see the version number. <br> If Java is not installed, download it from the [official website](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 
 ### Step 2: Download InvenTrack
 1. Get the latest version of InvenTrack by downloading the `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T17-3/tp/releases).
@@ -83,7 +83,7 @@ To run InvenTrack, you need to open your command terminal and navigate to the fo
 To launch the application:
 1. After step 3, type the following command and press Enter:
     ```
-    java -jar addressbook.jar
+    java -jar inventrack.jar
     ```
 2. After a few seconds, the InvenTrack application should open. A window similar to the one below should appear (note that some sample data may be pre-loaded in the app):
    ![Ui](images/Ui.png)
@@ -120,6 +120,12 @@ Refer to the [Features](#features) below to know more about the commands you cou
 > #### ❗ Extraneous Parameters Ignored
 > Commands that do not require parameters (such as `help`, `exit`, and `clear`) will ignore any extra inputs.
 > - **Example**: Typing `help 123` or `help -10` will be interpreted as `help`.
+> #### 📦 Setting Current Stock to be Greater than Maximum Threshold
+> - MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+
+<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
+    <strong>📝 Note:</strong> 
+</div>
 
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px; ">
     <strong>📝 Note:</strong> 
@@ -177,11 +183,13 @@ Format: `help`
 
 Want the app to automatically complete the commands, supplier name or the product names you want?
 
-- Just press tab button on your keyboard to see the information!
+- Just press tab button on your keyboard to see the information.
+- If there is exactly one matching autocomplete option, it'll perform the completion automatically!
 
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
-    <strong>📝 Note:</strong> It works only if you press tab button from your keyboard and only for the commands, after <code>pr/</code> or <code>su/</code> currently.
+    <strong>📝 Note:</strong> It works only if you press tab button from your keyboard and only for the command names, after <code>pr/</code> or <code>su/</code> currently.
 </div>
+
 ![Autocomplete feature](images/autocomplete_feature.png)
 
 ---
@@ -200,9 +208,11 @@ Here are a few examples to help you:
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
     <strong>📝 Note:</strong>
     <ul>
-        <li>A supplier can have any number of tags (including 0).</li>
-        <li>Currently, there is no restriction in phone number format, so you can use numbers like (+65) 97136544 or even +91-97664 23668, according to any country-specific format you prefer.</li>
-        <li>No value allows usage of "/", so if you want to use "S/O" in names, it's better to use alternatives like "son of," as there is no length restriction for names.</li>
+         <li>A supplier can have any number of tags (including 0).</li>
+         <li>Currently, there is no restriction in phone number format, so you can use numbers like (+65) 97136544 or even +91-97664 23668, according to any country-specific format you prefer.</li>
+         <li>Email can be the same if different people from same company use same work email hence we don't check for duplicate in emails and phone number too, It is intended for future enhancements.</li>
+         <li>No value allows usage of "/", so if you want to use "S/O" in names, it's better to use alternatives like "son of," as there is no length restriction for names.</li>
+         <li>If you want to see the supplier you have added, use view_supplier to switch panel, as currently the UI would not show newly added supplier information.</li>
     </ul>
 </div>
 
@@ -229,12 +239,12 @@ Here are a few examples to help you:
 </div>
 
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
-    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the intended number of products you would like to have in your store for a particular product when you restock. This is to help tell the supplier what quantity is required. It might happen that CURRENT_STOCK_LEVEL maybe greater than this number because of greater number of purchase order. This helps to suit real world implementation.
 </div>
 
 ---
 
-### Assigning a product to supplier: `assign` 🧋 ➡️ 🙋‍♀️
+### Assigning a product to supplier: `assign` ➡️ 🙋‍♀️
 
 This feature allows you to connect products with their current supplier. This makes it easier to track which supplier is responsible for supplying each product in your store.
 
@@ -296,7 +306,7 @@ Here are a few examples to help you:
 </div>
 
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
-    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
+    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the intended number of products you would like to have in your store for a particular product when you restock. This is to help tell the supplier what quantity is required. It might happen that CURRENT_STOCK_LEVEL maybe greater than this number because of greater number of purchase order. This helps to suit real world implementation.
 </div>
 
 - Before executing the command
@@ -324,10 +334,6 @@ Here are a few examples to help you:
     </ul>
 </div>
 
-<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
-    <strong>📝 Note:</strong> MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
-</div>
-
 <div style="background-color: #e8f5e9; padding: 15px; border-left: 6px solid #4CAF50; margin-bottom: 15px;">
     <strong>💡 Tip:</strong> If the stock level is below the minimum stock level, the system will highlight these products in red to alert you that they need restocking.
     <br>
@@ -349,9 +355,9 @@ Format:
 
 ` view_supplier n/KEYWORD ` (For displaying specified suppliers matched with the keyword)
 
-` view_supplier t/TAG... ` (For displaying details about filtered suppliers)
+` view_supplier t/TAG... ` (For displaying details about filtered suppliers with specified tags)
 
-` view_supplier n/KEYWORD t/TAG... ` (For displaying details about filtered/sorted suppliers)
+` view_supplier n/KEYWORD t/TAG... ` (For displaying details about filtered suppliers with specified tag(s) and matched with the keyword)
 
 Here are a few examples to help you:
 - `view_supplier`
@@ -386,6 +392,11 @@ Here are a few examples to help you:
 - `view_product t/dessert`
 - `view_product t/dessert sort/i`
 - `view_product t/dessert su/Best Supplier`
+
+<div style="background-color: #e8f5e9; padding: 15px; border-left: 6px solid #4CAF50; margin-bottom: 15px;">
+    <strong>💡 Tip:</strong> The <code>sort</code> functionality can be used to easily see which products require immediate restocking, or if done in reverse, the products which are well above the minimum stock and aren't selling well.
+    <br>
+</div>
 
 ---
 
@@ -490,6 +501,12 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates the file that contains the data of your previous AddressBook home folder.
 
+**Q**: Why can we add stock level more than the maximum stock level(maximum threshold)?<br>
+**A**: MAX_STOCK_LEVEL is the intended number of products you would like to have in your store for a particular product when you restock. This is to help tell the supplier what quantity is required. <br> It might happen that CURRENT_STOCK_LEVEL maybe greater than this number because of greater number of purchase order. This helps to suit real world implementation.
+
+**Q**: Why do we have n/ and pr/ and su/ prefixes if they almost fulfill the same purpose?<br>
+**A**: n/ prefix is used for the products and supplier names who are to be newly added to the system. But pr/ and su/ prefixes are for the commands for which the products and suppliers already exist in the system. This differentiating value helps in abstraction!
+
 ---
 
 ## Known issues
@@ -501,19 +518,19 @@ _Details coming soon ..._
 
 ## Command summary 📋
 
-| Action               | Format, Examples                                                                                                                                                      |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Supplier**     | `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add_supplier n/Fresh Farms Ltd p/98765432 e/contact@freshfarms.com a/Orchard St, Suite 5` |
-| **Add Product**      | `add_product n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`<br> e.g., `add_product n/Tissue Paper st/500 su/Global Produce`                                     |
-| **Assign Product**   | `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`<br> e.g., `assign pr/Tissue Paper su/Fresh Farms Ltd`                                                                       |
-| **Unassign Product** | `unassign pr/PRODUCT_NAME su/SUPPLIER_NAME`<br> e.g., `unassign pr/Tissue Paper su/Fresh Farms Ltd`                                                                   |
-| **Set Threshold**    | `set_threshold pr/PRODUCT_NAME min/MIN_STOCK_LEVEL max/MAX_STOCK_LEVEL`<br> e.g., `set_threshold pr/Tissue Paper min/100 max/1000`                                    |
-| **Update Stock**     | `update_stock pr/PRODUCT_NAME stk/STOCK_LEVEL`<br> e.g., `update_stock pr/Tissue Paper stk/300`                                                                       |
-| **View Suppliers**   | `view_supplier [KEYWORD]`<br> e.g., `view_supplier Fresh` or `view_supplier`                                                                                          |
-| **View Products**    | `view_product [KEYWORD]`<br> e.g., `view_product Tissue` or `view_product`                                                                                            |
-| **Delete Supplier**  | `delete_supplier n/SUPPLIER_NAME`<br> e.g., `delete_supplier n/Global Produce`                                                                                        |
-| **Delete Product**   | `delete_product pr/PRODUCT_NAME`<br> e.g., `delete_product pr/Tissue Paper`                                                                                           |
-| **Autocomplete**     | Press tab to execute this feature while writing commands                                                                                                              |
-| **Clear All**        | `clear`                                                                                                                                                               |
-| **Help**             | `help`                                                                                                                                                                |
-| **Exit**             | `exit`                                                                                                                                                                
+| Action               | Format, Examples                                                                                                                                                                                                  |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Supplier**     | `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add_supplier n/Fresh Farms Ltd p/98765432 e/contact@freshfarms.com a/Orchard St, Suite 5`                                             |
+| **Add Product**      | `add_product n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`<br> e.g., `add_product n/Tissue Paper st/500 su/Global Produce`                                                                                 |
+| **Assign Product**   | `assign pr/PRODUCT_NAME su/SUPPLIER_NAME`<br> e.g., `assign pr/Tissue Paper su/Fresh Farms Ltd`                                                                                                                   |
+| **Unassign Product** | `unassign pr/PRODUCT_NAME `<br> e.g., `unassign pr/Tissue Paper`                                                                                                                                                  |
+| **Set Threshold**    | `set_threshold pr/PRODUCT_NAME [min/MIN_STOCK_LEVEL] max/MAX_STOCK_LEVEL` or `set_threshold pr/PRODUCT_NAME min/MIN_STOCK_LEVEL [max/MAX_STOCK_LEVEL]`<br> e.g., `set_threshold pr/Tissue Paper min/100 max/1000` |
+| **Update Stock**     | `update_stock pr/PRODUCT_NAME stk/STOCK_LEVEL`<br> e.g., `update_stock pr/Tissue Paper stk/300`                                                                                                                   |
+| **View Suppliers**   | `view_supplier [n/KEYWORD] [t/TAG]...`<br> e.g., `view_supplier` or `view_supplier Fresh`                                                                                                                         |
+| **View Products**    | `view_product [n/NAME] [t/TAG]... [su/SUPPLIER_NAME] [sort/i\|sort/d]` <br> e.g., `view_product Tissue` or `view_product t/household sort/i`                                                                      |
+| **Delete Supplier**  | `delete_supplier su/SUPPLIER_NAME`<br> e.g., `delete_supplier su/Global Produce`                                                                                                                                  |
+| **Delete Product**   | `delete_product pr/PRODUCT_NAME`<br> e.g., `delete_product pr/Tissue Paper`                                                                                                                                       |
+| **Autocomplete**     | Press tab to execute this feature while writing commands.                                                                                                                                                         |
+| **Clear All**        | `clear`                                                                                                                                                                                                           |
+| **Help**             | `help`                                                                                                                                                                                                            |
+| **Exit**             | `exit`                                                                                                                                                                                                            
