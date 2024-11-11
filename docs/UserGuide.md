@@ -762,8 +762,6 @@ Format: `exit-search` or `es`
 
 _This concludes the commands available in Search Mode. The following commands can be used in the normal display mode._
 
-<div style="page-break-after: always"></div>
-
 ### 5.5 Clearing All Entries : `clear`
 
 Removes all entries from the address book.
