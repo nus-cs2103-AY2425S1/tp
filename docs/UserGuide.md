@@ -25,8 +25,8 @@ done faster than traditional GUI apps.
 3. Copy the file to the folder you want to use as the _home folder_ for your Teletutors.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. <br>
-   <img src="images/Ui.png" alt="Ui" style="zoom: 40%"/>
+   A GUI similar to the one below should appear in a few seconds. <br>
+   <img src="images/Ui.png" alt="Ui" style="zoom: 50%"/>
 
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
@@ -41,6 +41,8 @@ done faster than traditional GUI apps.
    * `adds n/John Doe p/98765432 tg/G17 sn/A1234567Z` : Adds a student named `John Doe` to the Teletutor contact list.
 
    * `deletes n/John Doe` : Deletes the contact with the name John Doe.
+
+   * `deleteall` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -70,11 +72,15 @@ done faster than traditional GUI apps.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-* Extra whitespaces between words in a name will be reduced to a single whitespace, and extra whitespaces at the end of a full name will be removed. 
-  e.g. `n/John    Doe   ` will be treated as `n/John Doe`.
+* Name arguments with extra whitespaces between words will be reduced to a single whitespace. 
+  e.g. `n/John    Doe` will be treated as `n/John Doe`.
+  * Additionally, name fields do not allow Special Characters like "/". Names that include "D/O" or "S/O" should be replaced by "DO" and "SO" 
 
-* Tutorial group and student number arguments are not case-sensitive. 
-  e.g. `tg/G17` is the same as `tg/g17` and `sn/A1234567Z` is the same as `sn/a1234567z`.
+* Tutorial group and student number arguments are not case-sensitive.  
+  * Tutorial Groups must be in the format of a letter followed by two numbers i.e `G17`, `Z19`, `T15`, etc.
+      e.g. `tg/G17` is the same as `tg/g17` and `sn/A1234567Z` is the same as `sn/a1234567z`.
+
+* Student Numbers must be in the format of a letter followed by 7 numbers and a letter i.e `A1234567Z`, `a1234567z`, etc.
 
 </box>
 
@@ -205,7 +211,7 @@ Format: `deleteall`
 
 <box type="tip" seamless>
 
-**Tip:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
+**IMPORANT:** Any command that has the optional field `sn/STUDENT_NUMBER` can be used without the student number if the student number is not known. However, if there are multiple students with the same name, the student number is required to differentiate between them.
 
 </box>
 
@@ -248,6 +254,11 @@ Format : `deleteatall tg/TUTORIAL_GROUP dt/DATE`
 ### Getting Attendance : `getat`
 
 Gets attendance of student for a particular date
+
+* If `Adam Lee` is a unique name, `getat n/Adam Lee dt/2024-12-12` gets the student with the name `Adam Lee`'s attendance on `2024-12-12`.
+* If `Mary Tan` is a unique name, `getat n/Mary Tan dt/2024-09-11` gets the student with the name `Mary Tan`'s attendance on `2024-09-11`.
+* If there are multiple students with the name `Adam Lee`, `getat n/Adam Lee dt/2024-12-12 sn/A1234567Z` gets the student with the name `Adam Lee` and student number `A1234567Z`'s attendance on `2024-12-12`.
+* If there are multiple students with the name `Mary Tan`, `getat n/Mary Tan dt/2024-09-11 sn/A0123456X` gets the student with the name `Mary Tan` and student number `A0123456X`'s attendance on `2024-09-11`.
 
 Format: `getat n/NAME dt/DATE [sn/STUDENT_NUMBER]`
 
@@ -332,9 +343,18 @@ Furthermore, certain edits can cause the Teletutors to behave in unexpected ways
 
 </box>
 
-### Archiving data files `[coming in v2.0]`
+### Future Implementations `[coming in v2.0]`
 
-_Details coming soon ..._
+#### Assignment
+* View full details i.e (Name, Submission Status, Grade and Deadline) of an assignment
+  * Currently only Name, Submission Status and Grade are shown
+  * Ability to view all assignments for a Tutorial Group
+* Feedback on Assignments
+
+#### Attendance
+* Export all attendance records to Comma Separated Values (CSV) format
+  * Allows for easy exporting to other applications like Microsoft Excel
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -350,6 +370,10 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. For students with exceptionally long names, the window might not be long enough to accomodate the full name.
+4. There is currently no way for users to view `Assignment`'s Dates. Will be implemented in future versions.
+5. Input field for assignment grade is case-sensitive.
+6. Students with the same phone number can be added to the list.
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -376,4 +400,4 @@ _Details coming soon ..._
 | **Add Assignment**                              | `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`<br> e.g., `adda n/John Doe a/Assignment 1 d/2021-10-10 s/N g/100 sn/A1234567Z` |
 | **Delete Assignment**                           | `deletea n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletea n/John Doe a/Assignment 1 sn/A1234567Z`                                                             |
 | **Edit Assignment**                             | `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE]`<br> e.g., `edita n/John Doe a/Assignment 1 d/2021-10-10 s/Y g/90`                               |
-| **Add Assignment by Tutorial Group**            | `addatg tg/TUTORIAL_GROUP a/ASSIGNMENT_NAME d/DEADLINE `<br> e.g., `addatg tg/T15 a/Assignment 1 d/2021-10-10`                                                                |
+| **Add Assignment to Tutorial Group**            | `addatg tg/TUTORIAL_GROUP a/ASSIGNMENT_NAME d/DEADLINE `<br> e.g., `addatg tg/T15 a/Assignment 1 d/2021-10-10`                                                                |
