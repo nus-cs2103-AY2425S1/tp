@@ -9,7 +9,8 @@ import static tahub.contacts.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
-    public static final String MESSAGE_CONSTRAINTS = "Email must be a valid email format according to the following rules:\n"
+    public static final String MESSAGE_CONSTRAINTS = "Email must be a valid email format according "
+            + "to the following rules:\n"
             + "https://help.xmatters.com/ondemand/trial/valid_email_format.htm";
 
     // Allowed characters in email prefix
