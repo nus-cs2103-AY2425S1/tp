@@ -40,9 +40,9 @@ class JsonAdaptedStudyGroupTag {
      * adapted tag object into the model's
      * {@code StudyGroupTag} object.
      *
-     * @throws IllegalValueException
-     * if there were any data constraints violated in
-     * the adapted study group tag.
+     * @throws IllegalValueException if there were
+     *              any data constraints violated in
+     *              the adapted study group tag.
      */
     public StudyGroupTag toModelType() throws IllegalValueException {
         if (!StudyGroupTag.isValidStudyGroupName(studyGroupName)) {

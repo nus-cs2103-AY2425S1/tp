@@ -72,9 +72,9 @@ class JsonAdaptedPerson {
      * adapted person object into the model's
      * {@code Person} object.
      *
-     * @throws IllegalValueException
-     * if there were any data constraints violated in
-     * the adapted person.
+     * @throws IllegalValueException if there were
+     *              any data constraints violated in
+     *              the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<StudyGroupTag> personStudyGroupTags = new ArrayList<>();

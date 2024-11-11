@@ -23,8 +23,8 @@ public interface UserPrefsStorage {
      * Returns {@code Optional.empty()}
      * if storage file is not found.
      *
-     * @throws DataLoadingException if
-     * the loading of data from preference file failed.
+     * @throws DataLoadingException if the loading
+     *              of data from preference file failed.
      */
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 
