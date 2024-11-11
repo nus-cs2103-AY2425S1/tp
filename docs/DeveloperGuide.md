@@ -1136,9 +1136,9 @@ The team consists of 5 members.
 Given below are enhancements planned for future versions. <br>
 
 1. **Make 'Role' and 'Company Name' in the `add` command less restrictive:** 
-- Current behaviour: The current validator is too restrictive on what is allowed as `Role` and `Company Name`. Valid roles such as: C++ Developer, C# Developer, R&D Specialist are currently flagged as invalid by the validator. Similarly, valid company names such as: A*STAR, SK-II, Yahoo!, John's Bakery are also flagged as invalid by the validator. <br></br>
-- Planned enhancement: We plan to loosen the restrictions for roles and company names by adjusting the regular expressions allowed. <br></br>
-- Justification: This allows the command to be more inclusive of the possible roles and company names in the real world. <br></br>
+   - Current behaviour: The current validator is too restrictive on what is allowed as `Role` and `Company Name`. Valid roles such as: C++ Developer, C# Developer, R&D Specialist are currently flagged as invalid by the validator. Similarly, valid company names such as: A*STAR, SK-II, Yahoo!, John's Bakery are also flagged as invalid by the validator. <br></br>
+   - Planned enhancement: We plan to loosen the restrictions for roles and company names by adjusting the regular expressions allowed. <br></br>
+   - Justification: This allows the command to be more inclusive of the possible roles and company names in the real world. <br></br>
 
 2. **Improve consistency in `find` feature:** Currently, while we prevent special characters in the `Company Name` (such as ~\`!@#),  
 we did not prevent the same characters from being used as keywords for the `find` feature. This leads to an inconsistent user experience, 
