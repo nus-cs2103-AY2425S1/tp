@@ -33,6 +33,7 @@ StudentManagerPro (SMP) is a **desktop app for managing students, optimized for 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/1A s/M r/1` : Adds a student named `John Doe` to the student list.
 
    * `delete 3` : Deletes the 3rd student contact shown in the current list.
+   * `delete 3` : Deletes the 3rd student contact shown in the current list.
 
    * `clear` : Deletes all student contacts.
 
@@ -87,7 +88,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS s/SEX r/REGISTER_NU
 </box>
 
 * Adds a student to the student list with attributes as specified in the command.
-* The name should contain only alphanumeric characters and spaces, and it should not be blank.
+* The name should contain only alphanumeric characters and spaces, and it should not be blank. For names with legal operators (e.g. `Jack s/o Jason`), please write the full phrase instead (e.g. `Jack son of Jason`).
 * The phone number should only contain numbers, and it should be at least 3 digits long.
 * The email should only contain alphanumeric characters and select special characters, and it should not be blank. (The specifics will be described only if the wrong format is provided for email)
 * The address can take any values, and it should not be blank.
@@ -124,7 +125,7 @@ Examples:
 
 ### Filtering persons by name: `filter`
 
-Finds persons whose attributes contain any of the given keywords.
+Filters persons whose attributes contain any of the given keywords.
 
 Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX] [r/REGISTER_NUMBER] [en/ECNAME] [ep/ECNUMBER] [t/TAG]…​`
 
@@ -138,7 +139,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
   e.g. `999` will return `99999999`, `27899988`
 * As for register numbers and class, the entire number or class name must be provided in the command to filter
 * Note on Emergency Contact Filtering
-  * If a student does not have an emergency contact name or number saved, using filter en/ (for emergency contact names) or filter ep/ (for emergency contact numbers) will not return any results. To find these students, please use other attributes in your search criteria.
+  * If a student does not have an emergency contact name or number saved, using filter en/ (for emergency contact names) or filter ep/ (for emergency contact numbers) will not return any results. To filter these students, please use other attributes in your search criteria.
 * Support for Multiple Predicates: The filter command allows users to specify multiple values for a single attribute (e.g.multiple names) or combine multiple attributes for more refined filtering. 
   e.g. `filter n/Alex Bernice` and `filter n/Alex n/Bernice` will both display details for Alex and Bernice. This will be true for all attributes.
   e.g. `filter s/F p/99999999` will display details of a female student with the phone number 99999999.
@@ -150,7 +151,7 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
 * When only one predicate is used but multiple values are provided e.g. `filter n/Alex Bernice`, an 'OR' search is run to return the students who are either Alex or Bernice.
 * When multiple predicates and multiple values are to be filtered, both an `OR` and an`AND` search is run:
   * e.g. Student 1 - name: Alex & phone number: 99999999, Student 2 - name: Bernice & phone number: 92443567, Student 3 - name: Christine & phone number: 88888888
-  * e.g. `filter n/Alex Bernice p/99999999 92443567` where the order of the names and phone numbers match, an AND search is run to make sure that the student has matched both a name and a phone number, and an OR search is run to see if multiple students match a name and a phone number. Hence, both Alex and Bernice are returned as depicted in the image below.
+  * e.g. `filter n/Alex Bernice p/99999999 92443567` where the order of the names and phone numbers match, an AND search is run to make sure that the student has matched both a name and a phone number, and an OR search is run to see if multiple students match a name and a phone number. Hence, both Alex and Bernice out of 6 students are returned as depicted in the image below.
 ![Filter2 - Sucess.png](images%2FFilter2%20-%20Sucess.png)
   * e.g. `filter n/Alex Bernice p/92443567 99999999` where the order of the phone numbers are reversed, still, both Alex and Bernice are returned. 
   * e.g. `filter n/Alex Bernice p/99999999 92443567 88888888`, only Alex and Bernice are returned.
@@ -177,7 +178,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the student list.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `filter Betsy` followed by `delete 1` deletes the 1st person in the results of the `filter` command.
 
 ### Adding an Emergency contact's name : `addEcName`
 
