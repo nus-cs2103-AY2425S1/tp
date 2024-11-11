@@ -251,10 +251,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Visit History
 
-_{Explain here how the data archiving feature will be implemented}_
+The visit history feature allows users to save a record of visits to contacts with optional remarks. This allows social workers to better keep track of their interactions with beneficiaries. 
 
+The Model component would be altered such that each person would now store a visit history object:
+
+<puml src="diagrams/VisitHistory.puml" />
+
+It is optional to include a remark when adding a visit to the visit history. Given this implementation the person's date of last visit can be obtained from visit history.
+
+
+### \[Proposed\] Emergency Contact Expansion
+
+The emergency contact was designed to only be a phone number in the current implementation. It is intended to extend this so that the emergency contact includes a name and phone number.
+
+A current contact can be assigned as another person's emergency contact. It is also possible to create a person who is only an emergency contact. To generalize we create a class called contactable person which has all the necessary methods and values for an emergency contact:
+
+<puml src="diagrams/EmergencyContact.puml" />
+
+A person will then store an EmergencyContactablePerson as their emergency contact.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -291,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                   | I want to …​                                                               | So that I can…​                                                                                        |
 |----------|-------------------------------------------|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `* * *`  | social worker                             | delete a contact                                                           | remove the contact when I no longer serve them so that the contact list do not get too long            |
+| `* * *`  | social worker                             | delete a contact                                                           | remove the contact when I no longer serve them so that the contact list does not get too long           |
 | `* * *`  | social worker/new user                    | add contact with phone number                                              | remember the person i serve                                                                            |
 | `* * *`  | social worker/new user                    | add address                                                                | easily look up without needed to look up database/files                                                |
 | `* * *`  | social worker                             | view my list of contacts                                                   | so that i can see the beneficiaries i serve                                                            |
@@ -308,13 +324,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | social worker/expert user                 | add alternative phone number                                               | incase beneficiary cannot be reached                                                                   |
 | `* *`    | social worker/new user                    | edit contact                                                               | edit the contact without the need to delete and create a new one                                       |
 | `* *`    | forgetful individual                      | add tags which explain what service the person needs                       | remember and be able to meet the needs of beneficiaries                                                |
-| `* *`    | holder of sensitive information           | lock the SocialBook behind a password                                     | avoid having unsolicited sharing of personal information                                               |
+| `* *`    | holder of sensitive information           | lock the SocialBook behind a password                                      | avoid having unsolicited sharing of personal information                                               |
 | `* *`    | max/expert user                           | add the medicinal information of beneficiaries                             | to know when to follow up on critical medicines                                                        |
-| `* *` | new user | see a sample of the product features on display | so that I know how a feature can be used to maximise the value |
-| `*`      | has rotating beneficiaries                | remove several contacts at once, when beneficiaries no longer require care | so that I can make space for new benficiaries and not keep track of old ones                           |
+| `* *`    | new user                                  | see a sample of the product features on display                            | so that I know how a feature can be used to maximise the value                                         |
+| `*`      | has rotating beneficiaries                | remove several contacts at once, when beneficiaries no longer require care | so that I can make space for new beneficiaries and not keep track of old ones                          |
 | `*`      | max/expert user                           | know the households I need to visit on a certain day                       | so that I can schedule my day and not forget to visit any households                                   |
 | `*`      | user short on time                        | visit households that are geographically close in the same day/visit       | minimise the travelling time for myself                                                                |
-| `*`      | user switching devices                    | transfer the SocialBook contacts from one device to another              | avoid having to manually re-enter all the current contacts                                             |
+| `*`      | user switching devices                    | transfer the SocialBook contacts from one device to another                | avoid having to manually re-enter all the current contacts                                             |
 | `*`      | max/expert user                           | export all contacts to a txt file/excel file                               | so that I have a copy of all beneficiaries, past and present, in a larger database                     |
 | `*`      | max/expert user                           | record social media credentials of a contact, if they have any             | so that I can get to know their lives better and establish a closer bond                               |
 | `*`      | max/expert user                           | send reminder to my email a day before my visit                            | so that I will not forget to visit a household                                                         |
@@ -325,9 +341,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | experienced social worker                 | locate a link where I can share my views and suggestions on the app        | help the app be more user centered and helpful over time                                               |
 | `*`      | efficient person                          | create visit paths based on proximity of beneficiaries                     | to be able to serve the most beneficiaries a day                                                       |
 | `*`      | social person                             | add notes of on conversations with beneficiaries                           | develop stronger relationships by building rapport                                                     |
-
-
-*{More to be added}*
 
 ### Use cases
 
@@ -504,8 +517,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -564,8 +575,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person or persons
 
 1. Deleting a person while all persons are being shown
@@ -573,7 +582,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -586,7 +595,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Find people with names matching a particular keyword using the `find` command.
 
     1. Test case: `delete x`<br> (where x is less than or equal to the number of found persons)
-       Expected: Contact x is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Contact x is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -599,32 +608,62 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1 2`<br>
-       Expected: First and second contact are deleted from the list. Names of the deleted contacts are shown in the status message. Timestamp in the status bar is updated.
+       Expected: First and second contact are deleted from the list. Names of the deleted contacts are shown in the status message.
 
     1. Test case: `delete x y`<br> (where x,y are greater than the number of listed persons)
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Test case: `delete 0 1`<br>
-       Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message.
 
 ### Saving data
 
 1. Dealing with missing files
 
-   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Existing data is not affected.
+   1. Delete `config.json` and re-launch the app. 
+      Expected: New `config.json` created. Existing data is not affected.
 
-   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Existing data is not affected.
+   2. Delete `preferences.json` and re-launch the app. 
+      Expected: New `preferences.json` created. Existing data is not affected.
 
-   3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only).
+   3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. 
+      Expected: App starts on clean slate (i.e. with sample data only).
 
-   4. Delete `data/` or `data/socialbook.json`. Expected:  New `data/socialbook.json` created. App starts on clean slate (i.e. with sample data only).
+   4. Delete `data/` or `data/socialbook.json`. 
+      Expected:  New `data/socialbook.json` created. App starts on clean slate (i.e. with sample data only).
 
 2. Dealing with corrupted data files
 
-   1. Add `"p"` to a `"phone"` field in data file. Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contacts still exist in the contact list.
+   1. Add `"p"` to a `"phone"` field in data file. 
+      Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contacts still exist in the contact list.
 
-   2. Add a new field `"newField" : "newField"` to a person. Expected: The person with the new field is lost. The rest of the contacts still exist in the contact list.
+   2. Add a new field `"newField" : "newField"` to a person. 
+      Expected: The person with the new field is lost. The rest of the contacts still exist in the contact list.
 
-   3. Remove `"remark"` field from a person. Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
+   3. Remove `"remark"` field from a person. 
+      Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
 
-   4. Add a `","` to the `"remark"` field of a person. Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
+   4. Add a `","` to the `"remark"` field of a person. 
+      Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
+
+### Sorting of person list
+
+1. Sorting entries while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `sort n/asc`<br> 
+       Expected: Persons are sorted in ascending order according to ASCII. A message saying the list has been sorted by name in ascending order is displayed. 
+
+    1. Test case: `sort d/desc`<br>
+       Expected: Persons are sorted in descending order according to date of last visit. Where a person doesn't have a date of last visit they are at the end of the list. A message saying the list has been sorted by date of last visit in descending order is displayed.
+
+2. Editing a parameter being sorted while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Sort using `sort n/asc`
+
+    1. Test case: `edit 1 n/"name starting with a different letter"`
+       Expected: A message is displayed showing the information of the updated person. The person moves in the display list according to the position of their new name (given ascending name order).
+
+    1. Test case: `add n/hunter p/61234578`
+       Expected: A message is displayed showing the information of the added person. The person is added to the list according to the position of their name (given ascending name order).
