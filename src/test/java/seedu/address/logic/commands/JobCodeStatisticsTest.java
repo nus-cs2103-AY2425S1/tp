@@ -11,6 +11,7 @@ public class JobCodeStatisticsTest {
 
     @Test
     public void testBlankStatistics() {
+        jobCodeStatistics = new JobCodeStatistics();
         assertEquals(0, jobCodeStatistics.getN());
         assertEquals(0, jobCodeStatistics.getBP());
         assertEquals(0, jobCodeStatistics.getBC());

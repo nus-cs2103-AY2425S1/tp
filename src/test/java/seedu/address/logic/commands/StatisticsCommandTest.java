@@ -104,7 +104,6 @@ public class StatisticsCommandTest {
                 + "SWE2024: 1 applicant(s)\n" + "      N: 1      TP: 0      TC: 0      BP: 0      BC: 0      "
                 + "A: 0      R: 0\n";
         assertEquals(expectedString.trim(), stats.buildStatisticsMessage(testHashMap).trim());
-        System.out.println(stats.buildStatisticsMessage(testHashMap));
     }
 
 
