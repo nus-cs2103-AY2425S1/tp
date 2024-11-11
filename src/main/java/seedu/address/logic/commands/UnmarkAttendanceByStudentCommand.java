@@ -22,14 +22,14 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
- * Marks the attendance of a person identified using it's displayed index from the addres book as absent.
+ * Marks the attendance of a student identified using its displayed index from EduVault as absent.
  */
 public class UnmarkAttendanceByStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "umas";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the attendance of the student identified "
-            + "by the index number used in the displayed person list.\n"
+            + "by the index number used in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ATTENDANCE + "ATTENDANCE "
             + PREFIX_TUTORIAL + "TUTORIAL\n"
