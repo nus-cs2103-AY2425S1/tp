@@ -12,7 +12,7 @@ Want to form a more personal relationship full of genuine human touch? Let's mak
 FindingbrUdders is a **desktop app designed exclusively for School of Computing (SoC) students** to manage contacts and schedule meetings, keeping track of the countless friends
 you can make along the way during your university journey. As anUdder (a person in the contact book or the user), you can add new people you meet (other Udders) to the app via a simple to use
 Command Line Interface (CLI). Furthermore, you can edit, update and keep track of meetings with others in an organised fashion. 
-You will _**never forget**_ the meaningful connections you make or the meetings you have after using findingbrUdders!
+You will _**never forget**_ the meaningful connections you make or the meetings you have after using FindingbrUdders!
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -88,7 +88,7 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 
 ### Before you start...
 
-* **Udder** refers to anyone using the findingbrUdders app and all the contacts in the app
+* **Udder** refers to anyone using the FindingbrUdders app and all the contacts in the app
 * **brUdder** refers to peers or connections who are experiencing similar things as you
 * **mUdder** refers to mentor users or connections who are more experienced in a relevant field
 </box>
