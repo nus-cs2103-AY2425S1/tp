@@ -181,7 +181,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 pri/HIGH income/2000 famsize/3 t/friends t/owesMoney`
 * `add n/Betsy Crowe dob/1992-08-12 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons: `list`
+### Listing persons: `list`
 
 Shows a list of persons in the address book, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
 
@@ -488,6 +488,11 @@ Examples:
 **Info:** It is still possible to make changes to archived people
 </box>
 
+<box type="tip" seamless>
+
+**Tip:** To view the archived person, run `list archive/` or `list all/`
+</box>
+
 ### Unarchiving a person: `unarchive`
 
 Unarchives the specified person from the address book.
@@ -501,6 +506,11 @@ Format: `unarchive INDEX`
 
 Examples:
 * `list archive/` followed by `unarchive 1` unarchives the 1st person in the address book.
+
+<box type="tip" seamless>
+
+**Tip:** To view the unarchived person, run `list` or `list all/`
+</box>
 
 ### Undo the previous command: `undo`
 
