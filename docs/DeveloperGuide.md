@@ -258,14 +258,15 @@ The `LinkCommand` can be generalized for other entity-entity links. For example,
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​      | I want to …​                                     | So that I can…​                                        |
-| -------- | ------------ | ------------------------------------------------ | ------------------------------------------------------ |
+| -------- | ------------ |--------------------------------------------------|--------------------------------------------------------|
 | `* * *`  | veterinarian | create and store profiles for pet owners         | quickly access their information                       |
 | `* * *`  | veterinarian | create and store profiles for pets               | quickly access their information                       |
 | `* * *`  | veterinarian | search for pet owners by key details             | quickly find the information I need                    |
 | `* * *`  | veterinarian | search for pets by key details                   | quickly find the information I need                    |
 | `* * *`  | veterinarian | list all pet owners and pets                     | quickly access and review my client base               |
 | `* * *`  | veterinarian | delete profiles for pet owners and pets          | keep my records up to date                             |
-| `* * *`  | veterinarian | exit PawPatrol                                   | save my data and close my session safely               |
+| `* * *`  | veterinarian | save PawPatrol                                   | save my data                                           |
+| `* * *`  | veterinarian | exit PawPatrol                                   | close my session safely                                |
 | `* *`    | veterinarian | link each pet owner to their pet(s)              | easily manage owners and their associated pet(s)       |
 | `* *`    | veterinarian | edit profiles for pet owners                     | update profile information and ensure accurate records |
 | `* *`    | veterinarian | edit profiles for pets                           | update profile information and ensure accurate records |
