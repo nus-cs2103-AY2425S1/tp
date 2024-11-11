@@ -4,7 +4,7 @@ title: User Guide
 ---
 ## <a id="top"></a>
 
-**ConTActs** is a desktop application designed specifically for Teaching Assistants (TAs) to **manage student contact information efficiently**. 
+**ConTActs** is a desktop application designed specifically for Teaching Assistants (TAs) to **manage student contact information efficiently** and **keep track of their tutorial attendance**. 
 Optimised for TAs **comfortable with Command Line Interface** (CLI) commands, ConTActs exploits the speed of CLI commands while retaining the benefits of a Graphical User Interface (GUI).
 For TAs who type quickly, ConTActs provides a faster, more streamlined solution for student contact management compared to traditional GUI applications.
 
@@ -60,7 +60,7 @@ For TAs who type quickly, ConTActs provides a faster, more streamlined solution 
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/CS1101S` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/CS1101S`, `t/MA1521 t/CS1101S` etc.
+  e.g. `[t/TAG]…​` can be empty, `t/CS1101S`, `t/MA1521 t/CS1101S` etc.
 
 - For commands with only prefixes (e.g. `add`, `edit`), parameter order does not matter.<br>
   e.g. `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` are both acceptable.
