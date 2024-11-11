@@ -29,22 +29,22 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 4. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in.
 
-<div markdown="span" class="alert alert-primary">**Example:**<br/>
-On **Mac/Linux**, if you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
-    ```dtd
+    <div markdown="span" class="alert alert-primary">**Example:**<br/>
+    On **Mac/Linux**, if you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
+    ```
     cd ~/Desktop/CCA
     ```
-</div>
+    </div>
 
-<div markdown="span" class="alert alert-primary">**Example:**<br/>
-On **Windows**, if you placed `ccaconnect.jar` in the `C:\Users\User1\Desktop\CCA` folder, type in the following command:
-    ```dtd
+    <div markdown="span" class="alert alert-primary">**Example:**<br/>
+    On **Windows**, if you placed `ccaconnect.jar` in the `C:\Users\User1\Desktop\CCA` folder, type in the following command:
+    ```
     cd C:\Users\User1\Desktop\CCA
     ```
-</div>
+    </div>
 
 5. Launch the CCAConnect application by typing in the following command:
-    ```dtd
+    ```
     java -jar ccaconnect.jar
     ```
    A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
@@ -135,6 +135,12 @@ Since Telegram treats their handles as case-insensitive, CCAConnect also treats 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 A person can have any number of roles (including 0).
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
+`Member` is a **special reserved role** in CCAConnect. Attendance related commands will only work for contacts that have the `Member` role.
+
+When adding/editing a person with the role of `Member`, the spelling of `Member` in `r/Member` is case-insensitive. E.g. `r/mEmBER` will also set the person to be a `Member`.
 </div>
 
 #### Example
@@ -319,8 +325,6 @@ attendance
 #### Parameters
 This command does not take any additional parameters.
 
-If any extra input is provided, an error message will be displayed.
-
 #### Example
 ![result for 'attendance'](images/ListAttendanceResult.png)
 
@@ -341,7 +345,7 @@ mark t/TELEGRAM…​ d/DATE
 | Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
-| `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
+| `DATE`     | `d/`   | Yes         | `DATE` follows **ISO 8601 standard** with the format **YYYY-MM-DD**, e.g. `2024-10-19`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                               |
 
 #### Example
 
@@ -351,24 +355,18 @@ mark t/TELEGRAM…​ d/DATE
 
   ![result of command `mark t/alexYeoh t/berniceYu d/2024-11-07`](images/MarkCommandResult.png)
 
-* Mark attendance of contact with telegram `alexYeoh`, `berniceYu` first, then input command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07`.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**<br/>
 
-  ![result of command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07` if Alex and Bernice's attendance is marked before.png](images/RepeatedMarkCommandResult.png)
+* If the input date matches the current date, the checkbox for marked members will be automatically selected upon successful attendance marking.
 
-* Mark attendance of a non-member contact `mark t/davidLi d/2024-11-07`.
-
-  ![result of command `mark t/davidLi d/2024-11-07`](images/MarkNonMemberCommandResult.png)
-
-* Mark attendance from a list with non-exist telegrams `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`.
-
-  ![result of command `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`](images/MarkNonExistCommandResult.png)
+* If the input telegrams include members who have already been marked on input date, the result will remind user of these repeatedly marked members while still marking other members as usual.
+</div>
 
 <div markdown="span" class="alert alert-info">:exclamation: **Note:**<br/>
 Do not be alarmed if your checkbox looks different from the one displayed in the examples. The checkbox styling depends on your current operating system, and have no impact on CCAConnect's functionality.
 </div>
 
-
-### Unmarking attendance: `unmark`
+### Unmarking attendance : `unmark`
 
 Unmarks attendance for **members** with specified Telegram handles on a specific date.
 
@@ -386,7 +384,22 @@ unmark t/TELEGRAM…​ d/DATE
 | Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
-| `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
+| `DATE`     | `d/`   | Yes         | `DATE` follows **ISO 8601 standard** with the format **YYYY-MM-DD**, e.g. `2024-10-19`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                               |
+
+
+#### Example
+* `unmark t/alexYeoh t/berniceYu d/2024-11-10`
+
+    ![result of command `unmark t/alexYeoh t/berniceYu d/2024-11-10`](images/UnmarkCommandResult.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**<br/>
+
+* If the input date matches the current date, the checkbox for previously marked members will be automatically cleared upon successful attendance unmarking.
+
+* If the input telegrams include members who have already been unmarked on input date, the result will remind user of these repeatedly unmarked members while still unmarking other members as usual.
+
+</div>
+
 
 
 ### Clearing all entries: `clear`
@@ -554,7 +567,7 @@ CCAConnect contact data is automatically saved as individual [JSON](https://en.w
 | **Delete Profile**    | `deleteProfile PROFILE`                                                                       | `deleteProfile alice`                                                   |
 | **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TELEGRAM] [r/ROLE] [f/ or nf/ (NOT BOTH)]` | `edit 2 n/James Lee e/jameslee@example.com`                             |
 | **Find**              | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`                         | `find n/James n/Jake`                                                   |
-| **Sort**              | `sort ORDER`                                                                                  | `sort asc`                                                              |
+| **Sort**              | `sort ORDER`                                                                                  | `sort ASC`                                                              |
 | **Switch**            | `switch PROFILE`                                                                              | `switch alice`                                                          |
 | **List**              | `list`                                                                                        | `list`                                                                  |
 | **Help**              | `help`                                                                                        | `help`                                                                  |

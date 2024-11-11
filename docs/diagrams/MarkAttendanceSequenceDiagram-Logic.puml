@@ -1,6 +1,7 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam style strictuml
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -52,6 +53,13 @@ activate Model
 
 MarkAttendanceCommand -> MarkAttendanceCommand : findByTelegram()
 activate MarkAttendanceCommand
+
+MarkAttendanceCommand --> MarkAttendanceCommand
+deactivate MarkAttendanceCommand
+
+MarkAttendanceCommand --> MarkAttendanceCommand
+deactivate MarkAttendanceCommand
+
 
 MarkAttendanceCommand --> LogicManager : result
 deactivate MarkAttendanceCommand

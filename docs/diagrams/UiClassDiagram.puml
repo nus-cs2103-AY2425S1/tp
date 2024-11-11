@@ -31,11 +31,11 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
-MainWindow *-down-> "1" ViewPersonCard
+MainWindow *-down-  "1" CommandBox
+MainWindow *-down- "1" ResultDisplay
+MainWindow *-down- "1" PersonListPanel
+MainWindow *-down- "1" StatusBarFooter
+MainWindow *-down- "1" ViewPersonCard
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
