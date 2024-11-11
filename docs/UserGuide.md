@@ -60,7 +60,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 3. Copy the file to the folder you want to use as the _home folder_ for EduManage.
 
 4. Open a [command terminal](#6-glossary-table), `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.<br>
-   A [GUI](#6-glossary-table) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A [GUI](#6-glossary-table) similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
 
    ![Ui](images/Ui.png)
    <br><br>
@@ -264,7 +264,7 @@ Find students by either their name, level or subject(s).
 * `find l/S3 NA` returns all students tagged with level `S3 NA`.
 * `find s/MATH` returns all students tagged with subject `MATH`.
 * `find s/Math chemistry` returns all students tagged with subjects `MATH` or `CHEMISTRY`.
-* `find n/alex david` returns `Alex Yeoh`, `David Li`.<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`.<br><br>
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 ***
@@ -339,7 +339,7 @@ Views a specific student on the right side window.
 </box>
 
 **Examples:**
-* `view n/Alex Yeoh`<br>
+* `view n/Alex Yeoh`<br><br>
   ![view student](images/view_student.png)
 
 [(Back to Top)](#edumanage-user-guide)
@@ -370,7 +370,7 @@ Deletes a task from the specified student's task list.
 **Format:** `deletetask n/NAME ti/TASK_INDEX`
 * The task index refers to the index number shown in the student's task list, as circled in red in the picture below.
 * The task index **must be a positive integer** 1, 2, 3, …​ .
-
+  <br><br>
   ![viewtasks](images/viewtasks.png)
 
 **Examples:**
