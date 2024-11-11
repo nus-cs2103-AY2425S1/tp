@@ -103,7 +103,6 @@ Feel free to use this command summary table and navigate to the features that in
 | **[Clear Address Book](#clearing-all-entries-in-address-book-clear-ab-cab)** | `clear-ab` or `cab` followed by `y` or `n`                                                                                                                                                           |
 | **[Clear Wedding Book](#clearing-all-entries-in-wedding-book-clear-wb-cwb)** | `clear-wb` or `cwb` followed by `y` or `n`                                                                                                                                                           |
 | **[Exit](#exiting-the-program-exit)**                                        | `exit`                                                                                                                                                                                               |
---------------------------------------------------------------------------------------------------------------------
 
 <box type="important" seamless>
 
@@ -217,8 +216,6 @@ You can view a popup with an overview of all commands, and also a link to this u
 Format: `help`
 
 ![help message](images/helpmsg.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Adding a Contact: `add`
 
