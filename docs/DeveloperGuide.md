@@ -1029,46 +1029,46 @@ testers are expected to do more *exploratory* testing.
 <br></br>
 
 ### Chart Window
-1. Open chart window
+1. Open Chart window
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the chart window is not opened.
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the Chart window is not opened.
    
     2. Test case `/chart`<br>
        Expected: Chart window opens.
 
-2. Open chart window with invalid command format
+2. Open Chart window with invalid command format
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the chart window is not opened.
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the Chart window is not opened.
    
     2. Test case: `/chart x`<br>
        Expected: An error message stating the valid use of the `/chart` command.
 
-3. Update chart window by updating status
+3. Update Chart window by updating status
 
-   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are the internship application at index 1 is of `PENDING` status and the chart window is already opened.
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are the internship application at index 1 is of `PENDING` status and the Chart window is already opened.
    
    2. Test case: `/accept 1`<br>
-      Expected: Pie chart on chart window to update accordingly.
+      Expected: Pie chart on Chart window to update accordingly.
 
-4. Update chart window by adding an internship application
+4. Update Chart window by adding an internship application
 
-   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application, `Google` is not in list, and the chart window is already opened.
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application, `Google` is not in list, and the Chart window is already opened.
    
    2. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/31/10/24`<br>
-      Expected: Pie chart on chart window to update accordingly.
+      Expected: Pie chart on Chart window to update accordingly.
 
-5. Update chart window by deleting an internship application
+5. Update Chart window by deleting an internship application
 
-   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at are at least two internship applications and the chart window is already opened.
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at are at least two internship applications and the Chart window is already opened.
    
    2. Test case: `/delete 1`<br>
-      Expected: Pie chart on chart window to update accordingly.
+      Expected: Pie chart on Chart window to update accordingly.
 
-6. Close chart window
+6. Close Chart window
 
    1. Prerequisites: Chart window is already opened.
    
-   2. Test case: Click on the close button on the Help window. <br>
+   2. Test case: Click on the close button on the Chart window. <br>
       Expected: Chart window closes.
 
 <br></br>
