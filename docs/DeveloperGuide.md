@@ -65,7 +65,9 @@ Each of the four main components (also shown in the diagram above),
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
-<puml src="diagrams/ComponentManagers.puml" width="300"/>
+<div style="text-align: center;">
+    <puml src="diagrams/ComponentManagers.puml" width="300"/>
+</div>
 
 The sections below give more details of each component.
 
@@ -92,7 +94,9 @@ The `UI` component,
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<div style="text-align: center;">
+    <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+</div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
