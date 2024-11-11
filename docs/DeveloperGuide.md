@@ -714,9 +714,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 2. **Scalability**: The application should handle **at least 500 internship applications** without any performance issues (e.g., lag or slowness).
 3. **Cross-Platform Compatibility**: The application should run on any operating system that has **Java 17** installed.
 4. **User Accessibility**: The system should be usable by a **novice** with no prior experience using a CLI application, without much difficulty.
-5. **Project Scheduling**: The project should follow a **weekly delivery schedule**, releasing a set of features every week.
-6. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
-7. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
+5. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
+6. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
 
 <br></br>
 
