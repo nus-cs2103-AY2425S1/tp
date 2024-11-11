@@ -639,7 +639,7 @@ You can use your own VRNs that follow the format in the User Guide.
 - **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX1234C`, where:
   - `XXX` represents 1 to 3 alphabet letters.
   - `1234` represents a number up to 4-digits.
-  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore).
+  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore). Find the correct checksum [here](https://carplatemart.sg/simple-checksum/).
 
  or use the list of VRNs provided below.
 
@@ -663,21 +663,23 @@ You can use your own VRNs that follow the format in the User Guide.
 
    1. Download the jar file and copy into an empty folder
 
-   - **Option 1: Open MATER by Double-Clicking**
-     - Go to the folder where you saved the `.jar` file.
-     - **On Windows or Linux**: Double-click the `.jar` file to open it.
-     - **On Mac**: Right-click the `.jar` file, select “Open With,” and choose Java.
-
-   - **Option 2: Open MATER from the Terminal**
-     - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
-     - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
-       ```shell
-       cd path/to/your/folder
-       ```
-     - Then, type the following command and press Enter:
-       ```shell
-       java -jar mater.jar
-       ```
+      - **Option 1: Open MATER by Double-Clicking**
+         - Go to the folder where you saved the `.jar` file.
+         - **On Windows or Linux**: Double-click the `.jar` file to open it.
+         - **On Mac**: It is recommended to open MATER from the terminal (see Option 2) due to system security settings and configurations.
+         - If MATER does not open, you may need to open it from the terminal (see Option 2).
+      <br><br>
+      - **Option 2: Open MATER from the Terminal**
+         - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
+         - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
+            ```shell
+            cd path/to/your/folder
+            ```
+            - If you require help with the `cd` command, you can refer to this [link](https://www.digitalcitizen.life/command-prompt-how-use-basic-commands/) for a basic tutorial.
+         - Then, if the file name is MATER.jar, run the application with the following command:
+            ```shell
+            java -jar MATER.jar
+            ```
 
    1. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
