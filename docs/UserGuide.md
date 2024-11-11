@@ -24,7 +24,7 @@ We’ll walk you through each feature, so you can discover with ease **DLTbook**
 ⚠️ **Security Note** : To protect your data from potential manipulation, we recommend using DLTbook on a device with no
 internet connectivity.
 
-# Contents
+# Table Of Contents
 
 - [Introduction](#introduction)
 
@@ -109,9 +109,7 @@ internet connectivity.
 - is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User
   Interface** (GUI).
 
-[Back to Top]
-
-
+[Return to Table of Contents](#table-of-contents)
 
 <div style="page-break-after: always"></div>
 
@@ -191,12 +189,23 @@ Here’s how you can start using DLTbook:
 
 4. Once you're comfortable with the basics, explore the full range of [features](#features) available in DLTbook.
 
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 ## Expert's Guide
+
 
 If you have used DLTbook before, jump straight to [Setup Guide](#setup-guide) for a quick overview on basic
 commands.
 Go to the [Features](#features) section for a detailed guide on all available commands and capabilities.
 </panel>
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 # Setup Guide
 
@@ -255,11 +264,19 @@ After a few seconds, you'll see the DLTbook window:
 ![Ui](images/Ui.png)
 Note that the app initially contains some sample data.
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 # GUI summary
 
 We have labelled the various parts of DLTbook's GUI for your reference:
 
 ![GUI summary](images/GUISummary.png)
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 # Try It Out!
 
@@ -321,6 +338,10 @@ Ready to learn more? Check out the [Features](#features) section below for a com
 capabilities.
 <br>
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 # Features
 
 ## Command Overview
@@ -369,6 +390,10 @@ DLTbook supports the following commands:
 </box>
 <br>
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Basic Features
@@ -383,6 +408,11 @@ Shows a message explaining how to access the help page.
 
 #### Format: `help`
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -393,6 +423,11 @@ Clears all entries from the address book.
 
 #### Format: `clear`
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -402,6 +437,11 @@ Clears all entries from the address book.
 Exits the program.
 
 #### Format: `exit`
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 
 <br>
 
@@ -435,6 +475,11 @@ Adds a contact to the address book.
 
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -456,6 +501,11 @@ Deletes the specified contact from the address book.
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 
 <br>
 
@@ -487,6 +537,11 @@ Edits an existing contact in the address book.
 
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -517,6 +572,11 @@ Finds contacts whose names contain any of the given keywords.
 
   ![result for 'find alex david'](images/find_example.png)
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -526,6 +586,11 @@ Finds contacts whose names contain any of the given keywords.
 Shows a list of all contacts in the address book.
 
 #### Format: `list`
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 
 <br>
 
@@ -561,6 +626,11 @@ Adds a public address to a contact.
   `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
 
 ![img.png](img.png)
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 
 <br>
 
@@ -602,6 +672,12 @@ Deletes the public address of a contact.
 
 <br>
 
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Editing a public address of a contact : `editpa`
@@ -635,6 +711,12 @@ Edits an existing public address of a contact.
 
 <br>
 
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Retrieving public addresses of a contact : `retrievepa`
@@ -667,6 +749,13 @@ Retrieves public addresses with matching labels.
 
 <br>
 
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Searching for a public address : `searchpa`
@@ -696,6 +785,11 @@ search on list of contacts displayed).
 
 <br>
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Filtering contacts by public addresses network : `filter`
@@ -719,6 +813,13 @@ Filters out a list of contacts with the public addresses of the specified networ
 
 <br>
 
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
@@ -726,6 +827,10 @@ Filters out a list of contacts with the public addresses of the specified networ
 Clears all entries from the address book.
 
 #### Format: `clear`
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 <br>
 
@@ -739,6 +844,13 @@ Exits the program.
 
 <br>
 
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
@@ -748,6 +860,13 @@ manually.
 
 
 <br>
+
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -775,10 +894,18 @@ our [GitHub repository](https://github.com/AY2425S1-CS2103T-T08-1/tp/issues).
 **Q**: Can I use it offline?<br>
 **A**: Yes, DLTbook is a desktop application and does not require an internet connection to run.
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Data Storage
 
 DLTbook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
 welcome to update data directly by editing that data file.
+
+<br>
 
 <box type = "info">
 
@@ -794,9 +921,32 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 
 <br>
 
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Common Errors
+
+1. **Invalid command format!**<br>
+   Ensure that the command is in the correct format. Check the error messsage for the correct syntax to use.
+2. **Unknown command**<br>
+   Ensure that the command is correct. Check [Command Overview](#command-overview) for correct commands to use.
+3. **The person index provided is invalid**<br>
+   Ensure that the index is a positive integer starting with 1 and within the range of the list of contacts displayed.
+4. **Network is blank or not supported. Currently supported: BTC, ETH, SOL**<br>
+   Ensure that the network is provided and is one of the supported networks: `BTC`, `ETH`, `SOL`. The network is
+   case-sensitive so `btc`, `eth`, `sol` are not valid.
+5. **Public Address for length BTC/ETH/SOL should be more than 26 characters**<br>
+   Ensure that the public address is provided and is valid. The length of BTC/ETH/SOL public addresses should be more
+   than 26 characters, less than 44 characters and can only contain alphanumeric characters.
+   
+ <div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -814,6 +964,11 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 4. **Missing email validation** The email field of contacts in DLTbook have no restrictions and can be duplicated across
    contacts.
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Future Enhancements
@@ -821,6 +976,10 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 Most commands currently do not forgive extraneous inputs for commands that do not require them.
 Such inputs will be ignored. But the error message displayed for this error for commands are different and may not
 exactly describe this error. This shall be fixed in the future.
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -855,6 +1014,11 @@ exactly describe this error. This shall be fixed in the future.
 | **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                  |
 | **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                      |
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 # Glossary
@@ -872,3 +1036,7 @@ exactly describe this error. This shall be fixed in the future.
 | **JSON**                           | JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate.                                            |
 | **Public Address**                 | A unique series of alphanumerical characters that is shared with others to receive cryptocurrencies (similar to an account number).                                                                  |
 | **SOL**                            | Solana, a high-performance blockchain supporting builders around the world creating crypto apps that scale, Solana (SOL) native cryptocurrency.                                                      |                                                                                                                                                                    |
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
