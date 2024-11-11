@@ -1,0 +1,45 @@
+@startuml
+skin rose
+!include style.puml
+start
+
+:requireNonNull(model);
+:getFilteredPersonList from model;
+:Initialize peopleToDelete as empty list;
+
+repeat
+    :Iterate over each index in targetIndices;
+    if () then (index out of bounds)
+        :Throw CommandException (invalid index);
+        stop
+    else (else)
+        :Get person at index from lastShownList;
+        :Add person to peopleToDelete;
+    endif
+repeat while (more indices in targetIndices?)
+
+:assert peopleToDelete.size() == targetIndices.size();
+
+:Initialize resultMessages as empty list;
+
+repeat
+    :Iterate over each person in peopleToDelete;
+    :deletePerson in model;
+    :Add formatted message to resultMessages;
+repeat while (more persons to delete)
+
+repeat
+    :Iterate over each person in peopleToDelete;
+    :removeLinks(person, model);
+repeat while (more persons to remove links for)
+
+:assert resultMessages.size() == targetIndices.size();
+
+if (Single result message?) then (yes)
+    :Return new CommandResult (MESSAGE_DELETE_PERSON_SUCCESS);
+else (no)
+    :Return new CommandResult (MESSAGE_DELETE_PEOPLE_SUCCESS);
+endif
+
+stop
+@enduml

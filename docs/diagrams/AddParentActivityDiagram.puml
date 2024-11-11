@@ -1,0 +1,40 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+start
+:User enters Add Parent Command;
+
+partition AddParentCommandParser{
+    if () then ([else])
+        :ParseException: Invalid command format;
+        stop
+    ([all prefixes present]) elseif () then ( [else])
+        :ParseException: Duplicate prefixes;
+        stop
+    ([no duplicate prefixes]) elseif () then ( [else])
+        :ParseException: Invalid parameter;
+        stop
+    else ( [valid parameters])
+
+endif
+}
+
+partition AddParentCommandParser {
+
+if () then ([else])
+:CommandException: Person already exist;
+stop
+else ( [Person not in Address Book] )
+
+endif
+}
+
+:Add Parent Command is executed successfully.
+Parent is added to Address Book.;
+stop
+
+
+@enduml
+
