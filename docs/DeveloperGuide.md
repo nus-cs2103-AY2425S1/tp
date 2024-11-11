@@ -225,7 +225,7 @@ The following sequence diagram shows how an `edit` command goes through the `Log
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
-<puml src="diagrams/EditActivityDiagram.puml" height="600" width="600" />
+<puml src="diagrams/EditActivityDiagram.puml" height="600" width="900" />
 
 ### Undo feature
 
