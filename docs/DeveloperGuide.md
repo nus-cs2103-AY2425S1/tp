@@ -688,26 +688,26 @@ testers are expected to do more *exploratory* testing.
         }
         ```
         
-   2. Test case: `addgrade n/John Doe a/Ex04 s/5` <br>
+   2. Test case: `addGrade n/John Doe a/Ex04 s/5` <br>
       Expected: Assignment `Ex04` with score `5` is added to `John Doe`. Details of the added grade shown in the status message.
    
-   3. Test case: `addgrade/John Doe a/Ex05 s/5` <br>
+   3. Test case: `addGrade/John Doe a/Ex05 s/5` <br>
       Expected: No grade is added to John Doe. Details of the error message is shown in the status message.
    
-   4. Other incorrect add grade commands to try: `addgrade`, `addgrade s/x` (where `x` is not a number)<br>
+   4. Other incorrect add grade commands to try: `addGrade`, `addGrade s/x` (where `x` is not a number or `x` is bigger than the max value of the assignment)<br>
       Expected: Similar to previous.
    
 ### Removing grade from a person
 1. Remove grade from a person
     1. Prerequisites: Contact `John Doe` with grades(assignment name,score) `Ex01,5` and `Ex02,3` added.
 
-    2. Test case: `removegrade n/John Doe a/Ex01` <br>
+    2. Test case: `removeGrade n/John Doe a/Ex01` <br>
        Expected: Assignment `Ex01` is removed from `John Doe`. Details shown in the status message.
 
-    3. Test case: `removegrade/John Doe a/Ex05 s/5` <br>
+    3. Test case: `removeGrade/John Doe a/Ex05 s/5` <br>
        Expected: No grade is removed from John Doe. Details of the error message is shown in the status message.
 
-    4. Other incorrect remove grade commands to try: `removegrade`, `removegrade a/x` (where `x` is any value)<br>
+    4. Other incorrect remove grade commands to try: `removeGrade`, `removeGrade a/x` (where `x` is any value)<br>
        Expected: Similar to previous.
    
 ### Marking attendance of a person
@@ -715,10 +715,10 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `mark n/John Doe w/5` <br>
       Expected: `John Doe` is marked as present for week 5. Details of the marked week is shown in status message and the list.
    
-   2. Test case: `mark n/John Doe w/s` <br>
-      Expected: No attendance is marked for `John Doe`. Details of the error is shown in the status message.
+   2. Test case: `mark n/John Doe w/999` <br>
+      Expected: Attendance not marked for `John Doe`. Details of the error is shown in the status message.
    
-   3. Other incorrect mark commands to try: `mark w/5`, `mark n/JohnDoe`<br>
+   3. Other incorrect mark commands to try: `mark`, `mark n/JohnDoe`<br>
       Expected: Similar to previous.
 
 ### Unmarking attendance of a person
@@ -726,10 +726,10 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `umark n/John Doe w/5` <br>
        Expected: `John Doe` is marked as absent for week 5. Details of the unmarked week is shown in status message and the list.
    
-    2. Test case: `unmark n/John Doe w/s` <br>
-       Expected: No attendance is unmarked for `John Doe`. 
+    2. Test case: `unmark n/John Doe w/999` <br>
+       Expected: No attendance unmarked for `John Doe`. 
    
-    3. Other incorrect unmark commands to try: `unmark w/5`, `unmark n/JohnDoe`<br>
+    3. Other incorrect unmark commands to try: `unmark`, `unmark n/JohnDoe`<br>
        Expected: Similar to previous.
 
 ### Import CSV
@@ -804,7 +804,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `view n/`
        Expected: No view window appears. Details of error shown in status message.
    
-    3. Other incorrect view commands to try: `view`, `view n`
+    3. Other incorrect view commands to try: `view n`
        Expected: Similar to previous.
 
 ### Launching Github page of person
