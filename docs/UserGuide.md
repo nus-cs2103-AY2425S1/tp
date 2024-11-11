@@ -7,7 +7,7 @@ PhysioPal is an **all-in-one, desktop app** specifically created to streamline d
 allowing them to focus more on patient care and less on paperwork. By seamlessly **combining the efficiency of a Command Line Interface (CLI)
 with the visual ease of a Graphical User Interface (GUI)**, PhysioPal provides a powerful and intuitive way to manage patient records,
 schedule appointments, and track payments all in one place. Designed to resolve common challenges—like long search times, duplicate records,
-and scheduling conflicts—PhysioPal simplifies client management with rapid commands for quick data entry, automated reminders, and a clear
+and scheduling conflicts—PhysioPal simplifies client management with rapid commands for quick data entry and retrieval, duplicate checks and a clear
 snapshot of all patient details. **PhysioPal supports only the English language**, ensuring clear and consistent communication across all its features.
 The result is a faster, more organised workflow that enables physiotherapists to deliver an exceptional
 experience to their clients without being weighed down by administrative burdens.
@@ -21,15 +21,15 @@ experience to their clients without being weighed down by administrative burdens
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W11-4/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W11-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your PhysioPal.
+3. Copy the file to the folder you want to use as the _home folder_ for your PhysioPal.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar physiopal.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar physiopal.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/quickStart.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -60,7 +60,8 @@ experience to their clients without being weighed down by administrative burdens
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -85,7 +86,7 @@ experience to their clients without being weighed down by administrative burdens
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* The parameter `NAME` is unique and case-insensitive across all commands that require it, and it will be displayed in lowercase.
+* The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b> across all commands that require it, and it will be displayed in lowercase.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -108,7 +109,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
-* Persons in PhysioPal can share the same phone number, email and address
+* The parameter `NAME` is <b>unique</b> and <b>case-insensitive</b>, and it will be displayed in lowercase.
+* Persons in PhysioPal can share the same phone number, email and address.
+* Persons with dashes, commas, slashes and periods in name should be omitted. For example,
+  persons with `s/o` or `d/o` in name should be entered as `s o` and `d o` respectively.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -127,6 +131,7 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* Conditions for each field is the same as the `add` command.
 
 Examples:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `john doe` to be `91234567` and `johndoe@example.com` respectively.
