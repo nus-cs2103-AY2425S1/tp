@@ -67,7 +67,8 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress());
+                .append(person.getAddress())
+                .append(";");
         return builder.toString();
     }
 }

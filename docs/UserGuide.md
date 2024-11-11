@@ -181,7 +181,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `delete z/PERSON_ID`, `PERSON_ID` is a parameter which can be used as `delete z/01`.
+  e.g. in `delete z/ID`, `ID` is a parameter which can be used as `delete z/01`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [r/REMARK]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
@@ -280,9 +280,9 @@ You may notice that patient contacts created have an even-numbered ID while doct
 
 Deletes the person with the specified `ID` from the MedDict database.
 
-Format: `delete z/PERSON_ID`
+Format: `delete z/ID`
 
-* **PERSON_ID**: Must be valid, present in the MedDict database.
+* **ID**: Must be valid, present in the MedDict database.
 * A _notification message_ will be displayed if MedDict could not delete the person with the given ID.
 
 Examples:
@@ -306,9 +306,6 @@ Examples:
 *  `addR z/0 r/cancer` <br>
     **Output**: <br>
    Successfully added remarks: cancer to patient of ID: 0.
-*  `addR z/0 r/cancer` <br>
-   **Output**: <br>
-   Unable to add remarks! Check the ID entered!
 
 ### [Listing All Persons](#command-summary): `list`
 
@@ -581,22 +578,22 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action                                                          | Format, Examples                                                                                                                                |
-|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help-help)**                                  | `help` <br> Shows help page                                                                                                                     |
-| **[Create Doctor](#creating-and-adding-a-doctor-created)**      | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` |
-| **[Create Patient](#creating-and-adding-a-patient-createp)**    | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`           |
-| **[Delete Person](#deleting-a-person-delete)**                  | `delete z/PERSON_ID` <br> e.g., `delete z/2`                                                                                                    |
-| **[Add Notes](#add-a-remark-to-a-patient-addr)**                | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                     |
-| **[List](#listing-all-persons-list)**                           | `list` <br> Shows all persons in address book                                                                                                   |
-| **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
-| **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**      | `get KEYWORD` <br> e.g., `get john`                                                                                                             |
-| **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                 |
-| **[View History](#view-history-of-a-person-view)**              | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                       |
-| **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/PERSON_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                |
-| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**      | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/0 z/01`                                                                  |
-| **[Delete Appointment](#delete-appointment-deletea)**           | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15:23 z/0 z/1`                                                  |
-| **[Clear](#clearing-all-entries-clear)**                        | `clear` <br> Clears all entries                                                                                                                 |
-| **[Exit](#exiting-the-program-exit)**                           | `exit` <br> Exits the program                                                                                                                   |
+| Action                                                         | Format, Examples                                                                                                                            |
+|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help-help)**                                 | `help` <br> Shows help page                                                                                                                 |
+| **[Create Doctor](#creating-and-adding-a-doctor-created)**     | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
+| **[Create Patient](#creating-and-adding-a-patient-createp)**   | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`       |
+| **[Delete Person](#deleting-a-person-delete)**                 | `delete z/ID` <br> e.g., `delete z/2`                                                                                                       |
+| **[Add Notes](#add-a-remark-to-a-patient-addr)**               | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                 |
+| **[List](#listing-all-persons-list)**                          | `list` <br> Shows all persons in address book                                                                                               |
+| **[Edit](#editing-a-person-edit)**                             | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                          |
+| **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**     | `get KEYWORD` <br> e.g., `get john`                                                                                                         |
+| **[Add Appointment](#adding-an-appointment-adda)**             | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`             |
+| **[View History](#view-history-of-a-person-view)**             | `view z/ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                          |
+| **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                   |
+| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**     | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                             |
+| **[Delete Appointment](#delete-appointment-deletea)**          | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                            |
+| **[Clear](#clearing-all-entries-clear)**                       | `clear` <br> Clears all entries                                                                                                             |
+| **[Exit](#exiting-the-program-exit)**                          | `exit` <br> Exits the program                                                                                                               |
 
 
