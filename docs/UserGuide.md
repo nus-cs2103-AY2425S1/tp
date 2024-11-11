@@ -198,6 +198,8 @@ Created weddings will have the person automatically assigned to their guest list
 * A person can have any number of tags or weddings (including 0)
 
 * A person's name must contain only alphanumeric characters, spaces, or the following characters: / . - '
+
+* Phone numbers are designed for Singapore phone numbers, it should be 3-8 digit long.
 </box>
 
 <box type="warning" seamless>
@@ -338,7 +340,7 @@ Format: `assign-wedding INDEX w/WEDDINGNAME`
 
 Edits the details of a `Wedding`.
 
-Format: `edit-wedding INDEX [w/WEDDINGNAME] [a/ADDRESS]`
+Format: `edit-wedding INDEX [w/WEDDINGNAME] [a/ADDRESS] [d/DATE]`
 
 * Edits the specific `Wedding` at the INDEX when in [list-wedding](#listing-all-weddings-list-weddings) view.
 * The index **must be a positive integer** 1, 2, 3, …​.
