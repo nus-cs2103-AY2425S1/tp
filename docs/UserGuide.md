@@ -10,7 +10,7 @@
 
 <br>
 
-EduContacts is a **desktop app for educators in tertiary institutions to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). For expert users familiar with command-based tools, EduContacts can get your contact management tasks done faster than traditional GUI apps. For new users, EduContacts also includes user-friendly and intuitive features and guidance, making it user-friendly and accessible for all users.
+EduContacts is a **desktop app for educators in tertiary institutions in Singapore to manage contacts, optimized for use via a Command Line Interface<sup id="fn1">[1]</sup>** (CLI) while still having the benefits of a Graphical User Interface<sup id="fn2">[2]</sup> (GUI). For expert users familiar with command-based tools, EduContacts can get your contact management tasks done faster than traditional GUI apps. For new users, EduContacts also includes user-friendly and intuitive features and guidance, making it user-friendly and accessible for all users.
 
 <br>
 <!-- * Table of Contents -->
@@ -34,6 +34,20 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
 6. [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<small>
+
+<p id="fn1"> 
+
+**1. Command Line Interface:** a software mechanism you use to interact with your operating system using your keyboard.</p>
+
+<p id="fn2"> 
+
+**2. Graphical User Interface:** a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.</p>
+
+</small>
+
+
 <div style="page-break-after: always;"></div>
 
 ## Guidance Icons Legend
@@ -184,6 +198,12 @@ Format:
 ```bash
 add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
+
+<box type="info" seamless>
+
+**Note:**  The phone number must be at least 8 digits long, and is a valid Singapore phone number.
+
+</box>
 
 Examples:
 * `add 87654321 n/Betsy Crowe r/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/12345678 c/Business Analytics` will add a person named `Betsy Crowe` with student ID of `87654321` to EduContacts.
