@@ -202,7 +202,7 @@ Clears all entries from AdmiNUS.
 **Expected message**:
 
 ```
-Address book has been cleared!
+Contact list has been cleared!
 ```
 
 #### Exiting the program: `exit`
