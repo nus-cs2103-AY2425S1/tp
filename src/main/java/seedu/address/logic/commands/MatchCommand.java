@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -34,6 +36,7 @@ public class MatchCommand extends Command {
     public static final String MESSAGE_HAS_OTHER_MATCHES = "Contact already has another job!";
     public static final String MESSAGE_ALREADY_MATCHED = "Contact already matched with this job!";
 
+    private static final Logger logger = LogsCenter.getLogger(MatchCommand.class);
     private final Index contactIndex;
     private final Index jobIndex;
 
@@ -61,6 +64,9 @@ public class MatchCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert contactIndex != null : "Contact index should not be null";
+        assert jobIndex != null : "Job index should not be null";
+        logger.info("Executing MatchCommand with contactIndex: " + contactIndex + " and jobIndex: " + jobIndex);
 
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         if (contactIndex.getZeroBased() >= lastShownPersonList.size()) {
@@ -75,11 +81,11 @@ public class MatchCommand extends Command {
         Person contactToMatch = lastShownPersonList.get(contactIndex.getZeroBased());
         Job jobToMatch = lastShownJobList.get(jobIndex.getZeroBased());
 
-        assert contactToMatch != null;
-        assert jobToMatch != null;
+        assert contactToMatch != null : "Contact to match should not be null";
+        assert jobToMatch != null : "Job to match should not be null";
+        logger.info("Contact to match: " + contactToMatch + ", Job to match: " + jobToMatch);
 
         final String jobIdentifier = jobToMatch.getIdentifier();
-
         boolean hasContactMatchedJob = contactToMatch.hasMatched(jobIdentifier);
 
         if (hasContactMatchedJob) {
@@ -91,9 +97,9 @@ public class MatchCommand extends Command {
         }
 
         Person matchedContact = matchContactToJob(contactToMatch, jobIdentifier);
-
         model.setPerson(contactToMatch, matchedContact);
 
+        logger.info("Matched successfully: " + matchedContact + " to Job: " + jobToMatch);
         return new CommandResult(
                 String.format(MESSAGE_MATCH_SUCCESS, Messages.format(matchedContact), Messages.format(jobToMatch)));
     }
