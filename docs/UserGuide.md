@@ -44,8 +44,14 @@ involved in IFG events.** Learn more about IFG [here](https://www.instagram.com/
    of files in the terminal's current working directory.
    
 7. Enter the `java -jar eventfulnus.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data from a sample database.<br>
    ![Ui](images/Ui.png)
+
+   On the left is a view of all people saved, and on the right is a view of all events saved.
+
+   A person has an index, or number, in the list of people in insertion order, a name, a phone number, an email, and optionally certain roles.
+
+   An event has a sport, two teams competing against each other, a venue, a date and time, and optionally some participants that correspond to people in the app.
 
 8. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -142,20 +148,20 @@ Before:
 
 
 After:
-
+![after-add-command](https://github.com/user-attachments/assets/743386be-62a5-4bb9-af63-dc287ec6b146)
 
 
 You may check a summary of the list of roles, faculties, sports, positions, and more via [this link](#using-shortcuts).
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the database.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the database.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
 
@@ -171,7 +177,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower r/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing roles.
+*  `edit 2 n/Betsy Crowe r/` Edits the name of the 2nd person to be `Betsy Crowe` and clears all existing roles.
+
+Before:
+![before-edit](https://github.com/user-attachments/assets/4415e4fd-067e-4e3d-b9ef-5cc194966a79)
+
+After:
+![after-edit](https://github.com/user-attachments/assets/0b61bc24-bb6a-45a9-b558-a3c8c0d36cb1)
+
 
 ### Locating persons by name: `find`
 
@@ -204,14 +217,33 @@ Format: `delete INDEX`
   this deletion and no longer show the person among its participants.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd person in the database.
+* `find Besty` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+Before `find`:
+![before-find](https://github.com/user-attachments/assets/3f288da6-fa8e-40d0-905e-f99a1c6b0abb)
+
+
+After `find`:
+![after-find](https://github.com/user-attachments/assets/9d564e39-8c29-4a24-a6ec-f34f6a3bc881)
+
+
+Before `delete`:
+![before-delete](https://github.com/user-attachments/assets/cad748a8-a951-4c59-8de6-a680d1a0cfcc)
+
+
+After `delete`:
+![after-delete](https://github.com/user-attachments/assets/a701dd0f-2f94-403b-a718-ca77f13f59de)
+
 
 <div style="page-break-after: always;"></div>
 
 ## Events
 
 ### Adding an event : `addevent`
+
+Adds an event to the database.
+
 Format: `addevent sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/PARTICIPANTS]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -221,10 +253,20 @@ Note that the participants must be valid persons in the database.</div>
 
 Examples:
 * `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John`
-  
+
+Before:
+![before-addevent](https://github.com/user-attachments/assets/7ef976b3-af85-4eff-9a09-faabe0ebf21f)
+
+
+After:
+![after-addevent](https://github.com/user-attachments/assets/af25492f-d4a8-4f0d-8983-1ba4bd715a0c)
+
+
 Please take note that faculties and sports use ONLY shortcuts found in [this section](#using-shortcuts).
 
 ### Editing an event : `editevent`
+
+Edits an existing event in the database.
 
 Format: `editevent INDEX sp/SPORT t/FACULTY 1 t/FACULTY 2 d/LOCALDATETIME v/VENUE [pa/PARTICIPANTS]…​`
 
@@ -240,25 +282,20 @@ Examples:
 *  `editevent 1 sp/Chess` Edits the sport of the first currently-displayed event to be `Chess`.
 *  `editevent 2 sp/Basketball Women pa/` Edits the sport of the second currently-displayed event to be `Basketball Women` and clears all existing participants.
 
-### Deleting an event : `deleteevent`
+Before:
+![before-editevent](https://github.com/user-attachments/assets/645bc487-6030-4528-a10a-df7cae416cc7)
 
-Deletes the specified event from the database.
 
-Format: `deleteevent INDEX`
+After:
+![after-editevent](https://github.com/user-attachments/assets/0a428cdd-1cb0-4f58-9cc9-eede6087707f)
 
-* Deletes the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed event list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listevent` followed by `deleteevent 2` deletes the 2nd event in the address book.
-* `findevent dummy` followed by `deleteevent 1` deletes the 1st event in the results of the `find` command.
 
 ### Listing all events : `listevent`
 
-Shows a list of all events in the address book.
+Shows a list of all events in the database.
 
 Format: `listevent`
+
 
 ### Finding events by keywords : `findevent`
 
@@ -272,6 +309,22 @@ Format: `findevent KEYWORD [MORE_KEYWORDS]…​`
 * Partial matches will also show in results e.g. `Che` will match `Chess`.
 * Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Utown Usc` will return events containing `Utown Chess`, `Usc Table Tennis`, etc.
+
+
+### Deleting an event : `deleteevent`
+
+Deletes an existing event from the database.
+
+Format: `deleteevent INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listevent` followed by `deleteevent 2` deletes the 2nd event in the database.
+* `findevent dummy` followed by `deleteevent 1` deletes the 1st event in the results of the `find` command.
+
 
 <div style="page-break-after: always;"></div>
 
@@ -388,7 +441,6 @@ Volunteer Roles (Code - Role Name):
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. Currently, only **standard English** names for people and events are accepted. We are planning to add support for more languages in the future.
-4. Currently, after a `find` command is executed, when executing `addevent` or `editevent`commands, references to people not in the currently displayed list are not able to be added to an event. We plan to fix this in a later version.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
