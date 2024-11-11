@@ -215,7 +215,7 @@ In this case, `AddressBookParser` creates `AddCommandParser` to parse user input
   If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, it creates a new instance of `AddCommand` that corresponds to the user input.
 `AddCommand` comprises of the internship application to be added, which is an instance of `InternshipApplication`.
 
-Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, `AddCommand` then adds the internship application into the data.
+Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, then `AddCommand` adds the internship application into the data.
 
 <br></br>
 
@@ -349,7 +349,7 @@ The implementation of the command follows the convention of a normal command, wh
 <puml src="diagrams/ExitSequenceDiagram.puml" alt="ExitSequenceDiagram" />
 
 `AddressBookParser` creates `ExitCommand`
-Upon execution, `ExitCommand` gets encapsulates the intent to close the application in `CommandResult`.
+Upon execution, `ExitCommand` encapsulates the intent to close the application in `CommandResult`.
 
 > **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
 
