@@ -21,7 +21,7 @@ What is Prudy used for:
 In this guide, you’ll learn how to:
 
 - **Set Up Prudy** to start managing client policies and claims with ease.
-- **Navigate and Use Key Features** such as adding, editing, and filtering client data, along with managing policies.
+- **Navigate and Use Key Features** such as adding, editing, and filtering client data, along with managing policies and claims.
 - **Optimize Your Workflow** by leveraging Prudy’s command-based data entry, powerful filtering options, and automatic data saving for streamlined client and policy management.
 
 Now, let’s get started and unlock the full potential of Prudy for efficient client management!
