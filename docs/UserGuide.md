@@ -386,7 +386,7 @@ Settles the amount owed by the student and adds it to the paid amount. To record
 
 * The **INDEX** refers to the index number shown in the displayed student list.
 * The **INDEX** **must be a positive integer** 1, 2, 3, …​
-* **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
+* **AMOUNT** must be a positive value and must not be more than the current amount owed by the student.
 * Command will behave weirdly if **INDEX** is larger than 2147483647.
 
 </box>
@@ -520,6 +520,7 @@ Please note:
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
+1. **For commands with INDEX, INDEX cannot be larger than 2147483647** (e.g. `3000000000`, `4000000000`, `1500000000`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `1`, `2`, `3`, assuming there are that many students in UGTeach. 
 1. **n/ only accepts alphanumeric characters and spaces**, which might not be suitable for names with special characters, e.g. `Ravi S/O Ramasamy, Devi D/O Rajaratnam`. The workaround is to exclude the special characters. E.g. replace the `S/O` with `s o` or `son of`, likewise for `D/O`.
 1. **a/ might not recognise addresses that contains prefixes**, unless the prefix is not separated by a space from `a/`.<br>
 e.g. `edit 1 a/n/Next Door` will edit the first student's address to be `n/Next Door`, but `edit 1 a/ at n/Next Door` will edit the first student's address to be  `at`, and edit the student's name to be `Next Door`.<br>
