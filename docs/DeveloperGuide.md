@@ -600,25 +600,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User does not input all the required parameters
-
     * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
       Step 1a1 is repeated until the input entered is valid containing all the required parameters<br>
       Use case resumes from step 2.
+
 
 * 1b. User inputs an invalid prefix
     * 1b1. ClinicConnect shows an error message saying the prefix is invalid.<br>
       Step 1b1 is repeated until the input entered only contains valid prefixes<br>
       Use case resumes from step 2.
 
+
 * 1c. User inputs a field in the wrong format
     * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
       Step 1c1 is repeated until the field is in the correct format<br>
       Use case resumes from step 2.
 
+
 * 1d. User inputs duplicate prefixes
     * 1d1. ClinicConnect prompts the user to fix the field that is has a duplicate prefix.<br>
       Step 1d1 is repeated until the input entered has distinct prefixes<br>
       Use case resumes from step 2.
+
 
 * 1e. User inputs an NRIC that already exists in the system
     * 1e1. ClinicConnect shows an error message saying the patient already exists in the system.<br>
