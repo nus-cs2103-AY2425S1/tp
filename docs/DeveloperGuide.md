@@ -268,7 +268,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Prefers typing over mouse interactions.
 * Familiar with the workings of CLI and commands.
 
-**Value proposition**: Our address book seamlessly combines client contacts,
+**Value proposition**: Clientele+ seamlessly combines client contacts,
 payment tracking and more in one efficient package, tailored specifically for freelance software developers.
 
 
@@ -556,7 +556,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete id/0`<br>
       Expected: No client is deleted. Error details shown in the status message.
 
-   4. Test case `delete n/John Doe` <br>
+   4. Test case: `delete n/John Doe` <br>
       Expected: Client with name `John Doe` is deleted. Details of the deleted client shown in the status message. <br>
       If multiple `John Doe`s exist, list of all `John Doe`s is displayed. <br>
       User prompted to delete by index in status message.
