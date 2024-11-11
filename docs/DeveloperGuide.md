@@ -283,18 +283,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                       | So that I can…​                                                               |
-|----------|---------|----------------------------------------------------|-------------------------------------------------------------------------------|
-| `* * *`  | user    | add clients to my existing addressbook             | store their contacts and respective information                               |
-| `* * *`  | user    | know if client has been added successfully         | so that I can proceed with the next steps or take corrective action if needed |
-| `* * *`  | user    | mark a client’s insurance payment as paid          | keep their due date up to date and know when they’ve fully paid               |
-| `* * *`  | user    | update existing client details                     | keep their information up to date.                                            |
-| `* * *`  | user    | record client's email address                      | contact them through email                                                    |
-| `* * *`  | user    | sort clients by renewal dates                      | prioritize my outreach efforts                                                |
-| `* * *`  | user    | remove clients should they change insurance agents |                                                                               |
-| `* * *`  | user    | know when was my client's last appointment         | track when to follow up                                                       |
-| `* * *`  | user    | know when is my client's birthday                  | reach out to build rapport                                                    |
-| `* * *`  | user    | know when is my client's next insurance payment    | so that I can keep track of client's payment                                  |
+| Priority | As a ... | I want to ...                                      | So that I can ...                                                             |
+|----------|----------|----------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user     | add clients to my existing addressbook             | store their contacts and respective information                               |
+| `* * *`  | user     | know if client has been added successfully         | so that I can proceed with the next steps or take corrective action if needed |
+| `* * *`  | user     | mark a client’s insurance payment as paid          | keep their due date up to date and know when they’ve fully paid               |
+| `* * *`  | user     | update existing client details                     | keep their information up to date.                                            |
+| `* * *`  | user     | record client's email address                      | contact them through email                                                    |
+| `* * *`  | user     | sort clients by renewal dates                      | prioritize my outreach efforts                                                |
+| `* * *`  | user     | remove clients should they change insurance agents |                                                                               |
+| `* * *`  | user     | know when is my client's next appointment          | track when to follow up                                                       |
+| `* * *`  | user     | know when is my client's birthday                  | reach out to build rapport                                                    |
+| `* * *`  | user     | know when is my client's next insurance payment    | so that I can keep track of client's payment                                  |
 
 
 ### Use cases
@@ -447,7 +447,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b2. User resubmits the command with a valid index.
     * Use case resumes from step 2.
 
-**Use case: Categorise client by policy**
+**Use case: Assign policy to client**
 
 **MSS**
 
@@ -455,7 +455,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User selects a client to assign a policy.
 3.  AgentConnect assigns the policy to the client.
 4.  AgentConnect shows updated client information.
-Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -463,10 +463,26 @@ Use case ends.
     * 2a1. AgentConnect shows an error message for the invalid client.
     * 2a2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
     * Use case resumes from step 2.
+  
+* 2b. Duplicate Policy
+    * 2b1. AgentConnect shows an error message "This policy already exist".
+    * 2b2. User modifies the policy name and resubmits the command.
+    * Use case resumes from step 2.
 
-* 2b. Policy type is not valid.
-    * 2b1. AgentConnect shows an error message for the invalid policy type.
-    * 2b2. AgentConnect prompts the user to enter a valid policy type.
+**Use case: Filter client by policy**
+
+**MSS**
+
+1.  User requests to list clients.
+2.  User requests to view clients that hold a certain policy.
+3.  AgentConnect retrieves and display all clients that holds the policy.
+Use case ends.
+
+**Extensions**
+
+* 2a. Policy does not exist.
+    * 2a1. AgentConnect shows an error message for the invalid policy.
+    * 2a2. AgentConnect prompts the user to enter a valid policy.
     * Use case resumes from step 2.
 
 **Use case: Retrieve appointment date**
@@ -484,9 +500,9 @@ Use case ends.
     * 2a1. AgentConnect shows a message indicating no appointment date available.
     * Use case ends.
 
-* 2b. Invalid client name.
-    * 2b1. AgentConnect shows an error message for the invalid client.
-    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+* 2b. Invalid appointment format.
+    * 2b1. AgentConnect shows an error message for the invalid appointment format.
+    * 2b2. AgentConnect prompts the user to either enter a date or date range to AgentConnect.
     * Use case resumes from step 1.
 
 
@@ -505,29 +521,34 @@ Use case ends.
     * 2a1. AgentConnect shows a message indicating no birthday date available.
     * Use case ends.
 
-* 2b. Invalid client name.
-    * 2b1. AgentConnect shows an error message for the invalid client.
-    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+* 2b. Invalid birthday format.
+    * 2b1. AgentConnect shows an error message for the invalid birthday input.
+    * 2b2. AgentConnect prompts the user to either enter a valid date or date range to AgentConnect.
     * Use case resumes from step 1.
 
-**Use case: Retrieve next payment date**
+**Use case: Update next payment date**
 
 **MSS**
 
 1.  User requests to list clients.
-2.  User requests to view a client's payment date.
+2.  User requests to view a client's payment date and update the current payment as paid.
 3.  AgentConnect retrieves and display the next payment date.
 Use case ends.
 
 **Extensions**
 
-* 2a. No payment data available.
-    * 2a1. AgentConnect shows a message indicating no payment data available.
+* 2a. No next payment available.
+    * 2a1. AgentConnect shows a message indicating no next payment data available by displaying "Fully Paid".
     * Use case ends.
 
-* 2b. Invalid client name.
-    * 2b1. AgentConnect shows an error message for the invalid client.
-    * 2b2. AgentConnect prompts the user to either enter a valid client name or add the client to AgentConnect.
+* 2b. Invalid client index.
+    * 2b1. AgentConnect shows an error message for the invalid client index.
+    * 2b2. AgentConnect prompts the user to enter a valid client index to AgentConnect.
+    * Use case resumes from step 1.
+
+* 2c. Invalid policy index.
+    * 2c1. AgentConnect shows an error message for the invalid policy index.
+    * 2c2. AgentConnect prompts the user to enter a valid policy index to AgentConnect.
     * Use case resumes from step 1.
 
 *{More to be added}*
@@ -594,11 +615,11 @@ testers are expected to do more *exploratory* testing.
    2. Test Case: `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
       - Expected: "Policy successfully assigned to Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Birthday: 1990-05-20; Appointment: 2024-10-15 14:00; Tags: [friends]"
 
-   3. Test Case: `assign 1 pon/PoicyOne pos/2025-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
+   3. Test Case: `assign 1 pon/PolicyOne pos/2025-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
       - Expected: "End date cannot be before start date!"
-   4. Test Case: `assign 1 pon/PoicyOne pos/2022-12-12 poe/2023-12-12 paydate/2021-11-01 amt/300.00`
+   4. Test Case: `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2021-11-01 amt/300.00`
       - Expected: "Premium due date cannot be before start date!"
-   5. Test Case: `assign 1 pon/PoicyOne pos/2022-12-12 poe/2022-12-12 paydate/2022-01-01 amt/300.00`
+   5. Test Case: `assign 1 pon/PolicyOne pos/2022-12-12 poe/2022-12-12 paydate/2022-01-01 amt/300.00`
       - Expected: "Start date and end date cannot be the same!"
 
 ### Marking a policy as paid
@@ -714,7 +735,10 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned enhancements**
 Team size: 5
 
-1.
+1. Delete 0 shows that invalid name is entered. We plan on on improving to show the correct error message in the future
+2. Implement refresh feature to ensure UI is updated with the latest information after every command is executed.
+3. Implement a more robust email validation feature. 
+4. Implement a fix to prevent the application from crashing when attempting to close the program while the delete confirmation pop-up window is still present.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -730,7 +754,7 @@ The project was moderately difficult due to the complexity of managing multiple 
 - Testing: Writing comprehensive tests for the new features and ensuring they integrate well with existing functionality required substantial effort.
 
 #### Effort Required
-The project required a considerable ammount of effort in the following areas:
+The project required a considerable amount of effort in the following areas:
 - **Design and Architecture**: Significant time was spent on designing the architecture to support multiple entities and their interactions.
 - **Implementation**: Implementing the new features, especially the undo/redo functionality and policy management, required detailed coding and debugging.
 - **Testing**: Writing unit tests, integration tests, and ensuring high test coverage was time-consuming but essential for maintaining code quality.
