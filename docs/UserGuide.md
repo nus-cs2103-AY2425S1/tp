@@ -238,7 +238,7 @@ Examples:
 * `find n/alex` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 #### Delete by name
-Format `delete FULL_NAME` or `delete n/FULL_NAME`
+Format: `delete FULL_NAME` or `delete n/FULL_NAME`
 
 * Delete the contact whose name matches the specified `FULL_NAME`.
 * Only contacts shown in the displayed contact list will be deleted. 
@@ -252,7 +252,7 @@ Examples:
 
 <box type="tip" seamless>
 
-Note: 
+**Note**: 
 * You may not delete by multiple ways concurrently. (eg. `delete FULL_NAME n/FULL_NAME_2` or `delete INDEX n/FULL_NAME`)
 * In the event of `FULL_NAME` matching to multiple contacts that exist, you will have to `find FULL_NAME` followed by `edit INDEX PARAMETER...` to choose which contact of the specified `FULL_NAME` you wish to edit.
 </box>
@@ -402,7 +402,7 @@ at the bottom of the app. It shows the total number of contacts being listed in 
 
 <box type="definition" seamless>
 
-**Definition:** List / show. The footer will display `x out of y contacts listed`, where x is the number of contacts in filtered list while y is the number of contacts in the total list
+The footer will display `x out of y contacts listed`, where `x` is the number of contacts in filtered list while `y` is the number of contacts in the total list
 </box>
 
 Examples:
@@ -461,8 +461,7 @@ Assuming the above entry in the address book, the following parameters passed in
 | 3         | `e/notjohnd@example.com ...`                                                                                                                      | `e/johnd@example.com ...`     &rarr; email already belongs to an existing contact                                                                                                                                                                     |
 | 4         | `r/Admin r/Marketing ...` (and `r/President` not inside)                                                                                          | `r/Admin r/President ...` &rarr; John is already President                                                                                                                                                                                            |
 
-
-
+---
 <div style="page-break-after: always;"></div>
 
 ## Contact Fields Constraints
