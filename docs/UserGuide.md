@@ -311,9 +311,18 @@ Furthermore, certain edits can cause the Teletutors to behave in unexpected ways
 
 </box>
 
-### Archiving data files `[coming in v2.0]`
+### Future Implementations `[coming in v2.0]`
 
-_Details coming soon ..._
+#### Assignment
+* View full details i.e (Name, Submission Status, Grade and Deadline) of an assignment
+  * Currently only Name, Submission Status and Grade are shown
+  * Ability to view all assignments for a Tutorial Group
+* Feedback on Assignments
+
+#### Attendance
+* Export all attendance records to Comma Separated Values (CSV) format
+  * Allows for easy exporting to other applications like Microsoft Excel
+
 
 --------------------------------------------------------------------------------------------------------------------
 
