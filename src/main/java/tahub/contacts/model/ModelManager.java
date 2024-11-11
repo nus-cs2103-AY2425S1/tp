@@ -258,4 +258,14 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public StudentCourseAssociationList getStudentScaList() {
+        return scaList;
+    }
+
+    @Override
+    public void setStudentCourseAssociation(StudentCourseAssociation target, StudentCourseAssociation editedSca) {
+        requireAllNonNull(target, editedSca);
+        scaList.set(target, editedSca);
+    }
 }
