@@ -277,8 +277,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 1a. KonTActs detects an error in the input.
 
   - 1a1.KonTActs rejects the addition request and shows an error message.
-  - 1b2. User enters a new input.
-  - Steps 1a1 - 3a1 are repeated until input entered is correct.
+  - 1a2. User enters a new input.
+  - Steps 1a1 - 1a2 are repeated until input entered is correct.
 
     Use cases resume from step 2.
 
@@ -335,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 1a2. User enters a new input.
   - Steps 1a1-1a2 are repeated until the input entered is correct.
 
-    Use case resumes from step 1.
+    Use case resumes from step 2.
 
     <br>
 
@@ -496,19 +496,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects the file provided is invalid.
 
-  - 2a1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
-  - 2a2. User provides a new file path
-  - Steps 2a1 - 2a2 are repeated until KonTActs is able to import contacts from the file.
+  - 1a1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
+  - 1a2. User provides a new file path
+  - Steps 1a1 - 1a2 are repeated until KonTActs is able to import contacts from the file.
 
-    Use case resumes from step 3.
+    Use case resumes from step 2.
 
 - 1b. KonTActs detects invalid content in CSV file.
 
-    - 2b1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
-    - 2b2. User provides a new file path or update their CSV file
-    - Steps 2b1 - 2b2 are repeated until KonTActs is able to import contacts from the file.
+    - 1b1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
+    - 1b2. User provides a new file path or update their CSV file
+    - Steps 1b1 - 1b2 are repeated until KonTActs is able to import contacts from the file.
 
-      Use case resumes from step 3.
+      Use case resumes from step 1.
   
 - \*a. At any time, User chooses to cancel the import.
 
