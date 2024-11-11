@@ -251,6 +251,88 @@ Below displays an activity diagram that explains roughly what happens when a use
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Withdraw feature
+
+#### Implementation
+
+The `withdraw` command is responsible for removing an application from a specified company. It is invoked when a user wants to close an application to a company and remove it from the application list. This command operates on the `Model`, updating the target company by removing the application from its list of applications.
+
+The following methods and operations are involved:
+
+* `WithdrawCommand#execute(Model model)` — Removes an `Application` from the specified `Company`.
+* `Model#setCompany(Company targetCompany, Company updatedCompany)` — Replaces the existing company in the model with an updated one, which does not contains the chosen application.
+* `AddressBook#setCompany(Company target, Company editedCompany)` — Commits the changes to the address book.
+
+##### Example usage scenario:
+
+Step 1. The user selects a company and application and executes the `withdraw` command. The command fetches the selected company and identifies the `Application` to be removed.
+
+Step 2. A copy of the company's current list of applications is made, and the selected `Application` is removed from the list.
+
+Step 3. The `WithdrawCommand` creates an updated `Company` object containing the updated list of applications and calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company in the model with the updated one.
+
+Step 4. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`.
+
+<puml src="diagrams/WithdrawCommandSequence.puml" alt="WithdrawCommandSequence" />
+
+Below displays an activity diagram that explains roughly what happens when a user tries to withdraw an application:
+<puml src="diagrams/WithdrawCommandActivity.puml" alt="WithdrawCommandActivity" />
+
+#### Design considerations:
+
+**Aspect: How to store the applications:**
+
+* **Alternative 1 (current choice):** Store applications as a modifiable list within each `Company`.
+  * Pros: Simple to implement and modify the list of applications.
+  * Cons: The list must be copied to ensure immutability during updates.
+
+* **Alternative 2:** Store applications as a separate entity with references to companies.
+  * Pros: Improves separation of concerns and scalability for large datasets.
+  * Cons: Increases complexity of application updates.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Update feature
+
+#### Implementation
+
+The `update` command is responsible for updating the status of an existing application for a specific company. When a user wants to modify the application status (e.g., changing from "APPLIED" to "INTERVIEWED"), this command is invoked.
+
+The following methods and operations are involved:
+
+* `UpdateCommand#execute(Model model)` — Updates the status of the specified `Application` for a particular `Company`.
+* `Model#setCompany(Company targetCompany, Company updatedCompany)` — Replaces the old company in the model with the updated company containing the modified application.
+* `AddressBook#setCompany(Company target, Company editedCompany)` — Commits the changes to the address book.
+
+##### Example usage scenario:
+
+Step 1. The user selects a company and executes the `update` command to change the status of an application. The command fetches the target company and retrieves the application to update.
+
+Step 2. A copy of the company's current list of applications is made, and the relevant application is modified by updating its `AppStatus`.
+
+Step 3. The `UpdateCommand` creates an updated `Company` object containing the modified application list and calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company with the updated one.
+
+Step 4. The changes are committed to the address book using `AddressBook#setCompany(companyToEdit, editedCompany)`.
+
+<puml src="diagrams/UpdateCommandSequence.puml" alt="UpdateCommandSequence" />
+
+Below displays an activity diagram that explains roughly what happens when a user tries to add an application:
+<puml src="diagrams/UpdateCommandActivity.puml" alt="UpdateCommandActivity" />
+
+#### Design considerations:
+
+**Aspect: How to modify the application status:**
+
+* **Alternative 1 (current choice):** Modify the application within the company’s application list directly.
+  * Pros: Easy to implement, minimal changes required in the data structure.
+  * Cons: The list must be copied to maintain immutability during updates.
+
+* **Alternative 2:** Store applications in a separate collection and update them independently of the company.
+  * Pros: Cleaner separation of concerns, potentially more scalable.
+  * Cons: Increased complexity in ensuring consistency between companies and applications.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Find feature
 
 #### Implementation
