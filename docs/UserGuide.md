@@ -587,9 +587,9 @@ data file only if you are confident that you can update it correctly.
 You have been duly warned.
 </box>
 
-### Future
+### Coming Soon
 
-#### Adding Support for more Course Codes and Tutorial IDs
+#### Added Support for more Course Codes and Tutorial IDs
 
 - Currently, we only support course codes of a specific format, as mentioned [here](#data-formats). However, we are aware that there are rarer course codes such as `LAJ1201` and `GESS1003`. Due to time limitations, we are not able to support __all__ potential course codes and this could be fixed in a future iteration. Similarly, valid but rarer tutorial IDs with an additional character at the back like `T01A` will not be accepted in the current iteration.
 
