@@ -1004,7 +1004,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/accept 1`<br>
-       Expected: The status of the 1st application (e.g., "Google") is updated to `ACCEPTED`.
+       Expected: The status of the first application (e.g., "Google") is updated to `ACCEPTED`.
    
     3. Test case: `/accept 0`<br>
        Expected: An error message should be shown which explains how to use the status command and what parameters are valid.
@@ -1014,14 +1014,14 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/pending 2`<br>
-       Expected: The status of the 2nd application (e.g., "Yahoo") is updated to `PENDING`.
+       Expected: The status of the second application (e.g., "Yahoo") is updated to `PENDING`.
 
 3. Update status to `REJECTED`
 
     1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/reject 1`<br>
-       Expected: The status of the 1st application (e.g., "Google") is updated to `REJECTED`.
+       Expected: The status of the first application (e.g., "Google") is updated to `REJECTED`.
 
 <br></br>
 
