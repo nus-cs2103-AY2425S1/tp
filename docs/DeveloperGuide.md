@@ -186,6 +186,7 @@ We designed the `home` command to display all the patients as we wanted the user
 
 We also display the total number of patients in the system, providing users with a clearer overview of the clinic's customers.
 
+
 #### Clear Command : `clear`
 The `clear` command allows the user to delete all the patients and appointments from the ClinicConnect system.
 
