@@ -33,12 +33,14 @@ public class ExportConsultCommand extends Command {
             + "\nExample: " + COMMAND_WORD + " consultations"
             + "\nExample with force flag: " + COMMAND_WORD + " " + FORCE_FLAG + " consultations";
 
-    public static final String MESSAGE_SUCCESS = "Exported %1$d consultations to %2$s";
     public static final String MESSAGE_FAILURE = "Failed to export consultations: %1$s";
     public static final String MESSAGE_FILE_EXISTS = "File %1$s already exists. Use -f flag to overwrite.";
     public static final String MESSAGE_HOME_FILE_EXISTS =
             "File %1$s already exists in home directory. Use -f flag to overwrite.";
+    public static final String MESSAGE_SUCCESS = "Exported %1$d consultations to %2$s";
     public static final String MESSAGE_SUCCESS_WITH_COPY = "Exported %1$d consultations to %2$s and %3$s";
+    public static final String INVALID_FILENAME_MESSAGE =
+            "Filename can only contain alphanumeric characters (A-Z, a-z, 0-9)";
 
     private static final Logger logger = LogsCenter.getLogger(ExportConsultCommand.class);
 
@@ -68,8 +70,21 @@ public class ExportConsultCommand extends Command {
         return Paths.get(System.getProperty("user.home"), filename + ".csv");
     }
 
+    /**
+     * Validates if filename is valid
+     *
+     * @param filename String representing filename to be validated
+     */
+    protected void validateFilename(String filename) throws CommandException {
+        // Check if filename contains any non-alphanumeric characters
+        if (!filename.matches("^[a-zA-Z0-9]+$")) {
+            throw new CommandException(ExportConsultCommand.INVALID_FILENAME_MESSAGE);
+        }
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        validateFilename(filename);
         List<Consultation> consultList = model.getFilteredConsultationList();
         logger.info("Starting export for " + consultList.size() + " consultations");
 

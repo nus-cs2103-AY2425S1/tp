@@ -202,27 +202,58 @@ public class AddToLessonCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudentByIndexInCommand_throwsCommandException() {
+    public void execute_duplicateStudentByIndexInCommandSuccess() throws Exception {
 
         AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
                 validStudentNames, duplicateIndices);
 
-        String error = String.format(AddToLessonCommand.MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_INDEX,
-                ALICE.getName().fullName,
-                INDEX_FIRST_STUDENT.getOneBased());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandFailure(command, model, error);
+        CommandResult result = command.execute(model);
+
+        Lesson targetLesson = expectedModel.getFilteredLessonList()
+                .get(validLessonIndex5.getZeroBased());
+        Lesson editedLesson = new Lesson(targetLesson);
+
+        editedLesson.addStudent(CARL);
+        editedLesson.addStudent(DANIEL);
+        editedLesson.addStudent(ALICE);
+        expectedModel.setLesson(targetLesson, editedLesson);
+
+        String expectedMessage = String.format(AddToLessonCommand.MESSAGE_ADD_TO_LESSON_SUCCESS,
+                Messages.format(editedLesson));
+
+        assertEquals(result.getFeedbackToUser(), expectedMessage);
+        assertEquals(expectedModel.getFilteredLessonList().get(validLessonIndex5.getZeroBased()),
+                model.getFilteredLessonList().get(validLessonIndex5.getZeroBased()));
     }
 
     @Test
-    public void execute_duplicateStudentByNameInCommand_throwsCommandException() {
+    public void execute_duplicateStudentByNameInCommandSuccess() throws Exception {
         AddToLessonCommand command = new AddToLessonCommand(validLessonIndex5,
                 duplicateStudentNames, validStudentIndicesContainsAlice);
 
-        String error = String.format(AddToLessonCommand.MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_NAME,
-                CARL.getName().fullName);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandFailure(command, model, error);
+        CommandResult result = command.execute(model);
+
+        Lesson targetLesson = expectedModel.getFilteredLessonList()
+                .get(validLessonIndex5.getZeroBased());
+        Lesson editedLesson = new Lesson(targetLesson);
+
+        editedLesson.addStudent(CARL);
+        editedLesson.addStudent(ALICE);
+        editedLesson.addStudent(BENSON);
+        expectedModel.setLesson(targetLesson, editedLesson);
+
+        String expectedMessage = String.format(AddToLessonCommand.MESSAGE_ADD_TO_LESSON_SUCCESS,
+                Messages.format(editedLesson));
+
+        assertEquals(result.getFeedbackToUser(), expectedMessage);
+        assertEquals(expectedModel.getFilteredLessonList().get(validLessonIndex5.getZeroBased()),
+                model.getFilteredLessonList().get(validLessonIndex5.getZeroBased()));
+
+
     }
 
     @Test

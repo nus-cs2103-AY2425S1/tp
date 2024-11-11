@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDE
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +23,6 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.exceptions.DuplicateStudentException;
 
 /**
  * Adds students to a specific lesson.
@@ -34,6 +34,7 @@ public class AddToLessonCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds students to the lesson identified "
             + "by the index number used in the displayed lesson list."
+            + "\nAt least one of the optional parameters must be provided."
             + "\nParameters: LESSON_INDEX "
             + "[" + PREFIX_NAME + "NAME]… "
             + "[" + PREFIX_INDEX + "INDEX]… "
@@ -45,6 +46,7 @@ public class AddToLessonCommand extends Command {
             "%s is already added to the lesson!";
     public static final String MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_INDEX =
             "%s at index %d is already added to the lesson!";
+
 
     private final Index index;
     private final List<Name> studentNames;
@@ -83,19 +85,29 @@ public class AddToLessonCommand extends Command {
 
         logger.info("Lesson to edit: " + targetLesson.toString());
 
+        Set<Student> studentsToAddSet = new HashSet<>();
+        ArrayList<Student> studentsToAddArr = new ArrayList<>();
+
         for (Name studentName : studentNames) {
             Student student = model.findStudentByName(studentName)
                     .orElseThrow(() -> new CommandException(String.format(MESSAGE_STUDENT_NOT_FOUND, studentName)));
-            try {
-                editedLesson.addStudent(student);
-            } catch (DuplicateStudentException e) {
+
+            // if student was already in the lesson before this command, throw error
+            if (editedLesson.hasStudent(student)) {
                 logger.warning("Students were not added to lesson " + targetLesson.toString()
-                        + " because there were duplicate names");
+                        + " because the student " + studentName + " was already in lesson");
                 throw new CommandException(
                         String.format(MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_NAME, studentName));
             }
+
+            //if student was not previously in the lesson before this command, add it to the set
+            if (!studentsToAddSet.contains(student)) {
+                studentsToAddArr.add(student);
+            }
+            studentsToAddSet.add(student);
         }
 
+        // checking if the indices are out of bounds
         boolean throwException = false;
         Set<Index> outOfBounds = new HashSet<>();
 
@@ -107,26 +119,36 @@ public class AddToLessonCommand extends Command {
         }
 
         if (throwException) {
-            logger.warning("Students were not added to lesson " + targetLesson.toString()
-                    + " because there were indices of students that were out of bounds");
             String formattedOutOfBoundIndices = outOfBounds.stream()
                     .map(index -> String.valueOf(index.getOneBased()))
                     .collect(Collectors.joining(", "));
+            logger.warning("Students were not added to lesson " + targetLesson.toString()
+                    + " because indices " + formattedOutOfBoundIndices + " were out of bounds");
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_INDEX_SHOWN,
                     formattedOutOfBoundIndices));
         }
 
+        // checking if the students at these indices were already in the lesson
         for (Index studentIndex : indices) {
             Student student = lastShownStudentList.get(studentIndex.getZeroBased());
-            try {
-                editedLesson.addStudent(student);
-            } catch (DuplicateStudentException e) {
+
+            if (editedLesson.hasStudent(student)) {
                 logger.warning("Students were not added to lesson " + targetLesson.toString()
-                        + " because there were duplicate names");
+                        + " because student " + student.getName() + " was already in the lesson");
                 throw new CommandException(
                         String.format(MESSAGE_DUPLICATE_STUDENT_IN_LESSON_BY_INDEX, student.getName(),
                                 studentIndex.getOneBased()));
             }
+
+            if (!studentsToAddSet.contains(student)) {
+                studentsToAddArr.add(student);
+            }
+            studentsToAddSet.add(student);
+        }
+
+        // actually adding the students into the lesson
+        for (Student student: studentsToAddArr) {
+            editedLesson.addStudent(student);
         }
 
         model.setLesson(targetLesson, editedLesson);

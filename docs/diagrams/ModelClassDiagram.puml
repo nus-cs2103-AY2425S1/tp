@@ -19,9 +19,16 @@ Class Name
 Class Phone
 Class Course
 
+Class UniqueConsultList
 Class Consultation
 Class Date
 Class Time
+
+Class UniqueLessonList
+Class Lesson
+Class StudentLessonInfo
+Class Attendance
+Class Participation
 
 Class I #FFFFFF
 }
@@ -39,23 +46,34 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueStudentList
-ModelManager --> "~* all" Consultation
 UniqueStudentList --> "~* all" Student
 Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> "0..*" Course
 
+AddressBook *--> "1" UniqueConsultList
+UniqueConsultList --> "~* all" Consultation
 Consultation *--> Date
 Consultation *--> Time
-Consultation -left-> "0..*" Student
+Consultation -down--> "0..*" Student
+
+AddressBook *--> "1" UniqueLessonList
+UniqueLessonList --> "~* all" Lesson
+Lesson *--> Date
+Lesson *--> Time
+Lesson -down--> "0..*" StudentLessonInfo
+
+StudentLessonInfo -left-> "1" Student
+StudentLessonInfo -down-> Attendance
+StudentLessonInfo -down-> Participation
 
 Student -[hidden]up--> I
 UniqueStudentList -[hidden]right-> I
+UniqueConsultList -[hidden]left-> I
+UniqueLessonList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Date
-Date -[hidden]right-> Time
-
-ModelManager --> "~* filtered" Student
+ModelManager -right--> "~* filtered" Student
+ModelManager --> "~* filtered" Consultation
+ModelManager -right--> "~* filtered" Lesson
 @enduml

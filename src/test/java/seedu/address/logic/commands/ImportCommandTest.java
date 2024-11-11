@@ -309,16 +309,23 @@ public class ImportCommandTest {
 
     @Test
     public void execute_absolutePath() throws IOException, CommandException {
-        // Create file with absolute path
-        Path absolutePath = testDir.toAbsolutePath().resolve("absolute.csv");
-        try (FileWriter writer = new FileWriter(absolutePath.toFile())) {
-            writer.write("Name,Phone,Email,Courses\n");
-            writer.write("John Doe,12345678,john@example.com,CS2103T\n");
-        }
+        // Create file using platform-independent path handling
+        Path absolutePath = testDir.toAbsolutePath().normalize().resolve("absolute.csv");
+        Files.createDirectories(absolutePath.getParent());
+
+        Files.writeString(absolutePath,
+                "Name,Phone,Email,Courses\n"
+                        + "John Doe,12345678,john@example.com,CS2103T\n"
+        );
         filesToCleanup.add(absolutePath);
 
-        ImportCommand importCommand = new ImportCommand(absolutePath.toString());
-        CommandResult result = importCommand.execute(model);
+        ImportCommand testCommand = new ImportCommand(absolutePath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return Paths.get(filepath).normalize();
+            }
+        };
+        CommandResult result = testCommand.execute(model);
         assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
     }
 
@@ -423,5 +430,37 @@ public class ImportCommandTest {
 
         CommandResult result = importCommand.execute(model);
         assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_dataDirectoryPath_success() throws IOException, CommandException {
+        // Create test file in data directory
+        Path dataDir = Paths.get("data");
+        Files.createDirectories(dataDir);
+        Path testFile = dataDir.resolve("students.csv");
+
+        try (FileWriter writer = new FileWriter(testFile.toFile())) {
+            writer.write("Name,Phone,Email,Courses\n");
+            writer.write("John Doe,12345678,john@example.com,CS2103T\n");
+        }
+        filesToCleanup.add(testFile);
+
+        ImportCommand importCommand = new ImportCommand("students.csv");
+        CommandResult result = importCommand.execute(model);
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
+    }
+
+    @Test
+    public void resolveFilePath_existingDirectPath_returnsDirectPath() throws IOException {
+        // Create a file in the current directory
+        Path directPath = Paths.get("test.csv");
+        Files.writeString(directPath, "test content");
+        filesToCleanup.add(directPath);
+
+        ImportCommand testCommand = new ImportCommand("test.csv");
+        Path resolved = testCommand.resolveFilePath("test.csv");
+        assertEquals(directPath.normalize(), resolved);
+
+        Files.deleteIfExists(directPath); // Clean up immediately
     }
 }

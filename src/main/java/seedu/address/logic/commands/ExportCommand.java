@@ -25,7 +25,6 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String FORCE_FLAG = "-f";
     public static final CommandType COMMAND_TYPE = CommandType.STUDENT;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the current list of students to a CSV file. "
             + "Parameters: FILENAME " + "[" + FORCE_FLAG + "] "
             + "\nExample: " + COMMAND_WORD + " students"
@@ -37,6 +36,8 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_HOME_FILE_EXISTS =
             "File %1$s already exists in home directory. Use -f flag to overwrite.";
     public static final String MESSAGE_SUCCESS_WITH_COPY = "Exported %1$d students to %2$s and %3$s";
+    public static final String INVALID_FILENAME_MESSAGE =
+            "Filename can only contain alphanumeric characters (A-Z, a-z, 0-9)";
     private static final Logger logger = LogsCenter.getLogger(ExportCommand.class);
 
     private final String filename;
@@ -79,9 +80,21 @@ public class ExportCommand extends Command {
         return Paths.get(System.getProperty("user.home"), filename + ".csv");
     }
 
+    /**
+     * Validates if filename is valid
+     *
+     * @param filename String representing filename to be validated
+     */
+    protected void validateFilename(String filename) throws CommandException {
+        if (!filename.matches("^[a-zA-Z0-9]+$")) {
+            throw new CommandException(INVALID_FILENAME_MESSAGE);
+        }
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model cannot be null";
+        validateFilename(filename);
         List<Student> studentList = model.getFilteredStudentList();
         logger.info("Starting export for " + studentList.size() + " students");
 
@@ -155,7 +168,13 @@ public class ExportCommand extends Command {
         return escapedData;
     }
 
-    private void writeCsvFile(Path filePath, List<Student> studentList) throws IOException {
+    /**
+     * Writes all Students in a given List into a CSV file saved at filePath
+     * @param filePath Location to save CSV file
+     * @param studentList List of Students whose details should be saved
+     * @throws IOException Throws IO Exception
+     */
+    public void writeCsvFile(Path filePath, List<Student> studentList) throws IOException {
         assert filePath != null : "File path cannot be null";
         assert studentList != null : "Student list cannot be null";
         logger.fine("Writing CSV file to: " + filePath);
@@ -178,7 +197,12 @@ public class ExportCommand extends Command {
         }
     }
 
-    private String coursesToString(Set<Course> courses) {
+    /**
+     * Helper function that collects a set of Courses into a string for exporting
+     * @param courses Set of Courses to be collected into a string
+     * @return String representing a set of Courses
+     */
+    public String coursesToString(Set<Course> courses) {
         assert courses != null : "Courses set cannot be null";
         return courses.stream()
                 .map(Course::toString)
