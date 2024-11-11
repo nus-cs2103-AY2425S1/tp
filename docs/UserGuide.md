@@ -154,7 +154,7 @@ Adds a student to the address book.
   > Reason for the maximum value: It is unlikely for an undergraduate tutor to have an hourly rate higher than $1000.00.
 * **PAID_AMOUNT** and **OWED_AMOUNT** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`.
-  * Special case: `-0`, `-0.0`, `-0.00` are not allowed!
+  * Special case: `-0`, `-0.0`, `-0.00` are not allowed! UGTeach will behave weirdly if you enter these values.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
@@ -421,6 +421,6 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
 --------------------------------------------------------------------------------------------------------------------
