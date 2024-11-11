@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.JOBCODE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.JOBCODE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_NEW;
@@ -47,13 +47,15 @@ public class MassRejectCommandParserTest {
     @Test
     public void parse_missingAllFields_failure() {
         String userInput = "";
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassRejectCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassRejectCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingOneField_failure() {
         String userInput = "j/";
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassRejectCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassRejectCommand.MESSAGE_USAGE));
     }
 
     @Test
