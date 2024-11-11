@@ -370,6 +370,64 @@ results based on the specified criteria.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
 
+## Export feature
+
+### Implementation
+
+Step 1: The user executes `export`
+
+Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder.
+The name of the JSON file is the time of export.
+
+The following sequence diagram shows how a `export` command goes through the `Logic` component:
+
+### Design considerations:
+
+**Aspect: The name of the JSON file on `export`
+
+* **Alternative 1:** Use a generic format such as `SAVE_FILE_1`, `SAVE_FILE_2`
+    * Pros: Easy for the user to know at first glance which save file was created latest as well as the chronological order of their creation.
+    * Cons: Does not tell the user at what time they actually exported the save file or contents of the save file.
+
+* **Alternative 2 (current implementation):** The time of the device's system at the moment of `export`
+    * Pros: Allows for pinpoint of exact save files as no two files can be exported at the same time.
+    * Cons: Takes longer to manually understand the name of the save file when trying to locate a specific one, 
+  especially when multiple `exports` happen within a short period of time. Also has no mention of contents of JSON file.
+
+* **Alternative 3:** A brief summary of the file such as `FIRST-Alex_Jones LENGTH-20`
+    * Pros: Easy for the user to know at first glance which save file contains what.
+    * Cons: Does not tell the user at what time they actually exported the save file. Also has no indication of the 
+  chronology of creation of the files, and hence no information on which file was the last to be created. Additionally,
+  it would become complicated when exporting files with similar data.
+
+## Import feature
+
+### Implementation
+
+The `import` command implements `Undoable`. The `import` command deletes the contacts whose `GradYear` field is earlier
+than the current year, deleting contacts who have graduated from the address book.
+The `clean` command is undoable.
+
+Given below is an example usage scenario and how the `import` command behaves at each step.
+
+Step 1. The user executes `import fp/./data/SaveFile3.json`
+
+Step 2. The 
+
+The following sequence diagram shows how a `import` command goes through the `Logic` component:
+
+### Design considerations:
+
+**Aspect: The exact format of the `FILE_PATH` parameter**
+
+* **Alternative 1:** Take in only the name of the JSON file in the data folder of the home folder.
+    * Pros: Shorter command for the user to type. It is also considerably less complicated than alternative 2, making it more accessible to non-technical users.
+    * Cons: Limits the ability of import to only the contents of the data folder. Also requires user to move any JSON file they may want to `import` into the data folder.
+
+* **Alternative 2 (current implementation):** Require the user to type in the full file path of the JSON file they wish to `import`.
+    * Pros: Allow greater flexibility for user to import JSON files from any location of the device.
+    * Cons: Significantly longer command for the user to type. Requires user to have prior knowledge of what the JSON's filepath is, increasing complexity.
+
 ### Delete Command
 
 #### Implementation
@@ -814,12 +872,51 @@ testers are expected to do more *exploratory* testing.
       Expected: An error message is shown informing the user about the correct data format for PHONE.
    2. Test case: `find n/John Doe r/abcd` <br>
       Expected: An error message is shown informing the user about the correct data format for ROOM_NUMBER.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+   1. Test case: Edit a record of a person in DorManagerPro.json to have a name containing `/`, which is an invalid character in DorManagerPro. <br>
+      Expected: On launch, the application has no contacts as it does not read files that contain invalid data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Exporting data
 
+1. Exporting a contact list with one or more contacts.
+   1. Prerequisites: There is at least one person in DorManagerPro
+   2. Test case: `export` <br>
+      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export.
+   3. More positive tests can be done for different numbers of people in DorManagerPro
+
+2. Exporting a contact list with zero contacts
+   1. Prerequisites: There are no people in DorManagerPro
+   2. Test case: `export` <br>
+      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export. The contents of the json file is as follows: { "persons" : [ ] }
+
+### Importing data
+
+1. Importing a json file with valid data
+   1. Prerequisites: There is a json file with valid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
+   2. Test case: `import fp/./data/SaveFile.json` <br>
+      Expected: The contents of `SaveFile.json` is loaded into DorManagerPro.
+
+2. Importing a json file with invalid data
+   1. Prequisites: There is a json file with invalid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
+   2. Test case: `import fp/./data/SaveFile.json`
+   Expected: No information is imported into DorManagerPro. Error details shown in the status message.
+
+3. Importing a file that is not of json format
+   1. Prerequisites: There is a file not of json format on the device. In this case, it is assumed the file path to this file is `./data/text`.
+   2. Test case: `import fp/./data/text`
+      Expected: Same as above.
+
+4. Importing a folder
+   1. Prerequisites: There is a folder on the device. In this case, it is assumed the file path to this file is `./data`.
+   2. Test case: `import fp/./data`
+      Expected: Same as above.
+
+5. Trying to import a file that does not exist on the device
+    1. Test case: `import fp/./data/SaveFile4.json` where SaveFile4.json does not exist on the device <br>
+       Expected: Same as above, with error message now instead specifying that the file path must correspond to an existing system path.
 
 ### Adding a person
 
