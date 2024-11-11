@@ -77,7 +77,9 @@ Adds a restaurant to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Names should only contain alphanumeric characters and spaces, and it should not be blank
+Names should only contain alphanumeric characters and spaces, and it should not be blank.
+Note: Characters outside the English alphabet are currently not supported.
+Please use an English transliteration.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
