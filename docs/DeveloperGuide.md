@@ -740,7 +740,7 @@ Prerequisites: List all Guests and Vendors using the `list` command. Multiple Gu
 Prerequisites: List all Guests and Vendors using the `list` command. Multiple Guests and Vendors in each list.
 
 1. Test case: `delete_vendor 1`<br>
-   Expected: First Vendor is deleted from the Guest list. Details of the deleted Vendor shown in the outcome box.
+   Expected: First Vendor is deleted from the Vendor list. Details of the deleted Vendor shown in the outcome box.
 
 2. Test case: `delete_vendor 0`<br>
    Expected: No Vendor is deleted. Error details shown in the outcome box. Command line remains the same.
