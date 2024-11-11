@@ -324,7 +324,7 @@ EZSTATES features (i.e. commands) are divided into **four** main categories:
     - [Filter Appointments](#today) (`today`)
 3. [Listing Management Commands](#3-listing-management) 
     - [Add Listing](#add-listing) (`listing`)
-    - [Find Listings]() (`findlisting`)
+    - [Find Listings](#find-listings) (`findlisting`)
     - [Show Listings](#show-listings) (`showlistings`)
     - [Edit Listing](#edit-listing) (`editlisting`)
     - [Add Buyers to Listing](#add-buyers-to-listing) (`addlistingbuyers`)
