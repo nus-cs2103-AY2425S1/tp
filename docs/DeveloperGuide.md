@@ -10,7 +10,17 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * Our codebase was built off the [AB3 code base](https://github.com/se-edu/addressbook-level3)
-* AI was used in the generation of javadocs
+* **Use of AI Tools:** Below, each team member outlines their specific usage of AI tools in this project.
+   - **AGARWAL ISHAN:** 
+     - **GitHub Copilot:** Utilized extensively for code completion and generation for attendance tracking commands. Particularly effective when entering class names, as it often auto-filled the correct code for entire classes. GitHub Copilot also assisted in generating Javadocs.
+     - **ChatGPT-4:** Consulted for assistance with code implementation, writing tests, and resolving specific programming challenges.
+
+    - **GABRIELLE GIANNA TAN-WININGS:** 
+      - **ChatGPT:** Consulted for generation of javadocs. Was used minimally in the generation of some test cases and functional code. Code done with the help of AI is written in comments near said parts.
+    - **NICHOLAS TANG BOON KEAT:** 
+      - No usage of AI tools.
+    - **WILLIAM ALEXANDER DAVID NAYAR:**
+      - No usage of AI tools.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -237,13 +247,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -540,7 +543,7 @@ Preconditions: Installed the application
 
 **MSS:**
 
-1. TA enters the `listattendance` command with a valid event name and status (`present` or `absent`).
+1. TA enters the `listattn` command with a valid event name and status (`present` or `absent`).
 2. TP validates the event name and status.
 3. TP retrieves the list of students matching the specified attendance status for the event.
 4. TP displays the list of students.
@@ -745,11 +748,11 @@ testers are expected to do more *exploratory* testing.
 
 1. **Creating attendance events**
 
-    - Test case: `createattendance e/Tutorial 1 e/Lab Session`
+    - Test case: `createattn e/Tutorial 1 e/Lab Session`
 
       Expected: Attendance events "Tutorial 1" and "Lab Session" are created. Confirmation message shown.
 
-    - Test case: `createattendance e/`
+    - Test case: `createattn e/`
 
       Expected: Error message indicating event name cannot be empty.
 
@@ -803,19 +806,19 @@ testers are expected to do more *exploratory* testing.
 
 1. **Listing present students for an event**
 
-    - Test case: `listattendance e/Lab Session s/present`
+    - Test case: `listattn e/Lab Session s/present`
 
       Expected: Displays a list of students marked as present for "Lab Session".
 
 2. **Listing absent students for an event**
 
-    - Test case: `listattendance e/Lab Session s/absent`
+    - Test case: `listattn e/Lab Session s/absent`
 
       Expected: Displays a list of students marked as absent for "Lab Session".
 
 3. **Invalid status**
 
-    - Test case: `listattendance e/Lab Session s/late`
+    - Test case: `listattn e/Lab Session s/late`
 
       Expected: Error message indicating valid statuses are 'present' or 'absent'.
 
@@ -933,23 +936,25 @@ testers are expected to do more *exploratory* testing.
 
 **Team size: 4**
 
-- **Allow Partial Matching in Find Feature**
+- **Enhanced Find Command with Partial Matching and Group Filtering**
 
-  Currently, the `find` command matches students based on exact names or IDs. To improve usability, we plan to enhance the `find` command to allow partial matching of names. This will enable TAs to search for students even if they only remember part of the student's name.
+  Currently, the `find` command supports exact matches for names and student IDs, which may limit its usability when TAs want to locate students based on partial names. Additionally, `find` does not work well when used after `show`, as it displays students from all groups, rather than only those from the filtered group list. To improve functionality, we plan to enhance the `find` command to support both partial matching and group filtering.
 
-  **Example Usage:**
+  **Enhancement Goals:**
 
-    - `find n/Alex` would match students with names like "Alex Yeoh", "Alexander Lee", or "Alexis Tan".
+    - **Partial Matching:** Allow the `find` command to match partial names, enabling TAs to locate students even if they remember only part of a student's name.
+    - **Group Filtering:** Enable `find` to respect any active `show` filter, so it only searches within the displayed subset of students. This ensures that if a TA has filtered by group using `show`, the `find` command will only search within that group rather than across all students.
+
+- **Enhance Grouping Functionality for Attendance Tracking**
+
+  Currently, the `listattn` command lists all students for a given attendance event without segmentation by groups, which may cause confusion when managing multiple classes or sections. We plan to enhance the `listattn` command to allow filtering by groups, so TAs can view attendance specifically for each group within an event.
 
   **Implementation Considerations:**
 
-    - Modify the `NameContainsKeywordsPredicate` to check for partial matches.
-    - Ensure that the search remains case-insensitive.
-    - Update unit tests and documentation accordingly.
+    - Integrate the existing `group` field with the `listattn` command to support group-based filtering.
+    - Update the UI to display group-specific attendance more clearly.
+    - Ensure compatibility with other group and attendance features.
 
-- **Track attendance of students individually**
-
-    Currently, the listattn feature shows status of all students for a given event. We plan to enhance this feature to allow TAs to track attendance of individual students across all events.
 
 - **Specificity of error message for Edit function**
   
