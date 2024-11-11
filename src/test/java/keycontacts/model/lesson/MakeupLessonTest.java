@@ -29,10 +29,20 @@ public class MakeupLessonTest {
     @Test
     public void equals() {
         MakeupLesson sameMakeupLesson = new MakeupLesson(new Date("08-01-2025"), new Time("14:00"), new Time("15:00"));
+
         assertEquals(sameMakeupLesson, makeupLesson);
+        assertTrue(makeupLesson.equals(makeupLesson));
+        assertNotEquals(makeupLesson, null);
+        assertNotEquals(makeupLesson, new Object());
         assertNotEquals(new MakeupLesson(date, startTime, new Time("16:00")), makeupLesson);
         assertNotEquals(new MakeupLesson(date, new Time("03:00"), endTime), makeupLesson);
         assertNotEquals(new MakeupLesson(new Date("08-02-2025"), startTime, endTime), makeupLesson);
+    }
+
+    @Test
+    public void toDisplayTest() {
+        String expected = date.toDisplay() + ", " + startTime.toString() + " - " + endTime.toString();
+        assertEquals(expected, makeupLesson.toDisplay());
     }
 
     @Test
