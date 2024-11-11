@@ -507,7 +507,8 @@ Format: `view-wed NAME & NAME` / `vw NAME & NAME`
 
 **TAKE NOTE:** 
 * No prefixes are required for this command.
-* If there are no contacts in the wedding, KnottyPlanners will display all weddings to allow you to conveniently view other weddings if needed.
+* If you are in the WeddingBook tab and the wedding you request to view has no participants, KnottyPlanners will display all weddings to allow you to conveniently view other weddings if needed.
+* If you are in the AddressBook tab and the wedding you request to view has no participants, KnottyPlanners will not display any participants.
 
 </box>
 
