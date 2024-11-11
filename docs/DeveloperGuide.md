@@ -873,18 +873,138 @@ testers are expected to do more *exploratory* testing.
     Similarly, 'ltags' can be used to list all tags, while 'ltasks' can be used to list all tasks (note the plural for both commands, 'tags' and 'tasks').  
 </box>
 
+<br>
+
 ### Finding a person
 
 <box type="info" seamless>
-      **Note:** The guide for the find command will be based on the sample address book created on application launch. The commands can be similarly
-        applied to edited data.
-
-      **Note:** 
+      **Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
+        applied to edited data, but specific expected results will differ.
 </box>
 
 1. Finding a person by name
 
-   1. 
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+
+   2. Test case: `find n/alex` <br>
+      Expected: The contact `Alex Yeoh` is shown in the `Person` view. If this contact has been deleted and no other contacts whose
+      names have the keyword `Alex` are in the system, an empty `Person` list is shown. The status message reflects the success of the find command.
+
+   3. Test case:  `find n/B` <br>
+      Expected: The contacts `Bernice Yu`, `Irfan Ibrahim`, and `Roy Balakrishnan` are shown in the `Person` view. If any of these contacts
+      have been deleted, they are not shown in the `Person` list. The status message reflects the success of the find command.
+
+   4. Test case:  `find n/roy n/Irf` <br>
+      Expected: The contacts `Irfan Ibrahim` and `Roy Balakrishnan` are shown in the `Person` view. If any of these contacts
+      have been deleted, they are not shown in the `Person` list. The status message reflects the success of the find command.
+
+   5. Test case:  `find n/NAMETHATDOESNOTEXIST` (where NAMETHATDOESNOTEXIST is not part of the names of any `Person` in the system)
+      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+   6. Test case:  `find n/` <br>
+      Expected: The currently shown `Person` list is unchanged. Error details shown in the status message.
+
+   7. Test case: `find n/X` (where X is a character unsupported in `Person` names)
+      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+   8. Test case:  `find a/Blk p/` <br>
+      Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+
+
+<br>
+
+2. Finding a person by address
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+
+    2. Test case: `find a/30` <br>
+       Expected: The contacts `Alex Yeoh` and `Bernice Yu` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find a/serangoon a/Aljunied`
+       Expected: The contacts `Bernice Yu`, `David Li`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case:  `find a/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+
+    5. Test case:  `find a/%%%` (where %%%  is not part of the address of any addresses of any `Person` in the system) <br>
+      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    6. Test case:  `find a/Blk p/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+
+
+<br>
+
+3. Finding a person by phone
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+
+    2. Test case: `find p/88` <br>
+       Expected: The contact `Alex Yeoh` is shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find p/92` <br>
+       Expected: The contacts `Bernice Yu`, `Irfan Ibrahim`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case:  `find p/XXXXXXXXXX` (where XXXXXXXXXX is not part of the phone number of any phone numbers of any `Person` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Test case:  `find p/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+
+    6. Test case:  `find p/9 n/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+
+
+<br>
+
+4. Finding a person by email
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+
+    2. Test case: `find e/LI` <br>
+       Expected: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find e/er e/ro` <br>
+       Expected: The contacts `Bernice Yu` and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case: `find e/XXXX@XXX.XXX` (where XXXX@XXX.XXX is not part of the email of any emails of any `Person` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Test case:  `find e/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched. 
+
+    6. Test case:  `find e/@example.com a/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+
+
+<br>
+
+5. Finding a person by tag
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+       1. **Tip**: You can also enter the `list-tags` or `ltags` command to list all tags in the system. <br>
+
+    2. Test case: `find t/guest` <br>
+       Expected: The contacts `Bernice Yu` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    3. Test case: `find t/photographer t/HOTEL MANAGER` <br>
+       Expected: The contacts `Alex Yeoh` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+
+    4. Test case: `find t/NONEXISTENTTAG` (where NONEXISTENTTAG is not a `Tag` in the system) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    5. Test case:  `find t/UNASSIGNEDTAG` (where UNASSIGNEDTAG is a `Tag` in the system, but there are no `Persons` tagged with it) <br>
+       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+
+    6. Test case:  `find t/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+
+    7. Test case:  `find t/photographer a/` <br>
+       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+
+
+
+<br>
 
 ### Deleting a person
 
@@ -922,7 +1042,8 @@ testers are expected to do more *exploratory* testing.
         Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     4. Other incorrect test cases to try can be found at point 1.iv of [Deleting a person](#deleting-a-person)
-    
+
+<br>
 
 ### Saving data
 
