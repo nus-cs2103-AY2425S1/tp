@@ -122,20 +122,29 @@ public class CommandTestUtil {
     }
 
     /**
-     * Executes the given {@code command}, confirms that <br>
-     * - a {@code CommandException} is thrown <br>
-     * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * Executes the given {@code command} and verifies that:
+     * <ul>
+     *   <li>A {@code CommandException} is thrown.</li>
+     *   <li>The exception message matches the {@code expectedMessage}.</li>
+     *   <li>The address book, filtered person list, and filtered appointment list in {@code actualModel}
+     *       remain unchanged.</li>
+     * </ul>
+     *
+     * @param command The command to execute.
+     * @param actualModel The model on which the command is executed.
+     * @param expectedMessage The expected exception message.
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Person> expectedFilteredPersonList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Appointment> expectedFilteredAppointmentList = new ArrayList<>(actualModel.getFilteredAppointmentList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredPersonList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredAppointmentList, actualModel.getFilteredAppointmentList());
     }
 
     /**
