@@ -480,10 +480,6 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous case.
 
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 
