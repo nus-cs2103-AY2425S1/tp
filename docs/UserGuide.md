@@ -76,7 +76,7 @@ This section explains the different types of annotated boxes used in the user gu
 **macOS User Interface**: 
 ![Ui](images/Ui.png)
 **Windows User Interface**:
-![Windows Ui](images/EditCommand.png)
+![Windows Ui](images/windows_ui.jpg)
 
 5. Enter a command:
 
