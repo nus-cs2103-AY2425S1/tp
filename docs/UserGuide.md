@@ -260,11 +260,11 @@ Format: `sort PARAMETER_PREFIX/ORDER`
 * An ascending order can be specified by replacing `ORDER` with `ascending` or its short form `asc`.
 * A descending order can be specified by replacing `ORDER` with `descending` or its short form `desc`.
 * Ascending name order will **generally** be special characters and numbers followed by letters (incase-sensitive).
-* Persons with date of last visit will always appear in the end when sorting by date of last visit. 
+* Persons with date of last visit will always appear in the end when sorting by date of last visit.
 
 Examples:
 * `sort n/` sorts by name in ascending order.
-* `sort d/`, `sort d/asc`, `sort d/ascending` are all equivalent, and they sort the date of last visit in ascending order. 
+* `sort d/`, `sort d/asc`, `sort d/ascending` are all equivalent, and they sort the date of last visit in ascending order.
 * `sort d/desc` sorts by date of last visit in descending order.
 
 ### Viewing a person : `view`
@@ -286,7 +286,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Take Note:** Viewing is executed based on the currently displayed list. 
+**Take Note:** Viewing is executed based on the currently displayed list.
 Executing any commands that alter the displayed list (such as `delete`, `sort`, or `find`) may change the person being viewed.
 For this reason, it is recommended to execute `view` commands after the displayed list has been modified as intended. 
 
