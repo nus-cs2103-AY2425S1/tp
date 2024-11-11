@@ -632,7 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 Preconditions: The patient with the corresponding NRIC is already registered in the system.
-Guarantees: Appointments only will be booked if they consist of valid date and time in the future 
+Guarantees: Appointments only will be booked if they consist of valid date and time in the future
 
 1.  User types the command to book an upcoming appointment for the patient with the corresponding NRIC.
 2.  ClinicConnect books an upcoming appointment for the patient successfully.
@@ -675,7 +675,7 @@ Guarantees: Appointments only will be booked if they consist of valid date and t
 
 **MSS**
 Preconditions: The patient with the corresponding NRIC is already registered in the system.
-Guarantees: Valid appointments will be deleted if they are already in the patient's list of appointments. 
+Guarantees: Valid appointments will be deleted if they are already in the patient's list of appointments.
 
 1.  User types the command to delete an appointment for the patient with the corresponding NRIC.
 2.  ClinicConnect deletes an appointment for the patient successfully.
