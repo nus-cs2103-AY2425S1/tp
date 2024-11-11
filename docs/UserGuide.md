@@ -1,18 +1,50 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # VolunTier User Guide
 
 --------------------------------------------------------------------------------------------------------------------
-## Introduction
-VolunTier is the **top _Tier_** solution for volunteer organisations that specialise in teaching students and are
-looking to manage your growing clientele in an efficient manner.
 
-VolunTier is designed for those of you who are **familiar with the Command Line Interface (CLI)** living in Singapore,
-simplifying the process of adding, editing and deleting your volunteers, students and the lessons that they share.
+<!-- Table of Contents -->
+- [VolunTier User Guide](#voluntier-user-guide)
+- [Quick start](#quick-start)
+    - [Installation of application](#installation-of-application)
+- [Features](#features)
+    - [Viewing help](#viewing-help--help)
+    - [Adding a Tutor](#adding-a-tutor-addtutor)
+    - [Adding a Tutee](#adding-a-tutee-addtutee)
+    - [Adding a Lesson](#adding-a-lesson-addlesson)
+    - [Listing all persons](#listing-all-persons--list)
+    - [Editing a person](#editing-a-person--edit)
+    - [Locating persons by name](#locating-persons-by-name-find)
+    - [Locating persons by subject](#locating-persons-by-subject-findsubject)
+    - [Deleting a person](#deleting-a-person--delete)
+    - [Deleting a lesson](#deleting-a-lesson--deletelesson)
+    - [Viewing a person's details](#viewing-a-persons-details--view)
+    - [Undoing a command](#undoing-a-command--undo)
+    - [Redoing a command](#redoing-a-command--redo)
+    - [Viewing command history](#viewing-command-history--history)
+    - [Viewing chart of tutors’ volunteer hours](#viewing-chart-of-tutors-volunteer-hours--vtc)
+    - [Clearing all entries](#clearing-all-entries--clear)
+    - [Importing people from CSV files](#importing-people-from-csv-files--import)
+    - [Exiting the program](#exiting-the-program--exit)
+- [Saving the data](#saving-the-data)
+- [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
+
+<page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## Introduction
+VolunTier is the **top _Tier_** solution for volunteer organisations that specialise in teaching students and looking to manage your growing clientele efficiently.
+VolunTier is designed for those of you who are **familiar with the Command Line Interface (CLI) and can type fast** living in Singapore, who have many tutors and tutee data to manage and support tutoring of 3 subjects. VolunTier simplifies the process of adding, editing and deleting your volunteers, students and the lessons that they share.
 
 <box type="info" seamless>
 
@@ -32,7 +64,6 @@ Tutor and Tutees can both be referred to as Person.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar VolunTier.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -54,6 +85,8 @@ Tutor and Tutees can both be referred to as Person.
 
 ### CLI tutorial
 
+Skip to [Features](#features) if you are proficient in CLI.
+
 This tutorial introduces you to the basics of using the Command Line Interface (CLI) on Unix-based systems (Linux/macOS) and Windows. By the end, you’ll be comfortable navigating the file system, managing files, and running basic commands through the terminal.
 
 #### 1. **What is the CLI?**
@@ -73,10 +106,30 @@ Search for command prompt or Powershell in the start menu.
 ```shell
 Ctrl + Alt + T
 ```
+--------------------------------------------------------------------------------------------------------------------
+### User Interface
+
+![Ui](images/UiOverview.png)
+
+1. **Tabs**: Provides access to the File and Help options.
+2. **Person List**: Displays the list of tutors and tutees.
+3. **Response Box**: Shows feedback for users from the VolunTier app.
+4. **Tutor Hours Chart**: Displays a bar chart when the `vtc` command is used.
+5. **Command Box**: The area where user commands are entered.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
+
+<box type="tip" seamless>
+
+**Tips:**
+
+* start the app with `java -jar VolunTier.jar` when you are in the folder you put the jar file in.
+
+</box>
+
 
 <box type="info" seamless>
 
@@ -101,6 +154,9 @@ Ctrl + Alt + T
   Index **must be a positive integer**.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* For users who have used VolunTier before can jump to [Command Summary](#Command-summary)
+
   </box>
 
 
@@ -114,7 +170,7 @@ Format: `help`
 
 ### Adding a Tutor: `addTutor`
 
-Adds a Tutor to VolunTier.
+Adds a tutor to VolunTier.
 
 Format: `addTutor \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​`
 
@@ -122,10 +178,9 @@ Examples:
 * `addTutor \n Alice Pauline \p 98722342 \e alicep@example.com \a Alice street, block 123, 999888 \s math \s science`
 * `addTutor \n John Doe \p 98765432 \e johnd@example.com \a Mingyang street, block 123, 888777 \h 6 \s english`
 
-
 ### Adding a Tutee: `addTutee`
 
-Adds a tutee to VolunTier.
+Adds a Tutee to VolunTier.
 
 Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​`
 
@@ -133,16 +188,19 @@ Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUB
 
 **Tips:**
 
+* Names can include alphanumeric characters as well as the special characters `/`, `,`, and `-`.
+
 * Phone number must be 8 integer digits and start with 8, 9, or 6.
 
 * Address must have any text followed by a comma and a 6-digit postal code.<br>
-e.g. `Tampines, 234678`.
+  e.g. `Tampines, 234678`.
 
 * Hours must be a non-negative integer, with a maximum of 876,000 (100 years).
 
 * Hours will default to 0 if it is not specified.
 
 * A person can have any number of subjects (including 0).
+
 </box>
 
 
@@ -199,7 +257,7 @@ Examples:
 
 ### Locating persons by subject: `findSubject`
 
-Find persons who have any of the subject(s).
+Finds persons who have any of the SUBJECT(s).
 
 Format: `findSubject SUBJECT [MORE_SUBJECTS]`
 
@@ -227,20 +285,22 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in VolunTier.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+> **⚠️ Warning:** Deleting a person will permanently remove all lessons associated with them. Ensure you have selected the correct person before proceeding with deletion.
+
 ### Deleting a lesson : `deleteLesson`
 
 Deletes the specified lesson from VolunTier.
 
 Format: `deleteLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT`
 
-* Deletes the lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX`, and subject.
+* Deletes the lesson between the tutor at the specified `TUTOR_INDEX` and the tutee at the specified `TUTEE_INDEX` for the specified SUBJECT.
 
 Examples:
 * `findSubject Math` followed by `deleteLesson 2 5 \s Math` deletes the lesson between the Tutor with index 2 and the Tutee with index 5.
 
 ### Viewing a person's details : `view`
 
-Displays the details of a person that might not be shown in their card.
+Displays additional details of a person that might not be shown on their card.
 
 Format: `view INDEX`
 
@@ -269,6 +329,17 @@ Reapplies a command that was previously undone.
 Format: `redo`
 
 * Redo is only available immediately after an undo.
+
+<box type="tip" seamless>
+
+**Tips:**
+
+* The undo and redo commands only apply to actions that modify data in the VolunTier address book, such as `edit` or `addTutor`. Commands that do not alter data, like `view`, cannot be undone or redone.
+  </box>
+
+
+
+
 
 Examples:
 * If you `undo` the addition of a new tutor by mistake, `redo` will restore that entry.
@@ -329,7 +400,7 @@ Format: `import \f FILEPATH`
 * For any field that requires a comma, surround it in quotes like this: "1 Jurong, 123456".
 
 * For more than one subject, separate it with a semicolon like this: English; Science.
-</box>
+  </box>
 
 
 Example:
@@ -372,6 +443,12 @@ Furthermore, certain edits can cause the VolunTier to behave in unexpected ways 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: Can I customize the subjects offered in VolunTier?
+**A**: Currently, VolunTier supports only three basic subjects: Math, Science, and English. Custom subjects are not supported, but this feature may be considered in future updates.
+
+**Q**: Is it possible to export my data from VolunTier?
+**A**: VolunTier currently does not support an export feature directly. However, you can manually copy the addressbook.json file from the data folder and use it as a backup or to transfer data to another instance.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -386,20 +463,21 @@ Furthermore, certain edits can cause the VolunTier to behave in unexpected ways 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add Lesson**   | `addLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT` <br> e.g., `addLesson 1 2 \s science`
-**Add Tutee**    | `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT​]…​` <br> e.g., `addTutee \n Evan Lee \p 88889999 \e evanlee@example.com \a 345, Clementi Rd, 1234665 \h 2 \s english`
-**Add Tutor**    | `addTutor \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​` <br> e.g., `addTutor \n James Ho \p 92224444 \e jamesho@example.com \a 123, Clementi Rd, 1234665 \h 7 \s math`
+**Add Tutee**    | `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT​]…​` <br> e.g., `addTutee \n Evan Lee \p 88889999 \e evanlee@example.com \a 345, Clementi Rd, 123465 \h 2 \s english`
+**Add Tutor**    | `addTutor \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​` <br> e.g., `addTutor \n James Ho \p 92224444 \e jamesho@example.com \a 123, Clementi Rd, 123465 \h 7 \s math`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**DeleteLesson**| `deleteLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT `<br> e.g., `deleteLesson 1 2 \s science`
+**Delete Lesson**| `deleteLesson TUTOR_INDEX TUTEE_INDEX \s SUBJECT `<br> e.g., `deleteLesson 1 2 \s science`
 **Edit**   | `edit INDEX [\n NAME] [\p PHONE_NUMBER] [\e EMAIL] [\a ADDRESS] [\h HOURS] [\s SUBJECT]…​`<br> e.g.,`edit 2 \n James Lee \e jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**FindSubject** | `findSubject SUBJECT [MORE_SUBJECTS]` <br> e.g., `findSubject math science`
+**Find Subject** | `findSubject SUBJECT [MORE_SUBJECTS]` <br> e.g., `findSubject math science`
 **History**	    | `history`
 **Import** | `import \f FILEPATH`
 **List**   | `list`
 **Undo**   | `undo`
 **Redo**   | `redo`
-**View**   | `view`
+**View**   | `view INDEX`<br> e.g., `view 2`
 **View Tutor Hours**   | `vtc`
 **Exit**   | `exit`
 **Help**   | `help`
+
