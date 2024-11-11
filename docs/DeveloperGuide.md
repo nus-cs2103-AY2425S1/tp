@@ -268,7 +268,7 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ## **Planned Enhancements**
 
-In the current v1.6 iteration, we are aware of certain feature flaws and possible areas for improvements. Below are some of the upcoming works scheduled to be addressed<br>
+In the current v1.6 iteration, we are aware of certain feature flaws and possible areas for improvements. Below are some of the upcoming works scheduled to be addressed.<br>
 
 ### **Fix `filter`, `add` and `undo` commands**
 Currently, running any `filter` command that changes the list displayed, followed by an `add` command that successfully adds a guest changes the displayed list to the full guest list as intended.<br>
@@ -282,7 +282,7 @@ Currently, the colour of the tags changes randomly everytime the app is reopened
 We understand that experienced users may associate certain colours to certain tags. Thus, we plan to map each tag to a fixed colour, ensuring a standardised tag colour everytime the app is used.
 
 ### **Rigorous checks on user inputs**
-Currently, fields like `Phone` accepts only 8 digits, but does not check whether the starting digit is a 6, 8, or 9 (in compliance to Singapore's phone numbers)<br>
+Currently, fields like `Phone` accepts only 8 digits, but does not check whether the starting digit is a 6, 8, or 9 (in compliance with Singapore's phone numbers).<br>
 Other commands such as `newtag 1 t/friends` will successfully create a new tag called `friends` while ignoring the redundant input `1`.<br>
 To provide clarity and ease to users, we plan to have more rigorous checks and display clearer messages to the user. For the latter example, "The input '1' is ignored."
 

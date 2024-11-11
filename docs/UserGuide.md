@@ -42,7 +42,7 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
-7. Do note that users should open only **one** instance of AB3 My Guest at a time.
+7. Do note that users should open only **one** AB3 My Guest at a time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -181,8 +181,8 @@ Format: `deletetag [-force] t/TAG1…​`
 * User cannot delete a tag that has not been added via `newtag` before.
 * If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
 * Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
-* Attempting to delete a mix of tags with invalid and valid names at once will result in an error.
-* Attempting to delete a mix of existing and non-existent tags at once will only allow the existing tags to be deleted.
+* Attempting to delete tags with a mix of invalid and valid names at once will result in an error.
+* Attempting to delete tags with a mix of existing and non-existent tags at once will only allow the existing tags to be deleted.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may delete any number of tags at once. e.g. `deletetag t/bride's side t/groom's side t/friends`
@@ -289,7 +289,7 @@ You can clear all filters by running the `list` command.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Known Issue:**
-Currently, running an `add` command while being in a filtered list returns the list displaying all the guests, though the filters are not cleared from the filter panel. The developers are working on this fix in future iterations, for now you may clear the filters using the `list` command.
+Currently, running an `add` command while being in a filtered list returns the list displaying all the guests, though the filters are not cleared from the filter panel. For now, you may clear the filters using the `list` command.
 </div>
 
 Example:
@@ -339,13 +339,12 @@ Format: `undo`
   * `filter`
   * `find`
   * `setrsvp`
-* Only the **latest** command can be undone, if it was successfully executed. 
-* Some examples of the `undo` command are:
-  * `tag 1 2 t/friends` successfully tagged the guest at index 1 but not the guest at index 2. Then `undo` will untag the guest at index 1
-  * `filter s/3 t/friends` followed by `filter s/3` (shows an error message since the filter predicate is already applied). Then `undo` will not revert the first filter command `filter s/3 t/friends` since the last command, `filter s/3` was not successfully executed.
+* Only the **latest** command can be undone, if it was successfully executed.
 
 Examples:
-* `tag 7 t/neighbours` is the latest successfully executed
+* `tag 1 2 t/friends` successfully tagged the guest at index 1 but not the guest at index 2. Then `undo` will untag the guest at index 1.
+* `filter s/3 t/friends` followed by `filter s/3` (shows an error message since the filter predicate is already applied). Then `undo` will not revert the first filter command `filter s/3 t/friends` since the last command, `filter s/3` was not successfully executed.
+* `tag 7 t/neighbours` successfully tagged the guest at index 7.
 ![undoCommand1.png](images/undoCommand1.png)
 ![undoCommand2.png](images/undoCommand2.png)
 
