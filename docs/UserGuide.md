@@ -150,11 +150,13 @@ Adds a student to the address book.
 
 ##### Constraints
 
-* **NAME** must only contain alphanumeric characters and spaces.
+* **NAME** must only contain alphanumeric characters and spaces. 
+* **NAME** is case-insensitive.
 * **ADDRESS** has no restrictions.
 * **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`.
-* **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
-* **START_TIME** and **END_TIME** are represented as `HHmm`.
+  * **DAY_OF_THE_WEEK** is one of `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
+  * **DAY_OF_THE_WEEK** is case-insensitive.
+  * **START_TIME** and **END_TIME** are represented as `HHmm`.
 * **PHONE_NUMBER** should be 8 digits that starts with 3, 6, 8 or 9.
 > Reason: This constraint follows the convention set by Singapore's National Numbering Plan.
 * **RATE** is the tuition fee per hour. It must meet the following criteria:
@@ -165,6 +167,7 @@ Adds a student to the address book.
 * **SUBJECT** should only be
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
+* **SUBJECT** is case-insensitive.
 
 </box>
 
