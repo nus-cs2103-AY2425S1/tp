@@ -31,10 +31,11 @@ public class SortCommandParser implements Parser<SortCommand> {
         logger.info("Starting to parse sort command.");
 
         switch (trimmedArgs) {
-        case "name" -> comparator = Comparator.comparing(person -> person.getName().toString());
-        case "subject" -> comparator = Comparator.comparing(person -> person.getSubjects().toString());
+        case "name" -> comparator = Comparator.comparing(person -> person.getName().toString().toLowerCase());
+        case "subject" -> comparator = Comparator.comparing(person -> person.getSubjects().toString().toLowerCase());
         case "class" -> comparator = Comparator.comparing(person ->
-                ComparatorUtil.getPrimaryClassForSorting(Collections.singletonList(person.getClasses().toString()))
+                ComparatorUtil.getPrimaryClassForSorting(Collections.singletonList(person.getClasses().toString()
+                        .toLowerCase()))
         );
         case "attendance" -> comparator = Comparator.comparing(
                 Person::getDaysAttended,
