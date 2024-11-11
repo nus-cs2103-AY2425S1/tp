@@ -232,7 +232,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md) 
+* [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -297,14 +297,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. EduConnect verifies the command inputs
 3. EduConnect adds the student’s contact details to the address book
 4. EduConnect displays a success message
-    
+
     Use case ends.
 
 **Extensions**
 
 * 2a. Required parameter(s) missing in command format
   * 2a1. EduConnect displays an error message.
-  
+
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2d. Existing contact or email given
   * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
-    
+
     Use case ends.
 
 **Use case: UC02 - Add a teacher**
@@ -332,34 +332,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. EduConnect verifies the command inputs
 3. EduConnect adds the teacher’s contact details to the address book
 4. EduConnect displays a success message
-   
+
     Use case ends.
 
 **Extensions**
 * 2a. Required parameter(s) missing in command format
   * 2a1. EduConnect displays an error message.
-    
+
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
   * 2b1. EduConnect displays an error message
-    
+
     Use case ends.
 
-* 2c. Invalid argument for a parameter given 
+* 2c. Invalid argument for a parameter given
   * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
-    
+
     Use case ends.
 
 * 2d. Existing contact or email given
   * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
-    
+
     Use case ends.
 
 **Use case: UC-03 Delete a contact**
 
 **Preconditions**
-* The address book contains at least one contact 
+* The address book contains at least one contact
 * User knows the index of the contact to be deleted
 
 **MSS**
@@ -367,20 +367,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. EduConnect verifies the index validity
 3. EduConnect deletes the contact from the address book
 4. EduConnect displays a success message
-   
+
     Use case ends.
 
 **Extensions**
 * 2a. Invalid index provided
   * 2a1. EduConnect displays an error message, e.g. “The person index provided is invalid: 2”
-    
+
     Use case ends.
 
 **Use case: UC-04 List contacts**
 
 **MSS**
 1. Teacher enters the list command
-2. EduConnect displays a list of all contacts in the address book 
+2. EduConnect displays a list of all contacts in the address book
 
     Use case ends.
 
@@ -394,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Teacher enters the edit command
 2. EduConnect verifies the command inputs
 3. EduConnect edits the specified contact in the address book
-4. EduConnect displays a success message 
+4. EduConnect displays a success message
 
     Use case ends.
 
@@ -406,17 +406,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. Invalid/Unsupported parameter tag used
   * 2b1. EduConnect displays an error message.
-  
+
     Use case ends.
-  
+
 * 2c. Invalid new argument for a parameter given
   * 2c1. EduConnect displays an error message, e.g. "Names should only contain alphanumeric characters and spaces, and it should not be blank"
-    
+
     Use case ends.
 
 * 2d. Duplicate contact or email provided
   * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
-  
+
     Use case ends.
 
 **Use case: UC-06 Clear**
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-* 1a. Teacher specifies a tag to clear 
+* 1a. Teacher specifies a tag to clear
   * 1a1. EduConnect clears all contacts with that tag value in the address book
 
     Use case ends.
@@ -482,7 +482,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 * 1b. Teacher specifies invalid criteria
   * 1b1. EduConnect displays an error message.
-  
+
     Use case ends.
 
 **Use case: UC-09 Mark Attendance**
@@ -498,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. Teacher enters the unmark command with the index(es) of the student(s) to unmark
 2. EduConnect unmarks the specified student(s) attendance, decrementing it by 1
-    
+
     Use case ends.
 
 **Extensions**
@@ -566,7 +566,7 @@ testers are expected to do more *exploratory* testing.
    1. Open the “Command Prompt” (for Windows) or “Terminal” (for Mac/Linux).
    2. Type `cd` followed by the folder location where you saved the EduConnect file.
    3. Type and enter the command `java -jar educonnect.jar`
-   
+
         Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
@@ -580,15 +580,15 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Student
     1. Prerequisities: There is no existing person (student or teacher) in EduConnect with the same contact or email as the student we're adding.
     1. Test case: `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321`
-   
+
         **Expected**: A student is added to EduConnect with the specified details. A new blue colored card is added to the GUI with the student's details.
    2. Test case: `student` (missing required fields like name, contact, etc. )
-   
+
         **Expected**: No student is added. An error is thrown indicating the command given has an invalid format.
    3. Other incorrect `student` commands to try:
       - `student /name John Doe` (missing other required fields)
       - `student /name John Doe /contact 12345 ...` (invalid phone format)
-   
+
       **Expected**: Similar to previous case. No student is added. If all required fields are provided but an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
 ### Adding a Teacher
@@ -620,7 +620,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, negative or a non-integer)<br>
       **Expected**: Similar to previous.
-   
+
    1. Test case: `delete 1 2`<br>
         **Expected**: First and second contact is deleted from the list. Details of the deleted contacts are shown in the status message.
 
@@ -638,7 +638,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `edit 3 /name Bob /contact 12345678`<br>
         **Expected**: Third contact's name is edited to "Bob" and contact number is edited to 12345678. Details of the edited contact shown in the status message.
    4. Test case: `edit 0 /name Bob`<br>
-        **Expected**: No person is edited. Error details shown in the status message. 
+        **Expected**: No person is edited. Error details shown in the status message.
    5. Other incorrect edit commands to try: `edit`, `edit x` (where x is larger than the list size, negative or non-integer), `edit 1 /contact 111` (invalid phone format)<br>
         **Expected**: Similar to previous case. No person is edited. If an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
@@ -693,7 +693,7 @@ testers are expected to do more *exploratory* testing.
    **Expected**: EduConnect remains the same. Error details shown in the status message.
    6. Other incorrect `find` commands to try:
       - `find John` (where the command is missing a TAG to find with)
-   
+
       **Expected**: Similar to previous case. EduConnect remains the same. Error details shown in the status message.
 
 2. Finding people in EduConnect while only some persons are shown
@@ -733,7 +733,7 @@ testers are expected to do more *exploratory* testing.
    **Expected**: No students' attendance are affected. Error details shown in the status message.
    4. Other incorrect `unmark` commands to try:
       - `unmark`, `unmark x` (where x is larger than the list size, negative or a non-integer)
-   
+
       **Expected**: Similar to previous case. Error details shown in the status message.
    5. Test case: `unmark 1` (where index 1 is a teacher) <br>
    **Expected**: Similar to previous case. Error details shown in the status message.

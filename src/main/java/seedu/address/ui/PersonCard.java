@@ -79,10 +79,12 @@ public class PersonCard extends UiPart<Region> {
         // Set other UI components
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
+        name.setWrapText(true);
         String formattedGender = student.getGender().value.toLowerCase().equals("male") ? "Male" : "Female";
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + student.getPhone().value);
         address.setText("📍 " + student.getAddress().value);
+        address.setWrapText(true);
         person.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> {
@@ -95,13 +97,16 @@ public class PersonCard extends UiPart<Region> {
         }
 
         email.setText("📨 " + student.getEmail().value);
+        email.setWrapText(true);
         String formattedSubjects = String.join(" • ", student.getSubjects().stream()
             .map(subject -> subject.subjectName)
             .toArray(String[]::new));
         subjects.setText("📚 " + formattedSubjects);
+        subjects.setWrapText(true);
         String formattedClasses = String.join(" • ", student.getClasses().stream()
             .toArray(String[]::new));
         classes.setText("🏫 " + formattedClasses);
+        classes.setWrapText(true);
 
         daysAttended.textProperty().bind(
             Bindings.format("📅 Days Attended: %d", student.daysAttendedProperty())
@@ -110,6 +115,7 @@ public class PersonCard extends UiPart<Region> {
         daysAttendedContainer.setManaged(true);
 
         nextOfKin.setText("👪 Next of Kin: " + student.getNextOfKinName().fullName);
+        nextOfKin.setWrapText(true);
         nextOfKinContainer.setVisible(true);
         nextOfKinContainer.setManaged(true);
 
@@ -130,10 +136,12 @@ public class PersonCard extends UiPart<Region> {
         // Set other UI components
         id.setText(displayedIndex + ". ");
         name.setText(teacher.getName().fullName);
+        name.setWrapText(true);
         String formattedGender = teacher.getGender().value.toLowerCase().equals("male") ? "Male" : "Female";
         gender.setText("👫 " + formattedGender);
         phone.setText("📱 " + teacher.getPhone().value);
         address.setText("📍 " + teacher.getAddress().value);
+        address.setWrapText(true);
         person.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> {
@@ -146,13 +154,16 @@ public class PersonCard extends UiPart<Region> {
         }
 
         email.setText("📨 " + teacher.getEmail().value);
+        email.setWrapText(true);
         String formattedSubjects = String.join(" • ", teacher.getSubjects().stream()
             .map(subject -> subject.subjectName)
             .toArray(String[]::new));
         subjects.setText("📚 " + formattedSubjects);
+        subjects.setWrapText(true);
         String formattedClasses = String.join(" • ", teacher.getClasses().stream()
             .toArray(String[]::new));
         classes.setText("🏫 " + formattedClasses);
+        classes.setWrapText(true);
 
         daysAttendedContainer.setVisible(false);
         daysAttendedContainer.setManaged(false);
