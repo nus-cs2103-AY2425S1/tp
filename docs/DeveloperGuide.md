@@ -1061,4 +1061,12 @@ Currently, EduManage does not support multiple students with identical names. As
 students by adding numbering to their names (e.g., "John Doe 1," "John Doe 2"). We plan to accommodate this in the future by
 relying on `INDEX` instead of `n/NAME` or `NAME` for commands.
 
+### 7.4 Usage of prefixes reserved in parameters
+
+Currently, EduManage does not check whether reserved prefixes are used within parameters. A future version will ensure that
+all prefixes reserved will be restricted from use in any parameters to prevent conflicts or unexpected behavior. This planned
+enhancement aims to improve system reliability by reducing potential errors arising from misuse of reserved prefixes.
+
+The prefixes include: `a/`, `e/`, `lt/`, `l/`, `n/`, `nt/`, `p/`, `s/`, `d/`, `t/`, `ti/`.
+
 [(Back to Top)](#edumanage-developer-guide)
