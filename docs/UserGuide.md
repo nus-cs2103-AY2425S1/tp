@@ -366,7 +366,7 @@ Format: `deleteappt INDEX DATE HH:mm`
 
 * Removes the appointment scheduled at the specified date and time for the patient at the given Index.
 * `INDEX` refers to the patient’s position in the displayed list.
-* `INDEX` **must be a positive whole number no larger than the size of the list.**
+* `INDEX` must be a positive whole number no larger than the size of the list.
 
 Example:
 * `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024 for the patient at index 1 of the displayed list, assuming 12:12 falls within his appointment window.
