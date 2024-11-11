@@ -1152,7 +1152,7 @@ and check whether the keywords provided to the `find` command are valid characte
 3. **Make error message for `add` command more specific:** Currently, the error message provided when the user inputs an invalid `add` command is too generic. 
 For example, `/add n/Google r/SWE d/01/01/24` will provide an error message stating `Invalid command format!`. It does not provide additional information to the user, 
 on why the command is invalid. It could be improved to state the email field is missing. 
-We plan to implement a checker to check the command provided by the user, and provide a more specific error message depending on why the command is invalid. <br>
+We plan to improve the validator to be able to detect specifically why the command is invalid, and provide a more specific error message. <br>
 
 4. **Improve UI to deal with long texts:** The current application does not allow the user to scroll the list displayed on the application. 
 If there is a very long text, the text will be cut off and the use would have to maximise the application's window in order to see the full text. 
