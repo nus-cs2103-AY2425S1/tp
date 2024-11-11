@@ -11,6 +11,7 @@
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -29,6 +30,7 @@ Additionally, we acknowledge the following resources and tools that contributed 
 Special thanks to the **CS2103/T teaching team** for their structured guidance, feedback, and provision of relevant learning materials that helped shape this project.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -48,7 +50,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -62,6 +64,8 @@ The bulk of the app's work is done by the following four components:
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
+
+<div style="page-break-after: always;"></div>
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
@@ -83,7 +87,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -102,7 +106,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -133,7 +137,6 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-<div style="page-break-after: always;"></div>
 
 In addition to the original AB3 features, the `Logic` component has been extended to support new commands such as adding interests, work experience, and finding contacts based on various criteria. The class diagram below showcases these new features integrated into the `Command` structure:
 
@@ -151,7 +154,7 @@ The diagram below shows the newly added features for UniVerse.
 - **New Features**: These extend the command capabilities in `UniVerse` to allow users to add specific details like interests and work experience, and search contacts based on university, major, interest, or work experience.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -174,7 +177,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -306,7 +309,7 @@ _{more aspects and alternatives to be added}_
 
 ### Product scope
 
-**Target user profile**: University students who
+**Target user profile**: University students who:
 
 *  want to make friends and grow their professional networks by having an all-in-one platform that consolidates all the information (contact details, interests, academic backgrounds and work experience).
 * prefer desktop apps over other types
@@ -458,6 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 </box>
 
 <br>
+<div style="page-break-after: always;"></div>
 
 #### **Use Case: Add Interests or Hobbies**
 **System**: UniVerse  
@@ -539,10 +543,79 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <box type="info" seamless>
 
 **Notes**:
-- Only one-word interests are supported; partial matches and case insensitivity apply.
+Only one-word interests are supported; partial matches and case insensitivity apply.
 </box>
 
+<br>
+
+#### **Use Case: Edit a Contact**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC09 - Edit a Contact
+
+**MSS**:
+1. User requests to edit an existing contact by specifying an index and updated fields.
+2. UniVerse validates the contact index and checks the format of the updated fields.
+3. UniVerse applies the changes to the contact.
+4. UniVerse displays confirmation that the contact has been updated with the new information.
+5. Use case ends.
+
+**Extensions**:
+- **1a**: The specified contact index is invalid.
+  - **1a1**: UniVerse displays an error message.
+  - **1a2**: Use case resumes at step 1.
+- **2a**: One or more fields have an invalid format (e.g., incorrect date format in `b/BIRTHDATE`).
+  - **2a1**: UniVerse displays an error message for the invalid fields.
+  - **2a2**: User re-enters valid fields and resumes the command.
+
+<br>
+
+#### **Use Case: View Help**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC10 - View Help
+
+**MSS**:
+1. User requests to view help information using the `help` command.
+2. UniVerse displays a message explaining how to access help topics or opens the help window.
+3. Use case ends.
+
+**Extensions**:
+- **1a**: User minimizes or closes the help window.
+  - **1a1**: The help command will reopen or restore the help window.
+
+<br>
+
+#### **Use Case: Exit the Application**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC11 - Exit the Application
+
+**MSS**:
+1. User requests to exit the application by using the `exit` command.
+2. UniVerse performs cleanup operations if necessary.
+3. UniVerse closes the application window.
+4. Use case ends.
+
+<br>
+
+#### **Use Case: List All Contacts**
+**System**: UniVerse  
+**Actor**: User  
+**Use Case ID**: UC12 - List All Contacts
+
+**MSS**:
+1. User requests to list all contacts using the `list` command.
+2. UniVerse retrieves all contacts from the stored data and displays them in the contact list.
+3. Use case ends.
+
+**Extensions**:
+- **1a**: Contact list is empty.
+  - **1a1**: UniVerse displays a message indicating that there are no contacts to display.
+
+
 ---
+<div style="page-break-after: always;"></div>
 
 
 
@@ -600,24 +673,28 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Commands to Test
 
 This section includes commands specific to the additional features implemented in this app, along with some example test inputs. Copy-paste these inputs to verify command functionality.
 
-### 1. Adding Interests: `addi`
+
+#### 1. Adding Interests: `addi`
 
 This command allows you to add one or more interests to an existing contact.
 
+<box type="info" seamless>
+
 **Note:** Only interests that were not part of the contact's interest list will be shown on the display message.
+</box>
 
 **Test case 1:** `addi in/1 i/Swimming i/Cycling`
 
@@ -625,6 +702,7 @@ This command allows you to add one or more interests to an existing contact.
 
 **Display Message:** "New interests added to <name of contact at index 1>: [Cyling, Swimming]" **(only if "Swimming" and "Cycling" were not originally part of the interest list of the contact at index 1.)**
 
+<br>
 
 **Test case 2:** `addi in/2 i/Reading`
 
@@ -632,11 +710,15 @@ This command allows you to add one or more interests to an existing contact.
 
 **Display Message:** "New interest added to <name of contact at index 2>: [Reading]" **(only if "Reading" was not originally part of the interest list of the contact at index 2.)**
 
+<br>
+
 **Test case 3:** `addi in/3 i/`
 
 ***Expected:*** Error message due to missing interest input.
 
-### 2. Adding Work Experience: `addw`
+<br>
+
+#### 2. Adding Work Experience: `addw`
 
 This command adds work experience to a contact, replacing any existing work experience if present.
 
@@ -644,33 +726,44 @@ This command adds work experience to a contact, replacing any existing work expe
 
 ***Expected:*** Adds the work experience "SoftwareEngineer,Google,2023" to the contact at index 1.
 
+<br>
+
 **Test case 2:** `addw in/2 w/DataScientist,Meta,2022`
 
 ***Expected:***  Adds "DataScientist,Meta,2022" to the contact at index 2.
+
+<br>
 
 **Test case 3:** `addw in/3 w/`
 
 ***Expected:*** Error message due to incomplete work experience details.
 
-<div style="page-break-after: always;"></div>
+<br>
 
-### 3. Finding Contacts by Interest: `findi`
 
-This command finds contacts by specific interests. The command supports searching for one or more interests.
+#### 3. Finding Contacts by Interest: `findi`
+
+This command finds contacts by specific interest. The command supports searching for one interest only.  Interest is case-insensitive.
 
 **Test case 1:** `findi i/Swimming`
 
 ***Expected:*** Lists all contacts with "Swimming" as their interests.
 
+<br>
+
 **Test case 2:** `findi i/Swimming i/Cycling`
 
-***Expected:***  Lists all contacts with either "Swimming" and "Cycling" as an interest.
+***Expected:***  Error message due to more than one interests in input.
+
+<br>
 
 **Test case 3:** `findi i/UnknownInterest`
 
 ***Expected:*** Empty list or message indicating no matches found.
 
-### 4. Finding Contacts by Work Experience: `findw`
+<br>
+
+#### 4. Finding Contacts by Work Experience: `findw`
 
 This command finds contacts by work experience. It requires a company name and allows optional role and year fields.
 
@@ -678,39 +771,51 @@ This command finds contacts by work experience. It requires a company name and a
 
 ***Expected:*** Lists all contacts who have worked at Amazon.
 
+<br>
+
 **Test case 2:** `findw w/Intern,Meta`
 
 ***Expected:***   Lists contacts who interned at Meta.
+
+<br>
 
 **Test case 3:** `findw w/Intern,Google,2023`
 
 ***Expected:*** Lists contacts who interned at Google in 2023.
 
+<br>
+
 **Test case 4:** `findw w/`
 
 ***Expected:*** Error message due to missing company name.
 
-### 5. Finding Contacts by Major: `findm`
+<br>
 
-This command finds contacts by major. It requires a major. Major is case insensitive. [UserGuide.md](UserGuide.md)
+#### 5. Finding Contacts by Major: `findm`
+
+This command finds contacts by major. It requires a major. Major is case-insensitive.
 
 **Test case 1:** `findm m/Business`
 
 ***Expected:*** Lists all contacts who have major as Business.
 
+<br>
+
 **Test case 2:** `findm m/`
 
 ***Expected:*** Error message due to missing major name.
 
----
+<br>
 
-### 6. Finding Contacts by University: `findu`
+#### 6. Finding Contacts by University: `findu`
 
 This command finds contacts by university. It requires a university. University is case insensitive.
 
 **Test case 1:** `findu u/NUS`
 
 ***Expected:*** Lists all contacts who have university as NUS.
+
+<br>
 
 **Test case 2:** `findu u/`
 
@@ -751,79 +856,127 @@ Our goal was to enhance AB3 by introducing new commands and improving functional
 - The project successfully extended the original AB3 with functionality focused on university students' needs, balancing ease of use and powerful data organization.
 - Careful planning and rigorous testing ensured the new features did not introduce regressions or instability.
 
-## **Appendix: Planned Enhancements**
+---
 
-## Planned Enhancements
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Planned Enhancements**
 
 **Team size**: 5
 
-**1. Relax Formatting Restrictions and Support Multi-Word Input for Work Experience in `addw` Command**  
-Currently, when adding work experience with the `addw` command (e.g., `addw in/1 w/Intern,Google,2024`), the `work experience` field must follow a strict format: it must not contain spaces after commas, the first word must be capitalized, and both role and company names are restricted to a single word each. In future updates, we plan to relax these restrictions by allowing:
+---
 
-- Spaces after commas
-- Optional capitalization in the first word
-- Multi-word inputs for both role and company (e.g., `software engineer, Jane Street, 2024`)
+### 1. Relax Formatting Restrictions and Support Multi-Word Input for Work Experience in `addw` Command
 
-This enhancement will improve flexibility, allowing users to enter more realistic and descriptive job titles and company names for work experience entries.
+- **Current Behavior**:  
+  The `addw` command (e.g., `addw in/1 w/Intern,Google,2024`) requires strict formatting. The role and company names must be single words, with the first letter capitalized, and there must be no spaces after commas.
 
-**2. Allow Multiple Work Experiences per Contact**  
-Currently, each contact can only have a single work experience entry. To better reflect real-life situations where individuals often have multiple job experiences, we plan to allow multiple work experiences for each contact. These entries will be stored as a list, enabling users to add, view, and manage multiple roles over time for each contact. This enhancement will provide a more complete and accurate representation of each contact's professional background.
+- **Limitation**:  
+  This strict formatting limits flexibility, as it prevents users from entering more realistic job titles or multi-word company names (e.g., `software engineer, Jane Street`).
 
-**3. Support Multiple Interest Fields in `findi` Command**  
-Currently, the `findi` command only allows a single interest to be specified at a time. We plan to enhance this command to allow multiple interests (e.g., `findi i/swimming i/reading`), enabling users to search for contacts with any combination of interests. This will return contacts who have **all** specified interests, allowing users to refine their searches for more specific results.
+- **Planned Enhancement**:  
+  Allow spaces after commas, optional capitalization for the first word, and multi-word entries for both roles and companies, enabling entries like `software engineer, Jane Street, 2024`.
 
-**Example Usage and Expected Results**:
-- Command: `findi i/swimming i/reading`
-  - **Expected Result**: The command will return contacts who have both "swimming" and "reading" listed as interests. For instance:
-    - Contact 1: Alice Lee (interests: swimming, reading, cooking)
-    - Contact 2: Bob Tan (interests: reading, swimming)
-    - Contacts with only one of these interests (e.g., "swimming" but not "reading") will not be included in the results.
+---
 
-**4. Support `m/` Substring in Names**  
-In the current version, names that contain `m/` (such as `add n/John m/Doe i/...`) can be mistakenly interpreted as the `major` prefix, which leads to parsing errors. To resolve this, we plan to update the parser so that `m/` within a name field is not confused with the major prefix. This change will allow names like "Jeremy m/Chia" to be entered without issues, improving flexibility in name input.
+### 2. Allow Multiple Work Experiences per Contact
 
-**5. Enhanced Input Validation for Search Commands**  
-Currently, the `find` commands (e.g., `findm`, `findu`) lack strict input validation, which can lead to misleading search results. For instance, a command like `findm m/###` (where `###` is not a valid major) currently returns "No users listed," even though the input is invalid. We plan to improve these commands to validate input and throw a clear error message if the search criteria are invalid. This will prevent inaccurate results and improve the reliability of search feedback.
+- **Current Behavior**:  
+  Each contact can only have one work experience entry.
 
-**6. Consistent Scope Selection for `find` Commands**  
-Currently, some `find` commands operate on the entire contact list, while others search only within the currently displayed list. This inconsistency can be confusing for users. We plan to introduce a scope option that allows users to specify whether they want to search within the entire contact list or only within the currently displayed list.
+- **Limitation**:  
+  This setup does not reflect real-life scenarios where individuals have multiple job experiences. It restricts users from creating a complete professional history for each contact.
 
-- **Example Usage**:
-  - Command: `findm #e m/computer science`
-    - **Scope**: Entire list. This command will search the entire contact list for contacts with the major "computer science," regardless of the currently displayed subset.
-  - Command: `findm #c m/computer science`
-    - **Scope**: Currently displayed list. This command will only search within the contacts currently displayed on the screen.
+- **Planned Enhancement**:  
+  Enable multiple work experiences per contact, storing each as a separate entry within a list. This will allow users to manage a comprehensive job history for each contact.
 
-This enhancement will give users greater control over their searches, ensuring consistency and clarity in search behavior across different commands.
+---
 
-**7. Validate `birthday` Field to Prevent Future Dates**  
-Currently, users can enter a future date for the `birthday` field when creating a new contact using the `add` command. In a future update, we plan to add validation for the `birthday` field to ensure that only dates in the past or present are allowed. This will prevent users from accidentally setting a birthday in the future, ensuring more accurate data entry.
+### 3. Support Multiple Interests in `findi` Command
 
-**Example**:
-- Command: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 w/Intern,Google,2024 u/NUS m/Computer Science t/friends t/owesMoney i/swimming i/reading b/13-12-2030`
-  - **Current Behavior**: This command would be accepted even though the birthday is in the future.
-  - **Planned Behavior**: The command will be rejected with an error message indicating that the `birthday` field must be a past or present date.
+- **Current Behavior**:  
+  The `findi` command only accepts a single interest at a time (e.g., `findi i/swimming`).
 
-This validation will help maintain data accuracy and prevent unrealistic birthday entries.
+- **Limitation**:  
+  Users cannot search for contacts who share multiple interests, limiting the usefulness of the search.
 
-**8. Validate Year in Work Experience to Prevent Unrealistic Future Dates**  
-Currently, users can specify any year for the `work experience` field, even years far in the future, when adding work experience (e.g., `addw in/1 w/Intern,Google,2035`). In a future update, we plan to implement validation for the year in the `work experience` field to ensure that it cannot be set more than 2 years ahead of the current year. This will prevent unrealistic work experience entries that are unlikely to be valid.
+- **Planned Enhancement**:  
+  Allow multiple interests in `findi` (e.g., `findi i/swimming i/reading`), returning contacts who have **all** specified interests, enabling more specific and refined searches.
 
-**Example**:
-- Command: `addw in/1 w/Intern,Google,2035`
-  - **Current Behavior**: This command would be accepted even though the work experience date (2035) is far in the future.
-  - **Planned Behavior**: The command will be rejected with an error message if the work experience year exceeds the limit (e.g., current year + 2 years), ensuring more realistic data entry.
+---
 
-This validation will help maintain data accuracy by ensuring that work experience entries are realistic and relevant.
+### 4. Support `m/` Substring in Names
 
-**9. Limit Length of Interest Field to Improve UI Display**  
-Currently, if a user adds an overly long interest string (e.g., `addi in/1 i/VeryLongInterestNameExceedingLimit`), the UI may not be able to fully display it. This can lead to a poor user experience, as the interest text may be cut off or difficult to read. In future updates, we plan to add a length restriction for the `interest` field to ensure that entries remain manageable in length and display properly in the UI.
+- **Current Behavior**:  
+  If a name contains the substring `m/`, it may be mistakenly interpreted as the `major` prefix, leading to parsing errors (e.g., `add n/John m/Doe`).
 
-**Example**:
-- Command: `addi in/1 i/VeryLongInterestNameExceedingLimit`
-  - **Current Behavior**: This command would be accepted, but the interest text may not display fully in the UI.
-  - **Planned Behavior**: The command will be rejected with an error message if the interest string exceeds a certain length (e.g., 20 characters), prompting the user to enter a shorter, more concise interest.
+- **Limitation**:  
+  This parsing error prevents users from adding names with `m/` within them.
 
-This enhancement will improve the user interface by ensuring that all interest entries display clearly and consistently.
+- **Planned Enhancement**:  
+  Update the parser to differentiate between `m/` used within names and `m/` as the major prefix. This will allow names with the substring `m/` to be entered without issues.
 
-These planned enhancements are intended to make the application more user-friendly, realistic, and adaptable to real-world data needs.
+---
+
+### 5. Enhanced Input Validation for Search Commands
+
+- **Current Behavior**:  
+  Search commands such as `findm` and `findu` currently do not enforce strict input validation. Invalid inputs (e.g., `findm m/###`) result in "No users listed," even if the input format is incorrect.
+
+- **Limitation**:  
+  Lack of strict validation may lead to misleading results and errors that are not user-friendly.
+
+- **Planned Enhancement**:  
+  Add strict validation for search commands, so that invalid input prompts a clear error message, improving feedback reliability.
+
+---
+
+### 6. Consistent Scope Selection for `find` Commands
+
+- **Current Behavior**:  
+  Some `find` commands operate on the entire contact list, while others search only within the currently displayed list.
+
+- **Limitation**:  
+  This inconsistency can confuse users who are unsure about which list is being searched.
+
+- **Planned Enhancement**:  
+  Introduce a scope option (e.g., `#e` for entire list, `#c` for current list) that allows users to specify the scope of the search, ensuring consistency and clarity in search behavior across commands.
+
+---
+
+### 7. Validate `birthday` Field to Prevent Future Dates
+
+- **Current Behavior**:  
+  Users can enter a future date in the `birthday` field (e.g., `b/13-12-2030`), and the command will be accepted.
+
+- **Limitation**:  
+  Accepting future dates for the `birthday` field can lead to inaccurate and unrealistic data entries.
+
+- **Planned Enhancement**:  
+  Implement validation to ensure that the `birthday` field only accepts past or present dates, preventing future dates from being entered and improving data accuracy.
+
+---
+
+### 8. Validate Year in Work Experience to Prevent Unrealistic Future Dates
+
+- **Current Behavior**:  
+  Users can set a work experience date far in the future (e.g., `addw in/1 w/Intern,Google,2035`), which will be accepted.
+
+- **Limitation**:  
+  Accepting unrealistic future dates can lead to inaccurate work history information.
+
+- **Planned Enhancement**:  
+  Add validation to restrict the `year` field in `work experience` to within 2 years of the current date. This will prevent unrealistic entries and ensure relevant and accurate data.
+
+---
+
+### 9. Limit Length of Interest Field to Improve UI Display
+
+- **Current Behavior**:  
+  Users can enter interests longer than 20 characters, causing the UI to cut off text if it exceeds display limits.
+
+- **Limitation**:  
+  Overly long interest strings may not display properly, leading to a poor user experience.
+
+- **Planned Enhancement**:  
+  Restrict the `interest` field to a maximum of 20 characters, ensuring all entries display clearly in the UI and improving readability.

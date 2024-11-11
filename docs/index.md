@@ -6,7 +6,7 @@
 # UniVerse
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T17-1/tp/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2425S1-CS2103T-T17-1/tp)
 
 ![Ui](images/Ui.png)
 
@@ -15,7 +15,7 @@ UniVerse is a **comprehensive platform** tailored for university students to sea
 **Key Features:**
 
 * **Search by Major:** Quickly find and connect with students from the same academic field to foster meaningful academic and professional relationships.
-* **Add New Contacts:** Build your professional network by adding new contacts, complete with essential details such as name, phone, email, address, university, and major.
+* **Add New Contacts:** Build your professional network by adding new contacts, complete with essential details such as name, birthday, phone, email, address, university, and major.
 * **Associate Interests:** Link interests or hobbies to contacts, making it easier to discover peers with common interests in both academic and social circles.
 * **Delete Contacts:** Keep your network organized by easily removing outdated or unnecessary contacts.
 * **Add Work Experience:** Enhance your contacts by adding their internship or work experience, allowing you to connect with people who have relevant industry experience.
