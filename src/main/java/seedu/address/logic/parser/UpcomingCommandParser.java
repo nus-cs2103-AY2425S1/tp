@@ -18,10 +18,16 @@ import seedu.address.model.delivery.Status;
 
 /**
  * Parses input {@code String} arguments and creates a new UpcomingCommand object.
- *
- *  @throws ParseException If the user input does not conform the expected format.
  */
 public class UpcomingCommandParser implements Parser<UpcomingCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the UpcomingCommand
+     * and returns an UpcomingCommand object for execution.
+     *
+     * @param args Input String parameters provided by user.
+     * @return UpcomingCommand object.
+     * @throws ParseException If the user input does not conform to the expected format.
+     */
     @Override
     public UpcomingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -34,18 +40,41 @@ public class UpcomingCommandParser implements Parser<UpcomingCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_START_DATE, PREFIX_END_DATE);
         List<Predicate<Delivery>> predicates = new ArrayList<>();
         if (argMultimap.getValue(PREFIX_START_DATE).isPresent()) {
-            DateTime deliveryStartDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_START_DATE).get());
-            DeliveryIsUpcomingAfterPredicate upcomingAfterPredicate = new DeliveryIsUpcomingAfterPredicate(
-                    deliveryStartDateTime, Status.PENDING);
-            predicates.add(upcomingAfterPredicate);
+            addUpcomingAfterPredicate(argMultimap, predicates);
         }
         if (argMultimap.getValue(PREFIX_END_DATE).isPresent()) {
-            DateTime deliveryEndDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_END_DATE).get());
-            DeliveryIsUpcomingBeforePredicate upcomingBeforePredicate = new
-                    DeliveryIsUpcomingBeforePredicate(deliveryEndDateTime, Status.PENDING);
-            predicates.add(upcomingBeforePredicate);
+            addUpcomingBeforePredicate(argMultimap, predicates);
         }
         assert !predicates.isEmpty();
         return new UpcomingCommand(predicates);
+    }
+
+    /**
+     * Adds an UpcomingAfterPredicate to the list of Predicates provided.
+     *
+     * @param argMultimap Map that stores the mapping of prefixes to their respective arguments.
+     * @param predicates List of Predicates used to filter the Delivery list.
+     * @throws ParseException If the DateTime input provided by the user is invalid.
+     */
+    public void addUpcomingAfterPredicate(ArgumentMultimap argMultimap, List<Predicate<Delivery>> predicates)
+            throws ParseException {
+        DateTime deliveryStartDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_START_DATE).get());
+        DeliveryIsUpcomingAfterPredicate upcomingAfterPredicate = new DeliveryIsUpcomingAfterPredicate(
+                deliveryStartDateTime, Status.PENDING);
+        predicates.add(upcomingAfterPredicate);
+    }
+    /**
+     * Adds an UpcomingBeforePredicate to the list of Predicates provided.
+     *
+     * @param argMultimap Map that stores the mapping of prefixes to their respective arguments.
+     * @param predicates List of Predicates used to filter the Delivery list.
+     * @throws ParseException If the DateTime input provided by the user is invalid.
+     */
+    public void addUpcomingBeforePredicate(ArgumentMultimap argMultimap, List<Predicate<Delivery>> predicates)
+            throws ParseException {
+        DateTime deliveryEndDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_END_DATE).get());
+        DeliveryIsUpcomingBeforePredicate upcomingBeforePredicate = new
+                DeliveryIsUpcomingBeforePredicate(deliveryEndDateTime, Status.PENDING);
+        predicates.add(upcomingBeforePredicate);
     }
 }
