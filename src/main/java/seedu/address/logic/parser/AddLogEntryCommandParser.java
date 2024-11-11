@@ -45,19 +45,7 @@ public class AddLogEntryCommandParser implements Parser<AddLogEntryCommand> {
             throw new ParseException(MESSAGE_INVALID_ID);
         }
 
-        AppointmentDate appointmentDate;
-        try {
-            // Parse date
-            String date = argMultimap.getValue(PREFIX_DATE).get();
-            if (!AppointmentDate.isValidDateString(date)) {
-                throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
-            }
-            appointmentDate = new AppointmentDate(date);
-        } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_DATE);
-        }
-
-
+        AppointmentDate appointmentDate = ParserUtil.parseAppointmentDate(argMultimap.getValue(PREFIX_DATE).get());
 
         // Create and return AddLog without entry
         return new AddLogEntryCommand(identityNumber, appointmentDate);

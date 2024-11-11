@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -15,10 +16,17 @@ import java.util.Objects;
  */
 public class AppointmentDate implements Comparable<AppointmentDate> {
     public static final String MESSAGE_CONSTRAINTS = "Invalid date format! Please use 'dd MMM yyyy'.";
+    public static final String MESSAGE_CONSTRAINTS_INVALID_DATE = "Invalid date! Please enter a valid date.";
     private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern("dd MMM yyyy")
             .toFormatter(Locale.ENGLISH);
+
+    private static final DateTimeFormatter STRICT_FORMATTER = new DateTimeFormatterBuilder()
+            .parseCaseInsensitive()
+            .appendPattern("dd MMM uuuu")
+            .toFormatter(Locale.ENGLISH)
+            .withResolverStyle(ResolverStyle.STRICT);
 
     private final LocalDate date;
 
@@ -39,8 +47,8 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
      */
     public AppointmentDate(String dateString) {
         requireNonNull(dateString);
-        checkArgument(isValidDateString(dateString), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(dateString, FORMATTER);
+        checkArgument(isValidDate(dateString), MESSAGE_CONSTRAINTS_INVALID_DATE);
+        this.date = LocalDate.parse(dateString, STRICT_FORMATTER);
     }
 
     /**
@@ -65,6 +73,23 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
             return false;
         }
     }
+
+    /**
+     * Returns true if the given string is a valid date.
+     *
+     * @param dateString the string to validate
+     * @return true if valid, false otherwise
+     */
+    public static boolean isValidDate(String dateString) {
+        requireNonNull(dateString);
+        try {
+            LocalDate.parse(dateString, STRICT_FORMATTER);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
 
     @Override
     public int compareTo(AppointmentDate o) {

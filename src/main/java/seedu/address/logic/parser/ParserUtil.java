@@ -165,4 +165,22 @@ public class ParserUtil {
         }
         return logSet;
     }
+
+    /**
+     * Parses a {@code String date} into an {@code AppointmentDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static AppointmentDate parseAppointmentDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!AppointmentDate.isValidDateString(trimmedDate)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        }
+        if (!AppointmentDate.isValidDate(trimmedDate)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS_INVALID_DATE);
+        }
+        return new AppointmentDate(trimmedDate);
+    }
 }
