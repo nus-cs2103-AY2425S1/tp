@@ -66,7 +66,6 @@ public class EditContactCommand extends ContactCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_ROLE_CANNOT_BE_EDITED = "Role cannot be changed!";
     private static Logger logger = LogsCenter.getLogger(EditContactCommand.class);
-
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -97,6 +96,7 @@ public class EditContactCommand extends ContactCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Invalid index: " + index.getZeroBased() + " - out of bounds for current list size");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -109,6 +109,7 @@ public class EditContactCommand extends ContactCommand {
         hasDuplicates(personToEdit, editedPerson, model);
 
         model.setPerson(personToEdit, editedPerson);
+        logger.info("Person updated in model: " + editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
