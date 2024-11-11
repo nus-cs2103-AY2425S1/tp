@@ -5,47 +5,64 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "u:AddClaimCommand" as AddClaimCommand LOGIC_COLOR
+participant ":AddClaimCommandParser" as AddClaimCommandParser LOGIC_COLOR
+participant "a:AddClaimCommand" as AddClaimCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(addClaimCommand)
+[-> LogicManager : execute(inputString)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(input string)
+LogicManager -> AddressBookParser : parseCommand(inputString)
 activate AddressBookParser
 
+create AddClaimCommandParser
+AddressBookParser -> AddClaimCommandParser
+activate AddClaimCommandParser
+
+AddClaimCommandParser --> AddressBookParser
+deactivate AddClaimCommandParser
+
+AddressBookParser -> AddClaimCommandParser : parse(claimInputs)
+activate AddClaimCommandParser
+
 create AddClaimCommand
-AddressBookParser -> AddClaimCommand
+AddClaimCommandParser -> AddClaimCommand
 activate AddClaimCommand
 
-AddClaimCommand --> AddressBookParser
+AddClaimCommand --> AddClaimCommandParser
 deactivate AddClaimCommand
 
-AddressBookParser --> LogicManager : u
+AddClaimCommandParser --> AddressBookParser : a
+deactivate AddClaimCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddClaimCommandParser -[hidden]-> AddressBookParser
+destroy AddClaimCommandParser
+
+AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> AddClaimCommand : execute()
+LogicManager -> AddClaimCommand : execute(command)
 activate AddClaimCommand
 
-AddClaimCommand -> Model : createClaim(claim inputs)
-activate Model
-
-Model --> AddClaimCommand : Claim
-deactivate Model
-
-AddClaimCommand -> Model : addClaim(Claim)
+AddClaimCommand -> Model : addClaim(claimInputs)
 activate Model
 
 Model --> AddClaimCommand
 deactivate Model
 
-AddClaimCommand --> LogicManager : result
+create CommandResult
+AddClaimCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddClaimCommand
+deactivate CommandResult
+
+AddClaimCommand --> LogicManager : r
 deactivate AddClaimCommand
-AddClaimCommand -[hidden]-> LogicManager : result
-destroy AddClaimCommand
 
 [<--LogicManager
 deactivate LogicManager
