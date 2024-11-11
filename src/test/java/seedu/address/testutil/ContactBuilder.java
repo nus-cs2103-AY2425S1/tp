@@ -13,6 +13,7 @@ import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
 import seedu.address.model.util.SampleDataUtil;
 
+//@@author
 /**
  * A utility class to help with building Contact objects.
  */
@@ -70,8 +71,8 @@ public class ContactBuilder {
     /**
      * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Contact} that we are building.
      */
-    public ContactBuilder withRoles(String ... tags) {
-        this.roles = SampleDataUtil.getRoleSet(tags);
+    public ContactBuilder withRoles(String ... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
         return this;
     }
 
@@ -99,6 +100,7 @@ public class ContactBuilder {
         return this;
     }
 
+    //@@author cth06-Github
     /**
      * Sets the {@code Nickname} of the {@code Contact} that we are building.
      */
@@ -106,6 +108,7 @@ public class ContactBuilder {
         this.nickname = new Nickname(nickname);
         return this;
     }
+    //@@author
 
     /**
      * Builds and returns a new {@code Contact} instance using the current values set

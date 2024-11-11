@@ -37,6 +37,7 @@ import seedu.address.model.contact.exceptions.DuplicateFieldException;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
+//@@author
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */

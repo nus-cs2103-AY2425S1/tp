@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
 
+//@@author
 /**
  * Represents the in-memory model of the address book data.
  */
@@ -126,6 +127,7 @@ public class ModelManager implements Model {
 
     //=========== Filtered Contact List Accessors =============================================================
 
+    //@@author cth06-Github
     /**
      * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
      * {@code versionedAddressBook}
@@ -134,6 +136,7 @@ public class ModelManager implements Model {
     public ObservableList<Contact> getAllContactList() {
         return allContacts;
     }
+    //@@author
 
     @Override
     public ObservableList<Contact> getFilteredContactList() {

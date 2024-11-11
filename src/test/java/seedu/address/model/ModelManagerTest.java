@@ -23,6 +23,7 @@ import seedu.address.model.contact.exceptions.DuplicateFieldException;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ContactBuilder;
 
+//@@author
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -93,10 +94,12 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasContact(ALICE));
     }
 
+    //@@author cth06-Github
     @Test
     public void getAllContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getAllContactList().remove(0));
     }
+    //@@author
 
     @Test
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
