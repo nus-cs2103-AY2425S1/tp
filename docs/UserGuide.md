@@ -720,7 +720,7 @@ For detailed explanations for the matching criteria of each flag and the accepta
   ```
 **Matching Criteria & Filter Behavior:**
 
-- **Name/Address/Job/Remarks (Substring Matching)**
+- **Name/Address/Job/Remarks (Substring Matching)**:
   - Searches in these fields use **substring matching**, where the search term must match a portion of the field in the exact order it appears in the client record.
   - **Example:**
     If a client’s name is `Gordon Moore`, search terms like `Gordon`, `Moore`, or `Gordon Moore` will match, but `Moore Gordon` will not.
