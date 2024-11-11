@@ -333,8 +333,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean checkStatusFilterAlreadyExists() {
-        return (!statusFilters.isEmpty());
+    public boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
+        if (this.statusFilters.contains(statusToCheck)) {
+            return true;
+        }
+
+        return false;
+
     }
 
     @Override

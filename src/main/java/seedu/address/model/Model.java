@@ -225,7 +225,7 @@ public interface Model {
     /**
      * Checks whether any RSVP status filter already exists in the list of filters.
      */
-    boolean checkStatusFilterAlreadyExists();
+    boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck);
 
     /**
      * Checks whether a specific RSVP status filter already exists in the list of filters.
