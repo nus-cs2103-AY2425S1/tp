@@ -107,11 +107,11 @@ Examples:
 * `NAME` should have alphanumeric characters before and after the symbol, and it should not be blank. Relationship indicator using "S/O" or "D/O" can be included but should be wrapped with a single space, and followed with the name of customer with stated relationship.
 * Duplicated `NAME` is not allowed.
 * If there is already a customer with similar `NAME` (same name excluding space and casing), a warning will be given.
-* `PHONE_NUMBER` should only contains numbers, and it should at least be 3 digits long.
+* `PHONE_NUMBER` should only contains numbers, and it should be at least be 3 digits long.
 * `EMAIL` should be of the format `local-part` `@` `domain` and adhere to the following constraints:
   * The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-).
   * The `local-part` may not start or end with any special characters.
-  * This is followed by a '@' and then a `domain` name.
+  * This is followed by a `@` and then a `domain` name.
   * The `domain` name is made up of domain labels separated by periods.
   * The `domain` name must:
       - end with a domain label at least 2 characters long
@@ -243,9 +243,9 @@ Examples:
 * Add an order under the customer at the specified `CUSTOMER_INDEX`, with a default `Pending` status.
 * The index refers to the index number shown in the displayed customer list.
 * The index and quantity **must be a positive integer** 1, 2, 3, …​
-* 'ITEM' can contain any printable characters, but it should not be blank.
-* Date must follow the following format: `DD-MM-YYYY`
-* If the quantity is not provided, the quantity will be set to a default value of **1**.
+* `ITEM` can contain any printable characters, but it should not be blank.
+* `DATE` must follow the following format: `DD-MM-YYYY`
+* If the `QUANTITY` is not provided, the `QUANTITY` will be set to a default value of **1**.
 * If there already exists a pending order with similar item (same item excluding space and casing), identical quantity and date under that customer, a warning will be given.
 * If the order `DATE` has elapsed the current date, a warning will be given.
 
@@ -332,7 +332,7 @@ Command alias: `marko`<br>
 Format: `markorder ORDER_INDEX`<br>
 Examples:
 * `markorder 2` marks the order with index 2 from the displayed order list as completed.
-* `listorder 1` followed by `marko 1` selects the 1st customer in the address book and marks the 1st order under the 1st customer as completed.
+* `listorder 1` followed by `marko 1` selects the 1st customer in the address book and marks the 1st order under the 1st customer as completed.<br>
   ![result for 'marko 1'](images/markOrder.png)
 
 <box type="important">
