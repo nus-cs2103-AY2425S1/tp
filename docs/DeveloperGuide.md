@@ -739,8 +739,7 @@ hence reducing the usefulness of this command.
 This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
 we plan to adopt other ways of constructing the query to allow for more general search of module-role in the future.
 
-2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields of a contact can be deleted, by editing the contact description field with
-an empty string (For Example: `edit 9 d/` removes description of the ninth contact in the current list), and not any other optional fields such as phone, email and address.
+2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields can be deleted, by specifying the corresponding prefix followed by an empty string (For Example: `edit 9 t/` removes all tags, while `edit 9 d/` removes the description of the ninth contact in the current list). However, other optional fields such as the phone, email and address cannot be removed as of v1.6.
 
 ![point2_screenshot_remove_description_example](images/Planned_Enhancements_Screenshots/Point2_RemoveDescriptionExample.png)
 (As shown in the screenshot, `edit 9 d/` successfully removes description field from the ninth person in the current list.)
@@ -753,3 +752,30 @@ This can be very troublesome to user if he/she accidentally adds these fields to
 If these fields are left unchanged over a long period of time, user may forget that these fields are wrong and hence use the wrong information in the program, which is definitely
 not desired. We plan to allow edit command to accept empty input for phone, email and address and change the parser such that the empty inputs for these fields can be considered as
 deleting them from the selected contact.
+
+3. **Allow the user to delimit special prefixes appearing in the contact details.**
+Currently, if any of the input fields contain the special prefixes, the string will be split into multiple fields, which may not be the user's intention.
+For example, if the user attempts to execute `edit 1 d/For a/b testing`, the command will be wrongly interpreted as
+   - change the description of the first contact to `For`, and
+   - add a new contact with description `b testing`. (refer to the screenshot below)
+
+![point3 screenshot](images/Planned_Enhancements_Screenshots/Point3.png)
+
+The current workaround is to add a non-whitespace character in front of the prefix (i.e. `edit 1 d/For 'a/b testing`), but this is not intuitive to the user.
+We plan to follow a more standard approach of using a backslash to escape the special prefixes.
+More importantly, the parser will remove the backslash at the end of parsing, so that the user does not see the backslash in the final output.
+
+4. **Enforce realistic role assignment for contacts.** Currently, a contact can have multiple roles, such as both "Professor" and "Student".
+This is unrealistic, as an individual is typically either a student or a professor, but not both.
+
+![point4_screenshot](images/Planned_Enhancements_Screenshots/Point4_ConflictingRoleExample.png)<br>
+(As shown in the screenshot, Royston is both a CS1101S professor and CS2100 student.)
+
+We plan to enforce stricter role assignment, ensuring that:
+* A contact can be designated as a Professor across multiple modules. 
+* Alternatively, a contact can be designated as either a Student or a Tutor across multiple modules.
+
+5. **Allows command navigation using up and down arrows.** Currently, the user has to type the command from scratch if he/she wants to execute a previous command again.
+This can be very troublesome if the user wants to execute the same command multiple times, or if the user wants to execute a similar command to the previous one.
+We plan to allow the user to navigate through the command history using the up and down arrows.
+
