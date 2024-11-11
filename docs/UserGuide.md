@@ -38,11 +38,11 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F08-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook. Ensure this folder does not contain a subfolder named `data`.
+1. Copy the file to the folder you want to use as the _home folder_ for NetBook. Ensure this folder does not contain a subfolder named `data`.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar netbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -51,7 +51,7 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com o/nus` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com o/nus` : Adds a contact named `John Doe` to NetBook.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -89,7 +89,7 @@ NetBook is a **desktop app for managing your contacts, optimized for use via a C
 
 ### Viewing help : `help` or `h`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -107,7 +107,7 @@ Format: `help`
 
 ### Adding a person: `add` or `a`
 
-Adds a person to the address book.
+Adds a person to NetBook.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL o/ORGANIZATION [d/LAST SEEN] [t/TAG]… [pr/PRIORITY] [r/REMARK]`
 
@@ -121,24 +121,24 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com o/nus`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com t/criminal`
+* `add n/Betsy Crowe p/99423374 t/friend e/betsycrowe@example.com o/nus t/criminal`
 
 ### Listing all persons : `list` or `l`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in NetBook.
 
 Format: `list`
 
 ### Editing a person : `edit` or `ed`
 
-Edits an existing person in the address book.
+Edits an existing person in NetBook.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/ORGANIZATION] [d/LAST SEEN] [r/REMARK] [pr/PRIORITY]  [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 * Executing this command will remove any filters in place (i.e. all contacts will be displayed).
@@ -198,7 +198,7 @@ Examples:
 
 ### Deleting a person : `delete` or `del`
 
-Deletes the specified person from the address book.
+Deletes the specified person from NetBook.
 
 Format: `delete INDEX` or `del INDEX`
 
@@ -207,12 +207,12 @@ Format: `delete INDEX` or `del INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in NetBook.
 * `find Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
 
 ### Add a remark to a person : `remark`
 
-Adds a remark to an existing person in the address book.
+Adds a remark to an existing person in NetBook.
 
 Format: `remark INDEX [r/REMARK]​`
 
@@ -225,7 +225,7 @@ Examples:
 
 ### Clearing all entries : `clear` or `c`
 
-Clears all entries from the address book.
+Clears all entries from the NetBook.
 
 Format: `clear` or `c`
 
@@ -233,14 +233,14 @@ Format: `clear` or `c`
 
 ### Create a reminder: `remind` or `rem`
 
-Creates a reminder for the specified person in the address book.
+Creates a reminder for the specified person in NetBook.
 
 Format: `remind INDEX d/DATE des/DESCRIPTION`
 
 * Creates a reminder for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* When first added, dates cannot be in the past
+* `DATE` cannot be earlier than the current date
 * Expired reminders will display negative days
 
 Examples:
@@ -251,7 +251,7 @@ Christmas date with the person at index 2
 
 ### Deleting a reminder: `delete_reminder` or `dr`
 
-Deletes the specified reminder from the address book.
+Deletes the specified reminder from NetBook.
 
 Format: `delete_reminder INDEX` or `dr INDEX`
 
@@ -262,6 +262,10 @@ Format: `delete_reminder INDEX` or `dr INDEX`
 
 Examples:
 * `delete_reminder 5` and `dr 5` deletes the 5th reminder in the reminder list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Reminders cannot be edited. To make changes, delete the original reminder and create a new one with updated details.
+</div>
 
 ### Exiting the program : `exit` or `ex`
 
@@ -275,11 +279,11 @@ NetBook data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+NetBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, NetBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause NetBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -287,7 +291,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NetBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
