@@ -309,6 +309,32 @@ The following fields are required as they are essential details that the clinic 
 * NRIC (`Nric`)
 
 #### View Command : `view`
+The `view` command is used to display detailed information of a patient.
+
+The user has to specify the target patient's:
+* NRIC (`Nric`)
+
+##### Parsing User Input
+The `ViewCommandParser` class parses the user input to extract the NRIC parameter that has been specified.
+
+##### Executing the Command
+The `ViewCommand` class is initialized and the `Patient` object with a matching NRIC with the argument is retrieved. A `PatientInfoPanel` containing detailed information about the patient entry is then displayed in the `guiPanelPlaceholder` section of the UI.
+
+##### Sequence Diagram
+The sequence diagram below illustrates the process behind the parsing and execution of the user input.
+In this example, it takes a `view` command: `view T0123456A`
+
+![DeleteSequenceDiagram](images/ViewSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>ViewCommandParser</code> and <code>ViewCommand</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.</div>
+
+##### Design Considerations
+**Using `Nric` Field as a Unique Identifier**<br>
+Following the reasoning of why `Nric` is used as a unique identifier in `add` command, it is also used as a unique identifier in the `view` command.
+
+**Compulsory and Non-Compulsory Fields**<br>
+The following fields are required as they are essential details that the clinic needs to know to identify and delete a patient entry.
+* NRIC (`Nric`)
 
 ### Appointment Management Features
 
