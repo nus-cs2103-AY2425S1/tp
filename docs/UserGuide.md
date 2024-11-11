@@ -65,6 +65,8 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 ### Compulsory Fields: 
 
 1. NAME: Names should only contain alphanumeric characters (letters and digits) and spaces, and should not be blank. **Duplicate names are not allowed**. <br> Prefix: `n/` 
+    * Valid Examples: `John Doe`, `Alice Tan`
+    * Invalid Examples: `#John Do&`, `@l!ce T@n`
 
 <box type="tip" seamless>
 
@@ -74,8 +76,11 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
 </box>
 
 2. ADDRESS: Addresses can take any values, and should not be blank. <br> Prefix: `a/`
+    * Valid Examples: `Blk 10 Serangoon Ave 3, #12-12`, `Blk 410 Clementi Ave 2, #08-08`
 
 3. PHONE NUMBER: Phone numbers should contain only numbers, and should be at least 3 digits long. <br> Prefix: `p/`
+    * Valid Examples: `81234567`, `69876543`
+    * Invalid Examples: `99`, `9123 4567`, `9 1 2 3 4 5 6 7`
 
 4. EMAIL: Emails should be of the format local-part@domain. **Most common emails will be accepted** but refer to the specifications below if you need more information: <br> Prefix: `e/`
    * "local-part" can only contain alphanumeric characters and the following special characters: .+_- (Cannot start/end with any special characters)
@@ -87,16 +92,26 @@ In SocialBook, a person has multiple **details** that can be added/edited by you
    * Invalid Examples: `john.doe.@example.com`, `john.doe@exa_mple.com`
 
 5. DATE OF BIRTH: Date of birth must not be a future date. Input must follow the format yyyy-MM-dd. <br> Prefix: `dob/`
+    * Valid Examples: `2000-01-01`, `1990-12-29`
+    * Invalid Examples: `01-01-2001`, `1st Dec 1996`, `2030-02-01`
 
 ### Optional Fields:
 
-1. PRIORITY: Priority can be HIGH, MEDIUM, or LOW. Default value: LOW <br> Prefix: `pri/` 
+1. PRIORITY: Priority should be HIGH, MEDIUM, or LOW. The input is case-insensitive, meaning `high` is the same as `HIGH`. Default: LOW <br> Prefix: `pri/` 
+    * Valid Examples: `HIGH`, `medium`
+    * Invalid Examples: `middle`, `less`
 
-2. INCOME: Income should be a non-negative decimal number. Default value: 0 <br> Prefix: `income/`
+2. INCOME: Income should be a non-negative decimal number. Default: 0 <br> Prefix: `income/`
+    * Valid Examples: `2000.00`, `1500`
+    * Invalid Examples: `-10`, `80.0%`
 
-3. FAMILY SIZE: Family size should be a positive integer. Default value: 1 <br> Prefix: `famsize/`
+3. FAMILY SIZE: Family size should be a positive integer. Default: 1 <br> Prefix: `famsize/`
+    * Valid Examples: `5`, `10`
+    * Invalid Examples: `0`, `-3`, `2.5`
 
 4. TAGS: Tag names should be alphanumeric. <br> Prefix: `t/`
+    * Valid Examples: `childcare`, `educational`
+    * Invalid Examples: `#needslegalhelp`, `almost-done`
 
 <box type="info" seamless>
 
@@ -192,6 +207,7 @@ Format: `list [archive/] [all/]`
 **Caution:**
 - Should not be used with both `archive/` and `all/` concurrently, e.g. `list archive/ all/` ❌, `list archive/` ✅
 - `archive/` and `all/` should not have parameter values, e.g. `list archive/bob` ❌, `list archive/` ✅
+- Parameters other than `archive/` and `all/` are disallowed, e.g. `list 1` ❌, `list archie/` ❌
 </box>
 
 ### Editing a person: `edit`
@@ -220,12 +236,12 @@ Format: `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [inc
 
 * The search is case-insensitive. e.g. `n/alice` will match `Alice`.
 * At least one filter must be specified (i.e. no empty `find` command).
-* For names, only those that start with the given filter will be matched e.g. `find n/A` returns all persons whose first name starts with A only. 
-* For addresses, those that contain the part of the address given are returned e.g. `find a/clementi` returns all persons who stay at clementi only. 
-* For priorities, exact priorities must be specified to filter accurately e.g. `find pri/high` returns all persons with high priority only.
-* For income, those with income less than or equal to the specified value are listed e.g. `find income/2000` returns all persons with income less than or equal to 2000.00 only.
-* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. `find n/alex n/david n/bobby`
-* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but also have high priority. 
+* For **names**, only those that **start** with the given filter will be matched e.g. `find n/A` returns all persons whose first name starts with A only. 
+* For **addresses**, those that **contain** the part of the address given are returned e.g. `find a/clementi` returns all persons who stay at clementi only. 
+* For **priorities**, exact priorities must be specified to filter accurately e.g. `find pri/high` returns all persons with high priority only.
+* For **income**, those with income **less than or equal** to the specified value are listed e.g. `find income/2000` returns all persons with income less than or equal to 2000.00 only.
+* To specify multiple filters of the **same type**, use the corresponding prefix for every new filter e.g. `find n/alex n/david n/bobby`
+* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. `find n/A n/B pri/HIGH` returns all persons whose name starts with either A or B but also have high priority. 
 
 Examples:
 * `find pri/high` returns `Alice Tan` and `David Wong` (from sample data)
@@ -248,12 +264,12 @@ Format: `sort [name] [address] [priority] [income] [updated]`
 * Only one parameter can be specified at any time.
 * At least one parameter must be specified (i.e. no empty `sort` command).
 * The parameter is case-insensitive. e.g. `sort name` works the same as `sort NAME`.
-* For name, the sorting is in alphabetical order.
-* For address, the sorting is in lexicographical order (similar to alphabetical order but also takes the special characters and numerical digits into account). 
-* Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` followed by `sort address` will sort the contact list of those staying in Clementi in order of their address. 
-* For priority, the sorting is in order from HIGH to LOW.
-* For income, the sorting order is in increasing order from the lowest to highest.
-* For updated, the sorting order is from the person updated least recently to the one updated most recently.
+* For **name**, the sorting is in alphabetical order.
+* For **address**, the sorting is in **lexicographical order** (similar to alphabetical order but also takes the special characters and numerical digits into account). 
+  * Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` followed by `sort address` will sort the contact list of those staying in Clementi in order of their address. 
+* For **priority**, the sorting is in order from **HIGH to LOW**.
+* For **income**, the sorting order is in **increasing order** from the lowest to highest.
+* For **updated**, the sorting order is from the person updated **least recently** to the one updated **most recently**.
 
 Examples:
 * `sort updated`
