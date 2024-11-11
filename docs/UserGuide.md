@@ -348,7 +348,7 @@ Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 
 Additional Details:
 * Adds or updates the next appointment date and time of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`.
-* If the attribute provided matches more than one person, more attributes need to be provided to uniquely match a person.
+* If the attributes provided (e.g. `NAME`) cannot uniquely identify the patient, then more details (e.g. `PHONE` or `EMAIL`) need to be provided to uniquely match a person.
 * To remove the date and time from a person, use `d/None` in the command.
 * 2 patients cannot have the same date and time for their appointment.
 * When no date and time is set, no date and time are displayed.
