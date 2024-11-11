@@ -5,6 +5,10 @@ title: User Guide
 
 **Address Book Command Line Interface (ABCLI)** is a desktop application tailored for **real estate agents** who value the speed and efficiency of managing workflows through a **Command Line Interface (CLI)**. With the added support of a Graphical User Interface (GUI) for visual clarity, ABCLI empowers agents to handle contacts, schedule meetings, and organize property details significantly faster than traditional GUI-only applications. If you are a fast-typing real estate agent, ABCLI is designed to keep up with your speed, boosting your productivity.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+For any terms that you are unfamiliar with, refer to the [Glossary of Terms](#glossary)
+</div>
+
 <a id="toc"></a>
 <span style="font-size: 30px; font-weight: bold; color: #d67d3e">Table of Contents</span>
 
@@ -42,6 +46,7 @@ title: User Guide
   * [Clearing all properties : `clear`](#clear-property)
 * [FAQ](#faq)
 * [Known issues](#known-issues)
+* [Glossary of Terms](#glossary)
 * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -725,11 +730,8 @@ Using the clear command will delete all the properties from the list of properti
 
 --------------------------------------------------------------------------------------------------------------------
 
-<<<<<<< HEAD
-<a id="command-summary"></a>
-<span style="font-size: 30px; font-weight: bold; color: #d67d3e">Command summary</span>
-=======
-## Glossary of Terms
+<a id="glossary"></a>
+<span style="font-size: 30px; font-weight: bold; color: #ba5340">Glossary of Terms</span>
 
 <table>
     <tr>
@@ -745,7 +747,7 @@ Using the clear command will delete all the properties from the list of properti
     <tr>
         <td><b>Buyer</b></td>
         <td>A client that is interested and looking to purchase a house.</td>
-        <td>A buyer that you may add as you use the application could be someone named <code>Jeremy Tan</code></td>
+        <td><code>add n/Betsy Crowe t/urgent e/betsycrowe@example.com b/7,000,000 p/91234567 t/referred</code> is an example of adding a <code>Buyer</code> in <code>ABCLI</code></td>
     </tr>
     <tr>
         <td><b>Case sensitive/insensitive</b></td>
@@ -758,16 +760,71 @@ Using the clear command will delete all the properties from the list of properti
         <td>When typing commands in ABCLI, the panel where you see your typed commands acts as the CLI.</td>
     </tr>
     <tr>
+        <td><b>Field</b></td>
+        <td>Information that the user provides to the commands in ABCLI.</td>
+        <td><code>PHONE_NUMBER</code> and <code>ADDRESS</code> are fields that the user needs to provide to the <code>add</code> buyer command in ABCLI. <code>912345678</code> and <code>Sembawang Street 8 Blk 220</code> are examples of the fields mentioned.</td>
+    </tr>
+    <tr>
+        <td><b>Graphical User Interface (GUI)</b></td>
+        <td>An interface that serves as way to interact with a computer or application using pictures, icons, and buttons on the screen instead of typing commands</td>
+        <td>The <code>Help</code> button is a clickable element in ABCLI's GUI that directs the user to the user guide.</td>
+    </tr>
+    <tr>
+        <td><b>Graphical User Interface (GUI)</b></td>
+        <td>An interface that serves as way to interact with a computer or application using pictures, icons, and buttons on the screen instead of typing commands</td>
+        <td>The <code>Help</code> button is a clickable element in ABCLI's GUI that directs the user to the user guide.</td>
+    </tr>
+    <tr>
+        <td><b>Hard Disk</b></td>
+        <td>A storage box in the computer that keeps all the user's files, programs and information even when the computer is turned off and can be retrieved whenever the user needs it.</td>
+        <td>Data that user has added to ABCLI is stored in a file which in turn is stored in the hard disk.</td>
+    </tr>
+    <tr>
+        <td><b>Java</b></td>
+        <td>A programming language that lets people write instructions for computers, to create many things like applications, websites and games.</td>
+        <td><code>ABCLI</code> is an application that is written using <code>Java</code>.</td>
+    </tr>
+    <tr>
+        <td><b>JAR File (.jar)</b></td>
+        <td>A zip file specifically for Java programs, it holds all the files needed to run a Java program in one place.</td>
+        <td><code>ABCLI</code> is an application that can be opened through the use of a <code>JAR file</code></td>
+    </tr>
+    <tr>
+        <td><b>JSON File (JSON)</b></td>
+        <td>A simple text file used to store and share data in a structured and organised way, that both the user and computer can easily read.</td>
+        <td><code>ABCLI</code> uses a <code>JSON file</code> to store <code>buyer</code> data so that it can be easily read and retrieved by the user and computer. </td>
+    </tr>
+    <tr>
+        <td><b>Meet-up</b></td>
+        <td>A meeting with a buyer that contains basic information such as meeting subject, starting and ending time of meeting, as well as the buyer to meet.</td>
+        <td><code>add s/Discuss work plans i/Meet with Alex and David to discuss the March Project f/2024-02-03 14:00 t/2024-02-03 15:30 n/Alex Yeoh n/David Li</code> is an example of adding a <code>Meet-up</code> in <code>ABCLI</code></td>
+    </tr>
+    <tr>
+        <td><b>Property</b></td>
+        <td>An estate or housing that is of interest to buyers.</td>
+        <td><code>add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium</code> is an example of adding a <code>property</code> in <code>ABCLI</code></td>
+    </tr>
+    <tr>
         <td><b>Parser</b></td>
         <td>Takes in user's commands and translate them into instructions understandable by the computer or application .</td>
         <td>When the command <code>delete 1</code> is typed and entered into ABCLI, the parser will read through the command and inform the application that the user desires to <code>delete</code> at the index <code>1</code>.</td>
+    </tr>
+    <tr>
+        <td><b>Terminal</b></td>
+        <td>A tool that lets users type commands directly to the computer to control it.</td>
+        <td>The command terminal is an example of a <code>Terminal</code></td>
+    </tr>
+    <tr>
+        <td><b>Silently fail</b></td>
+        <td>Occurs when the computer or application is unable to process or execute a command properly, but it does not show any signs of error to the user.</td>
+        <td>An example is when a user inputs a number that is too large into <code>ABCLI</code>, <code>ABCLI</code> will not explicitly inform the user that there is an error, but there will be an error call behind the scenes.</td>
     </tr>
 </table>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
->>>>>>> origin/FixBugsTwo-1.6
+<a id="command-summary"></a>
+<span style="font-size: 30px; font-weight: bold; color: #d67d3e">Command summary</span>
 
 <table>
     <tr>
