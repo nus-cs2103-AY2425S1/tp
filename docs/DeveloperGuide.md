@@ -839,7 +839,7 @@ The following planned enhancements address known feature flaws identified during
 1. **Allow Events To Span Multiple Days**
    - **Feature Flaw**: Currently events cannot span multiple days (e.g overnight events).
    - **Proposed Solution**: Events should be able to have multiple days with multiple start and end timings.
-   - **Expected Outcome**: Users should be able to assign volunteers to all or some days of a multi-date event instead of  and creating multiple events on each day and separately assign volunteers.
+   - **Expected Outcome**: Users should be able to assign volunteers to all or some days of a multi-date event instead of and creating multiple events on each day and separately assign volunteers.
 
 2. **Enhance Event List Sorting**
     - **Feature Flaw**: Events are currently displayed in the order they were added, making it difficult to find upcoming events.
