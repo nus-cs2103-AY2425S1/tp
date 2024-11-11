@@ -740,7 +740,7 @@ testers are expected to do more *exploratory* testing.
        Currently multiple comments per student is not supported. However, you are allowed to have /c as part of
        your string for your comment so long as it is not preceded with blank space.
 
-  
+
 ### Managing Attendance Events
 
 1. **Creating attendance events**
@@ -827,7 +827,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-  
+
        Expected: Application closes
     2. Test case: `exit 2`
 
