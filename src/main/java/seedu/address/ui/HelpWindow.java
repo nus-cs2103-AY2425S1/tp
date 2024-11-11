@@ -117,8 +117,8 @@ public class HelpWindow extends UiPart<Stage> {
                         "list",
                         "list"),
                 new CommandSummary("Filter Client List",
-                        "filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [i/<INCOME>] "
-                                + "[t/<TIER>] [r/<REMARK>] [s/ <STATUS>]",
+                        "filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] "
+                                + "[t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]",
                         "filter n/ TAN LESHEW t/ gold"),
                 new CommandSummary("View Client Details",
                         "view <INDEX>",

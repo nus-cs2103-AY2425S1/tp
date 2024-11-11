@@ -309,7 +309,7 @@ Additionally, certain command hints could benefit from more clarity on constrain
 1. The current error messages are functional and provide sufficient guidance for users. However, standardizing them will improve usability by minimizing confusion and ensuring consistent messaging.
 2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
 
-### 5. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
+### 6. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
 **Current issue:** The current parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
 - `income` must be a full, valid 8-digit phone number.
 - `email` must be a valid email address.
@@ -317,6 +317,15 @@ Additionally, certain command hints could benefit from more clarity on constrain
 These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
 
 **Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the filter command, allowing any input and matching based on substrings rather than strict validation.
+
+**Status:** Scheduled for future release due to current timeline priorities.
+
+### 7. Prevent Duplicate Client Entries by Standardizing Name Formatting
+**Current issue:** Client names are currently considered distinct if they contain minor differences in whitespace (e.g., `John Doe` vs. `John  Doe`). This can lead to duplicate entries due to minor typos when using the `add` or `edit` commands.
+
+This can result in duplication of clients when using the `add` or `edit` command due to typos.
+
+**Proposed Enhancement:** Standardize client names by trimming excess whitespace from each part of the name before storing and comparing entries. This ensures that variations in spacing do not create duplicates.
 
 **Status:** Scheduled for future release due to current timeline priorities.
 
@@ -352,28 +361,28 @@ These requirements can be restrictive for agents who may prefer more flexible fi
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                               | So that I can…​                                                                                                                     |
-|----------|-----------------|----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | user            | save current data                                                          | when I close & open the app, details I have added persist                                                                           |
-| `* * *`  | user            | be able to edit data of my client                                        | I can change client details without having to delete a contact and re-add it with the new details                                 |
-| `* * *`  | banking agent   | add a client                                                             | I can save the records and details of the new client                                                                              |
-| `* * *`  | banking agent   | remove a client                                                          | I can remove a client that is no longer going to use our credit card services or is blacklisted                                   |
-| `* * *`  | banking agent   | view details of a client                                                 | I need not ask clients for details again                                                                                          |
-| `* * *`  | banking agent   | save contact details of the clients                                      | I can contact clients who are more willing to spend money and call back clients with updates                                    |
-| `* * *`  | banking agent   | edit contact details of the clients                                      | I need not delete and re-add a client just for a small change in detail (i.e. moved house)                                        |
-| `* * *`  | banking agent   | delete contact details                                                     | I can remove clients who are no longer valid or for whatever reason are not worth saving                                          |
-| `* * *`  | banking agent   | save a note/remarks about the clients                                    | I can recall any particular notable details about the client (for e.g. This client is very concerned about pricing)             |
-| `* *`    | banking agent   | check which credit card services or plans a client has/had               | I avoid selling products that the client already has                                                                              |
-| `* *`    | banking agent   | filter using details like occupation and income                            | I can target a group of clients more quickly                                                                                      |
-| `* *`    | first time user | have a walkthrough guide to show me the user interface                     | I am familiar with the features available and how I can find and use them                                                           |
-| `*`      | user            | export current data                                                        | I can backup the data regularly                                                                                                     |
-| `*`      | user            | import data from a backup                                                  | I can use my data backed up in case of data loss, or initialise the app with a set of data if I am transferring from a prior source |
-| `*`      | banking agent   | view common urls/card information                                          | I can read/send them to the client quickly when inquired                                                                          |
-| `*`      | banking agent   | be reminded to call back a client when I open the application              | I can immediately know which client I need to follow up today                                                                       |
-| `*`      | impatient user  | get the results that falls into a specific group/category                  | I don’t waste time querying all the result in that category one by one                                                              |
-| `*`      | impatient user  | enter details quickly using a user-friendly interface                      | I can quickly add/view data and not get mad because it’s fast                                                                       |
-| `*`      | long time user  | access my most frequently used features easily                             | I can save time when accessing my most used features                                                                                |
-| `*`      | beginner user   | have a help menu                                                           | I know how to perform a particular task                                                                                             |
+| Priority | As a …​         | I want to …​                                                             | So that I can…​                                                                                                                     |
+|----------|-----------------|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | user            | save current data                                                        | when I close & open the app, details I have added persist                                                                           |
+| `* * *`  | user            | be able to edit data of my client                                        | I can change client details without having to delete a contact and re-add it with the new details                                   |
+| `* * *`  | banking agent   | add a client                                                             | I can save the records and details of the new client                                                                                |
+| `* * *`  | banking agent   | remove a client                                                          | I can remove a client that is no longer going to use our credit card services or is blacklisted                                     |
+| `* * *`  | banking agent   | view details of a client                                                 | I need not ask clients for details again                                                                                            |
+| `* * *`  | banking agent   | save contact details of the clients                                      | I can contact clients who are more willing to spend money and call back clients with updates                                        |
+| `* * *`  | banking agent   | edit contact details of the clients                                      | I need not delete and re-add a client just for a small change in detail (i.e. moved house)                                          |
+| `* * *`  | banking agent   | delete contact details                                                   | I can remove clients who are no longer valid or for whatever reason are not worth saving                                            |
+| `* * *`  | banking agent   | save a note/remarks about the clients                                    | I can recall any particular notable details about the client (for e.g. This client is very concerned about pricing)                 |
+| `* *`    | banking agent   | check which credit card services or plans a client has/had               | I avoid selling products that the client already has                                                                                |
+| `* *`    | banking agent   | filter using details like occupation and income                          | I can target a group of clients more quickly                                                                                        |
+| `* *`    | first time user | have a walkthrough guide to show me the user interface                   | I am familiar with the features available and how I can find and use them                                                           |
+| `*`      | user            | export current data                                                      | I can backup the data regularly                                                                                                     |
+| `*`      | user            | import data from a backup                                                | I can use my data backed up in case of data loss, or initialise the app with a set of data if I am transferring from a prior source |
+| `*`      | banking agent   | view common urls/card information                                        | I can read/send them to the client quickly when inquired                                                                            |
+| `*`      | banking agent   | be reminded to call back a client when I open the application            | I can immediately know which client I need to follow up today                                                                       |
+| `*`      | impatient user  | get the results that falls into a specific group/category                | I don’t waste time querying all the result in that category one by one                                                              |
+| `*`      | impatient user  | enter details quickly using a user-friendly interface                    | I can quickly add/view data and not get mad because it’s fast                                                                       |
+| `*`      | long time user  | access my most frequently used features easily                           | I can save time when accessing my most used features                                                                                |
+| `*`      | beginner user   | have a help menu                                                         | I know how to perform a particular task                                                                                             |
 | `*`      | beginner user   | have some sample client data that has already been inputted into the app | I can find out information can be saved in the application                                                                          |
 
 ### Use cases
@@ -507,16 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U7 - Remove remarks about a client**
-
-**MSS**
-
-1.  User performs <u> Edit remarks about a client (U4)</u>.
-2.  User removes existing remark through editing.
-
-    Use case ends.
-
-**Use case: U8 - Clear clients' contacts**
+**Use case: U7 - Clear clients' contacts**
 
 **MSS**
 
@@ -535,7 +535,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U9 - Undo the most recent change**
+**Use case: U8 - Undo the most recent change**
 
 **MSS**
 1. User requests to undo the last change made to the list of contacts.
@@ -551,7 +551,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: U10 - Exit**
+**Use case: U9 - Exit**
 
 **MSS**
 
