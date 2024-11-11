@@ -2,6 +2,10 @@ package tutorease.address.logic.parser;
 
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.DeleteLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
@@ -12,6 +16,8 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  */
 public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
 
+    private static Logger logger = LogsCenter.getLogger(DeleteLessonCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteLessonCommand
      * and returns a DeleteLessonCommand object for execution.
@@ -19,6 +25,7 @@ public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
      */
     public DeleteLessonCommand parse(String args) throws ParseException {
         try {
+            logger.log(Level.INFO, "Parsing DeleteLessonCommand with args: " + args);
             Index index = ParserUtil.parseIndex(args.trim());
             return new DeleteLessonCommand(index);
         } catch (ParseException pe) {

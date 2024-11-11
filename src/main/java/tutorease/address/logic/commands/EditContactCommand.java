@@ -19,7 +19,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.commons.util.CollectionUtil;
 import tutorease.address.commons.util.ToStringBuilder;
@@ -62,9 +65,10 @@ public class EditContactCommand extends ContactCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_ROLE_CANNOT_BE_EDITED = "Role cannot be changed!";
-
+    private static Logger logger = LogsCenter.getLogger(EditContactCommand.class);
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+
 
     /**
      * Creates an EditContactCommand to edit the details of a person in the filtered person list.
@@ -77,28 +81,41 @@ public class EditContactCommand extends ContactCommand {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
+        assert index != null : "index cannot be null";
+        assert editPersonDescriptor != null : "Edit Person Descriptor cannot be null";
+
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        logger.log(Level.INFO, this.toString());
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.log(Level.INFO, "Executing EditContactCommand");
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.warning("Invalid index: " + index.getZeroBased() + " - out of bounds for current list size");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        assert personToEdit != null : "Person to edit cannot be null";
+        assert editedPerson != null : "Edited person cannot be null";
+
         hasDuplicates(personToEdit, editedPerson, model);
 
         model.setPerson(personToEdit, editedPerson);
+        logger.info("Person updated in model: " + editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+
+        String formattedString = String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+        logger.log(Level.INFO, formattedString);
+        return new CommandResult(formattedString);
     }
 
     /**
@@ -107,7 +124,7 @@ public class EditContactCommand extends ContactCommand {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
-        assert personToEdit != null;
+        assert personToEdit != null : "Person to edit cannot be null";
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
@@ -139,8 +156,15 @@ public class EditContactCommand extends ContactCommand {
         }
 
         EditContactCommand otherEditCommand = (EditContactCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+
+        boolean isIndexEqual = index.equals(otherEditCommand.index);
+        boolean isEditPersonDescriptorEqual = editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+
+        logger.log(Level.INFO, "Comparing EditContactCommand: " + this + " with " + otherEditCommand);
+        logger.log(Level.INFO, "Comparing index: " + isIndexEqual + " Comparing edit person descriptor: "
+                + isEditPersonDescriptorEqual);
+
+        return isIndexEqual && isEditPersonDescriptorEqual;
     }
 
     @Override

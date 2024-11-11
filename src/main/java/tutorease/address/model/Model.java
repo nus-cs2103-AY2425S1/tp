@@ -125,9 +125,9 @@ public interface Model {
     void updateFilteredLessonList(Predicate<Lesson> predicate);
 
     /**
-     * Returns true if the filtered person list is empty.
+     * Returns true if the filtered lesson list is empty.
      *
-     * @return A boolean indicating if the filtered person list is empty.
+     * @return A boolean indicating if the filtered lesson list is empty.
      */
     boolean filteredLessonListIsEmpty();
 
