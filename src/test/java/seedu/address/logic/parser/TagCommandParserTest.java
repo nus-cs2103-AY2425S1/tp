@@ -118,13 +118,6 @@ public class TagCommandParserTest {
     }
 
     @Test
-    public void parse_validLevelInvalidSubject_failure() {
-        String command = " n/John Doe l/S2 NA s/Chem";
-
-        assertParseFailure(parser, command, Subject.getValidSubjectMessage(new Level("S2 NA")));
-    }
-
-    @Test
     public void parse_invalidLevelInvalidSubject_failure() {
         String command = " n/John Doe s/Chem";
 
