@@ -18,7 +18,7 @@ end box
 [-> LogicManager : execute("cadd n/John Doe p/91231231 e/john@example.com")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("cadd n/John Doe p/91231231 e/john@example.com")")
+LogicManager -> AddressBookParser : parseCommand("cadd n/John Doe p/91231231 e/john@example.com")
 activate AddressBookParser
 
 create AddClientCommandParser

@@ -16,11 +16,11 @@ pageNav: 3
 This project is built on top of [AddressBook-Level3 Project](https://se-education.org/). Special thanks and appreciation
 for the team of AddressBook-Level 3.
 
-**ChatGPT** was used to create the TrueRental application logo, as well as **debugging** and **documentation** purposes only.
+**ChatGPT** was used to create the TrueRental application logo, as well as for **debugging** and **documentation** purposes only.
 
 ![logo](images/true_rental.jpg){width=200px height=200px}
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -86,7 +86,7 @@ There are two ways to run tests.
 
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [TrueRental’s architecture](DeveloperGuide.md#architecture).
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -139,6 +139,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified
@@ -163,6 +165,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -212,6 +216,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
+<div style="page-break-after: always;"></div>
+
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
@@ -248,6 +254,8 @@ each `Person` needing their own `Tag` objects.<br>
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -373,8 +381,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user    | set reminders for a _client_                      | remember my schedule with individual _client_                              |
 | `*`      | user    | lock my application                               | protect my data                                                            |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `TrueRental` application and the **Actor** is the `user`, unless specified
@@ -472,6 +478,8 @@ otherwise)
 * *a. At any time, user chooses not proceed on with the operation.
 
   Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 #### Use case 3: Find a [_client_](#glossary-client)
 
@@ -702,7 +710,7 @@ otherwise)
 
 [Back to top](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -735,20 +743,22 @@ testers are expected to do more *exploratory* testing.
         2. Windows / Linux: Red cross button at the top-right of the application window.<br>
            Expected: The application will exit and close safely.
     2. Enter `exit` into the command box of the application.<br>
-       Expected: The application will exit and close safely.
-
+       Expected: The application will exit and close safely.<br>
+       
 3. Subsequent Launches
 
     1. Relaunch the application by `cd` into the respective folder with the `truerental.jar` file.
     2. Use `java --version` to ensure your java version is `Java 17`.
     3. Use `java -jar truerental.jar` command to run the application.
-    4. Expected: The application should retain all changes made to the data within the application previously.
-
+    4. Expected: The application should retain all changes made to the data within the application previously.<br>
+       
 4. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
     2. Re-launch the app by typing `java -jar truerental.jar`.<br>
        Expected: The most recent window size and location is retained.
+
+<div style="page-break-after: always;"></div>
 
 ### Basic Usage
 
@@ -908,8 +918,12 @@ Adding a _client_'s rental information while all _clients_ are being shown.
 the clients already has a _rental information_ saved in the application with address of
 `Blk 321 Ang Mo Kio Ave 3, #09-123`.<br>
 
+<box type="info" light>
+
 **Note**: Following test cases should be executed independently. You should delete the newly added rental information 
 after every test case.<br>
+
+</box>
 
 </box>
 
@@ -1148,6 +1162,8 @@ rental information list panel. A command success message is displayed in the res
 </box>
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 <box type="info" seamless>
 
@@ -1445,6 +1461,8 @@ from `15` to `20`.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 <box type="info" seamless>
 
 **Test case 10**: `redit 1 r/1 dd/-1` and `redit 1 r/1 dd/40`<br>
@@ -1535,6 +1553,8 @@ All _clients_ will be displayed in the client list panel.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 #### Find [_clients_](#glossary-client) based on criteria
 
 Find _clients_ based on certain criteria such as **name contains `Amy`**, **is tagged with `Friends`**, etc.
@@ -1611,6 +1631,8 @@ In this case, only the client `Irfan Ibrahim` will be displayed.
 </box>
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 <box type="info" seamless>
 
@@ -1895,6 +1917,8 @@ Step 4: Press ↑ up-arrow key on the keyboard.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 Step 5: Press ↑ up-arrow key on the keyboard.
 
 <box type="success">
@@ -1971,6 +1995,8 @@ Nothing is shown in the command box.
 </box>
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 #### Autofill Commands Feature
 
@@ -2158,6 +2184,8 @@ Value of the input command changes from `redit cl/J ` to `redit cl/Josh`.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 Step 3: Press Tab key on the keyboard.<br>
 
 <box type="success">
@@ -2240,6 +2268,8 @@ displayed in the result display box.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 #### Clear
 
 Clearing the entire True Rental's database, wiping all clients and their respective rental information (if any).
@@ -2321,6 +2351,8 @@ The following is a **DUPLICATE** of the initial client:
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ## Duplicate Rental Information Detection and Handling
 
 Rental information is considered a **duplicate** **if and only if** the `ADDRESS` parameter is **exactly the same**, including case sensitivity.
@@ -2357,6 +2389,9 @@ The following are **DUPLICATES** of the initial rental information:
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+<br>
+<br>
+<br>
 
 ### Appendix: Future Enhancements
 
