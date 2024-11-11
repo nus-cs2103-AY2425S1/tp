@@ -46,6 +46,7 @@ public class Task {
         this.name = name;
         this.deadline = deadline;
         this.status = status;
+        setStatus();
         this.groupsWithTask = groupsWithTask;
     }
 
