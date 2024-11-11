@@ -107,9 +107,8 @@ A client can have any number of tags (including 0).
 The following constraints apply to both the `add` and `edit` commands:
 
 * Client's name should only contain alphanumeric characters and spaces, and it should not be blank
-  * The name is recommended to be within 100 characters long to be displayed properly.
-  * name must be unique (case-sensitive). Clients with the same name cannot be added to
-    the system twice.
+  * Names are recommended to be within 100 characters long to be displayed properly.
+  * Names must be unique (case-sensitive)
       - entering the commands:
           * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
           * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
