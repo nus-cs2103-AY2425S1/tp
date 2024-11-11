@@ -21,7 +21,7 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the emails of current listed participants into a txt file.\n"
-            + "Parameters: FILENAME\n"
+            + "Parameters: FILENAME or FILEPATH\n"
             + "Example: " + COMMAND_WORD + " " + "data/MyEmailsList";
     public static final String MESSAGE_SUCCESS = "Exported participants' emails to \n";
     public static final String MESSAGE_EMPTY = "No participants to export.";

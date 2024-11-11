@@ -267,12 +267,13 @@ Examples:
 
 Exports the current listed persons' emails to a .txt file.
 
-Format: `export FILENAME`
+Format: `export FILENAME` or `export FILEPATH`
 
-* Exports the current listed persons' emails to a .txt file with the specified filename.
-* Filepath can be specified by the user.
-* `FILENAME` should only have alphanumeric characters, `_` and `/`.
+* Exports the current listed persons' emails to a .txt file with the specified filename/filepath.
+* `FILENAME` should only have alphanumeric characters and `_`.
 * If the specified file already exists, a copy will be created for the new export.
+* `FILEPATH` should only have alphanumeric characters, `_` and `/`
+* To avoid I/O errors, the `FILEPATH` should **only consist of pre-existing directories**.
 
 Examples:
 * `export data/MyEmailsList` exports current listed persons' emails to `MyEmailsList.txt` in the `data` directory.
