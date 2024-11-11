@@ -137,7 +137,7 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 
 <box type="info" seamless>
   
-**Note that not all commands can be copy-pasted directly; they are provided as examples. Ensure all pre-requisites are met for each command to work** 
+**Note that not all commands can be copy-pasted directly; they are provided as examples. Ensure all pre-requisites are met for each command to work.** 
 For example, the command `sold 1 1 ap/1110000` will not work if a property to sell has not been added under the contact at index 1. <br>
 </box>
 
@@ -234,6 +234,7 @@ Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/U
 <box type="note" seamless>
 
 **Note:** A property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
+**Note:** The error message for `addBuy` encloses the parameters in square brackets, however these parameters are compulsory.
 </box>
 
 Examples:
@@ -258,6 +259,7 @@ Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un
 <box type="note" seamless>
 
 **Note:** A Property can be assigned up to 2 tags and each tag can have a maximum of 9 characters.
+**Note:** The error message for `addSell` encloses the parameters in square brackets, however these parameters are compulsory.
 </box>
 
 Examples:
@@ -314,6 +316,11 @@ Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 * The index refers to the index number displayed in the buying properties list and person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="note" seamless>
+
+**Note:** The error message for `delBuy` encloses the parameters in square brackets, however these parameters are compulsory.
+</box>
+
 Examples:
 * `list` followed by `delBuy 2 1` deletes the 1st buying property under 2nd person in the address book.
 * `list` followed by `delBuy 4 2` deletes the 2nd buying property under 4th person in the address book.
@@ -330,6 +337,11 @@ Format: `delSell INDEX_PERSON INDEX_PROPERTY`
 * Deletes the property to be sold at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
 * The index refers to the index number displayed in the selling properties list and person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="note" seamless>
+
+**Note:** The error message for `delSell` encloses the parameters in square brackets, however these parameters are compulsory.
+</box>
 
 Examples:
 * `list` followed by `delSell 2 1` deletes the 1st selling property under 2nd person in the address book.
@@ -451,12 +463,16 @@ Format: `sort f/FIELD o/ORDER`
 * The FIELD parameter can be `Name` or `NumProp`. The `Name` field is the name of the contact and the `NumProp` field is the number of properties associated with the contact. Users can sort the contact list based on these fields.
 * The ORDER parameter can be `L` for ascending (Low to High) and `H` for descending (High to Low).
 
+<box type="note" seamless>
+
+**Note:** Note: The error message for `sort` encloses the parameters in square brackets, however these parameters are compulsory.
+</box>
+
 Examples:
 * `sort f/Name o/L` returns the contact list sorted in ascending order with respect to the name associated with a contact.
 * `sort f/NumProp o/H` returns the contact list sorted in descending order with respect to the property list associated with the contact.
   ![result for sort](images/sortCommand.png)
 
-Note: The error message for sort encloses the parameters in square brackets, however these parameters are compulsory.
 
 ### Sort all properties associated with a person: `sorti`
 
@@ -468,6 +484,11 @@ Format: `sorti INDEX f/FIELD o/ORDER`
 * The parameters FIELD and ORDER are case-sensitive.
 * The FIELD parameter can be `Price`
 * The ORDER parameter can be `L` for ascending and `H` for descending.
+
+<box type="note" seamless>
+
+**Note:** Note: The error message for `sorti` encloses the parameters in square brackets, however these parameters are compulsory.
+</box>
 
 Examples:
 * `sorti 1 f/Price o/L` returns the property list for contact at index 1 sorted in ascending order with respect to the price associated to it.
@@ -483,6 +504,11 @@ Format `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL_PRICE`
 * The parameters PERSON_INDEX and PROPERTY_TO_BUY_INDEX must be positive integers.
 * The ACTUAL_PRICE must be a valid numerical value.
 
+<box type="note" seamless>
+
+**Note:** Note: The error message for `bought` encloses the parameters in square brackets, however these parameters are compulsory.
+</box>
+
 Examples:
 Assuming you have executed the command `addBuy 1 ht/c bp/1650000 pc/189651 un/5-10` before executing the following:
 * `bought 1 1 ap/1110000` marks property to buy 1 for contact 1 as bought at the actual price of $1110000 and removes from list.
@@ -494,6 +520,11 @@ Format `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL_PRICE`
 
 * The parameters PERSON_INDEX and PROPERTY_TO_BUY_INDEX must be positive integers.
 * The ACTUAL_PRICE must be a valid numerical value.
+
+<box type="note" seamless>
+
+**Note:** Note: The error message for `sold` encloses the parameters in square brackets, however these parameters are compulsory.
+</box>
 
 Examples:
 Assuming you have executed the command `addSell 1 ht/c sp/1650000 pc/189651 un/5-10` before executing the following:
@@ -574,24 +605,24 @@ Examples:
   - Cause: The required person index is missing.
   - Highlight: No specific part is highlighted.
 
-2. **Invalid Index Value**:
+3. **Invalid Index Value**:
   - Command entered: `addBuy -22 ht/c pc/999111 un/10-01 bp/1000000`
   - Cause: The person index `-22` is invalid.
   - Highlight: The invalid `-22` part is highlighted.
 
-3. **Invalid Parameter Values**:
+4. **Invalid Parameter Values**:
   - Command entered: `add n/John Doe p/abc e/johnd@example.com a/John street, block 123, #01-01`
   - Cause: The phone number `abc` is invalid.
   - Highlight: The `p/abc` part is highlighted.
 
-4. **Invalid Command Format and Other Errors**:
+5. **Invalid Command Format and Other Errors**:
   - Command entered: `addBuy 1 pc/999111 un/10-01 bp/1000000`
   - Cause: The housing type parameter `ht/` is missing.
   - Highlight: No specific part is highlighted.
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
