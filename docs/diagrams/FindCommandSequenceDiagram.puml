@@ -1,4 +1,4 @@
-@startuml
+@startuml FindCommandSequenceDiagram
 !include style.puml
 skinparam ArrowFontStyle plain
 skinparam arrowThickness 1.1
@@ -35,7 +35,7 @@ activate NameContainsKeywordsPredicate
 NameContainsKeywordsPredicate --> FindCommandParser : p
 deactivate NameContainsKeywordsPredicate
 
-AddressBookParser -> FilterCommandParser : parse("filter Vegan Vegetarian")
+create PhoneContainsKeywordsPredicate
 
 FindCommandParser -> PhoneContainsKeywordsPredicate : new PhoneContainsKeywordsPredicate(["9123"])
 activate PhoneContainsKeywordsPredicate
