@@ -65,7 +65,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -141,7 +141,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -173,7 +173,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
@@ -199,7 +199,7 @@ The `Model` component,
 
 </box>
 
-**API** : [`LessonManager.java`]()
+**API** : [`LessonManager.java`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/model/person/lesson/LessonManager.java)
 
 <puml src="diagrams/LessonClassDiagram.puml" width="450" />
 
@@ -222,7 +222,7 @@ Note: As of `v1.5` clashing lessons are not allowed, hence when a `Person` is de
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F09-4/tp/blob/master/src/main/java/tuteez/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -395,53 +395,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types keyword followed by student details into the textbox
-2. Tuteez acknowledges that a new student has been added
-3. Use case ends
+1. User types keyword followed by student details into the textbox.
+2. Tuteez acknowledges that a new student has been added.
+3. Use case ends.
 
 **Extensions**
 
-- 2a. Tuteez detects similar/identical name
-    - 2a1. Tuteez rejects the new addition and show error message
-    Use case ends
+* 2a. Tuteez detects an identical name.
 
-- 2b. Tuteez detects clashing lesson
-    - 2b1. Tuteez rejects the new addition and show error message
-    Use case ends
+    * 2a1. Tuteez rejects the new addition and show error message.
+
+    Use case ends.
+
+* 2b. Tuteez detects clashing lesson.
+
+    * 2b1. Tuteez rejects the new addition and show error message.
+
+    Use case ends.
 
 
 **Use case: UC2 - List all students**
 
 **MSS**
 
-1. User types keyword
-2. Tuteez displays all students
-3. Use case ends
+1. User types keyword.
+2. Tuteez displays a list of all students.
+3. Use case ends.
+
+**Extensions**
+
+* 2a. The list of all students is empty.
+
+    Use case ends.
 
 **Use case: UC3 - Delete a student**
 
 **MSS**
 
-1.  User requests to list students
-2.  Tuteez shows a list of student <u>(UC2)</u>
-3.  User types keyword followed by delete index or name
-4.  Tuteez deletes the person
-5. Use case ends
+1.  User requests to list students.
+2.  Tuteez shows a list of students <u>(UC2)</u>.
+3.  User types keyword followed by delete index or name.
+4.  Tuteez deletes the person.
+5.  Use case ends.
 
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
 * 3a. The given index is invalid.
 
-  - 3a1. Tuteez shows an error message.
+  * 3a1. Tuteez shows an error message
 
-      Use case resumes at step 2.
-- 3b. The given name does not exist
-  - 3b1. Tuteez shows an error message.
+      Use case resumes at step 2
+  
+* 3b. The given name does not exist
+
+  * 3b1. Tuteez shows an error message
         
       Use case resumes at step 2
 
@@ -449,10 +457,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons
-1. tuteez shows a list of persons <u>(UC2)</u>
-1. User types keyword followed by index then lesson day and time
-1. tuteez adds lesson to student
+1. User requests to list students
+1. Tuteez shows a list of students <u>(UC2)</u>
+1. User types keyword followed by index of the student and then lesson day and time
+1. Tuteez adds lesson to student
 
 **Extensions**
 
@@ -468,11 +476,74 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case resumes at step 2
 
-* 3c. The given index is invalid.
+* 3c. The given index is invalid
 
-   * 3c1. Tuteez shows an error message.
+   * 3c1. Tuteez shows an error message
 
    Use case resumes at step 2
+
+** Use case: UC5 - Delete a lesson from a student**
+
+**MSS**
+
+1. User requests to list students
+2. Tuteez shows a list of students <u>(UC2)</u>
+3. User types keyword followed by index of the student and then lesson index to delete
+4. Tuteez deletes the lesson from the student
+
+**Extensions**
+
+* 3a. The given student index is invalid
+  
+    * 3a1. Tuteez shows an error message
+  
+    Use case resumes at step 2
+
+* 3b. The given lesson index is invalid
+
+    * 3b1. Tuteez shows an error message
+  
+    Use case resumes at step 2
+
+**Use case: UC6 - Add a remark to a student**
+
+**MSS**
+
+1. User requests to list students
+2. Tuteez shows a list of students <u>(UC2)</u>
+3. User types keyword followed by index of the student and then the remark to be added
+4. Tuteez adds the remark to the student
+
+**Extensions**
+
+* 3a. The given student index is invalid
+
+    * 3a1. Tuteez shows an error message
+  
+    Use case resumes at step 2
+
+**Use case: UC7 - Delete a remark from a student**
+
+**MSS**
+
+1. User requests to list students
+2. Tuteez shows a list of students <u>(UC2)</u>
+3. User types keyword followed by index of the student and then the remark index to delete
+4. Tuteez deletes the remark from the student
+
+**Extensions**
+
+* 3a. The given student index is invalid
+
+    * 3a1. Tuteez shows an error message
+  
+    Use case resumes at step 2
+
+* 3b. The given remark index is invalid
+
+    * 3b1. Tuteez shows an error message
+  
+    Use case resumes at step 2
 
 ### Non-Functional Requirements
 
