@@ -131,13 +131,13 @@ Parameters often take up the form of `p/[PARAMETER]` where p is the parameter sy
 ### Patient Parameters
 
 
-| Symbol  | Parameter    | Constraints                                                                                                                                                                                 |
-| ------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`n`** | `NAME`       | - Must contain at least 1 alphabetic character and has a character limit of 50.<br> - Allows alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.       |
-| **`i`** | `ID`         | - Must contain at least 1 alphanumeric character and has a character limit of 36.<br> - Allows alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets.                 |
-| **`w`** | `WARD`       | - Must contain at least 1 alphanumeric character and has a character limit of 50.                                                                                                           |
-| **`d`** | `DIAGNOSIS`  | - Must contain at least 1 alphabetic character and has a character limit of 80.                                                                                                             |
-| **`m`** | `MEDICATION` | - Must contain at least 1 alphanumeric character and has a character limit of 80.<br> - Allows alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods. |
+| Symbol  | Parameter    | Constraints                                                                                                                                                                                                                           |
+| ------- | ------------ |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`n`** | `NAME`       | - Must contain at least 1 alphabetic character and has a character limit of 50.<br> - Allows alphabetic characters, spaces, rounded brackets, hyphen, forward-slashes, @, and commas.                                                 |
+| **`i`** | `ID`         | - Must contain at least 1 alphanumeric character and has a character limit of 36.<br> - Allows alphanumeric characters, hyphens, forward-slashes, hashes, rounded brackets.<br> - **Unique**: Cannot have duplicates (case sensitive) |
+| **`w`** | `WARD`       | - Must contain at least 1 alphanumeric character and has a character limit of 50.                                                                                                                                                     |
+| **`d`** | `DIAGNOSIS`  | - Must contain at least 1 alphabetic character and has a character limit of 80.                                                                                                                                                       |
+| **`m`** | `MEDICATION` | - Must contain at least 1 alphanumeric character and has a character limit of 80.<br> - Allows alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.                                           |
 
 ### Notes Parameters
 
