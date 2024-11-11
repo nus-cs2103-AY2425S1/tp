@@ -20,6 +20,8 @@
     - [Jackson](https://github.com/FasterXML/jackson): Used for JSON data processing.
     - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability.
 
+<!-- Spacer for extra break -->
+
 - **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
 
 - **References to Other Team Projects (TPs):**
@@ -258,6 +260,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
+  <p><p/>
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
@@ -319,7 +322,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | inexperienced user       | be informed a customer already made an identical order    | take note of duplicate orders made by the same customer    |
 | `*`      | inexperienced user       | be informed if a new order's delivery date has passed     | take note of erroneous creation of historical orders       |
 
-*{More to be added}*
 
 For **all** use cases, the system is **SellSavvy** and the actor is the **user**.
 
@@ -407,7 +409,7 @@ Use case ends.
 
 
 * 2b. SellSavvy detects that there are no customers with the specified index.
-  * 2b1. SellSavvy displays an error that the customer index is invalid. 
+  * 2b1. SellSavvy displays an error that the customer index is invalid.
 
   Use case ends.
 
@@ -761,8 +763,6 @@ Use case ends.
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
-
-<a id="similar"></a>
 * **Similar names (for customers, orders and tags)**: Names which are identical if whitespaces and case sensitivity are ignored.
 * **Similar details (orders)**: Orders with identical date, quantity and status along with similar item names.
 
@@ -807,7 +807,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a customer
 
-**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with duplicate/similar names. You are advised to follow the test cases in order. <br> 
+**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with duplicate/similar names. You are advised to follow the test cases in order.<br>
 
 **Tips:** All the prerequisites below will be fulfilled if you start off with the default sample data and follow the test cases in sequence.
 
@@ -821,10 +821,10 @@ testers are expected to do more *exploratory* testing.
 2. Adding a unique customer with all parameters specified using the command alias.
 
     1. Prerequisites: Customer with name `Betsy Crowe` or other similar names does not already exist in the address book.
-   
+
     2. Test case: `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` <br>
        Expected: The customer is successfully added. Details of the added customer shown in the status message.
-   
+
 3. Adding a customer with an identical name.
 
    1. Prerequisites: Customer with name `Betsy Crowe` already exists in the address book.
@@ -832,7 +832,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `addcustomer n/Betsy Crowe t/friend e/betsycrowe@duplicate.com a/Newgate Prison p/12345678 t/criminal` <br>
       Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
 
-4. Adding a customer with a [similar name](#similar) and without the optional `tag` field.
+4. Adding a customer with a [similar name](#glossary) and without the optional `tag` field.
 
     1. Prerequisites: Customer with name `Betsy Crowe` but not `Betsy crowe` already exist in the address book.
 
@@ -846,7 +846,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `addcustomer n/Yu Sutong t/vvip t/vvip e/su@example.com a/Newgate Prison p/12345678` <br>
        Expected: The customer is successfully added with one of the duplicated tags ignored. Details of the added customer shown in the status message.
 
-6. Adding a customer with [similar tags](#similar).
+6. Adding a customer with [similar tags](#glossary).
 
     1. Prerequisites: Customer with name `Foo Chao` or other similar names does not already exist in the address book.
 
@@ -876,17 +876,27 @@ testers are expected to do more *exploratory* testing.
 1. Finding customers with one keyword.
 
     1. Test case: `findcustomer bernice` <br>
-       Expected: 
+       Expected:
        - All customers with 'bernice' in their names are listed. A success message shown in the status message.
        - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
-       
+       <p><p/>
+
 2. Finding customers with multiple keywords using the command alias.
 
     1. Test case: `findc alex david` <br>
        Expected:
        - All customers with `alex` or `david` in their names are listed. A success message shown in the status message.
        - If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.
-   
+       <p><p/>
+
+3. Finding customer who does not exist in the address book.
+
+    1. Prerequisites: Customer with name containing `khengyang` (case-insensitive) does not exist in the address book.
+
+    2. Test case: `findcustomer khengyang` <br>
+       Expected: No customers listed. A success message shown in the status message. A message informing user that no related customers are found is shown in the customer list.
+
+
 ### Editing an existing customer
 
 1. Editing a customer while all customers are being shown.
@@ -910,17 +920,19 @@ testers are expected to do more *exploratory* testing.
        - Customer with name `Betsy Crowe` already exist in the address book.
        - At least 1 customer is listed.
        - The customer to be edited is not `Betsy Crowe`.
+        <p><p/>
 
     2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
 
-4. Editing a customer to have a [name similar to an existing customer](#similar).
+4. Editing a customer to have a [name similar to an existing customer](#glossary).
 
     1. Prerequisites:
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
         - At least 1 customer is listed.
         - The customer to be edited is not `Betsy Crowe`.
-       
+       <p><p/>
+
     2. Test case: `editcustomer 1 n/betsy crowe` <br>
        Expected: The customer is successfully edited. A warning and details of the edited customer shown in the status message.
 
@@ -931,7 +943,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editcustomer 1 t/friends t/friends` <br>
        Expected: The customer's tags is successfully edited with one of the duplicated tags ignored. Details of the edited customer shown in the status message.
 
-6. Editing a customer to have [similar tags](#similar).
+6. Editing a customer to have [similar tags](#glossary).
 
     1. Prerequisites: At least one customer is listed.
 
@@ -943,7 +955,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `editcustomer 1 n/@#$%` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
-   
+
 ### Deleting a customer
 
 1. Deleting a customer while all customers are being shown.
@@ -976,10 +988,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a unique order with all parameters specified while all customers is being shown.
 
-    1. Prerequisites: 
+    1. Prerequisites:
         - At least 1 customer is displayed in the customer list.
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
         - There are no orders similar to the order to be added under the first customer.
+       <p><p/>
 
     2. Test case: `addorder 1 i/Lamp d/20-11-2024 q/3`<br>
        Expected: The order is successfully added. Details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
@@ -1002,36 +1015,38 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addo 1 q/100` <br>
         Expected: No order is added. Error details shown in the status message. Status bar remains the same.
 
-4. Adding a [similar order](#similar).
+4. Adding a [similar order](#glossary).
 
     1. Prerequisites:
         - At least 1 customer is displayed in the customer list.
         - There is an existing order similar to the order to be added under the first customer.
+       <p><p/>
 
     2. Test case: `addo 1 i/books d/02-03-2026` <br>
        Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list.
 
 5. Adding an order with delivery date elapsed.
 
-    1. Prerequisites: 
+    1. Prerequisites:
         - At least 1 customer is displayed in the customer list.
         - No order similar to order to be added under the first customer.
+       <p><p/>
 
     2. Test case: `addo 1 i/phone d/02-03-2020` <br>
        Expected: The order is successfully added. A warning and details of the added order shown in the status message. All orders associated with the customer are shown in the order list
-   
+
 ### Listing all orders under a customer.
 
 1. Listing all orders with or without aliasing.
 
     1. Prerequisites: At least 2 customers and at most 99 customers is displayed in the customer list.
-   
+
     2. Test case: `listorder 1` <br>
        Expected: All orders under the first customer are listed. A success message shown in the status message.
 
     3. Test case: `listo 2` <br>
        Expected: All orders under the second customer are listed. A success message shown in the status message.
-   
+
     4. Test case: `listo 100` <br>
        Expected: No change to the order list. Error details shown in the status message. Status bar remains the same.
 
@@ -1049,7 +1064,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed.<br>
        Example `listorder 1`.
-       
+
     2. Test case: `filterorder completed` <br>
        Expected: Only completed orders remain in the order list. A success message shown in the status message.
 
@@ -1071,11 +1086,12 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `edito 2 q/22` <br>
        Expected: The order is successfully edited. Details of the edited order shown in the status message.
 
-3. Editing an order to a [similar order](#similar).
+3. Editing an order to a [similar order](#glossary).
 
     1. Prerequisites:
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
         - The first order must be `pending` status.
+       <p><p/>
 
     2. Adding the similar order: `addo 1 i/test d/21-11-2025 q/1`
 
@@ -1121,6 +1137,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites:
        - List all customers using the `listorder 1` command with at least 1 order listed.
        - The first order's status is not `Completed`.
+       <p><p/>
 
     2. Test case: `markorder 1`<br>
        Expected: First order is marked as completed. Details of the marked order shown in the status message.
@@ -1140,12 +1157,13 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `marko 0`<br>
       Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
-   
+
 3. Marking an already completed order as completed.
 
     1. Prerequisites:
         - At least 1 order listed. <br>
         - The first order's status is `Completed`.
+       <p><p/>
 
     2. Test case: `marko 1`<br>
        Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
@@ -1157,6 +1175,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites:
         - List all customers using the `listorder 1` command with at least 1 order listed.
         - The first order's status is not `Pending`.
+       <p><p/>
 
     2. Test case: `unmarkorder 1`<br>
        Expected: First order is reverted to pending status. Details of the unmarked order shown in the status message.
@@ -1182,6 +1201,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites:
         - At least 1 order listed. <br>
         - The first order's status is `Pending`.
+       <p><p/>
 
     2. Test case: `unmarko 1`<br>
        Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
@@ -1209,16 +1229,50 @@ testers are expected to do more *exploratory* testing.
     - **Problem:** Currently, we made the customer's index needed to be specified for `addorder` when the customer's order list is open but related commands like `editorder` and `filterorder` do not require a customer's index to be supplied.
     - **Solution:** We planned to make the customer's index for `addorder` optional when a particular customer's order list is already displayed.
     - **Rationale:** Requiring the user to remember the customer's index may be unnecessary and would facilitate user convenience.
+<p><p/>
 
 2. **Allows detection of wrong prefix for commands**
     - **Problem:** Currently, we only detect the relevant prefix for each command and treat all other irrelevant prefixes as part of a parameter input.
     - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
     - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used, instead of treating it as part of the parameters. We also considered allowing users to key in prefixes such as `n/` or `a/` as string inputs via the use of special symbols, possibly using a symbol such as `\`.
     - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict users from typing inputs with prefix such as `n/` or `a/` as parameter string inputs, hence we will need to add the functionality to do it as well.
-   
-3. **Allows case-insensitivity for relationship indicator in customer's `NAME`**
+<p><p/>
+
+3. **Improve error messages related to handling of index**
+    - **Problem:** Currently, having an invalid value (e.g. `0`, `1 2`) for `CUSTOMER_INDEX` and `ORDER_INDEX` will result in an error stating "Invalid command format!" along with the command format. While in the command format it states that said parameters must be a positive integer, the error message could be more concise.
+    - **Example:** User tries to delete a customer using `deletec 0`, the following error message is displayed:
+      ```
+      Invalid command format! 
+      deletecustomer: Deletes the customer identified by the index number used in the displayed customer list.
+      Parameters: CUSTOMER_INDEX (must be a positive integer)
+      Example: deletecustomer 1
+      ```
+    - **Solution:** Shorten the error message to state that the index should be a positive integer.
+    - **Rationale:** Stating that the command format is invalid in the first line of the error message may confuse the user in a case where they type an invalid index such as `1a` by mistake, as it is only the parameters which are incorrect in this case. Making the error message more concise also provides users with a better experience.
+<p><p/>
+
+4. **Improve display of longer messages or entries**
+   - **Problem:** Currently, longer messages or entries can be cut off, especially for users with smaller resolution/larger scale.
+   - **Example:** ![longMessages](images/longMessages.png)
+   - **Solution:** Improve text wrapping, allow customisable GUI and resizable UI parts.
+   - **Rationale:** Longer messages/entries being cut off may be inconvenient for certain users (e.g. being required to scroll left/right to read an error message). Hence, providing text wrapping, allowing users to customise the GUI (e.g. whether they prefer to display an ellipsis, wrap text, etc.) and resize the UI parts will give them more freedom to adjust based on their preferences and for convenience.
+<p><p/>
+
+5. **Include a warning if there is only one domain label provided for email**
+   - **Problem:** Currently, the `EMAIL` parameter accepts emails with only one domain label e.g. `johndoe@gmail`
+   - **Solution:** Allow emails with a single domain label, but provide a warning for it.
+   - **Rationale:** It is possible for some email address to have only one domain label, but we deem it unlikely to happen for the target users of this application. It is more likely that the user may forget to include a second domain label (e.g. missing `.com` in `johndoe@gmail.com`).
+<p><p/>
+
+6. **Make sample data more relevant/realistic to the context**
+   - **Problem:** Currently, the loaded sample data has customers who have tags such as `friends`, `neighbours`, etc.
+   - **Solution:** Change the tags (and any relevant sample data) to fit more with the context of the target user.
+   - **Rationale:** It is unlikely that a target user will label their customers as the current tags in the sample data. Making the sample data more relevant will allow users trying out the application to better simulate the experience of a target user using the application.
+<p><p/>
+
+7. **Allows case-insensitivity for relationship indicator in customer's `NAME`**
     - **Problem:** Currently, we only allow the relationship indicator to be "S/O" or "D/O", which are in upper-case.
-    - **Example:** User tries to add a customer using `addc n/John s/o Doe p/98765432 e/johnd@example.com a/John street`. An error message informs user that name is wrong.
+    - **Example:** User tries to add a customer using `addc n/john s/o doe p/98765432 e/johnd@example.com a/John street`. An error message informs user that name is wrong.
     - **Solution:** Add the functionality that allows the relationship indicator, namely "S/O" and "D/O", to be case-insensitive.
     - **Rationale:** It is normal for a user to enter a customer name in any casing, including relationship indicator.
 
@@ -1238,9 +1292,10 @@ Order handling involved:
 * Enhance UI and Storage functionality to support `Order` and `OrderList`.
 
 This was time and effort intensive as:
-* Orders are handled differently from Person because identical orders should be allowed.
+* Orders are handled differently from Customer because identical orders should be allowed.
 * Orders requires additional levels of similarity checks.
 * Further enhancements for order management by parameters is stated below.
+* The `OrderListPanel` implementation is not a direct parallel to the `CustomerListPanel` because the `OrderList` is part of the `Customer` class instead of being directly within the `ModelManager` class. This distinction necessitates handling the selected `Customer` to ensure the `OrderListPanel` correctly displays the orders relevant to the currently chosen customer.
 
 ### Implementing `Order` parameters for order management
 

@@ -5,6 +5,8 @@
 
 ### Project: SellSavvy
 
+#### Note: This is outdated. Please do not use this to evaluate my contribution.
+
 SellSavvy helps independent sellers/dropshipping business owners manage detail of their clients and orders. It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
 
 Given below are my contributions to the project.
