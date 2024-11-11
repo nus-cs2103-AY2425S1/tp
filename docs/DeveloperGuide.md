@@ -633,11 +633,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 Team Size: 5
-1. **Make `add-patient` and `add-doctor` commands check the date of birth input for validity.**
+1. **Update `add-patient` and `add-doctor` commands to check the date of birth and phone number input for validity.**
    1. Currently, both commands do not check whether the given data is a valid date of birth.
    2. We plan to make the commands check whether the data of birth given is not just in the correct format given, but also to check that it is:
       1. In the past (dates that are in the future from current date are invalid)
       2. Not too far in the past (e.g. 200 years ago from current date are invalid)
+   3. We also plan to make the commands check whether the phone number given is not just in the correct format given, but also to check that it is:
+      1. A valid phone number (e.g. 7 - 15 digits, handling the shortest and longest phone numbers internationally)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
