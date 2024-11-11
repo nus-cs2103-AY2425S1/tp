@@ -247,7 +247,7 @@ Format: `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROL
 
 **Action:** Finds contacts whose details matches all given fields.
 * Each PREFIX can only be used once (except Role)
-* All parameters are not case-sensitive. e.g. `find r/pResiDent` &rarr; valid
+* All fields are not case-sensitive. e.g. `find r/pResiDent` &rarr; valid
 * At least one PREFIX must come immediately after `find`
   * `find n/abc` &rarr; valid
   * `find abc n/rawr` &rarr; invalid
