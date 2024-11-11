@@ -549,7 +549,7 @@ Example: seller n/John Doe p/98765432 e/johnd@example.com t/friends t/owesMoney
 >
 > **User Error**: Client not found
 > 
-> **Input**: `find Bob7`
+> **Input**: `find noMatchingClients`
 > 
 > **Output**: 0 persons listed!
 > 
