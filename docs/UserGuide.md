@@ -115,7 +115,7 @@ Format: `help`
 
 A help window will pop up containing basic introduction to the three core features `add`, `edit` and `delete`.
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" alt="Help Message" height=auto width="850"/>
 
 ### Adding a person: `add`
 
