@@ -35,11 +35,11 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
    * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew` : Creates a vendor named `Hong Lim Trading Pte. Ltd.` and saves in the application.
 
-   * `view v/1` then `assign 2` : Assigns the 1st vendor in the vendor list to the 2nd event in the assignable event list.
+   * `view v/1` then `assign 2` : Assigns the vendor with index 1 in the vendor list to the event with index 2 in the assignable event list.
 
-   * `view e/4` : View more information about the 4th event in the event list.
+   * `view e/4` : View more information about the event with index 4 in the event list.
 
-   * `delete v/9` : Deletes the 1st vendor shown in the vendor list.
+   * `delete v/9` : Deletes the vendor with index 9 shown in the vendor list.
 
    * `clear` : Deletes all vendors and events stored in EventTory.
 
@@ -202,8 +202,8 @@ Note:
     * You can remove all tags from a vendor/event by typing `t/` without specifying any tags after it.
 
 Examples:
-*  `edit v/1 p/58623042 ` : Edits the phone number of the vendor at index 1 to be `58623042`.
-*  `edit e/2 n/Baby Shower t/` : Edits the name of the event at index 2 to be `Baby Shower`, and clears all existing tags.
+*  `edit v/1 p/58623042 ` : Edits the phone number of the vendor with index 1 to be `58623042`.
+*  `edit e/2 n/Baby Shower t/` : Edits the name of the event with index 2 to be `Baby Shower`, and clears all existing tags.
 
 ### Deleting Vendors & Events : `delete`
 
@@ -223,8 +223,8 @@ Note:
 * If the current viewed vendor/event is deleted, the application will return you to the main list screen.
 
 Examples:
-* `list` followed by `delete v/2` deletes the vendor at index 2 in EventTory.
-* `find e/ Wedding` followed by `delete e/1` deletes the event at index 1 shown in the results of the `find` command.
+* `list` followed by `delete v/2` deletes the vendor with index 2 in EventTory.
+* `find e/ Wedding` followed by `delete e/1` deletes the event with index 1 shown in the results of the `find` command.
 
 ### Listing Vendors & Events : `list`
 
@@ -261,8 +261,8 @@ Note:
 * The current displayed indexes for items may change after issuing this command. See [Changing Indexes](#changing-indexes) for more details.
 
 Examples:
-* `view v/2` will show the details of the vendor at index 2 in the displayed list.
-* `view e/1` will show the details of the event at index 1 in the displayed list.
+* `view v/2` will show the details of the vendor with index 2 in the displayed list.
+* `view e/1` will show the details of the event with index 1 in the displayed list.
 
 ### Assigning Vendors & Events: `assign`
 
@@ -280,8 +280,8 @@ Note:
 
 Examples:
 The following examples are for illustrative purposes only. The `aassign` command will still fail if the chosen item to assign is invalid.
-* `view v/2` then `assign 1` will view the vendor at index 2 in the current list, then assign the event at index 1 in the assignable list to the chosen vendor.
-* `view e/1` then `assign 3` will view the event at index 1 in the current list, then assign the vendor at index 3 in the assignable list to the chosen event.
+* `view v/2` then `assign 1` will view the vendor with index 2 in the current list, then assign the event with index 1 in the assignable list to the chosen vendor.
+* `view e/1` then `assign 3` will view the event with index 1 in the current list, then assign the vendor with index 3 in the assignable list to the chosen event.
 
 ### Unassigning Vendors & Events: `unassign`
 
@@ -299,8 +299,8 @@ Note:
 
 Examples:
 The following examples are for illustrative purposes only. The `unassign` command will still fail if the chosen item to unassign is invalid.
-* `view v/2` then `unassign 6` will view the vendor at index 2 in the current list, then unassign the event at index 6 in the assigned list while viewing the chosen vendor.
-* `view e/1` then `unassign 11` will view the event at index 1 in the current list, then unassign the vendor at index 11 in the assigned list while viewing the chosen event.
+* `view v/2` then `unassign 6` will view the vendor with index 2 in the current list, then unassign the event with index 6 in the assigned list while viewing the chosen vendor.
+* `view e/1` then `unassign 11` will view the event with index 1 in the current list, then unassign the vendor with index 11 in the assigned list while viewing the chosen event.
 
 ### Searching for Vendors & Events: `find`
 
