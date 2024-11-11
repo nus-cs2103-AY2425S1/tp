@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddNotesCommandParser" as AddNotesCommandParser LOGIC_COLOR
+participant "d:AddNotesCommand" as AddNotesCommand LOGIC_COLOR
+participant "p:Person" as Person LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(addnotes)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(addnotes)
+activate AddressBookParser
+
+create AddNotesCommandParser
+AddressBookParser -> AddNotesCommandParser
+activate AddNotesCommandParser
+
+AddNotesCommandParser --> AddressBookParser
+deactivate AddNotesCommandParser
+
+AddressBookParser -> AddNotesCommandParser : parse(arguments)
+activate AddNotesCommandParser
+
+create AddNotesCommand
+AddNotesCommandParser -> AddNotesCommand
+activate AddNotesCommand
+
+AddNotesCommand --> AddNotesCommandParser :
+deactivate AddNotesCommand
+
+AddNotesCommandParser --> AddressBookParser : d
+deactivate AddNotesCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddNotesCommandParser -[hidden]-> AddressBookParser
+destroy AddNotesCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> AddNotesCommand : execute(m)
+activate AddNotesCommand
+
+create Person
+AddNotesCommand -> Person
+activate Person
+
+Person --> AddNotesCommand
+deactivate Person
+
+AddNotesCommand -> Model : setPerson(p)
+activate Model
+
+Model --> AddNotesCommand
+deactivate Model
+
+AddNotesCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> AddNotesCommand
+deactivate Model
+
+create CommandResult
+AddNotesCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddNotesCommand
+deactivate CommandResult
+
+AddNotesCommand --> LogicManager : r
+deactivate AddNotesCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -185,9 +185,9 @@ This section describes some noteworthy details on how certain features are imple
 The `add` command allows users to add new patients. The command requires:
 - **Name** – Patient's name.
 - **ID** – Patient's unique ID.
-- **Ward** – Patient's Ward
-- **Diagnosis** – Patient's Diagnosis
-- **Medication** - Patient's Medication
+- **Ward** – Patient's Ward.
+- **Diagnosis** – Patient's Diagnosis.
+- **Medication** - Patient's Medication.
 
 Here is an activity diagram that summarises the key steps taken.
 <puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
@@ -196,9 +196,9 @@ Here is an activity diagram that summarises the key steps taken.
 The **`AddCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
 - **Name** – Patient's name.
 - **ID** – Patient's unique ID.
-- **Ward** – Patient's Ward
-- **Diagnosis** – Patient's Diagnosis
-- **Medication** - Patient's Medication
+- **Ward** – Patient's Ward.
+- **Diagnosis** – Patient's Diagnosis.
+- **Medication** - Patient's Medication.
 
 The parser will check that the compulsory `Name`, `ID`, and `Ward` fields are present, and that there are no duplicate parameters included in the input string. The optional `Diagnosis` and `Medication` fields will be parsed as empty strings if they are not included in the input string.
 
@@ -217,9 +217,53 @@ The **`AddCommand`** class enforces validation rules to ensure non-duplicates an
 
 - **Ensuring non-duplicates**:
   Check that the new person added does not already exist in WardWatch, i.e. does not already exist a person with same `ID`.
-
+<br><br>
 - **Warnings**
   The command will also check for the presence of *special characters* in the `Ward` and `ID` fields. An appropriate warning will be displayed if they are present.
+
+### Add Notes Feature
+
+#### Overview
+The `addnotes` command allows users to add notes to a specific patient. The command requires:
+- **Index** – Patient's index in the address book.
+- **Notes** - Patient notes that the user wishes to write for the specified patient.
+
+Here is a sequence diagram which showcases the flow of the program as well as the key steps taken.
+<puml src="diagrams/AddNotesSequenceDiagram.puml" alt="AddNotesSequenceDiagram" />
+
+#### 1. Parsing User Input
+The **`AddNotesCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
+- **Index** – Identifies the patient in the address book.
+- **Notes** - Patient notes that the user wishes to write for the specified patient.
+
+During this parsing process:
+- A `Notes` instance is created to hold the note details.
+
+#### 2. Executing the Command
+The **`AddNotesCommand`** class performs the following steps to add Notes to a patient:
+
+1. **Retrieve Patient Information**:  
+   Uses the `index` from the parser to locate the patient in the latest filtered list of patients.
+
+2. **Create New Person Instance with the Notes instance**:
+    - Combines patient information with the new `Notes` details.
+    - Creates a new updated `Person` instance, with the `Notes`.
+
+3. **Replace Existing Patient Record**:
+   The new `Person` instance, with the `Notes`, replaces the existing patient record in the **Model**.
+
+4. **Updating filtered list**:
+   The **Model** will then update the filtered list of patients to show all patients.
+
+#### 3. Handling Invalid Date Inputs
+The **`AddNotesCommandParser`** and **`AddNotesCommand`** classes enforce validation rules to ensure that valid index and notes are being passed in.
+
+- **Valid index verification**:
+  - **AddNotesCommandParser** checks if the `Index` is an unsigned non-zero integer.
+  - **AddNotesCommand** checks if the `Index` is greater than the number of patients in the last displayed list.
+  <br><br>
+- **Valid notes verification**:
+  - **AddNotesCommandParser** checks if the user input for `Notes` is empty and throws an error message stating that the user is unable to add empty notes to a patient.
 
 ### Add Appointment Feature
 
@@ -233,7 +277,7 @@ The `makeappt` command allows users to add an appointment tied to a specific pat
 <puml src="diagrams/AddAppointmentSequenceDiagram.puml" alt="AddAppointmentSequenceDiagram" />
 
 #### 1. Parsing User Input
-The **`MakeAppointmentCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
+The **`AddAppointmentCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
 - **Index** – Identifies the patient in the address book.
 - **Start Date** – Beginning of the appointment.
 - **End Date** – End of the appointment.
@@ -243,25 +287,25 @@ During this parsing process:
 - An `Appointment` instance is created to hold the appointment details.
 
 #### 2. Executing the Command
-The **`MakeAppointmentCommand`** class performs the following steps to add an appointment:
+The **`AddAppointmentCommand`** class performs the following steps to add an appointment:
 
 1. **Retrieve Patient Information**:  
-   Uses the `index` from the parser to locate the patient in the address book.
+   Uses the `index` from the parser to locate the patient in the latest filtered list of patients.
 
 2. **Create New Person Instance with Appointment**:
     - Combines patient information with the new `Appointment` details.
     - Creates an updated `Person` instance, including the appointment data.
 
 3. **Replace Existing Patient Record**:
-    - The new `Person` instance, containing the appointment, replaces the existing patient record in the **Model**.
+   The new `Person` instance, containing the appointment, replaces the existing patient record in the **Model**.
 
 #### 3. Handling Invalid Date Inputs
-The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:
+The **`AddAppointmentCommandParser`** and **`AddAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:
 
 - **Format Verification**:
     - **Parser** checks if the date format follows `dd-MM-yyyy-HH-mm`.
     - **Parser** also ensures the **Start Date** is before or equal to the **End Date**.
-
+    <br><br>
 - **Conflict Checking**:
     - **Command** checks if the new appointment overlaps with any existing appointments for the patient.
     - If there is an overlap, an error message is thrown, preventing the appointment from being created.
@@ -282,11 +326,12 @@ We can make it such that a `Person` object contains a `LocalDateTime` field call
 <br><br>
 
 ### Make "Index does not exist" error message more specific
-Currently, whenever a user enters a command that requires `INDEX` as a parameter, such as the `view` or `delete` command, and enters an index that is greater than the number of patients in the displayed list, WardWatch will show the general `invalid command format` message followed by the command usage message. <br><br>
+Currently, whenever a user enters a command that requires `INDEX` as a parameter, such as the `view` or `delete` command, and enters an index that is either non-positive or greater than `Integer.MAX_VALUE` of `2147483647`, WardWatch will show the general `invalid command format` message followed by the command usage message. <br><br>
 **Planned implementation**<br><br>
-We plan to add more specific error messages in the case where users pass in an index that is not shows in the displayed patients list. 
-In the case where the index passed in is greater than the largest index in the displayed patient list, the error message `The index provided does not refer to any patient in the displayed list, please check the displayed list again!` will be shown
-In the case where the index passed in is negative, the error message `INDEX provided must be a positive integer, please try again!` will be shown
+We plan to make the current invalid index message more specific and add more error messages in the case where users pass in the following invalid indexes:
+- The current invalid index message which is thrown when a valid index that is greater than the largest index in the displayed patient list just states that `The person index provided is invalid` and is not specific enough. We plan to change it to `The index provided does not refer to any patient in the displayed list, please check the displayed list again!` which will give users a better idea of what went wrong.
+- In the case where the index passed in is greater than the `Integer.MAX_VALUE`, the error message `The index provided is greater than 2147483647 which is unfortunately not supported in our product, please try again with a smaller index!` will be shown.
+- In the case where the index passed in is non-positive, the error message `INDEX provided must be a positive integer, please try again!` will be shown.
 <br><br>
 
 ### Add appointment title and description and `viewappt` command
@@ -301,6 +346,18 @@ Currently, some of the commands in WardWatch such as `scheduleall` and `schedule
 **Planned implementation**<br><br>
 We plan to add command shortcuts for longer commands such as `sAll` and `sDate` for the commands `scheduleall` and `scheduledate` respectively. These command shortcuts will work alongside the original commands, meaning that whether the user types in `sAll` or `scheduleall`, wardwatch will recognise both as the `scheduleall` command. <br>
 This is so that seasoned and more advanced users have the option to optimise their workflow by utilising the command shortcuts while newer users still have the option of using the more intuitive sounding commands which reduces the learning curve.
+<br><br>
+
+### Fix `addnotes` command showing all patients
+Currently, the successful execution of an `addnotes` command will subsequently reset the last filtered list of patients to show all patients again. <br><br>
+**Planned implementation**<br><br>
+We plan to change the implementation of `addnotes` command such that the patient list will remain filtered after the successful addition of notes.
+<br><br>
+
+### Make duplicate ID checking case-insensitive
+Currently, the checking for duplicate patient ID when creating a new patient is case-sensitive, meaning that patients with similar IDs except for the casing of letters will be considered different. For example, the IDs `P12345` and `p12345` will be considered different.<br><br>
+**Planned implementation**<br><br>
+We plan to make the duplicate ID cross-checking case-insensitive such that similar IDs that differ only by casing will be considered as duplicate. This will help to reduce the room for human error when using our product.
 <br><br>
 
 
