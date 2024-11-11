@@ -99,8 +99,8 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
    [↗ See editw command details](#editing-a-wedding-editw)
 
 #### 4. Finding and Filtering Contacts
-1. Search by name (supports partial matches):
-   `find john                      # Finds "John" and "Johnny"`
+1. Search by name (exact name match):
+   `find john                      # Finds "John" or "John Doe"`
    [↗ See find command details](#finding-persons-by-name-find)
 
 2. Filter by multiple criteria:
@@ -135,6 +135,8 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
 - Use `list` frequently to see updated indices
 - For name-based commands, use index if you get multiple matches
 - Check [validation rules](#validation-rules) when adding/editing entries
+- Check [general command format](#general-command-format) for command structure
+- Check [general command details](#general-command-details) for detailed command usage
 - View the [command summary](#command-summary) for quick reference
 
 [↗ See more tips in FAQ section](#faq)
@@ -144,196 +146,6 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
 ---
 
 ## Features
-
-### General Command Format
-
-- **Command Structure**:
-    - Commands are case-insensitive.
-    - Parameters are case-insensitive unless specified.
-- **Parameters in `UPPER_CASE`** are to be supplied by the user.
-    - e.g., in `add n/NAME`, `NAME` is a parameter to be replaced: `add n/John Doe`.
-- **Optional Parameters** are enclosed in square brackets `[ ]`.
-    - e.g., `n/NAME [r/ROLE]` can be `n/John Doe r/florist` or just `n/John Doe`.
-- **Multiple Parameters**:
-    - Parameters with `...` after them can be used multiple times (including zero times).
-        - e.g., `[w/WEDDING_INDEX]...` can be used as ` ` (zero times), `w/1`, `w/1 w/2`, etc.
-- **Flexible Order**:
-    - Parameters can be in any order.
-        - e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, you can input `p/PHONE_NUMBER n/NAME`.
-- **Extraneous Parameters**:
-    - Commands that do not take in parameters (e.g., `help`, `list`, `exit`, and `clear`) will ignore any extra parameters.
-        - e.g., `help 123` will be interpreted as `help`.
-- **Client Parameter (`c/`)**:
-    - In wedding commands, accepts either an index number or a name.
-        - e.g., `c/1` or `c/John Doe` are both valid.
-- **Date Format**:
-    - Dates must be specified in `YYYY-MM-DD` format.
-        - e.g., `d/2024-12-31` for December 31st, 2024.
-- **Role Parameter (`r/`)**:
-    - Must be a single-word alphanumeric string (no spaces or special characters).
-        - e.g., `r/photographer` is valid, but `r/wedding planner` is not.
-- **Email Addresses**:
-    - Must follow strict validation rules (see [Validation Rules](#validation-rules)).
-- **Phone Numbers**:
-    - Must start with 8 or 9 and be exactly 8 digits long.
-- **Copying Commands**:
-    - When copying commands that span multiple lines (e.g., from a PDF), ensure that spaces are correctly included.
----
-
-### Validation Rules
-
-#### Names
-
-- **Allowed Characters**:
-    - Alphabets, spaces, apostrophes (`'`), and hyphens (`-`).
-- **Restrictions**:
-    - Cannot be blank.
-    - Maximum length of 70 characters.
-- **Examples**:
-    - `John Doe`, `Mary-Jane`, `O'Connor`.
-
-#### Phone Numbers
-
-- **Format**:
-    - Must start with 8 or 9.
-    - Exactly 8 digits long.
-    - Numbers only; no spaces or special characters.
-- **Uniqueness**:
-    - Each phone number must be unique in the system.
-- **Examples**:
-    - `91234567`, `82345678`.
-
-#### Email Addresses
-
-- **Format**:
-    - Must be in the form `local-part@domain.toplevel`
-- **Local-part Rules**:
-    - Can contain alphanumeric characters and `+`, `_`, `.`, `-`
-    - Cannot start or end with a special character
-    - Example: `user.name`, `john.doe-123`, `user+tag`
-- **Domain Rules**:
-    - Must include a top-level domain (e.g., `.com`, `.org`, `.edu`, `.sg`)
-    - Domain labels (parts between dots) must:
-        - Start and end with alphanumeric characters
-        - Can contain hyphens between alphanumeric characters
-        - Each label must contain at least one character
-    - Examples of valid domains:
-        - `example.com`
-        - `my-company.com`
-        - `school.edu.sg`
-        - `sub1.sub2.example.com`
-- **Uniqueness**:
-    - Each email must be unique in the system
-- **Valid Examples**:
-    - `john@example.com`
-    - `user.name+tag@my-company.com`
-    - `sales@company-name.com.sg`
-- **Invalid Examples**:
-    - `user@domain` (missing top-level domain)
-    - `user@e-a` (missing top-level domain)
-    - `user@-domain.com` (domain label starts with hyphen)
-    - `user@domain-.com` (domain label ends with hyphen)
-    - `user@.com` (empty domain label)
-#### Roles
-
-- **Format**:
-    - Single-word alphanumeric string.
-- **Restrictions**:
-    - No spaces or special characters.
-    - Case-insensitive for matching.
-- **Examples**:
-    - `photographer`, `florist`, `coordinator`.
-
-#### Wedding Fields
-
-- **Wedding Name**:
-    - Cannot be blank
-    - Must follow same restrictions as Person names:
-           - Maximum 70 characters
-           - Can only contain alphabets, spaces, apostrophes (') and hyphens (-)
-- **Date**:
-    - Must be in `YYYY-MM-DD` format
-    - Must be a valid calendar date
-- **Venue**:
-    - Optional field - only validated when v/ prefix is provided
-    - When provided, cannot be blank or consist only of whitespace
-- **Client**:
-    - A client can have only one wedding at a time.
-
-#### Addresses
-
-- **Restrictions**:
-    - Cannot be blank.
-    - Can contain any characters except leading/trailing spaces.
-    - No length restriction.
-
----
-
-### Index vs. Name-Based Commands
-
-Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) support both index-based and name-based formats.
-
-#### Index Format
-
-- **Usage**:
-    - Uses the position number from the displayed list.
-    - Only integers are accepted.
-    - **Format**: `COMMAND INDEX [parameters]`
-    - **Example**:
-        - `edit 1 n/John Smith`
-
-#### Name-Based Format
-
-- **Usage**:
-    - Uses the person's or wedding's name.
-    - **Format**: `COMMAND NAME [parameters]`
-    - **Behavior**:
-        - **Case-insensitive matching**.
-        - **Full name matching**: Searches for names containing the entire keyword (not necessarily as substring).
-        - **Single Match**:
-            - Command executes immediately.
-        - **Multiple Matches**:
-            - System displays a list of matching entries with indices.
-            - User must re-enter the command using the index.
-        - **No Matches**:
-            - Displays "No matches found" message.
-- **Examples**:<br>
-  ![Multiple matches example](images/multiple_match.png)<br>
-  *When multiple matches are found, the system displays a list with indices*
-
-  ![Multiple matches resolution](images/multiple_match_solution.png) <br>
-  *User selects a specific index to complete the command*
-
-[↥ Back to Top](#bridal-boss-user-guide)
-
----
-
-### Cross-Reference Validations
-
-#### Client-Wedding Relationship
-
-- **One Wedding per Client**:
-    - A client can have only one wedding at a time.
-- **Deletion Restrictions**:
-    - Cannot delete a client who is associated with an active wedding.
-- **Assignment Restrictions**:
-    - Cannot assign a client as a vendor to their own wedding.
-
-#### Person-Wedding Relationships
-
-- **Vendor Assignments**:
-    - A person can be assigned to multiple weddings as a vendor.
-    - Cannot assign the same person to the same wedding multiple times.
-- **Deletion Effects**:
-    - Deleting a wedding removes all vendor assignments related to that wedding.
-
-#### Role-Person Relationship
-
-- **Single Role per Person**:
-    - Each person can have at most one role.
-    - Assigning a new role replaces any existing role.
-
----
 
 ### General Command Details
 
@@ -685,6 +497,197 @@ Advanced users can edit the data file directly to modify the address book data.
     - Commands are generally case-insensitive, but parameters (especially for exact matches) may be case-sensitive as per the validation rules.
 
 [↥ Back to Top](#bridal-boss-user-guide)
+
+### General Command Format
+
+- **Command Structure**:
+    - Commands are case-insensitive.
+    - Parameters are case-insensitive unless specified.
+- **Parameters in `UPPER_CASE`** are to be supplied by the user.
+    - e.g., in `add n/NAME`, `NAME` is a parameter to be replaced: `add n/John Doe`.
+- **Optional Parameters** are enclosed in square brackets `[ ]`.
+    - e.g., `n/NAME [r/ROLE]` can be `n/John Doe r/florist` or just `n/John Doe`.
+- **Multiple Parameters**:
+    - Parameters with `...` after them can be used multiple times (including zero times).
+        - e.g., `[w/WEDDING_INDEX]...` can be used as ` ` (zero times), `w/1`, `w/1 w/2`, etc.
+- **Flexible Order**:
+    - Parameters can be in any order.
+        - e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, you can input `p/PHONE_NUMBER n/NAME`.
+- **Extraneous Parameters**:
+    - Commands that do not take in parameters (e.g., `help`, `list`, `exit`, and `clear`) will ignore any extra parameters.
+        - e.g., `help 123` will be interpreted as `help`.
+- **Client Parameter (`c/`)**:
+    - In wedding commands, accepts either an index number or a name.
+        - e.g., `c/1` or `c/John Doe` are both valid.
+- **Date Format**:
+    - Dates must be specified in `YYYY-MM-DD` format.
+        - e.g., `d/2024-12-31` for December 31st, 2024.
+- **Role Parameter (`r/`)**:
+    - Must be a single-word alphanumeric string (no spaces or special characters).
+        - e.g., `r/photographer` is valid, but `r/wedding planner` is not.
+- **Email Addresses**:
+    - Must follow strict validation rules (see [Validation Rules](#validation-rules)).
+- **Phone Numbers**:
+    - Must start with 8 or 9 and be exactly 8 digits long.
+- **Copying Commands**:
+    - When copying commands that span multiple lines (e.g., from a PDF), ensure that spaces are correctly included.
+---
+
+### Validation Rules
+
+#### Names
+
+- **Allowed Characters**:
+    - Alphabets, spaces, apostrophes (`'`), and hyphens (`-`).
+- **Restrictions**:
+    - Cannot be blank.
+    - Maximum length of 70 characters.
+- **Examples**:
+    - `John Doe`, `Mary-Jane`, `O'Connor`.
+
+#### Phone Numbers
+
+- **Format**:
+    - Must start with 8 or 9.
+    - Exactly 8 digits long.
+    - Numbers only; no spaces or special characters.
+- **Uniqueness**:
+    - Each phone number must be unique in the system.
+- **Examples**:
+    - `91234567`, `82345678`.
+
+#### Email Addresses
+
+- **Format**:
+    - Must be in the form `local-part@domain.toplevel`
+- **Local-part Rules**:
+    - Can contain alphanumeric characters and `+`, `_`, `.`, `-`
+    - Cannot start or end with a special character
+    - Example: `user.name`, `john.doe-123`, `user+tag`
+- **Domain Rules**:
+    - Must include a top-level domain (e.g., `.com`, `.org`, `.edu`, `.sg`)
+    - Domain labels (parts between dots) must:
+        - Start and end with alphanumeric characters
+        - Can contain hyphens between alphanumeric characters
+        - Each label must contain at least one character
+    - Examples of valid domains:
+        - `example.com`
+        - `my-company.com`
+        - `school.edu.sg`
+        - `sub1.sub2.example.com`
+- **Uniqueness**:
+    - Each email must be unique in the system
+- **Valid Examples**:
+    - `john@example.com`
+    - `user.name+tag@my-company.com`
+    - `sales@company-name.com.sg`
+- **Invalid Examples**:
+    - `user@domain` (missing top-level domain)
+    - `user@e-a` (missing top-level domain)
+    - `user@-domain.com` (domain label starts with hyphen)
+    - `user@domain-.com` (domain label ends with hyphen)
+    - `user@.com` (empty domain label)
+#### Roles
+
+- **Format**:
+    - Single-word alphanumeric string.
+- **Restrictions**:
+    - No spaces or special characters.
+    - Case-insensitive for matching.
+- **Examples**:
+    - `photographer`, `florist`, `coordinator`.
+
+#### Wedding Fields
+
+- **Wedding Name**:
+    - Cannot be blank
+    - Must follow same restrictions as Person names:
+      - Maximum 70 characters
+      - Can only contain alphabets, spaces, apostrophes (') and hyphens (-)
+- **Date**:
+    - Must be in `YYYY-MM-DD` format
+    - Must be a valid calendar date
+- **Venue**:
+    - Optional field - only validated when v/ prefix is provided
+    - When provided, cannot be blank or consist only of whitespace
+- **Client**:
+    - A client can have only one wedding at a time.
+
+#### Addresses
+
+- **Restrictions**:
+    - Cannot be blank.
+    - Can contain any characters except leading/trailing spaces.
+    - No length restriction.
+
+---
+
+### Index vs. Name-Based Commands
+
+Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) support both index-based and name-based formats.
+
+#### Index Format
+
+- **Usage**:
+    - Uses the position number from the displayed list.
+    - Only positive non-zero integers are accepted.
+    - **Format**: `COMMAND INDEX [parameters]`
+    - **Example**:
+        - `edit 1 n/John Smith`
+
+#### Name-Based Format
+
+- **Usage**:
+    - Uses the person's or wedding's name.
+    - **Format**: `COMMAND NAME [parameters]`
+    - **Behavior**:
+        - **Case-insensitive matching**.
+        - **Full name matching**: Searches for names containing the entire keyword (not necessarily as substring).
+        - **Single Match**:
+            - Command executes immediately.
+        - **Multiple Matches**:
+            - System displays a list of matching entries with indices.
+            - User must re-enter the command using the index.
+        - **No Matches**:
+            - Displays "No matches found" message.
+- **Examples**:<br>
+  ![Multiple matches example](images/multiple_match.png)<br>
+  *When multiple matches are found, the system displays a list with indices*
+
+  ![Multiple matches resolution](images/multiple_match_solution.png) <br>
+  *User selects a specific index to complete the command*
+
+[↥ Back to Top](#bridal-boss-user-guide)
+
+---
+
+### Cross-Reference Validations
+
+#### Client-Wedding Relationship
+
+- **One Wedding per Client**:
+    - A client can have only one wedding at a time.
+- **Deletion Restrictions**:
+    - Cannot delete a client who is associated with an active wedding.
+- **Assignment Restrictions**:
+    - Cannot assign a client as a vendor to their own wedding.
+
+#### Person-Wedding Relationships
+
+- **Vendor Assignments**:
+    - A person can be assigned to multiple weddings as a vendor.
+    - Cannot assign the same person to the same wedding multiple times.
+- **Deletion Effects**:
+    - Deleting a wedding removes all vendor assignments related to that wedding.
+
+#### Role-Person Relationship
+
+- **Single Role per Person**:
+    - Each person can have at most one role.
+    - Assigning a new role replaces any existing role.
+
+---
+
 
 --------------------------------------------------------------------------------------------------------------------
 
