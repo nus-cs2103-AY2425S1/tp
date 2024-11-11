@@ -61,6 +61,7 @@
 9. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -129,6 +130,8 @@
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 ### Person-Related Commands
@@ -199,7 +202,6 @@ with a single space is NOT the same person as John&nbsp;&nbsp;&nbsp;Doe. If ther
 ContactsForGood, you may add another John &nbsp;Doe with 2 spaces between.
 - Note: Email addresses without periods (Single Label Domains) **are supported**. 
 e.g. johndoe@intranet is a valid email.
-
 
 Examples:
 * `add r/volunteer h/10 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
