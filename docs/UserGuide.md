@@ -5,7 +5,7 @@ title: User Guide
 
 <link rel="stylesheet" type="text/css" href="assets/css/UserGuide.css">
 
-EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments. Below is a sneak peek into our app: 
+EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for **real estate agents** who manage buyer and seller contacts (i.e. clients), listings, and appointments. Below is a sneak peek into our app:
 <br>
 <br>
 **Client management**
@@ -18,10 +18,10 @@ EZSTATES is a Command Line Interface (CLI) desktop app designed specifically for
 
 **You could be part of the ideal target audience of EZSTATES if you meet the following criteria**:
 
-* `Job` : Real Estate Agent focused on managing buyer and seller relationships 
-* `Typing ability` : Comfortable typing at speeds of ~80 WPM or higher 
-* `Workflow Preference` : Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons 
-* `Tech Savviness` : Confident using command-based applications and prefers minimal mouse use 
+* `Job` : Real Estate Agent focused on managing buyer and seller relationships
+* `Typing ability` : Comfortable typing at speeds of ~80 WPM or higher
+* `Workflow Preference` : Prefers streamlined typing commands over navigating Graphic User Interface (GUI) buttons
+* `Tech Savviness` : Confident using command-based applications and prefers minimal mouse use
 * `Work Style` : Handles multiple clients and properties simultaneously and values efficiency in contact and property management
 * `Environment` : Works in a fast-paced setting where quick data entry and retrival are essential
 
@@ -69,12 +69,12 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
     right click on any space inside the folder and click `Open in Terminal`.
     </div>
     <br>
-   
+
    Then inside terminal, run the app with:
     ```bash
     java -jar EZSTATES.jar
     ```
-   
+
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
 6. Head over to the [next section](#gui-overview) to understand the GUI. If you're already familiar with it, feel free to skip ahead to [Basic Commands](#basic-commands).
@@ -101,7 +101,7 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 5. Open Terminal (repeat Step 1) and navigate to the folder with the `.jar` file by typing:
     ```bash
     cd path/to/your/folder
-    ``` 
+    ```
     <div class="note" markdown="span">
     Alternatively, you can open the folder where the `.jar` file  is located,
     right click on any space inside the folder and click `New Terminal at Folder`.
@@ -148,9 +148,9 @@ Once you've tried out these basic commands, it's helpful to understand [how they
 
 ### Command Structure
 
-Understanding the command structure in EZSTATES is essential for efficient navigation and use of the app’s features. 
-Each command in EZSTATES is designed to follow a **clear, consistent format**, allowing you to manage clients, listings, and appointments with precision and speed. 
-By mastering this structure, you will find it easier to remember commands and customize inputs, making your experience smoother and enabling you to accomplish tasks more effectively. 
+Understanding the command structure in EZSTATES is essential for efficient navigation and use of the app’s features.
+Each command in EZSTATES is designed to follow a **clear, consistent format**, allowing you to manage clients, listings, and appointments with precision and speed.
+By mastering this structure, you will find it easier to remember commands and customize inputs, making your experience smoother and enabling you to accomplish tasks more effectively.
 
 This section breaks down the **structure, reference, and prefixes** used across all commands, so you can quickly become proficient with EZSTATES.
 
@@ -189,10 +189,10 @@ Prefixes follow the same structure:
 and can be either optional or mandatory, and variadic or not variadic.
 The table below showcases the four different possible notations of prefixes:
 
-|                      | Mandatory       | Optional<sup>1</sup> |
-|----------------------|-----------------|----------------------|
-| Not variadic         | prefix/Value    | [prefix/Value]       |
-| Variadic<sup>2</sup> | prefix/Value... | [prefix/Value]...    |
+|                      | Mandatory          | Optional<sup>1</sup> |
+|----------------------|--------------------|----------------------|
+| Not variadic         | `prefix/Value`     | `[prefix/Value]`     |
+| Variadic<sup>2</sup> | `prefix/Value...`  | `[prefix/Value]...`  |
 
 **Notes:**
 1. Optional prefixes can be omitted and the command will still be executed successfully _(assuming all other parts of the command are correctly inputted)_. 
@@ -992,7 +992,7 @@ The buyer index specified is not a buyer:
 
 #### Edit Listing
 - **Command:** `editlisting INDEX [n/NAME] [pr/PRICE] [ar/AREA] [add/ADDRESS] [reg/REGION]`
-- **Description:** Edits the details of the listing identified by the listing index number. **Buyers cannot be edited using this command.** Use addlistingbuyers or removelistingbuyers to manage buyers.
+- **Description:** Edits the details of the listing identified by the listing index number. **Buyers cannot be edited using this command.** Use [`addlistingbuyers`](#add-buyers-to-listing) or [`removelistingbuyers`](#remove-buyers-from-listing) to manage buyers.
 - **Successful Execution:**
 > ---
 > **Use Case #1**: Editing listing `RC4` to become `RC445` with area `150`
@@ -1397,11 +1397,11 @@ For clarity, the first `Output` demonstration will utilise a screenshot. Subsequ
 > **Use Case #1**: Valid Greeting
 >
 > **Input**: `hello`
-> 
+>
 > **Output**:
-> 
+>
 > ![outputFromValidGreeting.png](images%2FoutputFromValidGreeting.png)
-> 
+>
 > ---
 >
 > **Use Case #2**: Valid Query
@@ -1457,8 +1457,16 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 
 ## FAQ
 
+**Q**: Can I use EZSTATES without any prior programming knowledge?<br>
+**A**: Of course! EZSTATES is designed to be user-friendly and does not require the user to have programming knowledge to use.
+By reading through our User Guide, you will be able to learn how to use EZSTATES effectively.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EZSTATES home folder.
+
+**Q**: Can I look at all my clients and listings at the same time?<br>
+**A**: Although you are allowed to open EZSTATES using two terminals, this is not recommended as the data saved on one window is not saved on
+the separate window. Please utilise the [`showclients`](#show-clients) or [`showlistings`](#show-listings) commands to navigate between your clients and listings.
 
 **Q**: Where can I find more help or report bugs?<br>
 **A**: For more help, refer to the User Guide or reach out to the project’s repository on [GitHub](https://github.com/AY2425S1-CS2103T-F11-4/tp). If you encounter any bugs or issues, please submit an issue report through the GitHub Issues section.
@@ -1469,7 +1477,7 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **For the [n/ prefix](#n)**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified. 
+3. **For the [n/ prefix](#n)**, users are not able to put slashes in their names (e.g. Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified.
 4. **For the [add/ prefix](#add)**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
 5. **For the [Edit Listing command](#edit-listing)**, users can modify listings to assign a buyer as the seller of a listing.
 6. **For the [Add Buyers to Listing command](#add-buyers-to-listing)**, the Result Display displays an incorrect error message.
@@ -1509,24 +1517,23 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 
 ## Glossary of Terms
 
-| **Term**           | **Definition**                                                                                                                                                                                                                                                                                                                                                             |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **.json**          | A lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. In EZSTATES, `.json` files are used to store and exchange data, such as user contact details or listings, in a structured and easily accessible way. JSON files consist of key-value pairs and can be used to store complex data structures. |
-| **Index**          | A number representing the position of an item in a list. In EZSTATES, it is commonly used to refer to client or listing positions. Valid index values are positive integers within the bounds of the displayed list.                                                                                                                                                       |
-| **Command**        | A directive given to the EZSTATES application, typically entered by the user, that triggers specific actions such as adding, editing, or deleting data (e.g., `add`, `edit`, `delete`).                                                                                                                                                                                    |
-| **Buyer**          | A person or entity interested in purchasing properties. In EZSTATES, buyers can be added and associated with listings.                                                                                                                                                                                                                                                     |
-| **Seller**         | A person or entity who is selling properties. In EZSTATES, sellers are added and associated with properties they wish to sell.                                                                                                                                                                                                                                             |
-| **Listing**        | A property available for sale in EZSTATES. Each listing contains details such as price, area, and the seller associated with it.                                                                                                                                                                                                                                           |
-| **GUI**            | Graphical User Interface. The visual interface of the application that allows users to interact with the system via buttons, fields, and other visual elements. In EZSTATES, the GUI includes features like adding, editing, and viewing client details.                                                                                                                   |
-| **Client**         | A person or entity whose contact details are managed in the system. A client can either be a buyer, a seller, or both, depending on their interaction with the listings.                                                                                                                                                                                                   |
-| **Command Prefix** | A specific keyword or shorthand that precedes arguments in a command. Examples include `add/`, `edit/`, and `delete/` for actions in the EZSTATES CLI. Each prefix is followed by specific parameters for the desired action.                                                                                                                                              |
-| **Data File**      | A file that stores all of the data associated with EZSTATES, such as contacts, listings, and appointments. These are often stored in `.json` format and can be loaded into the app.                                                                                                                                                                                        |
-| **Tag**            | A label associated with a client or listing, used for categorization or filtering. Tags can be added, modified, or removed for clients or listings in EZSTATES.                                                                                                                                                                                                            |
-| **Valid Index**    | A valid index refers to an index number that is within the range of available items, such as clients or listings. Indexes must be positive integers and not exceed the total number of items in the list.                                                                                                                                                                  |
-| **Invalid Index**  | An invalid index refers to a number that is either non-positive, exceeds the total number of items in the list, or is not a valid integer. The system will return an error when such an index is used.                                                                                                                                                                     |
-| **Command Error**  | An error caused by an invalid command, such as missing required parameters, incorrect formatting, or invalid argument values. EZSTATES provides feedback to help correct the command.                                                                                                                                                                                      |
-| **Known Issue**    | A documented problem or limitation within the software that is known to the developers. These issues may have workarounds or fixes pending in future releases.                                                                                                                                                                                                             |
-| **App Launch**     | The initial startup of EZSTATES, where the app loads and displays a GUI for user interaction. On the first launch, sample data may be shown to help users get started.                                                                                                                                                                                                     |
-| **Sample Data**    | Predefined data loaded into the application on its initial launch to demonstrate features. Users can edit, delete, or replace this data with their own information.                                                                                                                                                                                                        |
-| **Exit Command**   | The command used to close the EZSTATES application. The command is typically `exit`, which allows users to safely terminate the application session.                                                                                                                                                                                                                       |
-| **Help Command**   | A command that provides the user with a list of available commands and their descriptions, often used to get guidance on how to use the application.                                                                                                                                                                                                                       |
+| **Term**           | **Definition**                                                                                                                                                                                                                                                                                                                                                    |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **.json**          | A lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. In EZSTATES, `.json` files are used to store and exchange data, such as `clients` or `listings`, in a structured and easily accessible way. JSON files consist of key-value pairs and can be used to store complex data structures. |
+| **Index**          | A number representing the position of an item in a list. In EZSTATES, it is commonly used to refer to `client` or `listing` positions. Valid index values are positive integers within the bounds of the displayed list.                                                                                                                                          |
+| **Command**        | A directive given to the EZSTATES application, typically entered by the user, that triggers specific actions such as adding a `buyer`, editing a `client`, or deleting a `client` (e.g., `buyer`, `editclient`, `deleteclient`).                                                                                                                                  |
+| **Client**         | A person or entity whose contact details are managed in the system. A `client` can either be a `buyer` or a `seller`.                                                                                                                                                                                                                                             |
+| **Buyer**          | A person or entity interested in purchasing properties. In EZSTATES, `buyers` can be added and associated with `listings`.                                                                                                                                                                                                                                        |
+| **Seller**         | A person or entity who is selling properties. In EZSTATES, `sellers` are added and associated with `listings`.                                                                                                                                                                                                                                                    |
+| **Listing**        | A property available for sale in EZSTATES. Each `listing` contains details such as `price`, `area`, and the `seller` associated with it.                                                                                                                                                                                                                          |
+| **CLI**            | Command Line Interface. An interface where the user interacts with the application by typing commands instead of using graphical elements. In EZSTATES, users can enter commands directly through the command line. Each command follows a specific format and structure to perform various actions.                                                              |
+| **GUI**            | Graphical User Interface. The visual interface of the application that allows users to interact with the system via buttons, fields, and other visual elements.                                                                                                                                                                                                   |
+| **Command Prefix** | A specific keyword or shorthand that precedes arguments in a command. Examples include `add/`, `edit/`, and `delete/` for actions in the EZSTATES CLI. Each prefix is followed by specific parameters for the desired action.                                                                                                                                     |
+| **Data File**      | A file that stores all of the data associated with EZSTATES, such as `clients`, `listings`, and `appointments`. These are often stored in `.json` format and can be loaded into the app.                                                                                                                                                                          |
+| **Tag**            | A label associated with a `client` or `listing`, used for categorization or filtering. Tags can be added, modified, or removed for `clients` or `listings` in EZSTATES.                                                                                                                                                                                           |
+| **Valid Index**    | A valid index refers to an index number that is within the range of available items, such as `clients` or `listings`. Indexes must be positive integers and not exceed the total number of items in the list.                                                                                                                                                     |
+| **Invalid Index**  | An invalid index refers to a number that is either non-positive, exceeds the total number of items in the list, or is not a valid integer. The system will return an error when such an index is used.                                                                                                                                                            |
+| **Command Error**  | An error caused by an invalid command, such as missing required parameters, incorrect formatting, or invalid argument values. EZSTATES provides feedback to help correct the command.                                                                                                                                                                             |
+| **Known Issue**    | A documented problem that is known to the developers. These issues may have workarounds or fixes pending in future releases.                                                                                                                                                                                                                                      |
+| **App Launch**     | The initial startup of EZSTATES, where the app loads and displays a GUI for user interaction. On the first launch, sample data may be shown to help users get started.                                                                                                                                                                                            |
+| **Sample Data**    | Predefined data loaded into the application on its initial launch to demonstrate features. Users can edit, delete, or replace this data with their own information.                                                                                                                                                                                               |
