@@ -153,7 +153,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelClassDiagram.png" />
 
 The `Model` component,
 
@@ -174,7 +174,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" />
 
 The `Storage` component,
 
