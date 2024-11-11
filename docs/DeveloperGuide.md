@@ -816,4 +816,14 @@ Currently, users can specify any year for the `work experience` field, even year
 
 This validation will help maintain data accuracy by ensuring that work experience entries are realistic and relevant.
 
+**9. Limit Length of Interest Field to Improve UI Display**  
+Currently, if a user adds an overly long interest string (e.g., `addi in/1 i/VeryLongInterestNameExceedingLimit`), the UI may not be able to fully display it. This can lead to a poor user experience, as the interest text may be cut off or difficult to read. In future updates, we plan to add a length restriction for the `interest` field to ensure that entries remain manageable in length and display properly in the UI.
+
+**Example**:
+- Command: `addi in/1 i/VeryLongInterestNameExceedingLimit`
+  - **Current Behavior**: This command would be accepted, but the interest text may not display fully in the UI.
+  - **Planned Behavior**: The command will be rejected with an error message if the interest string exceeds a certain length (e.g., 20 characters), prompting the user to enter a shorter, more concise interest.
+
+This enhancement will improve the user interface by ensuring that all interest entries display clearly and consistently.
+
 These planned enhancements are intended to make the application more user-friendly, realistic, and adaptable to real-world data needs.
