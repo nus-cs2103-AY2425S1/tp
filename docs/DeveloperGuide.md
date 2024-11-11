@@ -267,7 +267,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a contact, providing the information that is required.
+1. User chooses to add a contact, providing the information that is required.
 2. KonTActs adds the new contact and indicates success.
 
    Use case ends.
@@ -276,7 +276,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-  - 1a1.KonTActs rejects the addition request and shows an error message.
+  - 1a1. KonTActs request for the correct input.
   - 1a2. User enters a new input.
   - Steps 1a1 - 1a2 are repeated until input entered is correct.
 
@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete a contact.
+1. User chooses to delete a contact.
 2. KonTActs deletes the contact and indicates success.
 
    Use case ends.
@@ -303,7 +303,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-  - 1a1.KonTActs rejects the deletion request and shows an error message.
+  - 1a1. KonTActs request for the correct input.
   - 1a2. User enters a new input.
   - Steps 1a1 - 1a2 are repeated until the input entered is correct.
 
@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User request to add grades for a student, providing the student's details and grade.
+1. User chooses to add grades for a student, providing the assignment details and grade.
 2. KonTActs updates the grade of the student and indicates success.
 
    Use case ends.
@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-  - 1a1. KonTActs rejects the request and shows an error message.
+  - 1a1. KonTActs request for the correct input.
   - 1a2. User enters a new input.
   - Steps 1a1-1a2 are repeated until the input entered is correct.
 
@@ -345,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view the entire contact list.
+1. User chooses to view the entire contact list.
 2. KonTActs displays the full list of contacts.
 
    Use case ends.
@@ -358,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to edit a contact’s detail, providing the updated details.
+1. User chooses to edit a contact’s detail, providing the updated details.
 2. KonTActs updates the details of the contact and indicates success.
 
    Use case ends.
@@ -367,7 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects that the contact provided does not exist.
 
-  - 1a1. KonTActs rejects the request and shows an error message.
+  - 1a1. KonTActs request for the correct input.
   - 1a2. User enters a new input.
   - Steps 1a1-1a2 are repeated until the input entered is correct.
 
@@ -375,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1b. KonTActs detects that the new details provided is invalid.
 
-    - 1b1. KonTActs rejects the request and shows an error message.
+    - 1b1. KonTActs request for the correct input.
     - 1b2. User enters a new input.
     - Steps 1b1-1b2 are repeated until the input entered is correct.
 
@@ -389,7 +389,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to filter the contact list, providing the filter criteria.
+1. User chooses to filter the contact list, providing the filter criteria.
 2. KonTActs filters the contact list and displays the filtered list.
 
    Use case ends.
@@ -398,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-  - 1a1. KonTActs rejects the request and shows an error message.
+  - 1a1. KonTActs request for the correct input.
   - 1a2. Users enter a new input.
   - Steps 1a1-1a2 are repeated until the input entered is correct.
 
@@ -413,11 +413,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Precondition**
 
 1. User must have permission to write to the provided path.
+
 2. User must have enough storage to store the output file.
 
 **MSS**
 
-1. User request to export the contact list, providing the file path.
+1. User chooses to export the contact list, providing the file path.
 2. KonTActs exports the contact list in CSV format and indicates success.
 
    Use case ends.
@@ -426,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-    - 1a1. KonTActs rejects the request and shows an error message.
+    - 1a1. KonTActs request for the correct input.
     - 1a2. User enters a new input.
     - Steps 1a1-1a2 are repeated until the input entered is correct.
 
@@ -466,7 +467,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. KonTActs detects an error in the entered data.
 
-  - 3a1. KonTActs displays error message.
+  - 3a1. KonTActs request for the correct data.
   - 3a2. User enters new data.
   - Steps 3a1-3a2 are repeated until the data entered are correct.
 
@@ -487,7 +488,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to import the contact list, providing the desired file path.
+1. User chooses to import the contact list, providing the desired file path.
 2. KonTActs imports the contact list from the specified file path and indicates successful import.
 
    Use case ends.
@@ -496,7 +497,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects the file provided is invalid.
 
-  - 1a1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
+  - 1a1. KonTActs request for the correct file path.
   - 1a2. User provides a new file path
   - Steps 1a1 - 1a2 are repeated until KonTActs is able to import contacts from the file.
 
@@ -504,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1b. KonTActs detects invalid content in CSV file.
 
-    - 1b1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
+    - 1b1. KonTActs request for the correct file path.
     - 1b2. User provides a new file path or update their CSV file
     - Steps 1b1 - 1b2 are repeated until KonTActs is able to import contacts from the file.
 
@@ -522,7 +523,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to sort the contact list, providing the sort criteria.
+1. User chooses to sort the contact list, providing the sort criteria.
 2. KonTActs sots the contact list and displays the sorted list.
 
    Use case ends.
@@ -531,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-    - 1a1. KonTActs rejects the request and shows an error message.
+    - 1a1. KonTActs request for the correct input.
     - 1a2. Users enter a new input.
     - Steps 1a1-1a2 are repeated until the input entered is correct.
 
@@ -548,7 +549,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to open the Github page of a student.
+1. User chooses to open the Github page of a student.
 2. KonTActs opens the Github page on the user's default browser.
 
    Use case ends.
@@ -557,7 +558,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-    - 1a1. KonTActs rejects the request and shows an error message.
+    - 1a1. KonTActs request for the correct input.
     - 1a2. Users enter a new input.
     - Steps 1a1-1a2 are repeated until the input entered is correct.
 
