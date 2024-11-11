@@ -216,6 +216,8 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 
 - **Single Role per Person**:
     - Each person can have at most one role.
+    - For example: `assign 1 r/florist` assigns the role "florist" to the person at index 1.
+    - The person will be ```florist``` in any wedding assigned to him until a new role is assigned.
     - Assigning a new role replaces any existing role.
 
 ---
@@ -457,8 +459,11 @@ Views the details of a wedding.
     - **By Index**: `vieww INDEX`
     - **By Keyword**: `vieww KEYWORD`
 - **Notes**:
-    - Keyword can be the wedding name or client's name.
+    - Keyword can be the wedding name.
+    - Person list will only be updated when one unique wedding is found.
     - If multiple matches are found, the system will prompt for index.
+    - Wedding list will be truncated to the matched wedding(s).
+    - Use `list` to view all weddings again.
 - **Information Displayed**:
     - Wedding name, client details, date, venue.
     - Assigned vendors.
