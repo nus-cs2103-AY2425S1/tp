@@ -324,6 +324,8 @@ Examples:
     **Output**: <br>
     ![list](images/list.png)
 
+<div style="page-break-after: always;"></div>
+
 ### [Editing a Person](#command-summary): `edit`
 
 Edits an existing person with the specified `ID` in the database.
@@ -440,6 +442,8 @@ Examples:
    **Output**: <br>
    The patient or doctor already has another appointment!
 
+<div style="page-break-after: always;"></div>
+
 ### [View History of a Person](#command-summary): `view`
 
 Displays the history of an existing person with the specified `ID` in the MedDict database.
@@ -512,6 +516,8 @@ Examples:
    **Output**: <br>
    No appointments found on this date.
 
+<div style="page-break-after: always;"></div>
+
 ### [Delete Appointment](#command-summary): `deleteA`
 
 Deletes appointment associated with the specified `PATIENT_ID`, `DOCTOR_ID`, `DATE_TIME` from the MedDict database.
@@ -535,6 +541,8 @@ Examples:
 *  `deleteA z/1 z/3 x/2024-12-31 15:23` <br>
    **Output**: <br>
    The appointment doesn't exist! Please check again the details you have entered!
+
+<div style="page-break-after: always;"></div>
 
 ### [Clearing All Entries](#command-summary): `clear`
 
