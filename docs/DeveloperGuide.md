@@ -265,22 +265,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to add a contact.
-2. KonTActs requests for the contact details.
-3. User enters the contact details.
-4. KonTActs adds the new contact.
+1. User requests to add a contact, providing the information that is required.
+2. KonTActs adds the new contact and indicates success.
 
    Use case ends.
 
 **Extensions**
 
-- 3a. KonTActs detects an error in the input format.
+- 1a. KonTActs detects an error in the input.
 
-  - 3a1.KonTActs requests for the corrected input.
-  - 3b2. User enters a new input.
-  - Steps 3a1 - 3a2 are repeated until input format is correct.
+  - 1a1.KonTActs rejects the addition request and shows an error message.
+  - 1b2. User enters a new input.
+  - Steps 1a1 - 3a1 are repeated until input entered is correct.
 
-    Use cases resume from step 4.
+    Use cases resume from step 2.
 
 <br>
 
@@ -294,7 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User indicates to delete a contact.
+1. User requests to delete a contact.
 2. KonTActs deletes the contact and indicates success.
 
    Use case ends.
@@ -303,8 +301,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-  - 1a1.KonTActs requests for the user to try again.
-  - 1a2. User enters the command again
+  - 1a1.KonTActs rejects the deletion request and shows an error message.
+  - 1a2. User enters a new input.
   - Steps 1a1 - 1a2 are repeated until the input entered is correct.
 
     Use case resumes from step 2.
@@ -322,22 +320,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to add grades for a student.
-2. KonTActs requests for details of the student alongside the assignment and grade.
-3. User enters the requested details.
-4. KonTActs updates the grade of the student.
+1. User request to add grades for a student, providing the student's details and grade.
+2. KonTActs updates the grade of the student and indicates success.
 
    Use case ends.
 
 **Extensions**
 
-- 4a. KonTActs detects an error in the entered data.
+- 1a. KonTActs detects an error in the input.
 
-  - 4a1. KonTActs requests for the correct data.
-  - 4a2. User enters new data.
-  - Steps 4a1-4a2 are repeated until the data entered are correct.
+  - 1a1. KonTActs rejects the request and shows an error message.
+  - 1a2. User enters a new input.
+  - Steps 1a1-1a2 are repeated until the input entered is correct.
 
-    Use case resumes from step 4.
+    Use case resumes from step 1.
 
     <br>
 
@@ -347,23 +343,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to view the entire contact list.
-2. KonTActs displays the full list of contacts.\
+1. User requests to view the entire contact list.
+2. KonTActs displays the full list of contacts.
+
    Use case ends.
-
-**Extensions**
-
-- 1a. User has previously filtered the contact list.
-
-  - 1a1. KonTActs displays the full contact list, removing the previous filters.
-
-    Use case ends.
-
-- 1b. KonTActs detects an error (e.g., unable to retrieve contacts).
-
-  - 1b1. KonTActs displays an error message.
-
-    Use case ends.
 
 <br>
 
@@ -373,32 +356,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. TA chooses to edit a contact’s details.
-2. KonTActs requests the contact’s identifier.
-3. TA enters the identifier of the contact to update.
-4. KonTActs displays the current details and requests the changes.
-5. TA updates the relevant details.
-6. KonTActs saves and displays the changes.
+1. User requests to edit a contact’s detail, providing the updated details.
+2. KonTActs updates the details of the contact and indicates success.
 
    Use case ends.
 
 **Extensions**
 
-- 3a. KonTActs identifies that there is no such contact.
+- 1a. KonTActs detects that the contact provided does not exist.
 
-  - 3a1. KonTActs requests for the correct data.
-  - 3a2. TA enters the new data.
-  - Steps 3a1-3a2 are repeated until the data entered are correct.
+  - 1a1. KonTActs rejects the request and shows an error message.
+  - 1a2. User enters a new input.
+  - Steps 1a1-1a2 are repeated until the input entered is correct.
 
-    Use case resumes from step 4.
-  
-- 4a. KonTActs identifies that the data to be updated is invalid.
+    Use case resumes from step 2.
 
-    - 4a1. KonTActs requests for the correct data.
-    - 4a2. TA enters new data
-    - Steps 4a1-4a2 are repeated until the data entered are correct.
+- 1b. KonTActs detects that the new details provided is invalid.
 
-      Use case resumes from step 5.
+    - 1b1. KonTActs rejects the request and shows an error message.
+    - 1b2. User enters a new input.
+    - Steps 1b1-1b2 are repeated until the input entered is correct.
+
+      Use case resumes from step 2.
 
 <br>
 
@@ -408,25 +387,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to filter the contact list.
-2. KonTActs requests the filter criteria (current overall grades, name, tele handle).
-3. User enters the filter criteria.
-4. KonTActs filters the contact list based on the entered criteria and displays the filtered list.
+1. User requests to filter the contact list, providing the filter criteria.
+2. KonTActs filters the contact list and displays the filtered list.
 
    Use case ends.
 
 **Extensions**
 
-- 3a. KonTActs detects an error in the entered filter criteria (e.g., incorrect input - invalid score input).
+- 1a. KonTActs detects an error in the input.
 
-  - 3a1. KonTActs requests for the correct filter criteria.
-  - 3a2. Users enter new criteria.
-  - Steps 3a1-3a2 are repeated until the criteria entered are valid.
+  - 1a1. KonTActs rejects the request and shows an error message.
+  - 1a2. Users enter a new input.
+  - Steps 1a1-1a2 are repeated until the input entered is correct.
 
-    Use case resumes from step 4.
-
-- \*a. At any time, User chooses to cancel the filter action.
-- \*a1. KonTActs stops the filter operation and returns to the unfiltered contact list by using list
+    Use case resumes from step 2.
 
 <br>
 
@@ -441,21 +415,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User chooses to export the contact list.
-2. User provides the file path. 
-3. KonTActs exports the contact list in CSV format and shows the number of people successfully exported.
+1. User request to export the contact list, providing the file path.
+2. KonTActs exports the contact list in CSV format and indicates success.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. User enters an invalid path (e.g .pdf).
+- 1a. KonTActs detects an error in the input.
 
-  - 2a1. KonTActs displays an error message and request for user to provide a valid file path (e.g. must end with .csv)
-  - 2a2. User provides new file path
-  - Step 2a1-2a2 are repeated until file path is valid
+    - 1a1. KonTActs rejects the request and shows an error message.
+    - 1a2. User enters a new input.
+    - Steps 1a1-1a2 are repeated until the input entered is correct.
 
-    Use case resumes from step 3.
+      Use case resumes from step 2.
 
     <br>
 
@@ -507,21 +480,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. The file is in CSV format and ends with .csv
 2. The file contains valid data of at least 1 person
-3. The header of the file is in a specific sequence 
-("Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent")
+3. The header of the file is in the required sequence
 4. Current user have permissions to access and read the file
 
 **MSS**
 
-1. User chooses to import the contact list.
-2. User gives the desired file (by its path).
-3. KonTActs import the contact list from the specified file path and shows successful import.
+1. User requests to import the contact list, providing the desired file path.
+2. KonTActs imports the contact list from the specified file path and indicates successful import.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. KonTActs detects an unsupported, corrupted file or a file without the valid headers.
+- 1a. KonTActs detects the file provided is invalid.
 
   - 2a1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
   - 2a2. User provides a new file path
@@ -529,8 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 3.
 
-- 2b. KonTActs detects invalid content in CSV file (e.g. Name/Email that does not comply with requirement, 
-Duplicate names)
+- 1b. KonTActs detects invalid content in CSV file.
 
     - 2b1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
     - 2b2. User provides a new file path or update their CSV file
