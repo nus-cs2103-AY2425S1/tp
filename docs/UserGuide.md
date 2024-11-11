@@ -146,7 +146,7 @@ Adds a customer to the contact list.
 - Phone number (with `p/` prefix) should be an 8-digit mainstream Singaporean phone number starting with 9, 8, 7, or 6.
 - Postal code (with `pc/` prefix) should be a 6-digit number.
 
-> Note: Leading and trailing spaces in name inputs will be automatically removed.
+> Note: Leading and trailing spaces in `NAME` inputs will be automatically removed.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** Any further specification in ability to add or edit fields is described in the respective field's error message</div>
 
@@ -319,6 +319,8 @@ Adds an order to NomNomNotifier.
 - `ORDER` must be in lowercase.
 - If `ORDER` contains uppercase characters, they will be converted to lowercase automatically.
 - `ORDER` can only contain alphanumeric characters and whitespace.
+  
+> Note: Leading and trailing spaces in `ORDER` inputs will be automatically removed.
 
 **Examples:**
 - `order cake` — Adds an order called "cake" to NomNomNotifier.
@@ -340,6 +342,8 @@ Deletes an order from NomNomNotifier.
 - `ORDER` must be in lowercase.
 - If `ORDER` contains uppercase characters, they will be converted to lowercase automatically.
 - `ORDER` can only contain alphanumeric characters and whitespace.
+  
+> Note: Leading and trailing spaces in `ORDER` inputs will be automatically removed.
 
 **Examples:**
 - `deleteOrder cake` — Deletes an order called "cake" from NomNomNotifier.
@@ -370,12 +374,14 @@ Shows a list of all orders in NomNomNotifier.
 
 Adds an order history to a customer.
 
-**Format:** `put ORDER [n/NAME]`
+**Format:** `put ORDER n/NAME`
 
 - `ORDER` must be in lowercase.
 - If `ORDER` contains uppercase characters, they will be converted to lowercase automatically.
 - `ORDER` can only contain alphanumeric characters and whitespace.
 - The time recorded by the order history is the time the `put` command is run.
+
+> Note: Leading and trailing spaces in `ORDER` inputs will be automatically removed.
 
 **Examples:**
 - `put pizza n/Alex Yeoh` — Adds an order called "pizza" to a customer named "Alex Yeoh".
@@ -393,6 +399,8 @@ Adds an order history to a customer.
 Lists all order histories of a customer, including the time of each order.
 
 **Format:** `history NAME`
+
+> Note: Leading and trailing spaces in `NAME` inputs will be automatically removed.
 
 **Examples:**
 - `history Alex Yeoh` — Lists order histories of a customer named `Alex Yeoh`.
