@@ -19,7 +19,7 @@ This app is designed for GP clinics in Singapore, where all patients should have
 
 1. Ensure you have Java `17` or above installed in your Computer. Instructions for Java `17` are available [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-2. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.5). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
+2. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.6). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
 
 3. Copy the file to the folder you want to use as the _home folder_ for MediContact. 
 
@@ -119,6 +119,7 @@ Adds a patient contact to the address book.
 - Duplicate phone numbers are allowed for cases like parents and children sharing a same number.
 - Fields in square brackets (e.g. `[ap/FUTURE APPOINTMENT]`) are optional.
 </box>
+<div style="page-break-before:always">&nbsp;</div>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
 **Examples**:
@@ -217,6 +218,8 @@ Deletes the specified patient contact from the address book.
 * `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd patient contact in the address book.
 * `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st patient contact in the results of the `find` command.<br>
 
+<div style="page-break-before:always">&nbsp;</div>
+
 **Input**<br>
 
 <img src="images/deleteCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
@@ -260,7 +263,6 @@ Edits an existing patient contact in the address book.
 - You can remove all the patient’s future appointments by typing `ap/` without specifying any appointments after it.
 
 - Currently, editing of specific tags and appointments are not possible. To work around this, you can clear their respective fields and add the new tags/appointments.
-
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
@@ -268,6 +270,8 @@ Edits an existing patient contact in the address book.
 
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit John Doe n/Betsy Crower t/ ap/` Edits the name of John Doe to be `Betsy Crower` and clears all existing tags and appointments.
+
+<div style="page-break-before:always">&nbsp;</div>
 
 **Input**<br>
 
@@ -318,7 +322,6 @@ Filter patients whose age and/or appointment dates are within the specified rang
 **Remarks**:
 
 - Fields in square brackets (e.g. `[t/TAG]`) are optional.
-
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
@@ -332,6 +335,8 @@ Filter patients whose age and/or appointment dates are within the specified rang
 **Input**<br>
 
 <img src="images/filterCommand_input.png" width="700" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+<div style="page-break-before:always">&nbsp;</div>
 
 **Output**<br>
 
@@ -370,7 +375,7 @@ Finds patients whose names or phone numbers contain any of the given keywords.
 **Examples**:
 
 * `find John` returns `john` and `Johnny Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find david` returns `David Li`<br>
 * `find olive 87438` returns `87438807`, `Charlotte Oliveiro`
 
 **Input**<br>
@@ -498,6 +503,8 @@ The following is an example of a valid JSON file content.
 
 - Each patient data must be enclosed with `{}` and seperated by a comma `,`
 
+<div style="page-break-before:always">&nbsp;</div>
+
 - The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient contacts before importing. Remember to ensure that data adheres to the constraints of MediContact (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details).
 
   ````
@@ -614,7 +621,6 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 - You can remove all the patient’s medications by typing `m/` without specifying any medications after it.
 
 - You can remove all the patient’s remarks by typing `r/` without specifying any remarks after it.
-
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
@@ -622,6 +628,7 @@ Edits an existing patient's note in the address book, which contains `PREVIOUS A
 *  `note John Doe ap/01/01/2023 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
+<div style="page-break-before:always">&nbsp;</div>
 
 **Input**<br>
 
@@ -654,7 +661,6 @@ Sorts the patient contact list in the address book on the basis of their earlies
 - If patient contacts share an appointment timing, they will be sorted alphabetically by name.
 
 - Any patient contacts without any appointment timings will remain sorted alphabetically at the end of the list.
-
 </box>
 <box type="warning" icon=":fa-solid-book:" no-background light>
 
