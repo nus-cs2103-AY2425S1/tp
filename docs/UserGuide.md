@@ -19,7 +19,6 @@ the process of accessing and updating resident student details. What's more, Dor
 
 
 <!-- * Table of Contents -->
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
@@ -319,7 +318,7 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. You can also use the import and export features to directly manage and modify JSON files that follow DorManagerPros format.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DorManagerPro home folder. You can also use the import and export features to directly manage and modify JSON files that follow DorManagerPros format.
 
 --------------------------------------------------------------------------------------------------------------------
 
