@@ -230,13 +230,17 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
 [m/MAJOR] [u/UNIVERSITY]…​
 ```
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-- The index should not be longer than 1000. 
-- At least one of the optional fields must be provided.
-- Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+- **Index:**
+  - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+  - The index should not be longer than 1000. 
+- **Updating Values:**
+  - At least one of the optional fields must be provided.
+  - Existing values will be updated to the input values.
+- **Removing Optional Fields:**
+  - `Interests`: If the edit command is executed with an empty `i/` field, it will remove the `interests` from the specified contact.
+  - `Work Experience`: If the edit command is executed with an empty `w/` field, it will remove the `work experience` from the specified contact.
+  - `Tag`: If the edit command is executed with an empty `t/` field, it will remove the `tag` from the specified contact.
+**Note:** When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 
 Examples:
 
@@ -249,6 +253,16 @@ edit 1 p/91234567 e/johndoe@example.com
 edit 2 n/Betsy Crower t/
 ```
 - Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+```plaintext
+edit 3 i/
+```
+- Removes all interests from the third contact.
+
+```plaintext
+edit 4 w/
+```
+- Removes the work experience for the fourth contact.
 
 <br>
 
