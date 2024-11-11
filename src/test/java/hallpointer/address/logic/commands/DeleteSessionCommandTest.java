@@ -2,7 +2,11 @@ package hallpointer.address.logic.commands;
 
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static hallpointer.address.testutil.TypicalMembers.ALICE;
+import static hallpointer.address.testutil.TypicalMembers.GEORGE;
 import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
+import static hallpointer.address.testutil.TypicalSessions.MEETING;
+import static hallpointer.address.testutil.TypicalSessions.REHEARSAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -37,19 +41,23 @@ public class DeleteSessionCommandTest {
             new Point("10"));
 
     @Test
-    public void constructor_nullSessionName_throwsNullPointerException() {
+    public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeleteSessionCommand(null, new HashSet<>()));
+        assertThrows(NullPointerException.class, () -> new DeleteSessionCommand(new SessionName("Rehearsal"), null));
+        assertThrows(NullPointerException.class, () -> new DeleteSessionCommand(null, null));
     }
 
     @Test
-    public void constructor_nullIndexes_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteSessionCommand(new SessionName("Rehearsal"), null));
+    public void constructor_emptyIndices_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new DeleteSessionCommand(
+                new SessionName("Rehearsal"), new HashSet<>()));
     }
 
     @Test
     public void execute_validSessionDelete_success() throws Exception {
         ModelStubAcceptingMemberWithSession modelStub = new ModelStubAcceptingMemberWithSession();
         Member validMember = new MemberBuilder().withName("Alice").build();
+        validMember.addSession(MEETING);
         validMember.addSession(defaultSession);
         modelStub.addMember(validMember);
 
@@ -61,33 +69,86 @@ public class DeleteSessionCommandTest {
         CommandResult commandResult = deleteSessionCommand.execute(modelStub);
 
         assertEquals(
-                String.format(DeleteSessionCommand.MESSAGE_SUCCESS, sessionName.toString(), 1),
+                String.format(DeleteSessionCommand.MESSAGE_SUCCESS, sessionName, 1),
                 commandResult.getFeedbackToUser()
         );
+        assertEquals(validMember.getSessions().size(), 1); // check if session is deleted properly
+        assertTrue(validMember.getSessions().contains(MEETING));
+        assertFalse(validMember.getSessions().contains(defaultSession));
+    }
+
+    //@@author {yuvrajaryan}
+    @Test
+    public void execute_deleteSessionFromNonExistentMember_throwsCommandException() {
+        ModelStubWithoutMembers modelStub = new ModelStubWithoutMembers();
+        Set<Index> memberIndexes = new HashSet<>();
+        memberIndexes.add(INDEX_FIRST_MEMBER); // Valid index, but no members exist
+
+        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(
+                defaultSession.getSessionName(), memberIndexes);
+        assertThrows(CommandException.class,
+                DeleteSessionCommand.MESSAGE_INVALID_INDEX, () -> deleteSessionCommand.execute(modelStub));
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        ModelStub modelStub = new ModelStubWithoutMembers();
+        ModelStub modelStub = new ModelStubWithMemberButNoSession();
         Set<Index> memberIndexes = new HashSet<>();
         memberIndexes.add(Index.fromZeroBased(5)); // Invalid index
 
         DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(
                 new SessionName("Rehearsal"), memberIndexes);
         assertThrows(CommandException.class,
-                DeleteSessionCommand.MESSAGE_INVALID_INDEX, ()
+                DeleteSessionCommand.MESSAGE_INVALID_INDEX, () -> deleteSessionCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_sessionNotInAnyMember_throwsCommandException() {
+        ModelStub modelStub = new ModelStubWithMemberButNoSession();
+        Set<Index> memberIndexes = new HashSet<>();
+        SessionName missingSessionName = new SessionName("NonExistentSession");
+        memberIndexes.add(TypicalIndexes.INDEX_FIRST_MEMBER);
+
+        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(
+                missingSessionName, memberIndexes);
+        assertThrows(CommandException.class,
+                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER,
+                        missingSessionName, modelStub.getFilteredMemberList().get(0).getName()), ()
                         -> deleteSessionCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_sessionNotInMember_throwsCommandException() {
-        ModelStub modelStub = new ModelStubWithMemberButNoSession();
+    public void execute_sessionNotInAnySelectedMembers_throwsCommandException() {
+        ModelStub modelStub = new ModelStubAcceptingMemberWithSession();
+        modelStub.addMember(GEORGE); // has the REHEARSAL session
+        modelStub.addMember(ALICE);
+        Set<Index> memberIndexes = new HashSet<>();
+        memberIndexes.add(TypicalIndexes.INDEX_SECOND_MEMBER);
+
+        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(REHEARSAL.getSessionName(), memberIndexes);
+        assertThrows(CommandException.class,
+                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER,
+                        REHEARSAL.getSessionName(), ALICE.getName()), ()
+                        -> deleteSessionCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_sessionNotInSomeSelectedMembers_throwsCommandException() {
+        ModelStub modelStub = new ModelStubAcceptingMemberWithSession();
+        modelStub.addMember(GEORGE); // has the REHEARSAL session
+        modelStub.addMember(ALICE);
         Set<Index> memberIndexes = new HashSet<>();
         memberIndexes.add(TypicalIndexes.INDEX_FIRST_MEMBER);
+        memberIndexes.add(TypicalIndexes.INDEX_SECOND_MEMBER);
 
-        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(
-                new SessionName("NonExistentSession"), memberIndexes);
-        assertThrows(CommandException.class, () -> deleteSessionCommand.execute(modelStub));
+        DeleteSessionCommand deleteSessionCommand = new DeleteSessionCommand(REHEARSAL.getSessionName(), memberIndexes);
+        assertThrows(CommandException.class,
+                String.format(DeleteSessionCommand.MESSAGE_SESSION_NOT_IN_MEMBER,
+                        REHEARSAL.getSessionName(), ALICE.getName()), ()
+                        -> deleteSessionCommand.execute(modelStub));
+        assertEquals(modelStub.getFilteredMemberList().size(), 2); // check if nothing was deleted
+        assertTrue(modelStub.getFilteredMemberList().contains(GEORGE));
+        assertTrue(modelStub.getFilteredMemberList().contains(ALICE));
     }
 
     @Test

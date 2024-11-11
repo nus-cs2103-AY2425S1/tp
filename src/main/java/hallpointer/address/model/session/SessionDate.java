@@ -23,7 +23,7 @@ public class SessionDate {
     // Desired date format
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     // Whitespace processing already done earlier
-    public static final Pattern parsingPattern = Pattern.compile("^([0-9]{1,2}) ([a-zA-Z]{3}) ([0-9]{4})$");
+    public static final Pattern PARSING_PATTERN = Pattern.compile("^([0-9]{1,2}) ([a-zA-Z]{3}) ([0-9]{4})$");
 
     public final LocalDate fullDate;
 
@@ -47,7 +47,7 @@ public class SessionDate {
      */
     private static String manualFormatDate(String date) {
         requireNonNull(date);
-        Matcher matcher = parsingPattern.matcher(date);
+        Matcher matcher = PARSING_PATTERN.matcher(date);
         if (!matcher.find()) {
             return ""; // no amount of formatting can save this given the input constraints
         }

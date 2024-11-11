@@ -1,14 +1,14 @@
 package hallpointer.address.logic.parser;
 
+import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static hallpointer.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.logic.commands.FindSessionCommand;
-import hallpointer.address.logic.parser.exceptions.ParseException;
 import hallpointer.address.model.member.SessionContainsKeywordsPredicate;
 
 public class FindSessionCommandParserTest {
@@ -25,7 +25,8 @@ public class FindSessionCommandParserTest {
 
     @Test
     public void parse_emptyArgs_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(""));
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindSessionCommand.MESSAGE_USAGE));
     }
 }
 
