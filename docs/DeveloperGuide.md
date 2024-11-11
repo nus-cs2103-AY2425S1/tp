@@ -207,25 +207,25 @@ The `PaginationPanel` contains the following member/class variables:
 
 * `ROWS_PER_PAGE`: Represents the number of items to display in a single page.
 * `currentPageIndex`: Represents the index (0-indexed) of the current page, it is shared among all instances and hence `static`.
-* `personList`: A **reference** of `ObservableList<Person>` from `Logic` during the initialization of UI.
+* `contactList`: A **reference** of `ObservableList<Person>` from `Logic` during the initialization of UI.
 
-#### Implementation of Constructor ####
+#### Implementation of Constructor
 
 The constructor of `PaginationPanel` takes in a reference of `ObservableList<Person>` and stores it as a member variable.
-Since it is _observable_, the pagination listens to the event when there is an update of `personList`, this is implemented by
-`this.personList.addListener(this::onListItemsChanged)`. Then the constructor initializes the pagination component.
+Since it is _observable_, the pagination listens to the event when there is an update of `contactList`, this is implemented by
+`this.contactList.addListener(this::onListItemsChanged)`. Then the constructor initializes the pagination component.
 
 
-#### Steps to Update the List when there is a Change ####
+#### Steps to Update the List when there is a Change
 
-Since the constructor adds a listener that listens to `onListItemsChanged` event on `personList`.
+Since the constructor adds a listener that listens to `onListItemsChanged` event on `contactList`.
 The `onListItemsChanged` simply invokes `initPagination` to re-render the list displayed.
 It takes the following steps to make the update:
 
-1. Calculate the number of pages by `personList.size()` and `ROWS_PER_PAGE`. The `Math::max` ensures that there is **at least one** page
+1. Calculate the number of pages by `contactList.size()` and `ROWS_PER_PAGE`. The `Math::max` ensures that there is **at least one** page
 even when there is no item. Then it updates the page count of the pagination.
-2. Calculate the starting index of sublist from `personList`.
-3. Calculate the end index of sublist from `personList`. The `Math::min` makes sure that the index does not go beyond the list size. Hence,
+2. Calculate the starting index of sublist from `contactList`.
+3. Calculate the end index of sublist from `contactList`. The `Math::min` makes sure that the index does not go beyond the list size. Hence,
 when there is less than the default `ROWS_PER_PAGE` number of items to render, it can correctly render all remaining items without the risk of
 triggering `ArrayIndexOutOfBoundException`.
 4. Get the sublist to be rendered based on the calculated `fromIndex` and `endIndex`.
@@ -268,7 +268,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                     | I want to …​                                                                                                                                                                             | So that I can…​                             -                                                                                    |
 |----------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | `* * *`  | new user                    | search the contact information of a CCA member by his/her name or other fields                                                                                                           | find the information of this member quickly.                                                                                     |
-| `* * *`  | user                        | remove a member from the address book                                                                                                                                                    | update the address book accordingly if he is no longer in the club                                                               |
+| `* * *`  | user                        | delete a member from the address book                                                                                                                                                    | update the address book accordingly if he is no longer in the club                                                               |
 | `* * *`  | user                        | use this app to populate the member’s details into the app database                                                                                                                      | save their details (name, year, tele handle, email address) into the database for future reference                               |
 | `* *`    | user                        | see a demonstration or tutorial for me to get started                                                                                                                                    | know how to use the app                                                                                                          |
 | `*`      | user that values efficiency | “manipulate” member’s data entries in batches                                                                                                                                            | can do things efficiently (Manipulate includes: Edit, Delete and Add)                                                            |
@@ -292,6 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | intermediate user       | automatically update particulars (year of study, graduation status, on exchange) when necessary, especially at the beginning of a new semester                             | ensure data accuracy with minimal manual effort.                                                            |
 | `* *`        | intermediate user       | generate a custom list of selected member information with only the needed details                                                                                         | easily retrieve the specific data required.                                                                 |
 | `* * *`      | user who values data privacy | set a password for the app                                                                                                                                                 | restrict access to only authorised individuals.                                                             |
+| `* * *`      | user | edit an existing member's particulars                                                                                                                                                    | easily update the particular without re-creating.                                                                                |
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -336,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User enters the `delete` command with the contact’s index or unique full name.
-2. Application removes the specified contact.
+2. Application deletes the specified contact.
 3. Application displays a confirmation message with the deleted contact’s details.
      Use case ends.
 
@@ -346,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 - 1b. User enters a name that is not unique in the address book.
   - 1b1. Application prompts the user to delete by index instead.
-  - 1b2. User enters index of contact to delete
+  - 1b2. User enters index of contact to delete.
       Use case resumes at step 2.
 
 ---
@@ -355,18 +356,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User performs a search using `find` to filter contacts.
-2. User enters the `delete` command with an index from the filtered list.
+2. User enters the `delete` command with the contact’s index or unique full name from the filtered list.
 3. Application deletes the specified contact from the filtered list.
-4. Application displays a confirmation message.
+4. Application displays a confirmation message with the deleted contact's details.
      Use case ends.
 
 **Extensions**
-- 2a. User provides an invalid index or namenot in the filterest list.
+- 2a. User provides an invalid index or name not in the filtered list.
   - 2a1. Application displays an error message: "Error: Contact not found."
       Use case ends.
 - 2b. User enters a name that is not unique in the address book.
   - 2b1. Application prompts the user to delete by index instead.
-  - 2b2. User enters index of contact to delete
+  - 2b2. User enters index of contact to delete.
       Use case resumes at step 2.
 
 ---
@@ -383,14 +384,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 - 1a. User provides incomplete, invalid, or duplicate data.
   - 1a1. Application displays an error message indicating the issue.
-      Use case ends
+      Use case ends.
 - 1b. User specifies a non-unique full name for editing.
   - 1b1. Application prompts the user to edit by index.
-  - 1b2. User enters index of contact to delete
+  - 1b2. User enters index of contact to delete.
       Use case resumes at step 2.
 - 1c. Contact not found (e.g., incorrect index or name not in list).
   - 1c1. Application displays an error message: "Error: Contact not found."
-      Use case ends
+      Use case ends.
 
 ---
 
@@ -398,22 +399,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User performs a search using `find` to filter contacts.
-2. User enters the `edit` command with an index from the filtered list.
+2. User enters the `edit` command with the contact’s index or unique full name, specifying the fields to update from the filtered list.
 3. Application updates the specified contact’s details in the filtered list.
-4. Application displays a confirmation message.
-     Use case ends
+4. Application displays a confirmation message: "Contact edited successfully."
+     Use case ends.
 
 **Extensions**
 - 2a. User provides incomplete, invalid, or duplicate data.
   - 2a1. Application displays an error message indicating the issue.
-      Use case ends
+      Use case ends.
 - 2b. User specifies a non-unique full name for editing.
   - 2b1. Application prompts the user to edit by index.
   - 2b2. User enters index of contact to delete
       Use case resumes at step 2.
 - 2c. Contact not found (e.g., incorrect index or name not in filtered list).
   - 2c1. Application displays an error message: "Error: Contact not found."
-      Use case ends
+      Use case ends.
 
 ---
 
@@ -427,13 +428,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 - 1a. Search input does not match any contact in the AddressBook.
-  - 1a1. Application shows an error message and prompts user to try searching under another field
+  - 1a1. Application shows an error message and prompts user to try searching under another field.
       Use case ends.
 - 1b. User specifies an invalid role or student status.
-  - 1b1. Application displays an error message of invalid role/student status inputted
+  - 1b1. Application displays an error message of invalid role/student status inputted.
       Use case ends.
 - 1c. User did not provide the search input
-  - 1c1. Application displays error message to input search criteria
+  - 1c1. Application displays error message to input search criteria.
       Use case ends.
 
 ---
@@ -517,12 +518,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Main Success Scenario (MSS)**: The primary sequence of actions in a use case that achieves the intended result.
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
 
 * **Pagination**: A technique for organising large sets of data or lists into discrete pages, making it easier to navigate and view information one section at a time. 
 
 * **User Interface (UI)**: The part of an application that users see and interact with to operate the software.
 
+* **Footer**: A footer is the bottom section of an application.
+
+* **Component**: A component is a collection of functions that provide a single responsibility to the application. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -597,10 +601,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message.
 
    1. Test case: `delete UNIQUE_FULL_NAME`<br>
       Expected: If UNIQUE_FULL_NAME is in the addressbook and there is only one FULL_NAME, deletes that contact.

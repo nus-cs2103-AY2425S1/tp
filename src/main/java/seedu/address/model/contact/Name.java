@@ -51,15 +51,18 @@ public class Name {
         boolean hasOpenBracket = validSpecialCharForRegex.equals("(");
         boolean hasCloseBracketAtEnd = testInNameCase.matches(".*[)]$"); // mmmmm
 
+        // if no special cases, just check that it is only alphabets
         if (hasNoSpecialChar) {
             return testInNameCase.matches(VALIDATION_REGEX);
         }
+
+        // if found special character, determine if its a bracket case
         if (hasOpenBracket && !hasCloseBracketAtEnd) {
             return false;
         }
-        if (hasOpenBracket && hasCloseBracketAtEnd) {
+        if (hasOpenBracket) {
             validSpecialCharForRegex = "\\("; // to be compatible with regex
-            testInNameCase = testInNameCase.substring(0, test.length() - 1); // minus off the close bracket
+            testInNameCase = testInNameCase.substring(0, testInNameCase.length() - 1); // minus off the close bracket
         }
         assert validSpecialCharForRegex.equals(validSpecialCharForRegex.toUpperCase());
 
