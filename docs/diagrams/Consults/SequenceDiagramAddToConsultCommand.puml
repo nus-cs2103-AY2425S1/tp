@@ -6,10 +6,11 @@ skinparam ArrowFontStyle plain
 title AddToConsultCommand Sequence Diagram
 
 box Logic
-Participant ":LogicManager" as LogicManager LOGIC_COLOR
-Participant ":AddressBookParser" as addressBookParser LOGIC_COLOR_T3
-Participant ":AddToConsultCommandParser" as AddToConsultCommandParser LOGIC_COLOR_T2
-Participant ":AddToConsultCommand" as AddToConsultCommand LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as addressBookParser LOGIC_COLOR_T3
+participant ":AddToConsultCommandParser" as AddToConsultCommandParser LOGIC_COLOR_T2
+participant ":AddToConsultCommand" as AddToConsultCommand LOGIC_COLOR_T1
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -25,19 +26,19 @@ activate addressBookParser LOGIC_COLOR_T3
 
 'AddressBookParser creates an instance of the parser
 create AddToConsultCommandParser
-addressBookParser -[LOGIC_COLOR_T3]> AddToConsultCommandParser : AddToConsultCommandParser(arguments)
+addressBookParser -[LOGIC_COLOR_T3]> AddToConsultCommandParser :
 activate AddToConsultCommandParser LOGIC_COLOR_T2
 
 AddToConsultCommandParser --[LOGIC_COLOR_T2]> addressBookParser
 deactivate AddToConsultCommandParser
 
 ' AddressBookParser calls the parse command
-addressBookParser -[LOGIC_COLOR_T3]> AddToConsultCommandParser : parse("addtoconsult 1 n/John Doe i/3")
+addressBookParser -[LOGIC_COLOR_T3]> AddToConsultCommandParser : parse("1 n/John Doe i/3")
 activate AddToConsultCommandParser LOGIC_COLOR_T2
 
 'Within the parse command, the parser creates an instance of the command
 create AddToConsultCommand
-AddToConsultCommandParser --[LOGIC_COLOR_T2]> AddToConsultCommand : AddToConsultCommand(index, studentNames, indices)
+AddToConsultCommandParser --[LOGIC_COLOR_T2]> AddToConsultCommand :
 activate AddToConsultCommand LOGIC_COLOR_T1
 
 AddToConsultCommand --[LOGIC_COLOR]> AddToConsultCommandParser
@@ -58,18 +59,19 @@ LogicManager -[LOGIC_COLOR]> AddToConsultCommand : execute(model)
 activate AddToConsultCommand LOGIC_COLOR_T1
 
 'get filteredConsultationList
-AddToConsultCommand -[LOGIC_COLOR]> model : getFilteredConsultationList()
+AddToConsultCommand -[LOGIC_COLOR]> model : addStudent(student)
 activate model MODEL_COLOR
+
 
 model -[MODEL_COLOR]-> AddToConsultCommand
 deactivate model
 
-'get filteredStudentList
-AddToConsultCommand -[LOGIC_COLOR]> model : filteredStudentList()
-activate model MODEL_COLOR
+create CommandResult
+AddToConsultCommand --[LOGIC_COLOR_T2]> CommandResult
+activate CommandResult LOGIC_COLOR
+CommandResult --[LOGIC_COLOR]> AddToConsultCommand
+deactivate CommandResult
 
-model -[MODEL_COLOR]-> AddToConsultCommand
-deactivate model
 
 'After adding students, return new consultation
 AddToConsultCommand --[LOGIC_COLOR]> LogicManager : CommandResult

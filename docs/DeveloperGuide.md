@@ -300,6 +300,9 @@ The sequence diagram below shows how the `addStudent(student)` method is perform
 
 <img src="images/Consultation/addStudent_for_consult.png" width="450" />
 
+The command first checks if the student is already in the consultation. If the student was already in the consultation, and exception is thrown and teh student is not added.
+
+However, if the student was not previously in the consultation, the student is now added to the list of students in the consultation.
 
 **3. Command Processing**
 
@@ -312,10 +315,22 @@ The system supports these consultation management commands:
 Command examples:
 ```
 addconsult d/2024-10-20 t/14:00
-addtoconsult 1 n/John Doe i/1
+addtoconsult 1 n/John Doe i/3
 deleteconsult 1
 removefromconsult 1 n/John Doe
 ```
+The sequence diagram below shows how the command `addtoconsult 1 n/John Doe i/3` is executed.
+
+<img src="images/Consultation/SequenceDiagramAddToConsultCommand.png" />
+
+The commands for Consultations are executed using the `Logic` component:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `AddToConsultCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (in this case, the `AddToConsultCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to add a student to the consultation).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
 
 **Aspect 1: Date and Time Representation**
 
