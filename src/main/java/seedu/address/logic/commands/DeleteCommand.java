@@ -24,7 +24,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified person or policy from their respective lists.\n"
             + "Use the index number shown in the displayed persons and policy list or the person's exact name\n"
-            + "Parameters: INDEX(positive integers) + <Optional> po/policyIndex or NAME\n"
+            + "Parameters: INDEX(positive integers) + <Optional> po/policyIndex\n"
+            + "Alternative: NAME\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 1 po/1 or " + COMMAND_WORD + " Alex Yeoh";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
