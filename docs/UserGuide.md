@@ -431,7 +431,7 @@ Example:
 
   In this example, `aggGrade mean n/final` calculates the mean of the final grades of **persons who have their final tests recorded in their grade list**.
   Only Alex Yeoh and Bernice Yu have their final marks recorded, which are 87.00 and 90.00 respectively.
-  Other persons like Charlotte Oliveiro are not included in the calculation.
+  Other persons like Charlotte Oliveiro who currently do not have a grade for 'final' are not included in the calculation.
 
 <div style="page-break-after: always;"></div>
 
