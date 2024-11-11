@@ -91,6 +91,8 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String PREAMBLE_SPECIAL_CHARACTERS = "`-=[]\\;',./~!@#$%^&*()_+{}|:<>?";
+    public static final String PREAMBLE_NUMBERS = "0123456789";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;

@@ -32,13 +32,13 @@ HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
 LogicManager -right->"1" ParserClasses
-ParserClasses ..> XYZCommand : <<create>>
+ParserClasses ..> XYZCommand : create >
 
 XYZCommand -up-|> Command
-LogicManager .left.> Command : <<call>>
+LogicManager .left.> Command :  call >
 
 LogicManager --> Model
-LogicManager --> Storage
+LogicManager -right-> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
@@ -48,5 +48,5 @@ note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
-Command .up.> CommandResult : <<create>>
+Command .up.> CommandResult : create >
 @enduml

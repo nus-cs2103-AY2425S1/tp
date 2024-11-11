@@ -33,6 +33,18 @@ public class AppointmentTest {
     }
 
     @Test
+    public void isInvalidAppointment() {
+        // invalid Appointment dates
+        String invalidFormat1 = "2025-11-11 11:00";
+        String invalidFormat2 = "11/11/25 1100";
+        String invalidFormat3 = "11/11/2025 11:00";
+
+        assertFalse(Appointment.isFutureAppointment(invalidFormat1));
+        assertFalse(Appointment.isFutureAppointment(invalidFormat2));
+        assertFalse(Appointment.isFutureAppointment(invalidFormat3));
+    }
+
+    @Test
     public void getDate_validDate_returnsCorrectDate() {
         LocalDateTime expectedDate = LocalDateTime.of(2025, 11, 11, 11, 0);
         Appointment appointment = new Appointment("11/11/2025 1100");

@@ -22,9 +22,10 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
-    public static final String INCORRECT_AGE = "Age should be an integer";
     public static final String INCORRECT_DATE_FORMAT = "Appointment date should be form dd/MM/yyyy";
     public static final String INCORRECT_RANGE = "Please provide range in format: Lower bound - Upper bound";
+    public static final String INCORRECT_AGE_AND_RANGE = "Please provide age range in format: Lower bound - Upper bound"
+            + "\nAge should be a positive integer";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
@@ -102,18 +103,18 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String[] splittedRange = trimmedRange.split("-");
 
         if (splittedRange.length != 2) {
-            throw new ParseException(String.format(INCORRECT_RANGE));
+            throw new ParseException(String.format(INCORRECT_AGE_AND_RANGE));
         }
 
         try {
             int lower = Integer.parseInt(splittedRange[0].trim());
             int upper = Integer.parseInt(splittedRange[1].trim());
             if (lower > upper) {
-                throw new ParseException(String.format(INCORRECT_RANGE));
+                throw new ParseException(String.format(INCORRECT_AGE_AND_RANGE));
             }
             return new Range<Integer>(lower, upper);
         } catch (NumberFormatException e) {
-            throw new ParseException(String.format(INCORRECT_AGE));
+            throw new ParseException(String.format(INCORRECT_AGE_AND_RANGE));
         }
     }
 
