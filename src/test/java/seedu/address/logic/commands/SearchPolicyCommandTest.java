@@ -26,6 +26,9 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class SearchPolicyCommandTest {
 
+    private SearchPolicyCommand searchFirstCommand = initialiseTestVar("HealthInsurance");
+    private SearchPolicyCommand searchSecondCommand = initialiseTestVar("AutoInsurance");
+
     public SearchPolicyCommand initialiseTestVar(String policyName) {
         try {
             SearchPolicyCommand output = new SearchPolicyCommand(policyName);
@@ -35,9 +38,6 @@ public class SearchPolicyCommandTest {
         }
         return null;
     }
-
-    SearchPolicyCommand searchFirstCommand = initialiseTestVar("HealthInsurance");
-    SearchPolicyCommand searchSecondCommand = initialiseTestVar("AutoInsurance");
 
     @Test
     public void execute_sameCommandObject() {

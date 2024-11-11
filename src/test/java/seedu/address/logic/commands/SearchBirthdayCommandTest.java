@@ -39,6 +39,9 @@ public class SearchBirthdayCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    private SearchBirthdayCommand searchFirstCommand = initialiseTestVar("2000-04-25");
+    private SearchBirthdayCommand searchSecondCommand = initialiseTestVar("2001-05-30");
+
     public SearchBirthdayCommand initialiseTestVar(String birthday) {
         try {
             SearchBirthdayCommand output = new SearchBirthdayCommand(birthday);
@@ -48,9 +51,6 @@ public class SearchBirthdayCommandTest {
         }
         return null;
     }
-
-    SearchBirthdayCommand searchFirstCommand = initialiseTestVar("2000-04-25");
-    SearchBirthdayCommand searchSecondCommand = initialiseTestVar("2001-05-30");
 
     @Test
     public void execute_sameCommandObject() {

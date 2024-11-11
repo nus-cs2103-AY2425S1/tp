@@ -35,6 +35,9 @@ public class SearchAppointmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    private SearchAppointmentCommand searchFirstCommand = initialiseTestVar("2023-12-31 14:30");
+    private SearchAppointmentCommand searchSecondCommand = initialiseTestVar("2024-01-01 09:00");
+
     public SearchAppointmentCommand initialiseTestVar(String appointment) {
         try {
             SearchAppointmentCommand output = new SearchAppointmentCommand(appointment);
@@ -44,9 +47,6 @@ public class SearchAppointmentCommandTest {
         }
         return null;
     }
-
-    SearchAppointmentCommand searchFirstCommand = initialiseTestVar("2023-12-31 14:30");
-    SearchAppointmentCommand searchSecondCommand = initialiseTestVar("2024-01-01 09:00");
 
     @Test
     public void execute_sameCommandObject() {
