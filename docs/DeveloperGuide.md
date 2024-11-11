@@ -64,7 +64,7 @@ The Gradle instructions provided are for macOS and Linux users. If you are using
 **General Update**
 - Add individual photos
 - Update AboutUs.md
-- 
+
 ### Milestone v1.2
 **Deciding MVP features**
 - Divided features amongst group mates
@@ -151,7 +151,7 @@ The `UI` component,
 
 ### UI layout
 
-EZSTATES is built with users who prefer using their keyboard. Hence, all commands are accessible through CLI interactions.
+EZSTATES is built for users who prefer using their keyboard. Hence, all commands are accessible through CLI interactions.
 
 When the app is first opened, the user is able to immediately see the `MainWindow`.
 EZSTATES displays a default message in the `ResultDisplay` which helps new users navigate
@@ -159,7 +159,8 @@ the application.
 
 **PICTURE**
 
-EZSTATES contains 5 main UI components which will be elaborated in the [UI Components](#ui-components) section.
+For developers, there are 5 main UI components that are essential in understanding the design and implementation of
+EZSTATES, which will be elaborated in the [UI Components](#ui-components) section.
 
 ### UI Components
 
@@ -174,11 +175,11 @@ EZSTATES contains 4 main UI components:
     - [ChatWindow Design](#chatwindow-design)
     - [ChatWindow Implementation](#chatwindow-implementation)
 4. MoreInfo Window
-    - [MoreInfoWindow Design]()
-    - [MoreInfoWindow Implementation]()
+    - [MoreInfoWindow Design](#moreinfowindow-design)
+    - [MoreInfoWindow Implementation](#moreinfowindow-implementation)
 5. Confirmation Dialog
-    - [Confirmation Dialog Design]()
-    - [Confirmation Dialog Implementation]()
+    - [Confirmation Dialog Design](#moreinfowindow-design)
+    - [Confirmation Dialog Implementation](#moreinfowindow-implementation)
 
 #### MainWindow Design
 
@@ -389,12 +390,13 @@ to the user.
 **IMAGE** 
 
 Additionally, there is a `clientRemarksLabel` and `remarkInput` which provides users with another field
-to specify characteristics or information about their user which can be hidden from the `MainWindow` as this 
+to specify characteristics or information about their `client` which can be hidden from the `MainWindow` as this 
 remark is only displayed within the `MoreInfoWindow`.
 
 <div class="note" markdown="span"> 
 The `clientRemarksLabel` allows a maximum of 400 characters to be entered. This was chosen due to the small space
 allocated for the remarks, which is a trade-off made to display other relevant `client` information.
+<br>
 <br>
 Additionally, the `clientRemarksLabel` is saved in EZSTATES when the application is closed and preserved when it is opened.
 </div> 
@@ -418,7 +420,7 @@ The window displays the `name` of the `client` and that the `client` has an acti
 if he/she is a `seller` of a `listing`.
 
 <div markdown="span" class="alert alert-primary">
-A `client` without an active listing will not be open a `ConfirmationDialog` upon deletion.
+A `client` without an active listing will not open a `ConfirmationDialog` window upon deletion.
 </div>
 
 This window is developed as a fail-safe for users to protect against deletions of `clients` that is a `seller` of a `listing`
@@ -427,7 +429,8 @@ since a `listing` cannot exist without its `seller`.
 <div class="note" markdown="span"> 
 To facilitate the target audience which prefers CLI-focused interactions, the `ConfirmationDialog` window can be interacted with fully
 keyboard-only inputs. 
-<br><br>
+<br>
+<br>
 In the window, the user can navigate between the Yes/No buttons using the `LEFT ARROW <` and `RIGHT ARROW >` keys. To confirm their
 decision, they can do so by pressing `ENTER`. Additionally, they can also exit the window by using the `ESC` key.
 </div>
@@ -445,8 +448,10 @@ it to the `ConfirmationDialogController`. `Window` then passes the `client` to t
 <div class="note" markdown="span"> 
 Why is it beneficial to create a Controller class?
 <br>
+<br>
 This approach keeps the code modular and organized through the **Separation of Concerns** design principle. 
-<br><br>
+<br>
+<br>
 The `Window` class handles the window setup and layout loading exclusively while the `Controller` class manages all
 UI interactions and dynamically updates the UI utilising `set` methods. By dividing responsibilities between classes, this
 simplifies code, improves maintainability and enhances reusability.
@@ -460,7 +465,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/Bob")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deleteclient 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -469,25 +474,25 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, it is passed to an `EzstatesParser` object which in turn 
+creates a parser that matches the command (e.g., `DeleteClientProfileCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteClientProfileCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `EzstatesParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddListingCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `ListingCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 

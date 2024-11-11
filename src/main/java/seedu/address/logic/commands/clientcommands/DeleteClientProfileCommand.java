@@ -59,16 +59,6 @@ public class DeleteClientProfileCommand extends Command {
         }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        /*if (!lastShownList.contains(personToDelete)) {
-            String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
-
-            if (closestMatch != null) {
-                throw new CommandException(String.format(Messages.MESSAGE_SUGGESTION, closestMatch));
-            } else {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
-            }
-        }*/
-
         if (!skipConfirmation
                 && (model.hasListingsForSeller(personToDelete)
                 || model.hasListingsForBuyer(personToDelete))) {
